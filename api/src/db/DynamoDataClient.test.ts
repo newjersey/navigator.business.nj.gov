@@ -228,4 +228,64 @@ describe("User and Business Migration with DynamoDataClient", () => {
       nextTokenBatch2
     );
   });
+
+  it("should return user when business name matches", async () => {
+    const user = generateUserData();
+    const business = user.businesses[user.currentBusinessId];
+    const businessName = user.businesses[user.currentBusinessId]?.profileData.businessName;
+
+    jest.spyOn(dynamoBusinessesDataClient, "findByBusinessName").mockResolvedValueOnce({
+      ...business,
+      userId: user.user.id,
+    });
+
+    jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(user);
+    const result = await dynamoDataClient.findUserByBusinessName(businessName);
+    expect(result).toEqual(user);
+    expect(dynamoBusinessesDataClient.findByBusinessName).toHaveBeenCalledWith(businessName);
+    expect(dynamoUsersDataClient.get).toHaveBeenCalledWith(business.userId);
+  });
+
+  it("should return undefined and log info when no business is found", async () => {
+    const businessName = "Nonexistent Corp";
+    jest.spyOn(dynamoBusinessesDataClient, "findByBusinessName").mockResolvedValueOnce(void 0);
+
+    const result = await dynamoDataClient.findUserByBusinessName(businessName);
+
+    expect(result).toBeUndefined();
+    expect(logger.LogInfo).toHaveBeenCalledWith(`No Business Found with name: ${businessName}`);
+  });
+
+  it("should return users whose business names match the given prefix", async () => {
+    const prefix = "some-business";
+    const user1 = generateUserData();
+    const user2 = generateUserData();
+
+    const business1 = user1.businesses[user1.currentBusinessId];
+    const business2 = user2.businesses[user2.currentBusinessId];
+
+    jest.spyOn(dynamoBusinessesDataClient, "findBusinessesByNamePrefix").mockResolvedValue([
+      { ...business1, userId: user1.user.id },
+      { ...business2, userId: user2.user.id },
+    ]);
+
+    jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(user1).mockResolvedValueOnce(user2);
+
+    const result = await dynamoDataClient.findUsersByBusinessNamePrefix(prefix);
+
+    expect(result).toContainEqual(user1);
+    expect(result).toContainEqual(user2);
+    expect(dynamoUsersDataClient.get).toHaveBeenCalledTimes(2);
+  });
+
+  it("should return an empty array if no business names match the given prefix", async () => {
+    const prefix = "non-matching-prefix";
+
+    jest.spyOn(dynamoBusinessesDataClient, "findBusinessesByNamePrefix").mockResolvedValue([]);
+    const mockGet = jest.spyOn(dynamoUsersDataClient, "get");
+    const result = await dynamoDataClient.findUsersByBusinessNamePrefix(prefix);
+
+    expect(result).toEqual([]);
+    expect(mockGet).not.toHaveBeenCalled();
+  });
 });

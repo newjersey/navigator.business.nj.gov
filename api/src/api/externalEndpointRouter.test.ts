@@ -44,6 +44,8 @@ describe("externalEndpointRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findUserByBusinessName: jest.fn(),
+      findUsersByBusinessNamePrefix: jest.fn(),
     };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();

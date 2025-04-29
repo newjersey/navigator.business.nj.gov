@@ -36,6 +36,8 @@ export interface DatabaseClient {
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
+  findUserByBusinessName: (businessName: string) => Promise<UserData | undefined>;
+  findUsersByBusinessNamePrefix: (prefix: string) => Promise<UserData[]>;
 }
 
 export interface UserDataClient {
@@ -58,7 +60,7 @@ export interface BusinessesDataClient {
   findByBusinessName: (businessName: string) => Promise<Business | undefined>;
   findAllByNAICSCode: (naicsCode: string) => Promise<Business[]>;
   findAllByIndustry: (industry: string) => Promise<Business[]>;
-  findAllByBusinessName: (businessName: string) => Promise<Business[]>;
+  findBusinessesByNamePrefix: (prefix: string) => Promise<Business[]>;
   findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
 }
 

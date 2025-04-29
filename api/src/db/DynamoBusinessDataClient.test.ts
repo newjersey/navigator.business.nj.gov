@@ -80,10 +80,10 @@ describe("DynamoBusinessesDataClient", () => {
     expect(expectedValue).toEqual(businessData);
   });
 
-  it("finds all businesses by the businessName", async () => {
-    const businessName = businessData.profileData.businessName;
+  it("finds all businesses by the businessName prefix", async () => {
     await dynamoBusinessesDataClient.put(businessData);
-    const expectedValue = await dynamoBusinessesDataClient.findAllByBusinessName(businessName);
+    const prefix = "some-business";
+    const expectedValue = await dynamoBusinessesDataClient.findBusinessesByNamePrefix(prefix);
     expect(expectedValue).toHaveLength(1);
     expect(expectedValue[0]).toBeDefined();
     expect(expectedValue[0]).toEqual(businessData);
