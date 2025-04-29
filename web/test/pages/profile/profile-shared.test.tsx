@@ -154,6 +154,7 @@ describe("profile - shared", () => {
     });
 
     renderPage({ business });
+    chooseTab("permits");
 
     expect(
       screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
@@ -183,6 +184,7 @@ describe("profile - shared", () => {
     });
 
     renderPage({ business });
+    chooseTab("permits");
 
     expect(
       screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
@@ -225,6 +227,7 @@ describe("profile - shared", () => {
       });
 
       renderPage({ business });
+      chooseTab("permits");
 
       expect(
         screen.getByText(

@@ -174,10 +174,15 @@
       },
       "nonEssentialQuestions": {
         "default": {
-          "header": "Your industry has additional questions to help you find any required licenses or permits. Based on your answers, tasks will be available for you to complete.",
+          "sectionHeader": "Discover Industry Licenses and Permits",
+          "sectionSubText": "Depending on your industry, you might see additional questions. Answering these questions will give you additional tasks to complete that may be required for your business.",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
-          "optionalText": "(Optional)"
+          "optionalText": "(Optional)",
+          "linkToPermitsHeader": "Keep in mind:",
+          "linkToPermitsTextBeforeButton": "Answer",
+          "linkToPermitsTextButton": "more questions",
+          "linkToPermitsTextAfterButton": "to see if your business needs more licenses or permits."
         }
       },
       "businessPersona": {
@@ -467,7 +472,6 @@
       "escapeModalReturn": "Continue without saving",
       "essentialQuestionAlertText": "Complete all required fields.",
       "formationDocFileTitle": "Official Formation Document",
-      "industryLicensesAndPermitsHeader": "Discover Industry Licenses and Permits",
       "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
       "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
       "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete.",

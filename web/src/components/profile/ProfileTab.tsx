@@ -1,6 +1,6 @@
 import { Icon } from "@/components/njwds/Icon";
 import { ProfileTabs } from "@/lib/types/types";
-import { ReactElement, RefObject, forwardRef } from "react";
+import { ReactElement, forwardRef } from "react";
 
 interface Props {
   tab: ProfileTabs;
@@ -9,7 +9,6 @@ interface Props {
   tabIcon: "info-outline" | "bar-chart" | "content-paste" | "folder-open" | "edit";
   tabText: string;
   onKeyDown?: (event: React.KeyboardEvent) => void;
-  ref: RefObject<HTMLButtonElement>;
 }
 
 export const ProfileTab = forwardRef<HTMLButtonElement, Props>(

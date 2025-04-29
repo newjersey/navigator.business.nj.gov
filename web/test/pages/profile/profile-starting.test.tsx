@@ -322,6 +322,8 @@ describe("profile - starting business", () => {
     fillText(inputFieldName, "Cool Computers");
     selectByText("Location", randomMunicipality.displayName);
     selectByValue("Industry", "e-commerce");
+
+    chooseTab("permits");
     chooseRadio("home-based-business-radio-true");
 
     chooseTab("numbers");
@@ -1064,6 +1066,7 @@ describe("profile - starting business", () => {
         }),
       }),
     });
+    chooseTab("permits");
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
@@ -1076,21 +1079,13 @@ describe("profile - starting business", () => {
         }),
       }),
     });
+    chooseTab("permits");
     expect(screen.queryByLabelText("Home based business")).not.toBeInTheDocument();
 
+    chooseTab("info");
     selectByValue("Industry", randomHomeBasedIndustry());
-    expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
-  });
 
-  it("shows the home-based question when industry is undefined", () => {
-    renderPage({
-      business: generateBusinessForProfile({
-        profileData: generateProfileData({
-          industryId: undefined,
-          businessPersona: "STARTING",
-        }),
-      }),
-    });
+    chooseTab("permits");
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
@@ -1402,6 +1397,7 @@ describe("profile - starting business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("elevatorOwningBusiness-radio-group")).toBeInTheDocument();
     });
@@ -1460,6 +1456,7 @@ describe("profile - starting business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });

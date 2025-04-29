@@ -1807,7 +1807,8 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Section Header", name: "sectionHeader", widget: "string" }
+                          - { label: "Section Sub Text", name: "sectionSubText", widget: "string" }
                           - {
                               label: "Radio Button - Yes",
                               name: "radioButtonTrueText",
@@ -1819,6 +1820,26 @@ collections:
                               widget: "string",
                             }
                           - { label: "Optional Suffix", name: "optionalText", widget: "string" }
+                          - {
+                              label: "Link to Permits Header",
+                              name: "linkToPermitsHeader",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Link to Permits Text Before Button",
+                              name: "linkToPermitsTextBeforeButton",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Link to Permits Text Button",
+                              name: "linkToPermitsTextButton",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Link to Permits Text After Button",
+                              name: "linkToPermitsTextAfterButton",
+                              widget: "string",
+                            }
                   - label: Responsible Owner Name
                     name: responsibleOwnerName
                     collapsed: true
@@ -2476,11 +2497,6 @@ collections:
                   - {
                       label: Note for Businesses Formed Outside Navigator,
                       name: noteForBusinessesFormedOutsideNavigator,
-                      widget: string,
-                    }
-                  - {
-                      label: Industry Licenses and Permits Header,
-                      name: industryLicensesAndPermitsHeader,
                       widget: string,
                     }
                   - {

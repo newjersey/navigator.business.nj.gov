@@ -99,6 +99,7 @@ export class OnboardingPage {
   }
 
   getOwnershipDropdown() {
+    cy.get('[data-testid="info"').click({ force: true });
     return cy.get('[data-testid="ownership"]');
   }
 

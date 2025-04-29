@@ -151,13 +151,17 @@ describe("profile - owning existing business", () => {
     selectByText("Location", randomMunicipality.displayName);
     selectByValue("Ownership", "veteran-owned");
     selectByValue("Ownership", "woman-owned");
+
+    chooseTab("permits");
     chooseRadio("home-based-business-radio-true");
+
     chooseTab("numbers");
     fillText("Employer id", "02-3456780");
     fillText("Entity id", "0234567890");
     fillText("Tax id", "023456790");
     fillText("Tax id location", "123");
     fillText("Tax pin", "6666");
+
     chooseTab("notes");
     fillText("Notes", "whats appppppp", "textarea");
     clickSave();
@@ -236,9 +240,10 @@ describe("profile - owning existing business", () => {
     expect(getMunicipalityValue()).toEqual(randomMunicipality.displayName);
     expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
     expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
-    expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
     expect(getExistingEmployeesValue()).toEqual("123");
     expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
+    chooseTab("permits");
+    expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
     chooseTab("numbers");
     expect(getEmployerIdValue()).toEqual("12-3456789");
     expect(getEntityIdValue()).toEqual("1234567890");
@@ -784,6 +789,7 @@ describe("profile - owning existing business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });
@@ -803,6 +809,7 @@ describe("profile - owning existing business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });
