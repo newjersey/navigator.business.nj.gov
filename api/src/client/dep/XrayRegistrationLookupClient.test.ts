@@ -158,4 +158,57 @@ describe("xrayRegistrationLookupClient", () => {
       "SOME ERROR",
     );
   });
+
+  it("modifies the status to expired when expiration date is in the past and original status is active", async () => {
+    const expirationDate = getCurrentDate().subtract(2, "month").format("MM/DD/YYYY");
+    const businessOneEntry = generateXrayRegistrationEntry({
+      name: "machine-1",
+      modelNumber: "modelNumber-1",
+      serialNumber: "serialNumber-1",
+      businessName: "Business One",
+      streetAddress: "123 Main Street",
+      zipCode: "12345",
+      registrationNumber: "123456",
+      status: "Active",
+      expirationDate,
+    });
+
+    const businessTwoEntry = generateXrayRegistrationEntry({
+      name: "someMachine-2",
+      modelNumber: "modelNumber-2",
+      serialNumber: "serialNumber-2",
+      businessName: "Business Two",
+      streetAddress: "123 Main Street",
+      zipCode: "12345",
+      registrationNumber: "654321",
+    });
+
+    searchClient.searchByAddress.mockResolvedValue([
+      businessOneEntry,
+      businessOneEntry,
+      businessOneEntry,
+      businessTwoEntry,
+      businessTwoEntry,
+    ]);
+
+    searchClient.searchByBusinessName.mockResolvedValue([businessOneEntry, businessOneEntry]);
+
+    const response = await client.getStatus("Business One", "123 Main Street", "12345");
+    expect(response).toEqual({
+      machines: [
+        {
+          registrationNumber: businessOneEntry.registrationNumber,
+          roomId: businessOneEntry.roomId,
+          registrationCategory: businessOneEntry.registrationCategory,
+          name: businessOneEntry.name,
+          modelNumber: businessOneEntry.modelNumber,
+          serialNumber: businessOneEntry.serialNumber,
+          annualFee: businessOneEntry.annualFee,
+        },
+      ],
+      status: "EXPIRED",
+      expirationDate,
+      deactivationDate: businessOneEntry.deactivationDate,
+    });
+  });
 });
