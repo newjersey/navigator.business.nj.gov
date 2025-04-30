@@ -5,8 +5,8 @@ import {
   TaxIdFormContext,
   taxIdFormContextErrorMap,
 } from "@/components/data-fields/tax-id/TaxIdFormContext";
-import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { GenericTextField } from "@/components/GenericTextField";
+import { ShowHideStatus } from "@/components/ShowHideToggleButton";
 import { ConfigType } from "@/contexts/configContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -26,7 +26,7 @@ interface Props
   > {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
-  taxIdDisplayStatus: TaxIdDisplayStatus;
+  taxIdDisplayStatus: ShowHideStatus;
 }
 export const SplitTaxId = ({
   handleChangeOverride,

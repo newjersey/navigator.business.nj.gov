@@ -2,8 +2,10 @@ import { ButtonIcon } from "@/components/ButtonIcon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ReactElement } from "react";
 
+export type ShowHideStatus = "text-view" | "password-view";
+
 interface Props {
-  status: "text-view" | "password-view";
+  status: ShowHideStatus;
   toggle: () => Promise<void>;
   hideText: string;
   showText: string;
