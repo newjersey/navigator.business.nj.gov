@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { GenericTextField } from "@/components/GenericTextField";
+import { ShowHideStatus } from "@/components/ShowHideToggleButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
-import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -19,7 +19,7 @@ interface Props
   > {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: () => ReactElement;
-  taxIdDisplayStatus: TaxIdDisplayStatus;
+  taxIdDisplayStatus: ShowHideStatus;
 }
 export const SingleTaxId = ({
   handleChangeOverride,
