@@ -56,17 +56,13 @@
     },
     {
       "step": 4,
-      "licenseTask": "RMW-generator-registration",
+      "licenseTask": "rmw-generator-registration",
       "required": true,
       "weight": 100
     }
   ],
   "name": "Funeral Services",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg",
-    "crematory"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "business-vehicle-title-reg", "crematory"],
   "displayname": "funeral",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

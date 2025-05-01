@@ -4,7 +4,7 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "licenseTask": "RMW-generator-registration",
+      "licenseTask": "rmw-generator-registration",
       "weight": 100,
       "required": true
     }

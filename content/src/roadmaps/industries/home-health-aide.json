@@ -57,13 +57,11 @@
       "step": 4,
       "weight": 101,
       "required": true,
-      "licenseTask": "RMW-generator-registration"
+      "licenseTask": "rmw-generator-registration"
     }
   ],
   "name": "Home Health Aide Placement",
-  "nonEssentialQuestionsIds": [
-    "weights-measures"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

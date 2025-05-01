@@ -1,12 +1,12 @@
 ---
 licenseName: ""
-id: RMW-generator-registration
-displayname: RMW-generator-registration
+id: rmw-generator-registration
+displayname: rmw-generator-registration
 urlSlug: rmw-generator-registration
 name: Complete Your Regulated Medical Waste Generator Registration
 webflowName: Complete Your Regulated Medical Waste Generator Registration
 summaryDescriptionMd: >-
-  If your business produces 
+  If your business produces
 
   `Regulated Medical Waste (RMW)|Regulated-Medical-Waste`, you must register with the New Jersey Department of Environmental Protection (NJDEP) as an RMW generator.
 industryId:
@@ -22,51 +22,55 @@ callToActionText: Submit My RMW Registration Form
 callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
 agencyId: njdep
 ---
+
 \
-You need a new registration if your facility: 
+You need a new registration if your facility:
 
-* Is registering for the first time 
-* Moves to another address 
-* Changes tax ID<insert contextual information> number  
+- Is registering for the first time
+- Moves to another address
+- Changes tax ID<insert contextual information> number
 
-You need to update your registration if your facility changes: 
+You need to update your registration if your facility changes:
 
-* Any address, such as facility address, owner address, or billing address 
-* Fees/billing contact information 
-* Business names (but keeps the same tax ID number) 
-* The amount of medical waste it generates, putting your business in a different category
+- Any address, such as facility address, owner address, or billing address
+- Fees/billing contact information
+- Business names (but keeps the same tax ID number)
+- The amount of medical waste it generates, putting your business in a different category
 
 ## Business Location and Registration Details
 
-* If you have **one business** in **one location**:  
+- If you have **one business** in **one location**:
 
   Submit one registration
-* If you have **one business** in **multiple locations**: 
+
+- If you have **one business** in **multiple locations**:
 
   Submit one registration for each location
-* If you have **more than one business**:  
 
-  Submit one registration for each business  
-* If you have **one business** in **different buildings connected by private roads** (for example, a campus with no public roads between buildings):  
+- If you have **more than one business**:
 
-   Submit one registration
+  Submit one registration for each business
+
+- If you have **one business** in **different buildings connected by private roads** (for example, a campus with no public roads between buildings):
+
+  Submit one registration
 
 ## Registration Requirements
 
-* Facility name 
-* Facility address 
-* Billing address 
-* Owner/operator address 
-* NAICS code <insert contextual information>
-* Tax ID number
-* Type of business 
-* Estimated pounds of medical waste your business will generate each year 
-* Medical waste category number (based on the estimated pounds of medical waste generated each year) 
-* Name of person submitting the form 
-* Contact name 
-* Contact email address 
-* Registration number, if you are updating your registration
-* Applicable fees paid
+- Facility name
+- Facility address
+- Billing address
+- Owner/operator address
+- NAICS code <insert contextual information>
+- Tax ID number
+- Type of business
+- Estimated pounds of medical waste your business will generate each year
+- Medical waste category number (based on the estimated pounds of medical waste generated each year)
+- Name of person submitting the form
+- Contact name
+- Contact email address
+- Registration number, if you are updating your registration
+- Applicable fees paid
 
   :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
@@ -74,7 +78,7 @@ You need to update your registration if your facility changes:
 
   :::
 
-  If you have questions about RMW registration, email mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3. 
+  If you have questions about RMW registration, email mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3.
 
   :::callout{ showHeader="true" headerText="What if I don’t register?" showIcon="false" calloutType="warning" }
 
