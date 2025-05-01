@@ -1,3 +1,4 @@
+import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
@@ -7,7 +8,6 @@ import { housingRouterFactory } from "@api/housingRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
-import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
 import { userRouterFactory } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
@@ -424,7 +424,7 @@ app.use(
   "/api/taxFilings",
   taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient),
 );
-app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
+app.use("/api", decryptionRouterFactory(AWSEncryptionDecryptionClient));
 app.use(
   "/health",
   healthCheckRouterFactory(

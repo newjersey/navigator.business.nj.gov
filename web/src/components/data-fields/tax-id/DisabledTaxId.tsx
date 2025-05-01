@@ -2,7 +2,7 @@
 
 import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { decryptTaxId } from "@/lib/api-client/apiClient";
+import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -60,8 +60,8 @@ export const DisabledTaxId = (props: Props): ReactElement => {
   };
 
   const getDecryptedTaxId = async (): Promise<string> => {
-    return decryptTaxId({
-      encryptedTaxId: state.profileData.encryptedTaxId as string,
+    return decryptValue({
+      encryptedValue: state.profileData.encryptedTaxId as string,
     });
   };
 

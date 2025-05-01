@@ -10,7 +10,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  decryptTaxId: jest.fn(),
+  decryptValue: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -143,14 +143,14 @@ describe("<TaxId />", () => {
     });
 
     it("decrypts the tax id if tax id is a masked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+      expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
           "123-456-789/000",
@@ -159,7 +159,7 @@ describe("<TaxId />", () => {
     });
 
     it("doesn't decrypt if the tax id in current profile data is an unmasked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "*******89000",
@@ -176,11 +176,11 @@ describe("<TaxId />", () => {
         expect(currentProfileData().taxId).toEqual("123456789000");
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledTimes(1);
+      expect(mockApi.decryptValue).toHaveBeenCalledTimes(1);
     });
 
     it("changes the tax id input type to text when show is clicked", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "********9000",
@@ -204,7 +204,7 @@ describe("<TaxId />", () => {
     });
 
     it("toggles between hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "********9000",
@@ -219,7 +219,7 @@ describe("<TaxId />", () => {
     });
 
     it("toggles between mobile hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       setLargeScreen(false);
       renderComponent({
         ...profileData,
@@ -361,21 +361,21 @@ describe("<TaxId />", () => {
     });
 
     it("decrypts the tax id if tax id is a masked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789");
+      mockApi.decryptValue.mockResolvedValue("123456789");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+      expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
       });
     });
 
     it("doesn't decrypt if the tax id in current profile data is an unmasked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789");
+      mockApi.decryptValue.mockResolvedValue("123456789");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
@@ -390,11 +390,11 @@ describe("<TaxId />", () => {
         expect(currentProfileData().taxId).toEqual("123456789");
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledTimes(1);
+      expect(mockApi.decryptValue).toHaveBeenCalledTimes(1);
     });
 
     it("changes the tax id input type to text when show is clicked", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789");
+      mockApi.decryptValue.mockResolvedValue("123456789");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
@@ -418,7 +418,7 @@ describe("<TaxId />", () => {
     });
 
     it("toggles between hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
@@ -433,7 +433,7 @@ describe("<TaxId />", () => {
     });
 
     it("toggles between mobile hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       setLargeScreen(false);
       renderComponent({
         ...profileData,

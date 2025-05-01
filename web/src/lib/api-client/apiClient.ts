@@ -113,7 +113,7 @@ export const postTaxFilingsLookup = (props: {
   return post(`/taxFilings/lookup`, props);
 };
 
-export const decryptTaxId = (props: { encryptedTaxId: string }): Promise<string> => {
+export const decryptValue = (props: { encryptedValue: string }): Promise<string> => {
   return post(`/decrypt`, props);
 };
 

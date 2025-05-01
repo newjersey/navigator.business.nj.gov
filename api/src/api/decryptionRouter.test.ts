@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
+import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { EncryptionDecryptionClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { Express } from "express";
 import request from "supertest";
 
-describe("taxDecryptionRouter", () => {
+describe("decryptionRouter", () => {
   let app: Express;
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
 
@@ -22,7 +22,7 @@ describe("taxDecryptionRouter", () => {
     };
 
     app = setupExpress(false);
-    app.use(taxDecryptionRouterFactory(stubEncryptionDecryptionClient));
+    app.use(decryptionRouterFactory(stubEncryptionDecryptionClient));
   });
 
   afterAll(async () => {
@@ -32,8 +32,8 @@ describe("taxDecryptionRouter", () => {
   });
 
   describe("/decrypt", () => {
-    it("decrypts tax id", async () => {
-      const response = await request(app).post(`/decrypt`).send({ encryptedTaxId: "sample-value" });
+    it("decrypts value", async () => {
+      const response = await request(app).post(`/decrypt`).send({ encryptedValue: "sample-value" });
       expect(response.body).toEqual("decrypted sample-value");
     });
   });

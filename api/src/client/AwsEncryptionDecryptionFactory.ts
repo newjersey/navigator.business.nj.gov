@@ -21,17 +21,17 @@ export const AWSEncryptionDecryptionFactory = (
 
   const decoder = new TextDecoder();
 
-  const encryptValue = async (plainTextTaxId: string): Promise<string> => {
-    const { result } = await encrypt(keyring, plainTextTaxId, {
+  const encryptValue = async (plainTextValue: string): Promise<string> => {
+    const { result } = await encrypt(keyring, plainTextValue, {
       encryptionContext: context,
     });
-    const base64TaxId = toBase64(result);
-    return base64TaxId;
+    const base64Value = toBase64(result);
+    return base64Value;
   };
 
-  const decryptValue = async (encryptedTaxId: string): Promise<string> => {
-    const bufferedTaxId = fromBase64(encryptedTaxId);
-    const { plaintext, messageHeader } = await decrypt(keyring, bufferedTaxId);
+  const decryptValue = async (encryptedValue: string): Promise<string> => {
+    const bufferedValue = fromBase64(encryptedValue);
+    const { plaintext, messageHeader } = await decrypt(keyring, bufferedValue);
 
     const { encryptionContext } = messageHeader;
 
@@ -41,8 +41,8 @@ export const AWSEncryptionDecryptionFactory = (
       }
     }
 
-    const decodedTaxId = decoder.decode(plaintext);
-    return decodedTaxId;
+    const decodedValue = decoder.decode(plaintext);
+    return decodedValue;
   };
 
   return { encryptValue, decryptValue };
