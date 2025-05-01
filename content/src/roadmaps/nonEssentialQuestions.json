@@ -167,7 +167,7 @@
     },
     {
       "id": "regulated-medical-waste-question",
-      "questionText": "Will your business have `Regulated Medical Waste (RMW)|Regulated-Medical-Waste` ?",
+      "questionText": "Will your business have `Regulated Medical Waste (RMW)|regulated-medical-waste` ?",
       "addOn": "regulated-medical-waste-generator-registration"
     }
   ]
