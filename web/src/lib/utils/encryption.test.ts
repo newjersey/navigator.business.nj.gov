@@ -10,6 +10,6 @@ describe("isEncrypted", () => {
     `should return $expected when maskedValue is $maskedValue and encryptedValue is $encryptedValue`,
     ({ maskedValue, encryptedValue, expected }) => {
       expect(isEncrypted(maskedValue, encryptedValue)).toEqual(expected);
-    }
+    },
   );
 });

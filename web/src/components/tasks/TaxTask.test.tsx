@@ -71,7 +71,7 @@ describe("<TaxTask />", () => {
     expect(screen.getByText("some content here")).toBeInTheDocument();
     expect(screen.getByText("more content")).toBeInTheDocument();
     expect(screen.queryByText("${taxInputComponent}")).not.toBeInTheDocument();
-    expect(screen.getByText(Config.tax.descriptionText)).toBeInTheDocument();
+    expect(screen.getByText(Config.taxId.descriptionText)).toBeInTheDocument();
   });
 
   it("renders CTA button", () => {
@@ -99,8 +99,8 @@ describe("<TaxTask />", () => {
       </WithStatefulBusiness>,
     );
     expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
-    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPostText);
-    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPreText);
+    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.taxId.lockedPostText);
+    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.taxId.lockedPreText);
     expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
   });
 
@@ -127,7 +127,7 @@ describe("<TaxTask />", () => {
 
     it("shows the save button text for an authenticated user", async () => {
       renderPage();
-      expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxId.saveButtonText)).toBeInTheDocument();
     });
 
     it("updates the progress of the task to TO_DO if there is a pre-existing 9 digit tax id", async () => {
@@ -155,7 +155,7 @@ describe("<TaxTask />", () => {
     it("enters and saves Tax ID", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
-      fireEvent.click(screen.getByText(Config.tax.saveButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.saveButtonText));
       await waitFor(() => {
         expect(currentBusiness().profileData.taxId).toEqual("123456789123");
       });
@@ -170,7 +170,7 @@ describe("<TaxTask />", () => {
         },
       );
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123123123" } });
-      fireEvent.click(screen.getByText(Config.tax.saveButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.saveButtonText));
       expect(screen.getByText(expectedErrorMessage)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
     });
@@ -178,7 +178,7 @@ describe("<TaxTask />", () => {
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
-      fireEvent.click(screen.getByText(Config.tax.saveButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.saveButtonText));
       await waitFor(() => {
         expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
       });
@@ -242,12 +242,12 @@ describe("<TaxTask />", () => {
 
     it("prepends register to the Save button", async () => {
       renderPage();
-      expect(screen.getByText(`Register & ${Config.tax.saveButtonText}`)).toBeInTheDocument();
+      expect(screen.getByText(`Register & ${Config.taxId.saveButtonText}`)).toBeInTheDocument();
     });
 
     it("opens Needs Account modal on save button click", async () => {
       renderPage();
-      fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
+      fireEvent.click(screen.getByText(`Register & ${Config.taxId.saveButtonText}`));
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
