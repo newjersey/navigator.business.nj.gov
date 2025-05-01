@@ -61,6 +61,12 @@
       "weight": 100,
       "step": 4,
       "licenseTask": "boiler-inspection"
+    },
+    {
+      "step": 4,
+      "weight": 101,
+      "licenseTask": "RMW-generator-registration",
+      "required": true
     }
   ],
   "name": "Healthcare",
