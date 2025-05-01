@@ -130,7 +130,7 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "",
       });
-      expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
     });
 
     it("disables the field if the encrypted tax id is populated and tax id is masked", () => {
@@ -149,7 +149,7 @@ describe("<TaxId />", () => {
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
@@ -165,17 +165,17 @@ describe("<TaxId />", () => {
         taxId: "*******89000",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
           "123-456-789/000",
         );
       });
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       await waitFor(() => {
         expect(currentProfileData().taxId).toEqual("123456789000");
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       expect(mockApi.decryptValue).toHaveBeenCalledTimes(1);
     });
 
@@ -187,7 +187,7 @@ describe("<TaxId />", () => {
         encryptedTaxId: "some-encrypted-value",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
       });
@@ -199,7 +199,7 @@ describe("<TaxId />", () => {
         taxId: "1233456789000",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
     });
 
@@ -210,12 +210,12 @@ describe("<TaxId />", () => {
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      expect(screen.queryByText(Config.taxId.hideButtonText)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonText)).not.toBeInTheDocument();
     });
 
     it("toggles between mobile hide and show text", async () => {
@@ -226,12 +226,12 @@ describe("<TaxId />", () => {
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
+      expect(screen.queryByText(Config.taxId.hideButtonTextMobile)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonTextMobile));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonTextMobile)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonTextMobile)).not.toBeInTheDocument();
     });
   });
 
@@ -367,7 +367,7 @@ describe("<TaxId />", () => {
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
@@ -381,15 +381,15 @@ describe("<TaxId />", () => {
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
       });
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       await waitFor(() => {
         expect(currentProfileData().taxId).toEqual("123456789");
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       expect(mockApi.decryptValue).toHaveBeenCalledTimes(1);
     });
 
@@ -401,7 +401,7 @@ describe("<TaxId />", () => {
         encryptedTaxId: "some-encrypted-value",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
       });
@@ -413,7 +413,7 @@ describe("<TaxId />", () => {
         taxId: "123456789",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
     });
 
@@ -424,12 +424,12 @@ describe("<TaxId />", () => {
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      expect(screen.queryByText(Config.taxId.hideButtonText)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonText)).not.toBeInTheDocument();
     });
 
     it("toggles between mobile hide and show text", async () => {
@@ -440,12 +440,12 @@ describe("<TaxId />", () => {
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
+      expect(screen.queryByText(Config.taxId.hideButtonTextMobile)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonTextMobile));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonTextMobile)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonTextMobile)).not.toBeInTheDocument();
     });
   });
 });

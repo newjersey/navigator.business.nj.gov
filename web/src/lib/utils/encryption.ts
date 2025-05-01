@@ -3,7 +3,7 @@ import { maskingCharacter } from "@businessnjgovnavigator/shared";
 
 export const isEncrypted = (
   maskedValue: string | undefined,
-  encryptedValue: string | undefined
+  encryptedValue: string | undefined,
 ): boolean | undefined => {
   if (maskedValue === undefined || !encryptedValue) {
     return;

@@ -19,7 +19,7 @@ const TaxInputPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <Content>{config.tax.descriptionText}</Content>
+        <Content>{config.taxId.descriptionText}</Content>
         <TaxInput task={task} />
 
         <hr className="margin-y-6" />

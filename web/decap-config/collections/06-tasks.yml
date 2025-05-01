@@ -1012,7 +1012,7 @@ collections:
     files:
       - label: "Tax ID Input Section"
         name: "tax-input-section"
-        file: content/src/fieldConfig/tax.json
+        file: content/src/fieldConfig/tax-id.json
         editor:
           preview: true
         fields:

@@ -57,11 +57,11 @@ export const TaxId = (props: Props): ReactElement => {
       <ShowHideToggleButton
         status={taxIdDisplayStatus}
         toggle={taxIdToggle(toggleFunc)}
-        showText={Config.tax.showButtonText}
-        hideText={Config.tax.hideButtonText}
+        showText={Config.taxId.showButtonText}
+        hideText={Config.taxId.hideButtonText}
         useOverrideText={!isTabletAndUp}
-        showOverrideText={Config.tax.showButtonTextMobile}
-        hideOverrideText={Config.tax.hideButtonTextMobile}
+        showOverrideText={Config.taxId.showButtonTextMobile}
+        hideOverrideText={Config.taxId.hideButtonTextMobile}
       />
     );
   };

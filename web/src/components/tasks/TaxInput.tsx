@@ -47,8 +47,8 @@ export const TaxInput = (props: Props): ReactElement => {
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE
-      ? `Register & ${Config.tax.saveButtonText}`
-      : Config.tax.saveButtonText;
+      ? `Register & ${Config.taxId.saveButtonText}`
+      : Config.taxId.saveButtonText;
 
   useEffect(() => {
     if (!business) return;
@@ -93,10 +93,12 @@ export const TaxInput = (props: Props): ReactElement => {
 
   const DisabledElement = (props: { children: ReactNode }): ReactElement => (
     <div className={`flex ${isTabletAndUp ? "flex-row" : "flex-column margin-right-2"} no-wrap`}>
-      <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>{Config.tax.lockedPreText}</div>
+      <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>
+        {Config.taxId.lockedPreText}
+      </div>
       <div>{props.children}</div>
       <div className={`${isTabletAndUp ? "padding-left-1" : ""} margin-right-1`}>
-        {Config.tax.lockedPostText}
+        {Config.taxId.lockedPostText}
       </div>
       <div className={"text-wrap margin-bottom-1"}>
         <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>

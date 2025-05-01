@@ -57,7 +57,7 @@ describe("<DisabledTaxId />", () => {
       taxId: "********9000",
       encryptedTaxId: "some-encrypted-value",
     });
-    fireEvent.click(screen.getByText(Config.tax.showButtonText));
+    fireEvent.click(screen.getByText(Config.taxId.showButtonText));
     expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
     await waitFor(() => {
       expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("123-456-789/000");
@@ -71,13 +71,13 @@ describe("<DisabledTaxId />", () => {
       taxId: "********9000",
       encryptedTaxId: "some-encrypted-value",
     });
-    expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.taxId.hideButtonText)).not.toBeInTheDocument();
     expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
-    fireEvent.click(screen.getByText(Config.tax.showButtonText));
+    fireEvent.click(screen.getByText(Config.taxId.showButtonText));
     await waitFor(() => {
-      expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
     });
-    expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.taxId.showButtonText)).not.toBeInTheDocument();
   });
 
   it("toggles between mobile hide and show text", async () => {
@@ -88,11 +88,11 @@ describe("<DisabledTaxId />", () => {
       taxId: "********9000",
       encryptedTaxId: "some-encrypted-value",
     });
-    expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
+    expect(screen.queryByText(Config.taxId.hideButtonTextMobile)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText(Config.taxId.showButtonTextMobile));
     await waitFor(() => {
-      expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxId.hideButtonTextMobile)).toBeInTheDocument();
     });
-    expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.taxId.showButtonTextMobile)).not.toBeInTheDocument();
   });
 });

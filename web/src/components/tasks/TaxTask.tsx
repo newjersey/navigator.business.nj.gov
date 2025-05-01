@@ -26,7 +26,7 @@ export const TaxTask = (props: Props): ReactElement => {
       <UnlockedBy task={props.task} />
       <Content>{preInputContent}</Content>
       <div className="margin-left-3ch margin-top-1">
-        <Content>{Config.tax.descriptionText}</Content>
+        <Content>{Config.taxId.descriptionText}</Content>
         <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
         <TaxInput task={props.task} />
       </div>
