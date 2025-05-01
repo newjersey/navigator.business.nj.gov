@@ -60,7 +60,8 @@
     "cds-supply",
     "other-businesses-CRTK-survey",
     "business-vehicle-title-reg",
-    "inspect-boiler"
+    "inspect-boiler",
+    "regulated-medical-waste-question"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
