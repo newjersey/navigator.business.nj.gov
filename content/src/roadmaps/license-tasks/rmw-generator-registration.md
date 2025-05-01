@@ -17,6 +17,7 @@ industryId:
   - healthcare
   - generic
   - logistics
+  - home-health-aide
 callToActionText: Submit My RMW Registration Form
 callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
 agencyId: njdep
