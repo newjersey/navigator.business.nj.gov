@@ -164,6 +164,11 @@
       "questionText": "Does your business or facility use a boiler with a significant heating capacity?",
       "id": "inspect-boiler",
       "addOn": "boiler"
+    },
+    {
+      "id": "regulated-medical-waste-question",
+      "questionText": "Will your business have `Regulated Medical Waste (RMW)|Regulated-Medical-Waste` ?",
+      "addOn": "regulated-medical-waste-generator-registration"
     }
   ]
 }
