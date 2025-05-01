@@ -59,7 +59,8 @@
   "name": "Logistics",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "logistics-CRTK-survey"
+    "logistics-CRTK-survey",
+    "regulated-medical-waste-question"
   ],
   "displayname": "logistics",
   "industryOnboardingQuestions": {
