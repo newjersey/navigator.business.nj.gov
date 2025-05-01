@@ -1,0 +1,12 @@
+{
+  "id": "regulated-medical-waste-generator-registration",
+  "displayname": "regulated-medical-waste-generator-registration",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "licenseTask": "RMW-generator-registration",
+      "weight": 100,
+      "required": true
+    }
+  ]
+}
