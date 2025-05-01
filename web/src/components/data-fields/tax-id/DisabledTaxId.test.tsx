@@ -10,7 +10,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  decryptTaxId: jest.fn(),
+  decryptValue: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -51,21 +51,21 @@ describe("<DisabledTaxId />", () => {
   });
 
   it("decrypts the tax id if tax id is a masked value", async () => {
-    mockApi.decryptTaxId.mockResolvedValue("123456789000");
+    mockApi.decryptValue.mockResolvedValue("123456789000");
     renderComponent({
       ...profileData,
       taxId: "********9000",
       encryptedTaxId: "some-encrypted-value",
     });
     fireEvent.click(screen.getByText(Config.tax.showButtonText));
-    expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+    expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
     await waitFor(() => {
       expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("123-456-789/000");
     });
   });
 
   it("toggles between hide and show text", async () => {
-    mockApi.decryptTaxId.mockResolvedValue("123456789000");
+    mockApi.decryptValue.mockResolvedValue("123456789000");
     renderComponent({
       ...profileData,
       taxId: "********9000",
@@ -81,7 +81,7 @@ describe("<DisabledTaxId />", () => {
   });
 
   it("toggles between mobile hide and show text", async () => {
-    mockApi.decryptTaxId.mockResolvedValue("123456789000");
+    mockApi.decryptValue.mockResolvedValue("123456789000");
     setLargeScreen(false);
     renderComponent({
       ...profileData,

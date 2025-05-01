@@ -5,7 +5,7 @@ import { SingleTaxId } from "@/components/data-fields/tax-id/SingleTaxId";
 import { SplitTaxId } from "@/components/data-fields/tax-id/SplitTaxId";
 import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { decryptTaxId } from "@/lib/api-client/apiClient";
+import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -67,8 +67,8 @@ export const TaxId = (props: Props): ReactElement => {
   };
 
   const getDecryptedTaxId = async (): Promise<string> => {
-    return decryptTaxId({
-      encryptedTaxId: state.profileData.encryptedTaxId as string,
+    return decryptValue({
+      encryptedValue: state.profileData.encryptedTaxId as string,
     });
   };
 
