@@ -19,9 +19,7 @@ callToActionText: Submit My RMW Registration Form
 callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
 agencyId: njdep
 ---
-
-
-
+\
 You need a new registration if your facility: 
 
 * Is registering for the first time 
