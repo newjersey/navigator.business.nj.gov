@@ -9,6 +9,7 @@ industryIds:
   - funeral
   - pharmacy
   - petcare
+  - home-health-aide
 sectorIds:
   - health-care-and-social-assistance
   - professional-scientific-and-technical-services
