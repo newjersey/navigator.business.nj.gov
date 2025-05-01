@@ -15,6 +15,8 @@ industryId:
   - pharmacy
   - petcare
   - healthcare
+  - generic
+  - logistics
 callToActionText: Submit My RMW Registration Form
 callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
 agencyId: njdep
@@ -71,7 +73,7 @@ You need to update your registration if your facility changes:
 
   :::
 
-  If you have questions about RMW registration, send an email to mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3. 
+  If you have questions about RMW registration, email mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3. 
 
   :::callout{ showHeader="true" headerText="What if I don’t register?" showIcon="false" calloutType="warning" }
 
