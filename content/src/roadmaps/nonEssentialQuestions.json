@@ -169,6 +169,11 @@
       "id": "regulated-medical-waste-question",
       "questionText": "Will your business have `Regulated Medical Waste (RMW)|regulated-medical-waste` ?",
       "addOn": "regulated-medical-waste-generator-registration"
+    },
+    {
+      "id": "business-vehicle-irp",
+      "questionText": "Will you operate vehicles over 26,000 pounds, or that have 3 or more axles, in 2 or more states or Canadian provinces?",
+      "addOn": "vehicle-irp"
     }
   ]
 }
