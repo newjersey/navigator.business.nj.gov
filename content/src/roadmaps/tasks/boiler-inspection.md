@@ -4,7 +4,7 @@ notesMd: >-
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.ndgv526k6eks
 
 
-  5.2: Updating callout to "note", or quick ref callout
+  5.2: Updating callout to "note", or quick ref callout, but not republishing until that callout looks like it should (I know Faraz is working on this now!)
 
 
   4.21: SME approved, publishing task
