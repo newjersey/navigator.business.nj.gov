@@ -45,7 +45,8 @@
   ],
   "name": "Event Planning",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "business-vehicle-irp"
   ],
   "displayname": "event-planning",
   "industryOnboardingQuestions": {
