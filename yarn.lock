@@ -4577,7 +4577,6 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 8.19.4
-    css-loader: 6.11.0
     cypress: 14.3.2
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
@@ -4777,7 +4776,6 @@ __metadata:
     copy-webpack-plugin: 13.0.0
     cross-env: 7.0.3
     cspell: 8.19.4
-    css-loader: 6.11.0
     cypress: 14.3.2
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
@@ -17110,7 +17108,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:6.11.0, css-loader@npm:^6.7.1, css-loader@npm:^6.7.3":
+"css-loader@npm:^6.7.1, css-loader@npm:^6.7.3":
   version: 6.11.0
   resolution: "css-loader@npm:6.11.0"
   dependencies:
