@@ -61,7 +61,8 @@
     "other-businesses-CRTK-survey",
     "business-vehicle-title-reg",
     "inspect-boiler",
-    "regulated-medical-waste-question"
+    "regulated-medical-waste-question",
+    "business-vehicle-irp"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
