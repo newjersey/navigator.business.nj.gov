@@ -57,7 +57,7 @@ If the boiler **meets any** of the following *and* serves a building with less t
 
 After your boiler is registered and passes the first inspection, either a State inspector or your insurance company will contact you to set up future inspections. Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected.
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="note" }
 
 **To register a boiler and schedule the first inspection**: Call the NJ Bureau of Boiler and Pressure Vessel Compliance at (609) 292-2921.
 
