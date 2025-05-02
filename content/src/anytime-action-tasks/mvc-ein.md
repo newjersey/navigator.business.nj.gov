@@ -3,7 +3,7 @@ notesMd: ""
 id: mvc-ein
 name: Get Your Motor Vehicle Commission EIN
 category:
-  - Purchase New Products or Equipment
+  - Manage My Business Vehicles
 industryIds: []
 sectorIds:
   - transportation-and-warehousing
