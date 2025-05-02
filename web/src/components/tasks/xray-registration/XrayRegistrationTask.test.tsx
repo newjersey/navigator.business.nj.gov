@@ -30,11 +30,11 @@ describe("<XrayRegistrationTask />", () => {
         initialUserData={generateUserDataForBusiness(
           generateBusiness({
             ...business,
-          })
+          }),
         )}
       >
         <XrayRegistrationTask task={task} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -76,8 +76,8 @@ describe("<XrayRegistrationTask />", () => {
                 },
               ],
             },
-          })
-        )
+          }),
+        ),
       );
       renderTaskWithBusinessData();
       goToCheckStatusTab();
@@ -117,8 +117,8 @@ describe("<XrayRegistrationTask />", () => {
               machines: [],
               expirationDate: undefined,
             },
-          })
-        )
+          }),
+        ),
       );
       renderTaskWithBusinessData();
       goToCheckStatusTab();
@@ -203,7 +203,11 @@ describe("<XrayRegistrationTask />", () => {
     fireEvent.change(screen.getByTestId(testid), { target: { value: value } });
   };
 
-  const fillOutSearchTab = (businessName: string, address: string, addressZipCode: string): void => {
+  const fillOutSearchTab = (
+    businessName: string,
+    address: string,
+    addressZipCode: string,
+  ): void => {
     fillText("business-name", businessName);
     fillText("address-1", address);
     fillText("addressZipCode", addressZipCode);

@@ -118,7 +118,8 @@ const formationData: FormationData = {
     makeDistributionTerms: "some-makeDistributionTerms-text-89515693",
     hasNonprofitBoardMembers: false,
     nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS",
-    nonprofitBoardMemberQualificationsTerms: "some-nonprofitBoardMemberQualificationsTerms-text-92612643",
+    nonprofitBoardMemberQualificationsTerms:
+      "some-nonprofitBoardMemberQualificationsTerms-text-92612643",
     nonprofitBoardMemberRightsSpecified: "IN_FORM",
     nonprofitBoardMemberRightsTerms: "some-nonprofitBoardMemberRightsTerms-text-24980832",
     nonprofitTrusteesMethodSpecified: "IN_FORM",

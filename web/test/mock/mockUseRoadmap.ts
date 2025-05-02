@@ -21,7 +21,8 @@ export const setMockRoadmapResponse = (params: {
     sectionNamesInRoadmap: [...sectionNames],
     isSectionCompleted: params.isSectionCompletedFn ?? jest.fn(),
     currentAndNextSection:
-      params.currentAndNextSection ?? ((): CurrentAndNextSection => ({ current: "PLAN", next: "START" })),
+      params.currentAndNextSection ??
+      ((): CurrentAndNextSection => ({ current: "PLAN", next: "START" })),
   });
 };
 

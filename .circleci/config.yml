@@ -53,7 +53,14 @@ commands:
     steps:
       - run:
           name: Build Web Docker image
-          command: docker build -f WebApp.Dockerfile . -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >>-${CIRCLE_SHA1} -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >> -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >>-latest
+          command:
+            docker build -f WebApp.Dockerfile . -t
+            ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<<
+            parameters.image-name >>-${CIRCLE_SHA1} -t
+            ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<<
+            parameters.image-name >> -t
+            ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<<
+            parameters.image-name >>-latest
       - run:
           name: Push Web Docker image
           command: |
@@ -100,13 +107,18 @@ commands:
     steps:
       - run:
           name: Start services
-          command: yarn workspace @businessnjgovnavigator/api start & yarn workspace @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web start
+          command:
+            yarn workspace @businessnjgovnavigator/api start & yarn workspace
+            @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web
+            start
           background: true
           no_output_timeout: 30m
       - run:
           name: Run Tests
           no_output_timeout: 30m
-          command: yarn cypress:run --browser=<< parameters.browser >> --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>
+          command:
+            yarn cypress:run --browser=<< parameters.browser >> --record=<<
+            parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>
           working_directory: web
       - store_test_results:
           path: web/cypress/results
@@ -126,10 +138,14 @@ commands:
     steps:
       - run:
           name: Install Additional Tools
-          command: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+          command:
+            sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4
+            libnss3 libxss1 libasound2 libxtst6 xauth xvfb
       - run:
           name: Run Tests
-          command: yarn cypress:run --browser=chrome --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >> --config baseUrl=${SMOKE_TEST_ENV}
+          command:
+            yarn cypress:run --browser=chrome --record=<< parameters.enable-dashboard >> --env
+            SUITE=<< parameters.suite >> --config baseUrl=${SMOKE_TEST_ENV}
           working_directory: web
       - store_test_results:
           path: web/cypress/results
@@ -168,7 +184,9 @@ commands:
     steps:
       - run:
           name: Deploy Serverless
-          command: yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE} --region us-east-1
+          command:
+            yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE}
+            --region us-east-1
 
   set-shared-stage-env-vars:
     steps:
@@ -487,7 +505,9 @@ commands:
           image-name: bfs-navigator-content
       - run:
           name: Deploy WebApp
-          command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-content --region ${AWS_REGION} --force-new-deployment
+          command:
+            aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-content
+            --region ${AWS_REGION} --force-new-deployment
 
   deploy-testing-env:
     steps:
@@ -496,7 +516,9 @@ commands:
           image-name: bfs-navigator-testing
       - run:
           name: Deploy WebApp
-          command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-testing --region ${AWS_REGION} --force-new-deployment
+          command:
+            aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-testing
+            --region ${AWS_REGION} --force-new-deployment
 
   deploy:
     steps:
@@ -505,7 +527,9 @@ commands:
           image-name: bfs-navigator
       - run:
           name: Deploy WebApp
-          command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator --region ${AWS_REGION} --force-new-deployment
+          command:
+            aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator --region
+            ${AWS_REGION} --force-new-deployment
 
   deploy-storybook:
     steps:
@@ -514,7 +538,9 @@ commands:
           command: aws s3 rm s3://$STORYBOOK_S3_BUCKET --recursive
       - run:
           name: Deploy Storybook
-          command: yarn workspace @businessnjgovnavigator/web deploy:storybook --bucket-path $STORYBOOK_S3_BUCKET  --aws-profile=NONE
+          command:
+            yarn workspace @businessnjgovnavigator/web deploy:storybook --bucket-path
+            $STORYBOOK_S3_BUCKET  --aws-profile=NONE
 
   install-chrome:
     steps:
@@ -588,7 +614,14 @@ commands:
     steps:
       - run:
           name: Build  Docker Image
-          command: docker build -f BuilderImage.Dockerfile . -t ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >>-${CIRCLE_SHA1} -t ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >> -t ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >>-latest
+          command:
+            docker build -f BuilderImage.Dockerfile . -t
+            ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<<
+            parameters.image-name >>-${CIRCLE_SHA1} -t
+            ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<<
+            parameters.image-name >> -t
+            ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<<
+            parameters.image-name >>-latest
       - run:
           name: Push Builder Docker Image
           command: |

@@ -11,7 +11,7 @@ type Config = {
 
 export const DynamicsFireSafetyHealthCheckClient = (
   logWriter: LogWriterType,
-  config: Config
+  config: Config,
 ): HealthCheckMethod => {
   return async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();
@@ -31,7 +31,10 @@ export const DynamicsFireSafetyHealthCheckClient = (
         } as HealthCheckMetadata;
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`Dynamics Fire Safety Health Check Failed - Id:${logId} - Error:`, error);
+        logWriter.LogError(
+          `Dynamics Fire Safety Health Check Failed - Id:${logId} - Error:`,
+          error,
+        );
         if (error.response) {
           return {
             success: false,

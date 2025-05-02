@@ -28,7 +28,7 @@ describe("<NavBarDesktopQuickLinks />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarPlanLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -39,7 +39,7 @@ describe("<NavBarDesktopQuickLinks />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarOperateLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -50,7 +50,7 @@ describe("<NavBarDesktopQuickLinks />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarGrowLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -61,7 +61,7 @@ describe("<NavBarDesktopQuickLinks />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarUpdatesLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -72,7 +72,7 @@ describe("<NavBarDesktopQuickLinks />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarSearchLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 });

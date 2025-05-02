@@ -22,11 +22,11 @@ describe("<XrayRegistrationStatus />", () => {
         initialUserData={generateUserDataForBusiness(
           generateBusiness({
             ...business,
-          })
+          }),
         )}
       >
         <XrayRegistrationStatus onSubmit={() => {}} error={undefined} isLoading={false} />;
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 

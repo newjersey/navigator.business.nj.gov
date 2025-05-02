@@ -63,13 +63,15 @@ describe("dateHelpers", () => {
     });
 
     it("returns issue date when populated", () => {
-      expect(getLicenseDate(licenceData)).toEqual(parseDateWithFormat(licenceData.issueDate, "YYYYMMDD X"));
+      expect(getLicenseDate(licenceData)).toEqual(
+        parseDateWithFormat(licenceData.issueDate, "YYYYMMDD X"),
+      );
     });
 
     it("returns date this status when issue date is not populated", () => {
       licenceData.issueDate = "";
       expect(getLicenseDate(licenceData)).toEqual(
-        parseDateWithFormat(licenceData.dateThisStatus, "YYYYMMDD X")
+        parseDateWithFormat(licenceData.dateThisStatus, "YYYYMMDD X"),
       );
     });
 
@@ -77,7 +79,7 @@ describe("dateHelpers", () => {
       licenceData.issueDate = "";
       licenceData.dateThisStatus = "";
       expect(getLicenseDate(licenceData)).toEqual(
-        parseDateWithFormat(licenceData.expirationDate, "YYYYMMDD X")
+        parseDateWithFormat(licenceData.expirationDate, "YYYYMMDD X"),
       );
     });
   });

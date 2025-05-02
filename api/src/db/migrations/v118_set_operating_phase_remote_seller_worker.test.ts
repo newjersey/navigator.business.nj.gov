@@ -1,4 +1,7 @@
-import { generateV117ProfileData, generateV117UserData } from "@db/migrations/v117_add_onboarding_nonprofit";
+import {
+  generateV117ProfileData,
+  generateV117UserData,
+} from "@db/migrations/v117_add_onboarding_nonprofit";
 import { migrate_v117_to_v118 } from "@db/migrations/v118_set_operating_phase_remote_seller_worker";
 
 describe("migrate_v117_to_v118", () => {
@@ -35,6 +38,8 @@ describe("migrate_v117_to_v118", () => {
       }),
     });
 
-    expect(migrate_v117_to_v118(v117UserData).profileData.operatingPhase).toEqual("NEEDS_BUSINESS_STRUCTURE");
+    expect(migrate_v117_to_v118(v117UserData).profileData.operatingPhase).toEqual(
+      "NEEDS_BUSINESS_STRUCTURE",
+    );
   });
 });

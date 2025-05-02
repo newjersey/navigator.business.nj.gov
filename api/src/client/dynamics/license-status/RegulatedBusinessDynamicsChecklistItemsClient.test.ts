@@ -24,7 +24,10 @@ describe("RegulatedBusinessDynamicsChecklistItemsClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = RegulatedBusinessDynamicsChecklistItemsClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
+    client = RegulatedBusinessDynamicsChecklistItemsClient(
+      DEBUG ? logger : DummyLogWriter,
+      ORG_URL,
+    );
   });
 
   const mockAccessToken = "access-granted";
@@ -41,7 +44,7 @@ describe("RegulatedBusinessDynamicsChecklistItemsClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -58,7 +61,7 @@ describe("RegulatedBusinessDynamicsChecklistItemsClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/rgb_checklistitems?$select=activitytypecode,rgb_categorycode,statecode,subject,statuscode&$filter=(_regardingobjectid_value eq ${mockApplicationIdResponse[1].applicationId})`,
@@ -66,7 +69,7 @@ describe("RegulatedBusinessDynamicsChecklistItemsClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -102,7 +105,7 @@ describe("RegulatedBusinessDynamicsChecklistItemsClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: { value: [] } });
 
     expect(
-      await client.getChecklistItemsForAllApplications(mockAccessToken, mockApplicationIdResponse)
+      await client.getChecklistItemsForAllApplications(mockAccessToken, mockApplicationIdResponse),
     ).toEqual([
       {
         licenseStatus: licenseApplicationIdResponse1.licenseStatus,
@@ -134,7 +137,7 @@ describe("RegulatedBusinessDynamicsChecklistItemsClient", () => {
     });
 
     await expect(
-      client.getChecklistItemsForAllApplications(mockAccessToken, mockApplicationIdResponse)
+      client.getChecklistItemsForAllApplications(mockAccessToken, mockApplicationIdResponse),
     ).rejects.toEqual(500);
   });
 });

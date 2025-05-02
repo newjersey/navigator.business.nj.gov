@@ -1,9 +1,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FormationClient } from "@domain/types";
 import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
-import { getCurrentDate, getCurrentDateISOString, parseDate, parseDateWithFormat } from "@shared/dateHelpers";
+import {
+  getCurrentDate,
+  getCurrentDateISOString,
+  parseDate,
+  parseDateWithFormat,
+} from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
-import { FormationFormData, FormationLegalType, formationApiDateFormat } from "@shared/formationData";
+import {
+  FormationFormData,
+  FormationLegalType,
+  formationApiDateFormat,
+} from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
 import {
   generateBusiness,
@@ -22,7 +31,12 @@ import { generateFormationUserData, generateInputFile } from "@test/factories";
 import axios from "axios";
 
 import { ApiFormationClient } from "@client/ApiFormationClient";
-import { ApiError, ApiGetFilingResponse, ApiResponse, ApiSubmission } from "@client/ApiFormationHelpers";
+import {
+  ApiError,
+  ApiGetFilingResponse,
+  ApiResponse,
+  ApiSubmission,
+} from "@client/ApiFormationHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { UserData } from "@shared/userData";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
@@ -55,7 +69,9 @@ const generateApiError = (overrides: Partial<ApiError>): ApiError => {
   };
 };
 
-const stubGenerateApiResponse = (overrides: Partial<ApiGetFilingResponse>): ApiGetFilingResponse => {
+const stubGenerateApiResponse = (
+  overrides: Partial<ApiGetFilingResponse>,
+): ApiGetFilingResponse => {
   return {
     Success: true,
     BusinessName: `some-BusinessName-${Math.random()}`,
@@ -78,7 +94,7 @@ describe("ApiFormationClient", () => {
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = ApiFormationClient(
       { account: "12345", key: "abcdef", baseUrl: "example.com/formation" },
-      DEBUG ? logger : DummyLogWriter
+      DEBUG ? logger : DummyLogWriter,
     );
   });
 
@@ -116,13 +132,13 @@ describe("ApiFormationClient", () => {
             ],
           },
 
-          { legalStructureId: "limited-liability-company" }
+          { legalStructureId: "limited-liability-company" },
         );
 
         const userData = generateFormationUserData(
           { legalStructureId: "limited-liability-company", businessPersona: "STARTING" },
           {},
-          formationFormData
+          formationFormData,
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -160,7 +176,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 MainAddress: {
                   Address1: formationFormData.addressLine1,
@@ -235,7 +251,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
 
@@ -267,13 +283,13 @@ describe("ApiFormationClient", () => {
               }),
             ],
           },
-          { legalStructureId: "foreign-limited-liability-company" }
+          { legalStructureId: "foreign-limited-liability-company" },
         );
 
         const userData = generateFormationUserData(
           { legalStructureId: "limited-liability-company", businessPersona: "FOREIGN" },
           {},
-          formationFormData
+          formationFormData,
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -311,7 +327,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 ForeignDateOfFormation: "10/20/2022",
                 ForeignStateOfFormation: "Massachusetts",
@@ -326,7 +342,9 @@ describe("ApiFormationClient", () => {
                   Zipcode: formationFormData.addressZipCode,
                   Country: formationFormData.addressCountry,
                   Province:
-                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                    formationFormData.addressCountry === "US"
+                      ? undefined
+                      : formationFormData.addressProvince,
                 },
               },
               CompanyProfit: "Profit",
@@ -367,7 +385,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
     });
@@ -406,13 +424,13 @@ describe("ApiFormationClient", () => {
             members,
           },
 
-          { legalStructureId }
+          { legalStructureId },
         );
 
         const userData = generateFormationUserData(
           { legalStructureId, businessPersona: "STARTING" },
           {},
-          formationFormData
+          formationFormData,
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -451,7 +469,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 MainAddress: {
                   Address1: formationFormData.addressLine1,
@@ -546,7 +564,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
 
@@ -576,13 +594,13 @@ describe("ApiFormationClient", () => {
             signers,
           },
 
-          { legalStructureId: `foreign-${legalStructureId}` }
+          { legalStructureId: `foreign-${legalStructureId}` },
         );
 
         const userData = generateFormationUserData(
           { legalStructureId, businessPersona: "FOREIGN" },
           {},
-          formationFormData
+          formationFormData,
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -628,7 +646,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 ForeignDateOfFormation: "10/20/2022",
                 ForeignStateOfFormation: "Massachusetts",
@@ -643,7 +661,9 @@ describe("ApiFormationClient", () => {
                   Zipcode: formationFormData.addressZipCode,
                   Country: formationFormData.addressCountry,
                   Province:
-                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                    formationFormData.addressCountry === "US"
+                      ? undefined
+                      : formationFormData.addressProvince,
                 },
               },
               CompanyProfit: "Profit",
@@ -691,7 +711,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
 
@@ -708,13 +728,13 @@ describe("ApiFormationClient", () => {
           it(`is undefined if not provided for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               {},
-              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
+              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType },
             );
 
             const userData = generateFormationUserData(
               { legalStructureId, businessPersona: "FOREIGN" },
               {},
-              formationFormData
+              formationFormData,
             );
 
             await client.form(userData, "hostname.com/form-business");
@@ -726,13 +746,13 @@ describe("ApiFormationClient", () => {
           it(`is 'Yes' if willPracticeLaw is true for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               { willPracticeLaw: true },
-              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
+              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType },
             );
 
             const userData = generateFormationUserData(
               { legalStructureId, businessPersona: "FOREIGN" },
               {},
-              formationFormData
+              formationFormData,
             );
 
             await client.form(userData, "hostname.com/form-business");
@@ -744,13 +764,13 @@ describe("ApiFormationClient", () => {
           it(`is 'No' if willPracticeLaw is false for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               { willPracticeLaw: false },
-              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
+              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType },
             );
 
             const userData = generateFormationUserData(
               { legalStructureId, businessPersona: "FOREIGN" },
               {},
-              formationFormData
+              formationFormData,
             );
 
             await client.form(userData, "hostname.com/form-business");
@@ -762,13 +782,13 @@ describe("ApiFormationClient", () => {
           it(`is undefined if not foreign corp for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               { willPracticeLaw: true },
-              { legalStructureId: `${legalStructureId}` as FormationLegalType }
+              { legalStructureId: `${legalStructureId}` as FormationLegalType },
             );
 
             const userData = generateFormationUserData(
               { legalStructureId, businessPersona: "OWNING" },
               {},
-              formationFormData
+              formationFormData,
             );
 
             await client.form(userData, "hostname.com/form-business");
@@ -809,7 +829,7 @@ describe("ApiFormationClient", () => {
             ],
           },
 
-          { legalStructureId: "limited-liability-partnership" }
+          { legalStructureId: "limited-liability-partnership" },
         );
 
         const userData = generateUserDataForBusiness(
@@ -819,7 +839,7 @@ describe("ApiFormationClient", () => {
               businessPersona: "STARTING",
             }),
             formationData: generateFormationData({ formationFormData }),
-          })
+          }),
         );
 
         await client.form(userData, "hostname.com/form-business");
@@ -857,7 +877,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 MainAddress: {
                   Address1: formationFormData.addressLine1,
@@ -909,7 +929,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
 
@@ -937,7 +957,7 @@ describe("ApiFormationClient", () => {
               }),
             ],
           },
-          { legalStructureId: "foreign-limited-liability-partnership" }
+          { legalStructureId: "foreign-limited-liability-partnership" },
         );
 
         const userData = generateUserDataForBusiness(
@@ -947,7 +967,7 @@ describe("ApiFormationClient", () => {
               businessPersona: "FOREIGN",
             }),
             formationData: generateFormationData({ formationFormData }),
-          })
+          }),
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -985,7 +1005,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 ForeignDateOfFormation: "10/20/2022",
                 ForeignStateOfFormation: "Massachusetts",
@@ -1000,7 +1020,9 @@ describe("ApiFormationClient", () => {
                   Zipcode: formationFormData.addressZipCode,
                   Country: formationFormData.addressCountry,
                   Province:
-                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                    formationFormData.addressCountry === "US"
+                      ? undefined
+                      : formationFormData.addressProvince,
                 },
               },
               CompanyProfit: "Profit",
@@ -1036,7 +1058,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
     });
@@ -1082,7 +1104,7 @@ describe("ApiFormationClient", () => {
             signers: undefined,
             incorporators,
           },
-          { legalStructureId: "limited-partnership" }
+          { legalStructureId: "limited-partnership" },
         );
 
         const userData = generateUserDataForBusiness(
@@ -1092,7 +1114,7 @@ describe("ApiFormationClient", () => {
               businessPersona: "STARTING",
             }),
             formationData: generateFormationData({ formationFormData }),
-          })
+          }),
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -1130,7 +1152,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 MainAddress: {
                   Address1: formationFormData.addressLine1,
@@ -1225,7 +1247,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
     });
@@ -1240,7 +1262,7 @@ describe("ApiFormationClient", () => {
               businessPersona: "STARTING",
             }),
             formationData: generateFormationData({ formationFormData }),
-          })
+          }),
         );
       };
 
@@ -1274,7 +1296,7 @@ describe("ApiFormationClient", () => {
             incorporators,
             isVeteranNonprofit: false,
           },
-          { legalStructureId: "nonprofit" }
+          { legalStructureId: "nonprofit" },
         );
 
         const userData = getUserDataForNonProfit(formationFormData);
@@ -1314,7 +1336,7 @@ describe("ApiFormationClient", () => {
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
-                  defaultDateFormat
+                  defaultDateFormat,
                 ).format(formationApiDateFormat),
                 MainAddress: {
                   Address1: formationFormData.addressLine1,
@@ -1394,7 +1416,7 @@ describe("ApiFormationClient", () => {
               ContactEmail: userData.user.email,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "text/plain" } },
         );
       });
 
@@ -1419,7 +1441,7 @@ describe("ApiFormationClient", () => {
             incorporators: [generateFormationIncorporator({})],
             isVeteranNonprofit: false,
           },
-          { legalStructureId: "nonprofit" }
+          { legalStructureId: "nonprofit" },
         );
 
         const userData = getUserDataForNonProfit(formationFormData);
@@ -1429,7 +1451,7 @@ describe("ApiFormationClient", () => {
         const lastSubmittedData = mockAxios.post.mock.calls[lastIndex][1] as ApiSubmission;
 
         expect(lastSubmittedData.Formation.BusinessInformation.Business).toEqual(
-          "DomesticNonProfitCorporation"
+          "DomesticNonProfitCorporation",
         );
 
         expect(lastSubmittedData.Formation.AdditionalDomesticNonProfitCorp).toEqual({
@@ -1453,7 +1475,7 @@ describe("ApiFormationClient", () => {
           {
             isVeteranNonprofit: true,
           },
-          { legalStructureId: "nonprofit" }
+          { legalStructureId: "nonprofit" },
         );
 
         const userData = getUserDataForNonProfit(formationFormData);
@@ -1464,7 +1486,7 @@ describe("ApiFormationClient", () => {
         const lastSubmittedData = mockAxios.post.mock.calls[lastIndex][1] as ApiSubmission;
 
         expect(lastSubmittedData.Formation.BusinessInformation.Business).toEqual(
-          "DomesticNonProfitVeteranCorporation"
+          "DomesticNonProfitVeteranCorporation",
         );
       });
     });
@@ -1477,7 +1499,7 @@ describe("ApiFormationClient", () => {
         const userData = generateFormationUserData(
           { businessPersona: "STARTING" },
           {},
-          { addressLine1: "", addressMunicipality: undefined, addressZipCode: "" }
+          { addressLine1: "", addressMunicipality: undefined, addressZipCode: "" },
         );
 
         await client.form(userData, "some-url");
@@ -1496,7 +1518,7 @@ describe("ApiFormationClient", () => {
             addressLine1: "11 Main Street",
             addressMunicipality: generateMunicipality({}),
             addressZipCode: "08363",
-          }
+          },
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -1504,16 +1526,16 @@ describe("ApiFormationClient", () => {
         const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
 
         expect(postBody.Formation.BusinessInformation.MainAddress?.Address1).toEqual(
-          currentBusiness.formationData.formationFormData.addressLine1
+          currentBusiness.formationData.formationFormData.addressLine1,
         );
         expect(postBody.Formation.BusinessInformation.MainAddress?.City).toEqual(
-          currentBusiness.formationData.formationFormData.addressMunicipality?.name
+          currentBusiness.formationData.formationFormData.addressMunicipality?.name,
         );
         expect(postBody.Formation.BusinessInformation.MainAddress?.State).toEqual(
-          currentBusiness.formationData.formationFormData.addressState?.name
+          currentBusiness.formationData.formationFormData.addressState?.name,
         );
         expect(postBody.Formation.BusinessInformation.MainAddress?.Zipcode).toEqual(
-          currentBusiness.formationData.formationFormData.addressZipCode
+          currentBusiness.formationData.formationFormData.addressZipCode,
         );
       });
     });
@@ -1530,7 +1552,7 @@ describe("ApiFormationClient", () => {
             addressLine1: "",
             addressMunicipality: generateMunicipality({}),
             addressZipCode: "",
-          }
+          },
         );
         const currentBusiness = getCurrentBusiness(userData);
 
@@ -1538,16 +1560,16 @@ describe("ApiFormationClient", () => {
         const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
 
         expect(postBody.Formation.BusinessInformation.MainAddress?.Address1).toEqual(
-          currentBusiness.formationData.formationFormData.addressLine1
+          currentBusiness.formationData.formationFormData.addressLine1,
         );
         expect(postBody.Formation.BusinessInformation.MainAddress?.City).toEqual(
-          currentBusiness.formationData.formationFormData.addressMunicipality?.name
+          currentBusiness.formationData.formationFormData.addressMunicipality?.name,
         );
         expect(postBody.Formation.BusinessInformation.MainAddress?.State).toEqual(
-          currentBusiness.formationData.formationFormData.addressState?.name
+          currentBusiness.formationData.formationFormData.addressState?.name,
         );
         expect(postBody.Formation.BusinessInformation.MainAddress?.Zipcode).toEqual(
-          currentBusiness.formationData.formationFormData.addressZipCode
+          currentBusiness.formationData.formationFormData.addressZipCode,
         );
       });
     });
@@ -1562,7 +1584,7 @@ describe("ApiFormationClient", () => {
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
       expect(postBody.Formation.RegisteredAgent.Id).toEqual(
-        currentBusiness.formationData.formationFormData.agentNumber
+        currentBusiness.formationData.formationFormData.agentNumber,
       );
       expect(postBody.Formation.RegisteredAgent.Email).toEqual(undefined);
       expect(postBody.Formation.RegisteredAgent.Name).toEqual(undefined);
@@ -1576,7 +1598,7 @@ describe("ApiFormationClient", () => {
       const userData = generateFormationUserData(
         { naicsCode: "12345" },
         {},
-        { agentNumberOrManual: "NUMBER" }
+        { agentNumberOrManual: "NUMBER" },
       );
 
       await client.form(userData, "some-url");
@@ -1682,7 +1704,7 @@ describe("ApiFormationClient", () => {
           Key: "abcdef",
           FormationId: "formation-id-123",
         },
-        { headers: { "Content-Type": "text/plain" } }
+        { headers: { "Content-Type": "text/plain" } },
       );
 
       expect(response).toEqual({
@@ -1717,7 +1739,10 @@ describe("ApiFormationClient", () => {
     });
 
     it("returns a failing health check if an unexpected status code is received", async () => {
-      mockAxios.post.mockRejectedValue({ response: { status: StatusCodes.BAD_REQUEST }, message: "" });
+      mockAxios.post.mockRejectedValue({
+        response: { status: StatusCodes.BAD_REQUEST },
+        message: "",
+      });
       expect(await client.health()).toEqual({
         success: false,
         error: {

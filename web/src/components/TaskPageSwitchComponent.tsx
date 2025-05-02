@@ -63,7 +63,10 @@ export const TaskPageSwitchComponent = ({
 }: Props): ReactElement => {
   if (taskIdsWithLicenseSearchEnabled.includes(task.id)) {
     return (
-      <LicenseTask task={task as TaskWithLicenseTaskId} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <LicenseTask
+        task={task as TaskWithLicenseTaskId}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+      />
     );
   }
 
@@ -71,7 +74,9 @@ export const TaskPageSwitchComponent = ({
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,
     "air-permitting": <EnvPermit task={task} />,
-    "xray-reg": <XrayRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
+    "xray-reg": (
+      <XrayRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+    ),
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
@@ -79,7 +84,10 @@ export const TaskPageSwitchComponent = ({
       <HotelMotelRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
     "multiple-dwelling-registration": (
-      <MultipleDwellingRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <MultipleDwellingRegistrationTask
+        task={task}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+      />
     ),
     "raffle-bingo-games-license": <RaffleBingoPaginator task={task} />,
     "determine-naics-code": <NaicsCodeTask task={task} />,
@@ -88,12 +96,20 @@ export const TaskPageSwitchComponent = ({
     "annual-license-cannabis": <CannabisApplyForLicenseTask task={task} />,
     "register-for-ein": <EinTask task={task} />,
     "register-for-taxes": <TaxTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />,
-    "business-structure": <BusinessStructureTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />,
+    "business-structure": (
+      <BusinessStructureTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />
+    ),
     "search-business-name": (
-      <BusinessFormation task={getTaskFromRoadmap(roadmap, task.id)} displayContent={displayContent} />
+      <BusinessFormation
+        task={getTaskFromRoadmap(roadmap, task.id)}
+        displayContent={displayContent}
+      />
     ),
     [formationTaskId]: (
-      <BusinessFormation task={getTaskFromRoadmap(roadmap, task.id)} displayContent={displayContent} />
+      <BusinessFormation
+        task={getTaskFromRoadmap(roadmap, task.id)}
+        displayContent={displayContent}
+      />
     ),
     default: <TaskBody task={task} business={business} roadmap={roadmap} />,
   });

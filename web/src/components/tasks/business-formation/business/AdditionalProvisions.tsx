@@ -13,7 +13,8 @@ export const AdditionalProvisions = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const isExpanded =
-    state.formationFormData.additionalProvisions && state.formationFormData.additionalProvisions.length > 0;
+    state.formationFormData.additionalProvisions &&
+    state.formationFormData.additionalProvisions.length > 0;
 
   const handleAddButtonClick = (): void => {
     setFormationFormData((previousFormationData) => {
@@ -73,13 +74,17 @@ export const AdditionalProvisions = (): ReactElement => {
         </div>
       </div>
       {isExpanded && (
-        <Content className="margin-bottom-2">{Config.formation.fields.additionalProvisions.body}</Content>
+        <Content className="margin-bottom-2">
+          {Config.formation.fields.additionalProvisions.body}
+        </Content>
       )}
       {state.formationFormData.additionalProvisions?.map((provision: string, index: number) => {
         return (
           <div key={index}>
             <strong>
-              <ModifiedContent>{Config.formation.fields.additionalProvisions.secondaryLabel}</ModifiedContent>
+              <ModifiedContent>
+                {Config.formation.fields.additionalProvisions.secondaryLabel}
+              </ModifiedContent>
             </strong>
             <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
             <div className="grid-row">

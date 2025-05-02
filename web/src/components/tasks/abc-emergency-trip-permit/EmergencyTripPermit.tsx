@@ -33,7 +33,7 @@ export const EmergencyTripPermit = (): ReactElement => {
   const { Config } = useConfig();
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [applicationInfo, setApplicationInfo] = useState<EmergencyTripPermitApplicationInfo>(
-    generateNewEmergencyTripPermitData()
+    generateNewEmergencyTripPermitData(),
   );
   const [submitted, setSubmitted] = useState(false);
   const [apiError, setApiError] = useState(false);
@@ -64,7 +64,10 @@ export const EmergencyTripPermit = (): ReactElement => {
     let hasErrorFields = false;
     for (const key of Object.keys(applicationInfo)) {
       const fieldName = key as EmergencyTripPermitFieldNames;
-      const hasError = getErrorStateForEmergencyTripPermitField(fieldName, applicationInfo).hasError;
+      const hasError = getErrorStateForEmergencyTripPermitField(
+        fieldName,
+        applicationInfo,
+      ).hasError;
       hasErrorFields = hasErrorFields || hasError;
       dataFormErrorMapContext.reducer({
         type: FieldStateActionKind.VALIDATION,
@@ -104,8 +107,10 @@ export const EmergencyTripPermit = (): ReactElement => {
             type: FieldStateActionKind.VALIDATION,
             payload: {
               field: fields.payerFieldName,
-              invalid: getErrorStateForEmergencyTripPermitField(fields.payerFieldName, newApplicationInfo)
-                .hasError,
+              invalid: getErrorStateForEmergencyTripPermitField(
+                fields.payerFieldName,
+                newApplicationInfo,
+              ).hasError,
             },
           });
         }

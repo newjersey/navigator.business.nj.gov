@@ -78,7 +78,10 @@ describe("sidebarCard Helpers", () => {
       const business = generateBusiness({
         preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
       });
-      const certifications = [generateCertification({ id: "one" }), generateCertification({ id: "two" })];
+      const certifications = [
+        generateCertification({ id: "one" }),
+        generateCertification({ id: "two" }),
+      ];
 
       expect(getVisibleCertifications(certifications, business)).toEqual(certifications);
     });
@@ -175,8 +178,16 @@ describe("sidebarCard Helpers", () => {
           }),
         });
         const funding1 = generateFunding({ name: "Bca", status: "deadline" });
-        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["fakeAgency"] });
-        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["testAgency"] });
+        const funding2 = generateFunding({
+          name: "Abc",
+          status: "deadline",
+          agency: ["fakeAgency"],
+        });
+        const funding3 = generateFunding({
+          name: "cba",
+          status: "deadline",
+          agency: ["testAgency"],
+        });
         const funding4 = generateFunding({ name: "abc", status: "first come, first serve" });
         const funding5 = generateFunding({
           name: "bca",
@@ -197,8 +208,16 @@ describe("sidebarCard Helpers", () => {
           }),
         });
         const funding1 = generateFunding({ name: "Bca", status: "deadline" });
-        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["fakeAgency"] });
-        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["testAgency", ""] });
+        const funding2 = generateFunding({
+          name: "Abc",
+          status: "deadline",
+          agency: ["fakeAgency"],
+        });
+        const funding3 = generateFunding({
+          name: "cba",
+          status: "deadline",
+          agency: ["testAgency", ""],
+        });
         const funding4 = generateFunding({ name: "abc", status: "first come, first serve" });
         const funding5 = generateFunding({
           name: "bca",
@@ -218,9 +237,21 @@ describe("sidebarCard Helpers", () => {
             accountCreationSource: "investNewark",
           }),
         });
-        const funding1 = generateFunding({ name: "Bca", status: "deadline", agency: ["invest-newark"] });
-        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["invest-newark"] });
-        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["invest-newark"] });
+        const funding1 = generateFunding({
+          name: "Bca",
+          status: "deadline",
+          agency: ["invest-newark"],
+        });
+        const funding2 = generateFunding({
+          name: "Abc",
+          status: "deadline",
+          agency: ["invest-newark"],
+        });
+        const funding3 = generateFunding({
+          name: "cba",
+          status: "deadline",
+          agency: ["invest-newark"],
+        });
         const funding4 = generateFunding({
           name: "abc",
           status: "first come, first serve",
@@ -245,8 +276,16 @@ describe("sidebarCard Helpers", () => {
         const funding1 = generateFunding({ name: "Bca", status: "deadline" });
         const funding2 = generateFunding({ name: "Abc", status: "deadline", priority: undefined });
         const funding3 = generateFunding({ name: "cba", status: "deadline", priority: true });
-        const funding4 = generateFunding({ name: "abc", status: "first come, first serve", priority: false });
-        const funding5 = generateFunding({ name: "bca", status: "rolling application", priority: true });
+        const funding4 = generateFunding({
+          name: "abc",
+          status: "first come, first serve",
+          priority: false,
+        });
+        const funding5 = generateFunding({
+          name: "bca",
+          status: "rolling application",
+          priority: true,
+        });
         const fundings = [funding5, funding2, funding3, funding1, funding4];
 
         const result = sortFundingsForUser(fundings, userData);
@@ -480,10 +519,19 @@ describe("sidebarCard Helpers", () => {
 
         const funding1 = generateFunding({ county: ["Atlantic"], status: "rolling application" });
         const funding2 = generateFunding({ county: [], status: "rolling application" });
-        const funding3 = generateFunding({ county: ["Bergen", "Atlantic"], status: "rolling application" });
-        const funding4 = generateFunding({ county: ["Bergen", "Camden"], status: "rolling application" });
+        const funding3 = generateFunding({
+          county: ["Bergen", "Atlantic"],
+          status: "rolling application",
+        });
+        const funding4 = generateFunding({
+          county: ["Bergen", "Camden"],
+          status: "rolling application",
+        });
         const funding5 = generateFunding({ county: ["All"], status: "rolling application" });
-        const funding6 = generateFunding({ county: ["All", "Camden"], status: "rolling application" });
+        const funding6 = generateFunding({
+          county: ["All", "Camden"],
+          status: "rolling application",
+        });
         const funding7 = generateFunding({
           county: ["All", "Camden"],
           status: "rolling application",
@@ -493,7 +541,9 @@ describe("sidebarCard Helpers", () => {
 
         const result = filterFundings({ fundings, business });
         expect(result.length).toEqual(5);
-        expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3, funding5, funding6]));
+        expect(result).toEqual(
+          expect.arrayContaining([funding1, funding2, funding3, funding5, funding6]),
+        );
       });
 
       it("shows fundings where user municipality is undefined", () => {
@@ -508,10 +558,19 @@ describe("sidebarCard Helpers", () => {
 
         const funding1 = generateFunding({ county: ["Atlantic"], status: "rolling application" });
         const funding2 = generateFunding({ county: [], status: "rolling application" });
-        const funding3 = generateFunding({ county: ["Bergen", "Atlantic"], status: "rolling application" });
-        const funding4 = generateFunding({ county: ["Bergen", "Camden"], status: "rolling application" });
+        const funding3 = generateFunding({
+          county: ["Bergen", "Atlantic"],
+          status: "rolling application",
+        });
+        const funding4 = generateFunding({
+          county: ["Bergen", "Camden"],
+          status: "rolling application",
+        });
         const funding5 = generateFunding({ county: ["All"], status: "rolling application" });
-        const funding6 = generateFunding({ county: ["All", "Camden"], status: "rolling application" });
+        const funding6 = generateFunding({
+          county: ["All", "Camden"],
+          status: "rolling application",
+        });
         const funding7 = generateFunding({
           county: ["All", "Camden"],
           status: "rolling application",
@@ -522,7 +581,7 @@ describe("sidebarCard Helpers", () => {
         const result = filterFundings({ fundings, business });
         expect(result.length).toEqual(6);
         expect(result).toEqual(
-          expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6])
+          expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6]),
         );
       });
     });
@@ -621,8 +680,14 @@ describe("sidebarCard Helpers", () => {
             sectorId: undefined,
           }),
         });
-        const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
-        const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
+        const funding1 = generateFunding({
+          employeesRequired: "n/a",
+          status: "rolling application",
+        });
+        const funding2 = generateFunding({
+          employeesRequired: "yes",
+          status: "rolling application",
+        });
         const funding3 = generateFunding({
           employeesRequired: "n/a",
           status: "rolling application",
@@ -644,8 +709,14 @@ describe("sidebarCard Helpers", () => {
             sectorId: undefined,
           }),
         });
-        const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
-        const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
+        const funding1 = generateFunding({
+          employeesRequired: "n/a",
+          status: "rolling application",
+        });
+        const funding2 = generateFunding({
+          employeesRequired: "yes",
+          status: "rolling application",
+        });
         const funding3 = generateFunding({
           employeesRequired: "n/a",
           status: "rolling application",
@@ -693,8 +764,14 @@ describe("sidebarCard Helpers", () => {
             sectorId: undefined,
           }),
         });
-        const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
-        const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
+        const funding1 = generateFunding({
+          employeesRequired: "n/a",
+          status: "rolling application",
+        });
+        const funding2 = generateFunding({
+          employeesRequired: "yes",
+          status: "rolling application",
+        });
         const fundings = [funding1, funding2];
 
         const result = filterFundings({ fundings, business });
@@ -746,9 +823,18 @@ describe("sidebarCard Helpers", () => {
             sectorId: undefined,
           }),
         });
-        const funding1 = generateFunding({ status: "rolling application", minEmployeesRequired: 50 });
-        const funding2 = generateFunding({ status: "rolling application", minEmployeesRequired: 199 });
-        const funding3 = generateFunding({ status: "rolling application", minEmployeesRequired: 100 });
+        const funding1 = generateFunding({
+          status: "rolling application",
+          minEmployeesRequired: 50,
+        });
+        const funding2 = generateFunding({
+          status: "rolling application",
+          minEmployeesRequired: 199,
+        });
+        const funding3 = generateFunding({
+          status: "rolling application",
+          minEmployeesRequired: 100,
+        });
         const fundings = [funding1, funding2, funding3];
 
         const result = filterFundings({ fundings, business });
@@ -829,7 +915,15 @@ describe("sidebarCard Helpers", () => {
       const funding7 = generateFunding({ certifications: ["emerging-small-business-enterprise"] });
       const funding8 = generateFunding({ certifications: [] });
 
-      const listOfFundingTypes = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
+      const listOfFundingTypes = [
+        funding1,
+        funding2,
+        funding3,
+        funding4,
+        funding5,
+        funding6,
+        funding7,
+      ];
 
       it("returns a generic funding when certifications are not defined", () => {
         const business = generateBusiness({
@@ -860,7 +954,9 @@ describe("sidebarCard Helpers", () => {
 
         const result = filterFundings({ fundings: listOfFundingTypes, business });
         expect(result.length).toEqual(5);
-        expect(result).toEqual(expect.arrayContaining([funding1, funding3, funding5, funding6, funding7]));
+        expect(result).toEqual(
+          expect.arrayContaining([funding1, funding3, funding5, funding6, funding7]),
+        );
       });
 
       it("does not return sbe funding when existing employees is greater than small business threshold", () => {
@@ -877,7 +973,7 @@ describe("sidebarCard Helpers", () => {
         const result = filterFundings({ fundings: listOfFundingTypes, business });
         expect(result.length).toEqual(6);
         expect(result).toEqual(
-          expect.arrayContaining([funding1, funding2, funding3, funding4, funding6, funding7])
+          expect.arrayContaining([funding1, funding2, funding3, funding4, funding6, funding7]),
         );
       });
 
@@ -895,7 +991,15 @@ describe("sidebarCard Helpers", () => {
         const result = filterFundings({ fundings: listOfFundingTypes, business });
         expect(result.length).toEqual(7);
         expect(result).toEqual(
-          expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6, funding7])
+          expect.arrayContaining([
+            funding1,
+            funding2,
+            funding3,
+            funding4,
+            funding5,
+            funding6,
+            funding7,
+          ]),
         );
       });
     });
@@ -1026,7 +1130,10 @@ describe("sidebarCard Helpers", () => {
         applicableOwnershipTypes: ["disabled-veteran", "veteran-owned"],
       });
       const cert5 = generateCertification({ applicableOwnershipTypes: [] });
-      const results = filterCertifications({ certifications: [cert1, cert2, cert3, cert4, cert5], business });
+      const results = filterCertifications({
+        certifications: [cert1, cert2, cert3, cert4, cert5],
+        business,
+      });
       expect(results.length).toEqual(3);
       expect(results).toEqual(expect.arrayContaining([cert1, cert4, cert5]));
     });
@@ -1042,7 +1149,10 @@ describe("sidebarCard Helpers", () => {
       });
       const cert5 = generateCertification({ applicableOwnershipTypes: [] });
 
-      const results = filterCertifications({ certifications: [cert1, cert2, cert3, cert4, cert5], business });
+      const results = filterCertifications({
+        certifications: [cert1, cert2, cert3, cert4, cert5],
+        business,
+      });
       expect(results.length).toEqual(3);
       expect(results).toEqual(expect.arrayContaining([cert3, cert4, cert5]));
     });
@@ -1058,7 +1168,9 @@ describe("sidebarCard Helpers", () => {
       const cert4 = generateCertification({
         applicableOwnershipTypes: ["disabled-veteran", "veteran-owned"],
       });
-      const cert5 = generateCertification({ applicableOwnershipTypes: ["minority-owned", "veteran-owned"] });
+      const cert5 = generateCertification({
+        applicableOwnershipTypes: ["minority-owned", "veteran-owned"],
+      });
       const cert6 = generateCertification({ applicableOwnershipTypes: [] });
 
       const results = filterCertifications({
@@ -1157,7 +1269,9 @@ describe("sidebarCard Helpers", () => {
       const cert4 = generateCertification({
         applicableOwnershipTypes: ["disabled-veteran", "veteran-owned"],
       });
-      const cert5 = generateCertification({ applicableOwnershipTypes: ["minority-owned", "veteran-owned"] });
+      const cert5 = generateCertification({
+        applicableOwnershipTypes: ["minority-owned", "veteran-owned"],
+      });
       const cert6 = generateCertification({ isSbe: true, applicableOwnershipTypes: [] });
       const cert7 = generateCertification({
         isSbe: true,
@@ -1174,7 +1288,9 @@ describe("sidebarCard Helpers", () => {
         business,
       });
       expect(results.length).toEqual(7);
-      expect(results).toEqual(expect.arrayContaining([cert1, cert3, cert4, cert5, cert6, cert8, cert9]));
+      expect(results).toEqual(
+        expect.arrayContaining([cert1, cert3, cert4, cert5, cert6, cert8, cert9]),
+      );
     });
   });
 });

@@ -34,7 +34,7 @@ describe("<ProfileErrorAlert/>", () => {
     const profileAlert = screen.getByTestId("profile-error-alert");
     expect(profileAlert).toBeInTheDocument();
     expect(
-      within(profileAlert).getByText(Config.profileDefaults.fields.petCareHousing.default.header)
+      within(profileAlert).getByText(Config.profileDefaults.fields.petCareHousing.default.header),
     ).toBeInTheDocument();
   });
 
@@ -43,7 +43,7 @@ describe("<ProfileErrorAlert/>", () => {
     const profileAlert = screen.getByTestId("profile-error-alert");
     expect(profileAlert).toBeInTheDocument();
     expect(
-      within(profileAlert).getByText(Config.profileDefaults.fields.constructionType.default.header)
+      within(profileAlert).getByText(Config.profileDefaults.fields.constructionType.default.header),
     ).toBeInTheDocument();
   });
 
@@ -53,8 +53,8 @@ describe("<ProfileErrorAlert/>", () => {
     expect(profileAlert).toBeInTheDocument();
     expect(
       within(profileAlert).getByText(
-        Config.profileDefaults.fields.employmentPersonnelServiceType.default.header
-      )
+        Config.profileDefaults.fields.employmentPersonnelServiceType.default.header,
+      ),
     ).toBeInTheDocument();
   });
 
@@ -62,6 +62,8 @@ describe("<ProfileErrorAlert/>", () => {
     render(<ProfileErrorAlert fieldErrors={["addressLine1"]} />);
     const profileAlert = screen.getByTestId("profile-error-alert");
     expect(profileAlert).toBeInTheDocument();
-    expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+    expect(
+      within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
+    ).toBeInTheDocument();
   });
 });

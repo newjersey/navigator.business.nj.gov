@@ -17,7 +17,9 @@ describe("v137_add_employment_placement_personal_types", () => {
       businesses: { "biz-1": v136Business },
     });
 
-    expect(v136User.businesses[id].profileData).not.toHaveProperty("employmentPersonnelServiceType");
+    expect(v136User.businesses[id].profileData).not.toHaveProperty(
+      "employmentPersonnelServiceType",
+    );
     expect(v136User.businesses[id].profileData).not.toHaveProperty("employmentPlacementType");
 
     const v137User = migrate_v136_to_v137(v136User);

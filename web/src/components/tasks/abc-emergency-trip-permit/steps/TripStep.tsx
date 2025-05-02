@@ -47,7 +47,9 @@ export const TripStep = (): ReactElement => {
           </div>
         </div>
         <div className={"padding-top-3"}>
-          <Heading level={4}>{Config.abcEmergencyTripPermit.steps.trip.deliverySiteSection}</Heading>
+          <Heading level={4}>
+            {Config.abcEmergencyTripPermit.steps.trip.deliverySiteSection}
+          </Heading>
           <EmergencyTripPermitTextFieldEntry fieldName={"deliverySiteName"} required />
           <EmergencyTripPermitCountryDropdown fieldName={"deliveryCountry"} />
           <EmergencyTripPermitTextFieldEntry fieldName={"deliveryAddress"} required />

@@ -4,7 +4,10 @@ import { Task } from "@/lib/types/types";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   formationTaskId,
@@ -32,7 +35,7 @@ const renderTaskHeader = (task: Task, business?: Business): void => {
       >
         <TaskHeader task={task} />
       </WithStatefulUserData>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 

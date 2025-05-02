@@ -52,7 +52,11 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
 
   return (
     <>
-      <Heading level={3} className="margin-bottom-3" data-testid="main-business-address-container-header">
+      <Heading
+        level={3}
+        className="margin-bottom-3"
+        data-testid="main-business-address-container-header"
+      >
         {Config.formation.sections.addressHeader}
       </Heading>
       <CannabisLocationAlert industryId={business?.profileData.industryId} />

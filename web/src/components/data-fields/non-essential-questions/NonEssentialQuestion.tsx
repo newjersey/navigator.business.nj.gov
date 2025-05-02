@@ -49,7 +49,9 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
                 data-testid={`${props.essentialQuestionId}-radio-yes`}
                 value={true}
                 control={<Radio color="primary" />}
-                label={Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonTrueText}
+                label={
+                  Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonTrueText
+                }
               />
               <FormControlLabel
                 style={{ alignItems: "center" }}
@@ -57,7 +59,9 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
                 data-testid={`${props.essentialQuestionId}-radio-no`}
                 value={false}
                 control={<Radio color="primary" />}
-                label={Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonFalseText}
+                label={
+                  Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonFalseText
+                }
               />
             </RadioGroup>
           </FormControl>

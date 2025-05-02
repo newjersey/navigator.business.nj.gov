@@ -14,7 +14,8 @@ export interface v94UserData {
 }
 
 export const migrate_v93_to_v94 = (v93Data: v93UserData): v94UserData => {
-  const castedV93FormationFormData = v93Data.formationData.formationFormData as v94FormationFormData;
+  const castedV93FormationFormData = v93Data.formationData
+    .formationFormData as v94FormationFormData;
   return {
     ...v93Data,
     formationData: {
@@ -321,7 +322,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v94BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 

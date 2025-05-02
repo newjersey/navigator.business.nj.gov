@@ -3,7 +3,7 @@ import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const taxDecryptionRouterFactory = (
-  encryptionDecryptionClient: EncryptionDecryptionClient
+  encryptionDecryptionClient: EncryptionDecryptionClient,
 ): Router => {
   const router = Router();
 

@@ -2,7 +2,10 @@ import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import {
+  WithStatefulUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   LookupLegalStructureById,
@@ -25,7 +28,7 @@ const renderComponent = (business: Business): void => {
           <BusinessStructure />
         </WithStatefulProfileData>
       </WithStatefulUserData>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -43,12 +46,12 @@ describe("<BusinessStructure />", () => {
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({ legalStructureId: undefined }),
-      })
+      }),
     );
 
     expect(screen.getByText(configForField.addText)).toHaveAttribute(
       "href",
-      "/tasks/some-business-structure-url"
+      "/tasks/some-business-structure-url",
     );
   });
 
@@ -57,11 +60,11 @@ describe("<BusinessStructure />", () => {
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({ legalStructureId: "c-corporation" }),
-      })
+      }),
     );
     expect(screen.getByText(configForField.editText)).toHaveAttribute(
       "href",
-      "/tasks/some-business-structure-url"
+      "/tasks/some-business-structure-url",
     );
   });
 
@@ -69,7 +72,7 @@ describe("<BusinessStructure />", () => {
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({ legalStructureId: undefined }),
-      })
+      }),
     );
     expect(screen.getByText(configForField.notEnteredText)).toBeInTheDocument();
   });
@@ -78,7 +81,7 @@ describe("<BusinessStructure />", () => {
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({ legalStructureId: "c-corporation" }),
-      })
+      }),
     );
     expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
     expect(screen.getByText(LookupLegalStructureById("c-corporation").name)).toBeInTheDocument();

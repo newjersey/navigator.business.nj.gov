@@ -20,7 +20,9 @@ export const NonEssentialQuestionsSection = (props: Props): ReactElement => {
     const nonEssentialQuestionsArray: ReactElement[] = [];
     const questionIds = LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds;
     for (const question of questionIds) {
-      nonEssentialQuestionsArray.push(<NonEssentialQuestion key={question} essentialQuestionId={question} />);
+      nonEssentialQuestionsArray.push(
+        <NonEssentialQuestion key={question} essentialQuestionId={question} />,
+      );
     }
 
     return nonEssentialQuestionsArray;

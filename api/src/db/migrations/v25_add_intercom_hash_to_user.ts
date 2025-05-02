@@ -73,7 +73,11 @@ export type v25TaxFilingData = {
   filings: v25TaxFiling[];
 };
 
-export type v25EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
+export type v25EntityIdStatus =
+  | "UNKNOWN"
+  | "EXISTS_AND_REGISTERED"
+  | "EXISTS_NOT_REGISTERED"
+  | "NOT_FOUND";
 
 export type v25TaxFiling = {
   identifier: string;

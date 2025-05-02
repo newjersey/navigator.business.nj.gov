@@ -41,8 +41,14 @@ export default {
   collapsed: false,
   summary: "{{fields.title}}",
   fromBlock: (
-    match: RegExpMatchArray
-  ): { showHeader: boolean; headerText: string; body: string; calloutType: string; showIcon: boolean } => {
+    match: RegExpMatchArray,
+  ): {
+    showHeader: boolean;
+    headerText: string;
+    body: string;
+    calloutType: string;
+    showIcon: boolean;
+  } => {
     // We can safely assume there will be a single match; else we wouldn't be inside this function.
     const [calloutBlock] = match;
 

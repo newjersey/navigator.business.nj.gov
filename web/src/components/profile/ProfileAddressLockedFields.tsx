@@ -17,9 +17,13 @@ export const ProfileAddressLockedFields = (): ReactElement => {
       case "NJ":
         return (
           <>
-            <div data-testid={"locked-profileAddressLine1"}>{state.formationAddressData.addressLine1}</div>
+            <div data-testid={"locked-profileAddressLine1"}>
+              {state.formationAddressData.addressLine1}
+            </div>
             {state.formationAddressData.addressLine2 && (
-              <div data-testid={"locked-profileAddressLine2"}>{state.formationAddressData.addressLine2}</div>
+              <div data-testid={"locked-profileAddressLine2"}>
+                {state.formationAddressData.addressLine2}
+              </div>
             )}
             <div data-testid={"locked-profileAddressMuniStateZip"}>
               {`${state.formationAddressData.addressMunicipality?.displayName}, ${state.formationAddressData.addressState?.shortCode} ${state.formationAddressData.addressZipCode}`}
@@ -29,9 +33,13 @@ export const ProfileAddressLockedFields = (): ReactElement => {
       case "US":
         return (
           <>
-            <div data-testid={"locked-profileAddressLine1"}>{state.formationAddressData.addressLine1}</div>
+            <div data-testid={"locked-profileAddressLine1"}>
+              {state.formationAddressData.addressLine1}
+            </div>
             {state.formationAddressData.addressLine2 && (
-              <div data-testid={"locked-profileAddressLine2"}>{state.formationAddressData.addressLine2}</div>
+              <div data-testid={"locked-profileAddressLine2"}>
+                {state.formationAddressData.addressLine2}
+              </div>
             )}
             <div data-testid={"locked-profileAddressCityStateZip"}>
               {`${state.formationAddressData.addressCity}, ${state.formationAddressData.addressState?.shortCode} ${state.formationAddressData.addressZipCode}`}
@@ -41,9 +49,13 @@ export const ProfileAddressLockedFields = (): ReactElement => {
       case "INTL":
         return (
           <>
-            <div data-testid={"locked-profileAddressLine1"}>{state.formationAddressData.addressLine1}</div>
+            <div data-testid={"locked-profileAddressLine1"}>
+              {state.formationAddressData.addressLine1}
+            </div>
             {state.formationAddressData.addressLine2 && (
-              <div data-testid={"locked-profileAddressLine2"}>{state.formationAddressData.addressLine2}</div>
+              <div data-testid={"locked-profileAddressLine2"}>
+                {state.formationAddressData.addressLine2}
+              </div>
             )}
             <div data-testid={"locked-profileAddressCityProvZip"}>
               {`${state.formationAddressData.addressCity}, ${state.formationAddressData.addressProvince} ${state.formationAddressData.addressZipCode}`}
@@ -62,7 +74,9 @@ export const ProfileAddressLockedFields = (): ReactElement => {
   return (
     <div className="margin-top-4 margin-bottom-4" data-testid={"locked-profileAddressFields"}>
       <div className="flex flex-row fac margin-bottom-05">
-        <div className="text-bold">{Config.profileDefaults.fields.businessAddress.default.header}</div>
+        <div className="text-bold">
+          {Config.profileDefaults.fields.businessAddress.default.header}
+        </div>
         <div className="margin-left-1">
           <ArrowTooltip
             title={Config.profileDefaults.default.lockedFieldTooltipText}

@@ -32,11 +32,15 @@ describe("<EnvPermitsResults />", () => {
             ? generateBusiness({
                 ...business,
               })
-            : generateBusiness({})
+            : generateBusiness({}),
         )}
       >
-        <EnvPermitsResults taskId={taskId} mediaArea={mediaArea} noSelectionOption={noSelectionOption} />
-      </WithStatefulUserData>
+        <EnvPermitsResults
+          taskId={taskId}
+          mediaArea={mediaArea}
+          noSelectionOption={noSelectionOption}
+        />
+      </WithStatefulUserData>,
     );
   };
 
@@ -48,11 +52,15 @@ describe("<EnvPermitsResults />", () => {
             ? generateBusiness({
                 ...business,
               })
-            : generateBusiness({})
+            : generateBusiness({}),
         )}
       >
-        <EnvPermitsResults taskId={taskId} mediaArea={mediaArea} noSelectionOption={noSelectionOption} />
-      </WithStatefulUserData>
+        <EnvPermitsResults
+          taskId={taskId}
+          mediaArea={mediaArea}
+          noSelectionOption={noSelectionOption}
+        />
+      </WithStatefulUserData>,
     );
     const user: UserEvent = userEvent.setup();
     return { user };
@@ -78,13 +86,13 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       expect(
-        screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
+        screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.compostWaste)
+        screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.compostWaste),
       ).toBeInTheDocument();
     });
 
@@ -101,16 +109,16 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       expect(
-        screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
+        screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste),
       ).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.envQuestionPage.waste.questionnaireOptions.constructionDebris)
+        screen.queryByText(Config.envQuestionPage.waste.questionnaireOptions.constructionDebris),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.envQuestionPage.waste.questionnaireOptions.treatProcessWaste)
+        screen.queryByText(Config.envQuestionPage.waste.questionnaireOptions.treatProcessWaste),
       ).not.toBeInTheDocument();
     });
 
@@ -122,7 +130,7 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             }),
           }),
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
       expect(currentBusiness().environmentData?.waste?.submitted).toBe(false);
@@ -139,7 +147,7 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
       expect(currentBusiness().environmentData?.waste?.submitted).toBe(false);
@@ -154,7 +162,7 @@ describe("<EnvPermitsResults />", () => {
             }),
           }),
           taskProgress: { [taskId]: "COMPLETED" },
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
       expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
@@ -172,7 +180,7 @@ describe("<EnvPermitsResults />", () => {
             },
           }),
           taskProgress: { [taskId]: "COMPLETED" },
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
       expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
@@ -201,19 +209,21 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       expect(
-        screen.getByText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+        screen.getByText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(Config.envQuestionPage.land.questionnaireOptions.propertyAssessment)
+        screen.getByText(Config.envQuestionPage.land.questionnaireOptions.propertyAssessment),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(Config.envQuestionPage.land.questionnaireOptions.constructionActivities)
+        screen.getByText(Config.envQuestionPage.land.questionnaireOptions.constructionActivities),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(Config.envQuestionPage.land.questionnaireOptions.siteImprovementWasteLands)
+        screen.getByText(
+          Config.envQuestionPage.land.questionnaireOptions.siteImprovementWasteLands,
+        ),
       ).toBeInTheDocument();
     });
 
@@ -231,19 +241,21 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       expect(
-        screen.queryByText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+        screen.queryByText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.envQuestionPage.land.questionnaireOptions.propertyAssessment)
+        screen.queryByText(Config.envQuestionPage.land.questionnaireOptions.propertyAssessment),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.envQuestionPage.land.questionnaireOptions.constructionActivities)
+        screen.queryByText(Config.envQuestionPage.land.questionnaireOptions.constructionActivities),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.envQuestionPage.land.questionnaireOptions.siteImprovementWasteLands)
+        screen.queryByText(
+          Config.envQuestionPage.land.questionnaireOptions.siteImprovementWasteLands,
+        ),
       ).not.toBeInTheDocument();
     });
 
@@ -255,7 +267,7 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             }),
           }),
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
       expect(currentBusiness().environmentData?.land?.submitted).toBe(false);
@@ -272,7 +284,7 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
       expect(currentBusiness().environmentData?.land?.submitted).toBe(false);
@@ -287,7 +299,7 @@ describe("<EnvPermitsResults />", () => {
             }),
           }),
           taskProgress: { [taskId]: "COMPLETED" },
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
       expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
@@ -305,7 +317,7 @@ describe("<EnvPermitsResults />", () => {
             },
           }),
           taskProgress: { [taskId]: "COMPLETED" },
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
       expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
@@ -333,16 +345,16 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       expect(
-        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.emitPollutants)
+        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.emitPollutants),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions)
+        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.constructionActivities)
+        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.constructionActivities),
       ).toBeInTheDocument();
     });
 
@@ -359,16 +371,16 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       expect(
-        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.emitPollutants)
+        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.emitPollutants),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions)
+        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.constructionActivities)
+        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.constructionActivities),
       ).not.toBeInTheDocument();
     });
 
@@ -380,7 +392,7 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             }),
           }),
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
       expect(currentBusiness().environmentData?.air?.submitted).toBe(false);
@@ -397,7 +409,7 @@ describe("<EnvPermitsResults />", () => {
               submitted: true,
             },
           }),
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
       expect(currentBusiness().environmentData?.air?.submitted).toBe(false);
@@ -412,7 +424,7 @@ describe("<EnvPermitsResults />", () => {
             }),
           }),
           taskProgress: { [taskId]: "COMPLETED" },
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
       expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
@@ -430,7 +442,7 @@ describe("<EnvPermitsResults />", () => {
             },
           }),
           taskProgress: { [taskId]: "COMPLETED" },
-        })
+        }),
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
       expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");

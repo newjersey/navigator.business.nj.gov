@@ -20,7 +20,11 @@ import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactNode } from "react";
 
@@ -41,7 +45,7 @@ jest.mock(
   "next/link",
   () =>
     ({ children }: { children: ReactNode }): ReactNode =>
-      children
+      children,
 );
 
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
@@ -135,7 +139,9 @@ describe("shared-submenu-components", () => {
 
   it("renders RegisterMenuItem and navigates correclty onClick", () => {
     render(<RegisterMenuItem />);
-    expect(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText),
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
@@ -150,15 +156,21 @@ describe("shared-submenu-components", () => {
   describe("ProfileMenuItem", () => {
     it("renders ProfileMenuItem and navigates to dashbaord correclty onClick", () => {
       const userData = generateUserData({});
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
-      expect(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)).toBeInTheDocument();
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
+      expect(
+        screen.getByText(Config.navigationDefaults.navBarGuestBusinessText),
+      ).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
 
     it("renders ProfileMenuItem and navigates correclty onClick", () => {
       const userData = generateUserData({});
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
       expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
@@ -185,7 +197,9 @@ describe("shared-submenu-components", () => {
         },
       });
 
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />);
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />,
+      );
 
       expect(screen.getByText("first-biz")).toBeInTheDocument();
       expect(screen.getByText("second-biz")).toBeInTheDocument();
@@ -205,7 +219,9 @@ describe("shared-submenu-components", () => {
           [secondBusiness.id]: secondBusiness,
         },
       });
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />);
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />,
+      );
 
       expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
     });
@@ -218,11 +234,13 @@ describe("shared-submenu-components", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarPlanLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_plan.click.plan_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_plan.click.plan_page,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -233,11 +251,13 @@ describe("shared-submenu-components", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarOperateLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_operate.click.operate_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_operate.click.operate_page,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -248,11 +268,13 @@ describe("shared-submenu-components", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarGrowLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_grow.click.grow_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_grow.click.grow_page,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -263,11 +285,13 @@ describe("shared-submenu-components", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarUpdatesLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_updates.click.updates_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_updates.click.updates_page,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -278,10 +302,12 @@ describe("shared-submenu-components", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarSearchLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_search.click.search_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_search.click.search_page,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -292,10 +318,12 @@ describe("shared-submenu-components", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarStartLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_start.click.start_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_start.click.start_page,
+      ).toHaveBeenCalled();
     });
   });
 });

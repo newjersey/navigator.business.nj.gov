@@ -23,7 +23,7 @@ export const ContactsStep = (): ReactElement => {
   const shouldShowMembers = (): boolean => {
     return (
       [...corpLegalStructures, "limited-liability-company", "nonprofit"].includes(
-        state.formationFormData.legalType
+        state.formationFormData.legalType,
       ) && state.formationFormData.businessLocationType === "NJ"
     );
   };
@@ -31,7 +31,9 @@ export const ContactsStep = (): ReactElement => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const getDescription = (field: string): string => {
     const legalType = state.formationFormData.legalType;
-    const overriddenLegalTypes = Object.keys((Config.formation.fields as any)[field].overrides ?? {});
+    const overriddenLegalTypes = Object.keys(
+      (Config.formation.fields as any)[field].overrides ?? {},
+    );
     if (overriddenLegalTypes.includes(legalType)) {
       return ((Config.formation.fields as any)[field].overrides as any)[legalType].description;
     }
@@ -57,7 +59,7 @@ export const ContactsStep = (): ReactElement => {
               createEmptyAddress={(): FormationIncorporator => {
                 return createSignedEmptyFormationObject(
                   state.formationFormData.legalType,
-                  createEmptyFormationIncorporator
+                  createEmptyFormationIncorporator,
                 );
               }}
               fieldName="incorporators"

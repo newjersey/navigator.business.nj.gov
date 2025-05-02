@@ -35,7 +35,7 @@ const renderComponent = (profileData: ProfileData): void => {
       <ThemeProvider theme={createTheme()}>
         <DisabledTaxId />
       </ThemeProvider>
-    </WithStatefulProfileData>
+    </WithStatefulProfileData>,
   );
 };
 

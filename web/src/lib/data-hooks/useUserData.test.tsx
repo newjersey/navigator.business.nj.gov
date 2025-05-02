@@ -41,7 +41,7 @@ describe("useUserData", () => {
 
   const setupHook = async (
     currentUser: BusinessUser | undefined,
-    isAuthenticated?: IsAuthenticated
+    isAuthenticated?: IsAuthenticated,
   ): Promise<UseUserDataResponse> => {
     const returnVal = generateUseUserDataResponse({});
 
@@ -67,11 +67,11 @@ describe("useUserData", () => {
               <TestComponent />
             </SWRConfig>
           </RoadmapContext.Provider>,
-          { activeUser: currentUser, dispatch: mockDispatch, isAuthenticated }
+          { activeUser: currentUser, dispatch: mockDispatch, isAuthenticated },
         ),
         undefined,
-        mockSetError
-      )
+        mockSetError,
+      ),
     );
     await waitFor(() => {
       expect(returnVal.updateQueue).toBeDefined();
@@ -151,7 +151,9 @@ describe("useUserData", () => {
       };
 
       await waitFor(() => {
-        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(expectedProfileData);
+        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(
+          expectedProfileData,
+        );
       });
       expect(mockSetRoadmap).toHaveBeenCalledWith(returnedRoadmap);
       expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(expectedProfileData);

@@ -13,7 +13,9 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Not Displayed -----</div>
+        <div className="h3-styling margin-y-2">
+          ----- When Certs/Fundings Are Not Displayed -----
+        </div>
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[]}

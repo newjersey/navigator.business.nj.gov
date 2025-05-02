@@ -41,10 +41,18 @@ collections:
                     collapsed: true
                     widget: object
                     fields:
-                      - { label: Hazardous Medical Waste Option, name: hazardousMedicalWaste, widget: text }
+                      - {
+                          label: Hazardous Medical Waste Option,
+                          name: hazardousMedicalWaste,
+                          widget: text,
+                        }
                       - { label: Compost Waste Option, name: compostWaste, widget: text }
                       - { label: Treat Process Waste Option, name: treatProcessWaste, widget: text }
-                      - { label: Construction Debris Option, name: constructionDebris, widget: text }
+                      - {
+                          label: Construction Debris Option,
+                          name: constructionDebris,
+                          widget: text,
+                        }
                       - { label: No Waste Option, name: noWaste, widget: text }
               - label: Land
                 name: land
@@ -58,10 +66,22 @@ collections:
                     collapsed: true
                     widget: object
                     fields:
-                      - { label: Take Over Existing Business, name: takeOverExistingBiz, widget: text }
+                      - {
+                          label: Take Over Existing Business,
+                          name: takeOverExistingBiz,
+                          widget: text,
+                        }
                       - { label: Property Assessment, name: propertyAssessment, widget: text }
-                      - { label: Construction Activities, name: constructionActivities, widget: text }
-                      - { label: Site Improvement Waste Land, name: siteImprovementWasteLands, widget: text }
+                      - {
+                          label: Construction Activities,
+                          name: constructionActivities,
+                          widget: text,
+                        }
+                      - {
+                          label: Site Improvement Waste Land,
+                          name: siteImprovementWasteLands,
+                          widget: text,
+                        }
                       - { label: No Land Option, name: noLand, widget: text }
               - label: Air
                 name: air
@@ -77,7 +97,11 @@ collections:
                     fields:
                       - { label: Emit Pollutants, name: emitPollutants, widget: text }
                       - { label: Emit Emissions, name: emitEmissions, widget: text }
-                      - { label: Construction Activities, name: constructionActivities, widget: text }
+                      - {
+                          label: Construction Activities,
+                          name: constructionActivities,
+                          widget: text,
+                        }
                       - { label: No Air Option, name: noAir, widget: text }
           - label: Results Page Config
             name: envResultsPage

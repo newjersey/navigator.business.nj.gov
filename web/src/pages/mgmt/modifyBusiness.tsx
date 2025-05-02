@@ -49,7 +49,9 @@ const ModifyBusinessPage = (): ReactElement => {
         <SingleColumnContainer>
           <div className="padding-top-5 desktop:padding-top-0" data-testid={"modifyBusinessPage"}>
             <Heading level={1}>This page will allow you to modify license data</Heading>
-            {isLicenseDataUndefined && <div>There is no existing license data for this business</div>}
+            {isLicenseDataUndefined && (
+              <div>There is no existing license data for this business</div>
+            )}
             {!isLicenseDataUndefined && (
               <div>
                 <div className="">The current business contains the following license data:</div>
@@ -66,20 +68,22 @@ const ModifyBusinessPage = (): ReactElement => {
                         <div className="width-card-lg">{licenseDetails.licenseStatus}</div>
                         <div className="width-mobile">{LicenseNameTaskIdMapping[licenseName]}</div>
                       </div>
-                    )
+                    ),
                   )}
               </div>
             )}
 
             <div className="margin-top-6">
-              Note 1: to view an anytime actions reinstatement, the license status must be set to expired.
+              Note 1: to view an anytime actions reinstatement, the license status must be set to
+              expired.
             </div>
             <div>
-              Note 2: deleting the license data will reset all license search enabled task statuses to TO_DO
+              Note 2: deleting the license data will reset all license search enabled task statuses
+              to TO_DO
             </div>
             <div>
-              Note 3: to view the license details in the task, you must select an industry that has the task
-              on the roadmap
+              Note 3: to view the license details in the task, you must select an industry that has
+              the task on the roadmap
             </div>
 
             <div className="flex margin-top-2">
@@ -165,11 +169,14 @@ const ModifyBusinessPage = (): ReactElement => {
                 onClick={() => {
                   if (business?.licenseData) {
                     const taskProgress = sortedLicenseNames.reduce(
-                      (acc: Record<string, TaskProgress>, curr: string): Record<string, TaskProgress> => {
+                      (
+                        acc: Record<string, TaskProgress>,
+                        curr: string,
+                      ): Record<string, TaskProgress> => {
                         acc[curr] = "TO_DO";
                         return acc;
                       },
-                      {}
+                      {},
                     );
 
                     updateQueue?.queueBusiness({

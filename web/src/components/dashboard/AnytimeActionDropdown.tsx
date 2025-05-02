@@ -72,9 +72,10 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           category: ["Reactivate My Expired Permit, License or Registration"],
         };
       });
-    anytimeActionLicenseReinstatementsWithType = orderBy(anytimeActionLicenseReinstatementsWithType, [
-      "name",
-    ]);
+    anytimeActionLicenseReinstatementsWithType = orderBy(
+      anytimeActionLicenseReinstatementsWithType,
+      ["name"],
+    );
 
     let applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
     applicableAnytimeActions.push(...anytimeActionTasksWithType);
@@ -115,14 +116,15 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
 
   const licenseReinstatementMatch = (action: AnytimeActionLicenseReinstatement): boolean => {
     const licenseNameFromAnytimeAction = action.licenseName;
-    const licenseStatus = business?.licenseData?.licenses?.[licenseNameFromAnytimeAction]?.licenseStatus;
+    const licenseStatus =
+      business?.licenseData?.licenses?.[licenseNameFromAnytimeAction]?.licenseStatus;
 
     return licenseStatus === "EXPIRED";
   };
 
   const handleChange = (
     event: ChangeEvent<unknown>,
-    value: AnytimeActionWithTypeAndCategory | null
+    value: AnytimeActionWithTypeAndCategory | null,
   ): void => {
     if (value === null) {
       setSelectedAnytimeAction(undefined);
@@ -137,7 +139,9 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         {Config.dashboardAnytimeActionDefaults.defaultHeaderText}
       </Heading>
       <HorizontalLine ariaHidden={true} />
-      <div className="text-bold">{Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}</div>
+      <div className="text-bold">
+        {Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}
+      </div>
       <span className={isDesktopAndUp ? "flex" : "flex-column"}>
         <Autocomplete
           renderInput={(params): ReactElement => {
@@ -194,7 +198,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           renderOption={(
             _props,
             option: AnytimeActionWithTypeAndCategory,
-            { selected, inputValue }
+            { selected, inputValue },
           ): ReactElement => {
             const titleText = getBoldedTextComponent(inputValue, option.name);
             const descriptionText = getBoldedTextComponent(inputValue, option.description ?? "");
@@ -211,9 +215,13 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                 key={option.filename}
               >
                 {selected ? (
-                  <MenuOptionSelected secondaryText={descriptionText}>{titleText}</MenuOptionSelected>
+                  <MenuOptionSelected secondaryText={descriptionText}>
+                    {titleText}
+                  </MenuOptionSelected>
                 ) : (
-                  <MenuOptionUnselected secondaryText={descriptionText}>{titleText}</MenuOptionUnselected>
+                  <MenuOptionUnselected secondaryText={descriptionText}>
+                    {titleText}
+                  </MenuOptionUnselected>
                 )}
               </li>
             );
@@ -228,7 +236,9 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         {selectedAnytimeAction && (
           <span
             className={
-              isDesktopAndUp ? "anytime-action-primary-button" : "anytime-action-primary-button-mobile"
+              isDesktopAndUp
+                ? "anytime-action-primary-button"
+                : "anytime-action-primary-button-mobile"
             }
           >
             {" "}
@@ -238,18 +248,20 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
               onClick={() => {
                 if (!router) return;
                 analytics.event.anytime_action_button.click.go_to_anytime_action_screen(
-                  selectedAnytimeAction.filename
+                  selectedAnytimeAction.filename,
                 );
                 if (selectedAnytimeAction.type === "task") {
                   router.push(
-                    `${ROUTES.anytimeActions}/${(selectedAnytimeAction as AnytimeActionTask).urlSlug}`
+                    `${ROUTES.anytimeActions}/${
+                      (selectedAnytimeAction as AnytimeActionTask).urlSlug
+                    }`,
                   );
                 }
                 if (selectedAnytimeAction.type === "license-reinstatement") {
                   router.push(
                     `${ROUTES.licenseReinstatement}/${
                       (selectedAnytimeAction as AnytimeActionLicenseReinstatement).urlSlug
-                    }`
+                    }`,
                   );
                 }
               }}

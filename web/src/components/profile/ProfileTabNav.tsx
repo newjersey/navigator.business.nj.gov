@@ -31,11 +31,13 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   const shouldDisplayFormationDocuments =
     isStartingBusiness(props.business) &&
     LookupLegalStructureById(props.business?.profileData.legalStructureId).elementsToDisplay.has(
-      "formationDocuments"
+      "formationDocuments",
     );
 
   const shouldShowPermits =
-    isNexusBusiness(props.business) || isOwningBusiness(props.business) || isStartingBusiness(props.business);
+    isNexusBusiness(props.business) ||
+    isOwningBusiness(props.business) ||
+    isStartingBusiness(props.business);
   const shouldShowDocuments = isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
 
   const tabRefs = {

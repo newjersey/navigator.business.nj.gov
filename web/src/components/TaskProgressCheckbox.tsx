@@ -34,7 +34,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
   const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
-  const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] = useState<boolean>(false);
+  const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] =
+    useState<boolean>(false);
   const router = useRouter();
   const { Config } = useConfig();
 
@@ -106,7 +107,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     updateQueue
       .update()
       .then(() => {
-        if (!(isFormationTask(props.taskId) && nextStatus === "COMPLETED")) setSuccessSnackbarIsOpen(true);
+        if (!(isFormationTask(props.taskId) && nextStatus === "COMPLETED"))
+          setSuccessSnackbarIsOpen(true);
         if (!redirectOnSuccess) {
           return;
         }

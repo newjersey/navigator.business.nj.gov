@@ -33,7 +33,7 @@ jest.mock(
   "next/link",
   () =>
     ({ children }: { children: ReactNode }): ReactNode =>
-      children
+      children,
 );
 
 const setLargeScreen = (value: boolean): void => {
@@ -75,7 +75,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
@@ -93,7 +93,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.queryByText(Config.navigationDefaults.getStartedText)).not.toBeInTheDocument();
@@ -118,7 +118,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
@@ -138,7 +138,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
@@ -156,7 +156,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
@@ -178,7 +178,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
@@ -198,10 +198,12 @@ describe("<NavBarMobile />", () => {
           showSidebar={false}
           previousBusinessId={undefined}
           userData={userData}
-        />
+        />,
       );
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.addBusinessButton)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.addBusinessButton),
+      ).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
 
@@ -226,7 +228,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
@@ -246,18 +248,20 @@ describe("<NavBarMobile />", () => {
           showSidebar={false}
           previousBusinessId={undefined}
           userData={userData}
-        />
+        />,
       );
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
+        screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText),
       ).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
       expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText),
+      ).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
     });
   });
@@ -276,7 +280,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={true}
           previousBusinessId={undefined}
-        />
+        />,
       );
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
@@ -291,7 +295,7 @@ describe("<NavBarMobile />", () => {
             generateStep({ name: "step1", section: "PLAN" }),
             generateStep({ name: "step2", section: "START" }),
           ],
-        })
+        }),
       );
       render(
         <NavBarMobile
@@ -303,7 +307,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={false}
           showSidebar={true}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
@@ -321,7 +325,7 @@ describe("<NavBarMobile />", () => {
         generateRoadmap({
           steps: [generateStep({ name: "step1", stepNumber: 1 })],
           tasks: [generateTask({ name: "task1", stepNumber: 1 })],
-        })
+        }),
       );
       render(
         <NavBarMobile
@@ -333,7 +337,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={false}
           showSidebar={true}
           previousBusinessId={undefined}
-        />
+        />,
       );
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));

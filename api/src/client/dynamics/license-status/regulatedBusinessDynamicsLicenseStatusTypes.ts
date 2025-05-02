@@ -2,20 +2,23 @@ import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelp
 import { LicenseSearchAddress, LicenseStatus } from "@shared/license";
 
 export interface BusinessIdsAndNamesClient {
-  getMatchedBusinessIdsAndNames: (accessToken: string, nameToSearch: string) => Promise<BusinessIdAndName[]>;
+  getMatchedBusinessIdsAndNames: (
+    accessToken: string,
+    nameToSearch: string,
+  ) => Promise<BusinessIdAndName[]>;
 }
 
 export interface BusinessAddressesClient {
   getBusinessAddressesForAllBusinessIds: (
     accessToken: string,
-    businessIdAndName: BusinessIdAndName[]
+    businessIdAndName: BusinessIdAndName[],
   ) => Promise<BusinessIdAndLicenseSearchNameAndAddresses[]>;
 }
 
 export interface ChecklistItemsForAllApplicationsClient {
   getChecklistItemsForAllApplications: (
     accessToken: string,
-    licenseApplicationInformation: LicenseApplicationIdResponse[]
+    licenseApplicationInformation: LicenseApplicationIdResponse[],
   ) => Promise<LicenseChecklistResponse[]>;
 }
 
@@ -26,7 +29,7 @@ export interface BusinessIdAndLicenseSearchNameAndAddresses extends BusinessIdAn
 export interface LicenseApplicationIdsForAllBusinessIdsClient {
   getLicenseApplicationIdsForAllBusinessIds: (
     accessToken: string,
-    businessIdsAndNames: BusinessIdAndName[]
+    businessIdsAndNames: BusinessIdAndName[],
   ) => Promise<LicenseApplicationIdResponse[]>;
 }
 

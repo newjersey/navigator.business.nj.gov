@@ -416,7 +416,9 @@ export const generateV108User = (overrides: Partial<v108BusinessUser>): v108Busi
   };
 };
 
-export const generateV108FormationMember = (overrides: Partial<v108FormationMember>): v108FormationMember => {
+export const generateV108FormationMember = (
+  overrides: Partial<v108FormationMember>,
+): v108FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -429,7 +431,9 @@ export const generateV108FormationMember = (overrides: Partial<v108FormationMemb
   };
 };
 
-export const generateV108Municipality = (overrides: Partial<v108Municipality>): v108Municipality => {
+export const generateV108Municipality = (
+  overrides: Partial<v108Municipality>,
+): v108Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -449,9 +453,11 @@ export const allFormationLegalTypes = [
 
 export const generateV108FormationFormData = (
   overrides: Partial<v108FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v108FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return {
     businessName: `some-business-name-${randomInt()}`,
@@ -477,7 +483,8 @@ export const generateV108FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV108FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generateV108FormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -501,7 +508,7 @@ export const generateV108FormationFormData = (
 };
 
 export const generateV108IndustrySpecificData = (
-  overrides: Partial<v108IndustrySpecificData>
+  overrides: Partial<v108IndustrySpecificData>,
 ): v108IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -565,7 +572,9 @@ export const generateV108ProfileData = (overrides: Partial<v108ProfileData>): v1
   };
 };
 
-export const generateV108TaxFilingData = (overrides: Partial<v108TaxFilingData>): v108TaxFilingData => {
+export const generateV108TaxFilingData = (
+  overrides: Partial<v108TaxFilingData>,
+): v108TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -579,7 +588,7 @@ export const generateV108TaxFilingData = (overrides: Partial<v108TaxFilingData>)
 
 export const generateV108FormationData = (
   overrides: Partial<v108FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v108FormationData => {
   return {
     formationFormData: generateV108FormationFormData({}, legalStructureId),

@@ -5,13 +5,16 @@ import { validatedFieldsForUser } from "@/components/tasks/business-formation/va
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorState, FormationStepNames } from "@/lib/types/types";
-import { FieldsForErrorHandling, FormationFields } from "@businessnjgovnavigator/shared/formationData";
+import {
+  FieldsForErrorHandling,
+  FormationFields,
+} from "@businessnjgovnavigator/shared/formationData";
 import { useContext, useMemo } from "react";
 
 type FormationErrorsResponse = {
   allCurrentErrorsForStep: (
     step: FormationStepNames,
-    overrides?: { hasSubmitted: boolean }
+    overrides?: { hasSubmitted: boolean },
   ) => FormationFieldErrorState[];
   doesFieldHaveError: (field: FieldsForErrorHandling) => boolean;
   doSomeFieldsHaveError: (fields: FormationFields[]) => boolean;
@@ -48,7 +51,9 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     state.foreignGoodStandingFile,
   ]);
 
-  const getApiFieldErrorState = (field: FieldsForErrorHandling): FormationFieldErrorState | undefined => {
+  const getApiFieldErrorState = (
+    field: FieldsForErrorHandling,
+  ): FormationFieldErrorState | undefined => {
     if (
       !business?.formationData.formationResponse ||
       business.formationData.formationResponse.errors.length === 0
@@ -75,7 +80,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
   };
 
   const overrideErrorStateForApiErrors = (
-    fieldErrorState: FormationFieldErrorState
+    fieldErrorState: FormationFieldErrorState,
   ): FormationFieldErrorState => {
     return getApiFieldErrorState(fieldErrorState.field) ?? fieldErrorState;
   };
@@ -86,7 +91,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
 
   const allCurrentErrorsForStep = (
     step: FormationStepNames,
-    overrides?: { hasSubmitted: boolean }
+    overrides?: { hasSubmitted: boolean },
   ): FormationFieldErrorState[] => {
     const allErrorsForStep = validatedFields
       .filter((field) => {
@@ -162,7 +167,10 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     });
   };
 
-  const doesStepHaveError = (step: FormationStepNames, overrides?: { hasSubmitted: boolean }): boolean => {
+  const doesStepHaveError = (
+    step: FormationStepNames,
+    overrides?: { hasSubmitted: boolean },
+  ): boolean => {
     if (step === "Name") {
       return allCurrentErrorsForStep(step, overrides).length > 0;
     }

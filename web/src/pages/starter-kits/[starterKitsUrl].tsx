@@ -13,7 +13,11 @@ import {
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { STARTER_KITS_GENERIC_SLUG, StarterKitsUrl, getAllStarterKitUrls } from "@/lib/utils/starterKits";
+import {
+  STARTER_KITS_GENERIC_SLUG,
+  StarterKitsUrl,
+  getAllStarterKitUrls,
+} from "@/lib/utils/starterKits";
 import type { Industry } from "@businessnjgovnavigator/shared";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
 import type { GetStaticPathsResult } from "next";
@@ -38,18 +42,18 @@ const StarterKitsPage = (props: Props): ReactElement => {
   const heroTitle = insertIndustryContent(
     Config.starterKits.hero.title,
     props.industry.id,
-    props.industry.name
+    props.industry.name,
   );
 
   const solutionsTitle = insertIndustryContent(
     Config.starterKits.solutions.title,
     props.industry.id,
-    props.industry.name
+    props.industry.name,
   );
 
   const stepsTitle = insertRoadmapSteps(
     insertIndustryContent(Config.starterKits.steps.title, props.industry.id, props.industry.name),
-    props.roadmap.steps.length
+    props.roadmap.steps.length,
   );
 
   return (
@@ -149,7 +153,11 @@ export const getStaticPaths = (): GetStaticPathsResult<StarterKitsUrl> => {
   };
 };
 
-export const getStaticProps = async ({ params }: { params: StarterKitsUrl }): Promise<{ props: Props }> => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: StarterKitsUrl;
+}): Promise<{ props: Props }> => {
   let industry;
   if (params.starterKitsUrl === STARTER_KITS_GENERIC_SLUG) {
     industry = LookupIndustryById("generic");

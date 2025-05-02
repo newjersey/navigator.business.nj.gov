@@ -67,7 +67,11 @@ type v39TaxFilingData = {
   filings: v39TaxFiling[];
 };
 
-type v39EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
+type v39EntityIdStatus =
+  | "UNKNOWN"
+  | "EXISTS_AND_REGISTERED"
+  | "EXISTS_NOT_REGISTERED"
+  | "NOT_FOUND";
 
 type v39TaxFiling = {
   identifier: string;

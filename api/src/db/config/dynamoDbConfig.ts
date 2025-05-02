@@ -19,7 +19,7 @@ export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
 export const createDynamoDbClient = (
   isOffline: boolean,
   isDocker: boolean,
-  dynamoPort: number
+  dynamoPort: number,
 ): DynamoDBDocumentClient => {
   let dynamoDb: DynamoDBDocumentClient;
 
@@ -30,14 +30,14 @@ export const createDynamoDbClient = (
         region: "us-east-1",
         endpoint: `http://${dynamoDbEndpoint}:${dynamoPort}`,
       }),
-      dynamoDbTranslateConfig
+      dynamoDbTranslateConfig,
     );
   } else {
     dynamoDb = DynamoDBDocumentClient.from(
       new DynamoDBClient({
         region: "us-east-1",
       }),
-      dynamoDbTranslateConfig
+      dynamoDbTranslateConfig,
     );
   }
 

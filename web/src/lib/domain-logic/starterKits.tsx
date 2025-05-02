@@ -8,12 +8,18 @@ export const insertRoadmapSteps = (content: string, roadMapsStepsLength: number)
     content,
     condition: () => true,
     modificationMap: {
-      numberRoadMapEasySteps: `${roadMapsStepsLength} Easy Step${roadMapsStepsLength > 1 ? "s" : ""}`,
+      numberRoadMapEasySteps: `${roadMapsStepsLength} Easy Step${
+        roadMapsStepsLength > 1 ? "s" : ""
+      }`,
     },
   });
 };
 
-export const insertIndustryContent = (content: string, industryId: string, industryName: string): string => {
+export const insertIndustryContent = (
+  content: string,
+  industryId: string,
+  industryName: string,
+): string => {
   return modifyContent({
     content,
     condition: () => industryId !== "generic",

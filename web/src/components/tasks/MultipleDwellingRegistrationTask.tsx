@@ -66,7 +66,11 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
     }
     setIsLoading(true);
     api
-      .checkHousingRegistrationStatus(address.address1, address.municipalityExternalId, "multipleDwelling")
+      .checkHousingRegistrationStatus(
+        address.address1,
+        address.municipalityExternalId,
+        "multipleDwelling",
+      )
       .then((result) => {
         if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
           setError("NO_PROPERTY_INTEREST_FOUND");
@@ -105,7 +109,12 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
               <TabList
                 onChange={onSelectTab}
                 aria-label="Multiple Dwelling Registration task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab
                   value="0"
@@ -136,7 +145,9 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
                         setTabIndex(STATUS_TAB_INDEX);
                       }}
                     >
-                      <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
+                      <div>
+                        {Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}
+                      </div>
                     </SecondaryButton>
                   </div>
                   <PrimaryButton
@@ -146,7 +157,9 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
                       openInNewTab(callToActionLink);
                     }}
                   >
-                    <div>{Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
+                    <div>
+                      {Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}
+                    </div>
                     <Icon iconName="launch" className="usa-icon-button-margin" />
                   </PrimaryButton>
                 </ActionBarLayout>

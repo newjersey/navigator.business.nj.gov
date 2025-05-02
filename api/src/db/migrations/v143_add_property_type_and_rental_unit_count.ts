@@ -1,4 +1,7 @@
-import { v142Business, v142UserData } from "@db/migrations/v142_add_domestic_employer_roadmap_section";
+import {
+  v142Business,
+  v142UserData,
+} from "@db/migrations/v142_add_domestic_employer_roadmap_section";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v142_to_v143 = (v142Data: v142UserData): v143UserData => {
@@ -7,7 +10,7 @@ export const migrate_v142_to_v143 = (v142Data: v142UserData): v143UserData => {
     businesses: Object.fromEntries(
       Object.values(v142Data.businesses)
         .map((business: v142Business) => migrate_v142Business_to_v143Business(business))
-        .map((currBusiness: v143Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v143Business) => [currBusiness.id, currBusiness]),
     ),
     version: 143,
   } as v143UserData;
@@ -549,7 +552,9 @@ export const generatev143UserData = (overrides: Partial<v143UserData>): v143User
   };
 };
 
-export const generatev143BusinessUser = (overrides: Partial<v143BusinessUser>): v143BusinessUser => {
+export const generatev143BusinessUser = (
+  overrides: Partial<v143BusinessUser>,
+): v143BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -635,7 +640,7 @@ export const generatev143ProfileData = (overrides: Partial<v143ProfileData>): v1
 };
 
 export const generatev143IndustrySpecificData = (
-  overrides: Partial<v143IndustrySpecificData>
+  overrides: Partial<v143IndustrySpecificData>,
 ): v143IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -682,7 +687,7 @@ export const generatev143Preferences = (overrides: Partial<v143Preferences>): v1
 
 export const generatev143FormationData = (
   overrides: Partial<v143FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v143FormationData => {
   return {
     formationFormData: generatev143FormationFormData({}, legalStructureId),
@@ -698,9 +703,11 @@ export const generatev143FormationData = (
 
 export const generatev143FormationFormData = (
   overrides: Partial<v143FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v143FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v143FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -746,7 +753,8 @@ export const generatev143FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev143FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generatev143FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -769,7 +777,9 @@ export const generatev143FormationFormData = (
   };
 };
 
-export const generatev143Municipality = (overrides: Partial<v143Municipality>): v143Municipality => {
+export const generatev143Municipality = (
+  overrides: Partial<v143Municipality>,
+): v143Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -779,7 +789,9 @@ export const generatev143Municipality = (overrides: Partial<v143Municipality>): 
   };
 };
 
-export const generatev143FormationMember = (overrides: Partial<v143FormationMember>): v143FormationMember => {
+export const generatev143FormationMember = (
+  overrides: Partial<v143FormationMember>,
+): v143FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -793,7 +805,9 @@ export const generatev143FormationMember = (overrides: Partial<v143FormationMemb
   };
 };
 
-export const generatev143TaxFilingData = (overrides: Partial<v143TaxFilingData>): v143TaxFilingData => {
+export const generatev143TaxFilingData = (
+  overrides: Partial<v143TaxFilingData>,
+): v143TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,

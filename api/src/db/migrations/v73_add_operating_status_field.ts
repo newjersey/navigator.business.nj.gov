@@ -18,7 +18,9 @@ export interface v73UserData {
 
 export const migrate_v72_to_v73 = (v72Data: v72UserData): v73UserData => {
   const taskProgress = v72Data.taskProgress;
-  const isPublicFiling = LookupLegalStructureById(v72Data.profileData.legalStructureId).requiresPublicFiling;
+  const isPublicFiling = LookupLegalStructureById(
+    v72Data.profileData.legalStructureId,
+  ).requiresPublicFiling;
 
   let newOperatingPhase: v73OperatingPhase;
   if (!v72Data.user.myNJUserKey) {
@@ -297,7 +299,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v73BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -388,7 +394,7 @@ export const generatev73ProfileData = (overrides: Partial<v73ProfileData>): v73P
 };
 
 export const generatev73FormationFormData = (
-  overrides: Partial<v73FormationFormData>
+  overrides: Partial<v73FormationFormData>,
 ): v73FormationFormData => {
   return {
     businessName: "",

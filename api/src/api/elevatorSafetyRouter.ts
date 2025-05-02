@@ -13,7 +13,7 @@ import { StatusCodes } from "http-status-codes";
 export const elevatorSafetyRouterFactory = (
   elevatorSafetyInspection: ElevatorSafetyInspectionStatus,
   elevatorSafetyRegistration: ElevatorSafetyRegistrationStatus,
-  elevatorSafetyViolation: ElevatorSafetyViolationsStatus
+  elevatorSafetyViolation: ElevatorSafetyViolationsStatus,
 ): Router => {
   const router = Router();
 

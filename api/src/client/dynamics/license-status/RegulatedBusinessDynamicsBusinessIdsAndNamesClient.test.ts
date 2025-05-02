@@ -20,7 +20,10 @@ describe("RegulatedBusinessDynamicsBusinessIdsClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = RegulatedBusinessDynamicsBusinessIdsAndNamesClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
+    client = RegulatedBusinessDynamicsBusinessIdsAndNamesClient(
+      DEBUG ? logger : DummyLogWriter,
+      ORG_URL,
+    );
   });
 
   const mockAccessToken = "access-granted";
@@ -63,13 +66,16 @@ describe("RegulatedBusinessDynamicsBusinessIdsClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
   it("rejects with NO_MATCH error when received data value is an empty array", async () => {
     mockAxios.get.mockResolvedValue({ data: { value: [] } });
-    const expectedThrownError = client.getMatchedBusinessIdsAndNames(mockAccessToken, mockNametoSearch);
+    const expectedThrownError = client.getMatchedBusinessIdsAndNames(
+      mockAccessToken,
+      mockNametoSearch,
+    );
     await expect(expectedThrownError).rejects.toEqual(new Error(NO_ADDRESS_MATCH_ERROR));
   });
 
@@ -78,8 +84,8 @@ describe("RegulatedBusinessDynamicsBusinessIdsClient", () => {
       response: { status: 500 },
     });
 
-    await expect(client.getMatchedBusinessIdsAndNames(mockAccessToken, mockNametoSearch)).rejects.toEqual(
-      500
-    );
+    await expect(
+      client.getMatchedBusinessIdsAndNames(mockAccessToken, mockNametoSearch),
+    ).rejects.toEqual(500);
   });
 });

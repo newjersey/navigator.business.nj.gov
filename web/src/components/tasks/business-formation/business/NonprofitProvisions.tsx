@@ -52,7 +52,7 @@ export const NonprofitProvisions = (): ReactElement => {
         "nonprofitAssetDistributionSpecified",
         "nonprofitAssetDistributionTerms",
       ],
-      { setToUninteracted: true }
+      { setToUninteracted: true },
     );
   };
 
@@ -95,13 +95,15 @@ export const NonprofitProvisions = (): ReactElement => {
         getTextArea("nonprofitBoardMemberQualificationsTerms")}
 
       {hasBoardMembers && getFormBylawsRadio("nonprofitBoardMemberRightsSpecified")}
-      {isInForm("nonprofitBoardMemberRightsSpecified") && getTextArea("nonprofitBoardMemberRightsTerms")}
+      {isInForm("nonprofitBoardMemberRightsSpecified") &&
+        getTextArea("nonprofitBoardMemberRightsTerms")}
 
       {hasBoardMembers && getFormBylawsRadio("nonprofitTrusteesMethodSpecified")}
       {isInForm("nonprofitTrusteesMethodSpecified") && getTextArea("nonprofitTrusteesMethodTerms")}
 
       {hasBoardMembers && getFormBylawsRadio("nonprofitAssetDistributionSpecified")}
-      {isInForm("nonprofitAssetDistributionSpecified") && getTextArea("nonprofitAssetDistributionTerms")}
+      {isInForm("nonprofitAssetDistributionSpecified") &&
+        getTextArea("nonprofitAssetDistributionTerms")}
     </>
   );
 };

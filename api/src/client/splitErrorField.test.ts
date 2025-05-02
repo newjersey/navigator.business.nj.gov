@@ -7,7 +7,7 @@ describe("splitErrorField", () => {
 
   it("if more than one dot, splits all into sentence case with hyphens", () => {
     expect(splitErrorField("Formation.RegisteredAgent.StreetAddress.Zipcode")).toEqual(
-      "Registered Agent - Street Address - Zipcode"
+      "Registered Agent - Street Address - Zipcode",
     );
   });
 });

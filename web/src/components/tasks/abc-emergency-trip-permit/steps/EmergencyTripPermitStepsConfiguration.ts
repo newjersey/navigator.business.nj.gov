@@ -84,7 +84,7 @@ export const generateEmptyErrorMap = (): Record<EmergencyTripPermitFieldNames, b
 };
 
 export const getStepFromFieldName = (
-  fieldName: EmergencyTripPermitFieldNames
+  fieldName: EmergencyTripPermitFieldNames,
 ): EmergencyTripPermitStepNames => {
   switch (fieldName) {
     case "carrier":
@@ -141,7 +141,7 @@ export const getStepFromFieldName = (
 
 export const doesStepHaveError = (
   stepName: EmergencyTripPermitStepNames,
-  invalidFieldIds: EmergencyTripPermitFieldNames[]
+  invalidFieldIds: EmergencyTripPermitFieldNames[],
 ): boolean => {
   if (stepName === "Review" && invalidFieldIds.length > 0) {
     return true;
@@ -156,7 +156,7 @@ export const doesStepHaveError = (
 
 export const isStepComplete = (
   stepName: EmergencyTripPermitStepNames,
-  invalidFieldIds: EmergencyTripPermitFieldNames[]
+  invalidFieldIds: EmergencyTripPermitFieldNames[],
 ): boolean => {
   return !doesStepHaveError(stepName, invalidFieldIds);
 };

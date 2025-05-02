@@ -17,7 +17,7 @@ export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
   const sideBarDisplayContent = fileNames.reduce((acc, cur) => {
     const fileContents: string = fs.readFileSync(
       path.join(displayContentDir, "roadmap-sidebar-cards", cur),
-      "utf8"
+      "utf8",
     );
     const markdownContents = getMarkdown(fileContents);
     const displayContent: SidebarCardContent = {

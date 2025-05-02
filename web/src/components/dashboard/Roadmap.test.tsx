@@ -34,7 +34,9 @@ describe("<Roadmap />", () => {
     (operatingPhase) => {
       beforeEach(() => {
         useMockBusiness(
-          generateBusiness({ profileData: generateProfileData({ operatingPhase: operatingPhase }) })
+          generateBusiness({
+            profileData: generateProfileData({ operatingPhase: operatingPhase }),
+          }),
         );
       });
 
@@ -46,24 +48,26 @@ describe("<Roadmap />", () => {
 
         it("routes user to task page on button click", () => {
           useMockRoadmap({
-            tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+            tasks: [
+              generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" }),
+            ],
           });
           render(<Roadmap />);
           fireEvent.click(screen.getByText(Config.businessStructurePrompt.buttonText));
           expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
         });
       });
-    }
+    },
   );
 
   test.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
     "does not render the roadmap with the business structure prompt for %p",
     (operatingPhase) => {
       useMockBusiness(
-        generateBusiness({ profileData: generateProfileData({ operatingPhase: operatingPhase }) })
+        generateBusiness({ profileData: generateProfileData({ operatingPhase: operatingPhase }) }),
       );
       render(<Roadmap />);
       expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();
-    }
+    },
   );
 });

@@ -12,7 +12,10 @@ describe("EmergencyTripPermitReviewField", () => {
   let fieldName: EmergencyTripPermitUserEnteredFieldNames;
 
   beforeEach(() => {
-    applicationInfo = generateEmergencyTripPermitApplicationData({ carrier: "", permitStartTime: "" });
+    applicationInfo = generateEmergencyTripPermitApplicationData({
+      carrier: "",
+      permitStartTime: "",
+    });
     fieldName = "carrier";
   });
 
@@ -33,7 +36,7 @@ describe("EmergencyTripPermitReviewField", () => {
         }}
       >
         <EmergencyTripPermitReviewField fieldName={fieldName} />
-      </EmergencyTripPermitContext.Provider>
+      </EmergencyTripPermitContext.Provider>,
     );
   };
 

@@ -23,7 +23,10 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { ConfigContext } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -156,7 +159,11 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
           <div className="margin-top-3">
             <Heading level={4}>----Input Label On Naics Code Task----</Heading>
-            <FieldLabelProfile fieldName={"naicsCode"} isAltDescriptionDisplayed ignoreContextualInfo />
+            <FieldLabelProfile
+              fieldName={"naicsCode"}
+              isAltDescriptionDisplayed
+              ignoreContextualInfo
+            />
           </div>
 
           <hr className="margin-y-4" />

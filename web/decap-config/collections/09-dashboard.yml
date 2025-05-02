@@ -23,15 +23,27 @@ collections:
             fields:
               - { label: Header - No User Name, name: noUserNameHeaderText, widget: string }
               - { label: Header - with User Name, name: defaultHeaderText, widget: string }
-              - { label: Starter Kit Header - Generic Industry, name: genericStarterKitText, widget: string }
-              - { label: Starter Kit Header - Other Industries, name: starterKitText, widget: string }
+              - {
+                  label: Starter Kit Header - Generic Industry,
+                  name: genericStarterKitText,
+                  widget: string,
+                }
+              - {
+                  label: Starter Kit Header - Other Industries,
+                  name: starterKitText,
+                  widget: string,
+                }
               - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
               - {
                   label: Guest Mode - To Profile Button Text,
                   name: guestModeToProfileButtonText,
                   widget: string,
                 }
-              - { label: Generic - To Profile Button Text, name: genericToProfileButtonText, widget: string }
+              - {
+                  label: Generic - To Profile Button Text,
+                  name: genericToProfileButtonText,
+                  widget: string,
+                }
           - label: Dashboard Roadmap Defaults
             name: dashboardRoadmapHeaderDefaults
             collapsed: false
@@ -54,7 +66,11 @@ collections:
                   name: defaultAutocompleteHeaderText,
                   widget: string,
                 }
-              - { label: Anytime Action Page Button Text, name: anytimeActionPageButtonText, widget: string }
+              - {
+                  label: Anytime Action Page Button Text,
+                  name: anytimeActionPageButtonText,
+                  widget: string,
+                }
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"
@@ -73,7 +89,11 @@ collections:
                   name: certificationsSnackbarHeading,
                   widget: string,
                 }
-              - { label: Certifications Snackbar Body, name: certificationsSnackbarBody, widget: text }
+              - {
+                  label: Certifications Snackbar Body,
+                  name: certificationsSnackbarBody,
+                  widget: text,
+                }
               - {
                   label: Deferred Onboarding - Snackbar Header,
                   name: deferredOnboardingSnackbarHeader,
@@ -91,7 +111,11 @@ collections:
                   name: taxRegistrationSnackbarHeading,
                   widget: string,
                 }
-              - { label: Tax Registration Snackbar Body, name: taxRegistrationSnackbarBody, widget: text }
+              - {
+                  label: Tax Registration Snackbar Body,
+                  name: taxRegistrationSnackbarBody,
+                  widget: text,
+                }
               - {
                   label: Additional Business Snackbar Heading,
                   name: additionalBusinessSnackbarHeader,
@@ -117,7 +141,11 @@ collections:
                   name: timeDelayBetweenMultipleSnackbars,
                   widget: text,
                 }
-              - { label: Needs Account Snackbar Title, name: needsAccountSnackbarTitle, widget: text }
+              - {
+                  label: Needs Account Snackbar Title,
+                  name: needsAccountSnackbarTitle,
+                  widget: text,
+                }
               - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
@@ -135,25 +163,45 @@ collections:
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar List View Button, name: calendarListViewButton, widget: string }
               - { label: Calendar Grid View Button, name: calendarGridViewButton, widget: string }
-              - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
+              - {
+                  label: Calendar Filing Due Date Label,
+                  name: calendarFilingDueDateLabel,
+                  widget: string,
+                }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
               - { label: Show Task Button Text, name: showTaskText, widget: string }
               - { label: Hide Task Button Text, name: hideTaskText, widget: string }
               - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: string }
-              - { label: Show Additional Filings Button Text, name: viewMoreFilingsButton, widget: string }
-              - { label: Hide Additional Filings Button Text, name: viewLessFilingsButton, widget: string }
+              - {
+                  label: Show Additional Filings Button Text,
+                  name: viewMoreFilingsButton,
+                  widget: string,
+                }
+              - {
+                  label: Hide Additional Filings Button Text,
+                  name: viewLessFilingsButton,
+                  widget: string,
+                }
               - {
                   label: Calendar List View - View More Button Text,
                   name: calendarListViewMoreButton,
                   widget: string,
                 }
-              - { label: Calendar Feedback Button Text, name: calendarFeedbackButtonText, widget: string }
+              - {
+                  label: Calendar Feedback Button Text,
+                  name: calendarFeedbackButtonText,
+                  widget: string,
+                }
               - {
                   label: Calendar Empty Description,
                   name: calendarEmptyDescriptionMarkdown,
                   widget: markdown,
                 }
-              - { label: Calendar Add Formation Date to Profile, name: calendarAddDateMd, widget: markdown }
+              - {
+                  label: Calendar Add Formation Date to Profile,
+                  name: calendarAddDateMd,
+                  widget: markdown,
+                }
 
       - label: "Dashboard Modals"
         name: "dashboard-config-modals"
@@ -166,10 +214,26 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Congratulatory Modal - Title, name: congratulatoryModalTitle, widget: string }
-              - { label: Congratulatory Modal - Header, name: congratulatoryModalHeader, widget: string }
-              - { label: Congratulatory Modal - Body, name: congratulatoryModalBody, widget: string }
-              - { label: Congratulatory Modal - Link Text, name: congratulatoryModalLinkText, widget: string }
+              - {
+                  label: Congratulatory Modal - Title,
+                  name: congratulatoryModalTitle,
+                  widget: string,
+                }
+              - {
+                  label: Congratulatory Modal - Header,
+                  name: congratulatoryModalHeader,
+                  widget: string,
+                }
+              - {
+                  label: Congratulatory Modal - Body,
+                  name: congratulatoryModalBody,
+                  widget: string,
+                }
+              - {
+                  label: Congratulatory Modal - Link Text,
+                  name: congratulatoryModalLinkText,
+                  widget: string,
+                }
               - { label: Sector Modal Title, name: sectorModalTitle, widget: string }
               - { label: Sector Modal Body, name: sectorModalBody, widget: text }
               - { label: Sector Modal Cancel Button, name: sectorModalCancelButton, widget: string }
@@ -186,8 +250,16 @@ collections:
             widget: object
             fields:
               - { label: Sidebar Heading, name: sidebarHeading, widget: string }
-              - { label: Complete Required Tasks Text, name: completeRequiredTasksText, widget: markdown }
-              - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: markdown }
+              - {
+                  label: Complete Required Tasks Text,
+                  name: completeRequiredTasksText,
+                  widget: markdown,
+                }
+              - {
+                  label: Empty Opportunities Header,
+                  name: emptyOpportunitiesHeader,
+                  widget: markdown,
+                }
               - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
               - {
                   label: Empty Opportunities Text - Remote Seller/Worker,
@@ -195,7 +267,11 @@ collections:
                   widget: markdown,
                 }
               - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }
-              - { label: Hidden Opportunities Header, name: hiddenOpportunitiesHeader, widget: string }
+              - {
+                  label: Hidden Opportunities Header,
+                  name: hiddenOpportunitiesHeader,
+                  widget: string,
+                }
               - { label: Unhide Opportunity Text, name: unHideOpportunityText, widget: string }
               - { label: Funding Tag Text, name: fundingTagText, widget: string }
               - { label: Certification Tag Text, name: certificationTagText, widget: string }
@@ -258,5 +334,10 @@ collections:
       - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
       - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
       - { label: "CTA Text", name: "ctaText", widget: "string", required: false }
-      - { label: "Pre Body Button Text", name: "preBodySpanButtonText", widget: "string", required: false }
+      - {
+          label: "Pre Body Button Text",
+          name: "preBodySpanButtonText",
+          widget: "string",
+          required: false,
+        }
       - { label: "Content", name: "body", widget: "markdown" }

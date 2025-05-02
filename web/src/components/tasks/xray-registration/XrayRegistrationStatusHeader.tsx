@@ -90,7 +90,11 @@ export const XrayRegistrationStatusHeader = (props: Props): ReactElement => {
           </p>
         </div>
 
-        <div className={`padding-x-105 ${statusColorScheme[props.xrayRegistrationStatus].textAndIconColor}`}>
+        <div
+          className={`padding-x-105 ${
+            statusColorScheme[props.xrayRegistrationStatus].textAndIconColor
+          }`}
+        >
           {getTextByStatus[props.xrayRegistrationStatus].description}
           {props.xrayRegistrationStatus === "EXPIRED" && (
             <>

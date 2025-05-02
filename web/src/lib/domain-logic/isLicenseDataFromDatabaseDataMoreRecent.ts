@@ -11,7 +11,8 @@ export const isLicenseDataFromDatabaseDataMoreRecent = ({
   if (typeof businessFromDb.licenseData !== typeof businessFromUpdateQueue.licenseData) return true;
 
   const bothBusinessesHaveLicenseData =
-    !!businessFromDb?.licenseData?.lastUpdatedISO && !!businessFromUpdateQueue?.licenseData?.lastUpdatedISO;
+    !!businessFromDb?.licenseData?.lastUpdatedISO &&
+    !!businessFromUpdateQueue?.licenseData?.lastUpdatedISO;
 
   if (bothBusinessesHaveLicenseData) {
     const dateFromDb = dayjs(businessFromDb?.licenseData?.lastUpdatedISO);

@@ -35,7 +35,12 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
   }));
 };
 
-const searchObj = (obj: any, term: string, matches: JsonMatch[], keyPaths: string[]): JsonMatch[] => {
+const searchObj = (
+  obj: any,
+  term: string,
+  matches: JsonMatch[],
+  keyPaths: string[],
+): JsonMatch[] => {
   if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {
     for (const key of Object.keys(obj)) {
       const value = obj[key];
@@ -101,7 +106,11 @@ const findFilesInCmsConfig = (cmsConfig: any, key: string): FileMatch[] => {
   return matchingFiles;
 };
 
-const buildCmsConfigPath = (cmsConfigFile: any, keyPath: string[], cmsLabelPath: string[]): string[] => {
+const buildCmsConfigPath = (
+  cmsConfigFile: any,
+  keyPath: string[],
+  cmsLabelPath: string[],
+): string[] => {
   if (keyPath.length === 0) {
     return cmsLabelPath;
   }

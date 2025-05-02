@@ -33,13 +33,13 @@ describe("<DeferredOnboardingQuestion />", () => {
     render(
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
-          generateBusiness({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
+          generateBusiness({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) }),
         )}
       >
         <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
           <HomeBasedBusiness />
         </DeferredOnboardingQuestion>
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 

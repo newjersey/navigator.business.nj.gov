@@ -29,7 +29,7 @@ describe("taxFilingRouter", () => {
   let apiTaxFilingClient: jest.Mocked<TaxFilingInterface>;
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
   const userData = generateUserDataForBusiness(
-    generateBusiness({ taxFilingData: generateTaxFilingData({ state: "PENDING" }) })
+    generateBusiness({ taxFilingData: generateTaxFilingData({ state: "PENDING" }) }),
   );
   const responseUserData: UserData = modifyCurrentBusiness(userData, (business) => ({
     ...business,
@@ -59,7 +59,13 @@ describe("taxFilingRouter", () => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(taxFilingRouterFactory(stubDynamoDataClient, apiTaxFilingClient, stubEncryptionDecryptionClient));
+    app.use(
+      taxFilingRouterFactory(
+        stubDynamoDataClient,
+        apiTaxFilingClient,
+        stubEncryptionDecryptionClient,
+      ),
+    );
   });
 
   afterAll(async () => {
@@ -141,7 +147,9 @@ describe("taxFilingRouter", () => {
       stubEncryptionDecryptionClient.decryptValue.mockResolvedValue("123456789000");
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
       expect(response.body).toEqual(responseUserData);
-      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
+      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith(
+        "some-encrypted-value",
+      );
       expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
         userData,
         taxId: "123456789000",
@@ -153,7 +161,9 @@ describe("taxFilingRouter", () => {
     });
 
     it("returns INTERNAL SERVER ERROR on interface error", async () => {
-      apiTaxFilingClient.lookup.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
+      apiTaxFilingClient.lookup.mockRejectedValue(
+        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()),
+      );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
@@ -161,7 +171,9 @@ describe("taxFilingRouter", () => {
 
     it("returns INTERNAL SERVER ERROR on userDataClient put error", async () => {
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
-      stubDynamoDataClient.put.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
+      stubDynamoDataClient.put.mockRejectedValue(
+        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()),
+      );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
@@ -170,7 +182,9 @@ describe("taxFilingRouter", () => {
 
     it("returns INTERNAL SERVER ERROR on userDataClient get error", async () => {
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
-      stubDynamoDataClient.get.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
+      stubDynamoDataClient.get.mockRejectedValue(
+        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()),
+      );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
@@ -221,7 +235,9 @@ describe("taxFilingRouter", () => {
         taxId: "123456789000",
         businessName: "my-cool-business",
       });
-      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
+      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith(
+        "some-encrypted-value",
+      );
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubDynamoDataClient.get).toHaveBeenCalledWith("some-id");
       expect(response.status).toEqual(StatusCodes.OK);
@@ -229,7 +245,7 @@ describe("taxFilingRouter", () => {
 
     it("returns INTERNAL SERVER ERROR on client error", async () => {
       apiTaxFilingClient.onboarding.mockRejectedValue(
-        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString())
+        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()),
       );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
@@ -238,7 +254,9 @@ describe("taxFilingRouter", () => {
 
     it("returns INTERNAL SERVER ERROR on userDataClient put error", async () => {
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
-      stubDynamoDataClient.put.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
+      stubDynamoDataClient.put.mockRejectedValue(
+        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()),
+      );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
@@ -247,7 +265,9 @@ describe("taxFilingRouter", () => {
 
     it("returns INTERNAL SERVER ERROR on userDataClient get error", async () => {
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
-      stubDynamoDataClient.get.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
+      stubDynamoDataClient.get.mockRejectedValue(
+        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()),
+      );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);

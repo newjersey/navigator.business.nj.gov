@@ -12,7 +12,8 @@ export const buildRoadmap = async ({
   let stepImporter: () => Promise<GenericStep[]>;
 
   if (industryId) {
-    stepImporter = industryId === "domestic-employer" ? importDomesticEmployerSteps : importGenericSteps;
+    stepImporter =
+      industryId === "domestic-employer" ? importDomesticEmployerSteps : importGenericSteps;
   } else {
     stepImporter = importForeignSteps;
   }
@@ -40,7 +41,7 @@ export const buildRoadmap = async ({
 const generateIndustryRoadmap = async (
   builder: RoadmapBuilder,
   industryId: string,
-  addOns: string[]
+  addOns: string[],
 ): Promise<RoadmapBuilder> => {
   const industryRoadmap: IndustryRoadmap = await importRoadmap(industryId);
 
@@ -51,7 +52,10 @@ const generateIndustryRoadmap = async (
   return builder;
 };
 
-const applyAddOns = async (builder: RoadmapBuilder, addOnFilenames: string[]): Promise<RoadmapBuilder> => {
+const applyAddOns = async (
+  builder: RoadmapBuilder,
+  addOnFilenames: string[],
+): Promise<RoadmapBuilder> => {
   for (const addOnFilename of addOnFilenames) {
     const addOns = await importAddOn(addOnFilename);
     addTasksFromAddOn(builder, addOns.roadmapSteps);
@@ -66,7 +70,9 @@ const importRoadmap = async (industryId: string): Promise<IndustryRoadmap> => {
     const industries = await import(`@/lib/roadmap/fixtures/industries/${industryId}.json`);
     return industries.default as IndustryRoadmap;
   }
-  const industries = await import(`@businessnjgovnavigator/content/roadmaps/industries/${industryId}.json`);
+  const industries = await import(
+    `@businessnjgovnavigator/content/roadmaps/industries/${industryId}.json`
+  );
   return industries.default as IndustryRoadmap;
 };
 
@@ -76,7 +82,9 @@ const importDomesticEmployerSteps = async (): Promise<GenericStep[]> => {
     return steps.steps as GenericStep[];
   }
 
-  const steps = await import(`@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json`);
+  const steps = await import(
+    `@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json`
+  );
   return steps.steps as GenericStep[];
 };
 
@@ -133,7 +141,10 @@ const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
   return builder;
 };
 
-const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
+const modifyTasks = (
+  roadmap: RoadmapBuilder,
+  modifications: TaskModification[],
+): RoadmapBuilder => {
   if (modifications) {
     for (const modification of modifications) {
       const task = findTaskInRoadmapByFilename(roadmap, modification.taskToReplaceFilename);
@@ -161,7 +172,7 @@ const removeDuplicateTasks = (roadmap: RoadmapBuilder): RoadmapBuilder => {
 
 const findTaskInRoadmapByFilename = (
   roadmapBuilder: RoadmapBuilder,
-  taskFilename: string
+  taskFilename: string,
 ): TaskBuilder | undefined => {
   return roadmapBuilder.tasks.find((task) => {
     return task.filename === taskFilename;
@@ -178,14 +189,14 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
           stepNumber: task.stepNumber,
           required: task.required,
         };
-      })
+      }),
     ),
   };
 
   const allFilenames = new Set(
     roadmap.tasks.map((task) => {
       return task.filename;
-    })
+    }),
   );
 
   return {

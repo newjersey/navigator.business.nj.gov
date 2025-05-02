@@ -12,7 +12,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
   const currentBusiness = getCurrentBusiness(userData);
   const originalPhase = currentBusiness.profileData.operatingPhase;
   const isPublicFiling = LookupLegalStructureById(
-    currentBusiness.profileData.legalStructureId
+    currentBusiness.profileData.legalStructureId,
   ).requiresPublicFiling;
 
   const isRemoteSellerOrWorker = isRemoteWorkerOrSellerBusiness(currentBusiness);

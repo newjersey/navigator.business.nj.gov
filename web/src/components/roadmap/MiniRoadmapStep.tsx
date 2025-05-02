@@ -55,7 +55,11 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
           miniRoadmapSubtaskisOpen={isOpen}
         />
 
-        <button className="usa-button--unstyled width-100" onClick={toggleOpen} aria-expanded={isOpen}>
+        <button
+          className="usa-button--unstyled width-100"
+          onClick={toggleOpen}
+          aria-expanded={isOpen}
+        >
           <div className="fdr fjc fac">
             <div
               role="heading"

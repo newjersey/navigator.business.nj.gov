@@ -33,7 +33,7 @@ export const NavBarDashboardLink = (props: Props): ReactNode => {
                   userData,
                   newCurrentBusinessId: props.previousBusinessId,
                   idToRemove: userData.currentBusinessId,
-                })
+                }),
               )
               .update();
           }

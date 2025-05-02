@@ -6,7 +6,7 @@ describe("Alert", () => {
     render(
       <Alert variant="warning" heading="Warning Alert with heading">
         Test Button
-      </Alert>
+      </Alert>,
     );
     expect(screen.getByText("Warning Alert with heading")).toBeInTheDocument();
   });

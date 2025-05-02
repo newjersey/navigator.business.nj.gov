@@ -21,7 +21,10 @@ export const migrate_v66_to_v67 = (v66Data: v66UserData): v67UserData => {
     ...v66Data,
     preferences: {
       ...v66Data.preferences,
-      visibleRoadmapSidebarCards: [...v66Data.preferences.visibleRoadmapSidebarCards, ...graduationCard],
+      visibleRoadmapSidebarCards: [
+        ...v66Data.preferences.visibleRoadmapSidebarCards,
+        ...graduationCard,
+      ],
     },
 
     version: 67,
@@ -267,7 +270,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v67BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -353,7 +360,7 @@ export const generatev67ProfileData = (overrides: Partial<v67ProfileData>): v67P
 };
 
 export const generatev67FormationFormData = (
-  overrides: Partial<v67FormationFormData>
+  overrides: Partial<v67FormationFormData>,
 ): v67FormationFormData => {
   return {
     businessName: "",
@@ -394,7 +401,7 @@ export const generatev67FormationFormData = (
 };
 
 export const generatev67GetFilingResponse = (
-  overrides: Partial<v67GetFilingResponse>
+  overrides: Partial<v67GetFilingResponse>,
 ): v67GetFilingResponse => {
   return {
     success: true,

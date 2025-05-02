@@ -45,37 +45,44 @@ export const postUserEmailCheck = async (email: string): Promise<EmailCheckRespo
   return post("/users/emailCheck", { email }, false);
 };
 
-export const checkLicenseStatus = (nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
+export const checkLicenseStatus = (
+  nameAndAddress: LicenseSearchNameAndAddress,
+): Promise<UserData> => {
   return post(`/license-status`, { nameAndAddress });
 };
 
 export const checkElevatorRegistrationStatus = (
   address: string,
-  municipalityId: string
+  municipalityId: string,
 ): Promise<ElevatorSafetyRegistrationSummary> => {
   return post(`/elevator-safety/registration`, { address, municipalityId });
 };
 
-export const checkElevatorViolations = (address: string, municipalityId: string): Promise<boolean> => {
+export const checkElevatorViolations = (
+  address: string,
+  municipalityId: string,
+): Promise<boolean> => {
   return post(`/elevator-safety/violations`, { address, municipalityId });
 };
 
 export const checkHousingRegistrationStatus = (
   address: string,
   municipalityId: string,
-  propertyInterestType: PropertyInterestType
+  propertyInterestType: PropertyInterestType,
 ): Promise<HousingRegistrationRequestLookupResponse> => {
   return post(`/housing/registrations/`, { address, municipalityId, propertyInterestType });
 };
 
-export const checkXrayRegistrationStatus = (facilityDetails: FacilityDetails): Promise<UserData> => {
+export const checkXrayRegistrationStatus = (
+  facilityDetails: FacilityDetails,
+): Promise<UserData> => {
   return post(`/xray-registration`, { facilityDetails });
 };
 
 export const postBusinessFormation = (
   userData: UserData,
   returnUrl: string,
-  foreignGoodStandingFile: InputFile | undefined
+  foreignGoodStandingFile: InputFile | undefined,
 ): Promise<UserData> => {
   return post(`/formation`, { userData, returnUrl, foreignGoodStandingFile });
 };
@@ -84,7 +91,9 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
-export const postTaxClearanceCertificate = (userData: UserData): Promise<TaxClearanceCertificateResponse> => {
+export const postTaxClearanceCertificate = (
+  userData: UserData,
+): Promise<TaxClearanceCertificateResponse> => {
   return post(`/postTaxClearanceCertificate`, userData);
 };
 
@@ -125,7 +134,7 @@ export const searchBusinessName = (name: string): Promise<NameAvailability> => {
 };
 
 export const postEmergencyTripPermitApplication = (
-  applicationInfo: EmergencyTripPermitApplicationInfo
+  applicationInfo: EmergencyTripPermitApplicationInfo,
 ): Promise<EmergencyTripPermitSubmitResponse> => {
   return post("/emergencyTripPermit", applicationInfo);
 };

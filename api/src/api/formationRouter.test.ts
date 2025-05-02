@@ -65,7 +65,11 @@ describe("formationRouter", () => {
       findByEmail: jest.fn(),
     };
     app = setupExpress(false);
-    app.use(formationRouterFactory(stubFormationClient, stubDynamoDataClient, { shouldSaveDocuments: true }));
+    app.use(
+      formationRouterFactory(stubFormationClient, stubDynamoDataClient, {
+        shouldSaveDocuments: true,
+      }),
+    );
   });
 
   afterAll(async () => {
@@ -87,7 +91,11 @@ describe("formationRouter", () => {
         foreignGoodStandingFile,
       });
 
-      expect(stubFormationClient.form).toHaveBeenCalledWith(userData, "some-url", foreignGoodStandingFile);
+      expect(stubFormationClient.form).toHaveBeenCalledWith(
+        userData,
+        "some-url",
+        foreignGoodStandingFile,
+      );
 
       expect(response.status).toEqual(StatusCodes.OK);
       const expectedResponse = modifyCurrentBusiness(userData, (business) => ({
@@ -159,7 +167,9 @@ describe("formationRouter", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+            formationResponse: generateFormationSubmitResponse({
+              formationId: "some-formation-id",
+            }),
           }),
           profileData: generateProfileData({
             documents: {
@@ -168,7 +178,7 @@ describe("formationRouter", () => {
               standingDoc: "",
             },
           }),
-        })
+        }),
       );
       stubDynamoDataClient.get.mockResolvedValue(userData);
       const response = await request(app).get(`/completed-filing`).send();
@@ -201,7 +211,7 @@ describe("formationRouter", () => {
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,
         `us-east-1:identityId/formationDoc-1487076708000.pdf`,
-        undefined
+        undefined,
       );
       expect(response.body).toEqual(expectedNewUserData);
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
@@ -215,7 +225,9 @@ describe("formationRouter", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+            formationResponse: generateFormationSubmitResponse({
+              formationId: "some-formation-id",
+            }),
           }),
           profileData: generateProfileData({
             documents: {
@@ -224,7 +236,7 @@ describe("formationRouter", () => {
               standingDoc: "",
             },
           }),
-        })
+        }),
       );
       stubDynamoDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
@@ -247,7 +259,9 @@ describe("formationRouter", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+            formationResponse: generateFormationSubmitResponse({
+              formationId: "some-formation-id",
+            }),
           }),
           profileData: generateProfileData({
             documents: {
@@ -256,7 +270,7 @@ describe("formationRouter", () => {
               standingDoc: "",
             },
           }),
-        })
+        }),
       );
       stubDynamoDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
@@ -287,17 +301,17 @@ describe("formationRouter", () => {
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,
         `us-east-1:identityId/formationDoc-1487076708000.pdf`,
-        process.env.DOCUMENT_S3_BUCKET
+        process.env.DOCUMENT_S3_BUCKET,
       );
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.standingDoc,
         `us-east-1:identityId/standingDoc-1487076708000.pdf`,
-        process.env.DOCUMENT_S3_BUCKET
+        process.env.DOCUMENT_S3_BUCKET,
       );
       expect(fakeSaveFileFromUrl).not.toHaveBeenCalledWith(
         getFilingResponse.certifiedDoc,
         `us-east-1:identityId/certifiedDoc-1487076708000.pdf`,
-        process.env.DOCUMENT_S3_BUCKET
+        process.env.DOCUMENT_S3_BUCKET,
       );
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
     });

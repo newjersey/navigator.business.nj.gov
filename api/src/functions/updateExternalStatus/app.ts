@@ -17,7 +17,9 @@ export default async function handler(): Promise<void> {
 
   const GOV_DELIVERY_BASE_URL =
     process.env.GOV_DELIVERY_BASE_URL ||
-    (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.govdelivery.com");
+    (IS_OFFLINE
+      ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+      : "https://api.govdelivery.com");
   const GOV_DELIVERY_API_KEY = process.env.GOV_DELIVERY_API_KEY || "tempkey";
   const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "NJGOV_1";
   const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID || "q_86783";
@@ -26,7 +28,9 @@ export default async function handler(): Promise<void> {
   const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
   const AIRTABLE_BASE_URL =
     process.env.AIRTABLE_BASE_URL ||
-    (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
+    (IS_OFFLINE
+      ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+      : "https://api.airtable.com");
   const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 
   const newsletterGovDeliveryClient = GovDeliveryNewsletterClient({
@@ -45,7 +49,7 @@ export default async function handler(): Promise<void> {
       baseUrl: AIRTABLE_BASE_URL,
       usersTableName: AIRTABLE_USERS_TABLE,
     },
-    logger
+    logger,
   );
 
   const addNewsletter = addNewsletterFactory(newsletterGovDeliveryClient);

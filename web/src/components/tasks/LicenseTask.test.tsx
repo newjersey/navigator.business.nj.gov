@@ -4,7 +4,10 @@ import * as api from "@/lib/api-client/apiClient";
 import { generateLicenseTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   createEmptyLicenseSearchNameAndAddress,
@@ -27,7 +30,10 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 window.open = jest.fn();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  checkLicenseStatus: jest.fn(),
+  getUserData: jest.fn(),
+}));
 const mockApi = api as jest.Mocked<typeof api>;
 const mockWindowOpen = window.open as jest.Mocked<typeof window.open>;
 const Config = getMergedConfig();
@@ -39,7 +45,7 @@ describe("<LicenseTask />", () => {
     render(
       <ThemeProvider theme={createTheme()}>
         <LicenseTask task={task} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -49,7 +55,7 @@ describe("<LicenseTask />", () => {
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
           <LicenseTask task={task} />
         </WithStatefulUserData>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -67,7 +73,7 @@ describe("<LicenseTask />", () => {
         taskProgress: { [task.id]: "TO_DO" },
         licenseData: generateLicenseData(
           {},
-          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) },
         ),
       });
       renderTaskWithStatefulData(business);
@@ -85,7 +91,7 @@ describe("<LicenseTask />", () => {
         taskProgress: { [task.id]: "TO_DO" },
         licenseData: generateLicenseData(
           {},
-          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({}) }
+          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({}) },
         ),
       });
       renderTaskWithStatefulData(business);
@@ -108,7 +114,7 @@ describe("<LicenseTask />", () => {
       useMockBusiness({
         licenseData: generateLicenseData(
           {},
-          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) },
         ),
       });
       renderTask();
@@ -134,7 +140,7 @@ describe("<LicenseTask />", () => {
               }),
               lastUpdatedISO: "",
             }),
-          }
+          },
         ),
       });
       renderTask();
@@ -161,7 +167,7 @@ describe("<LicenseTask />", () => {
               }),
               lastUpdatedISO: "",
             }),
-          }
+          },
         ),
       });
       renderTask();
@@ -173,7 +179,11 @@ describe("<LicenseTask />", () => {
       useMockBusiness({ licenseData: undefined });
       renderTask();
       fireEvent.click(screen.getByTestId("cta-primary"));
-      expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
+      expect(mockWindowOpen).toHaveBeenCalledWith(
+        task.callToActionLink,
+        "_blank",
+        "noopener noreferrer",
+      );
     });
   });
 
@@ -193,7 +203,7 @@ describe("<LicenseTask />", () => {
                 }),
                 lastUpdatedISO: "",
               }),
-            }
+            },
           ),
         });
         renderTask();
@@ -242,7 +252,7 @@ describe("<LicenseTask />", () => {
                 lastUpdatedISO: "",
                 nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
               }),
-            }
+            },
           ),
           formationData: generateFormationData({
             formationResponse: generateFormationSubmitResponse({
@@ -307,7 +317,7 @@ describe("<LicenseTask />", () => {
                 lastUpdatedISO: "",
                 nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
               }),
-            }
+            },
           ),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -343,7 +353,7 @@ describe("<LicenseTask />", () => {
                 licenseStatus: "ACTIVE",
                 lastUpdatedISO: "not empty string",
               }),
-            }
+            },
           ),
         });
         renderTask();
@@ -362,10 +372,10 @@ describe("<LicenseTask />", () => {
                   [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                     licenseStatus: "DRAFT",
                   }),
-                }
+                },
               ),
-            })
-          )
+            }),
+          ),
         );
 
         setupStatefulUserDataContext();
@@ -373,7 +383,7 @@ describe("<LicenseTask />", () => {
           taskProgress: { [task.id]: "TO_DO" },
           licenseData: generateLicenseData(
             {},
-            { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+            { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) },
           ),
         });
         renderTaskWithStatefulData(business);
@@ -407,7 +417,7 @@ describe("<LicenseTask />", () => {
                 lastUpdatedISO: "",
                 nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
               }),
-            }
+            },
           ),
           formationData: generateFormationData({
             formationResponse: generateFormationSubmitResponse({
@@ -431,10 +441,10 @@ describe("<LicenseTask />", () => {
                       zipCode: "12345",
                     }),
                   }),
-                }
+                },
               ),
-            })
-          )
+            }),
+          ),
         );
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
@@ -480,7 +490,7 @@ describe("<LicenseTask />", () => {
               lastUpdatedISO: "last-updated",
               licenses: {},
             },
-          })
+          }),
         );
         mockApi.checkLicenseStatus.mockResolvedValue(userData);
         fireEvent.submit(screen.getByTestId("check-status-submit"));
@@ -512,7 +522,7 @@ describe("<LicenseTask />", () => {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 lastUpdatedISO: "",
               }),
-            }
+            },
           ),
         });
         renderTask();
@@ -534,7 +544,7 @@ describe("<LicenseTask />", () => {
                 lastUpdatedISO: "",
                 nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
               }),
-            }
+            },
           ),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -564,7 +574,7 @@ describe("<LicenseTask />", () => {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 lastUpdatedISO: "",
               }),
-            }
+            },
           ),
         });
         mockApi.checkLicenseStatus.mockResolvedValue(
@@ -580,10 +590,10 @@ describe("<LicenseTask />", () => {
                       generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
                     ],
                   }),
-                }
+                },
               ),
-            })
-          )
+            }),
+          ),
         );
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
@@ -613,7 +623,7 @@ describe("<LicenseTask />", () => {
                   zipCode: "12345",
                 }),
               }),
-            }
+            },
           ),
         });
         renderTask();
@@ -630,7 +640,7 @@ describe("<LicenseTask />", () => {
             {},
             {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({}),
-            }
+            },
           ),
         });
 
@@ -648,9 +658,11 @@ describe("<LicenseTask />", () => {
             {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 licenseStatus: "ACTIVE",
-                checklistItems: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
+                checklistItems: [
+                  generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" }),
+                ],
               }),
-            }
+            },
           ),
         });
         renderTask();
@@ -666,9 +678,11 @@ describe("<LicenseTask />", () => {
             {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 licenseStatus: "PENDING",
-                checklistItems: [generateLicenseStatusItem({ title: "Application", status: "PENDING" })],
+                checklistItems: [
+                  generateLicenseStatusItem({ title: "Application", status: "PENDING" }),
+                ],
               }),
-            }
+            },
           ),
         });
         renderTask();
@@ -687,9 +701,11 @@ describe("<LicenseTask />", () => {
             {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 licenseStatus: "EXPIRED",
-                checklistItems: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
+                checklistItems: [
+                  generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" }),
+                ],
               }),
-            }
+            },
           ),
         });
         renderTask();

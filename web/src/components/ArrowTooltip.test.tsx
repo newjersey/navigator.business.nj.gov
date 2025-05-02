@@ -29,7 +29,7 @@ const renderToolTip = (): void => {
           <Icon iconName="help_outline" />
         </div>
       </ArrowTooltip>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 

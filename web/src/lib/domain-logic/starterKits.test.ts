@@ -38,7 +38,7 @@ describe("starter Kits", () => {
       const data = createStarterKitProfileData(industry);
       allStarterKitEssentialQuestions = combineObjectsKeepingTruthyValues(
         allStarterKitEssentialQuestions,
-        data
+        data,
       );
     }
 
@@ -51,11 +51,12 @@ describe("starter Kits", () => {
     const mainAppEssentialQuestions = EssentialQuestions.map((question) => question.fieldName);
 
     for (const mainAppEssentialQuestion of mainAppEssentialQuestions) {
-      const essentialQuestionInBoth = onlyStarterKitEssentialQuestions.includes(mainAppEssentialQuestion);
+      const essentialQuestionInBoth =
+        onlyStarterKitEssentialQuestions.includes(mainAppEssentialQuestion);
       if (!essentialQuestionInBoth) {
         console.error(
           "The new essential question should have a value set in createStarterKitProfileData() function",
-          mainAppEssentialQuestion
+          mainAppEssentialQuestion,
         );
       }
       expect(essentialQuestionInBoth).toBe(true);

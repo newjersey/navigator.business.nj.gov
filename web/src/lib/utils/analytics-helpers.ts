@@ -15,7 +15,11 @@ import {
   getCurrentBusiness,
 } from "@businessnjgovnavigator/shared";
 
-type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
+type RegistrationProgress =
+  | "Not Started"
+  | "Began Onboarding"
+  | "Onboarded Guest"
+  | "Fully Registered";
 
 export const setOnLoadDimensions = (userData: UserData): void => {
   setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
@@ -25,22 +29,31 @@ export const setOnLoadDimensions = (userData: UserData): void => {
 
 export const setRegistrationDimension = (
   status: RegistrationProgress,
-  queue = false
+  queue = false,
 ): DimensionQueueFactory => {
   const updateQueue = analytics.dimensions.registrationStatus(status);
   !queue && updateQueue.update();
   return updateQueue;
 };
 
-export const setABExperienceDimension = (value: ABExperience, queue = false): DimensionQueueFactory => {
+export const setABExperienceDimension = (
+  value: ABExperience,
+  queue = false,
+): DimensionQueueFactory => {
   const updateQueue = analytics.dimensions.abExperience(value);
   !queue && updateQueue.update();
   return updateQueue;
 };
 
-export const setPhaseDimension = (value: OperatingPhaseId, queue = false): DimensionQueueFactory => {
+export const setPhaseDimension = (
+  value: OperatingPhaseId,
+  queue = false,
+): DimensionQueueFactory => {
   const phase = LookupOperatingPhaseById(value);
-  const updateQueue = analytics.dimensions.phase(getPhaseDimension(value), phase.displayCalendarType);
+  const updateQueue = analytics.dimensions.phase(
+    getPhaseDimension(value),
+    phase.displayCalendarType,
+  );
   !queue && updateQueue.update();
   return updateQueue;
 };
@@ -85,7 +98,7 @@ export const setAnalyticsDimensions = (profileData: ProfileData, queue = false):
   analytics.dimensions.naicsCode(profileData.naicsCode);
   setPhaseDimension(profileData.operatingPhase, true);
   analytics.dimensions.subPersona(
-    getSubPersonaDimension(determineForeignBusinessType(profileData.foreignBusinessTypeIds))
+    getSubPersonaDimension(determineForeignBusinessType(profileData.foreignBusinessTypeIds)),
   );
   !queue && analytics.dimensions.update();
 };
@@ -171,7 +184,8 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
     } else if (question.fieldName === "cannabisLicenseType") {
       eventQuestions = {
         ...eventQuestions,
-        [questionName]: newProfileData[question.fieldName] === "CONDITIONAL" ? "conditional" : "annual",
+        [questionName]:
+          newProfileData[question.fieldName] === "CONDITIONAL" ? "conditional" : "annual",
       };
     } else if (question.fieldName === "carService") {
       eventQuestions = {
@@ -193,7 +207,10 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
   });
 };
 
-export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageName?: string): void => {
+export const sendOnboardingOnSubmitEvents = (
+  newProfileData: ProfileData,
+  pageName?: string,
+): void => {
   if (pageName === "industry-page" && newProfileData.industryId) {
     sendEssentialQuestionEvents(newProfileData);
   }

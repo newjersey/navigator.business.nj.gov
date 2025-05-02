@@ -40,7 +40,9 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
 
     mockAxios.get.mockResolvedValueOnce({ data: elevatorSafetyRegistrationMockResponse });
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse });
-    expect(await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId)).toEqual([
+    expect(
+      await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId),
+    ).toEqual([
       {
         dateStarted: "06/14/2021",
         deviceCount: 2,
@@ -53,7 +55,7 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_elevatordeviceregistrationrequests?$filter=(_ultra_registrationrequestid_value eq request-id-1)`,
@@ -61,7 +63,7 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -91,7 +93,9 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: elevatorSafetyRegistrationMockResponse });
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse1 });
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse2 });
-    expect(await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId)).toEqual([
+    expect(
+      await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId),
+    ).toEqual([
       {
         dateStarted: "06/14/2021",
         deviceCount: 2,
@@ -110,7 +114,7 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_elevatordeviceregistrationrequests?$filter=(_ultra_registrationrequestid_value eq request-id-1)`,
@@ -118,7 +122,7 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_elevatordeviceregistrationrequests?$filter=(_ultra_registrationrequestid_value eq request-id-2)`,
@@ -126,7 +130,7 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -188,7 +192,9 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse2 });
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse1 });
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse2 });
-    expect(await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId)).toEqual([
+    expect(
+      await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId),
+    ).toEqual([
       {
         dateStarted: "06/14/2021",
         deviceCount: 2,
@@ -229,14 +235,16 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
 
     mockAxios.get.mockResolvedValueOnce({ data: elevatorSafetyRegistrationMockResponse });
 
-    expect(await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId)).toEqual([]);
+    expect(
+      await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId),
+    ).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_elevatorregistrationrequests?$select=createdon,statecode,statuscode&$filter=(_ultra_propertyinterest_value eq 'property-interest-id')`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 });

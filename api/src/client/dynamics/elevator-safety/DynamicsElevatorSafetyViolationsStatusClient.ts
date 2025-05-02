@@ -8,14 +8,14 @@ type Config = {
 };
 
 export const DynamicsElevatorSafetyViolationsStatusClient = (
-  config: Config
+  config: Config,
 ): ElevatorSafetyViolationsStatus => {
   return async (address: string, municipalityId: string): Promise<boolean> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
     return await config.elevatorSafetyViolationsClient.getViolationsForPropertyInterest(
       accessToken,
       address,
-      municipalityId
+      municipalityId,
     );
   };
 };

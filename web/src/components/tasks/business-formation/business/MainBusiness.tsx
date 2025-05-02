@@ -22,7 +22,7 @@ export const MainBusiness = (): ReactElement => {
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
   const isForeign = useMemo(
     () => state.formationFormData.businessLocationType !== "NJ",
-    [state.formationFormData.businessLocationType]
+    [state.formationFormData.businessLocationType],
   );
 
   return (
@@ -64,14 +64,20 @@ export const MainBusiness = (): ReactElement => {
           >
             <div className="grid-row grid-gap-1">
               <div className="margin-top-2 tablet:grid-col-6">
-                <WithErrorBar hasError={doesFieldHaveError("foreignStateOfFormation")} type="MOBILE-ONLY">
+                <WithErrorBar
+                  hasError={doesFieldHaveError("foreignStateOfFormation")}
+                  type="MOBILE-ONLY"
+                >
                   <FormationField fieldName="foreignStateOfFormation">
                     <ForeignStateOfFormation />
                   </FormationField>
                 </WithErrorBar>
               </div>
               <div className="margin-top-2 tablet:grid-col-6">
-                <WithErrorBar hasError={doesFieldHaveError("foreignDateOfFormation")} type="MOBILE-ONLY">
+                <WithErrorBar
+                  hasError={doesFieldHaveError("foreignDateOfFormation")}
+                  type="MOBILE-ONLY"
+                >
                   <FormationField fieldName="foreignDateOfFormation">
                     <FormationDate fieldName="foreignDateOfFormation" />
                   </FormationField>

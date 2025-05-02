@@ -65,7 +65,7 @@ describe("migrate_v126_to_v127", () => {
 
       const v127 = migrate_v126_to_v127(v126UserData);
       expect(v127.businesses[id].profileData.operatingPhase).toEqual("NEEDS_TO_FORM");
-    }
+    },
   );
 
   it("does not modify operatingPhase for business without foreignBusinessTypeIds", () => {

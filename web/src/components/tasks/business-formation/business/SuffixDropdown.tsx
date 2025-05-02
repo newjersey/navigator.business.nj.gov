@@ -16,7 +16,14 @@ import {
   LpBusinessSuffix,
   NonprofitBusinessSuffix,
 } from "@businessnjgovnavigator/shared/";
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -17,7 +17,7 @@ interface Props {
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
   const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
-    props.certificatePdfBlob || undefined
+    props.certificatePdfBlob || undefined,
   );
 
   const onStepClick = (step: number): void => {
@@ -38,7 +38,9 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       ),
     },
     {
-      component: <Review setStepIndex={props.stepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />,
+      component: (
+        <Review setStepIndex={props.stepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />
+      ),
     },
   ];
 

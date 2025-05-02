@@ -33,7 +33,7 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
 
   const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
     props.fieldName,
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
 
   const contentFromConfig = getProfileConfig({
@@ -85,7 +85,7 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
                       ? props.labels[val.toString()]
                       : contentFromConfig[
                           `radioButton${capitalizeFirstLetter(
-                            kebabSnakeSentenceToCamelCase(val.toString())
+                            kebabSnakeSentenceToCamelCase(val.toString()),
                           )}Text`
                         ]
                   }

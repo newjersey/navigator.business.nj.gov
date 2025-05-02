@@ -6,7 +6,7 @@ import { chunk } from "lodash";
 export const DynamoDataClient = (
   userDataClient: UserDataClient,
   businessesDataClient: BusinessesDataClient,
-  logger: LogWriterType
+  logger: LogWriterType,
 ): DatabaseClient => {
   const migrateOutdatedVersionUsers = async (): Promise<{
     success: boolean;
@@ -19,20 +19,20 @@ export const DynamoDataClient = (
       const batchSize = 25;
 
       do {
-        const { usersToMigrate, nextToken: newNextToken } = await userDataClient.getUsersWithOutdatedVersion(
-          CURRENT_VERSION,
-          nextToken
-        );
+        const { usersToMigrate, nextToken: newNextToken } =
+          await userDataClient.getUsersWithOutdatedVersion(CURRENT_VERSION, nextToken);
         const batches = chunk(usersToMigrate, batchSize);
         for (const batch of batches) {
           await processBatch(batch);
           migratedCount += batch.length;
-          logger.LogInfo(`Processed batch of ${batch.length} users. Total migrated so far: ${migratedCount}`);
+          logger.LogInfo(
+            `Processed batch of ${batch.length} users. Total migrated so far: ${migratedCount}`,
+          );
         }
         nextToken = newNextToken;
       } while (nextToken);
       logger.LogInfo(
-        `Migration complete. Migrated ${migratedCount} users. Current version: ${CURRENT_VERSION}`
+        `Migration complete. Migrated ${migratedCount} users. Current version: ${CURRENT_VERSION}`,
       );
       return { success: true, migratedCount };
     } catch (error) {
@@ -47,7 +47,7 @@ export const DynamoDataClient = (
       usersToMigrate.map(async (user) => {
         await updateUserAndBusinesses(user);
         logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
-      })
+      }),
     );
 
     for (const [index, result] of results.entries()) {
@@ -79,7 +79,7 @@ export const DynamoDataClient = (
             logger.LogInfo(`Processed business with ID ${businessId} for user ${userData.user.id}`);
           } catch (error) {
             logger.LogError(
-              `Error processing business with ID ${businessId} for user ${userData.user.id}: ${error}`
+              `Error processing business with ID ${businessId} for user ${userData.user.id}: ${error}`,
             );
           }
         }

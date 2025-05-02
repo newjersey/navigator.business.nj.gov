@@ -14,7 +14,7 @@ import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const getHiddenCertifications = (
   business: Business | undefined,
-  certifications: Certification[]
+  certifications: Certification[],
 ): Certification[] => {
   if (!business) return [];
 
@@ -36,7 +36,7 @@ export const sortCertifications = (certifications: Certification[]): Certificati
 };
 export const getVisibleCertifications = (
   certifications: Certification[],
-  business: Business | undefined
+  business: Business | undefined,
 ): Certification[] => {
   if (!business) return [];
 
@@ -57,8 +57,13 @@ export const sortFundingsForUser = (fundings: Funding[], userData?: UserData): F
     return nameA.localeCompare(nameB);
   });
   if (userData?.user.accountCreationSource) {
-    const agencySource = mapAccountCreationSourceToAgencySource(userData.user.accountCreationSource);
-    const agencySortedFundings = prioritizeFundingByAgencySource(statusSortedFundings, agencySource);
+    const agencySource = mapAccountCreationSourceToAgencySource(
+      userData.user.accountCreationSource,
+    );
+    const agencySortedFundings = prioritizeFundingByAgencySource(
+      statusSortedFundings,
+      agencySource,
+    );
     return sortFundingsByPrioritization(agencySortedFundings);
   }
   return sortFundingsByPrioritization(statusSortedFundings);
@@ -105,7 +110,7 @@ const sortFundingsByPrioritization = (fundings: Funding[]): Funding[] => {
 };
 export const getVisibleSideBarCards = (
   business: Business | undefined,
-  sidebarDisplayContent: Record<string, SidebarCardContent> | undefined
+  sidebarDisplayContent: Record<string, SidebarCardContent> | undefined,
 ): SidebarCardContent[] => {
   if (!business || !sidebarDisplayContent) return [];
 
@@ -113,13 +118,19 @@ export const getVisibleSideBarCards = (
     return sidebarDisplayContent[id];
   });
 };
-export const getVisibleFundings = (fundings: Funding[], business: Business | undefined): Funding[] => {
+export const getVisibleFundings = (
+  fundings: Funding[],
+  business: Business | undefined,
+): Funding[] => {
   if (!business) return [];
   return fundings.filter((it) => {
     return !business?.preferences.hiddenFundingIds.includes(it.id);
   });
 };
-export const getHiddenFundings = (business: Business | undefined, fundings: Funding[]): Funding[] => {
+export const getHiddenFundings = (
+  business: Business | undefined,
+  fundings: Funding[],
+): Funding[] => {
   if (!business) return [];
   return fundings.filter((it: Funding) => {
     return business.preferences.hiddenFundingIds.includes(it.id);
@@ -141,11 +152,18 @@ export const filterFundings = ({
       return false;
     }
 
-    if (it.dueDate && parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(getCurrentDate())) {
+    if (
+      it.dueDate &&
+      parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(getCurrentDate())
+    ) {
       return false;
     }
 
-    if (business.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown") {
+    if (
+      business.profileData.homeBasedBusiness &&
+      it.homeBased !== "yes" &&
+      it.homeBased !== "unknown"
+    ) {
       return false;
     }
 
@@ -188,7 +206,9 @@ export const filterFundings = ({
 
     if (it.certifications) {
       if (it.certifications.length > 0 && business.profileData.ownershipTypeIds.length > 0) {
-        const ownershipTypeIds = new Set(arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id));
+        const ownershipTypeIds = new Set(
+          arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id),
+        );
         const ownershipTypeCerts = it.certifications.filter((cert) => ownershipTypeIds.has(cert));
 
         if (ownershipTypeCerts.length > 0) {
@@ -268,7 +288,7 @@ export const filterCertifications = ({
 export const getForYouCardCount = (
   business: Business | undefined,
   certifications: Certification[],
-  fundings: Funding[]
+  fundings: Funding[],
 ): number => {
   let count = 0;
 
@@ -277,7 +297,10 @@ export const getForYouCardCount = (
   }
 
   if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications) {
-    count += getVisibleCertifications(filterCertifications({ certifications, business }), business).length;
+    count += getVisibleCertifications(
+      filterCertifications({ certifications, business }),
+      business,
+    ).length;
   }
 
   if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings) {

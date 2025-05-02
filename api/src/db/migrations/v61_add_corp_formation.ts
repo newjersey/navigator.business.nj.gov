@@ -284,7 +284,11 @@ export const createEmptyFormationAddress = (): v61FormationAddress => {
   };
 };
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v61BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -360,7 +364,7 @@ export const generatev61ProfileData = (overrides: Partial<v61ProfileData>): v61P
 };
 
 export const generatev61FormationFormData = (
-  overrides: Partial<v61FormationFormData>
+  overrides: Partial<v61FormationFormData>,
 ): v61FormationFormData => {
   return {
     businessSuffix: undefined,

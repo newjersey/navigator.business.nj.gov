@@ -8,7 +8,7 @@ import {
 
 export const allowFormation = (
   legalStructureId: string | undefined,
-  persona: BusinessPersona | undefined
+  persona: BusinessPersona | undefined,
 ): boolean => {
   const featureFlagMap: Partial<Record<FormationLegalType, boolean>> = {
     "foreign-limited-partnership": process.env.FEATURE_BUSINESS_FLP === "true",

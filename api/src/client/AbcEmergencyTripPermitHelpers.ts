@@ -74,7 +74,7 @@ export type ApiConfig = {
 
 export const getApiSubmissionBody = (
   applicationInfo: EmergencyTripPermitApplicationInfo,
-  config: ApiConfig
+  config: ApiConfig,
 ): ApiSubmission => {
   return {
     Account: config.account,
@@ -136,7 +136,9 @@ export const getApiSubmissionBody = (
   };
 };
 
-export const generateSampleAPISubmissionBody = (overrides: Partial<ApiSubmission>): ApiSubmission => {
+export const generateSampleAPISubmissionBody = (
+  overrides: Partial<ApiSubmission>,
+): ApiSubmission => {
   return {
     Account: "",
     Key: "",

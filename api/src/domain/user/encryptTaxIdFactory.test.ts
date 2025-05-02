@@ -21,7 +21,7 @@ describe("encryptTaxId", () => {
           taxId: "123456789000",
           encryptedTaxId: undefined,
         }),
-      })
+      }),
     );
     const response = await encryptTaxId(userData);
     expect(stubEncryptionDecryptionClient.encryptValue).toHaveBeenCalledWith("123456789000");

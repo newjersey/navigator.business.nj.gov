@@ -5,7 +5,10 @@ import { CannabisApplicationRequirementsTab } from "@/components/tasks/cannabis/
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { PriorityApplicationType, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
+import {
+  PriorityApplicationType,
+  priorityTypesObj,
+} from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -27,7 +30,9 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
 
   const [displayFirstTab, setDisplayFirstTab] = useState<boolean>(true);
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
-  const [priorityStatusState, setPriorityStatusState] = useState<Record<PriorityApplicationType, boolean>>({
+  const [priorityStatusState, setPriorityStatusState] = useState<
+    Record<PriorityApplicationType, boolean>
+  >({
     diverselyOwned: false,
     socialEquity: false,
     impactZone: false,
@@ -69,7 +74,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       !minorityOrWomenPriorityTypeSelected &&
         !veteranPriorityTypeSelected &&
         !impactZonePriorityTypeSelected &&
-        !socialEquityPriorityTypeSelected
+        !socialEquityPriorityTypeSelected,
     );
   }, business);
 

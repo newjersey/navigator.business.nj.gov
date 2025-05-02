@@ -33,7 +33,10 @@ const Home = (): ReactElement => {
   const sectionLookingForSupport = useRef(null);
   const [fireAnalyticsForSectionLookingForSupport, setFireAnalyticsForSectionLookingForSupport] =
     useState(true);
-  const sectionLookingForSupportInViewport = useIntersectionOnElement(sectionLookingForSupport, "-150px");
+  const sectionLookingForSupportInViewport = useIntersectionOnElement(
+    sectionLookingForSupport,
+    "-150px",
+  );
   const config = getMergedConfig();
 
   if (sectionHowItWorksInViewport && fireAnalyticsForSectionHowItWorks) {
@@ -94,14 +97,16 @@ const Home = (): ReactElement => {
     supportingText: string,
     imageSrc: string,
     imageAlt: string,
-    reverseOrder?: boolean
+    reverseOrder?: boolean,
   ): ReactElement => {
     return (
       <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
         <div className="grid-row margin-x-05">
           <div
             className={`desktop:grid-col ${isDesktopAndUp ? "" : "text-center"} ${
-              reverseOrder && isDesktopAndUp ? "order-last desktop:margin-left-8" : "desktop:margin-right-3"
+              reverseOrder && isDesktopAndUp
+                ? "order-last desktop:margin-left-8"
+                : "desktop:margin-right-3"
             }`}
           >
             {isDesktopAndUp ? (
@@ -205,20 +210,20 @@ const Home = (): ReactElement => {
               landingPageConfig.section5FirstHeaderText,
               landingPageConfig.section5FirstSupportingText,
               "/img/Landing-step-by-step.svg",
-              "Example step-by-step guide from the My Profile application to check business name availability, get your tax registration from the IRS, and more. A progress bar that shows completion of business formation."
+              "Example step-by-step guide from the My Profile application to check business name availability, get your tax registration from the IRS, and more. A progress bar that shows completion of business formation.",
             )}
             {renderTwoColumnRow(
               landingPageConfig.section5SecondHeaderText,
               landingPageConfig.section5SecondSupportingText,
               "/img/Landing-funding-and-certifications.svg",
               "Two example opportunity cards from the My Profile application as examples: small business lease grant funding details and veteran-owned business certification details.",
-              true
+              true,
             )}
             {renderTwoColumnRow(
               landingPageConfig.section5ThirdHeaderText,
               landingPageConfig.section5ThirdSupportingText,
               "/img/Landing-and-more.svg",
-              "Example of the calendar in the My Profile application with upcoming due dates for annual report and license renewal. Example of progress bar with the heading to check available names and form your business."
+              "Example of the calendar in the My Profile application with upcoming due dates for annual report and license renewal. Example of progress bar with the heading to check available names and form your business.",
             )}
           </section>
 

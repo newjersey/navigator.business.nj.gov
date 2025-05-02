@@ -22,26 +22,30 @@ interface Props extends FormContextFieldProps {
 
 export const AccountSetupForm = (props: Props): ReactElement => {
   const [email, setEmail] = useState<string>(props.user.email || "");
-  const [confirmEmail, setConfirmEmail] = useState<string | undefined>(props.user.email || undefined);
+  const [confirmEmail, setConfirmEmail] = useState<string | undefined>(
+    props.user.email || undefined,
+  );
   const { Config } = useConfig();
   const { registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
 
   const emailFormContextHelpers = useFormContextFieldHelpers(
     "email",
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const nameFormContextHelpers = useFormContextFieldHelpers(
     "name",
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   emailFormContextHelpers.RegisterForOnSubmit(() =>
-    props.user.email ? validateEmail(props.user.email) : false
+    props.user.email ? validateEmail(props.user.email) : false,
   );
-  nameFormContextHelpers.RegisterForOnSubmit(() => getFullNameErrorVariant(props.user.name) === "NO_ERROR");
+  nameFormContextHelpers.RegisterForOnSubmit(
+    () => getFullNameErrorVariant(props.user.name) === "NO_ERROR",
+  );
 
   const FullNameErrorMessageLookup: Record<FullNameErrorVariant, string> = {
     MISSING: Config.selfRegistration.errorTextFullName,

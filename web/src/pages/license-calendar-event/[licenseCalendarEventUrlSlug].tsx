@@ -50,7 +50,9 @@ export const getStaticProps = ({
 }: {
   params: LicenseCalendarEventUrlSlugParam;
 }): GetStaticPropsResult<Props> => {
-  const licenseEventType = params.licenseCalendarEventUrlSlug.split("-").pop() as LicenseEventSubtype;
+  const licenseEventType = params.licenseCalendarEventUrlSlug
+    .split("-")
+    .pop() as LicenseEventSubtype;
   return {
     props: {
       license: loadLicenseCalendarEventByUrlSlug(params.licenseCalendarEventUrlSlug),

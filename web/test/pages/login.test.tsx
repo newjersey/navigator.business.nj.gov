@@ -33,7 +33,7 @@ describe("login page", () => {
     render(
       <AuthContextWrapper>
         <LoginPage />
-      </AuthContextWrapper>
+      </AuthContextWrapper>,
     );
 
     await waitFor(() => {
@@ -47,7 +47,7 @@ describe("login page", () => {
     render(
       <AuthContextWrapper>
         <LoginPage />
-      </AuthContextWrapper>
+      </AuthContextWrapper>,
     );
 
     expect(mockPush).not.toHaveBeenCalled();

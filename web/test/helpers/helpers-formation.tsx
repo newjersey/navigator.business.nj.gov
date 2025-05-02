@@ -16,7 +16,10 @@ import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessUser,
@@ -91,7 +94,9 @@ export const preparePage = ({
   user,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
-  const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
+  const isValid = publicFilingLegalTypes.includes(
+    profileData.legalStructureId as PublicFilingLegalType,
+  );
   const initialBusiness = generateBusiness({
     ...business,
     profileData,
@@ -100,8 +105,8 @@ export const preparePage = ({
           { ...business.formationData },
           castPublicFilingLegalTypeToFormationType(
             profileData.legalStructureId as PublicFilingLegalType,
-            profileData.businessPersona
-          )
+            profileData.businessPersona,
+          ),
         )
       : generateFormationData({
           ...business.formationData,
@@ -114,7 +119,9 @@ export const preparePage = ({
     ...(municipalities ?? []),
   ];
   initialBusiness.formationData.formationFormData.addressMunicipality &&
-    internalMunicipalities.push(initialBusiness.formationData.formationFormData.addressMunicipality);
+    internalMunicipalities.push(
+      initialBusiness.formationData.formationFormData.addressMunicipality,
+    );
 
   const userData = generateUserData({
     user: generateUser(user ?? {}),
@@ -137,8 +144,8 @@ export const preparePage = ({
       {
         showNeedsAccountModal: false,
         setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
-      }
-    )
+      },
+    ),
   );
   return createFormationPageHelpers();
 };
@@ -209,9 +216,15 @@ export type FormationPageHelpers = {
   clickAddressSubmit: () => void;
   openAddressModal: (fieldName: string) => Promise<void>;
   fillAddressModal: (overrides: Partial<FormationSignedAddress>) => Promise<void>;
-  fillAndSubmitAddressModal: (overrides: Partial<FormationSignedAddress>, fieldName: string) => Promise<void>;
+  fillAndSubmitAddressModal: (
+    overrides: Partial<FormationSignedAddress>,
+    fieldName: string,
+  ) => Promise<void>;
   clickSubmit: () => Promise<void>;
-  selectDate: (value: DateObject, fieldType: "Business start date" | "Foreign date of formation") => void;
+  selectDate: (
+    value: DateObject,
+    fieldType: "Business start date" | "Foreign date of formation",
+  ) => void;
   uploadFile: (file: File) => void;
   completeWillPracticeLaw: (response?: boolean) => void;
 };
@@ -225,7 +238,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.blur(item);
   };
 
-  const fillAndSubmitBusinessNameStep = async (businessName = "Default Test Name"): Promise<void> => {
+  const fillAndSubmitBusinessNameStep = async (
+    businessName = "Default Test Name",
+  ): Promise<void> => {
     fillText("Search business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
@@ -250,7 +265,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
-  const fillAndSubmitNexusBusinessNameStep = async (businessName = "Default Test Name"): Promise<void> => {
+  const fillAndSubmitNexusBusinessNameStep = async (
+    businessName = "Default Test Name",
+  ): Promise<void> => {
     fillText("Search business name", businessName);
     await submitNexusBusinessNameStep();
   };
@@ -394,9 +411,14 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     return screen.getByTestId(testId) as HTMLInputElement;
   };
 
-  const getInputElementByParentTestId = (testId: string, params: { type: string }): HTMLInputElement => {
+  const getInputElementByParentTestId = (
+    testId: string,
+    params: { type: string },
+  ): HTMLInputElement => {
     // eslint-disable-next-line testing-library/no-node-access
-    return screen.getByTestId(testId).querySelector(`input[type="${params.type}"]`) as HTMLInputElement;
+    return screen
+      .getByTestId(testId)
+      .querySelector(`input[type="${params.type}"]`) as HTMLInputElement;
   };
 
   const selectByText = (label: string, value: string): void => {
@@ -424,13 +446,17 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const getSignerBox = (index: number, type: "signers" | "incorporators"): boolean => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
     return (
-      additionalSigner.getByLabelText(`${Config.formation.fields.signers.columnLabel}`) as HTMLInputElement
+      additionalSigner.getByLabelText(
+        `${Config.formation.fields.signers.columnLabel}`,
+      ) as HTMLInputElement
     ).checked;
   };
 
   const checkSignerBox = (index: number, type: "signers" | "incorporators"): void => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
-    fireEvent.click(additionalSigner.getByLabelText(`${Config.formation.fields.signers.columnLabel}`));
+    fireEvent.click(
+      additionalSigner.getByLabelText(`${Config.formation.fields.signers.columnLabel}`),
+    );
   };
 
   const clickAddressSubmit = (): void => {
@@ -446,7 +472,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
   const fillAndSubmitAddressModal = async (
     overrides: Partial<FormationSignedAddress>,
-    fieldName: string
+    fieldName: string,
   ): Promise<void> => {
     await openAddressModal(fieldName);
     await fillAddressModal(overrides);
@@ -476,7 +502,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
   const selectDate = (
     value: DateObject,
-    fieldType: "Business start date" | "Foreign date of formation"
+    fieldType: "Business start date" | "Foreign date of formation",
   ): void => {
     fillText(fieldType, value.format(defaultDisplayDateFormat));
     fireEvent.blur(screen.getByLabelText(fieldType));

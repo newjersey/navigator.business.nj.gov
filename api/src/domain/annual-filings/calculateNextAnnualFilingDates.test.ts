@@ -11,7 +11,8 @@ jest.mock("@shared/dateHelpers", () => {
     }),
   };
 });
-const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDateModule>).getCurrentDate;
+const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDateModule>)
+  .getCurrentDate;
 
 describe("calculateNextAnnualFilingDates", () => {
   describe("when today is October 5, 2021", () => {

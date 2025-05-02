@@ -13,7 +13,8 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { ReactElement, useContext } from "react";
 
-export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
+export interface Props
+  extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;
   secondaryLabel?: string;
   readOnly?: boolean;
@@ -24,10 +25,16 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
 export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props): ReactElement => {
   const context = useContext(EmergencyTripPermitContext);
   const { Config } = useConfig();
-  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, DataFormErrorMapContext);
+  const { isFormFieldInvalid } = useFormContextFieldHelpers(
+    props.fieldName,
+    DataFormErrorMapContext,
+  );
   const { getFieldErrorLabel } = useEmergencyTripPermitErrors();
 
-  const setValueForField = (fieldName: EmergencyTripPermitUserEnteredFieldNames, value: string): void => {
+  const setValueForField = (
+    fieldName: EmergencyTripPermitUserEnteredFieldNames,
+    value: string,
+  ): void => {
     context.setApplicationInfo({
       ...context.state.applicationInfo,
       [fieldName]: value,
@@ -60,8 +67,10 @@ export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props
           value={context.state.applicationInfo[props.fieldName]}
           error={isFormFieldInvalid}
           additionalValidationIsValid={() => {
-            return !getErrorStateForEmergencyTripPermitField(props.fieldName, context.state.applicationInfo)
-              .hasError;
+            return !getErrorStateForEmergencyTripPermitField(
+              props.fieldName,
+              context.state.applicationInfo,
+            ).hasError;
           }}
           validationText={getFieldErrorLabel(props.fieldName)}
           numericProps={

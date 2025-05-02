@@ -51,7 +51,9 @@ describe("onboarding - additional business", () => {
       expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
     });
 
-    const expectedTitle = templateEval(Config.onboardingDefaults.pageTitle, { Additional: "Additional" });
+    const expectedTitle = templateEval(Config.onboardingDefaults.pageTitle, {
+      Additional: "Additional",
+    });
     const step = evalHeaderStepsTemplate({ current: 1, previous: 1 });
 
     expect(screen.getByText(composeOnBoardingTitle(step, expectedTitle))).toBeInTheDocument();
@@ -66,7 +68,10 @@ describe("onboarding - additional business", () => {
       expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
     });
 
-    const previousBusinessName = getNavBarBusinessTitle(initialBusiness, IsAuthenticated.TRUE === "TRUE");
+    const previousBusinessName = getNavBarBusinessTitle(
+      initialBusiness,
+      IsAuthenticated.TRUE === "TRUE",
+    );
     const expectedText = templateEval(Config.onboardingDefaults.returnToPreviousBusiness, {
       previousBusiness: previousBusinessName,
     });
@@ -162,7 +167,10 @@ describe("onboarding - additional business", () => {
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({
         pathname: ROUTES.unsupported,
-        query: { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: "initial-business-id" },
+        query: {
+          [QUERIES.additionalBusiness]: "true",
+          [QUERIES.previousBusinessId]: "initial-business-id",
+        },
       });
     });
   });

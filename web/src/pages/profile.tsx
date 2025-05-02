@@ -49,7 +49,10 @@ import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -108,18 +111,21 @@ const ProfilePage = (props: Props): ReactElement => {
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
-  const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
+  const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] =
+    useState<boolean>(false);
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
-  const businessPersona: BusinessPersona = props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
+  const businessPersona: BusinessPersona =
+    props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
   const foreignBusinessType: ForeignBusinessType = determineForeignBusinessType(
-    profileData.foreignBusinessTypeIds
+    profileData.foreignBusinessTypeIds,
   );
-  const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
+  const [formationAddressData, setAddressData] =
+    useState<FormationAddress>(emptyFormationAddressData);
   const {
     FormFuncWrapper,
     onSubmit,
@@ -129,8 +135,12 @@ const ProfilePage = (props: Props): ReactElement => {
     getInvalidFieldIds,
   } = useFormContextHelper(createDataFormErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const redirect = (params?: { [key: string]: any }, routerType = router!.push): Promise<boolean> => {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const redirect = (
+    params?: { [key: string]: any },
+    routerType = router!.push,
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+  ): Promise<boolean> => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
@@ -234,7 +244,7 @@ const ProfilePage = (props: Props): ReactElement => {
     },
     (isValid, _errors, pageChange) => {
       !isValid && pageChange && setAlert("ERROR");
-    }
+    },
   );
 
   const sendOnSaveAnalytics = (prevProfileData: ProfileData, newProfileData: ProfileData): void => {
@@ -275,7 +285,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const shouldShowNexusBusinessNameElements = (): boolean => {
     if (!business) return false;
     return LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
-      "nexusBusinessElements"
+      "nexusBusinessElements",
     );
   };
 
@@ -285,7 +295,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const displayOpportunityAlert = LookupOperatingPhaseById(
-    profileData.operatingPhase
+    profileData.operatingPhase,
   ).displayProfileOpportunityAlert;
 
   const shouldLockMunicipality = (): boolean => {
@@ -293,7 +303,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
-    business?.profileData.operatingPhase
+    business?.profileData.operatingPhase,
   ).displayAltHomeBasedBusinessDescription;
 
   const displayHomedBaseBusinessQuestion = (): boolean => {
@@ -322,14 +332,16 @@ const ProfilePage = (props: Props): ReactElement => {
   const displayCarnivalRidesQuestion = (): boolean => {
     if (!business) return false;
     return (
-      profileData.sectorId === "arts-entertainment-and-recreation" && profileData.businessPersona === "OWNING"
+      profileData.sectorId === "arts-entertainment-and-recreation" &&
+      profileData.businessPersona === "OWNING"
     );
   };
 
   const displayVacantBuildingOwnerQuestion = (): boolean => {
     if (!business) return false;
     return (
-      (profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate") &&
+      (profileData.industryId === "real-estate-investor" ||
+        profileData.sectorId === "real-estate") &&
       (profileData.operatingPhase === "UP_AND_RUNNING" || profileData.businessPersona === "OWNING")
     );
   };
@@ -354,7 +366,11 @@ const ProfilePage = (props: Props): ReactElement => {
           <ForeignBusinessTypeField required />
         </ProfileField>
 
-        <ProfileField fieldName="businessName" isVisible={shouldShowNexusBusinessNameElements()} noLabel>
+        <ProfileField
+          fieldName="businessName"
+          isVisible={shouldShowNexusBusinessNameElements()}
+          noLabel
+        >
           <NexusBusinessNameField />
         </ProfileField>
 
@@ -385,7 +401,9 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="legalStructureId"
           noLabel
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
+          lockedValueFormatter={(legalStructureId): string =>
+            LookupLegalStructureById(legalStructureId).name
+          }
         >
           <BusinessStructure />
         </ProfileField>
@@ -622,7 +640,9 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="legalStructureId"
           noLabel
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
+          lockedValueFormatter={(legalStructureId): string =>
+            LookupLegalStructureById(legalStructureId).name
+          }
         >
           <BusinessStructure />
         </ProfileField>
@@ -775,9 +795,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="entityId"
-          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "entityId"
-          )}
+          isVisible={LookupLegalStructureById(
+            business?.profileData.legalStructureId,
+          ).elementsToDisplay.has("entityId")}
           locked={shouldLockFormationFields}
         >
           <EntityId handleChangeOverride={showNeedsAccountModalForGuest()} />
@@ -812,9 +832,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="documents"
-          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "formationDocuments"
-          )}
+          isVisible={LookupLegalStructureById(
+            business?.profileData.legalStructureId,
+          ).elementsToDisplay.has("formationDocuments")}
         >
           <ProfileDocuments />
         </ProfileField>
@@ -867,7 +887,10 @@ const ProfilePage = (props: Props): ReactElement => {
           hideHeader
           boldAltDescription
         >
-          <RadioQuestion<boolean> fieldName={"carnivalRideOwningBusiness"} choices={[true, false]} />
+          <RadioQuestion<boolean>
+            fieldName={"carnivalRideOwningBusiness"}
+            choices={[true, false]}
+          />
         </ProfileField>
 
         <ProfileField
@@ -897,9 +920,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="dateOfFormation"
-          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "formationDate"
-          )}
+          isVisible={LookupLegalStructureById(
+            business?.profileData.legalStructureId,
+          ).elementsToDisplay.has("formationDate")}
         >
           <DateOfFormation futureAllowed={false} />
         </ProfileField>
@@ -963,7 +986,10 @@ const ProfilePage = (props: Props): ReactElement => {
                 boldDescription
                 optionalText
               >
-                <RadioQuestion<boolean> fieldName={"carnivalRideOwningBusiness"} choices={[true, false]} />
+                <RadioQuestion<boolean>
+                  fieldName={"carnivalRideOwningBusiness"}
+                  choices={[true, false]}
+                />
               </ProfileField>
 
               <ProfileField
@@ -1143,7 +1169,9 @@ const ProfilePage = (props: Props): ReactElement => {
                     handleDelete={onSubmit}
                   />
                   <SingleColumnContainer>
-                    {alert && <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />}
+                    {alert && (
+                      <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />
+                    )}
                     <UserDataErrorAlert />
                   </SingleColumnContainer>
                   <div className="margin-top-1 desktop:margin-top-0">
@@ -1163,7 +1191,10 @@ const ProfilePage = (props: Props): ReactElement => {
                         }
                       >
                         <>
-                          <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+                          <form
+                            onSubmit={onSubmit}
+                            className={`usa-prose onboarding-form margin-top-2`}
+                          >
                             {getElements()}
                             <div className="margin-top-2">
                               <ActionBarLayout>

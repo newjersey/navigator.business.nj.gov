@@ -63,7 +63,7 @@ interface v0BusinessForm {
         zipCode?: string;
         license?: boolean;
         [k: string]: unknown;
-      }[]
+      }[],
     ];
     [k: string]: unknown;
   };

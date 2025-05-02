@@ -41,7 +41,9 @@ describe("Onboarding for all industries when starting a business [feature] [all]
           onOnboardingPageStartingBusiness.selectCarServiceRadio(carService);
           onOnboardingPageStartingBusiness.getCarServiceRadio(carService).should("be.checked");
 
-          const otherValues = carServiceOptions.filter((value: CarServiceType) => value !== carService);
+          const otherValues = carServiceOptions.filter(
+            (value: CarServiceType) => value !== carService,
+          );
           for (const value of otherValues) {
             onOnboardingPageStartingBusiness.getCarServiceRadio(value).should("not.be.checked");
           }
@@ -54,7 +56,9 @@ describe("Onboarding for all industries when starting a business [feature] [all]
           onOnboardingPageStartingBusiness.getChildcareRadio().should("not.exist");
         } else {
           onOnboardingPageStartingBusiness.selectChildcareRadio(isChildcareForSixOrMore);
-          onOnboardingPageStartingBusiness.getChildcareRadio(isChildcareForSixOrMore).should("be.checked");
+          onOnboardingPageStartingBusiness
+            .getChildcareRadio(isChildcareForSixOrMore)
+            .should("be.checked");
           onOnboardingPageStartingBusiness
             .getChildcareRadio(!isChildcareForSixOrMore)
             .should("not.be.checked");
@@ -68,8 +72,12 @@ describe("Onboarding for all industries when starting a business [feature] [all]
           onOnboardingPageStartingBusiness.getPetCareHousingRadio().should("not.exist");
         } else {
           onOnboardingPageStartingBusiness.selectPetCareHousingRadio(petCareHousing);
-          onOnboardingPageStartingBusiness.getPetCareHousingRadio(petCareHousing).should("be.checked");
-          onOnboardingPageStartingBusiness.getPetCareHousingRadio(!petCareHousing).should("not.be.checked");
+          onOnboardingPageStartingBusiness
+            .getPetCareHousingRadio(petCareHousing)
+            .should("be.checked");
+          onOnboardingPageStartingBusiness
+            .getPetCareHousingRadio(!petCareHousing)
+            .should("not.be.checked");
         }
 
         const willSellPetCareItems = industry.industryOnboardingQuestions.willSellPetCareItems
@@ -111,16 +119,19 @@ describe("Onboarding for all industries when starting a business [feature] [all]
               "BOTH",
             ] as ResidentialConstructionType[];
             const randomAnswerIndex = Math.floor(Math.random() * 3);
-            const residentialConstructionTypeOption = residentialConstructionChoices[randomAnswerIndex];
+            const residentialConstructionTypeOption =
+              residentialConstructionChoices[randomAnswerIndex];
 
             onOnboardingPageStartingBusiness.selectResidentialConstructionTypeRadio(
-              residentialConstructionTypeOption
+              residentialConstructionTypeOption,
             );
             onOnboardingPageStartingBusiness
               .getResidentialConstructionTypeItemsRadio(residentialConstructionTypeOption)
               .should("be.checked");
           } else {
-            onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("not.exist");
+            onOnboardingPageStartingBusiness
+              .getResidentialConstructionTypeRadio()
+              .should("not.exist");
           }
         }
 
@@ -130,14 +141,17 @@ describe("Onboarding for all industries when starting a business [feature] [all]
           "BOTH",
         ] as PropertyLeaseType[];
 
-        const propertyLeaseTypeApplicable = industry.industryOnboardingQuestions.whatIsPropertyLeaseType
+        const propertyLeaseTypeApplicable = industry.industryOnboardingQuestions
+          .whatIsPropertyLeaseType
           ? propertyLeaseTypeChoices[Math.floor(Math.random() * 3)]
           : undefined;
 
         if (propertyLeaseTypeApplicable === undefined) {
           onOnboardingPageStartingBusiness.getPropertyLeaseTypeRadio().should("not.exist");
         } else {
-          onOnboardingPageStartingBusiness.selectLongTermPropertyLeaseTypeRadio(propertyLeaseTypeApplicable);
+          onOnboardingPageStartingBusiness.selectLongTermPropertyLeaseTypeRadio(
+            propertyLeaseTypeApplicable,
+          );
           onOnboardingPageStartingBusiness
             .getPropertyLeaseTypeRadio(propertyLeaseTypeApplicable)
             .should("be.checked");
@@ -147,7 +161,9 @@ describe("Onboarding for all industries when starting a business [feature] [all]
               .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
               .should("not.exist");
           } else {
-            onOnboardingPageStartingBusiness.getHasThreeOrMoreRentalUnitsRadio(randomAnswer).should("exist");
+            onOnboardingPageStartingBusiness
+              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
+              .should("exist");
 
             onOnboardingPageStartingBusiness.selectThreeOrMoreRentalUnitsRadio(randomAnswer);
             onOnboardingPageStartingBusiness

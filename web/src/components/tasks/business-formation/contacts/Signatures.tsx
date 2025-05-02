@@ -36,7 +36,7 @@ export const Signatures = (): ReactElement => {
   // const needsSignerType = true;
   const needsSignerType = useMemo(
     () => needsSignerTypeFunc(state.formationFormData.legalType),
-    [state.formationFormData.legalType]
+    [state.formationFormData.legalType],
   );
 
   const getDescription = (): string => {
@@ -56,7 +56,10 @@ export const Signatures = (): ReactElement => {
           return {
             ...previousFormationData,
             signers: [
-              createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner),
+              createSignedEmptyFormationObject(
+                previousFormationData.legalType,
+                createEmptyFormationSigner,
+              ),
             ],
           };
         });
@@ -68,7 +71,10 @@ export const Signatures = (): ReactElement => {
         ...previousFormationData,
         signers: [
           ...(state.formationFormData.signers ?? []),
-          createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner),
+          createSignedEmptyFormationObject(
+            previousFormationData.legalType,
+            createEmptyFormationSigner,
+          ),
         ],
       };
     });
@@ -226,10 +232,13 @@ export const Signatures = (): ReactElement => {
       false;
 
     const isMissingName = (): boolean =>
-      (state.formationFormData.signers && state.formationFormData.signers[index].name.length === 0) ?? false;
+      (state.formationFormData.signers &&
+        state.formationFormData.signers[index].name.length === 0) ??
+      false;
 
     const isMissingSignature = (): boolean =>
-      (state.formationFormData.signers && !state.formationFormData.signers[index].signature) ?? false;
+      (state.formationFormData.signers && !state.formationFormData.signers[index].signature) ??
+      false;
 
     const SIGNER_NAME_MAX_LEN = 50;
     const isTooLong = (): boolean =>
@@ -237,10 +246,13 @@ export const Signatures = (): ReactElement => {
         state.formationFormData.signers[index].name.length > SIGNER_NAME_MAX_LEN) ??
       false;
 
-    const signerNameIsTooLongLabel: string = templateEval(Config.formation.general.maximumLengthErrorText, {
-      field: Config.formation.fields.signers.label,
-      maxLen: SIGNER_NAME_MAX_LEN.toString(),
-    });
+    const signerNameIsTooLongLabel: string = templateEval(
+      Config.formation.general.maximumLengthErrorText,
+      {
+        field: Config.formation.fields.signers.label,
+        maxLen: SIGNER_NAME_MAX_LEN.toString(),
+      },
+    );
 
     const getInlineValidationText = (needsSignerType: boolean): string => {
       if (isTooLong()) {
@@ -289,7 +301,8 @@ export const Signatures = (): ReactElement => {
 
     const signer = state.formationFormData.signers[index];
     const needsTypeField = BusinessSignerTypeMap[state.formationFormData.legalType].length > 1;
-    const error = signer.name.length === 0 || !signer.signature || signer.name.length > SIGNER_NAME_MAX_LEN;
+    const error =
+      signer.name.length === 0 || !signer.signature || signer.name.length > SIGNER_NAME_MAX_LEN;
     if (needsTypeField) {
       return (error || !signer.title) && hasError;
     } else {
@@ -319,13 +332,17 @@ export const Signatures = (): ReactElement => {
                   <div className="grid-row margin-top-1">
                     <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
                       <strong>
-                        <ModifiedContent>{Config.formation.fields.signers.nameLabel}</ModifiedContent>
+                        <ModifiedContent>
+                          {Config.formation.fields.signers.nameLabel}
+                        </ModifiedContent>
                       </strong>
                       {getSignatureField(0)}
                     </div>
                     {needsSignerType && (
                       <div
-                        className={`${isTabletAndUp ? "grid-col-6 padding-x-2" : "grid-col-12 margin-y-2"}`}
+                        className={`${
+                          isTabletAndUp ? "grid-col-6 padding-x-2" : "grid-col-12 margin-y-2"
+                        }`}
                       >
                         <strong>
                           <Content>{Config.formation.fields.signers.titleLabel}</Content>
@@ -348,64 +365,70 @@ export const Signatures = (): ReactElement => {
           </div>
         </div>
 
-        {(state.formationFormData.signers ?? []).slice(1).map((it: FormationSigner, _index: number) => {
-          const index = _index + 1;
-          return (
-            <div key={`signature-${index}`}>
-              {isTabletAndUp ? <></> : <hr className="margin-top-2" />}
-              <WithErrorBar
-                hasError={doesRowHaveError(index)}
-                type="ALWAYS"
-                className="grid-row margin-bottom-1"
-              >
-                <div className="grid-col">
-                  <div className="grid-row flex-align-start" data-testid={`signers-${index}`}>
-                    <div className="grid-col">
-                      <div className="grid-row margin-top-1">
-                        <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
-                          <strong>
-                            <ModifiedContent>{Config.formation.fields.signers.nameLabel}</ModifiedContent>
-                          </strong>
-                          {getSignatureField(index)}
-                        </div>
-                        {needsSignerType && (
+        {(state.formationFormData.signers ?? [])
+          .slice(1)
+          .map((it: FormationSigner, _index: number) => {
+            const index = _index + 1;
+            return (
+              <div key={`signature-${index}`}>
+                {isTabletAndUp ? <></> : <hr className="margin-top-2" />}
+                <WithErrorBar
+                  hasError={doesRowHaveError(index)}
+                  type="ALWAYS"
+                  className="grid-row margin-bottom-1"
+                >
+                  <div className="grid-col">
+                    <div className="grid-row flex-align-start" data-testid={`signers-${index}`}>
+                      <div className="grid-col">
+                        <div className="grid-row margin-top-1">
                           <div
-                            className={`${
-                              isTabletAndUp ? "grid-col-6 padding-x-2" : "grid-col-12 margin-y-2"
-                            }`}
+                            className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}
                           >
                             <strong>
-                              <Content>{Config.formation.fields.signers.titleLabel}</Content>
+                              <ModifiedContent>
+                                {Config.formation.fields.signers.nameLabel}
+                              </ModifiedContent>
                             </strong>
-                            {getTypeField(index)}
+                            {getSignatureField(index)}
                           </div>
-                        )}
+                          {needsSignerType && (
+                            <div
+                              className={`${
+                                isTabletAndUp ? "grid-col-6 padding-x-2" : "grid-col-12 margin-y-2"
+                              }`}
+                            >
+                              <strong>
+                                <Content>{Config.formation.fields.signers.titleLabel}</Content>
+                              </strong>
+                              {getTypeField(index)}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="grid-row margin-top-1" style={{ marginBottom: "1em" }}>
+                        <div>
+                          <strong>
+                            <ModifiedContent>{`${Config.formation.fields.signers.columnLabel}`}</ModifiedContent>
+                          </strong>
+                          {renderSignatureColumn({
+                            index: index,
+                          })}
+                        </div>
+                        {isTabletAndUp &&
+                          renderDeleteColumn({
+                            onClick: (): void => removeSigner(index),
+                          })}
                       </div>
                     </div>
-                    <div className="grid-row margin-top-1" style={{ marginBottom: "1em" }}>
-                      <div>
-                        <strong>
-                          <ModifiedContent>{`${Config.formation.fields.signers.columnLabel}`}</ModifiedContent>
-                        </strong>
-                        {renderSignatureColumn({
-                          index: index,
-                        })}
-                      </div>
-                      {isTabletAndUp &&
-                        renderDeleteColumn({
-                          onClick: (): void => removeSigner(index),
-                        })}
-                    </div>
+                    {!isTabletAndUp &&
+                      renderDeleteColumn({
+                        onClick: (): void => removeSigner(index),
+                      })}
                   </div>
-                  {!isTabletAndUp &&
-                    renderDeleteColumn({
-                      onClick: (): void => removeSigner(index),
-                    })}
-                </div>
-              </WithErrorBar>
-            </div>
-          );
-        })}
+                </WithErrorBar>
+              </div>
+            );
+          })}
 
         {(state.formationFormData.signers?.length ?? 0) < 10 && (
           <UnStyledButton onClick={addSignerField} dataTestid="add-new-signer">

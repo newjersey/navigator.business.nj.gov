@@ -90,7 +90,10 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
                       data-testid={"nav-bar-popup-menu"}
                       className="padding-bottom-0"
                     >
-                      <MenuItem className={"display-flex padding-y-1 menu-item-title"} disabled={true}>
+                      <MenuItem
+                        className={"display-flex padding-y-1 menu-item-title"}
+                        disabled={true}
+                      >
                         <div className="text-bold">{props.dropDownTitle}</div>
                       </MenuItem>
                       <hr className="margin-0 hr-2px" key="name-break" />

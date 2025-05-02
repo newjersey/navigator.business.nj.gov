@@ -36,7 +36,7 @@ describe("<ElevatorRegistrationTask />", () => {
         <ThemeProvider theme={createTheme()}>
           <ElevatorRegistrationTask task={task} />
         </ThemeProvider>
-      </HousingMunicipalitiesContext.Provider>
+      </HousingMunicipalitiesContext.Provider>,
     );
   };
 
@@ -60,9 +60,13 @@ describe("<ElevatorRegistrationTask />", () => {
           event: "outbound_link_clicks",
           legacy_event_category: "elevator_registration_button_click_register",
           legacy_event_action: "click",
-        })
+        }),
       );
-      expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
+      expect(mockWindowOpen).toHaveBeenCalledWith(
+        task.callToActionLink,
+        "_blank",
+        "noopener noreferrer",
+      );
     });
 
     it("can get to second tab by clicking tab", () => {
@@ -75,7 +79,7 @@ describe("<ElevatorRegistrationTask />", () => {
           event: "task_tab_clicked",
           legacy_event_category: "check_my_elevator_application_status_tab_click",
           legacy_event_action: "click",
-        })
+        }),
       );
 
       expect(screen.getByTestId("address-1")).toBeInTheDocument();
@@ -91,7 +95,7 @@ describe("<ElevatorRegistrationTask />", () => {
           event: "task_tab_continue_button_clicks",
           legacy_event_category: "elevator_registration_button_click_update",
           legacy_event_action: "click",
-        })
+        }),
       );
 
       expect(screen.getByTestId("address-1")).toBeInTheDocument();
@@ -110,14 +114,14 @@ describe("<ElevatorRegistrationTask />", () => {
           event: "form_submits",
           legacy_event_category: "elevator_registration_form_submission",
           legacy_event_action: "submit",
-        })
+        }),
       );
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           event: "form_submits",
           legacy_event_category: "elevator_registration_form_submission_failed",
           legacy_event_action: "submit",
-        })
+        }),
       );
 
       await waitFor(() => {
@@ -130,7 +134,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      expect(screen.queryByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND"),
+      ).not.toBeInTheDocument();
       const noPropertyInterestResponse = generateElevatorSafetyRegistrationSummary({
         lookupStatus: "NO PROPERTY INTERESTS FOUND",
       });
@@ -142,7 +148,7 @@ describe("<ElevatorRegistrationTask />", () => {
           event: "form_submits",
           legacy_event_category: "elevator_registration_form_submission",
           legacy_event_action: "submit",
-        })
+        }),
       );
 
       await waitFor(() => {
@@ -155,14 +161,18 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      expect(screen.queryByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND"),
+      ).not.toBeInTheDocument();
       const noRegistrationResponse = generateElevatorSafetyRegistrationSummary({
         lookupStatus: "NO REGISTRATIONS FOUND",
       });
       mockApi.checkElevatorRegistrationStatus.mockResolvedValue(noRegistrationResponse);
       fireEvent.submit(screen.getByTestId("check-status-submit"));
       await waitFor(() => {
-        expect(screen.getByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND")).toBeInTheDocument();
+        expect(
+          screen.getByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND"),
+        ).toBeInTheDocument();
       });
     });
   });

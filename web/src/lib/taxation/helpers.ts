@@ -4,16 +4,16 @@ import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalSt
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 
 const displayBusinessName = (profileData: ProfileData): boolean => {
-  const hasBusinessName = LookupLegalStructureById(profileData.legalStructureId).elementsToDisplay.has(
-    "businessName"
-  );
+  const hasBusinessName = LookupLegalStructureById(
+    profileData.legalStructureId,
+  ).elementsToDisplay.has("businessName");
   const notEmptyString = profileData.businessName !== "";
   return hasBusinessName && notEmptyString;
 };
 
 const displayResponsibleOwnerName = (profileData: ProfileData): boolean => {
   const hasResponsibleOwnerName = LookupLegalStructureById(
-    profileData.legalStructureId
+    profileData.legalStructureId,
   ).elementsToDisplay.has("responsibleOwnerName");
   const notEmptyString = profileData.responsibleOwnerName !== "";
   return hasResponsibleOwnerName && notEmptyString;

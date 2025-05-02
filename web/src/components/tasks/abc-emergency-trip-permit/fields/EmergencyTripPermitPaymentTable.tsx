@@ -38,7 +38,9 @@ export const EmergencyTripPermitPaymentTable = (): ReactElement => {
           </td>
         </tr>
         <tr>
-          <td colSpan={1}>{Config.abcEmergencyTripPermit.steps.billing.onlineProcessFeeLineItem}</td>
+          <td colSpan={1}>
+            {Config.abcEmergencyTripPermit.steps.billing.onlineProcessFeeLineItem}
+          </td>
           <td colSpan={1} className={"text-bold text-secondary-vivid-dark"}>
             {getDollarValue(5)}
           </td>

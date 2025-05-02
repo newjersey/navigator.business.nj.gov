@@ -62,7 +62,7 @@ describe("DynamicsElevatorSafetyInspectionClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -79,7 +79,7 @@ describe("DynamicsElevatorSafetyInspectionClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 });

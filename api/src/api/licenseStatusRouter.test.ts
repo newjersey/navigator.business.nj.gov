@@ -76,7 +76,9 @@ describe("licenseStatusRouter", () => {
   it("returns an empty object when update license status returns an empty object", async () => {
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
     stubUpdateLicenseStatus.mockResolvedValue({});
-    const response = await request(app).post(`/license-status`).send({ nameAndAddress: nameAndAddress });
+    const response = await request(app)
+      .post(`/license-status`)
+      .send({ nameAndAddress: nameAndAddress });
     expect(response.status).toEqual(StatusCodes.OK);
     expect(response.body).toEqual({});
   });

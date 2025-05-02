@@ -66,7 +66,7 @@ describe("<TaxTask />", () => {
     render(
       <WithStatefulBusiness initialBusiness={generateBusiness({})}>
         <TaxTask task={task} />
-      </WithStatefulBusiness>
+      </WithStatefulBusiness>,
     );
     expect(screen.getByText("some content here")).toBeInTheDocument();
     expect(screen.getByText("more content")).toBeInTheDocument();
@@ -78,14 +78,17 @@ describe("<TaxTask />", () => {
     render(
       <WithStatefulBusiness initialBusiness={generateBusiness({})}>
         <TaxTask task={task} />
-      </WithStatefulBusiness>
+      </WithStatefulBusiness>,
     );
     expect(screen.getByText(ctaText)).toBeInTheDocument();
   });
 
   it("shows disabled taxId when taxCalendar is PENDING or SUCCESS", () => {
     const business = generateBusiness({
-      profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
+      profileData: generateProfileData({
+        taxId: "*******89123",
+        encryptedTaxId: "some-encrypted-value",
+      }),
       taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
     });
     render(
@@ -93,7 +96,7 @@ describe("<TaxTask />", () => {
         <ThemeProvider theme={createTheme()}>
           <TaxTask task={task} />
         </ThemeProvider>
-      </WithStatefulBusiness>
+      </WithStatefulBusiness>,
     );
     expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
     expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPostText);
@@ -110,8 +113,8 @@ describe("<TaxTask />", () => {
           <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
           </WithStatefulBusiness>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
@@ -164,7 +167,7 @@ describe("<TaxTask />", () => {
         Config.profileDefaults.fields.taxId.default.errorTextRequired,
         {
           length: "12",
-        }
+        },
       );
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123123123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
@@ -191,21 +194,26 @@ describe("<TaxTask />", () => {
           <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
           </WithStatefulBusiness>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
+        profileData: generateProfileData({
+          taxId: "*******89123",
+          encryptedTaxId: "some-encrypted-value",
+        }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
     });
 
     it("displays Tax ID and success message when it exists in data and is 12 digits in length", () => {
       renderPage();
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/123");
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+        "***-***-*89/123",
+      );
     });
   });
 
@@ -220,8 +228,8 @@ describe("<TaxTask />", () => {
             <TaxTask task={task} />
           </WithStatefulBusiness>,
           IsAuthenticated.FALSE,
-          { showNeedsAccountModal: false, setShowNeedsAccountModal }
-        )
+          { showNeedsAccountModal: false, setShowNeedsAccountModal },
+        ),
       );
     };
 
@@ -245,7 +253,7 @@ describe("<TaxTask />", () => {
       });
       expect(userDataWasNotUpdated()).toBe(true);
       expect(
-        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
       ).not.toBeInTheDocument();
     });
 
@@ -258,7 +266,7 @@ describe("<TaxTask />", () => {
       });
       expect(userDataWasNotUpdated()).toBe(true);
       expect(
-        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
       ).not.toBeInTheDocument();
       expect(screen.getByLabelText("Tax id")).toHaveValue("");
     });
@@ -269,7 +277,7 @@ describe("<TaxTask />", () => {
       render(
         <WithStatefulBusiness initialBusiness={initialBusiness}>
           <TaxTask task={task} />
-        </WithStatefulBusiness>
+        </WithStatefulBusiness>,
       );
     };
 
@@ -282,7 +290,7 @@ describe("<TaxTask />", () => {
       renderComponent(initialBusiness);
 
       expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
-        markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+        markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd),
       );
     });
 

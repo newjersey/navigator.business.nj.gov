@@ -38,7 +38,9 @@ export const Step = (props: Props): ReactElement => {
               >
                 <ModifiedContent>{props.step.name}</ModifiedContent>
               </span>
-              {props.step.timeEstimate && <span className="text-base">({props.step.timeEstimate})</span>}
+              {props.step.timeEstimate && (
+                <span className="text-base">({props.step.timeEstimate})</span>
+              )}
             </div>
           </div>
         </div>

@@ -26,6 +26,8 @@ describe("<SkipToMainContent>", () => {
   it("fires skip_to_main_content analytics event when link is clicked", () => {
     render(<SkipToMainContent />);
     fireEvent.click(screen.getByText(Config.skipToMainContent.buttonText));
-    expect(mockAnalytics.event.skip_to_main_content.click.skip_to_main_content).toHaveBeenCalledTimes(1);
+    expect(
+      mockAnalytics.event.skip_to_main_content.click.skip_to_main_content,
+    ).toHaveBeenCalledTimes(1);
   });
 });

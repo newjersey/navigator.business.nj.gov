@@ -22,17 +22,17 @@ interface RgbApiConfiguration {
 const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false; // this variable exists in updateLicenseStatusFactory; enable both for debugging
 
 export const RegulatedBusinessDynamicsLicenseStatusClient = (
-  rgbApiConfiguration: RgbApiConfiguration
+  rgbApiConfiguration: RgbApiConfiguration,
 ): SearchLicenseStatus => {
   return async function RgbDynamicsLicenseStatusClientFunction(
-    nameAndAddress: LicenseSearchNameAndAddress
+    nameAndAddress: LicenseSearchNameAndAddress,
   ): Promise<LicenseStatusResults> {
     const accessToken = await rgbApiConfiguration.dynamicsAccessTokenClient.getAccessToken();
 
     const matchedBusinessIdsAndNames =
       await rgbApiConfiguration.rgbBusinessIdsAndNamesClient.getMatchedBusinessIdsAndNames(
         accessToken,
-        nameAndAddress.name
+        nameAndAddress.name,
       );
 
     if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
@@ -45,7 +45,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
     const businessAddressesForAllBusinessIds =
       await rgbApiConfiguration.rgbBusinessAddressesClient.getBusinessAddressesForAllBusinessIds(
         accessToken,
-        matchedBusinessIdsAndNames
+        matchedBusinessIdsAndNames,
       );
 
     if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
@@ -57,7 +57,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
 
     const matchedBusinessIdAndNameByAddress = searchBusinessAddressesForMatches(
       businessAddressesForAllBusinessIds,
-      nameAndAddress
+      nameAndAddress,
     );
 
     if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
@@ -70,7 +70,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
     const applicationIdsForAllBusinessIdsResponse =
       await rgbApiConfiguration.rgbLicenseApplicationIdsClient.getLicenseApplicationIdsForAllBusinessIds(
         accessToken,
-        matchedBusinessIdAndNameByAddress
+        matchedBusinessIdAndNameByAddress,
       );
 
     if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
@@ -83,7 +83,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
     const applicationsWithChecklistItems =
       await rgbApiConfiguration.rgbChecklistItemsClient.getChecklistItemsForAllApplications(
         accessToken,
-        applicationIdsForAllBusinessIdsResponse
+        applicationIdsForAllBusinessIdsResponse,
       );
 
     const results = formatRegulatedBusinessDynamicsApplications(applicationsWithChecklistItems);

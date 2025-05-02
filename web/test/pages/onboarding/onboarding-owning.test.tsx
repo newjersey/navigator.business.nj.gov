@@ -45,7 +45,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
         ...overrides,
       }),
       onboardingFormProgress: "UNSTARTED",
-    })
+    }),
   );
 };
 
@@ -79,7 +79,7 @@ describe("onboarding - owning a business", () => {
       fireEvent.click(screen.getByTestId("next"));
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
         ).toBeInTheDocument();
       });
       expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
@@ -114,7 +114,7 @@ describe("onboarding - owning a business", () => {
       });
 
       expect(
-        screen.queryByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).not.toBeInTheDocument();
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
@@ -170,7 +170,9 @@ describe("onboarding - owning a business", () => {
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
     expect(
-      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText)
+      page.getRadioButton(
+        Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText,
+      ),
     ).toBeChecked();
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
   });
@@ -200,7 +202,9 @@ describe("onboarding - owning a business", () => {
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
     expect(
-      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText)
+      page.getRadioButton(
+        Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText,
+      ),
     ).toBeChecked();
     page.clickNext();
     await waitFor(() => {

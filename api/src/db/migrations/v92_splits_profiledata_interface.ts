@@ -289,7 +289,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v92BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -372,7 +376,7 @@ export const createEmptyv92FormationFormData = (): v92FormationFormData => {
 };
 
 export const generatev92IndustrySpecificData = (
-  overrides: Partial<v92IndustrySpecificData>
+  overrides: Partial<v92IndustrySpecificData>,
 ): v92IndustrySpecificData => {
   return {
     liquorLicense: false,

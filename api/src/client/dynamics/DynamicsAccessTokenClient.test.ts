@@ -43,12 +43,15 @@ describe("DynamicsAccessTokenClient", () => {
 
     mockAxios.postForm.mockResolvedValue({ data: accessTokenMockResponse });
     expect(await client.getAccessToken()).toEqual(accessTokenMockResponse.access_token);
-    expect(mockAxios.postForm).toHaveBeenCalledWith(`https://login.windows.net/${TENANT_ID}/oauth2/token`, {
-      grant_type: "client_credentials",
-      resource: ORG_URL,
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-    });
+    expect(mockAxios.postForm).toHaveBeenCalledWith(
+      `https://login.windows.net/${TENANT_ID}/oauth2/token`,
+      {
+        grant_type: "client_credentials",
+        resource: ORG_URL,
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+      },
+    );
   });
 
   it("returns empty string if received data is empty", async () => {

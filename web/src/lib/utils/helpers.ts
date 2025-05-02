@@ -17,12 +17,15 @@ export const useMountEffect = (fun: () => void): void => {
   return useEffect(fun, []);
 };
 
-export const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[]) => string): T[][] =>
+export const groupBy = <T>(
+  array: T[],
+  predicate: (value: T, index: number, array: T[]) => string,
+): T[][] =>
   Object.values(
     array.reduce((acc, value, index, array) => {
       (acc[predicate(value, index, array)] ||= []).push(value);
       return acc;
-    }, {} as { [key: string]: T[] })
+    }, {} as { [key: string]: T[] }),
   );
 
 export const useOnWindowResize = (fun: () => void): void => {
@@ -36,7 +39,7 @@ export const useOnWindowResize = (fun: () => void): void => {
 
 export const useMountEffectWhenDefined = (
   func: () => void,
-  thingToBeDefined: unknown | unknown[] | undefined
+  thingToBeDefined: unknown | unknown[] | undefined,
 ): void => {
   const effectOccurred = useRef<boolean>(false);
   useEffect(() => {
@@ -96,7 +99,10 @@ export const templateEval = (template: string, args: Record<string, string>): st
   return newTemplate;
 };
 
-export const templateEvalWithExtraSpaceRemoval = (template: string, args: Record<string, string>): string => {
+export const templateEvalWithExtraSpaceRemoval = (
+  template: string,
+  args: Record<string, string>,
+): string => {
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}} `;
@@ -138,7 +144,7 @@ const getNavBarHeight = (): number | undefined => {
 
 export const scrollToTopOfElement = (
   element: HTMLDivElement | null,
-  { waitTime = 100, focusElement = false }: { waitTime?: number; focusElement?: boolean }
+  { waitTime = 100, focusElement = false }: { waitTime?: number; focusElement?: boolean },
 ): void => {
   if (element === null) {
     return;
@@ -173,7 +179,7 @@ export const scrollToTopOfElement = (
       },
       {
         threshold: 1,
-      }
+      },
     );
 
     observer.observe(element);
@@ -188,7 +194,7 @@ interface AlertProps {
 }
 
 export const OnboardingStatusLookup = (
-  configOverrides?: ConfigType
+  configOverrides?: ConfigType,
 ): Record<OnboardingStatus, AlertProps> => {
   const config = configOverrides ?? getMergedConfig();
   return {
@@ -217,11 +223,13 @@ export const getUserNameOrEmail = (userData: UserData | undefined): string => {
 
 export const validateEmail = (email: string): boolean => {
   return !!/^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z-]+\.)+[A-Za-z]{2,}))$/.test(
-    String(email).toLowerCase()
+    String(email).toLowerCase(),
   );
 };
 
-export const flipObject = <T extends string | number | symbol>(obj: Record<string, T>): Record<T, string> => {
+export const flipObject = <T extends string | number | symbol>(
+  obj: Record<string, T>,
+): Record<T, string> => {
   return Object.keys(obj).reduce((acc, key) => {
     acc[obj[key]] = key;
     return acc;
@@ -276,7 +284,9 @@ export const flattenObject = (obj: any): any => {
   }
 };
 
-export const mapMunicipalityDetailToMunicipality = (municipalityDetail: MunicipalityDetail): Municipality => {
+export const mapMunicipalityDetailToMunicipality = (
+  municipalityDetail: MunicipalityDetail,
+): Municipality => {
   return {
     displayName: municipalityDetail.townDisplayName,
     id: municipalityDetail.id,
@@ -290,11 +300,13 @@ export const isForeignCorporation = (legalStructure: FormationLegalType): boolea
 };
 
 export const isForeignCorporationOrNonprofit = (legalStructure: FormationLegalType): boolean => {
-  return ["foreign-c-corporation", "foreign-s-corporation", "foreign-nonprofit"].includes(legalStructure);
+  return ["foreign-c-corporation", "foreign-s-corporation", "foreign-nonprofit"].includes(
+    legalStructure,
+  );
 };
 
 export const getConfigFieldByLegalStructure = (
-  legalType: FormationLegalType
+  legalType: FormationLegalType,
 ): "directors" | "trustees" | "members" => {
   switch (legalType) {
     case "c-corporation":

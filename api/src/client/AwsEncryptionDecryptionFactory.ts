@@ -12,10 +12,10 @@ type Context = {
 
 export const AWSEncryptionDecryptionFactory = (
   generatorKeyId: string,
-  context: Context
+  context: Context,
 ): EncryptionDecryptionClient => {
   const { encrypt, decrypt } = AWSCrypto.buildClient(
-    AWSCrypto.CommitmentPolicy.REQUIRE_ENCRYPT_REQUIRE_DECRYPT
+    AWSCrypto.CommitmentPolicy.REQUIRE_ENCRYPT_REQUIRE_DECRYPT,
   );
   const keyring = new AWSCrypto.KmsKeyringNode({ generatorKeyId });
 

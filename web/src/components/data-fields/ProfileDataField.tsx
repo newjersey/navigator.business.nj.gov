@@ -7,7 +7,8 @@ import { ProfileContentField } from "@/lib/types/types";
 import { OutlinedInputProps, TextFieldProps } from "@mui/material";
 import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 
-export interface ProfileDataFieldProps<T = unknown> extends Omit<GenericTextFieldProps<T>, "fieldName"> {
+export interface ProfileDataFieldProps<T = unknown>
+  extends Omit<GenericTextFieldProps<T>, "fieldName"> {
   fieldName: ProfileContentField;
   fieldOptions?: TextFieldProps;
   inputProps?: OutlinedInputProps;

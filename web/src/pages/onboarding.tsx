@@ -8,7 +8,10 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
 import { AuthContext } from "@/contexts/authContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -21,7 +24,12 @@ import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness"
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
-import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
+import {
+  QUERIES,
+  QUERY_PARAMS_VALUES,
+  ROUTES,
+  routeShallowWithQuery,
+} from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
   FlowType,
@@ -134,7 +142,8 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     const removeNonProfitForDomesticEmployer = (): void => {
       const isDomesticEmployer =
-        profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
+        profileData.businessPersona === "STARTING" &&
+        profileData.industryId === "domestic-employer";
       if (profileData.businessPersona !== "STARTING") return;
       if (isDomesticEmployer) {
         removePageFromFlow("industry-page", "STARTING");
@@ -153,14 +162,16 @@ const OnboardingPage = (props: Props): ReactElement => {
     (page: number) => {
       return router && routeShallowWithQuery(router, "page", page);
     },
-    [router]
+    [router],
   );
 
   useEffect(() => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
 
-  const protectUpdateQueueAgainstRaceCondition = (currentUserData: UserData | undefined): boolean => {
+  const protectUpdateQueueAgainstRaceCondition = (
+    currentUserData: UserData | undefined,
+  ): boolean => {
     /*
     A user cannot be authenticated and have empty userData. In order to preserve any data that may
     have not yet returned, redirect the user to the landing page and out of the onboarding flow.
@@ -222,7 +233,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         const queryPage = Number(router.query[QUERIES.page]);
         const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
         const querySectorId = router.query[QUERIES.sector] as string | undefined;
-        const businessMunicipality = router.query[QUERIES.businessMunicipality] as string | undefined;
+        const businessMunicipality = router.query[QUERIES.businessMunicipality] as
+          | string
+          | undefined;
         const queryFlow = router.query[QUERIES.flow] as string;
         const utmSource = router.query[QUERIES.utmSource] as string | undefined;
 
@@ -287,7 +300,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const setBusinessPersonaAndRouteToPage = async (
     flow: string,
-    updateQueue: UpdateQueue | undefined
+    updateQueue: UpdateQueue | undefined,
   ): Promise<void> => {
     const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
     const newProfileData: ProfileData = {
@@ -307,7 +320,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const completeOnboarding = async (
     newProfileData: ProfileData,
-    updateQueue: UpdateQueue | undefined
+    updateQueue: UpdateQueue | undefined,
   ): Promise<void> => {
     if (!updateQueue) return;
 
@@ -323,8 +336,13 @@ const OnboardingPage = (props: Props): ReactElement => {
       onboardingFormProgress: "COMPLETED",
     });
 
-    if (isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness()) && OperatingPhaseId.GUEST_MODE) {
-      updateQueue.queueProfileData({ operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE });
+    if (
+      isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness()) &&
+      OperatingPhaseId.GUEST_MODE
+    ) {
+      updateQueue.queueProfileData({
+        operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
+      });
     }
 
     if (updateQueue.currentBusiness().profileData.legalStructureId) {
@@ -388,7 +406,10 @@ const OnboardingPage = (props: Props): ReactElement => {
           (await router.push({
             pathname: ROUTES.unsupported,
             query: isAdditionalBusiness
-              ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
+              ? {
+                  [QUERIES.additionalBusiness]: "true",
+                  [QUERIES.previousBusinessId]: previousBusiness?.id,
+                }
               : {},
           }));
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
@@ -423,7 +444,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         setError(undefined);
         setAlert(undefined);
       }
-    }
+    },
   );
 
   const onBack = (): void => {
@@ -532,7 +553,10 @@ const OnboardingPage = (props: Props): ReactElement => {
                             isAdditionalBusiness={isAdditionalBusiness}
                             isFinal={page.current === onboardingFlows[currentFlow].pages.length}
                           />
-                          <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
+                          <DevOnlySkipOnboardingButton
+                            setPage={setPage}
+                            routeToPage={routeToPage}
+                          />
                         </form>
                       </SingleColumnContainer>
                     </CSSTransition>

@@ -8,7 +8,11 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
-import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
+import {
+  FormationFields,
+  FormationIncorporator,
+  FormationMember,
+} from "@businessnjgovnavigator/shared/";
 import { Checkbox } from "@mui/material";
 import React, { ChangeEvent, Fragment, ReactElement, ReactNode, useState } from "react";
 
@@ -39,7 +43,7 @@ interface Props<T> {
 }
 
 export const Addresses = <T extends FormationMember | FormationIncorporator>(
-  props: Props<T>
+  props: Props<T>,
 ): ReactElement => {
   const { Config } = useConfig();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -70,14 +74,18 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     return (
       <div className="grid-col-auto mobile-sign-wrapper flex-align-center flex-justify-center">
         <label
-          htmlFor={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
+          htmlFor={
+            index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`
+          }
           className="text-bold display-only-mobile-and-tablet"
         >
           {Config.formation.fields.signers.columnLabel}
         </label>
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           <Checkbox
-            id={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
+            id={
+              index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`
+            }
             onChange={onChange}
             checked={checked}
             {...(doesFieldHaveError(fieldName) && !checked ? { color: "error" } : {})}
@@ -88,7 +96,10 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
   };
 
   const deleteAddress = (index: number): void => {
-    props.setData([...[...props.addressData].slice(0, index), ...[...props.addressData].slice(index + 1)]);
+    props.setData([
+      ...[...props.addressData].slice(0, index),
+      ...[...props.addressData].slice(index + 1),
+    ]);
   };
 
   const zebraOnOdd = (index: number): string => (index % 2 === 1 ? "bg-base-extra-light" : "");

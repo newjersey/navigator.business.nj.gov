@@ -20,7 +20,7 @@ describe("<ProfileOpportunitiesAlert />", () => {
     render(
       <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
         <ProfileOpportunitiesAlert />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
   };
 
@@ -57,23 +57,23 @@ describe("<ProfileOpportunitiesAlert />", () => {
       renderComponent(profileData);
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
+          Config.profileDefaults.fields.dateOfFormation.default.header,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.ownershipTypeIds.default.header
-        )
+          Config.profileDefaults.fields.ownershipTypeIds.default.header,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.existingEmployees.default.header
-        )
+          Config.profileDefaults.fields.existingEmployees.default.header,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.homeBasedBusiness.default.header
-        )
+          Config.profileDefaults.fields.homeBasedBusiness.default.header,
+        ),
       ).toBeInTheDocument();
     });
   });
@@ -95,28 +95,28 @@ describe("<ProfileOpportunitiesAlert />", () => {
         renderComponent(profileData);
         expect(
           within(screen.getByTestId("opp-alert")).getByText(
-            Config.profileDefaults.fields.municipality.default.header
-          )
+            Config.profileDefaults.fields.municipality.default.header,
+          ),
         ).toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.dateOfFormation.default.header
-          )
+            Config.profileDefaults.fields.dateOfFormation.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.ownershipTypeIds.default.header
-          )
+            Config.profileDefaults.fields.ownershipTypeIds.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.existingEmployees.default.header
-          )
+            Config.profileDefaults.fields.existingEmployees.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.homeBasedBusiness.default.header
-          )
+            Config.profileDefaults.fields.homeBasedBusiness.default.header,
+          ),
         ).not.toBeInTheDocument();
       });
 
@@ -135,28 +135,28 @@ describe("<ProfileOpportunitiesAlert />", () => {
         renderComponent(profileData);
         expect(
           within(screen.getByTestId("opp-alert")).getByText(
-            Config.profileDefaults.fields.dateOfFormation.default.header
-          )
+            Config.profileDefaults.fields.dateOfFormation.default.header,
+          ),
         ).toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).getByText(
-            Config.profileDefaults.fields.municipality.default.header
-          )
+            Config.profileDefaults.fields.municipality.default.header,
+          ),
         ).toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.ownershipTypeIds.default.header
-          )
+            Config.profileDefaults.fields.ownershipTypeIds.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.existingEmployees.default.header
-          )
+            Config.profileDefaults.fields.existingEmployees.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.homeBasedBusiness.default.header
-          )
+            Config.profileDefaults.fields.homeBasedBusiness.default.header,
+          ),
         ).not.toBeInTheDocument();
       });
     });
@@ -177,28 +177,28 @@ describe("<ProfileOpportunitiesAlert />", () => {
         renderComponent(profileData);
         expect(
           within(screen.getByTestId("opp-alert")).getByText(
-            Config.profileDefaults.fields.homeBasedBusiness.default.header
-          )
+            Config.profileDefaults.fields.homeBasedBusiness.default.header,
+          ),
         ).toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.dateOfFormation.default.header
-          )
+            Config.profileDefaults.fields.dateOfFormation.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.ownershipTypeIds.default.header
-          )
+            Config.profileDefaults.fields.ownershipTypeIds.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.existingEmployees.default.header
-          )
+            Config.profileDefaults.fields.existingEmployees.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.municipality.default.header
-          )
+            Config.profileDefaults.fields.municipality.default.header,
+          ),
         ).not.toBeInTheDocument();
       });
 
@@ -217,28 +217,28 @@ describe("<ProfileOpportunitiesAlert />", () => {
         renderComponent(profileData);
         expect(
           within(screen.getByTestId("opp-alert")).getByText(
-            Config.profileDefaults.fields.dateOfFormation.default.header
-          )
+            Config.profileDefaults.fields.dateOfFormation.default.header,
+          ),
         ).toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).getByText(
-            Config.profileDefaults.fields.homeBasedBusiness.default.header
-          )
+            Config.profileDefaults.fields.homeBasedBusiness.default.header,
+          ),
         ).toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.ownershipTypeIds.default.header
-          )
+            Config.profileDefaults.fields.ownershipTypeIds.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.existingEmployees.default.header
-          )
+            Config.profileDefaults.fields.existingEmployees.default.header,
+          ),
         ).not.toBeInTheDocument();
         expect(
           within(screen.getByTestId("opp-alert")).queryByText(
-            Config.profileDefaults.fields.municipality.default.header
-          )
+            Config.profileDefaults.fields.municipality.default.header,
+          ),
         ).not.toBeInTheDocument();
       });
     });

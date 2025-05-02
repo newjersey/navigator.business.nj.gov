@@ -9,7 +9,9 @@ export const SingleColumnContainer = (props: Props): ReactElement => {
   return (
     <div
       className={`${
-        props.isSmallerWidth ? "grid-container width-100" : "grid-container-widescreen desktop:padding-x-7"
+        props.isSmallerWidth
+          ? "grid-container width-100"
+          : "grid-container-widescreen desktop:padding-x-7"
       }`}
     >
       <div className="grid-row grid-gap">

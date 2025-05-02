@@ -29,10 +29,14 @@ describe("validatedFieldsForUser", () => {
     it("requires INTL address fields for foreign legal structure", () => {
       const formationFormData = generateFormationFormData(
         { businessLocationType: "INTL" },
-        { legalStructureId: "foreign-limited-liability-company" }
+        { legalStructureId: "foreign-limited-liability-company" },
       );
 
-      const expected: FormationFields[] = [...foreignValidatedFields, "addressProvince", "addressCountry"];
+      const expected: FormationFields[] = [
+        ...foreignValidatedFields,
+        "addressProvince",
+        "addressCountry",
+      ];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -40,7 +44,7 @@ describe("validatedFieldsForUser", () => {
     it("requires US address fields for foreign legal structure", () => {
       const formationFormData = generateFormationFormData(
         { businessLocationType: "US" },
-        { legalStructureId: "foreign-limited-liability-company" }
+        { legalStructureId: "foreign-limited-liability-company" },
       );
 
       const expected: FormationFields[] = [...foreignValidatedFields, "addressState"];
@@ -54,7 +58,7 @@ describe("validatedFieldsForUser", () => {
       const legalStructureId = randomFormationLegalType();
       const formationFormData = generateFormationFormData(
         { agentNumberOrManual: "MANUAL_ENTRY" },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       const expected: FormationFields[] = [
@@ -73,7 +77,7 @@ describe("validatedFieldsForUser", () => {
       const legalStructureId = randomFormationLegalType();
       const formationFormData = generateFormationFormData(
         { agentNumberOrManual: "NUMBER" },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       const expected: FormationFields[] = ["agentNumber"];
@@ -144,7 +148,7 @@ describe("validatedFieldsForUser", () => {
           canGetDistribution: false,
           canMakeDistribution: false,
         },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       const expected: FormationFields[] = [
@@ -168,7 +172,7 @@ describe("validatedFieldsForUser", () => {
           canGetDistribution: false,
           canMakeDistribution: false,
         },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
@@ -183,7 +187,7 @@ describe("validatedFieldsForUser", () => {
           canGetDistribution: true,
           canMakeDistribution: false,
         },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
@@ -198,7 +202,7 @@ describe("validatedFieldsForUser", () => {
           canGetDistribution: true,
           canMakeDistribution: true,
         },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
@@ -213,7 +217,7 @@ describe("validatedFieldsForUser", () => {
     it("isVeteranNonprofit and Provisions radio questions does not have a response", () => {
       const formationFormData = generateFormationFormData(
         { hasNonprofitBoardMembers: undefined },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       const expected: FormationFields[] = [
@@ -235,7 +239,7 @@ describe("validatedFieldsForUser", () => {
     it("isVeteranNonprofit and hasNonprofitBoardMembers radio questions are no", () => {
       const formationFormData = generateFormationFormData(
         { hasNonprofitBoardMembers: false },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       const expected: FormationFields[] = [
@@ -257,7 +261,7 @@ describe("validatedFieldsForUser", () => {
     it("displays hasNonprofitBoardMembers questions when hasNonprofitBoardMembers is true", () => {
       const formationFormData = generateFormationFormData(
         { hasNonprofitBoardMembers: true },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       const expected: FormationFields[] = [
@@ -284,13 +288,19 @@ describe("validatedFieldsForUser", () => {
           nonprofitTrusteesMethodSpecified: "IN_FORM",
           nonprofitAssetDistributionSpecified: "IN_FORM",
         },
-        { legalStructureId }
+        { legalStructureId },
       );
 
-      expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitBoardMemberQualificationsTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitBoardMemberRightsTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "nonprofitBoardMemberQualificationsTerms",
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "nonprofitBoardMemberRightsTerms",
+      );
       expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitTrusteesMethodTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitAssetDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "nonprofitAssetDistributionTerms",
+      );
     });
 
     it("does not require terms when radio question is false / IN_BYLAWS", () => {
@@ -302,21 +312,30 @@ describe("validatedFieldsForUser", () => {
           nonprofitTrusteesMethodSpecified: "IN_BYLAWS",
           nonprofitAssetDistributionSpecified: "IN_BYLAWS",
         },
-        { legalStructureId }
+        { legalStructureId },
       );
 
       expect(validatedFieldsForUser(formationFormData)).not.toContain(
-        "nonprofitBoardMemberQualificationsTerms"
+        "nonprofitBoardMemberQualificationsTerms",
       );
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("nonprofitBoardMemberRightsTerms");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("nonprofitTrusteesMethodTerms");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("nonprofitAssetDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "nonprofitBoardMemberRightsTerms",
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "nonprofitTrusteesMethodTerms",
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "nonprofitAssetDistributionTerms",
+      );
     });
   });
 
   describe("foreign c-corp", () => {
     it("requires 'practice law' and 'certificate of good standing' fields", () => {
-      const formationFormData = generateFormationFormData({}, { legalStructureId: "foreign-c-corporation" });
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId: "foreign-c-corporation" },
+      );
       expect(validatedFieldsForUser(formationFormData)).toContain("willPracticeLaw");
       expect(validatedFieldsForUser(formationFormData)).toContain("foreignGoodStandingFile");
     });
@@ -324,7 +343,10 @@ describe("validatedFieldsForUser", () => {
 
   describe("foreign nonprofit", () => {
     it("requires 'certificate of good standing' field", () => {
-      const formationFormData = generateFormationFormData({}, { legalStructureId: "foreign-nonprofit" });
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId: "foreign-nonprofit" },
+      );
       expect(validatedFieldsForUser(formationFormData)).toContain("foreignGoodStandingFile");
       expect(validatedFieldsForUser(formationFormData)).not.toContain("willPracticeLaw");
     });

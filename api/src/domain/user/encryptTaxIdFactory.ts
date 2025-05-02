@@ -5,15 +5,20 @@ import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusines
 import { maskingCharacter } from "@shared/profileData";
 import { UserData } from "@shared/userData";
 
-export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryptionClient): EncryptTaxId => {
+export const encryptTaxIdFactory = (
+  encryptionDecryptionClient: EncryptionDecryptionClient,
+): EncryptTaxId => {
   return async (userData: UserData): Promise<UserData> => {
     const currentBusiness = getCurrentBusiness(userData);
-    if (!currentBusiness.profileData.taxId || currentBusiness.profileData.taxId?.includes(maskingCharacter)) {
+    if (
+      !currentBusiness.profileData.taxId ||
+      currentBusiness.profileData.taxId?.includes(maskingCharacter)
+    ) {
       return userData;
     }
     const maskedTaxId = maskTaxId(currentBusiness.profileData.taxId as string);
     const encryptedTaxId = await encryptionDecryptionClient.encryptValue(
-      currentBusiness.profileData.taxId as string
+      currentBusiness.profileData.taxId as string,
     );
 
     return modifyCurrentBusiness(userData, (business) => ({

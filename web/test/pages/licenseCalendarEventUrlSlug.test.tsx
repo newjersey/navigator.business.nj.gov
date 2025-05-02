@@ -22,11 +22,14 @@ describe("license page", () => {
     jest.resetAllMocks();
   });
 
-  const renderLicensePage = (license: LicenseEventType, licenseEventType: LicenseEventSubtype): void => {
+  const renderLicensePage = (
+    license: LicenseEventType,
+    licenseEventType: LicenseEventSubtype,
+  ): void => {
     render(
       <ThemeProvider theme={createTheme()}>
         <LicenseCalendarEventPage license={license} licenseEventType={licenseEventType} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -64,7 +67,9 @@ describe("license page", () => {
     expect(screen.getByText("content-1")).toBeInTheDocument();
     expect(screen.getByText("summary-description-1")).toBeInTheDocument();
     expect(screen.getByText("disclaimer-text-1")).toBeInTheDocument();
-    expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false }),
+    ).toBeInTheDocument();
   });
 
   it("shows the basic renewal details and renewal date", () => {

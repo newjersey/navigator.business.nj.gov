@@ -45,7 +45,9 @@ describe("selfRegRouter", () => {
 
   describe("when record has a myNJ key", () => {
     const myNJKey = "some-mynj-key";
-    const stubRecordWithMyNJKey = generateUserData({ user: generateUser({ myNJUserKey: myNJKey }) });
+    const stubRecordWithMyNJKey = generateUserData({
+      user: generateUser({ myNJUserKey: myNJKey }),
+    });
 
     it("calls auth resume with myNJ key, saves data, & returns the auth redirect URL on success", async () => {
       const selfRegResponse = generateSelfRegResponse({ myNJUserKey: myNJKey });
@@ -137,7 +139,7 @@ describe("selfRegRouter", () => {
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(
         expect.objectContaining({
           email: email.toLowerCase(),
-        })
+        }),
       );
     });
   });

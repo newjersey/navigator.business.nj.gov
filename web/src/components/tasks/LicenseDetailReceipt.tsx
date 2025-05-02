@@ -27,7 +27,8 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
 
   const getOneLineAddress = (): string => {
     const nameAndAddress =
-      business?.licenseData?.licenses?.[taskIdLicenseNameMapping[props.licenseTaskId]]?.nameAndAddress;
+      business?.licenseData?.licenses?.[taskIdLicenseNameMapping[props.licenseTaskId]]
+        ?.nameAndAddress;
     if (!nameAndAddress) {
       return "";
     }

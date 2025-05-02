@@ -9,7 +9,7 @@ export const uploadFile = async function (
   fullName: string,
   fileContent: Buffer,
   fileType: string,
-  bucket: string
+  bucket: string,
 ): Promise<PutObjectCommandOutput> {
   const s3 = new S3Client({
     region: "us-east-1",
@@ -62,7 +62,7 @@ const escapeColons = (value: string): string => {
 export const saveFileFromUrl = async function (
   URI: string,
   fullName: string,
-  bucket: string
+  bucket: string,
 ): Promise<string> {
   return new Promise((resolve, reject) => {
     getFileFromURL(URI)

@@ -31,7 +31,9 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
         <div className={isDesktopAndUp ? "flex-fill margin-right-2" : ""}>
           {router && router.asPath === `/tasks/${businessStructureUrlSlug}` ? (
             <div data-testid={"content-when-on-business-structure-task"}>
-              <Content>{Config.businessStructurePrompt.notCompletedTaskPromptBusinessStructureTask}</Content>
+              <Content>
+                {Config.businessStructurePrompt.notCompletedTaskPromptBusinessStructureTask}
+              </Content>
             </div>
           ) : (
             <div data-testid={"content-when-not-on-business-structure-task"}>

@@ -1,4 +1,8 @@
-import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "@/lib/search/helpers";
+import {
+  findMatchInBlock,
+  findMatchInLabelledText,
+  findMatchInListText,
+} from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Certification } from "@/lib/types/types";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";

@@ -33,7 +33,10 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
-    client = RegulatedBusinessDynamicsLicenseApplicationIdsClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
+    client = RegulatedBusinessDynamicsLicenseApplicationIdsClient(
+      DEBUG ? logger : DummyLogWriter,
+      ORG_URL,
+    );
   });
 
   const mockBusinessNameAndId_1: BusinessIdAndName = {
@@ -58,14 +61,16 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
       };
 
       mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
-      await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1]);
+      await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+        mockBusinessNameAndId_1,
+      ]);
       expect(mockAxios.get).toHaveBeenCalledWith(
         `${ORG_URL}/api/data/v9.2/rgb_applications?$select=${appTypeKeysString},_rgb_apptypeid_value,rgb_name,rgb_appnumber,rgb_number,rgb_startdate,rgb_versioncode,rgb_expirationdate,statecode,statuscode,rgb_applicationid&$filter=(_rgb_businessid_value eq ${mockBusinessNameAndId_1.businessId})`,
         {
           headers: {
             Authorization: `Bearer ${mockAccessToken}`,
           },
-        }
+        },
       );
     });
 
@@ -103,7 +108,7 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
           headers: {
             Authorization: `Bearer ${mockAccessToken}`,
           },
-        }
+        },
       );
       expect(mockAxios.get).toHaveBeenCalledWith(
         `${ORG_URL}/api/data/v9.2/rgb_applications?$select=${appTypeKeysString},_rgb_apptypeid_value,rgb_name,rgb_appnumber,rgb_number,rgb_startdate,rgb_versioncode,rgb_expirationdate,statecode,statuscode,rgb_applicationid&$filter=(_rgb_businessid_value eq ${mockBusinessNameAndId_2.businessId})`,
@@ -111,7 +116,7 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
           headers: {
             Authorization: `Bearer ${mockAccessToken}`,
           },
-        }
+        },
       );
     });
 
@@ -135,7 +140,9 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
 
       mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
       expect(
-        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1])
+        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+          mockBusinessNameAndId_1,
+        ]),
       ).toEqual([
         {
           expirationDateISO: application_2.rgb_expirationdate,
@@ -188,7 +195,9 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
 
       mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
       expect(
-        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1])
+        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+          mockBusinessNameAndId_1,
+        ]),
       ).toEqual([
         {
           expirationDateISO: application_1.rgb_expirationdate,
@@ -237,7 +246,9 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
 
       mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
       expect(
-        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1])
+        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+          mockBusinessNameAndId_1,
+        ]),
       ).toEqual([
         {
           expirationDateISO: application_1.rgb_expirationdate,
@@ -280,7 +291,9 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
 
       mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
       expect(
-        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1])
+        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+          mockBusinessNameAndId_1,
+        ]),
       ).toEqual([
         {
           expirationDateISO: application_1.rgb_expirationdate,
@@ -306,7 +319,9 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
         },
       });
       await expect(
-        client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1])
+        client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+          mockBusinessNameAndId_1,
+        ]),
       ).rejects.toEqual(new Error(NO_MATCH_ERROR));
     });
 
@@ -334,7 +349,9 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
 
       mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
       expect(
-        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1])
+        await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+          mockBusinessNameAndId_1,
+        ]),
       ).toEqual([
         {
           expirationDateISO: application_1.rgb_expirationdate,
@@ -383,7 +400,7 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
         await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
           mockBusinessNameAndId_1,
           mockBusinessNameAndId_2,
-        ])
+        ]),
       ).toEqual([
         {
           applicationId: application_1.rgb_applicationid,
@@ -407,7 +424,9 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
       });
 
       await expect(
-        client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [mockBusinessNameAndId_1])
+        client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+          mockBusinessNameAndId_1,
+        ]),
       ).rejects.toEqual(500);
     });
   });
@@ -446,7 +465,7 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
         ]);
         console.log(repsonse[0].professionNameAndLicenseType);
         expect(repsonse[0].professionNameAndLicenseType).toEqual(expectedProfession);
-      }
+      },
     );
   });
 });

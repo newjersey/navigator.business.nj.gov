@@ -1,4 +1,7 @@
-import { v129Business, v129UserData } from "@db/migrations/v129_add_elevator_owning_business_to_profile";
+import {
+  v129Business,
+  v129UserData,
+} from "@db/migrations/v129_add_elevator_owning_business_to_profile";
 
 interface v130ProfileData extends v130IndustrySpecificData {
   businessPersona: v130BusinessPersona;
@@ -34,7 +37,7 @@ export const migrate_v129_to_v130 = (v129Data: v129UserData): v130UserData => {
     businesses: Object.fromEntries(
       Object.values(v129Data.businesses)
         .map((business: v129Business) => migrate_v129Business_to_v130Business(business))
-        .map((currBusiness: v130Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v130Business) => [currBusiness.id, currBusiness]),
     ),
     version: 130,
   } as v130UserData;
@@ -47,9 +50,8 @@ const migrate_v129Business_to_v130Business = (business: v129Business): v130Busin
   ) {
     business.profileData.foreignBusinessTypeIds.push("officeInNJ");
   } else if (business.profileData.nexusLocationInNewJersey === false) {
-    business.profileData.foreignBusinessTypeIds = business.profileData.foreignBusinessTypeIds.filter(
-      (id) => id !== "officeInNJ"
-    );
+    business.profileData.foreignBusinessTypeIds =
+      business.profileData.foreignBusinessTypeIds.filter((id) => id !== "officeInNJ");
   }
   delete business.profileData.nexusLocationInNewJersey;
   return business;

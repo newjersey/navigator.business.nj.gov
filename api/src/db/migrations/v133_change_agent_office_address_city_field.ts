@@ -41,7 +41,7 @@ export const migrate_v132_to_v133 = (v132Data: v132UserData): v133UserData => {
     businesses: Object.fromEntries(
       Object.values(v132Data.businesses)
         .map((business: v132Business) => migrate_v132Business_to_v133Business(business))
-        .map((currBusiness: v133Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v133Business) => [currBusiness.id, currBusiness]),
     ),
     version: 133,
   } as v133UserData;

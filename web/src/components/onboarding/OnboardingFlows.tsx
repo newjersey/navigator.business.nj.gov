@@ -94,7 +94,9 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         component: (
           <>
             <FieldLabelOnboarding fieldName="foreignBusinessTypeIds" />
-            <ForeignBusinessTypeField<OnboardingErrors> errorTypes={["REQUIRED_FOREIGN_BUSINESS_TYPE"]} />
+            <ForeignBusinessTypeField<OnboardingErrors>
+              errorTypes={["REQUIRED_FOREIGN_BUSINESS_TYPE"]}
+            />
           </>
         ),
       },

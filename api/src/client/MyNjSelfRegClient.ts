@@ -10,7 +10,10 @@ type MyNJConfig = {
   serviceUrl: string;
 };
 
-export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterType): SelfRegClient => {
+export const MyNJSelfRegClientFactory = (
+  config: MyNJConfig,
+  logger: LogWriterType,
+): SelfRegClient => {
   const logId = logger.GetId();
   const resume = (myNJUserKey: string): Promise<SelfRegResponse> => {
     return makeRequest(createResumeBody(myNJUserKey), "RESUME");
@@ -27,8 +30,8 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
     logger.LogInfo(
       `myNJ Self-Reg - Id:${logId} - Request Sent to ${config.serviceUrl} data: ${JSON.stringify(
-        body
-      )} headers: ${JSON.stringify(headers)}`
+        body,
+      )} headers: ${JSON.stringify(headers)}`,
     );
 
     return axios({
@@ -52,12 +55,12 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
         if (!success || success[0] !== "true") {
           logger.LogError(
-            `myNJ Self-Reg - Id:${logId} - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+            `myNJ Self-Reg - Id:${logId} - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`,
           );
           throw errors;
         } else {
           logger.LogInfo(
-            `myNJ Self-Reg - Id:${logId} - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+            `myNJ Self-Reg - Id:${logId} - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`,
           );
         }
 

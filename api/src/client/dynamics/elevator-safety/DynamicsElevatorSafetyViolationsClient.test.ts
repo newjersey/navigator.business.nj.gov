@@ -50,9 +50,9 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: { value: buildingResponse } });
     mockAxios.get.mockResolvedValueOnce({ data: { value: deviceIdsResponse } });
     mockAxios.get.mockResolvedValueOnce({ data: { value: violationsResponse } });
-    expect(await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId)).toEqual(
-      true
-    );
+    expect(
+      await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId),
+    ).toEqual(true);
 
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_buildings?$select=ultra_buildingid&$filter=(ultra_name eq '${address}' and _ultra_municipality_value eq '${municipalityId}')`,
@@ -60,7 +60,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -69,7 +69,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -78,7 +78,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -88,9 +88,9 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
 
     mockAxios.get.mockResolvedValueOnce({ data: { value: [] } });
 
-    expect(await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId)).toEqual(
-      false
-    );
+    expect(
+      await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId),
+    ).toEqual(false);
 
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_buildings?$select=ultra_buildingid&$filter=(ultra_name eq '${address}' and _ultra_municipality_value eq '${municipalityId}')`,
@@ -98,7 +98,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -115,9 +115,9 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
 
     mockAxios.get.mockResolvedValueOnce({ data: { value: buildingResponse } });
     mockAxios.get.mockResolvedValueOnce({ data: { value: [] } });
-    expect(await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId)).toEqual(
-      false
-    );
+    expect(
+      await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId),
+    ).toEqual(false);
 
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_buildings?$select=ultra_buildingid&$filter=(ultra_name eq '${address}' and _ultra_municipality_value eq '${municipalityId}')`,
@@ -125,7 +125,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -134,7 +134,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -159,9 +159,9 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: { value: buildingResponse } });
     mockAxios.get.mockResolvedValueOnce({ data: { value: deviceIdsResponse } });
     mockAxios.get.mockResolvedValueOnce({ data: { value: [] } });
-    expect(await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId)).toEqual(
-      false
-    );
+    expect(
+      await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId),
+    ).toEqual(false);
 
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_buildings?$select=ultra_buildingid&$filter=(ultra_name eq '${address}' and _ultra_municipality_value eq '${municipalityId}')`,
@@ -169,7 +169,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -178,7 +178,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -187,7 +187,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -224,9 +224,9 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: { value: [] } });
     mockAxios.get.mockResolvedValueOnce({ data: { value: deviceIdsResponse } });
     mockAxios.get.mockResolvedValueOnce({ data: { value: violationsResponse } });
-    expect(await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId)).toEqual(
-      true
-    );
+    expect(
+      await client.getViolationsForPropertyInterest(mockAccessToken, address, municipalityId),
+    ).toEqual(true);
 
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_buildings?$select=ultra_buildingid&$filter=(ultra_name eq '${address}' and _ultra_municipality_value eq '${municipalityId}')`,
@@ -234,7 +234,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -243,7 +243,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -252,7 +252,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -261,7 +261,7 @@ describe("DynamicsElevatorSafetyViolationClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 });

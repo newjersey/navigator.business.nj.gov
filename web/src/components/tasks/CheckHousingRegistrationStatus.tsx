@@ -23,7 +23,8 @@ const HousingRegistrationSearchErrorLookup: Record<
   string
 > = {
   NO_PROPERTY_INTEREST_FOUND: Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_HOTEL_MOTEL_REGISTRATIONS_FOUND: Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
+  NO_HOTEL_MOTEL_REGISTRATIONS_FOUND:
+    Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
   FIELDS_REQUIRED: Config.housingRegistrationSearchTask.errorTextFieldsRequired,
   SEARCH_FAILED: Config.housingRegistrationSearchTask.errorTextSearchFailed,
   NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND:
@@ -32,7 +33,9 @@ const HousingRegistrationSearchErrorLookup: Record<
 
 export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
   const [formValues, setFormValues] = useState<HousingAddress>({ address1: "" });
-  const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
+  const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(
+    undefined,
+  );
   const { business, updateQueue } = useUserData();
 
   const formattedMunicipalities = props.municipalities.map((municipality) => {
@@ -89,7 +92,7 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
   };
 
   const handleChangeForKey = (
-    key: keyof HousingAddress
+    key: keyof HousingAddress,
   ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
     return (event: ChangeEvent<HTMLInputElement>): void => {
       setFormValues((prevValues) => {
@@ -144,7 +147,9 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="municipality">{Config.housingRegistrationSearchTask.municipalityLabel}</label>
+            <label htmlFor="municipality">
+              {Config.housingRegistrationSearchTask.municipalityLabel}
+            </label>
             <MunicipalityDropdown
               fieldName={"municipalities"}
               municipalities={formattedMunicipalities}

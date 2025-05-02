@@ -28,7 +28,7 @@ describe("migrate_v73_to_v74", () => {
 
 const makeUserData = (
   profileData: v73ProfileData,
-  taskProgress: Record<string, v73TaskProgress>
+  taskProgress: Record<string, v73TaskProgress>,
 ): v73UserData => {
   return {
     user: generatev73User({}),

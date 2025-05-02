@@ -42,7 +42,9 @@ describe("DynamicsHousingPropertyInterestClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: housingPropertyInterestMockResponse });
-    expect(await client.getPropertyInterest(mockAccessToken, searchAddress, searchMunicipalityID)).toEqual({
+    expect(
+      await client.getPropertyInterest(mockAccessToken, searchAddress, searchMunicipalityID),
+    ).toEqual({
       createdOn: "2023-05-31T10:31:51Z",
       isFireSafety: true,
       isBHIRegistered: false,
@@ -58,7 +60,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -68,16 +70,16 @@ describe("DynamicsHousingPropertyInterestClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: housingInspectionMockResponse });
-    expect(await client.getPropertyInterest(mockAccessToken, searchAddress, searchMunicipalityID)).toEqual(
-      undefined
-    );
+    expect(
+      await client.getPropertyInterest(mockAccessToken, searchAddress, searchMunicipalityID),
+    ).toEqual(undefined);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode,ultra_buildingcount&$filter=(ultra_streetaddress eq '${searchAddress}' and _ultra_municipality_value eq '${searchMunicipalityID}')&$top=1`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 });

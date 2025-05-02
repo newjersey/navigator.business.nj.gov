@@ -49,7 +49,7 @@ describe("Industry Dropdown", () => {
           })}
         >
           <IndustryDropdown />
-        </WithStatefulProfileData>
+        </WithStatefulProfileData>,
       );
 
       fireEvent.mouseDown(screen.getByLabelText("Industry"));
@@ -65,7 +65,7 @@ describe("Industry Dropdown", () => {
           })}
         >
           <IndustryDropdown />
-        </WithStatefulProfileData>
+        </WithStatefulProfileData>,
       );
 
       fireEvent.mouseDown(screen.getByLabelText("Industry"));

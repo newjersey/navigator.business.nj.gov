@@ -53,9 +53,9 @@ export const IndustryDropdown = (props: Props): ReactElement => {
         : undefined;
 
     if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(industryId)) {
-      const wasCannabisPreviouslyApplicable = getIsApplicableToFunctionByFieldName("cannabisLicenseType")(
-        state.profileData.industryId
-      );
+      const wasCannabisPreviouslyApplicable = getIsApplicableToFunctionByFieldName(
+        "cannabisLicenseType",
+      )(state.profileData.industryId);
       cannabisLicenseType = wasCannabisPreviouslyApplicable
         ? state.profileData.cannabisLicenseType
         : ("CONDITIONAL" as CannabisLicenseType);
@@ -88,7 +88,10 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     setSearchText(value ? value.name : "");
   };
 
-  const getFilterOptions = (options: Industry[], state: FilterOptionsState<Industry>): Industry[] => {
+  const getFilterOptions = (
+    options: Industry[],
+    state: FilterOptionsState<Industry>,
+  ): Industry[] => {
     const filterOptions = createFilterOptions({
       matchFrom: "any",
       stringify: (option: Industry) => {
@@ -144,11 +147,15 @@ export const IndustryDropdown = (props: Props): ReactElement => {
           <li {...props}>
             {selected ? (
               <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                <MenuOptionSelected secondaryText={option.description}>{option.name}</MenuOptionSelected>
+                <MenuOptionSelected secondaryText={option.description}>
+                  {option.name}
+                </MenuOptionSelected>
               </div>
             ) : (
               <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                <MenuOptionUnselected secondaryText={splitAndBoldSearchText(option.description, searchText)}>
+                <MenuOptionUnselected
+                  secondaryText={splitAndBoldSearchText(option.description, searchText)}
+                >
                   {splitAndBoldSearchText(option.name, searchText)}
                 </MenuOptionUnselected>
               </div>

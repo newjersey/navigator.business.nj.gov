@@ -63,7 +63,7 @@ describe("<LandingPageTiles />", () => {
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
     expect(
-      mockAnalytics.event.landing_page_get_my_registration_guide_tile.click.go_to_onboarding
+      mockAnalytics.event.landing_page_get_my_registration_guide_tile.click.go_to_onboarding,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -72,9 +72,12 @@ describe("<LandingPageTiles />", () => {
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageOutOfStateTile));
 
-    expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "out-of-state" } });
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: "/onboarding",
+      query: { flow: "out-of-state" },
+    });
     expect(
-      mockAnalytics.event.landing_page_im_an_out_of_business_tile.click.go_to_onboarding
+      mockAnalytics.event.landing_page_im_an_out_of_business_tile.click.go_to_onboarding,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -83,9 +86,12 @@ describe("<LandingPageTiles />", () => {
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageTaxesTile));
 
-    expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: "/onboarding",
+      query: { flow: "up-and-running" },
+    });
     expect(
-      mockAnalytics.event.landing_page_file_and_pay_my_taxes_tile.click.go_to_onboarding
+      mockAnalytics.event.landing_page_file_and_pay_my_taxes_tile.click.go_to_onboarding,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -94,9 +100,12 @@ describe("<LandingPageTiles />", () => {
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageFundingTile));
 
-    expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: "/onboarding",
+      query: { flow: "up-and-running" },
+    });
     expect(
-      mockAnalytics.event.landing_page_find_funding_for_my_business_tile.click.go_to_onboarding
+      mockAnalytics.event.landing_page_find_funding_for_my_business_tile.click.go_to_onboarding,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -107,7 +116,7 @@ describe("<LandingPageTiles />", () => {
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
     expect(
-      mockAnalytics.event.landing_page_im_starting_a_nj_business_tile.click.go_to_onboarding
+      mockAnalytics.event.landing_page_im_starting_a_nj_business_tile.click.go_to_onboarding,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -116,9 +125,12 @@ describe("<LandingPageTiles />", () => {
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageRunBizTile));
 
-    expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: "/onboarding",
+      query: { flow: "up-and-running" },
+    });
     expect(
-      mockAnalytics.event.landing_page_im_running_a_nj_business_tile.click.go_to_onboarding
+      mockAnalytics.event.landing_page_im_running_a_nj_business_tile.click.go_to_onboarding,
     ).toHaveBeenCalledTimes(1);
   });
 });

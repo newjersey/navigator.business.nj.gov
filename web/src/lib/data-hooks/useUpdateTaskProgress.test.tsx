@@ -30,7 +30,7 @@ describe("useUpdateTaskProgress", () => {
   });
 
   const setupHook = (
-    business: Business
+    business: Business,
   ): {
     queueUpdateTaskProgress: (taskId: string, newValue: TaskProgress) => void;
     congratulatoryModal: ReactNode;
@@ -51,7 +51,7 @@ describe("useUpdateTaskProgress", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <TestComponent />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
     return {
       ...returnVal,

@@ -5,12 +5,12 @@ import axios, { AxiosError } from "axios";
 
 export const DynamicsElevatorSafetyViolationsClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): ElevatorSafetyViolationsClient => {
   const getViolationsForPropertyInterest = async (
     accessToken: string,
     address: string,
-    municipalityId: string
+    municipalityId: string,
   ): Promise<boolean> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Elevator Violations Client - Id:${logId}`);
@@ -23,7 +23,7 @@ export const DynamicsElevatorSafetyViolationsClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then(async (response) => {
         const deviceInspectionIds: string[] = [];
@@ -36,10 +36,11 @@ export const DynamicsElevatorSafetyViolationsClient = (
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
-                }
+                },
               )
               .then((response) => {
-                const inspections = response.data.value as DynamicsElevatorSafetyDeviceInspectionResponse[];
+                const inspections = response.data
+                  .value as DynamicsElevatorSafetyDeviceInspectionResponse[];
                 for (const inspection of inspections) {
                   deviceInspectionIds.push(inspection.ultra_elsadeviceinspectionid);
                 }
@@ -47,7 +48,7 @@ export const DynamicsElevatorSafetyViolationsClient = (
               .catch((error: AxiosError) => {
                 throw error.response?.status;
               });
-          })
+          }),
         );
 
         const violations: ElevatorSafetyViolation[] = [];
@@ -60,19 +61,21 @@ export const DynamicsElevatorSafetyViolationsClient = (
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
-                }
+                },
               )
               .then((response) => {
-                const violationsResponse = response.data.value as DynamicsElevatorSafetyViolationResponse[];
+                const violationsResponse = response.data
+                  .value as DynamicsElevatorSafetyViolationResponse[];
                 violationsResponse.map((violation) => {
-                  const formattedViolation = processDynamicsElevatorSafetyViolationResponse(violation);
+                  const formattedViolation =
+                    processDynamicsElevatorSafetyViolationResponse(violation);
                   violations.push(formattedViolation);
                 });
               })
               .catch((error: AxiosError) => {
                 throw error.response?.status;
               });
-          })
+          }),
         );
 
         hasViolations = violations.length > 0;
@@ -91,7 +94,7 @@ export const DynamicsElevatorSafetyViolationsClient = (
 };
 
 function processDynamicsElevatorSafetyViolationResponse(
-  response: DynamicsElevatorSafetyViolationResponse
+  response: DynamicsElevatorSafetyViolationResponse,
 ): ElevatorSafetyViolation {
   return {
     isOpen: response.statusCode === 1,

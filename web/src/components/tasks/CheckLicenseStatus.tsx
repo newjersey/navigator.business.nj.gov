@@ -44,7 +44,7 @@ const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
 export const CheckLicenseStatus = (props: Props): ReactElement => {
   const classes = useStyles();
   const [formValues, setFormValues] = useState<LicenseSearchNameAndAddress>(
-    createEmptyLicenseSearchNameAndAddress()
+    createEmptyLicenseSearchNameAndAddress(),
   );
   const { business } = useUserData();
 
@@ -55,7 +55,8 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
     const licenseDetails = business.licenseData?.licenses?.[licenseNameForTask];
     const nameAndAddress = licenseDetails?.nameAndAddress;
 
-    const hasNameAndAddress = nameAndAddress?.name && nameAndAddress?.addressLine1 && nameAndAddress?.zipCode;
+    const hasNameAndAddress =
+      nameAndAddress?.name && nameAndAddress?.addressLine1 && nameAndAddress?.zipCode;
 
     if (nameAndAddress && hasNameAndAddress) {
       setFormValues(licenseDetails.nameAndAddress);
@@ -89,7 +90,7 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
   };
 
   const handleChangeForKey = (
-    key: keyof LicenseSearchNameAndAddress
+    key: keyof LicenseSearchNameAndAddress,
   ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
     return (event: ChangeEvent<HTMLInputElement>): void => {
       setFormValues((prevValues) => {

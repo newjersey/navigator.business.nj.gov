@@ -107,7 +107,12 @@ describe.skip("Performance and Accessibility - Roadmap Tasks [all] [group3]", ()
     cy.loginByCognitoApi();
   });
 
-  const urlSlugs = ["identify-potential-lease", "check-site-requirements", "reseller", "business-plan"];
+  const urlSlugs = [
+    "identify-potential-lease",
+    "check-site-requirements",
+    "reseller",
+    "business-plan",
+  ];
 
   for (const slug of urlSlugs) {
     it(`should pass the audits on ${slug}`, () => {

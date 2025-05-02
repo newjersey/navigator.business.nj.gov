@@ -2,7 +2,11 @@ import { NonEssentialQuestion } from "@/components/data-fields/non-essential-que
 import { getMergedConfig } from "@/contexts/configContext";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { createEmptyProfileData, generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyProfileData,
+  generateProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
@@ -34,7 +38,7 @@ describe("ProfileNonEssentialQuestion", () => {
         initialData={generateProfileData({ ...profileData }) ?? createEmptyProfileData()}
       >
         <NonEssentialQuestion essentialQuestionId={essentialQuestionId} />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
   };
 
@@ -42,17 +46,17 @@ describe("ProfileNonEssentialQuestion", () => {
     renderEssentialQuestion({ essentialQuestionId: "cool-test-id" });
     expect(screen.getByText(questionText)).toBeInTheDocument();
     expect(
-      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText)
+      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText),
     ).toBeInTheDocument();
   });
 
   it("doesn't have an option pre-filled if user hasn't selected anything", () => {
     renderEssentialQuestion({ essentialQuestionId: "cool-test-id" });
     expect(
-      within(screen.getByTestId("cool-test-id-radio-no") as HTMLInputElement).getByRole("radio")
+      within(screen.getByTestId("cool-test-id-radio-no") as HTMLInputElement).getByRole("radio"),
     ).not.toBeChecked();
     expect(
-      within(screen.getByTestId("cool-test-id-radio-yes") as HTMLInputElement).getByRole("radio")
+      within(screen.getByTestId("cool-test-id-radio-yes") as HTMLInputElement).getByRole("radio"),
     ).not.toBeChecked();
   });
 

@@ -70,7 +70,9 @@ export const StateDropdown = (props: Props): ReactElement => {
     if (props.excludeTerritories) {
       result = result.filter((stateObject) => {
         return (
-          stateObject.shortCode !== "AS" && stateObject.shortCode !== "VI" && stateObject.shortCode !== "GU"
+          stateObject.shortCode !== "AS" &&
+          stateObject.shortCode !== "VI" &&
+          stateObject.shortCode !== "GU"
         );
       });
     }
@@ -105,7 +107,9 @@ export const StateDropdown = (props: Props): ReactElement => {
         return (
           <li {..._props} data-testid={option.shortCode}>
             {selected ? (
-              <MenuOptionSelected>{props.useFullName ? option.name : option.shortCode}</MenuOptionSelected>
+              <MenuOptionSelected>
+                {props.useFullName ? option.name : option.shortCode}
+              </MenuOptionSelected>
             ) : (
               <MenuOptionUnselected>
                 {props.useFullName ? option.name : option.shortCode}

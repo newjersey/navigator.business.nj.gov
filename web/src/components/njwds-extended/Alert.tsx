@@ -38,7 +38,13 @@ const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): Reac
   const roundedClass = rounded ? " radius-md" : "";
   const alertRole = props.noAlertRole ? {} : { role: "alert" };
   const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
-  const className = [defaultClassNames, roundedClass, variantClass, noIconClass, props.className ?? ""]
+  const className = [
+    defaultClassNames,
+    roundedClass,
+    variantClass,
+    noIconClass,
+    props.className ?? "",
+  ]
     .map((i) => {
       return i?.trim();
     })
@@ -60,10 +66,12 @@ const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): Reac
   return (
     <div
       className={className}
-      {...(dataTestid ? { "data-testid": dataTestid } : { "data-testid": `alert-${props.variant}` })}
+      {...(dataTestid
+        ? { "data-testid": dataTestid }
+        : { "data-testid": `alert-${props.variant}` })}
       aria-label={composeAriaGroupLabel(
         Config.calloutAlerts.calloutAlertGroupTitle,
-        AlertVariantsAriaMapping[props.variant]
+        AlertVariantsAriaMapping[props.variant],
       )}
       {...alertRole}
       ref={ref}

@@ -24,7 +24,8 @@ export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactEle
   const { Config } = useConfig();
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
-  const licenseName = props.CMS_ONLY_fakeLicenseName ?? props.anytimeActionLicenseReinstatement.licenseName;
+  const licenseName =
+    props.CMS_ONLY_fakeLicenseName ?? props.anytimeActionLicenseReinstatement.licenseName;
   const licenseDetails = business?.licenseData?.licenses?.[licenseName];
 
   return (
@@ -41,7 +42,7 @@ export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactEle
             </span>{" "}
             {licenseDetails?.expirationDateISO &&
               parseDateWithFormat(licenseDetails.expirationDateISO, defaultDateFormat).format(
-                licenseSearchDateFormat
+                licenseSearchDateFormat,
               )}
           </div>
         </div>
@@ -52,7 +53,10 @@ export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactEle
       </div>
       <HorizontalLine />
 
-      <LicenseCurrentStatusComponent licenseData={business?.licenseData} licenseName={licenseName} />
+      <LicenseCurrentStatusComponent
+        licenseData={business?.licenseData}
+        licenseName={licenseName}
+      />
 
       <Content>{props.anytimeActionLicenseReinstatement.contentMd}</Content>
 

@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
-import { TaxIdFormContext, taxIdFormContextErrorMap } from "@/components/data-fields/tax-id/TaxIdFormContext";
+import {
+  TaxIdFormContext,
+  taxIdFormContextErrorMap,
+} from "@/components/data-fields/tax-id/TaxIdFormContext";
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ConfigType } from "@/contexts/configContext";
@@ -17,7 +20,10 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props
-  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+  extends Omit<
+    ProfileDataFieldProps,
+    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+  > {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
@@ -34,14 +40,18 @@ export const SplitTaxId = ({
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
-  const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
+  const [locationValue, setLocationValue] = useState(
+    state.profileData[fieldName]?.trim().slice(9, 12) ?? "",
+  );
+  const [taxIdValue, setTaxIdValue] = useState(
+    state.profileData[fieldName]?.trim().slice(0, 9) ?? "",
+  );
 
   const { isValid, state: formContextState } = useFormContextHelper(taxIdFormContextErrorMap);
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
 
   RegisterForOnSubmit(
@@ -49,17 +59,18 @@ export const SplitTaxId = ({
       isValid() &&
       (additionalValidationIsValid && !!state.profileData.taxId
         ? additionalValidationIsValid(state.profileData.taxId)
-        : true)
+        : true),
   );
 
   const locationBoxRef = useRef<HTMLDivElement>(null);
   const taxIdBoxRef = useRef<HTMLDivElement>(null);
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxId"]["default"] = getProfileConfig({
-    config: Config,
-    persona: state.flow,
-    fieldName: "taxId",
-  });
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxId"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "taxId",
+    });
 
   const updateSplitTaxId = (taxId: string): void => {
     setTaxIdValue(taxId.trim().slice(0, 9));
@@ -137,7 +148,9 @@ export const SplitTaxId = ({
         </div>
         <div className="grid-col-12 tablet:grid-col-2">
           <div
-            className={isTabletAndUp ? "margin-top-2 margin-left-3" : "flex flex-justify-center margin-y-2"}
+            className={
+              isTabletAndUp ? "margin-top-2 margin-left-3" : "flex flex-justify-center margin-y-2"
+            }
           >
             {props.getShowHideToggleButton(updateSplitTaxId)}
           </div>

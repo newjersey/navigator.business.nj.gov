@@ -5,21 +5,21 @@ import axios from "axios";
 
 export const XrayRegistrationSearchClient = (
   logWriter: LogWriterType,
-  baseUrl: string
+  baseUrl: string,
 ): XrayRegistrationSearch => {
   const searchByAddress = async (
     addressLine1: string,
-    addressZipCode: string
+    addressZipCode: string,
   ): Promise<XrayRegistrationEntry[]> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(
-      `Xray Registration Xray Registration Search by Address - Id:${logId}, Address: ${addressLine1}, Zip: ${addressZipCode}`
+      `Xray Registration Xray Registration Search by Address - Id:${logId}, Address: ${addressLine1}, Zip: ${addressZipCode}`,
     );
     return await axios
       .get(
-        `${baseUrl}/xray_by_address?partialaddr=${encodeURIComponent(addressLine1)}&zip=${encodeURIComponent(
-          addressZipCode
-        )}`
+        `${baseUrl}/xray_by_address?partialaddr=${encodeURIComponent(
+          addressLine1,
+        )}&zip=${encodeURIComponent(addressZipCode)}`,
       )
       .then(async (response) => {
         if (response.data.data.length === 0) {
@@ -50,14 +50,16 @@ export const XrayRegistrationSearchClient = (
       })
       .then((entries) => {
         logWriter.LogInfo(
-          `Xray Registration Search by Address - Id:${logId} - Success: Returned ${entries.length} entries`
+          `Xray Registration Search by Address - Id:${logId} - Success: Returned ${entries.length} entries`,
         );
         return entries;
       })
       .catch((error) => {
         const message = (error as Error).message;
         if (message === "NOT_FOUND") {
-          logWriter.LogError(`Xray Registration Search by Address - Id:${logId} - Error: No entries found`);
+          logWriter.LogError(
+            `Xray Registration Search by Address - Id:${logId} - Error: No entries found`,
+          );
           throw error;
         }
         logWriter.LogError(`Xray Registration Search by Address - Id:${logId} - Error:`, error);
@@ -68,7 +70,7 @@ export const XrayRegistrationSearchClient = (
   const searchByBusinessName = async (businessName: string): Promise<XrayRegistrationEntry[]> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(
-      `Xray Registration Search by Business Name - Id:${logId}, Business Name: ${businessName}`
+      `Xray Registration Search by Business Name - Id:${logId}, Business Name: ${businessName}`,
     );
     return await axios
       .get(`${baseUrl}/xray_by_business_name?namepart=${encodeURIComponent(businessName)}`)
@@ -101,7 +103,7 @@ export const XrayRegistrationSearchClient = (
       })
       .then((entries) => {
         logWriter.LogInfo(
-          `Xray Registration Search by Business Name - Id:${logId} - Success: Returned ${entries.length} entries`
+          `Xray Registration Search by Business Name - Id:${logId} - Success: Returned ${entries.length} entries`,
         );
         return entries;
       })
@@ -109,11 +111,14 @@ export const XrayRegistrationSearchClient = (
         const message = (error as Error).message;
         if (message === "NOT_FOUND") {
           logWriter.LogError(
-            `Xray Registration Search by Business Name - Id:${logId} - Error: No entries found`
+            `Xray Registration Search by Business Name - Id:${logId} - Error: No entries found`,
           );
           throw error;
         }
-        logWriter.LogError(`Xray Registration Search by Business Name - Id:${logId} - Error:`, error);
+        logWriter.LogError(
+          `Xray Registration Search by Business Name - Id:${logId} - Error:`,
+          error,
+        );
         throw error;
       });
   };

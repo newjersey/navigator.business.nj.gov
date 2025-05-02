@@ -86,15 +86,21 @@ const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
   const dbaNameIsOlderThanAnHour =
     currentBusiness.profileData.nexusDbaName !== undefined &&
     currentBusiness.formationData.dbaBusinessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(currentBusiness.formationData.dbaBusinessNameAvailability.lastUpdatedTimeStamp);
+    hasBeenMoreThanOneHour(
+      currentBusiness.formationData.dbaBusinessNameAvailability.lastUpdatedTimeStamp,
+    );
 
   const businessNameIsOlderThanAnHour =
     currentBusiness.profileData.businessName !== undefined &&
     currentBusiness.formationData.businessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(currentBusiness.formationData.businessNameAvailability.lastUpdatedTimeStamp);
+    hasBeenMoreThanOneHour(
+      currentBusiness.formationData.businessNameAvailability.lastUpdatedTimeStamp,
+    );
 
   const isDba = determineIfNexusDbaNameNeeded(currentBusiness);
-  const shouldUpdateNameAvailability = isDba ? dbaNameIsOlderThanAnHour : businessNameIsOlderThanAnHour;
+  const shouldUpdateNameAvailability = isDba
+    ? dbaNameIsOlderThanAnHour
+    : businessNameIsOlderThanAnHour;
 
   return shouldUpdateNameAvailability && !currentBusiness.formationData.completedFilingPayment;
 };
@@ -129,7 +135,7 @@ export const userRouterFactory = (
   updateOperatingPhase: UpdateOperatingPhase,
   encryptionDecryptionClient: EncryptionDecryptionClient,
   timeStampBusinessSearch: TimeStampBusinessSearch,
-  logger: LogWriterType
+  logger: LogWriterType,
 ): Router => {
   const router = Router();
   const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
@@ -206,7 +212,9 @@ export const userRouterFactory = (
     const userDataWithUpdatedLegalStructure = await updateLegalStructureIfNeeded(userData);
     const userDataWithAnnualFilings = getAnnualFilings(userDataWithUpdatedLegalStructure);
     const userDataWithUpdatedOperatingPhase = updateOperatingPhase(userDataWithAnnualFilings);
-    const userDataWithUpdatedSidebarCards = updateRoadmapSidebarCards(userDataWithUpdatedOperatingPhase);
+    const userDataWithUpdatedSidebarCards = updateRoadmapSidebarCards(
+      userDataWithUpdatedOperatingPhase,
+    );
     const userDataWithEncryptedTaxId = await encryptTaxId(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedTaxId);
 

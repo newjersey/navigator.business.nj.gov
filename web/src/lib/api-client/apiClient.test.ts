@@ -74,7 +74,7 @@ describe("apiClient", () => {
       { nameAndAddress },
       {
         headers: { Authorization: "Bearer some-token" },
-      }
+      },
     );
   });
 
@@ -82,9 +82,13 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
     await postTaxFilingsOnboarding(taxIdAndBusinessName);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/onboarding", taxIdAndBusinessName, {
-      headers: { Authorization: "Bearer some-token" },
-    });
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/taxFilings/onboarding",
+      taxIdAndBusinessName,
+      {
+        headers: { Authorization: "Bearer some-token" },
+      },
+    );
   });
 
   it("posts taxFilings lookup request", async () => {
@@ -110,11 +114,13 @@ describe("apiClient", () => {
     const inputFile = generateInputFile({});
 
     mockAxios.post.mockResolvedValue({ data: responseUserData });
-    expect(await postBusinessFormation(inputUserData, returnUrl, inputFile)).toEqual(responseUserData);
+    expect(await postBusinessFormation(inputUserData, returnUrl, inputFile)).toEqual(
+      responseUserData,
+    );
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/formation",
       { userData: inputUserData, returnUrl, foreignGoodStandingFile: inputFile },
-      { headers: { Authorization: "Bearer some-token" } }
+      { headers: { Authorization: "Bearer some-token" } },
     );
   });
 

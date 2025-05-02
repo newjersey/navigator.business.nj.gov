@@ -53,7 +53,9 @@ export const migrate_v31_to_v32 = (v31Data: v31UserData): v32UserData => {
         userTesting: v31Data.user.externalStatus.userTesting
           ? {
               success: v31Data.user.externalStatus.userTesting.success,
-              status: v31Data.user.externalStatus.userTesting.success ? "SUCCESS" : "CONNECTION_ERROR",
+              status: v31Data.user.externalStatus.userTesting.success
+                ? "SUCCESS"
+                : "CONNECTION_ERROR",
             }
           : undefined,
       },
@@ -107,7 +109,11 @@ export type v32TaxFilingData = {
   filings: v32TaxFiling[];
 };
 
-export type v32EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
+export type v32EntityIdStatus =
+  | "UNKNOWN"
+  | "EXISTS_AND_REGISTERED"
+  | "EXISTS_NOT_REGISTERED"
+  | "NOT_FOUND";
 
 export type v32TaxFiling = {
   identifier: string;

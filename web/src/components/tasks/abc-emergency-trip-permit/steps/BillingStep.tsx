@@ -14,7 +14,7 @@ export const BillingStep = (): ReactElement => {
   const { Config } = useConfig();
   const context = useContext(EmergencyTripPermitContext);
   const [showAdditionalEmailDownloadLink, setShowAdditionalEmailDownloadLink] = useState(
-    context.state.applicationInfo.additionalEmail !== ""
+    context.state.applicationInfo.additionalEmail !== "",
   );
   const isMobile = useMediaQuery(MediaQueries.isMobile);
 
@@ -82,7 +82,9 @@ export const BillingStep = (): ReactElement => {
               }
             />
             <FormControlLabel
-              label={Config.abcEmergencyTripPermit.steps.billing.textMessageDownloadLinkCheckboxLabel}
+              label={
+                Config.abcEmergencyTripPermit.steps.billing.textMessageDownloadLinkCheckboxLabel
+              }
               control={
                 <Checkbox
                   checked={context.state.applicationInfo.shouldSendTextConfirmation}
@@ -100,11 +102,15 @@ export const BillingStep = (): ReactElement => {
               <EmergencyTripPermitTextFieldEntry fieldName={"textMsgMobile"} required />
             )}
             <FormControlLabel
-              label={Config.abcEmergencyTripPermit.steps.billing.additionalEmailDownloadLinkCheckboxLabel}
+              label={
+                Config.abcEmergencyTripPermit.steps.billing.additionalEmailDownloadLinkCheckboxLabel
+              }
               control={
                 <Checkbox
                   checked={showAdditionalEmailDownloadLink}
-                  onChange={(event): void => setShowAdditionalEmailDownloadLink(event.target.checked)}
+                  onChange={(event): void =>
+                    setShowAdditionalEmailDownloadLink(event.target.checked)
+                  }
                   id="textMessageDownloadLinkCheckbox"
                 />
               }

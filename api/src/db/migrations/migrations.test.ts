@@ -20,7 +20,9 @@ const areUserDatasEqual = (userData1: object, userData2: object): boolean => {
               const firstPeriodIndex = subkey.indexOf(".");
               const subkeyAfterBusinessId = subkey.slice(firstPeriodIndex + 1);
               if (subkeyAfterBusinessId.includes(".")) {
-                const everythingAfterIdSingleString = "business-id-value.".concat(subkeyAfterBusinessId);
+                const everythingAfterIdSingleString = "business-id-value.".concat(
+                  subkeyAfterBusinessId,
+                );
                 return `${key}.${everythingAfterIdSingleString}`;
               } else {
                 return `${key}.business-id-value`;
@@ -165,7 +167,9 @@ describe("migrations", () => {
           migratedUser = func(migratedUser);
         }
       } catch (error) {
-        logger.LogError(`Dynamo User Migration Test Error - Error: ${error} - Data: ${migratedUser}`);
+        logger.LogError(
+          `Dynamo User Migration Test Error - Error: ${error} - Data: ${migratedUser}`,
+        );
       }
 
       const userDataEqual = areUserDatasEqual(currentUser, migratedUser as object);

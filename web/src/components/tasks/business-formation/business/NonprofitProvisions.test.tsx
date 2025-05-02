@@ -45,7 +45,7 @@ describe("<NonprofitProvisions />", () => {
   const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>,
-    municipalities?: Municipality[]
+    municipalities?: Municipality[],
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
@@ -87,29 +87,38 @@ describe("<NonprofitProvisions />", () => {
           nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
           nonprofitBoardMemberQualificationsTerms: "some terms here",
           nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
-        }
+        },
       );
       page.chooseRadio(`hasNonprofitBoardMembers-false`);
       await page.submitBusinessStep();
-      expect(currentBusiness().formationData.formationFormData.hasNonprofitBoardMembers).toEqual(false);
+      expect(currentBusiness().formationData.formationFormData.hasNonprofitBoardMembers).toEqual(
+        false,
+      );
       expect(
-        currentBusiness().formationData.formationFormData.nonprofitBoardMemberQualificationsSpecified
+        currentBusiness().formationData.formationFormData
+          .nonprofitBoardMemberQualificationsSpecified,
       ).toBeUndefined();
       expect(
-        currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsSpecified
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsSpecified,
       ).toBeUndefined();
       expect(
-        currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodSpecified
+        currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodSpecified,
       ).toBeUndefined();
       expect(
-        currentBusiness().formationData.formationFormData.nonprofitAssetDistributionSpecified
+        currentBusiness().formationData.formationFormData.nonprofitAssetDistributionSpecified,
       ).toBeUndefined();
       expect(
-        currentBusiness().formationData.formationFormData.nonprofitBoardMemberQualificationsTerms
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberQualificationsTerms,
       ).toEqual("");
-      expect(currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsTerms).toEqual("");
-      expect(currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodTerms).toEqual("");
-      expect(currentBusiness().formationData.formationFormData.nonprofitAssetDistributionTerms).toEqual("");
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsTerms,
+      ).toEqual("");
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodTerms,
+      ).toEqual("");
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitAssetDistributionTerms,
+      ).toEqual("");
     });
 
     it("removes field interaction and error text when resetting fields", async () => {
@@ -118,7 +127,7 @@ describe("<NonprofitProvisions />", () => {
         {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
-        }
+        },
       );
       page.chooseRadio("nonprofitBoardMemberRightsSpecified-IN_FORM");
       expect(screen.queryByText(Config.formation.general.genericErrorText)).not.toBeInTheDocument();
@@ -136,7 +145,7 @@ describe("<NonprofitProvisions />", () => {
       it("shows text field when IN_FORM is selected", async () => {
         const page = await getPageHelper(
           { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, [args.radio]: undefined }
+          { hasNonprofitBoardMembers: true, [args.radio]: undefined },
         );
         const termsLabel = camelCaseToSentence(args.terms);
         expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
@@ -147,7 +156,7 @@ describe("<NonprofitProvisions />", () => {
       it("does not show text field when IN_BYLAWS is selected", async () => {
         const page = await getPageHelper(
           { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, [args.radio]: undefined }
+          { hasNonprofitBoardMembers: true, [args.radio]: undefined },
         );
         const termsLabel = camelCaseToSentence(args.terms);
         expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
@@ -161,27 +170,35 @@ describe("<NonprofitProvisions />", () => {
     it(`does not show ${args.radio} when board members is false`, async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
-        { hasNonprofitBoardMembers: false }
+        { hasNonprofitBoardMembers: false },
       );
       const termsLabel = camelCaseToSentence(args.terms);
       expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
-      expect(screen.queryByText((Config.formation.fields as any)[args.radio].body)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText((Config.formation.fields as any)[args.radio].body),
+      ).not.toBeInTheDocument();
 
       page.chooseRadio(`hasNonprofitBoardMembers-true`);
-      expect(screen.getByText((Config.formation.fields as any)[args.radio].body)).toBeInTheDocument();
+      expect(
+        screen.getByText((Config.formation.fields as any)[args.radio].body),
+      ).toBeInTheDocument();
     });
 
     it(`does not show ${args.radio} when board members is undefined`, async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
-        { hasNonprofitBoardMembers: undefined }
+        { hasNonprofitBoardMembers: undefined },
       );
       const termsLabel = camelCaseToSentence(args.terms);
       expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
-      expect(screen.queryByText((Config.formation.fields as any)[args.radio].body)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText((Config.formation.fields as any)[args.radio].body),
+      ).not.toBeInTheDocument();
 
       page.chooseRadio(`hasNonprofitBoardMembers-true`);
-      expect(screen.getByText((Config.formation.fields as any)[args.radio].body)).toBeInTheDocument();
+      expect(
+        screen.getByText((Config.formation.fields as any)[args.radio].body),
+      ).toBeInTheDocument();
     });
   });
 });

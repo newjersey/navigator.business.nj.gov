@@ -8,7 +8,7 @@ import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const emergencyTripPermitRouterFactory = (
-  emergencyTripPermitClient: EmergencyTripPermitClient
+  emergencyTripPermitClient: EmergencyTripPermitClient,
 ): Router => {
   const router = Router();
 
@@ -27,7 +27,7 @@ export const emergencyTripPermitRouterFactory = (
         .catch(async () => {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
         });
-    }
+    },
   );
 
   return router;

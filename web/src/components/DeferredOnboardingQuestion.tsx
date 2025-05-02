@@ -1,5 +1,8 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -33,7 +36,8 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
 
   FormFuncWrapper(async () => {
     if (!updateQueue || !business) return;
-    const profileDataHasNotChanged = JSON.stringify(profileData) === JSON.stringify(business.profileData);
+    const profileDataHasNotChanged =
+      JSON.stringify(profileData) === JSON.stringify(business.profileData);
     if (profileDataHasNotChanged) {
       return;
     }

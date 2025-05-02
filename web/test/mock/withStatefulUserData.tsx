@@ -3,7 +3,11 @@ import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UpdateQueue } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { StatefulDataContext, statefulDataHelpers, WithStatefulData } from "@/test/mock/withStatefulData";
+import {
+  StatefulDataContext,
+  statefulDataHelpers,
+  WithStatefulData,
+} from "@/test/mock/withStatefulData";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen } from "@testing-library/react";

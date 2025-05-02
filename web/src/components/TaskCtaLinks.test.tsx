@@ -52,7 +52,7 @@ describe("<TaskFooterCtas />", () => {
             callToActionLink: "https://www.example.com/0",
             callToActionText: "CTA Link",
           })}
-        />
+        />,
       );
 
       expect(screen.getByTestId("cta-area")).toBeInTheDocument();
@@ -66,12 +66,12 @@ describe("<TaskFooterCtas />", () => {
             callToActionLink: "https://www.example.com/0",
             callToActionText: "CTA Link",
           })}
-        />
+        />,
       );
 
       fireEvent.click(screen.getByText("CTA Link"));
       expect(
-        mockAnalytics.event.task_primary_call_to_action.click.open_external_website
+        mockAnalytics.event.task_primary_call_to_action.click.open_external_website,
       ).toHaveBeenCalledWith("CTA Link", "https://www.example.com/0");
     });
 
@@ -82,7 +82,7 @@ describe("<TaskFooterCtas />", () => {
             callToActionLink: "https://www.example.com/0",
             callToActionText: "CTA Link",
           })}
-        />
+        />,
       );
 
       expect(screen.getByTestId("cta-area")).toBeInTheDocument();

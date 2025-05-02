@@ -46,7 +46,7 @@ describe("Formation - BusinessNameStep", () => {
 
   const getPageHelper = (
     initialBusinessName?: string,
-    businessNameAvailability?: NameAvailability
+    businessNameAvailability?: NameAvailability,
   ): FormationPageHelpers => {
     const profileData = initialBusinessName
       ? generateFormationProfileData({ businessName: initialBusinessName })
@@ -69,7 +69,7 @@ describe("Formation - BusinessNameStep", () => {
   it("pre-fills the text field with the business name from profile", () => {
     getPageHelper("My Restaurant");
     expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-      "My Restaurant"
+      "My Restaurant",
     );
   });
 
@@ -78,7 +78,7 @@ describe("Formation - BusinessNameStep", () => {
       "My Restaurant",
       generateBusinessNameAvailability({
         status: "UNAVAILABLE",
-      })
+      }),
     );
     expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
   });
@@ -86,12 +86,12 @@ describe("Formation - BusinessNameStep", () => {
   it("overrides the text field's initial value if user types in field", () => {
     const page = getPageHelper("My Restaurant");
     expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-      "My Restaurant"
+      "My Restaurant",
     );
 
     page.fillText("Search business name", "My New Restaurant");
     expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-      "My New Restaurant"
+      "My New Restaurant",
     );
   });
 
@@ -100,7 +100,7 @@ describe("Formation - BusinessNameStep", () => {
     page.fillText("Search business name", "First Name");
     page.fillAndBlurBusinessName();
     expect(
-      screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+      screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
     ).toBeInTheDocument();
   });
 
@@ -112,7 +112,7 @@ describe("Formation - BusinessNameStep", () => {
     expect(screen.getByTestId("available-text")).toBeInTheDocument();
     await page.fillAndBlurBusinessName("New Name");
     expect(
-      screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+      screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
     ).toBeInTheDocument();
   });
 
@@ -168,7 +168,7 @@ describe("Formation - BusinessNameStep", () => {
     await page.searchBusinessName({ status: "RESTRICTED_ERROR", invalidWord: "Joint" });
     expect(screen.getByTestId("restricted-word-error-text")).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("restricted-word-error-text")).getByText("Joint", { exact: false })
+      within(screen.getByTestId("restricted-word-error-text")).getByText("Joint", { exact: false }),
     ).toBeInTheDocument();
   });
 
@@ -176,7 +176,10 @@ describe("Formation - BusinessNameStep", () => {
     const page = getPageHelper();
 
     page.fillText("Search business name", "Pizza Joint");
-    await page.searchBusinessName({ status: "UNAVAILABLE", similarNames: ["Rusty's Pizza", "Pizzapizza"] });
+    await page.searchBusinessName({
+      status: "UNAVAILABLE",
+      similarNames: ["Rusty's Pizza", "Pizzapizza"],
+    });
     expect(screen.getByText("Rusty's Pizza")).toBeInTheDocument();
     expect(screen.getByText("Pizzapizza")).toBeInTheDocument();
   });
@@ -216,7 +219,7 @@ describe("Formation - BusinessNameStep", () => {
       fireEvent.change(businessNameField, { target: { value: "Apple Pies Rockettes" } });
 
       expect(
-        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
       ).toBeInTheDocument();
     });
 
@@ -230,7 +233,9 @@ describe("Formation - BusinessNameStep", () => {
       const businessNameField = screen.getByLabelText("Search business name");
       fireEvent.change(businessNameField, { target: { value: "" } });
 
-      expect(screen.getByText(Config.formation.fields.businessName.errorInlineEmpty)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.businessName.errorInlineEmpty),
+      ).toBeInTheDocument();
     });
   });
 
@@ -249,7 +254,10 @@ describe("Formation - BusinessNameStep", () => {
 
     for (const legalStructureId of domesticTypes) {
       it(`uses default content for ${legalStructureId}`, () => {
-        const profileData = generateFormationProfileData({ legalStructureId, businessPersona: "STARTING" });
+        const profileData = generateFormationProfileData({
+          legalStructureId,
+          businessPersona: "STARTING",
+        });
         const formationData = {
           formationFormData: generateFormationFormData({}, { legalStructureId }),
           formationResponse: undefined,
@@ -267,7 +275,7 @@ describe("Formation - BusinessNameStep", () => {
 
         expect(screen.getByText(Config.formation.fields.businessName.header)).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.formation.fields.businessName.overrides.foreign.header)
+          screen.queryByText(Config.formation.fields.businessName.overrides.foreign.header),
         ).not.toBeInTheDocument();
       });
     }
@@ -287,9 +295,11 @@ describe("Formation - BusinessNameStep", () => {
         });
 
         expect(
-          screen.getByText(Config.formation.fields.businessName.overrides.foreign.header)
+          screen.getByText(Config.formation.fields.businessName.overrides.foreign.header),
         ).toBeInTheDocument();
-        expect(screen.queryByText(Config.formation.fields.businessName.header)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.fields.businessName.header),
+        ).not.toBeInTheDocument();
       });
     }
   });

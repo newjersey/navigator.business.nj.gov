@@ -14,7 +14,10 @@ const REPORT_FIELDS: (keyof ProfileData)[] = ["dateOfFormation"];
 
 const FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION: (keyof ProfileData)[] = ["municipality"];
 const FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION: (keyof ProfileData)[] = ["homeBasedBusiness"];
-const ALL_FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION = [...FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION, ...REPORT_FIELDS];
+const ALL_FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION = [
+  ...FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION,
+  ...REPORT_FIELDS,
+];
 const ALL_FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION = [
   ...FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION,
   ...REPORT_FIELDS,
@@ -22,12 +25,19 @@ const ALL_FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION = [
 const FIELDS_FOR_PROFILE = [...REPORT_FIELDS, ...OPPORTUNITY_FIELDS];
 
 export const getFieldsForProfile = (profileData: ProfileData): (keyof ProfileData)[] => {
-  const isNexusBusiness = determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS";
+  const isNexusBusiness =
+    determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS";
 
   if (profileData.businessPersona === "FOREIGN" && isNexusBusiness) {
     return nexusLocationInNewJersey(profileData)
-      ? filterByLegalStructure(ALL_FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION, profileData.legalStructureId)
-      : filterByLegalStructure(ALL_FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION, profileData.legalStructureId);
+      ? filterByLegalStructure(
+          ALL_FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION,
+          profileData.legalStructureId,
+        )
+      : filterByLegalStructure(
+          ALL_FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION,
+          profileData.legalStructureId,
+        );
   } else {
     return filterByLegalStructure(FIELDS_FOR_PROFILE, profileData.legalStructureId);
   }
@@ -35,7 +45,7 @@ export const getFieldsForProfile = (profileData: ProfileData): (keyof ProfileDat
 
 const filterByLegalStructure = (
   profileKeys: (keyof ProfileData)[],
-  legalStructureId?: string
+  legalStructureId?: string,
 ): (keyof ProfileData)[] => {
   return profileKeys.filter((field) => {
     if (field === "dateOfFormation" && legalStructureId) {

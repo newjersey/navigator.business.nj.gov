@@ -42,7 +42,7 @@ const renderComponent = (businessOverrides: Partial<Business>): void => {
           <NaicsCode />
         </WithStatefulUserData>
       </ProfileDataContext.Provider>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -57,7 +57,10 @@ describe("<NaicsCode />", () => {
   it("routes to naics code URL", () => {
     useMockRoadmapTask({ id: "determine-naics-code", urlSlug: "some-naics-url" });
     renderComponent({});
-    expect(screen.getByText(configForField.editText)).toHaveAttribute("href", "/tasks/some-naics-url");
+    expect(screen.getByText(configForField.editText)).toHaveAttribute(
+      "href",
+      "/tasks/some-naics-url",
+    );
   });
 
   it("displays NAICS code when exists", () => {

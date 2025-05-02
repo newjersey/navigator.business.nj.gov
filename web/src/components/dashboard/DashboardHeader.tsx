@@ -46,7 +46,8 @@ export const DashboardHeader = (): ReactElement => {
       return Config.dashboardHeaderDefaults.guestModeToProfileButtonText;
     }
 
-    const businessName = LookupLegalStructureById(business?.profileData.legalStructureId).requiresPublicFiling
+    const businessName = LookupLegalStructureById(business?.profileData.legalStructureId)
+      .requiresPublicFiling
       ? business?.profileData.businessName
       : business?.profileData.tradeName;
 
@@ -74,7 +75,9 @@ export const DashboardHeader = (): ReactElement => {
           {getButtonText()}
         </UnStyledButton>
         <span className="vertical-line margin-x-105 border-right-base" />
-        <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD, YYYY")}</span>{" "}
+        <span className="text-base">
+          {getCurrentDateInNewJersey().format("MMMM DD, YYYY")}
+        </span>{" "}
         <span className="text-base">{Config.dashboardHeaderDefaults.newJerseyDateBodyText}</span>
       </div>
     </>

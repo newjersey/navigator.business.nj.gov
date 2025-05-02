@@ -8,7 +8,11 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
-import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
+import {
+  FormationIncorporator,
+  FormationMember,
+  StateObject,
+} from "@businessnjgovnavigator/shared";
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
@@ -33,7 +37,7 @@ interface Props<T extends FormationMember | FormationIncorporator> {
 }
 
 export const AddressModal = <T extends FormationMember | FormationIncorporator>(
-  props: Props<T>
+  props: Props<T>,
 ): ReactElement => {
   const { business } = useUserData();
   const isStarting = isStartingBusiness(business);
@@ -65,7 +69,10 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
 
   const [addressErrorMap, setAddressErrorMap] = useState<AddressErrorMap>(createAddressErrorMap());
 
-  const getErrorStateForField = (fieldName: ErrorFields, options?: { dataOverride?: T }): ErrorState => {
+  const getErrorStateForField = (
+    fieldName: ErrorFields,
+    options?: { dataOverride?: T },
+  ): ErrorState => {
     const data = options?.dataOverride ?? addressData;
 
     const fieldWithMaxLength = (params: {
@@ -120,7 +127,10 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           dataField: "name",
         });
       case "addressState":
-        return { invalid: !data.addressState, label: Config.formation.addressModal.addressState.error };
+        return {
+          invalid: !data.addressState,
+          label: Config.formation.addressModal.addressState.error,
+        };
       case "addressZipCode":
         return {
           invalid: !data.addressZipCode || data.addressZipCode.length < 5,
@@ -146,7 +156,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
         setUseDefaultAddress(false);
       }
     },
-    [addressData, setUseDefaultAddress, props.defaultAddress]
+    [addressData, setUseDefaultAddress, props.defaultAddress],
   );
 
   useEffect(() => {
@@ -185,7 +195,10 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   };
 
   const onValidation = (fieldName: string): void => {
-    setAddressErrorMap({ ...addressErrorMap, [fieldName]: getErrorStateForField(fieldName as ErrorFields) });
+    setAddressErrorMap({
+      ...addressErrorMap,
+      [fieldName]: getErrorStateForField(fieldName as ErrorFields),
+    });
   };
 
   const onSubmit = (): void => {
@@ -198,8 +211,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           (prev: AddressErrorMap, curr: ErrorFields) => {
             return { ...prev, [curr]: getErrorStateForField(curr) };
           },
-          { ...addressErrorMap } as AddressErrorMap
-        )
+          { ...addressErrorMap } as AddressErrorMap,
+        ),
       );
       return;
     }
@@ -334,9 +347,14 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           >
             <div className="grid-row grid-gap-1">
               <div className="grid-col-12 tablet:grid-col-6">
-                <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
+                <WithErrorBar
+                  hasError={!!addressErrorMap["addressCity"].invalid}
+                  type="MOBILE-ONLY"
+                >
                   <strong>
-                    <ModifiedContent>{Config.formation.addressModal.addressCity.label}</ModifiedContent>
+                    <ModifiedContent>
+                      {Config.formation.addressModal.addressCity.label}
+                    </ModifiedContent>
                   </strong>
                   <GenericTextField
                     inputWidth="full"
@@ -359,14 +377,17 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
                 <WithErrorBar
                   hasError={
-                    !!addressErrorMap["addressState"].invalid || !!addressErrorMap["addressZipCode"].invalid
+                    !!addressErrorMap["addressState"].invalid ||
+                    !!addressErrorMap["addressZipCode"].invalid
                   }
                   type="MOBILE-ONLY"
                 >
                   <div className="grid-row grid-gap-1">
                     <div className="grid-col-5">
                       <strong>
-                        <ModifiedContent>{Config.formation.addressModal.addressState.label}</ModifiedContent>
+                        <ModifiedContent>
+                          {Config.formation.addressModal.addressState.label}
+                        </ModifiedContent>
                       </strong>
                       <StateDropdown
                         fieldName="addressState"

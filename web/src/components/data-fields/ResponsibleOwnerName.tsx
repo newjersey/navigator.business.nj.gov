@@ -1,7 +1,9 @@
 import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { ReactElement } from "react";
 
-export const ResponsibleOwnerName = (props: Omit<ProfileDataFieldProps, "fieldName">): ReactElement => {
+export const ResponsibleOwnerName = (
+  props: Omit<ProfileDataFieldProps, "fieldName">,
+): ReactElement => {
   return (
     <ProfileDataField
       fieldName="responsibleOwnerName"

@@ -1,4 +1,8 @@
-import { generatev21OnboardingData, generatev21User, v21UserData } from "@db/migrations/v21_add_tax_fields";
+import {
+  generatev21OnboardingData,
+  generatev21User,
+  v21UserData,
+} from "@db/migrations/v21_add_tax_fields";
 import { migrate_v21_to_v22 } from "@db/migrations/v22_switch_legal_structure_to_id";
 
 describe("migrate_v21_to_v22", () => {
@@ -7,7 +11,9 @@ describe("migrate_v21_to_v22", () => {
   const taskProgress = {};
 
   it("turns legalStructure into legalStructureId", () => {
-    const onboardingData = generatev21OnboardingData({ legalStructure: "limited-liability-company" });
+    const onboardingData = generatev21OnboardingData({
+      legalStructure: "limited-liability-company",
+    });
     const v21: v21UserData = {
       user,
       onboardingData,

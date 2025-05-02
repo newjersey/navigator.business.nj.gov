@@ -10,9 +10,11 @@ export const defaultFormationLegalType: PublicFilingLegalType = "limited-liabili
 
 export const castPublicFilingLegalTypeToFormationType = (
   legalStructureId: PublicFilingLegalType,
-  persona: BusinessPersona | undefined
+  persona: BusinessPersona | undefined,
 ): FormationLegalType => {
-  return `${persona === "FOREIGN" ? foreignLegalTypePrefix : ""}${legalStructureId}` as FormationLegalType;
+  return `${
+    persona === "FOREIGN" ? foreignLegalTypePrefix : ""
+  }${legalStructureId}` as FormationLegalType;
 };
 
 export type SignerTitle =
@@ -367,7 +369,11 @@ export const nonprofitBusinessSuffix = [
 
 export const foreignCorpBusinessSuffix = [...corpBusinessSuffix] as const;
 
-export const foreignCorpWillPracticeLawBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
+export const foreignCorpWillPracticeLawBusinessSuffix = [
+  ...corpBusinessSuffix,
+  "P.C.",
+  "P.A.",
+] as const;
 
 export type CorpBusinessSuffix = (typeof corpBusinessSuffix)[number];
 

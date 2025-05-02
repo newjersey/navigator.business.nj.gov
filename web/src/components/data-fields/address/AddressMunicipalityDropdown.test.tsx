@@ -1,7 +1,11 @@
 import { AddressMunicipalityDropdown } from "@/components/data-fields/address/AddressMunicipalityDropdown";
 import { generateAddress } from "@/test/factories";
 import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
-import { emptyFormationAddressData, FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
+import {
+  emptyFormationAddressData,
+  FormationAddress,
+  Municipality,
+} from "@businessnjgovnavigator/shared/";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
@@ -19,7 +23,7 @@ describe("<AddressMunicipalityDropdown  />", () => {
         municipalities={municipalities || [generateMunicipality({})]}
       >
         <AddressMunicipalityDropdown onValidation={() => {}} />
-      </WithStatefulAddressData>
+      </WithStatefulAddressData>,
     );
   };
 

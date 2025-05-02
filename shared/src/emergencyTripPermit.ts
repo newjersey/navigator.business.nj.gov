@@ -135,5 +135,8 @@ export type EmergencyTripPermitSubmitResponse =
 export type EmergencyTripPermitFieldNames = keyof EmergencyTripPermitApplicationInfo;
 export type EmergencyTripPermitUserEnteredFieldNames = Exclude<
   EmergencyTripPermitFieldNames,
-  "requestorConfirmemail" | "additionalConfirmemail" | "shouldAttachPdfToEmail" | "shouldSendTextConfirmation"
+  | "requestorConfirmemail"
+  | "additionalConfirmemail"
+  | "shouldAttachPdfToEmail"
+  | "shouldSendTextConfirmation"
 >;

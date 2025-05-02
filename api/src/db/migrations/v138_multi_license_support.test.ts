@@ -117,13 +117,19 @@ describe("v138_multi_license_support", () => {
       [args.taskId]: "COMPLETED",
     });
 
-    expect(updatedBusiness.licenseData?.lastUpdatedISO).toEqual(initialBusiness.licenseData?.lastUpdatedISO);
+    expect(updatedBusiness.licenseData?.lastUpdatedISO).toEqual(
+      initialBusiness.licenseData?.lastUpdatedISO,
+    );
 
     const updatedLicenseDetails =
       updatedBusiness.licenseData?.licenses?.[args.licenseName as v138LicenseName];
-    expect(updatedLicenseDetails?.nameAndAddress).toEqual(initialBusiness.licenseData?.nameAndAddress);
+    expect(updatedLicenseDetails?.nameAndAddress).toEqual(
+      initialBusiness.licenseData?.nameAndAddress,
+    );
     expect(updatedLicenseDetails?.licenseStatus).toBe(initialBusiness.licenseData?.status);
-    expect(updatedLicenseDetails?.expirationDateISO).toBe(initialBusiness.licenseData?.expirationISO);
+    expect(updatedLicenseDetails?.expirationDateISO).toBe(
+      initialBusiness.licenseData?.expirationISO,
+    );
     expect(updatedLicenseDetails?.lastUpdatedISO).toBe(initialBusiness.licenseData?.lastUpdatedISO);
     expect(updatedLicenseDetails?.checklistItems).toEqual(initialBusiness.licenseData?.items);
     expect(updatedLicenseDetails?.hasError).toBeFalsy();
@@ -163,7 +169,7 @@ describe("v138_multi_license_support", () => {
       });
 
       expect(updatedBusiness.licenseData).toBeUndefined();
-    }
+    },
   );
 
   it("correctly updates the license data and changes register-consumer-affairs taskprogress key to register-home-contractor", () => {
@@ -184,12 +190,19 @@ describe("v138_multi_license_support", () => {
       [taskId]: "COMPLETED",
     });
 
-    expect(updatedBusiness.licenseData?.lastUpdatedISO).toEqual(initialBusiness.licenseData?.lastUpdatedISO);
+    expect(updatedBusiness.licenseData?.lastUpdatedISO).toEqual(
+      initialBusiness.licenseData?.lastUpdatedISO,
+    );
 
-    const updatedLicenseDetails = updatedBusiness.licenseData?.licenses?.[licenseName as v138LicenseName];
-    expect(updatedLicenseDetails?.nameAndAddress).toEqual(initialBusiness.licenseData?.nameAndAddress);
+    const updatedLicenseDetails =
+      updatedBusiness.licenseData?.licenses?.[licenseName as v138LicenseName];
+    expect(updatedLicenseDetails?.nameAndAddress).toEqual(
+      initialBusiness.licenseData?.nameAndAddress,
+    );
     expect(updatedLicenseDetails?.licenseStatus).toBe(initialBusiness.licenseData?.status);
-    expect(updatedLicenseDetails?.expirationDateISO).toBe(initialBusiness.licenseData?.expirationISO);
+    expect(updatedLicenseDetails?.expirationDateISO).toBe(
+      initialBusiness.licenseData?.expirationISO,
+    );
     expect(updatedLicenseDetails?.lastUpdatedISO).toBe(initialBusiness.licenseData?.lastUpdatedISO);
     expect(updatedLicenseDetails?.checklistItems).toEqual(initialBusiness.licenseData?.items);
     expect(updatedLicenseDetails?.hasError).toBeFalsy();
@@ -233,12 +246,19 @@ describe("v138_multi_license_support", () => {
       [taskId]: "COMPLETED",
     });
 
-    expect(updatedBusiness.licenseData?.lastUpdatedISO).toEqual(initialBusiness.licenseData?.lastUpdatedISO);
+    expect(updatedBusiness.licenseData?.lastUpdatedISO).toEqual(
+      initialBusiness.licenseData?.lastUpdatedISO,
+    );
 
-    const updatedLicenseDetails = updatedBusiness.licenseData?.licenses?.[licenseName as v138LicenseName];
-    expect(updatedLicenseDetails?.nameAndAddress).toEqual(initialBusiness.licenseData?.nameAndAddress);
+    const updatedLicenseDetails =
+      updatedBusiness.licenseData?.licenses?.[licenseName as v138LicenseName];
+    expect(updatedLicenseDetails?.nameAndAddress).toEqual(
+      initialBusiness.licenseData?.nameAndAddress,
+    );
     expect(updatedLicenseDetails?.licenseStatus).toBe(initialBusiness.licenseData?.status);
-    expect(updatedLicenseDetails?.expirationDateISO).toBe(initialBusiness.licenseData?.expirationISO);
+    expect(updatedLicenseDetails?.expirationDateISO).toBe(
+      initialBusiness.licenseData?.expirationISO,
+    );
     expect(updatedLicenseDetails?.lastUpdatedISO).toBe(initialBusiness.licenseData?.lastUpdatedISO);
     expect(updatedLicenseDetails?.checklistItems).toEqual(initialBusiness.licenseData?.items);
     expect(updatedLicenseDetails?.hasError).toBe(false);

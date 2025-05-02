@@ -4,7 +4,10 @@ import { QUERIES } from "@/lib/domain-logic/routes";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -30,11 +33,13 @@ describe("<DashboardAlerts />", () => {
     render(
       <WithStatefulUserData
         initialUserData={
-          business ? generateUserDataForBusiness(business) : generateUserDataForBusiness(generateBusiness({}))
+          business
+            ? generateUserDataForBusiness(business)
+            : generateUserDataForBusiness(generateBusiness({}))
         }
       >
         <DashboardAlerts />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -45,7 +50,7 @@ describe("<DashboardAlerts />", () => {
       generateBusiness({
         preferences: generatePreferences({ phaseNewlyChanged: true }),
         onboardingFormProgress: "COMPLETED",
-      })
+      }),
     );
     expect(screen.getByText(Config.profileDefaults.default.successTextHeader)).toBeInTheDocument();
   });

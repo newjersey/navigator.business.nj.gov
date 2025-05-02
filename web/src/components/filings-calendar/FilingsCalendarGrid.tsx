@@ -28,8 +28,8 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
 
   return (
     <div>
-      {sortFilterCalendarEventsWithinAYear(props.business.taxFilingData.filings, props.activeYear).length ===
-        0 && (
+      {sortFilterCalendarEventsWithinAYear(props.business.taxFilingData.filings, props.activeYear)
+        .length === 0 && (
         <Content className="text-base margin-bottom-3">
           {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
         </Content>

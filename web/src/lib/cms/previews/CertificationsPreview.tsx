@@ -12,7 +12,9 @@ const CertificationsPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <div className="h3-styling margin-top-5">----------Card in For You Section (My Account)----------</div>
+      <div className="h3-styling margin-top-5">
+        ----------Card in For You Section (My Account)----------
+      </div>
       <OpportunityCard key={certification.id} opportunity={certification} urlPath="certification" />
       <div className="h3-styling margin-top-5">
         ----------Certification Details Page (My Account)----------

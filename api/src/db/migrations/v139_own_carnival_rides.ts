@@ -7,7 +7,7 @@ export const migrate_v138_to_v139 = (v138Data: v138UserData): v139UserData => {
     businesses: Object.fromEntries(
       Object.values(v138Data.businesses)
         .map((business: v138Business) => migrate_v138Business_to_v139Business(business))
-        .map((currBusiness: v139Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v139Business) => [currBusiness.id, currBusiness]),
     ),
     version: 139,
   } as v139UserData;
@@ -541,7 +541,9 @@ export const generatev139UserData = (overrides: Partial<v139UserData>): v139User
   };
 };
 
-export const generatev139BusinessUser = (overrides: Partial<v139BusinessUser>): v139BusinessUser => {
+export const generatev139BusinessUser = (
+  overrides: Partial<v139BusinessUser>,
+): v139BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -621,7 +623,7 @@ export const generatev139ProfileData = (overrides: Partial<v139ProfileData>): v1
 };
 
 export const generatev139IndustrySpecificData = (
-  overrides: Partial<v139IndustrySpecificData>
+  overrides: Partial<v139IndustrySpecificData>,
 ): v139IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -666,7 +668,7 @@ export const generatev139Preferences = (overrides: Partial<v139Preferences>): v1
 
 export const generatev139FormationData = (
   overrides: Partial<v139FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v139FormationData => {
   return {
     formationFormData: generatev139FormationFormData({}, legalStructureId),
@@ -682,9 +684,11 @@ export const generatev139FormationData = (
 
 export const generatev139FormationFormData = (
   overrides: Partial<v139FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v139FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v139FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -731,7 +735,8 @@ export const generatev139FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: true, title: "Authorized Representative" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev139FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generatev139FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -752,7 +757,9 @@ export const generatev139FormationFormData = (
   };
 };
 
-export const generatev139Municipality = (overrides: Partial<v139Municipality>): v139Municipality => {
+export const generatev139Municipality = (
+  overrides: Partial<v139Municipality>,
+): v139Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -762,7 +769,9 @@ export const generatev139Municipality = (overrides: Partial<v139Municipality>): 
   };
 };
 
-export const generatev139FormationMember = (overrides: Partial<v139FormationMember>): v139FormationMember => {
+export const generatev139FormationMember = (
+  overrides: Partial<v139FormationMember>,
+): v139FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -776,7 +785,9 @@ export const generatev139FormationMember = (overrides: Partial<v139FormationMemb
   };
 };
 
-export const generatev139TaxFilingData = (overrides: Partial<v139TaxFilingData>): v139TaxFilingData => {
+export const generatev139TaxFilingData = (
+  overrides: Partial<v139TaxFilingData>,
+): v139TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,

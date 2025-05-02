@@ -33,7 +33,9 @@ export const ReviewStep = (): ReactElement => {
         </div>
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <span className={"text-bold"}>{Config.abcEmergencyTripPermit.steps.review.permitAttach}</span>
+            <span className={"text-bold"}>
+              {Config.abcEmergencyTripPermit.steps.review.permitAttach}
+            </span>
           </span>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             {context.state.applicationInfo.shouldAttachPdfToEmail ? "Yes" : "No"}
@@ -54,7 +56,9 @@ export const ReviewStep = (): ReactElement => {
         {context.state.applicationInfo.additionalEmail !== "" && (
           <div className={"grid-row grid-gap"}>
             <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-              <span className={"text-bold"}>{Config.abcEmergencyTripPermit.steps.review.alternateEmail}</span>
+              <span className={"text-bold"}>
+                {Config.abcEmergencyTripPermit.steps.review.alternateEmail}
+              </span>
             </span>
             <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
               {context.state.applicationInfo.additionalEmail}
@@ -82,7 +86,9 @@ export const ReviewStep = (): ReactElement => {
   };
 
   const doesAnyStepHaveErrors = (): boolean => {
-    return doesStepHaveError("Requestor") || doesStepHaveError("Trip") || doesStepHaveError("Billing");
+    return (
+      doesStepHaveError("Requestor") || doesStepHaveError("Trip") || doesStepHaveError("Billing")
+    );
   };
 
   return (
@@ -103,7 +109,10 @@ export const ReviewStep = (): ReactElement => {
       {context.state.submitted && context.state.apiError && (
         <Alert variant={"error"}>{Config.abcEmergencyTripPermit.steps.review.apiErrorText}</Alert>
       )}
-      <EmergencyTripPermitReviewSection stepName={"Requestor"} dataTestId={"requestor-review-section"}>
+      <EmergencyTripPermitReviewSection
+        stepName={"Requestor"}
+        dataTestId={"requestor-review-section"}
+      >
         <EmergencyTripPermitReviewField fieldName={"carrier"} />
         <EmergencyTripPermitReviewField fieldName={"requestorFirstName"} />
         <EmergencyTripPermitReviewField fieldName={"requestorLastName"} />

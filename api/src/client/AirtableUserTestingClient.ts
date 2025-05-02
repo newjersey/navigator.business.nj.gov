@@ -15,7 +15,7 @@ type AirtableConfig = {
 
 export const AirtableUserTestingClient = (
   config: AirtableConfig,
-  logWriter: LogWriterType
+  logWriter: LogWriterType,
 ): UserTestingClient => {
   Airtable.configure({
     endpointUrl: config.baseUrl,
@@ -40,17 +40,17 @@ export const AirtableUserTestingClient = (
       logWriter.LogInfo(
         `UserResearch - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${
           config.usersTableName
-        }. data: ${JSON.stringify(fields)}`
+        }. data: ${JSON.stringify(fields)}`,
       );
       base(config.usersTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(
-            `UserResearchClient - Airtable - Id:${logId} - Error Received: ${JSON.stringify(err)}`
+            `UserResearchClient - Airtable - Id:${logId} - Error Received: ${JSON.stringify(err)}`,
           );
           return resolve({ success: false, status: "RESPONSE_ERROR" });
         }
         logWriter.LogInfo(
-          `UserResearchClient - Airtable - Id:${logId} - Response Received: ${JSON.stringify(res)}`
+          `UserResearchClient - Airtable - Id:${logId} - Response Received: ${JSON.stringify(res)}`,
         );
         return resolve({ success: true, status: "SUCCESS" });
       });

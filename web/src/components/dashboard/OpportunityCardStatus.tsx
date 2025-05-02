@@ -18,7 +18,9 @@ export const OpportunityCardStatus = (props: Props): ReactElement => {
           </div>
         )}
       {(props.status === "first come, first serve" || props.status === "rolling application") && (
-        <div className="dashboard-opportunity-card-due-date text-bold">{toProperCase(props.status)}</div>
+        <div className="dashboard-opportunity-card-due-date text-bold">
+          {toProperCase(props.status)}
+        </div>
       )}
     </>
   );

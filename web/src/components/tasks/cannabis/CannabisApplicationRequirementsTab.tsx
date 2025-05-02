@@ -24,11 +24,11 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
   const { business } = useUserData();
   const { Config } = useConfig();
 
-  const hasPriorityStatus = (Object.keys(props.priorityStatusState) as PriorityApplicationType[]).some(
-    (key) => {
-      return props.priorityStatusState[key];
-    }
-  );
+  const hasPriorityStatus = (
+    Object.keys(props.priorityStatusState) as PriorityApplicationType[]
+  ).some((key) => {
+    return props.priorityStatusState[key];
+  });
 
   const expandIcon = (): ReactElement => {
     return <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />;

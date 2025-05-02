@@ -37,7 +37,9 @@ export enum OperatingPhaseId {
   DOMESTIC_EMPLOYER = "DOMESTIC_EMPLOYER",
 }
 
-export const LookupOperatingPhaseById = (id?: OperatingPhaseId): OperatingPhase | UnknownOperatingPhase => {
+export const LookupOperatingPhaseById = (
+  id?: OperatingPhaseId,
+): OperatingPhase | UnknownOperatingPhase => {
   return (
     OperatingPhases.find((x) => {
       return x.id === id;

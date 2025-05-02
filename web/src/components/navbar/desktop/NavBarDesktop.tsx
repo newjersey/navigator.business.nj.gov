@@ -43,7 +43,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClose = (
-    event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
+    event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>,
   ): void => {
     if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
     if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
@@ -64,7 +64,9 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   const textColor = props.isAuthenticated ? "primary" : "base";
   const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
   const currentIndex =
-    props.userData && business ? orderBusinessIdsByDateCreated(props.userData).indexOf(business.id) : 0;
+    props.userData && business
+      ? orderBusinessIdsByDateCreated(props.userData).indexOf(business.id)
+      : 0;
 
   if (props.logoOnlyType) {
     // loading/redirect/ethan onboarding
@@ -125,7 +127,10 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             textColor={textColor}
             icon={
               <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" />
+                <ButtonIcon
+                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                  sizePx="35px"
+                />
               </div>
             }
             subMenuElement={[]}
@@ -151,7 +156,10 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             textColor={textColor}
             icon={
               <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" />
+                <ButtonIcon
+                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                  sizePx="35px"
+                />
               </div>
             }
             subMenuElement={[
@@ -188,7 +196,10 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             textColor={textColor}
             icon={
               <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" />
+                <ButtonIcon
+                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                  sizePx="35px"
+                />
               </div>
             }
             subMenuElement={[

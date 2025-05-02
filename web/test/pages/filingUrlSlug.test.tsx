@@ -27,7 +27,7 @@ describe("filing page", () => {
     render(
       <ThemeProvider theme={createTheme()}>
         <FilingPage filing={filing} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -150,11 +150,15 @@ describe("filing page", () => {
 
     renderFilingPage(filing);
 
-    expect(screen.getByText(Config.filingDefaults.paperOrMailOnlyTaxFilingMethod)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.filingDefaults.paperOrMailOnlyTaxFilingMethod),
+    ).toBeInTheDocument();
     expect(screen.getByText("every day, all day")).toBeInTheDocument();
     expect(screen.getByText("please file this way")).toBeInTheDocument();
     expect(screen.getByText(Config.filingDefaults.extensionTagText)).toBeInTheDocument();
-    expect(screen.getByTestId("treasury-link")).toHaveTextContent(Config.filingDefaults.treasuryLinkText);
+    expect(screen.getByTestId("treasury-link")).toHaveTextContent(
+      Config.filingDefaults.treasuryLinkText,
+    );
     expect(screen.getByText("tax rate stuff")).toBeInTheDocument();
     expect(screen.getByText("additional info stuff")).not.toBeVisible();
     fireEvent.click(screen.getByText(Config.filingDefaults.additionalInfo));
@@ -233,7 +237,7 @@ describe("filing page", () => {
 
     renderFilingPage(filing);
     expect(screen.getByTestId("due-date")).toHaveTextContent(
-      closestDate.format("MMMM D, YYYY").toUpperCase()
+      closestDate.format("MMMM D, YYYY").toUpperCase(),
     );
   });
 

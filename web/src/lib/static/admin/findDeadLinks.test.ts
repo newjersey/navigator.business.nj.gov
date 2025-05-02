@@ -2,7 +2,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import {
+  findDeadContextualInfo,
+  findDeadLinks,
+  findDeadTasks,
+} from "@/lib/static/admin/findDeadLinks";
 import { Options } from "broken-link-checker";
 import fs from "fs";
 
@@ -50,7 +54,8 @@ describe("findDeadLinks", () => {
     const task2 = "Task 2 contents with `contextual info|info1` in it";
     const deadTask = "Dead task contents";
     const industry1 = '{"roadmapSteps":[],"modifications":[]}';
-    const addOn1 = '{"roadmapSteps":[{"step": 1, "weight": 1, "task": "task1"}],"modifications":[]}';
+    const addOn1 =
+      '{"roadmapSteps":[{"step": 1, "weight": 1, "task": "task1"}],"modifications":[]}';
     const addOn2 =
       '{"roadmapSteps":[],"modifications":[{"step": 1, "taskToReplaceFilename": "something","replaceWithFilename": "task2"}]}';
     const info1 = "Info 1 contents with `contextual info|info2` in it";
@@ -136,7 +141,7 @@ jest.mock("broken-link-checker", () => {
       handlers: {
         link?: ((result: any) => void) | undefined;
         end?: (() => void) | undefined;
-      }
+      },
     ): any {
       const enqueue = (pageUrl: any): any => {
         if (!handlers.link || !handlers.end) {

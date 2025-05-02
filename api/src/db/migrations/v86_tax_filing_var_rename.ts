@@ -282,7 +282,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v86BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -371,7 +375,7 @@ export const generatev86ProfileData = (overrides: Partial<v86ProfileData>): v86P
 };
 
 export const generatev86FormationFormData = (
-  overrides: Partial<v86FormationFormData>
+  overrides: Partial<v86FormationFormData>,
 ): v86FormationFormData => {
   return {
     businessName: "",

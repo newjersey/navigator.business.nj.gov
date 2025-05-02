@@ -44,7 +44,7 @@ const updateLicenseStatusAndLicenseTask = (
   args: {
     nameAndAddress: LicenseSearchNameAndAddress;
     licenseStatusResult: LicenseStatusResults;
-  }
+  },
 ): UserData => {
   // TODO: In a future state we need to account for existing license data with address that does not match search query
   return modifyCurrentBusiness(userData, (business: Business): Business => {
@@ -64,21 +64,25 @@ const updateLicenseStatusAndLicenseTask = (
 
 export const updateLicenseStatusFactory = (
   webserviceLicenseStatusSearch: SearchLicenseStatus,
-  rgbLicenseStatusSearch: SearchLicenseStatus
+  rgbLicenseStatusSearch: SearchLicenseStatus,
 ): UpdateLicenseStatus => {
-  return async (userData: UserData, nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
+  return async (
+    userData: UserData,
+    nameAndAddress: LicenseSearchNameAndAddress,
+  ): Promise<UserData> => {
     const webserviceLicenseStatusPromise = webserviceLicenseStatusSearch(nameAndAddress);
     const rgbLicenseStatusPromise = rgbLicenseStatusSearch(nameAndAddress);
     return Promise.allSettled([webserviceLicenseStatusPromise, rgbLicenseStatusPromise])
       .then(([webserviceLicenseStatusResults, rgbLicenseStatusResults]) => {
         const webserviceHasError = webserviceLicenseStatusResults.status === "rejected";
         const webserviceHasInvalidMatch =
-          webserviceHasError && [NO_MATCH_ERROR].includes(webserviceLicenseStatusResults.reason.message);
+          webserviceHasError &&
+          [NO_MATCH_ERROR].includes(webserviceLicenseStatusResults.reason.message);
         const rgbHasError = rgbLicenseStatusResults.status === "rejected";
         const rgbHasInvalidMatch =
           rgbHasError &&
           [NO_ADDRESS_MATCH_ERROR, NO_MATCH_ERROR, NO_MAIN_APPS_ERROR].includes(
-            rgbLicenseStatusResults.reason.message
+            rgbLicenseStatusResults.reason.message,
           );
 
         if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
@@ -89,14 +93,19 @@ export const updateLicenseStatusFactory = (
           });
         }
 
-        if (!webserviceHasInvalidMatch && !rgbHasInvalidMatch && webserviceHasError && rgbHasError) {
+        if (
+          !webserviceHasInvalidMatch &&
+          !rgbHasInvalidMatch &&
+          webserviceHasError &&
+          rgbHasError
+        ) {
           const webserviceErrorMessage = webserviceLicenseStatusResults.reason;
           const rgbErrorMessage = rgbLicenseStatusResults.reason;
           throw new Error(
             JSON.stringify({
               webserviceErrorMessage,
               rgbErrorMessage,
-            })
+            }),
           );
         }
 
@@ -110,7 +119,8 @@ export const updateLicenseStatusFactory = (
           // In the case a license has been migrated to RGB from Webservice, the information from the RGB API should be referenced.
           const licenseNames = Object.keys(rgbLicenseStatusResults.value) as LicenseName[];
           for (const licenseName of licenseNames) {
-            const dataSource = enabledLicensesSources[licenseName as keyof typeof enabledLicensesSources];
+            const dataSource =
+              enabledLicensesSources[licenseName as keyof typeof enabledLicensesSources];
             if (dataSource === "RGB") {
               results = {
                 ...results,

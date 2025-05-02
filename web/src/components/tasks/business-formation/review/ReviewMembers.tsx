@@ -16,7 +16,9 @@ export const ReviewMembers = (): ReactElement => {
   const getConfig = (): { header: string; label: string } => {
     const field = isCorp ? "directors" : "members";
     return {
-      header: isNonProfit ? Config.formation.fields.trustees.label : Config.formation.fields[field].label,
+      header: isNonProfit
+        ? Config.formation.fields.trustees.label
+        : Config.formation.fields[field].label,
       label: isNonProfit
         ? Config.formation.fields.trustees.trusteeFullName
         : Config.formation.sections.review.nameLabel,
@@ -70,13 +72,29 @@ export const ReviewMembers = (): ReactElement => {
   const displayEmptyMembers = (): ReactElement => {
     return (
       <div data-testid="empty-members-section">
-        <ReviewLineItem label={getConfig().label} value={undefined} marginOverride={"margin-top-0"} />
+        <ReviewLineItem
+          label={getConfig().label}
+          value={undefined}
+          marginOverride={"margin-top-0"}
+        />
         {isCorp && (
           <>
-            <ReviewLineItem label={Config.formation.addressModal.addressLine1.label} value={undefined} />
-            <ReviewLineItem label={Config.formation.addressModal.addressCity.label} value={undefined} />
-            <ReviewLineItem label={Config.formation.addressModal.addressState.label} value={undefined} />
-            <ReviewLineItem label={Config.formation.addressModal.addressZipCode.label} value={undefined} />
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressLine1.label}
+              value={undefined}
+            />
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressCity.label}
+              value={undefined}
+            />
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressState.label}
+              value={undefined}
+            />
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressZipCode.label}
+              value={undefined}
+            />
           </>
         )}
       </div>

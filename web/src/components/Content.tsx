@@ -116,7 +116,7 @@ const Link = (onClick?: (url?: string) => void): any => {
         </a>
       );
     },
-    { displayName: "Link" }
+    { displayName: "Link" },
   );
 };
 
@@ -136,7 +136,9 @@ export const ExternalLink = ({
       target="_blank"
       rel="noreferrer noopener"
       onClick={(): void => {
-        onClick ? onClick(href) : analytics.event.external_link.click.open_external_website(children, href);
+        onClick
+          ? onClick(href)
+          : analytics.event.external_link.click.open_external_website(children, href);
       }}
     >
       {children}
@@ -158,7 +160,11 @@ const OutlineBox = (props: any): ReactElement => {
 };
 
 const ListOrCheckbox = (props: any): ReactElement => {
-  if (props.children && typeof props.children[0] === "string" && props.children[0].startsWith("[]")) {
+  if (
+    props.children &&
+    typeof props.children[0] === "string" &&
+    props.children[0].startsWith("[]")
+  ) {
     const checklistItemId = props.children[0].slice("[]".length).split("{")[1].split("}")[0];
     const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
 

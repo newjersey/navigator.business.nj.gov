@@ -10,11 +10,11 @@ import axios, { AxiosError } from "axios";
 
 export const RegulatedBusinessDynamicsBusinessAddressesClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): BusinessAddressesClient => {
   const getBusinessAddresses = async (
     accessToken: string,
-    businessIdAndName: BusinessIdAndName
+    businessIdAndName: BusinessIdAndName,
   ): Promise<LicenseSearchAddress[]> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Rgb Business Addresses Client - Id:${logId}`);
@@ -26,16 +26,20 @@ export const RegulatedBusinessDynamicsBusinessAddressesClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then((response) => {
         logWriter.LogInfo(
-          `RGB Dynamics Business Addresses Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
+          `RGB Dynamics Business Addresses Client - Id:${logId} - Response: ${JSON.stringify(
+            response.data,
+          )}`,
         );
         const activeAddresses = response.data.value.filter(
-          (address: DynamicsApiAddressResponse) => address.statecode === ACTIVE_STATECODE
+          (address: DynamicsApiAddressResponse) => address.statecode === ACTIVE_STATECODE,
         );
-        return activeAddresses.map((address: DynamicsApiAddressResponse) => processAddress(address));
+        return activeAddresses.map((address: DynamicsApiAddressResponse) =>
+          processAddress(address),
+        );
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`RGB Dynamics Business Addresses Client - Id:${logId} - Error:`, error);
@@ -45,10 +49,10 @@ export const RegulatedBusinessDynamicsBusinessAddressesClient = (
 
   const getBusinessAddressesForAllBusinessIds = async (
     accessToken: string,
-    businessIdsAndNames: BusinessIdAndName[]
+    businessIdsAndNames: BusinessIdAndName[],
   ): Promise<BusinessIdAndLicenseSearchNameAndAddresses[]> => {
     const getBusinessAddressesById = async (
-      businessIdAndName: BusinessIdAndName
+      businessIdAndName: BusinessIdAndName,
     ): Promise<BusinessIdAndLicenseSearchNameAndAddresses> => {
       return {
         businessId: businessIdAndName.businessId,
@@ -58,7 +62,7 @@ export const RegulatedBusinessDynamicsBusinessAddressesClient = (
     };
 
     return await Promise.all(
-      businessIdsAndNames.map((businessIdAndName) => getBusinessAddressesById(businessIdAndName))
+      businessIdsAndNames.map((businessIdAndName) => getBusinessAddressesById(businessIdAndName)),
     );
   };
 

@@ -11,7 +11,7 @@ type Config = {
 
 export const DynamicsHousingHealthCheckClient = (
   logWriter: LogWriterType,
-  config: Config
+  config: Config,
 ): HealthCheckMethod => {
   return async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();

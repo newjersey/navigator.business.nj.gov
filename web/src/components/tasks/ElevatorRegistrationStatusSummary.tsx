@@ -80,7 +80,7 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
     date: string,
     deviceCount: number,
     status: string,
-    index: number
+    index: number,
   ): ReactElement => {
     const details = getDetailsForRegistrationCard(status);
     const formattedDate = parseDate(date).format("MMMM d, YYYY");
@@ -89,7 +89,13 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
     const getIconForRegistrationCard = (): ReactElement => {
       switch (status) {
         case "In Review":
-          return <img src={`/img/access_time_filled.svg`} alt="" style={{ width: "17px", height: "17px" }} />;
+          return (
+            <img
+              src={`/img/access_time_filled.svg`}
+              alt=""
+              style={{ width: "17px", height: "17px" }}
+            />
+          );
         default:
           return (
             <>
@@ -126,7 +132,9 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
               {status}
             </span>
             {informationalMessage && (
-              <div data-testid={`registration-${index}-informational-message`}>{informationalMessage}</div>
+              <div data-testid={`registration-${index}-informational-message`}>
+                {informationalMessage}
+              </div>
             )}
           </Box>
         </Box>
@@ -167,7 +175,7 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
                 registration.dateStarted,
                 registration.deviceCount,
                 registration.status,
-                index
+                index,
               );
             })}
           </div>

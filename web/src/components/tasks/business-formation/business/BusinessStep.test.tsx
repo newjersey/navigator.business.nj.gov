@@ -27,7 +27,10 @@ import {
   randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
-import { corpLegalStructures, publicFilingLegalTypes } from "@businessnjgovnavigator/shared/formationData";
+import {
+  corpLegalStructures,
+  publicFilingLegalTypes,
+} from "@businessnjgovnavigator/shared/formationData";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 
@@ -65,7 +68,7 @@ describe("Formation - BusinessStep", () => {
 
   const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
-    formationFormData: Partial<FormationFormData>
+    formationFormData: Partial<FormationFormData>,
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const isForeign = initialProfileData.businessPersona === "FOREIGN";
@@ -73,7 +76,7 @@ describe("Formation - BusinessStep", () => {
       formationFormData: generateFormationFormData(formationFormData, {
         legalStructureId: castPublicFilingLegalTypeToFormationType(
           profileData.legalStructureId as PublicFilingLegalType,
-          initialProfileData.businessPersona
+          initialProfileData.businessPersona,
         ),
       }),
       formationResponse: undefined,
@@ -97,29 +100,35 @@ describe("Formation - BusinessStep", () => {
 
   it("displays modal when legal structure Edit button clicked", async () => {
     await getPageHelper({}, {});
-    expect(screen.queryByText(Config.formation.legalStructure.warningModalHeader)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.formation.legalStructure.warningModalHeader),
+    ).not.toBeInTheDocument();
     fireEvent.click(screen.getByTestId("edit-legal-structure"));
-    expect(screen.getByText(Config.formation.legalStructure.warningModalHeader)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.formation.legalStructure.warningModalHeader),
+    ).toBeInTheDocument();
   });
 
   it("displays jurisdiction alert info box", async () => {
     await getPageHelper({}, {});
     expect(
-      screen.getByText(markdownToText(Config.formation.fields.addressMunicipality.infoAlert))
+      screen.getByText(markdownToText(Config.formation.fields.addressMunicipality.infoAlert)),
     ).toBeInTheDocument();
   });
 
   it("routes to profile page when edit legal structure button is clicked", async () => {
     useMockRoadmap({
-      tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+      tasks: [
+        generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" }),
+      ],
     });
     await getPageHelper({}, {});
 
     fireEvent.click(screen.getByTestId("edit-legal-structure"));
     fireEvent.click(
       within(screen.getByTestId("modal-content")).getByText(
-        Config.formation.legalStructure.warningModalContinueButton
-      )
+        Config.formation.legalStructure.warningModalContinueButton,
+      ),
     );
     expect(mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
   });
@@ -138,12 +147,12 @@ describe("Formation - BusinessStep", () => {
         addressState: { name: "New Jersey", shortCode: "NJ" },
         addressZipCode: "07601",
         businessPurpose: "some cool purpose",
-      }
+      },
     );
 
     expect(screen.getByText("LTD LIABILITY CO")).toBeInTheDocument();
     expect(page.getInputElementByLabel("Business start date").value).toBe(
-      getCurrentDateFormatted(defaultDisplayDateFormat)
+      getCurrentDateFormatted(defaultDisplayDateFormat),
     );
     expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
     expect(page.getInputElementByLabel("Address line2").value).toBe("suite 102");
@@ -171,15 +180,15 @@ describe("Formation - BusinessStep", () => {
         addressZipCode: "20011",
         addressCity: "Washington",
         businessPurpose: "some cool purpose",
-      }
+      },
     );
 
     expect(screen.getByText("LTD LIABILITY CO")).toBeInTheDocument();
     expect(page.getInputElementByLabel("Business start date").value).toBe(
-      getCurrentDateFormatted(defaultDisplayDateFormat)
+      getCurrentDateFormatted(defaultDisplayDateFormat),
     );
     expect(page.getInputElementByLabel("Foreign date of formation").value).toBe(
-      getCurrentDateFormatted(defaultDisplayDateFormat)
+      getCurrentDateFormatted(defaultDisplayDateFormat),
     );
     expect(page.getInputElementByLabel("Foreign state of formation").value).toBe("Virgin Islands");
     expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
@@ -209,15 +218,15 @@ describe("Formation - BusinessStep", () => {
         addressZipCode: "2033011",
         addressCity: "Paris",
         businessPurpose: "some cool purpose",
-      }
+      },
     );
 
     expect(screen.getByText("LTD LIABILITY CO")).toBeInTheDocument();
     expect(page.getInputElementByLabel("Business start date").value).toBe(
-      getCurrentDateFormatted(defaultDisplayDateFormat)
+      getCurrentDateFormatted(defaultDisplayDateFormat),
     );
     expect(page.getInputElementByLabel("Foreign date of formation").value).toBe(
-      getCurrentDateFormatted(defaultDisplayDateFormat)
+      getCurrentDateFormatted(defaultDisplayDateFormat),
     );
     expect(page.getInputElementByLabel("Foreign state of formation").value).toBe("Virgin Islands");
     expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
@@ -246,31 +255,35 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.fields.businessPurpose.label)).toBeInTheDocument();
       expect(
         within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
-          Config.formation.fields.businessPurpose.addButtonText
-        )
+          Config.formation.fields.businessPurpose.addButtonText,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("formation-text-box-businessPurpose")).queryByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).not.toBeInTheDocument();
       expect(
-        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByLabelText("Business purpose")
+        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByLabelText(
+          "Business purpose",
+        ),
       ).not.toBeInTheDocument();
     });
 
     it("shows business purpose open if exists", async () => {
       await getPageHelper({}, { businessPurpose: "some purpose" });
       expect(
-        screen.queryByText(Config.formation.fields.businessPurpose.addButtonText)
+        screen.queryByText(Config.formation.fields.businessPurpose.addButtonText),
       ).not.toBeInTheDocument();
       expect(
         within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).toBeInTheDocument();
       expect(
-        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText("Business purpose")
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText(
+          "Business purpose",
+        ),
       ).toBeInTheDocument();
     });
 
@@ -278,21 +291,23 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper({}, { businessPurpose: "" });
       fireEvent.click(
         within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
-          Config.formation.fields.businessPurpose.addButtonText
-        )
+          Config.formation.fields.businessPurpose.addButtonText,
+        ),
       );
       expect(
         within(screen.getByTestId("formation-text-box-businessPurpose")).queryByText(
-          Config.formation.fields.businessPurpose.addButtonText
-        )
+          Config.formation.fields.businessPurpose.addButtonText,
+        ),
       ).not.toBeInTheDocument();
       expect(
         within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).toBeInTheDocument();
       expect(
-        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText("Business purpose")
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText(
+          "Business purpose",
+        ),
       ).toBeInTheDocument();
     });
 
@@ -300,8 +315,8 @@ describe("Formation - BusinessStep", () => {
       const page = await getPageHelper({}, { businessPurpose: "some purpose" });
       fireEvent.click(
         within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       );
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.businessPurpose).toEqual("");
@@ -324,9 +339,11 @@ describe("Formation - BusinessStep", () => {
           businessPersona: "FOREIGN",
           legalStructureId: randomPublicFilingLegalType((value) => value !== "limited-partnership"),
         },
-        { additionalProvisions: [] }
+        { additionalProvisions: [] },
       );
-      expect(screen.queryByText(Config.formation.fields.additionalProvisions.label)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.fields.additionalProvisions.label),
+      ).not.toBeInTheDocument();
     });
 
     it("shows provisions when forming as a foreign business and the legalStructureId is foreign-limited-partnership", async () => {
@@ -335,25 +352,25 @@ describe("Formation - BusinessStep", () => {
           businessPersona: "FOREIGN",
           legalStructureId: randomPublicFilingLegalType((value) => value === "limited-partnership"),
         },
-        { additionalProvisions: [] }
+        { additionalProvisions: [] },
       );
       expect(
         within(screen.getByTestId("additional-provisions")).getByText(
-          Config.formation.fields.additionalProvisions.label
-        )
+          Config.formation.fields.additionalProvisions.label,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("additional-provisions")).getByText(
-          Config.formation.fields.additionalProvisions.addButtonText
-        )
+          Config.formation.fields.additionalProvisions.addButtonText,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("additional-provisions")).queryByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).not.toBeInTheDocument();
       expect(
-        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0")
+        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0"),
       ).not.toBeInTheDocument();
     });
 
@@ -361,21 +378,21 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper({}, { additionalProvisions: [] });
       expect(
         within(screen.getByTestId("additional-provisions")).getByText(
-          Config.formation.fields.additionalProvisions.label
-        )
+          Config.formation.fields.additionalProvisions.label,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("additional-provisions")).getByText(
-          Config.formation.fields.additionalProvisions.addButtonText
-        )
+          Config.formation.fields.additionalProvisions.addButtonText,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("additional-provisions")).queryByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).not.toBeInTheDocument();
       expect(
-        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0")
+        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0"),
       ).not.toBeInTheDocument();
     });
 
@@ -383,19 +400,19 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper({}, { additionalProvisions: ["provision1", "provision2"] });
       expect(
         within(screen.getByTestId("additional-provisions")).queryByText(
-          Config.formation.fields.additionalProvisions.addButtonText
-        )
+          Config.formation.fields.additionalProvisions.addButtonText,
+        ),
       ).not.toBeInTheDocument();
       expect(
         within(screen.getByTestId("additional-provisions")).queryAllByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).toHaveLength(2);
       expect(
-        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0")
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0"),
       ).toBeInTheDocument();
       expect(
-        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 1")
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 1"),
       ).toBeInTheDocument();
     });
 
@@ -403,32 +420,34 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper({}, { additionalProvisions: [] });
       fireEvent.click(
         within(screen.getByTestId("additional-provisions")).getByText(
-          Config.formation.fields.additionalProvisions.addButtonText
-        )
+          Config.formation.fields.additionalProvisions.addButtonText,
+        ),
       );
       expect(
         within(screen.getByTestId("additional-provisions")).queryByText(
-          Config.formation.fields.additionalProvisions.addButtonText
-        )
+          Config.formation.fields.additionalProvisions.addButtonText,
+        ),
       ).not.toBeInTheDocument();
       expect(
         within(screen.getByTestId("additional-provisions")).getByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).toBeInTheDocument();
       expect(
-        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0")
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0"),
       ).toBeInTheDocument();
     });
 
     it("adds more provisions when Add More button clicked", async () => {
       await getPageHelper({}, { additionalProvisions: [] });
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
-      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
+      fireEvent.click(
+        screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText),
+      );
       expect(
         within(screen.getByTestId("additional-provisions")).queryAllByText(
-          Config.formation.general.removeSectionText
-        )
+          Config.formation.general.removeSectionText,
+        ),
       ).toHaveLength(2);
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
@@ -439,12 +458,12 @@ describe("Formation - BusinessStep", () => {
         {},
         {
           additionalProvisions: ["provision1", "provision2", "provision3"],
-        }
+        },
       );
 
-      const removeProvision2Button = within(screen.getByTestId("additional-provisions")).getAllByText(
-        Config.formation.general.removeSectionText
-      )[1];
+      const removeProvision2Button = within(
+        screen.getByTestId("additional-provisions"),
+      ).getAllByText(Config.formation.general.removeSectionText)[1];
 
       fireEvent.click(removeProvision2Button);
       await page.submitBusinessStep();
@@ -467,9 +486,11 @@ describe("Formation - BusinessStep", () => {
     it("does not allow adding more than 10 provisions", async () => {
       const nineProvisions = Array(9).fill("some provision");
       await getPageHelper({}, { additionalProvisions: nineProvisions });
-      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
+      fireEvent.click(
+        screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText),
+      );
       expect(
-        screen.queryByText(Config.formation.fields.additionalProvisions.addAnotherButtonText)
+        screen.queryByText(Config.formation.fields.additionalProvisions.addAnotherButtonText),
       ).not.toBeInTheDocument();
     });
   });
@@ -478,22 +499,22 @@ describe("Formation - BusinessStep", () => {
     it("saves data to formationData", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignStateOfFormation: undefined }
+        { foreignStateOfFormation: undefined },
       );
       expect(
-        screen.getByText(markdownToText(Config.formation.fields.foreignStateOfFormation.label))
+        screen.getByText(markdownToText(Config.formation.fields.foreignStateOfFormation.label)),
       ).toBeInTheDocument();
       page.fillText("Foreign state of formation", "Virgin Islands");
       await page.submitBusinessStep(true);
       expect(currentBusiness().formationData.formationFormData.foreignStateOfFormation).toEqual(
-        "Virgin Islands"
+        "Virgin Islands",
       );
     });
 
     it("does not include New Jersey in the foreign state of formation dropdown", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignStateOfFormation: undefined }
+        { foreignStateOfFormation: undefined },
       );
 
       const listBox = await page.getListBoxForInputElementByTestId("foreignStateOfFormation");
@@ -505,7 +526,7 @@ describe("Formation - BusinessStep", () => {
     it("includes 'Outside of the USA' in the foreign state of formation dropdown", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignStateOfFormation: undefined }
+        { foreignStateOfFormation: undefined },
       );
 
       const listBox = await page.getListBoxForInputElementByTestId("foreignStateOfFormation");
@@ -516,10 +537,12 @@ describe("Formation - BusinessStep", () => {
     it("displays error on field validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignStateOfFormation: undefined }
+        { foreignStateOfFormation: undefined },
       );
       page.fillText("Foreign state of formation", "test");
-      expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.foreignStateOfFormation.error),
+      ).toBeInTheDocument();
     });
   });
 
@@ -527,7 +550,9 @@ describe("Formation - BusinessStep", () => {
     for (const legalStructureId of ["c-corporation", "s-corporation", "nonprofit"]) {
       it(`should render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
-        expect(screen.getByTestId("foreign-certificate-of-good-standing-header")).toBeInTheDocument();
+        expect(
+          screen.getByTestId("foreign-certificate-of-good-standing-header"),
+        ).toBeInTheDocument();
       });
     }
 
@@ -538,14 +563,18 @@ describe("Formation - BusinessStep", () => {
     ]) {
       it(`should not render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
-        expect(screen.queryByTestId("foreign-certificate-of-good-standing-header")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("foreign-certificate-of-good-standing-header"),
+        ).not.toBeInTheDocument();
       });
     }
 
     for (const legalStructureId of publicFilingLegalTypes) {
       it(`should not render for ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "OWNING", legalStructureId }, {});
-        expect(screen.queryByTestId("foreign-certificate-of-good-standing-header")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("foreign-certificate-of-good-standing-header"),
+        ).not.toBeInTheDocument();
       });
     }
   });
@@ -566,14 +595,18 @@ describe("Formation - BusinessStep", () => {
     ]) {
       it(`should not render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
-        expect(screen.queryByText(Config.formation.fields.willPracticeLaw.label)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.fields.willPracticeLaw.label),
+        ).not.toBeInTheDocument();
       });
     }
 
     for (const legalStructureId of publicFilingLegalTypes) {
       it(`should not render for ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "OWNING", legalStructureId }, {});
-        expect(screen.queryByText(Config.formation.fields.willPracticeLaw.label)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.fields.willPracticeLaw.label),
+        ).not.toBeInTheDocument();
       });
     }
 
@@ -584,9 +617,11 @@ describe("Formation - BusinessStep", () => {
           async (legalStructureId) => {
             await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
             expect(
-              screen.getByText(Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation)
+              screen.getByText(
+                Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation,
+              ),
             ).toBeInTheDocument();
-          }
+          },
         );
       });
 
@@ -594,7 +629,10 @@ describe("Formation - BusinessStep", () => {
         it.each(corpLegalStructures)(
           "Shows PA and PC options for Business Designator when Will You Practice Law is Yes for %s",
           async (legalStructureId) => {
-            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
+            await getPageHelper(
+              { businessPersona: "FOREIGN", legalStructureId },
+              { willPracticeLaw: true },
+            );
 
             expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
             expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
@@ -602,29 +640,15 @@ describe("Formation - BusinessStep", () => {
             await userEvent.click(screen.getByTestId("business-suffix-main"));
             expect(screen.getByText("P.C.")).toBeInTheDocument();
             expect(screen.getByText("P.A.")).toBeInTheDocument();
-          }
+          },
         );
 
         it.each(corpLegalStructures)(
           "Does not show PA and PC options for Business Designator when Will You Practice Law is No for %s",
           async (legalStructureId) => {
-            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: false });
-            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
-
-            await userEvent.click(screen.getByTestId("business-suffix-main"));
-
-            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
-          }
-        );
-
-        it.each(corpLegalStructures)(
-          "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined for %s",
-          async (legalStructureId) => {
             await getPageHelper(
               { businessPersona: "FOREIGN", legalStructureId },
-              { willPracticeLaw: undefined }
+              { willPracticeLaw: false },
             );
             expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
             expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
@@ -633,7 +657,24 @@ describe("Formation - BusinessStep", () => {
 
             expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
             expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
-          }
+          },
+        );
+
+        it.each(corpLegalStructures)(
+          "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined for %s",
+          async (legalStructureId) => {
+            await getPageHelper(
+              { businessPersona: "FOREIGN", legalStructureId },
+              { willPracticeLaw: undefined },
+            );
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
+
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+          },
         );
 
         it.each(corpLegalStructures)(
@@ -641,25 +682,30 @@ describe("Formation - BusinessStep", () => {
           async (legalStructureId) => {
             await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
             expect(
-              screen.queryByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
+              screen.queryByText(
+                Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert,
+              ),
             ).not.toBeInTheDocument();
             fireEvent.click(screen.getByTestId("willPracticeLaw-true"));
             expect(
-              screen.getByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
+              screen.getByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert),
             ).toBeInTheDocument();
-          }
+          },
         );
 
         it.each(corpLegalStructures)(
           "clears Business Designator if Will you practice law question is changed and Business designator is selected for %s",
           async (legalStructureId) => {
-            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
+            await getPageHelper(
+              { businessPersona: "FOREIGN", legalStructureId },
+              { willPracticeLaw: true },
+            );
             await userEvent.click(screen.getByTestId("business-suffix-main"));
             await userEvent.click(screen.getByText("P.C."));
             expect(screen.getByTestId("business-suffix-main")).toHaveTextContent("P.C.");
             fireEvent.click(screen.getByTestId("willPracticeLaw-false"));
             expect(screen.getByTestId("business-suffix-main")).toBeEmptyDOMElement();
-          }
+          },
         );
       });
     });
@@ -673,7 +719,10 @@ describe("Formation - BusinessStep", () => {
     });
 
     it("resets address data on switch", async () => {
-      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { businessLocationType: "US" });
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN" },
+        { businessLocationType: "US" },
+      );
       page.fillText("Address line1", "test12345");
       fireEvent.click(screen.getByTestId("address-radio-intl"));
       expect(screen.queryByText("test12345")).not.toBeInTheDocument();
@@ -684,7 +733,7 @@ describe("Formation - BusinessStep", () => {
     it("saves data to formationData", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressCountry: undefined, businessLocationType: "INTL" }
+        { addressCountry: undefined, businessLocationType: "INTL" },
       );
       page.fillText("Address country", "Canada");
       await page.submitBusinessStep(true);
@@ -694,7 +743,7 @@ describe("Formation - BusinessStep", () => {
     it("displays error on field validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressCountry: undefined, businessLocationType: "INTL" }
+        { addressCountry: undefined, businessLocationType: "INTL" },
       );
       page.fillText("Address country", "test");
       expect(screen.getByText(Config.formation.fields.addressCountry.error)).toBeInTheDocument();
@@ -705,7 +754,7 @@ describe("Formation - BusinessStep", () => {
     it("saves data to formationData", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressProvince: undefined, businessLocationType: "INTL" }
+        { addressProvince: undefined, businessLocationType: "INTL" },
       );
       page.fillText("Address province", "Quebec");
       await page.submitBusinessStep(true);
@@ -715,7 +764,7 @@ describe("Formation - BusinessStep", () => {
     it("displays error on field validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressCountry: undefined, businessLocationType: "INTL" }
+        { addressCountry: undefined, businessLocationType: "INTL" },
       );
       page.fillText("Address province", "");
       expect(screen.getByText(Config.formation.fields.addressProvince.error)).toBeInTheDocument();
@@ -741,7 +790,7 @@ describe("Formation - BusinessStep", () => {
     it("saves data to formationData", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressState: undefined, businessLocationType: "US" }
+        { addressState: undefined, businessLocationType: "US" },
       );
       page.fillText("Address state", "AL");
       await page.submitBusinessStep(true);
@@ -754,7 +803,7 @@ describe("Formation - BusinessStep", () => {
     it("displays error on field validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressState: undefined, businessLocationType: "US" }
+        { addressState: undefined, businessLocationType: "US" },
       );
       page.fillText("Address state", "");
       expect(screen.getByText(Config.formation.fields.addressState.error)).toBeInTheDocument();
@@ -765,7 +814,7 @@ describe("Formation - BusinessStep", () => {
     it("saves data to formationData", async () => {
       const page = await getPageHelper(
         { legalStructureId: "c-corporation" },
-        { businessTotalStock: undefined }
+        { businessTotalStock: undefined },
       );
       page.fillText("Business total stock", "123");
       await page.submitBusinessStep(true);
@@ -775,7 +824,7 @@ describe("Formation - BusinessStep", () => {
     it("trims leading zeros", async () => {
       const page = await getPageHelper(
         { legalStructureId: "c-corporation" },
-        { businessTotalStock: undefined }
+        { businessTotalStock: undefined },
       );
       page.fillText("Business total stock", "0123");
       await page.submitBusinessStep(true);
@@ -787,25 +836,29 @@ describe("Formation - BusinessStep", () => {
     it("displays error message when less than 5 characters are entered", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "US" }
+        { addressZipCode: "", businessLocationType: "US" },
       );
       page.fillText("Address zip code", "2222");
-      expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS),
+      ).toBeInTheDocument();
     });
 
     it("displays error message when non-numeric zipCode is entered", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "US" }
+        { addressZipCode: "", businessLocationType: "US" },
       );
       page.fillText("Address zip code", "AAAAA");
-      expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS),
+      ).toBeInTheDocument();
     });
 
     it("passes zipCode validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "US" }
+        { addressZipCode: "", businessLocationType: "US" },
       );
       page.fillText("Address zip code", "01752");
       await page.submitBusinessStep();
@@ -815,7 +868,7 @@ describe("Formation - BusinessStep", () => {
     it("limits zipCode to 5-digits in length", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "US" }
+        { addressZipCode: "", businessLocationType: "US" },
       );
       page.fillText("Address zip code", "01752345");
       await page.submitBusinessStep();
@@ -827,30 +880,36 @@ describe("Formation - BusinessStep", () => {
     it("displays error message when no characters are entered", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "INTL" }
+        { addressZipCode: "", businessLocationType: "INTL" },
       );
       page.fillText("Address zip code", "");
-      expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl),
+      ).toBeInTheDocument();
     });
 
     it("passes 11-digit postal code validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "INTL" }
+        { addressZipCode: "", businessLocationType: "INTL" },
       );
       page.fillText("Address zip code", "12345678912");
       await page.submitBusinessStep();
-      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("12345678912");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual(
+        "12345678912",
+      );
     });
 
     it("limits postal code vto  11-digit digits in length", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "INTL" }
+        { addressZipCode: "", businessLocationType: "INTL" },
       );
       page.fillText("Address zip code", "12345678912345");
       await page.submitBusinessStep();
-      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("12345678912");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual(
+        "12345678912",
+      );
     });
   });
 
@@ -860,21 +919,23 @@ describe("Formation - BusinessStep", () => {
     it("shows error when there is an invalid date", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignDateOfFormation: undefined }
+        { foreignDateOfFormation: undefined },
       );
       page.fillText(fieldLabel, "12/23");
-      expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.foreignDateOfFormation.error),
+      ).toBeInTheDocument();
     });
 
     it("saves an inputted date", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignDateOfFormation: undefined }
+        { foreignDateOfFormation: undefined },
       );
       page.selectDate(getCurrentDate(), fieldLabel);
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.foreignDateOfFormation).toEqual(
-        getCurrentDateFormatted(defaultDateFormat)
+        getCurrentDateFormatted(defaultDateFormat),
       );
     });
   });
@@ -887,7 +948,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.businessStartDate).toEqual(
-        getCurrentDateInNewJersey().format(defaultDateFormat)
+        getCurrentDateInNewJersey().format(defaultDateFormat),
       );
     });
 
@@ -895,7 +956,7 @@ describe("Formation - BusinessStep", () => {
       const yesterday = getCurrentDate().subtract(1, "day").format(defaultDateFormat);
       await getPageHelper({}, { businessStartDate: yesterday });
       expect(screen.getByLabelText("Business start date")).toHaveValue(
-        getCurrentDateInNewJersey().format(defaultDisplayDateFormat)
+        getCurrentDateInNewJersey().format(defaultDisplayDateFormat),
       );
     });
 
@@ -907,7 +968,7 @@ describe("Formation - BusinessStep", () => {
               const page = await getPageHelper({ legalStructureId }, {});
               page.selectDate(getCurrentDate().add(91, "day"), fieldLabel);
               expect(
-                screen.getByText(Config.formation.fields.businessStartDate.error90Days)
+                screen.getByText(Config.formation.fields.businessStartDate.error90Days),
               ).toBeInTheDocument();
             });
 
@@ -915,7 +976,7 @@ describe("Formation - BusinessStep", () => {
               const page = await getPageHelper({ legalStructureId }, {});
               page.selectDate(getCurrentDate().subtract(4, "day"), fieldLabel);
               expect(
-                screen.getByText(Config.formation.fields.businessStartDate.error90Days)
+                screen.getByText(Config.formation.fields.businessStartDate.error90Days),
               ).toBeInTheDocument();
             });
 
@@ -923,10 +984,10 @@ describe("Formation - BusinessStep", () => {
               const page = await getPageHelper({ legalStructureId }, {});
               page.selectDate(getCurrentDate().add(89, "day"), fieldLabel);
               expect(
-                screen.queryByText(Config.formation.fields.businessStartDate.error90Days)
+                screen.queryByText(Config.formation.fields.businessStartDate.error90Days),
               ).not.toBeInTheDocument();
             });
-          })
+          }),
         );
       });
 
@@ -934,20 +995,24 @@ describe("Formation - BusinessStep", () => {
         it("shows validation error past date limit", async () => {
           const page = await getPageHelper({ legalStructureId: "limited-partnership" }, {});
           page.selectDate(getCurrentDate().add(31, "day"), fieldLabel);
-          expect(screen.getByText(Config.formation.fields.businessStartDate.error30Days)).toBeInTheDocument();
+          expect(
+            screen.getByText(Config.formation.fields.businessStartDate.error30Days),
+          ).toBeInTheDocument();
         });
 
         it("shows validation error for previous date", async () => {
           const page = await getPageHelper({ legalStructureId: "limited-partnership" }, {});
           page.selectDate(getCurrentDate().subtract(4, "day"), fieldLabel);
-          expect(screen.getByText(Config.formation.fields.businessStartDate.error30Days)).toBeInTheDocument();
+          expect(
+            screen.getByText(Config.formation.fields.businessStartDate.error30Days),
+          ).toBeInTheDocument();
         });
 
         it("does not show validation error", async () => {
           const page = await getPageHelper({ legalStructureId: "limited-partnership" }, {});
           page.selectDate(getCurrentDate().add(29, "day"), fieldLabel);
           expect(
-            screen.queryByText(Config.formation.fields.businessStartDate.error30Days)
+            screen.queryByText(Config.formation.fields.businessStartDate.error30Days),
           ).not.toBeInTheDocument();
         });
       });
@@ -960,7 +1025,7 @@ describe("Formation - BusinessStep", () => {
               const page = await getPageHelper({ legalStructureId }, {});
               page.selectDate(getCurrentDate().subtract(4, "day"), fieldLabel);
               expect(
-                screen.getByText(Config.formation.fields.businessStartDate.errorFuture)
+                screen.getByText(Config.formation.fields.businessStartDate.errorFuture),
               ).toBeInTheDocument();
             });
 
@@ -968,10 +1033,10 @@ describe("Formation - BusinessStep", () => {
               const page = await getPageHelper({ legalStructureId }, {});
               page.selectDate(getCurrentDate().add(120, "day"), fieldLabel);
               expect(
-                screen.queryByText(Config.formation.fields.businessStartDate.errorFuture)
+                screen.queryByText(Config.formation.fields.businessStartDate.errorFuture),
               ).not.toBeInTheDocument();
             });
-          })
+          }),
         );
       });
 
@@ -988,13 +1053,17 @@ describe("Formation - BusinessStep", () => {
             it("reset to current date", async () => {
               await getPageHelper(
                 { legalStructureId, businessPersona },
-                { businessStartDate: getCurrentDate().subtract(4, "day").format(defaultDisplayDateFormat) }
+                {
+                  businessStartDate: getCurrentDate()
+                    .subtract(4, "day")
+                    .format(defaultDisplayDateFormat),
+                },
               );
               expect(screen.getByLabelText("Business start date")).toHaveValue(
-                getCurrentDateInNewJersey().format(defaultDisplayDateFormat)
+                getCurrentDateInNewJersey().format(defaultDisplayDateFormat),
               );
             });
-          })
+          }),
         );
       });
     });
@@ -1007,9 +1076,9 @@ describe("Formation - BusinessStep", () => {
         await getPageHelper({ legalStructureId, businessPersona: "STARTING" }, {});
         const displayLegalStructure = screen.getByTestId("legal-structure");
         expect(displayLegalStructure).toHaveTextContent(
-          Config.formation.legalStructure.domesticLabels[legalStructureId]
+          Config.formation.legalStructure.domesticLabels[legalStructureId],
         );
-      }
+      },
     );
 
     it.each(publicFilingLegalTypes)(
@@ -1018,9 +1087,9 @@ describe("Formation - BusinessStep", () => {
         await getPageHelper({ legalStructureId, businessPersona: "FOREIGN" }, {});
         const displayLegalStructure = screen.getByTestId("legal-structure");
         expect(displayLegalStructure).toHaveTextContent(
-          Config.formation.legalStructure.foreignLabels[legalStructureId]
+          Config.formation.legalStructure.foreignLabels[legalStructureId],
         );
-      }
+      },
     );
 
     it("displays business name from name check step and overrides profile", async () => {
@@ -1040,9 +1109,11 @@ describe("Formation - BusinessStep", () => {
         {
           businessPersona: "STARTING",
         },
-        { addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }) }
+        { addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }) },
       );
-      expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
+      expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual(
+        "Newark",
+      );
     });
   });
 
@@ -1059,7 +1130,10 @@ describe("Formation - BusinessStep", () => {
     });
 
     it("saves data to formationData", async () => {
-      const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        { isVeteranNonprofit: undefined },
+      );
       page.chooseRadio("isVeteranNonprofit-true");
       await page.submitBusinessStep(true);
       expect(currentBusiness().formationData.formationFormData.isVeteranNonprofit).toEqual(true);
@@ -1095,208 +1169,238 @@ describe("Formation - BusinessStep", () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.businessSuffix.label
+        Config.formation.fields.businessSuffix.label,
       );
     });
 
     it("displays Withdrawals error label when Withdrawals is empty", async () => {
-      const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { withdrawals: "" },
+      );
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
-      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.withdrawals.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.withdrawals.label,
+      );
     });
 
     it("displays Dissolution error label when Dissolution is empty", async () => {
-      const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { dissolution: "" },
+      );
       await attemptApiSubmission(page);
-      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.dissolution.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.dissolution.label,
+      );
     });
 
     it("displays Combined Investment error label when Combined Investment is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { combinedInvestment: "" }
+        { combinedInvestment: "" },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.combinedInvestment.label
+        Config.formation.fields.combinedInvestment.label,
       );
     });
 
     it("displays error label when Partnership Rights can create Limited Partner is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canCreateLimitedPartner: undefined }
+        { canCreateLimitedPartner: undefined },
       );
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.formation.fields.canCreateLimitedPartner.label
+        Config.formation.fields.canCreateLimitedPartner.label,
       );
     });
 
     it("displays error label when Partnership Rights Limited Partner Terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canCreateLimitedPartner: true, createLimitedPartnerTerms: "" }
+        { canCreateLimitedPartner: true, createLimitedPartnerTerms: "" },
       );
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.createLimitedPartnerTerms.label
+        Config.formation.fields.createLimitedPartnerTerms.label,
       );
     });
 
     it("displays error label when Partnership Rights can make distribution is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canMakeDistribution: undefined }
+        { canMakeDistribution: undefined },
       );
       await attemptApiSubmission(page);
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.formation.fields.canMakeDistribution.label
+        Config.formation.fields.canMakeDistribution.label,
       );
     });
 
     it("displays error label when Partnership Rights make distribution terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canMakeDistribution: true, makeDistributionTerms: "" }
+        { canMakeDistribution: true, makeDistributionTerms: "" },
       );
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.makeDistributionTerms.label
+        Config.formation.fields.makeDistributionTerms.label,
       );
     });
 
     it("displays error label when Partnership Rights can get distribution is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canGetDistribution: undefined }
+        { canGetDistribution: undefined },
       );
       await attemptApiSubmission(page);
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.formation.fields.canGetDistribution.label
+        Config.formation.fields.canGetDistribution.label,
       );
     });
 
     it("displays error label when Partnership Rights get distribution terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canGetDistribution: true, getDistributionTerms: "" }
+        { canGetDistribution: true, getDistributionTerms: "" },
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.getDistributionTerms.label
+        Config.formation.fields.getDistributionTerms.label,
       );
     });
 
     it("displays error label when Total Shares is empty", async () => {
-      const page = await getPageHelper({ legalStructureId: "c-corporation" }, { businessTotalStock: "" });
+      const page = await getPageHelper(
+        { legalStructureId: "c-corporation" },
+        { businessTotalStock: "" },
+      );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.businessTotalStock.label
+        Config.formation.fields.businessTotalStock.label,
       );
-      expect(screen.getByText(Config.formation.fields.businessTotalStock.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.businessTotalStock.error),
+      ).toBeInTheDocument();
     });
 
     it("displays error label when Foreign Date of Formation is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignDateOfFormation: undefined }
+        { foreignDateOfFormation: undefined },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.foreignDateOfFormation.label
+        Config.formation.fields.foreignDateOfFormation.label,
       );
-      expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.foreignDateOfFormation.error),
+      ).toBeInTheDocument();
     });
 
     it("displays error label when Foreign State of Formation is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-        { foreignStateOfFormation: undefined }
+        { foreignStateOfFormation: undefined },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.foreignStateOfFormation.label
+        Config.formation.fields.foreignStateOfFormation.label,
       );
-      expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.foreignStateOfFormation.error),
+      ).toBeInTheDocument();
     });
 
     it("displays error label when Address line1 is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressLine1: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressLine1.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressLine1.label,
+      );
     });
 
     it("displays error label when Address zip code is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressZipCode: "" });
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.addressZipCode.label
+        Config.formation.fields.addressZipCode.label,
       );
     });
 
     it("displays error label when Address province is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressProvince: undefined, businessLocationType: "INTL" }
+        { addressProvince: undefined, businessLocationType: "INTL" },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.addressProvince.label
+        Config.formation.fields.addressProvince.label,
       );
     });
 
     it("displays error label when Address country is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressCountry: undefined, businessLocationType: "INTL" }
+        { addressCountry: undefined, businessLocationType: "INTL" },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.addressCountry.label
+        Config.formation.fields.addressCountry.label,
       );
     });
 
     it("displays error label when Address city is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressCity: undefined, businessLocationType: "INTL" }
+        { addressCity: undefined, businessLocationType: "INTL" },
       );
       await attemptApiSubmission(page);
-      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressCity.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressCity.label,
+      );
     });
 
     it("displays error label when Address state is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressState: undefined, businessLocationType: "US" }
+        { addressState: undefined, businessLocationType: "US" },
       );
       await attemptApiSubmission(page);
-      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressState.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressState.label,
+      );
     });
 
     it("displays error label when isVeteranNonprofit is undefined", async () => {
-      const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        { isVeteranNonprofit: undefined },
+      );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.isVeteranNonprofit.label
+        Config.formation.fields.isVeteranNonprofit.label,
       );
-      expect(screen.getByText(Config.formation.fields.isVeteranNonprofit.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.isVeteranNonprofit.error),
+      ).toBeInTheDocument();
     });
 
     it("displays error label when hasNonprofitBoardMembers is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
-        { hasNonprofitBoardMembers: undefined, legalType: "nonprofit" }
+        { hasNonprofitBoardMembers: undefined, legalType: "nonprofit" },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.hasNonprofitBoardMembers.label
+        Config.formation.fields.hasNonprofitBoardMembers.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1308,11 +1412,11 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberQualificationsSpecified: undefined,
           legalType: "nonprofit",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.label
+        Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1325,11 +1429,11 @@ describe("Formation - BusinessStep", () => {
           nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
           nonprofitBoardMemberQualificationsTerms: "",
           legalType: "nonprofit",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitBoardMemberQualificationsTerms.label
+        Config.formation.fields.nonprofitBoardMemberQualificationsTerms.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1341,11 +1445,11 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberRightsSpecified: undefined,
           legalType: "nonprofit",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
+        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1358,11 +1462,11 @@ describe("Formation - BusinessStep", () => {
           nonprofitBoardMemberRightsSpecified: "IN_FORM",
           legalType: "nonprofit",
           nonprofitBoardMemberRightsTerms: "",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
+        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1374,11 +1478,11 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitTrusteesMethodSpecified: undefined,
           legalType: "nonprofit",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitTrusteesMethodSpecified.label
+        Config.formation.fields.nonprofitTrusteesMethodSpecified.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1391,11 +1495,11 @@ describe("Formation - BusinessStep", () => {
           nonprofitTrusteesMethodSpecified: "IN_FORM",
           nonprofitTrusteesMethodTerms: "",
           legalType: "nonprofit",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitTrusteesMethodTerms.label
+        Config.formation.fields.nonprofitTrusteesMethodTerms.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1407,11 +1511,11 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitAssetDistributionSpecified: undefined,
           legalType: "nonprofit",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitAssetDistributionSpecified.label
+        Config.formation.fields.nonprofitAssetDistributionSpecified.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
@@ -1424,11 +1528,11 @@ describe("Formation - BusinessStep", () => {
           nonprofitAssetDistributionSpecified: "IN_FORM",
           nonprofitAssetDistributionTerms: "",
           legalType: "nonprofit",
-        }
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByTestId("alert-error")).toHaveTextContent(
-        Config.formation.fields.nonprofitAssetDistributionTerms.label
+        Config.formation.fields.nonprofitAssetDistributionTerms.label,
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });

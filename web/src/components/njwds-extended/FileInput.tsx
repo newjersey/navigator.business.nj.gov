@@ -55,7 +55,9 @@ export const FileInput = ({
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const size = maxFileSize?.maxSizeInMegabytes ? maxFileSize.maxSizeInMegabytes * BYTES_IN_A_MB : undefined;
+  const size = maxFileSize?.maxSizeInMegabytes
+    ? maxFileSize.maxSizeInMegabytes * BYTES_IN_A_MB
+    : undefined;
 
   const [hasFileBeenRead, setHasFileBeenRead] = useState<boolean>(false);
   const [fileUploadError, setFileUploadError] = useState({ hasError: false, errorMessage: "" });
@@ -112,7 +114,9 @@ export const FileInput = ({
           e.stopImmediatePropagation();
           setFileUploadError({
             hasError: true,
-            errorMessage: templateEval(acceptedFileTypes.errorMessage, { fileName: selectedFile.name }),
+            errorMessage: templateEval(acceptedFileTypes.errorMessage, {
+              fileName: selectedFile.name,
+            }),
           });
         } else if (maxFileSize && size && selectedFile.size > size) {
           e.stopImmediatePropagation();
@@ -163,7 +167,11 @@ export const FileInput = ({
 
   return (
     <>
-      <div className={`usa-form-group${hasError || (fileUploadError.hasError && " usa-form-group--error")}`}>
+      <div
+        className={`usa-form-group${
+          hasError || (fileUploadError.hasError && " usa-form-group--error")
+        }`}
+      >
         <label className="usa-label" htmlFor="file-input-single">
           {helperText}
         </label>

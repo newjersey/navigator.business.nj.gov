@@ -11,7 +11,7 @@ export const migrate_v137_to_v138 = (v137Data: v137UserData): v138UserData => {
     businesses: Object.fromEntries(
       Object.values(v137Data.businesses)
         .map((business: v137Business) => migrate_v137Business_to_v138Business(business))
-        .map((currBusiness: v138Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v138Business) => [currBusiness.id, currBusiness]),
     ),
     version: 138,
   } as v138UserData;
@@ -38,7 +38,10 @@ export const migrate_v137Business_to_v138Business = (business: v137Business): v1
   delete otherTaskProgressItems["public-accountant-license"];
   delete otherTaskProgressItems["landscape-architect-license"];
 
-  if (business.profileData.industryId === "health-care-services-firm-renewal" && business.licenseData) {
+  if (
+    business.profileData.industryId === "health-care-services-firm-renewal" &&
+    business.licenseData
+  ) {
     return {
       ...business,
       taskProgress: {
@@ -80,7 +83,9 @@ export const migrate_v137Business_to_v138Business = (business: v137Business): v1
       licenseData: {
         lastUpdatedISO: business.licenseData.lastUpdatedISO,
         licenses: {
-          "Home Improvement Contractors-Home Improvement Contractor": getLicenseDetails(business.licenseData),
+          "Home Improvement Contractors-Home Improvement Contractor": getLicenseDetails(
+            business.licenseData,
+          ),
         },
       },
     };
@@ -139,7 +144,7 @@ export const migrate_v137Business_to_v138Business = (business: v137Business): v1
         lastUpdatedISO: business.licenseData.lastUpdatedISO,
         licenses: {
           "Massage and Bodywork Therapy-Massage and Bodywork Employer": getLicenseDetails(
-            business.licenseData
+            business.licenseData,
           ),
         },
       },
@@ -189,7 +194,9 @@ export const migrate_v137Business_to_v138Business = (business: v137Business): v1
       licenseData: {
         lastUpdatedISO: business.licenseData.lastUpdatedISO,
         licenses: {
-          "Real Estate Appraisers-Appraisal Management Company": getLicenseDetails(business.licenseData),
+          "Real Estate Appraisers-Appraisal Management Company": getLicenseDetails(
+            business.licenseData,
+          ),
         },
       },
     };
@@ -785,7 +792,9 @@ export const generatev138UserData = (overrides: Partial<v138UserData>): v138User
   };
 };
 
-export const generatev138BusinessUser = (overrides: Partial<v138BusinessUser>): v138BusinessUser => {
+export const generatev138BusinessUser = (
+  overrides: Partial<v138BusinessUser>,
+): v138BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -865,7 +874,7 @@ export const generatev138ProfileData = (overrides: Partial<v138ProfileData>): v1
 };
 
 export const generatev138IndustrySpecificData = (
-  overrides: Partial<v138IndustrySpecificData>
+  overrides: Partial<v138IndustrySpecificData>,
 ): v138IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -910,7 +919,7 @@ export const generatev138Preferences = (overrides: Partial<v138Preferences>): v1
 
 export const generatev138FormationData = (
   overrides: Partial<v138FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v138FormationData => {
   return {
     formationFormData: generatev138FormationFormData({}, legalStructureId),
@@ -926,9 +935,11 @@ export const generatev138FormationData = (
 
 export const generatev138FormationFormData = (
   overrides: Partial<v138FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v138FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v138FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -975,7 +986,8 @@ export const generatev138FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: true, title: "Authorized Representative" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev138FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generatev138FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -996,7 +1008,9 @@ export const generatev138FormationFormData = (
   };
 };
 
-export const generatev138Municipality = (overrides: Partial<v138Municipality>): v138Municipality => {
+export const generatev138Municipality = (
+  overrides: Partial<v138Municipality>,
+): v138Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -1006,7 +1020,9 @@ export const generatev138Municipality = (overrides: Partial<v138Municipality>): 
   };
 };
 
-export const generatev138FormationMember = (overrides: Partial<v138FormationMember>): v138FormationMember => {
+export const generatev138FormationMember = (
+  overrides: Partial<v138FormationMember>,
+): v138FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -1020,7 +1036,9 @@ export const generatev138FormationMember = (overrides: Partial<v138FormationMemb
   };
 };
 
-export const generatev138TaxFilingData = (overrides: Partial<v138TaxFilingData>): v138TaxFilingData => {
+export const generatev138TaxFilingData = (
+  overrides: Partial<v138TaxFilingData>,
+): v138TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,

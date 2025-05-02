@@ -1,5 +1,12 @@
 import { GTM_ID } from "@/lib/utils/analytics";
-import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
 import Script from "next/script";
 import { ReactElement } from "react";
 

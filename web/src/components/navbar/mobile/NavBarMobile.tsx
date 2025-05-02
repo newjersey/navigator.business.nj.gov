@@ -64,7 +64,10 @@ export const NavBarMobile = (props: Props): ReactElement => {
   // logo only / loading/redirect
   if (props.logoOnlyType) {
     return (
-      <NavBarLogoOnlyMobile scrolled={scrolled} showMyNjLogo={props.logoOnlyType === "NAVIGATOR_MYNJ_LOGO"} />
+      <NavBarLogoOnlyMobile
+        scrolled={scrolled}
+        showMyNjLogo={props.logoOnlyType === "NAVIGATOR_MYNJ_LOGO"}
+      />
     );
   } else if (props.isLoginPage) {
     return (
@@ -105,7 +108,10 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
-          subMenuElement={[<GetStartedMenuItem key={"getStarted"} />, <LoginMenuItem key={"login"} />]}
+          subMenuElement={[
+            <GetStartedMenuItem key={"getStarted"} />,
+            <LoginMenuItem key={"login"} />,
+          ]}
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}

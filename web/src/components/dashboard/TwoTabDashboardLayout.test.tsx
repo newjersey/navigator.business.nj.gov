@@ -37,7 +37,7 @@ describe("<TwoTabDashboardLayout />", () => {
         secondTab={<div>Second Tab Content</div>}
         certifications={certificationsArray ?? certs}
         fundings={fundingsArray ?? fundings}
-      />
+      />,
     );
   };
 
@@ -55,8 +55,8 @@ describe("<TwoTabDashboardLayout />", () => {
       screen.getByText(
         templateEval(Config.dashboardDefaults.mobileSecondTabText, {
           count: "0",
-        })
-      )
+        }),
+      ),
     );
 
     expect(screen.getByText("Second Tab Content")).toBeInTheDocument();
@@ -83,8 +83,8 @@ describe("<TwoTabDashboardLayout />", () => {
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
             count: "1",
-          })
-        )
+          }),
+        ),
       ).toBeInTheDocument();
     });
 
@@ -108,8 +108,8 @@ describe("<TwoTabDashboardLayout />", () => {
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
             count: "4",
-          })
-        )
+          }),
+        ),
       ).toBeInTheDocument();
     });
 
@@ -134,8 +134,8 @@ describe("<TwoTabDashboardLayout />", () => {
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
             count: "6",
-          })
-        )
+          }),
+        ),
       ).toBeInTheDocument();
     });
   });

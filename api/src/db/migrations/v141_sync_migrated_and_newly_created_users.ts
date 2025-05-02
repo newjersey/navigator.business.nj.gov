@@ -7,7 +7,7 @@ export const migrate_v140_to_v141 = (v140Data: v140UserData): v141UserData => {
     businesses: Object.fromEntries(
       Object.values(v140Data.businesses)
         .map((business: v140Business) => migrate_v140Business_to_v141Business(business))
-        .map((currBusiness: v141Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v141Business) => [currBusiness.id, currBusiness]),
     ),
     version: 141,
     user: {
@@ -16,7 +16,9 @@ export const migrate_v140_to_v141 = (v140Data: v140UserData): v141UserData => {
         ...v140Data.user.externalStatus,
         userTesting: {
           success: v140Data.user.externalStatus.userTesting?.success || undefined,
-          status: v140Data.user.externalStatus.userTesting?.success ? "SUCCESS" : "CONNECTION_ERROR",
+          status: v140Data.user.externalStatus.userTesting?.success
+            ? "SUCCESS"
+            : "CONNECTION_ERROR",
         },
       },
     },
@@ -40,7 +42,8 @@ export const migrate_v140Business_to_v141Business = (business: v140Business): v1
         ...business.formationData.formationFormData,
         addressMunicipality: {
           name: business.formationData.formationFormData.addressMunicipality?.name ?? "",
-          displayName: business.formationData.formationFormData.addressMunicipality?.displayName ?? "",
+          displayName:
+            business.formationData.formationFormData.addressMunicipality?.displayName ?? "",
           id: business.formationData.formationFormData.addressMunicipality?.id ?? "",
           county: business.formationData.formationFormData.addressMunicipality?.county ?? "",
         },
@@ -574,7 +577,9 @@ export const generatev141UserData = (overrides: Partial<v141UserData>): v141User
   };
 };
 
-export const generatev141BusinessUser = (overrides: Partial<v141BusinessUser>): v141BusinessUser => {
+export const generatev141BusinessUser = (
+  overrides: Partial<v141BusinessUser>,
+): v141BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -660,7 +665,7 @@ export const generatev141ProfileData = (overrides: Partial<v141ProfileData>): v1
 };
 
 export const generatev141IndustrySpecificData = (
-  overrides: Partial<v141IndustrySpecificData>
+  overrides: Partial<v141IndustrySpecificData>,
 ): v141IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -705,7 +710,7 @@ export const generatev141Preferences = (overrides: Partial<v141Preferences>): v1
 
 export const generatev141FormationData = (
   overrides: Partial<v141FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v141FormationData => {
   return {
     formationFormData: generatev141FormationFormData({}, legalStructureId),
@@ -721,9 +726,11 @@ export const generatev141FormationData = (
 
 export const generatev141FormationFormData = (
   overrides: Partial<v141FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v141FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v141FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -769,7 +776,8 @@ export const generatev141FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev141FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generatev141FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -792,7 +800,9 @@ export const generatev141FormationFormData = (
   };
 };
 
-export const generatev141Municipality = (overrides: Partial<v141Municipality>): v141Municipality => {
+export const generatev141Municipality = (
+  overrides: Partial<v141Municipality>,
+): v141Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -802,7 +812,9 @@ export const generatev141Municipality = (overrides: Partial<v141Municipality>): 
   };
 };
 
-export const generatev141FormationMember = (overrides: Partial<v141FormationMember>): v141FormationMember => {
+export const generatev141FormationMember = (
+  overrides: Partial<v141FormationMember>,
+): v141FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -816,7 +828,9 @@ export const generatev141FormationMember = (overrides: Partial<v141FormationMemb
   };
 };
 
-export const generatev141TaxFilingData = (overrides: Partial<v141TaxFilingData>): v141TaxFilingData => {
+export const generatev141TaxFilingData = (
+  overrides: Partial<v141TaxFilingData>,
+): v141TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,

@@ -50,7 +50,7 @@ const renderComponent = ({
       initialUserData={userData === undefined ? createEmptyUserData(generateUser({})) : userData}
     >
       <NavBarDashboardLink linkText={displayedLinkText} previousBusinessId={previousBusinessId} />
-    </WithStatefulUserData>
+    </WithStatefulUserData>,
   );
 };
 
@@ -71,7 +71,10 @@ describe("<NavBarDashboardLink/>", () => {
         id: "previous-business-id",
         onboardingFormProgress: "COMPLETED",
       });
-      newBusiness = generateBusiness({ id: "new-business-id", onboardingFormProgress: "UNSTARTED" });
+      newBusiness = generateBusiness({
+        id: "new-business-id",
+        onboardingFormProgress: "UNSTARTED",
+      });
       userData = generateUserDataForBusiness(newBusiness, {
         businesses: {
           "new-business-id": newBusiness,
@@ -105,7 +108,9 @@ describe("<NavBarDashboardLink/>", () => {
 
   describe("when previousBusinessId prop is not present", () => {
     it("navigates to the onboarding if onboarding hasn't been started", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: undefined }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: undefined }),
+      );
       renderComponent({ userData });
       fireEvent.click(screen.getByText(displayedLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);

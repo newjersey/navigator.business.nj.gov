@@ -55,7 +55,7 @@ module.exports = withBundleAnalyzer({
             },
           },
         ],
-      }
+      },
     );
 
     config.plugins.push(
@@ -63,7 +63,7 @@ module.exports = withBundleAnalyzer({
         dry: false,
         cleanOnceBeforeBuildPatterns: ["../public/vendor"],
         dangerouslyAllowCleanPatternsOutsideProject: true,
-      })
+      }),
     );
 
     config.plugins.push(
@@ -78,7 +78,7 @@ module.exports = withBundleAnalyzer({
             to: "../public/vendor/js",
           },
         ],
-      })
+      }),
     );
 
     return config;

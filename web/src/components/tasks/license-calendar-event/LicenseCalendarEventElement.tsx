@@ -52,7 +52,7 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
             </span>{" "}
             {licenseDetails?.expirationDateISO &&
               parseDateWithFormat(date.format(defaultDateFormat), defaultDateFormat).format(
-                licenseSearchDateFormat
+                licenseSearchDateFormat,
               )}
           </div>
         </div>
@@ -71,7 +71,10 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
         </>
       )}
 
-      <LicenseCurrentStatusComponent licenseData={business?.licenseData} licenseName={licenseName} />
+      <LicenseCurrentStatusComponent
+        licenseData={business?.licenseData}
+        licenseName={licenseName}
+      />
 
       <Content>{props.license.contentMd}</Content>
 
@@ -82,7 +85,10 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
       <span className="h6-styling">{props.license.issuingAgency}</span>
 
       {props.license.callToActionLink && props.license.callToActionText && (
-        <SingleCtaLink link={props.license.callToActionLink} text={props.license.callToActionText} />
+        <SingleCtaLink
+          link={props.license.callToActionLink}
+          text={props.license.callToActionText}
+        />
       )}
     </div>
   );

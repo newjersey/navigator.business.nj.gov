@@ -22,7 +22,9 @@ describe("migrate_v95_to_v96", () => {
   });
 
   it("converts the registered field on taxFilingData to the registeredISO Field", () => {
-    const v95 = v95UserDataGenerator({ taxFilingData: v95TaxFilingDataGenerator({ registered: true }) });
+    const v95 = v95UserDataGenerator({
+      taxFilingData: v95TaxFilingDataGenerator({ registered: true }),
+    });
     const v96 = migrate_v95_to_v96(v95);
     expect(v96).toEqual({
       ...v95,

@@ -32,11 +32,11 @@ describe("<UnlockedBy />", () => {
     render(<UnlockedBy task={task} />);
 
     const alertMatchedWithStartingText = screen.getByText((content) =>
-      content.includes(Config.formation.intro.certificateOfGoodStandingAlert.beginning)
+      content.includes(Config.formation.intro.certificateOfGoodStandingAlert.beginning),
     );
 
     const alertMatchedWithEndingText = screen.getByText((content) =>
-      content.includes(Config.formation.intro.certificateOfGoodStandingAlert.end)
+      content.includes(Config.formation.intro.certificateOfGoodStandingAlert.end),
     );
 
     expect(alertMatchedWithStartingText).toBeInTheDocument();

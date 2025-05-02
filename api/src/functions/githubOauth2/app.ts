@@ -60,7 +60,7 @@ app.get("/api/cms/callback", async (req, res) => {
       renderResponse("success", {
         token: accessToken.token["access_token"],
         provider: "github",
-      })
+      }),
     );
   } catch (error) {
     console.error(JSON.stringify(error));

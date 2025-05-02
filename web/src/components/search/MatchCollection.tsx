@@ -24,7 +24,7 @@ export const MatchCollection = (props: Props): ReactElement => {
 
   const configMatchesInThisCollection = props.groupedConfigMatches.filter((configMatch) => {
     const cmsHeaderForMatch = cmsCollections.find((it) =>
-      it.children.includes(configMatch.cmsCollectionName)
+      it.children.includes(configMatch.cmsCollectionName),
     )?.label;
     return cmsHeaderForMatch === collectionTitle;
   });
@@ -33,7 +33,7 @@ export const MatchCollection = (props: Props): ReactElement => {
     (acc: number, curr: Match[]) => {
       return acc + curr.length;
     },
-    0
+    0,
   );
 
   const totalMatches = countAllMatchesInCollections + configMatchesInThisCollection.length;

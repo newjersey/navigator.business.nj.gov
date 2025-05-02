@@ -53,14 +53,14 @@ describe("ProfileNonEssentialQuestionsSection", () => {
         })}
       >
         <NonEssentialQuestionsSection />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
   };
 
   it("doesn't display section if industry doesn't have any non essential questions", () => {
     renderComponent({ industryId: "test-industry-with-no-non-essential-questions" });
     expect(
-      screen.queryByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
+      screen.queryByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header),
     ).not.toBeInTheDocument();
   });
 
@@ -74,7 +74,7 @@ describe("ProfileNonEssentialQuestionsSection", () => {
     });
 
     expect(
-      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
+      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header),
     ).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 1?")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 2?")).toBeInTheDocument();

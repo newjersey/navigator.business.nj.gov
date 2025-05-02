@@ -102,7 +102,7 @@ describe("loading page", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <LoadingPage />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
     await waitFor(() => {
       expect(currentBusiness().preferences.returnToLink).toEqual("");

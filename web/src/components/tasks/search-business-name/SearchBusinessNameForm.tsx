@@ -60,7 +60,9 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     setFieldsInteracted,
   } = useContext(BusinessFormationContext);
 
-  const setNameAvailability = props.isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
+  const setNameAvailability = props.isDba
+    ? setDbaBusinessNameAvailability
+    : setBusinessNameAvailability;
 
   const FIELD_NAME = "businessName";
   const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
@@ -79,7 +81,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   const handleBusinessNameAvailability = (
     nameAvailability: NameAvailability,
-    submittedName: string
+    submittedName: string,
   ): void => {
     const validName = ["AVAILABLE", "UNAVAILABLE"].includes(nameAvailability.status ?? "");
     if (!updateQueue || !validName) return;
@@ -106,7 +108,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   const handleDbaBusinessNameAvailability = (
     nameAvailability: NameAvailability,
-    submittedName: string
+    submittedName: string,
   ): void => {
     if (!updateQueue || nameAvailability.status !== "AVAILABLE") return;
     updateQueue
@@ -122,7 +124,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   const doSearch = useCallback(
     async (
       event: FormEvent<HTMLFormElement> | undefined,
-      { isInitialSubmit }: { isInitialSubmit: boolean }
+      { isInitialSubmit }: { isInitialSubmit: boolean },
     ): Promise<void> => {
       searchBusinessName(event)
         .then(async ({ nameAvailability, submittedName }) => {
@@ -137,7 +139,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         .catch(() => {});
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [searchBusinessName]
+    [searchBusinessName],
   );
 
   const resetNameAvailability = (): void => {
@@ -167,7 +169,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     (function showBusinessNameSearchResultsIfDBANameExists(): void {
       if (!business) return;
       if (props.isDba) return;
-      const shouldDoInitialSearch = currentName.length > 0 && determineIfNexusDbaNameNeeded(business);
+      const shouldDoInitialSearch =
+        currentName.length > 0 && determineIfNexusDbaNameNeeded(business);
       if (shouldDoInitialSearch && !didInitialSearch.current) {
         didInitialSearch.current = true;
         doSearch(undefined, { isInitialSubmit: true });

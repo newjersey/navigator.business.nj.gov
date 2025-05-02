@@ -33,13 +33,16 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const licenseCalendarEvents = getLicenseCalendarEvents(
     props.business?.licenseData,
-    Number.parseInt(props.activeYear)
+    Number.parseInt(props.activeYear),
   );
 
   const taxFilings = props.business.taxFilingData.filings ?? [];
 
   const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> =
-    sortFilterCalendarEventsWithinAYear([...licenseCalendarEvents, ...taxFilings], props.activeYear);
+    sortFilterCalendarEventsWithinAYear(
+      [...licenseCalendarEvents, ...taxFilings],
+      props.activeYear,
+    );
 
   const eventsGroupedByDate = groupBy(
     sortedFilteredEventsWithinAYear.filter((event) => {
@@ -48,7 +51,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
       }
       return true;
     }),
-    (value) => value.dueDate
+    (value) => value.dueDate,
   );
 
   const visibleEvents = eventsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
@@ -60,7 +63,11 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
           {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
         </Content>
         <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-x-3">
-          <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
+          <img
+            className="padding-y-2"
+            src={`/img/empty-trophy-illustration.png`}
+            alt="empty calendar"
+          />
         </div>
       </>
     );

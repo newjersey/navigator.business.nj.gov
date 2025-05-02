@@ -17,7 +17,11 @@ import { Task } from "@/lib/types/types";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import type { UserData } from "@businessnjgovnavigator/shared/userData";
-import type { FacilityDetails, XrayData, XraySearchError } from "@businessnjgovnavigator/shared/xray";
+import type {
+  FacilityDetails,
+  XrayData,
+  XraySearchError,
+} from "@businessnjgovnavigator/shared/xray";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
@@ -62,7 +66,11 @@ export const XrayRegistrationTask = (props: Props): ReactElement => {
   };
 
   const allFieldsHaveValues = (facilityDetails: FacilityDetails): boolean => {
-    return !!(facilityDetails.businessName && facilityDetails.addressLine1 && facilityDetails.addressZipCode);
+    return !!(
+      facilityDetails.businessName &&
+      facilityDetails.addressLine1 &&
+      facilityDetails.addressZipCode
+    );
   };
 
   const onSubmit = (facilityDetails: FacilityDetails): void => {
@@ -75,7 +83,8 @@ export const XrayRegistrationTask = (props: Props): ReactElement => {
     api
       .checkXrayRegistrationStatus(facilityDetails)
       .then((userData: UserData) => {
-        const xrayRegistrationData = userData.businesses[userData.currentBusinessId].xrayRegistrationData;
+        const xrayRegistrationData =
+          userData.businesses[userData.currentBusinessId].xrayRegistrationData;
         if (!xrayRegistrationData?.status && xrayRegistrationData?.machines?.length === 0) {
           setError("NOT_FOUND");
           setIsLoading(false);
@@ -115,7 +124,12 @@ export const XrayRegistrationTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="X-Ray Registration task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab
                   value="0"

@@ -126,7 +126,9 @@ export const generatev19User = (overrides: Partial<v19BusinessUser>): v19Busines
   };
 };
 
-export const generatev19OnboardingData = (overrides: Partial<v19OnboardingData>): v19OnboardingData => {
+export const generatev19OnboardingData = (
+  overrides: Partial<v19OnboardingData>,
+): v19OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",

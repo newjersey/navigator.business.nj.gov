@@ -25,15 +25,16 @@ export const NATURAL_PROGRAM_ERROR = "Error calling Natural Program. Please try 
 
 export const ApiTaxClearanceCertificateClient = (
   logWriter: LogWriterType,
-  config: Config
+  config: Config,
 ): TaxClearanceCertificateClient => {
   const postTaxClearanceCertificate = async (
-    userData: UserData
+    userData: UserData,
   ): Promise<TaxClearanceCertificateResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Tax Clearance Certificate Client - Id:${logId}`);
 
-    const currTaxClearanceData = userData.businesses[userData.currentBusinessId].taxClearanceCertificateData;
+    const currTaxClearanceData =
+      userData.businesses[userData.currentBusinessId].taxClearanceCertificateData;
 
     const postBody = {
       repId: userData.user.id,
@@ -46,13 +47,15 @@ export const ApiTaxClearanceCertificateClient = (
       city: currTaxClearanceData?.addressCity,
       state: currTaxClearanceData?.addressState?.shortCode,
       zip: currTaxClearanceData?.addressZipCode,
-      agencyName: LookupTaxClearanceCertificateAgenciesById(currTaxClearanceData?.requestingAgencyId).name,
+      agencyName: LookupTaxClearanceCertificateAgenciesById(
+        currTaxClearanceData?.requestingAgencyId,
+      ).name,
     };
 
     logWriter.LogInfo(
       `Tax Clearance Certificate Client - Id:${logId} - Request Sent to ${
         config.orgUrl
-      }/TYTR_ACE_App/ProcessCertificate/businessClearance data: ${JSON.stringify(postBody)}`
+      }/TYTR_ACE_App/ProcessCertificate/businessClearance data: ${JSON.stringify(postBody)}`,
     );
 
     return axios
@@ -67,11 +70,11 @@ export const ApiTaxClearanceCertificateClient = (
           `Tax Clearance Certificate Client - Id:${logId} - Response received: ${JSON.stringify({
             ...response.data,
             certificate: "Succussful Response - PDF data omitted",
-          })}`
+          })}`,
         );
         if (!Array.isArray(response.data.certificate) || response.data.certificate.length === 0) {
           const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Error: Certificate is empty or not an array ${JSON.stringify(
-            response.data.certificate
+            response.data.certificate,
           )}`;
           logWriter.LogError(errorMessage);
           throw errorMessage;

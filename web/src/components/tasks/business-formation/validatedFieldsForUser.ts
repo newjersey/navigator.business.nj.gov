@@ -7,7 +7,9 @@ import {
   incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 
-export const validatedFieldsForUser = (formationFormData: FormationFormData): FieldsForErrorHandling[] => {
+export const validatedFieldsForUser = (
+  formationFormData: FormationFormData,
+): FieldsForErrorHandling[] => {
   let validatedFields: FieldsForErrorHandling[] = [
     "businessName",
     "businessSuffix",
@@ -32,7 +34,12 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
       validatedFields = [...validatedFields, ...foreignValidatedFields, "addressState"];
       break;
     case "INTL":
-      validatedFields = [...validatedFields, ...foreignValidatedFields, "addressProvince", "addressCountry"];
+      validatedFields = [
+        ...validatedFields,
+        ...foreignValidatedFields,
+        "addressProvince",
+        "addressCountry",
+      ];
       break;
     case "NJ":
       validatedFields.push("addressMunicipality");

@@ -36,7 +36,9 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+          hint:
+            "This appears only in My Account, in the For You column, max char is 150 including
+            spaces, plain text only",
         }
       - {
           label: "Open Date",
@@ -66,13 +68,19 @@ collections:
           widget: "markdown",
           hint: "Eligibility Requirements for Business, Benefit to Participating Businesses",
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
       - {
           label: "Call To Action Text",
           name: "callToActionText",
           widget: "string",
           required: false,
-          hint: "If there is a link in the 'Call To Action Link' field above, this field is required",
+          hint:
+            "If there is a link in the 'Call To Action Link' field above, this field is required",
         }
       - label: "Funding Type"
         name: "fundingType"
@@ -95,7 +103,8 @@ collections:
       - label: "Status"
         name: "status"
         widget: "select"
-        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+        options:
+          ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
       - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"
@@ -123,8 +132,15 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-        hint: "Early stage business = not yet open or open less than 2 years; Established business = open 2 years or more"
-      - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
+        hint:
+          "Early stage business = not yet open or open less than 2 years; Established business =
+          open 2 years or more"
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          options: ["yes", "n/a"],
+        }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
@@ -146,8 +162,14 @@ collections:
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
           - { label: "Small Business Enterprise", value: "small-business-enterprise" }
-          - { label: "Disadvantaged Business Enterprise", value: "disadvantaged-business-enterprise" }
-          - { label: "Emerging Small Business Enterprise", value: "emerging-small-business-enterprise" }
+          - {
+              label: "Disadvantaged Business Enterprise",
+              value: "disadvantaged-business-enterprise",
+            }
+          - {
+              label: "Emerging Small Business Enterprise",
+              value: "emerging-small-business-enterprise",
+            }
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"
@@ -254,7 +276,9 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+          hint:
+            "This appears only in My Account, in the For You column, max char is 150 including
+            spaces, plain text only",
         }
       - {
           label: "Open Date",
@@ -284,13 +308,19 @@ collections:
           widget: "markdown",
           hint: "Eligibility Requirements for Business, Benefit to Participating Businesses",
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
       - {
           label: "Call To Action Text",
           name: "callToActionText",
           widget: "string",
           required: false,
-          hint: "If there is a link in the 'Call To Action Link' field above, this field is required",
+          hint:
+            "If there is a link in the 'Call To Action Link' field above, this field is required",
         }
       - label: "Funding Type"
         name: "fundingType"
@@ -312,7 +342,8 @@ collections:
       - label: "Status"
         name: "status"
         widget: "select"
-        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+        options:
+          ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
       - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"
@@ -340,8 +371,15 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-        hint: "Early stage business = not yet open or open less than 2 years; Established business = open 2 years or more"
-      - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
+        hint:
+          "Early stage business = not yet open or open less than 2 years; Established business =
+          open 2 years or more"
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          options: ["yes", "n/a"],
+        }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
@@ -363,8 +401,14 @@ collections:
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
           - { label: "Small Business Enterprise", value: "small-business-enterprise" }
-          - { label: "Disadvantaged Business Enterprise", value: "disadvantaged-business-enterprise" }
-          - { label: "Emerging Small Business Enterprise", value: "emerging-small-business-enterprise" }
+          - {
+              label: "Disadvantaged Business Enterprise",
+              value: "disadvantaged-business-enterprise",
+            }
+          - {
+              label: "Emerging Small Business Enterprise",
+              value: "emerging-small-business-enterprise",
+            }
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"

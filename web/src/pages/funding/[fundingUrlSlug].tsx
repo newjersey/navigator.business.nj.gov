@@ -8,7 +8,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
+import {
+  FundingUrlSlugParam,
+  loadAllFundingUrlSlugs,
+  loadFundingByUrlSlug,
+} from "@/lib/static/loadFundings";
 import { Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
@@ -76,7 +80,10 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
         ) : null}
       </div>
       {props.funding.callToActionLink && props.funding.callToActionText && (
-        <SingleCtaLink link={props.funding.callToActionLink} text={props.funding.callToActionText} />
+        <SingleCtaLink
+          link={props.funding.callToActionLink}
+          text={props.funding.callToActionText}
+        />
       )}
     </>
   );
@@ -103,7 +110,11 @@ export const getStaticPaths = (): GetStaticPathsResult<FundingUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: FundingUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = ({
+  params,
+}: {
+  params: FundingUrlSlugParam;
+}): GetStaticPropsResult<Props> => {
   return {
     props: {
       funding: loadFundingByUrlSlug(params.fundingUrlSlug),
