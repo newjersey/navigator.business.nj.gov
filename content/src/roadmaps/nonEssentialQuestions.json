@@ -161,7 +161,7 @@
       "addOn": "crematory-application-funeral"
     },
     {
-      "questionText": "Does your business or facility use a boiler with a significant heating capacity?",
+      "questionText": "Will your business or facility use a boiler with a significant heating capacity?",
       "id": "inspect-boiler",
       "addOn": "boiler"
     },
