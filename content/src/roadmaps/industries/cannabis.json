@@ -85,7 +85,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "business-vehicle-title-reg",
-    "inspect-boiler"
+    "inspect-boiler",
+    "business-vehicle-irp"
   ],
   "displayname": "cannabis",
   "industryOnboardingQuestions": {
