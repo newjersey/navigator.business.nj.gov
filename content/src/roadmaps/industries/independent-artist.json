@@ -48,7 +48,8 @@
     "carnival-ride-permitting",
     "ticket-broker-resell",
     "entertainment-agency-register",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "business-vehicle-irp"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
