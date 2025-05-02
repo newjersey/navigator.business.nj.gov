@@ -1,0 +1,11 @@
+{
+  "id": "vehicle-irp",
+  "displayname": "vehicle-irp",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "task": "trucking-irp",
+      "weight": 100
+    }
+  ]
+}
