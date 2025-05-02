@@ -1,3 +1,10 @@
+## [2025.10.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.10.0...v2025.10.1) (2025-05-02)
+
+
+### Bug Fixes
+
+* updating dynamics api environment variables; increase docker resource class ([aad7923](https://github.com/newjersey/navigator.business.nj.gov/commit/aad79238a3162ba709c64f1b1b18c4c3be1557ac))
+
 # [2025.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.9.0...v2025.10.0) (2025-04-02)
 
 
