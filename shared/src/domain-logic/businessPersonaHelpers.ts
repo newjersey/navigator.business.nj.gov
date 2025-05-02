@@ -7,7 +7,9 @@ export const isRemoteWorkerOrSellerBusiness = (business?: Business | undefined):
   return isRemoteWorkerOrSellerProfileData(business?.profileData);
 };
 
-export const isRemoteWorkerOrSellerProfileData = (profileData?: ProfileData | undefined): boolean => {
+export const isRemoteWorkerOrSellerProfileData = (
+  profileData?: ProfileData | undefined,
+): boolean => {
   if (!profileData || profileData.businessPersona !== "FOREIGN") return false;
   const foreignBusinessType = determineForeignBusinessType(profileData.foreignBusinessTypeIds);
   return foreignBusinessType === "REMOTE_SELLER" || foreignBusinessType === "REMOTE_WORKER";
@@ -45,7 +47,10 @@ export const NexusBusinessTypeIds: ForeignBusinessTypeId[] = [
   "companyOperatedVehiclesInNJ",
 ];
 export const RemoteWorkerBusinessTypeIds: ForeignBusinessTypeId[] = ["employeesInNJ"];
-export const RemoteSellerBusinessTypeIds: ForeignBusinessTypeId[] = ["revenueInNJ", "transactionsInNJ"];
+export const RemoteSellerBusinessTypeIds: ForeignBusinessTypeId[] = [
+  "revenueInNJ",
+  "transactionsInNJ",
+];
 
 export const determineForeignBusinessType = (ids: ForeignBusinessTypeId[]): ForeignBusinessType => {
   if (ids.includes("none")) return "NONE";
@@ -58,6 +63,7 @@ export const determineForeignBusinessType = (ids: ForeignBusinessTypeId[]): Fore
 export const determineIfNexusDbaNameNeeded = (business?: Business | undefined): boolean => {
   if (!business) return false;
   return (
-    isNexusBusiness(business) && business.formationData.businessNameAvailability?.status === "UNAVAILABLE"
+    isNexusBusiness(business) &&
+    business.formationData.businessNameAvailability?.status === "UNAVAILABLE"
   );
 };

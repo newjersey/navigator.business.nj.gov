@@ -2,7 +2,7 @@ import type { XrayRegistrationEntry } from "@shared/xray";
 
 export const consolidatedEntries = (
   addressResults: XrayRegistrationEntry[],
-  businessNameResults: XrayRegistrationEntry[]
+  businessNameResults: XrayRegistrationEntry[],
 ): XrayRegistrationEntry[] => {
   const businessNameRecord: Record<string, XrayRegistrationEntry> = {};
   const consolidatedEntries: XrayRegistrationEntry[] = [];

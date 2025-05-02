@@ -19,13 +19,12 @@ export const ProfileDocuments = (props: Props): ReactElement => {
   const { documents } = useDocuments();
   const { state } = useContext(ProfileDataContext);
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["documents"]["default"] = getProfileConfig(
-    {
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["documents"]["default"] =
+    getProfileConfig({
       config: Config,
       persona: state.flow,
       fieldName: "documents",
-    }
-  );
+    });
 
   const listOfDocuments = useMemo(() => {
     return Object.values(business?.profileData.documents ?? {});

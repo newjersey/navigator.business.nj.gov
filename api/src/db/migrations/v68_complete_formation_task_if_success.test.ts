@@ -47,7 +47,7 @@ describe("migrate_v67_to_v68", () => {
 const makeUserData = (
   profileData: v67ProfileData,
   getFilingResponse: v67GetFilingResponse,
-  taskProgress: Record<string, v67TaskProgress>
+  taskProgress: Record<string, v67TaskProgress>,
 ): v67UserData => {
   return {
     user: generatev67User({}),

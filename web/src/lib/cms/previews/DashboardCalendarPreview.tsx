@@ -43,13 +43,22 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     }),
     taxFilingData: generateTaxFilingData({
       filings: [
-        generateTaxFilingCalendarEvent({ identifier: "1", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFilingCalendarEvent({
+          identifier: "1",
+          dueDate: dayjs().format(defaultDateFormat),
+        }),
         generateTaxFilingCalendarEvent({
           identifier: "2",
           dueDate: dayjs().add(1, "month").format(defaultDateFormat),
         }),
-        generateTaxFilingCalendarEvent({ identifier: "3", dueDate: dayjs().format(defaultDateFormat) }),
-        generateTaxFilingCalendarEvent({ identifier: "4", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFilingCalendarEvent({
+          identifier: "3",
+          dueDate: dayjs().format(defaultDateFormat),
+        }),
+        generateTaxFilingCalendarEvent({
+          identifier: "4",
+          dueDate: dayjs().format(defaultDateFormat),
+        }),
       ],
     }),
   });

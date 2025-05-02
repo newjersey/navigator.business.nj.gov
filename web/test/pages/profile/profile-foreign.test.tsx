@@ -73,22 +73,34 @@ describe("profile-foreign", () => {
 
   it("does not display the permits tab", () => {
     renderPage({ business: setupBusiness });
-    expect(screen.getAllByText(Config.profileDefaults.default.profileTabNumbersTitle).length).toBeGreaterThan(
-      0
-    );
-    expect(screen.getAllByText(Config.profileDefaults.default.profileTabNoteTitle).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(Config.profileDefaults.default.profileTabInfoTitle).length).toBeGreaterThan(0);
-    expect(screen.queryByText(Config.profileDefaults.default.profileTabPermitsTitle)).not.toBeInTheDocument();
+    expect(
+      screen.getAllByText(Config.profileDefaults.default.profileTabNumbersTitle).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(Config.profileDefaults.default.profileTabNoteTitle).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(Config.profileDefaults.default.profileTabInfoTitle).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.queryByText(Config.profileDefaults.default.profileTabPermitsTitle),
+    ).not.toBeInTheDocument();
   });
 
   it("does not display the documents tab", () => {
     renderPage({ business: setupBusiness });
-    expect(screen.getAllByText(Config.profileDefaults.default.profileTabNumbersTitle).length).toBeGreaterThan(
-      0
-    );
-    expect(screen.getAllByText(Config.profileDefaults.default.profileTabNoteTitle).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(Config.profileDefaults.default.profileTabInfoTitle).length).toBeGreaterThan(0);
-    expect(screen.queryByText(Config.profileDefaults.default.profileTabDocsTitle)).not.toBeInTheDocument();
+    expect(
+      screen.getAllByText(Config.profileDefaults.default.profileTabNumbersTitle).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(Config.profileDefaults.default.profileTabNoteTitle).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(Config.profileDefaults.default.profileTabInfoTitle).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.queryByText(Config.profileDefaults.default.profileTabDocsTitle),
+    ).not.toBeInTheDocument();
   });
 
   it("does not show the home-based question if locationInNewJersey=true, even if industry applicable", () => {
@@ -119,9 +131,11 @@ describe("profile-foreign", () => {
       renderPage({ business });
       clickSave();
       await waitFor(() => {
-        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+        expect(
+          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+        ).toBeInTheDocument();
       });
-    }
+    },
   );
 
   it("prevents Foreign Nexus user from saving when employment agency is selected as industry, but essential question is not answered", async () => {
@@ -137,7 +151,9 @@ describe("profile-foreign", () => {
     renderPage({ business });
     clickSave();
     await waitFor(() => {
-      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+      ).toBeInTheDocument();
     });
   });
 
@@ -178,8 +194,9 @@ describe("profile-foreign", () => {
       });
       fireEvent.click(
         screen.getByRole("checkbox", {
-          name: Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent.officeInNJ,
-        })
+          name: Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent
+            .officeInNJ,
+        }),
       );
       clickSave();
       await waitFor(() => {
@@ -198,8 +215,9 @@ describe("profile-foreign", () => {
       });
       fireEvent.click(
         screen.getByRole("checkbox", {
-          name: Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent.officeInNJ,
-        })
+          name: Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent
+            .officeInNJ,
+        }),
       );
       clickSave();
       await waitFor(() => {
@@ -211,24 +229,30 @@ describe("profile-foreign", () => {
       renderPage({ business: nexusForeignBusinessProfile({}) });
       expect(screen.getByTestId("info")).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.fields.industryId.default.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.industryId.default.header)),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.fields.legalStructureId.default.header))
+        screen.getByText(
+          markdownToText(Config.profileDefaults.fields.legalStructureId.default.header),
+        ),
       ).toBeInTheDocument();
     });
 
     it("displays the out of state business name field", () => {
       renderPage({ business: nexusForeignBusinessProfile({}) });
       expect(
-        screen.getByText(Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader)
+        screen.getByText(
+          Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader,
+        ),
       ).toBeInTheDocument();
     });
 
     it("displays the tax pin field", () => {
       renderPage({ business: nexusForeignBusinessProfile({}) });
       chooseTab("numbers");
-      expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
+      ).toBeInTheDocument();
     });
 
     it("displays Not Entered when the user hasn't entered a business name yet", () => {
@@ -244,7 +268,9 @@ describe("profile-foreign", () => {
       });
 
       expect(
-        screen.getByText(Config.profileDefaults.fields.nexusBusinessName.default.emptyBusinessPlaceHolder)
+        screen.getByText(
+          Config.profileDefaults.fields.nexusBusinessName.default.emptyBusinessPlaceHolder,
+        ),
       ).toBeInTheDocument();
     });
 
@@ -256,16 +282,20 @@ describe("profile-foreign", () => {
       });
 
       expect(
-        screen.queryByText(Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader)
+        screen.queryByText(
+          Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader,
+        ),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
+        screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header),
       ).not.toBeInTheDocument();
     });
 
     it("displays the user's business name if they have one", () => {
       renderPage({
-        business: nexusForeignBusinessProfile({ profileDataOverrides: { businessName: "Test Business" } }),
+        business: nexusForeignBusinessProfile({
+          profileDataOverrides: { businessName: "Test Business" },
+        }),
       });
       expect(within(screen.getByTestId("main")).getByText("Test Business")).toBeInTheDocument();
     });
@@ -281,7 +311,7 @@ describe("profile-foreign", () => {
       });
       expect(within(screen.getByTestId("main")).getByText("Test Business")).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header)),
       ).toBeInTheDocument();
     });
 
@@ -296,7 +326,7 @@ describe("profile-foreign", () => {
       });
       expect(within(screen.getByTestId("main")).getByText("Test Business")).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
+        screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header),
       ).not.toBeInTheDocument();
     });
 
@@ -389,11 +419,11 @@ describe("profile-foreign", () => {
 
       describe("when location is optional", () => {
         describe("legalStructure is Public Filing and operating Phase is GUEST_MODE or NEEDS_TO_FORM", () => {
-          const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
-            (it) => {
-              return it.id;
-            }
-          );
+          const allPublicFilingLegalStructures = allLegalStructuresOfType({
+            type: "publicFiling",
+          }).map((it) => {
+            return it.id;
+          });
           const operatingPhases: OperatingPhaseId[] = [
             OperatingPhaseId.GUEST_MODE,
             OperatingPhaseId.NEEDS_TO_FORM,
@@ -414,9 +444,11 @@ describe("profile-foreign", () => {
         });
 
         describe("legalStructure is Trade Name and operating Phase is GUEST_MODE", () => {
-          const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
-            return it.id;
-          });
+          const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map(
+            (it) => {
+              return it.id;
+            },
+          );
 
           for (const legalStructure of allTradeNameLegalStructures) {
             it(`allows saving with empty location for ${legalStructure} in GUEST_MODE`, async () => {
@@ -433,11 +465,11 @@ describe("profile-foreign", () => {
 
       describe("when location is required", () => {
         describe("legalStructure is Public Filing and operating Phase is FORMED", () => {
-          const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
-            (it) => {
-              return it.id;
-            }
-          );
+          const allPublicFilingLegalStructures = allLegalStructuresOfType({
+            type: "publicFiling",
+          }).map((it) => {
+            return it.id;
+          });
 
           for (const legalStructure of allPublicFilingLegalStructures) {
             it(`prevents saving with empty location for ${legalStructure} in FORMED`, async () => {
@@ -452,9 +484,11 @@ describe("profile-foreign", () => {
         });
 
         describe("legalStructure is Trade Name and operating Phase is FORMED", () => {
-          const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
-            return it.id;
-          });
+          const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map(
+            (it) => {
+              return it.id;
+            },
+          );
           for (const legalStructure of allTradeNameLegalStructures) {
             it(`prevents saving with empty location for ${legalStructure}`, async () => {
               renderWithLegalStructureAndPhase({
@@ -479,7 +513,7 @@ describe("profile-foreign", () => {
           }),
         });
         expect(
-          screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+          screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.header),
         ).toBeInTheDocument();
       });
 
@@ -492,10 +526,14 @@ describe("profile-foreign", () => {
           }),
         });
 
-        fireEvent.change(screen.getByLabelText("Date of formation"), { target: { value: "09/2025" } });
+        fireEvent.change(screen.getByLabelText("Date of formation"), {
+          target: { value: "09/2025" },
+        });
         fireEvent.blur(screen.getByLabelText("Date of formation"));
         expect(
-          screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.errorTextRequired)
+          screen.queryByText(
+            Config.profileDefaults.fields.dateOfFormation.default.errorTextRequired,
+          ),
         ).not.toBeInTheDocument();
       });
 
@@ -508,7 +546,7 @@ describe("profile-foreign", () => {
           }),
         });
         expect(
-          screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+          screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header),
         ).not.toBeInTheDocument();
       });
 
@@ -552,11 +590,11 @@ describe("profile-foreign", () => {
         renderPage({ business: foreignNexusUserData });
         expect(screen.getByTestId("info")).toBeInTheDocument();
         expect(
-          screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
+          screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header),
         ).toBeInTheDocument();
         expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)
+          screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText),
         ).not.toBeInTheDocument();
 
         expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
@@ -580,7 +618,7 @@ describe("profile-foreign", () => {
           }),
         });
         expect(screen.getByTestId("businessName")).toBeInTheDocument();
-      }
+      },
     );
 
     it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
@@ -595,8 +633,10 @@ describe("profile-foreign", () => {
           }),
         });
         chooseTab("numbers");
-        expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
-      }
+        expect(
+          screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
+        ).toBeInTheDocument();
+      },
     );
   });
 

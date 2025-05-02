@@ -50,7 +50,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
-    createEmptyFormationFormData()
+    createEmptyFormationFormData(),
   );
   const [stepIndex, setStepIndex] = useState(0);
   const [interactedFields, setInteractedFields] = useState<FieldsForErrorHandling[]>([]);
@@ -59,29 +59,39 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
   const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
-  const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
-    undefined
-  );
+  const [businessNameAvailability, setBusinessNameAvailability] = useState<
+    NameAvailability | undefined
+  >(undefined);
   const [dbaBusinessNameAvailability, setDbaBusinessNameAvailability] = useState<
     NameAvailability | undefined
   >(undefined);
-  const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(undefined);
+  const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(
+    undefined,
+  );
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
-      (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
-      business?.profileData.businessPersona
+      (business?.profileData.legalStructureId ??
+        defaultFormationLegalType) as PublicFilingLegalType,
+      business?.profileData.businessPersona,
     );
   }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
 
-  const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
-
-  const isValidLegalStructure = useMemo(
-    () => allowFormation(business?.profileData.legalStructureId, business?.profileData.businessPersona),
-    [business?.profileData.legalStructureId, business?.profileData.businessPersona]
+  const isForeign = useMemo(
+    () => legalStructureId.includes(foreignLegalTypePrefix),
+    [legalStructureId],
   );
 
-  const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
+  const isValidLegalStructure = useMemo(
+    () =>
+      allowFormation(business?.profileData.legalStructureId, business?.profileData.businessPersona),
+    [business?.profileData.legalStructureId, business?.profileData.businessPersona],
+  );
+
+  const getBusinessStartDate = (
+    date: string | undefined,
+    legalType: FormationLegalType,
+  ): string => {
     return !date || !isBusinessStartDateValid(date, legalType)
       ? getCurrentDateInNewJerseyFormatted(defaultDateFormat)
       : date;
@@ -98,12 +108,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
         business.formationData.formationFormData.businessName ?? business.profileData.businessName,
       businessStartDate: getBusinessStartDate(
         business.formationData.formationFormData.businessStartDate,
-        legalStructureId
+        legalStructureId,
       ),
       addressMunicipality: business.formationData.formationFormData.addressMunicipality,
       legalType: legalStructureId,
-      contactFirstName: business.formationData.formationFormData.contactFirstName || splitName.firstName,
-      contactLastName: business.formationData.formationFormData.contactLastName || splitName.lastName,
+      contactFirstName:
+        business.formationData.formationFormData.contactFirstName || splitName.firstName,
+      contactLastName:
+        business.formationData.formationFormData.contactLastName || splitName.lastName,
       businessLocationType: isForeign
         ? business.formationData.formationFormData.businessLocationType ?? "US"
         : "NJ",
@@ -165,7 +177,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
           .update()
           .then(() => {
             setIsLoadingGetFiling(false);
-            router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
+            router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, {
+              shallow: true,
+            });
           });
       }
     })();
@@ -175,7 +189,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   const setFieldsInteracted = (
     fields: FieldsForErrorHandling[],
-    config?: { setToUninteracted: boolean }
+    config?: { setToUninteracted: boolean },
   ): void => {
     setInteractedFields((prevState) => {
       const prevStateFieldRemoved = prevState.filter((it) => {

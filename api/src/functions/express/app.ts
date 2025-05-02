@@ -55,7 +55,13 @@ import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
 import { updateXrayRegistrationStatusFactory } from "@domain/user/updateXrayRegistrationStatusFactory";
-import { BUSINESSES_TABLE, DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE } from "@functions/config";
+import {
+  BUSINESSES_TABLE,
+  DYNAMO_OFFLINE_PORT,
+  IS_DOCKER,
+  IS_OFFLINE,
+  STAGE,
+} from "@functions/config";
 import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
 import bodyParser from "body-parser";
@@ -79,10 +85,13 @@ const XRAY_REGISTRATION_STATUS_BASE_URL =
 
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
-const webServiceLicenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL, logger);
+const webServiceLicenseStatusClient = WebserviceLicenseStatusClient(
+  LICENSE_STATUS_BASE_URL,
+  logger,
+);
 const webServiceLicenseStatusHealthCheckClient = webServiceLicenseStatusClient.health;
 const webserviceLicenseStatusProcessorClient = WebserviceLicenseStatusProcessorClient(
-  webServiceLicenseStatusClient
+  webServiceLicenseStatusClient,
 );
 
 const DYNAMICS_LICENSE_STATUS_URL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
@@ -96,19 +105,19 @@ const dynamicsLicenseStatusAccessTokenClient = DynamicsAccessTokenClient(logger,
 
 const rgbBusinessIdClient = RegulatedBusinessDynamicsBusinessIdsAndNamesClient(
   logger,
-  DYNAMICS_LICENSE_STATUS_URL
+  DYNAMICS_LICENSE_STATUS_URL,
 );
 const rgbAddressClient = RegulatedBusinessDynamicsBusinessAddressesClient(
   logger,
-  DYNAMICS_LICENSE_STATUS_URL
+  DYNAMICS_LICENSE_STATUS_URL,
 );
 const rgbApplicationIdClient = RegulatedBusinessDynamicsLicenseApplicationIdsClient(
   logger,
-  DYNAMICS_LICENSE_STATUS_URL
+  DYNAMICS_LICENSE_STATUS_URL,
 );
 const rgbCheckListItemsClient = RegulatedBusinessDynamicsChecklistItemsClient(
   logger,
-  DYNAMICS_LICENSE_STATUS_URL
+  DYNAMICS_LICENSE_STATUS_URL,
 );
 
 const rgbLicenseStatusClient = RegulatedBusinessDynamicsLicenseStatusClient({
@@ -119,10 +128,13 @@ const rgbLicenseStatusClient = RegulatedBusinessDynamicsLicenseStatusClient({
   rgbChecklistItemsClient: rgbCheckListItemsClient,
 });
 
-const rgbDynamicsLicenseHealthCheckClient = RegulatedBusinessDynamicsLicenseHealthCheckClient(logger, {
-  accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
-  orgUrl: DYNAMICS_LICENSE_STATUS_URL,
-});
+const rgbDynamicsLicenseHealthCheckClient = RegulatedBusinessDynamicsLicenseHealthCheckClient(
+  logger,
+  {
+    accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
+    orgUrl: DYNAMICS_LICENSE_STATUS_URL,
+  },
+);
 
 const DYNAMICS_FIRE_SAFETY_URL = process.env.DYNAMICS_FIRE_SAFETY_URL || "";
 
@@ -135,7 +147,7 @@ const dynamicsFireSafetyAccessTokenClient = DynamicsAccessTokenClient(logger, {
 
 const dynamicsFireSafetyInspectionClient = DynamicsFireSafetyInspectionClient(
   logger,
-  DYNAMICS_FIRE_SAFETY_URL
+  DYNAMICS_FIRE_SAFETY_URL,
 );
 const dynamicsFireSafetyClient = DynamicsFireSafetyClient(logger, {
   accessTokenClient: dynamicsFireSafetyAccessTokenClient,
@@ -152,7 +164,7 @@ const dynamicsHousingAccessTokenClient = DynamicsAccessTokenClient(logger, {
 });
 const dynamicsHousingPropertyInterestClient = DynamicsHousingPropertyInterestClient(
   logger,
-  DYNAMICS_HOUSING_URL
+  DYNAMICS_HOUSING_URL,
 );
 
 const dynamicsHousingClient = DynamicsHousingClient(logger, {
@@ -171,31 +183,32 @@ const dynamicsElevatorSafetyAccessTokenClient = DynamicsAccessTokenClient(logger
 
 const dynamicsElevatorSafetyInspectionClient = DynamicsElevatorSafetyInspectionClient(
   logger,
-  DYNAMICS_ELEVATOR_SAFETY_URL
+  DYNAMICS_ELEVATOR_SAFETY_URL,
 );
 const dynamicsElevatorSafetyRegistrationClient = DynamicsElevatorSafetyRegistrationClient(
   logger,
-  DYNAMICS_ELEVATOR_SAFETY_URL
+  DYNAMICS_ELEVATOR_SAFETY_URL,
 );
 
 const dynamicsElevatorSafetyViolationsClient = DynamicsElevatorSafetyViolationsClient(
   logger,
-  DYNAMICS_ELEVATOR_SAFETY_URL
+  DYNAMICS_ELEVATOR_SAFETY_URL,
 );
 
-const dynamicsElevatorSafetyInspectionStatusClient = DynamicsElevatorSafetyInspectionStatusClient(logger, {
-  accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
-  elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
-});
-const dynamicsElevatorSafetyRegistrationStatusClient = DynamicsElevatorSafetyRegistrationStatusClient(
+const dynamicsElevatorSafetyInspectionStatusClient = DynamicsElevatorSafetyInspectionStatusClient(
   logger,
   {
+    accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
+    elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
+  },
+);
+const dynamicsElevatorSafetyRegistrationStatusClient =
+  DynamicsElevatorSafetyRegistrationStatusClient(logger, {
     accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
     elevatorRegistrationClient: dynamicsElevatorSafetyRegistrationClient,
     housingAccessTokenClient: dynamicsHousingAccessTokenClient,
     housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
-  }
-);
+  });
 const dynamicsElevatorSafetyViolationsStatusClient = DynamicsElevatorSafetyViolationsStatusClient({
   accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
   elevatorSafetyViolationsClient: dynamicsElevatorSafetyViolationsClient,
@@ -212,7 +225,10 @@ const dynamicsHousingHealthCheckClient = DynamicsHousingHealthCheckClient(logger
   accessTokenClient: dynamicsHousingAccessTokenClient,
   orgUrl: DYNAMICS_HOUSING_URL,
 });
-const dynamicsHousingRegistrationClient = DynamicsHousingRegistrationClient(logger, DYNAMICS_HOUSING_URL);
+const dynamicsHousingRegistrationClient = DynamicsHousingRegistrationClient(
+  logger,
+  DYNAMICS_HOUSING_URL,
+);
 const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatusClient({
   accessTokenClient: dynamicsHousingAccessTokenClient,
   housingHousingRegistrationClient: dynamicsHousingRegistrationClient,
@@ -220,7 +236,9 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
 });
 
 const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
-  orgUrl: process.env.TAX_CLEARANCE_CERTIFICATE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`,
+  orgUrl:
+    process.env.TAX_CLEARANCE_CERTIFICATE_URL ||
+    `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`,
   userName: process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "",
   password: process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "",
 });
@@ -276,7 +294,7 @@ const taxFilingClient = ApiTaxFilingClient(
     baseUrl: GOV2GO_REGISTRATION_BASE_URL,
     apiKey: GOV2GO_REGISTRATION_API_KEY,
   },
-  logger
+  logger,
 );
 const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   baseUrl: GOV_DELIVERY_BASE_URL,
@@ -294,7 +312,7 @@ const airtableUserTestingClient = AirtableUserTestingClient(
     baseUrl: AIRTABLE_BASE_URL,
     usersTableName: AIRTABLE_USERS_TABLE,
   },
-  logger
+  logger,
 );
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
@@ -309,10 +327,13 @@ const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClie
 
 const updateLicenseStatus = updateLicenseStatusFactory(
   webserviceLicenseStatusProcessorClient,
-  rgbLicenseStatusClient
+  rgbLicenseStatusClient,
 );
 
-const xrayRegistrationSearch = XrayRegistrationSearchClient(logger, XRAY_REGISTRATION_STATUS_BASE_URL);
+const xrayRegistrationSearch = XrayRegistrationSearchClient(
+  logger,
+  XRAY_REGISTRATION_STATUS_BASE_URL,
+);
 
 const xrayRegistrationLookup = XrayRegistrationLookupClient(xrayRegistrationSearch, logger);
 
@@ -326,10 +347,11 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
     roleName: process.env.MYNJ_ROLE_NAME || "",
     serviceUrl: process.env.MYNJ_SERVICE_URL || "",
   },
-  logger
+  logger,
 );
 const fakeSelfRegClient = FakeSelfRegClientFactory();
-const selfRegClient = process.env.USE_FAKE_SELF_REG === "true" ? fakeSelfRegClient : myNJSelfRegClient;
+const selfRegClient =
+  process.env.USE_FAKE_SELF_REG === "true" ? fakeSelfRegClient : myNJSelfRegClient;
 
 const apiFormationClient = ApiFormationClient(
   {
@@ -337,7 +359,7 @@ const apiFormationClient = ApiFormationClient(
     key: FORMATION_API_KEY,
     baseUrl: FORMATION_API_BASE_URL,
   },
-  logger
+  logger,
 );
 
 const formationHealthCheckClient = apiFormationClient.health;
@@ -350,7 +372,7 @@ const emergencyTripPermitClient = AbcEmergencyTripPermitClient(
     key: ABC_ETP_API_KEY,
     baseUrl: ABC_ETP_API_BASE_URL,
   },
-  logger
+  logger,
 );
 
 app.use(bodyParser.json({ strict: false }));
@@ -364,13 +386,17 @@ app.use(
     updateOperatingPhase,
     AWSEncryptionDecryptionClient,
     timeStampToBusinessSearch,
-    logger
-  )
+    logger,
+  ),
 );
 
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(dynamoDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
+  externalEndpointRouterFactory(
+    dynamoDataClient,
+    addGovDeliveryNewsletter,
+    addToAirtableUserTesting,
+  ),
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, dynamoDataClient));
@@ -379,18 +405,24 @@ app.use(
   elevatorSafetyRouterFactory(
     dynamicsElevatorSafetyInspectionStatusClient,
     dynamicsElevatorSafetyRegistrationStatusClient,
-    dynamicsElevatorSafetyViolationsStatusClient
-  )
+    dynamicsElevatorSafetyViolationsStatusClient,
+  ),
 );
 app.use("/api", taxClearanceCertificateRouterFactory(taxClearanceCertificateClient));
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
-app.use("/api", housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient));
+app.use(
+  "/api",
+  housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient),
+);
 app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient));
-app.use("/api", formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }));
+app.use(
+  "/api",
+  formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }),
+);
 app.use("/api", emergencyTripPermitRouterFactory(emergencyTripPermitClient));
 app.use(
   "/api/taxFilings",
-  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
+  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient),
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
 app.use(
@@ -403,8 +435,8 @@ app.use(
       ["rgbDynamics/license-status", rgbDynamicsLicenseHealthCheckClient],
       ["webservice/license-status", webServiceLicenseStatusHealthCheckClient],
       ["webservice/formation", formationHealthCheckClient],
-    ])
-  )
+    ]),
+  ),
 );
 
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient));
@@ -417,7 +449,7 @@ app.post("/api/mgmt/auth", (req, res) => {
     logger.LogInfo(
       `MgmtAuth - Id:${logger.GetId()} - FAILED-AUTH request: '${req.body.password}' password: '${
         process.env.ADMIN_PASSWORD
-      }'`
+      }'`,
     );
     res.status(StatusCodes.UNAUTHORIZED).send();
   }

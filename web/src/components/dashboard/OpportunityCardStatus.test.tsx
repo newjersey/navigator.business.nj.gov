@@ -15,7 +15,7 @@ describe("OpportunityCard", () => {
 
   it("does not render due date if status is first come, first serve", () => {
     const view = render(
-      <OpportunityCardStatus dueDate="09/03/30" status="first come, first serve" />
+      <OpportunityCardStatus dueDate="09/03/30" status="first come, first serve" />,
     ).baseElement;
     expect(view).not.toHaveTextContent("Due:");
     expect(view).toContainHTML("First Come, First Serve");
@@ -28,7 +28,7 @@ describe("OpportunityCard", () => {
 
   it("does not render due date if status is rolling application", () => {
     const view = render(
-      <OpportunityCardStatus dueDate="09/03/30" status="rolling application" />
+      <OpportunityCardStatus dueDate="09/03/30" status="rolling application" />,
     ).baseElement;
     expect(view).not.toHaveTextContent("Due:");
     expect(view).toContainHTML("Rolling Application");

@@ -35,8 +35,8 @@ describe("usePageWithNeedsAccountSnackbar", () => {
           showNeedsAccountModal: showNeedsAccountModal ?? false,
           setShowNeedsAccountSnackbar,
         }),
-        { isAuthenticated: isAuth }
-      )
+        { isAuthenticated: isAuth },
+      ),
     );
   };
 

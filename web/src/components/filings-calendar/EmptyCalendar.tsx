@@ -9,7 +9,11 @@ export const EmptyCalendar = (): ReactElement => {
     <div data-testid="empty-calendar">
       <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
       <div className="flex flex-column fac padding-top-205">
-        <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
+        <img
+          className="padding-y-2"
+          src={`/img/empty-trophy-illustration.png`}
+          alt="empty calendar"
+        />
       </div>
     </div>
   );

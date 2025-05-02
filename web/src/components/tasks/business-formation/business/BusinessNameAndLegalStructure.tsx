@@ -51,12 +51,12 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     if (business.profileData.businessPersona === "FOREIGN") {
       return extractConfig(
         Config.formation.legalStructure.foreignLabels,
-        business.profileData.legalStructureId
+        business.profileData.legalStructureId,
       );
     } else {
       return extractConfig(
         Config.formation.legalStructure.domesticLabels,
-        business.profileData.legalStructureId
+        business.profileData.legalStructureId,
       );
     }
   };

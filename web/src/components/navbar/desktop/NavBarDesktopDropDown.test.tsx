@@ -43,7 +43,7 @@ describe("<NavBarDesktopDropDown/>", () => {
         dropDownTitle={dropDownTitle}
         anchorRef={mockRef}
         textColor={"base"}
-      />
+      />,
     );
 
     expect(screen.getByText(menuButtonTitle)).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("<NavBarDesktopDropDown/>", () => {
         dropDownTitle={dropDownTitle}
         anchorRef={mockRef}
         textColor={"base"}
-      />
+      />,
     );
 
     expect(screen.getByText(menuButtonTitle)).toBeInTheDocument();

@@ -279,7 +279,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v77BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -369,7 +373,7 @@ export const generatev77ProfileData = (overrides: Partial<v77ProfileData>): v77P
 };
 
 export const generatev77FormationFormData = (
-  overrides: Partial<v77FormationFormData>
+  overrides: Partial<v77FormationFormData>,
 ): v77FormationFormData => {
   return {
     businessName: "",

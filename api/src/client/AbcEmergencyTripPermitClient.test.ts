@@ -8,7 +8,7 @@ jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 const generateApplicationInfo = (
-  overrides: Partial<EmergencyTripPermitApplicationInfo>
+  overrides: Partial<EmergencyTripPermitApplicationInfo>,
 ): EmergencyTripPermitApplicationInfo => {
   return {
     additionalConfirmemail: "test@test.com",
@@ -69,7 +69,7 @@ describe("AbcEmergencyTripPermitClient", () => {
     jest.resetAllMocks();
     client = AbcEmergencyTripPermitClient(
       { account: "12345", key: "abcdef", baseUrl: "example.com/formation" },
-      DummyLogWriter
+      DummyLogWriter,
     );
   });
 

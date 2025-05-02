@@ -54,9 +54,15 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
       radioField: "nonprofitBoardMemberQualificationsSpecified",
       termsField: "nonprofitBoardMemberQualificationsTerms",
     },
-    { radioField: "nonprofitBoardMemberRightsSpecified", termsField: "nonprofitBoardMemberRightsTerms" },
+    {
+      radioField: "nonprofitBoardMemberRightsSpecified",
+      termsField: "nonprofitBoardMemberRightsTerms",
+    },
     { radioField: "nonprofitTrusteesMethodSpecified", termsField: "nonprofitTrusteesMethodTerms" },
-    { radioField: "nonprofitAssetDistributionSpecified", termsField: "nonprofitAssetDistributionTerms" },
+    {
+      radioField: "nonprofitAssetDistributionSpecified",
+      termsField: "nonprofitAssetDistributionTerms",
+    },
   ];
 
   return (
@@ -71,7 +77,10 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
             <Content>{Config.formation.fields.hasNonprofitBoardMembers.noReviewText}</Content>
           )}
           {hasNonprofitBoardMembers === undefined && (
-            <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.reviewLabel} value="" />
+            <ReviewLineItem
+              label={Config.formation.fields.hasNonprofitBoardMembers.reviewLabel}
+              value=""
+            />
           )}
         </div>
 

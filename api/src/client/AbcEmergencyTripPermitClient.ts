@@ -9,11 +9,11 @@ import axios from "axios";
 
 export const AbcEmergencyTripPermitClient = (
   config: ApiConfig,
-  logger: LogWriterType
+  logger: LogWriterType,
 ): EmergencyTripPermitClient => {
   const logId = logger.GetId();
   const apply = (
-    applicationInfo: EmergencyTripPermitApplicationInfo
+    applicationInfo: EmergencyTripPermitApplicationInfo,
   ): Promise<EmergencyTripPermitSubmitResponse> => {
     const postBody = getApiSubmissionBody(applicationInfo, config);
     const postContentType = "text/plain";
@@ -21,7 +21,7 @@ export const AbcEmergencyTripPermitClient = (
     logger.LogInfo(
       `Emergency Trip Permit - ABC - Id:${logId} - ${postContentType} Request Sent to ${
         config.baseUrl
-      }/GetCompletedFiling data: ${JSON.stringify(postBody)}`
+      }/GetCompletedFiling data: ${JSON.stringify(postBody)}`,
     );
 
     return axios
@@ -32,22 +32,26 @@ export const AbcEmergencyTripPermitClient = (
       })
       .then((response) => {
         logger.LogInfo(
-          `Emergency Trip Permit - ABC - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+          `Emergency Trip Permit - ABC - Id:${logId} - Response received: ${JSON.stringify(
+            response.data,
+          )}`,
         );
         if (response.data.Success && response.data.Success === true) {
           return response.data as EmergencyTripPermitSubmitResponse;
         } else {
           logger.LogInfo(
             `Emergency Trip Permit - ABC - Id:${logId} - Response error received: ${JSON.stringify(
-              response.data
-            )}`
+              response.data,
+            )}`,
           );
           return response.data as EmergencyTripPermitSubmitResponse;
         }
       })
       .catch((error) => {
         logger.LogError(
-          `Emergency Trip Permit - ABC - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
+          `Emergency Trip Permit - ABC - Id:${logId} - Unknown error received: ${JSON.stringify(
+            error,
+          )}`,
         );
         return error.data as EmergencyTripPermitSubmitResponse;
       });

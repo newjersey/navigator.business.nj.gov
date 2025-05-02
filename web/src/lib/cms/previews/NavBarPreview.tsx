@@ -27,7 +27,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
         businessName: "",
         tradeName: "",
       }),
-    })
+    }),
   );
   const userDataRemoteSellerWorkerNoName = generateUserDataForBusiness(
     generateBusiness({
@@ -37,7 +37,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
         tradeName: "",
         foreignBusinessTypeIds: ["employeesInNJ"],
       }),
-    })
+    }),
   );
   const userDataDBANoName = generateUserDataForBusiness(
     generateBusiness({
@@ -52,7 +52,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           status: "UNAVAILABLE",
         }),
       }),
-    })
+    }),
   );
 
   return (

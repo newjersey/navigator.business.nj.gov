@@ -300,7 +300,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v95BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -393,7 +397,7 @@ export const createEmptyv95FormationFormData = (): v95FormationFormData => {
 };
 
 export const generatev95IndustrySpecificData = (
-  overrides: Partial<v95IndustrySpecificData>
+  overrides: Partial<v95IndustrySpecificData>,
 ): v95IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -451,7 +455,9 @@ export const generatev95ProfileData = (overrides: Partial<v95ProfileData>): v95P
   };
 };
 
-export const v95TaxFilingDataGenerator = (overrides: Partial<v95TaxFilingData>): v95TaxFilingData => {
+export const v95TaxFilingDataGenerator = (
+  overrides: Partial<v95TaxFilingData>,
+): v95TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,

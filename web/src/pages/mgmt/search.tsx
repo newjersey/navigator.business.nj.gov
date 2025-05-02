@@ -24,9 +24,15 @@ import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
 import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
-import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
+import {
+  loadAllArchivedCertifications,
+  loadAllCertifications,
+} from "@/lib/static/loadCertifications";
 import { loadCmsConfig } from "@/lib/static/loadCmsConfig";
-import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/static/loadContextualInfo";
+import {
+  loadAllArchivedContextualInfo,
+  loadAllContextualInfo,
+} from "@/lib/static/loadContextualInfo";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -108,9 +114,8 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
   const [anytimeActionTaskMatches, setAnytimeActionTaskMatches] = useState<Match[]>([]);
-  const [anytimeActionLicenseReinstatementMatches, setAnytimeActionLicenseReinstatementMatches] = useState<
-    Match[]
-  >([]);
+  const [anytimeActionLicenseReinstatementMatches, setAnytimeActionLicenseReinstatementMatches] =
+    useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
@@ -119,7 +124,9 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const { Config } = useConfig();
 
-  const sidebarCards: SidebarCardContent[] = Object.values(props.roadmapDisplayContent.sidebarDisplayContent);
+  const sidebarCards: SidebarCardContent[] = Object.values(
+    props.roadmapDisplayContent.sidebarDisplayContent,
+  );
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
@@ -145,34 +152,49 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(
-      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm)
+      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm),
     );
     setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
     setAnytimeActionLicenseReinstatementMatches(
-      searchAnytimeActionLicenseReinstatements(props.anytimeActionLicenseReinstatements, lowercaseTerm)
+      searchAnytimeActionLicenseReinstatements(
+        props.anytimeActionLicenseReinstatements,
+        lowercaseTerm,
+      ),
     );
 
-    const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
-    const domesticEmployerStepsMatches = searchSteps(DomesticEmployerSteps.steps as Step[], lowercaseTerm, {
-      filename: "Steps - Domestic Employer",
+    const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, {
+      filename: "Steps",
     });
+    const domesticEmployerStepsMatches = searchSteps(
+      DomesticEmployerSteps.steps as Step[],
+      lowercaseTerm,
+      {
+        filename: "Steps - Domestic Employer",
+      },
+    );
     const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
       filename: "Steps - Dakota",
     });
-    setStepsMatches([...defaultStepsMatches, ...domesticEmployerStepsMatches, ...foreignStepsMatches]);
+    setStepsMatches([
+      ...defaultStepsMatches,
+      ...domesticEmployerStepsMatches,
+      ...foreignStepsMatches,
+    ]);
 
     setNonEssentialQuestionsMatches(
       searchNonEssentialQuestions(
         NonEssentialQuestions.nonEssentialQuestionsArray as NonEssentialQuestion[],
-        lowercaseTerm
-      )
+        lowercaseTerm,
+      ),
     );
 
     setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
     setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
     setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
     setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
-    setArchivedContextualInfoMatches(searchContextualInfo(props.archivedContextualInfo, lowercaseTerm));
+    setArchivedContextualInfoMatches(
+      searchContextualInfo(props.archivedContextualInfo, lowercaseTerm),
+    );
     setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
     setHasSearched(true);
   };
@@ -269,14 +291,38 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
-      <MatchCollection matchedCollections={envCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={certCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={fundingCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={roadmapsCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={taskCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={calendarCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection
+        matchedCollections={envCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={certCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={fundingCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={roadmapsCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={taskCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={calendarCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={dashboardCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={miscCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
       <MatchCollection
         matchedCollections={anytimeActionCollection}
         groupedConfigMatches={groupedConfigMatches}

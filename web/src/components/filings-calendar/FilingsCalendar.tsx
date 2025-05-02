@@ -49,7 +49,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     if (!business) return false;
     return (
       LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
-        "formationDate"
+        "formationDate",
       ) && !business.profileData.dateOfFormation
     );
   };

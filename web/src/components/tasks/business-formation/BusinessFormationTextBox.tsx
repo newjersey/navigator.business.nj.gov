@@ -25,7 +25,9 @@ interface Props {
 export const BusinessFormationTextBox = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
-  const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);
+  const [isExpanded, setIsExpanded] = useState(
+    props.required || !!state.formationFormData[props.fieldName],
+  );
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleAddButtonClick = (): void => {

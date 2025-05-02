@@ -54,7 +54,9 @@ describe("SearchBusinessNameForm", () => {
     useSetupInitialMocks();
   });
 
-  const getPageHelper = async (initialProfileData?: Partial<ProfileData>): Promise<FormationPageHelpers> => {
+  const getPageHelper = async (
+    initialProfileData?: Partial<ProfileData>,
+  ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData({
       ...initialProfileData,
       legalStructureId: "limited-liability-company",
@@ -66,9 +68,9 @@ describe("SearchBusinessNameForm", () => {
         {
           legalStructureId: castPublicFilingLegalTypeToFormationType(
             profileData.legalStructureId as PublicFilingLegalType,
-            profileData.businessPersona
+            profileData.businessPersona,
           ),
-        }
+        },
       ),
       formationResponse: undefined,
       getFilingResponse: undefined,
@@ -77,7 +79,10 @@ describe("SearchBusinessNameForm", () => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
-    return preparePage({ business: generateBusiness({ profileData, formationData }), displayContent });
+    return preparePage({
+      business: generateBusiness({ profileData, formationData }),
+      displayContent,
+    });
   };
 
   it("displays modal when legal structure Edit button clicked", async () => {
@@ -174,7 +179,7 @@ describe("SearchBusinessNameForm", () => {
     expect(specialCharacterErrorTextExists()).toBe(false);
     expect(restrictedWordErrorTextExists()).toBe(true);
     expect(
-      within(screen.getByTestId("restricted-word-error-text")).getByText("JOINT", { exact: false })
+      within(screen.getByTestId("restricted-word-error-text")).getByText("JOINT", { exact: false }),
     ).toBeInTheDocument();
   });
 

@@ -15,7 +15,10 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 interface Props
-  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+  extends Omit<
+    ProfileDataFieldProps,
+    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+  > {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
 }
@@ -50,7 +53,9 @@ export const TaxId = (props: Props): ReactElement => {
     }
   };
 
-  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
+  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(
+    taxIdInitialDisplay(),
+  );
 
   useEffect(() => {
     if (business?.profileData.taxId?.includes(maskingCharacter)) {
@@ -76,7 +81,10 @@ export const TaxId = (props: Props): ReactElement => {
     }
     if (!state.profileData.taxId.includes(maskingCharacter) && state.profileData.encryptedTaxId) {
       return "decrypted";
-    } else if (state.profileData.taxId.includes(maskingCharacter) && state.profileData.encryptedTaxId) {
+    } else if (
+      state.profileData.taxId.includes(maskingCharacter) &&
+      state.profileData.encryptedTaxId
+    ) {
       return "encrypted";
     }
   };

@@ -108,7 +108,7 @@ describe("xrayRegistrationLookupClient", () => {
     searchClient.searchByBusinessName.mockResolvedValue([entryTwo, entryOne]);
 
     await expect(client.getStatus("Some Business", "123 Main Street", "12345")).rejects.toThrow(
-      "STATUS_MISMATCH"
+      "STATUS_MISMATCH",
     );
   });
 
@@ -128,7 +128,7 @@ describe("xrayRegistrationLookupClient", () => {
     searchClient.searchByBusinessName.mockResolvedValue([entryOne, entryTwo]);
 
     await expect(client.getStatus("Some Business", "123 Main Street", "12345")).rejects.toThrow(
-      "EXPIRATION_DATE_MISMATCH"
+      "EXPIRATION_DATE_MISMATCH",
     );
   });
 
@@ -148,12 +148,14 @@ describe("xrayRegistrationLookupClient", () => {
     searchClient.searchByBusinessName.mockResolvedValue([entryOne, entryTwo]);
 
     await expect(client.getStatus("Some Business", "123 Main Street", "12345")).rejects.toThrow(
-      "DEACTIVATION_DATE_MISMATCH"
+      "DEACTIVATION_DATE_MISMATCH",
     );
   });
 
   it("throws an errow when searchClient throws an error", async () => {
     searchClient.searchByAddress.mockRejectedValue(new Error("SOME ERROR"));
-    await expect(client.getStatus("Some Business", "123 Main Street", "12345")).rejects.toThrow("SOME ERROR");
+    await expect(client.getStatus("Some Business", "123 Main Street", "12345")).rejects.toThrow(
+      "SOME ERROR",
+    );
   });
 });

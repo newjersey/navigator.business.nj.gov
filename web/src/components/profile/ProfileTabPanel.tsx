@@ -21,7 +21,10 @@ export const ProfileTabPanel = ({ children, navChildren }: ProfileTabPanelProps)
   const titleOverColumns: React.ReactNode = (
     <>
       <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
-      <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
+      <ProfileNoteDisclaimerForSubmittingData
+        business={business}
+        isAuthenticated={isAuthenticated}
+      />
     </>
   );
 

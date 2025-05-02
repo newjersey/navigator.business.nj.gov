@@ -21,7 +21,11 @@ export const NewJerseyAddress = (props: Props): ReactElement => {
       <AddressLines1And2 onValidation={props.onValidation} />
       <div className="text-field-width-default">
         <WithErrorBar
-          hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
+          hasError={doSomeFieldsHaveError([
+            "addressState",
+            "addressZipCode",
+            "addressMunicipality",
+          ])}
           type="DESKTOP-ONLY"
         >
           <div className="grid-row tablet:grid-gap-2">
@@ -39,7 +43,9 @@ export const NewJerseyAddress = (props: Props): ReactElement => {
                 <div className="grid-row grid-gap tablet:grid-gap-2">
                   <div className="grid-col-6">
                     <strong>
-                      <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                      <ModifiedContent>
+                        {Config.formation.fields.addressState.label}
+                      </ModifiedContent>
                     </strong>
                     <div
                       id={`question-addressState`}

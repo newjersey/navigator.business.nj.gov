@@ -37,15 +37,27 @@ collections:
               - { label: Step 2 Cancel Button, name: stepTwoCancelButton, widget: text }
               - { label: Step 2 Error Banner, name: stepTwoErrorBanner, widget: text }
               - { label: BusinessName Field Header, name: businessFieldHeader, widget: markdown }
-              - { label: BusinessName Field Error Alert Text, name: businessFieldErrorName, widget: text }
+              - {
+                  label: BusinessName Field Error Alert Text,
+                  name: businessFieldErrorName,
+                  widget: text,
+                }
               - { label: BusinessName Field Text, name: businessFieldMarkdown, widget: markdown }
-              - { label: BusinessName API Failed Helper Text, name: failedBusinessFieldHelper, widget: text }
+              - {
+                  label: BusinessName API Failed Helper Text,
+                  name: failedBusinessFieldHelper,
+                  widget: text,
+                }
               - { label: TaxId Field Header, name: taxIdHeader, widget: markdown }
               - { label: TaxId Field Text, name: taxIdMarkdown, widget: markdown }
               - { label: TaxId Field Error Alert Text, name: taxFieldErrorName, widget: text }
               - { label: TaxId API Failed Helper Text, name: failedTaxIdHelper, widget: text }
               - { label: Responsible Owner Header, name: businessOwnerName, widget: text }
-              - { label: Responsible Owner Description, name: businessOwnerDescription, widget: text }
+              - {
+                  label: Responsible Owner Description,
+                  name: businessOwnerDescription,
+                  widget: text,
+                }
               - {
                   label: Responsible Owner Field Error Alert Text,
                   name: responsibleOwnerFieldErrorName,
@@ -79,30 +91,43 @@ collections:
           name: "urlSlug",
           widget: "no-space",
           required: true,
-          hint: "The suffix '-renewal' and '-expiration' are automatically appended to the url slug.",
+          hint:
+            "The suffix '-renewal' and '-expiration' are automatically appended to the url slug.",
         }
       - {
           label: "Expiration Event Label",
           name: "expirationEventDisplayName",
           widget: "string",
           required: true,
-          hint: "This field updates the label on the calendar in the dashboard and header text on the expiration details page",
+          hint:
+            "This field updates the label on the calendar in the dashboard and header text on the
+            expiration details page",
         }
       - {
           label: "Renewal Event Label",
           name: "renewalEventDisplayName",
           widget: "string",
           required: true,
-          hint: "This field updates the label on the calendar in the dashboard and header text on the renewal details page",
+          hint:
+            "This field updates the label on the calendar in the dashboard and header text on the
+            renewal details page",
         }
       - {
           label: "Disclaimer Text",
           name: "disclaimerText",
           widget: "markdown",
           required: true,
-          default: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services.",
+          default:
+            "You can renew your license 60 days before it expires and up to 30 days after
+            expiration. If you fail to renew your license at this point, your license will be
+            suspended and you won't be able to provide your licensed services.",
         }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown", required: false }
+      - {
+          label: "Summary Description",
+          name: "summaryDescriptionMd",
+          widget: "markdown",
+          required: false,
+        }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - {
           label: "Issuing Agency",
@@ -111,8 +136,18 @@ collections:
           required: true,
           default: "Division of Consumer Affairs",
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
   - name: "filings"
     label: "Taxes Filings - All"
     folder: "content/src/filings"
@@ -146,7 +181,12 @@ collections:
         }
       - { label: "Filing Details", name: "filingDetails", widget: "markdown", required: false }
       - { label: "Frequency", name: "frequency", widget: "markdown", required: false }
-      - { label: "Disposition Content", name: "additionalInfo", widget: "markdown", required: false }
+      - {
+          label: "Disposition Content",
+          name: "additionalInfo",
+          widget: "markdown",
+          required: false,
+        }
       - {
           label: "Agency",
           name: "agency",
@@ -167,5 +207,15 @@ collections:
           hint: "This should be the same as the filename. Content will appear on the filings page.",
           required: true,
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }

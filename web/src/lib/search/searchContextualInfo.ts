@@ -2,7 +2,10 @@ import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers"
 import { Match } from "@/lib/search/typesForSearch";
 import { ContextualInfoFile } from "@/lib/types/types";
 
-export const searchContextualInfo = (contextualInfo: ContextualInfoFile[], term: string): Match[] => {
+export const searchContextualInfo = (
+  contextualInfo: ContextualInfoFile[],
+  term: string,
+): Match[] => {
   const matches: Match[] = [];
 
   for (const info of contextualInfo) {

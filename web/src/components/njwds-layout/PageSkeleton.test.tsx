@@ -12,7 +12,7 @@ describe("<PageSkeleton />", () => {
     render(
       <PageSkeleton landingPage={true}>
         <></>
-      </PageSkeleton>
+      </PageSkeleton>,
     );
 
     expect(screen.queryByTestId("beta-bar")).not.toBeInTheDocument();
@@ -24,7 +24,7 @@ describe("<PageSkeleton />", () => {
     render(
       <PageSkeleton landingPage={false}>
         <></>
-      </PageSkeleton>
+      </PageSkeleton>,
     );
 
     expect(screen.getByTestId("beta-bar")).toBeInTheDocument();

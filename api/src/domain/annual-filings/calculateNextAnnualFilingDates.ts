@@ -8,7 +8,8 @@ export const calculateNextAnnualFilingDates = (dateOfFormation: string): string[
   const nextYear = today.add(1, "year").year();
   const formationDate = parseDateWithFormat(dateOfFormation, defaultDateFormat);
 
-  const wasFormedThisMonth = formationDate.year() === currentYear && formationDate.month() === today.month();
+  const wasFormedThisMonth =
+    formationDate.year() === currentYear && formationDate.month() === today.month();
   const isFormedInTheFuture =
     formationDate.year() > currentYear ||
     (formationDate.year() === currentYear && formationDate.month() > currentMonth);

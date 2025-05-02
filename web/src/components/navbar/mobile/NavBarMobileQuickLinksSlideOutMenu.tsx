@@ -1,5 +1,12 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
-import { Grow, Operate, Plan, Search, Start, Updates } from "@/components/navbar/shared-submenu-components";
+import {
+  Grow,
+  Operate,
+  Plan,
+  Search,
+  Start,
+  Updates,
+} from "@/components/navbar/shared-submenu-components";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
@@ -48,7 +55,9 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
             className="padding-bottom-0"
           >
             <MenuItem className={"display-flex padding-y-205 menu-item-title"} disabled={true}>
-              <div className="text-bold">{Config.navigationQuickLinks.navBarMobileQuickLinksTitle}</div>
+              <div className="text-bold">
+                {Config.navigationQuickLinks.navBarMobileQuickLinksTitle}
+              </div>
             </MenuItem>
             <hr className="margin-0 hr-2px" key="name-break" />
 

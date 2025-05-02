@@ -87,12 +87,18 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
         <>
           {props.isAltDescriptionDisplayed && altDescription && (
             <Content>
-              {`${getDescriptionContentText(altDescription, props.boldAltDescription)} ${optionalTagText}`}
+              {`${getDescriptionContentText(
+                altDescription,
+                props.boldAltDescription,
+              )} ${optionalTagText}`}
             </Content>
           )}
           {!props.isAltDescriptionDisplayed && description && (
             <Content>
-              {`${getDescriptionContentText(description, props.boldDescription)} ${optionalTagText}`}
+              {`${getDescriptionContentText(
+                description,
+                props.boldDescription,
+              )} ${optionalTagText}`}
             </Content>
           )}
         </>

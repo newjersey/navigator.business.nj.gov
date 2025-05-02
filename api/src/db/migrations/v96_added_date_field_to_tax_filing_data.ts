@@ -305,7 +305,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v96BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -350,7 +354,9 @@ export const v96generatorUser = (overrides: Partial<v96BusinessUser>): v96Busine
   };
 };
 
-export const v96generateFormationAddress = (overrides: Partial<v96FormationAddress>): v96FormationAddress => {
+export const v96generateFormationAddress = (
+  overrides: Partial<v96FormationAddress>,
+): v96FormationAddress => {
   return {
     name: `some-members-name-${randomInt()}`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -383,9 +389,11 @@ export const allFormationLegalTypes = [
 
 export const v96generateFormationFormData = (
   overrides: Partial<v96FormationFormData>,
-  legalStructureId?: string
+  legalStructureId?: string,
 ): v96FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return {
     businessName: `some-business-name-${randomInt()}`,
@@ -414,7 +422,8 @@ export const v96generateFormationFormData = (
       v96generateFormationAddress({ signature: true }),
       v96generateFormationAddress({ signature: true }),
     ],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [v96generateFormationAddress({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [v96generateFormationAddress({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -438,7 +447,7 @@ export const v96generateFormationFormData = (
 };
 
 export const v96generatorIndustrySpecificData = (
-  overrides: Partial<v96IndustrySpecificData>
+  overrides: Partial<v96IndustrySpecificData>,
 ): v96IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -496,7 +505,9 @@ export const v96generatorProfileData = (overrides: Partial<v96ProfileData>): v96
   };
 };
 
-export const v96TaxFilingDataGenerator = (overrides: Partial<v96TaxFilingData>): v96TaxFilingData => {
+export const v96TaxFilingDataGenerator = (
+  overrides: Partial<v96TaxFilingData>,
+): v96TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -510,7 +521,7 @@ export const v96TaxFilingDataGenerator = (overrides: Partial<v96TaxFilingData>):
 
 export const v96FormationData = (
   overrides: Partial<v96FormationData>,
-  legalStructureId?: string
+  legalStructureId?: string,
 ): v96FormationData => {
   return {
     formationFormData: v96generateFormationFormData({}, legalStructureId),

@@ -138,7 +138,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     if (
       getIndustryNaicsCodes(business.profileData.industryId).length === 0 ||
       (business.profileData.naicsCode.length > 0 &&
-        !getIndustryNaicsCodes(business.profileData.industryId).includes(business.profileData.naicsCode))
+        !getIndustryNaicsCodes(business.profileData.industryId).includes(
+          business.profileData.naicsCode,
+        ))
     ) {
       setDisplayInput(true);
     }
@@ -183,7 +185,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                         <span className="text-bold margin-right-05">{code}</span>
                         <span className="margin-right-05">- </span>
                         <ExternalLink
-                          href={templateEval(Config.determineNaicsCode.naicsDescriptionURL, { code: code })}
+                          href={templateEval(Config.determineNaicsCode.naicsDescriptionURL, {
+                            code: code,
+                          })}
                         >
                           {descriptions.find((obj) => {
                             return obj.SixDigitCode?.toString() === code;
@@ -226,7 +230,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
           </ul>
           <div>
             <WithErrorBar hasError={!!isInvalid} type={"ALWAYS"}>
-              <FieldLabelProfile fieldName={"naicsCode"} isAltDescriptionDisplayed ignoreContextualInfo />
+              <FieldLabelProfile
+                fieldName={"naicsCode"}
+                isAltDescriptionDisplayed
+                ignoreContextualInfo
+              />
               <GenericTextField
                 inputWidth="reduced"
                 fieldName="naicsCode"

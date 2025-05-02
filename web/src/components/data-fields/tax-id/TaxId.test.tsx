@@ -34,7 +34,7 @@ const renderComponent = (profileData: ProfileData, fieldProps?: any): void => {
   render(
     <WithStatefulProfileData initialData={profileData}>
       <TaxId {...fieldProps} />
-    </WithStatefulProfileData>
+    </WithStatefulProfileData>,
   );
 };
 
@@ -80,7 +80,9 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "*******89000",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/000");
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+        "***-***-*89/000",
+      );
     });
 
     it("successfully saves to profileData", () => {
@@ -150,7 +152,9 @@ describe("<TaxId />", () => {
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789/000");
+        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+          "123-456-789/000",
+        );
       });
     });
 
@@ -163,7 +167,9 @@ describe("<TaxId />", () => {
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789/000");
+        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+          "123-456-789/000",
+        );
       });
       fireEvent.click(screen.getByText(Config.tax.hideButtonText));
       await waitFor(() => {
@@ -284,7 +290,7 @@ describe("<TaxId />", () => {
           ...profileData,
           taxId: "123456789",
         },
-        { required: true }
+        { required: true },
       );
       fireEvent.click(screen.getByLabelText("Tax id location"));
       fireEvent.blur(screen.getByLabelText("Tax id location"));

@@ -9,7 +9,10 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
+import {
+  noneOfTheAbovePriorityId,
+  priorityTypesObj,
+} from "@/lib/domain-logic/cannabisPriorityTypes";
 import { CallToActionHyperlink } from "@/lib/types/types";
 import { openInNewTab, useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
@@ -104,7 +107,11 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       );
     } else if (ctaButtons.length === 1) {
       return (
-        <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={ctaButtons[0].onClick}>
+        <PrimaryButton
+          isColor="primary"
+          isRightMarginRemoved={true}
+          onClick={ctaButtons[0].onClick}
+        >
           {ctaButtons[0].text}
         </PrimaryButton>
       );
@@ -128,7 +135,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       <div className="margin-bottom-4">
         {!displayNoPriorityType && (
           <>
-            <div className="margin-bottom-3">{Config.cannabisPriorityStatus.secondTabDescriptionText}</div>
+            <div className="margin-bottom-3">
+              {Config.cannabisPriorityStatus.secondTabDescriptionText}
+            </div>
             <Heading level={2}>{Config.cannabisPriorityStatus.secondTabHeaderText}</Heading>
           </>
         )}
@@ -204,7 +213,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
           </>
         )}
         {displayNoPriorityType && <div>{Config.cannabisPriorityStatus.noPriorityStatusText}</div>}
-        {(displayMWPriorityType || displayVeteranPriorityType || displaySocialEquityPriorityType) && (
+        {(displayMWPriorityType ||
+          displayVeteranPriorityType ||
+          displaySocialEquityPriorityType) && (
           <>
             <hr />
             <Callout
@@ -216,7 +227,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 {displayMWPriorityType && (
                   <li>{Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText}</li>
                 )}
-                {displayVeteranPriorityType && <li>{Config.cannabisPriorityStatus.greenBoxVeteranText}</li>}
+                {displayVeteranPriorityType && (
+                  <li>{Config.cannabisPriorityStatus.greenBoxVeteranText}</li>
+                )}
                 {displaySocialEquityPriorityType && (
                   <li>{Config.cannabisPriorityStatus.greenBoxSocialEquityText}</li>
                 )}

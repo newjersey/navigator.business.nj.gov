@@ -23,7 +23,7 @@ export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null =
   const router = useRouter();
   const businessName = getNavBarBusinessTitle(
     props.previousBusiness,
-    state.isAuthenticated === IsAuthenticated.TRUE
+    state.isAuthenticated === IsAuthenticated.TRUE,
   );
 
   if (!props.previousBusiness) return null;
@@ -37,7 +37,7 @@ export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null =
           userData,
           newCurrentBusinessId: props.previousBusiness.id,
           idToRemove: userData.currentBusinessId,
-        })
+        }),
       )
       .update();
     router && (await router.push(ROUTES.dashboard));

@@ -46,7 +46,7 @@ describe("loadLicenseCalendarEvents", () => {
           { params: { licenseCalendarEventUrlSlug: "some-url-slug-1-renewal" } },
           { params: { licenseCalendarEventUrlSlug: "some-url-slug-2-expiration" } },
           { params: { licenseCalendarEventUrlSlug: "some-url-slug-2-renewal" } },
-        ])
+        ]),
       );
     });
   });

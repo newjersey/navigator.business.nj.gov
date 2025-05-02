@@ -7,7 +7,11 @@ import type { XrayRegistrationSearch, XrayRegistrationStatusLookup } from "@doma
 import type { LogWriterType } from "@libs/logWriter";
 import type { XrayRegistrationStatus, XrayRegistrationStatusResponse } from "@shared/xray";
 
-const getStatusString = (status: string, logId: string, logWriter: LogWriterType): XrayRegistrationStatus => {
+const getStatusString = (
+  status: string,
+  logId: string,
+  logWriter: LogWriterType,
+): XrayRegistrationStatus => {
   switch (status) {
     case "Active":
       return "ACTIVE";
@@ -23,12 +27,12 @@ const getStatusString = (status: string, logId: string, logWriter: LogWriterType
 
 export const XrayRegistrationLookupClient = (
   xrayRegistrationSearchClient: XrayRegistrationSearch,
-  logWriter: LogWriterType
+  logWriter: LogWriterType,
 ): XrayRegistrationStatusLookup => {
   const getStatus = async (
     businessName: string,
     addressLine1: string,
-    addressZipCode: string
+    addressZipCode: string,
   ): Promise<XrayRegistrationStatusResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Xray Registration Lookup - Id:${logId}`);
@@ -37,7 +41,10 @@ export const XrayRegistrationLookupClient = (
     let businessNameResults: XrayRegistrationEntry[] = [];
 
     try {
-      addressResults = await xrayRegistrationSearchClient.searchByAddress(addressLine1, addressZipCode);
+      addressResults = await xrayRegistrationSearchClient.searchByAddress(
+        addressLine1,
+        addressZipCode,
+      );
       businessNameResults = await xrayRegistrationSearchClient.searchByBusinessName(businessName);
     } catch (error) {
       const message = (error as Error).message;
@@ -80,11 +87,15 @@ export const XrayRegistrationLookupClient = (
         throw new Error("STATUS_MISMATCH");
       }
       if (expirationDate !== consolidatedEntriesResults[entry].expirationDate) {
-        logWriter.LogError(`Xray Registration Lookup - Id:${logId} - Error: Expiration Date Mismatch`);
+        logWriter.LogError(
+          `Xray Registration Lookup - Id:${logId} - Error: Expiration Date Mismatch`,
+        );
         throw new Error("EXPIRATION_DATE_MISMATCH");
       }
       if (deactivationDate !== consolidatedEntriesResults[entry].deactivationDate) {
-        logWriter.LogError(`Xray Registration Lookup - Id:${logId} - Error: Deactivation Date Mismatch`);
+        logWriter.LogError(
+          `Xray Registration Lookup - Id:${logId} - Error: Deactivation Date Mismatch`,
+        );
         throw new Error("DEACTIVATION_DATE_MISMATCH");
       }
       const machineDetails = {
@@ -112,7 +123,7 @@ export const XrayRegistrationLookupClient = (
 
     logWriter.LogInfo(
       `Xray Registration Lookup Results - Id:${logId}, Status: ${xrayRegistrationStatusResponse.status}, Expiration Date: ${xrayRegistrationStatusResponse.expirationDate},
-      Deactivation Date: ${xrayRegistrationStatusResponse.deactivationDate}, Number of Machines: ${xrayRegistrationStatusResponse.machines.length}`
+      Deactivation Date: ${xrayRegistrationStatusResponse.deactivationDate}, Number of Machines: ${xrayRegistrationStatusResponse.machines.length}`,
     );
 
     return xrayRegistrationStatusResponse;

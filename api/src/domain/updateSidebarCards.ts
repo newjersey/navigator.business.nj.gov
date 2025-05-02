@@ -25,7 +25,10 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     cards = [...allCardsExceptIdToHide];
   };
 
-  if (operatingPhase !== OperatingPhaseId.GUEST_MODE && cards.includes(SIDEBAR_CARDS.notRegistered)) {
+  if (
+    operatingPhase !== OperatingPhaseId.GUEST_MODE &&
+    cards.includes(SIDEBAR_CARDS.notRegistered)
+  ) {
     hideCard(SIDEBAR_CARDS.notRegistered);
   }
 
@@ -52,7 +55,7 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     const isEveryOpportunityFieldAnswered = getFieldsForProfile(currentBusiness.profileData).every(
       (field) => {
         return isFieldAnswered(field, currentBusiness.profileData);
-      }
+      },
     );
 
     if (isEveryOpportunityFieldAnswered) {

@@ -15,7 +15,9 @@ export const NavBarDesktopWrapper = (props: NavBarDesktopWrapperProps): ReactEle
     >
       <OutageAlertBar />
       <nav aria-label="Primary" className="grid-container-widescreen desktop:padding-x-7">
-        <div className="display-flex flex-row flex-justify flex-align-center height-8">{props.children}</div>
+        <div className="display-flex flex-row flex-justify flex-align-center height-8">
+          {props.children}
+        </div>
       </nav>
       <hr className="margin-0" />
     </div>

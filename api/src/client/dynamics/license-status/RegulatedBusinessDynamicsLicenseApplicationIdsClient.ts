@@ -12,14 +12,14 @@ import axios, { AxiosError } from "axios";
 
 export const RegulatedBusinessDynamicsLicenseApplicationIdsClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): LicenseApplicationIdsForAllBusinessIdsClient => {
   const getLicenseApplicationIdsForAllBusinessIds = async (
     accessToken: string,
-    businessIdAndName: BusinessIdAndName[]
+    businessIdAndName: BusinessIdAndName[],
   ): Promise<LicenseApplicationIdResponse[]> => {
     const getLicenseApplicationIds = (
-      businessIdAndName: BusinessIdAndName
+      businessIdAndName: BusinessIdAndName,
     ): Promise<LicenseApplicationIdResponse[]> => {
       const logId = logWriter.GetId();
       logWriter.LogInfo(`RGB Dynamics License Application Ids Client - Id:${logId}`);
@@ -31,18 +31,18 @@ export const RegulatedBusinessDynamicsLicenseApplicationIdsClient = (
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
-          }
+          },
         )
         .then((response) => {
           logWriter.LogInfo(
             `RGB Dynamics License Application Id Client - Id:${logId} - Response: ${JSON.stringify(
-              response.data
-            )}`
+              response.data,
+            )}`,
           );
           const activeApplications = response.data.value
             .filter(
               (applicationDetails: LicenseApplicationIdApiResponse) =>
-                applicationDetails.statecode === ACTIVE_STATECODE
+                applicationDetails.statecode === ACTIVE_STATECODE,
             )
             .filter((applicationDetails: LicenseApplicationIdApiResponse) => {
               if (applicationDetails._rgb_apptypeid_value === PUBLIC_MOVERS_LICENSE_UUID) {
@@ -61,7 +61,10 @@ export const RegulatedBusinessDynamicsLicenseApplicationIdsClient = (
           return processApplicationDetails(activeApplications);
         })
         .catch((error: AxiosError) => {
-          logWriter.LogError(`RGB Dynamics License Application Id Client - Id:${logId} - Error:`, error);
+          logWriter.LogError(
+            `RGB Dynamics License Application Id Client - Id:${logId} - Error:`,
+            error,
+          );
           if (error.message === NO_MATCH_ERROR) throw error;
           throw error.response?.status;
         });
@@ -69,8 +72,8 @@ export const RegulatedBusinessDynamicsLicenseApplicationIdsClient = (
 
     const LicenseApplicationIdResponses = await Promise.all(
       businessIdAndName.map((businessIdAndName: BusinessIdAndName) =>
-        getLicenseApplicationIds(businessIdAndName)
-      )
+        getLicenseApplicationIds(businessIdAndName),
+      ),
     );
 
     return LicenseApplicationIdResponses.flat();
@@ -138,8 +141,10 @@ export const licenseAppType: Record<string, string> = {
     "Career Consulting/Outplacement-Career Consulting/Outplacement",
   [`${CAREER_CONSULTING_LICENSE_UUID}-100000001`]:
     "Career Consulting/Outplacement-Prepaid Computer Job Matching Service",
-  [`${CAREER_CONSULTING_LICENSE_UUID}-100000002`]: "Career Consulting/Outplacement-Job Listing Service",
-  [`${CONSULTING_FIRM_LICENSE_UUID}-100000000`]: "Consulting Firms/Temporary Help Services-Consulting Firm",
+  [`${CAREER_CONSULTING_LICENSE_UUID}-100000002`]:
+    "Career Consulting/Outplacement-Job Listing Service",
+  [`${CONSULTING_FIRM_LICENSE_UUID}-100000000`]:
+    "Consulting Firms/Temporary Help Services-Consulting Firm",
   [`${CONSULTING_FIRM_LICENSE_UUID}-100000001`]:
     "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service",
   [`${CONSULTING_FIRM_LICENSE_UUID}-100000002`]:
@@ -184,7 +189,7 @@ export type LicenseApplicationIdApiResponse = {
 };
 
 const processApplicationDetails = (
-  responses: LicenseApplicationIdApiResponse[]
+  responses: LicenseApplicationIdApiResponse[],
 ): LicenseApplicationIdResponse[] => {
   return responses.map((response) => {
     const appTypeKey = appTypeKeys[response._rgb_apptypeid_value] as keyof typeof response;

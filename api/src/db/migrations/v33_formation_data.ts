@@ -68,7 +68,11 @@ type v33TaxFilingData = {
   filings: v33TaxFiling[];
 };
 
-type v33EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
+type v33EntityIdStatus =
+  | "UNKNOWN"
+  | "EXISTS_AND_REGISTERED"
+  | "EXISTS_NOT_REGISTERED"
+  | "NOT_FOUND";
 
 type v33TaxFiling = {
   identifier: string;

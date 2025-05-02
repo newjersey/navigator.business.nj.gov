@@ -49,8 +49,13 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         hideDivider
         name="year-selector"
         dropdownClassName="padding-x-05 bg-transparent"
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        wrapper={(props: { children: ReactNode; className?: string; [key: string]: any }): JSX.Element => (
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        wrapper={(props: {
+          children: ReactNode;
+          className?: string;
+          [key: string]: any;
+          /* eslint-enable @typescript-eslint/no-explicit-any */
+        }): JSX.Element => (
           <div
             {...props}
             className={`radius-lg font-body-2xs text-normal margin-x-05 usa-button padding-05 ${props.className}`}

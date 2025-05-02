@@ -3,7 +3,7 @@ import { Business, UserData } from "@shared/userData";
 import { FacilityDetails } from "@shared/xray";
 
 export const updateXrayRegistrationStatusFactory = (
-  xrayRegistrationLookupClient: XrayRegistrationStatusLookup
+  xrayRegistrationLookupClient: XrayRegistrationStatusLookup,
 ): UpdateXrayRegistration => {
   return async (userData: UserData, facilityDetails: FacilityDetails): Promise<UserData> => {
     const { businessName, addressLine1, addressLine2, addressZipCode } = facilityDetails;

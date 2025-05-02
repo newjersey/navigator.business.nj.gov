@@ -406,7 +406,7 @@ export const v100generatorUser = (overrides: Partial<v100BusinessUser>): v100Bus
 };
 
 export const v100generateFormationAddress = (
-  overrides: Partial<v100FormationAddress>
+  overrides: Partial<v100FormationAddress>,
 ): v100FormationAddress => {
   return {
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -419,7 +419,9 @@ export const v100generateFormationAddress = (
   };
 };
 
-export const v100generateFormationMember = (overrides: Partial<v100FormationMember>): v100FormationMember => {
+export const v100generateFormationMember = (
+  overrides: Partial<v100FormationMember>,
+): v100FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -452,9 +454,11 @@ export const allFormationLegalTypes = [
 
 export const v100generateFormationFormData = (
   overrides: Partial<v100FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v100FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return {
     businessName: `some-business-name-${randomInt()}`,
@@ -480,7 +484,8 @@ export const v100generateFormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [v100generateFormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [v100generateFormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -504,7 +509,7 @@ export const v100generateFormationFormData = (
 };
 
 export const v100generatorIndustrySpecificData = (
-  overrides: Partial<v100IndustrySpecificData>
+  overrides: Partial<v100IndustrySpecificData>,
 ): v100IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -563,7 +568,9 @@ export const v100generatorProfileData = (overrides: Partial<v100ProfileData>): v
   };
 };
 
-export const v100TaxFilingDataGenerator = (overrides: Partial<v100TaxFilingData>): v100TaxFilingData => {
+export const v100TaxFilingDataGenerator = (
+  overrides: Partial<v100TaxFilingData>,
+): v100TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -577,7 +584,7 @@ export const v100TaxFilingDataGenerator = (overrides: Partial<v100TaxFilingData>
 
 export const v100FormationData = (
   overrides: Partial<v100FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v100FormationData => {
   return {
     formationFormData: v100generateFormationFormData({}, legalStructureId),

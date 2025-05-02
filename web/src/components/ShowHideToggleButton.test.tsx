@@ -25,11 +25,16 @@ const renderButton = ({
         useOverrideText={useOverrideText}
         showOverrideText={showOverrideText}
         hideOverrideText={hideOverrideText}
-      />
+      />,
     );
   } else {
     render(
-      <ShowHideToggleButton status={status} toggle={toggleMock} hideText={hideText} showText={showText} />
+      <ShowHideToggleButton
+        status={status}
+        toggle={toggleMock}
+        hideText={hideText}
+        showText={showText}
+      />,
     );
   }
 };

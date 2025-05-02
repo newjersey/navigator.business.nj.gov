@@ -50,7 +50,7 @@ describe("loadDisplayContent", () => {
       const introParagraph = "### I am a header\n\nI am a description";
       mockedFs.readFileSync.mockReturnValue(introParagraph);
       expect(loadTasksDisplayContent().formationDbaContent.Authorize.contentMd).toEqual(
-        "### I am a header\n\nI am a description"
+        "### I am a header\n\nI am a description",
       );
     });
   });

@@ -1,13 +1,16 @@
 import { RefObject, useEffect, useState } from "react";
 
-export const useIntersectionOnElement = (element: RefObject<HTMLElement>, rootMargin: string): boolean => {
+export const useIntersectionOnElement = (
+  element: RefObject<HTMLElement>,
+  rootMargin: string,
+): boolean => {
   const [isVisible, setState] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setState(entry.isIntersecting);
       },
-      { rootMargin }
+      { rootMargin },
     );
 
     element.current && observer.observe(element.current);

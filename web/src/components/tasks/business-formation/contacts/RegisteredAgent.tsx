@@ -46,7 +46,7 @@ export const RegisteredAgent = (): ReactElement => {
         });
       }
     },
-    [state.formationFormData, setFormationFormData]
+    [state.formationFormData, setFormationFormData],
   );
 
   const resetAgentFieldsInteraction = (): void => {
@@ -61,11 +61,13 @@ export const RegisteredAgent = (): ReactElement => {
         "agentOfficeAddressCity",
         "agentOfficeAddressZipCode",
       ],
-      { setToUninteracted: true }
+      { setToUninteracted: true },
     );
   };
 
-  const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+  const handleRadioSelection = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>,
+  ): void => {
     resetAgentFieldsInteraction();
     setFormationFormData((previousFormationData) => {
       return {
@@ -132,11 +134,15 @@ export const RegisteredAgent = (): ReactElement => {
     const interactedWithAgentCheckbox =
       state.interactedFields.includes("agentEmail") && state.interactedFields.includes("agentName");
     if (interactedWithAgentCheckbox && !state.formationFormData.agentUseAccountInfo) {
-      return <div>{`${Config.formation.registeredAgent.checkboxCheckedScreenReaderAnnouncement}`}</div>;
+      return (
+        <div>{`${Config.formation.registeredAgent.checkboxCheckedScreenReaderAnnouncement}`}</div>
+      );
     }
 
     if (interactedWithAgentCheckbox && state.formationFormData.agentUseAccountInfo) {
-      return <div>{`${Config.formation.registeredAgent.checkboxUnCheckedScreenReaderAnnouncement}`}</div>;
+      return (
+        <div>{`${Config.formation.registeredAgent.checkboxUnCheckedScreenReaderAnnouncement}`}</div>
+      );
     }
   };
 
@@ -223,7 +229,10 @@ export const RegisteredAgent = (): ReactElement => {
                 />
               </div>
 
-              <WithErrorBar hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])} type="DESKTOP-ONLY">
+              <WithErrorBar
+                hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])}
+                type="DESKTOP-ONLY"
+              >
                 <div className="grid-row grid-gap-1 margin-bottom-2">
                   <div className="grid-col-12 tablet:grid-col-6">
                     <FormationField fieldName="agentName">
@@ -291,11 +300,17 @@ export const RegisteredAgent = (): ReactElement => {
               </FormationField>
               <WithErrorBar
                 type="DESKTOP-ONLY"
-                hasError={doSomeFieldsHaveError(["agentOfficeAddressCity", "agentOfficeAddressZipCode"])}
+                hasError={doSomeFieldsHaveError([
+                  "agentOfficeAddressCity",
+                  "agentOfficeAddressZipCode",
+                ])}
               >
                 <div className="grid-row grid-gap-1 margin-top-2">
                   <div className="grid-col-12 tablet:grid-col-6">
-                    <WithErrorBar hasError={doesFieldHaveError("agentOfficeAddressCity")} type="MOBILE-ONLY">
+                    <WithErrorBar
+                      hasError={doesFieldHaveError("agentOfficeAddressCity")}
+                      type="MOBILE-ONLY"
+                    >
                       <FormationField fieldName="agentOfficeAddressCity">
                         <BusinessFormationTextField
                           label={Config.formation.fields.agentOfficeAddressCity.label}
@@ -337,7 +352,9 @@ export const RegisteredAgent = (): ReactElement => {
                               numericProps={{ maxLength: 5 }}
                               fieldName="agentOfficeAddressZipCode"
                               label={Config.formation.fields.agentOfficeAddressZipCode.label}
-                              validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
+                              validationText={
+                                Config.formation.fields.agentOfficeAddressZipCode.error
+                              }
                               required={true}
                               disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                             />

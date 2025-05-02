@@ -31,7 +31,7 @@ describe("<SidebarCardFormationNudge />", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserData(business)}>
         <SidebarCardFormationNudge card={card} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -76,9 +76,13 @@ describe("<SidebarCardFormationNudge />", () => {
 
       expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
       await waitFor(() => {
-        return expect(mockPush).toHaveBeenCalledWith({ query: { fromForming: "true" } }, undefined, {
-          shallow: true,
-        });
+        return expect(mockPush).toHaveBeenCalledWith(
+          { query: { fromForming: "true" } },
+          undefined,
+          {
+            shallow: true,
+          },
+        );
       });
     });
 

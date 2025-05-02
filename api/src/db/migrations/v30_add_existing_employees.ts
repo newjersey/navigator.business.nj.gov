@@ -66,7 +66,11 @@ export type v30TaxFilingData = {
   filings: v30TaxFiling[];
 };
 
-export type v30EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
+export type v30EntityIdStatus =
+  | "UNKNOWN"
+  | "EXISTS_AND_REGISTERED"
+  | "EXISTS_NOT_REGISTERED"
+  | "NOT_FOUND";
 
 export type v30TaxFiling = {
   identifier: string;

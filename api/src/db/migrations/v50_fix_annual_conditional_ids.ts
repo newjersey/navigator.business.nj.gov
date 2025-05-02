@@ -16,7 +16,8 @@ export interface v50UserData {
 
 export const migrate_v49_to_v50 = (v49Data: v49UserData): v50UserData => {
   const isAnnualCannabis =
-    v49Data.profileData.industryId === "cannabis" && v49Data.profileData.cannabisLicenseType === "ANNUAL";
+    v49Data.profileData.industryId === "cannabis" &&
+    v49Data.profileData.cannabisLicenseType === "ANNUAL";
   const cannabisTaskStatus = v49Data.taskProgress["conditional-permit-cannabis"];
 
   return isAnnualCannabis
@@ -304,7 +305,7 @@ export const generatev50ProfileData = (overrides: Partial<v50ProfileData>): v50P
 };
 
 export const generatev50FormationFormData = (
-  overrides: Partial<v50FormationFormData>
+  overrides: Partial<v50FormationFormData>,
 ): v50FormationFormData => {
   return {
     businessSuffix: undefined,

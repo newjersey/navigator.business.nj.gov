@@ -3,7 +3,8 @@ import { determineForeignBusinessType } from "./businessPersonaHelpers";
 
 export const nexusLocationInNewJersey = (profileData: ProfileData): boolean | undefined => {
   const isForeignBusiness = profileData.businessPersona === "FOREIGN";
-  const isNexusBusiness = determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS";
+  const isNexusBusiness =
+    determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS";
   const hasOfficeInNJ = profileData.foreignBusinessTypeIds.includes("officeInNJ");
 
   if (!isForeignBusiness) {

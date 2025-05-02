@@ -181,7 +181,11 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     });
   };
 
-  const composeFormationTabAriaLabel = (content: string, stepName: string, stepState: string): string => {
+  const composeFormationTabAriaLabel = (
+    content: string,
+    stepName: string,
+    stepState: string,
+  ): string => {
     return insertStepState(insertStepName(content, stepName), stepState);
   };
 
@@ -198,7 +202,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                   key={`${step.name}-${index}`}
                   className={
                     `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
-                    `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
+                    `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(
+                      index,
+                    )}`
                   }
                   data-num={getIcon(index)}
                   data-state={determineState(index)}
@@ -210,7 +216,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                   aria-label={composeFormationTabAriaLabel(
                     Config.formation.general.ariaContextStepperLabels,
                     step.name,
-                    determineAriaState(determineState(index))
+                    determineAriaState(determineState(index)),
                   )}
                   aria-selected={index === props.currentStep}
                   ref={(el) => {

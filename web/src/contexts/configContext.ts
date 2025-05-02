@@ -105,9 +105,9 @@ const merged = JSON.parse(
       TaxClearanceCertificateDownload,
       FundingsOnboarding,
       XrayRegistration,
-      AbcEmergencyTripPermit
-    )
-  )
+      AbcEmergencyTripPermit,
+    ),
+  ),
 );
 
 export type ConfigType = typeof ConfigOriginal &
@@ -212,7 +212,7 @@ export const getMergedConfig = (): ConfigType => {
     TaxClearanceCertificateShared,
     TaxClearanceCertificateDownload,
     XrayRegistration,
-    AbcEmergencyTripPermit
+    AbcEmergencyTripPermit,
   );
 };
 

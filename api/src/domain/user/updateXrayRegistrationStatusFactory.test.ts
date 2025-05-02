@@ -12,7 +12,9 @@ describe("updateXrayRegistrationStatusFactory", () => {
     xrayRegistrationLookupClient = {
       getStatus: jest.fn(),
     };
-    updateXrayRegistrationStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookupClient);
+    updateXrayRegistrationStatus = updateXrayRegistrationStatusFactory(
+      xrayRegistrationLookupClient,
+    );
   });
 
   it("returns updated userData with updated task progress", async () => {
@@ -44,15 +46,17 @@ describe("updateXrayRegistrationStatusFactory", () => {
     };
 
     const updatedUserData = await updateXrayRegistrationStatus(userData, facilityDetails);
-    expect(updatedUserData.businesses[updatedUserData.currentBusinessId].xrayRegistrationData).toEqual({
+    expect(
+      updatedUserData.businesses[updatedUserData.currentBusinessId].xrayRegistrationData,
+    ).toEqual({
       facilityDetails: facilityDetails,
       status: xrayRegistrationResponse.status,
       expirationDate: xrayRegistrationResponse.expirationDate,
       machines: xrayRegistrationResponse.machines,
     });
-    expect(updatedUserData.businesses[updatedUserData.currentBusinessId].taskProgress["xray-reg"]).toBe(
-      "COMPLETED"
-    );
+    expect(
+      updatedUserData.businesses[updatedUserData.currentBusinessId].taskProgress["xray-reg"],
+    ).toBe("COMPLETED");
   });
 
   it("throws an error when lookup throws an error", async () => {
@@ -64,6 +68,8 @@ describe("updateXrayRegistrationStatusFactory", () => {
       addressLine2: "Apt 4B",
       addressZipCode: "12345",
     };
-    await expect(updateXrayRegistrationStatus(userData, facilityDetails)).rejects.toThrow("SOME_ERROR");
+    await expect(updateXrayRegistrationStatus(userData, facilityDetails)).rejects.toThrow(
+      "SOME_ERROR",
+    );
   });
 });

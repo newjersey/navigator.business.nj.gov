@@ -38,7 +38,7 @@ describe("roadmapBuilder", () => {
     expect(
       roadmap.tasks.map((it) => {
         return it.id;
-      })
+      }),
     ).toEqual(expect.arrayContaining(["tea-task-1-id"]));
   });
 
@@ -50,7 +50,7 @@ describe("roadmapBuilder", () => {
     expect(
       roadmap.tasks.map((it) => {
         return it.id;
-      })
+      }),
     ).toEqual(expect.arrayContaining(["license-task-1-id"]));
   });
 
@@ -91,7 +91,7 @@ describe("roadmapBuilder", () => {
     expect(
       roadmap.tasks.map((it) => {
         return it.id;
-      })
+      }),
     ).toEqual(expect.arrayContaining(["license-task-1-id"]));
   });
 
@@ -104,7 +104,7 @@ describe("roadmapBuilder", () => {
     expect(
       roadmap.tasks.map((it) => {
         return { id: it.id, stepNumber: it.stepNumber };
-      })
+      }),
     ).toEqual(
       expect.arrayContaining([
         { id: "generic-task-1-id", stepNumber: 1 },
@@ -114,7 +114,7 @@ describe("roadmapBuilder", () => {
         { id: "tea-task-1-id", stepNumber: 1 },
         { id: "coffee-task-3-id", stepNumber: 2 },
         { id: "tea-task-2-id", stepNumber: 2 },
-      ])
+      ]),
     );
   });
 
@@ -127,7 +127,7 @@ describe("roadmapBuilder", () => {
     expect(
       roadmap.tasks.map((it) => {
         return { id: it.id, stepNumber: it.stepNumber };
-      })
+      }),
     ).toEqual([
       { id: "generic-task-1-id", stepNumber: 1 },
       { id: "coffee-task-2-id", stepNumber: 1 },
@@ -147,7 +147,7 @@ describe("roadmapBuilder", () => {
     expect(
       roadmap.tasks.map((it) => {
         return { id: it.id, stepNumber: it.stepNumber };
-      })
+      }),
     ).toEqual([
       { id: "weighted-task-0-id", stepNumber: 1 },
       { id: "generic-task-1-id", stepNumber: 1 },
@@ -170,7 +170,7 @@ describe("roadmapBuilder", () => {
         .map((it) => {
           return it.id;
         })
-        .includes("mocha-task-5-id")
+        .includes("mocha-task-5-id"),
     ).toBeTruthy();
   });
 
@@ -233,7 +233,7 @@ describe("roadmapBuilder", () => {
     expect(
       roadmap.tasks.filter((task) => {
         return task.filename === "generic-task-1";
-      }).length
+      }).length,
     ).toEqual(1);
   });
 });

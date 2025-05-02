@@ -48,7 +48,7 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
       raffleBingoStepFiles.map(async (fileName) => {
         const step = await fetchTaskByFilename(fileName);
         return { name: step.stepLabel ?? "" };
-      })
+      }),
     );
     return labels;
   };

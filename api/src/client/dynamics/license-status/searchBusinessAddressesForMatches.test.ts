@@ -44,20 +44,26 @@ describe("searchBusinessAddressesForMatch", () => {
         businessId: "matchingBusinessId-1234",
         addresses: [matchedAddress1, matchedAddress2],
       };
-      const result = searchBusinessAddressesForMatches([businessIdAndMatchingAddresses], userInputtedAddress);
+      const result = searchBusinessAddressesForMatches(
+        [businessIdAndMatchingAddresses],
+        userInputtedAddress,
+      );
       expect(result).toEqual([{ businessId: "matchingBusinessId-1234", name: "Some Business1" }]);
     });
 
     it("throws NO_ADDRESS_MATCH_ERROR when there is no match", () => {
       expect(() =>
-        searchBusinessAddressesForMatches([randomBusinessWithRandomAddresses1], userInputtedAddress)
+        searchBusinessAddressesForMatches(
+          [randomBusinessWithRandomAddresses1],
+          userInputtedAddress,
+        ),
       ).toThrow(NO_ADDRESS_MATCH_ERROR);
     });
 
     it("throws NO_ADDRESS_MATCH_ERROR when there are no addresses", () => {
-      expect(() => searchBusinessAddressesForMatches([businessWithNoAddresses], userInputtedAddress)).toThrow(
-        NO_ADDRESS_MATCH_ERROR
-      );
+      expect(() =>
+        searchBusinessAddressesForMatches([businessWithNoAddresses], userInputtedAddress),
+      ).toThrow(NO_ADDRESS_MATCH_ERROR);
     });
   });
 
@@ -70,7 +76,7 @@ describe("searchBusinessAddressesForMatch", () => {
       };
       const result = searchBusinessAddressesForMatches(
         [businessIdWithMatchingAddress, randomBusinessWithRandomAddresses1],
-        userInputtedAddress
+        userInputtedAddress,
       );
       expect(result).toEqual([{ businessId: "matchingBusinessId-1234", name: "Some Business2" }]);
     });
@@ -83,7 +89,7 @@ describe("searchBusinessAddressesForMatch", () => {
       };
       const result = searchBusinessAddressesForMatches(
         [businessIdAndMatchingAddresses, randomBusinessWithRandomAddresses1],
-        userInputtedAddress
+        userInputtedAddress,
       );
       expect(result).toEqual([{ businessId: "matchingBusinessId-1234", name: "Some Business3" }]);
     });
@@ -101,7 +107,7 @@ describe("searchBusinessAddressesForMatch", () => {
       };
       const result = searchBusinessAddressesForMatches(
         [businessIdAndMatchingAddresses, businessIdAndMatchingAddresses2],
-        userInputtedAddress
+        userInputtedAddress,
       );
       expect(result).toEqual([
         { businessId: "matchingBusinessId-1234", name: "Some Business3" },
@@ -118,7 +124,7 @@ describe("searchBusinessAddressesForMatch", () => {
 
       const result = searchBusinessAddressesForMatches(
         [businessWithNoAddresses, businessIdAndMatchingAddresses],
-        userInputtedAddress
+        userInputtedAddress,
       );
       expect(result).toEqual([{ businessId: "matchingBusinessId-1234", name: "Some Business5" }]);
     });
@@ -127,8 +133,8 @@ describe("searchBusinessAddressesForMatch", () => {
       expect(() =>
         searchBusinessAddressesForMatches(
           [randomBusinessWithRandomAddresses1, randomBusinessWithRandomAddresses2],
-          userInputtedAddress
-        )
+          userInputtedAddress,
+        ),
       ).toThrow(NO_ADDRESS_MATCH_ERROR);
     });
   });

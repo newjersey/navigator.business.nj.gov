@@ -50,9 +50,15 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     return getTaxIdInitialStatus(getTaxIdEncryptionStatus(state.profileData));
   };
 
-  const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
-  const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
-  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
+  const [locationValue, setLocationValue] = useState(
+    state.profileData[fieldName]?.trim().slice(9, 12) ?? "",
+  );
+  const [taxIdValue, setTaxIdValue] = useState(
+    state.profileData[fieldName]?.trim().slice(0, 9) ?? "",
+  );
+  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(
+    taxIdInitialDisplay(),
+  );
   const getShowHideToggleButton = (): ReactElement => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,

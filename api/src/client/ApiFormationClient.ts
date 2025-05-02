@@ -26,7 +26,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
   const form = (
     userData: UserData,
     returnUrl: string,
-    foreignGoodStandingFile: InputFile | undefined
+    foreignGoodStandingFile: InputFile | undefined,
   ): Promise<FormationSubmitResponse> => {
     const postBody = makePostBody(userData, returnUrl, config, foreignGoodStandingFile);
     const postContentType = "text/plain";
@@ -34,7 +34,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     logger.LogInfo(
       `Formation - NICUSA - Id:${logId} - ${postContentType} Request Sent to ${
         config.baseUrl
-      }/PrepareFiling data: ${JSON.stringify(postBody)}`
+      }/PrepareFiling data: ${JSON.stringify(postBody)}`,
     );
 
     return axios
@@ -45,7 +45,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       })
       .then((response) => {
         logger.LogInfo(
-          `Formation - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+          `Formation - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`,
         );
         if (response.data.Success && response.data.Success === true) {
           const successResponse = response.data as ApiResponse;
@@ -60,7 +60,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         } else {
           let errors = [] as FormationSubmitError[];
           logger.LogInfo(
-            `Formation - NICUSA - Id:${logId} - Response error received: ${JSON.stringify(response.data)}`
+            `Formation - NICUSA - Id:${logId} - Response error received: ${JSON.stringify(
+              response.data,
+            )}`,
           );
           if (Array.isArray(response.data)) {
             const apiError = response.data as ApiErrorResponse;
@@ -86,7 +88,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       })
       .catch((error) => {
         logger.LogError(
-          `Formation - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
+          `Formation - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`,
         );
         return {
           success: false,
@@ -108,7 +110,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     logger.LogInfo(
       `GetFiling - NICUSA - Id:${logId} - Request Sent to ${
         config.baseUrl
-      }/GetCompletedFiling data: ${JSON.stringify(postBody)}`
+      }/GetCompletedFiling data: ${JSON.stringify(postBody)}`,
     );
     return axios
       .post(`${config.baseUrl}/GetCompletedFiling`, postBody, {
@@ -118,7 +120,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       })
       .then((response) => {
         logger.LogInfo(
-          `GetFiling - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+          `GetFiling - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`,
         );
         if (response.data.Success && response.data.Success === true) {
           const successResponse = response.data as ApiGetFilingResponse;
@@ -145,7 +147,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       })
       .catch((error) => {
         logger.LogError(
-          `GetFiling - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
+          `GetFiling - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`,
         );
         return {
           success: false,
@@ -169,7 +171,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     logger.LogInfo(
       `Formation Health Check - NICUSA - Id:${logId} - Request Sent to ${
         config.baseUrl
-      }/PrepareFiling data: ${JSON.stringify(postBody)}`
+      }/PrepareFiling data: ${JSON.stringify(postBody)}`,
     );
 
     return axios
@@ -181,8 +183,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       .then((response) => {
         logger.LogInfo(
           `Formation Health Check - NICUSA - Id:${logId} - Response received: ${JSON.stringify(
-            response.data
-          )}`
+            response.data,
+          )}`,
         );
         return response.data.Success && response.data.Success === true
           ? ({

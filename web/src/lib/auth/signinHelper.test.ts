@@ -1,7 +1,13 @@
 import * as api from "@/lib/api-client/apiClient";
 import { AuthAction } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
-import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
+import {
+  onGuestSignIn,
+  onSelfRegister,
+  onSignIn,
+  onSignOut,
+  SelfRegRouter,
+} from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as AccountLinkingErrorStorage from "@/lib/storage/AccountLinkingErrorStorage";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
@@ -267,7 +273,8 @@ describe("SigninHelper", () => {
         encounteredMyNjLinkingError: true,
       });
       expect(
-        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
+        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser
+          ?.encounteredMyNjLinkingError,
       ).toEqual(true);
     });
 
@@ -286,7 +293,8 @@ describe("SigninHelper", () => {
       await onGuestSignIn({ push: mockPush, pathname: ROUTES.landing, dispatch: mockDispatch });
       expect(mockGetFn).toHaveBeenCalled();
       expect(
-        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
+        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser
+          ?.encounteredMyNjLinkingError,
       ).toEqual(true);
     });
 
@@ -311,7 +319,9 @@ describe("SigninHelper", () => {
     });
 
     it("redirect user to onboarding if still in progress", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: "UNSTARTED" }),
+      );
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
@@ -356,7 +366,9 @@ describe("SigninHelper", () => {
     });
 
     it("redirects user to /account-setup from /login when onboarding has been completed", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "COMPLETED" }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: "COMPLETED" }),
+      );
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
@@ -368,7 +380,9 @@ describe("SigninHelper", () => {
     });
 
     it("redirects user to /onboarding from /login when onboarding has not been completed", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: "UNSTARTED" }),
+      );
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });

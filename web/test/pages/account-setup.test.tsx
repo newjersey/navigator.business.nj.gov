@@ -104,8 +104,8 @@ describe("Account Setup page", () => {
         <WithStatefulUserData initialUserData={initialUserData}>
           <AccountSetupPage />
         </WithStatefulUserData>,
-        { activeUser: activeUser, isAuthenticated }
-      )
+        { activeUser: activeUser, isAuthenticated },
+      ),
     );
     const page = createPageHelpers();
     return { page };
@@ -127,8 +127,8 @@ describe("Account Setup page", () => {
           <AccountSetupPage />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.FALSE,
-        { registrationStatus }
-      )
+        { registrationStatus },
+      ),
     );
   };
 
@@ -173,7 +173,9 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(
+      screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length,
+    ).toEqual(2);
   });
 
   it("prevents user from registering if the email is not matching after changing it", () => {
@@ -185,7 +187,9 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(
+      screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length,
+    ).toEqual(2);
   });
 
   it("prevents user from registering if the name is empty", () => {
@@ -207,7 +211,9 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(screen.getByText(Config.selfRegistration.errorTextFullNameSpecialCharacter)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.selfRegistration.errorTextFullNameSpecialCharacter),
+    ).toBeInTheDocument();
   });
 
   it("prevents user from registering if the name is greater than 50 characters", () => {
@@ -230,7 +236,9 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(screen.getByText(Config.selfRegistration.errorTextFullNameStartWithLetter)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.selfRegistration.errorTextFullNameStartWithLetter),
+    ).toBeInTheDocument();
   });
 
   it("prevents user from registering if the email is empty", () => {
@@ -241,7 +249,9 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(screen.getAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(screen.getAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(
+      2,
+    );
   });
 
   it("displays error message when @ is missing in email input field", async () => {
@@ -251,7 +261,9 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(screen.getAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(screen.getAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(
+      2,
+    );
   });
 
   it("displays error message when . is missing in email input field", async () => {
@@ -261,7 +273,9 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(screen.getAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(screen.getAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(
+      2,
+    );
   });
 
   it("allows a user to uncheck to opt out of newsletter", async () => {
@@ -344,13 +358,15 @@ describe("Account Setup page", () => {
 
     expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled();
     expect(
-      mockAnalytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration
+      mockAnalytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration,
     ).toHaveBeenCalled();
   });
 
   it("uses source query param as analytics event", () => {
     useMockRouter({ isReady: true, query: { source: "guest_snackbar" } });
     renderPage({ isAuthenticated: IsAuthenticated.FALSE });
-    expect(mockAnalytics.event.guest_snackbar.click.go_to_NavigatorAccount_setup).toHaveBeenCalled();
+    expect(
+      mockAnalytics.event.guest_snackbar.click.go_to_NavigatorAccount_setup,
+    ).toHaveBeenCalled();
   });
 });

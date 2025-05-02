@@ -55,8 +55,10 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
                 type: FieldStateActionKind.VALIDATION,
                 payload: {
                   field: "permitStartTime",
-                  invalid: getErrorStateForEmergencyTripPermitField("permitStartTime", newApplicationInfo)
-                    .hasError,
+                  invalid: getErrorStateForEmergencyTripPermitField(
+                    "permitStartTime",
+                    newApplicationInfo,
+                  ).hasError,
                 },
               });
             }

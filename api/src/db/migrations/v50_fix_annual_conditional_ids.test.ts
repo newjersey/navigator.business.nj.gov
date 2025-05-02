@@ -51,7 +51,10 @@ describe("migrate_v49_to_v50", () => {
     });
   });
 
-  const makeUserData = (profileData: v49ProfileData, overrides: Partial<v49UserData>): v49UserData => {
+  const makeUserData = (
+    profileData: v49ProfileData,
+    overrides: Partial<v49UserData>,
+  ): v49UserData => {
     return {
       user,
       profileData,

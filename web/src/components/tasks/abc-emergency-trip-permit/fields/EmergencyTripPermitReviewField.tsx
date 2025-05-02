@@ -23,7 +23,10 @@ export const EmergencyTripPermitReviewField = (props: Props): ReactElement => {
     } else if (props.fieldName === "permitStartTime") {
       return (
         <span>
-          {getFormattedTimeFromInternalTime(context.state.applicationInfo[props.fieldName])?.displayTime}
+          {
+            getFormattedTimeFromInternalTime(context.state.applicationInfo[props.fieldName])
+              ?.displayTime
+          }
         </span>
       );
     } else {

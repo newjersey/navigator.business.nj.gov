@@ -115,18 +115,21 @@ export const XrayRegistrationSummary = (props: Props): ReactElement => {
                     <li>
                       {templateEval(Config.xrayRegistrationTask.registrationNumber, {
                         registrationNumber:
-                          machine.registrationNumber ?? Config.xrayRegistrationTask.noInformationAvailable,
+                          machine.registrationNumber ??
+                          Config.xrayRegistrationTask.noInformationAvailable,
                       })}
                     </li>
                     <li>
                       {templateEval(Config.xrayRegistrationTask.roomId, {
-                        roomId: machine.roomId ?? Config.xrayRegistrationTask.noInformationAvailable,
+                        roomId:
+                          machine.roomId ?? Config.xrayRegistrationTask.noInformationAvailable,
                       })}
                     </li>
                     <li>
                       {templateEval(Config.xrayRegistrationTask.registrationCategory, {
                         registrationCategory:
-                          machine.registrationCategory ?? Config.xrayRegistrationTask.noInformationAvailable,
+                          machine.registrationCategory ??
+                          Config.xrayRegistrationTask.noInformationAvailable,
                       })}
                     </li>
                     <li>
@@ -138,13 +141,15 @@ export const XrayRegistrationSummary = (props: Props): ReactElement => {
                     <li>
                       {templateEval(Config.xrayRegistrationTask.serialNumber, {
                         serialNumber:
-                          machine.serialNumber ?? Config.xrayRegistrationTask.noInformationAvailable,
+                          machine.serialNumber ??
+                          Config.xrayRegistrationTask.noInformationAvailable,
                       })}
                     </li>
                     <li>
                       {templateEval(Config.xrayRegistrationTask.annualFee, {
                         annualFee:
-                          machine.annualFee?.toString() ?? Config.xrayRegistrationTask.noInformationAvailable,
+                          machine.annualFee?.toString() ??
+                          Config.xrayRegistrationTask.noInformationAvailable,
                       })}
                     </li>
                   </ul>
@@ -155,7 +160,9 @@ export const XrayRegistrationSummary = (props: Props): ReactElement => {
         </ResultsSectionAccordion>
       </div>
       <div className={"font-open-sans-3 margin-top-2"}>
-        <span className={"text-bold margin-right-05"}>{Config.xrayRegistrationTask.issuingAgencyText}:</span>
+        <span className={"text-bold margin-right-05"}>
+          {Config.xrayRegistrationTask.issuingAgencyText}:
+        </span>
         {Config.xrayRegistrationTask.issuingAgency}
       </div>
     </div>

@@ -21,7 +21,8 @@ export const migrate_v117_to_v118 = (v117Data: v117UserData): v118UserData => {
     v117Data.profileData.businessPersona === "FOREIGN" &&
     (v117Data.profileData.foreignBusinessType === "REMOTE_SELLER" ||
       v117Data.profileData.foreignBusinessType === "REMOTE_WORKER");
-  const isNeedsBusinessStructure = v117Data.profileData.operatingPhase === "NEEDS_BUSINESS_STRUCTURE";
+  const isNeedsBusinessStructure =
+    v117Data.profileData.operatingPhase === "NEEDS_BUSINESS_STRUCTURE";
 
   return {
     ...v117Data,

@@ -77,7 +77,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         num={month}
         activeYear={year}
         licenseEvents={[generateLicenseEvent({})]}
-      />
+      />,
     );
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
   });
@@ -106,7 +106,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         num={month - 1}
         activeYear={year}
         licenseEvents={[generateLicenseEvent({})]}
-      />
+      />,
     );
     expect(screen.queryByText("Tax Filing Old")).not.toBeInTheDocument();
   });
@@ -135,7 +135,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         }}
         num={month - 1}
         activeYear={currentDate.add(1, "year").year().toString()}
-      />
+      />,
     );
     expect(screen.getByText("Tax Filing Old")).toBeInTheDocument();
   });
@@ -152,7 +152,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={currentDate.add(1, "year").year().toString()}
-      />
+      />,
     );
 
     expect(screen.queryByText("Tax Filing One")).not.toBeInTheDocument();
@@ -179,13 +179,13 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={currentDate.year().toString()}
-      />
+      />,
     );
 
     expect(screen.getByText(licenseEvent.expirationEventDisplayName)).toBeInTheDocument();
     expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
       "href",
-      `license-calendar-event/${licenseEvent.urlSlug}-expiration`
+      `license-calendar-event/${licenseEvent.urlSlug}-expiration`,
     );
   });
 
@@ -210,12 +210,12 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={currentDate.add(1, "month").month()}
         activeYear={currentDate.year().toString()}
-      />
+      />,
     );
     expect(screen.getByText(licenseEvent.renewalEventDisplayName)).toBeInTheDocument();
     expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
       "href",
-      `license-calendar-event/${licenseEvent.urlSlug}-renewal`
+      `license-calendar-event/${licenseEvent.urlSlug}-renewal`,
     );
   });
 
@@ -240,19 +240,19 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={0}
         activeYear={currentDate.add(1, "year").year().toString()}
-      />
+      />,
     );
 
     expect(screen.getByText(licenseEvent.expirationEventDisplayName)).toBeInTheDocument();
     expect(screen.getAllByTestId("calendar-event-anchor")[0]).toHaveAttribute(
       "href",
-      `license-calendar-event/${licenseEvent.urlSlug}-expiration`
+      `license-calendar-event/${licenseEvent.urlSlug}-expiration`,
     );
 
     expect(screen.getByText(licenseEvent.renewalEventDisplayName)).toBeInTheDocument();
     expect(screen.getAllByTestId("calendar-event-anchor")[1]).toHaveAttribute(
       "href",
-      `license-calendar-event/${licenseEvent.urlSlug}-renewal`
+      `license-calendar-event/${licenseEvent.urlSlug}-renewal`,
     );
   });
 
@@ -267,13 +267,17 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
-      />
+      />,
     );
 
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
-    expect(screen.queryByText(Config.dashboardDefaults.viewMoreFilingsButton)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.dashboardDefaults.viewMoreFilingsButton),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton),
+    ).not.toBeInTheDocument();
   });
 
   it("shows a licenseEvent and exactly 2 tax filings in order by due date", () => {
@@ -307,7 +311,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
-      />
+      />,
     );
 
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
@@ -355,7 +359,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
-      />
+      />,
     );
 
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
@@ -371,7 +375,9 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("shows and hides the additional tax filings when the view more / view less button is clicked", () => {
     const business = generateBusiness({
-      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
+      taxFilingData: generateTaxFilingData({
+        filings: [taxFilingOne, taxFilingTwo, taxFilingThree],
+      }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -380,23 +386,29 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
-      />
+      />,
     );
 
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
     expect(screen.queryByText("Tax Filing Three")).not.toBeInTheDocument();
     expect(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton)).toBeInTheDocument();
-    expect(screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton),
+    ).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
     expect(screen.getByText("Tax Filing Three")).toBeInTheDocument();
-    expect(screen.queryByText(Config.dashboardDefaults.viewMoreFilingsButton)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.dashboardDefaults.viewMoreFilingsButton),
+    ).not.toBeInTheDocument();
     expect(screen.getByText(Config.dashboardDefaults.viewLessFilingsButton)).toBeInTheDocument();
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.viewLessFilingsButton));
     expect(screen.queryByText("Tax Filing Three")).not.toBeInTheDocument();
     expect(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton)).toBeInTheDocument();
-    expect(screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton),
+    ).not.toBeInTheDocument();
   });
 });

@@ -24,7 +24,10 @@ export const Task = (props: Props): ReactElement => {
       return <></>;
     }
     return (
-      <span className="text-base text-no-underline display-inline-block" data-testid="required task">
+      <span
+        className="text-base text-no-underline display-inline-block"
+        data-testid="required task"
+      >
         <Content>{Config.taskDefaults.requiredLabelText}</Content>
       </span>
     );
@@ -46,7 +49,9 @@ export const Task = (props: Props): ReactElement => {
           <Link
             href={`/tasks/${props.task.urlSlug}`}
             passHref
-            onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
+            onClick={(): void =>
+              analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)
+            }
             className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
             data-task={props.task.id}
             data-testid={props.task.id}
@@ -59,7 +64,8 @@ export const Task = (props: Props): ReactElement => {
       </div>
       {!isTabletAndUp && (
         <div className="margin-bottom-2">
-          {TaskProgressTagLookup[taskProgress]} <span className="margin-left-1">{renderRequiredLabel()}</span>
+          {TaskProgressTagLookup[taskProgress]}{" "}
+          <span className="margin-left-1">{renderRequiredLabel()}</span>
         </div>
       )}
     </li>

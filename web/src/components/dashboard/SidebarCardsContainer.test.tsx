@@ -1,6 +1,11 @@
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import { getMergedConfig } from "@/contexts/configContext";
-import { Certification, Funding, RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
+import {
+  Certification,
+  Funding,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
@@ -16,7 +21,11 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { Business, generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -36,7 +45,9 @@ describe("<SidebarCardsContainer />", () => {
     setupStatefulUserDataContext();
   });
 
-  const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
+  const createDisplayContent = (
+    sidebar?: Record<string, SidebarCardContent>,
+  ): RoadmapDisplayContent => {
     return {
       sidebarDisplayContent: sidebar ?? {
         welcome: generateSidebarCardContent({}),
@@ -54,7 +65,7 @@ describe("<SidebarCardsContainer />", () => {
         sidebarDisplayContent={createDisplayContent(overrides.sidebarCards).sidebarDisplayContent}
         fundings={overrides.fundings ?? []}
         certifications={overrides.certifications ?? []}
-      />
+      />,
     );
   };
 
@@ -64,18 +75,20 @@ describe("<SidebarCardsContainer />", () => {
       sidebarCards?: Record<string, SidebarCardContent>;
       fundings?: Funding[];
       certifications?: Certification[];
-    }
+    },
   ): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <ThemeProvider theme={createTheme()}>
           <SidebarCardsContainer
-            sidebarDisplayContent={createDisplayContent(overrides.sidebarCards).sidebarDisplayContent}
+            sidebarDisplayContent={
+              createDisplayContent(overrides.sidebarCards).sidebarDisplayContent
+            }
             fundings={overrides.fundings ?? []}
             certifications={overrides.certifications ?? []}
           />
         </ThemeProvider>
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -116,7 +129,9 @@ describe("<SidebarCardsContainer />", () => {
         expect(screen.getByText("FakeContent")).toBeInTheDocument();
       });
 
-      fireEvent.click(within(screen.getByTestId("fake-visible-card") as HTMLElement).getByLabelText("Close"));
+      fireEvent.click(
+        within(screen.getByTestId("fake-visible-card") as HTMLElement).getByLabelText("Close"),
+      );
 
       await waitFor(() => {
         expect(screen.queryByText("FakeContent")).not.toBeInTheDocument();
@@ -219,7 +234,11 @@ describe("<SidebarCardsContainer />", () => {
 
       const fundings = [
         generateFunding({ name: "Funding 1", sector: ["construction"], status: "closed" }),
-        generateFunding({ name: "Funding 2", sector: ["construction"], status: "rolling application" }),
+        generateFunding({
+          name: "Funding 2",
+          sector: ["construction"],
+          status: "rolling application",
+        }),
         generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "rolling application" }),
         generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
         generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
@@ -251,7 +270,11 @@ describe("<SidebarCardsContainer />", () => {
       });
 
       const fundings = [
-        generateFunding({ name: "Funding 1", sector: ["construction"], status: "rolling application" }),
+        generateFunding({
+          name: "Funding 1",
+          sector: ["construction"],
+          status: "rolling application",
+        }),
       ];
 
       renderWithBusiness(business, { fundings });
@@ -277,7 +300,7 @@ describe("<SidebarCardsContainer />", () => {
       });
       renderWithBusiness(business, { fundings: [] });
       expect(
-        screen.getByText(Config.dashboardDefaults.learnMoreFundingOpportunitiesText)
+        screen.getByText(Config.dashboardDefaults.learnMoreFundingOpportunitiesText),
       ).toBeInTheDocument();
     });
 
@@ -289,13 +312,15 @@ describe("<SidebarCardsContainer />", () => {
       });
       renderWithBusiness(business, { fundings: [] });
       expect(
-        screen.queryByText(Config.dashboardDefaults.learnMoreFundingOpportunitiesText)
+        screen.queryByText(Config.dashboardDefaults.learnMoreFundingOpportunitiesText),
       ).not.toBeInTheDocument();
     });
   });
 
   describe("hiding opportunities", () => {
-    const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1", id: "cert1-id" })];
+    const certifications = [
+      generateCertification({ urlSlug: "cert1", name: "Cert 1", id: "cert1-id" }),
+    ];
     const fundings = [generateFunding({ urlSlug: "fund1", name: "Fund 1", id: "fund1-id" })];
 
     beforeEach(() => {
@@ -303,10 +328,13 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
-      renderWithBusiness(generateBusiness({ profileData: getProfileDataForUnfilteredOpportunities() }), {
-        certifications,
-        fundings,
-      });
+      renderWithBusiness(
+        generateBusiness({ profileData: getProfileDataForUnfilteredOpportunities() }),
+        {
+          certifications,
+          fundings,
+        },
+      );
 
       let cert1 = within(screen.getByTestId("cert1-id"));
       const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
@@ -378,7 +406,9 @@ describe("<SidebarCardsContainer />", () => {
 
       renderWithBusiness(business, { certifications, fundings });
       expect(
-        screen.getByText(templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "1" }))
+        screen.getByText(
+          templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "1" }),
+        ),
       ).toBeInTheDocument();
     });
 
@@ -395,7 +425,9 @@ describe("<SidebarCardsContainer />", () => {
 
       renderWithBusiness(business, { certifications, fundings });
       expect(
-        screen.getByText(templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "2" }))
+        screen.getByText(
+          templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "2" }),
+        ),
       ).toBeInTheDocument();
     });
   });

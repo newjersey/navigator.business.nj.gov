@@ -69,12 +69,12 @@ describe("TaxClearanceCertificateClient", () => {
         zip: generatedTaxClearanceCertificateData.addressZipCode,
         taxpayerPin: generatedTaxClearanceCertificateData.taxPin,
         agencyName: LookupTaxClearanceCertificateAgenciesById(
-          generatedTaxClearanceCertificateData.requestingAgencyId
+          generatedTaxClearanceCertificateData.requestingAgencyId,
         ).name,
       },
       {
         auth: { password: "fakePassword", username: "fakeUserName" },
-      }
+      },
     );
   });
 
@@ -104,7 +104,7 @@ describe("TaxClearanceCertificateClient", () => {
       state: generatedTaxClearanceCertificateData.addressState?.shortCode,
       zip: generatedTaxClearanceCertificateData.addressZipCode,
       agencyName: LookupTaxClearanceCertificateAgenciesById(
-        generatedTaxClearanceCertificateData.requestingAgencyId
+        generatedTaxClearanceCertificateData.requestingAgencyId,
       ).name,
     };
 
@@ -118,12 +118,12 @@ describe("TaxClearanceCertificateClient", () => {
     expect(spyOnLogInfo.mock.calls[1][0]).toEqual(
       `Tax Clearance Certificate Client - Id:test - Request Sent to ${
         config.orgUrl
-      }/TYTR_ACE_App/ProcessCertificate/businessClearance data: ${JSON.stringify(postBody)}`
+      }/TYTR_ACE_App/ProcessCertificate/businessClearance data: ${JSON.stringify(postBody)}`,
     );
     expect(spyOnLogInfo.mock.calls[2][0]).toEqual(
       `Tax Clearance Certificate Client - Id:test - Response received: ${JSON.stringify({
         certificate: "Succussful Response - PDF data omitted",
-      })}`
+      })}`,
     );
 
     spyOnGetId.mockRestore();
@@ -145,7 +145,9 @@ describe("TaxClearanceCertificateClient", () => {
     const spyOnGetId = jest.spyOn(DummyLogWriter, "GetId").mockReturnValue("test");
     const spyOnLogError = jest.spyOn(DummyLogWriter, "LogError");
     mockAxios.post.mockRejectedValue(error);
-    await expect(client.postTaxClearanceCertificate(userData)).rejects.toEqual(StatusCodes.BAD_REQUEST);
+    await expect(client.postTaxClearanceCertificate(userData)).rejects.toEqual(
+      StatusCodes.BAD_REQUEST,
+    );
 
     expect(spyOnLogError.mock.calls[0]).toEqual([
       "Tax Clearance Certificate Client - Id:test - Error",
@@ -162,7 +164,7 @@ describe("TaxClearanceCertificateClient", () => {
       response: { status: StatusCodes.INTERNAL_SERVER_ERROR },
     });
     await expect(client.postTaxClearanceCertificate(userData)).rejects.toEqual(
-      StatusCodes.INTERNAL_SERVER_ERROR
+      StatusCodes.INTERNAL_SERVER_ERROR,
     );
   });
 

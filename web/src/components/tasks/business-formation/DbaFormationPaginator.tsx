@@ -36,7 +36,7 @@ export const DbaFormationPaginator = (): ReactElement => {
         hasError: false,
         isComplete: index === 0,
       };
-    })
+    }),
   );
 
   useMountEffect(() => {
@@ -65,7 +65,7 @@ export const DbaFormationPaginator = (): ReactElement => {
 
   const onMoveToStep = async (
     stepIndex: number,
-    config: { moveType: "NEXT_BUTTON" | "STEPPER" }
+    config: { moveType: "NEXT_BUTTON" | "STEPPER" },
   ): Promise<void> => {
     if (!updateQueue) return;
     onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
@@ -89,7 +89,7 @@ export const DbaFormationPaginator = (): ReactElement => {
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
-    moveType: "NEXT_BUTTON" | "STEPPER"
+    moveType: "NEXT_BUTTON" | "STEPPER",
   ): void => {
     if (!formationFormData) {
       return;
@@ -142,7 +142,11 @@ export const DbaFormationPaginator = (): ReactElement => {
         " margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105 width-full mobile-lg:width-auto"
       }
     >
-      <SecondaryButton isColor="primary" onClick={onPreviousButtonClick} isRightMarginRemoved={true}>
+      <SecondaryButton
+        isColor="primary"
+        onClick={onPreviousButtonClick}
+        isRightMarginRemoved={true}
+      >
         {Config.formation.general.previousButtonText}
       </SecondaryButton>
     </div>
@@ -182,7 +186,11 @@ export const DbaFormationPaginator = (): ReactElement => {
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>
-            <a href={state.dbaContent.Authorize.callToActionLink} target="_blank" rel="noreferrer noopener">
+            <a
+              href={state.dbaContent.Authorize.callToActionLink}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               <PrimaryButton
                 isColor="primary"
                 isRightMarginRemoved={true}
@@ -190,12 +198,13 @@ export const DbaFormationPaginator = (): ReactElement => {
                   analytics.event.task_primary_call_to_action.click.open_external_website(
                     state.dbaContent.Authorize.callToActionText ||
                       Config.taskDefaults.defaultCallToActionText,
-                    state.dbaContent.Authorize.callToActionLink as string
+                    state.dbaContent.Authorize.callToActionLink as string,
                   );
                   setShowCtaModal(true);
                 }}
               >
-                {state.dbaContent.Authorize.callToActionText || Config.taskDefaults.defaultCallToActionText}
+                {state.dbaContent.Authorize.callToActionText ||
+                  Config.taskDefaults.defaultCallToActionText}
               </PrimaryButton>
             </a>
           </ActionBarLayout>

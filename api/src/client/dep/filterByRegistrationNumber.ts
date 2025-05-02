@@ -1,6 +1,8 @@
 import type { XrayRegistrationEntry } from "@shared/xray";
 
-export const filterByRegistrationNumber = (entries: XrayRegistrationEntry[]): XrayRegistrationEntry[] => {
+export const filterByRegistrationNumber = (
+  entries: XrayRegistrationEntry[],
+): XrayRegistrationEntry[] => {
   const entriesRecord: Record<string, XrayRegistrationEntry> = {};
 
   for (const entry of entries) {

@@ -57,7 +57,9 @@ export const XrayRegistrationStatus = (props: Props): ReactElement => {
     const nameAndAddress = business.xrayRegistrationData?.facilityDetails;
 
     const hasNameAndAddress =
-      nameAndAddress?.businessName && nameAndAddress?.addressLine1 && nameAndAddress?.addressZipCode;
+      nameAndAddress?.businessName &&
+      nameAndAddress?.addressLine1 &&
+      nameAndAddress?.addressZipCode;
 
     if (nameAndAddress && hasNameAndAddress) {
       setFormValues(nameAndAddress);
@@ -91,7 +93,7 @@ export const XrayRegistrationStatus = (props: Props): ReactElement => {
   };
 
   const handleChangeForKey = (
-    key: keyof FacilityDetails
+    key: keyof FacilityDetails,
   ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
     return (event: ChangeEvent<HTMLInputElement>): void => {
       setFormValues((prevValues) => {

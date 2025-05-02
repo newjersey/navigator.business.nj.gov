@@ -12,7 +12,9 @@ export interface v43UserData {
   version: number;
 }
 
-const getOnboardingFlow = (hasExistingBusiness: boolean | undefined): "STARTING" | "OWNING" | undefined => {
+const getOnboardingFlow = (
+  hasExistingBusiness: boolean | undefined,
+): "STARTING" | "OWNING" | undefined => {
   if (hasExistingBusiness === true) {
     return "OWNING";
   } else if (hasExistingBusiness === false) {

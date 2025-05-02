@@ -31,7 +31,7 @@ export const migrate_v121_to_v122 = (v121Data: v121UserData): v122UserData => {
     businesses: Object.fromEntries(
       Object.values(v121Data.businesses)
         .map((business) => migrate_v121Business_to_v122Business(business))
-        .map((currBusiness) => [currBusiness.id, currBusiness])
+        .map((currBusiness) => [currBusiness.id, currBusiness]),
     ),
     version: 122,
   };
@@ -480,7 +480,9 @@ export const generateV122UserData = (overrides: Partial<v122UserData>): v122User
   };
 };
 
-export const generateV122BusinessUser = (overrides: Partial<v122BusinessUser>): v122BusinessUser => {
+export const generateV122BusinessUser = (
+  overrides: Partial<v122BusinessUser>,
+): v122BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -558,7 +560,7 @@ export const generateV122ProfileData = (overrides: Partial<v122ProfileData>): v1
 };
 
 export const generateV122IndustrySpecificData = (
-  overrides: Partial<v122IndustrySpecificData>
+  overrides: Partial<v122IndustrySpecificData>,
 ): v122IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -598,7 +600,7 @@ export const generateV122Preferences = (overrides: Partial<v122Preferences>): v1
 
 export const generateV122FormationData = (
   overrides: Partial<v122FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v122FormationData => {
   return {
     formationFormData: generateV122FormationFormData({}, legalStructureId),
@@ -614,9 +616,11 @@ export const generateV122FormationData = (
 
 export const generateV122FormationFormData = (
   overrides: Partial<v122FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v122FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v122FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -663,7 +667,8 @@ export const generateV122FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: true, title: "Authorized Representative" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV122FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generateV122FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -684,7 +689,9 @@ export const generateV122FormationFormData = (
   };
 };
 
-export const generateV122Municipality = (overrides: Partial<v122Municipality>): v122Municipality => {
+export const generateV122Municipality = (
+  overrides: Partial<v122Municipality>,
+): v122Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -694,7 +701,9 @@ export const generateV122Municipality = (overrides: Partial<v122Municipality>): 
   };
 };
 
-export const generateV122FormationMember = (overrides: Partial<v122FormationMember>): v122FormationMember => {
+export const generateV122FormationMember = (
+  overrides: Partial<v122FormationMember>,
+): v122FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -708,7 +717,9 @@ export const generateV122FormationMember = (overrides: Partial<v122FormationMemb
   };
 };
 
-export const generateV122TaxFilingData = (overrides: Partial<v122TaxFilingData>): v122TaxFilingData => {
+export const generateV122TaxFilingData = (
+  overrides: Partial<v122TaxFilingData>,
+): v122TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,

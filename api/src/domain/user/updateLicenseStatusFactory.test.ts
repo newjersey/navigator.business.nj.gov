@@ -47,7 +47,7 @@ describe("updateLicenseStatus", () => {
 
     updateLicenseStatus = updateLicenseStatusFactory(
       stubWebserviceLicenseStatusSearch,
-      stubRGBLicenseStatusSearch
+      stubRGBLicenseStatusSearch,
     );
 
     userData = generateUserDataForBusiness(
@@ -63,7 +63,7 @@ describe("updateLicenseStatus", () => {
             .subtract(1, "minute")
             .toISOString(),
         }),
-      })
+      }),
     );
   });
 
@@ -258,7 +258,7 @@ describe("updateLicenseStatus", () => {
         JSON.stringify({
           webserviceErrorMessage: new Error("fail"),
           rgbErrorMessage: new Error("fail"),
-        })
+        }),
       );
     });
 
@@ -308,7 +308,7 @@ describe("updateLicenseStatus", () => {
             ...licenseType1Expected,
           },
         });
-      }
+      },
     );
   });
 

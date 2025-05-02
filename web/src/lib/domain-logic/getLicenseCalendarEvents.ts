@@ -10,7 +10,7 @@ import { LicenseName, taskIdLicenseNameMapping } from "@businessnjgovnavigator/s
 export const getLicenseCalendarEvents = (
   licenseData: LicenseData | undefined,
   year: number,
-  month?: number
+  month?: number,
 ): LicenseCalendarEvent[] => {
   const events: LicenseCalendarEvent[] = [];
   if (licenseData === undefined) {
@@ -35,7 +35,10 @@ export const getLicenseCalendarEvents = (
     }
 
     const expirationDate = parseDate(licenseDetail.expirationDateISO);
-    if (expirationDate.year() === year && (isMonthDefined ? expirationDate.month() === month : true)) {
+    if (
+      expirationDate.year() === year &&
+      (isMonthDefined ? expirationDate.month() === month : true)
+    ) {
       events.push({
         dueDate: expirationDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",

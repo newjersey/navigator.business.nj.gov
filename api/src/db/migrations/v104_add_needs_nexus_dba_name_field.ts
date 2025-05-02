@@ -395,7 +395,7 @@ export const generateV104User = (overrides: Partial<v104BusinessUser>): v104Busi
 };
 
 export const generateV104FormationAddress = (
-  overrides: Partial<v104FormationAddress>
+  overrides: Partial<v104FormationAddress>,
 ): v104FormationAddress => {
   return {
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -408,7 +408,9 @@ export const generateV104FormationAddress = (
   };
 };
 
-export const generateV104FormationMember = (overrides: Partial<v104FormationMember>): v104FormationMember => {
+export const generateV104FormationMember = (
+  overrides: Partial<v104FormationMember>,
+): v104FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -421,7 +423,9 @@ export const generateV104FormationMember = (overrides: Partial<v104FormationMemb
   };
 };
 
-export const generateV104Municipality = (overrides: Partial<v104Municipality>): v104Municipality => {
+export const generateV104Municipality = (
+  overrides: Partial<v104Municipality>,
+): v104Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -441,9 +445,11 @@ export const allFormationLegalTypes = [
 
 export const generateV104FormationFormData = (
   overrides: Partial<v104FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v104FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return {
     businessName: `some-business-name-${randomInt()}`,
@@ -469,7 +475,8 @@ export const generateV104FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV104FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generateV104FormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -493,7 +500,7 @@ export const generateV104FormationFormData = (
 };
 
 export const generateV104IndustrySpecificData = (
-  overrides: Partial<v104IndustrySpecificData>
+  overrides: Partial<v104IndustrySpecificData>,
 ): v104IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -553,7 +560,9 @@ export const generateV104ProfileData = (overrides: Partial<v104ProfileData>): v1
   };
 };
 
-export const generateV104TaxFilingData = (overrides: Partial<v104TaxFilingData>): v104TaxFilingData => {
+export const generateV104TaxFilingData = (
+  overrides: Partial<v104TaxFilingData>,
+): v104TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -567,7 +576,7 @@ export const generateV104TaxFilingData = (overrides: Partial<v104TaxFilingData>)
 
 export const generateV104FormationData = (
   overrides: Partial<v104FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v104FormationData => {
   return {
     formationFormData: generateV104FormationFormData({}, legalStructureId),

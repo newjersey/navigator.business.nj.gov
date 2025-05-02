@@ -4,7 +4,7 @@ export interface HousingPropertyInterestClient {
   getPropertyInterest: (
     accessToken: string,
     address: string,
-    municipalityId: string
+    municipalityId: string,
   ) => Promise<HousingPropertyInterestResponse>;
 }
 
@@ -23,7 +23,7 @@ export type HousingPropertyInterestResponse = HousingPropertyInterest | undefine
 
 export type HousingPropertyInterestInfo = (
   address: string,
-  municipalityId: string
+  municipalityId: string,
 ) => Promise<HousingPropertyInterestResponse>;
 
 export interface HousingRegistrationClient {
@@ -31,7 +31,7 @@ export interface HousingRegistrationClient {
     accessToken: string,
     propertyInterestId: string,
     buildingCount: number,
-    propertyInterestType: PropertyInterestType
+    propertyInterestType: PropertyInterestType,
   ) => Promise<HousingRegistrationRequestResponse>;
 }
 
@@ -58,7 +58,7 @@ export type HousingRegistrationLookupStatus =
 
 export type HousingRegistrationRequestResponseInfo = (
   address: string,
-  municipalityId: string
+  municipalityId: string,
 ) => Promise<HousingRegistrationRequestLookupResponse>;
 
 export type PropertyInterestTypes =

@@ -62,7 +62,8 @@ export const getErrorStateForFormationField = (inputParams: {
   foreignGoodStandingFile?: InputFile | undefined;
 }): FormationFieldErrorState => {
   const Config = getMergedConfig();
-  const { field, formationFormData, businessNameAvailability, foreignGoodStandingFile } = inputParams;
+  const { field, formationFormData, businessNameAvailability, foreignGoodStandingFile } =
+    inputParams;
 
   const errorState = {
     field: field,
@@ -78,7 +79,10 @@ export const getErrorStateForFormationField = (inputParams: {
     };
   }
 
-  const fieldWithMaxLength = (params: { required: boolean; maxLen: number }): FormationFieldErrorState => {
+  const fieldWithMaxLength = (params: {
+    required: boolean;
+    maxLen: number;
+  }): FormationFieldErrorState => {
     const exists = !!formationFormData[field];
     const isTooLong = (formationFormData[field] as string)?.length > params.maxLen;
     let label = errorState.label;
@@ -168,7 +172,10 @@ export const getErrorStateForFormationField = (inputParams: {
   if (field === "businessStartDate") {
     return {
       ...errorState,
-      hasError: !isBusinessStartDateValid(formationFormData.businessStartDate, formationFormData.legalType),
+      hasError: !isBusinessStartDateValid(
+        formationFormData.businessStartDate,
+        formationFormData.legalType,
+      ),
     };
   }
 
@@ -206,7 +213,11 @@ export const getErrorStateForFormationField = (inputParams: {
         label: Config.formation.fields.signers.errorBannerMinimum,
       };
     } else if (someSignersMissingName) {
-      return { ...errorState, hasError: true, label: Config.formation.fields.signers.errorBannerSignerName };
+      return {
+        ...errorState,
+        hasError: true,
+        label: Config.formation.fields.signers.errorBannerSignerName,
+      };
     } else if (someSignersMissingTitle) {
       return {
         ...errorState,
@@ -279,7 +290,11 @@ export const getErrorStateForFormationField = (inputParams: {
           break;
       }
       const isValid = exists && inRange;
-      return { ...errorState, hasError: !isValid, label: Config.formation.fields.addressZipCode.error };
+      return {
+        ...errorState,
+        hasError: !isValid,
+        label: Config.formation.fields.addressZipCode.error,
+      };
     }
 
     const partialAddressError = fieldWithAssociatedFields({
@@ -302,13 +317,19 @@ export const getErrorStateForFormationField = (inputParams: {
       return fieldWithMaxLength({ required: true, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
     }
 
-    const maxLengthError = fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
+    const maxLengthError = fieldWithMaxLength({
+      required: false,
+      maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+    });
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressZipCode", "addressLine2"],
       label: (Config.formation.fields as any)[field].error,
     });
 
-    return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
+    return combineErrorStates({
+      firstPriority: maxLengthError,
+      secondPriority: partialAddressError,
+    });
   }
 
   if (field === "addressMunicipality") {

@@ -34,7 +34,7 @@ export const migrate_v119_to_v120 = (v119Data: v119UserData): v120UserData => {
     businesses: Object.fromEntries(
       Object.values(v119Data.businesses)
         .map((business) => migrate_v119Business_to_v120Business(business))
-        .map((currBusiness) => [currBusiness.id, currBusiness])
+        .map((currBusiness) => [currBusiness.id, currBusiness]),
     ),
     version: 120,
   };
@@ -74,7 +74,8 @@ const migrate_v119Business_to_v120Business = (v119BusinessData: v119Business): v
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         willPracticeLaw: (v119BusinessData.formationData.formationFormData as any).willPracticeLaw,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        businessLocationType: (v119BusinessData.formationData.formationFormData as any).businessLocationType,
+        businessLocationType: (v119BusinessData.formationData.formationFormData as any)
+          .businessLocationType,
         members: v119BusinessData.formationData.formationFormData.members?.map((member) => ({
           ...member,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,7 +86,7 @@ const migrate_v119Business_to_v120Business = (v119BusinessData: v119Business): v
             ...incorporator,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             businessLocationType: (incorporator as any).businessLocationType,
-          })
+          }),
         ),
       },
     },

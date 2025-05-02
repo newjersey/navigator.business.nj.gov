@@ -13,8 +13,12 @@ interface Props {
 }
 
 export const AutosaveSpinner = (props: Props): ReactElement => {
-  const [savingSpinnerClock, setSavingSpinnerClock] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
-  const [savingSpinnerState, setSavingSpinnerState] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
+  const [savingSpinnerClock, setSavingSpinnerClock] = useState<"HIDDEN" | "SAVING" | "SAVED">(
+    "HIDDEN",
+  );
+  const [savingSpinnerState, setSavingSpinnerState] = useState<"HIDDEN" | "SAVING" | "SAVED">(
+    "HIDDEN",
+  );
   const [timestampOfLastSave, setTimestampOfLastSave] = useState<number>(0);
   const [timestampOfLastSpinAnimation, setTimestampOfLastSpinAnimation] = useState<number>(0);
   const { Config } = useConfig();
@@ -52,7 +56,8 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
       } else if (savingSpinnerClock === "SAVED") {
         const didSpinAnimationThisInterval =
           timestampOfLastSpinAnimation > 0 &&
-          dayjs().valueOf() - timestampOfLastSpinAnimation <= props.secondsBetweenSpinAnimations * 1000;
+          dayjs().valueOf() - timestampOfLastSpinAnimation <=
+            props.secondsBetweenSpinAnimations * 1000;
         setSavingSpinnerState(didSpinAnimationThisInterval ? "SAVED" : "HIDDEN");
       } else {
         setSavingSpinnerState("HIDDEN");

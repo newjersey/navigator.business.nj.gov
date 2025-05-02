@@ -15,7 +15,9 @@ const isThisYear = (dueDate: string): boolean => {
   return dayjs(dueDate).isSame(dayjs(), "year");
 };
 
-export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
+export const taxFilingsInterfaceFactory = (
+  apiTaxFilingClient: TaxFilingClient,
+): TaxFilingInterface => {
   const lookup = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
     const currentBusiness = getCurrentBusiness(request.userData);
     const { state, filings, taxCity, naicsCode } = await apiTaxFilingClient.lookup({
@@ -26,9 +28,10 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     const shouldSwitchToCalendarGridView = (): boolean => {
       const maxFilingsInCurrentYearListView = 5;
       const prevFilingsThisYear = currentBusiness.taxFilingData.filings.filter((it) =>
-        isThisYear(it.dueDate)
+        isThisYear(it.dueDate),
       );
-      const prevFilingsCountBelowMax = prevFilingsThisYear.length <= maxFilingsInCurrentYearListView;
+      const prevFilingsCountBelowMax =
+        prevFilingsThisYear.length <= maxFilingsInCurrentYearListView;
 
       const newFilingsThisYear = filings.filter((it) => isThisYear(it.dueDate));
       const newFilingsAboveMax = newFilingsThisYear.length > maxFilingsInCurrentYearListView;
@@ -65,13 +68,16 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       profileData: profileDataToReturn,
       preferences: {
         ...business.preferences,
-        isCalendarFullView: shouldSwitchToCalendarGridView() ? true : business.preferences.isCalendarFullView,
+        isCalendarFullView: shouldSwitchToCalendarGridView()
+          ? true
+          : business.preferences.isCalendarFullView,
       },
       taxFilingData: {
         ...business.taxFilingData,
         businessName: request.businessName,
         lastUpdatedISO: now,
-        registeredISO: state === "SUCCESS" ? business.taxFilingData.registeredISO ?? now : undefined,
+        registeredISO:
+          state === "SUCCESS" ? business.taxFilingData.registeredISO ?? now : undefined,
         errorField: state === "SUCCESS" ? undefined : business.taxFilingData.errorField,
         state: state,
         filings: state === "SUCCESS" ? filings : business.taxFilingData.filings,

@@ -32,7 +32,10 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
     <>
       <Heading level={2} styleVariant="h3" className="margin-bottom-05-override">
         {contentFromConfig.headerContextualInfo ? (
-          <ContextualInfoButton text={contentFromConfig.header} id={contentFromConfig.headerContextualInfo} />
+          <ContextualInfoButton
+            text={contentFromConfig.header}
+            id={contentFromConfig.headerContextualInfo}
+          />
         ) : (
           contentFromConfig.header
         )}

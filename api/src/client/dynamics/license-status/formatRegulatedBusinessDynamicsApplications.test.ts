@@ -6,7 +6,9 @@ describe("formatRegulatedBusinessDynamicsApplications", () => {
     const checklistResult1 = generateLicenseStatusChecklistResult({});
     const checklistResult2 = generateLicenseStatusChecklistResult({});
 
-    expect(formatRegulatedBusinessDynamicsApplications([checklistResult1, checklistResult2])).toEqual({
+    expect(
+      formatRegulatedBusinessDynamicsApplications([checklistResult1, checklistResult2]),
+    ).toEqual({
       [checklistResult1.professionNameAndLicenseType]: {
         licenseStatus: checklistResult1.licenseStatus,
         expirationDateISO: checklistResult1.expirationDateISO,
@@ -23,7 +25,9 @@ describe("formatRegulatedBusinessDynamicsApplications", () => {
   it("returns one license when duplicate checklist results are provided to the fn", () => {
     const checklistResult1 = generateLicenseStatusChecklistResult({});
 
-    expect(formatRegulatedBusinessDynamicsApplications([checklistResult1, checklistResult1])).toEqual({
+    expect(
+      formatRegulatedBusinessDynamicsApplications([checklistResult1, checklistResult1]),
+    ).toEqual({
       [checklistResult1.professionNameAndLicenseType]: {
         licenseStatus: checklistResult1.licenseStatus,
         expirationDateISO: checklistResult1.expirationDateISO,

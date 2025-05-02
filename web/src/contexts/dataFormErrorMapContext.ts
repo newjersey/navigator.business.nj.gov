@@ -27,10 +27,10 @@ const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof Busin
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
 const taxClearanceCertificateFields = Object.keys(
-  emptyTaxClearanceCertificateData
+  emptyTaxClearanceCertificateData,
 ) as (keyof TaxClearanceCertificateData)[];
 const emergencyTripPermitFields = Object.keys(
-  generateNewEmergencyTripPermitData()
+  generateNewEmergencyTripPermitData(),
 ) as (keyof EmergencyTripPermitApplicationInfo)[];
 
 const dataFormErrorMapFields: DataFormErrorMapFields[] = [
@@ -51,4 +51,7 @@ export const DataFormErrorMapContext = createFormContext<DataFormErrorMap>();
 export const createDataFormErrorMap = <FieldError>(): ReducedFieldStates<
   DataFormErrorMapFields,
   FieldError
-> => createReducedFieldStates<(typeof dataFormErrorMapFields)[number], FieldError>(dataFormErrorMapFields);
+> =>
+  createReducedFieldStates<(typeof dataFormErrorMapFields)[number], FieldError>(
+    dataFormErrorMapFields,
+  );

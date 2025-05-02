@@ -25,7 +25,7 @@ describe("Industry Tests", () => {
     const orderdIndustries = orderBy(
       industryJson.industries as Industry[],
       [isIndustryIdGeneric, "name"],
-      ["desc", "asc"]
+      ["desc", "asc"],
     ).filter((x: Industry) => {
       return x.isEnabled;
     });
@@ -55,7 +55,7 @@ describe("Industry Tests", () => {
       const filteredOrderdIndustries = orderBy(
         industryJson.industries as Industry[],
         [isIndustryIdGeneric, "name"],
-        ["desc", "asc"]
+        ["desc", "asc"],
       ).filter((x: Industry) => {
         return x.isEnabled;
       });
@@ -86,7 +86,7 @@ describe("Industry Tests", () => {
       const orderdIndustries = orderBy(
         industryJson.industries as Industry[],
         [isIndustryIdGeneric, "name"],
-        ["desc", "asc"]
+        ["desc", "asc"],
       );
 
       expect(getIndustries()).toEqual(orderdIndustries);
@@ -97,7 +97,7 @@ describe("Industry Tests", () => {
     const orderdIndustries = orderBy(
       industryJson.industries as Industry[],
       [isIndustryIdGeneric, "name"],
-      ["desc", "asc"]
+      ["desc", "asc"],
     );
 
     expect(getIndustries({ overrideShowDisabledIndustries: true })).toEqual(orderdIndustries);
@@ -131,7 +131,7 @@ describe("Industry Tests", () => {
     it("industry with the name 'Domestic Employer' should always have the id domestic-employer", () => {
       // Domestic Employer was created for a specific use case and has unique dashboard rendering logic dependent on the industry id
       const domesticEmployerIndustry = getIndustries().find(
-        (industry) => industry.name === "Domestic Employer"
+        (industry) => industry.name === "Domestic Employer",
       );
       expect(domesticEmployerIndustry?.id).toBe("domestic-employer");
     });

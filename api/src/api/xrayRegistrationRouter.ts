@@ -6,7 +6,7 @@ import { StatusCodes } from "http-status-codes";
 
 export const xrayRegistrationRouterFactory = (
   updateXrayRegistrationStatus: UpdateXrayRegistration,
-  databaseClient: DatabaseClient
+  databaseClient: DatabaseClient,
 ): Router => {
   const router = Router();
 

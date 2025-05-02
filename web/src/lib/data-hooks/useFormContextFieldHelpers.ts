@@ -7,7 +7,7 @@ const debug = false;
 export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   fieldName: keyof T,
   context?: Context<FormContextType<T, FieldError>>,
-  errorTypes?: FieldError[]
+  errorTypes?: FieldError[],
 ): {
   RegisterForOnSubmit: (isValidFunc: () => boolean, preventRefreshWhenUnmounted?: boolean) => void;
   setIsValid: (isValid: boolean) => void;
@@ -25,7 +25,10 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { runValidations, fieldStates, reducer } = useContext(context);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const RegisterForOnSubmit = (isValidFunc: () => boolean, preventRefreshWhenUnmounted?: boolean): void => {
+  const RegisterForOnSubmit = (
+    isValidFunc: () => boolean,
+    preventRefreshWhenUnmounted?: boolean,
+  ): void => {
     debug && console.log("register func");
     useMountEffect(() => {
       debug && console.log("mounted");
@@ -69,7 +72,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       return fieldStates[fieldName].invalid === true;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [fieldStates[fieldName].invalid]
+    [fieldStates[fieldName].invalid],
   );
 
   return {

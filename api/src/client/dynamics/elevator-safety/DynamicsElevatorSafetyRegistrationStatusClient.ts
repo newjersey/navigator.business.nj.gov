@@ -16,7 +16,7 @@ type Config = {
 
 export const DynamicsElevatorSafetyRegistrationStatusClient = (
   logWriter: LogWriterType,
-  config: Config
+  config: Config,
 ): ElevatorSafetyRegistrationStatus => {
   return async (address: string, municipalityId: string): Promise<ElevatorRegistrationSummary> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
@@ -25,7 +25,7 @@ export const DynamicsElevatorSafetyRegistrationStatusClient = (
     const propertyInterest = await config.housingPropertyInterestClient.getPropertyInterest(
       housingAccessToken,
       address,
-      municipalityId
+      municipalityId,
     );
 
     if (!propertyInterest?.id) {
@@ -35,10 +35,11 @@ export const DynamicsElevatorSafetyRegistrationStatusClient = (
       };
     }
 
-    const registrations = await config.elevatorRegistrationClient.getElevatorRegistrationsForBuilding(
-      accessToken,
-      propertyInterest?.id
-    );
+    const registrations =
+      await config.elevatorRegistrationClient.getElevatorRegistrationsForBuilding(
+        accessToken,
+        propertyInterest?.id,
+      );
 
     if (registrations.length === 0) {
       return {

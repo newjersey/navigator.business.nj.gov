@@ -62,7 +62,10 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
               {props.elevatorViolations && <ElevatorViolationsCard />}
 
               {renderDeferredHomeBasedQuestion && (
-                <DeferredHomeBasedQuestion business={business} onSave={deferredHomeBasedOnSaveButtonClick} />
+                <DeferredHomeBasedQuestion
+                  business={business}
+                  onSave={deferredHomeBasedOnSaveButtonClick}
+                />
               )}
 
               {operatingPhase.displayAnytimeActions && (
@@ -75,7 +78,9 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
               {operatingPhase.displayRoadmapTasks && (
                 <>
                   <hr className="margin-bottom-3" />
-                  <Heading level={2}>{getRoadmapHeadingText(business?.profileData.industryId)}</Heading>
+                  <Heading level={2}>
+                    {getRoadmapHeadingText(business?.profileData.industryId)}
+                  </Heading>
                   <Roadmap />
                 </>
               )}

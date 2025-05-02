@@ -10,7 +10,7 @@ export const Authorization = (): ReactElement => {
 
   const getFormattedBody = (): ReactElement => {
     const [beforeIndentation, after] = state.dbaContent.Authorize.contentMd.split(
-      "${beginIndentationSection}"
+      "${beginIndentationSection}",
     );
     const [indentedSection, afterIndentation] = after.split("${endIndentationSection}");
 
@@ -30,11 +30,16 @@ export const Authorization = (): ReactElement => {
   };
 
   return (
-    <div data-testid={"authorization-step"} className="flex flex-column space-between min-height-38rem">
+    <div
+      data-testid={"authorization-step"}
+      className="flex flex-column space-between min-height-38rem"
+    >
       <div>
         <>
           {getFormattedBody()}
-          {(state.dbaContent.Authorize.agencyId || state.dbaContent.Authorize.formName) && <HorizontalLine />}
+          {(state.dbaContent.Authorize.agencyId || state.dbaContent.Authorize.formName) && (
+            <HorizontalLine />
+          )}
           {state.dbaContent.Authorize.agencyId && (
             <div>
               <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>

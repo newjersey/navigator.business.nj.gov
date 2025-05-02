@@ -21,7 +21,7 @@ export const migrate_v101_to_v102 = (v101Data: v101UserData): v102UserData => {
       const newVal = val === "tax-registration-nudge" ? "registered-for-taxes-nudge" : val;
       return [...acc, newVal];
     },
-    []
+    [],
   );
 
   return {
@@ -402,7 +402,7 @@ export const generateV102User = (overrides: Partial<v102BusinessUser>): v102Busi
 };
 
 export const generateV102FormationAddress = (
-  overrides: Partial<v102FormationAddress>
+  overrides: Partial<v102FormationAddress>,
 ): v102FormationAddress => {
   return {
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -415,7 +415,9 @@ export const generateV102FormationAddress = (
   };
 };
 
-export const generateV102FormationMember = (overrides: Partial<v102FormationMember>): v102FormationMember => {
+export const generateV102FormationMember = (
+  overrides: Partial<v102FormationMember>,
+): v102FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -428,7 +430,9 @@ export const generateV102FormationMember = (overrides: Partial<v102FormationMemb
   };
 };
 
-export const generateV102Municipality = (overrides: Partial<v102Municipality>): v102Municipality => {
+export const generateV102Municipality = (
+  overrides: Partial<v102Municipality>,
+): v102Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -448,9 +452,11 @@ export const allFormationLegalTypes = [
 
 export const generateV102FormationFormData = (
   overrides: Partial<v102FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v102FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return {
     businessName: `some-business-name-${randomInt()}`,
@@ -476,7 +482,8 @@ export const generateV102FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV102FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generateV102FormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -500,7 +507,7 @@ export const generateV102FormationFormData = (
 };
 
 export const generateV102IndustrySpecificData = (
-  overrides: Partial<v102IndustrySpecificData>
+  overrides: Partial<v102IndustrySpecificData>,
 ): v102IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -559,7 +566,9 @@ export const generateV102ProfileData = (overrides: Partial<v102ProfileData>): v1
   };
 };
 
-export const generateV102TaxFilingData = (overrides: Partial<v102TaxFilingData>): v102TaxFilingData => {
+export const generateV102TaxFilingData = (
+  overrides: Partial<v102TaxFilingData>,
+): v102TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -573,7 +582,7 @@ export const generateV102TaxFilingData = (overrides: Partial<v102TaxFilingData>)
 
 export const generateV102FormationData = (
   overrides: Partial<v102FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v102FormationData => {
   return {
     formationFormData: generateV102FormationFormData({}, legalStructureId),

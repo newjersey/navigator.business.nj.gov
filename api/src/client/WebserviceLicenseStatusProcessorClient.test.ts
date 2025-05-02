@@ -38,7 +38,9 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
       name: "Crystal",
       zipCode: "12345",
     });
-    await expect(searchLicenseStatus(nameAndAddress)).rejects.toEqual(new Error(NO_ADDRESS_MATCH_ERROR));
+    await expect(searchLicenseStatus(nameAndAddress)).rejects.toEqual(
+      new Error(NO_ADDRESS_MATCH_ERROR),
+    );
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345");
   });
 
@@ -48,7 +50,9 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
       name: " Crystal, LLC   ",
       zipCode: "12345",
     });
-    await expect(searchLicenseStatus(nameAndAddress)).rejects.toEqual(new Error(NO_ADDRESS_MATCH_ERROR));
+    await expect(searchLicenseStatus(nameAndAddress)).rejects.toEqual(
+      new Error(NO_ADDRESS_MATCH_ERROR),
+    );
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345");
   });
 
@@ -90,7 +94,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
           title: "Item 2",
           status: "ACTIVE",
         },
-      ])
+      ]),
     );
   });
 
@@ -128,7 +132,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
           title: "Item 1",
           status: "ACTIVE",
         },
-      ])
+      ]),
     );
     expect(result["HVACR-HVACR CE Sponsor"]?.licenseStatus).toEqual("ACTIVE");
     expect(result["HVACR-HVACR CE Sponsor"]?.checklistItems).toEqual(
@@ -137,7 +141,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
           title: "Item 2",
           status: "ACTIVE",
         },
-      ])
+      ]),
     );
   });
 
@@ -194,7 +198,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
           title: "Item 2",
           status: "PENDING",
         },
-      ])
+      ]),
     );
   });
 
@@ -222,7 +226,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
           title: "Item 1",
           status: "PENDING",
         },
-      ])
+      ]),
     );
   });
 
@@ -250,7 +254,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
           title: "Item 1",
           status: "ACTIVE",
         },
-      ])
+      ]),
     );
   });
 
@@ -276,7 +280,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
 
     const result = await searchLicenseStatus(nameAndAddress);
     expect(result["Pharmacy-Pharmacy"]?.expirationDateISO).toEqual(
-      parseDateWithFormat("20210505", "YYYYMMDD").toISOString()
+      parseDateWithFormat("20210505", "YYYYMMDD").toISOString(),
     );
     expect(result["Pharmacy-Pharmacy"]?.licenseStatus).toEqual("ACTIVE");
   });
@@ -335,7 +339,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
     return await searchLicenseStatus(
       generateLicenseSearchNameAndAddress({
         addressLine1: address,
-      })
+      }),
     );
   };
 
@@ -397,7 +401,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
           title: "Item 2",
           status: "PENDING",
         },
-      ])
+      ]),
     );
   });
 
@@ -435,10 +439,15 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
   });
 
   it("rejects with NO_ADDRESS_MATCH_ERROR when no result matches the address", async () => {
-    stubLicenseStatusClient.search.mockResolvedValue([generateLicenseEntity({}), generateLicenseEntity({})]);
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({}),
+      generateLicenseEntity({}),
+    ]);
 
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    await expect(searchLicenseStatus(nameAndAddress)).rejects.toEqual(new Error(NO_ADDRESS_MATCH_ERROR));
+    await expect(searchLicenseStatus(nameAndAddress)).rejects.toEqual(
+      new Error(NO_ADDRESS_MATCH_ERROR),
+    );
   });
 
   it("rejects when search fails", async () => {
@@ -508,7 +517,9 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
     const result = await searchLicenseStatus(nameAndAddress);
 
     const unTypedResult = result as Record<string, unknown>;
-    expect(unTypedResult["Home Improvement Contractors-Home Improvement Contractor"]).toBeUndefined();
+    expect(
+      unTypedResult["Home Improvement Contractors-Home Improvement Contractor"],
+    ).toBeUndefined();
     expect(result["Home Improvement Contractors-Home Improvement Business Contr"]).toBeDefined();
   });
 });

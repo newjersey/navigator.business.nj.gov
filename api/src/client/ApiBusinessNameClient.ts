@@ -3,18 +3,23 @@ import { LogWriterType } from "@libs/logWriter";
 import { NameAvailabilityResponse, NameAvailabilityStatus } from "@shared/businessNameSearch";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType): BusinessNameClient => {
+export const ApiBusinessNameClient = (
+  baseUrl: string,
+  logWriter: LogWriterType,
+): BusinessNameClient => {
   const search = (name: string): Promise<NameAvailabilityResponse> => {
     const url = `${baseUrl}/Available?q=${encodeURIComponent(name)}`;
     const logId = logWriter.GetId();
-    logWriter.LogInfo(`Business Name Search - NICUSA - Id:${logId} - Request Sent to ${url}. Name: ${name}`);
+    logWriter.LogInfo(
+      `Business Name Search - NICUSA - Id:${logId} - Request Sent to ${url}. Name: ${name}`,
+    );
     return axios
       .get(url)
       .then((response: AxiosResponse<ApiNameAvailabilityResponse>) => {
         logWriter.LogInfo(
-          `Business Name Search - NICUSA - Id:${logId} -Response Received. Status: ${response.status} : ${
-            response.statusText
-          }. Data: ${JSON.stringify(response.data)}`
+          `Business Name Search - NICUSA - Id:${logId} -Response Received. Status: ${
+            response.status
+          } : ${response.statusText}. Data: ${JSON.stringify(response.data)}`,
         );
         let responseStatus: NameAvailabilityStatus;
         let invalidWord;
@@ -24,7 +29,10 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
           responseStatus = "DESIGNATOR_ERROR";
         } else if (response.data.Reason.indexOf("restricted word") > 0) {
           responseStatus = "RESTRICTED_ERROR";
-          invalidWord = (response.data.Reason.match(new RegExp(/'(.*?)'/g)) ?? [])[0]?.replaceAll("'", "");
+          invalidWord = (response.data.Reason.match(new RegExp(/'(.*?)'/g)) ?? [])[0]?.replaceAll(
+            "'",
+            "",
+          );
         } else if (response.data.Reason.indexOf("invalid special character") > 0) {
           {
             responseStatus = "SPECIAL_CHARACTER_ERROR";

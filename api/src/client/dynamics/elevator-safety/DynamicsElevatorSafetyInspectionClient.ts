@@ -1,14 +1,17 @@
-import { ElevatorInspection, ElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/types";
+import {
+  ElevatorInspection,
+  ElevatorSafetyInspectionClient,
+} from "@client/dynamics/elevator-safety/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
 
 export const DynamicsElevatorSafetyInspectionClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): ElevatorSafetyInspectionClient => {
   const getElevatorInspections = async (
     accessToken: string,
-    address: string
+    address: string,
   ): Promise<ElevatorInspection[]> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Elevator Inspection Client - Id:${logId}`);
@@ -20,16 +23,16 @@ export const DynamicsElevatorSafetyInspectionClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then((response) => {
         logWriter.LogInfo(
           `Dynamics Elevator Safety Inspection Client - Id:${logId} - Response: ${JSON.stringify(
-            response.data
-          )}`
+            response.data,
+          )}`,
         );
         return response.data.value.map((element: DynamicsElevatorSafetyInspectionResponse) =>
-          processDynamicsElevatorSafetyInspectionResponse(element)
+          processDynamicsElevatorSafetyInspectionResponse(element),
         );
       })
       .catch((error: AxiosError) => {
@@ -44,7 +47,7 @@ export const DynamicsElevatorSafetyInspectionClient = (
 };
 
 function processDynamicsElevatorSafetyInspectionResponse(
-  response: DynamicsElevatorSafetyInspectionResponse
+  response: DynamicsElevatorSafetyInspectionResponse,
 ): ElevatorInspection {
   return {
     deviceCount: response.ultra_devicecount,

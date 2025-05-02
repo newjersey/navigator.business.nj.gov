@@ -44,7 +44,12 @@ describe("DynamicsHousingPropertyInterestClient", () => {
 
     mockAxios.get.mockResolvedValue({ data: housingHousingRegistrationMockResponse });
     expect(
-      await client.getHousingRegistration(mockAccessToken, propertyInterestID, buildingCount, "hotelMotel")
+      await client.getHousingRegistration(
+        mockAccessToken,
+        propertyInterestID,
+        buildingCount,
+        "hotelMotel",
+      ),
     ).toEqual([
       {
         buildingCount: 4,
@@ -60,7 +65,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -83,8 +88,8 @@ describe("DynamicsHousingPropertyInterestClient", () => {
         mockAccessToken,
         propertyInterestID,
         buildingCount,
-        "multipleDwelling"
-      )
+        "multipleDwelling",
+      ),
     ).toEqual([
       {
         buildingCount: 4,
@@ -100,7 +105,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -111,7 +116,12 @@ describe("DynamicsHousingPropertyInterestClient", () => {
 
     mockAxios.get.mockResolvedValue({ data: housingHousingRegistrationMockResponse });
     expect(
-      await client.getHousingRegistration(mockAccessToken, propertyInterestID, buildingCount, "hotelMotel")
+      await client.getHousingRegistration(
+        mockAccessToken,
+        propertyInterestID,
+        buildingCount,
+        "hotelMotel",
+      ),
     ).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_bhiregistrationrequests?$select=ultra_bhiregistrationrequestid,ultra_requestdate,statuscode,ultra_propertyinteresttype&$filter=(_ultra_linktoexistingpropertyinterest_value eq '${propertyInterestID}' and (ultra_propertyinteresttype eq 240000001 or ultra_propertyinteresttype eq 240000016))`,
@@ -119,7 +129,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 });

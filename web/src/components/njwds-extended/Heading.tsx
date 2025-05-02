@@ -21,7 +21,7 @@ const variantClasses: HeadingStyles = {
 const determineClassNames = (
   level: HeadingLevel,
   styleVariant?: HeadingStyleVariant | undefined,
-  className?: string | undefined
+  className?: string | undefined,
 ): string => {
   const classStrings = [];
   let styleClass: string;

@@ -68,7 +68,7 @@ export const FormationDate = (props: Props): ReactElement => {
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state.formationFormData.legalType]
+    [state.formationFormData.legalType],
   );
 
   const handleChange = (value: string): void => {
@@ -107,7 +107,10 @@ export const FormationDate = (props: Props): ReactElement => {
             }
             value={
               state.formationFormData[props.fieldName]
-                ? parseDateWithFormat(state.formationFormData[props.fieldName] ?? "", defaultDateFormat)
+                ? parseDateWithFormat(
+                    state.formationFormData[props.fieldName] ?? "",
+                    defaultDateFormat,
+                  )
                 : null
             }
             inputFormat={dateFormat}
@@ -130,7 +133,8 @@ export const FormationDate = (props: Props): ReactElement => {
                       setFieldsInteracted([props.fieldName]);
                     }}
                     helperText={
-                      doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText
+                      doesFieldHaveError(props.fieldName) &&
+                      contentProps[props.fieldName].helperText
                     }
                     sx={{
                       svg: { fill: "#4b7600" },

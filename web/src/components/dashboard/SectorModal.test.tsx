@@ -21,7 +21,11 @@ describe("<SectorModal />", () => {
 
   const renderSectorModal = (onContinue?: jest.Mock): { page: PageHelpers } => {
     render(
-      <SectorModal open={true} handleClose={(): void => {}} onContinue={onContinue ?? ((): void => {})} />
+      <SectorModal
+        open={true}
+        handleClose={(): void => {}}
+        onContinue={onContinue ?? ((): void => {})}
+      />,
     );
     const page = createPageHelpers();
     return { page };
@@ -61,7 +65,7 @@ describe("<SectorModal />", () => {
     submitSectorModal();
     expect(onContinue).not.toHaveBeenCalled();
     expect(
-      screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+      screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
     ).toBeInTheDocument();
   });
 

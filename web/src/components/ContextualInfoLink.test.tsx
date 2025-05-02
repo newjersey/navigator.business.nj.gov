@@ -3,9 +3,12 @@ import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchCo
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({ fetchContextualInfo: jest.fn() }));
-const mockFetchContextualInfo = (FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>)
-  .fetchContextualInfo;
+jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({
+  fetchContextualInfo: jest.fn(),
+}));
+const mockFetchContextualInfo = (
+  FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>
+).fetchContextualInfo;
 
 describe("<ContextualInfoLink />", () => {
   beforeEach(() => {
@@ -29,8 +32,8 @@ describe("<ContextualInfoLink />", () => {
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
         { isVisible: false, header: "", markdown: "" },
-        setContent
-      )
+        setContent,
+      ),
     );
     fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() => {
@@ -53,8 +56,8 @@ describe("<ContextualInfoLink />", () => {
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
         { isVisible: false, header: "", markdown: "" },
-        setContent
-      )
+        setContent,
+      ),
     );
     fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() => {

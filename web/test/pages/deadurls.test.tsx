@@ -14,7 +14,7 @@ jest.mock("broken-link-checker", () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         link?: ((result: any) => void) | undefined;
         end?: (() => void) | undefined;
-      }
+      },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ): any {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -48,7 +48,7 @@ describe("DeadUrls page", () => {
           deadLink1: ["http://www.deadlink.com"],
         }}
         noAuth={true}
-      />
+      />,
     );
     expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
 
@@ -69,7 +69,7 @@ describe("DeadUrls page", () => {
           deadLink1: ["http://www.deadlink.com"],
         }}
         noAuth={true}
-      />
+      />,
     );
     expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
 

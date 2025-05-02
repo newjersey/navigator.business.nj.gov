@@ -98,7 +98,11 @@ const CMS = dynamic(
 
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
-      registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
+      registerPreview(
+        CMS,
+        "anytime-action-license-reinstatements",
+        AnytimeActionLicenseReinstatementPreview,
+      );
       registerPreview(CMS, "taxClearanceCertificate-step1", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-step2", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
@@ -138,7 +142,11 @@ const CMS = dynamic(
       ]);
 
       // ----- Formation -----
-      registerPreview(CMS, "business-formation-interim-success-page", FormationInterimSuccessPreview);
+      registerPreview(
+        CMS,
+        "business-formation-interim-success-page",
+        FormationInterimSuccessPreview,
+      );
       registerPreview(CMS, "business-formation-success-page", FormationSuccessPreview);
 
       // Naics Code
@@ -160,7 +168,7 @@ const CMS = dynamic(
       registerPreview(CMS, "calloutDefaults", CalloutPreview);
     });
   },
-  { ssr: false, loading: Loading }
+  { ssr: false, loading: Loading },
 );
 
 const registerAsTask = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
@@ -170,7 +178,10 @@ const registerAsTask = (CMS: typeof import("decap-cms-app"), names: string[]): v
   }
 };
 
-const registerAsCannabisLicensePreview = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
+const registerAsCannabisLicensePreview = (
+  CMS: typeof import("decap-cms-app"),
+  names: string[],
+): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
@@ -181,7 +192,7 @@ const registerPreview = (
   CMS: typeof import("decap-cms-app"),
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  preview: (props: any) => JSX.Element
+  preview: (props: any) => JSX.Element,
 ): void => {
   // @ts-expect-error: No type definition available
   CMS.registerPreviewTemplate(name, applyTheme(preview));
@@ -215,7 +226,7 @@ const Admin = (): ReactElement => {
     if (errorMessages.length > 0) {
       for (const element of errorMessages) {
         const getParent = (
-          element: Element | null | undefined
+          element: Element | null | undefined,
         ): { label: string | null | undefined; element: Element | null | undefined } => {
           const container = element?.parentElement?.closest(".css-1rsca1y-ControlContainer");
           return {
@@ -235,7 +246,7 @@ const Admin = (): ReactElement => {
           ${level2Parent.label ? `${level2Parent.label} > ` : ""}
            ${level1Parent.label ? `${level1Parent.label} > ` : ""}
             ${element.textContent}`,
-          "background: #111; color: tomato; font-size: 16px;"
+          "background: #111; color: tomato; font-size: 16px;",
         );
       }
     }

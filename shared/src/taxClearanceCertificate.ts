@@ -50,7 +50,7 @@ export type TaxClearanceCertificateData = {
 };
 
 export const LookupTaxClearanceCertificateAgenciesById = (
-  id: string | undefined
+  id: string | undefined,
 ): TaxClearanceCertificateAgency => {
   return (
     taxClearanceCertificateAgencies.find((x) => {

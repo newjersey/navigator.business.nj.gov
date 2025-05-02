@@ -15,7 +15,7 @@ export const BusinessStep = (): ReactElement => {
 
   const isForeign = useMemo(
     () => state.formationFormData.businessLocationType !== "NJ",
-    [state.formationFormData.businessLocationType]
+    [state.formationFormData.businessLocationType],
   );
 
   const isNonprofit = state.formationFormData.legalType === "nonprofit";

@@ -49,7 +49,7 @@ describe("<XrayRegistrationSummary />", () => {
         }}
         edit={() => {}}
         goToRegistrationTab={() => {}}
-      />
+      />,
     );
   };
 
@@ -78,8 +78,8 @@ describe("<XrayRegistrationSummary />", () => {
     const daysToExpiration = dayjs(fifteenDaysInTheFutureDate).diff(getCurrentDate(), "day");
     expect(
       screen.getByText(
-        `Expires in ${daysToExpiration} days (${dayjs(fifteenDaysInTheFutureDate).format("LL")})`
-      )
+        `Expires in ${daysToExpiration} days (${dayjs(fifteenDaysInTheFutureDate).format("LL")})`,
+      ),
     ).toBeInTheDocument();
   });
 
@@ -94,7 +94,7 @@ describe("<XrayRegistrationSummary />", () => {
     renderComponent("ACTIVE", futureDate);
     fireEvent.click(screen.getByText(Config.xrayRegistrationTask.accordionHeader));
     expect(
-      screen.getByText(`Serial Number: ${Config.xrayRegistrationTask.noInformationAvailable}`)
+      screen.getByText(`Serial Number: ${Config.xrayRegistrationTask.noInformationAvailable}`),
     ).toBeInTheDocument();
   });
 });

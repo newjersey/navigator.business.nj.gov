@@ -31,7 +31,7 @@ describe("Review step", () => {
           }}
         >
           <ReviewStep />
-        </EmergencyTripPermitContext.Provider>
+        </EmergencyTripPermitContext.Provider>,
       );
     };
 

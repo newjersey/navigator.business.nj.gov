@@ -68,7 +68,9 @@ export const generateV5User = (overrides: Partial<v5BusinessUser>): v5BusinessUs
   };
 };
 
-export const generateV5OnboardingData = (overrides: Partial<v5OnboardingData>): v5OnboardingData => {
+export const generateV5OnboardingData = (
+  overrides: Partial<v5OnboardingData>,
+): v5OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",

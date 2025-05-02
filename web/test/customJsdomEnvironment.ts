@@ -14,8 +14,8 @@ class CustomJSDOMEnvironment extends JSDOMEnvironment {
       const currentTestName = this.getVmContext()?.expect.getState().currentTestName;
       console.log(
         `Failed ${currentTestName}. Replicate Math.random() values by running with RANDOM_SEED=${testRandomSeeds.get(
-          currentTestName
-        )}`
+          currentTestName,
+        )}`,
       );
     }
   }

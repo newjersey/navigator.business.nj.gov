@@ -22,7 +22,7 @@ describe("<FieldEntryAlert/>", () => {
           variant: "error",
         }}
         fields={[{ name: "field-name", label: "Field Name" }]}
-      />
+      />,
     );
     expect(screen.getByText(alertMessage)).toBeInTheDocument();
   });
@@ -35,24 +35,27 @@ describe("<FieldEntryAlert/>", () => {
           variant: "error",
         }}
         fields={[]}
-      />
+      />,
     );
     expect(screen.queryByText(alertMessage)).not.toBeInTheDocument();
   });
 
-  it.each(AlertVariants)("sets Alert variant accordingly when provided variant is %s", (variant) => {
-    render(
-      <FieldEntryAlert
-        alertMessage={alertMessage}
-        alertProps={{
-          dataTestid: "field-entry-alert",
-          variant,
-        }}
-        fields={[{ name: "field-name", label: "Field Name" }]}
-      />
-    );
-    expect(screen.getByTestId("field-entry-alert")).toHaveClass(`usa-alert--${variant}`);
-  });
+  it.each(AlertVariants)(
+    "sets Alert variant accordingly when provided variant is %s",
+    (variant) => {
+      render(
+        <FieldEntryAlert
+          alertMessage={alertMessage}
+          alertProps={{
+            dataTestid: "field-entry-alert",
+            variant,
+          }}
+          fields={[{ name: "field-name", label: "Field Name" }]}
+        />,
+      );
+      expect(screen.getByTestId("field-entry-alert")).toHaveClass(`usa-alert--${variant}`);
+    },
+  );
 
   it("displays each provided field in alert body", () => {
     const fields = [
@@ -78,7 +81,7 @@ describe("<FieldEntryAlert/>", () => {
           variant: "info",
         }}
         fields={fields}
-      />
+      />,
     );
 
     for (const field of fields) {
@@ -97,7 +100,7 @@ describe("<FieldEntryAlert/>", () => {
           variant: "error",
         }}
         fields={[{ name: "field-name", label: "Field Name" }]}
-      />
+      />,
     );
 
     fireEvent.click(screen.getByText("Field Name"));

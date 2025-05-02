@@ -31,7 +31,9 @@ export const NavBarMobileHomeLogo = (props: Props): ReactElement => {
             <NavBarDashboardLink
               className={props.showSidebar ? "truncate-long-business-names_NavBarMobile" : ""}
               linkText={
-                props.showSidebar ? props.businessNavBarTitle : Config.navigationDefaults.navBarMyAccountText
+                props.showSidebar
+                  ? props.businessNavBarTitle
+                  : Config.navigationDefaults.navBarMyAccountText
               }
               previousBusinessId={props.previousBusinessId}
             />

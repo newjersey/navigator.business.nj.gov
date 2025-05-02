@@ -23,8 +23,18 @@ collections:
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", required: true, widget: "write-once-read-only-no-space" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
       - label: Agency
         name: agencyId
         widget: relation
@@ -118,7 +128,11 @@ collections:
                         fields:
                           - { label: "Label", name: "label", widget: "string" }
                           - { label: "Inline error - US", name: "errorUS", widget: "string" }
-                          - { label: "Inline error - International", name: "errorIntl", widget: "string" }
+                          - {
+                              label: "Inline error - International",
+                              name: "errorIntl",
+                              widget: "string",
+                            }
                   - label: Agent Name
                     name: agentName
                     collapsed: true
@@ -189,13 +203,21 @@ collections:
                       - { label: "Description", name: "description", widget: "markdown" }
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Alert - Name Available", name: "alertAvailable", widget: "text" }
-                      - { label: "Alert - Name Unavailable", name: "alertUnavailable", widget: "text" }
+                      - {
+                          label: "Alert - Name Unavailable",
+                          name: "alertUnavailable",
+                          widget: "text",
+                        }
                       - {
                           label: "Alert - Special Characters Error",
                           name: "alertSpecialCharacters",
                           widget: "text",
                         }
-                      - { label: "Alert - Designator Error", name: "alertDesignator", widget: "text" }
+                      - {
+                          label: "Alert - Designator Error",
+                          name: "alertDesignator",
+                          widget: "text",
+                        }
                       - {
                           label: "Alert - Restricted Word Error",
                           name: "alertRestrictedWord",
@@ -206,7 +228,11 @@ collections:
                           name: "errorInlineUnavailable",
                           widget: "string",
                         }
-                      - { label: "Inline error - empty", name: "errorInlineEmpty", widget: "string" }
+                      - {
+                          label: "Inline error - empty",
+                          name: "errorInlineEmpty",
+                          widget: "string",
+                        }
                       - {
                           label: "Inline error - needs to search",
                           name: "errorInlineNeedsToSearch",
@@ -449,7 +475,11 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
-                      - { label: "Label Secondary Text", name: "labelSecondaryText", widget: "string" }
+                      - {
+                          label: "Label Secondary Text",
+                          name: "labelSecondaryText",
+                          widget: "string",
+                        }
                       - { label: "Inline error", name: "error", widget: "string" }
                   - label: Corp Watch Notification
                     name: corpWatchNotification
@@ -469,7 +499,11 @@ collections:
                           name: "successSnackbarHeader",
                           widget: "string",
                         }
-                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - {
+                          label: "Success snackbar - body",
+                          name: "successSnackbarBody",
+                          widget: "string",
+                        }
                       - { label: "Error", name: "error", widget: "string" }
                       - { label: "Review Step header", name: "reviewStepHeader", widget: "string" }
                       - { label: "Modal title", name: "modalTitle", widget: "string" }
@@ -489,7 +523,11 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
-                      - { label: "Label Secondary Text", name: "labelSecondaryText", widget: "string" }
+                      - {
+                          label: "Label Secondary Text",
+                          name: "labelSecondaryText",
+                          widget: "string",
+                        }
                       - { label: "Inline error", name: "error", widget: "string" }
                   - label: Foreign state of formation
                     name: foreignStateOfFormation
@@ -506,9 +544,21 @@ collections:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Contextual Label", name: "contextualLabel", widget: "markdown" }
                       - { label: "Helper Text", name: "helperText", widget: "string" }
-                      - { label: "Error Message - File Size", name: "errorMessageFileSize", widget: "string" }
-                      - { label: "Error Message - File Type", name: "errorMessageFileType", widget: "string" }
-                      - { label: "Error Message - Required", name: "errorMessageRequired", widget: "string" }
+                      - {
+                          label: "Error Message - File Size",
+                          name: "errorMessageFileSize",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error Message - File Type",
+                          name: "errorMessageFileType",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error Message - Required",
+                          name: "errorMessageRequired",
+                          widget: "string",
+                        }
                   - label: Incorporators
                     name: incorporators
                     collapsed: true
@@ -521,7 +571,11 @@ collections:
                           name: "successSnackbarHeader",
                           widget: "string",
                         }
-                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - {
+                          label: "Success snackbar - body",
+                          name: "successSnackbarBody",
+                          widget: "string",
+                        }
                       - { label: "Modal title", name: "modalTitle", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
@@ -549,12 +603,20 @@ collections:
                           name: "successSnackbarHeader",
                           widget: "string",
                         }
-                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - {
+                          label: "Success snackbar - body",
+                          name: "successSnackbarBody",
+                          widget: "string",
+                        }
                       - { label: "Modal title", name: "modalTitle", widget: "string" }
                       - { label: "Modal save button", name: "modalSaveButton", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
-                      - { label: "Address checkbox label", name: "addressCheckboxText", widget: "string" }
+                      - {
+                          label: "Address checkbox label",
+                          name: "addressCheckboxText",
+                          widget: "string",
+                        }
                       - { label: "Expand text", name: "expandText", widget: "string" }
                   - label: Nonprofit Provisions - Board Members
                     name: hasNonprofitBoardMembers
@@ -639,7 +701,11 @@ collections:
                       - { label: "Credit Card label", name: "creditCardLabel", widget: "string" }
                       - { label: "Column - cost", name: "costColumnLabel", widget: "string" }
                       - { label: "Column - service", name: "serviceColumnLabel", widget: "string" }
-                      - { label: "Cost subtotal label", name: "costSubtotalLabel", widget: "string" }
+                      - {
+                          label: "Cost subtotal label",
+                          name: "costSubtotalLabel",
+                          widget: "string",
+                        }
                       - { label: "Cost total label", name: "costTotalLabel", widget: "string" }
                       - {
                           label: "Cost total payment disclaimer",
@@ -651,8 +717,16 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Credit card initial", name: "creditCardInitial", widget: "string" }
-                          - { label: "Credit card extra", name: "creditCardExtra", widget: "string" }
+                          - {
+                              label: "Credit card initial",
+                              name: "creditCardInitial",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Credit card extra",
+                              name: "creditCardExtra",
+                              widget: "string",
+                            }
                           - { label: "ACH", name: "ach", widget: "string" }
                   - label: Additional Provisions
                     name: additionalProvisions
@@ -663,7 +737,11 @@ collections:
                       - { label: "Secondary Label", name: "secondaryLabel", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
-                      - { label: "Add another button text", name: "addAnotherButtonText", widget: "string" }
+                      - {
+                          label: "Add another button text",
+                          name: "addAnotherButtonText",
+                          widget: "string",
+                        }
                   - label: Signers
                     name: signers
                     collapsed: true
@@ -685,7 +763,11 @@ collections:
                           name: "errorBannerSignerName",
                           widget: "string",
                         }
-                      - { label: "Error banner - checkbox", name: "errorBannerCheckbox", widget: "string" }
+                      - {
+                          label: "Error banner - checkbox",
+                          name: "errorBannerCheckbox",
+                          widget: "string",
+                        }
                       - {
                           label: "Error inline - first signer name",
                           name: "errorInlineSignerName",
@@ -717,9 +799,17 @@ collections:
                       - { label: "Sign delete label", name: "deleteLabel", widget: "string" }
                       - { label: "Sign edit label", name: "editLabel", widget: "string" }
                       - { label: "Table headers Name", name: "tableHeaderName", widget: "string" }
-                      - { label: "Table headers Address", name: "tableHeaderAddress", widget: "string" }
+                      - {
+                          label: "Table headers Address",
+                          name: "tableHeaderAddress",
+                          widget: "string",
+                        }
                       - { label: "Table headers Sign", name: "tableHeaderSign", widget: "string" }
-                      - { label: "Table headers Actions", name: "tableHeaderActions", widget: "string" }
+                      - {
+                          label: "Table headers Actions",
+                          name: "tableHeaderActions",
+                          widget: "string",
+                        }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
                       - { label: "Signature aid text", name: "aidText", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
@@ -749,7 +839,11 @@ collections:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Add Button Text", name: "addButtonText", widget: "string" }
                       - { label: "Error", name: "error", widget: "string" }
-                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - {
+                          label: "Success snackbar - body",
+                          name: "successSnackbarBody",
+                          widget: "string",
+                        }
                       - { label: "Modal Title", name: "modalTitle", widget: "string" }
                       - { label: "Subheader", name: "subheader", widget: "string" }
                       - { label: "Trustee Full Name", name: "trusteeFullName", widget: "string" }
@@ -843,7 +937,11 @@ collections:
                   - { label: "Description", name: "description", widget: "string" }
                   - { label: "Radio button - No", name: "radioNoText", widget: "string" }
                   - { label: "Radio button - Yes", name: "radioYesText", widget: "string" }
-                  - { label: "Review step - terms label", name: "reviewStepTermsLabel", widget: "string" }
+                  - {
+                      label: "Review step - terms label",
+                      name: "reviewStepTermsLabel",
+                      widget: "string",
+                    }
               - label: Registered Agent
                 name: registeredAgent
                 collapsed: true
@@ -892,28 +990,48 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: "Primary address section header", name: "addressHeader", widget: "string" }
+                  - {
+                      label: "Primary address section header",
+                      name: "addressHeader",
+                      widget: "string",
+                    }
                   - { label: "Add address button ", name: "addressAddButtonText", widget: "string" }
                   - {
                       label: "Name and Legal Structure section header",
                       name: "businessNameAndStructureHeader",
                       widget: "string",
                     }
-                  - { label: "Contact info section header", name: "contactInfoHeader", widget: "string" }
-                  - { label: "Notifications section header", name: "notificationsHeader", widget: "string" }
+                  - {
+                      label: "Contact info section header",
+                      name: "contactInfoHeader",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Notifications section header",
+                      name: "notificationsHeader",
+                      widget: "string",
+                    }
                   - {
                       label: "Notifications section description",
                       name: "notificationsDescription",
                       widget: "markdown",
                     }
                   - { label: "Services section header", name: "servicesHeader", widget: "string" }
-                  - { label: "Services section description", name: "servicesDescription", widget: "markdown" }
+                  - {
+                      label: "Services section description",
+                      name: "servicesDescription",
+                      widget: "markdown",
+                    }
                   - label: Review
                     name: review
                     collapsed: false
                     widget: object
                     fields:
-                      - { label: "Review step - signer/member label", name: "nameLabel", widget: "string" }
+                      - {
+                          label: "Review step - signer/member label",
+                          name: "nameLabel",
+                          widget: "string",
+                        }
                       - {
                           label: "Review step - billing contact header",
                           name: "billingContactHeader",
@@ -925,9 +1043,21 @@ collections:
                 widget: object
                 fields:
                   - { label: "Generic API error", name: "genericApiError", widget: "string" }
-                  - { label: "Error on individual step page", name: "errorOnStep", widget: "string" }
-                  - { label: "Error on review page", name: "incompleteStepsError", widget: "string" }
-                  - { label: "API error - resubmit text", name: "apiResubmitText", widget: "string" }
+                  - {
+                      label: "Error on individual step page",
+                      name: "errorOnStep",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Error on review page",
+                      name: "incompleteStepsError",
+                      widget: "string",
+                    }
+                  - {
+                      label: "API error - resubmit text",
+                      name: "apiResubmitText",
+                      widget: "string",
+                    }
               - label: Legal Structure
                 name: legalStructure
                 collapsed: true
@@ -977,7 +1107,11 @@ collections:
                       name: "warningModalContinueButton",
                       widget: "string",
                     }
-                  - { label: "Warning modal - header", name: "warningModalHeader", widget: "string" }
+                  - {
+                      label: "Warning modal - header",
+                      name: "warningModalHeader",
+                      widget: "string",
+                    }
                   - { label: "Warning modal - body", name: "warningModalBody", widget: "markdown" }
               - label: General
                 name: general
@@ -985,13 +1119,21 @@ collections:
                 widget: object
                 fields:
                   - { label: "Amendment Info Alert", name: "amendmentInfo", widget: "markdown" }
-                  - { label: "Not entered text - review page", name: "notEntered", widget: "string" }
+                  - {
+                      label: "Not entered text - review page",
+                      name: "notEntered",
+                      widget: "string",
+                    }
                   - {
                       label: "Nexus - initial next button text",
                       name: "initialNextNexusButtonText",
                       widget: "string",
                     }
-                  - { label: "Nexus - next button text", name: "initialNextButtonText", widget: "string" }
+                  - {
+                      label: "Nexus - next button text",
+                      name: "initialNextButtonText",
+                      widget: "string",
+                    }
                   - { label: "Cancel Button Text", name: "backButtonText", widget: "string" }
                   - { label: "Edit Button Text", name: "editButtonText", widget: "string" }
                   - { label: "Submit Button Text", name: "submitButtonText", widget: "string" }
@@ -1001,20 +1143,32 @@ collections:
                   - { label: "Characters label", name: "charactersLabel", widget: "string" }
                   - { label: "Payment disclaimer", name: "paymentDisclaimer", widget: "text" }
                   - { label: "Optional field label", name: "optionalLabel", widget: "string" }
-                  - { label: "Generic inline error text", name: "genericErrorText", widget: "string" }
-                  - { label: "Maximum length error text", name: "maximumLengthErrorText", widget: "string" }
+                  - {
+                      label: "Generic inline error text",
+                      name: "genericErrorText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Maximum length error text",
+                      name: "maximumLengthErrorText",
+                      widget: "string",
+                    }
                   - { label: "Read more button text", name: "viewMoreButtonText", widget: "string" }
                   - { label: "Read less button text", name: "viewLessButtonText", widget: "string" }
                   - { label: "Radio no text", name: "radioNoText", widget: "string" }
                   - { label: "Radio yes text", name: "radioYesText", widget: "string" }
                   - { label: "Remove Section Text", name: "removeSectionText", widget: "string" }
                   - {
-                      label: "Aria Context - Will Need to Provide Business date for checking formation task",
+                      label:
+                        "Aria Context - Will Need to Provide Business date for checking formation
+                        task",
                       name: "ariaContextWillNeedToProvideBusinessDate",
                       widget: "string",
                     }
                   - {
-                      label: "Aria Context - Will Need to lose calendar / certifications access but un-starting formation",
+                      label:
+                        "Aria Context - Will Need to lose calendar / certifications access but
+                        un-starting formation",
                       name: "ariaContextWillLooseCalendarAndCertificationAccess",
                       widget: "string",
                     }
@@ -1147,7 +1301,11 @@ collections:
               - { label: DBA Name Section Header, name: dbaNameHeader, widget: string }
               - { label: DBA Name Description, name: dbaNameDescription, widget: markdown }
               - { label: DBA Name Search Label, name: dbaNameSearchLabel, widget: string }
-              - { label: DBA Name Search Submit Button, name: dbaNameSearchSubmitButton, widget: string }
+              - {
+                  label: DBA Name Search Submit Button,
+                  name: dbaNameSearchSubmitButton,
+                  widget: string,
+                }
               - { label: Next Button Text, name: nexusNextButton, widget: string }
               - { label: DBA Available Text, name: dbaAvailableText, widget: markdown }
               - { label: DBA Unavailable Text, name: dbaUnavailableText, widget: markdown }
@@ -1170,5 +1328,13 @@ collections:
                 }
               - { label: CTA Modal Header, name: dbaCtaModalHeader, widget: string }
               - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
-              - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
-              - { label: CTA Modal Cancel Button, name: dbaCtaModalCancelButtonText, widget: string }
+              - {
+                  label: CTA Modal Continue Button,
+                  name: dbaCtaModalContinueButtonText,
+                  widget: string,
+                }
+              - {
+                  label: CTA Modal Cancel Button,
+                  name: dbaCtaModalCancelButtonText,
+                  widget: string,
+                }

@@ -6,13 +6,13 @@ import { ReasonPhrases } from "http-status-codes";
 
 export const WebserviceLicenseStatusClient = (
   baseUrl: string,
-  logWriter: LogWriterType
+  logWriter: LogWriterType,
 ): LicenseStatusClient => {
   const search = (name: string, zipCode: string): Promise<LicenseEntity[]> => {
     const url = `${baseUrl}/ws/simple/queryLicenseStatuses`;
     const logId = logWriter.GetId();
     logWriter.LogInfo(
-      `Webservice License Status Client - Request Sent.- Id: ${logId}  url: ${url}. Business Name: ${name}. ZipCode: ${zipCode}`
+      `Webservice License Status Client - Request Sent.- Id: ${logId}  url: ${url}. Business Name: ${name}. ZipCode: ${zipCode}`,
     );
     return axios
       .post(url, {
@@ -23,12 +23,15 @@ export const WebserviceLicenseStatusClient = (
         logWriter.LogInfo(
           `Webservice License Status Client - Response Received.- Id: ${logId}  Status: ${
             response.status
-          } StatusText: ${response.statusText}. Data: ${JSON.stringify(response.data)}`
+          } StatusText: ${response.statusText}. Data: ${JSON.stringify(response.data)}`,
         );
         return response.data || [];
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`Webservice License Status Client - Error. - Id:${logId} - Error:`, error);
+        logWriter.LogError(
+          `Webservice License Status Client - Error. - Id:${logId} - Error:`,
+          error,
+        );
         throw error.response?.status;
       });
   };
@@ -56,7 +59,7 @@ export const WebserviceLicenseStatusClient = (
         console.dir({ error });
         logWriter.LogError(
           `Webservice License Status Client - Heath Check Error. - Id:${logId} - Error:`,
-          error
+          error,
         );
         if (error.response) {
           return {

@@ -55,7 +55,7 @@ describe("<TaskProgressCheckbox />", () => {
             <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
           </WithStatefulUserData>
         </ThemeProvider>
-      </MunicipalitiesContext.Provider>
+      </MunicipalitiesContext.Provider>,
     );
   };
 
@@ -68,8 +68,8 @@ describe("<TaskProgressCheckbox />", () => {
           </WithStatefulUserData>
         </MunicipalitiesContext.Provider>,
         IsAuthenticated.FALSE,
-        { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal }
-      )
+        { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal },
+      ),
     );
   };
 
@@ -137,7 +137,9 @@ describe("<TaskProgressCheckbox />", () => {
 
       renderTaskCheckbox(taxTaskId, userData);
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-      expect(screen.getByText(Config.registeredForTaxesModal.areYouSureTaxBody)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.registeredForTaxesModal.areYouSureTaxBody),
+      ).toBeInTheDocument();
     });
 
     it("updates the task progress if the user continues in the warning modal", async () => {
@@ -181,7 +183,7 @@ describe("<TaskProgressCheckbox />", () => {
         formationTaskId,
         generateBusiness({
           taskProgress: { [formationTaskId]: "COMPLETED" },
-        })
+        }),
       );
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
 
@@ -197,7 +199,7 @@ describe("<TaskProgressCheckbox />", () => {
         formationTaskId,
         generateBusiness({
           taskProgress: { [formationTaskId]: "TO_DO" },
-        })
+        }),
       );
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
       await waitFor(() => {
@@ -210,7 +212,7 @@ describe("<TaskProgressCheckbox />", () => {
         formationTaskId,
         generateBusiness({
           taskProgress: { [formationTaskId]: "TO_DO" },
-        })
+        }),
       );
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
       fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
@@ -223,17 +225,24 @@ describe("<TaskProgressCheckbox />", () => {
       jest.useFakeTimers();
       const id = formationTaskId;
       const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
-      renderTaskCheckbox(formationTaskId, generateBusiness({ profileData: startingPersonaForRoadmapUrl }));
+      renderTaskCheckbox(
+        formationTaskId,
+        generateBusiness({ profileData: startingPersonaForRoadmapUrl }),
+      );
       await selectCompleted();
 
       const date = getCurrentDate().subtract(1, "month").date(1);
       selectDate(date);
       fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
       await waitFor(() => {
-        expect(screen.queryByText(getTaskStatusUpdatedMessage("COMPLETED"))).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(getTaskStatusUpdatedMessage("COMPLETED")),
+        ).not.toBeInTheDocument();
       });
       await waitFor(() => {
-        return expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+        return expect(currentBusiness().profileData.dateOfFormation).toEqual(
+          date.format(defaultDateFormat),
+        );
       });
       expect(currentBusiness().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith({
@@ -247,20 +256,24 @@ describe("<TaskProgressCheckbox />", () => {
         formationTaskId,
         generateBusiness({
           profileData: generateProfileData({ businessPersona: "STARTING" }),
-        })
+        }),
       );
       await selectCompleted();
       const date = getCurrentDate().subtract(1, "month").date(1);
       selectDate(date);
       fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
       await waitFor(() => {
-        return expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+        return expect(currentBusiness().profileData.dateOfFormation).toEqual(
+          date.format(defaultDateFormat),
+        );
       });
 
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
 
       expect(screen.getByText(Config.formationDateModal.areYouSureModalHeader)).toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.formationDateModal.areYouSureModalContinueButtonText));
+      fireEvent.click(
+        screen.getByText(Config.formationDateModal.areYouSureModalContinueButtonText),
+      );
       await waitFor(() => {
         return expect(currentBusiness().profileData.dateOfFormation).toBeUndefined();
       });
@@ -269,7 +282,9 @@ describe("<TaskProgressCheckbox />", () => {
     it("does not show warning modal if status is not already completed", async () => {
       renderTaskCheckbox(formationTaskId, generateBusiness({}));
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-      expect(screen.queryByText(Config.formationDateModal.areYouSureModalHeader)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formationDateModal.areYouSureModalHeader),
+      ).not.toBeInTheDocument();
     });
 
     it("does not update dateOfFormation or status if user changes their mind", async () => {
@@ -278,18 +293,22 @@ describe("<TaskProgressCheckbox />", () => {
         formationTaskId,
         generateBusiness({
           profileData: generateProfileData({ businessPersona: "STARTING" }),
-        })
+        }),
       );
       await selectCompleted();
       const date = getCurrentDate().subtract(1, "month").date(1);
       selectDate(date);
       fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
       await waitFor(() => {
-        return expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+        return expect(currentBusiness().profileData.dateOfFormation).toEqual(
+          date.format(defaultDateFormat),
+        );
       });
 
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-      fireEvent.click(screen.getAllByText(Config.formationDateModal.areYouSureModalCancelButtonText)[0]);
+      fireEvent.click(
+        screen.getAllByText(Config.formationDateModal.areYouSureModalCancelButtonText)[0],
+      );
       expect(currentBusiness().taskProgress[id]).toEqual("COMPLETED");
       expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
     });
@@ -324,7 +343,7 @@ describe("<TaskProgressCheckbox />", () => {
               success: true,
             }),
           }),
-        })
+        }),
       );
 
       expect(currentBusiness().taskProgress[id]).toEqual("COMPLETED");

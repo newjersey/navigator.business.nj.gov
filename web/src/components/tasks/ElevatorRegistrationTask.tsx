@@ -41,9 +41,9 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
   const [elevatorRegistrationSummary, setElevatorRegistrationSummary] = useState<
     ElevatorSafetyRegistrationSummary | undefined
   >(undefined);
-  const [elevatorSafetyAddress, setElevatorSafetyAddress] = useState<ElevatorSafetyAddress | undefined>(
-    undefined
-  );
+  const [elevatorSafetyAddress, setElevatorSafetyAddress] = useState<
+    ElevatorSafetyAddress | undefined
+  >(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
@@ -111,7 +111,12 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="Elevator Registration task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab
                   value="0"

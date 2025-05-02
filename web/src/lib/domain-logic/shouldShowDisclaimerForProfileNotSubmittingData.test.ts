@@ -13,8 +13,12 @@ const nonOwningPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
 describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   it("returns true if business is not defined", () => {
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(undefined, IsAuthenticated.TRUE)).toBe(true);
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(undefined, IsAuthenticated.FALSE)).toBe(true);
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(undefined, IsAuthenticated.TRUE)).toBe(
+      true,
+    );
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(undefined, IsAuthenticated.FALSE)).toBe(
+      true,
+    );
   });
 
   it("returns true if isAuthenticated is UNKNOWN", () => {
@@ -27,8 +31,12 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
         businessPersona: "STARTING",
       }),
     });
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.UNKNOWN)).toBe(true);
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.UNKNOWN)).toBe(true);
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.UNKNOWN)).toBe(
+      true,
+    );
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.UNKNOWN)).toBe(
+      true,
+    );
   });
 
   it("returns true if persona is OWNING and Authenticated", () => {
@@ -40,7 +48,9 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
         dateOfFormation: undefined,
       }),
     });
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(true);
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(
+      true,
+    );
   });
 
   it.each(nonOwningPersonas)(
@@ -55,8 +65,10 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
           businessPersona: persona as BusinessPersona,
         }),
       });
-      expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(true);
-    }
+      expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(
+        true,
+      );
+    },
   );
 
   it("returns true for REMOTE_WORKER", () => {
@@ -68,7 +80,9 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
       }),
     });
 
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(true);
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(
+      true,
+    );
   });
 
   it("returns true for REMOTE_SELLER", () => {
@@ -80,7 +94,9 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
       }),
     });
 
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(true);
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(
+      true,
+    );
   });
 
   it.each(nonOwningPersonas)(
@@ -96,34 +112,46 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
           operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),
       });
-      expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(false);
-    }
+      expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(
+        false,
+      );
+    },
   );
 
-  it.each(nonOwningPersonas)("returns false if dateOfFormation is undefined for %s persona", (persona) => {
-    const business = generateBusiness({
-      formationData: generateFormationData({
-        completedFilingPayment: false,
-      }),
-      profileData: generateProfileData({
-        dateOfFormation: undefined,
-        businessPersona: persona as BusinessPersona,
-        operatingPhase: OperatingPhaseId.FORMED,
-      }),
-    });
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(false);
-  });
+  it.each(nonOwningPersonas)(
+    "returns false if dateOfFormation is undefined for %s persona",
+    (persona) => {
+      const business = generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: undefined,
+          businessPersona: persona as BusinessPersona,
+          operatingPhase: OperatingPhaseId.FORMED,
+        }),
+      });
+      expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(
+        false,
+      );
+    },
+  );
 
-  it.each(businessPersonas)("returns true for a %s persona in who is not authenticated", (persona) => {
-    const business = generateBusiness({
-      formationData: generateFormationData({
-        completedFilingPayment: false,
-      }),
-      profileData: generateProfileData({
-        dateOfFormation: undefined,
-        businessPersona: persona as BusinessPersona,
-      }),
-    });
-    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.FALSE)).toBe(true);
-  });
+  it.each(businessPersonas)(
+    "returns true for a %s persona in who is not authenticated",
+    (persona) => {
+      const business = generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: undefined,
+          businessPersona: persona as BusinessPersona,
+        }),
+      });
+      expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.FALSE)).toBe(
+        true,
+      );
+    },
+  );
 });

@@ -21,7 +21,10 @@ describe("RegulatedBusinessDynamicsBusinessAddressClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = RegulatedBusinessDynamicsBusinessAddressesClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
+    client = RegulatedBusinessDynamicsBusinessAddressesClient(
+      DEBUG ? logger : DummyLogWriter,
+      ORG_URL,
+    );
   });
 
   const mockAccessToken = "access-granted";
@@ -69,7 +72,9 @@ describe("RegulatedBusinessDynamicsBusinessAddressClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: businessAddressMockResponse });
-    expect(await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)).toEqual([
+    expect(
+      await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds),
+    ).toEqual([
       {
         businessId: "id2",
         name: "Business 1",
@@ -110,7 +115,7 @@ describe("RegulatedBusinessDynamicsBusinessAddressClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
 
     expect(mockAxios.get).toHaveBeenNthCalledWith(
@@ -120,7 +125,7 @@ describe("RegulatedBusinessDynamicsBusinessAddressClient", () => {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
-      }
+      },
     );
   });
 
@@ -157,7 +162,9 @@ describe("RegulatedBusinessDynamicsBusinessAddressClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: businessAddressMockResponse });
-    expect(await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)).toEqual([
+    expect(
+      await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds),
+    ).toEqual([
       {
         businessId: "id2",
         name: "Business 1",
@@ -185,7 +192,9 @@ describe("RegulatedBusinessDynamicsBusinessAddressClient", () => {
 
   it("returns empty array if received data value is empty", async () => {
     mockAxios.get.mockResolvedValue({ data: { value: [] } });
-    expect(await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)).toEqual([
+    expect(
+      await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds),
+    ).toEqual([
       {
         businessId: "id2",
         addresses: [],
@@ -205,7 +214,7 @@ describe("RegulatedBusinessDynamicsBusinessAddressClient", () => {
     });
 
     await expect(
-      client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)
+      client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds),
     ).rejects.toEqual(500);
   });
 });

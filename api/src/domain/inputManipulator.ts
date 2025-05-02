@@ -18,7 +18,8 @@ export const inputManipulator = (initial: string): InputManipulator => {
       return this;
     },
     trimPunctuation: function (): InputManipulator {
-      const startsOrEndsWithPunctuation = /^[\s!"#$%()*+,.:;<=-_`{}~]+|[\s!"#$%()*+,.:;<=-_`{}~]+$/g;
+      const startsOrEndsWithPunctuation =
+        /^[\s!"#$%()*+,.:;<=-_`{}~]+|[\s!"#$%()*+,.:;<=-_`{}~]+$/g;
       this.value = this.value.replaceAll(startsOrEndsWithPunctuation, "");
       return this;
     },
@@ -58,5 +59,7 @@ export const inputManipulator = (initial: string): InputManipulator => {
 
 const removeWords = (value: string, words: string[]): string => {
   const regexString = words.join("|");
-  return value.replaceAll(new RegExp(`\\b(${regexString})\\b`, "gi"), " ").replaceAll(/\s{2,}/g, " ");
+  return value
+    .replaceAll(new RegExp(`\\b(${regexString})\\b`, "gi"), " ")
+    .replaceAll(/\s{2,}/g, " ");
 };

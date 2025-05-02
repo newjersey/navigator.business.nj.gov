@@ -20,7 +20,7 @@ export const useEmergencyTripPermitErrors = (): EmergencyTripPermitErrorsRespons
   const doesFieldHaveError = (field: EmergencyTripPermitUserEnteredFieldNames): boolean => {
     const emergencyTripPermitFieldErrorState = getErrorStateForEmergencyTripPermitField(
       field,
-      state.applicationInfo
+      state.applicationInfo,
     );
     return emergencyTripPermitFieldErrorState.hasError;
   };
@@ -28,10 +28,12 @@ export const useEmergencyTripPermitErrors = (): EmergencyTripPermitErrorsRespons
   const getFieldErrorLabel = (field: EmergencyTripPermitUserEnteredFieldNames): string => {
     const emergencyTripPermitFieldErrorState = getErrorStateForEmergencyTripPermitField(
       field,
-      state.applicationInfo
+      state.applicationInfo,
     );
     const fieldLabelNames = Config.abcEmergencyTripPermit.fields;
-    return templateEval(emergencyTripPermitFieldErrorState.label, { fieldName: fieldLabelNames[field] });
+    return templateEval(emergencyTripPermitFieldErrorState.label, {
+      fieldName: fieldLabelNames[field],
+    });
   };
 
   const doesStepHaveError = (stepName: EmergencyTripPermitStepNames): boolean => {

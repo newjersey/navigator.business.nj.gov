@@ -46,7 +46,7 @@ describe("<ProfileAddress  />", () => {
         >
           <ProfileAddress />
         </WithStatefulAddressData>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -61,7 +61,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
           }),
-        })
+        }),
       );
       renderComponent({});
       expect(screen.getByLabelText("Address line1")).toHaveValue("1111 Home Alone");
@@ -77,7 +77,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
           }),
-        })
+        }),
       );
       renderComponent({});
 
@@ -96,7 +96,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
           }),
-        })
+        }),
       );
       renderComponent({});
 
@@ -114,7 +114,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
           }),
-        })
+        }),
       );
       renderComponent({});
 
@@ -131,7 +131,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
           }),
-        })
+        }),
       );
       renderComponent({});
 
@@ -152,14 +152,19 @@ describe("<ProfileAddress  />", () => {
           }),
           formationData: generateFormationData({
             completedFilingPayment: false,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: "NJ",
+            }),
           }),
-        })
+        }),
       );
       renderComponent({});
       blurInput("Address line2");
       expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
-      expect(screen.getByText(Config.formation.fields.addressMunicipality.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.addressMunicipality.error),
+      ).toBeInTheDocument();
       expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
     });
 
@@ -173,7 +178,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
           }),
-        })
+        }),
       );
       renderComponent({});
       expect(screen.getByLabelText("Address zip code")).toHaveValue("08437");
@@ -189,7 +194,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
           }),
-        })
+        }),
       );
       renderComponent({});
 
@@ -215,7 +220,7 @@ describe("<ProfileAddress  />", () => {
               businessLocationType: "NJ",
             }),
           }),
-        })
+        }),
       );
       renderComponent({});
 
@@ -234,9 +239,12 @@ describe("<ProfileAddress  />", () => {
           }),
           formationData: generateFormationData({
             completedFilingPayment: false,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: "NJ",
+            }),
           }),
-        })
+        }),
       );
       renderComponent({});
       blurInput("Address zip code");
@@ -251,16 +259,22 @@ describe("<ProfileAddress  />", () => {
         generateBusiness({
           formationData: generateFormationData({
             completedFilingPayment: false,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: "NJ",
+            }),
           }),
-        })
+        }),
       );
       renderComponent({});
       expect(screen.getByLabelText("Address state")).toBeDisabled();
     });
 
     it("renders profile address municipality field with input value", async () => {
-      const municipality = generateMunicipality({ displayName: "Newark Display Name", name: "Newark" });
+      const municipality = generateMunicipality({
+        displayName: "Newark Display Name",
+        name: "Newark",
+      });
       const address = generateAddress({
         addressMunicipality: municipality,
       });
@@ -268,9 +282,12 @@ describe("<ProfileAddress  />", () => {
         generateBusiness({
           formationData: generateFormationData({
             completedFilingPayment: false,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: "NJ",
+            }),
           }),
-        })
+        }),
       );
       renderComponent({
         municipalities: [municipality],
@@ -279,7 +296,10 @@ describe("<ProfileAddress  />", () => {
     });
 
     it("renders profile address municipality field reflects changed value", async () => {
-      const municipality = generateMunicipality({ displayName: "Newark Display Name", name: "Newark" });
+      const municipality = generateMunicipality({
+        displayName: "Newark Display Name",
+        name: "Newark",
+      });
       const address = generateAddress({
         addressMunicipality: undefined,
       });
@@ -287,9 +307,12 @@ describe("<ProfileAddress  />", () => {
         generateBusiness({
           formationData: generateFormationData({
             completedFilingPayment: false,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: "NJ",
+            }),
           }),
-        })
+        }),
       );
       renderComponent({
         municipalities: [municipality],
@@ -299,7 +322,10 @@ describe("<ProfileAddress  />", () => {
     });
 
     it("renders profile address municipality error", async () => {
-      const municipality = generateMunicipality({ displayName: "Newark Display Name", name: "Newark" });
+      const municipality = generateMunicipality({
+        displayName: "Newark Display Name",
+        name: "Newark",
+      });
       const address = generateAddress({
         addressMunicipality: undefined,
       });
@@ -307,15 +333,20 @@ describe("<ProfileAddress  />", () => {
         generateBusiness({
           formationData: generateFormationData({
             completedFilingPayment: false,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: "NJ",
+            }),
           }),
-        })
+        }),
       );
       renderComponent({
         municipalities: [municipality],
       });
       blurInput("Address municipality");
-      expect(screen.getByText(Config.formation.fields.addressMunicipality.error)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.addressMunicipality.error),
+      ).toBeInTheDocument();
     });
 
     it("renders profile locked fields when completed filing payment is true", async () => {
@@ -332,9 +363,12 @@ describe("<ProfileAddress  />", () => {
           profileData: generateProfileData({ businessPersona: "STARTING" }),
           formationData: generateFormationData({
             completedFilingPayment: true,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: "NJ",
+            }),
           }),
-        })
+        }),
       );
       renderComponent({
         municipalities: [municipality],
@@ -360,9 +394,12 @@ describe("<ProfileAddress  />", () => {
           profileData: generateProfileData({ businessPersona: "STARTING" }),
           formationData: generateFormationData({
             completedFilingPayment: true,
-            formationFormData: generateFormationFormData({ ...address, businessLocationType: undefined }),
+            formationFormData: generateFormationFormData({
+              ...address,
+              businessLocationType: undefined,
+            }),
           }),
-        })
+        }),
       );
       renderComponent({
         municipalities: [municipality],
@@ -384,7 +421,7 @@ describe("<ProfileAddress  />", () => {
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ businessLocationType: "US" }),
           }),
-        })
+        }),
       );
       renderComponent({});
       expect(screen.getByLabelText("U.S. address")).toBeInTheDocument();
@@ -402,7 +439,7 @@ describe("<ProfileAddress  />", () => {
               completedFilingPayment: false,
               formationFormData: generateFormationFormData({ businessLocationType: "US" }),
             }),
-          })
+          }),
         );
         renderComponent({});
         expect(screen.getByLabelText("Address line1")).toBeInTheDocument();
@@ -426,9 +463,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
         expect(screen.getByLabelText("Address line1")).toHaveValue("1111 Home Alone");
@@ -446,9 +486,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -468,9 +511,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -489,9 +535,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -509,9 +558,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -532,15 +584,20 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
         blurInput("Address line2");
         expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
-        expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS),
+        ).toBeInTheDocument();
       });
 
       it("renders profile address zip code field with input value", () => {
@@ -554,9 +611,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -574,9 +634,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -597,9 +660,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -617,14 +683,19 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "US" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "US",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
         blurInput("Address zip code");
-        expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS),
+        ).toBeInTheDocument();
       });
     });
 
@@ -641,7 +712,7 @@ describe("<ProfileAddress  />", () => {
                 businessLocationType: "INTL",
               }),
             }),
-          })
+          }),
         );
 
         renderComponent({});
@@ -665,9 +736,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
         expect(screen.getByLabelText("Address line1")).toHaveValue("1111 Home Alone");
@@ -684,9 +758,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -706,9 +783,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -727,9 +807,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -747,9 +830,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -772,16 +858,19 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({ ...address, municipalities: undefined });
         blurInput("Address line2");
         expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
         expect(screen.getByText(Config.formation.fields.addressCity.error)).toBeInTheDocument();
         expect(
-          screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl)
+          screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl),
         ).toBeInTheDocument();
       });
 
@@ -796,9 +885,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -816,9 +908,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
@@ -838,9 +933,12 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
         expect(screen.getByLabelText("Address province")).toHaveValue("some-Province");
@@ -857,15 +955,18 @@ describe("<ProfileAddress  />", () => {
             }),
             formationData: generateFormationData({
               completedFilingPayment: false,
-              formationFormData: generateFormationFormData({ ...address, businessLocationType: "INTL" }),
+              formationFormData: generateFormationFormData({
+                ...address,
+                businessLocationType: "INTL",
+              }),
             }),
-          })
+          }),
         );
         renderComponent({});
 
         blurInput("Address zip code");
         expect(
-          screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl)
+          screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl),
         ).toBeInTheDocument();
       });
     });

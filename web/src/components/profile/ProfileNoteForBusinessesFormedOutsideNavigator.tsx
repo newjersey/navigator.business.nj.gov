@@ -18,6 +18,8 @@ export const ProfileNoteDisclaimerForSubmittingData = (props: Props): ReactEleme
   }
 
   return (
-    <Alert variant="warning">{Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}</Alert>
+    <Alert variant="warning">
+      {Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}
+    </Alert>
   );
 };

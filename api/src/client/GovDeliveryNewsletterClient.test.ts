@@ -1,4 +1,7 @@
-import { GovDeliveryNewsletterClient, GovDeliveryResponse } from "@client/GovDeliveryNewsletterClient";
+import {
+  GovDeliveryNewsletterClient,
+  GovDeliveryResponse,
+} from "@client/GovDeliveryNewsletterClient";
 import { NewsletterClient } from "@domain/types";
 import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
@@ -8,7 +11,7 @@ const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 const generateGovDeliveryResponse = (
   overrides: Partial<GovDeliveryResponse>,
-  failed = !!(randomInt() % 2)
+  failed = !!(randomInt() % 2),
 ): GovDeliveryResponse => {
   return {
     citizen_id: failed ? undefined : randomInt(),
@@ -60,7 +63,10 @@ describe("GovDeliveryNewsletterClient", () => {
 
   it("returns CONNECTION_ERROR if an error is thrown by axios", async () => {
     mockAxios.get.mockRejectedValueOnce({ message: "something random" });
-    expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "CONNECTION_ERROR" });
+    expect(await client.add("testuser@xyz.com")).toEqual({
+      success: false,
+      status: "CONNECTION_ERROR",
+    });
   });
 
   it("returns EMAIL_ERROR if there is an invalid email", async () => {
@@ -76,7 +82,10 @@ describe("GovDeliveryNewsletterClient", () => {
   it("returns RESPONSE_ERROR if the request fails gracefully upon malformed response", async () => {
     const response = { message: "Whatever." };
     mockAxios.get.mockResolvedValue({ data: response });
-    expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "RESPONSE_ERROR" });
+    expect(await client.add("testuser@xyz.com")).toEqual({
+      success: false,
+      status: "RESPONSE_ERROR",
+    });
   });
 
   it("returns TOPIC_ERROR if the user was created but the request was unsuccessful as they were not able to be added to the topic", async () => {
@@ -98,7 +107,10 @@ describe("GovDeliveryNewsletterClient", () => {
       citizen_id: 19227,
     };
     mockAxios.get.mockResolvedValue({ data: response });
-    expect(await client.add("testuser@xyz.com")).toEqual({ success: true, status: "QUESTION_WARNING" });
+    expect(await client.add("testuser@xyz.com")).toEqual({
+      success: true,
+      status: "QUESTION_WARNING",
+    });
   });
 
   it("returns RESPONSE_WARNING if the user request is successful, they were created, and added to a topic, but there is an unknown warning", async () => {
@@ -109,6 +121,9 @@ describe("GovDeliveryNewsletterClient", () => {
       citizen_id: 19227,
     };
     mockAxios.get.mockResolvedValue({ data: response });
-    expect(await client.add("testuser@xyz.com")).toEqual({ success: true, status: "RESPONSE_WARNING" });
+    expect(await client.add("testuser@xyz.com")).toEqual({
+      success: true,
+      status: "RESPONSE_WARNING",
+    });
   });
 });

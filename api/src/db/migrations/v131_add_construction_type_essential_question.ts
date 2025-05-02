@@ -1,4 +1,7 @@
-import { v130Business, v130UserData } from "@db/migrations/v130_remove_nexus_location_in_new_jersey";
+import {
+  v130Business,
+  v130UserData,
+} from "@db/migrations/v130_remove_nexus_location_in_new_jersey";
 
 export interface v131IndustrySpecificData {
   liquorLicense: boolean;
@@ -27,7 +30,7 @@ export const migrate_v130_to_v131 = (v130Data: v130UserData): v131UserData => {
     businesses: Object.fromEntries(
       Object.values(v130Data.businesses)
         .map((business: v130Business) => migrate_v130Business_to_v131Business(business))
-        .map((currBusiness: v131Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v131Business) => [currBusiness.id, currBusiness]),
     ),
     version: 131,
   } as v131UserData;

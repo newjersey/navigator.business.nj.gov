@@ -13,7 +13,7 @@ beforeEach(function () {
     throw new Error(
       `Unexpected duplicate test name "${currentTestName}" at ${
         expect.getState().testPath
-      }. Please make test names unique.`
+      }. Please make test names unique.`,
     );
   }
   const randomSeed = process.env.RANDOM_SEED || Math.random().toString(36).slice(2);

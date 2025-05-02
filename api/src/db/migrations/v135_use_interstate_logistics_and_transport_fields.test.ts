@@ -24,7 +24,9 @@ describe("v135_use_interstate_logistics_and_transport_fields", () => {
     const v135User = migrate_v134_to_v135(v134User);
 
     expect(v135User.businesses[id].profileData).toHaveProperty("interstateLogistics");
-    expect(v135User.businesses[id].profileData).not.toHaveProperty("isInterstateLogisticsApplicable");
+    expect(v135User.businesses[id].profileData).not.toHaveProperty(
+      "isInterstateLogisticsApplicable",
+    );
     expect(v135User.businesses[id].profileData).not.toHaveProperty("isInterstateMovingApplicable");
     expect(v135User.businesses[id].profileData.interstateLogistics).toEqual(true);
     expect(v135User.businesses[id].profileData.interstateMoving).toEqual(false);
@@ -49,7 +51,9 @@ describe("v135_use_interstate_logistics_and_transport_fields", () => {
 
     expect(v135User.businesses[id].profileData).toHaveProperty("interstateMoving");
     expect(v135User.businesses[id].profileData).not.toHaveProperty("isInterstateMovingApplicable");
-    expect(v135User.businesses[id].profileData).not.toHaveProperty("isInterstateLogisticsApplicable");
+    expect(v135User.businesses[id].profileData).not.toHaveProperty(
+      "isInterstateLogisticsApplicable",
+    );
     expect(v135User.businesses[id].profileData.interstateMoving).toEqual(true);
     expect(v135User.businesses[id].profileData.interstateLogistics).toEqual(false);
   });
@@ -72,7 +76,9 @@ describe("v135_use_interstate_logistics_and_transport_fields", () => {
     const v135User = migrate_v134_to_v135(v134User);
 
     expect(v135User.businesses[id].profileData).not.toHaveProperty("isInterstateMovingApplicable");
-    expect(v135User.businesses[id].profileData).not.toHaveProperty("isInterstateLogisticsApplicable");
+    expect(v135User.businesses[id].profileData).not.toHaveProperty(
+      "isInterstateLogisticsApplicable",
+    );
     expect(v135User.businesses[id].profileData.interstateLogistics).toEqual(false);
     expect(v135User.businesses[id].profileData.interstateMoving).toEqual(false);
   });

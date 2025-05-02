@@ -13,22 +13,22 @@ type Config = {
 };
 
 export const DynamicsHousingRegistrationStatusClient = (
-  config: Config
+  config: Config,
 ): ((
   address: string,
   municipalityId: string,
-  propertyInterestType: PropertyInterestType
+  propertyInterestType: PropertyInterestType,
 ) => Promise<HousingRegistrationRequestLookupResponse>) => {
   return async (
     address: string,
     municipalityId: string,
-    propertyInterestType: PropertyInterestType
+    propertyInterestType: PropertyInterestType,
   ): Promise<HousingRegistrationRequestLookupResponse> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
     const propertyInterest = await config.housingPropertyInterestClient.getPropertyInterest(
       accessToken,
       address,
-      municipalityId
+      municipalityId,
     );
 
     if (!propertyInterest) {
@@ -42,7 +42,7 @@ export const DynamicsHousingRegistrationStatusClient = (
       accessToken,
       propertyInterest.id,
       propertyInterest.buildingCount,
-      propertyInterestType
+      propertyInterestType,
     );
 
     if (!registrations || registrations.length === 0) {

@@ -31,7 +31,7 @@ export type ElevatorSafetyAddress = {
 };
 
 export function generateElevatorSafetyRegistrationSummary(
-  overrides?: Partial<ElevatorSafetyRegistrationSummary>
+  overrides?: Partial<ElevatorSafetyRegistrationSummary>,
 ): ElevatorSafetyRegistrationSummary {
   return {
     lookupStatus: "SUCCESSFUL",
@@ -41,7 +41,7 @@ export function generateElevatorSafetyRegistrationSummary(
 }
 
 export function generateElevatorSafetyRegistration(
-  overrides?: Partial<ElevatorSafetyRegistration>
+  overrides?: Partial<ElevatorSafetyRegistration>,
 ): ElevatorSafetyRegistration {
   return {
     dateStarted: dayjs().toString(),

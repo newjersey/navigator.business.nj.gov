@@ -4,7 +4,10 @@ import {
   generatev152LandQuestionnaireData,
   generatev152UserData,
 } from "@db/migrations/v152_add_land_to_environment_data";
-import { migrate_v152_to_v153, v153EnvironmentData } from "@db/migrations/v153_add_air_to_environment_data";
+import {
+  migrate_v152_to_v153,
+  v153EnvironmentData,
+} from "@db/migrations/v153_add_air_to_environment_data";
 
 describe("v153_add_air_to_environment_data", () => {
   it("migrates environment data when land task is COMPLETED", () => {

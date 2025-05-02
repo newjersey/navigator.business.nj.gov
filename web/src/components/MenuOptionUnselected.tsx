@@ -13,7 +13,9 @@ export const MenuOptionUnselected = (props: Props): ReactElement => {
       </div>
 
       {props.secondaryText && (
-        <div className="font-body-3xs text-base-dark padding-left-205 text-wrap">{props.secondaryText}</div>
+        <div className="font-body-3xs text-base-dark padding-left-205 text-wrap">
+          {props.secondaryText}
+        </div>
       )}
     </>
   );

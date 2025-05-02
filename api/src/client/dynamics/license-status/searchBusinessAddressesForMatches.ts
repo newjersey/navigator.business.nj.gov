@@ -7,13 +7,13 @@ import { LicenseSearchAddress } from "@shared/license";
 
 export const searchBusinessAddressesForMatches = (
   businessIdsAndLicenseAddresses: BusinessIdAndLicenseSearchNameAndAddresses[],
-  nameAndAddress: LicenseSearchAddress
+  nameAndAddress: LicenseSearchAddress,
 ): BusinessIdAndName[] => {
   const result: BusinessIdAndName[] = [];
 
   const isAddressMatch = (
     address: LicenseSearchAddress,
-    userInputtedAddress: LicenseSearchAddress
+    userInputtedAddress: LicenseSearchAddress,
   ): boolean => {
     return (
       userInputtedAddress.addressLine1 === address.addressLine1 &&

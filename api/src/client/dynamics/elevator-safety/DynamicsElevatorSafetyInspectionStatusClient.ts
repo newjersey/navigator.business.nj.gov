@@ -13,7 +13,7 @@ type Config = {
 
 export const DynamicsElevatorSafetyInspectionStatusClient = (
   logWriter: LogWriterType,
-  config: Config
+  config: Config,
 ): ElevatorSafetyInspectionInfo => {
   return async (address: string): Promise<ElevatorInspection[]> => {
     const accessToken = await config.accessTokenClient.getAccessToken();

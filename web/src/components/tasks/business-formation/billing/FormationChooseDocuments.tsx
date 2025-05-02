@@ -11,9 +11,18 @@ export const FormationChooseDocuments = (): ReactElement => {
 
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
 
-  const officialFormationCost = getCost("officialFormationDocument", state.formationFormData.legalType);
-  const certifiedCopyCost = getCost("certifiedCopyOfFormationDocument", state.formationFormData.legalType);
-  const certificateStandingCost = getCost("certificateOfStanding", state.formationFormData.legalType);
+  const officialFormationCost = getCost(
+    "officialFormationDocument",
+    state.formationFormData.legalType,
+  );
+  const certifiedCopyCost = getCost(
+    "certifiedCopyOfFormationDocument",
+    state.formationFormData.legalType,
+  );
+  const certificateStandingCost = getCost(
+    "certificateOfStanding",
+    state.formationFormData.legalType,
+  );
 
   const [totalCost, setTotalCost] = useState<number>(officialFormationCost);
 
@@ -81,7 +90,9 @@ export const FormationChooseDocuments = (): ReactElement => {
                 />
               </label>
             </td>
-            <td className={"text-primary-dark text-bold"}>{getDollarValue(officialFormationCost)}</td>
+            <td className={"text-primary-dark text-bold"}>
+              {getDollarValue(officialFormationCost)}
+            </td>
           </tr>
           <tr>
             <td className={"padding-1"}>
@@ -101,7 +112,9 @@ export const FormationChooseDocuments = (): ReactElement => {
               >
                 <div
                   className={
-                    state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""
+                    state.formationFormData.certificateOfStanding
+                      ? "text-primary-dark text-bold"
+                      : ""
                   }
                 >
                   <ContextualInfoButton
@@ -113,7 +126,9 @@ export const FormationChooseDocuments = (): ReactElement => {
               </label>
             </td>
             <td
-              className={state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""}
+              className={
+                state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""
+              }
             >
               {getDollarValue(certificateStandingCost)}
             </td>
@@ -143,7 +158,9 @@ export const FormationChooseDocuments = (): ReactElement => {
                 >
                   <ContextualInfoButton
                     text={Config.formation.fields.certifiedCopyOfFormationDocument.label}
-                    id={Config.formation.fields.certifiedCopyOfFormationDocument.labelContextualInfo}
+                    id={
+                      Config.formation.fields.certifiedCopyOfFormationDocument.labelContextualInfo
+                    }
                   />
                 </div>
                 <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
@@ -151,7 +168,9 @@ export const FormationChooseDocuments = (): ReactElement => {
             </td>
             <td
               className={
-                state.formationFormData.certifiedCopyOfFormationDocument ? "text-primary-dark text-bold" : ""
+                state.formationFormData.certifiedCopyOfFormationDocument
+                  ? "text-primary-dark text-bold"
+                  : ""
               }
             >
               {getDollarValue(certifiedCopyCost)}
@@ -162,7 +181,9 @@ export const FormationChooseDocuments = (): ReactElement => {
           <tr>
             <td colSpan={1}>
               <div className="text-align-left">
-                <span className="text-bold">{Config.formation.fields.paymentType.costSubtotalLabel}</span>{" "}
+                <span className="text-bold">
+                  {Config.formation.fields.paymentType.costSubtotalLabel}
+                </span>{" "}
               </div>
             </td>
             <td colSpan={1}></td>

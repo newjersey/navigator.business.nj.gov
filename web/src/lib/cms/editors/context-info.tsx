@@ -84,8 +84,8 @@ export default {
     postContext: string;
     postFormat: string;
   }): string => {
-    return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId || ""}\` ${(
-      obj.postContext || ""
-    ).trim()}`;
+    return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
+      obj.contextId || ""
+    }\` ${(obj.postContext || "").trim()}`;
   },
 };

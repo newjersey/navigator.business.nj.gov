@@ -267,7 +267,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v68BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -354,7 +358,7 @@ export const generatev68ProfileData = (overrides: Partial<v68ProfileData>): v68P
 };
 
 export const generatev68FormationFormData = (
-  overrides: Partial<v68FormationFormData>
+  overrides: Partial<v68FormationFormData>,
 ): v68FormationFormData => {
   return {
     businessName: "",
@@ -395,7 +399,7 @@ export const generatev68FormationFormData = (
 };
 
 export const generatev68GetFilingResponse = (
-  overrides: Partial<v68GetFilingResponse>
+  overrides: Partial<v68GetFilingResponse>,
 ): v68GetFilingResponse => {
   return {
     success: true,

@@ -29,15 +29,20 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
   const visibleSidebarCards = getVisibleSideBarCards(business, props.sidebarDisplayContent);
   const visibleSortedFundings = getVisibleFundings(
     sortFundingsForUser(filterFundings({ fundings: props.fundings, business: business }), userData),
-    business
+    business,
   );
-  const hiddenSortedFundings = sortFundingsForUser(getHiddenFundings(business, props.fundings), userData);
+  const hiddenSortedFundings = sortFundingsForUser(
+    getHiddenFundings(business, props.fundings),
+    userData,
+  );
   const visibleSortedCertifications = getVisibleCertifications(
-    sortCertifications(filterCertifications({ certifications: props.certifications, business: business })),
-    business
+    sortCertifications(
+      filterCertifications({ certifications: props.certifications, business: business }),
+    ),
+    business,
   );
   const hiddenSortedCertifications = sortCertifications(
-    getHiddenCertifications(business, props.certifications)
+    getHiddenCertifications(business, props.certifications),
   );
 
   const remoteSellerWorker = isRemoteWorkerOrSellerBusiness(business);
@@ -50,7 +55,9 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
       certifications={visibleSortedCertifications}
       hiddenCertifications={hiddenSortedCertifications}
       isRemoteSellerWorker={remoteSellerWorker}
-      displayFundingCards={LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings}
+      displayFundingCards={
+        LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings
+      }
       displayCertificationsCards={
         LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications
       }

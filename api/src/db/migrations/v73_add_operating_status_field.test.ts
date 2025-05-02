@@ -88,7 +88,7 @@ describe("migrate_v72_to_v73", () => {
 const makeUserData = (
   profileData: v72ProfileData,
   taskProgress: Record<string, v72TaskProgress>,
-  myNJUserKey?: string | undefined
+  myNJUserKey?: string | undefined,
 ): v72UserData => {
   return {
     user: generatev72User({ myNJUserKey }),

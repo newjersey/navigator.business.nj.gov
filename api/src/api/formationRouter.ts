@@ -20,7 +20,7 @@ type FormationPostBody = {
 export const formationRouterFactory = (
   formationClient: FormationClient,
   databaseClient: DatabaseClient,
-  config: { shouldSaveDocuments: boolean }
+  config: { shouldSaveDocuments: boolean },
 ): Router => {
   const router = Router();
 
@@ -79,7 +79,7 @@ export const formationRouterFactory = (
           const formationDoc = await saveFileFromUrl(
             getFilingResponse.formationDoc,
             `${signedInUser["custom:identityId"]}/formationDoc-${Date.now()}.pdf`,
-            process.env.DOCUMENT_S3_BUCKET as string
+            process.env.DOCUMENT_S3_BUCKET as string,
           );
 
           let certifiedDoc = "";
@@ -89,7 +89,7 @@ export const formationRouterFactory = (
             certifiedDoc = await saveFileFromUrl(
               getFilingResponse.certifiedDoc,
               `${signedInUser["custom:identityId"]}/certifiedDoc-${Date.now()}.pdf`,
-              process.env.DOCUMENT_S3_BUCKET as string
+              process.env.DOCUMENT_S3_BUCKET as string,
             );
           }
 
@@ -97,7 +97,7 @@ export const formationRouterFactory = (
             standingDoc = await saveFileFromUrl(
               getFilingResponse.standingDoc,
               `${signedInUser["custom:identityId"]}/standingDoc-${Date.now()}.pdf`,
-              process.env.DOCUMENT_S3_BUCKET as string
+              process.env.DOCUMENT_S3_BUCKET as string,
             );
           }
 

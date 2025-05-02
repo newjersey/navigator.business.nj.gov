@@ -18,7 +18,9 @@ describe("getLicenseCalendarEvent", () => {
   const licenseNames = Object.values(taskIdLicenseNameMapping);
 
   it("returns empty array when licenseData is undefined", () => {
-    expect(getLicenseCalendarEvents(undefined, currentDate.year(), currentDate.month())).toEqual([]);
+    expect(getLicenseCalendarEvents(undefined, currentDate.year(), currentDate.month())).toEqual(
+      [],
+    );
   });
 
   it("returns empty array when expirationISO is undefined", () => {
@@ -116,7 +118,9 @@ describe("getLicenseCalendarEvent", () => {
       },
     });
 
-    expect(getLicenseCalendarEvents(licenseData, dateInJanurary.year(), dateInJanurary.month())).toEqual([
+    expect(
+      getLicenseCalendarEvents(licenseData, dateInJanurary.year(), dateInJanurary.month()),
+    ).toEqual([
       {
         dueDate: firstDayOfYear.format(defaultDateFormat),
         licenseEventSubtype: "expiration",

@@ -24,14 +24,14 @@ export const Review = (props: Props): ReactElement => {
   const { userData, business } = useUserData();
 
   const requestingAgencyName = LookupTaxClearanceCertificateAgenciesById(
-    business?.taxClearanceCertificateData?.requestingAgencyId
+    business?.taxClearanceCertificateData?.requestingAgencyId,
   ).name;
 
   const isAddressComplete = Boolean(
     business?.taxClearanceCertificateData?.addressLine1 &&
       business?.taxClearanceCertificateData?.addressCity &&
       business?.taxClearanceCertificateData?.addressState &&
-      business?.taxClearanceCertificateData?.addressZipCode
+      business?.taxClearanceCertificateData?.addressZipCode,
   );
 
   let addressValue = "";
@@ -51,10 +51,14 @@ export const Review = (props: Props): ReactElement => {
     const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
     if (taxClearanceResponse.certificatePdfArray) {
       const blob = new Blob(
-        [new Uint8Array(convertSignedByteArrayToUnsigned(taxClearanceResponse.certificatePdfArray))],
+        [
+          new Uint8Array(
+            convertSignedByteArrayToUnsigned(taxClearanceResponse.certificatePdfArray),
+          ),
+        ],
         {
           type: "application/pdf",
-        }
+        },
       );
       props.setCertificatePdfBlob(blob);
     }

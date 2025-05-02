@@ -26,7 +26,7 @@ describe("migrate_v127_to_v128", () => {
     const v128 = migrate_v127_to_v128(v127UserData);
     expect(v128.businesses[id].profileData.operatingPhase).toEqual("FORMED");
     expect(
-      v128.businesses[id].preferences.visibleSidebarCards.includes("registered-for-taxes-nudge")
+      v128.businesses[id].preferences.visibleSidebarCards.includes("registered-for-taxes-nudge"),
     ).toEqual(false);
   });
 

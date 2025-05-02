@@ -9,7 +9,7 @@ import timezone from "dayjs/plugin/timezone";
 
 export const getErrorStateForEmergencyTripPermitField = (
   fieldName: EmergencyTripPermitFieldNames,
-  state: EmergencyTripPermitApplicationInfo
+  state: EmergencyTripPermitApplicationInfo,
 ): EmergencyTripPermitFieldErrorState => {
   const value = state[fieldName];
   const nonRequiredFields: EmergencyTripPermitFieldNames[] = [
@@ -56,7 +56,8 @@ export const getErrorStateForEmergencyTripPermitField = (
       .hour(Number(timeParts[0]))
       .minute(Number(timeParts[1]));
     const fifteenMinutesAgoInNJ = dayjs().tz("America/New_York").subtract(15, "minutes");
-    const isPermitDateEarlierThanFifteenMinutesAgoInNJ = permitDateTime.isBefore(fifteenMinutesAgoInNJ);
+    const isPermitDateEarlierThanFifteenMinutesAgoInNJ =
+      permitDateTime.isBefore(fifteenMinutesAgoInNJ);
     if (isPermitDateEarlierThanFifteenMinutesAgoInNJ) {
       return {
         field: fieldName,
@@ -99,7 +100,7 @@ export const getErrorStateForEmergencyTripPermitField = (
 };
 
 export const getMaximumLengthForFieldName = (
-  fieldName: EmergencyTripPermitFieldNames
+  fieldName: EmergencyTripPermitFieldNames,
 ): number | undefined => {
   switch (fieldName) {
     case "vehicleYear":

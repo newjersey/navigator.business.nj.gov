@@ -31,12 +31,14 @@ export const TaskElement = (props: Props): ReactElement => {
       props.task.contentMd.includes("${beginLocationDependentSection}") &&
       props.task.contentMd.includes("${endLocationDependentSection}");
 
-    const [beforeDeferredLocation, rest] = props.task.contentMd.split("${beginLocationDependentSection}");
+    const [beforeDeferredLocation, rest] = props.task.contentMd.split(
+      "${beginLocationDependentSection}",
+    );
     deferredLocationQuestion.before = beforeDeferredLocation;
     deferredLocationQuestion.after = rest;
     if (rest) {
       const [innerContentDeferredLocation, afterDeferredLocation] = rest.split(
-        "${endLocationDependentSection}"
+        "${endLocationDependentSection}",
       );
       deferredLocationQuestion.innerContent = innerContentDeferredLocation;
       deferredLocationQuestion.after = afterDeferredLocation;

@@ -124,7 +124,10 @@ const typeDesignatorAndStartDate = ({
 }: Partial<FormationFormData>): void => {
   if (businessSuffix) {
     onBusinessFormationPage.selectBusinessDesignator(businessSuffix);
-    onBusinessFormationPage.getBusinessDesignator().invoke("prop", "value").should("contain", businessSuffix);
+    onBusinessFormationPage
+      .getBusinessDesignator()
+      .invoke("prop", "value")
+      .should("contain", businessSuffix);
   }
   if (businessStartDate) {
     onBusinessFormationPage.typeBusinessStartDate(businessStartDate as string);
@@ -143,11 +146,17 @@ const typeBusinessAddress = ({
 }: Partial<FormationFormData>): void => {
   if (addressLine1) {
     onBusinessFormationPage.typeBusinessAddressLine1(addressLine1 as string);
-    onBusinessFormationPage.getBusinessAddressLine1().invoke("prop", "value").should("contain", addressLine1);
+    onBusinessFormationPage
+      .getBusinessAddressLine1()
+      .invoke("prop", "value")
+      .should("contain", addressLine1);
   }
   if (addressLine2) {
     onBusinessFormationPage.typeBusinessAddressLine2(addressLine2 as string);
-    onBusinessFormationPage.getBusinessAddressLine2().invoke("prop", "value").should("contain", addressLine2);
+    onBusinessFormationPage
+      .getBusinessAddressLine2()
+      .invoke("prop", "value")
+      .should("contain", addressLine2);
   }
   if (addressMunicipality) {
     onBusinessFormationPage.selectBusinessAddressMunicipality(addressMunicipality.displayName);
@@ -172,7 +181,10 @@ const openAddressSection = (): void => {
 const typeBusinessPurpose = (businessPurpose: FormationFormData["businessPurpose"]): void => {
   onBusinessFormationPage.clickAddBusinessPurpose();
   onBusinessFormationPage.typeBusinessPurpose(businessPurpose as string);
-  onBusinessFormationPage.getBusinessPurpose().invoke("prop", "value").should("contain", businessPurpose);
+  onBusinessFormationPage
+    .getBusinessPurpose()
+    .invoke("prop", "value")
+    .should("contain", businessPurpose);
 };
 
 const typeProvisions = (provisions: FormationFormData["additionalProvisions"]): void => {
@@ -182,7 +194,10 @@ const typeProvisions = (provisions: FormationFormData["additionalProvisions"]): 
   onBusinessFormationPage.clickAddProvisions();
   for (const [index, provision] of provisions.entries()) {
     onBusinessFormationPage.typeProvision(provision, index);
-    onBusinessFormationPage.getProvision(index).invoke("prop", "value").should("contain", provisions[index]);
+    onBusinessFormationPage
+      .getProvision(index)
+      .invoke("prop", "value")
+      .should("contain", provisions[index]);
     if (index + 1 < provisions.length) {
       onBusinessFormationPage.clickAddNewProvision();
     }
@@ -225,11 +240,17 @@ const selectAndTypeRegisteredAgent = ({
     }
     if (agentName) {
       onBusinessFormationPage.typeRegisteredAgentName(agentName);
-      onBusinessFormationPage.getRegisteredAgentName().invoke("prop", "value").should("contain", agentName);
+      onBusinessFormationPage
+        .getRegisteredAgentName()
+        .invoke("prop", "value")
+        .should("contain", agentName);
     }
     if (agentEmail) {
       onBusinessFormationPage.typeRegisteredAgentEmail(agentEmail);
-      onBusinessFormationPage.getRegisteredAgentEmail().invoke("prop", "value").should("contain", agentEmail);
+      onBusinessFormationPage
+        .getRegisteredAgentEmail()
+        .invoke("prop", "value")
+        .should("contain", agentEmail);
     }
     if (getRegisteredAgentSameAsBusinessAddressCheckbox) {
       onBusinessFormationPage.getRegisteredAgentSameAsBusinessAddressCheckbox().check();
@@ -278,10 +299,16 @@ const addMembersToFormation = (members: FormationFormData["members"] = []): void
     onAddressModal.getFullName().invoke("prop", "value").should("contain", membersObj.name);
 
     onAddressModal.typeAddressLine1(membersObj.addressLine1);
-    onAddressModal.getAddressLine1().invoke("prop", "value").should("contain", membersObj.addressLine1);
+    onAddressModal
+      .getAddressLine1()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressLine1);
 
     onAddressModal.typeAddressLine2(membersObj.addressLine2);
-    onAddressModal.getAddressLine2().invoke("prop", "value").should("contain", membersObj.addressLine2);
+    onAddressModal
+      .getAddressLine2()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressLine2);
 
     onAddressModal.typeCity(membersObj.addressCity);
     onAddressModal.getCity().invoke("prop", "value").should("contain", membersObj.addressCity);
@@ -293,7 +320,10 @@ const addMembersToFormation = (members: FormationFormData["members"] = []): void
       .should("contain", membersObj.addressState ? membersObj.addressState.shortCode : "");
 
     onAddressModal.typeZipCode(membersObj.addressZipCode);
-    onAddressModal.getZipCode().invoke("prop", "value").should("contain", membersObj.addressZipCode);
+    onAddressModal
+      .getZipCode()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressZipCode);
 
     onAddressModal.clickAddMemberButton();
   }
@@ -319,11 +349,17 @@ const typeBillingContactInfo = ({
 }: Partial<FormationFormData>): void => {
   if (contactFirstName) {
     onBusinessFormationPage.typeContactFirstName(contactFirstName);
-    onBusinessFormationPage.getContactFirstName().invoke("prop", "value").should("contain", contactFirstName);
+    onBusinessFormationPage
+      .getContactFirstName()
+      .invoke("prop", "value")
+      .should("contain", contactFirstName);
   }
   if (contactLastName) {
     onBusinessFormationPage.typeContactLastName(contactLastName);
-    onBusinessFormationPage.getContactLastName().invoke("prop", "value").should("contain", contactLastName);
+    onBusinessFormationPage
+      .getContactLastName()
+      .invoke("prop", "value")
+      .should("contain", contactLastName);
   }
   if (contactPhoneNumber) {
     onBusinessFormationPage.typeContactPhoneNumber(contactPhoneNumber);
@@ -332,10 +368,10 @@ const typeBillingContactInfo = ({
       .invoke("prop", "value")
       .should(
         "contain",
-        `(${contactPhoneNumber.slice(0, 3)}) ${contactPhoneNumber.slice(3, 6)}-${contactPhoneNumber.slice(
+        `(${contactPhoneNumber.slice(0, 3)}) ${contactPhoneNumber.slice(
+          3,
           6,
-          10
-        )}`
+        )}-${contactPhoneNumber.slice(6, 10)}`,
       );
   }
 };

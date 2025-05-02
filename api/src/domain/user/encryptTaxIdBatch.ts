@@ -8,7 +8,7 @@ type EncryptTaxIdBatchResponse = {
 
 export const encryptTaxIdBatch = async (
   encryptTaxId: EncryptTaxId,
-  userDataClient: UserDataClient
+  userDataClient: UserDataClient,
 ): Promise<EncryptTaxIdBatchResponse> => {
   const results = await userDataClient.getNeedTaxIdEncryptionUsers();
   let success = 0;
@@ -23,7 +23,7 @@ export const encryptTaxIdBatch = async (
         })
         .catch(() => {
           failed += 1;
-        })
+        }),
     );
   }
 

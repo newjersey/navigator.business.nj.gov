@@ -44,12 +44,12 @@ describe("intHelpers", () => {
     it("throws an error if a signed byte is invalid", () => {
       const lessThanValidByte = [0, 1, -129, 127];
       expect(() => convertSignedByteArrayToUnsigned(lessThanValidByte)).toThrow(
-        "Invalid signedByte -129, expected -128 <= signedByte <= 127"
+        "Invalid signedByte -129, expected -128 <= signedByte <= 127",
       );
 
       const greaterThanValidByte = [0, 1, -128, 128];
       expect(() => convertSignedByteArrayToUnsigned(greaterThanValidByte)).toThrow(
-        "Invalid signedByte 128, expected -128 <= signedByte <= 127"
+        "Invalid signedByte 128, expected -128 <= signedByte <= 127",
       );
     });
   });

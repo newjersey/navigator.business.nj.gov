@@ -26,7 +26,7 @@ export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
 export const DynamoUserDataClient = (
   db: DynamoDBDocumentClient,
   tableName: string,
-  logger: LogWriterType
+  logger: LogWriterType,
 ): UserDataClient => {
   const migrateData = (data: UserData, logger: LogWriterType): any => {
     const logId = logger.GetId();
@@ -35,14 +35,16 @@ export const DynamoUserDataClient = (
     const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
       try {
         logger.LogInfo(
-          `Database Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
-            Number(prevData.version) + 1
-          }`
+          `Database Migration - Id:${logId} - Upgrading ${data.user.id} from ${
+            prevData.version
+          } to ${Number(prevData.version) + 1}`,
         );
         return migration(prevData);
       } catch (error) {
         logger.LogError(
-          `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
+          `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(
+            prevData,
+          )}`,
         );
       }
     }, data);
@@ -138,7 +140,7 @@ export const DynamoUserDataClient = (
   };
   const getUsersWithOutdatedVersion = async (
     latestVersion: number,
-    nextToken?: string
+    nextToken?: string,
   ): Promise<{ usersToMigrate: UserData[]; nextToken?: string }> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["version"] < ${latestVersion}`;
     return await searchWithPagination(statement, nextToken);
@@ -146,13 +148,13 @@ export const DynamoUserDataClient = (
 
   const searchWithPagination = async (
     statement: string,
-    nextToken?: string
+    nextToken?: string,
   ): Promise<{ usersToMigrate: UserData[]; nextToken?: string }> => {
     const { Items = [], NextToken } = await db.send(
       new ExecuteStatementCommand({
         Statement: statement,
         NextToken: nextToken,
-      })
+      }),
     );
 
     const usersToMigrate = Items.map((object: any): UserData => {
@@ -168,7 +170,7 @@ export const DynamoUserDataClient = (
       Items.map(async (object: any): Promise<UserData> => {
         const data = unmarshall(object).data;
         return await doMigration(data);
-      })
+      }),
     );
   };
 

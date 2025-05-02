@@ -7,7 +7,10 @@ import { TripStep } from "@/components/tasks/abc-emergency-trip-permit/steps/Tri
 import { EmergencyTripPermitStepNames } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-export const EmergencyTripPermitSteps: { component: ReactElement; step: EmergencyTripPermitStepNames }[] = [
+export const EmergencyTripPermitSteps: {
+  component: ReactElement;
+  step: EmergencyTripPermitStepNames;
+}[] = [
   {
     component: <InstructionsStep />,
     step: EmergencyTripPermitStepsConfiguration[0].name,

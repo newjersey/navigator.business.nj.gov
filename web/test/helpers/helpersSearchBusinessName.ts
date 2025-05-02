@@ -17,7 +17,7 @@ export const fillText = (value: string, dba?: { dba: boolean }): void => {
 
 export const searchAndGetValue = async (
   nameAvailability: Partial<NameAvailability>,
-  dba?: { dba: boolean }
+  dba?: { dba: boolean },
 ): Promise<void> => {
   const returnedPromise = Promise.resolve(generateBusinessNameAvailability(nameAvailability));
   mockApi.searchBusinessName.mockReturnValue(returnedPromise);

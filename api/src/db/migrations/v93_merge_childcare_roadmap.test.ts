@@ -27,7 +27,11 @@ describe("migrate_v92_to_v93", () => {
     const v93 = migrate_v92_to_v93(v92);
     expect(v93).toEqual({
       ...v92,
-      profileData: { ...v92.profileData, industryId: "generic", isChildcareForSixOrMore: undefined },
+      profileData: {
+        ...v92.profileData,
+        industryId: "generic",
+        isChildcareForSixOrMore: undefined,
+      },
       version: 93,
     });
   });

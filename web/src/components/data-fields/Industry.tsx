@@ -23,7 +23,7 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const { Config } = useConfig();
@@ -39,7 +39,9 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
 
   RegisterForOnSubmit(() => isValid(state.profileData.industryId));
 
-  const shouldEssentialQuestionAppearBasedOnProfileData = (essentialQuestion: EssentialQuestion): boolean => {
+  const shouldEssentialQuestionAppearBasedOnProfileData = (
+    essentialQuestion: EssentialQuestion,
+  ): boolean => {
     switch (essentialQuestion.fieldName) {
       case "residentialConstructionType":
         return (
@@ -61,7 +63,8 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
   const getEssentialQuestions = (industryId: string | undefined): ReactNode[] => {
     return EssentialQuestions.filter((i) => {
       return (
-        i.isQuestionApplicableToIndustryId(industryId) && shouldEssentialQuestionAppearBasedOnProfileData(i)
+        i.isQuestionApplicableToIndustryId(industryId) &&
+        shouldEssentialQuestionAppearBasedOnProfileData(i)
       );
     }).map((obj) => (
       <EssentialQuestionField<T>

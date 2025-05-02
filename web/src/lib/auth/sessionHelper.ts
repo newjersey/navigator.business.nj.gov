@@ -104,7 +104,9 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
     sha256: Sha256,
   });
 
-  const url = await presigner.presign(new HttpRequest(parseUrl(value)), { expiresIn: expires ?? 900 });
+  const url = await presigner.presign(new HttpRequest(parseUrl(value)), {
+    expiresIn: expires ?? 900,
+  });
   return formatUrl(url);
 };
 
@@ -123,7 +125,8 @@ export const getActiveUser = async (): Promise<ActiveUser> => {
   if (!cognitoPayload["custom:identityId"]) {
     cognitoPayload = await addCustomFieldToCognito();
   }
-  const encounteredMyNjLinkingError = AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
+  const encounteredMyNjLinkingError =
+    AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
   return cognitoPayloadToActiveUser({ cognitoPayload, encounteredMyNjLinkingError });
 };
 

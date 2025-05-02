@@ -18,7 +18,7 @@ export const isDateValid = (value?: string): boolean => {
 
 export const isBusinessStartDateValid = (
   value: string,
-  legalType: FormationLegalType | undefined
+  legalType: FormationLegalType | undefined,
 ): boolean => {
   if (!isDateValid(value) || !legalType) return false;
   const date = parseDateWithFormat(value, defaultDateFormat);

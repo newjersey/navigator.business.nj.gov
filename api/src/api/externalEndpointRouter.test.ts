@@ -48,7 +48,9 @@ describe("externalEndpointRouter", () => {
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
     app = setupExpress(false);
-    app.use(externalEndpointRouterFactory(stubDynamoDataClient, stubAddNewsletter, stubAddToUserTesting));
+    app.use(
+      externalEndpointRouterFactory(stubDynamoDataClient, stubAddNewsletter, stubAddToUserTesting),
+    );
   });
 
   afterAll(async () => {
@@ -96,7 +98,10 @@ describe("externalEndpointRouter", () => {
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         stubDynamoDataClient.put.mockResolvedValue(userData);
-        await request(app).post(`/newsletter`).send(userData).set("Authorization", "Bearer user-123-token");
+        await request(app)
+          .post(`/newsletter`)
+          .send(userData)
+          .set("Authorization", "Bearer user-123-token");
         expect(stubAddNewsletter).toHaveBeenCalled();
         expect(stubDynamoDataClient.put).toHaveBeenCalled();
       });
@@ -140,7 +145,10 @@ describe("externalEndpointRouter", () => {
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         stubDynamoDataClient.put.mockResolvedValue(userData);
-        await request(app).post(`/userTesting`).send(userData).set("Authorization", "Bearer user-123-token");
+        await request(app)
+          .post(`/userTesting`)
+          .send(userData)
+          .set("Authorization", "Bearer user-123-token");
         expect(stubAddToUserTesting).toHaveBeenCalled();
         expect(stubDynamoDataClient.put).toHaveBeenCalled();
       });

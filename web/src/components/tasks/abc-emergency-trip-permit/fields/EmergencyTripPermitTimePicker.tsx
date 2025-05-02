@@ -24,7 +24,7 @@ interface FormattedTime {
 
 const generateAllTimesWithHalfHourIncrement = (
   startHour: number,
-  startAtZeroMinutes: boolean
+  startAtZeroMinutes: boolean,
 ): FormattedTime[] => {
   const times: FormattedTime[] = [];
   for (let hour = startHour; hour < 24; hour++) {
@@ -61,7 +61,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
   const context = useContext(EmergencyTripPermitContext);
   const { isFormFieldInvalid, setIsValid } = useFormContextFieldHelpers(
     props.fieldName,
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
   const { getFieldErrorLabel, doesFieldHaveError } = useEmergencyTripPermitErrors();
   dayjs.extend(timezone);
@@ -139,7 +139,9 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
             <FormHelperText error>{`${getFieldErrorLabel(props.fieldName)}`}</FormHelperText>
             <div aria-live="polite" className="screen-reader-only">{`${
               Config.siteWideErrorMessages.errorScreenReaderInlinePrefix
-            } ${camelCaseToSentence(props.fieldName)}, ${getFieldErrorLabel(props.fieldName)}`}</div>
+            } ${camelCaseToSentence(props.fieldName)}, ${getFieldErrorLabel(
+              props.fieldName,
+            )}`}</div>
           </>
         )}
       </div>

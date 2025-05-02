@@ -51,7 +51,7 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
         openSideBar={openSideBar}
         isSideBarOpen={false}
         title={innerMenuTitle}
-      />
+      />,
     );
 
     expect(screen.queryByText(innerMenuTitle)).not.toBeInTheDocument();
@@ -75,7 +75,7 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
         openSideBar={openSideBar}
         isSideBarOpen={true}
         title={innerMenuTitle}
-      />
+      />,
     );
 
     expect(screen.getByText(innerMenuTitle)).toBeInTheDocument();
@@ -88,7 +88,9 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
     expect(closeSideBar).toHaveBeenCalled();
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_menu_close_button.click.close_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_menu_close_button.click.close_mobile_menu,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -100,7 +102,7 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
         openSideBar={openSideBar}
         isSideBarOpen={true}
         title={innerMenuTitle}
-      />
+      />,
     );
 
     expect(screen.getByText(innerMenuTitle)).toBeInTheDocument();
@@ -125,7 +127,7 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
         openSideBar={openSideBar}
         isSideBarOpen={true}
         title={innerMenuTitle}
-      />
+      />,
     );
     expect(screen.getByText(subMenuText)).toBeInTheDocument();
   });

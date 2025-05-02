@@ -7,7 +7,7 @@ import { StatusCodes } from "http-status-codes";
 const getTaxId = async (
   encryptionDecryptionClient: EncryptionDecryptionClient,
   taxId: string,
-  encryptedTaxId: string | undefined
+  encryptedTaxId: string | undefined,
 ): Promise<string> => {
   if (taxId.includes(maskingCharacter)) {
     if (encryptedTaxId) {
@@ -22,7 +22,7 @@ const getTaxId = async (
 export const taxFilingRouterFactory = (
   dynamoDataClient: DatabaseClient,
   taxFilingInterface: TaxFilingInterface,
-  encryptionDecryptionClient: EncryptionDecryptionClient
+  encryptionDecryptionClient: EncryptionDecryptionClient,
 ): Router => {
   const router = Router();
 

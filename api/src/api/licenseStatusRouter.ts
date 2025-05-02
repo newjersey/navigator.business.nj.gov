@@ -11,7 +11,7 @@ type LicenseStatusRequestBody = {
 
 export const licenseStatusRouterFactory = (
   updateLicenseStatus: UpdateLicenseStatus,
-  databaseClient: DatabaseClient
+  databaseClient: DatabaseClient,
 ): Router => {
   const router = Router();
 

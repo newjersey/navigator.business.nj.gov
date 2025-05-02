@@ -4,7 +4,7 @@ import { cloneDeep } from "lodash";
 
 export const roadmapWithSectionSpecificTasks = (
   roadmap: Roadmap | undefined,
-  section: SectionType
+  section: SectionType,
 ): Roadmap | undefined => {
   if (!roadmap) return undefined;
 

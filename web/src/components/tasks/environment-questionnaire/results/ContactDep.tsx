@@ -35,7 +35,9 @@ export const ContactDep = (props: Props): ReactElement => {
           {contactConfig.contact.form && (
             <div className="flex flex-align-center margin-top-05">
               <Icon className={"margin-right-1"} iconName={"language"} />
-              <Content className={"text-underline text-base-darkest"}>{contactConfig.contact.form}</Content>
+              <Content className={"text-underline text-base-darkest"}>
+                {contactConfig.contact.form}
+              </Content>
             </div>
           )}
           {contactConfig.contact.email && (

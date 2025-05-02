@@ -3,7 +3,9 @@ import { convertAnytimeActionTaskMd } from "@/lib/utils/markdownReader";
 
 export const fetchAnytimeActionByFilename = async (id: string): Promise<AnytimeActionTask> => {
   try {
-    const fileContent = await import(`@businessnjgovnavigator/content/anytime-action-tasks/${id}.md`);
+    const fileContent = await import(
+      `@businessnjgovnavigator/content/anytime-action-tasks/${id}.md`
+    );
     return convertAnytimeActionTaskMd(fileContent.default, id);
   } catch {
     return {

@@ -1,4 +1,7 @@
-import { generatev157BusinessUser, generatev157UserData } from "@db/migrations/v157_add_tax_clearance_data";
+import {
+  generatev157BusinessUser,
+  generatev157UserData,
+} from "@db/migrations/v157_add_tax_clearance_data";
 import { migrate_v157_to_v158, v158UserData } from "@db/migrations/v158_login_email_to_lowercase";
 
 const createMigratedData = (testEmail: string): v158UserData => {

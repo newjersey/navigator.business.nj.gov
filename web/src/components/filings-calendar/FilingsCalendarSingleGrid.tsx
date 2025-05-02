@@ -34,7 +34,8 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [showExpandFilingsButton, setShowExpandFilingsButton] = useState(false);
   const date = getJanOfYear(parseDateWithFormat(props.activeYear, "YYYY")).add(props.num, "months");
-  const sortedFilteredFilingsWithinAYear: TaxFilingCalendarEvent[] = props.business?.taxFilingData.filings
+  const sortedFilteredFilingsWithinAYear: TaxFilingCalendarEvent[] = props.business?.taxFilingData
+    .filings
     ? sortFilterCalendarEventsWithinAYear(props.business.taxFilingData.filings, props.activeYear)
     : [];
 
@@ -50,7 +51,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const thisMonthLicenseEvents = getLicenseCalendarEvents(
     props.business?.licenseData,
     date.year(),
-    date.month()
+    date.month(),
   );
 
   const sortedCalendarEvents = sortCalendarEventsEarliestToLatest([
@@ -60,9 +61,12 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const visibleEvents = sortedCalendarEvents.slice(0, NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const remainingEvents = sortedCalendarEvents.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
 
-  const renderCalendarEventItems = (events: (TaxFilingCalendarEvent | LicenseCalendarEvent)[]): ReactNode => {
+  const renderCalendarEventItems = (
+    events: (TaxFilingCalendarEvent | LicenseCalendarEvent)[],
+  ): ReactNode => {
     return events.map((event) => {
-      if (event.calendarEventType === "TAX-FILING" && !props.operateReferences[event.identifier]) return null;
+      if (event.calendarEventType === "TAX-FILING" && !props.operateReferences[event.identifier])
+        return null;
 
       if (event.calendarEventType === "TAX-FILING") {
         return (
@@ -91,7 +95,9 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
     <div data-testid={date.format("MMM YYYY")}>
       <div
         className={`${
-          isOnCurrentYear && getCurrentDate().month() === date.month() ? "text-green" : "text-base-dark"
+          isOnCurrentYear && getCurrentDate().month() === date.month()
+            ? "text-green"
+            : "text-base-dark"
         } padding-bottom-1`}
         aria-hidden="true"
       >

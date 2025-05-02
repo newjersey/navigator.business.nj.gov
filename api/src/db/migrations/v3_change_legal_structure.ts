@@ -63,7 +63,9 @@ type v3LegalStructure =
 
 // ---------------- v3 factories ----------------
 
-export const generateV3OnboardingData = (overrides: Partial<v3OnboardingData>): v3OnboardingData => {
+export const generateV3OnboardingData = (
+  overrides: Partial<v3OnboardingData>,
+): v3OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",

@@ -57,7 +57,7 @@ describe("Formation - ReviewStep", () => {
 
   const renderStep = async (
     initialProfileData: Partial<ProfileData>,
-    formationFormData: Partial<FormationFormData>
+    formationFormData: Partial<FormationFormData>,
   ): Promise<void> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const isForeign = profileData.businessPersona === "FOREIGN";
@@ -65,7 +65,7 @@ describe("Formation - ReviewStep", () => {
       formationFormData: generateFormationFormData(formationFormData, {
         legalStructureId: castPublicFilingLegalTypeToFormationType(
           profileData.legalStructureId as PublicFilingLegalType,
-          profileData.businessPersona
+          profileData.businessPersona,
         ),
       }),
       formationResponse: undefined,
@@ -98,8 +98,12 @@ describe("Formation - ReviewStep", () => {
     const formationFormData = { businessName: "name entered in step 1" };
     await renderStep(initialProfileData, formationFormData);
     const designatorSection = within(screen.getByTestId("review-suffix-and-start-date"));
-    expect(designatorSection.getByText("name entered in step 1", { exact: false })).toBeInTheDocument();
-    expect(designatorSection.queryByText("name in profile", { exact: false })).not.toBeInTheDocument();
+    expect(
+      designatorSection.getByText("name entered in step 1", { exact: false }),
+    ).toBeInTheDocument();
+    expect(
+      designatorSection.queryByText("name in profile", { exact: false }),
+    ).not.toBeInTheDocument();
   });
 
   it("displays not entered on the business designator line if suffix is undefined", async () => {
@@ -130,9 +134,11 @@ describe("Formation - ReviewStep", () => {
     await renderStep(initialProfileData, formationFormData);
     const legalStockSection = screen.getByTestId("review-total-business-stock");
     expect(
-      within(legalStockSection).getByText(`${Config.formation.fields.businessTotalStock.label}:`)
+      within(legalStockSection).getByText(`${Config.formation.fields.businessTotalStock.label}:`),
     ).toBeInTheDocument();
-    expect(within(legalStockSection).getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+    expect(
+      within(legalStockSection).getByText(Config.formation.general.notEntered),
+    ).toBeInTheDocument();
   });
 
   it("doesn't display the total share of stock if legal type is not corporation", async () => {
@@ -145,7 +151,7 @@ describe("Formation - ReviewStep", () => {
     };
     await renderStep(initialProfileData, formationFormData);
     expect(
-      screen.queryByText(`${Config.formation.fields.businessTotalStock.label}:`)
+      screen.queryByText(`${Config.formation.fields.businessTotalStock.label}:`),
     ).not.toBeInTheDocument();
   });
 
@@ -237,7 +243,10 @@ describe("Formation - ReviewStep", () => {
   it("displays foreign date of formation within review step", async () => {
     await renderStep(
       { businessPersona: "FOREIGN" },
-      { businessStartDate: getCurrentDate().format(defaultDateFormat), foreignDateOfFormation: "2021-01-01" }
+      {
+        businessStartDate: getCurrentDate().format(defaultDateFormat),
+        foreignDateOfFormation: "2021-01-01",
+      },
     );
     expect(screen.getByTestId("foreign-date-of-formation")).toBeInTheDocument();
     expect(screen.getByText("01/01/2021")).toBeInTheDocument();
@@ -251,7 +260,10 @@ describe("Formation - ReviewStep", () => {
   it("display foreign state of formation within review step", async () => {
     await renderStep(
       { businessPersona: "FOREIGN" },
-      { addressState: { name: "Alabama", shortCode: "AL" }, foreignStateOfFormation: "Virgin Islands" }
+      {
+        addressState: { name: "Alabama", shortCode: "AL" },
+        foreignStateOfFormation: "Virgin Islands",
+      },
     );
     expect(screen.getByTestId("foreign-state-of-formation")).toBeInTheDocument();
     expect(screen.getByText("Virgin Islands")).toBeInTheDocument();
@@ -268,7 +280,9 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByText("provision1")).toBeInTheDocument();
     expect(screen.getByText("provision2")).toBeInTheDocument();
     expect(
-      screen.getAllByText(Config.formation.fields.additionalProvisions.secondaryLabel, { exact: false })
+      screen.getAllByText(Config.formation.fields.additionalProvisions.secondaryLabel, {
+        exact: false,
+      }),
     ).toHaveLength(2);
   });
 
@@ -300,24 +314,30 @@ describe("Formation - ReviewStep", () => {
   it("displays different titles when legalStructure is a ForProfit Corporation", async () => {
     await renderStep(
       { legalStructureId: "c-corporation" },
-      { incorporators: [generateFormationIncorporator({})] }
+      { incorporators: [generateFormationIncorporator({})] },
     );
     expect(
-      screen.getByText(markdownToText(Config.formation.fields.directors.reviewStepHeader))
+      screen.getByText(markdownToText(Config.formation.fields.directors.reviewStepHeader)),
     ).toBeInTheDocument();
-    expect(screen.getByText(markdownToText(Config.formation.fields.incorporators.label))).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.formation.fields.incorporators.label)),
+    ).toBeInTheDocument();
   });
 
   it("displays different titles when legalStructure is an llc", async () => {
     await renderStep({ legalStructureId: "limited-liability-company" }, {});
-    expect(screen.getByText(markdownToText(Config.formation.fields.members.label))).toBeInTheDocument();
-    expect(screen.getByText(markdownToText(Config.formation.fields.signers.label))).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.formation.fields.members.label)),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.formation.fields.signers.label)),
+    ).toBeInTheDocument();
   });
 
   it("does not displays signer titles when domestic", async () => {
     await renderStep(
       { businessPersona: "STARTING", legalStructureId: "limited-liability-company" },
-      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
+      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] },
     );
     expect(screen.queryByText(Config.formation.fields.signers.titleLabel)).not.toBeInTheDocument();
     expect(screen.queryByText("Authorized Partner", { exact: false })).not.toBeInTheDocument();
@@ -326,7 +346,7 @@ describe("Formation - ReviewStep", () => {
   it("displays signer titles when foreign", async () => {
     await renderStep(
       { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
-      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
+      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] },
     );
     expect(screen.getByText(`${Config.formation.fields.signers.titleLabel}:`)).toBeInTheDocument();
     expect(screen.getByText("Authorized Partner", { exact: false })).toBeInTheDocument();
@@ -335,11 +355,11 @@ describe("Formation - ReviewStep", () => {
   it("displays signer name when it exists in userData", async () => {
     await renderStep(
       { businessPersona: "STARTING", legalStructureId: "limited-liability-company" },
-      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
+      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] },
     );
     const reviewSignersSection = within(screen.getByTestId("review-signers"));
     expect(
-      reviewSignersSection.getByText(`${Config.formation.addressModal.name.label}:`)
+      reviewSignersSection.getByText(`${Config.formation.addressModal.name.label}:`),
     ).toBeInTheDocument();
   });
 
@@ -359,7 +379,9 @@ describe("Formation - ReviewStep", () => {
       return true;
     });
 
-    const legalStructureIds = nonTradeNamelegalStructures.map((legalStructure) => legalStructure.id);
+    const legalStructureIds = nonTradeNamelegalStructures.map(
+      (legalStructure) => legalStructure.id,
+    );
 
     const shouldShowMembersSectionNoMembers = (legalStructure: string): boolean => {
       if (["nonprofit", "c-corporation", "s-corporation"].includes(legalStructure)) return true;
@@ -377,13 +399,16 @@ describe("Formation - ReviewStep", () => {
           /* eslint-disable-next-line jest/no-conditional-expect */
           expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
         }
-      }
+      },
     );
 
     it.each(legalStructureIds)(
       "conditionally renders the members section when there are members and the legalStructure is %s",
       async (legalStructure) => {
-        await renderStep({ legalStructureId: legalStructure }, { members: [generateFormationMember({})] });
+        await renderStep(
+          { legalStructureId: legalStructure },
+          { members: [generateFormationMember({})] },
+        );
         if (legalStructure === "limited-partnership") {
           /* eslint-disable-next-line jest/no-conditional-expect */
           expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
@@ -391,7 +416,7 @@ describe("Formation - ReviewStep", () => {
           /* eslint-disable-next-line jest/no-conditional-expect */
           expect(screen.getByTestId("review-members")).toBeInTheDocument();
         }
-      }
+      },
     );
   });
 
@@ -407,23 +432,28 @@ describe("Formation - ReviewStep", () => {
     });
 
     it("does not include country in address when non-intl", async () => {
-      await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "US" });
+      await renderStep(
+        { businessPersona: "FOREIGN" },
+        { addressCountry: "US", businessLocationType: "US" },
+      );
       expect(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, {
           exact: false,
-        })
+        }),
       ).not.toBeInTheDocument();
     });
 
     it("include country in address when intl", async () => {
       await renderStep(
         { businessPersona: "FOREIGN" },
-        { addressCountry: "US", businessLocationType: "INTL" }
+        { addressCountry: "US", businessLocationType: "INTL" },
       );
       expect(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, { exact: false })
+        screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, {
+          exact: false,
+        }),
       ).toBeInTheDocument();
     });
 
@@ -434,7 +464,7 @@ describe("Formation - ReviewStep", () => {
           addressState: { name: "Alabama", shortCode: "AL" },
           businessLocationType: "US",
           foreignStateOfFormation: "Alaska",
-        }
+        },
       );
       expect(screen.getByText("Alabama", { exact: false })).toBeInTheDocument();
     });
@@ -442,7 +472,7 @@ describe("Formation - ReviewStep", () => {
     it("displays province name in address when intl", async () => {
       await renderStep(
         { businessPersona: "FOREIGN" },
-        { addressProvince: "Random place whatever", businessLocationType: "INTL" }
+        { addressProvince: "Random place whatever", businessLocationType: "INTL" },
       );
       expect(screen.getByText("Random place whatever", { exact: false })).toBeInTheDocument();
     });
@@ -450,7 +480,7 @@ describe("Formation - ReviewStep", () => {
     it("displays province name label in address when intl", async () => {
       await renderStep(
         { businessPersona: "FOREIGN" },
-        { addressProvince: "Province", businessLocationType: "INTL" }
+        { addressProvince: "Province", businessLocationType: "INTL" },
       );
       expect(screen.getByText(Config.formation.fields.addressProvince.label)).toBeInTheDocument();
     });
@@ -461,7 +491,7 @@ describe("Formation - ReviewStep", () => {
         {
           addressCity: "Roflcopterville",
           businessLocationType: randomInt() % 2 ? "INTL" : "US",
-        }
+        },
       );
       expect(screen.getByText("Roflcopterville", { exact: false })).toBeInTheDocument();
     });
@@ -476,7 +506,7 @@ describe("Formation - ReviewStep", () => {
             displayName: "Some city",
           }),
           businessLocationType: "NJ",
-        }
+        },
       );
       expect(screen.getByText("Some city", { exact: false })).toBeInTheDocument();
     });
@@ -504,7 +534,9 @@ describe("Formation - ReviewStep", () => {
 
     it("displays combined-investment on review step", async () => {
       await renderStep({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
-      expect(screen.getByText(Config.formation.fields.combinedInvestment.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.combinedInvestment.label),
+      ).toBeInTheDocument();
       expect(screen.getByText("combinedInvestment stuff")).toBeInTheDocument();
     });
 
@@ -518,20 +550,20 @@ describe("Formation - ReviewStep", () => {
           getDistributionTerms: "get distro terms",
           canMakeDistribution: true,
           makeDistributionTerms: "make distro terms",
-        }
+        },
       );
       const getByMarkup = withMarkup(screen.getByText);
       expect(screen.getByText(Config.formation.partnershipRights.label)).toBeInTheDocument();
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.canCreateLimitedPartner.reviewStepYes))
+        getByMarkup(markdownToText(Config.formation.fields.canCreateLimitedPartner.reviewStepYes)),
       ).toBeInTheDocument();
       expect(screen.getByText("partnerTerms whatever")).toBeInTheDocument();
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.canGetDistribution.reviewStepNo))
+        getByMarkup(markdownToText(Config.formation.fields.canGetDistribution.reviewStepNo)),
       ).toBeInTheDocument();
       expect(screen.queryByText("get distro terms")).not.toBeInTheDocument();
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.canMakeDistribution.reviewStepYes))
+        getByMarkup(markdownToText(Config.formation.fields.canMakeDistribution.reviewStepYes)),
       ).toBeInTheDocument();
       expect(screen.getByText("make distro terms")).toBeInTheDocument();
     });
@@ -550,7 +582,7 @@ describe("Formation - ReviewStep", () => {
           getDistributionTerms: "get distro terms",
           canMakeDistribution: true,
           makeDistributionTerms: "make distro terms",
-        }
+        },
       );
       expect(screen.queryByText(Config.formation.partnershipRights.label)).not.toBeInTheDocument();
     });
@@ -567,7 +599,9 @@ describe("Formation - ReviewStep", () => {
 
     it("does not display combined-investment on review step", async () => {
       await renderStep({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
-      expect(screen.queryByText(Config.formation.fields.combinedInvestment.label)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.fields.combinedInvestment.label),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -581,7 +615,11 @@ describe("Formation - ReviewStep", () => {
     it("displays contact information", async () => {
       await renderStep(
         {},
-        { contactFirstName: "Namey", contactLastName: "McNameFace", contactPhoneNumber: "1234567890" }
+        {
+          contactFirstName: "Namey",
+          contactLastName: "McNameFace",
+          contactPhoneNumber: "1234567890",
+        },
       );
       expect(screen.getByText("Namey")).toBeInTheDocument();
       expect(screen.getByText("McNameFace")).toBeInTheDocument();
@@ -590,14 +628,20 @@ describe("Formation - ReviewStep", () => {
 
     it("displays services payment type for CC", async () => {
       await renderStep({}, { paymentType: "CC" });
-      expect(screen.getByText(Config.formation.fields.paymentType.creditCardLabel)).toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.fields.paymentType.achLabel)).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.paymentType.creditCardLabel),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.fields.paymentType.achLabel),
+      ).not.toBeInTheDocument();
     });
 
     it("displays services payment type for ACH", async () => {
       await renderStep({}, { paymentType: "ACH" });
       expect(screen.getByText(Config.formation.fields.paymentType.achLabel)).toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.fields.paymentType.creditCardLabel)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.fields.paymentType.creditCardLabel),
+      ).not.toBeInTheDocument();
     });
 
     it("displays documents as comma separated list", async () => {
@@ -607,7 +651,7 @@ describe("Formation - ReviewStep", () => {
           officialFormationDocument: true,
           certifiedCopyOfFormationDocument: true,
           certificateOfStanding: false,
-        }
+        },
       );
       const formationDocLabel = Config.formation.fields.officialFormationDocument.label;
       const certifiedCopyLabel = Config.formation.fields.certifiedCopyOfFormationDocument.label;
@@ -617,7 +661,7 @@ describe("Formation - ReviewStep", () => {
     it("displays Not set for phone number when there is no phone number", async () => {
       await renderStep(
         {},
-        { contactFirstName: "Namey", contactLastName: "McNameFace", contactPhoneNumber: "" }
+        { contactFirstName: "Namey", contactLastName: "McNameFace", contactPhoneNumber: "" },
       );
       const phoneNumberField = within(screen.getByTestId("contact-phone-number-field"));
       expect(phoneNumberField.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
@@ -631,7 +675,7 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { isVeteranNonprofit: true });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes))
+        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes)),
       ).toBeInTheDocument();
     });
 
@@ -639,7 +683,7 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { isVeteranNonprofit: false });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo))
+        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo)),
       ).toBeInTheDocument();
     });
 
@@ -647,10 +691,10 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { isVeteranNonprofit: undefined });
       const queryByMarkup = withMarkup(screen.queryByText);
       expect(
-        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo))
+        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo)),
       ).not.toBeInTheDocument();
       expect(
-        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes))
+        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes)),
       ).not.toBeInTheDocument();
       const section = within(screen.getByTestId("isVeteranNonprofit"));
       expect(section.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
@@ -658,14 +702,16 @@ describe("Formation - ReviewStep", () => {
 
     it("displays the Provisions section", async () => {
       await renderStep({ legalStructureId }, {});
-      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.additionalProvisions.label),
+      ).toBeInTheDocument();
     });
 
     it("displays yes for board members in the Provisions section", async () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: true });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText))
+        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText)),
       ).toBeInTheDocument();
     });
 
@@ -673,7 +719,7 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText))
+        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText)),
       ).toBeInTheDocument();
     });
 
@@ -681,10 +727,14 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: undefined });
       const queryByMarkup = withMarkup(screen.queryByText);
       expect(
-        queryByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText))
+        queryByMarkup(
+          markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText),
+        ),
       ).not.toBeInTheDocument();
       expect(
-        queryByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText))
+        queryByMarkup(
+          markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText),
+        ),
       ).not.toBeInTheDocument();
       const boardMemberSection = within(screen.getByTestId("hasNonprofitBoardMembers"));
       expect(boardMemberSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
@@ -700,29 +750,39 @@ describe("Formation - ReviewStep", () => {
       { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
     ])("provisions $radio radio questions", (args) => {
       it(`does not display ${args.radio} when no board members`, async () => {
-        await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false, [args.radio]: "IN_FORM" });
+        await renderStep(
+          { legalStructureId },
+          { hasNonprofitBoardMembers: false, [args.radio]: "IN_FORM" },
+        );
         expect(
-          screen.queryByText(((Config.formation.fields as any)[args.radio] as any).body)
+          screen.queryByText(((Config.formation.fields as any)[args.radio] as any).body),
         ).not.toBeInTheDocument();
       });
 
       it(`displays as IN_BYLAWS for ${args.radio}`, async () => {
-        await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: true, [args.radio]: "IN_BYLAWS" });
+        await renderStep(
+          { legalStructureId },
+          { hasNonprofitBoardMembers: true, [args.radio]: "IN_BYLAWS" },
+        );
         const radioReviewSection = within(screen.getByTestId(args.radio));
         expect(
-          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body)
+          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body),
         ).toBeInTheDocument();
         expect(
           radioReviewSection.getByText(
-            `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
-          )
+            `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`,
+          ),
         ).toBeInTheDocument();
       });
 
       it("does not display terms when not IN_FORM", async () => {
         await renderStep(
           { legalStructureId },
-          { hasNonprofitBoardMembers: true, [args.radio]: "IN_BYLAWS", [args.terms]: "some-random-terms" }
+          {
+            hasNonprofitBoardMembers: true,
+            [args.radio]: "IN_BYLAWS",
+            [args.terms]: "some-random-terms",
+          },
         );
         expect(screen.queryByText("some-random-terms")).not.toBeInTheDocument();
       });
@@ -733,13 +793,15 @@ describe("Formation - ReviewStep", () => {
           {
             hasNonprofitBoardMembers: true,
             [args.radio]: undefined,
-          }
+          },
         );
         const radioReviewSection = within(screen.getByTestId(args.radio));
         expect(
-          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body)
+          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body),
         ).toBeInTheDocument();
-        expect(radioReviewSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+        expect(
+          radioReviewSection.getByText(Config.formation.general.notEntered),
+        ).toBeInTheDocument();
       });
 
       it(`displays as IN_FORM for ${args.radio}`, async () => {
@@ -750,16 +812,16 @@ describe("Formation - ReviewStep", () => {
             hasNonprofitBoardMembers: true,
             [args.radio]: "IN_FORM",
             [args.terms]: terms,
-          }
+          },
         );
         const radioReviewSection = within(screen.getByTestId(args.radio));
         expect(
-          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body)
+          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body),
         ).toBeInTheDocument();
         expect(
           radioReviewSection.getByText(
-            `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
-          )
+            `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`,
+          ),
         ).toBeInTheDocument();
         expect(screen.getByText(terms)).toBeInTheDocument();
       });
@@ -771,12 +833,14 @@ describe("Formation - ReviewStep", () => {
             hasNonprofitBoardMembers: true,
             [args.radio]: "IN_FORM",
             [args.terms]: "",
-          }
+          },
         );
         const termsReviewSection = within(screen.getByTestId(`${args.radio}-terms`));
-        expect(termsReviewSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
         expect(
-          termsReviewSection.getByText(`${Config.formation.nonprofitProvisions.description}:`)
+          termsReviewSection.getByText(Config.formation.general.notEntered),
+        ).toBeInTheDocument();
+        expect(
+          termsReviewSection.getByText(`${Config.formation.nonprofitProvisions.description}:`),
         ).toBeInTheDocument();
       });
     });
@@ -785,7 +849,9 @@ describe("Formation - ReviewStep", () => {
   describe("when foreign corporation", () => {
     it("displays foreign cert of good standing", async () => {
       await renderStep({ businessPersona: "FOREIGN", legalStructureId: "c-corporation" }, {});
-      expect(screen.getByText(Config.formation.fields.foreignGoodStandingFile.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.foreignGoodStandingFile.label),
+      ).toBeInTheDocument();
     });
 
     it("displays will practice law", async () => {
@@ -797,12 +863,16 @@ describe("Formation - ReviewStep", () => {
   describe("when foreign nonprofit", () => {
     it("displays foreign cert of good standing", async () => {
       await renderStep({ businessPersona: "FOREIGN", legalStructureId: "nonprofit" }, {});
-      expect(screen.getByText(Config.formation.fields.foreignGoodStandingFile.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.foreignGoodStandingFile.label),
+      ).toBeInTheDocument();
     });
 
     it("does not display will practice law", async () => {
       await renderStep({ businessPersona: "FOREIGN", legalStructureId: "nonprofit" }, {});
-      expect(screen.queryByText(Config.formation.fields.willPracticeLaw.label)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.fields.willPracticeLaw.label),
+      ).not.toBeInTheDocument();
     });
   });
 });

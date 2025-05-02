@@ -301,7 +301,7 @@ export const generatev54ProfileData = (overrides: Partial<v54ProfileData>): v54P
 };
 
 export const generatev54FormationFormData = (
-  overrides: Partial<v54FormationFormData>
+  overrides: Partial<v54FormationFormData>,
 ): v54FormationFormData => {
   return {
     businessSuffix: undefined,

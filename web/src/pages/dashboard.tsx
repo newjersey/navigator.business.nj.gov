@@ -106,7 +106,7 @@ const DashboardPage = (props: Props): ReactElement => {
       ) {
         const hasViolations = await api.checkElevatorViolations(
           business.profileData.communityAffairsAddress.streetAddress1,
-          business.profileData.communityAffairsAddress.municipality.id
+          business.profileData.communityAffairsAddress.municipality.id,
         );
         setHasElevatorViolations(hasViolations);
       }

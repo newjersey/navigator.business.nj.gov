@@ -50,7 +50,9 @@ jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn()
 
 const Config = getMergedConfig();
 
-const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
+const createDisplayContent = (
+  sidebar?: Record<string, SidebarCardContent>,
+): RoadmapDisplayContent => {
   return {
     sidebarDisplayContent: sidebar ?? {
       welcome: generateSidebarCardContent({}),
@@ -99,7 +101,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
         />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -107,7 +109,9 @@ describe("<DashboardOnDesktop />", () => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
+      >
         <ThemeProvider theme={createTheme()}>
           <DashboardOnDesktop
             operateReferences={{}}
@@ -119,7 +123,7 @@ describe("<DashboardOnDesktop />", () => {
             licenseEvents={[]}
           />
         </ThemeProvider>
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -156,7 +160,10 @@ describe("<DashboardOnDesktop />", () => {
 
   it("shows task progress tag", () => {
     useMockRoadmap({
-      steps: [generateStep({ name: "step1", stepNumber: 1 }), generateStep({ name: "step2", stepNumber: 2 })],
+      steps: [
+        generateStep({ name: "step1", stepNumber: 1 }),
+        generateStep({ name: "step2", stepNumber: 2 }),
+      ],
       tasks: [
         generateTask({ id: "task1", name: "task1", stepNumber: 1 }),
         generateTask({ id: "task2", name: "task2", stepNumber: 1 }),
@@ -232,13 +239,15 @@ describe("<DashboardOnDesktop />", () => {
       renderDashboardComponent({});
 
       expect(screen.queryByTestId("hideableTasks")).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(operatingPhasesThatDisplayHideableRoadmapTasks)(
     "renders HideableTasks for %s that display HideableRoadmapTasks",
     (OperatingPhase) => {
-      const filteredIndustries = getIndustries().filter((industry) => industry.id !== "domestic-employer");
+      const filteredIndustries = getIndustries().filter(
+        (industry) => industry.id !== "domestic-employer",
+      );
       useMockBusiness({
         profileData: generateProfileData({
           operatingPhase: OperatingPhase,
@@ -249,12 +258,14 @@ describe("<DashboardOnDesktop />", () => {
       renderDashboardComponent({});
 
       expect(
-        screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText)
+        screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
       ).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText)
+        screen.queryByText(
+          Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+        ),
       ).not.toBeInTheDocument();
-    }
+    },
   );
 
   it("renders HideableTasks for domestic-employer industry with alternate heading", () => {
@@ -265,10 +276,12 @@ describe("<DashboardOnDesktop />", () => {
     renderDashboardComponent({});
 
     expect(
-      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText)
+      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
     ).not.toBeInTheDocument();
     expect(
-      screen.getByText(Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText)
+      screen.getByText(
+        Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+      ),
     ).toBeInTheDocument();
   });
 
@@ -287,20 +300,24 @@ describe("<DashboardOnDesktop />", () => {
                   operatingPhase: operatingPhase,
                 }),
                 onboardingFormProgress: "COMPLETED",
-              })
+              }),
             );
 
             renderDashboardComponent({});
 
             expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+              screen.queryByText(
+                Config.profileDefaults.fields.homeBasedBusiness.default.description,
+              ),
             ).not.toBeInTheDocument();
             expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+              screen.queryByText(
+                Config.profileDefaults.fields.homeBasedBusiness.default.altDescription,
+              ),
             ).not.toBeInTheDocument();
           });
         });
-      }
+      },
     );
 
     describe.each(operatingPhasesDisplayingHomeBasedPrompt)(
@@ -317,16 +334,20 @@ describe("<DashboardOnDesktop />", () => {
                   operatingPhase: operatingPhase,
                 }),
                 onboardingFormProgress: "COMPLETED",
-              })
+              }),
             );
 
             renderDashboardComponent({});
 
             expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+              screen.queryByText(
+                Config.profileDefaults.fields.homeBasedBusiness.default.description,
+              ),
             ).not.toBeInTheDocument();
             expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+              screen.queryByText(
+                Config.profileDefaults.fields.homeBasedBusiness.default.altDescription,
+              ),
             ).not.toBeInTheDocument();
           });
 
@@ -342,11 +363,15 @@ describe("<DashboardOnDesktop />", () => {
             renderStatefulDashboardComponent({ business });
 
             fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-            fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+            fireEvent.click(
+              screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText),
+            );
 
             await waitFor(() => {
               return expect(
-                screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+                screen.queryByText(
+                  Config.profileDefaults.fields.homeBasedBusiness.default.description,
+                ),
               ).not.toBeInTheDocument();
             });
             expect(currentBusiness().profileData.homeBasedBusiness).toEqual(true);
@@ -365,19 +390,21 @@ describe("<DashboardOnDesktop />", () => {
             renderStatefulDashboardComponent({ business });
 
             fireEvent.click(screen.getByTestId("home-based-business-radio-false"));
-            fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+            fireEvent.click(
+              screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText),
+            );
             await waitFor(() => {
               return expect(mockPush).toHaveBeenCalledWith(
                 { query: { deferredQuestionAnswered: "true" } },
                 undefined,
                 {
                   shallow: true,
-                }
+                },
               );
             });
           });
         });
-      }
+      },
     );
 
     describe.each(operatingPhasesDisplayingAltHomeBasedBusinessDescription)(
@@ -394,20 +421,24 @@ describe("<DashboardOnDesktop />", () => {
                   operatingPhase: operatingPhase,
                 }),
                 onboardingFormProgress: "COMPLETED",
-              })
+              }),
             );
 
             renderDashboardComponent({});
 
             expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+              screen.queryByText(
+                Config.profileDefaults.fields.homeBasedBusiness.default.description,
+              ),
             ).not.toBeInTheDocument();
             expect(
-              screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+              screen.getByText(
+                Config.profileDefaults.fields.homeBasedBusiness.default.altDescription,
+              ),
             ).toBeInTheDocument();
           });
         });
-      }
+      },
     );
   });
 
@@ -423,23 +454,30 @@ describe("<DashboardOnDesktop />", () => {
     it.each(operatingPhasesWithoutAnytimeActions)(
       "does not display anytime action section for %s",
       (phase) => {
-        useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
+        useMockBusiness(
+          generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }),
+        );
         renderDashboardComponent({
           anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
         expect(screen.queryByTestId("anytimeActionDropdown")).not.toBeInTheDocument();
-      }
+      },
     );
 
-    it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
-      useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
-      renderDashboardComponent({
-        anytimeActionTasks: [generateAnytimeActionTask({})],
-      });
+    it.each(operatingPhasesWithAnytimeActions)(
+      "displays anytime action section for %s",
+      (phase) => {
+        useMockBusiness(
+          generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }),
+        );
+        renderDashboardComponent({
+          anytimeActionTasks: [generateAnytimeActionTask({})],
+        });
 
-      expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();
-    });
+        expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();
+      },
+    );
   });
 
   it("displays step2 for guest mode user when business structure task is completed", () => {

@@ -108,14 +108,15 @@ export const taskIdLicenseNameMapping = {
   "consulting-firm-headhunter-reg": "Consulting Firms/Temporary Help Services-Consulting Firm",
   "temp-help-consulting-firm-combined-reg":
     "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service",
-  "temporary-help-service-firm-reg": "Consulting Firms/Temporary Help Services-Temporary Help Service",
+  "temporary-help-service-firm-reg":
+    "Consulting Firms/Temporary Help Services-Temporary Help Service",
   "search-licenses-employment-agency": "Employment & Personnel Service-Employment Agency",
   "funeral-registration": "Mortuary Science-Funeral Home",
   "oos-pharmacy-registration": "Pharmacy-Out of State Pharmacy",
 } as const;
 
 export const LicenseNameTaskIdMapping = Object.fromEntries(
-  Object.entries(taskIdLicenseNameMapping).map(([key, value]) => [value, key])
+  Object.entries(taskIdLicenseNameMapping).map(([key, value]) => [value, key]),
 );
 
 export type LicenseTaskId = keyof typeof taskIdLicenseNameMapping;

@@ -54,8 +54,8 @@ describe("<EinTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
@@ -84,9 +84,12 @@ describe("<EinTask />", () => {
 
     it("shows error on length validation failure", () => {
       renderPage();
-      const expectedErrorMessage = templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-        length: "9",
-      });
+      const expectedErrorMessage = templateEval(
+        Config.onboardingDefaults.errorTextMinimumNumericField,
+        {
+          length: "9",
+        },
+      );
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "12345" },
       });
@@ -127,8 +130,8 @@ describe("<EinTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
@@ -148,7 +151,9 @@ describe("<EinTask />", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
-      expect((screen.getByLabelText("Save your EIN") as HTMLInputElement).value).toEqual("12-3456789");
+      expect((screen.getByLabelText("Save your EIN") as HTMLInputElement).value).toEqual(
+        "12-3456789",
+      );
       expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
     });
 
@@ -185,8 +190,8 @@ describe("<EinTask />", () => {
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { showNeedsAccountModal: false, setShowNeedsAccountModal }
-        )
+          { showNeedsAccountModal: false, setShowNeedsAccountModal },
+        ),
       );
     };
 

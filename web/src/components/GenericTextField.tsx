@@ -53,7 +53,11 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
 export const GenericTextField = forwardRef(
   <T,>(
     props: GenericTextFieldProps<T>,
-    ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined
+    ref?:
+      | ((instance: HTMLDivElement | null) => void)
+      | RefObject<HTMLDivElement>
+      | null
+      | undefined,
   ): ReactElement => {
     const widthStyling =
       props.inputWidth === "reduced"
@@ -70,14 +74,15 @@ export const GenericTextField = forwardRef(
     let fieldOptions = props.fieldOptions;
 
     const value = useMemo(
-      () => (visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? ""),
-      [props.value, visualFilter]
+      () =>
+        visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? "",
+      [props.value, visualFilter],
     );
 
     const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
       props.fieldName,
       props.formContext,
-      props.errorTypes
+      props.errorTypes,
     );
 
     if (props.numericProps) {
@@ -115,7 +120,9 @@ export const GenericTextField = forwardRef(
         return ![
           validMinimumValue(returnedValue),
           returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
-          props.additionalValidationIsValid ? props.additionalValidationIsValid(returnedValue) : true,
+          props.additionalValidationIsValid
+            ? props.additionalValidationIsValid(returnedValue)
+            : true,
         ].some((i) => {
           return !i;
         });
@@ -128,7 +135,9 @@ export const GenericTextField = forwardRef(
 
     const isFieldValid = (currentValue: string): boolean => {
       const value = valueFilter ? valueFilter(currentValue) : currentValue;
-      const isValidAdditional = additionalValidationIsValid ? additionalValidationIsValid(value) : true;
+      const isValidAdditional = additionalValidationIsValid
+        ? additionalValidationIsValid(value)
+        : true;
       const isValidRequired = props.required ? !!value.trim() : true;
       return isValidAdditional && isValidRequired;
     };
@@ -185,12 +194,12 @@ export const GenericTextField = forwardRef(
 
         <div aria-live="polite" className="screen-reader-only">
           {error && (
-            <div>{`${Config.siteWideErrorMessages.errorScreenReaderInlinePrefix} ${camelCaseToSentence(
-              props.fieldName
-            )}, ${props.validationText}`}</div>
+            <div>{`${
+              Config.siteWideErrorMessages.errorScreenReaderInlinePrefix
+            } ${camelCaseToSentence(props.fieldName)}, ${props.validationText}`}</div>
           )}
         </div>
       </div>
     );
-  }
+  },
 );

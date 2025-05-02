@@ -53,7 +53,8 @@ export const OpportunityCard = (props: Props): ReactElement => {
     if (!business || !updateQueue) {
       return;
     }
-    const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
+    const propertyToUpdate =
+      props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     analytics.event.for_you_card_hide_button.click.hide_card();
     await updateQueue
       .queuePreferences({
@@ -66,7 +67,8 @@ export const OpportunityCard = (props: Props): ReactElement => {
     if (!business || !updateQueue) {
       return;
     }
-    const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
+    const propertyToUpdate =
+      props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     analytics.event.for_you_card_unhide_button.click.unhide_card();
     await updateQueue
       .queuePreferences({
@@ -116,13 +118,22 @@ export const OpportunityCard = (props: Props): ReactElement => {
           </div>
         </div>
         <div className="text-normal font-body-md margin-bottom-105">
-          <UnStyledButton isUnderline onClick={routeToPage} dataTestid={`${props.opportunity.id}-button`}>
+          <UnStyledButton
+            isUnderline
+            onClick={routeToPage}
+            dataTestid={`${props.opportunity.id}-button`}
+          >
             {props.opportunity.name}
           </UnStyledButton>
         </div>
-        <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
+        <OpportunityCardStatus
+          dueDate={props.opportunity.dueDate}
+          status={props.opportunity.status}
+        />
         <div className="override-p-2xs text-base-dark">
-          {truncate(props.opportunity.sidebarCardBodyText, { length: OPPORTUNITY_CARD_MAX_BODY_CHARS })}
+          {truncate(props.opportunity.sidebarCardBodyText, {
+            length: OPPORTUNITY_CARD_MAX_BODY_CHARS,
+          })}
         </div>
       </div>
     </>

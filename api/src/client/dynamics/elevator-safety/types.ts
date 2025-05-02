@@ -5,7 +5,7 @@ export interface ElevatorSafetyInspectionClient {
 export interface ElevatorSafetyRegistrationClient {
   getElevatorRegistrationsForBuilding: (
     accessToken: string,
-    propertyInterestId: string
+    propertyInterestId: string,
   ) => Promise<ElevatorRegistration[]>;
 }
 
@@ -13,7 +13,7 @@ export interface ElevatorSafetyViolationsClient {
   getViolationsForPropertyInterest: (
     accessToken: string,
     address: string,
-    municipalityId: string
+    municipalityId: string,
   ) => Promise<boolean>;
 }
 
@@ -53,5 +53,5 @@ export type ElevatorSafetyInspectionInfo = (address: string) => Promise<Elevator
 
 export type ElevatorRegistrationInfo = (
   address: string,
-  zipCode: string
+  zipCode: string,
 ) => Promise<ElevatorRegistrationSummary>;

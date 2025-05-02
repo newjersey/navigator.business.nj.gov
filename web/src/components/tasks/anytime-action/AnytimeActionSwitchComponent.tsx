@@ -15,7 +15,10 @@ export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
   // when this happens, the content in the markdown file will no longer render; let content know, and advise them to
   // delete the content in tax-clearance-certificate.md
   const isTaxClearanceCertificateEnabled = process.env.FEATURE_TAX_CLEARANCE_CERTIFICATE === "true";
-  if (isTaxClearanceCertificateEnabled && props.anytimeActionTask.filename === "tax-clearance-certificate")
+  if (
+    isTaxClearanceCertificateEnabled &&
+    props.anytimeActionTask.filename === "tax-clearance-certificate"
+  )
     return <AnytimeActionTaxClearanceCertificateElement anytimeAction={props.anytimeActionTask} />;
 
   const isABCETPApplicationEnabled = process.env.FEATURE_ABC_ETP_APPLICATION === "true";

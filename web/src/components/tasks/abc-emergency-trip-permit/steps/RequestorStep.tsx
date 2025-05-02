@@ -16,7 +16,9 @@ export const RequestorStep = (): ReactElement => {
   return (
     <form onSubmit={context.onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
       <div className={"padding-top-1 padding-bottom-3"}>
-        <Heading level={3}>{Config.abcEmergencyTripPermit.steps.requestor.requestorSection}</Heading>
+        <Heading level={3}>
+          {Config.abcEmergencyTripPermit.steps.requestor.requestorSection}
+        </Heading>
         {Config.abcEmergencyTripPermit.steps.requestor.requestorSectionSubHeading}
       </div>
 

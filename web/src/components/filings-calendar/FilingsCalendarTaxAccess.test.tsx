@@ -56,8 +56,8 @@ const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
         </WithStatefulUserData>
       </ThemeProvider>,
       IsAuthenticated.TRUE,
-      { showNeedsAccountModal: false, setShowNeedsAccountModal }
-    )
+      { showNeedsAccountModal: false, setShowNeedsAccountModal },
+    ),
   );
 };
 
@@ -68,8 +68,8 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (business: Business): void
         <FilingsCalendarTaxAccess />
       </WithStatefulUserData>,
       IsAuthenticated.FALSE,
-      { showNeedsAccountModal: false, setShowNeedsAccountModal }
-    )
+      { showNeedsAccountModal: false, setShowNeedsAccountModal },
+    ),
   );
 };
 
@@ -126,7 +126,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           completedFilingPayment: !!params.formedInNavigator,
           getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator }),
         },
-        legalStructureId as FormationLegalType
+        legalStructureId as FormationLegalType,
       );
     }
 
@@ -137,7 +137,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
               return obj.displayTaxAccessButton;
-            })
+            }),
           ).id,
           taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
           encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
@@ -149,7 +149,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         }),
         formationData: formationData,
         taxFilingData: generateTaxFilingData({ state: undefined }),
-      })
+      }),
     );
   };
 
@@ -203,7 +203,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           registeredISO: getCurrentDateISOString(),
           state: "SUCCESS",
         }),
-      })
+      }),
     );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
@@ -223,7 +223,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
         }),
-      })
+      }),
     );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
@@ -248,7 +248,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           taxFilingData: generateTaxFilingData({
             registeredISO: undefined,
           }),
-        })
+        }),
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
     });
@@ -260,7 +260,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           taxFilingData: generateTaxFilingData({
             registeredISO: getCurrentDateISOString(),
           }),
-        })
+        }),
       );
 
       expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
@@ -277,7 +277,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
             registeredISO: undefined,
             errorField: undefined,
           }),
-        })
+        }),
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
@@ -291,7 +291,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
             state: undefined,
             registeredISO: undefined,
           }),
-        })
+        }),
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();

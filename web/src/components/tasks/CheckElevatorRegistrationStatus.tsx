@@ -21,15 +21,19 @@ interface Props {
 
 const Config = getMergedConfig();
 const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string> = {
-  NO_PROPERTY_INTEREST_FOUND: Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_ELEVATOR_REGISTRATIONS_FOUND: Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
+  NO_PROPERTY_INTEREST_FOUND:
+    Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
+  NO_ELEVATOR_REGISTRATIONS_FOUND:
+    Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
   FIELDS_REQUIRED: Config.elevatorRegistrationSearchTask.errorTextFieldsRequired,
   SEARCH_FAILED: Config.elevatorRegistrationSearchTask.errorTextSearchFailed,
 };
 
 export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
   const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({ address1: "" });
-  const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
+  const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(
+    undefined,
+  );
   const { business, updateQueue } = useUserData();
 
   const formattedMunicipalities = props.municipalities.map((municipality) => {
@@ -97,7 +101,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
   };
 
   const handleChangeForKey = (
-    key: keyof ElevatorSafetyAddress
+    key: keyof ElevatorSafetyAddress,
   ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
     return (event: ChangeEvent<HTMLInputElement>): void => {
       setFormValues((prevValues) => {
@@ -152,7 +156,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="municipality">{Config.elevatorRegistrationSearchTask.municipalityLabel}</label>
+            <label htmlFor="municipality">
+              {Config.elevatorRegistrationSearchTask.municipalityLabel}
+            </label>
             <MunicipalityDropdown
               fieldName={"municipalities"}
               municipalities={formattedMunicipalities}

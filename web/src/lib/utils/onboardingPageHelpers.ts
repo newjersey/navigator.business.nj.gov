@@ -28,7 +28,7 @@ export const flowQueryParamIsValid = (flow: string): boolean => {
 export const pageQueryParamisValid = (
   onboardingFlows: Record<FlowType, OnboardingFlow>,
   business: Business,
-  page: number
+  page: number,
 ): boolean => {
   const hasAnsweredBusinessPersona = business?.profileData.businessPersona !== undefined;
   const flow = getFlow(business.profileData);

@@ -1,4 +1,8 @@
-import { swrPrefixToIgnore, userDataPrefix, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import {
+  swrPrefixToIgnore,
+  userDataPrefix,
+  UserDataStorageFactory,
+} from "@/lib/storage/UserDataStorage";
 import { generateUserData } from "@businessnjgovnavigator/shared";
 
 describe("userDataStorage", () => {

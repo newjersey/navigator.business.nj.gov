@@ -9,7 +9,10 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { DataFormErrorMapContext, DataFormErrorMapFields } from "@/contexts/dataFormErrorMapContext";
+import {
+  DataFormErrorMapContext,
+  DataFormErrorMapFields,
+} from "@/contexts/dataFormErrorMapContext";
 import { createReducedFieldStates } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -90,13 +93,13 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
   const displayBusinessName = (): boolean => {
     return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-      "businessName"
+      "businessName",
     );
   };
 
   const displayResponsibleOwnerName = (): boolean => {
     return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-      "responsibleOwnerName"
+      "responsibleOwnerName",
     );
   };
 
@@ -205,7 +208,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         setIsLoading(false);
       }
     },
-    () => analytics.event.tax_calendar.submit.tax_calendar_validation_error()
+    () => analytics.event.tax_calendar.submit.tax_calendar_validation_error(),
   );
 
   if (profileData.legalStructureId === undefined) return <></>;
@@ -239,7 +242,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             </Alert>
           )}
 
-          {(apiFailed || has_CMS_ONLY_fakeError) && <Alert variant={"error"}> {errorAlert()}</Alert>}
+          {(apiFailed || has_CMS_ONLY_fakeError) && (
+            <Alert variant={"error"}> {errorAlert()}</Alert>
+          )}
 
           <TaxAccessBody isStepOne={false} showHeader={canMoveToPrevStep} />
 
@@ -303,7 +308,11 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 }}
               />
             </div>
-            <TaxId validationText={Config.taxAccess.failedTaxIdHelper} required inputWidth={"full"} />
+            <TaxId
+              validationText={Config.taxAccess.failedTaxIdHelper}
+              required
+              inputWidth={"full"}
+            />
           </WithErrorBar>
           <div
             className="margin-top-3 width-full"
@@ -319,7 +328,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   {Config.taxAccess.stepTwoBackButton}
                 </SecondaryButton>
               )}
-              <div className={`mobile-lg:margin-left-auto ${canMoveToPrevStep ? "" : "width-full"}`}>
+              <div
+                className={`mobile-lg:margin-left-auto ${canMoveToPrevStep ? "" : "width-full"}`}
+              >
                 <PrimaryButton
                   isColor="primary"
                   isRightMarginRemoved={true}

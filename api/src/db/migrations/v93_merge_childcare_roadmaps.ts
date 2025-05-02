@@ -19,8 +19,12 @@ export const migrate_v92_to_v93 = (v92Data: v92UserData): v93UserData => {
     profileData: {
       ...v92Data.profileData,
       industryId:
-        v92Data.profileData.industryId === "family-daycare" ? "daycare" : v92Data.profileData.industryId,
-      isChildcareForSixOrMore: ["family-daycare", "daycare"].includes(v92Data.profileData.industryId ?? "")
+        v92Data.profileData.industryId === "family-daycare"
+          ? "daycare"
+          : v92Data.profileData.industryId,
+      isChildcareForSixOrMore: ["family-daycare", "daycare"].includes(
+        v92Data.profileData.industryId ?? "",
+      )
         ? v92Data.profileData.industryId === "daycare"
         : undefined,
     },
@@ -297,7 +301,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v93BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 

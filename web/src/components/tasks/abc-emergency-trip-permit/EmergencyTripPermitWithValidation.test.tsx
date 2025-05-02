@@ -9,7 +9,7 @@ describe("EmergencyPermitWithValidation", () => {
       render(
         <ThemeProvider theme={createTheme()}>
           <EmergencyTripPermitWithValidation />
-        </ThemeProvider>
+        </ThemeProvider>,
       );
     };
 
@@ -17,11 +17,15 @@ describe("EmergencyPermitWithValidation", () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Review Step, State: Incomplete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Review Step, State: Incomplete",
+        }),
       );
       await user.click(screen.getByRole("button", { name: "Submit & Pay" }));
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Error" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Error",
+        }),
       );
       expect(screen.getByText("Enter a Requestor First Name.")).toBeInTheDocument();
     });
@@ -30,11 +34,15 @@ describe("EmergencyPermitWithValidation", () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Review Step, State: Incomplete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Review Step, State: Incomplete",
+        }),
       );
       await user.click(screen.getByRole("button", { name: "Submit & Pay" }));
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Error" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Error",
+        }),
       );
       expect(screen.queryByText("Enter a Business Address Line 2.")).not.toBeInTheDocument();
     });
@@ -43,18 +51,24 @@ describe("EmergencyPermitWithValidation", () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Review Step, State: Incomplete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Review Step, State: Incomplete",
+        }),
       );
       await user.click(screen.getByRole("button", { name: "Submit & Pay" }));
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Error" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Error",
+        }),
       );
       expect(screen.getByText("Enter a Requestor First Name.")).toBeInTheDocument();
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Trip Step, State: Error" })
+        screen.getByRole("tab", { name: "Formation Stepper Navigation: Trip Step, State: Error" }),
       );
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Error" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Error",
+        }),
       );
       expect(screen.getByText("Enter a Requestor First Name.")).toBeInTheDocument();
     });
@@ -63,7 +77,9 @@ describe("EmergencyPermitWithValidation", () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Incomplete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Incomplete",
+        }),
       );
       await user.click(screen.getByRole("textbox", { name: "Requestor First Name" }));
       await user.click(screen.getByRole("textbox", { name: "Requestor Last Name" }));
@@ -74,27 +90,33 @@ describe("EmergencyPermitWithValidation", () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Incomplete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Incomplete",
+        }),
       );
       await user.type(
         screen.getByRole("textbox", { name: "Requestor First Name" }),
-        "hereIsAVeryLongInputIHaveEnteredIntoAFieldThatCannotHandleIt"
+        "hereIsAVeryLongInputIHaveEnteredIntoAFieldThatCannotHandleIt",
       );
       await user.click(screen.getByRole("textbox", { name: "Requestor Last Name" }));
-      expect(screen.getByText("Requestor First Name must be 35 characters or fewer.")).toBeInTheDocument();
+      expect(
+        screen.getByText("Requestor First Name must be 35 characters or fewer."),
+      ).toBeInTheDocument();
     });
 
     it("displays error alert on review page if not all fields are successfully validated", async () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Review Step, State: Incomplete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Review Step, State: Incomplete",
+        }),
       );
       expect(screen.getByRole("alert", { name: "informational" })).toBeInTheDocument();
       await user.click(screen.getByRole("button", { name: "Submit & Pay" }));
       expect(screen.getByRole("alert", { name: "error" })).toBeInTheDocument();
       expect(
-        screen.getByText("Check the steps below for missing information or errors:")
+        screen.getByText("Check the steps below for missing information or errors:"),
       ).toBeInTheDocument();
     });
 
@@ -103,7 +125,10 @@ describe("EmergencyPermitWithValidation", () => {
       renderPage();
 
       await user.click(screen.getByRole("button", { name: "Save & Continue" }));
-      await user.type(screen.getByRole("textbox", { name: "Carrier Name (Business Name)" }), "carrier");
+      await user.type(
+        screen.getByRole("textbox", { name: "Carrier Name (Business Name)" }),
+        "carrier",
+      );
       await user.type(screen.getByRole("textbox", { name: "Requestor First Name" }), "firstName");
       await user.type(screen.getByRole("textbox", { name: "Requestor Last Name" }), "lastName");
       await user.type(screen.getByRole("textbox", { name: "Email Address" }), "email@email.com");
@@ -117,32 +142,46 @@ describe("EmergencyPermitWithValidation", () => {
       await user.type(screen.getByRole("textbox", { name: "VIN/Serial Number" }), "12345");
       await user.type(screen.getByRole("textbox", { name: "License Plate Number" }), "abc123");
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Review Step, State: Incomplete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Review Step, State: Incomplete",
+        }),
       );
       await user.click(screen.getByRole("button", { name: "Submit & Pay" }));
       expect(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Instructions Step, State: Complete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Instructions Step, State: Complete",
+        }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Complete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Complete",
+        }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Trip Step, State: Error" })
+        screen.getByRole("tab", { name: "Formation Stepper Navigation: Trip Step, State: Error" }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Billing Step, State: Complete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Billing Step, State: Complete",
+        }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Review Step, State: Error" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Review Step, State: Error",
+        }),
       ).toBeInTheDocument();
 
       await user.click(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Complete" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Complete",
+        }),
       );
       await user.clear(screen.getByRole("textbox", { name: "Carrier Name (Business Name)" }));
       await user.click(screen.getByRole("textbox", { name: "Requestor First Name" }));
       expect(
-        screen.getByRole("tab", { name: "Formation Stepper Navigation: Requestor Step, State: Error" })
+        screen.getByRole("tab", {
+          name: "Formation Stepper Navigation: Requestor Step, State: Error",
+        }),
       ).toBeInTheDocument();
     });
   });
