@@ -13,7 +13,7 @@ summaryDescriptionMd: >
   :::
 urlSlug: trucking-irp
 displayname: trucking-irp
-name: Register Your Vehicles Under the International Registration Plan (IRP)
+name: Register Your Vehicle(s) Under the International Registration Plan (IRP)
 id: trucking-irp
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: Register With the IRP
