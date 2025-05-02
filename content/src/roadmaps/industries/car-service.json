@@ -63,7 +63,8 @@
   ],
   "name": "Car Service",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-irp"
   ],
   "displayname": "car-service",
   "industryOnboardingQuestions": {
