@@ -85,6 +85,7 @@ module.exports = withBundleAnalyzer({
   },
   experimental: {
     largePageDataBytes: 1.28 * 1024 * 1024,
+    reactCompiler: true,
   },
   async redirects() {
     return [
