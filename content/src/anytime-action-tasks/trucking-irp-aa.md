@@ -5,7 +5,21 @@ name: Register Your Vehicle(s) Under the International Registration Plan (IRP)
 category:
   - Manage My Business Vehicles
 industryIds: []
-sectorIds: []
+sectorIds:
+  - transportation-and-warehousing
+  - manufacturing
+  - utilities
+  - mining-quarrying-and-oil-and-gas-extraction
+  - waste-management-and-Remediation
+  - construction
+  - wholesale-trade
+  - agriculture-forestry-fishing-and-hunting
+  - life-sciences
+  - cannabis
+  - arts-entertainment-and-recreation
+  - offshore-wind
+  - clean-energy
+  - retail-trade-and-ecommerce
 urlSlug: trucking-irp-aa
 summaryDescriptionMd: >-
   Before transporting passengers or hauling loads across state lines, your
