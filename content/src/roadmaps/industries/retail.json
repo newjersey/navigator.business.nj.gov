@@ -62,7 +62,8 @@
     "other-businesses-CRTK-survey",
     "retail-pesticide-dealer-licensing",
     "business-vehicle-title-reg",
-    "inspect-boiler"
+    "inspect-boiler",
+    "business-vehicle-irp"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {
