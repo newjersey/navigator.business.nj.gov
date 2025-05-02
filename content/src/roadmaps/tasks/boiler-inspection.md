@@ -4,6 +4,9 @@ notesMd: >-
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.ndgv526k6eks
 
 
+  5.2: Updating callout to "note", or quick ref callout
+
+
   4.21: SME approved, publishing task
 
   4.18: Revisions made with guidance from Jess
