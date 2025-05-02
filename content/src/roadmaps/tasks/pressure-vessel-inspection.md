@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZ\
-  Z0/edit?pli=1&tab=t.bp49p3vkr1w0"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.bp49p3vkr1w0
+
+
+  Want to use the quick reference callout but currently using the 'note' callout because it's the same color as the quick ref, as far as I understand
 summaryDescriptionMd: Your pressure vessels may need to be inspected regularly
   to ensure they are working safely. If a pressure vessel is newly installed or
   recently replaced, **it must be registered and inspected within 30 days**.
