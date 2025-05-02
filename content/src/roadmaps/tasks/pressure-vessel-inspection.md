@@ -47,7 +47,7 @@ After your pressure vessel is registered and passes the first inspection, a Stat
 
 Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected. 
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="note" }
 
 **To register a pressure vessel and schedule the first inspection**: Call the NJ Bureau of Boiler and Pressure Vessel Compliance at (609) 292-2921.
 
