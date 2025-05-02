@@ -41,7 +41,7 @@ Additionally, vehicles that qualify for IRP registration must also meet **at lea
 - Truck information, such as the Vehicle Identification Number (VIN#), fuel type, number of axles, and more
 - Mileage traveled in each state for the past year
 
-Fill out form IRP-7 and email it to mcscustomerservice@mvc.nj.gov, or mail it to:
+Fill out form IRP-7, linked at the bottom of the page, and email it to mcscustomerservice@mvc.nj.gov, or mail it to:
 
 &nbsp;
 
