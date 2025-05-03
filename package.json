@@ -209,7 +209,7 @@
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
     "rimraf": "5.0.10",
-    "sass": "1.86.3",
+    "sass": "1.87.0",
     "sass-loader": "14.2.1",
     "seedrandom": "^3.0.5",
     "semantic-release": "19.0.5",
