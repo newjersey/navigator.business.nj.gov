@@ -74,6 +74,7 @@ export const XrayRegistrationTask = (props: Props): ReactElement => {
   };
 
   const onSubmit = (facilityDetails: FacilityDetails): void => {
+    setError(undefined);
     if (!allFieldsHaveValues(facilityDetails)) {
       setError("FIELDS_REQUIRED");
       return;
