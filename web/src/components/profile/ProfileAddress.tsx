@@ -158,6 +158,7 @@ export const ProfileAddress = (): ReactElement => {
           </div>
         </div>
       )}
+      <hr aria-hidden={true} />
     </>
   );
 };
