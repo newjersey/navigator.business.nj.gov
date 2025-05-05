@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url": "/xray_by_address?partialaddr=123%20Second%20Street&zip=12345"
+    "url": "/xray_by_address?partialaddr=123%20Fourth%20Street&zip=12345"
   },
   "response": {
     "status": 200,

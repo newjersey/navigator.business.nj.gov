@@ -86,7 +86,7 @@ export const XrayRegistrationSummary = (props: Props): ReactElement => {
             iconName={"event"}
             className={`${statusColorScheme[xrayData.status]?.iconColor} ${
               statusColorScheme[xrayData.status].iconBackground
-            }  height-3 width-3 padding-05 bg-error-extra-light radius-pill margin-right-1`}
+            }  height-3 width-3 padding-5px bg-error-extra-light radius-pill margin-right-1`}
           />
           <span className="font-open-sans-7">
             {getFormatedExpirationDate(Config, xrayData.expirationDate ?? "")}
@@ -102,7 +102,7 @@ export const XrayRegistrationSummary = (props: Props): ReactElement => {
               iconName={"build"}
               className={`${statusColorScheme[xrayData.status].iconColor} ${
                 statusColorScheme[xrayData.status].iconBackground
-              }  height-3 width-3 padding-05 bg-error-extra-light radius-pill margin-right-1`}
+              }  height-3 width-3 padding-5px bg-error-extra-light radius-pill margin-right-1`}
             />
           }
         >
@@ -147,9 +147,9 @@ export const XrayRegistrationSummary = (props: Props): ReactElement => {
                     </li>
                     <li>
                       {templateEval(Config.xrayRegistrationTask.annualFee, {
-                        annualFee:
-                          machine.annualFee?.toString() ??
-                          Config.xrayRegistrationTask.noInformationAvailable,
+                        annualFee: machine.annualFee
+                          ? `$${machine.annualFee?.toString()}`
+                          : Config.xrayRegistrationTask.noInformationAvailable,
                       })}
                     </li>
                   </ul>

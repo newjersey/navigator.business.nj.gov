@@ -1,11 +1,16 @@
-import type { XrayRegistrationEntry } from "@businessnjgovnavigator/shared";
 import { consolidatedEntries } from "@client/dep/consolidatedEntries";
 import { filterByOwnerType } from "@client/dep/filterByOwnerType";
-import { filterByRegistrationNumber } from "@client/dep/filterByRegistrationNumber";
 import { filterByUndefinedDisposalDate } from "@client/dep/filterByUndefinedDisposalDate";
+import { filterSquashByRegNumAndAddress } from "@client/dep/filterSquashByRegNumAndAddress";
 import type { XrayRegistrationSearch, XrayRegistrationStatusLookup } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
-import type { XrayRegistrationStatus, XrayRegistrationStatusResponse } from "@shared/xray";
+import { getCurrentDate } from "@shared/dateHelpers";
+import type {
+  XrayRegistrationEntry,
+  XrayRegistrationStatus,
+  XrayRegistrationStatusResponse,
+} from "@shared/xray";
+import dayjs from "dayjs";
 
 const getStatusString = (
   status: string,
@@ -23,6 +28,16 @@ const getStatusString = (
       logWriter.LogError(`Xray Registration Lookup - Id:${logId} - Unsupported Status: ${status}`);
       return "INACTIVE";
   }
+};
+
+const modifyStatusIfExpiredAndActive = (
+  expirationDate: string | undefined,
+  status: string,
+): string => {
+  if (!expirationDate) return status;
+
+  const isExpired = dayjs(expirationDate).isBefore(getCurrentDate()) && status !== "Inactive";
+  return isExpired ? "Expired" : status;
 };
 
 export const XrayRegistrationLookupClient = (
@@ -65,14 +80,14 @@ export const XrayRegistrationLookupClient = (
     businessNameResults = filterByOwnerType(businessNameResults);
 
     // filter out duplicate entries
-    addressResults = filterByRegistrationNumber(addressResults);
-    businessNameResults = filterByRegistrationNumber(businessNameResults);
+    addressResults = filterSquashByRegNumAndAddress(addressResults, addressLine1);
+    businessNameResults = filterSquashByRegNumAndAddress(businessNameResults, addressLine1);
 
     // find the overlapping entries
     let consolidatedEntriesResults = consolidatedEntries(addressResults, businessNameResults);
 
     let consolidatedMachineDetails = [];
-    const status = consolidatedEntriesResults[0].status;
+    let status = consolidatedEntriesResults[0].status;
     const expirationDate = consolidatedEntriesResults[0].expirationDate ?? undefined;
     const deactivationDate = consolidatedEntriesResults[0].deactivationDate ?? undefined;
 
@@ -113,6 +128,9 @@ export const XrayRegistrationLookupClient = (
     consolidatedMachineDetails = consolidatedMachineDetails.sort((a, b) => {
       return a.name?.localeCompare(b.name || "") || 0;
     });
+
+    // to handle the case where the status is "Active" but the expiration date is in the past
+    status = modifyStatusIfExpiredAndActive(expirationDate, status);
 
     const xrayRegistrationStatusResponse = {
       machines: consolidatedMachineDetails,

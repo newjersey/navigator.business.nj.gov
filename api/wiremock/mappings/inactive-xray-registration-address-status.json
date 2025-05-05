@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/xray_by_address?partialaddr=123%20Second%20Street&zip=12345"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "inactive-xray-registration-address-status-response.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

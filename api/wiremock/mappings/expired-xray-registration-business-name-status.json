@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url": "/xray_by_business_name?namepart=Test%20Business%20Two"
+    "url": "/xray_by_business_name?namepart=Test%20Business%20Four"
   },
   "response": {
     "status": 200,

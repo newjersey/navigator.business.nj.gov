@@ -23,7 +23,7 @@ export const updateXrayRegistrationStatusFactory = (
           },
           taskProgress: {
             ...userData.businesses[userData.currentBusinessId].taskProgress,
-            "xray-reg": "COMPLETED",
+            "xray-reg": response.status ? "COMPLETED" : "TO_DO",
           },
         };
 
