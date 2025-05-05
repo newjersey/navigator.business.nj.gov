@@ -51,9 +51,12 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
     props.displayFundingCards &&
     props.certifications.length + props.fundings.length === 0;
   const showCompleteRequiredTasksMsg =
-    !props.displayCertificationsCards && !props.displayFundingCards && props.sideBarCards.length === 0;
+    !props.displayCertificationsCards &&
+    !props.displayFundingCards &&
+    props.sideBarCards.length === 0;
   const getEmptyForYouMessageTopText = (): string => {
-    if (props.isRemoteSellerWorker) return Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText;
+    if (props.isRemoteSellerWorker)
+      return Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText;
     if (showCompleteRequiredTasksMsg) return Config.dashboardDefaults.completeRequiredTasksText;
     if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesHeader;
     return "";
@@ -67,7 +70,8 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
     showEmptyOpportunitiesMsg || showCompleteRequiredTasksMsg || props.isRemoteSellerWorker;
   const renderFundingCards = props.displayFundingCards;
   const renderCertificationsCards = props.displayCertificationsCards;
-  const renderHiddenOpportunitiesAccordian = props.displayCertificationsCards || props.displayFundingCards;
+  const renderHiddenOpportunitiesAccordian =
+    props.displayCertificationsCards || props.displayFundingCards;
   const renderFundingsInHiddenOpportunitiesAccordian = props.displayFundingCards;
   const renderLearnMoreFundingOpportunities = props.displayFundingCards;
 
@@ -139,7 +143,9 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
               isColor={"accent-cooler"}
               isRightMarginRemoved={true}
               isFullWidthOnDesktop={true}
-              onClick={(): void => openInNewTab(Config.dashboardDefaults.learnMoreFundingOpportunitiesLink)}
+              onClick={(): void =>
+                openInNewTab(Config.dashboardDefaults.learnMoreFundingOpportunitiesLink)
+              }
             >
               {Config.dashboardDefaults.learnMoreFundingOpportunitiesText}
             </PrimaryButton>
@@ -173,7 +179,9 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
               }}
             >
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />}
+                expandIcon={
+                  <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />
+                }
                 aria-controls="hidden-opportunity-content"
                 id="hidden-opportunity-header"
                 data-testid="hidden-opportunity-header"
@@ -190,11 +198,15 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
               </AccordionSummary>
               <AccordionDetails data-testid="hidden-opportunities">
                 {props.hiddenCertifications.map((cert) => {
-                  return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
+                  return (
+                    <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
+                  );
                 })}
                 {renderFundingsInHiddenOpportunitiesAccordian &&
                   props.hiddenFundings.map((funding) => {
-                    return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
+                    return (
+                      <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
+                    );
                   })}
               </AccordionDetails>
             </Accordion>

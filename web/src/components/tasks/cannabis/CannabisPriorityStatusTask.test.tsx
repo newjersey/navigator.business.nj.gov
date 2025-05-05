@@ -3,7 +3,10 @@
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
+import {
+  noneOfTheAbovePriorityId,
+  priorityTypesObj,
+} from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import { getTaskStatusUpdatedMessage, templateEval } from "@/lib/utils/helpers";
 import { generateTask, generateTaskLink } from "@/test/factories";
@@ -30,8 +33,8 @@ const renderPage = (task: Task): void => {
       <WithStatefulUserData initialUserData={generateUserData({})}>
         <CannabisPriorityStatusTask task={task} />
       </WithStatefulUserData>,
-      IsAuthenticated.TRUE
-    )
+      IsAuthenticated.TRUE,
+    ),
   );
 };
 
@@ -141,7 +144,10 @@ describe("<CannabisPriorityStatusTask />", () => {
   });
 
   it("task progress remains to-do when user navigates to the second tab", async () => {
-    const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityId]);
+    const randomPriorityType = randomElementFromArray([
+      ...allPriorityTypes,
+      noneOfTheAbovePriorityId,
+    ]);
 
     const task = generateTask({
       id: "123",
@@ -160,7 +166,10 @@ describe("<CannabisPriorityStatusTask />", () => {
   });
 
   it("navigates to and from second tab", async () => {
-    const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityId]);
+    const randomPriorityType = randomElementFromArray([
+      ...allPriorityTypes,
+      noneOfTheAbovePriorityId,
+    ]);
 
     const task = generateTask({
       id: "123",
@@ -202,7 +211,9 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     fireEvent.click(screen.getByText(C.completeTaskProgressButtonText));
     await waitFor(() => {
-      expect(within(screen.getByTestId("taskProgress")).getByTestId("COMPLETED")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("taskProgress")).getByTestId("COMPLETED"),
+      ).toBeInTheDocument();
     });
     expect(screen.getByText(getTaskStatusUpdatedMessage("COMPLETED"))).toBeInTheDocument();
   });
@@ -387,7 +398,9 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
 
     it("displays diversely-owned eligibility when minority/women or veteran priority types are selected", () => {
-      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([
+        ...priorityTypesObj.minorityOrWomen,
+      ]);
       const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
@@ -422,7 +435,9 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
 
     it("displays social equity eligibility when social equity types are selected", () => {
-      const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
+      const randomSocialEquityPriorityType = randomElementFromArray([
+        ...priorityTypesObj.socialEquity,
+      ]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
         type1: Config.cannabisPriorityStatus.socialEquity,
@@ -438,7 +453,9 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
 
     it("displays 2-part eligibility when minority/women AND impact zone are selected", () => {
-      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([
+        ...priorityTypesObj.minorityOrWomen,
+      ]);
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
       const eligibilityPhrase = templateEval(C.phrase2, {
@@ -458,8 +475,12 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
 
     it("displays 2-part eligibility when minority/women AND social equity are selected", () => {
-      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
-      const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([
+        ...priorityTypesObj.minorityOrWomen,
+      ]);
+      const randomSocialEquityPriorityType = randomElementFromArray([
+        ...priorityTypesObj.socialEquity,
+      ]);
 
       const eligibilityPhrase = templateEval(C.phrase2, {
         type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
@@ -478,8 +499,12 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
 
     it("displays 3-part eligibility when minority/women, impact zone, AND social equity are selected", () => {
-      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
-      const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([
+        ...priorityTypesObj.minorityOrWomen,
+      ]);
+      const randomSocialEquityPriorityType = randomElementFromArray([
+        ...priorityTypesObj.socialEquity,
+      ]);
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
       const eligibilityPhrase = templateEval(C.phrase3, {

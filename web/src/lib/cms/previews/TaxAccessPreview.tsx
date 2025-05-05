@@ -60,8 +60,8 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
         <TaxAccessStepOne moveToNextStep={(): void => {}} />
 
         <div>
-          This is a preview of Step Two with a <span className="text-bold">public filing</span> legal
-          structure:
+          This is a preview of Step Two with a <span className="text-bold">public filing</span>{" "}
+          legal structure:
         </div>
 
         <TaxAccessStepTwo
@@ -77,7 +77,8 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
         />
 
         <div>
-          This is a preview of Step Two with a <span className="text-bold">trade name</span> legal structure:
+          This is a preview of Step Two with a <span className="text-bold">trade name</span> legal
+          structure:
         </div>
 
         <TaxAccessStepTwo

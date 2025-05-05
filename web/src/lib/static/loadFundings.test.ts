@@ -1,4 +1,8 @@
-import { loadAllFundings, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
+import {
+  loadAllFundings,
+  loadAllFundingUrlSlugs,
+  loadFundingByUrlSlug,
+} from "@/lib/static/loadFundings";
 import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 
@@ -96,7 +100,7 @@ describe("loadFundings", () => {
             contentMd: "Some content description 2",
             sidebarCardBodyText: "",
           },
-        ])
+        ]),
       );
     });
   });
@@ -132,7 +136,7 @@ describe("loadFundings", () => {
         expect.arrayContaining([
           { params: { fundingUrlSlug: "some-url-slug-1" } },
           { params: { fundingUrlSlug: "some-url-slug-2" } },
-        ])
+        ]),
       );
     });
   });

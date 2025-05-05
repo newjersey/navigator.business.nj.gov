@@ -42,7 +42,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
       foreignStateOfFormation: undefined,
       agentOfficeAddressMunicipality: undefined,
       signers: ["s-corporation", "c-corporation", "limited-partnership"].includes(
-        props.profileData.legalStructureId ?? ""
+        props.profileData.legalStructureId ?? "",
       )
         ? undefined
         : signers.map((signer) => {
@@ -53,7 +53,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
             };
           }),
       incorporators: ["s-corporation", "c-corporation", "limited-partnership"].includes(
-        props.profileData.legalStructureId ?? ""
+        props.profileData.legalStructureId ?? "",
       )
         ? signers.map((signer) => {
             return {
@@ -67,7 +67,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
           })
         : undefined,
       members: ["limited-partnership", "limited-liability-partnership"].includes(
-        props.profileData.legalStructureId ?? ""
+        props.profileData.legalStructureId ?? "",
       )
         ? undefined
         : members.map((member) => {
@@ -535,7 +535,9 @@ export const v97generatorUser = (overrides: Partial<v97BusinessUser>): v97Busine
   };
 };
 
-export const v97generateFormationAddress = (overrides: Partial<v97FormationAddress>): v97FormationAddress => {
+export const v97generateFormationAddress = (
+  overrides: Partial<v97FormationAddress>,
+): v97FormationAddress => {
   return {
     addressLine1: `some-members-address-1-${randomInt()}`,
     addressLine2: `some-members-address-2-${randomInt()}`,
@@ -547,7 +549,9 @@ export const v97generateFormationAddress = (overrides: Partial<v97FormationAddre
   };
 };
 
-export const v97generateFormationMember = (overrides: Partial<v97FormationMember>): v97FormationMember => {
+export const v97generateFormationMember = (
+  overrides: Partial<v97FormationMember>,
+): v97FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -634,9 +638,11 @@ export const createEmptyFormationFormData = (): v97FormationFormData => {
 
 export const v97generateFormationFormData = (
   overrides: Partial<v97FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v97FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return {
     businessName: `some-business-name-${randomInt()}`,
@@ -662,7 +668,8 @@ export const v97generateFormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [v97generateFormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [v97generateFormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -686,7 +693,7 @@ export const v97generateFormationFormData = (
 };
 
 export const v97generatorIndustrySpecificData = (
-  overrides: Partial<v97IndustrySpecificData>
+  overrides: Partial<v97IndustrySpecificData>,
 ): v97IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -744,7 +751,9 @@ export const v97generatorProfileData = (overrides: Partial<v97ProfileData>): v97
   };
 };
 
-export const v97TaxFilingDataGenerator = (overrides: Partial<v97TaxFilingData>): v97TaxFilingData => {
+export const v97TaxFilingDataGenerator = (
+  overrides: Partial<v97TaxFilingData>,
+): v97TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -758,7 +767,7 @@ export const v97TaxFilingDataGenerator = (overrides: Partial<v97TaxFilingData>):
 
 export const v97FormationData = (
   overrides: Partial<v97FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v97FormationData => {
   return {
     formationFormData: v97generateFormationFormData({}, legalStructureId),

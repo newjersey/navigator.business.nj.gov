@@ -21,11 +21,11 @@ describe("updateOperatingPhase", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateOwningProfileData({}),
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
       expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
-        OperatingPhaseId.UP_AND_RUNNING_OWNING
+        OperatingPhaseId.UP_AND_RUNNING_OWNING,
       );
     });
   });
@@ -38,11 +38,11 @@ describe("updateOperatingPhase", () => {
             businessPersona: "FOREIGN",
             foreignBusinessTypeIds: ["employeesInNJ", "revenueInNJ", "transactionsInNJ"],
           }),
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
       expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
-        OperatingPhaseId.REMOTE_SELLER_WORKER
+        OperatingPhaseId.REMOTE_SELLER_WORKER,
       );
     });
   });
@@ -54,10 +54,12 @@ describe("updateOperatingPhase", () => {
           profileData: generateStartingProfileData({
             industryId: "domestic-employer",
           }),
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
-      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(OperatingPhaseId.DOMESTIC_EMPLOYER);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
+        OperatingPhaseId.DOMESTIC_EMPLOYER,
+      );
     });
   });
 
@@ -73,10 +75,12 @@ describe("updateOperatingPhase", () => {
           taskProgress: {
             [businessStructureTaskId]: "COMPLETED",
           },
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
-      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(OperatingPhaseId.NEEDS_TO_FORM);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
+        OperatingPhaseId.NEEDS_TO_FORM,
+      );
     });
 
     it("updates to FORMED operatingPhase when public filing business structure is selected and formed", () => {
@@ -91,7 +95,7 @@ describe("updateOperatingPhase", () => {
             [formationTaskId]: "COMPLETED",
             [businessStructureTaskId]: "COMPLETED",
           },
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
       expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(OperatingPhaseId.FORMED);
@@ -108,7 +112,7 @@ describe("updateOperatingPhase", () => {
           taskProgress: {
             [businessStructureTaskId]: "COMPLETED",
           },
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
       expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(OperatingPhaseId.FORMED);
@@ -126,10 +130,12 @@ describe("updateOperatingPhase", () => {
             [formationTaskId]: "COMPLETED",
             [businessStructureTaskId]: "COMPLETED",
           },
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
-      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(OperatingPhaseId.UP_AND_RUNNING);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
+        OperatingPhaseId.UP_AND_RUNNING,
+      );
     });
 
     it("stays in UP_AND_RUNNING operatingPhase when not a public filing business structure is selected", () => {
@@ -143,10 +149,12 @@ describe("updateOperatingPhase", () => {
           taskProgress: {
             [businessStructureTaskId]: "COMPLETED",
           },
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
-      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(OperatingPhaseId.UP_AND_RUNNING);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
+        OperatingPhaseId.UP_AND_RUNNING,
+      );
     });
 
     it("updates GUEST_MODE operatingPhase to NEEDS_BUSINESS_STRUCTURE operatingPhase", () => {
@@ -156,11 +164,11 @@ describe("updateOperatingPhase", () => {
             businessPersona: randomInt() % 2 ? "STARTING" : "FOREIGN",
             operatingPhase: OperatingPhaseId.GUEST_MODE,
           }),
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
       expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
-        OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE
+        OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
       );
     });
 
@@ -180,11 +188,11 @@ describe("updateOperatingPhase", () => {
           taskProgress: {
             [businessStructureTaskId]: "TO_DO",
           },
-        })
+        }),
       );
       const result = updateOperatingPhase(userData);
       expect(getCurrentBusiness(result).profileData.operatingPhase).toBe(
-        OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE
+        OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
       );
     });
   });

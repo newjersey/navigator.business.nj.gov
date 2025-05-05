@@ -20,7 +20,9 @@ describe("v130_remove_nexus_location_in_new_jersey", () => {
     const v129UserData = generateV129UserData({ businesses: { "biz-1": v129Business } });
 
     const v130 = migrate_v129_to_v130(v129UserData);
-    expect(v130.businesses[id].profileData.foreignBusinessTypeIds.includes("officeInNJ")).toBe(true);
+    expect(v130.businesses[id].profileData.foreignBusinessTypeIds.includes("officeInNJ")).toBe(
+      true,
+    );
   });
 
   it("removes officeInNJ from foreignBusinessIds if nexusLocationInNewJersey is false", () => {
@@ -37,7 +39,9 @@ describe("v130_remove_nexus_location_in_new_jersey", () => {
     const v129UserData = generateV129UserData({ businesses: { "biz-1": v129Business } });
 
     const v130 = migrate_v129_to_v130(v129UserData);
-    expect(v130.businesses[id].profileData.foreignBusinessTypeIds.includes("officeInNJ")).toBe(false);
+    expect(v130.businesses[id].profileData.foreignBusinessTypeIds.includes("officeInNJ")).toBe(
+      false,
+    );
   });
 
   it("doesn't add officeInNJ to foreignBusinessIds if it's already present", () => {

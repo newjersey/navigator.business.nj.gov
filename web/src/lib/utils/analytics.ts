@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { LegacyEventAction, LegacyEventCategory, LegacyEventLabel } from "@/lib/utils/analytics-legacy";
+import {
+  LegacyEventAction,
+  LegacyEventCategory,
+  LegacyEventLabel,
+} from "@/lib/utils/analytics-legacy";
 import analytics from "./analytics-base";
 
 export const GTM_ID = process.env.GOOGLE_TAG_MANAGER_ID;
@@ -279,7 +283,7 @@ export interface GTMEventData {
 
 const getSiteSectionFromUrl = (
   url: URL,
-  calendar_view?: "NONE" | "LIST" | "FULL"
+  calendar_view?: "NONE" | "LIST" | "FULL",
 ): OnSiteSection | undefined => {
   const path = url.pathname;
   if (path.includes("/onboarding")) {
@@ -326,7 +330,7 @@ class GTMTracker {
 
     const on_site_section: OnSiteSection | undefined = getSiteSectionFromUrl(
       new URL(window.location.href),
-      analytics.context.calendar_view
+      analytics.context.calendar_view,
     );
 
     const on_task_id: string | undefined = window.location.pathname.split("/tasks/")[1];
@@ -346,7 +350,7 @@ class GTMTracker {
           hostname: location.hostname,
           on_site_section,
           on_task_id,
-        } as Partial<Record<string, string>>
+        } as Partial<Record<string, string>>,
       );
     };
 
@@ -887,7 +891,11 @@ export default {
     },
     task_primary_call_to_action: {
       click: {
-        open_external_website: (click_text: string, clicked_to: URL | string, on_tab_name?: OnTabName) => {
+        open_external_website: (
+          click_text: string,
+          clicked_to: URL | string,
+          on_tab_name?: OnTabName,
+        ) => {
           eventRunner.track({
             event: "call_to_action_clicks",
             legacy_event_action: "click",

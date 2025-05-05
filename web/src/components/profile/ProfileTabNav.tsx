@@ -1,13 +1,18 @@
 import { ProfileTab } from "@/components/profile/ProfileTab";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
-import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import {
+  isNexusBusiness,
+  isOwningBusiness,
+  isStartingBusiness,
+} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useRef } from "react";
 
 const infoTab = "info";
+const permitsTab = "permits";
 const numbersTab = "numbers";
 const documentsTab = "documents";
 const notesTab = "notes";
@@ -26,18 +31,30 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   const shouldDisplayFormationDocuments =
     isStartingBusiness(props.business) &&
     LookupLegalStructureById(props.business?.profileData.legalStructureId).elementsToDisplay.has(
-      "formationDocuments"
+      "formationDocuments",
     );
+
+  const shouldShowPermits =
+    isNexusBusiness(props.business) ||
+    isOwningBusiness(props.business) ||
+    isStartingBusiness(props.business);
   const shouldShowDocuments = isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
 
   const tabRefs = {
     [infoTab]: useRef<HTMLButtonElement>(null),
+    [permitsTab]: useRef<HTMLButtonElement>(null),
     [numbersTab]: useRef<HTMLButtonElement>(null),
     [documentsTab]: useRef<HTMLButtonElement>(null),
     [notesTab]: useRef<HTMLButtonElement>(null),
   };
 
-  const availableTabs = [infoTab, numbersTab, ...(shouldShowDocuments ? [documentsTab] : []), notesTab];
+  const availableTabs = [
+    infoTab,
+    ...(shouldShowPermits ? [permitsTab] : []),
+    numbersTab,
+    ...(shouldShowDocuments ? [documentsTab] : []),
+    notesTab,
+  ];
 
   const handleKeyDown = (event: React.KeyboardEvent, currentTab: ProfileTabs): void => {
     const currentIndex = availableTabs.indexOf(currentTab);
@@ -87,6 +104,16 @@ export const ProfileTabNav = (props: Props): ReactElement => {
         onKeyDown={(e) => handleKeyDown(e, infoTab)}
         ref={tabRefs[infoTab]}
       />
+      {shouldShowPermits && (
+        <ProfileTab
+          {...props}
+          tab={permitsTab}
+          tabIcon="content-paste"
+          tabText={Config.profileDefaults.default.profileTabPermitsTitle}
+          onKeyDown={(e) => handleKeyDown(e, permitsTab)}
+          ref={tabRefs[permitsTab]}
+        />
+      )}
       <ProfileTab
         {...props}
         tab={numbersTab}

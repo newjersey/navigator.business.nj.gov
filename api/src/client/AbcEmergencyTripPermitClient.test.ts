@@ -8,7 +8,7 @@ jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 const generateApplicationInfo = (
-  overrides: Partial<EmergencyTripPermitApplicationInfo>
+  overrides: Partial<EmergencyTripPermitApplicationInfo>,
 ): EmergencyTripPermitApplicationInfo => {
   return {
     additionalConfirmemail: "test@test.com",
@@ -30,7 +30,7 @@ const generateApplicationInfo = (
     payerLastName: "Smith",
     payerPhoneNumber: "1234567890",
     payerStateAbbreviation: "NJ",
-    pdfAttach: "0",
+    shouldAttachPdfToEmail: false,
     permitDate: "01/02/03",
     permitStartTime: "9:15",
     pickupAddress: "Boolean Street",
@@ -39,7 +39,7 @@ const generateApplicationInfo = (
     pickupSiteName: "Bobs",
     pickupStateProvince: "NJ",
     pickupZipPostalCode: "12345",
-    requestAddress2: "",
+    requestorAddress2: "",
     requestorAddress1: "Another Street",
     requestorCity: "Fiji",
     requestorConfirmemail: "email98989@email.com",
@@ -50,7 +50,7 @@ const generateApplicationInfo = (
     requestorPhone: "0988765421",
     requestorStateProvince: "NJ",
     requestorZipPostalCode: "08850",
-    textMsg: "1",
+    shouldSendTextConfirmation: false,
     textMsgMobile: "8787878787",
     vehicleCountry: "US",
     vehicleLicensePlateNum: "123456",
@@ -69,7 +69,7 @@ describe("AbcEmergencyTripPermitClient", () => {
     jest.resetAllMocks();
     client = AbcEmergencyTripPermitClient(
       { account: "12345", key: "abcdef", baseUrl: "example.com/formation" },
-      DummyLogWriter
+      DummyLogWriter,
     );
   });
 

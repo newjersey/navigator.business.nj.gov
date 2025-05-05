@@ -37,7 +37,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["dateOfFormation"]["default"] =

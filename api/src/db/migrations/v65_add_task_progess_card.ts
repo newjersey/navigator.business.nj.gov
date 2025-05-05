@@ -18,7 +18,10 @@ export const migrate_v64_to_v65 = (v64Data: v64UserData): v65UserData => {
     ...v64Data,
     preferences: {
       ...v64Data.preferences,
-      visibleRoadmapSidebarCards: [...v64Data.preferences.visibleRoadmapSidebarCards, "task-progress"],
+      visibleRoadmapSidebarCards: [
+        ...v64Data.preferences.visibleRoadmapSidebarCards,
+        "task-progress",
+      ],
     },
 
     version: 65,
@@ -262,7 +265,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v65BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 

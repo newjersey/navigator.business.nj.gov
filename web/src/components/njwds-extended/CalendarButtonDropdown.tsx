@@ -39,7 +39,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
   };
 
   const handleClose = (
-    event: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
+    event: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>,
   ): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;

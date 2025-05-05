@@ -30,7 +30,7 @@ export const migrate_v123_to_v124 = (v123Data: v123UserData): v124UserData => {
     businesses: Object.fromEntries(
       Object.values(v123Data.businesses)
         .map((business) => migrate_v123Business_to_v124Business(business))
-        .map((currBusiness) => [currBusiness.id, currBusiness])
+        .map((currBusiness) => [currBusiness.id, currBusiness]),
     ),
     version: 124,
   };

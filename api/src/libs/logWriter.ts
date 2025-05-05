@@ -54,7 +54,7 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
       logGroupName: `/${groupName}/${logStream}`,
       logStreamName: `${logStream}-${getCurrentDateFormatted("YYYYMMDD")}`,
       awsRegion: region || process.env.AWS_REGION,
-    })
+    }),
   );
 
   const LogError = async (message: string, details?: AxiosError): Promise<void> => {
@@ -83,13 +83,15 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
 
   const FlushLog = async (): Promise<void> => {
     const winstonCloudWatchTransport = logger.transports.find((t) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return (t as unknown as any).name === `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`;
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      return (
+        (t as unknown as any).name === `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`
+      );
     });
     await new Promise((resolve) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (winstonCloudWatchTransport as unknown as any).kthxbye(resolve);
     });
+    /* eslint-enable @typescript-eslint/no-explicit-any */
   };
 
   return {

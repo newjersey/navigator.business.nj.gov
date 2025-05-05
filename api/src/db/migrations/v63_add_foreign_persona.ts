@@ -272,7 +272,11 @@ export const createEmptyFormationAddress = (): v63FormationAddress => {
   };
 };
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v63BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 

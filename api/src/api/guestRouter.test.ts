@@ -51,7 +51,9 @@ describe("guestRouter", () => {
           filings: [],
         }),
       });
-      const postedUserData = generateUserDataForBusiness(business, { user: generateUser({ id: "123" }) });
+      const postedUserData = generateUserDataForBusiness(business, {
+        user: generateUser({ id: "123" }),
+      });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);
       const expectedUserData = modifyCurrentBusiness(postedUserData, (business) => ({
@@ -79,7 +81,9 @@ describe("guestRouter", () => {
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
       expect(response.status).toEqual(StatusCodes.OK);
       expect(result.status).toEqual(result.status);
-      expect(parseDate(response.body.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")).toEqual(true);
+      expect(
+        parseDate(response.body.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute"),
+      ).toEqual(true);
     });
 
     it("returns Bad Request if name search returns BAD_INPUT", async () => {

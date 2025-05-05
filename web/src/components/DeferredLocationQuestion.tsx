@@ -23,7 +23,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   const updateQueue = userDataFromHook.updateQueue;
 
   const [showSuccessBanner, setShowSuccessBanner] = useState<boolean>(
-    props.CMS_ONLY_showSuccessBanner ?? false
+    props.CMS_ONLY_showSuccessBanner ?? false,
   );
   const [showEditLocation, setShowEditLocation] = useState<boolean>(false);
 

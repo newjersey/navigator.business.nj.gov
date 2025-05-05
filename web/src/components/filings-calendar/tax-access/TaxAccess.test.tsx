@@ -52,7 +52,7 @@ describe("<TaxAccess />", () => {
         initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
       >
         <TaxAccess onSuccess={(): void => {}} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -68,7 +68,7 @@ describe("<TaxAccess />", () => {
           profileData: generateProfileData({
             businessPersona: persona as BusinessPersona,
           }),
-        })
+        }),
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
@@ -120,13 +120,15 @@ describe("<TaxAccess />", () => {
       renderComponent(undefinedLegalStructureBusiness);
       expect(screen.queryByText(Config.taxAccess.stepOneErrorBanner)).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
+        screen.queryByText(
+          Config.profileDefaults.fields.legalStructureId.default.errorTextRequired,
+        ),
       ).not.toBeInTheDocument();
 
       fireEvent.blur(screen.getByLabelText("Business structure"));
       expect(screen.getByText(Config.taxAccess.stepOneErrorBanner)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
 
@@ -135,7 +137,7 @@ describe("<TaxAccess />", () => {
       fireEvent.click(screen.getByText(Config.taxAccess.stepOneNextButton));
       expect(screen.getByText(Config.taxAccess.stepOneErrorBanner)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired),
       ).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
@@ -147,7 +149,7 @@ describe("<TaxAccess />", () => {
       renderComponent(
         generateBusiness({
           profileData: generateOwningProfileData({}),
-        })
+        }),
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
@@ -159,7 +161,7 @@ describe("<TaxAccess />", () => {
       renderComponent(
         generateBusiness({
           profileData: generateOwningProfileData({}),
-        })
+        }),
       );
 
       expect(screen.queryByText(Config.taxAccess.stepTwoBackButton)).not.toBeInTheDocument();
@@ -189,7 +191,9 @@ describe("<TaxAccess />", () => {
       });
 
       expect(screen.getByText(Config.taxAccess.taxCalendarAccessBody)).toBeInTheDocument();
-      expect(screen.queryByLabelText(Config.taxAccess.legalStructureDropDownHeader)).not.toBeInTheDocument();
+      expect(
+        screen.queryByLabelText(Config.taxAccess.legalStructureDropDownHeader),
+      ).not.toBeInTheDocument();
     });
 
     it("moves back to step 1 on back button", async () => {

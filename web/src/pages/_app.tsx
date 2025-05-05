@@ -22,7 +22,11 @@ import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
+import {
+  BusinessPersona,
+  OperatingPhaseId,
+  RegistrationStatus,
+} from "@businessnjgovnavigator/shared";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
 import { DefaultSeo } from "next-seo";
@@ -48,7 +52,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
   const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(
-    UserDataStorageFactory().getRegistrationStatus()
+    UserDataStorageFactory().getRegistrationStatus(),
   );
 
   const setRegistrationStatusInStateAndStorage = (value: RegistrationStatus | undefined): void => {
@@ -145,19 +149,19 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const heroTitle = insertIndustryContent(
     config.starterKits.hero.title,
     pageProps.industry?.id,
-    pageProps.industry?.name
+    pageProps.industry?.name,
   );
 
   const description = insertIndustryContent(
     config.starterKits.seo.description,
     pageProps.industry?.id,
-    pageProps.industry?.name
+    pageProps.industry?.name,
   );
 
   const imageAlt = insertIndustryContent(
     config.starterKits.seo.imageAltText,
     pageProps.industry?.id,
-    pageProps.industry?.name
+    pageProps.industry?.name,
   );
 
   const DEFAULT_BASE_URL = "https://navigator.business.nj.gov/dashboard";

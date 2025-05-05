@@ -299,7 +299,7 @@ export const generatev49ProfileData = (overrides: Partial<v49ProfileData>): v49P
 };
 
 export const generatev49FormationFormData = (
-  overrides: Partial<v49FormationFormData>
+  overrides: Partial<v49FormationFormData>,
 ): v49FormationFormData => {
   return {
     businessSuffix: undefined,

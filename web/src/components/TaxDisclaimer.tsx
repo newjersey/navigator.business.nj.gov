@@ -12,7 +12,9 @@ export const TaxDisclaimer = (props: Props): ReactElement => {
 
   return (
     <>
-      {LookupLegalStructureById(props.legalStructureId).elementsToDisplay.has("taxIdDisclaimer") && (
+      {LookupLegalStructureById(props.legalStructureId).elementsToDisplay.has(
+        "taxIdDisclaimer",
+      ) && (
         <div className="margin-top-2" data-testid="tax-disclaimer">
           <Content>{Config.profileDefaults.fields.taxId.default.disclaimerMd}</Content>
         </div>

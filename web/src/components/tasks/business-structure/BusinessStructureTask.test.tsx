@@ -31,7 +31,8 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<BusinessStructureTask />", () => {
-  const content = "some content here\n\n" + "${businessStructureSelectionComponent}\n\n" + "more content";
+  const content =
+    "some content here\n\n" + "${businessStructureSelectionComponent}\n\n" + "more content";
   const taskId = "12345";
 
   beforeEach(() => {
@@ -47,18 +48,24 @@ describe("<BusinessStructureTask />", () => {
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
           <BusinessStructureTask task={task} />
         </WithStatefulUserData>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
   it("shows tooltip text on task progress checkbox", async () => {
     const business = generateBusiness({ taskProgress: { [taskId]: "TO_DO" } });
     renderTask(business);
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip),
+    ).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip),
+    ).not.toBeInTheDocument();
     await screen.findByText(Config.businessStructureTask.uncompletedTooltip);
   });
 
@@ -68,24 +75,40 @@ describe("<BusinessStructureTask />", () => {
       formationData: generateFormationData({ completedFilingPayment: true }),
     });
     renderTask(business);
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText),
+    ).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip),
+    ).not.toBeInTheDocument();
     await screen.findByText(Config.profileDefaults.default.lockedFieldTooltipText);
   });
 
   it("shows locked formation tooltip text on task progress checkbox when formation is completed", async () => {
     const business = generateBusiness({ taskProgress: { [taskId]: "COMPLETED" } });
     renderTask(business);
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip),
+    ).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip),
+    ).not.toBeInTheDocument();
     await screen.findByText(Config.businessStructureTask.completedTooltip);
   });
 
@@ -100,7 +123,7 @@ describe("<BusinessStructureTask />", () => {
     });
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("success-alert")).toContainHTML(
-      renderToStaticMarkup(Content({ children: successMessage }))
+      renderToStaticMarkup(Content({ children: successMessage })),
     );
   });
 
@@ -126,11 +149,15 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("saves and shows success banner when save button clicked", async () => {
-    const business = generateBusiness({ profileData: generateProfileData({ legalStructureId: undefined }) });
+    const business = generateBusiness({
+      profileData: generateProfileData({ legalStructureId: undefined }),
+    });
     renderTask(business);
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
     expect(screen.getByText(Config.businessStructureTask.radioQuestionHeader)).toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.completedHeader)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedHeader),
+    ).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
@@ -142,7 +169,9 @@ describe("<BusinessStructureTask />", () => {
     });
     expect(screen.queryByLabelText("Business structure")).not.toBeInTheDocument();
     expect(screen.getByText(Config.businessStructureTask.completedHeader)).toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.radioQuestionHeader)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.radioQuestionHeader),
+    ).not.toBeInTheDocument();
 
     expect(currentBusiness().profileData.legalStructureId).toEqual("limited-liability-company");
   });
@@ -178,7 +207,9 @@ describe("<BusinessStructureTask />", () => {
     });
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip),
+    ).not.toBeInTheDocument();
     await screen.findByText(Config.businessStructureTask.uncompletedTooltip);
   });
 
@@ -207,7 +238,7 @@ describe("<BusinessStructureTask />", () => {
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
     await waitFor(() => {
       expect(currentBusiness().profileData.operatingPhase).toEqual(
-        OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+        OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
       );
     });
   });
@@ -226,7 +257,7 @@ describe("<BusinessStructureTask />", () => {
       expect(currentBusiness().profileData.operatingPhase).toBeDefined();
     });
     expect(currentBusiness().profileData.operatingPhase).not.toEqual(
-      OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+      OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
     );
   });
 

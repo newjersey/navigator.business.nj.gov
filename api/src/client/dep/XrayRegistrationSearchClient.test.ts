@@ -127,7 +127,9 @@ describe("xrayRegistrationSearchClient", () => {
     const response = await client.searchByBusinessName(businessName);
 
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${encodeURIComponent(ORG_URL)}/xray_by_business_name?namepart=${encodeURIComponent(businessName)}`
+      `${encodeURIComponent(ORG_URL)}/xray_by_business_name?namepart=${encodeURIComponent(
+        businessName,
+      )}`,
     );
 
     expect(response).toEqual([
@@ -318,9 +320,9 @@ describe("xrayRegistrationSearchClient", () => {
     const response = await client.searchByAddress(addressLine1, addressZipCode);
 
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/xray_by_address?partialaddr=${encodeURIComponent(addressLine1)}&zip=${encodeURIComponent(
-        addressZipCode
-      )}`
+      `${ORG_URL}/xray_by_address?partialaddr=${encodeURIComponent(
+        addressLine1,
+      )}&zip=${encodeURIComponent(addressZipCode)}`,
     );
 
     expect(response).toEqual([

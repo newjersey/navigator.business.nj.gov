@@ -21,15 +21,32 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+          hint:
+            "This appears only in My Account, in the For You column, max char is 150 including
+            spaces, plain text only",
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "write-once-read-only-no-space",
+          required: true,
+        }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
       - label: Agency
         name: agency
         widget: relation
@@ -52,7 +69,12 @@ collections:
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
           - { label: "LGBTQ Owned", value: "lgbtq-owned" }
-      - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
+      - {
+          label: "is SBE (show if fewer than 120 employees)",
+          name: "isSbe",
+          widget: boolean,
+          default: false,
+        }
   - name: "archived-certification-opportunities"
     label: "Cert Opps - Archived"
     folder: "content/src/archived-certifications"
@@ -69,14 +91,31 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+          hint:
+            "This appears only in My Account, in the For You column, max char is 150 including
+            spaces, plain text only",
         }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "write-once-read-only-no-space",
+          required: true,
+        }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
       - label: Agency
         name: agency
         widget: relation
@@ -98,4 +137,9 @@ collections:
           - { label: "Minority Owned", value: "minority-owned" }
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
-      - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
+      - {
+          label: "is SBE (show if fewer than 120 employees)",
+          name: "isSbe",
+          widget: boolean,
+          default: false,
+        }

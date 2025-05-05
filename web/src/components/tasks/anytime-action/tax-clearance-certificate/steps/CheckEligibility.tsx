@@ -67,7 +67,11 @@ export const CheckEligibility = (props: Props): ReactElement => {
               {Config.taxClearanceCertificateShared.backButtonText}
             </SecondaryButton>
           </div>
-          <PrimaryButton isColor="primary" onClick={handleSaveButtonClick} isRightMarginRemoved={true}>
+          <PrimaryButton
+            isColor="primary"
+            onClick={handleSaveButtonClick}
+            isRightMarginRemoved={true}
+          >
             {Config.taxClearanceCertificateShared.saveButtonText}
           </PrimaryButton>
         </ActionBarLayout>

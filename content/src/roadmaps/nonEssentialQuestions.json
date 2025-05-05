@@ -12,7 +12,7 @@
     },
     {
       "id": "hotel-register",
-      "questionText": "Do you plan to own a hotel, motel, or guesthouse with 10 rooms or more? ",
+      "questionText": "Do you plan to own a hotel, motel, or guesthouse with 10 rooms or more?",
       "addOn": "lodging-hotel-registration"
     },
     {
@@ -143,7 +143,7 @@
     {
       "id": "business-vehicle-title-reg",
       "addOn": "business-vehicle",
-      "questionText": "Do you plan to either own or operate business vehicles in NJ? "
+      "questionText": "Do you plan to either own or operate business vehicles in NJ?"
     },
     {
       "id": "retail-pesticide-dealer-licensing",

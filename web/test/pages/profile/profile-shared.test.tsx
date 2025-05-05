@@ -125,11 +125,13 @@ describe("profile - shared", () => {
     render(
       <WithStatefulUserData initialUserData={undefined}>
         <Profile municipalities={[]} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
 
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.default.profileTabInfoTitle)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.default.profileTabInfoTitle),
+    ).not.toBeInTheDocument();
   });
 
   it("shows home-based business question with default description when applicable to industry", () => {
@@ -152,12 +154,13 @@ describe("profile - shared", () => {
     });
 
     renderPage({ business });
+    chooseTab("permits");
 
     expect(
-      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription),
     ).not.toBeInTheDocument();
   });
 
@@ -181,12 +184,13 @@ describe("profile - shared", () => {
     });
 
     renderPage({ business });
+    chooseTab("permits");
 
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
     ).not.toBeInTheDocument();
     expect(
-      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription),
     ).toBeInTheDocument();
   });
 
@@ -202,7 +206,9 @@ describe("profile - shared", () => {
     renderPage({ business });
 
     expect(
-      screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+      screen.queryByText(
+        Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
+      ),
     ).not.toBeInTheDocument();
   });
 
@@ -221,11 +227,14 @@ describe("profile - shared", () => {
       });
 
       renderPage({ business });
+      chooseTab("permits");
 
       expect(
-        screen.getByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+        screen.getByText(
+          Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
+        ),
       ).toBeInTheDocument();
-    }
+    },
   );
 
   it.each(nonOwningPersonas)(
@@ -245,9 +254,11 @@ describe("profile - shared", () => {
       renderPage({ business });
 
       expect(
-        screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+        screen.queryByText(
+          Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
+        ),
       ).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(nonOwningPersonas)(
@@ -267,9 +278,11 @@ describe("profile - shared", () => {
       renderPage({ business });
 
       expect(
-        screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+        screen.queryByText(
+          Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
+        ),
       ).not.toBeInTheDocument();
-    }
+    },
   );
 
   it("sends analytics when municipality entered for first time", async () => {
@@ -296,7 +309,7 @@ describe("profile - shared", () => {
       return expect(currentBusiness().profileData.municipality).toEqual(randomMunicipality);
     });
     expect(
-      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time
+      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time,
     ).toHaveBeenCalled();
   });
 
@@ -323,7 +336,7 @@ describe("profile - shared", () => {
       return expect(currentBusiness().profileData.municipality).toEqual(randomMunicipality);
     });
     expect(
-      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time
+      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time,
     ).not.toHaveBeenCalled();
   });
 
@@ -339,7 +352,9 @@ describe("profile - shared", () => {
                 businessPersona,
                 foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["none"] : [],
               }),
-              taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
+              taxFilingData: generateTaxFilingData({
+                state: randomInt() % 2 ? "SUCCESS" : "PENDING",
+              }),
             });
 
             renderPage({ business });
@@ -370,7 +385,7 @@ describe("profile - shared", () => {
               renderPage({ business });
               chooseTab("numbers");
               expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
-                markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+                markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd),
               );
             });
           });
@@ -402,8 +417,10 @@ describe("profile - shared", () => {
             }),
           });
           chooseTab("numbers");
-          expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
-        }
+          expect(
+            screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
+          ).toBeInTheDocument();
+        },
       );
     });
   });
@@ -421,17 +438,20 @@ describe("profile - shared", () => {
       expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
     });
 
-    it.each(phasesWhereGoToProfileDoesNotShow)("does not display alert for %s", (operatingPhase) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase,
-          dateOfFormation: undefined,
-        }),
-      });
-      renderPage({ business });
+    it.each(phasesWhereGoToProfileDoesNotShow)(
+      "does not display alert for %s",
+      (operatingPhase) => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            operatingPhase,
+            dateOfFormation: undefined,
+          }),
+        });
+        renderPage({ business });
 
-      expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
-    });
+        expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+      },
+    );
 
     it("does display date of formation question when legal structure is undefined", () => {
       const business = generateBusinessForProfile({
@@ -444,13 +464,13 @@ describe("profile - shared", () => {
       renderPage({ business });
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
+          Config.profileDefaults.fields.dateOfFormation.default.header,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
+          Config.profileDefaults.fields.dateOfFormation.default.header,
+        ),
       ).toBeInTheDocument();
     });
 
@@ -465,7 +485,7 @@ describe("profile - shared", () => {
       });
       renderPage({ business });
       expect(
-        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header),
       ).not.toBeInTheDocument();
       expect(screen.queryByTestId("effective-date")).not.toBeInTheDocument();
     });
@@ -482,13 +502,13 @@ describe("profile - shared", () => {
       renderPage({ business });
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
+          Config.profileDefaults.fields.dateOfFormation.default.header,
+        ),
       ).toBeInTheDocument();
       expect(
         within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
+          Config.profileDefaults.fields.dateOfFormation.default.header,
+        ),
       ).toBeInTheDocument();
     });
 
@@ -505,19 +525,19 @@ describe("profile - shared", () => {
       renderPage({ business });
 
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.dateOfFormation.default.header
+        Config.profileDefaults.fields.dateOfFormation.default.header,
       );
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header
+        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header,
       );
 
       fillText("Existing employees", "12");
 
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.dateOfFormation.default.header
+        Config.profileDefaults.fields.dateOfFormation.default.header,
       );
       expect(screen.getByTestId("opp-alert")).not.toHaveTextContent(
-        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header
+        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header,
       );
     });
   });
@@ -537,9 +557,9 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
         expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
         ).toBeInTheDocument();
-      }
+      },
     );
 
     it("shows the Note Alert for OWNING businesses and authenticated", () => {
@@ -553,7 +573,7 @@ describe("profile - shared", () => {
       });
       renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
       expect(
-        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
       ).toBeInTheDocument();
     });
 
@@ -571,9 +591,11 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         expect(
-          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.queryByText(
+            Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator,
+          ),
         ).not.toBeInTheDocument();
-      }
+      },
     );
 
     it.each(nonOwningPersonas)(
@@ -590,9 +612,11 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         expect(
-          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.queryByText(
+            Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator,
+          ),
         ).not.toBeInTheDocument();
-      }
+      },
     );
 
     it.each(businessPersonas)(
@@ -609,14 +633,16 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
         ).toBeInTheDocument();
-      }
+      },
     );
   });
 
   describe("non essential questions", () => {
-    const generateBusinessForNonEssentialQuestionTest = (profileData: Partial<ProfileData>): Business => {
+    const generateBusinessForNonEssentialQuestionTest = (
+      profileData: Partial<ProfileData>,
+    ): Business => {
       return generateBusiness({
         profileData: generateProfileData({
           ...profileData,
@@ -643,7 +669,7 @@ describe("profile - shared", () => {
         await waitFor(() => {
           expect(currentBusiness().profileData.nonEssentialRadioAnswers).toStrictEqual({});
         });
-      }
+      },
     );
   });
 
@@ -661,8 +687,10 @@ describe("profile - shared", () => {
             }),
           }),
         });
-        expect(screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)).toBeInTheDocument();
-      }
+        expect(
+          screen.getByText(Config.profileDefaults.default.cannabisLocationAlert),
+        ).toBeInTheDocument();
+      },
     );
 
     it.each(nonOwningPersonas)(
@@ -681,9 +709,9 @@ describe("profile - shared", () => {
           }),
         });
         expect(
-          screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
+          screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert),
         ).not.toBeInTheDocument();
-      }
+      },
     );
 
     it("should NOT display a cannabis specific warning alert when OWNING", () => {
@@ -693,7 +721,7 @@ describe("profile - shared", () => {
         }),
       });
       expect(
-        screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
+        screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert),
       ).not.toBeInTheDocument();
     });
   });
@@ -717,9 +745,9 @@ describe("profile - shared", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.profileDefaults.fields.industryId.default.header)
+          within(profileAlert).getByText(Config.profileDefaults.fields.industryId.default.header),
         ).toBeInTheDocument();
-      }
+      },
     );
   });
 });

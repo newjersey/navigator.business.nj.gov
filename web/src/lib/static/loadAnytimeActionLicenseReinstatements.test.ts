@@ -75,7 +75,7 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
             callToActionText: "CallToActionText2",
             form: "Form2",
           },
-        ])
+        ]),
       );
     });
   });
@@ -178,7 +178,7 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
           { params: { anytimeActionLicenseReinstatementUrlSlug: "urlslug1" } },
           { params: { anytimeActionLicenseReinstatementUrlSlug: "urlslug2" } },
           { params: { anytimeActionLicenseReinstatementUrlSlug: "urlslug3" } },
-        ])
+        ]),
       );
     });
   });

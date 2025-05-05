@@ -11,7 +11,10 @@ export type CurrentAndNextSection = { current: SectionType; next: SectionType | 
 export type UseRoadmapReturnValue = {
   roadmap: Roadmap | undefined;
   sectionNamesInRoadmap: SectionType[];
-  isSectionCompleted: (section: SectionType, taskProgressOverride?: Record<string, TaskProgress>) => boolean;
+  isSectionCompleted: (
+    section: SectionType,
+    taskProgressOverride?: Record<string, TaskProgress>,
+  ) => boolean;
   currentAndNextSection: (taskId: string) => CurrentAndNextSection;
 };
 
@@ -67,13 +70,15 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
   };
 
   const nextUncompletedSection = (currentSection: SectionType): SectionType | undefined => {
-    return sectionNames.slice(sectionNames.indexOf(currentSection) + 1).find((section: SectionType) => {
-      return !isSectionCompleted(section);
-    });
+    return sectionNames
+      .slice(sectionNames.indexOf(currentSection) + 1)
+      .find((section: SectionType) => {
+        return !isSectionCompleted(section);
+      });
   };
 
   const currentAndNextSection = (
-    taskId: string
+    taskId: string,
   ): {
     current: SectionType;
     next: SectionType | undefined;
@@ -87,11 +92,13 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
 
   const isSectionCompleted = (
     section: SectionType,
-    taskProgressOverride?: Record<string, TaskProgress>
+    taskProgressOverride?: Record<string, TaskProgress>,
   ): boolean => {
     if (!business) return false;
     return tasksInSection(section).every((task) => {
-      const status = taskProgressOverride ? taskProgressOverride[task.id] : business.taskProgress[task.id];
+      const status = taskProgressOverride
+        ? taskProgressOverride[task.id]
+        : business.taskProgress[task.id];
       return status === "COMPLETED";
     });
   };

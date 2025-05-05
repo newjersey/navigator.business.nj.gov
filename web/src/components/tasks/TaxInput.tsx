@@ -4,7 +4,10 @@ import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -27,7 +30,7 @@ export const TaxInput = (props: Props): ReactElement => {
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(
-    business?.profileData ?? createEmptyProfileData()
+    business?.profileData ?? createEmptyProfileData(),
   );
 
   const {
@@ -44,8 +47,8 @@ export const TaxInput = (props: Props): ReactElement => {
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE
-      ? `Register & ${Config.tax.saveButtonText}`
-      : Config.tax.saveButtonText;
+      ? `Register & ${Config.taxId.saveButtonText}`
+      : Config.taxId.saveButtonText;
 
   useEffect(() => {
     if (!business) return;
@@ -90,10 +93,12 @@ export const TaxInput = (props: Props): ReactElement => {
 
   const DisabledElement = (props: { children: ReactNode }): ReactElement => (
     <div className={`flex ${isTabletAndUp ? "flex-row" : "flex-column margin-right-2"} no-wrap`}>
-      <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>{Config.tax.lockedPreText}</div>
+      <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>
+        {Config.taxId.lockedPreText}
+      </div>
       <div>{props.children}</div>
       <div className={`${isTabletAndUp ? "padding-left-1" : ""} margin-right-1`}>
-        {Config.tax.lockedPostText}
+        {Config.taxId.lockedPostText}
       </div>
       <div className={"text-wrap margin-bottom-1"}>
         <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>

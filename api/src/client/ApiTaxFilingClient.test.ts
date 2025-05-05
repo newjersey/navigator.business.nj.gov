@@ -29,7 +29,7 @@ interface TaxFilingOnboardingRequest extends TaxFilingLookUpRequest {
 }
 
 const generateTaxIdAndBusinessNameAndEmail = (
-  overrides: Partial<TaxFilingOnboardingRequest>
+  overrides: Partial<TaxFilingOnboardingRequest>,
 ): TaxFilingOnboardingRequest => {
   return {
     ...generateTaxIdAndBusinessName({}),
@@ -41,7 +41,7 @@ const generateTaxIdAndBusinessNameAndEmail = (
 const generateSuccessfulApiTaxFilingLookupResponse = (
   overrides: Partial<ApiTaxFilingLookupResponse>,
   taxCity?: string,
-  naicsCode?: string
+  naicsCode?: string,
 ): ApiTaxFilingLookupResponse => {
   return {
     ApiKey: `some-ApiKey-${randomInt()}`,
@@ -63,12 +63,13 @@ const generateSuccessfulApiTaxFilingLookupResponse = (
 
 const generateErroredApiTaxFilingLookupResponse = (
   overrides: Partial<ApiTaxFilingLookupResponse>,
-  state: "PENDING" | "FAILED" | "UNREGISTERED"
+  state: "PENDING" | "FAILED" | "UNREGISTERED",
 ): ApiTaxFilingLookupResponse => {
   const stateErrorMap = {
     PENDING:
       "There is no specific tax eligibility for this business at the moment but please do come back to check later since we get weekly updates.",
-    FAILED: "No matching record found for the business. Please verify your Taxpayer ID and Business Name.",
+    FAILED:
+      "No matching record found for the business. Please verify your Taxpayer ID and Business Name.",
     UNREGISTERED: "This business has not been onboarded to Gov2Go Tax calendar Service so far",
   };
   return {
@@ -86,7 +87,7 @@ const generateErroredApiTaxFilingLookupResponse = (
 };
 
 const generateSuccessfulApiTaxFilingOnboardingResponse = (
-  overrides: Partial<ApiTaxFilingOnboardingResponse>
+  overrides: Partial<ApiTaxFilingOnboardingResponse>,
 ): ApiTaxFilingOnboardingResponse => {
   return {
     ApiKey: `some-ApiKey-${randomInt()}`,
@@ -99,7 +100,7 @@ const generateSuccessfulApiTaxFilingOnboardingResponse = (
 
 const generateErroredApiTaxFilingOnboardingResponse = (
   overrides: Partial<ApiTaxFilingOnboardingResponse>,
-  statusCode: StatusCodes.BAD_REQUEST | StatusCodes.INTERNAL_SERVER_ERROR | number
+  statusCode: StatusCodes.BAD_REQUEST | StatusCodes.INTERNAL_SERVER_ERROR | number,
 ): ApiTaxFilingOnboardingResponse => {
   return {
     ApiKey: `some-ApiKey-${randomInt()}`,
@@ -170,7 +171,7 @@ describe("ApiTaxFilingClient", () => {
           Results,
         },
         "testville",
-        "123456"
+        "123456",
       );
       mockAxios.post.mockResolvedValue({ data: stubResponse });
       const response = await client.lookup({
@@ -193,7 +194,9 @@ describe("ApiTaxFilingClient", () => {
 
     it("returns only taxFiling state on failure", async () => {
       const stubResponse = generateErroredApiTaxFilingLookupResponse({}, "FAILED");
-      mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: StatusCodes.BAD_REQUEST } });
+      mockAxios.post.mockRejectedValue({
+        response: { data: stubResponse, status: StatusCodes.BAD_REQUEST },
+      });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         businessName: taxIdAndBusinessNameAndEmail.businessName,
@@ -206,7 +209,9 @@ describe("ApiTaxFilingClient", () => {
 
     it("returns only taxFiling state on pending", async () => {
       const stubResponse = generateErroredApiTaxFilingLookupResponse({}, "PENDING");
-      mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: StatusCodes.BAD_REQUEST } });
+      mockAxios.post.mockRejectedValue({
+        response: { data: stubResponse, status: StatusCodes.BAD_REQUEST },
+      });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         businessName: taxIdAndBusinessNameAndEmail.businessName,
@@ -219,7 +224,9 @@ describe("ApiTaxFilingClient", () => {
 
     it("returns only taxFiling state on unregistered", async () => {
       const stubResponse = generateErroredApiTaxFilingLookupResponse({}, "UNREGISTERED");
-      mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: StatusCodes.BAD_REQUEST } });
+      mockAxios.post.mockRejectedValue({
+        response: { data: stubResponse, status: StatusCodes.BAD_REQUEST },
+      });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         businessName: taxIdAndBusinessNameAndEmail.businessName,
@@ -295,9 +302,11 @@ describe("ApiTaxFilingClient", () => {
         {
           Errors: [{ Error: "some-error-string", Field: "Taxpayer ID" }],
         },
-        StatusCodes.BAD_REQUEST
+        StatusCodes.BAD_REQUEST,
       );
-      mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: StatusCodes.BAD_REQUEST } });
+      mockAxios.post.mockRejectedValue({
+        response: { data: stubResponse, status: StatusCodes.BAD_REQUEST },
+      });
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
@@ -311,9 +320,11 @@ describe("ApiTaxFilingClient", () => {
         {
           Errors: [{ Error: "some-error-string", Field: "Business Name" }],
         },
-        StatusCodes.BAD_REQUEST
+        StatusCodes.BAD_REQUEST,
       );
-      mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: StatusCodes.BAD_REQUEST } });
+      mockAxios.post.mockRejectedValue({
+        response: { data: stubResponse, status: StatusCodes.BAD_REQUEST },
+      });
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
@@ -323,7 +334,10 @@ describe("ApiTaxFilingClient", () => {
     });
 
     it("returns failed state on api unknown statusCode", async () => {
-      const stubResponse = generateErroredApiTaxFilingOnboardingResponse({}, StatusCodes.NO_CONTENT);
+      const stubResponse = generateErroredApiTaxFilingOnboardingResponse(
+        {},
+        StatusCodes.NO_CONTENT,
+      );
       mockAxios.post.mockResolvedValue({ data: stubResponse });
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
@@ -336,7 +350,7 @@ describe("ApiTaxFilingClient", () => {
     it("returns error state on api lookup failure", async () => {
       const stubResponse = generateErroredApiTaxFilingOnboardingResponse(
         {},
-        StatusCodes.INTERNAL_SERVER_ERROR
+        StatusCodes.INTERNAL_SERVER_ERROR,
       );
       mockAxios.post.mockRejectedValue({
         response: { data: stubResponse, status: StatusCodes.INTERNAL_SERVER_ERROR },

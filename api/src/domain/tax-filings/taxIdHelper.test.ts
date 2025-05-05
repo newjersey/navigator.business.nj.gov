@@ -43,13 +43,13 @@ describe("Tax-Filings Helpers", () => {
         ["cr-1orcnr-11", "cr-1orcnr-12"].map((Id) => {
           return generateTaxFilingResult({ Id });
         }),
-        taxIdMap
+        taxIdMap,
       );
       const ids = [
         ...new Set(
           filings.map((i) => {
             return i.identifier;
-          })
+          }),
         ),
       ];
       expect(ids).toEqual(["cr-1orcnr-1"]);
@@ -60,13 +60,13 @@ describe("Tax-Filings Helpers", () => {
         ["st-250_350"].map((Id) => {
           return generateTaxFilingResult({ Id });
         }),
-        taxIdMap
+        taxIdMap,
       );
       const ids = [
         ...new Set(
           filings.map((i) => {
             return i.identifier;
-          })
+          }),
         ),
       ];
       expect(ids).toEqual(["st-250", "st-350"]);
@@ -77,13 +77,13 @@ describe("Tax-Filings Helpers", () => {
         ["nj-927_927-w"].map((Id) => {
           return generateTaxFilingResult({ Id });
         }),
-        taxIdMap
+        taxIdMap,
       );
       const ids = [
         ...new Set(
           filings.map((i) => {
             return i.identifier;
-          })
+          }),
         ),
       ];
       expect(ids).toEqual(["nj-927_927-w", "nj-927-w"]);

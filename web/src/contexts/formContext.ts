@@ -1,8 +1,11 @@
 import { FieldErrorType, FormContextType, ReducedFieldStates } from "@/lib/types/types";
 import { Context, createContext } from "react";
 
-export const createReducedFieldStates = <K extends string | number | symbol, FieldError = FieldErrorType>(
-  fields: K[]
+export const createReducedFieldStates = <
+  K extends string | number | symbol,
+  FieldError = FieldErrorType,
+>(
+  fields: K[],
 ): ReducedFieldStates<K, FieldError> => {
   return fields.reduce((p, c: K) => {
     p[c] = { invalid: false };

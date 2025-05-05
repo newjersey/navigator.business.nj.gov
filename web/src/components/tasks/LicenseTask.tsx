@@ -54,7 +54,8 @@ export const LicenseTask = (props: Props): ReactElement => {
 
   useEffect(() => {
     if (!business) return;
-    const licenseDetailsReceived = business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
+    const licenseDetailsReceived =
+      business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
 
     if (!licenseDetailsReceived && business.licenseData?.lastUpdatedISO) {
       setError("NOT_FOUND");
@@ -137,7 +138,12 @@ export const LicenseTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="License task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab value="0" sx={tabStyle} label={Config.licenseSearchTask.tab1Text} />
                 <Tab value="1" sx={tabStyle} label={Config.licenseSearchTask.tab2Text} />
@@ -157,7 +163,7 @@ export const LicenseTask = (props: Props): ReactElement => {
                       onClick={(): void => {
                         analytics.event.task_button_i_already_submitted.click.view_status_tab(
                           "check_status",
-                          "start_application"
+                          "start_application",
                         );
                         setTabIndex(STATUS_TAB_INDEX);
                       }}
@@ -172,7 +178,7 @@ export const LicenseTask = (props: Props): ReactElement => {
                       analytics.event.task_primary_call_to_action.click.open_external_website(
                         Config.licenseSearchTask.primaryCTAFirstLineText,
                         callToActionLink,
-                        "start_application"
+                        "start_application",
                       );
                       openInNewTab(callToActionLink);
                     }}

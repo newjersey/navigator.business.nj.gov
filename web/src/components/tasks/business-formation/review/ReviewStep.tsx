@@ -54,7 +54,9 @@ export const ReviewStep = (): ReactElement => {
         <BusinessFormationReviewSection stepName={"Business"} dataTestId="edit-business-name-step">
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
-          {isNonProfit && <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />}
+          {isNonProfit && (
+            <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />
+          )}
           {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
             <>
               <hr className="margin-y-205" />

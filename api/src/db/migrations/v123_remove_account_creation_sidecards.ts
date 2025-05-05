@@ -34,7 +34,7 @@ export const migrate_v122_to_v123 = (v122Data: v122UserData): v123UserData => {
     businesses: Object.fromEntries(
       Object.values(v122Data.businesses)
         .map((business) => migrate_v122Business_to_v123Business(business))
-        .map((currBusiness) => [currBusiness.id, currBusiness])
+        .map((currBusiness) => [currBusiness.id, currBusiness]),
     ),
     version: 123,
   };
@@ -483,7 +483,9 @@ export const generateV123UserData = (overrides: Partial<v123UserData>): v123User
   };
 };
 
-export const generateV123BusinessUser = (overrides: Partial<v123BusinessUser>): v123BusinessUser => {
+export const generateV123BusinessUser = (
+  overrides: Partial<v123BusinessUser>,
+): v123BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -561,7 +563,7 @@ export const generateV123ProfileData = (overrides: Partial<v123ProfileData>): v1
 };
 
 export const generateV123IndustrySpecificData = (
-  overrides: Partial<v123IndustrySpecificData>
+  overrides: Partial<v123IndustrySpecificData>,
 ): v123IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -601,7 +603,7 @@ export const generateV123Preferences = (overrides: Partial<v123Preferences>): v1
 
 export const generateV123FormationData = (
   overrides: Partial<v123FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v123FormationData => {
   return {
     formationFormData: generateV123FormationFormData({}, legalStructureId),
@@ -617,9 +619,11 @@ export const generateV123FormationData = (
 
 export const generateV123FormationFormData = (
   overrides: Partial<v123FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v123FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v123FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -666,7 +670,8 @@ export const generateV123FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: true, title: "Authorized Representative" }],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV123FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generateV123FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -687,7 +692,9 @@ export const generateV123FormationFormData = (
   };
 };
 
-export const generateV123Municipality = (overrides: Partial<v123Municipality>): v123Municipality => {
+export const generateV123Municipality = (
+  overrides: Partial<v123Municipality>,
+): v123Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -697,7 +704,9 @@ export const generateV123Municipality = (overrides: Partial<v123Municipality>): 
   };
 };
 
-export const generateV123FormationMember = (overrides: Partial<v123FormationMember>): v123FormationMember => {
+export const generateV123FormationMember = (
+  overrides: Partial<v123FormationMember>,
+): v123FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -711,7 +720,9 @@ export const generateV123FormationMember = (overrides: Partial<v123FormationMemb
   };
 };
 
-export const generateV123TaxFilingData = (overrides: Partial<v123TaxFilingData>): v123TaxFilingData => {
+export const generateV123TaxFilingData = (
+  overrides: Partial<v123TaxFilingData>,
+): v123TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,

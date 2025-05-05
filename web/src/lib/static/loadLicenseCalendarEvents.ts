@@ -9,7 +9,13 @@ export type LicenseCalendarEventUrlSlugParam = {
   licenseCalendarEventUrlSlug: string;
 };
 
-const licenseCalendarEventsDir = path.join(process.cwd(), "..", "content", "src", "license-calendar-events");
+const licenseCalendarEventsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "license-calendar-events",
+);
 
 export const loadAllLicenseCalendarEvents = (): LicenseEventType[] => {
   const fileNames = fs.readdirSync(licenseCalendarEventsDir);
@@ -18,22 +24,23 @@ export const loadAllLicenseCalendarEvents = (): LicenseEventType[] => {
   });
 };
 
-export const loadAllLicenseCalendarEventUrlSlugs = (): PathParams<LicenseCalendarEventUrlSlugParam>[] => {
-  const fileNames = fs.readdirSync(licenseCalendarEventsDir);
-  return fileNames.flatMap((fileName) => {
-    const slug = loadUrlSlugByFilename(fileName, licenseCalendarEventsDir);
-    return ["expiration", "renewal"].map((type) => ({
-      params: {
-        licenseCalendarEventUrlSlug: [slug, type].join("-"),
-      },
-    }));
-  });
-};
+export const loadAllLicenseCalendarEventUrlSlugs =
+  (): PathParams<LicenseCalendarEventUrlSlugParam>[] => {
+    const fileNames = fs.readdirSync(licenseCalendarEventsDir);
+    return fileNames.flatMap((fileName) => {
+      const slug = loadUrlSlugByFilename(fileName, licenseCalendarEventsDir);
+      return ["expiration", "renewal"].map((type) => ({
+        params: {
+          licenseCalendarEventUrlSlug: [slug, type].join("-"),
+        },
+      }));
+    });
+  };
 
 export const loadLicenseCalendarEventByUrlSlug = (urlSlug: string): LicenseEventType => {
   const matchingFileName = getFileNameByUrlSlug(
     licenseCalendarEventsDir,
-    urlSlug.split("-").slice(0, -1).join("-")
+    urlSlug.split("-").slice(0, -1).join("-"),
   );
   return loadLicenseCalendarEventByFileName(matchingFileName);
 };

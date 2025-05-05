@@ -34,12 +34,12 @@ describe("encryptTaxIdBatch", () => {
       generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
-        })
+        }),
       ),
       generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
-        })
+        }),
       ),
     ]);
 
@@ -59,12 +59,12 @@ describe("encryptTaxIdBatch", () => {
       generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
-        })
+        }),
       ),
       generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
-        })
+        }),
       ),
     ]);
 

@@ -65,7 +65,9 @@ export type v2LegalStructure =
 
 // ---------------- v2 factories ----------------
 
-export const generateV2OnboardingData = (overrides: Partial<v2OnboardingData>): v2OnboardingData => {
+export const generateV2OnboardingData = (
+  overrides: Partial<v2OnboardingData>,
+): v2OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",

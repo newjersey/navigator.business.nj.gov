@@ -34,8 +34,8 @@ const renderPage = (task: Task, business?: Business): void => {
       >
         <CannabisApplyForLicenseTask task={task} />
       </WithStatefulUserData>,
-      IsAuthenticated.TRUE
-    )
+      IsAuthenticated.TRUE,
+    ),
   );
 };
 
@@ -63,7 +63,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
     await waitFor(() => {
       expect(screen.getByText("Do this first")).toBeInTheDocument();
     });
-    expect(screen.getByText(Config.cannabisApplyForLicense.priorityStatusHeader)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.cannabisApplyForLicense.priorityStatusHeader),
+    ).toBeInTheDocument();
     expect(screen.getByText(Config.cannabisApplyForLicense.businessSizeHeader)).toBeInTheDocument();
   });
 
@@ -162,10 +164,14 @@ describe("<CannabisApplyForLicenseTask />", () => {
     renderPage(generateTask({}), business);
     expect(sbeCheckbox().checked).toEqual(false);
     fireEvent.click(sbeCheckbox());
-    expect(screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle),
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.cannabisEligibilityModal.eligibleModalContinueButton));
     await waitFor(() => {
-      expect(screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle),
+      ).not.toBeInTheDocument();
     });
     expect(sbeCheckbox().checked).toEqual(true);
   });
@@ -180,10 +186,14 @@ describe("<CannabisApplyForLicenseTask />", () => {
     renderPage(generateTask({}), business);
     expect(sbeCheckbox().checked).toEqual(false);
     fireEvent.click(sbeCheckbox());
-    expect(screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle),
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.cannabisEligibilityModal.eligibleModalCancelButton));
     await waitFor(() => {
-      expect(screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle),
+      ).not.toBeInTheDocument();
     });
     expect(sbeCheckbox().checked).toEqual(false);
   });
@@ -290,17 +300,25 @@ describe("<CannabisApplyForLicenseTask />", () => {
     });
 
     it("shows CTA for task", () => {
-      renderPage(generateTask({ callToActionText: "do the application here" }), generateBusiness({}));
+      renderPage(
+        generateTask({ callToActionText: "do the application here" }),
+        generateBusiness({}),
+      );
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
       expect(screen.getByText("do the application here")).toBeInTheDocument();
     });
 
     it("can go back to first tab", () => {
-      renderPage(generateTask({ callToActionText: "do the application here" }), generateBusiness({}));
+      renderPage(
+        generateTask({ callToActionText: "do the application here" }),
+        generateBusiness({}),
+      );
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.backToFirstTabButton));
-      expect(screen.getByText(Config.cannabisApplyForLicense.applicationQuestionsText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.cannabisApplyForLicense.applicationQuestionsText),
+      ).toBeInTheDocument();
     });
   });
 

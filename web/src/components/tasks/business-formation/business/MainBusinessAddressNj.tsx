@@ -88,13 +88,22 @@ export const MainBusinessAddressNj = (): ReactElement => {
             />
           </FormationField>
           <WithErrorBar
-            hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
+            hasError={doSomeFieldsHaveError([
+              "addressState",
+              "addressZipCode",
+              "addressMunicipality",
+            ])}
             type="DESKTOP-ONLY"
           >
             <div className="grid-row grid-gap-1">
               <div className="grid-col-12 tablet:grid-col-6">
-                <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
-                  <span className="text-bold">{Config.formation.fields.addressMunicipality.label}</span>
+                <WithErrorBar
+                  hasError={doesFieldHaveError("addressMunicipality")}
+                  type="MOBILE-ONLY"
+                >
+                  <span className="text-bold">
+                    {Config.formation.fields.addressMunicipality.label}
+                  </span>
                   <FormationMunicipality />
                 </WithErrorBar>
               </div>
@@ -106,7 +115,9 @@ export const MainBusinessAddressNj = (): ReactElement => {
                   <div className="grid-row grid-gap-1">
                     <div className="grid-col-5">
                       <strong>
-                        <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                        <ModifiedContent>
+                          {Config.formation.fields.addressState.label}
+                        </ModifiedContent>
                       </strong>
                       <FormationField fieldName="addressState">
                         <StateDropdown

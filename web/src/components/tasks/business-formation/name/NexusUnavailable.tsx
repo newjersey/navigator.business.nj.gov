@@ -31,11 +31,15 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
     <>
       <div data-testid="unavailable-text">
         <Alert variant="info">
-          <PureMarkdownContent components={inlineParagraphComponent}>{textBeforeButton}</PureMarkdownContent>{" "}
+          <PureMarkdownContent components={inlineParagraphComponent}>
+            {textBeforeButton}
+          </PureMarkdownContent>{" "}
           <UnStyledButton onClick={onClick} className="display-inline" dataTestid="search-again">
             {Config.nexusNameSearch.searchAgainButtonText}
           </UnStyledButton>
-          <PureMarkdownContent components={inlineParagraphComponent}>{textAfterButton}</PureMarkdownContent>
+          <PureMarkdownContent components={inlineParagraphComponent}>
+            {textAfterButton}
+          </PureMarkdownContent>
         </Alert>
       </div>
 

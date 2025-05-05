@@ -132,13 +132,17 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
-      expect(screen.queryByText(Config.formation.general.initialNextButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.general.initialNextButtonText),
+      ).not.toBeInTheDocument();
       expect(screen.getByText(Config.formation.general.nextButtonText)).toBeInTheDocument();
     });
 
     it("does not show previous button on first step", () => {
       preparePage({ business, displayContent });
-      expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.general.previousButtonText),
+      ).not.toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
       expect(screen.getByText(Config.formation.general.previousButtonText)).toBeInTheDocument();
     });
@@ -182,8 +186,8 @@ describe("<BusinessFormationPaginator />", () => {
             </MunicipalitiesContext.Provider>
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { showNeedsAccountModal: false, setShowNeedsAccountModal }
-        )
+          { showNeedsAccountModal: false, setShowNeedsAccountModal },
+        ),
       );
     };
 
@@ -268,12 +272,12 @@ describe("<BusinessFormationPaginator />", () => {
       const page = preparePage({ business, displayContent });
       await page.fillAndBlurBusinessName("Pizza Joint");
       expect(
-        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
       ).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
       await page.stepperClickToBusinessNameStep();
       expect(
-        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
       ).toBeInTheDocument();
     });
 
@@ -282,9 +286,15 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage({ business, displayContent });
         await page.stepperClickToBusinessStep();
 
-        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
-        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
-        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
+        fireEvent.click(
+          screen.getByText(Config.formation.fields.additionalProvisions.addButtonText),
+        );
+        fireEvent.click(
+          screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText),
+        );
+        fireEvent.click(
+          screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText),
+        );
         page.fillText("Provisions 2", "provision2");
         switchStepFunction();
         expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([
@@ -300,11 +310,13 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           switchStepFunction();
-          expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().formationData.formationFormData.businessName).toEqual(
+            "Pizza Joint",
+          );
 
           await page.stepperClickToBusinessNameStep();
           expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-            "Pizza Joint"
+            "Pizza Joint",
           );
         });
 
@@ -335,7 +347,9 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "UNAVAILABLE" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
+          expect(currentBusiness().profileData.businessName).toEqual(
+            business.profileData.businessName,
+          );
         });
 
         it("does not save name to profile when error", async () => {
@@ -344,7 +358,9 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint LLC");
           await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
+          expect(currentBusiness().profileData.businessName).toEqual(
+            business.profileData.businessName,
+          );
         });
       });
 
@@ -356,7 +372,10 @@ describe("<BusinessFormationPaginator />", () => {
               ...business.formationData,
               formationFormData: {
                 ...business.formationData.formationFormData,
-                addressMunicipality: generateMunicipality({ displayName: "New Town", name: "New Town" }),
+                addressMunicipality: generateMunicipality({
+                  displayName: "New Town",
+                  name: "New Town",
+                }),
               },
             },
           };
@@ -368,15 +387,15 @@ describe("<BusinessFormationPaginator />", () => {
 
           page.selectByText("Address municipality", "New Town");
           expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual(
-            "New Town"
+            "New Town",
           );
           switchStepFunction();
           await waitFor(() => {
             expect(currentBusiness().profileData.municipality?.displayName).toEqual("New Town");
           });
-          expect(currentBusiness().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
-            "New Town"
-          );
+          expect(
+            currentBusiness().formationData.formationFormData.addressMunicipality?.displayName,
+          ).toEqual("New Town");
         });
 
         it("send analytics when municipality entered for first time", async () => {
@@ -405,7 +424,8 @@ describe("<BusinessFormationPaginator />", () => {
           });
 
           expect(
-            mockAnalytics.event.business_formation_location_question.submit.location_entered_for_first_time
+            mockAnalytics.event.business_formation_location_question.submit
+              .location_entered_for_first_time,
           ).toHaveBeenCalled();
         });
 
@@ -431,12 +451,13 @@ describe("<BusinessFormationPaginator />", () => {
           switchStepFunction();
           await waitFor(() => {
             expect(
-              currentBusiness().formationData.formationFormData.addressMunicipality?.displayName
+              currentBusiness().formationData.formationFormData.addressMunicipality?.displayName,
             ).toEqual("New Town");
           });
 
           expect(
-            mockAnalytics.event.business_formation_location_question.submit.location_entered_for_first_time
+            mockAnalytics.event.business_formation_location_question.submit
+              .location_entered_for_first_time,
           ).not.toHaveBeenCalled();
         });
       });
@@ -503,7 +524,9 @@ describe("<BusinessFormationPaginator />", () => {
         expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE");
 
         await page.stepperClickToBusinessStep();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE-ACTIVE");
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual(
+          "INCOMPLETE-ACTIVE",
+        );
         expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
       });
     };
@@ -529,16 +552,22 @@ describe("<BusinessFormationPaginator />", () => {
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
 
-        expect(screen.queryByText(Config.formation.errorBanner.incompleteStepsError)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.errorBanner.incompleteStepsError),
+        ).not.toBeInTheDocument();
         await page.clickSubmit();
 
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
         expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("ERROR");
         expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("ERROR");
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Review"))).toEqual("INCOMPLETE-ACTIVE");
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Review"))).toEqual(
+          "INCOMPLETE-ACTIVE",
+        );
 
-        expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+        ).toBeInTheDocument();
       });
 
       it("shows error field states for each step with error except for businessName field", async () => {
@@ -552,7 +581,9 @@ describe("<BusinessFormationPaginator />", () => {
         await page.stepperClickToContactsStep();
         expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
         await page.stepperClickToBillingStep();
-        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.errorBanner.errorOnStep),
+        ).not.toBeInTheDocument();
       });
 
       it("updates stepper to show error state if user changes a COMPLETE step", async () => {
@@ -564,11 +595,15 @@ describe("<BusinessFormationPaginator />", () => {
 
         await page.stepperClickToBillingStep();
 
-        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.errorBanner.errorOnStep),
+        ).not.toBeInTheDocument();
         page.fillText("Contact first name", "");
 
         expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("ERROR-ACTIVE");
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual(
+          "ERROR-ACTIVE",
+        );
       });
 
       it("updates stepper to show COMPLETE if user changes an ERROR step", async () => {
@@ -580,8 +615,12 @@ describe("<BusinessFormationPaginator />", () => {
         expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
 
         page.completeRequiredBillingFields();
-        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE-ACTIVE");
+        expect(
+          screen.queryByText(Config.formation.errorBanner.errorOnStep),
+        ).not.toBeInTheDocument();
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual(
+          "COMPLETE-ACTIVE",
+        );
       });
 
       it("shows the Trustees label when members' field has an error and legalType is nonprofit", async () => {
@@ -599,11 +638,15 @@ describe("<BusinessFormationPaginator />", () => {
         await page.submitReviewStep();
 
         await page.stepperClickToContactsStep();
-        expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
-        expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
-          Config.formation.fields.members.label
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(
+          Config.formation.errorBanner.errorOnStep,
         );
-        expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.trustees.label);
+        expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
+          Config.formation.fields.members.label,
+        );
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(
+          Config.formation.fields.trustees.label,
+        );
       });
 
       it.each(corpLegalStructures)(
@@ -625,15 +668,15 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToContactsStep();
 
           expect(screen.getByTestId("alert-error")).toHaveTextContent(
-            Config.formation.errorBanner.errorOnStep
+            Config.formation.errorBanner.errorOnStep,
           );
           expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
-            Config.formation.fields.members.label
+            Config.formation.fields.members.label,
           );
           expect(screen.getByTestId("alert-error")).toHaveTextContent(
-            Config.formation.fields.directors.label
+            Config.formation.fields.directors.label,
           );
-        }
+        },
       );
     });
 
@@ -647,7 +690,7 @@ describe("<BusinessFormationPaginator />", () => {
             ...business.formationData,
             formationFormData: generateFormationFormData(
               {},
-              { legalStructureId: "limited-liability-company" }
+              { legalStructureId: "limited-liability-company" },
             ),
           },
         };
@@ -658,7 +701,7 @@ describe("<BusinessFormationPaginator />", () => {
           generateFormationSubmitResponse({
             success: true,
             redirect: "www.example.com",
-          })
+          }),
         );
 
         const page = preparePage({ business: filledInBusiness, displayContent });
@@ -675,7 +718,7 @@ describe("<BusinessFormationPaginator />", () => {
           const businessName: MockApiErrorTestData = {
             formationFormData: generateFormationFormData(
               { businessName: "1111111" },
-              { legalStructureId: "limited-liability-company" }
+              { legalStructureId: "limited-liability-company" },
             ),
             formationResponse: generateFormationSubmitResponse({
               success: false,
@@ -714,12 +757,18 @@ describe("<BusinessFormationPaginator />", () => {
 
             const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("COMPLETE");
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE",
+            );
 
             await page.stepperClickToReviewStep();
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
-            expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "ERROR",
+            );
+            expect(
+              screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+            ).toBeInTheDocument();
           });
         });
 
@@ -732,7 +781,7 @@ describe("<BusinessFormationPaginator />", () => {
               }),
               formationFormData: generateFormationFormData(
                 { businessTotalStock: "10", businessSuffix: "CO" },
-                { legalStructureId: "c-corporation" }
+                { legalStructureId: "c-corporation" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -755,7 +804,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { businessSuffix: "LLC" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -778,7 +827,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { businessStartDate: getCurrentDate().format(defaultDateFormat) },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -802,7 +851,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { agentNumberOrManual: "NUMBER", agentNumber: "1111111" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -825,7 +874,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { agentNumberOrManual: "MANUAL_ENTRY", agentName: "1111111" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -848,7 +897,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { agentNumberOrManual: "MANUAL_ENTRY", agentEmail: "1111111" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -871,7 +920,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine1: "1111111" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -894,7 +943,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine2: "1111111" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -920,7 +969,7 @@ describe("<BusinessFormationPaginator />", () => {
                   agentNumberOrManual: "MANUAL_ENTRY",
                   agentOfficeAddressCity: `agent-city-${randomInt()}`,
                 },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -943,7 +992,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressZipCode: "07004" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -967,7 +1016,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { contactFirstName: "1111111" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -990,7 +1039,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { contactLastName: "1111111" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1013,7 +1062,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { contactPhoneNumber: "4325435432" },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1036,7 +1085,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 { paymentType: undefined },
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1062,7 +1111,7 @@ describe("<BusinessFormationPaginator />", () => {
               }),
               formationFormData: generateFormationFormData(
                 { combinedInvestment: "1111111" },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1089,7 +1138,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { createLimitedPartnerTerms: "1111111", canCreateLimitedPartner: true },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1116,7 +1165,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { getDistributionTerms: "1111111", canGetDistribution: true },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1143,7 +1192,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { makeDistributionTerms: "1111111", canMakeDistribution: true },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1170,7 +1219,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { withdrawals: "1111111" },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1197,7 +1246,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { dissolution: "1111111" },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1225,7 +1274,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { canCreateLimitedPartner: false },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1251,7 +1300,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { canGetDistribution: false },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1277,7 +1326,7 @@ describe("<BusinessFormationPaginator />", () => {
 
               formationFormData: generateFormationFormData(
                 { canMakeDistribution: false },
-                { legalStructureId: "limited-partnership" }
+                { legalStructureId: "limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1337,9 +1386,13 @@ describe("<BusinessFormationPaginator />", () => {
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
-              expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
-            }
+              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+                "ERROR",
+              );
+              expect(
+                screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+              ).toBeInTheDocument();
+            },
           );
 
           it.each([
@@ -1367,7 +1420,13 @@ describe("<BusinessFormationPaginator />", () => {
             contactPhoneNumber,
             paymentType,
           ])("shows API error message on step for %o API error", async (testTitle, data) => {
-            const { formationFormData, formationResponse, formationStepName, fieldName, profileData } = data;
+            const {
+              formationFormData,
+              formationResponse,
+              formationStepName,
+              fieldName,
+              profileData,
+            } = data;
             filledInBusiness = {
               ...business,
               profileData: profileData ? { ...profileData } : { ...business.profileData },
@@ -1386,11 +1445,11 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
 
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              Config.formation.errorBanner.errorOnStep
+              Config.formation.errorBanner.errorOnStep,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (Config.formation.fields as any)[fieldName as string].label
+              (Config.formation.fields as any)[fieldName as string].label,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });
@@ -1413,47 +1472,57 @@ describe("<BusinessFormationPaginator />", () => {
             contactFirstName,
             contactLastName,
             contactPhoneNumber,
-          ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
-            const {
-              formationFormData,
-              formationResponse,
-              formationStepName,
-              fieldLabel,
-              newTextInput,
-              profileData,
-            } = data;
-            filledInBusiness = {
-              ...business,
-              profileData: profileData ? { ...profileData } : { ...business.profileData },
-              formationData: {
-                ...business.formationData,
+          ])(
+            "removes %o API error on blur when user changes text field",
+            async (testTitle, data) => {
+              const {
                 formationFormData,
                 formationResponse,
-              },
-            };
-            const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitBusinessNameStep();
-            await page.stepperClickToReviewStep();
-            await page.clickSubmit();
-            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
-            page.fillText(fieldLabel as string as string, newTextInput as string);
-            await waitFor(() => {
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-            });
-            expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-              "COMPLETE-ACTIVE"
-            );
-          });
+                formationStepName,
+                fieldLabel,
+                newTextInput,
+                profileData,
+              } = data;
+              filledInBusiness = {
+                ...business,
+                profileData: profileData ? { ...profileData } : { ...business.profileData },
+                formationData: {
+                  ...business.formationData,
+                  formationFormData,
+                  formationResponse,
+                },
+              };
+              const page = preparePage({ business: filledInBusiness, displayContent });
+              await page.fillAndSubmitBusinessNameStep();
+              await page.stepperClickToReviewStep();
+              await page.clickSubmit();
+              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
+              if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+              page.fillText(fieldLabel as string as string, newTextInput as string);
+              await waitFor(() => {
+                expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+              });
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep),
+              ).not.toBeInTheDocument();
+              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+                "COMPLETE-ACTIVE",
+              );
+            },
+          );
 
           it.each([paymentType, canCreateLimitedPartner, canGetDistribution, canMakeDistribution])(
             "removes %o API error when user selects radio button",
             async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName, radioBtnTestId, profileData } =
-                data;
+              const {
+                formationFormData,
+                formationResponse,
+                formationStepName,
+                radioBtnTestId,
+                profileData,
+              } = data;
               filledInBusiness = {
                 ...business,
                 profileData: profileData ? { ...profileData } : { ...business.profileData },
@@ -1473,11 +1542,13 @@ describe("<BusinessFormationPaginator />", () => {
               expect(screen.getByTestId("alert-error")).toBeInTheDocument();
               fireEvent.click(screen.getByTestId(radioBtnTestId as string));
               expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep),
+              ).not.toBeInTheDocument();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE"
+                "COMPLETE-ACTIVE",
               );
-            }
+            },
           );
 
           it.each([businessSuffix])(
@@ -1509,11 +1580,13 @@ describe("<BusinessFormationPaginator />", () => {
               fireEvent.focusOut(screen.getAllByLabelText(dropDownLabel as string)[0]);
 
               expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep),
+              ).not.toBeInTheDocument();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE"
+                "COMPLETE-ACTIVE",
               );
-            }
+            },
           );
 
           it.each([businessStartDate])(
@@ -1543,15 +1616,17 @@ describe("<BusinessFormationPaginator />", () => {
 
               page.selectDate(
                 newDate as DateObject,
-                datePickerFieldType as "Business start date" | "Foreign date of formation"
+                datePickerFieldType as "Business start date" | "Foreign date of formation",
               );
 
               expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep),
+              ).not.toBeInTheDocument();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE"
+                "COMPLETE-ACTIVE",
               );
-            }
+            },
           );
         });
 
@@ -1565,7 +1640,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   businessLocationType: "US",
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1591,7 +1666,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1617,7 +1692,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1643,7 +1718,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({ addressState: undefined }),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1669,7 +1744,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1696,7 +1771,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1722,7 +1797,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1748,7 +1823,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1774,7 +1849,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1800,7 +1875,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1826,7 +1901,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({ addressCountry: undefined }),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1855,7 +1930,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessLocationType: "US",
                   foreignStateOfFormation: undefined,
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1884,7 +1959,7 @@ describe("<BusinessFormationPaginator />", () => {
                   businessLocationType: "US",
                   foreignDateOfFormation: undefined,
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-partnership" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1935,9 +2010,13 @@ describe("<BusinessFormationPaginator />", () => {
               await page.fillAndSubmitNexusBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
-              expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
-            }
+              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+                "ERROR",
+              );
+              expect(
+                screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+              ).toBeInTheDocument();
+            },
           );
 
           it.each([
@@ -1973,11 +2052,11 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              Config.formation.errorBanner.errorOnStep
+              Config.formation.errorBanner.errorOnStep,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (Config.formation.fields as any)[fieldName as string].label
+              (Config.formation.fields as any)[fieldName as string].label,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });
@@ -1996,36 +2075,46 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressCountry,
             foreignStateOfFormation,
             foreignDateOfFormation,
-          ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
-            const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
-              data;
-            filledInBusiness = {
-              ...filledInBusiness,
-              profileData: { ...filledInBusiness.profileData, businessPersona: "FOREIGN" },
-              formationData: {
-                ...filledInBusiness.formationData,
+          ])(
+            "removes %o API error on blur when user changes text field",
+            async (testTitle, data) => {
+              const {
                 formationFormData,
                 formationResponse,
-              },
-            };
-            const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitNexusBusinessNameStep();
-            await page.stepperClickToReviewStep();
-            await page.clickSubmit();
-            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+                formationStepName,
+                fieldLabel,
+                newTextInput,
+              } = data;
+              filledInBusiness = {
+                ...filledInBusiness,
+                profileData: { ...filledInBusiness.profileData, businessPersona: "FOREIGN" },
+                formationData: {
+                  ...filledInBusiness.formationData,
+                  formationFormData,
+                  formationResponse,
+                },
+              };
+              const page = preparePage({ business: filledInBusiness, displayContent });
+              await page.fillAndSubmitNexusBusinessNameStep();
+              await page.stepperClickToReviewStep();
+              await page.clickSubmit();
+              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
+              if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
-            page.fillText(fieldLabel as string as string, newTextInput as string);
-            await waitFor(() => {
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-            });
-            expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-              "COMPLETE-ACTIVE"
-            );
-          });
+              page.fillText(fieldLabel as string as string, newTextInput as string);
+              await waitFor(() => {
+                expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+              });
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep),
+              ).not.toBeInTheDocument();
+              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+                "COMPLETE-ACTIVE",
+              );
+            },
+          );
         });
       });
 
@@ -2037,7 +2126,7 @@ describe("<BusinessFormationPaginator />", () => {
               ...business.formationData,
               formationFormData: generateFormationFormData(
                 {},
-                { legalStructureId: "limited-liability-company" }
+                { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -2083,7 +2172,9 @@ describe("<BusinessFormationPaginator />", () => {
           expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("COMPLETE");
           expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("COMPLETE");
           expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Review"))).toEqual("INCOMPLETE-ACTIVE");
+          expect(page.getStepStateInStepper(LookupStepIndexByName("Review"))).toEqual(
+            "INCOMPLETE-ACTIVE",
+          );
         });
       });
     });
@@ -2105,7 +2196,9 @@ describe("<BusinessFormationPaginator />", () => {
       });
       page.fillText("Search business name", "Pizza Joint");
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(currentBusiness().formationData.formationFormData.businessName).toEqual(
+          "Pizza Joint",
+        ),
       );
     });
 
@@ -2130,7 +2223,9 @@ describe("<BusinessFormationPaginator />", () => {
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
       await waitFor(() => {
-        expect(currentBusiness().formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+        expect(currentBusiness().formationData.businessNameAvailability?.status).toEqual(
+          "UNAVAILABLE",
+        );
       });
     });
 
@@ -2154,7 +2249,9 @@ describe("<BusinessFormationPaginator />", () => {
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
 
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([""])
+        expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([
+          "",
+        ]),
       );
       await page.stepperClickToContactsStep();
       await page.stepperClickToBusinessStep();
@@ -2181,7 +2278,9 @@ describe("<BusinessFormationPaginator />", () => {
       });
       makeChangeToForm(page);
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(currentBusiness().formationData.formationFormData.businessName).toEqual(
+          "Pizza Joint",
+        ),
       );
 
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
@@ -2344,43 +2443,43 @@ describe("<BusinessFormationPaginator />", () => {
       preparePage({ business, displayContent });
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Name")
+        expect.stringContaining("Name"),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Business")
+        expect.stringContaining("Business"),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Contacts")
+        expect.stringContaining("Contacts"),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Billing")
+        expect.stringContaining("Billing"),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Review")
+        expect.stringContaining("Review"),
       );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)).toHaveAttribute(
         "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete),
       );
     });
   });

@@ -31,7 +31,8 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     ...getLegalStructureAddOns(profileData),
   ];
 
-  const isDomesticEmployer = profileData.businessPersona === "STARTING" && industryId === "domestic-employer";
+  const isDomesticEmployer =
+    profileData.businessPersona === "STARTING" && industryId === "domestic-employer";
   if (isDomesticEmployer) {
     addOns = [];
   }
@@ -52,7 +53,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     roadmap = removeTask(roadmap, "register-for-ein");
   }
 
-  if (getIsApplicableToFunctionByFieldName("carService")(industryId) && profileData.carService === "BOTH") {
+  if (
+    getIsApplicableToFunctionByFieldName("carService")(industryId) &&
+    profileData.carService === "BOTH"
+  ) {
     roadmap = removeTask(roadmap, "taxi-insurance");
   }
 
@@ -80,7 +84,10 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
   return addOns;
 };
 
-const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | undefined): string[] => {
+const getIndustryBasedAddOns = (
+  profileData: ProfileData,
+  industryId: string | undefined,
+): string[] => {
   const industry = LookupIndustryById(industryId);
   if (industry.id === "") {
     return [];
@@ -226,7 +233,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("reseller");
   }
 
-  if (profileData.propertyLeaseType === "LONG_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+  if (
+    profileData.propertyLeaseType === "LONG_TERM_RENTAL" ||
+    profileData.propertyLeaseType === "BOTH"
+  ) {
     if (profileData.hasThreeOrMoreRentalUnits) {
       addOns.push("residential-landlord-long-term-many-units");
     } else {
@@ -234,7 +244,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (profileData.propertyLeaseType === "SHORT_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+  if (
+    profileData.propertyLeaseType === "SHORT_TERM_RENTAL" ||
+    profileData.propertyLeaseType === "BOTH"
+  ) {
     addOns.push("short-term-rental-registration");
   }
 
@@ -297,7 +310,10 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
   return addOns;
 };
 
-const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {
+const addMunicipalitySpecificData = async (
+  roadmap: Roadmap,
+  municipalityId: string,
+): Promise<Roadmap> => {
   const municipality = await fetchMunicipalityById(municipalityId);
   if (!municipality) {
     return roadmap;
@@ -336,7 +352,10 @@ const removeTask = (roadmap: Roadmap, taskId: string): Roadmap => {
   };
 };
 
-const applyTemplateEvalForAllTasks = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {
+const applyTemplateEvalForAllTasks = (
+  roadmap: Roadmap,
+  evalValues: Record<string, string>,
+): Roadmap => {
   for (const task of roadmap.tasks) {
     if (task.callToActionLink) {
       task.callToActionLink = templateEval(task.callToActionLink, evalValues);

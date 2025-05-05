@@ -69,12 +69,14 @@ describe("<DeferredLocationQuestion />", () => {
         ),
         initialRoadmap: generateRoadmap({}),
         mockSetRoadmapFunction: setRoadmap,
-      })
+      }),
     );
   };
 
   it("shows location question and not inner content if location is not yet answered", () => {
-    const business = generateBusiness({ profileData: generateProfileData({ municipality: undefined }) });
+    const business = generateBusiness({
+      profileData: generateProfileData({ municipality: undefined }),
+    });
     renderComponent({ initialBusiness: business, innerContent: "inner-content" });
     expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
     expect(screen.queryByText("inner-content")).not.toBeInTheDocument();
@@ -93,7 +95,9 @@ describe("<DeferredLocationQuestion />", () => {
   describe("when saving location", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const absecon = generateMunicipality({ displayName: "Absecon" });
-    const business = generateBusiness({ profileData: generateProfileData({ municipality: undefined }) });
+    const business = generateBusiness({
+      profileData: generateProfileData({ municipality: undefined }),
+    });
 
     const selectNewarkAndSave = async (): Promise<void> => {
       renderComponent({
@@ -151,7 +155,7 @@ describe("<DeferredLocationQuestion />", () => {
     it("sends analytics when municipality entered for first time", async () => {
       await selectNewarkAndSave();
       expect(
-        mockAnalytics.event.task_location_question.submit.location_entered_for_first_time
+        mockAnalytics.event.task_location_question.submit.location_entered_for_first_time,
       ).toHaveBeenCalled();
     });
   });

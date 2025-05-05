@@ -18,7 +18,12 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
-import { Industry, arrayOfSectors, randomElementFromArray, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  Industry,
+  arrayOfSectors,
+  randomElementFromArray,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 
 describe("Profile [feature] [all] [group4]", () => {
   beforeEach(() => {
@@ -60,7 +65,7 @@ describe("Profile [feature] [all] [group4]", () => {
       const newIndustry = randomElementFromArray(
         homeBasedIndustries.filter((x) => {
           return x.isEnabled;
-        }) as Industry[]
+        }) as Industry[],
       );
       const newtownDisplayName = "Bass River";
       const newHomeBasedQuestion = Boolean(randomInt() % 2);
@@ -113,7 +118,7 @@ describe("Profile [feature] [all] [group4]", () => {
       const industry = randomElementFromArray(
         liquorLicenseIndustries.filter((x) => {
           return x.isEnabled;
-        }) as Industry[]
+        }) as Industry[],
       );
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable

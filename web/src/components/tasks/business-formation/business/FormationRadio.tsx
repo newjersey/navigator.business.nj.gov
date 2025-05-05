@@ -67,7 +67,10 @@ export const FormationRadio = (props: Props): ReactElement => {
                 style={{ alignItems: "center" }}
                 value={value}
                 control={
-                  <Radio data-testid={`${props.fieldName}-${value}`} color={hasError ? "error" : "primary"} />
+                  <Radio
+                    data-testid={`${props.fieldName}-${value}`}
+                    color={hasError ? "error" : "primary"}
+                  />
                 }
                 label={getRadioLabel(value)}
               />

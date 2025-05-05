@@ -41,7 +41,9 @@ export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
   setMockUserDataResponse({ userData });
 };
 
-export const generateUseUserDataResponse = (overrides: Partial<UseUserDataResponse>): UseUserDataResponse => {
+export const generateUseUserDataResponse = (
+  overrides: Partial<UseUserDataResponse>,
+): UseUserDataResponse => {
   const userData = overrides.userData ?? generateUserData({});
   const business =
     overrides.userData === undefined ? undefined : userData.businesses[userData.currentBusinessId];

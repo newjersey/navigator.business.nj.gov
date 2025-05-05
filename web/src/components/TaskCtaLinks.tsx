@@ -31,7 +31,7 @@ export const TaskCtaLinks = (props: Props): ReactElement => {
       onClick: () => {
         analytics.event.task_primary_call_to_action.click.open_external_website(
           taskCtaText || Config.taskDefaults.defaultCallToActionText,
-          taskCtaDestination as string
+          taskCtaDestination as string,
         );
         openInNewTab(taskCtaDestination);
       },

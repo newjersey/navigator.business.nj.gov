@@ -5,7 +5,13 @@ import path from "path";
 import { getFileNameByUrlSlug } from "./helpers";
 
 const certificationDir = path.join(process.cwd(), "..", "content", "src", "certifications");
-const archivedCertificationDir = path.join(process.cwd(), "..", "content", "src", "archived-certifications");
+const archivedCertificationDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "archived-certifications",
+);
 
 type PathParams<P> = { params: P; locale?: string };
 export type CertificationUrlSlugParam = {

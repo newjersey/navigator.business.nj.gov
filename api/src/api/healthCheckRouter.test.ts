@@ -48,11 +48,15 @@ describe("healthCheckRouter", () => {
   beforeEach(async () => {
     app = setupExpress(false);
     app.use(
-      healthCheckRouterFactory(new Map<string, HealthCheckMethod>([["mockOK", mockOKHealthCheckMethod]])),
-      healthCheckRouterFactory(new Map<string, HealthCheckMethod>([["mockErr", mockErrorHealthCheckMethod]])),
       healthCheckRouterFactory(
-        new Map<string, HealthCheckMethod>([["mockTimeout", mockTimeoutHealthCheckMethod]])
-      )
+        new Map<string, HealthCheckMethod>([["mockOK", mockOKHealthCheckMethod]]),
+      ),
+      healthCheckRouterFactory(
+        new Map<string, HealthCheckMethod>([["mockErr", mockErrorHealthCheckMethod]]),
+      ),
+      healthCheckRouterFactory(
+        new Map<string, HealthCheckMethod>([["mockTimeout", mockTimeoutHealthCheckMethod]]),
+      ),
     );
   });
 

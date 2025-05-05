@@ -24,7 +24,7 @@ export const makePostBody = (
   userData: UserData,
   returnUrl: string,
   config: ApiConfig,
-  foreignGoodStandingFile: InputFile | undefined
+  foreignGoodStandingFile: InputFile | undefined,
 ): ApiSubmission => {
   const currentBusiness = getCurrentBusiness(userData);
   const formationFormData = currentBusiness.formationData.formationFormData;
@@ -81,7 +81,7 @@ export const makePostBody = (
 
   const isInFormAndTerms = (
     input: "IN_BYLAWS" | "IN_FORM" | undefined,
-    terms: string | undefined
+    terms: string | undefined,
   ): string | undefined => {
     return input === "IN_FORM" ? terms : undefined;
   };
@@ -142,33 +142,33 @@ export const makePostBody = (
           AdditionalDomesticNonProfitCorp: {
             HasMembers: formationFormData.hasNonprofitBoardMembers ? "Yes" : "No",
             MemberTermsProvisionLocation: isInFormOrBylaw(
-              formationFormData.nonprofitBoardMemberQualificationsSpecified
+              formationFormData.nonprofitBoardMemberQualificationsSpecified,
             ),
             MemberTerms: isInFormAndTerms(
               formationFormData.nonprofitBoardMemberQualificationsSpecified,
-              formationFormData.nonprofitBoardMemberQualificationsTerms
+              formationFormData.nonprofitBoardMemberQualificationsTerms,
             ),
 
             MemberClassPermissionsProvisionLocation: isInFormOrBylaw(
-              formationFormData.nonprofitBoardMemberRightsSpecified
+              formationFormData.nonprofitBoardMemberRightsSpecified,
             ),
             MemberClassPermissions: isInFormAndTerms(
               formationFormData.nonprofitBoardMemberRightsSpecified,
-              formationFormData.nonprofitBoardMemberRightsTerms
+              formationFormData.nonprofitBoardMemberRightsTerms,
             ),
             TrusteeElectionProcessProvisionLocation: isInFormOrBylaw(
-              formationFormData.nonprofitTrusteesMethodSpecified
+              formationFormData.nonprofitTrusteesMethodSpecified,
             ),
             TrusteeElectionProcess: isInFormAndTerms(
               formationFormData.nonprofitTrusteesMethodSpecified,
-              formationFormData.nonprofitTrusteesMethodTerms
+              formationFormData.nonprofitTrusteesMethodTerms,
             ),
             AssetDistributionProvisionLocation: isInFormOrBylaw(
-              formationFormData.nonprofitAssetDistributionSpecified
+              formationFormData.nonprofitAssetDistributionSpecified,
             ),
             AssetDistribution: isInFormAndTerms(
               formationFormData.nonprofitAssetDistributionSpecified,
-              formationFormData.nonprofitAssetDistributionTerms
+              formationFormData.nonprofitAssetDistributionTerms,
             ),
           },
         };
@@ -232,13 +232,13 @@ export const makePostBody = (
         ForeignStateOfFormation: formationFormData.foreignStateOfFormation,
         ForeignDateOfFormation: formationFormData.foreignDateOfFormation
           ? parseDateWithFormat(formationFormData.foreignDateOfFormation, defaultDateFormat).format(
-              formationApiDateFormat
+              formationApiDateFormat,
             )
           : undefined,
         BusinessPurpose: formationFormData.businessPurpose || undefined,
         EffectiveFilingDate: parseDateWithFormat(
           formationFormData.businessStartDate,
-          defaultDateFormat
+          defaultDateFormat,
         ).format(formationApiDateFormat),
         MainAddress: getMainBusinessAddress(),
         TotalShares:
@@ -480,7 +480,19 @@ type BusinessType =
 
 type FormationFields = {
   businessType: BusinessType;
-  shortDescription: "LLC" | "LLP" | "LP" | "DP" | "NP" | "NV" | "NF" | "LF" | "LFC" | "FLC" | "FLP" | "FR";
+  shortDescription:
+    | "LLC"
+    | "LLP"
+    | "LP"
+    | "DP"
+    | "NP"
+    | "NV"
+    | "NF"
+    | "LF"
+    | "LFC"
+    | "FLC"
+    | "FLP"
+    | "FR";
 };
 
 const BusinessTypeMap: Record<FormationLegalType | "veteran-nonprofit", FormationFields> = {

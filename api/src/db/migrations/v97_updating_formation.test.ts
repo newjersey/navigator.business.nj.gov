@@ -21,10 +21,10 @@ describe("migrate_v96_to_v97", () => {
         {
           formationFormData: v96generateFormationFormData(
             { members: [v96generateFormationAddress({ addressState: "Maine" })] },
-            "sole-proprietorship"
+            "sole-proprietorship",
           ),
         },
-        "sole-proprietorship"
+        "sole-proprietorship",
       ),
     });
     migrate_v96_to_v97(v96);
@@ -48,10 +48,10 @@ describe("migrate_v96_to_v97", () => {
           {
             formationFormData: v96generateFormationFormData(
               { members: [v96generateFormationAddress({ addressState: "Maine" })] },
-              legalStructureId
+              legalStructureId,
             ),
           },
-          legalStructureId
+          legalStructureId,
         ),
       });
       const v97 = migrate_v96_to_v97(v96);
@@ -70,7 +70,9 @@ describe("migrate_v96_to_v97", () => {
       it("renames businessAddress fields", () => {
         expect(v97.formationData.formationFormData.addressCity).toEqual(undefined);
         expect(v97.formationData.formationFormData).not.toContain("businessAddressCity");
-        expect(v97.formationData.formationFormData.addressMunicipality).toEqual(businessAddressCity);
+        expect(v97.formationData.formationFormData.addressMunicipality).toEqual(
+          businessAddressCity,
+        );
         expect(v97.formationData.formationFormData.addressLine1).toEqual(businessAddressLine1);
         expect(v97.formationData.formationFormData).not.toContain("businessAddressLine1");
         expect(v97.formationData.formationFormData.addressLine2).toEqual(businessAddressLine2);
@@ -98,7 +100,9 @@ describe("migrate_v96_to_v97", () => {
       });
 
       it("adds new agent office municipality field but retains the legacy agent office city field", () => {
-        expect(v97.formationData.formationFormData.agentOfficeAddressMunicipality).toEqual(undefined);
+        expect(v97.formationData.formationFormData.agentOfficeAddressMunicipality).toEqual(
+          undefined,
+        );
         expect(v97.formationData.formationFormData.agentOfficeAddressCity).not.toEqual(undefined);
       });
     });
@@ -112,10 +116,10 @@ describe("migrate_v96_to_v97", () => {
         {
           formationFormData: v96generateFormationFormData(
             { members: [v96generateFormationAddress({ addressState: "Maine" })] },
-            legalStructureId
+            legalStructureId,
           ),
         },
-        legalStructureId
+        legalStructureId,
       ),
     });
     const v97 = migrate_v96_to_v97(v96);
@@ -127,16 +131,24 @@ describe("migrate_v96_to_v97", () => {
     it("converts members to new international address format", () => {
       expect(v97.formationData.formationFormData.members).toEqual(
         v96.formationData.formationFormData.members.map((member) => {
-          return { ...member, addressCountry: "US", addressState: { shortCode: "ME", name: "Maine" } };
-        })
+          return {
+            ...member,
+            addressCountry: "US",
+            addressState: { shortCode: "ME", name: "Maine" },
+          };
+        }),
       );
     });
 
     it("converts signers to new titled format", () => {
       expect(v97.formationData.formationFormData.signers).toEqual(
         v96.formationData.formationFormData.signers.map((signer) => {
-          return { name: signer.name, signature: signer.signature, title: "Authorized Representative" };
-        })
+          return {
+            name: signer.name,
+            signature: signer.signature,
+            title: "Authorized Representative",
+          };
+        }),
       );
     });
   });
@@ -149,7 +161,7 @@ describe("migrate_v96_to_v97", () => {
         {
           formationFormData: v96generateFormationFormData({}, legalStructureId),
         },
-        legalStructureId
+        legalStructureId,
       ),
     });
     const v97 = migrate_v96_to_v97(v96);
@@ -166,7 +178,7 @@ describe("migrate_v96_to_v97", () => {
       expect(v97.formationData.formationFormData.signers).toEqual(
         v96.formationData.formationFormData.signers.map((signer) => {
           return { name: signer.name, signature: signer.signature, title: "Authorized Partner" };
-        })
+        }),
       );
     });
   });
@@ -183,10 +195,10 @@ describe("migrate_v96_to_v97", () => {
               members: [incorporator],
               signers: [incorporator],
             },
-            legalStructureId
+            legalStructureId,
           ),
         },
-        legalStructureId
+        legalStructureId,
       ),
     });
     const v97 = migrate_v96_to_v97(v96);
@@ -200,7 +212,7 @@ describe("migrate_v96_to_v97", () => {
             addressState: { shortCode: "ME", name: "Maine" },
             title: "General Partner",
           };
-        })
+        }),
       );
     });
 
@@ -225,10 +237,10 @@ describe("migrate_v96_to_v97", () => {
                 members: [v96generateFormationAddress({ addressState: "Maine" })],
                 signers: [v96generateFormationAddress({ addressState: "Maine" })],
               },
-              legalStructureId
+              legalStructureId,
             ),
           },
-          legalStructureId
+          legalStructureId,
         ),
       });
       const v97 = migrate_v96_to_v97(v96);
@@ -242,15 +254,19 @@ describe("migrate_v96_to_v97", () => {
               addressState: { shortCode: "ME", name: "Maine" },
               title: "Incorporator",
             };
-          })
+          }),
         );
       });
 
       it("converts members (directors) to new international address format", () => {
         expect(v97.formationData.formationFormData.members).toEqual(
           v96.formationData.formationFormData.members.map((member) => {
-            return { ...member, addressCountry: "US", addressState: { shortCode: "ME", name: "Maine" } };
-          })
+            return {
+              ...member,
+              addressCountry: "US",
+              addressState: { shortCode: "ME", name: "Maine" },
+            };
+          }),
         );
       });
 

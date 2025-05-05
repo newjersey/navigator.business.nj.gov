@@ -42,12 +42,18 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
   it("opens when the icon is clicked", async () => {
     render(<NavBarMobileQuickLinksSlideOutMenu />);
 
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarSearchText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarSearchText),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarOperateText),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText),
+    ).not.toBeInTheDocument();
 
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-open");
     expect(openMenuIcon).toBeInTheDocument();
@@ -61,7 +67,9 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_icon_quick_links.click.open_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_icon_quick_links.click.open_mobile_menu,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -84,18 +92,24 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     fireEvent.click(closeMenuIcon);
 
     await waitFor(() => {
-      expect(screen.queryByText(Config.navigationQuickLinks.navBarSearchText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationQuickLinks.navBarSearchText),
+      ).not.toBeInTheDocument();
     });
 
     expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarOperateText),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText),
+    ).not.toBeInTheDocument();
 
     await waitFor(() => {
       expect(
-        mockAnalytics.event.mobile_menu_close_button_quick_links.click.close_mobile_menu
+        mockAnalytics.event.mobile_menu_close_button_quick_links.click.close_mobile_menu,
       ).toHaveBeenCalled();
     });
   });
@@ -119,17 +133,25 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     fireEvent.click(closeMenuIcon);
 
     await waitFor(() => {
-      expect(screen.queryByText(Config.navigationQuickLinks.navBarSearchText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationQuickLinks.navBarSearchText),
+      ).not.toBeInTheDocument();
     });
 
     expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarOperateText),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText),
+    ).not.toBeInTheDocument();
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_menu_quick_links.click_outside.close_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_menu_quick_links.click_outside.close_mobile_menu,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -142,7 +164,7 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarPlanLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -155,7 +177,7 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarOperateLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -168,7 +190,7 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarGrowLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -181,7 +203,7 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarUpdatesLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 
@@ -194,7 +216,7 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarSearchLink,
       "_blank",
-      "noopener noreferrer"
+      "noopener noreferrer",
     );
   });
 });

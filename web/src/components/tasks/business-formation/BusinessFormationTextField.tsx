@@ -6,7 +6,8 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { FormationTextField } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
-export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
+export interface Props
+  extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
   fieldName: FormationTextField;
   label?: string;
   secondaryLabel?: string;
@@ -20,7 +21,10 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
-    setFormationFormData((formationFormData) => ({ ...formationFormData, [props.fieldName]: value }));
+    setFormationFormData((formationFormData) => ({
+      ...formationFormData,
+      [props.fieldName]: value,
+    }));
   };
 
   const onValidation = (): void => {

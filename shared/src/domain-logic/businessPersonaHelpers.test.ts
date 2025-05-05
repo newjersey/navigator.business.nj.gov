@@ -26,7 +26,7 @@ const generateBusinessWithBusinessPersona = (businessPersona: BusinessPersona): 
 
 const generateBusinessWithBusinessPersonaAndIndustry = (
   businessPersona: BusinessPersona,
-  industryId: string
+  industryId: string,
 ): Business =>
   generateBusiness({
     profileData: generateProfileData({
@@ -36,7 +36,7 @@ const generateBusinessWithBusinessPersonaAndIndustry = (
   });
 
 const generateForeignBusinessWithForeignBusinessTypeIds = (
-  foreignBusinessTypeIds: ForeignBusinessTypeId[]
+  foreignBusinessTypeIds: ForeignBusinessTypeId[],
 ): Business => {
   return generateBusiness({
     profileData: generateProfileData({
@@ -84,21 +84,28 @@ describe("businessPersonaHelpers", () => {
   });
 
   describe("isNexusBusiness", () => {
-    it.each(NexusBusinessTypeIds)(`returns true when %s`, (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
-      expect(isNexusBusiness(generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds]))).toBe(
-        true
-      );
-    });
+    it.each(NexusBusinessTypeIds)(
+      `returns true when %s`,
+      (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
+        expect(
+          isNexusBusiness(
+            generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds]),
+          ),
+        ).toBe(true);
+      },
+    );
 
     it.each([...RemoteSellerBusinessTypeIds, ...RemoteWorkerBusinessTypeIds])(
       `returns false when %s`,
       (RemoteSellerOrWorkerBusinessTypeIds: ForeignBusinessTypeId) => {
         expect(
           isNexusBusiness(
-            generateForeignBusinessWithForeignBusinessTypeIds([RemoteSellerOrWorkerBusinessTypeIds])
-          )
+            generateForeignBusinessWithForeignBusinessTypeIds([
+              RemoteSellerOrWorkerBusinessTypeIds,
+            ]),
+          ),
         ).toBe(false);
-      }
+      },
     );
 
     it("returns false when empty", () => {
@@ -117,8 +124,8 @@ describe("businessPersonaHelpers", () => {
               foreignBusinessTypeIds: ["employeesInNJ"],
               businessPersona: "STARTING",
             }),
-          })
-        )
+          }),
+        ),
       ).toBe(false);
     });
   });
@@ -129,24 +136,27 @@ describe("businessPersonaHelpers", () => {
       (RemoteWorkerOrSellerBusinessTypeId: ForeignBusinessTypeId) => {
         expect(
           isRemoteWorkerOrSellerBusiness(
-            generateForeignBusinessWithForeignBusinessTypeIds([RemoteWorkerOrSellerBusinessTypeId])
-          )
+            generateForeignBusinessWithForeignBusinessTypeIds([RemoteWorkerOrSellerBusinessTypeId]),
+          ),
         ).toBe(true);
-      }
+      },
     );
 
-    it.each(NexusBusinessTypeIds)(`returns false when %s`, (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
-      expect(
-        isRemoteWorkerOrSellerBusiness(
-          generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds])
-        )
-      ).toBe(false);
-    });
+    it.each(NexusBusinessTypeIds)(
+      `returns false when %s`,
+      (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
+        expect(
+          isRemoteWorkerOrSellerBusiness(
+            generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds]),
+          ),
+        ).toBe(false);
+      },
+    );
 
     it("returns false when empty", () => {
-      expect(isRemoteWorkerOrSellerBusiness(generateForeignBusinessWithForeignBusinessTypeIds([]))).toBe(
-        false
-      );
+      expect(
+        isRemoteWorkerOrSellerBusiness(generateForeignBusinessWithForeignBusinessTypeIds([])),
+      ).toBe(false);
     });
 
     it("returns false when business is undefined", () => {
@@ -161,8 +171,8 @@ describe("businessPersonaHelpers", () => {
               foreignBusinessTypeIds: ["employeesInNJ"],
               businessPersona: "STARTING",
             }),
-          })
-        )
+          }),
+        ),
       ).toBe(false);
     });
   });
@@ -175,16 +185,22 @@ describe("businessPersonaHelpers", () => {
     it("returns NEXUS for employeeOrContractorInNJ as highest priority", () => {
       expect(determineForeignBusinessType(["employeeOrContractorInNJ"])).toEqual("NEXUS");
 
-      expect(determineForeignBusinessType(["employeeOrContractorInNJ", "employeesInNJ"])).toEqual("NEXUS");
-      expect(determineForeignBusinessType(["employeeOrContractorInNJ", "transactionsInNJ"])).toEqual("NEXUS");
-      expect(determineForeignBusinessType(["employeeOrContractorInNJ", "revenueInNJ"])).toEqual("NEXUS");
+      expect(determineForeignBusinessType(["employeeOrContractorInNJ", "employeesInNJ"])).toEqual(
+        "NEXUS",
+      );
+      expect(
+        determineForeignBusinessType(["employeeOrContractorInNJ", "transactionsInNJ"]),
+      ).toEqual("NEXUS");
+      expect(determineForeignBusinessType(["employeeOrContractorInNJ", "revenueInNJ"])).toEqual(
+        "NEXUS",
+      );
       expect(
         determineForeignBusinessType([
           "employeeOrContractorInNJ",
           "revenueInNJ",
           "transactionsInNJ",
           "employeesInNJ",
-        ])
+        ]),
       ).toEqual("NEXUS");
     });
 
@@ -195,7 +211,12 @@ describe("businessPersonaHelpers", () => {
       expect(determineForeignBusinessType(["officeInNJ", "transactionsInNJ"])).toEqual("NEXUS");
       expect(determineForeignBusinessType(["officeInNJ", "revenueInNJ"])).toEqual("NEXUS");
       expect(
-        determineForeignBusinessType(["officeInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"])
+        determineForeignBusinessType([
+          "officeInNJ",
+          "revenueInNJ",
+          "transactionsInNJ",
+          "employeesInNJ",
+        ]),
       ).toEqual("NEXUS");
     });
 
@@ -206,25 +227,34 @@ describe("businessPersonaHelpers", () => {
       expect(determineForeignBusinessType(["propertyInNJ", "transactionsInNJ"])).toEqual("NEXUS");
       expect(determineForeignBusinessType(["propertyInNJ", "revenueInNJ"])).toEqual("NEXUS");
       expect(
-        determineForeignBusinessType(["propertyInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"])
+        determineForeignBusinessType([
+          "propertyInNJ",
+          "revenueInNJ",
+          "transactionsInNJ",
+          "employeesInNJ",
+        ]),
       ).toEqual("NEXUS");
     });
 
     it("returns NEXUS for companyOperatedVehiclesInNJ as highest priority", () => {
       expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ"])).toEqual("NEXUS");
 
-      expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "employeesInNJ"])).toEqual("NEXUS");
-      expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "transactionsInNJ"])).toEqual(
-        "NEXUS"
+      expect(
+        determineForeignBusinessType(["companyOperatedVehiclesInNJ", "employeesInNJ"]),
+      ).toEqual("NEXUS");
+      expect(
+        determineForeignBusinessType(["companyOperatedVehiclesInNJ", "transactionsInNJ"]),
+      ).toEqual("NEXUS");
+      expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "revenueInNJ"])).toEqual(
+        "NEXUS",
       );
-      expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "revenueInNJ"])).toEqual("NEXUS");
       expect(
         determineForeignBusinessType([
           "companyOperatedVehiclesInNJ",
           "revenueInNJ",
           "transactionsInNJ",
           "employeesInNJ",
-        ])
+        ]),
       ).toEqual("NEXUS");
     });
 
@@ -233,24 +263,30 @@ describe("businessPersonaHelpers", () => {
       expect(determineForeignBusinessType(["propertyInNJ"])).toEqual("NEXUS");
       expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ"])).toEqual("NEXUS");
       expect(
-        determineForeignBusinessType(["officeInNJ", "propertyInNJ", "companyOperatedVehiclesInNJ"])
+        determineForeignBusinessType(["officeInNJ", "propertyInNJ", "companyOperatedVehiclesInNJ"]),
       ).toEqual("NEXUS");
     });
 
     it("returns REMOTE_WORKER for employeesInNJ as higher priority over remote_seller (but not nexus)", () => {
       expect(determineForeignBusinessType(["employeesInNJ"])).toEqual("REMOTE_WORKER");
 
-      expect(determineForeignBusinessType(["employeesInNJ", "transactionsInNJ"])).toEqual("REMOTE_WORKER");
-      expect(determineForeignBusinessType(["employeesInNJ", "revenueInNJ"])).toEqual("REMOTE_WORKER");
-      expect(determineForeignBusinessType(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])).toEqual(
-        "REMOTE_WORKER"
+      expect(determineForeignBusinessType(["employeesInNJ", "transactionsInNJ"])).toEqual(
+        "REMOTE_WORKER",
       );
+      expect(determineForeignBusinessType(["employeesInNJ", "revenueInNJ"])).toEqual(
+        "REMOTE_WORKER",
+      );
+      expect(
+        determineForeignBusinessType(["employeesInNJ", "revenueInNJ", "transactionsInNJ"]),
+      ).toEqual("REMOTE_WORKER");
     });
 
     it("returns REMOTE_SELLER for revenueInNJ or transactionsInNJ", () => {
       expect(determineForeignBusinessType(["revenueInNJ"])).toEqual("REMOTE_SELLER");
       expect(determineForeignBusinessType(["transactionsInNJ"])).toEqual("REMOTE_SELLER");
-      expect(determineForeignBusinessType(["revenueInNJ", "transactionsInNJ"])).toEqual("REMOTE_SELLER");
+      expect(determineForeignBusinessType(["revenueInNJ", "transactionsInNJ"])).toEqual(
+        "REMOTE_SELLER",
+      );
     });
 
     it("returns none when none is selected", () => {
@@ -272,14 +308,16 @@ describe("businessPersonaHelpers", () => {
     });
 
     it("returns false when business persona is FOREIGN", () => {
-      expect(isDomesticEmployerBusiness(generateBusinessWithBusinessPersona("FOREIGN"))).toBe(false);
+      expect(isDomesticEmployerBusiness(generateBusinessWithBusinessPersona("FOREIGN"))).toBe(
+        false,
+      );
     });
 
     it("returns true when business persona is STARTING and industry is domestic employer", () => {
       expect(
         isDomesticEmployerBusiness(
-          generateBusinessWithBusinessPersonaAndIndustry("STARTING", "domestic-employer")
-        )
+          generateBusinessWithBusinessPersonaAndIndustry("STARTING", "domestic-employer"),
+        ),
       ).toBe(true);
     });
   });

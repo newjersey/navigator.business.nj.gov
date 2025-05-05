@@ -43,7 +43,10 @@ export const ReviewBillingServices = (): ReactElement => {
         label={Config.formation.fields.paymentType.reviewStepsServicesSelected}
         value={getDocumentsList()}
       />
-      <ReviewLineItem label={Config.formation.fields.paymentType.label} value={getPaymentTypeLabel()} />
+      <ReviewLineItem
+        label={Config.formation.fields.paymentType.label}
+        value={getPaymentTypeLabel()}
+      />
     </ReviewSubSection>
   );
 };

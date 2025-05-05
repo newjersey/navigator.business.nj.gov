@@ -270,7 +270,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v72BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
@@ -359,7 +363,7 @@ export const generatev72ProfileData = (overrides: Partial<v72ProfileData>): v72P
 };
 
 export const generatev72FormationFormData = (
-  overrides: Partial<v72FormationFormData>
+  overrides: Partial<v72FormationFormData>,
 ): v72FormationFormData => {
   return {
     businessName: "",
@@ -400,7 +404,7 @@ export const generatev72FormationFormData = (
 };
 
 export const generatev72GetFilingResponse = (
-  overrides: Partial<v72GetFilingResponse>
+  overrides: Partial<v72GetFilingResponse>,
 ): v72GetFilingResponse => {
   return {
     success: true,

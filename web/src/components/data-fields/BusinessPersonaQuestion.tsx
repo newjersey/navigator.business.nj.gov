@@ -19,7 +19,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
   const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
     "businessPersona",
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   RegisterForOnSubmit(() => state.profileData.businessPersona !== undefined);

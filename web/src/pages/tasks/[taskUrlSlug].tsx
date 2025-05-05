@@ -54,7 +54,7 @@ const TaskPage = (props: Props): ReactElement => {
   const renderNextAndPreviousButtons = (): ReactElement | undefined => {
     const isValidLegalStructure = allowFormation(
       business?.profileData.legalStructureId,
-      business?.profileData.businessPersona
+      business?.profileData.businessPersona,
     );
     if (props.task.id === formationTaskId && isValidLegalStructure) {
       return undefined;
@@ -65,7 +65,9 @@ const TaskPage = (props: Props): ReactElement => {
 
     return (
       <div
-        className={`flex flex-row ${previousUrlSlug ? "flex-justify" : "flex-justify-end"} margin-top-2 `}
+        className={`flex flex-row ${
+          previousUrlSlug ? "flex-justify" : "flex-justify-end"
+        } margin-top-2 `}
         data-testid="nextAndPreviousButtons"
       >
         {previousUrlSlug && (
@@ -95,10 +97,15 @@ const TaskPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <HousingMunicipalitiesContext.Provider value={{ municipalities: props.housingMunicipalities }}>
+      <HousingMunicipalitiesContext.Provider
+        value={{ municipalities: props.housingMunicipalities }}
+      >
         <NextSeo title={getNextSeoTitle(props.task.name)} />
         <PageSkeleton showNavBar showSidebar task={props.task}>
-          <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
+          <TaskSidebarPageLayout
+            task={props.task}
+            belowBoxComponent={renderNextAndPreviousButtons()}
+          >
             {renderLoadingState && <PageCircularIndicator />}
             {!renderLoadingState && (
               <TaskPageSwitchComponent
@@ -123,7 +130,11 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = ({
+  params,
+}: {
+  params: TaskUrlSlugParam;
+}): GetStaticPropsResult<Props> => {
   return {
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),

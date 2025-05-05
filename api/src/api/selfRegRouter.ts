@@ -11,7 +11,7 @@ type Mutable<T> = {
 
 export const selfRegRouterFactory = (
   databaseClient: DatabaseClient,
-  selfRegClient: SelfRegClient
+  selfRegClient: SelfRegClient,
 ): Router => {
   const router = Router();
 

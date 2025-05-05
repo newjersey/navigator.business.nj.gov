@@ -50,7 +50,8 @@ export const Tag = (props: Props): ReactElement => {
       styling = "bg-white text-base-darkest bg-accent-cool-light";
       break;
     case "accent-semi-cool-light":
-      styling = "bg-white text-base-darkest bg-accent-semi-cool-light border border-accent-semi-cool-500";
+      styling =
+        "bg-white text-base-darkest bg-accent-semi-cool-light border border-accent-semi-cool-500";
       break;
     case "accent-warm-extra-light":
       styling = "bg-accent-warm-extra-light text-base-dark";

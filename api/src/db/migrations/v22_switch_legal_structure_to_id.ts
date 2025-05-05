@@ -119,7 +119,9 @@ export const generatev22User = (overrides: Partial<v22BusinessUser>): v22Busines
   };
 };
 
-export const generatev22OnboardingData = (overrides: Partial<v22OnboardingData>): v22OnboardingData => {
+export const generatev22OnboardingData = (
+  overrides: Partial<v22OnboardingData>,
+): v22OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industryId: "restaurant",

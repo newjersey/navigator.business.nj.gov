@@ -7,7 +7,11 @@ import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from 
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateUser, getCurrentDateInNewJersey, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  generateUser,
+  getCurrentDateInNewJersey,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
@@ -34,11 +38,15 @@ describe("<Header />", () => {
     render(
       <ThemeProvider theme={createTheme()}>
         <DashboardHeader />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
-  const renderHeaderWithAuth = ({ isAuthenticated }: { isAuthenticated: IsAuthenticated }): void => {
+  const renderHeaderWithAuth = ({
+    isAuthenticated,
+  }: {
+    isAuthenticated: IsAuthenticated;
+  }): void => {
     render(
       withAuth(
         <ThemeProvider theme={createTheme()}>
@@ -46,8 +54,8 @@ describe("<Header />", () => {
         </ThemeProvider>,
         {
           isAuthenticated: isAuthenticated,
-        }
-      )
+        },
+      ),
     );
   };
 
@@ -61,14 +69,16 @@ describe("<Header />", () => {
         });
         expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.dashboardHeaderDefaults.genericStarterKitText)
+          screen.queryByText(Config.dashboardHeaderDefaults.genericStarterKitText),
         ).not.toBeInTheDocument();
       });
 
       it("displays generic starter kit text when industry is generic", () => {
         useMockProfileData({ industryId: "generic", businessPersona: "STARTING" });
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-        expect(screen.getByText(Config.dashboardHeaderDefaults.genericStarterKitText)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.dashboardHeaderDefaults.genericStarterKitText),
+        ).toBeInTheDocument();
 
         const templatedHeaderText = templateEval(Config.dashboardHeaderDefaults.starterKitText, {
           industry: LookupIndustryById("generic").name,
@@ -84,17 +94,21 @@ describe("<Header />", () => {
         const business = generateBusiness({
           profileData: generateProfileData({ industryId: "generic", businessPersona: persona }),
         });
-        const userData = generateUserDataForBusiness(business, { user: generateUser({ name: undefined }) });
+        const userData = generateUserDataForBusiness(business, {
+          user: generateUser({ name: undefined }),
+        });
         useMockUserData(userData);
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
         const templatedHeaderText = templateEval(Config.dashboardHeaderDefaults.starterKitText, {
           industry: LookupIndustryById("generic").name,
         });
         expect(
-          screen.queryByText(Config.dashboardHeaderDefaults.genericStarterKitText)
+          screen.queryByText(Config.dashboardHeaderDefaults.genericStarterKitText),
         ).not.toBeInTheDocument();
         expect(screen.queryByText(templatedHeaderText)).not.toBeInTheDocument();
-        expect(screen.getByText(Config.dashboardHeaderDefaults.noUserNameHeaderText)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.dashboardHeaderDefaults.noUserNameHeaderText),
+        ).toBeInTheDocument();
       });
     });
 
@@ -102,7 +116,9 @@ describe("<Header />", () => {
       it("greets user when name is undefined", () => {
         useMockUserData({ user: generateUser({ name: undefined }) });
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-        expect(screen.getByText(Config.dashboardHeaderDefaults.noUserNameHeaderText)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.dashboardHeaderDefaults.noUserNameHeaderText),
+        ).toBeInTheDocument();
       });
 
       it("includes user full name in header", () => {
@@ -133,26 +149,37 @@ describe("<Header />", () => {
         legalStructureId: randomPublicFilingLegalStructure(),
       });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.guestModeToProfileButtonText));
+      fireEvent.click(
+        screen.getByText(Config.dashboardHeaderDefaults.guestModeToProfileButtonText),
+      );
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("displays generic content when business name is not an empty string and user is authenticated then routes to profile page on button click", () => {
-      useMockProfileData({ businessName: "", legalStructureId: randomPublicFilingLegalStructure() });
+      useMockProfileData({
+        businessName: "",
+        legalStructureId: randomPublicFilingLegalStructure(),
+      });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
       fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("displays generic content when trade name is undefined and user is authenticated then routes to profile page on button click", () => {
-      useMockProfileData({ tradeName: undefined, legalStructureId: randomTradeNameLegalStructure() });
+      useMockProfileData({
+        tradeName: undefined,
+        legalStructureId: randomTradeNameLegalStructure(),
+      });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
       fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("displays generic content when business name is undefined and user is authenticated then routes to profile page on button click", () => {
-      useMockProfileData({ businessName: undefined, legalStructureId: randomPublicFilingLegalStructure() });
+      useMockProfileData({
+        businessName: undefined,
+        legalStructureId: randomPublicFilingLegalStructure(),
+      });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
       fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);

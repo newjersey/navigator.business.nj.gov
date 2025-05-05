@@ -13,7 +13,10 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
   return (
     <>
       <hr className="margin-y-205" />
-      <ReviewSubSection header={Config.formation.sections.addressHeader} marginOverride="margin-top-0">
+      <ReviewSubSection
+        header={Config.formation.sections.addressHeader}
+        marginOverride="margin-top-0"
+      >
         <ReviewLineItem
           label={Config.formation.fields.addressLine1.label}
           value={state.formationFormData.addressLine1}

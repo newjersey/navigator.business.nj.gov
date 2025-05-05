@@ -2,7 +2,11 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { Task } from "@/lib/types/types";
 import { getDollarValue } from "@/lib/utils/formatters";
-import { generateEmptyFormationData, generateFormationDbaContent, generateTask } from "@/test/factories";
+import {
+  generateEmptyFormationData,
+  generateFormationDbaContent,
+  generateTask,
+} from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
@@ -93,7 +97,7 @@ describe("<BusinessFormation />", () => {
 
     useMockBusiness(generateBusiness({}));
     expect(screen.getByTestId("formation-form")).toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.formation.intro.default }))
+      renderToStaticMarkup(Content({ children: Config.formation.intro.default })),
     );
   });
 
@@ -110,7 +114,7 @@ describe("<BusinessFormation />", () => {
 
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("formation-form")).toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.formation.intro.foreign }))
+      renderToStaticMarkup(Content({ children: Config.formation.intro.foreign })),
     );
   });
 
@@ -179,7 +183,7 @@ describe("<BusinessFormation />", () => {
             formationResponse: generateFormationSubmitResponse({ success: true }),
             getFilingResponse: validGetFilingResponse,
           }),
-        })
+        }),
       );
 
       mockApi.getCompletedFiling.mockResolvedValue(userDataReturnFromApi);
@@ -256,9 +260,13 @@ describe("<BusinessFormation />", () => {
           preparePage({ business: { formationData }, displayContent, task });
         });
         await waitFor(() => {
-          return expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
-            shallow: true,
-          });
+          return expect(mockPush).toHaveBeenCalledWith(
+            { pathname: "/tasks/some-formation-url" },
+            undefined,
+            {
+              shallow: true,
+            },
+          );
         });
       });
     });
@@ -502,9 +510,11 @@ describe("<BusinessFormation />", () => {
     });
     expect(formationFormData.businessSuffix).toEqual("LLC");
     expect(formationFormData.businessStartDate).toEqual(
-      getCurrentDateInNewJerseyFormatted(defaultDateFormat)
+      getCurrentDateInNewJerseyFormatted(defaultDateFormat),
     );
-    expect(formationFormData.foreignDateOfFormation).toEqual(threeDaysFromNow.format(defaultDateFormat));
+    expect(formationFormData.foreignDateOfFormation).toEqual(
+      threeDaysFromNow.format(defaultDateFormat),
+    );
     expect(formationFormData.addressLine1).toEqual("1234 main street");
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "Massachusetts", shortCode: "MA" });
@@ -830,7 +840,9 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["limited-partnership"].cost) +
+      Number.parseInt(
+        Config.formation.fields.certificateOfStanding.overrides["limited-partnership"].cost,
+      ) +
       Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
       Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
@@ -872,7 +884,9 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.canCreateLimitedPartner).toEqual(true);
     expect(formationFormData.canMakeDistribution).toEqual(false);
     expect(formationFormData.canGetDistribution).toEqual(true);
-    expect(formationFormData.createLimitedPartnerTerms).toEqual("to create partners invest over the world");
+    expect(formationFormData.createLimitedPartnerTerms).toEqual(
+      "to create partners invest over the world",
+    );
     expect(formationFormData.getDistributionTerms).toEqual("to get distribution over the world");
     expect(formationFormData.makeDistributionTerms).toEqual("");
     expect(formationFormData.paymentType).toEqual("CC");
@@ -947,7 +961,9 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["c-corporation"].cost) +
+      Number.parseInt(
+        Config.formation.fields.certificateOfStanding.overrides["c-corporation"].cost,
+      ) +
       Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
       Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
@@ -1181,7 +1197,9 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["foreign-nonprofit"].cost) +
+      Number.parseInt(
+        Config.formation.fields.certificateOfStanding.overrides["foreign-nonprofit"].cost,
+      ) +
       Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
       Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 

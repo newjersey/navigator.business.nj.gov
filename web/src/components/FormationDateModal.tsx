@@ -4,7 +4,10 @@ import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -81,7 +84,10 @@ export const FormationDateModal = (props: Props): ReactElement => {
             <Content>{Config.formationDateModal.description}</Content>
           </div>
           <hr className="margin-y-4" />
-          <WithErrorBar hasError={formContextState.fieldStates.dateOfFormation.invalid} type="ALWAYS">
+          <WithErrorBar
+            hasError={formContextState.fieldStates.dateOfFormation.invalid}
+            type="ALWAYS"
+          >
             <FieldLabelModal
               fieldName="dateOfFormation"
               overrides={{

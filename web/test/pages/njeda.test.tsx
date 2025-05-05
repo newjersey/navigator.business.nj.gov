@@ -4,7 +4,10 @@ import { Funding } from "@/lib/types/types";
 import NJEDAFundingsOnboardingPaage from "@/pages/njeda";
 import { generateFunding } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import { selectByValue } from "@/test/pages/profile/profile-helpers";
 import {
   generateBusiness,
@@ -27,11 +30,13 @@ const renderStatefulFundingsPageComponent = (business: Business, fundings: Fundi
   setupStatefulUserDataContext();
 
   render(
-    <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+    <WithStatefulUserData
+      initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
+    >
       <ThemeProvider theme={createTheme()}>
         <NJEDAFundingsOnboardingPaage fundings={fundings} noAuth={true} />
       </ThemeProvider>
-    </WithStatefulUserData>
+    </WithStatefulUserData>,
   );
 };
 
@@ -46,9 +51,11 @@ describe("njeda fundings onboarding", () => {
     const business = generateBusiness({});
     renderStatefulFundingsPageComponent(business, []);
     expect(
-      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText),
     ).toBeInTheDocument();
-    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes),
+    );
     await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "35");
     await waitFor(() => {
       selectByValue("Sector", "clean-energy");
@@ -63,9 +70,11 @@ describe("njeda fundings onboarding", () => {
     const business = generateBusiness({});
     renderStatefulFundingsPageComponent(business, []);
     expect(
-      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText),
     ).toBeInTheDocument();
-    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes),
+    );
     await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "35");
     await waitFor(() => {
       selectByValue("Sector", "clean-energy");
@@ -84,14 +93,14 @@ describe("njeda fundings onboarding", () => {
     });
     renderStatefulFundingsPageComponent(business, []);
     expect(
-      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(Config.fundingsOnboardingModal.numberOfEmployeesQuestion.questionText)
+      screen.getByText(Config.fundingsOnboardingModal.numberOfEmployeesQuestion.questionText),
     ).toBeInTheDocument();
     await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
     expect(
-      screen.getByText(Config.fundingsOnboardingModal.incompleteWarningMultipleText)
+      screen.getByText(Config.fundingsOnboardingModal.incompleteWarningMultipleText),
     ).toBeInTheDocument();
   });
 
@@ -115,7 +124,9 @@ describe("njeda fundings onboarding", () => {
     ];
     renderStatefulFundingsPageComponent(business, fundings);
 
-    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes),
+    );
     await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2000");
 
     await waitFor(() => {
@@ -125,7 +136,7 @@ describe("njeda fundings onboarding", () => {
     await user.click(screen.getByTestId(`${fundings[0].id}-button`));
 
     expect(
-      screen.queryByText(Config.fundingsOnboardingModal.incompleteWarningSingularText)
+      screen.queryByText(Config.fundingsOnboardingModal.incompleteWarningSingularText),
     ).not.toBeInTheDocument();
 
     expect(mockPush).toHaveBeenCalled();
@@ -163,7 +174,9 @@ describe("njeda fundings onboarding", () => {
     ];
     renderStatefulFundingsPageComponent(business, fundings);
 
-    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes),
+    );
     await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
 
     await waitFor(() => {
@@ -209,7 +222,9 @@ describe("njeda fundings onboarding", () => {
     ];
     renderStatefulFundingsPageComponent(business, fundings);
 
-    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes),
+    );
     await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
 
     await waitFor(() => {
@@ -219,9 +234,9 @@ describe("njeda fundings onboarding", () => {
 
     expect(screen.getByTestId(`${fundings[0].id}-button`)).toBeInTheDocument();
     expect(screen.getByTestId(`${fundings[1].id}-button`)).toBeInTheDocument();
-    expect(screen.getByText("funding-2").compareDocumentPosition(screen.getByText("funding-1"))).toBe(
-      Node.DOCUMENT_POSITION_PRECEDING
-    );
+    expect(
+      screen.getByText("funding-2").compareDocumentPosition(screen.getByText("funding-1")),
+    ).toBe(Node.DOCUMENT_POSITION_PRECEDING);
   });
 
   it("displays alert when no fundings provided", async () => {
@@ -231,7 +246,9 @@ describe("njeda fundings onboarding", () => {
     const fundings: Funding[] = [];
     renderStatefulFundingsPageComponent(business, fundings);
 
-    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes),
+    );
     await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
 
     await waitFor(() => {
@@ -276,7 +293,9 @@ describe("njeda fundings onboarding", () => {
     ];
     renderStatefulFundingsPageComponent(business, fundings);
 
-    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes),
+    );
     await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
 
     await waitFor(() => {

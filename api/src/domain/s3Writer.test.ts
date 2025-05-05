@@ -45,12 +45,14 @@ describe("s3Writer", () => {
     const response = await saveFileFromUrl(
       "https://whatever.com/thing.pdf",
       "us-east-1:1234/zzz.pdf",
-      "testBucket"
+      "testBucket",
     );
     expect(mockS3Upload).toHaveBeenCalledWith(
-      expect.objectContaining({ input: expect.objectContaining(params) })
+      expect.objectContaining({ input: expect.objectContaining(params) }),
     );
-    expect(response).toEqual("https://testBucket.s3.us-east-1.amazonaws.com/us-east-1%3A1234/zzz.pdf");
+    expect(response).toEqual(
+      "https://testBucket.s3.us-east-1.amazonaws.com/us-east-1%3A1234/zzz.pdf",
+    );
     expect(mockAxios.get).toHaveBeenCalledWith("https://whatever.com/thing.pdf", {
       responseType: "arraybuffer",
     });

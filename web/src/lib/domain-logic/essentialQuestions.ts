@@ -7,7 +7,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 
 export const getResetIndustrySpecificData = (
-  industryId: string | undefined
+  industryId: string | undefined,
 ): Partial<IndustrySpecificData> => {
   const industry = LookupIndustryById(industryId);
   return EssentialQuestions.filter((eQ) => {
@@ -18,7 +18,7 @@ export const getResetIndustrySpecificData = (
 };
 
 export const getIsApplicableToFunctionByFieldName = (
-  fieldName: ProfileContentField
+  fieldName: ProfileContentField,
 ): ((industryId: string | undefined) => boolean) => {
   return (industryId: string | undefined): boolean => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

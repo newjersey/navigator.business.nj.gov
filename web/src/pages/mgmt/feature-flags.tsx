@@ -27,7 +27,7 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
     ...new Set(
       featuresWithSuffixes.map((it) => {
         return it.split("_").slice(1, -1).join("_");
-      })
+      }),
     ),
   ];
 
@@ -47,10 +47,18 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
             return (
               <tr key={it}>
                 <td>{it}</td>
-                <td className={envVars[`FEATURE_${it}_STAGING`]?.includes("true") ? "enabled" : "disabled"}>
+                <td
+                  className={
+                    envVars[`FEATURE_${it}_STAGING`]?.includes("true") ? "enabled" : "disabled"
+                  }
+                >
                   {envVars[`FEATURE_${it}_STAGING`] || "false"}
                 </td>
-                <td className={envVars[`FEATURE_${it}_PROD`]?.includes("true") ? "enabled" : "disabled"}>
+                <td
+                  className={
+                    envVars[`FEATURE_${it}_PROD`]?.includes("true") ? "enabled" : "disabled"
+                  }
+                >
                   {envVars[`FEATURE_${it}_PROD`] || "false"}
                 </td>
               </tr>

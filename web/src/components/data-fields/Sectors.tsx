@@ -7,7 +7,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
-import { LookupSectorTypeById, SectorType, arrayOfSectors as sectors } from "@businessnjgovnavigator/shared";
+import {
+  LookupSectorTypeById,
+  SectorType,
+  arrayOfSectors as sectors,
+} from "@businessnjgovnavigator/shared";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { Autocomplete, TextField } from "@mui/material";
 import { orderBy } from "lodash";
@@ -25,14 +29,15 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "sectorId",
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["sectorId"]["default"] = getProfileConfig({
-    config: Config,
-    persona: state.flow,
-    fieldName: "sectorId",
-  });
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["sectorId"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "sectorId",
+    });
 
   const SectorsOrdered: SectorType[] = orderBy(sectors, (SectorType: SectorType) => {
     return SectorType.name;
@@ -44,7 +49,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
 
   const handleSectorSelect = (
     event: React.SyntheticEvent<Element, Event>,
-    value: SectorType | null
+    value: SectorType | null,
   ): void => {
     if (!value) {
       setSearchText("");
@@ -57,8 +62,11 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
 
   const isValid = (): boolean => {
     const existsAndIsValid =
-      !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id !== undefined;
-    const isRequiredForPhase = LookupOperatingPhaseById(state.profileData.operatingPhase).sectorRequired;
+      !!state.profileData.sectorId &&
+      LookupSectorTypeById(state.profileData.sectorId)?.id !== undefined;
+    const isRequiredForPhase = LookupOperatingPhaseById(
+      state.profileData.operatingPhase,
+    ).sectorRequired;
 
     if (props.isSectorModal) {
       return existsAndIsValid;

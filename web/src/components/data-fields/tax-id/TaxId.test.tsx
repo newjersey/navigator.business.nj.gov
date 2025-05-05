@@ -10,7 +10,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  decryptTaxId: jest.fn(),
+  decryptValue: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -34,7 +34,7 @@ const renderComponent = (profileData: ProfileData, fieldProps?: any): void => {
   render(
     <WithStatefulProfileData initialData={profileData}>
       <TaxId {...fieldProps} />
-    </WithStatefulProfileData>
+    </WithStatefulProfileData>,
   );
 };
 
@@ -80,7 +80,9 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "*******89000",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/000");
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+        "***-***-*89/000",
+      );
     });
 
     it("successfully saves to profileData", () => {
@@ -128,7 +130,7 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "",
       });
-      expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
     });
 
     it("disables the field if the encrypted tax id is populated and tax id is masked", () => {
@@ -141,47 +143,51 @@ describe("<TaxId />", () => {
     });
 
     it("decrypts the tax id if tax id is a masked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
+      expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789/000");
+        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+          "123-456-789/000",
+        );
       });
     });
 
     it("doesn't decrypt if the tax id in current profile data is an unmasked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "*******89000",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789/000");
+        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+          "123-456-789/000",
+        );
       });
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       await waitFor(() => {
         expect(currentProfileData().taxId).toEqual("123456789000");
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledTimes(1);
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
+      expect(mockApi.decryptValue).toHaveBeenCalledTimes(1);
     });
 
     it("changes the tax id input type to text when show is clicked", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
       });
@@ -193,39 +199,39 @@ describe("<TaxId />", () => {
         taxId: "1233456789000",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
     });
 
     it("toggles between hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      expect(screen.queryByText(Config.taxId.hideButtonText)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonText)).not.toBeInTheDocument();
     });
 
     it("toggles between mobile hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       setLargeScreen(false);
       renderComponent({
         ...profileData,
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
+      expect(screen.queryByText(Config.taxId.hideButtonTextMobile)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonTextMobile));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonTextMobile)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonTextMobile)).not.toBeInTheDocument();
     });
   });
 
@@ -284,7 +290,7 @@ describe("<TaxId />", () => {
           ...profileData,
           taxId: "123456789",
         },
-        { required: true }
+        { required: true },
       );
       fireEvent.click(screen.getByLabelText("Tax id location"));
       fireEvent.blur(screen.getByLabelText("Tax id location"));
@@ -355,47 +361,47 @@ describe("<TaxId />", () => {
     });
 
     it("decrypts the tax id if tax id is a masked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789");
+      mockApi.decryptValue.mockResolvedValue("123456789");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
+      expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
       });
     });
 
     it("doesn't decrypt if the tax id in current profile data is an unmasked value", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789");
+      mockApi.decryptValue.mockResolvedValue("123456789");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
       });
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       await waitFor(() => {
         expect(currentProfileData().taxId).toEqual("123456789");
       });
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledTimes(1);
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
+      expect(mockApi.decryptValue).toHaveBeenCalledTimes(1);
     });
 
     it("changes the tax id input type to text when show is clicked", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789");
+      mockApi.decryptValue.mockResolvedValue("123456789");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
         expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
       });
@@ -407,39 +413,39 @@ describe("<TaxId />", () => {
         taxId: "123456789",
       });
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
-      fireEvent.click(screen.getByText(Config.tax.hideButtonText));
+      fireEvent.click(screen.getByText(Config.taxId.hideButtonText));
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
     });
 
     it("toggles between hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       renderComponent({
         ...profileData,
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonText));
+      expect(screen.queryByText(Config.taxId.hideButtonText)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonText));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonText)).not.toBeInTheDocument();
     });
 
     it("toggles between mobile hide and show text", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789000");
+      mockApi.decryptValue.mockResolvedValue("123456789000");
       setLargeScreen(false);
       renderComponent({
         ...profileData,
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
+      expect(screen.queryByText(Config.taxId.hideButtonTextMobile)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxId.showButtonTextMobile));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+        expect(screen.getByText(Config.taxId.hideButtonTextMobile)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxId.showButtonTextMobile)).not.toBeInTheDocument();
     });
   });
 });

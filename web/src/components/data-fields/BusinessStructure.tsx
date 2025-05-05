@@ -34,7 +34,9 @@ export const BusinessStructure = (): ReactElement => {
   }, [roadmap]);
 
   const getAddOrEdit = (): string => {
-    return state.profileData.legalStructureId ? contentFromConfig.editText : contentFromConfig.addText;
+    return state.profileData.legalStructureId
+      ? contentFromConfig.editText
+      : contentFromConfig.addText;
   };
 
   const ariaLabel = `${getAddOrEdit()} ${contentFromConfig.header}`;

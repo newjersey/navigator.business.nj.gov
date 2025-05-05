@@ -9,7 +9,10 @@ type Config = {
   clientSecret: string;
 };
 
-export const DynamicsAccessTokenClient = (logWriter: LogWriterType, config: Config): AccessTokenClient => {
+export const DynamicsAccessTokenClient = (
+  logWriter: LogWriterType,
+  config: Config,
+): AccessTokenClient => {
   const getAccessToken = async (): Promise<string> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Access Token Client - Id:${logId}`);
@@ -22,7 +25,9 @@ export const DynamicsAccessTokenClient = (logWriter: LogWriterType, config: Conf
         client_secret: config.clientSecret,
       })
       .then((response) => {
-        logWriter.LogInfo(`Dynamics Access Token Client - Id:${logId} - Response Status: ${response.status}`);
+        logWriter.LogInfo(
+          `Dynamics Access Token Client - Id:${logId} - Response Status: ${response.status}`,
+        );
         return response.data.access_token || "";
       })
       .catch((error: AxiosError) => {

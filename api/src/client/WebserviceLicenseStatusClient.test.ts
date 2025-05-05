@@ -24,10 +24,13 @@ describe("WebserviceLicenseStatusClient", () => {
       const entities = [generateLicenseEntity({})];
       mockAxios.post.mockResolvedValue({ data: entities });
       expect(await client.search("some-name", "12345")).toEqual(entities);
-      expect(mockAxios.post).toHaveBeenCalledWith("www.example.com/ws/simple/queryLicenseStatuses", {
-        zipCode: "12345",
-        businessName: "some-name",
-      });
+      expect(mockAxios.post).toHaveBeenCalledWith(
+        "www.example.com/ws/simple/queryLicenseStatuses",
+        {
+          zipCode: "12345",
+          businessName: "some-name",
+        },
+      );
     });
 
     it("returns empty list if data is empty", async () => {
@@ -43,7 +46,10 @@ describe("WebserviceLicenseStatusClient", () => {
     });
 
     it("returns a failing health check if unexpected data is retrieved", async () => {
-      mockAxios.post.mockRejectedValue({ response: { status: StatusCodes.NOT_FOUND }, message: "" });
+      mockAxios.post.mockRejectedValue({
+        response: { status: StatusCodes.NOT_FOUND },
+        message: "",
+      });
       expect(await client.health()).toEqual({
         success: false,
         error: {

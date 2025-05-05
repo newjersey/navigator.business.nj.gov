@@ -79,7 +79,9 @@ export const generateV7User = (overrides: Partial<v7BusinessUser>): v7BusinessUs
   };
 };
 
-export const generateV7OnboardingData = (overrides: Partial<v7OnboardingData>): v7OnboardingData => {
+export const generateV7OnboardingData = (
+  overrides: Partial<v7OnboardingData>,
+): v7OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",

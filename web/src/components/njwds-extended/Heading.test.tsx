@@ -13,7 +13,7 @@ describe("Heading component", () => {
     render(
       <Heading level={2} styleVariant="h3">
         {sampleHeadingText}
-      </Heading>
+      </Heading>,
     );
     const headingElement = screen.getByText(sampleHeadingText);
     expect(headingElement.tagName).toEqual("H2");
@@ -24,7 +24,7 @@ describe("Heading component", () => {
     render(
       <Heading level={3} styleVariant="rawElement">
         {sampleHeadingText}
-      </Heading>
+      </Heading>,
     );
     const headingElement = screen.getByText(sampleHeadingText);
     expect(headingElement.tagName).toEqual("H3");
@@ -35,7 +35,7 @@ describe("Heading component", () => {
     render(
       <Heading level={4} className="navigator">
         {sampleHeadingText}
-      </Heading>
+      </Heading>,
     );
     const headingElement = screen.getByText(sampleHeadingText);
     expect(headingElement.tagName).toEqual("H4");

@@ -4,7 +4,14 @@ import {
   LookupOwnershipTypeById,
   OwnershipType,
 } from "@businessnjgovnavigator/shared";
-import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  ListItemText,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 export const Ownership = (): ReactElement => {

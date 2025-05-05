@@ -19,7 +19,9 @@ export const ReviewLineItem = (props: Props): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   return (
     <div
-      className={`${isTabletAndUp ? "grid-row" : "display-block"} ${props.marginOverride || "margin-top-1"}`}
+      className={`${isTabletAndUp ? "grid-row" : "display-block"} ${
+        props.marginOverride || "margin-top-1"
+      }`}
       data-testid={props.dataTestId}
     >
       <div className="text-bold grid-col flex-5">

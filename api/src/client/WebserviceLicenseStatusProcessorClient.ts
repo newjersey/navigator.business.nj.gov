@@ -11,7 +11,7 @@ import {
 } from "@shared/license";
 
 export const WebserviceLicenseStatusProcessorClient = (
-  licenseStatusClient: LicenseStatusClient
+  licenseStatusClient: LicenseStatusClient,
 ): SearchLicenseStatus => {
   return async (nameAndAddress: LicenseSearchNameAndAddress): Promise<LicenseStatusResults> => {
     const searchName = inputManipulator(nameAndAddress.name)
@@ -19,7 +19,10 @@ export const WebserviceLicenseStatusProcessorClient = (
       .removeBusinessDesignators()
       .trimPunctuation().value;
 
-    const licenseStatusClientResults = await licenseStatusClient.search(searchName, nameAndAddress.zipCode);
+    const licenseStatusClientResults = await licenseStatusClient.search(
+      searchName,
+      nameAndAddress.zipCode,
+    );
 
     const allMatchingAddressesArray = licenseStatusClientResults.filter((it) => {
       return cleanAddress(it.addressLine1).startsWith(cleanAddress(nameAndAddress.addressLine1));
@@ -37,11 +40,12 @@ export const WebserviceLicenseStatusProcessorClient = (
         checklistItem.licenseType = "Home Improvement Business Contr";
       }
 
-      const licenseName = `${checklistItem.professionName}-${checklistItem.licenseType}` as LicenseName;
+      const licenseName =
+        `${checklistItem.professionName}-${checklistItem.licenseType}` as LicenseName;
       if (licenseName in results) {
         results[licenseName]!.checklistItems = updateChecklist(
           checklistItem,
-          results[licenseName]!.checklistItems
+          results[licenseName]!.checklistItems,
         );
       } else {
         results[licenseName] = {
@@ -67,9 +71,12 @@ const getExpirationDate = (checklistItem: LicenseEntity): string | undefined => 
 
 const updateChecklist = (
   newChecklistItem: LicenseEntity,
-  checklist: LicenseStatusItem[]
+  checklist: LicenseStatusItem[],
 ): LicenseStatusItem[] => {
-  if (newChecklistItem.checkoffStatus === "Unchecked" || newChecklistItem.checkoffStatus === "Completed") {
+  if (
+    newChecklistItem.checkoffStatus === "Unchecked" ||
+    newChecklistItem.checkoffStatus === "Completed"
+  ) {
     checklist.push({
       title: newChecklistItem.checklistItem,
       status: newChecklistItem.checkoffStatus === "Completed" ? "ACTIVE" : "PENDING",

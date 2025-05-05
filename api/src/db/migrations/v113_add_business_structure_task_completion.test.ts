@@ -11,7 +11,9 @@ describe("migrate_v112_to_v113", () => {
       taskProgress: {},
     });
 
-    expect(migrate_v112_to_v113(v112UserData).taskProgress).toEqual({ "business-structure": "COMPLETED" });
+    expect(migrate_v112_to_v113(v112UserData).taskProgress).toEqual({
+      "business-structure": "COMPLETED",
+    });
   });
 
   it("keeps prior task progress saved", () => {
@@ -32,6 +34,8 @@ describe("migrate_v112_to_v113", () => {
       taskProgress: {},
     });
 
-    expect(migrate_v112_to_v113(v112UserData).taskProgress).toEqual({ "business-structure": "NOT_STARTED" });
+    expect(migrate_v112_to_v113(v112UserData).taskProgress).toEqual({
+      "business-structure": "NOT_STARTED",
+    });
   });
 });

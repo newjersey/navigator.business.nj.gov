@@ -2,15 +2,28 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { TaxClearanceSteps } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceSteps";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask, StepperStep } from "@/lib/types/types";
+import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+  StepperStep,
+} from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { emptyTaxClearanceCertificateData, LookupMunicipalityByName } from "@businessnjgovnavigator/shared";
-import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
+import {
+  emptyTaxClearanceCertificateData,
+  LookupMunicipalityByName,
+} from "@businessnjgovnavigator/shared";
+import {
+  emptyFormationAddressData,
+  FormationAddress,
+} from "@businessnjgovnavigator/shared/formationData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useEffect, useState } from "react";
 
@@ -23,22 +36,35 @@ interface Props {
 const Config = getMergedConfig();
 
 const initialTaxClearanceCertificateSteps = (): StepperStep[] => [
-  { name: Config.taxClearanceCertificateShared.stepperOneLabel, hasError: false, isComplete: false },
-  { name: Config.taxClearanceCertificateShared.stepperTwoLabel, hasError: false, isComplete: false },
-  { name: Config.taxClearanceCertificateShared.stepperThreeLabel, hasError: false, isComplete: false },
+  {
+    name: Config.taxClearanceCertificateShared.stepperOneLabel,
+    hasError: false,
+    isComplete: false,
+  },
+  {
+    name: Config.taxClearanceCertificateShared.stepperTwoLabel,
+    hasError: false,
+    isComplete: false,
+  },
+  {
+    name: Config.taxClearanceCertificateShared.stepperThreeLabel,
+    hasError: false,
+    isComplete: false,
+  },
 ];
 
 export const AnytimeActionTaxClearanceCertificateElement = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
   const [stateTaxClearanceCertificateSteps, setStateTaxClearanceCertificateSteps] = useState(
-    initialTaxClearanceCertificateSteps()
+    initialTaxClearanceCertificateSteps(),
   );
 
   const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState(
-    emptyTaxClearanceCertificateData
+    emptyTaxClearanceCertificateData,
   );
-  const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
+  const [formationAddressData, setAddressData] =
+    useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
 
   const saveTaxClearanceCertificateData = (): void => {
@@ -66,7 +92,9 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     if (business) {
       const newRequestingAgencyId = business.taxClearanceCertificateData?.requestingAgencyId || "";
       const newBusinessName =
-        business?.taxClearanceCertificateData?.businessName || business?.profileData.businessName || "";
+        business?.taxClearanceCertificateData?.businessName ||
+        business?.profileData.businessName ||
+        "";
       const newAddressLine1 =
         business?.taxClearanceCertificateData?.addressLine1 ||
         business.formationData.formationFormData.addressLine1 ||
@@ -77,8 +105,9 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
         "";
       const newAddressCity =
         business?.taxClearanceCertificateData?.addressCity ||
-        LookupMunicipalityByName(business?.formationData?.formationFormData?.addressMunicipality?.name)
-          ?.displayName ||
+        LookupMunicipalityByName(
+          business?.formationData?.formationFormData?.addressMunicipality?.name,
+        )?.displayName ||
         business.formationData.formationFormData.addressCity ||
         "";
       const newAddressState =
@@ -89,8 +118,10 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
         business?.taxClearanceCertificateData?.addressZipCode ||
         business.formationData.formationFormData.addressZipCode ||
         "";
-      const newTaxId = business?.taxClearanceCertificateData?.taxId || business.profileData.taxId || "";
-      const newTaxPin = business?.taxClearanceCertificateData?.taxPin || business.profileData.taxPin || "";
+      const newTaxId =
+        business?.taxClearanceCertificateData?.taxId || business.profileData.taxId || "";
+      const newTaxPin =
+        business?.taxClearanceCertificateData?.taxPin || business.profileData.taxPin || "";
 
       setTaxClearanceCertificateData({
         ...taxClearanceCertificateData,

@@ -47,7 +47,9 @@ export const FocusTrappedSidebar = ({
   if (CMS_ONLY_disable_focus_trap) return <>{children}</>;
 
   return showDiv ? (
-    <FocusTrap focusTrapOptions={{ allowOutsideClick: true, tabbableOptions: { displayCheck: "none" } }}>
+    <FocusTrap
+      focusTrapOptions={{ allowOutsideClick: true, tabbableOptions: { displayCheck: "none" } }}
+    >
       {children}
     </FocusTrap>
   ) : (

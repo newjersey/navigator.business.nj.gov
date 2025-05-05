@@ -8,7 +8,10 @@ export interface GenericButtonProps {
   isAriaExpanded?: boolean;
   isAriaHaspopup?: boolean;
 
-  onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
+  onClick?:
+    | (() => void)
+    | ((event: React.MouseEvent) => Promise<void>)
+    | ((event: React.MouseEvent) => void);
   dataTestId?: string;
   className?: string;
   isIntercomEnabled?: boolean;
@@ -26,14 +29,16 @@ export interface GenericButtonProps {
 
 export const GenericButton = forwardRef(function GenericButton(
   props: GenericButtonProps,
-  ref?: Ref<HTMLButtonElement> | undefined
+  ref?: Ref<HTMLButtonElement> | undefined,
 ): ReactElement {
   const disabledClass = "usa-button--disabled";
   const showDisabledClass = props.isLoading ? disabledClass : "";
   const noRightMargin = props.isRightMarginRemoved ? "margin-right-0" : "margin-right-2";
   const fullWidth = props.isFullWidthOnDesktop ? "width-100 flex fjc" : "";
   const isNotFullWidthOnMobile = props.isNotFullWidthOnMobile ? "width-auto" : "";
-  const isVerticalPaddingRemoved = props.isVerticalPaddingRemoved ? "padding-y-0" : "padding-y-11px";
+  const isVerticalPaddingRemoved = props.isVerticalPaddingRemoved
+    ? "padding-y-0"
+    : "padding-y-11px";
   const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
   const isUnBolded = props.isUnBolded ? "text-normal" : "";
   const isSmallerText = props.isSmallerText ? "font-body-2xs" : "";
@@ -88,7 +93,10 @@ export const GenericButton = forwardRef(function GenericButton(
           </div>
         </div>
       ) : (
-        <div ref={widthRef} className={`display-flex flex-row flex-align-center flex-justify-center`}>
+        <div
+          ref={widthRef}
+          className={`display-flex flex-row flex-align-center flex-justify-center`}
+        >
           {props.children}
         </div>
       )}

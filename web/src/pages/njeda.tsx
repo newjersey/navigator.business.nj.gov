@@ -9,7 +9,10 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -40,11 +43,12 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
   const currentUserData = createEmptyUserData(createEmptyUser());
   const { business, updateQueue, createUpdateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(
-    business?.profileData || currentUserData.businesses[currentUserData.currentBusinessId].profileData
+    business?.profileData ||
+      currentUserData.businesses[currentUserData.currentBusinessId].profileData,
   );
   const [isNonProfit, setIsNonProfit] = useState<boolean | undefined>(undefined);
   const [numberOfEmployees, setNumberofEmployees] = useState<string>(
-    business?.profileData.existingEmployees ?? ""
+    business?.profileData.existingEmployees ?? "",
   );
   const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(false);
   const [filteredFundings, setFilteredFundings] = useState<Funding[]>(props.fundings);
@@ -111,12 +115,13 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     }
 
     return sortFundingsForUser(
-      filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
-        (it) => {
-          return it.agency?.includes("njeda");
-        }
-      ),
-      updateQueue?.current()
+      filterFundings({
+        fundings: filteredFundings,
+        business: updateQueue?.currentBusiness(),
+      }).filter((it) => {
+        return it.agency?.includes("njeda");
+      }),
+      updateQueue?.current(),
     );
   };
 
@@ -260,7 +265,10 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
                     />
                   </div>
                   {shouldShowEmployeeCountError() && (
-                    <div className="text-error-dark text-bold" data-testid="business-structure-error">
+                    <div
+                      className="text-error-dark text-bold"
+                      data-testid="business-structure-error"
+                    >
                       {Config.fundingsOnboardingModal.numberOfEmployeesQuestion.selectAnAnswerText}
                     </div>
                   )}
@@ -279,23 +287,26 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
                       onChange={(event) => {
                         setIsNonProfit(
                           (event.target.value as string) ===
-                            Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes
+                            Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes,
                         );
                       }}
                       row={true}
                     >
                       {radioButtonOption(
                         Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes,
-                        shouldShowNonProfitError()
+                        shouldShowNonProfitError(),
                       )}
                       {radioButtonOption(
                         Config.fundingsOnboardingModal.nonProfitQuestion.responses.no,
-                        shouldShowNonProfitError()
+                        shouldShowNonProfitError(),
                       )}
                     </RadioGroup>
                   </FormControl>
                   {shouldShowNonProfitError() && (
-                    <div className="text-error-dark text-bold" data-testid="business-structure-error">
+                    <div
+                      className="text-error-dark text-bold"
+                      data-testid="business-structure-error"
+                    >
                       {Config.fundingsOnboardingModal.nonProfitQuestion.selectAnAnswerText}
                     </div>
                   )}

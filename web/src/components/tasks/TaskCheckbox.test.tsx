@@ -42,8 +42,8 @@ describe("<TaskCheckbox />", () => {
           <TaskCheckbox checklistItemId={checklistItemId} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
-        { showNeedsAccountModal: false, setShowNeedsAccountModal }
-      )
+        { showNeedsAccountModal: false, setShowNeedsAccountModal },
+      ),
     );
   };
 

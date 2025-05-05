@@ -12,7 +12,9 @@ describe("addAdditionalBusiness", () => {
     const newUserData = addAdditionalBusiness(userData);
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(2);
-    const newBusinessId = Object.keys(newUserData.businesses).find((id) => id !== firstBusiness.id)!;
+    const newBusinessId = Object.keys(newUserData.businesses).find(
+      (id) => id !== firstBusiness.id,
+    )!;
 
     expect(newUserData.currentBusinessId).toBeDefined();
     expect(newUserData.currentBusinessId).not.toEqual(firstBusiness.id);
@@ -28,7 +30,9 @@ describe("addAdditionalBusiness", () => {
     const newUserData = addAdditionalBusiness(userData);
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(2);
-    const newBusinessId = Object.keys(newUserData.businesses).find((id) => id !== firstBusiness.id)!;
+    const newBusinessId = Object.keys(newUserData.businesses).find(
+      (id) => id !== firstBusiness.id,
+    )!;
 
     expect(newUserData.businesses[newBusinessId].userId).toEqual(userId);
   });
@@ -47,7 +51,9 @@ describe("addAdditionalBusiness", () => {
     const newUserData = addAdditionalBusiness(userData);
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(2);
-    const newBusinessId = Object.keys(newUserData.businesses).find((id) => id !== firstBusiness.id)!;
+    const newBusinessId = Object.keys(newUserData.businesses).find(
+      (id) => id !== firstBusiness.id,
+    )!;
 
     expect(newUserData.businesses[newBusinessId].versionWhenCreated).toEqual(CURRENT_VERSION);
   });

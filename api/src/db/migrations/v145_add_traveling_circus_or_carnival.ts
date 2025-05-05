@@ -7,7 +7,7 @@ export const migrate_v144_to_v145 = (v144Data: v144UserData): v145UserData => {
     businesses: Object.fromEntries(
       Object.values(v144Data.businesses)
         .map((business: v144Business) => migrate_v144Business_to_v145Business(business))
-        .map((currBusiness: v145Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v145Business) => [currBusiness.id, currBusiness]),
     ),
     version: 145,
   } as v145UserData;
@@ -565,7 +565,9 @@ export const generatev145UserData = (overrides: Partial<v145UserData>): v145User
   };
 };
 
-export const generatev145BusinessUser = (overrides: Partial<v145BusinessUser>): v145BusinessUser => {
+export const generatev145BusinessUser = (
+  overrides: Partial<v145BusinessUser>,
+): v145BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -652,7 +654,7 @@ export const generatev145ProfileData = (overrides: Partial<v145ProfileData>): v1
 };
 
 export const generatev145IndustrySpecificData = (
-  overrides: Partial<v145IndustrySpecificData>
+  overrides: Partial<v145IndustrySpecificData>,
 ): v145IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -700,7 +702,7 @@ export const generatev145Preferences = (overrides: Partial<v145Preferences>): v1
 
 export const generatev145FormationData = (
   overrides: Partial<v145FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v145FormationData => {
   return {
     formationFormData: generatev145FormationFormData({}, legalStructureId),
@@ -716,9 +718,11 @@ export const generatev145FormationData = (
 
 export const generatev145FormationFormData = (
   overrides: Partial<v145FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v145FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v145FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -764,7 +768,8 @@ export const generatev145FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev145FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generatev145FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -787,7 +792,9 @@ export const generatev145FormationFormData = (
   };
 };
 
-export const generatev145Municipality = (overrides: Partial<v145Municipality>): v145Municipality => {
+export const generatev145Municipality = (
+  overrides: Partial<v145Municipality>,
+): v145Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -797,7 +804,9 @@ export const generatev145Municipality = (overrides: Partial<v145Municipality>): 
   };
 };
 
-export const generatev145FormationMember = (overrides: Partial<v145FormationMember>): v145FormationMember => {
+export const generatev145FormationMember = (
+  overrides: Partial<v145FormationMember>,
+): v145FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -811,7 +820,9 @@ export const generatev145FormationMember = (overrides: Partial<v145FormationMemb
   };
 };
 
-export const generatev145TaxFilingData = (overrides: Partial<v145TaxFilingData>): v145TaxFilingData => {
+export const generatev145TaxFilingData = (
+  overrides: Partial<v145TaxFilingData>,
+): v145TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -823,7 +834,9 @@ export const generatev145TaxFilingData = (overrides: Partial<v145TaxFilingData>)
   };
 };
 
-export const generatev145LicenseDetails = (overrides: Partial<v145LicenseDetails>): v145LicenseDetails => {
+export const generatev145LicenseDetails = (
+  overrides: Partial<v145LicenseDetails>,
+): v145LicenseDetails => {
   return {
     nameAndAddress: generatev145LicenseSearchNameAndAddress({}),
     licenseStatus: getRandomV145LicenseStatus(),
@@ -836,7 +849,7 @@ export const generatev145LicenseDetails = (overrides: Partial<v145LicenseDetails
 };
 
 const generatev145LicenseSearchNameAndAddress = (
-  overrides: Partial<v145LicenseSearchNameAndAddress>
+  overrides: Partial<v145LicenseSearchNameAndAddress>,
 ): v145LicenseSearchNameAndAddress => {
   return {
     name: `some-name`,

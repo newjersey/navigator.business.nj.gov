@@ -18,13 +18,12 @@ export const NaicsCode = (): ReactElement => {
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["naicsCode"]["default"] = getProfileConfig(
-    {
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["naicsCode"]["default"] =
+    getProfileConfig({
       config: Config,
       persona: state.flow,
       fieldName: "naicsCode",
-    }
-  );
+    });
 
   const naicsTaskUrl = useMemo(() => {
     const urlSlug = getTaskFromRoadmap(roadmap, "determine-naics-code")?.urlSlug ?? "";
@@ -68,7 +67,11 @@ export const NaicsCode = (): ReactElement => {
             </ArrowTooltip>
           </div>
         ) : (
-          <a className="text-accent-cool-darker margin-left-2" href={naicsTaskUrl} aria-label={ariaLabel}>
+          <a
+            className="text-accent-cool-darker margin-left-2"
+            href={naicsTaskUrl}
+            aria-label={ariaLabel}
+          >
             {getAddOrEdit()}
           </a>
         )}

@@ -147,7 +147,7 @@ describe("getProfileConfig", () => {
   it("gets default onboarding value when persona does not have overrides", () => {
     const mergedConfigForTest: ConfigType = merge(
       Config,
-      testConfigDefaultWithOverridesAndOboardingWithOverrides
+      testConfigDefaultWithOverridesAndOboardingWithOverrides,
     );
     const result = getProfileConfig({
       config: mergedConfigForTest,
@@ -165,7 +165,10 @@ describe("getProfileConfig", () => {
   });
 
   it("gets onboarding value when no persona passed", () => {
-    const mergedConfigForTest: ConfigType = merge(Config, testConfigDefaultWithOverridesAndOboarding);
+    const mergedConfigForTest: ConfigType = merge(
+      Config,
+      testConfigDefaultWithOverridesAndOboarding,
+    );
     const result = getProfileConfig({
       config: mergedConfigForTest,
       fieldName: "businessName",
@@ -183,7 +186,7 @@ describe("getProfileConfig", () => {
   it("gets onboarding value with persona override", () => {
     const mergedConfigForTest: ConfigType = merge(
       Config,
-      testConfigDefaultWithOverridesAndOboardingWithOverrides
+      testConfigDefaultWithOverridesAndOboardingWithOverrides,
     );
     const result = getProfileConfig({
       config: mergedConfigForTest,

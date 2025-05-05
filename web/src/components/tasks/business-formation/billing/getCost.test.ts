@@ -2,7 +2,10 @@
 
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { getMergedConfig } from "@/contexts/configContext";
-import { allFormationLegalTypes, FormationLegalType } from "@businessnjgovnavigator/shared/formationData";
+import {
+  allFormationLegalTypes,
+  FormationLegalType,
+} from "@businessnjgovnavigator/shared/formationData";
 
 const Config = getMergedConfig();
 
@@ -11,9 +14,11 @@ describe("getCost", () => {
     describe("certified copy of formation", () => {
       it(`uses default cost for ${legalStructureId}`, async () => {
         const certifiedCopyCost = Number.parseInt(
-          Config.formation.fields.certifiedCopyOfFormationDocument.cost
+          Config.formation.fields.certifiedCopyOfFormationDocument.cost,
         );
-        expect(getCost("certifiedCopyOfFormationDocument", legalStructureId)).toEqual(certifiedCopyCost);
+        expect(getCost("certifiedCopyOfFormationDocument", legalStructureId)).toEqual(
+          certifiedCopyCost,
+        );
       });
     });
   }
@@ -24,15 +29,20 @@ describe("getCost", () => {
 
     for (const legalStructureId of defaultCostIds) {
       it(`uses default cost for ${legalStructureId}`, async () => {
-        const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
-        expect(getCost("officialFormationDocument", legalStructureId)).toEqual(officialFormationCost);
+        const officialFormationCost = Number.parseInt(
+          Config.formation.fields.officialFormationDocument.cost,
+        );
+        expect(getCost("officialFormationDocument", legalStructureId)).toEqual(
+          officialFormationCost,
+        );
       });
     }
 
     for (const legalStructureId of overriddenCostIds) {
       it(`uses override cost for ${legalStructureId}`, async () => {
         const standingCost = Number.parseInt(
-          (Config.formation.fields.officialFormationDocument.overrides as any)[legalStructureId].cost
+          (Config.formation.fields.officialFormationDocument.overrides as any)[legalStructureId]
+            .cost,
         );
         expect(getCost("officialFormationDocument", legalStructureId)).toEqual(standingCost);
       });
@@ -59,7 +69,7 @@ describe("getCost", () => {
     for (const legalStructureId of overriddenCostIds) {
       it(`uses override cost for ${legalStructureId}`, async () => {
         const standingCost = Number.parseInt(
-          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost
+          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost,
         );
         expect(getCost("certificateOfStanding", legalStructureId)).toEqual(standingCost);
       });

@@ -11,7 +11,14 @@ import {
   QuestionnaireConfig,
   QuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared/environment";
-import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, useMediaQuery } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  useMediaQuery,
+} from "@mui/material";
 import { ChangeEvent, ReactElement, useState } from "react";
 
 interface Props {
@@ -48,7 +55,9 @@ export const EnvQuestionnaire = (props: Props): ReactElement => {
     return questionnaire;
   };
 
-  const [questionnaireData, setQuestionnaireData] = useState<Questionnaire>(setUpQuestionnaireData());
+  const [questionnaireData, setQuestionnaireData] = useState<Questionnaire>(
+    setUpQuestionnaireData(),
+  );
   const [showError, setShowError] = useState<boolean>(false);
 
   const noSelectionMade = (): boolean => {

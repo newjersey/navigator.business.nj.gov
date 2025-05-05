@@ -10,16 +10,18 @@ interface TaxClearanceCertificateDataContextType {
   setTaxClearanceCertificateData: React.Dispatch<React.SetStateAction<TaxClearanceCertificateData>>;
 }
 
-export const TaxClearanceCertificateDataContext = createContext<TaxClearanceCertificateDataContextType>({
-  state: emptyTaxClearanceCertificateData,
-  setTaxClearanceCertificateData: () => {},
-});
+export const TaxClearanceCertificateDataContext =
+  createContext<TaxClearanceCertificateDataContextType>({
+    state: emptyTaxClearanceCertificateData,
+    setTaxClearanceCertificateData: () => {},
+  });
 
 type TaxClearanceCertificateFields = keyof TaxClearanceCertificateData;
 
 const taxClearanceCertificateFields = Object.keys(
-  emptyTaxClearanceCertificateData
+  emptyTaxClearanceCertificateData,
 ) as TaxClearanceCertificateFields[];
 
 export const taxClearanceFieldErrorMap = createReducedFieldStates(taxClearanceCertificateFields);
-export const TaxClearanceCertificateFormContext = createFormContext<typeof taxClearanceFieldErrorMap>();
+export const TaxClearanceCertificateFormContext =
+  createFormContext<typeof taxClearanceFieldErrorMap>();

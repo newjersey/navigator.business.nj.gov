@@ -30,7 +30,7 @@ export const migrate_v127_to_v128 = (v127Data: v127UserData): v128UserData => {
     businesses: Object.fromEntries(
       Object.values(v127Data.businesses)
         .map((business) => migrate_v127Business_to_v128Business(business))
-        .map((currBusiness) => [currBusiness.id, currBusiness])
+        .map((currBusiness) => [currBusiness.id, currBusiness]),
     ),
     version: 128,
   };
@@ -44,7 +44,7 @@ const migrate_v127Business_to_v128Business = (business: v127Business): v128Busin
       : business.profileData.operatingPhase;
 
   const visibleSidebarCards = business.preferences.visibleSidebarCards.filter(
-    (x) => x !== "registered-for-taxes-nudge"
+    (x) => x !== "registered-for-taxes-nudge",
   );
 
   return {

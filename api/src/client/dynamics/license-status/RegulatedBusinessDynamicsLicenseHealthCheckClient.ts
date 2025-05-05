@@ -11,7 +11,7 @@ type Config = {
 
 export const RegulatedBusinessDynamicsLicenseHealthCheckClient = (
   logWriter: LogWriterType,
-  config: Config
+  config: Config,
 ): HealthCheckMethod => {
   return async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();
@@ -31,7 +31,10 @@ export const RegulatedBusinessDynamicsLicenseHealthCheckClient = (
         } as HealthCheckMetadata;
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`RGB Dynamics License Status Health Check Failed - Id:${logId} - Error:`, error);
+        logWriter.LogError(
+          `RGB Dynamics License Status Health Check Failed - Id:${logId} - Error:`,
+          error,
+        );
         if (error.response) {
           return {
             success: false,

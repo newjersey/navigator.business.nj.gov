@@ -24,7 +24,11 @@ import {
   HousingRegistrationRequestLookupResponse,
   PropertyInterestType,
 } from "@shared/housing";
-import { enabledLicensesSources, LicenseEntity, LicenseSearchNameAndAddress } from "@shared/license";
+import {
+  enabledLicensesSources,
+  LicenseEntity,
+  LicenseSearchNameAndAddress,
+} from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
@@ -32,7 +36,11 @@ import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
 export interface DatabaseClient {
-  migrateOutdatedVersionUsers: () => Promise<{ success: boolean; migratedCount?: number; error?: string }>;
+  migrateOutdatedVersionUsers: () => Promise<{
+    success: boolean;
+    migratedCount?: number;
+    error?: string;
+  }>;
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
@@ -47,7 +55,7 @@ export interface UserDataClient {
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
   getUsersWithOutdatedVersion: (
     latestVersion: number,
-    nextToken?: string
+    nextToken?: string,
   ) => Promise<{ usersToMigrate: UserData[]; nextToken?: string }>;
 }
 
@@ -74,14 +82,16 @@ export interface FormationClient {
   form: (
     userData: UserData,
     returnUrl: string,
-    foreignGoodStandingFile?: InputFile
+    foreignGoodStandingFile?: InputFile,
   ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
   health: HealthCheckMethod;
 }
 
 export interface EmergencyTripPermitClient {
-  apply: (applicationInfo: EmergencyTripPermitApplicationInfo) => Promise<EmergencyTripPermitSubmitResponse>;
+  apply: (
+    applicationInfo: EmergencyTripPermitApplicationInfo,
+  ) => Promise<EmergencyTripPermitSubmitResponse>;
 }
 
 export interface TaxFilingClient {
@@ -95,7 +105,11 @@ export interface TaxFilingClient {
 
 export interface TaxFilingInterface {
   lookup: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
-  onboarding: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
+  onboarding: (props: {
+    userData: UserData;
+    taxId: string;
+    businessName: string;
+  }) => Promise<UserData>;
 }
 
 export interface EncryptionDecryptionClient {
@@ -152,37 +166,40 @@ export type LicenseType = keyof typeof enabledLicensesSources;
 export type SearchLicenseStatusFactory = (licenseType: LicenseType) => SearchLicenseStatus;
 
 export type SearchLicenseStatus = (
-  nameAndAddress: LicenseSearchNameAndAddress
+  nameAndAddress: LicenseSearchNameAndAddress,
 ) => Promise<LicenseStatusResults>;
 
 export type UpdateLicenseStatus = (
   userData: UserData,
-  nameAndAddress: LicenseSearchNameAndAddress
+  nameAndAddress: LicenseSearchNameAndAddress,
 ) => Promise<UserData>;
 
 export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;
 
 export type HousingPropertyInterestStatus = (
   address: string,
-  municipalityId: string
+  municipalityId: string,
 ) => Promise<HousingPropertyInterestDetails | undefined>;
 
 export type HousingRegistrationStatus = (
   address: string,
   municipalityId: string,
-  propertyInterestType: PropertyInterestType
+  propertyInterestType: PropertyInterestType,
 ) => Promise<HousingRegistrationRequestLookupResponse>;
 
 export type ElevatorSafetyInspectionStatus = (
-  address: string
+  address: string,
 ) => Promise<ElevatorSafetyDeviceInspectionDetails[]>;
 
 export type ElevatorSafetyRegistrationStatus = (
   address: string,
-  municipalityId: string
+  municipalityId: string,
 ) => Promise<ElevatorSafetyRegistrationSummary>;
 
-export type ElevatorSafetyViolationsStatus = (address: string, municipalityId: string) => Promise<boolean>;
+export type ElevatorSafetyViolationsStatus = (
+  address: string,
+  municipalityId: string,
+) => Promise<boolean>;
 export interface SuccessfulHealthCheckMetadata {
   success: true;
   data?: {
@@ -231,16 +248,19 @@ export interface XrayRegistrationStatusLookup {
   getStatus: (
     businessName: string,
     addressLine1: string,
-    addressZipCode: string
+    addressZipCode: string,
   ) => Promise<XrayRegistrationStatusResponse>;
 }
 
 export interface XrayRegistrationSearch {
-  searchByAddress: (addressLine1: string, addressZipCode: string) => Promise<XrayRegistrationEntry[]>;
+  searchByAddress: (
+    addressLine1: string,
+    addressZipCode: string,
+  ) => Promise<XrayRegistrationEntry[]>;
   searchByBusinessName: (businessName: string) => Promise<XrayRegistrationEntry[]>;
 }
 
 export type UpdateXrayRegistration = (
   userData: UserData,
-  facilityDetails: FacilityDetails
+  facilityDetails: FacilityDetails,
 ) => Promise<UserData>;

@@ -11,7 +11,7 @@ export const needsSignerTypeFunc = (legalType: FormationLegalType): boolean => {
 
 export const createSignedEmptyFormationObject = <T extends FormationSigner | FormationIncorporator>(
   legalType: FormationLegalType,
-  defaultFunc: () => T
+  defaultFunc: () => T,
 ): T => ({
   ...defaultFunc(),
   title: needsSignerTypeFunc(legalType) ? undefined : BusinessSignerTypeMap[legalType][0],

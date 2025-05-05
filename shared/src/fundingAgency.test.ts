@@ -1,4 +1,7 @@
-import { arrayOfFundingAgencies as FundingAgencies, LookupFundingAgencyById } from "./fundingAgency";
+import {
+  arrayOfFundingAgencies as FundingAgencies,
+  LookupFundingAgencyById,
+} from "./fundingAgency";
 
 describe("FundingAgency Tests", () => {
   it("has fundingAgency records", () => {

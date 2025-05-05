@@ -11,7 +11,7 @@ const isFormedOutsideNavigator = (business: Business): boolean => {
 
 export const shouldShowDisclaimerForProfileNotSubmittingData = (
   business: Business | undefined,
-  isAuthenticated: IsAuthenticated
+  isAuthenticated: IsAuthenticated,
 ): boolean => {
   if (!business || isAuthenticated === IsAuthenticated.UNKNOWN) return true;
 

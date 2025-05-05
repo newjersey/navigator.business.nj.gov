@@ -275,7 +275,7 @@ export const generatev42ProfileData = (overrides: Partial<v42ProfileData>): v42P
 };
 
 export const generatev42FormationFormData = (
-  overrides: Partial<v42FormationFormData>
+  overrides: Partial<v42FormationFormData>,
 ): v42FormationFormData => {
   return {
     businessSuffix: undefined,

@@ -42,9 +42,17 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Registration Request Date Text, name: registrationRequestDateText, widget: string }
+              - {
+                  label: Registration Request Date Text,
+                  name: registrationRequestDateText,
+                  widget: string,
+                }
               - { label: Registration Status Text, name: registrationStatusText, widget: string }
-              - { label: Registration Device Count Text, name: registrationDeviceCountText, widget: string }
+              - {
+                  label: Registration Device Count Text,
+                  name: registrationDeviceCountText,
+                  widget: string,
+                }
               - {
                   label: Registration Application Found Text,
                   name: registrationApplicationFoundText,
@@ -82,7 +90,11 @@ collections:
                   name: registrationRejectedOrReturnedMessage,
                   widget: string,
                 }
-              - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
+              - {
+                  label: Registration Search Prompt Text,
+                  name: registrationSearchPrompt,
+                  widget: string,
+                }
               - { label: Address 1 Label, name: address1Label, widget: string }
               - { label: Address 2 Label, name: address2Label, widget: string }
               - { label: Municipality Label, name: municipalityLabel, widget: string }
@@ -98,18 +110,42 @@ collections:
                   name: errorTextNoElevatorRegistrations,
                   widget: string,
                 }
-              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - {
+                  label: Error - Missing Required Fields,
+                  name: errorTextFieldsRequired,
+                  widget: string,
+                }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
-              - { label: Informational Message - In Review, name: informationalInReview, widget: string }
-              - { label: Informational Message - Returned, name: informationalReturned, widget: string }
-              - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
-              - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
+              - {
+                  label: Informational Message - In Review,
+                  name: informationalInReview,
+                  widget: string,
+                }
+              - {
+                  label: Informational Message - Returned,
+                  name: informationalReturned,
+                  widget: string,
+                }
+              - {
+                  label: Informational Message - Rejected,
+                  name: informationalRejected,
+                  widget: string,
+                }
+              - {
+                  label: Informational Message - Incomplete,
+                  name: informationalIncomplete,
+                  widget: string,
+                }
           - label: Elevator Violations Card
             name: elevatorViolationsCard
             collapsed: false
             widget: object
             fields:
-              - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
+              - {
+                  label: Violation Notice Message Text,
+                  name: violationNoticeMessage,
+                  widget: string,
+                }
               - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
               - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: no-space }
       - label: "Housing"
@@ -123,7 +159,11 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Registration Start Date Text, name: registrationStartDateText, widget: string }
+              - {
+                  label: Registration Start Date Text,
+                  name: registrationStartDateText,
+                  widget: string,
+                }
               - { label: Registration Status Text, name: registrationStatusText, widget: string }
               - {
                   label: Registration Building Count Text,
@@ -167,7 +207,11 @@ collections:
                   name: registrationRejectedOrReturnedMessage,
                   widget: string,
                 }
-              - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
+              - {
+                  label: Registration Search Prompt Text,
+                  name: registrationSearchPrompt,
+                  widget: string,
+                }
               - { label: Address 1 Label, name: address1Label, widget: string }
               - { label: Address 2 Label, name: address2Label, widget: string }
               - { label: Municipality Label, name: municipalityLabel, widget: string }
@@ -183,12 +227,32 @@ collections:
                   name: errorTextNoHotelMotelRegistrations,
                   widget: string,
                 }
-              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - {
+                  label: Error - Missing Required Fields,
+                  name: errorTextFieldsRequired,
+                  widget: string,
+                }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
-              - { label: Informational Message - In Review, name: informationalInReview, widget: string }
-              - { label: Informational Message - Returned, name: informationalReturned, widget: string }
-              - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
-              - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
+              - {
+                  label: Informational Message - In Review,
+                  name: informationalInReview,
+                  widget: string,
+                }
+              - {
+                  label: Informational Message - Returned,
+                  name: informationalReturned,
+                  widget: string,
+                }
+              - {
+                  label: Informational Message - Rejected,
+                  name: informationalRejected,
+                  widget: string,
+                }
+              - {
+                  label: Informational Message - Incomplete,
+                  name: informationalIncomplete,
+                  widget: string,
+                }
               - {
                   label: Error - No Multiple Dwelling Registrations Found,
                   name: errorTextNoMultipleDwellingRegistrations,
@@ -204,7 +268,11 @@ collections:
                   name: reviewApplicationCallToActionLink,
                   widget: string,
                 }
-              - { label: Renew Registration Message, name: renewRegistrationMessage, widget: string }
+              - {
+                  label: Renew Registration Message,
+                  name: renewRegistrationMessage,
+                  widget: string,
+                }
           - label: Elevator Violations Card
             name: elevatorViolationsCard
             collapsed: false
@@ -248,8 +316,18 @@ collections:
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
       - {
           label: "Webflow Name (not being synced, only for reference and future expansion)",
           name: "webflowName",
@@ -322,7 +400,12 @@ collections:
           widget: "markdown",
         }
       - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown" }
-      - { label: "Form Name (Webflow & Navigator)", name: "formName", widget: "string", required: false }
+      - {
+          label: "Form Name (Webflow & Navigator)",
+          name: "formName",
+          widget: "string",
+          required: false,
+        }
       - label: "Industry (Webflow & Navigator)"
         name: industryId
         widget: "relation"
@@ -344,7 +427,12 @@ collections:
           widget: "string",
           required: false,
         }
-      - { label: "Industry (Webflow - archive)", name: "webflowIndustry", widget: "string", required: false }
+      - {
+          label: "Industry (Webflow - archive)",
+          name: "webflowIndustry",
+          widget: "string",
+          required: false,
+        }
       - {
           label: "License Classification (Webflow - archive)",
           name: "licenseCertificationClassification",
@@ -407,8 +495,18 @@ collections:
       - { label: "Title", name: "name", widget: "string" }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Body", name: "body", widget: "markdown" }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
 
   - name: "webflow-licenses"
     label: "Webflow Licenses"
@@ -433,7 +531,12 @@ collections:
           name: "summaryDescriptionMd",
           widget: "markdown",
         }
-      - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown", required: false }
+      - {
+          label: "Detailed Description (Navigator)",
+          name: "body",
+          widget: "markdown",
+          required: false,
+        }
       - label: Licensing Agency (Webflow & Navigator)
         name: agencyId
         widget: relation
@@ -449,7 +552,12 @@ collections:
           widget: "string",
           required: false,
         }
-      - { label: "Form Name (Webflow & Navigator)", name: "formName", widget: "string", required: false }
+      - {
+          label: "Form Name (Webflow & Navigator)",
+          name: "formName",
+          widget: "string",
+          required: false,
+        }
       - label: "Industry (Webflow & Navigator)"
         name: industryId
         widget: "relation"
@@ -514,8 +622,16 @@ collections:
                   widget: text,
                   hint: This field supports Markdown,
                 }
-              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
-              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
+              - {
+                  label: Eligible Modal Continue Button,
+                  name: eligibleModalContinueButton,
+                  widget: string,
+                }
+              - {
+                  label: Eligible Modal Cancel Button,
+                  name: eligibleModalCancelButton,
+                  widget: string,
+                }
 
       - label: "Tab 1 (Business Size and Priority Status)"
         name: "cannabisLicense-1"
@@ -579,7 +695,12 @@ collections:
                   widget: markdown,
                   hint: This field supports Markdown,
                 }
-              - { label: SBE Label, name: sbeLabel, widget: markdown, hint: This field supports Markdown }
+              - {
+                  label: SBE Label,
+                  name: sbeLabel,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
               - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
 
       - label: "Tab 2 Annual (Defaults + Requirements)"
@@ -594,23 +715,43 @@ collections:
             widget: object
             summary: "{{cannabisApplyForLicense}}"
             fields:
-              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
+              - {
+                  label: Application Page Helper Text,
+                  name: applicationPageHelperText,
+                  widget: string,
+                }
               - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
-              - { label: General Annual Requirements, name: annualGeneralRequirements, widget: markdown }
+              - {
+                  label: General Annual Requirements,
+                  name: annualGeneralRequirements,
+                  widget: markdown,
+                }
               - {
                   label: Microbusiness Application Needs,
                   name: microbusinessApplicationNeeds,
                   widget: string,
                 }
-              - { label: Microbusiness Requirements, name: microbusinessRequirements, widget: markdown }
+              - {
+                  label: Microbusiness Requirements,
+                  name: microbusinessRequirements,
+                  widget: markdown,
+                }
               - {
                   label: Priority Status Application Needs,
                   name: priorityStatusApplicationNeeds,
                   widget: string,
                 }
-              - { label: Diversely Owned Requirements, name: diverselyOwnedRequirements, widget: markdown }
+              - {
+                  label: Diversely Owned Requirements,
+                  name: diverselyOwnedRequirements,
+                  widget: markdown,
+                }
               - { label: Impact Zone Requirements, name: impactZoneRequirements, widget: markdown }
-              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
+              - {
+                  label: Social Equity Requirements,
+                  name: socialEquityRequirements,
+                  widget: markdown,
+                }
               - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
               - { label: Annual - After Requirements, name: annualBottomOfTask, widget: markdown }
 
@@ -631,7 +772,11 @@ collections:
                   name: conditionalGeneralRequirements,
                   widget: markdown,
                 }
-              - { label: Conditional - After Requirements, name: conditionalBottomOfTask, widget: markdown }
+              - {
+                  label: Conditional - After Requirements,
+                  name: conditionalBottomOfTask,
+                  widget: markdown,
+                }
   - name: "cannabis-priority-status"
     label: "Tasks - Cannabis Priority Status"
     delete: false
@@ -679,26 +824,46 @@ collections:
             fields:
               - { label: Text Before Header, name: secondTabDescriptionText, widget: text }
               - { label: Header Text, name: secondTabHeaderText, widget: string }
-              - { label: Minority / Women Header Text, name: minorityOrWomenHeaderText, widget: string }
+              - {
+                  label: Minority / Women Header Text,
+                  name: minorityOrWomenHeaderText,
+                  widget: string,
+                }
               - {
                   label: Minority / Women Requirements,
                   name: minorityWomenOwnedRequirements,
                   widget: markdown,
                 }
               - { label: Veteran Header Text, name: veteranHeaderText, widget: string }
-              - { label: Veteran Owned Requirements, name: veteranOwnedRequirements, widget: markdown }
+              - {
+                  label: Veteran Owned Requirements,
+                  name: veteranOwnedRequirements,
+                  widget: markdown,
+                }
               - { label: Social Equity Header Text, name: socialEquityHeaderText, widget: string }
-              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
+              - {
+                  label: Social Equity Requirements,
+                  name: socialEquityRequirements,
+                  widget: markdown,
+                }
               - { label: Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
               - { label: Impact Zone Text, name: impactZoneText, widget: string }
 
-              - { label: Conditional Callout Heading Text, name: greenBoxHeadingText, widget: string }
+              - {
+                  label: Conditional Callout Heading Text,
+                  name: greenBoxHeadingText,
+                  widget: string,
+                }
               - {
                   label: Conditional Callout Minority Or Women Text,
                   name: greenBoxMinorityOrWomenText,
                   widget: string,
                 }
-              - { label: Conditional Callout Veteran Text, name: greenBoxVeteranText, widget: string }
+              - {
+                  label: Conditional Callout Veteran Text,
+                  name: greenBoxVeteranText,
+                  widget: string,
+                }
               - {
                   label: Conditional Callout Social Equity Text,
                   name: greenBoxSocialEquityText,
@@ -756,7 +921,9 @@ collections:
                   label: Aria Label Text,
                   name: ariaLabelText,
                   widget: string,
-                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                  hint:
+                    This is the text that is populates the Edit/Remove button aria label. It is
+                    prepended by "Edit" or "Remove".,
                 }
   - name: "xray-registration"
     label: "Tasks- Xray Registration"
@@ -776,8 +943,16 @@ collections:
             fields:
               - { label: Tab One Text, name: header, widget: string }
               - { label: Tab Two Text, name: tab2Text, widget: string }
-              - { label: Call to Action Primary Text, name: callToActionPrimaryText, widget: string }
-              - { label: Call to Action Secondary Text, name: callToActionSecondaryText, widget: string }
+              - {
+                  label: Call to Action Primary Text,
+                  name: callToActionPrimaryText,
+                  widget: string,
+                }
+              - {
+                  label: Call to Action Secondary Text,
+                  name: callToActionSecondaryText,
+                  widget: string,
+                }
               - { label: Issuing Agency, name: issuingAgency, widget: string }
               - { label: Check Status Text, name: checkStatusText, widget: string }
               - { label: Business Name Label, name: businessNameLabel, widget: string }
@@ -809,7 +984,11 @@ collections:
               - { label: Inactive Status Text, name: inactiveStatusText, widget: string }
               - { label: Accordion Header, name: accordionHeader, widget: string }
               - { label: Edit Button Text, name: editButtonText, widget: string }
-              - { label: Future Expiration Date Text, name: futureExpirationDateText, widget: string }
+              - {
+                  label: Future Expiration Date Text,
+                  name: futureExpirationDateText,
+                  widget: string,
+                }
               - { label: Expired Text, name: expiredText, widget: string }
               - {
                   label: Expires in Less Than a Month Text,
@@ -833,7 +1012,7 @@ collections:
     files:
       - label: "Tax ID Input Section"
         name: "tax-input-section"
-        file: content/src/fieldConfig/tax.json
+        file: content/src/fieldConfig/tax-id.json
         editor:
           preview: true
         fields:
@@ -865,8 +1044,18 @@ collections:
       - { label: "Name", name: "name", widget: "string", required: false }
       - { label: "ID", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
-      - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call to Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call to Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
       - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
       - {
           label: "Agency Additional Context",
@@ -883,8 +1072,181 @@ collections:
           widget: "string",
           required: false,
         }
-      - { label: "Summary Description MD", name: "summaryDescriptionMd", widget: "string", required: false }
+      - {
+          label: "Summary Description MD",
+          name: "summaryDescriptionMd",
+          widget: "string",
+          required: false,
+        }
       - { label: "Body", name: "body", widget: "markdown", required: false }
+  - name: "abc-tasks"
+    label: "Tasks - ABC"
+    delete: false
+    create: false
+    files:
+      - label: "ABC Emergency Trip Permit Application Task"
+        name: abc-emergency-trip-permit
+        file: content/src/fieldConfig/abc-emergency-trip-permit.json
+        editor:
+          preview: false
+        fields:
+          - label: "Steps"
+            name: steps
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Task Name, name: taskName, widget: string }
+              - { label: Next Step Text, name: nextStepText, widget: string }
+              - { label: Previous Step Text, name: previousStepText, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - label: "Instructions"
+                name: instructions
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Description, name: description, widget: string }
+                  - { label: Application Header, name: applicationHeader, widget: string }
+                  - {
+                      label: Application Instructions Description,
+                      name: applicationInstructionsDescription,
+                      widget: string,
+                    }
+                  - { label: Application Details, name: applicationDetails, widget: string }
+                  - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Help Text, name: helpText, widget: string }
+              - label: "Requestor"
+                name: requestor
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Vehicle Section, name: vehicleSection, widget: string }
+                  - { label: Requestor Section, name: requestorSection, widget: string }
+                  - {
+                      label: Requestor Section Subheading,
+                      name: requestorSectionSubHeading,
+                      widget: string,
+                    }
+              - label: "Trip"
+                name: trip
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Subheader, name: subHeader, widget: string }
+                  - { label: Pickup Site Section, name: pickupSiteSection, widget: string }
+                  - { label: Delivery Site Section, name: deliverySiteSection, widget: string }
+              - label: "Billing"
+                name: billing
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Services Section, name: servicesSection, widget: string }
+                  - { label: Billing Section, name: billingSection, widget: string }
+                  - { label: Permit Section, name: permitSection, widget: string }
+                  - { label: Permit Subheader, name: permitSubheader, widget: string }
+                  - {
+                      label: PDF Attach Checkbox Label,
+                      name: pdfAttachCheckboxLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Text Message Download Link Checkbox Label,
+                      name: textMessageDownloadLinkCheckboxLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Additional Email Download Link Checkbox Label,
+                      name: additionalEmailDownloadLinkCheckboxLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Trip Permit Fee Line Item,
+                      name: tripPermitFeeLineItem,
+                      widget: string,
+                    }
+                  - { label: Trip Permit Fee Info, name: tripPermitFeeInfo, widget: string }
+                  - {
+                      label: Online Process Fee Line Item,
+                      name: onlineProcessFeeLineItem,
+                      widget: string,
+                    }
+                  - { label: Total Fee Line Item, name: totalFeeLineItem, widget: string }
+              - label: "Review"
+                name: review
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Info Alert Text, name: infoAlertText, widget: string }
+                  - { label: Error Submit Text, name: errorSubmitText, widget: string }
+                  - { label: API Error Text, name: apiErrorText, widget: string }
+                  - { label: Confirmation Email, name: confirmationEmail, widget: string }
+                  - { label: Permit Attach, name: permitAttach, widget: string }
+                  - { label: Permit Text Message, name: permitTextMessage, widget: string }
+                  - { label: AlternateEmail, name: alternateEmail, widget: string }
+              - label: "Fields"
+                name: fields
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Carrier, name: carrier, widget: string }
+                  - { label: Requestor First Name, name: requestorFirstName, widget: string }
+                  - { label: Requestor Last Name, name: requestorLastName, widget: string }
+                  - { label: Requestor Email, name: requestorEmail, widget: string }
+                  - { label: Requestor Phone, name: requestorPhone, widget: string }
+                  - { label: Requestor Country, name: requestorCountry, widget: string }
+                  - { label: Requestor Address 1, name: requestorAddress1, widget: string }
+                  - { label: Requestor Address 2, name: requestorAddress2, widget: string }
+                  - {
+                      label: Requestor State Province,
+                      name: requestorStateProvince,
+                      widget: string,
+                    }
+                  - { label: Requestor City, name: requestorCity, widget: string }
+                  - {
+                      label: Requestor Zip Postal Code,
+                      name: requestorZipPostalCode,
+                      widget: string,
+                    }
+                  - { label: Vehicle Country, name: vehicleCountry, widget: string }
+                  - {
+                      label: Vehicle License Plate Number,
+                      name: vehicleLicensePlateNum,
+                      widget: string,
+                    }
+                  - { label: Vehicle Make, name: vehicleMake, widget: string }
+                  - { label: Vehicle State Province, name: vehicleStateProvince, widget: string }
+                  - { label: Vehicle Vin Serial Number, name: vehicleVinSerial, widget: string }
+                  - { label: Vehicle Year, name: vehicleYear, widget: string }
+                  - { label: Permit Date, name: permitDate, widget: string }
+                  - { label: Permit Start Time, name: permitStartTime, widget: string }
+                  - { label: Pickup Country, name: pickupCountry, widget: string }
+                  - { label: Pickup City, name: pickupCity, widget: string }
+                  - { label: Pickup Address, name: pickupAddress, widget: string }
+                  - { label: Pickup Site Name, name: pickupSiteName, widget: string }
+                  - { label: Pickup State Province, name: pickupStateProvince, widget: string }
+                  - { label: Pickup Zip Postal Code, name: pickupZipPostalCode, widget: string }
+                  - { label: Delivery Site Name, name: deliverySiteName, widget: string }
+                  - { label: Delivery Country, name: deliveryCountry, widget: string }
+                  - { label: Delivery Address, name: deliveryAddress, widget: string }
+                  - { label: Delivery City, name: deliveryCity, widget: string }
+                  - { label: Delivery State Province, name: deliveryStateProvince, widget: string }
+                  - { label: Delivery Zip Postal Code, name: deliveryZipPostalCode, widget: string }
+                  - { label: Payer First Name, name: payerFirstName, widget: string }
+                  - { label: Payer Last Name, name: payerLastName, widget: string }
+                  - { label: Payer Email, name: payerEmail, widget: string }
+                  - { label: Payer Phone Number, name: payerPhoneNumber, widget: string }
+                  - { label: Payer Country, name: payerCountry, widget: string }
+                  - { label: Payer Address 1, name: payerAddress1, widget: string }
+                  - { label: Payer Address 2, name: payerAddress2, widget: string }
+                  - { label: Payer City, name: payerCity, widget: string }
+                  - {
+                      label: Payer State Abbreviation,
+                      name: payerStateAbbreviation,
+                      widget: string,
+                    }
+                  - { label: Payer Zip Code, name: payerZipCode, widget: string }
+                  - { label: Payer Company Name, name: payerCompanyName, widget: string }
+                  - { label: Text Message Mobile, name: textMsgMobile, widget: string }
+                  - { label: Additional Email, name: additionalEmail, widget: string }
 
   - name: "naics-code"
     label: "Tasks - NAICS Code"
@@ -915,16 +1277,31 @@ collections:
                   widget: text,
                   hint: This field supports Markdown,
                 }
-              - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
+              - {
+                  label: naics.com Link,
+                  name: naicsLink,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Save Button Text, name: saveButtonText, widget: string }
-              - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
-              - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
+              - {
+                  label: Invalid Validation Error Text,
+                  name: invalidValidationErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Length Validation Error Text,
+                  name: lengthValidationErrorText,
+                  widget: string,
+                }
               - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
               - {
                   label: Aria Label Text,
                   name: ariaLabelText,
                   widget: string,
-                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                  hint:
+                    This is the text that is populates the Edit/Remove button aria label. It is
+                    prepended by "Edit" or "Remove".,
                 }
               - {
                   label: Success Message,
@@ -965,7 +1342,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header (shared on profile/task)", name: "header", widget: "string" }
+                          - {
+                              label: "Header (shared on profile/task)",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Alt Description Text - Renders On Task Page",
                               name: "altDescription",
@@ -998,7 +1379,9 @@ collections:
                   label: Aria Label Text,
                   name: ariaLabelText,
                   widget: string,
-                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                  hint:
+                    This is the text that is populates the Edit/Remove button aria label. It is
+                    prepended by "Edit" or "Remove".,
                 }
       - label: "Business Structure Prompt Component"
         name: "business-structure-prompt"

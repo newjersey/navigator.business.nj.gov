@@ -57,7 +57,8 @@ const healthCheckLambda = `businessnjgov-api-${stage}-healthCheck`;
 const healthCheckEventRule = `health_check_lambda_event_rule`;
 
 const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
-const serverlessDeploymentS3Bucket = process.env.BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME || "default-bucket";
+const serverlessDeploymentS3Bucket =
+  process.env.BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME || "default-bucket";
 const skipSaveDocumentsToS3 = process.env.SKIP_SAVE_DOCUMENTS_TO_S3 || "";
 
 const awsCryptoKey = process.env.AWS_CRYPTO_KEY || "";
@@ -87,7 +88,8 @@ const dynamicsElevatorSafetySecret = process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET
 const dynamicsElevatorSafetyTenantId = process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "";
 const useWireMockForFormationAndBusinessSearch =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH || "";
-const useWireMockForGetTaxCalendarSearch = process.env.USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH || "";
+const useWireMockForGetTaxCalendarSearch =
+  process.env.USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH || "";
 
 const taxClearanceCertificateUrl = process.env.TAX_CLEARANCE_CERTIFICATE_URL || "";
 const taxClearanceCertificateUserName = process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "";
@@ -294,7 +296,7 @@ serverlessConfiguration.functions = {
             "${self:custom.config.infrastructure.SUBNET_02}",
           ],
         }
-      : undefined
+      : undefined,
   ),
   externalStatus: updateExternalStatus(
     env.CI
@@ -305,7 +307,7 @@ serverlessConfiguration.functions = {
             "${self:custom.config.infrastructure.SUBNET_02}",
           ],
         }
-      : undefined
+      : undefined,
   ),
 
   encryptTaxId: encryptTaxId(
@@ -317,7 +319,7 @@ serverlessConfiguration.functions = {
             "${self:custom.config.infrastructure.SUBNET_02}",
           ],
         }
-      : undefined
+      : undefined,
   ),
   migrateUsersVersion: migrateUsersVersion(
     env.CI
@@ -328,7 +330,7 @@ serverlessConfiguration.functions = {
             "${self:custom.config.infrastructure.SUBNET_02}",
           ],
         }
-      : undefined
+      : undefined,
   ),
 };
 
@@ -344,7 +346,7 @@ if (stage !== contentEnv && stage !== testEnv) {
               "${self:custom.config.infrastructure.SUBNET_02}",
             ],
           }
-        : undefined
+        : undefined,
     ),
   };
 }
@@ -360,7 +362,7 @@ if (stage === devEnv) {
               "${self:custom.config.infrastructure.SUBNET_02}",
             ],
           }
-        : undefined
+        : undefined,
     ),
   };
 }

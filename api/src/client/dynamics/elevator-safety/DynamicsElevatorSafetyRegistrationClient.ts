@@ -9,11 +9,11 @@ import axios, { AxiosError } from "axios";
 
 export const DynamicsElevatorSafetyRegistrationClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): ElevatorSafetyRegistrationClient => {
   const getElevatorRegistrationsForBuilding = async (
     accessToken: string,
-    propertyInterestId: string
+    propertyInterestId: string,
   ): Promise<ElevatorRegistration[]> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Elevator Registration Client - Id:${logId}`);
@@ -25,13 +25,13 @@ export const DynamicsElevatorSafetyRegistrationClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then(async (response) => {
         logWriter.LogInfo(
           `Dynamics Elevator Safety Registration Client - Id:${logId} - Response: ${JSON.stringify(
-            response.data
-          )}`
+            response.data,
+          )}`,
         );
         return await Promise.all(
           response.data.value.map(async (element: DynamicsElevatorSafetyRegistrationResponse) => {
@@ -42,7 +42,7 @@ export const DynamicsElevatorSafetyRegistrationClient = (
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
-                }
+                },
               )
               .then((response) => {
                 return response.data.value.length;
@@ -51,11 +51,14 @@ export const DynamicsElevatorSafetyRegistrationClient = (
                 throw error.response?.status;
               });
             return processDynamicsElevatorSafetyRegistrationResponse(element, deviceCount);
-          })
+          }),
         );
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`Dynamics Elevator Safety Registration Client - Id:${logId} - Error:`, error);
+        logWriter.LogError(
+          `Dynamics Elevator Safety Registration Client - Id:${logId} - Error:`,
+          error,
+        );
         throw error.response?.status;
       });
   };
@@ -67,7 +70,7 @@ export const DynamicsElevatorSafetyRegistrationClient = (
 
 function processDynamicsElevatorSafetyRegistrationResponse(
   response: DynamicsElevatorSafetyRegistrationResponse,
-  deviceCount: number
+  deviceCount: number,
 ): ElevatorRegistration {
   return {
     deviceCount: deviceCount,

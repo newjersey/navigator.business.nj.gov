@@ -4,7 +4,7 @@ import { NonEssentialQuestion } from "@/lib/types/types";
 
 export const searchNonEssentialQuestions = (
   nonEssentialQuestions: NonEssentialQuestion[],
-  term: string
+  term: string,
 ): Match[] => {
   const matches: Match[] = [];
 

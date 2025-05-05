@@ -46,10 +46,12 @@ describe("<FormationDateModal />", () => {
 
     render(
       <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
-        <WithStatefulUserData initialUserData={generateUserDataForBusiness(businessWithMunicipality)}>
+        <WithStatefulUserData
+          initialUserData={generateUserDataForBusiness(businessWithMunicipality)}
+        >
           <FormationDateModal isOpen={true} close={(): void => {}} onSave={(): void => {}} />
         </WithStatefulUserData>
-      </MunicipalitiesContext.Provider>
+      </MunicipalitiesContext.Provider>,
     );
   };
 
@@ -72,10 +74,16 @@ describe("<FormationDateModal />", () => {
   });
 
   it("shows error when user saves without entering date", () => {
-    renderComponent(generateBusiness({ profileData: generateProfileData({ dateOfFormation: undefined }) }));
-    expect(screen.queryByText(Config.formationDateModal.dateOfFormationErrorText)).not.toBeInTheDocument();
+    renderComponent(
+      generateBusiness({ profileData: generateProfileData({ dateOfFormation: undefined }) }),
+    );
+    expect(
+      screen.queryByText(Config.formationDateModal.dateOfFormationErrorText),
+    ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
-    expect(screen.getByText(Config.formationDateModal.dateOfFormationErrorText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.formationDateModal.dateOfFormationErrorText),
+    ).toBeInTheDocument();
   });
 
   it("does not update dateOfFormation if user cancels", () => {
@@ -86,7 +94,7 @@ describe("<FormationDateModal />", () => {
     fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
     triggerQueueUpdate();
     expect(currentBusiness().profileData.dateOfFormation).toEqual(
-      initialBusiness.profileData.dateOfFormation
+      initialBusiness.profileData.dateOfFormation,
     );
   });
 
@@ -102,7 +110,7 @@ describe("<FormationDateModal />", () => {
           municipality: undefined,
           ...startingOrForeign,
         }),
-      })
+      }),
     );
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
@@ -127,7 +135,7 @@ describe("<FormationDateModal />", () => {
           foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           municipality: undefined,
         }),
-      })
+      }),
     );
     expect(screen.getByText("Location")).toBeInTheDocument();
   });
@@ -140,7 +148,7 @@ describe("<FormationDateModal />", () => {
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           municipality: undefined,
         }),
-      })
+      }),
     );
     expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
   });
@@ -154,14 +162,14 @@ describe("<FormationDateModal />", () => {
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({ municipality: undefined, ...startingOrForeign }),
-      })
+      }),
     );
     expect(
-      screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+      screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired),
     ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     expect(
-      screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+      screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired),
     ).toBeInTheDocument();
   });
 });

@@ -1,11 +1,14 @@
 import { HousingPropertyInterestStatus, HousingRegistrationStatus } from "@domain/types";
-import { HousingPropertyInterestDetails, HousingRegistrationRequestLookupResponse } from "@shared/housing";
+import {
+  HousingPropertyInterestDetails,
+  HousingRegistrationRequestLookupResponse,
+} from "@shared/housing";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const housingRouterFactory = (
   housingPropertyInterest: HousingPropertyInterestStatus,
-  housingRegistrationStatus: HousingRegistrationStatus
+  housingRegistrationStatus: HousingRegistrationStatus,
 ): Router => {
   const router = Router();
 

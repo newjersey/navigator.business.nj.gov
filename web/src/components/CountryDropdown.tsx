@@ -1,7 +1,10 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { arrayOfCountriesObjects as countries, CountriesObject } from "@businessnjgovnavigator/shared/";
+import {
+  arrayOfCountriesObjects as countries,
+  CountriesObject,
+} from "@businessnjgovnavigator/shared/";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
@@ -18,6 +21,7 @@ interface Props {
   autoComplete?: boolean;
   disabled?: boolean;
   required?: boolean;
+  options?: CountriesObject[];
 }
 
 export const CountryDropdown = (props: Props): ReactElement => {
@@ -58,15 +62,17 @@ export const CountryDropdown = (props: Props): ReactElement => {
         })
       : countries;
 
+  const options = props.options ?? filteredCountries();
+
   const getCountry = (value: string | undefined): CountriesObject | undefined => {
-    return filteredCountries().find((country: CountriesObject) => {
+    return options.find((country: CountriesObject) => {
       return country.name === value || country.shortCode === value?.toUpperCase();
     });
   };
 
   return (
     <Autocomplete
-      options={filteredCountries()}
+      options={options}
       value={getCountry(props.value) || null}
       filterOptions={filterOptions}
       getOptionLabel={(option: CountriesObject): string => {
@@ -86,7 +92,9 @@ export const CountryDropdown = (props: Props): ReactElement => {
         return (
           <li {..._props}>
             {selected ? (
-              <MenuOptionSelected>{props.useFullName ? option.name : option.shortCode}</MenuOptionSelected>
+              <MenuOptionSelected>
+                {props.useFullName ? option.name : option.shortCode}
+              </MenuOptionSelected>
             ) : (
               <MenuOptionUnselected>
                 {props.useFullName ? option.name : option.shortCode}

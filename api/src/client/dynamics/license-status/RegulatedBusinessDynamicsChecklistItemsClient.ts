@@ -9,11 +9,11 @@ import axios, { AxiosError } from "axios";
 
 export const RegulatedBusinessDynamicsChecklistItemsClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): ChecklistItemsForAllApplicationsClient => {
   const getChecklistItems = async (
     accessToken: string,
-    licenseApplicationInformation: LicenseApplicationIdResponse
+    licenseApplicationInformation: LicenseApplicationIdResponse,
   ): Promise<LicenseChecklistResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Rgb Checklist Items Client - Id:${logId}`);
@@ -24,15 +24,18 @@ export const RegulatedBusinessDynamicsChecklistItemsClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then((response) => {
         logWriter.LogInfo(
-          `RGB Dynamics Checklist Items Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
+          `RGB Dynamics Checklist Items Client - Id:${logId} - Response: ${JSON.stringify(
+            response.data,
+          )}`,
         );
 
-        const checklistItems = response.data.value.map((checklistItem: DynamicsApiChecklistItemsResponse) =>
-          processChecklistItems(checklistItem)
+        const checklistItems = response.data.value.map(
+          (checklistItem: DynamicsApiChecklistItemsResponse) =>
+            processChecklistItems(checklistItem),
         );
         return {
           licenseStatus: licenseApplicationInformation.licenseStatus,
@@ -49,12 +52,12 @@ export const RegulatedBusinessDynamicsChecklistItemsClient = (
 
   const getChecklistItemsForAllApplications = async (
     accessToken: string,
-    applicationIdResponse: LicenseApplicationIdResponse[]
+    applicationIdResponse: LicenseApplicationIdResponse[],
   ): Promise<LicenseChecklistResponse[]> => {
     return await Promise.all(
       applicationIdResponse.map((licenseApplicationInformation) =>
-        getChecklistItems(accessToken, licenseApplicationInformation)
-      )
+        getChecklistItems(accessToken, licenseApplicationInformation),
+      ),
     );
   };
 
@@ -79,7 +82,9 @@ const statusCodeToChecklistItemStatus: Record<number, CheckoffStatus> = {
   4: "PENDING",
 };
 
-const processChecklistItems = (checklistItem: DynamicsApiChecklistItemsResponse): LicenseStatusItem => {
+const processChecklistItems = (
+  checklistItem: DynamicsApiChecklistItemsResponse,
+): LicenseStatusItem => {
   return {
     title: checklistItem.subject,
     status: statusCodeToChecklistItemStatus[checklistItem.statuscode],

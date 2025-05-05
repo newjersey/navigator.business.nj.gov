@@ -47,7 +47,7 @@ describe("loadFilings", () => {
         expect.arrayContaining([
           { params: { filingUrlSlug: "some-url-slug-1" } },
           { params: { filingUrlSlug: "some-url-slug-2" } },
-        ])
+        ]),
       );
     });
   });

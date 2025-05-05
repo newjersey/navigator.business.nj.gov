@@ -86,12 +86,27 @@ collections:
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
-      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
+      - {
+          label: "Url Slug - Internal Routing",
+          name: "urlSlug",
+          widget: "no-space",
+          required: true,
+        }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
 
   - name: "anytime-action-license-reinstatements"
     label: "Anytime Action With Consumer Affairs License Integrations (Reinstatements)"
@@ -115,7 +130,12 @@ collections:
         }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
       - { label: "Name/Title", name: "name", widget: "string" }
-      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
+      - {
+          label: "Url Slug - Internal Routing",
+          name: "urlSlug",
+          widget: "no-space",
+          required: true,
+        }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license tasks)
       # - {
@@ -133,8 +153,18 @@ collections:
           required: true,
           default: "Division of Consumer Affairs",
         }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
   - name: "tax-clearance-certificate-anytime-action"
     label: "Tax Clearance Anytime Action"
     delete: false
@@ -158,8 +188,18 @@ collections:
                   widget: "string",
                   required: true,
                 }
-              - { label: "Issuing Agency Text", name: "issuingAgencyText", widget: "string", required: true }
-              - { label: "Next Button Text", name: "continueButtonText", widget: "string", required: true }
+              - {
+                  label: "Issuing Agency Text",
+                  name: "issuingAgencyText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Next Button Text",
+                  name: "continueButtonText",
+                  widget: "string",
+                  required: true,
+                }
       - label: "Tax Clearance Step 2"
         name: "taxClearanceCertificate-step2"
         file: "content/src/fieldConfig/tax-clearance-certificate-step2.json"
@@ -200,8 +240,18 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Main Title Header", name: "mainTitleHeader", widget: "string", required: true }
-              - { label: "Edit Button Text", name: "editButtonText", widget: "string", required: true }
+              - {
+                  label: "Main Title Header",
+                  name: "mainTitleHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Edit Button Text",
+                  name: "editButtonText",
+                  widget: "string",
+                  required: true,
+                }
               - {
                   label: "First Section Header",
                   name: "firstSectionHeader",
@@ -220,9 +270,19 @@ collections:
                   widget: "string",
                   required: true,
                 }
-              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
+              - {
+                  label: "Business Name Label",
+                  name: "businessNameLabel",
+                  widget: "string",
+                  required: true,
+                }
               - { label: "Address Label", name: "addressLabel", widget: "string", required: true }
-              - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
+              - {
+                  label: "State Tax Id Label",
+                  name: "stateTaxIdLabel",
+                  widget: "string",
+                  required: true,
+                }
               - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
       - label: "Tax Clearance Shared"
         name: "taxClearanceCertificate-shared"
@@ -235,8 +295,18 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Stepper One Tab Text", name: "stepperOneLabel", widget: "string", required: true }
-              - { label: "Stepper Two Tab Text", name: "stepperTwoLabel", widget: "string", required: true }
+              - {
+                  label: "Stepper One Tab Text",
+                  name: "stepperOneLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Stepper Two Tab Text",
+                  name: "stepperTwoLabel",
+                  widget: "string",
+                  required: true,
+                }
               - {
                   label: "Stepper Three Tab Text",
                   name: "stepperThreeLabel",
@@ -268,6 +338,16 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Header Two Text", name: "headerTwoLabel", widget: "string", required: true }
+              - {
+                  label: "Header Two Text",
+                  name: "headerTwoLabel",
+                  widget: "string",
+                  required: true,
+                }
               - { label: "Callout Text", name: "calloutText", widget: "string", required: true }
-              - { label: "Download Button Text", name: "buttonText", widget: "string", required: true }
+              - {
+                  label: "Download Button Text",
+                  name: "buttonText",
+                  widget: "string",
+                  required: true,
+                }

@@ -119,15 +119,17 @@ describe("RegulatedBusinessDynamicsLicenseStatusClient", () => {
     ];
 
     stubAccessTokenClient.getAccessToken.mockResolvedValue("some-token");
-    stubBusinessIdsAndNamesClient.getMatchedBusinessIdsAndNames.mockResolvedValue(businessIdAndName);
+    stubBusinessIdsAndNamesClient.getMatchedBusinessIdsAndNames.mockResolvedValue(
+      businessIdAndName,
+    );
     stubBusinessAddressesClient.getBusinessAddressesForAllBusinessIds.mockResolvedValue(
-      businessIdAndLicenseSearchNameAndAddresses
+      businessIdAndLicenseSearchNameAndAddresses,
     );
     stubLicenseApplicationIdsClient.getLicenseApplicationIdsForAllBusinessIds.mockResolvedValue(
-      licenseApplicationIdResponse
+      licenseApplicationIdResponse,
     );
     stubChecklistItemsClient.getChecklistItemsForAllApplications.mockResolvedValue(
-      licenseStatusChecklistResult
+      licenseStatusChecklistResult,
     );
 
     client = RegulatedBusinessDynamicsLicenseStatusClient({
@@ -164,7 +166,7 @@ describe("RegulatedBusinessDynamicsLicenseStatusClient", () => {
 
     it("throws error when getMatchedBusinessIdsAndNames throws NO_MATCH_ERROR error", async () => {
       stubBusinessIdsAndNamesClient.getMatchedBusinessIdsAndNames.mockRejectedValue(
-        new Error(NO_MATCH_ERROR)
+        new Error(NO_MATCH_ERROR),
       );
 
       await expect(client(nameAndAddress)).rejects.toThrow(NO_MATCH_ERROR);
@@ -228,7 +230,9 @@ describe("RegulatedBusinessDynamicsLicenseStatusClient", () => {
           .fn()
           .mockResolvedValue(businessIdAndLicenseSearchNameAndAddresses),
       };
-      stubLicenseApplicationIdsClient.getLicenseApplicationIdsForAllBusinessIds.mockRejectedValue(500);
+      stubLicenseApplicationIdsClient.getLicenseApplicationIdsForAllBusinessIds.mockRejectedValue(
+        500,
+      );
 
       client = RegulatedBusinessDynamicsLicenseStatusClient({
         dynamicsAccessTokenClient: stubAccessTokenClient,
@@ -264,7 +268,7 @@ describe("RegulatedBusinessDynamicsLicenseStatusClient", () => {
           .mockResolvedValue(businessIdAndLicenseSearchNameAndAddresses),
       };
       stubLicenseApplicationIdsClient.getLicenseApplicationIdsForAllBusinessIds.mockRejectedValue(
-        new Error(NO_MAIN_APPS_ERROR)
+        new Error(NO_MAIN_APPS_ERROR),
       );
 
       client = RegulatedBusinessDynamicsLicenseStatusClient({

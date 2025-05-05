@@ -18,7 +18,7 @@ describe("Operating Phase Tests", () => {
 
     it("returns oeprating phase record when a valid id is supplied", () => {
       expect(LookupOperatingPhaseById(OperatingPhaseId.NEEDS_TO_FORM)?.id).toEqual(
-        OperatingPhaseId.NEEDS_TO_FORM
+        OperatingPhaseId.NEEDS_TO_FORM,
       );
     });
   });

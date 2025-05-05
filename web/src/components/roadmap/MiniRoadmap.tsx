@@ -19,7 +19,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    business?.profileData.operatingPhase
+    business?.profileData.operatingPhase,
   ).displayBusinessStructurePrompt;
   const completedBusinessStructure = hasCompletedBusinessStructure(business);
 
@@ -49,7 +49,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
           .update();
       }
     },
-    [updateQueue, business]
+    [updateQueue, business],
   );
 
   return (
@@ -57,7 +57,9 @@ export const MiniRoadmap = (props: Props): ReactElement => {
       {sectionNamesInRoadmap.map((section) => {
         return (
           <SectionAccordion key={section} sectionType={section} mini={true}>
-            {section === "START" && !completedBusinessStructure && displayBusinessStructurePrompt ? (
+            {section === "START" &&
+            !completedBusinessStructure &&
+            displayBusinessStructurePrompt ? (
               <BusinessStructurePrompt isCTAButtonHidden={true} />
             ) : (
               roadmap?.steps

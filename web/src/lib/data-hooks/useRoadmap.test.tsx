@@ -1,4 +1,8 @@
-import { CurrentAndNextSection, useRoadmap, UseRoadmapReturnValue } from "@/lib/data-hooks/useRoadmap";
+import {
+  CurrentAndNextSection,
+  useRoadmap,
+  UseRoadmapReturnValue,
+} from "@/lib/data-hooks/useRoadmap";
 import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
@@ -37,7 +41,7 @@ describe("useRoadmap", () => {
       withRoadmap({
         component: <TestComponent />,
         initialRoadmap: initialRoadmap,
-      })
+      }),
     );
     return initialReturnVal;
   };

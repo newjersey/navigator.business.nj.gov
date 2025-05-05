@@ -21,7 +21,10 @@ export const useUpdateTaskProgress = (): {
     updateQueue.queueTaskProgress({ [taskId]: newValue });
     const { current, next } = currentAndNextSection(taskId);
     const wasSectionPreviouslyCompleted = isSectionCompleted(current);
-    const isSectionNowCompleted = isSectionCompleted(current, updateQueue.currentBusiness().taskProgress);
+    const isSectionNowCompleted = isSectionCompleted(
+      current,
+      updateQueue.currentBusiness().taskProgress,
+    );
 
     if (!wasSectionPreviouslyCompleted && isSectionNowCompleted) {
       setNextSection(next);

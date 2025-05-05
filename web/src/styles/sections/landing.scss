@@ -18,7 +18,11 @@
 }
 
 .hero-gradient-bg {
-  background: linear-gradient(variables.$white, variables.$white, variables.$primary-extra-light) !important;
+  background: linear-gradient(
+    variables.$white,
+    variables.$white,
+    variables.$primary-extra-light
+  ) !important;
 }
 
 .hero-gradient-bg-bottom {

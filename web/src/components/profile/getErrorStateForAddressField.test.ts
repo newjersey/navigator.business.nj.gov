@@ -20,19 +20,19 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressLine1",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressLine1",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine1.label,
           maxLen: String(BUSINESS_ADDRESS_LINE_1_MAX_CHAR),
-        })
+        }),
       );
     });
 
@@ -44,7 +44,7 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressLine1",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(false);
     });
   });
@@ -58,18 +58,18 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressLine2",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
       expect(
         getErrorStateForAddressField({
           field: "addressLine2",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine2.label,
           maxLen: String(BUSINESS_ADDRESS_LINE_1_MAX_CHAR),
-        })
+        }),
       );
     });
 
@@ -82,7 +82,7 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressLine2",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(false);
     });
   });
@@ -100,13 +100,13 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressZipCode",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
       expect(
         getErrorStateForAddressField({
           field: "addressZipCode",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(Config.formation.fields.addressZipCode.error);
     });
 
@@ -122,14 +122,14 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressZipCode",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressZipCode",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(Config.formation.fields.addressZipCode.error);
     });
 
@@ -141,7 +141,7 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressZipCode",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(false);
     });
   });
@@ -157,14 +157,14 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressMunicipality",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressMunicipality",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(Config.formation.fields.addressMunicipality.error);
     });
   });
@@ -181,14 +181,14 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressCity",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressCity",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(Config.formation.fields.addressCity.error);
     });
   });
@@ -204,14 +204,14 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressProvince",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressProvince",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(Config.formation.fields.addressProvince.error);
     });
   });
@@ -227,14 +227,14 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressCountry",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressCountry",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(Config.formation.fields.addressCountry.error);
     });
   });
@@ -250,14 +250,14 @@ describe("getErrorStateForAddressField", () => {
         getErrorStateForAddressField({
           field: "addressState",
           formationAddressData: address,
-        }).hasError
+        }).hasError,
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressState",
           formationAddressData: address,
-        }).label
+        }).label,
       ).toEqual(Config.formation.fields.addressState.error);
     });
   });

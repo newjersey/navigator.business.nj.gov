@@ -2,16 +2,16 @@ import { EncryptionDecryptionClient } from "@domain/types";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
-export const taxDecryptionRouterFactory = (
-  encryptionDecryptionClient: EncryptionDecryptionClient
+export const decryptionRouterFactory = (
+  encryptionDecryptionClient: EncryptionDecryptionClient,
 ): Router => {
   const router = Router();
 
   router.post("/decrypt", async (req, res) => {
-    const { encryptedTaxId } = req.body;
+    const { encryptedValue } = req.body;
     try {
-      const plainTextTaxId = await encryptionDecryptionClient.decryptValue(encryptedTaxId);
-      res.json(plainTextTaxId);
+      const plainTextValue = await encryptionDecryptionClient.decryptValue(encryptedValue);
+      res.json(plainTextValue);
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
     }

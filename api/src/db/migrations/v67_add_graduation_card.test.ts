@@ -13,7 +13,9 @@ describe("migrate_v66_to_v67", () => {
     const v66 = makeUserData(profileData);
     const v67 = migrate_v66_to_v67(v66);
 
-    expect(v67.preferences.visibleRoadmapSidebarCards).toEqual(expect.arrayContaining(["graduation"]));
+    expect(v67.preferences.visibleRoadmapSidebarCards).toEqual(
+      expect.arrayContaining(["graduation"]),
+    );
   });
 
   it("adds graduation card to visibleRoadmapSidebarCards when business persona is OWNING", () => {
@@ -21,7 +23,9 @@ describe("migrate_v66_to_v67", () => {
     const v66 = makeUserData(profileData);
     const v67 = migrate_v66_to_v67(v66);
 
-    expect(v67.preferences.visibleRoadmapSidebarCards).toEqual(expect.arrayContaining(["graduation"]));
+    expect(v67.preferences.visibleRoadmapSidebarCards).toEqual(
+      expect.arrayContaining(["graduation"]),
+    );
   });
 
   it("does not add graduation card to visibleRoadmapSidebarCards when business persona is FOREIGN", () => {

@@ -74,7 +74,8 @@ export const RGB_LICENSE_APPLICATION_INFORMATION = [
   {
     uuid: CONSULTING_FIRM_LICENSE_UUID,
     appTypeCode: 100000001,
-    expectedProfession: "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service",
+    expectedProfession:
+      "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service",
   },
   {
     uuid: CONSULTING_FIRM_LICENSE_UUID,

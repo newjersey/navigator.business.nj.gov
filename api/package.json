@@ -26,29 +26,25 @@
   "engines": {
     "node": ">=20.18.1"
   },
-  "prettier": {
-    "printWidth": 110,
-    "endOfLine": "auto"
-  },
   "dependencies": {
     "@aws-crypto/client-node": "4.2.1",
-    "@aws-sdk/client-cloudwatch-logs": "3.787.0",
-    "@aws-sdk/client-dynamodb": "3.788.0",
-    "@aws-sdk/client-s3": "3.787.0",
-    "@aws-sdk/lib-dynamodb": "3.789.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.800.0",
+    "@aws-sdk/client-dynamodb": "3.799.0",
+    "@aws-sdk/client-s3": "3.800.0",
+    "@aws-sdk/lib-dynamodb": "3.799.0",
     "@aws-sdk/smithy-client": "3.374.0",
     "@aws-sdk/types": "3.775.0",
     "@aws-sdk/util-base64-node": "3.209.0",
-    "@aws-sdk/util-dynamodb": "3.788.0",
+    "@aws-sdk/util-dynamodb": "3.799.0",
     "@businessnjgovnavigator/shared": "*",
     "@serverless/typescript": "3.38.0",
     "@smithy/node-http-handler": "2.5.0",
     "airtable": "0.12.2",
-    "axios": "1.8.4",
+    "axios": "1.9.0",
     "body-parser": "1.20.3",
     "cors": "2.8.5",
     "dayjs": "1.11.13",
-    "dedent": "1.5.3",
+    "dedent": "1.6.0",
     "express": "4.21.2",
     "helmet": "7.2.0",
     "http-status-codes": "2.3.0",
@@ -88,9 +84,9 @@
     "jest-dynalite": "3.6.1",
     "jest-junit": "16.0.0",
     "prettier": "2.8.8",
-    "prettier-plugin-organize-imports": "3.2.4",
+    "prettier-plugin-organize-imports": "4.1.0",
     "rimraf": "5.0.10",
-    "serverless": "4.13.0",
+    "serverless": "4.14.2",
     "serverless-dynamodb": "0.2.56",
     "serverless-offline": "14.4.0",
     "serverless-offline-ssm": "6.2.0",
@@ -101,6 +97,6 @@
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.8.3",
-    "wiremock": "3.12.1"
+    "wiremock": "3.13.0"
   }
 }

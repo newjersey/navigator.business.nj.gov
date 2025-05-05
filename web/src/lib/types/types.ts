@@ -20,6 +20,7 @@ import {
   UserData,
   XrayData,
 } from "@businessnjgovnavigator/shared/";
+import { EmergencyTripPermitApplicationInfo } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { Reducer } from "react";
@@ -74,6 +75,12 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
 export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
+export type EmergencyTripPermitStepNames =
+  | "Instructions"
+  | "Requestor"
+  | "Trip"
+  | "Billing"
+  | "Review";
 
 export type FormationFieldErrorState = {
   field: FieldsForErrorHandling;
@@ -211,7 +218,13 @@ export const FundingStatusOrder: Record<FundingStatus, number> = {
   closed: 4,
   "opening soon": 4,
 };
-export type FundingProgramFrequency = "annual" | "ongoing" | "reoccuring" | "one-time" | "pilot" | "other";
+export type FundingProgramFrequency =
+  | "annual"
+  | "ongoing"
+  | "reoccuring"
+  | "one-time"
+  | "pilot"
+  | "other";
 export type FundingBusinessStage = "early-stage" | "operating" | "both";
 export type FundingHomeBased = "yes" | "no" | "unknown";
 export type FundingpreferenceForOpportunityZone = "yes" | "no";
@@ -265,7 +278,9 @@ export type County =
   | "Union"
   | "Warren";
 
-export interface FormationSignedAddress extends FormationMember, Partial<Omit<FormationSigner, "name">> {}
+export interface FormationSignedAddress
+  extends FormationMember,
+    Partial<Omit<FormationSigner, "name">> {}
 
 export type FormationDbaContent = {
   DbaResolution: TaskWithoutLinks;
@@ -449,7 +464,9 @@ export type NaicsCodeObject = {
 
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
-export type ElevatorRegistrationSearchError = CommunityAffairsSearchError | "NO_ELEVATOR_REGISTRATIONS_FOUND";
+export type ElevatorRegistrationSearchError =
+  | CommunityAffairsSearchError
+  | "NO_ELEVATOR_REGISTRATIONS_FOUND";
 
 export type HotelMotelRegistrationSearchError =
   | CommunityAffairsSearchError
@@ -459,7 +476,10 @@ export type MultipleDwellingSearchError =
   | CommunityAffairsSearchError
   | "NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND";
 
-export type CommunityAffairsSearchError = "NO_PROPERTY_INTEREST_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
+export type CommunityAffairsSearchError =
+  | "NO_PROPERTY_INTEREST_FOUND"
+  | "FIELDS_REQUIRED"
+  | "SEARCH_FAILED";
 
 export type FeedbackRequestModalNames =
   | "Select Feedback"
@@ -467,7 +487,7 @@ export type FeedbackRequestModalNames =
   | "Request Submitted"
   | "Report Issue";
 
-const _profileTabs = ["info", "numbers", "documents", "notes"] as const;
+const _profileTabs = ["info", "permits", "numbers", "documents", "notes"] as const;
 
 export type ProfileTabs = (typeof _profileTabs)[number];
 
@@ -563,6 +583,13 @@ export type AddressFieldErrorState = {
 };
 export type FieldErrorType = undefined | unknown;
 
+export type FieldsForEmergencyTripPermitErrorHandling = keyof EmergencyTripPermitApplicationInfo;
+export type EmergencyTripPermitFieldErrorState = {
+  field: FieldsForEmergencyTripPermitErrorHandling;
+  hasError: boolean;
+  label: string;
+};
+
 export enum FieldStateActionKind {
   RESET = "RESET",
   REGISTER = "REGISTER",
@@ -600,10 +627,10 @@ export type FieldStatus<FieldError = FieldErrorType> = {
   updated?: boolean;
   errorTypes?: FieldError[];
 };
-export type ReducedFieldStates<K extends string | number | symbol, FieldError = FieldErrorType> = Record<
-  K,
-  FieldStatus<FieldError>
->;
+export type ReducedFieldStates<
+  K extends string | number | symbol,
+  FieldError = FieldErrorType,
+> = Record<K, FieldStatus<FieldError>>;
 export type FormContextReducer<T, FieldError = FieldErrorType> = Reducer<
   ReducedFieldStates<keyof T, FieldError>,
   FormContextReducerActions<T, FieldError>
@@ -612,7 +639,9 @@ export type FormContextReducer<T, FieldError = FieldErrorType> = Reducer<
 export interface FormContextType<T, FieldError = FieldErrorType> {
   fieldStates: ReducedFieldStates<keyof T, FieldError>;
   runValidations: boolean;
-  reducer: React.Dispatch<FormContextReducerActions<ReducedFieldStates<keyof T, FieldError>, FieldError>>;
+  reducer: React.Dispatch<
+    FormContextReducerActions<ReducedFieldStates<keyof T, FieldError>, FieldError>
+  >;
 }
 
 export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };

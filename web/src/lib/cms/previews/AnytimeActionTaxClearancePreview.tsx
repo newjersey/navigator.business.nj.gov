@@ -19,8 +19,8 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <div className={"margin-bottom-4"}>
-          The H1 can only be updated in the tax clearance file located within the anytime action tasks admin
-          collection
+          The H1 can only be updated in the tax clearance file located within the anytime action
+          tasks admin collection
         </div>
         {tab === "step1" && (
           <>

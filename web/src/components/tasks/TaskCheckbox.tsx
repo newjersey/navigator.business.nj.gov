@@ -33,6 +33,10 @@ export const TaskCheckbox = (props: Props): ReactElement => {
   };
 
   return (
-    <Checkbox onChange={handleChange} checked={checklistItemStatus} data-testid={props.checklistItemId} />
+    <Checkbox
+      onChange={handleChange}
+      checked={checklistItemStatus}
+      data-testid={props.checklistItemId}
+    />
   );
 };

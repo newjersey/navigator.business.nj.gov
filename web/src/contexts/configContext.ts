@@ -1,3 +1,4 @@
+import * as AbcEmergencyTripPermit from "@businessnjgovnavigator/content/fieldConfig/abc-emergency-trip-permit.json";
 import * as AccountSetup from "@businessnjgovnavigator/content/fieldConfig/account-setup-page.json";
 import * as anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults from "@businessnjgovnavigator/content/fieldConfig/anytime-action-reinstatement-and-license-calendar-event-status-defaults.json";
 import * as BusinessFormation from "@businessnjgovnavigator/content/fieldConfig/business-formation.json";
@@ -42,7 +43,7 @@ import * as TaxClearanceCertificateShared from "@businessnjgovnavigator/content/
 import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step1.json";
 import * as TaxClearanceCertificateStep2 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step2.json";
 import * as TaxClearanceCertificateStep3 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step3.json";
-import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+import * as TaxId from "@businessnjgovnavigator/content/fieldConfig/tax-id.json";
 import * as XrayRegistration from "@businessnjgovnavigator/content/fieldConfig/x-ray-registration.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
@@ -64,7 +65,7 @@ const merged = JSON.parse(
       NexusDbaFormation,
       NaicsCode,
       Ein,
-      Tax,
+      TaxId,
       CannabisLicenseEligibilityModal,
       FormationInterimSuccessPage,
       FormationSuccessPage,
@@ -103,9 +104,10 @@ const merged = JSON.parse(
       TaxClearanceCertificateShared,
       TaxClearanceCertificateDownload,
       FundingsOnboarding,
-      XrayRegistration
-    )
-  )
+      XrayRegistration,
+      AbcEmergencyTripPermit,
+    ),
+  ),
 );
 
 export type ConfigType = typeof ConfigOriginal &
@@ -119,7 +121,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof NexusDbaFormation &
   typeof NaicsCode &
   typeof Ein &
-  typeof Tax &
+  typeof TaxId &
   typeof CannabisLicenseEligibilityModal &
   typeof FormationInterimSuccessPage &
   typeof FormationSuccessPage &
@@ -157,7 +159,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof TaxClearanceCertificateStep3 &
   typeof TaxClearanceCertificateShared &
   typeof XrayRegistration &
-  typeof TaxClearanceCertificateDownload;
+  typeof TaxClearanceCertificateDownload &
+  typeof AbcEmergencyTripPermit;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -172,7 +175,7 @@ export const getMergedConfig = (): ConfigType => {
     NexusDbaFormation,
     NaicsCode,
     Ein,
-    Tax,
+    TaxId,
     CannabisLicenseEligibilityModal,
     FormationInterimSuccessPage,
     FormationSuccessPage,
@@ -208,7 +211,8 @@ export const getMergedConfig = (): ConfigType => {
     TaxClearanceCertificateStep3,
     TaxClearanceCertificateShared,
     TaxClearanceCertificateDownload,
-    XrayRegistration
+    XrayRegistration,
+    AbcEmergencyTripPermit,
   );
 };
 

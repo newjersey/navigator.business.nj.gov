@@ -32,7 +32,7 @@ export const migrate_v39_to_v40 = (v39Data: v39UserData): v40UserData => {
         ...new Set(
           v39Data.preferences.roadmapOpenSteps.map((value) => {
             return determineOpenSteps(value);
-          })
+          }),
         ),
       ],
     },
@@ -87,7 +87,11 @@ type v40TaxFilingData = {
   filings: v40TaxFiling[];
 };
 
-type v40EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
+type v40EntityIdStatus =
+  | "UNKNOWN"
+  | "EXISTS_AND_REGISTERED"
+  | "EXISTS_NOT_REGISTERED"
+  | "NOT_FOUND";
 
 type v40TaxFiling = {
   identifier: string;

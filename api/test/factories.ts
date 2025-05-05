@@ -30,7 +30,11 @@ import {
   randomPublicFilingLegalType,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { XrayRegistrationEntry, XrayRegistrationStatus, XrayRegistrationStatusResponse } from "@shared/xray";
+import {
+  XrayRegistrationEntry,
+  XrayRegistrationStatus,
+  XrayRegistrationStatusResponse,
+} from "@shared/xray";
 import {
   getRandomDateInBetween,
   randomElementFromArray,
@@ -47,7 +51,10 @@ export const generateTaxFilingDates = (numberOfDates: number): string[] => {
   const futureDate = new Date(Date.now());
   futureDate.setFullYear(futureDate.getFullYear() + 2);
   return [...Array.from({ length: numberOfDates }).keys()].map(() => {
-    return getRandomDateInBetween(dateToShortISO(date), dateToShortISO(futureDate)).toLocaleDateString();
+    return getRandomDateInBetween(
+      dateToShortISO(date),
+      dateToShortISO(futureDate),
+    ).toLocaleDateString();
   });
 };
 
@@ -63,7 +70,7 @@ export const generateTaxFilingResult = (overrides: Partial<TaxFilingResult>): Ta
 export const generateFormationUserData = (
   profileData: Partial<ProfileData>,
   formationData: Partial<FormationData>,
-  formationFormData: Partial<FormationFormData>
+  formationFormData: Partial<FormationFormData>,
 ): UserData => {
   const _profileData = generateProfileData({
     legalStructureId: randomPublicFilingLegalType(),
@@ -71,7 +78,7 @@ export const generateFormationUserData = (
   });
   const legalStructureId = castPublicFilingLegalTypeToFormationType(
     _profileData.legalStructureId as PublicFilingLegalType,
-    _profileData.businessPersona
+    _profileData.businessPersona,
   );
   const _formationData = generateFormationData(
     {
@@ -80,10 +87,10 @@ export const generateFormationUserData = (
       }),
       ...formationData,
     },
-    legalStructureId
+    legalStructureId,
   );
   return generateUserDataForBusiness(
-    generateBusiness({ formationData: _formationData, profileData: _profileData })
+    generateBusiness({ formationData: _formationData, profileData: _profileData }),
   );
 };
 
@@ -147,7 +154,9 @@ export const generateExternalStatus = (overrides: Partial<ExternalStatus>): Exte
   };
 };
 
-export const generateNewsletterResponse = (overrides: Partial<NewsletterResponse>): NewsletterResponse => {
+export const generateNewsletterResponse = (
+  overrides: Partial<NewsletterResponse>,
+): NewsletterResponse => {
   const failed = !!(randomInt() % 2);
   return {
     success: !failed,
@@ -156,7 +165,9 @@ export const generateNewsletterResponse = (overrides: Partial<NewsletterResponse
   };
 };
 
-export const generateUserTestingResponse = (overrides: Partial<UserTestingResponse>): UserTestingResponse => {
+export const generateUserTestingResponse = (
+  overrides: Partial<UserTestingResponse>,
+): UserTestingResponse => {
   const failed = !!(randomInt() % 2);
   return {
     success: !failed,
@@ -165,7 +176,7 @@ export const generateUserTestingResponse = (overrides: Partial<UserTestingRespon
   };
 };
 export const generateLicenseApplicationIdApiResponseValue = (
-  overrides: Partial<LicenseApplicationIdApiResponse>
+  overrides: Partial<LicenseApplicationIdApiResponse>,
 ): LicenseApplicationIdApiResponse => {
   // randApplication randomly selects a real license application structure
   const randApplication = randomElementFromArray(RGB_LICENSE_APPLICATION_INFORMATION);
@@ -189,7 +200,7 @@ export const generateLicenseApplicationIdApiResponseValue = (
 };
 
 export const generateLicenseStatusChecklistResult = (
-  overrides: Partial<LicenseChecklistResponse>
+  overrides: Partial<LicenseChecklistResponse>,
 ): LicenseChecklistResponse => {
   return {
     licenseStatus: "PENDING",
@@ -201,7 +212,7 @@ export const generateLicenseStatusChecklistResult = (
 };
 
 export const generateLicenseApplicationIdResponseValue = (
-  overrides: Partial<LicenseApplicationIdResponse>
+  overrides: Partial<LicenseApplicationIdResponse>,
 ): LicenseApplicationIdResponse => {
   return {
     professionNameAndLicenseType: `some-professionNameAndLicenseType-${randomInt()}`,
@@ -213,7 +224,7 @@ export const generateLicenseApplicationIdResponseValue = (
 };
 
 export const generateXrayRegistrationEntry = (
-  overrides: Partial<XrayRegistrationEntry>
+  overrides: Partial<XrayRegistrationEntry>,
 ): XrayRegistrationEntry => {
   return {
     businessName: "Test LLC",
@@ -238,7 +249,7 @@ export const generateXrayRegistrationEntry = (
 };
 
 export const generateXrayRegistrationStatusResponse = (
-  overrides: Partial<XrayRegistrationStatusResponse>
+  overrides: Partial<XrayRegistrationStatusResponse>,
 ): XrayRegistrationStatusResponse => {
   return {
     status: "ACTIVE" as XrayRegistrationStatus,

@@ -1,4 +1,7 @@
-import { getLicenseStatusResultsFromLicenses, licenseDataModifyingFunction } from "@/lib/utils/licenseStatus";
+import {
+  getLicenseStatusResultsFromLicenses,
+  licenseDataModifyingFunction,
+} from "@/lib/utils/licenseStatus";
 import {
   generateBusiness,
   generateLicenseData,
@@ -59,9 +62,12 @@ describe("licenseStatus", () => {
         generateBusiness({
           id: currBusinessIdFromUpdateQueue,
           licenseData: generateLicenseData({ licenses: licensesFromDb }),
-        })
+        }),
       );
-      const returnedFn = licenseDataModifyingFunction(userDataFromDb, currBusinessIdFromUpdateQueue);
+      const returnedFn = licenseDataModifyingFunction(
+        userDataFromDb,
+        currBusinessIdFromUpdateQueue,
+      );
 
       const result = returnedFn(businessFromUpdateQueue).licenseData!.licenses;
       expect(result).toEqual(licensesFromDb);

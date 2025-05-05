@@ -9,7 +9,10 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -17,7 +20,12 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { Task } from "@/lib/types/types";
-import { getFlow, scrollToTopOfElement, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import {
+  getFlow,
+  scrollToTopOfElement,
+  templateEval,
+  useMountEffectWhenDefined,
+} from "@/lib/utils/helpers";
 import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
@@ -78,7 +86,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       if (!isValid) {
         scrollToTopOfElement(whenErrorScrollToRef.current, { focusElement: true });
       }
-    }
+    },
   );
 
   const setBackToEditing = (): void => {
@@ -157,7 +165,11 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
           >
             <LegalStructureRadio taskId={props.task.id} ref={whenErrorScrollToRef} />
             <div className="margin-top-4">
-              <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId={"save-business-structure"}>
+              <SecondaryButton
+                isColor="primary"
+                onClick={onSubmit}
+                dataTestId={"save-business-structure"}
+              >
                 {Config.businessStructureTask.saveButton}
               </SecondaryButton>
             </div>
@@ -170,10 +182,14 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             {Config.businessStructureTask.completedHeader}
           </Heading>
           <Alert variant="success">
-            <div className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`} data-testid="success-alert">
+            <div
+              className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`}
+              data-testid="success-alert"
+            >
               <Content>
                 {templateEval(Config.businessStructureTask.successMessage, {
-                  legalStructure: LookupLegalStructureById(business.profileData.legalStructureId).name,
+                  legalStructure: LookupLegalStructureById(business.profileData.legalStructureId)
+                    .name,
                 })}
               </Content>
               {canEdit() ? (

@@ -1,25 +1,49 @@
 @use "../sass-files/variables";
 
 .primary-gradient {
-  background-image: linear-gradient(to right, variables.$secondary-vivid-dark, variables.$info-dark-medium);
+  background-image: linear-gradient(
+    to right,
+    variables.$secondary-vivid-dark,
+    variables.$info-dark-medium
+  );
 }
 
 .primary-gradient-reverse {
-  background-image: linear-gradient(to right, variables.$info-dark-medium, variables.$secondary-vivid-dark);
+  background-image: linear-gradient(
+    to right,
+    variables.$info-dark-medium,
+    variables.$secondary-vivid-dark
+  );
 }
 
 .secondary-gradient {
-  background-image: linear-gradient(to right, variables.$accent-cool-dark-medium, variables.$accent-cooler);
+  background-image: linear-gradient(
+    to right,
+    variables.$accent-cool-dark-medium,
+    variables.$accent-cooler
+  );
 }
 
 .secondary-gradient-reverse {
-  background-image: linear-gradient(to right, variables.$accent-cooler, variables.$accent-cool-dark-medium);
+  background-image: linear-gradient(
+    to right,
+    variables.$accent-cooler,
+    variables.$accent-cool-dark-medium
+  );
 }
 
 .tertiary-gradient {
-  background-image: linear-gradient(to right, variables.$secondary-vivid-dark, variables.$accent-cooler);
+  background-image: linear-gradient(
+    to right,
+    variables.$secondary-vivid-dark,
+    variables.$accent-cooler
+  );
 }
 
 .tertiary-gradient-reverse {
-  background-image: linear-gradient(to right, variables.$accent-cooler, variables.$secondary-vivid-dark);
+  background-image: linear-gradient(
+    to right,
+    variables.$accent-cooler,
+    variables.$secondary-vivid-dark
+  );
 }

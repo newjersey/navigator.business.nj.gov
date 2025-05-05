@@ -33,9 +33,11 @@ describe("Unsupported", () => {
               id: "prev-biz-id",
             }),
           },
-        })
+        }),
       );
-      useMockRouter({ query: { additionalBusiness: "true", [QUERIES.previousBusinessId]: "prev-biz-id" } });
+      useMockRouter({
+        query: { additionalBusiness: "true", [QUERIES.previousBusinessId]: "prev-biz-id" },
+      });
       render(<UnsupportedPage />);
       expect(screen.getByTestId("return-to-prev-button")).toBeInTheDocument();
     });
@@ -48,7 +50,7 @@ describe("Unsupported", () => {
               id: "prev-biz-id",
             }),
           },
-        })
+        }),
       );
       useMockRouter({ query: {} });
       render(<UnsupportedPage />);

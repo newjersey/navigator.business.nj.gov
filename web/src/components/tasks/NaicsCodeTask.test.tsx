@@ -75,8 +75,8 @@ describe("<NaicsCodeTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
@@ -176,8 +176,8 @@ describe("<NaicsCodeTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
@@ -220,7 +220,9 @@ describe("<NaicsCodeTask />", () => {
         target: { value: "12345" },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
-      expect(screen.getByText(Config.determineNaicsCode.lengthValidationErrorText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.lengthValidationErrorText),
+      ).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
     });
 
@@ -229,9 +231,13 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "123457" },
       });
-      expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.invalidValidationErrorText),
+      ).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
-      expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.invalidValidationErrorText),
+      ).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
     });
 
@@ -240,12 +246,14 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "123457" },
       });
-      expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.invalidValidationErrorText),
+      ).toBeInTheDocument();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "12345" },
       });
       expect(
-        screen.queryByText(Config.determineNaicsCode.invalidValidationErrorText)
+        screen.queryByText(Config.determineNaicsCode.invalidValidationErrorText),
       ).not.toBeInTheDocument();
     });
 
@@ -300,8 +308,8 @@ describe("<NaicsCodeTask />", () => {
               <NaicsCodeTask task={task} />
             </WithStatefulUserData>
           </ThemeProvider>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
@@ -327,8 +335,12 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
-      expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual(validNaicsCode);
-      expect(screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).not.toBeInTheDocument();
+      expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual(
+        validNaicsCode,
+      );
+      expect(
+        screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader),
+      ).not.toBeInTheDocument();
     });
 
     it("navigates back to empty input on remove button click", () => {
@@ -337,7 +349,9 @@ describe("<NaicsCodeTask />", () => {
       expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
       expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual("");
-      expect(screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader),
+      ).not.toBeInTheDocument();
       expect(currentBusiness().profileData.naicsCode).toEqual("");
     });
 
@@ -399,8 +413,8 @@ describe("<NaicsCodeTask />", () => {
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { showNeedsAccountModal: false, setShowNeedsAccountModal }
-        )
+          { showNeedsAccountModal: false, setShowNeedsAccountModal },
+        ),
       );
     };
 
@@ -414,7 +428,9 @@ describe("<NaicsCodeTask />", () => {
 
     it("prepends register to the next button", async () => {
       renderPage();
-      expect(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
+      expect(
+        screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`),
+      ).toBeInTheDocument();
     });
 
     it("opens Needs Account modal on save button click", () => {

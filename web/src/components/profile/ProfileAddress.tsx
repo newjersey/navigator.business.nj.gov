@@ -22,34 +22,43 @@ export const ProfileAddress = (): ReactElement => {
   const { doesFieldHaveError } = useAddressErrors();
   const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
     "addressLine1",
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
   const { setIsValid: setIsValidAddressLine2 } = useFormContextFieldHelpers(
     "addressLine2",
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
-  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers("addressCity", DataFormErrorMapContext);
+  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers(
+    "addressCity",
+    DataFormErrorMapContext,
+  );
   const { setIsValid: setIsValidMunicipality } = useFormContextFieldHelpers(
     "addressMunicipality",
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
   const { setIsValid: setIsValidProvince } = useFormContextFieldHelpers(
     "addressProvince",
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
-  const { setIsValid: setIsValidState } = useFormContextFieldHelpers("addressState", DataFormErrorMapContext);
+  const { setIsValid: setIsValidState } = useFormContextFieldHelpers(
+    "addressState",
+    DataFormErrorMapContext,
+  );
   const { setIsValid: setIsValidCountry } = useFormContextFieldHelpers(
     "addressCountry",
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
   const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers(
     "addressZipCode",
-    DataFormErrorMapContext
+    DataFormErrorMapContext,
   );
 
   const handleAddressTypeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const businessLocationTypeValue = event.target.value as FormationBusinessLocationType;
-    setAddressData({ ...emptyFormationAddressData, businessLocationType: businessLocationTypeValue });
+    setAddressData({
+      ...emptyFormationAddressData,
+      businessLocationType: businessLocationTypeValue,
+    });
   };
 
   const isAddressFieldsDisabled = business?.formationData.completedFilingPayment;
@@ -83,7 +92,9 @@ export const ProfileAddress = (): ReactElement => {
           : business.formationData.formationFormData.addressState;
 
       const businessLocationType =
-        isStarting || isOwning ? "NJ" : business.formationData.formationFormData.businessLocationType ?? "US";
+        isStarting || isOwning
+          ? "NJ"
+          : business.formationData.formationFormData.businessLocationType ?? "US";
       setAddressData({
         addressLine1: business.formationData.formationFormData.addressLine1,
         addressLine2: business.formationData.formationFormData.addressLine2,

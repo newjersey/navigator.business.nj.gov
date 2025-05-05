@@ -143,7 +143,9 @@ describe("profile - starting business", () => {
 
     it("locks businessName", () => {
       renderPage({ business: startingBusiness });
-      expect(screen.getByText(Config.profileDefaults.fields.businessName.default.header)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.businessName.default.header),
+      ).toBeInTheDocument();
       expect(within(screen.getByTestId("main")).getByText("some-name")).toBeInTheDocument();
       expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
     });
@@ -151,7 +153,9 @@ describe("profile - starting business", () => {
     it("locks entityID", () => {
       renderPage({ business: startingBusiness });
       chooseTab("numbers");
-      expect(screen.getByText(Config.profileDefaults.fields.entityId.default.header)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.entityId.default.header),
+      ).toBeInTheDocument();
       expect(screen.getByText("some-id")).toBeInTheDocument();
       expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
     });
@@ -160,11 +164,11 @@ describe("profile - starting business", () => {
       renderPage({ business: startingBusiness });
       expect(screen.getByTestId("info")).toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header),
       ).toBeInTheDocument();
       expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)
+        screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText),
       ).not.toBeInTheDocument();
 
       expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
@@ -189,7 +193,10 @@ describe("profile - starting business", () => {
 
     it("displays when populated", () => {
       const initialBusiness = generateBusinessForProfile({
-        profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          dateOfFormation: "2020-01-01",
+        }),
       });
       renderPage({ business: initialBusiness });
       expect(getDateOfFormation()).toBe("01/2020");
@@ -223,7 +230,9 @@ describe("profile - starting business", () => {
         clickSave();
 
         fireEvent.click(
-          within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.cancelButtonText)
+          within(screen.getByRole("dialog")).getByText(
+            Config.formationDateDeletionModal.cancelButtonText,
+          ),
         );
 
         expect(userDataWasNotUpdated()).toBe(true);
@@ -243,7 +252,9 @@ describe("profile - starting business", () => {
         clickSave();
 
         fireEvent.click(
-          within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.deleteButtonText)
+          within(screen.getByRole("dialog")).getByText(
+            Config.formationDateDeletionModal.deleteButtonText,
+          ),
         );
 
         await waitFor(() => {
@@ -256,7 +267,16 @@ describe("profile - starting business", () => {
 
   it("displays business info tab", () => {
     renderPage({ business: businessFromSetup });
-    expect(screen.getByTestId("info")).toBeInTheDocument();
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabInfoTitle }),
+    ).toBeInTheDocument();
+  });
+
+  it("displays permits tab", () => {
+    renderPage({ business: businessFromSetup });
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabPermitsTitle }),
+    ).toBeInTheDocument();
   });
 
   it("redirects user to dashboard with success query string on save", async () => {
@@ -302,6 +322,8 @@ describe("profile - starting business", () => {
     fillText(inputFieldName, "Cool Computers");
     selectByText("Location", randomMunicipality.displayName);
     selectByValue("Industry", "e-commerce");
+
+    chooseTab("permits");
     chooseRadio("home-based-business-radio-true");
 
     chooseTab("numbers");
@@ -438,11 +460,11 @@ describe("profile - starting business", () => {
 
     describe("when location is optional", () => {
       describe("legalStructure is Public Filing and operating Phase is GUEST_MODE or NEEDS_TO_FORM", () => {
-        const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
-          (it) => {
-            return it.id;
-          }
-        );
+        const allPublicFilingLegalStructures = allLegalStructuresOfType({
+          type: "publicFiling",
+        }).map((it) => {
+          return it.id;
+        });
         const operatingPhases: OperatingPhaseId[] = [
           OperatingPhaseId.GUEST_MODE,
           OperatingPhaseId.NEEDS_TO_FORM,
@@ -463,9 +485,11 @@ describe("profile - starting business", () => {
       });
 
       describe("legalStructure is Trade Name and operating Phase is GUEST_MODE", () => {
-        const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
-          return it.id;
-        });
+        const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map(
+          (it) => {
+            return it.id;
+          },
+        );
 
         for (const legalStructure of allTradeNameLegalStructures) {
           it(`allows saving with empty location for ${legalStructure} in GUEST_MODE`, async () => {
@@ -482,11 +506,11 @@ describe("profile - starting business", () => {
 
     describe("when location is required", () => {
       describe("legalStructure is Public Filing and operating Phase is FORMED", () => {
-        const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
-          (it) => {
-            return it.id;
-          }
-        );
+        const allPublicFilingLegalStructures = allLegalStructuresOfType({
+          type: "publicFiling",
+        }).map((it) => {
+          return it.id;
+        });
         for (const legalStructure of allPublicFilingLegalStructures) {
           it(`prevents saving with empty location for ${legalStructure} in FORMED`, async () => {
             renderWithLegalStructureAndPhase({
@@ -500,9 +524,11 @@ describe("profile - starting business", () => {
       });
 
       describe("legalStructure is Trade Name and operating Phase is FORMED", () => {
-        const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
-          return it.id;
-        });
+        const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map(
+          (it) => {
+            return it.id;
+          },
+        );
         for (const legalStructure of allTradeNameLegalStructures) {
           it(`prevents saving with empty location for ${legalStructure}`, async () => {
             renderWithLegalStructureAndPhase({
@@ -526,7 +552,9 @@ describe("profile - starting business", () => {
     });
     renderPage({ business });
     chooseTab("numbers");
-    expect(screen.queryByText(Config.profileDefaults.fields.entityId.default.header)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.fields.entityId.default.header),
+    ).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
   });
 
@@ -545,8 +573,8 @@ describe("profile - starting business", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
-        )
+          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" }),
+        ),
       ).toBeInTheDocument();
     });
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -594,7 +622,7 @@ describe("profile - starting business", () => {
           return expect(userDataWasNotUpdated()).toEqual(true);
         });
         expect(
-          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
         ).toBeInTheDocument();
         expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
       });
@@ -816,7 +844,7 @@ describe("profile - starting business", () => {
 
         expect(screen.queryByLabelText("Existing employees")).not.toBeInTheDocument();
         expect(screen.queryByLabelText("Ownership")).not.toBeInTheDocument();
-      }
+      },
     );
 
     it("renders the existing employees field and ownership field when phase is FORMED", () => {
@@ -896,12 +924,12 @@ describe("profile - starting business", () => {
       expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
       const header = screen.getByTestId("profile-tab-header");
       expect(
-        within(header).getByText(Config.profileDefaults.default.profileTabNumbersTitle)
+        within(header).getByText(Config.profileDefaults.default.profileTabNumbersTitle),
       ).toBeInTheDocument();
       expect(
-        within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle)
+        within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle),
       ).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(OperatingPhases.filter((it) => it.sectorRequired).map((it) => it.id))(
@@ -922,12 +950,12 @@ describe("profile - starting business", () => {
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
       const header = screen.getByTestId("profile-tab-header");
       expect(
-        within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle)
+        within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle),
       ).toBeInTheDocument();
       expect(
-        within(header).queryByText(Config.profileDefaults.default.profileTabNumbersTitle)
+        within(header).queryByText(Config.profileDefaults.default.profileTabNumbersTitle),
       ).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"))(
@@ -950,7 +978,7 @@ describe("profile - starting business", () => {
       fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
         ).toBeInTheDocument();
       });
       selectByValue("Industry", newIndustry);
@@ -978,9 +1006,9 @@ describe("profile - starting business", () => {
             [naicsCodeTaskId]: "TO_DO",
           },
           taskItemChecklist: {},
-        })
+        }),
       );
-    }
+    },
   );
 
   it("prevents user from saving if in up-and-running and sector is not selected", async () => {
@@ -998,7 +1026,7 @@ describe("profile - starting business", () => {
     clickSave();
     await waitFor(() => {
       expect(
-        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -1038,6 +1066,7 @@ describe("profile - starting business", () => {
         }),
       }),
     });
+    chooseTab("permits");
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
@@ -1050,21 +1079,13 @@ describe("profile - starting business", () => {
         }),
       }),
     });
+    chooseTab("permits");
     expect(screen.queryByLabelText("Home based business")).not.toBeInTheDocument();
 
+    chooseTab("info");
     selectByValue("Industry", randomHomeBasedIndustry());
-    expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
-  });
 
-  it("shows the home-based question when industry is undefined", () => {
-    renderPage({
-      business: generateBusinessForProfile({
-        profileData: generateProfileData({
-          industryId: undefined,
-          businessPersona: "STARTING",
-        }),
-      }),
-    });
+    chooseTab("permits");
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
@@ -1078,10 +1099,10 @@ describe("profile - starting business", () => {
     renderPage({ business });
 
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription),
     ).not.toBeInTheDocument();
   });
 
@@ -1139,9 +1160,11 @@ describe("profile - starting business", () => {
       renderPage({ business });
       clickSave();
       await waitFor(() => {
-        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+        expect(
+          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+        ).toBeInTheDocument();
       });
-    }
+    },
   );
 
   it("prevents user from saving when employment agency is selected as industry, but essential question is not answered", async () => {
@@ -1156,7 +1179,9 @@ describe("profile - starting business", () => {
     renderPage({ business });
     clickSave();
     await waitFor(() => {
-      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+      ).toBeInTheDocument();
     });
   });
 
@@ -1199,9 +1224,12 @@ describe("profile - starting business", () => {
       renderPage({ business });
       chooseTab("documents");
       expect(
-        screen.getByText(Config.profileDefaults.fields.documents.default.placeholder.split("[")[0], {
-          exact: false,
-        })
+        screen.getByText(
+          Config.profileDefaults.fields.documents.default.placeholder.split("[")[0],
+          {
+            exact: false,
+          },
+        ),
       ).toBeInTheDocument();
     });
 
@@ -1219,9 +1247,15 @@ describe("profile - starting business", () => {
       renderPage({ business });
       chooseTab("documents");
       expect(screen.queryByText("test12345")).not.toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.default.certificationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.default.standingDocFileTitle)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.default.formationDocFileTitle),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.default.certificationDocFileTitle),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.default.standingDocFileTitle),
+      ).toBeInTheDocument();
     });
 
     it("uses links from useDocuments hook", () => {
@@ -1243,18 +1277,16 @@ describe("profile - starting business", () => {
       renderPage({ business });
       chooseTab("documents");
 
-      expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toHaveAttribute(
-        "href",
-        "testForm.pdf"
-      );
+      expect(
+        screen.getByText(Config.profileDefaults.default.formationDocFileTitle),
+      ).toHaveAttribute("href", "testForm.pdf");
       expect(screen.getByText(Config.profileDefaults.default.standingDocFileTitle)).toHaveAttribute(
         "href",
-        "testStand.pdf"
+        "testStand.pdf",
       );
-      expect(screen.getByText(Config.profileDefaults.default.certificationDocFileTitle)).toHaveAttribute(
-        "href",
-        "testCert.pdf"
-      );
+      expect(
+        screen.getByText(Config.profileDefaults.default.certificationDocFileTitle),
+      ).toHaveAttribute("href", "testCert.pdf");
     });
 
     it("hides document links if they do not exist", () => {
@@ -1272,9 +1304,15 @@ describe("profile - starting business", () => {
       renderPage({ business });
       chooseTab("documents");
 
-      expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.default.certificationDocFileTitle)).toBeInTheDocument();
-      expect(screen.queryByText(Config.profileDefaults.default.standingDocFileTitle)).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.default.formationDocFileTitle),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.default.certificationDocFileTitle),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.default.standingDocFileTitle),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -1337,7 +1375,7 @@ describe("profile - starting business", () => {
       });
       renderPage({ business });
       expect(
-        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header),
       ).toBeInTheDocument();
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
     });
@@ -1359,6 +1397,7 @@ describe("profile - starting business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("elevatorOwningBusiness-radio-group")).toBeInTheDocument();
     });
@@ -1417,6 +1456,7 @@ describe("profile - starting business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });
@@ -1466,14 +1506,16 @@ describe("profile - starting business", () => {
         expect(profileAlert).toBeInTheDocument();
       });
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressLine1.label)
+        within(profileAlert).queryByText(Config.formation.fields.addressLine1.label),
       ).not.toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
       ).not.toBeInTheDocument();
-      expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        within(profileAlert).getByText(Config.formation.fields.addressCity.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
       ).toBeInTheDocument();
     });
 
@@ -1499,15 +1541,17 @@ describe("profile - starting business", () => {
         expect(profileAlert).toBeInTheDocument();
       });
 
-      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
-      ).not.toBeInTheDocument();
-      expect(
-        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
       ).toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressZipCode.label)
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressZipCode.label),
       ).not.toBeInTheDocument();
     });
 
@@ -1533,15 +1577,17 @@ describe("profile - starting business", () => {
         expect(profileAlert).toBeInTheDocument();
       });
 
-      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
-      ).not.toBeInTheDocument();
-      expect(
-        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
       ).toBeInTheDocument();
       expect(
-        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
       ).toBeInTheDocument();
     });
 
@@ -1562,7 +1608,9 @@ describe("profile - starting business", () => {
       renderPage({ business, municipalities: [randomMunicipality] });
 
       selectByText("Address municipality", randomMunicipality.displayName);
-      expect(screen.getByLabelText("Address municipality")).toHaveValue(randomMunicipality.displayName);
+      expect(screen.getByLabelText("Address municipality")).toHaveValue(
+        randomMunicipality.displayName,
+      );
       fireEvent.blur(screen.getByLabelText("Address municipality"));
 
       clickSave();
@@ -1572,14 +1620,16 @@ describe("profile - starting business", () => {
         expect(profileAlert).toBeInTheDocument();
       });
       expect(
-        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
       ).toBeInTheDocument();
-      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
       ).not.toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressMunicipality.label)
+        within(profileAlert).queryByText(Config.formation.fields.addressMunicipality.label),
       ).not.toBeInTheDocument();
     });
 
@@ -1605,13 +1655,17 @@ describe("profile - starting business", () => {
       await waitFor(() => {
         expect(profileAlert).toBeInTheDocument();
       });
-      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
       ).not.toBeInTheDocument();
-      expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        within(profileAlert).getByText(Config.formation.fields.addressCity.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
       ).toBeInTheDocument();
     });
 
@@ -1637,15 +1691,17 @@ describe("profile - starting business", () => {
       await waitFor(() => {
         expect(profileAlert).toBeInTheDocument();
       });
-      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
-      ).not.toBeInTheDocument();
-      expect(
-        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
       ).toBeInTheDocument();
       expect(
-        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
       ).toBeInTheDocument();
     });
 
@@ -1671,13 +1727,17 @@ describe("profile - starting business", () => {
       await waitFor(() => {
         expect(profileAlert).toBeInTheDocument();
       });
-      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
-      expect(within(profileAlert).getByText(Config.formation.fields.addressLine2.label)).toBeInTheDocument();
       expect(
-        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
       ).toBeInTheDocument();
       expect(
-        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        within(profileAlert).getByText(Config.formation.fields.addressLine2.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
       ).toBeInTheDocument();
     });
 

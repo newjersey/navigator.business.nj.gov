@@ -16,11 +16,7 @@
       "automergeStrategy": "rebase"
     },
     {
-      "matchPackageNames": [
-        "@aws-amplify/core",
-        "@aws-amplify/auth",
-        "decap-cms-app"
-      ],
+      "matchPackageNames": ["@aws-amplify/core", "@aws-amplify/auth", "decap-cms-app"],
       "automerge": false
     },
     {
@@ -28,12 +24,7 @@
       "groupName": "cypress"
     },
     {
-      "matchPackageNames": [
-        "@types/jest",
-        "ts-jest",
-        "babel-jest",
-        "@jest/types"
-      ],
+      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest", "@jest/types"],
       "matchPackagePrefixes": ["jest"],
       "groupName": "jest"
     },
@@ -51,11 +42,7 @@
       "enabled": false
     },
     {
-      "matchPackageNames": [
-        "@types/react",
-        "focus-trap-react",
-        "@types/react-dom"
-      ],
+      "matchPackageNames": ["@types/react", "focus-trap-react", "@types/react-dom"],
       "matchPackagePrefixes": ["react"],
       "groupName": "react"
     },
@@ -89,13 +76,7 @@
       "groupName": "aws-sdk"
     },
     {
-      "matchPackageNames": [
-        "unified",
-        "remark",
-        "remark-*",
-        "rehype",
-        "rehype-*"
-      ],
+      "matchPackageNames": ["unified", "remark", "remark-*", "rehype", "rehype-*"],
       "groupName": "unified"
     },
     {

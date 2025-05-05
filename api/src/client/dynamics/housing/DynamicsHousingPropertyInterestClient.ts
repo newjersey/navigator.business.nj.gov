@@ -8,12 +8,12 @@ import axios, { AxiosError } from "axios";
 
 export const DynamicsHousingPropertyInterestClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): HousingPropertyInterestClient => {
   const getPropertyInterest = async (
     accessToken: string,
     address: string,
-    municipalityId: string
+    municipalityId: string,
   ): Promise<HousingPropertyInterestResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Housing Property Interest Client - Id:${logId}`);
@@ -25,13 +25,13 @@ export const DynamicsHousingPropertyInterestClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then((response) => {
         logWriter.LogInfo(
           `Dynamics Housing Property Interest Client - Id:${logId} - Response: ${JSON.stringify(
-            response.data
-          )}`
+            response.data,
+          )}`,
         );
         const value = response.data.value as Array<DynamicsHousingPropertyInterestResponse>;
         if (value.length === 0) {
@@ -51,7 +51,7 @@ export const DynamicsHousingPropertyInterestClient = (
 };
 
 function processDynamicsPropertyInterestResponse(
-  response: DynamicsHousingPropertyInterestResponse
+  response: DynamicsHousingPropertyInterestResponse,
 ): HousingPropertyInterest {
   return {
     createdOn: response.createdon,

@@ -3,7 +3,15 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { CallToActionHyperlink } from "@/lib/types/types";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import { KeyboardEvent, ReactElement, ReactNode, SyntheticEvent, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEvent,
+  ReactElement,
+  ReactNode,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface Props {
   children: ReactNode;
@@ -57,7 +65,10 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
       >
         <>
           {props.children}
-          <Icon className="usa-icon--size-3 margin-left-05 margin-right-neg-1" iconName="arrow_drop_down" />
+          <Icon
+            className="usa-icon--size-3 margin-left-05 margin-right-neg-1"
+            iconName="arrow_drop_down"
+          />
         </>
       </GenericButton>
       <Popper

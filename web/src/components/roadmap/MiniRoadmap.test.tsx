@@ -154,7 +154,7 @@ describe("<MiniRoadmap />", () => {
           expect(screen.getByTestId("business-structure-prompt")).toBeInTheDocument();
         });
       });
-    }
+    },
   );
 
   test.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
@@ -176,14 +176,14 @@ describe("<MiniRoadmap />", () => {
 
       renderMiniRoadMap("task3");
       expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();
-    }
+    },
   );
 
   const renderStatefulMiniRoadMap = (taskId: string, business: Business): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <MiniRoadmap activeTaskId={taskId} />;
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -232,7 +232,9 @@ describe("<MiniRoadmap />", () => {
       renderStatefulMiniRoadMap("task1", business);
       expect(screen.getByText("task1")).toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(
+          expect.arrayContaining([1, 2]),
+        );
       });
     });
 
@@ -243,7 +245,9 @@ describe("<MiniRoadmap />", () => {
       expect(screen.getByText("task1")).toBeInTheDocument();
       expect(screen.getByText("task2")).toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(
+          expect.arrayContaining([1, 2]),
+        );
       });
     });
 
@@ -252,7 +256,9 @@ describe("<MiniRoadmap />", () => {
       fireEvent.click(screen.getByText("step1"));
       expect(screen.queryByText("task1")).not.toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(
+          expect.arrayContaining([2]),
+        );
       });
     });
   });

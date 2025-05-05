@@ -35,7 +35,9 @@ export const ForeignCertificate = (props: Props): ReactElement => {
           onChange={setForeignGoodStandingFile}
           hasError={hasError}
           helperText={Config.formation.fields.foreignGoodStandingFile.helperText}
-          errorMessageRequired={Config.formation.fields.foreignGoodStandingFile.errorMessageRequired}
+          errorMessageRequired={
+            Config.formation.fields.foreignGoodStandingFile.errorMessageRequired
+          }
           maxFileSize={{
             errorMessage: Config.formation.fields.foreignGoodStandingFile.errorMessageFileSize,
             maxSizeInMegabytes: 3,

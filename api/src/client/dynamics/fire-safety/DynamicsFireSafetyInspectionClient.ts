@@ -1,14 +1,17 @@
-import { FireSafetyInspection, FireSafetyInspectionClient } from "@client/dynamics/fire-safety/types";
+import {
+  FireSafetyInspection,
+  FireSafetyInspectionClient,
+} from "@client/dynamics/fire-safety/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
 
 export const DynamicsFireSafetyInspectionClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): FireSafetyInspectionClient => {
   const getFireSafetyInspections = async (
     accessToken: string,
-    address: string
+    address: string,
   ): Promise<FireSafetyInspection[]> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Fire Safety Inspection Client - Id:${logId}`);
@@ -20,11 +23,11 @@ export const DynamicsFireSafetyInspectionClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then((response) => {
         logWriter.LogInfo(
-          `Dynamics Fire Safety Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
+          `Dynamics Fire Safety Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`,
         );
         return response.data.value.map((response: DynamicsFireSafetyInspectionResponse) => {
           return processDynamicsFireSafetyInspectionResponse(response);
@@ -42,7 +45,7 @@ export const DynamicsFireSafetyInspectionClient = (
 };
 
 function processDynamicsFireSafetyInspectionResponse(
-  response: DynamicsFireSafetyInspectionResponse
+  response: DynamicsFireSafetyInspectionResponse,
 ): FireSafetyInspection {
   return {
     createdOn: response.createdon,

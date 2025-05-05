@@ -109,13 +109,15 @@ export const onGuestSignIn = async ({
         email: userData.user.email,
         id: userData.user.id,
         encounteredMyNjLinkingError:
-          encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
+          encounteredMyNjLinkingError ??
+          accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       }
     : {
         email: emptyUser.email,
         id: emptyUser.id,
         encounteredMyNjLinkingError:
-          encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
+          encounteredMyNjLinkingError ??
+          accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       };
   dispatch({
     type: "LOGIN_GUEST",
@@ -171,7 +173,7 @@ export const onGuestSignIn = async ({
 
 export const onSignOut = async (
   push: (url: string) => Promise<boolean>,
-  dispatch: Dispatch<AuthAction>
+  dispatch: Dispatch<AuthAction>,
 ): Promise<void> => {
   analytics.event.roadmap_logout_button.click.log_out();
   const user = await session.getActiveUser();

@@ -48,7 +48,7 @@ export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks => {
 
 export const convertLicenseCalendarEventMd = (
   licenseMdContents: string,
-  filename: string
+  filename: string,
 ): LicenseEventType => {
   const matterResult = matter(licenseMdContents);
 
@@ -66,7 +66,7 @@ export const convertLicenseCalendarEventMd = (
 
 export const convertAnytimeActionTaskMd = (
   anytimeActionTaskMdContents: string,
-  filename: string
+  filename: string,
 ): AnytimeActionTask => {
   const matterResult = matter(anytimeActionTaskMdContents);
   const anytimeActionGrayMatter = matterResult.data as AnytimeActionTaskGrayMatter;
@@ -79,7 +79,7 @@ export const convertAnytimeActionTaskMd = (
 
 export const convertAnytimeActionLicenseReinstatementMd = (
   anytimeActionLicenseReinstatementMdContents: string,
-  filename: string
+  filename: string,
 ): AnytimeActionLicenseReinstatement => {
   const matterResult = matter(anytimeActionLicenseReinstatementMdContents);
   const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
@@ -135,7 +135,10 @@ export const convertWebflowLicenseMd = (mdContents: string, filename: string): W
   };
 };
 
-export const convertPageMetadataMd = (pageMetadataMdContents: string, filename: string): PageMetadata => {
+export const convertPageMetadataMd = (
+  pageMetadataMdContents: string,
+  filename: string,
+): PageMetadata => {
   const matterResult = matter(pageMetadataMdContents);
   const pageMetadataGrayMatter = matterResult.data as PageMetadataGrayMatter;
   return {

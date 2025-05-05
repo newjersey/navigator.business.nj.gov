@@ -2,6 +2,6 @@ import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonE
 
 export const getNonEssentialQuestionAddOn = (essentialQuestionId: string): string | undefined => {
   return NonEssentialQuestions.nonEssentialQuestionsArray.find(
-    (questionObj) => questionObj.id === essentialQuestionId
+    (questionObj) => questionObj.id === essentialQuestionId,
   )?.addOn;
 };

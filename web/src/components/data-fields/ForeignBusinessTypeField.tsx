@@ -33,7 +33,7 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
   const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
     "foreignBusinessTypeIds",
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["foreignBusinessTypeIds"]["default"] =
@@ -66,14 +66,15 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
 
     setProfileData({
       ...state.profileData,
-      industryId: determineForeignBusinessType(ids) === "NEXUS" ? state.profileData.industryId : undefined,
+      industryId:
+        determineForeignBusinessType(ids) === "NEXUS" ? state.profileData.industryId : undefined,
       homeBasedBusiness: ids.includes("officeInNJ") ? false : state.profileData.homeBasedBusiness,
       foreignBusinessTypeIds: ids,
     });
   };
 
   let renderAlertForValidForeignBusiness = determineForeignBusinessType(
-    state.profileData.foreignBusinessTypeIds
+    state.profileData.foreignBusinessTypeIds,
   );
 
   if (
@@ -103,7 +104,11 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
                       checked={state.profileData.foreignBusinessTypeIds.includes(id)}
                     />
                   }
-                  label={<Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>}
+                  label={
+                    <Content>
+                      {(contentFromConfig.optionContent as Record<string, string>)[id]}
+                    </Content>
+                  }
                 />
               );
             })}

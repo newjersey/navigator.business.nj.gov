@@ -14,8 +14,8 @@ class CustomNodeEnvironment extends NodeEnvironment {
       const currentTestName = this.context?.expect.getState().currentTestName;
       console.log(
         `Failed ${currentTestName}. Replicate Math.random() values by running with RANDOM_SEED=${testRandomSeeds.get(
-          currentTestName
-        )}`
+          currentTestName,
+        )}`,
       );
     }
   }

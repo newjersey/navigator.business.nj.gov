@@ -1,5 +1,10 @@
 import { AttributeValue, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
-import { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  DeleteCommand,
+  DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+} from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { BusinessesDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
@@ -8,12 +13,12 @@ import { Business } from "@shared/userData";
 export const DynamoBusinessDataClient = (
   db: DynamoDBDocumentClient,
   tableName: string,
-  logger: LogWriterType
+  logger: LogWriterType,
 ): BusinessesDataClient => {
   const findSingleBusinessByIndex = (
     indexName: string,
     keyConditionExpression: string,
-    expressionAttributeValues: Record<string, AttributeValue>
+    expressionAttributeValues: Record<string, AttributeValue>,
   ): Promise<Business | undefined> => {
     const params: QueryCommandInput = {
       TableName: tableName,
@@ -32,7 +37,9 @@ export const DynamoBusinessDataClient = (
         return item.data;
       })
       .catch((error: Error) => {
-        logger.LogError(`Error finding business by index: ${indexName} with error: ${error.message}`);
+        logger.LogError(
+          `Error finding business by index: ${indexName} with error: ${error.message}`,
+        );
         throw new Error("Not found");
       });
   };
@@ -40,7 +47,7 @@ export const DynamoBusinessDataClient = (
   const findAllBusinessesByIndex = (
     indexName: string,
     keyConditionExpression: string,
-    expressionAttributeValues: Record<string, AttributeValue>
+    expressionAttributeValues: Record<string, AttributeValue>,
   ): Promise<Business[]> => {
     const params: QueryCommandInput = {
       TableName: tableName,
@@ -59,7 +66,9 @@ export const DynamoBusinessDataClient = (
         return Promise.all(businesses.map(async (item) => await item.data));
       })
       .catch((error: Error) => {
-        logger.LogError(`Error finding business by index: ${indexName} with error: ${error.message}`);
+        logger.LogError(
+          `Error finding business by index: ${indexName} with error: ${error.message}`,
+        );
         throw new Error("Error retrieving items");
       });
   };
@@ -76,7 +85,9 @@ export const DynamoBusinessDataClient = (
   };
 
   const findAllByIndustry = (industry: string): Promise<Business[]> => {
-    return findAllBusinessesByIndex("Industry", "industry = :industry", { ":industry": { S: industry } });
+    return findAllBusinessesByIndex("Industry", "industry = :industry", {
+      ":industry": { S: industry },
+    });
   };
 
   const findByBusinessName = (businessName: string): Promise<Business | undefined> => {

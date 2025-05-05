@@ -32,7 +32,7 @@ export const useUserData = (): UseUserDataResponse => {
       isPaused: () => {
         return state.isAuthenticated !== IsAuthenticated.TRUE;
       },
-    }
+    },
   );
   const dataExists = !!data;
   const { setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona } =
@@ -82,7 +82,7 @@ export const useUserData = (): UseUserDataResponse => {
     ) {
       const mergedData = modifyCurrentBusiness(
         updateQueue?.current(),
-        licenseDataModifyingFunction(data, currBusinessIdFromUpdateQueue)
+        licenseDataModifyingFunction(data, currBusinessIdFromUpdateQueue),
       );
       updateQueue?.queue(mergedData);
     }
@@ -99,7 +99,10 @@ export const useUserData = (): UseUserDataResponse => {
     }
   }, [userDataError, dataExists, error, setUserDataError, state.isAuthenticated]);
 
-  const profileDataHasChanged = (oldUserData: UserData | undefined, newUserData: UserData): boolean => {
+  const profileDataHasChanged = (
+    oldUserData: UserData | undefined,
+    newUserData: UserData,
+  ): boolean => {
     const oldProfileData = oldUserData?.businesses[oldUserData?.currentBusinessId].profileData;
     const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
 
@@ -113,7 +116,10 @@ export const useUserData = (): UseUserDataResponse => {
     setRoadmap(newRoadmap);
   };
 
-  const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
+  const update = async (
+    newUserData: UserData | undefined,
+    config?: { local?: boolean },
+  ): Promise<void> => {
     if (newUserData) {
       const localUpdateQueue = updateQueue ?? new UpdateQueueFactory(newUserData, update);
       if (!updateQueue) {

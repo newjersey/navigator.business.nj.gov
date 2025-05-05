@@ -52,7 +52,7 @@ class WriteOnceReadOnlyNoSpaceControl extends Component<
 
   handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     this.setState({ _sel: e.target.selectionStart });
-    this.props.onChange(e.target.value.trim());
+    this.props.onChange(e.target.value.trim().toLowerCase());
   };
 
   render(): ReactElement {

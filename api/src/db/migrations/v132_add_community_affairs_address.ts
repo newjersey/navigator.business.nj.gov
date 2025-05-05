@@ -1,4 +1,7 @@
-import { v131Business, v131UserData } from "@db/migrations/v131_add_construction_type_essential_question";
+import {
+  v131Business,
+  v131UserData,
+} from "@db/migrations/v131_add_construction_type_essential_question";
 
 export interface v132ProfileData extends v132IndustrySpecificData {
   businessPersona: v132BusinessPersona;
@@ -41,7 +44,7 @@ export const migrate_v131_to_v132 = (v131Data: v131UserData): v132UserData => {
     businesses: Object.fromEntries(
       Object.values(v131Data.businesses)
         .map((business: v131Business) => migrate_v131Business_to_v132Business(business))
-        .map((currBusiness: v132Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v132Business) => [currBusiness.id, currBusiness]),
     ),
     version: 132,
   } as v132UserData;

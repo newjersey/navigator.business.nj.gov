@@ -9,7 +9,7 @@ import { StatusCodes } from "http-status-codes";
 export const externalEndpointRouterFactory = (
   databaseClient: DatabaseClient,
   addNewsletter: AddNewsletter,
-  addToUserTesting: AddToUserTesting
+  addToUserTesting: AddToUserTesting,
 ): Router => {
   const router = Router();
 

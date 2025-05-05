@@ -4,7 +4,11 @@
   border: double 3px transparent;
   border-radius: 6px;
   background-image: linear-gradient(white, white),
-    radial-gradient(circle at top left, variables.$primary-light-vivid, variables.$accent-semi-cool-vivid);
+    radial-gradient(
+      circle at top left,
+      variables.$primary-light-vivid,
+      variables.$accent-semi-cool-vivid
+    );
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }

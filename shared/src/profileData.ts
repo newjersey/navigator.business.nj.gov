@@ -12,7 +12,11 @@ const booleanChoice = [true, false];
 export const cannabisLicenseOptions = ["CONDITIONAL", "ANNUAL"] as const;
 export const carServiceOptions = ["STANDARD", "HIGH_CAPACITY", "BOTH"] as const;
 export const constructionOptions = ["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "BOTH"] as const;
-export const residentialConstructionOptions = ["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"] as const;
+export const residentialConstructionOptions = [
+  "NEW_HOME_CONSTRUCTION",
+  "HOME_RENOVATIONS",
+  "BOTH",
+] as const;
 export const employmentPersonnelServiceOptions = ["JOB_SEEKERS", "EMPLOYERS"] as const;
 export const employmentPlacementOptions = ["TEMPORARY", "PERMANENT", "BOTH"] as const;
 export const propertyLeaseTypeOptions = ["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"] as const;
@@ -173,7 +177,11 @@ export const createEmptyProfileData = (): ProfileData => {
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
-export type ResidentialConstructionType = "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
+export type ResidentialConstructionType =
+  | "NEW_HOME_CONSTRUCTION"
+  | "HOME_RENOVATIONS"
+  | "BOTH"
+  | undefined;
 export type EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 export type PropertyLeaseType = "SHORT_TERM_RENTAL" | "LONG_TERM_RENTAL" | "BOTH" | undefined;

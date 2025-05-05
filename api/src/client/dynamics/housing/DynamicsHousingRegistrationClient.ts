@@ -12,13 +12,13 @@ import axios, { AxiosError } from "axios";
 
 export const DynamicsHousingRegistrationClient = (
   logWriter: LogWriterType,
-  orgUrl: string
+  orgUrl: string,
 ): HousingRegistrationClient => {
   const getHousingRegistration = async (
     accessToken: string,
     propertyInterestId: string,
     buildingCount: number,
-    propertyInterestType: PropertyInterestType
+    propertyInterestType: PropertyInterestType,
   ): Promise<HousingRegistrationRequestResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Hotel Motel Registration Client - Id:${logId}`);
@@ -27,12 +27,12 @@ export const DynamicsHousingRegistrationClient = (
     switch (propertyInterestType) {
       case "hotelMotel":
         propertyInterestTypeFilter = ` and (ultra_propertyinteresttype eq ${getPropertyInterestTypeIntegerFromTitle(
-          "Hotel"
+          "Hotel",
         )} or ultra_propertyinteresttype eq ${getPropertyInterestTypeIntegerFromTitle("Motel")})`;
         break;
       case "multipleDwelling":
         propertyInterestTypeFilter = ` and (ultra_propertyinteresttype eq ${getPropertyInterestTypeIntegerFromTitle(
-          "Multiple Dwelling"
+          "Multiple Dwelling",
         )})`;
         break;
     }
@@ -44,20 +44,20 @@ export const DynamicsHousingRegistrationClient = (
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       )
       .then((response) => {
         logWriter.LogInfo(
           `Dynamics Hotel Motel Registration Client - Id:${logId} - Response: ${JSON.stringify(
-            response.data
-          )}`
+            response.data,
+          )}`,
         );
         const value = response.data.value as Array<DynamicsHousingRegistrationResponse>;
         if (value.length === 0) {
           return [];
         }
         const registrations = value.map((registration) =>
-          processDynamicsHotelMotelRegistrationResponse(registration, buildingCount)
+          processDynamicsHotelMotelRegistrationResponse(registration, buildingCount),
         );
         const sortedRegistrations = registrations.sort((a, b) => {
           const dateA = parseDate(a.date);
@@ -70,7 +70,10 @@ export const DynamicsHousingRegistrationClient = (
         return sortedRegistrations.slice(0, 1);
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`Dynamics Hotel Motel Registration Client - Id:${logId} - Error:`, error);
+        logWriter.LogError(
+          `Dynamics Hotel Motel Registration Client - Id:${logId} - Error:`,
+          error,
+        );
         throw error.response?.status;
       });
   };
@@ -82,7 +85,7 @@ export const DynamicsHousingRegistrationClient = (
 
 function processDynamicsHotelMotelRegistrationResponse(
   response: DynamicsHousingRegistrationResponse,
-  buildingCount: number
+  buildingCount: number,
 ): HousingRegistrationRequest {
   return {
     id: response.ultra_bhiregistrationrequestid,

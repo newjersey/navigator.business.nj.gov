@@ -89,7 +89,7 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
     date: string,
     status: string,
     index: number,
-    renewalDate?: string
+    renewalDate?: string,
   ): ReactElement => {
     const details = getDetailsForRegistrationCard(status);
     const formattedDate = parseDate(date).format("MMMM d, YYYY");
@@ -100,7 +100,13 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
     const getIconForRegistrationCard = (): ReactElement => {
       switch (status) {
         case "In Review":
-          return <img src={`/img/access_time_filled.svg`} alt="" style={{ width: "17px", height: "17px" }} />;
+          return (
+            <img
+              src={`/img/access_time_filled.svg`}
+              alt=""
+              style={{ width: "17px", height: "17px" }}
+            />
+          );
         default:
           return (
             <>
@@ -132,11 +138,15 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
               {status}
             </span>
             {informationalMessage && (
-              <div data-testid={`registration-${index}-informational-message`}>{informationalMessage}</div>
+              <div data-testid={`registration-${index}-informational-message`}>
+                {informationalMessage}
+              </div>
             )}
           </Box>
         </Box>
-        {status === "Approved" && renewalMessage && <div className={"padding-top-4"}>{renewalMessage}</div>}
+        {status === "Approved" && renewalMessage && (
+          <div className={"padding-top-4"}>{renewalMessage}</div>
+        )}
       </div>
     );
   };
@@ -188,7 +198,9 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
               isColor={"primary"}
               isRightMarginRemoved
               onClick={() => {
-                openInNewTab(Config.housingRegistrationSearchTask.reviewApplicationCallToActionLink);
+                openInNewTab(
+                  Config.housingRegistrationSearchTask.reviewApplicationCallToActionLink,
+                );
               }}
             >
               {Config.housingRegistrationSearchTask.reviewMyApplicationCallToAction}

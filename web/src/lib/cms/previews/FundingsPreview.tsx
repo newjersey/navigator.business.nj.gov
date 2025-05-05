@@ -12,9 +12,13 @@ const FundingsPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <div className="h3-styling margin-top-5">----------Card in For You Section (My Account)----------</div>
+      <div className="h3-styling margin-top-5">
+        ----------Card in For You Section (My Account)----------
+      </div>
       <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
-      <div className="h3-styling margin-top-5">----------Funding Details Page (My Account)----------</div>
+      <div className="h3-styling margin-top-5">
+        ----------Funding Details Page (My Account)----------
+      </div>
       <FundingElement funding={funding} />
     </div>
   );

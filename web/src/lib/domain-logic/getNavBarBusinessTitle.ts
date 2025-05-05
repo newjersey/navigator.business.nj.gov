@@ -1,18 +1,26 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  LookupIndustryById,
+  LookupLegalStructureById,
+} from "@businessnjgovnavigator/shared";
 import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
 import {
   isOwningBusiness,
   isRemoteWorkerOrSellerBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 
-export const getNavBarBusinessTitle = (business: Business | undefined, isAuthenticated: boolean): string => {
+export const getNavBarBusinessTitle = (
+  business: Business | undefined,
+  isAuthenticated: boolean,
+): string => {
   const Config = getMergedConfig();
   if (!business || !isAuthenticated) {
     return Config.navigationDefaults.navBarGuestBusinessText;
   }
 
-  const { businessName, tradeName, legalStructureId, industryId, nexusDbaName } = business.profileData;
+  const { businessName, tradeName, legalStructureId, industryId, nexusDbaName } =
+    business.profileData;
 
   const determineName = (): string => {
     if (determineIfNexusDbaNameNeeded(business)) {

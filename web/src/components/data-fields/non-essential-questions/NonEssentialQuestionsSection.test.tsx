@@ -1,5 +1,4 @@
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
@@ -43,8 +42,6 @@ const mockGetNonEssentialQuestionText = (
 ).getNonEssentialQuestionText;
 
 describe("ProfileNonEssentialQuestionsSection", () => {
-  const Config = getMergedConfig();
-
   const renderComponent = (profileData: Partial<ProfileData>): void => {
     render(
       <WithStatefulProfileData
@@ -53,15 +50,13 @@ describe("ProfileNonEssentialQuestionsSection", () => {
         })}
       >
         <NonEssentialQuestionsSection />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
   };
 
   it("doesn't display section if industry doesn't have any non essential questions", () => {
     renderComponent({ industryId: "test-industry-with-no-non-essential-questions" });
-    expect(
-      screen.queryByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("non-essential-questions-wrapper")).not.toBeInTheDocument();
   });
 
   it("displays all the non essential questions if industry has non essential questions", () => {
@@ -73,9 +68,7 @@ describe("ProfileNonEssentialQuestionsSection", () => {
       industryId: "test-industry-with-non-essential-questions",
     });
 
-    expect(
-      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
-    ).toBeInTheDocument();
+    expect(screen.getByTestId("non-essential-questions-wrapper")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 1?")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 2?")).toBeInTheDocument();
   });

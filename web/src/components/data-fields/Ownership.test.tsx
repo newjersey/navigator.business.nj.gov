@@ -9,7 +9,7 @@ describe("<Ownership />", () => {
     render(
       <WithStatefulProfileData initialData={createEmptyProfileData()}>
         <Ownership />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
     selectDropdownByValue("Ownership", "woman-owned");
     selectDropdownByValue("Ownership", "veteran-owned");
@@ -22,7 +22,7 @@ describe("<Ownership />", () => {
     render(
       <WithStatefulProfileData initialData={createEmptyProfileData()}>
         <Ownership />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
     selectDropdownByValue("Ownership", "none");
     expect(screen.getByTestId("ownership")).toHaveValue("none");

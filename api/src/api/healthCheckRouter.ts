@@ -1,4 +1,8 @@
-import type { HealthCheckMetadata, HealthCheckMethod, SuccessfulHealthCheckResponse } from "@domain/types";
+import type {
+  HealthCheckMetadata,
+  HealthCheckMethod,
+  SuccessfulHealthCheckResponse,
+} from "@domain/types";
 import { Router } from "express";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 

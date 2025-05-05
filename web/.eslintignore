@@ -1,4 +1,5 @@
 .next
+amplify
 *.md
 public/
 out_publish/

@@ -14,7 +14,7 @@ import { createContext, ReactElement, ReactNode, useEffect, useState } from "rea
 type GenericData = Record<string, any>;
 
 export const statefulDataHelpers = (
-  spy: jest.Mock
+  spy: jest.Mock,
 ): {
   getLastCalledWithConfig: () => { local?: boolean };
   currentData: () => GenericData;
@@ -46,7 +46,10 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
   type UpdateFn = (newData: GenericData | undefined, config?: { local?: boolean }) => Promise<void>;
 
   return ({ children, initialData }: StatefulDataProps): ReactElement => {
-    const update = (newData: GenericData | undefined, config?: { local?: boolean }): Promise<void> => {
+    const update = (
+      newData: GenericData | undefined,
+      config?: { local?: boolean },
+    ): Promise<void> => {
       spy(newData, config);
       setGenericData(newData);
       return Promise.resolve();

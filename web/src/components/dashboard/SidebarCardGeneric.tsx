@@ -44,7 +44,9 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
   return (
     <>
       <div
-        className={`padding-3 radius-md margin-bottom-3 ${sideBarCardGradientBackground[props.card.id]}`}
+        className={`padding-3 radius-md margin-bottom-3 ${
+          sideBarCardGradientBackground[props.card.id]
+        }`}
         {...{ "data-testid": props.card.id }}
       >
         {props.card.header && (

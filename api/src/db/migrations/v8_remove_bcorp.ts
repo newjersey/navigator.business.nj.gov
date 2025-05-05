@@ -86,7 +86,9 @@ export const generateV8User = (overrides: Partial<v8BusinessUser>): v8BusinessUs
   };
 };
 
-export const generateV8OnboardingData = (overrides: Partial<v8OnboardingData>): v8OnboardingData => {
+export const generateV8OnboardingData = (
+  overrides: Partial<v8OnboardingData>,
+): v8OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",
@@ -103,7 +105,9 @@ export const generateV8OnboardingData = (overrides: Partial<v8OnboardingData>): 
   };
 };
 
-export const generateV8LicenseSearchData = (overrides: Partial<v8LicenseSearchData>): v8LicenseSearchData => {
+export const generateV8LicenseSearchData = (
+  overrides: Partial<v8LicenseSearchData>,
+): v8LicenseSearchData => {
   return {
     nameAndAddress: generateV8NameAndAddress({}),
     completedSearch: false,
@@ -111,7 +115,9 @@ export const generateV8LicenseSearchData = (overrides: Partial<v8LicenseSearchDa
   };
 };
 
-export const generateV8NameAndAddress = (overrides: Partial<v8NameAndAddress>): v8NameAndAddress => {
+export const generateV8NameAndAddress = (
+  overrides: Partial<v8NameAndAddress>,
+): v8NameAndAddress => {
   return {
     name: `some-name-${randomInt()}`,
     addressLine1: `some-address-1-${randomInt()}`,

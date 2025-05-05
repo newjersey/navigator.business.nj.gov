@@ -22,7 +22,7 @@ describe("addToUserTesting", () => {
 
     expect(stubUserTestingClient.add).toHaveBeenCalledWith(
       userData.user,
-      getCurrentBusiness(userData).profileData
+      getCurrentBusiness(userData).profileData,
     );
     expect(response).toEqual({
       ...userData,

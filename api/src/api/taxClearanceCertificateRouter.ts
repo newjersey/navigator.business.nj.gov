@@ -5,7 +5,7 @@ import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const taxClearanceCertificateRouterFactory = (
-  taxClearanceCertificateClient: TaxClearanceCertificateClient
+  taxClearanceCertificateClient: TaxClearanceCertificateClient,
 ): Router => {
   const router = Router();
   router.post("/postTaxClearanceCertificate", async (req: ExpressRequestBody<UserData>, res) => {

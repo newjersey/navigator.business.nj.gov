@@ -2,7 +2,11 @@ import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressL
 import { generateAddress } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
-import { emptyFormationAddressData, FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
+import {
+  emptyFormationAddressData,
+  FormationAddress,
+  Municipality,
+} from "@businessnjgovnavigator/shared/";
 import {
   generateFormationData,
   generateFormationFormData,
@@ -42,7 +46,7 @@ describe("ProfileAddressLockedFields", () => {
         >
           <ProfileAddressLockedFields />
         </WithStatefulAddressData>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -224,7 +228,9 @@ describe("ProfileAddressLockedFields", () => {
       const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
       expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
       const addressCityProvZip = screen.getByTestId("locked-profileAddressCityProvZip");
-      expect(within(addressCityProvZip).getByText("London, some-Province ERT45")).toBeInTheDocument();
+      expect(
+        within(addressCityProvZip).getByText("London, some-Province ERT45"),
+      ).toBeInTheDocument();
       expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
     });
 
@@ -252,7 +258,9 @@ describe("ProfileAddressLockedFields", () => {
       const addressLine2 = screen.getByTestId("locked-profileAddressLine2");
       expect(within(addressLine2).getByText("Suite 10")).toBeInTheDocument();
       const addressCityProvZip = screen.getByTestId("locked-profileAddressCityProvZip");
-      expect(within(addressCityProvZip).getByText("London, some-Province ERT45")).toBeInTheDocument();
+      expect(
+        within(addressCityProvZip).getByText("London, some-Province ERT45"),
+      ).toBeInTheDocument();
     });
 
     it("does not render address fields when address fields are empty", () => {

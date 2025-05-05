@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
+import { convertTextToMarkdownBold } from "@/lib/utils/content-helpers";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -28,14 +29,11 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
     <>
       {nonEssentialQuestionText && (
         <>
-          <div className={"margin-top-2"}>
-            <div className={"text-bold"}>
-              <Content>{nonEssentialQuestionText}</Content>
-            </div>
-            <span className={"margin-left-05"}>
-              {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
-            </span>
-          </div>
+          <Content className={"margin-top-2"}>
+            {`${convertTextToMarkdownBold(nonEssentialQuestionText)} ${
+              Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText
+            }`}
+          </Content>
           <FormControl fullWidth>
             <RadioGroup
               aria-label={nonEssentialQuestionText}
@@ -51,7 +49,9 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
                 data-testid={`${props.essentialQuestionId}-radio-yes`}
                 value={true}
                 control={<Radio color="primary" />}
-                label={Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonTrueText}
+                label={
+                  Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonTrueText
+                }
               />
               <FormControlLabel
                 style={{ alignItems: "center" }}
@@ -59,7 +59,9 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
                 data-testid={`${props.essentialQuestionId}-radio-no`}
                 value={false}
                 control={<Radio color="primary" />}
-                label={Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonFalseText}
+                label={
+                  Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonFalseText
+                }
               />
             </RadioGroup>
           </FormControl>

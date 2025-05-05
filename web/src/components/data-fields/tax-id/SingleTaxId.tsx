@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { GenericTextField } from "@/components/GenericTextField";
+import { ShowHideStatus } from "@/components/ShowHideToggleButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
-import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -13,12 +13,19 @@ import { InputAdornment, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 interface Props
-  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+  extends Omit<
+    ProfileDataFieldProps,
+    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+  > {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: () => ReactElement;
-  taxIdDisplayStatus: TaxIdDisplayStatus;
+  taxIdDisplayStatus: ShowHideStatus;
 }
-export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: Props): ReactElement => {
+export const SingleTaxId = ({
+  handleChangeOverride,
+  validationText,
+  ...props
+}: Props): ReactElement => {
   const fieldName = "taxId";
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
@@ -63,7 +70,9 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
       </WithErrorBar>
 
       {!isTabletAndUp && (
-        <div className="flex flex-justify-center margin-bottom-3">{props.getShowHideToggleButton()}</div>
+        <div className="flex flex-justify-center margin-bottom-3">
+          {props.getShowHideToggleButton()}
+        </div>
       )}
     </div>
   );

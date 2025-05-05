@@ -31,13 +31,14 @@ const AnytimeActionLicenseReinstatementPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionLicenseReinstatementUrlSlugParam> => {
-  const paths = loadAllAnytimeActionLicenseReinstatementsUrlSlugs();
-  return {
-    paths,
-    fallback: false,
+export const getStaticPaths =
+  (): GetStaticPathsResult<AnytimeActionLicenseReinstatementUrlSlugParam> => {
+    const paths = loadAllAnytimeActionLicenseReinstatementsUrlSlugs();
+    return {
+      paths,
+      fallback: false,
+    };
   };
-};
 
 export const getStaticProps = ({
   params,
@@ -47,7 +48,7 @@ export const getStaticProps = ({
   return {
     props: {
       anytimeActionLicenseReinstatement: loadAnytimeActionLicenseReinstatementsByUrlSlug(
-        params.anytimeActionLicenseReinstatementUrlSlug
+        params.anytimeActionLicenseReinstatementUrlSlug,
       ),
     },
   };

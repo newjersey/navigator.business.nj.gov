@@ -2,7 +2,10 @@ import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropd
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { generateAnytimeActionLicenseReinstatement, generateAnytimeActionTask } from "@/test/factories";
+import {
+  generateAnytimeActionLicenseReinstatement,
+  generateAnytimeActionTask,
+} from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
@@ -107,7 +110,7 @@ describe("<AnytimeActionDropdown />", () => {
         <AnytimeActionDropdown
           anytimeActionTasks={anytimeActionTasks}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
-        />
+        />,
       );
     };
 
@@ -115,7 +118,9 @@ describe("<AnytimeActionDropdown />", () => {
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByText("Some Category")).toBeInTheDocument();
-      expect(screen.getByText("Reactivate My Expired Permit, License or Registration")).toBeInTheDocument();
+      expect(
+        screen.getByText("Reactivate My Expired Permit, License or Registration"),
+      ).toBeInTheDocument();
 
       expect(screen.getByText(taskName)).toBeInTheDocument();
       expect(screen.getByText(licenseReinstatementName)).toBeInTheDocument();
@@ -146,9 +151,15 @@ describe("<AnytimeActionDropdown />", () => {
       const category1Task2 = screen.getByText("category-1-task-name-2");
       const category2Title = screen.getByText("Category 2");
       const category2Task = screen.getByText("category-2-task-name");
-      expect(category1Title.compareDocumentPosition(category1Task1)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-      expect(category1Title.compareDocumentPosition(category1Task2)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-      expect(category2Title.compareDocumentPosition(category2Task)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(category1Title.compareDocumentPosition(category1Task1)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      );
+      expect(category1Title.compareDocumentPosition(category1Task2)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      );
+      expect(category2Title.compareDocumentPosition(category2Task)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      );
     });
 
     it("routes to actions/url and triggers analytics when internal task clicked", () => {
@@ -158,7 +169,7 @@ describe("<AnytimeActionDropdown />", () => {
       fireEvent.click(screen.getByTestId("anytimeActionPrimaryButton"));
       expect(mockPush).toHaveBeenCalledWith(`${ROUTES.anytimeActions}/some-url`);
       expect(
-        mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen
+        mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen,
       ).toHaveBeenCalledWith("some-filename-task");
     });
 
@@ -189,7 +200,7 @@ describe("<AnytimeActionDropdown />", () => {
       fireEvent.click(screen.getByTestId("anytimeActionPrimaryButton"));
       expect(mockPush).toHaveBeenCalledWith(`${ROUTES.licenseReinstatement}/some-url`);
       expect(
-        mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen
+        mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen,
       ).toHaveBeenCalledWith("some-filename-license");
     });
   });
@@ -222,7 +233,7 @@ describe("<AnytimeActionDropdown />", () => {
         <AnytimeActionDropdown
           anytimeActionTasks={anytimeActionTasks}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
-        />
+        />,
       );
     };
 
@@ -257,26 +268,26 @@ describe("<AnytimeActionDropdown />", () => {
       const tasklicenseReinstatementLast = screen.getByText("zzz-some-license-reinstatement-name");
 
       const categoryTitleReinstatements = screen.getByText(
-        "Reactivate My Expired Permit, License or Registration"
+        "Reactivate My Expired Permit, License or Registration",
       );
       const categoryTitleGeneral = screen.getByText("Some Category");
 
       expect(categoryTitleReinstatements.compareDocumentPosition(taskLicenseReinstatement)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING
+        Node.DOCUMENT_POSITION_FOLLOWING,
       );
-      expect(categoryTitleReinstatements.compareDocumentPosition(tasklicenseReinstatementLast)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING
-      );
+      expect(
+        categoryTitleReinstatements.compareDocumentPosition(tasklicenseReinstatementLast),
+      ).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       expect(taskLicenseReinstatement.compareDocumentPosition(tasklicenseReinstatementLast)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING
+        Node.DOCUMENT_POSITION_FOLLOWING,
       );
 
       expect(tasklicenseReinstatementLast.compareDocumentPosition(categoryTitleGeneral)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING
+        Node.DOCUMENT_POSITION_FOLLOWING,
       );
 
       expect(categoryTitleGeneral.compareDocumentPosition(taskGeneral)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING
+        Node.DOCUMENT_POSITION_FOLLOWING,
       );
     });
 
@@ -357,7 +368,7 @@ describe("<AnytimeActionDropdown />", () => {
         fireEvent.click(screen.getByLabelText("Open"));
 
         expect(!!screen.queryByText(taskOverrides.name)).toBe(isShown);
-      }
+      },
     );
 
     it("does NOT renders license reinstatement anytime action when license is NOT expired", () => {
@@ -422,7 +433,9 @@ describe("<AnytimeActionDropdown />", () => {
       });
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.queryByTestId("carnival-ride-supplemental-modification-option")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("carnival-ride-supplemental-modification-option"),
+      ).not.toBeInTheDocument();
 
       useMockBusiness({
         profileData: generateProfileData({
@@ -431,7 +444,9 @@ describe("<AnytimeActionDropdown />", () => {
       });
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.getByTestId("carnival-ride-supplemental-modification-option")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("carnival-ride-supplemental-modification-option"),
+      ).toBeInTheDocument();
     });
 
     it("adds operating carnival fire permit for carnival owning businesses", () => {
@@ -537,7 +552,9 @@ describe("<AnytimeActionDropdown />", () => {
       });
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.queryByTestId("carnival-ride-supplemental-modification-option")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("carnival-ride-supplemental-modification-option"),
+      ).not.toBeInTheDocument();
 
       useMockBusiness({
         profileData: generateProfileData({
@@ -551,7 +568,9 @@ describe("<AnytimeActionDropdown />", () => {
       });
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.getByTestId("carnival-ride-supplemental-modification-option")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("carnival-ride-supplemental-modification-option"),
+      ).toBeInTheDocument();
     });
 
     it("renders an anytime action with a description", () => {

@@ -65,7 +65,7 @@ describe("onboarding - shared", () => {
       await waitFor(() => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
       });
-    }
+    },
   );
 
   it("routes to the second onboarding page when they have answered the first question and we route them to page 2", async () => {
@@ -129,7 +129,9 @@ describe("onboarding - shared", () => {
     expect(currentBusiness().profileData.businessPersona).toEqual("OWNING");
     expect(currentBusiness().profileData.sectorId).toEqual(sector);
     expect(currentBusiness().onboardingFormProgress).toEqual("COMPLETED");
-    expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE_OWNING);
+    expect(currentBusiness().profileData.operatingPhase).toEqual(
+      OperatingPhaseId.GUEST_MODE_OWNING,
+    );
   });
 
   it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {
@@ -152,7 +154,9 @@ describe("onboarding - shared", () => {
   });
 
   it("updates locally for each step", async () => {
-    const business = generateBusiness({ profileData: generateProfileData({ businessPersona: "STARTING" }) });
+    const business = generateBusiness({
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
+    });
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
     const numberOfPages = onboardingFlows.STARTING.pages.length;
 

@@ -32,12 +32,16 @@ export const ReviewPartnership = (): ReactElement => {
         {params.radioData === undefined ? (
           notEnteredText(params.questionText)
         ) : (
-          <Content className="margin-bottom-2">{params.radioData ? params.yesBody : params.noBody}</Content>
+          <Content className="margin-bottom-2">
+            {params.radioData ? params.yesBody : params.noBody}
+          </Content>
         )}
         {params.radioData && (
           <div className="margin-left-4">
             <em>
-              <ModifiedContent>{Config.formation.partnershipRights.reviewStepTermsLabel}</ModifiedContent>
+              <ModifiedContent>
+                {Config.formation.partnershipRights.reviewStepTermsLabel}
+              </ModifiedContent>
             </em>
             <span className="margin-left-1">{params.termsData}</span>
           </div>

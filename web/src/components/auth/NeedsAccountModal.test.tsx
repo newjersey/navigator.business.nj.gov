@@ -23,12 +23,15 @@ describe("<NeedsAccount Modal />", () => {
 
   const setShowNeedsAccountModal = jest.fn();
 
-  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, showNeedsAccountModal = true): void => {
+  const setupHookWithAuth = (
+    isAuthenticated: IsAuthenticated,
+    showNeedsAccountModal = true,
+  ): void => {
     render(
       withNeedsAccountContext(<NeedsAccountModal />, isAuthenticated, {
         showNeedsAccountModal: showNeedsAccountModal,
         setShowNeedsAccountModal: setShowNeedsAccountModal,
-      })
+      }),
     );
   };
 
@@ -39,7 +42,9 @@ describe("<NeedsAccount Modal />", () => {
 
   it("does not show Needs Account modal when user is in guest mode and it's disabled", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, false);
-    expect(screen.queryByText(Config.selfRegistration.needsAccountModalBody)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.selfRegistration.needsAccountModalBody),
+    ).not.toBeInTheDocument();
   });
 
   it("returns user to previous page when modal is closed", () => {
@@ -50,7 +55,9 @@ describe("<NeedsAccount Modal />", () => {
 
   it("does not show Needs Account snackbar when user is authenticated", () => {
     setupHookWithAuth(IsAuthenticated.TRUE);
-    expect(screen.queryByText(Config.selfRegistration.needsAccountModalBody)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.selfRegistration.needsAccountModalBody),
+    ).not.toBeInTheDocument();
   });
 
   it("routes to account setup when link is clicked", async () => {
@@ -67,7 +74,9 @@ describe("<NeedsAccount Modal />", () => {
 
   it("goes to myNJ when Log-in link is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(markdownToText(Config.selfRegistration.needsAccountModalSubText)));
+    fireEvent.click(
+      screen.getByText(markdownToText(Config.selfRegistration.needsAccountModalSubText)),
+    );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
   });
 });

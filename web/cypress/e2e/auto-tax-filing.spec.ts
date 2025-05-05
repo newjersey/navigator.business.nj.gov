@@ -82,5 +82,5 @@ describe.skip(
       cy.get('[data-testid="get-tax-access"]').should("exist");
       cy.get('[data-testid="alert-content-container"]').should("not.exist");
     });
-  }
+  },
 );

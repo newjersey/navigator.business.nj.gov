@@ -18,13 +18,19 @@ const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldCo
 const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
 const licensesDir = path.join(process.cwd(), "..", "content", "src", "license-calendar-events");
-const anytimeActionTasksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-tasks");
+const anytimeActionTasksDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "anytime-action-tasks",
+);
 const anytimeActionLicenseReinstatementsDir = path.join(
   process.cwd(),
   "..",
   "content",
   "src",
-  "anytime-action-license-reinstatements"
+  "anytime-action-license-reinstatements",
 );
 
 type Filenames = {
@@ -90,10 +96,14 @@ const getFilenames = (): Filenames => {
 
 const getContents = (filenames: Filenames): FileContents => {
   const industries = filenames.industries.map((it) => {
-    return JSON.parse(fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8")) as IndustryRoadmap;
+    return JSON.parse(
+      fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8"),
+    ) as IndustryRoadmap;
   });
   const addOns = filenames.addOns.map((it) => {
-    return JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as IndustryRoadmap;
+    return JSON.parse(
+      fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8"),
+    ) as IndustryRoadmap;
   });
   const fieldConfigs = filenames.fieldConfigs.map((it) => {
     return fs.readFileSync(path.join(fieldConfigDir, it), "utf8");
@@ -116,8 +126,9 @@ const getContents = (filenames: Filenames): FileContents => {
       }),
     ],
     contextualInfos: filenames.contextualInfos.map((it) => {
-      return matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8"))
-        .content;
+      return matter(
+        fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8"),
+      ).content;
     }),
     displayContents: filenames.displayContents.map((it) => {
       return matter(fs.readFileSync(it, "utf8")).content;
@@ -128,7 +139,7 @@ const getContents = (filenames: Filenames): FileContents => {
 
 const isReferencedInAMarkdown = async (
   contextualInfoFilename: string,
-  markdowns: string[]
+  markdowns: string[],
 ): Promise<boolean> => {
   let contained = false;
   const contextualInfoId = contextualInfoFilename.split(".md")[0];
@@ -142,7 +153,10 @@ const isReferencedInAMarkdown = async (
   return contained;
 };
 
-const isReferencedInConfig = async (contextualInfoFilename: string, configs: string[]): Promise<boolean> => {
+const isReferencedInConfig = async (
+  contextualInfoFilename: string,
+  configs: string[],
+): Promise<boolean> => {
   let contained = false;
   const contextualInfoId = contextualInfoFilename.split(".md")[0];
   for (const content of configs) {
@@ -155,7 +169,10 @@ const isReferencedInConfig = async (contextualInfoFilename: string, configs: str
   return contained;
 };
 
-const isReferencedInARoadmap = async (filename: string, contents: FileContents): Promise<boolean> => {
+const isReferencedInARoadmap = async (
+  filename: string,
+  contents: FileContents,
+): Promise<boolean> => {
   let containedInAnAddOn = false;
   let containedInAModification = false;
   const filenameWithoutMd = filename.split(".md")[0];
@@ -309,7 +326,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
             end: (): void => {
               resolve({});
             },
-          }
+          },
         );
         const url = new URL(process.env.REDIRECT_URL || "");
         htmlUrlChecker.enqueue(`${url.origin}${page}`, {});

@@ -25,7 +25,7 @@ export const MunicipalityField = (props: Props): ReactElement => {
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["municipality"]["default"] =
@@ -41,7 +41,7 @@ export const MunicipalityField = (props: Props): ReactElement => {
       operatingPhase: state.profileData.operatingPhase,
     }) || props.required
       ? state.profileData[fieldName] !== undefined
-      : true
+      : true,
   );
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {

@@ -87,7 +87,12 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
         </div>
         <TabContext value={tabIndex.toString()}>
           <div className="border radius-lg border-base-lighter bg-base-extra-light margin-top-3 padding-1">
-            <TabList onChange={handleChange} aria-label="Dashboard Tabs" variant="fullWidth" sx={tabStyling}>
+            <TabList
+              onChange={handleChange}
+              aria-label="Dashboard Tabs"
+              variant="fullWidth"
+              sx={tabStyling}
+            >
               <Tab
                 label={Config.dashboardDefaults.mobileFirstTabText}
                 value={DASHBOARD_TAB.toString()}
@@ -98,7 +103,11 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
                 label={
                   <div className="fdr fjc">
                     {templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-                      count: getForYouCardCount(business, props.certifications, props.fundings).toString(),
+                      count: getForYouCardCount(
+                        business,
+                        props.certifications,
+                        props.fundings,
+                      ).toString(),
                     })}
                     {getIndicator()}
                   </div>

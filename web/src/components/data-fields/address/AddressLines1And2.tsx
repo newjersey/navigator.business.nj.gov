@@ -15,7 +15,9 @@ export const AddressLines1And2 = (props: Props): ReactElement => {
     <>
       <div
         id={`question-addressLine1`}
-        className={`${props.isFullWidth ? "" : "text-field-width-default"} add-spacing-on-ele-scroll`}
+        className={`${
+          props.isFullWidth ? "" : "text-field-width-default"
+        } add-spacing-on-ele-scroll`}
       >
         <AddressTextField
           label={Config.formation.fields.addressLine1.label}
@@ -28,7 +30,9 @@ export const AddressLines1And2 = (props: Props): ReactElement => {
       </div>
       <div
         id={`question-addressLine2`}
-        className={`${props.isFullWidth ? "" : "text-field-width-default"} add-spacing-on-ele-scroll`}
+        className={`${
+          props.isFullWidth ? "" : "text-field-width-default"
+        } add-spacing-on-ele-scroll`}
       >
         <AddressTextField
           label={Config.formation.fields.addressLine2.label}

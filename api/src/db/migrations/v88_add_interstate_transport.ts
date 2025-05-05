@@ -286,7 +286,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
+const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 type v88BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 

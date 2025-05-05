@@ -28,7 +28,7 @@ describe("<SectionAccordion />", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <SectionAccordion sectionType={type}>BODY CONTENT</SectionAccordion>
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -39,19 +39,23 @@ describe("<SectionAccordion />", () => {
         preferences: generatePreferences({
           roadmapOpenSections: [],
         }),
-      })
+      }),
     );
 
     expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
 
     fireEvent.click(screen.getByTestId("plan-header"));
     await waitFor(() => {
-      return expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).toBeVisible();
+      return expect(
+        within(screen.getByTestId("section-plan")).getByText("BODY CONTENT"),
+      ).toBeVisible();
     });
 
     fireEvent.click(screen.getByTestId("plan-header"));
     await waitFor(() => {
-      return expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
+      return expect(
+        within(screen.getByTestId("section-plan")).getByText("BODY CONTENT"),
+      ).not.toBeVisible();
     });
   });
 
@@ -62,7 +66,7 @@ describe("<SectionAccordion />", () => {
         preferences: generatePreferences({
           roadmapOpenSections: ["PLAN", "START"],
         }),
-      })
+      }),
     );
 
     const sectionPlan = screen.getByTestId("plan-header");
@@ -72,7 +76,7 @@ describe("<SectionAccordion />", () => {
     expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);
     fireEvent.click(sectionPlan);
     expect(currentBusiness().preferences.roadmapOpenSections).toEqual(
-      expect.arrayContaining(["PLAN", "START"])
+      expect.arrayContaining(["PLAN", "START"]),
     );
   });
 });

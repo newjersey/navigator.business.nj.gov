@@ -61,7 +61,7 @@ export enum QUERIES {
 export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(
   router: NextRouter,
   query: K,
-  value: QUERY_PARAMS_VALUES[K]
+  value: QUERY_PARAMS_VALUES[K],
 ): void => {
   router.push({ query: { [query]: value } }, undefined, { shallow: true });
 };
@@ -71,7 +71,7 @@ export const routeWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(
   config: {
     path: string;
     queries: Record<K, QUERY_PARAMS_VALUES[K]>;
-  }
+  },
 ): void => {
   router.push({
     pathname: config.path,
@@ -82,7 +82,7 @@ export const routeWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(
 export const checkQueryValue = <K extends keyof QUERY_PARAMS_VALUES>(
   router: NextRouter,
   query: K,
-  value: QUERY_PARAMS_VALUES[K]
+  value: QUERY_PARAMS_VALUES[K],
 ): boolean => {
   return router.query[query] === value;
 };

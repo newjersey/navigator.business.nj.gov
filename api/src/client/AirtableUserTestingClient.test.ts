@@ -32,7 +32,7 @@ describe("AirtableUserTestingClient", () => {
         baseUrl: "some-base-url",
         usersTableName: "some-users-table",
       },
-      logger
+      logger,
     );
   });
 

@@ -11,8 +11,15 @@ import {
   randomPublicFilingLegalType,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { setMockRoadmapResponse, useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setMockRoadmapResponse,
+  useMockRoadmap,
+  useMockRoadmapTask,
+} from "@/test/mock/mockUseRoadmap";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   formationTaskId,
@@ -58,7 +65,7 @@ const renderPage = (task: Task, initialBusiness?: Business): void => {
           housingMunicipalities={[]}
         />
       </WithStatefulUserData>
-    </materialUi.ThemeProvider>
+    </materialUi.ThemeProvider>,
   );
 };
 
@@ -93,7 +100,9 @@ describe("task page", () => {
     expect(screen.getByText("destination: city clerk")).toBeInTheDocument();
     expect(screen.getByText("Submit The Form Here")).toBeInTheDocument();
 
-    expect(screen.getByText(Config.taskDefaults.backToRoadmapText, { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.taskDefaults.backToRoadmapText, { exact: false }),
+    ).toBeInTheDocument();
   });
 
   it("does not show button if no link available", () => {
@@ -125,7 +134,7 @@ describe("task page", () => {
           municipalities={[]}
           housingMunicipalities={[]}
         />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
     expect(screen.getByTestId("loading")).toBeInTheDocument();
   });
@@ -140,7 +149,7 @@ describe("task page", () => {
           municipalities={[]}
           housingMunicipalities={[]}
         />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
     expect(screen.getByTestId("loading")).toBeInTheDocument();
   });
@@ -192,21 +201,28 @@ describe("task page", () => {
   });
 
   it("displays agencyId as its name when it is defined", () => {
-    renderPage(generateTask({ agencyId: "nj-consumer-affairs", agencyAdditionalContext: undefined }));
+    renderPage(
+      generateTask({ agencyId: "nj-consumer-affairs", agencyAdditionalContext: undefined }),
+    );
     expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
     expect(screen.getByText(LookupTaskAgencyById("nj-consumer-affairs").name)).toBeInTheDocument();
     expect(screen.queryByText("nj-consumer-affairs")).not.toBeInTheDocument();
   });
 
   it("displays agencyAdditionalContext when it is defined", () => {
-    renderPage(generateTask({ agencyId: undefined, agencyAdditionalContext: "Board of Something" }));
+    renderPage(
+      generateTask({ agencyId: undefined, agencyAdditionalContext: "Board of Something" }),
+    );
     expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
     expect(screen.getByText("Board of Something")).toBeInTheDocument();
   });
 
   it("displays agencyId as its name and agencyAdditionalContext comma separated when both defined", () => {
     renderPage(
-      generateTask({ agencyId: "nj-consumer-affairs", agencyAdditionalContext: "Board of Something" })
+      generateTask({
+        agencyId: "nj-consumer-affairs",
+        agencyAdditionalContext: "Board of Something",
+      }),
     );
     expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
     const agencyName = LookupTaskAgencyById("nj-consumer-affairs").name;
@@ -273,7 +289,9 @@ describe("task page", () => {
     it("renders only Next Task button for first task", () => {
       renderPage(taskOne);
       expect(screen.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.taskDefaults.previousTaskButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.taskDefaults.previousTaskButtonText),
+      ).not.toBeInTheDocument();
     });
 
     it("renders only Previous Task button at last task", () => {
@@ -318,10 +336,10 @@ describe("task page", () => {
       useMockRoadmapWithTask(task);
       renderPage(task);
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false }),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false }),
       ).not.toBeInTheDocument();
     });
 
@@ -332,11 +350,16 @@ describe("task page", () => {
       useMockRoadmapWithTask(task);
       renderPage(task);
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false }),
       ).not.toBeInTheDocument();
-      expect(screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false }),
+      ).toBeInTheDocument();
       expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
-      expect(screen.getByText("Do this first", { exact: false })).toHaveAttribute("href", "do-this-first");
+      expect(screen.getByText("Do this first", { exact: false })).toHaveAttribute(
+        "href",
+        "do-this-first",
+      );
     });
 
     it("shows an alert with links when this task is unlocked by several other tasks", () => {
@@ -350,14 +373,22 @@ describe("task page", () => {
       useMockRoadmapWithTask(task);
       renderPage(task);
 
-      expect(screen.getByText(Config.taskDefaults.unlockedByPlural, { exact: false })).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
+        screen.getByText(Config.taskDefaults.unlockedByPlural, { exact: false }),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false }),
       ).not.toBeInTheDocument();
       expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Also this one", { exact: false })).toBeInTheDocument();
-      expect(screen.getByText("Do this first", { exact: false })).toHaveAttribute("href", "do-this-first");
-      expect(screen.getByText("Also this one", { exact: false })).toHaveAttribute("href", "also-this-one");
+      expect(screen.getByText("Do this first", { exact: false })).toHaveAttribute(
+        "href",
+        "do-this-first",
+      );
+      expect(screen.getByText("Also this one", { exact: false })).toHaveAttribute(
+        "href",
+        "also-this-one",
+      );
     });
 
     it("ignores unlocked-by tasks on the page's default task", () => {
@@ -365,7 +396,7 @@ describe("task page", () => {
         generateTask({
           id: "this-task",
           unlockedBy: [generateTaskLink({ name: "NOT ON ROADMAP TASK" })],
-        })
+        }),
       );
 
       expect(screen.queryByText("NOT ON ROADMAP TASK", { exact: false })).not.toBeInTheDocument();
@@ -374,7 +405,11 @@ describe("task page", () => {
     it("removes a task from the unlocked-by alert when its status is completed", () => {
       const task = generateTask({
         unlockedBy: [
-          generateTaskLink({ name: "Do this first", urlSlug: "do-this-first", id: "do-this-first" }),
+          generateTaskLink({
+            name: "Do this first",
+            urlSlug: "do-this-first",
+            id: "do-this-first",
+          }),
           generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" }),
         ],
       });
@@ -383,9 +418,11 @@ describe("task page", () => {
       renderPage(task, generateBusiness({ taskProgress: { "do-this-first": "COMPLETED" } }));
 
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false }),
       ).not.toBeInTheDocument();
-      expect(screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false }),
+      ).toBeInTheDocument();
       expect(screen.queryByText("Do this first", { exact: false })).not.toBeInTheDocument();
       expect(screen.getByText("Also this one", { exact: false })).toBeInTheDocument();
     });
@@ -400,7 +437,7 @@ describe("task page", () => {
           legalStructureId: randomPublicFilingLegalType(),
           businessPersona: "STARTING",
         }),
-      })
+      }),
     );
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
@@ -415,7 +452,7 @@ describe("task page", () => {
           legalStructureId: randomPublicFilingLegalType(),
           businessPersona: "FOREIGN",
         }),
-      })
+      }),
     );
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
@@ -432,10 +469,10 @@ describe("task page", () => {
             operatingPhase,
           }),
           taskProgress: { [businessStructureTaskId]: "TO_DO" },
-        })
+        }),
       );
       expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
@@ -449,11 +486,11 @@ describe("task page", () => {
             operatingPhase,
           }),
           taskProgress: { [businessStructureTaskId]: "COMPLETED" },
-        })
+        }),
       );
 
       expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
-    }
+    },
   );
 
   describe("deferred location question", () => {
@@ -510,7 +547,7 @@ describe("task page", () => {
         generateTask({
           requiresLocation: true,
           contentMd: contentWithLocationSection,
-        })
+        }),
       );
       await screen.findByTestId("deferred-location-task");
       expect(screen.getByText("some content")).toBeInTheDocument();

@@ -5,7 +5,10 @@ import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 export const addToUserTestingFactory = (userTestingClient: UserTestingClient): AddToUserTesting => {
   return async (userData: UserData): Promise<UserData> => {
-    const userTesting = await userTestingClient.add(userData.user, getCurrentBusiness(userData).profileData);
+    const userTesting = await userTestingClient.add(
+      userData.user,
+      getCurrentBusiness(userData).profileData,
+    );
     const user: UserData = {
       ...userData,
       user: {

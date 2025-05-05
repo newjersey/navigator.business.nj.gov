@@ -63,7 +63,11 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
     if (address?.address1 && address?.municipalityExternalId) {
       setIsLoading(true);
       api
-        .checkHousingRegistrationStatus(address.address1, address.municipalityExternalId, "hotelMotel")
+        .checkHousingRegistrationStatus(
+          address.address1,
+          address.municipalityExternalId,
+          "hotelMotel",
+        )
         .then((result) => {
           if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
             setError("NO_PROPERTY_INTEREST_FOUND");
@@ -106,7 +110,12 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="Hotel, Motel, and Guest House Registration task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab
                   value="0"

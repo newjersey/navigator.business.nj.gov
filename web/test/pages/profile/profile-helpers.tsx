@@ -51,7 +51,8 @@ export const renderPage = ({
 }): void => {
   const genericTown = generateMunicipality({ displayName: "GenericTown" });
   const profileDataMunicipality = business && business.profileData.municipality;
-  const formationNJAddress = business && business.formationData.formationFormData.addressMunicipality;
+  const formationNJAddress =
+    business && business.formationData.formationFormData.addressMunicipality;
 
   const municipalitiesList = [genericTown];
   if (profileDataMunicipality) municipalitiesList.push(profileDataMunicipality);
@@ -76,8 +77,11 @@ export const renderPage = ({
         </WithStatefulDataFieldFormContext>
       </ThemeProvider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
-      { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn() }
-    )
+      {
+        showNeedsAccountModal: false,
+        setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
+      },
+    ),
   );
 };
 
@@ -167,12 +171,14 @@ export const expectLocationSavedAsUndefined = async (): Promise<void> => {
 export const expectLocationNotSavedAndError = (): void => {
   expect(userDataWasNotUpdated()).toBe(true);
   expect(
-    screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+    screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired),
   ).toBeInTheDocument();
   expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
 };
 
-export const getForeignNexusProfileFields = (businessPersona: BusinessPersona): Partial<ProfileData> => {
+export const getForeignNexusProfileFields = (
+  businessPersona: BusinessPersona,
+): Partial<ProfileData> => {
   return businessPersona === "FOREIGN"
     ? {
         foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
@@ -180,9 +186,9 @@ export const getForeignNexusProfileFields = (businessPersona: BusinessPersona): 
     : {};
 };
 export const phasesWhereGoToProfileShows = OperatingPhases.filter(
-  (it) => it.displayProfileOpportunityAlert
+  (it) => it.displayProfileOpportunityAlert,
 ).map((it) => it.id);
 
 export const phasesWhereGoToProfileDoesNotShow = OperatingPhases.filter(
-  (it) => !it.displayProfileOpportunityAlert
+  (it) => !it.displayProfileOpportunityAlert,
 ).map((it) => it.id);

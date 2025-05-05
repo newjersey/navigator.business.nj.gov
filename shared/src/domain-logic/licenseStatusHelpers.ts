@@ -1,11 +1,16 @@
-import { LicenseName, LicenseStatus, LicenseStatusItem, taskIdLicenseNameMapping } from "../license";
+import {
+  LicenseName,
+  LicenseStatus,
+  LicenseStatusItem,
+  taskIdLicenseNameMapping,
+} from "../license";
 import { Business, TaskProgress } from "../userData";
 
 export const getNonLicenseTasks = (business: Business): Record<string, TaskProgress> =>
   Object.fromEntries(
     Object.entries(business.taskProgress).filter(
-      ([key]) => !Object.keys(taskIdLicenseNameMapping).includes(key)
-    )
+      ([key]) => !Object.keys(taskIdLicenseNameMapping).includes(key),
+    ),
   );
 export type LicenseChecklistResponse = {
   licenseStatus: LicenseStatus;
@@ -17,12 +22,13 @@ export type LicenseStatusResults = Partial<
   Record<LicenseName, Omit<LicenseChecklistResponse, "professionNameAndLicenseType">>
 >;
 export const getLicenseTasksProgress = (
-  licenseStatusResult: LicenseStatusResults
+  licenseStatusResult: LicenseStatusResults,
 ): Record<string, TaskProgress> => {
   const licenseTasksProgress: Record<string, TaskProgress> = {};
   for (const licenseName of Object.keys(licenseStatusResult) as LicenseName[]) {
     const taskId = Object.keys(taskIdLicenseNameMapping).find(
-      (taskId) => taskIdLicenseNameMapping[taskId as keyof typeof taskIdLicenseNameMapping] === licenseName
+      (taskId) =>
+        taskIdLicenseNameMapping[taskId as keyof typeof taskIdLicenseNameMapping] === licenseName,
     );
     if (taskId === undefined) {
       continue;

@@ -261,12 +261,16 @@
 
   const setIndustryData = () => {
     const industryNames = Array.from(document.getElementsByClassName("sk-industry-name"));
-    const industryDescriptions = Array.from(document.getElementsByClassName("sk-industry-description"));
+    const industryDescriptions = Array.from(
+      document.getElementsByClassName("sk-industry-description"),
+    );
     const industrySynonyms = Array.from(document.getElementsByClassName("sk-industry-synonyms"));
     const industrySlugs = Array.from(document.getElementsByClassName("sk-industry-slug"));
 
     industryNames.forEach((name, index) => {
-      const synonyms = industrySynonyms[index].innerText.split(", ").map((synoynm) => synoynm.toLowerCase());
+      const synonyms = industrySynonyms[index].innerText
+        .split(", ")
+        .map((synoynm) => synoynm.toLowerCase());
 
       industries.push({
         name: name.innerText,
@@ -308,7 +312,9 @@
     }
     industries.forEach((industry) => {
       const className =
-        industry.name === selectedIndustry?.name ? "skf-industry skf-industry-selected" : "skf-industry";
+        industry.name === selectedIndustry?.name
+          ? "skf-industry skf-industry-selected"
+          : "skf-industry";
       HTMLString += `
           <li class="${className}" onclick='selectDropdownItem(${JSON.stringify(industry)})'>
             <p class="skf-industry-name">${industry.name}</p>

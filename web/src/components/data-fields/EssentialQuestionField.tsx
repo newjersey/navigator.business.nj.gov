@@ -21,7 +21,7 @@ export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
   const { RegisterForOnSubmit, isFormFieldInvalid } = useFormContextFieldHelpers(
     props.essentialQuestion.fieldName,
     DataFormErrorMapContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const { Config } = useConfig();
@@ -34,11 +34,15 @@ export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
       <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS" className="margin-top-4">
         {props.onboardingFieldLabel ? (
           <div data-testid={"FieldLabelOnboarding"}>
-            <FieldLabelOnboarding fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
+            <FieldLabelOnboarding
+              fieldName={props.essentialQuestion.fieldName as ProfileContentField}
+            />
           </div>
         ) : (
           <div data-testid={"FieldLabelProfile"}>
-            <FieldLabelProfile fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
+            <FieldLabelProfile
+              fieldName={props.essentialQuestion.fieldName as ProfileContentField}
+            />
           </div>
         )}
 

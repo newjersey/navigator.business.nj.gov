@@ -54,7 +54,7 @@ export const NexusFormationFlow = (): ReactElement => {
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
-    moveType: "NEXT_BUTTON" | "STEPPER"
+    moveType: "NEXT_BUTTON" | "STEPPER",
   ): void => {
     if (!formationFormData) {
       return;
@@ -67,14 +67,16 @@ export const NexusFormationFlow = (): ReactElement => {
 
   const onMoveToStep = async (
     stepIndex: number,
-    config: { moveType: "NEXT_BUTTON" | "STEPPER" }
+    config: { moveType: "NEXT_BUTTON" | "STEPPER" },
   ): Promise<void> => {
     onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
     moveToStep(stepIndex);
   };
 
   if (state.stepIndex > 0 && isNotDba) {
-    if (allowFormation(business.profileData.legalStructureId, business.profileData.businessPersona)) {
+    if (
+      allowFormation(business.profileData.legalStructureId, business.profileData.businessPersona)
+    ) {
       return <BusinessFormationPaginator />;
     } else {
       return (
@@ -113,12 +115,13 @@ export const NexusFormationFlow = (): ReactElement => {
                     analytics.event.task_primary_call_to_action.click.open_external_website(
                       state.dbaContent.Formation.callToActionText ||
                         Config.taskDefaults.defaultCallToActionText,
-                      state.dbaContent.Formation.callToActionLink as string
+                      state.dbaContent.Formation.callToActionLink as string,
                     );
                     openInNewTab(state.dbaContent.Formation.callToActionLink);
                   }}
                 >
-                  {state.dbaContent.Formation.callToActionText || Config.taskDefaults.defaultCallToActionText}
+                  {state.dbaContent.Formation.callToActionText ||
+                    Config.taskDefaults.defaultCallToActionText}
                 </PrimaryButton>
               </ActionBarLayout>
             </CtaContainer>

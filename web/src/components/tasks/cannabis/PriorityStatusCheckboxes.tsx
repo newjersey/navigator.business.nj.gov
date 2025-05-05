@@ -11,13 +11,15 @@ interface Props {
 }
 
 export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
-  const [eligibleModalIsOpenWith, setEligibleModalIsOpenWith] = useState<PriorityApplicationType | "">("");
+  const [eligibleModalIsOpenWith, setEligibleModalIsOpenWith] = useState<
+    PriorityApplicationType | ""
+  >("");
 
   const { Config } = useConfig();
 
   const handleCheckbox = (
     event: React.ChangeEvent<HTMLInputElement>,
-    type: PriorityApplicationType
+    type: PriorityApplicationType,
   ): void => {
     if (event.target.checked) {
       setEligibleModalIsOpenWith(type);

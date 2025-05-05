@@ -77,7 +77,10 @@ export const BusinessNameStep = (): ReactElement => {
                   value={currentName}
                   onChange={(event): void => {
                     onChangeNameField(event.target.value);
-                    setFormationFormData({ ...state.formationFormData, businessName: event.target.value });
+                    setFormationFormData({
+                      ...state.formationFormData,
+                      businessName: event.target.value,
+                    });
                   }}
                   variant="outlined"
                   inputProps={{
@@ -99,7 +102,10 @@ export const BusinessNameStep = (): ReactElement => {
                   }}
                 />
                 {state.businessNameAvailability?.status === "UNAVAILABLE" && (
-                  <div className="text-error-dark text-bold margin-y-2" data-testid="unavailable-text">
+                  <div
+                    className="text-error-dark text-bold margin-y-2"
+                    data-testid="unavailable-text"
+                  >
                     <p>
                       {templateEval(Config.formation.fields.businessName.alertUnavailable, {
                         name: state.formationFormData.businessName,

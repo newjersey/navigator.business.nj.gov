@@ -13,7 +13,8 @@ import { IconButton } from "@mui/material";
 import { ReactElement, useContext, useEffect } from "react";
 
 export const RegistrationStatusSnackbar = (): ReactElement => {
-  const { isAuthenticated, registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
+  const { isAuthenticated, registrationStatus, setRegistrationStatus } =
+    useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();
 

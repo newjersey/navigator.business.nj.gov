@@ -22,7 +22,7 @@ export const useBusinessNameSearch = ({
   onChangeNameField: (value: string) => void;
   onBlurNameField: (value: string) => void;
   searchBusinessName: (
-    event?: FormEvent<HTMLFormElement>
+    event?: FormEvent<HTMLFormElement>,
   ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
   setCurrentName: (name: string) => void;
   resetSearch: () => void;
@@ -58,7 +58,9 @@ export const useBusinessNameSearch = ({
 
   useMountEffectWhenDefined(() => {
     if (!business) return;
-    setCurrentName(isDba ? business.profileData.nexusDbaName || "" : business.profileData.businessName);
+    setCurrentName(
+      isDba ? business.profileData.nexusDbaName || "" : business.profileData.businessName,
+    );
     if (businessNameIsNotAvailable() && businessNameHasBeenSearched()) {
       setFieldsInteracted(["businessName"]);
     }
@@ -90,7 +92,7 @@ export const useBusinessNameSearch = ({
   };
 
   const searchBusinessName = async (
-    event?: FormEvent<HTMLFormElement>
+    event?: FormEvent<HTMLFormElement>,
   ): Promise<{ nameAvailability: NameAvailability; submittedName: string }> => {
     if (event) {
       event.preventDefault();

@@ -42,7 +42,9 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 
-const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
+const createDisplayContent = (
+  sidebar?: Record<string, SidebarCardContent>,
+): RoadmapDisplayContent => {
   return {
     sidebarDisplayContent: sidebar ?? {
       welcome: generateSidebarCardContent({}),
@@ -72,7 +74,7 @@ describe("dashboard page", () => {
           anytimeActionLicenseReinstatements={[]}
           licenseEvents={[]}
         />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -80,7 +82,9 @@ describe("dashboard page", () => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
+      >
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
             operateReferences={{}}
@@ -93,7 +97,7 @@ describe("dashboard page", () => {
             licenseEvents={[]}
           />
         </ThemeProvider>
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -132,7 +136,9 @@ describe("dashboard page", () => {
       }),
     });
     renderStatefulDashboardComponent(business);
-    expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(
+      SIDEBAR_CARDS.notRegistered,
+    );
   });
 
   it("renders not-registered card when operatingPhase is GUEST_MODE and businessPersona is FOREIGN", () => {
@@ -147,7 +153,9 @@ describe("dashboard page", () => {
     });
     renderStatefulDashboardComponent(business);
 
-    expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(
+      SIDEBAR_CARDS.notRegistered,
+    );
   });
 
   it("renders not-registered-up-and-running card when operatingPhase is GUEST_MODE_OWNING and businessPersona is OWNING", () => {
@@ -161,13 +169,15 @@ describe("dashboard page", () => {
     });
     renderStatefulDashboardComponent(business);
     expect(currentBusiness().preferences.visibleSidebarCards).toContain(
-      SIDEBAR_CARDS.notRegisteredUpAndRunning
+      SIDEBAR_CARDS.notRegisteredUpAndRunning,
     );
   });
 
   describe("phase newly changed indicator", () => {
     it("shows no indicator on desktop", () => {
-      const business = generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: true }) });
+      const business = generateBusiness({
+        preferences: generatePreferences({ phaseNewlyChanged: true }),
+      });
       useMockBusiness(business);
       renderDashboardPage();
       expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
@@ -187,7 +197,9 @@ describe("dashboard page", () => {
     });
 
     it("does not update userData when phaseNewlyChanged is false in desktop mode", async () => {
-      const business = generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: false }) });
+      const business = generateBusiness({
+        preferences: generatePreferences({ phaseNewlyChanged: false }),
+      });
       useMockBusiness(business);
       renderDashboardPage();
       expect(userDataWasNotUpdated()).toBe(true);

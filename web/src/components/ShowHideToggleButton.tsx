@@ -2,8 +2,10 @@ import { ButtonIcon } from "@/components/ButtonIcon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ReactElement } from "react";
 
+export type ShowHideStatus = "text-view" | "password-view";
+
 interface Props {
-  status: "text-view" | "password-view";
+  status: ShowHideStatus;
   toggle: () => Promise<void>;
   hideText: string;
   showText: string;
@@ -32,7 +34,9 @@ export const ShowHideToggleButton = ({
   return (
     <UnStyledButton className="padding-x-1 width-100" onClick={toggle}>
       <ButtonIcon svgFilename={status === "text-view" ? "hide" : "show"} />
-      <span className="underline">{status === "text-view" ? hideButtonText() : showButtonText()}</span>
+      <span className="underline">
+        {status === "text-view" ? hideButtonText() : showButtonText()}
+      </span>
     </UnStyledButton>
   );
 };

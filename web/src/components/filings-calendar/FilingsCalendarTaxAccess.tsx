@@ -77,7 +77,10 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         );
       } else if (isBeforeTheFollowingSaturday(business.taxFilingData.registeredISO)) {
         return (
-          <div className="tax-calendar-upper-widget-container" data-testid="alert-content-container">
+          <div
+            className="tax-calendar-upper-widget-container"
+            data-testid="alert-content-container"
+          >
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
               <Content>{Config.taxCalendar.registrationFollowUpCopyMarkdown}</Content>
             </div>

@@ -13,14 +13,18 @@ const debug = false;
 export const useFormContextHelper = <
   T extends ReducedFieldStates<keyof T, FieldError>,
   Tab = unknown,
-  FieldError = Exclude<T[keyof T]["errorTypes"], undefined>[number]
+  FieldError = Exclude<T[keyof T]["errorTypes"], undefined>[number],
 >(
   initState: T,
-  initTab?: Tab
+  initTab?: Tab,
 ): {
   FormFuncWrapper: (
     onSubmitFunc: () => void | Promise<void>,
-    onChangeFunc?: (isValid: boolean, errors: FieldError[], pageChange: boolean) => void | Promise<void>
+    onChangeFunc?: (
+      isValid: boolean,
+      errors: FieldError[],
+      pageChange: boolean,
+    ) => void | Promise<void>,
   ) => void;
   onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
   onTabChange: (tab: Tab) => void;
@@ -86,12 +90,17 @@ export const useFormContextHelper = <
     }
   };
 
-  const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(fieldStatesReducer, initState);
+  const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(
+    fieldStatesReducer,
+    initState,
+  );
   debug && console.log(fieldStates);
 
   const getErrors = (): FieldError[] =>
     Object.values(fieldStates)
-      .filter((k) => (k as FieldStatus<FieldError>).invalid && (k as FieldStatus<FieldError>).updated)
+      .filter(
+        (k) => (k as FieldStatus<FieldError>).invalid && (k as FieldStatus<FieldError>).updated,
+      )
       .flatMap((k) => (k as FieldStatus<FieldError>).errorTypes ?? []);
 
   const getInvalidFieldIds = (): string[] => {
@@ -102,7 +111,11 @@ export const useFormContextHelper = <
 
   const FormFuncWrapper: (
     onSubmitFunc: () => void | Promise<void>,
-    onChangeFunc?: (isValid: boolean, errors: FieldError[], pageChange: boolean) => void | Promise<void>
+    onChangeFunc?: (
+      isValid: boolean,
+      errors: FieldError[],
+      pageChange: boolean,
+    ) => void | Promise<void>,
   ) => void = (onSubmitFunc, onChangeFunc) => {
     debug && console.log("wrapper");
 
@@ -110,7 +123,7 @@ export const useFormContextHelper = <
       debug && console.log("submitEffect");
 
       const stillNeedsUpdates = Object.values(fieldStates).some(
-        (k) => (k as FieldStatus<FieldErrorType>).updated === false
+        (k) => (k as FieldStatus<FieldErrorType>).updated === false,
       );
 
       debug && console.log("submitwrapper");
@@ -153,7 +166,7 @@ export const useFormContextHelper = <
       event?.preventDefault();
       !submitted && setSubmitted(true);
     },
-    [submitted]
+    [submitted],
   );
 
   const onTabChange = useCallback(
@@ -162,13 +175,14 @@ export const useFormContextHelper = <
       debug && console.log(_tab);
       if (JSON.stringify(_tab) !== JSON.stringify(tab)) setStagingTab(_tab);
     },
-    [tab]
+    [tab],
   );
 
   const isValid = (): boolean => {
     debug && console.log("form is valid");
     const thing = !Object.values(fieldStates).some(
-      (k) => (k as FieldStatus<FieldErrorType>).invalid && (k as FieldStatus<FieldErrorType>).updated
+      (k) =>
+        (k as FieldStatus<FieldErrorType>).invalid && (k as FieldStatus<FieldErrorType>).updated,
     );
     return thing;
   };

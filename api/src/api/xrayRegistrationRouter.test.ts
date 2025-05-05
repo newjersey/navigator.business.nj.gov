@@ -2,7 +2,11 @@ import { getSignedInUserId } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import type { FacilityDetails } from "@businessnjgovnavigator/shared";
 import { setupExpress } from "@libs/express";
-import { generateBusiness, generateUserDataForBusiness, generateXrayRegistrationData } from "@shared/test";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+  generateXrayRegistrationData,
+} from "@shared/test";
 import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import type { DatabaseClient } from "src/domain/types";
@@ -58,7 +62,7 @@ describe("xrayRegistrationRouter", () => {
         xrayRegistrationData: generateXrayRegistrationData({
           facilityDetails,
         }),
-      })
+      }),
     );
 
     stubUpdateXrayRegistration.mockResolvedValue(userData);

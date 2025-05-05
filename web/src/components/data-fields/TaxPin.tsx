@@ -16,11 +16,12 @@ export const TaxPin = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxPin"]["default"] = getProfileConfig({
-    config: Config,
-    persona: state.flow,
-    fieldName: fieldName,
-  });
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxPin"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: fieldName,
+    });
 
   return (
     <>

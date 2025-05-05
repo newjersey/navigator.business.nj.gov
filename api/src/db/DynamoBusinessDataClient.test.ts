@@ -54,7 +54,7 @@ describe("DynamoBusinessesDataClient", () => {
     const randomBusinessId = `business-id-${randomInt()}`;
 
     await expect(dynamoBusinessesDataClient.get(randomBusinessId)).rejects.toEqual(
-      new Error(`Business with ID ${randomBusinessId} not found in table ${dbConfig.tableName}`)
+      new Error(`Business with ID ${randomBusinessId} not found in table ${dbConfig.tableName}`),
     );
   });
 
@@ -68,7 +68,7 @@ describe("DynamoBusinessesDataClient", () => {
 
   it("should return undefined for a non-existent business name", async () => {
     expect(
-      await dynamoBusinessesDataClient.findByBusinessName(`some-business-name-${randomInt()}`)
+      await dynamoBusinessesDataClient.findByBusinessName(`some-business-name-${randomInt()}`),
     ).toBeUndefined();
   });
 
@@ -117,7 +117,9 @@ describe("DynamoBusinessesDataClient", () => {
 
   it("should return undefined for a non-existent encrypted tax ID", async () => {
     const randomEncryptedTaxId = `some-encryptedId-${randomInt()}`;
-    expect(await dynamoBusinessesDataClient.findByEncryptedTaxId(randomEncryptedTaxId)).toBeUndefined();
+    expect(
+      await dynamoBusinessesDataClient.findByEncryptedTaxId(randomEncryptedTaxId),
+    ).toBeUndefined();
   });
 
   it("finds a business by the encryptedId", async () => {
@@ -137,7 +139,7 @@ describe("DynamoBusinessesDataClient", () => {
 
     await dynamoBusinessesDataClient.deleteBusinessById(businessId);
     await expect(dynamoBusinessesDataClient.get(businessId)).rejects.toEqual(
-      new Error(`Business with ID ${businessId} not found in table ${dbConfig.tableName}`)
+      new Error(`Business with ID ${businessId} not found in table ${dbConfig.tableName}`),
     );
   });
 });

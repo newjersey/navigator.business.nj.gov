@@ -5,7 +5,13 @@ import fs from "fs";
 import path from "path";
 
 type PathParams<P> = { params: P; locale?: string };
-const anytimeActionsTaskDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-tasks");
+const anytimeActionsTaskDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "anytime-action-tasks",
+);
 
 export type AnytimeActionTaskUrlSlugParam = {
   anytimeActionTaskUrlSlug: string;

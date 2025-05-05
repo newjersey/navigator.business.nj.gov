@@ -37,7 +37,7 @@ const colors = {
 
 export const PrimaryButton = forwardRef(function PrimaryButton(
   props: Props,
-  ref: Ref<HTMLButtonElement>
+  ref: Ref<HTMLButtonElement>,
 ): ReactElement {
   return <GenericButton {...props} className={`${colors[props.isColor]}`} ref={ref} />;
 });

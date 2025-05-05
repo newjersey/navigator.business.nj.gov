@@ -151,13 +151,17 @@ describe("profile - owning existing business", () => {
     selectByText("Location", randomMunicipality.displayName);
     selectByValue("Ownership", "veteran-owned");
     selectByValue("Ownership", "woman-owned");
+
+    chooseTab("permits");
     chooseRadio("home-based-business-radio-true");
+
     chooseTab("numbers");
     fillText("Employer id", "02-3456780");
     fillText("Entity id", "0234567890");
     fillText("Tax id", "023456790");
     fillText("Tax id location", "123");
     fillText("Tax pin", "6666");
+
     chooseTab("notes");
     fillText("Notes", "whats appppppp", "textarea");
     clickSave();
@@ -168,7 +172,12 @@ describe("profile - owning existing business", () => {
     expect(currentBusiness()).toEqual({
       ...business,
       onboardingFormProgress: "COMPLETED",
-      taxFilingData: { ...business.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
+      taxFilingData: {
+        ...business.taxFilingData,
+        state: undefined,
+        filings: [],
+        registeredISO: undefined,
+      },
       profileData: {
         ...business.profileData,
         businessName: "Cool Computers",
@@ -231,9 +240,10 @@ describe("profile - owning existing business", () => {
     expect(getMunicipalityValue()).toEqual(randomMunicipality.displayName);
     expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
     expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
-    expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
     expect(getExistingEmployeesValue()).toEqual("123");
     expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
+    chooseTab("permits");
+    expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
     chooseTab("numbers");
     expect(getEmployerIdValue()).toEqual("12-3456789");
     expect(getEntityIdValue()).toEqual("1234567890");
@@ -250,14 +260,14 @@ describe("profile - owning existing business", () => {
     fillText("Tax pin", "");
     fireEvent.blur(screen.getByLabelText("Tax pin"));
     expect(
-      screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
+      screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired),
     ).not.toBeInTheDocument();
 
     fillText("Tax pin", "123");
     fireEvent.blur(screen.getByLabelText("Tax pin"));
     await waitFor(() => {
       expect(
-        screen.getByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired),
       ).toBeInTheDocument();
     });
 
@@ -265,7 +275,7 @@ describe("profile - owning existing business", () => {
     fireEvent.blur(screen.getByLabelText("Tax pin"));
     await waitFor(() => {
       expect(
-        screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired),
       ).not.toBeInTheDocument();
     });
   });
@@ -280,8 +290,8 @@ describe("profile - owning existing business", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
-        )
+          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" }),
+        ),
       ).toBeInTheDocument();
     });
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -300,7 +310,7 @@ describe("profile - owning existing business", () => {
     clickSave();
     await waitFor(() => {
       expect(
-        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -331,7 +341,16 @@ describe("profile - owning existing business", () => {
 
   it("displays business info tab", () => {
     renderPage({ business });
-    expect(screen.getByTestId("info")).toBeInTheDocument();
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabInfoTitle }),
+    ).toBeInTheDocument();
+  });
+
+  it("displays permits tab", () => {
+    renderPage({ business });
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabPermitsTitle }),
+    ).toBeInTheDocument();
   });
 
   it("displays date of formation input for public filing businesses", () => {
@@ -457,7 +476,7 @@ describe("profile - owning existing business", () => {
       });
       renderPage({ business });
       expect(
-        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header),
       ).toBeInTheDocument();
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
     });
@@ -479,7 +498,7 @@ describe("profile - owning existing business", () => {
         expect(profileAlert).toBeInTheDocument();
       });
       expect(
-        within(profileAlert).getByText(Config.profileDefaults.fields.sectorId.default.header)
+        within(profileAlert).getByText(Config.profileDefaults.fields.sectorId.default.header),
       ).toBeInTheDocument();
     });
 
@@ -505,14 +524,16 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressLine1.label),
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
         ).not.toBeInTheDocument();
-        expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(Config.formation.fields.addressCity.label),
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
         ).toBeInTheDocument();
       });
 
@@ -538,16 +559,16 @@ describe("profile - owning existing business", () => {
         });
 
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressZipCode.label),
         ).not.toBeInTheDocument();
       });
 
@@ -573,16 +594,16 @@ describe("profile - owning existing business", () => {
         });
 
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
         ).toBeInTheDocument();
       });
 
@@ -602,7 +623,9 @@ describe("profile - owning existing business", () => {
         renderPage({ business, municipalities: [randomMunicipality] });
 
         selectByText("Address municipality", randomMunicipality.displayName);
-        expect(screen.getByLabelText("Address municipality")).toHaveValue(randomMunicipality.displayName);
+        expect(screen.getByLabelText("Address municipality")).toHaveValue(
+          randomMunicipality.displayName,
+        );
         fireEvent.blur(screen.getByLabelText("Address municipality"));
 
         clickSave();
@@ -612,16 +635,16 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressMunicipality.label),
         ).not.toBeInTheDocument();
       });
 
@@ -647,14 +670,16 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
         ).not.toBeInTheDocument();
-        expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(Config.formation.fields.addressCity.label),
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
         ).toBeInTheDocument();
       });
 
@@ -680,16 +705,16 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label),
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
         ).toBeInTheDocument();
       });
 
@@ -715,16 +740,16 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).getByText(Config.formation.fields.addressLine2.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label),
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label),
         ).toBeInTheDocument();
       });
     });
@@ -764,6 +789,7 @@ describe("profile - owning existing business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });
@@ -783,6 +809,7 @@ describe("profile - owning existing business", () => {
         }),
       });
       renderPage({ business });
+      chooseTab("permits");
 
       expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });

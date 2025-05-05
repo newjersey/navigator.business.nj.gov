@@ -89,7 +89,9 @@ export const Hero = (): ReactElement => {
             <div className="desktop:grid-col-5">
               <div
                 className={`${
-                  isDesktopAndUp ? "width-80 margin-top-15" : "maxw-tablet margin-auto margin-top-205"
+                  isDesktopAndUp
+                    ? "width-80 margin-top-15"
+                    : "maxw-tablet margin-auto margin-top-205"
                 } padding-x-4 tablet:padding-x-10 desktop:padding-x-0`}
               >
                 <img src="/img/Landing-Hero-people.png" alt="" />

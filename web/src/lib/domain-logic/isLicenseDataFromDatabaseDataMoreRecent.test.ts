@@ -1,5 +1,9 @@
 import { isLicenseDataFromDatabaseDataMoreRecent } from "@/lib/domain-logic/isLicenseDataFromDatabaseDataMoreRecent";
-import { generateBusiness, generateLicenseData, getCurrentDate } from "@businessnjgovnavigator/shared/";
+import {
+  generateBusiness,
+  generateLicenseData,
+  getCurrentDate,
+} from "@businessnjgovnavigator/shared/";
 
 const currentDate = getCurrentDate();
 const currentDateISOString = currentDate.toISOString();

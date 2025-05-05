@@ -17,7 +17,9 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const verticalHeight = document.getElementById(`vertical-content-${props.stepNumber}`)?.offsetHeight;
+  const verticalHeight = document.getElementById(
+    `vertical-content-${props.stepNumber}`,
+  )?.offsetHeight;
   const renderVerticalBar =
     (isTabletAndUp && sectionIsOpen && !props.miniRoadmap) ||
     (props.miniRoadmap && sectionIsOpen && (!props.last || props.miniRoadmapSubtaskisOpen));
@@ -50,7 +52,9 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
   useOnWindowResize(resizeVerticalBarToContent);
   return (
     <div className={`vertical-step-indicator`}>
-      <div className={`usa-step-indicator usa-step-indicator--counters usa-step-indicator__segments`}>
+      <div
+        className={`usa-step-indicator usa-step-indicator--counters usa-step-indicator__segments`}
+      >
         <div className="visually-hidden-centered">
           {props.completed ? `Completed step ${props.stepNumber}` : `Step ${props.stepNumber}`}
         </div>

@@ -23,13 +23,14 @@ export interface Payer {
   PhoneNumber: string | null;
   Email: string | null;
   Country: string;
+  ZipCode: string | null;
 }
 
 export interface PermitApplication {
   RequestorFirstName: string;
   RequestorLastName: string;
   RequestorEmail: string;
-  RequestorConfirmemail: string;
+  RequestorConfirmEmail: string;
   RequestorPhone: string;
   Carrier: string;
   RequestorAddress1: string;
@@ -73,7 +74,7 @@ export type ApiConfig = {
 
 export const getApiSubmissionBody = (
   applicationInfo: EmergencyTripPermitApplicationInfo,
-  config: ApiConfig
+  config: ApiConfig,
 ): ApiSubmission => {
   return {
     Account: config.account,
@@ -90,16 +91,17 @@ export const getApiSubmissionBody = (
       PhoneNumber: applicationInfo.payerPhoneNumber ?? "",
       Email: applicationInfo.payerEmail ?? "",
       Country: applicationInfo.payerCountry ?? "",
+      ZipCode: applicationInfo.payerZipCode ?? "",
     },
     PermitApplication: {
       RequestorFirstName: applicationInfo.requestorFirstName,
       RequestorLastName: applicationInfo.requestorLastName,
       RequestorEmail: applicationInfo.requestorEmail,
-      RequestorConfirmemail: applicationInfo.requestorConfirmemail,
+      RequestorConfirmEmail: applicationInfo.requestorEmail,
       RequestorPhone: applicationInfo.requestorPhone,
       Carrier: applicationInfo.carrier,
       RequestorAddress1: applicationInfo.requestorAddress1,
-      RequestAddress2: applicationInfo.requestAddress2 ?? null,
+      RequestAddress2: applicationInfo.requestorAddress2 ?? null,
       RequestorCity: applicationInfo.requestorCity,
       RequestorCountry: applicationInfo.requestorCountry,
       RequestorStateProvince: applicationInfo.requestorStateProvince,
@@ -125,16 +127,18 @@ export const getApiSubmissionBody = (
       PickupCountry: applicationInfo.pickupCountry,
       PickupZipPostalCode: applicationInfo.pickupZipPostalCode,
       AdditionalEmail: applicationInfo.additionalEmail ?? null,
-      AdditionalConfirmemail: applicationInfo.additionalConfirmemail ?? null,
-      TextMsg: applicationInfo.textMsg,
+      AdditionalConfirmemail: applicationInfo.additionalEmail ?? null,
+      TextMsg: applicationInfo.shouldSendTextConfirmation ? "1" : "0",
       TextMsgMobile: applicationInfo.textMsgMobile ?? null,
-      PdfAttach: applicationInfo.pdfAttach,
+      PdfAttach: applicationInfo.shouldAttachPdfToEmail ? "1" : "0",
     },
     ReturnUrl: null,
   };
 };
 
-export const generateSampleAPISubmissionBody = (overrides: Partial<ApiSubmission>): ApiSubmission => {
+export const generateSampleAPISubmissionBody = (
+  overrides: Partial<ApiSubmission>,
+): ApiSubmission => {
   return {
     Account: "",
     Key: "",
@@ -146,7 +150,7 @@ export const generateSampleAPISubmissionBody = (overrides: Partial<ApiSubmission
       RequestorFirstName: "John",
       RequestorLastName: "Smith",
       RequestorEmail: "j.smith@yahoo.com",
-      RequestorConfirmemail: "j.smith@yahoo.com",
+      RequestorConfirmEmail: "j.smith@yahoo.com",
       RequestorPhone: "888-555-1212",
       Carrier: "Cardinal",
       RequestorAddress1: "110 Main Street",

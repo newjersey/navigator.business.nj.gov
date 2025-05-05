@@ -11,7 +11,9 @@ export const ActionBarLayout = (props: Props): ReactElement => {
   return (
     <div
       className={`mobile-lg:display-flex ${
-        props.stackOnLeft || props.alignLeft ? "mobile-lg:flex-justify" : "mobile-lg:flex-justify-end"
+        props.stackOnLeft || props.alignLeft
+          ? "mobile-lg:flex-justify"
+          : "mobile-lg:flex-justify-end"
       } `}
     >
       {props.stackOnLeft && (
@@ -21,7 +23,9 @@ export const ActionBarLayout = (props: Props): ReactElement => {
       {props.disableReverseOrderInMobile ? (
         <>{props.children}</>
       ) : (
-        <ReverseOrderInMobile className="mobile-lg:flex-justify-end">{props.children}</ReverseOrderInMobile>
+        <ReverseOrderInMobile className="mobile-lg:flex-justify-end">
+          {props.children}
+        </ReverseOrderInMobile>
       )}
     </div>
   );

@@ -27,7 +27,7 @@ describe("getAnnualFilings", () => {
         taxFilingData: generateTaxFilingData({
           filings: [],
         }),
-      })
+      }),
     );
 
     const response = getAnnualFilings(postedUserData);
@@ -55,9 +55,11 @@ describe("getAnnualFilings", () => {
           legalStructureId: "limited-liability-company",
         }),
         taxFilingData: generateTaxFilingData({
-          filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })],
+          filings: [
+            generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }),
+          ],
         }),
-      })
+      }),
     );
 
     const response = getAnnualFilings(postedUserData);
@@ -87,7 +89,7 @@ describe("getAnnualFilings", () => {
         taxFilingData: generateTaxFilingData({
           filings: [],
         }),
-      })
+      }),
     );
 
     const response = getAnnualFilings(postedUserData);
@@ -115,9 +117,11 @@ describe("getAnnualFilings", () => {
           legalStructureId: "sole-proprietorship",
         }),
         taxFilingData: generateTaxFilingData({
-          filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })],
+          filings: [
+            generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }),
+          ],
         }),
-      })
+      }),
     );
 
     const response = getAnnualFilings(postedUserData);

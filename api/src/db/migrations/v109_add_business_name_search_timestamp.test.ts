@@ -16,7 +16,7 @@ describe("migrate_v108_to_v109", () => {
             },
           },
         },
-        "LLC"
+        "LLC",
       ),
     });
     const v109 = migrate_v108_to_v109(v108);

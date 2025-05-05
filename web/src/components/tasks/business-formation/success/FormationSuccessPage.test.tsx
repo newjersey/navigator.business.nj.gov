@@ -8,7 +8,10 @@ import {
   ProfileData,
   generateBusiness,
 } from "@businessnjgovnavigator/shared";
-import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+} from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useDocuments");
@@ -30,7 +33,7 @@ describe("Formation - <FormationSuccessPage />", () => {
 
   const renderSuccessPage = (
     overrides: Partial<GetFilingResponse>,
-    profileOverrides: Partial<ProfileData> = {}
+    profileOverrides: Partial<ProfileData> = {},
   ): void => {
     getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
     const profileData = generateFormationProfileData(profileOverrides);
@@ -39,7 +42,7 @@ describe("Formation - <FormationSuccessPage />", () => {
       profileData,
       formationData: generateFormationData(
         { getFilingResponse },
-        profileData.legalStructureId as FormationLegalType
+        profileData.legalStructureId as FormationLegalType,
       ),
     });
     render(<FormationSuccessPage business={business} />);
@@ -58,24 +61,26 @@ describe("Formation - <FormationSuccessPage />", () => {
     expect(screen.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
     expect(screen.getByTestId(Config.formation.successPage.formationDocLabel)).toHaveAttribute(
       "href",
-      "testForm.pdf"
+      "testForm.pdf",
     );
     expect(screen.getByTestId(Config.formation.successPage.standingDocLabel)).toHaveAttribute(
       "href",
-      "testStand.pdf"
+      "testStand.pdf",
     );
     expect(screen.getByTestId(Config.formation.successPage.certifiedDocLabel)).toHaveAttribute(
       "href",
-      "testCert.pdf"
+      "testCert.pdf",
     );
   });
 
   it("does not display documents when they are not present", () => {
     renderSuccessPage(
       { certifiedDoc: "" },
-      { documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" } }
+      { documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" } },
     );
-    expect(screen.queryByTestId(Config.formation.successPage.certifiedDocLabel)).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId(Config.formation.successPage.certifiedDocLabel),
+    ).not.toBeInTheDocument();
   });
 
   it("shows the survey link", () => {

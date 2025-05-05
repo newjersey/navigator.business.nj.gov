@@ -17,7 +17,9 @@ describe("<BusinessStructurePrompt />", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({
-      tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+      tasks: [
+        generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" }),
+      ],
     });
   });
 
@@ -46,7 +48,9 @@ describe("<BusinessStructurePrompt />", () => {
     });
     render(<BusinessStructurePrompt />);
     expect(screen.getByTestId("content-when-on-business-structure-task")).toBeInTheDocument();
-    expect(screen.queryByTestId("content-when-not-on-business-structure-task")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("content-when-not-on-business-structure-task"),
+    ).not.toBeInTheDocument();
   });
 
   it("routes user to business structure task page on button click", () => {

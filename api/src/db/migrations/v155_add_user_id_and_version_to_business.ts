@@ -10,7 +10,7 @@ export const migrate_v154_to_v155 = (v154Data: v154UserData): v155UserData => {
     businesses: Object.fromEntries(
       Object.values(v154Data.businesses)
         .map((business: v154Business) => migrate_v154Business_to_v155Business(business, v154Data))
-        .map((currBusiness: v155Business) => [currBusiness.id, currBusiness])
+        .map((currBusiness: v155Business) => [currBusiness.id, currBusiness]),
     ),
     version: 155,
   } as v155UserData;
@@ -18,7 +18,7 @@ export const migrate_v154_to_v155 = (v154Data: v154UserData): v155UserData => {
 
 export const migrate_v154Business_to_v155Business = (
   business: v154Business,
-  userData: v154UserData
+  userData: v154UserData,
 ): v155Business => {
   return {
     ...business,
@@ -629,7 +629,9 @@ export const generatev155UserData = (overrides: Partial<v155UserData>): v155User
   };
 };
 
-export const generatev155BusinessUser = (overrides: Partial<v155BusinessUser>): v155BusinessUser => {
+export const generatev155BusinessUser = (
+  overrides: Partial<v155BusinessUser>,
+): v155BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -720,7 +722,7 @@ export const generatev155ProfileData = (overrides: Partial<v155ProfileData>): v1
 };
 
 export const generatev155IndustrySpecificData = (
-  overrides: Partial<v155IndustrySpecificData>
+  overrides: Partial<v155IndustrySpecificData>,
 ): v155IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -770,7 +772,7 @@ export const generatev155Preferences = (overrides: Partial<v155Preferences>): v1
 
 export const generatev155FormationData = (
   overrides: Partial<v155FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v155FormationData => {
   return {
     formationFormData: generatev155FormationFormData({}, legalStructureId),
@@ -786,9 +788,11 @@ export const generatev155FormationData = (
 
 export const generatev155FormationFormData = (
   overrides: Partial<v155FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v155FormationFormData => {
-  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+  const isCorp = legalStructureId
+    ? ["s-corporation", "c-corporation"].includes(legalStructureId)
+    : false;
 
   return <v155FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
@@ -834,7 +838,8 @@ export const generatev155FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev155FormationMember({})],
+    members:
+      legalStructureId === "limited-liability-partnership" ? [] : [generatev155FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -857,7 +862,9 @@ export const generatev155FormationFormData = (
   };
 };
 
-export const generatev155Municipality = (overrides: Partial<v155Municipality>): v155Municipality => {
+export const generatev155Municipality = (
+  overrides: Partial<v155Municipality>,
+): v155Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -867,7 +874,9 @@ export const generatev155Municipality = (overrides: Partial<v155Municipality>): 
   };
 };
 
-export const generatev155FormationMember = (overrides: Partial<v155FormationMember>): v155FormationMember => {
+export const generatev155FormationMember = (
+  overrides: Partial<v155FormationMember>,
+): v155FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -881,7 +890,9 @@ export const generatev155FormationMember = (overrides: Partial<v155FormationMemb
   };
 };
 
-export const generatev155TaxFilingData = (overrides: Partial<v155TaxFilingData>): v155TaxFilingData => {
+export const generatev155TaxFilingData = (
+  overrides: Partial<v155TaxFilingData>,
+): v155TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -893,7 +904,9 @@ export const generatev155TaxFilingData = (overrides: Partial<v155TaxFilingData>)
   };
 };
 
-export const generatev155LicenseDetails = (overrides: Partial<v155LicenseDetails>): v155LicenseDetails => {
+export const generatev155LicenseDetails = (
+  overrides: Partial<v155LicenseDetails>,
+): v155LicenseDetails => {
   return {
     nameAndAddress: generatev155LicenseSearchNameAndAddress({}),
     licenseStatus: getRandomv155LicenseStatus(),
@@ -905,7 +918,7 @@ export const generatev155LicenseDetails = (overrides: Partial<v155LicenseDetails
 };
 
 const generatev155LicenseSearchNameAndAddress = (
-  overrides: Partial<v155LicenseSearchNameAndAddress>
+  overrides: Partial<v155LicenseSearchNameAndAddress>,
 ): v155LicenseSearchNameAndAddress => {
   return {
     name: `some-name`,

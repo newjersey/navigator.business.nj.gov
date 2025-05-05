@@ -12,7 +12,11 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCalendarEvents";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
+import {
+  FilingUrlSlugParam,
+  loadAllFilingUrlSlugs,
+  loadFilingByUrlSlug,
+} from "@/lib/static/loadFilings";
 import { Filing, TaxFilingMethod } from "@/lib/types/types";
 import {
   defaultDateFormat,
@@ -51,15 +55,22 @@ export const FilingElement = (props: {
                 <h1>{props.filing.name}</h1>
               </div>
               <div className="display-inline-flex ">
-                <span className="text-bold">{Config.filingDefaults.beforeDueDateText.toUpperCase()}</span>{" "}
+                <span className="text-bold">
+                  {Config.filingDefaults.beforeDueDateText.toUpperCase()}
+                </span>{" "}
                 &nbsp;{" "}
                 <span data-testid="due-date">
-                  {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
+                  {parseDateWithFormat(props.dueDate, defaultDateFormat)
+                    .format("MMMM D, YYYY")
+                    .toUpperCase()}
                 </span>
                 {props.filing.urlSlug === "annual-report" ? (
                   <div className="margin-left-1 margin-bottom-05">
                     <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
-                      <div className="fdr fac font-body-lg text-green" data-testid="due-date-tooltip">
+                      <div
+                        className="fdr fac font-body-lg text-green"
+                        data-testid="due-date-tooltip"
+                      >
                         <Icon iconName="help_outline" />
                       </div>
                     </ArrowTooltip>
@@ -69,7 +80,11 @@ export const FilingElement = (props: {
                 )}
                 {props.filing.extension && (
                   <div className="margin-left-4">
-                    <Tag backgroundColor="accent-cooler-lightest" data-testid="extension" isLowerCase>
+                    <Tag
+                      backgroundColor="accent-cooler-lightest"
+                      data-testid="extension"
+                      isLowerCase
+                    >
                       {Config.filingDefaults.extensionTagText}
                     </Tag>
                   </div>
@@ -112,9 +127,9 @@ export const FilingElement = (props: {
                   alt=""
                 />
                 <span className="flex flex-column margin-top-1">
-                  <Content className="flex">{`**${Config.filingDefaults.filingMethod}** &nbsp;&nbsp;${
-                    taxFilingMethodMap[props.filing.filingMethod]
-                  }`}</Content>
+                  <Content className="flex">{`**${
+                    Config.filingDefaults.filingMethod
+                  }** &nbsp;&nbsp;${taxFilingMethodMap[props.filing.filingMethod]}`}</Content>
                   {props.filing.filingDetails && (
                     <>
                       {" "}
@@ -150,9 +165,15 @@ export const FilingElement = (props: {
 
         {props.filing.additionalInfo ? (
           <>
-            <Accordion data-testid="additional-info" defaultExpanded={props.preview} className="margin-top-2">
+            <Accordion
+              data-testid="additional-info"
+              defaultExpanded={props.preview}
+              className="margin-top-2"
+            >
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />}
+                expandIcon={
+                  <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />
+                }
                 aria-controls={`${Config.filingDefaults.additionalInfo
                   .toLowerCase()
                   .replaceAll(" ", "-")}-content`}
@@ -199,9 +220,9 @@ export const FilingElement = (props: {
 
 const FilingPage = (props: Props): ReactElement => {
   const { business } = useUserData();
-  const matchingFiling = sortCalendarEventsEarliestToLatest(business?.taxFilingData.filings ?? []).find(
-    (it: TaxFilingCalendarEvent) => it.identifier === props.filing.id
-  );
+  const matchingFiling = sortCalendarEventsEarliestToLatest(
+    business?.taxFilingData.filings ?? [],
+  ).find((it: TaxFilingCalendarEvent) => it.identifier === props.filing.id);
 
   return (
     <>
@@ -223,7 +244,11 @@ export const getStaticPaths = (): GetStaticPathsResult<FilingUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: FilingUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = ({
+  params,
+}: {
+  params: FilingUrlSlugParam;
+}): GetStaticPropsResult<Props> => {
   return {
     props: {
       filing: loadFilingByUrlSlug(params.filingUrlSlug),

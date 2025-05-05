@@ -90,12 +90,14 @@ export const isIndustryIdGeneric = (industry: Industry): boolean => {
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export const getIndustries = (props?: { overrideShowDisabledIndustries?: boolean }): Industry[] =>
-  orderBy(industryJson.industries as Industry[], [isIndustryIdGeneric, "name"], ["desc", "asc"]).filter(
-    (x) => {
-      return (
-        x.isEnabled ||
-        props?.overrideShowDisabledIndustries ||
-        process.env.SHOW_DISABLED_INDUSTRIES === "true"
-      );
-    }
-  );
+  orderBy(
+    industryJson.industries as Industry[],
+    [isIndustryIdGeneric, "name"],
+    ["desc", "asc"],
+  ).filter((x) => {
+    return (
+      x.isEnabled ||
+      props?.overrideShowDisabledIndustries ||
+      process.env.SHOW_DISABLED_INDUSTRIES === "true"
+    );
+  });

@@ -262,7 +262,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
 
   const expectLocationSpecificContentInTask = (townDisplayName: string): void => {
     cy.get('[data-testid="deferred-location-task"]').find(".usa-link").should("have.length", 2);
-    cy.get('[data-testid="deferred-location-task"] .usa-link').first().should("contain", townDisplayName);
+    cy.get('[data-testid="deferred-location-task"] .usa-link')
+      .first()
+      .should("contain", townDisplayName);
   };
 
   const navigateBackToDashboard = (): void => {

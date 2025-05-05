@@ -36,15 +36,21 @@ const CannabisPriorityStatusPreview = (props: PreviewProps): ReactElement => {
             <Heading level={2}>Priority Status Types</Heading>
 
             <Alert variant="info">
-              <Content>{templateEval(config.cannabisPriorityStatus.phrase1, priorityStatusTypes)}</Content>
+              <Content>
+                {templateEval(config.cannabisPriorityStatus.phrase1, priorityStatusTypes)}
+              </Content>
             </Alert>
 
             <Alert variant="info">
-              <Content>{templateEval(config.cannabisPriorityStatus.phrase2, priorityStatusTypes)}</Content>
+              <Content>
+                {templateEval(config.cannabisPriorityStatus.phrase2, priorityStatusTypes)}
+              </Content>
             </Alert>
 
             <Alert variant="info">
-              <Content>{templateEval(config.cannabisPriorityStatus.phrase3, priorityStatusTypes)}</Content>
+              <Content>
+                {templateEval(config.cannabisPriorityStatus.phrase3, priorityStatusTypes)}
+              </Content>
             </Alert>
           </>
         )}

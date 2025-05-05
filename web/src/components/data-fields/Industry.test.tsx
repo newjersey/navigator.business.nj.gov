@@ -10,7 +10,11 @@ import {
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { WithStatefulProfileData, currentProfileData } from "@/test/mock/withStatefulProfileData";
-import { filterRandomIndustry, generateProfileData, randomIndustry } from "@businessnjgovnavigator/shared";
+import {
+  filterRandomIndustry,
+  generateProfileData,
+  randomIndustry,
+} from "@businessnjgovnavigator/shared";
 import {
   ProfileData,
   createEmptyProfileData,
@@ -33,7 +37,7 @@ describe("<Industry />", () => {
     render(
       <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
         <Industry />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
   };
 
@@ -113,8 +117,10 @@ describe("<Industry />", () => {
         const chooseRadioWithContent = (div: HTMLElement, choice: string): void => {
           fireEvent.click(
             within(div).getByText(
-              fieldContent[`radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`]
-            )
+              fieldContent[
+                `radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`
+              ],
+            ),
           );
         };
 
@@ -125,27 +131,29 @@ describe("<Industry />", () => {
           };
           renderComponent(profileData);
           expect(
-            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)
+            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
           ).not.toBeInTheDocument();
 
           selectIndustry(validIndustryId.id);
-          expect(screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)).toContainHTML(
+          expect(
+            screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
+          ).toContainHTML(
             renderToStaticMarkup(
               Content({
                 children: fieldContent.description,
-              })
-            )
+              }),
+            ),
           );
           choices.map((choice) => {
             chooseRadioWithContent(
               screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
-              choice.toString()
+              choice.toString(),
             );
             expect(currentProfileData()[el.fieldName]).toEqual(choice);
           });
           selectIndustry("generic");
           expect(
-            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)
+            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
           ).not.toBeInTheDocument();
         });
 
@@ -163,27 +171,33 @@ describe("<Industry />", () => {
           });
           chooseRadioWithContent(
             screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
-            nonDefaultChoice?.toString() ?? ""
+            nonDefaultChoice?.toString() ?? "",
           );
           expect(currentProfileData()[el.fieldName]).toEqual(nonDefaultChoice);
           selectIndustry("generic");
-          expect(currentProfileData()[el.fieldName]).toEqual(emptyIndustrySpecificData[el.fieldName]);
+          expect(currentProfileData()[el.fieldName]).toEqual(
+            emptyIndustrySpecificData[el.fieldName],
+          );
         });
 
         it(`displays FieldLabelProfile for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is false for ${el.fieldName}`, () => {
           render(
-            <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
+            <WithStatefulProfileData
+              initialData={generateProfileData({ industryId: validIndustryId.id })}
+            >
               <Industry onboardingFieldLabel={false} />
-            </WithStatefulProfileData>
+            </WithStatefulProfileData>,
           );
           expect(screen.getAllByTestId("FieldLabelProfile")[0]).toBeInTheDocument();
         });
 
         it(`displays FieldLabelOnboarding for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is true for ${el.fieldName}`, () => {
           render(
-            <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
+            <WithStatefulProfileData
+              initialData={generateProfileData({ industryId: validIndustryId.id })}
+            >
               <Industry onboardingFieldLabel={true} />
-            </WithStatefulProfileData>
+            </WithStatefulProfileData>,
           );
           expect(screen.getAllByTestId("FieldLabelOnboarding")[0]).toBeInTheDocument();
         });
@@ -196,26 +210,32 @@ describe("<Industry />", () => {
         selectIndustry("commercial-construction");
         expect(currentProfileData().constructionType).toEqual(undefined);
         expect(
-          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+          screen.getByTestId("industry-specific-commercial-construction-constructionType"),
         ).toBeInTheDocument();
         expect(
-          screen.queryByTestId("industry-specific-commercial-construction-residentialConstructionType")
+          screen.queryByTestId(
+            "industry-specific-commercial-construction-residentialConstructionType",
+          ),
         ).not.toBeInTheDocument();
 
         fireEvent.click(screen.getByLabelText("Residential"));
         expect(
-          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+          screen.getByTestId("industry-specific-commercial-construction-constructionType"),
         ).toBeInTheDocument();
         expect(
-          screen.getByTestId("industry-specific-commercial-construction-residentialConstructionType")
+          screen.getByTestId(
+            "industry-specific-commercial-construction-residentialConstructionType",
+          ),
         ).toBeInTheDocument();
 
         fireEvent.click(screen.getByLabelText("Commercial or Industrial"));
         expect(
-          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+          screen.getByTestId("industry-specific-commercial-construction-constructionType"),
         ).toBeInTheDocument();
         expect(
-          screen.queryByTestId("industry-specific-commercial-construction-residentialConstructionType")
+          screen.queryByTestId(
+            "industry-specific-commercial-construction-residentialConstructionType",
+          ),
         ).not.toBeInTheDocument();
       });
 
@@ -225,10 +245,12 @@ describe("<Industry />", () => {
         expect(currentProfileData().constructionType).toEqual(undefined);
         expect(currentProfileData().residentialConstructionType).toEqual(undefined);
         expect(
-          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+          screen.getByTestId("industry-specific-commercial-construction-constructionType"),
         ).toBeInTheDocument();
         expect(
-          screen.queryByTestId("industry-specific-commercial-construction-residentialConstructionType")
+          screen.queryByTestId(
+            "industry-specific-commercial-construction-residentialConstructionType",
+          ),
         ).not.toBeInTheDocument();
 
         fireEvent.click(screen.getByLabelText("Residential"));
@@ -245,14 +267,14 @@ describe("<Industry />", () => {
         renderComponent();
         selectIndustry("employment-agency");
         expect(
-          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
+          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType"),
         ).toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toBe(undefined);
         expect(currentProfileData().employmentPlacementType).toBe(undefined);
 
         fireEvent.click(screen.getByLabelText("Employers"));
         expect(
-          screen.getByTestId("industry-specific-employment-agency-employmentPlacementType")
+          screen.getByTestId("industry-specific-employment-agency-employmentPlacementType"),
         ).toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toEqual("EMPLOYERS");
 
@@ -264,14 +286,14 @@ describe("<Industry />", () => {
         renderComponent();
         selectIndustry("employment-agency");
         expect(
-          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
+          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType"),
         ).toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toEqual(undefined);
         expect(currentProfileData().employmentPlacementType).toEqual(undefined);
 
         fireEvent.click(screen.getByLabelText("Job Seekers"));
         expect(
-          screen.queryByTestId("industry-specific-employment-agency-employmentPlacementType")
+          screen.queryByTestId("industry-specific-employment-agency-employmentPlacementType"),
         ).not.toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toEqual("JOB_SEEKERS");
         expect(currentProfileData().employmentPlacementType).toEqual(undefined);
@@ -281,7 +303,7 @@ describe("<Industry />", () => {
         renderComponent();
         selectIndustry("employment-agency");
         expect(
-          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
+          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType"),
         ).toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toEqual(undefined);
         expect(currentProfileData().employmentPlacementType).toEqual(undefined);
@@ -290,7 +312,7 @@ describe("<Industry />", () => {
         expect(currentProfileData().employmentPersonnelServiceType).toEqual("EMPLOYERS");
         expect(currentProfileData().employmentPlacementType).toBe(undefined);
         expect(
-          screen.getByTestId("industry-specific-employment-agency-employmentPlacementType")
+          screen.getByTestId("industry-specific-employment-agency-employmentPlacementType"),
         ).toBeInTheDocument();
         fireEvent.click(screen.getByLabelText("Temporary"));
         expect(currentProfileData().employmentPlacementType).toEqual("TEMPORARY");
@@ -305,34 +327,34 @@ describe("<Industry />", () => {
         selectIndustry("residential-landlord");
         expect(currentProfileData().propertyLeaseType).toEqual(undefined);
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType"),
         ).toBeInTheDocument();
         expect(
-          screen.queryByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+          screen.queryByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits"),
         ).not.toBeInTheDocument();
 
         fireEvent.click(screen.getByLabelText("Long Term"));
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType"),
         ).toBeInTheDocument();
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits"),
         ).toBeInTheDocument();
 
         fireEvent.click(screen.getByLabelText("Both"));
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType"),
         ).toBeInTheDocument();
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits"),
         ).toBeInTheDocument();
 
         fireEvent.click(screen.getByLabelText("Short Term"));
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType"),
         ).toBeInTheDocument();
         expect(
-          screen.queryByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+          screen.queryByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits"),
         ).not.toBeInTheDocument();
       });
 
@@ -340,7 +362,7 @@ describe("<Industry />", () => {
         renderComponent();
         selectIndustry("residential-landlord");
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType"),
         ).toBeInTheDocument();
         expect(currentProfileData().propertyLeaseType).toEqual(undefined);
         expect(currentProfileData().hasThreeOrMoreRentalUnits).toEqual(undefined);
@@ -349,7 +371,7 @@ describe("<Industry />", () => {
         expect(currentProfileData().propertyLeaseType).toEqual("LONG_TERM_RENTAL");
         expect(currentProfileData().hasThreeOrMoreRentalUnits).toBe(undefined);
         expect(
-          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits"),
         ).toBeInTheDocument();
         fireEvent.click(screen.getByLabelText("Yes"));
         expect(currentProfileData().hasThreeOrMoreRentalUnits).toEqual(true);

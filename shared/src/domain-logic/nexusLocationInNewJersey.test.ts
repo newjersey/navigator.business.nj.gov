@@ -5,20 +5,25 @@ describe("nexusLocationInNewJersey", () => {
   it("returns true when business is foreign, nexus, and contains officeInNJ in foreignBusinessTypesIds", () => {
     expect(
       nexusLocationInNewJersey(
-        generateProfileData({ businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] })
-      )
+        generateProfileData({ businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] }),
+      ),
     ).toBe(true);
   });
 
   it("returns undefined when business is not foreign", () => {
-    expect(nexusLocationInNewJersey(generateProfileData({ businessPersona: "STARTING" }))).toBe(undefined);
+    expect(nexusLocationInNewJersey(generateProfileData({ businessPersona: "STARTING" }))).toBe(
+      undefined,
+    );
   });
 
   it("returns false when business is not nexus", () => {
     expect(
       nexusLocationInNewJersey(
-        generateProfileData({ businessPersona: "FOREIGN", foreignBusinessTypeIds: ["revenueInNJ"] })
-      )
+        generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessTypeIds: ["revenueInNJ"],
+        }),
+      ),
     ).toBe(false);
   });
 
@@ -28,8 +33,8 @@ describe("nexusLocationInNewJersey", () => {
         generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-        })
-      )
+        }),
+      ),
     ).toBe(false);
   });
 });

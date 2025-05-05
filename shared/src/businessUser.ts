@@ -67,7 +67,12 @@ export interface UserTestingResponse {
 
 export type NewsletterStatus = (typeof newsletterStatusList)[number];
 
-export const externalStatusList = ["SUCCESS", "IN_PROGRESS", "RESPONSE_ERROR", "CONNECTION_ERROR"] as const;
+export const externalStatusList = [
+  "SUCCESS",
+  "IN_PROGRESS",
+  "RESPONSE_ERROR",
+  "CONNECTION_ERROR",
+] as const;
 
 export const userTestingStatusList = [...externalStatusList] as const;
 

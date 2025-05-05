@@ -4,6 +4,7 @@ import { TaxFilingCalendarEvent } from "../calendarEvent";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
+import { EmergencyTripPermitApplicationInfo, getEarliestPermitDate } from "../emergencyTripPermit";
 import {
   AirData,
   AirQuestionnaireData,
@@ -23,7 +24,7 @@ import {
   publicFilingLegalTypes,
 } from "../formationData";
 import { getIndustries, Industry } from "../industry";
-import { randomInt } from "../intHelpers";
+import { randomInt, randomIntFromInterval } from "../intHelpers";
 import { LegalStructure, LegalStructures } from "../legalStructure";
 import {
   LicenseData,
@@ -40,14 +41,17 @@ import { OperatingPhaseId } from "../operatingPhase";
 import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { StateObject, arrayOfStateObjects as states } from "../states";
-import { taxClearanceCertificateAgencies, TaxClearanceCertificateData } from "../taxClearanceCertificate";
+import {
+  taxClearanceCertificateAgencies,
+  TaxClearanceCertificateData,
+} from "../taxClearanceCertificate";
 import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { XrayData, XrayRegistrationStatus } from "../xray";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
-  overrides: Partial<FormationSubmitResponse>
+  overrides: Partial<FormationSubmitResponse>,
 ): FormationSubmitResponse => {
   return {
     success: !!(randomInt() % 2),
@@ -60,7 +64,9 @@ export const generateFormationSubmitResponse = (
   };
 };
 
-export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>): GetFilingResponse => {
+export const generateGetFilingResponse = (
+  overrides: Partial<GetFilingResponse>,
+): GetFilingResponse => {
   return {
     success: true,
     entityId: `some-entity-${randomInt()}`,
@@ -75,7 +81,7 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
 
 export const generateFormationData = (
   overrides: Partial<FormationData>,
-  legalStructureId?: FormationLegalType
+  legalStructureId?: FormationLegalType,
 ): FormationData => {
   return {
     formationFormData: generateFormationFormData({}, { legalStructureId }),
@@ -111,7 +117,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
 };
 
 export const generateLicenseSearchNameAndAddress = (
-  overrides: Partial<LicenseSearchNameAndAddress>
+  overrides: Partial<LicenseSearchNameAndAddress>,
 ): LicenseSearchNameAndAddress => {
   return {
     name: `some-name-${randomInt()}`,
@@ -121,7 +127,7 @@ export const generateLicenseSearchNameAndAddress = (
 };
 
 export const generateLicenseSearchAddress = (
-  overrides: Partial<LicenseSearchAddress>
+  overrides: Partial<LicenseSearchAddress>,
 ): LicenseSearchAddress => {
   return {
     addressLine1: `some-address-1-${randomInt()}`,
@@ -132,7 +138,7 @@ export const generateLicenseSearchAddress = (
 };
 
 export const generateTaxIdAndBusinessName = (
-  overrides: Partial<TaxFilingLookUpRequest>
+  overrides: Partial<TaxFilingLookUpRequest>,
 ): TaxFilingLookUpRequest => {
   return {
     businessName: `some-name-${randomInt()}`,
@@ -142,7 +148,9 @@ export const generateTaxIdAndBusinessName = (
   };
 };
 
-export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
+export const generateLicenseStatusItem = (
+  overrides: Partial<LicenseStatusItem>,
+): LicenseStatusItem => {
   return {
     title: `some-title-${randomInt()}`,
     status: "ACTIVE",
@@ -151,7 +159,7 @@ export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>)
 };
 
 export const generateTaxFilingCalendarEvent = (
-  overrides: Partial<TaxFilingCalendarEvent>
+  overrides: Partial<TaxFilingCalendarEvent>,
 ): TaxFilingCalendarEvent => {
   return {
     identifier: `some-identifier-${randomInt()}`,
@@ -185,7 +193,7 @@ export const generateLicenseDetails = (overrides: Partial<LicenseDetails>): Lice
 
 export const generateLicenseData = (
   overrides: Partial<LicenseData>,
-  licensesOverrides?: Licenses
+  licensesOverrides?: Licenses,
 ): LicenseData => {
   return {
     licenses: {
@@ -231,7 +239,7 @@ export const randomIndustry = (canHavePermanentLocation = false): Industry => {
 
 export const generateIndustrySpecificData = (
   overrides: Partial<IndustrySpecificData>,
-  industry?: Industry
+  industry?: Industry,
 ): IndustrySpecificData => {
   const _industry = industry ?? randomIndustry();
   return {
@@ -243,7 +251,8 @@ export const generateIndustrySpecificData = (
     cannabisMicrobusiness: !(randomInt() % 2),
     constructionRenovationPlan: !(randomInt() % 2),
     providesStaffingService: !(randomInt() % 2),
-    certifiedInteriorDesigner: !!_industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
+    certifiedInteriorDesigner:
+      !!_industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
     realEstateAppraisalManagement: !(randomInt() % 2),
     carService: randomElementFromArray(["STANDARD", "HIGH_CAPACITY", "BOTH"]),
     interstateLogistics: !(randomInt() % 2),
@@ -270,7 +279,7 @@ export const generateIndustrySpecificData = (
 
 export const generateProfileData = (
   overrides: Partial<ProfileData>,
-  canHavePermanentLocation?: boolean
+  canHavePermanentLocation?: boolean,
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
   const persona: BusinessPersona = randomElementFromArray(["STARTING", "OWNING", "FOREIGN"]);
@@ -315,27 +324,27 @@ export const generateProfileData = (
 
 export const generateStartingProfileData = (
   overrides: Partial<ProfileData>,
-  canHavePermanentLocation?: boolean
+  canHavePermanentLocation?: boolean,
 ): ProfileData => {
   return generateProfileData(
     {
       ...overrides,
       businessPersona: "STARTING",
     },
-    canHavePermanentLocation
+    canHavePermanentLocation,
   );
 };
 
 export const generateOwningProfileData = (
   overrides: Partial<ProfileData>,
-  canHavePermanentLocation?: boolean
+  canHavePermanentLocation?: boolean,
 ): ProfileData => {
   return generateProfileData(
     {
       ...overrides,
       businessPersona: "OWNING",
     },
-    canHavePermanentLocation
+    canHavePermanentLocation,
   );
 };
 
@@ -380,7 +389,9 @@ export const generateUnitedStatesStateDropdownOption = ({
   if (excludeTerritories) {
     filteredStates = filteredStates.filter((stateObject) => {
       return (
-        stateObject.shortCode !== "AS" && stateObject.shortCode !== "VI" && stateObject.shortCode !== "GU"
+        stateObject.shortCode !== "AS" &&
+        stateObject.shortCode !== "VI" &&
+        stateObject.shortCode !== "GU"
       );
     });
   }
@@ -389,7 +400,7 @@ export const generateUnitedStatesStateDropdownOption = ({
 };
 
 export const generateTaxClearanceCertificateData = (
-  overrides: Partial<TaxClearanceCertificateData>
+  overrides: Partial<TaxClearanceCertificateData>,
 ): TaxClearanceCertificateData => {
   return {
     requestingAgencyId: randomElementFromArray(taxClearanceCertificateAgencies).id,
@@ -406,7 +417,7 @@ export const generateTaxClearanceCertificateData = (
 };
 
 export const generateLandQuestionnaireData = (
-  overrides: Partial<LandQuestionnaireData>
+  overrides: Partial<LandQuestionnaireData>,
 ): LandQuestionnaireData => {
   return {
     takeOverExistingBiz: false,
@@ -429,7 +440,7 @@ export const generateLandData = (overrides: Partial<LandData>): LandData => {
 };
 
 export const generateWasteQuestionnaireData = (
-  overrides: Partial<WasteQuestionnaireData>
+  overrides: Partial<WasteQuestionnaireData>,
 ): WasteQuestionnaireData => {
   return {
     hazardousMedicalWaste: false,
@@ -452,7 +463,7 @@ export const generateWasteData = (overrides: Partial<WasteData>): WasteData => {
 };
 
 export const generateAirQuestionnaireData = (
-  overrides: Partial<AirQuestionnaireData>
+  overrides: Partial<AirQuestionnaireData>,
 ): AirQuestionnaireData => {
   return {
     emitEmissions: false,
@@ -511,7 +522,7 @@ export const generateXrayRegistrationData = (overrides: Partial<XrayData>): Xray
 export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
-    profileData.legalStructureId as PublicFilingLegalType
+    profileData.legalStructureId as PublicFilingLegalType,
   )
     ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
     : {
@@ -563,7 +574,10 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
   };
 };
 
-export const generateUserDataForBusiness = (business: Business, overrides?: Partial<UserData>): UserData => {
+export const generateUserDataForBusiness = (
+  business: Business,
+  overrides?: Partial<UserData>,
+): UserData => {
   return {
     version: CURRENT_VERSION,
     versionWhenCreated: -1,
@@ -578,7 +592,9 @@ export const generateUserDataForBusiness = (business: Business, overrides?: Part
   };
 };
 
-export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail>): MunicipalityDetail => {
+export const generateMunicipalityDetail = (
+  overrides: Partial<MunicipalityDetail>,
+): MunicipalityDetail => {
   return {
     id: `some-id-${randomInt()}`,
     townName: `some-town-name-${randomInt()}`,
@@ -589,6 +605,67 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
     countyClerkPhone: `some-phone-${randomInt()}`,
     countyClerkWebsite: `some-clerk-webpage-${randomInt()}`,
     countyWebsite: `some-county-website-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateEmergencyTripPermitApplicationData = (
+  overrides: Partial<EmergencyTripPermitApplicationInfo>,
+): EmergencyTripPermitApplicationInfo => {
+  const requestorEmail = `email-${randomInt()}@email.com`;
+  const payerEmail = `email-${randomInt()}@email.com`;
+  const additionalEmail = `email-${randomInt()}@email.com`;
+  return {
+    additionalConfirmemail: additionalEmail,
+    additionalEmail: additionalEmail,
+    carrier: `some-carrier-${randomInt()}`,
+    deliveryAddress: `some-delivery-address-${randomInt()}`,
+    deliveryCity: `some-delivery-city-${randomInt()}`,
+    deliveryCountry: "US",
+    deliverySiteName: `some-delivery-site-name-${randomInt()}`,
+    deliveryStateProvince: "NJ",
+    deliveryZipPostalCode: `${randomInt(5)}`,
+    payerCountry: "US",
+    payerStateAbbreviation: "NJ",
+    payerFirstName: `some-payer-first-name-${randomInt()}`,
+    payerLastName: `some-payer-last-name-${randomInt()}`,
+    payerCompanyName: "`some-payer-company-${randomInt()}`",
+    payerCity: `some-payer-city-${randomInt()}`,
+    payerEmail: payerEmail,
+    payerZipCode: `${randomInt(5)}`,
+    payerPhoneNumber: `${randomInt(10)}`,
+    payerAddress1: `some-payer-address-1-${randomInt()}`,
+    payerAddress2: `some-payer-address-1-${randomInt()}`,
+    shouldAttachPdfToEmail: false,
+    permitDate: getEarliestPermitDate()
+      .add(randomIntFromInterval("1", "4"), "days")
+      .format(defaultDateFormat),
+    permitStartTime: `${randomIntFromInterval("0", "11")}:00`,
+    pickupAddress: `some-pickup-address-${randomInt()}`,
+    pickupCity: `some-pickup-city-${randomInt()}`,
+    pickupCountry: "US",
+    pickupSiteName: `some-pickup-site-name-${randomInt()}`,
+    pickupStateProvince: "NJ",
+    pickupZipPostalCode: `${randomInt(5)}`,
+    requestorAddress2: `some-requestor-address-2-${randomInt()}`,
+    requestorAddress1: `some-requestor-address-1-${randomInt()}`,
+    requestorCity: `some-requestor-city-${randomInt()}`,
+    requestorConfirmemail: requestorEmail,
+    requestorCountry: "US",
+    requestorEmail: requestorEmail,
+    requestorFirstName: `some-requestor-first-name-${randomInt()}`,
+    requestorLastName: `some-requestor-last-name-${randomInt()}`,
+    requestorPhone: `${randomInt(10)}`,
+    requestorStateProvince: "NJ",
+    requestorZipPostalCode: "",
+    shouldSendTextConfirmation: false,
+    textMsgMobile: `${randomInt(10)}`,
+    vehicleCountry: "US",
+    vehicleLicensePlateNum: `${randomInt(6)}`,
+    vehicleMake: `some-vehicle-make-${randomInt()}`,
+    vehicleStateProvince: "NJ",
+    vehicleVinSerial: `${randomInt(10)}`,
+    vehicleYear: `${randomInt(4)}`,
     ...overrides,
   };
 };

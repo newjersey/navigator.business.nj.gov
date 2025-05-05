@@ -48,9 +48,11 @@ describe("<CheckEnvPermits />", () => {
     task: Task;
   }): { user: UserEvent } => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
+      >
         <EnvPermit task={task ?? generateTask({})} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
     const user = userEvent.setup();
     return { user };
@@ -58,17 +60,21 @@ describe("<CheckEnvPermits />", () => {
 
   const renderQuestionnaire = ({ business, task }: { business?: Business; task: Task }): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
+      >
         <EnvPermit task={task ?? generateTask({})} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
   describe("land", () => {
     it("displays the results page when the user submits the questionnaire", async () => {
-      const { user } = renderQuestionnaireAndSetupUser({ task: generateTask({ id: "land-permitting" }) });
+      const { user } = renderQuestionnaireAndSetupUser({
+        task: generateTask({ id: "land-permitting" }),
+      });
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz),
       );
       await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
       expect(currentBusiness().environmentData?.land?.submitted).toBe(true);
@@ -97,9 +103,13 @@ describe("<CheckEnvPermits />", () => {
 
   describe("waste", () => {
     it("displays the results page when the user submits the questionnaire", async () => {
-      const { user } = renderQuestionnaireAndSetupUser({ task: generateTask({ id: "waste-permitting" }) });
+      const { user } = renderQuestionnaireAndSetupUser({
+        task: generateTask({ id: "waste-permitting" }),
+      });
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
+        screen.getByLabelText(
+          Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste,
+        ),
       );
       await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
       expect(currentBusiness().environmentData?.waste?.submitted).toBe(true);
@@ -128,8 +138,12 @@ describe("<CheckEnvPermits />", () => {
 
   describe("air", () => {
     it("displays the results page when the user submits the questionnaire", async () => {
-      const { user } = renderQuestionnaireAndSetupUser({ task: generateTask({ id: "air-permitting" }) });
-      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
+      const { user } = renderQuestionnaireAndSetupUser({
+        task: generateTask({ id: "air-permitting" }),
+      });
+      await user.click(
+        screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions),
+      );
       await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
       expect(currentBusiness().environmentData?.air?.submitted).toBe(true);
       await waitFor(() => {
@@ -170,19 +184,22 @@ describe("<CheckEnvPermits />", () => {
     ["land", "land-permitting"],
     ["waste", "waste-permitting"],
     ["air", "air-permitting"],
-  ])("displays the questionnaire if submitted is false for %s", (mediaArea: string, taskId: string) => {
-    renderQuestionnaire({
-      business: generateBusiness({
-        environmentData: generateEnvironmentData({
-          [mediaArea]: {
-            submitted: false,
-          },
+  ])(
+    "displays the questionnaire if submitted is false for %s",
+    (mediaArea: string, taskId: string) => {
+      renderQuestionnaire({
+        business: generateBusiness({
+          environmentData: generateEnvironmentData({
+            [mediaArea]: {
+              submitted: false,
+            },
+          }),
         }),
-      }),
-      task: generateTask({ id: taskId }),
-    });
-    expect(screen.getByText(Config.envQuestionPage.generic.title)).toBeInTheDocument();
-  });
+        task: generateTask({ id: taskId }),
+      });
+      expect(screen.getByText(Config.envQuestionPage.generic.title)).toBeInTheDocument();
+    },
+  );
 
   it.each([
     ["land", "land-permitting", "Check Your Land Permits"],

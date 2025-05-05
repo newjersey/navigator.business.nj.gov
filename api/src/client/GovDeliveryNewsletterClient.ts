@@ -19,12 +19,14 @@ export type GovDeliveryResponse = {
   errors?: { email?: string[]; secondary_email?: string[]; wireless?: string[] };
 };
 
-export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientConfig): NewsletterClient => {
+export const GovDeliveryNewsletterClient = (
+  config: GovDeliveryNewsletterClientConfig,
+): NewsletterClient => {
   const logId = config.logWriter.GetId();
   const add = (email: string): Promise<NewsletterResponse> => {
     const url = `${config.baseUrl}/api/add_script_subscription`;
     config.logWriter.LogInfo(
-      `NewsletterResponse - GovDelivery - Id:${logId} - Request Sent. url: ${url}. email: ${email}`
+      `NewsletterResponse - GovDelivery - Id:${logId} - Request Sent. url: ${url}. email: ${email}`,
     );
     return axios
       .get(url, {
@@ -37,9 +39,9 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
       })
       .then((response) => {
         config.logWriter.LogInfo(
-          `NewsletterResponse - GovDelivery - - Id:${logId} Response Received. Status: ${response.status} : ${
-            response.statusText
-          }. Data: ${JSON.stringify(response.data)}`
+          `NewsletterResponse - GovDelivery - - Id:${logId} Response Received. Status: ${
+            response.status
+          } : ${response.statusText}. Data: ${JSON.stringify(response.data)}`,
         );
         let status: NewsletterStatus;
         const data: GovDeliveryResponse =
