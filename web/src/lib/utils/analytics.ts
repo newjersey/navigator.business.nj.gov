@@ -30,9 +30,7 @@ type EventType =
   | "site_return_callback"
   | "account_clicks"
   | "tax_calendar_arrive_v2"
-  | "tax_calendar_click_v2"
-  | "submit_non_essential_question"
-  | "view_non_essential_question";
+  | "tax_calendar_click_v2";
 
 const eventMap: Record<EventType, string> = {
   contextual_link_clicks: "contextual_link_clicks",
@@ -57,8 +55,6 @@ const eventMap: Record<EventType, string> = {
   account_clicks: "account_clicks",
   tax_calendar_arrive_v2: "tax_calendar_arrive_v2",
   tax_calendar_click_v2: "tax_calendar_click_v2",
-  submit_non_essential_question: "submit_non_essential_question",
-  view_non_essential_question: "view_non_essential_question",
 };
 
 type ParameterType =
@@ -1066,15 +1062,6 @@ export default {
             clicked_to,
             click_text: click_text as ClickText,
             on_tab_name,
-          });
-        },
-      },
-    },
-    non_essential_question: {
-      viewed: {
-        view_non_essential_question: (nonEssentialQuestion: string) => {
-          eventRunner.track({
-            event: "view_non_essential_question",
           });
         },
       },
