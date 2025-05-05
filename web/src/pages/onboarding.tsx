@@ -353,6 +353,11 @@ const OnboardingPage = (props: Props): ReactElement => {
     updateQueue.queue(newUserData);
     await updateQueue.update();
 
+    console.log("TEST - before dashboard redirect");
+    // analytics.dimensions.industry(queryIndustryId);
+    analytics.dimensions.industry("TEST - before dashboard redirect, onboarding onboarding");
+    analytics.dimensions.update();
+
     router &&
       (await router.push({
         pathname: ROUTES.dashboard,

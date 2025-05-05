@@ -90,7 +90,9 @@ export const phaseChangeAnalytics = ({
 };
 
 export const setAnalyticsDimensions = (profileData: ProfileData, queue = false): void => {
-  analytics.dimensions.industry(profileData.industryId);
+  console.log("dimension set analytics", !queue);
+  analytics.dimensions.industry("TEST - profile profile");
+  // analytics.dimensions.industry(profileData.industryId);
   analytics.dimensions.municipality(profileData.municipality?.displayName);
   analytics.dimensions.legalStructure(profileData.legalStructureId);
   analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness);

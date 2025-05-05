@@ -227,6 +227,11 @@ const ProfilePage = (props: Props): ReactElement => {
       }
 
       if (business.profileData.industryId !== profileData.industryId) {
+        // analytics.dimensions.industry(profileData.industryId);
+        console.log("TEST - profile save");
+        analytics.dimensions.industry("TEST - profile individual");
+        analytics.dimensions.update();
+
         updateQueue
           .queueBusiness({ ...updateQueue.currentBusiness(), taskItemChecklist: {} })
           .queueTaskProgress({ [naicsCodeTaskId]: "TO_DO" });
