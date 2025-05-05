@@ -4,7 +4,7 @@ import type { XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
-import { Link } from "@mui/material";
+import router from "next/router";
 import { ReactElement } from "react";
 
 interface Props {
@@ -91,24 +91,27 @@ export const XrayRegistrationStatusHeader = (props: Props): ReactElement => {
         </div>
 
         <div
-          className={`padding-x-105 ${
+          className={`tablet:padding-x-105 ${
             statusColorScheme[props.xrayRegistrationStatus].textAndIconColor
           }`}
         >
           {getTextByStatus[props.xrayRegistrationStatus].description}
           {props.xrayRegistrationStatus === "EXPIRED" && (
             <>
-              <Link href={Config.xrayRegistrationTask.renewRegistrationLink}>
-                <UnStyledButton
-                  isBgTransparent
-                  isUnderline
-                  isButtonALink
-                  isTextBold={false}
-                  className={`text-error-darker text-normal padding-0 margin-left-05`}
-                >
+              <UnStyledButton
+                isBgTransparent
+                isUnderline
+                isButtonALink
+                isTextBold={false}
+                className={`text-error-darker text-normal padding-0 margin-left-05`}
+                onClick={() => {
+                  router && router.push(Config.xrayRegistrationTask.renewRegistrationLink);
+                }}
+              >
+                <span className="hover:text-error-dark text-underline">
                   {Config.xrayRegistrationTask.expiredDescriptionCallToAction}
-                </UnStyledButton>
-              </Link>
+                </span>
+              </UnStyledButton>
             </>
           )}
           {props.xrayRegistrationStatus === "INACTIVE" && (
@@ -118,7 +121,7 @@ export const XrayRegistrationStatusHeader = (props: Props): ReactElement => {
                 isUnderline
                 isButtonALink
                 isTextBold={false}
-                className={`text-secondary-darker text-normal padding-0 margin-left-05`}
+                className={`text-secondary-darker hover:text-secondary-dark text-normal text-align-left padding-0 margin-left-05`}
                 onClick={props.goToRegistrationTab}
               >
                 {Config.xrayRegistrationTask.inactiveDescriptionCallToAction}

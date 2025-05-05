@@ -2,7 +2,7 @@ import type { XrayRegistrationEntry } from "@shared/xray";
 
 export const filterSquashByRegNumAndAddress = (
   entries: XrayRegistrationEntry[],
-  addressLine1: string
+  addressLine1: string,
 ): XrayRegistrationEntry[] => {
   const entriesRecord: Record<string, XrayRegistrationEntry> = {};
 
@@ -12,7 +12,9 @@ export const filterSquashByRegNumAndAddress = (
       const squashedEntry: XrayRegistrationEntry = {
         ...entry,
         streetAddress:
-          existingEntry.streetAddress === addressLine1 ? existingEntry.streetAddress : entry.streetAddress,
+          existingEntry.streetAddress === addressLine1
+            ? existingEntry.streetAddress
+            : entry.streetAddress,
       };
       entriesRecord[entry.registrationNumber] = squashedEntry;
     } else {

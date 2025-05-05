@@ -30,7 +30,10 @@ const getStatusString = (
   }
 };
 
-const modifyStatusIfExpiredAndActive = (expirationDate: string | undefined, status: string): string => {
+const modifyStatusIfExpiredAndActive = (
+  expirationDate: string | undefined,
+  status: string,
+): string => {
   if (!expirationDate) return status;
 
   const isExpired = dayjs(expirationDate).isBefore(getCurrentDate()) && status !== "Inactive";

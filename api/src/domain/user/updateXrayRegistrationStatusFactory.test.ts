@@ -17,7 +17,7 @@ describe("updateXrayRegistrationStatusFactory", () => {
     );
   });
 
-  it("returns updated userData with updated task progress", async () => {
+  it("returns updated userData with updated task progress when status is defined", async () => {
     const xrayRegistrationResponse = {
       machines: [
         {
@@ -57,6 +57,30 @@ describe("updateXrayRegistrationStatusFactory", () => {
     expect(
       updatedUserData.businesses[updatedUserData.currentBusinessId].taskProgress["xray-reg"],
     ).toBe("COMPLETED");
+  });
+
+  it("doesn't update task progress when status is undefined", async () => {
+    const xrayRegistrationResponse = {
+      machines: [],
+      status: undefined,
+      expirationDate: undefined,
+      deactivationDate: undefined,
+    };
+
+    xrayRegistrationLookupClient.getStatus.mockResolvedValue(xrayRegistrationResponse);
+
+    const userData = generateUserData({});
+    const facilityDetails = {
+      businessName: "Some Business LLC",
+      addressLine1: "123 Main Street",
+      addressLine2: "Apt 4B",
+      addressZipCode: "12345",
+    };
+
+    const updatedUserData = await updateXrayRegistrationStatus(userData, facilityDetails);
+    expect(
+      updatedUserData.businesses[updatedUserData.currentBusinessId].taskProgress["xray-reg"],
+    ).toBe("TO_DO");
   });
 
   it("throws an error when lookup throws an error", async () => {
