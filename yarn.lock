@@ -4577,7 +4577,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 8.19.4
-    css-loader: 6.11.0
+    css-loader: 7.1.2
     cypress: 14.3.2
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
@@ -4777,7 +4777,7 @@ __metadata:
     copy-webpack-plugin: 13.0.0
     cross-env: 7.0.3
     cspell: 8.19.4
-    css-loader: 6.11.0
+    css-loader: 7.1.2
     cypress: 14.3.2
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
@@ -17110,7 +17110,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:6.11.0, css-loader@npm:^6.7.1, css-loader@npm:^6.7.3":
+"css-loader@npm:7.1.2":
+  version: 7.1.2
+  resolution: "css-loader@npm:7.1.2"
+  dependencies:
+    icss-utils: ^5.1.0
+    postcss: ^8.4.33
+    postcss-modules-extract-imports: ^3.1.0
+    postcss-modules-local-by-default: ^4.0.5
+    postcss-modules-scope: ^3.2.0
+    postcss-modules-values: ^4.0.0
+    postcss-value-parser: ^4.2.0
+    semver: ^7.5.4
+  peerDependencies:
+    "@rspack/core": 0.x || 1.x
+    webpack: ^5.27.0
+  peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
+    webpack:
+      optional: true
+  checksum: 15bfd90d778ddab90ee1d04c8c8bcc13ea6c0791d01b52b09d1b1c753b3410f7a7788a510d93726a9878e70b7c1a140f21efdf5c96e1857872107551d3897822
+  languageName: node
+  linkType: hard
+
+"css-loader@npm:^6.7.1, css-loader@npm:^6.7.3":
   version: 6.11.0
   resolution: "css-loader@npm:6.11.0"
   dependencies:
