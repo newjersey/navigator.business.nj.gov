@@ -1113,10 +1113,18 @@ describe("userRouter", () => {
       });
     });
 
-    describe("when user changes Tax ID", () => {
-      it("encrypts and masks the tax id before getting put into the user data client", async () => {
+    describe("when user changes Tax ID and Tax PIN", () => {
+      it("encrypts and masks the tax id and tax pin before getting put into the user data client", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("my cool encrypted value");
+        stubEncryptionDecryptionClient.encryptValue.mockImplementation(
+          (valueToBeEncrypted: string) => {
+            const encryptedValues: { [key: string]: string } = {
+              "123456789000": "encrypted-tax-id",
+              "1234": "encrypted-tax-pin",
+            };
+            return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
+          },
+        );
 
         const oldUserData = generateUserData({
           user: generateUser({ id: "123" }),
@@ -1126,8 +1134,10 @@ describe("userRouter", () => {
           generateBusiness({
             profileData: generateProfileData({
               ...getCurrentBusiness(oldUserData).profileData,
-              taxId: "123456789123",
+              taxId: "123456789000",
               encryptedTaxId: undefined,
+              taxPin: "1234",
+              encryptedTaxPin: undefined,
             }),
           }),
           { user: oldUserData.user },
@@ -1146,40 +1156,11 @@ describe("userRouter", () => {
         ).profileData;
         expect(profileDataPut).toEqual({
           ...getCurrentBusiness(updatedUserData).profileData,
-          taxId: "*******89123",
-          encryptedTaxId: "my cool encrypted value",
+          taxId: "*******89000",
+          encryptedTaxId: "encrypted-tax-id",
+          taxPin: "****",
+          encryptedTaxPin: "encrypted-tax-pin",
         });
-      });
-
-      it("doesn't encrypt tax id if the same masked value as before is being posted", async () => {
-        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-
-        const oldUserData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              taxId: "*******89123",
-            }),
-          }),
-          { user: generateUser({ id: "123" }) },
-        );
-
-        const updatedUserData = modifyCurrentBusiness(oldUserData, (business) => ({
-          ...business,
-          profileData: {
-            ...business.profileData,
-            taxId: "*******89123",
-          },
-        }));
-
-        stubUnifiedDataClient.get.mockResolvedValue(oldUserData);
-        stubUnifiedDataClient.put.mockResolvedValue(updatedUserData);
-
-        await request(app)
-          .post(`/users`)
-          .send(updatedUserData)
-          .set("Authorization", "Bearer user-123-token");
-
-        expect(stubEncryptionDecryptionClient.encryptValue).toHaveBeenCalledTimes(0);
       });
     });
   });

@@ -1619,6 +1619,47 @@ collections:
                               name: disclaimerMd,
                               widget: text,
                             }
+                  - label: Tax PIN
+                    name: taxPin
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{displayname}}"],
+                              options_length: 500,
+                              value_field: "{{fields.id}}",
+                              display_fields: ["{{displayname}}"],
+                            }
+                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
+                          - { label: "Show Button Text", name: "showButtonText", widget: "string" }
+                          - { label: "Hide Button Text", name: "hideButtonText", widget: "string" }
+                          - {
+                              label: "Show Button Mobile Text",
+                              name: "showButtonTextMobile",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Hide Button Mobile Text",
+                              name: "hideButtonTextMobile",
+                              widget: "string",
+                            }
                   - label: Entity ID
                     name: entityId
                     collapsed: true
@@ -1719,35 +1760,6 @@ collections:
                             }
                   - label: Date of Formation
                     name: dateOfFormation
-                    collapsed: true
-                    widget: object
-                    fields:
-                      - label: Default
-                        name: "default"
-                        collapsed: false
-                        widget: object
-                        fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - {
-                              label: "Contextual Info for Header",
-                              name: "headerContextualInfo",
-                              required: false,
-                              widget: "relation",
-                              collection: "contextual-information",
-                              search_fields: ["{{displayname}}"],
-                              options_length: 500,
-                              value_field: "{{fields.id}}",
-                              display_fields: ["{{displayname}}"],
-                            }
-                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
-                          - {
-                              label: "Description",
-                              name: "description",
-                              widget: "markdown",
-                              required: false,
-                            }
-                  - label: Tax PIN
-                    name: taxPin
                     collapsed: true
                     widget: object
                     fields:

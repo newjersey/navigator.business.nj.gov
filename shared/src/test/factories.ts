@@ -412,7 +412,9 @@ export const generateTaxClearanceCertificateData = (
     addressState: generateUnitedStatesStateDropdownOption({}),
     addressZipCode: randomInt(5).toString(),
     taxId: `${randomInt(12)}`,
+    encryptedTaxId: undefined,
     taxPin: randomInt(4).toString(),
+    encryptedTaxPin: undefined,
     ...overrides,
   };
 };

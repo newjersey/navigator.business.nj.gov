@@ -1,6 +1,6 @@
 import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient } from "@domain/types";
+import { encryptTaxIdForBatchLambdaFactory } from "@domain/user/encryptFieldsFactory";
 import { encryptTaxIdBatch } from "@domain/user/encryptTaxIdBatch";
-import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
 import { generateBusiness, generateProfileData, generateUserDataForBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 
@@ -21,7 +21,7 @@ describe("encryptTaxIdBatch", () => {
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
     };
-    encryptTaxId = encryptTaxIdFactory(stubEncryptionDecryptionClient);
+    encryptTaxId = encryptTaxIdForBatchLambdaFactory(stubEncryptionDecryptionClient);
   });
 
   it("encrypts and masks tax id for users who need it and returns success, failed, and total count when all succeed", async () => {

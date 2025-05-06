@@ -1,4 +1,5 @@
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
+import { encryptTaxIdForBatchLambdaFactory } from "@domain/user/encryptFieldsFactory";
 import {
   AWS_CRYPTO_CONTEXT_ORIGIN,
   AWS_CRYPTO_CONTEXT_PURPOSE,
@@ -14,7 +15,6 @@ import { LogWriter } from "@libs/logWriter";
 import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { encryptTaxIdBatch } from "src/domain/user/encryptTaxIdBatch";
-import { encryptTaxIdFactory } from "src/domain/user/encryptTaxIdFactory";
 
 export default async function handler(): Promise<void> {
   const logger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
@@ -33,6 +33,6 @@ export default async function handler(): Promise<void> {
     logger,
   );
 
-  const encryptTaxId = encryptTaxIdFactory(AWSEncryptionDecryptionClient);
+  const encryptTaxId = encryptTaxIdForBatchLambdaFactory(AWSEncryptionDecryptionClient);
   await encryptTaxIdBatch(encryptTaxId, dbClient);
 }
