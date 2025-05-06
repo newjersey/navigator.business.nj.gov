@@ -279,6 +279,18 @@ describe("profile - starting business", () => {
     ).toBeInTheDocument();
   });
 
+  it("hides permits tab when industry is Domestic Employer", () => {
+    renderPage({
+      business: {
+        ...businessFromSetup,
+        profileData: { ...businessFromSetup.profileData, industryId: "domestic-employer" },
+      },
+    });
+    expect(
+      screen.queryByRole("tab", { name: Config.profileDefaults.default.profileTabPermitsTitle }),
+    ).not.toBeInTheDocument();
+  });
+
   it("redirects user to dashboard with success query string on save", async () => {
     renderPage({ business: businessFromSetup });
     fillText("Industry", "All Other Businesses");
