@@ -934,9 +934,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:3.800.0":
-  version: 3.800.0
-  resolution: "@aws-sdk/client-s3@npm:3.800.0"
+"@aws-sdk/client-s3@npm:3.802.0":
+  version: 3.802.0
+  resolution: "@aws-sdk/client-s3@npm:3.802.0"
   dependencies:
     "@aws-crypto/sha1-browser": 5.2.0
     "@aws-crypto/sha256-browser": 5.2.0
@@ -994,7 +994,7 @@ __metadata:
     "@smithy/util-utf8": ^4.0.0
     "@smithy/util-waiter": ^4.0.3
     tslib: ^2.6.2
-  checksum: eff020fd93bd451da24813eb55e689d38907f559197b705a1c59fda0ee6bd03aedb1c4e55f15cae9364ebf79a2183e04293a780b6fb267f3afdc366a392ecd3c
+  checksum: 4529348e4ea6b4e60e84e6e43413b9a116072c5d640646f1312f97d79dba3714692cc37158cbfe57466d33dff7ca6f540b1d1b8a8fe48f3ad890c652ca5db487
   languageName: node
   linkType: hard
 
@@ -2447,9 +2447,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/s3-request-presigner@npm:3.800.0":
-  version: 3.800.0
-  resolution: "@aws-sdk/s3-request-presigner@npm:3.800.0"
+"@aws-sdk/s3-request-presigner@npm:3.802.0":
+  version: 3.802.0
+  resolution: "@aws-sdk/s3-request-presigner@npm:3.802.0"
   dependencies:
     "@aws-sdk/signature-v4-multi-region": 3.800.0
     "@aws-sdk/types": 3.775.0
@@ -2459,7 +2459,7 @@ __metadata:
     "@smithy/smithy-client": ^4.2.1
     "@smithy/types": ^4.2.0
     tslib: ^2.6.2
-  checksum: ab3622d00e85a326780f024911159b9858eccca951726ba14bb482b9ce9ec7e9e73623013d2791971b921d7ed5ac9f9cd466241ccd772d5eb88c2af8db3e159f
+  checksum: eef9dbfa1c043706343b45b7d4becefa3f4d3a21123edf5323f938ea6a5d7b138267f39d519fba595808e821d94c89545e24c94079d00c617ab03886fbbb537e
   languageName: node
   linkType: hard
 
@@ -4397,7 +4397,7 @@ __metadata:
     "@aws-sdk/client-cloudwatch-logs": 3.800.0
     "@aws-sdk/client-cognito-identity-provider": ^3.777.0
     "@aws-sdk/client-dynamodb": 3.799.0
-    "@aws-sdk/client-s3": 3.800.0
+    "@aws-sdk/client-s3": 3.802.0
     "@aws-sdk/lib-dynamodb": 3.799.0
     "@aws-sdk/smithy-client": 3.374.0
     "@aws-sdk/types": 3.775.0
@@ -4485,10 +4485,10 @@ __metadata:
     "@aws-sdk/client-cloudwatch-logs": 3.800.0
     "@aws-sdk/client-cognito-identity-provider": ^3.777.0
     "@aws-sdk/client-dynamodb": 3.799.0
-    "@aws-sdk/client-s3": 3.800.0
+    "@aws-sdk/client-s3": 3.802.0
     "@aws-sdk/lib-dynamodb": 3.799.0
     "@aws-sdk/protocol-http": 3.374.0
-    "@aws-sdk/s3-request-presigner": 3.800.0
+    "@aws-sdk/s3-request-presigner": 3.802.0
     "@aws-sdk/smithy-client": 3.374.0
     "@aws-sdk/types": 3.775.0
     "@aws-sdk/url-parser": 3.374.0
@@ -4712,7 +4712,7 @@ __metadata:
   dependencies:
     "@aws-crypto/sha256-browser": 5.2.0
     "@aws-sdk/protocol-http": 3.374.0
-    "@aws-sdk/s3-request-presigner": 3.800.0
+    "@aws-sdk/s3-request-presigner": 3.802.0
     "@aws-sdk/url-parser": 3.374.0
     "@aws-sdk/util-format-url": 3.775.0
     "@babel/core": 7.26.10
