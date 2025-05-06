@@ -24,7 +24,7 @@ callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
 
 A steam or hot water boiler must be inspected if it meets the following condition:
 
-Has 10+ square feet of heating surface
+* Has 10+ square feet of heating surface
 
 If the boiler has 1 of the following and serves a building with 6+ housing units or 25+ people, it also requires inspection:
 
@@ -40,7 +40,7 @@ During the inspection, a hydrostatic test (a type of pressure test) may be requi
 
 ## Boilers That Do Not Need Inspection
 
-A steam or hot water boiler is exempt and does not need to be inspected if it meets any of the following conditions:
+A steam or hot water boiler is exempt and does not need to be inspected if it **meets any** of the following conditions:
 
 * Has less than 10 square feet of heating surface
 * Has less than 10 kilowatts of incoming power, or produces less than 40,000 BTU per hour of heat output
@@ -68,8 +68,6 @@ Even though they keep track of the due dates, it’s your responsibility to make
 * Yearly inspections can be done by a certified insurance inspector or the State (MIBBPVC)
 
 If you have questions, email bpvrcompliance@dol.nj.gov or write to:
-
-
 
 NJ Department of Labor & Workforce Development
 
