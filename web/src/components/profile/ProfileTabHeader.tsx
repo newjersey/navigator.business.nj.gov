@@ -6,7 +6,6 @@ import { ReactElement, forwardRef } from "react";
 
 interface Props {
   tab: ProfileTabs;
-  subText?: string;
 }
 
 export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
