@@ -1,4 +1,5 @@
 import { ProfileTab } from "@/components/profile/ProfileTab";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
 import {
@@ -9,7 +10,7 @@ import {
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useRef } from "react";
+import { ReactElement, useContext, useRef } from "react";
 
 const infoTab = "info";
 const permitsTab = "permits";
@@ -26,6 +27,7 @@ interface Props {
 
 export const ProfileTabNav = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const { state } = useContext(ProfileDataContext);
 
   const isSuccessfulFilingResponse = props.business?.formationData.getFilingResponse?.success;
   const shouldDisplayFormationDocuments =
@@ -35,9 +37,11 @@ export const ProfileTabNav = (props: Props): ReactElement => {
     );
 
   const shouldShowPermits =
-    isNexusBusiness(props.business) ||
-    isOwningBusiness(props.business) ||
-    isStartingBusiness(props.business);
+    (isNexusBusiness(props.business) ||
+      isOwningBusiness(props.business) ||
+      isStartingBusiness(props.business)) &&
+    state.profileData.industryId !== "domestic-employer";
+
   const shouldShowDocuments = isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
 
   const tabRefs = {
