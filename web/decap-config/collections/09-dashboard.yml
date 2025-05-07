@@ -44,6 +44,11 @@ collections:
                   name: genericToProfileButtonText,
                   widget: string,
                 }
+              - {
+                  label: Personalize My Tasks Button Text,
+                  name: personalizeMyTasksButtonText,
+                  widget: string,
+                }
           - label: Dashboard Roadmap Defaults
             name: dashboardRoadmapHeaderDefaults
             collapsed: false

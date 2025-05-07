@@ -1,6 +1,7 @@
 /* eslint-disable jest/expect-expect */
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import { QUERIES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import Profile from "@/pages/profile";
 import {
@@ -37,6 +38,7 @@ import {
   generateFormationData,
   generateTaxFilingData,
 } from "@businessnjgovnavigator/shared/test";
+import { useRouter } from "next/compat/router";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
@@ -749,5 +751,56 @@ describe("profile - shared", () => {
         ).toBeInTheDocument();
       },
     );
+  });
+
+  describe("sets init profile tab", () => {
+    const mockRouter = (query = {}): void => {
+      (useRouter as jest.Mock).mockImplementation(() => ({
+        query,
+        push: jest.fn(),
+        pathname: "/",
+      }));
+    };
+
+    it("should use the default tab when no query param is set", () => {
+      const business = generateBusinessForProfile({});
+
+      renderPage({ business });
+
+      expect(
+        screen.getByRole("tabpanel", { name: Config.profileDefaults.default.profileTabInfoTitle }),
+      ).toBeInTheDocument();
+    });
+
+    it("should use the default tab when query param is set to an invalid tab value", () => {
+      mockRouter({ [QUERIES.tab]: "invalid-value" });
+
+      const business = generateBusinessForProfile({});
+
+      renderPage({ business });
+
+      expect(
+        screen.getByRole("tabpanel", { name: Config.profileDefaults.default.profileTabInfoTitle }),
+      ).toBeInTheDocument();
+    });
+
+    it("should be set to the query param tab when query param is set", () => {
+      mockRouter({ [QUERIES.tab]: "notes" });
+
+      const business = generateBusinessForProfile({});
+
+      renderPage({ business });
+
+      expect(
+        screen.queryByRole("tabpanel", {
+          name: Config.profileDefaults.default.profileTabInfoTitle,
+        }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("tabpanel", {
+          name: Config.profileDefaults.default.profileTabNoteTitle,
+        }),
+      ).toBeInTheDocument();
+    });
   });
 });

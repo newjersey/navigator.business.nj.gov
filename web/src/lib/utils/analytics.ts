@@ -110,6 +110,7 @@ type Clicked =
   | "go_to_myNJ_home"
   | "expand_contract"
   | "go_to_profile_screen"
+  | "go_to_profile_tasks_screen"
   | "go_to_myNJ_login"
   | "go_to_NavigatorAccount_setup"
   | "log_out"
@@ -214,6 +215,7 @@ type Item =
   | "account_menu_my_profile"
   | "roadmap_section"
   | "roadmap_profile_edit_button"
+  | "roadmap_personlize_my_tasks_button"
   | "landing_page_navbar_log_in"
   | "guest_modal"
   | "guest_menu"
@@ -788,6 +790,19 @@ export default {
             legacy_event_category: "roadmap_profile_edit_button",
             legacy_event_label: "go_to_profile_screen",
             clicked: "go_to_profile_screen",
+          });
+        },
+      },
+    },
+    roadmap_personlize_my_tasks_button: {
+      click: {
+        go_to_profile_tasks_screen: () => {
+          eventRunner.track({
+            event: "navigation_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "roadmap_profile_edit_button",
+            legacy_event_label: "go_to_profile_screen",
+            clicked: "go_to_profile_tasks_screen",
           });
         },
       },
