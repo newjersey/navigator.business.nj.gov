@@ -299,6 +299,8 @@ export const generateProfileData = (
     employerId: randomInt(9).toString(),
     taxId: randomInt(12).toString(),
     encryptedTaxId: undefined,
+    taxPin: randomInt(4).toString(),
+    encryptedTaxPin: undefined,
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     documents: {
@@ -307,7 +309,6 @@ export const generateProfileData = (
       standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
-    taxPin: randomInt(4).toString(),
     sectorId: randomSector().id,
     naicsCode: randomInt(6).toString(),
     foreignBusinessTypeIds: [],

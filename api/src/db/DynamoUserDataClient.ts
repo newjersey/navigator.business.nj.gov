@@ -3,7 +3,7 @@
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { MigrationFunction, Migrations } from "@db/migrations/migrations";
+import { Migrations } from "@db/migrations/migrations";
 import { type EncryptionDecryptionClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
@@ -29,31 +29,34 @@ export const DynamoUserDataClient = (
   tableName: string,
   logger: LogWriterType,
 ): UserDataClient => {
-  const migrateData = (data: UserData, logger: LogWriterType): any => {
+  const migrateData = async (data: UserData, logger: LogWriterType): Promise<any> => {
     const logId = logger.GetId();
     const dataVersion = data.version ?? CURRENT_VERSION;
     const migrationsToRun = Migrations.slice(dataVersion);
-    const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
+    let migratedData = data;
+    for (const migration of migrationsToRun) {
       try {
         logger.LogInfo(
           `Database Migration - Id:${logId} - Upgrading ${data.user.id} from ${
-            prevData.version
-          } to ${Number(prevData.version) + 1}`,
+            migratedData.version
+          } to ${Number(migratedData.version) + 1}`,
         );
-        return migration(prevData, { encryptionDecryptionClient });
+        migratedData = await Promise.resolve(
+          migration(migratedData, { encryptionDecryptionClient }),
+        );
       } catch (error) {
         logger.LogError(
           `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(
-            prevData,
+            migratedData,
           )}`,
         );
       }
-    }, data);
+    }
     return { ...migratedData, version: CURRENT_VERSION };
   };
 
   const doMigration = async (data: UserData): Promise<UserData> => {
-    const migratedData = migrateData(data, logger);
+    const migratedData = await migrateData(data, logger);
     await put(migratedData);
     return migratedData;
   };
@@ -105,7 +108,7 @@ export const DynamoUserDataClient = (
   };
 
   const put = async (userData: UserData): Promise<UserData> => {
-    const migratedData = migrateData(userData, logger);
+    const migratedData = await migrateData(userData, logger);
     const params = {
       TableName: tableName,
       Item: {

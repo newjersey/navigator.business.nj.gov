@@ -62,8 +62,16 @@ describe("migrations", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     encryptionDecryptionClient = {
-      encryptValue: jest.fn(),
-      decryptValue: jest.fn(),
+      encryptValue: jest.fn((value) => {
+        return new Promise((resolve) => {
+          resolve(`encrypted ${value}`);
+        });
+      }),
+      decryptValue: jest.fn((value) => {
+        return new Promise((resolve) => {
+          resolve(`decrypted ${value}`);
+        });
+      }),
     };
   });
 
@@ -150,11 +158,11 @@ describe("migrations", () => {
       expect(fileContents).toContain(`version: ${CURRENT_VERSION}`);
     });
 
-    it("runs all migrations and gets user to current version", () => {
+    it("runs all migrations and gets user to current version", async () => {
       let user: unknown = generateV0UserData({});
       try {
         for (const func of Migrations) {
-          user = func(user, { encryptionDecryptionClient });
+          user = await Promise.resolve(func(user, { encryptionDecryptionClient }));
         }
       } catch (error) {
         logger.LogError(`Dynamo User Migration Test Error - Error: ${error} - Data: ${user}`);
@@ -169,13 +177,13 @@ describe("migrations", () => {
       expect(currentUser.version).toBe(CURRENT_VERSION);
     });
 
-    it("ensures that a user who has been fully migrated has the same fields as a newly generated user on the current version", () => {
+    it("ensures that a user who has been fully migrated has the same fields as a newly generated user on the current version", async () => {
       const currentUser = CURRENT_GENERATOR({});
       let migratedUser: unknown = generateV0UserData({});
 
       try {
         for (const func of Migrations) {
-          migratedUser = func(migratedUser, { encryptionDecryptionClient });
+          migratedUser = await Promise.resolve(func(migratedUser, { encryptionDecryptionClient }));
         }
       } catch (error) {
         logger.LogError(
