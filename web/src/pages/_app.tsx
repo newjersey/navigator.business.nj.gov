@@ -168,6 +168,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL ?? DEFAULT_BASE_URL;
   const imageUrl = new URL("/img/team-success.jpg", baseUrl).href;
 
+  const requireAccount = (returnToLink: string): void => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("returnToLink", returnToLink);
+    }
+    setShowNeedsAccountModal(true);
+  };
+
   return (
     <>
       <Head>
@@ -243,6 +250,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                               setRegistrationStatus: setRegistrationStatusInStateAndStorage,
                               setShowNeedsAccountSnackbar,
                               setShowNeedsAccountModal,
+                              requireAccount,
                             }}
                           >
                             <ContextualInfoPanel />

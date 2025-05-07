@@ -4,14 +4,27 @@ import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
 }
+
 export const Requirements = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const { requireAccount, isAuthenticated } = useContext(NeedsAccountContext);
+
+  const handleContinue = async (): Promise<void> => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      requireAccount(ROUTES.taxClearanceCertificate);
+    } else {
+      props.setStepIndex(1);
+    }
+  };
 
   return (
     <>
@@ -26,9 +39,7 @@ export const Requirements = (props: Props): ReactElement => {
           <LiveChatHelpButton />
           <PrimaryButton
             isColor="primary"
-            onClick={(): void => {
-              props.setStepIndex(1);
-            }}
+            onClick={handleContinue}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >
