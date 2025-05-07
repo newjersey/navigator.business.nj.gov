@@ -46,7 +46,8 @@
       "step": 4,
       "weight": 1,
       "licenseTask": "boiler-inspection",
-      "task": "boiler-inspection"
+      "task": "boiler-inspection",
+      "required": true
     }
   ],
   "name": "Real Estate Investing",
