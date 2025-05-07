@@ -8,7 +8,9 @@ import { Review } from "@/components/tasks/anytime-action/tax-clearance-certific
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { StepperStep } from "@/lib/types/types";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { FormEvent, ReactElement, useState } from "react";
+import { FormEvent, ReactElement, useContext, useState } from "react";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 
 interface Props {
   taxClearanceCertificateData: TaxClearanceCertificateData;
@@ -27,9 +29,15 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
   const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
     props.certificatePdfBlob || undefined,
   );
+  const { requireAccount } = useContext(NeedsAccountContext);
 
   const onStepClick = (step: number): void => {
-    props.saveTaxClearanceCertificateData();
+    if (requireAccount(`${ROUTES.taxClearanceCertificate}`)) {
+      return;
+    }
+    if (step === 2 && stepIndex === 1) {
+      props.saveTaxClearanceCertificateData();
+    }
     setStepIndex(step);
   };
 

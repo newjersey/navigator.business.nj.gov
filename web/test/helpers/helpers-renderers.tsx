@@ -45,6 +45,7 @@ export const withNeedsAccountContext = (
     setRegistrationStatus?: (value: RegistrationStatus | undefined) => void;
     setShowNeedsAccountSnackbar?: (value: boolean) => void;
     setShowNeedsAccountModal?: (value: boolean) => void;
+    requireAccount?: (returnToLink: string) => void;
   },
 ): ReactElement => {
   return (
@@ -57,6 +58,7 @@ export const withNeedsAccountContext = (
         setRegistrationStatus: context?.setRegistrationStatus || jest.fn(),
         setShowNeedsAccountSnackbar: context?.setShowNeedsAccountSnackbar || jest.fn(),
         setShowNeedsAccountModal: context?.setShowNeedsAccountModal || jest.fn(),
+        requireAccount: context?.requireAccount || jest.fn(),
       }}
     >
       {subject}
