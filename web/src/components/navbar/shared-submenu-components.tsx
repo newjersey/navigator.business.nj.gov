@@ -19,18 +19,24 @@ import { ReactElement, useContext } from "react";
 export const LoginMenuItem = (): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
+  const { updateQueue } = useUserData();
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
 
+  const handleLogin = async (): Promise<void> => {
+    if (!router) return;
+    if (updateQueue) {
+      await updateQueue.queuePreferences({ returnToLink: "" }).update();
+    }
+    analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
+    if (loginPageEnabled) {
+      router && router.push(ROUTES.login);
+    } else {
+      triggerSignIn();
+    }
+  };
+
   return NavMenuItem({
-    onClick: (): void => {
-      if (!router) return;
-      analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
-      if (loginPageEnabled) {
-        router && router.push(ROUTES.login);
-      } else {
-        triggerSignIn();
-      }
-    },
+    onClick: handleLogin,
     icon: <ButtonIcon svgFilename="login" sizePx="25px" />,
     itemText: Config.navigationDefaults.logInButton,
     key: "loginMenuItem",

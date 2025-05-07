@@ -3,45 +3,39 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ROUTES } from "@/lib/domain-logic/routes";
-import { ReactElement, useContext } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
 }
 
-export const Requirements = (props: Props): ReactElement => {
+export const TaxClearanceCertificateForm = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { requireAccount } = useContext(NeedsAccountContext);
-
-  const handleContinue = (): void => {
-    if (requireAccount(`${ROUTES.taxClearanceCertificate}`)) {
-      return;
-    }
-    props.setStepIndex(1);
-  };
 
   return (
     <>
-      <Content>{Config.taxClearanceCertificateStep1.content}</Content>
+      <Content>{Config.taxClearanceCertificateStep2.content}</Content>
       <HorizontalLine />
-      <span className="h5-styling">
-        {Config.taxClearanceCertificateStep1.issuingAgencyLabelText}:{" "}
-      </span>
-      <span className="h6-styling">{Config.taxClearanceCertificateStep1.issuingAgencyText}</span>
       <CtaContainer>
         <ActionBarLayout>
           <LiveChatHelpButton />
+          <SecondaryButton
+            isColor="secondary"
+            onClick={(): void => props.setStepIndex(0)}
+            dataTestId="cta-secondary-1"
+          >
+            {Config.taxClearanceCertificateStep2.backButtonText}
+          </SecondaryButton>
           <PrimaryButton
             isColor="primary"
-            onClick={handleContinue}
+            onClick={(): void => props.setStepIndex(2)}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >
-            {Config.taxClearanceCertificateStep1.continueButtonText}
+            {Config.taxClearanceCertificateStep2.continueButtonText}
           </PrimaryButton>
         </ActionBarLayout>
       </CtaContainer>
