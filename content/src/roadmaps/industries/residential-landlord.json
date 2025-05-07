@@ -51,7 +51,8 @@
       "weight": 300,
       "step": 4,
       "licenseTask": "boiler-inspection",
-      "task": "boiler-inspection"
+      "task": "boiler-inspection",
+      "required": true
     }
   ],
   "name": "Residential Landlord",
