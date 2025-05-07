@@ -1,7 +1,6 @@
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
+import { Dashboard } from "@/components/dashboard/Dashboard";
 import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
-import { DashboardOnDesktop } from "@/components/dashboard/DashboardOnDesktop";
-import { DashboardOnMobile } from "@/components/dashboard/DashboardOnMobile";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -121,28 +120,16 @@ const DashboardPage = (props: Props): ReactElement => {
           <DashboardAlerts />
           {isLoading && <PageCircularIndicator />}
           {!isLoading && (
-            <>
-              <DashboardOnDesktop
-                certifications={props.certifications}
-                displayContent={props.displayContent}
-                fundings={props.fundings}
-                operateReferences={props.operateReferences}
-                anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
-                anytimeActionTasks={props.anytimeActionTasks}
-                elevatorViolations={hasElevatorViolations}
-                licenseEvents={props.licenseEvents}
-              />
-              <DashboardOnMobile
-                certifications={props.certifications}
-                displayContent={props.displayContent}
-                fundings={props.fundings}
-                operateReferences={props.operateReferences}
-                anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
-                anytimeActionTasks={props.anytimeActionTasks}
-                elevatorViolations={hasElevatorViolations}
-                licenseEvents={props.licenseEvents}
-              />
-            </>
+            <Dashboard
+              certifications={props.certifications}
+              displayContent={props.displayContent}
+              fundings={props.fundings}
+              operateReferences={props.operateReferences}
+              anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+              anytimeActionTasks={props.anytimeActionTasks}
+              elevatorViolations={hasElevatorViolations}
+              licenseEvents={props.licenseEvents}
+            />
           )}
         </main>
       </PageSkeleton>

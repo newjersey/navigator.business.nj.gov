@@ -6,7 +6,8 @@
     "genericStarterKitText": "Your Starter Kit",
     "newJerseyDateBodyText": "ET",
     "guestModeToProfileButtonText": "Guest Account",
-    "genericToProfileButtonText": "Business Profile"
+    "genericToProfileButtonText": "Business Profile",
+    "personalizeMyTasksButtonText": "Personalize My Tasks"
   },
   "dashboardRoadmapHeaderDefaults": {
     "RoadmapTasksHeaderText": "Business Tasks",

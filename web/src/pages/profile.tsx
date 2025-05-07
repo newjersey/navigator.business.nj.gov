@@ -64,7 +64,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -127,6 +127,19 @@ const ProfilePage = (props: Props): ReactElement => {
   );
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
+
+  const getInitTab = (): ProfileTabs => {
+    if (props.CMS_ONLY_tab) return props.CMS_ONLY_tab;
+
+    const tabValue = router?.query[QUERIES.tab] as string;
+
+    const initTab = profileTabs.includes(tabValue as ProfileTabs)
+      ? (tabValue as ProfileTabs)
+      : profileTabs[0];
+
+    return initTab;
+  };
+
   const {
     FormFuncWrapper,
     onSubmit,
@@ -134,7 +147,7 @@ const ProfilePage = (props: Props): ReactElement => {
     onTabChange: setProfileTab,
     state: formContextState,
     getInvalidFieldIds,
-  } = useFormContextHelper(createDataFormErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
+  } = useFormContextHelper(createDataFormErrorMap(), getInitTab());
 
   const permitsRef = useRef<HTMLDivElement>(null);
 

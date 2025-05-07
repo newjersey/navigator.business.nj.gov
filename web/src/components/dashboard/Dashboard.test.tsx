@@ -1,4 +1,4 @@
-import { DashboardOnDesktop } from "@/components/dashboard/DashboardOnDesktop";
+import { Dashboard } from "@/components/dashboard/Dashboard";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
   AnytimeActionLicenseReinstatement,
@@ -26,27 +26,44 @@ import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
+  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  defaultDateFormat,
   generateBusiness,
   generatePreferences,
   generateProfileData,
+  generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateUserDataForBusiness,
+  getCurrentDate,
   getIndustries,
   OperatingPhases,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { createTheme, ThemeProvider } from "@mui/material";
+import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
+
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+
+const setLargeScreen = (value: boolean): void => {
+  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+};
 
 const Config = getMergedConfig();
 
@@ -64,9 +81,9 @@ const operatingPhasesThatDontDisplayHideableRoadmapTasks = OperatingPhases.filte
   return !obj.displayHideableRoadmapTasks;
 }).map((obj) => obj.id);
 
-const operatingPhasesThatDisplayHideableRoadmapTasks = OperatingPhases.filter((obj) => {
-  return obj.displayHideableRoadmapTasks;
-}).map((obj) => obj.id);
+const operatingPhasesThatDisplayHideableRoadmapTasks = OperatingPhases.filter(
+  (obj) => obj.displayHideableRoadmapTasks,
+).map((obj) => obj.id);
 
 describe("<DashboardOnDesktop />", () => {
   beforeEach(() => {
@@ -74,6 +91,7 @@ describe("<DashboardOnDesktop />", () => {
     useMockBusiness({ onboardingFormProgress: "COMPLETED" });
     useMockRoadmap({});
     useMockRouter({});
+    setLargeScreen(true);
     jest.useFakeTimers();
   });
 
@@ -92,7 +110,7 @@ describe("<DashboardOnDesktop />", () => {
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <DashboardOnDesktop
+        <Dashboard
           operateReferences={operateReferences ?? {}}
           displayContent={createDisplayContent(sidebarDisplayContent)}
           fundings={[]}
@@ -113,7 +131,7 @@ describe("<DashboardOnDesktop />", () => {
         initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
       >
         <ThemeProvider theme={createTheme()}>
-          <DashboardOnDesktop
+          <Dashboard
             operateReferences={{}}
             displayContent={createDisplayContent()}
             fundings={[]}
@@ -126,6 +144,88 @@ describe("<DashboardOnDesktop />", () => {
       </WithStatefulUserData>,
     );
   };
+
+  describe("personalize my tasks button", () => {
+    it.each([
+      {
+        label: "STARTING",
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: undefined,
+        }),
+      },
+      {
+        label: "NEXUS",
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          legalStructureId: undefined,
+        }),
+      },
+    ])("hidden for a $label business with undefined business structure", ({ profileData }) => {
+      const business = generateBusiness({ profileData });
+      renderStatefulDashboardComponent({ business });
+
+      expect(
+        screen.queryByText(Config.dashboardHeaderDefaults.personalizeMyTasksButtonText),
+      ).not.toBeInTheDocument();
+    });
+
+    it.each([
+      {
+        label: "STARTING",
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "sole-proprietorship",
+        }),
+      },
+      {
+        label: "NEXUS",
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          legalStructureId: "sole-proprietorship",
+        }),
+      },
+    ])("shows for a $label business with defined business structure", ({ profileData }) => {
+      const business = generateBusiness({ profileData });
+      renderStatefulDashboardComponent({ business });
+
+      expect(
+        screen.getByText(Config.dashboardHeaderDefaults.personalizeMyTasksButtonText),
+      ).toBeInTheDocument();
+    });
+
+    it.each([
+      {
+        label: "OWNING",
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+        }),
+      },
+      {
+        label: "REMOTE",
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessTypeIds: ["revenueInNJ"],
+        }),
+      },
+      {
+        label: "DOMESTIC-EMPLOYER",
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: "domestic-employer",
+        }),
+      },
+    ])("shows for a $label business", ({ profileData }) => {
+      const business = generateBusiness({ profileData });
+      renderStatefulDashboardComponent({ business });
+
+      expect(
+        screen.getByText(Config.dashboardHeaderDefaults.personalizeMyTasksButtonText),
+      ).toBeInTheDocument();
+    });
+  });
 
   it("shows steps and tasks from roadmap", () => {
     useMockRoadmap({
@@ -241,49 +341,6 @@ describe("<DashboardOnDesktop />", () => {
       expect(screen.queryByTestId("hideableTasks")).not.toBeInTheDocument();
     },
   );
-
-  it.each(operatingPhasesThatDisplayHideableRoadmapTasks)(
-    "renders HideableTasks for %s that display HideableRoadmapTasks",
-    (OperatingPhase) => {
-      const filteredIndustries = getIndustries().filter(
-        (industry) => industry.id !== "domestic-employer",
-      );
-      useMockBusiness({
-        profileData: generateProfileData({
-          operatingPhase: OperatingPhase,
-          industryId: randomElementFromArray(filteredIndustries).id,
-        }),
-        onboardingFormProgress: "COMPLETED",
-      });
-      renderDashboardComponent({});
-
-      expect(
-        screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
-      ).toBeInTheDocument();
-      expect(
-        screen.queryByText(
-          Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
-        ),
-      ).not.toBeInTheDocument();
-    },
-  );
-
-  it("renders HideableTasks for domestic-employer industry with alternate heading", () => {
-    useMockBusiness({
-      profileData: generateProfileData({ industryId: "domestic-employer" }),
-      onboardingFormProgress: "COMPLETED",
-    });
-    renderDashboardComponent({});
-
-    expect(
-      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.getByText(
-        Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
-      ),
-    ).toBeInTheDocument();
-  });
 
   describe("deferred onboarding question", () => {
     describe.each(operatingPhasesNotDisplayingHomeBasedPrompt)(
@@ -500,9 +557,123 @@ describe("<DashboardOnDesktop />", () => {
     expect(within(screen.getByTestId("section-start")).getByText("step2")).toBeVisible();
   });
 
+  it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
+    const dueDate = getCurrentDate().add(1, "days");
+    const annualReport = generateTaxFilingCalendarEvent({
+      identifier: "annual-report",
+      dueDate: dueDate.format(defaultDateFormat),
+    });
+    useMockBusiness({
+      profileData: generateProfileData({ operatingPhase: OperatingPhaseId.FORMED }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      onboardingFormProgress: "COMPLETED",
+    });
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+    renderDashboardComponent({ operateReferences });
+
+    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("Annual Report")).toBeInTheDocument();
+  });
+
+  it.each(operatingPhasesThatDisplayHideableRoadmapTasks)(
+    "renders HideableTasks for %s that display HideableRoadmapTasks",
+    (OperatingPhase) => {
+      const filteredIndustries = getIndustries().filter(
+        (industry) => industry.id !== "domestic-employer",
+      );
+      useMockBusiness({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhase,
+          industryId: randomElementFromArray(filteredIndustries).id,
+        }),
+        onboardingFormProgress: "COMPLETED",
+      });
+      renderDashboardComponent({});
+
+      expect(
+        screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryAllByRole("heading", {
+          level: 2,
+          name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+        }).length,
+      ).toEqual(0);
+    },
+  );
+
+  it("renders HideableTasks for domestic-employer industry with alternate heading", () => {
+    useMockBusiness({
+      profileData: generateProfileData({ industryId: "domestic-employer" }),
+      onboardingFormProgress: "COMPLETED",
+    });
+    renderDashboardComponent({});
+
+    expect(
+      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+      }),
+    ).toBeInTheDocument();
+  });
+
   it("does not render tabs in desktop view", () => {
     renderDashboardComponent({});
     expect(screen.getByTestId("rightSidebarPageLayout")).toBeInTheDocument();
     expect(screen.queryByTestId("two-tab-Layout")).not.toBeInTheDocument();
+  });
+
+  describe("mobile view specifics", () => {
+    beforeEach(() => {
+      setLargeScreen(false);
+    });
+
+    it("renders tabs", () => {
+      renderDashboardComponent({});
+
+      expect(screen.queryByTestId("rightSidebarPageLayout")).not.toBeInTheDocument();
+      expect(screen.getByTestId("two-tab-Layout")).toBeInTheDocument();
+    });
+
+    it("sets phaseNewlyChanged to false on mobile when rendering For You tab", async () => {
+      const business = generateBusiness({
+        preferences: generatePreferences({ phaseNewlyChanged: true }),
+        onboardingFormProgress: "COMPLETED",
+      });
+      renderStatefulDashboardComponent({ business });
+
+      expect(userDataWasNotUpdated()).toBe(true);
+
+      fireEvent.click(screen.getByTestId("for-you-tab"));
+      await waitFor(() => {
+        return expect(currentBusiness().preferences.phaseNewlyChanged).toBe(false);
+      });
+    });
+
+    it("shows indicator next to For You tab when phaseNewlyChanged is true", async () => {
+      const business = generateBusiness({
+        preferences: generatePreferences({ phaseNewlyChanged: true }),
+        onboardingFormProgress: "COMPLETED",
+      });
+      renderStatefulDashboardComponent({ business });
+
+      expect(screen.getByTestId("for-you-indicator")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("for-you-tab"));
+      await waitFor(() => {
+        return expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
+      });
+    });
   });
 });
