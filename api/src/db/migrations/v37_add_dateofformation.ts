@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v36UserData } from "@db/migrations/v36_add_member_to_formation_data";
 
 export interface v37UserData {
@@ -12,7 +13,11 @@ export interface v37UserData {
   version: number;
 }
 
-export const migrate_v36_to_v37 = (v36Data: v36UserData): v37UserData => {
+export const migrate_v36_to_v37 = (
+  v36Data: v36UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v37UserData => {
   return {
     ...v36Data,
     profileData: { ...v36Data.profileData, dateOfFormation: undefined },

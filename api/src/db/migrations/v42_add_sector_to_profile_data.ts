@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v41UserData } from "@db/migrations/v41_remove_operate_section";
 import { randomInt } from "@shared/intHelpers";
 
@@ -13,7 +14,11 @@ export interface v42UserData {
   version: number;
 }
 
-export const migrate_v41_to_v42 = (v41Data: v41UserData): v42UserData => {
+export const migrate_v41_to_v42 = (
+  v41Data: v41UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v42UserData => {
   return {
     ...v41Data,
     profileData: {

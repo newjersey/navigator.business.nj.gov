@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v49UserData } from "@db/migrations/v49_add_cannabis_microbusiness";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v50UserData {
   version: number;
 }
 
-export const migrate_v49_to_v50 = (v49Data: v49UserData): v50UserData => {
+export const migrate_v49_to_v50 = (
+  v49Data: v49UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v50UserData => {
   const isAnnualCannabis =
     v49Data.profileData.industryId === "cannabis" &&
     v49Data.profileData.cannabisLicenseType === "ANNUAL";

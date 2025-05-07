@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v91UserData } from "@db/migrations/v91_consolidate_section_type";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v92UserData {
   version: number;
 }
 
-export const migrate_v91_to_v92 = (v91Data: v91UserData): v92UserData => {
+export const migrate_v91_to_v92 = (
+  v91Data: v91UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v92UserData => {
   return {
     ...v91Data,
     version: 92,

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v86UserData } from "@db/migrations/v86_tax_filing_var_rename";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v87UserData {
   version: number;
 }
 
-export const migrate_v86_to_v87 = (v86Data: v86UserData): v87UserData => {
+export const migrate_v86_to_v87 = (
+  v86Data: v86UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v87UserData => {
   let newIndustryID;
   let newCarServiceType: v87CarServiceType;
   if (v86Data.profileData.industryId === "car-service") {

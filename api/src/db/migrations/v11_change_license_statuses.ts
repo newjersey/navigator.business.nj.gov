@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v10UserData } from "@db/migrations/v10_add_mynjuserkey";
 import { randomInt } from "@shared/intHelpers";
 
@@ -10,7 +11,11 @@ export interface v11UserData {
   version: number;
 }
 
-export const migrate_v10_to_v11 = (v10Data: v10UserData): v11UserData => {
+export const migrate_v10_to_v11 = (
+  v10Data: v10UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v11UserData => {
   return {
     ...v10Data,
     version: 11,

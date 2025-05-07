@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v121Business, v121UserData } from "@db/migrations/v121_add_nonprofit_formation_fields";
 import { randomInt } from "@shared/intHelpers";
 
@@ -25,7 +26,11 @@ export interface v122Business {
   formationData: v122FormationData;
 }
 
-export const migrate_v121_to_v122 = (v121Data: v121UserData): v122UserData => {
+export const migrate_v121_to_v122 = (
+  v121Data: v121UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v122UserData => {
   return {
     ...v121Data,
     businesses: Object.fromEntries(

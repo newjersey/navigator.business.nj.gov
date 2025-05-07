@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import {
   v125Business,
   v125UserData,
@@ -28,7 +29,11 @@ export interface v126Business {
   formationData: v126FormationData;
 }
 
-export const migrate_v125_to_v126 = (v125Data: v125UserData): v126UserData => {
+export const migrate_v125_to_v126 = (
+  v125Data: v125UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v126UserData => {
   return {
     ...v125Data,
     businesses: Object.fromEntries(

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v80UserData } from "@db/migrations/v80_add_calendar_preference";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v81UserData {
   version: number;
 }
 
-export const migrate_v80_to_v81 = (v80Data: v80UserData): v81UserData => {
+export const migrate_v80_to_v81 = (
+  v80Data: v80UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v81UserData => {
   return {
     ...v80Data,
     formationData: {

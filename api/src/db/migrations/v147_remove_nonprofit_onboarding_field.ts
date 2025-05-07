@@ -1,10 +1,15 @@
+import { type MigrationClients } from "@db/migrations/types";
 import {
   v146Business,
   v146UserData,
 } from "@db/migrations/v146_remove_haserror_field_from_licensedetails";
 import { randomInt } from "@shared/intHelpers";
 
-export const migrate_v146_to_v147 = (v146Data: v146UserData): v147UserData => {
+export const migrate_v146_to_v147 = (
+  v146Data: v146UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v147UserData => {
   return {
     ...v146Data,
     businesses: Object.fromEntries(

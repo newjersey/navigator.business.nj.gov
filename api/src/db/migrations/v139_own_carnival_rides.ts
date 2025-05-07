@@ -1,7 +1,12 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v138Business, v138UserData } from "@db/migrations/v138_multi_license_support";
 import { randomInt } from "@shared/intHelpers";
 
-export const migrate_v138_to_v139 = (v138Data: v138UserData): v139UserData => {
+export const migrate_v138_to_v139 = (
+  v138Data: v138UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v139UserData => {
   return {
     ...v138Data,
     businesses: Object.fromEntries(

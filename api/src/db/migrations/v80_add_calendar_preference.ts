@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v79UserData } from "@db/migrations/v79_add_return_to_link";
 
 export interface v80UserData {
@@ -13,7 +14,11 @@ export interface v80UserData {
   version: number;
 }
 
-export const migrate_v79_to_v80 = (v79Data: v79UserData): v80UserData => {
+export const migrate_v79_to_v80 = (
+  v79Data: v79UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v80UserData => {
   return {
     ...v79Data,
     preferences: {

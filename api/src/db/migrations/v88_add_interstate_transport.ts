@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v87UserData } from "@db/migrations/v87_add_car_service";
 
 export interface v88UserData {
@@ -13,7 +14,11 @@ export interface v88UserData {
   version: number;
 }
 
-export const migrate_v87_to_v88 = (v87Data: v87UserData): v88UserData => {
+export const migrate_v87_to_v88 = (
+  v87Data: v87UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v88UserData => {
   return {
     ...v87Data,
     profileData: {

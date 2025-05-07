@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v64UserData } from "@db/migrations/v64_save_formation_address_checkboxes";
 
 export interface v65UserData {
@@ -13,7 +14,11 @@ export interface v65UserData {
   version: number;
 }
 
-export const migrate_v64_to_v65 = (v64Data: v64UserData): v65UserData => {
+export const migrate_v64_to_v65 = (
+  v64Data: v64UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v65UserData => {
   return {
     ...v64Data,
     preferences: {

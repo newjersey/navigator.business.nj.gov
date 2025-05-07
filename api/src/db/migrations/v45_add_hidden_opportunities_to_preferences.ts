@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v44UserData } from "@db/migrations/v44_add_cannabis_license_to_profile_data";
 
 export interface v45UserData {
@@ -12,7 +13,11 @@ export interface v45UserData {
   version: number;
 }
 
-export const migrate_v44_to_v45 = (v44Data: v44UserData): v45UserData => {
+export const migrate_v44_to_v45 = (
+  v44Data: v44UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v45UserData => {
   return {
     ...v44Data,
     preferences: {

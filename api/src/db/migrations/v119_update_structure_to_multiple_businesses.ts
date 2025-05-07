@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v118UserData } from "@db/migrations/v118_set_operating_phase_remote_seller_worker";
 import { v4 as uuidv4 } from "uuid";
 
@@ -25,7 +26,11 @@ export interface v119Business {
   formationData: v119FormationData;
 }
 
-export const migrate_v118_to_v119 = (v118Data: v118UserData): v119UserData => {
+export const migrate_v118_to_v119 = (
+  v118Data: v118UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v119UserData => {
   const businessId = uuidv4();
   return {
     user: v118Data.user,

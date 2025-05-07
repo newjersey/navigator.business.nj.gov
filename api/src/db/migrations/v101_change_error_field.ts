@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v100UserData } from "@db/migrations/v100_add_updated_timestamp";
 import { randomInt } from "@shared/intHelpers";
 
@@ -15,7 +16,11 @@ export interface v101UserData {
   version: number;
 }
 
-export const migrate_v100_to_v101 = (v100Data: v100UserData): v101UserData => {
+export const migrate_v100_to_v101 = (
+  v100Data: v100UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v101UserData => {
   if (v100Data.taxFilingData.errorField && v100Data.taxFilingData.errorField === "Business Name") {
     return {
       ...v100Data,

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import {
   v150Business,
   v150BusinessUser,
@@ -5,7 +6,11 @@ import {
 } from "@db/migrations/v150_remove_needs_nexus_dba_name";
 import { randomInt } from "@shared/intHelpers";
 
-export const migrate_v150_to_v151 = (v150Data: v150UserData): v151UserData => {
+export const migrate_v150_to_v151 = (
+  v150Data: v150UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v151UserData => {
   return {
     ...v150Data,
     businesses: Object.fromEntries(

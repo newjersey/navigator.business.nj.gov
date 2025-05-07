@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v46UserData } from "@db/migrations/v46_add_task_item_checklist";
 
 export interface v47UserData {
@@ -13,7 +14,11 @@ export interface v47UserData {
   version: number;
 }
 
-export const migrate_v46_to_v47 = (v46Data: v46UserData): v47UserData => {
+export const migrate_v46_to_v47 = (
+  v46Data: v46UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v47UserData => {
   return {
     ...v46Data,
     profileData: {
