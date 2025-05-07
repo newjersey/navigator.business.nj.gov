@@ -45,9 +45,9 @@ Your petition should start off with the following caption:
 
 In the body of the petition, it is recommended to use numbered paragraphs to address the following:​
 
-* **1. Purpose of the Petition:** Describe the type of service you intend to operate, such as regular route, special operation, or casino, and how it will serve the public convenience and necessity in the municipalities in which you intend to operate
+* **1. Purpose of the Petition:** Describe the type of service you intend to operate and how it will serve the public convenience and necessity
 * **2. Equipment Details:** List each vehicle's make, model, year, Vehicle Identification Number (VIN), passenger capacity, and ownership status.
-* **3. Qualifications:** Outline your experience and qualifications relevant to operating the proposed service.​
+* **3. Qualifications:** Outline your experience and qualifications relevant to the proposed service.​
 * **4. Business Documentation:** Attach copies of your Certificate of Incorporation, Certificate of Good Standing, or other formation documents as applicable.​
 * **5. Ownership and Management:** Provide the total number of shares issued (if applicable) and the names and addresses of individuals or entities with more than 5% voting control, as well as all officers, directors, members, and partners.​
 * **6. Financial Statements:** Include your current income statement and balance sheet, or projected financial statements if not yet operational.
