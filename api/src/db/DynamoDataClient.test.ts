@@ -281,7 +281,10 @@ describe("User and Business Migration with DynamoDataClient", () => {
       { ...business2, userId: user2.user.id },
     ]);
 
-    jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(user1).mockResolvedValueOnce(user2);
+    jest
+      .spyOn(dynamoUsersDataClient, "get")
+      .mockResolvedValueOnce(user1)
+      .mockResolvedValueOnce(user2);
 
     const result = await dynamoDataClient.findUsersByBusinessNamePrefix(prefix);
 

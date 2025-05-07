@@ -136,7 +136,9 @@ export const DynamoDataClient = (
         logger.LogInfo(`No Businesses Found with prefix: ${prefix}`);
         return [];
       }
-      const users = await Promise.all(businesses.map((business) => userDataClient.get(business.userId)));
+      const users = await Promise.all(
+        businesses.map((business) => userDataClient.get(business.userId)),
+      );
 
       return users as UserData[];
     } catch (error) {
