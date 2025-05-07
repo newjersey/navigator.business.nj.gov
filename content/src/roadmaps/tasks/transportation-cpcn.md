@@ -13,7 +13,7 @@ summaryDescriptionMd: >
   :::
 
 
-  Passenger transport vehicles requiring the CPCN include those that:
+  Vehicles requiring the CPCN include those that:
 
 
   * Transport passengers for compensation, such as transit buses
