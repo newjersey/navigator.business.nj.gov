@@ -316,7 +316,12 @@ const airtableUserTestingClient = AirtableUserTestingClient(
 );
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
-const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
+const userDataClient = DynamoUserDataClient(
+  dynamoDb,
+  AWSEncryptionDecryptionClient,
+  USERS_TABLE,
+  dataLogger,
+);
 const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, dataLogger);
 const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, dataLogger);
 

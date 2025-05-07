@@ -20,13 +20,18 @@ export default async function handler(): Promise<void> {
   const logger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
-  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, logger);
-
   const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
     stage: AWS_CRYPTO_CONTEXT_STAGE,
     purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
     origin: AWS_CRYPTO_CONTEXT_ORIGIN,
   });
+
+  const dbClient = DynamoUserDataClient(
+    dynamoDb,
+    AWSEncryptionDecryptionClient,
+    USERS_TABLE,
+    logger,
+  );
 
   const encryptTaxId = encryptTaxIdFactory(AWSEncryptionDecryptionClient);
   await encryptTaxIdBatch(encryptTaxId, dbClient);
