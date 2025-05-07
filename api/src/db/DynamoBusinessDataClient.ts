@@ -81,7 +81,7 @@ export const DynamoBusinessDataClient = (
       {
         ":partition": { S: "businessName" },
         ":prefix": { S: prefix },
-      }
+      },
     );
   };
 
