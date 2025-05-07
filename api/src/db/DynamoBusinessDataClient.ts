@@ -63,7 +63,8 @@ export const DynamoBusinessDataClient = (
           return [];
         }
         const businesses = result.Items.map((item) => unmarshall(item));
-        return Promise.all(businesses.map(async (item) => await item.data));
+        const businessData = businesses.map((item) => item.data as Business);
+        return businessData;
       })
       .catch((error: Error) => {
         logger.LogError(
@@ -73,11 +74,17 @@ export const DynamoBusinessDataClient = (
       });
   };
 
-  const findAllByBusinessName = (businessName: string): Promise<Business[]> => {
-    return findAllBusinessesByIndex("BusinessName", "businessName = :businessName", {
-      ":businessName": { S: businessName },
-    });
+  const findBusinessesByNamePrefix = (prefix: string): Promise<Business[]> => {
+    return findAllBusinessesByIndex(
+      "BusinessNameWithSortKey",
+      "businessNamePartition = :partition AND begins_with(businessName, :prefix)",
+      {
+        ":partition": { S: "businessName" },
+        ":prefix": { S: prefix },
+      }
+    );
   };
+
   const findAllByNAICSCode = (naicsCode: string): Promise<Business[]> => {
     return findAllBusinessesByIndex("NaicsCode", "naicsCode = :naicsCode", {
       ":naicsCode": { S: naicsCode },
@@ -120,6 +127,7 @@ export const DynamoBusinessDataClient = (
   const put = async (businessData: Business): Promise<Business> => {
     const businessName = businessData.profileData.businessName;
     const naicsCode = businessData.profileData.naicsCode;
+    const hasBusinessName = businessName && businessName !== "";
     const params = {
       TableName: tableName,
       Item: {
@@ -127,9 +135,9 @@ export const DynamoBusinessDataClient = (
         industry: businessData.profileData.industryId,
         encryptedTaxId: businessData.profileData.encryptedTaxId,
         data: businessData,
-        // Replaces empty strings with `undefined` to avoid indexing empty values in DynamoDB.
         businessName: businessName === "" ? undefined : businessData.profileData.businessName,
         naicsCode: naicsCode === "" ? undefined : businessData.profileData.naicsCode,
+        businessNamePartition: hasBusinessName ? "businessName" : undefined,
       },
     };
     return db.send(new PutCommand(params)).then(() => {
@@ -163,6 +171,6 @@ export const DynamoBusinessDataClient = (
     findByEncryptedTaxId,
     findAllByIndustry,
     findAllByNAICSCode,
-    findAllByBusinessName,
+    findBusinessesByNamePrefix,
   };
 };

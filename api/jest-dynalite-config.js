@@ -51,6 +51,10 @@ module.exports = {
           AttributeType: "S",
         },
         {
+          AttributeName: "businessNamePartition",
+          AttributeType: "S",
+        },
+        {
           AttributeName: "businessName",
           AttributeType: "S",
         },
@@ -128,6 +132,26 @@ module.exports = {
             {
               AttributeName: "encryptedTaxId",
               KeyType: "HASH",
+            },
+          ],
+          Projection: {
+            ProjectionType: "ALL",
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+        {
+          IndexName: "BusinessNameWithSortKey",
+          KeySchema: [
+            {
+              AttributeName: "businessNamePartition",
+              KeyType: "HASH",
+            },
+            {
+              AttributeName: "businessName",
+              KeyType: "RANGE",
             },
           ],
           Projection: {
