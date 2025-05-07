@@ -1,10 +1,9 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >
-  To legally provide transportation services in New Jersey, you need a
-  Certificate of Public Convenience and Necessity (CPCN). This certificate shows
-  that you have legal authority by the state to engage in transportation
-  services.
+  To provide transportation services in New Jersey, you need a Certificate of
+  Public Convenience and Necessity (CPCN). This certificate shows that you have
+  authority by the state to legally engage in said services.
 
 
   :::infoAlert 
