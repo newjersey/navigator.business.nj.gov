@@ -45,8 +45,6 @@ Your petition should start off with the following caption:
 
 > *“In the matter of the Petition for a Certificate of Public Convenience and Necessity for Conducting \[type of operation] by \[legal name of operator].​”*
 
-&nbsp;
-
 In the body of the petition, it is recommended to use numbered paragraphs to address the following:​
 
 * **1. Purpose of the Petition:** Describe the type of service you intend to operate, such as regular route, special operation, or casino, and how it will serve the public convenience and necessity in the municipalities in which you intend to operate
@@ -83,30 +81,26 @@ Additionally, you will need to provide the following alongside your petition:
 
 ## How to Submit Your Petition
 
-Mail your petition and supporting documentation to the following address and please allow **2 weeks for processing.**:
+Mail your petition and supporting documentation to the following address and please allow **2 weeks for processing**:
 
-&nbsp;
+> New Jersey Motor Vehicle Commission
+> &nbsp;
+>
+> Passenger Carrier Services
+> &nbsp;
+>
+> Business Licensing Services Bureau
+> &nbsp;
+>
+> 225 East State Street
+> &nbsp;
+>
+> PO Box 680
+> &nbsp;
+>
+> Trenton, NJ 08666-0170
 
-New Jersey Motor Vehicle Commission
-&nbsp;
-
-Passenger Carrier Services
-&nbsp;
-
-Business Licensing Services Bureau
-&nbsp;
-
-225 East State Street
-&nbsp;
-
-PO Box 680
-&nbsp;
-
-Trenton, NJ 08666-0170
-
-&nbsp;
-
-After submission of your petition, the NJ MVC will assign you a Docket Number. Upon receiving the docket number, the applicant must:
+After submission of your petition, the NJ MVC will assign you a docket number. Upon receiving the docket number, the applicant must:
 
 * Publish the Notice of petition in a designated newspaper
 * Send notices to municipal clerks where the service operates and competing carriers operating in the same area
