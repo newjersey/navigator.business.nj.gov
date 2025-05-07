@@ -125,3 +125,9 @@ ol {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+*:focus,
+.usa-focus {
+  outline: 0.25rem solid variables.$accent-cool-darker !important;
+  outline-offset: 0 !important;
+}
