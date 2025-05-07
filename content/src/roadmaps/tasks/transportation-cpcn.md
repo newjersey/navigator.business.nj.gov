@@ -41,8 +41,6 @@ Unlike many licenses, **there is no standard application form for the CPCN.** Yo
 
 Your petition should start off with the following caption:
 
-&nbsp;
-
 > *“In the matter of the Petition for a Certificate of Public Convenience and Necessity for Conducting \[type of operation] by \[legal name of operator].​”*
 
 In the body of the petition, it is recommended to use numbered paragraphs to address the following:​
