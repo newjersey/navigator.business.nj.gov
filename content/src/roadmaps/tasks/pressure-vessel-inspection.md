@@ -27,10 +27,9 @@ All pressure vessels must be registered and inspected after they are installed, 
 * Have a “UM” stamp (used for small pressure vessels), or
 * Are owned by a registered owner-user inspection agency (a business that is approved to do its own inspections based on the [National Board of Boiler and Pressure Vessel Inspectors Inspection Code](https://www.nationalboard.org/index.aspx?pageID=4#))
 
-Most pressure vessels must be inspected every 3 years after the initial inspection. This includes:
+Most pressure vessels must be inspected every 3 years after the initial inspection. 
 
-* Unfired pressure vessels, unless they meet specific requirements
-* Pressure vessels used in refrigeration systems
+This includes unfired pressure vessels, unless they meet specific requirements.
 
 ## Pressure Vessels That Do Not Need Inspection
 
