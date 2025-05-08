@@ -22,24 +22,20 @@ agencyAdditionalContext: "Division of Public Safety and Occupational Safety and
 ---
 ## Pressure Vessels That Need Inspection
 
-All pressure vessels must be registered and inspected after they are installed, unless they:
+All pressure vessels must be registered and inspected after they are installed.
 
-* Have a “UM” stamp (used for small pressure vessels), or
-* Are owned by a registered owner-user inspection agency (a business that is approved to do its own inspections based on the [National Board of Boiler and Pressure Vessel Inspectors Inspection Code](https://www.nationalboard.org/index.aspx?pageID=4#))
-
-Most pressure vessels must be inspected every 3 years after the initial inspection. 
-
-This includes unfired pressure vessels, unless they meet specific requirements.
+Most pressure vessels must be inspected every 3 years after the initial inspection. This includes unfired pressure vessels, unless they meet specific requirements.
 
 ## Pressure Vessels That Do Not Need Inspection
 
 If the pressure vessel **meets any** of the following conditions, it does not need to be inspected again:
 
-* Marked with a “UM” stamp
+* Marked with a “UM” stamp (used for small pressure vessels)
 * Internal diameter is less than 6 inches
 * Operates under 15 psig (internal or external pressure)
 * Can handle up to 300 psi of pressure and temperatures up to 210 degrees Fahrenheit, and holds water with air under pressure (where the air only acts as a cushion)
 * Is used as a hot water tank heated by steam/indirectly and serves a building with fewer less than 6 housing units or 25 people, and does not exceed 120 gallons of capacity, 200,000 BTU of heat input, or 200 degrees Fahrenheit
+* Are owned by a registered owner-user inspection agency (a business that is approved to do its own inspections based on the [National Board of Boiler and Pressure Vessel Inspectors Inspection Code](https://www.nationalboard.org/index.aspx?pageID=4#))
 * Is under the control of the United States government and is regulated by a federal agency
 * Is used only for motor vehicle propulsion and is regulated by the  Motor Vehicle Act, Title 39 of the Revised Statutes \[ADD LINK]
 
