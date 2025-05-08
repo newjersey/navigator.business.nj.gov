@@ -25,13 +25,13 @@ agencyAdditionalContext: "New Jersey Department of Labor and Workforce
 
 Refrigeration systems using **flammable or toxic refrigerants** must be inspected if they **meet either** of the following criteria:
 
-* Use 3+ tons of refrigerating capacity
-* Require 6+ driving horsepower 
+* Use over 3 tons of refrigerating capacity
+* Require over 6 driving horsepower 
 
 Refrigeration systems using **nonflammable and nontoxic refrigerants** that have a relief device set over 15 PSIG and are used in a plant of any size or storage capacity must be inspected if they **meet either** of the following criteria:
 
-* Use 18+ tons of refrigerating capacity
-* Require 36+ driving horsepower 
+* Use over 18 tons of refrigerating capacity
+* Require over 36 driving horsepower 
 
 Refrigeration systems must be inspected every year.
 
