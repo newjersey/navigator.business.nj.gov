@@ -24,7 +24,7 @@ callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
 
 A steam or hot water boiler must be inspected if it meets the following condition:
 
-* Has 10+ square feet of heating surface
+* Has 10 square feet or more of heating surface
 
 If the boiler has 1 of the following and serves a building with 6+ housing units or 25+ people, it also requires inspection:
 
