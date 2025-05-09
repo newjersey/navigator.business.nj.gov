@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import {
   v128Business,
   v128UserData,
@@ -33,7 +34,11 @@ interface v129ProfileData extends v129IndustrySpecificData {
   elevatorOwningBusiness: boolean | undefined;
 }
 
-export const migrate_v128_to_v129 = (v128Data: v128UserData): v129UserData => {
+export const migrate_v128_to_v129 = (
+  v128Data: v128UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v129UserData => {
   return {
     ...v128Data,
     businesses: Object.fromEntries(

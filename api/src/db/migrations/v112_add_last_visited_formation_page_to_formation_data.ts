@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v111UserData } from "@db/migrations/v111_add_date_created_and_initial_version";
 import { randomInt } from "@shared/intHelpers";
 
@@ -17,7 +18,11 @@ export interface v112UserData {
   versionWhenCreated: number;
 }
 
-export const migrate_v111_to_v112 = (v111Data: v111UserData): v112UserData => {
+export const migrate_v111_to_v112 = (
+  v111Data: v111UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v112UserData => {
   return {
     ...v111Data,
     formationData: {

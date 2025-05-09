@@ -3,7 +3,12 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
+import {
+  BusinessesDataClient,
+  DatabaseClient,
+  type EncryptionDecryptionClient,
+  UserDataClient,
+} from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 
 import { DynamoDataClient } from "@db/DynamoDataClient";
@@ -38,6 +43,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
   let dynamoBusinessesDataClient: BusinessesDataClient;
   let logger: LogWriterType;
   let dynamoUsersDataClient: UserDataClient;
+  let encryptionDecryptionClient: EncryptionDecryptionClient;
 
   let dynamoDataClient: DatabaseClient;
 
@@ -72,9 +78,18 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
   beforeEach(() => {
     logger = DummyLogWriter;
+    encryptionDecryptionClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+    };
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
     dynamoBusinessesDataClient = DynamoBusinessDataClient(client, dbConfig.tableName, logger);
-    dynamoUsersDataClient = DynamoUserDataClient(client, usersDbConfig.tableName, logger);
+    dynamoUsersDataClient = DynamoUserDataClient(
+      client,
+      encryptionDecryptionClient,
+      usersDbConfig.tableName,
+      logger,
+    );
 
     dynamoDataClient = DynamoDataClient(dynamoUsersDataClient, dynamoBusinessesDataClient, logger);
     (dynamoBusinessesDataClient.put as jest.Mock) = jest.fn();

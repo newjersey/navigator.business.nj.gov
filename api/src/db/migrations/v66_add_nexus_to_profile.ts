@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v65UserData } from "@db/migrations/v65_add_task_progess_card";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v66UserData {
   version: number;
 }
 
-export const migrate_v65_to_v66 = (v65Data: v65UserData): v66UserData => {
+export const migrate_v65_to_v66 = (
+  v65Data: v65UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v66UserData => {
   return {
     ...v65Data,
     profileData: {

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v47UserData } from "@db/migrations/v47_add_profile_documents";
 
 export interface v48UserData {
@@ -13,7 +14,11 @@ export interface v48UserData {
   version: number;
 }
 
-export const migrate_v47_to_v48 = (v47Data: v47UserData): v48UserData => {
+export const migrate_v47_to_v48 = (
+  v47Data: v47UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v48UserData => {
   return {
     ...v47Data,
     user: {

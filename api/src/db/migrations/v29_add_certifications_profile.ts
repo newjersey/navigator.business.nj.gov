@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v28UserData } from "@db/migrations/v28_add_has_existing_business_to_profile";
 
 export interface v29UserData {
@@ -11,7 +12,11 @@ export interface v29UserData {
   version: number;
 }
 
-export const migrate_v28_to_v29 = (v28Data: v28UserData): v29UserData => {
+export const migrate_v28_to_v29 = (
+  v28Data: v28UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v29UserData => {
   return {
     ...v28Data,
     profileData: {

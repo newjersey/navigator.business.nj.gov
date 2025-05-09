@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v40UserData } from "@db/migrations/v40_merge_down_steps";
 
 export interface v41UserData {
@@ -12,7 +13,11 @@ export interface v41UserData {
   version: number;
 }
 
-export const migrate_v40_to_v41 = (v40Data: v40UserData): v41UserData => {
+export const migrate_v40_to_v41 = (
+  v40Data: v40UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v41UserData => {
   return {
     ...v40Data,
     preferences: {

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v3UserData } from "@db/migrations/v3_change_legal_structure";
 import { randomInt } from "@shared/intHelpers";
 
@@ -9,7 +10,11 @@ export interface v4UserData {
   version: number;
 }
 
-export const migrate_v3_to_v4 = (v3Data: v3UserData): v4UserData => {
+export const migrate_v3_to_v4 = (
+  v3Data: v3UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v4UserData => {
   return {
     ...v3Data,
     onboardingData: {

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v55UserData } from "@db/migrations/v55_marketing_and_pr";
 
 export interface v56UserData {
@@ -13,7 +14,11 @@ export interface v56UserData {
   version: number;
 }
 
-export const migrate_v55_to_v56 = (v55Data: v55UserData): v56UserData => {
+export const migrate_v55_to_v56 = (
+  v55Data: v55UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v56UserData => {
   const newIndustryId =
     v55Data.profileData.industryId === "janitorial-services" ||
     v55Data.profileData.industryId === "cleaning-aid"

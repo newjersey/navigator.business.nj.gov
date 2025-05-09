@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v71UserData } from "@db/migrations/v71_add_certified_interior_designer";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v72UserData {
   version: number;
 }
 
-export const migrate_v71_to_v72 = (v71Data: v71UserData): v72UserData => {
+export const migrate_v71_to_v72 = (
+  v71Data: v71UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v72UserData => {
   const taskProgress = v71Data.taskProgress;
 
   return {

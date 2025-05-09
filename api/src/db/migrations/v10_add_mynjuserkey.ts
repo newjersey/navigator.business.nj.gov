@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v9UserData } from "@db/migrations/v9_add_license_status_to_data";
 
 export interface v10UserData {
@@ -9,7 +10,11 @@ export interface v10UserData {
   version: number;
 }
 
-export const migrate_v9_to_v10 = (v9Data: v9UserData): v10UserData => {
+export const migrate_v9_to_v10 = (
+  v9Data: v9UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v10UserData => {
   return {
     ...v9Data,
     user: {

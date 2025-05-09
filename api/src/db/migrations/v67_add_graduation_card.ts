@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v66UserData } from "@db/migrations/v66_add_nexus_to_profile";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v67UserData {
   version: number;
 }
 
-export const migrate_v66_to_v67 = (v66Data: v66UserData): v67UserData => {
+export const migrate_v66_to_v67 = (
+  v66Data: v66UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v67UserData => {
   const graduationCard = v66Data.profileData.businessPersona === "FOREIGN" ? [] : ["graduation"];
 
   return {

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v92UserData } from "@db/migrations/v92_splits_profiledata_interface";
 
 export interface v93UserData {
@@ -13,7 +14,11 @@ export interface v93UserData {
   version: number;
 }
 
-export const migrate_v92_to_v93 = (v92Data: v92UserData): v93UserData => {
+export const migrate_v92_to_v93 = (
+  v92Data: v92UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v93UserData => {
   return {
     ...v92Data,
     profileData: {

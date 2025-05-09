@@ -1,7 +1,12 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v147Business, v147UserData } from "@db/migrations/v147_remove_nonprofit_onboarding_field";
 import { randomInt } from "@shared/intHelpers";
 
-export const migrate_v147_to_v148 = (v147Data: v147UserData): v148UserData => {
+export const migrate_v147_to_v148 = (
+  v147Data: v147UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v148UserData => {
   return {
     ...v147Data,
     businesses: Object.fromEntries(

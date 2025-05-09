@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v101UserData } from "@db/migrations/v101_change_error_field";
 import { randomInt } from "@shared/intHelpers";
 
@@ -15,7 +16,11 @@ export interface v102UserData {
   version: number;
 }
 
-export const migrate_v101_to_v102 = (v101Data: v101UserData): v102UserData => {
+export const migrate_v101_to_v102 = (
+  v101Data: v101UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v102UserData => {
   const visibleSidebarCards: string[] = v101Data.preferences.visibleSidebarCards.reduce(
     (acc: string[], val: string) => {
       const newVal = val === "tax-registration-nudge" ? "registered-for-taxes-nudge" : val;

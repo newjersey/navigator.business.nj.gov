@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v7UserData } from "@db/migrations/v7_add_license_data";
 import { randomInt } from "@shared/intHelpers";
 
@@ -10,7 +11,11 @@ export interface v8UserData {
   version: number;
 }
 
-export const migrate_v7_to_v8 = (v7Data: v7UserData): v8UserData => {
+export const migrate_v7_to_v8 = (
+  v7Data: v7UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v8UserData => {
   const newLegalStructure =
     v7Data.onboardingData.legalStructure === "b-corporation"
       ? undefined

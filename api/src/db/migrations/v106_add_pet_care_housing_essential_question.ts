@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v105UserData } from "@db/migrations/v105_add_pet_care_essential_question";
 import { randomInt } from "@shared/intHelpers";
 
@@ -15,7 +16,11 @@ export interface v106UserData {
   version: number;
 }
 
-export const migrate_v105_to_v106 = (v105Data: v105UserData): v106UserData => {
+export const migrate_v105_to_v106 = (
+  v105Data: v105UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v106UserData => {
   return {
     ...v105Data,
     profileData: {

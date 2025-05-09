@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v12UserData } from "@db/migrations/v12_remove_scorp";
 
 export interface v13UserData {
@@ -9,7 +10,11 @@ export interface v13UserData {
   version: number;
 }
 
-export const migrate_v12_to_v13 = (v12Data: v12UserData): v13UserData => {
+export const migrate_v12_to_v13 = (
+  v12Data: v12UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v13UserData => {
   return {
     ...v12Data,
     onboardingData: {

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v115UserData } from "@db/migrations/v115_rename_tax_filings";
 
 export interface v116UserData {
@@ -16,7 +17,11 @@ export interface v116UserData {
   versionWhenCreated: number;
 }
 
-export const migrate_v115_to_v116 = (v115Data: v115UserData): v116UserData => {
+export const migrate_v115_to_v116 = (
+  v115Data: v115UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v116UserData => {
   return {
     ...v115Data,
     formationData: {

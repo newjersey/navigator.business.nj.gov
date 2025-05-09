@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v2LegalStructure, v2UserData } from "@db/migrations/v2_form_data_to_onboarding_data";
 import { randomInt } from "@shared/intHelpers";
 
@@ -9,7 +10,11 @@ export interface v3UserData {
   version: number;
 }
 
-export const migrate_v2_to_v3 = (v2Data: v2UserData): v3UserData => {
+export const migrate_v2_to_v3 = (
+  v2Data: v2UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v3UserData => {
   const legalStructureMapping: Record<v2LegalStructure, v3LegalStructure> = {
     "Sole Proprietorship": "sole-proprietorship",
     "General Partnership": "general-partnership",

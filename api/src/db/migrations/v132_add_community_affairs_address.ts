@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import {
   v131Business,
   v131UserData,
@@ -38,7 +39,11 @@ export type v132CommunityAffairsAddress = {
   streetAddress2?: string;
   municipality: v132Municipality;
 };
-export const migrate_v131_to_v132 = (v131Data: v131UserData): v132UserData => {
+export const migrate_v131_to_v132 = (
+  v131Data: v131UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v132UserData => {
   return {
     ...v131Data,
     businesses: Object.fromEntries(

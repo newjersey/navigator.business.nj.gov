@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v25UserData } from "@db/migrations/v25_add_intercom_hash_to_user";
 
 export interface v26UserData {
@@ -11,7 +12,11 @@ export interface v26UserData {
   version: number;
 }
 
-export const migrate_v25_to_v26 = (v25Data: v25UserData): v26UserData => {
+export const migrate_v25_to_v26 = (
+  v25Data: v25UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v26UserData => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { dateOfFormation, ...rest } = v25Data.profileData;
   return {
