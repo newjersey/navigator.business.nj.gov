@@ -29,11 +29,9 @@ id: transportation-cpcn
 callToActionLink: ""
 callToActionText: ""
 agencyId: nj-motor-vehicle
-agencyAdditionalContext: ""
+agencyAdditionalContext: Division of Inspection Services
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
-&nbsp;
-
 ## Petition Instructions
 
 Unlike many licenses, **there is no standard application form for the CPCN.** You must draft and submit a [CPCN petition](https://www.nj.gov/mvc/pdf/business/cpcn_instructions.pdf) that meets NJ regulatory requirements.
@@ -42,12 +40,10 @@ Unlike many licenses, **there is no standard application form for the CPCN.** Yo
 
 Your petition should start off with the following caption:
 
-&nbsp;
 > *“In the matter of the Petition for a Certificate of Public Convenience and Necessity for Conducting \[type of operation] by \[legal name of operator].​”*
-&nbsp;
+> &nbsp;
 
 In the body of the petition, it is recommended to use numbered paragraphs to address the following:​
-
 
 * **1. Purpose of the Petition:** Describe the type of service you intend to provide, including routes, pickup locations, and frequency. You must also provide justification for public need of your service, as well as the date in which you plan to start your service.
 * **2. Equipment Details:** List each of your vehicles’ make, model, year, Vehicle Identification Number (VIN), passenger capacity, and ownership status.
@@ -58,8 +54,7 @@ In the body of the petition, it is recommended to use numbered paragraphs to add
 * **7. Projected Financials:** Provide pro forma balance sheets and income statements for the projected first two years of operation.
 * **8. Tariff Sheet:** Provide fares to be charged for your service, including per-passenger fares. If you are not requiring fares, you must describe how the service will be funded, and provide proof of this funding as applicable.
 * **9. Insurance Information:** Attach a copy of your Certificate of Liability Insurance. It must meet the NJ MVC’s liability limit of $1.5 million, minimum.
-&nbsp;
-
+  &nbsp;
 
 ## Petition Supporting Documents
 
@@ -72,32 +67,30 @@ Additionally, you will need to provide the following alongside your petition:
 * $25 Petition Filing Fee
 * $25 Basic Tariff Filing Fee
 * One-tenth of one percent of the applicant’s projected 1st year revenue (minimum of $25)
-&nbsp;
-
+  &nbsp;
 
 ## How to Submit Your Petition
 
 Mail your petition and supporting documentation to the following address and please allow **2 weeks for processing.**:
 &nbsp;
 
-New Jersey Motor Vehicle Commission
-&nbsp;
-
-Passenger Carrier Services
-&nbsp;
-
-
-Business Licensing Services Bureau
-&nbsp;
-
-225 East State Street
-&nbsp;
-
-PO Box 680
-&nbsp;
-
-Trenton, NJ 08666-0170
-&nbsp;
+> New Jersey Motor Vehicle Commission
+> &nbsp;
+>
+> Passenger Carrier Services
+> &nbsp;
+>
+> Business Licensing Services Bureau
+> &nbsp;
+>
+> 225 East State Street
+> &nbsp;
+>
+> PO Box 680
+> &nbsp;
+>
+> Trenton, NJ 08666-0170
+> &nbsp;
 
 After submission of your petition, the NJ MVC will assign you a Docket Number. Upon receiving the docket number, the applicant must:
 
@@ -107,13 +100,15 @@ After submission of your petition, the NJ MVC will assign you a Docket Number. U
 Once your Notice is published, you must obtain an **Affidavit of Publication** from the newspaper and forward it to the above mailing address.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
 A Certificate of Public Convenience and Necessity (CPCN) mailed to you.
+
 :::
 
 :::callout{ showHeader="true" headerText="What if I don’t get a CPCN?" showIcon="false" calloutType="warning" }
-* Operating a vehicle that requires IRP registration without proper credentials can result in fines and penalties imposed by enforcement agencies.
+* Operating qualifying vehicles without a CPCN can result in fines and penalties imposed by enforcement agencies.
 * Your vehicles may be impounded
 * Potential lawsuits or administrative actions may be taken against your business
 :::
 
-**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.go
+**Contact:** (609) 777-4186 or sbiu@mvc.nj.go
