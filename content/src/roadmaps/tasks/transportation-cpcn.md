@@ -94,7 +94,7 @@ Mail your petition and supporting documentation to the following address and ple
 
 After submission of your petition, the NJ MVC will assign you a Docket Number. Upon receiving the docket number, the applicant must:
 
-* Publish the Notice of petition in a designated newspaper
+* Publish the Notice of petition in a newspaper designated by the MVC
 * Send notices to municipal clerks where the service operates and competing carriers operating in the same area.
 
 Once your Notice is published, you must obtain an **Affidavit of Publication** from the newspaper and forward it to the above mailing address.
