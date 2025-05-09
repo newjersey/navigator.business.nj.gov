@@ -1,10 +1,7 @@
-import { Content } from "@/components/Content";
 import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
-import { TaxClearanceCertificateAgencyDropdown } from "@/components/data-fields/TaxClearanceCertificateAgencyDropdown";
 import { TaxPin } from "@/components/data-fields/TaxPin";
-import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -12,20 +9,56 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { ProfileField } from "@/components/profile/ProfileField";
+import { StateAgencyDropdown } from "@/components/tasks/anytime-action/tax-clearance-certificate/StateAgencyDropdown";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { FormEvent, ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
-  saveTaxClearanceCertificateData: () => void;
+  onSave: (event?: FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
 }
 
 export const CheckEligibility = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
+  const { doesFieldHaveError } = useAddressErrors();
+  const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
+    "addressLine1",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidAddressLine2 } = useFormContextFieldHelpers(
+    "addressLine2",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers(
+    "addressCity",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidState } = useFormContextFieldHelpers(
+    "addressState",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers(
+    "addressZipCode",
+    DataFormErrorMapContext,
+  );
+
+  const onValidation = (): void => {
+    setIsValidAddressLine1(!doesFieldHaveError("addressLine1"));
+    setIsValidAddressLine2(!doesFieldHaveError("addressLine2"));
+    setIsValidCity(!doesFieldHaveError("addressCity"));
+    setIsValidState(!doesFieldHaveError("addressState"));
+    setIsValidZipCode(!doesFieldHaveError("addressZipCode"));
+  };
+
   const handleSaveButtonClick = (): void => {
-    props.setStepIndex(2);
-    props.saveTaxClearanceCertificateData();
+    props.onSave();
+    props.onSubmit();
   };
 
   return (
@@ -34,30 +67,38 @@ export const CheckEligibility = (props: Props): ReactElement => {
         <Heading level={2} styleVariant={"h3"}>
           {Config.taxClearanceCertificateStep2.requestingAgencySectionHeader}
         </Heading>
-        <Content className={"text-bold margin-bottom-05"}>
-          {Config.taxClearanceCertificateStep2.requestingAgencyLabel}
-        </Content>
-        <TaxClearanceCertificateAgencyDropdown />
+        <div id={`question-requestingAgencyId`} data-testid={"requestingAgency"}>
+          <StateAgencyDropdown preventRefreshWhenUnmounted />
+        </div>
         <HorizontalLine />
         <div className="margin-top-3">
           <Heading level={2} styleVariant={"h3"}>
             {Config.taxClearanceCertificateStep2.businessInformationSectionHeader}
           </Heading>
         </div>
-        <div className="margin-bottom-2">
-          <FieldLabelProfile fieldName={"businessName"} />
-          <BusinessName inputWidth="full" />
+        <div className="margin-y-2">
+          <ProfileField fieldName={"businessName"} hideLine fullWidth>
+            <BusinessName
+              inputWidth="full"
+              required={true}
+              validationText={Config.taxClearanceCertificateShared.businessNameErrorText}
+              preventRefreshWhenUnmounted
+            />
+          </ProfileField>
         </div>
         <div className="margin-y-2">
-          <UnitesStatesAddress excludeNJ={false} onValidation={() => {}} isFullWidth />
+          <UnitesStatesAddress onValidation={onValidation} isFullWidth />
         </div>
-        <div className="margin-bottom-2">
-          <FieldLabelProfile fieldName="taxId" />
-          <TaxId inputWidth="full" />
+        <div className="margin-y-2">
+          <ProfileField fieldName="taxId" hideLine fullWidth>
+            <TaxId inputWidth="full" preventRefreshWhenUnmounted required />
+          </ProfileField>
         </div>
-
-        <FieldLabelProfile fieldName="taxPin" />
-        <TaxPin inputWidth="full" />
+        <div>
+          <ProfileField fieldName="taxPin" hideLine fullWidth>
+            <TaxPin inputWidth="full" preventRefreshWhenUnmounted required />
+          </ProfileField>
+        </div>
       </div>
       <CtaContainer>
         <ActionBarLayout>

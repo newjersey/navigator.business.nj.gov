@@ -67,7 +67,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   };
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const isFormFieldInValid = useMemo(
+  const isFormFieldInvalid = useMemo(
     () => {
       return fieldStates[fieldName].invalid === true;
     },
@@ -77,7 +77,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
 
   return {
     RegisterForOnSubmit,
-    setIsValid: setIsValid,
-    isFormFieldInvalid: isFormFieldInValid,
+    setIsValid,
+    isFormFieldInvalid,
   };
 };

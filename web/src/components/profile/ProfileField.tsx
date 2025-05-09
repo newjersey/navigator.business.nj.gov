@@ -7,18 +7,18 @@ import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
-  fieldName: ProfileContentField;
-  children: ReactNode;
-  locked?: boolean;
-  lockedValueFormatter?: (value: string) => string;
-  isVisible?: boolean;
-  displayAltDescription?: boolean;
-  noLabel?: boolean;
-  hideHeader?: boolean;
   boldAltDescription?: boolean;
   boldDescription?: boolean;
-  compact?: boolean;
+  children: ReactNode;
+  displayAltDescription?: boolean;
+  fieldName: ProfileContentField;
   fullWidth?: boolean;
+  hideHeader?: boolean;
+  hideLine?: boolean;
+  isVisible?: boolean;
+  locked?: boolean;
+  lockedValueFormatter?: (value: string) => string;
+  noLabel?: boolean;
   optionalText?: boolean;
 }
 
@@ -33,7 +33,7 @@ export const ProfileField = (props: Props): ReactElement => {
   }
 
   const classes: string = [
-    props.compact ? "margin-y-2" : "margin-y-4",
+    props.hideLine ? "margin-y-2" : "margin-y-4",
     props.fullWidth ? "w-full" : "text-field-width-default",
     "add-spacing-on-ele-scroll",
   ].join(" ");
@@ -63,7 +63,7 @@ export const ProfileField = (props: Props): ReactElement => {
         )}
       </div>
 
-      {!props.compact && <hr aria-hidden={true} />}
+      {!props.hideLine && <hr aria-hidden={true} />}
     </>
   );
 };

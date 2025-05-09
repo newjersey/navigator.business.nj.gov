@@ -1,45 +1,71 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
+import { getAllFieldsNonEmpty } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { CheckEligibility } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/CheckEligibility";
 import { Download } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Download";
 import { Requirements } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Requirements";
 import { Review } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Review";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { StepperStep } from "@/lib/types/types";
-import { ReactElement, useState } from "react";
+import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import { FormEvent, ReactElement, useState } from "react";
 
 interface Props {
-  steps: StepperStep[];
+  taxClearanceCertificateData: TaxClearanceCertificateData;
   certificatePdfBlob?: Blob;
-  currentStep: number;
-  stepIndex: (value: ((prevState: number) => number) | number) => void;
   saveTaxClearanceCertificateData: () => void;
-  setStepIndex: (step: number) => void;
+  isValid: () => boolean;
+  getInvalidFieldIds: () => string[];
+  onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
+  CMS_ONLY_stepIndex?: number;
 }
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+
+  const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
   const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
     props.certificatePdfBlob || undefined,
   );
 
   const onStepClick = (step: number): void => {
-    if (step === 2 && props.currentStep === 1) {
-      props.saveTaxClearanceCertificateData();
-    }
-    props.setStepIndex(step);
+    props.saveTaxClearanceCertificateData();
+    setStepIndex(step);
   };
 
-  const steps: { component: ReactElement }[] = [
-    { component: <Requirements setStepIndex={props.stepIndex} /> },
+  const onSave = (): void => {
+    props.saveTaxClearanceCertificateData();
+    setStepIndex(2);
+  };
+
+  const stepperSteps: StepperStep[] = [
+    {
+      name: Config.taxClearanceCertificateShared.stepperOneLabel,
+      hasError: false,
+      isComplete: stepIndex > 0 || getAllFieldsNonEmpty(props.taxClearanceCertificateData),
+    },
+    {
+      name: Config.taxClearanceCertificateShared.stepperTwoLabel,
+      hasError: false,
+      isComplete: props.isValid() && getAllFieldsNonEmpty(props.taxClearanceCertificateData),
+    },
+    {
+      name: Config.taxClearanceCertificateShared.stepperThreeLabel,
+      hasError: false,
+      isComplete: false,
+    },
+  ];
+
+  const stepsComponents: { component: ReactElement }[] = [
+    { component: <Requirements setStepIndex={setStepIndex} /> },
     {
       component: (
-        <CheckEligibility
-          setStepIndex={props.stepIndex}
-          saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
-        />
+        <CheckEligibility setStepIndex={setStepIndex} onSave={onSave} onSubmit={props.onSubmit} />
       ),
     },
     {
       component: (
-        <Review setStepIndex={props.stepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />
+        <Review setStepIndex={setStepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />
       ),
     },
   ];
@@ -54,11 +80,12 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       ) : (
         <>
           <HorizontalStepper
-            steps={props.steps}
-            currentStep={props.currentStep}
+            steps={stepperSteps}
+            currentStep={stepIndex}
             onStepClicked={onStepClick}
           />
-          {steps[props.currentStep].component}
+          <AnytimeActionTaxClearanceCertificateAlert fieldErrors={props.getInvalidFieldIds()} />
+          {stepsComponents[stepIndex].component}
         </>
       )}
     </>
