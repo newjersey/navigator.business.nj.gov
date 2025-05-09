@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v99UserData } from "@db/migrations/v99_added_encrypted_tax_id";
 import { randomInt } from "@shared/intHelpers";
 
@@ -15,7 +16,11 @@ export interface v100UserData {
   version: number;
 }
 
-export const migrate_v99_to_v100 = (v99Data: v99UserData): v100UserData => {
+export const migrate_v99_to_v100 = (
+  v99Data: v99UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v100UserData => {
   return {
     ...v99Data,
     licenseData: v99Data.licenseData

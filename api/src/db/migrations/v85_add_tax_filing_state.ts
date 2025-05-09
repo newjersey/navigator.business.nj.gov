@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v84UserData } from "@db/migrations/v84_fix_completed_filing";
 
 export interface v85UserData {
@@ -13,7 +14,11 @@ export interface v85UserData {
   version: number;
 }
 
-export const migrate_v84_to_v85 = (v84Data: v84UserData): v85UserData => {
+export const migrate_v84_to_v85 = (
+  v84Data: v84UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v85UserData => {
   return {
     ...v84Data,
     taxFilingData: {

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v70UserData } from "@db/migrations/v70_add_staffing_service";
 
 export interface v71UserData {
@@ -13,7 +14,11 @@ export interface v71UserData {
   version: number;
 }
 
-export const migrate_v70_to_v71 = (v70Data: v70UserData): v71UserData => {
+export const migrate_v70_to_v71 = (
+  v70Data: v70UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v71UserData => {
   const taskProgress = v70Data.taskProgress;
 
   return {

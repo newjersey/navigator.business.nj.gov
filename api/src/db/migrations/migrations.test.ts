@@ -1,5 +1,6 @@
 import { CURRENT_GENERATOR, Migrations } from "@db/migrations/migrations";
 import { generateV0UserData } from "@db/migrations/v0_user_data";
+import { type EncryptionDecryptionClient } from "@domain/types";
 import { ConsoleLogWriter } from "@libs/logWriter";
 import { CURRENT_VERSION } from "@shared/userData";
 import fs from "node:fs";
@@ -56,6 +57,16 @@ const areUserDatasEqual = (userData1: object, userData2: object): boolean => {
 const logger = ConsoleLogWriter;
 
 describe("migrations", () => {
+  let encryptionDecryptionClient: EncryptionDecryptionClient;
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    encryptionDecryptionClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+    };
+  });
+
   it("has CURRENT_VERSION number of migrations in the migrations list", () => {
     expect(Migrations.length).toEqual(CURRENT_VERSION);
   });
@@ -143,7 +154,7 @@ describe("migrations", () => {
       let user: unknown = generateV0UserData({});
       try {
         for (const func of Migrations) {
-          user = func(user);
+          user = func(user, { encryptionDecryptionClient });
         }
       } catch (error) {
         logger.LogError(`Dynamo User Migration Test Error - Error: ${error} - Data: ${user}`);
@@ -164,7 +175,7 @@ describe("migrations", () => {
 
       try {
         for (const func of Migrations) {
-          migratedUser = func(migratedUser);
+          migratedUser = func(migratedUser, { encryptionDecryptionClient });
         }
       } catch (error) {
         logger.LogError(

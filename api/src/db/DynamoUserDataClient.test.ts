@@ -3,7 +3,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
-import { UserDataClient } from "@domain/types";
+import { type EncryptionDecryptionClient, UserDataClient } from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
 import { generateUser, generateUserData } from "@shared/test";
@@ -22,13 +22,23 @@ describe("DynamoUserDataClient", () => {
 
   let client: DynamoDBDocumentClient;
   let dynamoUserDataClient: UserDataClient;
+  let encryptionDecryptionClient: EncryptionDecryptionClient;
   let logger: LogWriterType;
 
   beforeEach(() => {
     jest.resetAllMocks();
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
+    encryptionDecryptionClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+    };
     logger = DummyLogWriter;
-    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName, logger);
+    dynamoUserDataClient = DynamoUserDataClient(
+      client,
+      encryptionDecryptionClient,
+      dbConfig.tableName,
+      logger,
+    );
   });
 
   it("should throw an error when attempting to retrieve a non-existent user by ID", async () => {

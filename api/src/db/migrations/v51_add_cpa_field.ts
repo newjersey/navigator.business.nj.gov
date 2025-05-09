@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v50UserData } from "@db/migrations/v50_fix_annual_conditional_ids";
 
 export interface v51UserData {
@@ -13,7 +14,11 @@ export interface v51UserData {
   version: number;
 }
 
-export const migrate_v50_to_v51 = (v50Data: v50UserData): v51UserData => {
+export const migrate_v50_to_v51 = (
+  v50Data: v50UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v51UserData => {
   return {
     ...v50Data,
     profileData: {

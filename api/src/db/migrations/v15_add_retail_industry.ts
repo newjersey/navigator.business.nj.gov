@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v14UserData } from "@db/migrations/v14_add_cleaning_aid_industry";
 
 export interface v15UserData {
@@ -9,7 +10,11 @@ export interface v15UserData {
   version: number;
 }
 
-export const migrate_v14_to_v15 = (v14Data: v14UserData): v15UserData => {
+export const migrate_v14_to_v15 = (
+  v14Data: v14UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v15UserData => {
   return {
     ...v14Data,
     version: 15,

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v42UserData } from "@db/migrations/v42_add_sector_to_profile_data";
 
 export interface v43UserData {
@@ -24,7 +25,11 @@ const getOnboardingFlow = (
   }
 };
 
-export const migrate_v42_to_v43 = (v42Data: v42UserData): v43UserData => {
+export const migrate_v42_to_v43 = (
+  v42Data: v42UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v43UserData => {
   return {
     ...v42Data,
     profileData: {

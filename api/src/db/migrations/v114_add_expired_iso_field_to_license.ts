@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v113UserData } from "@db/migrations/v113_add_business_structure_task_completion";
 
 export interface v114UserData {
@@ -16,7 +17,11 @@ export interface v114UserData {
   versionWhenCreated: number;
 }
 
-export const migrate_v113_to_v114 = (v113Data: v113UserData): v114UserData => {
+export const migrate_v113_to_v114 = (
+  v113Data: v113UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v114UserData => {
   return {
     ...v113Data,
     version: 114,

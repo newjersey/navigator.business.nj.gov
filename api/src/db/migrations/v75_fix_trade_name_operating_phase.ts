@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v74UserData } from "@db/migrations/v74_change_register_for_taxes_foreign_id";
 import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
@@ -15,7 +16,11 @@ export interface v75UserData {
   version: number;
 }
 
-export const migrate_v74_to_v75 = (v74Data: v74UserData): v75UserData => {
+export const migrate_v74_to_v75 = (
+  v74Data: v74UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v75UserData => {
   const legalStructure = LookupLegalStructureById(v74Data.profileData.legalStructureId);
   const newOperatingPhase =
     legalStructure.hasTradeName && v74Data.profileData.operatingPhase === "NEEDS_TO_FORM"

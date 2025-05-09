@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v22UserData } from "@db/migrations/v22_switch_legal_structure_to_id";
 
 export interface v23UserData {
@@ -11,7 +12,11 @@ export interface v23UserData {
   version: number;
 }
 
-export const migrate_v22_to_v23 = (v22Data: v22UserData): v23UserData => {
+export const migrate_v22_to_v23 = (
+  v22Data: v22UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v23UserData => {
   const userData = {
     ...v22Data,
     profileData: {

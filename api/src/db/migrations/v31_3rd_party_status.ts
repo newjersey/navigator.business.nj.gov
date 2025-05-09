@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v30UserData } from "@db/migrations/v30_add_existing_employees";
 
 export interface v31UserData {
@@ -36,7 +37,11 @@ export type v31ExternalStatus = {
   userTesting?: v31UserTestingResponse;
 };
 
-export const migrate_v30_to_v31 = (v30Data: v30UserData): v31UserData => {
+export const migrate_v30_to_v31 = (
+  v30Data: v30UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v31UserData => {
   return {
     ...v30Data,
     user: {

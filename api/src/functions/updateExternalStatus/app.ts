@@ -1,8 +1,19 @@
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
+import { AWSEncryptionDecryptionFactory } from "@client/AwsEncryptionDecryptionFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { addToUserTestingBatch } from "@domain/user-testing/addToUserTestingBatch";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
-import { DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE, USERS_TABLE } from "@functions/config";
+import {
+  AWS_CRYPTO_CONTEXT_ORIGIN,
+  AWS_CRYPTO_CONTEXT_PURPOSE,
+  AWS_CRYPTO_CONTEXT_STAGE,
+  AWS_CRYPTO_KEY,
+  DYNAMO_OFFLINE_PORT,
+  IS_DOCKER,
+  IS_OFFLINE,
+  STAGE,
+  USERS_TABLE,
+} from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
 import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
@@ -12,7 +23,17 @@ import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory
 export default async function handler(): Promise<void> {
   const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
-  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
+  const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+    stage: AWS_CRYPTO_CONTEXT_STAGE,
+    purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
+    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  });
+  const dbClient = DynamoUserDataClient(
+    dynamoDb,
+    AWSEncryptionDecryptionClient,
+    USERS_TABLE,
+    dataLogger,
+  );
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 
   const GOV_DELIVERY_BASE_URL =

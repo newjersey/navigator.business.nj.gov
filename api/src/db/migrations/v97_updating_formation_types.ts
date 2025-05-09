@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v96UserData } from "@db/migrations/v96_added_date_field_to_tax_filing_data";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v97UserData {
   version: number;
 }
 
-export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
+export const migrate_v96_to_v97 = (
+  v96Data: v96UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v97UserData => {
   const {
     formationData: { formationFormData, ...remainingFormation },
     ...props

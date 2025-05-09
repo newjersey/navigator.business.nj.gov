@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v32UserData } from "@db/migrations/v32_3rd_party_status_status";
 
 export interface v33UserData {
@@ -12,7 +13,11 @@ export interface v33UserData {
   version: number;
 }
 
-export const migrate_v32_to_v33 = (v32Data: v32UserData): v33UserData => {
+export const migrate_v32_to_v33 = (
+  v32Data: v32UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v33UserData => {
   return {
     ...v32Data,
     formationData: {

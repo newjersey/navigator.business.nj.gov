@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v38UserData } from "@db/migrations/v38_swap_certification_for_ownership";
 
 export interface v39UserData {
@@ -12,7 +13,11 @@ export interface v39UserData {
   version: number;
 }
 
-export const migrate_v38_to_v39 = (v38Data: v38UserData): v39UserData => {
+export const migrate_v38_to_v39 = (
+  v38Data: v38UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v39UserData => {
   return {
     ...v38Data,
     profileData: { ...v38Data.profileData, taxPin: undefined },

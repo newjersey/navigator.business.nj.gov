@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v6UserData } from "@db/migrations/v6_add_home_based_business";
 import { randomInt } from "@shared/intHelpers";
 
@@ -10,7 +11,11 @@ export interface v7UserData {
   version: number;
 }
 
-export const migrate_v6_to_v7 = (v6Data: v6UserData): v7UserData => {
+export const migrate_v6_to_v7 = (
+  v6Data: v6UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v7UserData => {
   return {
     ...v6Data,
     licenseSearchData: undefined,

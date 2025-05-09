@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v19UserData } from "@db/migrations/v19_add_employment_agency_roadmap";
 
 export interface v20UserData {
@@ -11,7 +12,11 @@ export interface v20UserData {
   version: number;
 }
 
-export const migrate_v19_to_v20 = (v19Data: v19UserData): v20UserData => {
+export const migrate_v19_to_v20 = (
+  v19Data: v19UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v20UserData => {
   const updatedOnboardingData = v19Data.onboardingData;
   const industryId = v19Data.onboardingData.industry;
   delete updatedOnboardingData.industry;

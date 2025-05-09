@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v76UserData } from "@db/migrations/v76_fix_trade_name_operating_phase_round_2";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v77UserData {
   version: number;
 }
 
-export const migrate_v76_to_v77 = (v76Data: v76UserData): v77UserData => {
+export const migrate_v76_to_v77 = (
+  v76Data: v76UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v77UserData => {
   const updatedCards = v76Data.preferences.visibleRoadmapSidebarCards.filter((cardId) => {
     return cardId !== "graduation";
   });

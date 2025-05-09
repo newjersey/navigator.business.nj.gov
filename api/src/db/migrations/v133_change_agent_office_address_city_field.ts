@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v132Business, v132UserData } from "@db/migrations/v132_add_community_affairs_address";
 
 export interface v133ProfileData extends v133IndustrySpecificData {
@@ -35,7 +36,11 @@ export type v133CommunityAffairsAddress = {
   streetAddress2?: string;
   municipality: v133Municipality;
 };
-export const migrate_v132_to_v133 = (v132Data: v132UserData): v133UserData => {
+export const migrate_v132_to_v133 = (
+  v132Data: v132UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v133UserData => {
   return {
     ...v132Data,
     businesses: Object.fromEntries(

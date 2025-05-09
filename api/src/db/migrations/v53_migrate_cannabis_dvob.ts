@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v52UserData } from "@db/migrations/v52_add_naics_code";
 
 export interface v53UserData {
@@ -13,7 +14,11 @@ export interface v53UserData {
   version: number;
 }
 
-export const migrate_v52_to_v53 = (v52Data: v52UserData): v53UserData => {
+export const migrate_v52_to_v53 = (
+  v52Data: v52UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v53UserData => {
   const vetOwnedValue = v52Data.taskItemChecklist["general-veteran-owned"];
   delete v52Data.taskItemChecklist["general-veteran-owned"];
   return {

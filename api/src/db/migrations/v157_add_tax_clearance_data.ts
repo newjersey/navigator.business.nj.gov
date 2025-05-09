@@ -1,7 +1,12 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v156Business, v156UserData } from "@db/migrations/v156_remove_in_progress_task_status";
 import { randomInt } from "@shared/intHelpers";
 
-export const migrate_v156_to_v157 = (v156Data: v156UserData): v157UserData => {
+export const migrate_v156_to_v157 = (
+  v156Data: v156UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v157UserData => {
   return {
     ...v156Data,
     businesses: Object.fromEntries(

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v67UserData } from "@db/migrations/v67_add_graduation_card";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v68UserData {
   version: number;
 }
 
-export const migrate_v67_to_v68 = (v67Data: v67UserData): v68UserData => {
+export const migrate_v67_to_v68 = (
+  v67Data: v67UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v68UserData => {
   const taskProgress = v67Data.taskProgress;
 
   if (v67Data.formationData.getFilingResponse?.success === true) {

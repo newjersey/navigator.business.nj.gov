@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v117UserData } from "@db/migrations/v117_add_onboarding_nonprofit";
 
 export interface v118UserData {
@@ -16,7 +17,11 @@ export interface v118UserData {
   versionWhenCreated: number;
 }
 
-export const migrate_v117_to_v118 = (v117Data: v117UserData): v118UserData => {
+export const migrate_v117_to_v118 = (
+  v117Data: v117UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v118UserData => {
   const isRemoteSellerWorker =
     v117Data.profileData.businessPersona === "FOREIGN" &&
     (v117Data.profileData.foreignBusinessType === "REMOTE_SELLER" ||

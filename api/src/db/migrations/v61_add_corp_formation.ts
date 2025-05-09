@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v60UserData } from "@db/migrations/v60_add_llp_suffix";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v61UserData {
   version: number;
 }
 
-export const migrate_v60_to_v61 = (v60Data: v60UserData): v61UserData => {
+export const migrate_v60_to_v61 = (
+  v60Data: v60UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v61UserData => {
   return {
     ...v60Data,
     formationData: {

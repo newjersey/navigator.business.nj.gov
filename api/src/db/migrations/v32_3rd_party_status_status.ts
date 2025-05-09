@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v31UserData } from "@db/migrations/v31_3rd_party_status";
 
 export interface v32UserData {
@@ -43,7 +44,11 @@ export const newsletterStatusList = [
   "QUESTION_WARNING",
 ] as const;
 
-export const migrate_v31_to_v32 = (v31Data: v31UserData): v32UserData => {
+export const migrate_v31_to_v32 = (
+  v31Data: v31UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v32UserData => {
   return {
     ...v31Data,
     user: {

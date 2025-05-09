@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import {
   v134Business,
   v134UserData,
@@ -25,7 +26,11 @@ export interface v135IndustrySpecificData {
   residentialConstructionType: v135ResidentialConstructionType;
 }
 
-export const migrate_v134_to_v135 = (v134Data: v134UserData): v135UserData => {
+export const migrate_v134_to_v135 = (
+  v134Data: v134UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v135UserData => {
   return {
     ...v134Data,
     businesses: Object.fromEntries(

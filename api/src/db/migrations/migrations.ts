@@ -161,7 +161,9 @@ import { migrate_v157_to_v158 } from "@db/migrations/v158_login_email_to_lowerca
 import { migrate_v158_to_v159 } from "@db/migrations/v159_remove_entity_id";
 import { migrate_v159_to_v160 } from "@db/migrations/v160_add_xray_registration_data";
 
-export type MigrationFunction = (data: any) => any;
+import { MigrationClients } from "@db/migrations/types";
+
+export type MigrationFunction = (data: any, clients: MigrationClients | undefined) => any;
 
 export const Migrations: MigrationFunction[] = [
   migrate_v0_to_v1,

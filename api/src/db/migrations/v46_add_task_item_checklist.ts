@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v45UserData } from "@db/migrations/v45_add_hidden_opportunities_to_preferences";
 
 export interface v46UserData {
@@ -13,7 +14,11 @@ export interface v46UserData {
   version: number;
 }
 
-export const migrate_v45_to_v46 = (v45Data: v45UserData): v46UserData => {
+export const migrate_v45_to_v46 = (
+  v45Data: v45UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v46UserData => {
   return {
     ...v45Data,
     taskItemChecklist: {},

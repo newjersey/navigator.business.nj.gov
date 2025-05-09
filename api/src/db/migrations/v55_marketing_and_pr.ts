@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v54UserData } from "@db/migrations/v54_add_business_purpose";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v55UserData {
   version: number;
 }
 
-export const migrate_v54_to_v55 = (v54Data: v54UserData): v55UserData => {
+export const migrate_v54_to_v55 = (
+  v54Data: v54UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v55UserData => {
   const newIndustryId =
     v54Data.profileData.industryId === "pr-consultant" ||
     v54Data.profileData.industryId === "marketing-consulting"

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v110UserData } from "@db/migrations/v110_rename_form_progress_to_onboarding_form_progress";
 
 export interface v111UserData {
@@ -16,7 +17,11 @@ export interface v111UserData {
   versionWhenCreated: number;
 }
 
-export const migrate_v110_to_v111 = (v110Data: v110UserData): v111UserData => {
+export const migrate_v110_to_v111 = (
+  v110Data: v110UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v111UserData => {
   return {
     ...v110Data,
     dateCreatedISO: undefined,

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v103UserData } from "@db/migrations/v103_change_tax_calendar_view_default";
 import { randomInt } from "@shared/intHelpers";
 
@@ -15,7 +16,11 @@ export interface v104UserData {
   version: number;
 }
 
-export const migrate_v103_to_v104 = (v103Data: v103UserData): v104UserData => {
+export const migrate_v103_to_v104 = (
+  v103Data: v103UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v104UserData => {
   return {
     ...v103Data,
     profileData: {

@@ -9,16 +9,30 @@
 */
 import { BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
+import { AWSEncryptionDecryptionFactory } from "@client/AwsEncryptionDecryptionFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoDataClient } from "@db/DynamoDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { BUSINESSES_TABLE, USERS_TABLE } from "@functions/config";
+import {
+  AWS_CRYPTO_CONTEXT_ORIGIN,
+  AWS_CRYPTO_CONTEXT_PURPOSE,
+  AWS_CRYPTO_CONTEXT_STAGE,
+  AWS_CRYPTO_KEY,
+  BUSINESSES_TABLE,
+  USERS_TABLE,
+} from "@functions/config";
 import { generateUserData } from "@shared/test";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
 
 const BATCH_SIZE = 25;
 const dynamoDb = createDynamoDbClient(true, false, 8000);
+
+const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+  stage: AWS_CRYPTO_CONTEXT_STAGE,
+  purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
+  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+});
 
 class BasicLogger {
   private id: string;
@@ -69,7 +83,7 @@ const batchWriteUsers = async (users: any[]): Promise<number> => {
           data: userData,
           version: userData.version,
         },
-        { removeUndefinedValues: true }
+        { removeUndefinedValues: true },
       );
 
       return {
@@ -98,7 +112,12 @@ const run = async (): Promise<void> => {
   console.log("Done inserting users.");
   console.log(`Starting migration of ${outdatedVersionCount} users`);
 
-  const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, logger);
+  const userDataClient = DynamoUserDataClient(
+    dynamoDb,
+    AWSEncryptionDecryptionClient,
+    USERS_TABLE,
+    logger,
+  );
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
   const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, logger);
 

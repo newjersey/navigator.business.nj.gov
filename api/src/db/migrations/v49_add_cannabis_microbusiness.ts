@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v48UserData } from "@db/migrations/v48_add_ab_experience";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,7 +15,11 @@ export interface v49UserData {
   version: number;
 }
 
-export const migrate_v48_to_v49 = (v48Data: v48UserData): v49UserData => {
+export const migrate_v48_to_v49 = (
+  v48Data: v48UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v49UserData => {
   return {
     ...v48Data,
     profileData: {

@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v104UserData } from "@db/migrations/v104_add_needs_nexus_dba_name_field";
 import { randomInt } from "@shared/intHelpers";
 
@@ -15,7 +16,11 @@ export interface v105UserData {
   version: number;
 }
 
-export const migrate_v104_to_v105 = (v104Data: v104UserData): v105UserData => {
+export const migrate_v104_to_v105 = (
+  v104Data: v104UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v105UserData => {
   return {
     ...v104Data,
     profileData: {

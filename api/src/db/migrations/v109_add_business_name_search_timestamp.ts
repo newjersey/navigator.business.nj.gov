@@ -1,3 +1,4 @@
+import { type MigrationClients } from "@db/migrations/types";
 import { v108UserData } from "@db/migrations/v108_add_business_name_search_to_formation_data";
 
 export interface v109UserData {
@@ -14,7 +15,11 @@ export interface v109UserData {
   version: number;
 }
 
-export const migrate_v108_to_v109 = (v108Data: v108UserData): v109UserData => {
+export const migrate_v108_to_v109 = (
+  v108Data: v108UserData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _?: MigrationClients,
+): v109UserData => {
   return v108Data.formationData.businessNameSearch?.businessNameAvailability
     ? {
         ...v108Data,
