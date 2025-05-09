@@ -14,6 +14,7 @@ export interface ProfileDataFieldProps<T = unknown>
   inputProps?: OutlinedInputProps;
   type?: HTMLInputTypeAttribute;
   inputWidth?: "full" | "default" | "reduced" | undefined;
+  preventRefreshWhenUnmounted?: boolean;
 }
 
 export const ProfileDataField = <T,>({
@@ -52,6 +53,7 @@ export const ProfileDataField = <T,>({
         {...props}
         validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}
         handleChange={handleChange}
+        preventRefreshWhenUnmounted={props.preventRefreshWhenUnmounted}
       />
     </div>
   );

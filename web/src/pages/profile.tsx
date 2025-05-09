@@ -446,7 +446,7 @@ const ProfilePage = (props: Props): ReactElement => {
               fieldName="homeBasedBusiness"
               isVisible={displayHomedBaseBusinessQuestion()}
               displayAltDescription={displayAltHomeBasedBusinessDescription}
-              compact
+              hideLine
               fullWidth
               hideHeader
               boldAltDescription
@@ -458,7 +458,7 @@ const ProfilePage = (props: Props): ReactElement => {
             <ProfileField
               fieldName="plannedRenovationQuestion"
               isVisible={displayPlannedRenovationQuestionQuestion()}
-              compact
+              hideLine
               fullWidth
               hideHeader
               displayAltDescription
@@ -681,7 +681,7 @@ const ProfilePage = (props: Props): ReactElement => {
               fieldName="homeBasedBusiness"
               isVisible={displayHomedBaseBusinessQuestion()}
               displayAltDescription={displayAltHomeBasedBusinessDescription}
-              compact
+              hideLine
               fullWidth
               hideHeader
               optionalText
@@ -694,7 +694,7 @@ const ProfilePage = (props: Props): ReactElement => {
             <ProfileField
               fieldName="plannedRenovationQuestion"
               isVisible={displayPlannedRenovationQuestionQuestion()}
-              compact
+              hideLine
               fullWidth
               hideHeader
               displayAltDescription
@@ -707,7 +707,7 @@ const ProfilePage = (props: Props): ReactElement => {
               fieldName="elevatorOwningBusiness"
               displayAltDescription={displayAltHomeBasedBusinessDescription}
               isVisible={displayElevatorQuestion()}
-              compact
+              hideLine
               fullWidth
               hideHeader
               boldAltDescription
@@ -730,7 +730,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 fieldName="vacantPropertyOwner"
                 isVisible
                 hideHeader
-                compact
+                hideLine
                 fullWidth
                 boldAltDescription
                 boldDescription
@@ -873,7 +873,7 @@ const ProfilePage = (props: Props): ReactElement => {
             fieldName="homeBasedBusiness"
             isVisible={displayHomedBaseBusinessQuestion()}
             displayAltDescription={displayAltHomeBasedBusinessDescription}
-            compact
+            hideLine
             fullWidth
             hideHeader
             boldAltDescription
@@ -893,7 +893,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 fieldName="carnivalRideOwningBusiness"
                 isVisible={displayCarnivalRidesQuestion()}
                 hideHeader
-                compact
+                hideLine
                 fullWidth
                 boldAltDescription
                 boldDescription
@@ -909,7 +909,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 fieldName="travelingCircusOrCarnivalOwningBusiness"
                 isVisible={displayCarnivalRidesQuestion()}
                 hideHeader
-                compact
+                hideLine
                 fullWidth
                 boldAltDescription
                 boldDescription
@@ -925,7 +925,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 fieldName="vacantPropertyOwner"
                 isVisible={displayVacantBuildingOwnerQuestion()}
                 hideHeader
-                compact
+                hideLine
                 fullWidth
                 boldAltDescription
                 boldDescription
