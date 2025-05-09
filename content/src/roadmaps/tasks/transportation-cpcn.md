@@ -48,7 +48,7 @@ In the body of the petition, it is recommended to use numbered paragraphs to add
 * **1. Purpose of the Petition:** Describe the type of service you intend to provide, including routes, pickup locations, and frequency. You must also provide justification for public need of your service, as well as the date in which you plan to start your service.
 * **2. Equipment Details:** List each of your vehicles’ make, model, year, Vehicle Identification Number (VIN), passenger capacity, and ownership status.
 * **3. Qualifications:** Describe your experience and qualifications relevant to the service you want to operate.
-* **4. Business Documentation:**Attach copies of your Certificate of Incorporation, Certificate of Good Standing, or other business formation documents as applicable. Casino bus operations should additionally provide letters of agreement.
+* **4. Business Documentation:** Attach copies of your Certificate of Incorporation, Certificate of Good Standing, or other business formation documents as applicable. Casino bus operations should additionally provide letters of agreement.
 * **5. Ownership and Management:** Provide the total number of shares issued, if applicable, and the names and addresses of all those with more than 5% voting control. Please also specify all officers, directors, members, and partners.
 * **6. Financial Statements:** Provide your current income statement and balance sheet, or projected financial statements if not yet operational.
 * **7. Projected Financials:** Provide pro forma balance sheets and income statements for the projected first two years of operation.
@@ -92,9 +92,9 @@ Mail your petition and supporting documentation to the following address and ple
 > Trenton, NJ 08666-0170
 > &nbsp;
 
-After submission of your petition, the NJ MVC will assign you a Docket Number. Upon receiving the docket number, the applicant must:
+After submission of your petition, the NJ MVC will assign you a docket number. Upon receiving the docket number, the applicant must:
 
-* Publish the Notice of petition in a newspaper designated by the MVC
+* Publish a Notice of petition in a newspaper designated by the MVC
 * Send notices to municipal clerks where the service operates and competing carriers operating in the same area.
 
 Once your Notice is published, you must obtain an **Affidavit of Publication** from the newspaper and forward it to the above mailing address.
