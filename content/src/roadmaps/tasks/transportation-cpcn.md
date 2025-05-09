@@ -29,7 +29,7 @@ id: transportation-cpcn
 callToActionLink: ""
 callToActionText: ""
 agencyId: nj-motor-vehicle
-agencyAdditionalContext: Division of Inspection Services
+agencyAdditionalContext: Business Licensing Services Bureau – Passenger Carrier Unit
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
 ## Petition Instructions
