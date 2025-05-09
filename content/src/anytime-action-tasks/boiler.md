@@ -81,7 +81,8 @@ Trenton, NJ 08625-0392
 
 :::callout{ showHeader="true" headerText="What if I don't get my boiler inspected?" showIcon="false" calloutType="warning" }
 
-If your equipment is not inspected as required, it could pose serious safety risks. You could face fines or legal penalties for non-compliance
+* If your equipment is not inspected as required, it could pose serious safety risks. You could face fines or legal penalties for non-compliance
+* For new boilers, you may not be able to get an official `Certificate of Occupancy|` for your building until your inspection is passed
 
 :::
 
