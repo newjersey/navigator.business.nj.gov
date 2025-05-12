@@ -38,7 +38,7 @@ If the pressure vessel **meets any** of the following conditions, it does not ne
 * Is used as a hot water tank heated by steam/indirectly and serves a building with fewer less than 6 housing units or 25 people, and does not exceed 120 gallons of capacity, 200,000 BTU of heat input, or 200 degrees Fahrenheit
 * Are owned by a registered owner-user inspection agency (a business that is approved to do its own inspections based on the [National Board of Boiler and Pressure Vessel Inspectors Inspection Code](https://www.nationalboard.org/index.aspx?pageID=4#))
 * Is under the control of the United States government and is regulated by a federal agency
-* Is used only for motor vehicle propulsion and is regulated by the  Motor Vehicle Act, Title 39 of the Revised Statutes \[ADD LINK]
+* Is used only for motor vehicle propulsion and is regulated by the [Motor Vehicle Act, Title 39 of the Revised Statutes](https://www.nj.gov/mvc/about/regs.htm)
 
 ## How Inspections Work
 
