@@ -10,9 +10,9 @@ notesMd: >-
   4.21: SME approved, publishing task
 
   4.18: Revisions made with guidance from Jess
-summaryDescriptionMd: " Your boilers may need to be inspected regularly to
-  ensure they are working safely. If a boiler is newly installed or recently
-  replaced, **it must be registered and inspected within 30 days**."
+summaryDescriptionMd: If your boiler is newly installed or recently replaced,
+  **it must be registered and inspected within 30 days**. Your boiler may also
+  need to be inspected regularly to ensure it is working safely.
 urlSlug: boiler-inspection
 displayname: boiler-inspection
 name: Get Your Boiler Registered and Inspected
