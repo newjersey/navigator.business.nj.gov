@@ -46,6 +46,13 @@
       "step": 4,
       "weight": 10,
       "task": "search-licenses-retail"
+    },
+    {
+      "weight": 20,
+      "step": 4,
+      "licenseTask": "boiler-inspection",
+      "task": "boiler-inspection",
+      "required": true
     }
   ],
   "name": "Retail",
@@ -55,7 +62,9 @@
     "cigarette-manufacture-sell",
     "other-businesses-CRTK-survey",
     "retail-pesticide-dealer-licensing",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "inspect-boiler",
+    "business-vehicle-irp"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {

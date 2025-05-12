@@ -45,12 +45,16 @@
     {
       "step": 3,
       "weight": 21
+    },
+    {
+      "step": 4,
+      "licenseTask": "rmw-generator-registration",
+      "required": true,
+      "weight": 1
     }
   ],
   "name": "Acupuncture",
-  "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["business-vehicle-title-reg"],
   "displayname": "acupuncture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

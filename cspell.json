@@ -229,7 +229,10 @@
     "XRSY",
     "LSRP",
     "pedodontics",
-    "maxillofacial"
+    "maxillofacial",
+    "MIBBPVC",
+    "psig",
+    "ACORD"
   ],
   "ignorePaths": [
     "node_modules/**",

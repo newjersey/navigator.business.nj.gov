@@ -2,7 +2,7 @@
 id: mvc-title
 name: Get a Title for Your Business Vehicle(s)
 category:
-  - Purchase New Products or Equipment
+  - Manage My Business Vehicles
 applyToAllUsers: false
 industryIds: []
 sectorIds:

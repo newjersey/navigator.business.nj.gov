@@ -53,13 +53,16 @@
       "weight": 25,
       "licenseTask": "mortuary-practitioner",
       "required": false
+    },
+    {
+      "step": 4,
+      "licenseTask": "rmw-generator-registration",
+      "required": true,
+      "weight": 100
     }
   ],
   "name": "Funeral Services",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "business-vehicle-title-reg", "crematory"],
   "displayname": "funeral",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

@@ -1,12 +1,17 @@
 {
   "arrayOfTaxClearanceCertificateIssuingAgencies": [
-    { "name": "New Jersey Board of Public Utilities", "id": "newJerseyBoardOfPublicUtilities" },
+    {
+      "name": "New Jersey Board of Public Utilities",
+      "id": "newJerseyBoardOfPublicUtilities"
+    },
     {
       "name": "New Jersey Department of Community Affairs",
       "id": "newJerseyDepartmentOfCommunityAffairs"
     },
-
-    { "name": "New Jersey Department of Health", "id": "newJerseyDepartmentOfHealth" },
+    {
+      "name": "New Jersey Department of Health",
+      "id": "newJerseyDepartmentOfHealth"
+    },
     {
       "name": "New Jersey Department of Labor & Workforce Development",
       "id": "newJerseyDepartmentOfLabor&WorkforceDevelopment"
@@ -24,28 +29,33 @@
       "id": "newJerseyCasinoReinvestmentDevelopmentAuthority"
     },
     {
-      "name": "New Jersey Commerce, Economic Growth & Tourism Commission",
-      "id": "newJerseyCommerceEconomicGrowth&TourismCommission"
-    },
-    {
-      "name": "New Jersey Commission on Science, innovation and Technology",
+      "name": "New Jersey Commission on Science, Innovation and Technology",
       "id": "newJerseyCommissionOnScienceInnovation&Technology"
     },
     {
-      "name": "New Jersey Department of Children & Families",
+      "name": "New Jersey Department of Children and Families",
       "id": "newJerseyDepartmentOfChildren&Families"
     },
     {
       "name": "New Jersey Department of Human Services",
       "id": "newJerseyDepartmentOfHumanServices"
     },
-    { "name": "New Jersey Department of Treasury", "id": "newJerseyDepartmentOfTreasury" },
     {
-      "name": "New Jersey Housing & Mortgage Finance Agency",
+      "name": "New Jersey Department of Treasury",
+      "id": "newJerseyDepartmentOfTreasury"
+    },
+    {
+      "name": "New Jersey Housing and Mortgage Finance Agency",
       "id": "newJerseyHousing&MortgageFinanceAgency"
     },
-    { "name": "New Jersey Secretary of State", "id": "newJerseySecretaryOfState" },
-    { "name": "New Jersey Redevelopment Authority", "id": "newJerseyRedevelopmentAuthority" },
+    {
+      "name": "New Jersey Secretary of State",
+      "id": "newJerseySecretaryOfState"
+    },
+    {
+      "name": "New Jersey Redevelopment Authority",
+      "id": "newJerseyRedevelopmentAuthority"
+    },
     {
       "name": "New Jersey Department of Environmental Protection",
       "id": "newJerseyDepartmentOfEnvironmentalProtection"

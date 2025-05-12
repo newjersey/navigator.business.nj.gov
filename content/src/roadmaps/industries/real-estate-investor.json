@@ -41,12 +41,20 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "boiler-inspection",
+      "task": "boiler-inspection",
+      "required": true
     }
   ],
   "name": "Real Estate Investing",
   "nonEssentialQuestionsIds": [
     "multiple-dwelling-register",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "inspect-boiler"
   ],
   "displayname": "real-estate-investor",
   "industryOnboardingQuestions": {

@@ -41,6 +41,12 @@
       "step": 3,
       "weight": 15,
       "task": null
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "rmw-generator-registration",
+      "required": true
     }
   ],
   "name": "Pet Care",

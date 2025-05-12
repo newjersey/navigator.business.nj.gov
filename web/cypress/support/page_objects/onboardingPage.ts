@@ -1,4 +1,8 @@
-import { CarServiceType, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
+import {
+  CarServiceType,
+  LookupIndustryById,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared/";
 import { random } from "lodash";
 
 export class OnboardingPage {
@@ -24,28 +28,34 @@ export class OnboardingPage {
 
   getStaffingService(radio?: boolean) {
     return cy.get(
-      `input[name="provides-staffing-service"]${radio === undefined ? "" : `[value="${radio}"]`}`
+      `input[name="provides-staffing-service"]${radio === undefined ? "" : `[value="${radio}"]`}`,
     );
   }
 
   getInteriorDesigner(radio?: boolean) {
     return cy.get(
-      `input[name="certified-interior-designer"]${radio === undefined ? "" : `[value="${radio}"]`}`
+      `input[name="certified-interior-designer"]${radio === undefined ? "" : `[value="${radio}"]`}`,
     );
   }
 
   getRealEstateAppraisal(radio?: boolean) {
     return cy.get(
-      `input[name="real-estate-appraisal-management"]${radio === undefined ? "" : `[value="${radio}"]`}`
+      `input[name="real-estate-appraisal-management"]${
+        radio === undefined ? "" : `[value="${radio}"]`
+      }`,
     );
   }
 
   getInterstateLogistics(radio?: boolean) {
-    return cy.get(`input[name="interstate-logistics"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="interstate-logistics"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
   }
 
   getInterstateMoving(radio?: boolean) {
-    return cy.get(`input[name="interstate-moving"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="interstate-moving"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
   }
 
   getCarService(radio?: CarServiceType) {
@@ -54,16 +64,22 @@ export class OnboardingPage {
 
   getChildcare(radio?: boolean) {
     return cy.get(
-      `input[name="is-childcare-for-six-or-more"]${radio === undefined ? "" : `[value="${radio}"]`}`
+      `input[name="is-childcare-for-six-or-more"]${
+        radio === undefined ? "" : `[value="${radio}"]`
+      }`,
     );
   }
 
   getWillSellPetcareItems(radio?: boolean) {
-    return cy.get(`input[name="will-sell-pet-care-items"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="will-sell-pet-care-items"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
   }
 
   getPetCareHousing(radio?: boolean) {
-    return cy.get(`input[name="pet-care-housing"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="pet-care-housing"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
   }
 
   getIndustryDropdown() {
@@ -95,7 +111,9 @@ export class OnboardingPage {
   }
 
   getLocationInNewJersey(radio?: boolean) {
-    return cy.get(`input[name="location-in-new-jersey"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="location-in-new-jersey"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
   }
 
   getOwnershipDropdown() {

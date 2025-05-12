@@ -1,5 +1,27 @@
 ---
-summaryDescriptionMd: >
+notesMd: ""
+id: trucking-irp-aa
+name: Register Your Vehicle(s) Under the International Registration Plan (IRP)
+category:
+  - Manage My Business Vehicles
+industryIds: []
+sectorIds:
+  - transportation-and-warehousing
+  - manufacturing
+  - utilities
+  - mining-quarrying-and-oil-and-gas-extraction
+  - waste-management-and-Remediation
+  - construction
+  - wholesale-trade
+  - agriculture-forestry-fishing-and-hunting
+  - life-sciences
+  - cannabis
+  - arts-entertainment-and-recreation
+  - offshore-wind
+  - clean-energy
+  - retail-trade-and-ecommerce
+urlSlug: trucking-irp-aa
+summaryDescriptionMd: >-
   Before transporting passengers or hauling loads across state lines, your
   vehicles must be registered with the IRP in the state where you formed your
   business. The IRP is a reciprocity agreement between all states in the U.S.
@@ -11,17 +33,10 @@ summaryDescriptionMd: >
   Recently purchased, qualifying vehicles cannot be registered with the NJ MVC until IRP-issued, appointed license plates and cab card are received by the owner.
 
   :::
-urlSlug: trucking-irp
-displayname: trucking-irp
-name: Register Your Vehicle(s) Under the International Registration Plan (IRP)
-id: trucking-irp
-callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
+issuingAgency: NJ Motor Vehicle Commission
 callToActionText: Register With the IRP
-agencyId: nj-motor-vehicle
-agencyAdditionalContext: ""
-formName: IRP-7
+callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 ---
-
 ## Eligibility Criteria
 
 Vehicles qualify for IRP registration if they:
@@ -74,4 +89,3 @@ Trenton, NJ 08666
 :::
 
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
-

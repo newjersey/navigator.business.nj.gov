@@ -87,7 +87,8 @@
   ],
   "name": "School Bus",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-irp"
   ],
   "displayname": "school-bus",
   "industryOnboardingQuestions": {

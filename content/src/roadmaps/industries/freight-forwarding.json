@@ -57,6 +57,12 @@
     {
       "step": 3,
       "weight": 14,
+      "task": "trucking-irp",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 15,
       "task": "mvc-registration-task",
       "required": true
     }

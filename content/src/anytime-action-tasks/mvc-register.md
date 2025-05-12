@@ -2,7 +2,7 @@
 id: mvc-register
 name: Register Your Business-Owned Vehicle(s)
 category:
-  - Purchase New Products or Equipment
+  - Manage My Business Vehicles
 applyToAllUsers: false
 industryIds: []
 sectorIds:

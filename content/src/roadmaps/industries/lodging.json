@@ -41,6 +41,13 @@
       "step": 3,
       "weight": 14,
       "task": "get-insurance"
+    },
+    {
+      "weight": 1,
+      "step": 4,
+      "licenseTask": "boiler-inspection",
+      "task": "boiler-inspection",
+      "required": true
     }
   ],
   "name": "Lodging",
@@ -49,7 +56,9 @@
     "rooming-boarding-house-owner",
     "hotel-food",
     "hotel-liquor",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "inspect-boiler",
+    "business-vehicle-irp"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {

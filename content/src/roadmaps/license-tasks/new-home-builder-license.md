@@ -1,5 +1,6 @@
 ---
-notesMd: "[Muni planning doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit)"
+notesMd: "[Muni planning
+  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit)"
 licenseName: ""
 id: new-home-builder-license
 displayname: new-home-builder-license
@@ -56,7 +57,7 @@ A builder registration card and number, which must be shown to your local Constr
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't register?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't register?" showIcon="false" calloutType="warning" }
 
 If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines.
 

@@ -1,0 +1,12 @@
+{
+  "id": "crematory-application-funeral",
+  "displayname": "crematory-application-funeral",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 100,
+      "task": "crematory-application",
+      "required": true
+    }
+  ]
+}
