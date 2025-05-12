@@ -5,9 +5,10 @@ notesMd: >-
 
 
   Want to use the quick reference callout but currently using the 'note' callout because it's the same color as the quick ref, as far as I understand
-summaryDescriptionMd: Your pressure vessels may need to be inspected regularly
-  to ensure they are working safely. If a pressure vessel is newly installed or
-  recently replaced, **it must be registered and inspected within 30 days**.
+summaryDescriptionMd: If your pressure vessel is newly installed or recently
+  replaced, **it must be registered and inspected within 30 days**. Your
+  pressure vessel may also need to be inspected regularly to ensure it is
+  working safely.
 urlSlug: pressure-vessel-inspection
 displayname: pressure-vessel-inspection
 name: Get Your Pressure Vessel Registered and Inspected
@@ -75,6 +76,6 @@ Trenton, NJ 08625-0392
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Certificate of Inspection with a jurisdiction number mailed to the address the business owner provides after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
+A Certificate of Inspection with a jurisdiction number mailed to the address you provide after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
 
 :::
