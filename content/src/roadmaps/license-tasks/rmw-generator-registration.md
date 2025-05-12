@@ -1,26 +1,18 @@
 ---
-licenseName: ""
 id: rmw-generator-registration
-displayname: rmw-generator-registration
+webflowId: 682247683fc6ae4236738863
 urlSlug: rmw-generator-registration
 name: Complete Your Regulated Medical Waste Generator Registration
+displayname: rmw-generator-registration
 webflowName: Complete Your Regulated Medical Waste Generator Registration
-summaryDescriptionMd: >-
-  If your business produces
-
-  `Regulated Medical Waste (RMW)|regulated-medical-waste`, you must register with the New Jersey Department of Environmental Protection (NJDEP) as an RMW generator.
-industryId:
-  - acupuncture
-  - funeral
-  - pharmacy
-  - petcare
-  - healthcare
-  - generic
-  - logistics
-  - home-health-aide
-callToActionText: Submit My RMW Registration Form
+filename: rmw-generator-registration
 callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
+callToActionText: Submit My RMW Registration Form
 agencyId: njdep
+industryId: acupuncture,funeral,pharmacy,petcare,healthcare,generic,logistics,home-health-aide
+licenseCertificationClassification: undefined
+summaryDescriptionMd: "If your business produces
+`Regulated Medical Waste (RMW)|regulated-medical-waste`, you must register with the New Jersey Department of Environmental Protection (NJDEP) as an RMW generator."
 ---
 
 \
@@ -51,7 +43,8 @@ You need to update your registration if your facility changes:
 
   Submit one registration for each business
 
-- If you have **one business** in **different buildings connected by private roads** (for example, a campus with no public roads between buildings):
+- If you have **one business** in **different buildings connected by private roads** (for example, a
+  campus with no public roads between buildings):
 
   Submit one registration
 
@@ -74,13 +67,16 @@ You need to update your registration if your facility changes:
 
   :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-  NJDEP will email you an RMW generator ID number. Each year, NJDEP will email you a bill to renew your registration. The annual fee is due within 30 days of the billing date.
+  NJDEP will email you an RMW generator ID number. Each year, NJDEP will email you a bill to renew
+  your registration. The annual fee is due within 30 days of the billing date.
 
   :::
 
-  If you have questions about RMW registration, email mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3.
+  If you have questions about RMW registration, email mebinfo@dep.nj.gov. Or you can call (609)
+  292-7081 and select option 3.
 
-  :::callout{ showHeader="true" headerText="What if I don’t register?" showIcon="false" calloutType="warning" }
+  :::callout{ showHeader="true" headerText="What if I don’t register?" showIcon="false"
+  calloutType="warning" }
 
   If your business generates RMW without a registration, you may face penalties.
 
