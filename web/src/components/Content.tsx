@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Callout } from "@/components/Callout";
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { Callout } from "@/components/njwds-extended/callout/Callout";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
@@ -64,6 +64,11 @@ export const Content = (props: ContentProps): ReactNode => {
           headerText={props.headerText}
           showIcon={props.showIcon}
           calloutType={props.calloutType}
+          amountIconText={props.amountIconText}
+          filingTypeIconText={props.filingTypeIconText}
+          frequencyIconText={props.frequencyIconText}
+          phoneIconText={props.phoneIconText}
+          emailIconText={props.emailIconText}
         >
           {props.children}
         </Callout>

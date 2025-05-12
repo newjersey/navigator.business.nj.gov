@@ -3,6 +3,11 @@
     "informationalHeadingDefaultText": "Keep in mind:",
     "conditionalHeadingDefaultText": "Once completed, you will have:",
     "warningHeadingDefaultText": "Be advised:",
-    "noteHeadingDefaultText": "Note:"
+    "quickReferenceHeadingDefaultText": "Quick Reference Placeholder Header Text:",
+    "amountIconAriaLabel": "amount",
+    "filingTypeIconAriaLabel": "filing type",
+    "frequencyIconAriaLabel": "frequency",
+    "phoneIconAriaLabel": "phone number",
+    "emailIconAriaLabel": "email address"
   }
 }

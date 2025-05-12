@@ -1,10 +1,10 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { Callout } from "@/components/Callout";
 import { Content, ExternalLink } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";
+import { Callout } from "@/components/njwds-extended/callout/Callout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";

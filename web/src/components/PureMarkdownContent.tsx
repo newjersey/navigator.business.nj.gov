@@ -47,6 +47,26 @@ const customRemarkPlugin: Plugin = () => {
               showHeader: node.attributes.showHeader === "true",
               showIcon: node.attributes.showIcon === "true",
               calloutType: node.attributes.calloutType,
+              amountIconText:
+                node.attributes.amountIconText?.length > 0
+                  ? node.attributes.amountIconText
+                  : undefined,
+              filingTypeIconText:
+                node.attributes.filingTypeIconText?.length > 0
+                  ? node.attributes.filingTypeIconText
+                  : undefined,
+              frequencyIconText:
+                node.attributes.frequencyIconText?.length > 0
+                  ? node.attributes.frequencyIconText
+                  : undefined,
+              phoneIconText:
+                node.attributes.phoneIconText?.length > 0
+                  ? node.attributes.phoneIconText
+                  : undefined,
+              emailIconText:
+                node.attributes.emailIconText?.length > 0
+                  ? node.attributes.emailIconText
+                  : undefined,
             };
             break;
           case "icon":

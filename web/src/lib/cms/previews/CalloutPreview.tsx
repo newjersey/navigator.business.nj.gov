@@ -1,4 +1,4 @@
-import { Callout } from "@/components/Callout";
+import { Callout } from "@/components/njwds-extended/callout/Callout";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
@@ -12,16 +12,25 @@ const CalloutPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <Callout calloutType="informational" showIcon="true">
+        <Callout calloutType="informational" showIcon="true" showHeader>
           Body Text
         </Callout>
-        <Callout calloutType="conditional" showIcon="true">
+        <Callout calloutType="conditional" showIcon="true" showHeader>
           Body Text
         </Callout>
-        <Callout calloutType="warning" showIcon="true">
+        <Callout calloutType="warning" showIcon="true" showHeader>
           Body Text
         </Callout>
-        <Callout calloutType="note" showIcon="true">
+        <Callout
+          calloutType="quickReference"
+          showIcon="true"
+          showHeader
+          amountIconText="Amount Icon"
+          filingTypeIconText="Filing Type Icon"
+          frequencyIconText="Frequency Icon"
+          phoneIconText="Phone Icon"
+          emailIconText="Email Icon"
+        >
           Body Text
         </Callout>
       </div>

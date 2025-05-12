@@ -182,12 +182,41 @@ collections:
                   required: true,
                 }
               - {
-                  label: "Note Heading Default Text",
-                  name: "noteHeadingDefaultText",
+                  label: "Quick Reference Default Text",
+                  name: "quickReferenceHeadingDefaultText",
                   widget: "string",
                   required: true,
                 }
-
+              - {
+                  label: "Quick Reference Amount Icon Aria Label",
+                  name: "amountIconAriaLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Quick Reference Filing Icon Aria Label",
+                  name: "filingTypeIconAriaLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Quick Reference Frequency Icon Aria Label",
+                  name: "frequencyIconAriaLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Quick Reference Phone Icon Aria Label",
+                  name: "phoneIconAriaLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Quick Reference Email Icon Aria Label",
+                  name: "emailIconAriaLabel",
+                  widget: "string",
+                  required: true,
+                }
   - name: "mappings"
     label: "Dropdown Mappings"
     editor:
