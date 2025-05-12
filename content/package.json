@@ -13,7 +13,7 @@
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json"
   },
   "devDependencies": {
-    "@types/node": "20.17.40",
+    "@types/node": "20.17.46",
     "cross-env": "7.0.3",
     "cspell": "8.19.4",
     "prettier": "2.8.8",
