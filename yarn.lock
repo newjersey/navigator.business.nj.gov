@@ -4577,7 +4577,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 8.19.4
-    cypress: 14.3.2
+    cypress: 14.3.3
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -4776,7 +4776,7 @@ __metadata:
     copy-webpack-plugin: 13.0.0
     cross-env: 7.0.3
     cspell: 8.19.4
-    cypress: 14.3.2
+    cypress: 14.3.3
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -16087,7 +16087,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-table3@npm:^0.6.1, cli-table3@npm:^0.6.2, cli-table3@npm:^0.6.3, cli-table3@npm:~0.6.5":
+"cli-table3@npm:0.6.1":
+  version: 0.6.1
+  resolution: "cli-table3@npm:0.6.1"
+  dependencies:
+    colors: 1.4.0
+    string-width: ^4.2.0
+  dependenciesMeta:
+    colors:
+      optional: true
+  checksum: 956e175f8eb019c26465b9f1e51121c08d8978e2aab04be7f8520ea8a4e67906fcbd8516dfb77e386ae3730ef0281aa21a65613dffbfa3d62969263252bd25a9
+  languageName: node
+  linkType: hard
+
+"cli-table3@npm:^0.6.1, cli-table3@npm:^0.6.2, cli-table3@npm:^0.6.3":
   version: 0.6.5
   resolution: "cli-table3@npm:0.6.5"
   dependencies:
@@ -16320,6 +16333,13 @@ __metadata:
   version: 1.0.3
   resolution: "colors@npm:1.0.3"
   checksum: 234e8d3ab7e4003851cdd6a1f02eaa16dabc502ee5f4dc576ad7959c64b7477b15bd21177bab4055a4c0a66aa3d919753958030445f87c39a253d73b7a3637f5
+  languageName: node
+  linkType: hard
+
+"colors@npm:1.4.0":
+  version: 1.4.0
+  resolution: "colors@npm:1.4.0"
+  checksum: 98aa2c2418ad87dedf25d781be69dc5fc5908e279d9d30c34d8b702e586a0474605b3a189511482b9d5ed0d20c867515d22749537f7bc546256c6014f3ebdcec
   languageName: node
   linkType: hard
 
@@ -17253,9 +17273,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:14.3.2":
-  version: 14.3.2
-  resolution: "cypress@npm:14.3.2"
+"cypress@npm:14.3.3":
+  version: 14.3.3
+  resolution: "cypress@npm:14.3.3"
   dependencies:
     "@cypress/request": ^3.0.8
     "@cypress/xvfb": ^1.2.4
@@ -17270,7 +17290,7 @@ __metadata:
     check-more-types: ^2.24.0
     ci-info: ^4.1.0
     cli-cursor: ^3.1.0
-    cli-table3: ~0.6.5
+    cli-table3: 0.6.1
     commander: ^6.2.1
     common-tags: ^1.8.0
     dayjs: ^1.10.4
@@ -17302,7 +17322,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 8c008519a929fb9d1ebdee190682fd86b12b46e14443e71fabf801e6bc503720854a934bb36b9cad2267c690b5ab0a0e8329ff13d8189bbc5d6affdea9e3fd8c
+  checksum: c76b58e25a3dfa8eefd8047f247fed9a6ad21a3f277c1273dd49caeef8ae2916f472f8dad4870c32d5fdefee46766dc54655b30eb451c238bf9f22ffa78fd59f
   languageName: node
   linkType: hard
 
