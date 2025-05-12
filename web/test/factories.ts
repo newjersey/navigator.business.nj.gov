@@ -313,6 +313,7 @@ export const generateAnytimeActionTask = (
     sectorIds: [`some-sector-id-${randomInt()}`],
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     applyToAllUsers: false,
+    synonyms: [`some-synonym-${randomInt()}`],
     ...overrides,
   };
 };
@@ -330,6 +331,7 @@ export const generateAnytimeActionLicenseReinstatement = (
     issuingAgency: `some-issusing-agency-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
+    synonyms: [`some-synonym-${randomInt()}`],
     ...overrides,
   };
 };
