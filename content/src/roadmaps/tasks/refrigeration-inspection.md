@@ -6,10 +6,10 @@ notesMd: >-
   \
 
   Note: Drafting in the CMS prior to internal review in order to show the SME in a call on 5.8.25
-summaryDescriptionMd: Your refrigeration system may need to be inspected
-  regularly to ensure they are working safely. If a refrigeration system is
-  newly installed or recently replaced, **it must be registered and inspected
-  within 30 days**.
+summaryDescriptionMd: If your refrigeration system is newly installed or
+  recently replaced, **it must be registered and inspected within 30 days**.
+  Your refrigeration system may also need to be inspected regularly to ensure it
+  is working safely.
 urlSlug: refrigeration-inspection
 displayname: refrigeration-inspection
 name: Get Your Refrigeration System Registered and Inspected
@@ -23,33 +23,31 @@ agencyAdditionalContext: "New Jersey Department of Labor and Workforce
 ---
 ## Refrigeration Systems That Need Inspection
 
-Refrigeration systems using **flammable or toxic refrigerants** must be inspected if they **meet either** of the following criteria:
+Refrigeration systems using **flammable or toxic refrigerants** must be inspected if they:
 
-* Use over 3 tons of refrigerating capacity
+* Use over 3 tons of refrigerating capacity, **or**
 * Require over 6 driving horsepower 
 
-Refrigeration systems using **nonflammable and nontoxic refrigerants** that have a relief device set over 15 PSIG and are used in a plant of any size or storage capacity must be inspected if they **meet either** of the following criteria:
+Refrigeration systems using **nonflammable and nontoxic refrigerants** that have a relief device set over 15 PSIG and are used in a plant of any size or storage capacity must be inspected if they:
 
-* Use over 18 tons of refrigerating capacity
+* Use over 18 tons of refrigerating capacity, **or**
 * Require over 36 driving horsepower 
 
 Refrigeration systems must be inspected every year.
 
-The inspection includes: the liquid receiver, condenser, all safety valves and their discharge points, gauges, controls, and all other items that might be considered potentially critical.
+The inspection includes: the liquid receiver, condenser, all safety valves and their discharge points, gauges, controls, and other important parts.
 
 ## Refrigeration Systems That Do Not Need Inspection
 
-Inspection is not required for refrigeration systems if they **meet any** of the following conditions, based on the type of refrigerant used:
+Inspection is not required for systems using **flammable, highly toxic, or toxic refrigerants** that:
 
-For systems using **flammable, highly toxic, or toxic refrigerants**:
-
-* Use 3 tons or less of refrigerating capacity
+* Use 3 tons or less of refrigerating capacity, **or**
 * Require 6 horsepower or less to operate
 
-For systems using **nonflammable and nontoxic refrigerants**:
+Inspection is not required for systems using **nonflammable and nontoxic refrigerants** that:
 
 * Use 18 tons or less of refrigerating capacity
-* Require 36 horsepower or less to operate
+* Require 36 horsepower or less to operate, **or**
 * Operates at 15 PSIG or lower, regardless of system size
 
 ## How Inspections Work
@@ -88,6 +86,6 @@ Trenton, NJ 08625-0392
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Certificate of Inspection with a jurisdiction number mailed to the address the business owner provides after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
+A Certificate of Inspection with a jurisdiction number mailed to the address you provide after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
 
 :::
