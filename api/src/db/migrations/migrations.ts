@@ -160,10 +160,12 @@ import { migrate_v156_to_v157 } from "@db/migrations/v157_add_tax_clearance_data
 import { migrate_v157_to_v158 } from "@db/migrations/v158_login_email_to_lowercase";
 import { migrate_v158_to_v159 } from "@db/migrations/v159_remove_entity_id";
 import { migrate_v159_to_v160 } from "@db/migrations/v160_add_xray_registration_data";
+import { migrate_v160_to_v161 } from "@db/migrations/v161_add_encrypted_tax_pin";
 
 import { MigrationClients } from "@db/migrations/types";
 
-export type MigrationFunction = (data: any, clients: MigrationClients | undefined) => any;
+// Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
+export type MigrationFunction = (data: any, clients: MigrationClients) => any;
 
 export const Migrations: MigrationFunction[] = [
   migrate_v0_to_v1,
@@ -326,6 +328,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v157_to_v158,
   migrate_v158_to_v159,
   migrate_v159_to_v160,
+  migrate_v160_to_v161,
 ];
 
-export { generatev160UserData as CURRENT_GENERATOR } from "@db/migrations/v160_add_xray_registration_data";
+export { generatev161UserData as CURRENT_GENERATOR } from "@db/migrations/v161_add_encrypted_tax_pin";

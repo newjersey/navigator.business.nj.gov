@@ -418,7 +418,9 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       addressState: { shortCode: "MD", name: "Maryland" },
       addressZipCode: "21210",
       taxId: "012345678901",
+      encryptedTaxId: undefined,
       taxPin: "1234",
+      encryptedTaxPin: undefined,
     });
   });
 

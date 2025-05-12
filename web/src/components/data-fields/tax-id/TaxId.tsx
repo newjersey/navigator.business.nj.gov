@@ -10,9 +10,8 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
-import { maskingCharacter } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useEffect, useRef, useState } from "react";
+import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props
   extends Omit<
@@ -43,14 +42,8 @@ export const TaxId = (props: Props): ReactElement => {
 
   const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
-    getInitialShowHideStatus(taxIdIsEncrypted),
+    getInitialShowHideStatus(business?.profileData.taxId),
   );
-
-  useEffect(() => {
-    if (business?.profileData.taxId?.includes(maskingCharacter)) {
-      setTaxIdDisplayStatus("password-view");
-    }
-  }, [business?.profileData.taxId]);
 
   const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement => {
     return (
@@ -79,10 +72,6 @@ export const TaxId = (props: Props): ReactElement => {
   };
 
   const taxIdToggle = (toggleFunc?: (taxId: string) => void) => async (): Promise<void> => {
-    if (!state.profileData.taxId) {
-      return;
-    }
-
     if (taxIdDisplayStatus === "password-view") {
       if (taxIdIsEncrypted) {
         await getDecryptedTaxId().then((decryptedTaxId) => {
@@ -90,7 +79,7 @@ export const TaxId = (props: Props): ReactElement => {
           toggleFunc && toggleFunc(decryptedTaxId);
         });
       } else {
-        toggleFunc && toggleFunc(state.profileData.taxId);
+        toggleFunc && state.profileData.taxId && toggleFunc(state.profileData.taxId);
       }
     }
     toggleTaxIdDisplay();

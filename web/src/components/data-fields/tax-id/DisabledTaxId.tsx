@@ -22,14 +22,10 @@ export const DisabledTaxId = (props: Props): ReactElement => {
 
   const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
-    getInitialShowHideStatus(taxIdIsEncrypted),
+    getInitialShowHideStatus(state.profileData.taxId),
   );
   useEffect(() => {
-    setTaxIdDisplayStatus(
-      getInitialShowHideStatus(
-        isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId),
-      ),
-    );
+    setTaxIdDisplayStatus(getInitialShowHideStatus(state.profileData.taxId));
     updateSplitTaxId(state.profileData.taxId ?? "");
   }, [state.profileData.taxId, state.profileData.encryptedTaxId]);
 

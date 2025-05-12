@@ -122,11 +122,12 @@ export interface ProfileData extends IndustrySpecificData {
   readonly employerId: string | undefined;
   readonly taxId: string | undefined;
   readonly encryptedTaxId: string | undefined;
+  readonly taxPin: string | undefined;
+  readonly encryptedTaxPin: string | undefined;
   readonly notes: string;
   readonly documents: ProfileDocuments;
   readonly ownershipTypeIds: string[];
   readonly existingEmployees: string | undefined;
-  readonly taxPin: string | undefined;
   readonly sectorId: string | undefined;
   readonly naicsCode: string;
   readonly foreignBusinessTypeIds: ForeignBusinessTypeId[];
@@ -152,11 +153,12 @@ export const emptyProfileData: ProfileData = {
   employerId: undefined,
   taxId: undefined,
   encryptedTaxId: undefined,
+  taxPin: undefined,
+  encryptedTaxPin: undefined,
   notes: "",
   documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
   ownershipTypeIds: [],
   existingEmployees: undefined,
-  taxPin: undefined,
   sectorId: undefined,
   naicsCode: "",
   foreignBusinessTypeIds: [],

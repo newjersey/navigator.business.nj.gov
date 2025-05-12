@@ -146,6 +146,10 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
           <TaxId />
 
           <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="taxPin" />
+          <TaxPin />
+
+          <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="entityId" />
           <EntityId />
 
@@ -169,10 +173,6 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="dateOfFormation" />
           <DateOfFormation futureAllowed={false} />
-
-          <hr className="margin-y-4" />
-          <FieldLabelOnboarding fieldName="taxPin" />
-          <TaxPin />
 
           <hr className="margin-y-4" />
           <ProfileDocuments />

@@ -77,7 +77,9 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       addressState: formationAddressData.addressState,
       addressZipCode: formationAddressData.addressZipCode,
       taxId: profileData.taxId || "",
+      encryptedTaxId: profileData.encryptedTaxId || undefined,
       taxPin: profileData.taxPin || "",
+      encryptedTaxPin: profileData.encryptedTaxPin || undefined,
     };
 
     updateQueue
@@ -120,8 +122,16 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
         "";
       const newTaxId =
         business?.taxClearanceCertificateData?.taxId || business.profileData.taxId || "";
+      const newEncryptedTaxId =
+        business?.taxClearanceCertificateData?.encryptedTaxId ||
+        business.profileData.encryptedTaxId ||
+        "";
       const newTaxPin =
         business?.taxClearanceCertificateData?.taxPin || business.profileData.taxPin || "";
+      const newEncryptedTaxPin =
+        business?.taxClearanceCertificateData?.encryptedTaxPin ||
+        business.profileData.encryptedTaxPin ||
+        "";
 
       setTaxClearanceCertificateData({
         ...taxClearanceCertificateData,
@@ -132,7 +142,9 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
         ...profileData,
         businessName: newBusinessName,
         taxId: newTaxId,
+        encryptedTaxId: newEncryptedTaxId,
         taxPin: newTaxPin,
+        encryptedTaxPin: newEncryptedTaxPin,
       });
 
       setAddressData({

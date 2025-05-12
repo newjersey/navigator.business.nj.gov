@@ -11,6 +11,6 @@ export const isEncrypted = (
   return maskedValue.includes(maskingCharacter);
 };
 
-export const getInitialShowHideStatus = (isEncrypted: boolean | undefined): ShowHideStatus => {
-  return isEncrypted ? "password-view" : "text-view";
+export const getInitialShowHideStatus = (maskedValue: string | undefined): ShowHideStatus => {
+  return maskedValue?.includes(maskingCharacter) ? "password-view" : "text-view";
 };
