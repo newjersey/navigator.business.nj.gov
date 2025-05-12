@@ -10,9 +10,9 @@ category:
 industryIds: []
 sectorIds: []
 urlSlug: boiler
-summaryDescriptionMd: Your boilers may need to be inspected regularly to ensure
-  they are working safely. If a boiler is newly installed or recently replaced,
-  **it must be registered and inspected within 30 days.**
+summaryDescriptionMd: If your boiler is newly installed or recently replaced,
+  **it must be registered and inspected within 30 days**. Your boiler may also
+  need to be inspected regularly to ensure it is working safely.
 issuingAgency: "New Jersey Department of Labor and Workforce Development,
   Division of Public Safety and Occupational Safety and Health, Bureau of Boiler
   and Pressure Vessel Compliance "
