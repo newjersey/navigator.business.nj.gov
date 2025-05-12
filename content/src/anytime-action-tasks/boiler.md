@@ -19,6 +19,17 @@ industryIds:
   - restaurant
 sectorIds:
   - cannabis
+  - accommodation-and-food-services
+  - clean-energy
+  - health-care-and-social-assistance
+  - manufacturing
+  - retail-trade-and-ecommerce
+  - mining-quarrying-and-oil-and-gas-extraction
+  - other-services
+  - offshore-wind
+  - real-estate
+  - transportation-and-warehousing
+  - utilities
 urlSlug: boiler
 summaryDescriptionMd: If your boiler is newly installed or recently replaced,
   **it must be registered and inspected within 30 days**. Your boiler may also
