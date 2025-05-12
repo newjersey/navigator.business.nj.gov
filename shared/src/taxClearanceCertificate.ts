@@ -34,7 +34,9 @@ export const emptyTaxClearanceCertificateData: TaxClearanceCertificateData = {
   addressState: undefined,
   addressZipCode: "",
   taxId: "",
+  encryptedTaxId: "",
   taxPin: "",
+  encryptedTaxPin: "",
 };
 
 export type TaxClearanceCertificateData = {
@@ -46,7 +48,9 @@ export type TaxClearanceCertificateData = {
   addressState?: StateObject;
   addressZipCode: string | undefined;
   taxId: string | undefined;
+  encryptedTaxId: string | undefined;
   taxPin: string | undefined;
+  encryptedTaxPin: string | undefined;
 };
 
 export const LookupTaxClearanceCertificateAgenciesById = (

@@ -87,6 +87,18 @@
           "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
         }
       },
+      "taxPin": {
+        "default": {
+          "header": "Tax PIN",
+          "headerContextualInfo": "tax-pin",
+          "errorTextRequired": "Tax PIN must be 4 digits.",
+          "description": "",
+          "showButtonText": "Show",
+          "hideButtonText": "Hide",
+          "showButtonTextMobile": "Show Tax PIN",
+          "hideButtonTextMobile": "Hide Tax PIN"
+        }
+      },
       "requiresCpa": {
         "default": {
           "header": "Public Accounting Services",
@@ -128,14 +140,6 @@
           "REMOTE_WORKER": "It sounds like you have `Remote Workers|remote-worker` .",
           "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
           "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
-        }
-      },
-      "taxPin": {
-        "default": {
-          "header": "Tax PIN",
-          "headerContextualInfo": "tax-pin",
-          "description": "",
-          "errorTextRequired": "Tax PIN must be 4 digits."
         }
       },
       "elevatorOwningBusiness": {

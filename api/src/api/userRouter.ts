@@ -7,7 +7,7 @@ import {
   UpdateOperatingPhase,
   UpdateSidebarCards,
 } from "@domain/types";
-import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
+import { encryptFieldsFactory } from "@domain/user/encryptFieldsFactory";
 import type { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
@@ -138,7 +138,7 @@ export const userRouterFactory = (
   logger: LogWriterType,
 ): Router => {
   const router = Router();
-  const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
+  const encryptFields = encryptFieldsFactory(encryptionDecryptionClient);
 
   router.post("/users/emailCheck", async (req, res) => {
     const { email } = req.body;
@@ -215,8 +215,8 @@ export const userRouterFactory = (
     const userDataWithUpdatedSidebarCards = updateRoadmapSidebarCards(
       userDataWithUpdatedOperatingPhase,
     );
-    const userDataWithEncryptedTaxId = await encryptTaxId(userDataWithUpdatedSidebarCards);
-    const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedTaxId);
+    const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
+    const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
 
     dynamoDataClient
       .put(userDataWithUpdatedISO)

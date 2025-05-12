@@ -2,7 +2,13 @@ import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -31,10 +37,13 @@ const setLargeScreen = (value: boolean): void => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderComponent = (profileData: ProfileData, fieldProps?: any): void => {
+  const business = generateBusiness({ profileData });
   render(
-    <WithStatefulProfileData initialData={profileData}>
-      <TaxId {...fieldProps} />
-    </WithStatefulProfileData>,
+    <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulProfileData initialData={profileData}>
+        <TaxId {...fieldProps} />
+      </WithStatefulProfileData>
+    </WithStatefulUserData>,
   );
 };
 
