@@ -7,8 +7,18 @@ id: boiler
 name: Get Your Boiler Inspected
 category:
   - Manage My Properties
-industryIds: []
-sectorIds: []
+industryIds:
+  - cannabis
+  - generic
+  - health-club
+  - healthcare
+  - logistics
+  - real-estate-investor
+  - residential-landlord
+  - retail
+  - restaurant
+sectorIds:
+  - cannabis
 urlSlug: boiler
 summaryDescriptionMd: If your boiler is newly installed or recently replaced,
   **it must be registered and inspected within 30 days**. Your boiler may also
