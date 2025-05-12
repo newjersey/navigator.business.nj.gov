@@ -50,13 +50,6 @@ collections:
               "Manage My Business Vehicles",
             ],
         }
-      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license reinstatements)
-      # - {
-      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
-      #     name: "searchMetaDataMatch",
-      #     widget: "string",
-      #     required: false,
-      #   }
       - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
@@ -107,6 +100,15 @@ collections:
           widget: "string",
           required: false,
         }
+      - {
+          label: "Synonyms For Search",
+          name: "synonyms",
+          widget: "list",
+          required: false,
+          allow_add: true,
+          create: true,
+          field: { name: synonym, label: "Synonym", widget: string },
+        }
 
   - name: "anytime-action-license-reinstatements"
     label: "Anytime Action With Consumer Affairs License Integrations (Reinstatements)"
@@ -137,13 +139,6 @@ collections:
           required: true,
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license tasks)
-      # - {
-      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
-      #     name: "searchMetaDataMatch",
-      #     widget: "string",
-      #     required: false,
-      #   }
       - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - {
@@ -164,6 +159,15 @@ collections:
           name: "callToActionLink",
           widget: "string",
           required: false,
+        }
+      - {
+          label: "Synonyms For Search",
+          name: "synonyms",
+          widget: "list",
+          required: false,
+          allow_add: true,
+          create: true,
+          field: { name: synonym, label: "Synonym", widget: string },
         }
   - name: "tax-clearance-certificate-anytime-action"
     label: "Tax Clearance Anytime Action"

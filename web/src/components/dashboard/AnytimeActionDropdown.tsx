@@ -188,10 +188,16 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
               return options;
             }
             return options.filter((option) => {
+              if (option.synonyms) {
+                for (const synonym of option.synonyms) {
+                  if (synonym.toLowerCase().includes(searchValue)) {
+                    return true;
+                  }
+                }
+              }
               return (
                 option.name.toLowerCase().includes(searchValue) ||
-                option.description?.toLowerCase().includes(searchValue) ||
-                option.searchMetaDataMatch?.toLowerCase().includes(searchValue)
+                option.description?.toLowerCase().includes(searchValue)
               );
             });
           }}

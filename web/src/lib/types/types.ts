@@ -166,6 +166,7 @@ export interface Opportunity {
 interface AnytimeAction {
   name: string;
   filename: string;
+  synonyms?: string[];
 }
 
 export interface AnytimeActionTask extends AnytimeAction {
