@@ -1,3 +1,44 @@
+# [2025.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.10.1...v2025.11.0) (2025-05-12)
+
+
+### Bug Fixes
+
+* [AB[#13890](https://github.com/newjersey/navigator.business.nj.gov/issues/13890)] fixed after hours test flakyness ([b467a3c](https://github.com/newjersey/navigator.business.nj.gov/commit/b467a3c4870dbb1e3d463620d292c8d817ea1d5e))
+* [AB[#13908](https://github.com/newjersey/navigator.business.nj.gov/issues/13908)] updates to accessibility for profileNav ([3f4ff55](https://github.com/newjersey/navigator.business.nj.gov/commit/3f4ff5518b955e5b579eb38adafbf768ae6a136d))
+* [AB[#14182](https://github.com/newjersey/navigator.business.nj.gov/issues/14182)] capitalization contextual info issue for content repo ([0a67c1a](https://github.com/newjersey/navigator.business.nj.gov/commit/0a67c1aec39cb614be3dddff0b8508aff0983f13))
+* [AB[#7017](https://github.com/newjersey/navigator.business.nj.gov/issues/7017)] x-ray registration review fixes ([32e9008](https://github.com/newjersey/navigator.business.nj.gov/commit/32e9008aa553c3c63e61e64464fb16edecce1379))
+* [AB[#7458](https://github.com/newjersey/navigator.business.nj.gov/issues/7458)] add query to get find userWithBusinessName ([08ced34](https://github.com/newjersey/navigator.business.nj.gov/commit/08ced347f883571f4b75fb1fdf0a78416c192e1d))
+* capitalization build issue for content repo ([e548d21](https://github.com/newjersey/navigator.business.nj.gov/commit/e548d219041670f8da0b32563c2f69692204f52d))
+* capitalization contextual info issue for content repo ([2e5f318](https://github.com/newjersey/navigator.business.nj.gov/commit/2e5f3181a370218c572c1a04344520eb7d0c64d5))
+* content-repo merge conflicts ([18a77c9](https://github.com/newjersey/navigator.business.nj.gov/commit/18a77c92f83b2f5f6d0edaafd58a21b0053cba64))
+* **deps:** update aws-sdk ([0b5b022](https://github.com/newjersey/navigator.business.nj.gov/commit/0b5b022044a7143937978750c9a32f08e275195f))
+* **deps:** update aws-sdk ([1352808](https://github.com/newjersey/navigator.business.nj.gov/commit/1352808123a198a157b0450620813628159460f4))
+* **deps:** update aws-sdk to v3.802.0 ([e7bcd57](https://github.com/newjersey/navigator.business.nj.gov/commit/e7bcd57d4b6c534081f734bc81798d797cc0e222))
+* **deps:** update cypress ([1015823](https://github.com/newjersey/navigator.business.nj.gov/commit/1015823ecee95e58e855d710eba8d863f8c2f147))
+* **deps:** update dependency @aws-crypto/client-node to v4.2.1 ([71f16aa](https://github.com/newjersey/navigator.business.nj.gov/commit/71f16aa93b8d1ede682e745b17b1198ba4168f87))
+* **deps:** update dependency aws-amplify to v6.14.2 ([26c6b43](https://github.com/newjersey/navigator.business.nj.gov/commit/26c6b43c822e2e7be4c84d19dc727916f87f5379))
+* **deps:** update dependency aws-amplify to v6.14.4 ([d79fd77](https://github.com/newjersey/navigator.business.nj.gov/commit/d79fd778a24c32fca98234380b817bc2194e9f55))
+* **deps:** update dependency axios to v1.8.4 ([b09addc](https://github.com/newjersey/navigator.business.nj.gov/commit/b09addc190125476192fc95ef4f19a52c9abcb5c))
+* **deps:** update dependency axios to v1.9.0 ([e5ae0fc](https://github.com/newjersey/navigator.business.nj.gov/commit/e5ae0fc2f433069e0ff4b4839a1e0bda6b9bdd83))
+* **deps:** update dependency dedent to v1.6.0 ([fef937e](https://github.com/newjersey/navigator.business.nj.gov/commit/fef937e12b9c953a5422d8fa05b2fd1cd9e66569))
+* **deps:** update dependency next to v15.2.4 [security] ([7ef7ec7](https://github.com/newjersey/navigator.business.nj.gov/commit/7ef7ec71e04b1bfa83aded68fdbc0c3813783e6c))
+* **deps:** update dependency remove-markdown to v0.6.2 ([3efac55](https://github.com/newjersey/navigator.business.nj.gov/commit/3efac55b51b4907834505d2f8f633c7cff0dafa6))
+* **deps:** update material-ui ([50c332a](https://github.com/newjersey/navigator.business.nj.gov/commit/50c332a9beb44e81eeb6680a224ee9219a42a7bb))
+* **deps:** update nextjs monorepo to v15.3.1 ([1a874b5](https://github.com/newjersey/navigator.business.nj.gov/commit/1a874b55c886d9390c495100c90bcddb7756d884))
+
+
+### Features
+
+* [AB[#13315](https://github.com/newjersey/navigator.business.nj.gov/issues/13315)] Tax Clearance Certificate Download ([928d4f7](https://github.com/newjersey/navigator.business.nj.gov/commit/928d4f7ed332d39b8fe1b60c3356d85321dbdbb9))
+* [AB[#13315](https://github.com/newjersey/navigator.business.nj.gov/issues/13315)] Tax Clearance Download PR Feedback ([1deef13](https://github.com/newjersey/navigator.business.nj.gov/commit/1deef137a078c3f54ec09206bbb36a31b0535abb))
+* [AB[#13633](https://github.com/newjersey/navigator.business.nj.gov/issues/13633)] add anytime action category for vehicle related actions ([741c1c5](https://github.com/newjersey/navigator.business.nj.gov/commit/741c1c5ae51b3ee5a3813b6ad668775a6cdf66a0))
+* [AB[#13776](https://github.com/newjersey/navigator.business.nj.gov/issues/13776)] add Permits & Licenses Tab to Profile ([994fe3b](https://github.com/newjersey/navigator.business.nj.gov/commit/994fe3b72cf4f609289fa942b3acc104a256c347))
+* [AB[#6936](https://github.com/newjersey/navigator.business.nj.gov/issues/6936)] update content on Tax Calendar access ([7ed63ab](https://github.com/newjersey/navigator.business.nj.gov/commit/7ed63ab5bfa762451a567b58e46d982d14aef101))
+* [AB[#7071](https://github.com/newjersey/navigator.business.nj.gov/issues/7071)] xray registration status ([457de19](https://github.com/newjersey/navigator.business.nj.gov/commit/457de192af59f89ddca3d41963d3d5372c2b1d9c))
+* [AB[#7714](https://github.com/newjersey/navigator.business.nj.gov/issues/7714)] Tax Clearance rename SYSTEM_ERROR -> NATURAL_PROGRAM_ERROR. ([fba4cda](https://github.com/newjersey/navigator.business.nj.gov/commit/fba4cda9461b5b82b0fc365ccdf11fc59c7709b6))
+* [AB[#7752](https://github.com/newjersey/navigator.business.nj.gov/issues/7752)] successful tax clearance document response ([178deb3](https://github.com/newjersey/navigator.business.nj.gov/commit/178deb3528e9d1f0734f9b8f813773632cf327c8))
+* [AB[#7863](https://github.com/newjersey/navigator.business.nj.gov/issues/7863)] ABC ETP application connection ([c5b1cdd](https://github.com/newjersey/navigator.business.nj.gov/commit/c5b1cdd484f11210424ed3984b93bf13e0ae3c58))
+
 ## [2025.10.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.10.0...v2025.10.1) (2025-05-02)
 
 ### Bug Fixes
