@@ -1,5 +1,5 @@
-import { Callout } from "@/components/Callout";
 import { DocumentTile } from "@/components/DocumentTile";
+import { Callout } from "@/components/njwds-extended/callout/Callout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";

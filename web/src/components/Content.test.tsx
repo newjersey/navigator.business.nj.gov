@@ -57,6 +57,6 @@ describe("<Content />", () => {
     render(<Content>{mdString}</Content>);
     expect(screen.getByText("header")).toBeInTheDocument();
     expect(screen.getByText("body text")).toBeInTheDocument();
-    expect(screen.getByTestId("callout-conditional-icon")).toBeInTheDocument();
+    expect(screen.getByTestId("callout-icon")).toBeInTheDocument();
   });
 });

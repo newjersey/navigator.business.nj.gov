@@ -1,6 +1,6 @@
-import { Callout } from "@/components/Callout";
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { Callout } from "@/components/njwds-extended/callout/Callout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
@@ -205,7 +205,7 @@ export const RegisteredAgent = (): ReactElement => {
                 }
               >
                 <Callout
-                  calloutType="note"
+                  calloutType="quickReference"
                   headerText={Config.formation.registeredAgent.noteTitle}
                   showHeader={true}
                 >

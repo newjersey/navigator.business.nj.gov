@@ -1,6 +1,6 @@
-import { Callout } from "@/components/Callout";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Callout } from "@/components/njwds-extended/callout/Callout";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ContactDep } from "@/components/tasks/environment-questionnaire/results/ContactDep";
 import { PersonalizedSupport } from "@/components/tasks/environment-questionnaire/results/PersonalizedSupport";
@@ -89,7 +89,7 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
             <Content>{Config.envResultsPage.lowApplicability.summaryLineTwo}</Content>
           </div>
         </div>
-        <Callout calloutType={"note"} showIcon showHeader={false} showIconInBody={true}>
+        <Callout calloutType={"quickReference"}>
           <span>
             {Config.envResultsPage.lowApplicability.callout}
             <UnStyledButton className={"margin-left-05"} isUnderline onClick={onClick}>

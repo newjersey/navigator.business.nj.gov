@@ -1,7 +1,7 @@
-import { Callout } from "@/components/Callout";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, RefObject } from "react";
+import { Callout } from "../njwds-extended/callout/Callout";
 
 interface Props {
   permitsRef: RefObject<HTMLDivElement>;

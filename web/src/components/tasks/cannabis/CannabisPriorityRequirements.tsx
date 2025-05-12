@@ -1,5 +1,5 @@
-import { Callout } from "@/components/Callout";
 import { Content } from "@/components/Content";
+import { Callout } from "@/components/njwds-extended/callout/Callout";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
