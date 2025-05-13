@@ -4,6 +4,9 @@ notesMd: >-
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.ndgv526k6eks
 
 
+  5.13: Updated note callout to quick ref. Final publish for this task!
+
+
   5.2: Updating callout to "note", or quick ref callout, but not republishing until that callout looks like it should (I know Faraz is working on this now!)
 
 
@@ -60,9 +63,9 @@ If the boiler **meets any** of the following *and* serves a building with less t
 
 After your boiler is registered and passes the first inspection, either a State inspector or your insurance company will contact you to set up future inspections. Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected.
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="quickReference" }
+:::callout{ showHeader="true" headerText="To register a boiler and schedule the first inspection:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-2921" emailIconText="" }
 
-**To register a boiler and schedule the first inspection**: Call the NJ Bureau of Boiler and Pressure Vessel Compliance at (609) 292-2921.
+Call the NJ Bureau of Boiler and Pressure Vessel Compliance.
 
 :::
 
