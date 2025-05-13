@@ -25,6 +25,10 @@ summaryDescriptionMd: >-
   :::
 callToActionText: Complete My PW CR Application
 callToActionLink: https://www.njportal.com/lwd/pwcr
+synonyms:
+  - government
+  - contractor
+  - bidding
 ---
 
 ### Registration Requirements

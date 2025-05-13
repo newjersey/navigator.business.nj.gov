@@ -26,6 +26,9 @@ summaryDescriptionMd: >-
   :::
 callToActionText: Update My Electrical Contracting Business Permit
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
+synonyms:
+  - electrician
+  - wiring
 ---
 
 ## Application Requirements

@@ -20,6 +20,10 @@ summaryDescriptionMd: >-
 issuingAgency: NJ Division of Consumer Affairs, New Jersey Drug Control Unit
 callToActionText: "Reinstate My CDS Registration "
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Pages/applications.aspx
+synonyms:
+  - drug license
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements

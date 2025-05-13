@@ -8,6 +8,9 @@ description: Learn the requirements for complying with prevailing wage laws.
 sectorIds: []
 urlSlug: prevailing-wage
 summaryDescriptionMd: \
+synonyms:
+  - government
+  - contracting
 ---
 
 ## Ensure Your Staff Has Prevailing Wage

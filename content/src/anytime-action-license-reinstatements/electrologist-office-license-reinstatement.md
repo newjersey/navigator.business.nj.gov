@@ -1,14 +1,17 @@
 ---
-filename: electrologist-office-license-reinstatement
+id: electrologist-office-license-reinstatement
 licenseName: Electrologists-Premises
 name: Reinstate Your Electrologist Office Premises License
-icon: update-purple.svg
-urlSlug: electrologist-office-license-reinstatement
 summaryDescriptionMd: You need to reinstate your electrologist office premises
   license if it is expired or inactive.
 issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Electrologist Office Premises License
 callToActionLink: https://www.njconsumeraffairs.gov/eac/Applications/Application-to-Reinstate-a-License-as-an-Electrologist.pdf
+synonyms:
+  - license renewal
+  - restore
+icon: update-purple.svg
+urlSlug: electrologist-office-license-reinstatement
 ---
 
 ## Application Requirements

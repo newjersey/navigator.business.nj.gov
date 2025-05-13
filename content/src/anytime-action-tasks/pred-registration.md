@@ -22,6 +22,9 @@ summaryDescriptionMd: >-
 
 
   In certain cases, you may not need to register, and in others, you may need to request an exemption. [Learn more about the exemption.](https://www.nj.gov/dca/codes/forms/pdf_pred/exemption_pkt.pdf)
+synonyms:
+  - business action
+  - compliance
 ---
 
 ## Eligibility Criteria

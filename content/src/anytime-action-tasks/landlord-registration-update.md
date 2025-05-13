@@ -26,6 +26,10 @@ summaryDescriptionMd: >-
 
 
   You also need to give your tenant(s) a copy of the completed form.
+synonyms:
+  - rental property
+  - lease registration
+  - property manager
 ---
 
 ## How to Register or Update Your Registration

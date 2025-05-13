@@ -8,6 +8,9 @@ summaryDescriptionMd: You need to reinstate your fire alarm, burglar alarm, and
 issuingAgency: Division of Consumer Affairs
 callToActionText: Reactivate Your License
 callToActionLink: https://www.njconsumeraffairs.gov/fbl/Applications/Application-to-Reactivate-an-Inactive-Business-License.pdf
+synonyms:
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements

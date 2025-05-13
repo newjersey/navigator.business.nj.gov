@@ -11,6 +11,9 @@ summaryDescriptionMd: You need to reactivate your electrical contracting
   changes.
 callToActionText: Reactivate My Electrical Contracting Business Permit
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
+synonyms:
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements
