@@ -18,6 +18,7 @@ describe("healthCheck", () => {
       rgbDynamicsLicenseStatus: "PASS",
       webserviceLicenseStatus: "PASS",
       webserviceFormation: "PASS",
+      app: "PASS",
     });
   });
 
@@ -31,6 +32,7 @@ describe("healthCheck", () => {
       rgbDynamicsLicenseStatus: "FAIL",
       webserviceLicenseStatus: "FAIL",
       webserviceFormation: "FAIL",
+      app: "FAIL",
     });
   });
 
@@ -44,6 +46,7 @@ describe("healthCheck", () => {
       rgbDynamicsLicenseStatus: "ERROR",
       webserviceLicenseStatus: "ERROR",
       webserviceFormation: "ERROR",
+      app: "ERROR",
     });
   });
 });
