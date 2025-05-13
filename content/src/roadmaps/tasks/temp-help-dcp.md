@@ -7,9 +7,7 @@ notesMd: >
   Question: Is an employer account number from the instruction sheet the same as an Employer Registration Number?
 summaryDescriptionMd: >-
   You need a certification to make designated classification placements (DCPs)
-  if your temporary help service firm or other business assigns temporary
-  workers in the following categories, per the Bureau of Labor Statistics of the
-  U.S. Department of Labor: 
+  if you assign temporary workers in any of these categories: 
 
 
   * 33-90000 Other Protective Service Workers
@@ -61,7 +59,7 @@ You must have an active license or registration as one of the following:
 * `Business type/structure|business-structure-learn-more\`
 * Owner’s information, including name, address, and email
 * Supplier information, including name, address, and phone number, if applicable
-* Manufacturer representative information, including company name, address of machine location, and 12-digit `New Jersey tax ID number|tax-id\`
+* Manufacturer representative information, including company name, address of machine location, and 12-digit `New Jersey tax ID number|tax-id\`, if applicable
 * 15-digit employer account number (usually in this format: 0-###-###-###/000-00), issued by the Department of Labor and Workforce Development for the payment of unemployment insurance contributions
 * Proof of valid workers’ compensation insurance covering all employees
 * Applicable fees paid
@@ -76,7 +74,7 @@ Trenton, NJ 08646-0252
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
-You will have to pay a penalty for each day that an agency makes DCPs without having a valid certification.
+You will have to pay a penalty for each day that an agency makes DCPs without  a valid certification.
 
 :::
 
