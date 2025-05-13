@@ -31,6 +31,10 @@ export const CheckEligibility = (props: Props): ReactElement => {
     props.setStepIndex(2);
     props.saveTaxClearanceCertificateData();
   };
+  console.log(
+    "business?.taxClearanceCertificateData?.taxId",
+    business?.taxClearanceCertificateData?.taxId,
+  );
 
   return (
     <>
@@ -59,7 +63,12 @@ export const CheckEligibility = (props: Props): ReactElement => {
           <FieldLabelProfile fieldName="taxId" />
           <TaxId
             inputWidth="full"
-            // taxId={state.}
+            businessTaxId={business?.taxClearanceCertificateData?.taxId}
+            taxId={state.taxId}
+            encryptedTaxId={state.encryptedTaxId}
+            setDecryptedTaxId={(decryptedTaxId) =>
+              setTaxClearanceCertificateData({ ...state, taxId: decryptedTaxId })
+            }
           />
         </div>
 

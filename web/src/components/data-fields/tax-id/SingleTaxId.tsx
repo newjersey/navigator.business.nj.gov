@@ -38,7 +38,7 @@ export const SingleTaxId = ({
       return;
     }
     setProfileData({
-      ...state.profileData,
+      ...state.profileData, // todo would need to adjust all this stuff as well
       [fieldName]: value,
     });
   };

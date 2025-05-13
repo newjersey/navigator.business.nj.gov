@@ -16,8 +16,8 @@ interface Props
   > {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
+  businessTaxId: string | undefined;
   taxId: string | undefined;
-  dbTaxId: string | undefined;
   encryptedTaxId: string | undefined;
   setDecryptedTaxId: (taxId: string) => void;
 }
@@ -44,7 +44,7 @@ export const TaxId = (props: Props): ReactElement => {
   const taxIdIsEncrypted = isEncrypted(props.taxId, props.encryptedTaxId);
   // const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
-    getInitialShowHideStatus(props.dbTaxId),
+    getInitialShowHideStatus(props.businessTaxId),
     // getInitialShowHideStatus(business?.profileData.taxId),
   );
 
@@ -93,7 +93,7 @@ export const TaxId = (props: Props): ReactElement => {
     // if (!business) return true;
     if (
       !(value.length === 0 || value.length === 12) &&
-      (props.dbTaxId !== value || props.required)
+      (props.businessTaxId !== value || props.required)
       // (business.profileData.taxId !== value || props.required)
     ) {
       return false;

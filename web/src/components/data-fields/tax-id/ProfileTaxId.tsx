@@ -22,7 +22,7 @@ export const ProfileTaxId = (props: Props): ReactElement => {
   return (
     <TaxId
       taxId={state.profileData[fieldName]}
-      dbTaxId={business?.profileData.taxId}
+      businessTaxId={business?.profileData.taxId}
       encryptedTaxId={state.profileData.encryptedTaxId}
       setDecryptedTaxId={(decryptedTaxId) =>
         setProfileData({ ...state.profileData, taxId: decryptedTaxId })
