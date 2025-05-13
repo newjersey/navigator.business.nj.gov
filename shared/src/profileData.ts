@@ -121,6 +121,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly entityId: string | undefined;
   readonly employerId: string | undefined;
   readonly taxId: string | undefined;
+  readonly hashedTaxId: string | undefined;
   readonly encryptedTaxId: string | undefined;
   readonly taxPin: string | undefined;
   readonly encryptedTaxPin: string | undefined;
@@ -152,6 +153,7 @@ export const emptyProfileData: ProfileData = {
   entityId: undefined,
   employerId: undefined,
   taxId: undefined,
+  hashedTaxId: undefined,
   encryptedTaxId: undefined,
   taxPin: undefined,
   encryptedTaxPin: undefined,

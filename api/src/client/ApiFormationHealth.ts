@@ -41,6 +41,7 @@ const profileData: ProfileData = {
   entityId: "8206864808",
   employerId: "366451721",
   taxId: "752066817169",
+  hashedTaxId: undefined,
   encryptedTaxId: undefined,
   taxPin: "2671",
   encryptedTaxPin: undefined,

@@ -298,6 +298,7 @@ export const generateProfileData = (
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
     taxId: randomInt(12).toString(),
+    hashedTaxId: undefined,
     encryptedTaxId: undefined,
     taxPin: randomInt(4).toString(),
     encryptedTaxPin: undefined,
