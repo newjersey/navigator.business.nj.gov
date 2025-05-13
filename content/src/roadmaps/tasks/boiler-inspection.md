@@ -69,7 +69,7 @@ Call the NJ Bureau of Boiler and Pressure Vessel Compliance.
 
 :::
 
-* New or replaced equipment inspections can only be done by the New Jersey [Mechanical Inspection Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)](https://www.nj.gov/labor/safetyandhealth/programs-services/boiler-pressure-vessel-compliance/index.shtml)
+* New or replaced equipment inspections can only be done by the NJ Mechanical Inspection Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)
 * Yearly inspections can be done by a certified insurance inspector or the State (MIBBPVC)
 
 If you have questions, email [bpvrcompliance@dol.nj.gov](bpvrcompliance@dol.nj.gov) or write to:
