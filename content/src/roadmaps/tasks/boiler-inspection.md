@@ -93,6 +93,6 @@ Trenton, NJ 08625-0392
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A Certificate of Inspection with a jurisdiction number mailed to the address the business owner provides after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
+A Certificate of Inspection with a jurisdiction number mailed to the address you provide after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
 
 :::
