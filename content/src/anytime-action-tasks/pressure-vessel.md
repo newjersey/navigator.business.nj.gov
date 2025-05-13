@@ -3,8 +3,29 @@ id: pressure-vessel
 name: Get Your Pressure Vessel Inspected
 category:
   - Manage My Properties
-industryIds: []
-sectorIds: []
+industryIds:
+  - cannabis
+  - generic
+  - health-club
+  - healthcare
+  - lodging
+  - residential-landlord
+  - real-estate-investor
+  - restaurant
+  - retail
+sectorIds:
+  - cannabis
+  - accommodation-and-food-services
+  - clean-energy
+  - health-care-and-social-assistance
+  - manufacturing
+  - retail-trade-and-ecommerce
+  - real-estate
+  - mining-quarrying-and-oil-and-gas-extraction
+  - other-services
+  - offshore-wind
+  - utilities
+  - transportation-and-warehousing
 urlSlug: pressure-vessel
 summaryDescriptionMd: If your pressure vessel is newly installed or recently
   replaced, **it must be registered and inspected within 30 days**. Your
@@ -40,7 +61,6 @@ If the pressure vessel **meets any** of the following conditions, it does not ne
 
 After your pressure vessel is registered and passes the first inspection, a State inspector or your insurance company will contact you to set up future inspections. 
 
-
 Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected. 
 
 :::callout{ showHeader="true" headerText="To register a pressure vessel and schedule the first inspection:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-2921" emailIconText="" }
@@ -54,8 +74,6 @@ Call the NJ Bureau of Boiler and Pressure Vessel Compliance.
 
 If you have questions, email bpvrcompliance@dol.nj.gov or write to:
 
-
-
 NJ Department of Labor & Workforce Development
 
 Division of Public Safety & Occupational Safety & Health
@@ -65,8 +83,6 @@ Bureau of Boiler & Pressure Vessel Compliance
 P.O. Box 392
 
 Trenton, NJ 08625-0392
-
-
 
 :::callout{ showHeader="true" headerText="What if I don't get my pressure vessel inspected?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
