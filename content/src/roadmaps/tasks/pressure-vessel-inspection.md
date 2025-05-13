@@ -46,7 +46,7 @@ After your pressure vessel is registered and passes the first inspection, a Stat
 
 Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected. 
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="note" }
+:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="quickReference" }
 
 **To register a pressure vessel and schedule the first inspection**: Call the NJ Bureau of Boiler and Pressure Vessel Compliance at (609) 292-2921.
 
@@ -67,14 +67,14 @@ P.O. Box 392
 
 Trenton, NJ 08625-0392
 
-:::callout{ showHeader="true" headerText="What if I don't get my pressure vessel inspected?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't get my pressure vessel inspected?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * If your equipment is not inspected as required, it could pose serious safety risks. You could face fines or legal penalties for non-compliance
 * For new pressure vessels, you may not be able to get an official `Certificate of Occupancy|certificate-occupancy` for your building until your inspection is passed
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A Certificate of Inspection with a jurisdiction number mailed to the address you provide after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
 
