@@ -4,7 +4,6 @@ import { SplitTaxId } from "@/components/data-fields/tax-id/SplitTaxId";
 import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
 import { useMediaQuery } from "@mui/material";
@@ -18,15 +17,16 @@ interface Props
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
   taxId: string;
+  dbTaxId: string;
   encryptedTaxId: string;
-  setTaxId: (taxId: string) => void;
+  setDecryptedTaxId: (taxId: string) => void;
 }
 
 export const TaxId = (props: Props): ReactElement => {
   // const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const { business } = useUserData();
+  // const { business } = useUserData();
   // const { state, setProfileData } = useContext(ProfileDataContext); // make this a controlled component, stateless on this
   const { Config } = useConfig();
 
@@ -44,7 +44,8 @@ export const TaxId = (props: Props): ReactElement => {
   const taxIdIsEncrypted = isEncrypted(props.taxId, props.encryptedTaxId);
   // const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
-    getInitialShowHideStatus(business?.profileData.taxId),
+    getInitialShowHideStatus(props.dbTaxId),
+    // getInitialShowHideStatus(business?.profileData.taxId),
   );
 
   const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement => {
@@ -63,7 +64,7 @@ export const TaxId = (props: Props): ReactElement => {
 
   const getDecryptedTaxId = async (): Promise<string> => {
     return decryptValue({
-      encryptedValue: state.profileData.encryptedTaxId as string,
+      encryptedValue: props.encryptedTaxId as string,
     });
   };
 
@@ -77,21 +78,23 @@ export const TaxId = (props: Props): ReactElement => {
     if (taxIdDisplayStatus === "password-view") {
       if (taxIdIsEncrypted) {
         await getDecryptedTaxId().then((decryptedTaxId) => {
-          setProfileData({ ...state.profileData, taxId: decryptedTaxId });
+          props.setDecryptedTaxId(decryptedTaxId);
+          // setProfileData({ ...props, taxId: decryptedTaxId });
           toggleFunc && toggleFunc(decryptedTaxId);
         });
       } else {
-        toggleFunc && state.profileData.taxId && toggleFunc(state.profileData.taxId);
+        toggleFunc && props.taxId && toggleFunc(props.taxId);
       }
     }
     toggleTaxIdDisplay();
   };
 
   const additionalValidationIsValid = (value: string): boolean => {
-    if (!business) return true;
+    // if (!business) return true;
     if (
       !(value.length === 0 || value.length === 12) &&
-      (business.profileData.taxId !== value || props.required)
+      (props.dbTaxId !== value || props.required)
+      // (business.profileData.taxId !== value || props.required)
     ) {
       return false;
     }
