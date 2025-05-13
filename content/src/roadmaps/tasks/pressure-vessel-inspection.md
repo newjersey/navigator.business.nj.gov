@@ -4,7 +4,7 @@ notesMd: >-
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.bp49p3vkr1w0
 
 
-  Want to use the quick reference callout but currently using the 'note' callout because it's the same color as the quick ref, as far as I understand
+  5.12.25: In SME review
 summaryDescriptionMd: If your pressure vessel is newly installed or recently
   replaced, **it must be registered and inspected within 30 days**. Your
   pressure vessel may also need to be inspected regularly to ensure it is
