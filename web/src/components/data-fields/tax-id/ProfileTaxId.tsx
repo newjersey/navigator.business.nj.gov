@@ -2,13 +2,14 @@ import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField
 import { SingleTaxId } from "@/components/data-fields/tax-id/SingleTaxId";
 import { SplitTaxId } from "@/components/data-fields/tax-id/SplitTaxId";
 import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props
   extends Omit<
@@ -17,22 +18,18 @@ interface Props
   > {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
-  taxId: string;
-  encryptedTaxId: string;
-  setTaxId: (taxId: string) => void;
 }
 
 export const TaxId = (props: Props): ReactElement => {
-  // const fieldName = "taxId";
+  const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { business } = useUserData();
-  // const { state, setProfileData } = useContext(ProfileDataContext); // make this a controlled component, stateless on this
+  const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
   const getFieldType = (): "FULL" | "SPLIT" => {
-    const initialValue = props.taxId.trim().length ?? 0; // should this be a question mark? not sure where to put the undefined line
-    // const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
+    const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
     if (initialValue === 0 || initialValue === 12) {
       return "FULL";
     }
@@ -41,8 +38,7 @@ export const TaxId = (props: Props): ReactElement => {
 
   const initialType = useRef<"FULL" | "SPLIT">(getFieldType());
 
-  const taxIdIsEncrypted = isEncrypted(props.taxId, props.encryptedTaxId);
-  // const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
+  const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
     getInitialShowHideStatus(business?.profileData.taxId),
   );
