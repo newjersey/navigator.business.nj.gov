@@ -4,12 +4,18 @@ notesMd: >-
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.ndgv526k6eks
 
 
+  5.13: Updated note callout to quick ref. Final publish for this task!
+
+
+  5.2: Updating callout to "note", or quick ref callout, but not republishing until that callout looks like it should (I know Faraz is working on this now!)
+
+
   4.21: SME approved, publishing task
 
   4.18: Revisions made with guidance from Jess
-summaryDescriptionMd: " Your boilers may need to be inspected regularly to
-  ensure they are working safely. If a boiler is newly installed or recently
-  replaced, **it must be registered and inspected within 30 days**."
+summaryDescriptionMd: If your boiler is newly installed or recently replaced,
+  **it must be registered and inspected within 30 days**. Your boiler may also
+  need to be inspected regularly to ensure it is working safely.
 urlSlug: boiler-inspection
 displayname: boiler-inspection
 name: Get Your Boiler Registered and Inspected
@@ -57,13 +63,13 @@ If the boiler **meets any** of the following *and* serves a building with less t
 
 After your boiler is registered and passes the first inspection, either a State inspector or your insurance company will contact you to set up future inspections. Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected.
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+:::callout{ showHeader="true" headerText="To register a boiler and schedule the first inspection:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-2921" emailIconText="" }
 
-**To register a boiler and schedule the first inspection**: Call the NJ Bureau of Boiler and Pressure Vessel Compliance at (609) 292-2921.
+Call the NJ Bureau of Boiler and Pressure Vessel Compliance.
 
 :::
 
-* New or replaced equipment inspections can only be done by the New Jersey [Mechanical Inspection Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)](https://www.nj.gov/labor/safetyandhealth/programs-services/boiler-pressure-vessel-compliance/index.shtml)
+* New or replaced equipment inspections can only be done by the NJ Mechanical Inspection Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)
 * Yearly inspections can be done by a certified insurance inspector or the State (MIBBPVC)
 
 If you have questions, email [bpvrcompliance@dol.nj.gov](bpvrcompliance@dol.nj.gov) or write to:
@@ -78,15 +84,15 @@ P.O. Box 392
 
 Trenton, NJ 08625-0392
 
-:::callout{ showHeader="true" headerText="What if I don't get my boiler inspected?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't get my boiler inspected?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * If your equipment is not inspected as required, it could pose serious safety risks. You could face fines or legal penalties for non-compliance
 * For new boilers, you may not be able to get an official `Certificate of Occupancy|certificate-occupancy` for your building until your inspection is passed
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A Certificate of Inspection with a jurisdiction number mailed to the address the business owner provides after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
+A Certificate of Inspection with a jurisdiction number mailed to the address you provide after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
 
 :::
