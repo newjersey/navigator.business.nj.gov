@@ -8,9 +8,7 @@ notesMd: >
 summaryDescriptionMd: >-
   You need a certification to make designated classification placements (DCPs)
   if your temporary help service firm or other business assigns temporary
-  workers in the following categories or \[PENDING: related successor
-  categories? How would the user find this? Here?
-  https://data.bls.gov/oesprofile/ ], per the Bureau of Labor Statistics of the
+  workers in the following categories, per the Bureau of Labor Statistics of the
   U.S. Department of Labor: 
 
 
