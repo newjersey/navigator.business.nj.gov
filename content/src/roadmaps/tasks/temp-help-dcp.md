@@ -20,7 +20,9 @@ summaryDescriptionMd: >-
 
   * 37-0000 Building and Grounds Cleaning and Maintenance Occupations
 
-  * 39-0000 Personal Care and Service Occupations; 47-2060 Construction Laborers
+  * 39-0000 Personal Care and Service Occupations
+
+  * 47-2060 Construction Laborers
 
   * 47-30000 Helpers, Construction Trades
 
