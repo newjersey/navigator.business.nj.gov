@@ -48,15 +48,13 @@ You must have an active license or registration as one of the following:
 * Career consulting/outplacement
 * Health care service firm
 
-
-
 ## Application Requirements
 
 * Business name
-* `Trade name|alt-name-trade-name\`, if applicable
-* 12-digit `New Jersey tax ID number|tax-id\`
+*  `Trade name|alt-name-trade-name\`, if applicable
+* 12-digit `New Jersey tax ID number|tax-id\` 
 * Business address
-* `Business type/structure|business-structure-learn-more\`
+*  `Business type/structure|business-structure-learn-more\` 
 * Owner’s information, including name, address, and email
 * Supplier information, including name, address, and phone number, if applicable
 * Manufacturer representative information, including company name, address of machine location, and 12-digit `New Jersey tax ID number|tax-id\`, if applicable
@@ -72,13 +70,13 @@ PO Box 252
 
 Trenton, NJ 08646-0252
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You will have to pay a penalty for each day that an agency makes DCPs without  a valid certification.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A paper certificate with a certification number beginning with "CA" followed by 6 digits.
 
