@@ -52,21 +52,18 @@ describe("<AnytimeActionDropdown />", () => {
       applyToAllUsers: true,
       category: ["Category 1"],
       description: "test-description-1",
-      searchMetaDataMatch: "meta-data-1",
     }),
     generateAnytimeActionTask({
       name: "test-title-2",
       applyToAllUsers: true,
       category: ["Category 1"],
       description: "test-description-2",
-      searchMetaDataMatch: "meta-data-2",
     }),
     generateAnytimeActionTask({
       name: "test-title-3",
       applyToAllUsers: true,
       category: ["Category 3"],
       description: "test-description-3",
-      searchMetaDataMatch: "meta-data-3",
     }),
   ];
 
@@ -637,18 +634,47 @@ describe("<AnytimeActionDropdown />", () => {
       expect(screen.queryByText("Category 1")).not.toBeInTheDocument();
     });
 
-    it("renders an anytime actions that match search value to a meta data, without showing meta data values", async () => {
-      anytimeActionTasks = anytimeActionTasksAlternate;
+    it("matches search for synonyms for anytime action", async () => {
+      anytimeActionTasks = [
+        generateAnytimeActionTask({
+          name: "task-1",
+          synonyms: ["Particular search"],
+          applyToAllUsers: true,
+        }),
+        generateAnytimeActionTask({ name: "task-2", applyToAllUsers: true }),
+      ];
 
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
-      await userEvent.type(screen.getByRole("combobox"), "meta-data-3");
-      expect(screen.getByText("test-title-3")).toBeInTheDocument();
-      expect(screen.queryByText("test-title-3")).not.toHaveClass("text-bold");
-      expect(screen.getByText("Category 3")).toBeInTheDocument();
-      expect(screen.queryByText("test-title-2")).not.toBeInTheDocument();
-      expect(screen.queryByText("test-title-1")).not.toBeInTheDocument();
-      expect(screen.queryByText("Category 1")).not.toBeInTheDocument();
+      await userEvent.type(screen.getByRole("combobox"), "particular");
+      expect(screen.getByText("task-1")).toBeInTheDocument();
+      expect(screen.queryByText("task-2")).not.toBeInTheDocument();
+    });
+
+    it("matches search for multiple synonyms for anytime action", async () => {
+      anytimeActionTasks = [
+        generateAnytimeActionTask({
+          name: "task-1",
+          synonyms: ["Particular search", "crazy search"],
+          applyToAllUsers: true,
+        }),
+        generateAnytimeActionTask({
+          name: "task-2",
+          synonyms: ["crazy search"],
+          applyToAllUsers: true,
+        }),
+      ];
+
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      await userEvent.type(screen.getByRole("combobox"), "particular");
+      expect(screen.getByText("task-1")).toBeInTheDocument();
+      expect(screen.queryByText("task-2")).not.toBeInTheDocument();
+
+      await userEvent.clear(screen.getByRole("combobox"));
+      await userEvent.type(screen.getByRole("combobox"), "crazy");
+      expect(screen.getByText("task-1")).toBeInTheDocument();
+      expect(screen.getByText("task-2")).toBeInTheDocument();
     });
   });
 });
