@@ -1,4 +1,4 @@
-import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
+import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledProfileTaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";

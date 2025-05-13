@@ -1,5 +1,5 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
+import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledProfileTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";

@@ -12,8 +12,10 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
@@ -21,6 +23,8 @@ interface Props {
 }
 
 export const CheckEligibility = (props: Props): ReactElement => {
+  const { business } = useUserData();
+  const { state, setTaxClearanceCertificateData } = useContext(TaxClearanceCertificateDataContext);
   const { Config } = useConfig();
 
   const handleSaveButtonClick = (): void => {
@@ -53,7 +57,10 @@ export const CheckEligibility = (props: Props): ReactElement => {
         </div>
         <div className="margin-bottom-2">
           <FieldLabelProfile fieldName="taxId" />
-          <TaxId inputWidth="full" />
+          <TaxId
+            inputWidth="full"
+            // taxId={state.}
+          />
         </div>
 
         <FieldLabelProfile fieldName="taxPin" />

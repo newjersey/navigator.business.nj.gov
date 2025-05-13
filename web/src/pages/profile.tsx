@@ -21,7 +21,7 @@ import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGa
 import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
-import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
+import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledProfileTaxId";
 import { ProfileTaxId } from "@/components/data-fields/tax-id/ProfileTaxId";
 import { TaxPin } from "@/components/data-fields/TaxPin";
 import { TradeName } from "@/components/data-fields/TradeName";
