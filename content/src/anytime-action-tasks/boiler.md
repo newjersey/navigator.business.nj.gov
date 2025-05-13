@@ -12,11 +12,11 @@ industryIds:
   - generic
   - health-club
   - healthcare
-  - logistics
   - real-estate-investor
   - residential-landlord
   - retail
   - restaurant
+  - lodging
 sectorIds:
   - cannabis
   - accommodation-and-food-services
