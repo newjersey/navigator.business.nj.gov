@@ -15,7 +15,7 @@ import { Ownership } from "@/components/data-fields/Ownership";
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
-import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { ProfileTaxId } from "@/components/data-fields/tax-id/ProfileTaxId";
 import { TaxPin } from "@/components/data-fields/TaxPin";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
@@ -143,7 +143,7 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="taxId" />
-          <TaxId />
+          <ProfileTaxId />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="taxPin" />

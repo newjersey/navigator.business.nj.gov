@@ -1,8 +1,11 @@
-import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { ProfileTaxId } from "@/components/data-fields/tax-id/ProfileTaxId";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -52,7 +55,7 @@ const Template = () => {
                 headerNotBolded: "UnBoldedHeader Text",
               }}
             />
-            <TaxId validationText={config.taxAccess.failedTaxIdHelper} required />
+            <ProfileTaxId validationText={config.taxAccess.failedTaxIdHelper} required />
 
             <WithErrorBar hasError type="ALWAYS" className="margin-top-2">
               <FieldLabelModal
@@ -65,7 +68,7 @@ const Template = () => {
                   headerNotBolded: "UnBoldedHeader Text",
                 }}
               />
-              <TaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
+              <ProfileTaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
             </WithErrorBar>
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>

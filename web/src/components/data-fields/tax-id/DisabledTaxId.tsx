@@ -13,7 +13,7 @@ import { ReactElement, ReactNode, useContext, useEffect, useMemo, useState } fro
 type Props = {
   template?: (props: { children: ReactNode }) => ReactElement;
 };
-export const DisabledTaxId = (props: Props): ReactElement => {
+export const DisabledProfileTaxId = (props: Props): ReactElement => {
   const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);

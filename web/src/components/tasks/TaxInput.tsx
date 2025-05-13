@@ -1,5 +1,5 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
+import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -143,7 +143,7 @@ export const TaxInput = (props: Props): ReactElement => {
         <div className={isTabletAndUp ? "flex flex-row" : ""}>
           {shouldLockTaxId ? (
             <Alert variant="success" className="width-100">
-              <DisabledTaxId template={DisabledElement} />
+              <DisabledProfileTaxId template={DisabledElement} />
             </Alert>
           ) : (
             <>

@@ -16,9 +16,9 @@ interface Props
   > {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
-  taxId: string;
-  dbTaxId: string;
-  encryptedTaxId: string;
+  taxId: string | undefined;
+  dbTaxId: string | undefined;
+  encryptedTaxId: string | undefined;
   setDecryptedTaxId: (taxId: string) => void;
 }
 
@@ -31,7 +31,7 @@ export const TaxId = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const getFieldType = (): "FULL" | "SPLIT" => {
-    const initialValue = props.taxId.trim().length ?? 0; // should this be a question mark? not sure where to put the undefined line
+    const initialValue = props.taxId?.trim().length ?? 0; // should this be a question mark? not sure where to put the undefined line
     // const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
     if (initialValue === 0 || initialValue === 12) {
       return "FULL";

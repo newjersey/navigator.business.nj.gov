@@ -21,8 +21,8 @@ import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGa
 import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
-import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
-import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { DisabledProfileTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
+import { ProfileTaxId } from "@/components/data-fields/tax-id/ProfileTaxId";
 import { TaxPin } from "@/components/data-fields/TaxPin";
 import { TradeName } from "@/components/data-fields/TradeName";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
@@ -475,9 +475,9 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           <div className={"max-width-38rem"}>
             {hasSubmittedTaxData ? (
-              <DisabledTaxId />
+              <DisabledProfileTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <ProfileTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
           {business?.profileData.naicsCode && (
@@ -534,9 +534,9 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           <div className={"max-width-38rem"}>
             {hasSubmittedTaxData ? (
-              <DisabledTaxId />
+              <DisabledProfileTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <ProfileTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
@@ -759,9 +759,9 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           <div className="max-width-38rem">
             {hasSubmittedTaxData ? (
-              <DisabledTaxId />
+              <DisabledProfileTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <ProfileTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
@@ -952,9 +952,9 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           <div className={"max-width-38rem"}>
             {hasSubmittedTaxData ? (
-              <DisabledTaxId />
+              <DisabledProfileTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <ProfileTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
@@ -1013,9 +1013,9 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           <div className="max-width-38rem">
             {hasSubmittedTaxData ? (
-              <DisabledTaxId />
+              <DisabledProfileTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <ProfileTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
