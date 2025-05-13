@@ -13,6 +13,8 @@ summaryDescriptionMd: You can start a registered apprenticeship program within
   program combines paid on-the-job training and classroom instruction.
 callToActionText: Submit Your Apprenticeship Program Intake Form
 callToActionLink: https://nj.gov/labor/lwdhome/apprenticeship/apprenticeshipOnboarding.html
+synonyms:
+  - trainee
 ---
 
 ## Submit Your Apprenticeship Program Intake Form

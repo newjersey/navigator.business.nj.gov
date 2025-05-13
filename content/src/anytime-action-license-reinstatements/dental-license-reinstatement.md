@@ -1,14 +1,17 @@
 ---
 id: dental-license-reinstatement
-name: Reinstate Your Dental License
 licenseName: ""
+name: Reinstate Your Dental License
 urlSlug: dental-license-reinstatement
-issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: If your dental license expired less than 30 days ago, [you
   can renew online](https://newjersey.mylicense.com/). If it has been expired
   for more than 30 days or is inactive, you need to reinstate it.
+issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Dental License
-callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Application-To-Reinstate-Reactivate-a-License-or-Registration.pdf"
+callToActionLink: https://www.njconsumeraffairs.gov/den/Applications/Application-To-Reinstate-Reactivate-a-License-or-Registration.pdf
+synonyms:
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements

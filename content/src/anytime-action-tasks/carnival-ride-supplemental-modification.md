@@ -14,6 +14,10 @@ summaryDescriptionMd: If you want to make major changes to your `carnival or
   apply, the ride must have an `Individual Approval|individual-approval` .
 callToActionText: "Apply for My Supplemental Modification Certification "
 callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rides/Appl_SuplCert.pdf
+synonyms:
+  - change
+  - fair
+  - festival
 ---
 
 ## Application Requirements

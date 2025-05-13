@@ -20,6 +20,9 @@ summaryDescriptionMd: >-
   Register with NJSTART to find bidding opportunities for goods and services through the DPP.
 callToActionText: Register My Business with NJSTART
 callToActionLink: https://www.njstart.gov/bso/
+synonyms:
+  - government
+  - contracting
 ---
 
 ### Registration Requirements

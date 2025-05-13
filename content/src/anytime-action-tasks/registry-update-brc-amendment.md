@@ -18,6 +18,9 @@ summaryDescriptionMd: >-
 
 
   Depending on the type of changes, this may include updating your business charter or obtaining a new `Business Registration Certificate (BRC)|business-reg-certificate` .
+synonyms:
+  - address
+  - name change
 ---
 
 ## Update Your Tax and Employer Information
