@@ -3,8 +3,11 @@ import { CheckEligibility } from "@/components/tasks/anytime-action/tax-clearanc
 import { Download } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Download";
 import { Requirements } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Requirements";
 import { Review } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Review";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { StepperStep } from "@/lib/types/types";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   steps: StepperStep[];
@@ -19,8 +22,13 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
   const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
     props.certificatePdfBlob || undefined,
   );
+  const { requireAccount, isAuthenticated } = useContext(NeedsAccountContext);
 
   const onStepClick = (step: number): void => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      requireAccount(ROUTES.taxClearanceCertificate);
+      return;
+    }
     if (step === 2 && props.currentStep === 1) {
       props.saveTaxClearanceCertificateData();
     }

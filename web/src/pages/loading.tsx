@@ -29,6 +29,17 @@ const LoadingPage = (): ReactElement => {
       return;
     }
 
+    if (typeof window !== "undefined") {
+      const returnToLink = sessionStorage.getItem("returnToLink");
+      if (returnToLink) {
+        sessionStorage.removeItem("returnToLink");
+        if (Object.values(ROUTES).includes(returnToLink)) {
+          router.push(returnToLink);
+        }
+        return;
+      }
+    }
+
     if (router.query[QUERIES.code]) {
       getActiveUser().then((currentUser) => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
