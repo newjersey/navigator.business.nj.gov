@@ -232,7 +232,8 @@
     "maxillofacial",
     "MIBBPVC",
     "psig",
-    "ACORD"
+    "ACORD",
+    "Faraz"
   ],
   "ignorePaths": [
     "node_modules/**",
