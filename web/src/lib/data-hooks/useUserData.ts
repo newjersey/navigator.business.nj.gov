@@ -111,7 +111,9 @@ export const useUserData = (): UseUserDataResponse => {
 
   const onProfileDataChange = async (newUserData: UserData): Promise<void> => {
     const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
-    setAnalyticsDimensions(newProfileData);
+
+    console.log("🚀 ~ useUserData ~ setAnalyticsDimensions:");
+    setAnalyticsDimensions(newProfileData); // a call here
     const newRoadmap = await buildUserRoadmap(newProfileData);
     setRoadmap(newRoadmap);
   };

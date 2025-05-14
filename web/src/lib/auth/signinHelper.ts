@@ -28,6 +28,7 @@ export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> =>
 
   const userData = await api.getUserData(user.id);
   setRegistrationDimension("Fully Registered");
+  console.log("~ signinHelper ~ setOnLoadDimensions");
   setOnLoadDimensions(userData);
 };
 
@@ -129,6 +130,7 @@ export const onGuestSignIn = async ({
   }
   setUserId(activeUser.id, true);
   if (userData) {
+    console.log("~ signinHelper ~ setAnalyticsDimensions");
     setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
     if (getCurrentBusiness(userData).onboardingFormProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");

@@ -450,6 +450,7 @@ export class DimensionQueueFactory {
   }
 
   update(): void {
+    console.log("interal Queue on update", this.internalQueue);
     return this.updateFunction(this.internalQueue);
   }
 
