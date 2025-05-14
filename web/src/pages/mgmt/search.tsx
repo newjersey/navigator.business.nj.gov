@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { MatchCollection } from "@/components/search/MatchCollection";
@@ -95,11 +96,23 @@ interface Props {
   cmsConfig: any;
 }
 
+interface SearchState {
+  term: string;
+  error: {
+    message: string;
+    term: string;
+  } | null;
+  hasSearched: boolean;
+}
+
 const SearchContentPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
-  const [hasSearched, setHasSearched] = useState<boolean>(false);
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchState, setSearchState] = useState<SearchState>({
+    term: "",
+    error: null,
+    hasSearched: false,
+  });
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
@@ -128,6 +141,10 @@ const SearchContentPage = (props: Props): ReactElement => {
     props.roadmapDisplayContent.sidebarDisplayContent,
   );
 
+  const updateSearchState = (updates: Partial<SearchState>): void => {
+    setSearchState((prev) => ({ ...prev, ...updates }));
+  };
+
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
       submit();
@@ -135,13 +152,22 @@ const SearchContentPage = (props: Props): ReactElement => {
   };
 
   const handleSearchInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSearchTerm(event.target.value);
-    setHasSearched(false);
+    updateSearchState({ term: event.target.value, hasSearched: false });
   };
 
   const onSearchSubmit = (): void => {
-    const lowercaseTerm = searchTerm.toLowerCase();
-    setGroupedConfigMatches(searchConfig(Config, lowercaseTerm, props.cmsConfig));
+    updateSearchState({ error: null });
+
+    if (searchState.term === "") return;
+
+    const lowercaseTerm = searchState.term.toLowerCase();
+
+    try {
+      setGroupedConfigMatches(searchConfig(Config, lowercaseTerm, props.cmsConfig));
+    } catch (error) {
+      updateSearchState({ error: { message: error as string, term: searchState.term } });
+      console.error(error);
+    }
 
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
@@ -196,12 +222,12 @@ const SearchContentPage = (props: Props): ReactElement => {
       searchContextualInfo(props.archivedContextualInfo, lowercaseTerm),
     );
     setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
-    setHasSearched(true);
+    updateSearchState({ hasSearched: true });
   };
 
   const noMatches = (): boolean => {
     return (
-      hasSearched &&
+      searchState.hasSearched &&
       [
         ...taskMatches,
         ...licenseTaskMatches,
@@ -278,7 +304,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         name="search"
         variant="outlined"
         type="text"
-        value={searchTerm}
+        value={searchState.term}
         onChange={handleSearchInput}
         onKeyDown={(event): void => handleKeyPress(event, onSearchSubmit)}
         inputProps={{ id: "search" }}
@@ -287,6 +313,15 @@ const SearchContentPage = (props: Props): ReactElement => {
         Submit
       </button>
       {noMatches() && <div>No matches.</div>}
+      {searchState.error && (
+        <Alert className="margin-bottom-4" rounded variant="warning">
+          <div>
+            Some results might be missing for <strong>{searchState.error.term}</strong>. Please
+            notify dev team.
+          </div>
+          <div>{searchState.error.message}</div>
+        </Alert>
+      )}
       <MatchCollection
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}

@@ -115,7 +115,7 @@ const buildCmsConfigPath = (
     return cmsLabelPath;
   }
 
-  const foundField = cmsConfigFile.fields.find((it: any) => it.name === keyPath[0]);
+  const foundField = cmsConfigFile.fields?.find((it: any) => it.name === keyPath[0]);
   if (!foundField) {
     return cmsLabelPath;
   }
