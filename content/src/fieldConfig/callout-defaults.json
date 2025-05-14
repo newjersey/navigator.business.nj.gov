@@ -1,13 +1,13 @@
 {
   "calloutDefaults": {
     "informationalHeadingDefaultText": "Keep in mind:",
-    "conditionalHeadingDefaultText": "Once completed, you will have:",
-    "warningHeadingDefaultText": "Be advised:",
-    "quickReferenceHeadingDefaultText": "Quick Reference Placeholder Header Text:",
-    "amountIconAriaLabel": "amount",
-    "filingTypeIconAriaLabel": "filing type",
-    "frequencyIconAriaLabel": "frequency",
     "phoneIconAriaLabel": "phone number",
-    "emailIconAriaLabel": "email address"
+    "warningHeadingDefaultText": "Be advised:",
+    "quickReferenceHeadingDefaultText": "Quick Reference",
+    "conditionalHeadingDefaultText": "Once completed, you will have:",
+    "emailIconAriaLabel": "email address",
+    "frequencyIconAriaLabel": "frequency",
+    "amountIconAriaLabel": "amount",
+    "filingTypeIconAriaLabel": "filing type"
   }
 }
