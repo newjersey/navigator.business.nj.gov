@@ -3,6 +3,14 @@ import { StateObject } from "@businessnjgovnavigator/shared/states";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
+export const getInitialTaxId = (business: Business | undefined): string => {
+  return business?.taxClearanceCertificateData?.taxId || business?.profileData.taxId || "";
+};
+
+export const getInitialTaxPin = (business: Business | undefined): string => {
+  return business?.taxClearanceCertificateData?.taxPin || business?.profileData.taxPin || "";
+};
+
 export const getInitialData = (
   business: Business,
 ): {
@@ -43,12 +51,12 @@ export const getInitialData = (
     business?.taxClearanceCertificateData?.addressZipCode ||
     business.formationData.formationFormData.addressZipCode ||
     "";
-  const taxId = business?.taxClearanceCertificateData?.taxId || business.profileData.taxId || "";
+  const taxId = getInitialTaxId(business);
   const encryptedTaxId =
     business?.taxClearanceCertificateData?.encryptedTaxId ||
     business.profileData.encryptedTaxId ||
     undefined;
-  const taxPin = business?.taxClearanceCertificateData?.taxPin || business.profileData.taxPin || "";
+  const taxPin = getInitialTaxPin(business);
   const encryptedTaxPin =
     business?.taxClearanceCertificateData?.encryptedTaxPin ||
     business.profileData.encryptedTaxPin ||

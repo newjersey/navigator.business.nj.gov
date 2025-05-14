@@ -1,4 +1,4 @@
-import { TaxPin } from "@/components/data-fields/TaxPin";
+import { TaxPin, Props as TaxPinProps } from "@/components/data-fields/TaxPin";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
@@ -35,12 +35,12 @@ const setLargeScreen = (value: boolean): void => {
   });
 };
 
-const renderComponent = (profileData: ProfileData): void => {
+const renderComponent = (profileData: ProfileData, fieldProps?: Partial<TaxPinProps>): void => {
   const business = generateBusiness({ profileData });
   render(
     <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
       <WithStatefulProfileData initialData={profileData}>
-        <TaxPin />
+        <TaxPin dbBusinessTaxPin={business.profileData.taxPin} {...fieldProps} />
       </WithStatefulProfileData>
       ,
     </WithStatefulUserData>,
@@ -113,6 +113,18 @@ describe("<TaxPin />", () => {
       taxPin: "****",
       encryptedTaxPin: "some-encrypted-value",
     });
+    expect(screen.getByLabelText("Tax pin")).toBeDisabled();
+  });
+
+  it("defaults to disabled if the database tax pin is masked, even if profileData tax pin is unmasked", () => {
+    renderComponent(
+      {
+        ...profileData,
+        taxPin: "1234",
+        encryptedTaxPin: "some-encrypted-value",
+      },
+      { dbBusinessTaxPin: "****" },
+    );
     expect(screen.getByLabelText("Tax pin")).toBeDisabled();
   });
 

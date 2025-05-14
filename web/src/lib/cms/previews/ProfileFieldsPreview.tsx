@@ -143,11 +143,11 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="taxId" />
-          <TaxId />
+          <TaxId dbBusinessTaxId="" />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="taxPin" />
-          <TaxPin />
+          <TaxPin dbBusinessTaxPin="" />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="entityId" />

@@ -309,6 +309,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
               />
             </div>
             <TaxId
+              dbBusinessTaxId={business?.profileData.taxId}
               validationText={Config.taxAccess.failedTaxIdHelper}
               required
               inputWidth={"full"}
