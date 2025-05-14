@@ -62,14 +62,6 @@ You must have an active license or registration as one of the following:
 * Proof of valid workers’ compensation insurance covering all employees
 * Applicable fees paid
 
-Mail your completed application and any fees to: 
-
-Division of Revenue and Enterprise Services
-
-PO Box 252
-
-Trenton, NJ 08646-0252
-
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You will have to pay a penalty for each day that an agency makes DCPs without  a valid certification.
