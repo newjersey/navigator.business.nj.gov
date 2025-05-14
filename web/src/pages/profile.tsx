@@ -477,7 +477,10 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <TaxId
+                dbBusinessTaxId={business?.profileData.taxId}
+                handleChangeOverride={showNeedsAccountModalForGuest()}
+              />
             )}
           </div>
           {business?.profileData.naicsCode && (
@@ -490,7 +493,10 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="taxPin">
-          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+          <TaxPin
+            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            handleChangeOverride={showNeedsAccountModalForGuest()}
+          />
         </ProfileField>
       </div>
     ),
@@ -536,13 +542,19 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <TaxId
+                dbBusinessTaxId={business?.profileData.taxId}
+                handleChangeOverride={showNeedsAccountModalForGuest()}
+              />
             )}
           </div>
         </ProfileField>
 
         <ProfileField fieldName="taxPin">
-          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+          <TaxPin
+            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            handleChangeOverride={showNeedsAccountModalForGuest()}
+          />
         </ProfileField>
       </div>
     ),
@@ -761,13 +773,19 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <TaxId
+                dbBusinessTaxId={business?.profileData.taxId}
+                handleChangeOverride={showNeedsAccountModalForGuest()}
+              />
             )}
           </div>
         </ProfileField>
 
         <ProfileField fieldName="taxPin">
-          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+          <TaxPin
+            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            handleChangeOverride={showNeedsAccountModalForGuest()}
+          />
         </ProfileField>
       </div>
     ),
@@ -954,13 +972,19 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <TaxId
+                dbBusinessTaxId={business?.profileData.taxId}
+                handleChangeOverride={showNeedsAccountModalForGuest()}
+              />
             )}
           </div>
         </ProfileField>
 
         <ProfileField fieldName="taxPin">
-          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+          <TaxPin
+            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            handleChangeOverride={showNeedsAccountModalForGuest()}
+          />
         </ProfileField>
       </div>
     ),
@@ -1015,7 +1039,10 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+              <TaxId
+                dbBusinessTaxId={business?.profileData.taxId}
+                handleChangeOverride={showNeedsAccountModalForGuest()}
+              />
             )}
           </div>
         </ProfileField>

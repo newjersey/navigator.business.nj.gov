@@ -12,7 +12,9 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ReactElement } from "react";
 
 interface Props {
@@ -22,7 +24,7 @@ interface Props {
 
 export const CheckEligibility = (props: Props): ReactElement => {
   const { Config } = useConfig();
-
+  const { business } = useUserData();
   const handleSaveButtonClick = (): void => {
     props.setStepIndex(2);
     props.saveTaxClearanceCertificateData();
@@ -53,11 +55,14 @@ export const CheckEligibility = (props: Props): ReactElement => {
         </div>
         <div className="margin-bottom-2">
           <FieldLabelProfile fieldName="taxId" />
-          <TaxId inputWidth="full" />
+          <TaxId dbBusinessTaxId={getInitialTaxId(business)} inputWidth="full" />
         </div>
 
         <FieldLabelProfile fieldName="taxPin" />
-        <TaxPin inputWidth="full" />
+        <TaxPin
+          dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+          inputWidth="full"
+        />
       </div>
       <CtaContainer>
         <ActionBarLayout>

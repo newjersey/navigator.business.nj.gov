@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { SingleTaxId } from "@/components/data-fields/tax-id/SingleTaxId";
 import { SplitTaxId } from "@/components/data-fields/tax-id/SplitTaxId";
@@ -7,26 +5,25 @@ import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHide
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 
-interface Props
+export interface Props
   extends Omit<
     ProfileDataFieldProps,
     "fieldName" | "handleChange" | "onValidation" | "inputWidth"
   > {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
+  dbBusinessTaxId: string | undefined;
 }
 
 export const TaxId = (props: Props): ReactElement => {
   const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const { business } = useUserData();
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
@@ -42,7 +39,7 @@ export const TaxId = (props: Props): ReactElement => {
 
   const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
-    getInitialShowHideStatus(business?.profileData.taxId),
+    getInitialShowHideStatus(props.dbBusinessTaxId),
   );
 
   const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement => {
@@ -86,10 +83,9 @@ export const TaxId = (props: Props): ReactElement => {
   };
 
   const additionalValidationIsValid = (value: string): boolean => {
-    if (!business) return true;
     if (
       !(value.length === 0 || value.length === 12) &&
-      (business.profileData.taxId !== value || props.required)
+      (props.dbBusinessTaxId !== value || props.required)
     ) {
       return false;
     }

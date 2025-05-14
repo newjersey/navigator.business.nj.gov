@@ -1,4 +1,8 @@
 import { Heading } from "@/components/njwds-extended/Heading";
+import {
+  getInitialTaxId,
+  getInitialTaxPin,
+} from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { TaxClearanceSteps } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceSteps";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
@@ -120,14 +124,12 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
         business?.taxClearanceCertificateData?.addressZipCode ||
         business.formationData.formationFormData.addressZipCode ||
         "";
-      const newTaxId =
-        business?.taxClearanceCertificateData?.taxId || business.profileData.taxId || "";
+      const newTaxId = getInitialTaxId(business);
       const newEncryptedTaxId =
         business?.taxClearanceCertificateData?.encryptedTaxId ||
         business.profileData.encryptedTaxId ||
         "";
-      const newTaxPin =
-        business?.taxClearanceCertificateData?.taxPin || business.profileData.taxPin || "";
+      const newTaxPin = getInitialTaxPin(business);
       const newEncryptedTaxPin =
         business?.taxClearanceCertificateData?.encryptedTaxPin ||
         business.profileData.encryptedTaxPin ||
