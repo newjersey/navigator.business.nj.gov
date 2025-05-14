@@ -1,13 +1,16 @@
 ---
 id: authorization-certificate-reinstatement
-name: Apply to Reinstate Your Application for a Certificate of Authorization
 licenseName: Architecture-Certificate of Authorization
+name: Apply to Reinstate Your Application for a Certificate of Authorization
 urlSlug: authorization-certificate-reinstatement
 summaryDescriptionMd: Your certificate of authorization is either expired with
   no renewal or inactive, so you need to reinstate it.
-callToActionText: "Reinstate My Application for a Certificate of Authorization"
+issuingAgency: Division of Consumer Affairs
+callToActionText: Reinstate My Application for a Certificate of Authorization
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
-issuingAgency: "Division of Consumer Affairs"
+synonyms:
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements

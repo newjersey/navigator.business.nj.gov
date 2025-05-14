@@ -3,7 +3,6 @@ notesMd: Need to check with engineering team what the system is returning -- is
   it definitely showing licenses that have been expired for five years or less?
 id: architecture-license-reinstatement
 licenseName: ""
-issuingAgency: "Division of Consumer Affairs"
 name: Apply to Reinstate Your Architecture License
 urlSlug: architecture-license-reinstatement
 summaryDescriptionMd: >-
@@ -18,8 +17,12 @@ summaryDescriptionMd: >-
   If your license has been expired for over five years, then you need to re-apply for your architect license.
 
   :::
+issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Architecture License
 callToActionLink: https://www.njconsumeraffairs.gov/arch/applications/Application-for-Reinstatement-with-Instructions.pdf
+synonyms:
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements

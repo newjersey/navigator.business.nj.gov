@@ -19,6 +19,9 @@ summaryDescriptionMd: >-
   2. After your completed application has been emailed back to the DCU, they will email you an invoice to pay the fee online.
 
   3. If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration is also expired, be sure to reinstate it.
+synonyms:
+  - veterinarian
+  - drugs
 ---
 
 ## Application Requirements

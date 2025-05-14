@@ -29,6 +29,8 @@ summaryDescriptionMd: >-
   * Fire extinguishers
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
+synonyms:
+  - safety
 ---
 
 ## How to Apply

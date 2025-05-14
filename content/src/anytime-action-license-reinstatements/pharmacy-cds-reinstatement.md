@@ -6,10 +6,9 @@ notesMd: >-
 
   * 8.12: updated steps 1-3 per CDS SME
 id: pharmacy-cds-reinstatement
+licenseName: ""
 name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
 urlSlug: pharmacy-cds-reinstatement
-licenseName: ""
-issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: >-
   If your Controlled Dangerous Substances (CDS) registration expired less than
   30 days ago, [you can renew online](https://newjersey.mylicense.com/). If it
@@ -22,6 +21,10 @@ summaryDescriptionMd: >-
   2. After your completed application has been emailed back to the DCU, they will send you an invoice via email to pay the fee online.
 
   3. If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration is also expired, be sure to reinstate it.
+issuingAgency: Division of Consumer Affairs
+synonyms:
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements

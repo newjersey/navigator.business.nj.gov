@@ -1,13 +1,16 @@
 ---
 id: accounting-firm-registration-reinstatement
-name: Apply to Reinstate Your Accounting Firm Registration
 licenseName: Accountancy-Firm Registration
+name: Apply to Reinstate Your Accounting Firm Registration
 urlSlug: accounting-firm-registration-reinstatement
 summaryDescriptionMd: Your accounting firm registration needs to be reinstated
   because it is expired or inactive.
-issuingAgency: "Division of Consumer Affairs"
+issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Accountant Firm Registration
 callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Reinstatement-of-a-Lapsed-Certified-Public-Accountants-Firm-Registration.pdf
+synonyms:
+  - license renewal
+  - restore
 ---
 
 ## Application Requirements

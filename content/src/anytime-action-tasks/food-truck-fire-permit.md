@@ -20,6 +20,9 @@ summaryDescriptionMd: You must have a fire permit to cook in a mobile canteen or
 issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
+synonyms:
+  - fire safety
+  - fire marshal
 ---
 
 ## How to Apply

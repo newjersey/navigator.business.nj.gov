@@ -1,17 +1,20 @@
 ---
-id: dental-branch-reinstatement
-name: Reinstate Your Dental Branch Office Registration, if Applicable
-industryIds:
-  - healthcare
-sectorIds: []
 licenseName: ""
-issuingAgency: "Division of Consumer Affairs"
-urlSlug: dental-branch-reinstatement
+name: Reinstate Your Dental Branch Office Registration, if Applicable
 summaryDescriptionMd: If your branch office registration expired less than 30
   days ago, [you can renew online](https://newjersey.mylicense.com/). If it has
   been expired for more than 30 days or is inactive, you need to reinstate it.
-callToActionText: "Reinstate My Dental Branch Office Registration "
 callToActionLink: https://www.njconsumeraffairs.gov/den/Applications/Request-for-Branch-Office-Registration.pdf
+sectorIds: []
+urlSlug: dental-branch-reinstatement
+synonyms:
+  - license renewal
+  - restore
+industryIds:
+  - healthcare
+id: dental-branch-reinstatement
+issuingAgency: Division of Consumer Affairs
+callToActionText: "Reinstate My Dental Branch Office Registration "
 ---
 
 ## Application Requirements

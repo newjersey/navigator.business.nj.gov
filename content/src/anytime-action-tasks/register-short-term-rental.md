@@ -18,6 +18,10 @@ summaryDescriptionMd: >
   need to register it as a short-term rental in your town. This requirement also
   applies to properties rented through websites like Airbnb or Vrbo.
 issuingAgency: ""
+synonyms:
+  - airbnb
+  - host registration
+  - vacation rental
 ---
 
 ## How to Apply

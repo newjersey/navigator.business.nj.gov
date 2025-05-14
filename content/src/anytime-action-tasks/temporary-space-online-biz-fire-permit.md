@@ -9,7 +9,7 @@ id: temporary-space-online-biz-fire-permit
 name: Get a Fire Permit to Set Up Your Temporary Retail Space
 category:
   - Set Up at a Temporary Location
-description: "Ensure your kiosk or booth meets fire safety requirements with a permit."
+description: Ensure your kiosk or booth meets fire safety requirements with a permit.
 industryIds:
   - e-commerce
 sectorIds: []
@@ -22,6 +22,9 @@ summaryDescriptionMd: >
 issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
+synonyms:
+  - fire safety
+  - fire marshal
 ---
 
 ## How to Apply
