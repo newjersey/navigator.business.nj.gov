@@ -232,7 +232,10 @@
     "maxillofacial",
     "MIBBPVC",
     "psig",
-    "ACORD"
+    "ACORD",
+    "Faraz",
+    "FINRA",
+    "NJDOBI"
   ],
   "ignorePaths": [
     "node_modules/**",
