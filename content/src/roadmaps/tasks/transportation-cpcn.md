@@ -1,8 +1,8 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >
-  To legally provide transportation services in New Jersey, you need a
-  Certificate of Public Convenience and Necessity (CPCN). This certificate
+  To legally provide intrastate transportation services in New Jersey, you need
+  a Certificate of Public Convenience and Necessity (CPCN). This certificate
   serves as proof that you have legal authority by the state to do so.
 
 
@@ -80,7 +80,7 @@ If you are providing **regular route or casino bus services,** you must addition
 * **17.** A list of all other passenger carriers operating a similar service, or those seeking to operate a similar service, in your proposed service area.
 
 
-Your petition must also include a **petition filing fee ($25)** and **tariff filing fee ($25)** in the form of checks payable to the MVC. You must also provide **one-tenth of one percent** of your projected revenues for your first year of operations. This amount must be less than $25.
+Your petition must include a **petition filing fee ($25)** and **tariff filing fee ($25)** in the form of checks payable to the New Jersey Motor Vehicle Commission. You must also provide **one-tenth of one percent** of your projected revenues for your first year of operations. This amount must be less than $25.
 
 &nbsp;
 
@@ -104,10 +104,8 @@ Mail your petition to the following address:
 > &nbsp;
 >
 > Trenton, NJ 08666-0170
->
 
-
-
+&nbsp;
 ## Post Submission Instructions
 
 After submission of your petition, the NJ MVC will assign you a docket number. Upon receiving the docket number, the applicant must:
