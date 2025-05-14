@@ -108,58 +108,60 @@ export const FilingElement = (props: {
           props.filing.frequency ||
           props.filing.agency === "New Jersey Division of Taxation") && (
           <Callout calloutType="conditional" showHeader={false}>
-            {props.filing.taxRates && (
-              <>
-                <span className="flex" data-testid="tax-rates">
-                  <Icon
-                    className="usa-icon--size-3 minw-3 margin-left-1 text-green margin-right-2"
-                    iconName="attach_money"
+            <div className="flex flex-column">
+              {props.filing.taxRates && (
+                <>
+                  <span className="flex margin-1" data-testid="tax-rates">
+                    <Icon
+                      className="usa-icon--size-3 minw-3 text-green margin-right-2"
+                      iconName="attach_money"
+                    />
+                    <Content>{`**${Config.filingDefaults.taxRateTitle}** &nbsp;&nbsp;${props.filing.taxRates}`}</Content>
+                  </span>
+                </>
+              )}
+              {props.filing.filingMethod && (
+                <span className="flex flex-row margin-1 " data-testid="filing-method">
+                  <img
+                    className="usa-icon--size-3 minw-3 margin-right-2"
+                    src={`/img/file-document-outline.svg`}
+                    alt=""
                   />
-                  <Content className="">{`**${Config.filingDefaults.taxRateTitle}** &nbsp;&nbsp;${props.filing.taxRates}`}</Content>
+                  <span className="flex flex-column ">
+                    <Content className="flex">{`**${
+                      Config.filingDefaults.filingMethod
+                    }** &nbsp;&nbsp;${taxFilingMethodMap[props.filing.filingMethod]}`}</Content>
+                    {props.filing.filingDetails && (
+                      <>
+                        {" "}
+                        <br />
+                        <Content data-testid="filing-details">{props.filing.filingDetails}</Content>
+                      </>
+                    )}
+                  </span>
                 </span>
-              </>
-            )}
-            {props.filing.filingMethod && (
-              <span className="flex flex-row margin-top-05" data-testid="filing-method">
-                <img
-                  className="usa-icon--size-3 minw-3 margin-1 margin-right-2"
-                  src={`/img/file-document-outline.svg`}
-                  alt=""
-                />
-                <span className="flex flex-column margin-top-1">
-                  <Content className="flex">{`**${
-                    Config.filingDefaults.filingMethod
-                  }** &nbsp;&nbsp;${taxFilingMethodMap[props.filing.filingMethod]}`}</Content>
-                  {props.filing.filingDetails && (
-                    <>
-                      {" "}
-                      <br />
-                      <Content data-testid="filing-details">{props.filing.filingDetails}</Content>
-                    </>
-                  )}
-                </span>
-              </span>
-            )}
-            {props.filing.frequency && (
-              <>
-                <span className="flex margin-top-05">
+              )}
+              {props.filing.frequency && (
+                <>
+                  <span className="flex margin-1">
+                    <Icon
+                      className="usa-icon--size-3 minw-3 text-green margin-right-2"
+                      iconName="event"
+                    />
+                    <Content>{`**${Config.filingDefaults.filingFrequency}** &nbsp;&nbsp;${props.filing.frequency}`}</Content>
+                  </span>
+                </>
+              )}
+              {props.filing.agency === "New Jersey Division of Taxation" && (
+                <span className="flex margin-1" data-testid="late-filing">
                   <Icon
-                    className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2"
-                    iconName="event"
+                    className="usa-icon--size-3 minw-3 text-green margin-right-2"
+                    iconName="cancel"
                   />
-                  <Content className="margin-top-1">{`**${Config.filingDefaults.filingFrequency}** &nbsp;&nbsp;${props.filing.frequency}`}</Content>
+                  <Content>{`**${Config.filingDefaults.lateFilingsTitle}** &nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
                 </span>
-              </>
-            )}
-            {props.filing.agency === "New Jersey Division of Taxation" && (
-              <span className="flex margin-top-05" data-testid="late-filing">
-                <Icon
-                  className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2"
-                  iconName="cancel"
-                />
-                <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}** &nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
-              </span>
-            )}
+              )}
+            </div>
           </Callout>
         )}
 
