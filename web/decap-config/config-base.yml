@@ -18,6 +18,3 @@ slug:
   encoding: "ascii"
   clean_accents: true
   sanitize_replacement: "_"
-yaml:
-  outputStringStyle: "QUOTE_ALL_STRINGS"
-  outputIndentation: "FIXED_2_SPACES"
