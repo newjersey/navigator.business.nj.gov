@@ -34,14 +34,14 @@ NJ resident applicants only:
 
 * Business name, address, phone number, and email
 * Social Security number
-* `National Producer Number|national-producer-number` (NPN), if assigned
+*  `National Producer Number|national-producer-number` (NPN), if assigned
 * Firm Central Registration Depository (FINRA) number, if applicable
 * Any other assumed, fictitious, alias, or trade names under which you are currently doing business or intend to do business, if applicable
 * Employment history
 * Completed background questionnaire and documentation, if applicable
 * Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You cannot legally sell, solicit, or negotiate insurance products. You may face fines and legal penalties.
 
