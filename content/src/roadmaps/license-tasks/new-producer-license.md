@@ -5,10 +5,9 @@ displayname: new-business-producer-license
 urlSlug: new-producer-license
 name: Apply for an Insurance Business Entity Producer License
 webflowName: Insurance Company
-summaryDescriptionMd: >+
-  You must have a business `producer|insurance-producer` license for your
-  company to legally sell, solicit, or negotiate insurance products.
-
+summaryDescriptionMd: You must have a business `producer|insurance-producer`
+  license for your company to legally sell, solicit, or negotiate insurance
+  products.
 industryId:
   - retail
 callToActionText: Apply for My Business Producer License
@@ -28,9 +27,11 @@ divisionPhone: " 609-292-7272"
 ## Application Requirements
 
 * Business name, address, and phone number
-* `Certificate of Formation|certificate-formation` **(only for NJ resident applicants)**
-* `EIN|ein
-* `National Producer Number|national-producer-number`, if assigned
+*  `Certificate of Formation|certificate-formation` **(only for NJ resident applicants)**
+
+
+*  `Employer Identification number (EIN)|ein` 
+*  `National Producer number,|national-producer-number` if assigned
 * FINRA Firm Central Registration Depository (CRD) number, if applicable
 * Designated responsible licensed producers name, Social Security number, and National Producer Number (NPN)
 * Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
@@ -38,7 +39,7 @@ divisionPhone: " 609-292-7272"
 * Proof that every officer, partner, director, and owner with 10% or more ownership has passed the [criminal background checks](https://www.nj.gov/dobi/insliced/livescan.htm) **(only for NJ resident applicants)**
 * Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You cannot legally sell, solicit or negotiate insurance products. The business may face fines and legal penalties.
 
@@ -46,4 +47,4 @@ You cannot legally sell, solicit or negotiate insurance products. The business m
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
 
-A business entity producer license with a unique number valid for two years.
+A business entity producer license with a unique number valid for 2 years.
