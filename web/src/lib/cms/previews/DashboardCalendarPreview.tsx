@@ -100,6 +100,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
             operateReferences={{}}
             CMS_ONLY_fakeBusiness={emptyFilingsUserData}
             licenseEvents={[]}
+            renewalEvents={[]}
           />
 
           <hr className="margin-top-6" />
@@ -109,6 +110,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessList}
             licenseEvents={licenseEvents}
+            renewalEvents={[]}
           />
 
           <hr className="margin-top-6" />
@@ -118,6 +120,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessGrid}
             licenseEvents={licenseEvents}
+            renewalEvents={[]}
           />
 
           <HideableTasks />

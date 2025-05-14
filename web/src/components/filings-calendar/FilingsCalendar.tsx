@@ -12,7 +12,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import { LicenseEventType, OperateReference, RenewalEventType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   Business,
@@ -27,9 +27,12 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
   CMS_ONLY_fakeBusiness?: Business;
   licenseEvents: LicenseEventType[];
+  renewalEvents: RenewalEventType[];
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
+  console.log("FilingsCalendar renewalEvents", props.renewalEvents);
+  console.log("FilingsCalendar licenseEvents", props.licenseEvents);
   const { Config } = useConfig();
   const { updateQueue } = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
@@ -63,6 +66,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           business={business as Business}
           activeYear={activeYear}
           licenseEvents={props.licenseEvents}
+          renewalEvents={props.renewalEvents}
         />
       );
     if (type === "FULL") {
@@ -73,6 +77,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             business={business}
             activeYear={activeYear}
             licenseEvents={props.licenseEvents}
+            renewalEvents={props.renewalEvents}
           />
         );
       return (
@@ -81,6 +86,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           business={business as Business}
           activeYear={activeYear}
           licenseEvents={props.licenseEvents}
+          renewalEvents={props.renewalEvents}
         />
       );
     }

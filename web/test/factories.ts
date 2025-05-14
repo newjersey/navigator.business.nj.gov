@@ -18,6 +18,7 @@ import {
   OperateReference,
   Opportunity,
   OutageConfig,
+  RenewalEventType,
   Roadmap,
   SidebarCardContent,
   Step,
@@ -131,6 +132,21 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     agencyAdditionalContext: `some-agency-${randomInt()}`,
     formName: `some-form-${randomInt()}`,
     requiresLocation: Math.random() < 0.5,
+    ...overrides,
+  };
+};
+
+export const generateRenewalEvent = (overrides: Partial<RenewalEventType>): RenewalEventType => {
+  return {
+    issuingAgency: "some-issuing-agency",
+    eventDisplayName: "some-event-display-name",
+    filename: "some-filename",
+    urlSlug: "some-url-slug",
+    callToActionLink: "some-cta-link",
+    callToActionText: "some-cta-text",
+    contentMd: "some-content-md",
+    name: "some-name",
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };

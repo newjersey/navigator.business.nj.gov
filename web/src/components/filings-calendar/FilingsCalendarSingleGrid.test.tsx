@@ -1,6 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
-import { generateLicenseEvent } from "@/test/factories";
+import { generateLicenseEvent, generateRenewalEvent } from "@/test/factories";
 import * as shared from "@businessnjgovnavigator/shared";
 import {
   defaultDateFormat,
@@ -12,7 +12,10 @@ import {
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
-import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateLicenseData,
+  generateXrayRegistrationData,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
@@ -77,6 +80,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         num={month}
         activeYear={year}
         licenseEvents={[generateLicenseEvent({})]}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
@@ -106,6 +110,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         num={month - 1}
         activeYear={year}
         licenseEvents={[generateLicenseEvent({})]}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
     expect(screen.queryByText("Tax Filing Old")).not.toBeInTheDocument();
@@ -126,6 +131,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       <FilingsCalendarSingleGrid
         business={business}
         licenseEvents={[generateLicenseEvent({})]}
+        renewalEvents={[generateRenewalEvent({})]}
         operateReferences={{
           "tax-filing-old": {
             name: "Tax Filing Old",
@@ -152,6 +158,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={currentDate.add(1, "year").year().toString()}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
 
@@ -179,6 +186,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={currentDate.year().toString()}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
 
@@ -210,6 +218,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={currentDate.add(1, "month").month()}
         activeYear={currentDate.year().toString()}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
     expect(screen.getByText(licenseEvent.renewalEventDisplayName)).toBeInTheDocument();
@@ -240,6 +249,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={0}
         activeYear={currentDate.add(1, "year").year().toString()}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
 
@@ -267,6 +277,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
 
@@ -311,6 +322,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
 
@@ -359,6 +371,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
 
@@ -386,6 +399,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        renewalEvents={[generateRenewalEvent({})]}
       />,
     );
 
@@ -410,5 +424,35 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(
       screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton),
     ).not.toBeInTheDocument();
+  });
+
+  it("renders an xray renewal event", () => {
+    const renewalEvent = generateRenewalEvent({
+      id: "xray-renewal",
+      eventDisplayName: "Xray Renewal",
+      urlSlug: "xray-renewal",
+    });
+    const business = generateBusiness({
+      xrayRegistrationData: generateXrayRegistrationData({
+        expirationDate: currentDate.add(1, "month").format("YYYY-MM-DD").toString(),
+        status: "ACTIVE",
+      }),
+    });
+
+    render(
+      <FilingsCalendarSingleGrid
+        licenseEvents={[]}
+        business={business}
+        operateReferences={operateReferences}
+        num={currentDate.add(1, "month").month()}
+        activeYear={currentDate.year().toString()}
+        renewalEvents={[renewalEvent]}
+      />,
+    );
+    expect(screen.getByText(renewalEvent.eventDisplayName)).toBeInTheDocument();
+    expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
+      "href",
+      `renewal-calendar-event/${renewalEvent.urlSlug}`,
+    );
   });
 });

@@ -18,14 +18,18 @@ export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
     setProfileData({
       ...emptyProfileData,
       businessPersona: "STARTING",
-      industryId: "generic",
-      legalStructureId: "c-corporation",
+      industryId: "healthcare",
+      legalStructureId: "limited-liability-company",
+      nonEssentialRadioAnswers: {
+        "healthcare-xray-regis": true,
+      },
     });
     props.setPage({ current: 2, previous: 1 });
     props.routeToPage(2);
     updateQueue?.queueTaskProgress({
       [businessStructureTaskId]: "COMPLETED",
     });
+
     updateQueue?.update();
   };
 
