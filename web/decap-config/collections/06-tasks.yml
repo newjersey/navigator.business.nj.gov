@@ -941,7 +941,7 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Tab One Text, name: header, widget: string }
+              - { label: Tab One Text, name: tab1Text, widget: string }
               - { label: Tab Two Text, name: tab2Text, widget: string }
               - {
                   label: Call to Action Primary Text,
@@ -1017,7 +1017,7 @@ collections:
           preview: true
         fields:
           - label: Tax ID
-            name: tax
+            name: taxId
             collapsed: false
             widget: object
             fields:
@@ -1090,98 +1090,99 @@ collections:
         editor:
           preview: false
         fields:
-          - label: "Steps"
-            name: steps
+          - label: "ABC Emergency Trip Permit"
+            name: abcEmergencyTripPermit
             collapsed: false
             widget: object
             fields:
-              - { label: Task Name, name: taskName, widget: string }
-              - { label: Next Step Text, name: nextStepText, widget: string }
-              - { label: Previous Step Text, name: previousStepText, widget: string }
-              - { label: Submit Text, name: submitText, widget: string }
-              - label: "Instructions"
-                name: instructions
+              - label: "Steps"
+                name: steps
                 collapsed: false
                 widget: object
                 fields:
-                  - { label: Description, name: description, widget: string }
-                  - { label: Application Header, name: applicationHeader, widget: string }
-                  - {
-                      label: Application Instructions Description,
-                      name: applicationInstructionsDescription,
-                      widget: string,
-                    }
-                  - { label: Application Details, name: applicationDetails, widget: string }
-                  - { label: Button Text, name: buttonText, widget: string }
-                  - { label: Help Text, name: helpText, widget: string }
-              - label: "Requestor"
-                name: requestor
-                collapsed: false
-                widget: object
-                fields:
-                  - { label: Vehicle Section, name: vehicleSection, widget: string }
-                  - { label: Requestor Section, name: requestorSection, widget: string }
-                  - {
-                      label: Requestor Section Subheading,
-                      name: requestorSectionSubHeading,
-                      widget: string,
-                    }
-              - label: "Trip"
-                name: trip
-                collapsed: false
-                widget: object
-                fields:
-                  - { label: Subheader, name: subHeader, widget: string }
-                  - { label: Pickup Site Section, name: pickupSiteSection, widget: string }
-                  - { label: Delivery Site Section, name: deliverySiteSection, widget: string }
-              - label: "Billing"
-                name: billing
-                collapsed: false
-                widget: object
-                fields:
-                  - { label: Services Section, name: servicesSection, widget: string }
-                  - { label: Billing Section, name: billingSection, widget: string }
-                  - { label: Permit Section, name: permitSection, widget: string }
-                  - { label: Permit Subheader, name: permitSubheader, widget: string }
-                  - {
-                      label: PDF Attach Checkbox Label,
-                      name: pdfAttachCheckboxLabel,
-                      widget: string,
-                    }
-                  - {
-                      label: Text Message Download Link Checkbox Label,
-                      name: textMessageDownloadLinkCheckboxLabel,
-                      widget: string,
-                    }
-                  - {
-                      label: Additional Email Download Link Checkbox Label,
-                      name: additionalEmailDownloadLinkCheckboxLabel,
-                      widget: string,
-                    }
-                  - {
-                      label: Trip Permit Fee Line Item,
-                      name: tripPermitFeeLineItem,
-                      widget: string,
-                    }
-                  - { label: Trip Permit Fee Info, name: tripPermitFeeInfo, widget: string }
-                  - {
-                      label: Online Process Fee Line Item,
-                      name: onlineProcessFeeLineItem,
-                      widget: string,
-                    }
-                  - { label: Total Fee Line Item, name: totalFeeLineItem, widget: string }
-              - label: "Review"
-                name: review
-                collapsed: false
-                widget: object
-                fields:
-                  - { label: Info Alert Text, name: infoAlertText, widget: string }
-                  - { label: Error Submit Text, name: errorSubmitText, widget: string }
-                  - { label: API Error Text, name: apiErrorText, widget: string }
-                  - { label: Confirmation Email, name: confirmationEmail, widget: string }
-                  - { label: Permit Attach, name: permitAttach, widget: string }
-                  - { label: Permit Text Message, name: permitTextMessage, widget: string }
-                  - { label: AlternateEmail, name: alternateEmail, widget: string }
+                  - label: "Instructions"
+                    name: instructions
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: Description, name: description, widget: string }
+                      - { label: Application Header, name: applicationHeader, widget: string }
+                      - {
+                          label: Application Instructions Description,
+                          name: applicationInstructionsDescription,
+                          widget: string,
+                        }
+                      - { label: Application Details, name: applicationDetails, widget: string }
+                      - { label: Button Text, name: buttonText, widget: string }
+                      - { label: Help Text, name: helpText, widget: string }
+                  - label: "Requestor"
+                    name: requestor
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: Vehicle Section, name: vehicleSection, widget: string }
+                      - { label: Requestor Section, name: requestorSection, widget: string }
+                      - {
+                          label: Requestor Section Subheading,
+                          name: requestorSectionSubHeading,
+                          widget: string,
+                        }
+                  - label: "Trip"
+                    name: trip
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: Subheader, name: subHeader, widget: string }
+                      - { label: Pickup Site Section, name: pickupSiteSection, widget: string }
+                      - { label: Delivery Site Section, name: deliverySiteSection, widget: string }
+                  - label: "Billing"
+                    name: billing
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: Services Section, name: servicesSection, widget: string }
+                      - { label: Billing Section, name: billingSection, widget: string }
+                      - { label: Permit Section, name: permitSection, widget: string }
+                      - { label: Permit Subheader, name: permitSubheader, widget: string }
+                      - {
+                          label: PDF Attach Checkbox Label,
+                          name: pdfAttachCheckboxLabel,
+                          widget: string,
+                        }
+                      - {
+                          label: Text Message Download Link Checkbox Label,
+                          name: textMessageDownloadLinkCheckboxLabel,
+                          widget: string,
+                        }
+                      - {
+                          label: Additional Email Download Link Checkbox Label,
+                          name: additionalEmailDownloadLinkCheckboxLabel,
+                          widget: string,
+                        }
+                      - {
+                          label: Trip Permit Fee Line Item,
+                          name: tripPermitFeeLineItem,
+                          widget: string,
+                        }
+                      - { label: Trip Permit Fee Info, name: tripPermitFeeInfo, widget: string }
+                      - {
+                          label: Online Process Fee Line Item,
+                          name: onlineProcessFeeLineItem,
+                          widget: string,
+                        }
+                      - { label: Total Fee Line Item, name: totalFeeLineItem, widget: string }
+                  - label: "Review"
+                    name: review
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: Info Alert Text, name: infoAlertText, widget: string }
+                      - { label: Error Submit Text, name: errorSubmitText, widget: string }
+                      - { label: API Error Text, name: apiErrorText, widget: string }
+                      - { label: Confirmation Email, name: confirmationEmail, widget: string }
+                      - { label: Permit Attach, name: permitAttach, widget: string }
+                      - { label: Permit Text Message, name: permitTextMessage, widget: string }
+                      - { label: AlternateEmail, name: alternateEmail, widget: string }
               - label: "Fields"
                 name: fields
                 collapsed: false
@@ -1247,6 +1248,10 @@ collections:
                   - { label: Payer Company Name, name: payerCompanyName, widget: string }
                   - { label: Text Message Mobile, name: textMsgMobile, widget: string }
                   - { label: Additional Email, name: additionalEmail, widget: string }
+              - { label: Task Name, name: taskName, widget: string }
+              - { label: Next Step Text, name: nextStepText, widget: string }
+              - { label: Previous Step Text, name: previousStepText, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
 
   - name: "naics-code"
     label: "Tasks - NAICS Code"
