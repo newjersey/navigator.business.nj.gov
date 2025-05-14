@@ -1,0 +1,66 @@
+{
+  "naicsCodes": "524210, 524126, 524128, 524298, 524127, 524114, 524113, 525190, 524291, 522220, 524298",
+  "defaultSectorId": "finance-and-insurance",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 50,
+      "task": "determine-naics-code",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "search-licenses"
+    }
+  ],
+  "name": "Finance and Insurance",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "finance-insurance",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
+  "additionalSearchTerms": "Insurance agency, insurance broker, insurers, insurance agent, risk management, insurance, business insurance, auto insurance, car insurance, life insurance, home insurance, liability protection, financial protection services",
+  "id": "finance-insurance",
+  "description": "Businesses that sell, solicit, or negotiate insurance products. Financial institutions that help people and companies manage money and protect assets.",
+  "webflowId": "656a13628934eb2330f44bcb"
+}
