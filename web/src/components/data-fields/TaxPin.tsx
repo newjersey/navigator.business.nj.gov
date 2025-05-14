@@ -4,24 +4,23 @@ import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
 import { InputAdornment, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 
-interface Props {
+export interface Props {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
   required?: boolean;
   preventRefreshWhenUnmounted?: boolean;
+  dbBusinessTaxPin: string | undefined;
 }
 
 export const TaxPin = (props: Props): ReactElement => {
   const fieldName = "taxPin";
   const { Config } = useConfig();
-  const { business } = useUserData();
   const { state, setProfileData } = useContext(ProfileDataContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const taxPinIsEncrypted = isEncrypted(
@@ -29,7 +28,7 @@ export const TaxPin = (props: Props): ReactElement => {
     state.profileData.encryptedTaxPin,
   );
   const [showHideStatus, setShowHideStatus] = useState<ShowHideStatus>(
-    getInitialShowHideStatus(business?.profileData[fieldName]),
+    getInitialShowHideStatus(props.dbBusinessTaxPin),
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxPin"]["default"] =
