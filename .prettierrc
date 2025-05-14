@@ -15,17 +15,13 @@
     {
       "files": ["*.yml", "*.yaml"],
       "options": {
-        "singleQuote": false,
-        "quoteProps": "preserve"
+        "singleQuote": false
       }
     },
     {
       "files": ["*.md"],
       "options": {
-        "proseWrap": "preserve",
-        "embeddedLanguageFormatting": "auto",
-        "quoteProps": "as-needed",
-        "singleQuote": false
+        "proseWrap": "preserve"
       }
     }
   ]
