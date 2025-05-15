@@ -45,7 +45,8 @@
   ],
   "name": "Travel Agency",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "bus-initial-inspection"
   ],
   "displayname": "travel-agent",
   "industryOnboardingQuestions": {
