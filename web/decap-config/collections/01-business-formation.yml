@@ -275,6 +275,11 @@ collections:
                           value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
+                      - {
+                          label: "Label Secondary Text",
+                          name: "labelSecondaryText",
+                          widget: "string",
+                        }
                       - { label: "Inline error - future", name: "errorFuture", widget: "string" }
                       - { label: "Inline error - today", name: "errorToday", widget: "string" }
                       - { label: "Inline error - 30 days", name: "error30Days", widget: "string" }
@@ -377,6 +382,17 @@ collections:
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
+                      - label: Overrides
+                        name: overrides
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: Non Profit
+                            name: "nonprofit"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Cost", name: "cost", widget: "string" }
                   - label: Document - Certified Copy of Formation
                     name: certifiedCopyOfFormationDocument
                     collapsed: true
@@ -566,6 +582,7 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                      - { label: "Error", name: "error", widget: "string" }
                       - {
                           label: "Success snackbar - header",
                           name: "successSnackbarHeader",
@@ -598,6 +615,7 @@ collections:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Subheader", name: "subheader", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                      - { label: "Error", name: "error", widget: "string" }
                       - {
                           label: "Success snackbar - header",
                           name: "successSnackbarHeader",

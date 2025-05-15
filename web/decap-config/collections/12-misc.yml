@@ -315,7 +315,9 @@ collections:
           - label: Skip to main content
             name: skipToMainContent
             collapsed: true
-            widget: string
+            widget: object
+            fields:
+              - { label: Button Text, name: buttonText, widget: string }
           - label: Beta Bar
             name: betaBar
             collapsed: true
@@ -1809,6 +1811,12 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
+                          - {
+                              label: "Header Not Bolded",
+                              name: "headerNotBolded",
+                              widget: "string",
+                              required: false,
+                            }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - {
                               label: "Description",
@@ -1970,6 +1978,7 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
+                          - { label: "Header", name: "header", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Deferred Planned Renovation Question
                     name: "plannedRenovationQuestion"
@@ -1996,6 +2005,12 @@ collections:
                               label: "Radio Button No Text",
                               name: "radioButtonFalseText",
                               widget: "string",
+                            }
+                          - {
+                              label: "Alt Description",
+                              name: "altDescription",
+                              widget: "markdown",
+                              required: false,
                             }
                           - {
                               label: "Description",
@@ -2316,6 +2331,48 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Traveling Circus or Carnival Owning Business
+                    name: travelingCircusOrCarnivalOwningBusiness
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Vacant Property Owner
+                    name: vacantPropertyOwner
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
                           - {
                               label: "Radio Button Yes Text",
                               name: "radioButtonTrueText",
