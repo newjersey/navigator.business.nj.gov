@@ -62,7 +62,12 @@
     }
   ],
   "name": "Funeral Services",
-  "nonEssentialQuestionsIds": ["weights-measures", "business-vehicle-title-reg", "crematory"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg",
+    "crematory",
+    "bus-initial-inspection"
+  ],
   "displayname": "funeral",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
