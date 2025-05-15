@@ -9,6 +9,7 @@ export const encryptFieldsFactory = (
   encryptionDecryptionClient: EncryptionDecryptionClient,
 ): ((userData: UserData) => Promise<UserData>) => {
   return async (userData: UserData): Promise<UserData> => {
+    console.log("running encryptFieldsFactory");
     const encryptionFunctions = [
       encryptProfileTaxId,
       encryptProfileTaxPin,
@@ -120,6 +121,7 @@ const encryptTaxClearanceTaxPin = async (
   encryptionDecryptionClient: EncryptionDecryptionClient,
 ): Promise<UserData> => {
   const currentBusiness = getCurrentBusiness(userData);
+  console.log("running encryptTaxClearanceTaxPin");
   if (
     !currentBusiness.taxClearanceCertificateData?.taxPin ||
     currentBusiness.taxClearanceCertificateData?.taxPin?.includes(maskingCharacter)

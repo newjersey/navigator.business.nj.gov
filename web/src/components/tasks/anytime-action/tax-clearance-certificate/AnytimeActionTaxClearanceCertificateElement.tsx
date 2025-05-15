@@ -92,6 +92,10 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
         taxClearanceCertificateData: newTaxClearanceCertificateData,
       })
       .update();
+    console.log(
+      "business?.taxClearanceCertificateData?.taxPin",
+      business?.taxClearanceCertificateData?.taxPin,
+    );
   };
 
   useMountEffectWhenDefined(() => {

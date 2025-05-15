@@ -218,6 +218,8 @@ export const userRouterFactory = (
     const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
 
+    console.log("in user router");
+
     dynamoDataClient
       .put(userDataWithUpdatedISO)
       .then((result: UserData) => {
