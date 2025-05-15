@@ -33,22 +33,22 @@ export const triggerQueueUpdate = (): void => {
   fireEvent.click(screen.getByText("trigger queue update"));
 };
 
-const mockPostSideEffects = async (userData: UserData): Promise<UserData> => {
-  // const stubEncryptionDecryptionClient = {
-  //   encryptValue: jest.fn((value) => {
-  //     return new Promise((resolve) => {
-  //       resolve(`encrypted ${value}`);
-  //     });
-  //   }),
-  //   decryptValue: jest.fn((value) => {
-  //     return new Promise((resolve) => {
-  //       resolve(`decrypted ${value}`);
-  //     });
-  //   }),
-  // };
-  // const encryptFields = encryptFieldsFactory(stubEncryptionDecryptionClient);
-  return await encryptFields(userData);
-};
+// const mockPostSideEffects = async (userData: UserData): Promise<UserData> => {
+//   // const stubEncryptionDecryptionClient = {
+//   //   encryptValue: jest.fn((value) => {
+//   //     return new Promise((resolve) => {
+//   //       resolve(`encrypted ${value}`);
+//   //     });
+//   //   }),
+//   //   decryptValue: jest.fn((value) => {
+//   //     return new Promise((resolve) => {
+//   //       resolve(`decrypted ${value}`);
+//   //     });
+//   //   }),
+//   // };
+//   // const encryptFields = encryptFieldsFactory(stubEncryptionDecryptionClient);
+//   return await encryptFields(userData);
+// };
 
 export const WithStatefulUserData = ({
   children,
@@ -63,13 +63,18 @@ export const WithStatefulUserData = ({
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
 export const setupStatefulUserDataContext = (): void => {
+  console.log("calling setupStatefulUserDataContext");
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useMockRoadmap({});
   mockUseUserData.mockImplementation(() => {
     const { genericData, update } = useContext(StatefulDataContext);
     const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
 
+    // console.log("calling mockUseUserData.mockImplementation");
+    // this gets called a lot
+
     const createUpdateQueue = async (userData: UserData): Promise<UpdateQueue> => {
+      console.log("calling createUpdateQueue"); // this never gets called
       const queue = new UpdateQueueFactory(userData, update);
       setUpdateQueue(queue);
       await update(userData, { local: true });
@@ -77,6 +82,8 @@ export const setupStatefulUserDataContext = (): void => {
     };
 
     const userData = genericData as UserData | undefined;
+
+    // console.log("updateQueue withStatefulUserData.tsx", updateQueue);
 
     return {
       userData,

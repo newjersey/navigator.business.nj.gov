@@ -93,6 +93,13 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       })
       .update();
     console.log(
+      "updateQueue?.queueBusiness",
+      updateQueue?.queueBusiness({
+        ...updateQueue.currentBusiness(),
+        taxClearanceCertificateData: newTaxClearanceCertificateData,
+      }),
+    );
+    console.log(
       "business?.taxClearanceCertificateData?.taxPin",
       business?.taxClearanceCertificateData?.taxPin,
     );

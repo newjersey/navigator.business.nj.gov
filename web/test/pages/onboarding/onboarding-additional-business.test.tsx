@@ -28,6 +28,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
   postUserTesting: jest.fn(),
   postGetAnnualFilings: jest.fn(),
+  postUserData: jest.fn().mockImplementation(() => console.log("postUserData")),
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;

@@ -6,7 +6,8 @@ import { UpdateQueue } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { isUserData } from "@/lib/utils/helpers";
 import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers/helpers-utilities";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@businessnjgovnavigator/shared/index";
+import { maskingCharacter, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { createContext, ReactElement, ReactNode, useEffect, useState } from "react";
 
@@ -42,6 +43,57 @@ type StatefulDataProps = {
   initialData: GenericData | undefined;
 };
 
+export const maskTaxId = (taxId: string): string => {
+  return taxId.length === 12
+    ? `${maskingCharacter.repeat(7)}${taxId.slice(7, taxId.length)}`
+    : `${maskingCharacter.repeat(5)}${taxId.slice(5, taxId.length)}`;
+};
+
+const mockNonLocalUserDataUpdateSideEffects = (userData: UserData) => {
+  const currentBusiness = getCurrentBusiness(userData);
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
+    profileData: {
+      ...business.profileData,
+      taxId:
+        !currentBusiness.profileData.taxId ||
+        currentBusiness.profileData.taxId?.includes(maskingCharacter)
+          ? currentBusiness.profileData.taxId
+          : maskTaxId(currentBusiness.profileData.taxId as string),
+      encryptedTaxId:
+        !currentBusiness.profileData.taxId ||
+        currentBusiness.profileData.taxId?.includes(maskingCharacter)
+          ? currentBusiness.profileData.encryptedTaxId
+          : `encrypted-${currentBusiness.profileData.encryptedTaxId}`,
+    },
+    taxClearanceCertificateData: business.taxClearanceCertificateData
+      ? {
+          ...business.taxClearanceCertificateData,
+          taxId:
+            !currentBusiness.profileData.taxId ||
+            currentBusiness.profileData.taxId?.includes(maskingCharacter)
+              ? currentBusiness.profileData.taxId
+              : maskTaxId(currentBusiness.profileData.taxId as string),
+          encryptedTaxId:
+            !currentBusiness.profileData.taxId ||
+            currentBusiness.profileData.taxId?.includes(maskingCharacter)
+              ? currentBusiness.profileData.encryptedTaxId
+              : `encrypted-${currentBusiness.profileData.encryptedTaxId}`,
+          taxPin:
+            !currentBusiness.profileData.taxPin ||
+            currentBusiness.profileData.taxPin?.includes(maskingCharacter)
+              ? currentBusiness.profileData.taxPin
+              : maskingCharacter.repeat(currentBusiness.profileData.taxPin.length),
+          encryptedTaxPin:
+            !currentBusiness.profileData.taxPin ||
+            currentBusiness.profileData.taxPin?.includes(maskingCharacter)
+              ? currentBusiness.profileData.encryptedTaxPin
+              : `encrypted-${currentBusiness.profileData.encryptedTaxPin}`,
+        }
+      : undefined,
+  }));
+};
+
 export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) => ReactElement) => {
   type UpdateFn = (newData: GenericData | undefined, config?: { local?: boolean }) => Promise<void>;
 
@@ -50,7 +102,12 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
       newData: GenericData | undefined,
       config?: { local?: boolean },
     ): Promise<void> => {
+      // this is this.updateFunction
       spy(newData, config);
+      // technically this is missing a  || state.isAuthenticated !== IsAuthenticated.TRUE
+      if (!config?.local && isUserData(genericData as UserData | ProfileData)) {
+        newData = mockNonLocalUserDataUpdateSideEffects(newData as UserData);
+      }
       setGenericData(newData);
       return Promise.resolve();
     };
@@ -96,6 +153,7 @@ interface StatefulDataContextType {
 export const StatefulDataContext = createContext<StatefulDataContextType>({
   genericData: undefined,
   update: () => {
+    console.log("withStatefulData.tsx");
     return Promise.resolve();
   },
 });

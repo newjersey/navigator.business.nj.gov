@@ -224,6 +224,8 @@ export class UpdateQueueFactory implements UpdateQueue {
   }
 
   update(config?: { local?: boolean }): Promise<void> {
+    console.log("calling update UpdateQueue.ts");
+    console.log("this.updateFunction.toString", this.updateFunction.toString());
     return this.updateFunction(this.internalQueue, config);
   }
 

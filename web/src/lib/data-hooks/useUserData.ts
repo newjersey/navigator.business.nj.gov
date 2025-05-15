@@ -120,6 +120,7 @@ export const useUserData = (): UseUserDataResponse => {
     newUserData: UserData | undefined,
     config?: { local?: boolean },
   ): Promise<void> => {
+    console.log("calling useUserData.ts update"); // this is not called
     if (newUserData) {
       const localUpdateQueue = updateQueue ?? new UpdateQueueFactory(newUserData, update);
       if (!updateQueue) {
@@ -154,6 +155,7 @@ export const useUserData = (): UseUserDataResponse => {
   };
 
   const createUpdateQueue = async (userData: UserData): Promise<UpdateQueue> => {
+    console.log("calling useUserData.ts createUpdateQueue");
     const createdQueue = new UpdateQueueFactory(userData, update);
     setUpdateQueue(createdQueue);
     await update(userData, { local: true });
