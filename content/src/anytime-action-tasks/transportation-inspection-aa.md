@@ -4,7 +4,17 @@ name: Schedule Your Initial Bus Inspection
 category:
   - Manage My Business Vehicles
 industryIds: []
-sectorIds: []
+sectorIds:
+  - transportation-and-warehousing
+  - educational-services
+  - arts-entertainment-and-recreation
+  - accommodation-and-food-services
+  - utilities
+  - construction
+  - health-care-and-social-assistance
+  - mining-quarrying-and-oil-and-gas-extraction
+  - offshore-wind
+  - other-services
 urlSlug: transportation-inspection-aa
 summaryDescriptionMd: >-
   :::infoAlert
@@ -17,6 +27,8 @@ summaryDescriptionMd: >-
 
 
   All transportation vehicles must pass an initial inspection before you register them for Omnibus (code 54) or s1/s2 plates.
+issuingAgency: NJ Motor Vehicle Commission - Commercial Bus Inspection Unit |
+  School Bus Inspection Unit
 ---
 ## Eligibility Criteria
 
@@ -86,9 +98,9 @@ You'll be asked to provide information about the bus(es), location, and facility
 
 
 
-\* Form SS-14, “Authorization to Issue School Bus License Plates”
+* Form SS-14, “Authorization to Issue School Bus License Plates”
 
-\* MVC-issued inspection sticker, to be displayed on the vehicle
+* MVC-issued inspection sticker, to be displayed on the vehicle
 
 
 
@@ -110,6 +122,6 @@ You'll be asked to provide information about the bus(es), location, and facility
 
   :::infoAlert
 
-  After passing initial inspection, \*\*buses must continue to be inspected every 6 months.\*\* The NJ MVC inspector assigned to your area will schedule these for you, and will reach out shortly before the scheduled inspection date as a reminder.
+After passing initial inspection, **buses must continue to be inspected every 6 months.** The NJ MVC inspector assigned to your area will schedule these for you, and will reach out shortly before the scheduled inspection date as a reminder.
 
   :::
