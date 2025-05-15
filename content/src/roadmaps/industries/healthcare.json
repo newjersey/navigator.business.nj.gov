@@ -58,12 +58,6 @@
       "task": "community-right-to-know-survey"
     },
     {
-      "weight": 100,
-      "step": 4,
-      "licenseTask": "boiler-inspection",
-      "required": true
-    },
-    {
       "step": 4,
       "weight": 101,
       "licenseTask": "rmw-generator-registration",
@@ -81,7 +75,9 @@
     "business-vehicle-title-reg",
     "dental-hygienist",
     "special-permit-dentistry",
-    "inspect-boiler"
+    "inspect-boiler",
+    "inspect-pv",
+    "inspect-fridge"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
