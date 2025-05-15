@@ -61,7 +61,7 @@ You must have an active license or registration as one of the following:
 * Proof of valid workers’ compensation insurance covering all employees
 * Applicable fees paid
 
-Choose the "File an Application for Temporary Workers Bill of Rights Certification" after signing in or creating an account.
+Choose the "File an Application for Temporary Workers Bill of Rights Certification" (TWBR) after signing in or creating an account. 
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
