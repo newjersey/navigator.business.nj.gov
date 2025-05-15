@@ -69,7 +69,8 @@
   ],
   "name": "Car Rental",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "bus-initial-inspection"
   ],
   "displayname": "car-rental",
   "industryOnboardingQuestions": {
