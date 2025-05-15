@@ -55,7 +55,8 @@
     "business-vehicle-title-reg",
     "inspect-boiler",
     "inspect-pv",
-    "inspect-fridge"
+    "inspect-fridge",
+    "bus-initial-inspection"
   ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
