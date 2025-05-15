@@ -54,12 +54,12 @@
     },
     {
       "step": 4,
-      "weight": 90,
+      "weight": 1,
       "task": "community-right-to-know-survey"
     },
     {
       "step": 4,
-      "weight": 101,
+      "weight": 2,
       "licenseTask": "rmw-generator-registration",
       "required": true
     }
