@@ -57,7 +57,8 @@
   ],
   "name": "Security",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "bus-initial-inspection"
   ],
   "displayname": "security",
   "industryOnboardingQuestions": {
