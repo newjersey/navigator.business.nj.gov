@@ -46,15 +46,18 @@ You'll be asked to provide information about the bus(es), location, and facility
 
 * Certificate CMC-9 - “Commercial Bus Safety Certificate”
 * Certificate CMC-12 - “Authorization for Omnibus (Code 54) License Plates”
-* Form SS-14, “Authorization to Issue School Bus License Plates”
 * MVC-issued inspection sticker, to be displayed on the vehicle
 
 
 **School buses:**
 
+* Form SS-14, “Authorization to Issue School Bus License Plates”
 * MVC-issued inspection sticker, to be displayed on the vehicle
-  :::
-  :::callout{ showHeader="true" headerText="What if I don't get an initial bus inspection?" showIcon="false" calloutType="warning" }
+
+
+:::
+:::callout{ showHeader="true" headerText="What if I don't get an initial bus inspection?" showIcon="false" calloutType="warning" }
+
 * You cannot legally transport passengers in the vehicle
 * You will not receive the certificates and documentation necessary to register the bus for the appropriate plates
 * Operating a bus without approval can result in fines, impoundment, or license suspension
