@@ -30,7 +30,7 @@ urlSlug: temp-help-dcp
 displayname: temp-help-dcp
 name: Apply for Your Certification to Make Designated Classification Placements
 id: temp-help-dcp
-callToActionLink: https://rgbportal.dca.njoag.gov/mylicenseandregistrations
+callToActionLink: https://rgbportal.dca.njoag.gov/application-TWBRdcp/
 callToActionText: Apply for My Certification to Make DCPs
 webflowName: Temporary Workers Designated Classification Placements
 industryId: ""
@@ -61,7 +61,7 @@ You must have an active license or registration as one of the following:
 * Proof of valid workers’ compensation insurance covering all employees
 * Applicable fees paid
 
-Choose the "File an Application for Temporary Workers Bill of Rights Certification" (TWBR) after signing in or creating an account. 
+Select the option to apply for a TWBR (Temporary Workers Bill of Rights) certification after signing in or creating an account.
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
