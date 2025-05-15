@@ -58,7 +58,8 @@
     "regulated-medical-waste-question",
     "business-vehicle-irp",
     "inspect-fridge",
-    "inspect-pv"
+    "inspect-pv",
+    "bus-initial-inspection"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
