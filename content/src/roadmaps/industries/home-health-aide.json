@@ -61,7 +61,10 @@
     }
   ],
   "name": "Home Health Aide Placement",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "bus-initial-inspection"
+  ],
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
