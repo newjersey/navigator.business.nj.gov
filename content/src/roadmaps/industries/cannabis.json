@@ -73,13 +73,6 @@
       "step": 4,
       "weight": 35,
       "licenseTask": "town-mercantile-license"
-    },
-    {
-      "step": 4,
-      "weight": 40,
-      "licenseTask": "boiler-inspection",
-      "task": "boiler-inspection",
-      "required": true
     }
   ],
   "name": "Cannabis",
