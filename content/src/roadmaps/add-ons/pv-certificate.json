@@ -1,0 +1,12 @@
+{
+  "id": "pv-certificate",
+  "displayname": "pv-certificate",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 40,
+      "task": "pressure-vessel-inspection",
+      "required": true
+    }
+  ]
+}
