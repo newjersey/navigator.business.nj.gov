@@ -45,13 +45,6 @@
       "step": 4,
       "weight": 1,
       "task": "search-licenses"
-    },
-    {
-      "step": 4,
-      "weight": 5,
-      "licenseTask": "boiler-inspection",
-      "task": "boiler-inspection",
-      "required": true
     }
   ],
   "name": "All Other Businesses",
@@ -63,7 +56,9 @@
     "business-vehicle-title-reg",
     "inspect-boiler",
     "regulated-medical-waste-question",
-    "business-vehicle-irp"
+    "business-vehicle-irp",
+    "inspect-fridge",
+    "inspect-pv"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
