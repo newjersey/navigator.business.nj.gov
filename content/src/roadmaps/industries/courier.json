@@ -43,7 +43,8 @@
     "weights-measures",
     "courier-CRTK-survey",
     "business-vehicle-title-reg",
-    "business-vehicle-irp"
+    "business-vehicle-irp",
+    "bus-initial-inspection"
   ],
   "displayname": "courier",
   "industryOnboardingQuestions": {
