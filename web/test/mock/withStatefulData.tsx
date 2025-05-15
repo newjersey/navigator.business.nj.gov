@@ -51,6 +51,7 @@ export const maskTaxId = (taxId: string): string => {
 
 const mockNonLocalUserDataUpdateSideEffects = (userData: UserData) => {
   const currentBusiness = getCurrentBusiness(userData);
+  // debugger in this test
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
     profileData: {

@@ -696,7 +696,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(within(screen.getByTestId("businessName")).getByText("Test Name")).toBeInTheDocument();
       expect(within(screen.getByTestId("addressLabel")).getByText(address)).toBeInTheDocument();
       expect(
-        within(screen.getByTestId("stateTaxIdLabel")).getByText("012345678901"),
+        within(screen.getByTestId("stateTaxIdLabel")).getByText("*******78901"),
       ).toBeInTheDocument();
       expect(within(screen.getByTestId("taxPinLabel")).getByText("****")).toBeInTheDocument();
       // expect(within(screen.getByTestId("taxPinLabel")).getByText("1234")).toBeInTheDocument();
