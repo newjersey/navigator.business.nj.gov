@@ -184,6 +184,11 @@
       "id": "inspect-fridge",
       "questionText": "Will your business or facility use a large refrigerator or cooling system?",
       "addOn": "refrigeration-certificate"
+    },
+    {
+      "id": "bus-initial-inspection",
+      "addOn": "transportation-initial-inspection",
+      "questionText": "Will your business use commercial vehicles, such as school or shuttle buses, to transport passengers?"
     }
   ]
 }
