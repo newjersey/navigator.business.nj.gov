@@ -6,18 +6,19 @@
       "step": 4,
       "weight": 100,
       "task": "transportation-entity-id",
-      "required": false
+      "required": true
     },
     {
       "step": 4,
       "weight": 101,
-      "task": "mvc-title-task"
+      "task": "mvc-title-task",
+      "required": true
     },
     {
       "step": 4,
       "weight": 102,
       "task": "mvc-registration-task",
-      "required": false
+      "required": true
     }
   ]
 }
