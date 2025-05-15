@@ -1,10 +1,9 @@
 ---
-notesMd: >
+notesMd: >+
   Planning doc:
   https://docs.google.com/document/d/1pvZxUu7oNqGu61FQ_Z9CwYVIqBW26uTH2PfV7-Vqnj4/edit?tab=t.0#heading=h.5ku5mzqkm00c
 
 
-  Question: Is an employer account number from the instruction sheet the same as an Employer Registration Number?
 summaryDescriptionMd: >-
   You need a certification to make designated classification placements (DCPs)
   if you assign temporary workers in any of these categories: 
