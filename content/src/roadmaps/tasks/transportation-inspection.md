@@ -9,7 +9,7 @@ summaryDescriptionMd: >
   All transportation vehicles must pass an initial inspection before you register them for Omnibus (code 54) or s1/s2 plates.
 urlSlug: transportation-inspection
 displayname: transportation-inspection
-name: Get Your Commercial Buses Inspected
+name: Schedule Your Initial Bus Inspection
 id: transportation-inspection
 callToActionLink: ""
 callToActionText: ""
