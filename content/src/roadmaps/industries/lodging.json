@@ -53,7 +53,8 @@
     "inspect-boiler",
     "business-vehicle-irp",
     "inspect-pv",
-    "inspect-fridge"
+    "inspect-fridge",
+    "bus-initial-inspection"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
