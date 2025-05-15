@@ -71,8 +71,9 @@
     {
       "step": 3,
       "weight": 25,
-      "licenseTask": "bus-inspection",
-      "required": true
+      "licenseTask": "",
+      "required": true,
+      "task": "transportation-inspection"
     },
     {
       "step": 4,
