@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
   :::infoAlert
 
 
-  Before purchasing a bus, \*\*it's highly recommended to seek consultation from a transportation specialist or licensed NJ bus dealer.\*\* This will ensure that your bus can be legally operated within the state of NJ.
+  Before purchasing a bus, **it's highly recommended to seek consultation from a transportation specialist or licensed NJ bus dealer.** This will ensure that your bus can be legally operated within the state of NJ.
 
 
   :::
@@ -54,7 +54,7 @@ Call the **MVC School Bus Inspection Unit** at the number below to schedule an i
 
 
 
-Call the \*\*MVC Commercial Bus Inspection Unit\*\* at the number below to schedule an initial inspection.
+Call the **MVC Commercial Bus Inspection Unit** at the number below to schedule an initial inspection.
 
 
 
@@ -68,21 +68,21 @@ You'll be asked to provide information about the bus(es), location, and facility
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-\*\*Commercial buses:\*\*
+**Commercial buses:**
 
 
 
-\* Certificate CMC-9 - “Commercial Bus Safety Certificate”
+* Certificate CMC-9 - “Commercial Bus Safety Certificate”
 
-\* Certificate CMC-12 - “Authorization for Omnibus (Code 54) License Plates”
+* Certificate CMC-12 - “Authorization for Omnibus (Code 54) License Plates”
 
-\* MVC-issued inspection sticker, to be displayed on the vehicle
-
-
+* MVC-issued inspection sticker, to be displayed on the vehicle
 
 
 
-\*\*School buses:\*\*
+
+
+**School buses:**
 
 
 
@@ -100,11 +100,11 @@ You'll be asked to provide information about the bus(es), location, and facility
 
 
 
-\* You cannot legally transport passengers in the vehicle
+* You cannot legally transport passengers in the vehicle
 
-\* You will not receive the certificates and documentation necessary to register the bus for the appropriate plates
+* You will not receive the certificates and documentation necessary to register the bus for the appropriate plates
 
-\* Operating a bus without approval can result in fines, impoundment, or license suspension
+* Operating a bus without approval can result in fines, impoundment, or license suspension
 
   :::
 
