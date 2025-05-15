@@ -179,6 +179,11 @@
       "id": "inspect-pv",
       "questionText": "Will your business or facility use a large pressure vessel (a vessel without a \"UM\" stamp)?",
       "addOn": "pv-certificate"
+    },
+    {
+      "id": "inspect-fridge",
+      "questionText": "Will your business or facility use a large refrigerator or cooling system?",
+      "addOn": "refrigeration-certificate"
     }
   ]
 }
