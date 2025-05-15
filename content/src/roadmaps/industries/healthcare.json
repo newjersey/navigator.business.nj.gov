@@ -77,7 +77,8 @@
     "special-permit-dentistry",
     "inspect-boiler",
     "inspect-pv",
-    "inspect-fridge"
+    "inspect-fridge",
+    "bus-initial-inspection"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
