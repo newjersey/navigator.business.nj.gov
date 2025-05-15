@@ -1,7 +1,7 @@
 import { EmergencyTripPermitWithValidation } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWithValidation";
 import { AnytimeActionElement } from "@/components/tasks/anytime-action/AnytimeActionElement";
 import { AnytimeActionGovernmentContractingElement } from "@/components/tasks/anytime-action/AnytimeActionGovernmentContractingElement";
-import { AnytimeActionTaxClearanceCertificateElement } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElement";
+import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
 import { AnytimeActionTask } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
@@ -19,7 +19,7 @@ export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
     isTaxClearanceCertificateEnabled &&
     props.anytimeActionTask.filename === "tax-clearance-certificate"
   )
-    return <AnytimeActionTaxClearanceCertificateElement anytimeAction={props.anytimeActionTask} />;
+    return <AnytimeActionTaxClearanceCertificate anytimeAction={props.anytimeActionTask} />;
 
   const isABCETPApplicationEnabled = process.env.FEATURE_ABC_ETP_APPLICATION === "true";
   if (isABCETPApplicationEnabled && props.anytimeActionTask.filename === "emergency-trip-permit") {

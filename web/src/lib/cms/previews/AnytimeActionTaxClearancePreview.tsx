@@ -1,9 +1,12 @@
-import { AnytimeActionTaxClearanceCertificateElement } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElement";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
+import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateAnytimeActionTask } from "@/test/factories";
+import { emptyTaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 import { ReactElement } from "react";
 
 const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => {
@@ -15,6 +18,8 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
 
   const [, tab] = props.entry.toJS().slug.split("-");
 
+  const taxClearanceFields = Object.keys(emptyTaxClearanceCertificateData);
+
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
@@ -24,7 +29,7 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
         </div>
         {tab === "step1" && (
           <>
-            <AnytimeActionTaxClearanceCertificateElement
+            <AnytimeActionTaxClearanceCertificate
               anytimeAction={taxClearanceAnytimeAction}
               CMS_ONLY_stepIndex={0}
             />
@@ -32,7 +37,7 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
         )}
         {tab === "step2" && (
           <>
-            <AnytimeActionTaxClearanceCertificateElement
+            <AnytimeActionTaxClearanceCertificate
               anytimeAction={taxClearanceAnytimeAction}
               CMS_ONLY_stepIndex={1}
             />
@@ -40,7 +45,7 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
         )}
         {tab === "step3" && (
           <>
-            <AnytimeActionTaxClearanceCertificateElement
+            <AnytimeActionTaxClearanceCertificate
               anytimeAction={taxClearanceAnytimeAction}
               CMS_ONLY_stepIndex={2}
             />
@@ -48,7 +53,12 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
         )}
         {tab === "shared" && (
           <>
-            <AnytimeActionTaxClearanceCertificateElement
+            <Heading level={2}>Singular Field Error</Heading>
+            <AnytimeActionTaxClearanceCertificateAlert fieldErrors={[taxClearanceFields[0]]} />
+            <Heading level={2}>Multiple Field Errors</Heading>
+            <AnytimeActionTaxClearanceCertificateAlert fieldErrors={taxClearanceFields} />
+            <Heading level={2}>Anytime Action Task Screen</Heading>
+            <AnytimeActionTaxClearanceCertificate
               anytimeAction={taxClearanceAnytimeAction}
               CMS_ONLY_stepIndex={1}
             />
@@ -56,7 +66,7 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
         )}
         {tab === "download" && (
           <>
-            <AnytimeActionTaxClearanceCertificateElement
+            <AnytimeActionTaxClearanceCertificate
               anytimeAction={taxClearanceAnytimeAction}
               CMS_ONLY_certificatePdfBlob={new Blob()}
             />
