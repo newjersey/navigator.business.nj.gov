@@ -1,55 +1,67 @@
 ---
-summaryDescriptionMd: >-
-  
-
+summaryDescriptionMd: >
   :::infoAlert
 
-  Commercial buses must be inspected twice a year.
+  Before purchasing a bus, **it's highly recommended to seek consultation from a transportation specialist or licensed NJ bus dealer.** This will ensure that your bus can be legally operated within the state of NJ.
 
   :::
 
-
-  Before registering a commercial bus, you must request and pass an inspection conducted by the New Jersey Motor Vehicle Commission Bus Inspection Unit.
+  All transportation vehicles must pass an initial inspection before you register them for Omnibus (code 54) or s1/s2 plates.
 urlSlug: transportation-inspection
 displayname: transportation-inspection
-name: Get Your Commercial Buses Inspected
+name: Schedule Your Initial Bus Inspection
 id: transportation-inspection
-callToActionLink: https://www.nj.gov/mvc/pdf/inspections/Commercial_Bus_Application.pdf
-callToActionText: Request My Vehicle Inspection
+callToActionLink: ""
+callToActionText: ""
 agencyId: nj-motor-vehicle
-agencyAdditionalContext: Commercial Bus Inspection Unit
+agencyAdditionalContext: Commercial Bus Inspection Unit | School Bus Inspection Unit
 issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
 ---
+## Eligibility Criteria
 
-## Application Requirements
+Before scheduling your initial inspection, make sure that:
 
-- Business name
-- Business address
-- Insurance company name and policy number
-- Copy of the vehicle title
-- Vehicle information (year, make, model, etc.)
+* The bus is titled or in the process of being titled in the state of NJ
+* The bus is configured for passenger service in the state of NJ, and meets federal safety standards (seating, mirrors, signage, flashing lights, etc)
+* Any modifications or retrofits are completed
 
-Complete the Application for Commercial Bus Operation and email all required documentation to CBIU@mvc.nj.gov or mail to:
+## How to Schedule Your Inspection
 
-&nbsp;
+:::callout{ showHeader="true" headerText="School Buses:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9473" emailIconText="" }
 
-NJMVC CBIU
-&nbsp;
-
-PO Box 680
-&nbsp;
-
-Trenton, NJ 08666
-
-&nbsp;
-
-Once your application is reviewed, you will be contacted to set up an inspection appointment.
-
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-
-- A safety inspection decal valid for 6 months
-- CMC-9 and CMC-12 Certificates for registration and license plates
+Call the **MVC School Bus Inspection Unit** at the number below to schedule an initial inspection.
 
 :::
 
-**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
+:::callout{ showHeader="true" headerText="Commercial Buses:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 777-4196" emailIconText="" }
+
+Call the **MVC Commercial Bus Inspection Unit** at the number below to schedule an initial inspection.
+
+:::
+
+You'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site.
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+**Commercial buses:**
+
+* Certificate CMC-9 - “Commercial Bus Safety Certificate”
+* Certificate CMC-12 - “Authorization for Omnibus (Code 54) License Plates”
+* MVC-issued inspection sticker, to be displayed on the vehicle
+
+
+**School buses:**
+
+* Form SS-14, “Authorization to Issue School Bus License Plates”
+* MVC-issued inspection sticker, to be displayed on the vehicle
+
+
+:::
+:::callout{ showHeader="true" headerText="What if I don't get an initial bus inspection?" showIcon="false" calloutType="warning" }
+
+* You cannot legally transport passengers in the vehicle
+* You will not receive the certificates and documentation necessary to register the bus for the appropriate plates
+* Operating a bus without approval can result in fines, impoundment, or license suspension
+  :::
+  :::infoAlert
+  After passing initial inspection, **buses must continue to be inspected every 6 months.** The NJ MVC inspector assigned to your area will schedule these for you, and will reach out shortly before the scheduled inspection date as a reminder.
+  :::
