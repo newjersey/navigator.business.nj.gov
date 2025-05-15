@@ -698,7 +698,8 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(
         within(screen.getByTestId("stateTaxIdLabel")).getByText("012345678901"),
       ).toBeInTheDocument();
-      expect(within(screen.getByTestId("taxPinLabel")).getByText("1234")).toBeInTheDocument();
+      expect(within(screen.getByTestId("taxPinLabel")).getByText("****")).toBeInTheDocument();
+      // expect(within(screen.getByTestId("taxPinLabel")).getByText("1234")).toBeInTheDocument();
     });
 
     describe("renders data when input is provided", () => {});

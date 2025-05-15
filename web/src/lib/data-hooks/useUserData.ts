@@ -128,12 +128,14 @@ export const useUserData = (): UseUserDataResponse => {
 
       await mutate(newUserData, false);
       localUpdateQueue.queue(newUserData);
+      console.log("queue 1");
       if (config?.local || state.isAuthenticated !== IsAuthenticated.TRUE) {
         if (profileDataHasChanged(data, newUserData)) {
           await onProfileDataChange(newUserData);
         }
         return;
       }
+      console.log("queue 2");
       return postUserData(newUserData)
         .then((response: UserData) => {
           if (profileDataHasChanged(data, newUserData)) {

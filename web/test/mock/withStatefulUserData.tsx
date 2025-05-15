@@ -33,6 +33,23 @@ export const triggerQueueUpdate = (): void => {
   fireEvent.click(screen.getByText("trigger queue update"));
 };
 
+const mockPostSideEffects = async (userData: UserData): Promise<UserData> => {
+  // const stubEncryptionDecryptionClient = {
+  //   encryptValue: jest.fn((value) => {
+  //     return new Promise((resolve) => {
+  //       resolve(`encrypted ${value}`);
+  //     });
+  //   }),
+  //   decryptValue: jest.fn((value) => {
+  //     return new Promise((resolve) => {
+  //       resolve(`decrypted ${value}`);
+  //     });
+  //   }),
+  // };
+  // const encryptFields = encryptFieldsFactory(stubEncryptionDecryptionClient);
+  return await encryptFields(userData);
+};
+
 export const WithStatefulUserData = ({
   children,
   initialUserData,
