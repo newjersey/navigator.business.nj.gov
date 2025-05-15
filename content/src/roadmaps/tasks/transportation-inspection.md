@@ -28,7 +28,7 @@ Before scheduling your initial inspection, make sure that:
 
 #### **School Buses:**
 
-Call the **NJ MVC School Bus Inspection Unit** at **(609) 633-9473** to schedule an initial inspection
+Call the **NJ MVC School Bus Inspection Unit** at **(609) 633-9473** to schedule an initial inspection.
 
 In addition to proof of the above, you'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site.
 &nbsp;
@@ -37,15 +37,22 @@ In addition to proof of the above, you'll be asked to provide information about 
 Call the **NJ MVC Commercial Bus Inspection Unit** at **(609) 777-4196** to schedule an initial inspection.
 
 In addition to proof of the above, you'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site.
+
 &nbsp;
+
 You’ll also be asked to fill out the [Application for Commercial Bus Operation.](https://www.nj.gov/mvc/pdf/inspections/Commercial_Bus_Application.pdf) Once completed, the form can be emailed to cbiu@mvc.nj.gov or mailed to:
+
 &nbsp;
 NJMVC CBIU
+
 &nbsp;
 PO Box 680
+
 &nbsp;
 Trenton, NJ 08666
+
 &nbsp;
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 **Commercial buses:**
 * Certificate CMC-9 - “Commercial Bus Safety Certificate”
