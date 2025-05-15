@@ -1,0 +1,11 @@
+{
+  "id": "transportation-initial-inspection",
+  "displayname": "transportation-initial-inspection",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "task": "transportation-inspection",
+      "weight": 10
+    }
+  ]
+}
