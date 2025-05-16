@@ -109,7 +109,8 @@ export const Review = (props: Props): ReactElement => {
           />
           <ReviewLineItem
             label={Config.taxClearanceCertificateStep3.taxPinLabel}
-            value={business?.taxClearanceCertificateData?.taxPin}
+            // A masked tax pin is "****", which is not rendered as literal text in markdown.
+            value={business?.taxClearanceCertificateData?.taxPin?.replace("*", "&ast;")}
             dataTestId={"taxPinLabel"}
           />
         </ReviewSubSection>
