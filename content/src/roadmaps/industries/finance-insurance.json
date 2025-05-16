@@ -51,7 +51,8 @@
   "name": "Finance and Insurance",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "insurance-producer"
   ],
   "displayname": "finance-insurance",
   "industryOnboardingQuestions": {
