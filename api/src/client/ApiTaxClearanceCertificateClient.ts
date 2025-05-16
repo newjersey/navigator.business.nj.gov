@@ -1,7 +1,4 @@
-import {
-  type TaxClearanceCertificateData,
-  TaxClearanceCertificateResponse,
-} from "@businessnjgovnavigator/shared";
+import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
 import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
@@ -40,11 +37,27 @@ export const ApiTaxClearanceCertificateClient = (
     const currTaxClearanceData =
       userData.businesses[userData.currentBusinessId].taxClearanceCertificateData;
 
+    if (
+      currTaxClearanceData === undefined ||
+      currTaxClearanceData.encryptedTaxId === undefined ||
+      currTaxClearanceData.encryptedTaxPin === undefined
+    ) {
+      const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Unexpected required field(s) undefined: ${JSON.stringify(
+        currTaxClearanceData,
+      )}`;
+      logWriter.LogInfo(errorMessage);
+      throw errorMessage;
+    }
+
     const postBody = {
       repId: userData.user.id,
       repName: userData.user.name,
-      taxpayerId: currTaxClearanceData?.taxId,
-      taxpayerPin: currTaxClearanceData?.taxPin,
+      taxpayerId: await encryptionDecryptionClient.decryptValue(
+        currTaxClearanceData.encryptedTaxId,
+      ),
+      taxpayerPin: await encryptionDecryptionClient.decryptValue(
+        currTaxClearanceData.encryptedTaxPin,
+      ),
       taxpayerName: currTaxClearanceData?.businessName,
       addressLine1: currTaxClearanceData?.addressLine1,
       addressLine2: currTaxClearanceData?.addressLine2,
