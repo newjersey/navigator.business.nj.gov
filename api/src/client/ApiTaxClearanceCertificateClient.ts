@@ -37,6 +37,7 @@ export const ApiTaxClearanceCertificateClient = (
     const currTaxClearanceData =
       userData.businesses[userData.currentBusinessId].taxClearanceCertificateData;
 
+    console.log("currTaxClearanceData", currTaxClearanceData);
     if (
       currTaxClearanceData === undefined ||
       currTaxClearanceData.encryptedTaxId === undefined ||
@@ -49,12 +50,14 @@ export const ApiTaxClearanceCertificateClient = (
       throw errorMessage;
     }
 
+    const foo = await encryptionDecryptionClient.decryptValue(currTaxClearanceData.encryptedTaxId);
+    console.log("foo", foo);
+    console.log("currTaxClearanceData.encryptedTaxId", currTaxClearanceData.encryptedTaxId);
+
     const postBody = {
       repId: userData.user.id,
       repName: userData.user.name,
-      taxpayerId: await encryptionDecryptionClient.decryptValue(
-        currTaxClearanceData.encryptedTaxId,
-      ),
+      taxpayerId: foo,
       taxpayerPin: await encryptionDecryptionClient.decryptValue(
         currTaxClearanceData.encryptedTaxPin,
       ),
@@ -68,6 +71,7 @@ export const ApiTaxClearanceCertificateClient = (
         currTaxClearanceData?.requestingAgencyId,
       ).name,
     };
+    console.log("postBody", postBody);
 
     logWriter.LogInfo(
       `Tax Clearance Certificate Client - Id:${logId} - Request Sent to ${
@@ -86,7 +90,7 @@ export const ApiTaxClearanceCertificateClient = (
         logWriter.LogInfo(
           `Tax Clearance Certificate Client - Id:${logId} - Response received: ${JSON.stringify({
             ...response.data,
-            certificate: "Succussful Response - PDF data omitted",
+            certificate: "Successful Response - PDF data omitted",
           })}`,
         );
         if (!Array.isArray(response.data.certificate) || response.data.certificate.length === 0) {
