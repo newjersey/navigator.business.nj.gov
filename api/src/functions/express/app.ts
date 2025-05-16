@@ -413,7 +413,13 @@ app.use(
     dynamicsElevatorSafetyViolationsStatusClient,
   ),
 );
-app.use("/api", taxClearanceCertificateRouterFactory(taxClearanceCertificateClient));
+app.use(
+  "/api",
+  taxClearanceCertificateRouterFactory(
+    taxClearanceCertificateClient,
+    AWSEncryptionDecryptionClient,
+  ),
+);
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use(
   "/api",
