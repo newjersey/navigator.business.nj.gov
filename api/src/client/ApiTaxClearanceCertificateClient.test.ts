@@ -109,8 +109,8 @@ describe("TaxClearanceCertificateClient", () => {
     const postBody = {
       repId: userData.user.id,
       repName: userData.user.name,
-      taxpayerId: generatedTaxClearanceCertificateData.taxId,
-      taxpayerPin: generatedTaxClearanceCertificateData.taxPin,
+      taxpayerId: generatedTaxClearanceCertificateData.encryptedTaxId?.replace("encrypted-", ""),
+      taxpayerPin: generatedTaxClearanceCertificateData.encryptedTaxPin?.replace("encrypted-", ""),
       taxpayerName: generatedTaxClearanceCertificateData.businessName,
       addressLine1: generatedTaxClearanceCertificateData.addressLine1,
       addressLine2: generatedTaxClearanceCertificateData.addressLine2,

@@ -193,7 +193,8 @@ describe("profile - owning existing business", () => {
         entityId: "0234567890",
         employerId: "023456780",
         notes: "whats appppppp",
-        taxPin: "6666",
+        taxPin: "****",
+        encryptedTaxPin: "encrypted-6666",
         sectorId: "clean-energy",
       },
       formationData: {
