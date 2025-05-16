@@ -2,7 +2,7 @@
 id: state-contracting
 name: Learn How to Contract with the NJ State Government
 category:
-  - Contract With NJ State Government
+  - contract-with-nj-gov
 description: Discover the steps to become a contractor for the state government.
 industryIds: []
 sectorIds:
@@ -46,29 +46,28 @@ callToActionLink: https://www.njstart.gov/bso/
 synonyms:
   - bidding
 ---
-
 ### Registration Requirements
 
 1. Complete your pre-registration by submitting the following information:
 
-- `EIN|ein` or Social Security number (SSN)
-- Business name
-- Email address
+*  `EIN|ein` or Social Security number (SSN)
+* Business name
+* Email address
 
 You will then receive an email with your Vendor ID number and login link.
 
 2. Complete your registration by providing the following information:
 
-- `Tax ID|tax-id`
-- Business name
-- Profile administrator’s information (name, title, address, etc.). The administrator maintains and updates the business profile (also known as “vendor profile”)
-- Primary business function
-- Business formation
-- Electronic funds transfer certification
-- Tax ID certification statement
-- `NIGP commodity code|nigp-commodity-code`
+*  `Tax ID|tax-id` 
+* Business name
+* Profile administrator’s information (name, title, address, etc.). The administrator maintains and updates the business profile (also known as “vendor profile”)
+* Primary business function
+* Business formation
+* Electronic funds transfer certification
+* Tax ID certification statement
+*  `NIGP commodity code|nigp-commodity-code` 
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A confirmation email.
 

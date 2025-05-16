@@ -22,6 +22,10 @@ interface Props {
 type AnytimeAction = AnytimeActionTask | AnytimeActionLicenseReinstatement;
 type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
 
+// the TODO if I did everything right we're not grabbing a dynamic category ID, not the actual title text itself
+// that means that we need to do a mapping from ID to actual text to get this all to work and that involves consuming all the data from the .md files and then translating them into their corresponding text
+// then everything will work as we desired plus, we could modify the text of the option without modifying the id itself and everything will still work without further modifications
+
 const getBoldedTextComponent = (searchValue: string, textToBold: string): ReactNode => {
   const matches = textToBold.toLowerCase().indexOf(searchValue.toLowerCase());
   if (matches >= 0) {
@@ -69,7 +73,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "license-reinstatement",
-          category: ["Reactivate My Expired Permit, License or Registration"],
+          category: ["reactivate-my-expired-permit-license-or-registration"],
         };
       });
     anytimeActionLicenseReinstatementsWithType = orderBy(
@@ -132,6 +136,8 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
       setSelectedAnytimeAction(value);
     }
   };
+
+  console.log(props.anytimeActionTasks);
 
   return (
     <div className={"anytime-action-dropdown-container"}>

@@ -186,6 +186,10 @@ export interface AnytimeActionTask extends AnytimeAction {
   searchMetaDataMatch?: string;
 }
 
+export interface AnytimeActionCategoryMapping {
+  [key: string]: string;
+}
+
 export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   licenseName: LicenseName;
   urlSlug: string;

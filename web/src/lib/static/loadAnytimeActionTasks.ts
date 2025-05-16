@@ -1,6 +1,9 @@
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "@/lib/static/helpers";
-import { AnytimeActionTask } from "@/lib/types/types";
-import { convertAnytimeActionTaskMd } from "@/lib/utils/markdownReader";
+import { AnytimeActionCategoryMapping, AnytimeActionTask } from "@/lib/types/types";
+import {
+  convertAnytimeActionCategoryMd,
+  convertAnytimeActionTaskMd,
+} from "@/lib/utils/markdownReader";
 import fs from "fs";
 import path from "path";
 
@@ -20,8 +23,10 @@ export type AnytimeActionTaskUrlSlugParam = {
 export const loadAllAnytimeActionTasks = (): AnytimeActionTask[] => {
   const fileNames = fs.readdirSync(anytimeActionsTaskDir);
 
+  const anytimeActionCategoryMappings = loadAnytimeActionCategoryMappings();
+
   return fileNames.map((fileName) => {
-    return loadAnytimeActionTasksByFileName(fileName);
+    return loadAnytimeActionTasksByFileName(fileName, anytimeActionCategoryMappings);
   });
 };
 
@@ -38,13 +43,74 @@ export const loadAllAnytimeActionTaskUrlSlugs = (): PathParams<AnytimeActionTask
 
 export const loadAnytimeActionTaskByUrlSlug = (urlSlug: string): AnytimeActionTask => {
   const matchingFileName = getFileNameByUrlSlug(anytimeActionsTaskDir, urlSlug);
-  return loadAnytimeActionTasksByFileName(matchingFileName);
+  const anytimeActionCategoryMappings = loadAnytimeActionCategoryMappings();
+  return loadAnytimeActionTasksByFileName(matchingFileName, anytimeActionCategoryMappings);
 };
 
-const loadAnytimeActionTasksByFileName = (fileName: string): AnytimeActionTask => {
+const loadAnytimeActionTasksByFileName = (
+  fileName: string,
+  anytimeActionCategoryMappings: AnytimeActionCategoryMapping,
+): AnytimeActionTask => {
   const fullPath = path.join(anytimeActionsTaskDir, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const fileNameWithoutMd = fileName.split(".md")[0];
-  return convertAnytimeActionTaskMd(fileContents, fileNameWithoutMd);
+  const anytimeActionData = convertAnytimeActionTaskMd(fileContents, fileNameWithoutMd);
+  const anytimeActionWithCorrectCategoryText = convertCategories(
+    anytimeActionData,
+    anytimeActionCategoryMappings,
+  );
+  return anytimeActionWithCorrectCategoryText;
 };
+
+export const loadAnytimeActionCategoryMappings = (): AnytimeActionCategoryMapping => {
+  const anytimeActionsCatgoriesDir = path.join(
+    process.cwd(),
+    "..",
+    "content",
+    "src",
+    "anytime-action-categories",
+  );
+  const fileNames = fs.readdirSync(anytimeActionsCatgoriesDir);
+
+  const categoryArrayMapping = fileNames.map((fileName) => {
+    return loadIndividualAnytimeActionCatgory(fileName, anytimeActionsCatgoriesDir);
+  });
+
+  let categoryArrayMappingTwo = {};
+
+  for (const element of categoryArrayMapping) {
+    categoryArrayMappingTwo = {
+      ...categoryArrayMappingTwo,
+      [element.id]: element.categoryName,
+    };
+  }
+
+  console.log(categoryArrayMappingTwo);
+
+  return categoryArrayMappingTwo;
+};
+
+const loadIndividualAnytimeActionCatgory = (
+  fileName: string,
+  directory: string,
+): AnytimeActionCategoryMapping => {
+  const fullPath = path.join(directory, `${fileName}`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+
+  return convertAnytimeActionCategoryMd(fileContents);
+};
+
+function convertCategories(
+  anytimeActionData: AnytimeActionTask,
+  anytimeActionCategoryMappings: AnytimeActionCategoryMapping,
+): AnytimeActionTask {
+  anytimeActionData.category = anytimeActionData.category.map((categoryId) => {
+    const newName = anytimeActionCategoryMappings[categoryId];
+    if (newName) {
+      return newName;
+    }
+    return categoryId;
+  });
+  return anytimeActionData;
+}

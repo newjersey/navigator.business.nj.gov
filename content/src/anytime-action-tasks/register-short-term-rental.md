@@ -8,7 +8,7 @@ notesMd: >-
 id: register-short-term-rental
 name: Register as a Short-term Rental, if Your Town Requires It
 category:
-  - Manage My Properties
+  - manage-my-properties
 industryIds: []
 sectorIds:
   - real-estate

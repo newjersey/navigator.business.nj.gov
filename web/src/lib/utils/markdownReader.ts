@@ -1,5 +1,6 @@
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
+  AnytimeActionCategoryMapping,
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
   Certification,
@@ -153,6 +154,17 @@ export const getMarkdown = (mdContents: string): MarkdownResult => {
   return {
     content: matterResult.content,
     grayMatter: matterResult.data,
+  };
+};
+
+export const convertAnytimeActionCategoryMd = (
+  mdContents: string,
+): AnytimeActionCategoryMapping => {
+  const matterResult = matter(mdContents);
+
+  return {
+    categoryName: matterResult.data["category-name"],
+    id: matterResult.data["id"],
   };
 };
 

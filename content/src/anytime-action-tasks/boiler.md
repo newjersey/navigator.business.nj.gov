@@ -6,7 +6,7 @@ notesMd: >-
 id: boiler
 name: Get Your Boiler Inspected
 category:
-  - Manage My Properties
+  - manage-my-properties
 industryIds:
   - cannabis
   - generic
