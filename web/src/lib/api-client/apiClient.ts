@@ -136,7 +136,7 @@ export const searchBusinessName = (name: string): Promise<NameAvailability> => {
 export const postEmergencyTripPermitApplication = (
   applicationInfo: EmergencyTripPermitApplicationInfo,
 ): Promise<EmergencyTripPermitSubmitResponse> => {
-  return post("/emergencyTripPermit", applicationInfo);
+  return post("/emergencyTripPermit", applicationInfo, false);
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
