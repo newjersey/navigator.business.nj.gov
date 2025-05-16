@@ -1,5 +1,8 @@
-import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
-import { TaxClearanceCertificateClient } from "@domain/types";
+import {
+  type TaxClearanceCertificateData,
+  TaxClearanceCertificateResponse,
+} from "@businessnjgovnavigator/shared";
+import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
 import { UserData } from "@shared/userData";
@@ -29,6 +32,7 @@ export const ApiTaxClearanceCertificateClient = (
 ): TaxClearanceCertificateClient => {
   const postTaxClearanceCertificate = async (
     userData: UserData,
+    encryptionDecryptionClient: EncryptionDecryptionClient,
   ): Promise<TaxClearanceCertificateResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Tax Clearance Certificate Client - Id:${logId}`);
