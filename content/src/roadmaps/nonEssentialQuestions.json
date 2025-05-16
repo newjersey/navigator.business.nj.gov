@@ -189,6 +189,11 @@
       "id": "bus-initial-inspection",
       "addOn": "transportation-initial-inspection",
       "questionText": "Will your business use commercial vehicles, such as school or shuttle buses, to transport passengers?"
+    },
+    {
+      "id": "insurance-producer",
+      "questionText": "Will you sell, solicit, or negotiate insurance products?",
+      "addOn": "produce-insurance"
     }
   ]
 }
