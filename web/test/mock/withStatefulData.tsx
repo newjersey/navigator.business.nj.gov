@@ -27,6 +27,10 @@ export const statefulDataHelpers = (
       return getLastCalledWith(spy)[1] as { local?: boolean };
     },
     currentData: (): GenericData => {
+      // console.log(
+      //   "JSON.stringify(getLastCalledWith(spy)[0])",
+      //   JSON.stringify(getLastCalledWith(spy)[0]),
+      // );
       return getLastCalledWith(spy)[0] as GenericData;
     },
     dataWasNotUpdated: (): boolean => {
@@ -56,6 +60,7 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
       if (!config?.local && isUserData(genericData as UserData | ProfileData)) {
         newData = mockEncryptFields(newData as UserData);
       }
+
       spy(newData, config);
       setGenericData(newData);
       return Promise.resolve();

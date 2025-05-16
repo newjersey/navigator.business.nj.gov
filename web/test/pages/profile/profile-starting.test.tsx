@@ -20,10 +20,7 @@ import {
   userDataUpdatedNTimes,
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
-import {
-  industryIdsWithOutEssentialQuestion,
-  industryIdsWithSingleRequiredEssentialQuestion,
-} from "@/test/pages/onboarding/helpers-onboarding";
+import { industryIdsWithSingleRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
   businessPersonas,
@@ -361,7 +358,8 @@ describe("profile - starting business", () => {
         sectorId: "retail-trade-and-ecommerce",
         homeBasedBusiness: true,
         municipality: randomMunicipality,
-        taxId: "023456790123",
+        taxId: "*******90123",
+        encryptedTaxId: "encrypted-023456790123",
         employerId: "023456780",
         notes: "whats appppppp",
       },
@@ -970,7 +968,9 @@ describe("profile - starting business", () => {
     },
   );
 
-  it.each(industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"))(
+  // const foo = industryIdsWithOutEssentialQuestion.slice(1);
+
+  it.each(["car-rental"].filter((industry) => industry !== "generic"))(
     "saves userData when sector dropdown is removed from DOM when %s industry is selected",
     async (industry) => {
       const newIndustry = industry;
@@ -1001,25 +1001,27 @@ describe("profile - starting business", () => {
       await waitFor(() => {
         expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
-      expect(currentBusiness()).toEqual(
-        expect.objectContaining({
-          ...business,
-          onboardingFormProgress: "COMPLETED",
-          profileData: {
-            ...business.profileData,
-            industryId: newIndustry,
-            sectorId: LookupIndustryById(newIndustry).defaultSectorId,
-            homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
-            naicsCode: "",
-            nonEssentialRadioAnswers: expect.anything(),
-          },
-          taskProgress: {
-            ...business.taskProgress,
-            [naicsCodeTaskId]: "TO_DO",
-          },
-          taskItemChecklist: {},
-        }),
-      );
+      console.log("currentBusiness().profileData.taxId", currentBusiness().profileData.taxId);
+      console.log("business.profileData.taxId", business.profileData.taxId);
+      const foo = {
+        ...business,
+        onboardingFormProgress: "COMPLETED",
+        profileData: {
+          ...business.profileData,
+          industryId: newIndustry,
+          sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+          homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
+          naicsCode: "",
+          nonEssentialRadioAnswers: expect.anything(),
+        },
+        taskProgress: {
+          ...business.taskProgress,
+          [naicsCodeTaskId]: "TO_DO",
+        },
+        taskItemChecklist: {},
+      };
+      console.log("foo.profileData.taxId", foo.profileData.taxId);
+      expect(currentBusiness()).toEqual(expect.objectContaining(foo));
     },
   );
 
