@@ -157,8 +157,13 @@ describe("<TaxTask />", () => {
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(Config.taxId.saveButtonText));
       await waitFor(() => {
-        expect(currentBusiness().profileData.taxId).toEqual("123456789123");
+        expect(currentBusiness().profileData.taxId).toEqual("*******89123");
       });
+      expect(screen.getByLabelText("Tax id")).toBeDisabled();
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+        "***-***-*89/123",
+      );
     });
 
     it("shows error on length validation failure", () => {
@@ -214,6 +219,7 @@ describe("<TaxTask />", () => {
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
         "***-***-*89/123",
       );
+      expect(screen.getByLabelText("Tax id")).toBeDisabled();
     });
   });
 
