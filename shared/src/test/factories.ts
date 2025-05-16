@@ -307,7 +307,7 @@ export const generateProfileData = (
     hashedTaxId: undefined,
     encryptedTaxId: `encrpyted-${taxId}`,
     taxPin: maskingCharacter.repeat(4),
-    encryptedTaxPin: `encrypted${randomInt(4)}`,
+    encryptedTaxPin: `encrypted-${randomInt(4)}`,
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     documents: {
@@ -422,7 +422,7 @@ export const generateTaxClearanceCertificateData = (
     taxId: maskingCharacter.repeat(7) + taxId.slice(-5),
     encryptedTaxId: `encrpyted-${taxId}`,
     taxPin: maskingCharacter.repeat(4),
-    encryptedTaxPin: `encrypted${randomInt(4)}`,
+    encryptedTaxPin: `encrypted-${randomInt(4)}`,
     ...overrides,
   };
 };

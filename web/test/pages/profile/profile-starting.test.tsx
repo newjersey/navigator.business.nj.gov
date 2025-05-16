@@ -20,7 +20,10 @@ import {
   userDataUpdatedNTimes,
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
-import { industryIdsWithSingleRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
+import {
+  industryIdsWithOutEssentialQuestion,
+  industryIdsWithSingleRequiredEssentialQuestion,
+} from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
   businessPersonas,
@@ -607,7 +610,8 @@ describe("profile - starting business", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          taxId: "123456789",
+          taxId: "*****6789",
+          encryptedTaxId: "encrypted-123456789",
         }),
       });
 
@@ -654,7 +658,11 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWith9TaxId.profileData, taxId: "123456789123" },
+            profileData: {
+              ...businessWith9TaxId.profileData,
+              taxId: "*******89123",
+              encryptedTaxId: "encrypted-123456789123",
+            },
           });
         });
       });
@@ -674,7 +682,11 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWith9TaxId.profileData, taxId: "" },
+            profileData: {
+              ...businessWith9TaxId.profileData,
+              taxId: "",
+              encryptedTaxId: "encrypted-123456789", // Note that this does not clear the encryption
+            },
           });
         });
       });
@@ -685,7 +697,8 @@ describe("profile - starting business", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          taxId: "123456789123",
+          taxId: "*******89123",
+          encryptedTaxId: "encrypted-123456789123",
         }),
       });
 
@@ -726,13 +739,17 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWith12TaxId.profileData, taxId: "666666666666" },
+            profileData: {
+              ...businessWith12TaxId.profileData,
+              taxId: "*******66666",
+              encryptedTaxId: "encrypted-666666666666",
+            },
           });
         });
       });
     });
 
-    describe("when the tax ID is initially 0  in length", () => {
+    describe("when the tax ID is initially 0 in length", () => {
       const businessWithEmptyTaxId = generateBusinessForProfile({
         profileData: generateProfileData({
           taxId: "",
@@ -778,7 +795,11 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWithEmptyTaxId.profileData, taxId: "123456789123" },
+            profileData: {
+              ...businessWithEmptyTaxId.profileData,
+              taxId: "*******89123",
+              encryptedTaxId: "encrypted-123456789123",
+            },
           });
         });
       });
@@ -968,9 +989,7 @@ describe("profile - starting business", () => {
     },
   );
 
-  // const foo = industryIdsWithOutEssentialQuestion.slice(1);
-
-  it.each(["car-rental"].filter((industry) => industry !== "generic"))(
+  it.each(industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"))(
     "saves userData when sector dropdown is removed from DOM when %s industry is selected",
     async (industry) => {
       const newIndustry = industry;
@@ -1001,27 +1020,25 @@ describe("profile - starting business", () => {
       await waitFor(() => {
         expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
-      console.log("currentBusiness().profileData.taxId", currentBusiness().profileData.taxId);
-      console.log("business.profileData.taxId", business.profileData.taxId);
-      const foo = {
-        ...business,
-        onboardingFormProgress: "COMPLETED",
-        profileData: {
-          ...business.profileData,
-          industryId: newIndustry,
-          sectorId: LookupIndustryById(newIndustry).defaultSectorId,
-          homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
-          naicsCode: "",
-          nonEssentialRadioAnswers: expect.anything(),
-        },
-        taskProgress: {
-          ...business.taskProgress,
-          [naicsCodeTaskId]: "TO_DO",
-        },
-        taskItemChecklist: {},
-      };
-      console.log("foo.profileData.taxId", foo.profileData.taxId);
-      expect(currentBusiness()).toEqual(expect.objectContaining(foo));
+      expect(currentBusiness()).toEqual(
+        expect.objectContaining({
+          ...business,
+          onboardingFormProgress: "COMPLETED",
+          profileData: {
+            ...business.profileData,
+            industryId: newIndustry,
+            sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+            homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
+            naicsCode: "",
+            nonEssentialRadioAnswers: expect.anything(),
+          },
+          taskProgress: {
+            ...business.taskProgress,
+            [naicsCodeTaskId]: "TO_DO",
+          },
+          taskItemChecklist: {},
+        }),
+      );
     },
   );
 
