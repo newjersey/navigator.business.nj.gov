@@ -27,7 +27,6 @@ const Template = () => {
           setShowNeedsAccountSnackbar: () => {},
           showNeedsAccountModal: false,
           setShowNeedsAccountModal: () => {},
-          requireAccount: () => {},
         }}
       >
         <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
