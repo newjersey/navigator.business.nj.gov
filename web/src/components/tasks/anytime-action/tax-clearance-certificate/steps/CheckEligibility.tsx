@@ -10,7 +10,10 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
+import {
+  getInitialTaxId,
+  getInitialTaxPin,
+} from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { StateAgencyDropdown } from "@/components/tasks/anytime-action/tax-clearance-certificate/StateAgencyDropdown";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
@@ -105,7 +108,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
         <div>
           <ProfileField fieldName="taxPin" hideLine fullWidth>
             <TaxPin
-              dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+              dbBusinessTaxPin={getInitialTaxPin(business)}
               inputWidth="full"
               preventRefreshWhenUnmounted
               required
