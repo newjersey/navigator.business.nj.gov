@@ -5,8 +5,8 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -15,13 +15,14 @@ interface Props {
 
 export const Requirements = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { requireAccount } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   const handleContinue = (): void => {
-    if (requireAccount(`${ROUTES.taxClearanceCertificate}`)) {
-      return;
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      setShowNeedsAccountModal(true);
+    } else {
+      props.setStepIndex(1);
     }
-    props.setStepIndex(1);
   };
 
   return (
