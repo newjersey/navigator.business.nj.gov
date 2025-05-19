@@ -17,7 +17,7 @@ export const Requirements = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
-  const handleContinue = (): void => {
+  const onContinueClick = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setShowNeedsAccountModal(true);
     } else {
@@ -38,7 +38,7 @@ export const Requirements = (props: Props): ReactElement => {
           <LiveChatHelpButton />
           <PrimaryButton
             isColor="primary"
-            onClick={handleContinue}
+            onClick={onContinueClick}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >

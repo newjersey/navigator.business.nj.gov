@@ -13,7 +13,7 @@ import { useRouter } from "next/compat/router";
 import { ReactElement, useContext } from "react";
 
 export const NeedsAccountModal = (): ReactElement => {
-  const { business, updateQueue } = useUserData();
+  const { business } = useUserData();
   const router = useRouter();
   const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
     useContext(NeedsAccountContext);
@@ -30,13 +30,6 @@ export const NeedsAccountModal = (): ReactElement => {
     return <></>;
   }
 
-  const handleClose = (): void => {
-    if (updateQueue) {
-      updateQueue.queuePreferences({ returnToLink: "" }).update();
-    }
-    setShowNeedsAccountModal(false);
-  };
-
   const linkToAccountSetup = (): void => {
     if (business?.preferences.returnToLink === `${ROUTES.dashboard}`) {
       analytics.event.myNJ_prompt_modal_complete_button.click.go_to_NavigatorAccount_setup();
@@ -51,7 +44,7 @@ export const NeedsAccountModal = (): ReactElement => {
     <>
       <ModalZeroButton
         isOpen={showNeedsAccountModal}
-        close={handleClose}
+        close={(): void => setShowNeedsAccountModal(false)}
         title={Config.selfRegistration.needsAccountModalTitle}
       >
         <div data-testid="self-reg-modal">
@@ -68,7 +61,6 @@ export const NeedsAccountModal = (): ReactElement => {
             <Content
               onClick={(): void => {
                 analytics.event.guest_modal.click.go_to_myNJ_login();
-                setShowNeedsAccountModal(false);
                 if (loginPageEnabled) {
                   router && router.push(ROUTES.login);
                 } else {

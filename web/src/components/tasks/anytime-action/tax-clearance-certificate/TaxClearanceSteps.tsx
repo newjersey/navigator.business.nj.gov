@@ -8,7 +8,6 @@ import { Review } from "@/components/tasks/anytime-action/tax-clearance-certific
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { StepperStep } from "@/lib/types/types";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 import { FormEvent, ReactElement, useContext, useState } from "react";
