@@ -5,10 +5,12 @@ import { CheckEligibility } from "@/components/tasks/anytime-action/tax-clearanc
 import { Download } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Download";
 import { Requirements } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Requirements";
 import { Review } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Review";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { StepperStep } from "@/lib/types/types";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { FormEvent, ReactElement, useState } from "react";
+import { FormEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
   taxClearanceCertificateData: TaxClearanceCertificateData;
@@ -27,9 +29,15 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
   const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
     props.certificatePdfBlob || undefined,
   );
+  const { requireAccount } = useContext(NeedsAccountContext);
 
   const onStepClick = (step: number): void => {
-    props.saveTaxClearanceCertificateData();
+    if (requireAccount(`${ROUTES.taxClearanceCertificate}`)) {
+      return;
+    }
+    if (step === 2 && stepIndex === 1) {
+      props.saveTaxClearanceCertificateData();
+    }
     setStepIndex(step);
   };
 

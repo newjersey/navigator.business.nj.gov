@@ -14,6 +14,7 @@ export const ROUTES = {
   starterKits: "/starter-kits",
   login: "/login",
   njeda: "/njeda",
+  taxClearanceCertificate: "/tax-clearance-certificate",
 };
 
 export interface QUERY_PARAMS_VALUES {
