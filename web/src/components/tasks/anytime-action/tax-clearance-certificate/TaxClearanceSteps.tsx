@@ -6,7 +6,9 @@ import { Download } from "@/components/tasks/anytime-action/tax-clearance-certif
 import { Requirements } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Requirements";
 import { Review } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Review";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { StepperStep } from "@/lib/types/types";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
@@ -24,15 +26,22 @@ interface Props {
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { updateQueue } = useUserData();
 
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
   const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
     props.certificatePdfBlob || undefined,
   );
-  const { requireAccount } = useContext(NeedsAccountContext);
 
   const onStepClick = (step: number): void => {
-    if (requireAccount(`${ROUTES.taxClearanceCertificate}`)) {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      updateQueue
+        ?.queuePreferences({
+          returnToLink: `${ROUTES.taxClearanceCertificate}`,
+        })
+        .update();
+      setShowNeedsAccountModal(true);
       return;
     }
     if (step === 2 && stepIndex === 1) {
@@ -87,12 +96,12 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
         />
       ) : (
         <>
+          <AnytimeActionTaxClearanceCertificateAlert fieldErrors={props.getInvalidFieldIds()} />
           <HorizontalStepper
             steps={stepperSteps}
             currentStep={stepIndex}
             onStepClicked={onStepClick}
           />
-          <AnytimeActionTaxClearanceCertificateAlert fieldErrors={props.getInvalidFieldIds()} />
           {stepsComponents[stepIndex].component}
         </>
       )}

@@ -3,24 +3,35 @@ import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfo
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Roadmap, UserDataError } from "@/lib/types/types";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
   subject: ReactElement,
-  context: {
-    activeUser?: ActiveUser;
-    dispatch?: Dispatch<AuthAction>;
-    isAuthenticated?: IsAuthenticated;
+  authState?: {
+    isAuthenticated: IsAuthenticated;
+    activeUser?: {
+      id: string;
+      email: string;
+      encounteredMyNjLinkingError?: boolean;
+    };
   },
 ): ReactElement => {
-  const isAuthenticated =
-    context.isAuthenticated || (context.activeUser ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
-  const dispatch = context.dispatch || jest.fn();
-  const state: AuthState = { isAuthenticated, activeUser: context.activeUser };
-  return <AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        state: {
+          isAuthenticated: authState?.isAuthenticated ?? IsAuthenticated.UNKNOWN,
+          activeUser: authState?.activeUser,
+        },
+        dispatch: jest.fn(),
+      }}
+    >
+      {subject}
+    </AuthContext.Provider>
+  );
 };
 
 export const withContextualInfo = (

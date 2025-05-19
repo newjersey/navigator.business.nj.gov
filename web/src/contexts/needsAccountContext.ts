@@ -10,7 +10,7 @@ export interface NeedsAccountContextType {
   setRegistrationStatus: (value: RegistrationStatus | undefined) => void;
   setShowNeedsAccountSnackbar: (value: boolean) => void;
   setShowNeedsAccountModal: (value: boolean) => void;
-  requireAccount: (returnToLink?: string) => boolean;
+  // requireAccount: (returnToLink?: string) => void;
 }
 
 export const NeedsAccountContext = createContext<NeedsAccountContextType>({
@@ -21,5 +21,5 @@ export const NeedsAccountContext = createContext<NeedsAccountContextType>({
   setShowNeedsAccountSnackbar: () => {},
   showNeedsAccountModal: false,
   setShowNeedsAccountModal: () => {},
-  requireAccount: () => false,
+  // requireAccount: () => false,
 });

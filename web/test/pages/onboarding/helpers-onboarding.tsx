@@ -59,7 +59,10 @@ export const renderPage = ({
           <Onboarding municipalities={municipalities || []} />
         </ThemeProvider>
       </WithStatefulUserData>,
-      { activeUser: { ...currentUser, encounteredMyNjLinkingError: false }, isAuthenticated },
+      {
+        activeUser: { ...currentUser, encounteredMyNjLinkingError: false },
+        isAuthenticated: isAuthenticated ?? IsAuthenticated.FALSE,
+      },
     ),
   );
   const page = createPageHelpers();

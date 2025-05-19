@@ -38,7 +38,6 @@ import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import { Hub, type HubCapsule } from "aws-amplify/utils";
 
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
 
@@ -244,20 +243,20 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                               setRegistrationStatus: setRegistrationStatusInStateAndStorage,
                               setShowNeedsAccountSnackbar,
                               setShowNeedsAccountModal,
-                              requireAccount: (returnToLink?: string) => {
-                                if (state.isAuthenticated === IsAuthenticated.FALSE) {
-                                  if (returnToLink) {
-                                    updateQueue
-                                      ?.queuePreferences({
-                                        returnToLink,
-                                      })
-                                      .update();
-                                  }
-                                  setShowNeedsAccountModal(true);
-                                  return true;
-                                }
-                                return false;
-                              },
+                              // requireAccount: (returnToLink?: string) => {
+                              //   if (state.isAuthenticated === IsAuthenticated.FALSE) {
+                              //     if (returnToLink) {
+                              //       updateQueue
+                              //         ?.queuePreferences({
+                              //           returnToLink,
+                              //         })
+                              //         .update();
+                              //     }
+                              //     setShowNeedsAccountModal(true);
+                              //     return true;
+                              //   }
+                              //   return false;
+                              // },
                             }}
                           >
                             <ContextualInfoPanel />
