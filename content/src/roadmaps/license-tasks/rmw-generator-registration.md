@@ -11,8 +11,7 @@ callToActionText: Submit My RMW Registration Form
 agencyId: njdep
 industryId: acupuncture,funeral,pharmacy,petcare,healthcare,generic,logistics,home-health-aide
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "If your business produces
-`Regulated Medical Waste (RMW)|regulated-medical-waste`, you must register with the New Jersey Department of Environmental Protection (NJDEP) as an RMW generator."
+summaryDescriptionMd: "If your business produces `Regulated Medical Waste (RMW)|regulated-medical-waste`, you must register with the New Jersey Department of Environmental Protection (NJDEP) as an RMW generator."
 ---
 
 \
