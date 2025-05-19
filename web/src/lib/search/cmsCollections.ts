@@ -1,5 +1,9 @@
 export const cmsCollections = [
   {
+    label: "📅 RENEWAL CALENDAR EVENTS",
+    children: ["Renewal Calendar Events"],
+  },
+  {
     label: "🟥 BUSINESS FORMATION",
     children: ["Biz Form - Config", "Biz Form - DBA Tasks", "Nexus"],
   },

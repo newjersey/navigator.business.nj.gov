@@ -19,6 +19,7 @@ import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
+import { loadAllRenewalCalendarEvents } from "@/lib/static/loadRenewalCalendarEvents";
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -26,6 +27,7 @@ import {
   Funding,
   LicenseEventType,
   OperateReference,
+  RenewalEventType,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -46,6 +48,7 @@ interface Props {
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   licenseEvents: LicenseEventType[];
+  renewalEvents: RenewalEventType[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -129,6 +132,7 @@ const DashboardPage = (props: Props): ReactElement => {
               anytimeActionTasks={props.anytimeActionTasks}
               elevatorViolations={hasElevatorViolations}
               licenseEvents={props.licenseEvents}
+              renewalEvents={props.renewalEvents}
             />
           )}
         </main>
@@ -148,6 +152,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       anytimeActionTasks: loadAllAnytimeActionTasks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       licenseEvents: loadAllLicenseCalendarEvents(),
+      renewalEvents: loadAllRenewalCalendarEvents(),
     },
   };
 };

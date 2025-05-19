@@ -118,6 +118,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionTasks={anytimeActionTasks ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
+          renewalEvents={[]}
         />
       </ThemeProvider>,
     );
@@ -139,6 +140,7 @@ describe("<DashboardOnDesktop />", () => {
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
+            renewalEvents={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>,
