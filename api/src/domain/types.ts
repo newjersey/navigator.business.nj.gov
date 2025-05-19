@@ -243,7 +243,10 @@ export const NO_ADDRESS_MATCH_ERROR = "NO_ADDRESS_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
 
 export interface TaxClearanceCertificateClient {
-  postTaxClearanceCertificate: (userData: UserData) => Promise<TaxClearanceCertificateResponse>;
+  postTaxClearanceCertificate: (
+    userData: UserData,
+    encryptionDecryptionClient: EncryptionDecryptionClient,
+  ) => Promise<TaxClearanceCertificateResponse>;
 }
 
 export interface XrayRegistrationStatusLookup {
