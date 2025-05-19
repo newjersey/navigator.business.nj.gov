@@ -74,7 +74,7 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
         </>
       )}
       {props.responseErrorType !== undefined && (
-        <div>{Config.taxClearanceCertificateShared.genericTaxClearanceErrorText}</div>
+        <div>{Config.taxClearanceCertificateStep3.genericTaxClearanceErrorText}</div>
       )}
     </Alert>
   ) : (

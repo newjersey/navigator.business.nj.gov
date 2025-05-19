@@ -45,6 +45,12 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
         )}
         {tab === "step3" && (
           <>
+            <Heading level={2}>Generic Taxation API Error</Heading>
+            <AnytimeActionTaxClearanceCertificateAlert
+              fieldErrors={[]}
+              responseErrorType={"INELIGIBLE_TAX_CLEARANCE_FORM"}
+            />
+            <Heading level={2}>Anytime Action Step 3</Heading>
             <AnytimeActionTaxClearanceCertificate
               anytimeAction={taxClearanceAnytimeAction}
               CMS_ONLY_stepIndex={2}

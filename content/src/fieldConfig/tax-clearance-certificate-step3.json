@@ -8,6 +8,7 @@
     "mainTitleHeader": "Check Eligibility",
     "certificationReasonLabel": "What agency is requesting the Tax Clearance Certificate?",
     "secondSectionHeader": "Business Information",
-    "stateTaxIdLabel": "NJ State Tax ID"
+    "stateTaxIdLabel": "NJ State Tax ID",
+    "genericTaxClearanceErrorText": "We cannot find your business information. Please check the information you've entered."
   }
 }
