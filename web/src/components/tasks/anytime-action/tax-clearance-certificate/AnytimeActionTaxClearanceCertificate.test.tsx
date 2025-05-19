@@ -569,10 +569,10 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       addressCity: "Baltimore",
       addressState: { shortCode: "MD", name: "Maryland" },
       addressZipCode: "21210",
-      taxId: "012345678901",
-      encryptedTaxId: undefined,
-      taxPin: "1234",
-      encryptedTaxPin: undefined,
+      taxId: "*******78901",
+      encryptedTaxId: "encrypted-012345678901",
+      taxPin: "****",
+      encryptedTaxPin: "encrypted-1234",
     });
   });
 
@@ -610,10 +610,10 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       addressCity: "Baltimore",
       addressState: { shortCode: "MD", name: "Maryland" },
       addressZipCode: "21210",
-      taxId: "012345678901",
-      encryptedTaxId: undefined,
-      taxPin: "1234",
-      encryptedTaxPin: undefined,
+      taxId: "*******78901",
+      encryptedTaxId: "encrypted-012345678901",
+      taxPin: "****",
+      encryptedTaxPin: "encrypted-1234",
     });
   });
 
@@ -850,9 +850,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(within(screen.getByTestId("businessName")).getByText("Test Name")).toBeInTheDocument();
       expect(within(screen.getByTestId("addressLabel")).getByText(address)).toBeInTheDocument();
       expect(
-        within(screen.getByTestId("stateTaxIdLabel")).getByText("012345678901"),
+        within(screen.getByTestId("stateTaxIdLabel")).getByText("*******78901"),
       ).toBeInTheDocument();
-      expect(within(screen.getByTestId("taxPinLabel")).getByText("1234")).toBeInTheDocument();
+      expect(within(screen.getByTestId("taxPinLabel")).getByText("****")).toBeInTheDocument();
     });
 
     describe("renders data when input is provided", () => {});

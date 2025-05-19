@@ -17,10 +17,10 @@ describe("encryptFieldsFactory", () => {
   const profileTaxPin = "1234";
   const taxClearanceTaxId = "111111111111";
   const taxClearanceTaxPin = "1111";
-  const encryptedProfileTaxId = "encrypted-profile-tax-id";
-  const encryptedProfileTaxPin = "encrypted-profile-tax-pin";
-  const encryptedTaxClearanceTaxId = "encrypted-tax-clearance-tax-id";
-  const encryptedTaxClearanceTaxPin = "encrypted-tax-clearance-tax-pin";
+  const encryptedProfileTaxId = "encrypted-123456789000";
+  const encryptedProfileTaxPin = "encrypted-1234";
+  const encryptedTaxClearanceTaxId = "encrypted-111111111111";
+  const encryptedTaxClearanceTaxPin = "encrypted-1111";
 
   const generateUnencryptedUserData = (
     profileDataOverrides = {},

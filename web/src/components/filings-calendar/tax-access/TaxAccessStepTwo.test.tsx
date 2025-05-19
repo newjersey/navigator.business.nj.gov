@@ -226,8 +226,8 @@ describe("<TaxAccessStepTwo />", () => {
       await waitFor(() => {
         return expect(currentBusiness().profileData.businessName).not.toEqual("zoom");
       });
-      expect(currentBusiness().profileData.taxId).toEqual("999888777666");
-      expect(currentBusiness().profileData.encryptedTaxId).toEqual("");
+      expect(currentBusiness().profileData.taxId).toEqual("*******77666");
+      expect(currentBusiness().profileData.encryptedTaxId).toEqual("encrypted-999888777666");
     });
 
     it("updates businessName on submit if tax filing is success", async () => {
@@ -255,8 +255,8 @@ describe("<TaxAccessStepTwo />", () => {
       await waitFor(() => {
         expect(currentBusiness().profileData.businessName).toEqual("zoom");
       });
-      expect(currentBusiness().profileData.taxId).toEqual("999888777666");
-      expect(currentBusiness().profileData.encryptedTaxId).toEqual("");
+      expect(currentBusiness().profileData.taxId).toEqual("*******77666");
+      expect(currentBusiness().profileData.encryptedTaxId).toEqual("encrypted-999888777666");
     });
 
     it("displays in-line error and alert when businessName field is empty and save button is clicked", async () => {
@@ -478,9 +478,8 @@ describe("<TaxAccessStepTwo />", () => {
       await waitFor(() => {
         return expect(currentBusiness().profileData.responsibleOwnerName).toEqual("zoom");
       });
-      await waitFor(() => {
-        return expect(currentBusiness().profileData.taxId).toEqual("123456789000");
-      });
+      expect(currentBusiness().profileData.taxId).toEqual("*******89000");
+      expect(currentBusiness().profileData.encryptedTaxId).toEqual("encrypted-123456789000");
     });
 
     it("displays in-line error and alert when responsibleOwnerName field is empty and save button is clicked", () => {
