@@ -40,7 +40,6 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       }
       setStepIndex(step);
     }
-
   };
 
   const onSave = (): void => {
