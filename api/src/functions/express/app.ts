@@ -424,7 +424,7 @@ app.use(
   "/api",
   formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }),
 );
-app.use("/api", emergencyTripPermitRouterFactory(emergencyTripPermitClient));
+app.use("/api/external", emergencyTripPermitRouterFactory(emergencyTripPermitClient));
 app.use(
   "/api/taxFilings",
   taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient),
