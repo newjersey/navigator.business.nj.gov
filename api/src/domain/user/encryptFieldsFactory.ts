@@ -72,7 +72,7 @@ const encryptProfileTaxPin = async (
   ) {
     return userData;
   }
-  const maskedTaxPin = maskingCharacter.repeat(4);
+  const maskedTaxPin = maskingCharacter.repeat(currentBusiness.profileData.taxPin.length);
   const encryptedTaxPin = await encryptionDecryptionClient.encryptValue(
     currentBusiness.profileData.taxPin as string,
   );
