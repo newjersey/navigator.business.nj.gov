@@ -159,6 +159,11 @@ describe("<TaxTask />", () => {
       await waitFor(() => {
         expect(currentBusiness().profileData.taxId).toEqual("*******89123");
       });
+      expect(screen.getByLabelText("Tax id")).toBeDisabled();
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual(
+        "***-***-*89/123",
+      );
     });
 
     it("shows error on length validation failure", () => {
