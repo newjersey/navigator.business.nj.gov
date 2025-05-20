@@ -1105,7 +1105,7 @@ describe("profile - starting business", () => {
     renderPage({
       business: generateBusinessForProfile({
         profileData: generateProfileData({
-          industryId: randomNonHomeBasedIndustry(),
+          industryId: randomNonHomeBasedIndustry(["domestic-employer"]),
           businessPersona: "STARTING",
         }),
       }),
@@ -1123,11 +1123,12 @@ describe("profile - starting business", () => {
   it("does not show the home-based question if not applicable to industry", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
-        industryId: randomNonHomeBasedIndustry(),
+        industryId: randomNonHomeBasedIndustry(["domestic-employer"]),
         businessPersona: "STARTING",
       }),
     });
     renderPage({ business });
+    chooseTab("permits");
 
     expect(
       screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
