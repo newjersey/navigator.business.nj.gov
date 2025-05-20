@@ -1,7 +1,6 @@
 ---
 notesMd: "Working doc:
-  https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZ\
-  Z0/edit?pli=1&tab=t.qv11ld6e66f#heading=h.9mj2fg7swjt4"
+  https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.qv11ld6e66f#heading=h.9mj2fg7swjt4"
 id: refrigeration
 name: Get Your Refrigeration System Inspected
 category:
@@ -41,17 +40,18 @@ callToActionText: Visit the Bureau’s Page for More Information
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
   oiler-pressure-vessel-compliance/index.shtml "
 ---
+
 ## Refrigeration Systems That Need Inspection
 
 Refrigeration systems using **flammable or toxic refrigerants** must be inspected if they:
 
-* Use over 3 tons of refrigerating capacity, **or**
-* Require over 6 driving horsepower 
+- Use over 3 tons of refrigerating capacity, **or**
+- Require over 6 driving horsepower
 
 Refrigeration systems using **nonflammable and nontoxic refrigerants** that have a relief device set over 15 PSIG and are used in a plant of any size or storage capacity must be inspected if they:
 
-* Use over 18 tons of refrigerating capacity, **or**
-* Require over 36 driving horsepower
+- Use over 18 tons of refrigerating capacity, **or**
+- Require over 36 driving horsepower
 
 Refrigeration systems must be inspected every year.
 
@@ -61,20 +61,20 @@ The inspection includes: the liquid receiver, condenser, all safety valves and t
 
 Inspection is not required for systems using **flammable, highly toxic, or toxic refrigerants** that:
 
-* Use 3 tons or less of refrigerating capacity, **or**
-* Require 6 horsepower or less to operate
+- Use 3 tons or less of refrigerating capacity, **or**
+- Require 6 horsepower or less to operate
 
 Inspection is not required for systems using **nonflammable and nontoxic refrigerants** that:
 
-* Use 18 tons or less of refrigerating capacity
-* Require 36 horsepower or less to operate, **or**
-* Operate at 15 PSIG or lower, regardless of system size
+- Use 18 tons or less of refrigerating capacity
+- Require 36 horsepower or less to operate, **or**
+- Operate at 15 PSIG or lower, regardless of system size
 
 ## How Inspections Work
 
-After your refrigeration system is registered and passes the first inspection, a State inspector or your insurance company will contact you to set up future inspections. 
+After your refrigeration system is registered and passes the first inspection, a State inspector or your insurance company will contact you to set up future inspections.
 
-Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected. 
+Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected.
 
 :::callout{ showHeader="true" headerText="To register a refrigeration system and schedule the first inspection:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-2921" emailIconText="" }
 
@@ -82,8 +82,8 @@ Call the NJ Bureau of Boiler and Pressure Vessel Compliance.
 
 :::
 
-* New or replaced equipment inspections can only be done by the NJ Mechanical Inspection Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)
-* Yearly inspections can be done by a certified insurance inspector or the State (MIBBPVC)
+- New or replaced equipment inspections can only be done by the NJ Mechanical Inspection Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)
+- Yearly inspections can be done by a certified insurance inspector or the State (MIBBPVC)
 
 If you have questions, email bpvrcompliance@dol.nj.gov or write to:
 
@@ -99,8 +99,8 @@ Trenton, NJ 08625-0392
 
 :::callout{ showHeader="true" headerText="What if I don't get my refrigeration system inspected?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-* If your equipment is not inspected as required, it could pose serious safety risks. You could face fines or legal penalties for non-compliance
-* For new refrigeration systems, you may not be able to get an official `Certificate of Occupancy|certificate-occupancy` for your building until your inspection is passed
+- If your equipment is not inspected as required, it could pose serious safety risks. You could face fines or legal penalties for non-compliance
+- For new refrigeration systems, you may not be able to get an official `Certificate of Occupancy|certificate-occupancy` for your building until your inspection is passed
 
 :::
 
