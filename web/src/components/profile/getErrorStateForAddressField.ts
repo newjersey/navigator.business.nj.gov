@@ -26,7 +26,10 @@ export const getErrorStateForAddressField = ({
   const Config = getMergedConfig();
   const errorState = {
     field: field,
-    label: (Config.formation.fields as any)[field].label,
+    label:
+      field === "addressZipCode" && formationAddressData.addressState?.shortCode !== "NJ"
+        ? (Config.formation.fields as any)[field].foreign.errorUS
+        : (Config.formation.fields as any)[field].error,
   };
 
   const fieldWithMaxLength = (params: {
@@ -37,9 +40,7 @@ export const getErrorStateForAddressField = ({
     const isTooLong = (formationAddressData[field] as string)?.length > params.maxLen;
     let label = errorState.label;
     const isValid = params.required ? exists && !isTooLong : !isTooLong;
-    if (params.required && !exists) {
-      label = (Config.formation.fields as any)[field].error;
-    } else if (isTooLong) {
+    if (isTooLong) {
       label = templateEval(Config.formation.general.maximumLengthErrorText, {
         field: (Config.formation.fields as any)[field].label,
         maxLen: params.maxLen.toString(),
@@ -50,18 +51,16 @@ export const getErrorStateForAddressField = ({
 
   const fieldWithAssociatedFields = (params: {
     associatedFields: AddressFields[];
-    label: string;
   }): AddressFieldErrorState => {
     const exists = !!formationAddressData[field];
     const anAssociatedFieldExists = params.associatedFields.some(
       (it) => !!formationAddressData[it],
     );
 
-    let label = errorState.label;
+    const label = errorState.label;
     let isValid = true;
 
     if (!exists && anAssociatedFieldExists) {
-      label = params.label;
       isValid = false;
     }
 
@@ -100,7 +99,6 @@ export const getErrorStateForAddressField = ({
         "addressProvince",
         "addressCountry",
       ],
-      label: (Config.formation.fields as any)[field].error,
     });
 
     return combineErrorStates({
@@ -116,7 +114,6 @@ export const getErrorStateForAddressField = ({
   if (field === "addressMunicipality") {
     return fieldWithAssociatedFields({
       associatedFields: ["addressLine1", "addressZipCode", "addressLine2"],
-      label: (Config.formation.fields as any)[field].error,
     });
   }
 
@@ -129,7 +126,6 @@ export const getErrorStateForAddressField = ({
         "addressZipCode",
         "addressLine2",
       ],
-      label: (Config.formation.fields as any)[field].error,
     });
   }
 
@@ -142,7 +138,6 @@ export const getErrorStateForAddressField = ({
         "addressZipCode",
         "addressLine2",
       ],
-      label: (Config.formation.fields as any)[field].error,
     });
   }
 
@@ -155,7 +150,6 @@ export const getErrorStateForAddressField = ({
         "addressZipCode",
         "addressLine2",
       ],
-      label: (Config.formation.fields as any)[field].error,
     });
   }
 
@@ -168,7 +162,6 @@ export const getErrorStateForAddressField = ({
         "addressZipCode",
         "addressLine2",
       ],
-      label: (Config.formation.fields as any)[field].error,
     });
   }
 
@@ -189,20 +182,13 @@ export const getErrorStateForAddressField = ({
 
     const hasError = exists && !inRange;
 
-    const zipCodeErrorLabel =
-      formationAddressData.addressState?.shortCode === "NJ"
-        ? (Config.formation.fields as any)[field].error
-        : (Config.formation.fields as any)[field].foreign.errorUS;
-
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressLine1", "addressLine2"],
-      label: zipCodeErrorLabel,
     });
 
     const inRangeError = {
       ...errorState,
       hasError: hasError,
-      label: zipCodeErrorLabel,
     };
 
     return combineErrorStates({ firstPriority: inRangeError, secondPriority: partialAddressError });

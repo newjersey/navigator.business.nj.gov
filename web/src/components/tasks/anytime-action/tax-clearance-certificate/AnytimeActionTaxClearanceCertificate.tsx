@@ -12,7 +12,7 @@ import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCerti
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
-import { getFlow, scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { emptyTaxClearanceCertificateData } from "@businessnjgovnavigator/shared";
 import {
   emptyFormationAddressData,
@@ -32,9 +32,13 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
   const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState(
     emptyTaxClearanceCertificateData,
   );
+
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);
+  const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
+    props.CMS_ONLY_certificatePdfBlob || undefined,
+  );
 
   const setAddress: Dispatch<SetStateAction<FormationAddress>> = (action) => {
     setAddressData((prevAddress) => {
@@ -136,23 +140,12 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
   }, business);
 
   const {
-    FormFuncWrapper,
+    FormFuncWrapper: formFuncWrapper,
     isValid,
     getInvalidFieldIds,
     onSubmit,
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
-
-  FormFuncWrapper(
-    async (): Promise<void> => {
-      if (!business || !isValid()) {
-        scrollToTop();
-        return;
-      }
-      scrollToTop();
-    },
-    () => {},
-  );
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
@@ -184,15 +177,18 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
                   <Heading level={1}>{props.anytimeAction.name}</Heading>
                 </div>
               </div>
-              <TaxClearanceSteps
-                taxClearanceCertificateData={taxClearanceCertificateData}
-                certificatePdfBlob={props.CMS_ONLY_certificatePdfBlob}
-                saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
-                isValid={isValid}
-                getInvalidFieldIds={getInvalidFieldIds}
-                onSubmit={onSubmit}
-                CMS_ONLY_stepIndex={props.CMS_ONLY_stepIndex}
-              />
+              <form onSubmit={onSubmit}>
+                <TaxClearanceSteps
+                  taxClearanceCertificateData={taxClearanceCertificateData}
+                  certificatePdfBlob={certificatePdfBlob}
+                  setCertificatePdfBlob={setCertificatePdfBlob}
+                  saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
+                  isValid={isValid}
+                  getInvalidFieldIds={getInvalidFieldIds}
+                  CMS_ONLY_stepIndex={props.CMS_ONLY_stepIndex}
+                  formFuncWrapper={formFuncWrapper}
+                />
+              </form>
             </div>
           </AddressContext.Provider>
         </ProfileDataContext.Provider>

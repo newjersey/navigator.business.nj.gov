@@ -12,7 +12,7 @@ import { StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { FormEvent, ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   taxClearanceCertificateData: TaxClearanceCertificateData;
@@ -20,17 +20,21 @@ interface Props {
   saveTaxClearanceCertificateData: () => void;
   isValid: () => boolean;
   getInvalidFieldIds: () => string[];
-  onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
+  setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
   CMS_ONLY_stepIndex?: number;
+  formFuncWrapper: (
+    onSubmitFunc: () => void | Promise<void>,
+    onChangeFunc?:
+      | ((isValid: boolean, errors: unknown[], pageChange: boolean) => void | Promise<void>)
+      | undefined,
+  ) => void;
 }
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
-  const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
-    props.certificatePdfBlob || undefined,
-  );
+
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const [responseErrorType, setResponseErrorType] = useState<
     TaxClearanceCertificateResponseErrorType | undefined
@@ -51,16 +55,12 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       setShowNeedsAccountModal(true);
     } else {
       fireAnalyticsEvent(step);
+
       if (step === 2 && stepIndex === 1) {
         props.saveTaxClearanceCertificateData();
       }
       setStepIndex(step);
     }
-  };
-
-  const onSave = (): void => {
-    props.saveTaxClearanceCertificateData();
-    setStepIndex(2);
   };
 
   const stepperSteps: StepperStep[] = [
@@ -71,7 +71,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     },
     {
       name: Config.taxClearanceCertificateShared.stepperTwoLabel,
-      hasError: false,
+      hasError: props.getInvalidFieldIds().length > 0,
       isComplete: props.isValid() && getAllFieldsNonEmpty(props.taxClearanceCertificateData),
     },
     {
@@ -85,14 +85,18 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     { component: <Requirements setStepIndex={setStepIndex} /> },
     {
       component: (
-        <CheckEligibility setStepIndex={setStepIndex} onSave={onSave} onSubmit={props.onSubmit} />
+        <CheckEligibility
+          setStepIndex={setStepIndex}
+          saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
+        />
       ),
     },
     {
       component: (
         <Review
           setStepIndex={setStepIndex}
-          setCertificatePdfBlob={setCertificatePdfBlob}
+          setCertificatePdfBlob={props.setCertificatePdfBlob}
+          formFuncWrapper={props.formFuncWrapper}
           setResponseErrorType={setResponseErrorType}
         />
       ),
@@ -101,9 +105,9 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
 
   return (
     <>
-      {certificatePdfBlob ? (
+      {props.certificatePdfBlob ? (
         <Download
-          certificatePdfBlob={certificatePdfBlob}
+          certificatePdfBlob={props.certificatePdfBlob}
           downloadFilename={`Tax Clearance Certificate - ${Date.now()}`}
         />
       ) : (

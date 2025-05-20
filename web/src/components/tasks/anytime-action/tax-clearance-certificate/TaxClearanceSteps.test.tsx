@@ -24,6 +24,8 @@ describe("TaxClearanceSteps", () => {
     isValid: jest.fn().mockReturnValue(true),
     getInvalidFieldIds: jest.fn().mockReturnValue([]),
     onSubmit: jest.fn(),
+    setCertificatePdfBlob: jest.fn(),
+    formFuncWrapper: jest.fn(),
   };
 
   beforeEach(() => {
