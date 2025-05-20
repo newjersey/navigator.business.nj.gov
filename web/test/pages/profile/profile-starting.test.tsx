@@ -1102,25 +1102,22 @@ describe("profile - starting business", () => {
   });
 
   it("shows the home-based question when user changes to applicable industry, even before saving", () => {
-    const industry = randomNonHomeBasedIndustry();
     renderPage({
       business: generateBusinessForProfile({
         profileData: generateProfileData({
-          industryId: industry,
+          industryId: randomNonHomeBasedIndustry(),
           businessPersona: "STARTING",
         }),
       }),
     });
-    console.log("industry", industry);
     chooseTab("permits");
-    expect(false).toBeTruthy();
-    // expect(screen.queryByLabelText("Home based business")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Home based business")).not.toBeInTheDocument();
 
-    // chooseTab("info");
-    // selectByValue("Industry", randomHomeBasedIndustry());
+    chooseTab("info");
+    selectByValue("Industry", randomHomeBasedIndustry());
 
-    // chooseTab("permits");
-    // expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
+    chooseTab("permits");
+    expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
   it("does not show the home-based question if not applicable to industry", () => {
