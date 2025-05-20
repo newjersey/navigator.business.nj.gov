@@ -2,7 +2,10 @@ import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -13,8 +16,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
 const Template = () => {
+  const taxId = "2";
   const [config, setConfig] = useState<ConfigType>(getMergedConfig());
-  const [profileData, setProfileData] = useState<ProfileData>(generateProfileData({ taxId: "2" }));
+  const [profileData, setProfileData] = useState<ProfileData>(generateProfileData({ taxId }));
   const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   return (
@@ -52,7 +56,11 @@ const Template = () => {
                 headerNotBolded: "UnBoldedHeader Text",
               }}
             />
-            <TaxId validationText={config.taxAccess.failedTaxIdHelper} required />
+            <TaxId
+              dbBusinessTaxId={taxId}
+              validationText={config.taxAccess.failedTaxIdHelper}
+              required
+            />
 
             <WithErrorBar hasError type="ALWAYS" className="margin-top-2">
               <FieldLabelModal
@@ -65,7 +73,12 @@ const Template = () => {
                   headerNotBolded: "UnBoldedHeader Text",
                 }}
               />
-              <TaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
+              <TaxId
+                dbBusinessTaxId={taxId}
+                validationText={config.taxAccess.failedTaxIdHelper}
+                required
+                error
+              />
             </WithErrorBar>
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>

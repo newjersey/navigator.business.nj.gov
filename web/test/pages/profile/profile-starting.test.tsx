@@ -361,7 +361,8 @@ describe("profile - starting business", () => {
         sectorId: "retail-trade-and-ecommerce",
         homeBasedBusiness: true,
         municipality: randomMunicipality,
-        taxId: "023456790123",
+        taxId: "*******90123",
+        encryptedTaxId: "encrypted-023456790123",
         employerId: "023456780",
         notes: "whats appppppp",
       },
@@ -609,7 +610,8 @@ describe("profile - starting business", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          taxId: "123456789",
+          taxId: "*****6789",
+          encryptedTaxId: "encrypted-123456789",
         }),
       });
 
@@ -656,7 +658,11 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWith9TaxId.profileData, taxId: "123456789123" },
+            profileData: {
+              ...businessWith9TaxId.profileData,
+              taxId: "*******89123",
+              encryptedTaxId: "encrypted-123456789123",
+            },
           });
         });
       });
@@ -676,7 +682,11 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWith9TaxId.profileData, taxId: "" },
+            profileData: {
+              ...businessWith9TaxId.profileData,
+              taxId: "",
+              encryptedTaxId: "encrypted-123456789", // Note that this does not clear the encryption
+            },
           });
         });
       });
@@ -687,7 +697,8 @@ describe("profile - starting business", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          taxId: "123456789123",
+          taxId: "*******89123",
+          encryptedTaxId: "encrypted-123456789123",
         }),
       });
 
@@ -728,13 +739,17 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWith12TaxId.profileData, taxId: "666666666666" },
+            profileData: {
+              ...businessWith12TaxId.profileData,
+              taxId: "*******66666",
+              encryptedTaxId: "encrypted-666666666666",
+            },
           });
         });
       });
     });
 
-    describe("when the tax ID is initially 0  in length", () => {
+    describe("when the tax ID is initially 0 in length", () => {
       const businessWithEmptyTaxId = generateBusinessForProfile({
         profileData: generateProfileData({
           taxId: "",
@@ -780,7 +795,11 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            profileData: { ...businessWithEmptyTaxId.profileData, taxId: "123456789123" },
+            profileData: {
+              ...businessWithEmptyTaxId.profileData,
+              taxId: "*******89123",
+              encryptedTaxId: "encrypted-123456789123",
+            },
           });
         });
       });

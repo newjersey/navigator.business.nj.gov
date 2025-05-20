@@ -1,5 +1,5 @@
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
-import { TaxClearanceCertificateClient } from "@domain/types";
+import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
@@ -8,14 +8,24 @@ import request from "supertest";
 describe("taxClearanceCertificateRouterFactory", () => {
   let app: Express;
   let stubTaxClearanceCertificateClient: jest.Mocked<TaxClearanceCertificateClient>;
+  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
 
   beforeEach(() => {
     jest.resetAllMocks();
     stubTaxClearanceCertificateClient = {
       postTaxClearanceCertificate: jest.fn(),
     };
+    stubEncryptionDecryptionClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+    };
     app = setupExpress(false);
-    app.use(taxClearanceCertificateRouterFactory(stubTaxClearanceCertificateClient));
+    app.use(
+      taxClearanceCertificateRouterFactory(
+        stubTaxClearanceCertificateClient,
+        stubEncryptionDecryptionClient,
+      ),
+    );
   });
 
   it("returns a successful response", async () => {
