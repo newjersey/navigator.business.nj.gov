@@ -507,7 +507,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="taxPin">
           <TaxPin
-            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            dbBusinessTaxPin={business?.profileData?.taxPin}
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
@@ -565,7 +565,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="taxPin">
           <TaxPin
-            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            dbBusinessTaxPin={business?.profileData?.taxPin}
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
@@ -796,7 +796,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="taxPin">
           <TaxPin
-            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            dbBusinessTaxPin={business?.profileData?.taxPin}
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
@@ -995,7 +995,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="taxPin">
           <TaxPin
-            dbBusinessTaxPin={business?.taxClearanceCertificateData?.taxPin}
+            dbBusinessTaxPin={business?.profileData?.taxPin}
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
