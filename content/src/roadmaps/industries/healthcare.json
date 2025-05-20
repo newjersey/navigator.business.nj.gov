@@ -54,18 +54,12 @@
     },
     {
       "step": 4,
-      "weight": 90,
+      "weight": 1,
       "task": "community-right-to-know-survey"
     },
     {
-      "weight": 100,
       "step": 4,
-      "licenseTask": "boiler-inspection",
-      "required": true
-    },
-    {
-      "step": 4,
-      "weight": 101,
+      "weight": 2,
       "licenseTask": "rmw-generator-registration",
       "required": true
     }
@@ -81,7 +75,10 @@
     "business-vehicle-title-reg",
     "dental-hygienist",
     "special-permit-dentistry",
-    "inspect-boiler"
+    "inspect-boiler",
+    "inspect-pv",
+    "inspect-fridge",
+    "bus-initial-inspection"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {

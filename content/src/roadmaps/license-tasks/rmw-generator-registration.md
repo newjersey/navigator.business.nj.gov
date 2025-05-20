@@ -1,17 +1,19 @@
 ---
+agencyId: njdep
+filename: rmw-generator-registration
 id: rmw-generator-registration
-webflowId: 682247683fc6ae4236738863
+displayname: rmw-generator-registration
 urlSlug: rmw-generator-registration
 name: Complete Your Regulated Medical Waste Generator Registration
-displayname: rmw-generator-registration
 webflowName: Complete Your Regulated Medical Waste Generator Registration
-filename: rmw-generator-registration
-callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
-callToActionText: Submit My RMW Registration Form
-agencyId: njdep
+summaryDescriptionMd: If your business produces `Regulated Medical Waste
+  (RMW)|regulated-medical-waste` , you must register with the New Jersey
+  Department of Environmental Protection (NJDEP) as an RMW generator.
 industryId: acupuncture,funeral,pharmacy,petcare,healthcare,generic,logistics,home-health-aide
+callToActionText: Submit My RMW Registration Form
+callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
+webflowId: 682247683fc6ae4236738863
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "If your business produces `Regulated Medical Waste (RMW)|regulated-medical-waste`, you must register with the New Jersey Department of Environmental Protection (NJDEP) as an RMW generator."
 ---
 
 \
@@ -74,8 +76,7 @@ You need to update your registration if your facility changes:
   If you have questions about RMW registration, email mebinfo@dep.nj.gov. Or you can call (609)
   292-7081 and select option 3.
 
-  :::callout{ showHeader="true" headerText="What if I don’t register?" showIcon="false"
-  calloutType="warning" }
+  :::callout{ showHeader="true" headerText="What if I don’t register?" showIcon="false" calloutType="warning" }
 
   If your business generates RMW without a registration, you may face penalties.
 

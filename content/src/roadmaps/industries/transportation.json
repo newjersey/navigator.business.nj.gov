@@ -38,20 +38,21 @@
       "task": "bank-account"
     },
     {
-      "task": "transportation-inspection",
-      "weight": 15,
-      "step": 4
-    },
-    {
       "step": 4,
-      "weight": 16,
+      "weight": 15,
       "task": "transportation-entity-id",
       "required": true
     },
     {
       "step": 4,
-      "weight": 17,
+      "weight": 16,
       "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "task": "transportation-inspection",
+      "weight": 17,
+      "step": 4,
       "required": true
     },
     {

@@ -1,13 +1,13 @@
 {
   "taxClearanceCertificateStep3": {
-    "mainTitleHeader": "Check Eligibility",
-    "firstSectionHeader": "Reason for Certification",
-    "secondSectionHeader": "Business Information",
-    "businessNameLabel": "Business Name",
-    "stateTaxIdLabel": "NJ State Tax ID",
     "addressLabel": "Address",
-    "taxPinLabel": "Tax Pin",
+    "firstSectionHeader": "Reason for Certification",
+    "editButtonText": "Edit",
+    "businessNameLabel": "Business Name",
+    "taxPinLabel": "Tax PIN",
+    "mainTitleHeader": "Check Eligibility",
     "certificationReasonLabel": "What agency is requesting the Tax Clearance Certificate?",
-    "editButtonText": "Edit"
+    "secondSectionHeader": "Business Information",
+    "stateTaxIdLabel": "NJ State Tax ID"
   }
 }

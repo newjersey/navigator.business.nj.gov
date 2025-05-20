@@ -65,8 +65,14 @@
       "weight": 14
     },
     {
-      "step": 3,
       "weight": 15,
+      "step": 3,
+      "task": "transportation-inspection",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 16,
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"

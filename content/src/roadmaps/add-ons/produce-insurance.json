@@ -1,0 +1,18 @@
+{
+  "id": "produce-insurance",
+  "displayname": "produce-insurance",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 40,
+      "licenseTask": "individual-producer-license",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 45,
+      "licenseTask": "new-producer-license",
+      "required": true
+    }
+  ]
+}

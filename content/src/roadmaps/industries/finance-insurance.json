@@ -1,6 +1,6 @@
 {
-  "naicsCodes": "561510",
-  "defaultSectorId": "other-services",
+  "naicsCodes": "524210, 524126, 524128, 524298, 524127, 524114, 524113, 525190, 524291, 522220, 524298",
+  "defaultSectorId": "finance-and-insurance",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -41,21 +41,27 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "search-licenses"
     }
   ],
-  "name": "Travel Agency",
+  "name": "Finance and Insurance",
   "nonEssentialQuestionsIds": [
+    "weights-measures",
     "business-vehicle-title-reg",
-    "bus-initial-inspection"
+    "insurance-producer"
   ],
-  "displayname": "travel-agent",
+  "displayname": "finance-insurance",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "home-based travel agent",
-  "id": "travel-agent",
-  "description": "Coordinates the details of transportation, itinerary and accommodations for travelers",
-  "webflowId": "656a13621bdc1e1600ec8734"
+  "additionalSearchTerms": "Insurance agency, insurance broker, insurers, insurance agent, risk management, insurance, business insurance, auto insurance, car insurance, life insurance, home insurance, liability protection, financial protection services",
+  "id": "finance-insurance",
+  "description": "Businesses that sell, solicit, or negotiate insurance products. Financial institutions that help people and companies manage money and protect assets",
+  "webflowId": "656a13628934eb2330f44bcb"
 }

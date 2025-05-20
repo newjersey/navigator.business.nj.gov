@@ -1,0 +1,12 @@
+{
+  "id": "refrigeration-certificate",
+  "displayname": "refrigeration-certificate",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 40,
+      "task": "refrigeration-inspection",
+      "required": true
+    }
+  ]
+}

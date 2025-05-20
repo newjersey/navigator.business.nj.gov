@@ -5,7 +5,8 @@
     {
       "step": 4,
       "task": "trucking-irp",
-      "weight": 100
+      "weight": 100,
+      "required": true
     }
   ]
 }

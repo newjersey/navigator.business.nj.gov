@@ -46,7 +46,8 @@
   "name": "Event Planning",
   "nonEssentialQuestionsIds": [
     "business-vehicle-title-reg",
-    "business-vehicle-irp"
+    "business-vehicle-irp",
+    "bus-initial-inspection"
   ],
   "displayname": "event-planning",
   "industryOnboardingQuestions": {
