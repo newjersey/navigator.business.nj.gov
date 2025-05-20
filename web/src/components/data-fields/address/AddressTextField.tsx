@@ -11,6 +11,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "error" | "
   label?: string;
   secondaryLabel?: string;
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";
+  error?: boolean;
 }
 
 export const AddressTextField = ({ className, ...props }: Props): ReactElement => {
@@ -22,7 +23,7 @@ export const AddressTextField = ({ className, ...props }: Props): ReactElement =
     setAddressData((prevAddressData) => ({ ...prevAddressData, [props.fieldName]: value }));
   };
 
-  const hasError = doesFieldHaveError(props.fieldName);
+  const hasError = props.error || doesFieldHaveError(props.fieldName);
 
   return (
     <WithErrorBar className={className ?? ""} hasError={hasError} type={props.errorBarType}>

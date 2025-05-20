@@ -6,6 +6,7 @@ import { ReactElement } from "react";
 interface Props {
   onValidation: () => void;
   isFullWidth?: boolean;
+  isAddressLine1Invalid?: boolean;
 }
 export const AddressLines1And2 = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -26,6 +27,7 @@ export const AddressLines1And2 = (props: Props): ReactElement => {
           className={"margin-bottom-2"}
           errorBarType="ALWAYS"
           onValidation={props.onValidation}
+          error={props.isAddressLine1Invalid}
         />
       </div>
       <div

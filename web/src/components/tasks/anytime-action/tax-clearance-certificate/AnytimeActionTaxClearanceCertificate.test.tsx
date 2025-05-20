@@ -27,7 +27,9 @@ import {
   getTaxClearanceCertificateAgencies,
   LookupTaxClearanceCertificateAgenciesById,
   randomElementFromArray,
+  TaxClearanceCertificateData,
   TaxClearanceCertificateResponse,
+  TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
@@ -82,6 +84,16 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     return generateBusiness({
       profileData: generateProfileData({ businessName: "", taxId: undefined, taxPin: undefined }),
       taxClearanceCertificateData: emptyTaxClearanceCertificateData,
+      formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+    });
+  };
+
+  const generateBusinessWithEmptyProfileDataAndFormationDataData = (
+    taxClearanceOverides: Partial<TaxClearanceCertificateData>,
+  ): Business => {
+    return generateBusiness({
+      profileData: generateProfileData({ businessName: "", taxId: undefined, taxPin: undefined }),
+      taxClearanceCertificateData: generateTaxClearanceCertificateData(taxClearanceOverides),
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
   };
@@ -211,14 +223,14 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       "Address zip code",
       "Tax id",
       "Tax pin",
-    ])("renders tab two as incomplete if the text field %s is empty", (emptyField) => {
+    ])("renders tab two as error if the text field %s is empty", (emptyField) => {
       renderComponent({});
       const secondTab = screen.getAllByRole("tab")[1];
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
       fireEvent.click(secondTab);
 
       fillText(emptyField, "");
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
     });
 
     it("renders tab two as incomplete if Requesting Agency is not selected", async () => {
@@ -244,7 +256,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
-    it("renders tab two as incomplete if Address state is not selected", async () => {
+    it("renders tab two as Error if Address state is not selected", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
       const secondTab = screen.getAllByRole("tab")[1];
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -261,14 +273,14 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fillText("Tax id", "012345678901");
       fillText("Tax pin", "1234");
 
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
 
       selectComboboxValueByTextClick("Address state", "MD");
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
     it.each(["Address zip code", "Tax id", "Tax pin"])(
-      "renders tab two as incomplete when all fields are non empty but the %s field does not have enough digits",
+      "renders tab two as error when all fields are non empty but the %s field does not have enough digits",
       async (incompleteField) => {
         renderComponent({});
         const secondTab = screen.getAllByRole("tab")[1];
@@ -276,10 +288,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         fireEvent.click(secondTab);
 
         fillText(incompleteField, "123");
-        expect(secondTab).toHaveAttribute(
-          "aria-label",
-          expect.stringContaining("State: Incomplete"),
-        );
+        expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
       },
     );
   });
@@ -1003,6 +1012,249 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     );
   });
 
+  it("renders error states when empty address field is blurred", async () => {
+    const business = generateBusinessWithEmptyTaxClearanceData();
+    renderComponent({ business });
+    const secondTab = screen.getAllByRole("tab")[1];
+    fireEvent.click(secondTab);
+
+    fireEvent.blur(screen.getByLabelText("Address line1"));
+    expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.addressCity.error)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.addressState.error)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.formation.fields.addressZipCode.foreign.errorUS),
+    ).toBeInTheDocument();
+  });
+
+  it("renders error icon when field is blurred", async () => {
+    const business = generateBusinessWithEmptyTaxClearanceData();
+    renderComponent({ business });
+    const secondTab = screen.getAllByRole("tab")[1];
+    fireEvent.click(secondTab);
+    fireEvent.blur(screen.getByLabelText("Address line1"));
+
+    expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+  });
+
+  describe("renders error from review tab", () => {
+    it("renders address line 1 error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        addressLine1: "",
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.formation.fields.addressLine1.label,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+
+    it("renders address city error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        addressCity: "",
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.formation.fields.addressCity.label,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+
+    it("renders address state error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        addressState: undefined,
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.formation.fields.addressState.label,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+
+    it("renders address zip code error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        addressZipCode: "",
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.formation.fields.addressZipCode.label,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+
+    it("renders requestingAgencyId error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        requestingAgencyId: "",
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.taxClearanceCertificateStep2.requestingAgencyLabel,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+
+    it("renders businessName error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        businessName: "",
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.profileDefaults.fields.businessName.default.header,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+
+    it("renders taxId error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        taxId: "",
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.profileDefaults.fields.taxId.default.header,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+
+    it("renders taxPin error when not entered", async () => {
+      const business = generateBusinessWithEmptyProfileDataAndFormationDataData({
+        taxPin: "",
+      });
+
+      renderComponent({ business });
+
+      const secondTab = screen.getAllByRole("tab")[1];
+      const thirdTab = screen.getAllByRole("tab")[2];
+
+      fireEvent.click(thirdTab);
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
+      await waitFor(() =>
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText(
+            Config.profileDefaults.fields.taxPin.default.header,
+          ),
+        ).toBeInTheDocument(),
+      );
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+  });
+
   it.each([
     {
       type: "INELIGIBLE_TAX_CLEARANCE_FORM" as const,
@@ -1032,7 +1284,12 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   ] as const)(
     "shows a generic error message when the API post request returns an error type $type",
     async (arg) => {
-      const response: TaxClearanceCertificateResponse = { error: arg };
+      const response: TaxClearanceCertificateResponse = {
+        error: {
+          type: arg.type as TaxClearanceCertificateResponseErrorType,
+          message: arg.message,
+        },
+      };
       mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
       renderComponent({});
       fireEvent.click(screen.getByTestId("stepper-2"));
