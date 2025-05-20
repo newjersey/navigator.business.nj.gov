@@ -8,7 +8,7 @@ summaryDescriptionMd: >
 
   :::infoAlert 
 
-  New or recently acquired, qualifying vehicles must obtain the CPCN **before scheduling the vehicle’s initial inspection, and before registering the vehicle with the MVC for plates.**
+  New or recently acquired, qualifying vehicles must obtain the CPCN before scheduling the vehicle’s initial inspection, and before registering the vehicle with the MVC for plates.
 
   :::
 
