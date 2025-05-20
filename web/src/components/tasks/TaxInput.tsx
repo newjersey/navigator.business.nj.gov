@@ -148,6 +148,7 @@ export const TaxInput = (props: Props): ReactElement => {
           ) : (
             <>
               <TaxId
+                dbBusinessTaxId={business?.profileData.taxId}
                 required={isAuthenticated === IsAuthenticated.TRUE}
                 handleChangeOverride={getNeedsAccountModalFunction()}
               />

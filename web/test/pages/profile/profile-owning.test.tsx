@@ -127,9 +127,11 @@ describe("profile - owning existing business", () => {
   });
 
   it("updates the user data on save", async () => {
+    const initialTaxId = randomInt(9).toString();
     const business = generateBusinessForProfile({
       profileData: generateOwningProfileData({
-        taxId: randomInt(9).toString(),
+        taxId: `*****${initialTaxId.slice(-4)}`,
+        encryptedTaxId: `encrypted-${initialTaxId}`,
         industryId: "generic",
         legalStructureId: "limited-liability-company",
       }),
@@ -186,11 +188,13 @@ describe("profile - owning existing business", () => {
         ownershipTypeIds: ["veteran-owned", "woman-owned"],
         municipality: randomMunicipality,
         dateOfFormation,
-        taxId: "023456790123",
+        taxId: "*******90123",
+        encryptedTaxId: "encrypted-023456790123",
         entityId: "0234567890",
         employerId: "023456780",
         notes: "whats appppppp",
-        taxPin: "6666",
+        taxPin: "****",
+        encryptedTaxPin: "encrypted-6666",
         sectorId: "clean-energy",
       },
       formationData: {

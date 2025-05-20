@@ -38,7 +38,12 @@ import {
 } from "../license";
 import { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
-import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
+import {
+  BusinessPersona,
+  IndustrySpecificData,
+  maskingCharacter,
+  ProfileData,
+} from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { StateObject, arrayOfStateObjects as states } from "../states";
 import {
@@ -284,6 +289,7 @@ export const generateProfileData = (
   const id = `some-id-${randomInt()}`;
   const persona: BusinessPersona = randomElementFromArray(["STARTING", "OWNING", "FOREIGN"]);
   const industry = randomIndustry(canHavePermanentLocation);
+  const taxId = randomInt(12).toString();
 
   return {
     ...generateIndustrySpecificData({}),
@@ -297,11 +303,11 @@ export const generateProfileData = (
     dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
-    taxId: randomInt(12).toString(),
+    taxId: maskingCharacter.repeat(7) + taxId.slice(-5),
     hashedTaxId: undefined,
-    encryptedTaxId: undefined,
-    taxPin: randomInt(4).toString(),
-    encryptedTaxPin: undefined,
+    encryptedTaxId: `encrypted-${taxId}`,
+    taxPin: maskingCharacter.repeat(4),
+    encryptedTaxPin: `encrypted-${randomInt(4)}`,
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     documents: {
@@ -404,6 +410,7 @@ export const generateUnitedStatesStateDropdownOption = ({
 export const generateTaxClearanceCertificateData = (
   overrides: Partial<TaxClearanceCertificateData>,
 ): TaxClearanceCertificateData => {
+  const taxId = randomInt(12).toString();
   return {
     requestingAgencyId: randomElementFromArray(taxClearanceCertificateAgencies).id,
     businessName: `some-business-name-${randomInt()}`,
@@ -412,10 +419,10 @@ export const generateTaxClearanceCertificateData = (
     addressCity: `some-city-${randomInt()}`,
     addressState: generateUnitedStatesStateDropdownOption({}),
     addressZipCode: randomInt(5).toString(),
-    taxId: `${randomInt(12)}`,
-    encryptedTaxId: undefined,
-    taxPin: randomInt(4).toString(),
-    encryptedTaxPin: undefined,
+    taxId: maskingCharacter.repeat(7) + taxId.slice(-5),
+    encryptedTaxId: `encrypted-${taxId}`,
+    taxPin: maskingCharacter.repeat(4),
+    encryptedTaxPin: `encrypted-${randomInt(4)}`,
     ...overrides,
   };
 };

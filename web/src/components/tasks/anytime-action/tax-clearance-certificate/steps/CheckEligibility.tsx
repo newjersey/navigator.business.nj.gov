@@ -10,11 +10,16 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileField } from "@/components/profile/ProfileField";
+import {
+  getInitialTaxId,
+  getInitialTaxPin,
+} from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { StateAgencyDropdown } from "@/components/tasks/anytime-action/tax-clearance-certificate/StateAgencyDropdown";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormEvent, ReactElement } from "react";
 
 interface Props {
@@ -55,6 +60,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
     setIsValidState(!doesFieldHaveError("addressState"));
     setIsValidZipCode(!doesFieldHaveError("addressZipCode"));
   };
+  const { business } = useUserData();
 
   const handleSaveButtonClick = (): void => {
     props.onSave();
@@ -91,12 +97,22 @@ export const CheckEligibility = (props: Props): ReactElement => {
         </div>
         <div className="margin-y-2">
           <ProfileField fieldName="taxId" hideLine fullWidth>
-            <TaxId inputWidth="full" preventRefreshWhenUnmounted required />
+            <TaxId
+              dbBusinessTaxId={getInitialTaxId(business)}
+              inputWidth="full"
+              preventRefreshWhenUnmounted
+              required
+            />
           </ProfileField>
         </div>
         <div>
           <ProfileField fieldName="taxPin" hideLine fullWidth>
-            <TaxPin inputWidth="full" preventRefreshWhenUnmounted required />
+            <TaxPin
+              dbBusinessTaxPin={getInitialTaxPin(business)}
+              inputWidth="full"
+              preventRefreshWhenUnmounted
+              required
+            />
           </ProfileField>
         </div>
       </div>

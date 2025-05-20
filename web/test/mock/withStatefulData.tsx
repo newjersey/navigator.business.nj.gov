@@ -6,6 +6,7 @@ import { UpdateQueue } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { isUserData } from "@/lib/utils/helpers";
 import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers/helpers-utilities";
+import { mockEncryptFields } from "@/test/mock/mockEncryptFields";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { createContext, ReactElement, ReactNode, useEffect, useState } from "react";
@@ -50,6 +51,10 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
       newData: GenericData | undefined,
       config?: { local?: boolean },
     ): Promise<void> => {
+      if (!config?.local && isUserData(genericData as UserData | ProfileData)) {
+        newData = mockEncryptFields(newData as UserData);
+      }
+
       spy(newData, config);
       setGenericData(newData);
       return Promise.resolve();

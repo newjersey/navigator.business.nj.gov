@@ -1,4 +1,4 @@
-import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { TaxId, Props as TaxIdProps } from "@/components/data-fields/tax-id/TaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
@@ -35,13 +35,15 @@ const setLargeScreen = (value: boolean): void => {
   });
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const renderComponent = (profileData: ProfileData, fieldProps?: any): void => {
+const renderComponent = (profileData: ProfileData, fieldProps?: Partial<TaxIdProps>): void => {
   const business = generateBusiness({ profileData });
   render(
     <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
       <WithStatefulProfileData initialData={profileData}>
-        <TaxId {...fieldProps} />
+        <TaxId
+          dbBusinessTaxId={fieldProps ? fieldProps.dbBusinessTaxId : profileData.taxId}
+          {...fieldProps}
+        />
       </WithStatefulProfileData>
     </WithStatefulUserData>,
   );
@@ -148,6 +150,18 @@ describe("<TaxId />", () => {
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
+      expect(screen.getByLabelText("Tax id")).toBeDisabled();
+    });
+
+    it("defaults to disabled if the database tax id is masked, even if profileData tax id is unmasked", () => {
+      renderComponent(
+        {
+          ...profileData,
+          taxId: "123456789000",
+          encryptedTaxId: "some-encrypted-value",
+        },
+        { dbBusinessTaxId: "********9000" },
+      );
       expect(screen.getByLabelText("Tax id")).toBeDisabled();
     });
 
@@ -367,6 +381,18 @@ describe("<TaxId />", () => {
       });
       expect(screen.getByLabelText("Tax id")).toBeDisabled();
       expect(screen.getByLabelText("Tax id location")).toBeDisabled();
+    });
+
+    it("defaults to disabled if the database tax id is masked, even if profileData tax id is unmasked", () => {
+      renderComponent(
+        {
+          ...profileData,
+          taxId: "123456789",
+          encryptedTaxId: "some-encrypted-value",
+        },
+        { dbBusinessTaxId: "*****6789" },
+      );
+      expect(screen.getByLabelText("Tax id")).toBeDisabled();
     });
 
     it("decrypts the tax id if tax id is a masked value", async () => {
