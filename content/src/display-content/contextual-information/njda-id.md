@@ -6,4 +6,4 @@ header: NJDA ID
 id: njda-id
 displayname: njda-id
 ---
-An NJDA ID is a unique identification number issued by the New Jersey Department of Agriculture. If you register for a NJDA license or permit, you’ll get an NJDA ID as part of that process. You may need this number to renew your licenses.
+An NJDA ID is a unique identification number issued by the New Jersey Department of Agriculture. They will assign you one when you register for an NJDA license. You will need this, along with a PIN number, to renew your licenses and access your NJDA account online.
