@@ -11,13 +11,17 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { scrollToTop } from "@/lib/utils/helpers";
-import { LookupTaxClearanceCertificateAgenciesById } from "@businessnjgovnavigator/shared";
+import {
+  LookupTaxClearanceCertificateAgenciesById,
+  TaxClearanceCertificateResponseErrorType,
+} from "@businessnjgovnavigator/shared";
 import { convertSignedByteArrayToUnsigned } from "@businessnjgovnavigator/shared/intHelpers";
 import { ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
+  setResponseErrorType: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;
 }
 export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -49,7 +53,10 @@ export const Review = (props: Props): ReactElement => {
   const handleButtonClick = async (): Promise<void> => {
     if (!userData) return;
     const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
-    if (taxClearanceResponse.certificatePdfArray) {
+
+    if (taxClearanceResponse.error) {
+      props.setResponseErrorType(taxClearanceResponse.error.type);
+    } else if (taxClearanceResponse.certificatePdfArray) {
       const blob = new Blob(
         [
           new Uint8Array(
@@ -61,11 +68,9 @@ export const Review = (props: Props): ReactElement => {
         },
       );
       props.setCertificatePdfBlob(blob);
+      props.setResponseErrorType(undefined);
     }
 
-    // TODO: Error Response will be addressed in a separate ticket
-    // Note: if there is a server error, we may return a 500 status code, or
-    // return the error object with type = NATURAL_PROGRAM_ERROR
     scrollToTop();
   };
 

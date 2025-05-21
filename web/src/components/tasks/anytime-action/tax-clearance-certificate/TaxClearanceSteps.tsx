@@ -9,6 +9,7 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { StepperStep } from "@/lib/types/types";
+import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 import { FormEvent, ReactElement, useContext, useState } from "react";
 
@@ -30,6 +31,9 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     props.certificatePdfBlob || undefined,
   );
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const [responseErrorType, setResponseErrorType] = useState<
+    TaxClearanceCertificateResponseErrorType | undefined
+  >(undefined);
 
   const onStepClick = (step: number): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
@@ -74,7 +78,11 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     },
     {
       component: (
-        <Review setStepIndex={setStepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />
+        <Review
+          setStepIndex={setStepIndex}
+          setCertificatePdfBlob={setCertificatePdfBlob}
+          setResponseErrorType={setResponseErrorType}
+        />
       ),
     },
   ];
@@ -93,7 +101,10 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
             currentStep={stepIndex}
             onStepClicked={onStepClick}
           />
-          <AnytimeActionTaxClearanceCertificateAlert fieldErrors={props.getInvalidFieldIds()} />
+          <AnytimeActionTaxClearanceCertificateAlert
+            fieldErrors={props.getInvalidFieldIds()}
+            responseErrorType={responseErrorType}
+          />
           {stepsComponents[stepIndex].component}
         </>
       )}
