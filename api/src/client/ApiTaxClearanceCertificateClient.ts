@@ -140,6 +140,10 @@ export const ApiTaxClearanceCertificateClient = (
             };
           }
         }
+        logWriter.LogError(
+          `Tax Clearance Certificate Client - Id:${logId} - Unexpected Error Response`,
+          error,
+        );
         throw error.response?.status;
       });
   };

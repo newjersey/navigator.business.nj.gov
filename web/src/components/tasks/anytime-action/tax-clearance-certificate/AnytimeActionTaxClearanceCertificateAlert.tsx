@@ -2,10 +2,12 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
+import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {
   fieldErrors: string[];
+  responseErrorType?: TaxClearanceCertificateResponseErrorType;
 }
 
 export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactElement | null => {
@@ -48,23 +50,32 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
     );
   };
 
-  const hasErrors = props.fieldErrors.length > 0;
+  const hasErrors = props.fieldErrors.length > 0 || props.responseErrorType !== undefined;
 
   return hasErrors ? (
     <Alert variant="error" dataTestid={"tax-clearance-error-alert"}>
-      <div>
-        <span className="text-bold">{Config.taxClearanceCertificateShared.preHeaderErrorText}</span>{" "}
-        {fieldErrors.length === 1
-          ? Config.taxClearanceCertificateShared.singularErrorText
-          : Config.taxClearanceCertificateShared.pluralErrorText}
-      </div>
-      <ul>
-        {fieldErrors.map((id) => (
-          <li key={`${id}`} id={`label-${id}`}>
-            <a href={`#question-${id}`}>{getLabel(id)}</a>
-          </li>
-        ))}
-      </ul>
+      {props.fieldErrors.length > 0 && (
+        <>
+          <div>
+            <span className="text-bold">
+              {Config.taxClearanceCertificateShared.preHeaderErrorText}
+            </span>{" "}
+            {fieldErrors.length === 1
+              ? Config.taxClearanceCertificateShared.singularErrorText
+              : Config.taxClearanceCertificateShared.pluralErrorText}
+          </div>
+          <ul>
+            {fieldErrors.map((id) => (
+              <li key={`${id}`} id={`label-${id}`}>
+                <a href={`#question-${id}`}>{getLabel(id)}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {props.responseErrorType !== undefined && (
+        <div>{Config.taxClearanceCertificateStep3.genericTaxClearanceErrorText}</div>
+      )}
     </Alert>
   ) : (
     <></>

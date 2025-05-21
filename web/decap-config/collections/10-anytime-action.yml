@@ -245,6 +245,12 @@ collections:
             widget: object
             fields:
               - {
+                  label: "Generic Taxation API Error Text",
+                  name: "genericTaxClearanceErrorText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
                   label: "Main Title Header",
                   name: "mainTitleHeader",
                   widget: "string",
