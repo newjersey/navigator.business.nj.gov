@@ -454,6 +454,7 @@ export const generateWasteQuestionnaireData = (
   overrides: Partial<WasteQuestionnaireData>,
 ): WasteQuestionnaireData => {
   return {
+    transportWaste: false,
     hazardousMedicalWaste: false,
     constructionDebris: false,
     compostWaste: false,

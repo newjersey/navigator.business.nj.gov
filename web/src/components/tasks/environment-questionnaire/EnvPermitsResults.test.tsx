@@ -80,6 +80,7 @@ describe("<EnvPermitsResults />", () => {
           environmentData: generateEnvironmentData({
             waste: {
               questionnaireData: generateWasteQuestionnaireData({
+                transportWaste: true,
                 hazardousMedicalWaste: true,
                 compostWaste: true,
               }),
@@ -88,6 +89,9 @@ describe("<EnvPermitsResults />", () => {
           }),
         }),
       );
+      expect(
+        screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.transportWaste),
+      ).toBeInTheDocument();
       expect(
         screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste),
       ).toBeInTheDocument();
