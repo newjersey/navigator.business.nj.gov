@@ -1,6 +1,6 @@
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { CarServiceType } from "@businessnjgovnavigator/shared/profileData";
+import { CarServiceType, ConstructionType } from "@businessnjgovnavigator/shared/profileData";
 
 export interface LighthouseThresholds {
   accessibility: number;
@@ -43,6 +43,7 @@ export interface StartingOnboardingData {
   isChildcareForSixOrMore: boolean | undefined;
   willSellPetCareItems: boolean | undefined;
   petCareHousing: boolean | undefined;
+  isConstruction: ConstructionType | undefined;
 }
 
 export interface ExistingOnboardingData {

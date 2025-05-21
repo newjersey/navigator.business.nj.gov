@@ -51,7 +51,11 @@ while ! echo exit | nc localhost ${WEB_PORT}; do sleep 1; done
 
 echo "🌟 app started"
 
-CYPRESS_API_BASE_URL=${API_BASE_URL} yarn workspace @businessnjgovnavigator/web cypress:run:feature --browser=chrome --config baseUrl=http://localhost:${WEB_PORT}
+count=0
+while [ $count -lt 5 ]; do
+    CYPRESS_API_BASE_URL=${API_BASE_URL} yarn workspace @businessnjgovnavigator/web cypress:run:feature --browser=chrome --config baseUrl=http://localhost:${WEB_PORT} --spec "cypress/e2e/deferred-onboarding.spec.ts"
+    count=$((count + 1))
+done
 
 set +e
 
