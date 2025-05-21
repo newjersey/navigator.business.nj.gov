@@ -237,8 +237,10 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
 
 const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
   orgUrl:
-    process.env.TAX_CLEARANCE_CERTIFICATE_URL ||
-    `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`,
+    process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
+      ? "http://localhost:9000"
+      : process.env.TAX_CLEARANCE_CERTIFICATE_URL ||
+        `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`,
   userName: process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "",
   password: process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "",
 });
