@@ -9,7 +9,10 @@ import {
 import { getIndustries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 import { randomInt } from "@businessnjgovnavigator/shared/lib/shared/src/intHelpers";
 import { carServiceOptions } from "@businessnjgovnavigator/shared/lib/shared/src/profileData";
-import { arrayOfSectors, LookupSectorTypeById } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
+import {
+  arrayOfSectors,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared/lib/shared/src/sector";
 
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
@@ -65,13 +68,15 @@ export const completeNewBusinessOnboarding = ({
   }
 
   if (providesStaffingService === undefined) {
-    providesStaffingService = industry.industryOnboardingQuestions.isProvidesStaffingServicesApplicable
+    providesStaffingService = industry.industryOnboardingQuestions
+      .isProvidesStaffingServicesApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
   }
 
   if (certifiedInteriorDesigner === undefined) {
-    certifiedInteriorDesigner = industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable
+    certifiedInteriorDesigner = industry.industryOnboardingQuestions
+      .isCertifiedInteriorDesignerApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
   }
@@ -151,7 +156,9 @@ export const completeNewBusinessOnboarding = ({
   } else {
     onOnboardingPage.selectRealEstateAppraisal(realEstateAppraisalManagement);
     onOnboardingPage.getRealEstateAppraisal(realEstateAppraisalManagement).should("be.checked");
-    onOnboardingPage.getRealEstateAppraisal(!realEstateAppraisalManagement).should("not.be.checked");
+    onOnboardingPage
+      .getRealEstateAppraisal(!realEstateAppraisalManagement)
+      .should("not.be.checked");
   }
 
   if (interstateLogistics === undefined) {
@@ -257,7 +264,9 @@ export const completeForeignBusinessOnboarding = ({
 export const completeForeignNexusBusinessOnboarding = ({
   industry = undefined,
   locationInNewJersey = false,
-}: Partial<ForeignOnboardingData> & Partial<StartingOnboardingData> & Partial<Registration>): void => {
+}: Partial<ForeignOnboardingData> &
+  Partial<StartingOnboardingData> &
+  Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
