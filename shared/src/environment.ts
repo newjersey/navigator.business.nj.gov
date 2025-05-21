@@ -18,6 +18,7 @@ export type WasteData = {
 };
 
 export type WasteQuestionnaireFieldIds =
+  | "transportWaste"
   | "hazardousMedicalWaste"
   | "compostWaste"
   | "treatProcessWaste"

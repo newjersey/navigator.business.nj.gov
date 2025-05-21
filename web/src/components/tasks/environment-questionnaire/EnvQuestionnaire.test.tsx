@@ -92,6 +92,7 @@ describe("<EnvQuestionnaire />", () => {
           environmentData: generateEnvironmentData({
             waste: generateWasteData({
               questionnaireData: {
+                transportWaste: false,
                 hazardousMedicalWaste: false,
                 constructionDebris: false,
                 compostWaste: false,

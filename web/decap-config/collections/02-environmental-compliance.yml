@@ -41,6 +41,7 @@ collections:
                     collapsed: true
                     widget: object
                     fields:
+                      - { label: Transport Waste Option, name: transportWaste, widget: text }
                       - {
                           label: Hazardous Medical Waste Option,
                           name: hazardousMedicalWaste,
