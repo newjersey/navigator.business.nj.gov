@@ -1,9 +1,7 @@
 import {
   CarServiceType,
-  ConstructionType,
   LookupIndustryById,
   LookupSectorTypeById,
-  ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared/";
 import { random } from "lodash";
 
@@ -58,20 +56,6 @@ export class OnboardingPage {
     return cy.get(
       `input[name="interstate-moving"]${radio === undefined ? "" : `[value="${radio}"]`}`,
     );
-  }
-  ////
-  getConstruction(radio?: ConstructionType) {
-    return cy.get(
-      `input[name="construction-type"]${radio === undefined ? "" : `[value="${radio}"]`}`,
-    );
-  }
-
-  getResidentialConstructionTypeItemsRadio(value?: ResidentialConstructionType) {
-    return cy.get(`input[name="residential-construction-type"]${`[value="${value}"]`}`);
-  }
-
-  selectResidentialConstructionTypeRadio(value: ResidentialConstructionType) {
-    this.getResidentialConstructionTypeItemsRadio(value).check();
   }
 
   getCarService(radio?: CarServiceType) {
@@ -203,10 +187,6 @@ export class OnboardingPage {
 
   selectCarService(radio: CarServiceType) {
     this.getCarService(radio).check();
-  }
-
-  selectConstructionType(radio: ConstructionType) {
-    this.getConstruction(radio).check();
   }
 
   selectIndustry(industry: string) {

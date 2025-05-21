@@ -86,12 +86,8 @@ export class ProfilePage extends OnboardingPage {
     this.getHomeBased(radio).check();
   }
 
-  getPermitsTab() {
-    return cy.get('[data-testid="permits"');
-  }
-
   getHomeBased(radio?: boolean) {
-    this.getPermitsTab().click({ force: true });
+    cy.get('[data-testid="permits"').click({ force: true });
     return cy.get(
       `input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`,
     );

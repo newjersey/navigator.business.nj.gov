@@ -17,16 +17,9 @@ export const industriesNotHomeBasedOrLiquorLicense = getIndustries().filter((ind
 export const randomHomeBasedIndustry = (): Industry => {
   return randomElementFromArray(homeBasedIndustries.filter((x) => x.isEnabled) as Industry[]);
 };
-
 export const randomNonHomeBasedIndustry = (): Industry => {
   return randomElementFromArray(
     industriesNotHomeBasedOrLiquorLicense.filter((x) => x.isEnabled) as Industry[],
-  );
-};
-
-export const randomHomeBasedNonDomesticEmployerIndustry = (): Industry => {
-  return randomElementFromArray(
-    homeBasedIndustries.filter((x) => x.isEnabled && x.name !== "Domestic Employer") as Industry[],
   );
 };
 

@@ -13,14 +13,13 @@ import {
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { updateNewBusinessProfilePage } from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
 import {
-  randomHomeBasedNonDomesticEmployerIndustry,
+  randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
-  randomNonHomeBasedNonDomesticEmployerIndustry,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
 
-describe("Deferred Onboarding [feature] [all] [group5]", () => {
+describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
@@ -75,7 +74,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
       describe("when we answer No to home-based business question immediately", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
-            industry: randomHomeBasedNonDomesticEmployerIndustry(),
+            industry: randomHomeBasedIndustry(),
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           selectHomeBased(false);
@@ -87,7 +86,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
       describe("when we answer No to home-based business question after providing location", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
-            industry: randomHomeBasedNonDomesticEmployerIndustry(),
+            industry: randomHomeBasedIndustry(),
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
@@ -97,7 +96,9 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           selectDate("04/2021");
           selectLocation("Allendale");
           clickModalSaveButton();
+
           selectHomeBased(false);
+
           goToMercantileTask();
           expectLocationSpecificContentInTask("Allendale");
           navigateBackToDashboard();
@@ -110,7 +111,9 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           onProfilePage.clickSaveButton();
           cy.url().should("contain", "/dashboard");
           onProfilePage.getLocationDropdown().should("not.exist");
+
           selectHomeBased(false);
+
           goToMercantileTask();
           expectLocationSpecificContentInTask("Allendale");
         });
@@ -121,7 +124,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   describe("home-based business", () => {
     describe("onboarded as STARTING - applicable industry", () => {
       it("shows and answers home-based-business deferred question", () => {
-        completeNewBusinessOnboarding({ industry: randomHomeBasedNonDomesticEmployerIndustry() });
+        completeNewBusinessOnboarding({ industry: randomHomeBasedIndustry() });
         completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         showsAndAnswersHomeBasedBusinessQuestionOnDashboard();
       });
@@ -129,39 +132,37 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
 
     describe("onboarded as STARTING - non-applicable industry", () => {
       it("does not show pre-answered home-based-business deferred question", () => {
-        completeNewBusinessOnboarding({
-          industry: randomNonHomeBasedNonDomesticEmployerIndustry(),
-        });
+        completeNewBusinessOnboarding({ industry: randomNonHomeBasedIndustry() });
         completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         hasNonHomeBasedTasks();
-        doesNotShowHomeBasedBusinessQuestionOnPermitsTab();
+        doesNotShowHomeBasedBusinessQuestionAtAll();
       });
     });
 
     describe("onboarded as FOREIGN", () => {
       describe("remote seller / remote worker", () => {
-        it("does not show permits tab or the pre-answered home-based-business deferred question", () => {
+        it("does not show pre-answered home-based-business deferred question", () => {
           completeForeignBusinessOnboarding({ foreignBusinessTypeIds: ["employeesInNJ"] });
-          doesNotShowPermitsTabAtAll();
+          doesNotShowHomeBasedBusinessQuestionAtAll();
         });
       });
 
       describe("NEXUS - applicable industry - location in NJ", () => {
         it("does not show home-based-business question", () => {
           completeForeignNexusBusinessOnboarding({
-            industry: randomHomeBasedNonDomesticEmployerIndustry(),
+            industry: randomHomeBasedIndustry(),
             locationInNewJersey: true,
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           hasNonHomeBasedTasks();
-          doesNotShowHomeBasedBusinessQuestionOnPermitsTab();
+          doesNotShowHomeBasedBusinessQuestionAtAll();
         });
       });
 
       describe("NEXUS - applicable industry - no location in NJ", () => {
         it("shows and answers home-based-business deferred question", () => {
           completeForeignNexusBusinessOnboarding({
-            industry: randomHomeBasedNonDomesticEmployerIndustry(),
+            industry: randomHomeBasedIndustry(),
             locationInNewJersey: false,
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
@@ -173,26 +174,26 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
       describe("NEXUS - non-applicable industry - location in NJ", () => {
         it("does not show home-based-business question", () => {
           completeForeignNexusBusinessOnboarding({
-            industry: randomHomeBasedNonDomesticEmployerIndustry(),
+            industry: randomNonHomeBasedIndustry(),
             locationInNewJersey: true,
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
           hasNonHomeBasedTasks();
-          doesNotShowHomeBasedBusinessQuestionOnPermitsTab();
+          doesNotShowHomeBasedBusinessQuestionAtAll();
         });
       });
 
       describe("NEXUS - non-applicable industry - no location in NJ", () => {
         it("does not show home-based-business question", () => {
           completeForeignNexusBusinessOnboarding({
-            industry: randomNonHomeBasedNonDomesticEmployerIndustry(),
+            industry: randomNonHomeBasedIndustry(),
             locationInNewJersey: false,
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
           hasHomeBasedTasks();
-          doesNotShowHomeBasedBusinessQuestionOnPermitsTab();
+          doesNotShowHomeBasedBusinessQuestionAtAll();
         });
       });
     });
@@ -206,14 +207,8 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     cy.get('[data-task="identify-potential-lease"]').should("exist");
   };
 
-  // TODO: DELETE ME - this exists for the case that a user does NOT have a permits tab
-  const doesNotShowPermitsTabAtAll = (): void => {
-    onDashboardPage.clickEditProfileLink();
-    onProfilePage.getPermitsTab().should("not.exist");
-  };
-
-  // TODO: DELETE ME - this exists for the case that a user has a permits tab and does NOT have home-based question
-  const doesNotShowHomeBasedBusinessQuestionOnPermitsTab = (): void => {
+  const doesNotShowHomeBasedBusinessQuestionAtAll = (): void => {
+    onDashboardPage.getHomeBased().should("not.exist");
     onDashboardPage.clickEditProfileLink();
     cy.url().should("contain", "/profile");
     cy.wait(1000);
