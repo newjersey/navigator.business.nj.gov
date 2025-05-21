@@ -44,18 +44,23 @@ webflowType: business-license
 * Previous owner’s NJDA ID, if known
 * Weekly average quarts of milk sold by the previous owner in the past 2 months, if known
 
-You can [apply for your license online](https://www-agr.state.nj.us/agriculture/AG_NJFARMS/welcome.html) or [by mail](https://www.nj.gov/agriculture/pdf/storemilklic.pdf). You will also need to pay all applicable fees.
+You can [apply for your license online](https://www-agr.state.nj.us/agriculture/AG_NJFARMS/welcome.html) or [by mail](https://www.nj.gov/agriculture/pdf/storemilklic.pdf). You will also need to pay all applicable fees based on whether you’re opening a new store or taking over an existing one.
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If you sell milk or milk products without a license, your products may be seized. You may also be subject to fines.
+You need to renew your license every year. NJDA will mail you a renewal form approximately 6-8 weeks before your current license expires.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-* A store milk license mailed to you, which must be displayed at your store
-* A 9-digit NJDA ID number and 7-digit PIN number, which you need to renew your license every year
+If you sell milk or milk products without a license, you may be subject to violation fees and a cease and desist order to stop operations.
 
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+* A printable store milk license
+* A 9-digit NJDA ID number and 7-digit PIN number (this will also be on your license renewal form)
 
 :::
