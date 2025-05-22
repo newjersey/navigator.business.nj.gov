@@ -1,7 +1,4 @@
-import {
-  TaxClearanceCertificateResponse,
-  TaxClearanceCertificateResponseErrorType,
-} from "@businessnjgovnavigator/shared";
+import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
 import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
@@ -147,7 +144,7 @@ export const ApiTaxClearanceCertificateClient = (
         if (response?.status === StatusCodes.INTERNAL_SERVER_ERROR || !response) {
           return {
             error: {
-              type: "GENERIC_ERROR" as TaxClearanceCertificateResponseErrorType,
+              type: "GENERIC_ERROR",
               message: GENERIC_ERROR,
             },
           };
