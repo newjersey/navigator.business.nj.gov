@@ -1,6 +1,7 @@
 import {
   ApiTaxClearanceCertificateClient,
   FAILED_TAX_ID_AND_PIN_VALIDATION,
+  GENERIC_ERROR,
   INELIGIBLE_TAX_CLEARANCE_FORM,
   MISSING_FIELD,
   NATURAL_PROGRAM_ERROR,
@@ -173,16 +174,6 @@ describe("TaxClearanceCertificateClient", () => {
     spyOnLogError.mockRestore();
   });
 
-  it("throws error when error response is unknown", async () => {
-    const userData = generateUserData({});
-    mockAxios.post.mockRejectedValue({
-      response: { status: StatusCodes.INTERNAL_SERVER_ERROR },
-    });
-    await expect(
-      client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
-    ).rejects.toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
-  });
-
   it("returns INELIGIBLE_TAX_CLEARANCE_FORM error", async () => {
     const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
@@ -269,6 +260,36 @@ describe("TaxClearanceCertificateClient", () => {
       error: {
         message: TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
         type: "MISSING_FIELD",
+      },
+    });
+  });
+
+  it("returns GENERIC_ERROR for 500 status code", async () => {
+    const userData = generateUserData({});
+    mockAxios.post.mockRejectedValue({
+      response: { status: StatusCodes.INTERNAL_SERVER_ERROR },
+    });
+    expect(
+      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+    ).toEqual({
+      error: {
+        type: "GENERIC_ERROR",
+        message: GENERIC_ERROR,
+      },
+    });
+  });
+
+  it("returns GENERIC_ERROR for unknown errors", async () => {
+    const userData = generateUserData({});
+    mockAxios.post.mockRejectedValue({
+      response: undefined,
+    });
+    expect(
+      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+    ).toEqual({
+      error: {
+        type: "GENERIC_ERROR",
+        message: GENERIC_ERROR,
       },
     });
   });

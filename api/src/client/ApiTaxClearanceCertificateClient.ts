@@ -22,6 +22,7 @@ export const FAILED_TAX_ID_AND_PIN_VALIDATION =
 export const MISSING_FIELD =
   "Mandatory Field Missing. TaxpayerId, TaxpayerName, AddressLine1, City, State, Zip, Agency name, Rep Id and RepName are required.";
 export const NATURAL_PROGRAM_ERROR = "Error calling Natural Program. Please try again later.";
+export const GENERIC_ERROR = "Something went wrong. Try again later.";
 
 export const ApiTaxClearanceCertificateClient = (
   logWriter: LogWriterType,
@@ -139,6 +140,14 @@ export const ApiTaxClearanceCertificateClient = (
               },
             };
           }
+        }
+        if (response?.status === StatusCodes.INTERNAL_SERVER_ERROR || !response) {
+          return {
+            error: {
+              type: "GENERIC_ERROR",
+              message: GENERIC_ERROR,
+            },
+          };
         }
         logWriter.LogError(
           `Tax Clearance Certificate Client - Id:${logId} - Unexpected Error Response`,

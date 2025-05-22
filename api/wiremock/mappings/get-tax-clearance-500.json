@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/TYTR_ACE_App/ProcessCertificate/businessClearance",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.taxpayerId == '500500500500')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
