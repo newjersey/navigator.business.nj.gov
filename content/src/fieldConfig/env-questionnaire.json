@@ -11,6 +11,7 @@
       "mediaAreaText": "waste",
       "mediaAreaLink": "[NJDEP’s page on Sustainable Waste Management](https://www.nj.gov/dep/dshw/)",
       "questionnaireOptions": {
+        "transportWaste": "My business will transport waste.",
         "hazardousMedicalWaste": "My business will generate `hazardous waste|hazardous-waste` or `medical waste|medical-waste`.",
         "compostWaste": "My business will `compost waste|compost-waste` on site.",
         "treatProcessWaste": "My business will treat or process waste.",
