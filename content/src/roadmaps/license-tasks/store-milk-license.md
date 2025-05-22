@@ -61,6 +61,6 @@ If you sell milk or milk products without a license, you may be subject to viola
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * A printable store milk license
-* A 9-digit NJDA ID number and 7-digit PIN number (this will also be on your license renewal form; the PIN number will change every renewal)
+* A 9-digit NJDA ID number and 7-digit PIN number (this will also be on your license renewal form)
 
 :::
