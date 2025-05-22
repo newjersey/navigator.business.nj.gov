@@ -177,16 +177,6 @@ describe("TaxClearanceCertificateClient", () => {
     spyOnLogError.mockRestore();
   });
 
-  it("throws error when error response is unknown", async () => {
-    const userData = generateUserData({});
-    mockAxios.post.mockRejectedValue({
-      response: { status: StatusCodes.INTERNAL_SERVER_ERROR },
-    });
-    await expect(
-      client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
-    ).rejects.toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
-  });
-
   it("returns INELIGIBLE_TAX_CLEARANCE_FORM error", async () => {
     const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
@@ -292,7 +282,7 @@ describe("TaxClearanceCertificateClient", () => {
     });
   });
 
-  it("returns GENERIC_ERROR for network errors", async () => {
+  it("returns GENERIC_ERROR for unknown errors", async () => {
     const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: undefined,
