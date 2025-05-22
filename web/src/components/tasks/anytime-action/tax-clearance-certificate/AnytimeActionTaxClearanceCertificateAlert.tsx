@@ -52,6 +52,28 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
 
   const hasErrors = props.fieldErrors.length > 0 || props.responseErrorType !== undefined;
 
+  const getTaxClearanceErrorMessage = (
+    errorType: TaxClearanceCertificateResponseErrorType,
+  ): string => {
+    if (errorType === "INELIGIBLE_TAX_CLEARANCE_FORM") {
+      return Config.taxClearanceCertificateStep3.errorTextGeneric;
+    }
+
+    if (errorType === "FAILED_TAX_ID_AND_PIN_VALIDATION") {
+      return Config.taxClearanceCertificateStep3.errorTextValidation;
+    }
+
+    if (
+      errorType === "MISSING_FIELD" ||
+      errorType === "TAX_ID_MISSING_FIELD" ||
+      errorType === "TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE"
+    ) {
+      return Config.taxClearanceCertificateStep3.errorTextMissingField;
+    }
+
+    return Config.taxClearanceCertificateStep3.errorTextSystem;
+  };
+
   return hasErrors ? (
     <Alert variant="error" dataTestid={"tax-clearance-error-alert"}>
       {props.fieldErrors.length > 0 && (
@@ -74,7 +96,7 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
         </>
       )}
       {props.responseErrorType !== undefined && (
-        <div>{Config.taxClearanceCertificateStep3.genericTaxClearanceErrorText}</div>
+        <div>{getTaxClearanceErrorMessage(props.responseErrorType)}</div>
       )}
     </Alert>
   ) : (
