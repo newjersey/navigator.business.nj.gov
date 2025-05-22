@@ -30,7 +30,7 @@ webflowType: business-license
 * Business name 
 * Business address
 * Social Security number or `Employer Identification Number (EIN)|ein` (FEIN on the form)
-* `Type of ownership|type-of-ownership` (Cooperative, Corporation, Partnership, or Sole Proprietorship)
+* Type of ownership (Cooperative, Corporation, Partnership, or Sole Proprietorship)
 * Names, titles, and addresses of all officers and directors, if a corporation
 * Franchisee’s name, if applicable
 * Trade name, if applicable
