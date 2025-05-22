@@ -10,6 +10,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import {
   LookupTaxClearanceCertificateAgenciesById,
@@ -50,13 +51,15 @@ export const Review = (props: Props): ReactElement => {
     });
   }
 
-  const handleButtonClick = async (): Promise<void> => {
+  const handleSaveButtonClick = async (): Promise<void> => {
     if (!userData) return;
     const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
 
     if (taxClearanceResponse.error) {
+      analytics.event.tax_clearance.submit.validation_error();
       props.setResponseErrorType(taxClearanceResponse.error.type);
     } else if (taxClearanceResponse.certificatePdfArray) {
+      analytics.event.tax_clearance.appears.validation_success();
       const blob = new Blob(
         [
           new Uint8Array(
@@ -72,6 +75,11 @@ export const Review = (props: Props): ReactElement => {
     }
 
     scrollToTop();
+  };
+
+  const handleBackButtonClick = (): void => {
+    analytics.event.tax_clearance.click.switch_to_step_two();
+    props.setStepIndex(1);
   };
 
   return (
@@ -127,7 +135,7 @@ export const Review = (props: Props): ReactElement => {
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <SecondaryButton
                 isColor="primary"
-                onClick={() => props.setStepIndex(1)}
+                onClick={handleBackButtonClick}
                 dataTestId="previous-button"
               >
                 {Config.taxClearanceCertificateShared.backButtonText}
@@ -135,7 +143,7 @@ export const Review = (props: Props): ReactElement => {
             </div>
             <PrimaryButton
               isColor="primary"
-              onClick={handleButtonClick}
+              onClick={handleSaveButtonClick}
               isRightMarginRemoved={true}
               dataTestId="next-button"
             >
