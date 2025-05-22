@@ -236,7 +236,8 @@
     "Faraz",
     "FINRA",
     "NJDOBI",
-    "reauthorizations"
+    "reauthorizations",
+    "NJDA"
   ],
   "ignorePaths": [
     "node_modules/**",
