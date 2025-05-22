@@ -7,6 +7,7 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -21,6 +22,7 @@ export const Requirements = (props: Props): ReactElement => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setShowNeedsAccountModal(true);
     } else {
+      analytics.event.tax_clearance.click.switch_to_step_two();
       props.setStepIndex(1);
     }
   };
