@@ -194,6 +194,11 @@
       "id": "insurance-producer",
       "questionText": "Will you sell, solicit, or negotiate insurance products?",
       "addOn": "produce-insurance"
+    },
+    {
+      "id": "sell-milk-question",
+      "questionText": "Will you sell milk or other milk products, such as yogurt or cream?",
+      "addOn": "sell-milk"
     }
   ]
 }
