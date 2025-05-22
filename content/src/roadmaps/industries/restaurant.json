@@ -44,7 +44,7 @@
     },
     {
       "step": 4,
-      "weight": 100,
+      "weight": 15,
       "task": "floor-plan-approval-doh",
       "required": true
     },
@@ -60,7 +60,8 @@
     "business-vehicle-title-reg",
     "inspect-boiler",
     "inspect-pv",
-    "inspect-fridge"
+    "inspect-fridge",
+    "sell-milk-question"
   ],
   "displayname": "restaurant",
   "industryOnboardingQuestions": {
