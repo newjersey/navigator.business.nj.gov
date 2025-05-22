@@ -10,10 +10,7 @@ import {
 } from "@client/ApiTaxClearanceCertificateClient";
 import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
-import {
-  LookupTaxClearanceCertificateAgenciesById,
-  TaxClearanceCertificateResponseErrorType,
-} from "@shared/taxClearanceCertificate";
+import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
 import {
   generateBusiness,
   generateTaxClearanceCertificateData,
@@ -276,7 +273,7 @@ describe("TaxClearanceCertificateClient", () => {
       await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
     ).toEqual({
       error: {
-        type: "GENERIC_ERROR" as TaxClearanceCertificateResponseErrorType,
+        type: "GENERIC_ERROR",
         message: GENERIC_ERROR,
       },
     });
@@ -291,7 +288,7 @@ describe("TaxClearanceCertificateClient", () => {
       await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
     ).toEqual({
       error: {
-        type: "GENERIC_ERROR" as TaxClearanceCertificateResponseErrorType,
+        type: "GENERIC_ERROR",
         message: GENERIC_ERROR,
       },
     });
