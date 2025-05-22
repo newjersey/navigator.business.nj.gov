@@ -8,3 +8,4 @@ export const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
 export const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
 export const AWS_CRYPTO_CONTEXT_PURPOSE = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
 export const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
+export const AWS_CRYPTO_TAX_ID_HASHING_KEY = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
