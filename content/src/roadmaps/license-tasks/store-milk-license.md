@@ -4,7 +4,7 @@ notesMd: >-
   https://docs.google.com/document/d/17tTd7hwvhRZQGftkR1P-wEyL-H0BPZa9oSQqgzn9KlI/edit?tab=t.0 
 
 
-  Needs SME review
+  Approved 5/21/25
 licenseName: ""
 id: store-milk-license
 displayname: store-milk-license
