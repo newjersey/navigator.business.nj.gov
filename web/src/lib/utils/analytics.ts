@@ -13,52 +13,58 @@ interface Nothing {}
 type Union<T, U> = T | (U & Nothing);
 
 type EventType =
-  | "contextual_link_clicks"
-  | "outbound_link_clicks"
+  | "account_clicks"
   | "call_to_action_clicks"
-  | "task_manual_status_change"
-  | "scroll_tracking"
-  | "navigator_phase_change"
-  | "graduation_phase_interactions"
-  | "link_clicks"
-  | "tool_tip_mouseover"
+  | "contextual_link_clicks"
+  | "form_edits"
+  | "form_status"
   | "form_submits"
   | "form_validation"
-  | "form_status"
-  | "task_tab_clicks"
-  | "task_tab_clicked"
-  | "form_edits"
-  | "task_tab_continue_button_clicks"
-  | "task_search_interactions"
+  | "graduation_phase_interactions"
+  | "link_clicks"
   | "navigation_clicks"
+  | "navigator_phase_change"
+  | "outbound_link_clicks"
+  | "scroll_tracking"
   | "site_return_callback"
-  | "account_clicks"
+  | "task_manual_status_change"
+  | "task_search_interactions"
+  | "task_tab_clicked"
+  | "task_tab_clicks"
+  | "task_tab_continue_button_clicks"
   | "tax_calendar_arrive_v2"
-  | "tax_calendar_click_v2";
+  | "tax_calendar_click_v2"
+  | "tax_clearance_switch_step"
+  | "tax_clearance_validation_error"
+  | "tax_clearance_validation_success"
+  | "tool_tip_mouseover";
 
 const eventMap: Record<EventType, string> = {
-  contextual_link_clicks: "contextual_link_clicks",
-  outbound_link_clicks: "outbound_link_clicks",
+  account_clicks: "account_clicks",
   call_to_action_clicks: "call_to_action_clicks",
-  task_manual_status_change: "task_manual_status_change",
-  scroll_tracking: "scroll_tracking",
-  navigator_phase_change: "navigator_phase_change",
-  graduation_phase_interactions: "graduation_phase_interactions",
-  link_clicks: "link_clicks",
-  tool_tip_mouseover: "tool_tip_mouseover",
+  contextual_link_clicks: "contextual_link_clicks",
+  form_edits: "form_edits",
+  form_status: "form_status",
   form_submits: "form_submits",
   form_validation: "form_validation",
-  form_status: "form_status",
-  site_return_callback: "site_return_callback",
-  task_tab_clicks: "task_tab_clicks",
-  task_tab_clicked: "task_tab_clicked",
-  form_edits: "form_edits",
-  task_tab_continue_button_clicks: "task_tab_continue_button_clicks",
-  task_search_interactions: "task_search_interactions",
+  graduation_phase_interactions: "graduation_phase_interactions",
+  link_clicks: "link_clicks",
   navigation_clicks: "navigation_clicks",
-  account_clicks: "account_clicks",
+  navigator_phase_change: "navigator_phase_change",
+  outbound_link_clicks: "outbound_link_clicks",
+  scroll_tracking: "scroll_tracking",
+  site_return_callback: "site_return_callback",
+  task_manual_status_change: "task_manual_status_change",
+  task_search_interactions: "task_search_interactions",
+  task_tab_clicked: "task_tab_clicked",
+  task_tab_clicks: "task_tab_clicks",
+  task_tab_continue_button_clicks: "task_tab_continue_button_clicks",
   tax_calendar_arrive_v2: "tax_calendar_arrive_v2",
   tax_calendar_click_v2: "tax_calendar_click_v2",
+  tax_clearance_switch_step: "tax_clearance_switch_step",
+  tax_clearance_validation_error: "tax_clearance_validation_error",
+  tax_clearance_validation_success: "tax_clearance_validation_success",
+  tool_tip_mouseover: "tool_tip_mouseover",
 };
 
 type ParameterType =
@@ -2018,6 +2024,54 @@ export default {
             legacy_event_category: "tax_calendar_v2_cta",
             legacy_event_label: "tax_calendar_click_calendar_v2",
             item: "tax_calendar_v2_cta",
+          });
+        },
+      },
+    },
+    tax_clearance: {
+      click: {
+        switch_to_step_one: () => {
+          eventRunner.track({
+            event: "tax_clearance_switch_step",
+            legacy_event_category: "tax_clearance_anytime_action_switch_to_step_1",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_step_one",
+          });
+        },
+        switch_to_step_two: () => {
+          eventRunner.track({
+            event: "tax_clearance_switch_step",
+            legacy_event_category: "tax_clearance_anytime_action_switch_to_step_2",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_step_two",
+          });
+        },
+        switch_to_step_three: () => {
+          eventRunner.track({
+            event: "tax_clearance_switch_step",
+            legacy_event_category: "tax_clearance_anytime_action_switch_to_step_3",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_step_three",
+          });
+        },
+      },
+      submit: {
+        validation_error: () => {
+          eventRunner.track({
+            event: "tax_clearance_validation_error",
+            legacy_event_category: "tax_clearance_anytime_action_step_3_save_button",
+            legacy_event_action: "submit",
+            legacy_event_label: "remain_on_tax_clearance_error",
+          });
+        },
+      },
+      appears: {
+        validation_success: () => {
+          eventRunner.track({
+            event: "tax_clearance_validation_success",
+            legacy_event_category: "tax_clearance_anytime_action_success_screen",
+            legacy_event_action: "appear",
+            legacy_event_label: "remain_on_tax_clearance_sucess_screen",
           });
         },
       },

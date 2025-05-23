@@ -9,6 +9,7 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { StepperStep } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 import { FormEvent, ReactElement, useContext, useState } from "react";
@@ -35,10 +36,21 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     TaxClearanceCertificateResponseErrorType | undefined
   >(undefined);
 
+  const fireAnalyticsEvent = (step: number): void => {
+    const events = [
+      analytics.event.tax_clearance.click.switch_to_step_one,
+      analytics.event.tax_clearance.click.switch_to_step_two,
+      analytics.event.tax_clearance.click.switch_to_step_three,
+    ];
+
+    if (events[step]) events[step]();
+  };
+
   const onStepClick = (step: number): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setShowNeedsAccountModal(true);
     } else {
+      fireAnalyticsEvent(step);
       if (step === 2 && stepIndex === 1) {
         props.saveTaxClearanceCertificateData();
       }

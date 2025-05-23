@@ -20,6 +20,7 @@ import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { FormEvent, ReactElement } from "react";
 
 interface Props {
@@ -63,8 +64,14 @@ export const CheckEligibility = (props: Props): ReactElement => {
   const { business } = useUserData();
 
   const handleSaveButtonClick = (): void => {
+    analytics.event.tax_clearance.click.switch_to_step_three();
     props.onSave();
     props.onSubmit();
+  };
+
+  const handleBackButtonClick = (): void => {
+    analytics.event.tax_clearance.click.switch_to_step_one();
+    props.setStepIndex(0);
   };
 
   return (
@@ -120,7 +127,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
         <ActionBarLayout>
           <LiveChatHelpButton />
           <div className="margin-top-2 mobile-lg:margin-top-0">
-            <SecondaryButton isColor="primary" onClick={() => props.setStepIndex(0)}>
+            <SecondaryButton isColor="primary" onClick={handleBackButtonClick}>
               {Config.taxClearanceCertificateShared.backButtonText}
             </SecondaryButton>
           </div>
