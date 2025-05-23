@@ -1,4 +1,4 @@
-import { AWSEncryptionDecryptionFactory } from "@client/AwsEncryptionDecryptionFactory";
+import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoDataClient } from "@db/DynamoDataClient";
@@ -21,14 +21,14 @@ export default async function handler(): Promise<void> {
   const logger = LogWriter(`UsersSchemaMigration/${STAGE}`, "MigrationLogs");
 
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
-  const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+  const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_KEY, {
     stage: AWS_CRYPTO_CONTEXT_STAGE,
     purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
     origin: AWS_CRYPTO_CONTEXT_ORIGIN,
   });
   const userDataClient = DynamoUserDataClient(
     dynamoDb,
-    AWSEncryptionDecryptionClient,
+    AWSTaxIDEncryptionClient,
     USERS_TABLE,
     logger,
   );

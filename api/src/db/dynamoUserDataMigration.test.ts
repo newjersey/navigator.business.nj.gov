@@ -7,7 +7,7 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { type EncryptionDecryptionClient, UserDataClient } from "@domain/types";
+import { type CryptoClient, UserDataClient } from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 import * as sharedUserData from "@shared/userData";
 
@@ -49,22 +49,18 @@ describe("DynamoUserDataClient Migrations", () => {
 
   let client: DynamoDBDocumentClient;
   let dynamoUserDataClient: UserDataClient;
-  let encryptionDecryptionClient: EncryptionDecryptionClient;
+  let cryptoClient: CryptoClient;
   let logger: LogWriterType;
 
   beforeEach(async () => {
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
-    encryptionDecryptionClient = {
+    cryptoClient = {
       encryptValue: jest.fn(),
       decryptValue: jest.fn(),
+      hashValue: jest.fn(),
     };
     logger = DummyLogWriter;
-    dynamoUserDataClient = DynamoUserDataClient(
-      client,
-      encryptionDecryptionClient,
-      dbConfig.tableName,
-      logger,
-    );
+    dynamoUserDataClient = DynamoUserDataClient(client, cryptoClient, dbConfig.tableName, logger);
     await insertOldData();
   });
 

@@ -1,12 +1,12 @@
 /**
  * Storing this file in scripts/ for record keeping purposes. I had to run it in the context of the api/ dir to be able
- * to import and use AWSEncryptionDecryptionFactory. Given it's not likely we'll need to use this again in the near term
+ * to import and use AWSCryptoFactory. Given it's not likely we'll need to use this again in the near term
  * I didn't find it important to make the proper changes to TypeScript in order to get this to execute from scripts/.
  * */
 
 // @ts-nocheck
 
-import { AWSEncryptionDecryptionFactory } from "@client/AwsEncryptionDecryptionFactory";
+import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
@@ -42,7 +42,7 @@ async function findDuplicateTaxIds(directory: string): Promise<void> {
   const taxIdMap: TaxIdMap = new Map();
   let count = 0;
 
-  const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(
+  const AWSTaxIDEncryptionClient = AWSCryptoFactory(
     AWS_CRYPTO_KEY,
     {
       stage: AWS_CRYPTO_CONTEXT_STAGE,
@@ -72,7 +72,7 @@ async function findDuplicateTaxIds(directory: string): Promise<void> {
             const encryptedTaxId = businessData.profileData?.encryptedTaxId;
             let plainTextTaxId;
             if (encryptedTaxId) {
-              plainTextTaxId = await AWSEncryptionDecryptionClient.decryptValue(
+              plainTextTaxId = await AWSTaxIDEncryptionClient.decryptValue(
                 encryptedTaxId
               ).then((decodedId): string => {
                 return decodedId;

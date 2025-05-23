@@ -1,5 +1,5 @@
 import { userRouterFactory } from "@api/userRouter";
-import { DatabaseClient, EncryptionDecryptionClient, TimeStampBusinessSearch } from "@domain/types";
+import { CryptoClient, DatabaseClient, TimeStampBusinessSearch } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
@@ -75,7 +75,7 @@ describe("userRouter", () => {
   let stubUpdateLicenseStatus: jest.Mock;
   let stubUpdateRoadmapSidebarCards: jest.Mock;
   let stubUpdateOperatingPhase: jest.Mock;
-  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
+  let stubCryptoClient: jest.Mocked<CryptoClient>;
   let stubTimeStampBusinessSearch: jest.Mocked<TimeStampBusinessSearch>;
 
   beforeEach(async () => {
@@ -96,9 +96,10 @@ describe("userRouter", () => {
     stubUpdateOperatingPhase.mockImplementation((userData) => {
       return userData;
     });
-    stubEncryptionDecryptionClient = {
+    stubCryptoClient = {
       encryptValue: jest.fn(),
       decryptValue: jest.fn(),
+      hashValue: jest.fn(),
     };
     stubTimeStampBusinessSearch = {
       search: jest.fn(),
@@ -110,7 +111,7 @@ describe("userRouter", () => {
         stubUpdateLicenseStatus,
         stubUpdateRoadmapSidebarCards,
         stubUpdateOperatingPhase,
-        stubEncryptionDecryptionClient,
+        stubCryptoClient,
         stubTimeStampBusinessSearch,
         DummyLogWriter,
       ),
@@ -1116,15 +1117,13 @@ describe("userRouter", () => {
     describe("when user changes Tax ID and Tax PIN", () => {
       it("encrypts and masks the tax id and tax pin before getting put into the user data client", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        stubEncryptionDecryptionClient.encryptValue.mockImplementation(
-          (valueToBeEncrypted: string) => {
-            const encryptedValues: { [key: string]: string } = {
-              "123456789000": "encrypted-tax-id",
-              "1234": "encrypted-tax-pin",
-            };
-            return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
-          },
-        );
+        stubCryptoClient.encryptValue.mockImplementation((valueToBeEncrypted: string) => {
+          const encryptedValues: { [key: string]: string } = {
+            "123456789000": "encrypted-tax-id",
+            "1234": "encrypted-tax-pin",
+          };
+          return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
+        });
 
         const oldUserData = generateUserData({
           user: generateUser({ id: "123" }),

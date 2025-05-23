@@ -1,17 +1,17 @@
-import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient } from "@domain/types";
+import { CryptoClient, EncryptTaxId, UserDataClient } from "@domain/types";
 import { encryptTaxIdForBatchLambdaFactory } from "@domain/user/encryptFieldsFactory";
 import { encryptTaxIdBatch } from "@domain/user/encryptTaxIdBatch";
 import { generateBusiness, generateProfileData, generateUserDataForBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 
 describe("encryptTaxIdBatch", () => {
-  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
+  let stubCryptoClient: jest.Mocked<CryptoClient>;
   let encryptTaxId: EncryptTaxId;
   let stubUserDataClient: jest.Mocked<UserDataClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
-    stubEncryptionDecryptionClient = { encryptValue: jest.fn(), decryptValue: jest.fn() };
+    stubCryptoClient = { encryptValue: jest.fn(), decryptValue: jest.fn(), hashValue: jest.fn() };
     stubUserDataClient = {
       get: jest.fn(),
       put: jest.fn(),
@@ -21,14 +21,14 @@ describe("encryptTaxIdBatch", () => {
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
     };
-    encryptTaxId = encryptTaxIdForBatchLambdaFactory(stubEncryptionDecryptionClient);
+    encryptTaxId = encryptTaxIdForBatchLambdaFactory(stubCryptoClient);
   });
 
   it("encrypts and masks tax id for users who need it and returns success, failed, and total count when all succeed", async () => {
     stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
-    stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("some-encrypted-value");
+    stubCryptoClient.encryptValue.mockResolvedValue("some-encrypted-value");
 
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
       generateUserDataForBusiness(
@@ -51,7 +51,7 @@ describe("encryptTaxIdBatch", () => {
     stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
-    stubEncryptionDecryptionClient.encryptValue
+    stubCryptoClient.encryptValue
       .mockResolvedValueOnce("some-encrypted-value")
       .mockRejectedValueOnce({});
 

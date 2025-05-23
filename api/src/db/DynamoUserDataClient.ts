@@ -4,7 +4,7 @@ import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-s
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { Migrations } from "@db/migrations/migrations";
-import { type EncryptionDecryptionClient, UserDataClient } from "@domain/types";
+import { type CryptoClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
 
@@ -25,7 +25,7 @@ const unmarshallOptions = {
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
 export const DynamoUserDataClient = (
   db: DynamoDBDocumentClient,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
   tableName: string,
   logger: LogWriterType,
 ): UserDataClient => {
@@ -41,9 +41,7 @@ export const DynamoUserDataClient = (
             migratedData.version
           } to ${Number(migratedData.version) + 1}`,
         );
-        migratedData = await Promise.resolve(
-          migration(migratedData, { encryptionDecryptionClient }),
-        );
+        migratedData = await Promise.resolve(migration(migratedData, { cryptoClient }));
       } catch (error) {
         logger.LogError(
           `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(

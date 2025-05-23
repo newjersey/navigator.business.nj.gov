@@ -4,10 +4,6 @@ import { AwsPiiHashFactory } from "@client/AwsPiiHashFactory";
 import { PiiHashClient } from "@domain/types";
 import { randomInt } from "@shared/intHelpers";
 
-// Create a mock decrypt function that will be used by our KMS mock
-const mockDecrypt = jest.fn().mockResolvedValue({
-  Plaintext: Buffer.from("decrypted-salt-value"),
-});
 
 type AWSMockContext = {
   stage: string;
@@ -106,7 +102,6 @@ describe("Secure PII Hashing", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockDecrypt.mockResolvedValue({ Plaintext: Buffer.from("decrypted-salt-value") });
 
     client = AwsPiiHashFactory(fakeGeneratorKeyId, 1);
   });

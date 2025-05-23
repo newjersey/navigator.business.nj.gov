@@ -93,7 +93,7 @@ export const AwsPiiHashFactory = (
       const { plaintext, messageHeader } = await decrypt(keyring, bufferedValue);
 
       // TODO: messageHeader has details about how the value was encrypted
-      // we may want to include a check similar to AwsEncryptionDecryptionFactory
+      // we may want to include a check similar to AwsCryptoFactory
       // to validate this information.
 
       if (!plaintext) {

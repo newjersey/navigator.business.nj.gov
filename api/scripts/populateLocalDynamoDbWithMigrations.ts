@@ -9,7 +9,7 @@
 */
 import { BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
-import { AWSEncryptionDecryptionFactory } from "@client/AwsEncryptionDecryptionFactory";
+import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoDataClient } from "@db/DynamoDataClient";
@@ -28,7 +28,7 @@ import { CURRENT_VERSION, UserData } from "@shared/userData";
 const BATCH_SIZE = 25;
 const dynamoDb = createDynamoDbClient(true, false, 8000);
 
-const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
   purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
@@ -114,7 +114,7 @@ const run = async (): Promise<void> => {
 
   const userDataClient = DynamoUserDataClient(
     dynamoDb,
-    AWSEncryptionDecryptionClient,
+    AWSTaxIDEncryptionClient,
     USERS_TABLE,
     logger,
   );

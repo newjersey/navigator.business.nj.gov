@@ -42,7 +42,7 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
-// import { AWSPiiHashFactory } from "@client/SecurePiiHashFactory";
+import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
@@ -72,7 +72,6 @@ import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
 import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
-import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
 
@@ -281,18 +280,18 @@ const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
 const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
 const AWS_CRYPTO_CONTEXT_PURPOSE = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
 const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
-// const AWS_CRYPTO_TAX_ID_HASHING_KEY = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
+const AWS_CRYPTO_TAX_ID_HASHING_KEY = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
 const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
-const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
   purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
 
-const AWSTaxIDHashingClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+const AWSTaxIDHashingClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_HASHING_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
   purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
@@ -327,7 +326,7 @@ const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(
   dynamoDb,
-  AWSEncryptionDecryptionClient,
+  AWSTaxIDEncryptionClient,
   USERS_TABLE,
   dataLogger,
 );
@@ -398,7 +397,7 @@ app.use(
     updateLicenseStatus,
     updateSidebarCards,
     updateOperatingPhase,
-    AWSEncryptionDecryptionClient,
+    AWSTaxIDEncryptionClient,
     timeStampToBusinessSearch,
     logger,
   ),
@@ -426,7 +425,7 @@ app.use(
   "/api",
   taxClearanceCertificateRouterFactory(
     taxClearanceCertificateClient,
-    AWSEncryptionDecryptionClient,
+    AWSTaxIDEncryptionClient,
   ),
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
@@ -442,9 +441,9 @@ app.use(
 app.use("/api/external", emergencyTripPermitRouterFactory(emergencyTripPermitClient));
 app.use(
   "/api/taxFilings",
-  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient),
+  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSTaxIDEncryptionClient),
 );
-app.use("/api", decryptionRouterFactory(AWSEncryptionDecryptionClient));
+app.use("/api", decryptionRouterFactory(AWSTaxIDEncryptionClient));
 app.use(
   "/health",
   healthCheckRouterFactory(

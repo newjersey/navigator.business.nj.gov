@@ -6,8 +6,8 @@ import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import {
   BusinessesDataClient,
   DatabaseClient,
-  type EncryptionDecryptionClient,
   UserDataClient,
+  type CryptoClient,
 } from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 
@@ -43,7 +43,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
   let dynamoBusinessesDataClient: BusinessesDataClient;
   let logger: LogWriterType;
   let dynamoUsersDataClient: UserDataClient;
-  let encryptionDecryptionClient: EncryptionDecryptionClient;
+  let cryptoClient: CryptoClient;
 
   let dynamoDataClient: DatabaseClient;
 
@@ -78,15 +78,16 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
   beforeEach(() => {
     logger = DummyLogWriter;
-    encryptionDecryptionClient = {
+    cryptoClient = {
       encryptValue: jest.fn(),
       decryptValue: jest.fn(),
+      hashValue: jest.fn(),
     };
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
     dynamoBusinessesDataClient = DynamoBusinessDataClient(client, dbConfig.tableName, logger);
     dynamoUsersDataClient = DynamoUserDataClient(
       client,
-      encryptionDecryptionClient,
+      cryptoClient,
       usersDbConfig.tableName,
       logger,
     );
