@@ -34,7 +34,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   describe.each([
     [
       "INELIGIBLE_TAX_CLEARANCE_FORM" as TaxClearanceCertificateResponseErrorType,
-      Config.taxClearanceCertificateStep3.errorTextGeneric,
+      Config.taxClearanceCertificateStep3.errorTextIneligible,
     ],
     [
       "FAILED_TAX_ID_AND_PIN_VALIDATION" as TaxClearanceCertificateResponseErrorType,
