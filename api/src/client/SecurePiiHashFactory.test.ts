@@ -4,13 +4,7 @@
  * Jest tests for the secure PII hashing module.
  */
 
-import {
-  createSecurePIIHash,
-  hashPII,
-  createSecureSSNHash,
-  hashSSN,
-  cryptoUtils,
-} from "./SecurePiiHashFactory";
+import { AWSPiiHashFactory } from "./SecurePiiHashFactory";
 
 // Create a mock decrypt function that will be used by our KMS mock
 const mockDecrypt = jest.fn().mockResolvedValue({
@@ -37,18 +31,11 @@ describe("Secure PII Hashing", () => {
     // Reset mocked functions to their default behavior
     mockDecrypt.mockResolvedValue({ Plaintext: Buffer.from("decrypted-salt-value") });
 
-    // Set up environment variables
-    process.env.PII_HASH_SALT = "test-application-salt";
-    process.env.PII_HASH_ITERATIONS = "1000";
-
-    // Clear encrypted salt settings
-    delete process.env.PII_HASH_SALT_ENCRYPTED;
-    delete process.env.PII_HASH_KMS_KEY_ID;
   });
 
-  describe("createSecurePIIHash", () => {
+  describe("hashValue", () => {
     it("should generate a hash for a valid sensitive string", async () => {
-      const hash = await createSecurePIIHash("123-45-6789", testOptions);
+      const hash = await AWSPiiHashFactory("123-45-6789", testOptions);
       expect(hash).toBeDefined();
       expect(typeof hash).toBe("string");
       expect(hash.length).toBe(128); // SHA3-512 = 64 bytes = 128 hex chars

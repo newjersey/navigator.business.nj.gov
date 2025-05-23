@@ -34,6 +34,7 @@ import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFilin
 import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
+import { PIIHashOptions } from "@client/SecurePiiHashFactory";
 
 export interface DatabaseClient {
   migrateOutdatedVersionUsers: () => Promise<{
@@ -120,7 +121,7 @@ export interface EncryptionDecryptionClient {
 }
 
 export interface PiiHashClient {
-  hashValue: (valueToBeHashed: string) => Promise<string>;
+  hashValue: (valueToBeHashed: string, options: PIIHashOptions) => Promise<string>;
 }
 
 export interface TimeStampBusinessSearch {
