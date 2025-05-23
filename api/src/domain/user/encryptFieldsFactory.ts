@@ -6,18 +6,21 @@ import { maskingCharacter } from "@shared/profileData";
 import { UserData } from "@shared/userData";
 
 export const encryptFieldsFactory = (
-  cryptoClient: CryptoClient,
+  encryptionDecryptionClient: CryptoClient,
+  hashingClient: CryptoClient,
 ): ((userData: UserData) => Promise<UserData>) => {
   return async (userData: UserData): Promise<UserData> => {
+    const userDataWithHashedTaxId = await hashProfileTaxId(userData, hashingClient);
     const encryptionFunctions = [
       encryptProfileTaxId,
       encryptProfileTaxPin,
       encryptTaxClearanceTaxId,
       encryptTaxClearanceTaxPin,
     ];
-    let encryptedUserData = userData;
+    let encryptedUserData = userDataWithHashedTaxId;
+
     for (const encryptionFunction of encryptionFunctions) {
-      encryptedUserData = await encryptionFunction(encryptedUserData, cryptoClient);
+      encryptedUserData = await encryptionFunction(encryptedUserData, encryptionDecryptionClient);
     }
     return encryptedUserData;
   };
@@ -137,5 +140,23 @@ const encryptTaxClearanceTaxPin = async (
           encryptedTaxPin: encryptedTaxPin,
         }
       : undefined,
+  }));
+};
+
+const hashProfileTaxId = async (
+  userData: UserData,
+  cryptoClient: CryptoClient,
+): Promise<UserData> => {
+  const currentBusiness = getCurrentBusiness(userData);
+  if (!currentBusiness.profileData.taxId) {
+    return userData;
+  }
+  const hashedTaxId = await cryptoClient.hashValue(
+    currentBusiness.profileData.taxId as string,
+    process.env.TAX_ID_HASHING_SALT as string,
+  );
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
+    profileData: { ...business.profileData, hashedTaxId: hashedTaxId },
   }));
 };

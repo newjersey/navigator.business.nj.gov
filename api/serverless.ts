@@ -66,6 +66,7 @@ const awsCryptoContextStage = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
 const awsCryptoContextPurpose = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
 const awsCryptoContextOrigin = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 const awsCryptoTaxIdHashingKey = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
+const awsCryptoTaxIdHashingSalt = process.env.TAX_ID_HASHING_SALT || "";
 
 const dynamicsLicenseStatusTenantId = process.env.DYNAMICS_LICENSE_STATUS_TENANT_ID || "";
 const dynamicsLicenseStatusURL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
@@ -211,6 +212,7 @@ const serverlessConfiguration: AWS = {
       AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
       AWS_CRYPTO_KEY: awsCryptoKey,
       AWS_CRYPTO_TAX_ID_HASHING_KEY: awsCryptoTaxIdHashingKey,
+      TAX_ID_HASHING_SALT: awsCryptoTaxIdHashingSalt,
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
       CMS_OAUTH_CLIENT_ID: cmsoAuthClientId,

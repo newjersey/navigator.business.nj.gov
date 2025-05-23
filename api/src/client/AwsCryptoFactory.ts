@@ -46,6 +46,7 @@ export const AWSCryptoFactory = (
 
   const decryptValue = async (encryptedValue: string): Promise<string> => {
     const bufferedValue = fromBase64(encryptedValue);
+
     const { plaintext, messageHeader } = await decrypt(keyring, bufferedValue);
 
     const { encryptionContext } = messageHeader;
@@ -68,7 +69,7 @@ export const AWSCryptoFactory = (
 
     if (!applicationSalt) {
       throw new Error(
-        "Application salt must be provided in options or as PII_HASH_SALT environment variable",
+        "Application salt must be provided",
       );
     }
 

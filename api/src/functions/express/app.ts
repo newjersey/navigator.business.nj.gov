@@ -398,6 +398,7 @@ app.use(
     updateSidebarCards,
     updateOperatingPhase,
     AWSTaxIDEncryptionClient,
+    AWSTaxIDHashingClient,
     timeStampToBusinessSearch,
     logger,
   ),

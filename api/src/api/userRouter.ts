@@ -133,12 +133,13 @@ export const userRouterFactory = (
   updateLicenseStatus: UpdateLicenseStatus,
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
-  cryptoClient: CryptoClient,
+  encryptionDecryptionClient: CryptoClient,
+  hashingClient: CryptoClient,
   timeStampBusinessSearch: TimeStampBusinessSearch,
   logger: LogWriterType,
 ): Router => {
   const router = Router();
-  const encryptFields = encryptFieldsFactory(cryptoClient);
+  const encryptFields = encryptFieldsFactory(encryptionDecryptionClient, hashingClient);
 
   router.post("/users/emailCheck", async (req, res) => {
     const { email } = req.body;
