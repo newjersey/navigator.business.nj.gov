@@ -9,7 +9,7 @@ export type TaxClearanceCertificateResponseErrorType =
   | "NATURAL_PROGRAM_ERROR"
   | "TAX_ID_MISSING_FIELD"
   | "TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE"
-  | "GENERIC_ERROR";
+  | "SYSTEM_ERROR";
 
 export type TaxClearanceCertificateResponse = {
   error?: {

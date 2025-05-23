@@ -56,7 +56,7 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
     errorType: TaxClearanceCertificateResponseErrorType,
   ): string => {
     if (errorType === "INELIGIBLE_TAX_CLEARANCE_FORM") {
-      return Config.taxClearanceCertificateStep3.errorTextGeneric;
+      return Config.taxClearanceCertificateStep3.errorTextIneligible;
     }
 
     if (errorType === "FAILED_TAX_ID_AND_PIN_VALIDATION") {
