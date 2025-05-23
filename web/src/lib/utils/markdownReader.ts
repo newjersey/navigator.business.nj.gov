@@ -1,7 +1,5 @@
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
   Certification,
   County,
   Filing,
@@ -61,32 +59,6 @@ export const convertLicenseCalendarEventMd = (
     filename,
     ...licenseGrayMatter,
     licenseName,
-  };
-};
-
-export const convertAnytimeActionTaskMd = (
-  anytimeActionTaskMdContents: string,
-  filename: string,
-): AnytimeActionTask => {
-  const matterResult = matter(anytimeActionTaskMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionTaskGrayMatter;
-  return {
-    contentMd: matterResult.content,
-    filename,
-    ...anytimeActionGrayMatter,
-  };
-};
-
-export const convertAnytimeActionLicenseReinstatementMd = (
-  anytimeActionLicenseReinstatementMdContents: string,
-  filename: string,
-): AnytimeActionLicenseReinstatement => {
-  const matterResult = matter(anytimeActionLicenseReinstatementMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
-  return {
-    contentMd: matterResult.content,
-    filename,
-    ...anytimeActionGrayMatter,
   };
 };
 
@@ -188,29 +160,6 @@ type LicenseGrayMatter = {
   summaryDescriptionMd: string;
   notesMd?: string;
   licenseName: string;
-};
-
-type AnytimeActionTaskGrayMatter = {
-  name: string;
-  category: string[];
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  issuingAgency?: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
-  summaryDescriptionMd: string;
-};
-
-type AnytimeActionLicenseReinsatementGrayMatter = {
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  issuingAgency: string;
-  licenseName: LicenseName;
-  summaryDescriptionMd: string;
 };
 
 type TaskGrayMatter = {

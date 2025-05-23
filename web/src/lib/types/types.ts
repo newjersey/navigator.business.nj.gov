@@ -172,7 +172,7 @@ interface AnytimeAction {
 export interface AnytimeActionTask extends AnytimeAction {
   filename: string;
   name: string;
-  category: string[];
+  category: AnytimeActionCategory[];
   urlSlug: string;
   callToActionLink?: string;
   callToActionText?: string;
@@ -186,6 +186,15 @@ export interface AnytimeActionTask extends AnytimeAction {
   searchMetaDataMatch?: string;
 }
 
+export interface AnytimeActionCategory {
+  categoryId: string;
+  categoryName: string;
+}
+
+export interface AnytimeActionCategoryMapping {
+  [key: string]: string;
+}
+
 export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   licenseName: LicenseName;
   urlSlug: string;
@@ -196,6 +205,7 @@ export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   summaryDescriptionMd: string;
   description?: string;
   searchMetaDataMatch?: string;
+  category: AnytimeActionCategory[];
 }
 
 export type FundingType =

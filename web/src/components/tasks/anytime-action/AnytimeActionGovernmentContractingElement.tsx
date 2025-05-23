@@ -1,11 +1,12 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { GovernmentContractorPaginator } from "@/components/tasks/government-contracting/GovernmentContractingPaginator";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
+import { AnytimeActionTask } from "@/lib/types/types";
 import Link from "next/link";
 import { ReactElement } from "react";
 
 interface Props {
-  anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
+  governmentContractingStepAnytimeActions: AnytimeActionTask[];
+  governmentContractingTask: AnytimeActionTask;
 }
 
 export const AnytimeActionGovernmentContractingElement = (props: Props): ReactElement => {
@@ -13,7 +14,7 @@ export const AnytimeActionGovernmentContractingElement = (props: Props): ReactEl
     <div className="min-height-38rem">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
         <div className="padding-top-4 padding-bottom-4 margin-x-4">
-          <h1>{props.anytimeAction.name}</h1>
+          <h1>{props.governmentContractingTask.name}</h1>
         </div>
         <div className="flex flex-column min-height-38rem bg-white">
           <Alert className="margin-x-4" variant={"warning"}>
@@ -22,7 +23,9 @@ export const AnytimeActionGovernmentContractingElement = (props: Props): ReactEl
               Home Improvement Contractor License
             </Link>
           </Alert>
-          <GovernmentContractorPaginator />
+          <GovernmentContractorPaginator
+            governmentContractingStepAnytimeActions={props.governmentContractingStepAnytimeActions}
+          />
         </div>
       </div>
     </div>

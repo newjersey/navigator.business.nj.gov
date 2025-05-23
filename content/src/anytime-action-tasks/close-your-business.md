@@ -3,13 +3,13 @@ notesMd: https://docs.google.com/document/d/1riQ2ETmNCcn3hosFvujoFV-6pWJiptwayLh
 id: close-your-business
 name: Close Your Business
 category:
-  - Sell or Close My Business
+  - sell-or-close-my-business
 applyToAllUsers: true
 industryIds: []
 sectorIds: []
 urlSlug: close-your-business
-summaryDescriptionMd:
-  "If you plan to sell, close, or move your business, complete the following steps:"
+summaryDescriptionMd: "If you plan to sell, close, or move your business,
+  complete the following steps:"
 callToActionText: File to Close Your Business
 callToActionLink: https://www.njportal.com/dor/annualreports
 synonyms:

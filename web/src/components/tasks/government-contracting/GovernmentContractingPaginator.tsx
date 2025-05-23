@@ -5,7 +5,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import {
-  getAnytimeActionTaskObj,
   GovernmentContractingSteps,
   shouldDisplayContinueButton,
   shouldDisplayPreviousButton,
@@ -15,7 +14,11 @@ import { AnytimeActionTask } from "@/lib/types/types";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 
-export const GovernmentContractorPaginator = (): ReactElement => {
+interface Props {
+  governmentContractingStepAnytimeActions: AnytimeActionTask[];
+}
+
+export const GovernmentContractorPaginator = (props: Props): ReactElement => {
   const stepperRef = useRef<HTMLDivElement>(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [anytimeActionTask, setAnytimeActionTask] = useState<AnytimeActionTask>();
@@ -27,14 +30,12 @@ export const GovernmentContractorPaginator = (): ReactElement => {
   });
 
   useEffect(() => {
-    getAnytimeActionTaskObj(stepIndex).then((anytimeActionTask) => {
-      setAnytimeActionTask(anytimeActionTask);
-    });
+    setAnytimeActionTask(props.governmentContractingStepAnytimeActions[stepIndex]);
 
     if (isMounted.current) {
       scrollToTopOfElement(stepperRef.current, {});
     }
-  }, [stepIndex]);
+  }, [stepIndex, props.governmentContractingStepAnytimeActions]);
 
   const onMoveToStep = (stepIndex: number): void => {
     setStepIndex(stepIndex);

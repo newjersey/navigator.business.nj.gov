@@ -5,7 +5,7 @@ notesMd: "[Muni
 id: operating-carnival-fire-permit
 name: Get a Fire Permit for Your Carnival or Circus
 category:
-  - Set Up at a Temporary Location
+  - set-up-at-a-temporary-location
 industryIds: []
 urlSlug: operating-carnival-fire-permit
 summaryDescriptionMd: >-
@@ -15,7 +15,7 @@ summaryDescriptionMd: >-
 
   * Setting up trailers, tents, stages, and similar structures that people will occupy
 
-  * Setting up a `carnival or amusement ride|carnival-amusement-ride` 
+  * Setting up a `carnival or amusement ride|carnival-amusement-ride`
 
   * Setting up food stalls or concession stands that need a fire suppression system, such as fire extinguishers or sprinklers
 

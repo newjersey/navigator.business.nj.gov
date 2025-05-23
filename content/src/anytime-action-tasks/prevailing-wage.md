@@ -3,7 +3,7 @@ notesMd: This is part of a multi-step task for the Government Contracting quick 
 id: prevailing-wage
 name: prevailing-wage
 category:
-  - Only Show in Subtask
+  - only-show-in-subtask
 description: Learn the requirements for complying with prevailing wage laws.
 sectorIds: []
 urlSlug: prevailing-wage

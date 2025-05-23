@@ -8,7 +8,7 @@ notesMd: >-
 id: adjust-rental-rates
 name: Learn How to Adjust Your Rental Rates
 category:
-  - Manage My Properties
+  - manage-my-properties
 industryIds:
   - residential-landlord
 sectorIds:

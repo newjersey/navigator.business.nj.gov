@@ -46,10 +46,27 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
+      const fakeCategoryMapping =
+        "---\n" +
+        "category-name: Reactivate My Expired Permit, License or Registration\n" +
+        "id: reactivate-my-expired-permit-license-or-registration\n" +
+        "---\n";
+
+      mockedFs.readdirSync
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["opp1.md", "opp2.md"])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["fake-category.md"])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionLicenseReinstatement1)
-        .mockReturnValueOnce(anytimeActionLicenseReinstatement2);
+        .mockReturnValueOnce(fakeCategoryMapping)
+        .mockReturnValueOnce(anytimeActionLicenseReinstatement2)
+        .mockReturnValueOnce(fakeCategoryMapping);
 
       const anytimeActionTasks = await loadAllAnytimeActionLicenseReinstatements();
       expect(anytimeActionTasks).toHaveLength(2);
@@ -63,6 +80,12 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
             contentMd: "Some content description 1",
             callToActionLink: "CallToActionLink1",
             callToActionText: "CallToActionText1",
+            category: [
+              {
+                categoryId: "reactivate-my-expired-permit-license-or-registration",
+                categoryName: "Reactivate My Expired Permit, License or Registration",
+              },
+            ],
             form: "Form1",
           },
           {
@@ -73,6 +96,12 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
             contentMd: "Some content description 2",
             callToActionLink: "CallToActionLink2",
             callToActionText: "CallToActionText2",
+            category: [
+              {
+                categoryId: "reactivate-my-expired-permit-license-or-registration",
+                categoryName: "Reactivate My Expired Permit, License or Registration",
+              },
+            ],
             form: "Form2",
           },
         ]),
@@ -106,11 +135,24 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
+      const fakeCategoryMapping =
+        "---\n" +
+        "category-name: Reactivate My Expired Permit, License or Registration\n" +
+        "id: reactivate-my-expired-permit-license-or-registration\n" +
+        "---\n";
+
+      mockedFs.readdirSync
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["opp1.md", "opp2.md"])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionLicenseReinstatement1) // read first file in list
         .mockReturnValueOnce(anytimeActionLicenseReinstatement2) // read second file in list
-        .mockReturnValueOnce(anytimeActionLicenseReinstatement2); // read file once we found the match
+        .mockReturnValueOnce(anytimeActionLicenseReinstatement2) // read file once we found the match
+        .mockReturnValueOnce(fakeCategoryMapping);
 
       const anytimeActionTask = loadAnytimeActionLicenseReinstatementsByUrlSlug("urlslug2");
       expect(anytimeActionTask).toEqual({
@@ -122,6 +164,12 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         callToActionLink: "CallToActionLink2",
         callToActionText: "CallToActionText2",
         form: "Form2",
+        category: [
+          {
+            categoryId: "reactivate-my-expired-permit-license-or-registration",
+            categoryName: "Reactivate My Expired Permit, License or Registration",
+          },
+        ],
       });
     });
   });

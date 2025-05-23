@@ -5,7 +5,7 @@ notesMd: "[Muni
 id: new-home-warranty-enrollment
 name: Enroll New Homes You Build and Sell in a Warranty Plan
 category:
-  - Manage My Properties
+  - manage-my-properties
 description: Register your newly built homes in a state-approved warranty plan.
 industryIds:
   - commercial-construction

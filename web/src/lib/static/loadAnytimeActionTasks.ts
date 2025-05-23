@@ -1,6 +1,9 @@
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "@/lib/static/helpers";
-import { AnytimeActionTask } from "@/lib/types/types";
-import { convertAnytimeActionTaskMd } from "@/lib/utils/markdownReader";
+import { AnytimeActionCategoryMapping, AnytimeActionTask } from "@/lib/types/types";
+import {
+  convertAnytimeActionCategoryMd,
+  convertAnytimeActionTaskMd,
+} from "@/lib/utils/tasksMarkdownReader";
 import fs from "fs";
 import path from "path";
 
@@ -25,9 +28,16 @@ export const loadAllAnytimeActionTasks = (): AnytimeActionTask[] => {
   });
 };
 
-export const loadAllAnytimeActionTaskUrlSlugs = (): PathParams<AnytimeActionTaskUrlSlugParam>[] => {
+export const loadAllAnytimeActionTaskUrlSlugs = (
+  expection?: string,
+): PathParams<AnytimeActionTaskUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(anytimeActionsTaskDir);
-  return fileNames.map((fileName) => {
+  let fileNamesWithoutExceptions = fileNames;
+  if (expection) {
+    fileNamesWithoutExceptions = fileNames.filter((e) => e !== expection);
+  }
+
+  return fileNamesWithoutExceptions.map((fileName) => {
     return {
       params: {
         anytimeActionTaskUrlSlug: loadUrlSlugByFilename(fileName, anytimeActionsTaskDir),
@@ -47,4 +57,40 @@ const loadAnytimeActionTasksByFileName = (fileName: string): AnytimeActionTask =
 
   const fileNameWithoutMd = fileName.split(".md")[0];
   return convertAnytimeActionTaskMd(fileContents, fileNameWithoutMd);
+};
+
+export const loadAnytimeActionCategoryMappings = (): AnytimeActionCategoryMapping => {
+  const anytimeActionsCatgoriesDir = path.join(
+    process.cwd(),
+    "..",
+    "content",
+    "src",
+    "anytime-action-categories",
+  );
+  const fileNames = fs.readdirSync(anytimeActionsCatgoriesDir);
+
+  const categoryArrayMapping = fileNames.map((fileName) => {
+    return loadIndividualAnytimeActionCatgory(fileName, anytimeActionsCatgoriesDir);
+  });
+
+  let categoryArrayMappingTwo = {};
+
+  for (const element of categoryArrayMapping) {
+    categoryArrayMappingTwo = {
+      ...categoryArrayMappingTwo,
+      [element.id]: element.categoryName,
+    };
+  }
+
+  return categoryArrayMappingTwo;
+};
+
+const loadIndividualAnytimeActionCatgory = (
+  fileName: string,
+  directory: string,
+): AnytimeActionCategoryMapping => {
+  const fullPath = path.join(directory, `${fileName}`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+
+  return convertAnytimeActionCategoryMd(fileContents);
 };
