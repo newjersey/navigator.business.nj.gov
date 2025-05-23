@@ -9,6 +9,9 @@
     "certificationReasonLabel": "What agency is requesting the Tax Clearance Certificate?",
     "secondSectionHeader": "Business Information",
     "stateTaxIdLabel": "NJ State Tax ID",
-    "genericTaxClearanceErrorText": "We cannot find your business information. Please check the information you've entered."
+    "errorTextIneligible": "We cannot find your business information. Check the information you've entered.",
+    "errorTextMissingField": "Your request was missing required fields. Ensure that all required fields are completed.",
+    "errorTextSystem": "Something went wrong. Review your information and try again later.",
+    "errorTextValidation": "Some of the entries in your submission were not valid. Review your information and try again."
   }
 }
