@@ -1,20 +1,17 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const AWSCrypto = require("@aws-crypto/client-node");
+import { fromBase64 } from "@aws-sdk/util-base64-node";
 import { PiiHashClient } from "@domain/types";
-import * as crypto from "node:crypto";
 import { Buffer } from "node:buffer";
-
-type Context = {
-  stage: string;
-  purpose: string;
-  origin: string;
-};
+import * as crypto from "node:crypto";
 
 export interface PIIHashOptions {
   applicationSalt: string;
-  kmsKeyId: string;
 }
-export const AWSPiiHashFactory = (generatorKeyId: string, context: Context): PiiHashClient => {
+export const AwsPiiHashFactory = (
+  generatorKeyId: string,
+  iterationsOverride?: number,
+): PiiHashClient => {
   /**
    * Creates a cryptographically secure hash of a sensitive identifier that is:
    *
@@ -29,15 +26,12 @@ export const AWSPiiHashFactory = (generatorKeyId: string, context: Context): Pii
    * @throws Error if operations fail or if inputs are invalid
    */
 
-
-
   const hashValue = async (valueToBeHashed: string, options: PIIHashOptions): Promise<string> => {
     if (!valueToBeHashed || typeof valueToBeHashed !== "string") {
       throw new Error("Sensitive data must be a non-empty string");
     }
     const normalizedString = valueToBeHashed.replaceAll(/[^\dA-Za-z]/g, "");
-
-    let applicationSalt = options.applicationSalt;
+    const applicationSalt = options.applicationSalt;
 
     if (!applicationSalt) {
       throw new Error(
@@ -45,22 +39,23 @@ export const AWSPiiHashFactory = (generatorKeyId: string, context: Context): Pii
       );
     }
 
-    const kmsKeyId = options.kmsKeyId;
+    const kmsKeyId = generatorKeyId;
 
     if (!kmsKeyId) {
       throw new Error("KMS Key ID is required when using an encrypted salt");
     }
 
-    applicationSalt = await decryptSaltWithKms(applicationSalt, kmsKeyId);
+    const decryptedSalt = await decryptSaltWithKms(applicationSalt, kmsKeyId);
+    console.log({ decryptedSalt });
 
-    const iterations = 100000;
+    const iterations = iterationsOverride || 100000;
 
     try {
       // Use PBKDF2 with the application salt and SHA3-512
       const hash = await new Promise<string>((resolve, reject) => {
         crypto.pbkdf2(
           normalizedString,
-          applicationSalt,
+          decryptedSalt,
           iterations,
           64,
           "sha3-512",
@@ -92,15 +87,22 @@ export const AWSPiiHashFactory = (generatorKeyId: string, context: Context): Pii
       const { decrypt } = AWSCrypto.buildClient(
         AWSCrypto.CommitmentPolicy.REQUIRE_ENCRYPT_REQUIRE_DECRYPT,
       );
+
       const keyring = new AWSCrypto.KmsKeyringNode({ generatorKeyId: kmsKeyId });
+      const bufferedValue = fromBase64(encryptedSalt);
+      const { plaintext, messageHeader } = await decrypt(keyring, bufferedValue);
 
-      const decryptResult = await decrypt(keyring, encryptedSalt);
+      // TODO: messageHeader has details about how the value was encrypted
+      // we may want to include a check similar to AwsEncryptionDecryptionFactory
+      // to validate this information.
 
-      if (!decryptResult.Plaintext) {
+      if (!plaintext) {
         throw new Error("KMS decryption returned empty plaintext");
       }
 
-      return decryptResult.Plaintext.toString();
+      const decoder = new TextDecoder();
+      const decodedValue = decoder.decode(plaintext);
+      return decodedValue;
     } catch (error) {
       throw new Error(
         `Failed to decrypt salt with KMS: ${

@@ -42,7 +42,7 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
-import { AWSPiiHashFactory } from "@client/SecurePiiHashFactory";
+// import { AWSPiiHashFactory } from "@client/SecurePiiHashFactory";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
@@ -281,7 +281,7 @@ const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
 const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
 const AWS_CRYPTO_CONTEXT_PURPOSE = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
 const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
-const AWS_CRYPTO_TAX_ID_HASHING_KEY = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
+// const AWS_CRYPTO_TAX_ID_HASHING_KEY = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
 const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
@@ -292,9 +292,9 @@ const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
 
-const AWSPiiHashClient = AWSPiiHashFactory(AWS_CRYPTO_TAX_ID_HASHING_KEY, {
+const AWSTaxIDHashingClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_PURPOSE, // TODO: Need to change to "hashing"
+  purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
 

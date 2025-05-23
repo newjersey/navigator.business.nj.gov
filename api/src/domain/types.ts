@@ -5,6 +5,7 @@ import {
   XrayRegistrationEntry,
   XrayRegistrationStatusResponse,
 } from "@businessnjgovnavigator/shared";
+import { PIIHashOptions } from "@client/AwsPiiHashFactory";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -34,7 +35,6 @@ import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFilin
 import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
-import { PIIHashOptions } from "@client/SecurePiiHashFactory";
 
 export interface DatabaseClient {
   migrateOutdatedVersionUsers: () => Promise<{
