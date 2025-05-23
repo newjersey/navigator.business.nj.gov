@@ -42,6 +42,7 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
+import { AWSPiiHashFactory } from "@client/SecurePiiHashFactory";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
@@ -291,9 +292,9 @@ const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
 
-const SecurePiiHashFactory = SecurePiiHashFactory(AWS_CRYPTO_TAX_ID_HASHING_KEY, {
+const AWSPiiHashClient = AWSPiiHashFactory(AWS_CRYPTO_TAX_ID_HASHING_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
+  purpose: AWS_CRYPTO_CONTEXT_PURPOSE, // TODO: Need to change to "hashing"
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
 

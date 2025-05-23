@@ -119,6 +119,10 @@ export interface EncryptionDecryptionClient {
   decryptValue: (valueToBeDecrypted: string) => Promise<string>;
 }
 
+export interface PiiHashClient {
+  hashValue: (valueToBeHashed: string) => Promise<string>;
+}
+
 export interface TimeStampBusinessSearch {
   search: (businessName: string) => Promise<NameAvailability>;
 }
