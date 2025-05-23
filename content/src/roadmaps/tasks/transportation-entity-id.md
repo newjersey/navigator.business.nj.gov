@@ -47,7 +47,7 @@ Trenton, NJ 08666-0170
 
 :::callout{ showHeader="true" headerText="What if I don't get an MVC EIN?" showIcon="false" calloutType="warning" }
 
-You cannot register or title vehicles under your business's name. Also, the MVC must connect specific business licenses to an MVC EIN. If you do not have one, the MVC will create one when you apply for your business license.
+You cannot register or title vehicles under your business's name. If you do not have one, the MVC will create one when you apply for your business license.
 
 :::
 
