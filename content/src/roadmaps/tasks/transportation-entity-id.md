@@ -45,9 +45,8 @@ P.O. Box 170
 
 Trenton, NJ 08666-0170
 
-:::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
-
-Without an MVC EIN, you cannot register or title vehicles under your business's name. Also, the MVC must connect specific business licenses to an MVC EIN. If you do not have one, the MVC will create one when you apply for your business license.
+:::callout{ showHeader="true" headerText="What if I don't get an MVC EIN?" showIcon="false" calloutType="warning" }
+You cannot register or title vehicles in your business's name. You also cannot do other business-related transactions with the Motor Vehicle Commission.
 
 :::
 
