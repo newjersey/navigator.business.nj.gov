@@ -289,8 +289,8 @@ collections:
                 }
               - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
               - {
-                  label: "Generic Taxation API Error Text",
-                  name: "errorTextGeneric",
+                  label: "Ineligible Form Taxation API Error Text",
+                  name: "errorTextIneligible",
                   widget: "string",
                   required: true,
                 }
