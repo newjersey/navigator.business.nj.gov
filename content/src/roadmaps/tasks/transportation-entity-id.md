@@ -47,7 +47,6 @@ Trenton, NJ 08666-0170
 
 :::callout{ showHeader="true" headerText="What if I don't get an MVC EIN?" showIcon="false" calloutType="warning" }
 You cannot register or title vehicles in your business's name. You also cannot do other business-related transactions with the Motor Vehicle Commission.
-
 :::
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
