@@ -73,6 +73,7 @@ describe("dashboard page", () => {
           anytimeActionTasks={[]}
           anytimeActionLicenseReinstatements={[]}
           licenseEvents={[]}
+          renewalEvents={[]}
         />
       </ThemeProvider>,
     );
@@ -95,6 +96,7 @@ describe("dashboard page", () => {
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
+            renewalEvents={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>,

@@ -16,6 +16,7 @@ import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
 import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
+import { searchRenewalCalendarEvents } from "@/lib/search/searchRenewalCalendarEvents";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
@@ -39,6 +40,7 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
 import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
+import { loadAllRenewalCalendarEvents } from "@/lib/static/loadRenewalCalendarEvents";
 import {
   loadAllEnvTasks,
   loadAllLicenseTasks,
@@ -57,6 +59,7 @@ import {
   LicenseEventType,
   NonEssentialQuestion,
   PageMetadata,
+  RenewalEventType,
   RoadmapDisplayContent,
   SidebarCardContent,
   Step,
@@ -90,6 +93,7 @@ interface Props {
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
   licenseCalendarEvents: LicenseEventType[];
+  renewalCalendarEvents: RenewalEventType[];
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
@@ -133,6 +137,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
   const [licenseCalendarEventMatches, setLicenseCalendarEventMatches] = useState<Match[]>([]);
+  const [renewalCalendarEventsMatches, setRenewalCalendarEventMatches] = useState<Match[]>([]);
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
 
   const { Config } = useConfig();
@@ -222,6 +227,9 @@ const SearchContentPage = (props: Props): ReactElement => {
       searchContextualInfo(props.archivedContextualInfo, lowercaseTerm),
     );
     setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
+    setRenewalCalendarEventMatches(
+      searchRenewalCalendarEvents(props.renewalCalendarEvents, lowercaseTerm),
+    );
     updateSearchState({ hasSearched: true });
   };
 
@@ -242,6 +250,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...nonEssentialQuestionsMatches,
         ...filingMatches,
         ...licenseCalendarEventMatches,
+        ...renewalCalendarEventsMatches,
         ...sidebarCardMatches,
         ...webflowLicenseMatches,
         ...archivedContextualInfoMatches,
@@ -296,6 +305,10 @@ const SearchContentPage = (props: Props): ReactElement => {
     "Anytime Action License Reinstatements": anytimeActionLicenseReinstatementMatches,
   };
 
+  const renewalCalendarCollection = {
+    "Renewal Calendar Events": renewalCalendarEventsMatches,
+  };
+
   const authedView = (
     <div>
       <h1>Search in CMS</h1>
@@ -322,6 +335,10 @@ const SearchContentPage = (props: Props): ReactElement => {
           <div>{searchState.error.message}</div>
         </Alert>
       )}
+      <MatchCollection
+        matchedCollections={renewalCalendarCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
       <MatchCollection
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}
@@ -406,6 +423,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       contextualInfo: loadAllContextualInfo(),
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       licenseCalendarEvents: loadAllLicenseCalendarEvents(),
+      renewalCalendarEvents: loadAllRenewalCalendarEvents(),
       anytimeActionTasks: loadAllAnytimeActionTasks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),

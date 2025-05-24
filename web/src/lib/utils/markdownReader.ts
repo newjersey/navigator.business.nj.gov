@@ -17,6 +17,7 @@ import {
   LicenseEventType,
   MarkdownResult,
   PageMetadata,
+  RenewalEventType,
   TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
@@ -61,6 +62,22 @@ export const convertLicenseCalendarEventMd = (
     filename,
     ...licenseGrayMatter,
     licenseName,
+  };
+};
+
+export const convertRenewalCalendarEventMd = (
+  renewalMdContents: string,
+  filename: string,
+): RenewalEventType => {
+  const matterResult = matter(renewalMdContents);
+
+  const renewalGrayMatter = matterResult.data as RenewalGrayMatter;
+  delete renewalGrayMatter.notesMd;
+
+  return {
+    contentMd: matterResult.content,
+    filename,
+    ...renewalGrayMatter,
   };
 };
 
@@ -188,6 +205,18 @@ type LicenseGrayMatter = {
   summaryDescriptionMd: string;
   notesMd?: string;
   licenseName: string;
+};
+
+type RenewalGrayMatter = {
+  id: string;
+  issuingAgency: string;
+  name: string;
+  eventDisplayName: string;
+  urlSlug: string;
+  callToActionLink?: string;
+  callToActionText?: string;
+  summaryDescriptionMd: string;
+  notesMd?: string;
 };
 
 type AnytimeActionTaskGrayMatter = {

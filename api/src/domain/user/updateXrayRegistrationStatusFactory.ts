@@ -1,4 +1,5 @@
 import { UpdateXrayRegistration, XrayRegistrationStatusLookup } from "@domain/types";
+import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { Business, UserData } from "@shared/userData";
 import { FacilityDetails } from "@shared/xray";
 
@@ -20,6 +21,7 @@ export const updateXrayRegistrationStatusFactory = (
               addressLine2: addressLine2,
               addressZipCode: addressZipCode,
             },
+            lastUpdatedISO: getCurrentDateISOString(),
           },
           taskProgress: {
             ...userData.businesses[userData.currentBusinessId].taskProgress,

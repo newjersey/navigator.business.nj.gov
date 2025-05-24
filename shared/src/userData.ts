@@ -38,7 +38,7 @@ export interface Business {
   readonly userId: string;
 }
 
-export const CURRENT_VERSION = 163;
+export const CURRENT_VERSION = 164;
 
 export const createEmptyBusiness = ({
   userId,

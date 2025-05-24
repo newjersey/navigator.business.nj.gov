@@ -19,7 +19,7 @@ type StatusColorScheme = {
   icon: ReactElement;
 };
 
-export const XrayRegistrationStatusHeader = (props: Props): ReactElement => {
+export const XrayStatusHeader = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const statusColorScheme: Record<XrayRegistrationStatus, StatusColorScheme> = {

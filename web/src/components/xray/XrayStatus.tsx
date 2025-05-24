@@ -41,7 +41,7 @@ const XrayRegistrationErrorLookup: Record<XraySearchError, string> = {
   SEARCH_FAILED: Config.xrayRegistrationTask.errorTextSearchFailed,
 };
 
-export const XrayRegistrationStatus = (props: Props): ReactElement => {
+export const XrayStatus = (props: Props): ReactElement => {
   const classes = useStyles();
   const [formValues, setFormValues] = useState<FacilityDetails>({
     businessName: "",

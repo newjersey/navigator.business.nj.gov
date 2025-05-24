@@ -6,6 +6,7 @@ import {
   UpdateLicenseStatus,
   UpdateOperatingPhase,
   UpdateSidebarCards,
+  UpdateXrayRegistration,
 } from "@domain/types";
 import { encryptFieldsFactory } from "@domain/user/encryptFieldsFactory";
 import type { LogWriterType } from "@libs/logWriter";
@@ -50,6 +51,10 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
   return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
 };
 
+const hasBeenMoreThanOneDay = (lastCheckedDate: string): boolean => {
+  return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "day"));
+};
+
 const clearTaskItemChecklists = (userData: UserData): UserData => {
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
@@ -73,6 +78,11 @@ const shouldCheckLicense = (currentBusiness: Business): boolean => {
 
   return hasLicenseDataOrFormationAddress && licenseDataOlderThanOneHour;
 };
+
+const shouldCheckXrayRegistration = (currentBusiness: Business): boolean =>
+  currentBusiness.xrayRegistrationData !== undefined &&
+  currentBusiness.xrayRegistrationData.lastUpdatedISO !== undefined &&
+  hasBeenMoreThanOneDay(currentBusiness.xrayRegistrationData.lastUpdatedISO);
 
 const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
   const currentBusiness = getCurrentBusiness(userData);
@@ -131,6 +141,7 @@ const businessHasFormed = (userData: UserData): boolean => {
 export const userRouterFactory = (
   dynamoDataClient: DatabaseClient,
   updateLicenseStatus: UpdateLicenseStatus,
+  updateXrayStatus: UpdateXrayRegistration,
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
   encryptionDecryptionClient: EncryptionDecryptionClient,
@@ -178,7 +189,8 @@ export const userRouterFactory = (
         updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
           .then((userData) => updateOperatingPhase(userData))
           .then((userData) => updateRoadmapSidebarCards(userData))
-          .then((userData) => asyncUpdateLicenseStatus(userData));
+          .then((userData) => asyncUpdateLicenseStatus(userData))
+          .then((userData) => asyncUpdateXrayStatus(userData));
 
         await dynamoDataClient.put(updatedUserData);
         res.json(updatedUserData);
@@ -396,6 +408,41 @@ export const userRouterFactory = (
         licenseData: {
           lastUpdatedISO: getCurrentDateISOString(),
           licenses: currentBusiness.licenseData?.licenses,
+        },
+      };
+
+      const updatedUserData: UserData = {
+        ...userData,
+        businesses: {
+          ...userData.businesses,
+          [currentBusiness.id]: {
+            ...updatedBusiness,
+          },
+        },
+      };
+      return updatedUserData;
+    }
+  };
+
+  const asyncUpdateXrayStatus = async (userData: UserData): Promise<UserData> => {
+    const currentBusiness = getCurrentBusiness(userData);
+    if (!shouldCheckXrayRegistration(currentBusiness)) return userData;
+
+    try {
+      if (currentBusiness.xrayRegistrationData?.facilityDetails) {
+        return await updateXrayStatus(
+          userData,
+          currentBusiness.xrayRegistrationData.facilityDetails,
+        );
+      }
+
+      return userData;
+    } catch {
+      const updatedBusiness: Business = {
+        ...currentBusiness,
+        xrayRegistrationData: {
+          ...currentBusiness.xrayRegistrationData,
+          lastUpdatedISO: getCurrentDateISOString(),
         },
       };
 

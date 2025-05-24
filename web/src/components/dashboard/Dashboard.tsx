@@ -25,6 +25,7 @@ import {
   Funding,
   LicenseEventType,
   OperateReference,
+  RenewalEventType,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
@@ -46,6 +47,7 @@ interface Props {
   certifications: Certification[];
   elevatorViolations?: boolean;
   licenseEvents: LicenseEventType[];
+  renewalEvents: RenewalEventType[];
 }
 
 export const Dashboard = (props: Props): ReactElement => {
@@ -116,6 +118,7 @@ export const Dashboard = (props: Props): ReactElement => {
                       <FilingsCalendar
                         operateReferences={props.operateReferences}
                         licenseEvents={props.licenseEvents}
+                        renewalEvents={props.renewalEvents}
                       />
                     )}
                     {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
@@ -176,6 +179,7 @@ export const Dashboard = (props: Props): ReactElement => {
                     <FilingsCalendar
                       operateReferences={props.operateReferences}
                       licenseEvents={props.licenseEvents}
+                      renewalEvents={props.renewalEvents}
                     />
                   )}
                   {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
