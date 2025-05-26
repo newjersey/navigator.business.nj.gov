@@ -1,5 +1,5 @@
 import { userRouterFactory } from "@api/userRouter";
-import { DatabaseClient, EncryptionDecryptionClient, TimeStampBusinessSearch } from "@domain/types";
+import { CryptoClient, DatabaseClient, TimeStampBusinessSearch } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
@@ -75,7 +75,8 @@ describe("userRouter", () => {
   let stubUpdateLicenseStatus: jest.Mock;
   let stubUpdateRoadmapSidebarCards: jest.Mock;
   let stubUpdateOperatingPhase: jest.Mock;
-  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
+  let stubCryptoEncryptionClient: jest.Mocked<CryptoClient>;
+  let stubCryptoHashingClient: jest.Mocked<CryptoClient>;
   let stubTimeStampBusinessSearch: jest.Mocked<TimeStampBusinessSearch>;
 
   beforeEach(async () => {
@@ -96,9 +97,15 @@ describe("userRouter", () => {
     stubUpdateOperatingPhase.mockImplementation((userData) => {
       return userData;
     });
-    stubEncryptionDecryptionClient = {
+    stubCryptoEncryptionClient = {
       encryptValue: jest.fn(),
       decryptValue: jest.fn(),
+      hashValue: jest.fn(),
+    };
+    stubCryptoHashingClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+      hashValue: jest.fn(),
     };
     stubTimeStampBusinessSearch = {
       search: jest.fn(),
@@ -110,7 +117,8 @@ describe("userRouter", () => {
         stubUpdateLicenseStatus,
         stubUpdateRoadmapSidebarCards,
         stubUpdateOperatingPhase,
-        stubEncryptionDecryptionClient,
+        stubCryptoEncryptionClient,
+        stubCryptoHashingClient,
         stubTimeStampBusinessSearch,
         DummyLogWriter,
       ),
@@ -135,6 +143,47 @@ describe("userRouter", () => {
       expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
       expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual(userData);
+    });
+
+    it("does not return a hashed tax ID to the frontend if present in profileData", async () => {
+      const business = generateBusiness({
+        profileData: {
+          ...generateProfileData({ hashedTaxId: "some-hashed-tax-id" }),
+        },
+      });
+      const userData = generateUserDataForBusiness(business);
+      const currentBusiness = userData.businesses[userData.currentBusinessId];
+      expect(currentBusiness.profileData.hashedTaxId).not.toBeUndefined();
+
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.put.mockResolvedValue(generateUserData({}));
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+
+      const response = await request(app)
+        .get(`/users/123`)
+        .set("Authorization", "Bearer user-123-token");
+
+      const profileData = response.body.businesses[userData.currentBusinessId].profileData;
+      expect(profileData.hashedTaxId).toBeUndefined();
+    });
+
+    it("does not remove a hashed tax ID from profileData in a DB PUT", async () => {
+      const business = generateBusiness({
+        profileData: {
+          ...generateProfileData({ hashedTaxId: "some-hashed-tax-id" }),
+        },
+      });
+      const userData = generateUserDataForBusiness(business);
+      const currentBusiness = userData.businesses[userData.currentBusinessId];
+      expect(currentBusiness.profileData.hashedTaxId).not.toBeUndefined();
+
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.put.mockResolvedValue(generateUserData({}));
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+
+      await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+
+      expect(stubUnifiedDataClient.put).toHaveBeenCalledWith(userData);
     });
 
     it("returns NOT FOUND when a user isn't registered", async () => {
@@ -1116,15 +1165,13 @@ describe("userRouter", () => {
     describe("when user changes Tax ID and Tax PIN", () => {
       it("encrypts and masks the tax id and tax pin before getting put into the user data client", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        stubEncryptionDecryptionClient.encryptValue.mockImplementation(
-          (valueToBeEncrypted: string) => {
-            const encryptedValues: { [key: string]: string } = {
-              "123456789000": "encrypted-tax-id",
-              "1234": "encrypted-tax-pin",
-            };
-            return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
-          },
-        );
+        stubCryptoEncryptionClient.encryptValue.mockImplementation((valueToBeEncrypted: string) => {
+          const encryptedValues: { [key: string]: string } = {
+            "123456789000": "encrypted-tax-id",
+            "1234": "encrypted-tax-pin",
+          };
+          return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
+        });
 
         const oldUserData = generateUserData({
           user: generateUser({ id: "123" }),

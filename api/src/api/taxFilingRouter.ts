@@ -1,17 +1,17 @@
 import { getSignedInUserId } from "@api/userRouter";
-import { DatabaseClient, EncryptionDecryptionClient, TaxFilingInterface } from "@domain/types";
+import { CryptoClient, DatabaseClient, TaxFilingInterface } from "@domain/types";
 import { maskingCharacter } from "@shared/profileData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 const getTaxId = async (
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
   taxId: string,
   encryptedTaxId: string | undefined,
 ): Promise<string> => {
   if (taxId.includes(maskingCharacter)) {
     if (encryptedTaxId) {
-      return await encryptionDecryptionClient.decryptValue(encryptedTaxId);
+      return await cryptoClient.decryptValue(encryptedTaxId);
     }
     throw new Error("No valid taxId");
   } else {
@@ -22,7 +22,7 @@ const getTaxId = async (
 export const taxFilingRouterFactory = (
   dynamoDataClient: DatabaseClient,
   taxFilingInterface: TaxFilingInterface,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): Router => {
   const router = Router();
 
@@ -30,7 +30,7 @@ export const taxFilingRouterFactory = (
     const userId = getSignedInUserId(req);
     const { encryptedTaxId, taxId, businessName } = req.body;
     try {
-      const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
+      const plainTextTaxId = await getTaxId(cryptoClient, taxId, encryptedTaxId);
       const userData = await dynamoDataClient.get(userId);
       const userDataWithTaxFilingData = await taxFilingInterface.lookup({
         userData,
@@ -48,7 +48,7 @@ export const taxFilingRouterFactory = (
     const userId = getSignedInUserId(req);
     const { encryptedTaxId, taxId, businessName } = req.body;
     try {
-      const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
+      const plainTextTaxId = await getTaxId(cryptoClient, taxId, encryptedTaxId);
       const userData = await dynamoDataClient.get(userId);
       const userDataWithTaxFilingData = await taxFilingInterface.onboarding({
         userData,

@@ -4,14 +4,14 @@ import {
   generatev160UserData,
 } from "@db/migrations/v160_add_xray_registration_data";
 import { migrate_v160_to_v161 } from "@db/migrations/v161_add_encrypted_tax_pin";
-import { EncryptionDecryptionClient } from "@domain/types";
+import { CryptoClient } from "@domain/types";
 
 describe("v161 migration encrypts and masks tax pin if defined", () => {
-  let encryptionDecryptionClient: EncryptionDecryptionClient;
+  let cryptoClient: CryptoClient;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    encryptionDecryptionClient = {
+    cryptoClient = {
       encryptValue: jest.fn((value) => {
         return new Promise((resolve) => {
           resolve(`encrypted ${value}`);
@@ -22,6 +22,7 @@ describe("v161 migration encrypts and masks tax pin if defined", () => {
           resolve(`decrypted ${value}`);
         });
       }),
+      hashValue: jest.fn(),
     };
   });
 
@@ -43,7 +44,7 @@ describe("v161 migration encrypts and masks tax pin if defined", () => {
         },
       });
       const migratedUserData = await migrate_v160_to_v161(v160UserData, {
-        encryptionDecryptionClient,
+        cryptoClient,
       });
 
       expect(migratedUserData.version).toBe(161);

@@ -1,7 +1,7 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import {
+  CryptoClient,
   DatabaseClient,
-  EncryptionDecryptionClient,
   TimeStampBusinessSearch,
   UpdateLicenseStatus,
   UpdateOperatingPhase,
@@ -129,16 +129,17 @@ const businessHasFormed = (userData: UserData): boolean => {
 };
 
 export const userRouterFactory = (
-  dynamoDataClient: DatabaseClient,
+  databaseClient: DatabaseClient,
   updateLicenseStatus: UpdateLicenseStatus,
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  encryptionDecryptionClient: CryptoClient,
+  hashingClient: CryptoClient,
   timeStampBusinessSearch: TimeStampBusinessSearch,
   logger: LogWriterType,
 ): Router => {
   const router = Router();
-  const encryptFields = encryptFieldsFactory(encryptionDecryptionClient);
+  const encryptFields = encryptFieldsFactory(encryptionDecryptionClient, hashingClient);
 
   router.post("/users/emailCheck", async (req, res) => {
     const { email } = req.body;
@@ -150,7 +151,7 @@ export const userRouterFactory = (
       status = StatusCodes.BAD_REQUEST;
       res.status(status).send({ error: "`email` property required." });
     } else {
-      const userData = await dynamoDataClient.findByEmail(email.toLowerCase());
+      const userData = await databaseClient.findByEmail(email.toLowerCase());
 
       if (userData) {
         status = StatusCodes.OK;
@@ -171,7 +172,7 @@ export const userRouterFactory = (
       return;
     }
 
-    dynamoDataClient
+    databaseClient
       .get(req.params.userId)
       .then(async (userData: UserData) => {
         let updatedUserData = userData;
@@ -180,8 +181,10 @@ export const userRouterFactory = (
           .then((userData) => updateRoadmapSidebarCards(userData))
           .then((userData) => asyncUpdateLicenseStatus(userData));
 
-        await dynamoDataClient.put(updatedUserData);
-        res.json(updatedUserData);
+        await databaseClient.put(updatedUserData);
+
+        const santizedUserData = removeSensitiveData(updatedUserData);
+        res.json(santizedUserData);
       })
       .catch((error: Error) => {
         if (error.message === "Not found") {
@@ -218,7 +221,7 @@ export const userRouterFactory = (
     const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
 
-    dynamoDataClient
+    databaseClient
       .put(userDataWithUpdatedISO)
       .then((result: UserData) => {
         res.json(result);
@@ -230,7 +233,7 @@ export const userRouterFactory = (
 
   const industryHasChanged = async (userData: UserData): Promise<boolean> => {
     try {
-      const oldUserData = await dynamoDataClient.get(userData.user.id);
+      const oldUserData = await databaseClient.get(userData.user.id);
       const oldBusinessData = getCurrentBusiness(oldUserData);
       const currentBusinessData = getCurrentBusiness(userData);
 
@@ -243,7 +246,7 @@ export const userRouterFactory = (
   const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
     let oldUserData;
     try {
-      oldUserData = await dynamoDataClient.get(userData.user.id);
+      oldUserData = await databaseClient.get(userData.user.id);
     } catch {
       return userData;
     }
@@ -313,7 +316,7 @@ export const userRouterFactory = (
       contactSharingWithAccountCreationPartner: true,
     });
 
-    dynamoDataClient
+    databaseClient
       .put(emptyUserData)
       .then((result) => {
         res.json(result);
@@ -413,6 +416,25 @@ export const userRouterFactory = (
   };
 
   return router;
+};
+
+const removeSensitiveData = (userData: UserData): UserData => {
+  return {
+    ...userData,
+    businesses: Object.fromEntries(
+      Object.values(userData.businesses)
+        .map((business) => {
+          return {
+            ...business,
+            profileData: {
+              ...business.profileData,
+              hashedTaxId: undefined,
+            },
+          };
+        })
+        .map((currentBusiness) => [currentBusiness.id, currentBusiness]),
+    ),
+  };
 };
 
 const setLastUpdatedISO = (userData: UserData): UserData => {

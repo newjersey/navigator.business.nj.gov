@@ -1,16 +1,14 @@
-import { EncryptionDecryptionClient } from "@domain/types";
+import { CryptoClient } from "@domain/types";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
-export const decryptionRouterFactory = (
-  encryptionDecryptionClient: EncryptionDecryptionClient,
-): Router => {
+export const decryptionRouterFactory = (cryptoClient: CryptoClient): Router => {
   const router = Router();
 
   router.post("/decrypt", async (req, res) => {
     const { encryptedValue } = req.body;
     try {
-      const plainTextValue = await encryptionDecryptionClient.decryptValue(encryptedValue);
+      const plainTextValue = await cryptoClient.decryptValue(encryptedValue);
       res.json(plainTextValue);
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
