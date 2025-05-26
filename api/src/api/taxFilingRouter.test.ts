@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { taxFilingRouterFactory } from "@api/taxFilingRouter";
 import { getSignedInUserId } from "@api/userRouter";
-import { DatabaseClient, EncryptionDecryptionClient, TaxFilingInterface } from "@domain/types";
+import { CryptoClient, DatabaseClient, TaxFilingInterface } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
@@ -27,7 +27,7 @@ describe("taxFilingRouter", () => {
 
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
   let apiTaxFilingClient: jest.Mocked<TaxFilingInterface>;
-  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
+  let stubCryptoClient: jest.Mocked<CryptoClient>;
   const userData = generateUserDataForBusiness(
     generateBusiness({ taxFilingData: generateTaxFilingData({ state: "PENDING" }) }),
   );
@@ -52,22 +52,17 @@ describe("taxFilingRouter", () => {
       onboarding: jest.fn(),
     };
 
-    stubEncryptionDecryptionClient = {
+    stubCryptoClient = {
       encryptValue: jest.fn(),
       decryptValue: jest.fn(),
+      hashValue: jest.fn(),
     };
     stubDynamoDataClient.get.mockResolvedValue(userData);
     stubDynamoDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(
-      taxFilingRouterFactory(
-        stubDynamoDataClient,
-        apiTaxFilingClient,
-        stubEncryptionDecryptionClient,
-      ),
-    );
+    app.use(taxFilingRouterFactory(stubDynamoDataClient, apiTaxFilingClient, stubCryptoClient));
   });
 
   afterAll(async () => {
@@ -146,12 +141,10 @@ describe("taxFilingRouter", () => {
         encryptedTaxId: "some-encrypted-value",
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
-      stubEncryptionDecryptionClient.decryptValue.mockResolvedValue("123456789000");
+      stubCryptoClient.decryptValue.mockResolvedValue("123456789000");
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
       expect(response.body).toEqual(responseUserData);
-      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith(
-        "some-encrypted-value",
-      );
+      expect(stubCryptoClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
       expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
         userData,
         taxId: "123456789000",
@@ -228,7 +221,7 @@ describe("taxFilingRouter", () => {
         taxId: "*****89000",
         encryptedTaxId: "some-encrypted-value",
       });
-      stubEncryptionDecryptionClient.decryptValue.mockResolvedValue("123456789000");
+      stubCryptoClient.decryptValue.mockResolvedValue("123456789000");
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
       expect(response.body).toEqual(responseUserData);
@@ -237,9 +230,7 @@ describe("taxFilingRouter", () => {
         taxId: "123456789000",
         businessName: "my-cool-business",
       });
-      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith(
-        "some-encrypted-value",
-      );
+      expect(stubCryptoClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubDynamoDataClient.get).toHaveBeenCalledWith("some-id");
       expect(response.status).toEqual(StatusCodes.OK);

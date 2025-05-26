@@ -15,6 +15,7 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
+import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
 import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
@@ -56,6 +57,13 @@ import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFact
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
 import { updateXrayRegistrationStatusFactory } from "@domain/user/updateXrayRegistrationStatusFactory";
 import {
+  AWS_CRYPTO_CONTEXT_ORIGIN,
+  AWS_CRYPTO_CONTEXT_STAGE,
+  AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+  AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+  AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+  AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  AWS_CRYPTO_TAX_ID_HASHING_KEY,
   BUSINESSES_TABLE,
   DYNAMO_OFFLINE_PORT,
   IS_DOCKER,
@@ -71,7 +79,6 @@ import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
 import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
-import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
 
@@ -276,20 +283,25 @@ const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
   ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
   : process.env.GOV2GO_REGISTRATION_BASE_URL || "";
 
-const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
-const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
-const AWS_CRYPTO_CONTEXT_PURPOSE = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
-const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
-
 const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
-const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
+  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
+
+const AWSTaxIDHashingClient = AWSCryptoFactory(
+  AWS_CRYPTO_TAX_ID_HASHING_KEY,
+  {
+    stage: AWS_CRYPTO_CONTEXT_STAGE,
+    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  },
+  AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+);
 
 const taxFilingClient = ApiTaxFilingClient(
   {
@@ -320,7 +332,7 @@ const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(
   dynamoDb,
-  AWSEncryptionDecryptionClient,
+  AWSTaxIDEncryptionClient,
   USERS_TABLE,
   dataLogger,
 );
@@ -391,7 +403,8 @@ app.use(
     updateLicenseStatus,
     updateSidebarCards,
     updateOperatingPhase,
-    AWSEncryptionDecryptionClient,
+    AWSTaxIDEncryptionClient,
+    AWSTaxIDHashingClient,
     timeStampToBusinessSearch,
     logger,
   ),
@@ -417,10 +430,7 @@ app.use(
 );
 app.use(
   "/api",
-  taxClearanceCertificateRouterFactory(
-    taxClearanceCertificateClient,
-    AWSEncryptionDecryptionClient,
-  ),
+  taxClearanceCertificateRouterFactory(taxClearanceCertificateClient, AWSTaxIDEncryptionClient),
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use(
@@ -435,9 +445,9 @@ app.use(
 app.use("/api/external", emergencyTripPermitRouterFactory(emergencyTripPermitClient));
 app.use(
   "/api/taxFilings",
-  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient),
+  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSTaxIDEncryptionClient),
 );
-app.use("/api", decryptionRouterFactory(AWSEncryptionDecryptionClient));
+app.use("/api", decryptionRouterFactory(AWSTaxIDEncryptionClient));
 app.use(
   "/health",
   healthCheckRouterFactory(

@@ -1,6 +1,6 @@
 import { type MigrationClients } from "@db/migrations/types";
 import { v160Business, v160UserData } from "@db/migrations/v160_add_xray_registration_data";
-import { type EncryptionDecryptionClient } from "@domain/types";
+import { type CryptoClient } from "@domain/types";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v160_to_v161 = async (
@@ -14,9 +14,7 @@ export const migrate_v160_to_v161 = async (
   const businesses = Object.values(v160Data.businesses);
   const newBusinesses = [];
   for (const business of businesses) {
-    newBusinesses.push(
-      await migrate_v160Business_to_v161Business(business, clients.encryptionDecryptionClient),
-    );
+    newBusinesses.push(await migrate_v160Business_to_v161Business(business, clients.cryptoClient));
   }
   return {
     ...v160Data,
@@ -29,7 +27,7 @@ export const migrate_v160_to_v161 = async (
 
 export const migrate_v160Business_to_v161Business = async (
   business: v160Business,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): Promise<v161Business> => {
   const newBusiness = {
     ...business,
@@ -40,7 +38,7 @@ export const migrate_v160Business_to_v161Business = async (
         ? "*".repeat(business.profileData.taxPin.length)
         : undefined,
       encryptedTaxPin: business.profileData.taxPin
-        ? await encryptionDecryptionClient.encryptValue(business.profileData.taxPin)
+        ? await cryptoClient.encryptValue(business.profileData.taxPin)
         : undefined,
     },
   } as v161Business;

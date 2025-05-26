@@ -1,5 +1,5 @@
 import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
-import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
+import { type CryptoClient, TaxClearanceCertificateClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
 import { UserData } from "@shared/userData";
@@ -30,7 +30,7 @@ export const ApiTaxClearanceCertificateClient = (
 ): TaxClearanceCertificateClient => {
   const postTaxClearanceCertificate = async (
     userData: UserData,
-    encryptionDecryptionClient: EncryptionDecryptionClient,
+    cryptoClient: CryptoClient,
   ): Promise<TaxClearanceCertificateResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Tax Clearance Certificate Client - Id:${logId}`);
@@ -53,12 +53,8 @@ export const ApiTaxClearanceCertificateClient = (
     const postBody = {
       repId: userData.user.id,
       repName: userData.user.name,
-      taxpayerId: await encryptionDecryptionClient.decryptValue(
-        currTaxClearanceData.encryptedTaxId,
-      ),
-      taxpayerPin: await encryptionDecryptionClient.decryptValue(
-        currTaxClearanceData.encryptedTaxPin,
-      ),
+      taxpayerId: await cryptoClient.decryptValue(currTaxClearanceData.encryptedTaxId),
+      taxpayerPin: await cryptoClient.decryptValue(currTaxClearanceData.encryptedTaxPin),
       taxpayerName: currTaxClearanceData?.businessName,
       addressLine1: currTaxClearanceData?.addressLine1,
       addressLine2: currTaxClearanceData?.addressLine2,

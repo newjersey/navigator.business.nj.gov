@@ -114,9 +114,10 @@ export interface TaxFilingInterface {
   }) => Promise<UserData>;
 }
 
-export interface EncryptionDecryptionClient {
+export interface CryptoClient {
   encryptValue: (valueToBeEncrypted: string) => Promise<string>;
   decryptValue: (valueToBeDecrypted: string) => Promise<string>;
+  hashValue: (valueToBeHashed: string, _iterationsOverride?: number) => Promise<string>;
 }
 
 export interface TimeStampBusinessSearch {
@@ -245,7 +246,7 @@ export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
 export interface TaxClearanceCertificateClient {
   postTaxClearanceCertificate: (
     userData: UserData,
-    encryptionDecryptionClient: EncryptionDecryptionClient,
+    cryptoClient: CryptoClient,
   ) => Promise<TaxClearanceCertificateResponse>;
 }
 
