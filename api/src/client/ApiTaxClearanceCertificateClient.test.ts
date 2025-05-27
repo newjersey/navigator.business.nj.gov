@@ -7,7 +7,7 @@ import {
   TAX_ID_MISSING_FIELD,
   TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
 } from "@client/ApiTaxClearanceCertificateClient";
-import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
+import { type CryptoClient, TaxClearanceCertificateClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
 import {
@@ -30,7 +30,7 @@ describe("TaxClearanceCertificateClient", () => {
     password: "fakePassword",
   };
   let client: TaxClearanceCertificateClient;
-  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
+  let stubEncryptionDecryptionClient: jest.Mocked<CryptoClient>;
   let userData: UserData;
 
   beforeEach(() => {
@@ -43,6 +43,7 @@ describe("TaxClearanceCertificateClient", () => {
           resolve(value.replace("encrypted-", ""));
         });
       }),
+      hashValue: jest.fn(),
     };
     userData = generateUserData({});
     mockAxios.post.mockResolvedValue({ data: { certificate: [1] } });

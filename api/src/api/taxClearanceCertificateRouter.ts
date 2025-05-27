@@ -1,12 +1,12 @@
 import { ExpressRequestBody } from "@api/types";
-import { type EncryptionDecryptionClient, TaxClearanceCertificateClient } from "@domain/types";
+import { type CryptoClient, TaxClearanceCertificateClient } from "@domain/types";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const taxClearanceCertificateRouterFactory = (
   taxClearanceCertificateClient: TaxClearanceCertificateClient,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): Router => {
   const router = Router();
   router.post("/postTaxClearanceCertificate", async (req: ExpressRequestBody<UserData>, res) => {
@@ -15,7 +15,7 @@ export const taxClearanceCertificateRouterFactory = (
     try {
       const response = await taxClearanceCertificateClient.postTaxClearanceCertificate(
         userData,
-        encryptionDecryptionClient,
+        cryptoClient,
       );
       res.json(response);
     } catch (error) {

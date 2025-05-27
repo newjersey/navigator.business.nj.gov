@@ -1,4 +1,4 @@
-import { EncryptionDecryptionClient } from "@domain/types";
+import { CryptoClient } from "@domain/types";
 import { maskTaxId } from "@domain/user/maskTaxId";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -6,16 +6,19 @@ import { maskingCharacter } from "@shared/profileData";
 import { UserData } from "@shared/userData";
 
 export const encryptFieldsFactory = (
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  encryptionDecryptionClient: CryptoClient,
+  hashingClient: CryptoClient,
 ): ((userData: UserData) => Promise<UserData>) => {
   return async (userData: UserData): Promise<UserData> => {
+    const userDataWithHashedTaxId = await hashProfileTaxId(userData, hashingClient);
     const encryptionFunctions = [
       encryptProfileTaxId,
       encryptProfileTaxPin,
       encryptTaxClearanceTaxId,
       encryptTaxClearanceTaxPin,
     ];
-    let encryptedUserData = userData;
+    let encryptedUserData = userDataWithHashedTaxId;
+
     for (const encryptionFunction of encryptionFunctions) {
       encryptedUserData = await encryptionFunction(encryptedUserData, encryptionDecryptionClient);
     }
@@ -24,20 +27,17 @@ export const encryptFieldsFactory = (
 };
 
 export const encryptTaxIdForBatchLambdaFactory = (
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): ((userData: UserData) => Promise<UserData>) => {
   return async (userData: UserData): Promise<UserData> => {
-    const userDataWithEncryptedTaxId = await encryptProfileTaxId(
-      userData,
-      encryptionDecryptionClient,
-    );
+    const userDataWithEncryptedTaxId = await encryptProfileTaxId(userData, cryptoClient);
     return userDataWithEncryptedTaxId;
   };
 };
 
 const encryptProfileTaxId = async (
   userData: UserData,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): Promise<UserData> => {
   const currentBusiness = getCurrentBusiness(userData);
   if (
@@ -47,7 +47,7 @@ const encryptProfileTaxId = async (
     return userData;
   }
   const maskedTaxId = maskTaxId(currentBusiness.profileData.taxId as string);
-  const encryptedTaxId = await encryptionDecryptionClient.encryptValue(
+  const encryptedTaxId = await cryptoClient.encryptValue(
     currentBusiness.profileData.taxId as string,
   );
 
@@ -63,7 +63,7 @@ const encryptProfileTaxId = async (
 
 const encryptProfileTaxPin = async (
   userData: UserData,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): Promise<UserData> => {
   const currentBusiness = getCurrentBusiness(userData);
   if (
@@ -73,7 +73,7 @@ const encryptProfileTaxPin = async (
     return userData;
   }
   const maskedTaxPin = maskingCharacter.repeat(currentBusiness.profileData.taxPin.length);
-  const encryptedTaxPin = await encryptionDecryptionClient.encryptValue(
+  const encryptedTaxPin = await cryptoClient.encryptValue(
     currentBusiness.profileData.taxPin as string,
   );
 
@@ -89,7 +89,7 @@ const encryptProfileTaxPin = async (
 
 const encryptTaxClearanceTaxId = async (
   userData: UserData,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): Promise<UserData> => {
   const currentBusiness = getCurrentBusiness(userData);
   if (
@@ -99,7 +99,7 @@ const encryptTaxClearanceTaxId = async (
     return userData;
   }
   const maskedTaxId = maskTaxId(currentBusiness.taxClearanceCertificateData?.taxId as string);
-  const encryptedTaxId = await encryptionDecryptionClient.encryptValue(
+  const encryptedTaxId = await cryptoClient.encryptValue(
     currentBusiness.taxClearanceCertificateData?.taxId as string,
   );
 
@@ -117,7 +117,7 @@ const encryptTaxClearanceTaxId = async (
 
 const encryptTaxClearanceTaxPin = async (
   userData: UserData,
-  encryptionDecryptionClient: EncryptionDecryptionClient,
+  cryptoClient: CryptoClient,
 ): Promise<UserData> => {
   const currentBusiness = getCurrentBusiness(userData);
   if (
@@ -127,7 +127,7 @@ const encryptTaxClearanceTaxPin = async (
     return userData;
   }
   const maskedTaxPin = maskingCharacter.repeat(4);
-  const encryptedTaxPin = await encryptionDecryptionClient.encryptValue(
+  const encryptedTaxPin = await cryptoClient.encryptValue(
     currentBusiness.taxClearanceCertificateData?.taxPin as string,
   );
 
@@ -140,5 +140,20 @@ const encryptTaxClearanceTaxPin = async (
           encryptedTaxPin: encryptedTaxPin,
         }
       : undefined,
+  }));
+};
+
+const hashProfileTaxId = async (
+  userData: UserData,
+  cryptoClient: CryptoClient,
+): Promise<UserData> => {
+  const currentBusiness = getCurrentBusiness(userData);
+  if (!currentBusiness.profileData.taxId) {
+    return userData;
+  }
+  const hashedTaxId = await cryptoClient.hashValue(currentBusiness.profileData.taxId as string);
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
+    profileData: { ...business.profileData, hashedTaxId: hashedTaxId },
   }));
 };

@@ -61,10 +61,16 @@ const serverlessDeploymentS3Bucket =
   process.env.BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME || "default-bucket";
 const skipSaveDocumentsToS3 = process.env.SKIP_SAVE_DOCUMENTS_TO_S3 || "";
 
-const awsCryptoKey = process.env.AWS_CRYPTO_KEY || "";
+const awsCryptoTaxIdEncryptionKey = process.env.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
 const awsCryptoContextStage = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
-const awsCryptoContextPurpose = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
+const awsCryptoContextTaxIdEncryptionPurpose =
+  process.env.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE || "";
 const awsCryptoContextOrigin = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
+const awsCryptoTaxIdHashingKey = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
+const awsCryptoTaxIdEncryptedHashingSalt =
+  process.env.AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT || "";
+const awsCryptoContextTaxIdHashingPurpose =
+  process.env.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE || "";
 
 const dynamicsLicenseStatusTenantId = process.env.DYNAMICS_LICENSE_STATUS_TENANT_ID || "";
 const dynamicsLicenseStatusURL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
@@ -180,7 +186,7 @@ const serverlessConfiguration: AWS = {
           {
             Effect: "Allow",
             Action: ["kms:GenerateDataKey", "kms:Encrypt", "kms:Decrypt"],
-            Resource: awsCryptoKey,
+            Resource: awsCryptoTaxIdEncryptionKey,
           },
           {
             Effect: "Allow",
@@ -206,9 +212,12 @@ const serverlessConfiguration: AWS = {
       AIRTABLE_USER_RESEARCH_BASE_ID: airtableUserResearchBaseId,
       AIRTABLE_USERS_TABLE: airtableUsersTable,
       AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
-      AWS_CRYPTO_CONTEXT_PURPOSE: awsCryptoContextPurpose,
+      AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE: awsCryptoContextTaxIdEncryptionPurpose,
       AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
-      AWS_CRYPTO_KEY: awsCryptoKey,
+      AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
+      AWS_CRYPTO_TAX_ID_HASHING_KEY: awsCryptoTaxIdHashingKey,
+      AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT: awsCryptoTaxIdEncryptedHashingSalt,
+      AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE: awsCryptoContextTaxIdHashingPurpose,
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
       CMS_OAUTH_CLIENT_ID: cmsoAuthClientId,

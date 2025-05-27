@@ -1,5 +1,5 @@
-import { type EncryptionDecryptionClient } from "@domain/types";
+import { type CryptoClient } from "@domain/types";
 
-export type MigrationClients = {
-  encryptionDecryptionClient: EncryptionDecryptionClient;
-};
+export interface MigrationClients {
+  cryptoClient: CryptoClient;
+}
