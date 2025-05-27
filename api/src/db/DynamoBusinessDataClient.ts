@@ -134,6 +134,7 @@ export const DynamoBusinessDataClient = (
         businessId: businessData.id,
         industry: businessData.profileData.industryId,
         encryptedTaxId: businessData.profileData.encryptedTaxId,
+        hashedTaxId: businessData.profileData.hashedTaxId,
         data: businessData,
         businessName: businessName === "" ? undefined : businessData.profileData.businessName,
         naicsCode: naicsCode === "" ? undefined : businessData.profileData.naicsCode,
