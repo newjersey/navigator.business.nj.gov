@@ -245,12 +245,6 @@ collections:
             widget: object
             fields:
               - {
-                  label: "Generic Taxation API Error Text",
-                  name: "genericTaxClearanceErrorText",
-                  widget: "string",
-                  required: true,
-                }
-              - {
                   label: "Main Title Header",
                   name: "mainTitleHeader",
                   widget: "string",
@@ -294,6 +288,30 @@ collections:
                   required: true,
                 }
               - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
+              - {
+                  label: "Ineligible Form Taxation API Error Text",
+                  name: "errorTextIneligible",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Missing Field Taxation API Error Text",
+                  name: "errorTextMissingField",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "System Taxation API Error Text",
+                  name: "errorTextSystem",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Validation Taxation API Error Text",
+                  name: "errorTextValidation",
+                  widget: "string",
+                  required: true,
+                }
       - label: "Tax Clearance Shared"
         name: "taxClearanceCertificate-shared"
         file: "content/src/fieldConfig/tax-clearance-certificate-shared.json"

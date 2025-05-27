@@ -13,9 +13,7 @@
     "editor.formatOnSaveMode": "file",
     "editor.tabSize": 4
   },
-  "circleci.persistedProjectSelection": [
-    "gh/newjersey/navigator.business.nj.gov"
-  ],
+  "circleci.persistedProjectSelection": ["gh/newjersey/navigator.business.nj.gov"],
   "cSpell.enabled": false,
   "cSpell.words": ["businessnjgovnavigator"],
   "editor.codeActionsOnSave": [
@@ -24,12 +22,7 @@
     "source.fixAll.eslint"
   ],
   "editor.formatOnSave": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.py": "test_$(capture).py",
@@ -43,25 +36,12 @@
   "files.trimTrailingWhitespace": true,
   "git.pullBeforeCheckout": true,
   "git.mergeEditor": true,
+  "gitlens.codeLens.authors.command": false,
   "indentRainbow.indicatorStyle": "light",
   "jest.autoRun": "off",
   "terminal.integrated.scrollback": 10000,
-  "todo-tree.filtering.excludeGlobs": [
-    "**/node_modules",
-    "**/dist",
-    "**/.next",
-    "**/compiled"
-  ],
-  "todo-tree.general.tags": [
-    "BUG",
-    "HACK",
-    "FIXME",
-    "TODO",
-    "XXX",
-    "[ ]",
-    "[x]",
-    "TODO-APP"
-  ],
+  "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist", "**/.next", "**/compiled"],
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]", "TODO-APP"],
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.surveys.enabled": false,
   "[xml]": {

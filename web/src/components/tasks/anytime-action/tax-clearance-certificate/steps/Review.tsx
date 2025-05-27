@@ -53,28 +53,37 @@ export const Review = (props: Props): ReactElement => {
 
   const handleSaveButtonClick = async (): Promise<void> => {
     if (!userData) return;
-    const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
-
-    if (taxClearanceResponse.error) {
-      analytics.event.tax_clearance.submit.validation_error();
-      props.setResponseErrorType(taxClearanceResponse.error.type);
-    } else if (taxClearanceResponse.certificatePdfArray) {
-      analytics.event.tax_clearance.appears.validation_success();
-      const blob = new Blob(
-        [
-          new Uint8Array(
-            convertSignedByteArrayToUnsigned(taxClearanceResponse.certificatePdfArray),
-          ),
-        ],
-        {
-          type: "application/pdf",
-        },
-      );
-      props.setCertificatePdfBlob(blob);
-      props.setResponseErrorType(undefined);
-    }
 
     scrollToTop();
+
+    try {
+      const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+
+      if (taxClearanceResponse.error) {
+        analytics.event.tax_clearance.submit.validation_error();
+        props.setResponseErrorType(taxClearanceResponse.error.type);
+        return;
+      }
+
+      if (taxClearanceResponse.certificatePdfArray) {
+        analytics.event.tax_clearance.appears.validation_success();
+        const blob = new Blob(
+          [
+            new Uint8Array(
+              convertSignedByteArrayToUnsigned(taxClearanceResponse.certificatePdfArray),
+            ),
+          ],
+          {
+            type: "application/pdf",
+          },
+        );
+        props.setCertificatePdfBlob(blob);
+        props.setResponseErrorType(undefined);
+      }
+    } catch {
+      analytics.event.tax_clearance.submit.validation_error();
+      props.setResponseErrorType("SYSTEM_ERROR");
+    }
   };
 
   const handleBackButtonClick = (): void => {
