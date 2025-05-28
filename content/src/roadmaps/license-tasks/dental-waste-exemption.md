@@ -24,7 +24,7 @@ divisionPhone: (609)-292-4860
 ---
 ## Application Requirements
 
-* A [NJDEP Business Portal account](https://dep.nj.gov/online/)  ([create a new account](https://dep.nj.gov/wp-content/uploads/online/reg_instructions_new.pdf) if you do not have one)
+* A [NJDEP Business Portal account](https://dep.nj.gov/online/) ([create a new account](https://dep.nj.gov/wp-content/uploads/online/reg_instructions_new.pdf) if you do not have one)
 * Business name, address, and phone number
 * Type of dental practice
 * Business type
