@@ -108,6 +108,18 @@ describe("MyNJSelfRegClient", () => {
     mockedAxios.mockRejectedValue(["E2109 This would duplicate an existing authorization"]);
     await expect(client.resume("some-id")).rejects.toEqual(new Error("DUPLICATE_SIGNUP"));
   });
+
+  it("logs and returns error on network failure", async () => {
+    const networkError = new Error("Network failure");
+    mockedAxios.mockRejectedValueOnce(networkError);
+
+    const logSpy = jest.spyOn(logger, "LogError");
+
+    const result = await client.grant(generateUser({}));
+
+    expect(result).toBe(networkError);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("myNJSelfRegError"), networkError);
+  });
 });
 
 const grantSuccessReponse =
