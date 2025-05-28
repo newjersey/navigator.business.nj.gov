@@ -55,8 +55,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       setShowNeedsAccountModal(true);
     } else {
       fireAnalyticsEvent(step);
-
-      if (step === 2 && stepIndex === 1) {
+      if (step === 2) {
         props.saveTaxClearanceCertificateData();
       }
       setStepIndex(step);
