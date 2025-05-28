@@ -140,7 +140,6 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
   }, business);
 
   const {
-    FormFuncWrapper: formFuncWrapper,
     isValid,
     getInvalidFieldIds,
     onSubmit,
@@ -186,7 +185,6 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
                   isValid={isValid}
                   getInvalidFieldIds={getInvalidFieldIds}
                   CMS_ONLY_stepIndex={props.CMS_ONLY_stepIndex}
-                  formFuncWrapper={formFuncWrapper}
                 />
               </form>
             </div>
