@@ -5,8 +5,9 @@ notesMd: >+
 
 
 summaryDescriptionMd: >-
-  You need a certification to make designated classification placements (DCPs)
-  if you assign temporary workers in any of these categories: 
+  You need a Temporary Worker Bill of Rights certification to make designated
+  classification placements (DCPs) if you assign temporary workers in any of
+  these categories: 
 
 
   * 33-90000 Other Protective Service Workers
@@ -36,8 +37,6 @@ webflowName: Temporary Workers Designated Classification Placements
 industryId: ""
 agencyId: njdol
 ---
-## Eligibility Criteria
-
 You must have an active license or registration as one of the following:
 
 * Temporary help service firm
@@ -50,16 +49,25 @@ You must have an active license or registration as one of the following:
 ## Application Requirements
 
 * Business name
-*  `Trade name|alt-name-trade-name\`, if applicable
-* 12-digit `New Jersey tax ID number|tax-id\` 
+*  `Trade name|alt-name-trade-name`, if applicable
+* 12-digit `New Jersey tax ID number|tax-id`
+* Federal `employer identification number|ein`
 * Business address
-*  `Business type/structure|business-structure-learn-more\` 
+* `Business organization/structure|business-structure-learn-more\` 
 * Owner’s information, including name, address, and email
+* `Registered agent information|registered-agent`, if applicable
 * Supplier information, including name, address, and phone number, if applicable
 * Manufacturer representative information, including company name, address of machine location, and 12-digit `New Jersey tax ID number|tax-id\`, if applicable
 * 15-digit employer account number (usually in this format: 0-###-###-###/000-00), issued by the Department of Labor and Workforce Development for the payment of unemployment insurance contributions
-* Proof of valid workers’ compensation insurance covering all employees
+* Proof of valid workers’ compensation insurance covering all employees, including policy number, company name, and expiration date
+* Information about DCPs receiving permanent placements within the past 12 months, including number of placements and percentage of total workers placed
+* Revocation or suspension information within the last 5 years, if applicable
+* `Surety bond|surety-bond` information or exemption information
 * Applicable fees paid
+
+The certification must be signed by the principal executive officer.
+
+&nbsp;
 
 Select the option to apply for a TWBR (Temporary Workers Bill of Rights) certification after signing in or creating an account.
 
