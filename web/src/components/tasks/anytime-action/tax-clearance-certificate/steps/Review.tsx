@@ -94,35 +94,40 @@ export const Review = (props: Props): ReactElement => {
     DataFormErrorMapContext,
   );
 
+  // Update data error map based
+  const handleOnClick = (): void => {
+    if (!business || !userData || !business.taxClearanceCertificateData) {
+      return;
+    }
+    if (business.taxClearanceCertificateData.requestingAgencyId === "") {
+      setIsValidRequestingAgencyId(false);
+    }
+    if (business.taxClearanceCertificateData.businessName === "") {
+      setIsValidBusinessName(false);
+    }
+    if (business.taxClearanceCertificateData.taxId === "") {
+      setIsValidTaxId(false);
+    }
+    if (business.taxClearanceCertificateData.taxPin === "") {
+      setIsValidTaxPin(false);
+    }
+
+    setIsValidAddressLine1(!doesRequiredFieldHaveError("addressLine1"));
+    setIsValidCity(!doesRequiredFieldHaveError("addressCity"));
+    setIsValidState(!doesRequiredFieldHaveError("addressState"));
+    setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
+  };
+
   props.formFuncWrapper(async (): Promise<void> => {
     if (!business || !userData || !business.taxClearanceCertificateData) {
       return;
     }
-
     scrollToTop();
 
+    // If any field is empty, do not submit the form
     if (isAnyFieldEmpty(business.taxClearanceCertificateData)) {
-      if (business.taxClearanceCertificateData.requestingAgencyId === "") {
-        setIsValidRequestingAgencyId(false);
-      }
-      if (business.taxClearanceCertificateData.businessName === "") {
-        setIsValidBusinessName(false);
-      }
-      if (business.taxClearanceCertificateData.taxId === "") {
-        setIsValidTaxId(false);
-      }
-      if (business.taxClearanceCertificateData.taxPin === "") {
-        setIsValidTaxPin(false);
-      }
-
-      setIsValidAddressLine1(!doesRequiredFieldHaveError("addressLine1"));
-      setIsValidCity(!doesRequiredFieldHaveError("addressCity"));
-      setIsValidState(!doesRequiredFieldHaveError("addressState"));
-      setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
-
       return;
     }
-
     try {
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
 
@@ -218,6 +223,7 @@ export const Review = (props: Props): ReactElement => {
             </div>
             <PrimaryButton
               isColor="primary"
+              onClick={handleOnClick}
               isRightMarginRemoved={true}
               dataTestId="next-button"
               isSubmitButton={true}
