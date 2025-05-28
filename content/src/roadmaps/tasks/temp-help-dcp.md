@@ -37,6 +37,8 @@ webflowName: Temporary Workers Designated Classification Placements
 industryId: ""
 agencyId: njdol
 ---
+&nbsp;
+
 You must have an active license or registration as one of the following:
 
 * Temporary help service firm
