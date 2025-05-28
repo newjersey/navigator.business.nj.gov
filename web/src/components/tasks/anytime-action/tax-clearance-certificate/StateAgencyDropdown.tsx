@@ -11,7 +11,7 @@ import {
   LookupTaxClearanceCertificateAgenciesById,
 } from "@businessnjgovnavigator/shared";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { ReactElement, ReactNode, useContext } from "react";
+import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   preventRefreshWhenUnmounted?: boolean;
@@ -46,14 +46,22 @@ export const StateAgencyDropdown = (props: Props): ReactElement => {
     return <>{value && LookupTaxClearanceCertificateAgenciesById(value).name}</>;
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS">
-        <Content className={"text-bold margin-bottom-05"}>
-          {Config.taxClearanceCertificateStep2.requestingAgencyLabel}
-        </Content>
+        <label htmlFor="tax-clearance-certificate-agency-dropdown">
+          <Content className={"text-bold margin-bottom-05"}>
+            {Config.taxClearanceCertificateStep2.requestingAgencyLabel}
+          </Content>
+        </label>
         <FormControl variant="outlined" fullWidth error={isFormFieldInvalid}>
           <Select
+            open={isOpen}
+            onOpen={() => setIsOpen(true)}
+            onClose={() => setIsOpen(false)}
+            onClick={() => setIsOpen(!isOpen)}
             fullWidth
             displayEmpty
             value={state.requestingAgencyId || ""}
@@ -62,6 +70,7 @@ export const StateAgencyDropdown = (props: Props): ReactElement => {
             renderValue={renderValue}
             inputProps={{
               "aria-label": "Tax clearance certificate requesting agency",
+              id: "tax-clearance-certificate-agency-dropdown",
             }}
             onBlur={performValidation}
           >
