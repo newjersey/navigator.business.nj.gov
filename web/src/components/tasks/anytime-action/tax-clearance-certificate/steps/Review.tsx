@@ -3,31 +3,41 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { isAnyFieldEmpty } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import * as api from "@/lib/api-client/apiClient";
+import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import {
+  convertSignedByteArrayToUnsigned,
   LookupTaxClearanceCertificateAgenciesById,
   TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
-import { convertSignedByteArrayToUnsigned } from "@businessnjgovnavigator/shared/intHelpers";
 import { ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
   setResponseErrorType: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;
+  formFuncWrapper: (
+    onSubmitFunc: () => void | Promise<void>,
+    onChangeFunc?:
+      | ((isValid: boolean, errors: unknown[], pageChange: boolean) => void | Promise<void>)
+      | undefined,
+  ) => void;
 }
 export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData, business } = useUserData();
-
+  const { business, userData } = useUserData();
+  const { doesRequiredFieldHaveError } = useAddressErrors();
   const requestingAgencyName = LookupTaxClearanceCertificateAgenciesById(
     business?.taxClearanceCertificateData?.requestingAgencyId,
   ).name;
@@ -51,10 +61,67 @@ export const Review = (props: Props): ReactElement => {
     });
   }
 
-  const handleSaveButtonClick = async (): Promise<void> => {
-    if (!userData) return;
+  const { setIsValid: setIsValidRequestingAgencyId } = useFormContextFieldHelpers(
+    "requestingAgencyId",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidBusinessName } = useFormContextFieldHelpers(
+    "businessName",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
+    "addressLine1",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers(
+    "addressCity",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidState } = useFormContextFieldHelpers(
+    "addressState",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers(
+    "addressZipCode",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidTaxId } = useFormContextFieldHelpers(
+    "taxId",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidTaxPin } = useFormContextFieldHelpers(
+    "taxPin",
+    DataFormErrorMapContext,
+  );
+
+  props.formFuncWrapper(async (): Promise<void> => {
+    if (!business || !userData || !business.taxClearanceCertificateData) {
+      return;
+    }
 
     scrollToTop();
+
+    if (isAnyFieldEmpty(business.taxClearanceCertificateData)) {
+      if (business.taxClearanceCertificateData.requestingAgencyId === "") {
+        setIsValidRequestingAgencyId(false);
+      }
+      if (business.taxClearanceCertificateData.businessName === "") {
+        setIsValidBusinessName(false);
+      }
+      if (business.taxClearanceCertificateData.taxId === "") {
+        setIsValidTaxId(false);
+      }
+      if (business.taxClearanceCertificateData.taxPin === "") {
+        setIsValidTaxPin(false);
+      }
+
+      setIsValidAddressLine1(!doesRequiredFieldHaveError("addressLine1"));
+      setIsValidCity(!doesRequiredFieldHaveError("addressCity"));
+      setIsValidState(!doesRequiredFieldHaveError("addressState"));
+      setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
+
+      return;
+    }
 
     try {
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
@@ -84,13 +151,12 @@ export const Review = (props: Props): ReactElement => {
       analytics.event.tax_clearance.submit.validation_error();
       props.setResponseErrorType("SYSTEM_ERROR");
     }
-  };
+  });
 
   const handleBackButtonClick = (): void => {
     analytics.event.tax_clearance.click.switch_to_step_two();
     props.setStepIndex(1);
   };
-
   return (
     <>
       <ReviewSection
@@ -152,9 +218,9 @@ export const Review = (props: Props): ReactElement => {
             </div>
             <PrimaryButton
               isColor="primary"
-              onClick={handleSaveButtonClick}
               isRightMarginRemoved={true}
               dataTestId="next-button"
+              isSubmitButton={true}
             >
               {Config.taxClearanceCertificateShared.saveButtonText}
             </PrimaryButton>

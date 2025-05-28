@@ -91,3 +91,18 @@ export const getAllFieldsNonEmpty = (
     (taxClearanceCertificateData.taxPin ?? "").trim() !== ""
   );
 };
+
+export const isAnyFieldEmpty = (
+  taxClearanceCertificateData: TaxClearanceCertificateData,
+): boolean => {
+  return (
+    (taxClearanceCertificateData.requestingAgencyId ?? "").trim() === "" ||
+    (taxClearanceCertificateData.businessName ?? "").trim() === "" ||
+    (taxClearanceCertificateData.addressLine1 ?? "").trim() === "" ||
+    (taxClearanceCertificateData.addressCity ?? "").trim() === "" ||
+    taxClearanceCertificateData.addressState === undefined ||
+    (taxClearanceCertificateData.addressZipCode ?? "").trim() === "" ||
+    (taxClearanceCertificateData.taxId ?? "").trim() === "" ||
+    (taxClearanceCertificateData.taxPin ?? "").trim() === ""
+  );
+};

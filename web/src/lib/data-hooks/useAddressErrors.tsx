@@ -7,6 +7,7 @@ type AddressErrorsResponse = {
   doesFieldHaveError: (field: FieldsForAddressErrorHandling) => boolean;
   doSomeFieldsHaveError: (fields: AddressFields[]) => boolean;
   getFieldErrorLabel: (field: AddressFields) => string;
+  doesRequiredFieldHaveError: (field: AddressFields) => boolean;
 };
 
 export const useAddressErrors = (): AddressErrorsResponse => {
@@ -22,6 +23,15 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     "addressCountry",
     "addressProvince",
   ]);
+
+  // use for onBlur validation
+  const doesRequiredFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
+    return (
+      doesFieldHaveError(field) ||
+      state.formationAddressData[field] === "" ||
+      state.formationAddressData[field] === undefined
+    );
+  };
 
   const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
     if (!validatedFields.has(field)) {
@@ -56,5 +66,6 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     doesFieldHaveError,
     doSomeFieldsHaveError,
     getFieldErrorLabel,
+    doesRequiredFieldHaveError,
   };
 };

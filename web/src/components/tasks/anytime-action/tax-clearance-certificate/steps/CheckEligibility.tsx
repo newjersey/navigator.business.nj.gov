@@ -21,18 +21,19 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { FormEvent, ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
-  onSave: (event?: FormEvent<HTMLFormElement>) => void;
-  onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
+  saveTaxClearanceCertificateData: () => void;
 }
 
 export const CheckEligibility = (props: Props): ReactElement => {
+  const dataFormErrorMap = useContext(DataFormErrorMapContext);
+
   const { Config } = useConfig();
 
-  const { doesFieldHaveError } = useAddressErrors();
+  const { doesRequiredFieldHaveError, doesFieldHaveError } = useAddressErrors();
   const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
     "addressLine1",
     DataFormErrorMapContext,
@@ -55,18 +56,18 @@ export const CheckEligibility = (props: Props): ReactElement => {
   );
 
   const onValidation = (): void => {
-    setIsValidAddressLine1(!doesFieldHaveError("addressLine1"));
+    setIsValidAddressLine1(!doesRequiredFieldHaveError("addressLine1"));
     setIsValidAddressLine2(!doesFieldHaveError("addressLine2"));
-    setIsValidCity(!doesFieldHaveError("addressCity"));
-    setIsValidState(!doesFieldHaveError("addressState"));
-    setIsValidZipCode(!doesFieldHaveError("addressZipCode"));
+    setIsValidCity(!doesRequiredFieldHaveError("addressCity"));
+    setIsValidState(!doesRequiredFieldHaveError("addressState"));
+    setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
   };
   const { business } = useUserData();
 
   const handleSaveButtonClick = (): void => {
     analytics.event.tax_clearance.click.switch_to_step_three();
-    props.onSave();
-    props.onSubmit();
+    props.saveTaxClearanceCertificateData();
+    props.setStepIndex(2);
   };
 
   const handleBackButtonClick = (): void => {
@@ -100,7 +101,11 @@ export const CheckEligibility = (props: Props): ReactElement => {
           </ProfileField>
         </div>
         <div className="margin-y-2">
-          <UnitesStatesAddress onValidation={onValidation} isFullWidth />
+          <UnitesStatesAddress
+            onValidation={onValidation}
+            dataFormErrorMap={dataFormErrorMap}
+            isFullWidth
+          />
         </div>
         <div className="margin-y-2">
           <ProfileField fieldName="taxId" hideLine fullWidth>
