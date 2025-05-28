@@ -3,10 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { generateAnytimeActionTask } from "@/test/factories";
-import {
-  selectComboboxValueByTextClick,
-  selectComboboxValueByTextMouseDown,
-} from "@/test/helpers/helpers-testing-library-selectors";
+import { selectComboboxValueByTextClick } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -205,7 +202,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       fireEvent.click(secondTab);
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -253,7 +250,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -266,7 +263,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       fireEvent.click(secondTab);
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -560,7 +557,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     fireEvent.click(screen.getAllByRole("tab")[1]);
     expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-    selectComboboxValueByTextMouseDown(
+    selectComboboxValueByTextClick(
       "Tax clearance certificate requesting agency",
       LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
     );
@@ -602,7 +599,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     fireEvent.click(screen.getAllByRole("tab")[1]);
     expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-    selectComboboxValueByTextMouseDown(
+    selectComboboxValueByTextClick(
       "Tax clearance certificate requesting agency",
       LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
     );
@@ -692,7 +689,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -720,7 +717,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -748,7 +745,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -775,7 +772,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -801,7 +798,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
@@ -835,7 +832,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectComboboxValueByTextMouseDown(
+      selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
       );
