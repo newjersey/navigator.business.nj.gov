@@ -67,8 +67,6 @@ const awsCryptoContextTaxIdEncryptionPurpose =
   process.env.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE || "";
 const awsCryptoContextOrigin = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 const awsCryptoTaxIdHashingKey = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
-const awsCryptoTaxIdEncryptedHashingSalt =
-  process.env.AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT || "";
 const awsCryptoContextTaxIdHashingPurpose =
   process.env.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE || "";
 
@@ -216,7 +214,10 @@ const serverlessConfiguration: AWS = {
       AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
       AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
       AWS_CRYPTO_TAX_ID_HASHING_KEY: awsCryptoTaxIdHashingKey,
-      AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT: awsCryptoTaxIdEncryptedHashingSalt,
+      AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT:
+        stage === "local"
+          ? "${ssm:/dev/tax_id_hashing_salt}"
+          : `\${ssm:/${stage}/tax_id_hashing_salt}`,
       AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE: awsCryptoContextTaxIdHashingPurpose,
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
