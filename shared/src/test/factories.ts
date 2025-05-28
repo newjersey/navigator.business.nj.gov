@@ -423,6 +423,8 @@ export const generateTaxClearanceCertificateData = (
     encryptedTaxId: `encrypted-${taxId}`,
     taxPin: maskingCharacter.repeat(4),
     encryptedTaxPin: `encrypted-${randomInt(4)}`,
+    hasPreviouslyReceivedCertificate: false,
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };
@@ -532,7 +534,9 @@ export const generateXrayRegistrationData = (overrides: Partial<XrayData>): Xray
 };
 
 export const generateBusiness = (overrides: Partial<Business>): Business => {
-  const profileData = overrides.profileData ?? generateProfileData({});
+  const taxId = maskingCharacter.repeat(7) + randomInt(12).toString().slice(-5);
+  const taxPin = maskingCharacter.repeat(4);
+  const profileData = overrides.profileData ?? generateProfileData({ taxId, taxPin });
   const formationData: FormationData = publicFilingLegalTypes.includes(
     profileData.legalStructureId as PublicFilingLegalType,
   )
@@ -557,7 +561,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
-    taxClearanceCertificateData: generateTaxClearanceCertificateData({}),
+    taxClearanceCertificateData: generateTaxClearanceCertificateData({ taxId, taxPin }),
     environmentData: generateEnvironmentData({}),
     xrayRegistrationData: undefined,
     version: CURRENT_VERSION,

@@ -32,8 +32,9 @@ interface Props {
 }
 export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { business, userData } = useUserData();
   const { doesRequiredFieldHaveError } = useAddressErrors();
+  const { userData, business, updateQueue } = useUserData();
+
   const requestingAgencyName = LookupTaxClearanceCertificateAgenciesById(
     business?.taxClearanceCertificateData?.requestingAgencyId,
   ).name;
@@ -123,8 +124,7 @@ export const Review = (props: Props): ReactElement => {
 
     try {
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
-
-      if (taxClearanceResponse.error) {
+      if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
         props.setResponseErrorType(taxClearanceResponse.error.type);
         return;
@@ -143,6 +143,8 @@ export const Review = (props: Props): ReactElement => {
           },
         );
         props.setCertificatePdfBlob(blob);
+        props.setResponseErrorType(undefined);
+        updateQueue?.queue(taxClearanceResponse.userData).update();
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();

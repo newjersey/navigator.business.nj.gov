@@ -23,6 +23,7 @@ import {
   generateProfileData,
   generateTaxClearanceCertificateData,
   generateUnitedStatesStateDropdownOption,
+  generateUserData,
   generateUserDataForBusiness,
   getTaxClearanceCertificateAgencies,
   LookupTaxClearanceCertificateAgenciesById,
@@ -73,7 +74,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   }): void => {
     render(
       <WithStatefulUserData
-        initialUserData={userData || generateUserDataForBusiness(business || generateBusiness({}))}
+        initialUserData={userData ?? generateUserDataForBusiness(business ?? generateBusiness({}))}
       >
         <AnytimeActionTaxClearanceCertificate anytimeAction={anytimeAction} />
       </WithStatefulUserData>,
@@ -583,6 +584,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       encryptedTaxId: "encrypted-012345678901",
       taxPin: "****",
       encryptedTaxPin: "encrypted-1234",
+      hasPreviouslyReceivedCertificate: false,
+      lastUpdatedISO: undefined,
     });
   });
 
@@ -624,6 +627,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       encryptedTaxId: "encrypted-012345678901",
       taxPin: "****",
       encryptedTaxPin: "encrypted-1234",
+      hasPreviouslyReceivedCertificate: false,
+      lastUpdatedISO: undefined,
     });
   });
 
@@ -971,6 +976,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   it("makes the api post request", async () => {
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
+      userData: generateUserData({}),
     });
     window.URL.createObjectURL = jest.fn();
     const business = generateBusiness({ id: "Faraz" });
@@ -983,7 +989,14 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
     );
     await waitFor(() => {
-      expect(mockApi.postTaxClearanceCertificate).toHaveBeenCalledWith(userData);
+      const currentBusiness: Business = {
+        ...userData.businesses[userData.currentBusinessId],
+        lastUpdatedISO: expect.any(String),
+      };
+      expect(mockApi.postTaxClearanceCertificate).toHaveBeenCalledWith({
+        ...userData,
+        businesses: { ...userData.businesses, [currentBusiness.id]: currentBusiness },
+      });
     });
   });
 
@@ -994,6 +1007,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     window.URL.createObjectURL = mockCreateObjectURL;
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
+      userData: generateUserData({}),
     });
     renderComponent({});
     fireEvent.click(screen.getAllByRole("tab")[2]);

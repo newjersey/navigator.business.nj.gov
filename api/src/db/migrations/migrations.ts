@@ -163,6 +163,7 @@ import { migrate_v159_to_v160 } from "@db/migrations/v160_add_xray_registration_
 import { migrate_v160_to_v161 } from "@db/migrations/v161_add_encrypted_tax_pin";
 import { migrate_v161_to_v162 } from "@db/migrations/v162_add_hashed_taxid_to_userdata";
 import { migrate_v162_to_v163 } from "@db/migrations/v163_waste_transport_to_waste_data";
+import { migrate_v163_to_v164 } from "@db/migrations/v164_track_tax_clearance_primary_business";
 
 import { MigrationClients } from "@db/migrations/types";
 
@@ -333,6 +334,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v160_to_v161,
   migrate_v161_to_v162,
   migrate_v162_to_v163,
+  migrate_v163_to_v164,
 ];
 
-export { generatev163UserData as CURRENT_GENERATOR } from "@db/migrations/v163_waste_transport_to_waste_data";
+export { generatev164UserData as CURRENT_GENERATOR } from "@db/migrations/v164_track_tax_clearance_primary_business";

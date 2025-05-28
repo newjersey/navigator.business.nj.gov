@@ -37,6 +37,7 @@ describe("xrayRegistrationRouter", () => {
       migrateOutdatedVersionUsers: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
+      findBusinessesByHashedTaxId: jest.fn(),
     };
     stubDynamoDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);

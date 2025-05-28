@@ -24,19 +24,21 @@ describe("DynamoBusinessesDataClient", () => {
   let client: DynamoDBDocumentClient;
   let dynamoBusinessesDataClient: BusinessesDataClient;
   let logger: LogWriterType;
-  const formationDate = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
+  const dateOfFormation = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
   const naicsCode = "12345";
-  const industry = "test-industry";
+  const industryId = "test-industry";
   const encryptedTaxId = "test-id-12345";
+  const hashedTaxId = `some-hashed-tax-id-${randomInt()}`;
 
   const businessData = generateBusiness({
     profileData: generateProfileData({
-      dateOfFormation: formationDate,
+      dateOfFormation,
       entityId: undefined,
       legalStructureId: "limited-liability-company",
-      naicsCode: naicsCode,
-      industryId: industry,
-      encryptedTaxId: encryptedTaxId,
+      naicsCode,
+      industryId,
+      encryptedTaxId,
+      hashedTaxId,
     }),
     taxFilingData: generateTaxFilingData({
       filings: [],
@@ -102,6 +104,19 @@ describe("DynamoBusinessesDataClient", () => {
     expect(expectedValue[0]).toEqual(businessData);
   });
 
+  it("finds all businesses by the hashedTaxId", async () => {
+    await dynamoBusinessesDataClient.put(businessData);
+    let expectedValue = await dynamoBusinessesDataClient.findAllByHashedTaxId(hashedTaxId);
+    expect(expectedValue).toHaveLength(1);
+    expect(expectedValue[0]).toBeDefined();
+    expect(expectedValue[0]).toEqual(businessData);
+
+    const businessWithoutHashedTaxId = generateBusiness({ profileData: generateProfileData({}) });
+    await dynamoBusinessesDataClient.put(businessWithoutHashedTaxId);
+    expectedValue = await dynamoBusinessesDataClient.findAllByHashedTaxId(hashedTaxId);
+    expect(expectedValue).toHaveLength(1);
+  });
+
   it("should return an empty array for a non-existent industry", async () => {
     const randomIndustry = `some-industry-${randomInt()}`;
     expect(await dynamoBusinessesDataClient.findAllByIndustry(randomIndustry)).toHaveLength(0);
@@ -109,7 +124,7 @@ describe("DynamoBusinessesDataClient", () => {
 
   it("finds all businesses by the industry", async () => {
     await dynamoBusinessesDataClient.put(businessData);
-    const expectedValue = await dynamoBusinessesDataClient.findAllByIndustry(industry);
+    const expectedValue = await dynamoBusinessesDataClient.findAllByIndustry(industryId);
     expect(expectedValue).toHaveLength(1);
     expect(expectedValue[0]).toBeDefined();
     expect(expectedValue[0]).toEqual(businessData);

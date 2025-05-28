@@ -7,9 +7,12 @@ import {
   TAX_ID_MISSING_FIELD,
   TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
 } from "@client/ApiTaxClearanceCertificateClient";
-import { type CryptoClient, TaxClearanceCertificateClient } from "@domain/types";
+import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
-import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
+import {
+  emptyTaxClearanceCertificateData,
+  LookupTaxClearanceCertificateAgenciesById,
+} from "@shared/taxClearanceCertificate";
 import {
   generateBusiness,
   generateTaxClearanceCertificateData,
@@ -31,7 +34,24 @@ describe("TaxClearanceCertificateClient", () => {
   };
   let client: TaxClearanceCertificateClient;
   let stubEncryptionDecryptionClient: jest.Mocked<CryptoClient>;
+  let stubDatabaseClient: jest.Mocked<DatabaseClient>;
   let userData: UserData;
+
+  const createExpectedUserData = (baseUserData: UserData): UserData => ({
+    ...baseUserData,
+    businesses: {
+      ...baseUserData.businesses,
+      "123": {
+        ...baseUserData.businesses["123"],
+        taxClearanceCertificateData: {
+          ...emptyTaxClearanceCertificateData,
+          ...baseUserData.businesses["123"].taxClearanceCertificateData,
+          hasPreviouslyReceivedCertificate: true,
+          lastUpdatedISO: new Date().toISOString(),
+        },
+      },
+    },
+  });
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -45,13 +65,17 @@ describe("TaxClearanceCertificateClient", () => {
       }),
       hashValue: jest.fn(),
     };
-    userData = generateUserData({});
-    mockAxios.post.mockResolvedValue({ data: { certificate: [1] } });
-  });
+    stubDatabaseClient = {
+      get: jest.fn(),
+      put: jest.fn(),
+      findByEmail: jest.fn(),
+      findUserByBusinessName: jest.fn(),
+      findUsersByBusinessNamePrefix: jest.fn(),
+      findBusinessesByHashedTaxId: jest.fn(),
+      migrateOutdatedVersionUsers: jest.fn(),
+    };
 
-  it("makes a post request to correct url with basic auth and data", async () => {
-    const generatedTaxClearanceCertificateData = generateTaxClearanceCertificateData({});
-    const userData = generateUserData({
+    userData = generateUserData({
       currentBusinessId: "123",
       user: generateUser({
         id: "user-id1",
@@ -59,12 +83,61 @@ describe("TaxClearanceCertificateClient", () => {
       }),
       businesses: {
         123: generateBusiness({
-          taxClearanceCertificateData: generatedTaxClearanceCertificateData,
+          profileData: {
+            ...generateBusiness({}).profileData,
+            hashedTaxId: "test-hashed-tax-id",
+          },
+          taxClearanceCertificateData: generateTaxClearanceCertificateData({}),
         }),
       },
     });
 
-    await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient);
+    stubDatabaseClient.get.mockResolvedValue(userData);
+    stubDatabaseClient.findBusinessesByHashedTaxId.mockResolvedValue([]);
+
+    mockAxios.post.mockResolvedValue({ data: { certificate: [1] } });
+  });
+
+  it("returns error when another business has previously received a certificate", async () => {
+    const mockHashedTaxId = "test-hashed-tax-id";
+    const businessWithCertificate = generateBusiness({
+      id: "other-business-id",
+      profileData: {
+        ...generateBusiness({}).profileData,
+        businessName: "Other Business",
+        hashedTaxId: mockHashedTaxId,
+      },
+      taxClearanceCertificateData: {
+        ...generateTaxClearanceCertificateData({}),
+        hasPreviouslyReceivedCertificate: true,
+      },
+    });
+
+    stubDatabaseClient.findBusinessesByHashedTaxId.mockResolvedValue([businessWithCertificate]);
+
+    const result = await client.postTaxClearanceCertificate(
+      userData,
+      stubEncryptionDecryptionClient,
+      stubDatabaseClient,
+    );
+
+    expect(result).toEqual({
+      error: {
+        type: "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT",
+        message: `Business has previously received a tax clearance certificate.`,
+      },
+    });
+  });
+
+  it("makes a post request to correct url with basic auth and data", async () => {
+    const generatedTaxClearanceCertificateData =
+      userData.businesses["123"].taxClearanceCertificateData!;
+
+    await client.postTaxClearanceCertificate(
+      userData,
+      stubEncryptionDecryptionClient,
+      stubDatabaseClient,
+    );
     expect(mockAxios.post).toHaveBeenCalledWith(
       "www.test.com/TYTR_ACE_App/ProcessCertificate/businessClearance",
       {
@@ -92,19 +165,8 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("fires all logs when successful api response is returned", async () => {
-    const generatedTaxClearanceCertificateData = generateTaxClearanceCertificateData({});
-    const userData = generateUserData({
-      currentBusinessId: "123",
-      user: generateUser({
-        id: "user-id1",
-        name: "user-name1",
-      }),
-      businesses: {
-        123: generateBusiness({
-          taxClearanceCertificateData: generatedTaxClearanceCertificateData,
-        }),
-      },
-    });
+    const generatedTaxClearanceCertificateData =
+      userData.businesses["123"].taxClearanceCertificateData!;
     const postBody = {
       repId: userData.user.id,
       repName: userData.user.name,
@@ -124,7 +186,11 @@ describe("TaxClearanceCertificateClient", () => {
     const spyOnGetId = jest.spyOn(DummyLogWriter, "GetId").mockReturnValue("test");
     const spyOnLogInfo = jest.spyOn(DummyLogWriter, "LogInfo");
     mockAxios.post.mockResolvedValue({ data: { certificate: [11, 22] } });
-    await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient);
+    await client.postTaxClearanceCertificate(
+      userData,
+      stubEncryptionDecryptionClient,
+      stubDatabaseClient,
+    );
 
     expect(spyOnGetId).toHaveBeenCalled();
     expect(spyOnLogInfo.mock.calls[0][0]).toEqual("Tax Clearance Certificate Client - Id:test");
@@ -143,17 +209,26 @@ describe("TaxClearanceCertificateClient", () => {
     spyOnLogInfo.mockRestore();
   });
 
-  it("returns certificate pdf array", async () => {
+  it("returns certificate pdf array and updated user data", async () => {
     mockAxios.post.mockResolvedValue({ data: { certificate: [11, 22] } });
     const result = await client.postTaxClearanceCertificate(
       userData,
       stubEncryptionDecryptionClient,
+      stubDatabaseClient,
     );
-    expect(result).toEqual({ certificatePdfArray: [11, 22] });
+
+    if ("error" in result) {
+      throw new Error("Expected successful response");
+    }
+
+    const expectedUserData = createExpectedUserData(userData);
+    expect(result).toEqual({
+      certificatePdfArray: [11, 22],
+      userData: expectedUserData,
+    });
   });
 
   it("fires error log when error response is returned", async () => {
-    const userData = generateUserData({});
     const error = {
       response: { status: StatusCodes.BAD_REQUEST, data: "Error Message" },
     };
@@ -162,7 +237,11 @@ describe("TaxClearanceCertificateClient", () => {
     const spyOnLogError = jest.spyOn(DummyLogWriter, "LogError");
     mockAxios.post.mockRejectedValue(error);
     await expect(
-      client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).rejects.toEqual(StatusCodes.BAD_REQUEST);
 
     expect(spyOnLogError.mock.calls[0]).toEqual([
@@ -175,22 +254,28 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("throws error when error response is unknown", async () => {
-    const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.INTERNAL_SERVER_ERROR },
     });
     await expect(
-      client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).rejects.toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
   });
 
   it("returns INELIGIBLE_TAX_CLEARANCE_FORM error", async () => {
-    const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.BAD_REQUEST, data: INELIGIBLE_TAX_CLEARANCE_FORM },
     });
     expect(
-      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).toEqual({
       error: {
         message: INELIGIBLE_TAX_CLEARANCE_FORM,
@@ -200,12 +285,15 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("returns FAILED_TAX_ID_AND_PIN_VALIDATION error", async () => {
-    const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.BAD_REQUEST, data: FAILED_TAX_ID_AND_PIN_VALIDATION },
     });
     expect(
-      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).toEqual({
       error: {
         message: FAILED_TAX_ID_AND_PIN_VALIDATION,
@@ -215,12 +303,15 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("returns NATURAL_PROGRAM_ERROR error", async () => {
-    const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.BAD_REQUEST, data: NATURAL_PROGRAM_ERROR },
     });
     expect(
-      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).toEqual({
       error: {
         message: NATURAL_PROGRAM_ERROR,
@@ -230,12 +321,15 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("returns MISSING_FIELD error", async () => {
-    const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.BAD_REQUEST, data: MISSING_FIELD },
     });
     expect(
-      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).toEqual({
       error: {
         message: MISSING_FIELD,
@@ -245,12 +339,15 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("returns TAX_ID_MISSING_FIELD error", async () => {
-    const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.BAD_REQUEST, data: TAX_ID_MISSING_FIELD },
     });
     expect(
-      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).toEqual({
       error: {
         message: TAX_ID_MISSING_FIELD,
@@ -260,12 +357,15 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("returns TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE error", async () => {
-    const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.BAD_REQUEST, data: TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE },
     });
     expect(
-      await client.postTaxClearanceCertificate(userData, stubEncryptionDecryptionClient),
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
     ).toEqual({
       error: {
         message: TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
