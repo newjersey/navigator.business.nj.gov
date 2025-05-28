@@ -22,12 +22,6 @@ interface Props {
   getInvalidFieldIds: () => string[];
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
   CMS_ONLY_stepIndex?: number;
-  formFuncWrapper: (
-    onSubmitFunc: () => void | Promise<void>,
-    onChangeFunc?:
-      | ((isValid: boolean, errors: unknown[], pageChange: boolean) => void | Promise<void>)
-      | undefined,
-  ) => void;
 }
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
@@ -95,7 +89,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
         <Review
           setStepIndex={setStepIndex}
           setCertificatePdfBlob={props.setCertificatePdfBlob}
-          formFuncWrapper={props.formFuncWrapper}
+          isValid={props.isValid}
           setResponseErrorType={setResponseErrorType}
         />
       ),

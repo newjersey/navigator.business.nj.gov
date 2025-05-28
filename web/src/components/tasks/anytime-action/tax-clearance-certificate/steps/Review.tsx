@@ -19,6 +19,7 @@ import { scrollToTop } from "@/lib/utils/helpers";
 import {
   convertSignedByteArrayToUnsigned,
   LookupTaxClearanceCertificateAgenciesById,
+  TaxClearanceCertificateData,
   TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
@@ -27,12 +28,7 @@ interface Props {
   setStepIndex: (step: number) => void;
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
   setResponseErrorType: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;
-  formFuncWrapper: (
-    onSubmitFunc: () => void | Promise<void>,
-    onChangeFunc?:
-      | ((isValid: boolean, errors: unknown[], pageChange: boolean) => void | Promise<void>)
-      | undefined,
-  ) => void;
+  isValid: () => boolean;
 }
 export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -95,20 +91,17 @@ export const Review = (props: Props): ReactElement => {
   );
 
   // Update data error map based
-  const handleOnClick = (): void => {
-    if (!business || !userData || !business.taxClearanceCertificateData) {
-      return;
-    }
-    if (business.taxClearanceCertificateData.requestingAgencyId === "") {
+  const updateErrorMap = (taxClearanceData: TaxClearanceCertificateData): void => {
+    if (taxClearanceData.requestingAgencyId === "") {
       setIsValidRequestingAgencyId(false);
     }
-    if (business.taxClearanceCertificateData.businessName === "") {
+    if (taxClearanceData.businessName === "") {
       setIsValidBusinessName(false);
     }
-    if (business.taxClearanceCertificateData.taxId === "") {
+    if (taxClearanceData.taxId === "") {
       setIsValidTaxId(false);
     }
-    if (business.taxClearanceCertificateData.taxPin === "") {
+    if (taxClearanceData.taxPin === "") {
       setIsValidTaxPin(false);
     }
 
@@ -118,16 +111,16 @@ export const Review = (props: Props): ReactElement => {
     setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
   };
 
-  props.formFuncWrapper(async (): Promise<void> => {
-    if (!business || !userData || !business.taxClearanceCertificateData) {
-      return;
-    }
-    scrollToTop();
+  const handleSubmit = async (): Promise<void> => {
+    if (!userData || !business?.taxClearanceCertificateData) return;
 
-    // If any field is empty, do not submit the form
-    if (isAnyFieldEmpty(business.taxClearanceCertificateData)) {
-      return;
-    }
+    scrollToTop();
+    props.setResponseErrorType(undefined);
+    updateErrorMap(business.taxClearanceCertificateData);
+
+    if (isAnyFieldEmpty(business.taxClearanceCertificateData)) return;
+    if (!props.isValid()) return;
+
     try {
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
 
@@ -150,13 +143,12 @@ export const Review = (props: Props): ReactElement => {
           },
         );
         props.setCertificatePdfBlob(blob);
-        props.setResponseErrorType(undefined);
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();
       props.setResponseErrorType("SYSTEM_ERROR");
     }
-  });
+  };
 
   const handleBackButtonClick = (): void => {
     analytics.event.tax_clearance.click.switch_to_step_two();
@@ -223,10 +215,9 @@ export const Review = (props: Props): ReactElement => {
             </div>
             <PrimaryButton
               isColor="primary"
-              onClick={handleOnClick}
+              onClick={handleSubmit}
               isRightMarginRemoved={true}
               dataTestId="next-button"
-              isSubmitButton={true}
             >
               {Config.taxClearanceCertificateShared.saveButtonText}
             </PrimaryButton>
