@@ -26,7 +26,8 @@ agencyAdditionalContext: Bureau of Surface Water and Pretreatment Permitting
 divisionPhone: (609)-292-4860
 ---
 ## Application Requirements
-* A NJDEP Business Portal account  (create a new account if you do not have one)
+
+* A [NJDEP Business Portal account](https://dep.nj.gov/online/) ([create a new account](https://dep.nj.gov/wp-content/uploads/online/reg_instructions_new.pdf) if you do not have one)
 * Business name, address, and phone number
 * Type of dental practice
 * Business type
@@ -36,8 +37,11 @@ divisionPhone: (609)-292-4860
 * Name of Licensed Recycling Contractor (if you have sent amalgam out for recycling)
 * Certification Personal Identification Number (PIN) that you created during registration
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
 If you don’t register, you may be subject to significant fines.
+
 :::
+
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional"}
 A dental amalgam certificate, valid for a year, or a dental amalgam certification exemption.
