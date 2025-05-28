@@ -1,6 +1,6 @@
 import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { Business, CURRENT_VERSION, UserData } from "@shared/userData";
 import { chunk } from "lodash";
 
 export const DynamoDataClient = (
@@ -147,6 +147,26 @@ export const DynamoDataClient = (
       throw new Error(errorMessage);
     }
   };
+
+  const findBusinessesByHashedTaxId = async (hashedTaxId: string): Promise<Business[]> => {
+    const truncatedValue = `"${hashedTaxId.slice(0, 10)}..."`;
+
+    try {
+      const businesses = await businessesDataClient.findAllByHashedTaxId(hashedTaxId);
+      if (!businesses || businesses.length === 0) {
+        logger.LogInfo(`No Businesses found with hashedTaxId: ${truncatedValue}`);
+        return [];
+      }
+      return businesses;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      logger.LogError(
+        `Failed to get Businesses with hashedTaxId matching ${truncatedValue}: ${errorMessage}`,
+      );
+      throw new Error(errorMessage);
+    }
+  };
+
   return {
     migrateOutdatedVersionUsers,
     get,
@@ -154,5 +174,6 @@ export const DynamoDataClient = (
     findByEmail,
     findUserByBusinessName,
     findUsersByBusinessNamePrefix,
+    findBusinessesByHashedTaxId,
   };
 };

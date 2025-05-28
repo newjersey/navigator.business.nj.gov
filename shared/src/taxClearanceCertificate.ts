@@ -2,23 +2,6 @@ import { orderBy } from "lodash";
 import taxClearanceCertificateAgenciesJSON from "../../content/src/mappings/taxClearanceCertificateIssuingAgencies.json";
 import { StateObject } from "./states";
 
-export type TaxClearanceCertificateResponseErrorType =
-  | "INELIGIBLE_TAX_CLEARANCE_FORM"
-  | "FAILED_TAX_ID_AND_PIN_VALIDATION"
-  | "MISSING_FIELD"
-  | "NATURAL_PROGRAM_ERROR"
-  | "TAX_ID_MISSING_FIELD"
-  | "TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE"
-  | "SYSTEM_ERROR";
-
-export type TaxClearanceCertificateResponse = {
-  error?: {
-    type: TaxClearanceCertificateResponseErrorType;
-    message: string;
-  };
-  certificatePdfArray?: number[];
-};
-
 export const taxClearanceCertificateAgencies: TaxClearanceCertificateAgency[] =
   taxClearanceCertificateAgenciesJSON.arrayOfTaxClearanceCertificateIssuingAgencies;
 
@@ -42,6 +25,8 @@ export const emptyTaxClearanceCertificateData: TaxClearanceCertificateData = {
   encryptedTaxId: "",
   taxPin: "",
   encryptedTaxPin: "",
+  hasPreviouslyReceivedCertificate: false,
+  lastUpdatedISO: undefined,
 };
 
 export type TaxClearanceCertificateData = {
@@ -56,6 +41,8 @@ export type TaxClearanceCertificateData = {
   encryptedTaxId: string | undefined;
   taxPin: string | undefined;
   encryptedTaxPin: string | undefined;
+  hasPreviouslyReceivedCertificate: boolean | undefined;
+  lastUpdatedISO: string | undefined;
 };
 
 export const LookupTaxClearanceCertificateAgenciesById = (

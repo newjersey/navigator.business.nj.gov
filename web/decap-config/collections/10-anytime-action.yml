@@ -312,6 +312,12 @@ collections:
                   widget: "string",
                   required: true,
                 }
+              - {
+                  label: "Tax ID In Use By Another Business - Error Text",
+                  name: "errorTextPreviouslyReceivedCertificate",
+                  widget: "string",
+                  required: true,
+                }
       - label: "Tax Clearance Shared"
         name: "taxClearanceCertificate-shared"
         file: "content/src/fieldConfig/tax-clearance-certificate-shared.json"

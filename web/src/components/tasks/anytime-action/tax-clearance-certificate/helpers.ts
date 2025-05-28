@@ -25,6 +25,8 @@ export const getInitialData = (
   encryptedTaxId: string | undefined;
   taxPin: string;
   encryptedTaxPin: string | undefined;
+  hasPreviouslyReceivedCertificate: boolean;
+  lastUpdatedISO: string | undefined;
 } => {
   const requestingAgencyId = business.taxClearanceCertificateData?.requestingAgencyId || "";
   const businessName =
@@ -74,6 +76,9 @@ export const getInitialData = (
     encryptedTaxId,
     taxPin,
     encryptedTaxPin,
+    hasPreviouslyReceivedCertificate:
+      business.taxClearanceCertificateData?.hasPreviouslyReceivedCertificate ?? false,
+    lastUpdatedISO: business.taxClearanceCertificateData?.lastUpdatedISO,
   };
 };
 

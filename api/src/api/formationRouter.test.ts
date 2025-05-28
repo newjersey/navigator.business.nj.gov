@@ -65,6 +65,7 @@ describe("formationRouter", () => {
       findByEmail: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
+      findBusinessesByHashedTaxId: jest.fn(),
     };
     app = setupExpress(false);
     app.use(

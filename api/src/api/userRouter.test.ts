@@ -87,6 +87,7 @@ describe("userRouter", () => {
       findByEmail: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
+      findBusinessesByHashedTaxId: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
     stubUpdateRoadmapSidebarCards = jest.fn();

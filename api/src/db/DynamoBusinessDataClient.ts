@@ -109,6 +109,12 @@ export const DynamoBusinessDataClient = (
     });
   };
 
+  const findAllByHashedTaxId = (hashedTaxId: string): Promise<Business[]> => {
+    return findAllBusinessesByIndex("HashedTaxId", "hashedTaxId = :hashedTaxId", {
+      ":hashedTaxId": { S: hashedTaxId },
+    });
+  };
+
   const get = (businessId: string): Promise<Business> => {
     const params = {
       TableName: tableName,
@@ -173,5 +179,6 @@ export const DynamoBusinessDataClient = (
     findAllByIndustry,
     findAllByNAICSCode,
     findBusinessesByNamePrefix,
+    findAllByHashedTaxId,
   };
 };

@@ -430,7 +430,11 @@ app.use(
 );
 app.use(
   "/api",
-  taxClearanceCertificateRouterFactory(taxClearanceCertificateClient, AWSTaxIDEncryptionClient),
+  taxClearanceCertificateRouterFactory(
+    taxClearanceCertificateClient,
+    AWSTaxIDEncryptionClient,
+    dynamoDataClient,
+  ),
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use(

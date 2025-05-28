@@ -24,6 +24,7 @@ describe("selfRegRouter", () => {
       findByEmail: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
+      findBusinessesByHashedTaxId: jest.fn(),
     };
 
     stubSelfRegClient = {

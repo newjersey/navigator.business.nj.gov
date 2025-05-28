@@ -46,6 +46,7 @@ export interface DatabaseClient {
   findByEmail: (email: string) => Promise<UserData | undefined>;
   findUserByBusinessName: (businessName: string) => Promise<UserData | undefined>;
   findUsersByBusinessNamePrefix: (prefix: string) => Promise<UserData[]>;
+  findBusinessesByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
 }
 
 export interface UserDataClient {
@@ -70,6 +71,7 @@ export interface BusinessesDataClient {
   findAllByIndustry: (industry: string) => Promise<Business[]>;
   findBusinessesByNamePrefix: (prefix: string) => Promise<Business[]>;
   findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
+  findAllByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
 }
 
 export interface BusinessNameClient {
@@ -247,6 +249,7 @@ export interface TaxClearanceCertificateClient {
   postTaxClearanceCertificate: (
     userData: UserData,
     cryptoClient: CryptoClient,
+    databaseClient: DatabaseClient,
   ) => Promise<TaxClearanceCertificateResponse>;
 }
 
