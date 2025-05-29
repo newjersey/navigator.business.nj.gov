@@ -141,7 +141,8 @@ describe("AWSCryptoFactory", () => {
       await client.hashValue("123-45-6789");
       expect(cryptoUtils.pbkdf2).toHaveBeenCalledWith(
         "123456789",
-        "decrypted-value",
+        // "decrypted-value",
+        "some-application-salt",
         100000,
         64,
         "sha3-512",

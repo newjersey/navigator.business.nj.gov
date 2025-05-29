@@ -37,7 +37,10 @@ import * as materialUi from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-jest.mock("@/lib/api-client/apiClient", () => ({ postTaxClearanceCertificate: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postTaxClearanceCertificate: jest.fn(),
+  postUserData: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -974,6 +977,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   });
 
   it("makes the api post request", async () => {
+    // mockApi.postUserData.mockResolvedValue()
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
       userData: generateUserData({}),

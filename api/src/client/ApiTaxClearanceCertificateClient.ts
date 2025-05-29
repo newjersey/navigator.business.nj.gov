@@ -71,10 +71,13 @@ export const ApiTaxClearanceCertificateClient = (
       throw errorMessage;
     }
 
-    const matchingBusiness = await databaseClient.findBusinessesByHashedTaxId(currentHashedTaxId);
+    const matchingBusinesses = await databaseClient.findBusinessesByHashedTaxId(currentHashedTaxId);
 
-    for (const business of matchingBusiness) {
-      if (business.taxClearanceCertificateData?.hasPreviouslyReceivedCertificate) {
+    for (const business of matchingBusinesses) {
+      if (
+        business.id !== userData.currentBusinessId &&
+        business.taxClearanceCertificateData?.hasPreviouslyReceivedCertificate
+      ) {
         return {
           error: {
             type: "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT",
