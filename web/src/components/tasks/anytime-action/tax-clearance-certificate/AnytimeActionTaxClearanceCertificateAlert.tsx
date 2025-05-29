@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -71,6 +72,10 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
       return Config.taxClearanceCertificateStep3.errorTextMissingField;
     }
 
+    if (errorType === "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT") {
+      return Config.taxClearanceCertificateStep3.errorTextPreviouslyReceivedCertificate;
+    }
+
     return Config.taxClearanceCertificateStep3.errorTextSystem;
   };
 
@@ -96,7 +101,9 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
         </>
       )}
       {props.responseErrorType !== undefined && (
-        <div>{getTaxClearanceErrorMessage(props.responseErrorType)}</div>
+        <div>
+          <Content>{getTaxClearanceErrorMessage(props.responseErrorType)}</Content>
+        </div>
       )}
     </Alert>
   ) : (

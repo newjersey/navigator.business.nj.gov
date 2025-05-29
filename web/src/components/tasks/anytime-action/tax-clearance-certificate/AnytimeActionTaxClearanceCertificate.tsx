@@ -81,10 +81,18 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
   };
 
   const saveTaxClearanceCertificateData = (): void => {
+    if (!business) {
+      return;
+    }
     updateQueue
       ?.queueBusiness({
         ...updateQueue.currentBusiness(),
         taxClearanceCertificateData,
+        profileData: {
+          ...business.profileData,
+          taxId: taxClearanceCertificateData.taxId,
+        },
+        lastUpdatedISO: new Date(Date.now()).toISOString(),
       })
       .update();
   };
@@ -103,6 +111,8 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
         encryptedTaxId,
         taxPin,
         encryptedTaxPin,
+        hasPreviouslyReceivedCertificate,
+        lastUpdatedISO,
       } = getInitialData(business);
 
       setTaxClearanceCertificateData({
@@ -117,6 +127,8 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
         encryptedTaxId,
         taxPin,
         encryptedTaxPin,
+        hasPreviouslyReceivedCertificate,
+        lastUpdatedISO,
       });
 
       setProfileData({

@@ -1,6 +1,7 @@
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
-import { type CryptoClient, TaxClearanceCertificateClient } from "@domain/types";
+import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { generateUserData } from "@shared/test";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
@@ -9,6 +10,7 @@ describe("taxClearanceCertificateRouterFactory", () => {
   let app: Express;
   let stubTaxClearanceCertificateClient: jest.Mocked<TaxClearanceCertificateClient>;
   let stubCryptoClient: jest.Mocked<CryptoClient>;
+  let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -20,19 +22,34 @@ describe("taxClearanceCertificateRouterFactory", () => {
       decryptValue: jest.fn(),
       hashValue: jest.fn(),
     };
+    stubDynamoDataClient = {
+      migrateOutdatedVersionUsers: jest.fn(),
+      get: jest.fn(),
+      put: jest.fn(),
+      findByEmail: jest.fn(),
+      findUserByBusinessName: jest.fn(),
+      findUsersByBusinessNamePrefix: jest.fn(),
+      findBusinessesByHashedTaxId: jest.fn(),
+    };
     app = setupExpress(false);
     app.use(
-      taxClearanceCertificateRouterFactory(stubTaxClearanceCertificateClient, stubCryptoClient),
+      taxClearanceCertificateRouterFactory(
+        stubTaxClearanceCertificateClient,
+        stubCryptoClient,
+        stubDynamoDataClient,
+      ),
     );
   });
 
   it("returns a successful response", async () => {
+    const userData = generateUserData({});
     stubTaxClearanceCertificateClient.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [12],
+      userData,
     });
     const response = await request(app).post(`/postTaxClearanceCertificate`);
     expect(response.status).toEqual(StatusCodes.OK);
-    expect(response.body).toEqual({ certificatePdfArray: [12] });
+    expect(response.body).toEqual({ certificatePdfArray: [12], userData });
   });
 
   it("throws a server error", async () => {

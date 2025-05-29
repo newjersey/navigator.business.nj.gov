@@ -70,6 +70,10 @@ module.exports = {
           AttributeName: "encryptedTaxId",
           AttributeType: "S",
         },
+        {
+          AttributeName: "hashedTaxId",
+          AttributeType: "S",
+        },
       ],
       KeySchema: [
         {
@@ -140,6 +144,22 @@ module.exports = {
           ProvisionedThroughput: {
             ReadCapacityUnits: 1,
             WriteCapacityUnits: 1,
+          },
+        },
+        {
+          IndexName: "HashedTaxId",
+          KeySchema: [
+            {
+              AttributeName: "hashedTaxId",
+              KeyType: "HASH",
+            },
+          ],
+          Projection: {
+            ProjectionType: "ALL",
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 25,
+            WriteCapacityUnits: 25,
           },
         },
         {

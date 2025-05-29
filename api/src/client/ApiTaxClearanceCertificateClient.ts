@@ -1,6 +1,7 @@
 import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
-import { type CryptoClient, TaxClearanceCertificateClient } from "@domain/types";
+import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
 import { UserData } from "@shared/userData";
 import axios, { AxiosError, AxiosResponse } from "axios";
@@ -30,6 +31,7 @@ export const ApiTaxClearanceCertificateClient = (
   const postTaxClearanceCertificate = async (
     userData: UserData,
     cryptoClient: CryptoClient,
+    databaseClient: DatabaseClient,
   ): Promise<TaxClearanceCertificateResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Tax Clearance Certificate Client - Id:${logId}`);
@@ -47,6 +49,39 @@ export const ApiTaxClearanceCertificateClient = (
       )}`;
       logWriter.LogInfo(errorMessage);
       throw errorMessage;
+    }
+
+    let currentHashedTaxId: string | undefined;
+    try {
+      const userDataFromDb = await databaseClient.get(userData.user.id);
+      const currentBusiness = userDataFromDb.businesses[userDataFromDb.currentBusinessId];
+      currentHashedTaxId = currentBusiness.profileData.hashedTaxId;
+    } catch (error) {
+      logWriter.LogInfo(
+        `Tax Clearance Certificate Client - Id:${logId} - Failed to retrieve user data: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+      );
+      throw new Error("Failed to retrieve user data");
+    }
+
+    if (!currentHashedTaxId) {
+      const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Current hashed tax id is undefined`;
+      logWriter.LogError(errorMessage);
+      throw errorMessage;
+    }
+
+    const matchingBusiness = await databaseClient.findBusinessesByHashedTaxId(currentHashedTaxId);
+
+    for (const business of matchingBusiness) {
+      if (business.taxClearanceCertificateData?.hasPreviouslyReceivedCertificate) {
+        return {
+          error: {
+            type: "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT",
+            message: `Business has previously received a tax clearance certificate.`,
+          },
+        };
+      }
     }
 
     const postBody = {
@@ -92,7 +127,15 @@ export const ApiTaxClearanceCertificateClient = (
           logWriter.LogError(errorMessage);
           throw errorMessage;
         }
-        return { certificatePdfArray: response.data.certificate };
+        const updatedUserData = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
+          taxClearanceCertificateData: business.taxClearanceCertificateData && {
+            ...business.taxClearanceCertificateData,
+            hasPreviouslyReceivedCertificate: true,
+            lastUpdatedISO: new Date(Date.now()).toISOString(),
+          },
+        }));
+        return { certificatePdfArray: response.data.certificate, userData: updatedUserData };
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Tax Clearance Certificate Client - Id:${logId} - Error`, error);
