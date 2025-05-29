@@ -20,7 +20,7 @@ callToActionLink: "https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_versio\
   n_dental_new_user_exempt_quick_guide.pdf "
 agencyId: njdep
 agencyAdditionalContext: Bureau of Surface Water and Pretreatment Permitting
-divisionPhone: (609)-292-4860
+divisionPhone: (609) 292-4860
 ---
 ## Application Requirements
 
