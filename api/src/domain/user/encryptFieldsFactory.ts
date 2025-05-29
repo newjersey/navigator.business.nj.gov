@@ -3,7 +3,7 @@ import { maskTaxId } from "@domain/user/maskTaxId";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { maskingCharacter } from "@shared/profileData";
-import { UserData } from "@shared/userData";
+import { Business, UserData } from "@shared/userData";
 
 export const encryptFieldsFactory = (
   encryptionDecryptionClient: CryptoClient,
@@ -147,13 +147,21 @@ const hashProfileTaxId = async (
   userData: UserData,
   cryptoClient: CryptoClient,
 ): Promise<UserData> => {
-  const currentBusiness = getCurrentBusiness(userData);
-  if (!currentBusiness.profileData.taxId) {
-    return userData;
+  const businesses: Record<string, Business> = {};
+
+  for (const business of Object.values(userData.businesses)) {
+    let hashedTaxId = undefined;
+    if (business.profileData.taxId) {
+      hashedTaxId = await cryptoClient.hashValue(business.profileData.taxId);
+    }
+
+    businesses[business.id] = {
+      ...business,
+      profileData: {
+        ...business.profileData,
+        hashedTaxId,
+      },
+    };
   }
-  const hashedTaxId = await cryptoClient.hashValue(currentBusiness.profileData.taxId as string);
-  return modifyCurrentBusiness(userData, (business) => ({
-    ...business,
-    profileData: { ...business.profileData, hashedTaxId: hashedTaxId },
-  }));
+  return { ...userData, businesses };
 };

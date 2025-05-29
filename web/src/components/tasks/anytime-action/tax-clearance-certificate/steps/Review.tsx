@@ -29,6 +29,7 @@ interface Props {
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
   setResponseErrorType: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;
   isValid: () => boolean;
+  saveTaxClearanceCertificateData: () => void;
 }
 export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -123,6 +124,7 @@ export const Review = (props: Props): ReactElement => {
     if (!props.isValid()) return;
 
     try {
+      await api.postUserData(userData); // Need to assert that all businesses in a user's account have hashed data in DB
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
       if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
