@@ -2,7 +2,7 @@
 id: single-trip-osow-permit
 name: Apply for Your Single Trip OS/OW Permit (5-day)
 category:
-  - Transport My Products or Equipment
+  - transport-my-products-or-equipment
 industryIds:
   - commercial-construction
   - freight-forwarding

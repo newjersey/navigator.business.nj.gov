@@ -3,7 +3,7 @@ notesMd: https://docs.google.com/document/d/1gFdVGtUZiQHjvjU0fdhNK7BdM_508Wq8AzT
 id: xray-disposition-form
 name: Submit Your X-Ray Machine Disposition Form
 category:
-  - Sell or Close My Business
+  - sell-or-close-my-business
 industryIds:
   - healthcare
 sectorIds: []

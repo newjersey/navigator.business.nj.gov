@@ -7,7 +7,11 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
+import {
+  AnytimeActionCategory,
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { orderBy } from "lodash";
@@ -20,7 +24,10 @@ interface Props {
 }
 
 type AnytimeAction = AnytimeActionTask | AnytimeActionLicenseReinstatement;
-type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
+type AnytimeActionWithTypeAndCategory = AnytimeAction & {
+  type: string;
+  category: AnytimeActionCategory[];
+};
 
 const getBoldedTextComponent = (searchValue: string, textToBold: string): ReactNode => {
   const matches = textToBold.toLowerCase().indexOf(searchValue.toLowerCase());
@@ -69,7 +76,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "license-reinstatement",
-          category: ["Reactivate My Expired Permit, License or Registration"],
         };
       });
     anytimeActionLicenseReinstatementsWithType = orderBy(
@@ -80,13 +86,24 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     let applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
     applicableAnytimeActions.push(...anytimeActionTasksWithType);
     applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
-    applicableAnytimeActions = orderBy(applicableAnytimeActions, ["category"]);
+    applicableAnytimeActions = applicableAnytimeActions.sort((a, b) => {
+      const categoryA = a.category[0].categoryName.toLowerCase();
+      const categoryB = b.category[0].categoryName.toLowerCase();
+      if (categoryA < categoryB) {
+        return -1;
+      }
+      if (categoryA > categoryB) {
+        return 1;
+      }
+      return 0;
+    });
 
     return applicableAnytimeActions;
   };
 
   const findMatch = (action: AnytimeActionTask): boolean => {
-    if ("category" in action && action.category[0] === "Only Show in Subtask") return false;
+    if ("category" in action && action.category[0].categoryId === "only-show-in-subtask")
+      return false;
     if (action.applyToAllUsers) return true;
     if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
     if (isAnytimeActionFromNonEssentialQuestions(action)) return true;
@@ -174,7 +191,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           isOptionEqualToValue={(option, value) => {
             return option.name === value.name && option.filename === value.filename;
           }}
-          groupBy={(option) => option.category[0]} // Currently just showing the first category
+          groupBy={(option) => option.category[0].categoryName} // Currently just showing the first category
           renderGroup={(params) => (
             <li key={params.key} className="anytime-action-header-group">
               <div className="text-secondary-vivid text-bold padding-left-2 ">{params.group}</div>

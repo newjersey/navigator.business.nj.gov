@@ -56,6 +56,7 @@ export const cmsCollections = [
   {
     label: "🟧 ANYTIME ACTIONS",
     children: [
+      "Anytime Action Categories",
       "Anytime Action Tasks",
       "Anytime Action With Consumer Affairs License Integrations (Reinstatements)",
       "Tax Clearance Anytime Action",

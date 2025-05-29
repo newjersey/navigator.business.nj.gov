@@ -5,6 +5,25 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "anytime-action-categories"
+    label: "Anytime Action Categories"
+    folder: "content/src/anytime-action-categories"
+    create: true
+    delete: false
+    summary: "{{category-name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    sortable_fields: ["category-name"]
+    fields:
+      - { name: "category-name", label: "Category Name", widget: "string", required: true }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
+          required: true,
+        }
+
   - name: "anytime-action-tasks"
     label: "Anytime Actions Tasks"
     folder: "content/src/anytime-action-tasks"
@@ -29,26 +48,14 @@ collections:
       - {
           label: "Category",
           name: "category",
-          widget: "select",
+          widget: "relation",
           hint: "only the first category will be used",
           required: true,
           multiple: true,
-          options:
-            [
-              "Contract With NJ State Government",
-              "Sell or Close My Business",
-              "Change My Business Information",
-              "Hire New Employees",
-              "Reactivate My Expired Permit, License or Registration",
-              "Apply for State Funding",
-              "Offer New Products or Services",
-              "Transport My Products or Equipment",
-              "Manage My Properties",
-              "Set Up at a Temporary Location",
-              "Purchase New Products or Equipment",
-              "Only Show in Subtask",
-              "Manage My Business Vehicles",
-            ],
+          collection: "anytime-action-categories",
+          search_fields: ["category-name"],
+          value_field: "id",
+          display_fields: ["category-name"],
         }
       - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - {

@@ -1,9 +1,7 @@
 import { EmergencyTripPermitWithValidation } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWithValidation";
 import { AnytimeActionElement } from "@/components/tasks/anytime-action/AnytimeActionElement";
-import { AnytimeActionGovernmentContractingElement } from "@/components/tasks/anytime-action/AnytimeActionGovernmentContractingElement";
 import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
 import { AnytimeActionTask } from "@/lib/types/types";
-import { rswitch } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
 interface Props {
@@ -26,10 +24,5 @@ export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
     return <EmergencyTripPermitWithValidation />;
   }
 
-  return rswitch(props.anytimeActionTask.filename, {
-    "government-contracting": (
-      <AnytimeActionGovernmentContractingElement anytimeAction={props.anytimeActionTask} />
-    ),
-    default: <AnytimeActionElement anytimeAction={props.anytimeActionTask} />,
-  });
+  return <AnytimeActionElement anytimeAction={props.anytimeActionTask} />;
 };

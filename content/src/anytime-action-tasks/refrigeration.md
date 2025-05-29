@@ -4,7 +4,7 @@ notesMd: "Working doc:
 id: refrigeration
 name: Get Your Refrigeration System Inspected
 category:
-  - Manage My Properties
+  - manage-my-properties
 industryIds:
   - cannabis
   - health-club

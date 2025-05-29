@@ -2,7 +2,7 @@
 id: state-contracting
 name: Learn How to Contract with the NJ State Government
 category:
-  - Contract With NJ State Government
+  - contract-with-nj-gov
 description: Discover the steps to become a contractor for the state government.
 industryIds: []
 sectorIds:
@@ -68,7 +68,7 @@ You will then receive an email with your Vendor ID number and login link.
 - Tax ID certification statement
 - `NIGP commodity code|nigp-commodity-code`
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A confirmation email.
 
