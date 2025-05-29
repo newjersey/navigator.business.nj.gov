@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 const BASIC_AUTH_USERNAME = process.env.BASIC_AUTH_USERNAME;
 const BASIC_AUTH_PASSWORD = process.env.BASIC_AUTH_PASSWORD;
 
+const BASIC_AUTH_AGENCY_USERNAME = process.env.BASIC_AUTH_AGENCY_USERNAME;
+const BASIC_AUTH_AGENCY_PASSWORD = process.env.BASIC_AUTH_AGENCY_PASSWORD;
+
 export const config = {
   matcher:
     "/((?!_next/static|_next/image|_next/data|js|img|vendor|intercom|favicon.ico|healthz).*)",
@@ -23,7 +26,10 @@ export function middleware(req: NextRequest): NextResponse {
     const authValue = basicAuth.split(" ")[1];
     const [user, pwd] = atob(authValue).split(":");
 
-    if (user === BASIC_AUTH_USERNAME && pwd === BASIC_AUTH_PASSWORD) {
+    if (
+      (user === BASIC_AUTH_USERNAME && pwd === BASIC_AUTH_PASSWORD) ||
+      (user === BASIC_AUTH_AGENCY_USERNAME && pwd === BASIC_AUTH_AGENCY_PASSWORD)
+    ) {
       return NextResponse.next();
     }
   }
