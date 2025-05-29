@@ -74,14 +74,15 @@ export const AWSCryptoFactory = (
       throw new Error("Salt must be provided");
     }
 
-    const decryptedSalt = await decryptValue(encryptedHashingSalt);
+    // const decryptedSalt = await decryptValue(encryptedHashingSalt);
     const iterations = _iterationsOverride || 100000;
 
     try {
       const hash = await new Promise<string>((resolve, reject) => {
         cryptoUtils.pbkdf2(
           normalizedString,
-          decryptedSalt,
+          // decryptedSalt,
+          encryptedHashingSalt,
           iterations,
           64,
           "sha3-512",
