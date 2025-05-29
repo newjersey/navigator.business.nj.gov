@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
   :::infoAlert 
    **Keep in mind:** 
 
-  If your office doesn’t manage amalgam waste, you must[ register once for an amalgam exemption certificate](https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_exempt_quick_guide.pdf).
+  If your office doesn’t manage `amalgam waste|amalgam-waste`, you must[ register once for an amalgam exemption certificate](https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_exempt_quick_guide.pdf).
 
   :::
 
