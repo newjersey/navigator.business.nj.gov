@@ -2,7 +2,7 @@
 id: electrical-contracting-business-permit-reactivation
 name: Reactivate Your Electrical Contracting Business Permit
 category:
-  - Reactivate My Expired Permit, License or Registration
+  - reactivate-my-expired-permit-license-or-registration
 industryIds: []
 sectorIds: []
 urlSlug: electrical-contracting-business-permit-reactivation

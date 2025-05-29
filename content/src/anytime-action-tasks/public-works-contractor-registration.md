@@ -3,7 +3,7 @@ notesMd: ""
 id: public-works-contractor-registration
 name: public-works-contractor-registration
 category:
-  - Only Show in Subtask
+  - only-show-in-subtask
 sectorIds: []
 urlSlug: public-works-contractor-registration
 summaryDescriptionMd: >-

@@ -303,7 +303,9 @@ export const generateAnytimeActionTask = (
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
-    category: [`Category ${randomInt()}`],
+    category: [
+      { categoryName: `Category ${randomInt()}`, categoryId: `something-${randomInt()}-something` },
+    ],
     urlSlug: `some-url-slug-${randomInt()}`,
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
@@ -332,6 +334,12 @@ export const generateAnytimeActionLicenseReinstatement = (
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
     synonyms: [`some-synonym-${randomInt()}`],
+    category: [
+      {
+        categoryName: `Reactivate My Expired Permit, License or Registration`,
+        categoryId: `something-id-something`,
+      },
+    ],
     ...overrides,
   };
 };

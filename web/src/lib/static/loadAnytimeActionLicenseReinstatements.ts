@@ -1,6 +1,6 @@
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "@/lib/static/helpers";
 import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
-import { convertAnytimeActionLicenseReinstatementMd } from "@/lib/utils/markdownReader";
+import { convertAnytimeActionLicenseReinstatementMd } from "@/lib/utils/tasksMarkdownReader";
 import fs from "fs";
 import path from "path";
 

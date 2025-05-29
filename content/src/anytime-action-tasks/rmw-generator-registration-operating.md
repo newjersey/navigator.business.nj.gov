@@ -2,7 +2,7 @@
 id: rmw-generator-registration-operating
 name: Complete Your Regulated Medical Waste Generator Registration
 category:
-  - Change My Business Information
+  - change-my-business-information
 industryIds:
   - acupuncture
   - healthcare

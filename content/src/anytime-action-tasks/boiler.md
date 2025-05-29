@@ -6,7 +6,7 @@ notesMd: >-
 id: boiler
 name: Get Your Boiler Inspected
 category:
-  - Manage My Properties
+  - manage-my-properties
 industryIds:
   - cannabis
   - generic
@@ -41,22 +41,23 @@ callToActionText: Visit the Bureau’s Page for More Information
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
   oiler-pressure-vessel-compliance/index.shtml "
 ---
+
 ## Boilers That Need Inspection
 
 A steam or hot water boiler must be inspected if it meets the following condition:
 
-* Has 10 square feet or more of heating surface
+- Has 10 square feet or more of heating surface
 
 If the boiler has 1 of the following and serves a building with 6+ housing units or 25+ people, it
 also requires inspection:
 
-* 10 kilowatts of incoming power, or
-* A heat output of 40,000 BTU per hour
+- 10 kilowatts of incoming power, or
+- A heat output of 40,000 BTU per hour
 
 Hot water and steam boilers are inspected in 2 parts:
 
-* The outside is inspected every year
-* The inside is inspected every 2 years (unless a steam boiler is part of a continuous processing
+- The outside is inspected every year
+- The inside is inspected every 2 years (unless a steam boiler is part of a continuous processing
   operation; this requires fewer inspections)
 
 During the inspection, a hydrostatic test (a type of pressure test) may be required to check the
@@ -67,18 +68,18 @@ structural integrity of the boiler.
 A steam or hot water boiler is exempt and does not need to be inspected if it **meets any** of the
 following conditions:
 
-* Has less than 10 square feet of heating surface
-* Has less than 10 kilowatts of incoming power, or produces less than 40,000 BTU per hour of heat
+- Has less than 10 square feet of heating surface
+- Has less than 10 kilowatts of incoming power, or produces less than 40,000 BTU per hour of heat
   output
-* Is under the control of the United States government and is regulated by a federal agency
-* Is used only for motor vehicle propulsion and is regulated by the
+- Is under the control of the United States government and is regulated by a federal agency
+- Is used only for motor vehicle propulsion and is regulated by the
   [Motor Vehicle Act, Title 39 of the Revised Statutes](https://www.nj.gov/mvc/about/regs.htm)
 
 If the boiler meets any of the following and serves a building with less than 6 housing units or
 less than 25 people, it also does not need inspection:
 
-* It is a steam boiler with a relief valve set to discharge at 15 psig or lower
-* It is a hot water boiler with a relief valve set to discharge at 160 PSI or lower and operates
+- It is a steam boiler with a relief valve set to discharge at 15 psig or lower
+- It is a hot water boiler with a relief valve set to discharge at 160 PSI or lower and operates
   reliably at temperatures below or up to 250 degrees Fahrenheit
 
 ## How Inspections Work
@@ -96,9 +97,9 @@ Pressure Vessel Compliance.
 
 :::
 
-* New or replaced equipment inspections can only be done by the New Jersey Mechanical Inspection
+- New or replaced equipment inspections can only be done by the New Jersey Mechanical Inspection
   Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)
-* Yearly inspections can be done by a certified insurance inspector or the State (MIBBPVC)
+- Yearly inspections can be done by a certified insurance inspector or the State (MIBBPVC)
 
 If you have questions, email bpvrcompliance@dol.nj.gov or write to:
 

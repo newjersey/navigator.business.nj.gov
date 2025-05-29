@@ -2,7 +2,7 @@
 id: ocean-borne-container-permit
 name: Apply for Your Ocean Borne Container Permit
 category:
-  - Transport My Products or Equipment
+  - transport-my-products-or-equipment
 industryIds:
   - freight-forwarding
   - moving-company

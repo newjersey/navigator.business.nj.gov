@@ -8,8 +8,8 @@ notesMd: >-
 id: landlord-registration-update
 name: Register or Update Your Landlord Registration
 category:
-  - Manage My Properties
-  - Change My Business Information
+  - manage-my-properties
+  - change-my-business-information
 industryIds: []
 sectorIds:
   - real-estate
