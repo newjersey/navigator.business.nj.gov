@@ -7,8 +7,8 @@ urlSlug: dental-waste-exemption
 name: Apply for Your Dental Waste Exemption
 webflowName: "  "
 summaryDescriptionMd: >-
-  All dental offices in New Jersey must register for the state’s Dental Amalgam
-  Program (dental amalgam certification). This applies even if they do not use
+  All dental offices in New Jersey must register for the State’s Dental Amalgam
+  Program (dental amalgam certification). This applies even if you do not use
   amalgam.
 
 
@@ -32,7 +32,7 @@ divisionPhone: (609) 292-4860
 
 :::infoAlert 
  **Keep in mind:** 
-If your dental office begins placing or removing amalgam fillings, your exemption no longer applies. You must install an approved amalgam separator and [register for a new dental amalgam certification](https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_quick_guide.pdf) with NJDEP. This ensures your office stays compliant with state environmental rules.
+If your dental office begins placing or removing amalgam fillings, your exemption no longer applies. You must install an approved `amalgam separator|amalgam-separator` and [register for a new dental amalgam certification](https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_quick_guide.pdf) with NJDEP. This ensures your office stays compliant with state environmental rules.
 :::
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 If you don’t register, you may be subject to significant fines.
