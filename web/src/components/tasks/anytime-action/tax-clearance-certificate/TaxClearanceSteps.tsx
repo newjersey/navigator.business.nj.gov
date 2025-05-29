@@ -91,6 +91,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
           setCertificatePdfBlob={props.setCertificatePdfBlob}
           isValid={props.isValid}
           setResponseErrorType={setResponseErrorType}
+          saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
         />
       ),
     },
