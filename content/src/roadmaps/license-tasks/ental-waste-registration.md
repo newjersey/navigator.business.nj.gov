@@ -33,7 +33,7 @@ divisionPhone: (609) 292-4860
 * Business type
 * Total number of chairs that produce amalgam waste
 * Details about your amalgam separator: brand, model, and installation date
-* Number of chairs serviced by each separator
+* Number of chairs serviced by each `amalgam separator|amalgam-separator`
 * Name of Licensed Recycling Contractor (if you have sent amalgam out for recycling)
 * Certification Personal Identification Number (PIN) that you created during registration
 
@@ -44,4 +44,4 @@ If you don’t register, you may be subject to significant fines.
 :::
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional"}
-A dental amalgam certificate, valid for a year, or a dental amalgam certification exemption.
+A dental amalgam certificate, valid for 1 year, or a dental amalgam certification exemption.
