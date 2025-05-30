@@ -2032,7 +2032,7 @@ export default {
       click: {
         switch_to_step_one: () => {
           eventRunner.track({
-            event: "tax_clearance_switch_step",
+            event: "task_tab_clicked",
             legacy_event_category: "tax_clearance_anytime_action_switch_to_step_1",
             legacy_event_action: "click",
             legacy_event_label: "go_to_step_one",
@@ -2040,7 +2040,7 @@ export default {
         },
         switch_to_step_two: () => {
           eventRunner.track({
-            event: "tax_clearance_switch_step",
+            event: "task_tab_clicked",
             legacy_event_category: "tax_clearance_anytime_action_switch_to_step_2",
             legacy_event_action: "click",
             legacy_event_label: "go_to_step_two",
@@ -2048,7 +2048,7 @@ export default {
         },
         switch_to_step_three: () => {
           eventRunner.track({
-            event: "tax_clearance_switch_step",
+            event: "task_tab_clicked",
             legacy_event_category: "tax_clearance_anytime_action_switch_to_step_3",
             legacy_event_action: "click",
             legacy_event_label: "go_to_step_three",
@@ -2058,7 +2058,7 @@ export default {
       submit: {
         validation_error: () => {
           eventRunner.track({
-            event: "tax_clearance_validation_error",
+            event: "form_validation",
             legacy_event_category: "tax_clearance_anytime_action_step_3_save_button",
             legacy_event_action: "submit",
             legacy_event_label: "remain_on_tax_clearance_error",
@@ -2068,7 +2068,7 @@ export default {
       appears: {
         validation_success: () => {
           eventRunner.track({
-            event: "tax_clearance_validation_success",
+            event: "form_validation",
             legacy_event_category: "tax_clearance_anytime_action_success_screen",
             legacy_event_action: "appear",
             legacy_event_label: "remain_on_tax_clearance_sucess_screen",
