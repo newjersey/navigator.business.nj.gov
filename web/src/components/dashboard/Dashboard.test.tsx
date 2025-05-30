@@ -14,6 +14,7 @@ import {
   generateSidebarCardContent,
   generateStep,
   generateTask,
+  generateXrayRenewalCalendarEvent,
   operatingPhasesDisplayingAltHomeBasedBusinessDescription,
   operatingPhasesDisplayingHomeBasedPrompt,
   operatingPhasesNotDisplayingHomeBasedPrompt,
@@ -118,6 +119,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionTasks={anytimeActionTasks ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
+          xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
         />
       </ThemeProvider>,
     );
@@ -139,6 +141,7 @@ describe("<DashboardOnDesktop />", () => {
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
+            xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
           />
         </ThemeProvider>
       </WithStatefulUserData>,

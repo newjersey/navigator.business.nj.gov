@@ -1,10 +1,15 @@
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { getMergedConfig } from "@/contexts/configContext";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateLicenseEvent,
   generateOperateReference,
+  generateXrayRenewalCalendarEvent,
   publicFilingLegalStructures,
   tradeNameLegalStructures,
 } from "@/test/factories";
@@ -86,6 +91,7 @@ const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
   business: Business,
   licenseEvents?: LicenseEventType[],
+  xrayRenewalCalendarEvent?: XrayRenewalCalendarEventType,
 ): void => {
   render(
     <ThemeProvider theme={createTheme()}>
@@ -93,6 +99,7 @@ const renderFilingsCalendar = (
         <FilingsCalendar
           operateReferences={operateReferences}
           licenseEvents={licenseEvents ?? []}
+          xrayRenewalEvent={xrayRenewalCalendarEvent ?? generateXrayRenewalCalendarEvent({})}
         />
       </WithStatefulUserData>
     </ThemeProvider>,

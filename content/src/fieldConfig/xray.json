@@ -39,6 +39,14 @@
     "serialNumber": "Serial Number: ${serialNumber}",
     "annualFee": "Annual Fee: ${annualFee}",
     "issuingAgencyText": "Issuing Agency",
-    "equipmentText": "Equipment"
+    "equipmentText": "Equipment",
+    "ariaLabel": "X-Ray Registration Task"
+  },
+  "xrayRenewal": {
+    "callToActionSecondaryText": "Check My Registration Status",
+    "callToActionPrimaryText": "Renew My X-Ray Machine Registration",
+    "tab1Text": "Start Renewal",
+    "tab2Text": "Check Status",
+    "ariaLabel": "X-Ray Renewal"
   }
 }

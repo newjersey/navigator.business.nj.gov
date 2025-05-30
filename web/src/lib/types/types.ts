@@ -420,6 +420,19 @@ export interface LicenseEventType {
   licenseName: LicenseName;
 }
 
+export interface XrayRenewalCalendarEventType {
+  issuingAgency: string;
+  eventDisplayName: string;
+  filename: string;
+  urlSlug: string;
+  callToActionLink?: string;
+  callToActionText?: string;
+  contentMd: string;
+  summaryDescriptionMd?: string;
+  name: string;
+  id: string;
+}
+
 export type OperateReference = {
   name: string;
   urlSlug: string;

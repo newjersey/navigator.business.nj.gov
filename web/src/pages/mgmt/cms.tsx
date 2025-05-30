@@ -44,6 +44,7 @@ import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePrevie
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
+import RenewalCalendarEventPreview from "@/lib/cms/previews/RenewalCalendarEventPreview";
 import TaxAccessPreview from "@/lib/cms/previews/TaxAccessPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
@@ -93,6 +94,7 @@ const CMS = dynamic(
       registerPreview(CMS, "filings", FilingsPreview);
       registerPreview(CMS, "license-calendar-events", LicenseCalendarEventPreview);
       registerPreview(CMS, "municipal-tasks", TaskPreview);
+      registerPreview(CMS, "renewal-calendar-events", RenewalCalendarEventPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 
