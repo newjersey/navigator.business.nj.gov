@@ -12,7 +12,11 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   Business,
@@ -27,6 +31,7 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
   CMS_ONLY_fakeBusiness?: Business;
   licenseEvents: LicenseEventType[];
+  xrayRenewalEvent: XrayRenewalCalendarEventType;
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
@@ -63,6 +68,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           business={business as Business}
           activeYear={activeYear}
           licenseEvents={props.licenseEvents}
+          xrayRenewalEvent={props.xrayRenewalEvent}
         />
       );
     if (type === "FULL") {
@@ -73,6 +79,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             business={business}
             activeYear={activeYear}
             licenseEvents={props.licenseEvents}
+            xrayRenewalEvent={props.xrayRenewalEvent}
           />
         );
       return (
@@ -81,6 +88,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           business={business as Business}
           activeYear={activeYear}
           licenseEvents={props.licenseEvents}
+          xrayRenewalEvent={props.xrayRenewalEvent}
         />
       );
     }

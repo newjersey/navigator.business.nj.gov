@@ -7,7 +7,12 @@ import {
   sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import { getXrayRenewalEvent } from "@/lib/domain-logic/getXrayRenewalEvent";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@/lib/types/types";
 import {
   Business,
   defaultDateFormat,
@@ -16,6 +21,7 @@ import {
   LicenseCalendarEvent,
   parseDateWithFormat,
   TaxFilingCalendarEvent,
+  XrayRegistrationCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";
@@ -26,6 +32,7 @@ interface Props {
   activeYear: string;
   operateReferences: Record<string, OperateReference>;
   licenseEvents: LicenseEventType[];
+  xrayRenewalEvent: XrayRenewalCalendarEventType;
 }
 
 const NUM_OF_FILINGS_ALWAYS_VIEWABLE = 2;
@@ -54,15 +61,27 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
     date.month(),
   );
 
-  const sortedCalendarEvents = sortCalendarEventsEarliestToLatest([
-    ...thisMonthFilings,
-    ...thisMonthLicenseEvents,
-  ]);
+  const thisMonthXrayRenewalEvent = getXrayRenewalEvent(
+    props.business?.xrayRegistrationData,
+    date.year(),
+    date.month(),
+  );
+
+  const calendarEvents: (
+    | LicenseCalendarEvent
+    | TaxFilingCalendarEvent
+    | XrayRegistrationCalendarEvent
+  )[] = thisMonthXrayRenewalEvent
+    ? [...thisMonthFilings, ...thisMonthLicenseEvents, thisMonthXrayRenewalEvent]
+    : [...thisMonthFilings, ...thisMonthLicenseEvents];
+
+  const sortedCalendarEvents = sortCalendarEventsEarliestToLatest([...calendarEvents]);
+
   const visibleEvents = sortedCalendarEvents.slice(0, NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const remainingEvents = sortedCalendarEvents.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
 
   const renderCalendarEventItems = (
-    events: (TaxFilingCalendarEvent | LicenseCalendarEvent)[],
+    events: (TaxFilingCalendarEvent | LicenseCalendarEvent | XrayRegistrationCalendarEvent)[],
   ): ReactNode => {
     return events.map((event) => {
       if (event.calendarEventType === "TAX-FILING" && !props.operateReferences[event.identifier])
@@ -85,6 +104,17 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
             key={event.licenseName + event.licenseEventSubtype}
             LicenseCalendarEvent={event}
             licenseEvents={props.licenseEvents}
+          />
+        );
+      }
+
+      if (event.calendarEventType === "XRAY") {
+        return (
+          <CalendarEventItem
+            key={"XRAY_RENEWAL"}
+            title={props.xrayRenewalEvent.eventDisplayName}
+            dueDate={event.dueDate}
+            urlSlug={props.xrayRenewalEvent.urlSlug}
           />
         );
       }

@@ -19,6 +19,8 @@ import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
+import { loadXrayRenewalCalendarEvent } from "@/lib/static/loadXrayRenewalCalendarEvent";
+
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -27,6 +29,7 @@ import {
   LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
+  XrayRenewalCalendarEventType,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
@@ -46,6 +49,7 @@ interface Props {
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   licenseEvents: LicenseEventType[];
+  xrayRenewalEvent: XrayRenewalCalendarEventType;
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -129,6 +133,7 @@ const DashboardPage = (props: Props): ReactElement => {
               anytimeActionTasks={props.anytimeActionTasks}
               elevatorViolations={hasElevatorViolations}
               licenseEvents={props.licenseEvents}
+              xrayRenewalEvent={props.xrayRenewalEvent}
             />
           )}
         </main>
@@ -148,6 +153,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       anytimeActionTasks: loadAllAnytimeActionTasks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       licenseEvents: loadAllLicenseCalendarEvents(),
+      xrayRenewalEvent: loadXrayRenewalCalendarEvent(),
     },
   };
 };

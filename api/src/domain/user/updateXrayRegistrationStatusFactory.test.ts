@@ -1,7 +1,9 @@
 import { XrayRegistrationStatus } from "@businessnjgovnavigator/shared";
 import { UpdateXrayRegistration, XrayRegistrationStatusLookup } from "@domain/types";
 import { updateXrayRegistrationStatusFactory } from "@domain/user/updateXrayRegistrationStatusFactory";
+import { getCurrentDate } from "@shared/dateHelpers";
 import { generateUserData } from "@shared/test";
+import dayjs from "dayjs";
 
 describe("updateXrayRegistrationStatusFactory", () => {
   let xrayRegistrationLookupClient: jest.Mocked<XrayRegistrationStatusLookup>;
@@ -46,14 +48,17 @@ describe("updateXrayRegistrationStatusFactory", () => {
     };
 
     const updatedUserData = await updateXrayRegistrationStatus(userData, facilityDetails);
-    expect(
-      updatedUserData.businesses[updatedUserData.currentBusinessId].xrayRegistrationData,
-    ).toEqual({
-      facilityDetails: facilityDetails,
-      status: xrayRegistrationResponse.status,
-      expirationDate: xrayRegistrationResponse.expirationDate,
-      machines: xrayRegistrationResponse.machines,
+    const xrayRegistrationData =
+      updatedUserData.businesses[updatedUserData.currentBusinessId].xrayRegistrationData;
+
+    expect(xrayRegistrationData?.facilityDetails).toEqual({
+      ...facilityDetails,
     });
+    expect(xrayRegistrationData?.status).toEqual(xrayRegistrationResponse.status);
+    expect(xrayRegistrationData?.expirationDate).toEqual(xrayRegistrationResponse.expirationDate);
+    expect(xrayRegistrationData?.machines).toEqual(xrayRegistrationResponse.machines);
+    expect(dayjs(xrayRegistrationData?.lastUpdatedISO).minute()).toBe(getCurrentDate().minute());
+
     expect(
       updatedUserData.businesses[updatedUserData.currentBusinessId].taskProgress["xray-reg"],
     ).toBe("COMPLETED");

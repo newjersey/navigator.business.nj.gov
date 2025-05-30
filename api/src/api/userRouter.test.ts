@@ -21,6 +21,7 @@ import {
   generateUser,
   generateUserData,
   generateUserDataForBusiness,
+  generateXrayRegistrationData,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -63,8 +64,14 @@ const fiftyNineMinutesAgo: string = getCurrentDate()
   .subtract(1, "hour")
   .add(1, "minute")
   .toISOString();
+
 const sixtyOneMinutesAgo: string = getCurrentDate()
   .subtract(1, "hour")
+  .subtract(1, "minute")
+  .toISOString();
+
+const oneDayAndMinuteAgo: string = getCurrentDate()
+  .subtract(1, "day")
   .subtract(1, "minute")
   .toISOString();
 
@@ -73,6 +80,7 @@ describe("userRouter", () => {
 
   let stubUnifiedDataClient: jest.Mocked<DatabaseClient>;
   let stubUpdateLicenseStatus: jest.Mock;
+  let stubXrayRegistrationStatus: jest.Mock;
   let stubUpdateRoadmapSidebarCards: jest.Mock;
   let stubUpdateOperatingPhase: jest.Mock;
   let stubCryptoEncryptionClient: jest.Mocked<CryptoClient>;
@@ -90,6 +98,7 @@ describe("userRouter", () => {
       findBusinessesByHashedTaxId: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
+    stubXrayRegistrationStatus = jest.fn();
     stubUpdateRoadmapSidebarCards = jest.fn();
     stubUpdateRoadmapSidebarCards.mockImplementation((userData) => {
       return userData;
@@ -116,6 +125,7 @@ describe("userRouter", () => {
       userRouterFactory(
         stubUnifiedDataClient,
         stubUpdateLicenseStatus,
+        stubXrayRegistrationStatus,
         stubUpdateRoadmapSidebarCards,
         stubUpdateOperatingPhase,
         stubCryptoEncryptionClient,
@@ -469,6 +479,122 @@ describe("userRouter", () => {
         ).toEqual(true);
         expect(currentBusiness.licenseData?.licenses).toEqual(
           initialCurrentBusiness.licenseData?.licenses,
+        );
+      });
+    });
+
+    describe("updating xray registration status", () => {
+      beforeEach(async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      });
+
+      it("does not update xray registration if xrayRegistrationData is undefined", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            xrayRegistrationData: undefined,
+          }),
+        );
+
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubXrayRegistrationStatus).not.toHaveBeenCalled();
+      });
+
+      it("does not update xray registration data if xrayRegistrationData lastUpdatedISO is within the last day", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            xrayRegistrationData: generateXrayRegistrationData({
+              expirationDate: getCurrentDate().add(1, "month").format("YYYY-MM-DD"),
+              lastUpdatedISO: sixtyOneMinutesAgo,
+            }),
+          }),
+        );
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubXrayRegistrationStatus).not.toHaveBeenCalled();
+      });
+
+      it("updates userData with xray registration information if xray registration query returns data", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            xrayRegistrationData: generateXrayRegistrationData({
+              lastUpdatedISO: oneDayAndMinuteAgo,
+            }),
+          }),
+        );
+
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        const updatedUserData = generateUserDataForBusiness(
+          generateBusiness({
+            xrayRegistrationData: generateXrayRegistrationData({
+              lastUpdatedISO: getCurrentDate().toISOString(),
+              status: "ACTIVE",
+            }),
+          }),
+        );
+        stubXrayRegistrationStatus.mockResolvedValue(updatedUserData);
+
+        const result = await request(app)
+          .get(`/users/123`)
+          .set("Authorization", "Bearer user-123-token");
+        const expectedCurrentBusiness = getCurrentBusiness(updatedUserData);
+        const resultUserData = result.body as UserData;
+        const resultCurrentBusiness = getCurrentBusiness(resultUserData);
+        expect(stubXrayRegistrationStatus).toHaveBeenCalled();
+        expect(resultCurrentBusiness.xrayRegistrationData).toEqual(
+          expectedCurrentBusiness.xrayRegistrationData,
+        );
+      });
+
+      it("updates userData with xray registration information if lastUpdatedISO is over a day old", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            xrayRegistrationData: generateXrayRegistrationData({
+              lastUpdatedISO: oneDayAndMinuteAgo,
+            }),
+          }),
+        );
+
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubXrayRegistrationStatus).toHaveBeenCalled();
+      });
+
+      it("sets xrayRegistrationData lastUpdatedISO if xray registration check fails", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            xrayRegistrationData: generateXrayRegistrationData({
+              lastUpdatedISO: oneDayAndMinuteAgo,
+            }),
+          }),
+        );
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        stubXrayRegistrationStatus.mockRejectedValue(new Error("xray failure"));
+
+        const result = await request(app)
+          .get(`/users/123`)
+          .set("Authorization", "Bearer user-123-token");
+
+        const initialCurrentBusiness = getCurrentBusiness(userData);
+        const updatedUserData = result.body as UserData;
+        const currentBusiness = getCurrentBusiness(updatedUserData);
+
+        expect(
+          parseDate(currentBusiness.xrayRegistrationData?.lastUpdatedISO).isSame(
+            getCurrentDate(),
+            "minute",
+          ),
+        ).toEqual(true);
+        expect(currentBusiness.xrayRegistrationData?.status).toEqual(
+          initialCurrentBusiness.xrayRegistrationData?.status,
+        );
+        expect(currentBusiness.xrayRegistrationData?.machines).toEqual(
+          initialCurrentBusiness.xrayRegistrationData?.machines,
+        );
+        expect(currentBusiness.xrayRegistrationData?.expirationDate).toEqual(
+          initialCurrentBusiness.xrayRegistrationData?.expirationDate,
         );
       });
     });

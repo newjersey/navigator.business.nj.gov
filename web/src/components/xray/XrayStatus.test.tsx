@@ -1,4 +1,4 @@
-import { XrayRegistrationStatus } from "@/components/tasks/xray-registration/XrayRegistrationStatus";
+import { XrayStatus } from "@/components/xray/XrayStatus";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateEmptyFormationData } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
@@ -15,7 +15,7 @@ import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-describe("<XrayRegistrationStatus />", () => {
+describe("<XrayStatus />", () => {
   const renderComponent = (business: Partial<Business>): void => {
     render(
       <WithStatefulUserData
@@ -25,7 +25,7 @@ describe("<XrayRegistrationStatus />", () => {
           }),
         )}
       >
-        <XrayRegistrationStatus onSubmit={() => {}} error={undefined} isLoading={false} />;
+        <XrayStatus onSubmit={() => {}} error={undefined} isLoading={false} />;
       </WithStatefulUserData>,
     );
   };

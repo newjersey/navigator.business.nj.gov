@@ -1,6 +1,6 @@
 collections:
   - name: "calendar-label"
-    label: "🟪 CALENDAR"
+    label: "📅 CALENDAR"
     folder: "content/src"
     fields:
       - { name: "" }
@@ -148,6 +148,7 @@ collections:
           widget: "string",
           required: false,
         }
+
   - name: "filings"
     label: "Taxes Filings - All"
     folder: "content/src/filings"
@@ -219,3 +220,74 @@ collections:
           widget: "string",
           required: false,
         }
+
+  - name: "xray-calendar-event"
+    label: "Xray Renewal Calendar Event"
+    delete: false
+    create: false
+    files:
+      - label: "Xray Renewal Calendar Event"
+        name: "xray-calendar-event"
+        file: "content/src/renewal-calendar-events/xray-renewal.md"
+        editor:
+          preview: true
+        fields:
+          - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+          - {
+              label: "Id",
+              name: "id",
+              widget: "write-once-read-only-no-space",
+              hint: "disabled after file creation",
+              required: true,
+            }
+          - { label: "Name/Title", name: "name", widget: "string" }
+          - {
+              label: "Url Slug - Internal Routing",
+              name: "urlSlug",
+              widget: "no-space",
+              required: true,
+            }
+          - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+          - { label: "Content", name: "body", widget: "markdown", required: true }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - {
+              label: "Call To Action Text",
+              name: "callToActionText",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Call To Action Link",
+              name: "callToActionLink",
+              widget: "string",
+              required: false,
+            }
+  - name: "xray-renewal-config"
+    label: "Xray Renewal Config"
+    delete: false
+    create: false
+    files:
+      - label: "Xray Renewal Config"
+        name: "xray-renewal-config"
+        file: content/src/fieldConfig/xray-renewal.json
+        editor:
+          preview: true
+        fields:
+          - label: Xray Renewal
+            name: xrayRenewal
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: Call to Action Secondary Text,
+                  name: callToActionSecondaryText,
+                  widget: string,
+                }
+              - {
+                  label: Call to Action Primary Text,
+                  name: callToActionPrimaryText,
+                  widget: string,
+                }
+              - { label: Tab One Text, name: tab1Text, widget: string }
+              - { label: Tab Two Text, name: tab2Text, widget: string }
+              - { label: Aria Label Text, name: ariaLabel, widget: string }

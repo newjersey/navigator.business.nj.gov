@@ -1,4 +1,5 @@
 export type XrayData = {
+  lastUpdatedISO?: string;
   facilityDetails?: FacilityDetails;
   machines?: MachineDetails[];
   status?: XrayRegistrationStatus;

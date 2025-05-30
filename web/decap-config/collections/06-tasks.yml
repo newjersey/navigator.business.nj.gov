@@ -925,13 +925,13 @@ collections:
                     This is the text that is populates the Edit/Remove button aria label. It is
                     prepended by "Edit" or "Remove".,
                 }
-  - name: "xray-registration"
-    label: "Tasks- Xray Registration"
+  - name: "xray"
+    label: "Xray"
     delete: false
     create: false
     files:
-      - label: "Xray Registration"
-        name: "xray-registration"
+      - label: "Xray"
+        name: "xray"
         file: content/src/fieldConfig/xray-registration.json
         editor:
           preview: true
@@ -1005,6 +1005,25 @@ collections:
               - { label: Annual Fee, name: annualFee, widget: string }
               - { label: Issuing Agency Text, name: issuingAgencyText, widget: string }
               - { label: Equipment Text, name: equipmentText, widget: string }
+              - { label: Aria Label Text, name: ariaLabel, widget: string }
+          - label: Xray Renewal
+            name: xrayRenewal
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: Call to Action Secondary Text,
+                  name: callToActionSecondaryText,
+                  widget: string,
+                }
+              - {
+                  label: Call to Action Primary Text,
+                  name: callToActionPrimaryText,
+                  widget: string,
+                }
+              - { label: Tab One Text, name: tab1Text, widget: string }
+              - { label: Tab Two Text, name: tab2Text, widget: string }
+              - { label: Aria Label Text, name: ariaLabel, widget: string }
   - name: "tax-task"
     label: "Tasks - Tax ID"
     delete: false
