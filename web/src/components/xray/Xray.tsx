@@ -1,19 +1,13 @@
-import { Content } from "@/components/Content";
-import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskHeader } from "@/components/TaskHeader";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { XrayRegistrationStatus } from "@/components/tasks/xray-registration/XrayRegistrationStatus";
-import { XrayRegistrationSummary } from "@/components/tasks/xray-registration/XrayRegistrationSummary";
+import { XrayTabOne } from "@/components/xray/XrayTabOne";
+import { XrayTabZero } from "@/components/xray/XrayTabZero";
+
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
+import { Task, XrayRenewalCalendarEventType } from "@/lib/types/types";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import type { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -24,25 +18,24 @@ import type {
 } from "@businessnjgovnavigator/shared/xray";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
-  task: Task;
+  task?: Task;
+  renewal?: XrayRenewalCalendarEventType;
   CMS_ONLY_disable_overlay?: boolean;
 }
 
 const APPLICATION_TAB_INDEX = 0;
 const STATUS_TAB_INDEX = 1;
-
-export const XrayRegistrationTask = (props: Props): ReactElement => {
-  const { roadmap } = useRoadmap();
-  const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
-  const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [error, setError] = useState<XraySearchError | undefined>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+export const Xray = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const { roadmap } = useRoadmap();
   const { business, refresh } = useUserData();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
+  const [error, setError] = useState<XraySearchError | undefined>();
   const [xrayRegistrationData, setXrayRegistrationData] = useState<XrayData | undefined>(undefined);
 
   useEffect(() => {
@@ -115,16 +108,62 @@ export const XrayRegistrationTask = (props: Props): ReactElement => {
     color: "#757575",
   };
 
+  const getHeader = (): ReactNode => {
+    if (props.task) {
+      return <TaskHeader task={props.task} />;
+    }
+    if (props.renewal) {
+      return (
+        <div className="margin-bottom-2">
+          <h1>{props.renewal.name}</h1>
+        </div>
+      );
+    }
+  };
+
+  const xrayContentFromMarkdownAndConfig = (): {
+    summaryMd: string;
+    contentMd: string;
+    callToActionPrimaryText: string;
+    callToActionLink: string;
+    callToActionSecondaryText: string;
+    tab1Text: string;
+    tab2Text: string;
+    ariaLabel: string;
+  } => {
+    let summaryMd: string = "";
+    let contentMd: string = "";
+    let callToActionLink: string = "";
+
+    if (props.task) {
+      summaryMd = props.task.summaryDescriptionMd || "";
+      contentMd = getModifiedTaskContent(roadmap, props.task, "contentMd");
+      callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
+    }
+
+    if (props.renewal) {
+      summaryMd = props.renewal.summaryDescriptionMd || "";
+      contentMd = props.renewal.contentMd;
+      callToActionLink = props.renewal.callToActionLink || "";
+    }
+
+    const entriesFromConfig = props.task ? Config.xrayRegistrationTask : Config.xrayRenewal;
+
+    return { summaryMd, contentMd, callToActionLink, ...entriesFromConfig };
+  };
+
+  const xrayContent = xrayContentFromMarkdownAndConfig();
+
   return (
     <NeedsAccountModalWrapper CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}>
       <div className="flex flex-column">
-        <TaskHeader task={props.task} />
+        {getHeader()}
         <Box sx={{ width: "100%" }}>
           <TabContext value={tabIndex.toString()}>
             <Box>
               <TabList
                 onChange={onSelectTab}
-                aria-label="X-Ray Registration task"
+                aria-label={xrayContent.ariaLabel}
                 sx={{
                   borderBottom: 1,
                   borderColor: "divider",
@@ -135,63 +174,40 @@ export const XrayRegistrationTask = (props: Props): ReactElement => {
                 <Tab
                   value="0"
                   sx={tabStyle}
-                  label={Config.xrayRegistrationTask.tab1Text}
+                  label={xrayContent.tab1Text}
                   data-testid={"start-application-tab"}
                 />
                 <Tab
                   value="1"
                   sx={tabStyle}
-                  label={Config.xrayRegistrationTask.tab2Text}
+                  label={xrayContent.tab2Text}
                   data-testid={"check-status-tab"}
                 />
               </TabList>
             </Box>
             <TabPanel value="0">
-              <div className="margin-top-3">
-                <UnlockedBy task={props.task} />
-                <Content>{props.task.summaryDescriptionMd || ""}</Content>
-                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
-                <HorizontalLine />
-                <div className="h6-styling">{Config.xrayRegistrationTask.issuingAgency}</div>
-              </div>
-              <CtaContainer>
-                <ActionBarLayout>
-                  <div className="margin-top-2 mobile-lg:margin-top-0">
-                    <SecondaryButton
-                      isColor="primary"
-                      onClick={(): void => {
-                        setTabIndex(STATUS_TAB_INDEX);
-                      }}
-                      dataTestId="cta-secondary"
-                    >
-                      {Config.xrayRegistrationTask.callToActionSecondaryText}
-                    </SecondaryButton>
-                  </div>
-                  <PrimaryButton
-                    isColor="primary"
-                    onClick={(): void => {
-                      openInNewTab(callToActionLink);
-                    }}
-                    isRightMarginRemoved
-                    dataTestId="cta-primary"
-                  >
-                    {Config.xrayRegistrationTask.callToActionPrimaryText}
-                  </PrimaryButton>
-                </ActionBarLayout>
-              </CtaContainer>
+              <XrayTabZero
+                xrayContent={xrayContent}
+                ctaPrimaryText={xrayContent.callToActionPrimaryText}
+                ctaPrimaryOnClick={(callToActionLink: string): void => {
+                  openInNewTab(callToActionLink);
+                }}
+                ctaSecondaryText={xrayContent.callToActionSecondaryText}
+                ctaSecondaryOnClick={(): void => {
+                  setTabIndex(STATUS_TAB_INDEX);
+                }}
+                issuingAgency={Config.xrayRegistrationTask.issuingAgency}
+              />
             </TabPanel>
             <TabPanel value="1">
-              <div className="margin-top-3">
-                {xrayRegistrationData && error === undefined ? (
-                  <XrayRegistrationSummary
-                    xrayRegistrationData={xrayRegistrationData}
-                    edit={onEdit}
-                    goToRegistrationTab={goToRegistrationTab}
-                  />
-                ) : (
-                  <XrayRegistrationStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
-                )}
-              </div>
+              <XrayTabOne
+                xrayRegistrationData={xrayRegistrationData}
+                error={error}
+                isLoading={isLoading}
+                onEdit={onEdit}
+                onSubmit={onSubmit}
+                goToRegistrationTab={goToRegistrationTab}
+              />
             </TabPanel>
           </TabContext>
         </Box>

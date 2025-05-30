@@ -44,7 +44,8 @@ import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/f
 import * as TaxClearanceCertificateStep2 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step2.json";
 import * as TaxClearanceCertificateStep3 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step3.json";
 import * as TaxId from "@businessnjgovnavigator/content/fieldConfig/tax-id.json";
-import * as XrayRegistration from "@businessnjgovnavigator/content/fieldConfig/x-ray-registration.json";
+import * as XrayRegistration from "@businessnjgovnavigator/content/fieldConfig/xray-registration.json";
+import * as XrayRenewal from "@businessnjgovnavigator/content/fieldConfig/xray-renewal.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
@@ -105,6 +106,7 @@ const merged = JSON.parse(
       TaxClearanceCertificateDownload,
       FundingsOnboarding,
       XrayRegistration,
+      XrayRenewal,
       AbcEmergencyTripPermit,
     ),
   ),
@@ -159,6 +161,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof TaxClearanceCertificateStep3 &
   typeof TaxClearanceCertificateShared &
   typeof XrayRegistration &
+  typeof XrayRenewal &
   typeof TaxClearanceCertificateDownload &
   typeof AbcEmergencyTripPermit;
 
@@ -212,6 +215,7 @@ export const getMergedConfig = (): ConfigType => {
     TaxClearanceCertificateShared,
     TaxClearanceCertificateDownload,
     XrayRegistration,
+    XrayRenewal,
     AbcEmergencyTripPermit,
   );
 };

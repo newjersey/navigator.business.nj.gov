@@ -1,10 +1,15 @@
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { getMergedConfig } from "@/contexts/configContext";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateLicenseEvent,
   generateOperateReference,
+  generateXrayRenewalCalendarEvent,
   publicFilingLegalStructures,
   tradeNameLegalStructures,
 } from "@/test/factories";
@@ -34,6 +39,7 @@ import {
   generatePreferences,
   generateProfileData,
   generateTaxFilingData,
+  generateXrayRegistrationData,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -86,6 +92,7 @@ const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
   business: Business,
   licenseEvents?: LicenseEventType[],
+  xrayRenewalCalendarEvent?: XrayRenewalCalendarEventType,
 ): void => {
   render(
     <ThemeProvider theme={createTheme()}>
@@ -93,6 +100,7 @@ const renderFilingsCalendar = (
         <FilingsCalendar
           operateReferences={operateReferences}
           licenseEvents={licenseEvents ?? []}
+          xrayRenewalEvent={xrayRenewalCalendarEvent ?? generateXrayRenewalCalendarEvent({})}
         />
       </WithStatefulUserData>
     </ThemeProvider>,
@@ -561,6 +569,46 @@ describe("<FilingsCalendar />", () => {
       screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false }),
     ).toBeInTheDocument();
     expect(screen.getByText(licenseEvents[0].expirationEventDisplayName)).toBeInTheDocument();
+  });
+
+  it("displays filings calendar as list with xray renewal event", () => {
+    const expirationDate = getAprilDateOfThisYear().add(2, "months");
+
+    const xrayRenewalEvent = generateXrayRegistrationData({
+      expirationDate: expirationDate.toISOString(),
+    });
+
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "LIST";
+          }),
+        ).id,
+      }),
+      xrayRegistrationData: xrayRenewalEvent,
+      preferences: generatePreferences({ isCalendarFullView: false }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+
+    const xrayRenewalCalendarEvent = generateXrayRenewalCalendarEvent({
+      eventDisplayName: "Xray Renewal",
+    });
+
+    renderFilingsCalendar(operateReferences, business, [], xrayRenewalCalendarEvent);
+
+    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    expect(
+      screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(xrayRenewalCalendarEvent.eventDisplayName)).toBeInTheDocument();
   });
 
   it("sends analytics when feedback modal link is clicked", () => {

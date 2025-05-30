@@ -42,11 +42,12 @@ export const cmsCollections = [
     ],
   },
   {
-    label: "🟪 CALENDAR",
+    label: "📅 CALENDAR",
     children: [
       "Tax Access Modal Config",
       "Consumer Affairs License Expiration / Renewal Events",
       "Taxes Filings - All",
+      "Xray Renewal Calendar Event",
     ],
   },
   {

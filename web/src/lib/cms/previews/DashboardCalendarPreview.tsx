@@ -5,7 +5,11 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateLicenseEvent, generateOperateReference } from "@/test/factories";
+import {
+  generateLicenseEvent,
+  generateOperateReference,
+  generateXrayRenewalCalendarEvent,
+} from "@/test/factories";
 import {
   defaultDateFormat,
   generateBusiness,
@@ -91,6 +95,8 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     generateLicenseEvent({ licenseName }),
     generateLicenseEvent({ licenseName }),
   ];
+
+  const xrayRenewalEvent = generateXrayRenewalCalendarEvent({});
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
@@ -100,6 +106,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
             operateReferences={{}}
             CMS_ONLY_fakeBusiness={emptyFilingsUserData}
             licenseEvents={[]}
+            xrayRenewalEvent={xrayRenewalEvent}
           />
 
           <hr className="margin-top-6" />
@@ -109,6 +116,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessList}
             licenseEvents={licenseEvents}
+            xrayRenewalEvent={xrayRenewalEvent}
           />
 
           <hr className="margin-top-6" />
@@ -118,6 +126,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessGrid}
             licenseEvents={licenseEvents}
+            xrayRenewalEvent={xrayRenewalEvent}
           />
 
           <HideableTasks />

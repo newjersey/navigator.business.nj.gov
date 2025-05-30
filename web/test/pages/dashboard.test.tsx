@@ -1,7 +1,7 @@
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
-import { generateSidebarCardContent } from "@/test/factories";
+import { generateSidebarCardContent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -73,6 +73,7 @@ describe("dashboard page", () => {
           anytimeActionTasks={[]}
           anytimeActionLicenseReinstatements={[]}
           licenseEvents={[]}
+          xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
         />
       </ThemeProvider>,
     );
@@ -95,6 +96,7 @@ describe("dashboard page", () => {
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
+            xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
           />
         </ThemeProvider>
       </WithStatefulUserData>,

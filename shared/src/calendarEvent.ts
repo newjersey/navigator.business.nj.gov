@@ -2,7 +2,7 @@ import { LicenseName } from "./license";
 
 export type CalendarEvent = {
   readonly dueDate: string; // YYYY-MM-DD
-  readonly calendarEventType: "TAX-FILING" | "LICENSE";
+  readonly calendarEventType: "TAX-FILING" | "LICENSE" | "XRAY";
 };
 
 export interface TaxFilingCalendarEvent extends CalendarEvent {
@@ -16,4 +16,8 @@ export interface LicenseCalendarEvent extends CalendarEvent {
   readonly licenseEventSubtype: LicenseEventSubtype;
   readonly calendarEventType: "LICENSE";
   licenseName: LicenseName;
+}
+
+export interface XrayRegistrationCalendarEvent extends CalendarEvent {
+  readonly calendarEventType: "XRAY";
 }

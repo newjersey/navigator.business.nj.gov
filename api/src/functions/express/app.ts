@@ -401,6 +401,7 @@ app.use(
   userRouterFactory(
     dynamoDataClient,
     updateLicenseStatus,
+    updateXrayStatus,
     updateSidebarCards,
     updateOperatingPhase,
     AWSTaxIDEncryptionClient,

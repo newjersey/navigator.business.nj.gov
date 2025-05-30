@@ -25,6 +25,7 @@ import {
   TaskLink,
   TaskWithLicenseTaskId,
   TaskWithoutLinks,
+  XrayRenewalCalendarEventType,
 } from "@/lib/types/types";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
@@ -131,6 +132,23 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     agencyAdditionalContext: `some-agency-${randomInt()}`,
     formName: `some-form-${randomInt()}`,
     requiresLocation: Math.random() < 0.5,
+    ...overrides,
+  };
+};
+
+export const generateXrayRenewalCalendarEvent = (
+  overrides: Partial<XrayRenewalCalendarEventType>,
+): XrayRenewalCalendarEventType => {
+  return {
+    issuingAgency: `some-issuing-agency-${randomInt()}`,
+    eventDisplayName: `some-event-display-name-${randomInt()}`,
+    filename: `some-filename-${randomInt()}`,
+    urlSlug: `some-url-slug-${randomInt()}`,
+    callToActionLink: `some-cta-link-${randomInt()}`,
+    callToActionText: `some-cta-text-${randomInt()}`,
+    contentMd: `some-content-md-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };

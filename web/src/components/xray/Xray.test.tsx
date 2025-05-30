@@ -1,7 +1,8 @@
-import { XrayRegistrationTask } from "@/components/tasks/xray-registration/XrayRegistrationTask";
+import { Xray } from "@/components/xray/Xray";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { generateTask } from "@/test/factories";
+import { Task, XrayRenewalCalendarEventType } from "@/lib/types/types";
+import { generateTask, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
@@ -22,9 +23,8 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
 
-describe("<XrayRegistrationTask />", () => {
-  const task = generateTask({ id: "xray-reg" });
-  const renderTaskWithBusinessData = (business?: Partial<Business>): void => {
+describe("<Xray />", () => {
+  const renderTaskWithBusinessData = (business?: Partial<Business>, task?: Task): void => {
     render(
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
@@ -33,7 +33,24 @@ describe("<XrayRegistrationTask />", () => {
           }),
         )}
       >
-        <XrayRegistrationTask task={task} />
+        <Xray task={task ?? generateTask({ id: "xray-reg" })} />
+      </WithStatefulUserData>,
+    );
+  };
+
+  const renderRenewalWithBusinessData = (
+    business?: Partial<Business>,
+    xrayRenewal?: XrayRenewalCalendarEventType,
+  ): void => {
+    render(
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(
+          generateBusiness({
+            ...business,
+          }),
+        )}
+      >
+        <Xray renewal={xrayRenewal ?? generateXrayRenewalCalendarEvent({ id: "xray-renewal" })} />
       </WithStatefulUserData>,
     );
   };
@@ -42,6 +59,18 @@ describe("<XrayRegistrationTask />", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
+  });
+
+  describe("application", () => {
+    it("renders the xray registration task when a task is provided", () => {
+      renderTaskWithBusinessData();
+      expect(screen.getByText(Config.xrayRegistrationTask.tab1Text)).toBeInTheDocument();
+    });
+
+    it("renders the xray renewal task when a renewal is provided", () => {
+      renderRenewalWithBusinessData();
+      expect(screen.getByText(Config.xrayRenewal.tab1Text)).toBeInTheDocument();
+    });
   });
 
   describe("search", () => {

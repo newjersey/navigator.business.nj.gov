@@ -5,9 +5,18 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import { getXrayRenewalEvent } from "@/lib/domain-logic/getXrayRenewalEvent";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@/lib/types/types";
 import { groupBy } from "@/lib/utils/helpers";
-import { LicenseCalendarEvent, TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared";
+import {
+  LicenseCalendarEvent,
+  TaxFilingCalendarEvent,
+  XrayRegistrationCalendarEvent,
+} from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -20,6 +29,7 @@ interface Props {
   activeYear: string;
   operateReferences: Record<string, OperateReference>;
   licenseEvents: LicenseEventType[];
+  xrayRenewalEvent: XrayRenewalCalendarEventType;
 }
 
 export const FilingsCalendarAsList = (props: Props): ReactElement => {
@@ -38,11 +48,22 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const taxFilings = props.business.taxFilingData.filings ?? [];
 
-  const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> =
-    sortFilterCalendarEventsWithinAYear(
-      [...licenseCalendarEvents, ...taxFilings],
-      props.activeYear,
-    );
+  const xrayRenewalCalendarEvent = getXrayRenewalEvent(
+    props.business?.xrayRegistrationData,
+    Number.parseInt(props.activeYear),
+  );
+
+  const calendarEvents: (
+    | LicenseCalendarEvent
+    | TaxFilingCalendarEvent
+    | XrayRegistrationCalendarEvent
+  )[] = xrayRenewalCalendarEvent
+    ? [...taxFilings, ...licenseCalendarEvents, xrayRenewalCalendarEvent]
+    : [...taxFilings, ...licenseCalendarEvents];
+
+  const sortedFilteredEventsWithinAYear: Array<
+    TaxFilingCalendarEvent | LicenseCalendarEvent | XrayRegistrationCalendarEvent
+  > = sortFilterCalendarEventsWithinAYear([...calendarEvents], props.activeYear);
 
   const eventsGroupedByDate = groupBy(
     sortedFilteredEventsWithinAYear.filter((event) => {
@@ -104,6 +125,17 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                       key={event.licenseName + event.licenseEventSubtype}
                       LicenseCalendarEvent={event}
                       licenseEvents={props.licenseEvents}
+                      index={index}
+                    />
+                  );
+                }
+                if (event.calendarEventType === "XRAY") {
+                  return (
+                    <CalendarEventItem
+                      key={"XRAY_RENEWAL"}
+                      title={props.xrayRenewalEvent.eventDisplayName}
+                      dueDate={event.dueDate}
+                      urlSlug={props.xrayRenewalEvent.urlSlug}
                       index={index}
                     />
                   );

@@ -1,4 +1,4 @@
-import { XrayRegistrationSummary } from "@/components/tasks/xray-registration/XrayRegistrationSummary";
+import { XraySummary } from "@/components/xray/XraySummary";
 import { getMergedConfig } from "@/contexts/configContext";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import type { XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
@@ -8,7 +8,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 const Config = getMergedConfig();
 
-describe("<XrayRegistrationSummary />", () => {
+describe("<XraySummary />", () => {
   dayjs.extend(localizedFormat);
   const futureDate = getCurrentDate().add(2, "month").format("L");
   const fifteenDaysInTheFutureDate = getCurrentDate().add(15, "days").format("L");
@@ -16,7 +16,7 @@ describe("<XrayRegistrationSummary />", () => {
 
   const renderComponent = (status: string, date: string): void => {
     render(
-      <XrayRegistrationSummary
+      <XraySummary
         xrayRegistrationData={{
           facilityDetails: {
             businessName: "Brick and Mortar Store",
