@@ -28,17 +28,13 @@ describe("EmergencyTripPermit", () => {
     it("advances steps from clicking the stepper", async () => {
       const user = userEvent.setup();
       renderPage();
-      expect(
-        screen.queryByRole("textbox", { name: "Carrier Name (Business Name)" }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByRole("textbox", { name: "Carrier Name" })).not.toBeInTheDocument();
       await user.click(
         screen.getByRole("tab", {
           name: "Formation Stepper Navigation: Requestor Step, State: Incomplete",
         }),
       );
-      expect(
-        screen.getByRole("textbox", { name: "Carrier Name (Business Name)" }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("textbox", { name: "Carrier Name" })).toBeInTheDocument();
     });
 
     it("advances steps from clicking the primary button", async () => {
@@ -48,9 +44,7 @@ describe("EmergencyTripPermit", () => {
         screen.queryByRole("textbox", { name: "Carrier Name (Business Name)" }),
       ).not.toBeInTheDocument();
       await user.click(screen.getByRole("button", { name: "Save & Continue" }));
-      expect(
-        screen.getByRole("textbox", { name: "Carrier Name (Business Name)" }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("textbox", { name: "Carrier Name" })).toBeInTheDocument();
     });
 
     it("only displays back button on steps past the first step", async () => {
@@ -81,9 +75,7 @@ describe("EmergencyTripPermit", () => {
         }),
       );
       await user.click(screen.getByRole("button", { name: "Edit Requestor Information" }));
-      expect(
-        screen.getByRole("textbox", { name: "Carrier Name (Business Name)" }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("textbox", { name: "Carrier Name" })).toBeInTheDocument();
     });
   });
 
@@ -105,12 +97,12 @@ describe("EmergencyTripPermit", () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(screen.getByRole("button", { name: "Save & Continue" }));
-      await user.type(screen.getByRole("textbox", { name: "Requestor First Name" }), "firstName");
-      await user.type(screen.getByRole("textbox", { name: "Requestor Last Name" }), "lastName");
+      await user.type(screen.getByRole("textbox", { name: "First Name" }), "firstName");
+      await user.type(screen.getByRole("textbox", { name: "Last Name" }), "lastName");
       await user.type(screen.getByRole("textbox", { name: "Email Address" }), "email@email.com");
       await user.type(screen.getByRole("textbox", { name: "Phone Number" }), "1234567890");
-      await user.type(screen.getByRole("textbox", { name: "Business Address Line 1" }), "add");
-      await user.type(screen.getByRole("textbox", { name: "Business Address Line 2" }), "add2");
+      await user.type(screen.getByRole("textbox", { name: "Address Line 1" }), "add");
+      await user.type(screen.getByRole("textbox", { name: "Address Line 2" }), "add2");
       await user.type(screen.getByRole("textbox", { name: "City" }), "city");
       await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "zippy");
       // Go to Billing Step
@@ -131,12 +123,12 @@ describe("EmergencyTripPermit", () => {
       const user = userEvent.setup();
       renderPage();
       await user.click(screen.getByRole("button", { name: "Save & Continue" }));
-      await user.type(screen.getByRole("textbox", { name: "Requestor First Name" }), "firstName");
-      await user.type(screen.getByRole("textbox", { name: "Requestor Last Name" }), "lastName");
+      await user.type(screen.getByRole("textbox", { name: "First Name" }), "firstName");
+      await user.type(screen.getByRole("textbox", { name: "Last Name" }), "lastName");
       await user.type(screen.getByRole("textbox", { name: "Email Address" }), "email@email.com");
       await user.type(screen.getByRole("textbox", { name: "Phone Number" }), "1234567890");
-      await user.type(screen.getByRole("textbox", { name: "Business Address Line 1" }), "add");
-      await user.type(screen.getByRole("textbox", { name: "Business Address Line 2" }), "add2");
+      await user.type(screen.getByRole("textbox", { name: "Address Line 1" }), "add");
+      await user.type(screen.getByRole("textbox", { name: "Address Line 2" }), "add2");
       await user.type(screen.getByRole("textbox", { name: "City" }), "city");
       await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "zippy");
 
