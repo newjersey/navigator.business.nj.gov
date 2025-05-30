@@ -1,13 +1,19 @@
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "@/lib/static/helpers";
 import { AnytimeActionTask } from "@/lib/types/types";
-import { convertAnytimeActionTaskMd } from "@/lib/utils/markdownReader";
+import { convertAnytimeActionTaskMd } from "@/lib/utils/tasksMarkdownReader";
 import fs from "fs";
 import path from "path";
 
 type PathParams<P> = { params: P; locale?: string };
-const anytimeActionsTaskDir = path.join(
+const anytimeActionsTaskDirApp = path.join(
   process.cwd(),
   "..",
+  "content",
+  "src",
+  "anytime-action-tasks",
+);
+const anytimeActionsTaskDirTest = path.join(
+  process.cwd(),
   "content",
   "src",
   "anytime-action-tasks",
@@ -17,34 +23,55 @@ export type AnytimeActionTaskUrlSlugParam = {
   anytimeActionTaskUrlSlug: string;
 };
 
-export const loadAllAnytimeActionTasks = (): AnytimeActionTask[] => {
-  const fileNames = fs.readdirSync(anytimeActionsTaskDir);
+const getAnytimeActionsTaskDir = (isTest: boolean): string => {
+  if (isTest) {
+    return anytimeActionsTaskDirTest;
+  }
+  return anytimeActionsTaskDirApp;
+};
+
+export const loadAllAnytimeActionTasks = (isTest: boolean = false): AnytimeActionTask[] => {
+  const fileNames = fs.readdirSync(getAnytimeActionsTaskDir(isTest));
 
   return fileNames.map((fileName) => {
     return loadAnytimeActionTasksByFileName(fileName);
   });
 };
 
-export const loadAllAnytimeActionTaskUrlSlugs = (): PathParams<AnytimeActionTaskUrlSlugParam>[] => {
-  const fileNames = fs.readdirSync(anytimeActionsTaskDir);
-  return fileNames.map((fileName) => {
+export const loadAllAnytimeActionTaskUrlSlugs = (
+  isTest: boolean = false,
+  expection?: string,
+): PathParams<AnytimeActionTaskUrlSlugParam>[] => {
+  const fileNames = fs.readdirSync(getAnytimeActionsTaskDir(isTest));
+  let fileNamesWithoutExceptions = fileNames;
+  if (expection) {
+    fileNamesWithoutExceptions = fileNames.filter((e) => e !== expection);
+  }
+
+  return fileNamesWithoutExceptions.map((fileName) => {
     return {
       params: {
-        anytimeActionTaskUrlSlug: loadUrlSlugByFilename(fileName, anytimeActionsTaskDir),
+        anytimeActionTaskUrlSlug: loadUrlSlugByFilename(fileName, getAnytimeActionsTaskDir(isTest)),
       },
     };
   });
 };
 
-export const loadAnytimeActionTaskByUrlSlug = (urlSlug: string): AnytimeActionTask => {
-  const matchingFileName = getFileNameByUrlSlug(anytimeActionsTaskDir, urlSlug);
-  return loadAnytimeActionTasksByFileName(matchingFileName);
+export const loadAnytimeActionTaskByUrlSlug = (
+  urlSlug: string,
+  isTest: boolean = false,
+): AnytimeActionTask => {
+  const matchingFileName = getFileNameByUrlSlug(getAnytimeActionsTaskDir(isTest), urlSlug);
+  return loadAnytimeActionTasksByFileName(matchingFileName, isTest);
 };
 
-const loadAnytimeActionTasksByFileName = (fileName: string): AnytimeActionTask => {
-  const fullPath = path.join(anytimeActionsTaskDir, `${fileName}`);
+const loadAnytimeActionTasksByFileName = (
+  fileName: string,
+  isTest: boolean = false,
+): AnytimeActionTask => {
+  const fullPath = path.join(getAnytimeActionsTaskDir(isTest), `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const fileNameWithoutMd = fileName.split(".md")[0];
-  return convertAnytimeActionTaskMd(fileContents, fileNameWithoutMd);
+  return convertAnytimeActionTaskMd(fileContents, fileNameWithoutMd, isTest);
 };

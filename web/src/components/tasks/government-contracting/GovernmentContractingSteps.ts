@@ -1,6 +1,3 @@
-import { fetchAnytimeActionByFilename } from "@/lib/async-content-fetchers/fetchAnytimeActionByFilename";
-import { AnytimeActionTask } from "@/lib/types/types";
-
 type GovernmentContractingStepNames =
   | "NJSTART"
   | "Apprenticeship Program"
@@ -16,10 +13,6 @@ export const GovernmentContractingSteps: {
   { name: "Public Works", fileName: "public-works-contractor-registration" },
   { name: "Prevailing Wages", fileName: "prevailing-wage" },
 ];
-
-export const getAnytimeActionTaskObj = async (stepIndex: number): Promise<AnytimeActionTask> => {
-  return await fetchAnytimeActionByFilename(GovernmentContractingSteps[stepIndex].fileName);
-};
 
 export const shouldDisplayPreviousButton = (stepIndex: number): boolean => {
   return stepIndex !== 0;

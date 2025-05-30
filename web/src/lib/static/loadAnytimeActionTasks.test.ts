@@ -31,6 +31,8 @@ describe("loadAnytimeActionTasks", () => {
         "callToActionLink: CallToActionLink1\n" +
         "callToActionText: CallToActionText1\n" +
         "form: Form1\n" +
+        "category:\n" +
+        "  - test-cat\n" +
         "---\n" +
         "Some content description 1";
 
@@ -43,13 +45,29 @@ describe("loadAnytimeActionTasks", () => {
         "callToActionLink: CallToActionLink2\n" +
         "callToActionText: CallToActionText2\n" +
         "form: Form2\n" +
+        "category:\n" +
+        "  - test-cat\n" +
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
+      const fakeCategoryMapping =
+        "---\n" + "category-name: Test Cat\n" + "id: test-cat\n" + "---\n";
+
+      mockedFs.readdirSync
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["opp1.md", "opp2.md"])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["fake-category.md"])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionTask1)
-        .mockReturnValueOnce(anytimeActionTask2);
+        .mockReturnValueOnce(fakeCategoryMapping)
+        .mockReturnValueOnce(anytimeActionTask2)
+        .mockReturnValueOnce(fakeCategoryMapping);
 
       const anytimeActionTasks = await loadAllAnytimeActionTasks();
       expect(anytimeActionTasks).toHaveLength(2);
@@ -64,6 +82,12 @@ describe("loadAnytimeActionTasks", () => {
             callToActionLink: "CallToActionLink1",
             callToActionText: "CallToActionText1",
             form: "Form1",
+            category: [
+              {
+                categoryId: "test-cat",
+                categoryName: "Test Cat",
+              },
+            ],
           },
           {
             name: "anytime action task name2",
@@ -74,6 +98,12 @@ describe("loadAnytimeActionTasks", () => {
             callToActionLink: "CallToActionLink2",
             callToActionText: "CallToActionText2",
             form: "Form2",
+            category: [
+              {
+                categoryId: "test-cat",
+                categoryName: "Test Cat",
+              },
+            ],
           },
         ]),
       );
@@ -91,6 +121,8 @@ describe("loadAnytimeActionTasks", () => {
         "callToActionLink: CallToActionLink1\n" +
         "callToActionText: CallToActionText1\n" +
         "form: Form1\n" +
+        "category:\n" +
+        "  - test-cat\n" +
         "---\n" +
         "Some content description 1";
 
@@ -103,14 +135,26 @@ describe("loadAnytimeActionTasks", () => {
         "callToActionLink: CallToActionLink2\n" +
         "callToActionText: CallToActionText2\n" +
         "form: Form2\n" +
+        "category:\n" +
+        "  - test-cat\n" +
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
+      const fakeCategoryMapping =
+        "---\n" + "category-name: Test Cat\n" + "id: test-cat\n" + "---\n";
+
+      mockedFs.readdirSync
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["opp1.md", "opp2.md"])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionTask1) // read first file in list
         .mockReturnValueOnce(anytimeActionTask2) // read second file in list
-        .mockReturnValueOnce(anytimeActionTask2); // read file once we found the match
+        .mockReturnValueOnce(anytimeActionTask2) // read file once we found the match
+        .mockReturnValueOnce(fakeCategoryMapping);
 
       const anytimeActionTask = loadAnytimeActionTaskByUrlSlug("urlslug2");
       expect(anytimeActionTask).toEqual({
@@ -122,6 +166,12 @@ describe("loadAnytimeActionTasks", () => {
         callToActionLink: "CallToActionLink2",
         callToActionText: "CallToActionText2",
         form: "Form2",
+        category: [
+          {
+            categoryId: "test-cat",
+            categoryName: "Test Cat",
+          },
+        ],
       });
     });
   });

@@ -3,7 +3,7 @@ notesMd: ""
 id: government-contracting
 name: Become a Government Contractor
 category:
-  - Contract With NJ State Government
+  - contract-with-nj-gov
 description: Learn the steps to qualify and register as a government contractor.
 sectorIds:
   - construction

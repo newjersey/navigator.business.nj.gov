@@ -10,7 +10,7 @@ notesMd: >-
 id: tenant-eviction
 name: Learn About the Tenant Eviction Process
 category:
-  - Manage My Properties
+  - manage-my-properties
 industryIds:
   - residential-landlord
 sectorIds:

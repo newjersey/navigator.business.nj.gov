@@ -50,19 +50,19 @@ describe("<AnytimeActionDropdown />", () => {
     generateAnytimeActionTask({
       name: "test-title-1",
       applyToAllUsers: true,
-      category: ["Category 1"],
+      category: [{ categoryName: "Category 1", categoryId: "category-1" }],
       description: "test-description-1",
     }),
     generateAnytimeActionTask({
       name: "test-title-2",
       applyToAllUsers: true,
-      category: ["Category 1"],
+      category: [{ categoryName: "Category 1", categoryId: "category-1" }],
       description: "test-description-2",
     }),
     generateAnytimeActionTask({
       name: "test-title-3",
       applyToAllUsers: true,
-      category: ["Category 3"],
+      category: [{ categoryName: "Category 3", categoryId: "category-3" }],
       description: "test-description-3",
     }),
   ];
@@ -89,7 +89,7 @@ describe("<AnytimeActionDropdown />", () => {
           urlSlug: "some-url",
           filename: "some-filename-task",
           applyToAllUsers: true,
-          category: ["Some Category"],
+          category: [{ categoryName: "Some Category", categoryId: "some-category" }],
         }),
       ];
       anytimeActionLicenseReinstatement = [
@@ -128,17 +128,17 @@ describe("<AnytimeActionDropdown />", () => {
         generateAnytimeActionTask({
           name: "category-1-task-name-1",
           applyToAllUsers: true,
-          category: ["Category 1"],
+          category: [{ categoryName: "Category 1", categoryId: "category-1" }],
         }),
         generateAnytimeActionTask({
           name: "category-1-task-name-2",
           applyToAllUsers: true,
-          category: ["Category 1"],
+          category: [{ categoryName: "Category 1", categoryId: "category-1" }],
         }),
         generateAnytimeActionTask({
           name: "category-2-task-name",
           applyToAllUsers: true,
-          category: ["Category 2"],
+          category: [{ categoryName: "Category 2", categoryId: "category-2" }],
         }),
       ];
       renderAnytimeActionDropdown();
@@ -213,7 +213,7 @@ describe("<AnytimeActionDropdown />", () => {
           urlSlug: "some-url",
           filename: "some-filename-task",
           applyToAllUsers: true,
-          category: ["Some Category"],
+          category: [{ categoryName: "Some Category", categoryId: "some-category" }],
         }),
       ];
       anytimeActionLicenseReinstatement = [
@@ -293,7 +293,7 @@ describe("<AnytimeActionDropdown />", () => {
         taskOverrides: {
           name: "only-show-in-subtask-name",
           applyToAllUsers: true,
-          category: ["Only Show in Subtask"],
+          category: [{ categoryName: "Only Show in Subtask", categoryId: "only-show-in-subtask" }],
         },
         businessProfileDataOverrides: {},
         isShown: false,
@@ -577,7 +577,7 @@ describe("<AnytimeActionDropdown />", () => {
         generateAnytimeActionTask({
           name: "test-title-1",
           applyToAllUsers: true,
-          category: ["Category 1"],
+          category: [{ categoryName: "Category 1", categoryId: "category-1" }],
           description: testDescription,
         }),
       ];

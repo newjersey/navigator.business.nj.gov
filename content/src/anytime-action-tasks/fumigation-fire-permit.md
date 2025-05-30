@@ -15,7 +15,7 @@ notesMd: >-
 id: fumigation-fire-permit
 name: Get a Fire Permit for Fumigation or Thermal Insecticide Fogging
 category:
-  - Set Up at a Temporary Location
+  - set-up-at-a-temporary-location
 industryIds:
   - pest-control
 sectorIds: []
