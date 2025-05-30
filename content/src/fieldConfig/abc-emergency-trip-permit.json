@@ -5,9 +5,9 @@
         "description": "You need an emergency trip permit from the New Jersey Division of Alcoholic Beverage Control (ABC) if your business: \n - picks up or delivers alcoholic beverages into, out of, or within New Jersey\n - does not have an `annual transportation license or permit|transportation-license-permit`",
         "applicationHeader": "Application Instructions",
         "applicationInstructionsDescription": "Apply for a permit for each pickup or delivery you make in New Jersey. You can apply up to 5 days in advance of your pickup or delivery date. The permit is valid for 24 hours from that date or a single trip.",
-        "applicationDetails": "This application takes 5-10 minutes to compete. After you submit your payment, you will get a confirmation email with the permit download link.",
+        "applicationDetails": "This application takes 5-10 minutes to complete. The fee is $25.00 per permit plus a $5.00 online service fee. After you submit your payment, you will get a confirmation email with the permit download link.",
         "buttonText": "Start",
-        "helpText": "For technical help with this permit, call the support line at (609) 586-2600. It's available 24 hours a day, 7 days a week. "
+        "helpText": "Need help? Click the help button at the bottom of the screen to chat with us, Monday through Friday, 9 a.m. to 5 p.m. Eastern Time. Need after hours help? Learn more about [support services from the Division of Alcoholic Beverage Control.](https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/emergency-trip-permit/)"
       },
       "requestor": {
         "vehicleSection": "Vehicle Information",
@@ -23,7 +23,7 @@
         "servicesSection": "Services and Payment",
         "billingSection": "Billing Contact Information",
         "permitSection": "Getting Your Permit",
-        "permitSubheader": "A confirmation email with a link to download your permit will be sent to ${requestorEmail}. Please specify additional preferences below.",
+        "permitSubheader": "A confirmation email with a link to download your permit will be sent to ${requestorEmail}. You may have the permit sent other ways. Please select all options you prefer.",
         "pdfAttachCheckboxLabel": "Attach the permit document to my confirmation email",
         "textMessageDownloadLinkCheckboxLabel": "Send the permit download link via text message",
         "additionalEmailDownloadLinkCheckboxLabel": "Send the permit download link to another email address",
@@ -33,7 +33,7 @@
         "totalFeeLineItem": "Total"
       },
       "review": {
-        "infoAlertText": "Review your information before submitting to the New Jersey Division of Alcoholic Beverage Control (ABC). You will then be directed to a secure payment platform operated by New Jersey's partner NICUSA Inc.",
+        "infoAlertText": "Review your information below before paying. Once you click \"Pay Now\" you will be directed to a secure payment platform operated by New Jersey's partner, NICUSA Inc.",
         "errorSubmitText": "Check the steps below for missing information or errors:",
         "apiErrorText": "Something went wrong. Review your information and try again later.",
         "confirmationEmail": "Confirmation Email Sent To:",
@@ -43,14 +43,14 @@
       }
     },
     "fields": {
-      "carrier": "Carrier Name (Business Name)",
-      "requestorFirstName": "Requestor First Name",
-      "requestorLastName": "Requestor Last Name",
+      "carrier": "Carrier Name",
+      "requestorFirstName": "First Name",
+      "requestorLastName": "Last Name",
       "requestorEmail": "Email Address",
       "requestorPhone": "Phone Number",
       "requestorCountry": "Country",
-      "requestorAddress1": "Business Address Line 1",
-      "requestorAddress2": "Business Address Line 2",
+      "requestorAddress1": "Address Line 1",
+      "requestorAddress2": "Address Line 2",
       "requestorCity": "City",
       "requestorStateProvince": "State",
       "requestorZipPostalCode": "Zip Code",
@@ -60,8 +60,8 @@
       "vehicleStateProvince": "State of Registration",
       "vehicleVinSerial": "VIN/Serial Number",
       "vehicleYear": "Vehicle Year",
-      "permitDate": "Trip Start Date",
-      "permitStartTime": "Trip Start Time",
+      "permitDate": "Trip Effective Date",
+      "permitStartTime": "Trip Effective Time",
       "pickupSiteName": "Location Name",
       "pickupCountry": "Country",
       "pickupAddress": "Address",
@@ -91,6 +91,6 @@
     "taskName": "Apply for Your Emergency Trip Permit for Last-Minute Alcohol Pickups or Deliveries",
     "nextStepText": "Save & Continue",
     "previousStepText": "Back",
-    "submitText": "Submit & Pay"
+    "submitText": "Pay Now"
   }
 }
