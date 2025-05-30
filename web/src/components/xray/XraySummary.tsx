@@ -2,7 +2,8 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { XrayRegistrationStatusHeader } from "@/components/tasks/xray-registration/XrayRegistrationStatusHeader";
+import { XrayStatusHeader } from "@/components/xray/XrayStatusHeader";
+
 import type { ConfigType } from "@/contexts/configContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
@@ -57,7 +58,7 @@ const getFormatedExpirationDate = (Config: ConfigType, expirationDate: string): 
   }
 };
 
-export const XrayRegistrationSummary = (props: Props): ReactElement => {
+export const XraySummary = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const xrayData = props.xrayRegistrationData;
   if (!xrayData.facilityDetails || !xrayData.status || !xrayData.machines) return <></>;
@@ -76,7 +77,7 @@ export const XrayRegistrationSummary = (props: Props): ReactElement => {
         </div>
       </div>
       <div className={"paper"}>
-        <XrayRegistrationStatusHeader
+        <XrayStatusHeader
           xrayRegistrationStatus={xrayData.status}
           goToRegistrationTab={props.goToRegistrationTab}
         />

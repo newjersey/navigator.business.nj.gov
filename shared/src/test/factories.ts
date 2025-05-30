@@ -529,6 +529,7 @@ export const generateXrayRegistrationData = (overrides: Partial<XrayData>): Xray
         annualFee: 92,
       },
     ],
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };
