@@ -25,19 +25,6 @@ export const selectDropdownByValue = (label: string, value: string): void => {
   fireEvent.click(listbox.getByTestId(value));
 };
 
-export const selectComboboxValueByTextMouseDown = (
-  comboboxLabel: string,
-  selectionText: string,
-): void => {
-  const combobox = screen.getByRole("combobox", { name: comboboxLabel });
-
-  fireEvent.mouseDown(combobox);
-
-  const listbox = screen.getByRole("listbox");
-  fireEvent.click(within(listbox).getByText(selectionText));
-  fireEvent.blur(combobox);
-};
-
 export const selectComboboxValueByTextClick = (
   comboboxLabel: string,
   selectionText: string,
