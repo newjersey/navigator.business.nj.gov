@@ -53,6 +53,7 @@ export type LegacyEventCategory =
   | "elevator_registration_button_click_update"
   | "elevator_registration_form_submission"
   | "elevator_registration_form_submission_failed"
+  | "emergency_trip_permit_help_button"
   | "external_link"
   | "finish_setup_on_myNewJersey_button"
   | "for_you_card_hide_button"

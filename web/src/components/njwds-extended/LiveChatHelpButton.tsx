@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { ReactElement } from "react";
 
-export const LiveChatHelpButton = (): ReactElement => {
+export const LiveChatHelpButton = (props?: { onClick?: () => void }): ReactElement => {
   const { Config } = useConfig();
 
   return (
@@ -15,7 +15,13 @@ export const LiveChatHelpButton = (): ReactElement => {
         isTextBold
         isIntercomEnabled
         dataTestid={"help-button"}
-        onClick={(): void => analytics.event.business_formation_help_button.click.open_live_chat()}
+        onClick={() => {
+          if (props?.onClick) {
+            props.onClick();
+          } else {
+            analytics.event.business_formation_help_button.click.open_live_chat();
+          }
+        }}
       >
         <ButtonIcon svgFilename="help-circle-blue" sizePx="25px" />
         {Config.formation.general.helpButtonText}

@@ -1,4 +1,5 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
@@ -186,6 +187,8 @@ export const EmergencyTripPermit = (): ReactElement => {
               {Config.abcEmergencyTripPermit.previousStepText}
             </SecondaryButton>
           )}
+
+          <LiveChatHelpButton />
 
           <PrimaryButton
             isColor="primary"
