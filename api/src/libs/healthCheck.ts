@@ -12,6 +12,7 @@ const healthCheckEndPoints: Record<string, string> = {
   rgbDynamicsLicenseStatus: "rgbDynamics/license-status",
   webserviceLicenseStatus: "webservice/license-status",
   webserviceFormation: "webservice/formation",
+  taxClearance: "tax-clearance",
 };
 
 const url = process.env.API_BASE_URL ?? "https://api.account.business.nj.gov";

@@ -251,6 +251,7 @@ const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
   userName: process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "",
   password: process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "",
 });
+const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
 const BUSINESS_NAME_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
@@ -462,6 +463,7 @@ app.use(
       ["rgbDynamics/license-status", rgbDynamicsLicenseHealthCheckClient],
       ["webservice/license-status", webServiceLicenseStatusHealthCheckClient],
       ["webservice/formation", formationHealthCheckClient],
+      ["tax-clearance", taxClearanceHealthCheckClient],
     ]),
   ),
 );
