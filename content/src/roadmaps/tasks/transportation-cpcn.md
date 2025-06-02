@@ -1,10 +1,6 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  To provide transportation services in New Jersey, you need a Certificate of
-  Public Convenience and Necessity (CPCN).
-
-
   :::infoAlert 
 
   You must get the CPCN before scheduling initial vehicle inspections. The CPCN is also needed before registering vehicles with the NJ MVC.
@@ -12,7 +8,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  Transportation services that require a CPCN include:
+  To provide transportation services in New Jersey, you need a Certificate of Public Convenience and Necessity (CPCN). Transportation services that require a CPCN include:
 
 
   * **Intrastate Regular Route Operations,**: carrying passengers on a regular schedule between fixed points in NJ for compensation. This service can be open to the public or restricted to a specific group.
