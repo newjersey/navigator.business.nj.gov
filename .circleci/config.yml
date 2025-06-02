@@ -266,6 +266,7 @@ commands:
             echo 'export ABC_ETP_API_KEY=$ABC_ETP_API_KEY_DEV' >> $BASH_ENV
             echo 'export ABC_ETP_API_BASE_URL=$ABC_ETP_API_BASE_URL_DEV' >> $BASH_ENV
             echo 'export FEATURE_ABC_ETP_APPLICATION=$FEATURE_ABC_ETP_APPLICATION_DEV' >> $BASH_ENV
+            echo 'export FEATURE_SHOW_PERSONALIZE_TASK_TAB=$FEATURE_SHOW_PERSONALIZE_TASK_TAB_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -384,6 +385,7 @@ commands:
             echo 'export ABC_ETP_API_KEY=$ABC_ETP_API_KEY_STAGING' >> $BASH_ENV
             echo 'export ABC_ETP_API_BASE_URL=$ABC_ETP_API_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export FEATURE_ABC_ETP_APPLICATION=$FEATURE_ABC_ETP_APPLICATION_STAGING' >> $BASH_ENV
+            echo 'export FEATURE_SHOW_PERSONALIZE_TASK_TAB=$FEATURE_SHOW_PERSONALIZE_TASK_TAB_STAGING' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -454,6 +456,7 @@ commands:
             echo 'export ABC_ETP_API_KEY=$ABC_ETP_API_KEY_PROD' >> $BASH_ENV
             echo 'export ABC_ETP_API_BASE_URL=$ABC_ETP_API_BASE_URL_PROD' >> $BASH_ENV
             echo 'export FEATURE_ABC_ETP_APPLICATION=$FEATURE_ABC_ETP_APPLICATION_PROD' >> $BASH_ENV
+            echo 'export FEATURE_SHOW_PERSONALIZE_TASK_TAB=$FEATURE_SHOW_PERSONALIZE_TASK_TAB_PROD' >> $BASH_ENV
 
   # These inherit environment variables from dev unless overridden below.
   set-content-env-vars:

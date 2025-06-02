@@ -17,6 +17,7 @@ const permitsTab = "permits";
 const numbersTab = "numbers";
 const documentsTab = "documents";
 const notesTab = "notes";
+const personalizeMyTasksTab = "personalize";
 
 interface Props {
   business: Business | undefined;
@@ -42,6 +43,8 @@ export const ProfileTabNav = (props: Props): ReactElement => {
       isStartingBusiness(props.business)) &&
     state.profileData.industryId !== "domestic-employer";
 
+  const shouldShowPersonalizeMyTasks = process.env.FEATURE_SHOW_PERSONALIZE_TASK_TAB === "true";
+
   const shouldShowDocuments = isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
 
   const tabRefs = {
@@ -50,6 +53,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
     [numbersTab]: useRef<HTMLButtonElement>(null),
     [documentsTab]: useRef<HTMLButtonElement>(null),
     [notesTab]: useRef<HTMLButtonElement>(null),
+    [personalizeMyTasksTab]: useRef<HTMLButtonElement>(null),
   };
 
   const availableTabs = [
@@ -144,6 +148,16 @@ export const ProfileTabNav = (props: Props): ReactElement => {
         onKeyDown={(e) => handleKeyDown(e, notesTab)}
         ref={tabRefs[notesTab]}
       />
+      {shouldShowPersonalizeMyTasks && (
+        <div style={{ paddingTop: 24 }}>
+          <ProfileTab
+            {...props}
+            tab={personalizeMyTasksTab}
+            tabIcon={"star"}
+            tabText={Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -24,6 +24,8 @@ export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
           return Config.profileDefaults.default.profileTabDocsTitle;
         case "notes":
           return Config.profileDefaults.default.profileTabNoteTitle;
+        case "personalize":
+          return Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle;
       }
     };
 
@@ -33,7 +35,7 @@ export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
         <Heading level={2} className="margin-bottom-4" style={{ fontWeight: 300 }}>
           {getTitle()}
         </Heading>
-        {props.tab === "permits" && (
+        {(props.tab === "permits" || props.tab === "personalize") && (
           <ProfileTabSubText text={Config.profileDefaults.default.permitsAndLicensesSubText} />
         )}
       </div>
