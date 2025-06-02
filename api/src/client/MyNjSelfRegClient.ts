@@ -70,11 +70,7 @@ export const MyNJSelfRegClientFactory = (
         };
       })
       .catch((error) => {
-        if (process.env.NODE_ENV !== "test") {
-          console.log("error", error);
-        }
-        logger.LogError(`myNJ Self-Reg - Id:${logId} - Error: `, error);
-
+        logger.LogError(`myNJ Self-Reg - Id:${logId} - myNJSelfRegError: `, error);
         const myNJDuplicateErrors = ["E1048", "E1017", "E1059", "E2109"];
         if (error.length > 0 && myNJDuplicateErrors.includes(error[0].split(" ")[0])) {
           throw new Error("DUPLICATE_SIGNUP");
