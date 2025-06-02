@@ -2598,6 +2598,26 @@ collections:
                       widget: string,
                     }
                   - {
+                      label: Annual Report Deadline Header Text,
+                      name: annualReportDeadlineHeader,
+                      widget: string,
+                    }
+                  - {
+                      label: Annual Report Deadline Sub Text,
+                      name: annualReportDeadlineSubText,
+                      widget: string,
+                    }
+                  - {
+                      label: Filter Certifications and Funding Header,
+                      name: filterCertificationsAndFundingHeader,
+                      widget: string,
+                    }
+                  - {
+                      label: Filter Certifications and Funding Sub Text,
+                      name: filterCertificationsAndFundingSubText,
+                      widget: string,
+                    }
+                  - {
                       label: Location-Based Requirements Header,
                       name: locationBasedRequirementsHeader,
                       widget: string,
@@ -2619,6 +2639,11 @@ collections:
                     }
                   - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
                   - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
+                  - {
+                      label: Personalize Tasks Title,
+                      name: profileTabPersonalizeYourTasksTitle,
+                      widget: string,
+                    }
                   - { label: Formation Doc Label, name: formationDocFileTitle, widget: string }
                   - { label: Good Standing Doc Label, name: standingDocFileTitle, widget: string }
                   - {
