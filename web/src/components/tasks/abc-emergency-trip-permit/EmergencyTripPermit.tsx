@@ -176,6 +176,7 @@ export const EmergencyTripPermit = (): ReactElement => {
       {EmergencyTripPermitSteps[stepIndex].component}
       <CtaContainer>
         <ActionBarLayout>
+          <LiveChatHelpButton />
           {stepIndex !== 0 && (
             <SecondaryButton
               onClick={() => {
@@ -187,8 +188,6 @@ export const EmergencyTripPermit = (): ReactElement => {
               {Config.abcEmergencyTripPermit.previousStepText}
             </SecondaryButton>
           )}
-
-          <LiveChatHelpButton />
 
           <PrimaryButton
             isColor="primary"
