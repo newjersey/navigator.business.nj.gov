@@ -251,6 +251,7 @@ export interface TaxClearanceCertificateClient {
     cryptoClient: CryptoClient,
     databaseClient: DatabaseClient,
   ) => Promise<TaxClearanceCertificateResponse>;
+  health: () => Promise<HealthCheckMetadata>;
 }
 
 export interface XrayRegistrationStatusLookup {
