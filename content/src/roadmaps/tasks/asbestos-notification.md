@@ -11,6 +11,9 @@ id: asbestos-notification
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/a\
   sbestos/index.shtml "
 callToActionText: Submit My Notification of Asbestos Abatement
+agencyAdditionalContext: NJ Department of Labor and Workforce Development,
+  Asbestos Control and Licensing Section and NJ Department of Health and Senior
+  Services, Consumer and Environmental Health Services
 ---
 ## Application Requirements
 
@@ -83,3 +86,16 @@ Consumer and Environmental Health Services
 PO Box 369
 
 Trenton, NJ 08625-0369
+
+:::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+* You can't legally remove asbestos in New Jersey and may be subject to legal consequences, including fines
+* Each day you work without notice counts as a separate violation
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+A filed Notification of Asbestos Abatement allowing you to remove asbestos in New Jersey.
+
+:::
