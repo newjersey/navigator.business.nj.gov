@@ -1,4 +1,6 @@
 ---
+notesMd: "6.3.25: This is a work in progress; drafted here to see how the
+  callouts and overall layout appear"
 summaryDescriptionMd: You must submit a Notification of Asbestos Abatement at
   least **10 days before starting any asbestos removal** in New Jersey. This
   notification lets State agencies know when and where the asbestos work will
@@ -15,6 +17,17 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
   Asbestos Control and Licensing Section and NJ Department of Health and Senior
   Services, Consumer and Environmental Health Services
 ---
+:::callout{ showHeader="true" headerText="If you need to start work in less than 10 days because of an emergency:" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+The building owner or engineer must send a letter that explains:
+
+*  Why the situation is urgent
+*  What will happen if you can't start work right away
+
+Send this letter by fax or express mail to both the NJ Department of Labor and Workforce Development and the NJ Department of Health and Senior Services. **You must wait for approval before starting work.**
+
+:::
+
 ## Application Requirements
 
 *You must have a New Jersey asbestos license, and employees with asbestos permits.* 
