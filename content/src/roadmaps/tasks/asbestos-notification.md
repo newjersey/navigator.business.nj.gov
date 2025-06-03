@@ -78,7 +78,7 @@ Send this letter by fax or express mail to both the NJ Department of Labor and W
 * Disposal date
 * Name and address of landfill
 
-**Mail the notification form to both**:
+:::callout{ showHeader="true" headerText="Mail the notification form to both:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-3760" emailIconText="" }
 
 NJ Department of Labor and Workforce Development
 
@@ -90,7 +90,7 @@ PO Box 392
 
 Trenton, NJ 08625-0392
 
-**And** 
+**And**
 
 NJ Department of Health and Senior Services
 
@@ -99,6 +99,12 @@ Consumer and Environmental Health Services
 PO Box 369
 
 Trenton, NJ 08625-0369
+
+:::
+
+
+
+
 
 :::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
