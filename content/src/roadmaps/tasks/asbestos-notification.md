@@ -65,7 +65,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 ### Waste Disposal Information
 
 * Name and address of waste hauler
-* NJ Department of Environmental Protection (DEP) waste hauler ID number
+* DEP waste hauler ID number
 * Cubic yards of waste
 * Disposal date
 * Name and address of landfill
@@ -94,7 +94,14 @@ Trenton, NJ 08625-0369
 
 :::
 
+## Emergency Asbestos Work Notice
 
+If work must start in less than 10 days due to an emergency, submit a letter from the building owner or engineer explaining:
+
+* Why this is an emergency
+* What will happen if you can’t start the work right away
+
+Send the letter via fax or express mail to both the NJ Department of Labor and Workforce Development and the NJ Department of Health and Senior Services. **Wait for approval before starting work**.
 
 
 
