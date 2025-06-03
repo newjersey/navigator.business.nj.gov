@@ -20,6 +20,19 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
   Asbestos Control and Licensing Section and NJ Department of Health and Senior
   Services, Consumer and Environmental Health Services
 ---
+
+
+:::callout{ showHeader="true" headerText="Emergency Asbestos Work Notice" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+If work must start in less than 10 days due to an emergency, submit a letter from the building owner or engineer explaining:
+
+* Why this is an emergency
+* What will happen if you can’t start the work right away
+
+Send the letter via express mail to both the NJ Department of Labor and Workforce Development and the NJ Department of Health and Senior Services. **Wait for approval before starting work**.
+
+:::
+
 ## Application Requirements
 
 *You must have a New Jersey asbestos license, and employees with asbestos permits.* 
@@ -70,7 +83,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 * Disposal date
 * Name and address of landfill
 
-:::callout{ showHeader="true" headerText="Mail the notification form to both:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-3760" emailIconText="" }
+**Mail the notification form to both**:
 
 NJ Department of Labor and Workforce Development
 
@@ -82,7 +95,7 @@ PO Box 392
 
 Trenton, NJ 08625-0392
 
-**And**
+ **And** 
 
 NJ Department of Health and Senior Services
 
@@ -91,17 +104,6 @@ Consumer and Environmental Health Services
 PO Box 369
 
 Trenton, NJ 08625-0369
-
-:::
-
-## Emergency Asbestos Work Notice
-
-If work must start in less than 10 days due to an emergency, submit a letter from the building owner or engineer explaining:
-
-* Why this is an emergency
-* What will happen if you can’t start the work right away
-
-Send the letter via express mail to both the NJ Department of Labor and Workforce Development and the NJ Department of Health and Senior Services. **Wait for approval before starting work**.
 
 
 
