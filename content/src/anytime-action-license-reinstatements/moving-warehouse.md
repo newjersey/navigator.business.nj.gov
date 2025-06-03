@@ -9,7 +9,7 @@ notesMd: >-
 
   4.17: making SME revisions, will need another SME review
 id: moving-warehouse
-licenseName: ""
+licenseName: "Public Movers and Warehousemen"
 name: Reinstate Your Public Movers and/or Warehousemen License
 urlSlug: moving-warehouse
 summaryDescriptionMd: If your license expired less than 30 days ago, [you can
