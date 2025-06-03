@@ -34,10 +34,29 @@ const healthCheck = async (type: string, logger: LogWriterType): Promise<Status>
     });
 };
 
+const appHealthCheck = async (logger: LogWriterType): Promise<Status> => {
+  return axios
+    .get("https://account.business.nj.gov")
+    .then((response: AxiosResponse) => {
+      if (response.data.success === true) {
+        logger.LogInfo(`Health Check Status - App: PASS`);
+        return "PASS";
+      } else {
+        logger.LogError(`Health Check Status - App: FAIL`, response.data);
+        return "FAIL";
+      }
+    })
+    .catch((error: AxiosError) => {
+      logger.LogError(`Health Check Status - App: FAIL ERROR`, error);
+      return "ERROR";
+    });
+};
+
 export const runHealthChecks = async (logger: LogWriterType): Promise<StatusResult> => {
   const results: Record<string, Status> = {};
   for (const type in healthCheckEndPoints) {
     results[type] = await healthCheck(healthCheckEndPoints[type] ?? "", logger);
   }
+  results["app"] = await appHealthCheck(logger);
   return results;
 };
