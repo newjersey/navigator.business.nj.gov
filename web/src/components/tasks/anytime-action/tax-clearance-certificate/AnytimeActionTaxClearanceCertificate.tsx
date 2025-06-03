@@ -19,6 +19,7 @@ import {
   FormationAddress,
 } from "@businessnjgovnavigator/shared/formationData";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 
 interface Props {
@@ -29,9 +30,8 @@ interface Props {
 
 export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState(
-    emptyTaxClearanceCertificateData,
-  );
+  const [taxClearanceCertificateData, setTaxClearanceCertificateData] =
+    useState<TaxClearanceCertificateData>(emptyTaxClearanceCertificateData);
 
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
@@ -70,7 +70,13 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
           ? (action as (prevState: ProfileData) => ProfileData)(prevProfileData)
           : action;
 
-      const relevantFields = pickData(profileData, ["businessName", "taxId", "taxPin"]);
+      const relevantFields = pickData(profileData, [
+        "businessName",
+        "taxId",
+        "taxPin",
+        "legalStructureId",
+        "dateOfFormation",
+      ]);
       setTaxClearanceCertificateData({
         ...taxClearanceCertificateData,
         ...relevantFields,
@@ -113,6 +119,9 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
         encryptedTaxPin,
         hasPreviouslyReceivedCertificate,
         lastUpdatedISO,
+        checkEligibilityOption,
+        dateOfFormation,
+        legalStructureId,
       } = getInitialData(business);
 
       setTaxClearanceCertificateData({
@@ -129,6 +138,9 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
         encryptedTaxPin,
         hasPreviouslyReceivedCertificate,
         lastUpdatedISO,
+        checkEligibilityOption,
+        dateOfFormation,
+        legalStructureId,
       });
 
       setProfileData({
@@ -138,6 +150,8 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
         encryptedTaxId,
         taxPin,
         encryptedTaxPin,
+        dateOfFormation,
+        legalStructureId,
       });
 
       setAddressData({
@@ -190,7 +204,6 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
               </div>
               <form onSubmit={onSubmit}>
                 <TaxClearanceSteps
-                  taxClearanceCertificateData={taxClearanceCertificateData}
                   certificatePdfBlob={certificatePdfBlob}
                   setCertificatePdfBlob={setCertificatePdfBlob}
                   saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}

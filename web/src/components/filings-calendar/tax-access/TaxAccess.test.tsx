@@ -1,14 +1,17 @@
 import { TaxAccess } from "@/components/filings-calendar/tax-access/TaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
-import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
+import { selectComboboxValueByTextClick } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  generateOwningProfileData,
+  LookupLegalStructureById,
+} from "@businessnjgovnavigator/shared/";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
@@ -99,7 +102,10 @@ describe("<TaxAccess />", () => {
 
     it("does not save selection when refreshing page", () => {
       renderComponent(undefinedLegalStructureBusiness);
-      selectDropdownByValue("Business structure", "c-corporation");
+      selectComboboxValueByTextClick(
+        "Business structure",
+        LookupLegalStructureById("c-corporation").name,
+      );
       // Simulate page refresh
       renderComponent(undefinedLegalStructureBusiness);
       expect(userDataWasNotUpdated()).toBe(true);
@@ -107,7 +113,10 @@ describe("<TaxAccess />", () => {
 
     it("saves selection and moves to step 2 when clicking next button", async () => {
       renderComponent(undefinedLegalStructureBusiness);
-      selectDropdownByValue("Business structure", "c-corporation");
+      selectComboboxValueByTextClick(
+        "Business structure",
+        LookupLegalStructureById("c-corporation").name,
+      );
       fireEvent.click(screen.getByText(Config.taxAccess.stepOneNextButton));
       expect(currentBusiness().profileData.legalStructureId).toBe("c-corporation");
       await waitFor(() => {
@@ -181,7 +190,10 @@ describe("<TaxAccess />", () => {
 
     it("shows step 2 question with steps header", async () => {
       renderComponent(undefinedLegalStructureBusiness);
-      selectDropdownByValue("Business structure", "c-corporation");
+      selectComboboxValueByTextClick(
+        "Business structure",
+        LookupLegalStructureById("c-corporation").name,
+      );
 
       fireEvent.click(screen.getByText(Config.taxAccess.stepOneNextButton));
       expect(currentBusiness().profileData.legalStructureId).toBe("c-corporation");
@@ -198,7 +210,10 @@ describe("<TaxAccess />", () => {
 
     it("moves back to step 1 on back button", async () => {
       renderComponent(undefinedLegalStructureBusiness);
-      selectDropdownByValue("Business structure", "c-corporation");
+      selectComboboxValueByTextClick(
+        "Business structure",
+        LookupLegalStructureById("c-corporation").name,
+      );
 
       fireEvent.click(screen.getByText(Config.taxAccess.stepOneNextButton));
       await waitFor(() => {

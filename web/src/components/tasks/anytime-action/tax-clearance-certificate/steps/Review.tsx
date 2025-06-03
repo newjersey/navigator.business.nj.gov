@@ -3,7 +3,7 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { isAnyFieldEmpty } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
+import { isAnyRequiredFieldEmpty } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
@@ -18,6 +18,7 @@ import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import {
   convertSignedByteArrayToUnsigned,
+  LookupLegalStructureById,
   LookupTaxClearanceCertificateAgenciesById,
   TaxClearanceCertificateData,
   TaxClearanceCertificateResponseErrorType,
@@ -91,26 +92,31 @@ export const Review = (props: Props): ReactElement => {
     "taxPin",
     DataFormErrorMapContext,
   );
+  const { setIsValid: setIsValidLegalStructure } = useFormContextFieldHelpers(
+    "legalStructureId",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidDateOfFormation } = useFormContextFieldHelpers(
+    "dateOfFormation",
+    DataFormErrorMapContext,
+  );
 
-  // Update data error map based
   const updateErrorMap = (taxClearanceData: TaxClearanceCertificateData): void => {
-    if (taxClearanceData.requestingAgencyId === "") {
-      setIsValidRequestingAgencyId(false);
-    }
-    if (taxClearanceData.businessName === "") {
-      setIsValidBusinessName(false);
-    }
-    if (taxClearanceData.taxId === "") {
-      setIsValidTaxId(false);
-    }
-    if (taxClearanceData.taxPin === "") {
-      setIsValidTaxPin(false);
-    }
-
+    setIsValidRequestingAgencyId(taxClearanceData.requestingAgencyId !== "");
+    setIsValidBusinessName(taxClearanceData.businessName !== "");
     setIsValidAddressLine1(!doesRequiredFieldHaveError("addressLine1"));
     setIsValidCity(!doesRequiredFieldHaveError("addressCity"));
     setIsValidState(!doesRequiredFieldHaveError("addressState"));
     setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
+
+    if (taxClearanceData.checkEligibilityOption === "TAX_ID") {
+      setIsValidTaxId(taxClearanceData.taxId !== "");
+      setIsValidTaxPin(taxClearanceData.taxPin !== "");
+    }
+    if (taxClearanceData.checkEligibilityOption === "BUSINESS_TYPE") {
+      setIsValidLegalStructure(taxClearanceData.legalStructureId !== "");
+      setIsValidDateOfFormation(taxClearanceData.dateOfFormation !== "");
+    }
   };
 
   const handleSubmit = async (): Promise<void> => {
@@ -120,8 +126,7 @@ export const Review = (props: Props): ReactElement => {
     props.setResponseErrorType(undefined);
     updateErrorMap(business.taxClearanceCertificateData);
 
-    if (isAnyFieldEmpty(business.taxClearanceCertificateData)) return;
-    if (!props.isValid()) return;
+    if (isAnyRequiredFieldEmpty(business.taxClearanceCertificateData) || !props.isValid()) return;
 
     try {
       await api.postUserData(userData); // Need to assert that all businesses in a user's account have hashed data in DB
@@ -158,6 +163,7 @@ export const Review = (props: Props): ReactElement => {
     analytics.event.tax_clearance.click.switch_to_step_two();
     props.setStepIndex(1);
   };
+
   return (
     <>
       <ReviewSection
@@ -191,17 +197,38 @@ export const Review = (props: Props): ReactElement => {
             value={addressValue}
             dataTestId={"addressLabel"}
           />
-          <ReviewLineItem
-            label={Config.taxClearanceCertificateStep3.stateTaxIdLabel}
-            value={business?.taxClearanceCertificateData?.taxId}
-            dataTestId={"stateTaxIdLabel"}
-          />
-          <ReviewLineItem
-            label={Config.taxClearanceCertificateStep3.taxPinLabel}
-            // A masked tax pin is "****", which is not rendered as literal text in markdown.
-            value={business?.taxClearanceCertificateData?.taxPin?.replace("*", "&ast;")}
-            dataTestId={"taxPinLabel"}
-          />
+          {business?.taxClearanceCertificateData?.checkEligibilityOption === "TAX_ID" && (
+            <>
+              <ReviewLineItem
+                label={Config.taxClearanceCertificateStep3.stateTaxIdLabel}
+                value={business?.taxClearanceCertificateData?.taxId}
+                dataTestId={"stateTaxIdLabel"}
+              />
+              <ReviewLineItem
+                label={Config.taxClearanceCertificateStep3.taxPinLabel}
+                // A masked tax pin is "****", which is not rendered as literal text in markdown.
+                value={business?.taxClearanceCertificateData?.taxPin?.replace("*", "&ast;")}
+                dataTestId={"taxPinLabel"}
+              />
+            </>
+          )}
+          {business?.taxClearanceCertificateData?.checkEligibilityOption === "BUSINESS_TYPE" && (
+            <>
+              <ReviewLineItem
+                label={Config.taxClearanceCertificateStep3.businessStructureLabel}
+                value={
+                  LookupLegalStructureById(business?.taxClearanceCertificateData?.legalStructureId)
+                    .name
+                }
+                dataTestId={"businessStructureLabel"}
+              />
+              <ReviewLineItem
+                label={Config.taxClearanceCertificateStep3.dateOfFormationLabel}
+                value={business?.taxClearanceCertificateData?.dateOfFormation}
+                dataTestId={"dateOfFormationLabel"}
+              />
+            </>
+          )}
         </ReviewSubSection>
       </ReviewSection>
       <div className="margin-top-5">

@@ -10,6 +10,8 @@ export type TaxClearanceCertificateAgency = {
   id: string;
 };
 
+export type TaxClearanceEligibilityOption = "TAX_ID" | "BUSINESS_TYPE";
+
 export const getTaxClearanceCertificateAgencies = (): TaxClearanceCertificateAgency[] =>
   orderBy(taxClearanceCertificateAgencies, ["name"], ["asc"]);
 
@@ -27,6 +29,9 @@ export const emptyTaxClearanceCertificateData: TaxClearanceCertificateData = {
   encryptedTaxPin: "",
   hasPreviouslyReceivedCertificate: false,
   lastUpdatedISO: undefined,
+  checkEligibilityOption: "TAX_ID",
+  dateOfFormation: "",
+  legalStructureId: "",
 };
 
 export type TaxClearanceCertificateData = {
@@ -43,6 +48,9 @@ export type TaxClearanceCertificateData = {
   encryptedTaxPin: string | undefined;
   hasPreviouslyReceivedCertificate: boolean | undefined;
   lastUpdatedISO: string | undefined;
+  checkEligibilityOption: TaxClearanceEligibilityOption;
+  dateOfFormation: string | undefined;
+  legalStructureId: string | undefined;
 };
 
 export const LookupTaxClearanceCertificateAgenciesById = (

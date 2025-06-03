@@ -425,6 +425,9 @@ export const generateTaxClearanceCertificateData = (
     encryptedTaxPin: `encrypted-${randomInt(4)}`,
     hasPreviouslyReceivedCertificate: false,
     lastUpdatedISO: getCurrentDateISOString(),
+    checkEligibilityOption: "TAX_ID",
+    dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
+    legalStructureId: "",
     ...overrides,
   };
 };
@@ -562,7 +565,11 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
-    taxClearanceCertificateData: generateTaxClearanceCertificateData({ taxId, taxPin }),
+    taxClearanceCertificateData: generateTaxClearanceCertificateData({
+      taxId,
+      taxPin,
+      legalStructureId: profileData.legalStructureId || "",
+    }),
     environmentData: generateEnvironmentData({}),
     xrayRegistrationData: undefined,
     version: CURRENT_VERSION,

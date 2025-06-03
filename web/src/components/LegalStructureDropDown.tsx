@@ -12,16 +12,18 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
-import { ReactElement, ReactNode, useContext } from "react";
+import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   disabled?: boolean;
   fullWidth?: boolean;
+  preventRefreshWhenUnmounted?: boolean;
 }
 
 export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+  const [isOpen, setIsOpen] = useState(false);
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
@@ -29,13 +31,16 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
     props.errorTypes,
   );
 
-  const isValid = (): boolean => state.profileData.legalStructureId !== undefined;
+  const isValid = (): boolean => {
+    if (state.profileData.legalStructureId) return true;
+    return false;
+  };
 
   const performValidation = (): void => {
     setIsValid(isValid());
   };
 
-  RegisterForOnSubmit(isValid);
+  RegisterForOnSubmit(isValid, props.preventRefreshWhenUnmounted);
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
@@ -83,9 +88,11 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
           <Select
             fullWidth
             displayEmpty
+            open={isOpen}
             value={state.profileData.legalStructureId || ""}
             onChange={handleLegalStructure}
             onBlur={performValidation}
+            onClick={() => setIsOpen(!isOpen)}
             name="legal-structure"
             inputProps={{
               "aria-label": "Business structure",

@@ -25,6 +25,8 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
     "addressZipCode",
     "taxId",
     "taxPin",
+    "legalStructureId",
+    "dateOfFormation",
   ];
   const fieldErrors = fieldErrorsOrder.filter((item) => props.fieldErrors.includes(item));
 
@@ -34,11 +36,10 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
     // @ts-expect-error
     const formationLabel = Config.formation.fields[field]?.label;
 
-    let requestingAgencyLabel = "";
-
-    if (field === "requestingAgencyId") {
-      requestingAgencyLabel = Config.taxClearanceCertificateStep2.requestingAgencyLabel;
-    }
+    const requestingAgencyLabel =
+      field === "requestingAgencyId"
+        ? Config.taxClearanceCertificateStep2.requestingAgencyLabel
+        : "";
 
     // TODO: Should this be referencing the tax clearance fields?
     return (

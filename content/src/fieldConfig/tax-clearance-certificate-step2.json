@@ -2,6 +2,9 @@
   "taxClearanceCertificateStep2": {
     "requestingAgencySectionHeader": "Reason for Certification",
     "businessInformationSectionHeader": "Business Information",
-    "requestingAgencyLabel": "What agency is requesting the Tax Clearance Certificate?"
+    "requestingAgencyLabel": "What agency is requesting the Tax Clearance Certificate?",
+    "checkEligibilityQuestion": "How do you want to check your eligibility?",
+    "checkEligibilityTaxIdOption": "Using my full address, tax ID, and tax PIN",
+    "checkEligibilityBusinessTypeOption": "Using my business type, effective date, and ZIP code"
   }
 }

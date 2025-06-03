@@ -6,6 +6,7 @@ process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_FLP: "true",
   FEATURE_LOGIN_PAGE: "true",
   FEATURE_TAX_CLEARANCE_CERTIFICATE: "true",
+  FEATURE_TAX_CLEARANCE_STRUCTURE_VALIDATION: "true",
   WEBFLOW_API_TOKEN: 12345678910,
 });
 

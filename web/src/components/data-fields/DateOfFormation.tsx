@@ -26,6 +26,7 @@ interface Props {
   disabled?: boolean;
   errorTextOverride?: string;
   inputWidth?: "full" | "default" | "reduced";
+  preventRefreshWhenUnmounted?: boolean;
 }
 
 export const DateOfFormation = (props: Props): ReactElement => {
@@ -56,7 +57,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
   const isValid = (): boolean =>
     ((dateValue === null && !props.required) || (dateValue?.isValid() && !dateError)) ?? false;
 
-  RegisterForOnSubmit(isValid);
+  RegisterForOnSubmit(isValid, props.preventRefreshWhenUnmounted);
   const onValidation = (): void => setIsValid(isValid());
 
   const handleChange = (date: DateObject | null): void => {
@@ -96,6 +97,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
               validationText={errorText}
               error={isFormFieldInvalid}
               inputProps={params.InputProps}
+              preventRefreshWhenUnmounted={props.preventRefreshWhenUnmounted}
               fieldOptions={{
                 ...params,
                 inputProps: {

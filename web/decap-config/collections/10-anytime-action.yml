@@ -240,6 +240,24 @@ collections:
                   widget: "string",
                   required: true,
                 }
+              - {
+                  label: "How To Check Eligibility Question",
+                  name: "checkEligibilityQuestion",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "How To Check Eligibility Tax ID Option",
+                  name: "checkEligibilityTaxIdOption",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "How To Check Eligibility Business Type Option",
+                  name: "checkEligibilityBusinessTypeOption",
+                  widget: "string",
+                  required: true,
+                }
       - label: "Tax Clearance Step 3"
         name: "taxClearanceCertificate-step3"
         file: "content/src/fieldConfig/tax-clearance-certificate-step3.json"
@@ -295,6 +313,18 @@ collections:
                   required: true,
                 }
               - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
+              - {
+                  label: "Business Structure Label",
+                  name: "businessStructureLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Date of Formation Label",
+                  name: "dateOfFormationLabel",
+                  widget: "string",
+                  required: true,
+                }
               - {
                   label: "Ineligible Form Taxation API Error Text",
                   name: "errorTextIneligible",

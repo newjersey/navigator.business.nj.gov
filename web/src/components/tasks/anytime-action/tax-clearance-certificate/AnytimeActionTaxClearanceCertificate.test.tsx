@@ -23,6 +23,7 @@ import {
   generateUserData,
   generateUserDataForBusiness,
   getTaxClearanceCertificateAgencies,
+  LookupLegalStructureById,
   LookupTaxClearanceCertificateAgenciesById,
   randomElementFromArray,
   StateObject,
@@ -32,6 +33,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -74,11 +76,16 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     userData?: UserData;
   }): void => {
     render(
-      <WithStatefulUserData
-        initialUserData={userData ?? generateUserDataForBusiness(business ?? generateBusiness({}))}
-      >
-        <AnytimeActionTaxClearanceCertificate anytimeAction={anytimeAction} />
-      </WithStatefulUserData>,
+      <ThemeProvider theme={createTheme()}>
+        <WithStatefulUserData
+          initialUserData={
+            userData ?? generateUserDataForBusiness(business ?? generateBusiness({}))
+          }
+        >
+          <AnytimeActionTaxClearanceCertificate anytimeAction={anytimeAction} />
+        </WithStatefulUserData>
+        ,
+      </ThemeProvider>,
     );
   };
 
@@ -616,6 +623,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       encryptedTaxPin: "encrypted-1234",
       hasPreviouslyReceivedCertificate: false,
       lastUpdatedISO: undefined,
+      checkEligibilityOption: "TAX_ID",
+      dateOfFormation: "",
+      legalStructureId: "",
     });
   });
 
@@ -661,6 +671,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       encryptedTaxPin: "encrypted-1234",
       hasPreviouslyReceivedCertificate: false,
       lastUpdatedISO: undefined,
+      checkEligibilityOption: "TAX_ID",
+      dateOfFormation: "",
+      legalStructureId: "",
     });
   });
 
@@ -915,8 +928,6 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(within(screen.getByTestId("taxPinLabel")).getByText("****")).toBeInTheDocument();
     });
 
-    describe("renders data when input is provided", () => {});
-
     describe("renders errors on tax clearance step 2", () => {
       it("renders error for requestingAgency when empty and onBlur", async () => {
         const business = generateBusinessWithEmptyTaxClearanceData();
@@ -1019,7 +1030,6 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   });
 
   it("makes the api post request", async () => {
-    // mockApi.postUserData.mockResolvedValue()
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
       userData: generateUserData({}),
@@ -1541,6 +1551,226 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         ).toBeInTheDocument(),
       );
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
+  });
+
+  describe("BUSINESS_TYPE eligibility option is selected", () => {
+    it("renders Business Structure field and Date of Formation field for STARTING business", async () => {
+      const business = generateBusiness({
+        profileData: { ...emptyProfileData, businessPersona: "STARTING" },
+        formationData: generateFormationData({
+          formationFormData: createEmptyFormationFormData(),
+          completedFilingPayment: true,
+        }),
+      });
+      renderComponent({ business });
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+
+      const businessTypeEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityBusinessTypeOption,
+      );
+      fireEvent.click(businessTypeEligibilityOption);
+
+      expect(
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.header),
+      ).toBeInTheDocument();
+    });
+
+    it("renders Business Structure field and Date of Formation field for OWNING business", async () => {
+      const business = generateBusiness({
+        profileData: { ...emptyProfileData, businessPersona: "OWNING" },
+        formationData: generateFormationData({
+          formationFormData: createEmptyFormationFormData(),
+          completedFilingPayment: true,
+        }),
+      });
+      renderComponent({ business });
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+
+      const businessTypeEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityBusinessTypeOption,
+      );
+      fireEvent.click(businessTypeEligibilityOption);
+
+      expect(
+        screen.getByRole("combobox", {
+          name: "Business structure",
+        }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.header),
+      ).toBeInTheDocument();
+    });
+
+    it("renders Business Structure and Date of Formation review lines", async () => {
+      const business = generateBusiness({
+        profileData: { ...emptyProfileData, businessPersona: "OWNING" },
+        formationData: generateFormationData({
+          formationFormData: createEmptyFormationFormData(),
+          completedFilingPayment: true,
+        }),
+      });
+      renderComponent({ business });
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+
+      const businessTypeEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityBusinessTypeOption,
+      );
+      fireEvent.click(businessTypeEligibilityOption);
+
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+
+      const businessTypeReviewLine = screen.getByTestId("businessStructureLabel");
+      expect(businessTypeReviewLine).toBeInTheDocument();
+      const dateOfFormationReviewLine = screen.getByTestId("dateOfFormationLabel");
+      expect(dateOfFormationReviewLine).toBeInTheDocument();
+    });
+
+    it("saves userData when save and continue button is clicked on tab two", async () => {
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: { ...emptyProfileData, businessPersona: "OWNING" },
+        formationData: generateFormationData({
+          formationFormData: createEmptyFormationFormData(),
+          completedFilingPayment: true,
+        }),
+      });
+      renderComponent({ business });
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+
+      const businessTypeEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityBusinessTypeOption,
+      );
+      fireEvent.click(businessTypeEligibilityOption);
+
+      selectComboboxValueByTextClick(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+      );
+      fillText("Business name", "Test Name");
+      selectComboboxValueByTextClick(
+        "Business structure",
+        LookupLegalStructureById("general-partnership").name,
+      );
+      fillText("Date of formation", "022025");
+
+      fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.saveButtonText));
+      expect(currentBusiness().taxClearanceCertificateData).toEqual({
+        requestingAgencyId: "newJerseyBoardOfPublicUtilities",
+        businessName: "Test Name",
+        addressLine1: "",
+        addressLine2: "",
+        addressCity: "",
+        addressState: undefined,
+        addressZipCode: "",
+        taxId: "",
+        encryptedTaxId: undefined,
+        taxPin: "",
+        encryptedTaxPin: undefined,
+        hasPreviouslyReceivedCertificate: false,
+        lastUpdatedISO: undefined,
+        checkEligibilityOption: "BUSINESS_TYPE",
+        dateOfFormation: "2025-02-01",
+        legalStructureId: "general-partnership",
+      });
+    });
+
+    it("renders error for Business Structure when empty and onBlur", () => {
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: { ...emptyProfileData, businessPersona: "OWNING" },
+        formationData: generateFormationData({
+          formationFormData: createEmptyFormationFormData(),
+          completedFilingPayment: true,
+        }),
+      });
+      renderComponent({ business });
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+
+      const businessTypeEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityBusinessTypeOption,
+      );
+      fireEvent.click(businessTypeEligibilityOption);
+
+      fireEvent.blur(screen.getByLabelText("Business structure"));
+      expect(
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired),
+      ).toBeInTheDocument();
+    });
+
+    it("renders error for Date of Formation when empty and onBlur", () => {
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: { ...emptyProfileData, businessPersona: "OWNING" },
+        formationData: generateFormationData({
+          formationFormData: createEmptyFormationFormData(),
+          completedFilingPayment: true,
+        }),
+      });
+      renderComponent({ business });
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+
+      const businessTypeEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityBusinessTypeOption,
+      );
+      fireEvent.click(businessTypeEligibilityOption);
+
+      fillText("Date of formation", "");
+      fireEvent.blur(screen.getByLabelText("Date of formation"));
+      expect(
+        screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.errorTextRequired),
+      ).toBeInTheDocument();
+    });
+
+    it("clears errors for Business Structure and Date of Formation when TAX_ID eligibility option is selected", () => {
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: { ...emptyProfileData, businessPersona: "OWNING" },
+        formationData: generateFormationData({
+          formationFormData: createEmptyFormationFormData(),
+          completedFilingPayment: true,
+        }),
+      });
+      renderComponent({ business });
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+
+      const businessTypeEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityBusinessTypeOption,
+      );
+      fireEvent.click(businessTypeEligibilityOption);
+
+      fireEvent.blur(screen.getByLabelText("Business structure"));
+      expect(
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired),
+      ).toBeInTheDocument();
+
+      fillText("Date of formation", "");
+      fireEvent.blur(screen.getByLabelText("Date of formation"));
+      expect(
+        screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.errorTextRequired),
+      ).toBeInTheDocument();
+
+      const taxIdEligibilityOption = screen.getByText(
+        Config.taxClearanceCertificateStep2.checkEligibilityTaxIdOption,
+      );
+      fireEvent.click(taxIdEligibilityOption);
+
+      expect(
+        screen.queryByText(
+          Config.profileDefaults.fields.legalStructureId.default.errorTextRequired,
+        ),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.errorTextRequired),
+      ).not.toBeInTheDocument();
     });
   });
 
