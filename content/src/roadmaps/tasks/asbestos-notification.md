@@ -101,7 +101,7 @@ If work must start in less than 10 days due to an emergency, submit a letter fro
 * Why this is an emergency
 * What will happen if you can’t start the work right away
 
-Send the letter via fax or express mail to both the NJ Department of Labor and Workforce Development and the NJ Department of Health and Senior Services. **Wait for approval before starting work**.
+Send the letter via express mail to both the NJ Department of Labor and Workforce Development and the NJ Department of Health and Senior Services. **Wait for approval before starting work**.
 
 
 
