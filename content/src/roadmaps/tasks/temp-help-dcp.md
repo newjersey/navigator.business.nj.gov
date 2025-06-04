@@ -52,7 +52,7 @@ You must have an active license or registration as one of the following:
 
 * Business name
 *  `Trade name|alt-name-trade-name`, if applicable
-* 12-digit `New Jersey tax ID number|tax-id`
+* 9-digit `individual taxpayer identification number|itin`, if applicable
 * Federal `employer identification number|ein`
 * Business address
 * `Business organization/structure|business-structure-learn-more\` 
