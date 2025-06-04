@@ -23,6 +23,13 @@ callToActionLink: https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3
 synonyms:
   - sales tax
 ---
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+* To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
+* A contractor cannot use the Sales Tax Resale Certificate
+
+:::
+
 ## Requirements for Businesses in New Jersey
 
 If you are a reseller, complete the Sales Tax Resale Certificate with:
