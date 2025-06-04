@@ -37,3 +37,9 @@ If you are a seller, you must:
 * Keep certificates for 4 years
 * Keep sales slips, receipts, statements, cash register tapes, or guest checks documenting the sale for 4 years
 * Provide certificates and any documentation upon request to the New Jersey Division of Taxation
+
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+If you are buying products to resell without the Sales Tax Resale Certificate, you could be overpaying taxes.
+
+:::
