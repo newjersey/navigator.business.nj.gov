@@ -27,6 +27,9 @@ synonyms:
 
 * To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
 * A contractor cannot use the Sales Tax Resale Certificate
+* On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
+
+
 
 :::
 
@@ -40,7 +43,6 @@ If you are a reseller, complete the Sales Tax Resale Certificate with:
 * A description of the property or services you are buying
 
 When buying your goods or services, give the completed certificate to the seller. 
-
 
 If you are a seller, you must:
 
