@@ -39,7 +39,8 @@ If you are a reseller, complete the Sales Tax Resale Certificate with:
 * Your type of business
 * A description of the property or services you are buying
 
-When buying your goods or services, give the completed certificate to the seller.
+When buying your goods or services, give the completed certificate to the seller. 
+
 
 If you are a seller, you must:
 
