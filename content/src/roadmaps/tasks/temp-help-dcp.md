@@ -30,6 +30,7 @@ summaryDescriptionMd: >-
 urlSlug: temp-help-dcp
 displayname: temp-help-dcp
 name: Apply for Your Certification to Make Designated Classification Placements
+  for Temporary Workers
 id: temp-help-dcp
 callToActionLink: https://rgbportal.dca.njoag.gov/application-TWBRdcp/
 callToActionText: Apply for My Certification to Make DCPs
