@@ -1,6 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
-import { generateLicenseEvent } from "@/test/factories";
+import { generateLicenseEvent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import * as shared from "@businessnjgovnavigator/shared";
 import {
   defaultDateFormat,
@@ -12,20 +12,23 @@ import {
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
-import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateLicenseData,
+  generateXrayRegistrationData,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
 
 const Config = getMergedConfig();
-const currentDate = parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
-const year = currentDate.year().toString();
-const month: number = Number.parseInt(currentDate.month().toString());
+const fixedFebruaryDate = parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
+const year = fixedFebruaryDate.year().toString();
+const month: number = Number.parseInt(fixedFebruaryDate.month().toString());
 
 function mockShared(): typeof shared {
   return {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
-    getCurrentDate: (): Dayjs => currentDate,
+    getCurrentDate: (): Dayjs => fixedFebruaryDate,
   };
 }
 
@@ -33,17 +36,17 @@ jest.mock("@businessnjgovnavigator/shared", () => mockShared());
 
 const taxFilingOne = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-one",
-  dueDate: currentDate.format(defaultDateFormat),
+  dueDate: fixedFebruaryDate.format(defaultDateFormat),
 });
 
 const taxFilingTwo = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-two",
-  dueDate: currentDate.format(defaultDateFormat),
+  dueDate: fixedFebruaryDate.format(defaultDateFormat),
 });
 
 const taxFilingThree = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-three",
-  dueDate: currentDate.format(defaultDateFormat),
+  dueDate: fixedFebruaryDate.format(defaultDateFormat),
 });
 
 const operateReferences: Record<string, OperateReference> = {
@@ -77,6 +80,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         num={month}
         activeYear={year}
         licenseEvents={[generateLicenseEvent({})]}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
@@ -88,7 +92,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "tax-filing-old",
-            dueDate: currentDate.subtract(1, "month").format(defaultDateFormat),
+            dueDate: fixedFebruaryDate.subtract(1, "month").format(defaultDateFormat),
           }),
         ],
       }),
@@ -106,6 +110,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         num={month - 1}
         activeYear={year}
         licenseEvents={[generateLicenseEvent({})]}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
     expect(screen.queryByText("Tax Filing Old")).not.toBeInTheDocument();
@@ -117,7 +122,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "tax-filing-old",
-            dueDate: currentDate.add(1, "year").subtract(1, "month").format(defaultDateFormat),
+            dueDate: fixedFebruaryDate
+              .add(1, "year")
+              .subtract(1, "month")
+              .format(defaultDateFormat),
           }),
         ],
       }),
@@ -126,6 +134,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       <FilingsCalendarSingleGrid
         business={business}
         licenseEvents={[generateLicenseEvent({})]}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
         operateReferences={{
           "tax-filing-old": {
             name: "Tax Filing Old",
@@ -134,7 +143,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
           },
         }}
         num={month - 1}
-        activeYear={currentDate.add(1, "year").year().toString()}
+        activeYear={fixedFebruaryDate.add(1, "year").year().toString()}
       />,
     );
     expect(screen.getByText("Tax Filing Old")).toBeInTheDocument();
@@ -151,7 +160,8 @@ describe("<FilingsCalendarSingleGrid />", () => {
         business={business}
         operateReferences={operateReferences}
         num={month}
-        activeYear={currentDate.add(1, "year").year().toString()}
+        activeYear={fixedFebruaryDate.add(1, "year").year().toString()}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
 
@@ -166,7 +176,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
-            expirationDateISO: currentDate.add(4, "days").toISOString(),
+            expirationDateISO: fixedFebruaryDate.add(4, "days").toISOString(),
           }),
         },
       }),
@@ -178,7 +188,8 @@ describe("<FilingsCalendarSingleGrid />", () => {
         business={business}
         operateReferences={operateReferences}
         num={month}
-        activeYear={currentDate.year().toString()}
+        activeYear={fixedFebruaryDate.year().toString()}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
 
@@ -197,7 +208,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
-            expirationDateISO: currentDate.add(4, "days").toISOString(),
+            expirationDateISO: fixedFebruaryDate.add(4, "days").toISOString(),
           }),
         },
       }),
@@ -208,8 +219,9 @@ describe("<FilingsCalendarSingleGrid />", () => {
         licenseEvents={[licenseEvent]}
         business={business}
         operateReferences={operateReferences}
-        num={currentDate.add(1, "month").month()}
-        activeYear={currentDate.year().toString()}
+        num={fixedFebruaryDate.add(1, "month").month()}
+        activeYear={fixedFebruaryDate.year().toString()}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
     expect(screen.getByText(licenseEvent.renewalEventDisplayName)).toBeInTheDocument();
@@ -227,7 +239,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
-            expirationDateISO: currentDate.add(1, "year").month(0).date(1).toISOString(),
+            expirationDateISO: fixedFebruaryDate.add(1, "year").month(0).date(1).toISOString(),
           }),
         },
       }),
@@ -239,7 +251,8 @@ describe("<FilingsCalendarSingleGrid />", () => {
         business={business}
         operateReferences={operateReferences}
         num={0}
-        activeYear={currentDate.add(1, "year").year().toString()}
+        activeYear={fixedFebruaryDate.add(1, "year").year().toString()}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
 
@@ -267,6 +280,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
 
@@ -283,11 +297,11 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("shows a licenseEvent and exactly 2 tax filings in order by due date", () => {
     const first = {
       ...taxFilingOne,
-      dueDate: currentDate.toISOString(),
+      dueDate: fixedFebruaryDate.toISOString(),
     };
     const last = {
       ...taxFilingTwo,
-      dueDate: currentDate.add(2, "days").toISOString(),
+      dueDate: fixedFebruaryDate.add(2, "days").toISOString(),
     };
 
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
@@ -297,7 +311,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
-            expirationDateISO: currentDate.add(1, "days").toISOString(),
+            expirationDateISO: fixedFebruaryDate.add(1, "days").toISOString(),
             licenseStatus: "ACTIVE",
           }),
         },
@@ -311,6 +325,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
 
@@ -327,15 +342,15 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("shows a licenseEvent and 2+ tax filings in order by due date", () => {
     const first = {
       ...taxFilingOne,
-      dueDate: currentDate.toISOString(),
+      dueDate: fixedFebruaryDate.toISOString(),
     };
     const second = {
       ...taxFilingTwo,
-      dueDate: currentDate.add(1, "day").toISOString(),
+      dueDate: fixedFebruaryDate.add(1, "day").toISOString(),
     };
     const last = {
       ...taxFilingThree,
-      dueDate: currentDate.add(3, "days").toISOString(),
+      dueDate: fixedFebruaryDate.add(3, "days").toISOString(),
     };
 
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
@@ -345,7 +360,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
-            expirationDateISO: currentDate.add(2, "days").toISOString(),
+            expirationDateISO: fixedFebruaryDate.add(2, "days").toISOString(),
             licenseStatus: "ACTIVE",
           }),
         },
@@ -359,6 +374,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
 
@@ -386,6 +402,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
       />,
     );
 
@@ -410,5 +427,65 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(
       screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton),
     ).not.toBeInTheDocument();
+  });
+
+  it("renders an active xray renewal event", () => {
+    const xrayRenewalEvent = generateXrayRenewalCalendarEvent({
+      id: "xray-renewal",
+      eventDisplayName: "Xray Renewal",
+      urlSlug: "xray-renewal",
+    });
+    const business = generateBusiness({
+      xrayRegistrationData: generateXrayRegistrationData({
+        expirationDate: fixedFebruaryDate.add(1, "month").format("YYYY-MM-DD").toString(),
+        status: "ACTIVE",
+      }),
+    });
+
+    render(
+      <FilingsCalendarSingleGrid
+        licenseEvents={[]}
+        business={business}
+        operateReferences={operateReferences}
+        num={fixedFebruaryDate.add(1, "month").month()}
+        activeYear={fixedFebruaryDate.year().toString()}
+        xrayRenewalEvent={xrayRenewalEvent}
+      />,
+    );
+    expect(screen.getByText(xrayRenewalEvent.eventDisplayName)).toBeInTheDocument();
+    expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
+      "href",
+      `${xrayRenewalEvent.urlSlug}`,
+    );
+  });
+
+  it("renders an expired xray renewal event", () => {
+    const renewalEvent = generateXrayRenewalCalendarEvent({
+      id: "xray-renewal",
+      eventDisplayName: "Xray Renewal",
+      urlSlug: "xray-renewal",
+    });
+    const business = generateBusiness({
+      xrayRegistrationData: generateXrayRegistrationData({
+        expirationDate: fixedFebruaryDate.subtract(1, "day").format("YYYY-MM-DD").toString(),
+        status: "EXPIRED",
+      }),
+    });
+
+    render(
+      <FilingsCalendarSingleGrid
+        licenseEvents={[]}
+        business={business}
+        operateReferences={operateReferences}
+        num={fixedFebruaryDate.month()}
+        activeYear={fixedFebruaryDate.year().toString()}
+        xrayRenewalEvent={renewalEvent}
+      />,
+    );
+    expect(screen.getByText(renewalEvent.eventDisplayName)).toBeInTheDocument();
+    expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
+      "href",
+      `${renewalEvent.urlSlug}`,
+    );
   });
 });

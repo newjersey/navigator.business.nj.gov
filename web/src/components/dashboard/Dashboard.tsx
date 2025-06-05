@@ -26,6 +26,7 @@ import {
   LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
+  XrayRenewalCalendarEventType,
 } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import {
@@ -46,6 +47,7 @@ interface Props {
   certifications: Certification[];
   elevatorViolations?: boolean;
   licenseEvents: LicenseEventType[];
+  xrayRenewalEvent: XrayRenewalCalendarEventType;
 }
 
 export const Dashboard = (props: Props): ReactElement => {
@@ -116,6 +118,7 @@ export const Dashboard = (props: Props): ReactElement => {
                       <FilingsCalendar
                         operateReferences={props.operateReferences}
                         licenseEvents={props.licenseEvents}
+                        xrayRenewalEvent={props.xrayRenewalEvent}
                       />
                     )}
                     {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
@@ -176,6 +179,7 @@ export const Dashboard = (props: Props): ReactElement => {
                     <FilingsCalendar
                       operateReferences={props.operateReferences}
                       licenseEvents={props.licenseEvents}
+                      xrayRenewalEvent={props.xrayRenewalEvent}
                     />
                   )}
                   {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}

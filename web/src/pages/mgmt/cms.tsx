@@ -45,6 +45,8 @@ import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
 import TaxAccessPreview from "@/lib/cms/previews/TaxAccessPreview";
+import XrayRenewalCalendarEventPreview from "@/lib/cms/previews/XrayRenewalCalendarEventPreview";
+import XrayTaskPreview from "@/lib/cms/previews/XrayTaskPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
@@ -93,6 +95,9 @@ const CMS = dynamic(
       registerPreview(CMS, "filings", FilingsPreview);
       registerPreview(CMS, "license-calendar-events", LicenseCalendarEventPreview);
       registerPreview(CMS, "municipal-tasks", TaskPreview);
+      registerPreview(CMS, "xray-calendar-event", XrayRenewalCalendarEventPreview);
+      registerPreview(CMS, "xray-renewal-config", XrayRenewalCalendarEventPreview);
+      registerPreview(CMS, "xray", XrayTaskPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 

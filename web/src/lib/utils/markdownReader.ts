@@ -19,6 +19,7 @@ import {
   TaxAgency,
   TaxFilingMethod,
   WebflowLicense,
+  XrayRenewalCalendarEventType,
 } from "@/lib/types/types";
 import { LicenseName } from "@businessnjgovnavigator/shared/";
 import matter from "gray-matter";
@@ -59,6 +60,22 @@ export const convertLicenseCalendarEventMd = (
     filename,
     ...licenseGrayMatter,
     licenseName,
+  };
+};
+
+export const convertXrayRenewalCalendarEventMd = (
+  renewalMdContents: string,
+  filename: string,
+): XrayRenewalCalendarEventType => {
+  const matterResult = matter(renewalMdContents);
+
+  const renewalGrayMatter = matterResult.data as XrayRenewalGrayMatter;
+  delete renewalGrayMatter.notesMd;
+
+  return {
+    contentMd: matterResult.content,
+    filename,
+    ...renewalGrayMatter,
   };
 };
 
@@ -160,6 +177,18 @@ type LicenseGrayMatter = {
   summaryDescriptionMd: string;
   notesMd?: string;
   licenseName: string;
+};
+
+type XrayRenewalGrayMatter = {
+  id: string;
+  issuingAgency: string;
+  name: string;
+  eventDisplayName: string;
+  urlSlug: string;
+  callToActionLink?: string;
+  callToActionText?: string;
+  summaryDescriptionMd: string;
+  notesMd?: string;
 };
 
 type TaskGrayMatter = {

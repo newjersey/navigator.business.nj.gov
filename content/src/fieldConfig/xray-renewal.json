@@ -1,0 +1,9 @@
+{
+  "xrayRenewal": {
+    "callToActionSecondaryText": "Check My Registration Status",
+    "callToActionPrimaryText": "Renew My X-Ray Machine Registration",
+    "tab1Text": "Start Renewal",
+    "tab2Text": "Check Status",
+    "ariaLabel": "X-Ray Renewal"
+  }
+}
