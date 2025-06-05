@@ -72,6 +72,7 @@ import {
 } from "@functions/config";
 import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
+import { isKillSwitchOn } from "@libs/ssmUtils";
 import bodyParser from "body-parser";
 import { StatusCodes } from "http-status-codes";
 import serverless from "serverless-http";
@@ -338,7 +339,12 @@ const userDataClient = DynamoUserDataClient(
   dataLogger,
 );
 const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, dataLogger);
-const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, dataLogger);
+const dynamoDataClient = DynamoDataClient(
+  userDataClient,
+  businessesDataClient,
+  dataLogger,
+  isKillSwitchOn,
+);
 
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
