@@ -17,6 +17,7 @@ summaryDescriptionMd: >-
   without paying sales tax. 
 
 
+
   You cannot use the Sales Tax Resale Certificate for items or equipment that you will not resell. For example, if you are an electronics retailer who buys computers to resell, you cannot use the resale certificate to buy a computer to use in your home or office.
 issuingAgency: Division of Taxation
 callToActionText: Get My Sales Resale Certificate
