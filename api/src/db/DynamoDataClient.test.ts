@@ -32,6 +32,9 @@ const usersDbConfig = {
   tableName: "users-table-test",
 };
 
+const isKillSwitchOn = async (): Promise<boolean> => false;
+const isKillSwitchOnTruePath = async (): Promise<boolean> => true;
+
 describe("User and Business Migration with DynamoDataClient", () => {
   const config = {
     endpoint: process.env.MOCK_DYNAMODB_ENDPOINT,
@@ -92,11 +95,17 @@ describe("User and Business Migration with DynamoDataClient", () => {
       logger,
     );
 
-    dynamoDataClient = DynamoDataClient(dynamoUsersDataClient, dynamoBusinessesDataClient, logger);
+    dynamoDataClient = DynamoDataClient(
+      dynamoUsersDataClient,
+      dynamoBusinessesDataClient,
+      logger,
+      isKillSwitchOn,
+    );
     (dynamoBusinessesDataClient.put as jest.Mock) = jest.fn();
     (dynamoUsersDataClient.put as jest.Mock) = jest.fn();
 
     mockLogger();
+    jest.spyOn(dynamoUsersDataClient, "put").mockImplementation(async (input) => input);
     jest
       .spyOn(dynamoBusinessesDataClient, "put")
       .mockResolvedValue(userData.businesses[userData.user.id]);
@@ -318,5 +327,23 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
     expect(result).toEqual([]);
     expect(mockGet).not.toHaveBeenCalled();
+  });
+
+  it("should skip migration when kill switch flag is true", async () => {
+    dynamoDataClient = DynamoDataClient(
+      dynamoUsersDataClient,
+      dynamoBusinessesDataClient,
+      logger,
+      isKillSwitchOnTruePath,
+    );
+    const putBusinessesSpy = jest.spyOn(dynamoBusinessesDataClient, "put");
+    const putUsersSpy = jest.spyOn(dynamoUsersDataClient, "put");
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+    expect(result.success).toBe(true);
+    expect(result.migratedCount).toBe(0);
+    expect(putBusinessesSpy).not.toHaveBeenCalled();
+    expect(putUsersSpy).not.toHaveBeenCalled();
+    expect(logger.LogInfo).toHaveBeenCalledWith("Migration halted: kill switch is ON");
   });
 });
