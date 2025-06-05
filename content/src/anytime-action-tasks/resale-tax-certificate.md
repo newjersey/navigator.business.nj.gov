@@ -38,7 +38,7 @@ cannot use the Sales Tax Resale Certificate
 If you are a reseller, complete the Sales Tax Resale Certificate with:
 
 * Your business name and address are registered with the New Jersey Division of Taxation
-* Your New Jersey taxpayer identification number <contextual information>
+* Your New Jersey taxpayer identification number
 * Your type of business
 * A description of the property or services you are buying
 
