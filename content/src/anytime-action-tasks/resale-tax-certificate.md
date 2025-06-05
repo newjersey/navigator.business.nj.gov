@@ -16,10 +16,7 @@ summaryDescriptionMd: >-
   screen printing business). This certificate allows you to buy items for resale
   without paying sales tax. 
 
-  <br>
-
-
-  <p>&nbsp;</p>
+  <br> <br>
 
 
   You cannot use the Sales Tax Resale Certificate for items or equipment that you will not resell. For example, if you are an electronics retailer who buys computers to resell, you cannot use the resale certificate to buy a computer to use in your home or office.
@@ -31,10 +28,10 @@ synonyms:
 ---
 :::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
+* On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
 * To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
 * A `home improvement contractor|home-contractors-activities` 
   cannot use the Sales Tax Resale Certificate
-* On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
 
 :::
 
