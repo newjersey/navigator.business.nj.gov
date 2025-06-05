@@ -33,7 +33,9 @@ const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_K
   purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
   origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
-
+const isKillSwitchOn = async (): Promise<boolean> => {
+  return false;
+}
 class BasicLogger {
   private id: string;
 
@@ -119,7 +121,12 @@ const run = async (): Promise<void> => {
     logger,
   );
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
-  const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, logger);
+  const dynamoDataClient = DynamoDataClient(
+    userDataClient,
+    businessesDataClient,
+    logger,
+    isKillSwitchOn,
+  );
 
   await dynamoDataClient.migrateOutdatedVersionUsers();
 };
