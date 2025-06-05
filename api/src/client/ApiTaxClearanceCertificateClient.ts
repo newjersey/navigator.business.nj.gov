@@ -1,11 +1,16 @@
 import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
-import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
+import {
+  type CryptoClient,
+  DatabaseClient,
+  HealthCheckMetadata,
+  TaxClearanceCertificateClient,
+} from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
 import { UserData } from "@shared/userData";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { StatusCodes } from "http-status-codes";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 type Config = {
   orgUrl: string;
@@ -190,5 +195,43 @@ export const ApiTaxClearanceCertificateClient = (
       });
   };
 
-  return { postTaxClearanceCertificate };
+  const health = async (): Promise<HealthCheckMetadata> => {
+    const logId = logWriter.GetId();
+    return axios
+      .post(`${config.orgUrl}/TYTR_ACE_App/ProcessCertificate/businessClearance`)
+      .then(() => {
+        return {
+          success: true,
+          data: {
+            message: ReasonPhrases.OK,
+          },
+        } as HealthCheckMetadata;
+      })
+      .catch((error: AxiosError) => {
+        logWriter.LogError(
+          `Tax Clearance Certificate Health Check Failed - Id:${logId} - Error:`,
+          error,
+        );
+        if (error.response) {
+          return {
+            success: false,
+            error: {
+              serverResponseBody: error.message,
+              serverResponseCode: error.response.status,
+              message: ReasonPhrases.BAD_GATEWAY,
+              timeout: false,
+            },
+          } as HealthCheckMetadata;
+        }
+        return {
+          success: false,
+          error: {
+            message: ReasonPhrases.GATEWAY_TIMEOUT,
+            timeout: true,
+          },
+        } as HealthCheckMetadata;
+      });
+  };
+
+  return { postTaxClearanceCertificate, health };
 };

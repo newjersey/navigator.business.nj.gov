@@ -16,6 +16,7 @@ describe("taxClearanceCertificateRouterFactory", () => {
     jest.resetAllMocks();
     stubTaxClearanceCertificateClient = {
       postTaxClearanceCertificate: jest.fn(),
+      health: jest.fn(),
     };
     stubCryptoClient = {
       encryptValue: jest.fn(),

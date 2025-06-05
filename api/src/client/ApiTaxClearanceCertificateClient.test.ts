@@ -21,7 +21,7 @@ import {
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import axios from "axios";
-import { StatusCodes } from "http-status-codes";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -371,6 +371,40 @@ describe("TaxClearanceCertificateClient", () => {
         message: TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
         type: "MISSING_FIELD",
       },
+    });
+  });
+
+  describe("health", () => {
+    it("returns a passing health check if data can be retrieved successfully", async () => {
+      mockAxios.post.mockResolvedValue({});
+      expect(await client.health()).toEqual({ success: true, data: { message: "OK" } });
+    });
+
+    it("returns a failing health check if unexpected data is retrieved", async () => {
+      mockAxios.post.mockRejectedValue({
+        response: { status: StatusCodes.NOT_FOUND },
+        message: "",
+      });
+      expect(await client.health()).toEqual({
+        success: false,
+        error: {
+          message: ReasonPhrases.BAD_GATEWAY,
+          serverResponseBody: "",
+          serverResponseCode: StatusCodes.NOT_FOUND,
+          timeout: false,
+        },
+      });
+    });
+
+    it("returns a failing health check if axios request times out", async () => {
+      mockAxios.post.mockRejectedValue({});
+      expect(await client.health()).toEqual({
+        success: false,
+        error: {
+          message: ReasonPhrases.GATEWAY_TIMEOUT,
+          timeout: true,
+        },
+      });
     });
   });
 });
