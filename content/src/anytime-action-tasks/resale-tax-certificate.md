@@ -16,8 +16,6 @@ summaryDescriptionMd: >-
   screen printing business). This certificate allows you to buy items for resale
   without paying sales tax. 
 
-  <br>
-
 
 
 
