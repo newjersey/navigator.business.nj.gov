@@ -16,9 +16,15 @@ import {
   USERS_TABLE,
 } from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
+import { isKillSwitchOn } from "@libs/ssmUtils";
 
 export default async function handler(): Promise<void> {
   const logger = LogWriter(`UsersSchemaMigration/${STAGE}`, "MigrationLogs");
+  const killSwitchOn = await isKillSwitchOn();
+  if (killSwitchOn) {
+    logger.LogInfo("Migration skipped — kill switch is ON");
+    return;
+  }
 
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
@@ -33,6 +39,11 @@ export default async function handler(): Promise<void> {
     logger,
   );
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
-  const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, logger);
+  const dynamoDataClient = DynamoDataClient(
+    userDataClient,
+    businessesDataClient,
+    logger,
+    isKillSwitchOn,
+  );
   await dynamoDataClient.migrateOutdatedVersionUsers();
 }
