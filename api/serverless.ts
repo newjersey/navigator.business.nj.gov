@@ -6,12 +6,14 @@ import githubOauth2 from "@functions/githubOauth2";
 import healthCheck from "@functions/healthCheck";
 import migrateUsersVersion from "@functions/migrateUsersVersion";
 import updateExternalStatus from "@functions/updateExternalStatus";
+import updateKillSwitchParameter from "@functions/updateKillSwitchParameter";
 import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
 import { env } from "node:process";
 
 const isDocker = process.env.IS_DOCKER === "true" || false; // set in docker-compose
 const stage = process.env.STAGE || "local";
+const account_id = process.env.AWS_ACCOUNT_ID;
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5002;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
@@ -177,6 +179,13 @@ const serverlessConfiguration: AWS = {
           },
           {
             Effect: "Allow",
+            Action: ["ssm:GetParameter", "ssm:PutParameter"],
+            Resource: [
+              `arn:aws:ssm:${region}:${account_id}:parameter/${stage}/feature-flag/users-migration/kill-switch`,
+            ],
+          },
+          {
+            Effect: "Allow",
             Action: ["s3:GetObject"],
             Resource: "arn:aws:s3:::*/*",
           },
@@ -330,6 +339,17 @@ serverlessConfiguration.functions = {
       : undefined,
   ),
   migrateUsersVersion: migrateUsersVersion(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined,
+  ),
+  updateKillSwitchParameter: updateKillSwitchParameter(
     env.CI
       ? {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
