@@ -69,6 +69,15 @@
 
   .usa-step-indicator__segment {
     max-width: none;
+    outline-color: variables.$accent-cool-dark-medium !important;
+  }
+
+  .usa-step-indicator__segment--current-inline-dialog {
+    outline-color: variables.$accent-cooler !important;
+  }
+
+  .usa-step-indicator__segment--inline-dialog {
+    outline-color: variables.$accent-cooler !important;
   }
 
   .usa-step-indicator--counters .usa-step-indicator__segment,
@@ -103,7 +112,12 @@
   .usa-step-indicator__segment--current:after,
   .usa-step-indicator__segment--error:after,
   .usa-step-indicator__segment--complete:after {
-    background-color: variables.$base-light;
+    background-color: variables.$accent-cool-lighter;
+  }
+
+  .usa-step-indicator__segment--current-inline-dialog:after,
+  .usa-step-indicator__segment--inline-dialog:after {
+    background-color: variables.$accent-cooler-200;
   }
 
   .usa-step-indicator--counters-sm.usa-step-indicator .usa-step-indicator__segment:last-child:after,
@@ -116,7 +130,7 @@
   /* ----- LABEL STYLING ----- */
 
   .usa-step-indicator__segment-label {
-    color: variables.$base;
+    color: variables.$accent-cool-dark-medium;
     text-align: center;
     padding: 1.5rem 0 0 0;
     @media all and (max-width: variables.$sm) {
@@ -126,6 +140,14 @@
 
   .usa-step-indicator__segment--current .usa-step-indicator__segment-label {
     color: variables.$accent-cool-darker;
+  }
+
+  .usa-step-indicator__segment--current-inline-dialog .usa-step-indicator__segment-label {
+    color: variables.$accent-cooler;
+  }
+
+  .usa-step-indicator__segment--inline-dialog .usa-step-indicator__segment-label {
+    color: variables.$accent-cooler;
   }
 
   .usa-step-indicator__segment--complete .usa-step-indicator__segment-label {
@@ -140,19 +162,19 @@
 
   .usa-step-indicator--counters .usa-step-indicator__segment:before,
   .usa-step-indicator--counters-sm .usa-step-indicator__segment:before {
-    height: 1.5rem;
+    height: 1.75rem;
     border-radius: 99rem;
-    width: 1.5rem;
-    font-size: 0.88rem;
+    border: solid 2px variables.$accent-cool-darker;
+    width: 1.75rem;
+    font-size: 1rem;
     padding: calc(0.25rem + 1px);
     top: 1rem;
     font-feature-settings: "tnum" 1, "kern" 1;
     background-color: #fff;
     box-shadow: inset 0 0 0 0.25rem #e6e6e6, 0 0 0 0.25rem #fff;
-    color: #5c5c5c;
     content: counter(usa-step-indicator);
     display: block;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1;
     position: absolute;
     text-align: center;
@@ -166,21 +188,37 @@
   }
 
   .usa-step-indicator__segment::before {
-    color: variables.$white !important;
-    background-color: variables.$base-light !important;
+    color: variables.$accent-cool-dark-medium !important;
     box-shadow: none !important;
   }
 
+  .usa-step-indicator__segment--current-inline-dialog::before {
+    background-color: variables.$accent-cooler !important;
+    color: variables.$white !important;
+    border-color: variables.$accent-cooler !important;
+  }
+
+  .usa-step-indicator__segment--inline-dialog::before {
+    background-color: variables.$white !important;
+    color: variables.$accent-cooler !important;
+    border-color: variables.$accent-cooler !important;
+  }
+
   .usa-step-indicator__segment--error::before {
-    background-color: variables.$error-dark !important;
+    background-color: variables.$error-extra-light !important;
+    color: variables.$error-dark !important;
+    border-color: variables.$error-dark !important;
   }
 
   .usa-step-indicator__segment--current::before {
     background-color: variables.$accent-cool-darker !important;
+    color: variables.$white !important;
   }
 
   .usa-step-indicator__segment--complete::before {
-    background-color: variables.$primary !important;
+    background-color: variables.$primary-extra-light !important;
+    color: variables.$success-dark !important;
+    border-color: variables.$success-dark !important;
   }
 
   .usa-step-indicator__segment--complete:before,
