@@ -17,6 +17,17 @@ type Config = {
   userName: string;
   password: string;
 };
+const sanitizeAxiosError = (error: AxiosError): AxiosError => {
+  const sanitizedError = { ...error };
+  if (sanitizedError.config) {
+    sanitizedError.config = { ...sanitizedError.config };
+    delete sanitizedError.config.auth; // Remove the auth object
+  }
+  if (typeof error.toJSON === "function") {
+    sanitizedError.toJSON = error.toJSON.bind(sanitizedError);
+  }
+  return sanitizedError;
+};
 
 // Api returns an error message with extra space, second variable added to account for single space error message
 export const TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE = "TaxpayerId  is required.";
@@ -146,7 +157,11 @@ export const ApiTaxClearanceCertificateClient = (
         return { certificatePdfArray: response.data.certificate, userData: updatedUserData };
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`Tax Clearance Certificate Client - Id:${logId} - Error`, error);
+        const sanitizedError = sanitizeAxiosError(error);
+        logWriter.LogError(
+          `Tax Clearance Certificate Client - Id:${logId} - Error`,
+          sanitizedError,
+        );
         const { response } = error;
         if (response?.status === StatusCodes.BAD_REQUEST) {
           const errorMessage = response.data as string;
@@ -189,7 +204,7 @@ export const ApiTaxClearanceCertificateClient = (
         }
         logWriter.LogError(
           `Tax Clearance Certificate Client - Id:${logId} - Unexpected Error Response`,
-          error,
+          sanitizedError,
         );
         throw error.response?.status;
       });
