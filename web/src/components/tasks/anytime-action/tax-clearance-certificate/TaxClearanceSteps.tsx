@@ -12,7 +12,7 @@ import { StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
   taxClearanceCertificateData: TaxClearanceCertificateData;
@@ -96,6 +96,20 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       ),
     },
   ];
+
+  useEffect(() => {
+    setResponseErrorType(undefined);
+  }, [
+    props.taxClearanceCertificateData.requestingAgencyId,
+    props.taxClearanceCertificateData.businessName,
+    props.taxClearanceCertificateData.addressLine1,
+    props.taxClearanceCertificateData.addressLine2,
+    props.taxClearanceCertificateData.addressCity,
+    props.taxClearanceCertificateData.addressState,
+    props.taxClearanceCertificateData.addressZipCode,
+    props.taxClearanceCertificateData.taxId,
+    props.taxClearanceCertificateData.taxPin,
+  ]);
 
   return (
     <>

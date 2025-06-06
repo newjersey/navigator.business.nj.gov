@@ -25,6 +25,7 @@ import {
   getTaxClearanceCertificateAgencies,
   LookupTaxClearanceCertificateAgenciesById,
   randomElementFromArray,
+  StateObject,
   TaxClearanceCertificateData,
   TaxClearanceCertificateResponse,
   TaxClearanceCertificateResponseErrorType,
@@ -1534,14 +1535,118 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       };
       mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
       renderComponent({});
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      fireEvent.click(screen.getByTestId("next-button"));
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      fireEvent.click(
+        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+      );
 
       await waitFor(() => {
         expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
       });
     },
   );
+
+  it.each([
+    "Business name",
+    "Address line1",
+    "Address line2",
+    "Address city",
+    "Address zip code",
+    "Tax id",
+    "Tax pin",
+  ])("clears the error from submission when the text field %s is changed", async (fieldName) => {
+    const response: TaxClearanceCertificateResponse = {
+      error: {
+        type: "INELIGIBLE_TAX_CLEARANCE_FORM" as TaxClearanceCertificateResponseErrorType,
+        message: "Clean Tax Verification Failed.",
+      },
+    };
+    mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
+    renderComponent({});
+
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+    const nextButton = screen.getByRole("button", {
+      name: Config.taxClearanceCertificateShared.saveButtonText,
+    });
+    fireEvent.click(nextButton);
+    await waitFor(() => {
+      expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
+    });
+
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+    fireEvent.click(secondTab);
+    fillText(fieldName, "Test123456789012");
+    expect(screen.queryByTestId("tax-clearance-error-alert")).not.toBeInTheDocument();
+  });
+
+  it("clears the error from submission when a Requesting Agency dropdown selection is made", async () => {
+    const response: TaxClearanceCertificateResponse = {
+      error: {
+        type: "INELIGIBLE_TAX_CLEARANCE_FORM" as TaxClearanceCertificateResponseErrorType,
+        message: "Clean Tax Verification Failed.",
+      },
+    };
+    mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
+    renderComponent({
+      business: generateBusiness({
+        taxClearanceCertificateData: generateTaxClearanceCertificateData({
+          requestingAgencyId: "newJerseyRedevelopmentAuthority", // Ensures that the original requestingAgencyId is different from what we change it to
+        }),
+      }),
+    });
+
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+    const nextButton = screen.getByRole("button", {
+      name: Config.taxClearanceCertificateShared.saveButtonText,
+    });
+    fireEvent.click(nextButton);
+    await waitFor(() => {
+      expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
+    });
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+    fireEvent.click(secondTab);
+    selectComboboxValueByTextClick(
+      "Tax clearance certificate requesting agency",
+      LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+    );
+
+    expect(screen.queryByTestId("tax-clearance-error-alert")).not.toBeInTheDocument();
+  });
+
+  it("clears the error from submission when a State dropdown selection is made", async () => {
+    const response: TaxClearanceCertificateResponse = {
+      error: {
+        type: "INELIGIBLE_TAX_CLEARANCE_FORM" as TaxClearanceCertificateResponseErrorType,
+        message: "Clean Tax Verification Failed.",
+      },
+    };
+    mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
+    renderComponent({
+      business: generateBusiness({
+        taxClearanceCertificateData: generateTaxClearanceCertificateData({
+          addressState: { shortCode: "NJ", name: "New Jersey" } as StateObject, // Ensures that the original addressState is different from what we change it to
+        }),
+      }),
+    });
+
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+    const nextButton = screen.getByRole("button", {
+      name: Config.taxClearanceCertificateShared.saveButtonText,
+    });
+    fireEvent.click(nextButton);
+    await waitFor(() => {
+      expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
+    });
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+    fireEvent.click(secondTab);
+    selectComboboxValueByTextClick("Address state", "MD");
+
+    expect(screen.queryByTestId("tax-clearance-error-alert")).not.toBeInTheDocument();
+  });
 
   const getInputElementByLabel = (label: string): HTMLInputElement => {
     return screen.getByLabelText(label) as HTMLInputElement;
