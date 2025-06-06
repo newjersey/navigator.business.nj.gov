@@ -7,7 +7,9 @@ export const DynamoDataClient = (
   userDataClient: UserDataClient,
   businessesDataClient: BusinessesDataClient,
   logger: LogWriterType,
+  isKillSwitchOn: () => Promise<boolean>,
 ): DatabaseClient => {
+  const MAX_SAFE_MIGRATION_COUNT = 5000;
   const migrateOutdatedVersionUsers = async (): Promise<{
     success: boolean;
     migratedCount?: number;
@@ -19,10 +21,28 @@ export const DynamoDataClient = (
       const batchSize = 25;
 
       do {
+        const killSwitchOn = await isKillSwitchOn();
+        if (killSwitchOn) {
+          logger.LogInfo(`Migration halted: kill switch is ON`);
+          return { success: true, migratedCount };
+        }
+
         const { usersToMigrate, nextToken: newNextToken } =
           await userDataClient.getUsersWithOutdatedVersion(CURRENT_VERSION, nextToken);
         const batches = chunk(usersToMigrate, batchSize);
         for (const batch of batches) {
+          if (migratedCount >= MAX_SAFE_MIGRATION_COUNT) {
+            logger.LogInfo(
+              `Reached max safe migration count (${MAX_SAFE_MIGRATION_COUNT}), exiting early.`,
+            );
+            return { success: true, migratedCount };
+          }
+          const killSwitchBeforeEachBatch = await isKillSwitchOn();
+          if (killSwitchBeforeEachBatch) {
+            logger.LogInfo("Migration halted during batch processing: kill switch is ON.");
+            return { success: true, migratedCount };
+          }
+
           await processBatch(batch);
           migratedCount += batch.length;
           logger.LogInfo(

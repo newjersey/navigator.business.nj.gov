@@ -16,6 +16,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@aws-sdk/client-ssm" },
+    },
+    {
+      from: {},
       to: { path: "@aws-sdk/util-dynamodb" },
     },
     {

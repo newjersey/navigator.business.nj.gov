@@ -6,6 +6,7 @@ import githubOauth2 from "@functions/githubOauth2";
 import healthCheck from "@functions/healthCheck";
 import migrateUsersVersion from "@functions/migrateUsersVersion";
 import updateExternalStatus from "@functions/updateExternalStatus";
+import updateKillSwitchParameter from "@functions/updateKillSwitchParameter";
 import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
 import { env } from "node:process";
@@ -330,6 +331,17 @@ serverlessConfiguration.functions = {
       : undefined,
   ),
   migrateUsersVersion: migrateUsersVersion(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined,
+  ),
+  updateKillSwitchParameter: updateKillSwitchParameter(
     env.CI
       ? {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
