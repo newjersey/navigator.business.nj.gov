@@ -74,7 +74,6 @@ const dynamicsLicenseStatusTenantId = process.env.DYNAMICS_LICENSE_STATUS_TENANT
 const dynamicsLicenseStatusURL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
 const dynamicsLicenseStatusClientId = process.env.DYNAMICS_LICENSE_STATUS_CLIENT_ID || "";
 const dynamicsLicenseStatusSecret = process.env.DYNAMICS_LICENSE_STATUS_SECRET || "";
-const featureDynamicsPublicMovers = process.env.FEATURE_DYNAMICS_PUBLIC_MOVERS || "";
 
 const dynamicsFireSafetyURL = process.env.DYNAMICS_FIRE_SAFETY_URL || "";
 const dynamicsFireSafetyClientId = process.env.DYNAMICS_FIRE_SAFETY_CLIENT_ID || "";
@@ -241,7 +240,6 @@ const serverlessConfiguration: AWS = {
       DYNAMICS_LICENSE_STATUS_TENANT_ID: dynamicsLicenseStatusTenantId,
       DYNAMICS_LICENSE_STATUS_URL: dynamicsLicenseStatusURL,
       DYNAMO_PORT: dynamoOfflinePort,
-      FEATURE_DYNAMICS_PUBLIC_MOVERS: featureDynamicsPublicMovers,
       FORMATION_API_ACCOUNT: formationApiAccount,
       FORMATION_API_BASE_URL: formationApiBaseUrl,
       FORMATION_API_KEY: formationApiKey,
