@@ -25,6 +25,7 @@ import {
   getTaxClearanceCertificateAgencies,
   LookupTaxClearanceCertificateAgenciesById,
   randomElementFromArray,
+  StateObject,
   TaxClearanceCertificateData,
   TaxClearanceCertificateResponse,
   TaxClearanceCertificateResponseErrorType,
@@ -1588,7 +1589,13 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       },
     };
     mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
-    renderComponent({});
+    renderComponent({
+      business: generateBusiness({
+        taxClearanceCertificateData: generateTaxClearanceCertificateData({
+          requestingAgencyId: "newJerseyRedevelopmentAuthority", // Ensures that the original requestingAgencyId is different from what we change it to
+        }),
+      }),
+    });
 
     const thirdTab = screen.getAllByRole("tab")[2];
     fireEvent.click(thirdTab);
@@ -1617,7 +1624,13 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       },
     };
     mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
-    renderComponent({});
+    renderComponent({
+      business: generateBusiness({
+        taxClearanceCertificateData: generateTaxClearanceCertificateData({
+          addressState: { shortCode: "NJ", name: "New Jersey" } as StateObject, // Ensures that the original addressState is different from what we change it to
+        }),
+      }),
+    });
 
     const thirdTab = screen.getAllByRole("tab")[2];
     fireEvent.click(thirdTab);
