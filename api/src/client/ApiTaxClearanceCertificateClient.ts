@@ -223,7 +223,10 @@ export const ApiTaxClearanceCertificateClient = (
         } as HealthCheckMetadata;
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`Tax Clearance Certificate Health Check Failed - Id:${logId} - Error:`);
+        logWriter.LogError(
+          `Tax Clearance Certificate Health Check Failed - Id:${logId} - Error:`,
+          error,
+        );
         if (error.response) {
           return {
             success: false,
