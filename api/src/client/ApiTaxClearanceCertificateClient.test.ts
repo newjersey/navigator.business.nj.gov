@@ -259,6 +259,35 @@ describe("TaxClearanceCertificateClient", () => {
     spyOnLogError.mockRestore();
   });
 
+  it("removes auth object when logging error", async () => {
+    const error = {
+      response: { status: StatusCodes.BAD_REQUEST, data: "Error Message" },
+      config: { auth: { username: "username", password: "password" } },
+    };
+
+    const spyOnGetId = jest.spyOn(DummyLogWriter, "GetId").mockReturnValue("test");
+    const spyOnLogError = jest.spyOn(DummyLogWriter, "LogError");
+    mockAxios.post.mockRejectedValue(error);
+    await expect(
+      client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
+    ).rejects.toEqual(StatusCodes.BAD_REQUEST);
+
+    expect(spyOnLogError.mock.calls[0]).toEqual([
+      "Tax Clearance Certificate Client - Id:test - Error",
+      {
+        response: { status: StatusCodes.BAD_REQUEST, data: "Error Message" },
+        config: {},
+      },
+    ]);
+
+    spyOnGetId.mockRestore();
+    spyOnLogError.mockRestore();
+  });
+
   it("throws error when error response is unknown", async () => {
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.INTERNAL_SERVER_ERROR },
