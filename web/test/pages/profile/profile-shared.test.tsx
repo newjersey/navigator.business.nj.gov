@@ -803,4 +803,18 @@ describe("profile - shared", () => {
       ).toBeInTheDocument();
     });
   });
+
+  describe("personalize your tasks tab", () => {
+    it("navigates correctly to the personalize your tasks tab", () => {
+      const business = generateBusinessForProfile({});
+
+      renderPage({ business });
+
+      expect(
+        screen.getByRole("tab", {
+          name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
+        }),
+      ).toBeInTheDocument();
+    });
+  });
 });

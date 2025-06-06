@@ -34,6 +34,7 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
+import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { ProfileAddress } from "@/components/profile/ProfileAddress";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
@@ -523,6 +524,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    personalize: <PersonalizeYourTasksTab />,
   };
 
   const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -581,6 +583,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    personalize: <PersonalizeYourTasksTab />,
   };
 
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -825,6 +828,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    personalize: <PersonalizeYourTasksTab />,
   };
 
   const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -1011,6 +1015,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    personalize: <PersonalizeYourTasksTab />,
   };
 
   const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -1071,6 +1076,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    personalize: <PersonalizeYourTasksTab />,
   };
 
   return (
