@@ -3,10 +3,11 @@
   "id": "sell-milk",
   "roadmapSteps": [
     {
-      "step": 3,
-      "weight": 1,
-      "task": "sell-milk",
-      "required": false
+      "step": 4,
+      "weight": 30,
+      "task": "",
+      "required": true,
+      "licenseTask": "store-milk-license"
     }
   ]
 }

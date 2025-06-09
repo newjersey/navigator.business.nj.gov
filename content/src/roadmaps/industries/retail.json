@@ -59,7 +59,8 @@
     "inspect-boiler",
     "business-vehicle-irp",
     "inspect-pv",
-    "inspect-fridge"
+    "inspect-fridge",
+    "sell-milk-question"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {

@@ -20,7 +20,7 @@ webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
 ---
 
-## Eligibility Criteria (Initial Licensure by Examination)
+## Education Requirements (Initial Licensure by Examination)
 
 - A bachelor’s or master’s degree in architecture from an institution accredited by the National Architecture Accrediting Board (NAAB)
 - A minimum of 3 years in the Architectural Experience Program (AXP) administered by the National Council of Architectural Registration Boards (NCARB)
