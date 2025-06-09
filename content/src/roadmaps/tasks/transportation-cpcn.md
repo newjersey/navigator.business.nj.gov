@@ -49,11 +49,15 @@ Unlike many licenses, **there is no standard application form for the CPCN.** Yo
 
 Your petition should start off with the following:
 
-> *“In the matter of the Petition for a Certificate of Public Convenience and Necessity for Conducting \[type of operation] by \[legal name of operator].​”*
+&nbsp;
+
+*“In the matter of the Petition for a Certificate of Public Convenience and Necessity for Conducting \[type of operation] by \[legal name of operator].​”*
+
 &nbsp;
 
 In the body of your petition, include:​
 
+&nbsp;
 
 **1. The purpose of your petition.** State the reason for filing and describe the service you intend to operate.
 
