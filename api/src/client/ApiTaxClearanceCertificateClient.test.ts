@@ -210,6 +210,10 @@ describe("TaxClearanceCertificateClient", () => {
   });
 
   it("returns certificate pdf array and updated user data", async () => {
+    const NOW = "2000-01-01T10:00:00.000Z";
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date(NOW));
+
     mockAxios.post.mockResolvedValue({ data: { certificate: [11, 22] } });
     const result = await client.postTaxClearanceCertificate(
       userData,
@@ -226,6 +230,8 @@ describe("TaxClearanceCertificateClient", () => {
       certificatePdfArray: [11, 22],
       userData: expectedUserData,
     });
+
+    jest.useRealTimers();
   });
 
   it("fires error log when error response is returned", async () => {
