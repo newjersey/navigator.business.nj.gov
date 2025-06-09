@@ -41,3 +41,11 @@
 .gradient-button-text {
   margin: 0 5px;
 }
+
+.gradient-star {
+  width: 21.0503px;
+  height: 20px;
+  background: linear-gradient(to right, #0047ff, #43b0ff);
+  mask: url("/img/star.svg") no-repeat center;
+  mask-size: contain;
+}
