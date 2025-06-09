@@ -154,6 +154,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
             {...props}
             tab={personalizeMyTasksTab}
             tabIcon={"star"}
+            onKeyDown={(e) => handleKeyDown(e, personalizeMyTasksTab)}
             tabText={Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle}
           />
         </div>
