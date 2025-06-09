@@ -9,6 +9,7 @@ interface Props {
   currentStep: number;
   onStepClicked: (step: number) => void;
   suppressRefocusBehavior?: boolean;
+  inlineDialog?: boolean;
 }
 
 type StepperState =
@@ -17,7 +18,9 @@ type StepperState =
   | "COMPLETE"
   | "COMPLETE-ACTIVE"
   | "INCOMPLETE-ACTIVE"
-  | "INCOMPLETE";
+  | "INCOMPLETE"
+  | "INCOMPLETE-ACTIVE-INLINE-DIALOG"
+  | "INCOMPLETE-INLINE-DIALOG";
 
 export const HorizontalStepper = (props: Props): ReactElement => {
   const [focusStep, setFocusStep] = useState(props.currentStep);
@@ -40,6 +43,8 @@ export const HorizontalStepper = (props: Props): ReactElement => {
         return "ERROR-ACTIVE";
       } else if (props.steps[index].isComplete) {
         return "COMPLETE-ACTIVE";
+      } else if (props.inlineDialog) {
+        return "INCOMPLETE-ACTIVE-INLINE-DIALOG";
       } else {
         return "INCOMPLETE-ACTIVE";
       }
@@ -48,6 +53,8 @@ export const HorizontalStepper = (props: Props): ReactElement => {
         return "ERROR";
       } else if (props.steps[index].isComplete) {
         return "COMPLETE";
+      } else if (props.inlineDialog) {
+        return "INCOMPLETE-INLINE-DIALOG";
       } else {
         return "INCOMPLETE";
       }
@@ -65,8 +72,10 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       case "COMPLETE-ACTIVE":
         return Config.formation.general.ariaContextStepperStateComplete;
       case "INCOMPLETE-ACTIVE":
+      case "INCOMPLETE-ACTIVE-INLINE-DIALOG":
         return Config.formation.general.ariaContextStepperStateIncomplete;
       case "INCOMPLETE":
+      case "INCOMPLETE-INLINE-DIALOG":
         return Config.formation.general.ariaContextStepperStateIncomplete;
       default:
         return "";
@@ -84,6 +93,10 @@ export const HorizontalStepper = (props: Props): ReactElement => {
         return "--complete";
       case "INCOMPLETE-ACTIVE":
         return "--current";
+      case "INCOMPLETE-ACTIVE-INLINE-DIALOG":
+        return "--current-inline-dialog";
+      case "INCOMPLETE-INLINE-DIALOG":
+        return "--inline-dialog";
       default:
         return "";
     }
@@ -109,6 +122,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       case "ERROR-ACTIVE":
       case "COMPLETE-ACTIVE":
       case "INCOMPLETE-ACTIVE":
+      case "INCOMPLETE-ACTIVE-INLINE-DIALOG":
         return "text-bold";
       default:
         return "";

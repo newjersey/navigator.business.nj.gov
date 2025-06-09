@@ -66,12 +66,12 @@
     },
     {
       "step": 4,
-      "weight": 88,
+      "weight": 14,
       "task": "community-right-to-know-survey"
     },
     {
       "step": 4,
-      "weight": 100,
+      "weight": 20,
       "required": true,
       "licenseTask": "rmw-generator-registration"
     }
@@ -80,7 +80,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "business-vehicle-title-reg",
-    "business-vehicle-irp"
+    "business-vehicle-irp",
+    "sell-milk-question"
   ],
   "displayname": "pharmacy",
   "industryOnboardingQuestions": {},

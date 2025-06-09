@@ -19,11 +19,6 @@ agencyAdditionalContext: Office of Licensing
 divisionPhone: (609) 826-3999
 webflowId: 5f7728f5e8bf507c5e317899
 ---
-## Eligibility Criteria
-
-* Have 6 or more children under your care
-* Have all staff be at least 18 years old
-
 ## Application Requirements
 
 *  `EIN|ein` 
@@ -34,6 +29,8 @@ webflowId: 5f7728f5e8bf507c5e317899
 * Water bill and a water testing report from your local government
 * Map of your business location with the location of the outdoor playing area
 * Applicable fees paid
+
+All staff must be at least 18 years old.
 
 ## After the Initial Application
 
