@@ -1,3 +1,60 @@
+# [2025.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.11.0...v2025.12.0) (2025-06-09)
+
+
+### Bug Fixes
+
+* [AB[#13171](https://github.com/newjersey/navigator.business.nj.gov/issues/13171)] updated yml files to match json configs ([2977b80](https://github.com/newjersey/navigator.business.nj.gov/commit/2977b80f35c83c84e2a7a9181b8cd84a407a4035))
+* [AB[#13891](https://github.com/newjersey/navigator.business.nj.gov/issues/13891)] change formContext onSubmit for custom onSubmit ([5b1575c](https://github.com/newjersey/navigator.business.nj.gov/commit/5b1575cdd3a00f9079df0154c4f89929a09de0ef))
+* [AB[#13891](https://github.com/newjersey/navigator.business.nj.gov/issues/13891)] handle tax clearance input errors on submit ([7c2c60a](https://github.com/newjersey/navigator.business.nj.gov/commit/7c2c60a7f34dfd5e5a8918420dfa4f8ba4db471e))
+* [AB[#14067](https://github.com/newjersey/navigator.business.nj.gov/issues/14067)] link label to select input and make it respond to click events ([5ec1775](https://github.com/newjersey/navigator.business.nj.gov/commit/5ec1775dc26022b395bbf6af536b00625c58e886))
+* [AB[#14382](https://github.com/newjersey/navigator.business.nj.gov/issues/14382)] remove domestic-employer as option for permits tests ([36becf6](https://github.com/newjersey/navigator.business.nj.gov/commit/36becf66fa85fbbb6c1e4e007dca9163375e0344))
+* [AB[#14467](https://github.com/newjersey/navigator.business.nj.gov/issues/14467)] move help button ([aa05c62](https://github.com/newjersey/navigator.business.nj.gov/commit/aa05c622f1560ef03d4a15a069fcee38d88b3734))
+* [AB[#14467](https://github.com/newjersey/navigator.business.nj.gov/issues/14467)] Update ETP stepper from ABC feedback ([597adfa](https://github.com/newjersey/navigator.business.nj.gov/commit/597adfa2e3967bcc8f8335103396bf6b547d2335))
+* [AB[#14528](https://github.com/newjersey/navigator.business.nj.gov/issues/14528)] change analytic event names ([e6f7d30](https://github.com/newjersey/navigator.business.nj.gov/commit/e6f7d3041ab0562be22d36e88d31e1df3d91c021))
+* [AB[#14658](https://github.com/newjersey/navigator.business.nj.gov/issues/14658)] more distinct ineligible tax clearance error ([e6455c8](https://github.com/newjersey/navigator.business.nj.gov/commit/e6455c82d5efbb693ea509cd8b098d256f42bc19))
+* [AB[#7327](https://github.com/newjersey/navigator.business.nj.gov/issues/7327)] fix agentAddressCity validation ([fe0a8d9](https://github.com/newjersey/navigator.business.nj.gov/commit/fe0a8d95bbc2f16127d40d28b4d2c414840e5fe7))
+* [AB[#7751](https://github.com/newjersey/navigator.business.nj.gov/issues/7751)] pr comments ([6e67336](https://github.com/newjersey/navigator.business.nj.gov/commit/6e673363dad77eb24b5e6229ef1ea915d99c98f9))
+* [AB[#7863](https://github.com/newjersey/navigator.business.nj.gov/issues/7863)] Allow requests to emergency trip permit api without auth ([3e4fc91](https://github.com/newjersey/navigator.business.nj.gov/commit/3e4fc910ce758f43e0b123de85f1ea3e382348f2))
+* [AB[#7863](https://github.com/newjersey/navigator.business.nj.gov/issues/7863)] Change routing for emergency trip permit ([70df618](https://github.com/newjersey/navigator.business.nj.gov/commit/70df618f07f04a58bce0c963b0b7f901443955aa))
+* [AB[#8150](https://github.com/newjersey/navigator.business.nj.gov/issues/8150)] information in the tax detail screen is not floating / wrapping correctly ([b7b2b70](https://github.com/newjersey/navigator.business.nj.gov/commit/b7b2b70391c6610588beb5c0b88a17ab9c3d0d9f))
+* address race condition in tax clearance tax id check ([6a72e82](https://github.com/newjersey/navigator.business.nj.gov/commit/6a72e829b2a28fad52570e325babb3b533d00e55))
+* **deps:** update aws-sdk ([25f9715](https://github.com/newjersey/navigator.business.nj.gov/commit/25f97152806915e247ec56051dd1c4f211fd2856))
+* Fix that summaryDescriptionMd was multi-line without an indent ([#10366](https://github.com/newjersey/navigator.business.nj.gov/issues/10366)) ([efb3e1d](https://github.com/newjersey/navigator.business.nj.gov/commit/efb3e1d2da03de2798bc4824e0060280fe0f3902))
+
+
+### Features
+
+* [#AB7713] basic error validation and stepper success for tax clearance form ([0330ad1](https://github.com/newjersey/navigator.business.nj.gov/commit/0330ad1abc5b25fc7c3fddff82832cc99f88c1cf)), closes [#AB7713](https://github.com/newjersey/navigator.business.nj.gov/issues/AB7713)
+* [AB:13770] Add guest mode tax clearance access ([817a1ca](https://github.com/newjersey/navigator.business.nj.gov/commit/817a1ca07eca87e6a35ff574683f490d48d02e44))
+* [AB:14543] add tax clearance health check endpoint ([97ab892](https://github.com/newjersey/navigator.business.nj.gov/commit/97ab892e1cdc49c6dc524b8b6b9b85b024cb024e))
+* [AB[#12793](https://github.com/newjersey/navigator.business.nj.gov/issues/12793)] Encrypt Tax Clearance ID and PIN ([#10367](https://github.com/newjersey/navigator.business.nj.gov/issues/10367)) ([869713a](https://github.com/newjersey/navigator.business.nj.gov/commit/869713a5b852f9e9cf02263289f86aa66155c5c5))
+* [AB[#12793](https://github.com/newjersey/navigator.business.nj.gov/issues/12793)] Fix password view bug in tax task (separate from profile or tax clearance) ([c46dd77](https://github.com/newjersey/navigator.business.nj.gov/commit/c46dd77cd30391bae8a9326d0d33b1c34892f6ed)), closes [/github.com/newjersey/navigator.business.nj.gov/pull/10273#discussion_r2076164682](https://github.com//github.com/newjersey/navigator.business.nj.gov/pull/10273/issues/discussion_r2076164682)
+* [AB[#13778](https://github.com/newjersey/navigator.business.nj.gov/issues/13778)] Add synonyms for anytime action dropdown search ([0a46c64](https://github.com/newjersey/navigator.business.nj.gov/commit/0a46c646fc46668b45ba34aed7f561287875af69))
+* [AB[#13778](https://github.com/newjersey/navigator.business.nj.gov/issues/13778)] Add synonyms for anytime action dropdown search to relevant tasks ([c47fafb](https://github.com/newjersey/navigator.business.nj.gov/commit/c47fafb83bc374bacc99b90adf9671197f0aa987))
+* [AB[#13891](https://github.com/newjersey/navigator.business.nj.gov/issues/13891)] handle tax clearance input errors on submit ([3defdb9](https://github.com/newjersey/navigator.business.nj.gov/commit/3defdb960e99e9f852cc0073f45275949ee7581c))
+* [AB[#13918](https://github.com/newjersey/navigator.business.nj.gov/issues/13918)] update focus state color ([30235de](https://github.com/newjersey/navigator.business.nj.gov/commit/30235de9ab051ee9331a2fbff71bb380e2d60df2))
+* [AB[#14131](https://github.com/newjersey/navigator.business.nj.gov/issues/14131)] add quick reference callout ([e1b6260](https://github.com/newjersey/navigator.business.nj.gov/commit/e1b626077e6c000b516795565cf04b02fe874340))
+* [AB[#14239](https://github.com/newjersey/navigator.business.nj.gov/issues/14239)] Personalize My Tasks button ([ea524d5](https://github.com/newjersey/navigator.business.nj.gov/commit/ea524d55007dde7e11700877feb45e175ec3a029))
+* [AB[#14239](https://github.com/newjersey/navigator.business.nj.gov/issues/14239)] Personalize My Tasks button ([c49fc55](https://github.com/newjersey/navigator.business.nj.gov/commit/c49fc55539da86a416988dd688170c01c807bfc2))
+* [AB[#14311](https://github.com/newjersey/navigator.business.nj.gov/issues/14311)] add PII hashing service to use for tax ID hashing ([004c1d7](https://github.com/newjersey/navigator.business.nj.gov/commit/004c1d797812b831db2c605769be2b6ae6778490))
+* [AB[#14314](https://github.com/newjersey/navigator.business.nj.gov/issues/14314)] add logic to prevent business from requesting tax clearance if tax ID is in use ([5441ba6](https://github.com/newjersey/navigator.business.nj.gov/commit/5441ba6307285b653a41310f888fc202599cb7cd))
+* [AB[#14528](https://github.com/newjersey/navigator.business.nj.gov/issues/14528)] add analytic events for tax clearance ([4769d16](https://github.com/newjersey/navigator.business.nj.gov/commit/4769d1684b7262c44307955f4d69d7a20a41fad5))
+* [AB[#7714](https://github.com/newjersey/navigator.business.nj.gov/issues/7714)] Generic Taxation Api Error Message ([#10370](https://github.com/newjersey/navigator.business.nj.gov/issues/10370)) ([1858485](https://github.com/newjersey/navigator.business.nj.gov/commit/18584855b6939b5c1c22e27dc6a06e051165ea1b))
+* [AB[#7714](https://github.com/newjersey/navigator.business.nj.gov/issues/7714)] Handle 500 errors from tax clearance api ([46470f1](https://github.com/newjersey/navigator.business.nj.gov/commit/46470f15da087a154778385c3ffce1a3449b9d39))
+* [AB[#7751](https://github.com/newjersey/navigator.business.nj.gov/issues/7751)] tax clearance specific error messges ([cc1092b](https://github.com/newjersey/navigator.business.nj.gov/commit/cc1092b9580b76b034711c34433767999256f8ad))
+* [AB[#7782](https://github.com/newjersey/navigator.business.nj.gov/issues/7782)] Encrypt Profile Tax Pin ([#10273](https://github.com/newjersey/navigator.business.nj.gov/issues/10273)) ([70cb0de](https://github.com/newjersey/navigator.business.nj.gov/commit/70cb0de7de60ce2378de5d17ca3e34b9e3ebbea9))
+* [AB[#7782](https://github.com/newjersey/navigator.business.nj.gov/issues/7782)] Fix profile tax pin init view ([d43791b](https://github.com/newjersey/navigator.business.nj.gov/commit/d43791b59fdb90844b126c6d507099da07124b4a)), closes [#10367](https://github.com/newjersey/navigator.business.nj.gov/issues/10367)
+* [AB[#7782](https://github.com/newjersey/navigator.business.nj.gov/issues/7782)] Prefactor pass encryption client to migration functions ([c492bc0](https://github.com/newjersey/navigator.business.nj.gov/commit/c492bc07d9244decb67bc32a0fe820f8e2147bcb))
+* [AB[#7867](https://github.com/newjersey/navigator.business.nj.gov/issues/7867)] add migration to add hashed tax ID to userData structure ([2013bf7](https://github.com/newjersey/navigator.business.nj.gov/commit/2013bf7ae160ba5e7d6781f2138b4f2c1a0931f9))
+* [AB[#8142](https://github.com/newjersey/navigator.business.nj.gov/issues/8142)] content team can add anytime action categories via CMS, content in previous commit a6c7d20004b115867be42d024d75fe2f800eb1ae ([e8414f5](https://github.com/newjersey/navigator.business.nj.gov/commit/e8414f52cf79f5be00fc69fce960160c07e04ec5))
+* [AB[#8322](https://github.com/newjersey/navigator.business.nj.gov/issues/8322)] add transport waste question ([76b8bcb](https://github.com/newjersey/navigator.business.nj.gov/commit/76b8bcba3309f6cbac333da9f5f89c06c81cd69c))
+* [AB[#8605](https://github.com/newjersey/navigator.business.nj.gov/issues/8605)] add errLog for myNJSelf-Reg and test for fail path ([f856df8](https://github.com/newjersey/navigator.business.nj.gov/commit/f856df8007da8fba7c57fd2d1e5bda9147a7a318))
+
+
+### Reverts
+
+* Revert "chore: correct .prettierrc syntax and simplify Markdown formatting rules" ([4843b37](https://github.com/newjersey/navigator.business.nj.gov/commit/4843b37b85d299e9636791316b1860ad2de4adfc))
+
 # [2025.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.10.1...v2025.11.0) (2025-05-12)
 
 
