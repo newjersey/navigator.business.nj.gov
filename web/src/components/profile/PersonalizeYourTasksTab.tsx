@@ -3,7 +3,6 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -15,7 +14,9 @@ export const PersonalizeYourTasksTab = (): ReactElement => {
     description: string;
   }): ReactElement => {
     return (
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <AccordionSummary
+        expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"} iconName="expand_more" />}
+      >
         <div className={"display-flex flex-column"}>
           <span className={"display-flex flew-row"}>
             <span className={"margin-right-2"}>
