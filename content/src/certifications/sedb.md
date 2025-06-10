@@ -10,9 +10,10 @@ sidebarCardBodyText: "A Socially and Economically Disadvantaged Business
   contracts. "
 summaryDescriptionMd: Having a Socially and Economically Disadvantaged Business
   Enterprise (SEDB) certification may give you an advantage with [government
-  contracts.](https://business.nj.gov/pages/government-contracting)
+  contracts. ](https://business.nj.gov/pages/government-contracting)You must
+  verify your information every year and renew your application every 5 years.
 urlSlug: sedb
-name: "Get Certified as a Socially and Economically Disadvantaged Business "
+name: Get a Socially and Economically Disadvantaged Business Certificate
 id: sedb
 callToActionLink: https://www.nj.gov/treasury/revenue/business-cert-program.shtml
 callToActionText: Apply for My SEDB Certification
@@ -60,14 +61,8 @@ isSbe: true
 * Information showing the business is located in an area with a [poverty rate of 20% or more,](https://www.nj.gov/labor/wioa/documents/resources/high_poverty_areas.pdf) or in an area where the [median family income](https://mtgis-portal.geo.census.gov/arcgis/apps/experiencebuilder/experience/?id=ad8ad0751e474f938fc98345462cdfbf#data_s=id%3Awidget_61_output_config_0%3A0) is 80% or less of the higher of the statewide median or the median income of the area
 * Operational agreement which provides an understanding of how the business is run
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A Socially and Economically Disadvantaged Business Enterprise (SEDB) certification. You must verify your information every year and renew your application every 5 years.
-
-:::
-
-:::callout{ showHeader="true" headerText="What if I don't verify or renew my certification?" showIcon="false" calloutType="warning" }
-
-Your certification will be revoked and you will need to apply again.
+A SEDB certification.
 
 :::
