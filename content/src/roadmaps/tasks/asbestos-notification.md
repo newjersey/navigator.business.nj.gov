@@ -74,7 +74,7 @@ Email the notification and a photo of your payment.
 
 :::
 
-Mail your check or money to:\
+Mail your check or money order to:\
 NJ Department of Labor & Workforce Development 
 
 Division of Public Safety & Occupational Safety & Health
