@@ -41,8 +41,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 * Name and address of the facility where you will remove asbestos
 * Type of facility (school, commercial building,  home, etc.)
 * Current use of facility (or prior use if it is being demolished)
-* Square footage of facility
-* Number of floors and building age
+* Number of floors, square footage, and age of facility
 
 ### Project Information
 
