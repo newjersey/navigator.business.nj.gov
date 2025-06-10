@@ -136,7 +136,7 @@
     "@storybook/react": "7.6.20",
     "@storybook/storybook-deployer": "2.8.16",
     "@storybook/theming": "7.6.20",
-    "@swc/core": "1.11.24",
+    "@swc/core": "1.11.31",
     "@swc/jest": "0.2.38",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
