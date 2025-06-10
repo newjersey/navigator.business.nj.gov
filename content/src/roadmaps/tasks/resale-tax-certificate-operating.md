@@ -18,7 +18,7 @@ summaryDescriptionMd: >-
 
   * To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
 
-  * A `home improvement contractor|home-contractors-activities`  cannot use the Sales Tax Resale Certificate
+  * A `home improvement contractor|home-contractors-activities` cannot use the Sales Tax Resale Certificate
 
 
   :::
@@ -32,8 +32,6 @@ industryId: ""
 agencyId: nj-taxation
 ---
 ## Requirements for Businesses in New Jersey
-
-
 
 If you are the reseller, complete the Sales Tax Resale Certificate with:
 
