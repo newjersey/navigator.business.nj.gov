@@ -36,10 +36,8 @@ Express mail the forms to both the NJ Department of Labor and Workforce Developm
 ### Project Contact and Compliance Information
 
 * Name of building owner
-* Name of abatement contractor
-* License number of contractor
-* Name of monitoring firm hired by building owner
-* Address of monitoring firm
+* Name and license number of abatement contractor
+* Name and address of monitoring firm hired by building owner
 * Project manager name and phone number
 * Date of notification (the date stamped by the U.S. Postal Service on the envelope your notification was sent in)
 * What agencies you alerted of your asbestos removal work (Environmental Protection Agency (EPA), Department of Environmental Protection (DEP), etc.) 
@@ -57,16 +55,14 @@ Express mail the forms to both the NJ Department of Labor and Workforce Developm
 
 ### Project Information
 
-* Start date of asbestos work
-* Planned end date of asbestos work
+* Start and planned end date of asbestos work
 * Name and address of Occupational Safety and Health Administration (OSHA) monitor
 * Occupancy status of facility during asbestos removal
 * Scope of the work (renovation, mini-enclosure, etc.)
 
 ### Asbestos-Containing Material Information
 
-* Location of asbestos in the building
-* Whether only maintenance staff use this area or not
+* Location of asbestos in the building and if only maintenance staff use this area or not
 * Description of asbestos-containing material 
 * Amount of material in square or linear feet
 * Type of work (removal, repair, encapsulation, or enclosure)
