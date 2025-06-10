@@ -29,7 +29,7 @@ If work must start in less than 10 days, include a letter from the building owne
 
 ## Application Requirements
 
-**You must have a New Jersey asbestos license, and employees with asbestos permits.** 
+**You must have a New Jersey asbestos license, and employees with asbestos permits. \[add link]**
 
 ### Project Contact and Compliance Information
 
