@@ -109,63 +109,72 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   describe("navigation", () => {
     it("renders the requirements tab on load", () => {
       renderComponent({});
-      const firstTab = screen.getAllByRole("tab")[0];
+      const firstTab = screen.getByRole("tab", { name: /Requirements Step/ });
       expect(firstTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders the eligibility tab on click", () => {
       renderComponent({});
-      const secondTab = screen.getAllByRole("tab")[1];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
       fireEvent.click(secondTab);
       expect(secondTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders the review tab on click", () => {
       renderComponent({});
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(thirdTab);
       expect(thirdTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders back to tab one when the back button is clicked on tab 2", () => {
       renderComponent({});
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.backButtonText));
-      expect(screen.getAllByRole("tab")[0]).toBeInTheDocument();
+      const firstTab = screen.getByRole("tab", { name: /Requirements Step/ });
+      expect(firstTab).toBeInTheDocument();
     });
 
     it("renders tab three when the save button is clicked on tab two", () => {
       renderComponent({});
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.saveButtonText));
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders back to tab two when the back button is clicked on tab three", () => {
       renderComponent({});
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.backButtonText));
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders back to tab two when the back edit button is clicked on tab three", () => {
       renderComponent({});
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateStep3.editButtonText));
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders tab one as complete when on tab two", () => {
       const business = generateBusinessWithEmptyTaxClearanceData();
       renderComponent({ business });
-      const firstTab = screen.getAllByRole("tab")[0];
-      const secondTab = screen.getAllByRole("tab")[1];
+      const firstTab = screen.getByRole("tab", { name: /Requirements Step/ });
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
       expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       fireEvent.click(secondTab);
       expect(secondTab).toHaveAttribute("aria-selected", "true");
       expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
@@ -174,8 +183,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     it("renders tab one as complete when on tab three", () => {
       const business = generateBusinessWithEmptyTaxClearanceData();
       renderComponent({ business });
-      const firstTab = screen.getAllByRole("tab")[0];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const firstTab = screen.getByRole("tab", { name: /Requirements Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
 
       fireEvent.click(thirdTab);
@@ -186,19 +195,19 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     it("renders tab one as incomplete when viewing tab one and not all required data is provided", () => {
       const business = generateBusinessWithEmptyTaxClearanceData();
       renderComponent({ business });
-      const firstTab = screen.getAllByRole("tab")[0];
+      const firstTab = screen.getByRole("tab", { name: /Requirements Step/ });
       expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
     });
 
     it("renders tab one as complete when viewing tab one and all required data is provided", () => {
       renderComponent({});
-      const firstTab = screen.getAllByRole("tab")[0];
+      const firstTab = screen.getByRole("tab", { name: /Requirements Step/ });
       expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
     it("renders tab two as complete when all required fields are non empty and valid", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
-      const secondTab = screen.getAllByRole("tab")[1];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
 
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       fireEvent.click(secondTab);
@@ -227,7 +236,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       "Tax pin",
     ])("renders tab two as error if the text field %s is empty", (emptyField) => {
       renderComponent({});
-      const secondTab = screen.getAllByRole("tab")[1];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
       fireEvent.click(secondTab);
 
@@ -237,7 +246,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
     it("renders tab two as incomplete if Requesting Agency is not selected", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
-      const secondTab = screen.getAllByRole("tab")[1];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       fireEvent.click(secondTab);
 
@@ -260,7 +269,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
     it("renders tab two as Error if Address state is not selected", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
-      const secondTab = screen.getAllByRole("tab")[1];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       fireEvent.click(secondTab);
 
@@ -285,7 +294,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       "renders tab two as error when all fields are non empty but the %s field does not have enough digits",
       async (incompleteField) => {
         renderComponent({});
-        const secondTab = screen.getAllByRole("tab")[1];
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
         expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
         fireEvent.click(secondTab);
 
@@ -305,7 +314,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(screen.getByText(agencyId.name)).toBeInTheDocument();
       });
 
@@ -316,7 +326,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Business name").value).toEqual(
           "business name in taxClearanceCertificateData",
         );
@@ -329,7 +340,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address line1").value).toEqual("1010 Main Street");
       });
 
@@ -340,7 +352,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address line2").value).toEqual("1010 Main Street");
       });
 
@@ -351,7 +364,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
 
@@ -363,7 +377,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address state").value).toEqual(addressState.shortCode);
       });
 
@@ -374,7 +389,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address zip code").value).toEqual("12345");
       });
 
@@ -385,7 +401,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Tax id").value).toEqual("123-456-789/123");
       });
 
@@ -396,7 +413,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Tax pin").value).toEqual("1234");
       });
     });
@@ -408,7 +426,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ businessName: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Business name").value).toEqual(
           "business name in profile data",
         );
@@ -424,7 +443,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressLine1: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address line1").value).toEqual("1010 Main Street");
       });
 
@@ -438,7 +458,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressLine2: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address line2").value).toEqual("1010 Main Street");
       });
 
@@ -453,7 +474,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
 
@@ -468,7 +490,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
 
@@ -487,7 +510,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address city").value).toEqual("Newark");
       });
 
@@ -504,7 +528,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address state").value).toEqual(addressState.shortCode);
       });
 
@@ -518,7 +543,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressZipCode: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Address zip code").value).toEqual("12345");
       });
 
@@ -530,7 +556,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Tax id").value).toEqual("123-456-789/123");
       });
 
@@ -542,7 +569,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getAllByRole("tab")[1]);
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+        fireEvent.click(secondTab);
         expect(getInputElementByLabel("Tax pin").value).toEqual("1234");
       });
     });
@@ -555,8 +583,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
     renderComponent({ business });
-    fireEvent.click(screen.getAllByRole("tab")[1]);
-    expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+    fireEvent.click(secondTab);
+    expect(secondTab).toHaveAttribute("aria-selected", "true");
 
     selectComboboxValueByTextClick(
       "Tax clearance certificate requesting agency",
@@ -597,8 +626,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
     renderComponent({ business });
-    fireEvent.click(screen.getAllByRole("tab")[1]);
-    expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+    fireEvent.click(secondTab);
+    expect(secondTab).toHaveAttribute("aria-selected", "true");
 
     selectComboboxValueByTextClick(
       "Tax clearance certificate requesting agency",
@@ -614,8 +644,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     fillText("Tax id", "012345678901");
     fillText("Tax pin", "1234");
 
-    fireEvent.click(screen.getAllByRole("tab")[2]);
-    expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+    expect(thirdTab).toHaveAttribute("aria-selected", "true");
     expect(currentBusiness().taxClearanceCertificateData).toEqual({
       requestingAgencyId: "newJerseyBoardOfPublicUtilities",
       businessName: "Test Name",
@@ -640,9 +671,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
     renderComponent({ business });
-    const reviewTab = screen.getAllByRole("tab")[2];
-    fireEvent.click(reviewTab);
-    expect(reviewTab).toHaveAttribute("aria-selected", "true");
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+    expect(thirdTab).toHaveAttribute("aria-selected", "true");
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
       Config.taxClearanceCertificateStep3.mainTitleHeader,
     );
@@ -657,10 +688,12 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
       expect(
         within(screen.getByTestId("requestingAgencyId")).getByText(notStartedText),
@@ -687,9 +720,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
-
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
       selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
@@ -699,8 +732,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       selectComboboxValueByTextClick("Address state", "MD");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
       expect(
         within(screen.getByTestId("addressLabel")).getByText(notStartedText),
@@ -715,8 +749,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
 
       selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
@@ -727,8 +762,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       selectComboboxValueByTextClick("Address state", "MD");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
       expect(
         within(screen.getByTestId("addressLabel")).getByText(notStartedText),
@@ -743,8 +779,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
 
       selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
@@ -754,8 +791,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
       expect(
         within(screen.getByTestId("addressLabel")).getByText(notStartedText),
@@ -770,8 +808,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
 
       selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
@@ -781,8 +820,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
       selectComboboxValueByTextClick("Address state", "MD");
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
       expect(
         within(screen.getByTestId("addressLabel")).getByText(notStartedText),
@@ -796,8 +836,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
 
       selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
@@ -808,8 +849,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       selectComboboxValueByTextClick("Address state", "MD");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
       const address = formatAddress({
         addressLine1: "123 Test Road",
@@ -830,8 +872,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getAllByRole("tab")[1]);
-      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
 
       selectComboboxValueByTextClick(
         "Tax clearance certificate requesting agency",
@@ -855,8 +898,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         addressZipCode: "21210",
       });
 
-      fireEvent.click(screen.getAllByRole("tab")[2]);
-      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
       expect(
         within(screen.getByTestId("requestingAgencyId")).getByText(
@@ -878,7 +922,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         const business = generateBusinessWithEmptyTaxClearanceData();
         renderComponent({ business });
 
-        const secondTab = screen.getAllByRole("tab")[1];
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
         fireEvent.click(secondTab);
         expect(secondTab).toHaveAttribute("aria-selected", "true");
 
@@ -914,7 +958,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         });
         renderComponent({ business });
 
-        const secondTab = screen.getAllByRole("tab")[1];
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
         fireEvent.click(secondTab);
         expect(secondTab).toHaveAttribute("aria-selected", "true");
 
@@ -937,7 +981,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        const secondTab = screen.getAllByRole("tab")[1];
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
         fireEvent.click(secondTab);
         expect(secondTab).toHaveAttribute("aria-selected", "true");
         fillText("Tax id", "");
@@ -959,7 +1003,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
           }),
         });
         renderComponent({ business });
-        const secondTab = screen.getAllByRole("tab")[1];
+        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
         fireEvent.click(secondTab);
         expect(secondTab).toHaveAttribute("aria-selected", "true");
         fillText("Tax pin", "");
@@ -984,8 +1028,9 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     const business = generateBusiness({ id: "Faraz" });
     const userData = generateUserDataForBusiness(business);
     renderComponent({ userData });
-    fireEvent.click(screen.getAllByRole("tab")[2]);
-    expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+    expect(thirdTab).toHaveAttribute("aria-selected", "true");
 
     fireEvent.click(
       screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
@@ -1012,7 +1057,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       userData: generateUserData({}),
     });
     renderComponent({});
-    fireEvent.click(screen.getAllByRole("tab")[2]);
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
     fireEvent.click(
       screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
     );
@@ -1031,7 +1077,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   it("renders error states when empty address field is blurred", async () => {
     const business = generateBusinessWithEmptyTaxClearanceData();
     renderComponent({ business });
-    const secondTab = screen.getAllByRole("tab")[1];
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
     fireEvent.click(secondTab);
 
     fireEvent.blur(screen.getByLabelText("Address line1"));
@@ -1046,7 +1092,7 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   it("renders error icon when field is blurred", async () => {
     const business = generateBusinessWithEmptyTaxClearanceData();
     renderComponent({ business });
-    const secondTab = screen.getAllByRole("tab")[1];
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
     fireEvent.click(secondTab);
     fireEvent.blur(screen.getByLabelText("Address line1"));
 
@@ -1061,8 +1107,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1088,8 +1134,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1115,8 +1161,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1142,8 +1188,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1169,8 +1215,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1196,8 +1242,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1223,8 +1269,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1250,8 +1296,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(thirdTab);
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -1279,8 +1325,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
 
       fireEvent.click(secondTab);
 
@@ -1308,8 +1354,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(secondTab);
 
       fireEvent.click(thirdTab);
@@ -1336,8 +1382,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(secondTab);
 
       fireEvent.click(thirdTab);
@@ -1364,8 +1410,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(secondTab);
 
       fireEvent.click(thirdTab);
@@ -1392,8 +1438,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(secondTab);
 
       fireEvent.click(thirdTab);
@@ -1420,8 +1466,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(secondTab);
 
       fireEvent.click(thirdTab);
@@ -1448,8 +1494,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(secondTab);
 
       fireEvent.click(thirdTab);
@@ -1476,8 +1522,8 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
       renderComponent({ business });
 
-      const secondTab = screen.getAllByRole("tab")[1];
-      const thirdTab = screen.getAllByRole("tab")[2];
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
       fireEvent.click(secondTab);
 
       fireEvent.click(thirdTab);
