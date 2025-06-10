@@ -18,7 +18,7 @@ summaryDescriptionMd: >-
 
   * To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
 
-  * A home improvement contractor cannot use the Sales Tax Resale Certificate
+  * A `home improvement contractor|home-contractors-activities`  cannot use the Sales Tax Resale Certificate
 
 
   :::
