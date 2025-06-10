@@ -23,7 +23,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 ---
 :::callout{ showHeader="true" headerText="Emergency Asbestos Work Notice" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency and what will happen if there is a delay. **Wait for approval before starting work**.
+If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency and what will happen if there is a delay. Wait for approval before starting work.
 
 :::
 
@@ -68,7 +68,11 @@ If work must start in less than 10 days, include a letter from the building owne
 * Disposal date
 * Name and address of landfill
 
+:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-2159" emailIconText="asbestos@dol.nj.gov" }
 
+Email the notification and a photo of your payment.
+
+:::
 
 :::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
