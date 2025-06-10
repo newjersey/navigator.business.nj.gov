@@ -69,8 +69,7 @@ Express mail the forms to both the NJ Department of Labor and Workforce Developm
 
 ### Waste Disposal Information
 
-* Name and address of waste hauler
-* DEP waste hauler ID number
+* Name, address, and ID number of DEP waste hauler
 * Cubic yards of waste
 * Disposal date
 * Name and address of landfill
