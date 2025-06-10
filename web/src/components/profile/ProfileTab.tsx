@@ -27,7 +27,11 @@ export const ProfileTab = forwardRef<HTMLButtonElement, Props>(
         ref={ref}
       >
         <div className="profile-tab-left-content">
-          <img src={`/img/${props.tabIcon}.svg`} alt="" role="presentation" />
+          {props.tab !== "personalize" || props.activeTab !== "personalize" ? (
+            <img src={`/img/${props.tabIcon}.svg`} alt="" role="presentation" />
+          ) : (
+            <div className="gradient-star" role="presentation" />
+          )}
           <div className="profile-tab-text">{props.tabText}</div>
         </div>
         <Icon className="usa-icon--size-3" iconName="navigate_next" />
