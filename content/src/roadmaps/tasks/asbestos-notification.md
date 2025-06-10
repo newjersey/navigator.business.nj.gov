@@ -74,6 +74,17 @@ Email the notification and a photo of your payment.
 
 :::
 
+Mail your check or money to:\
+NJ Department of Labor & Workforce Development 
+
+Division of Public Safety & Occupational Safety & Health
+
+Office of Asbestos Control & Licensing
+
+P.O. Box 949 
+
+Trenton, NJ 08625-0949
+
 :::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * You can't remove asbestos in New Jersey and may be subject to legal consequences, including fines
