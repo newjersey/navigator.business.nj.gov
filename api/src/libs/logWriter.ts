@@ -31,7 +31,7 @@ export const ConsoleLogWriter: LogWriterType = {
     try {
       console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
     } catch (error) {
-      console.error(`Error with LogInfo:${error}`);
+      console.error(`Error with LogError:${error}`);
     }
   },
   LogInfo: async (message: string): Promise<void> => {
