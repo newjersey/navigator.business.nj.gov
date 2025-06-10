@@ -29,6 +29,10 @@ callToActionLink: https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3
 callToActionText: Get My Sales Resale Certificate
 industryId: ""
 ---
+## Requirements for Businesses in New Jersey
+
+
+
 If you are the reseller, complete the Sales Tax Resale Certificate with:
 
 * Your business name and address are registered with the New Jersey Division of Taxation
@@ -55,7 +59,5 @@ If you are buying products to resell without the Sales Tax Resale Certificate, y
 A completed Sales Tax Resale Certificate.
 
 :::
-
-
 
  `|`
