@@ -73,27 +73,7 @@ Express mail the forms to both the NJ Department of Labor and Workforce Developm
 * Disposal date
 * Name and address of landfill
 
-**Mail the notification form to both**:
 
-NJ Department of Labor and Workforce Development
-
-Asbestos Control and Licensing Section
-
-1 John Fitch Plaza, 3rd Floor
-
-PO Box 392
-
-Trenton, NJ 08625-0392
-
- **And** 
-
-NJ Department of Health and Senior Services
-
-Consumer and Environmental Health Services
-
-PO Box 369
-
-Trenton, NJ 08625-0369
 
 :::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
