@@ -52,4 +52,12 @@ If you are buying products to resell without the Sales Tax Resale Certificate, y
 
 :::
 
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+A completed Sales Tax Resale Certificate.
+
+:::
+
+
+
  `|`
