@@ -39,7 +39,7 @@ Express mail the forms to both the NJ Department of Labor and Workforce Developm
 * Name and license number of abatement contractor
 * Name and address of monitoring firm hired by building owner
 * Project manager name and phone number
-* What agencies you alerted of your asbestos removal work (Environmental Protection Agency (EPA), Department of Environmental Protection (DEP), etc.) 
+* All agencies you are alerting asbestos removal to
 * Applicable fees paid
 
 ### Facility Information
