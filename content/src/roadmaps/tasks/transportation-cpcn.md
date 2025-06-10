@@ -62,6 +62,7 @@ In the body of your petition, include:​
 **1. The purpose of your petition.** State the reason for filing and describe the service you intend to operate.
 
 **2. Equipment details.** List all vehicles used in your service. Include:
+
 * Make and model
 * Year
 * Vehicle Identification Number (VIN)
@@ -73,6 +74,7 @@ In the body of your petition, include:​
 **4. Business documentation.** Attach copies of your Certificate of Incorporation, Certificate of Good Standing, or other business formation documents as applicable.
 
 **5. Business ownership and management information.** Provide:
+
 * Total number of shares issued, if applicable
 * Names and addresses of all those with more than 5% voting control
 * Names all officers, directors, members, and partners associated with the business
@@ -140,14 +142,21 @@ After submission of your petition, the NJ MVC will assign you a docket number. Y
 
 Once your Notice is published, you must obtain proof of this from the newspaper. This is called Affidavit of Publication, and it must be forwarded to the above NJ MVC mailing address.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
 A Certificate of Public Convenience and Necessity (CPCN) mailed to you.
+
 :::
 
-:::callout{ showHeader="true" headerText="What if I don’t get a CPCN?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don’t get a CPCN?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
 * You risk fines and penalties imposed by enforcement agencies
 * Your vehicles may be impounded
 * Potential lawsuits or administrative actions may be taken against your business
+
 :::
 
-**Contact:** (609) 777-4186
+:::callout{ showHeader="true" headerText="Questions?" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 777-4186" emailIconText="" }
+
+Call the number below:
+:::
