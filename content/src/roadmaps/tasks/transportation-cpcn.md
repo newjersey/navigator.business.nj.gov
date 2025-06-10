@@ -1,6 +1,6 @@
 ---
 notesMd: ""
-summaryDescriptionMd: >-
+summaryDescriptionMd: >
   :::infoAlert 
 
   You must get the CPCN before scheduling initial vehicle inspections. The CPCN is also needed before registering vehicles with the NJ MVC.
@@ -11,9 +11,9 @@ summaryDescriptionMd: >-
   To provide transportation services in New Jersey, you need a Certificate of Public Convenience and Necessity (CPCN). Transportation services that require a CPCN include:
 
 
-  * **Intrastate Regular Route Operations,**: carrying passengers on a regular schedule between fixed points in NJ for compensation. This service can be open to the public or restricted to a specific group.
+  * **Intrastate Regular Route Operations,** carrying passengers on a regular schedule between fixed points in NJ for compensation. This service can be open to the public or restricted to a specific group.
 
-  * **Casino Bus Operations,**: carrying passengers to and from one or more casinos in Atlantic City.
+  * **Casino Bus Operations,** carrying passengers to and from one or more casinos in Atlantic City.
 
   * **Special Bus Operations,** carrying passengers, not on a regular schedule, to or from a place in NJ for per-person compensation. The compensation may include special discounts or premiums for attractions that are served by the route. These trips are offered and arranged by the owner of the bus company.
 
