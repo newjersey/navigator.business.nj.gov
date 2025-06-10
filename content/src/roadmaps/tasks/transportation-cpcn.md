@@ -8,10 +8,10 @@ summaryDescriptionMd: >
   :::
 
 
-  To provide transportation services in New Jersey, you need a Certificate of Public Convenience and Necessity (CPCN). Transportation services that require a CPCN include:
+  To provide intrastate transportation services in New Jersey, you need a Certificate of Public Convenience and Necessity (CPCN). Transportation services that require a CPCN include:
 
 
-  * **Intrastate Regular Route Operations,** carrying passengers on a regular schedule between fixed points in NJ for compensation. This service can be open to the public or restricted to a specific group.
+  * **Regular Route Operations,** carrying passengers on a regular schedule between fixed points in NJ for compensation. This service can be open to the public or restricted to a specific group.
 
   * **Casino Bus Operations,** carrying passengers to and from one or more casinos in Atlantic City.
 
