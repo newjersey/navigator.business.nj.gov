@@ -21,7 +21,16 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
   Asbestos Control and Licensing Section and NJ Department of Health and Senior
   Services, Consumer and Environmental Health Services
 ---
+:::callout{ showHeader="true" headerText="Emergency Asbestos Work Notice" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
+If work must begin in less than 10 days due to an emergency, include a letter from the building owner or engineer that explains:
+
+* Why this is an emergency
+* What will happen if you can’t start work right away
+
+**Wait for approval before starting work**.
+
+:::
 
 ## Application Requirements
 
@@ -68,7 +77,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 
 :::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-* You can't legally remove asbestos in New Jersey and may be subject to legal consequences, including fines
+* You can't remove asbestos in New Jersey and may be subject to legal consequences, including fines
 * Each day you work without notice counts as a separate violation
 
 :::
