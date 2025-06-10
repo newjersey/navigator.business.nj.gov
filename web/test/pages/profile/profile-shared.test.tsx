@@ -805,6 +805,15 @@ describe("profile - shared", () => {
   });
 
   describe("personalize your tasks tab", () => {
+    beforeEach(() => {
+      jest.resetModules();
+      const originalEnvironment = process.env;
+      process.env = {
+        ...originalEnvironment,
+        FEATURE_SHOW_PERSONALIZE_TASK_TAB: "true",
+      };
+    });
+
     it("navigates correctly to the personalize your tasks tab", () => {
       const business = generateBusinessForProfile({});
 
