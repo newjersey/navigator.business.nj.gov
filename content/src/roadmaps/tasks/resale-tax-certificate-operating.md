@@ -13,13 +13,11 @@ summaryDescriptionMd: >-
   :::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
-  On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
+  * On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
 
+  * To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
 
-  To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
-
-
-  A home improvement contractor cannot use the Sales Tax Resale Certificate
+  * A home improvement contractor cannot use the Sales Tax Resale Certificate
 
 
   :::
