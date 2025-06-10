@@ -33,8 +33,6 @@ industryId: ""
 ---
 If you are the reseller, complete the Sales Tax Resale Certificate with:
 
-
-
 * Your business name and address are registered with the New Jersey Division of Taxation
 * Your New Jersey taxpayer identification number <contextual information>
 * Your type of business
@@ -42,10 +40,16 @@ If you are the reseller, complete the Sales Tax Resale Certificate with:
 
 When buying your goods or services, give the completed certificate to the seller.
 
-
-
 If you are a seller, you must:
 
 * Keep certificates for 4 years
 * Keep sales slips, receipts, statements, cash register tapes, or guest checks documenting the sale for 4 years
 * Provide certificates and any documentation upon request to the New Jersey Division of Taxation
+
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+If you are buying products to resell without the Sales Tax Resale Certificate, you could be overpaying taxes.
+
+:::
+
+ `|`
