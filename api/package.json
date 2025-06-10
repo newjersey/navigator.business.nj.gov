@@ -61,7 +61,7 @@
     "@aws-sdk/client-cognito-identity-provider": "^3.777.0",
     "@businessnjgovnavigator/shared": "*",
     "@jest/types": "29.6.3",
-    "@types/cors": "2.8.17",
+    "@types/cors": "2.8.19",
     "@types/dedent": "0.7.2",
     "@types/express": "5.0.0",
     "@types/jest": "29.5.14",
