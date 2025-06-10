@@ -76,6 +76,6 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * A filed Notification of Asbestos Abatement allowing you to legally remove asbestos in New Jersey
-* For emergency requests, you will receive an emailed response
+* For emergency requests, you will receive an emailed approval or denial
 
 :::
