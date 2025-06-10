@@ -29,6 +29,7 @@ name: Get a Sales Tax Resale Certificate
 id: resale-tax-certificate-operating
 callToActionLink: https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3.pdf
 callToActionText: Get My Sales Resale Certificate
+industryId: ""
 ---
 If you are the reseller, complete the Sales Tax Resale Certificate with:
 
