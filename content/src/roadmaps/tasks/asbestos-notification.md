@@ -23,7 +23,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 ---
 :::callout{ showHeader="true" headerText="Emergency Asbestos Work Notice" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If work must begin in less than 10 days, include a letter from the building owner or engineer that explains why this is an emergency and what will happen if you can’t start work right away. **Wait for approval before starting work.**
+If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency and what will happen if there is a delay. **Wait for approval before starting work**.
 
 :::
 
