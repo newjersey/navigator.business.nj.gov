@@ -29,6 +29,7 @@ id: resale-tax-certificate-operating
 callToActionLink: https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3.pdf
 callToActionText: Get My Sales Resale Certificate
 industryId: ""
+agencyId: nj-taxation
 ---
 ## Requirements for Businesses in New Jersey
 
