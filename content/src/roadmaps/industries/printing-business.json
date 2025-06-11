@@ -56,7 +56,7 @@
   "displayname": "printing-business",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "office printing, commercial printing, printing services",
