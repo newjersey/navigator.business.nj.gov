@@ -53,6 +53,11 @@
       "weight": 61,
       "task": "community-right-to-know-survey",
       "required": false
+    },
+    {
+      "step": 4,
+      "task": "resale-tax-certificate-operating",
+      "weight": 63
     }
   ],
   "name": "Auto-Body Repair",
