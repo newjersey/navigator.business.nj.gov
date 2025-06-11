@@ -55,7 +55,7 @@
   "displayname": "employment-agency",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true,
+    "canBeReseller": false,
     "isEmploymentAndPersonnelTypeApplicable": true
   },
   "isEnabled": true,
