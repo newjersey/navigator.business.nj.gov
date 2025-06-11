@@ -52,7 +52,7 @@
   "displayname": "event-planning",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "planner, organizer, coordinator, party planner",
