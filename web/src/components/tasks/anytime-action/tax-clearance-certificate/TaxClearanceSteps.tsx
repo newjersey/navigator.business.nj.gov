@@ -121,6 +121,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       ) : (
         <>
           <AnytimeActionTaxClearanceCertificateAlert
+            setStepIndex={setStepIndex}
             fieldErrors={props.getInvalidFieldIds()}
             responseErrorType={responseErrorType}
           />
@@ -128,6 +129,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
             steps={stepperSteps}
             currentStep={stepIndex}
             onStepClicked={onStepClick}
+            suppressRefocusBehavior={props.getInvalidFieldIds().length > 0}
           />
           {stepsComponents[stepIndex].component}
         </>

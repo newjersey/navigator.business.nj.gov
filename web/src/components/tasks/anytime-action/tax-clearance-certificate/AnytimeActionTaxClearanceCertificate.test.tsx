@@ -169,6 +169,23 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(secondTab).toHaveAttribute("aria-selected", "true");
     });
 
+    it("renders back to tab two after clicking on a field error in the alert box", async () => {
+      renderComponent({});
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      fireEvent.click(secondTab);
+      fillText("Tax pin", "");
+
+      expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
+
+      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+      fireEvent.click(thirdTab);
+
+      const fieldErrorLink = screen.getByRole("link", { name: /Tax PIN/ });
+      fireEvent.click(fieldErrorLink);
+
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
+    });
+
     it("renders tab one as complete when on tab two", () => {
       const business = generateBusinessWithEmptyTaxClearanceData();
       renderComponent({ business });

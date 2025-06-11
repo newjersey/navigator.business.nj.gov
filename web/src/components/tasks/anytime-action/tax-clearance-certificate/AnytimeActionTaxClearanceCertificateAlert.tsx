@@ -9,6 +9,7 @@ import { ReactElement } from "react";
 interface Props {
   fieldErrors: string[];
   responseErrorType?: TaxClearanceCertificateResponseErrorType;
+  setStepIndex: (step: number) => void;
 }
 
 export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactElement | null => {
@@ -94,7 +95,14 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
           <ul>
             {fieldErrors.map((id) => (
               <li key={`${id}`} id={`label-${id}`}>
-                <a href={`#question-${id}`}>{getLabel(id)}</a>
+                <a
+                  onClick={() => {
+                    props.setStepIndex(1);
+                  }}
+                  href={`#question-${id}`}
+                >
+                  {getLabel(id)}
+                </a>
               </li>
             ))}
           </ul>
