@@ -21,15 +21,9 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
   Asbestos Control and Licensing Section and NJ Department of Health and Senior
   Services, Consumer and Environmental Health Services
 ---
-:::callout{ showHeader="true" headerText="Emergency Asbestos Work Notice" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-
-If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency and what will happen if there is a delay. Wait for approval before starting work.
-
-:::
-
 ## Application Requirements
 
-**You must have a New Jersey asbestos license, and employees with asbestos permits. \[add link]**
+**You must have a New Jersey [asbestos license, and employees with asbestos permits. *\[add links]***
 
 ### Project Contact and Compliance Information
 
