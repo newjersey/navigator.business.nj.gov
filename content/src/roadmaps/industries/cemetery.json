@@ -65,7 +65,7 @@
   ],
   "displayname": "cemetery",
   "industryOnboardingQuestions": {
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": false,
   "additionalSearchTerms": "cemetary, burial, graveyard, grave, crematory, mausoleum, niche, crypt ",
