@@ -68,7 +68,7 @@
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "caregiver, care services, health care service firm, health care service",
