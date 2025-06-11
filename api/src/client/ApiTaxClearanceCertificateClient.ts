@@ -40,6 +40,25 @@ export const MISSING_FIELD =
   "Mandatory Field Missing. TaxpayerId, TaxpayerName, AddressLine1, City, State, Zip, Agency name, Rep Id and RepName are required.";
 export const NATURAL_PROGRAM_ERROR = "Error calling Natural Program. Please try again later.";
 
+const makeTaxClearanceRequest = async (
+  config: Config,
+  requestBody: Record<string, unknown>,
+): Promise<AxiosResponse> => {
+  return axios.post(
+    `${config.orgUrl}/TYTR_ACE_App/ProcessCertificate/businessClearance`,
+    requestBody,
+    {
+      auth: {
+        username: config.userName,
+        password: config.password,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+};
+
 export const ApiTaxClearanceCertificateClient = (
   logWriter: LogWriterType,
   config: Config,
@@ -125,13 +144,7 @@ export const ApiTaxClearanceCertificateClient = (
       }/TYTR_ACE_App/ProcessCertificate/businessClearance data: ${JSON.stringify(postBody)}`,
     );
 
-    return axios
-      .post(`${config.orgUrl}/TYTR_ACE_App/ProcessCertificate/businessClearance`, postBody, {
-        auth: {
-          username: config.userName,
-          password: config.password,
-        },
-      })
+    return makeTaxClearanceRequest(config, postBody)
       .then((response: AxiosResponse) => {
         logWriter.LogInfo(
           `Tax Clearance Certificate Client - Id:${logId} - Response received: ${JSON.stringify({
@@ -212,8 +225,21 @@ export const ApiTaxClearanceCertificateClient = (
 
   const health = async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();
-    return axios
-      .post(`${config.orgUrl}/TYTR_ACE_App/ProcessCertificate/businessClearance`)
+    const healthCheckBody = {
+      taxpayerId: "777777777771",
+      taxpayerPin: "3889",
+      taxpayerName: "RUBBLE, BARNEY",
+      repName: "TEST REP",
+      addressLine1: "Test Line 1",
+      addressLine2: "Test Line 2",
+      city: "TEST City",
+      state: "FL",
+      zip: "08699",
+      agencyName: "Sample Agency",
+      repId: "XDCFJHJHFH",
+    };
+
+    return makeTaxClearanceRequest(config, healthCheckBody)
       .then(() => {
         return {
           success: true,
