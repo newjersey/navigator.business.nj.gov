@@ -50,7 +50,7 @@
   ],
   "displayname": "daycare",
   "industryOnboardingQuestions": {
-    "canBeReseller": true,
+    "canBeReseller": false,
     "isChildcareForSixOrMore": true
   },
   "isEnabled": true,
