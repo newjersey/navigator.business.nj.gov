@@ -29,6 +29,7 @@ import * as HousingRegistrationSearchTask from "@businessnjgovnavigator/content/
 import * as LandingPageExperienceB from "@businessnjgovnavigator/content/fieldConfig/landing-page-experience-b.json";
 import * as LandingPage from "@businessnjgovnavigator/content/fieldConfig/landing-page.json";
 import * as LicenseSearchTask from "@businessnjgovnavigator/content/fieldConfig/license-search-task.json";
+import * as ManageBusinessVehicles from "@businessnjgovnavigator/content/fieldConfig/manage-business-vehicles.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NavigationDefaults from "@businessnjgovnavigator/content/fieldConfig/navigation-defaults.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
@@ -105,6 +106,7 @@ const merged = JSON.parse(
       TaxClearanceCertificateShared,
       TaxClearanceCertificateDownload,
       FundingsOnboarding,
+      ManageBusinessVehicles,
       XrayRegistration,
       XrayRenewal,
       AbcEmergencyTripPermit,
@@ -155,6 +157,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof LicenseSearchTask &
   typeof LandingPage &
   typeof LandingPageExperienceB &
+  typeof ManageBusinessVehicles &
   typeof FundingsOnboarding &
   typeof TaxClearanceCertificateStep1 &
   typeof TaxClearanceCertificateStep2 &
@@ -212,6 +215,7 @@ export const getMergedConfig = (): ConfigType => {
     TaxClearanceCertificateStep1,
     TaxClearanceCertificateStep2,
     TaxClearanceCertificateStep3,
+    ManageBusinessVehicles,
     TaxClearanceCertificateShared,
     TaxClearanceCertificateDownload,
     XrayRegistration,

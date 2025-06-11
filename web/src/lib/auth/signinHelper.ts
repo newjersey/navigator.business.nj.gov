@@ -5,7 +5,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { UpdateQueue } from "@/lib/types/types";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import analytics from "@/lib/utils/analytics";
 import {
   setABExperienceDimension,

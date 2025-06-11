@@ -41,12 +41,14 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Management Consulting",
-  "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
-  ],
   "displayname": "management-consulting",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

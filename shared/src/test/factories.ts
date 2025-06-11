@@ -44,6 +44,7 @@ import {
   maskingCharacter,
   ProfileData,
 } from "../profileData";
+import { RoadmapTaskData } from "../roadmapTaskData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { StateObject, arrayOfStateObjects as states } from "../states";
 import {
@@ -566,6 +567,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     taxClearanceCertificateData: generateTaxClearanceCertificateData({ taxId, taxPin }),
     environmentData: generateEnvironmentData({}),
     xrayRegistrationData: undefined,
+    roadmapTaskData: generateRoadmapTaskData({}),
     version: CURRENT_VERSION,
     userId: generateUser({}).id,
     versionWhenCreated: CURRENT_VERSION,
@@ -575,6 +577,12 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
   };
 };
 
+export const generateRoadmapTaskData = (overrides: Partial<RoadmapTaskData>): RoadmapTaskData => {
+  return {
+    manageBusinessVehicles: !(randomInt() % 2),
+    ...overrides,
+  };
+};
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
   const id = createBusinessId();
   return {

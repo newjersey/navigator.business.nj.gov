@@ -47,13 +47,15 @@
       "weight": 20,
       "licenseTask": "certified-interior-designer",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Interior Design",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "interior-designer",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

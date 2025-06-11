@@ -54,13 +54,17 @@
       "weight": 2,
       "licenseTask": "authorization-landscape-architect-firm",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Landscape Architecture",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "planning-services",
-    "business-vehicle-title-reg",
     "pesticides-applicator-licensing"
   ],
   "displayname": "landscape architecture",

@@ -2,30 +2,32 @@ import { createFormContext, createReducedFieldStates } from "@/contexts/formCont
 import { profileFieldsFromConfig, ReducedFieldStates } from "@/lib/types/types";
 import {
   BusinessUser,
+  createEmptyRoadmapTaskData,
+  EmergencyTripPermitApplicationInfo,
   emptyBusinessUser,
   emptyFormationAddressData,
   emptyProfileData,
   emptyTaxClearanceCertificateData,
   FormationAddress,
+  generateNewEmergencyTripPermitData,
   ProfileData,
+  RoadmapTaskData,
   TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
-import {
-  EmergencyTripPermitApplicationInfo,
-  generateNewEmergencyTripPermitData,
-} from "@businessnjgovnavigator/shared/emergencyTripPermit";
 
 export type DataFormErrorMapFields =
   | keyof ProfileData
   | keyof BusinessUser
   | keyof FormationAddress
   | keyof TaxClearanceCertificateData
+  | keyof RoadmapTaskData
   | keyof EmergencyTripPermitApplicationInfo;
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as (keyof ProfileData)[];
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
+const roadmapTaskDataFields = Object.keys(createEmptyRoadmapTaskData) as (keyof RoadmapTaskData)[];
 const taxClearanceCertificateFields = Object.keys(
   emptyTaxClearanceCertificateData,
 ) as (keyof TaxClearanceCertificateData)[];
@@ -40,6 +42,7 @@ const dataFormErrorMapFields: DataFormErrorMapFields[] = [
     ...businessUserDisplayFields,
     ...formationAddressFields,
     ...taxClearanceCertificateFields,
+    ...roadmapTaskDataFields,
     ...emergencyTripPermitFields,
   ]),
 ];

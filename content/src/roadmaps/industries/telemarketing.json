@@ -48,12 +48,14 @@
       "task": "",
       "licenseTask": "telemarketing-license",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Telemarketing",
-  "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
-  ],
   "displayname": "telemarketing",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

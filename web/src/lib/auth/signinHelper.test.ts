@@ -21,8 +21,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
-import { UpdateQueue } from "../types/types";
-import { UpdateQueueFactory } from "../UpdateQueue";
+import { UpdateQueue, UpdateQueueFactory } from "../UpdateQueue";
 
 const mockGetCurrentUserData = jest.fn();
 const mockDelete = jest.fn();

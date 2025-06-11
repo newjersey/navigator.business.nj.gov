@@ -53,13 +53,15 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Security",
-  "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg",
-    "bus-initial-inspection"
-  ],
+  "nonEssentialQuestionsIds": ["bus-initial-inspection"],
   "displayname": "security",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
