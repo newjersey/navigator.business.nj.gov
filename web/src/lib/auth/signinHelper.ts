@@ -71,7 +71,12 @@ export const onSelfRegister = ({
       },
     })
     .then(async (response) => {
-      await updateQueue.queue(response.userData).update();
+      try {
+        await updateQueue.queue(response.userData).update();
+      } catch (error) {
+        console.error("Failed to update user data:", error);
+        // Continue with redirect even if update fails
+      }
       await router.replace(response.authRedirectURL);
     })
     .catch((error) => {
