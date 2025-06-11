@@ -41,6 +41,11 @@
       "step": 4,
       "weight": 90,
       "task": "community-right-to-know-survey"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Printing Business",
