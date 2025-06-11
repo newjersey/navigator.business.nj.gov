@@ -64,7 +64,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-2159" emailIconText="asbestos@dol.nj.gov" }
 
-Email the notification and a photo of your payment.
+Email the notification and a photo of your payment. Mail your check or money order.
 
 :::
 
