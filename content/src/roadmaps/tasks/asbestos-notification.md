@@ -23,7 +23,7 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
 ---
 ## Application Requirements
 
-**You must have a New Jersey [asbestos license, and employees with asbestos permits. *\[add links]***
+**You must have a New Jersey \[asbestos license, and employees with asbestos permits. \*[add links]\***
 
 ### Project Contact and Compliance Information
 
@@ -79,6 +79,12 @@ Office of Asbestos Control & Licensing
 P.O. Box 949 
 
 Trenton, NJ 08625-0949
+
+:::callout{ showHeader="true" headerText="Emergency Asbestos Work Notice" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency and what will happen if there is a delay. Wait for approval before starting work.
+
+:::
 
 :::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
