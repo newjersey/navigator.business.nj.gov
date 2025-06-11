@@ -50,7 +50,7 @@
   "displayname": "photography",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "freelance photographer, professional photographer, photographer, media, event photographer, video",
