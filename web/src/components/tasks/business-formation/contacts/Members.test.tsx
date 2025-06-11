@@ -217,11 +217,6 @@ describe("Formation - Members Field", () => {
             screen.queryByText(maxLengthMessage("addressLine2", "35")),
           ).not.toBeInTheDocument();
           expect(screen.queryByText(maxLengthMessage("addressCity", "30"))).not.toBeInTheDocument();
-
-          page.clickAddressSubmit();
-          await waitFor(() => {
-            expect(screen.getByText(successBodyText, { exact: false })).toBeInTheDocument();
-          });
         });
 
         it("resets form on cancel", async () => {

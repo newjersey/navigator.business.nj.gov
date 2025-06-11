@@ -80,7 +80,7 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
   };
 
   return hasErrors ? (
-    <Alert variant="error" dataTestid={"tax-clearance-error-alert"}>
+    <Alert className="margin-top-4" variant="error" dataTestid={"tax-clearance-error-alert"}>
       {props.fieldErrors.length > 0 && (
         <>
           <div>

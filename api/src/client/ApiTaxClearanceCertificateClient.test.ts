@@ -160,6 +160,9 @@ describe("TaxClearanceCertificateClient", () => {
       },
       {
         auth: { password: "fakePassword", username: "fakeUserName" },
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
     );
   });
