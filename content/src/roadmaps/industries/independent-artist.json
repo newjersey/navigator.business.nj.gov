@@ -55,7 +55,7 @@
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true,
+    "canBeReseller": false,
     "isCannabisLicenseTypeApplicable": false,
     "isCpaRequiredApplicable": false,
     "isCarServiceApplicable": false,
