@@ -50,7 +50,7 @@
   "displayname": "graphic-design",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "media services, freelancer, freelance art, visual design, illustrator",
