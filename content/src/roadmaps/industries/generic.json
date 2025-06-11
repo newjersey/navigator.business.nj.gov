@@ -64,7 +64,7 @@
   "displayname": "generic",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "id": "generic",
