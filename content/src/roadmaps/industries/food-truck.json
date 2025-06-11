@@ -109,7 +109,7 @@
   ],
   "displayname": "food-truck",
   "industryOnboardingQuestions": {
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart, food vendor",
