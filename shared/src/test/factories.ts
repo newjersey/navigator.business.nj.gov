@@ -411,14 +411,15 @@ export const generateTaxClearanceCertificateData = (
   overrides: Partial<TaxClearanceCertificateData>,
 ): TaxClearanceCertificateData => {
   const taxId = randomInt(12).toString();
+  const addressState = generateUnitedStatesStateDropdownOption({});
   return {
     requestingAgencyId: randomElementFromArray(taxClearanceCertificateAgencies).id,
     businessName: `some-business-name-${randomInt()}`,
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     addressCity: `some-city-${randomInt()}`,
-    addressState: generateUnitedStatesStateDropdownOption({}),
-    addressZipCode: randomInt(5).toString(),
+    addressState,
+    addressZipCode: addressState.shortCode === "NJ" ? generateNjZipCode() : randomInt(5).toString(),
     taxId: maskingCharacter.repeat(7) + taxId.slice(-5),
     encryptedTaxId: `encrypted-${taxId}`,
     taxPin: maskingCharacter.repeat(4),
@@ -685,4 +686,8 @@ export const generateEmergencyTripPermitApplicationData = (
     vehicleYear: `${randomInt(4)}`,
     ...overrides,
   };
+};
+
+export const generateNjZipCode = (): string => {
+  return `0${randomIntFromInterval("7", "8")}${randomInt(3)}`;
 };
