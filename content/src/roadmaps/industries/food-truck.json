@@ -96,6 +96,11 @@
       "step": 4,
       "weight": 2,
       "licenseTask": "town-mercantile-license"
+    },
+    {
+      "step": 4,
+      "weight": 3,
+      "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Food Truck",
