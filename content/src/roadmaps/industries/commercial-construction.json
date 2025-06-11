@@ -52,7 +52,7 @@
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true,
+    "canBeReseller": false,
     "isConstructionTypeApplicable": true
   },
   "isEnabled": true,
