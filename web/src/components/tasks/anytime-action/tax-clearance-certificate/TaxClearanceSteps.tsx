@@ -120,14 +120,14 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
         />
       ) : (
         <>
+          <AnytimeActionTaxClearanceCertificateAlert
+            fieldErrors={props.getInvalidFieldIds()}
+            responseErrorType={responseErrorType}
+          />
           <HorizontalStepper
             steps={stepperSteps}
             currentStep={stepIndex}
             onStepClicked={onStepClick}
-          />
-          <AnytimeActionTaxClearanceCertificateAlert
-            fieldErrors={props.getInvalidFieldIds()}
-            responseErrorType={responseErrorType}
           />
           {stepsComponents[stepIndex].component}
         </>
