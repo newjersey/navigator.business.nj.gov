@@ -51,6 +51,7 @@ const LoadingPage = (): ReactElement => {
   }, [router, dispatch, loginPageEnabled]);
 
   useMountEffectWhenDefined(() => {
+    console.log("updateQueue in useMountEffectWhenDefined:", updateQueue);
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
     if (business?.onboardingFormProgress && !onboardingCompleted(business)) {
