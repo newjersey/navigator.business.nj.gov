@@ -43,34 +43,45 @@ callToActionText: Apply for IFTA Account
 agencyId: nj-motor-vehicle
 formName: IFTA-1
 ---
+&nbsp;
 ## Application Requirements
 * Proof of business address, such as bank statements or a certificate of formation
 * `USDoT Number|usdot-number`
 * `NJ Tax ID|tax-id` or Social Security Number (SSN)
 * Truck information, such as the Vehicle Identification Number (VIN#), fuel type, and number of axles
 
+&nbsp;
 ## How to Apply                                      
 Fill out the application linked below bring it to the MVC Trenton office located at:
 
-&nbsp;
+
+
 120 South Stockton St.
 &nbsp;
+
 Trenton, NJ 08608
+
 &nbsp;
 
 Or mail to:
 
-&nbsp;
+
+
 New Jersey Motor Vehicle Commission
 &nbsp;
+
 P.O. Box 133
 &nbsp;
+
 Trenton, NJ 08666
+
 &nbsp;
 
 If you choose to apply by mail, please include a copy of your proof of Federal Tax ID number. 
 
 Once your application has been processed, your account can be accessed [online](https://mvcappwintelirp.state.nj.us/njWeb/login.do).
+
+&nbsp;
 
 ## Quarterly Tax Filing Requirements
 
