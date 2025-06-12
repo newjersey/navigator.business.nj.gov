@@ -7,6 +7,10 @@ export const selectLocationByText = (value: string): void => {
   fireEvent.click(listbox.getByText(value));
 };
 
+export const getInputElementByLabel = (label: string): HTMLInputElement => {
+  return screen.getByLabelText(label) as HTMLInputElement;
+};
+
 export const fillText = (label: string, value: string): void => {
   const item = screen.getByLabelText(label);
   fireEvent.change(item, { target: { value: value } });
