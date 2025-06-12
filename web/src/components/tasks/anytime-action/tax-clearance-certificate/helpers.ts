@@ -30,37 +30,37 @@ export const getInitialData = (
 } => {
   const requestingAgencyId = business.taxClearanceCertificateData?.requestingAgencyId || "";
   const businessName =
-    business?.taxClearanceCertificateData?.businessName || business?.profileData.businessName || "";
+    business.taxClearanceCertificateData?.businessName || business.profileData.businessName || "";
   const addressLine1 =
-    business?.taxClearanceCertificateData?.addressLine1 ||
+    business.taxClearanceCertificateData?.addressLine1 ||
     business.formationData.formationFormData.addressLine1 ||
     "";
   const addressLine2 =
-    business?.taxClearanceCertificateData?.addressLine2 ||
+    business.taxClearanceCertificateData?.addressLine2 ||
     business.formationData.formationFormData.addressLine2 ||
     "";
   const addressCity =
-    business?.taxClearanceCertificateData?.addressCity ||
-    LookupMunicipalityByName(business?.formationData?.formationFormData?.addressMunicipality?.name)
+    business.taxClearanceCertificateData?.addressCity ||
+    LookupMunicipalityByName(business.formationData?.formationFormData?.addressMunicipality?.name)
       ?.displayName ||
     business.formationData.formationFormData.addressCity ||
     "";
   const addressState =
-    business?.taxClearanceCertificateData?.addressState ||
+    business.taxClearanceCertificateData?.addressState ||
     business.formationData?.formationFormData?.addressState ||
     undefined;
   const addressZipCode =
-    business?.taxClearanceCertificateData?.addressZipCode ||
+    business.taxClearanceCertificateData?.addressZipCode ||
     business.formationData.formationFormData.addressZipCode ||
     "";
   const taxId = getInitialTaxId(business);
   const encryptedTaxId =
-    business?.taxClearanceCertificateData?.encryptedTaxId ||
+    business.taxClearanceCertificateData?.encryptedTaxId ||
     business.profileData.encryptedTaxId ||
     undefined;
   const taxPin = getInitialTaxPin(business);
   const encryptedTaxPin =
-    business?.taxClearanceCertificateData?.encryptedTaxPin ||
+    business.taxClearanceCertificateData?.encryptedTaxPin ||
     business.profileData.encryptedTaxPin ||
     undefined;
 
@@ -82,22 +82,7 @@ export const getInitialData = (
   };
 };
 
-export const getAllFieldsNonEmpty = (
-  taxClearanceCertificateData: TaxClearanceCertificateData,
-): boolean => {
-  return (
-    (taxClearanceCertificateData.requestingAgencyId ?? "").trim() !== "" &&
-    (taxClearanceCertificateData.businessName ?? "").trim() !== "" &&
-    (taxClearanceCertificateData.addressLine1 ?? "").trim() !== "" &&
-    (taxClearanceCertificateData.addressCity ?? "").trim() !== "" &&
-    taxClearanceCertificateData.addressState !== undefined &&
-    (taxClearanceCertificateData.addressZipCode ?? "").trim() !== "" &&
-    (taxClearanceCertificateData.taxId ?? "").trim() !== "" &&
-    (taxClearanceCertificateData.taxPin ?? "").trim() !== ""
-  );
-};
-
-export const isAnyFieldEmpty = (
+export const isAnyRequiredFieldEmpty = (
   taxClearanceCertificateData: TaxClearanceCertificateData,
 ): boolean => {
   return (
