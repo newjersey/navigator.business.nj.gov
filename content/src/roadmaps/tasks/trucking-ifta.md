@@ -22,7 +22,7 @@ summaryDescriptionMd: >
 
   * Will be operated within 1 or more states or provinces
 
-  * Will transport persons for hire, such as charter buses and airport shuttles
+  * Will transport persons for compensation, such as charter buses and airport shuttles
 
   * Will be used mainly to move goods, such as freight or cargo
 
@@ -39,7 +39,7 @@ displayname: trucking-ifta
 name: Get Your International Fuel Tax Agreement (IFTA) License and Decals
 id: trucking-ifta
 callToActionLink: https://www.nj.gov/mvc/pdf/commercial/IFTA_1.pdf
-callToActionText: Apply for IFTA Account
+callToActionText: Apply for an IFTA Account
 agencyId: nj-motor-vehicle
 formName: IFTA-1
 ---
@@ -77,7 +77,7 @@ Trenton, NJ 08666
 
 &nbsp;
 
-If you choose to apply by mail, please include a copy of your proof of Federal Tax ID number. 
+If you choose to apply by mail, please include a copy of your proof of `Federal Tax ID number.|federal-tax-id`
 
 Once your application has been processed, your account can be accessed [online](https://mvcappwintelirp.state.nj.us/njWeb/login.do).
 
