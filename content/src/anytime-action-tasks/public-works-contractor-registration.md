@@ -6,7 +6,7 @@ category:
   - only-show-in-subtask
 sectorIds: []
 urlSlug: public-works-contractor-registration
-summaryDescriptionMd: "&nbsp;"
+summaryDescriptionMd: This field does not render and will be deleted when completing the bug ticket.
 callToActionText: Complete My PW CR Application
 callToActionLink: https://www.njportal.com/lwd/pwcr
 synonyms:
