@@ -50,7 +50,7 @@
   "displayname": "it-consultant",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true,
+    "canBeReseller": false,
     "isProvidesStaffingServicesApplicable": true
   },
   "isEnabled": true,
