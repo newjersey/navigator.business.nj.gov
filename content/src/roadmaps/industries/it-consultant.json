@@ -41,6 +41,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "task": "resale-tax-certificate-operating",
+      "weight": 10
     }
   ],
   "name": "IT Consulting",
