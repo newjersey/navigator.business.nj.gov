@@ -3,16 +3,22 @@ import { Icon } from "@/components/njwds/Icon";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { FormationBusinessLocationType } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, ReactNode, useContext } from "react";
 
-export const ProfileAddressLockedFields = (): ReactElement => {
+interface Props {
+  businessLocation?: FormationBusinessLocationType;
+}
+
+export const ProfileAddressLockedFields = (props: Props): ReactElement => {
   const { state } = useContext(AddressContext);
   const { business } = useUserData();
 
   const Config = getMergedConfig();
 
   const displayAddress = (): ReactNode => {
-    const businessLocation = business?.formationData.formationFormData.businessLocationType;
+    const businessLocation =
+      props.businessLocation || business?.formationData.formationFormData.businessLocationType;
     switch (businessLocation) {
       case "NJ":
         return (
