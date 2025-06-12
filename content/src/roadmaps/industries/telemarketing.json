@@ -57,7 +57,7 @@
   "displayname": "telemarketing",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "telemarketer, phone banking, call center",
