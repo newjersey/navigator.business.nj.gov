@@ -501,6 +501,7 @@ commands:
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_TESTING' >> $BASH_ENV
             echo 'export BASIC_AUTH_AGENCY_PASSWORD=$BASIC_AUTH_AGENCY_PASSWORD_TESTING' >> $BASH_ENV
             echo 'export BASIC_AUTH_AGENCY_USERNAME=$BASIC_AUTH_AGENCY_USERNAME_TESTING' >> $BASH_ENV
+            echo 'export GOOGLE_TAG_MANAGER_ID=$GOOGLE_TAG_MANAGER_ID_TESTING' >> $BASH_ENV
 
   deploy-setup:
     steps:
