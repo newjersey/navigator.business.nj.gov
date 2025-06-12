@@ -63,7 +63,7 @@
   "displayname": "massage-therapy",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "Masseuse, Spa, Spa services, bodywork, wellness",
