@@ -69,7 +69,7 @@
   "displayname": "pest-control",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "exterminator, pest removal, pest management, bugs, insects, rodents, termites, roaches, pesticides",
