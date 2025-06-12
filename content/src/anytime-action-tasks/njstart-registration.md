@@ -7,7 +7,7 @@ category:
 description: Complete your NJSTART registration to bid on state contracts.
 sectorIds: []
 urlSlug: njstart-registration
-summaryDescriptionMd: " &nbsp;"
+summaryDescriptionMd: This field does not render and will be deleted when completing the bug ticket.
 callToActionText: Register My Business with NJSTART
 callToActionLink: https://www.njstart.gov/bso/
 synonyms:
