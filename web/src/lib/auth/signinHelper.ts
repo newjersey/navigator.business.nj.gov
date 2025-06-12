@@ -52,6 +52,13 @@ export const onSelfRegister = ({
   }
   setRegistrationStatus("IN_PROGRESS");
 
+  console.log("userData in onSelfRegister:", userData);
+  console.log("router.asPath in onSelfRegister:", router.asPath);
+  console.log(
+    "userData.businesses[userData.currentBusinessId].preferences.returnToLink in onSelfRegister:",
+    userData.businesses[userData.currentBusinessId].preferences.returnToLink,
+  );
+
   const route = router.asPath?.includes(ROUTES.accountSetup)
     ? ""
     : getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
