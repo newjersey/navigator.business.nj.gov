@@ -36,6 +36,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -78,11 +79,15 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     userData?: UserData;
   }): void => {
     render(
-      <WithStatefulUserData
-        initialUserData={userData ?? generateUserDataForBusiness(business ?? generateBusiness({}))}
-      >
-        <AnytimeActionTaxClearanceCertificate anytimeAction={anytimeAction} />
-      </WithStatefulUserData>,
+      <ThemeProvider theme={createTheme()}>
+        <WithStatefulUserData
+          initialUserData={
+            userData ?? generateUserDataForBusiness(business ?? generateBusiness({}))
+          }
+        >
+          <AnytimeActionTaxClearanceCertificate anytimeAction={anytimeAction} />
+        </WithStatefulUserData>
+      </ThemeProvider>,
     );
   };
 
@@ -1046,6 +1051,42 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         businesses: { ...userData.businesses, [currentBusiness.id]: currentBusiness },
       });
     });
+  });
+
+  it("renders locked address, business name, and taxId fields when business has formed", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+      }),
+      formationData: generateFormationData({
+        completedFilingPayment: true,
+        formationFormData: generateFormationFormData({
+          addressLine1: "123 Testing Road",
+          addressLine2: "",
+          addressMunicipality: generateMunicipality({ displayName: "Allendale" }),
+          addressState: {
+            name: "New Jersey",
+            shortCode: "NJ",
+          },
+          addressZipCode: "07781",
+          businessLocationType: "US",
+        }),
+      }),
+      taxFilingData: {
+        state: "SUCCESS",
+        filings: [],
+      },
+    });
+    renderComponent({ business });
+
+    const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+    fireEvent.click(secondTab);
+    expect(secondTab).toHaveAttribute("aria-selected", "true");
+
+    expect(screen.getByTestId("locked-businessName")).toBeInTheDocument();
+    expect(screen.getByTestId("locked-profileAddressLine1")).toBeInTheDocument();
+    expect(screen.getByTestId("locked-profileAddressCityStateZip")).toBeInTheDocument();
+    expect(screen.getByTestId("disabled-taxid")).toBeInTheDocument();
   });
 
   it("renders the page to download the certificate when the API post request is successful", async () => {
