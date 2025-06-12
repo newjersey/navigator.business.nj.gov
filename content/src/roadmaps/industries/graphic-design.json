@@ -45,7 +45,8 @@
   ],
   "name": "Graphic Design",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "resale-tax-cert"
   ],
   "displayname": "graphic-design",
   "industryOnboardingQuestions": {
