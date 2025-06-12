@@ -59,9 +59,9 @@ export const onSelfRegister = ({
     userData.businesses[userData.currentBusinessId].preferences.returnToLink,
   );
 
-  const route = router.asPath?.includes(ROUTES.accountSetup)
-    ? ""
-    : getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
+  // const route = router.asPath?.includes(ROUTES.accountSetup)
+  //   ? ""
+  //   : getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
 
   api
     .postSelfReg({
@@ -72,7 +72,7 @@ export const onSelfRegister = ({
           ...userData.businesses[userData.currentBusinessId],
           preferences: {
             ...userData.businesses[userData.currentBusinessId].preferences,
-            returnToLink: route,
+            returnToLink: getCurrentBusiness(userData).preferences.returnToLink,
           },
         },
       },
