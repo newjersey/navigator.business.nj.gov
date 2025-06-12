@@ -58,7 +58,7 @@
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host, rooming house, boarding house",
