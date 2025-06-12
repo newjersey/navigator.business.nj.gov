@@ -56,7 +56,8 @@
     "inspect-boiler",
     "inspect-pv",
     "inspect-fridge",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "resale-tax-cert"
   ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
