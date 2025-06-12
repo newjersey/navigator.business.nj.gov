@@ -48,7 +48,7 @@
   "displayname": "lawn-care",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "yard, lawn, mowing, maintenance, service, landscape",
