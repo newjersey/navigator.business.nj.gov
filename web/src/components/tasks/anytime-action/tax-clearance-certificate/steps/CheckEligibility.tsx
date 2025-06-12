@@ -1,7 +1,9 @@
 import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
+import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { TaxPin } from "@/components/data-fields/TaxPin";
+import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -9,19 +11,23 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
 import { ProfileField } from "@/components/profile/ProfileField";
 import {
   getInitialTaxId,
   getInitialTaxPin,
 } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { StateAgencyDropdown } from "@/components/tasks/anytime-action/tax-clearance-certificate/StateAgencyDropdown";
+import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { ReactElement, useContext } from "react";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
@@ -30,6 +36,7 @@ interface Props {
 
 export const CheckEligibility = (props: Props): ReactElement => {
   const dataFormErrorMap = useContext(DataFormErrorMapContext);
+  const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
 
   const { Config } = useConfig();
 
@@ -75,6 +82,15 @@ export const CheckEligibility = (props: Props): ReactElement => {
     props.setStepIndex(0);
   };
 
+  const hasSubmittedTaxData =
+    business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
+
+  useMountEffectWhenDefined(() => {
+    if (business) {
+      setShouldLockFormationFields(hasCompletedFormation(business));
+    }
+  }, business);
+
   return (
     <>
       <div>
@@ -91,7 +107,12 @@ export const CheckEligibility = (props: Props): ReactElement => {
           </Heading>
         </div>
         <div className="margin-y-2">
-          <ProfileField fieldName={"businessName"} hideLine fullWidth>
+          <ProfileField
+            locked={shouldLockFormationFields}
+            fieldName={"businessName"}
+            hideLine
+            fullWidth
+          >
             <BusinessName
               inputWidth="full"
               required={true}
@@ -101,20 +122,35 @@ export const CheckEligibility = (props: Props): ReactElement => {
           </ProfileField>
         </div>
         <div className="margin-y-2">
-          <UnitesStatesAddress
-            onValidation={onValidation}
-            dataFormErrorMap={dataFormErrorMap}
-            isFullWidth
-          />
-        </div>
-        <div className="margin-y-2">
-          <ProfileField fieldName="taxId" hideLine fullWidth>
-            <TaxId
-              dbBusinessTaxId={getInitialTaxId(business)}
-              inputWidth="full"
-              preventRefreshWhenUnmounted
-              required
+          {shouldLockFormationFields ? (
+            <ProfileAddressLockedFields businessLocation="US" />
+          ) : (
+            <UnitesStatesAddress
+              onValidation={onValidation}
+              dataFormErrorMap={dataFormErrorMap}
+              isFullWidth
             />
+          )}
+        </div>
+
+        <div className="margin-y-2">
+          <ProfileField fieldName="taxId" noLabel>
+            <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
+            {!hasSubmittedTaxData && (
+              <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+            )}
+            <div className="max-width-38rem">
+              {hasSubmittedTaxData ? (
+                <DisabledTaxId />
+              ) : (
+                <TaxId
+                  dbBusinessTaxId={getInitialTaxId(business)}
+                  inputWidth="full"
+                  preventRefreshWhenUnmounted
+                  required
+                />
+              )}
+            </div>
           </ProfileField>
         </div>
         <div>
