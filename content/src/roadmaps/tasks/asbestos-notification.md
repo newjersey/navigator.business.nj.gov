@@ -12,7 +12,7 @@ summaryDescriptionMd: You must submit a Notification of Asbestos Abatement at
   updated form.
 urlSlug: asbestos-notification
 displayname: asbestos-notification
-name: Report Your Asbestos Removal Work
+name: Report Your Asbestos Work
 id: asbestos-notification
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/a\
   sbestos/index.shtml "
