@@ -33,11 +33,13 @@ formName: IFTA-1
 ## Vehicle Requirements
 
 Vehicles qualify for IFTA if they:
+
 * Will be operated within 1 or more states or provinces
 * Will transport persons for compensation, such as charter buses and airport shuttles
-* Will be used mainly to move freight or `cargo|cargo`
+* Will be used mainly to move freight or `cargo|cargo` 
 
 Additionally, vehicles that qualify for IFTA must also meet **at least 1 of the following:**
+
 * Have 2 axles and a gross vehicle weight over 26,000 lbs
 * Have 3 or more axles, regardless of weight
 * Are part of a combination vehicle, with a total weight over 26,000 lbs
@@ -71,8 +73,6 @@ Or mail to:
 > &nbsp;
 >
 > Trenton, NJ 08666
-
-
 
 If you choose to apply by mail, please include a copy of your proof of `Federal Tax ID number.|federal-tax-id` Once your application has been processed, your account can be accessed [online](https://mvcappwintelirp.state.nj.us/njWeb/login.do).
 
@@ -115,4 +115,4 @@ Filing can be done [online](https://mvcappwintelirp.state.nj.us/njWeb/login.do) 
 
 :::
 
-**Contact:** (609) 633-9400  or mcscustomerservice@mvc.nj.gov
+**Contact:** (609) 633-9400 or mcscustomerservice@mvc.nj.gov
