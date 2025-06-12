@@ -199,6 +199,11 @@
       "id": "sell-milk-question",
       "questionText": "Will you sell milk or other milk products, such as yogurt or cream?",
       "addOn": "sell-milk"
+    },
+    {
+      "id": "resale-tax-cert",
+      "questionText": "Will you buy products for resale, or will you sell products to resellers?",
+      "addOn": "resale-certificate"
     }
   ]
 }
