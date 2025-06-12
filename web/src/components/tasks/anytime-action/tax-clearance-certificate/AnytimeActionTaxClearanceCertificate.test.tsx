@@ -3,7 +3,11 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { generateAnytimeActionTask } from "@/test/factories";
-import { selectComboboxValueByTextClick } from "@/test/helpers/helpers-testing-library-selectors";
+import {
+  fillText,
+  getInputElementByLabel,
+  selectComboboxValueByTextClick,
+} from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -915,8 +919,6 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(within(screen.getByTestId("taxPinLabel")).getByText("****")).toBeInTheDocument();
     });
 
-    describe("renders data when input is provided", () => {});
-
     describe("renders errors on tax clearance step 2", () => {
       it("renders error for requestingAgency when empty and onBlur", async () => {
         const business = generateBusinessWithEmptyTaxClearanceData();
@@ -1019,7 +1021,6 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   });
 
   it("makes the api post request", async () => {
-    // mockApi.postUserData.mockResolvedValue()
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
       userData: generateUserData({}),
@@ -1693,13 +1694,4 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
     expect(screen.queryByTestId("tax-clearance-error-alert")).not.toBeInTheDocument();
   });
-
-  const getInputElementByLabel = (label: string): HTMLInputElement => {
-    return screen.getByLabelText(label) as HTMLInputElement;
-  };
-
-  const fillText = (label: string, value: string): void => {
-    fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
-    fireEvent.blur(screen.getByLabelText(label));
-  };
 });
