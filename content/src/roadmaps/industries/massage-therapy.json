@@ -58,7 +58,8 @@
   ],
   "name": "Massage Therapy",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "resale-tax-cert"
   ],
   "displayname": "massage-therapy",
   "industryOnboardingQuestions": {
