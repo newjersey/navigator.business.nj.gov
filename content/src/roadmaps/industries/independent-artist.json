@@ -50,7 +50,8 @@
     "entertainment-agency-register",
     "business-vehicle-title-reg",
     "business-vehicle-irp",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "resale-tax-cert"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
