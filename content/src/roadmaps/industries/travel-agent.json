@@ -51,7 +51,7 @@
   "displayname": "travel-agent",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "home-based travel agent",
