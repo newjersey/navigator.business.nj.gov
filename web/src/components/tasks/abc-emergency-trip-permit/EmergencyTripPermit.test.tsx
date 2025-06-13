@@ -104,7 +104,7 @@ describe("EmergencyTripPermit", () => {
       await user.type(screen.getByRole("textbox", { name: "Address Line 1" }), "add");
       await user.type(screen.getByRole("textbox", { name: "Address Line 2" }), "add2");
       await user.type(screen.getByRole("textbox", { name: "City" }), "city");
-      await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "zippy");
+      await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "54321");
       // Go to Billing Step
       await user.click(screen.getByRole("button", { name: "Save & Continue" }));
       await user.click(screen.getByRole("button", { name: "Save & Continue" }));
@@ -116,7 +116,7 @@ describe("EmergencyTripPermit", () => {
       expect(screen.getByDisplayValue("add")).toBeInTheDocument();
       expect(screen.getByDisplayValue("add2")).toBeInTheDocument();
       expect(screen.getByDisplayValue("city")).toBeInTheDocument();
-      expect(screen.getByDisplayValue("zippy")).toBeInTheDocument();
+      expect(screen.getByDisplayValue("54321")).toBeInTheDocument();
     });
 
     it("can overwrite prepopulated values on the billing page without affecting the requestor page", async () => {
@@ -130,7 +130,7 @@ describe("EmergencyTripPermit", () => {
       await user.type(screen.getByRole("textbox", { name: "Address Line 1" }), "add");
       await user.type(screen.getByRole("textbox", { name: "Address Line 2" }), "add2");
       await user.type(screen.getByRole("textbox", { name: "City" }), "city");
-      await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "zippy");
+      await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "98765");
 
       // Go to Billing Step
       await user.click(
@@ -146,7 +146,7 @@ describe("EmergencyTripPermit", () => {
       expect(screen.getByDisplayValue("add")).toBeInTheDocument();
       expect(screen.getByDisplayValue("add2")).toBeInTheDocument();
       expect(screen.getByDisplayValue("city")).toBeInTheDocument();
-      expect(screen.getByDisplayValue("zippy")).toBeInTheDocument();
+      expect(screen.getByDisplayValue("98765")).toBeInTheDocument();
 
       await user.type(screen.getByRole("textbox", { name: "First Name" }), "newFirstName");
       await user.click(

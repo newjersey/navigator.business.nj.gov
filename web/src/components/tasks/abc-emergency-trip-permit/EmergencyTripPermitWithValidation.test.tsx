@@ -131,10 +131,13 @@ describe("EmergencyPermitWithValidation", () => {
       await user.type(screen.getByRole("textbox", { name: "Address Line 1" }), "add");
       await user.type(screen.getByRole("textbox", { name: "Address Line 2" }), "add2");
       await user.type(screen.getByRole("textbox", { name: "City" }), "city");
-      await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "zippy");
+      await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "12345");
       await user.type(screen.getByRole("textbox", { name: "Vehicle Make" }), "make");
       await user.type(screen.getByRole("textbox", { name: "Vehicle Year" }), "1900");
-      await user.type(screen.getByRole("textbox", { name: "VIN/Serial Number" }), "12345");
+      await user.type(
+        screen.getByRole("textbox", { name: "VIN/Serial Number" }),
+        "12345678901234567",
+      );
       await user.type(screen.getByRole("textbox", { name: "License Plate Number" }), "abc123");
       await user.click(
         screen.getByRole("tab", {
