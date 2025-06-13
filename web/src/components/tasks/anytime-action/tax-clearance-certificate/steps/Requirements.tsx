@@ -7,6 +7,8 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
 
@@ -17,9 +19,11 @@ interface Props {
 export const Requirements = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { updateQueue } = useUserData();
 
   const onContinueClick = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.taxClearanceCertificate }).update();
       setShowNeedsAccountModal(true);
     } else {
       analytics.event.tax_clearance.click.switch_to_step_two();
