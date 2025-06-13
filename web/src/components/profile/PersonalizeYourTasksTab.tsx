@@ -1,21 +1,34 @@
 import { Content } from "@/components/Content";
+import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { hasNonEssentialQuestions } from "@/lib/utils/non-essential-questions-helpers";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 export const PersonalizeYourTasksTab = (): ReactElement => {
   const { Config } = useConfig();
+
+  const { state } = useContext(ProfileDataContext);
+
   const AccordionHeader = (props: {
     icon: string;
     headerText: string;
     description: string;
+    hideExpandIcon?: boolean;
   }): ReactElement => {
     return (
       <AccordionSummary
-        expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"} iconName="expand_more" />}
+        expandIcon={
+          props.hideExpandIcon ? null : (
+            <div data-testid="ExpandMoreIcon">
+              <Icon className={"usa-icon--size-5 margin-left-1"} iconName="expand_more" />
+            </div>
+          )
+        }
       >
         <div className={"display-flex flex-column"}>
           <span className={"display-flex flew-row"}>
@@ -32,6 +45,7 @@ export const PersonalizeYourTasksTab = (): ReactElement => {
       </AccordionSummary>
     );
   };
+
   return (
     <div id="tabpanel-personalize" role="tabpanel" aria-labelledby="tab-personalize">
       <ProfileTabHeader tab="personalize" />
@@ -63,14 +77,15 @@ export const PersonalizeYourTasksTab = (): ReactElement => {
         <AccordionDetails sx={{ marginLeft: 6 }}>LOCATION BASED DETAILS</AccordionDetails>
       </Accordion>
       <hr className="margin-y-4" />
-      <Accordion>
+      <Accordion data-testid="nonEssentialQuestionsAccordianSection">
         <AccordionHeader
           icon={"search"}
           headerText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
           description={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
+          hideExpandIcon={!hasNonEssentialQuestions(state.profileData)}
         />
         <AccordionDetails sx={{ marginLeft: 6 }}>
-          DISCOVERY INDUSTRY LICENSE DETAILS
+          <NonEssentialQuestionsSection />
         </AccordionDetails>
       </Accordion>
       <hr className="margin-y-4" />

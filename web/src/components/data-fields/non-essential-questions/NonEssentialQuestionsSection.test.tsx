@@ -55,7 +55,10 @@ describe("ProfileNonEssentialQuestionsSection", () => {
   };
 
   it("doesn't display section if industry doesn't have any non essential questions", () => {
-    renderComponent({ industryId: "test-industry-with-no-non-essential-questions" });
+    renderComponent({
+      industryId: "test-industry-with-no-non-essential-questions",
+      businessPersona: "FOREIGN",
+    });
     expect(screen.queryByTestId("non-essential-questions-wrapper")).not.toBeInTheDocument();
   });
 
@@ -71,5 +74,20 @@ describe("ProfileNonEssentialQuestionsSection", () => {
     expect(screen.getByTestId("non-essential-questions-wrapper")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 1?")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 2?")).toBeInTheDocument();
+  });
+
+  it("displays different values specifically for Owning businesses", () => {
+    mockGetNonEssentialQuestionText
+      .mockReturnValueOnce("Non Essential Question 1?")
+      .mockReturnValueOnce("Non Essential Question 2?");
+
+    renderComponent({
+      industryId: "test-industry-with-non-essential-questions",
+      businessPersona: "OWNING",
+      sectorId: "arts-entertainment-and-recreation",
+    });
+
+    expect(screen.queryByText("Non Essential Question 1?")).not.toBeInTheDocument();
+    expect(screen.getByTestId("carnivalRideOwningBusiness-radio-group")).toBeInTheDocument();
   });
 });
