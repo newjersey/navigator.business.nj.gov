@@ -109,7 +109,7 @@ describe("SigninHelper", () => {
       expect(mockSetRegistrationStatus).toHaveBeenCalledWith("IN_PROGRESS");
     });
 
-    it("does not use a returnToLink if path is account-setup", async () => {
+    it("posts userData to api self-reg with current pathname included when returnToLink is empty", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({ returnToLink: "" }),
       });
@@ -137,7 +137,7 @@ describe("SigninHelper", () => {
       });
     });
 
-    it("posts userData to api self-reg with current pathname included when returnToLink is empty", async () => {
+    it("does not use a returnToLink if path is account-setup", async () => {
       fakeRouter = { replace: mockPush, asPath: ROUTES.accountSetup };
       const business = generateBusiness({
         preferences: generatePreferences({ returnToLink: "" }),

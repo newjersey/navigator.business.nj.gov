@@ -52,9 +52,9 @@ export const onSelfRegister = ({
   }
   setRegistrationStatus("IN_PROGRESS");
 
-  const route = router.asPath?.includes(ROUTES.accountSetup)
-    ? ""
-    : getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
+  const { returnToLink } = getCurrentBusiness(userData).preferences;
+  const fallback = router.asPath?.includes(ROUTES.accountSetup) ? "" : router.asPath || "";
+  const route = returnToLink || fallback;
 
   api
     .postSelfReg({
