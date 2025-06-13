@@ -1,20 +1,19 @@
 ---
 notesMd: >-
-  
-
-  6.13.25: WIP still. Edits made after crit but need to add exempted activities section
+  6.13.25: WIP still. Edits made after crit but need to add exempted activities
+  section. Note: address will go inside quick ref callout once available 
 
 
   6.10.25: Still a work in progress, making edits based on SME meeting
 
 
   6.3.25: This is a work in progress; drafted here in the early stage to see how the callouts and overall layout appear
-summaryDescriptionMd: You must submit a Notification of Asbestos Abatement at
-  least **10 days before starting any asbestos removal** in New Jersey. This
-  lets State agencies know when and where the asbestos work will take place.
-  This form is required every time you do any work with asbestos. If your plans
-  change (such as timeframe, description, or scope of work), you must send an
-  updated form.
+summaryDescriptionMd: If you are removing more than 3 square or linear feet of
+  material that contains more than 1% asbestos, you must submit a Notification
+  of Asbestos Abatement. This form must be sent at least **10 days before the
+  work begins**. It tells the State when and where the asbestos work will take
+  place. If your plans change (such as start or end date, description, or scope
+  of work), you must send an updated form.
 urlSlug: asbestos-notification
 displayname: asbestos-notification
 name: Report Your Asbestos Work
