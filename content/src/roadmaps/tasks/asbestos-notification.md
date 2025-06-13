@@ -1,5 +1,10 @@
 ---
 notesMd: >-
+  
+
+  6.13.25: WIP still. Edits made after crit but need to add exempted activities section
+
+
   6.10.25: Still a work in progress, making edits based on SME meeting
 
 
