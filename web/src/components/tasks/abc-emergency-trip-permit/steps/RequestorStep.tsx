@@ -33,7 +33,7 @@ export const RequestorStep = (): ReactElement => {
           </span>
         </div>
         <EmergencyTripPermitTextFieldEntry fieldName={"requestorEmail"} required />
-        <EmergencyTripPermitTextFieldEntry fieldName={"requestorPhone"} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"requestorPhone"} required numeric />
         <EmergencyTripPermitCountryDropdown fieldName={"requestorCountry"} />
         <EmergencyTripPermitTextFieldEntry fieldName={"requestorAddress1"} required />
         <EmergencyTripPermitTextFieldEntry
@@ -50,7 +50,11 @@ export const RequestorStep = (): ReactElement => {
             fieldName={"requestorStateProvince"}
           />
           <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"requestorZipPostalCode"} required />
+            <EmergencyTripPermitTextFieldEntry
+              fieldName={"requestorZipPostalCode"}
+              numeric
+              required
+            />
           </span>
         </div>
         <Heading level={3} className={"padding-top-5 padding-bottom-3"}>

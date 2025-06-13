@@ -30,6 +30,7 @@ export const getErrorStateForEmergencyTripPermitField = (
     "requestorConfirmemail",
   ];
   const maxLength = getMaximumLengthForFieldName(fieldName);
+  const minLength = getMinimumLengthForFieldName(fieldName);
 
   if (value === "" && !nonRequiredFields.includes(fieldName)) {
     return {
@@ -44,6 +45,14 @@ export const getErrorStateForEmergencyTripPermitField = (
       field: fieldName,
       hasError: true,
       label: `$\{fieldName} must be ${maxLength} characters or fewer.`,
+    };
+  }
+
+  if (minLength && value && value !== true && value?.length < minLength) {
+    return {
+      field: fieldName,
+      hasError: true,
+      label: `$\{fieldName} must be ${minLength} characters or more.`,
     };
   }
 
@@ -84,6 +93,14 @@ export const getErrorStateForEmergencyTripPermitField = (
     };
   }
 
+  if (fieldName === "vehicleVinSerial" && value && value !== true && value.length !== 17) {
+    return {
+      field: fieldName,
+      hasError: true,
+      label: "${fieldName} must be 17 characters.",
+    };
+  }
+
   if (emailFields.includes(fieldName) && value && value !== true && !validateEmail(value)) {
     return {
       field: fieldName,
@@ -118,8 +135,6 @@ export const getMaximumLengthForFieldName = (
     case "requestorPhone":
     case "textMsgMobile":
       return 15;
-    case "vehicleVinSerial":
-      return 17;
     case "payerCity":
       return 32;
     case "requestorFirstName":
@@ -149,5 +164,16 @@ export const getMaximumLengthForFieldName = (
     case "deliverySiteName":
     case "pickupSiteName":
       return 100;
+  }
+};
+
+export const getMinimumLengthForFieldName = (
+  fieldName: EmergencyTripPermitFieldNames,
+): number | undefined => {
+  switch (fieldName) {
+    case "requestorPhone":
+      return 10;
+    case "requestorZipPostalCode":
+      return 5;
   }
 };
