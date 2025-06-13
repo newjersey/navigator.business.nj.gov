@@ -55,6 +55,7 @@ import {
 } from "@/test/pages/profile/profile-helpers";
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
@@ -824,6 +825,142 @@ describe("profile - shared", () => {
           name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
         }),
       ).toBeInTheDocument();
+    });
+
+    describe("location section", () => {
+      it("displays all location questions if the business should see them", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            homeBasedBusiness: false,
+            businessPersona: "STARTING",
+            industryId: randomHomeBasedIndustry(),
+          }),
+        });
+
+        renderPage({ business });
+        expect(
+          screen.getByRole("tab", {
+            name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
+          }),
+        ).toBeInTheDocument();
+
+        await userEvent.click(
+          screen.getByRole("tab", {
+            name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
+          }),
+        );
+
+        expect(
+          screen.getByRole("heading", {
+            name: Config.profileDefaults.default.locationBasedRequirementsHeader,
+          }),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Home based business",
+          }),
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Planned renovation question",
+          }),
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Elevator owning business",
+          }),
+        ).not.toBeInTheDocument();
+
+        await userEvent.click(
+          screen.getByRole("heading", {
+            name: Config.profileDefaults.default.locationBasedRequirementsHeader,
+          }),
+        );
+
+        expect(
+          screen.getByRole("radiogroup", {
+            name: "Home based business",
+          }),
+        ).toBeInTheDocument();
+        expect(
+          screen.getByRole("radiogroup", {
+            name: "Planned renovation question",
+          }),
+        ).toBeInTheDocument();
+        expect(
+          screen.getByRole("radiogroup", {
+            name: "Elevator owning business",
+          }),
+        ).toBeInTheDocument();
+      });
+
+      it("only display home based question if business is home based", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            homeBasedBusiness: true,
+            businessPersona: "STARTING",
+            industryId: randomHomeBasedIndustry(),
+          }),
+        });
+
+        renderPage({ business });
+        expect(
+          screen.getByRole("tab", {
+            name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
+          }),
+        ).toBeInTheDocument();
+
+        await userEvent.click(
+          screen.getByRole("tab", {
+            name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
+          }),
+        );
+
+        expect(
+          screen.getByRole("heading", {
+            name: Config.profileDefaults.default.locationBasedRequirementsHeader,
+          }),
+        ).toBeInTheDocument();
+
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Home based business",
+          }),
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Planned renovation question",
+          }),
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Elevator owning business",
+          }),
+        ).not.toBeInTheDocument();
+
+        await userEvent.click(
+          screen.getByRole("heading", {
+            name: Config.profileDefaults.default.locationBasedRequirementsHeader,
+          }),
+        );
+
+        expect(
+          screen.getByRole("radiogroup", {
+            name: "Home based business",
+          }),
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Planned renovation question",
+          }),
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByRole("radiogroup", {
+            name: "Elevator owning business",
+          }),
+        ).not.toBeInTheDocument();
+      });
     });
   });
 });

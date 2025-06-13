@@ -36,6 +36,11 @@ import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { ProfileAddress } from "@/components/profile/ProfileAddress";
+import {
+  displayElevatorQuestion,
+  displayHomedBaseBusinessQuestion,
+  displayPlannedRenovationQuestion,
+} from "@/components/profile/profileDisplayLogicHelpers";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
@@ -64,7 +69,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
@@ -87,10 +91,7 @@ import {
   naicsCodeTaskId,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
-import {
-  isNexusBusiness,
-  isStartingBusiness,
-} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
@@ -323,29 +324,6 @@ const ProfilePage = (props: Props): ReactElement => {
     business?.profileData.operatingPhase,
   ).displayAltHomeBasedBusinessDescription;
 
-  const displayHomedBaseBusinessQuestion = (): boolean => {
-    if (!business) return false;
-    if (!profileData.industryId) {
-      return true;
-    }
-    if (nexusLocationInNewJersey(profileData)) {
-      return false;
-    }
-    return isHomeBasedBusinessApplicable(profileData.industryId);
-  };
-
-  const displayPlannedRenovationQuestionQuestion = (): boolean => {
-    return (
-      profileData.homeBasedBusiness === false &&
-      (isNexusBusiness(business) || profileData.businessPersona === "STARTING")
-    );
-  };
-
-  const displayElevatorQuestion = (): boolean => {
-    if (!business) return false;
-    return profileData.homeBasedBusiness === false && profileData.businessPersona === "STARTING";
-  };
-
   const displayCarnivalRidesQuestion = (): boolean => {
     if (!business) return false;
     return (
@@ -445,7 +423,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <>
             <ProfileField
               fieldName="homeBasedBusiness"
-              isVisible={displayHomedBaseBusinessQuestion()}
+              isVisible={displayHomedBaseBusinessQuestion(profileData, business)}
               displayAltDescription={displayAltHomeBasedBusinessDescription}
               hideLine
               fullWidth
@@ -458,7 +436,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
             <ProfileField
               fieldName="plannedRenovationQuestion"
-              isVisible={displayPlannedRenovationQuestionQuestion()}
+              isVisible={displayPlannedRenovationQuestion(profileData, business)}
               hideLine
               fullWidth
               hideHeader
@@ -694,7 +672,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <>
             <ProfileField
               fieldName="homeBasedBusiness"
-              isVisible={displayHomedBaseBusinessQuestion()}
+              isVisible={displayHomedBaseBusinessQuestion(profileData, business)}
               displayAltDescription={displayAltHomeBasedBusinessDescription}
               hideLine
               fullWidth
@@ -708,7 +686,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
             <ProfileField
               fieldName="plannedRenovationQuestion"
-              isVisible={displayPlannedRenovationQuestionQuestion()}
+              isVisible={displayPlannedRenovationQuestion(profileData, business)}
               hideLine
               fullWidth
               hideHeader
@@ -721,7 +699,7 @@ const ProfilePage = (props: Props): ReactElement => {
             <ProfileField
               fieldName="elevatorOwningBusiness"
               displayAltDescription={displayAltHomeBasedBusinessDescription}
-              isVisible={displayElevatorQuestion()}
+              isVisible={displayElevatorQuestion(profileData, business)}
               hideLine
               fullWidth
               hideHeader
@@ -893,7 +871,7 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileField
             fieldName="homeBasedBusiness"
-            isVisible={displayHomedBaseBusinessQuestion()}
+            isVisible={displayHomedBaseBusinessQuestion(profileData, business)}
             displayAltDescription={displayAltHomeBasedBusinessDescription}
             hideLine
             fullWidth
