@@ -4426,7 +4426,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.13
     dedent: 1.6.0
-    dependency-cruiser: 16.10.1
+    dependency-cruiser: 16.10.2
     eslint: 8.57.1
     eslint-config-prettier: 9.1.0
     eslint-plugin-jest: 27.9.0
@@ -4584,7 +4584,7 @@ __metadata:
     dayjs: 1.11.13
     decap-cms-app: 3.0.12
     dedent: 1.6.0
-    dependency-cruiser: 16.10.1
+    dependency-cruiser: 16.10.2
     dotenv: 16.5.0
     dynamodb-admin: 5.1.3
     eslint: 8.57.1
@@ -4782,7 +4782,7 @@ __metadata:
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
     decap-cms-app: 3.0.12
-    dependency-cruiser: 16.10.1
+    dependency-cruiser: 16.10.2
     dotenv: 16.5.0
     eslint: 8.57.1
     eslint-config-next: 15.3.3
@@ -13750,12 +13750,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-loose@npm:^8.4.0":
-  version: 8.4.0
-  resolution: "acorn-loose@npm:8.4.0"
+"acorn-loose@npm:^8.5.0":
+  version: 8.5.0
+  resolution: "acorn-loose@npm:8.5.0"
   dependencies:
-    acorn: ^8.11.0
-  checksum: e079d89c7502563f8e6aed39ae8facd1174198e8092b732d9913b6ad027ee3c2d29ab3612c1be739cefcf2508884ecff386e9390d3c264a1f8318c1eba1336b5
+    acorn: ^8.14.0
+  checksum: 1d7141f199c9e93a176131f8eb0674d2ccd4c0c740bb6e5389ab6bd2335d3ebcb24374ce1a03661416bff81b5478e9efc574fc094a5125caa50c657769c7d2b4
   languageName: node
   linkType: hard
 
@@ -18345,19 +18345,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.10.1":
-  version: 16.10.1
-  resolution: "dependency-cruiser@npm:16.10.1"
+"dependency-cruiser@npm:16.10.2":
+  version: 16.10.2
+  resolution: "dependency-cruiser@npm:16.10.2"
   dependencies:
     acorn: ^8.14.1
     acorn-jsx: ^5.3.2
     acorn-jsx-walk: ^2.0.0
-    acorn-loose: ^8.4.0
+    acorn-loose: ^8.5.0
     acorn-walk: ^8.3.4
     ajv: ^8.17.1
     commander: ^13.1.0
     enhanced-resolve: ^5.18.1
-    ignore: ^7.0.3
+    ignore: ^7.0.4
     interpret: ^3.1.1
     is-installed-globally: ^1.0.0
     json5: ^2.2.3
@@ -18378,7 +18378,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: b47504f4eae8d4b727d901cb937e81ad1c5a4e5a2a53b61cbc8c81496fbefc4a1d8019c9a87659a62a7652e9591e2f1db08bc2e9bd0ef59a91940ba8e35b1d6c
+  checksum: a719d153d7e9813cb9266797a86cdc873fcd79bf415af98f56aeccdcdd0b164f7c1d0df9f569f314f27353acc4394e4358eca7b664813cb44082f283f8ff9c6d
   languageName: node
   linkType: hard
 
@@ -22623,10 +22623,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "ignore@npm:7.0.3"
-  checksum: a0826b70b217d560e3703e3d64483283dc85f4c4ebca1f5bffeeecec9a7453dd542f33a02daeefa8d6f3c5f7ef387ec014ce2733014333357dd620002fa1fd4a
+"ignore@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "ignore@npm:7.0.4"
+  checksum: 09b4d69192355ac066f7d99c0fdb26f52035d2eaae423bfb5f7389091d75a93bf9c105e1fbf51f557098f6d446726f29a63cef3a7d26722dc696dd345224719b
   languageName: node
   linkType: hard
 
