@@ -25,6 +25,17 @@ agencyAdditionalContext: NJ Department of Labor and Workforce Development,
   Asbestos Control and Licensing Section and NJ Department of Health and Senior
   Services, Consumer and Environmental Health Services
 ---
+## Asbestos Work That Does Not Require Notification
+
+You don’t need an asbestos license or to submit a notification if **any** of the following are true:
+
+* You’re removing 3 linear feet or less of asbestos-containing material from pipes, or 3 square feet or less from ducts, boilers, tanks, or similar equipment
+* The material contains 1% or less asbestos
+* The work is limited repair, such as sealing with duct tape, cement, or other materials
+* You’re working on roofing or exterior siding that contains asbestos (unless it’s for demolition)
+* You’re only selling or storing asbestos, not disturbing it
+* Your company is using your own trained employees to handle asbestos at your own facility (and those employees are covered by federal OSHA rules)
+
 ## Application Requirements
 
 **You must have a New Jersey \[asbestos license, and employees with asbestos permits. \*[add links]\***
