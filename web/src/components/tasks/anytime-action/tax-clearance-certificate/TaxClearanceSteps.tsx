@@ -9,6 +9,8 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
@@ -26,7 +28,7 @@ interface Props {
 export const TaxClearanceSteps = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state: taxClearanceCertificateData } = useContext(TaxClearanceCertificateDataContext);
-
+  const { updateQueue } = useUserData();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
 
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
@@ -46,6 +48,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
 
   const onStepClick = (step: number): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.taxClearanceCertificate }).update();
       setShowNeedsAccountModal(true);
     } else {
       if (step === 2) {
