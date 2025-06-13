@@ -38,7 +38,7 @@ You don’t need an asbestos license or to submit a notification if **any** of t
 
 ## Application Requirements
 
-**You must have a New Jersey \[asbestos license, and employees with asbestos permits. \*[add links]\***
+**You must have a New Jersey \[asbestos license, and employees with asbestos permits. [add links!]**
 
 ### Project Contact and Compliance Information
 
@@ -79,7 +79,7 @@ You don’t need an asbestos license or to submit a notification if **any** of t
 
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-2159" emailIconText="asbestos@dol.nj.gov" }
 
-Email the notification and a photo of your payment. Mail your check or money order.
+Email the notification and a photo of your payment.
 
 :::
 
