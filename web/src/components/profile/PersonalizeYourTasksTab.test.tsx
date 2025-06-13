@@ -1,6 +1,9 @@
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { getMergedConfig } from "@/contexts/configContext";
-import { render, screen } from "@testing-library/react";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/components/profile/ProfileTabHeader", () => ({
@@ -25,26 +28,35 @@ jest.mock("@/components/Content", () => ({
 
 const Config = getMergedConfig();
 
+const renderPersonalizeYourTasksTab = ({ profileData }: { profileData?: ProfileData }): void => {
+  const initialProfileData = profileData ?? generateProfileData({});
+  render(
+    <WithStatefulProfileData initialData={initialProfileData}>
+      <PersonalizeYourTasksTab />
+    </WithStatefulProfileData>,
+  );
+};
+
 describe("PersonalizeYourTasksTab", () => {
   it("renders the tab panel with correct attributes", () => {
-    render(<PersonalizeYourTasksTab />);
+    renderPersonalizeYourTasksTab({});
     const tabPanel = screen.getByRole("tabpanel");
     expect(tabPanel).toHaveAttribute("id", "tabpanel-personalize");
   });
 
   it("renders the ProfileTabHeader", () => {
-    render(<PersonalizeYourTasksTab />);
+    renderPersonalizeYourTasksTab({});
     expect(screen.getByTestId("profile-tab-header")).toBeInTheDocument();
   });
 
   it("renders 4 accordions", () => {
-    render(<PersonalizeYourTasksTab />);
+    renderPersonalizeYourTasksTab({});
     const accordions = screen.getAllByRole("button", { expanded: false });
     expect(accordions).toHaveLength(4);
   });
 
   it("renders all accordion headers with correct text", () => {
-    render(<PersonalizeYourTasksTab />);
+    renderPersonalizeYourTasksTab({});
     expect(
       screen.getByText(Config.profileDefaults.default.annualReportDeadlineHeader),
     ).toBeInTheDocument();
@@ -60,7 +72,7 @@ describe("PersonalizeYourTasksTab", () => {
   });
 
   it("renders accordion descriptions", () => {
-    render(<PersonalizeYourTasksTab />);
+    renderPersonalizeYourTasksTab({});
     expect(
       screen.getByText(Config.profileDefaults.default.annualReportDeadlineSubText),
     ).toBeInTheDocument();
@@ -73,5 +85,57 @@ describe("PersonalizeYourTasksTab", () => {
     expect(
       screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText),
     ).toBeInTheDocument();
+  });
+
+  describe("nonEssential Questions Accordian", () => {
+    it("renders nonEssentialQuestion content", () => {
+      const profileData = generateProfileData({
+        businessPersona: "STARTING",
+        industryId: "photography",
+      });
+
+      renderPersonalizeYourTasksTab({ profileData });
+
+      screen.debug(screen.getByTestId("nonEssentialQuestionsAccordianSection"));
+      fireEvent.click(
+        within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).getByTestId(
+          "ExpandMoreIcon",
+        ),
+      );
+
+      expect(screen.queryAllByTestId("non-essential-questions-wrapper").length).toBeGreaterThan(0);
+    });
+
+    it("does not display a chevron for the nonEssentialQuestions section if the user has no tasks", () => {
+      const profileData = generateProfileData({
+        businessPersona: "OWNING",
+        sectorId: "unknown",
+      });
+
+      renderPersonalizeYourTasksTab({ profileData });
+
+      expect(
+        within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).queryByTestId(
+          "ExpandMoreIcon",
+        ),
+      ).not.toBeInTheDocument();
+    });
+
+    it("does display a chevron for the nonEssentialQuestions section if the user has tasks", () => {
+      const profileData = generateProfileData({
+        businessPersona: "STARTING",
+        industryId: "photography",
+      });
+
+      renderPersonalizeYourTasksTab({ profileData });
+
+      screen.debug(screen.getByTestId("nonEssentialQuestionsAccordianSection"));
+
+      expect(
+        within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).getByTestId(
+          "ExpandMoreIcon",
+        ),
+      ).toBeInTheDocument();
+    });
   });
 });

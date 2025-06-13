@@ -16,7 +16,6 @@ import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
-import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGamesQuestion";
 import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
@@ -344,23 +343,6 @@ const ProfilePage = (props: Props): ReactElement => {
   const displayElevatorQuestion = (): boolean => {
     if (!business) return false;
     return profileData.homeBasedBusiness === false && profileData.businessPersona === "STARTING";
-  };
-
-  const displayCarnivalRidesQuestion = (): boolean => {
-    if (!business) return false;
-    return (
-      profileData.sectorId === "arts-entertainment-and-recreation" &&
-      profileData.businessPersona === "OWNING"
-    );
-  };
-
-  const displayVacantBuildingOwnerQuestion = (): boolean => {
-    if (!business) return false;
-    return (
-      (profileData.industryId === "real-estate-investor" ||
-        profileData.sectorId === "real-estate") &&
-      (profileData.operatingPhase === "UP_AND_RUNNING" || profileData.businessPersona === "OWNING")
-    );
   };
 
   const displayRaffleBingoGameQuestion = (): boolean => {
@@ -740,19 +722,6 @@ const ProfilePage = (props: Props): ReactElement => {
           {
             <>
               <NonEssentialQuestionsSection />
-
-              <ProfileField
-                fieldName="vacantPropertyOwner"
-                isVisible
-                hideHeader
-                hideLine
-                fullWidth
-                boldAltDescription
-                boldDescription
-                optionalText
-              >
-                <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
-              </ProfileField>
             </>
           }
         </ProfileSubSection>
@@ -909,54 +878,7 @@ const ProfilePage = (props: Props): ReactElement => {
           heading={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
           subText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
         >
-          {
-            <>
-              <ProfileField
-                fieldName="carnivalRideOwningBusiness"
-                isVisible={displayCarnivalRidesQuestion()}
-                hideHeader
-                hideLine
-                fullWidth
-                boldAltDescription
-                boldDescription
-                optionalText
-              >
-                <RadioQuestion<boolean>
-                  fieldName={"carnivalRideOwningBusiness"}
-                  choices={[true, false]}
-                />
-              </ProfileField>
-
-              <ProfileField
-                fieldName="travelingCircusOrCarnivalOwningBusiness"
-                isVisible={displayCarnivalRidesQuestion()}
-                hideHeader
-                hideLine
-                fullWidth
-                boldAltDescription
-                boldDescription
-                optionalText
-              >
-                <RadioQuestion<boolean>
-                  fieldName={"travelingCircusOrCarnivalOwningBusiness"}
-                  choices={[true, false]}
-                />
-              </ProfileField>
-
-              <ProfileField
-                fieldName="vacantPropertyOwner"
-                isVisible={displayVacantBuildingOwnerQuestion()}
-                hideHeader
-                hideLine
-                fullWidth
-                boldAltDescription
-                boldDescription
-                optionalText
-              >
-                <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
-              </ProfileField>
-            </>
-          }
+          <NonEssentialQuestionsSection />
         </ProfileSubSection>
       </div>
     ),
