@@ -7,7 +7,12 @@ const Config = getMergedConfig();
 
 describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   it("displays single field text in header if there is only one error", () => {
-    render(<AnytimeActionTaxClearanceCertificateAlert fieldErrors={["entityId"]} />);
+    render(
+      <AnytimeActionTaxClearanceCertificateAlert
+        fieldErrors={["entityId"]}
+        setStepIndex={() => {}}
+      />,
+    );
     const profileAlert = screen.getByTestId("tax-clearance-error-alert");
     expect(
       within(profileAlert).getByText(Config.taxClearanceCertificateShared.singularErrorText),
@@ -18,6 +23,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
     render(
       <AnytimeActionTaxClearanceCertificateAlert
         fieldErrors={["requestingAgencyId", "entityId"]}
+        setStepIndex={() => {}}
       />,
     );
     const profileAlert = screen.getByTestId("tax-clearance-error-alert");
@@ -27,7 +33,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   });
 
   it("displays nothing if there are no errors", () => {
-    render(<AnytimeActionTaxClearanceCertificateAlert fieldErrors={[]} />);
+    render(<AnytimeActionTaxClearanceCertificateAlert fieldErrors={[]} setStepIndex={() => {}} />);
     expect(screen.queryByTestId("tax-clearance-error-alert")).not.toBeInTheDocument();
   });
 
@@ -66,6 +72,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
         <AnytimeActionTaxClearanceCertificateAlert
           fieldErrors={[]}
           responseErrorType={errorType}
+          setStepIndex={() => {}}
         />,
       );
 

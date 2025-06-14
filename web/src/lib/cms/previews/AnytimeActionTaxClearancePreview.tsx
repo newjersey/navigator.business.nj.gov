@@ -49,6 +49,7 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
             <AnytimeActionTaxClearanceCertificateAlert
               fieldErrors={[]}
               responseErrorType={"INELIGIBLE_TAX_CLEARANCE_FORM"}
+              setStepIndex={() => {}}
             />
             <Heading level={2}>Anytime Action Step 3</Heading>
             <AnytimeActionTaxClearanceCertificate
@@ -60,9 +61,15 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
         {tab === "shared" && (
           <>
             <Heading level={2}>Singular Field Error</Heading>
-            <AnytimeActionTaxClearanceCertificateAlert fieldErrors={[taxClearanceFields[0]]} />
+            <AnytimeActionTaxClearanceCertificateAlert
+              fieldErrors={[taxClearanceFields[0]]}
+              setStepIndex={() => {}}
+            />
             <Heading level={2}>Multiple Field Errors</Heading>
-            <AnytimeActionTaxClearanceCertificateAlert fieldErrors={taxClearanceFields} />
+            <AnytimeActionTaxClearanceCertificateAlert
+              fieldErrors={taxClearanceFields}
+              setStepIndex={() => {}}
+            />
             <Heading level={2}>Anytime Action Task Screen</Heading>
             <AnytimeActionTaxClearanceCertificate
               anytimeAction={taxClearanceAnytimeAction}
