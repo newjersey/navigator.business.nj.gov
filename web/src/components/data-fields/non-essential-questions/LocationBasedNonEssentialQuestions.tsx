@@ -1,5 +1,6 @@
 import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import {
+  displayAltHomeBasedBusinessDescription,
   displayElevatorQuestion,
   displayHomedBaseBusinessQuestion,
   displayPlannedRenovationQuestion,
@@ -12,10 +13,15 @@ export const LocationBasedNonEssentialQuestions = (): ReactElement => {
   const { business } = useUserData();
   const { state: profileDataState } = useContext(ProfileDataContext);
   const profileData = profileDataState.profileData;
+  const displayAltDescriptionForHomeBasedBusinessQuestion =
+    displayAltHomeBasedBusinessDescription(profileData);
   return (
     <>
       {displayHomedBaseBusinessQuestion(profileData, business) && (
-        <NonEssentialQuestionForPersonas questionId={"homeBasedBusiness"} />
+        <NonEssentialQuestionForPersonas
+          questionId={"homeBasedBusiness"}
+          displayAltDescription={displayAltDescriptionForHomeBasedBusinessQuestion}
+        />
       )}
 
       {displayPlannedRenovationQuestion(profileData, business) && (
