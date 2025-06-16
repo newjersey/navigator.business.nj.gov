@@ -37,10 +37,9 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import { Hub, type HubCapsule } from "aws-amplify/utils";
-
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
-import { UpdateQueue } from "@/lib/UpdateQueue";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";

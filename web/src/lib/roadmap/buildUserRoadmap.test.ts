@@ -8,6 +8,7 @@ import {
   generateMunicipality,
   generateMunicipalityDetail,
   generateProfileData,
+  generateRoadmapTaskData,
   getIndustries,
   LegalStructures,
   randomElementFromArray,
@@ -87,7 +88,7 @@ describe("buildUserRoadmap", () => {
         foreignBusinessTypeIds: ["employeesInNJ"],
       };
 
-      await buildUserRoadmap(profileData);
+      await buildUserRoadmap(profileData, {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual(["foreign-remote-worker"]);
     });
 
@@ -98,14 +99,14 @@ describe("buildUserRoadmap", () => {
         foreignBusinessTypeIds: ["revenueInNJ"],
       };
 
-      await buildUserRoadmap(profileData);
+      await buildUserRoadmap(profileData, {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual(["foreign-remote-seller"]);
     });
 
     it("adds roadmap for NEXUS type alongside industry tasks", async () => {
       const profileData = createEmptyNexusProfile({ industryId: "cannabis" });
 
-      await buildUserRoadmap(profileData);
+      await buildUserRoadmap(profileData, {});
       const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
       expect(lastCalledWith.addOns).toContain("foreign-nexus");
       expect(lastCalledWith.industryId).toEqual("cannabis");
@@ -114,7 +115,10 @@ describe("buildUserRoadmap", () => {
     it("adds public-record-filing-foreign add-ons for nexus public filing legal structures", async () => {
       const baseProfileData = createEmptyNexusProfile({ industryId: "cannabis" });
 
-      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "limited-liability-company" });
+      await buildUserRoadmap(
+        { ...baseProfileData, legalStructureId: "limited-liability-company" },
+        {},
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "public-record-filing-foreign",
       );
@@ -124,7 +128,7 @@ describe("buildUserRoadmap", () => {
     it("adds trade-name add-ons for nexus trade name legal structures", async () => {
       const baseProfileData = createEmptyNexusProfile({ industryId: "cannabis" });
 
-      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "general-partnership" });
+      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "general-partnership" }, {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
     });
 
@@ -136,7 +140,7 @@ describe("buildUserRoadmap", () => {
       );
 
       const profileData = createEmptyNexusProfile({ industryId: "cannabis" });
-      const roadmap = await buildUserRoadmap(profileData);
+      const roadmap = await buildUserRoadmap(profileData, {});
       expect(roadmap.tasks).toHaveLength(0);
     });
 
@@ -148,22 +152,22 @@ describe("buildUserRoadmap", () => {
       );
 
       const profileData = createEmptyNexusProfile({ industryId: "cannabis" });
-      const roadmap = await buildUserRoadmap(profileData);
+      const roadmap = await buildUserRoadmap(profileData, {});
       expect(roadmap.tasks).toHaveLength(0);
     });
 
     it("adds nonprofit-and-corp-foreign for S-Corp/C-Corp/foreign nonprofit legal structures", async () => {
-      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "s-corporation" }));
+      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "s-corporation" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "nonprofit-and-corp-foreign",
       );
 
-      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "c-corporation" }));
+      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "c-corporation" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "nonprofit-and-corp-foreign",
       );
 
-      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "nonprofit" }));
+      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "nonprofit" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "nonprofit-and-corp-foreign",
       );
@@ -171,7 +175,7 @@ describe("buildUserRoadmap", () => {
 
     it("adds oos-pharmacy add-on for out of state pharmacy", async () => {
       const profileData = createEmptyNexusProfile({ industryId: "pharmacy" });
-      await buildUserRoadmap(profileData);
+      await buildUserRoadmap(profileData, {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("oos-pharmacy");
     });
   });
@@ -181,6 +185,7 @@ describe("buildUserRoadmap", () => {
       it("adds permanent-location-business add-on if home-based business is false", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: false }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "permanent-location-business",
@@ -190,6 +195,7 @@ describe("buildUserRoadmap", () => {
       it("does not add permanent-location-business add-on if home-based business is true", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: true }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "permanent-location-business",
@@ -199,6 +205,7 @@ describe("buildUserRoadmap", () => {
       it("does not add permanent-location-business add-on if home-based business is undefined", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: undefined }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "permanent-location-business",
@@ -206,7 +213,7 @@ describe("buildUserRoadmap", () => {
       });
 
       it("does not add permanent-location-business add-on if industry does not allow permanent location", async () => {
-        await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }));
+        await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "permanent-location-business",
         );
@@ -215,6 +222,7 @@ describe("buildUserRoadmap", () => {
       it("does not add env-permitting add-on when industry is generic and if home-based business is true", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: true }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("env-permitting");
       });
@@ -222,6 +230,7 @@ describe("buildUserRoadmap", () => {
       it("adds env-permitting add-on when industry is generic and if home-based business is false", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: false }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
       });
@@ -229,6 +238,7 @@ describe("buildUserRoadmap", () => {
       it("adds env-permitting add-on when industry is generic and if home-based business is undefined", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: undefined }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
       });
@@ -241,7 +251,7 @@ describe("buildUserRoadmap", () => {
           homeBasedBusiness: false,
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
         });
-        await buildUserRoadmap(profileData);
+        await buildUserRoadmap(profileData, {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "permanent-location-business",
         );
@@ -253,7 +263,7 @@ describe("buildUserRoadmap", () => {
           homeBasedBusiness: false,
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
         });
-        await buildUserRoadmap(profileData);
+        await buildUserRoadmap(profileData, {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "permanent-location-business",
         );
@@ -265,7 +275,7 @@ describe("buildUserRoadmap", () => {
           homeBasedBusiness: false,
           foreignBusinessTypeIds: ["officeInNJ"],
         });
-        await buildUserRoadmap(profileData);
+        await buildUserRoadmap(profileData, {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "permanent-location-business",
         );
@@ -275,12 +285,12 @@ describe("buildUserRoadmap", () => {
 
   describe("reseller tasks", () => {
     it("adds reseller task if canBeReseller is true", async () => {
-      await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }));
+      await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("reseller");
     });
 
     it("does not add reseller task if canBeReseller is false", async () => {
-      await buildUserRoadmap(generateStartingProfile({ industryId: "non-medical-transport" }));
+      await buildUserRoadmap(generateStartingProfile({ industryId: "non-medical-transport" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("reseller");
     });
   });
@@ -292,6 +302,7 @@ describe("buildUserRoadmap", () => {
           legalStructureId: "limited-liability-company",
           businessPersona: "STARTING",
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
@@ -303,6 +314,7 @@ describe("buildUserRoadmap", () => {
           legalStructureId: "limited-liability-company",
           businessPersona: "FOREIGN",
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "public-record-filing-foreign",
@@ -311,30 +323,42 @@ describe("buildUserRoadmap", () => {
     });
 
     it("adds trade-name for general partnership legal structure", async () => {
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "general-partnership" }));
+      await buildUserRoadmap(
+        generateStartingProfile({ legalStructureId: "general-partnership" }),
+        {},
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
     });
 
     it("adds trade-name for sole proprietorship legal structure", async () => {
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "sole-proprietorship" }));
+      await buildUserRoadmap(
+        generateStartingProfile({ legalStructureId: "sole-proprietorship" }),
+        {},
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
     });
 
     it("adds tax registration tasks for S-Corp legal structures", async () => {
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "general-partnership" }));
+      await buildUserRoadmap(
+        generateStartingProfile({ legalStructureId: "general-partnership" }),
+        {},
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("scorp");
 
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "s-corporation" }));
+      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "s-corporation" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp");
     });
 
     it("adds nonprofit addon for Nonprofit legal structures", async () => {
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "general-partnership" }));
+      await buildUserRoadmap(
+        generateStartingProfile({ legalStructureId: "general-partnership" }),
+        {},
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("nonprofit");
 
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "nonprofit" }));
+      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "nonprofit" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit");
     });
   });
@@ -346,6 +370,7 @@ describe("buildUserRoadmap", () => {
       it(`adds ${industry.name} industry and modifications`, async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: industry.id, certifiedInteriorDesigner: true }),
+          {},
         );
         const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
         const shouldNotContainIndustries = getIndustries().filter((it) => {
@@ -370,7 +395,7 @@ describe("buildUserRoadmap", () => {
               providesStaffingService: true,
             };
 
-            await buildUserRoadmap(profileData);
+            await buildUserRoadmap(profileData, {});
             const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
             expect(lastCalledWith.industryId).toEqual("employment-agency");
           });
@@ -382,7 +407,7 @@ describe("buildUserRoadmap", () => {
               providesStaffingService: false,
             };
 
-            await buildUserRoadmap(profileData);
+            await buildUserRoadmap(profileData, {});
             const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
             expect(lastCalledWith.industryId).toEqual(industry.id);
           });
@@ -397,7 +422,7 @@ describe("buildUserRoadmap", () => {
             certifiedInteriorDesigner: false,
           };
 
-          await buildUserRoadmap(profileData);
+          await buildUserRoadmap(profileData, {});
           const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
           expect(lastCalledWith.industryId).toEqual("generic");
         });
@@ -409,7 +434,7 @@ describe("buildUserRoadmap", () => {
             certifiedInteriorDesigner: true,
           };
 
-          await buildUserRoadmap(profileData);
+          await buildUserRoadmap(profileData, {});
           const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
           expect(lastCalledWith.industryId).toEqual("interior-designer");
         });
@@ -422,6 +447,7 @@ describe("buildUserRoadmap", () => {
               realEstateAppraisalManagement: true,
               industryId: "real-estate-appraisals",
             }),
+            {},
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
             "real-estate-appraisal-management",
@@ -434,6 +460,7 @@ describe("buildUserRoadmap", () => {
               realEstateAppraisalManagement: false,
               industryId: "real-estate-appraisals",
             }),
+            {},
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
             "real-estate-appraiser",
@@ -446,6 +473,7 @@ describe("buildUserRoadmap", () => {
               realEstateAppraisalManagement: false,
               industryId: "generic",
             }),
+            {},
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
             "real-estate-appraiser",
@@ -458,6 +486,7 @@ describe("buildUserRoadmap", () => {
         it("does not add either real estate add-on and modification if is true and industry is not real-estate-appraisals", async () => {
           await buildUserRoadmap(
             generateStartingProfile({ realEstateAppraisalManagement: true, industryId: "generic" }),
+            {},
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
             "real-estate-appraiser",
@@ -471,24 +500,24 @@ describe("buildUserRoadmap", () => {
 
     describe("cpa", () => {
       it("adds cpa add-on and modification if is true", async () => {
-        await buildUserRoadmap(generateStartingProfile({ requiresCpa: true }));
+        await buildUserRoadmap(generateStartingProfile({ requiresCpa: true }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("cpa");
       });
 
       it("does not add liquor-license add-on and modification if is true", async () => {
-        await buildUserRoadmap(generateStartingProfile({ requiresCpa: false }));
+        await buildUserRoadmap(generateStartingProfile({ requiresCpa: false }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cpa");
       });
     });
 
     describe("petcare license", () => {
       it("adds petcare license add-on and modification if is true", async () => {
-        await buildUserRoadmap(generateStartingProfile({ petCareHousing: true }));
+        await buildUserRoadmap(generateStartingProfile({ petCareHousing: true }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("petcare-license");
       });
 
       it("does not add petcare license add-on and modification if is false", async () => {
-        await buildUserRoadmap(generateStartingProfile({ petCareHousing: false }));
+        await buildUserRoadmap(generateStartingProfile({ petCareHousing: false }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("petcare-license");
       });
     });
@@ -497,6 +526,7 @@ describe("buildUserRoadmap", () => {
       it("adds home-based-transportation add-on if transportation and home-based", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ homeBasedBusiness: true, industryId: "trucking" }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "home-based-transportation",
@@ -506,6 +536,7 @@ describe("buildUserRoadmap", () => {
       it("does not add home-based-transportation add-on if transportation and not home-based", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ homeBasedBusiness: false, industryId: "trucking" }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "home-based-transportation",
@@ -515,6 +546,7 @@ describe("buildUserRoadmap", () => {
       it("does not add home-based-transportation add-on if not transportation", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ homeBasedBusiness: true, industryId: "generic" }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "home-based-transportation",
@@ -526,6 +558,7 @@ describe("buildUserRoadmap", () => {
       it("adds if homeBasedBusiness is false and planned renovation is true", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ homeBasedBusiness: false, plannedRenovationQuestion: true }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("planned-renovation");
       });
@@ -533,6 +566,7 @@ describe("buildUserRoadmap", () => {
       it("does NOT add if homeBasedBusiness is false and planned renovation is false", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ homeBasedBusiness: false, plannedRenovationQuestion: false }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
       });
@@ -540,6 +574,7 @@ describe("buildUserRoadmap", () => {
       it("does NOT add if homeBasedBusiness is true and planned renovation is true", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ homeBasedBusiness: true, plannedRenovationQuestion: true }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
       });
@@ -547,6 +582,7 @@ describe("buildUserRoadmap", () => {
       it("does NOT show if homeBasedBusiness is true and planned renovation is false", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ homeBasedBusiness: true, plannedRenovationQuestion: false }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
       });
@@ -557,6 +593,7 @@ describe("buildUserRoadmap", () => {
             homeBasedBusiness: undefined,
             plannedRenovationQuestion: undefined,
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
       });
@@ -567,6 +604,7 @@ describe("buildUserRoadmap", () => {
             homeBasedBusiness: true,
             plannedRenovationQuestion: undefined,
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
       });
@@ -577,6 +615,7 @@ describe("buildUserRoadmap", () => {
             homeBasedBusiness: false,
             plannedRenovationQuestion: undefined,
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
       });
@@ -586,6 +625,7 @@ describe("buildUserRoadmap", () => {
       it("adds only the standard car service tasks to the roadmap if the user selects the standard choice", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ carService: "STANDARD", industryId: "car-service" }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("car-service-standard");
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
@@ -596,6 +636,7 @@ describe("buildUserRoadmap", () => {
       it("adds only the high capacity car service tasks to the roadmap if the user selects the high capacity choice", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ carService: "HIGH_CAPACITY", industryId: "car-service" }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "car-service-high-capacity",
@@ -608,6 +649,7 @@ describe("buildUserRoadmap", () => {
       it("adds both the standard and high capacity car service tasks to the roadmap if the user selects the both choice", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ carService: "BOTH", industryId: "car-service" }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "car-service-high-capacity",
@@ -618,19 +660,19 @@ describe("buildUserRoadmap", () => {
 
     describe("liquor license", () => {
       it("adds liquor-license add-on and modification if is true", async () => {
-        await buildUserRoadmap(generateStartingProfile({ liquorLicense: true }));
+        await buildUserRoadmap(generateStartingProfile({ liquorLicense: true }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("liquor-license");
       });
 
       it("does not add liquor-license add-on and modification if is true", async () => {
-        await buildUserRoadmap(generateStartingProfile({ liquorLicense: false }));
+        await buildUserRoadmap(generateStartingProfile({ liquorLicense: false }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("liquor-license");
       });
     });
 
     describe("cannabis license type", () => {
       it("adds annual-cannabis add-on when cannabis license ANNUAL", async () => {
-        await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: "ANNUAL" }));
+        await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: "ANNUAL" }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("cannabis-annual");
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "cannabis-conditional",
@@ -638,13 +680,13 @@ describe("buildUserRoadmap", () => {
       });
 
       it("adds conditional-cannabis add-on when cannabis license CONDITIONAL", async () => {
-        await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: "CONDITIONAL" }));
+        await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: "CONDITIONAL" }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-annual");
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("cannabis-conditional");
       });
 
       it("adds neither cannabis add-on when cannabis license is undefined", async () => {
-        await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: undefined }));
+        await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: undefined }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-annual");
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "cannabis-conditional",
@@ -654,19 +696,19 @@ describe("buildUserRoadmap", () => {
 
     describe("elevator owning business", () => {
       it("add elevator-registration task if is an elevator owning business", async () => {
-        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: true }));
+        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: true }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "elevator-owning-business",
         );
       });
 
       it("does not add elevator-registration task if not an elevator owning business", async () => {
-        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: false }));
+        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: false }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "elevator-owning-business",
         );
 
-        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: undefined }));
+        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: undefined }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "elevator-owning-business",
         );
@@ -675,7 +717,10 @@ describe("buildUserRoadmap", () => {
 
     describe("residential landlord", () => {
       it("add short term rental registration task for short term rental landlords", async () => {
-        await buildUserRoadmap(generateStartingProfile({ propertyLeaseType: "SHORT_TERM_RENTAL" }));
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "SHORT_TERM_RENTAL" }),
+          {},
+        );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "short-term-rental-registration",
         );
@@ -687,6 +732,7 @@ describe("buildUserRoadmap", () => {
             propertyLeaseType: "LONG_TERM_RENTAL",
             hasThreeOrMoreRentalUnits: true,
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "residential-landlord-long-term-many-units",
@@ -702,6 +748,7 @@ describe("buildUserRoadmap", () => {
             propertyLeaseType: "LONG_TERM_RENTAL",
             hasThreeOrMoreRentalUnits: false,
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "residential-landlord-long-term-many-units",
@@ -714,6 +761,7 @@ describe("buildUserRoadmap", () => {
       it("adds long term many unit add on and short term rental add on for landlords owning both short and long term rentals", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ propertyLeaseType: "BOTH", hasThreeOrMoreRentalUnits: true }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "residential-landlord-long-term-many-units",
@@ -729,6 +777,7 @@ describe("buildUserRoadmap", () => {
       it("adds long term few unit add on and short term rental add on for landlords owning both short and long term rentals", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ propertyLeaseType: "BOTH", hasThreeOrMoreRentalUnits: false }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "residential-landlord-long-term-many-units",
@@ -752,6 +801,7 @@ describe("buildUserRoadmap", () => {
               "non-essential-question-1": true,
             },
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("non-essential-add-on-1");
       });
@@ -768,6 +818,7 @@ describe("buildUserRoadmap", () => {
               "non-essential-question-2": false,
             },
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "non-essential-add-on-2",
@@ -785,6 +836,7 @@ describe("buildUserRoadmap", () => {
               "question-not-contained-in-industry": true,
             },
           }),
+          {},
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
           "add-on-for-question-not-contained-in-industry",
@@ -794,7 +846,7 @@ describe("buildUserRoadmap", () => {
 
     describe("residential landlord industry", () => {
       it("adds permanent location business landlord add on for residential landlord industry", () => {
-        buildUserRoadmap(generateStartingProfile({ industryId: "residential-landlord" }));
+        buildUserRoadmap(generateStartingProfile({ industryId: "residential-landlord" }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
           "permanent-location-business-landlord",
         );
@@ -803,7 +855,7 @@ describe("buildUserRoadmap", () => {
 
     describe("all other industries", () => {
       it("adds env permitting add on", () => {
-        buildUserRoadmap(generateStartingProfile({ industryId: "generic" }));
+        buildUserRoadmap(generateStartingProfile({ industryId: "generic" }), {});
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
       });
     });
@@ -841,7 +893,7 @@ describe("buildUserRoadmap", () => {
       const onboardingData = generateStartingProfile({
         municipality: generateMunicipality({ id: "1234" }),
       });
-      const roadmap = await buildUserRoadmap(onboardingData);
+      const roadmap = await buildUserRoadmap(onboardingData, {});
 
       const municipalityTask = roadmap.tasks[0];
       expect(municipalityTask.callToActionLink).toEqual("www.cooltown.com");
@@ -870,7 +922,7 @@ describe("buildUserRoadmap", () => {
       );
 
       const onboardingData = generateStartingProfile({ municipality: undefined });
-      const roadmap = await buildUserRoadmap(onboardingData);
+      const roadmap = await buildUserRoadmap(onboardingData, {});
 
       const municipalityTask = roadmap.tasks[0];
       expect(municipalityTask.callToActionLink).toEqual("");
@@ -892,7 +944,7 @@ describe("buildUserRoadmap", () => {
       );
 
       const profileData = generateStartingProfile({ naicsCode: "621399" });
-      const roadmap = await buildUserRoadmap(profileData);
+      const roadmap = await buildUserRoadmap(profileData, {});
 
       const task = roadmap.tasks[0];
       expect(task.contentMd).toContain("NAICS code");
@@ -918,7 +970,7 @@ describe("buildUserRoadmap", () => {
         naicsCode: "123456",
         municipality: generateMunicipality({ id: "1234" }),
       });
-      const roadmap = await buildUserRoadmap(profileData);
+      const roadmap = await buildUserRoadmap(profileData, {});
 
       const naicsTask = roadmap.tasks[0];
       const municipalityTask = roadmap.tasks[1];
@@ -936,7 +988,7 @@ describe("buildUserRoadmap", () => {
       );
 
       const profileData = generateStartingProfile({ naicsCode: "" });
-      const roadmap = await buildUserRoadmap(profileData);
+      const roadmap = await buildUserRoadmap(profileData, {});
 
       const task = roadmap.tasks[0];
       expect(task.contentMd).toEqual(
@@ -949,18 +1001,20 @@ describe("buildUserRoadmap", () => {
     it("does not add interstateLogistics add-on if true and industry is not applicable", () => {
       buildUserRoadmap(
         generateStartingProfile({ interstateLogistics: true, industryId: "generic" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-logistics");
     });
 
     it("adds logistics modification add-on", () => {
-      buildUserRoadmap(generateStartingProfile({ industryId: "logistics" }));
+      buildUserRoadmap(generateStartingProfile({ industryId: "logistics" }), {});
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("logistics-modification");
     });
 
     it("adds interstateLogistics add-on if true", () => {
       buildUserRoadmap(
         generateStartingProfile({ interstateLogistics: true, industryId: "logistics" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-logistics");
     });
@@ -968,6 +1022,7 @@ describe("buildUserRoadmap", () => {
     it("does not add interstateLogistics if false", () => {
       buildUserRoadmap(
         generateStartingProfile({ interstateLogistics: false, industryId: "logistics" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-logistics");
     });
@@ -975,13 +1030,17 @@ describe("buildUserRoadmap", () => {
 
   describe("interstateMoving", () => {
     it("does not add interstateMoving add-on if true and industry is not applicable", () => {
-      buildUserRoadmap(generateStartingProfile({ interstateMoving: true, industryId: "generic" }));
+      buildUserRoadmap(
+        generateStartingProfile({ interstateMoving: true, industryId: "generic" }),
+        {},
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-moving");
     });
 
     it("adds interstateMoving add-on if true", () => {
       buildUserRoadmap(
         generateStartingProfile({ interstateMoving: true, industryId: "moving-company" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-moving");
     });
@@ -989,6 +1048,7 @@ describe("buildUserRoadmap", () => {
     it("does not add interstateMoving add-on if false", () => {
       buildUserRoadmap(
         generateStartingProfile({ interstateMoving: false, industryId: "moving-company" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-moving");
     });
@@ -998,6 +1058,7 @@ describe("buildUserRoadmap", () => {
     it("adds daycare add-on if 6 or more children", () => {
       buildUserRoadmap(
         generateStartingProfile({ isChildcareForSixOrMore: true, industryId: "daycare" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("daycare");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("family-daycare");
@@ -1006,6 +1067,7 @@ describe("buildUserRoadmap", () => {
     it("adds family daycare add-on if 5 children or less", () => {
       buildUserRoadmap(
         generateStartingProfile({ isChildcareForSixOrMore: false, industryId: "daycare" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("family-daycare");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("daycare");
@@ -1016,6 +1078,7 @@ describe("buildUserRoadmap", () => {
     it("adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
       buildUserRoadmap(
         generateStartingProfile({ willSellPetCareItems: true, industryId: "petcare" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("will-sell-pet-care-items");
     });
@@ -1023,6 +1086,7 @@ describe("buildUserRoadmap", () => {
     it("will NOT adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
       buildUserRoadmap(
         generateStartingProfile({ willSellPetCareItems: false, industryId: "petcare" }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
         "will-sell-pet-care-items",
@@ -1038,6 +1102,7 @@ describe("buildUserRoadmap", () => {
           employmentPlacementType: undefined,
           industryId: "employment-agency",
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "employment-agency-job-seekers",
@@ -1057,6 +1122,7 @@ describe("buildUserRoadmap", () => {
           employmentPlacementType: "PERMANENT",
           industryId: "employment-agency",
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "employment-agency-employers-permanent",
@@ -1076,6 +1142,7 @@ describe("buildUserRoadmap", () => {
           employmentPlacementType: "TEMPORARY",
           industryId: "employment-agency",
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "employment-agency-employers-temporary",
@@ -1095,6 +1162,7 @@ describe("buildUserRoadmap", () => {
           employmentPlacementType: "BOTH",
           industryId: "employment-agency",
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
         "employment-agency-employers-both",
@@ -1112,6 +1180,7 @@ describe("buildUserRoadmap", () => {
           plannedRenovationQuestion: true,
           industryId: "domestic-employer",
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual([]);
     });
@@ -1124,7 +1193,7 @@ describe("buildUserRoadmap", () => {
         legalStructureId: "nonprofit",
       });
 
-      buildUserRoadmap(profileData);
+      buildUserRoadmap(profileData, {});
 
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("raffle-bingo-games");
     });
@@ -1135,7 +1204,7 @@ describe("buildUserRoadmap", () => {
         legalStructureId: "nonprofit",
       });
 
-      buildUserRoadmap(profileData);
+      buildUserRoadmap(profileData, {});
 
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("raffle-bingo-games");
     });
@@ -1148,8 +1217,17 @@ describe("buildUserRoadmap", () => {
           raffleBingoGames: true,
           legalStructureId: randomLegalStructure.id,
         }),
+        {},
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("raffle-bingo-games");
+    });
+  });
+
+  describe("roadmapTaskData", () => {
+    it("adds business vehicle addon", () => {
+      const profileData = generateStartingProfile({});
+      buildUserRoadmap(profileData, generateRoadmapTaskData({ manageBusinessVehicles: true }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("business-vehicle");
     });
   });
 });

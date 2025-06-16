@@ -1271,6 +1271,36 @@ collections:
               - { label: Next Step Text, name: nextStepText, widget: string }
               - { label: Previous Step Text, name: previousStepText, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
+  - name: "manage-business-vehicles"
+    label: "Tasks - Manage Business Vehicles"
+    delete: false
+    create: false
+    files:
+      - label: Manage Business Vehicles
+        name: manage-business-vehicles
+        file: content/src/fieldConfig/manage-business-vehicles.json
+        editor:
+          preview: true
+        fields:
+          - label: Manage Business Vehicles
+            name: manageBusinessVehicles
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Page Level Alert Text, name: pageLevelAlertText, widget: markdown }
+              - { label: H2 Header Text, name: h2HeaderText, widget: string }
+              - { label: Radio Question Text, name: radioQuestionText, widget: string }
+              - { label: Radio Option One Text, name: radioOptionOneText, widget: string }
+              - { label: Radio Option Two Text, name: radioOptionTwoText, widget: string }
+              - { label: Input Error Text, name: inputErrorText, widget: string }
+              - { label: Learn More Text, name: learnMoreText, widget: markdown }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Results Screen Header Text, name: resultsScreenHeaderText, widget: string }
+              - { label: Success Alert Text, name: successAlertText, widget: string }
+              - { label: Success Alert Button Text, name: successAlertButtonText, widget: string }
+              - { label: No Response Text, name: noResponseText, widget: markdown }
+              - { label: Yes Response Text, name: yesResponseText, widget: markdown }
+              - { label: Tooltip Text, name: tooltipText, widget: string }
 
   - name: "naics-code"
     label: "Tasks - NAICS Code"
@@ -1339,7 +1369,6 @@ collections:
                   widget: string,
                 }
               - { label: NAICS Description External URL, name: naicsDescriptionURL, widget: string }
-
       - label: "NAICS Code Input"
         name: "naics-code-input"
         file: "content/src/fieldConfig/profile.json"

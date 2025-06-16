@@ -54,11 +54,15 @@
       "weight": 32,
       "licenseTask": "verify-license-massage-therapy",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Massage Therapy",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg",
     "resale-tax-cert"
   ],
   "displayname": "massage-therapy",

@@ -46,13 +46,17 @@
       "step": 4,
       "weight": 15,
       "licenseTask": "health-club-registration"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Health Club",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "electrologist",
-    "business-vehicle-title-reg",
     "inspect-boiler",
     "inspect-pv",
     "inspect-fridge",

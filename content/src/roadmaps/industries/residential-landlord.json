@@ -46,12 +46,16 @@
       "step": 4,
       "weight": 200,
       "task": "residential-lease-agreement"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Residential Landlord",
   "nonEssentialQuestionsIds": [
     "multiple-dwelling-register",
-    "business-vehicle-title-reg",
     "inspect-boiler",
     "inspect-fridge",
     "inspect-pv"

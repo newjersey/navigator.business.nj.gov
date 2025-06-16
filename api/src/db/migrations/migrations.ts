@@ -166,6 +166,7 @@ import { migrate_v162_to_v163 } from "@db/migrations/v163_waste_transport_to_was
 import { migrate_v163_to_v164 } from "@db/migrations/v164_track_tax_clearance_primary_business";
 import { migrate_v164_to_v165 } from "@db/migrations/v165_add_last_updated_iso_to_xray_registration_data";
 import { MigrationClients } from "@db/migrations/types";
+import { migrate_v165_to_v166 } from "@db/migrations/v166_add_roadmap_task_data";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -336,6 +337,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v162_to_v163,
   migrate_v163_to_v164,
   migrate_v164_to_v165,
+  migrate_v165_to_v166,
 ];
 
-export { generatev165UserData as CURRENT_GENERATOR } from "@db/migrations/v165_add_last_updated_iso_to_xray_registration_data";
+export { generatev166UserData as CURRENT_GENERATOR } from "@db/migrations/v166_add_roadmap_task_data";

@@ -51,14 +51,15 @@
       "step": 4,
       "weight": 10,
       "task": "resale-tax-certificate-operating"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Vending Machine",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg",
-    "sell-milk-question"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "sell-milk-question"],
   "displayname": "vending-machine",
   "industryOnboardingQuestions": {
     "canBeReseller": false

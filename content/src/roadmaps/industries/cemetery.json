@@ -57,11 +57,15 @@
       "weight": 32,
       "step": 3,
       "licenseTask": "cemetery-branch"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Cemetery",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg",
     "mvc-cpcn"
   ],
   "displayname": "cemetery",
