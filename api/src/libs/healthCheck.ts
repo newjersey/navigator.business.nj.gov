@@ -15,9 +15,7 @@ const healthCheckEndPoints: Record<string, string> = {
   taxClearance: "tax-clearance",
 };
 
-const url = process.env.API_BASE_URL ?? "https://api.account.business.nj.gov";
-
-const healthCheck = async (type: string, logger: LogWriterType): Promise<Status> => {
+const healthCheck = async (type: string, url: string, logger: LogWriterType): Promise<Status> => {
   return axios
     .get(`${url}/health/${type}`)
     .then((response: AxiosResponse) => {
@@ -36,9 +34,14 @@ const healthCheck = async (type: string, logger: LogWriterType): Promise<Status>
 };
 
 export const runHealthChecks = async (logger: LogWriterType): Promise<StatusResult> => {
+  const url = process.env.API_BASE_URL;
+  if (!url) {
+    logger.LogError("Missing required environment variable: API_BASE_URL");
+    throw new Error("Missing required environment variable: API_BASE_URL");
+  }
   const results: Record<string, Status> = {};
   for (const type in healthCheckEndPoints) {
-    results[type] = await healthCheck(healthCheckEndPoints[type] ?? "", logger);
+    results[type] = await healthCheck(healthCheckEndPoints[type] ?? "", url, logger);
   }
   return results;
 };
