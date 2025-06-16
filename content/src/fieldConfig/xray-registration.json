@@ -12,7 +12,7 @@
     "addressZipCodeLabel": "ZIP Code",
     "stateLabel": "State",
     "submitText": "Submit",
-    "errorTextNotFound": "Registration could not be found. Try again or contact your registration agency for more information.",
+    "errorTextNotFound": "Your registration could not be found. Check your registration documents.",
     "errorTextFieldsRequired": "Fill in all non-optional fields.",
     "errorTextSearchFailed": "Unable to complete check. Try again later.",
     "registrationStatusText": "Registration Status:",
