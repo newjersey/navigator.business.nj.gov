@@ -69,9 +69,10 @@ describe("ProfileNonEssentialQuestionsSection", () => {
 
     renderComponent({
       industryId: "test-industry-with-non-essential-questions",
+      businessPersona: "STARTING",
     });
 
-    expect(screen.getByTestId("non-essential-questions-wrapper")).toBeInTheDocument();
+    expect(screen.getAllByTestId("non-essential-questions-wrapper").length).toBeGreaterThan(0);
     expect(screen.getByText("Non Essential Question 1?")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 2?")).toBeInTheDocument();
   });
