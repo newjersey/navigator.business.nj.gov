@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import {
+  formatDate,
   getCurrentDateFormatted,
   getDateInCurrentYear,
   getLicenseDate,
@@ -109,6 +110,33 @@ describe("dateHelpers", () => {
     it("returns true when date is before current date", () => {
       const value = dayjs().subtract(1, "day").format(defaultDateFormat);
       expect(isDateAfterCurrentDate(value)).toBe(false);
+    });
+  });
+
+  describe("formatDate", () => {
+    it("returns empty string for falsy input", () => {
+      expect(formatDate("")).toBe("");
+    });
+
+    it("returns formatted date for valid MM/YYYY input", () => {
+      const input = "06/2025";
+      const expected = dayjs(input).format("MM/YY");
+      expect(formatDate(input)).toBe(expected);
+    });
+
+    it("returns the original string if not in MM/YYYY format", () => {
+      expect(formatDate("2025/06")).toBe("2025/06");
+      expect(formatDate("06-2025")).toBe("06-2025");
+      expect(formatDate("invalid")).toBe("invalid");
+      expect(formatDate("062025")).toBe("062025");
+    });
+
+    it("handles single-digit months incorrectly formatted (should not match)", () => {
+      expect(formatDate("6/2025")).toBe("6/2025"); // Not MM/YYYY
+    });
+
+    it("returns original input for garbage date", () => {
+      expect(formatDate("abc/defg")).toBe("abc/defg");
     });
   });
 });

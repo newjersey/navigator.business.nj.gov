@@ -67,3 +67,13 @@ export const getLicenseDate = (entity: LicenseEntity): dayjs.Dayjs => {
 export const advancedDateLibrary = (): void => {
   dayjs.extend(advancedFormat);
 };
+
+export const formatDate = (date: string): string => {
+  if (!date) {
+    return "";
+  }
+
+  const dateIsValid = /^\d{2}\/\d{4}$/.test(date);
+
+  return dateIsValid ? dayjs(date).format("MM/YYY") : date;
+};
