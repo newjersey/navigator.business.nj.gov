@@ -6,13 +6,13 @@ import { EmployerId } from "@/components/data-fields/EmployerId";
 import { EntityId } from "@/components/data-fields/EntityId";
 import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
 import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
-import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
 import { Industry } from "@/components/data-fields/Industry";
 import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
 import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
+import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
@@ -34,7 +34,7 @@ import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { ProfileAddress } from "@/components/profile/ProfileAddress";
-import { displayHomedBaseBusinessQuestion } from "@/components/profile/profileDisplayLogicHelpers";
+import { displayAltHomeBasedBusinessDescription } from "@/components/profile/profileDisplayLogicHelpers";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
@@ -313,10 +313,6 @@ const ProfilePage = (props: Props): ReactElement => {
   const shouldLockMunicipality = (): boolean => {
     return !!profileData.municipality && business?.taxFilingData.state === "SUCCESS";
   };
-
-  const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
-    business?.profileData.operatingPhase,
-  ).displayAltHomeBasedBusinessDescription;
 
   const displayRaffleBingoGameQuestion = (): boolean => {
     if (!business) return false;
@@ -769,18 +765,10 @@ const ProfilePage = (props: Props): ReactElement => {
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
         >
-          <ProfileField
-            fieldName="homeBasedBusiness"
-            isVisible={displayHomedBaseBusinessQuestion(profileData, business)}
-            displayAltDescription={displayAltHomeBasedBusinessDescription}
-            hideLine
-            fullWidth
-            hideHeader
-            boldAltDescription
-            boldDescription
-          >
-            <HomeBasedBusiness />
-          </ProfileField>
+          <NonEssentialQuestionForPersonas
+            questionId={"homeBasedBusiness"}
+            displayAltDescription={displayAltHomeBasedBusinessDescription(profileData)}
+          />
         </ProfileSubSection>
 
         <ProfileSubSection

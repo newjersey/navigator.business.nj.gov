@@ -1,4 +1,5 @@
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
+import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -6,8 +7,10 @@ import {
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
 import { randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/factories";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
+import { OperatingPhase, OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
@@ -122,6 +125,41 @@ describe("LocationBasedNonEssentialQuestions", () => {
       screen.getByRole("radiogroup", {
         name: "Elevator owning business",
       }),
+    ).toBeInTheDocument();
+  });
+
+  it("displays alt description for home based business question when applicable", async () => {
+    const Config = getMergedConfig();
+    const altDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
+      return phase.displayAltHomeBasedBusinessDescription;
+    });
+    const persona: Partial<ProfileData> = randomElementFromArray([
+      { businessPersona: "STARTING" },
+      { businessPersona: "OWNING" },
+      { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["propertyInNJ"] },
+    ]);
+
+    const profileData = generateProfileData({
+      homeBasedBusiness: true,
+      businessPersona: "STARTING",
+      industryId: randomHomeBasedIndustry(),
+      operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
+      ...persona,
+    });
+
+    useMockBusiness(generateBusinessForProfile({ profileData: profileData }));
+    renderComponent(profileData);
+
+    expect(
+      screen.getByRole("radiogroup", {
+        name: "Home based business",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription),
     ).toBeInTheDocument();
   });
 });

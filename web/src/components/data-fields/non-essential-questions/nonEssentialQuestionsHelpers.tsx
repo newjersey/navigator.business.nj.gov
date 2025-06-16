@@ -5,6 +5,7 @@ import { ReactElement } from "react";
 
 export const NonEssentialQuestionForPersonas = (props: {
   questionId: ProfileContentField;
+  displayAltDescription?: boolean;
 }): ReactElement => {
   return (
     <div data-testid="non-essential-questions-wrapper">
@@ -17,6 +18,7 @@ export const NonEssentialQuestionForPersonas = (props: {
         boldAltDescription
         boldDescription
         optionalText
+        displayAltDescription={props.displayAltDescription}
       >
         <RadioQuestion<boolean> fieldName={props.questionId} choices={[true, false]} />
       </ProfileField>

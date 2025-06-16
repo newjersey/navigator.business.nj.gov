@@ -1,5 +1,10 @@
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { Business, isNexusBusiness, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  isNexusBusiness,
+  LookupOperatingPhaseById,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 
 export const displayHomedBaseBusinessQuestion = (
@@ -15,6 +20,9 @@ export const displayHomedBaseBusinessQuestion = (
   }
   return isHomeBasedBusinessApplicable(profileData.industryId);
 };
+
+export const displayAltHomeBasedBusinessDescription = (profileData: ProfileData): boolean =>
+  LookupOperatingPhaseById(profileData.operatingPhase).displayAltHomeBasedBusinessDescription;
 
 export const displayPlannedRenovationQuestion = (
   profileData: ProfileData,
