@@ -2,7 +2,6 @@ import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
-import { ElevatorOwningBusiness } from "@/components/data-fields/ElevatorOwningBusiness";
 import { EmployerId } from "@/components/data-fields/EmployerId";
 import { EntityId } from "@/components/data-fields/EntityId";
 import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
@@ -13,11 +12,11 @@ import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
 import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
+import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
 import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGamesQuestion";
-import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
@@ -35,11 +34,7 @@ import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { ProfileAddress } from "@/components/profile/ProfileAddress";
-import {
-  displayElevatorQuestion,
-  displayHomedBaseBusinessQuestion,
-  displayPlannedRenovationQuestion,
-} from "@/components/profile/profileDisplayLogicHelpers";
+import { displayHomedBaseBusinessQuestion } from "@/components/profile/profileDisplayLogicHelpers";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
@@ -402,32 +397,7 @@ const ProfilePage = (props: Props): ReactElement => {
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
         >
-          <>
-            <ProfileField
-              fieldName="homeBasedBusiness"
-              isVisible={displayHomedBaseBusinessQuestion(profileData, business)}
-              displayAltDescription={displayAltHomeBasedBusinessDescription}
-              hideLine
-              fullWidth
-              hideHeader
-              boldAltDescription
-              boldDescription
-            >
-              <HomeBasedBusiness />
-            </ProfileField>
-
-            <ProfileField
-              fieldName="plannedRenovationQuestion"
-              isVisible={displayPlannedRenovationQuestion(profileData, business)}
-              hideLine
-              fullWidth
-              hideHeader
-              displayAltDescription
-              boldAltDescription
-            >
-              <RenovationQuestion />
-            </ProfileField>
-          </>
+          <LocationBasedNonEssentialQuestions />
         </ProfileSubSection>
 
         <ProfileSubSection
@@ -651,46 +621,7 @@ const ProfilePage = (props: Props): ReactElement => {
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
         >
-          <>
-            <ProfileField
-              fieldName="homeBasedBusiness"
-              isVisible={displayHomedBaseBusinessQuestion(profileData, business)}
-              displayAltDescription={displayAltHomeBasedBusinessDescription}
-              hideLine
-              fullWidth
-              hideHeader
-              optionalText
-              boldAltDescription
-              boldDescription
-            >
-              <HomeBasedBusiness />
-            </ProfileField>
-
-            <ProfileField
-              fieldName="plannedRenovationQuestion"
-              isVisible={displayPlannedRenovationQuestion(profileData, business)}
-              hideLine
-              fullWidth
-              hideHeader
-              displayAltDescription
-              boldAltDescription
-            >
-              <RenovationQuestion />
-            </ProfileField>
-
-            <ProfileField
-              fieldName="elevatorOwningBusiness"
-              displayAltDescription={displayAltHomeBasedBusinessDescription}
-              isVisible={displayElevatorQuestion(profileData, business)}
-              hideLine
-              fullWidth
-              hideHeader
-              boldAltDescription
-              boldDescription
-            >
-              <ElevatorOwningBusiness />
-            </ProfileField>
-          </>
+          <LocationBasedNonEssentialQuestions />
         </ProfileSubSection>
 
         <ProfileSubSection

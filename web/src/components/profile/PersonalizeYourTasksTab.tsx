@@ -1,27 +1,17 @@
 import { Content } from "@/components/Content";
-import { ElevatorOwningBusiness } from "@/components/data-fields/ElevatorOwningBusiness";
-import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
+import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
-import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
-import {
-  displayElevatorQuestion,
-  displayHomedBaseBusinessQuestion,
-  displayPlannedRenovationQuestion,
-} from "@/components/profile/profileDisplayLogicHelpers";
-import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasNonEssentialQuestions } from "@/lib/utils/non-essential-questions-helpers";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const PersonalizeYourTasksTab = (): ReactElement => {
   const { Config } = useConfig();
-  const { business } = useUserData();
   const { state: profileDataState } = useContext(ProfileDataContext);
   const profileData = profileDataState.profileData;
   const AccordionHeader = (props: {
@@ -85,50 +75,7 @@ export const PersonalizeYourTasksTab = (): ReactElement => {
           description={Config.profileDefaults.default.locationBasedRequirementsSubText}
         />
         <AccordionDetails sx={{ marginLeft: 6 }}>
-          {displayHomedBaseBusinessQuestion(profileData, business) && (
-            <div className={"padding-top-1"}>
-              <ProfileField
-                fieldName="homeBasedBusiness"
-                hideLine
-                fullWidth
-                hideHeader
-                boldAltDescription
-                boldDescription
-              >
-                <HomeBasedBusiness />
-              </ProfileField>
-            </div>
-          )}
-
-          {displayPlannedRenovationQuestion(profileData, business) && (
-            <div className={"padding-top-1"}>
-              <ProfileField
-                fieldName="plannedRenovationQuestion"
-                hideLine
-                fullWidth
-                hideHeader
-                displayAltDescription
-                boldAltDescription
-              >
-                <RenovationQuestion />
-              </ProfileField>
-            </div>
-          )}
-
-          {displayElevatorQuestion(profileData, business) && (
-            <div className={"padding-top-1"}>
-              <ProfileField
-                fieldName="elevatorOwningBusiness"
-                hideLine
-                fullWidth
-                hideHeader
-                boldAltDescription
-                boldDescription
-              >
-                <ElevatorOwningBusiness />
-              </ProfileField>
-            </div>
-          )}
+          <LocationBasedNonEssentialQuestions />
         </AccordionDetails>
       </Accordion>
       <hr className="margin-y-4" />
