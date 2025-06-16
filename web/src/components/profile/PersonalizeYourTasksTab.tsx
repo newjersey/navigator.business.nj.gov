@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
@@ -11,9 +12,8 @@ import { ReactElement, useContext } from "react";
 
 export const PersonalizeYourTasksTab = (): ReactElement => {
   const { Config } = useConfig();
-
-  const { state } = useContext(ProfileDataContext);
-
+  const { state: profileDataState } = useContext(ProfileDataContext);
+  const profileData = profileDataState.profileData;
   const AccordionHeader = (props: {
     icon: string;
     headerText: string;
@@ -74,7 +74,9 @@ export const PersonalizeYourTasksTab = (): ReactElement => {
           headerText={Config.profileDefaults.default.locationBasedRequirementsHeader}
           description={Config.profileDefaults.default.locationBasedRequirementsSubText}
         />
-        <AccordionDetails sx={{ marginLeft: 6 }}>LOCATION BASED DETAILS</AccordionDetails>
+        <AccordionDetails sx={{ marginLeft: 6 }}>
+          <LocationBasedNonEssentialQuestions />
+        </AccordionDetails>
       </Accordion>
       <hr className="margin-y-4" />
       <Accordion data-testid="nonEssentialQuestionsAccordianSection">
@@ -82,7 +84,7 @@ export const PersonalizeYourTasksTab = (): ReactElement => {
           icon={"search"}
           headerText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
           description={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
-          hideExpandIcon={!hasNonEssentialQuestions(state.profileData)}
+          hideExpandIcon={!hasNonEssentialQuestions(profileData)}
         />
         <AccordionDetails sx={{ marginLeft: 6 }}>
           <NonEssentialQuestionsSection />

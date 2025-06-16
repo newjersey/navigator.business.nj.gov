@@ -1,8 +1,6 @@
 import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
-import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
-import { ProfileField } from "@/components/profile/ProfileField";
+import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileContentField } from "@/lib/types/types";
 import {
   doesIndustryHaveNonEssentialQuestions,
   getPersonaBasedNonEssentialQuestionsIds,
@@ -23,27 +21,6 @@ export const NonEssentialQuestionsSection = (): ReactElement => {
     }
 
     return nonEssentialQuestionsArray;
-  };
-
-  const NonEssentialQuestionForPersonas = (props: {
-    questionId: ProfileContentField;
-  }): ReactElement => {
-    return (
-      <div data-testid="non-essential-questions-wrapper">
-        <ProfileField
-          fieldName={props.questionId}
-          isVisible
-          hideHeader
-          hideLine
-          fullWidth
-          boldAltDescription
-          boldDescription
-          optionalText
-        >
-          <RadioQuestion<boolean> fieldName={props.questionId} choices={[true, false]} />
-        </ProfileField>
-      </div>
-    );
   };
 
   return (
