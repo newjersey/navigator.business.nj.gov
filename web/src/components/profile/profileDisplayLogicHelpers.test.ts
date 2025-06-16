@@ -1,4 +1,5 @@
 import {
+  displayElevatorQuestion,
   displayHomedBaseBusinessQuestion,
   displayPlannedRenovationQuestion,
 } from "@/components/profile/profileDisplayLogicHelpers";
@@ -99,7 +100,7 @@ describe("profileDisplayLogicHelpers", () => {
 
   describe("elevator question", () => {
     it("returns false if business is not provided", () => {
-      expect(displayPlannedRenovationQuestion(generateProfileData({}))).toBe(false);
+      expect(displayElevatorQuestion(generateProfileData({}))).toBe(false);
     });
 
     it("returns true for non home based starting businesses", () => {
@@ -109,7 +110,7 @@ describe("profileDisplayLogicHelpers", () => {
           businessPersona: "STARTING",
         }),
       });
-      expect(displayPlannedRenovationQuestion(business.profileData, business)).toBe(true);
+      expect(displayElevatorQuestion(business.profileData, business)).toBe(true);
     });
   });
 });
