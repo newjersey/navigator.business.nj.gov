@@ -29,6 +29,7 @@ const cmsoAuthClientSecret = process.env.CMS_OAUTH_CLIENT_SECRET || "";
 const formationApiAccount = process.env.FORMATION_API_ACCOUNT || "";
 const formationApiKey = process.env.FORMATION_API_KEY || "";
 const formationApiBaseUrl = process.env.FORMATION_API_BASE_URL || "";
+const apiBaseUrl = process.env.API_BASE_URL || "";
 
 const gov2goRegApiKey = process.env.GOV2GO_REGISTRATION_API_KEY || "";
 const gov2goRegBaseUrl = process.env.GOV2GO_REGISTRATION_BASE_URL || "";
@@ -250,6 +251,7 @@ const serverlessConfiguration: AWS = {
       DYNAMICS_LICENSE_STATUS_URL: dynamicsLicenseStatusURL,
       DYNAMO_PORT: dynamoOfflinePort,
       FORMATION_API_ACCOUNT: formationApiAccount,
+      API_BASE_URL: apiBaseUrl,
       FORMATION_API_BASE_URL: formationApiBaseUrl,
       FORMATION_API_KEY: formationApiKey,
       GOV_DELIVERY_API_KEY: govDeliveryApiKey,
