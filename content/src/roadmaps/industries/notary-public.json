@@ -47,12 +47,15 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Notary Public",
-  "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": [],
   "displayname": "notary-public",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true

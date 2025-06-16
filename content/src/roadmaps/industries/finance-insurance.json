@@ -46,14 +46,15 @@
       "step": 4,
       "weight": 1,
       "task": "search-licenses"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Finance and Insurance",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg",
-    "insurance-producer"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "insurance-producer"],
   "displayname": "finance-insurance",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

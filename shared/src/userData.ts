@@ -4,6 +4,7 @@ import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
+import { emptyRoadmapTaskData, RoadmapTaskData } from "./roadmapTaskData";
 import { TaxClearanceCertificateData } from "./taxClearanceCertificate";
 import { TaxFilingData } from "./taxFiling";
 import { XrayData } from "./xray";
@@ -33,12 +34,13 @@ export interface Business {
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
   readonly xrayRegistrationData: XrayData | undefined;
+  readonly roadmapTaskData: RoadmapTaskData;
   readonly versionWhenCreated: number;
   readonly version: number;
   readonly userId: string;
 }
 
-export const CURRENT_VERSION = 165;
+export const CURRENT_VERSION = 166;
 
 export const createEmptyBusiness = ({
   userId,
@@ -86,6 +88,7 @@ export const createEmptyBusiness = ({
     },
     xrayRegistrationData: undefined,
     environmentData: undefined,
+    roadmapTaskData: emptyRoadmapTaskData,
     version: CURRENT_VERSION,
     versionWhenCreated: CURRENT_VERSION,
     userId: userId,

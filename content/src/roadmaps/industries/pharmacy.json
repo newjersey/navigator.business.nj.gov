@@ -77,17 +77,17 @@
     },
     {
       "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
+    },
+    {
+      "step": 4,
       "weight": 25,
       "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Pharmacy",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg",
-    "business-vehicle-irp",
-    "sell-milk-question"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "business-vehicle-irp", "sell-milk-question"],
   "displayname": "pharmacy",
   "industryOnboardingQuestions": {},
   "isEnabled": true,

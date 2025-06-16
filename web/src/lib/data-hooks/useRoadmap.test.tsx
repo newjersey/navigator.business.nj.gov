@@ -8,7 +8,7 @@ import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateProfileData } from "@businessnjgovnavigator/shared";
+import { generateProfileData, generateRoadmapTaskData } from "@businessnjgovnavigator/shared";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
 
@@ -48,10 +48,11 @@ describe("useRoadmap", () => {
 
   it("builds roadmap when user data is defined and form is COMPLETED", async () => {
     const profileData = generateProfileData({});
-    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
+    const roadmapTaskData = generateRoadmapTaskData({});
+    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED", roadmapTaskData });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     setupHook();
-    expect(mockBuildUserRoadmap).toHaveBeenCalledWith(profileData);
+    expect(mockBuildUserRoadmap).toHaveBeenCalledWith(profileData, roadmapTaskData);
   });
 
   it("doesn't rebuild roadmap when there are steps and tasks", () => {

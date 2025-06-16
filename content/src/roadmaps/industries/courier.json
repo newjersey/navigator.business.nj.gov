@@ -36,13 +36,17 @@
       "step": 3,
       "weight": 10,
       "task": "bank-account"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Courier Service",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "courier-CRTK-survey",
-    "business-vehicle-title-reg",
     "business-vehicle-irp",
     "bus-initial-inspection"
   ],
