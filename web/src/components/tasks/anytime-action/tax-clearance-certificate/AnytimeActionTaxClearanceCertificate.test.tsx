@@ -1660,13 +1660,13 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
     });
     fireEvent.click(nextButton);
     await waitFor(() => {
-      expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
+      expect(screen.getByTestId("tax-clearance-response-error")).toBeInTheDocument();
     });
 
     const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
     fireEvent.click(secondTab);
     fillText(fieldName, "Test123456789012");
-    expect(screen.queryByTestId("tax-clearance-error-alert")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("tax-clearance-response-error")).not.toBeInTheDocument();
   });
 
   it("clears the error from submission when a Requesting Agency dropdown selection is made", async () => {
