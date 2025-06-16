@@ -8,7 +8,7 @@ import {
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-export const NonEssentialQuestionsSection = (): ReactElement => {
+export const IndustryBasedNonEssentialQuestionsSection = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
   const nonEssentialQuestions = (): ReactElement[] => {

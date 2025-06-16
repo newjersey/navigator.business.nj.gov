@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
+import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
-import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
@@ -87,7 +87,7 @@ export const PersonalizeYourTasksTab = (): ReactElement => {
           hideExpandIcon={!hasNonEssentialQuestions(profileData)}
         />
         <AccordionDetails sx={{ marginLeft: 6 }}>
-          <NonEssentialQuestionsSection />
+          <IndustryBasedNonEssentialQuestionsSection />
         </AccordionDetails>
       </Accordion>
       <hr className="margin-y-4" />

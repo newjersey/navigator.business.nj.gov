@@ -11,9 +11,9 @@ import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
 import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
+import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
-import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
 import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGamesQuestion";
@@ -400,7 +400,7 @@ const ProfilePage = (props: Props): ReactElement => {
           heading={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
           subText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
         >
-          <NonEssentialQuestionsSection />
+          <IndustryBasedNonEssentialQuestionsSection />
         </ProfileSubSection>
       </div>
     ),
@@ -626,7 +626,7 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           {
             <>
-              <NonEssentialQuestionsSection />
+              <IndustryBasedNonEssentialQuestionsSection />
             </>
           }
         </ProfileSubSection>
@@ -775,7 +775,7 @@ const ProfilePage = (props: Props): ReactElement => {
           heading={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
           subText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
         >
-          <NonEssentialQuestionsSection />
+          <IndustryBasedNonEssentialQuestionsSection />
         </ProfileSubSection>
       </div>
     ),
