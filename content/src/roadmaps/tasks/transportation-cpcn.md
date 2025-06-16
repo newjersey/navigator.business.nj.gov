@@ -1,9 +1,13 @@
 ---
 notesMd: ""
-summaryDescriptionMd: >
-  :::infoAlert 
+summaryDescriptionMd: >-
+  :::callout{ showHeader="true" headerText="" showIcon="false"
+  calloutType="informational" amountIconText="" filingTypeIconText=""
+  frequencyIconText="" phoneIconText="" emailIconText="" }
+
 
   You must get the CPCN before scheduling initial vehicle inspections. The CPCN is also needed before registering vehicles with the NJ MVC.
+
 
   :::
 
@@ -19,6 +23,7 @@ summaryDescriptionMd: >
 
 
   Transportation services that do not require the CPCN include: 
+
 
   * Taxicabs
 
@@ -142,17 +147,17 @@ After submission of your petition, the NJ MVC will assign you a docket number. Y
 
 Once your Notice is published, you must obtain proof of this from the newspaper. This is called Affidavit of Publication, and it must be forwarded to the above NJ MVC mailing address.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-
-A Certificate of Public Convenience and Necessity (CPCN) mailed to you.
-
-:::
-
 :::callout{ showHeader="true" headerText="What if I don’t get a CPCN?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * You risk fines and penalties imposed by enforcement agencies
 * Your vehicles may be impounded
 * Potential lawsuits or administrative actions may be taken against your business
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+A Certificate of Public Convenience and Necessity (CPCN) mailed to you.
 
 :::
 
