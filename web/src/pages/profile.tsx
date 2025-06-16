@@ -895,7 +895,8 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    personalize: <PersonalizeYourTasksTab />,
+    // personalize: <PersonalizeYourTasksTab />, // disabled for now while product decides best path forward
+    personalize: <></>,
   };
 
   return (
