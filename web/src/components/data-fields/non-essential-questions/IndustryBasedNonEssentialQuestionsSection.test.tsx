@@ -1,4 +1,4 @@
-import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
+import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
@@ -49,7 +49,7 @@ describe("ProfileNonEssentialQuestionsSection", () => {
           ...profileData,
         })}
       >
-        <NonEssentialQuestionsSection />
+        <IndustryBasedNonEssentialQuestionsSection />
       </WithStatefulProfileData>,
     );
   };
