@@ -100,7 +100,7 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
         </>
       )}
       {props.responseErrorType !== undefined && (
-        <div>
+        <div data-testid="tax-clearance-response-error">
           <Content>{getTaxClearanceErrorMessage(props.responseErrorType)}</Content>
         </div>
       )}
