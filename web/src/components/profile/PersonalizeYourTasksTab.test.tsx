@@ -96,7 +96,6 @@ describe("PersonalizeYourTasksTab", () => {
 
       renderPersonalizeYourTasksTab({ profileData });
 
-      screen.debug(screen.getByTestId("nonEssentialQuestionsAccordianSection"));
       fireEvent.click(
         within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).getByTestId(
           "ExpandMoreIcon",
@@ -128,8 +127,6 @@ describe("PersonalizeYourTasksTab", () => {
       });
 
       renderPersonalizeYourTasksTab({ profileData });
-
-      screen.debug(screen.getByTestId("nonEssentialQuestionsAccordianSection"));
 
       expect(
         within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).getByTestId(
