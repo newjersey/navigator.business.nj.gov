@@ -1,4 +1,4 @@
-import { UpdateQueue } from "@/lib/types/types";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import { createContext } from "react";
 
 export interface UpdateQueueContextType {

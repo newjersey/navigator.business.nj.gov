@@ -59,13 +59,15 @@
       "licenseTask": "commercial-pest-applicator-license",
       "required": true,
       "weight": -4
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Pest Control",
-  "nonEssentialQuestionsIds": [
-    "pest-pesticide-dealer-licensing",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["pest-pesticide-dealer-licensing"],
   "displayname": "pest-control",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

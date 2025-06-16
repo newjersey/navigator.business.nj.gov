@@ -12,10 +12,14 @@ import {
   LookupIndustryById,
   LookupLegalStructureById,
   ProfileData,
+  RoadmapTaskData,
 } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 
-export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
+export const buildUserRoadmap = async (
+  profileData: ProfileData,
+  roadmapTaskData: RoadmapTaskData,
+): Promise<Roadmap> => {
   let industryId = profileData.industryId;
   if (profileData.providesStaffingService) {
     industryId = "employment-agency";
@@ -29,6 +33,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     ...getForeignAddOns(profileData),
     ...getIndustryBasedAddOns(profileData, industryId),
     ...getLegalStructureAddOns(profileData),
+    ...getRoadmapTaskAddOns(roadmapTaskData),
   ];
 
   const isDomesticEmployer =
@@ -306,6 +311,14 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     if (profileData.raffleBingoGames) {
       addOns.push("raffle-bingo-games");
     }
+  }
+  return addOns;
+};
+
+const getRoadmapTaskAddOns = (roadmapTaskData: RoadmapTaskData): string[] => {
+  const addOns = [];
+  if (roadmapTaskData.manageBusinessVehicles) {
+    addOns.push("business-vehicle");
   }
   return addOns;
 };

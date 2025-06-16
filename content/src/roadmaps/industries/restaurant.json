@@ -52,12 +52,16 @@
       "step": 4,
       "weight": 100,
       "licenseTask": "food-safety-course"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Restaurant",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg",
     "inspect-boiler",
     "inspect-pv",
     "inspect-fridge",

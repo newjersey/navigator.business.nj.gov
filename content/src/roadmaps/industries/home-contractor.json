@@ -54,13 +54,15 @@
       "weight": 200,
       "licenseTask": "haul-waste-hic",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Home Improvement Contractor",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "home-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

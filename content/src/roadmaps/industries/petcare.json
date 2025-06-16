@@ -47,6 +47,11 @@
       "weight": 1,
       "licenseTask": "rmw-generator-registration",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Pet Care",
@@ -54,7 +59,6 @@
     "weights-measures",
     "petcare-cds-shelter",
     "petcare-cds-trainer",
-    "business-vehicle-title-reg",
     "pesticides-applicator-licensing"
   ],
   "displayname": "petcare",

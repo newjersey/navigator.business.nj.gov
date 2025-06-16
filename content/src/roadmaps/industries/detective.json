@@ -53,12 +53,15 @@
       "weight": 17,
       "licenseTask": "detective-employees",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Detective Agency",
-  "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": [],
   "displayname": "detective",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

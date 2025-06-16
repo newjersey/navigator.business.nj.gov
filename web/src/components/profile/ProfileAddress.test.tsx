@@ -652,7 +652,6 @@ describe("<ProfileAddress  />", () => {
         const address = generateAddress({
           addressState: { shortCode: "NY", name: "New York" },
         });
-        console.log(address);
         useMockBusiness(
           generateBusiness({
             profileData: generateProfileData({

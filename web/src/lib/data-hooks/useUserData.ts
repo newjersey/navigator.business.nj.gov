@@ -8,8 +8,8 @@ import { postUserData } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { isLicenseDataFromDatabaseDataMoreRecent } from "@/lib/domain-logic/isLicenseDataFromDatabaseDataMoreRecent";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { UpdateQueue, UserDataError } from "@/lib/types/types";
-import { UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { UserDataError } from "@/lib/types/types";
+import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { licenseDataModifyingFunction } from "@/lib/utils/licenseStatus";
 import { modifyCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
@@ -111,8 +111,9 @@ export const useUserData = (): UseUserDataResponse => {
 
   const onProfileDataChange = async (newUserData: UserData): Promise<void> => {
     const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
+    const roadmapTaskData = newUserData.businesses[newUserData.currentBusinessId].roadmapTaskData;
     setAnalyticsDimensions(newProfileData);
-    const newRoadmap = await buildUserRoadmap(newProfileData);
+    const newRoadmap = await buildUserRoadmap(newProfileData, roadmapTaskData);
     setRoadmap(newRoadmap);
   };
 

@@ -52,14 +52,15 @@
       "weight": 23,
       "step": 3,
       "licenseTask": "land-surveyor-license"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Engineering and Land Surveying",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "planning-services",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "planning-services"],
   "displayname": "engineering",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true
