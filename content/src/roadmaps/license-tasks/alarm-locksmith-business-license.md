@@ -27,8 +27,7 @@ webflowId: 6721493ccddf06cbf7fe46b4
 * Information about the licensee who will serve as your business's business qualifier
 * Copy of  liability insurance certificate with the coverage required on the application
 * Applicable fees paid (the Advisory Committee will send a license fee letter once the application is approved)
-
-The affidavit on the application executed before a notary public.
+* The affidavit on the application executed before a notary public
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
