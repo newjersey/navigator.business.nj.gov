@@ -5089,7 +5089,7 @@ __metadata:
     unified: 10.1.2
     unist-util-visit: 5.0.0
     uuid: 9.0.1
-    webpack: 5.99.7
+    webpack: 5.99.9
     winston: 3.17.0
     winston-cloudwatch: 6.3.0
     wiremock: 3.13.0
@@ -5264,7 +5264,7 @@ __metadata:
     typescript: 5.8.3
     unified: 10.1.2
     unist-util-visit: 5.0.0
-    webpack: 5.99.7
+    webpack: 5.99.9
   languageName: unknown
   linkType: soft
 
@@ -36133,9 +36133,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5, webpack@npm:5.99.7":
-  version: 5.99.7
-  resolution: "webpack@npm:5.99.7"
+"webpack@npm:5, webpack@npm:5.99.9":
+  version: 5.99.9
+  resolution: "webpack@npm:5.99.9"
   dependencies:
     "@types/eslint-scope": ^3.7.7
     "@types/estree": ^1.0.6
@@ -36166,7 +36166,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 691b0a57c5a4e9dc1bf99188c4b68a4ff3cf10c23ea8e726e6bf36643f40ecb0fb7a4d7a92f01b187184b8c9f3bc27ee0efc6973cf46ef3913ee6ee8fe806521
+  checksum: 5fd25e64b8d5a31919087834af3678eaee62dbf8990024fb4c71584d4beb2c3e75ecbabbcc654fa2536e0aa7900172512c674c6650acd7088e534716faa8449d
   languageName: node
   linkType: hard
 
