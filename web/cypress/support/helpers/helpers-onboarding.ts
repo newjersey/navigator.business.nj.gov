@@ -9,7 +9,14 @@ import {
 import { getIndustries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 import { randomInt } from "@businessnjgovnavigator/shared/lib/shared/src/intHelpers";
 import { carServiceOptions } from "@businessnjgovnavigator/shared/lib/shared/src/profileData";
-import { arrayOfSectors, LookupSectorTypeById } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
+import {
+  arrayOfSectors,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared/lib/shared/src/sector";
+import {
+  constructionOptions,
+  ResidentialConstructionType,
+} from "@businessnjgovnavigator/shared/src/profileData";
 
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
@@ -24,6 +31,7 @@ export const completeNewBusinessOnboarding = ({
   isChildcareForSixOrMore = undefined,
   willSellPetCareItems = undefined,
   petCareHousing = undefined,
+  isConstruction = undefined,
 }: Partial<StartingOnboardingData> & Partial<Registration>): void => {
   if (industry === undefined) {
     industry = randomElementFromArray(getIndustries()) as Industry;
@@ -65,13 +73,15 @@ export const completeNewBusinessOnboarding = ({
   }
 
   if (providesStaffingService === undefined) {
-    providesStaffingService = industry.industryOnboardingQuestions.isProvidesStaffingServicesApplicable
+    providesStaffingService = industry.industryOnboardingQuestions
+      .isProvidesStaffingServicesApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
   }
 
   if (certifiedInteriorDesigner === undefined) {
-    certifiedInteriorDesigner = industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable
+    certifiedInteriorDesigner = industry.industryOnboardingQuestions
+      .isCertifiedInteriorDesignerApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
   }
@@ -92,6 +102,12 @@ export const completeNewBusinessOnboarding = ({
   if (interstateMoving === undefined) {
     interstateMoving = industry.industryOnboardingQuestions.isInterstateMovingApplicable
       ? Boolean(randomInt() % 2)
+      : undefined;
+  }
+  //////
+  if (isConstruction === undefined) {
+    isConstruction = industry.industryOnboardingQuestions.isConstructionTypeApplicable
+      ? randomElementFromArray([...constructionOptions])
       : undefined;
   }
 
@@ -151,7 +167,9 @@ export const completeNewBusinessOnboarding = ({
   } else {
     onOnboardingPage.selectRealEstateAppraisal(realEstateAppraisalManagement);
     onOnboardingPage.getRealEstateAppraisal(realEstateAppraisalManagement).should("be.checked");
-    onOnboardingPage.getRealEstateAppraisal(!realEstateAppraisalManagement).should("not.be.checked");
+    onOnboardingPage
+      .getRealEstateAppraisal(!realEstateAppraisalManagement)
+      .should("not.be.checked");
   }
 
   if (interstateLogistics === undefined) {
@@ -168,6 +186,28 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.selectInterstateMoving(!!interstateMoving);
     onOnboardingPage.getInterstateMoving(interstateMoving).should("be.checked");
     onOnboardingPage.getInterstateMoving(!interstateMoving).should("not.be.checked");
+  }
+
+  if (isConstruction === undefined) {
+    onOnboardingPage.getConstruction().should("not.exist");
+  } else {
+    onOnboardingPage.selectConstructionType(isConstruction);
+    onOnboardingPage.getConstruction(isConstruction).should("be.checked");
+
+    const otherValues = constructionOptions.filter((value) => value !== isConstruction);
+    otherValues.forEach((value) => {
+      onOnboardingPage.getConstruction(value).should("not.be.checked");
+    });
+    if (isConstruction !== "COMMERCIAL_OR_INDUSTRIAL") {
+      const residentialConstructionChoices = [
+        "NEW_HOME_CONSTRUCTION",
+        "HOME_RENOVATIONS",
+        "BOTH",
+      ] as ResidentialConstructionType[];
+      const randomAnswerIndex = Math.floor(Math.random() * 3);
+      const residentialConstructionTypeOption = residentialConstructionChoices[randomAnswerIndex];
+      onOnboardingPage.selectResidentialConstructionTypeRadio(residentialConstructionTypeOption);
+    }
   }
 
   if (carService === undefined) {
@@ -257,7 +297,9 @@ export const completeForeignBusinessOnboarding = ({
 export const completeForeignNexusBusinessOnboarding = ({
   industry = undefined,
   locationInNewJersey = false,
-}: Partial<ForeignOnboardingData> & Partial<StartingOnboardingData> & Partial<Registration>): void => {
+}: Partial<ForeignOnboardingData> &
+  Partial<StartingOnboardingData> &
+  Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
