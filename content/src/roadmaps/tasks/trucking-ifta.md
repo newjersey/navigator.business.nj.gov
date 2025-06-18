@@ -1,9 +1,13 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::infoAlert 
+  :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false"
+  calloutType="informational" amountIconText="" filingTypeIconText=""
+  frequencyIconText="" phoneIconText="" emailIconText="" }
 
-  IFTA licenses must be renewed once per year. You can do so online through your account portal.
+
+  IFTA licenses must be renewed once per year. You can do so online once your account has been created.
+
 
   :::
 
@@ -15,6 +19,7 @@ summaryDescriptionMd: >-
 
 
   IFTA jurisdictions constitute the lower 48 U.S. states and the 10 Canadian provinces. Vehicles must display **1 or more of the following** to travel through IFTA member jurisdictions:
+
 
   * A valid IFTA license and two IFTA decals issued by a the IFTA member jurisdiction in which they are based
 
