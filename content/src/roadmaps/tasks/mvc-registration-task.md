@@ -5,7 +5,12 @@ summaryDescriptionMd: >-
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
-  You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
+  * A Motor Vehicle Commission
+
+  (MVC) Entity Identification Number (EIN) is required before registering a vehicle
+
+
+  * You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
 
 
   :::
