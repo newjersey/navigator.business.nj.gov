@@ -13,6 +13,7 @@ There are different types of ownership for different business structures. For ex
 * **Sole proprietorship:** Owned by one person who is personally responsible for the business, including debts and taxes
 * **Partnership:** Owned by 2 or more people who share the responsibilities
 * **Corporation:** Owned by shareholders and is a separate legal entity from its owners
+* **Limited Liability Company**: Members (owners) are provided some liability protection
 * **Cooperative (co-op):** Owned and run by its members, who make decisions together for their shared benefit
 
 [Learn more about business structures and ownership. ](https://business.nj.gov/pages/choose-a-business-structure)
