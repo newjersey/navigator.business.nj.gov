@@ -18,7 +18,7 @@ summaryDescriptionMd: >-
 
   * Class B or C with “P” Endorsement, for vehicles designed to transport 16 or more passengers.
 
-  * Class B or C with “S” Endorsement, for school buses used to transport students. **Please note that school buses require both an “S” and “P” CDL endorsement.**
+  * Class B or C with “S” Endorsement, for school buses used to transport students. **School buses require both an “S” and “P” CDL endorsement.**
 
   * Class A, B, or C  with “H” Endorsement, for vehicles transporting hazardous materials requiring placards
 
