@@ -12,7 +12,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  If you plan to operate vehicles outside of a base NJ jurisdiction, you will need to license them under the International Fuel Tax Agreement (IFTA).
+  If you plan to operate vehicles outside of a base NJ jurisdiction, you will need to license them under IFTA.
 
 
   &nbsp;
