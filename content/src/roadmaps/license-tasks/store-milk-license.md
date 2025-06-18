@@ -30,7 +30,7 @@ webflowType: business-license
 * Business name 
 * Business address
 * Social Security number or `Employer Identification Number (EIN)|ein` (FEIN on the form)
-* Type of ownership (Cooperative, Corporation, Partnership, or Sole Proprietorship)
+* `Type of ownership|type-of-ownership`
 * Names, titles, and addresses of all officers and directors, if a corporation
 * Franchisee’s name, if applicable
 * Trade name, if applicable
@@ -41,7 +41,7 @@ webflowType: business-license
 
 * Date of purchase
 * Previous owner’s business name and trade name, if known
-* Previous owner’s `NJ Department of Agriculture (NJDA) ID|njda-id`, if known
+* Previous owner’s `NJ Department of Agriculture (NJDA) ID|njda-id` , if known
 * Weekly average quarts of milk sold by the previous owner in the past 2 months, if known
 
 You can [apply for your license online](https://www-agr.state.nj.us/agriculture/AG_NJFARMS/welcome.html) or [by mail](https://www.nj.gov/agriculture/pdf/storemilklic.pdf). You also need to pay all applicable fees based on whether you’re opening a new store or taking over an existing one.
