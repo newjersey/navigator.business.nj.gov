@@ -1,17 +1,23 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::infoAlert 
+  :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false"
+  calloutType="informational" amountIconText="" filingTypeIconText=""
+  frequencyIconText="" phoneIconText="" emailIconText="" }
 
-  A Motor Vehicle Commission 
+
+  * A Motor Vehicle Commission
 
   (MVC) Entity Identification Number (EIN) is required before applying for or changing a vehicle title.
+
+
+  * You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
+
 
   :::
 
 
   You may need a title for any vehicles owned by your business.
-
 
 
   &nbsp;
@@ -65,10 +71,6 @@ For vessels, you will need:
 * Hull Identification Number (HIN), the vessel equivalent of a Vehicle Identification Number (VIN)
 * Proof of sales tax payment or exemption
 * USCG documentation, if the vessel is documented with the U.S. Coast Guard
-
-:::infoAlert 
- You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
-:::
 
 :::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
 If you operate a vehicle or vessel under an individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
