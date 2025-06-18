@@ -16,4 +16,4 @@ There are different types of ownership for different business structures. For ex
 * **Limited Liability Company**: Members (owners) are provided some liability protection
 * **Cooperative (co-op):** Owned and run by its members, who make decisions together for their shared benefit
 
-[Learn more about business structures and ownership. ](https://business.nj.gov/pages/choose-a-business-structure)
+[Learn more about business structures and ownership]. (https://business.nj.gov/pages/choose-a-business-structure)
