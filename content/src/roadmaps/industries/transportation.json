@@ -59,7 +59,7 @@
       "task": "transportation-inspection",
       "weight": 17,
       "step": 4,
-      "required": true
+      "required": false
     },
     {
       "step": 4,
