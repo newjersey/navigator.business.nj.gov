@@ -2,7 +2,7 @@
 
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { UpdateQueue } from "@/lib/types/types";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {

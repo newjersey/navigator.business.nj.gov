@@ -1,16 +1,37 @@
-import { UpdateQueue } from "@/lib/types/types";
 import {
   Business,
   BusinessUser,
+  EnvironmentData,
+  FormationData,
+  FormationFormData,
   Preferences,
   ProfileData,
+  RoadmapTaskData,
   TaskProgress,
   TaxFilingData,
   UserData,
   XrayData,
 } from "@businessnjgovnavigator/shared";
-import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
-import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+
+export interface UpdateQueue {
+  queue: (userData: Partial<UserData>) => UpdateQueue;
+  queueBusiness: (business: Business) => UpdateQueue;
+  queueSwitchBusiness: (id: string) => UpdateQueue;
+  queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
+  queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
+  queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
+  queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
+  queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
+  queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
+  queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
+  queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
+  queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
+  queueXrayRegistrationData: (xrayRegistrationData: Partial<XrayData>) => UpdateQueue;
+  queueRoadmapTaskData: (roadmapData: Partial<RoadmapTaskData>) => UpdateQueue;
+  update: (config?: { local?: boolean }) => Promise<void>;
+  current: () => UserData;
+  currentBusiness: () => Business;
+}
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;
@@ -216,6 +237,23 @@ export class UpdateQueueFactory implements UpdateQueue {
           taskItemChecklist: {
             ...this.currentBusiness().taskItemChecklist,
             ...taskItemChecklist,
+          },
+        },
+      },
+    };
+    return this;
+  }
+
+  queueRoadmapTaskData(roadmapTaskData: Partial<RoadmapTaskData>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          roadmapTaskData: {
+            ...this.currentBusiness().roadmapTaskData,
+            ...roadmapTaskData,
           },
         },
       },

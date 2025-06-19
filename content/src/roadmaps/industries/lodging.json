@@ -41,6 +41,11 @@
       "step": 3,
       "weight": 14,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Lodging",
@@ -49,7 +54,6 @@
     "rooming-boarding-house-owner",
     "hotel-food",
     "hotel-liquor",
-    "business-vehicle-title-reg",
     "inspect-boiler",
     "business-vehicle-irp",
     "inspect-pv",

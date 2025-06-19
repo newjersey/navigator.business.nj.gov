@@ -141,11 +141,6 @@
       "addOn": "pest-pesticide-dealer-license"
     },
     {
-      "id": "business-vehicle-title-reg",
-      "addOn": "business-vehicle",
-      "questionText": "Do you plan to either own or operate business vehicles in NJ?"
-    },
-    {
       "id": "retail-pesticide-dealer-licensing",
       "questionText": "Do you plan to sell pesticides?",
       "addOn": "retail-pesticide-dealer-license"

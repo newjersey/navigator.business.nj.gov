@@ -42,7 +42,7 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
 
   const buildAndSetRoadmap = async (): Promise<void> => {
     if (business?.onboardingFormProgress === "COMPLETED") {
-      const roadmap = await buildUserRoadmap(business.profileData);
+      const roadmap = await buildUserRoadmap(business.profileData, business.roadmapTaskData);
       setRoadmap(roadmap);
     }
   };
