@@ -66,7 +66,8 @@
     "weights-measures",
     "business-vehicle-title-reg",
     "crematory",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "mvc-cpcn"
   ],
   "displayname": "funeral",
   "industryOnboardingQuestions": {
