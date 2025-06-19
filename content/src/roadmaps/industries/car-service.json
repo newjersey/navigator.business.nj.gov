@@ -54,11 +54,6 @@
       "weight": 13,
       "task": "mvc-registration-task",
       "required": true
-    },
-    {
-      "step": 4,
-      "weight": 90,
-      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Car Service",
