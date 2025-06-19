@@ -40,6 +40,8 @@ summaryDescriptionMd: >-
   * Inter-state regular route services
 
   * Charter buses
+issuingAgency: NJ Motor Vehicle Commission | Business Licensing Services Bureau
+  – Passenger Carrier Unit
 ---
 &nbsp;
 
