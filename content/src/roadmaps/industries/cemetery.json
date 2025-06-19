@@ -61,7 +61,8 @@
   ],
   "name": "Cemetery",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "mvc-cpcn"
   ],
   "displayname": "cemetery",
   "industryOnboardingQuestions": {
