@@ -54,7 +54,8 @@
     "business-vehicle-irp",
     "inspect-pv",
     "inspect-fridge",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "mvc-cpcn"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
