@@ -51,7 +51,8 @@
     "business-vehicle-title-reg",
     "business-vehicle-irp",
     "bus-initial-inspection",
-    "resale-tax-cert"
+    "resale-tax-cert",
+    "mvc-cpcn"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
