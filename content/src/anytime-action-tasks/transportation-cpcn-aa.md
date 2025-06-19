@@ -4,7 +4,13 @@ name: Get Your Certificate of Public Convenience and Necessity (CPCN)
 category:
   - manage-my-business-vehicles
 industryIds: []
-sectorIds: []
+sectorIds:
+  - transportation-and-warehousing
+  - educational-services
+  - accommodation-and-food-services
+  - utilities
+  - arts-entertainment-and-recreation
+  - health-care-and-social-assistance
 urlSlug: transportation-cpcn-aa
 summaryDescriptionMd: >-
   :::callout{ showHeader="true" headerText="" showIcon="false"
