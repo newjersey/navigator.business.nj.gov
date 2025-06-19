@@ -22,17 +22,18 @@ sectorIds:
   - retail-trade-and-ecommerce
 urlSlug: trucking-irp-aa
 summaryDescriptionMd: >-
-  Before transporting passengers or hauling loads across state lines, your
-  vehicles must be registered with the IRP in the state where you formed your
-  business. The IRP is a reciprocity agreement between all states in the U.S.
-  and Canada, and **allows legal operation between jurisdictions.**
+  :::callout{ showHeader="true" headerText="" showIcon="false"
+  calloutType="informational" amountIconText="" filingTypeIconText=""
+  frequencyIconText="" phoneIconText="" emailIconText="" }
 
-
-  :::infoAlert
 
   Recently purchased, qualifying vehicles cannot be registered with the NJ MVC until IRP-issued, appointed license plates and cab card are received by the owner.
 
+
   :::
+
+
+  Before transporting passengers or hauling loads across state lines, your vehicles must be registered with the IRP in the state where you formed your business. The IRP is a reciprocity agreement between all states in the U.S. and Canada, and **allows legal operation between jurisdictions.**
 issuingAgency: NJ Motor Vehicle Commission
 callToActionText: Register With the IRP
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
