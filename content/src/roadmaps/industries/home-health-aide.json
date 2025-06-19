@@ -63,7 +63,8 @@
   "name": "Home Health Aide Placement",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "mvc-cpcn"
   ],
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
