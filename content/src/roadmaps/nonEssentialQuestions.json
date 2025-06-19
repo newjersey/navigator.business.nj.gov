@@ -207,7 +207,7 @@
     },
     {
       "addOn": "vehicle-cpcn",
-      "questionText": "“Will your business provide intrastate transportation of passengers to and from **casinos in Atlantic city,** or **in exchange for compensation**?”",
+      "questionText": "“Will your business provide intrastate transportation of passengers to and from **casinos in Atlantic city,** or **in exchange for compensation** from passengers or groups?”",
       "id": "mvc-cpcn"
     }
   ]
