@@ -116,7 +116,7 @@ describe("getErrorStateForEmergencyTripPermitField", () => {
 
     it("displays no error message for a time in the future less than 5 days", () => {
       const state = generateEmergencyTripPermitApplicationData({
-        permitDate: "01/01/2000",
+        permitDate: "01/05/2000",
         permitStartTime: "23:50",
       });
       const fakeDate = new Date("January 1, 2000 00:00:00 EST");
@@ -126,6 +126,21 @@ describe("getErrorStateForEmergencyTripPermitField", () => {
         field: "permitStartTime",
         hasError: false,
         label: "",
+      });
+    });
+
+    it("displays an error message for a time 5 days in the future", () => {
+      const state = generateEmergencyTripPermitApplicationData({
+        permitDate: "01/06/2000",
+        permitStartTime: "00:15",
+      });
+      const fakeDate = new Date("January 1, 2000 00:00:00 EST");
+      jest.useFakeTimers().setSystemTime(fakeDate);
+
+      expect(getErrorStateForEmergencyTripPermitField("permitStartTime", state)).toStrictEqual({
+        field: "permitStartTime",
+        hasError: true,
+        label: "${fieldName} must be no more than 5 days from now.",
       });
     });
   });
