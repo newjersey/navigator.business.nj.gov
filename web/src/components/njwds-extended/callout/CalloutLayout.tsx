@@ -33,12 +33,10 @@ export const CalloutLayout = (props: CalloutLayoutProps): ReactElement => {
           )}
           <span className="text-bold">{props.headingText}</span>
         </div>
-        {props.children && (
-          <div className="margin-top-105">
-            <div>{props.children}</div>
-            <IconTextList items={props.iconItems} />
-          </div>
-        )}
+        <div className="margin-top-105">
+          <div>{props.children}</div>
+          <IconTextList items={props.iconItems} />
+        </div>
       </div>
     );
   }

@@ -167,5 +167,30 @@ describe("Callout Component", () => {
       const emailLink = screen.getByRole("link", { name: email });
       expect(emailLink).toHaveAttribute("href", `mailto:${email}`);
     });
+
+    it("should render a combination of all icon types correctly without needing body text", () => {
+      const { amount, filingType, phone, email } = TEST_DATA.mixedData;
+
+      render(
+        <Callout
+          calloutType="quickReference"
+          amountIconText={amount}
+          filingTypeIconText={filingType}
+          phoneIconText={phone}
+          emailIconText={email}
+          showHeader
+          headerText="soemthing"
+        />,
+      );
+
+      expect(screen.getByText(amount)).toBeInTheDocument();
+      expect(screen.getByText(filingType)).toBeInTheDocument();
+
+      const phoneLink = screen.getByRole("link", { name: phone });
+      expect(phoneLink).toHaveAttribute("href", `tel:${phone}`);
+
+      const emailLink = screen.getByRole("link", { name: email });
+      expect(emailLink).toHaveAttribute("href", `mailto:${email}`);
+    });
   });
 });
