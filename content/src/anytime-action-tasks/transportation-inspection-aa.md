@@ -1,4 +1,5 @@
 ---
+notesMd: ""
 id: transportation-inspection-aa
 name: Schedule Your Initial Bus Inspection
 category:
@@ -42,21 +43,21 @@ Before scheduling your initial inspection, make sure that:
 
 ## How to Schedule Your Inspection
 
-**School Buses:** Call the MVC School Bus Inspection Unit at **(609) 633-9473** to schedule an initial inspection.
+:::callout{ showHeader="true" headerText="School Buses:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText=" (609) 633-9473" emailIconText="" }
 
-**Commercial Buses:** Call the MVC Commercial Bus Inspection Unit at **(609) 777-4196** to schedule an initial inspection.
+Call the MVC School Bus Inspection Unit to schedule an initial inspection.
+
+:::
+
+:::callout{ showHeader="true" headerText="Commercial Buses:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9473 " emailIconText="" }
+
+Call the MVC School Bus Inspection Unit at to schedule an initial inspection.
+
+:::
 
 You'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site.
 
 After passing initial inspection, **buses must continue to be inspected every 6 months.** The NJ MVC inspector assigned to your area will schedule these for you, and will reach out shortly before the scheduled inspection date as a reminder.
-
-:::callout{ showHeader="true" headerText="What if I don't get an initial bus inspection?" showIcon="false" calloutType="warning" }
-
-* You cannot legally transport passengers in the vehicle
-* You will not receive the certificates and documentation necessary to register the bus for the appropriate plates
-* Operating a bus without approval can result in fines, impoundment, or license suspension
-
-  :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
@@ -70,5 +71,13 @@ After passing initial inspection, **buses must continue to be inspected every 6 
 
 * Form SS-14, “Authorization to Issue School Bus License Plates”
 * MVC-issued inspection sticker, to be displayed on the vehicle
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't get an initial bus inspection?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+* You cannot legally transport passengers in the vehicle
+* You will not receive the certificates and documentation necessary to register the bus for the appropriate plates
+* Operating a bus without approval can result in fines, impoundment, or license suspension
 
 :::
