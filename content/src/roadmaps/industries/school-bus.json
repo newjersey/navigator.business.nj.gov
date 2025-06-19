@@ -53,7 +53,7 @@
       "step": 3,
       "weight": 15,
       "licenseTask": "",
-      "required": true,
+      "required": false,
       "task": "transportation-inspection"
     },
     {
