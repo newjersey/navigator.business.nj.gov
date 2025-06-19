@@ -6,7 +6,7 @@
       "step": 3,
       "task": "transportation-inspection",
       "weight": 10,
-      "required": true
+      "required": false
     }
   ]
 }
