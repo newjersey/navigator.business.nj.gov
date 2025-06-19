@@ -3,7 +3,7 @@
   "displayname": "transportation-initial-inspection",
   "roadmapSteps": [
     {
-      "step": 4,
+      "step": 3,
       "task": "transportation-inspection",
       "weight": 10,
       "required": true
