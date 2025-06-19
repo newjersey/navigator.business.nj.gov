@@ -23,7 +23,9 @@ summaryDescriptionMd: >-
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
-  Before purchasing a bus, **it's highly recommended to seek consultation from a transportation specialist or licensed NJ bus dealer.** This will ensure that your bus can be legally operated within the state of NJ.
+  * Before purchasing a bus, **it's highly recommended to seek consultation from a transportation specialist or licensed NJ bus dealer.** This will ensure that your bus can be legally operated within the state of NJ.
+
+  * After passing initial inspection, **buses must continue to be inspected every 6 months.** The NJ MVC inspector assigned to your area will schedule these for you, and will reach out shortly before the scheduled inspection date as a reminder.
 
 
   :::
