@@ -39,15 +39,21 @@
     },
     {
       "step": 4,
-      "weight": 15,
+      "weight": 14,
       "task": "transportation-entity-id",
       "required": true
     },
     {
       "step": 4,
-      "weight": 16,
+      "weight": 15,
       "task": "mvc-title-task",
       "required": true
+    },
+    {
+      "step": 4,
+      "task": "transportation-cpcn",
+      "required": true,
+      "weight": 16
     },
     {
       "task": "transportation-inspection",
