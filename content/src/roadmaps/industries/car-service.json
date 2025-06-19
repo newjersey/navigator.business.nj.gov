@@ -51,7 +51,13 @@
     },
     {
       "step": 3,
-      "weight": 13,
+      "task": "transportation-cpcn",
+      "required": true,
+      "weight": 13
+    },
+    {
+      "step": 3,
+      "weight": 14,
       "task": "mvc-registration-task",
       "required": true
     }
