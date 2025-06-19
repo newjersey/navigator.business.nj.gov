@@ -32,7 +32,7 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         minDate={getMinDate()}
-        maxDate={getMinDate()?.add(5, "days")}
+        maxDate={getMinDate()?.add(4, "days")}
         value={
           context.state.applicationInfo.permitDate
             ? parseDateWithFormat(context.state.applicationInfo.permitDate, defaultDateFormat)
