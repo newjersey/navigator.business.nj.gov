@@ -49,9 +49,9 @@ Call the MVC School Bus Inspection Unit to schedule an initial inspection.
 
 :::
 
-:::callout{ showHeader="true" headerText="Commercial Buses:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9473 " emailIconText="" }
+:::callout{ showHeader="true" headerText="Commercial Buses:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="609) 777-4196." emailIconText="" }
 
-Call the MVC School Bus Inspection Unit at to schedule an initial inspection.
+Call the MVC Commercial Bus Inspection Unit at to schedule an initial inspection.
 
 :::
 
