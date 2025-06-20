@@ -85,9 +85,9 @@ import {
   naicsCodeTaskId,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
-import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -165,20 +165,6 @@ const ProfilePage = (props: Props): ReactElement => {
       setShouldLockFormationFields(hasCompletedFormation(business));
     }
   }, business);
-
-  const formatDate = (date: string): string => {
-    if (!date) {
-      return "";
-    }
-
-    const dateIsValid = /^\d{2}\/\d{4}$/.test(date);
-
-    if (dateIsValid) {
-      return dayjs(date).format("MM/YYY");
-    } else {
-      return date;
-    }
-  };
 
   const onBack = async (): Promise<void> => {
     if (!business) return;
@@ -450,7 +436,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    personalize: <PersonalizeYourTasksTab />,
+    personalize: (
+      <PersonalizeYourTasksTab
+        fieldErrors={getInvalidFieldIds()}
+        lockFormationDateField={shouldLockFormationFields}
+      />
+    ),
   };
 
   const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -509,7 +500,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    personalize: <PersonalizeYourTasksTab />,
+    personalize: (
+      <PersonalizeYourTasksTab
+        fieldErrors={getInvalidFieldIds()}
+        lockFormationDateField={shouldLockFormationFields}
+      />
+    ),
   };
 
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -702,7 +698,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    personalize: <PersonalizeYourTasksTab />,
+    personalize: (
+      <PersonalizeYourTasksTab
+        fieldErrors={getInvalidFieldIds()}
+        lockFormationDateField={shouldLockFormationFields}
+      />
+    ),
   };
 
   const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -834,7 +835,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    personalize: <PersonalizeYourTasksTab />,
+    personalize: (
+      <PersonalizeYourTasksTab
+        fieldErrors={getInvalidFieldIds()}
+        lockFormationDateField={shouldLockFormationFields}
+      />
+    ),
   };
 
   const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -895,8 +901,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    // personalize: <PersonalizeYourTasksTab />, // disabled for now while product decides best path forward
-    personalize: <></>,
+    personalize: (
+      <PersonalizeYourTasksTab
+        fieldErrors={getInvalidFieldIds()}
+        lockFormationDateField={shouldLockFormationFields}
+      />
+    ),
   };
 
   return (
