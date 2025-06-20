@@ -64,10 +64,10 @@ Depending on your business type or dealership license, you may also need:
 
 Gather your required documents and fill out the appropriate form(s) linked below.
 
-* [New and Used Car Dealership](https://www.nj.gov/mvc/pdf/business/newuseddealer.pdf) [pdf]
-* [Used Car Dealership](https://www.nj.gov/mvc/pdf/business/useddealer.pdf) [pdf]
-* [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) [pdf]
-* [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) [pdf]
+* **[New and Used Car Dealership](https://www.nj.gov/mvc/pdf/business/newuseddealer.pdf)** [pdf]
+* **[Used Car Dealership](https://www.nj.gov/mvc/pdf/business/useddealer.pdf)** [pdf]
+* **[Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf)** [pdf]
+* **[Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf)** [pdf]
 
 Once you’ve completed your application(s), mail them to:
 
