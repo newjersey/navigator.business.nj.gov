@@ -354,7 +354,9 @@ class GTMTracker {
           return acc;
         },
         {
-          event: eventName,
+          // also should double check that this data isn't somehow already making it in / search as to how it might be
+          event: "analytics_event",
+          event_category: eventName, // so this is what I want to fix, basically I want to make the attribtue here something besdies event, make my event something hard coded. Make that triggered and caught in GTM. Then forward attributes that are always on everything (double check but the event and 3 legacy fields, event relabeled), then I'll make sure everything is forwarded to GTM correctly and in the right type to be tracked as such
           hostname: location.hostname,
           on_site_section,
           on_task_id,
