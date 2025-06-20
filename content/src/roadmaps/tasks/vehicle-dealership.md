@@ -41,22 +41,38 @@ agencyAdditionalContext: Business Licensing Services Bureau
 
 ## Application Requirements
 
+#### Required Documentation
+
+You must submit copies of the following:
+
 * `Federal Taxpayer Identification Number (FEIN)|federal-tax-id`
-* `Certificate of Formation|certificate-formation` or Corporate Resolution
+* `Certificate of Formation|certificate-formation`
+* `Certificate of Authority|certificate-authority-sales-tax`
+* Certificate of Liability Insurance, in the amount of $100,000 to $250,000 for bodily injury, and $25,000 for property 
+* Surety Bond, in the amount of $10,000
 * Driver’s license(s) for all owners, members, and partners
-* Deed, lease, or purchase agreement for your business location
-* Municipal Approval Certificate for Business License, to indicate your business follows local `zoning|zoning` and municipal laws
-* Liability insurance coverage, in the amount of $100,000 to $250,000 for bodily injury, and $25,000 for property damage
-* Motor vehicle dealer bond, in the amount of $10,000
-* Ability to pass a background check
+* Passport-size color photographs of all owners, members, and partners
+* Deed, lease, or purchase agreement for your business location. If leasing the property, the lease agreement must be for a minimum of 12 months.
+* Phone bill or phone installation order with your business name and addresses listed on the document
+* Site plans or photographs that clearly show the complete premises of where you plan to conduct business
+
+#### Required Forms
+
+The following are included in each application form linked below, and must be completed by all applicants:
+* Applicant’s Information Form BLS-163
+* Child Support Certification Form BLS-43
+* Business Hours Form BLS-19
+* Fingerprint Request Notification Form BLS-43
+* Authorized Signatories Form BLS-20
+* Municipal Approval Certificate for Business License Form BLS-162, which must be signed and stamped by the municipality.
+
+#### Other Requirements
 
 Depending on your business type or dealership license, you may also need:
-
 * Alternate/Fictitious Name Filing Certificate, if planning to deal or lease under a name different from your business
-* `Certificate of Authority|certificate-authority-sales-tax` from the Department of Treasury, for out-of-state corporations and LLCs
-* Distribution of stock, if applicable
-* Manufacturer and Franchise Agreements, for new vehicle dealers only
-* Established `business location|dealership-business-location`, for the sale of new or used vehicles only
+* Dealer Certification of License Location Type and Proper Walls Form BLS-158, for used vehicle dealers only
+* Franchise Agreement, for new vehicle dealers only
+* Established `business location|dealership-business-location`, for new or used vehicles dealers only
 
 &nbsp;
 
