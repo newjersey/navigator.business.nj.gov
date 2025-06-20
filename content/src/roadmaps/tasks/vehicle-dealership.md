@@ -48,8 +48,8 @@ You must submit copies of the following:
 * `Federal Taxpayer Identification Number (FEIN)|federal-tax-id`
 * `Certificate of Formation|certificate-formation`
 * `Certificate of Authority|certificate-authority-sales-tax`
-* Certificate of Liability Insurance, in the amount of $100,000 to $250,000 for bodily injury, and $25,000 for property 
-* Surety Bond, in the amount of $10,000
+* `Certificate of Liability Insurance|liability-insurance`, in the amount of $100,000 to $250,000 for bodily injury, and $25,000 for property 
+* `Surety Bond|surety-bond`, in the amount of $10,000
 * Driver’s license(s) for all owners, members, and partners
 * Passport-size color photographs of all owners, members, and partners
 * Deed, lease, or purchase agreement for your business location. If leasing the property, the lease agreement must be for a minimum of 12 months.
@@ -69,9 +69,9 @@ The following are included in each application form linked below, and must be co
 #### Other Requirements
 
 Depending on your business type or dealership license, you may also need:
-* Alternate/Fictitious Name Filing Certificate, if planning to deal or lease under a name different from your business
-* Dealer Certification of License Location Type and Proper Walls Form BLS-158, for used vehicle dealers only
-* Franchise Agreement, for new vehicle dealers only
+* [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if planning to deal or lease under a name different from your business
+* [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf),  for used vehicle dealers only
+* `Franchise Agreement|franchise-agreement`, for new vehicle dealers only
 * Established `business location|dealership-business-location`, for new or used vehicles dealers only
 
 &nbsp;
