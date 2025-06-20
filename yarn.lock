@@ -5001,7 +5001,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 8.19.4
-    cypress: 14.3.3
+    cypress: 14.5.0
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -5200,7 +5200,7 @@ __metadata:
     copy-webpack-plugin: 13.0.0
     cross-env: 7.0.3
     cspell: 8.19.4
-    cypress: 14.3.3
+    cypress: 14.5.0
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -17699,9 +17699,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:14.3.3":
-  version: 14.3.3
-  resolution: "cypress@npm:14.3.3"
+"cypress@npm:14.5.0":
+  version: 14.5.0
+  resolution: "cypress@npm:14.5.0"
   dependencies:
     "@cypress/request": ^3.0.8
     "@cypress/xvfb": ^1.2.4
@@ -17729,6 +17729,7 @@ __metadata:
     figures: ^3.2.0
     fs-extra: ^9.1.0
     getos: ^3.2.1
+    hasha: 5.2.2
     is-installed-globally: ~0.4.0
     lazy-ass: ^1.6.0
     listr2: ^3.8.3
@@ -17748,7 +17749,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: c76b58e25a3dfa8eefd8047f247fed9a6ad21a3f277c1273dd49caeef8ae2916f472f8dad4870c32d5fdefee46766dc54655b30eb451c238bf9f22ffa78fd59f
+  checksum: a310cb3b8edcca3f1973570be6da3337aaa692bb6e04121f11486d5c02542c992d5e47346f8bd94c33243d23e30023a5d4b296f237f0f3ce72cef35002c2a7b0
   languageName: node
   linkType: hard
 
@@ -22148,6 +22149,16 @@ __metadata:
     inherits: ^2.0.3
     minimalistic-assert: ^1.0.1
   checksum: e350096e659c62422b85fa508e4b3669017311aa4c49b74f19f8e1bc7f3a54a584fdfd45326d4964d6011f2b2d882e38bea775a96046f2a61b7779a979629d8f
+  languageName: node
+  linkType: hard
+
+"hasha@npm:5.2.2":
+  version: 5.2.2
+  resolution: "hasha@npm:5.2.2"
+  dependencies:
+    is-stream: ^2.0.0
+    type-fest: ^0.8.0
+  checksum: 06cc474bed246761ff61c19d629977eb5f53fa817be4313a255a64ae0f433e831a29e83acb6555e3f4592b348497596f1d1653751008dda4f21c9c21ca60ac5a
   languageName: node
   linkType: hard
 
@@ -34911,7 +34922,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^0.8.1":
+"type-fest@npm:^0.8.0, type-fest@npm:^0.8.1":
   version: 0.8.1
   resolution: "type-fest@npm:0.8.1"
   checksum: d61c4b2eba24009033ae4500d7d818a94fd6d1b481a8111612ee141400d5f1db46f199c014766b9fa9b31a6a7374d96fc748c6d688a78a3ce5a33123839becb7
