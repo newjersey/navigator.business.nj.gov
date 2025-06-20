@@ -59,6 +59,7 @@ You must submit copies of the following:
 #### Required Forms
 
 The following are included in each application form linked below, and must be completed by all applicants:
+
 * Applicant’s Information Form BLS-163
 * Child Support Certification Form BLS-43
 * Business Hours Form BLS-19
@@ -69,6 +70,7 @@ The following are included in each application form linked below, and must be co
 #### Other Requirements
 
 Depending on your business type or dealership license, you may also need:
+
 * [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if planning to deal or lease under a name different from your business
 * [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf),  for used vehicle dealers only
 * `Franchise Agreement|franchise-agreement`, for new vehicle dealers only
