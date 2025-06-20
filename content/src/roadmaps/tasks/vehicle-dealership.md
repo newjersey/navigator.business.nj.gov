@@ -40,23 +40,22 @@ agencyId: nj-motor-vehicle
 
 ## Application Requirements
 
-* Proof of Federal Taxpayer Identification Number (EIN)
-* Copy of Certificate of Formation or Corporate Resolution
+* Proof of `Federal Taxpayer Identification Number (FEIN)|federal-tax-id`
+* Copy of `Certificate of Formation|certificate-formation` or Corporate Resolution
 * Copy of driver’s license(s) for all owners, members, and partners
 * Copy of deed, lease, or purchase agreement for your business location
-* Copy of Alternate/Fictitious Name Filing Certificate, if planning to deal or lease under a name different from your business
-* Copy of Municipal Approval Certificate for Business License, to indicate your business follows local zoning and municipal laws
-* Copy of telephone bill for landline at premises to be licensed
-* Liability insurance coverage, in the amount of $100,000 to $250,000 for bodily injury, and $25 for property damage
+* Copy of Municipal Approval Certificate for Business License, to indicate your business follows local `zoning|zoning` and municipal laws
+* Liability insurance coverage, in the amount of $100,000 to $250,000 for bodily injury, and $25,000 for property damage
 * Motor vehicle dealer bond, in the amount of $10,000
 * Ability to pass a background check
 
 Depending on your business type or dealership license, you may also need:
 
-* Copy of Certificate of Authority from the Department of Treasury, for out-of-state corporations and LLCs
+* Copy of Alternate/Fictitious Name Filing Certificate, if planning to deal or lease under a name different from your business
+* Copy of `Certificate of Authority|certificate-authority-sales-tax` from the Department of Treasury, for out-of-state corporations and LLCs
 * Distribution of stock, if applicable
 * Manufacturer and Franchise Agreements, for new vehicle dealers only
-* Established `business location|business-location` for the sale of new or used vehicles only
+* Established `business location|dealership-business-location`, for the sale of new or used vehicles only
 
 &nbsp;
 
