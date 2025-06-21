@@ -13,7 +13,7 @@ executing==2.2.0
 fonttools==4.58.4
 idna==3.10
 ipdb==0.13.13
-ipython==9.2.0
+ipython==9.3.0
 jedi==0.19.2
 kiwisolver==1.4.8
 Markdown==3.8
