@@ -13,24 +13,23 @@ synonyms:
   - license renewal
   - restore
 ---
-
 ## Application Requirements
 
-- New Jersey dental license number
-- Date of initial license
-- Year you last renewed your license
-- Social Security number
-- List of professional licenses or certificates of any kind, held in any state
-- A list of every job held while your license was expired, including employer names, addresses, and phone numbers
-- List of continuing education courses you have completed since your license expired, including hours
-- A completed Verification of State License form from every state you hold or have held a license, completed by the board of dentistry of each state (included in application)
-- A completed Certification and Authorization form for a criminal history background check with the appropriate fee (form included in application)
-- Child support documentation, if applicable
-- Criminal history and supporting documentation, if applicable
-- Explanation of license suspension, denial, revocation, or surrender, if applicable
-- Name of any New Jersey Division of Consumer Affairs board or committee that has required prior fingerprinting from you, if applicable
-- Month and year of fingerprinting, if applicable
-- Applicable fees paid
+* New Jersey dental license number
+* Date of initial license
+* Year you last renewed your license
+* Social Security number
+* List of professional licenses or certificates of any kind, held in any state
+* A list of every job held while your license was expired, including employer names, addresses, and phone numbers
+* List of continuing education courses you have completed since your license expired, including hours
+* A completed Verification of State License form from every state you hold or have held a license, completed by the board of dentistry of each state (included in application)
+* A completed Certification and Authorization form for a criminal history background check with the appropriate fee (form included in application)
+* Child support documentation, if applicable
+* Criminal history and supporting documentation, if applicable
+* Explanation of license suspension, denial, revocation, or surrender, if applicable
+* Name of any New Jersey Division of Consumer Affairs board or committee that has required prior fingerprinting from you, if applicable
+* Month and year of fingerprinting, if applicable
+* Applicable fees paid
 
 Mail your completed reinstatement application and any fees to:
 
@@ -42,13 +41,13 @@ P.O. Box 45005
 
 Newark, NJ 07101
 
-:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 Your dental license may be suspended or revoked.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 The same dental license number.
 

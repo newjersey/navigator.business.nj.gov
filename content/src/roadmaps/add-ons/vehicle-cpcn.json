@@ -1,0 +1,12 @@
+{
+  "id": "vehicle-cpcn",
+  "displayname": "vehicle-cpcn",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 50,
+      "task": "transportation-cpcn",
+      "required": true
+    }
+  ]
+}

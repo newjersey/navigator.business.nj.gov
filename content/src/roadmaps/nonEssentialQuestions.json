@@ -199,6 +199,16 @@
       "id": "sell-milk-question",
       "questionText": "Will you sell milk or other milk products, such as yogurt or cream?",
       "addOn": "sell-milk"
+    },
+    {
+      "id": "resale-tax-cert",
+      "questionText": "Will you buy products for resale, or will you sell products to resellers?",
+      "addOn": "resale-certificate"
+    },
+    {
+      "addOn": "vehicle-cpcn",
+      "questionText": "“Will your business provide intrastate transportation of passengers to and from **casinos in Atlantic city,** or **in exchange for compensation** from passengers or groups?”",
+      "id": "mvc-cpcn"
     }
   ]
 }

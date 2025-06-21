@@ -1,0 +1,11 @@
+{
+  "id": "resale-certificate",
+  "displayname": "resale-certificate",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "task": "resale-tax-certificate-operating",
+      "weight": 10
+    }
+  ]
+}

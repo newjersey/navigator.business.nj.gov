@@ -75,7 +75,8 @@
   ],
   "name": "Moving Company",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "resale-tax-cert"
   ],
   "displayname": "moving-company",
   "industryOnboardingQuestions": {

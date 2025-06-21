@@ -46,12 +46,13 @@
   "name": "Travel Agency",
   "nonEssentialQuestionsIds": [
     "business-vehicle-title-reg",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "mvc-cpcn"
   ],
   "displayname": "travel-agent",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "home-based travel agent",

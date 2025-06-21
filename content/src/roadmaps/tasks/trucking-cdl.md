@@ -1,5 +1,5 @@
 ---
-summaryDescriptionMd: >
+summaryDescriptionMd: >-
   A Commercial Driver License (CDL) is required to operate large, heavy, or
   specialized commercial vehicles. A business owner only needs a CDL if they
   themselves plan to drive these vehicles. Otherwise, it is their responsibility
@@ -18,7 +18,7 @@ summaryDescriptionMd: >
 
   * Class B or C with “P” Endorsement, for vehicles designed to transport 16 or more passengers.
 
-  * Class B or C with “S” Endorsement, for school buses used to transport students. **Please note that school buses require both an “S” and “P” CDL endorsement.**
+  * Class B or C with “S” Endorsement, for school buses used to transport students. **School buses require both an “S” and “P” CDL endorsement.**
 
   * Class A, B, or C  with “H” Endorsement, for vehicles transporting hazardous materials requiring placards
 
@@ -27,6 +27,18 @@ summaryDescriptionMd: >
   * Class A with “T” Endorsement, for combination vehicles with two or more trailers.
 
   * Class A or B with “X” Endorsement, for vehicles that require a combination of Hazmat (“H”) and Tanker (“N”) endorsements, such as fuel tankers and chemical transport trucks
+
+
+  :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+
+  * Endorsements (“P,” “S,” “H,” “T,” “X”)  are only added to a CDL upon request and require that applicants pass [additional knowledge and skills tests.](https://www.nj.gov/mvc/drivertopics/cdlendorsements.htm)
+
+
+  * You must apply for a CDL in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard) before showing up.
+
+
+  :::
 urlSlug: trucking-cdl
 displayname: trucking-cdl
 name: Make Sure You or Your Drivers Have a Commercial Driver's License (CDL)
@@ -57,14 +69,6 @@ formName: BA-208C
 * Successfully completion of skills tests, including a vehicle inspection test, basic vehicle control test, and on-road test
 * Additional skills tests, for specific endorsements
 * Applicable fees paid
-
-:::infoAlert
-Endorsements (“P,” “S,” “H,” “T,” “X”)  are only added to a CDL upon request and require that applicants pass [additional knowledge and skills tests.](https://www.nj.gov/mvc/drivertopics/cdlendorsements.htm)
-:::
-
-:::infoAlert 
- You must apply for a CDL in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard) before showing up.
-:::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

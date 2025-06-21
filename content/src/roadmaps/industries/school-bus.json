@@ -53,7 +53,7 @@
       "step": 3,
       "weight": 15,
       "licenseTask": "",
-      "required": true,
+      "required": false,
       "task": "transportation-inspection"
     },
     {
@@ -79,11 +79,6 @@
       "step": 4,
       "weight": 10,
       "task": "trucking-parking"
-    },
-    {
-      "step": 4,
-      "weight": 90,
-      "task": "community-right-to-know-survey"
     }
   ],
   "name": "School Bus",

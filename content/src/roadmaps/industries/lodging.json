@@ -54,11 +54,12 @@
     "business-vehicle-irp",
     "inspect-pv",
     "inspect-fridge",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "mvc-cpcn"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host, rooming house, boarding house",

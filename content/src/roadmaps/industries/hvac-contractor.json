@@ -1,14 +1,7 @@
 {
-  "displayname": "hvac-contractor",
   "naicsCodes": "238220",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "professional-scientific-and-technical-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -58,6 +51,15 @@
     }
   ],
   "name": "HVAC Contractor",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "hvac-contractor",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": false
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R, contractor",
   "id": "hvac-contractor",
   "description": "Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration systems (HVACR)",

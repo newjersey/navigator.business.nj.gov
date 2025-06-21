@@ -52,7 +52,7 @@
   "displayname": "cleaning-janitorial-services",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "cleaning lady, house cleaner, maid service, maid, cleaning company, cleaning crew, commercial cleaning service, cleaning and maintenance, turnover service,  ",

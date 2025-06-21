@@ -49,7 +49,7 @@
   "displayname": "courier",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "messenger service, same day delivery service",

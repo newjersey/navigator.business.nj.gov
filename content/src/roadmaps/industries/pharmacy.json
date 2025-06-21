@@ -74,6 +74,11 @@
       "weight": 20,
       "required": true,
       "licenseTask": "rmw-generator-registration"
+    },
+    {
+      "step": 4,
+      "weight": 25,
+      "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Pharmacy",

@@ -56,12 +56,13 @@
     "inspect-boiler",
     "inspect-pv",
     "inspect-fridge",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "resale-tax-cert"
   ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "health spa, strength training and conditioning, athletic club, boxing club, fitness center, gym, swim club, sports club, exercise, electrolysis, electrologist",

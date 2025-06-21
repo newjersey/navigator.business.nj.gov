@@ -11,9 +11,8 @@ id: certificate-vending-machine
 callToActionLink: https://www.nj.gov/health/lh/documents/LocalHealthDirectory.pdf
 callToActionText: Contact My Department of Health
 ---
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-
-A health certificate from your local department of health (if needed).
+A health certificate from your local Department of Health.
 
 :::

@@ -59,12 +59,13 @@
     "business-vehicle-irp",
     "inspect-fridge",
     "inspect-pv",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "resale-tax-cert"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "id": "generic",

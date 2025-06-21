@@ -60,11 +60,6 @@
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"
-    },
-    {
-      "step": 4,
-      "weight": 101,
-      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Car Rental",

@@ -21,15 +21,15 @@ callToActionLink: ""
 callToActionText: ""
 formName: ""
 ---
+:::callout{ showHeader="true" headerText="What if I don't have a board of trustees?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-
-A board of trustees to govern and lead your nonprofit organization.
+A board of trustees is a legal requirement for nonprofits and is needed to apply for tax exempt status with the IRS.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't have a board of trustees?" showIcon="false" calloutType="conditional" }
 
-A board of trustees is a legal requirement for nonprofits and is needed to apply for tax exempt status with the IRS.
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+A board of trustees to govern and lead your nonprofit organization.
 
 :::

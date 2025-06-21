@@ -47,7 +47,7 @@ agencyAdditionalContext: Office of Weights and Measures
 - Representative name, address, and phone number for device location; completion of a separate application for each business location
 - Mailing address, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
 All applications must be filled out in their entirety and submitted with all applicable fees.  Failure to do so will result in the application and check/money order being returned and your business will remain unregistered.
 
@@ -66,7 +66,7 @@ Provide the following Information about the device:
 
 \*See page 4 of the [Registration Application for Commercial Weighing and Measuring Devices](https://www.njconsumeraffairs.gov/OWM/Applications/Registration-Application-for-Commercial-Weighing-and-Measuring-Devices.pdf) to help you find this information.
 
-:::callout{ showHeader="true" headerText="What if I don't register my device?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't register my device?" showIcon="false" calloutType="warning" }
 
 You may be subject to fines as well as late fees.
 

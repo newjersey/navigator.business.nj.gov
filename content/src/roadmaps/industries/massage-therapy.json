@@ -58,12 +58,13 @@
   ],
   "name": "Massage Therapy",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "resale-tax-cert"
   ],
   "displayname": "massage-therapy",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "Masseuse, Spa, Spa services, bodywork, wellness",
