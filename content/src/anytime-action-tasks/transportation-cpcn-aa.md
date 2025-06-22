@@ -150,7 +150,7 @@ After submission of your petition, the NJ MVC will assign you a docket number. Y
 * Publish the Notice of Petition in a newspaper. The MVC will designate this newspaper for you.
 * Send notices to municipal clerks where the service operates, as well as to competing carriers operating in the same area.
 
-Once your Notice is published, you must obtain proof of this from the newspaper. This is called Affidavit of Publication, and it must be forwarded to the above NJ MVC mailing address.
+Once your Notice is published, you must obtain proof of this from the newspaper. This is called an `Affidavit of Publication|affidavit-publication`, and it must be forwarded to the above NJ MVC mailing address.
 
 :::callout{ showHeader="true" headerText="What if I don’t get a CPCN?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
