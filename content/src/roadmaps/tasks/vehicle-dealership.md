@@ -58,7 +58,7 @@ You must submit copies of the following:
 
 #### Required Forms
 
-The following are included in each application form linked below, and must be completed by all applicants:
+The following are included in each application package linked below, and must be completed by all applicants:
 
 * Applicant’s Information Form BLS-163
 * Child Support Certification Form BLS-43
