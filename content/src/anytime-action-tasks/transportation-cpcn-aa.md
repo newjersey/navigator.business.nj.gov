@@ -93,7 +93,7 @@ In the body of your petition, include:​
 
 **7. Projected financial information.** Provide projected balance sheets and income statements for the first 2 years of operation.
 
-**8. Tariff sheet.** Provide fares to be charged for your service, including per-passenger fares. If you are not requiring fares, you must describe how the service will be funded. You must also provide proof of this funding as applicable.
+**8. `Tariff sheet|tariff-sheet`.** Provide fares to be charged for your service, including per-passenger fares. If you are not requiring fares, you must describe how the service will be funded. You must also provide proof of this funding as applicable.
 
 **9. Insurance information.** Attach a copy of your Certificate of Liability Insurance. It must meet the NJ MVC’s liability limit of $1.5 million, minimum.
 
