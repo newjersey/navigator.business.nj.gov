@@ -1,6 +1,10 @@
 // eslint-disable-next-line no-restricted-imports
 import sharedConfig from "../jest.shared";
 
+process.env = Object.assign(process.env, {
+  API_BASE_URL: "someurl",
+});
+
 /** @type {import('jest').Config} */
 export default {
   ...sharedConfig,
