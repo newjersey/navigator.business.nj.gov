@@ -8,6 +8,7 @@ interface Props {
   icon?: string;
   onClick?: () => void;
   role?: string;
+  overWriteWidth?: boolean;
 }
 
 export const GradientButton = (props: Props): ReactElement => {
@@ -17,6 +18,7 @@ export const GradientButton = (props: Props): ReactElement => {
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
       {...(props.role ? { role: props.role } : {})}
       className="gradient-button"
+      style={{ ...(props.overWriteWidth ? { width: 310 } : {}) }}
       onClick={props.onClick}
     >
       {props.icon && (
