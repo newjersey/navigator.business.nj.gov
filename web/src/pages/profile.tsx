@@ -64,7 +64,12 @@ import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
+import {
+  getFlow,
+  scrollToTopOfElement,
+  useMountEffectWhenDefined,
+  useScrollToPathAnchor,
+} from "@/lib/utils/helpers";
 import {
   Business,
   BusinessPersona,
@@ -88,7 +93,7 @@ import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useContext, useRef, useState } from "react";
+import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];
@@ -119,6 +124,7 @@ const ProfilePage = (props: Props): ReactElement => {
   );
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
+  const profileAlertRef = useRef<HTMLDivElement>(null);
 
   const getInitTab = (): ProfileTabs => {
     if (props.CMS_ONLY_tab) return props.CMS_ONLY_tab;
@@ -182,6 +188,14 @@ const ProfilePage = (props: Props): ReactElement => {
     }
     return undefined;
   };
+
+  const hasErrors = useMemo(() => getInvalidFieldIds().length > 0, [getInvalidFieldIds]);
+
+  useEffect(() => {
+    if (hasErrors) {
+      scrollToTopOfElement(profileAlertRef.current, { focusElement: true });
+    }
+  }, [hasErrors]);
 
   FormFuncWrapper(
     () => {
@@ -359,7 +373,7 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
-        <ProfileTabHeader ref={permitsRef} tab="permits" />
+        <ProfileTabHeader tab="permits" />
         <ProfileSubSection
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
@@ -909,7 +923,7 @@ const ProfilePage = (props: Props): ReactElement => {
                     handleDelete={onSubmit}
                   />
                   <SingleColumnContainer>
-                    {alert && (
+                    {alert === "SUCCESS" && (
                       <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />
                     )}
                     <UserDataErrorAlert />
@@ -929,6 +943,8 @@ const ProfilePage = (props: Props): ReactElement => {
                             }}
                           />
                         }
+                        showAlert={hasErrors}
+                        profileAlertRef={profileAlertRef}
                       >
                         <>
                           <form
@@ -952,7 +968,11 @@ const ProfilePage = (props: Props): ReactElement => {
                                     <PrimaryButton
                                       isColor="primary"
                                       isSubmitButton
-                                      onClick={(): void => {}}
+                                      onClick={(): void => {
+                                        if (hasErrors && profileAlertRef.current) {
+                                          profileAlertRef.current.focus();
+                                        }
+                                      }}
                                       isRightMarginRemoved
                                       dataTestId="save"
                                       isLoading={isLoading}

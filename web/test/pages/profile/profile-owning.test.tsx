@@ -298,7 +298,7 @@ describe("profile - owning existing business", () => {
         ),
       ).toBeInTheDocument();
     });
-    expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+    expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
   });
 
   it("prevents user from saving if sector is not selected", async () => {
@@ -317,7 +317,7 @@ describe("profile - owning existing business", () => {
         screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
-    expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+    expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
   });
 
   it("returns user back to dashboard", async () => {

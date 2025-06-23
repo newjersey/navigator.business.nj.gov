@@ -173,7 +173,7 @@ export const expectLocationNotSavedAndError = (): void => {
   expect(
     screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired),
   ).toBeInTheDocument();
-  expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+  expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
 };
 
 export const getForeignNexusProfileFields = (
