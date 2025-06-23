@@ -11,8 +11,9 @@ import {
   generateUserDataForBusiness,
   generateWasteData,
   generateWasteQuestionnaireData,
+  MediaArea,
+  QuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared";
-import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";

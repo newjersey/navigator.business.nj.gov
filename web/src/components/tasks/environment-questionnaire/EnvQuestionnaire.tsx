@@ -10,7 +10,7 @@ import {
   Questionnaire,
   QuestionnaireConfig,
   QuestionnaireFieldIds,
-} from "@businessnjgovnavigator/shared/environment";
+} from "@businessnjgovnavigator/shared";
 import {
   Checkbox,
   FormControl,

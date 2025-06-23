@@ -5,10 +5,12 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ElevatorRegistrationSearchError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { toProperCase } from "@businessnjgovnavigator/shared";
-import { ElevatorSafetyAddress } from "@businessnjgovnavigator/shared/elevatorSafety";
-import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
-import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import {
+  ElevatorSafetyAddress,
+  HousingMunicipality,
+  Municipality,
+  toProperCase,
+} from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
 

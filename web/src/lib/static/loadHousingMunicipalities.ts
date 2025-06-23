@@ -1,4 +1,4 @@
-import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
+import { HousingMunicipality } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import path from "path";
 

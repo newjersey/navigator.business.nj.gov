@@ -26,7 +26,7 @@ import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
   generateNewEmergencyTripPermitData,
-} from "@businessnjgovnavigator/shared/emergencyTripPermit";
+} from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useState } from "react";
 

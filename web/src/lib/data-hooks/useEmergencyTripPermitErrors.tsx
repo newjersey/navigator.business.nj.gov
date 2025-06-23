@@ -4,7 +4,7 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { EmergencyTripPermitStepNames } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
 import { useContext } from "react";
 
 type EmergencyTripPermitErrorsResponse = {

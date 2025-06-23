@@ -3,7 +3,7 @@ import { validateEmail } from "@/lib/utils/helpers";
 import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
-} from "@businessnjgovnavigator/shared/emergencyTripPermit";
+} from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 
