@@ -1,4 +1,3 @@
-import { UpdateQueue } from "@/lib/types/types";
 import {
   Business,
   BusinessUser,
@@ -12,6 +11,25 @@ import {
   UserData,
   XrayData,
 } from "@businessnjgovnavigator/shared";
+
+export interface UpdateQueue {
+  queue: (userData: Partial<UserData>) => UpdateQueue;
+  queueBusiness: (business: Business) => UpdateQueue;
+  queueSwitchBusiness: (id: string) => UpdateQueue;
+  queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
+  queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
+  queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
+  queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
+  queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
+  queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
+  queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
+  queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
+  queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
+  queueXrayRegistrationData: (xrayRegistrationData: Partial<XrayData>) => UpdateQueue;
+  update: (config?: { local?: boolean }) => Promise<void>;
+  current: () => UserData;
+  currentBusiness: () => Business;
+}
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;

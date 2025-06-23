@@ -1,5 +1,5 @@
 import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
-import { UpdateQueue } from "@/lib/types/types";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 

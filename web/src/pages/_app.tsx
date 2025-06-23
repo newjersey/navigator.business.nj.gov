@@ -18,7 +18,7 @@ import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
+import { Roadmap, UserDataError } from "@/lib/types/types";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -40,6 +40,7 @@ import { Hub, type HubCapsule } from "aws-amplify/utils";
 
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";

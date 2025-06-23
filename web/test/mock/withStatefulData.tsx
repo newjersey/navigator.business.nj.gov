@@ -2,8 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
-import { UpdateQueue } from "@/lib/types/types";
-import { UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { isUserData } from "@/lib/utils/helpers";
 import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers/helpers-utilities";
 import { mockEncryptFields } from "@/test/mock/mockEncryptFields";
