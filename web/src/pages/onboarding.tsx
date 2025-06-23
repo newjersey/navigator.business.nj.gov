@@ -15,6 +15,7 @@ import {
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { MediaQueries } from "@/lib/PageSizes";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -37,7 +38,6 @@ import {
   OnboardingStatus,
   Page,
   ProfileError,
-  UpdateQueue,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
