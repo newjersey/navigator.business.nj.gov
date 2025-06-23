@@ -11,18 +11,16 @@ import {
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as AccountLinkingErrorStorage from "@/lib/storage/AccountLinkingErrorStorage";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
+import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { generateActiveUser } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
-import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import { generateUser, generateUserData, UserData } from "@businessnjgovnavigator/shared";
 import {
   generateBusiness,
   generatePreferences,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
-import { UpdateQueue } from "../types/types";
-import { UpdateQueueFactory } from "../UpdateQueue";
 
 const mockGetCurrentUserData = jest.fn();
 const mockDelete = jest.fn();
