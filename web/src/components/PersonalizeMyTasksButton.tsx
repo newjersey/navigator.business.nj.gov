@@ -27,6 +27,7 @@ export const PersonalizeMyTasksButton = (props: Props): ReactElement => {
       icon="star"
       role="link"
       ariaLabel={Config.dashboardHeaderDefaults.personalizeMyTasksButtonText}
+      overWriteWidth={true}
     />
   );
 };
