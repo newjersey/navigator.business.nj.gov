@@ -9,12 +9,12 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { openInNewTab } from "@/lib/utils/helpers";
-import { toProperCase } from "@businessnjgovnavigator/shared";
-import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   HousingAddress,
   HousingRegistrationRequestLookupResponse,
-} from "@businessnjgovnavigator/shared/housing";
+  parseDate,
+  toProperCase,
+} from "@businessnjgovnavigator/shared";
 import { Box } from "@mui/material";
 import { ReactElement } from "react";
 

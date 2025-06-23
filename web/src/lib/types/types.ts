@@ -1,8 +1,11 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
+  Business,
   BusinessPersona,
   BusinessUser,
+  EmergencyTripPermitApplicationInfo,
+  EnvironmentData,
   FieldsForErrorHandling,
   FormationAddress,
   FormationData,
@@ -19,10 +22,7 @@ import {
   TaxFilingData,
   UserData,
   XrayData,
-} from "@businessnjgovnavigator/shared/";
-import { EmergencyTripPermitApplicationInfo } from "@businessnjgovnavigator/shared/emergencyTripPermit";
-import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+} from "@businessnjgovnavigator/shared";
 import { Reducer } from "react";
 
 // returns all keys in an object of a type

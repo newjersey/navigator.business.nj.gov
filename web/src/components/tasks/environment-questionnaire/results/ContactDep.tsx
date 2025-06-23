@@ -3,7 +3,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { MediaArea } from "@businessnjgovnavigator/shared/environment";
+import { MediaArea } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {

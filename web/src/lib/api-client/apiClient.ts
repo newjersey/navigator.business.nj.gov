@@ -1,24 +1,20 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
-import { getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import {
+  ElevatorSafetyRegistrationSummary,
+  EmergencyTripPermitApplicationInfo,
+  EmergencyTripPermitSubmitResponse,
+  FacilityDetails,
+  getCurrentBusiness,
+  HousingRegistrationRequestLookupResponse,
   InputFile,
   LicenseSearchNameAndAddress,
   NameAvailability,
+  PropertyInterestType,
   TaxClearanceCertificateResponse,
   UserData,
-} from "@businessnjgovnavigator/shared/";
-import { ElevatorSafetyRegistrationSummary } from "@businessnjgovnavigator/shared/elevatorSafety";
-import {
-  EmergencyTripPermitApplicationInfo,
-  EmergencyTripPermitSubmitResponse,
-} from "@businessnjgovnavigator/shared/emergencyTripPermit";
-import {
-  HousingRegistrationRequestLookupResponse,
-  PropertyInterestType,
-} from "@businessnjgovnavigator/shared/housing";
-import { FacilityDetails } from "@businessnjgovnavigator/shared/xray";
+} from "@businessnjgovnavigator/shared";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";

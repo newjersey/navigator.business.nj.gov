@@ -1,8 +1,10 @@
 import { CountryDropdown } from "@/components/CountryDropdown";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { CountriesObject } from "@businessnjgovnavigator/shared/countries";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import {
+  CountriesObject,
+  EmergencyTripPermitUserEnteredFieldNames,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 interface Props {

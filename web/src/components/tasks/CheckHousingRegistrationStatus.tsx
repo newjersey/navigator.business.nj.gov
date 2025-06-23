@@ -4,9 +4,12 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { HotelMotelRegistrationSearchError, MultipleDwellingSearchError } from "@/lib/types/types";
-import { toProperCase } from "@businessnjgovnavigator/shared";
-import { HousingAddress, HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
-import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import {
+  HousingAddress,
+  HousingMunicipality,
+  Municipality,
+  toProperCase,
+} from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
 
