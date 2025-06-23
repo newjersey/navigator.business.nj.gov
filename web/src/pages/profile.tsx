@@ -67,7 +67,12 @@ import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
+import {
+  getFlow,
+  scrollToTopOfElement,
+  useMountEffectWhenDefined,
+  useScrollToPathAnchor,
+} from "@/lib/utils/helpers";
 import {
   Business,
   BusinessPersona,
@@ -92,7 +97,7 @@ import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useContext, useRef, useState } from "react";
+import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];
@@ -105,6 +110,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
+  const [showProfileHeaderAlert, setShowProfileHeaderAlert] = useState<boolean>(false);
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
@@ -123,6 +129,7 @@ const ProfilePage = (props: Props): ReactElement => {
   );
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
+  const profileAlertRef = useRef<HTMLDivElement>(null);
 
   const getInitTab = (): ProfileTabs => {
     if (props.CMS_ONLY_tab) return props.CMS_ONLY_tab;
@@ -186,6 +193,15 @@ const ProfilePage = (props: Props): ReactElement => {
     }
     return undefined;
   };
+
+  const hasErrors = useMemo(() => getInvalidFieldIds().length > 0, [getInvalidFieldIds]);
+
+  useEffect(() => {
+    setShowProfileHeaderAlert(hasErrors);
+    if (showProfileHeaderAlert) {
+      scrollToTopOfElement(profileAlertRef.current, { focusElement: true });
+    }
+  }, [showProfileHeaderAlert, hasErrors]);
 
   FormFuncWrapper(
     () => {
@@ -374,7 +390,7 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
-        <ProfileTabHeader ref={permitsRef} tab="permits" />
+        <ProfileTabHeader tab="permits" />
         <ProfileSubSection
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
@@ -945,7 +961,7 @@ const ProfilePage = (props: Props): ReactElement => {
                     handleDelete={onSubmit}
                   />
                   <SingleColumnContainer>
-                    {alert && (
+                    {alert === "SUCCESS" && (
                       <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />
                     )}
                     <UserDataErrorAlert />
@@ -965,6 +981,8 @@ const ProfilePage = (props: Props): ReactElement => {
                             }}
                           />
                         }
+                        showAlert={showProfileHeaderAlert}
+                        profileAlertRef={profileAlertRef}
                       >
                         <>
                           <form
