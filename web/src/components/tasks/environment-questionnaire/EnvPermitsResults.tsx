@@ -11,7 +11,7 @@ import {
   MediaArea,
   QuestionnaireConfig,
   QuestionnaireFieldIds,
-} from "@businessnjgovnavigator/shared/environment";
+} from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {

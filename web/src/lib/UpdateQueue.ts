@@ -2,6 +2,9 @@ import { UpdateQueue } from "@/lib/types/types";
 import {
   Business,
   BusinessUser,
+  EnvironmentData,
+  FormationData,
+  FormationFormData,
   Preferences,
   ProfileData,
   TaskProgress,
@@ -9,8 +12,6 @@ import {
   UserData,
   XrayData,
 } from "@businessnjgovnavigator/shared";
-import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
-import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;

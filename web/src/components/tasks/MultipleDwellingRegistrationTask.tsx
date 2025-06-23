@@ -18,7 +18,7 @@ import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
   HousingAddress,
   HousingRegistrationRequestLookupResponse,
-} from "@businessnjgovnavigator/shared/housing";
+} from "@businessnjgovnavigator/shared";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";

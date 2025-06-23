@@ -8,7 +8,7 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { Task } from "@/lib/types/types";
-import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
+import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 import { EnvPermitsResults } from "./EnvPermitsResults";

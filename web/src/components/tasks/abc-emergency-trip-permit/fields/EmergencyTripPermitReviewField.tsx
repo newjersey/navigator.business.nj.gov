@@ -2,7 +2,7 @@ import { getFormattedTimeFromInternalTime } from "@/components/tasks/abc-emergen
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 

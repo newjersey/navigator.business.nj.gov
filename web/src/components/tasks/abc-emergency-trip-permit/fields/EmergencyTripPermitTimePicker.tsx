@@ -7,7 +7,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
 import { Autocomplete, FormHelperText, TextField } from "@mui/material";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";

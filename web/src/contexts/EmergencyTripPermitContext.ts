@@ -1,7 +1,7 @@
 import {
   EmergencyTripPermitApplicationInfo,
   generateNewEmergencyTripPermitData,
-} from "@businessnjgovnavigator/shared/emergencyTripPermit";
+} from "@businessnjgovnavigator/shared";
 import React, { createContext, FormEvent } from "react";
 
 interface EmergencyTripPermitState {

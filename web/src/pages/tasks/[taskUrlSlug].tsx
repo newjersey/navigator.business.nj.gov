@@ -21,9 +21,9 @@ import {
   businessStructureTaskId,
   formationTaskId,
   hasCompletedBusinessStructure,
+  HousingMunicipality,
   Municipality,
-} from "@businessnjgovnavigator/shared/";
-import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
+} from "@businessnjgovnavigator/shared";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";

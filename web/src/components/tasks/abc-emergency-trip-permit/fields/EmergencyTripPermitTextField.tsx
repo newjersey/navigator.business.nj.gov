@@ -10,7 +10,7 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export interface Props

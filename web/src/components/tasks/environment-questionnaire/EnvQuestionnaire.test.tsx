@@ -3,12 +3,13 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as helpers from "@/lib/utils/helpers";
 import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   generateEnvironmentData,
   generateLandData,
   generateWasteData,
+  MediaArea,
+  QuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared";
-import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
-import { Business } from "@businessnjgovnavigator/shared/index";
 import {
   generateAirData,
   generateBusiness,

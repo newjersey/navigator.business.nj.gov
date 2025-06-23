@@ -1,4 +1,4 @@
-import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
+import { HousingMunicipality } from "@businessnjgovnavigator/shared";
 import { createContext } from "react";
 
 export interface HousingMunicipalitiesContextType {

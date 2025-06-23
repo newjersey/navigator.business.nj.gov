@@ -3,7 +3,7 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitUserEnteredFieldNames,
-} from "@businessnjgovnavigator/shared/emergencyTripPermit";
+} from "@businessnjgovnavigator/shared";
 import { generateEmergencyTripPermitApplicationData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
