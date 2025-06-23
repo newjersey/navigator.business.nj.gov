@@ -1,8 +1,10 @@
 import { GradientButton } from "@/components/njwds-extended/GradientButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
 import { ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
@@ -14,6 +16,8 @@ export const PersonalizeMyTasksButton = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
   const tabValue: ProfileTabs = props.tabValue ?? "info";
+
+  const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   const handleClick = (): void => {
     analytics.event.roadmap_personlize_my_tasks_button.click.go_to_profile_tasks_screen();
@@ -27,7 +31,7 @@ export const PersonalizeMyTasksButton = (props: Props): ReactElement => {
       icon="star"
       role="link"
       ariaLabel={Config.dashboardHeaderDefaults.personalizeMyTasksButtonText}
-      overWriteWidth={true}
+      overWriteWidth={!isMobile}
     />
   );
 };
