@@ -7,20 +7,27 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
+import {Alert} from "@/components/njwds-extended/Alert";
+import {getMergedConfig} from "@/contexts/configContext";
 
 export interface ProfileTabPanelProps {
   children: React.ReactNode;
   navChildren?: React.ReactNode;
+  alert? : boolean;
 }
 
-export const ProfileTabPanel = ({ children, navChildren }: ProfileTabPanelProps): ReactElement => {
+export const ProfileTabPanel = ({ children, navChildren, alert }: ProfileTabPanelProps): ReactElement => {
   const userDataFromHook = useUserData();
+  const config = getMergedConfig();
   const business = userDataFromHook.business;
   const { isAuthenticated } = useContext(NeedsAccountContext);
-
+console.log(alert);
   const titleOverColumns: React.ReactNode = (
     <>
       <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
+      {alert ? (
+      <Alert variant={"error"}> {config.profileDefaults.default.errorTextBody}</Alert>
+      ) : (<></>) }
       <ProfileNoteDisclaimerForSubmittingData
         business={business}
         isAuthenticated={isAuthenticated}

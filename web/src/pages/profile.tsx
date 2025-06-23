@@ -41,7 +41,6 @@ import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileLinkToPermitsTabCallout } from "@/components/profile/ProfileLinkToPermitsTabCallout";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
-import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
@@ -104,7 +103,6 @@ interface Props {
 const ProfilePage = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
-  const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
@@ -249,13 +247,12 @@ const ProfilePage = (props: Props): ReactElement => {
           .update()
           .then(async () => {
             setIsLoading(false);
-            setAlert("SUCCESS");
             await redirect({ success: true });
           });
       })();
     },
     (isValid, _errors, pageChange) => {
-      !isValid && pageChange && setAlert("ERROR");
+      !isValid && pageChange
     },
   );
 
@@ -935,9 +932,6 @@ const ProfilePage = (props: Props): ReactElement => {
                     handleDelete={onSubmit}
                   />
                   <SingleColumnContainer>
-                    {alert && (
-                      <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />
-                    )}
                     <UserDataErrorAlert />
                   </SingleColumnContainer>
                   <div className="margin-top-1 desktop:margin-top-0">
@@ -955,6 +949,7 @@ const ProfilePage = (props: Props): ReactElement => {
                             }}
                           />
                         }
+                        alert={getInvalidFieldIds().length>0}
                       >
                         <>
                           <form
