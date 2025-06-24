@@ -53,21 +53,20 @@ Vehicles that **do not** need to register with the IFTA include:
 * Truck information, such as the Vehicle Identification Number (VIN#), fuel type, number of axles, and more
 * Mileage traveled in each state for the past year
 
-Fill out form IRP-7, linked at the bottom of the page, and email it to mcscustomerservice@mvc.nj.gov, or mail it to:
+Fill out form IRP-7, linked at the bottom of the page, and mail it to:
 
-&nbsp;
-
-New Jersey Motor Vehicle Commission
-&nbsp;
-
-225 East State Street
-&nbsp;
-
-PO Box 178
-&nbsp;
-
-Trenton, NJ 08666
-&nbsp;
+>
+>New Jersey Motor Vehicle Commission
+>&nbsp;
+>
+>225 East State Street
+>&nbsp;
+>
+>PO Box 178
+>&nbsp;
+>
+>Trenton, NJ 08666
+>&nbsp;
 
 
 :::callout{ showHeader="true" headerText="What if I don’t register with the IRP?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
