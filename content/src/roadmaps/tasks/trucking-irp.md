@@ -22,6 +22,8 @@ agencyId: nj-motor-vehicle
 agencyAdditionalContext: ""
 formName: IRP-7
 ---
+&nbsp;
+
 ## Eligibility Criteria
 
 Vehicles qualify for IRP registration if they:
@@ -35,6 +37,13 @@ Additionally, vehicles that qualify for IRP registration must also meet **at lea
 * Have 2 axles and a gross vehicle weight over 26,000 lbs
 * Have 3 or more axles, regardless of weight
 * Are part of a combination vehicle, with a total weight over 26,000 lbs
+
+Vehicles that **do not** need to register with the IFTA include: 
+* Government vehicles
+* Vehicles with restricted plates
+* Recreational vehicles
+
+&nbsp;
 
 ## Application Requirements
 
