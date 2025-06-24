@@ -39,22 +39,22 @@
     },
     {
       "step": 3,
-      "weight": 10,
+      "weight": 9,
       "task": "bank-account"
     },
     {
       "step": 3,
-      "weight": 11,
+      "weight": 10,
       "task": "get-insurance"
     },
     {
       "step": 3,
-      "weight": 12,
+      "weight": 11,
       "task": "logisticare"
     },
     {
       "step": 3,
-      "weight": 13,
+      "weight": 12,
       "task": "transportation-entity-id",
       "required": true
     },
@@ -62,13 +62,19 @@
       "step": 3,
       "task": "mvc-title-task",
       "required": true,
+      "weight": 13
+    },
+    {
+      "step": 3,
+      "task": "transportation-cpcn",
+      "required": true,
       "weight": 14
     },
     {
       "weight": 15,
       "step": 3,
       "task": "transportation-inspection",
-      "required": true
+      "required": false
     },
     {
       "step": 3,

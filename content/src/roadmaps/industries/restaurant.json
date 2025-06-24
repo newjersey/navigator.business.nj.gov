@@ -52,6 +52,11 @@
       "step": 4,
       "weight": 100,
       "licenseTask": "food-safety-course"
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Restaurant",
@@ -65,7 +70,7 @@
   ],
   "displayname": "restaurant",
   "industryOnboardingQuestions": {
-    "canBeReseller": true,
+    "canBeReseller": false,
     "isLiquorLicenseApplicable": true
   },
   "isEnabled": true,

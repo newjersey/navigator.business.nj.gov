@@ -47,6 +47,11 @@
       "weight": 1,
       "licenseTask": "rmw-generator-registration",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Pet Care",
@@ -61,7 +66,7 @@
   "industryOnboardingQuestions": {
     "isPetCareHousingApplicable": true,
     "canBeHomeBased": true,
-    "canBeReseller": true,
+    "canBeReseller": false,
     "willSellPetCareItems": true
   },
   "isEnabled": true,

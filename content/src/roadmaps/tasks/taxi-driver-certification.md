@@ -1,8 +1,12 @@
 ---
 summaryDescriptionMd: >-
-  :::infoAlert
+  :::callout{ showHeader="true" headerText="" showIcon="false"
+  calloutType="informational" amountIconText="" filingTypeIconText=""
+  frequencyIconText="" phoneIconText="" emailIconText="" }
+
 
   Drivers that already have a Commercial Driver’s License (CDL) with a Passenger "P" endorsement are exempt from this requirement.
+
 
   :::
 
@@ -17,21 +21,20 @@ callToActionText: Apply to Certify My Drivers
 agencyId: nj-motor-vehicle
 formName: CLD-5
 ---
-
 ## Eligibility Requirements
 
-- At least 21 years old
-- Ability to pass a criminal background check
+* At least 21 years old
+* Ability to pass a criminal background check
 
 ## Application Requirements
 
-- Business name
-- Business address
-- `NJ Tax ID|tax-id`
-- Driver’s name
-- Driver’s address
-- Driver’s license number
-- Driver’s Social Security Number (SSN)
+* Business name
+* Business address
+*  `NJ Tax ID|tax-id` 
+* Driver’s name
+* Driver’s address
+* Driver’s license number
+* Driver’s Social Security Number (SSN)
 
 Fill out form CDL-5 and mail it to:
 
@@ -52,15 +55,15 @@ Trenton, NJ 08666
 
 The process takes about 2 weeks after the application is received. The letter of qualification or disqualification will only be mailed to the employer.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A letter of qualification or disqualification for the driver.
+You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles.
+A letter of qualification or disqualification for the driver.
 
 :::
 

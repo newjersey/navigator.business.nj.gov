@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: alarm-locksmith-business-license
-filename: alarm-locksmith-business-license
 displayname: alarm-locksmith-business-license
 urlSlug: alarm-locksmith-business-license
 name: Apply for Your Fire Alarm, Burglar Alarm and Locksmith Business License
@@ -15,6 +14,7 @@ webflowIndustry: ""
 licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6245
+filename: alarm-locksmith-business-license
 webflowId: 6721493ccddf06cbf7fe46b4
 ---
 ## Application Requirements
@@ -27,17 +27,15 @@ webflowId: 6721493ccddf06cbf7fe46b4
 * Information about the licensee who will serve as your business's business qualifier
 * Copy of  liability insurance certificate with the coverage required on the application
 * Applicable fees paid (the Advisory Committee will send a license fee letter once the application is approved)
+* The affidavit on the application executed before a notary public
 
-The affidavit on the application executed before a notary public.
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
-
-* Your business can’t provide alarm and locksmith services
-* If your business qualifier licensee fails to renew their license, the business license will expire
+If your business qualifier licensee fails to renew their license, the business license will expire.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A business license number.
 

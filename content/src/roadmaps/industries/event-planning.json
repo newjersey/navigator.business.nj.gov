@@ -47,12 +47,13 @@
   "nonEssentialQuestionsIds": [
     "business-vehicle-title-reg",
     "business-vehicle-irp",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "mvc-cpcn"
   ],
   "displayname": "event-planning",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "planner, organizer, coordinator, party planner",

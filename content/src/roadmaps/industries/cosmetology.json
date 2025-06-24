@@ -53,6 +53,11 @@
       "licenseTask": "cosmetology-license",
       "weight": 12,
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 17,
+      "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Cosmetology",
@@ -62,7 +67,7 @@
   ],
   "displayname": "cosmetology",
   "industryOnboardingQuestions": {
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "modifications": [
     {

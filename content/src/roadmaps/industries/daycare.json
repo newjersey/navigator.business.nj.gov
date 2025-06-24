@@ -46,11 +46,12 @@
   "name": "Childcare Center",
   "nonEssentialQuestionsIds": [
     "business-vehicle-title-reg",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "mvc-cpcn"
   ],
   "displayname": "daycare",
   "industryOnboardingQuestions": {
-    "canBeReseller": true,
+    "canBeReseller": false,
     "isChildcareForSixOrMore": true
   },
   "isEnabled": true,

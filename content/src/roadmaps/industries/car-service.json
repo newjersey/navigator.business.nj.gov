@@ -51,14 +51,15 @@
     },
     {
       "step": 3,
-      "weight": 13,
-      "task": "mvc-registration-task",
-      "required": true
+      "task": "transportation-cpcn",
+      "required": true,
+      "weight": 13
     },
     {
-      "step": 4,
-      "weight": 90,
-      "task": "community-right-to-know-survey"
+      "step": 3,
+      "weight": 14,
+      "task": "mvc-registration-task",
+      "required": true
     }
   ],
   "name": "Car Service",

@@ -41,6 +41,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "resale-tax-certificate-operating"
     }
   ],
   "name": "Photography",
@@ -50,7 +55,7 @@
   "displayname": "photography",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "freelance photographer, professional photographer, photographer, media, event photographer, video",
