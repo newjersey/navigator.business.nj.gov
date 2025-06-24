@@ -19,7 +19,7 @@ import {
   generateUser,
   generateUserData,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import { Business, UserData } from "@shared/userData";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
@@ -409,6 +409,69 @@ describe("TaxClearanceCertificateClient", () => {
         message: TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
         type: "MISSING_FIELD",
       },
+    });
+  });
+
+  describe("unlink tax ID api request", () => {
+    const originalEnvironment = process.env.STAGE;
+
+    afterEach(() => {
+      process.env.STAGE = originalEnvironment;
+    });
+
+    it("is enabled in non-prod env", async () => {
+      process.env.STAGE = "dev";
+      const mockHashedTaxId = "test-hashed-tax-id";
+      const businessWithCertificate: Business = generateBusiness({
+        id: "other-business-id",
+        profileData: {
+          ...generateBusiness({}).profileData,
+          businessName: "Other Business",
+          hashedTaxId: mockHashedTaxId,
+        },
+        taxClearanceCertificateData: {
+          ...generateTaxClearanceCertificateData({}),
+          hasPreviouslyReceivedCertificate: true,
+        },
+        userId: "user-id2",
+      });
+
+      stubDatabaseClient.findBusinessesByHashedTaxId.mockResolvedValue([businessWithCertificate]);
+
+      const result = await client.unlinkTaxId(userData, stubDatabaseClient);
+
+      expect(stubDatabaseClient.put).toHaveBeenCalled();
+      expect(result).toEqual({
+        success: true,
+      });
+    });
+
+    it("is disabled in prod env", async () => {
+      process.env.STAGE = "prod";
+      const mockHashedTaxId = "test-hashed-tax-id";
+      const businessWithCertificate: Business = generateBusiness({
+        id: "other-business-id",
+        profileData: {
+          ...generateBusiness({}).profileData,
+          businessName: "Other Business",
+          hashedTaxId: mockHashedTaxId,
+        },
+        taxClearanceCertificateData: {
+          ...generateTaxClearanceCertificateData({}),
+          hasPreviouslyReceivedCertificate: true,
+        },
+        userId: "user-id2",
+      });
+
+      stubDatabaseClient.findBusinessesByHashedTaxId.mockResolvedValue([businessWithCertificate]);
+
+      const result = await client.unlinkTaxId(userData, stubDatabaseClient);
+
+      expect(stubDatabaseClient.put).not.toHaveBeenCalled();
+      expect(result).toEqual({
+        success: false,
+        error: { message: "This function isn't allowed in prod environment" },
+      });
     });
   });
 

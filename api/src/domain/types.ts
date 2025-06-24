@@ -2,6 +2,7 @@
 import {
   FacilityDetails,
   TaxClearanceCertificateResponse,
+  UnlinkTaxIdResponse,
   XrayRegistrationEntry,
   XrayRegistrationStatusResponse,
 } from "@businessnjgovnavigator/shared";
@@ -252,6 +253,7 @@ export interface TaxClearanceCertificateClient {
     databaseClient: DatabaseClient,
   ) => Promise<TaxClearanceCertificateResponse>;
   health: () => Promise<HealthCheckMetadata>;
+  unlinkTaxId: (userData: UserData, databaseClient: DatabaseClient) => Promise<UnlinkTaxIdResponse>;
 }
 
 export interface XrayRegistrationStatusLookup {

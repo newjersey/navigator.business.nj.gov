@@ -1,4 +1,7 @@
-import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
+import {
+  TaxClearanceCertificateResponse,
+  UnlinkTaxIdResponse,
+} from "@businessnjgovnavigator/shared";
 import {
   type CryptoClient,
   DatabaseClient,
@@ -223,6 +226,116 @@ export const ApiTaxClearanceCertificateClient = (
       });
   };
 
+  /*
+  Dev Note: this function is purely for QA and Demo purposes only.
+  The button linking to this api call will be hidden in prod environments.
+  */
+  const unlinkTaxId = async (
+    userData: UserData,
+    databaseClient: DatabaseClient,
+  ): Promise<UnlinkTaxIdResponse> => {
+    if (process.env.STAGE === "prod") {
+      return {
+        success: false,
+        error: { message: "This function isn't allowed in prod environment" },
+      };
+    }
+
+    const logId = logWriter.GetId();
+    logWriter.LogInfo(`Tax Clearance Certificate Client - Id:${logId} - Unlink Tax ID`);
+
+    const currTaxClearanceData =
+      userData.businesses[userData.currentBusinessId].taxClearanceCertificateData;
+
+    if (
+      currTaxClearanceData === undefined ||
+      currTaxClearanceData.encryptedTaxId === undefined ||
+      currTaxClearanceData.encryptedTaxPin === undefined
+    ) {
+      const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Unlink Tax ID: Unexpected required field(s) undefined: ${JSON.stringify(
+        currTaxClearanceData,
+      )}`;
+      logWriter.LogInfo(errorMessage);
+      return {
+        success: false,
+        error: { message: errorMessage },
+      };
+    }
+
+    let currentHashedTaxId: string | undefined;
+    try {
+      const userDataFromDb = await databaseClient.get(userData.user.id);
+      const currentBusiness = userDataFromDb.businesses[userDataFromDb.currentBusinessId];
+      currentHashedTaxId = currentBusiness.profileData.hashedTaxId;
+    } catch (error) {
+      const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Unlink Tax ID: Failed to retrieve user data: ${
+        error instanceof Error ? error.message : String(error)
+      }`;
+      logWriter.LogError(errorMessage);
+      return {
+        success: false,
+        error: { message: errorMessage },
+      };
+    }
+
+    if (!currentHashedTaxId) {
+      const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Unlink Tax ID: Current hashed tax id is undefined`;
+      logWriter.LogError(errorMessage);
+      return {
+        success: false,
+        error: { message: errorMessage },
+      };
+    }
+
+    const matchingBusinesses = await databaseClient.findBusinessesByHashedTaxId(currentHashedTaxId);
+
+    for (const business of matchingBusinesses) {
+      if (
+        business.userId &&
+        business.taxClearanceCertificateData?.hasPreviouslyReceivedCertificate
+      ) {
+        const userData = await databaseClient.get(business.userId);
+
+        if (!userData) {
+          const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Unlink Tax ID: User Data can't be found for User ID ${business.userId}`;
+          logWriter.LogError(errorMessage);
+          return {
+            success: false,
+            error: { message: errorMessage },
+          };
+        }
+
+        try {
+          const updatedUserData: UserData = {
+            ...userData,
+            businesses: {
+              ...userData.businesses,
+              [business.id]: {
+                ...business,
+                taxClearanceCertificateData: {
+                  ...business.taxClearanceCertificateData,
+                  hasPreviouslyReceivedCertificate: false,
+                },
+              },
+            },
+          };
+          await databaseClient.put(updatedUserData);
+        } catch (error) {
+          const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Unlink Tax ID: Failed to update user data: ${
+            error instanceof Error ? error.message : String(error)
+          }`;
+          logWriter.LogError(errorMessage);
+          return {
+            success: false,
+            error: { message: errorMessage },
+          };
+        }
+      }
+    }
+
+    return { success: true };
+  };
+
   const health = async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();
     const healthCheckBody = {
@@ -274,5 +387,5 @@ export const ApiTaxClearanceCertificateClient = (
       });
   };
 
-  return { postTaxClearanceCertificate, health };
+  return { postTaxClearanceCertificate, health, unlinkTaxId };
 };

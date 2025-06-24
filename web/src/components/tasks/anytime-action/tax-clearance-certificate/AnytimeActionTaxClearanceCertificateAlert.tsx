@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { DevOnlyUnlinkTaxIdButton } from "@/components/tasks/anytime-action/tax-clearance-certificate/DevOnlyUnlinkTaxIdButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
@@ -9,6 +10,7 @@ import { ReactElement } from "react";
 interface Props {
   fieldErrors: string[];
   responseErrorType?: TaxClearanceCertificateResponseErrorType;
+  setResponseErrorType?: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;
   setStepIndex: (step: number) => void;
 }
 
@@ -111,6 +113,9 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
         <div data-testid="tax-clearance-response-error">
           <Content>{getTaxClearanceErrorMessage(props.responseErrorType)}</Content>
         </div>
+      )}
+      {props.responseErrorType === "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT" && (
+        <DevOnlyUnlinkTaxIdButton setResponseErrorType={props.setResponseErrorType} />
       )}
     </Alert>
   ) : (

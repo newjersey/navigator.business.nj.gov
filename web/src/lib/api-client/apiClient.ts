@@ -13,6 +13,7 @@ import {
   NameAvailability,
   PropertyInterestType,
   TaxClearanceCertificateResponse,
+  UnlinkTaxIdResponse,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
@@ -91,6 +92,10 @@ export const postTaxClearanceCertificate = (
   userData: UserData,
 ): Promise<TaxClearanceCertificateResponse> => {
   return post(`/postTaxClearanceCertificate`, userData);
+};
+
+export const unlinkTaxId = (userData: UserData): Promise<UnlinkTaxIdResponse> => {
+  return post(`/unlinkTaxId`, userData);
 };
 
 export const postTaxFilingsOnboarding = (props: {

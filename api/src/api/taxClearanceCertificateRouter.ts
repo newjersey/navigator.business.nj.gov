@@ -24,5 +24,15 @@ export const taxClearanceCertificateRouterFactory = (
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
     }
   });
+  router.post("/unlinkTaxId", async (req: ExpressRequestBody<UserData>, res) => {
+    const userData = req.body;
+
+    try {
+      const response = await taxClearanceCertificateClient.unlinkTaxId(userData, databaseClient);
+      res.json(response);
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
+    }
+  });
   return router;
 };
