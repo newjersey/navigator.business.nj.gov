@@ -47,6 +47,11 @@ Additionally, vehicles must also meet **at least 1 of the following:**
 * Have 3 or more axles, regardless of weight
 * Are part of a combination vehicle, with a total weight over 26,000 lbs
 
+Vehicles that **do not** need to register with the IFTA include: 
+* Government vehicles
+* Vehicles with restricted plates
+* Recreational vehicles
+
 &nbsp;
 
 ## Application Requirements
