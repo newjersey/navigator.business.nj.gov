@@ -59,7 +59,8 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
 
   const LogError = async (message: string, details?: AxiosError): Promise<void> => {
     try {
-      console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
+      const jsonDetails = typeof details?.toJSON === "function" ? details.toJSON() : details;
+      console.error(`${message} - ${JSON.stringify(jsonDetails)}`);
       winston.error(message, details);
       await FlushLog();
     } catch (error) {
