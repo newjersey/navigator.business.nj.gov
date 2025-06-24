@@ -108,14 +108,14 @@ IFTA tax rates for New Jersey can be found [here](https://www.iftach.org/taxmatr
 
 Filing can be done [online](https://mvcappwintelirp.state.nj.us/njWeb/login.do) or by filing out [this form](https://www.nj.gov/mvc/pdf/business/nj_ifta_quarterly_tax_return.pdf) and mailing it to the NJ MVC P.O. box address above.
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-* An IFTA license, which must be carried in the cab of each qualified vehicle.​
-* A set of IFTA decals for each qualified vehicle, which must be affixed to the exterior of the cab on both sides.
+* An IFTA license, which must be carried in each vehicle at all times
+* A set of IFTA decals for each vehicle, which must be put on the exterior of the cab on both sides
 :::
 
 :::callout{ showHeader="true" headerText="What if I don’t license my vehicles under the IFTA?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-* You may receive fines and penalties imposed by enforcement agencies.
-* Your vehicles may be impounded until proper registration is obtained.
-* Your business may experience delays in operations, affecting delivery schedules and reputation.
+* You may receive fines and penalties
+* Your vehicles may be impounded until you properly register them
+* Your business may experience delays in operations, affecting delivery schedules and reputation
 :::
 
 :::callout{ showHeader="true" headerText="Questions?" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9400" emailIconText="mcscustomerservice@mvc.nj.gov" }
