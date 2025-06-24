@@ -22,6 +22,8 @@ agencyId: nj-motor-vehicle
 agencyAdditionalContext: ""
 formName: IRP-7
 ---
+&nbsp;
+
 ## Eligibility Criteria
 
 Vehicles qualify for IRP registration if they:
@@ -36,6 +38,13 @@ Additionally, vehicles that qualify for IRP registration must also meet **at lea
 * Have 3 or more axles, regardless of weight
 * Are part of a combination vehicle, with a total weight over 26,000 lbs
 
+Vehicles that **do not** need to register with the IRP include: 
+* Government vehicles
+* Vehicles with restricted plates
+* Recreational vehicles
+
+&nbsp;
+
 ## Application Requirements
 
 * Proof of business address, such as bank statements or a certificate of formation
@@ -44,24 +53,20 @@ Additionally, vehicles that qualify for IRP registration must also meet **at lea
 * Truck information, such as the Vehicle Identification Number (VIN#), fuel type, number of axles, and more
 * Mileage traveled in each state for the past year
 
-Fill out form IRP-7, linked at the bottom of the page, and email it to mcscustomerservice@mvc.nj.gov, or mail it to:
+Fill out form IRP-7, linked at the bottom of the page, and mail it to:
 
-&nbsp;
-
-New Jersey Motor Vehicle Commission
-&nbsp;
-
-Motor Carrier Services - IRP Section
-&nbsp;
-
-225 East State Street
-&nbsp;
-
-PO Box 178
-&nbsp;
-
-Trenton, NJ 08666
-&nbsp;
+>
+>New Jersey Motor Vehicle Commission
+>&nbsp;
+>
+>225 East State Street
+>&nbsp;
+>
+>PO Box 178
+>&nbsp;
+>
+>Trenton, NJ 08666
+>&nbsp;
 
 
 :::callout{ showHeader="true" headerText="What if I don’t register with the IRP?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
