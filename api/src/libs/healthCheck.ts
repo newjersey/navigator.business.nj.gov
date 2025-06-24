@@ -36,8 +36,8 @@ const healthCheck = async (type: string, url: string, logger: LogWriterType): Pr
 export const runHealthChecks = async (logger: LogWriterType): Promise<StatusResult> => {
   const url = process.env.API_BASE_URL;
   if (!url) {
-    logger.LogError("Missing required environment variable: API_BASE_URL");
-    throw new Error("Missing required environment variable: API_BASE_URL");
+    logger.LogError("API URL is undefined");
+    throw new Error("API URL is undefined");
   }
   const results: Record<string, Status> = {};
   for (const type in healthCheckEndPoints) {
