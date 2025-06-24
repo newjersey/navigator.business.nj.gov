@@ -17,6 +17,7 @@ describe("taxClearanceCertificateRouterFactory", () => {
     stubTaxClearanceCertificateClient = {
       postTaxClearanceCertificate: jest.fn(),
       health: jest.fn(),
+      unlinkTaxId: jest.fn(),
     };
     stubCryptoClient = {
       encryptValue: jest.fn(),
@@ -56,6 +57,22 @@ describe("taxClearanceCertificateRouterFactory", () => {
   it("throws a server error", async () => {
     stubTaxClearanceCertificateClient.postTaxClearanceCertificate.mockRejectedValue("some value");
     const response = await request(app).post(`/postTaxClearanceCertificate`);
+    expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+    expect(response.body).toEqual("some value");
+  });
+
+  it("unlink TaxId returns a successful response", async () => {
+    stubTaxClearanceCertificateClient.unlinkTaxId.mockResolvedValue({
+      success: true,
+    });
+    const response = await request(app).post(`/unlinkTaxId`);
+    expect(response.status).toEqual(StatusCodes.OK);
+    expect(response.body).toEqual({ success: true });
+  });
+
+  it("unlink TaxId throws a server error", async () => {
+    stubTaxClearanceCertificateClient.unlinkTaxId.mockRejectedValue("some value");
+    const response = await request(app).post(`/unlinkTaxId`);
     expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     expect(response.body).toEqual("some value");
   });

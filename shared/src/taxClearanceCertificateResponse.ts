@@ -22,4 +22,11 @@ type SuccessResponse = {
   certificatePdfArray: number[];
 };
 
+export interface UnlinkTaxIdResponse {
+  success: boolean;
+  error?: {
+    message: string;
+  };
+}
+
 export type TaxClearanceCertificateResponse = ErrorResponse | SuccessResponse;

@@ -127,6 +127,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
             setStepIndex={setStepIndex}
             fieldErrors={props.getInvalidFieldIds()}
             responseErrorType={responseErrorType}
+            setResponseErrorType={setResponseErrorType}
           />
           <HorizontalStepper
             steps={stepperSteps}
