@@ -5,12 +5,14 @@ import { XrayRenewalCalendarEventType } from "@/lib/types/types";
 export const searchXrayRenewalCalendarEvent = (
   renewalCalendarEvent: XrayRenewalCalendarEventType,
   term: string,
+  cmsCollectionName: string,
 ): Match[] => {
   const matches: Match[] = [];
 
   let match: Match = {
     filename: renewalCalendarEvent.filename,
     snippets: [],
+    cmsCollectionName: cmsCollectionName,
   };
   const content = renewalCalendarEvent.contentMd.toLowerCase();
   const filename = renewalCalendarEvent.filename.toLowerCase();

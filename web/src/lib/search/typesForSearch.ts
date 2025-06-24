@@ -1,5 +1,7 @@
 export type Match = {
   filename: string;
+  cmsCollectionName: string;
+  displayTitle?: string;
   snippets: string[];
 };
 

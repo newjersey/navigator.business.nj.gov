@@ -5,12 +5,14 @@ import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
 export const searchAnytimeActionLicenseReinstatements = (
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[],
   term: string,
+  cmsCollectionName: string,
 ): Match[] => {
   const matches: Match[] = [];
 
   for (const anytimeActionLicenseReinstatement of anytimeActionLicenseReinstatements) {
     let match: Match = {
       filename: anytimeActionLicenseReinstatement.filename,
+      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 

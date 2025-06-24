@@ -1,7 +1,7 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { getCollectionInfo } from "@/lib/search/searchConfig";
 import { ConfigMatch } from "@/lib/search/typesForSearch";
 import { ReactElement, useEffect, useState } from "react";
-
 interface Props {
   matches: ConfigMatch[];
   collectionName: string;
@@ -10,7 +10,7 @@ interface Props {
 
 export const ConfigMatchList = (props: Props): ReactElement => {
   const COLLAPSED_LEN = 5;
-
+  const collectionInfo = getCollectionInfo();
   const [expanded, setExpanded] = useState<boolean>(false);
   const collapsedMatches = props.matches.slice(0, COLLAPSED_LEN);
 
@@ -25,7 +25,6 @@ export const ConfigMatchList = (props: Props): ReactElement => {
   const toggleExpanded = (): void => {
     setExpanded((prev) => !prev);
   };
-
   return (
     <div className="margin-top-3 margin-left-6">
       <span className="font-body-lg">
@@ -35,9 +34,24 @@ export const ConfigMatchList = (props: Props): ReactElement => {
       <ul>
         {(expanded ? props.matches : collapsedMatches).map((match, i) => (
           <li key={i}>
-            <div>
-              <b>{match.cmsLabelPath.slice(2).join(" > ")}</b>
-            </div>
+            {collectionInfo ? (
+              <a
+                href={`/mgmt/cms#/collections/${collectionInfo.get(props.fileName)?.[0]}/entries/${
+                  collectionInfo.get(props.fileName)?.[1]
+                }`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div>
+                  <b>{match.cmsLabelPath.slice(2).join(" > ")}</b>
+                </div>
+              </a>
+            ) : (
+              <div>
+                <b>{match.cmsLabelPath.slice(2).join(" > ")}</b>
+              </div>
+            )}
+
             {match.value}
           </li>
         ))}

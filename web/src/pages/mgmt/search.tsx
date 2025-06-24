@@ -175,39 +175,62 @@ const SearchContentPage = (props: Props): ReactElement => {
       updateSearchState({ error: { message: error as string, term: searchState.term } });
       console.error(error);
     }
-
-    setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
-    setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
-    setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm));
-    setRaffleBingoStepMatches(searchTasks(props.raffleBingoSteps, lowercaseTerm));
-    setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm));
-    setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
-    setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
-    setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
-    setIndustryMatches(
-      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm),
+    setTaskMatches(searchTasks(props.tasks, lowercaseTerm, "tasks"));
+    setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm, "license-tasks"));
+    setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm, "municipal-tasks"));
+    setRaffleBingoStepMatches(
+      searchTasks(props.raffleBingoSteps, lowercaseTerm, "raffle-bingo-steps"),
     );
-    setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
+    setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm, ""));
+    setCertMatches(
+      searchCertifications(props.certifications, lowercaseTerm, "certification-opportunities"),
+    );
+    setCertArchiveMatches(
+      searchCertifications(
+        props.archivedCertifications,
+        lowercaseTerm,
+        "archived-certification-opportunities",
+      ),
+    );
+    setFundingMatches(searchFundings(props.fundings, lowercaseTerm, "funding-opportunities"));
+    setIndustryMatches(
+      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm, ""),
+    );
+    setAnytimeActionTaskMatches(
+      searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm, "anytime-action-tasks"),
+    );
     setAnytimeActionLicenseReinstatementMatches(
       searchAnytimeActionLicenseReinstatements(
         props.anytimeActionLicenseReinstatements,
         lowercaseTerm,
+        "anytime-action-license-reinstatements",
       ),
     );
 
-    const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, {
-      filename: "Steps",
-    });
+    const defaultStepsMatches = searchSteps(
+      Steps.steps as Step[],
+      lowercaseTerm,
+      {
+        filename: "Steps",
+      },
+      "",
+    );
     const domesticEmployerStepsMatches = searchSteps(
       DomesticEmployerSteps.steps as Step[],
       lowercaseTerm,
       {
         filename: "Steps - Domestic Employer",
       },
+      "steps-domestic-employer",
     );
-    const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
-      filename: "Steps - Dakota",
-    });
+    const foreignStepsMatches = searchSteps(
+      ForeignSteps.steps as Step[],
+      lowercaseTerm,
+      {
+        filename: "Steps - Dakota",
+      },
+      "steps-foreign",
+    );
     setStepsMatches([
       ...defaultStepsMatches,
       ...domesticEmployerStepsMatches,
@@ -218,19 +241,31 @@ const SearchContentPage = (props: Props): ReactElement => {
       searchNonEssentialQuestions(
         NonEssentialQuestions.nonEssentialQuestionsArray as NonEssentialQuestion[],
         lowercaseTerm,
+        "nonEssentialQuestionsCollection",
       ),
     );
 
-    setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
-    setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
-    setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
-    setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
-    setArchivedContextualInfoMatches(
-      searchContextualInfo(props.archivedContextualInfo, lowercaseTerm),
+    setWebflowLicenseMatches(
+      searchWebflowLicenses(props.webflowLicenses, lowercaseTerm, "webflow-licenses"),
     );
-    setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
+    setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm, "filings"));
+    setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm, "roadmap-sidebar-card"));
+    setContextualInfoMatches(
+      searchContextualInfo(props.contextualInfo, lowercaseTerm, "contextual-information"),
+    );
+    setArchivedContextualInfoMatches(
+      searchContextualInfo(props.archivedContextualInfo, lowercaseTerm, "archived-contextual-info"),
+    );
+    setLicenseCalendarEventMatches(
+      searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm, "license-calendar-events"),
+    );
+
     setXrayRenewalCalendarEventMatches(
-      searchXrayRenewalCalendarEvent(props.xrayRenewalCalendarEvent, lowercaseTerm),
+      searchXrayRenewalCalendarEvent(
+        props.xrayRenewalCalendarEvent,
+        lowercaseTerm,
+        "xray-calendar-event",
+      ),
     );
     updateSearchState({ hasSearched: true });
   };

@@ -2,13 +2,19 @@ import { findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Step } from "@/lib/types/types";
 
-export const searchSteps = (steps: Step[], term: string, params: { filename: string }): Match[] => {
+export const searchSteps = (
+  steps: Step[],
+  term: string,
+  params: { filename: string },
+  cmsCollectionName: string,
+): Match[] => {
   const matches: Match[] = [];
 
   for (const step of steps) {
     let match: Match = {
       filename: params.filename,
       snippets: [],
+      cmsCollectionName: cmsCollectionName,
     };
 
     const name = step.name.toLowerCase();
