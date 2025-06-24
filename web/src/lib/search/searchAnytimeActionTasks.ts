@@ -5,12 +5,14 @@ import { AnytimeActionTask } from "@/lib/types/types";
 export const searchAnytimeActionTasks = (
   anytimeActionTasks: AnytimeActionTask[],
   term: string,
+  cmsCollectionName: string,
 ): Match[] => {
   const matches: Match[] = [];
 
   for (const anytimeAction of anytimeActionTasks) {
     let match: Match = {
       filename: anytimeAction.filename,
+      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 

@@ -7,12 +7,17 @@ import { Match } from "@/lib/search/typesForSearch";
 import { Funding } from "@/lib/types/types";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
 
-export const searchFundings = (fundings: Funding[], term: string): Match[] => {
+export const searchFundings = (
+  fundings: Funding[],
+  term: string,
+  cmsCollectionName: string,
+): Match[] => {
   const matches: Match[] = [];
 
   for (const funding of fundings) {
     let match: Match = {
       filename: funding.filename,
+      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 

@@ -5,13 +5,15 @@ import { NonEssentialQuestion } from "@/lib/types/types";
 export const searchNonEssentialQuestions = (
   nonEssentialQuestions: NonEssentialQuestion[],
   term: string,
+  cmsCollectionName: string,
 ): Match[] => {
   const matches: Match[] = [];
 
   for (const nonEssentialQuestion of nonEssentialQuestions) {
     let match: Match = {
-      filename: "Non Essential Questions",
+      filename: "nonEssentialQuestionsArray",
       snippets: [],
+      cmsCollectionName: cmsCollectionName,
     };
 
     const id = nonEssentialQuestion.id.toLowerCase();
@@ -27,7 +29,7 @@ export const searchNonEssentialQuestions = (
     match = findMatchInLabelledText(labelledTexts, term, match);
 
     if (match.snippets.length > 0) {
-      match.filename = `${match.filename} (question ${nonEssentialQuestion.id})`;
+      match.displayTitle = `Non Essential Questions (question ${nonEssentialQuestion.id})`;
       matches.push(match);
     }
   }

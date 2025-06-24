@@ -3,12 +3,13 @@ import { Match } from "@/lib/search/typesForSearch";
 import { Task } from "@/lib/types/types";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 
-export const searchTasks = (tasks: Task[], term: string): Match[] => {
+export const searchTasks = (tasks: Task[], term: string, cmsCollectionName: string): Match[] => {
   const matches: Match[] = [];
 
   for (const task of tasks) {
     let match: Match = {
       filename: task.filename,
+      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 

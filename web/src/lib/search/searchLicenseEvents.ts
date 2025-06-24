@@ -2,13 +2,18 @@ import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers"
 import { Match } from "@/lib/search/typesForSearch";
 import { LicenseEventType } from "@/lib/types/types";
 
-export const searchLicenseEvents = (licenseEvents: LicenseEventType[], term: string): Match[] => {
+export const searchLicenseEvents = (
+  licenseEvents: LicenseEventType[],
+  term: string,
+  cmsCollectionName: string,
+): Match[] => {
   const matches: Match[] = [];
 
   for (const item of licenseEvents) {
     let match: Match = {
       filename: item.filename,
       snippets: [],
+      cmsCollectionName: cmsCollectionName,
     };
     const content = item.contentMd.toLowerCase();
     const filename = item.filename.toLowerCase();
