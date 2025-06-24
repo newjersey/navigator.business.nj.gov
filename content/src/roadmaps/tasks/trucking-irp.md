@@ -38,7 +38,7 @@ Additionally, vehicles that qualify for IRP registration must also meet **at lea
 * Have 3 or more axles, regardless of weight
 * Are part of a combination vehicle, with a total weight over 26,000 lbs
 
-Vehicles that **do not** need to register with the IFTA include: 
+Vehicles that **do not** need to register with the IRP include: 
 * Government vehicles
 * Vehicles with restricted plates
 * Recreational vehicles
