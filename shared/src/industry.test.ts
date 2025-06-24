@@ -22,6 +22,7 @@ describe("Industry Tests", () => {
   });
 
   it("getIndustries returns industries in order by name", () => {
+
     const orderdIndustries = orderBy(
       industryJson.industries as Industry[],
       [isIndustryIdGeneric, "name"],
@@ -29,7 +30,7 @@ describe("Industry Tests", () => {
     ).filter((x: Industry) => {
       return x.isEnabled;
     });
-
+    expect(getIndustries().length).toEqual(orderdIndustries.length);
     expect(getIndustries()).toEqual(orderdIndustries);
   });
 

@@ -214,7 +214,7 @@ describe("formationRouter", () => {
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,
         `us-east-1:identityId/formationDoc-1487076708000.pdf`,
-        undefined,
+        process.env.DOCUMENT_S3_BUCKET,
       );
       expect(response.body).toEqual(expectedNewUserData);
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
