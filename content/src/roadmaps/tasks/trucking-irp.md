@@ -60,9 +60,6 @@ Fill out form IRP-7, linked at the bottom of the page, and email it to mcscustom
 New Jersey Motor Vehicle Commission
 &nbsp;
 
-Motor Carrier Services - IRP Section
-&nbsp;
-
 225 East State Street
 &nbsp;
 
