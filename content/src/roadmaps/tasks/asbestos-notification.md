@@ -1,7 +1,9 @@
 ---
 notesMd: >-
-  6.13.25: WIP still. Edits made after crit but need to add exempted activities
-  section. Note: address will go inside quick ref callout once available 
+  6.25.25: Added exempted activities section, waiting for async SME review
+
+
+  6.13.25: WIP still. Edits made after crit but need to add exempted activities section. Note: address will go inside quick ref callout once available 
 
 
   6.10.25: Still a work in progress, making edits based on SME meeting
@@ -10,10 +12,10 @@ notesMd: >-
   6.3.25: This is a work in progress; drafted here in the early stage to see how the callouts and overall layout appear
 summaryDescriptionMd: If you are removing more than 3 square or linear feet of
   material that contains more than 1% asbestos, you must submit a Notification
-  of Asbestos Abatement. This form must be sent at least **10 days before the
-  work begins**. It tells the State when and where the asbestos work will take
-  place. If your plans change (such as start or end date, description, or scope
-  of work), you must send an updated form.
+  of Asbestos Abatement. Send this form at least **10 days before the work
+  begins**. This tells the State when and where asbestos work will happen. If
+  your plans change, send an updated form. If the start date changes or the
+  scope of work increases, you must submit payment again.
 urlSlug: asbestos-notification
 displayname: asbestos-notification
 name: Report Your Asbestos Work
@@ -34,11 +36,11 @@ You don’t need an asbestos license or to submit a notification if **any** of t
 * The work is limited repair, such as sealing with duct tape, cement, or other materials
 * You’re working on roofing or exterior siding that contains asbestos (unless it’s for demolition)
 * You’re only selling or storing asbestos, not disturbing it
-* Your company is using your own trained employees to handle asbestos at your own facility (and those employees are covered by federal OSHA rules)
+* Your company is using your own trained employees to handle asbestos at your own facility, and those employees are covered by federal Occupational Safety and Health Administration (OSHA) rules
 
 ## Application Requirements
 
-**You must have a New Jersey \[asbestos license, and employees with asbestos permits. [add links!]**
+**You must have a New Jersey asbestos license, and employees with asbestos permits. \[add links!]**
 
 ### Project Contact and Compliance Information
 
@@ -59,7 +61,7 @@ You don’t need an asbestos license or to submit a notification if **any** of t
 ### Project Information
 
 * Start and planned end date of asbestos work
-* Name and address of Occupational Safety and Health Administration (OSHA) monitor
+* Name and address of the OSHA monitor
 * Occupancy status of facility during asbestos removal
 * Scope of the work (renovation, mini-enclosure, etc.)
 
