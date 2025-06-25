@@ -1,27 +1,19 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
-  Business,
   BusinessPersona,
   BusinessUser,
   EmergencyTripPermitApplicationInfo,
-  EnvironmentData,
   FieldsForErrorHandling,
   FormationAddress,
-  FormationData,
-  FormationFormData,
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
   LicenseName,
   LicenseTaskId,
-  Preferences,
   ProfileData,
   SectionType,
-  TaskProgress,
-  TaxFilingData,
   UserData,
-  XrayData,
 } from "@businessnjgovnavigator/shared";
 import { Reducer } from "react";
 
@@ -516,25 +508,6 @@ const _profileTabs = ["info", "permits", "numbers", "documents", "notes", "perso
 export type ProfileTabs = (typeof _profileTabs)[number];
 
 export const profileTabs = _profileTabs as unknown as ProfileTabs[];
-
-export interface UpdateQueue {
-  queue: (userData: Partial<UserData>) => UpdateQueue;
-  queueBusiness: (business: Business) => UpdateQueue;
-  queueSwitchBusiness: (id: string) => UpdateQueue;
-  queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
-  queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
-  queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
-  queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
-  queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
-  queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
-  queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
-  queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
-  queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
-  queueXrayRegistrationData: (xrayRegistrationData: Partial<XrayData>) => UpdateQueue;
-  update: (config?: { local?: boolean }) => Promise<void>;
-  current: () => UserData;
-  currentBusiness: () => Business;
-}
 
 export type MarkdownResult = {
   content: string;
