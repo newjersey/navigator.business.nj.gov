@@ -2,8 +2,8 @@
 /* eslint-disable no-undef */
 
 import fs from "fs";
-import industryJson from "../../../../content/lib/industry.json" assert { type: "json" };
-import taskAgenciesJSON from "../../../../content/src/mappings/taskAgency.json" assert { type: "json" };
+import industryJson from "../../../../content/lib/industry.json" with { type: "json" };
+import taskAgenciesJSON from "../../../../content/src/mappings/taskAgency.json" with { type: "json" };
 import {
   loadAllLicenses,
   loadAllNavigatorLicenses,
@@ -110,21 +110,25 @@ const getAllLicensesFromWebflow = async () => {
 
 //  returns list of License MD loaded from navigator license-tasks folder
 const getLicensesAlreadyInWebflow = async () => {
-  const currentLicensesInWebflowIds = new Set((await getAllLicensesFromWebflow()).map((it) => it.id));
+  const currentLicensesInWebflowIds = new Set(
+    (await getAllLicensesFromWebflow()).map((it) => it.id),
+  );
   const currentLicensesInNavigator = loadAllNavigatorLicenses();
 
   return currentLicensesInNavigator.filter(
-    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.has(it.webflowId)
+    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.has(it.webflowId),
   );
 };
 
 //  returns list of License MD loaded from navigator webflow-licenses folder
 const getWebflowLicensesAlreadyInWebflow = async () => {
-  const currentLicensesInWebflowIds = new Set((await getAllLicensesFromWebflow()).map((it) => it.id));
+  const currentLicensesInWebflowIds = new Set(
+    (await getAllLicensesFromWebflow()).map((it) => it.id),
+  );
   const currentWebflowLicensesInNavigator = loadAllNavigatorWebflowLicenses();
 
   return currentWebflowLicensesInNavigator.filter(
-    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.has(it.webflowId)
+    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.has(it.webflowId),
   );
 };
 
@@ -132,12 +136,14 @@ const getWebflowLicensesAlreadyInWebflow = async () => {
 // returns a list of license MD objects that don't yet exist in webflow
 const getNewLicenses = async () => {
   const currentLicensesInNavigator = loadAllLicenses();
-  const currentLicensesInWebflowIds = new Set((await getAllLicensesFromWebflow()).map((it) => it.id));
+  const currentLicensesInWebflowIds = new Set(
+    (await getAllLicensesFromWebflow()).map((it) => it.id),
+  );
 
   //CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
   // right now only syncs license-tasks, not yet webflow-licenses also
   return currentLicensesInNavigator.filter(
-    (it) => it.webflowId === undefined || !currentLicensesInWebflowIds.has(it.webflowId)
+    (it) => it.webflowId === undefined || !currentLicensesInWebflowIds.has(it.webflowId),
   );
 };
 
@@ -148,7 +154,13 @@ const updateLicenses = async (licenseMarkdowns) => {
     try {
       return await modifyItem(webflowItemId, licenseCollectionId, webflowItem);
     } catch (error) {
-      await catchRateLimitErrorAndRetry(error, modifyItem, webflowItemId, licenseCollectionId, webflowItem);
+      await catchRateLimitErrorAndRetry(
+        error,
+        modifyItem,
+        webflowItemId,
+        licenseCollectionId,
+        webflowItem,
+      );
     }
   };
 
@@ -292,4 +304,5 @@ if (process.env.NODE_ENV === "test") {
   console.log("--preview = Preview Licenses to Create and Update");
   process.exit(1);
 }
-export {};
+export { };
+
