@@ -1,21 +1,18 @@
-import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
 import { EmployerId } from "@/components/data-fields/EmployerId";
 import { EntityId } from "@/components/data-fields/EntityId";
-import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
 import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
 import { Industry } from "@/components/data-fields/Industry";
-import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
 import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
+import { CertificationsAndFundingNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/CertificationsAndFundingNonEssentialQuestions";
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import { Notes } from "@/components/data-fields/Notes";
-import { Ownership } from "@/components/data-fields/Ownership";
 import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGamesQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
@@ -87,7 +84,6 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -296,10 +292,6 @@ const ProfilePage = (props: Props): ReactElement => {
     profileData.operatingPhase,
   ).displayProfileOpportunityAlert;
 
-  const shouldLockMunicipality = (): boolean => {
-    return !!profileData.municipality && business?.taxFilingData.state === "SUCCESS";
-  };
-
   const displayRaffleBingoGameQuestion = (): boolean => {
     if (!business) return false;
     return profileData.legalStructureId === "nonprofit";
@@ -362,14 +354,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <DateOfFormation futureAllowed />
         </ProfileField>
 
-        <ProfileField
-          fieldName="municipality"
-          isVisible={nexusLocationInNewJersey(profileData)}
-          locked={shouldLockMunicipality()}
-        >
-          <CannabisLocationAlert industryId={business?.profileData.industryId} />
-          <MunicipalityField />
-        </ProfileField>
+        <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
       </div>
     ),
     permits: (
@@ -580,30 +565,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <DateOfFormation futureAllowed />
         </ProfileField>
 
-        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
-          <CannabisLocationAlert industryId={business?.profileData.industryId} />
-          <MunicipalityField />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="ownershipTypeIds"
-          isVisible={
-            LookupOperatingPhaseById(business?.profileData.operatingPhase)
-              .displayCompanyDemographicProfileFields
-          }
-        >
-          <Ownership />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="existingEmployees"
-          isVisible={
-            LookupOperatingPhaseById(business?.profileData.operatingPhase)
-              .displayCompanyDemographicProfileFields
-          }
-        >
-          <ExistingEmployees />
-        </ProfileField>
+        <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
       </div>
     ),
     permits: (
@@ -746,17 +708,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <DateOfFormation futureAllowed={false} />
         </ProfileField>
 
-        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
-          <MunicipalityField />
-        </ProfileField>
-
-        <ProfileField fieldName="ownershipTypeIds">
-          <Ownership />
-        </ProfileField>
-
-        <ProfileField fieldName="existingEmployees">
-          <ExistingEmployees />
-        </ProfileField>
+        <CertificationsAndFundingNonEssentialQuestions />
       </div>
     ),
     permits: (
