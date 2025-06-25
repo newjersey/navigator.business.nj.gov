@@ -1,3 +1,10 @@
+## [2025.13.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.13.1...v2025.13.2) (2025-06-25)
+
+
+### Bug Fixes
+
+* enable tax clearance certificate feature via ff ([cf35d2f](https://github.com/newjersey/navigator.business.nj.gov/commit/cf35d2f896fef5399b1b657648144174cdad4a28))
+
 ## [2025.13.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.13.0...v2025.13.1) (2025-06-25)
 
 
