@@ -38,3 +38,7 @@ export const displayElevatorQuestion = (profileData: ProfileData, business?: Bus
   if (!business) return false;
   return profileData.homeBasedBusiness === false && profileData.businessPersona === "STARTING";
 };
+
+export const shouldLockMunicipality = (profileData: ProfileData, business?: Business): boolean => {
+  return !!profileData.municipality && business?.taxFilingData.state === "SUCCESS";
+};

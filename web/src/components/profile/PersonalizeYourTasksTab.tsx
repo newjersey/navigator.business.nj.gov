@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
+import { CertificationsAndFundingNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/CertificationsAndFundingNonEssentialQuestions";
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -97,7 +98,14 @@ export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
           headerText={Config.profileDefaults.default.filterCertificationsAndFundingHeader}
           description={Config.profileDefaults.default.filterCertificationsAndFundingSubText}
         />
-        <AccordionDetails sx={{ marginLeft: 6 }}>FILTER CERTIFICATIONS DETAILS</AccordionDetails>
+        <AccordionDetails sx={{ marginLeft: 6 }}>
+          <CertificationsAndFundingNonEssentialQuestions
+            showCannabisAlert={
+              profileData.businessPersona === "STARTING" ||
+              profileData.businessPersona === "FOREIGN"
+            }
+          />
+        </AccordionDetails>
       </Accordion>
       <hr className="margin-y-4" />
       <Accordion>
