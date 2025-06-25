@@ -1,3 +1,10 @@
+## [2025.13.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.13.0...v2025.13.1) (2025-06-25)
+
+
+### Bug Fixes
+
+* disable tax clearance certificate feature via ff ([ade300b](https://github.com/newjersey/navigator.business.nj.gov/commit/ade300b23bd7136cecabdee15fac0f4533b6c7de))
+
 # [2025.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.12.0...v2025.13.0) (2025-06-25)
 
 
