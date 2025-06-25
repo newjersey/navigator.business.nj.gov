@@ -29,7 +29,7 @@
   "displayname": "domestic-employer",
   "industryOnboardingQuestions": {},
   "isEnabled": true,
-  "additionalSearchTerms": "employs a nanny, employs a housekeeper, private household, household employer, employs a caretaker, employers a butler, employers a groundskeeper, employs a gardener, employs a pool cleaner",
+  "additionalSearchTerms": "employs a nanny, employs a housekeeper, private household, household employer, employs a caretaker, employers a butler, employers a groundskeeper, employs a gardener, employs a pool cleaner, employs an au pair",
   "id": "domestic-employer",
   "description": "A private household that employs a nanny, housekeeper, or similar who provides services for the household for five or more hours a month",
   "webflowId": "668d747e8623c6105ee139cf"
