@@ -51,6 +51,11 @@
       "step": 4,
       "weight": 20,
       "task": "resale-tax-certificate-operating"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Retail",
@@ -60,7 +65,6 @@
     "cigarette-manufacture-sell",
     "other-businesses-CRTK-survey",
     "retail-pesticide-dealer-licensing",
-    "business-vehicle-title-reg",
     "inspect-boiler",
     "business-vehicle-irp",
     "inspect-pv",

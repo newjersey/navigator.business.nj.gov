@@ -47,13 +47,15 @@
       "step": 4,
       "weight": 90,
       "task": "community-right-to-know-survey"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Electrical Contractor",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "electrical-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

@@ -59,12 +59,16 @@
       "licenseTask": "rmw-generator-registration",
       "required": true,
       "weight": 100
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Funeral Services",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg",
     "crematory",
     "bus-initial-inspection",
     "mvc-cpcn"

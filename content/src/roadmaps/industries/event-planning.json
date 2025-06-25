@@ -41,11 +41,15 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Event Planning",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg",
     "business-vehicle-irp",
     "bus-initial-inspection",
     "mvc-cpcn"

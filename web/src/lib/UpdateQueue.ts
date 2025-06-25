@@ -6,6 +6,7 @@ import {
   FormationFormData,
   Preferences,
   ProfileData,
+  RoadmapTaskData,
   TaskProgress,
   TaxFilingData,
   UserData,
@@ -26,6 +27,7 @@ export interface UpdateQueue {
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
   queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
   queueXrayRegistrationData: (xrayRegistrationData: Partial<XrayData>) => UpdateQueue;
+  queueRoadmapTaskData: (roadmapData: Partial<RoadmapTaskData>) => UpdateQueue;
   update: (config?: { local?: boolean }) => Promise<void>;
   current: () => UserData;
   currentBusiness: () => Business;
@@ -111,6 +113,23 @@ export class UpdateQueueFactory implements UpdateQueue {
           formationData: {
             ...this.currentBusiness().formationData,
             ...formationData,
+          },
+        },
+      },
+    };
+    return this;
+  }
+
+  queueRoadmapTaskData(roadmapTaskData: Partial<RoadmapTaskData>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          roadmapTaskData: {
+            ...this.currentBusiness().roadmapTaskData,
+            ...roadmapTaskData,
           },
         },
       },

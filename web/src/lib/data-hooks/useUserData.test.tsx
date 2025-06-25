@@ -8,7 +8,14 @@ import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { generateRoadmap } from "@/test/factories";
 import { withAuth, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
-import { BusinessUser, generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import {
+  BusinessUser,
+  generateBusiness,
+  generateRoadmapTaskData,
+  generateUser,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
@@ -131,12 +138,19 @@ describe("useUserData", () => {
       const returnedRoadmap = generateRoadmap({});
       mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
 
+      const roadmapTask = generateRoadmapTaskData({});
+
       const currentUser = generateUser({});
-      mockApi.postUserData.mockResolvedValue(generateUserData({}));
+      mockApi.postUserData.mockResolvedValue(
+        generateUserDataForBusiness(generateBusiness({ roadmapTaskData: roadmapTask })),
+      );
 
       const { updateQueue } = await setupHook(currentUser);
 
-      const newUserData = generateUserData({});
+      const newUserData = generateUserDataForBusiness(
+        generateBusiness({ roadmapTaskData: roadmapTask }),
+      );
+
       await act(() => {
         return updateQueue?.queue(newUserData).update();
       });
@@ -153,6 +167,7 @@ describe("useUserData", () => {
       await waitFor(() => {
         return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(
           expectedProfileData,
+          roadmapTask,
         );
       });
       expect(mockSetRoadmap).toHaveBeenCalledWith(returnedRoadmap);

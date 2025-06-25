@@ -12,6 +12,7 @@ import { BusinessStructureTask } from "@/components/tasks/business-structure/Bus
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
+import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
 import { Xray } from "@/components/xray/Xray";
 import { Roadmap, Task, TasksDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
@@ -77,6 +78,7 @@ export const TaskPageSwitchComponent = ({
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
+    "manage-business-vehicles": <ManageBusinessVehicles task={task} />,
     "hotel-motel-registration": (
       <HotelMotelRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),

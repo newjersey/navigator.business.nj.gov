@@ -41,11 +41,15 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Travel Agency",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg",
     "bus-initial-inspection",
     "mvc-cpcn"
   ],

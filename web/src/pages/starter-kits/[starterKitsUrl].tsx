@@ -14,11 +14,11 @@ import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
+  getAllStarterKitUrls,
   STARTER_KITS_GENERIC_SLUG,
   StarterKitsUrl,
-  getAllStarterKitUrls,
 } from "@/lib/utils/starterKits";
-import type { Industry } from "@businessnjgovnavigator/shared";
+import { emptyRoadmapTaskData, Industry } from "@businessnjgovnavigator/shared";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
 import type { GetStaticPathsResult } from "next";
 import type { ReactElement } from "react";
@@ -167,7 +167,7 @@ export const getStaticProps = async ({
 
   const newProfileData = createStarterKitProfileData(industry);
 
-  const roadmap = await buildUserRoadmap(newProfileData);
+  const roadmap = await buildUserRoadmap(newProfileData, emptyRoadmapTaskData);
 
   return {
     props: { noAuth: true, roadmap, industry },

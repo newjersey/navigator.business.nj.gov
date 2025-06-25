@@ -57,12 +57,16 @@
       "step": 4,
       "weight": 90,
       "task": "resale-tax-certificate-operating"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Restaurant",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg",
     "inspect-boiler",
     "inspect-pv",
     "inspect-fridge",

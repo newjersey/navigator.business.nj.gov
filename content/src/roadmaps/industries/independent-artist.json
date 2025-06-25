@@ -40,6 +40,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Entertainment",
@@ -48,7 +53,6 @@
     "carnival-ride-permitting",
     "ticket-broker-resell",
     "entertainment-agency-register",
-    "business-vehicle-title-reg",
     "business-vehicle-irp",
     "bus-initial-inspection",
     "resale-tax-cert",

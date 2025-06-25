@@ -46,13 +46,15 @@
       "step": 4,
       "weight": 99,
       "task": "resale-tax-certificate-operating"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Printing Business",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "printing-business",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

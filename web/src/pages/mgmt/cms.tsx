@@ -42,6 +42,7 @@ import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPrevie
 import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
+import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
 import TaxAccessPreview from "@/lib/cms/previews/TaxAccessPreview";
@@ -98,6 +99,7 @@ const CMS = dynamic(
       registerPreview(CMS, "xray-calendar-event", XrayRenewalCalendarEventPreview);
       registerPreview(CMS, "xray-renewal-config", XrayRenewalCalendarEventPreview);
       registerPreview(CMS, "xray", XrayTaskPreview);
+      registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 

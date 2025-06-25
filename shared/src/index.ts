@@ -31,6 +31,7 @@ export * from "./municipality";
 export * from "./operatingPhase";
 export * from "./ownership";
 export * from "./profileData";
+export * from "./roadmapTaskData";
 export * from "./sector";
 export * from "./states";
 export * from "./stringHelpers";

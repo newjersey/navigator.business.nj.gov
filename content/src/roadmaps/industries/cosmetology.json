@@ -53,18 +53,19 @@
       "licenseTask": "cosmetology-license",
       "weight": 12,
       "required": true
-    },
-    {
+    },  {
       "step": 4,
       "weight": 17,
       "task": "resale-tax-certificate-operating"
+    },
+    {
+      "step": 4,
+      "weight": 99,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Cosmetology",
-  "nonEssentialQuestionsIds": [
-    "electrologist",
-    "business-vehicle-title-reg"
-  ],
+  "nonEssentialQuestionsIds": ["electrologist"],
   "displayname": "cosmetology",
   "industryOnboardingQuestions": {
     "canBeReseller": false
