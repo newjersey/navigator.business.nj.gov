@@ -1,3 +1,47 @@
+# [2025.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.12.0...v2025.13.0) (2025-06-25)
+
+
+### Bug Fixes
+
+* [AB[#0000](https://github.com/newjersey/navigator.business.nj.gov/issues/0000)] test fix for AnytimeActionTaxClearance ([89e1c96](https://github.com/newjersey/navigator.business.nj.gov/commit/89e1c96a490f40b47918b5bde21b84cbc2bdc718))
+* [AB[#114979](https://github.com/newjersey/navigator.business.nj.gov/issues/114979)] prevent 'details?.toJSON is not a function' error ([6562d53](https://github.com/newjersey/navigator.business.nj.gov/commit/6562d53155a61b54474c6a522052c12ac441804a))
+* [AB[#13777](https://github.com/newjersey/navigator.business.nj.gov/issues/13777)] Configure env for personalize my tasks tab ([15cc8c4](https://github.com/newjersey/navigator.business.nj.gov/commit/15cc8c4d8fe90dc7673d8a1e5c8995120ba964a1))
+* [AB[#13777](https://github.com/newjersey/navigator.business.nj.gov/issues/13777)] fix gradient in star icon ([3ab475f](https://github.com/newjersey/navigator.business.nj.gov/commit/3ab475fdd43d2aae0789c44e02ef58f44ba0f9b0))
+* [AB[#13777](https://github.com/newjersey/navigator.business.nj.gov/issues/13777)] pr fixes ([889e11c](https://github.com/newjersey/navigator.business.nj.gov/commit/889e11c9d12f0d09384ba326922b66719359962b))
+* [AB[#14467](https://github.com/newjersey/navigator.business.nj.gov/issues/14467)] Update ETP environment and validation ([e9c1816](https://github.com/newjersey/navigator.business.nj.gov/commit/e9c181601c197f8b19b0c78628f8d59f525d1700))
+* [AB[#14657](https://github.com/newjersey/navigator.business.nj.gov/issues/14657)] remove auth from tax clearance logs ([#10443](https://github.com/newjersey/navigator.business.nj.gov/issues/10443)) ([08b6797](https://github.com/newjersey/navigator.business.nj.gov/commit/08b67974f958fded8a512b841ba2229163aff08e))
+* [AB[#14736](https://github.com/newjersey/navigator.business.nj.gov/issues/14736)] Tax Clearance Alert positon ([78ad886](https://github.com/newjersey/navigator.business.nj.gov/commit/78ad8861a3887140c9ab8a96e5f61bb935b38603))
+* [AB[#14779](https://github.com/newjersey/navigator.business.nj.gov/issues/14779)] fix flaking test by hardcoding current time ([f527548](https://github.com/newjersey/navigator.business.nj.gov/commit/f527548235a4100323018faf794815b2d67b58c4))
+* [AB[#14795](https://github.com/newjersey/navigator.business.nj.gov/issues/14795)] fix test flaking due to invalid NJ zipcode ([eb02817](https://github.com/newjersey/navigator.business.nj.gov/commit/eb02817f38bb72806efdf3bbcf3bc386531ef1bf))
+* [AB[#14796](https://github.com/newjersey/navigator.business.nj.gov/issues/14796)] Change copy from Personalize My Tasks to Personalize My Experience ([a4de1d3](https://github.com/newjersey/navigator.business.nj.gov/commit/a4de1d31b2bffcc1ef903cc74e44fb825805209c))
+* [AB[#14796](https://github.com/newjersey/navigator.business.nj.gov/issues/14796)] Change to Personalize my experience ([d493079](https://github.com/newjersey/navigator.business.nj.gov/commit/d493079eae5280675cf2d313a60004829108e553))
+* [AB[#14891](https://github.com/newjersey/navigator.business.nj.gov/issues/14891)] callout icon bullets will show without needing body text ([a5c8c40](https://github.com/newjersey/navigator.business.nj.gov/commit/a5c8c408f33fd8c11e0d85d0ead07fe37c1b7973))
+* [AB[#14936](https://github.com/newjersey/navigator.business.nj.gov/issues/14936)] Limit ABC ETP permits to 4 days in the future ([c586a29](https://github.com/newjersey/navigator.business.nj.gov/commit/c586a29d1b2b067a125c71a12028dd7e33bb8df0))
+* [AB[#14936](https://github.com/newjersey/navigator.business.nj.gov/issues/14936)] Remove flaky timer based test ([8e47455](https://github.com/newjersey/navigator.business.nj.gov/commit/8e474555fdc466e5403eb39b8ee9272a55b67675))
+* [AB[#8375](https://github.com/newjersey/navigator.business.nj.gov/issues/8375)] xray config ([fb78633](https://github.com/newjersey/navigator.business.nj.gov/commit/fb78633a0f08ee5cb77cbc85adeceba06166dc65))
+* cspell merge error ([6166cbe](https://github.com/newjersey/navigator.business.nj.gov/commit/6166cbe49b469a086505fe71579f639fbf29bb3b))
+* **deps:** update nextjs monorepo to v15.3.3 ([d946f47](https://github.com/newjersey/navigator.business.nj.gov/commit/d946f47e131ceec598205be8df23528bf5cc9e19))
+* **deps:** update nextjs monorepo to v15.3.4 ([5682487](https://github.com/newjersey/navigator.business.nj.gov/commit/5682487d5285886136f0099d6de9cb440aec55ad))
+
+
+### Features
+
+* [AB[#13626](https://github.com/newjersey/navigator.business.nj.gov/issues/13626)] Lock Fields in Tax Clearance ([43e29e6](https://github.com/newjersey/navigator.business.nj.gov/commit/43e29e68b2cf96a6c6cd71da4a5325af2a865f3d))
+* [AB[#13777](https://github.com/newjersey/navigator.business.nj.gov/issues/13777)] Add profile accordions in personalize your tasks tab ([80c30fd](https://github.com/newjersey/navigator.business.nj.gov/commit/80c30fd28ae53ba1f87200665507d614638b4cc6))
+* [AB[#14385](https://github.com/newjersey/navigator.business.nj.gov/issues/14385)] Add location based information to profile accordion ([6e7bd1d](https://github.com/newjersey/navigator.business.nj.gov/commit/6e7bd1d644545943b006a3f680f4c4a78758838a))
+* [AB[#14385](https://github.com/newjersey/navigator.business.nj.gov/issues/14385)] Add location based information to profile accordion ([8b557d6](https://github.com/newjersey/navigator.business.nj.gov/commit/8b557d601ce8b09ee20286b9da9d6fdd3bcd31ff))
+* [AB[#14385](https://github.com/newjersey/navigator.business.nj.gov/issues/14385)] Add location based information to profile accordion ([1104783](https://github.com/newjersey/navigator.business.nj.gov/commit/11047832b01fab679726264924331b70309d7990))
+* [AB[#14385](https://github.com/newjersey/navigator.business.nj.gov/issues/14385)] Add location based information to profile accordion ([9b48bcf](https://github.com/newjersey/navigator.business.nj.gov/commit/9b48bcfa637f79199a576d3f0d8b99b6c2b03893))
+* [AB[#14386](https://github.com/newjersey/navigator.business.nj.gov/issues/14386)] added profile customize tab nonEssentialQuestion section content ([87543ed](https://github.com/newjersey/navigator.business.nj.gov/commit/87543ed3500bfc6d7775cf809bd5e73b541d3039))
+* [AB[#14386](https://github.com/newjersey/navigator.business.nj.gov/issues/14386)] eliminated personalize My Task Section for domestic employer industry ([83cd966](https://github.com/newjersey/navigator.business.nj.gov/commit/83cd96661f1ea03e9e62df86810f744e9878ce4e))
+* [AB[#14386](https://github.com/newjersey/navigator.business.nj.gov/issues/14386)] fixed lint issue on main ([869d60b](https://github.com/newjersey/navigator.business.nj.gov/commit/869d60b652b41aa6f20fc6109e4e914ae2a80112))
+* [AB[#14386](https://github.com/newjersey/navigator.business.nj.gov/issues/14386)] fixed testing issue for nonEssentailQuestionsSection ([00ecf6d](https://github.com/newjersey/navigator.business.nj.gov/commit/00ecf6de5b7a2da08ee01a0c9cb9fb56a6da1f61))
+* [AB[#14466](https://github.com/newjersey/navigator.business.nj.gov/issues/14466)] clear submission error after user updates tax clearance form ([0a1f058](https://github.com/newjersey/navigator.business.nj.gov/commit/0a1f05812b88bad794b96e14f5688f0e191abbc8))
+* [AB[#14471](https://github.com/newjersey/navigator.business.nj.gov/issues/14471)] update returnToLink when showing sign-in/register modal on tax clearance steps ([744cddd](https://github.com/newjersey/navigator.business.nj.gov/commit/744cdddb3bc7ba4d0556bbb0d69cc1085a0f9a51))
+* [AB[#14543](https://github.com/newjersey/navigator.business.nj.gov/issues/14543)] add post body to health check ([dad1bbe](https://github.com/newjersey/navigator.business.nj.gov/commit/dad1bbe1a897db68d85f22475c5bb3d236636b57))
+* [AB[#14643](https://github.com/newjersey/navigator.business.nj.gov/issues/14643)] making error anchor link switch back to check eligibility step ([ee72afc](https://github.com/newjersey/navigator.business.nj.gov/commit/ee72afc2e887ccf7acf048db146fc71dd59c87fd))
+* [AB[#8375](https://github.com/newjersey/navigator.business.nj.gov/issues/8375)] xray renewal event ([16e2d6f](https://github.com/newjersey/navigator.business.nj.gov/commit/16e2d6f7533962d360e636cf437981fbdae0a99f))
+
 # [2025.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.11.0...v2025.12.0) (2025-06-09)
 
 
