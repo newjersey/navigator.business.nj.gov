@@ -424,16 +424,18 @@ app.use(
     dynamoDataClient,
     addGovDeliveryNewsletter,
     addToAirtableUserTesting,
+    logger,
   ),
 );
-app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
-app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, dynamoDataClient));
+app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch, logger));
+app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, dynamoDataClient, logger));
 app.use(
   "/api",
   elevatorSafetyRouterFactory(
     dynamicsElevatorSafetyInspectionStatusClient,
     dynamicsElevatorSafetyRegistrationStatusClient,
     dynamicsElevatorSafetyViolationsStatusClient,
+    logger,
   ),
 );
 app.use(
@@ -442,24 +444,25 @@ app.use(
     taxClearanceCertificateClient,
     AWSTaxIDEncryptionClient,
     dynamoDataClient,
+    logger,
   ),
 );
-app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
+app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient, logger));
 app.use(
   "/api",
-  housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient),
+  housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient, logger),
 );
-app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient));
+app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient, logger));
 app.use(
   "/api",
-  formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }),
+  formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }, logger),
 );
-app.use("/api/external", emergencyTripPermitRouterFactory(emergencyTripPermitClient));
+app.use("/api/external", emergencyTripPermitRouterFactory(emergencyTripPermitClient, logger));
 app.use(
   "/api/taxFilings",
-  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSTaxIDEncryptionClient),
+  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSTaxIDEncryptionClient, logger),
 );
-app.use("/api", decryptionRouterFactory(AWSTaxIDEncryptionClient));
+app.use("/api", decryptionRouterFactory(AWSTaxIDEncryptionClient, logger));
 app.use(
   "/health",
   healthCheckRouterFactory(
@@ -472,10 +475,11 @@ app.use(
       ["webservice/formation", formationHealthCheckClient],
       ["tax-clearance", taxClearanceHealthCheckClient],
     ]),
+    logger,
   ),
 );
 
-app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient));
+app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

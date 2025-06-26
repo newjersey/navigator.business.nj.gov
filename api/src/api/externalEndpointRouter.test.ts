@@ -1,6 +1,7 @@
 import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
 import { AddNewsletter, AddToUserTesting, DatabaseClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
@@ -52,8 +53,15 @@ describe("externalEndpointRouter", () => {
     stubAddToUserTesting = jest.fn();
     app = setupExpress(false);
     app.use(
-      externalEndpointRouterFactory(stubDynamoDataClient, stubAddNewsletter, stubAddToUserTesting),
+      externalEndpointRouterFactory(
+        stubDynamoDataClient,
+        stubAddNewsletter,
+        stubAddToUserTesting,
+        DummyLogWriter,
+      ),
     );
+    jest.spyOn(DummyLogWriter, "LogInfo").mockImplementation(() => {});
+    jest.spyOn(DummyLogWriter, "LogError").mockImplementation(() => {});
   });
 
   afterAll(async () => {
@@ -73,6 +81,9 @@ describe("externalEndpointRouter", () => {
         });
         await request(app).post(`/newsletter`).send(userData);
         expect(stubAddNewsletter).toHaveBeenCalled();
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("successfully updated newsletter preferences for userId:"),
+        );
       });
 
       it("does not add to newsletter if the request has been attempted", async () => {
@@ -108,6 +119,22 @@ describe("externalEndpointRouter", () => {
         expect(stubAddNewsletter).toHaveBeenCalled();
         expect(stubDynamoDataClient.put).toHaveBeenCalled();
       });
+
+      it("logs no update needed and does not call addNewsletter when no update is needed", async () => {
+        const userData = generateUserData({
+          user: generateUser({
+            externalStatus: { newsletter: { status: "IN_PROGRESS" } },
+            receiveNewsletter: true,
+          }),
+        });
+
+        await request(app).post(`/newsletter`).send(userData);
+
+        expect(stubAddNewsletter).not.toHaveBeenCalled();
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("no update to newsletter preferences needed for userId"),
+        );
+      });
     });
 
     describe("userTesting", () => {
@@ -131,6 +158,9 @@ describe("externalEndpointRouter", () => {
         });
         await request(app).post(`/userTesting`).send(userData);
         expect(stubAddToUserTesting).not.toHaveBeenCalled();
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("successfully updated user testing preferences for userId:"),
+        );
       });
 
       it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
@@ -140,6 +170,22 @@ describe("externalEndpointRouter", () => {
         await request(app).post(`/userTesting`).send(userData);
         expect(stubAddToUserTesting).toHaveBeenCalled();
         expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
+      });
+
+      it("logs no update needed and does not call addToUserTesting when no update is needed", async () => {
+        const userData = generateUserData({
+          user: generateUser({
+            externalStatus: { userTesting: { status: "IN_PROGRESS" } },
+            userTesting: true,
+          }),
+        });
+
+        await request(app).post(`/userTesting`).send(userData);
+
+        expect(stubAddToUserTesting).not.toHaveBeenCalled();
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("no update to user testing preferences needed for userId"),
+        );
       });
 
       it("adds to newsletter and updates the db if the user is authenticated", async () => {

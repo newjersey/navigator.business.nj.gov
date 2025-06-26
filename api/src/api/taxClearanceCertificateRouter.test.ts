@@ -1,6 +1,7 @@
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
 import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { generateUserData } from "@shared/test";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
@@ -39,6 +40,7 @@ describe("taxClearanceCertificateRouterFactory", () => {
         stubTaxClearanceCertificateClient,
         stubCryptoClient,
         stubDynamoDataClient,
+        DummyLogWriter,
       ),
     );
   });
@@ -58,7 +60,7 @@ describe("taxClearanceCertificateRouterFactory", () => {
     stubTaxClearanceCertificateClient.postTaxClearanceCertificate.mockRejectedValue("some value");
     const response = await request(app).post(`/postTaxClearanceCertificate`);
     expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(response.body).toEqual("some value");
+    expect(response.body).toEqual({ error: "some value" });
   });
 
   it("unlink TaxId returns a successful response", async () => {
@@ -74,6 +76,6 @@ describe("taxClearanceCertificateRouterFactory", () => {
     stubTaxClearanceCertificateClient.unlinkTaxId.mockRejectedValue("some value");
     const response = await request(app).post(`/unlinkTaxId`);
     expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(response.body).toEqual("some value");
+    expect(response.body).toEqual({ error: "some value" });
   });
 });
