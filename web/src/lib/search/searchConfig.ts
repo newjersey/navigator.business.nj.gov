@@ -3,6 +3,7 @@
 import { makeSnippet } from "@/lib/search/helpers";
 import { ConfigMatch, GroupedConfigMatch } from "@/lib/search/typesForSearch";
 
+const collectionInfo = new Map<string, string[]>();
 export const searchConfig = (obj: any, term: string, cmsConfig: any): GroupedConfigMatch[] => {
   const configMatches = searchObj(obj.default, term, [], []).map((it) => {
     const cmsPath = findCmsConfigPath(cmsConfig, it.keyPath);
@@ -91,6 +92,7 @@ const findFilesInCmsConfig = (cmsConfig: any, key: string): FileMatch[] => {
     });
     if (foundFiles.length > 0) {
       for (const foundFile of foundFiles) {
+        collectionInfo.set(foundFile.label, [collection.name, foundFile.name]);
         matchingFiles.push({
           labelPathForCmsConfigFile: [collection.label, foundFile.label],
           cmsConfigFile: foundFile,
@@ -106,6 +108,9 @@ const findFilesInCmsConfig = (cmsConfig: any, key: string): FileMatch[] => {
   return matchingFiles;
 };
 
+export const getCollectionInfo = (): Map<string, string[]> => {
+  return collectionInfo;
+};
 const buildCmsConfigPath = (
   cmsConfigFile: any,
   keyPath: string[],

@@ -1,7 +1,6 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Match } from "@/lib/search/typesForSearch";
 import { ReactElement, useEffect, useState } from "react";
-
 interface Props {
   matches: Match[];
   collectionLabel: string;
@@ -35,7 +34,15 @@ export const MatchList = (props: Props): ReactElement => {
         {(expanded ? props.matches : collapsedMatches).map((match) => (
           <li key={match.filename}>
             <div>
-              <b>{match.filename}</b>
+              {match.cmsCollectionName && (
+                <a
+                  href={`/mgmt/cms#/collections/${match.cmsCollectionName}/entries/${match.filename}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <b>{match.displayTitle || match.filename}</b>
+                </a>
+              )}
             </div>
             {match.snippets.map((snippet, i) => (
               <div key={i}>{snippet}</div>

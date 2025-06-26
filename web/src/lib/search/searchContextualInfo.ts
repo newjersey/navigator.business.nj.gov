@@ -5,12 +5,14 @@ import { ContextualInfoFile } from "@/lib/types/types";
 export const searchContextualInfo = (
   contextualInfo: ContextualInfoFile[],
   term: string,
+  cmsCollectionName: string,
 ): Match[] => {
   const matches: Match[] = [];
 
   for (const info of contextualInfo) {
     let match: Match = {
       filename: info.filename,
+      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 
