@@ -424,6 +424,7 @@ app.use(
     dynamoDataClient,
     addGovDeliveryNewsletter,
     addToAirtableUserTesting,
+    logger,
   ),
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
