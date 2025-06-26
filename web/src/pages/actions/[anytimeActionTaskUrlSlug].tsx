@@ -30,7 +30,7 @@ const AnytimeActionTaskPage = (props: Props): ReactElement => {
 };
 
 export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionTaskUrlSlugParam> => {
-  const paths = loadAllAnytimeActionTaskUrlSlugs(false, "government-contracting.md");
+  const paths = loadAllAnytimeActionTaskUrlSlugs(false);
   return {
     paths,
     fallback: false,

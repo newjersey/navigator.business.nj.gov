@@ -40,15 +40,9 @@ export const loadAllAnytimeActionTasks = (isTest: boolean = false): AnytimeActio
 
 export const loadAllAnytimeActionTaskUrlSlugs = (
   isTest: boolean = false,
-  expection?: string,
 ): PathParams<AnytimeActionTaskUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(getAnytimeActionsTaskDir(isTest));
-  let fileNamesWithoutExceptions = fileNames;
-  if (expection) {
-    fileNamesWithoutExceptions = fileNames.filter((e) => e !== expection);
-  }
-
-  return fileNamesWithoutExceptions.map((fileName) => {
+  return fileNames.map((fileName) => {
     return {
       params: {
         anytimeActionTaskUrlSlug: loadUrlSlugByFilename(fileName, getAnytimeActionsTaskDir(isTest)),

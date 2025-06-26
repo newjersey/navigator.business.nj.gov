@@ -427,3 +427,126 @@ collections:
                   widget: "string",
                   required: true,
                 }
+
+  - name: "government-contracting"
+    label: "Government Contracting"
+    files:
+      - label: "Government Contracting"
+        name: "government-contracting"
+        file: "content/src/fieldConfig/government-contracting.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Government Contracting"
+            name: "governmentContracting"
+            widget: "object"
+            collapsed: false
+            fields:
+              - {
+                  label: "Back Button Label",
+                  name: "backButtonLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Continue Button Label",
+                  name: "continueButtonLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Step One Stepper Label",
+                  name: "stepOneStepperLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Step Two Stepper Label",
+                  name: "stepTwoStepperLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Step Three Stepper Label",
+                  name: "stepThreeStepperLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Step Four Stepper Label",
+                  name: "stepFourStepperLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Step One Content",
+                  name: "stepOneContent",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Step One Button Text",
+                  name: "stepOneButtonText",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Step One Button Link",
+                  name: "stepOneButtonLink",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Step Two Content",
+                  name: "stepTwoContent",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Step Two Button Text",
+                  name: "stepTwoButtonText",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Step Two Button Link",
+                  name: "stepTwoButtonLink",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Step Three Content",
+                  name: "stepThreeContent",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Step Three Button Text",
+                  name: "stepThreeButtonText",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Step Three Button Link",
+                  name: "stepThreeButtonLink",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Step Four Content",
+                  name: "stepFourContent",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Step Four Button Text",
+                  name: "stepFourButtonText",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Step Four Button Link",
+                  name: "stepFourButtonLink",
+                  widget: "string",
+                  required: false,
+                }
