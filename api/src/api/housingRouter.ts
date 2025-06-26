@@ -1,4 +1,6 @@
 import { HousingPropertyInterestStatus, HousingRegistrationStatus } from "@domain/types";
+import { getDurationMs } from "@libs/logUtils";
+import type { LogWriterType } from "@libs/logWriter";
 import {
   HousingPropertyInterestDetails,
   HousingRegistrationRequestLookupResponse,
@@ -9,28 +11,67 @@ import { StatusCodes } from "http-status-codes";
 export const housingRouterFactory = (
   housingPropertyInterest: HousingPropertyInterestStatus,
   housingRegistrationStatus: HousingRegistrationStatus,
+  logger: LogWriterType,
 ): Router => {
   const router = Router();
 
   router.post("/housing/properties/", async (req, res) => {
     const { address, municipalityId } = req.body;
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+
+    logger.LogInfo(
+      `[START] ${method} ${endpoint} - address: ${address}, municipalityId: ${municipalityId}`,
+    );
     housingPropertyInterest(address, municipalityId)
       .then(async (propertyInterestDetails?: HousingPropertyInterestDetails) => {
-        return res.json(propertyInterestDetails);
+        const status = StatusCodes.OK;
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, successfully retrieved property interest details for address: ${address}, municipalityId: ${municipalityId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        return res.status(status).json(propertyInterestDetails);
       })
       .catch((error) => {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+        const status = StatusCodes.INTERNAL_SERVER_ERROR;
+        const message = error instanceof Error ? error.message : String(error);
+        logger.LogError(
+          `${method} ${endpoint} - Failed to retrieve property interest details: ${message}, status: ${status}, address: ${address}, municipalityId: ${municipalityId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        res.status(status).json({ error });
       });
   });
 
   router.post("/housing/registrations/", async (req, res) => {
     const { address, municipalityId, propertyInterestType } = req.body;
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+
+    logger.LogInfo(`[START] ${method} ${endpoint} - address: ${address}`);
     housingRegistrationStatus(address, municipalityId, propertyInterestType)
       .then(async (registrations?: HousingRegistrationRequestLookupResponse) => {
-        return res.json(registrations);
+        const status = StatusCodes.OK;
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, successfully submitted housing registration for address: ${address}, municipalityId: ${municipalityId}, propertyInterestType: ${propertyInterestType}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        return res.status(status).json(registrations);
       })
       .catch((error) => {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+        const status = StatusCodes.INTERNAL_SERVER_ERROR;
+        const message = error instanceof Error ? error.message : String(error);
+        logger.LogError(
+          `${method} ${endpoint} - Failed to submit housing registration: ${message}, status: ${status}, address: ${address}, municipalityId: ${municipalityId}, propertyInterestType: ${propertyInterestType}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        res.status(status).json({ error });
       });
   });
 

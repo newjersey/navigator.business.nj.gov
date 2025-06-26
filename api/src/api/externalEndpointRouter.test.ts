@@ -1,6 +1,7 @@
 import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
 import { AddNewsletter, AddToUserTesting, DatabaseClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
@@ -52,7 +53,12 @@ describe("externalEndpointRouter", () => {
     stubAddToUserTesting = jest.fn();
     app = setupExpress(false);
     app.use(
-      externalEndpointRouterFactory(stubDynamoDataClient, stubAddNewsletter, stubAddToUserTesting),
+      externalEndpointRouterFactory(
+        stubDynamoDataClient,
+        stubAddNewsletter,
+        stubAddToUserTesting,
+        DummyLogWriter,
+      ),
     );
   });
 

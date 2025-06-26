@@ -1,6 +1,7 @@
 import { guestRouterFactory } from "@api/guestRouter";
 import { TimeStampBusinessSearch } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -28,7 +29,7 @@ describe("guestRouter", () => {
   beforeEach(async () => {
     timeStampBusinessSearch = { search: jest.fn() };
     app = setupExpress(false);
-    app.use(guestRouterFactory(timeStampBusinessSearch));
+    app.use(guestRouterFactory(timeStampBusinessSearch, DummyLogWriter));
   });
 
   afterAll(async () => {
