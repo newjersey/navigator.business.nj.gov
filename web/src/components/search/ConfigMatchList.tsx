@@ -51,8 +51,14 @@ export const ConfigMatchList = (props: Props): ReactElement => {
                 <b>{match.cmsLabelPath.slice(2).join(" > ")}</b>
               </div>
             )}
-
-            {match.value}
+            <ul>
+              <li>
+                Snipet(s):
+                <ul>
+                  <li>{match.value}</li>
+                </ul>
+              </li>
+            </ul>
           </li>
         ))}
       </ul>

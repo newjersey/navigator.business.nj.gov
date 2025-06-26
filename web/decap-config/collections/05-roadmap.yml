@@ -7,7 +7,7 @@ collections:
 
   - name: "roadmaps"
     label: "Roadmaps - Industries"
-    folder: "content/src/roadmaps/industries"
+    folder: "content/src/roadmaps/industries" # here
     slug: "{{id}}"
     identifier_field: "{{id}}"
     extension: "json"
@@ -209,7 +209,7 @@ collections:
             options_length: 500
   - name: addons
     label: "Roadmaps - Add-ons"
-    folder: "content/src/roadmaps/add-ons"
+    folder: "content/src/roadmaps/add-ons" # here
     slug: "{{id}}"
     identifier_field: "{{id}}"
     extension: "json"
@@ -403,7 +403,7 @@ collections:
                 value_type: int
       - label: "Task Dependencies"
         name: "task-dependencies"
-        file: "content/src/roadmaps/task-dependencies.json"
+        file: "content/src/roadmaps/task-dependencies.json" # here
         fields:
           - label: Tasks
             name: dependencies

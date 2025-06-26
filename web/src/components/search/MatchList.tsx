@@ -1,5 +1,5 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Match } from "@/lib/search/typesForSearch";
+import { AdditionalUsageLocations, Match } from "@/lib/search/typesForSearch";
 import { ReactElement, useEffect, useState } from "react";
 interface Props {
   matches: Match[];
@@ -23,6 +23,28 @@ export const MatchList = (props: Props): ReactElement => {
   const toggleExpanded = (): void => {
     setExpanded((prev) => !prev);
   };
+  const renderAdditionalUsages = (match: Match) => {
+    if (match.additionalUsageLocations !== undefined) {
+      for (const key of Object.keys(
+        match.additionalUsageLocations,
+      ) as (keyof AdditionalUsageLocations)[]) {
+        const usageArray = match.additionalUsageLocations[key];
+        if (usageArray !== undefined) {
+          return (
+            <li>
+              {key}
+              <ul>
+                {usageArray.map((usage, i) => (
+                  <li key={i}>{usage}</li>
+                ))}
+              </ul>
+            </li>
+          );
+        }
+      }
+    }
+    return null;
+  };
 
   return (
     <div className="margin-top-3 margin-left-6">
@@ -33,20 +55,32 @@ export const MatchList = (props: Props): ReactElement => {
       <ul>
         {(expanded ? props.matches : collapsedMatches).map((match) => (
           <li key={match.filename}>
-            <div>
-              {match.cmsCollectionName && (
-                <a
-                  href={`/mgmt/cms#/collections/${match.cmsCollectionName}/entries/${match.filename}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <b>{match.displayTitle || match.filename}</b>
-                </a>
+            {match.cmsCollectionName && (
+              <a
+                href={`/mgmt/cms#/collections/${match.cmsCollectionName}/entries/${match.filename}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <b>{match.displayTitle || match.filename}</b>
+              </a>
+            )}
+            <ul>
+              <li>
+                Snipet(s):
+                <ul>
+                  {match.snippets.map((snippet, i) => (
+                    <li key={i}>{snippet}</li>
+                  ))}
+                </ul>
+              </li>
+
+              {match.additionalUsageLocations !== undefined && (
+                <li>
+                  Usage:
+                  <ul>{renderAdditionalUsages(match)}</ul>
+                </li>
               )}
-            </div>
-            {match.snippets.map((snippet, i) => (
-              <div key={i}>{snippet}</div>
-            ))}
+            </ul>
           </li>
         ))}
       </ul>
