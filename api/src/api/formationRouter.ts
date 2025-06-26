@@ -2,6 +2,8 @@ import { ExpressRequestBody } from "@api/types";
 import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
 import { DatabaseClient, FormationClient } from "@domain/types";
+import { getDurationMs } from "@libs/logUtils";
+import type { LogWriterType } from "@libs/logWriter";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
@@ -21,11 +23,20 @@ export const formationRouterFactory = (
   formationClient: FormationClient,
   databaseClient: DatabaseClient,
   config: { shouldSaveDocuments: boolean },
+  logger: LogWriterType,
 ): Router => {
   const router = Router();
 
   router.post("/formation", async (req: ExpressRequestBody<FormationPostBody>, res) => {
     const { userData, returnUrl, foreignGoodStandingFile } = req.body;
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+    const userId = userData.user.id;
+
+    logger.LogInfo(
+      `[START] ${method} ${endpoint} - Received formation request for userId: ${userId}`,
+    );
 
     formationClient
       .form(userData, returnUrl, foreignGoodStandingFile)
@@ -38,11 +49,23 @@ export const formationRouterFactory = (
           },
         }));
         await databaseClient.put(userDataWithResponse);
-        res.json(userDataWithResponse);
+        const status = StatusCodes.OK;
+        res.status(status).json(userDataWithResponse);
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
       })
       .catch(async () => {
         await databaseClient.put(userData);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+        const status = StatusCodes.INTERNAL_SERVER_ERROR;
+        logger.LogError(
+          `${method} ${endpoint} - Failed to submit formation: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        res.status(status).json();
       });
   });
 
@@ -52,8 +75,23 @@ export const formationRouterFactory = (
     const userData = await databaseClient.get(signedInUserId);
     const currentBusiness = getCurrentBusiness(userData);
 
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+    const userId = userData.user.id;
+
+    logger.LogInfo(
+      `[START] ${method} ${endpoint} - Received completed filing request for userId: ${userId}`,
+    );
+
     if (!currentBusiness.formationData.formationResponse?.formationId) {
-      res.status(StatusCodes.BAD_REQUEST).send("No formation ID");
+      const status = StatusCodes.BAD_REQUEST;
+      logger.LogError(
+        `${method} ${endpoint} - No formation ID found for userId: ${userId}, status: ${status}, duration: ${getDurationMs(
+          requestStart,
+        )}ms`,
+      );
+      res.status(status).send("No formation ID");
       return;
     }
 
@@ -126,12 +164,24 @@ export const formationRouterFactory = (
             },
           },
         }));
+        const status = StatusCodes.OK;
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - Retrieved filing data successfully: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
         await databaseClient.put(userDataWithResponse);
-        res.json(userDataWithResponse);
+        res.status(status).json(userDataWithResponse);
       })
       .catch((error) => {
-        console.error(error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+        const status = StatusCodes.INTERNAL_SERVER_ERROR;
+        const message = error instanceof Error ? error.message : String(error);
+        logger.LogError(
+          `${method} ${endpoint} - Failed to get completed filing: ${message}, status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        res.status(status).json();
       });
   });
 

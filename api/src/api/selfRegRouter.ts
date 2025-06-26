@@ -1,4 +1,6 @@
 import { DatabaseClient, SelfRegClient } from "@domain/types";
+import { getDurationMs } from "@libs/logUtils";
+import type { LogWriterType } from "@libs/logWriter";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Router } from "express";
@@ -12,6 +14,7 @@ type Mutable<T> = {
 export const selfRegRouterFactory = (
   databaseClient: DatabaseClient,
   selfRegClient: SelfRegClient,
+  logger: LogWriterType,
 ): Router => {
   const router = Router();
 
@@ -21,19 +24,40 @@ export const selfRegRouterFactory = (
     mutableClone.user.email = mutableClone.user.email.toLowerCase().normalize();
     const cleanedUserData: UserData = mutableClone as UserData;
 
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+
+    logger.LogInfo(
+      `[START] ${method} ${endpoint} - Received self-registration request for user: ${cleanedUserData.user.email}`,
+    );
     try {
+      const status = StatusCodes.OK;
       const selfRegResponse = await (cleanedUserData.user.myNJUserKey
         ? selfRegClient.resume(cleanedUserData.user.myNJUserKey)
         : selfRegClient.grant(cleanedUserData.user));
       const updatedUserData = await updateMyNJKey(cleanedUserData, selfRegResponse.myNJUserKey);
-      res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, successfully completed self-registration for user: ${
+          cleanedUserData.user.email
+        }, duration: ${getDurationMs(requestStart)}ms`,
+      );
+      res
+        .status(status)
+        .json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {
-      const message = (error as Error).message;
-      if (message === "DUPLICATE_SIGNUP") {
-        res.status(StatusCodes.CONFLICT).send({ error: message });
-        return;
-      }
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: message });
+      const status =
+        error instanceof Error && error.message === "DUPLICATE_SIGNUP"
+          ? StatusCodes.CONFLICT
+          : StatusCodes.INTERNAL_SERVER_ERROR;
+
+      const message = error instanceof Error ? error.message : String(error);
+      logger.LogError(
+        `${method} ${endpoint} - Failed to complete self-registration: ${message}, status: ${status}, user: ${
+          cleanedUserData.user.email
+        }, duration: ${getDurationMs(requestStart)}ms`,
+      );
+      res.status(status).send({ error: message });
     }
   });
 

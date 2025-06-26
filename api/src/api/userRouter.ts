@@ -154,37 +154,62 @@ export const userRouterFactory = (
 
   router.post("/users/emailCheck", async (req, res) => {
     const { email } = req.body;
+    const requestStart = Date.now();
+    const endpoint = req.originalUrl;
+    const method = req.method;
 
-    const logId = logger.GetId();
-    let status;
+    logger.LogInfo(`[START] ${method} ${endpoint} - payload: ${JSON.stringify({ email })}`);
 
     if (email === undefined) {
-      status = StatusCodes.BAD_REQUEST;
+      const status = StatusCodes.BAD_REQUEST;
       res.status(status).send({ error: "`email` property required." });
-    } else {
-      const userData = await databaseClient.findByEmail(email.toLowerCase());
-
-      if (userData) {
-        status = StatusCodes.OK;
-        res.status(status).send({ email, found: true });
-      } else {
-        status = StatusCodes.NOT_FOUND;
-        res.status(status).send({ email, found: false });
-      }
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, duration: ${Date.now() - requestStart}ms`,
+      );
+      return;
     }
-
-    logger.LogInfo(`Email Check, - Id: ${logId}, Status: ${status}, email: ${email}`);
+    try {
+      const userData = await databaseClient.findByEmail(email.toLowerCase());
+      const status = userData ? StatusCodes.OK : StatusCodes.NOT_FOUND;
+      res.status(status).send({ email, found: !!userData });
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, email: ${email}, found: ${!!userData}, duration: ${
+          Date.now() - requestStart
+        }ms`,
+      );
+    } catch (error: unknown) {
+      const status = StatusCodes.INTERNAL_SERVER_ERROR;
+      if (error instanceof Error) {
+        logger.LogError(`[ERROR] ${method} ${endpoint} - ${error.message}`);
+      } else {
+        logger.LogError(`[ERROR] ${method} ${endpoint} - Unknown error`);
+      }
+      res.status(status).send({ error: "Internal server error." });
+    }
   });
 
   router.get("/users/:userId", (req, res) => {
     const signedInUserId = getSignedInUserId(req);
-    if (signedInUserId !== req.params.userId) {
-      res.status(StatusCodes.FORBIDDEN).json();
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+    const requestedUserId = req.params.userId;
+
+    logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${requestedUserId}`);
+
+    if (signedInUserId !== requestedUserId) {
+      const status = StatusCodes.FORBIDDEN;
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, reason: signed-in user mismatch, duration: ${
+          Date.now() - requestStart
+        }ms`,
+      );
+      res.status(status).json();
       return;
     }
 
     databaseClient
-      .get(req.params.userId)
+      .get(requestedUserId)
       .then(async (userData: UserData) => {
         let updatedUserData = userData;
         updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
@@ -195,28 +220,57 @@ export const userRouterFactory = (
 
         await databaseClient.put(updatedUserData);
 
-        const santizedUserData = removeSensitiveData(updatedUserData);
-        res.json(santizedUserData);
+        const sanitizedUserData = removeSensitiveData(updatedUserData);
+        const status = StatusCodes.OK;
+        res.status(status).json(sanitizedUserData);
+
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, userId: ${requestedUserId}, duration: ${
+            Date.now() - requestStart
+          }ms`,
+        );
       })
       .catch((error: Error) => {
         if (error.message === "Not found") {
           if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
+            logger.LogInfo(
+              `${method} ${endpoint} - user not found, creating empty user, userId: ${requestedUserId}`,
+            );
             saveEmptyUserData(req, res, signedInUserId);
           } else {
-            res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
+            const status = StatusCodes.NOT_FOUND;
+            logger.LogError(
+              `${method} ${endpoint} - Resource not found: User ID ${requestedUserId}, status: ${status}`,
+            );
+            res.status(status).json({ error: error.message });
           }
         } else {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+          const status = StatusCodes.INTERNAL_SERVER_ERROR;
+          logger.LogError(`${method} ${endpoint} - Unknown error: ${error.message}`);
+          res.status(status).json({ error: error.message });
         }
       });
   });
 
   router.post("/users", async (req, res) => {
     let userData = req.body as UserData;
+    const signedInUserId = getSignedInUserId(req);
     const postedUserBodyId = userData.user.id;
 
-    if (getSignedInUserId(req) !== postedUserBodyId) {
-      res.status(StatusCodes.FORBIDDEN).json();
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+
+    logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${postedUserBodyId}`);
+
+    if (signedInUserId !== postedUserBodyId) {
+      const status = StatusCodes.FORBIDDEN;
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, reason: signed-in user mismatch, duration: ${
+          Date.now() - requestStart
+        }ms`,
+      );
+      res.status(status).json();
       return;
     }
 
@@ -236,10 +290,25 @@ export const userRouterFactory = (
     databaseClient
       .put(userDataWithUpdatedISO)
       .then((result: UserData) => {
-        res.json(result);
+        const status = StatusCodes.OK;
+        res.status(status).json(result);
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, userId: ${postedUserBodyId}, duration: ${
+            Date.now() - requestStart
+          }ms`,
+        );
       })
       .catch((error: Error) => {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+        const status = StatusCodes.INTERNAL_SERVER_ERROR;
+        logger.LogError(
+          `${method} ${endpoint} - Unknown error: ${
+            error.message
+          }, status: ${status}, userId: ${postedUserBodyId}, duration: ${
+            Date.now() - requestStart
+          }ms`,
+        );
+
+        res.status(status).json({ error: error.message });
       });
   });
 

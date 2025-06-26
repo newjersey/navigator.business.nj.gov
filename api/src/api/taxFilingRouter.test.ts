@@ -3,6 +3,7 @@ import { taxFilingRouterFactory } from "@api/taxFilingRouter";
 import { getSignedInUserId } from "@api/userRouter";
 import { CryptoClient, DatabaseClient, TaxFilingInterface } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
@@ -53,6 +54,9 @@ describe("taxFilingRouter", () => {
       onboarding: jest.fn(),
     };
 
+    jest.spyOn(DummyLogWriter, "LogError").mockImplementation(() => {});
+    jest.spyOn(DummyLogWriter, "LogInfo").mockImplementation(() => {});
+
     stubCryptoClient = {
       encryptValue: jest.fn(),
       decryptValue: jest.fn(),
@@ -63,7 +67,14 @@ describe("taxFilingRouter", () => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(taxFilingRouterFactory(stubDynamoDataClient, apiTaxFilingClient, stubCryptoClient));
+    app.use(
+      taxFilingRouterFactory(
+        stubDynamoDataClient,
+        apiTaxFilingClient,
+        stubCryptoClient,
+        DummyLogWriter,
+      ),
+    );
   });
 
   afterAll(async () => {
@@ -122,6 +133,11 @@ describe("taxFilingRouter", () => {
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubDynamoDataClient.get).toHaveBeenCalledWith("some-id");
       expect(response.status).toEqual(StatusCodes.OK);
+      expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+        expect.stringContaining(
+          "successfully submitted tax filing lookup and updated user data for userId:",
+        ),
+      );
     });
 
     it("returns INTERNAL SERVER ERROR if taxId is masked and there is no encryptedTaxId", async () => {
@@ -132,6 +148,9 @@ describe("taxFilingRouter", () => {
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
+      expect(DummyLogWriter.LogError).toHaveBeenCalledWith(
+        expect.stringContaining("Failed to submit tax filing lookup or update user data:"),
+      );
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
@@ -234,6 +253,9 @@ describe("taxFilingRouter", () => {
       expect(stubCryptoClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubDynamoDataClient.get).toHaveBeenCalledWith("some-id");
+      expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+        expect.stringContaining("successfully completed tax filing onboarding, userId:"),
+      );
       expect(response.status).toEqual(StatusCodes.OK);
     });
 
@@ -243,6 +265,9 @@ describe("taxFilingRouter", () => {
       );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
+      expect(DummyLogWriter.LogError).toHaveBeenCalledWith(
+        expect.stringContaining("Failed to complete tax filing onboarding: "),
+      );
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
@@ -253,6 +278,9 @@ describe("taxFilingRouter", () => {
       );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
+      expect(DummyLogWriter.LogError).toHaveBeenCalledWith(
+        expect.stringContaining("Failed to complete tax filing onboarding: "),
+      );
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(apiTaxFilingClient.onboarding).toHaveBeenCalled();
     });
@@ -264,6 +292,9 @@ describe("taxFilingRouter", () => {
       );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
+      expect(DummyLogWriter.LogError).toHaveBeenCalledWith(
+        expect.stringContaining("Failed to complete tax filing onboarding: "),
+      );
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(apiTaxFilingClient.onboarding).not.toHaveBeenCalled();
     });
