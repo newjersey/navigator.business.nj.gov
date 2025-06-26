@@ -2,10 +2,12 @@ import {
   displayElevatorQuestion,
   displayHomedBaseBusinessQuestion,
   displayPlannedRenovationQuestion,
+  shouldLockMunicipality,
 } from "@/components/profile/profileDisplayLogicHelpers";
 import { NexusBusinessTypeIds } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { getIndustries } from "@businessnjgovnavigator/shared/industry";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import {
   generateBusiness,
   generateProfileData,
@@ -111,6 +113,50 @@ describe("profileDisplayLogicHelpers", () => {
         }),
       });
       expect(displayElevatorQuestion(business.profileData, business)).toBe(true);
+    });
+  });
+
+  describe("shouldLockMunicipality", () => {
+    it("returns false if user hasn't submitted tax filing", () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          municipality: generateMunicipality({}),
+        }),
+        taxFilingData: {
+          state: "UNREGISTERED",
+          filings: [],
+        },
+      });
+
+      expect(shouldLockMunicipality(business.profileData, business)).toBe(false);
+    });
+
+    it("returns false if user has has submitted tax filing and has not selected municipality", () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          municipality: undefined,
+        }),
+        taxFilingData: {
+          state: "SUCCESS",
+          filings: [],
+        },
+      });
+
+      expect(shouldLockMunicipality(business.profileData, business)).toBe(false);
+    });
+
+    it("returns true if user has has submitted tax filing and selected municipality", () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          municipality: generateMunicipality({}),
+        }),
+        taxFilingData: {
+          state: "SUCCESS",
+          filings: [],
+        },
+      });
+
+      expect(shouldLockMunicipality(business.profileData, business)).toBe(true);
     });
   });
 });
