@@ -26,14 +26,17 @@ callToActionLink: https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3
 synonyms:
   - sales tax
 ---
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
+
 * To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
-* A `home improvement contractor|home-contractors-activities` 
-  cannot use the Sales Tax Resale Certificate
+
+* A `home improvement contractor|home-contractors-activities` cannot use the Sales Tax Resale Certificate
 
 :::
+
+ &nbsp;
 
 ## Requirements for Businesses in New Jersey
 
@@ -54,16 +57,24 @@ If you are a seller, you must:
 * Keep sales slips, receipts, statements, cash register tapes, or guest checks documenting the sale for 4 years
 * Provide certificates and any documentation upon request to the New Jersey Division of Taxation
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you are buying products to resell without the Sales Tax Resale Certificate, you could be overpaying taxes.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A completed Sales Tax Resale Certificate.
 
 :::
+
+
+
+
 
  `|`
