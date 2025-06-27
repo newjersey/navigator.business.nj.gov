@@ -22,7 +22,7 @@ import {
   TaxClearanceCertificateData,
   TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
@@ -35,6 +35,7 @@ export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { doesRequiredFieldHaveError } = useAddressErrors();
   const { userData, business, updateQueue } = useUserData();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const requestingAgencyName = LookupTaxClearanceCertificateAgenciesById(
     business?.taxClearanceCertificateData?.requestingAgencyId,
@@ -106,6 +107,8 @@ export const Review = (props: Props): ReactElement => {
   };
 
   const handleSubmit = async (): Promise<void> => {
+    setIsLoading(true);
+
     if (!userData || !business?.taxClearanceCertificateData) return;
 
     scrollToTop();
@@ -120,6 +123,7 @@ export const Review = (props: Props): ReactElement => {
       if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
         props.setResponseErrorType(taxClearanceResponse.error.type);
+        setIsLoading(false);
         return;
       }
 
@@ -138,10 +142,12 @@ export const Review = (props: Props): ReactElement => {
         props.setCertificatePdfBlob(blob);
         props.setResponseErrorType(undefined);
         updateQueue?.queue(taxClearanceResponse.userData).update();
+        setIsLoading(false);
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();
       props.setResponseErrorType("SYSTEM_ERROR");
+      setIsLoading(false);
     }
   };
 
@@ -211,9 +217,10 @@ export const Review = (props: Props): ReactElement => {
             </div>
             <PrimaryButton
               isColor="primary"
-              onClick={handleSubmit}
+              onClick={() => !isLoading && handleSubmit()}
               isRightMarginRemoved={true}
               dataTestId="next-button"
+              isLoading={isLoading}
             >
               {Config.taxClearanceCertificateShared.saveButtonText}
             </PrimaryButton>
