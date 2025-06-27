@@ -62,8 +62,4 @@ A completed Sales Tax Resale Certificate.
 
 :::
 
-
-
-
-
  `|`
