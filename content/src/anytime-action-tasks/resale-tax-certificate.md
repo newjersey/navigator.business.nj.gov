@@ -1,4 +1,5 @@
 ---
+notesMd: ""
 id: resale-tax-certificate
 name: Get a Sales Tax Resale Certificate
 category:
