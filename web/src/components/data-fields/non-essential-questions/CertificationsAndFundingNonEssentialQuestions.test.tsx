@@ -47,6 +47,7 @@ describe("CertificationsAndFundingNonEssentialQuestions", () => {
   it("only shows municipality questions for starting businesses", () => {
     const profileData = generateProfileData({
       operatingPhase: OperatingPhaseId.GUEST_MODE,
+      businessPersona: "STARTING",
     });
 
     useMockBusiness(generateBusinessForProfile({ profileData: profileData }));
