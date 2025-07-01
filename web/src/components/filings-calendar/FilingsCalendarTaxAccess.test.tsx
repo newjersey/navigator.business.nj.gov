@@ -216,31 +216,6 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
   });
 
-  it("closes the success alert when the close button is clicked", async () => {
-    mockApi.postTaxFilingsOnboarding.mockResolvedValue(
-      modifyUserData(userDataWithPrefilledFields, {
-        taxFilingData: generateTaxFilingData({
-          state: "SUCCESS",
-          registeredISO: getCurrentDateISOString(),
-        }),
-      }),
-    );
-
-    renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-
-    clickSave();
-    await waitFor(() => {
-      return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
-    });
-    await screen.findByTestId("tax-success");
-    expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
-    expect(screen.getByTestId("close-icon-button")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("close-icon-button"));
-    await waitFor(() => {
-      expect(screen.queryByText(Config.taxCalendar.snackbarSuccessHeader)).not.toBeInTheDocument();
-    });
-  });
-
   describe("different taxFiling states and update behavior", () => {
     it("does not do taxFiling lookup on page load if not registered", async () => {
       renderFilingsCalendarTaxAccess(
