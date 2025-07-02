@@ -12,26 +12,20 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { hasNonEssentialQuestions } from "@/lib/utils/non-essential-questions-helpers";
 import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldErrors?: string[];
   lockFormationDateField?: boolean;
+  isFormationDateFieldVisible?: boolean;
+  futureAllowed?: boolean;
 }
 
 export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state: profileDataState } = useContext(ProfileDataContext);
   const profileData = profileDataState.profileData;
-  const isDateOfFormationVisible =
-    (profileData.businessPersona === "OWNING" &&
-      LookupLegalStructureById(profileData.legalStructureId).elementsToDisplay.has(
-        "formationDate",
-      )) ||
-    !!profileData.dateOfFormation;
-  const futureAllowed = profileData.businessPersona !== "OWNING";
 
   const AccordionHeader = (props: {
     icon: string;
@@ -77,17 +71,17 @@ export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
           icon={"calendar_today"}
           headerText={Config.profileDefaults.default.annualReportDeadlineHeader}
           description={Config.profileDefaults.default.annualReportDeadlineSubText}
-          hideExpandIcon={!isDateOfFormationVisible}
+          hideExpandIcon={!props.isFormationDateFieldVisible}
         />
         <AccordionDetails sx={{ marginLeft: 6 }}>
           <ProfileField
             fieldName="dateOfFormation"
-            isVisible={isDateOfFormationVisible}
+            isVisible={props.isFormationDateFieldVisible}
             locked={props.lockFormationDateField}
             lockedValueFormatter={formatDate}
             hideLine={true}
           >
-            <DateOfFormation futureAllowed={futureAllowed} />
+            <DateOfFormation futureAllowed={props.futureAllowed ?? false} />
           </ProfileField>
         </AccordionDetails>
       </Accordion>
