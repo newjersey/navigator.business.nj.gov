@@ -43,7 +43,20 @@ type EventType =
   | "xray_renewal_started_expired_card"
   | "xray_status_check_started"
   | "xray_status_check_success_active"
-  | "xray_status_check_success_expired";
+  | "xray_status_check_success_expired"
+  | "env_requirements_assessment_started"
+  | "env_stepper_step_viewed"
+  | "env_final_cta_clicked"
+  | "env_question_answered"
+  | "env_permits_required_displayed"
+  | "env_no_permits_displayed"
+  | "env_responses_edit_started"
+  | "env_help_sbap_opened"
+  | "env_help_dep_opened"
+  | "env_help_responses_opened"
+  | "env_save_progress_prompted"
+  | "env_continue_without_auth"
+  | "env_contact_info_engaged";
 
 const eventMap: Record<EventType, string> = {
   account_clicks: "account_clicks",
@@ -77,6 +90,19 @@ const eventMap: Record<EventType, string> = {
   xray_status_check_started: "xray_status_check_started",
   xray_status_check_success_active: "xray_status_check_success_active",
   xray_status_check_success_expired: "xray_status_check_success_expired",
+  env_requirements_assessment_started: "env_requirements_assessment_started",
+  env_stepper_step_viewed: "env_stepper_step_viewed",
+  env_final_cta_clicked: "env_final_cta_clicked",
+  env_question_answered: "env_question_answered",
+  env_permits_required_displayed: "env_permits_required_displayed",
+  env_no_permits_displayed: "env_no_permits_displayed",
+  env_responses_edit_started: "env_responses_edit_started",
+  env_help_sbap_opened: "env_help_sbap_opened",
+  env_help_dep_opened: "env_help_dep_opened",
+  env_help_responses_opened: "env_help_responses_opened",
+  env_save_progress_prompted: "env_save_progress_prompted",
+  env_continue_without_auth: "env_continue_without_auth",
+  env_contact_info_engaged: "env_contact_info_engaged",
 };
 
 type ParameterType =
@@ -2588,6 +2614,150 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "xray_registration_expired_status_card",
             legacy_event_label: "renew_ref_link",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_initiated: {
+      arrive: {
+        general_guidance_initiated: () => {
+          eventRunner.track({
+            event: "env_requirements_assessment_started",
+            legacy_event_action: "arrive",
+            legacy_event_category: "environmental_requirements_assessment",
+            legacy_event_label: "general_guidance_initiated",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_step_category: {
+      click: {
+        general_guidance_step: (step: number, category: string) => {
+          eventRunner.track({
+            event: "env_stepper_step_viewed",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_stepper",
+            legacy_event_label: `step_${step}_${category}` as LegacyEventLabel,
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_save_see_results: {
+      click: {
+        general_guidance_save_see_results: () => {
+          eventRunner.track({
+            event: "env_final_cta_clicked",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_final_cta",
+            legacy_event_label: "save_see_results_clicked",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_permits_required_displayed: {
+      appears: {
+        general_guidance_permits_req_displayed: () => {
+          eventRunner.track({
+            event: "env_permits_required_displayed",
+            legacy_event_action: "appears",
+            legacy_event_category: "environmental_requirements_results",
+            legacy_event_label: "permits_required_displayed",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_no_permits_displayed: {
+      appears: {
+        general_guidance_no_permits_displayed: () => {
+          eventRunner.track({
+            event: "env_no_permits_displayed",
+            legacy_event_action: "appears",
+            legacy_event_category: "environmental_requirements_results",
+            legacy_event_label: "no_permits_needed_displayed",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_env_req_edits: {
+      click: {
+        general_guidance_env_req_edits: () => {
+          eventRunner.track({
+            event: "env_responses_edit_started",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_edit",
+            legacy_event_label: "edit_responses_clicked",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_contact_info_engagement: {
+      mouseover: {
+        general_guidance_contact_info_engage: () => {
+          eventRunner.track({
+            event: "env_contact_info_engaged",
+            legacy_event_action: "mouseover",
+            legacy_event_category: "environmental_requirements_contact",
+            legacy_event_label: "contact_info_hovered",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_continue_without_saving: {
+      click: {
+        general_guidance_continue_wo_saving: () => {
+          eventRunner.track({
+            event: "env_continue_without_auth",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_save",
+            legacy_event_label: "continue_without_saving_clicked",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_save_modal_displayed: {
+      appears: {
+        general_guidance_save_modal_displayed: () => {
+          eventRunner.track({
+            event: "env_save_progress_prompted",
+            legacy_event_action: "appears",
+            legacy_event_category: "environmental_requirements_save",
+            legacy_event_label: "mynewjersey_modal_displayed",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_responses_accordion_opened: {
+      click: {
+        general_guidance_resp_accordion_opened: () => {
+          eventRunner.track({
+            event: "env_help_responses_opened",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_help",
+            legacy_event_label: "responses_accordion_opened",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_dep_accordion_opened: {
+      click: {
+        general_guidance_dep_accordion_opened: () => {
+          eventRunner.track({
+            event: "env_help_dep_opened",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_help",
+            legacy_event_label: "dep_accordion_opened",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_sbap_accordion_opened: {
+      click: {
+        general_guidance_sbap_accordion_opened: () => {
+          eventRunner.track({
+            event: "env_help_sbap_opened",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_help",
+            legacy_event_label: "sbap_accordion_opened",
           });
         },
       },
