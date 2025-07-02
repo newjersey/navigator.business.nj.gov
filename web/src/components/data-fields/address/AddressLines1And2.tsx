@@ -40,6 +40,7 @@ export const AddressLines1And2 = (props: Props): ReactElement => {
             validationText={getFieldErrorLabel("addressLine2")}
             className="margin-bottom-2"
             onValidation={props.onValidation}
+            data-testid="addressLine2"
           />
         </div>
       </ScrollableFormFieldWrapper>

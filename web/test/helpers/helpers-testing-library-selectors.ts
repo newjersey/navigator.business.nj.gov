@@ -1,4 +1,5 @@
 import { fireEvent, MatcherFunction, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Dayjs } from "dayjs";
 
 export const selectLocationByText = (value: string): void => {
@@ -15,6 +16,15 @@ export const fillText = (label: string, value: string): void => {
   const item = screen.getByLabelText(label);
   fireEvent.change(item, { target: { value: value } });
   fireEvent.blur(item);
+};
+
+export const fillTextUserEvent = async (label: string, value: string): Promise<void> => {
+  const item = screen.getByLabelText(label);
+  await userEvent.clear(item);
+  if (value !== "") {
+    await userEvent.type(item, value);
+  }
+  await userEvent.tab();
 };
 
 export const selectDate = (date: Dayjs): void => {
