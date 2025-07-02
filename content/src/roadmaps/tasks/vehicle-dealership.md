@@ -6,8 +6,6 @@ summaryDescriptionMd: >+
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
-  * All dealership licenses need to be renewed yearly
-
   * You will need to apply for more than one license if your business plans to both sell and lease vehicles or boats
 
 
