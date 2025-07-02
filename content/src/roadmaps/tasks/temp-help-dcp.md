@@ -52,15 +52,14 @@ You must have an active license or registration as one of the following:
 ## Application Requirements
 
 * Business name
-*  `Trade name|alt-name-trade-name`, if applicable
-* 9-digit `individual taxpayer identification number|itin`, if applicable
+*  `Trade name (DBA, or "doing business as" name)|alt-name-trade-name`, if applicable
 * Federal `employer identification number|ein`
 * Business address
-* `Business organization/structure|business-structure-learn-more\` 
+* `Business organization/structure|business-structure-learn-more\`
+* 9-digit `individual taxpayer identification number|itin`, if applicable
+* Social Security number, if a sole proprietorship
 * Owner’s information, including name, address, and email
 * `Registered agent information|registered-agent`, if applicable
-* Supplier information, including name, address, and phone number, if applicable
-* Manufacturer representative information, including company name, address of machine location, and 12-digit `New Jersey tax ID number|tax-id\`, if applicable
 * 15-digit employer account number (usually in this format: 0-###-###-###/000-00), issued by the Department of Labor and Workforce Development for the payment of unemployment insurance contributions
 * Proof of valid workers’ compensation insurance covering all employees, including policy number, company name, and expiration date
 * Information about DCPs receiving permanent placements within the past 12 months, including number of placements and percentage of total workers placed
