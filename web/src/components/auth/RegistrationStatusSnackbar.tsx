@@ -2,14 +2,12 @@ import { Content } from "@/components/Content";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
-import { Icon } from "@/components/njwds/Icon";
 import { AuthContext } from "@/contexts/authContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
-import { IconButton } from "@mui/material";
 import { ReactElement, useContext, useEffect } from "react";
 
 export const RegistrationStatusSnackbar = (): ReactElement => {
@@ -55,7 +53,7 @@ export const RegistrationStatusSnackbar = (): ReactElement => {
         close={(): void => setRegistrationStatus(undefined)}
         variant={alertMap[registrationStatus]}
         noIcon={true}
-        autoHideDuration={null}
+        autoHideDuration={7000}
         snackBarProps={{ sx: { paddingX: 0 } }}
         dataTestid="reg-snackbar"
       >
@@ -70,18 +68,6 @@ export const RegistrationStatusSnackbar = (): ReactElement => {
             <Heading level={3} className="padding-right-2">
               {getSuccessTitle()}
             </Heading>
-            <IconButton
-              aria-label="close"
-              onClick={(): void => setRegistrationStatus(undefined)}
-              sx={{
-                position: "absolute",
-                right: 0,
-                top: 0,
-                color: "#757575",
-              }}
-            >
-              <Icon className="usa-icon--size-4" iconName="close" />
-            </IconButton>
             <Content>{contentMap[registrationStatus]}</Content>
           </div>
         </div>
