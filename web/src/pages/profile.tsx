@@ -424,7 +424,9 @@ const ProfilePage = (props: Props): ReactElement => {
     personalize: (
       <PersonalizeYourTasksTab
         fieldErrors={getInvalidFieldIds()}
+        isFormationDateFieldVisible={!!business?.profileData.dateOfFormation}
         lockFormationDateField={shouldLockFormationFields}
+        futureAllowed={true}
       />
     ),
   };
@@ -488,7 +490,9 @@ const ProfilePage = (props: Props): ReactElement => {
     personalize: (
       <PersonalizeYourTasksTab
         fieldErrors={getInvalidFieldIds()}
+        isFormationDateFieldVisible={false}
         lockFormationDateField={shouldLockFormationFields}
+        futureAllowed={false}
       />
     ),
   };
@@ -663,7 +667,9 @@ const ProfilePage = (props: Props): ReactElement => {
     personalize: (
       <PersonalizeYourTasksTab
         fieldErrors={getInvalidFieldIds()}
+        isFormationDateFieldVisible={!!business?.profileData.dateOfFormation}
         lockFormationDateField={shouldLockFormationFields}
+        futureAllowed={true}
       />
     ),
   };
@@ -790,7 +796,11 @@ const ProfilePage = (props: Props): ReactElement => {
     personalize: (
       <PersonalizeYourTasksTab
         fieldErrors={getInvalidFieldIds()}
+        isFormationDateFieldVisible={LookupLegalStructureById(
+          business?.profileData.legalStructureId,
+        ).elementsToDisplay.has("formationDate")}
         lockFormationDateField={shouldLockFormationFields}
+        futureAllowed={false}
       />
     ),
   };
@@ -856,7 +866,9 @@ const ProfilePage = (props: Props): ReactElement => {
     personalize: (
       <PersonalizeYourTasksTab
         fieldErrors={getInvalidFieldIds()}
+        isFormationDateFieldVisible={false}
         lockFormationDateField={shouldLockFormationFields}
+        futureAllowed={false}
       />
     ),
   };
