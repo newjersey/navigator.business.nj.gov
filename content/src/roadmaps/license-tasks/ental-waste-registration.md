@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
   :::infoAlert 
    **Keep in mind:** 
 
-  If your office discharges wastewater to septic systems, contact the [Bureau of Groundwater, Residuals, and Permit Administration](https://dep.nj.gov/dwq/contact-us/#bgwrpa). They will help you find out if you are a Significant Indirect User (SUI) and if you need a SUI permit..
+  If your office discharges wastewater to septic systems, contact the [Bureau of Groundwater, Residuals, and Permit Administration](https://dep.nj.gov/dwq/contact-us/#bgwrpa). They will help you find out if you are a `Significant Indirect User (SUI)|significant-indirect-user` and if you need a SUI permit.
 
   :::
 
