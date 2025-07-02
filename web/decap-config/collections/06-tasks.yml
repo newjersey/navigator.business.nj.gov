@@ -893,6 +893,105 @@ collections:
                   name: completeTaskProgressButtonText,
                   widget: string,
                 }
+  - name: "cigarette-license"
+    label: "Tasks - Cigarette License"
+    delete: false
+    create: false
+    files:
+      - label: "Cigarette License Step 1"
+        name: "cigaretteLicense-step1"
+        file: "content/src/fieldConfig/cigarette-license-step1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cigarette License Step 1
+            name: cigaretteLicenseStep1
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "content", widget: "markdown", required: true }
+      - label: "Cigarette License Shared"
+        name: "cigaretteLicenseShared"
+        file: "content/src/fieldConfig/cigarette-license-shared.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Text Before Header, name: secondTabDescriptionText, widget: text }
+              - { label: Header Text, name: secondTabHeaderText, widget: string }
+              - {
+                  label: Minority / Women Header Text,
+                  name: minorityOrWomenHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Minority / Women Requirements,
+                  name: minorityWomenOwnedRequirements,
+                  widget: markdown,
+                }
+              - { label: Veteran Header Text, name: veteranHeaderText, widget: string }
+              - {
+                  label: Veteran Owned Requirements,
+                  name: veteranOwnedRequirements,
+                  widget: markdown,
+                }
+              - { label: Social Equity Header Text, name: socialEquityHeaderText, widget: string }
+              - {
+                  label: Social Equity Requirements,
+                  name: socialEquityRequirements,
+                  widget: markdown,
+                }
+              - { label: Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
+              - { label: Impact Zone Text, name: impactZoneText, widget: string }
+
+              - {
+                  label: Conditional Callout Heading Text,
+                  name: greenBoxHeadingText,
+                  widget: string,
+                }
+              - {
+                  label: Conditional Callout Minority Or Women Text,
+                  name: greenBoxMinorityOrWomenText,
+                  widget: string,
+                }
+              - {
+                  label: Conditional Callout Veteran Text,
+                  name: greenBoxVeteranText,
+                  widget: string,
+                }
+              - {
+                  label: Conditional Callout Social Equity Text,
+                  name: greenBoxSocialEquityText,
+                  widget: string,
+                }
+              - { label: Back Button Text, name: backButtonText, widget: string }
+              - { label: Dropdown CTA Button Text, name: dropdownCTAButtonText, widget: string }
+              - { label: Social Equity Button Text, name: socialEquityButtonText, widget: string }
+              - { label: Social Equity Button Link, name: socialEquityButtonLink, widget: string }
+              - {
+                  label: Veteran Minority Or Women Button Text,
+                  name: certificationButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Veteran Minority Or Women Button Link,
+                  name: certificationButtonLink,
+                  widget: string,
+                }
+              - {
+                  label: Text For None Of The Above Checkbox Selection,
+                  name: noPriorityStatusText,
+                  widget: text,
+                }
+              - {
+                  label: Complete Task Progress Button Text,
+                  name: completeTaskProgressButtonText,
+                  widget: string,
+                }
   - name: "ein-task"
     label: "Tasks - EIN"
     delete: false
