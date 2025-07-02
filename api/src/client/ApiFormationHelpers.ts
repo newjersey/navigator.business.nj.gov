@@ -29,7 +29,11 @@ export const makePostBody = (
   const currentBusiness = getCurrentBusiness(userData);
   const formationFormData = currentBusiness.formationData.formationFormData;
 
-  const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
+  const isManual =
+    formationFormData.agentType === "MYSELF" ||
+    formationFormData.agentType === "AUTHORIZED_REP" ||
+    (formationFormData.agentType === "PROFESSIONAL_SERVICE" &&
+      formationFormData.showManualEntry === true);
 
   const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
   const isVeteranNonprofit = formationFormData.isVeteranNonprofit;
