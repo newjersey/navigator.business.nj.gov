@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
   :::infoAlert 
    **Keep in mind:** 
 
-  If your office doesn’t manage `amalgam waste|amalgam-waste`, you must[ register once for an amalgam exemption certificate](https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_exempt_quick_guide.pdf).
+  If your office discharges wastewater to septic systems, contact the [Bureau of Groundwater, Residuals, and Permit Administration](https://dep.nj.gov/dwq/contact-us/#bgwrpa). They will help you find out if you are a Significant Indirect User (SUI) and if you need a SUI permit..
 
   :::
 
