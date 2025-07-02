@@ -1,7 +1,6 @@
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { getMergedConfig } from "@/contexts/configContext";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { LegalStructures } from "@businessnjgovnavigator/shared/legalStructure";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
@@ -32,14 +31,22 @@ const Config = getMergedConfig();
 const renderPersonalizeYourTasksTab = ({
   profileData,
   fieldErrors,
+  isFormationDateFieldVisible,
+  futureAllowed,
 }: {
   profileData?: ProfileData;
   fieldErrors?: string[];
+  isFormationDateFieldVisible?: boolean;
+  futureAllowed?: boolean;
 }): void => {
   const initialProfileData = profileData ?? generateProfileData({});
   render(
     <WithStatefulProfileData initialData={initialProfileData}>
-      <PersonalizeYourTasksTab fieldErrors={fieldErrors} />
+      <PersonalizeYourTasksTab
+        fieldErrors={fieldErrors}
+        isFormationDateFieldVisible={isFormationDateFieldVisible}
+        futureAllowed={futureAllowed}
+      />
     </WithStatefulProfileData>,
   );
 };
@@ -95,48 +102,6 @@ describe("PersonalizeYourTasksTab", () => {
   });
 
   describe("Annual Report Deadline Accordian", () => {
-    const legalStructuresWithoutFormationDate = LegalStructures.filter(
-      (structure) => !structure.elementsToDisplay.has("formationDate"),
-    );
-
-    it.each(legalStructuresWithoutFormationDate)(
-      "does not display a chevron for the annualReportDeadlineAccordianSection section if OWNING and legal structure is %s",
-      (legalStructure) => {
-        const profileData = generateProfileData({
-          businessPersona: "OWNING",
-          sectorId: "unknown",
-          legalStructureId: legalStructure.id,
-          dateOfFormation: undefined,
-        });
-
-        renderPersonalizeYourTasksTab({ profileData });
-
-        const accordion = screen.getByTestId("annualReportDeadlineAccordianSection");
-        expect(within(accordion).queryByTestId("ExpandMoreIcon")).not.toBeInTheDocument();
-      },
-    );
-
-    const legalStructuresWithFormationDate = LegalStructures.filter((structure) =>
-      structure.elementsToDisplay.has("formationDate"),
-    );
-
-    it.each(legalStructuresWithFormationDate)(
-      "does display a chevron for the annualReportDeadlineAccordianSection section if OWNING and legal structure is %s",
-      (legalStructure) => {
-        const profileData = generateProfileData({
-          businessPersona: "OWNING",
-          sectorId: "unknown",
-          legalStructureId: legalStructure.id,
-          dateOfFormation: undefined,
-        });
-
-        renderPersonalizeYourTasksTab({ profileData });
-
-        const accordion = screen.getByTestId("annualReportDeadlineAccordianSection");
-        expect(within(accordion).getByTestId("ExpandMoreIcon")).toBeInTheDocument();
-      },
-    );
-
     it("does display a chevron for the annualReportDeadlineAccordianSection section if dateOfFormation has value", () => {
       const profileData = generateProfileData({
         businessPersona: "STARTING",
@@ -144,10 +109,31 @@ describe("PersonalizeYourTasksTab", () => {
         dateOfFormation: "10/2024",
       });
 
-      renderPersonalizeYourTasksTab({ profileData });
+      renderPersonalizeYourTasksTab({
+        profileData,
+        isFormationDateFieldVisible: true,
+        futureAllowed: true,
+      });
 
       const accordion = screen.getByTestId("annualReportDeadlineAccordianSection");
       expect(within(accordion).getByTestId("ExpandMoreIcon")).toBeInTheDocument();
+    });
+
+    it("does not display a chevron for the annualReportDeadlineAccordianSection section if dateOfFormation not visible", () => {
+      const profileData = generateProfileData({
+        businessPersona: "STARTING",
+        sectorId: "unknown",
+        dateOfFormation: "10/2024",
+      });
+
+      renderPersonalizeYourTasksTab({
+        profileData,
+        isFormationDateFieldVisible: false,
+        futureAllowed: false,
+      });
+
+      const accordion = screen.getByTestId("annualReportDeadlineAccordianSection");
+      expect(within(accordion).queryByTestId("ExpandMoreIcon")).not.toBeInTheDocument();
     });
   });
 
