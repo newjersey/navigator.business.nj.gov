@@ -7,6 +7,11 @@
       "weight": 11,
       "licenseTask": "temporary-help-service-firm-reg",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 18,
+      "task": "temp-help-dcp"
     }
   ]
 }
