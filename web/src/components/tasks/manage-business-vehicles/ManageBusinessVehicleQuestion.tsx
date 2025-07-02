@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -95,9 +95,9 @@ export const ManageBusinessVehicleQuestion: React.FC<Props> = (props: Props) => 
         </WithErrorBar>
         <Content>{Config.manageBusinessVehicles.learnMoreText}</Content>
         <div className="margin-top-3 flex flex-justify-end">
-          <SecondaryButton isColor="accent-cooler" isSubmitButton>
+          <PrimaryButton isColor="accent-cooler" isSubmitButton>
             {Config.manageBusinessVehicles.saveButtonText}
-          </SecondaryButton>
+          </PrimaryButton>
         </div>
       </form>
     </div>
