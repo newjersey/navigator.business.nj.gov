@@ -11,6 +11,7 @@ import { BusinessFormation } from "@/components/tasks/business-formation/Busines
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
+import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
 import { Xray } from "@/components/xray/Xray";
@@ -70,10 +71,18 @@ export const TaskPageSwitchComponent = ({
     );
   }
 
+  const isCigaretteLicenseEnabled = process.env.FEATURE_CIGARETTE_LICENSE === "true";
+  console.log(isCigaretteLicenseEnabled);
+
   return rswitch(task.id, {
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,
     "air-permitting": <EnvPermit task={task} />,
+    "cigarette-license": isCigaretteLicenseEnabled ? (
+      <CigaretteLicense task={task} />
+    ) : (
+      <TaskBody task={task} business={business} roadmap={roadmap} />
+    ),
     "xray-reg": <Xray task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />

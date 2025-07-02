@@ -12,6 +12,8 @@ import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfi
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as CheckAccountEmailPage from "@businessnjgovnavigator/content/fieldConfig/check-account-email-page.json";
+import * as CigaretteLicenseShared from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-shared.json";
+import * as CigaretteLicenseStep1 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step1.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
@@ -63,6 +65,8 @@ const merged = JSON.parse(
       CannabisLicenseTab1,
       CannabisLicenseAnnualTab2,
       CannabisLicenseConditionalTab2,
+      CigaretteLicenseShared,
+      CigaretteLicenseStep1,
       NexusNameSearch,
       NexusDbaFormation,
       NaicsCode,
@@ -121,6 +125,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof CannabisLicenseTab1 &
   typeof CannabisLicenseAnnualTab2 &
   typeof CannabisLicenseConditionalTab2 &
+  typeof CigaretteLicenseShared &
+  typeof CigaretteLicenseStep1 &
   typeof NexusNameSearch &
   typeof NexusDbaFormation &
   typeof NaicsCode &
@@ -177,6 +183,8 @@ export const getMergedConfig = (): ConfigType => {
     CannabisLicenseTab1,
     CannabisLicenseAnnualTab2,
     CannabisLicenseConditionalTab2,
+    CigaretteLicenseShared,
+    CigaretteLicenseStep1,
     NexusNameSearch,
     NexusDbaFormation,
     NaicsCode,
