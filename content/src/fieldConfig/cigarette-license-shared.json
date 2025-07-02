@@ -1,0 +1,10 @@
+{
+  "cigaretteLicenseShared": {
+    "stepperOneLabel": "General Info",
+    "stepperTwoLabel": "Licensee Info",
+    "stepperThreeLabel": "Sales Info",
+    "stepperFourLabel": "Review & Pay",
+    "issuingAgencyText": "NJ Division of Revenue and Enterprise Services",
+    "issuingAgencyLabelText": "Issuing Agency"
+  }
+}
