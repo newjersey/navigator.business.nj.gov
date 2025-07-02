@@ -22,33 +22,33 @@ import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
 import LicenseCalendarEventPreview from "@/lib/cms/previews/LicenseCalendarEventPreview";
 import PageMetaDataPreview from "@/lib/cms/previews/PageMetadataPreview";
 
-import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
-import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
-import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
-import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
-import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
-import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
-import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
-import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
-import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
-import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
-import TaskPreview from "@/lib/cms/previews/TaskPreview";
-import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
-import { useMountEffect } from "@/lib/utils/helpers";
-
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
 import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
+import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
+import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
+import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
+import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
 import GovernmentContractingAnytimeAction from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
+import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
+import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
+import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
+import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
+import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
+import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
+import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
+import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxAccessPreview from "@/lib/cms/previews/TaxAccessPreview";
+import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import XrayRenewalCalendarEventPreview from "@/lib/cms/previews/XrayRenewalCalendarEventPreview";
 import XrayTaskPreview from "@/lib/cms/previews/XrayTaskPreview";
+import { useMountEffect } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
@@ -101,6 +101,9 @@ const CMS = dynamic(
       registerPreview(CMS, "xray-renewal-config", XrayRenewalCalendarEventPreview);
       registerPreview(CMS, "xray", XrayTaskPreview);
       registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
+
+      registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 

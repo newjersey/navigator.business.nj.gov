@@ -11,6 +11,7 @@ import { BusinessFormation } from "@/components/tasks/business-formation/Busines
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
+import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
 import { Xray } from "@/components/xray/Xray";
@@ -26,7 +27,7 @@ interface Props {
   displayContent: TasksDisplayContent;
   business: Business;
   roadmap: Roadmap;
-  CMS_ONLY_disable_overlay?: boolean;
+  CMS_ONLY_disable_default_functionality?: boolean;
 }
 
 export const taskIdsWithLicenseSearchEnabled = [
@@ -59,31 +60,51 @@ export const TaskPageSwitchComponent = ({
   displayContent,
   business,
   roadmap,
-  CMS_ONLY_disable_overlay,
+  CMS_ONLY_disable_default_functionality,
 }: Props): ReactElement => {
   if (taskIdsWithLicenseSearchEnabled.includes(task.id)) {
     return (
       <LicenseTask
         task={task as TaskWithLicenseTaskId}
-        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality}
       />
     );
   }
 
+  const isCigaretteLicenseEnabled = process.env.FEATURE_CIGARETTE_LICENSE === "true";
+  console.log(isCigaretteLicenseEnabled);
+
   return rswitch(task.id, {
     "env-permitting": <EnvPermit task={task} />,
-    "xray-reg": <Xray task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
+    "waste-permitting": <EnvPermit task={task} />,
+    "land-permitting": <EnvPermit task={task} />,
+    "air-permitting": <EnvPermit task={task} />,
+    "cigarette-license":
+      isCigaretteLicenseEnabled && !CMS_ONLY_disable_default_functionality ? (
+        <CigaretteLicense task={task} />
+      ) : (
+        <TaskBody task={task} business={business} roadmap={roadmap} />
+      ),
+    "xray-reg": (
+      <Xray task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality} />
+    ),
     "elevator-registration": (
-      <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <ElevatorRegistrationTask
+        task={task}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality}
+      />
     ),
     "manage-business-vehicles": <ManageBusinessVehicles task={task} />,
     "hotel-motel-registration": (
-      <HotelMotelRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <HotelMotelRegistrationTask
+        task={task}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality}
+      />
     ),
     "multiple-dwelling-registration": (
       <MultipleDwellingRegistrationTask
         task={task}
-        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality}
       />
     ),
     "raffle-bingo-games-license": <RaffleBingoPaginator task={task} />,

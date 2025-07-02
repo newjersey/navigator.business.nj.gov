@@ -893,6 +893,77 @@ collections:
                   name: completeTaskProgressButtonText,
                   widget: string,
                 }
+  - name: "cigarette-license"
+    label: "Tasks - Cigarette License"
+    delete: false
+    create: false
+    files:
+      - label: "Cigarette License Step 1"
+        name: "cigaretteLicense-step1"
+        file: "content/src/fieldConfig/cigarette-license-step1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cigarette License Step 1
+            name: cigaretteLicenseStep1
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "content", widget: "markdown", required: true }
+              - { label: "Alert Body", name: "alert", widget: "markdown", required: true }
+              - {
+                  label: "Continue Button Text",
+                  name: "continueButtonText",
+                  widget: "markdown",
+                  required: true,
+                }
+      - label: "Cigarette License Shared"
+        name: "cigaretteLicense-shared"
+        file: "content/src/fieldConfig/cigarette-license-shared.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cigarette License Shared
+            name: cigaretteLicenseShared
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "Stepper One Tab Text",
+                  name: "stepperOneLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Stepper Two Tab Text",
+                  name: "stepperTwoLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Stepper Three Tab Text",
+                  name: "stepperThreeLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Stepper Four Tab Text",
+                  name: "stepperFourLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Issuing Agency Label Text",
+                  name: "issuingAgencyLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Issuing Agency Text",
+                  name: "issuingAgencyText",
+                  widget: "string",
+                  required: true,
+                }
   - name: "ein-task"
     label: "Tasks - EIN"
     delete: false
