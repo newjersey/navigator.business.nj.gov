@@ -971,6 +971,27 @@ collections:
                       name: "sectionDescription",
                       widget: "markdown",
                     }
+                  - { label: "Agent number label", name: "agentNumberLabel", widget: "string" }
+                  - {
+                      label: "Agent number label secondary",
+                      name: "agentNumberLabelSecondary",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Radio button label - myself",
+                      name: "radioButtonMyselfText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Radio button label - authorized rep",
+                      name: "radioButtonAuthorizedRepText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Radio button label - professional service",
+                      name: "radioButtonProfessionalServiceText",
+                      widget: "string",
+                    }
                   - {
                       label: "Radio button label - agent number",
                       name: "radioButtonNumberText",
@@ -979,6 +1000,19 @@ collections:
                   - {
                       label: "Radio button label - agent manual entry",
                       name: "radioButtonManualText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Who to list subheading",
+                      name: "whoToListSubheading",
+                      widget: "string",
+                    }
+                  - { label: "Info callout heading", name: "infoCalloutHeading", widget: "string" }
+                  - { label: "Info callout intro", name: "infoCalloutIntro", widget: "string" }
+                  - { label: "Info callout bullets", name: "infoCalloutBullets", widget: "list" }
+                  - {
+                      label: "Manual entry checkbox label",
+                      name: "manualEntryCheckboxLabel",
                       widget: "string",
                     }
                   - {
@@ -1003,6 +1037,7 @@ collections:
                       name: "checkboxCheckedScreenReaderAnnouncement",
                       widget: "string",
                     }
+                  - { label: "Info callout footer", name: "infoCalloutFooter", widget: "string" }
               - label: Sections
                 name: sections
                 collapsed: true

@@ -850,7 +850,7 @@ describe("<BusinessFormationPaginator />", () => {
             "agentNumber",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "NUMBER", agentNumber: "1111111" },
+                { agentType: "PROFESSIONAL_SERVICE", agentNumber: "1111111" },
                 { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -873,7 +873,7 @@ describe("<BusinessFormationPaginator />", () => {
             "agentName",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentName: "1111111" },
+                { agentType: "AUTHORIZED_REP", agentName: "1111111" },
                 { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -896,7 +896,7 @@ describe("<BusinessFormationPaginator />", () => {
             "agentEmail",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentEmail: "1111111" },
+                { agentType: "AUTHORIZED_REP", agentEmail: "1111111" },
                 { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -919,7 +919,7 @@ describe("<BusinessFormationPaginator />", () => {
             "agentOfficeAddressLine1",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine1: "1111111" },
+                { agentType: "AUTHORIZED_REP", agentOfficeAddressLine1: "1111111" },
                 { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -942,7 +942,7 @@ describe("<BusinessFormationPaginator />", () => {
             "agentOfficeAddressLine2",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine2: "1111111" },
+                { agentType: "AUTHORIZED_REP", agentOfficeAddressLine2: "1111111" },
                 { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -966,7 +966,7 @@ describe("<BusinessFormationPaginator />", () => {
             {
               formationFormData: generateFormationFormData(
                 {
-                  agentNumberOrManual: "MANUAL_ENTRY",
+                  agentType: "AUTHORIZED_REP",
                   agentOfficeAddressCity: `agent-city-${randomInt()}`,
                 },
                 { legalStructureId: "limited-liability-company" },
@@ -991,7 +991,7 @@ describe("<BusinessFormationPaginator />", () => {
             "agentOfficeAddressZipCode",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressZipCode: "07004" },
+                { agentType: "AUTHORIZED_REP", agentOfficeAddressZipCode: "07004" },
                 { legalStructureId: "limited-liability-company" },
               ),
               formationResponse: generateFormationSubmitResponse({

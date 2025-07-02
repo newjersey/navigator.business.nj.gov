@@ -54,10 +54,10 @@ describe("validatedFieldsForUser", () => {
   });
 
   describe("registeredAgent", () => {
-    it("requires registered agent fields for MANUAL_ENTRY for all legal structures", () => {
+    it("requires manual entry registered agent fields for MYSELF for all legal structures", () => {
       const legalStructureId = randomFormationLegalType();
       const formationFormData = generateFormationFormData(
-        { agentNumberOrManual: "MANUAL_ENTRY" },
+        { agentType: "MYSELF" },
         { legalStructureId },
       );
 
@@ -73,16 +73,56 @@ describe("validatedFieldsForUser", () => {
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
 
-    it("requires registered agent fields for NUMBER for all legal structures", () => {
+    it("requires manual entry registered agent fields for AUTHORIZED_REP for all legal structures", () => {
       const legalStructureId = randomFormationLegalType();
       const formationFormData = generateFormationFormData(
-        { agentNumberOrManual: "NUMBER" },
+        { agentType: "AUTHORIZED_REP" },
+        { legalStructureId },
+      );
+
+      const expected: FormationFields[] = [
+        "agentName",
+        "agentEmail",
+        "agentOfficeAddressLine1",
+        "agentOfficeAddressLine2",
+        "agentOfficeAddressCity",
+        "agentOfficeAddressZipCode",
+      ];
+
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it("requires agent number field for PROFESSIONAL_SERVICE for all legal structures", () => {
+      const legalStructureId = randomFormationLegalType();
+      const formationFormData = generateFormationFormData(
+        { agentType: "PROFESSIONAL_SERVICE" },
         { legalStructureId },
       );
 
       const expected: FormationFields[] = ["agentNumber"];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it("does not require agentNumber when PROFESSIONAL_SERVICE has showManualEntry true", () => {
+      const legalStructureId = randomFormationLegalType();
+      const formationFormData = generateFormationFormData(
+        { agentType: "PROFESSIONAL_SERVICE", showManualEntry: true },
+        { legalStructureId },
+      );
+
+      const validatedFields = validatedFieldsForUser(formationFormData);
+      expect(validatedFields).not.toContain("agentNumber");
+      expect(validatedFields).toEqual(
+        expect.arrayContaining([
+          "agentName",
+          "agentEmail",
+          "agentOfficeAddressLine1",
+          "agentOfficeAddressLine2",
+          "agentOfficeAddressCity",
+          "agentOfficeAddressZipCode",
+        ]),
+      );
     });
   });
 

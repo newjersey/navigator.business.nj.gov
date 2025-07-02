@@ -10,20 +10,14 @@ export const ReviewRegisteredAgent = (): ReactElement => {
 
   return (
     <ReviewSubSection header={Config.formation.registeredAgent.label} marginOverride="margin-top-0">
-      {state.formationFormData.agentNumberOrManual === "NUMBER" && (
-        <ReviewLineItem
-          label={Config.formation.fields.agentNumber.label}
-          value={state.formationFormData.agentNumber}
-          marginOverride="margin-top-0"
-          dataTestId="agent-number"
-        />
-      )}
-      {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
-        <div data-testid="agent-manual-entry">
+      {state.formationFormData.agentType === "MYSELF" ||
+      state.formationFormData.agentType === "AUTHORIZED_REP" ||
+      (state.formationFormData.agentType === "PROFESSIONAL_SERVICE" &&
+        state.formationFormData.showManualEntry === true) ? (
+        <div role="region" aria-label="Manual agent entry review">
           <ReviewLineItem
             label={Config.formation.fields.agentName.label}
             value={state.formationFormData.agentName}
-            marginOverride="margin-top-0"
           />
 
           <ReviewLineItem
@@ -54,6 +48,17 @@ export const ReviewRegisteredAgent = (): ReactElement => {
             value={state.formationFormData.agentOfficeAddressZipCode}
           />
         </div>
+      ) : (
+        state.formationFormData.agentType === "PROFESSIONAL_SERVICE" &&
+        state.formationFormData.showManualEntry === false && (
+          <div role="region" aria-label="Professional service agent review">
+            <ReviewLineItem
+              label={Config.formation.fields.agentNumber.label}
+              value={state.formationFormData.agentNumber}
+              marginOverride="margin-top-0"
+            />
+          </div>
+        )
       )}
     </ReviewSubSection>
   );
