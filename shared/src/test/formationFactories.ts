@@ -215,7 +215,7 @@ export const generateFormationFormData = (
     businessTotalStock: isCorp ? randomInt().toString() ?? "" : "",
     businessPurpose: `some-purpose-${randomInt()}`,
     additionalProvisions: [`some-provision-${randomInt()}`],
-    agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
+    agentType: randomElementFromArray(["MYSELF", "AUTHORIZED_REP", "PROFESSIONAL_SERVICE"]),
     agentNumber: `some-agent-number-${randomInt()}`,
     agentName: `some-agent-name-${randomInt()}`,
     agentEmail: `some-agent-email-${randomInt()}@gmail.com`,

@@ -278,9 +278,17 @@ export const BusinessFormationPaginator = (): ReactElement => {
     analytics.event.business_formation_signers.submit.signers_submitted_with_formation(
       formationFormData.signers?.length ?? formationFormData.incorporators?.length ?? 0,
     );
-    if (formationFormData.agentNumberOrManual === "NUMBER") {
+    if (
+      formationFormData.agentType === "PROFESSIONAL_SERVICE" &&
+      formationFormData.showManualEntry === false
+    ) {
       analytics.event.business_formation_registered_agent_identification.submit.entered_agent_ID();
-    } else if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
+    } else if (
+      formationFormData.agentType === "MYSELF" ||
+      formationFormData.agentType === "AUTHORIZED_REP" ||
+      (formationFormData.agentType === "PROFESSIONAL_SERVICE" &&
+        formationFormData.showManualEntry === true)
+    ) {
       analytics.event.business_formation_registered_agent_identification.submit.identified_agent_manually();
       if (formationFormData.agentUseBusinessAddress) {
         analytics.event.business_formation_registered_agent_manual_address.submit.address_is_same_as_account_holder();

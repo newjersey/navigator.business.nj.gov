@@ -1,16 +1,31 @@
 {
   "formation": {
     "registeredAgent": {
+      "agentNumberLabel": "Registered Agent ID Number",
+      "agentNumberLabelSecondary": "(Not your telephone number)",
       "radioButtonManualText": "Manually Identify Your Registered Agent",
       "checkboxUnCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now filled with the account holder information and locked",
       "radioButtonNumberText": "Enter Your Registered Agent ID Number",
+      "radioButtonMyselfText": "Myself",
+      "radioButtonAuthorizedRepText": "An authorized representative of the business (for example, an attorney, accountant, business partner, or manager)",
+      "radioButtonProfessionalServiceText": "A professional registered agent service",
       "noteTitle": "Note: ",
       "sameAddressCheckbox": "The address is the same as the business location.",
       "noteBody": "By checking this box, the account holder information will be applied to the 'Registered Agent Name' and 'Registered Agent Email' fields. These fields will be locked.",
       "label": "Registered Agent",
-      "sectionDescription": "Enter your `Registered Agent's|registered-agent` ID number. If your agent did not give you this number, you can enter their name and address.",
+      "sectionDescription": "All businesses in New Jersey must list a `registered agent|registered-agent` to receive official legal and tax documents on behalf of the business.",
       "checkboxCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now editable",
-      "sameContactCheckbox": "The agent information is the same as the account holder."
+      "whoToListSubheading": "Who would you like to list as your registered agent?",
+      "infoCalloutHeading": "Keep in mind:",
+      "infoCalloutIntro": "Whoever you choose as a registered agent (even if you choose yourself) must:",
+      "infoCalloutBullets": [
+        "Be a New Jersey resident with a physical street address in New Jersey (no P.O. boxes or virtual mailboxes)",
+        "Be available at that address during standard business hours (9:00am-5:00pm, Monday-Friday)",
+        "Be willing to receive legal and tax mail on your business's behalf (your name will be listed on public records)",
+        "Consent to be legally accountable for the business"
+      ],
+      "infoCalloutFooter": "If you or whoever you choose is not able to meet the requirements, you can search the internet to find a professional registered agent service. Carefully research the registered agent to make sure they are authorized in New Jersey.",
+      "manualEntryCheckboxLabel": "Can't find your ID? Enter info manually instead."
     },
     "general": {
       "helpButtonText": "Help",
