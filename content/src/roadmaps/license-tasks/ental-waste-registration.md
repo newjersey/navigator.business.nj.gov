@@ -39,7 +39,7 @@ divisionPhone: (609) 292-4860
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If you don’t register, you may be subject to significant fines.
+If you don’t register, you may be subject to significant fines, and you may have to apply for a SUI permit.
 
 :::
 
