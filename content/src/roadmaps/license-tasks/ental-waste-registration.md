@@ -16,7 +16,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  If your dental office handles amalgam waste by placing or removing amalgam fillings, you must register for dental waste management. This allows you to get a dental amalgam certification. You must renew it every year.
+  If your dental office handles `amalgam waste|amalgam-waste` by placing or removing amalgam fillings, you must register for dental waste management. This allows you to get a dental amalgam certification. You must renew it every year.
 industryId:
   - healthcare
 callToActionText: Apply for My Dental Waste Registration
