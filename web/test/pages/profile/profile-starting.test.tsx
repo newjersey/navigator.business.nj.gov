@@ -776,6 +776,7 @@ describe("profile - starting business", () => {
         await waitFor(() => {
           return expect(userDataWasNotUpdated()).toEqual(true);
         });
+        expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
       });
 
       it("will save if Tax ID changes to 12 digits in length", async () => {
