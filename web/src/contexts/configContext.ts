@@ -25,6 +25,7 @@ import * as EnvQuestionnaire from "@businessnjgovnavigator/content/fieldConfig/e
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
+import * as GovernmentContracting from "@businessnjgovnavigator/content/fieldConfig/government-contracting.json";
 import * as HousingRegistrationSearchTask from "@businessnjgovnavigator/content/fieldConfig/housing-registration.json";
 import * as LandingPageExperienceB from "@businessnjgovnavigator/content/fieldConfig/landing-page-experience-b.json";
 import * as LandingPage from "@businessnjgovnavigator/content/fieldConfig/landing-page.json";
@@ -85,6 +86,7 @@ const merged = JSON.parse(
       AccountSetup,
       NavigationDefaults,
       PageMetadata,
+      GovernmentContracting,
       NavigationDefaults,
       DashboardDefaults,
       PageMetadata,
@@ -143,6 +145,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof AccountSetup &
   typeof NavigationDefaults &
   typeof PageMetadata &
+  typeof GovernmentContracting &
   typeof CalloutDefaults &
   typeof ElevatorRegistration &
   typeof CalloutDefaults &
@@ -199,6 +202,7 @@ export const getMergedConfig = (): ConfigType => {
     PageMetadata,
     DashboardDefaults,
     PageMetadata,
+    GovernmentContracting,
     CalloutDefaults,
     ElevatorRegistration,
     StarterKits,
