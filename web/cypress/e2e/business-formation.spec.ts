@@ -35,8 +35,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
       "My Provision 1",
       "My Provision 2",
     ];
-    const agentNumberOrManual: FormationFormData["agentNumberOrManual"] = "MANUAL_ENTRY";
-    const registeredAgentSameAsAccountCheckbox = false;
+    const agentType: FormationFormData["agentType"] = "AUTHORIZED_REP";
     const agentName = "John Doe";
     const agentEmail = "John.Doe@gmail.com";
     const getRegisteredAgentSameAsBusinessAddressCheckbox = false;
@@ -82,8 +81,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     onBusinessFormationPage.clickContinueToNextTab();
 
     selectAndTypeRegisteredAgent({
-      agentNumberOrManual,
-      registeredAgentSameAsAccountCheckbox,
+      agentType,
       agentName,
       agentEmail,
       getRegisteredAgentSameAsBusinessAddressCheckbox,
@@ -205,9 +203,8 @@ const typeProvisions = (provisions: FormationFormData["additionalProvisions"]): 
 };
 
 const selectAndTypeRegisteredAgent = ({
-  agentNumberOrManual,
+  agentType,
   agentNumber,
-  registeredAgentSameAsAccountCheckbox,
   agentName,
   agentEmail,
   getRegisteredAgentSameAsBusinessAddressCheckbox,
@@ -216,7 +213,7 @@ const selectAndTypeRegisteredAgent = ({
   agentOfficeAddressCity,
   agentOfficeAddressZipCode,
 }: Partial<AdditionalFormation>): void => {
-  if (agentNumberOrManual === "NUMBER") {
+  if (agentType === "AUTHORIZED_REP") {
     onBusinessFormationPage.getRegisteredAgentNumberRadio().check();
     onBusinessFormationPage.getRegisteredAgentNumberRadio().should("be.checked");
 
@@ -228,16 +225,10 @@ const selectAndTypeRegisteredAgent = ({
         .should("contain", agentNumber);
     }
   }
-  if (agentNumberOrManual === "MANUAL_ENTRY") {
+  if (agentType === "AUTHORIZED_REP") {
     onBusinessFormationPage.getRegisteredAgentManualRadio().check();
     onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
 
-    if (registeredAgentSameAsAccountCheckbox) {
-      onBusinessFormationPage.getRegisteredAgentSameAsAccountCheckbox().check();
-      onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
-      onBusinessFormationPage.getRegisteredAgentName().should("be.disabled");
-      onBusinessFormationPage.getRegisteredAgentEmail().should("be.disabled");
-    }
     if (agentName) {
       onBusinessFormationPage.typeRegisteredAgentName(agentName);
       onBusinessFormationPage

@@ -346,7 +346,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -398,7 +398,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
     expect(formationFormData.addressZipCode).toEqual("08001");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");
@@ -471,7 +471,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -519,7 +519,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "Massachusetts", shortCode: "MA" });
     expect(formationFormData.addressZipCode).toEqual("01752");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");
@@ -574,7 +574,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -620,7 +620,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
     expect(formationFormData.addressZipCode).toEqual("08001");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");
@@ -686,7 +686,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -735,7 +735,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressCountry).toEqual("CA");
     expect(formationFormData.addressZipCode).toEqual("0800231");
     expect(formationFormData.addressProvince).toEqual("Quebec");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");
@@ -802,7 +802,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -860,7 +860,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
     expect(formationFormData.addressZipCode).toEqual("08001");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");
@@ -934,7 +934,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -983,7 +983,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
     expect(formationFormData.addressZipCode).toEqual("08001");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");
@@ -1057,7 +1057,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -1103,7 +1103,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
     expect(formationFormData.addressZipCode).toEqual("08001");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");
@@ -1173,7 +1173,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessStep();
 
-    page.chooseRadio("registered-agent-manual");
+    page.chooseRadio("registered-agent-authorized-rep");
     page.fillText("Agent name", "Hugo Weaving");
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
@@ -1219,7 +1219,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.addressCountry).toEqual("CA");
     expect(formationFormData.addressZipCode).toEqual("0800231");
     expect(formationFormData.addressProvince).toEqual("Quebec");
-    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentType).toEqual("AUTHORIZED_REP");
     expect(formationFormData.agentNumber).toEqual("");
     expect(formationFormData.agentName).toEqual("Hugo Weaving");
     expect(formationFormData.agentEmail).toEqual("name@example.com");

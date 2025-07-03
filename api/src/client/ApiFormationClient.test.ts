@@ -110,7 +110,7 @@ describe("ApiFormationClient", () => {
 
         const formationFormData = generateFormationFormData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             additionalProvisions: ["provision1", "provision2"],
             members,
             signers: [
@@ -260,7 +260,7 @@ describe("ApiFormationClient", () => {
         mockAxios.post.mockResolvedValue({ data: stubResponse });
         const formationFormData = generateFormationFormData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             foreignDateOfFormation: "2022/10/20",
             foreignStateOfFormation: "Massachusetts",
             additionalProvisions: ["provision1", "provision2"],
@@ -418,7 +418,7 @@ describe("ApiFormationClient", () => {
         const formationFormData = generateFormationFormData(
           {
             businessTotalStock: "1234",
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             additionalProvisions: ["provision1", "provision2"],
             incorporators,
             members,
@@ -585,7 +585,7 @@ describe("ApiFormationClient", () => {
         const formationFormData = generateFormationFormData(
           {
             businessTotalStock: "1234",
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             foreignDateOfFormation: "2022/10/20",
             foreignStateOfFormation: "Massachusetts",
             additionalProvisions: undefined,
@@ -807,7 +807,7 @@ describe("ApiFormationClient", () => {
 
         const formationFormData = generateFormationFormData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             additionalProvisions: ["provision1", "provision2"],
             members: [],
             signers: [
@@ -941,7 +941,7 @@ describe("ApiFormationClient", () => {
           {
             foreignDateOfFormation: "2022/10/20",
             foreignStateOfFormation: "Massachusetts",
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             additionalProvisions: [],
             members: undefined,
             signers: [
@@ -1089,7 +1089,7 @@ describe("ApiFormationClient", () => {
         ];
         const formationFormData = generateFormationFormData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             additionalProvisions: [],
             withdrawals: "withdrawl",
             dissolution: "dissolution",
@@ -1285,7 +1285,7 @@ describe("ApiFormationClient", () => {
         ];
         const formationFormData = generateFormationFormData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             hasNonprofitBoardMembers: true,
             nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS",
             nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
@@ -1425,7 +1425,7 @@ describe("ApiFormationClient", () => {
         mockAxios.post.mockResolvedValue({ data: stubResponse });
         const formationFormData = generateFormationFormData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
+            agentType: "AUTHORIZED_REP",
             hasNonprofitBoardMembers: true,
             nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
             nonprofitBoardMemberQualificationsTerms:
@@ -1574,11 +1574,11 @@ describe("ApiFormationClient", () => {
       });
     });
 
-    it("fills only registered agent number when NUMBER is selected", async () => {
+    it("fills only registered agent number when PROFESSIONAL_SERVICE is selected without manual entry", async () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-      const userData = generateFormationUserData({}, {}, { agentNumberOrManual: "NUMBER" });
+      const userData = generateFormationUserData({}, {}, { agentType: "PROFESSIONAL_SERVICE" });
       const currentBusiness = getCurrentBusiness(userData);
 
       await client.form(userData, "some-url");
@@ -1591,6 +1591,126 @@ describe("ApiFormationClient", () => {
       expect(postBody.Formation.RegisteredAgent.Location).toEqual(undefined);
     });
 
+    it("fills manual entry fields when MYSELF is selected", async () => {
+      const stubResponse = generateApiResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+      const userData = generateFormationUserData(
+        {},
+        {},
+        {
+          agentType: "MYSELF",
+          agentName: "Test Agent",
+          agentEmail: "test@example.com",
+          agentOfficeAddressLine1: "123 Test St",
+          agentOfficeAddressLine2: "",
+          agentOfficeAddressCity: "Test City",
+          agentOfficeAddressZipCode: "12345",
+          agentUseBusinessAddress: false,
+        },
+      );
+
+      await client.form(userData, "some-url");
+      const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+      expect(postBody.Formation.RegisteredAgent.Id).toEqual(undefined);
+      expect(postBody.Formation.RegisteredAgent.Email).toEqual("test@example.com");
+      expect(postBody.Formation.RegisteredAgent.Name).toEqual("Test Agent");
+      expect(postBody.Formation.RegisteredAgent.Location).toEqual({
+        Address1: "123 Test St",
+        Address2: "",
+        City: "Test City",
+        State: "New Jersey",
+        Zipcode: "12345",
+        Country: "US",
+      });
+    });
+
+    it("uses business address when agentUseBusinessAddress is true for MYSELF", async () => {
+      const stubResponse = generateApiResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+      const businessAddress = {
+        line1: "Biz Addr 1",
+        line2: "Biz Addr 2",
+        city: "Biz City",
+        zip: "99999",
+        state: "New Jersey",
+        country: "US",
+      };
+
+      const userData = generateFormationUserData(
+        {},
+        {},
+        {
+          agentType: "MYSELF",
+          agentName: "Test Agent",
+          agentEmail: "test@example.com",
+          agentUseBusinessAddress: true,
+          agentOfficeAddressLine1: businessAddress.line1,
+          agentOfficeAddressLine2: businessAddress.line2,
+          agentOfficeAddressCity: businessAddress.city,
+          agentOfficeAddressZipCode: businessAddress.zip,
+        },
+      );
+
+      await client.form(userData, "some-url");
+      const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+      expect(postBody.Formation.RegisteredAgent.Id).toEqual(undefined);
+      expect(postBody.Formation.RegisteredAgent.Email).toEqual("test@example.com");
+      expect(postBody.Formation.RegisteredAgent.Name).toEqual("Test Agent");
+      expect(postBody.Formation.RegisteredAgent.Location).toEqual({
+        Address1: businessAddress.line1,
+        Address2: businessAddress.line2,
+        City: businessAddress.city,
+        State: businessAddress.state,
+        Zipcode: businessAddress.zip,
+        Country: businessAddress.country,
+      });
+    });
+
+    it("uses business address when agentUseBusinessAddress is true for AUTHORIZED_REP", async () => {
+      const stubResponse = generateApiResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+      const businessAddress = {
+        line1: "Biz Addr 1",
+        line2: "Biz Addr 2",
+        city: "Biz City",
+        zip: "99999",
+        state: "New Jersey",
+        country: "US",
+      };
+
+      const userData = generateFormationUserData(
+        {},
+        {},
+        {
+          agentType: "AUTHORIZED_REP",
+          agentName: "Test Rep",
+          agentEmail: "rep@example.com",
+          agentUseBusinessAddress: true,
+          agentOfficeAddressLine1: businessAddress.line1,
+          agentOfficeAddressLine2: businessAddress.line2,
+          agentOfficeAddressCity: businessAddress.city,
+          agentOfficeAddressZipCode: businessAddress.zip,
+        },
+      );
+
+      await client.form(userData, "some-url");
+      const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+      expect(postBody.Formation.RegisteredAgent.Id).toEqual(undefined);
+      expect(postBody.Formation.RegisteredAgent.Email).toEqual("rep@example.com");
+      expect(postBody.Formation.RegisteredAgent.Name).toEqual("Test Rep");
+      expect(postBody.Formation.RegisteredAgent.Location).toEqual({
+        Address1: businessAddress.line1,
+        Address2: businessAddress.line2,
+        City: businessAddress.city,
+        State: businessAddress.state,
+        Zipcode: businessAddress.zip,
+        Country: businessAddress.country,
+      });
+    });
+
     it("sends with empty NAICS code if profile data NAICS is not 6 digits", async () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
@@ -1598,7 +1718,7 @@ describe("ApiFormationClient", () => {
       const userData = generateFormationUserData(
         { naicsCode: "12345" },
         {},
-        { agentNumberOrManual: "NUMBER" },
+        { agentType: "PROFESSIONAL_SERVICE" },
       );
 
       await client.form(userData, "some-url");

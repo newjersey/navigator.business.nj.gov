@@ -156,7 +156,7 @@ describe("Formation - ContactsStep", () => {
           name: "Jane Parks",
           addressCity: "New Orleans",
           addressLine1: "1600 Somewhere Drive",
-          addressLine2: "PH",
+          addressLine2: "Apt 1",
           addressState: { name: "Louisiana", shortCode: "LA" },
           addressCountry: "US",
           businessLocationType: "US",

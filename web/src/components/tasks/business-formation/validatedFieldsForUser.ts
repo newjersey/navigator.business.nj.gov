@@ -45,11 +45,27 @@ export const validatedFieldsForUser = (
       validatedFields.push("addressMunicipality");
   }
 
-  if (formationFormData.agentNumberOrManual === "NUMBER") {
-    validatedFields = [...validatedFields, "agentNumber"];
+  if (formationFormData.agentType === "PROFESSIONAL_SERVICE") {
+    if (!(formationFormData as FormationFormData).showManualEntry) {
+      validatedFields = [...validatedFields, "agentNumber"];
+    }
+    if ((formationFormData as FormationFormData).showManualEntry) {
+      validatedFields = [
+        ...validatedFields,
+        "agentName",
+        "agentEmail",
+        "agentOfficeAddressLine1",
+        "agentOfficeAddressLine2",
+        "agentOfficeAddressCity",
+        "agentOfficeAddressZipCode",
+      ];
+    }
   }
 
-  if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
+  if (
+    formationFormData.agentType === "MYSELF" ||
+    formationFormData.agentType === "AUTHORIZED_REP"
+  ) {
     validatedFields = [
       ...validatedFields,
       "agentName",
