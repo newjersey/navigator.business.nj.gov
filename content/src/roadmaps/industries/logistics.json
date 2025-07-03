@@ -60,7 +60,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "logistics-CRTK-survey",
-    "regulated-medical-waste-question"
+    "regulated-medical-waste-question",
+    "business-vehicle-irp"
   ],
   "displayname": "logistics",
   "industryOnboardingQuestions": {
