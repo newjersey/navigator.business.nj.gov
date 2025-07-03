@@ -5,6 +5,7 @@ import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
 import { DatabaseClient, FormationClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import {
@@ -69,9 +70,14 @@ describe("formationRouter", () => {
     };
     app = setupExpress(false);
     app.use(
-      formationRouterFactory(stubFormationClient, stubDynamoDataClient, {
-        shouldSaveDocuments: true,
-      }),
+      formationRouterFactory(
+        stubFormationClient,
+        stubDynamoDataClient,
+        {
+          shouldSaveDocuments: true,
+        },
+        DummyLogWriter,
+      ),
     );
   });
 

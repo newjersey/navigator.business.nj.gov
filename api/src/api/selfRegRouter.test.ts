@@ -1,6 +1,7 @@
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { DatabaseClient, SelfRegClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { generateSelfRegResponse } from "@test/factories";
@@ -33,7 +34,7 @@ describe("selfRegRouter", () => {
     };
 
     app = setupExpress(false);
-    app.use(selfRegRouterFactory(stubDynamoDataClient, stubSelfRegClient));
+    app.use(selfRegRouterFactory(stubDynamoDataClient, stubSelfRegClient, DummyLogWriter));
   });
 
   afterAll(async () => {
