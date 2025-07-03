@@ -317,7 +317,7 @@ describe("profile - owning existing business", () => {
         screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
-    expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
+    expect(screen.getByTestId("profile-error-alert")).toBeInTheDocument();
   });
 
   it("returns user back to dashboard", async () => {
