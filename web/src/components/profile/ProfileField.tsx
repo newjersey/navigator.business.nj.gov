@@ -20,6 +20,7 @@ interface Props {
   lockedValueFormatter?: (value: string) => string;
   noLabel?: boolean;
   optionalText?: boolean;
+  ignoreContextualInfo?: boolean;
 }
 
 export const ProfileField = (props: Props): ReactElement => {
@@ -56,6 +57,7 @@ export const ProfileField = (props: Props): ReactElement => {
                 boldAltDescription={props.boldAltDescription}
                 boldDescription={props.boldDescription}
                 optionalText={props.optionalText}
+                ignoreContextualInfo={props.ignoreContextualInfo}
               />
             )}
             <div className={props.noLabel ? "margin-bottom-05" : ""}>{props.children}</div>
