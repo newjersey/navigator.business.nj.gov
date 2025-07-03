@@ -20,6 +20,9 @@ summaryDescriptionMd: >-
   * A valid IFTA license and two IFTA decals issued by a the IFTA member jurisdiction in which they are based
 
   * A valid IFTA trip permit issued by the IFTA member jurisdiction in which they are based
+issuingAgency: New Jersey Motor Vehicle Commission
+callToActionText: Apply for an IFTA Account
+callToActionLink: https://www.nj.gov/mvc/pdf/commercial/IFTA_1.pdf
 ---
 &nbsp;
 
