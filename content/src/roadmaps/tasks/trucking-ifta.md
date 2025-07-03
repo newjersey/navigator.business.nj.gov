@@ -1,18 +1,8 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false"
-  calloutType="informational" amountIconText="" filingTypeIconText=""
-  frequencyIconText="" phoneIconText="" emailIconText="" }
-
-
-  IFTA licenses must be renewed once per year. You can do so online once your account has been created.
-
-
-  :::
-
-
-  If you plan to operate vehicles outside of a base NJ jurisdiction, you will need to license them under IFTA.
+  If you plan to operate vehicles outside of a base NJ jurisdiction, you will
+  need to license them under IFTA.
 
 
   &nbsp;
@@ -87,29 +77,14 @@ If you apply by mail, include a copy of your proof of `Federal Tax ID number.|fe
 
 &nbsp;
 
-## Quarterly Tax Filing Requirements
+After receiving your license and decals, you must file fuel taxes quarterly.
 
-After receiving your license and decals, you must report the following each quarter of the year:
-* Total miles driven in each IFTA jurisdiction
-* Total gallons of fuel purchased
-* Miles-per-gallon (MPG) calculation
-* Tax due or refund based on the difference between fuel tax paid at the pump and the jurisdictional tax owed
-
-#### Reporting Periods
-
-* Q1: Jan 1 – Mar 31 (Filing due date: Apr 30)
-* Q2: Apr 1 – Jun 30 (Filing due date: July 31)
-* Q3: Jul 1 – Sep 30 (Filing due date: Oct 31)
-* Q4: Oct 1 – Dec 31 (Filing due date: Jan 31)
-
-IFTA tax rates for New Jersey can be found [here](https://www.iftach.org/taxmatrix4/allrates-with-xchange-rate.php).
-
-#### How to File
-
-Filing can be done [online](https://mvcappwintelirp.state.nj.us/njWeb/login.do) or by filing out [this form](https://www.nj.gov/mvc/pdf/business/nj_ifta_quarterly_tax_return.pdf) and mailing it to the NJ MVC P.O. box address above.
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 * An IFTA license, which must be carried in each vehicle at all times
 * A set of IFTA decals for each vehicle, which must be put on the exterior of the cab on both sides
+
+IFTA licenses must be renewed once per year online.
+
 :::
 
 :::callout{ showHeader="true" headerText="What if I don’t license my vehicles under the IFTA?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
