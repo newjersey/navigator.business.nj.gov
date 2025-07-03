@@ -4,7 +4,21 @@ name: Get Your International Fuel Tax Agreement (IFTA) License and Decals
 category:
   - manage-my-business-vehicles
 industryIds: []
-sectorIds: []
+sectorIds:
+  - transportation-and-warehousing
+  - manufacturing
+  - utilities
+  - mining-quarrying-and-oil-and-gas-extraction
+  - waste-management-and-Remediation
+  - construction
+  - wholesale-trade
+  - agriculture-forestry-fishing-and-hunting
+  - life-sciences
+  - cannabis
+  - arts-entertainment-and-recreation
+  - offshore-wind
+  - clean-energy
+  - retail-trade-and-ecommerce
 urlSlug: trucking-ifta-aa
 summaryDescriptionMd: >-
   If you plan to operate vehicles outside of a base NJ jurisdiction, you will
