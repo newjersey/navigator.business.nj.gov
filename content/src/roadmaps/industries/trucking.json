@@ -56,13 +56,25 @@
     },
     {
       "step": 3,
-      "task": "mvc-registration-task",
       "weight": 16,
+      "task": "trucking-irp",
       "required": true
     },
     {
       "step": 3,
       "weight": 17,
+      "task": "trucking-ifta",
+      "required": true
+    },
+    {
+      "step": 3,
+      "task": "mvc-registration-task",
+      "weight": 18,
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 19,
       "task": "trucking-insurance",
       "required": true
     },
@@ -76,18 +88,6 @@
       "step": 4,
       "weight": 25,
       "task": "trucking-usdot",
-      "required": true
-    },
-    {
-      "step": 4,
-      "weight": 30,
-      "task": "trucking-irp",
-      "required": true
-    },
-    {
-      "step": 4,
-      "weight": 31,
-      "task": "trucking-ifta",
       "required": true
     }
   ],
