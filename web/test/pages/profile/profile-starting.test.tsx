@@ -590,7 +590,6 @@ describe("profile - starting business", () => {
         ),
       ).toBeInTheDocument();
     });
-    expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
   });
 
   it("user is able to go back to dashboard", async () => {
@@ -638,7 +637,6 @@ describe("profile - starting business", () => {
         expect(
           screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
         ).toBeInTheDocument();
-        expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
       });
 
       it("will save if Tax ID changes to 12 digits in length", async () => {
@@ -1060,7 +1058,6 @@ describe("profile - starting business", () => {
         screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
-    expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
   });
 
   describe("business name not required", () => {
@@ -1083,7 +1080,6 @@ describe("profile - starting business", () => {
         await waitFor(() => {
           expect(userDataUpdatedNTimes()).toEqual(1);
         });
-        expect(screen.queryByTestId("profile-header-inline-alert")).not.toBeInTheDocument();
       });
     }
   });

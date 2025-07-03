@@ -1,40 +1,26 @@
-import { Alert } from "@/components/njwds-extended/Alert";
 import { BackButtonForLayout } from "@/components/njwds-layout/BackButtonForLayout";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
-import { getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
-import React, { ReactElement, RefObject, useContext } from "react";
+import React, { ReactElement, useContext } from "react";
 
 export interface ProfileTabPanelProps {
   children: React.ReactNode;
   navChildren?: React.ReactNode;
-  showAlert?: boolean;
-  profileAlertRef: RefObject<HTMLDivElement>;
 }
 
 export const ProfileTabPanel = (props: ProfileTabPanelProps): ReactElement => {
   const userDataFromHook = useUserData();
-  const config = getMergedConfig();
   const business = userDataFromHook.business;
   const { isAuthenticated } = useContext(NeedsAccountContext);
 
   const titleOverColumns: React.ReactNode = (
     <>
       <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
-      {props.showAlert && (
-        <Alert
-          dataTestid={"profile-header-inline-alert"}
-          variant={"error"}
-          ref={props.profileAlertRef}
-        >
-          {config.profileDefaults.default.errorTextBody}
-        </Alert>
-      )}
       <ProfileNoteDisclaimerForSubmittingData
         business={business}
         isAuthenticated={isAuthenticated}

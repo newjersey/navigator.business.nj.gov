@@ -13,13 +13,14 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { hasNonEssentialQuestions } from "@/lib/utils/non-essential-questions-helpers";
 import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { ReactElement, RefObject, useContext } from "react";
 
 interface Props {
   fieldErrors?: string[];
   lockFormationDateField?: boolean;
   isFormationDateFieldVisible?: boolean;
   futureAllowed?: boolean;
+  profileAlertRef?: RefObject<HTMLDivElement>;
 }
 
 export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
@@ -62,7 +63,10 @@ export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
   return (
     <div id="tabpanel-personalize" role="tabpanel" aria-labelledby="tab-personalize">
       <ProfileTabHeader tab="personalize" />
-      <ProfileErrorAlert fieldErrors={props.fieldErrors ?? []} />
+      <ProfileErrorAlert
+        fieldErrors={props.fieldErrors ?? []}
+        profileAlertRef={props.profileAlertRef}
+      />
       <hr className="margin-y-4" />
       <Accordion data-testid="annualReportDeadlineAccordianSection">
         <AccordionHeader

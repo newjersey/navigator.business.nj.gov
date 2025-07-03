@@ -3,10 +3,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
+import { ReactElement, RefObject } from "react";
 
 interface Props {
   fieldErrors: string[];
+  profileAlertRef?: RefObject<HTMLDivElement>;
 }
 
 export const ProfileErrorAlert = (props: Props): ReactElement | null => {
@@ -59,7 +60,7 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
   if (!displayProfileErrorAlert()) return null;
 
   return (
-    <Alert variant="error" dataTestid={"profile-error-alert"}>
+    <Alert variant="error" dataTestid={"profile-error-alert"} ref={props.profileAlertRef}>
       <div>{profileErrorAlertText()}</div>
       <ul>
         {errorFieldsIds().map((id) => (
