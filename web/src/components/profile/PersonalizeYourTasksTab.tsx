@@ -61,10 +61,8 @@ export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
 
   return (
     <div id="tabpanel-personalize" role="tabpanel" aria-labelledby="tab-personalize">
-      <ProfileErrorAlert
-        fieldErrors={props.fieldErrors?.filter((e) => e === "dateOfFormation") ?? []}
-      />
       <ProfileTabHeader tab="personalize" />
+      <ProfileErrorAlert fieldErrors={props.fieldErrors ?? []} />
       <hr className="margin-y-4" />
       <Accordion data-testid="annualReportDeadlineAccordianSection">
         <AccordionHeader
