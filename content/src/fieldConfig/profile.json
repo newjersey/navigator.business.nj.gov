@@ -140,7 +140,7 @@
       "businessName": {
         "default": {
           "header": "Business Name",
-          "headerContextualInfo": "",
+          "headerContextualInfo": "business-name",
           "description": ""
         }
       },

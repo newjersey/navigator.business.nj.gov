@@ -438,7 +438,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileField fieldName="businessName">
+        <ProfileField ignoreContextualInfo fieldName="businessName">
           <BusinessName />
         </ProfileField>
         <ProfileAddress />
@@ -509,6 +509,7 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="businessName"
           locked={shouldLockFormationFields}
           isVisible={!shouldShowTradeNameElements()}
+          ignoreContextualInfo
         >
           <BusinessName />
         </ProfileField>
@@ -682,7 +683,11 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
-        <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
+        <ProfileField
+          ignoreContextualInfo
+          fieldName="businessName"
+          isVisible={!shouldShowTradeNameElements()}
+        >
           <BusinessName />
         </ProfileField>
 
@@ -815,6 +820,7 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="businessName"
           locked={shouldLockFormationFields}
           isVisible={!shouldShowTradeNameElements()}
+          ignoreContextualInfo
         >
           <BusinessName />
         </ProfileField>
