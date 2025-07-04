@@ -7,6 +7,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { IndustryRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
 import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
 import { searchCertifications } from "@/lib/search/searchCertifications";
@@ -24,6 +25,7 @@ import { searchTaxFilings } from "@/lib/search/searchTaxFilings";
 import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
+import { loadAllAddOns } from "@/lib/static/loadAllAddOns";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
 import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import {
@@ -70,7 +72,7 @@ import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonE
 import DomesticEmployerSteps from "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
-import { getIndustries } from "@businessnjgovnavigator/shared/industry";
+import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
 import { TextField } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -98,6 +100,8 @@ interface Props {
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
+  addOns: IndustryRoadmap[];
+  industries: Industry[];
 }
 
 interface SearchState {
@@ -175,13 +179,39 @@ const SearchContentPage = (props: Props): ReactElement => {
       updateSearchState({ error: { message: error as string, term: searchState.term } });
       console.error(error);
     }
-    setTaskMatches(searchTasks(props.tasks, lowercaseTerm, "tasks"));
-    setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm, "license-tasks"));
-    setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm, "municipal-tasks"));
-    setRaffleBingoStepMatches(
-      searchTasks(props.raffleBingoSteps, lowercaseTerm, "raffle-bingo-steps"),
+    setTaskMatches(
+      searchTasks(props.tasks, lowercaseTerm, "tasks", props.industries, props.addOns),
     );
-    setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm, ""));
+    setLicenseTaskMatches(
+      searchTasks(
+        props.licenseTasks,
+        lowercaseTerm,
+        "license-tasks",
+        props.industries,
+        props.addOns,
+      ),
+    );
+    setMunicipalTaskMatches(
+      searchTasks(
+        props.municipalTasks,
+        lowercaseTerm,
+        "municipal-tasks",
+        props.industries,
+        props.addOns,
+      ),
+    );
+    setRaffleBingoStepMatches(
+      searchTasks(
+        props.raffleBingoSteps,
+        lowercaseTerm,
+        "raffle-bingo-steps",
+        props.industries,
+        props.addOns,
+      ),
+    );
+    setEnvTaskMatches(
+      searchTasks(props.envTasks, lowercaseTerm, "", props.industries, props.addOns),
+    );
     setCertMatches(
       searchCertifications(props.certifications, lowercaseTerm, "certification-opportunities"),
     );
@@ -465,6 +495,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
+      addOns: loadAllAddOns(),
+      industries: getIndustries(),
     },
   };
 };

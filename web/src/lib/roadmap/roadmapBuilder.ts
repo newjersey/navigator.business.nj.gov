@@ -272,6 +272,7 @@ export interface TaskModification {
 }
 
 export interface IndustryRoadmap {
+  id: string;
   roadmapSteps: AddOn[];
   modifications: TaskModification[];
 }

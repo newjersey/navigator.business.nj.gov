@@ -3,6 +3,18 @@ export type Match = {
   cmsCollectionName: string;
   displayTitle?: string;
   snippets: string[];
+  additionalUsageLocations?: AdditionalUsageLocations;
+};
+
+export type AdditionalUsageLocations = {
+  taskDependencies?: LinkWithDescription[];
+  industries?: LinkWithDescription[];
+  addOns?: LinkWithDescription[];
+};
+
+export type LinkWithDescription = {
+  description: string;
+  link: string;
 };
 
 export type LabelledContent = {
