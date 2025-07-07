@@ -54,24 +54,30 @@ Vehicles that **do not** need to register with the IFTA include:
 &nbsp;
 
 ## How to Apply
-Fill out the application linked below bring it to the MVC Trenton office located at:
-> 120 South Stockton St.
-> &nbsp;
->
-> Trenton, NJ 08608
+Fill out the application linked below and bring it to the MVC Trenton office located at:
+&nbsp;
+
+120 South Stockton St.
+&nbsp;
+
+Trenton, NJ 08608
+
+&nbsp;
 
 Or mail to:
 
-> New Jersey Motor Vehicle Commission
-> &nbsp;
->
-> 225 East State St
-> &nbsp;
-> 
-> P.O. Box 133
-> &nbsp;
->
-> Trenton, NJ 08666
+New Jersey Motor Vehicle Commission
+&nbsp;
+
+225 East State St
+&nbsp;
+
+P.O. Box 133
+&nbsp;
+
+Trenton, NJ 08666
+
+&nbsp;
 
 If you apply by mail, include a copy of your proof of `Federal Tax ID number.|federal-tax-id` Once your application is processed, your IFTA account will be created. You can access this account [online](https://mvcappwintelirp.state.nj.us/njWeb/login.do).
 
