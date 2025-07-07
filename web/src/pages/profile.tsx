@@ -22,6 +22,7 @@ import { TaxPin } from "@/components/data-fields/TaxPin";
 import { TradeName } from "@/components/data-fields/TradeName";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { FormationDateDeletionModal } from "@/components/FormationDateDeletionModal";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
@@ -319,7 +320,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
-        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
@@ -392,7 +393,11 @@ const ProfilePage = (props: Props): ReactElement => {
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
-
+        {hasErrors && (
+          <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
+            {Config.profileDefaults.default.errorTextBody}
+          </Alert>
+        )}
         <ProfileField fieldName="taxId" noLabel>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
@@ -441,6 +446,7 @@ const ProfilePage = (props: Props): ReactElement => {
         isFormationDateFieldVisible={!!business?.profileData.dateOfFormation}
         lockFormationDateField={shouldLockFormationFields}
         futureAllowed={true}
+        profileAlertRef={profileAlertRef}
       />
     ),
   };
@@ -450,7 +456,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
-        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
         <ProfileField ignoreContextualInfo fieldName="businessName">
           <BusinessName />
@@ -465,7 +471,11 @@ const ProfilePage = (props: Props): ReactElement => {
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
-
+        {hasErrors && (
+          <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
+            {Config.profileDefaults.default.errorTextBody}
+          </Alert>
+        )}
         <ProfileField fieldName="taxId" noLabel>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
@@ -507,6 +517,7 @@ const ProfilePage = (props: Props): ReactElement => {
         isFormationDateFieldVisible={false}
         lockFormationDateField={shouldLockFormationFields}
         futureAllowed={false}
+        profileAlertRef={profileAlertRef}
       />
     ),
   };
@@ -516,7 +527,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
-        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
@@ -612,7 +623,11 @@ const ProfilePage = (props: Props): ReactElement => {
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
-
+        {hasErrors && (
+          <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
+            {Config.profileDefaults.default.errorTextBody}
+          </Alert>
+        )}
         <ProfileField fieldName="naicsCode" noLabel>
           <NaicsCode />
         </ProfileField>
@@ -685,6 +700,7 @@ const ProfilePage = (props: Props): ReactElement => {
         isFormationDateFieldVisible={!!business?.profileData.dateOfFormation}
         lockFormationDateField={shouldLockFormationFields}
         futureAllowed={true}
+        profileAlertRef={profileAlertRef}
       />
     ),
   };
@@ -694,7 +710,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
-        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
@@ -760,7 +776,11 @@ const ProfilePage = (props: Props): ReactElement => {
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
-
+        {hasErrors && (
+          <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
+            {Config.profileDefaults.default.errorTextBody}
+          </Alert>
+        )}
         {business?.profileData.naicsCode && (
           <div data-testid={"profile-naics-code"}>
             <ProfileField fieldName="naicsCode" noLabel>
@@ -820,6 +840,7 @@ const ProfilePage = (props: Props): ReactElement => {
         ).elementsToDisplay.has("formationDate")}
         lockFormationDateField={shouldLockFormationFields}
         futureAllowed={false}
+        profileAlertRef={profileAlertRef}
       />
     ),
   };
@@ -829,7 +850,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
-        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
         <ProfileField
           fieldName="businessName"
           locked={shouldLockFormationFields}
@@ -848,7 +869,11 @@ const ProfilePage = (props: Props): ReactElement => {
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
-
+        {hasErrors && (
+          <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
+            {Config.profileDefaults.default.errorTextBody}
+          </Alert>
+        )}
         <ProfileField fieldName="naicsCode" noLabel>
           <NaicsCode />
         </ProfileField>
@@ -889,6 +914,7 @@ const ProfilePage = (props: Props): ReactElement => {
         isFormationDateFieldVisible={false}
         lockFormationDateField={shouldLockFormationFields}
         futureAllowed={false}
+        profileAlertRef={profileAlertRef}
       />
     ),
   };
@@ -949,8 +975,6 @@ const ProfilePage = (props: Props): ReactElement => {
                             }}
                           />
                         }
-                        showAlert={hasErrors}
-                        profileAlertRef={profileAlertRef}
                       >
                         <>
                           <form

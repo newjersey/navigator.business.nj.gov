@@ -778,6 +778,7 @@ describe("profile - starting business", () => {
         await waitFor(() => {
           return expect(userDataWasNotUpdated()).toEqual(true);
         });
+        expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
       });
 
       it("will save if Tax ID changes to 12 digits in length", async () => {
@@ -1060,7 +1061,7 @@ describe("profile - starting business", () => {
         screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
-    expect(screen.getByTestId("profile-header-inline-alert")).toBeInTheDocument();
+    expect(screen.getByTestId("profile-error-alert")).toBeInTheDocument();
   });
 
   describe("business name not required", () => {
