@@ -29,6 +29,10 @@ describe("Requirements", () => {
             setShowNeedsAccountSnackbar: jest.fn(),
             registrationStatus: undefined,
             setRegistrationStatus: jest.fn(),
+            showContinueWithoutSaving: false,
+            setShowContinueWithoutSaving: jest.fn(),
+            userWantsToContinueWithoutSaving: false,
+            setUserWantsToContinueWithoutSaving: jest.fn(),
           }}
         >
           <Requirements setStepIndex={mockSetStepIndex} />

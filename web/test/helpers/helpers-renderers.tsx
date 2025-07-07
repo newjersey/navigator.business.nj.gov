@@ -42,9 +42,13 @@ export const withNeedsAccountContext = (
     showNeedsAccountSnackbar?: boolean;
     showNeedsAccountModal?: boolean;
     registrationStatus?: RegistrationStatus;
+    showContinueWithoutSaving?: boolean;
+    userWantsToContinueWithoutSaving?: boolean;
     setRegistrationStatus?: (value: RegistrationStatus | undefined) => void;
     setShowNeedsAccountSnackbar?: (value: boolean) => void;
     setShowNeedsAccountModal?: (value: boolean) => void;
+    setShowContinueWithoutSaving?: (value: boolean) => void;
+    setUserWantsToContinueWithoutSaving?: (value: boolean) => void;
   },
 ): ReactElement => {
   return (
@@ -57,6 +61,11 @@ export const withNeedsAccountContext = (
         setRegistrationStatus: context?.setRegistrationStatus || jest.fn(),
         setShowNeedsAccountSnackbar: context?.setShowNeedsAccountSnackbar || jest.fn(),
         setShowNeedsAccountModal: context?.setShowNeedsAccountModal || jest.fn(),
+        showContinueWithoutSaving: context?.showContinueWithoutSaving || false,
+        setShowContinueWithoutSaving: context?.setShowContinueWithoutSaving || jest.fn(),
+        userWantsToContinueWithoutSaving: context?.userWantsToContinueWithoutSaving || false,
+        setUserWantsToContinueWithoutSaving:
+          context?.setUserWantsToContinueWithoutSaving || jest.fn(),
       }}
     >
       {subject}

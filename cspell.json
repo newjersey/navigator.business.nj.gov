@@ -243,7 +243,9 @@
     "Lobecker",
     "Sherron",
     "Geoscience",
-    "NGWA"
+    "NGWA",
+    "Stormwater",
+    "stormwater"
   ],
   "ignorePaths": [
     "node_modules/**",

@@ -80,6 +80,10 @@ export const renderPage = ({
       {
         showNeedsAccountModal: false,
         setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
+        showContinueWithoutSaving: false,
+        setShowContinueWithoutSaving: jest.fn(),
+        userWantsToContinueWithoutSaving: false,
+        setUserWantsToContinueWithoutSaving: jest.fn(),
       },
     ),
   );

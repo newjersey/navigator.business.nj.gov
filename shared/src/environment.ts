@@ -1,23 +1,41 @@
 export type EnvironmentData = {
-  waste?: WasteData;
-  land?: LandData;
-  air?: AirData;
+  questionnaireData?: QuestionnaireData;
+  submitted?: boolean;
 };
 
-export type MediaArea = keyof EnvironmentData;
+export type QuestionnaireData = {
+  air: AirData;
+  land: LandData;
+  waste: WasteData;
+  drinkingWater: DrinkingWaterData;
+  wasteWater: WasteWaterData;
+};
+
+export type MediaArea = keyof QuestionnaireData;
+
 export type QuestionnaireFieldIds =
-  | WasteQuestionnaireFieldIds
-  | LandQuestionnaireFieldIds
-  | AirQuestionnaireFieldIds;
+  | AirFieldIds
+  | LandFieldIds
+  | WasteFieldIds
+  | DrinkingWaterFieldIds
+  | WasteWaterFieldIds;
 export type Questionnaire = Record<QuestionnaireFieldIds, boolean>;
 export type QuestionnaireConfig = Record<QuestionnaireFieldIds, string>;
 
-export type WasteData = {
-  questionnaireData: WasteQuestionnaireData;
-  submitted: boolean;
-};
+export type AirFieldIds = "emitPollutants" | "emitEmissions" | "constructionActivities" | "noAir";
 
-export type WasteQuestionnaireFieldIds =
+export type AirData = Record<AirFieldIds, boolean>;
+
+export type LandFieldIds =
+  | "takeOverExistingBiz"
+  | "propertyAssessment"
+  | "constructionActivities"
+  | "siteImprovementWasteLands"
+  | "noLand";
+
+export type LandData = Record<LandFieldIds, boolean>;
+
+export type WasteFieldIds =
   | "transportWaste"
   | "hazardousMedicalWaste"
   | "compostWaste"
@@ -25,31 +43,72 @@ export type WasteQuestionnaireFieldIds =
   | "constructionDebris"
   | "noWaste";
 
-export type WasteQuestionnaireData = Record<WasteQuestionnaireFieldIds, boolean>;
+export type WasteData = Record<WasteFieldIds, boolean>;
 
-export type LandData = {
-  questionnaireData: LandQuestionnaireData;
-  submitted: boolean;
+export type DrinkingWaterFieldIds =
+  | "ownWell"
+  | "combinedWellCapacity"
+  | "wellDrilled"
+  | "potableWater"
+  | "noDrinkingWater";
+
+export type DrinkingWaterData = Record<DrinkingWaterFieldIds, boolean>;
+
+export type WasteWaterFieldIds =
+  | "sanitaryWaste"
+  | "industrialWaste"
+  | "localSewage"
+  | "septicSystem"
+  | "streamsRiversOrLakes"
+  | "needsTreatment"
+  | "planningConstruction"
+  | "stormWaterDischarge"
+  | "takeoverIndustrialStormWaterPermit"
+  | "noWasteWater";
+
+export type WasteWaterData = Record<WasteWaterFieldIds, boolean>;
+
+export const generateEmptyEnvironmentQuestionnaireData = (): QuestionnaireData => {
+  return {
+    air: {
+      emitPollutants: false,
+      emitEmissions: false,
+      constructionActivities: false,
+      noAir: false,
+    },
+    land: {
+      takeOverExistingBiz: false,
+      propertyAssessment: false,
+      constructionActivities: false,
+      siteImprovementWasteLands: false,
+      noLand: false,
+    },
+    waste: {
+      transportWaste: false,
+      hazardousMedicalWaste: false,
+      compostWaste: false,
+      treatProcessWaste: false,
+      constructionDebris: false,
+      noWaste: false,
+    },
+    drinkingWater: {
+      ownWell: false,
+      combinedWellCapacity: false,
+      wellDrilled: false,
+      potableWater: false,
+      noDrinkingWater: false,
+    },
+    wasteWater: {
+      sanitaryWaste: false,
+      industrialWaste: false,
+      localSewage: false,
+      septicSystem: false,
+      streamsRiversOrLakes: false,
+      needsTreatment: false,
+      planningConstruction: false,
+      stormWaterDischarge: false,
+      takeoverIndustrialStormWaterPermit: false,
+      noWasteWater: false,
+    },
+  };
 };
-
-export type LandQuestionnaireFieldIds =
-  | "takeOverExistingBiz"
-  | "propertyAssessment"
-  | "constructionActivities"
-  | "siteImprovementWasteLands"
-  | "noLand";
-
-export type LandQuestionnaireData = Record<LandQuestionnaireFieldIds, boolean>;
-
-export type AirData = {
-  questionnaireData?: AirQuestionnaireData;
-  submitted: boolean;
-};
-
-export type AirQuestionnaireFieldIds =
-  | "emitPollutants"
-  | "emitEmissions"
-  | "constructionActivities"
-  | "noAir";
-
-export type AirQuestionnaireData = Record<AirQuestionnaireFieldIds, boolean>;
