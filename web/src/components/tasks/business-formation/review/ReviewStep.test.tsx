@@ -217,16 +217,38 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
   });
 
-  it("displays agent number on review step", async () => {
-    await renderStep({}, { agentNumberOrManual: "NUMBER" });
-    expect(screen.getByTestId("agent-number")).toBeInTheDocument();
-    expect(screen.queryByTestId("agent-manual-entry")).not.toBeInTheDocument();
+  it("displays agent number on review step when agent type is professional service and show manual entry is false", async () => {
+    await renderStep({}, { agentType: "PROFESSIONAL_SERVICE", showManualEntry: false });
+    expect(
+      screen.getByRole("region", { name: "Professional service agent review" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("region", { name: "Manual agent entry review" }),
+    ).not.toBeInTheDocument();
   });
 
-  it("displays manually entered registered agent info on review step", async () => {
-    await renderStep({}, { agentNumberOrManual: "MANUAL_ENTRY" });
-    expect(screen.queryByTestId("agent-number")).not.toBeInTheDocument();
-    expect(screen.getByTestId("agent-manual-entry")).toBeInTheDocument();
+  it("displays manually entered registered agent info on review step when agent type is authorized rep", async () => {
+    await renderStep({}, { agentType: "AUTHORIZED_REP" });
+    expect(
+      screen.queryByRole("region", { name: "Professional service agent review" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Manual agent entry review" })).toBeInTheDocument();
+  });
+
+  it("displays manually entered registered agent info on review step when agent type is myself", async () => {
+    await renderStep({}, { agentType: "MYSELF" });
+    expect(
+      screen.queryByRole("region", { name: "Professional service agent review" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Manual agent entry review" })).toBeInTheDocument();
+  });
+
+  it("displays manually entered registered agent info on review step when agent type is professional service and show manual entry is true", async () => {
+    await renderStep({}, { agentType: "PROFESSIONAL_SERVICE", showManualEntry: true });
+    expect(
+      screen.queryByRole("region", { name: "Professional service agent review" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Manual agent entry review" })).toBeInTheDocument();
   });
 
   it("displays empty directors section within review step when legal type is corporation", async () => {
