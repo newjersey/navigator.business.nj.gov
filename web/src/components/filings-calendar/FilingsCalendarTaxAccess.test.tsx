@@ -34,6 +34,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -216,7 +217,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
   });
 
-  it("closes the success alert when the close button is clicked", async () => {
+  it("automatically closes the success alert after 7 seconds", async () => {
+    jest.useFakeTimers();
     mockApi.postTaxFilingsOnboarding.mockResolvedValue(
       modifyUserData(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
@@ -234,11 +236,11 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
     await screen.findByTestId("tax-success");
     expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
-    expect(screen.getByTestId("close-icon-button")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("close-icon-button"));
+    act(() => jest.advanceTimersByTime(7000));
     await waitFor(() => {
       expect(screen.queryByText(Config.taxCalendar.snackbarSuccessHeader)).not.toBeInTheDocument();
     });
+    jest.useRealTimers();
   });
 
   describe("different taxFiling states and update behavior", () => {
