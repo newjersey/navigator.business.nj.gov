@@ -18,9 +18,16 @@ summaryDescriptionMd: >-
 industryId:
   - commercial-construction
 ---
-Application Requirements
-Education/Training
-Passing scores on all National Groundwater Association (NGWA) technical exams 
-Passing score on the NJ regulation exams for your license type 
-Copy of certification exam results 
-Education history
+## Application Requirements
+
+#### Education/Training
+
+* Passing scores on all National Groundwater Association (NGWA) technical exams 
+* Passing score on the NJ regulation exams for your license type 
+* Copy of certification exam results 
+* Education history
+
+Schedule your exam on the [NGWA website](https://test-takers.psiexams.com/ngwa).
+
+#### Personal Documents
+- Last four numbers of your Social Security number (SSN)  
