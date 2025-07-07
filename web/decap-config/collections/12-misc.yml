@@ -606,6 +606,7 @@ collections:
               - { label: Confirm Email Label, name: confirmEmailFieldLabel, widget: string }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Close Button Text, name: closeButtonText, widget: string }
+              - { label: Continue without Saving, name: continueWithoutSaving, widget: string }
               - { label: Error - Full name is required, name: errorTextFullName, widget: string }
               - {
                   label: Error - Full name contains special characters,
