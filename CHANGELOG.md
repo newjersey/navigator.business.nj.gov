@@ -1,3 +1,26 @@
+# [2025.14.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.13.2...v2025.14.0) (2025-07-08)
+
+
+### Bug Fixes
+
+* [AB[#114979](https://github.com/newjersey/navigator.business.nj.gov/issues/114979)] prevent 'details?.toJSON is not a function' error ([5d2402d](https://github.com/newjersey/navigator.business.nj.gov/commit/5d2402d514c0cbe34c24b3356c9497bd8076ad61))
+* [AB[#14383](https://github.com/newjersey/navigator.business.nj.gov/issues/14383)] fix accordion date of formation bug ([401f04f](https://github.com/newjersey/navigator.business.nj.gov/commit/401f04f74edd330f5d5eed16ad9f625416b5bba0))
+* [AB[#14384](https://github.com/newjersey/navigator.business.nj.gov/issues/14384)] Change error placement for personalize my tasks tab ([2cdb460](https://github.com/newjersey/navigator.business.nj.gov/commit/2cdb46053c05d0398fc3f60e065870eca5b36482))
+* [AB[#14796](https://github.com/newjersey/navigator.business.nj.gov/issues/14796)] Change copy from Personalize My Tasks to Personalize My Experience ([29c5968](https://github.com/newjersey/navigator.business.nj.gov/commit/29c59684bdfff0c0152cfd891ae8b6d029868cb4))
+* fix failing reseller test ([d93c6fc](https://github.com/newjersey/navigator.business.nj.gov/commit/d93c6fcdc9365e7938afee76d3419bb3b023c730))
+
+
+### Features
+
+* [#AB14918] [#AB12944] refactor govt contracting anytime action and remove alerts ([8d465bf](https://github.com/newjersey/navigator.business.nj.gov/commit/8d465bf643977cb9d05297071b94ef4951bc0b11)), closes [#AB14918](https://github.com/newjersey/navigator.business.nj.gov/issues/AB14918) [#AB12944](https://github.com/newjersey/navigator.business.nj.gov/issues/AB12944)
+* [#AB15063] manage business vehicle cta updated to use primary button ([1f712b3](https://github.com/newjersey/navigator.business.nj.gov/commit/1f712b393d327fbc95a54d3bc10ac595f8d5e18e)), closes [#AB15063](https://github.com/newjersey/navigator.business.nj.gov/issues/AB15063)
+* [AB[#14132](https://github.com/newjersey/navigator.business.nj.gov/issues/14132)] add manage business vehicles task page ([ec4f64a](https://github.com/newjersey/navigator.business.nj.gov/commit/ec4f64a9cf67bec9309914135dd82efbfbd86c16))
+* [AB[#14383](https://github.com/newjersey/navigator.business.nj.gov/issues/14383)] Implement Add Your Annual Report Deadline ([9dd1fe3](https://github.com/newjersey/navigator.business.nj.gov/commit/9dd1fe3ee91610c4a29a4c1e72436e347d9f9aec))
+* [AB[#14384](https://github.com/newjersey/navigator.business.nj.gov/issues/14384)] Add certifications and funding accordion details ([9f89c53](https://github.com/newjersey/navigator.business.nj.gov/commit/9f89c5352bad7e78caf54e13d1ada453dacc7160))
+* [AB[#14869](https://github.com/newjersey/navigator.business.nj.gov/issues/14869)] Add links to CMS search results ([ae2115e](https://github.com/newjersey/navigator.business.nj.gov/commit/ae2115e84fdee6700abe55ad9d088207230e0b23))
+* [AB[#14870](https://github.com/newjersey/navigator.business.nj.gov/issues/14870)] add loading spinner to tax clearance ([1b9ecd0](https://github.com/newjersey/navigator.business.nj.gov/commit/1b9ecd04a3cb329fbf3404ebe5f61f5052194781))
+* [AB[#14933](https://github.com/newjersey/navigator.business.nj.gov/issues/14933)] unlink taxId function in Dev ([a3bb10b](https://github.com/newjersey/navigator.business.nj.gov/commit/a3bb10ba689770abbc3492b3669ac60d8acd07fb))
+
 ## [2025.13.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.13.1...v2025.13.2) (2025-06-25)
 
 
