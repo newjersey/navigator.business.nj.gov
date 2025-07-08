@@ -5,7 +5,7 @@ const sendEvent = (event) => {
 
 const userUpdate = (user_update) => {
   window.userData = { ...window.userData, ...user_update };
-  sendEvent({ event: "user_update", ...window.userData });
+  sendEvent({ event: "user_update_revised", ...window.userData });
 };
 
 let analyticsContext = { calendar_view: undefined };

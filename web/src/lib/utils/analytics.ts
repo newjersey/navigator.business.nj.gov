@@ -354,7 +354,8 @@ class GTMTracker {
           return acc;
         },
         {
-          event: eventName,
+          event: "analytics_event",
+          event_category: eventName,
           hostname: location.hostname,
           on_site_section,
           on_task_id,

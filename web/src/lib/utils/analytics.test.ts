@@ -39,7 +39,8 @@ describe("analytics", () => {
         });
 
         expect(mockAnalyticsBase.sendEvent).toHaveBeenNthCalledWith(1, {
-          event: "form_submits",
+          event_category: "form_submits",
+          event: "analytics_event",
           form_name: "industry_essential_questions",
           hostname: "localhost",
           on_site_section: "landing_page",
@@ -48,7 +49,8 @@ describe("analytics", () => {
         });
 
         expect(mockAnalyticsBase.sendEvent).toHaveBeenNthCalledWith(2, {
-          event: "form_submits",
+          event_category: "form_submits",
+          event: "analytics_event",
           form_name: "industry_essential_questions",
           hostname: "localhost",
           on_site_section: "landing_page",
@@ -63,7 +65,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "landing_page",
         });
@@ -73,7 +76,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/onboarding";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "onboarding_screen",
         });
@@ -83,7 +87,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/dashboard";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "dashboard_screen",
         });
@@ -93,7 +98,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/profile";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "profile_screen",
         });
@@ -103,7 +109,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/tasks/evaluate-your-location";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "generic_task_screen",
           on_task_id: "evaluate-your-location",
@@ -114,7 +121,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/tasks/form-business-entity";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "business_formation_task",
           on_task_id: "form-business-entity",
@@ -125,7 +133,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/tasks/conditional-permit-cannabis";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "cannabis_task",
           on_task_id: "conditional-permit-cannabis",
@@ -136,7 +145,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/filings/annual-report";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "generic_filing_screen",
         });
@@ -146,7 +156,8 @@ describe("analytics", () => {
         window.location.href = "https://localhost/tasks/conditional-permit-cannabis?foo=bar";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
-          event: "account_clicks",
+          event_category: "account_clicks",
+          event: "analytics_event",
           hostname: "localhost",
           on_site_section: "cannabis_task",
           on_task_id: "conditional-permit-cannabis",

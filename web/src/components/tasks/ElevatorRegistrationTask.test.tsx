@@ -57,7 +57,8 @@ describe("<ElevatorRegistrationTask />", () => {
 
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
-          event: "outbound_link_clicks",
+          event: "analytics_event",
+          event_category: "outbound_link_clicks",
           legacy_event_category: "elevator_registration_button_click_register",
           legacy_event_action: "click",
         }),
@@ -76,7 +77,8 @@ describe("<ElevatorRegistrationTask />", () => {
       fireEvent.click(screen.getByTestId("check-status-tab"));
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
-          event: "task_tab_clicked",
+          event: "analytics_event",
+          event_category: "task_tab_clicked",
           legacy_event_category: "check_my_elevator_application_status_tab_click",
           legacy_event_action: "click",
         }),
@@ -92,7 +94,8 @@ describe("<ElevatorRegistrationTask />", () => {
       fireEvent.click(screen.getByTestId("cta-secondary"));
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
-          event: "task_tab_continue_button_clicks",
+          event: "analytics_event",
+          event_category: "task_tab_continue_button_clicks",
           legacy_event_category: "elevator_registration_button_click_update",
           legacy_event_action: "click",
         }),
@@ -111,14 +114,16 @@ describe("<ElevatorRegistrationTask />", () => {
 
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
-          event: "form_submits",
+          event: "analytics_event",
+          event_category: "form_submits",
           legacy_event_category: "elevator_registration_form_submission",
           legacy_event_action: "submit",
         }),
       );
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
-          event: "form_submits",
+          event: "analytics_event",
+          event_category: "form_submits",
           legacy_event_category: "elevator_registration_form_submission_failed",
           legacy_event_action: "submit",
         }),
@@ -145,7 +150,8 @@ describe("<ElevatorRegistrationTask />", () => {
 
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
-          event: "form_submits",
+          event: "analytics_event",
+          event_category: "form_submits",
           legacy_event_category: "elevator_registration_form_submission",
           legacy_event_action: "submit",
         }),
