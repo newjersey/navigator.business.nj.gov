@@ -41,6 +41,7 @@ const migrate_v166Business_to_v167Business = (business: v166Business): v167Busin
 
   return {
     ...business,
+    version: 167,
     formationData: {
       ...business.formationData,
       formationFormData: {
