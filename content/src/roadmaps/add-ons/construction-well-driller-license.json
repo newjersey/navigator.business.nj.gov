@@ -1,0 +1,12 @@
+{
+  "id": "construction-well-driller-license",
+  "displayname": "construction-well-driller-license",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "licenseTask": "well-driller-license",
+      "required": true,
+      "weight": 50
+    }
+  ]
+}
