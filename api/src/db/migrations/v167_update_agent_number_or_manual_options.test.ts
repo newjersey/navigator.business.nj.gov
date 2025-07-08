@@ -29,6 +29,8 @@ describe("migrate_v166_to_v167", () => {
     });
 
     const v167UserData = migrate_v166_to_v167(v166UserData);
+    expect(v167UserData.version).toBe(167);
+    expect(v167UserData.businesses[id].version).toBe(167);
     expect(v167UserData.businesses[id].formationData.formationFormData.agentType).toBe(
       "PROFESSIONAL_SERVICE",
     );
@@ -56,6 +58,8 @@ describe("migrate_v166_to_v167", () => {
     });
 
     const v167UserData = migrate_v166_to_v167(v166UserData);
+    expect(v167UserData.version).toBe(167);
+    expect(v167UserData.businesses[id].version).toBe(167);
     expect(v167UserData.businesses[id].formationData.formationFormData.agentType).toBe("MYSELF");
   });
 });
