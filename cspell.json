@@ -241,7 +241,9 @@
     "TWBR",
     "NJEMS",
     "Lobecker",
-    "Sherron"
+    "Sherron",
+    "Geoscience",
+    "NGWA"
   ],
   "ignorePaths": [
     "node_modules/**",
