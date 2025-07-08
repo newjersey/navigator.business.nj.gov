@@ -204,6 +204,11 @@
       "addOn": "vehicle-cpcn",
       "questionText": "“Will your business provide intrastate transportation of passengers to and from **casinos in Atlantic city,** or **in exchange for compensation** from passengers or groups?”",
       "id": "mvc-cpcn"
+    },
+    {
+      "id": "well-driller",
+      "questionText": "Do you plan to install, repair, or modify wells for your customer’s business?\n",
+      "addOn": "construction-well-driller-license"
     }
   ]
 }
