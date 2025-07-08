@@ -37,7 +37,6 @@ module.exports = withBundleAnalyzer({
     DISABLE_GTM: process.env.DISABLE_GTM,
     OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL,
     FEATURE_ABC_ETP_APPLICATION: process.env.FEATURE_ABC_ETP_APPLICATION ?? "false",
-    FEATURE_SHOW_PERSONALIZE_TASK_TAB: process.env.FEATURE_SHOW_PERSONALIZE_TASK_TAB ?? "false",
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
