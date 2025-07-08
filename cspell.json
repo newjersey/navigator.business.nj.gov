@@ -239,7 +239,11 @@
     "reauthorizations",
     "NJDA",
     "TWBR",
-    "NJEMS"
+    "NJEMS",
+    "Lobecker",
+    "Sherron",
+    "Geoscience",
+    "NGWA"
   ],
   "ignorePaths": [
     "node_modules/**",

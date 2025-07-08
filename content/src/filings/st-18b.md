@@ -14,7 +14,7 @@ frequency: Annually
 additionalInfo: null
 agency: New Jersey Division of Taxation
 id: st-18b
-callToActionLink: https://www.nj.gov/treasury/taxation/su_10.shtml
+callToActionLink: https://taxportal.nj.gov/
 callToActionText: File and Pay
 ---
 You are required to complete the form if your business didn’t sell taxable goods or services or lease taxable property to others during the tax year, or averaged less than $2,000 in Use Tax liability in the last 3 years and owes Use Tax for the current year.

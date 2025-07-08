@@ -63,6 +63,12 @@
     {
       "step": 3,
       "weight": 15,
+      "task": "trucking-ifta",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 16,
       "task": "mvc-registration-task",
       "required": true
     }
