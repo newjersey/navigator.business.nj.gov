@@ -810,7 +810,6 @@ describe("profile - shared", () => {
       const originalEnvironment = process.env;
       process.env = {
         ...originalEnvironment,
-        FEATURE_SHOW_PERSONALIZE_TASK_TAB: "true",
       };
     });
 
