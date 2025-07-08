@@ -46,8 +46,7 @@
   "name": "Construction",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-irp",
-    "well-driller"
+    "business-vehicle-irp"
   ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
