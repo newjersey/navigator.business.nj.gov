@@ -43,7 +43,7 @@ agencyAdditionalContext: Business Licensing Services Bureau
 
 You must submit copies of the following:
 
-* `Federal Taxpayer Identification Number (FEIN)|federal-tax-id`
+* `Federal Taxpayer Identification Number (EIN)|ein`
 * `Certificate of Formation|certificate-formation`
 * `Certificate of Authority|certificate-authority-sales-tax`
 * `Certificate of Liability Insurance|liability-insurance`, in the amount of $100,000 to $250,000 for bodily injury, and $25,000 for property 
