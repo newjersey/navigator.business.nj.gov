@@ -60,7 +60,7 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 
 You will need:
 
-- `Federal Tax ID Number (FEIN)|federal-tax-id`
+- `Federal Tax ID Number (EIN)|ein`
 - Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
 - [Application for Vehicle Registration (Form BA-49](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)
 - Proof of Identity, such as a valid driver’s license or other government-issued photo identification
