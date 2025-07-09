@@ -13,6 +13,7 @@ export interface Props
   secondaryLabel?: string;
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";
   readOnly?: boolean;
+  helperText?: string;
 }
 
 export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
@@ -40,6 +41,7 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
         </strong>
       )}
       {props.secondaryLabel && <span className="margin-left-1">{props.secondaryLabel}</span>}
+      {props.helperText && <div className="margin-top-05">{props.helperText}</div>}
       <GenericTextField
         inputWidth={"full"}
         value={state.formationFormData[props.fieldName]}
