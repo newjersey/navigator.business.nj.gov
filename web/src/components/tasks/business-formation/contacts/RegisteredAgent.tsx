@@ -299,9 +299,7 @@ export const RegisteredAgent = (): ReactElement => {
         {Config.formation.registeredAgent.sectionDescription}
       </Content>
       <div id="registeredAgent">
-        <Heading level={4} className="margin-bottom-2">
-          {Config.formation.registeredAgent.whoToListSubheading}
-        </Heading>
+        <div className="text-bold">{Config.formation.registeredAgent.whoToListSubheading}</div>
         <FormControl fullWidth>
           <RadioGroup
             aria-label="Registered Agent"
@@ -363,6 +361,7 @@ export const RegisteredAgent = (): ReactElement => {
                     validationText={Config.formation.fields.agentNumber.error}
                     errorBarType="ALWAYS"
                     disabled={state.formationFormData.showManualEntry}
+                    helperText={Config.formation.fields.agentNumber.helperText}
                   />
                 </FormationField>
               </div>
