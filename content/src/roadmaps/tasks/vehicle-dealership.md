@@ -39,7 +39,7 @@ agencyAdditionalContext: Business Licensing Services Bureau
 
 ## Application Requirements
 
-#### Required Documentation
+### Required Documentation
 
 You must submit copies of the following:
 
@@ -54,7 +54,7 @@ You must submit copies of the following:
 * Phone bill or phone installation order with your business name and addresses listed on the document
 * Site plans or photographs that clearly show the complete premises of where you plan to conduct business
 
-#### Required Forms
+### Required Forms
 
 The following are included in each application package linked below, and must be completed by all applicants:
 
@@ -65,7 +65,7 @@ The following are included in each application package linked below, and must be
 * Authorized Signatories Form BLS-20
 * Municipal Approval Certificate for Business License Form BLS-162, which must be signed and stamped by the municipality.
 
-#### Other Requirements
+### Other Requirements
 
 Depending on your business type or dealership license, you may also need:
 
