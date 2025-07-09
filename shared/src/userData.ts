@@ -1,4 +1,5 @@
 import { BusinessUser } from "./businessUser";
+import { CigaretteLicenseData } from "./cigaretteLicense";
 import { createBusinessId } from "./domain-logic/createBusinessId";
 import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
@@ -31,6 +32,7 @@ export interface Business {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly taxClearanceCertificateData: TaxClearanceCertificateData | undefined;
+  readonly cigaretteLicenseData: CigaretteLicenseData | undefined;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
   readonly xrayRegistrationData: XrayData | undefined;
@@ -40,7 +42,7 @@ export interface Business {
   readonly userId: string;
 }
 
-export const CURRENT_VERSION = 167;
+export const CURRENT_VERSION = 168;
 
 export const createEmptyBusiness = ({
   userId,
@@ -77,6 +79,7 @@ export const createEmptyBusiness = ({
       filings: [],
     },
     taxClearanceCertificateData: undefined,
+    cigaretteLicenseData: undefined,
     formationData: {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
