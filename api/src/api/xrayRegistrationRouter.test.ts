@@ -2,6 +2,7 @@ import { getSignedInUserId } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import type { FacilityDetails } from "@businessnjgovnavigator/shared";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import {
   generateBusiness,
   generateUserDataForBusiness,
@@ -43,7 +44,15 @@ describe("xrayRegistrationRouter", () => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(xrayRegistrationRouterFactory(stubUpdateXrayRegistration, stubDynamoDataClient));
+    app.use(
+      xrayRegistrationRouterFactory(
+        stubUpdateXrayRegistration,
+        stubDynamoDataClient,
+        DummyLogWriter,
+      ),
+    );
+    jest.spyOn(DummyLogWriter, "LogInfo").mockImplementation(() => {});
+    jest.spyOn(DummyLogWriter, "LogError").mockImplementation(() => {});
   });
 
   afterAll(async () => {
@@ -76,6 +85,9 @@ describe("xrayRegistrationRouter", () => {
     expect(stubDynamoDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.status).toEqual(StatusCodes.OK);
     expect(response.body).toEqual(userData);
+    expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+      expect.stringContaining("successfully updated x-ray registration"),
+    );
   });
 
   it("returns INTERNAL SERVER ERROR update xray registration fails", async () => {
@@ -89,5 +101,8 @@ describe("xrayRegistrationRouter", () => {
     const response = await request(app).post(`/xray-registration`).send(facilityDetails);
     expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
     expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+    expect(DummyLogWriter.LogError).toHaveBeenCalledWith(
+      expect.stringContaining("Failed to update x-ray registration:"),
+    );
   });
 });

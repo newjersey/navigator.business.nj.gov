@@ -2,6 +2,7 @@
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { getSignedInUserId } from "@api/userRouter";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import {
   generateBusiness,
   generateLicenseData,
@@ -44,7 +45,9 @@ describe("licenseStatusRouter", () => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(licenseStatusRouterFactory(stubUpdateLicenseStatus, stubDynamoDataClient));
+    app.use(
+      licenseStatusRouterFactory(stubUpdateLicenseStatus, stubDynamoDataClient, DummyLogWriter),
+    );
   });
 
   afterAll(async () => {

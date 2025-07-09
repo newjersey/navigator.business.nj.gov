@@ -2,6 +2,7 @@
 import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { CryptoClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { Express } from "express";
 import request from "supertest";
 
@@ -23,7 +24,7 @@ describe("decryptionRouter", () => {
     };
 
     app = setupExpress(false);
-    app.use(decryptionRouterFactory(stubCryptoClient));
+    app.use(decryptionRouterFactory(stubCryptoClient, DummyLogWriter));
   });
 
   afterAll(async () => {
