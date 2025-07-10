@@ -321,6 +321,7 @@ export const generateAnytimeActionTask = (
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
+    type: "task",
     category: [
       { categoryName: `Category ${randomInt()}`, categoryId: `something-${randomInt()}-something` },
     ],

@@ -176,6 +176,7 @@ export interface AnytimeActionTask extends AnytimeAction {
   contentMd: string;
   description?: string;
   searchMetaDataMatch?: string;
+  type: string;
 }
 
 export interface AnytimeActionCategory {

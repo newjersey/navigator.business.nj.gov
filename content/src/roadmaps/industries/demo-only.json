@@ -21,7 +21,10 @@
     }
   ],
   "name": "Demo Only",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "demo-only"
+  ],
   "displayname": "Demo Only",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

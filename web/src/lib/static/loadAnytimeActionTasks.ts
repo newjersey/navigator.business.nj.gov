@@ -59,7 +59,7 @@ export const loadAnytimeActionTaskByUrlSlug = (
   return loadAnytimeActionTasksByFileName(matchingFileName, isTest);
 };
 
-const loadAnytimeActionTasksByFileName = (
+export const loadAnytimeActionTasksByFileName = (
   fileName: string,
   isTest: boolean = false,
 ): AnytimeActionTask => {

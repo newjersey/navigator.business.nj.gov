@@ -308,12 +308,28 @@ collections:
                 widget: markdown
               - label: Add On
                 name: addOn
+                required: false
                 widget: "relation"
+                default: []
                 collection: "addons"
-                search_fields: ["{{displayname}}"]
+                search_fields: [displayname]
                 value_field: "{{fields.id}}"
-                display_fields: ["{{displayname}}"]
-                options_length: 500
+                display_fields: [displayname]
+                options_length: 9999
+              - label: Anytime Actions Tasks
+                name: anytimeActions
+                hint: Anytime Actions related to reinstatements are not included in this dropdown
+                required: false
+                default: []
+                widget: relation
+                collection: anytime-action-tasks
+                multiple: true
+                search_fields:
+                  - name
+                value_field: "{{fields.id}}"
+                display_fields:
+                  - name
+                options_length: 9999
 
   - name: "settings"
     label: "Roadmaps - Settings"
