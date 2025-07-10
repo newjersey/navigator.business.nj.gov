@@ -20,3 +20,22 @@ export const getFileNameByUrlSlug = (currPath: string, urlSlug: string): string 
 
   return matchingFileName;
 };
+
+// Function to load JSON files from a directory
+export const loadJsonFiles = (directoryPath: string): Record<string, unknown>[] => {
+  const jsonFiles: Record<string, unknown>[] = [];
+
+  const files = fs.readdirSync(directoryPath);
+
+  for (const file of files) {
+    const filePath = path.join(directoryPath, file);
+
+    if (path.extname(file) === ".json") {
+      const fileContent = fs.readFileSync(filePath, "utf8");
+      const jsonData = JSON.parse(fileContent);
+      jsonFiles.push(jsonData);
+    }
+  }
+
+  return jsonFiles;
+};
