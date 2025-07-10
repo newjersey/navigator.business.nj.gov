@@ -2568,7 +2568,22 @@ collections:
                   - { label: Success Alert - Header, name: successTextHeader, widget: string }
                   - { label: Success Alert - Body, name: successTextBody, widget: string }
                   - { label: Error Alert - Header, name: errorTextHeader, widget: string }
+                  - {
+                      label: Error Alert - Default Text,
+                      name: errorDefaultTextBody,
+                      widget: string,
+                    }
                   - { label: Error Alert - Body, name: errorTextBody, widget: string }
+                  - {
+                      label: Error Alert Multiple Fields Text,
+                      name: errorAlertMultipleFields,
+                      widget: string,
+                    }
+                  - {
+                      label: Error Alert Single Field Text,
+                      name: errorErrorAlertOneField,
+                      widget: string,
+                    }
                   - {
                       label: Essential Question Alert - Body,
                       name: essentialQuestionAlertText,
@@ -2662,17 +2677,6 @@ collections:
                       widget: markdown,
                     }
                   - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
-                  - { label: Profile Error Alert Title, name: profileErrorAlert, widget: string }
-                  - {
-                      label: Profile Error Alert Single Field Text,
-                      name: profileErrorAlertOneField,
-                      widget: string,
-                    }
-                  - {
-                      label: Profile Error Multiple Fields Text,
-                      name: profileErrorAlertMultipleFields,
-                      widget: string,
-                    }
 
   - label: "Fundings Onboarding Page"
     name: "business-fundings-onboarding-page"
