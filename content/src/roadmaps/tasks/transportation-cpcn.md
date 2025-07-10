@@ -27,7 +27,7 @@ summaryDescriptionMd: >-
 
   * Taxicabs
 
-  * Limousines
+  * Limousines (in certain cases)
 
   * School buses
 
