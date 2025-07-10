@@ -8,6 +8,7 @@ import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
+import { getAnytimeActionsFromNonEssentialQuestions } from "@/components/dashboard/anytimeActionsBuilder";
 import {
   getPersonalizeTaskButtonTabValue,
   getRoadmapHeadingText,
@@ -71,6 +72,10 @@ export const Dashboard = (props: Props): ReactElement => {
     business?.profileData.homeBasedBusiness === undefined &&
     operatingPhase.displayHomeBasedPrompt;
 
+  const anytimeActionTasksFromNonEssentialQuestions = getAnytimeActionsFromNonEssentialQuestions(
+    business?.profileData,
+    props.anytimeActionTasks,
+  );
   return (
     <>
       {isDesktop ? (
@@ -99,6 +104,9 @@ export const Dashboard = (props: Props): ReactElement => {
                     {operatingPhase.displayAnytimeActions && (
                       <AnytimeActionDropdown
                         anytimeActionTasks={props.anytimeActionTasks}
+                        anytimeActionTasksFromNonEssentialQuestions={
+                          anytimeActionTasksFromNonEssentialQuestions
+                        }
                         anytimeActionLicenseReinstatements={
                           props.anytimeActionLicenseReinstatements
                         }
@@ -162,6 +170,9 @@ export const Dashboard = (props: Props): ReactElement => {
                   {operatingPhase.displayAnytimeActions && (
                     <AnytimeActionDropdown
                       anytimeActionTasks={props.anytimeActionTasks}
+                      anytimeActionTasksFromNonEssentialQuestions={
+                        anytimeActionTasksFromNonEssentialQuestions
+                      }
                       anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                     />
                   )}

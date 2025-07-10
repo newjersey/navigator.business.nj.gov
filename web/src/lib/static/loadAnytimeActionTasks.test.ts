@@ -82,6 +82,7 @@ describe("loadAnytimeActionTasks", () => {
             callToActionLink: "CallToActionLink1",
             callToActionText: "CallToActionText1",
             form: "Form1",
+            type: "task",
             category: [
               {
                 categoryId: "test-cat",
@@ -98,6 +99,7 @@ describe("loadAnytimeActionTasks", () => {
             callToActionLink: "CallToActionLink2",
             callToActionText: "CallToActionText2",
             form: "Form2",
+            type: "task",
             category: [
               {
                 categoryId: "test-cat",
@@ -166,6 +168,7 @@ describe("loadAnytimeActionTasks", () => {
         callToActionLink: "CallToActionLink2",
         callToActionText: "CallToActionText2",
         form: "Form2",
+        type: "task",
         category: [
           {
             categoryId: "test-cat",
