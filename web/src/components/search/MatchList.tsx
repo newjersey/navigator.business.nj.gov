@@ -1,4 +1,5 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { UsagesList } from "@/components/search/UsagesList";
 import { Match } from "@/lib/search/typesForSearch";
 import { ReactElement, useEffect, useState } from "react";
 interface Props {
@@ -9,11 +10,11 @@ interface Props {
 export const MatchList = (props: Props): ReactElement => {
   const COLLAPSED_LEN = 5;
 
-  const [expanded, setExpanded] = useState<boolean>(false);
+  const [expandedMatches, setExpandedMatches] = useState<boolean>(false);
   const collapsedMatches = props.matches.slice(0, COLLAPSED_LEN);
 
   useEffect(() => {
-    setExpanded(false);
+    setExpandedMatches(false);
   }, [props.matches]);
 
   if (props.matches.length === 0) {
@@ -21,7 +22,7 @@ export const MatchList = (props: Props): ReactElement => {
   }
 
   const toggleExpanded = (): void => {
-    setExpanded((prev) => !prev);
+    setExpandedMatches((prev) => !prev);
   };
 
   return (
@@ -31,28 +32,42 @@ export const MatchList = (props: Props): ReactElement => {
         &nbsp;({props.matches.length})
       </span>
       <ul>
-        {(expanded ? props.matches : collapsedMatches).map((match) => (
+        {(expandedMatches ? props.matches : collapsedMatches).map((match) => (
           <li key={match.filename}>
-            <div>
-              {match.cmsCollectionName && (
-                <a
-                  href={`/mgmt/cms#/collections/${match.cmsCollectionName}/entries/${match.filename}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <b>{match.displayTitle || match.filename}</b>
-                </a>
+            {match.cmsCollectionName && (
+              <a
+                href={`/mgmt/cms#/collections/${match.cmsCollectionName}/entries/${match.filename}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <b>{match.displayTitle || match.filename}</b>
+              </a>
+            )}
+            <ul>
+              <li>
+                Snipet(s):
+                <ul>
+                  {match.snippets.map((snippet, i) => (
+                    <li key={i}>{snippet}</li>
+                  ))}
+                </ul>
+              </li>
+
+              {match.additionalUsageLocations !== undefined && (
+                <li>
+                  Usage:
+                  <ul>
+                    <UsagesList match={match} />
+                  </ul>
+                </li>
               )}
-            </div>
-            {match.snippets.map((snippet, i) => (
-              <div key={i}>{snippet}</div>
-            ))}
+            </ul>
           </li>
         ))}
       </ul>
       {collapsedMatches.length < props.matches.length && (
         <UnStyledButton onClick={toggleExpanded} className="margin-left-2">
-          {expanded ? "Collapse" : "See all"}
+          {expandedMatches ? "Collapse" : "See all"}
         </UnStyledButton>
       )}
     </div>
