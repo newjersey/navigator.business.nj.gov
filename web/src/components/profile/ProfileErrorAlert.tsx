@@ -1,8 +1,8 @@
 import { Alert } from "@/components/njwds-extended/Alert";
+import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
-import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement, RefObject } from "react";
 
 interface Props {
@@ -11,9 +11,8 @@ interface Props {
 }
 
 export const ProfileErrorAlert = (props: Props): ReactElement | null => {
-  const { Config } = useConfig();
-
   const displayProfileErrorAlert = (): boolean => props.fieldErrors.length > 0;
+  const { Config } = useConfig();
 
   const getLabel = (field: string): string => {
     // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
@@ -48,20 +47,11 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
     });
   };
 
-  const profileErrorAlertText = (): string =>
-    errorFieldsIds().length === 1
-      ? templateEval(Config.profileDefaults.default.profileErrorAlert, {
-          fieldText: Config.profileDefaults.default.profileErrorAlertOneField,
-        })
-      : templateEval(Config.profileDefaults.default.profileErrorAlert, {
-          fieldText: Config.profileDefaults.default.profileErrorAlertMultipleFields,
-        });
-
   if (!displayProfileErrorAlert()) return null;
 
   return (
     <Alert variant="error" dataTestid={"profile-error-alert"} ref={props.profileAlertRef}>
-      <div>{profileErrorAlertText()}</div>
+      <div>{getProfileErrorAlertText(errorFieldsIds().length)}</div>
       <ul>
         {errorFieldsIds().map((id) => (
           <li key={id}>{getLabel(id)}</li>

@@ -30,6 +30,7 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
+import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { ProfileAddress } from "@/components/profile/ProfileAddress";
 import { displayAltHomeBasedBusinessDescription } from "@/components/profile/profileDisplayLogicHelpers";
@@ -395,7 +396,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
         {hasErrors && (
           <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
-            {Config.profileDefaults.default.errorTextBody}
+            {getProfileErrorAlertText(getInvalidFieldIds().length)}
           </Alert>
         )}
         <ProfileField fieldName="taxId" noLabel>
@@ -473,7 +474,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
         {hasErrors && (
           <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
-            {Config.profileDefaults.default.errorTextBody}
+            {getProfileErrorAlertText(getInvalidFieldIds().length)}
           </Alert>
         )}
         <ProfileField fieldName="taxId" noLabel>
@@ -625,7 +626,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
         {hasErrors && (
           <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
-            {Config.profileDefaults.default.errorTextBody}
+            {getProfileErrorAlertText(getInvalidFieldIds().length)}
           </Alert>
         )}
         <ProfileField fieldName="naicsCode" noLabel>
@@ -778,7 +779,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
         {hasErrors && (
           <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
-            {Config.profileDefaults.default.errorTextBody}
+            {getProfileErrorAlertText(getInvalidFieldIds().length)}
           </Alert>
         )}
         {business?.profileData.naicsCode && (
@@ -871,7 +872,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
         {hasErrors && (
           <Alert dataTestid={"profile-header-inline-alert"} variant={"error"} ref={profileAlertRef}>
-            {Config.profileDefaults.default.errorTextBody}
+            {getProfileErrorAlertText(getInvalidFieldIds().length)}
           </Alert>
         )}
         <ProfileField fieldName="naicsCode" noLabel>

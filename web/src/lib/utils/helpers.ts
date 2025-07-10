@@ -204,7 +204,7 @@ export const OnboardingStatusLookup = (
       variant: "success",
     },
     ERROR: {
-      body: config.profileDefaults.default.errorTextBody,
+      body: config.profileDefaults.default.errorDefaultTextBody,
       header: config.profileDefaults.default.errorTextHeader,
       variant: "error",
     },
