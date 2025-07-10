@@ -9,8 +9,8 @@ describe("<ProfileErrorAlert/>", () => {
   it("displays single field text in header if there is only one error", () => {
     render(<ProfileErrorAlert fieldErrors={["industryId"]} />);
     const profileAlert = screen.getByTestId("profile-error-alert");
-    const headerText = templateEval(Config.profileDefaults.default.profileErrorAlert, {
-      fieldText: Config.profileDefaults.default.profileErrorAlertOneField,
+    const headerText = templateEval(Config.profileDefaults.default.errorTextBody, {
+      fieldText: Config.profileDefaults.default.errorErrorAlertOneField,
     });
     expect(within(profileAlert).getByText(headerText)).toBeInTheDocument();
   });
@@ -18,8 +18,8 @@ describe("<ProfileErrorAlert/>", () => {
   it("displays multiple fields text in header if there is only one error", () => {
     render(<ProfileErrorAlert fieldErrors={["industryId", "sectorId"]} />);
     const profileAlert = screen.getByTestId("profile-error-alert");
-    const headerText = templateEval(Config.profileDefaults.default.profileErrorAlert, {
-      fieldText: Config.profileDefaults.default.profileErrorAlertMultipleFields,
+    const headerText = templateEval(Config.profileDefaults.default.errorTextBody, {
+      fieldText: Config.profileDefaults.default.errorAlertMultipleFields,
     });
     expect(within(profileAlert).getByText(headerText)).toBeInTheDocument();
   });
