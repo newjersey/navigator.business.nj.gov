@@ -1,9 +1,19 @@
+import { IndustryRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
+import { AddAddOnUsage, AddIndustryUsage, AddTaskDependencyUsage } from "@/lib/search/usageHelpers";
 import { Task } from "@/lib/types/types";
+
+import { Industry } from "@businessnjgovnavigator/shared/industry";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 
-export const searchTasks = (tasks: Task[], term: string, cmsCollectionName: string): Match[] => {
+export const searchTasks = (
+  tasks: Task[],
+  term: string,
+  cmsCollectionName: string,
+  industries: Industry[],
+  addOns: IndustryRoadmap[],
+): Match[] => {
   const matches: Match[] = [];
 
   for (const task of tasks) {
@@ -43,6 +53,10 @@ export const searchTasks = (tasks: Task[], term: string, cmsCollectionName: stri
       matches.push(match);
     }
   }
+
+  AddAddOnUsage(matches, addOns);
+  AddIndustryUsage(matches, industries);
+  AddTaskDependencyUsage(matches);
 
   return matches;
 };
