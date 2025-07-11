@@ -39,6 +39,7 @@ export const cmsCollections = [
       "Tasks - Municipal",
       "Tasks - NAICS Code",
       "Tasks - Business Structure",
+      "Xray",
     ],
   },
   {
