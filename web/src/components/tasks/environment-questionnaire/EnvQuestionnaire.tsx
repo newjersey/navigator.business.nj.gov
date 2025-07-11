@@ -55,9 +55,8 @@ export const EnvQuestionnaire = (props: Props): ReactElement => {
     return questionnaire;
   };
 
-  const [questionnaireData, setQuestionnaireData] = useState<Questionnaire>(
-    setUpQuestionnaireData(),
-  );
+  const [questionnaireData, setQuestionnaireData] =
+    useState<Questionnaire>(setUpQuestionnaireData());
   const [showError, setShowError] = useState<boolean>(false);
 
   const noSelectionMade = (): boolean => {

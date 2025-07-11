@@ -214,7 +214,7 @@ export const makePostBody = (
       Address2: isForeign ? "" : formationFormData.addressLine2,
       City: isForeign
         ? ""
-        : formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+        : (formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? ""),
       StateAbbreviation: isForeign ? undefined : formationFormData.addressState?.shortCode,
       ZipCode: isForeign ? "" : formationFormData.addressZipCode,
       Email: userData.user.email,
@@ -313,21 +313,21 @@ export const makePostBody = (
           })
         : undefined,
       Signers: formationFormData.incorporators
-        ? formationFormData.incorporators?.map((signer) => {
+        ? (formationFormData.incorporators?.map((signer) => {
             return {
               Name: signer.name,
               Title: signer.title,
               Signed: signer.signature,
             };
-          }) ?? []
+          }) ?? [])
         : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          formationFormData.signers?.map((signer) => {
+          (formationFormData.signers?.map((signer) => {
             return {
               Name: signer.name,
               Title: signer.title,
               Signed: signer.signature,
             };
-          }) ?? [],
+          }) ?? []),
 
       ContactFirstName: formationFormData.contactFirstName,
       ContactLastName: formationFormData.contactLastName,

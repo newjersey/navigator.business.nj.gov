@@ -194,8 +194,8 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
           newProfileData[question.fieldName] === "STANDARD"
             ? "taxi_size"
             : newProfileData[question.fieldName] === "HIGH_CAPACITY"
-            ? "large_size"
-            : "both_sizes",
+              ? "large_size"
+              : "both_sizes",
       };
     }
   });
