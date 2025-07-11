@@ -2,19 +2,18 @@ import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { getMergedConfig } from "@/contexts/configContext";
+import { EnvPermitContext } from "@/contexts/EnvPermitContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { MediaArea } from "@businessnjgovnavigator/shared";
-import { ReactElement } from "react";
+import { MediaArea } from "@businessnjgovnavigator/shared/environment";
+import { ReactElement, useContext } from "react";
 
-interface Props {
-  mediaArea: MediaArea;
-}
-
-export const ContactDep = (props: Props): ReactElement => {
+export const ContactDep = (): ReactElement => {
   const Config = getMergedConfig();
-  const contactConfig = Config.envResultsPage.contactDep[props.mediaArea];
-  return (
-    <ResultsSectionAccordion title={Config.envResultsPage.contactDep.title}>
+  const envContext = useContext(EnvPermitContext);
+
+  const contactCard = (mediaArea: MediaArea): ReactElement => {
+    const contactConfig = Config.envResultsPage.contactDep[mediaArea];
+    return (
       <div className={"padding-205 margin-y-2 bg-base-extra-light radius-lg"}>
         <h4>{contactConfig.heading}</h4>
         <div className={"margin-x-105"}>
@@ -53,6 +52,18 @@ export const ContactDep = (props: Props): ReactElement => {
           )}
         </div>
       </div>
+    );
+  };
+
+  return (
+    <ResultsSectionAccordion title={Config.envResultsPage.contactDep.title}>
+      {envContext.applicableMediaAreas().map((mediaArea) => {
+        return (
+          <div key={mediaArea} data-testid={`contact-${mediaArea}`}>
+            {contactCard(mediaArea)}
+          </div>
+        );
+      })}
     </ResultsSectionAccordion>
   );
 };

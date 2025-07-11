@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
@@ -15,8 +16,13 @@ import { ReactElement, useContext } from "react";
 export const NeedsAccountModal = (): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
-  const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
-    useContext(NeedsAccountContext);
+  const {
+    isAuthenticated,
+    showNeedsAccountModal,
+    showContinueWithoutSaving,
+    setShowNeedsAccountModal,
+    setUserWantsToContinueWithoutSaving,
+  } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
 
@@ -53,6 +59,19 @@ export const NeedsAccountModal = (): ReactElement => {
             <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
               {Config.selfRegistration.needsAccountModalButtonText}
             </PrimaryButton>
+            {showContinueWithoutSaving && (
+              <SecondaryButton
+                isColor="primary"
+                className={"margin-top-05"}
+                isFullWidthOnDesktop
+                onClick={() => {
+                  setUserWantsToContinueWithoutSaving(true);
+                  setShowNeedsAccountModal(false);
+                }}
+              >
+                {Config.selfRegistration.continueWithoutSaving}
+              </SecondaryButton>
+            )}
           </div>
 
           <hr className="margin-y-3 margin-x-neg-4" />

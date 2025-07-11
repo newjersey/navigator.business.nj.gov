@@ -1,5 +1,6 @@
 {
   "selfRegistration": {
+    "continueWithoutSaving": "Continue without saving",
     "errorTextGeneric": "Something went wrong. Try again later.",
     "errorTextEmailsNotMatching": "Email addresses must match and be valid.",
     "accountSuccessSnackbarTitleExistingAccount": "Your myNewJersey Account is Linked",

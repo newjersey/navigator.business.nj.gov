@@ -26,9 +26,35 @@ collections:
                 fields:
                   - { label: Title, name: title, widget: text }
                   - { label: Question, name: question, widget: string }
+                  - { label: Start Text, name: startText, widget: string }
                   - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Back Button Text, name: backButtonText, widget: string }
                   - { label: Error Text, name: errorText, widget: string }
+                  - { label: Footer Text, name: footerText, widget: string }
+                  - {
+                      label: Aria Context Inline Dialog Inactive,
+                      name: ariaContextInlineDialogInactive,
+                      widget: string,
+                    }
+                  - {
+                      label: Aria Context Inline Dialog Active,
+                      name: ariaContextInlineDialogActive,
+                      widget: string,
+                    }
+                  - {
+                      label: Aria Context Env Stepper Labels,
+                      name: ariaContextEnvStepperLabels,
+                      widget: string,
+                    }
                   - { label: Footer, name: footerText, widget: markdown }
+              - label: Instructions
+                name: instructions
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Instructions Line One, name: lineOne, widget: string }
+                  - { label: Instructions Line Two, name: lineTwo, widget: string }
+                  - { label: Instructions Line Three, name: lineThree, widget: string }
               - label: Waste
                 name: waste
                 collapsed: true
@@ -104,6 +130,59 @@ collections:
                           widget: text,
                         }
                       - { label: No Air Option, name: noAir, widget: text }
+              - label: Drinking Water
+                name: drinkingWater
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: string }
+                  - label: Drinking Water Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Own Well, name: ownWell, widget: string }
+                      - {
+                          label: Combined Well Capacity,
+                          name: combinedWellCapacity,
+                          widget: string,
+                        }
+                      - { label: Well Drilled, name: wellDrilled, widget: string }
+                      - { label: Potable Water, name: potableWater, widget: string }
+                      - { label: No Drinking Water, name: noDrinkingWater, widget: string }
+              - label: Waste Water
+                name: wasteWater
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: string }
+                  - label: Waste Water Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Sanitary Waste, name: sanitaryWaste, widget: string }
+                      - { label: Industrial Waste, name: industrialWaste, widget: string }
+                      - { label: Local Sewage, name: localSewage, widget: string }
+                      - { label: Septic System, name: septicSystem, widget: string }
+                      - {
+                          label: Streams,
+                          Rivers,
+                          or Lakes,
+                          name: streamsRiversOrLakes,
+                          widget: string,
+                        }
+                      - { label: Needs Treatment, name: needsTreatment, widget: string }
+                      - { label: Planning Construction, name: planningConstruction, widget: string }
+                      - { label: Storm Water Discharge, name: stormWaterDischarge, widget: string }
+                      - {
+                          label: Takeover Industrial Storm Water Permit,
+                          name: takeoverIndustrialStormWaterPermit,
+                          widget: string,
+                        }
+                      - { label: No Waste Water, name: noWasteWater, widget: string }
           - label: Results Page Config
             name: envResultsPage
             collapsed: false
@@ -127,6 +206,12 @@ collections:
                       - { label: Waste Media Area Text, name: waste, widget: string }
                       - { label: Watershed and Land Media Area Text, name: land, widget: string }
                       - { label: Air Media Area Text, name: air, widget: string }
+                      - {
+                          label: Drinking Water Media Area Text,
+                          name: drinkingWater,
+                          widget: string,
+                        }
+                      - { label: Waste Water Media Area Text, name: wasteWater, widget: string }
               - label: Personalized Support
                 name: personalizedSupport
                 collapsed: true
@@ -172,6 +257,36 @@ collections:
                           - { label: Form, name: form, widget: text }
                   - label: Air Details
                     name: air
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number Info, name: phoneInfo, widget: text }
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Email, name: email, widget: text }
+                  - label: Waste Water Details
+                    name: wasteWater
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number Info, name: phoneInfo, widget: text }
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Email, name: email, widget: text }
+                  - label: Drinking Water Details
+                    name: drinkingWater
                     collapsed: true
                     widget: object
                     fields:

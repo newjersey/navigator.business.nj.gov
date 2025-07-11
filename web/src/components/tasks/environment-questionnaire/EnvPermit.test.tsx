@@ -1,26 +1,27 @@
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { getMergedConfig } from "@/contexts/configContext";
-import { Task } from "@/lib/types/types";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateTask } from "@/test/factories";
-import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  generateLandQuestionnaireData,
-  generateWasteQuestionnaireData,
-} from "@businessnjgovnavigator/shared";
-import { Business, generateEnvironmentData } from "@businessnjgovnavigator/shared/index";
+  currentBusiness,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
-  generateAirQuestionnaireData,
   generateBusiness,
+  generateEnvironmentQuestionnaireData,
   generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
+} from "@businessnjgovnavigator/shared/test/factories";
 import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent, { UserEvent } from "@testing-library/user-event";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -29,201 +30,343 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
-const isMobile = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => {
-    return value;
-  });
-};
-
 describe("<CheckEnvPermits />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockRoadmap({});
+    setupStatefulUserDataContext();
   });
 
-  const renderQuestionnaireAndSetupUser = ({
-    business,
-    task,
-  }: {
-    business?: Business;
-    task: Task;
-  }): { user: UserEvent } => {
-    render(
-      <WithStatefulUserData
-        initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
-      >
-        <EnvPermit task={task ?? generateTask({})} />
-      </WithStatefulUserData>,
-    );
-    const user = userEvent.setup();
-    return { user };
-  };
+  const setShowNeedsAccountModal = jest.fn();
+  const setShowContinueWithoutSaving = jest.fn();
 
-  const renderQuestionnaire = ({ business, task }: { business?: Business; task: Task }): void => {
-    render(
-      <WithStatefulUserData
-        initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
-      >
-        <EnvPermit task={task ?? generateTask({})} />
-      </WithStatefulUserData>,
-    );
-  };
-
-  describe("land", () => {
-    it("displays the results page when the user submits the questionnaire", async () => {
-      const { user } = renderQuestionnaireAndSetupUser({
-        task: generateTask({ id: "land-permitting" }),
-      });
-      await user.click(
-        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz),
+  describe("questionnaire", () => {
+    it("opens 'Needs Account' modal when the stepper is clicked", async () => {
+      render(
+        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
+          setShowNeedsAccountModal: setShowNeedsAccountModal,
+        }),
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(currentBusiness().environmentData?.land?.submitted).toBe(true);
+      fireEvent.click(screen.getByTestId(`stepper-1`));
       await waitFor(() => {
-        expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
     });
 
-    it("displays the results page if submitted is true", () => {
-      renderQuestionnaire({
-        business: generateBusiness({
-          environmentData: generateEnvironmentData({
-            land: {
-              questionnaireData: generateLandQuestionnaireData({
-                takeOverExistingBiz: true,
-              }),
-              submitted: true,
-            },
-          }),
+    it("opens 'Needs Account' modal when the start button is clicked", async () => {
+      render(
+        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
+          setShowNeedsAccountModal: setShowNeedsAccountModal,
         }),
-        task: generateTask({ id: "land-permitting" }),
-      });
-      expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
-    });
-  });
-
-  describe("waste", () => {
-    it("displays the results page when the user submits the questionnaire", async () => {
-      const { user } = renderQuestionnaireAndSetupUser({
-        task: generateTask({ id: "waste-permitting" }),
-      });
-      await user.click(
-        screen.getByLabelText(
-          Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste,
-        ),
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(currentBusiness().environmentData?.waste?.submitted).toBe(true);
+      fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startText));
       await waitFor(() => {
-        expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
     });
 
-    it("displays the results page if submitted is true", () => {
-      renderQuestionnaire({
-        business: generateBusiness({
-          environmentData: generateEnvironmentData({
-            waste: {
-              questionnaireData: generateWasteQuestionnaireData({
-                hazardousMedicalWaste: true,
-              }),
-              submitted: true,
-            },
-          }),
+    it("sets showContinueWithoutSaving to true when on the first step, is not authenticated and user hasn't clicked continue without saving", async () => {
+      render(
+        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
+          setShowContinueWithoutSaving: setShowContinueWithoutSaving,
         }),
-        task: generateTask({ id: "waste-permitting" }),
-      });
-      expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
-    });
-  });
-
-  describe("air", () => {
-    it("displays the results page when the user submits the questionnaire", async () => {
-      const { user } = renderQuestionnaireAndSetupUser({
-        task: generateTask({ id: "air-permitting" }),
-      });
-      await user.click(
-        screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions),
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(currentBusiness().environmentData?.air?.submitted).toBe(true);
+      fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startText));
       await waitFor(() => {
+        return expect(setShowContinueWithoutSaving).toHaveBeenCalledWith(true);
+      });
+    });
+
+    it("doesn't open 'Needs Account' modal when continueWithoutSaving is true", async () => {
+      render(
+        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
+          userWantsToContinueWithoutSaving: true,
+        }),
+      );
+      fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startText));
+      await waitFor(() => {
+        return expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
+      });
+    });
+
+    it.each([
+      ["air", 1],
+      ["land", 2],
+      ["waste", 3],
+      ["drinkingWater", 4],
+      ["wasteWater", 5],
+    ])("renders the %s step", async (mediaArea, stepIndex) => {
+      render(<EnvPermit task={generateTask({})} />);
+      fireEvent.click(screen.getByTestId(`stepper-${stepIndex}`));
+      await waitFor(() => {
+        expect(screen.getByTestId(`${mediaArea}-questionnaire`)).toBeInTheDocument();
+      });
+    });
+
+    it("steps forward in the questionnaire when Save and Continue is clicked", async () => {
+      render(<EnvPermit task={generateTask({})} />);
+      fireEvent.click(screen.getByTestId(`stepper-1`));
+      expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
+      goToNextStep();
+      expect(screen.queryByTestId(`air-questionnaire`)).not.toBeInTheDocument();
+      expect(screen.getByTestId(`land-questionnaire`)).toBeInTheDocument();
+    });
+
+    it("steps backward in the questionnaire when Back is clicked", async () => {
+      render(<EnvPermit task={generateTask({})} />);
+      fireEvent.click(screen.getByTestId(`stepper-2`));
+      expect(screen.getByTestId(`land-questionnaire`)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(`Back`));
+      expect(screen.queryByTestId(`land-questionnaire`)).not.toBeInTheDocument();
+      expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
+    });
+
+    it("throws an error if nothing is selected and navigates to step one", () => {
+      render(<EnvPermit task={generateTask({})} />);
+      fireEvent.click(screen.getByTestId(`stepper-5`));
+      goToNextStep();
+      expect(screen.getByTestId("stepper-error-alert")).toBeInTheDocument();
+      expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
+    });
+
+    it("navigates to the appropriate step when the step is clicked within the error alert", () => {
+      render(<EnvPermit task={generateTask({})} />);
+      fireEvent.click(screen.getByTestId(`stepper-5`));
+      goToNextStep();
+      const errorAlert = screen.getByTestId("stepper-error-alert");
+      expect(errorAlert).toBeInTheDocument();
+
+      fireEvent.click(within(errorAlert).getByText("Air"));
+      expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
+
+      fireEvent.click(within(errorAlert).getByText("Waste"));
+      expect(screen.getByTestId(`waste-questionnaire`)).toBeInTheDocument();
+    });
+
+    it("saves the questionnaire data when the Save and Continue button is clicked on the final page", () => {
+      render(
+        <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
+          <EnvPermit task={generateTask({})} />
+        </WithStatefulUserData>,
+      );
+      fireEvent.click(screen.getByText("Start"));
+      fireEvent.click(screen.getByTestId("constructionActivities"));
+      goToNextStep();
+      fireEvent.click(screen.getByTestId("propertyAssessment"));
+      goToNextStep();
+      fireEvent.click(screen.getByTestId("compostWaste"));
+      goToNextStep();
+      fireEvent.click(screen.getByTestId("combinedWellCapacity"));
+      goToNextStep();
+      fireEvent.click(screen.getByTestId("localSewage"));
+      goToNextStep();
+      expect(currentBusiness().environmentData?.submitted).toBe(true);
+      const updatedQuestionnaireData = generateEnvironmentQuestionnaireData({
+        airOverrides: { constructionActivities: true },
+        landOverrides: { propertyAssessment: true },
+        wasteOverrides: { compostWaste: true },
+        drinkingWaterOverrides: { combinedWellCapacity: true },
+        wasteWaterOverrides: { localSewage: true },
+      });
+      expect(currentBusiness().environmentData?.questionnaireData).toEqual(
+        updatedQuestionnaireData,
+      );
+      expect(currentBusiness().environmentData?.submitted).toBe(true);
+    });
+  });
+
+  describe("results", () => {
+    describe("applicable", () => {
+      const businessWithApplicableSubmittedQuestionnaire = generateBusiness({
+        environmentData: {
+          submitted: true,
+          questionnaireData: generateEnvironmentQuestionnaireData({
+            airOverrides: { constructionActivities: true },
+            landOverrides: { noLand: true },
+            wasteOverrides: { noWaste: true },
+            drinkingWaterOverrides: { combinedWellCapacity: true },
+            wasteWaterOverrides: { localSewage: true },
+          }),
+        },
+      });
+
+      it("displays only the applicable contact cards", async () => {
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(
+              businessWithApplicableSubmittedQuestionnaire,
+            )}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
         expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+        fireEvent.click(screen.getByText(Config.envResultsPage.contactDep.title));
+        expect(screen.getByTestId("contact-air")).toBeInTheDocument();
+        expect(screen.queryByTestId("contact-land")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("contact-waste")).not.toBeInTheDocument();
+        expect(screen.getByTestId("contact-drinkingWater")).toBeInTheDocument();
+        expect(screen.getByTestId("contact-wasteWater")).toBeInTheDocument();
+      });
+
+      it("displays only the applicable responses", async () => {
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(
+              businessWithApplicableSubmittedQuestionnaire,
+            )}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+        fireEvent.click(screen.getByText(Config.envResultsPage.seeYourResponses.title));
+        expect(screen.getByTestId("air-responses")).toBeInTheDocument();
+        expect(screen.queryByTestId("land-responses")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("waste-responses")).not.toBeInTheDocument();
+        expect(screen.getByTestId("drinkingWater-responses")).toBeInTheDocument();
+        expect(screen.getByTestId("wasteWater-responses")).toBeInTheDocument();
+      });
+
+      it("only shows the applicable media areas in the description", () => {
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(
+              businessWithApplicableSubmittedQuestionnaire,
+            )}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        const applicableMediaAreas = `${Config.envResultsPage.summary.mediaAreaText.air}, ${Config.envResultsPage.summary.mediaAreaText.drinkingWater}, and ${Config.envResultsPage.summary.mediaAreaText.wasteWater}`;
+        expect(screen.getByTestId("applicable-media-areas")).toHaveTextContent(
+          applicableMediaAreas,
+        );
+      });
+
+      it("displays the media areas joined by an 'and' in the description when only two media areas are applicable", () => {
+        const businessWithTwoApplicableMediaArea = generateBusiness({
+          environmentData: {
+            submitted: true,
+            questionnaireData: generateEnvironmentQuestionnaireData({
+              airOverrides: { constructionActivities: true },
+              drinkingWaterOverrides: { combinedWellCapacity: true },
+            }),
+          },
+        });
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(businessWithTwoApplicableMediaArea)}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        const applicableMediaAreas = `${Config.envResultsPage.summary.mediaAreaText.air} and ${Config.envResultsPage.summary.mediaAreaText.drinkingWater}`;
+        expect(screen.getByTestId("applicable-media-areas")).toHaveTextContent(
+          applicableMediaAreas,
+        );
+      });
+
+      it("displays a single media area in the description when only one is applicable", () => {
+        const businessWithOneApplicableMediaArea = generateBusiness({
+          environmentData: {
+            submitted: true,
+            questionnaireData: generateEnvironmentQuestionnaireData({
+              drinkingWaterOverrides: { combinedWellCapacity: true },
+            }),
+          },
+        });
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(businessWithOneApplicableMediaArea)}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        const applicableMediaAreas = `${Config.envResultsPage.summary.mediaAreaText.drinkingWater}`;
+        expect(screen.getByTestId("applicable-media-areas")).toHaveTextContent(
+          applicableMediaAreas,
+        );
+      });
+
+      it("takes the user back to step 0 when the Edit button is clicked", () => {
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(
+              businessWithApplicableSubmittedQuestionnaire,
+            )}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+        fireEvent.click(screen.getByText(Config.envResultsPage.editText));
+        expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
       });
     });
 
-    it("displays the results page if submitted is true", () => {
-      renderQuestionnaire({
-        business: generateBusiness({
-          environmentData: generateEnvironmentData({
-            air: {
-              questionnaireData: generateAirQuestionnaireData({
-                emitPollutants: true,
-              }),
-              submitted: true,
-            },
+    describe("not applicable", () => {
+      const businessWithNonApplicableSubmittedQuestionnaire = generateBusiness({
+        environmentData: {
+          submitted: true,
+          questionnaireData: generateEnvironmentQuestionnaireData({
+            airOverrides: { noAir: true },
+            landOverrides: { noLand: true },
+            wasteOverrides: { noWaste: true },
+            drinkingWaterOverrides: { noDrinkingWater: true },
+            wasteWaterOverrides: { noWasteWater: true },
           }),
-        }),
-        task: generateTask({ id: "air-permitting" }),
+        },
       });
-      expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
-    });
-  });
 
-  it.each([
-    ["land", "land-permitting", "Check Your Land Permits"],
-    ["waste", "waste-permitting", "Check Your Waste Permits"],
-    ["air", "air-permitting", "Check Your Air Permits"],
-  ])("renders the correct task for %s", (_, taskId: string, name: string) => {
-    renderQuestionnaire({
-      task: generateTask({ id: taskId, name }),
-    });
-    expect(screen.getByText(name)).toBeInTheDocument();
-  });
-
-  it.each([
-    ["land", "land-permitting"],
-    ["waste", "waste-permitting"],
-    ["air", "air-permitting"],
-  ])(
-    "displays the questionnaire if submitted is false for %s",
-    (mediaArea: string, taskId: string) => {
-      renderQuestionnaire({
-        business: generateBusiness({
-          environmentData: generateEnvironmentData({
-            [mediaArea]: {
-              submitted: false,
-            },
-          }),
-        }),
-        task: generateTask({ id: taskId }),
+      it("shows the low applicablity summary page", () => {
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(
+              businessWithNonApplicableSubmittedQuestionnaire,
+            )}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        expect(
+          screen.getByText(Config.envResultsPage.lowApplicability.summaryLineOne),
+        ).toBeInTheDocument();
       });
-      expect(screen.getByText(Config.envQuestionPage.generic.title)).toBeInTheDocument();
-    },
-  );
 
-  it.each([
-    ["land", "land-permitting", "Check Your Land Permits"],
-    ["waste", "waste-permitting", "Check Your Waste Permits"],
-    ["air", "air-permitting", "Check Your Air Permits"],
-  ])("renders summary when %s task and is mobile", (_, taskId: string, name: string) => {
-    isMobile(true);
-    const task = generateTask({ id: taskId, name });
-    renderQuestionnaire({
-      task,
-    });
-    expect(screen.getByText(task.summaryDescriptionMd)).toBeInTheDocument();
-  });
+      it("takes the user back to step zero when the Edit button is clicked", () => {
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(
+              businessWithNonApplicableSubmittedQuestionnaire,
+            )}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+        fireEvent.click(screen.getByText(Config.envResultsPage.editText));
+        expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
+      });
 
-  it.each([
-    ["land", "land-permitting", "Check Your Land Permits"],
-    ["waste", "waste-permitting", "Check Your Waste Permits"],
-    ["air", "air-permitting", "Check Your Air Permits"],
-  ])("doesn't render summary when %s task and is not mobile", (_, taskId: string, name: string) => {
-    isMobile(false);
-    const task = generateTask({ id: taskId, name });
-    renderQuestionnaire({
-      task,
+      it("takes the user back to step zero when 'redo this form' is clicked", () => {
+        render(
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(
+              businessWithNonApplicableSubmittedQuestionnaire,
+            )}
+          >
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+        );
+        expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+        fireEvent.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
+        expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
+      });
     });
-    expect(screen.queryByText(task.summaryDescriptionMd)).not.toBeInTheDocument();
   });
 });
+
+const goToNextStep = (): void => {
+  fireEvent.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+};

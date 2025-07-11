@@ -81,6 +81,8 @@ type PreparePageParams = {
   task?: Task;
   isAuthenticated?: IsAuthenticated;
   setShowNeedsAccountModal?: (value: boolean) => void;
+  setShowContinueWithoutSaving?: (value: boolean) => void;
+  setUserWantsToContinueWithoutSaving?: (value: boolean) => void;
   user?: Partial<BusinessUser>;
 };
 
@@ -91,6 +93,8 @@ export const preparePage = ({
   task,
   isAuthenticated,
   setShowNeedsAccountModal,
+  setShowContinueWithoutSaving,
+  setUserWantsToContinueWithoutSaving,
   user,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
@@ -144,6 +148,10 @@ export const preparePage = ({
       {
         showNeedsAccountModal: false,
         setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
+        showContinueWithoutSaving: false,
+        setShowContinueWithoutSaving: setShowContinueWithoutSaving ?? jest.fn(),
+        userWantsToContinueWithoutSaving: false,
+        setUserWantsToContinueWithoutSaving: setUserWantsToContinueWithoutSaving ?? jest.fn(),
       },
     ),
   );

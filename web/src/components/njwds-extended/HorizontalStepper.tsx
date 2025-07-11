@@ -9,6 +9,7 @@ interface Props {
   currentStep: number;
   onStepClicked: (step: number) => void;
   suppressRefocusBehavior?: boolean;
+  environmentPermit?: boolean;
   inlineDialog?: boolean;
 }
 
@@ -19,8 +20,8 @@ type StepperState =
   | "COMPLETE-ACTIVE"
   | "INCOMPLETE-ACTIVE"
   | "INCOMPLETE"
-  | "INCOMPLETE-ACTIVE-INLINE-DIALOG"
-  | "INCOMPLETE-INLINE-DIALOG";
+  | "ACTIVE-INLINE-DIALOG"
+  | "INLINE-DIALOG";
 
 export const HorizontalStepper = (props: Props): ReactElement => {
   const [focusStep, setFocusStep] = useState(props.currentStep);
@@ -44,7 +45,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       } else if (props.steps[index].isComplete) {
         return "COMPLETE-ACTIVE";
       } else if (props.inlineDialog) {
-        return "INCOMPLETE-ACTIVE-INLINE-DIALOG";
+        return "ACTIVE-INLINE-DIALOG";
       } else {
         return "INCOMPLETE-ACTIVE";
       }
@@ -54,7 +55,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       } else if (props.steps[index].isComplete) {
         return "COMPLETE";
       } else if (props.inlineDialog) {
-        return "INCOMPLETE-INLINE-DIALOG";
+        return "INLINE-DIALOG";
       } else {
         return "INCOMPLETE";
       }
@@ -72,11 +73,13 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       case "COMPLETE-ACTIVE":
         return Config.formation.general.ariaContextStepperStateComplete;
       case "INCOMPLETE-ACTIVE":
-      case "INCOMPLETE-ACTIVE-INLINE-DIALOG":
         return Config.formation.general.ariaContextStepperStateIncomplete;
+      case "ACTIVE-INLINE-DIALOG":
+        return Config.envQuestionPage.generic.ariaContextInlineDialogActive;
       case "INCOMPLETE":
-      case "INCOMPLETE-INLINE-DIALOG":
         return Config.formation.general.ariaContextStepperStateIncomplete;
+      case "INLINE-DIALOG":
+        return Config.envQuestionPage.generic.ariaContextInlineDialogInactive;
       default:
         return "";
     }
@@ -93,9 +96,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
         return "--complete";
       case "INCOMPLETE-ACTIVE":
         return "--current";
-      case "INCOMPLETE-ACTIVE-INLINE-DIALOG":
+      case "ACTIVE-INLINE-DIALOG":
         return "--current-inline-dialog";
-      case "INCOMPLETE-INLINE-DIALOG":
+      case "INLINE-DIALOG":
         return "--inline-dialog";
       default:
         return "";
@@ -122,7 +125,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       case "ERROR-ACTIVE":
       case "COMPLETE-ACTIVE":
       case "INCOMPLETE-ACTIVE":
-      case "INCOMPLETE-ACTIVE-INLINE-DIALOG":
+      case "ACTIVE-INLINE-DIALOG":
         return "text-bold";
       default:
         return "";
@@ -207,8 +210,12 @@ export const HorizontalStepper = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="horizontal-step-indicator display-block">
-        <div className="usa-step-indicator usa-step-indicator--counters-sm">
+      <div className={"horizontal-step-indicator display-block"}>
+        <div
+          className={`usa-step-indicator usa-step-indicator--counters-sm ${
+            props.inlineDialog && "bg-transparent"
+          }`}
+        >
           <div className={`usa-step-indicator__segments stepper-wrapper`} role={"tablist"}>
             {props.steps.map((step: StepperStep, index: number) => {
               return (
@@ -228,7 +235,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                   role="tab"
                   tabIndex={index === props.currentStep ? 0 : -1}
                   aria-label={composeFormationTabAriaLabel(
-                    Config.formation.general.ariaContextStepperLabels,
+                    props.environmentPermit
+                      ? Config.envQuestionPage.generic.ariaContextEnvStepperLabels
+                      : Config.formation.general.ariaContextStepperLabels,
                     step.name,
                     determineAriaState(determineState(index)),
                   )}

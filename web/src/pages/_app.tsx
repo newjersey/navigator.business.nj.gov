@@ -62,6 +62,11 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const [showNeedsAccountSnackbar, setShowNeedsAccountSnackbar] = useState<boolean>(false);
   const [showNeedsAccountModal, setShowNeedsAccountModal] = useState<boolean>(false);
+
+  const [showContinueWithoutSaving, setShowContinueWithoutSaving] = useState<boolean>(false);
+  const [userWantsToContinueWithoutSaving, setUserWantsToContinueWithoutSaving] =
+    useState<boolean>(false);
+
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
     header: "",
@@ -243,6 +248,10 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                               setRegistrationStatus: setRegistrationStatusInStateAndStorage,
                               setShowNeedsAccountSnackbar,
                               setShowNeedsAccountModal,
+                              showContinueWithoutSaving,
+                              setShowContinueWithoutSaving,
+                              userWantsToContinueWithoutSaving,
+                              setUserWantsToContinueWithoutSaving,
                             }}
                           >
                             <ContextualInfoPanel />

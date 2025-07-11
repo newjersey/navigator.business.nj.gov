@@ -3,9 +3,19 @@
     "generic": {
       "title": "Tell Us About Your Business",
       "question": "Which of the following are true?",
-      "buttonText": "See My Results",
-      "errorText": "Select a response below.",
-      "footerText": "To learn more about ${mediaAreaText} permits, visit ${mediaAreaLink}."
+      "startText": "Start",
+      "buttonText": "Save and Continue",
+      "backButtonText": "Back",
+      "errorText": "Provide responses to the following sections:",
+      "footerText": "To learn more about ${mediaAreaText} permits, visit ${mediaAreaLink}.",
+      "ariaContextInlineDialogInactive": "Inactive",
+      "ariaContextInlineDialogActive": "Active",
+      "ariaContextEnvStepperLabels": "Environment Permit Stepper Navigation: ${stepName} Step, State: ${stepState}"
+    },
+    "instructions": {
+      "lineOne": "Do you need Department of Environmental Protection (DEP) permits for your business?",
+      "lineTwo": "Your responses are secure and will not be shared without your permission.",
+      "lineThree": "You may be fined if you operate without the necessary permits."
     },
     "waste": {
       "mediaAreaText": "waste",
@@ -39,6 +49,33 @@
         "constructionActivities": "My business plans to conduct construction activities (crushers, conveyors, shredders, stationary engines, or equipment that generate dust).",
         "noAir": "None of the above apply."
       }
+    },
+    "drinkingWater": {
+      "mediaAreaText": "drinking water permits",
+      "mediaAreaLink": "[NJDEP’s Drinking Water page.](https://www.nj.gov/dep/watersupply/)",
+      "questionnaireOptions": {
+        "ownWell": "My business will have its own well for water supply with at least 15 `service|service` connections, or will regularly serve an average of at least 25 people daily for at least 60 days per year.",
+        "combinedWellCapacity": "My business will have a combined well pump capacity of greater than 69 gallons per minute.",
+        "wellDrilled": "My business will need to get a well drilled on the property.",
+        "potableWater": "My business will get a potable water supply from a water utility.",
+        "noDrinkingWater": "None of the above apply."
+      }
+    },
+    "wasteWater": {
+      "mediaAreaText": "these criteria",
+      "mediaAreaLink": "[NJDEP’s page on Wastewater.](https://dep.nj.gov/dwq/wastewater/)",
+      "questionnaireOptions": {
+        "sanitaryWaste": "My business will create `sanitary wastewater|sanitary-wastewater`.",
+        "industrialWaste": "My business will create `industrial wastewater|industrial-wastewater`. ",
+        "localSewage": "My business will release wastewater to a local `sewage treatment plant|sewage-treatment-plant`.",
+        "septicSystem": "My business will release wastewater to a `septic system|septic-system`. ",
+        "streamsRiversOrLakes": "My business will release wastewater directly to streams, rivers, or lakes.",
+        "needsTreatment": "My business will create wastewater that needs to be treated before releasing into streams, rivers, lakes, sewage treatment plants, or septic systems.",
+        "planningConstruction": "My business is planning construction for over 1 acre of land.",
+        "stormWaterDischarge": "My business will have `stormwater discharge|stormwater-discharge` related to industrial activity. This includes activities such as warehousing, trucking, and recycling.",
+        "takeoverIndustrialStormWaterPermit": "My business is going to take over an existing business with an industrial stormwater permit.",
+        "noWasteWater": "None of the above apply."
+      }
     }
   },
   "envResultsPage": {
@@ -49,9 +86,11 @@
       "partOne": "Based on your answers, your business may be legally required to have a Department of Environmental Protection (DEP)",
       "partTwo": "license or permit. Find out your business's requirements below.",
       "mediaAreaText": {
-        "waste": "waste",
-        "land": "watershed and land management",
-        "air": "air"
+        "waste": "Waste",
+        "land": "Watershed and Land Management",
+        "air": "Air",
+        "drinkingWater": "Drinking Water",
+        "wasteWater": "Wastewater"
       }
     },
     "personalizedSupport": {
@@ -91,10 +130,30 @@
           "form": "",
           "email": "aqppls@dep.nj.gov"
         }
+      },
+      "wasteWater": {
+        "heading": "Waste Water",
+        "bodyLink": "[Bureau of Stationary Sources](https://dep.nj.gov/boss/contact-information/)",
+        "contact": {
+          "phoneInfo": "General Permit Help Desk:",
+          "phone": "(609) 633-2829",
+          "form": "",
+          "email": "aqppls@dep.nj.gov"
+        }
+      },
+      "drinkingWater": {
+        "heading": "Drinking Water",
+        "bodyLink": "[Bureau of Stationary Sources](https://dep.nj.gov/boss/contact-information/)",
+        "contact": {
+          "phoneInfo": "General Permit Help Desk:",
+          "phone": "(609) 633-2829",
+          "form": "",
+          "email": "aqppls@dep.nj.gov"
+        }
       }
     },
     "seeYourResponses": {
-      "title": "See Your Responses"
+      "title": "Your Responses"
     },
     "lowApplicability": {
       "summaryLineOne": "You most likely will not need to apply for licenses or permits with the Department of Environmental Protection (DEP).",

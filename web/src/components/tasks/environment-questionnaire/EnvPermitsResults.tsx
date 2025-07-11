@@ -6,59 +6,35 @@ import { ContactDep } from "@/components/tasks/environment-questionnaire/results
 import { PersonalizedSupport } from "@/components/tasks/environment-questionnaire/results/PersonalizedSupport";
 import { SeeYourResponses } from "@/components/tasks/environment-questionnaire/results/SeeYourResponses";
 import { getMergedConfig } from "@/contexts/configContext";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  MediaArea,
-  QuestionnaireConfig,
-  QuestionnaireFieldIds,
-} from "@businessnjgovnavigator/shared";
-import { ReactElement } from "react";
+import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { ReactElement, useContext } from "react";
 
-interface Props {
-  taskId: string;
-  mediaArea: MediaArea;
-  noSelectionOption: QuestionnaireFieldIds;
-}
-
-export const EnvPermitsResults = (props: Props): ReactElement => {
-  const { business, updateQueue } = useUserData();
+export const EnvPermitsResults = (): ReactElement => {
+  const envContext = useContext(EnvPermitContext);
 
   const Config = getMergedConfig();
 
-  const questionnaireData = business?.environmentData?.[props.mediaArea]?.questionnaireData;
-
-  const responseTexts = (): string[] => {
-    if (!questionnaireData) return [];
-
-    const optionsMarkedTrue: string[] = [];
-    const questionnaireConfig = Config.envQuestionPage[props.mediaArea]
-      .questionnaireOptions as QuestionnaireConfig;
-
-    for (const [optionId, selected] of Object.entries(questionnaireData)) {
-      const text = questionnaireConfig[optionId as QuestionnaireFieldIds];
-      selected === true && optionsMarkedTrue.push(text);
-    }
-
-    return optionsMarkedTrue;
-  };
-
-  const onClick = (): void => {
-    if (!props.mediaArea) return;
-    updateQueue
-      ?.queueEnvironmentData({
-        [props.mediaArea]: {
-          ...business?.environmentData?.[props.mediaArea],
-          submitted: false,
-        },
-      })
-      .queueTaskProgress({
-        [props.taskId]: "TO_DO",
-      })
-      .update();
-  };
-
   const isLowApplicability = (): boolean => {
-    return questionnaireData?.[props.noSelectionOption as keyof typeof questionnaireData] ?? false;
+    return envContext.applicableMediaAreas().length === 0;
+  };
+
+  const applicableMediaAreasText = (): string => {
+    const mediaAreas = envContext.applicableMediaAreas();
+    const countOfMediaAreas = mediaAreas.length;
+    if (countOfMediaAreas === 1) {
+      return Config.envResultsPage.summary.mediaAreaText[mediaAreas[0]];
+    } else if (countOfMediaAreas === 2) {
+      return `${Config.envResultsPage.summary.mediaAreaText[mediaAreas[0]]} and ${
+        Config.envResultsPage.summary.mediaAreaText[mediaAreas[1]]
+      }`;
+    } else {
+      const mediaAreaTexts = mediaAreas.map(
+        (mediaArea) => Config.envResultsPage.summary.mediaAreaText[mediaArea],
+      );
+      const lastMediaAreaText = mediaAreaTexts[mediaAreaTexts.length - 1];
+      const remainingMediaAreaTexts = mediaAreaTexts.slice(0, -1);
+      return `${remainingMediaAreaTexts.join(", ")}, and ${lastMediaAreaText}`;
+    }
   };
 
   const highApplicability = (): ReactElement => {
@@ -66,14 +42,14 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
       <>
         <div className={"padding-bottom-3"}>
           {Config.envResultsPage.summary.partOne}
-          <span className={"text-bold margin-x-05"}>
-            {Config.envResultsPage.summary.mediaAreaText[props.mediaArea]}
+          <span data-testid={"applicable-media-areas"} className={"text-bold margin-x-05"}>
+            {applicableMediaAreasText()}
           </span>
           {Config.envResultsPage.summary.partTwo}
         </div>
         <PersonalizedSupport />
-        <ContactDep mediaArea={props.mediaArea} />
-        <SeeYourResponses responseTexts={responseTexts()} />
+        <ContactDep />
+        <SeeYourResponses />
       </>
     );
   };
@@ -92,7 +68,11 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
         <Callout calloutType={"quickReference"}>
           <span>
             {Config.envResultsPage.lowApplicability.callout}
-            <UnStyledButton className={"margin-left-05"} isUnderline onClick={onClick}>
+            <UnStyledButton
+              className={"margin-left-05"}
+              isUnderline
+              onClick={envContext.onClickForEdit}
+            >
               {Config.envResultsPage.lowApplicability.calloutRedo}
             </UnStyledButton>
           </span>
@@ -106,7 +86,7 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
       <h2>{Config.envResultsPage.title}</h2>
       <Alert variant={"success"}>
         <span className={"margin-right-05"}>{Config.envResultsPage.editInfo}</span>
-        <UnStyledButton isUnderline onClick={onClick}>
+        <UnStyledButton isUnderline onClick={envContext.onClickForEdit}>
           {Config.envResultsPage.editText}
         </UnStyledButton>
       </Alert>

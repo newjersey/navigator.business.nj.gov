@@ -169,6 +169,7 @@ import { MigrationClients } from "@db/migrations/types";
 import { migrate_v165_to_v166 } from "@db/migrations/v166_add_roadmap_task_data";
 import { migrate_v166_to_v167 } from "@db/migrations/v167_update_agent_number_or_manual_options";
 import { migrate_v167_to_v168 } from "@db/migrations/v168_add_cigarette_license_data";
+import { migrate_v168_to_v169 } from "@db/migrations/v169_consolidate_environment_data";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -342,6 +343,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v165_to_v166,
   migrate_v166_to_v167,
   migrate_v167_to_v168,
+  migrate_v168_to_v169,
 ];
 
-export { generatev168UserData as CURRENT_GENERATOR } from "@db/migrations/v168_add_cigarette_license_data";
+export { generatev169UserData as CURRENT_GENERATOR } from "@db/migrations/v169_consolidate_environment_data";
