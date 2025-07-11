@@ -47,7 +47,7 @@
     "@aws-sdk/util-format-url": "3.804.0",
     "@businessnjgovnavigator/shared": "*",
     "@emotion/react": "11.14.0",
-    "@emotion/styled": "11.14.0",
+    "@emotion/styled": "11.14.1",
     "@mui/icons-material": "5.17.1",
     "@mui/lab": "5.0.0-alpha.176",
     "@mui/material": "5.17.1",
