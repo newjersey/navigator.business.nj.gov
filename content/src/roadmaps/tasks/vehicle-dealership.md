@@ -56,7 +56,7 @@ The following are included in each application form linked below. They must be c
 Depending on your business type or dealership license, you may also need:
 * [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if you sell or lease under a different business names
 * [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf),  if you sell used vehicles only
-* `Franchise Agreement, if you sell new vehicles only
+* `Franchise Agreement|franchise-agreement`, if you sell new vehicles only
 * Established `business location|dealership-business-location`, if you sell new and used vehicles
 ## How to Apply
 
