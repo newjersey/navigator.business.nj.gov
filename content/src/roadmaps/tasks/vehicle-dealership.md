@@ -30,8 +30,6 @@ agencyAdditionalContext: Business Licensing Services Bureau
 ---
 ## Application Requirements
 
-### Required Documentation
-
 You must submit copies of the following:
 
 * `Federal Taxpayer Identification Number (EIN)|ein`
@@ -44,16 +42,9 @@ You must submit copies of the following:
 * Deed, lease, or purchase agreement for your business location. If leasing the property, the lease agreement must be for a minimum of 12 months.
 * Phone bill or phone installation order with your business name and addresses listed on the document
 * Photographs or plans clearly showing the complete premises where you want to conduct your business
-### Required Forms
-The following are included in each application form linked below. They must be completed by all applicants:
-* Applicant’s Information Form BLS-163
-* Child Support Certification Form BLS-43
-* Business Hours Form BLS-19
-* Fingerprint Request Notification Form BLS-43
-* Authorized Signatories Form BLS-20
-* Municipal Approval Certificate for Business License Form BLS-162, which must be signed and stamped by the municipality
-### Other Requirements
+
 Depending on your business type or dealership license, you may also need:
+
 * [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if you sell or lease under a different business names
 * [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf),  if you sell used vehicles only
 * `Franchise Agreement|franchise-agreement`, if you sell new vehicles only
