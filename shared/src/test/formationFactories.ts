@@ -212,7 +212,7 @@ export const generateFormationFormData = (
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(legalStructureId),
     businessStartDate: getCurrentDate().add(1, "days").format(defaultDateFormat),
-    businessTotalStock: isCorp ? randomInt().toString() ?? "" : "",
+    businessTotalStock: isCorp ? (randomInt().toString() ?? "") : "",
     businessPurpose: `some-purpose-${randomInt()}`,
     additionalProvisions: [`some-provision-${randomInt()}`],
     agentType: randomElementFromArray(["MYSELF", "AUTHORIZED_REP", "PROFESSIONAL_SERVICE"]),

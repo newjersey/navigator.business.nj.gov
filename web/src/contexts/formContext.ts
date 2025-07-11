@@ -7,15 +7,18 @@ export const createReducedFieldStates = <
 >(
   fields: K[],
 ): ReducedFieldStates<K, FieldError> => {
-  return fields.reduce((p, c: K) => {
-    p[c] = { invalid: false };
-    return p;
-  }, {} as ReducedFieldStates<K, FieldError>);
+  return fields.reduce(
+    (p, c: K) => {
+      p[c] = { invalid: false };
+      return p;
+    },
+    {} as ReducedFieldStates<K, FieldError>,
+  );
 };
 
 export const createFormContext = <T>(): Context<FormContextType<T>> =>
   createContext<FormContextType<T>>({
     fieldStates: {} as ReducedFieldStates<keyof T>,
     runValidations: false,
-    reducer: () => ({} as ReducedFieldStates<keyof T>),
+    reducer: () => ({}) as ReducedFieldStates<keyof T>,
   });

@@ -16,7 +16,7 @@ export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
   })();
 
   const get = (key: string): string | undefined => {
-    return isBrowser ? window[storageType].getItem(key) ?? undefined : undefined;
+    return isBrowser ? (window[storageType].getItem(key) ?? undefined) : undefined;
   };
 
   const set = (key: string, value: string): boolean => {

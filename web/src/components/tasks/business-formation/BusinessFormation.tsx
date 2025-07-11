@@ -117,7 +117,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       contactLastName:
         business.formationData.formationFormData.contactLastName || splitName.lastName,
       businessLocationType: isForeign
-        ? business.formationData.formationFormData.businessLocationType ?? "US"
+        ? (business.formationData.formationFormData.businessLocationType ?? "US")
         : "NJ",
     });
     if (business.formationData.businessNameAvailability) {

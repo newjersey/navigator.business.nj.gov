@@ -51,8 +51,8 @@ export const renderPage = ({
           userData === undefined
             ? createEmptyUserData(currentUser)
             : userData === null
-            ? undefined
-            : userData
+              ? undefined
+              : userData
         }
       >
         <ThemeProvider theme={createTheme()}>
