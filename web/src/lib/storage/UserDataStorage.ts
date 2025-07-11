@@ -101,8 +101,8 @@ export const UserDataStorageFactory = (): UserDataStorage => {
     return key.includes(swrPrefixToIgnore)
       ? ""
       : key.includes(userDataPrefix)
-      ? ""
-      : userDataPrefix;
+        ? ""
+        : userDataPrefix;
   };
 
   return {

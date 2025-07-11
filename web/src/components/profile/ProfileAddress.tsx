@@ -94,7 +94,7 @@ export const ProfileAddress = (): ReactElement => {
       const businessLocationType =
         isStarting || isOwning
           ? "NJ"
-          : business.formationData.formationFormData.businessLocationType ?? "US";
+          : (business.formationData.formationFormData.businessLocationType ?? "US");
       setAddressData({
         addressLine1: business.formationData.formationFormData.addressLine1,
         addressLine2: business.formationData.formationFormData.addressLine2,

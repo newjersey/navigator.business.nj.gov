@@ -77,7 +77,7 @@ export const taxFilingsInterfaceFactory = (
         businessName: request.businessName,
         lastUpdatedISO: now,
         registeredISO:
-          state === "SUCCESS" ? business.taxFilingData.registeredISO ?? now : undefined,
+          state === "SUCCESS" ? (business.taxFilingData.registeredISO ?? now) : undefined,
         errorField: state === "SUCCESS" ? undefined : business.taxFilingData.errorField,
         state: state,
         filings: state === "SUCCESS" ? filings : business.taxFilingData.filings,

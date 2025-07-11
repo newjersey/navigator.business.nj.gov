@@ -15,7 +15,7 @@ interface Props {
 
 export const NavMenuItem = (props: Props): ReactElement => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const icon = props.hoverIcon && isHovered ? props.hoverIcon : props.icon ?? "";
+  const icon = props.hoverIcon && isHovered ? props.hoverIcon : (props.icon ?? "");
 
   return (
     <MenuItem

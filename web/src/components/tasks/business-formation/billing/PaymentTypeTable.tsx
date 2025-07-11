@@ -119,8 +119,8 @@ export const PaymentTypeTable = (): ReactElement => {
                     hasError
                       ? "text-error-dark"
                       : state.formationFormData.paymentType === "CC"
-                      ? "text-primary-dark text-bold"
-                      : ""
+                        ? "text-primary-dark text-bold"
+                        : ""
                   }
                 >
                   <div data-testid={"paymentTypeCreditCardLabel"}>
@@ -154,8 +154,8 @@ export const PaymentTypeTable = (): ReactElement => {
                     doesFieldHaveError(fieldName)
                       ? "text-error-dark"
                       : state.formationFormData.paymentType === "ACH"
-                      ? "text-primary-dark text-bold"
-                      : ""
+                        ? "text-primary-dark text-bold"
+                        : ""
                   }
                 >
                   <div data-testid={"paymentTypeACHLabel"}>
