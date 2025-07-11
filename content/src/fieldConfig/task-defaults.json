@@ -1,0 +1,23 @@
+{
+  "taskDefaults": {
+    "requiredLabelText": "Required",
+    "secondaryNavigationAriaLabel": "Previous Page Navigation",
+    "continueButtonText": "Continue",
+    "backButtonText": "Back",
+    "backToRoadmapText": "Go Back",
+    "issuingAgencyText": "Issuing Agency",
+    "pageTitle": "Business Roadmap",
+    "taskProgressSnackbarPrefix": "Your task status has been updated to",
+    "loadingTaskDependencies": "Loading…",
+    "taskProgressSnackbarHeading": "Task status updated",
+    "unlockedBySingular": "Before starting this task, we recommend that you take a look at:",
+    "removeText": "Remove",
+    "nextTaskButtonText": "Next Task",
+    "editText": "Edit",
+    "markAsCompleteButtonText": "Mark As Completed",
+    "previousTaskButtonText": "Previous Task",
+    "formNameText": "Form",
+    "defaultCallToActionText": "Start Application",
+    "unlockedByPlural": "Before starting this task, we recommend you take a look at:"
+  }
+}

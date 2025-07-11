@@ -41,7 +41,6 @@ collections:
                   hint:
                     "This appears in the license calendar events and anytime action reinstatement",
                 }
-
   - name: "starter-kits"
     label: "Starter Kits"
     files:
@@ -303,32 +302,56 @@ collections:
               - label: Id
                 name: id
                 widget: hidden
-  - name: "config"
-    label: "General Config"
-    editor:
-      preview: false
+  - label: Skip to main content
+    name: skipToMainContent
+    delete: false
+    create: false
     files:
-      - label: "Config"
-        name: "config"
-        file: "content/src/fieldConfig/config.json"
+      - label: Skip to main content
+        name: "skipToMainContent"
+        file: "content/src/fieldConfig/skip-to-main-content.json"
+        editor:
+          preview: false
         fields:
           - label: Skip to main content
             name: skipToMainContent
-            collapsed: true
+            collapsed: false
             widget: object
             fields:
               - { label: Button Text, name: buttonText, widget: string }
+  - label: Beta Bar
+    name: betaBar
+    delete: false
+    create: false
+    files:
+      - label: Beta Bar
+        name: "betaBar"
+        file: "content/src/fieldConfig/beta-bar.json"
+        editor:
+          preview: false
+        fields:
           - label: Beta Bar
             name: betaBar
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{betaBar}}"
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
+  - label: Tax Calendar Defaults
+    name: taxCalendar
+    delete: false
+    create: false
+    files:
+      - label: Tax Calendar Defaults
+        name: "taxCalendar"
+        file: "content/src/fieldConfig/tax-calendar.json"
+        editor:
+          preview: false
+        fields:
           - label: Tax Calendar Defaults
             name: taxCalendar
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{taxCalendar}}"
             fields:
@@ -342,45 +365,20 @@ collections:
               - { label: Success Alert Header, name: snackbarSuccessHeader, widget: text }
               - { label: Success Alert Body, name: snackbarSuccessBody, widget: text }
               - { label: Access Open Modal Button, name: accessButton, widget: text }
-
-          - label: Filing Defaults
-            name: filingDefaults
-            collapsed: true
-            widget: object
-            summary: "{{filingDefaults}}"
-            fields:
-              - { label: Due Date Header, name: beforeDueDateText, widget: string }
-              - { label: Due Date Tool Tip, name: dueDateToolTip, widget: text }
-              - { label: Issuing Agency Header, name: issuingAgencyText, widget: string }
-              - { label: Form Id Header, name: formText, widget: string }
-              - { label: Extension Tag Text, name: extensionTagText, widget: string }
-              - { label: Tax Rate Header, name: taxRateTitle, widget: string }
-              - { label: Filing Method Header, name: filingMethod, widget: string }
-              - { label: Filing Frequency Header, name: filingFrequency, widget: markdown }
-              - { label: Late Filing Header, name: lateFilingsTitle, widget: string }
-              - { label: Late Filing Markdown, name: lateFilingsMarkdown, widget: markdown }
-              - { label: Treasury Link Text, name: treasuryLinkText, widget: string }
-              - { label: Additional Info Header, name: additionalInfo, widget: markdown }
-              - { label: Online Method Text, name: onlineTaxFilingMethod, widget: string }
-              - {
-                  label: Only Required Method Text,
-                  name: onlineRequiredTaxFilingMethod,
-                  widget: string,
-                }
-              - {
-                  label: Paper or Mail Only Method Text,
-                  name: paperOrMailOnlyTaxFilingMethod,
-                  widget: string,
-                }
-              - {
-                  label: Online or Phone Method Text,
-                  name: onlineOrPhoneTaxFilingMethod,
-                  widget: string,
-                }
-
+  - label: Formation Task - Date of Formation Modal
+    name: formationDateModal
+    delete: false
+    create: false
+    files:
+      - label: Formation Task - Date of Formation Modal
+        name: "formationDateModal"
+        file: "content/src/fieldConfig/formation-date-modal.json"
+        editor:
+          preview: false
+        fields:
           - label: Formation Task - Date of Formation Modal
             name: formationDateModal
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{formationDateModal}}"
             fields:
@@ -412,9 +410,20 @@ collections:
                   name: lockedStatusTooltipText,
                   widget: text,
                 }
+  - label: Tax Task - Tax Registration Modal
+    name: registeredForTaxesModal
+    delete: false
+    create: false
+    files:
+      - label: Tax Task - Tax Registration Modal
+        name: "registeredForTaxesModal"
+        file: "content/src/fieldConfig/registered-for-taxes-modal.json"
+        editor:
+          preview: false
+        fields:
           - label: Tax Task - Tax Registration Modal
             name: registeredForTaxesModal
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{registeredForTaxesModal}}"
             fields:
@@ -430,38 +439,58 @@ collections:
                   name: areYouSureTaxCancelButton,
                   widget: string,
                 }
-          - label: Formation Date Deletion Modal
-            name: formationDateDeletionModal
-            collapsed: true
-            widget: object
-            summary: "{{formationDateDeletionModal}}"
-            fields:
-              - { label: Header, name: header, widget: string }
-              - { label: Description, name: description, widget: markdown }
-              - { label: Are-You-Sure Modal Body, name: areYouSureModalBody, widget: markdown }
-              - { label: Cancel Button Text, name: cancelButtonText, widget: string }
-              - { label: Delete Button Text, name: deleteButtonText, widget: string }
+  - label: Funding Defaults
+    name: fundingDefaults
+    delete: false
+    create: false
+    files:
+      - label: Funding Defaults
+        name: "fundingDefaults"
+        file: "content/src/fieldConfig/funding-defaults.json"
+        editor:
+          preview: false
+        fields:
           - label: Funding Defaults
             name: fundingDefaults
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{fundingDefaults}}"
             fields:
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
-
+  - label: Legal Messages
+    name: legalMessageDefaults
+    delete: false
+    create: false
+    files:
+      - label: Legal Messages
+        name: "legalMessageDefaults"
+        file: "content/src/fieldConfig/legal-message-defaults.json"
+        editor:
+          preview: false
+        fields:
           - label: Legal Messages
             name: legalMessageDefaults
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{legalMessageDefaults}}"
             fields:
               - { label: Line 1, name: legalMessageTextOne, widget: text }
               - { label: Chat Label, name: legalMessageLegalChat, widget: string }
               - { label: Line 2, name: legalMessageTextTwo, widget: string }
-
+  - label: Onboarding Defaults
+    name: onboardingDefaults
+    delete: false
+    create: false
+    files:
+      - label: Onboarding Defaults
+        name: "onboardingDefaults"
+        file: "content/src/fieldConfig/onboarding-defaults.json"
+        editor:
+          preview: false
+        fields:
           - label: Onboarding Defaults
             name: onboardingDefaults
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{onboardingDefaults}}"
             fields:
@@ -490,9 +519,20 @@ collections:
                   name: errorTextMinimumRangeNumericField,
                   widget: string,
                 }
+  - label: Page Footer
+    name: footer
+    delete: false
+    create: false
+    files:
+      - label: Page Footer
+        name: "footer"
+        file: "content/src/fieldConfig/footer.json"
+        editor:
+          preview: false
+        fields:
           - label: Page Footer
             name: footer
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{footer}}"
             fields:
@@ -518,9 +558,20 @@ collections:
               - { label: Office External Text, name: officeExternalText, widget: string }
               - { label: Github Link, name: gitHubLink, widget: string }
               - { label: Facebook Link, name: facebookLink, widget: string }
+  - label: Section Headers
+    name: sectionHeaders
+    delete: false
+    create: false
+    files:
+      - label: Section Headers
+        name: "sectionHeaders"
+        file: "content/src/fieldConfig/section-headers.json"
+        editor:
+          preview: false
+        fields:
           - label: Section Headers
             name: sectionHeaders
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{sectionHeaders}}"
             fields:
@@ -531,9 +582,20 @@ collections:
                   name: DOMESTIC_EMPLOYER_SECTION,
                   widget: string,
                 }
+  - label: Self Registration
+    name: selfRegistration
+    delete: false
+    create: false
+    files:
+      - label: Self Registration
+        name: "selfRegistration"
+        file: "content/src/fieldConfig/self-registration.json"
+        editor:
+          preview: false
+        fields:
           - label: Self Registration
             name: selfRegistration
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{selfRegistration}}"
             fields:
@@ -603,9 +665,20 @@ collections:
                   name: needsAccountModalSubText,
                   widget: string,
                 }
+  - label: Shared Header Defaults
+    name: headerDefaults
+    delete: false
+    create: false
+    files:
+      - label: Shared Header Defaults
+        name: "headerDefaults"
+        file: "content/src/fieldConfig/header-defaults.json"
+        editor:
+          preview: false
+        fields:
           - label: Shared Header Defaults
             name: headerDefaults
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{headerDefaults}}"
             fields:
@@ -632,9 +705,20 @@ collections:
                   name: genericToProfileButtonText,
                   widget: string,
                 }
+  - label: Task Defaults
+    name: taskDefaults
+    delete: false
+    create: false
+    files:
+      - label: Task Defaults
+        name: "taskDefaults"
+        file: "content/src/fieldConfig/task-defaults.json"
+        editor:
+          preview: false
+        fields:
           - label: Task Defaults
             name: taskDefaults
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{taskDefaults}}"
             fields:
@@ -673,9 +757,20 @@ collections:
               - { label: Back, name: backButtonText, widget: string }
               - { label: Continue Text, name: continueButtonText, widget: string }
               - { label: Mark As Complete, name: "markAsCompleteButtonText", widget: string }
+  - label: Task - Business Name Search
+    name: searchBusinessNameTask
+    delete: false
+    create: false
+    files:
+      - label: Task - Business Name Search
+        name: "searchBusinessNameTask"
+        file: "content/src/fieldConfig/search-business-name-task.json"
+        editor:
+          preview: false
+        fields:
           - label: Task - Business Name Search
             name: searchBusinessNameTask
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{searchBusinessNameTask}}"
             fields:
@@ -696,17 +791,39 @@ collections:
                 }
               - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+  - label: Task Progress
+    name: taskProgress
+    delete: false
+    create: false
+    files:
+      - label: Task Progress
+        name: "taskProgress"
+        file: "content/src/fieldConfig/task-progress.json"
+        editor:
+          preview: false
+        fields:
           - label: Task Progress
             name: taskProgress
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{taskProgress}}"
             fields:
               - { label: To Do Text, name: TO_DO, widget: string }
               - { label: Completed Text, name: COMPLETED, widget: string }
+  - label: Task Progress Card
+    name: taskProgressCard
+    delete: false
+    create: false
+    files:
+      - label: Task Progress Card
+        name: "taskProgressCard"
+        file: "content/src/fieldConfig/task-progress-card.json"
+        editor:
+          preview: false
+        fields:
           - label: Task Progress Card
             name: taskProgressCard
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{taskProgressCard}}"
             fields:
@@ -730,22 +847,109 @@ collections:
                   name: requiredTasksPlural,
                   widget: string,
                 }
+  - label: Navigator Unsupported User Page
+    name: unsupportedNavigatorUserPage
+    delete: false
+    create: false
+    files:
+      - label: Navigator Unsupported User Page
+        name: "unsupportedNavigatorUserPage"
+        file: "content/src/fieldConfig/unsupported-navigator-user-page.json"
+        editor:
+          preview: false
+        fields:
           - label: Navigator Unsupported User Page
             name: unsupportedNavigatorUserPage
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{unsupportedNavigatorUserPage}}"
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Subtitle, name: subtitle, widget: markdown }
+  - label: Autosave
+    name: autosaveDefaults
+    delete: false
+    create: false
+    files:
+      - label: Autosave
+        name: "autosaveDefaults"
+        file: "content/src/fieldConfig/autosave-defaults.json"
+        editor:
+          preview: false
+        fields:
           - label: Autosave
             name: autosaveDefaults
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{autosaveDefaults}}"
             fields:
               - { label: Saving Text, name: savingText, widget: string }
               - { label: Saved Text, name: savedText, widget: string }
+  - label: Formation Date Deletion Modal
+    name: formationDateDeletionModal
+    delete: false
+    create: false
+    files:
+      - label: "Formation Date Deletion Modal"
+        name: "formationDateDeletionModal"
+        file: "content/src/fieldConfig/formation-date-deletion-modal.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Formation Date Deletion Modal"
+            name: formationDateDeletionModal
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header, name: header, widget: string }
+              - { label: Description, name: description, widget: markdown }
+              - { label: Are-You-Sure Modal Body, name: areYouSureModalBody, widget: markdown }
+              - { label: Cancel Button Text, name: cancelButtonText, widget: string }
+              - { label: Delete Button Text, name: deleteButtonText, widget: string }
+  - label: Filing Defaults
+    name: filingDefaults
+    delete: false
+    create: false
+    files:
+      - label: "Filing Defaults"
+        name: "filingDefaults"
+        file: "content/src/fieldConfig/filing-defaults.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Filing Defaults"
+            name: filingDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Due Date Header, name: beforeDueDateText, widget: string }
+              - { label: Due Date Tool Tip, name: dueDateToolTip, widget: text }
+              - { label: Issuing Agency Header, name: issuingAgencyText, widget: string }
+              - { label: Form Id Header, name: formText, widget: string }
+              - { label: Extension Tag Text, name: extensionTagText, widget: string }
+              - { label: Tax Rate Header, name: taxRateTitle, widget: string }
+              - { label: Filing Method Header, name: filingMethod, widget: string }
+              - { label: Filing Frequency Header, name: filingFrequency, widget: markdown }
+              - { label: Late Filing Header, name: lateFilingsTitle, widget: string }
+              - { label: Late Filing Markdown, name: lateFilingsMarkdown, widget: markdown }
+              - { label: Treasury Link Text, name: treasuryLinkText, widget: string }
+              - { label: Additional Info Header, name: additionalInfo, widget: markdown }
+              - { label: Online Method Text, name: onlineTaxFilingMethod, widget: string }
+              - {
+                  label: Only Required Method Text,
+                  name: onlineRequiredTaxFilingMethod,
+                  widget: string,
+                }
+              - {
+                  label: Paper or Mail Only Method Text,
+                  name: paperOrMailOnlyTaxFilingMethod,
+                  widget: string,
+                }
+              - {
+                  label: Online or Phone Method Text,
+                  name: onlineOrPhoneTaxFilingMethod,
+                  widget: string,
+                }
 
   - name: "landing-pages"
     label: "Landing Pages"

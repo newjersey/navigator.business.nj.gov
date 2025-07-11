@@ -1,0 +1,8 @@
+{
+  "taskProgressCard": {
+    "optionalTasksSingular": "${numTasks} optional task",
+    "optionalTasksPlural": "${numTasks} optional tasks",
+    "requiredTasksSingular": "${numTasks} required task",
+    "requiredTasksPlural": "${numTasks} required tasks"
+  }
+}
