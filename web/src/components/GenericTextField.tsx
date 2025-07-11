@@ -63,8 +63,8 @@ export const GenericTextField = forwardRef(
       props.inputWidth === "reduced"
         ? "text-field-width-reduced"
         : props.inputWidth === "full"
-          ? "width-100"
-          : "text-field-width-default";
+        ? "width-100"
+        : "text-field-width-default";
 
     const { Config } = useConfig();
 
@@ -75,9 +75,7 @@ export const GenericTextField = forwardRef(
 
     const value = useMemo(
       () =>
-        visualFilter
-          ? visualFilter(props.value?.toString() ?? "")
-          : (props.value?.toString() ?? ""),
+        visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? "",
       [props.value, visualFilter],
     );
 

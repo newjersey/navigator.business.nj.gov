@@ -132,9 +132,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
             >
               <Box className="drop-shadow-xl">
                 <Paper>
-                  <ClickAwayListener onClickAway={handleClose}>
-                    {DropdownMenu()}
-                  </ClickAwayListener>{" "}
+                  <ClickAwayListener onClickAway={handleClose}>{DropdownMenu()}</ClickAwayListener>{" "}
                 </Paper>
               </Box>
             </Grow>
