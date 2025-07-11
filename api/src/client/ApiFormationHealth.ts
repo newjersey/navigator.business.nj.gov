@@ -110,6 +110,7 @@ const formationData: FormationData = {
     contactFirstName: "some-contact-first-name-15248752",
     contactLastName: "some-contact-last-name-97216646",
     contactPhoneNumber: "6092926748",
+    contactEmail: "some-contact-email@email.com",
     withdrawals: "some-withdrawals-text-62080960",
     dissolution: "some-dissolution-text-69760616",
     combinedInvestment: "some-combinedInvestment-text-57158048",
