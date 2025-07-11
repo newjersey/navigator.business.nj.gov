@@ -1,0 +1,8 @@
+{
+  "registeredForTaxesModal": {
+    "areYouSureTaxTitle": "Didn't Register Yet?",
+    "areYouSureTaxBody": "If you change your task status, you will lose access to your Certifications. You can gain access to Certifications again once your status is marked as complete.",
+    "areYouSureTaxContinueButton": "Continue",
+    "areYouSureTaxCancelButton": "Cancel"
+  }
+}
