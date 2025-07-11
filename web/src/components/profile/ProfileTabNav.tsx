@@ -43,9 +43,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
       isStartingBusiness(props.business)) &&
     state.profileData.industryId !== "domestic-employer";
 
-  const shouldShowPersonalizeMyTasks =
-    process.env.FEATURE_SHOW_PERSONALIZE_TASK_TAB === "true" &&
-    state.profileData.industryId !== "domestic-employer";
+  const shouldShowPersonalizeMyTasks = state.profileData.industryId !== "domestic-employer";
 
   const shouldShowDocuments = isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
 
