@@ -1,0 +1,13 @@
+{
+  "searchBusinessNameTask": {
+    "designatorText": "It appears you have included a business designator in your name, such as LLC, LP or CORP. Remove it at try searching again. Once you have found an available name you then can officially form your business.",
+    "searchButtonText": "Check Availability",
+    "updateButtonText": "Update the name on your Roadmap with this one",
+    "nameHasBeenUpdatedText": "Your business name has been updated.",
+    "similarUnavailableNamesText": "Here are similar business names that are already taken:",
+    "availableText": "It looks like \"${name}\" might be available, but you should do an official name check using the button below.",
+    "errorTextBadInput": "That isn't a valid company name. Try a more specific name.",
+    "errorTextSearchFailed": "Unable to complete check. Try again later.",
+    "unavailableText": "\"${name}\" isn't available. Try another name."
+  }
+}

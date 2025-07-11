@@ -28,10 +28,6 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/content/fieldConfig/config.json" },
-    },
-    {
-      from: {},
       to: { path: "@businessnjgovnavigator/content/roadmaps/steps.json" },
     },
     {
