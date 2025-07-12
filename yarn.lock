@@ -5016,7 +5016,7 @@ __metadata:
     decap-cms-app: 3.0.12
     dedent: 1.6.0
     dependency-cruiser: 16.10.4
-    dotenv: 16.5.0
+    dotenv: 16.6.1
     dynamodb-admin: 5.1.3
     eslint: 8.57.1
     eslint-config-next: 15.3.5
@@ -5214,7 +5214,7 @@ __metadata:
     dayjs: 1.11.13
     decap-cms-app: 3.0.12
     dependency-cruiser: 16.10.4
-    dotenv: 16.5.0
+    dotenv: 16.6.1
     eslint: 8.57.1
     eslint-config-next: 15.3.5
     eslint-config-prettier: 9.1.0
@@ -19234,10 +19234,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.5.0, dotenv@npm:^16.0.0":
-  version: 16.5.0
-  resolution: "dotenv@npm:16.5.0"
-  checksum: 6543fe87b5ddf2d60dd42df6616eec99148a5fc150cb4530fef5bda655db5204a3afa0e6f25f7cd64b20657ace4d79c0ef974bec32fdb462cad18754191e7a90
+"dotenv@npm:16.6.1, dotenv@npm:^16.0.0":
+  version: 16.6.1
+  resolution: "dotenv@npm:16.6.1"
+  checksum: e8bd63c9a37f57934f7938a9cf35de698097fadf980cb6edb61d33b3e424ceccfe4d10f37130b904a973b9038627c2646a3365a904b4406514ea94d7f1816b69
   languageName: node
   linkType: hard
 
