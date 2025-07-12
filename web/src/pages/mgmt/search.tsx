@@ -10,6 +10,7 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { IndustryRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
 import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
+import { searchBusinessFormation } from "@/lib/search/searchBusinessFormation";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchConfig } from "@/lib/search/searchConfig";
 import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
@@ -37,7 +38,10 @@ import {
   loadAllArchivedContextualInfo,
   loadAllContextualInfo,
 } from "@/lib/static/loadContextualInfo";
-import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
+import {
+  loadRoadmapSideBarDisplayContent,
+  loadTasksDisplayContent,
+} from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
@@ -65,6 +69,8 @@ import {
   SidebarCardContent,
   Step,
   Task,
+  TasksDisplayContent,
+  TaskWithoutLinks,
   WebflowLicense,
   XrayRenewalCalendarEventType,
 } from "@/lib/types/types";
@@ -100,6 +106,7 @@ interface Props {
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
+  tasksDisplayContent: TasksDisplayContent;
   addOns: IndustryRoadmap[];
   industries: Industry[];
 }
@@ -121,6 +128,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     error: null,
     hasSearched: false,
   });
+  const [businessFormationMatches, setBusinessFormationMatches] = useState<Match[]>([]);
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
@@ -224,7 +232,11 @@ const SearchContentPage = (props: Props): ReactElement => {
     );
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm, "funding-opportunities"));
     setIndustryMatches(
-      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm, ""),
+      searchIndustries(
+        getIndustries({ overrideShowDisabledIndustries: true }),
+        lowercaseTerm,
+        "roadmaps",
+      ),
     );
     setAnytimeActionTaskMatches(
       searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm, "anytime-action-tasks"),
@@ -243,7 +255,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       {
         filename: "Steps",
       },
-      "",
+      "steps",
     );
     const domesticEmployerStepsMatches = searchSteps(
       DomesticEmployerSteps.steps as Step[],
@@ -297,6 +309,13 @@ const SearchContentPage = (props: Props): ReactElement => {
         "xray-calendar-event",
       ),
     );
+
+    const businessFormationInfo: TaskWithoutLinks[] = Object.values(
+      props.tasksDisplayContent.formationDbaContent,
+    );
+    setBusinessFormationMatches(
+      searchBusinessFormation(businessFormationInfo, lowercaseTerm, "business-formation-dba-tasks"),
+    );
     updateSearchState({ hasSearched: true });
   };
 
@@ -325,6 +344,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...groupedConfigMatches,
         ...anytimeActionTaskMatches,
         ...anytimeActionLicenseReinstatementMatches,
+        ...businessFormationMatches,
       ].length === 0
     );
   };
@@ -352,6 +372,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const roadmapsCollection = {
     "Roadmaps - Settings": stepsMatches,
     "Roadmaps - Non Essential Question": nonEssentialQuestionsMatches,
+    "Roadmaps - Industries": industryMatches,
   };
 
   const calendarCollection = {
@@ -407,7 +428,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         groupedConfigMatches={groupedConfigMatches}
       />
       <MatchCollection
-        matchedCollections={{ "Biz Form - Config": [] }}
+        matchedCollections={{ "Biz Form - DBA Tasks": businessFormationMatches }}
         groupedConfigMatches={groupedConfigMatches}
       />
       <MatchCollection
@@ -495,6 +516,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
+      tasksDisplayContent: loadTasksDisplayContent(),
       addOns: loadAllAddOns(),
       industries: getIndustries(),
     },
