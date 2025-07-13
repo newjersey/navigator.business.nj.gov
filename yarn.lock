@@ -4687,7 +4687,7 @@ __metadata:
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     next: 15.3.5
     next-router-mock: 0.9.13
-    next-seo: 6.6.0
+    next-seo: 6.8.0
     prettier: 3.6.2
     prettier-plugin-organize-imports: 4.1.0
     raw-loader: 4.0.2
@@ -4874,7 +4874,7 @@ __metadata:
     lodash: 4.17.21
     next: 15.3.5
     next-router-mock: 0.9.13
-    next-seo: 6.6.0
+    next-seo: 6.8.0
     prettier: 3.6.2
     prettier-plugin-organize-imports: 4.1.0
     raw-loader: 4.0.2
@@ -27737,14 +27737,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-seo@npm:6.6.0":
-  version: 6.6.0
-  resolution: "next-seo@npm:6.6.0"
+"next-seo@npm:6.8.0":
+  version: 6.8.0
+  resolution: "next-seo@npm:6.8.0"
   peerDependencies:
     next: ^8.1.1-canary.54 || >=9.0.0
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: cd320a4c8c1c817c0ffaf1639c405e5ee1df6500847a9024d1a8204eebf9a64bb01ba4d2e4ca656f8f5bdd1d85315ea5a16d9a68838b555d873833378d2d5376
+  checksum: 04b7ce8d46e98742c829d4979e4e2c2be5b8287c45b5cc2d32448825c232126e43840231ba53de126da06a78cd33631ce837e1610ea4c50aa3be1fcd5b2c2365
   languageName: node
   linkType: hard
 
