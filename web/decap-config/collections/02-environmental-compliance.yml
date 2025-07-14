@@ -30,7 +30,6 @@ collections:
                   - { label: Button Text, name: buttonText, widget: string }
                   - { label: Back Button Text, name: backButtonText, widget: string }
                   - { label: Error Text, name: errorText, widget: string }
-                  - { label: Footer Text, name: footerText, widget: string }
                   - {
                       label: Aria Context Inline Dialog Inactive,
                       name: ariaContextInlineDialogInactive,
