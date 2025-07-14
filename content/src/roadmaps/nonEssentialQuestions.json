@@ -206,6 +206,12 @@
       "id": "mvc-cpcn"
     },
     {
+      "id": "demo-only",
+      "questionText": "You are a demo industry user. This is an example non-essential question that is being used to add an Anytime Action. Answering \"yes\" will add the Anytime Action \"Demo Anytime Action\".",
+      "addOn": "",
+      "anytimeActions": ["demo-only"]
+    },
+    {
       "id": "well-driller",
       "questionText": "Do you plan to install, repair, or modify wells for your customer’s business?\n",
       "addOn": "construction-well-driller-license"

@@ -41,6 +41,7 @@ const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<AnytimeActionDropdown />", () => {
   let anytimeActionTasks: AnytimeActionTask[] = [];
+  let anytimeActionTasksFromNonEssentialQuestions: AnytimeActionTask[] = [];
   let anytimeActionLicenseReinstatement: AnytimeActionLicenseReinstatement[] = [];
 
   const taskName = "some-task-name";
@@ -106,6 +107,7 @@ describe("<AnytimeActionDropdown />", () => {
       render(
         <AnytimeActionDropdown
           anytimeActionTasks={anytimeActionTasks}
+          anytimeActionTasksFromNonEssentialQuestions={anytimeActionTasksFromNonEssentialQuestions}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
         />,
       );
@@ -229,6 +231,7 @@ describe("<AnytimeActionDropdown />", () => {
       render(
         <AnytimeActionDropdown
           anytimeActionTasks={anytimeActionTasks}
+          anytimeActionTasksFromNonEssentialQuestions={anytimeActionTasksFromNonEssentialQuestions}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
         />,
       );
@@ -394,180 +397,202 @@ describe("<AnytimeActionDropdown />", () => {
       expect(screen.queryByText("license - hvac-reinstatement")).not.toBeInTheDocument();
     });
 
-    it("adds vacant property anytime action for vacant property owners", () => {
-      anytimeActionTasks = [
-        generateAnytimeActionTask({ filename: "vacant-building-fire-permit" }),
-        ...anytimeActionTasks,
-      ];
-      useMockBusiness({
-        profileData: generateProfileData({
-          vacantPropertyOwner: false,
-        }),
-      });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.queryByTestId("vacant-building-fire-permit-option")).not.toBeInTheDocument();
+    describe("non essential questions", () => {
+      it("duplicate Anytime Actions added via non-essential questions are removed", () => {
+        const duplicateAnytimeAction = generateAnytimeActionTask({
+          filename: "same-anytime-action",
+          name: "same-anytime-action",
+        });
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          vacantPropertyOwner: true,
-        }),
-      });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
-    });
+        anytimeActionTasks = [duplicateAnytimeAction, ...anytimeActionTasks];
+        anytimeActionTasksFromNonEssentialQuestions = [duplicateAnytimeAction];
 
-    it("adds fire carnival modification for carnival ride owning businesses", () => {
-      anytimeActionTasks = [
-        generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
-        ...anytimeActionTasks,
-      ];
-      useMockBusiness({
-        profileData: generateProfileData({
-          carnivalRideOwningBusiness: false,
-        }),
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(screen.getAllByText("same-anytime-action").length).toBe(1);
       });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(
-        screen.queryByTestId("carnival-ride-supplemental-modification-option"),
-      ).not.toBeInTheDocument();
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          carnivalRideOwningBusiness: true,
-        }),
-      });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(
-        screen.getByTestId("carnival-ride-supplemental-modification-option"),
-      ).toBeInTheDocument();
-    });
+      it("adds vacant property anytime action for vacant property owners", () => {
+        anytimeActionTasks = [
+          generateAnytimeActionTask({ filename: "vacant-building-fire-permit" }),
+          ...anytimeActionTasks,
+        ];
+        useMockBusiness({
+          profileData: generateProfileData({
+            vacantPropertyOwner: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(screen.queryByTestId("vacant-building-fire-permit-option")).not.toBeInTheDocument();
 
-    it("adds operating carnival fire permit for carnival owning businesses", () => {
-      anytimeActionTasks = [
-        generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
-        ...anytimeActionTasks,
-      ];
-      useMockBusiness({
-        profileData: generateProfileData({
-          carnivalRideOwningBusiness: false,
-          travelingCircusOrCarnivalOwningBusiness: false,
-        }),
+        useMockBusiness({
+          profileData: generateProfileData({
+            vacantPropertyOwner: true,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
       });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.queryByTestId("operating-carnival-fire-permit-option")).not.toBeInTheDocument();
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          carnivalRideOwningBusiness: true,
-          travelingCircusOrCarnivalOwningBusiness: false,
-        }),
-      });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
-    });
+      it("adds fire carnival modification for carnival ride owning businesses", () => {
+        anytimeActionTasks = [
+          generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
+          ...anytimeActionTasks,
+        ];
+        useMockBusiness({
+          profileData: generateProfileData({
+            carnivalRideOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(
+          screen.queryByTestId("carnival-ride-supplemental-modification-option"),
+        ).not.toBeInTheDocument();
 
-    it("adds operating carnival fire permit for traveling circus or carnival owning businesses", () => {
-      anytimeActionTasks = [
-        generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
-        ...anytimeActionTasks,
-      ];
-      useMockBusiness({
-        profileData: generateProfileData({
-          carnivalRideOwningBusiness: false,
-          travelingCircusOrCarnivalOwningBusiness: false,
-        }),
+        useMockBusiness({
+          profileData: generateProfileData({
+            carnivalRideOwningBusiness: true,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(
+          screen.getByTestId("carnival-ride-supplemental-modification-option"),
+        ).toBeInTheDocument();
       });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.queryByTestId("operating-carnival-fire-permit-option")).not.toBeInTheDocument();
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          carnivalRideOwningBusiness: false,
-          travelingCircusOrCarnivalOwningBusiness: true,
-        }),
-      });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
-    });
+      it("adds operating carnival fire permit for carnival owning businesses", () => {
+        anytimeActionTasks = [
+          generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
+          ...anytimeActionTasks,
+        ];
+        useMockBusiness({
+          profileData: generateProfileData({
+            carnivalRideOwningBusiness: false,
+            travelingCircusOrCarnivalOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(
+          screen.queryByTestId("operating-carnival-fire-permit-option"),
+        ).not.toBeInTheDocument();
 
-    it("adds operating carnival fire permit for traveling circus or carnival owning businesses based on non-essential question answers", () => {
-      anytimeActionTasks = [
-        generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
-        ...anytimeActionTasks,
-      ];
-      useMockBusiness({
-        profileData: generateProfileData({
-          nonEssentialRadioAnswers: {
-            "carnival-fire-licenses": false,
-            "carnival-ride-permitting": false,
-          },
-          carnivalRideOwningBusiness: false,
-          travelingCircusOrCarnivalOwningBusiness: false,
-        }),
+        useMockBusiness({
+          profileData: generateProfileData({
+            carnivalRideOwningBusiness: true,
+            travelingCircusOrCarnivalOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
       });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.queryByTestId("operating-carnival-fire-permit-option")).not.toBeInTheDocument();
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          nonEssentialRadioAnswers: {
-            "carnival-fire-licenses": true,
-            "carnival-ride-permitting": false,
-          },
-          carnivalRideOwningBusiness: false,
-          travelingCircusOrCarnivalOwningBusiness: false,
-        }),
-      });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
-    });
+      it("adds operating carnival fire permit for traveling circus or carnival owning businesses", () => {
+        anytimeActionTasks = [
+          generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
+          ...anytimeActionTasks,
+        ];
+        useMockBusiness({
+          profileData: generateProfileData({
+            carnivalRideOwningBusiness: false,
+            travelingCircusOrCarnivalOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(
+          screen.queryByTestId("operating-carnival-fire-permit-option"),
+        ).not.toBeInTheDocument();
 
-    it("adds carnival ride supplemental modification for traveling circus or carnival owning businesses based on non-essential question answers", () => {
-      anytimeActionTasks = [
-        generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
-        ...anytimeActionTasks,
-      ];
-      useMockBusiness({
-        profileData: generateProfileData({
-          nonEssentialRadioAnswers: {
-            "carnival-ride-permitting": false,
-            "carnival-fire-licenses": false,
-          },
-          carnivalRideOwningBusiness: false,
-          travelingCircusOrCarnivalOwningBusiness: false,
-        }),
+        useMockBusiness({
+          profileData: generateProfileData({
+            carnivalRideOwningBusiness: false,
+            travelingCircusOrCarnivalOwningBusiness: true,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
       });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(
-        screen.queryByTestId("carnival-ride-supplemental-modification-option"),
-      ).not.toBeInTheDocument();
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          nonEssentialRadioAnswers: {
-            "carnival-ride-permitting": true,
-            "carnival-fire-licenses": false,
-          },
-          carnivalRideOwningBusiness: false,
-          travelingCircusOrCarnivalOwningBusiness: false,
-        }),
+      it("adds operating carnival fire permit for traveling circus or carnival owning businesses based on non-essential question answers", () => {
+        anytimeActionTasks = [
+          generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
+          ...anytimeActionTasks,
+        ];
+        useMockBusiness({
+          profileData: generateProfileData({
+            nonEssentialRadioAnswers: {
+              "carnival-fire-licenses": false,
+              "carnival-ride-permitting": false,
+            },
+            carnivalRideOwningBusiness: false,
+            travelingCircusOrCarnivalOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(
+          screen.queryByTestId("operating-carnival-fire-permit-option"),
+        ).not.toBeInTheDocument();
+
+        useMockBusiness({
+          profileData: generateProfileData({
+            nonEssentialRadioAnswers: {
+              "carnival-fire-licenses": true,
+              "carnival-ride-permitting": false,
+            },
+            carnivalRideOwningBusiness: false,
+            travelingCircusOrCarnivalOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
       });
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      expect(
-        screen.getByTestId("carnival-ride-supplemental-modification-option"),
-      ).toBeInTheDocument();
+
+      it("adds carnival ride supplemental modification for traveling circus or carnival owning businesses based on non-essential question answers", () => {
+        anytimeActionTasks = [
+          generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
+          ...anytimeActionTasks,
+        ];
+        useMockBusiness({
+          profileData: generateProfileData({
+            nonEssentialRadioAnswers: {
+              "carnival-ride-permitting": false,
+              "carnival-fire-licenses": false,
+            },
+            carnivalRideOwningBusiness: false,
+            travelingCircusOrCarnivalOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(
+          screen.queryByTestId("carnival-ride-supplemental-modification-option"),
+        ).not.toBeInTheDocument();
+
+        useMockBusiness({
+          profileData: generateProfileData({
+            nonEssentialRadioAnswers: {
+              "carnival-ride-permitting": true,
+              "carnival-fire-licenses": false,
+            },
+            carnivalRideOwningBusiness: false,
+            travelingCircusOrCarnivalOwningBusiness: false,
+          }),
+        });
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        expect(
+          screen.getByTestId("carnival-ride-supplemental-modification-option"),
+        ).toBeInTheDocument();
+      });
     });
 
     it("renders an anytime action with a description", () => {

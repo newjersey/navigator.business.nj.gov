@@ -8,7 +8,10 @@ import { ModifiedContent } from "@/components/ModifiedContent";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -27,7 +30,7 @@ const Template = () => {
   const mergedConfig = getMergedConfig();
   const [Config, setConfig] = useState<ConfigType>(mergedConfig);
   const [profileData, setProfileData] = useState<ProfileData>(
-    generateProfileData({ taxId: "2", naicsCode: "" })
+    generateProfileData({ taxId: "2", naicsCode: "" }),
   );
   const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
@@ -66,6 +69,10 @@ const Template = () => {
             setShowNeedsAccountSnackbar: () => {},
             showNeedsAccountModal: false,
             setShowNeedsAccountModal: () => {},
+            showContinueWithoutSaving: false,
+            setShowContinueWithoutSaving: () => {},
+            userWantsToContinueWithoutSaving: false,
+            setUserWantsToContinueWithoutSaving: () => {},
           }}
         >
           <ConfigContext.Provider value={{ config: Config, setOverrides: setConfig }}>
@@ -110,13 +117,17 @@ const Template = () => {
               <div>FieldLabelFormation Component</div>
               <div className={"border margin-bottom-4"}>
                 <strong>
-                  <ModifiedContent>{Config.profileDefaults.fields.industryId.default.header}</ModifiedContent>
+                  <ModifiedContent>
+                    {Config.profileDefaults.fields.industryId.default.header}
+                  </ModifiedContent>
                 </strong>
               </div>
 
               <div>ProfileField Component</div>
               <div className={"border margin-bottom-4"}>
-                <ProfileField fieldName="industryId">Children content is displayed here</ProfileField>
+                <ProfileField fieldName="industryId">
+                  Children content is displayed here
+                </ProfileField>
               </div>
 
               <div>ProfileField Component When Locked</div>

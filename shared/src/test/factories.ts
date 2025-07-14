@@ -8,13 +8,14 @@ import { createBusinessId } from "../domain-logic/createBusinessId";
 import { EmergencyTripPermitApplicationInfo, getEarliestPermitDate } from "../emergencyTripPermit";
 import {
   AirData,
-  AirQuestionnaireData,
+  DrinkingWaterData,
   EnvironmentData,
   LandData,
-  LandQuestionnaireData,
+  QuestionnaireData,
   WasteData,
-  WasteQuestionnaireData,
+  WasteWaterData,
 } from "../environment";
+
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -469,9 +470,7 @@ export const generateCigaretteLicenseData = (
   };
 };
 
-export const generateLandQuestionnaireData = (
-  overrides: Partial<LandQuestionnaireData>,
-): LandQuestionnaireData => {
+export const generateLandData = (overrides: Partial<LandData>): LandData => {
   return {
     takeOverExistingBiz: false,
     propertyAssessment: false,
@@ -482,19 +481,7 @@ export const generateLandQuestionnaireData = (
   };
 };
 
-export const generateLandData = (overrides: Partial<LandData>): LandData => {
-  return {
-    questionnaireData: generateLandQuestionnaireData({
-      ...overrides.questionnaireData,
-    }),
-    submitted: false,
-    ...overrides,
-  };
-};
-
-export const generateWasteQuestionnaireData = (
-  overrides: Partial<WasteQuestionnaireData>,
-): WasteQuestionnaireData => {
+export const generateWasteData = (overrides: Partial<WasteData>): WasteData => {
   return {
     transportWaste: false,
     hazardousMedicalWaste: false,
@@ -506,19 +493,7 @@ export const generateWasteQuestionnaireData = (
   };
 };
 
-export const generateWasteData = (overrides: Partial<WasteData>): WasteData => {
-  return {
-    questionnaireData: generateWasteQuestionnaireData({
-      ...overrides.questionnaireData,
-    }),
-    submitted: false,
-    ...overrides,
-  };
-};
-
-export const generateAirQuestionnaireData = (
-  overrides: Partial<AirQuestionnaireData>,
-): AirQuestionnaireData => {
+export const generateAirData = (overrides: Partial<AirData>): AirData => {
   return {
     emitEmissions: false,
     emitPollutants: false,
@@ -528,21 +503,59 @@ export const generateAirQuestionnaireData = (
   };
 };
 
-export const generateAirData = (overrides: Partial<AirData>): AirData => {
+export const generateWasteWaterData = (overrides: Partial<WasteWaterData>): WasteWaterData => {
   return {
-    questionnaireData: generateAirQuestionnaireData({
-      ...overrides.questionnaireData,
-    }),
-    submitted: false,
+    sanitaryWaste: false,
+    industrialWaste: false,
+    localSewage: false,
+    septicSystem: false,
+    streamsRiversOrLakes: false,
+    needsTreatment: false,
+    planningConstruction: false,
+    stormWaterDischarge: false,
+    takeoverIndustrialStormWaterPermit: false,
+    noWasteWater: false,
     ...overrides,
   };
 };
 
+export const generateDrinkingWaterData = (
+  overrides: Partial<DrinkingWaterData>,
+): DrinkingWaterData => {
+  return {
+    ownWell: false,
+    combinedWellCapacity: false,
+    wellDrilled: false,
+    potableWater: false,
+    noDrinkingWater: false,
+    ...overrides,
+  };
+};
+
+export const generateEnvironmentQuestionnaireData = ({
+  airOverrides,
+  landOverrides,
+  wasteOverrides,
+  drinkingWaterOverrides,
+  wasteWaterOverrides,
+}: {
+  airOverrides?: Partial<AirData>;
+  landOverrides?: Partial<LandData>;
+  wasteOverrides?: Partial<WasteData>;
+  drinkingWaterOverrides?: Partial<DrinkingWaterData>;
+  wasteWaterOverrides?: Partial<WasteWaterData>;
+}): QuestionnaireData => ({
+  air: generateAirData({ ...airOverrides }),
+  land: generateLandData({ ...landOverrides }),
+  waste: generateWasteData({ ...wasteOverrides }),
+  drinkingWater: generateDrinkingWaterData({ ...drinkingWaterOverrides }),
+  wasteWater: generateWasteWaterData({ ...wasteWaterOverrides }),
+});
+
 export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): EnvironmentData => {
   return {
-    waste: undefined,
-    land: undefined,
-    air: undefined,
+    submitted: false,
+    questionnaireData: generateEnvironmentQuestionnaireData({}),
     ...overrides,
   };
 };

@@ -14,12 +14,13 @@ import {
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
-import { orderBy } from "lodash";
+import { orderBy, unionBy } from "lodash";
 import { useRouter } from "next/compat/router";
 import { ChangeEvent, type ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
+  anytimeActionTasksFromNonEssentialQuestions: AnytimeActionTask[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
 
@@ -59,46 +60,37 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const sectorId = business?.profileData.sectorId;
 
   const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
-    let anytimeActionTasksWithType = props.anytimeActionTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
+    const [tasks, reinstatements] = [
+      props.anytimeActionTasks.filter(findMatch).map((action) => {
         return {
           ...action,
-          type: "task",
           category: action.category,
         };
-      });
-    anytimeActionTasksWithType = orderBy(anytimeActionTasksWithType, ["name"]);
-
-    let anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
-      .filter((action) => licenseReinstatementMatch(action))
-      .map((action) => {
+      }),
+      props.anytimeActionLicenseReinstatements.filter(licenseReinstatementMatch).map((action) => {
         return {
           ...action,
           type: "license-reinstatement",
         };
-      });
-    anytimeActionLicenseReinstatementsWithType = orderBy(
-      anytimeActionLicenseReinstatementsWithType,
-      ["name"],
+      }),
+    ];
+
+    const deduplicatedTasks = unionBy(
+      tasks,
+      props.anytimeActionTasksFromNonEssentialQuestions,
+      "name",
     );
 
-    let applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
-    applicableAnytimeActions.push(...anytimeActionTasksWithType);
-    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
-    applicableAnytimeActions = applicableAnytimeActions.sort((a, b) => {
+    const orderedTasks = orderBy(deduplicatedTasks, ["name"]);
+    const orderedReinstatements = orderBy(reinstatements, ["name"]);
+
+    const allActions = [...orderedTasks, ...orderedReinstatements];
+
+    return allActions.sort((a, b) => {
       const categoryA = a.category[0].categoryName.toLowerCase();
       const categoryB = b.category[0].categoryName.toLowerCase();
-      if (categoryA < categoryB) {
-        return -1;
-      }
-      if (categoryA > categoryB) {
-        return 1;
-      }
-      return 0;
+      return categoryA.localeCompare(categoryB);
     });
-
-    return applicableAnytimeActions;
   };
 
   const findMatch = (action: AnytimeActionTask): boolean => {
