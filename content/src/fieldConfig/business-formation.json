@@ -20,12 +20,12 @@
       "infoCalloutIntro": "Whoever you choose as a registered agent (even if you choose yourself) must:",
       "infoCalloutBullets": [
         "Be a New Jersey resident with a physical street address in New Jersey (no P.O. boxes or virtual mailboxes)",
-        "Be available at that address during standard business hours (9:00am-5:00pm, Monday-Friday)",
+        "Be available at that address during standard business hours (9:00 a.m.-5:00 p.m., Monday-Friday)",
         "Be willing to receive legal and tax mail on your business's behalf (your name will be listed on public records)",
         "Consent to be legally accountable for the business"
       ],
       "infoCalloutFooter": "If you or whoever you choose is not able to meet the requirements, you can search the internet to find a professional registered agent service. Carefully research the registered agent to make sure they are authorized in New Jersey.",
-      "manualEntryCheckboxLabel": "Can't find your ID? Enter info manually instead."
+      "manualEntryCheckboxLabel": "Can't find your ID? Enter information manually instead."
     },
     "general": {
       "helpButtonText": "Help",
@@ -279,7 +279,7 @@
       "agentNumber": {
         "label": "Registered Agent ID Number",
         "error": "Enter the 4 to 7 digit Registered Agent ID number.",
-        "helperText": "You can find this 7-digit ID in your account dashboard or email."
+        "helperText": "Check your account dashboard or the email from your registered agent to find the 7-digit ID."
       },
       "corpWatchNotification": {
         "checkboxText": "I want to sign up for CorpWatch Alerts to notify me when any charter document filing is performed for my business."
