@@ -1,6 +1,6 @@
 ---
 id: xray-renewal
-filename: xray-calendar-event
+filename: xray-renewal
 displayname: xray-renewal
 urlSlug: xray-renewal
 name: Renew Your X-Ray Machine Registration
