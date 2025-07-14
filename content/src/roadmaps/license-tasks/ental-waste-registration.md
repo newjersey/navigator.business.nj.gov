@@ -1,8 +1,8 @@
 ---
 licenseName: ""
 id: ental-waste-registration
-displayname: ental-waste-registration
-urlSlug: ental-waste-registration
+displayname: dental-waste-registration
+urlSlug: dental-waste-registration
 name: Apply for Your Dental Waste Registration
 webflowName: "  "
 summaryDescriptionMd: >-
