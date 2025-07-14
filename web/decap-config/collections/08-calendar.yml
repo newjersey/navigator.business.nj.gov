@@ -227,7 +227,7 @@ collections:
     create: false
     files:
       - label: "Xray Renewal Calendar Event"
-        name: "xray-calendar-event"
+        name: "xray-renewal"
         file: "content/src/renewal-calendar-events/xray-renewal.md"
         editor:
           preview: true
