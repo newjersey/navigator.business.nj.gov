@@ -226,7 +226,7 @@
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.8.3",
-    "webpack": "5.100.0",
+    "webpack": "5.100.1",
     "wiremock": "3.13.1",
     "yarn-workspace-sync-deps": "0.3.3"
   },
