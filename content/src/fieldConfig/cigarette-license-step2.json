@@ -1,0 +1,13 @@
+{
+  "cigaretteLicenseStep2": {
+    "businessNameErrorText": "Business name is required",
+    "businessNameText": "Enter the legal name of your business.",
+    "businessNameHeaderText": "Business Name",
+    "tradeNameErrorText": "Trade name is required",
+    "tradeNameText": "Enter the trade name of your business.",
+    "tradeNameHeaderText": "Trade Name",
+    "responsibleOwnerNameErrorText": "Responsible owner name is required",
+    "responsibleOwnerNameText": "Enter your full name exactly as it appears in the \"Responsible Owner Name\" section of your tax confirmation email.",
+    "responsibleOwnerNameHeaderText": "Responsible Owner Name"
+  }
+}

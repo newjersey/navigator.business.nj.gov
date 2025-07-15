@@ -916,6 +916,23 @@ collections:
                   widget: "markdown",
                   required: true,
                 }
+      - label: "Cigarette License Step 2"
+        name: "cigaretteLicense-step2"
+        file: "content/src/fieldConfig/cigarette-license-step2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cigarette License Step 2
+            name: cigaretteLicenseStep2
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "Business Name Error Text",
+                  name: "businessNameErrorText",
+                  widget: "string",
+                  required: true,
+                }
       - label: "Cigarette License Shared"
         name: "cigaretteLicense-shared"
         file: "content/src/fieldConfig/cigarette-license-shared.json"

@@ -148,6 +148,7 @@ export const GenericTextField = forwardRef(
 
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
       const isValid = isFieldValid(event.target.value);
+      console.log("onValidation", isValid);
       setIsValid(isValid);
       props.onValidation && props.onValidation(props.fieldName, !isValid, event.target.value);
     };
