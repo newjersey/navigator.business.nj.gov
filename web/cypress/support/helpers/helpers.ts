@@ -41,7 +41,11 @@ export const randomElementFromArray = (array: any[]) => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-export const completeBusinessStructureTask = ({ legalStructureId }: { legalStructureId: string }): void => {
+export const completeBusinessStructureTask = ({
+  legalStructureId,
+}: {
+  legalStructureId: string;
+}): void => {
   cy.get('[data-task="business-structure"]').first().scrollIntoView();
   cy.get('[data-task="business-structure"]').first().click();
   cy.get('[data-testid="business-structure-task"]').should("be.visible");
@@ -55,7 +59,9 @@ export const completeBusinessStructureTask = ({ legalStructureId }: { legalStruc
 };
 
 export const randomFormationLegalType = (): FormationLegalType => {
-  return randomElementFromArray(allFormationLegalTypes as unknown as string[]) as FormationLegalType;
+  return randomElementFromArray(
+    allFormationLegalTypes as unknown as string[],
+  ) as FormationLegalType;
 };
 
 export const randomPublicFilingLegalStructure = (): string => {
@@ -95,24 +101,98 @@ export const setMobileViewport = () => {
 
 export const completeEmploymentAgencyOnboarding = (industry: Industry) => {
   if (industry.industryOnboardingQuestions.isEmploymentAndPersonnelTypeApplicable === undefined) {
-    onOnboardingPageStartingBusiness.getEmploymentAndPersonnelServicesTypeItemsRadio().should("not.exist");
+    onOnboardingPageStartingBusiness
+      .getEmploymentAndPersonnelServicesTypeItemsRadio()
+      .should("not.exist");
   } else {
     const employmentAndPersonnelServicesType = randomInt() % 2 ? "EMPLOYERS" : "JOB_SEEKERS";
     onOnboardingPageStartingBusiness.selectEmploymentAndPersonnelServicesType(
-      employmentAndPersonnelServicesType
+      employmentAndPersonnelServicesType,
     );
     onOnboardingPageStartingBusiness
       .getEmploymentAndPersonnelServicesTypeItemsRadio(employmentAndPersonnelServicesType)
       .should("be.checked");
     if (employmentAndPersonnelServicesType === "EMPLOYERS") {
-      const employmentPlacementChoices = ["TEMPORARY", "PERMANENT", "BOTH"] as EmploymentPlacementType[];
+      const employmentPlacementChoices = [
+        "TEMPORARY",
+        "PERMANENT",
+        "BOTH",
+      ] as EmploymentPlacementType[];
       const randomAnswerIndex = Math.floor(Math.random() * 3);
       const employmentPlacementTypeOption = employmentPlacementChoices[randomAnswerIndex];
 
-      onOnboardingPageStartingBusiness.selectEmploymentPlacementTypeRadio(employmentPlacementTypeOption);
+      onOnboardingPageStartingBusiness.selectEmploymentPlacementTypeRadio(
+        employmentPlacementTypeOption,
+      );
       onOnboardingPageStartingBusiness
         .getEmploymentPlacementTypeItemsRadio(employmentPlacementTypeOption)
         .should("be.checked");
     }
   }
+};
+
+export const fillOutTaxClearanceForm = ({
+  businessName,
+  addressLine1,
+  addressCity,
+  addressState,
+  addressZipCode,
+  taxPayerId,
+  taxPayerPin,
+}: Partial<{
+  businessName: string;
+  addressLine1: string;
+  addressCity: string;
+  addressState: string;
+  addressZipCode: string;
+  taxPayerId: string;
+  taxPayerPin: string;
+}>): void => {
+  if (businessName) {
+    cy.get('input[data-testid="businessName"]').type(businessName);
+    cy.get('input[data-testid="businessName"]')
+      .invoke("prop", "value")
+      .should("contain", businessName);
+  }
+
+  if (addressLine1) {
+    cy.get('input[id="addressLine1"]').type(addressLine1);
+    cy.get('input[id="addressLine1"]').invoke("prop", "value").should("contain", addressLine1);
+  }
+
+  if (addressCity) {
+    cy.get('input[id="addressCity"]').type(addressCity);
+    cy.get('input[id="addressCity"]').invoke("prop", "value").should("contain", addressCity);
+  }
+
+  if (addressState) {
+    cy.get('input[data-testid="addressState"]').type(addressState);
+    cy.get('input[data-testid="addressState"]')
+      .invoke("prop", "value")
+      .should("contain", addressState);
+  }
+
+  if (addressZipCode) {
+    cy.get('input[id="addressZipCode"]').type(addressZipCode);
+    cy.get('input[id="addressZipCode"]').invoke("prop", "value").should("contain", addressZipCode);
+  }
+
+  if (taxPayerId) {
+    cy.get('input[id="taxId"]').clear().type(taxPayerId, { delay: 50 });
+  }
+
+  if (taxPayerPin) {
+    cy.get('input[id="taxPin"]').type(taxPayerPin);
+    cy.get('input[id="taxPin"]').invoke("prop", "value").should("contain", taxPayerPin);
+  }
+};
+
+export const completeTaxClearanceFlow = (): void => {
+  cy.contains("button", "Save & Continue").click();
+  cy.wait(1000);
+  cy.contains("button", "Save & Continue").click();
+  cy.wait(1000);
+  cy.get("h2.h2-styling", { timeout: 10000 })
+    .should("be.visible")
+    .and("contain.text", "Your Certificate is Ready!");
 };
