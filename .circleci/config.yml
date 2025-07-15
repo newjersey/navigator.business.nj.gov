@@ -279,6 +279,7 @@ commands:
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=http://localhost:3000' >> $BASH_ENV
+            echo 'export USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH=true' >> $BASH_ENV
 
             echo 'export FEATURE_BUSINESS_FLP=false' >> $BASH_ENV
             echo 'export FEATURE_CIGARETTE_LICENSE=true' >> $BASH_ENV
