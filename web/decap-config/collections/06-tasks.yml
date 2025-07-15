@@ -1154,6 +1154,11 @@ collections:
                       - { label: Subheader, name: subHeader, widget: string }
                       - { label: Pickup Site Section, name: pickupSiteSection, widget: string }
                       - { label: Delivery Site Section, name: deliverySiteSection, widget: string }
+                      - {
+                          label: Informational Callout Text,
+                          name: informationalCallOutText,
+                          widget: string,
+                        }
                   - label: "Billing"
                     name: billing
                     collapsed: false
