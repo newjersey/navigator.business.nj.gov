@@ -20,7 +20,7 @@ summaryDescriptionMd: >
   :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
-  * You will need to apply for more than one license if your business plans to both sell and lease vehicles or boats.
+  You will need to apply for more than one license if your business plans to both sell and lease vehicles or boats.
 urlSlug: vehicle-dealership
 displayname: vehicle-dealership
 name: Get Your Motor Vehicle or Boat Dealership License
@@ -53,10 +53,10 @@ Depending on your business type or dealership license, you may also need:
 
 Fill out the appropriate forms:
 
-* [New and Used Car Dealership](https://www.nj.gov/mvc/pdf/business/newuseddealer.pdf) [pdf]
-* [Used Car Dealership](https://www.nj.gov/mvc/pdf/business/useddealer.pdf) [pdf]
-* [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) [pdf]
-* [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) [pdf]
+* [New and Used Car Dealership](https://www.nj.gov/mvc/pdf/business/newuseddealer.pdf) (PDF)
+* [Used Car Dealership](https://www.nj.gov/mvc/pdf/business/useddealer.pdf) (PDF)
+* [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) (PDF)
+* [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) (PDF)
 
 Mail your completed application(s) to:
 
