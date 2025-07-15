@@ -17,7 +17,8 @@
       "trip": {
         "subHeader": "Trip Information",
         "pickupSiteSection": "Pickup Site",
-        "deliverySiteSection": "Delivery Site"
+        "deliverySiteSection": "Delivery Site",
+        "informationalCallOutText": "The Emergency Trip permit is in effect for 24 hours for a single trip with an effective calendar date and time in Eastern Standard Time Zone."
       },
       "billing": {
         "servicesSection": "Services and Payment",
