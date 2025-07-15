@@ -1,0 +1,6 @@
+{
+  "cigaretteLicenseStep2": {
+    "businessNameErrorText": "Business name is required",
+    "businessNameText": "Enter the legal name of your business."
+  }
+}
