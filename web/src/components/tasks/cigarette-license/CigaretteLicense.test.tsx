@@ -10,12 +10,10 @@ describe("<CigaretteLicense />", () => {
     render(<CigaretteLicense task={generateTask({ id: "cigarette-license" })} />);
   };
 
-  describe("navigation", () => {
-    it("renders the first tab on load", () => {
-      renderComponent();
-      const stepOne = new RegExp(Config.cigaretteLicenseShared.stepperOneLabel);
-      const firstTab = screen.getByRole("tab", { name: stepOne });
-      expect(firstTab).toHaveAttribute("aria-selected", "true");
-    });
+  it("renders the first tab on load", () => {
+    renderComponent();
+    const stepOne = new RegExp(Config.cigaretteLicenseShared.stepperOneLabel);
+    const firstTab = screen.getByRole("tab", { name: stepOne });
+    expect(firstTab).toHaveAttribute("aria-selected", "true");
   });
 });

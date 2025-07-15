@@ -1,5 +1,5 @@
 import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
-import { generateRoadmap, generateTask } from "@/test/factories";
+import { generateFormationDbaContent, generateRoadmap, generateTask } from "@/test/factories";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
@@ -14,52 +14,11 @@ describe("TaskPageSwitchComponent", () => {
     const task = generateTask({ id: "cigarette-license" });
     const roadmap = generateRoadmap({});
     const business = generateBusiness({});
-
     const displayContent = {
-      formationDbaContent: {
-        DbaResolution: {
-          id: "",
-          name: "",
-          urlSlug: "",
-          callToActionLink: "",
-          callToActionText: "",
-          summaryDescriptionMd: "",
-          contentMd: "",
-          required: undefined,
-          agencyId: undefined,
-          agencyAdditionalContext: undefined,
-          formName: undefined,
-        },
-        Authorize: {
-          id: "",
-          name: "",
-          urlSlug: "",
-          callToActionLink: "",
-          callToActionText: "",
-          summaryDescriptionMd: "",
-          contentMd: "",
-          required: undefined,
-          agencyId: undefined,
-          agencyAdditionalContext: undefined,
-          formName: undefined,
-        },
-        Formation: {
-          id: "",
-          name: "",
-          urlSlug: "",
-          callToActionLink: "",
-          callToActionText: "",
-          summaryDescriptionMd: "",
-          contentMd: "",
-          required: undefined,
-          agencyId: undefined,
-          agencyAdditionalContext: undefined,
-          formName: undefined,
-        },
-      },
+      formationDbaContent: generateFormationDbaContent({}),
     };
 
-    it("renders tax clearance certificate element when true", () => {
+    it("renders multi step cigarette task when true", () => {
       process.env.FEATURE_CIGARETTE_LICENSE = "true";
 
       render(
@@ -75,7 +34,7 @@ describe("TaskPageSwitchComponent", () => {
       expect(firstTab).toHaveAttribute("aria-selected", "true");
     });
 
-    it("does not render tax clearance certificate element when not true", () => {
+    it("renders static content cigarette task when not true", () => {
       process.env.FEATURE_CIGARETTE_LICENSE = "some other string";
 
       render(

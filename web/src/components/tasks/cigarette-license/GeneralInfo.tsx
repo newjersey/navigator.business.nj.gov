@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -12,14 +11,11 @@ interface Props {
   setStepIndex: (step: number) => void;
 }
 
-export const CigaretteLicenseStepOne = (props: Props): ReactElement => {
+export const GeneralInfo = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (
     <>
-      <Alert variant={"info"}>
-        <Content>{Config.cigaretteLicenseStep1.alert}</Content>
-      </Alert>
       <Content>{Config.cigaretteLicenseStep1.content}</Content>
       <HorizontalLine />
       <span className="h5-styling">{Config.cigaretteLicenseShared.issuingAgencyLabelText}: </span>

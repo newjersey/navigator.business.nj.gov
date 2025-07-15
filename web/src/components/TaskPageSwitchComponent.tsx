@@ -72,7 +72,6 @@ export const TaskPageSwitchComponent = ({
   }
 
   const isCigaretteLicenseEnabled = process.env.FEATURE_CIGARETTE_LICENSE === "true";
-  console.log(isCigaretteLicenseEnabled);
 
   return rswitch(task.id, {
     "env-permitting": <EnvPermit task={task} />,
