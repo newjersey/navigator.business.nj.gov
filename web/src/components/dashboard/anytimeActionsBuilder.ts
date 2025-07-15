@@ -22,9 +22,11 @@ const anytimeActionsToAdd = (
 ): string[] => {
   let anytimeActionIds: string[] = [];
 
-  for (const questionId in nonEssentialRadioAnswers) {
-    const anytimeActionId = getNonEssentialQuestionAnytimeActions(questionId);
-    anytimeActionIds = [...anytimeActionIds, ...anytimeActionId];
+  for (const [questionId, response] of Object.entries(nonEssentialRadioAnswers)) {
+    if (response) {
+      const anytimeActionId = getNonEssentialQuestionAnytimeActions(questionId);
+      anytimeActionIds = [...anytimeActionIds, ...anytimeActionId];
+    }
   }
   return anytimeActionIds;
 };
