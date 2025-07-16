@@ -217,6 +217,12 @@
       "id": "well-driller",
       "questionText": "Do you plan to install, repair, or modify wells for your customer’s business?\n",
       "addOn": "construction-well-driller-license"
+    },
+    {
+      "addOn": "vehicle-dealership-neq",
+      "anytimeActions": [],
+      "id": "vehicle-dealership-q",
+      "questionText": "Will your business sell or lease 4 or more vehicles or boats in a given year?"
     }
   ]
 }
