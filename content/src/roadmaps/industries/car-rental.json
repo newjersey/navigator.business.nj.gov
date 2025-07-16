@@ -60,11 +60,6 @@
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"
-    },
-    {
-      "step": 3,
-      "weight": 19,
-      "task": "vehicle-dealership"
     }
   ],
   "name": "Car Rental",
