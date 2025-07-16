@@ -16,13 +16,10 @@ export const RegulatedBusinessDynamicsLicenseHealthCheckClient = (
   return async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();
     try {
-      logWriter.LogInfo(
-        `RGB Dynamics License Status Health Check - Id:${logId} - Request Sent to ${config.orgUrl}/api/data/v9.2/accounts?$top=1`,
-      );
       const accessToken = await config.accessTokenClient.getAccessToken();
 
-      if (!accessToken) {
-        logWriter.LogError(`RGB Dynamics - Access token is undefined. Skipping request.`);
+      if (!accessToken || accessToken === "undefined") {
+        logWriter.LogError(`Access token is undefined or invalid. Skipping Dynamics request.`);
         return {
           success: false,
           error: {
@@ -31,6 +28,13 @@ export const RegulatedBusinessDynamicsLicenseHealthCheckClient = (
           },
         };
       }
+      logWriter.LogInfo(
+        `RGB Dynamics License Status Health Check - Id:${logId} - Access Token retrieved successfully.`,
+      );
+
+      logWriter.LogInfo(
+        `RGB Dynamics License Status Health Check - Id:${logId} - Request Sent to ${config.orgUrl}/api/data/v9.2/accounts?$top=1`,
+      );
       const response = await axios.get(`${config.orgUrl}/api/data/v9.2/accounts?$top=1`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
