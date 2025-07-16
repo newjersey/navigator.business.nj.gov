@@ -1,5 +1,6 @@
 ---
-notesMd: This definition is only applicable to tax clearance.
+notesMd: 'NOTE:  This definition for "business name" is only applicable to tax
+  clearance.'
 header: Business Name
 id: business-name
 displayname: business-name
