@@ -30,11 +30,15 @@ describe("RegulatedBusinessDynamicsLicenseHealthCheckClient", () => {
   });
 
   it("returns a passing health check if data can be retrieved sucessfully", async () => {
+    const sampleToken = "sample-access-token";
+    stubAccessTokenClient.getAccessToken.mockResolvedValue(sampleToken);
     mockAxios.get.mockResolvedValue({});
     expect(await client()).toEqual({ success: true, data: { message: "OK" } });
   });
 
   it("returns a failing health check if unexpected data is retrieved", async () => {
+    const sampleToken = "sample-access-token";
+    stubAccessTokenClient.getAccessToken.mockResolvedValue(sampleToken);
     mockAxios.get.mockRejectedValue({ response: { status: StatusCodes.NOT_FOUND }, message: "" });
     expect(await client()).toEqual({
       success: false,
@@ -48,6 +52,8 @@ describe("RegulatedBusinessDynamicsLicenseHealthCheckClient", () => {
   });
 
   it("returns a failing health check if axios request times out", async () => {
+    const sampleToken = "sample-access-token";
+    stubAccessTokenClient.getAccessToken.mockResolvedValue(sampleToken);
     mockAxios.get.mockRejectedValue({});
     expect(await client()).toEqual({
       success: false,
