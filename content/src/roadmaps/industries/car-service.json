@@ -66,8 +66,7 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "business-vehicle-irp",
-    "bus-initial-inspection",
-    "vehicle-dealership-q"
+    "bus-initial-inspection"
   ],
   "displayname": "car-service",
   "industryOnboardingQuestions": {
