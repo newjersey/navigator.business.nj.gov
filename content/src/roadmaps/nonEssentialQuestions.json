@@ -204,25 +204,6 @@
       "addOn": "vehicle-cpcn",
       "questionText": "“Will your business provide intrastate transportation of passengers to and from **casinos in Atlantic city,** or **in exchange for compensation** from passengers or groups?”",
       "id": "mvc-cpcn"
-    },
-    {
-      "id": "demo-only",
-      "questionText": "You are a demo industry user. This is an example non-essential question that is being used to add an Anytime Action. Answering \"yes\" will add the Anytime Action \"Demo Anytime Action\".",
-      "addOn": "",
-      "anytimeActions": [
-        "demo-only"
-      ]
-    },
-    {
-      "id": "well-driller",
-      "questionText": "Do you plan to install, repair, or modify wells for your customer’s business?\n",
-      "addOn": "construction-well-driller-license"
-    },
-    {
-      "addOn": [],
-      "anytimeActions": [],
-      "id": "vehicle-dealership-neq",
-      "questionText": "Will your business sell or lease 4 or more vehicles or boats in a given year?"
     }
   ]
 }
