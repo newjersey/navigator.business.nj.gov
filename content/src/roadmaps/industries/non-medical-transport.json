@@ -87,7 +87,8 @@
   "name": "Non-Medical Transport",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-irp"
+    "business-vehicle-irp",
+    "vehicle-dealership-q"
   ],
   "displayname": "non-medical-transport",
   "industryOnboardingQuestions": {
