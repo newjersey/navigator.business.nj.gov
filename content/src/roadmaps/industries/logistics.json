@@ -61,7 +61,8 @@
     "weights-measures",
     "logistics-CRTK-survey",
     "regulated-medical-waste-question",
-    "business-vehicle-irp"
+    "business-vehicle-irp",
+    "vehicle-dealership-q"
   ],
   "displayname": "logistics",
   "industryOnboardingQuestions": {
