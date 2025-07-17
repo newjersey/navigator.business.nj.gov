@@ -39,38 +39,6 @@
     },
     {
       "step": 3,
-      "weight": 13,
-      "task": "transportation-entity-id",
-      "required": true
-    },
-    {
-      "step": 3,
-      "weight": 14,
-      "task": "mvc-title-task",
-      "required": true
-    },
-    {
-      "step": 3,
-      "weight": 15,
-      "licenseTask": "",
-      "required": false,
-      "task": "transportation-inspection"
-    },
-    {
-      "step": 3,
-      "weight": 16,
-      "task": "mvc-registration-task",
-      "required": true
-    },
-    {
-      "weight": 17,
-      "step": 3,
-      "licenseTask": "",
-      "required": true,
-      "task": "trucking-cdl"
-    },
-    {
-      "step": 3,
       "weight": 20,
       "task": "school-bus-insurance",
       "required": true
@@ -79,6 +47,38 @@
       "step": 4,
       "weight": 10,
       "task": "trucking-parking"
+    },
+    {
+      "step": 4,
+      "weight": 13,
+      "task": "transportation-entity-id",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 14,
+      "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 15,
+      "licenseTask": "",
+      "required": false,
+      "task": "transportation-inspection"
+    },
+    {
+      "step": 4,
+      "weight": 16,
+      "task": "mvc-registration-task",
+      "required": true
+    },
+    {
+      "weight": 17,
+      "step": 4,
+      "licenseTask": "",
+      "required": true,
+      "task": "trucking-cdl"
     }
   ],
   "name": "School Bus",
