@@ -82,7 +82,8 @@
   ],
   "name": "Car Service (Large Capacity Vehicles)",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "vehicle-dealership-q"
   ],
   "displayname": "transportation",
   "industryOnboardingQuestions": {
