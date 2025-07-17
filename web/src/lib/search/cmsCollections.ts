@@ -34,6 +34,7 @@ export const cmsCollections = [
       "Webflow Licenses",
       "Tasks - Cannabis License",
       "Tasks - Cannabis Priority Status",
+      "Tasks - Cigarette License",
       "Tasks - EIN",
       "Tasks - Tax ID",
       "Tasks - Municipal",
