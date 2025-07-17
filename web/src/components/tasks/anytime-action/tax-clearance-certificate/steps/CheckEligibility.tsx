@@ -1,4 +1,4 @@
-import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
+import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
@@ -125,7 +125,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
           {shouldLockFormationFields ? (
             <ProfileAddressLockedFields businessLocation="US" />
           ) : (
-            <UnitesStatesAddress
+            <UnitedStatesAddress
               onValidation={onValidation}
               dataFormErrorMap={dataFormErrorMap}
               isFullWidth
