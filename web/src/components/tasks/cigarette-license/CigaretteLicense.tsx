@@ -1,7 +1,7 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskHeader } from "@/components/TaskHeader";
+import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
-import { CigaretteLicenseStepTwo } from "@/components/tasks/cigarette-license/CigaretteLicenseStepTwo";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { StepperStep, Task } from "@/lib/types/types";
 import { ReactElement, useState } from "react";
@@ -48,7 +48,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         }}
       />
       {stepIndex === 0 && <GeneralInfo setStepIndex={setStepIndex} />}
-      {stepIndex === 1 && <CigaretteLicenseStepTwo setStepIndex={setStepIndex} />}
+      {stepIndex === 1 && <LicenseeInfo setStepIndex={setStepIndex} />}
     </>
   );
 };

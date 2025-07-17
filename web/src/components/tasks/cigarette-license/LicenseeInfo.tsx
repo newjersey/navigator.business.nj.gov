@@ -1,30 +1,28 @@
 import { Content } from "@/components/Content";
-import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
-import { BusinessName } from "@/components/data-fields/BusinessName";
+import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { ProfileField } from "@/components/profile/ProfileField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
-  pickData,
 } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FieldStateActionKind } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
   emptyCigaretteLicenseAddress,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { FormationAddress } from "@businessnjgovnavigator/shared/formationData";
+import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Checkbox, FormControlLabel } from "@mui/material";
@@ -34,9 +32,32 @@ interface Props {
   setStepIndex: (idx: number) => void;
 }
 
-export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement => {
+export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
   const { business, userData } = useUserData();
   const { Config } = useConfig();
+
+
+  const { doesRequiredFieldHaveError, doesFieldHaveError } = useAddressErrors();
+  const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
+    "addressLine1",
+    DataFormErrorMapContext,
+  );
+  // const { setIsValid: setIsValidAddressLine2 } = useFormContextFieldHelpers(
+  //   "addressLine2",
+  //   DataFormErrorMapContext,
+  // );
+  // const { setIsValid: setIsValidCity } = useFormContextFieldHelpers(
+  //   "addressCity",
+  //   DataFormErrorMapContext,
+  // );
+  // const { setIsValid: setIsValidState } = useFormContextFieldHelpers(
+  //   "addressState",
+  //   DataFormErrorMapContext,
+  // );
+  // const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers(
+  //   "addressZipCode",
+  //   DataFormErrorMapContext,
+  // );
 
   // Get legal structure and check for SP/GP
   const legalStructureId = business?.profileData?.legalStructureId;
@@ -98,15 +119,17 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
 
   // Address context setup
   const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
-  const [addressData, setAddressData] = useState<FormationAddress>({
-    addressLine1: business?.formationData?.formationFormData?.addressLine1 || "",
-    addressLine2: business?.formationData?.formationFormData?.addressLine2 || "",
-    addressCity: business?.formationData?.formationFormData?.addressMunicipality?.name || "",
-    addressState: business?.formationData?.formationFormData?.addressState || undefined,
-    addressZipCode: business?.formationData?.formationFormData?.addressZipCode || "",
-    addressCountry: "US",
-    businessLocationType: "US",
-  });
+  // const [addressData, setAddressData] = useState<FormationAddress>({
+  //   addressLine1: business?.formationData?.formationFormData?.addressLine1 || "",
+  //   addressLine2: business?.formationData?.formationFormData?.addressLine2 || "",
+  //   addressCity: business?.formationData?.formationFormData?.addressMunicipality?.name || "",
+  //   addressState: business?.formationData?.formationFormData?.addressState || undefined,
+  //   addressZipCode: business?.formationData?.formationFormData?.addressZipCode || "",
+  //   addressCountry: "US",
+  //   businessLocationType: "US",
+  // });
+  const [formationAddressData, setAddressData] =
+    useState<FormationAddress>(emptyFormationAddressData);
 
   // Field handlers
   const handleFieldChange = (field: keyof CigaretteLicenseData, value: string | boolean): void => {
@@ -208,15 +231,12 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
   };
 
   const onValidation = (): void => {
-    // This will be called by UnitesStatesAddress for validation
+    // setIsValidAddressLine1(!doesRequiredFieldHaveError("addressLine1"));
+    // setIsValidAddressLine2(!doesFieldHaveError("addressLine2"));
+    // setIsValidCity(!doesRequiredFieldHaveError("addressCity"));
+    // setIsValidState(!doesRequiredFieldHaveError("addressState"));
+    // setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
   };
-
-  // const {
-  //   isValid,
-  //   getInvalidFieldIds,
-  //   onSubmit,
-  //   state: formContextState,
-  // } = useFormContextHelper(createDataFormErrorMap());
 
   useMountEffectWhenDefined(() => {
     if (business) {
@@ -229,29 +249,24 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
     }
   }, business);
 
-
   console.log(formContextState);
-  // formContextState.reducer({
-  //   type: FieldStateActionKind.VALIDATION,
-  //   payload: { field: "businessName", invalid: true },
-  // });
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
-          value={{
-            state: {
-              profileData: profileData,
-              flow: getFlow(profileData),
-            },
-            setProfileData: setProfile,
-            onBack: (): void => {},
-          }}
-        ></ProfileDataContext.Provider>
+        value={{
+          state: {
+            profileData: profileData,
+            flow: getFlow(profileData),
+          },
+          setProfileData: setProfile,
+          onBack: (): void => {},
+        }}
+      ></ProfileDataContext.Provider>
       <AddressContext.Provider
         value={{
           state: {
-            formationAddressData: addressData,
+            formationAddressData: formationAddressData,
           },
           setAddressData: setAddressData,
         }}
@@ -266,19 +281,23 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
               {/* Responsible Owner Name (required) */}
               <>
                 <WithErrorBar
-                    hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
-                    type="ALWAYS"
-                    className="margin-bottom-3"
-                  >
+                  hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
+                  type="ALWAYS"
+                  className="margin-bottom-3"
+                >
                   <div>
-                      <strong>
-                        <Content>{Config.cigaretteLicenseStep2.responsibleOwnerNameHeaderText}</Content>
-                      </strong>
-                      <Content>{Config.cigaretteLicenseStep2.responsibleOwnerNameText}</Content>
+                    <strong>
+                      <Content>
+                        {Config.cigaretteLicenseStep2.responsibleOwnerNameHeaderText}
+                      </Content>
+                    </strong>
+                    <Content>{Config.cigaretteLicenseStep2.responsibleOwnerNameText}</Content>
                     <GenericTextField
                       fieldName="responsibleOwnerName"
                       value={formData.responsibleOwnerName || ""}
-                      handleChange={(value: string) => handleFieldChange("responsibleOwnerName", value)}
+                      handleChange={(value: string) =>
+                        handleFieldChange("responsibleOwnerName", value)
+                      }
                       autoComplete="organization"
                       inputWidth="full"
                       required={true}
@@ -292,15 +311,15 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
               {/* Trade Name (optional) */}
               <>
                 <WithErrorBar
-                    hasError={!!formContextState.fieldStates.tradeName?.invalid}
-                    type="ALWAYS"
-                    className="margin-bottom-3"
-                  >
+                  hasError={!!formContextState.fieldStates.tradeName?.invalid}
+                  type="ALWAYS"
+                  className="margin-bottom-3"
+                >
                   <div>
-                      <strong>
-                        <Content>{Config.cigaretteLicenseStep2.tradeNameHeaderText}</Content>
-                      </strong>
-                      <Content>{Config.cigaretteLicenseStep2.tradeNameText}</Content>
+                    <strong>
+                      <Content>{Config.cigaretteLicenseStep2.tradeNameHeaderText}</Content>
+                    </strong>
+                    <Content>{Config.cigaretteLicenseStep2.tradeNameText}</Content>
                     <GenericTextField
                       fieldName="tradeName"
                       value={formData.tradeName || ""}
@@ -316,27 +335,27 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
             </>
           ) : (
             <>
-            <WithErrorBar
+              <WithErrorBar
                 hasError={!!formContextState.fieldStates.businessName?.invalid}
                 type="ALWAYS"
                 className="margin-bottom-3"
               >
-              <div>
-                {/* Business Name (required) */}
+                <div>
+                  {/* Business Name (required) */}
                   <strong>
                     <Content>{Config.cigaretteLicenseStep2.businessNameHeaderText}</Content>
                   </strong>
                   <Content>{Config.cigaretteLicenseStep2.businessNameText}</Content>
-                <GenericTextField
-                  fieldName="businessName"
-                  value={formData.businessName || ""}
-                  handleChange={(value: string) => handleFieldChange("businessName", value)}
-                  autoComplete="organization"
-                  inputWidth="full"
-                  required={true}
-                  validationText={Config.cigaretteLicenseStep2.businessNameErrorText}
-                  formContext={DataFormErrorMapContext}
-                />
+                  <GenericTextField
+                    fieldName="businessName"
+                    value={formData.businessName || ""}
+                    handleChange={(value: string) => handleFieldChange("businessName", value)}
+                    autoComplete="organization"
+                    inputWidth="full"
+                    required={true}
+                    validationText={Config.cigaretteLicenseStep2.businessNameErrorText}
+                    formContext={DataFormErrorMapContext}
+                  />
                 </div>
               </WithErrorBar>
             </>
@@ -362,7 +381,7 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
           {/* Business Address fields */}
           <div className="margin-bottom-3">
             <h3 className="margin-bottom-2">Business Address</h3>
-            <UnitesStatesAddress
+            <UnitedStatesAddress
               onValidation={onValidation}
               dataFormErrorMap={formContextState}
               isFullWidth

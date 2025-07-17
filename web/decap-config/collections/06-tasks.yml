@@ -928,7 +928,12 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Business Name Error Text", name: "businessNameErrorText", widget: "string", required: true }
+              - {
+                  label: "Business Name Error Text",
+                  name: "businessNameErrorText",
+                  widget: "string",
+                  required: true,
+                }
       - label: "Cigarette License Shared"
         name: "cigaretteLicense-shared"
         file: "content/src/fieldConfig/cigarette-license-shared.json"
