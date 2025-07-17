@@ -15,7 +15,6 @@ interface Props {
   children: ReactNode;
   label: ReactNode;
   onSave: () => void;
-  isTaskPage?: boolean;
 }
 
 export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
@@ -47,43 +46,6 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
     props.onSave();
   });
 
-  const onTaskPage = (
-    <div className="padding-3">
-      {props.label}
-      <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
-        <div className="margin-right-1 width-100 text-field-width-default margin-bottom-05">
-          {props.children}
-        </div>
-        <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId="deferred-question-save">
-          {Config.deferredLocation.deferredOnboardingSaveButtonText}
-        </SecondaryButton>
-      </div>
-    </div>
-  );
-
-  const onDashboard = (
-    <div className="radius-md border-primary-light border-1px padding-3">
-      <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-justify">
-        <div>
-          <div>{props.label}</div>
-          <div className="margin-right-1">{props.children}</div>
-        </div>
-        <div className="flex flex-align-center">
-          <div className="mobile-lg:margin-top-0 margin-top-2">
-            <SecondaryButton
-              isColor="primary"
-              onClick={onSubmit}
-              dataTestId="deferred-question-save"
-              isRightMarginRemoved={true}
-            >
-              {Config.deferredLocation.deferredOnboardingSaveButtonText}
-            </SecondaryButton>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
@@ -96,7 +58,21 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
           onBack: (): void => {},
         }}
       >
-        {props.isTaskPage ? onTaskPage : onDashboard}
+        <div className="padding-3">
+          {props.label}
+          <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
+            <div className="margin-right-1 width-100 text-field-width-default margin-bottom-05">
+              {props.children}
+            </div>
+            <SecondaryButton
+              isColor="primary"
+              onClick={onSubmit}
+              dataTestId="deferred-question-save"
+            >
+              {Config.deferredLocation.deferredOnboardingSaveButtonText}
+            </SecondaryButton>
+          </div>
+        </div>
       </ProfileDataContext.Provider>
     </DataFormErrorMapContext.Provider>
   );
