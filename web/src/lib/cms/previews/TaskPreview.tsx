@@ -37,7 +37,7 @@ const TaskPreview = (props: PreviewProps): ReactElement => {
         business={fakeBusinessWithMunicipality}
         displayContent={displayContent}
         roadmap={roadmap}
-        CMS_ONLY_disable_overlay
+        CMS_ONLY_disable_default_functionality
       />
     </div>
   );
