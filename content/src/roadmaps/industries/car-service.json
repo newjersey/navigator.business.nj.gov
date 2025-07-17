@@ -39,24 +39,24 @@
     },
     {
       "weight": 11,
-      "step": 3,
+      "step": 4,
       "task": "transportation-entity-id",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 12,
       "task": "mvc-title-task",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "task": "transportation-cpcn",
       "required": true,
       "weight": 13
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 14,
       "task": "mvc-registration-task",
       "required": true
