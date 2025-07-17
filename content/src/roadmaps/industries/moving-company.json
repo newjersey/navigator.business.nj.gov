@@ -77,7 +77,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "resale-tax-cert",
-    "business-vehicle-irp"
+    "business-vehicle-irp",
+    "vehicle-dealership-q"
   ],
   "displayname": "moving-company",
   "industryOnboardingQuestions": {
