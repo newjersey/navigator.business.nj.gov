@@ -60,47 +60,53 @@
     },
     {
       "step": 3,
-      "weight": 4,
-      "task": "transportation-entity-id",
-      "required": true
-    },
-    {
-      "step": 3,
-      "weight": 5,
-      "task": "mvc-title-task",
-      "required": true
-    },
-    {
-      "step": 3,
-      "weight": 6,
-      "task": "mvc-registration-task",
-      "required": true
-    },
-    {
-      "step": 3,
       "weight": 7,
       "task": "get-insurance"
     },
     {
       "step": 4,
-      "weight": 100,
-      "licenseTask": "food-safety-course"
-    },
-    {
-      "step": 4,
       "weight": 1,
-      "licenseTask": "fire-permit-food-truck",
+      "task": "transportation-entity-id",
       "required": true
     },
     {
       "step": 4,
       "weight": 2,
-      "licenseTask": "town-mercantile-license"
+      "task": "mvc-title-task",
+      "required": true
     },
     {
       "step": 4,
       "weight": 3,
+      "task": "mvc-registration-task",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 4,
+      "licenseTask": "fire-permit-food-truck",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 5,
+      "licenseTask": "town-mercantile-license"
+    },
+    {
+      "step": 4,
+      "weight": 6,
       "task": "resale-tax-certificate-operating"
+    },
+    {
+      "step": 4,
+      "weight": 7,
+      "licenseTask": "food-safety-course"
+    },
+    {
+      "weight": 8,
+      "step": 4,
+      "task": "trucking-cdl",
+      "required": true
     }
   ],
   "name": "Food Truck",
