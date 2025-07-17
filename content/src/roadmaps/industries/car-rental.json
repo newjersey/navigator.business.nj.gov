@@ -43,23 +43,28 @@
       "task": "get-insurance"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 16,
       "task": "transportation-entity-id",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 17,
       "task": "mvc-title-task",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 18,
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"
+    },
+    {
+      "weight": 19,
+      "step": 4,
+      "task": "vehicle-dealership"
     }
   ],
   "name": "Car Rental",
