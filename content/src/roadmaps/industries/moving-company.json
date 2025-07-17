@@ -50,27 +50,27 @@
       "required": true
     },
     {
-      "step": 3,
-      "weight": 13,
-      "task": "trucking-cdl"
-    },
-    {
-      "step": 3,
+      "step": 4,
       "weight": 14,
       "task": "transportation-entity-id",
       "required": true
     },
     {
       "weight": 15,
-      "step": 3,
+      "step": 4,
       "task": "mvc-title-task",
       "required": true
     },
     {
       "weight": 16,
-      "step": 3,
+      "step": 4,
       "task": "mvc-registration-task",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 17,
+      "task": "trucking-cdl"
     }
   ],
   "name": "Moving Company",
