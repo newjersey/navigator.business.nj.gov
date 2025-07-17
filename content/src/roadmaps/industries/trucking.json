@@ -39,41 +39,6 @@
     },
     {
       "step": 3,
-      "weight": 12,
-      "task": "trucking-cdl"
-    },
-    {
-      "step": 3,
-      "weight": 14,
-      "task": "transportation-entity-id",
-      "required": true
-    },
-    {
-      "step": 3,
-      "task": "mvc-title-task",
-      "weight": 15,
-      "required": true
-    },
-    {
-      "step": 3,
-      "weight": 16,
-      "task": "trucking-irp",
-      "required": true
-    },
-    {
-      "step": 3,
-      "weight": 17,
-      "task": "trucking-ifta",
-      "required": true
-    },
-    {
-      "step": 3,
-      "task": "mvc-registration-task",
-      "weight": 18,
-      "required": true
-    },
-    {
-      "step": 3,
       "weight": 19,
       "task": "trucking-insurance",
       "required": true
@@ -89,6 +54,41 @@
       "weight": 25,
       "task": "trucking-usdot",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 27,
+      "task": "transportation-entity-id",
+      "required": true
+    },
+    {
+      "step": 4,
+      "task": "mvc-title-task",
+      "weight": 28,
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 29,
+      "task": "trucking-irp",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 30,
+      "task": "trucking-ifta",
+      "required": true
+    },
+    {
+      "step": 4,
+      "task": "mvc-registration-task",
+      "weight": 31,
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 32,
+      "task": "trucking-cdl"
     }
   ],
   "name": "Trucking",

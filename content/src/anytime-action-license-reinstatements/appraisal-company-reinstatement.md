@@ -24,7 +24,7 @@ At the top of the application, write: 'To reinstate a registered appraisal manag
 
 ## Application Requirements
 
-*  `Federal tax ID number or federal employer ID number (EIN)|federal-tax-id` 
+*  `Federal tax ID number or federal employer ID number (EIN)|ein` 
 * Prior AMC registration number
 * Name and contact information of the `compliance officer|compliance-officer` 
 * License number of the controlling person
