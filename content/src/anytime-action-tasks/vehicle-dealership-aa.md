@@ -40,11 +40,9 @@ summaryDescriptionMd: >
 
 
   :::
-issuingAgency: New Jersey Motor Vehicle Commission
+issuingAgency: NJ Motor Vehicle Commission, Business Licensing Services Bureau
 ---
 ## Application Requirements
-
-### Required Documentation
 
 You must submit copies of the following:
 
