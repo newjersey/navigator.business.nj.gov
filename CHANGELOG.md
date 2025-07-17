@@ -1,3 +1,27 @@
+# [2025.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.14.0...v2025.15.0) (2025-07-17)
+
+
+### Bug Fixes
+
+* [AB[#14397](https://github.com/newjersey/navigator.business.nj.gov/issues/14397)] Address design and content discrepancies for new registered agent content ([05531f8](https://github.com/newjersey/navigator.business.nj.gov/commit/05531f80308e47d359270ec81447e65ba419897f))
+* [AB[#14397](https://github.com/newjersey/navigator.business.nj.gov/issues/14397)] migration 167 to include business version ([76abaa4](https://github.com/newjersey/navigator.business.nj.gov/commit/76abaa4cf0e456520a40f1f6c070f9da540b2b27))
+* [AB[#14397](https://github.com/newjersey/navigator.business.nj.gov/issues/14397)] update migration to follow generator pattern ([7750125](https://github.com/newjersey/navigator.business.nj.gov/commit/775012571409726eb90c078ba59b0fc2bc937b3f))
+* [AB[#14619](https://github.com/newjersey/navigator.business.nj.gov/issues/14619)] alert pops up for reference numbers ([e2defb6](https://github.com/newjersey/navigator.business.nj.gov/commit/e2defb62f6df5c19b416bd27d29dc92881ab89ab))
+* [AB[#14619](https://github.com/newjersey/navigator.business.nj.gov/issues/14619)] fix error copy ([05b98b0](https://github.com/newjersey/navigator.business.nj.gov/commit/05b98b0fd177e8d17a9a00271ade21b8bf0f13f2))
+* [AB[#14619](https://github.com/newjersey/navigator.business.nj.gov/issues/14619)] Replace error snackbar with page level alert on Business Profile page ([c13a7bb](https://github.com/newjersey/navigator.business.nj.gov/commit/c13a7bb72906817b010d191e95a65a2ba4a00b88))
+* [AB[#15167](https://github.com/newjersey/navigator.business.nj.gov/issues/15167)] fix copy in emergency permit ([aef5741](https://github.com/newjersey/navigator.business.nj.gov/commit/aef57419460c9d6699ef204e79777db42c4798aa))
+* Refine contactEmail in Formation API request and update test ([a9aa096](https://github.com/newjersey/navigator.business.nj.gov/commit/a9aa0962f304f884e8f49c8fc90bbfdbab3acc9c))
+* resolve webservice/formation bug ([0ef8837](https://github.com/newjersey/navigator.business.nj.gov/commit/0ef88379b6ad08ef0e1e2149cb39cac60ffde3d8))
+
+
+### Features
+
+* [AB[#14270](https://github.com/newjersey/navigator.business.nj.gov/issues/14270)] fixing broken analytics ([227db94](https://github.com/newjersey/navigator.business.nj.gov/commit/227db947c5c4c935c4f76077be8de1ec9b3d7f65))
+* [AB[#14397](https://github.com/newjersey/navigator.business.nj.gov/issues/14397)] Update Registered Agent fields in the formation form to accept 'myself' 'authorized rep' or 'professional service' options ([b41ed7a](https://github.com/newjersey/navigator.business.nj.gov/commit/b41ed7a27349eb8e34cb3e0c40756778906d23a7))
+* [AB[#14934](https://github.com/newjersey/navigator.business.nj.gov/issues/14934)] add business name contextual link ([d063f38](https://github.com/newjersey/navigator.business.nj.gov/commit/d063f380bd8c34b142fabd0de576a8e42368e389))
+* [AB[#15150](https://github.com/newjersey/navigator.business.nj.gov/issues/15150)] add cigarette license data object ([389a046](https://github.com/newjersey/navigator.business.nj.gov/commit/389a046a2d97ebad0dcadbaed72bb7b6e8d8a76b))
+* [AB[#7340](https://github.com/newjersey/navigator.business.nj.gov/issues/7340)] search for usage(s) of tasks ([6411731](https://github.com/newjersey/navigator.business.nj.gov/commit/6411731a95f2946d3a899211b93475a1e46815d6))
+
 # [2025.14.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.13.2...v2025.14.0) (2025-07-08)
 
 
