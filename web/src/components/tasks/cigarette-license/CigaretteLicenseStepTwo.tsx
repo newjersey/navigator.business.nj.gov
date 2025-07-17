@@ -17,6 +17,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { FieldStateActionKind } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
@@ -210,6 +211,13 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
     // This will be called by UnitesStatesAddress for validation
   };
 
+  // const {
+  //   isValid,
+  //   getInvalidFieldIds,
+  //   onSubmit,
+  //   state: formContextState,
+  // } = useFormContextHelper(createDataFormErrorMap());
+
   useMountEffectWhenDefined(() => {
     if (business) {
       setProfileData({
@@ -220,6 +228,13 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
       });
     }
   }, business);
+
+
+  console.log(formContextState);
+  // formContextState.reducer({
+  //   type: FieldStateActionKind.VALIDATION,
+  //   payload: { field: "businessName", invalid: true },
+  // });
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
@@ -249,74 +264,81 @@ export const CigaretteLicenseStepTwo = ({ setStepIndex }: Props): ReactElement =
           {isSpOrGp ? (
             <>
               {/* Responsible Owner Name (required) */}
-              <WithErrorBar
-                hasError={errors.responsibleOwnerName}
-                type="ALWAYS"
-                className="margin-bottom-3"
-              >
-                <strong>
-                  <ModifiedContent>Responsible Owner Name</ModifiedContent>
-                </strong>
-                <Content>
-                  Enter your full name exactly as it appears in the &quot;Responsible Owner
-                  Name&quot; section of your tax confirmation email.
-                </Content>
-                <GenericTextField
-                  fieldName="responsibleOwnerName"
-                  value={formData.responsibleOwnerName || ""}
-                  handleChange={(value: string) => handleFieldChange("responsibleOwnerName", value)}
-                  onValidation={() =>
-                    validateField("responsibleOwnerName", formData.responsibleOwnerName || "")
-                  }
-                  error={errors.responsibleOwnerName}
-                  validationText="Responsible owner name is required"
-                  required={true}
-                  autoComplete="name"
-                  inputWidth="full"
-                />
-              </WithErrorBar>
+              <>
+                <WithErrorBar
+                    hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
+                    type="ALWAYS"
+                    className="margin-bottom-3"
+                  >
+                  <div>
+                      <strong>
+                        <Content>{Config.cigaretteLicenseStep2.responsibleOwnerNameHeaderText}</Content>
+                      </strong>
+                      <Content>{Config.cigaretteLicenseStep2.responsibleOwnerNameText}</Content>
+                    <GenericTextField
+                      fieldName="responsibleOwnerName"
+                      value={formData.responsibleOwnerName || ""}
+                      handleChange={(value: string) => handleFieldChange("responsibleOwnerName", value)}
+                      autoComplete="organization"
+                      inputWidth="full"
+                      required={true}
+                      validationText={Config.cigaretteLicenseStep2.responsibleOwnerNameErrorText}
+                      formContext={DataFormErrorMapContext}
+                    />
+                  </div>
+                </WithErrorBar>
+              </>
 
               {/* Trade Name (optional) */}
-              <div className="margin-bottom-3">
-                <strong>
-                  <ModifiedContent>Trade Name</ModifiedContent>
-                </strong>
-                <span className="text-normal margin-left-1">(Optional)</span>
-                <Content>
-                  Enter this only if your business is known publicly by a name other than your legal
-                  name.
-                </Content>
-                <GenericTextField
-                  fieldName="tradeName"
-                  value={formData.tradeName || ""}
-                  handleChange={(value: string) => handleFieldChange("tradeName", value)}
-                  autoComplete="organization"
-                  inputWidth="full"
-                />
-              </div>
+              <>
+                <WithErrorBar
+                    hasError={!!formContextState.fieldStates.tradeName?.invalid}
+                    type="ALWAYS"
+                    className="margin-bottom-3"
+                  >
+                  <div>
+                      <strong>
+                        <Content>{Config.cigaretteLicenseStep2.tradeNameHeaderText}</Content>
+                      </strong>
+                      <Content>{Config.cigaretteLicenseStep2.tradeNameText}</Content>
+                    <GenericTextField
+                      fieldName="tradeName"
+                      value={formData.tradeName || ""}
+                      handleChange={(value: string) => handleFieldChange("tradeName", value)}
+                      autoComplete="organization"
+                      inputWidth="full"
+                      validationText={Config.cigaretteLicenseStep2.businessNameErrorText}
+                      formContext={DataFormErrorMapContext}
+                    />
+                  </div>
+                </WithErrorBar>
+              </>
             </>
           ) : (
             <>
-            <div>
-              {/* Business Name (required) */}
-                {/* <strong>
-                  <Content>Business Name</Content>
-                </strong> */}
-                <Content>{Config.cigaretteLicenseStep2.businessNameText}</Content>
-                <ProfileField
-                  locked={false}
-                  fieldName={"businessName"}
-                  hideLine
-                  fullWidth
-                >
-                  <BusinessName
-                    inputWidth="full"
-                    required={true}
-                    validationText={Config.cigaretteLicenseStep2.businessNameErrorText}
-                    preventRefreshWhenUnmounted
-                  />
-              </ProfileField>
-              </div>
+            <WithErrorBar
+                hasError={!!formContextState.fieldStates.businessName?.invalid}
+                type="ALWAYS"
+                className="margin-bottom-3"
+              >
+              <div>
+                {/* Business Name (required) */}
+                  <strong>
+                    <Content>{Config.cigaretteLicenseStep2.businessNameHeaderText}</Content>
+                  </strong>
+                  <Content>{Config.cigaretteLicenseStep2.businessNameText}</Content>
+                <GenericTextField
+                  fieldName="businessName"
+                  value={formData.businessName || ""}
+                  handleChange={(value: string) => handleFieldChange("businessName", value)}
+                  autoComplete="organization"
+                  inputWidth="full"
+                  required={true}
+                  validationText={Config.cigaretteLicenseStep2.businessNameErrorText}
+                  formContext={DataFormErrorMapContext}
+                />
+                </div>
+              </WithErrorBar>
             </>
           )}
 

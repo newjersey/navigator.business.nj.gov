@@ -158,6 +158,7 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
 
+  console.log(formContextState);
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
       <TaxClearanceCertificateDataContext.Provider
