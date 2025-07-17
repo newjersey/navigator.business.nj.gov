@@ -93,7 +93,8 @@
   ],
   "name": "Trucking",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "vehicle-dealership-q"
   ],
   "displayname": "trucking",
   "industryOnboardingQuestions": {
