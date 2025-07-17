@@ -43,33 +43,39 @@
       "task": "get-insurance"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 12,
       "task": "transportation-entity-id",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 13,
       "task": "mvc-title-task",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 14,
       "task": "trucking-irp",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 15,
       "task": "trucking-ifta",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 16,
       "task": "mvc-registration-task",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 17,
+      "task": "trucking-cdl",
       "required": true
     }
   ],
