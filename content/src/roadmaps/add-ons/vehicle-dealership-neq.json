@@ -1,0 +1,11 @@
+{
+  "id": "vehicle-dealership-neq",
+  "displayname": "vehicle-dealership-neq",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 16,
+      "task": "vehicle-dealership"
+    }
+  ]
+}
