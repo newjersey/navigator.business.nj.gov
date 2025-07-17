@@ -54,6 +54,12 @@
       "weight": 3,
       "task": "mvc-registration-task",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 4,
+      "task": "trucking-cdl",
+      "required": true
     }
   ],
   "name": "Logistics",
