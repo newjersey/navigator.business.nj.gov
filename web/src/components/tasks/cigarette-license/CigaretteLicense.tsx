@@ -5,6 +5,8 @@ import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { StepperStep, Task } from "@/lib/types/types";
 import { ReactElement, useState } from "react";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 
 type Props = {
   task: Task;
@@ -14,6 +16,7 @@ type Props = {
 export const CigaretteLicense = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   const stepperSteps: StepperStep[] = [
     {
@@ -47,8 +50,10 @@ export const CigaretteLicense = (props: Props): ReactElement => {
           setStepIndex(step);
         }}
       />
-      {stepIndex === 0 && <GeneralInfo setStepIndex={setStepIndex} />}
-      {stepIndex === 1 && <LicenseeInfo setStepIndex={setStepIndex} />}
+      <DataFormErrorMapContext.Provider value={formContextState}>
+        {stepIndex === 0 && <GeneralInfo setStepIndex={setStepIndex} />}
+        {stepIndex === 1 && <LicenseeInfo setStepIndex={setStepIndex} />}
+      </DataFormErrorMapContext.Provider>
     </>
   );
 };
