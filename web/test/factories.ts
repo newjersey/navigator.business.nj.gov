@@ -44,7 +44,6 @@ import {
   LegalStructures,
   LicenseTaskId,
   NameAvailability,
-  OperatingPhase,
   OperatingPhaseId,
   OperatingPhases,
   OwnershipType,
@@ -575,30 +574,6 @@ export const publicFilingLegalStructures: string[] = LegalStructures.filter(
 export const tradeNameLegalStructures: string[] = LegalStructures.filter((x) => x.hasTradeName).map(
   (it) => it.id,
 );
-
-export const operatingPhasesDisplayingHomeBasedPrompt = OperatingPhases.filter(
-  (phase: OperatingPhase) => {
-    return phase.displayHomeBasedPrompt;
-  },
-).map((phase) => phase.id);
-
-export const operatingPhasesNotDisplayingHomeBasedPrompt = OperatingPhases.filter(
-  (phase: OperatingPhase) => {
-    return !phase.displayHomeBasedPrompt;
-  },
-).map((phase) => phase.id);
-
-export const operatingPhasesNotDisplayingAltHomeBasedBusinessDescription = OperatingPhases.filter(
-  (phase: OperatingPhase) => {
-    return !phase.displayAltHomeBasedBusinessDescription && phase.displayHomeBasedPrompt;
-  },
-).map((phase) => phase.id);
-
-export const operatingPhasesDisplayingAltHomeBasedBusinessDescription = OperatingPhases.filter(
-  (phase: OperatingPhase) => {
-    return phase.displayAltHomeBasedBusinessDescription && phase.displayHomeBasedPrompt;
-  },
-).map((phase) => phase.id);
 
 export const operatingPhasesDisplayingBusinessStructurePrompt = OperatingPhases.filter(
   (phase) => phase.displayBusinessStructurePrompt,
