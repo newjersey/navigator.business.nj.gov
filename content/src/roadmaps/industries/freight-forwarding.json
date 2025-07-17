@@ -75,7 +75,8 @@
   ],
   "name": "Freight Forwarding",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "vehicle-dealership-q"
   ],
   "displayname": "freight-forwarding",
   "industryOnboardingQuestions": {
