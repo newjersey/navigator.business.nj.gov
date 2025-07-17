@@ -53,35 +53,41 @@
       "task": "logisticare"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 12,
       "task": "transportation-entity-id",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "task": "mvc-title-task",
       "required": true,
       "weight": 13
     },
     {
-      "step": 3,
+      "step": 4,
       "task": "transportation-cpcn",
       "required": true,
       "weight": 14
     },
     {
       "weight": 15,
-      "step": 3,
+      "step": 4,
       "task": "transportation-inspection",
       "required": false
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 16,
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"
+    },
+    {
+      "weight": 17,
+      "step": 4,
+      "task": "trucking-cdl",
+      "required": true
     }
   ],
   "name": "Non-Medical Transport",
