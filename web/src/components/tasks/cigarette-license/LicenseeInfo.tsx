@@ -6,15 +6,11 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
-import {
-  createDataFormErrorMap,
-  DataFormErrorMapContext,
-} from "@/contexts/dataFormErrorMapContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
@@ -22,11 +18,14 @@ import {
   emptyCigaretteLicenseAddress,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
+import {
+  emptyFormationAddressData,
+  FormationAddress,
+} from "@businessnjgovnavigator/shared/formationData";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { Dispatch, ReactElement, SetStateAction, useMemo, useState } from "react";
+import { Dispatch, ReactElement, SetStateAction, useContext, useMemo, useState } from "react";
 
 interface Props {
   setStepIndex: (idx: number) => void;
@@ -36,28 +35,31 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
   const { business, userData } = useUserData();
   const { Config } = useConfig();
 
-
-  const { doesRequiredFieldHaveError, doesFieldHaveError } = useAddressErrors();
+  const {
+    doesRequiredFieldHaveErrorWithAdditionalData,
+    doesFieldHaveErrorWithAdditionalData,
+    doesFieldHaveError,
+  } = useAddressErrors();
   const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
     "addressLine1",
     DataFormErrorMapContext,
   );
-  // const { setIsValid: setIsValidAddressLine2 } = useFormContextFieldHelpers(
-  //   "addressLine2",
-  //   DataFormErrorMapContext,
-  // );
-  // const { setIsValid: setIsValidCity } = useFormContextFieldHelpers(
-  //   "addressCity",
-  //   DataFormErrorMapContext,
-  // );
-  // const { setIsValid: setIsValidState } = useFormContextFieldHelpers(
-  //   "addressState",
-  //   DataFormErrorMapContext,
-  // );
-  // const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers(
-  //   "addressZipCode",
-  //   DataFormErrorMapContext,
-  // );
+  const { setIsValid: setIsValidAddressLine2 } = useFormContextFieldHelpers(
+    "addressLine2",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers(
+    "addressCity",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidState } = useFormContextFieldHelpers(
+    "addressState",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers(
+    "addressZipCode",
+    DataFormErrorMapContext,
+  );
 
   // Get legal structure and check for SP/GP
   const legalStructureId = business?.profileData?.legalStructureId;
@@ -77,28 +79,18 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
           ? (action as (prevState: ProfileData) => ProfileData)(prevProfileData)
           : action;
 
-      // const relevantFields = pickData(profileData, ["businessName", "taxId", "taxPin"]);
-      // setTaxClearanceCertificateData({
-      //   ...taxClearanceCertificateData,
-      //   ...relevantFields,
-      // });
-
       return profileData;
     });
   };
-  // Pre-fill values from profile
-  const businessName = business?.profileData?.businessName || "";
-  const responsibleOwnerName = business?.profileData?.responsibleOwnerName || "";
-  const tradeName = business?.profileData?.tradeName || "";
   const taxId = business?.profileData?.taxId || "";
 
   // Form state
   const [formData, setFormData] = useState<CigaretteLicenseData>({
     ...emptyCigaretteLicenseData,
-    businessName: businessName,
-    responsibleOwnerName: responsibleOwnerName,
-    tradeName: tradeName,
-    taxId: taxId,
+    businessName: business?.profileData?.businessName || "",
+    responsibleOwnerName: business?.profileData?.responsibleOwnerName || "",
+    tradeName: business?.profileData?.tradeName || "",
+    taxId: business?.profileData?.taxId || "",
     encryptedTaxId: business?.profileData?.encryptedTaxId || "",
     businessAddress: {
       ...emptyCigaretteLicenseAddress,
@@ -110,38 +102,48 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
     },
     mailingAddressIsTheSame: false,
     mailingAddress: { ...emptyCigaretteLicenseAddress },
-    contactName: business?.profileData?.responsibleOwnerName || "",
+    contactName: "",
     contactPhoneNumber: "",
     contactEmail: userData?.user?.email || "",
   });
 
-  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const { fieldStates, reducer, runValidations } = useContext(DataFormErrorMapContext);
 
-  // Address context setup
-  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
-  // const [addressData, setAddressData] = useState<FormationAddress>({
-  //   addressLine1: business?.formationData?.formationFormData?.addressLine1 || "",
-  //   addressLine2: business?.formationData?.formationFormData?.addressLine2 || "",
-  //   addressCity: business?.formationData?.formationFormData?.addressMunicipality?.name || "",
-  //   addressState: business?.formationData?.formationFormData?.addressState || undefined,
-  //   addressZipCode: business?.formationData?.formationFormData?.addressZipCode || "",
-  //   addressCountry: "US",
-  //   businessLocationType: "US",
-  // });
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
 
-  // Field handlers
+  // Create a custom setAddressData that also updates formData.businessAddress
+  const setAddressDataWithSync = (action: SetStateAction<FormationAddress>): void => {
+    setAddressData((prevAddress) => {
+      const newAddress =
+        typeof action === "function"
+          ? (action as (prevState: FormationAddress) => FormationAddress)(prevAddress)
+          : action;
+
+      console.log("setAddressDataWithSync - newAddress:", newAddress);
+
+      // Also update formData.businessAddress when formationAddressData changes
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        businessAddress: {
+          ...prevFormData.businessAddress,
+          addressLine1: newAddress.addressLine1,
+          addressLine2: newAddress.addressLine2,
+          addressCity: newAddress.addressCity || "",
+          addressState: newAddress.addressState,
+          addressZipCode: newAddress.addressZipCode,
+        },
+      }));
+
+      return newAddress;
+    });
+  };
+
   const handleFieldChange = (field: keyof CigaretteLicenseData, value: string | boolean): void => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));
-
-    // Clear error when user starts typing
-    if (typeof value === "string" && errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: false }));
-    }
   };
 
   const handleAddressChange = (
@@ -156,12 +158,6 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
         [field]: value,
       },
     }));
-
-    // Clear error when user starts typing
-    const errorKey = `${section}.${field}`;
-    if (errors[errorKey]) {
-      setErrors((prev) => ({ ...prev, [errorKey]: false }));
-    }
   };
 
   const handleMailingSameAsBusiness = (checked: boolean): void => {
@@ -194,35 +190,9 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
         ];
 
     if (requiredFields.includes(fieldName) && !value.trim()) {
-      setErrors((prev) => ({ ...prev, [fieldName]: true }));
       return false;
     }
 
-    // Email validation
-    if (fieldName === "contactEmail" && value) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(value)) {
-        setErrors((prev) => ({ ...prev, [fieldName]: true }));
-        return false;
-      }
-    }
-
-    // Phone validation
-    if (fieldName === "contactPhoneNumber" && value) {
-      const phoneRegex = /^[\d\s()]+$/;
-      if (!phoneRegex.test(value) || value.replaceAll(/\D/g, "").length < 10) {
-        setErrors((prev) => ({ ...prev, [fieldName]: true }));
-        return false;
-      }
-    }
-
-    // Zip code validation
-    if (fieldName.includes("addressZipCode") && value && value.length !== 5) {
-      setErrors((prev) => ({ ...prev, [fieldName]: true }));
-      return false;
-    }
-
-    setErrors((prev) => ({ ...prev, [fieldName]: false }));
     return true;
   };
 
@@ -231,11 +201,30 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
   };
 
   const onValidation = (): void => {
-    // setIsValidAddressLine1(!doesRequiredFieldHaveError("addressLine1"));
-    // setIsValidAddressLine2(!doesFieldHaveError("addressLine2"));
-    // setIsValidCity(!doesRequiredFieldHaveError("addressCity"));
-    // setIsValidState(!doesRequiredFieldHaveError("addressState"));
-    // setIsValidZipCode(!doesRequiredFieldHaveError("addressZipCode"));
+    // Convert CigaretteLicenseAddress to the format expected by validation functions
+    const businessAddressData = {
+      addressLine1: formData.businessAddress.addressLine1,
+      addressLine2: formData.businessAddress.addressLine2,
+      addressCity: formData.businessAddress.addressCity,
+      addressState: formData.businessAddress.addressState?.shortCode,
+      addressZipCode: formData.businessAddress.addressZipCode,
+    };
+
+    setIsValidAddressLine1(
+      !doesRequiredFieldHaveErrorWithAdditionalData("addressLine1", businessAddressData),
+    );
+    setIsValidAddressLine2(
+      !doesFieldHaveErrorWithAdditionalData("addressLine2", businessAddressData),
+    );
+    setIsValidCity(
+      !doesRequiredFieldHaveErrorWithAdditionalData("addressCity", businessAddressData),
+    );
+    setIsValidState(
+      !doesRequiredFieldHaveErrorWithAdditionalData("addressState", businessAddressData),
+    );
+    setIsValidZipCode(
+      !doesRequiredFieldHaveErrorWithAdditionalData("addressZipCode", businessAddressData),
+    );
   };
 
   useMountEffectWhenDefined(() => {
@@ -246,13 +235,24 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
         taxId: business.profileData.taxId,
         encryptedTaxId: business.profileData.encryptedTaxId,
       });
+
+      // Initialize formationAddressData with business address data
+      setAddressDataWithSync({
+        addressLine1: business.formationData?.formationFormData?.addressLine1 || "",
+        addressLine2: business.formationData?.formationFormData?.addressLine2 || "",
+        addressCity: business.formationData?.formationFormData?.addressMunicipality?.name || "",
+        addressState: business.formationData?.formationFormData?.addressState || undefined,
+        addressZipCode: business.formationData?.formationFormData?.addressZipCode || "",
+        addressCountry: business.formationData?.formationFormData?.addressCountry || undefined,
+        businessLocationType:
+          business.formationData?.formationFormData?.businessLocationType || undefined,
+      });
     }
   }, business);
 
-  console.log(formContextState);
-
   return (
-    <DataFormErrorMapContext.Provider value={formContextState}>
+    <>
+      {/* <DataFormErrorMapContext.Provider value={formContextState}> */}
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -268,7 +268,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
           state: {
             formationAddressData: formationAddressData,
           },
-          setAddressData: setAddressData,
+          setAddressData: setAddressDataWithSync,
         }}
       >
         <>
@@ -281,7 +281,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
               {/* Responsible Owner Name (required) */}
               <>
                 <WithErrorBar
-                  hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
+                  hasError={!!fieldStates.responsibleOwnerName?.invalid}
                   type="ALWAYS"
                   className="margin-bottom-3"
                 >
@@ -311,7 +311,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
               {/* Trade Name (optional) */}
               <>
                 <WithErrorBar
-                  hasError={!!formContextState.fieldStates.tradeName?.invalid}
+                  hasError={!!fieldStates.tradeName?.invalid}
                   type="ALWAYS"
                   className="margin-bottom-3"
                 >
@@ -336,7 +336,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
           ) : (
             <>
               <WithErrorBar
-                hasError={!!formContextState.fieldStates.businessName?.invalid}
+                hasError={!!fieldStates.businessName?.invalid}
                 type="ALWAYS"
                 className="margin-bottom-3"
               >
@@ -361,7 +361,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
             </>
           )}
 
-          {/* NJ Tax ID (masked, read-only) */}
+          {/* NJ Tax ID (needs show/hide functionality) */}
           <div className="margin-bottom-3">
             <strong>
               <Content>`NJ Tax ID|tax-id`</Content>
@@ -383,7 +383,11 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
             <h3 className="margin-bottom-2">Business Address</h3>
             <UnitedStatesAddress
               onValidation={onValidation}
-              dataFormErrorMap={formContextState}
+              dataFormErrorMap={{
+                fieldStates: fieldStates,
+                reducer: reducer,
+                runValidations: runValidations,
+              }}
               isFullWidth
             />
           </div>
@@ -496,7 +500,11 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
           <div className="margin-bottom-3">
             <h3 className="margin-bottom-2">Contact Information</h3>
 
-            <WithErrorBar hasError={errors.contactName} type="ALWAYS" className="margin-bottom-2">
+            <WithErrorBar
+              hasError={!!fieldStates.contactName?.invalid}
+              type="ALWAYS"
+              className="margin-bottom-2"
+            >
               <strong>
                 <ModifiedContent>Contact Name</ModifiedContent>
               </strong>
@@ -505,7 +513,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                 value={formData.contactName}
                 handleChange={(value: string) => handleFieldChange("contactName", value)}
                 onValidation={() => validateField("contactName", formData.contactName)}
-                error={errors.contactName}
+                error={fieldStates.contactName?.invalid}
                 validationText="Contact name is required"
                 required={true}
                 autoComplete="name"
@@ -514,7 +522,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
             </WithErrorBar>
 
             <WithErrorBar
-              hasError={errors.contactPhoneNumber}
+              hasError={!!fieldStates.contactPhoneNumber?.invalid}
               type="ALWAYS"
               className="margin-bottom-2"
             >
@@ -528,7 +536,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                 onValidation={() =>
                   validateField("contactPhoneNumber", formData.contactPhoneNumber)
                 }
-                error={errors.contactPhoneNumber}
+                error={fieldStates.contactPhoneNumber?.invalid}
                 validationText="Valid phone number is required"
                 required={true}
                 autoComplete="tel"
@@ -536,7 +544,11 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
               />
             </WithErrorBar>
 
-            <WithErrorBar hasError={errors.contactEmail} type="ALWAYS" className="margin-bottom-2">
+            <WithErrorBar
+              hasError={!!fieldStates.contactEmail?.invalid}
+              type="ALWAYS"
+              className="margin-bottom-2"
+            >
               <strong>
                 <ModifiedContent>Email Address</ModifiedContent>
               </strong>
@@ -545,7 +557,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                 value={formData.contactEmail}
                 handleChange={(value: string) => handleFieldChange("contactEmail", value)}
                 onValidation={() => validateField("contactEmail", formData.contactEmail)}
-                error={errors.contactEmail}
+                error={fieldStates.contactEmail?.invalid}
                 validationText="Valid email address is required"
                 required={true}
                 autoComplete="email"
@@ -572,6 +584,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
           </div>
         </>
       </AddressContext.Provider>
-    </DataFormErrorMapContext.Provider>
+      {/* </DataFormErrorMapContext.Provider> */}
+    </>
   );
 };
