@@ -70,7 +70,7 @@ Fill out the appropriate forms:
 * [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) (PDF)
 * [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) (PDF)
 
-Completed applications can be emailed to **mvcblsprocessing@mvc.nj.gov** or mailed to:
+Email your completed application to **mvcblsprocessing@mvc.nj.gov** or mail to:
 
 &nbsp;
 
