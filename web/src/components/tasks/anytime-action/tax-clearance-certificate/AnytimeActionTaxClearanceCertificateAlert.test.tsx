@@ -1,7 +1,7 @@
 import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
 import { getMergedConfig } from "@/contexts/configContext";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -13,23 +13,20 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
         setStepIndex={() => {}}
       />,
     );
-    const profileAlert = screen.getByTestId("tax-clearance-error-alert");
-    expect(
-      within(profileAlert).getByText(Config.taxClearanceCertificateShared.singularErrorText),
-    ).toBeInTheDocument();
+
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+    expect(screen.getByText(/review the following field/i)).toBeInTheDocument();
   });
 
-  it("displays multiple fields text in header if there is only one error", () => {
+  it("displays multiple fields text in header if there is more than one error", () => {
     render(
       <AnytimeActionTaxClearanceCertificateAlert
         fieldErrors={["requestingAgencyId", "entityId"]}
         setStepIndex={() => {}}
       />,
     );
-    const profileAlert = screen.getByTestId("tax-clearance-error-alert");
-    expect(
-      within(profileAlert).getByText(Config.taxClearanceCertificateShared.pluralErrorText),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+    expect(screen.getByText(/review the following fields/i)).toBeInTheDocument();
   });
 
   it("displays nothing if there are no errors", () => {
@@ -44,7 +41,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
     ],
     [
       "FAILED_TAX_ID_AND_PIN_VALIDATION" as TaxClearanceCertificateResponseErrorType,
-      Config.taxClearanceCertificateStep3.errorTextValidation,
+      "Some of the entries in your submission were not valid",
     ],
     [
       "MISSING_FIELD" as TaxClearanceCertificateResponseErrorType,
@@ -59,12 +56,12 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
       Config.taxClearanceCertificateStep3.errorTextMissingField,
     ],
     [
-      "GENERIC_ERROR" as TaxClearanceCertificateResponseErrorType,
+      "NATURAL_PROGRAM_ERROR" as TaxClearanceCertificateResponseErrorType,
       Config.taxClearanceCertificateStep3.errorTextSystem,
     ],
     [
-      "NATURAL_PROGRAM_ERROR" as TaxClearanceCertificateResponseErrorType,
-      Config.taxClearanceCertificateStep3.errorTextSystem,
+      "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT" as TaxClearanceCertificateResponseErrorType,
+      "Tax ID is in use by another business account",
     ],
   ])("when responseErrorType is %s", (errorType, expectedMessage) => {
     it(`displays "${expectedMessage}"`, () => {
