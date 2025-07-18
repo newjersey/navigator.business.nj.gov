@@ -332,7 +332,7 @@ export const makePostBody = (
       ContactFirstName: formationFormData.contactFirstName,
       ContactLastName: formationFormData.contactLastName,
       ContactPhoneNumber: formationFormData.contactPhoneNumber,
-      ContactEmail: formationFormData.contactEmail,
+      ContactEmail: userData.user.email,
     },
   };
 };

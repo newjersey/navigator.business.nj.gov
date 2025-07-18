@@ -177,7 +177,6 @@ export interface FormationFormData extends FormationAddress {
   readonly contactFirstName: string;
   readonly contactLastName: string;
   readonly contactPhoneNumber: string;
-  readonly contactEmail: string;
   readonly foreignStateOfFormation: StateNames | undefined;
   readonly foreignDateOfFormation: string | undefined; // YYYY-MM-DD
   readonly willPracticeLaw: boolean | undefined;
@@ -314,7 +313,6 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    contactEmail: "",
     foreignDateOfFormation: undefined,
     foreignStateOfFormation: undefined,
     willPracticeLaw: false,
