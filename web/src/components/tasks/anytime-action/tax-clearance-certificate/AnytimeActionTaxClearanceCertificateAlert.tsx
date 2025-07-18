@@ -86,12 +86,11 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
       {props.fieldErrors.length > 0 && (
         <>
           <div>
-            <span className="text-bold">
-              {Config.taxClearanceCertificateShared.preHeaderErrorText}
-            </span>{" "}
-            {fieldErrors.length === 1
-              ? Config.taxClearanceCertificateShared.singularErrorText
-              : Config.taxClearanceCertificateShared.pluralErrorText}
+            {fieldErrors.length === 1 ? (
+              <Content>{Config.taxClearanceCertificateShared.singularErrorText}</Content>
+            ) : (
+              <Content>{Config.taxClearanceCertificateShared.pluralErrorText}</Content>
+            )}
           </div>
           <ul>
             {fieldErrors.map((id) => (
