@@ -3,8 +3,9 @@
     "generic": {
       "title": "Tell Us About Your Business",
       "question": "Which of the following are true?",
-      "startText": "Start",
+      "startingButtonText": "Start",
       "buttonText": "Save and Continue",
+      "endingButtonText": "Save & See My Results",
       "backButtonText": "Back",
       "errorText": "Provide responses to the following sections:",
       "footerText": "To learn more about ${mediaAreaText} permits, visit ${mediaAreaLink}.",
@@ -14,7 +15,9 @@
     },
     "instructions": {
       "lineOne": "Do you need Department of Environmental Protection (DEP) permits for your business?",
-      "lineTwo": "Your responses are secure and will not be shared without your permission.",
+      "lineTwoPtOne": "Your responses are secure and will",
+      "lineTwoNotText": "not",
+      "lineTwoPtTwo": "be shared without your permission.",
       "lineThree": "You may be fined if you operate without the necessary permits."
     },
     "waste": {
@@ -51,10 +54,10 @@
       }
     },
     "drinkingWater": {
-      "mediaAreaText": "drinking water permits",
-      "mediaAreaLink": "[NJDEP’s Drinking Water page.](https://www.nj.gov/dep/watersupply/)",
+      "mediaAreaText": "drinking water",
+      "mediaAreaLink": "[NJDEP’s  page on Water Supply and Geoscience](https://www.nj.gov/dep/watersupply/)",
       "questionnaireOptions": {
-        "ownWell": "My business will have its own well for water supply with at least 15 `service|service` connections, or will regularly serve an average of at least 25 people daily for at least 60 days per year.",
+        "ownWell": "My business will have its own well for water supply with at least 15 `service connections|service-connections` , or will regularly serve an average of at least 25 people daily for at least 60 days per year.",
         "combinedWellCapacity": "My business will have a combined well pump capacity of greater than 69 gallons per minute.",
         "wellDrilled": "My business will need to get a well drilled on the property.",
         "potableWater": "My business will get a potable water supply from a water utility.",
@@ -63,7 +66,7 @@
     },
     "wasteWater": {
       "mediaAreaText": "these criteria",
-      "mediaAreaLink": "[NJDEP’s page on Wastewater.](https://dep.nj.gov/dwq/wastewater/)",
+      "mediaAreaLink": "[NJDEP’s page on Water Quality](https://dep.nj.gov/dwq/wastewater/)",
       "questionnaireOptions": {
         "sanitaryWaste": "My business will create `sanitary wastewater|sanitary-wastewater`.",
         "industrialWaste": "My business will create `industrial wastewater|industrial-wastewater`. ",
@@ -84,7 +87,7 @@
     "editText": "Edit.",
     "summary": {
       "partOne": "Based on your answers, your business may be legally required to have a Department of Environmental Protection (DEP)",
-      "partTwo": "license or permit. Find out your business's requirements below.",
+      "partTwo": "licenses or permits. Find out your business's requirements below.",
       "mediaAreaText": {
         "waste": "Waste",
         "land": "Watershed and Land Management",
@@ -132,23 +135,23 @@
         }
       },
       "wasteWater": {
-        "heading": "Waste Water",
-        "bodyLink": "[Bureau of Stationary Sources](https://dep.nj.gov/boss/contact-information/)",
+        "heading": "Wastewater",
+        "bodyLink": "[Division of Water Quality](https://dep.nj.gov/dwq/contact-us/)",
         "contact": {
-          "phoneInfo": "General Permit Help Desk:",
-          "phone": "(609) 633-2829",
+          "phoneInfo": "",
+          "phone": "609-292-9977",
           "form": "",
-          "email": "aqppls@dep.nj.gov"
+          "email": "dwq@dep.nj.gov"
         }
       },
       "drinkingWater": {
         "heading": "Drinking Water",
-        "bodyLink": "[Bureau of Stationary Sources](https://dep.nj.gov/boss/contact-information/)",
+        "bodyLink": "[Division of Water Supply and Geoscience](https://www.nj.gov/dep/watersupply/wsa_contact.html)",
         "contact": {
-          "phoneInfo": "General Permit Help Desk:",
-          "phone": "(609) 633-2829",
+          "phoneInfo": "General Water Quality and Water Supply:",
+          "phone": "(609) 292-5550",
           "form": "",
-          "email": "aqppls@dep.nj.gov"
+          "email": "watersupply@dep.nj.gov"
         }
       }
     },
