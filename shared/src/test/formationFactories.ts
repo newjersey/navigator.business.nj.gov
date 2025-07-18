@@ -247,7 +247,6 @@ export const generateFormationFormData = (
     contactFirstName: `some-contact-first-name-${randomInt()}`,
     contactLastName: `some-contact-last-name-${randomInt()}`,
     contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
-    contactEmail: `some-contact-email-${randomInt()}@gmail.org`,
     withdrawals: `some-withdrawals-text-${randomInt()}`,
     dissolution: `some-dissolution-text-${randomInt()}`,
     combinedInvestment: `some-combinedInvestment-text-${randomInt()}`,

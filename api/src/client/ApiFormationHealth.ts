@@ -141,8 +141,11 @@ const formationData: FormationData = {
   lastVisitedPageIndex: 0,
 };
 
-const emptyBusinessUser = createEmptyUser();
-const healthCheckUser = createEmptyUserData(emptyBusinessUser);
+const skeletonBusinessUser = {
+  ...createEmptyUser(),
+  email: "test@example.com",
+};
+const healthCheckUser = createEmptyUserData(skeletonBusinessUser);
 const currentBusiness = getCurrentBusiness(healthCheckUser);
 const currentBusinessId = currentBusiness.id;
 
