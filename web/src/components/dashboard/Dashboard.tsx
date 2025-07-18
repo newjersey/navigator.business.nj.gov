@@ -2,7 +2,6 @@ import { PersonalizeMyTasksButton } from "@/components/PersonalizeMyTasksButton"
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { DeferredHomeBasedQuestion } from "@/components/dashboard/DeferredHomeBasedQuestion";
 import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolationsCard";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
@@ -17,8 +16,6 @@ import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -36,7 +33,6 @@ import {
   isStartingBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
@@ -53,11 +49,7 @@ interface Props {
 
 export const Dashboard = (props: Props): ReactElement => {
   const { business } = useUserData();
-  const router = useRouter();
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
-  const deferredHomeBasedOnSaveButtonClick = (): void => {
-    router && routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
-  };
 
   const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
 
@@ -66,11 +58,6 @@ export const Dashboard = (props: Props): ReactElement => {
       !isDomesticEmployerBusiness(business) &&
       business?.profileData.legalStructureId === undefined) ||
     (isNexusBusiness(business) && business?.profileData.legalStructureId === undefined);
-
-  const renderDeferredHomeBasedQuestion =
-    isHomeBasedBusinessApplicable(business?.profileData.industryId) &&
-    business?.profileData.homeBasedBusiness === undefined &&
-    operatingPhase.displayHomeBasedPrompt;
 
   const anytimeActionTasksFromNonEssentialQuestions = getAnytimeActionsFromNonEssentialQuestions(
     business?.profileData,
@@ -92,13 +79,6 @@ export const Dashboard = (props: Props): ReactElement => {
                     />
                   )}
                   <div className="margin-top-3">
-                    {renderDeferredHomeBasedQuestion && (
-                      <DeferredHomeBasedQuestion
-                        business={business}
-                        onSave={deferredHomeBasedOnSaveButtonClick}
-                      />
-                    )}
-
                     {props.elevatorViolations && <ElevatorViolationsCard />}
 
                     {operatingPhase.displayAnytimeActions && (
@@ -159,14 +139,6 @@ export const Dashboard = (props: Props): ReactElement => {
                 <UserDataErrorAlert />
                 <div className="margin-top-3">
                   {props.elevatorViolations && <ElevatorViolationsCard />}
-
-                  {renderDeferredHomeBasedQuestion && (
-                    <DeferredHomeBasedQuestion
-                      business={business}
-                      onSave={deferredHomeBasedOnSaveButtonClick}
-                    />
-                  )}
-
                   {operatingPhase.displayAnytimeActions && (
                     <AnytimeActionDropdown
                       anytimeActionTasks={props.anytimeActionTasks}

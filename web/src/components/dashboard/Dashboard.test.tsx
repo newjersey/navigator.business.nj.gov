@@ -10,18 +10,12 @@ import {
 } from "@/lib/types/types";
 import {
   generateAnytimeActionTask,
-  generateBusinessPersona,
   generateSidebarCardContent,
   generateStep,
   generateTask,
   generateXrayRenewalCalendarEvent,
-  operatingPhasesDisplayingAltHomeBasedBusinessDescription,
-  operatingPhasesDisplayingHomeBasedPrompt,
-  operatingPhasesNotDisplayingHomeBasedPrompt,
-  randomHomeBasedIndustry,
-  randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
@@ -344,163 +338,6 @@ describe("<DashboardOnDesktop />", () => {
       expect(screen.queryByTestId("hideableTasks")).not.toBeInTheDocument();
     },
   );
-
-  describe("deferred onboarding question", () => {
-    describe.each(operatingPhasesNotDisplayingHomeBasedPrompt)(
-      "phases not displaying home-based prompt",
-      (operatingPhase) => {
-        describe(`${operatingPhase}`, () => {
-          it("does not show home-based business question when not applicable to operating phase", () => {
-            useMockBusiness(
-              generateBusiness({
-                profileData: generateProfileData({
-                  industryId: randomHomeBasedIndustry(),
-                  homeBasedBusiness: undefined,
-                  businessPersona: generateBusinessPersona(),
-                  operatingPhase: operatingPhase,
-                }),
-                onboardingFormProgress: "COMPLETED",
-              }),
-            );
-
-            renderDashboardComponent({});
-
-            expect(
-              screen.queryByText(
-                Config.profileDefaults.fields.homeBasedBusiness.default.description,
-              ),
-            ).not.toBeInTheDocument();
-            expect(
-              screen.queryByText(
-                Config.profileDefaults.fields.homeBasedBusiness.default.altDescription,
-              ),
-            ).not.toBeInTheDocument();
-          });
-        });
-      },
-    );
-
-    describe.each(operatingPhasesDisplayingHomeBasedPrompt)(
-      "phases displaying home-based prompt",
-      (operatingPhase) => {
-        describe(`${operatingPhase}`, () => {
-          it("does not show home-based business question when not applicable to industry", () => {
-            useMockBusiness(
-              generateBusiness({
-                profileData: generateProfileData({
-                  homeBasedBusiness: undefined,
-                  industryId: randomNonHomeBasedIndustry(),
-                  businessPersona: generateBusinessPersona(),
-                  operatingPhase: operatingPhase,
-                }),
-                onboardingFormProgress: "COMPLETED",
-              }),
-            );
-
-            renderDashboardComponent({});
-
-            expect(
-              screen.queryByText(
-                Config.profileDefaults.fields.homeBasedBusiness.default.description,
-              ),
-            ).not.toBeInTheDocument();
-            expect(
-              screen.queryByText(
-                Config.profileDefaults.fields.homeBasedBusiness.default.altDescription,
-              ),
-            ).not.toBeInTheDocument();
-          });
-
-          it("sets homeBasedBusiness in profile and removes question when radio is selected", async () => {
-            const business = generateBusiness({
-              profileData: generateProfileData({
-                industryId: randomHomeBasedIndustry(),
-                homeBasedBusiness: undefined,
-                operatingPhase: operatingPhase,
-              }),
-              onboardingFormProgress: "COMPLETED",
-            });
-            renderStatefulDashboardComponent({ business });
-
-            fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-            fireEvent.click(
-              screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText),
-            );
-
-            await waitFor(() => {
-              return expect(
-                screen.queryByText(
-                  Config.profileDefaults.fields.homeBasedBusiness.default.description,
-                ),
-              ).not.toBeInTheDocument();
-            });
-            expect(currentBusiness().profileData.homeBasedBusiness).toEqual(true);
-          });
-
-          it("shallow routes with query parameter when radio is selected", async () => {
-            const business = generateBusiness({
-              profileData: generateProfileData({
-                industryId: randomHomeBasedIndustry(),
-                homeBasedBusiness: undefined,
-                operatingPhase: operatingPhase,
-              }),
-              onboardingFormProgress: "COMPLETED",
-            });
-
-            renderStatefulDashboardComponent({ business });
-
-            fireEvent.click(screen.getByTestId("home-based-business-radio-false"));
-            fireEvent.click(
-              screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText),
-            );
-            await waitFor(() => {
-              return expect(mockPush).toHaveBeenCalledWith(
-                { query: { deferredQuestionAnswered: "true" } },
-                undefined,
-                {
-                  shallow: true,
-                },
-              );
-            });
-          });
-        });
-      },
-    );
-
-    describe.each(operatingPhasesDisplayingAltHomeBasedBusinessDescription)(
-      "phases displaying home-based prompt with alt description",
-      (operatingPhase) => {
-        describe(`${operatingPhase}`, () => {
-          it("shows home-based business question with alt description when applicable to industry and not yet answered", () => {
-            useMockBusiness(
-              generateBusiness({
-                profileData: generateProfileData({
-                  industryId: randomHomeBasedIndustry(),
-                  homeBasedBusiness: undefined,
-                  businessPersona: generateBusinessPersona(),
-                  operatingPhase: operatingPhase,
-                }),
-                onboardingFormProgress: "COMPLETED",
-              }),
-            );
-
-            renderDashboardComponent({});
-
-            expect(
-              screen.queryByText(
-                Config.profileDefaults.fields.homeBasedBusiness.default.description,
-              ),
-            ).not.toBeInTheDocument();
-            expect(
-              screen.getByText(
-                Config.profileDefaults.fields.homeBasedBusiness.default.altDescription,
-              ),
-            ).toBeInTheDocument();
-          });
-        });
-      },
-    );
-  });
 
   describe("anytime actions", () => {
     const operatingPhasesWithAnytimeActions = OperatingPhases.filter((phase: OperatingPhase) => {
