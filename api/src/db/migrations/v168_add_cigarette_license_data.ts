@@ -393,7 +393,7 @@ interface v168NameAvailability extends v168NameAvailabilityResponse {
   lastUpdatedTimeStamp: string;
 }
 
-interface v168FormationData {
+export interface v168FormationData {
   formationFormData: v168FormationFormData;
   businessNameAvailability: v168NameAvailability | undefined;
   dbaBusinessNameAvailability: v168NameAvailability | undefined;
@@ -405,7 +405,7 @@ interface v168FormationData {
 
 type v168InFormInBylaws = "IN_BYLAWS" | "IN_FORM" | undefined;
 
-interface v168FormationFormData extends v168FormationAddress {
+export interface v168FormationFormData extends v168FormationAddress {
   readonly businessName: string;
   readonly businessSuffix: v168BusinessSuffix | undefined;
   readonly businessTotalStock: string;

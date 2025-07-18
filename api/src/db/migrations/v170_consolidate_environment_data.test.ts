@@ -1,18 +1,18 @@
 import {
-  generatev168Business,
-  generatev168UserData,
-} from "@db/migrations/v168_add_cigarette_license_data";
+  generatev169Business,
+  generatev169UserData,
+} from "@db/migrations/v169_remove_formationformdata_contactemail";
 import {
-  generatev169EnvironmentQuestionnaireData,
-  migrate_v168_to_v169,
-} from "@db/migrations/v169_consolidate_environment_data";
+  generatev170EnvironmentQuestionnaireData,
+  migrate_v169_to_v170,
+} from "@db/migrations/v170_consolidate_environment_data";
 
-describe("migrate_v168_to_v169", () => {
+describe("migrate_v169_to_v170", () => {
   it("migrates existing environment data into consolidated environment data", async () => {
     const id = "biz-1";
-    const v168UserData = generatev168UserData({
+    const v169UserData = generatev169UserData({
       businesses: {
-        [id]: generatev168Business({
+        [id]: generatev169Business({
           id,
           environmentData: {
             air: {
@@ -50,41 +50,41 @@ describe("migrate_v168_to_v169", () => {
       },
     });
 
-    const v169UserData = migrate_v168_to_v169(v168UserData);
-    expect(v169UserData.businesses[id].version).toBe(169);
-    expect(v169UserData.version).toBe(169);
-    expect(v169UserData.businesses[id].environmentData?.submitted).toBe(false);
-    const updatedQuestionnaireData = generatev169EnvironmentQuestionnaireData({
+    const v170UserData = migrate_v169_to_v170(v169UserData);
+    expect(v170UserData.businesses[id].version).toBe(170);
+    expect(v170UserData.version).toBe(170);
+    expect(v170UserData.businesses[id].environmentData?.submitted).toBe(false);
+    const updatedQuestionnaireData = generatev170EnvironmentQuestionnaireData({
       airOverrides: {
-        ...v168UserData.businesses[id].environmentData?.air?.questionnaireData,
+        ...v169UserData.businesses[id].environmentData?.air?.questionnaireData,
       },
       landOverrides: {
-        ...v168UserData.businesses[id].environmentData?.land?.questionnaireData,
+        ...v169UserData.businesses[id].environmentData?.land?.questionnaireData,
       },
       wasteOverrides: {
-        ...v168UserData.businesses[id].environmentData?.waste?.questionnaireData,
+        ...v169UserData.businesses[id].environmentData?.waste?.questionnaireData,
       },
     });
-    expect(v169UserData.businesses[id].environmentData?.questionnaireData).toStrictEqual(
+    expect(v170UserData.businesses[id].environmentData?.questionnaireData).toStrictEqual(
       updatedQuestionnaireData,
     );
   });
 
   it("leaves environmentData as undefined if no air, land or waste data has been submitted", async () => {
     const id = "biz-1";
-    const v168UserData = generatev168UserData({
+    const v169UserData = generatev169UserData({
       businesses: {
-        [id]: generatev168Business({
+        [id]: generatev169Business({
           id,
           environmentData: undefined,
         }),
       },
     });
 
-    const v169UserData = migrate_v168_to_v169(v168UserData);
+    const v170UserData = migrate_v169_to_v170(v169UserData);
 
-    expect(v169UserData.businesses[id].version).toBe(169);
-    expect(v169UserData.version).toBe(169);
-    expect(v169UserData.businesses[id].environmentData).toBe(undefined);
+    expect(v170UserData.businesses[id].version).toBe(170);
+    expect(v170UserData.version).toBe(170);
+    expect(v170UserData.businesses[id].environmentData).toBe(undefined);
   });
 });
