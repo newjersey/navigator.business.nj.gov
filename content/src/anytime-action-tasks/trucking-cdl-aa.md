@@ -4,7 +4,24 @@ name: Make Sure You or Your Drivers have a Comercial Driver's License (CDL)
 category:
   - manage-my-business-vehicles
 industryIds: []
-sectorIds: []
+sectorIds:
+  - utilities
+  - transportation-and-warehousing
+  - arts-entertainment-and-recreation
+  - manufacturing
+  - retail-trade-and-ecommerce
+  - offshore-wind
+  - mining-quarrying-and-oil-and-gas-extraction
+  - waste-management-and-Remediation
+  - life-sciences
+  - wholesale-trade
+  - construction
+  - clean-energy
+  - cannabis
+  - agriculture-forestry-fishing-and-hunting
+  - health-care-and-social-assistance
+  - educational-services
+  - accommodation-and-food-services
 urlSlug: trucking-cdl-aa
 summaryDescriptionMd: >-
   A Commercial Driver License (CDL) is required to operate large, heavy, or
