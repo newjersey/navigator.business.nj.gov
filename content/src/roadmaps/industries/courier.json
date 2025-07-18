@@ -49,7 +49,8 @@
     "courier-CRTK-survey",
     "business-vehicle-irp",
     "bus-initial-inspection",
-    "vehicle-dealership-q"
+    "vehicle-dealership-q",
+    "cdl-neq"
   ],
   "displayname": "courier",
   "industryOnboardingQuestions": {
