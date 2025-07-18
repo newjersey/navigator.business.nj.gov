@@ -170,6 +170,7 @@ import { migrate_v165_to_v166 } from "@db/migrations/v166_add_roadmap_task_data"
 import { migrate_v166_to_v167 } from "@db/migrations/v167_update_agent_number_or_manual_options";
 import { migrate_v167_to_v168 } from "@db/migrations/v168_add_cigarette_license_data";
 import { migrate_v168_to_v169 } from "@db/migrations/v169_consolidate_environment_data";
+import { migrate_v169_to_v170 } from "@db/migrations/v170_remove_formationformdata_contactemail";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -344,6 +345,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v166_to_v167,
   migrate_v167_to_v168,
   migrate_v168_to_v169,
+  migrate_v169_to_v170,
 ];
 
-export { generatev169UserData as CURRENT_GENERATOR } from "@db/migrations/v169_consolidate_environment_data";
+export { generatev170UserData as CURRENT_GENERATOR } from "@db/migrations/v170_remove_formationformdata_contactemail";
