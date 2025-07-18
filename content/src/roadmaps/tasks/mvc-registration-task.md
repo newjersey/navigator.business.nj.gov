@@ -30,7 +30,7 @@ summaryDescriptionMd: >-
   Typically,  when you purchase a new vehicle from a New Jersey dealer, **they register it for you as part of the sales process.** If you opt out, or have a vehicle that was registered out of state, you, as the buyer, are responsible for registering it in NJ.
 urlSlug: mvc-register-task
 displayname: mvc-register-task
-name: Register Your Business-Owned Vehicle(s)
+name: Register Your Business-Owned Vehicle(s) with the NJ MVC
 id: mvc-registration-task
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 callToActionText: Register My Business Vehicle(s)
