@@ -87,7 +87,12 @@
     }
   ],
   "name": "Pharmacy",
-  "nonEssentialQuestionsIds": ["weights-measures", "business-vehicle-irp", "sell-milk-question"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-irp",
+    "sell-milk-question",
+    "cdl-neq"
+  ],
   "displayname": "pharmacy",
   "industryOnboardingQuestions": {},
   "isEnabled": true,
