@@ -62,7 +62,10 @@
     }
   ],
   "name": "Home Improvement Contractor",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "cdl-neq"
+  ],
   "displayname": "home-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
