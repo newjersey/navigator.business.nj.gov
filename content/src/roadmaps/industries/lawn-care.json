@@ -47,7 +47,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "lawn-businesses-CRTK-survey",
-    "pesticides-applicator-licensing"
+    "pesticides-applicator-licensing",
+    "cdl-neq"
   ],
   "displayname": "lawn-care",
   "industryOnboardingQuestions": {
