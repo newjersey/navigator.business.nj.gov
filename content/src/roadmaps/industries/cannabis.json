@@ -87,7 +87,8 @@
     "business-vehicle-irp",
     "inspect-pv",
     "inspect-fridge",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "cdl-neq"
   ],
   "displayname": "cannabis",
   "industryOnboardingQuestions": {
