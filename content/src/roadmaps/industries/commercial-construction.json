@@ -48,7 +48,8 @@
     "weights-measures",
     "business-vehicle-irp",
     "well-driller",
-    "vehicle-dealership-q"
+    "vehicle-dealership-q",
+    "cdl-neq"
   ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
