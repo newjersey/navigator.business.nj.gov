@@ -1,6 +1,6 @@
 ---
 id: mvc-register
-name: Register Your Business-Owned Vehicle(s)
+name: Register Your Business-Owned Vehicle(s) with the NJ MVC
 category:
   - manage-my-business-vehicles
 applyToAllUsers: false
