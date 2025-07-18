@@ -55,7 +55,10 @@
     }
   ],
   "name": "Electrical Contractor",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "cdl-neq"
+  ],
   "displayname": "electrical-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
