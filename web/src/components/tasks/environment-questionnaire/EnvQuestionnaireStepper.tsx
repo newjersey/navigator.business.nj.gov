@@ -13,6 +13,8 @@ import { EnvPermitContext } from "@/contexts/EnvPermitContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { scrollToTop, templateEval } from "@/lib/utils/helpers";
 import {
@@ -37,6 +39,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
   const { Config } = useConfig();
   const isMobile = useMediaQuery(MediaQueries.isMobile);
   const envContext = useContext(EnvPermitContext);
+  const { updateQueue } = useUserData();
 
   const {
     isAuthenticated,
@@ -51,7 +54,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     | "Land"
     | "Waste"
     | "Drinking Water"
-    | "Waste Water";
+    | "Wastewater";
 
   const EnvPermitConfiguration: {
     name: EnvPermitStepNames;
@@ -62,7 +65,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     { name: "Land", stepIndex: 2 },
     { name: "Waste", stepIndex: 3 },
     { name: "Drinking Water", stepIndex: 4 },
-    { name: "Waste Water", stepIndex: 5 },
+    { name: "Wastewater", stepIndex: 5 },
   ];
 
   const steps = EnvPermitConfiguration.map((step) => {
@@ -90,7 +93,13 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
   const instructionsTab = (): ReactNode => (
     <div>
       <div className={"text-bold"}>{Config.envQuestionPage.instructions.lineOne}</div>
-      <div> {Config.envQuestionPage.instructions.lineTwo}</div>
+      <div>
+        {Config.envQuestionPage.instructions.lineTwoPtOne}
+        <span className={"text-bold margin-x-05"}>
+          {Config.envQuestionPage.instructions.lineTwoNotText}
+        </span>
+        {Config.envQuestionPage.instructions.lineTwoPtTwo}
+      </div>
       <div> {Config.envQuestionPage.instructions.lineThree}</div>
       <hr className={"margin-y-2"} />
     </div>
@@ -124,11 +133,18 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     }
   };
 
+  const nextButtonText = (): string => {
+    if (envContext.state.stepIndex === 0) return Config.envQuestionPage.generic.startingButtonText;
+    if (envContext.state.stepIndex === 5) return Config.envQuestionPage.generic.endingButtonText;
+
+    return Config.envQuestionPage.generic.buttonText;
+  };
+
   return (
     <div className={"bg-accent-cooler-50 padding-2 radius-lg"}>
-      {!isMobile && (
-        <h2 className="margin-bottom-neg-2 font-normal">{Config.envQuestionPage.generic.title}</h2>
-      )}
+      <h2 className={`font-normal ${isMobile ? `margin-bottom-neg-05` : `margin-bottom-neg-2`}`}>
+        {Config.envQuestionPage.generic.title}
+      </h2>
       <HorizontalStepper
         steps={steps}
         currentStep={envContext.state.stepIndex}
@@ -138,8 +154,10 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
             isAuthenticated === IsAuthenticated.FALSE &&
             userWantsToContinueWithoutSaving === false
           ) {
+            updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
             setShowContinueWithoutSaving(true);
             setShowNeedsAccountModal(true);
+            envContext.setStepIndex(newStep);
             return;
           }
           envContext.setStepIndex(newStep);
@@ -243,8 +261,10 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
               isAuthenticated === IsAuthenticated.FALSE &&
               userWantsToContinueWithoutSaving === false
             ) {
+              updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
               setShowContinueWithoutSaving(true);
               setShowNeedsAccountModal(true);
+              envContext.setStepIndex(envContext.state.stepIndex + 1);
               return;
             }
             if (envContext.state.stepIndex < 5) {
@@ -261,9 +281,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
             }
           }}
         >
-          {envContext.state.stepIndex === 0
-            ? Config.envQuestionPage.generic.startText
-            : Config.envQuestionPage.generic.buttonText}
+          {nextButtonText()}
         </PrimaryButton>
       </div>
     </div>

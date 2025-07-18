@@ -26,9 +26,10 @@ collections:
                 fields:
                   - { label: Title, name: title, widget: text }
                   - { label: Question, name: question, widget: string }
-                  - { label: Start Text, name: startText, widget: string }
+                  - { label: Starting Button Text, name: startingButtonText, widget: string }
                   - { label: Button Text, name: buttonText, widget: string }
                   - { label: Back Button Text, name: backButtonText, widget: string }
+                  - { label: Ending Button Text, name: endingButtonText, widget: string }
                   - { label: Error Text, name: errorText, widget: string }
                   - {
                       label: Aria Context Inline Dialog Inactive,
