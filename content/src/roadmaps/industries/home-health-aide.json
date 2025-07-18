@@ -64,7 +64,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "bus-initial-inspection",
-    "mvc-cpcn"
+    "mvc-cpcn",
+    "cdl-neq"
   ],
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
