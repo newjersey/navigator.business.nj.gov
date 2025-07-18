@@ -26,9 +26,10 @@ collections:
                 fields:
                   - { label: Title, name: title, widget: text }
                   - { label: Question, name: question, widget: string }
-                  - { label: Start Text, name: startText, widget: string }
+                  - { label: Starting Button Text, name: startingButtonText, widget: string }
                   - { label: Button Text, name: buttonText, widget: string }
                   - { label: Back Button Text, name: backButtonText, widget: string }
+                  - { label: Ending Button Text, name: endingButtonText, widget: string }
                   - { label: Error Text, name: errorText, widget: string }
                   - {
                       label: Aria Context Inline Dialog Inactive,
@@ -52,7 +53,9 @@ collections:
                 widget: object
                 fields:
                   - { label: Instructions Line One, name: lineOne, widget: string }
-                  - { label: Instructions Line Two, name: lineTwo, widget: string }
+                  - { label: Instructions Line Two Part One, name: lineTwoPtOne, widget: string }
+                  - { label: Instructions Line Two Not Text, name: lineTwoNotText, widget: string }
+                  - { label: Instructions Line Two Part Two, name: lineTwoPtTwo, widget: string }
                   - { label: Instructions Line Three, name: lineThree, widget: string }
               - label: Waste
                 name: waste

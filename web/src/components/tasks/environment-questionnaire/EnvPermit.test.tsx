@@ -1,6 +1,7 @@
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateTask } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -41,7 +42,7 @@ describe("<CheckEnvPermits />", () => {
   const setShowContinueWithoutSaving = jest.fn();
 
   describe("questionnaire", () => {
-    it("opens 'Needs Account' modal when the stepper is clicked", async () => {
+    it("opens 'Needs Account' modal when the stepper is clicked and updates step", async () => {
       render(
         withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
           setShowNeedsAccountModal: setShowNeedsAccountModal,
@@ -51,18 +52,39 @@ describe("<CheckEnvPermits />", () => {
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
+      expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
     });
 
-    it("opens 'Needs Account' modal when the start button is clicked", async () => {
+    it("opens 'Needs Account' modal when the start button is clicked and updates step", async () => {
       render(
         withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
           setShowNeedsAccountModal: setShowNeedsAccountModal,
         }),
       );
-      fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startText));
+      startQuestionnaire();
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
+      expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
+    });
+
+    it("sets returnToLink on 'Needs Account Modal' opening", async () => {
+      render(
+        withNeedsAccountContext(
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
+            <EnvPermit task={generateTask({})} />
+          </WithStatefulUserData>,
+          IsAuthenticated.FALSE,
+          {
+            setShowNeedsAccountModal: setShowNeedsAccountModal,
+          },
+        ),
+      );
+      startQuestionnaire();
+      await waitFor(() => {
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+      });
+      expect(currentBusiness().preferences.returnToLink).toEqual(ROUTES.envPermit);
     });
 
     it("sets showContinueWithoutSaving to true when on the first step, is not authenticated and user hasn't clicked continue without saving", async () => {
@@ -71,7 +93,7 @@ describe("<CheckEnvPermits />", () => {
           setShowContinueWithoutSaving: setShowContinueWithoutSaving,
         }),
       );
-      fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startText));
+      startQuestionnaire();
       await waitFor(() => {
         return expect(setShowContinueWithoutSaving).toHaveBeenCalledWith(true);
       });
@@ -83,7 +105,7 @@ describe("<CheckEnvPermits />", () => {
           userWantsToContinueWithoutSaving: true,
         }),
       );
-      fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startText));
+      startQuestionnaire();
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
       });
@@ -116,7 +138,7 @@ describe("<CheckEnvPermits />", () => {
       render(<EnvPermit task={generateTask({})} />);
       fireEvent.click(screen.getByTestId(`stepper-2`));
       expect(screen.getByTestId(`land-questionnaire`)).toBeInTheDocument();
-      fireEvent.click(screen.getByText(`Back`));
+      fireEvent.click(screen.getByText(Config.envQuestionPage.generic.backButtonText));
       expect(screen.queryByTestId(`land-questionnaire`)).not.toBeInTheDocument();
       expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
     });
@@ -124,7 +146,7 @@ describe("<CheckEnvPermits />", () => {
     it("throws an error if nothing is selected and navigates to step one", () => {
       render(<EnvPermit task={generateTask({})} />);
       fireEvent.click(screen.getByTestId(`stepper-5`));
-      goToNextStep();
+      saveAndSeeResults();
       expect(screen.getByTestId("stepper-error-alert")).toBeInTheDocument();
       expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
     });
@@ -132,7 +154,7 @@ describe("<CheckEnvPermits />", () => {
     it("navigates to the appropriate step when the step is clicked within the error alert", () => {
       render(<EnvPermit task={generateTask({})} />);
       fireEvent.click(screen.getByTestId(`stepper-5`));
-      goToNextStep();
+      saveAndSeeResults();
       const errorAlert = screen.getByTestId("stepper-error-alert");
       expect(errorAlert).toBeInTheDocument();
 
@@ -149,7 +171,7 @@ describe("<CheckEnvPermits />", () => {
           <EnvPermit task={generateTask({})} />
         </WithStatefulUserData>,
       );
-      fireEvent.click(screen.getByText("Start"));
+      startQuestionnaire();
       fireEvent.click(screen.getByTestId("constructionActivities"));
       goToNextStep();
       fireEvent.click(screen.getByTestId("propertyAssessment"));
@@ -159,7 +181,7 @@ describe("<CheckEnvPermits />", () => {
       fireEvent.click(screen.getByTestId("combinedWellCapacity"));
       goToNextStep();
       fireEvent.click(screen.getByTestId("localSewage"));
-      goToNextStep();
+      saveAndSeeResults();
       expect(currentBusiness().environmentData?.submitted).toBe(true);
       const updatedQuestionnaireData = generateEnvironmentQuestionnaireData({
         airOverrides: { constructionActivities: true },
@@ -369,4 +391,12 @@ describe("<CheckEnvPermits />", () => {
 
 const goToNextStep = (): void => {
   fireEvent.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+};
+
+const saveAndSeeResults = (): void => {
+  fireEvent.click(screen.getByText(Config.envQuestionPage.generic.endingButtonText));
+};
+
+const startQuestionnaire = (): void => {
+  fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startingButtonText));
 };
