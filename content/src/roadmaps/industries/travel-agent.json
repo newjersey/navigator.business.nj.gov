@@ -51,7 +51,8 @@
   "name": "Travel Agency",
   "nonEssentialQuestionsIds": [
     "bus-initial-inspection",
-    "mvc-cpcn"
+    "mvc-cpcn",
+    "cdl-neq"
   ],
   "displayname": "travel-agent",
   "industryOnboardingQuestions": {
