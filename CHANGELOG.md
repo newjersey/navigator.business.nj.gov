@@ -1,3 +1,10 @@
+## [2025.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.15.0...v2025.15.1) (2025-07-18)
+
+
+### Bug Fixes
+
+* [AB[#15241](https://github.com/newjersey/navigator.business.nj.gov/issues/15241)] define formation contact email as user's email ([6dca238](https://github.com/newjersey/navigator.business.nj.gov/commit/6dca238f92e965aa05d5c92892fb848d950bfd78))
+
 # [2025.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.14.0...v2025.15.0) (2025-07-17)
 
 
