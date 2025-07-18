@@ -69,7 +69,8 @@
     "business-vehicle-irp",
     "inspect-pv",
     "inspect-fridge",
-    "sell-milk-question"
+    "sell-milk-question",
+    "cdl-neq"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {
