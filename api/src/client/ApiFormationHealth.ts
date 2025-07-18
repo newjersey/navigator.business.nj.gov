@@ -110,7 +110,6 @@ const formationData: FormationData = {
     contactFirstName: "some-contact-first-name-15248752",
     contactLastName: "some-contact-last-name-97216646",
     contactPhoneNumber: "6092926748",
-    contactEmail: "some-contact-email@email.org",
     withdrawals: "some-withdrawals-text-62080960",
     dissolution: "some-dissolution-text-69760616",
     combinedInvestment: "some-combinedInvestment-text-57158048",
@@ -141,8 +140,11 @@ const formationData: FormationData = {
   lastVisitedPageIndex: 0,
 };
 
-const emptyBusinessUser = createEmptyUser();
-const healthCheckUser = createEmptyUserData(emptyBusinessUser);
+const skeletonBusinessUser = {
+  ...createEmptyUser(),
+  email: "test@example.com",
+};
+const healthCheckUser = createEmptyUserData(skeletonBusinessUser);
 const currentBusiness = getCurrentBusiness(healthCheckUser);
 const currentBusinessId = currentBusiness.id;
 
