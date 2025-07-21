@@ -39,20 +39,26 @@
     },
     {
       "step": 4,
-      "weight": 1,
+      "weight": 16,
       "task": "transportation-entity-id",
       "required": true
     },
     {
-      "weight": 2,
+      "weight": 17,
       "step": 4,
       "task": "mvc-title-task",
       "required": true
     },
     {
       "step": 4,
-      "weight": 3,
+      "weight": 20,
       "task": "mvc-registration-task",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 21,
+      "task": "trucking-cdl",
       "required": true
     }
   ],
@@ -61,7 +67,7 @@
     "weights-measures",
     "logistics-CRTK-survey",
     "regulated-medical-waste-question",
-    "business-vehicle-irp"
+    "vehicle-dealership-q"
   ],
   "displayname": "logistics",
   "industryOnboardingQuestions": {

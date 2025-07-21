@@ -1,5 +1,21 @@
 ---
-notesMd: ""
+id: vehicle-dealership-aa
+name: Get Your Motor Vehicle or Boat Dealership License
+category:
+  - manage-my-business-vehicles
+industryIds: []
+sectorIds:
+  - transportation-and-warehousing
+  - waste-management-and-Remediation
+  - manufacturing
+  - utilities
+  - clean-energy
+  - offshore-wind
+  - mining-quarrying-and-oil-and-gas-extraction
+  - wholesale-trade
+  - construction
+  - agriculture-forestry-fishing-and-hunting
+urlSlug: vehicle-dealership-aa
 summaryDescriptionMd: >
   If your business plans to **sell or lease 4 or more vehicles or boats in a
   given year,** you need a dealership license from the NJ Motor Vehicle
@@ -8,25 +24,23 @@ summaryDescriptionMd: >
 
   There are 4 types of dealership licenses in the state of New Jersey:
 
-  * New and used car dealership
+  * **New and used car dealership**
 
-  * Used car dealership
+  * **Used car dealership**
 
-  * Leasing dealership
+  * **Leasing dealership**
 
-  * Boat dealership
+  * **Boat dealership**
 
 
   :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
   You will need to apply for more than one license if your business plans to both sell and lease vehicles or boats.
-urlSlug: vehicle-dealership
-displayname: vehicle-dealership
-name: Get Your Motor Vehicle or Boat Dealership License
-id: vehicle-dealership
-agencyId: nj-motor-vehicle
-agencyAdditionalContext: Business Licensing Services Bureau
+
+
+  :::
+issuingAgency: NJ Motor Vehicle Commission, Business Licensing Services Bureau
 ---
 ## Application Requirements
 
@@ -42,9 +56,7 @@ You must submit copies of the following:
 * Deed, lease, or purchase agreement for your business location. If leasing the property, the lease agreement must be for a minimum of 12 months.
 * Phone bill or phone installation order with your business name and addresses listed on the document
 * Photographs or plans clearly showing the complete premises where you want to conduct your business
-
 Depending on your business type or dealership license, you may also need:
-
 * [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if you sell or lease under a different business names
 * [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf),  if you sell used vehicles only
 * `Franchise Agreement|franchise-agreement`, if you sell new vehicles only

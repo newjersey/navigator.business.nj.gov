@@ -59,7 +59,8 @@
     "inspect-pv",
     "inspect-fridge",
     "bus-initial-inspection",
-    "mvc-cpcn"
+    "mvc-cpcn",
+    "cdl-neq"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {

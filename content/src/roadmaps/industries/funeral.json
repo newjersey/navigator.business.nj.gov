@@ -71,7 +71,8 @@
     "weights-measures",
     "crematory",
     "bus-initial-inspection",
-    "mvc-cpcn"
+    "mvc-cpcn",
+    "cdl-neq"
   ],
   "displayname": "funeral",
   "industryOnboardingQuestions": {

@@ -78,11 +78,18 @@
       "weight": 20,
       "task": "mvc-registration-task",
       "required": true
+    },
+    {
+      "weight": 21,
+      "step": 4,
+      "task": "trucking-cdl",
+      "required": true
     }
   ],
   "name": "Car Service (Large Capacity Vehicles)",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "vehicle-dealership-q"
   ],
   "displayname": "transportation",
   "industryOnboardingQuestions": {

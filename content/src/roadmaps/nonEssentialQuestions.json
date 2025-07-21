@@ -223,6 +223,12 @@
       "anytimeActions": [],
       "id": "vehicle-dealership-q",
       "questionText": "Will your business sell or lease 4 or more vehicles or boats in a given year?"
+    },
+    {
+      "addOn": "cdl-addon",
+      "anytimeActions": [],
+      "id": "cdl-neq",
+      "questionText": "Will your business use commercial vehicles weighing over 26,000 pounds to haul loads or transport passengers?"
     }
   ]
 }

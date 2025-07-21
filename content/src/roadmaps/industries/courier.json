@@ -48,7 +48,9 @@
     "weights-measures",
     "courier-CRTK-survey",
     "business-vehicle-irp",
-    "bus-initial-inspection"
+    "bus-initial-inspection",
+    "vehicle-dealership-q",
+    "cdl-neq"
   ],
   "displayname": "courier",
   "industryOnboardingQuestions": {

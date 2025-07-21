@@ -52,7 +52,8 @@
   "nonEssentialQuestionsIds": [
     "business-vehicle-irp",
     "bus-initial-inspection",
-    "mvc-cpcn"
+    "mvc-cpcn",
+    "cdl-neq"
   ],
   "displayname": "event-planning",
   "industryOnboardingQuestions": {

@@ -3,14 +3,14 @@
   "displayname": "vehicle-irp-ifta",
   "roadmapSteps": [
     {
-      "step": 3,
+      "step": 4,
       "task": "trucking-irp",
       "weight": 1,
       "required": true
     },
     {
       "weight": 2,
-      "step": 3,
+      "step": 4,
       "task": "trucking-ifta",
       "required": true
     }

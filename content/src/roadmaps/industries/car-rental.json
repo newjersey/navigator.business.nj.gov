@@ -43,26 +43,31 @@
       "task": "get-insurance"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 16,
       "task": "transportation-entity-id",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 17,
       "task": "mvc-title-task",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 18,
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"
+    },
+    {
+      "weight": 19,
+      "step": 4,
+      "task": "vehicle-dealership"
     }
   ],
-  "name": "Car Rental",
+  "name": "Car Rental and Dealerships",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "bus-initial-inspection"
@@ -73,8 +78,8 @@
     "canBeReseller": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "vehicle rental",
+  "additionalSearchTerms": "vehicle rental, vehicle dealership, car dealership, car rental, dealership, dealer, leasing, car leasing, vehicle leasing",
   "id": "car-rental",
-  "description": "Leases vehicles to customers for fewer than 90 days",
+  "description": "Leases or sells vehicles to customers",
   "webflowId": "656a136212e59f3e1bcf4cc5"
 }

@@ -50,8 +50,8 @@
   ],
   "name": "Childcare Center",
   "nonEssentialQuestionsIds": [
-    "business-vehicle-title-reg",
-    "mvc-cpcn"
+    "mvc-cpcn",
+    "cdl-neq"
   ],
   "displayname": "daycare",
   "industryOnboardingQuestions": {
