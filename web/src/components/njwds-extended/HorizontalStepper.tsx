@@ -255,7 +255,11 @@ export const HorizontalStepper = (props: Props): ReactElement => {
           </div>
         </div>
       </div>
-      <div className={"display-only-mobile-and-tablet margin-top-1 margin-bottom-2"}>
+      <div
+        className={
+          "display-only-mobile-and-tablet margin-top-1 margin-bottom-2 text-accent-cooler-600"
+        }
+      >
         <strong>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</strong>
         {` ${props.steps[props.currentStep].name}`}
       </div>

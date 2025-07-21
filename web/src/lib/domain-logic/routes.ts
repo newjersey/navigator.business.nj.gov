@@ -15,6 +15,7 @@ export const ROUTES = {
   login: "/login",
   njeda: "/njeda",
   taxClearanceCertificate: "/actions/tax-clearance-certificate-apply",
+  envPermit: "tasks/env-permitting",
 };
 
 export interface QUERY_PARAMS_VALUES {
