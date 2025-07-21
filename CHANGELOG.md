@@ -1,3 +1,34 @@
+# [2025.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.15.1...v2025.16.0) (2025-07-21)
+
+
+### Bug Fixes
+
+* [AB[#14397](https://github.com/newjersey/navigator.business.nj.gov/issues/14397)] updates from content ([ec91b72](https://github.com/newjersey/navigator.business.nj.gov/commit/ec91b72cbf0f9ffa2ad209f760e4e63222d4daee))
+* [AB[#15189](https://github.com/newjersey/navigator.business.nj.gov/issues/15189)] changing formatting for tax clearance error message ([ee9cf42](https://github.com/newjersey/navigator.business.nj.gov/commit/ee9cf4284c233e4008229fc2fe0ba994ae286cfb))
+* [AB[#15204](https://github.com/newjersey/navigator.business.nj.gov/issues/15204)] Add callout to Step 3 of Emergency Trip Permit ([1675d4b](https://github.com/newjersey/navigator.business.nj.gov/commit/1675d4bb1a32a8cf0c2a5c4958f7f0f5d1ec16b9))
+* [AB[#15241](https://github.com/newjersey/navigator.business.nj.gov/issues/15241)] define formation contact email as user's email ([33a907c](https://github.com/newjersey/navigator.business.nj.gov/commit/33a907c2f034c3cd90fad2ddbd40479941570fb7))
+* [AB[#7218](https://github.com/newjersey/navigator.business.nj.gov/issues/7218)] content, reroute, and stepper update ([27ecad3](https://github.com/newjersey/navigator.business.nj.gov/commit/27ecad3dddaf67c1f19df7b8de0c9e65d4f9cc77))
+* **deps:** update aws-sdk ([2085321](https://github.com/newjersey/navigator.business.nj.gov/commit/2085321077d41613a8123cc3eb3a0de67118c679))
+* **deps:** update dependency @emotion/styled to v11.14.1 ([4d7bc2f](https://github.com/newjersey/navigator.business.nj.gov/commit/4d7bc2fe76b232bbf9a260a0565e97130ba28e5c))
+* **deps:** update dependency aws-amplify to v6.15.3 ([ae6f4a0](https://github.com/newjersey/navigator.business.nj.gov/commit/ae6f4a021caaf0acc5de7c9ecab7a6c66536237f))
+* **deps:** update dependency axios to v1.10.0 ([73ce9ac](https://github.com/newjersey/navigator.business.nj.gov/commit/73ce9ac6fd2575753db00034d3bbe7224b946ec4))
+* **deps:** update dependency next-seo to v6.8.0 ([cf3d1d9](https://github.com/newjersey/navigator.business.nj.gov/commit/cf3d1d9a062c8a87d1109ebd637d8d2ef8cf3bd7))
+* **deps:** update material-ui ([e33ff33](https://github.com/newjersey/navigator.business.nj.gov/commit/e33ff33b10b10825a9ce19809aea63476402cada))
+* **deps:** update nextjs monorepo to v15.3.5 ([8d8ec0f](https://github.com/newjersey/navigator.business.nj.gov/commit/8d8ec0fa35691ce35a45e283578e543590e006e1))
+* merge conflict ([1c4fb65](https://github.com/newjersey/navigator.business.nj.gov/commit/1c4fb65f318dc46f380cafaecc521d5070a6e7f2))
+* remove duplicate CMS config field ([0fb0c0c](https://github.com/newjersey/navigator.business.nj.gov/commit/0fb0c0ca4b6e803128a6f29870d1e254e5666c83))
+
+
+### Features
+
+* [AB[#14929](https://github.com/newjersey/navigator.business.nj.gov/issues/14929)] step 1 of cigarette license ([#10716](https://github.com/newjersey/navigator.business.nj.gov/issues/10716)) ([8040d04](https://github.com/newjersey/navigator.business.nj.gov/commit/8040d047e585d2a367f187afbb533808b6567125))
+* [AB[#14974](https://github.com/newjersey/navigator.business.nj.gov/issues/14974)] Personalize My Experience CTA ([3922d09](https://github.com/newjersey/navigator.business.nj.gov/commit/3922d09d6374236539c64aa384d72b194408228f))
+* [AB[#15108](https://github.com/newjersey/navigator.business.nj.gov/issues/15108)] Remove home-based business question from dashboard ([a98b2a2](https://github.com/newjersey/navigator.business.nj.gov/commit/a98b2a299ddd99016564a97c9bf22226aa98b2ae))
+* [AB[#15159](https://github.com/newjersey/navigator.business.nj.gov/issues/15159)] add anytime actions based on non-essential questions ([15fb2bd](https://github.com/newjersey/navigator.business.nj.gov/commit/15fb2bdd7a7bd8580b2110a93b143cc464696596))
+* [AB[#15159](https://github.com/newjersey/navigator.business.nj.gov/issues/15159)] remove anytime actions when users answer 'no' to non-essential questions ([ad3b2de](https://github.com/newjersey/navigator.business.nj.gov/commit/ad3b2de30930e000a8b5779251991cc4f4adae82))
+* [AB[#15225](https://github.com/newjersey/navigator.business.nj.gov/issues/15225)] Add python script for generating a contextual information ([c7f7d47](https://github.com/newjersey/navigator.business.nj.gov/commit/c7f7d479c804f072977ab3382a461437ddd45d2e))
+* [AB[#7218](https://github.com/newjersey/navigator.business.nj.gov/issues/7218)] multi step env permit ([963304f](https://github.com/newjersey/navigator.business.nj.gov/commit/963304fc6b751fbddca39d122d489c0f8547e3a0))
+
 ## [2025.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.15.0...v2025.15.1) (2025-07-18)
 
 
