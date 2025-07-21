@@ -78,15 +78,11 @@
       "step": 4,
       "licenseTask": "",
       "required": true,
-      "task": "trucking-cdl"
+      "task": "passenger-transport-cdl"
     }
   ],
   "name": "School Bus",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "business-vehicle-irp",
-    "vehicle-dealership-q"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "business-vehicle-irp", "vehicle-dealership-q"],
   "displayname": "school-bus",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
