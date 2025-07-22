@@ -10,7 +10,7 @@
     "stepFourStepperLabel": "Prevailing Wages",
     "stepThreeStepperLabel": "Public Works",
     "stepTwoContent": "## Submit Your Apprenticeship Program Intake Form\n\nHaving an apprenticeship program is a requirement to be a contractor. This program allows you to develop skilled employees who work to meet your business needs. You can develop the training to best suit your business.\n\nStart the process by connecting with the New Jersey Department of Labor (NJDOL) Office of Apprenticeship. They will walk you through the registration process and your responsibilities as a program sponsor.\n\nYou will then work with a representative from the United States Department of Labor (USDOL) to develop and register your program.\n\n- - -\n\n### Intake Form Requirements\n\n* Business name\n*  `Business Structure|business-structure-learn-more` \n* Primary contact information\n* List of occupations to be developed in the program\n\n:::callout{ showHeader=\"true\" headerText=\"\" showIcon=\"false\" calloutType=\"conditional\" amountIconText=\"\" filingTypeIconText=\"\" frequencyIconText=\"\" phoneIconText=\"\" emailIconText=\"\" }\n\nAn email invite to schedule a virtual meeting for a needs assessment with the Office of Apprenticeship.\n\n:::",
-    "stepOneButtonText": "Register My Business with NJSTART",
+    "stepOneButtonText": "Register with NJSTART",
     "backButtonLabel": "Back",
     "continueButtonLabel": "Continue",
     "stepOneStepperLabel": "NJSTART",
