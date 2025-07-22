@@ -1,18 +1,19 @@
 import { Content } from "@/components/Content";
 import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
+import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
   emptyCigaretteLicenseAddress,
@@ -23,9 +24,8 @@ import {
   FormationAddress,
 } from "@businessnjgovnavigator/shared/formationData";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { Dispatch, ReactElement, SetStateAction, useContext, useMemo, useState } from "react";
+import { ReactElement, SetStateAction, useContext, useMemo, useState } from "react";
 
 interface Props {
   setStepIndex: (idx: number) => void;
@@ -67,19 +67,7 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
   const isSpOrGp =
     legalStructure.id === "sole-proprietorship" || legalStructure.id === "general-partnership";
 
-  const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);
-
-  const setProfile: Dispatch<SetStateAction<ProfileData>> = (action) => {
-    setProfileData((prevProfileData) => {
-      const profileData =
-        typeof action === "function"
-          ? (action as (prevState: ProfileData) => ProfileData)(prevProfileData)
-          : action;
-
-      return profileData;
-    });
-  };
-  const taxId = business?.profileData?.taxId || "";
+  // const taxId = business?.profileData?.taxId || "";
 
   // Form state
   const [formData, setFormData] = useState<CigaretteLicenseData>({
@@ -226,12 +214,12 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     if (business) {
-      setProfileData({
-        ...profileData,
-        businessName: business.profileData.businessName,
-        taxId: business.profileData.taxId,
-        encryptedTaxId: business.profileData.encryptedTaxId,
-      });
+      // setProfileData({
+      //   ...profileData,
+      //   businessName: business.profileData.businessName,
+      //   taxId: business.profileData.taxId,
+      //   encryptedTaxId: business.profileData.encryptedTaxId,
+      // });
 
       // Initialize formationAddressData with business address data
       setAddressDataWithSync({
@@ -249,17 +237,6 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
 
   return (
     <>
-      {/* <DataFormErrorMapContext.Provider value={formContextState}> */}
-      <ProfileDataContext.Provider
-        value={{
-          state: {
-            profileData: profileData,
-            flow: getFlow(profileData),
-          },
-          setProfileData: setProfile,
-          onBack: (): void => {},
-        }}
-      ></ProfileDataContext.Provider>
       <AddressContext.Provider
         value={{
           state: {
@@ -364,13 +341,11 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
               <Content>`NJ Tax ID|tax-id`</Content>
             </strong>
             <div className="max-width-38rem">
-              <GenericTextField
-                fieldName="taxId"
-                value={taxId ? `***-***-***${taxId.slice(-4)}` : formData.taxId || ""}
-                readOnly={!!taxId}
-                autoComplete="off"
+              <TaxId
+                dbBusinessTaxId={getInitialTaxId(business)}
                 inputWidth="full"
-                handleChange={(value: string) => handleFieldChange("taxId", value)}
+                preventRefreshWhenUnmounted
+                required
               />
             </div>
           </div>
