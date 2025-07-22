@@ -64,7 +64,7 @@ describe("onboarding - starting a business", () => {
       const { page } = renderPage({ userData });
       page.clickNext();
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 2 if you have selected an industry", async () => {
