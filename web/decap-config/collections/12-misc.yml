@@ -895,7 +895,7 @@ collections:
         name: "formationDateDeletionModal"
         file: "content/src/fieldConfig/formation-date-deletion-modal.json"
         editor:
-          preview: false
+          preview: true
         fields:
           - label: "Formation Date Deletion Modal"
             name: formationDateDeletionModal
