@@ -35,11 +35,8 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
   const { business, userData } = useUserData();
   const { Config } = useConfig();
 
-  const {
-    doesRequiredFieldHaveErrorWithAdditionalData,
-    doesFieldHaveErrorWithAdditionalData,
-    doesFieldHaveError,
-  } = useAddressErrors();
+  const { doesRequiredFieldHaveErrorWithAdditionalData, doesFieldHaveErrorWithAdditionalData } =
+    useAddressErrors();
   const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
     "addressLine1",
     DataFormErrorMapContext,
