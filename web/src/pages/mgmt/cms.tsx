@@ -30,6 +30,7 @@ import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePrevie
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
+import FormationDateDeletionModalPreview from "@/lib/cms/previews/FormationDateDeletionModalPreview";
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
@@ -105,6 +106,7 @@ const CMS = dynamic(
       registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
 
       registerPreview(CMS, "funding-onboarding-modal-config", NjedaPreview);
+      registerPreview(CMS, "formationDateDeletionModal", FormationDateDeletionModalPreview);
 
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
