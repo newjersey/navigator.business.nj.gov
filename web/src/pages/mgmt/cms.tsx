@@ -29,6 +29,7 @@ import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTa
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
+import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
@@ -38,6 +39,7 @@ import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
 import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
+import NjedaPreview from "@/lib/cms/previews/NjedaPreview";
 import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
 import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
@@ -102,10 +104,13 @@ const CMS = dynamic(
       registerPreview(CMS, "xray", XrayTaskPreview);
       registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
 
+      registerPreview(CMS, "funding-onboarding-modal-config", NjedaPreview);
+
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
+      registerPreview(CMS, "check-account-email-page", LoginEmailCheckPreview);
 
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);

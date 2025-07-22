@@ -2890,7 +2890,7 @@ collections:
         name: "funding-onboarding-modal-config"
         file: "content/src/fieldConfig/njeda-fundings-onboarding.json"
         editor:
-          preview: false
+          preview: true
         fields:
           - label: Fundings Onboarding Modal
             name: fundingsOnboardingModal
