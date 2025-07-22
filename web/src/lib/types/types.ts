@@ -29,7 +29,7 @@ export type ProfileError =
   | "REQUIRED_FOREIGN_BUSINESS_TYPE"
   | "REQUIRED_REVIEW_INFO_BELOW";
 
-export type OnboardingErrors = ProfileError | "ALERT_BAR";
+export type OnboardingErrors = ProfileError;
 
 export type FlowType = Exclude<BusinessPersona, undefined>;
 
