@@ -1,30 +1,22 @@
 import { StateObject } from "./states";
 
-export interface CigaretteLicenseAddress {
-  addressLine1: string;
-  addressLine2: string;
-  addressCity: string;
-  addressState?: StateObject;
-  addressZipCode: string;
-}
-
-export const emptyCigaretteLicenseAddress: CigaretteLicenseAddress = {
-  addressLine1: "",
-  addressLine2: "",
-  addressCity: "",
-  addressState: undefined,
-  addressZipCode: "",
-};
-
 export interface CigaretteLicenseData {
   businessName?: string;
   responsibleOwnerName?: string;
   tradeName?: string;
   taxId: string;
   encryptedTaxId: string;
-  businessAddress: CigaretteLicenseAddress;
+  addressLine1: string;
+  addressLine2: string;
+  addressCity: string;
+  addressState?: StateObject;
+  addressZipCode: string;
   mailingAddressIsTheSame: boolean;
-  mailingAddress?: CigaretteLicenseAddress;
+  mailingAddressLine1: string;
+  mailingAddressLine2: string;
+  mailingAddressCity: string;
+  mailingAddressState?: StateObject;
+  mailingAddressZipCode: string;
   contactName: string;
   contactPhoneNumber: string;
   contactEmail: string;
@@ -39,9 +31,17 @@ export const emptyCigaretteLicenseData: CigaretteLicenseData = {
   tradeName: "",
   taxId: "",
   encryptedTaxId: "",
-  businessAddress: emptyCigaretteLicenseAddress,
+  addressLine1: "",
+  addressLine2: "",
+  addressCity: "",
+  addressState: undefined,
+  addressZipCode: "",
   mailingAddressIsTheSame: false,
-  mailingAddress: emptyCigaretteLicenseAddress,
+  mailingAddressLine1: "",
+  mailingAddressLine2: "",
+  mailingAddressCity: "",
+  mailingAddressState: undefined,
+  mailingAddressZipCode: "",
   contactName: "",
   contactPhoneNumber: "",
   contactEmail: "",

@@ -1,7 +1,7 @@
 import { randomElementFromArray } from "../arrayHelpers";
 import { BusinessUser } from "../businessUser";
 import { TaxFilingCalendarEvent } from "../calendarEvent";
-import { CigaretteLicenseAddress, CigaretteLicenseData } from "../cigaretteLicense";
+import { CigaretteLicenseData } from "../cigaretteLicense";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
@@ -433,33 +433,28 @@ export const generateTaxClearanceCertificateData = (
   };
 };
 
-export const generateCigaretteLicenseAddress = (
-  overrides: Partial<CigaretteLicenseAddress>,
-): CigaretteLicenseAddress => {
-  const addressState = generateUnitedStatesStateDropdownOption({});
-  return {
-    addressLine1: `some-address-1-${randomInt()}`,
-    addressLine2: `some-address-2-${randomInt()}`,
-    addressCity: `some-city-${randomInt()}`,
-    addressState,
-    addressZipCode: addressState.shortCode === "NJ" ? generateNjZipCode() : randomInt(5).toString(),
-    ...overrides,
-  };
-};
-
 export const generateCigaretteLicenseData = (
   overrides: Partial<CigaretteLicenseData>,
 ): CigaretteLicenseData => {
   const taxId = randomInt(12).toString();
+  const addressState = generateUnitedStatesStateDropdownOption({});
   return {
     businessName: `some-business-name-${randomInt()}`,
     responsibleOwnerName: `some-owner-name-${randomInt()}`,
     tradeName: `some-trade-name-${randomInt()}`,
     taxId: maskingCharacter.repeat(7) + taxId.slice(-5),
     encryptedTaxId: `encrypted-${taxId}`,
-    businessAddress: generateCigaretteLicenseAddress({}),
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressState,
+    addressZipCode: addressState.shortCode === "NJ" ? generateNjZipCode() : randomInt(5).toString(),
     mailingAddressIsTheSame: false,
-    mailingAddress: generateCigaretteLicenseAddress({}),
+    mailingAddressLine1: "",
+    mailingAddressLine2: "",
+    mailingAddressCity: "",
+    mailingAddressState: undefined,
+    mailingAddressZipCode: "",
     contactName: `some-contact-name-${randomInt()}`,
     contactPhoneNumber: `some-phone-number-${randomInt()}`,
     contactEmail: `some-email-${randomInt()}`,
