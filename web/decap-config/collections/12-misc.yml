@@ -47,6 +47,8 @@ collections:
       - label: "Starter Kits"
         file: "content/src/fieldConfig/starter-kits.json"
         name: "starterKits"
+        editor:
+          preview: true
         fields:
           - label: "Starter Kits"
             name: "starterKits"
