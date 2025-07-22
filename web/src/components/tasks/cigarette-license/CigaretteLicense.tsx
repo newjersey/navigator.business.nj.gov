@@ -1,12 +1,15 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskHeader } from "@/components/TaskHeader";
-import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
+import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { StepperStep, Task } from "@/lib/types/types";
 import { ReactElement, useState } from "react";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
-import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 
 type Props = {
   task: Task;
@@ -40,6 +43,8 @@ export const CigaretteLicense = (props: Props): ReactElement => {
       isComplete: false,
     },
   ];
+
+  console.log(formContextState);
   return (
     <>
       <TaskHeader task={props.task} />
