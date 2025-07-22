@@ -360,7 +360,7 @@ describe("onboarding - foreign business", () => {
 
       expect(screen.getByTestId("step-3")).toBeInTheDocument();
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
     });
 
     it.each(industryIdsWithSingleRequiredEssentialQuestion)(

@@ -1,6 +1,5 @@
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkipOnboardingButton";
@@ -32,20 +31,14 @@ import {
   routeShallowWithQuery,
 } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import {
-  FlowType,
-  OnboardingErrors,
-  OnboardingStatus,
-  Page,
-  ProfileError,
-} from "@/lib/types/types";
+import { FlowType, OnboardingErrors, Page, ProfileError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   sendOnboardingOnSubmitEvents,
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
+import { getFlow, scrollToTop } from "@/lib/utils/helpers";
 import {
   evalHeaderStepsTemplate,
   flowQueryParamIsValid,
@@ -76,7 +69,6 @@ import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
-import Link from "next/link";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
@@ -91,7 +83,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [page, setPage] = useState<Page>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [error, setError] = useState<ProfileError | undefined>(undefined);
-  const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const { updateQueue, createUpdateQueue, hasCompletedFetch } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -432,24 +423,19 @@ const OnboardingPage = (props: Props): ReactElement => {
     (isValid, errors) => {
       if (errors.length > 0 && !isValid) {
         scrollToTop();
-        if (errors.includes("ALERT_BAR")) {
-          setAlert("ERROR");
-        }
-        const banner = errors.filter((error) => error !== "ALERT_BAR") as ProfileError[];
+        const banner = errors as ProfileError[];
         if (banner.length > 0) {
           setError(banner[0]);
         }
         headerRef.current?.focus();
       } else {
         setError(undefined);
-        setAlert(undefined);
       }
     },
   );
 
   const onBack = (): void => {
     if (page.current + 1 > 0) {
-      setAlert(undefined);
       setError(undefined);
       const previousPage = page.current - 1;
       setPage({
@@ -510,25 +496,6 @@ const OnboardingPage = (props: Props): ReactElement => {
                     {OnboardingErrorLookup[error]}
                   </Alert>
                 )}
-                {alert && (
-                  <SnackbarAlert
-                    variant={OnboardingStatusLookup()[alert].variant}
-                    isOpen={true}
-                    close={(): void => setAlert(undefined)}
-                    dataTestid={`snackbar-alert-${alert}`}
-                    heading={OnboardingStatusLookup()[alert].header}
-                  >
-                    <>
-                      {OnboardingStatusLookup()[alert].body}
-                      {OnboardingStatusLookup()[alert] && (
-                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-                          {OnboardingStatusLookup()[alert].link}
-                        </Link>
-                      )}
-                    </>
-                  </SnackbarAlert>
-                )}
-
                 <UserDataErrorAlert />
               </SingleColumnContainer>
               <div className="slide-container">
