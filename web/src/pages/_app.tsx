@@ -13,9 +13,11 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
+import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { Roadmap, UserDataError } from "@/lib/types/types";
@@ -29,6 +31,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
+import { Hub, type HubCapsule } from "aws-amplify/utils";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { useRouter } from "next/compat/router";
@@ -36,9 +39,6 @@ import Head from "next/head";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
-import { Hub, type HubCapsule } from "aws-amplify/utils";
-import { UpdateQueue } from "@/lib/UpdateQueue";
-import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
 
 AuthContext.displayName = "Authentication";
@@ -92,7 +92,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   type AuthEvent = {
     event:
-      | "signIn"
+      | "signedIn"
       | "signUp"
       | "signOut"
       | "signIn_failure"
@@ -107,7 +107,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const listener = (data: HubCapsule<string, AuthEvent>): void => {
     switch (data.payload.event) {
-      case "signIn":
+      case "signedIn":
         onSignIn(dispatch);
         break;
       case "signUp":
@@ -123,6 +123,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         console.error("token refresh failed");
         break;
       case "configured":
+        break;
+      default:
+        console.error("unknown payload type");
         break;
     }
   };
