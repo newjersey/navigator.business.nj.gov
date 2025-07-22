@@ -46,6 +46,7 @@ import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
+import StarterKitsPreview from "@/lib/cms/previews/StarterKitsPreview";
 import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxAccessPreview from "@/lib/cms/previews/TaxAccessPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
@@ -107,6 +108,8 @@ const CMS = dynamic(
 
       registerPreview(CMS, "funding-onboarding-modal-config", NjedaPreview);
       registerPreview(CMS, "formationDateDeletionModal", FormationDateDeletionModalPreview);
+
+      registerPreview(CMS, "starterKits", StarterKitsPreview);
 
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
