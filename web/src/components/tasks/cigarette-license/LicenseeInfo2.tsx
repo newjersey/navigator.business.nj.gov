@@ -110,7 +110,7 @@ export const LicenseeInfo2 = (props: Props): ReactElement => {
         </ProfileField>
       </div>
       <div className="margin-y-2">
-        <ProfileField fieldName="taxId" noLabel>
+        <ProfileField fieldName="taxId" noLabel fullWidth>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
 
           <div className="max-width-38rem">
@@ -129,16 +129,17 @@ export const LicenseeInfo2 = (props: Props): ReactElement => {
       </div>
 
       {/* Business Address */}
-      <h2 className="margin-bottom-2">{Config.cigaretteLicenseStep2.businessAddressHeader}</h2>
+      <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.businessAddressHeader}</h2>
       <p>{Config.cigaretteLicenseStep2.businessAddressDescription}</p>
       <UnitedStatesAddress
         onValidation={onValidation}
         dataFormErrorMap={dataFormErrorMap}
         isFullWidth
       />
+      <HorizontalLine />
 
       {/* Mailing Address */}
-      <h2 className="margin-bottom-2">{Config.cigaretteLicenseStep2.mailingAddressHeader}</h2>
+      <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.mailingAddressHeader}</h2>
       <p>{Config.cigaretteLicenseStep2.mailingAddressDescription}</p>
 
       <FormControlLabel

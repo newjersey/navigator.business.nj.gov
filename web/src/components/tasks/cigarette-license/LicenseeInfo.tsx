@@ -16,7 +16,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
-  emptyCigaretteLicenseAddress,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import {
@@ -77,16 +76,12 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
     tradeName: business?.profileData?.tradeName || "",
     taxId: business?.profileData?.taxId || "",
     encryptedTaxId: business?.profileData?.encryptedTaxId || "",
-    businessAddress: {
-      ...emptyCigaretteLicenseAddress,
-      addressLine1: business?.formationData?.formationFormData?.addressLine1 || "",
-      addressLine2: business?.formationData?.formationFormData?.addressLine2 || "",
-      addressCity: business?.formationData?.formationFormData?.addressMunicipality?.name || "",
-      addressState: business?.formationData?.formationFormData?.addressState || undefined,
-      addressZipCode: business?.formationData?.formationFormData?.addressZipCode || "",
-    },
+    addressLine1: business?.formationData?.formationFormData?.addressLine1 || "",
+    addressLine2: business?.formationData?.formationFormData?.addressLine2 || "",
+    addressCity: business?.formationData?.formationFormData?.addressMunicipality?.name || "",
+    addressState: business?.formationData?.formationFormData?.addressState || undefined,
+    addressZipCode: business?.formationData?.formationFormData?.addressZipCode || "",
     mailingAddressIsTheSame: false,
-    mailingAddress: { ...emptyCigaretteLicenseAddress },
     contactName: "",
     contactPhoneNumber: "",
     contactEmail: userData?.user?.email || "",
@@ -110,14 +105,11 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
       // Also update formData.businessAddress when formationAddressData changes
       setFormData((prevFormData) => ({
         ...prevFormData,
-        businessAddress: {
-          ...prevFormData.businessAddress,
-          addressLine1: newAddress.addressLine1,
-          addressLine2: newAddress.addressLine2,
-          addressCity: newAddress.addressCity || "",
-          addressState: newAddress.addressState,
-          addressZipCode: newAddress.addressZipCode,
-        },
+        addressLine1: newAddress.addressLine1,
+        addressLine2: newAddress.addressLine2,
+        addressCity: newAddress.addressCity || "",
+        addressState: newAddress.addressState,
+        addressZipCode: newAddress.addressZipCode,
       }));
 
       return newAddress;
@@ -131,26 +123,24 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
     }));
   };
 
-  const handleAddressChange = (
-    section: "businessAddress" | "mailingAddress",
-    field: keyof typeof emptyCigaretteLicenseAddress,
-    value: string | undefined,
-  ): void => {
-    setFormData((prev) => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [field]: value,
-      },
-    }));
+  const handleAddressChange = (field: string, value: string | undefined): void => {
+    console.log("handle address change:", field, value);
+    // setFormData((prev) => ({
+    //   ...prev,
+    //   [section]: {
+    //     ...prev[section],
+    //     [field]: value,
+    //   },
+    // }));
   };
 
   const handleMailingSameAsBusiness = (checked: boolean): void => {
-    setFormData((prev) => ({
-      ...prev,
-      mailingAddressIsTheSame: checked,
-      mailingAddress: checked ? { ...prev.businessAddress } : { ...emptyCigaretteLicenseAddress },
-    }));
+    console.log("handle mail same as business:", checked);
+    // setFormData((prev) => ({
+    //   ...prev,
+    //   mailingAddressIsTheSame: checked,
+    //   mailingAddress: checked ? { ...prev.businessAddress } : { ...emptyCigaretteLicenseAddress },
+    // }));
   };
 
   const validateField = (fieldName: string, value: string): boolean => {
@@ -188,11 +178,11 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
   const onValidation = (): void => {
     // Convert CigaretteLicenseAddress to the format expected by validation functions
     const businessAddressData = {
-      addressLine1: formData.businessAddress.addressLine1,
-      addressLine2: formData.businessAddress.addressLine2,
-      addressCity: formData.businessAddress.addressCity,
-      addressState: formData.businessAddress.addressState?.shortCode,
-      addressZipCode: formData.businessAddress.addressZipCode,
+      addressLine1: formData.addressLine1,
+      addressLine2: formData.addressLine2,
+      addressCity: formData.addressCity,
+      addressState: formData.addressState?.shortCode,
+      addressZipCode: formData.addressZipCode,
     };
 
     setIsValidAddressLine1(
@@ -388,10 +378,8 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                   </strong>
                   <GenericTextField
                     fieldName="mailingAddress.addressLine1"
-                    value={formData.mailingAddress?.addressLine1 || ""}
-                    handleChange={(value: string) =>
-                      handleAddressChange("mailingAddress", "addressLine1", value)
-                    }
+                    value={formData.mailingAddressLine1 || ""}
+                    handleChange={(value: string) => handleAddressChange("addressLine1", value)}
                     autoComplete="address-line1"
                     inputWidth="full"
                   />
@@ -404,10 +392,8 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                   <span className="text-normal margin-left-1">(Optional)</span>
                   <GenericTextField
                     fieldName="mailingAddress.addressLine2"
-                    value={formData.mailingAddress?.addressLine2 || ""}
-                    handleChange={(value: string) =>
-                      handleAddressChange("mailingAddress", "addressLine2", value)
-                    }
+                    value={formData.mailingAddressLine2 || ""}
+                    handleChange={(value: string) => handleAddressChange("addressLine2", value)}
                     autoComplete="address-line2"
                     inputWidth="full"
                   />
@@ -421,10 +407,8 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                       </strong>
                       <GenericTextField
                         fieldName="mailingAddress.addressCity"
-                        value={formData.mailingAddress?.addressCity || ""}
-                        handleChange={(value: string) =>
-                          handleAddressChange("mailingAddress", "addressCity", value)
-                        }
+                        value={formData.mailingAddressCity || ""}
+                        handleChange={(value: string) => handleAddressChange("addressCity", value)}
                         autoComplete="address-level2"
                         inputWidth="full"
                       />
@@ -437,10 +421,8 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                       </strong>
                       <GenericTextField
                         fieldName="mailingAddress.addressState"
-                        value={formData.mailingAddress?.addressState?.shortCode || ""}
-                        handleChange={(value: string) =>
-                          handleAddressChange("mailingAddress", "addressState", value)
-                        }
+                        value={formData.mailingAddressState?.shortCode || ""}
+                        handleChange={(value: string) => handleAddressChange("addressState", value)}
                         autoComplete="address-level1"
                         inputWidth="full"
                       />
@@ -453,9 +435,9 @@ export const LicenseeInfo = ({ setStepIndex }: Props): ReactElement => {
                       </strong>
                       <GenericTextField
                         fieldName="mailingAddress.addressZipCode"
-                        value={formData.mailingAddress?.addressZipCode || ""}
+                        value={formData.mailingAddressZipCode || ""}
                         handleChange={(value: string) =>
-                          handleAddressChange("mailingAddress", "addressZipCode", value)
+                          handleAddressChange("addressZipCode", value)
                         }
                         autoComplete="postal-code"
                         numericProps={{ maxLength: 5 }}
