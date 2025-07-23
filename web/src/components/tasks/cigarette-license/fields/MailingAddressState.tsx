@@ -98,46 +98,38 @@ export const MailingAddressState = (props: Props): ReactElement => {
         </WithErrorBar>
       </span>
       <span className={`${isMobile ? "grid-col-6" : ""}`}>
-        <WithErrorBar className={"padding-bottom-1"} hasError={isStateFieldInvalid} type={"ALWAYS"}>
-          <label htmlFor="mailingAddressState">
-            <span className={"text-bold"}>
-              <Content>State</Content>
-            </span>
-            <StateDropdown
-              fieldName="mailingAddressState"
-              onSelect={handleChangeState}
-              value={state.mailingAddressState?.shortCode}
-              error={isStateFieldInvalid}
-              validationText="Enter a state."
-              onValidation={() => performValidation("mailingAddressState")}
-            />
-          </label>
-        </WithErrorBar>
+        <label htmlFor="mailingAddressState">
+          <span className={"text-bold"}>
+            <Content>State</Content>
+          </span>
+          <StateDropdown
+            fieldName="mailingAddressState"
+            onSelect={handleChangeState}
+            value={state.mailingAddressState?.shortCode}
+            error={isStateFieldInvalid}
+            validationText="Enter a state."
+            onValidation={() => performValidation("mailingAddressState")}
+          />
+        </label>
       </span>
       <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
-        <WithErrorBar
-          className={"padding-bottom-1"}
-          hasError={isZipCodeFieldInvalid}
-          type={"ALWAYS"}
-        >
-          <label htmlFor="mailingAddressZipCode">
-            <span className={"text-bold"}>
-              <Content>City</Content>
-            </span>
-            <GenericTextField
-              inputWidth={"full"}
-              {...props}
-              fieldName="mailingAddressZipCode"
-              handleChange={handleChangeZipCode}
-              formContext={DataFormErrorMapContext}
-              value={state.mailingAddressZipCode}
-              error={isZipCodeFieldInvalid}
-              validationText="Enter a 5 digit zip code."
-              preventRefreshWhenUnmounted
-              onValidation={() => performValidation("mailingAddressZipCode")}
-            />
-          </label>
-        </WithErrorBar>
+        <label htmlFor="mailingAddressZipCode">
+          <span className={"text-bold"}>
+            <Content>City</Content>
+          </span>
+          <GenericTextField
+            inputWidth={"full"}
+            {...props}
+            fieldName="mailingAddressZipCode"
+            handleChange={handleChangeZipCode}
+            formContext={DataFormErrorMapContext}
+            value={state.mailingAddressZipCode}
+            error={isZipCodeFieldInvalid}
+            validationText="Enter a 5 digit zip code."
+            preventRefreshWhenUnmounted
+            onValidation={() => performValidation("mailingAddressZipCode")}
+          />
+        </label>
       </span>
     </div>
   );
