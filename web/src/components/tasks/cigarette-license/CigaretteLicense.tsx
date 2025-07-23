@@ -2,12 +2,13 @@ import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper
 import { TaskHeader } from "@/components/TaskHeader";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
-import { LicenseeInfo2 } from "@/components/tasks/cigarette-license/LicenseeInfo2";
 import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
+import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
+  pickData,
 } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -39,6 +40,8 @@ export const CigaretteLicense = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
+  const [cigaretteLicenseData, setCigaretteLicenseData] =
+    useState<CigaretteLicenseData>(emptyCigaretteLicenseData);
 
   const setAddress: Dispatch<SetStateAction<FormationAddress>> = (action) => {
     setAddressData((prevAddress) => {
@@ -47,26 +50,22 @@ export const CigaretteLicense = (props: Props): ReactElement => {
           ? (action as (prevState: FormationAddress) => FormationAddress)(prevAddress)
           : action;
 
-      // const relevantFields = pickData(newAddress, [
-      //   "addressLine1",
-      //   "addressLine2",
-      //   "addressCity",
-      //   "addressState",
-      //   "addressZipCode",
-      // ]);
-      // setTaxClearanceCertificateData({
-      //   ...taxClearanceCertificateData,
-      //   ...relevantFields,
-      // });
+      const relevantFields = pickData(newAddress, [
+        "addressLine1",
+        "addressLine2",
+        "addressCity",
+        "addressState",
+        "addressZipCode",
+      ]);
+      setCigaretteLicenseData({
+        ...cigaretteLicenseData,
+        ...relevantFields,
+      });
 
       return newAddress;
     });
   };
-  // const { business, userData } = useUserData();
-  const { business } = useUserData();
-
-  const [cigaretteLicenseData, setCigaretteLicenseData] =
-    useState<CigaretteLicenseData>(emptyCigaretteLicenseData);
+  const { business, userData } = useUserData();
 
   const stepperSteps: StepperStep[] = [
     {
@@ -98,30 +97,88 @@ export const CigaretteLicense = (props: Props): ReactElement => {
           ? (action as (prevState: ProfileData) => ProfileData)(prevProfileData)
           : action;
 
+      setCigaretteLicenseData({
+        ...cigaretteLicenseData,
+        businessName: profileData.businessName,
+        responsibleOwnerName: profileData.responsibleOwnerName,
+        tradeName: profileData.tradeName,
+        taxId: profileData.taxId || "",
+        encryptedTaxId: profileData.taxId || "",
+      });
+
       return profileData;
     });
   };
 
   useMountEffectWhenDefined(() => {
-    if (business) {
-      setProfileData({
-        ...profileData,
-        businessName: business.profileData.businessName,
-        taxId: business.profileData.taxId,
-        encryptedTaxId: business.profileData.encryptedTaxId,
+    if (business && userData) {
+      const {
+        businessName,
+        responsibleOwnerName,
+        tradeName,
+        taxId,
+        encryptedTaxId,
+        addressLine1,
+        addressLine2,
+        addressCity,
+        addressState,
+        addressZipCode,
+        mailingAddressIsTheSame,
+        mailingAddressLine1,
+        mailingAddressLine2,
+        mailingAddressCity,
+        mailingAddressState,
+        mailingAddressZipCode,
+        contactName,
+        contactPhoneNumber,
+        contactEmail,
+        salesInfoStartDate,
+        salesInfoSupplier,
+        lastUpdatedISO,
+      } = getInitialData(userData, business);
+
+      setCigaretteLicenseData({
+        businessName,
+        responsibleOwnerName,
+        tradeName,
+        taxId,
+        encryptedTaxId,
+        addressLine1,
+        addressLine2,
+        addressCity,
+        addressState,
+        addressZipCode,
+        mailingAddressIsTheSame,
+        mailingAddressLine1,
+        mailingAddressLine2,
+        mailingAddressCity,
+        mailingAddressState,
+        mailingAddressZipCode,
+        contactName,
+        contactPhoneNumber,
+        contactEmail,
+        salesInfoStartDate,
+        salesInfoSupplier,
+        lastUpdatedISO,
       });
 
-      // Initialize formationAddressData with business address data
-      // setAddressDataWithSync({
-      //   addressLine1: business.formationData?.formationFormData?.addressLine1 || "",
-      //   addressLine2: business.formationData?.formationFormData?.addressLine2 || "",
-      //   addressCity: business.formationData?.formationFormData?.addressMunicipality?.name || "",
-      //   addressState: business.formationData?.formationFormData?.addressState || undefined,
-      //   addressZipCode: business.formationData?.formationFormData?.addressZipCode || "",
-      //   addressCountry: business.formationData?.formationFormData?.addressCountry || undefined,
-      //   businessLocationType:
-      //     business.formationData?.formationFormData?.businessLocationType || undefined,
-      // });
+      setProfileData({
+        ...profileData,
+        businessName,
+        responsibleOwnerName,
+        tradeName,
+        taxId,
+        encryptedTaxId,
+      });
+
+      setAddressData({
+        ...formationAddressData,
+        addressLine1,
+        addressLine2,
+        addressCity,
+        addressState,
+        addressZipCode,
+      });
     }
   }, business);
 
@@ -136,38 +193,36 @@ export const CigaretteLicense = (props: Props): ReactElement => {
           setStepIndex(step);
         }}
       />
-      <CigaretteLicenseContext.Provider
-        value={{
-          state: cigaretteLicenseData,
-          setCigaretteLicenseData,
-        }}
-      >
-        <ProfileDataContext.Provider
+      <DataFormErrorMapContext.Provider value={formContextState}>
+        <CigaretteLicenseContext.Provider
           value={{
-            state: {
-              profileData: profileData,
-              flow: getFlow(profileData),
-            },
-            setProfileData: setProfile,
-            onBack: (): void => {},
+            state: cigaretteLicenseData,
+            setCigaretteLicenseData,
           }}
         >
-          <AddressContext.Provider
+          <ProfileDataContext.Provider
             value={{
               state: {
-                formationAddressData: formationAddressData,
+                profileData: profileData,
+                flow: getFlow(profileData),
               },
-              setAddressData: setAddress,
+              setProfileData: setProfile,
+              onBack: (): void => {},
             }}
           >
-            <DataFormErrorMapContext.Provider value={formContextState}>
+            <AddressContext.Provider
+              value={{
+                state: { formationAddressData },
+                setAddressData: setAddress,
+              }}
+            >
               {stepIndex === 0 && <GeneralInfo setStepIndex={setStepIndex} />}
               {stepIndex === 1 && <LicenseeInfo setStepIndex={setStepIndex} />}
-              {stepIndex === 2 && <LicenseeInfo2 setStepIndex={setStepIndex} />}
-            </DataFormErrorMapContext.Provider>
-          </AddressContext.Provider>
-        </ProfileDataContext.Provider>
-      </CigaretteLicenseContext.Provider>
+              {stepIndex === 2 && <></>}
+            </AddressContext.Provider>
+          </ProfileDataContext.Provider>
+        </CigaretteLicenseContext.Provider>
+      </DataFormErrorMapContext.Provider>
     </>
   );
 };
