@@ -910,7 +910,6 @@ collections:
             widget: object
             fields:
               - { label: "Content Body", name: "content", widget: "markdown", required: true }
-              - { label: "Alert Body", name: "alert", widget: "markdown", required: true }
               - {
                   label: "Continue Button Text",
                   name: "continueButtonText",
