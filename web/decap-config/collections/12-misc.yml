@@ -47,6 +47,8 @@ collections:
       - label: "Starter Kits"
         file: "content/src/fieldConfig/starter-kits.json"
         name: "starterKits"
+        editor:
+          preview: true
         fields:
           - label: "Starter Kits"
             name: "starterKits"
@@ -895,7 +897,7 @@ collections:
         name: "formationDateDeletionModal"
         file: "content/src/fieldConfig/formation-date-deletion-modal.json"
         editor:
-          preview: false
+          preview: true
         fields:
           - label: "Formation Date Deletion Modal"
             name: formationDateDeletionModal
@@ -2890,7 +2892,7 @@ collections:
         name: "funding-onboarding-modal-config"
         file: "content/src/fieldConfig/njeda-fundings-onboarding.json"
         editor:
-          preview: false
+          preview: true
         fields:
           - label: Fundings Onboarding Modal
             name: fundingsOnboardingModal
