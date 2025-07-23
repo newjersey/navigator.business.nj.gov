@@ -32,7 +32,7 @@ import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview"
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
-import GovernmentContractingAnytimeAction from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
+import GovernmentContractingAnytimeActionPreview from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
 import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
@@ -119,7 +119,7 @@ const CMS = dynamic(
       registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-download", AnytimeActionTaxClearancePreview);
-      registerPreview(CMS, "government-contracting", GovernmentContractingAnytimeAction);
+      registerPreview(CMS, "government-contracting", GovernmentContractingAnytimeActionPreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
