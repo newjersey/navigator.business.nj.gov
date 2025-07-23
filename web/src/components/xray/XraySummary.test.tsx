@@ -1,5 +1,6 @@
 import { XraySummary } from "@/components/xray/XraySummary";
 import { getMergedConfig } from "@/contexts/configContext";
+import { templateEval } from "@/lib/utils/helpers";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import type { XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -14,7 +15,7 @@ describe("<XraySummary />", () => {
   const fifteenDaysInTheFutureDate = getCurrentDate().add(15, "days").format("L");
   const pastDate = getCurrentDate().subtract(2, "month").format("L");
 
-  const renderComponent = (status: string, date: string): void => {
+  const renderComponent = (status: string, date: string, lastUpdatedISODate?: string): void => {
     render(
       <XraySummary
         xrayRegistrationData={{
@@ -46,6 +47,7 @@ describe("<XraySummary />", () => {
           ],
           status: status as XrayRegistrationStatus,
           expirationDate: date,
+          lastUpdatedISO: lastUpdatedISODate,
         }}
         edit={() => {}}
         goToRegistrationTab={() => {}}
@@ -95,6 +97,30 @@ describe("<XraySummary />", () => {
     fireEvent.click(screen.getByText(Config.xrayRegistrationTask.accordionHeader));
     expect(
       screen.getByText(`Serial Number: ${Config.xrayRegistrationTask.noInformationAvailable}`),
+    ).toBeInTheDocument();
+  });
+
+  it("does not display `Last Updated` if lastUpdatedISO is undefined", () => {
+    renderComponent("ACTIVE", futureDate, undefined);
+    fireEvent.click(screen.getByText(Config.xrayRegistrationTask.accordionHeader));
+    expect(
+      screen.queryByText(
+        templateEval(Config.xrayRegistrationTask.lastUpdatedText, {
+          lastUpdatedFormattedValue: dayjs(futureDate).format("MMMM Do, YYYY [at] ha"),
+        }),
+      ),
+    ).not.toBeInTheDocument();
+  });
+
+  it("displays `Last Updated` if lastUpdatedISO is defined", () => {
+    renderComponent("ACTIVE", futureDate, pastDate);
+    fireEvent.click(screen.getByText(Config.xrayRegistrationTask.accordionHeader));
+    expect(
+      screen.getByText(
+        templateEval(Config.xrayRegistrationTask.lastUpdatedText, {
+          lastUpdatedFormattedValue: dayjs(pastDate).format("MMMM Do, YYYY [at] ha"),
+        }),
+      ),
     ).toBeInTheDocument();
   });
 });
