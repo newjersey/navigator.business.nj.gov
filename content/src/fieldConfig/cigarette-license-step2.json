@@ -1,5 +1,7 @@
 {
   "cigaretteLicenseStep2": {
+    "licenseeInformationHeader": "Licensee Information",
+    "licenseeInformationDescription": "Tell us about the business applying for this license.",
     "businessNameErrorText": "Business name is required",
     "businessNameText": "Enter the legal name of your business.",
     "businessNameHeaderText": "Business Name",
@@ -8,6 +10,11 @@
     "tradeNameHeaderText": "Trade Name",
     "responsibleOwnerNameErrorText": "Responsible owner name is required",
     "responsibleOwnerNameText": "Enter your full name exactly as it appears in the \"Responsible Owner Name\" section of your tax confirmation email.",
-    "responsibleOwnerNameHeaderText": "Responsible Owner Name"
+    "responsibleOwnerNameHeaderText": "Responsible Owner Name",
+    "businessAddressHeader": "Business Address",
+    "businessAddressDescription": "Tell us where your business is located.",
+    "mailingAddressHeader": "Mailing Address",
+    "mailingAddressDescription": "Tell us where to send your license.",
+    "mailingIsSameCheck": "Mailing address is the same as the business address"
   }
 }
