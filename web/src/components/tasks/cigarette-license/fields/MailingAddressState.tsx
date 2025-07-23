@@ -97,7 +97,7 @@ export const MailingAddressState = (props: Props): ReactElement => {
           </label>
         </WithErrorBar>
       </span>
-      <span className={`${isMobile ? "grid-col-6" : ""}`}>
+      <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
         <label htmlFor="mailingAddressState">
           <span className={"text-bold"}>
             <Content>State</Content>
@@ -112,7 +112,7 @@ export const MailingAddressState = (props: Props): ReactElement => {
           />
         </label>
       </span>
-      <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
+      <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
         <label htmlFor="mailingAddressZipCode">
           <span className={"text-bold"}>
             <Content>City</Content>
