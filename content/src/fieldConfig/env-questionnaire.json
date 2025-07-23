@@ -86,7 +86,7 @@
     "editInfo": "Your answers were successfully completed!",
     "editText": "Edit.",
     "summary": {
-      "partOne": "Based on your answers, your business may be legally required to have a Department of Environmental Protection (DEP)",
+      "partOne": "Based on your answers, your business may be legally required to have Department of Environmental Protection (DEP)",
       "partTwo": "licenses or permits. Find out your business's requirements below.",
       "mediaAreaText": {
         "waste": "Waste",
@@ -135,17 +135,17 @@
         }
       },
       "wasteWater": {
-        "heading": "Wastewater",
+        "heading": "Wastewater Requirements",
         "bodyLink": "[Division of Water Quality](https://dep.nj.gov/dwq/contact-us/)",
         "contact": {
           "phoneInfo": "",
-          "phone": "609-292-9977",
+          "phone": "(609) 292-9977",
           "form": "",
           "email": "dwq@dep.nj.gov"
         }
       },
       "drinkingWater": {
-        "heading": "Drinking Water",
+        "heading": "Drinking Water Requirements",
         "bodyLink": "[Division of Water Supply and Geoscience](https://www.nj.gov/dep/watersupply/wsa_contact.html)",
         "contact": {
           "phoneInfo": "General Water Quality and Water Supply:",
