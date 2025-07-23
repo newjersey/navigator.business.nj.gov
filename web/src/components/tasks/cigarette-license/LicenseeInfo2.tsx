@@ -20,6 +20,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { ReactElement, useContext } from "react";
+import { MailingAddressState } from "@/components/tasks/cigarette-license/fields/MailingAddressState";
 
 interface Props {
   setStepIndex: (idx: number) => void;
@@ -147,11 +148,7 @@ export const LicenseeInfo2 = (props: Props): ReactElement => {
         label={Config.cigaretteLicenseStep2.businessNameErrorText}
       />
 
-      <UnitedStatesAddress
-        onValidation={onValidation}
-        dataFormErrorMap={dataFormErrorMap}
-        isFullWidth
-      />
+      <MailingAddressState />
 
       {/* footer */}
       <HorizontalLine />
