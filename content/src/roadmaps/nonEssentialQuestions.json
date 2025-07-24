@@ -198,7 +198,8 @@
     {
       "id": "resale-tax-cert",
       "questionText": "Will you buy products for resale, or will you sell products to resellers?",
-      "addOn": "resale-certificate"
+      "addOn": "resale-certificate",
+      "anytimeActions": ["resale-tax-certificate"]
     },
     {
       "addOn": "vehicle-cpcn",
@@ -209,9 +210,7 @@
       "id": "demo-only",
       "questionText": "You are a demo industry user. This is an example non-essential question that is being used to add an Anytime Action. Answering \"yes\" will add the Anytime Action \"Demo Anytime Action\".",
       "addOn": "",
-      "anytimeActions": [
-        "demo-only"
-      ]
+      "anytimeActions": ["demo-only"]
     },
     {
       "id": "well-driller",
