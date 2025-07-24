@@ -3,7 +3,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, useContext } from "react";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { StateObject } from "@businessnjgovnavigator/shared/states";
@@ -40,17 +40,24 @@ export const MailingAddress = (props: Props): ReactElement => {
     | "mailingAddressState"
     | "mailingAddressZipCode";
 
-  const handleChange = (val: string | StateObject | undefined, fieldName: TextFields) => {
+  const handleChange = (val: string | StateObject | undefined, fieldName: TextFields): void => {
     if (val !== undefined) {
       setCigaretteLicenseData({
         ...state,
         [fieldName]: val,
       });
+      performValidation();
     }
   };
 
-  const handleAddressIsTheSame = () => {
-    if (!state.mailingAddressIsTheSame) {
+  const handleAddressIsTheSame = (): void => {
+    if (state.mailingAddressIsTheSame) {
+      setCigaretteLicenseData({
+        ...state,
+        mailingAddressIsTheSame: false,
+      });
+      performValidation();
+    } else {
       setCigaretteLicenseData({
         ...state,
         mailingAddressIsTheSame: true,
@@ -60,16 +67,10 @@ export const MailingAddress = (props: Props): ReactElement => {
       setIsCityValid(true);
       setIsStateValid(true);
       setIsZipCodeValid(true);
-    } else {
-      setCigaretteLicenseData({
-        ...state,
-        mailingAddressIsTheSame: false,
-      });
-      performValidation();
     }
   };
 
-  const getErrorMessage = (field: TextFields) => {
+  const getErrorMessage = (field: TextFields): string => {
     if (!state[field]) return Config.cigaretteLicenseStep2.fields[field].errorRequiredText;
 
     if (field === "mailingAddressZipCode" && state.mailingAddressState?.shortCode === "NJ")
@@ -78,13 +79,13 @@ export const MailingAddress = (props: Props): ReactElement => {
     return Config.cigaretteLicenseStep2.fields[field].errorValidationText;
   };
 
-  const validateMaxLength = (val: string, required: boolean) => {
+  const validateLine1AndLine2 = (val: string, required: boolean): boolean => {
     if (required && val === "") return false;
 
     return val.length <= 35;
   };
 
-  const validateZip = (zip: string) => {
+  const validateZip = (zip: string): boolean => {
     if (!zip) return false;
 
     const isValidUsZipCode = isZipCodeUs(zip);
@@ -93,19 +94,9 @@ export const MailingAddress = (props: Props): ReactElement => {
     return state.mailingAddressState?.shortCode === "NJ" ? isValidNjZipCode : isValidUsZipCode;
   };
 
-  useEffect(() => {
-    performValidation();
-  }, [state]);
-
   const performValidation = (): void => {
-    {
-      /*
-    TODO: if mailing address is the same as billing then autofilling mailing and lock fields
-    if not the same, then enforce all of these validations
-    */
-    }
-    setIsLine1Valid(validateMaxLength(state.mailingAddressLine1, true));
-    setIsLine2Valid(validateMaxLength(state.mailingAddressLine2, false));
+    setIsLine1Valid(validateLine1AndLine2(state.mailingAddressLine1, true));
+    setIsLine2Valid(validateLine1AndLine2(state.mailingAddressLine2, false));
     setIsCityValid(state.mailingAddressCity !== "");
     setIsStateValid(state.mailingAddressState !== undefined);
     setIsZipCodeValid(validateZip(state.mailingAddressZipCode));

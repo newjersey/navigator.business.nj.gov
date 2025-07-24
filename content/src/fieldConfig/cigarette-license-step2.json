@@ -24,18 +24,15 @@
       },
       "mailingAddressLine2": {
         "label": "Mailing Address Line 2",
-        "errorRequiredText": "",
         "errorValidationText": "Address Line 2 must be 35 characters or fewer."
       },
       "mailingAddressCity": {
         "label": "City",
-        "errorRequiredText": "Enter a city.",
-        "errorValidationText": ""
+        "errorRequiredText": "Enter a city."
       },
       "mailingAddressState": {
         "label": "State",
-        "errorRequiredText": "Enter a state.",
-        "errorValidationText": ""
+        "errorRequiredText": "Enter a state."
       },
       "mailingAddressZipCode": {
         "label": "Zip Code",
