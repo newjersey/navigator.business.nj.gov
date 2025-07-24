@@ -20,6 +20,7 @@ export const searchXrayRenewalCalendarEvent = (
   const callToActionText = renewalCalendarEvent.callToActionText?.toLowerCase();
   const urlSlug = renewalCalendarEvent.urlSlug.toLowerCase();
   const eventDisplayName = renewalCalendarEvent.eventDisplayName.toLowerCase();
+  const name = renewalCalendarEvent.name.toLowerCase();
 
   const blockTexts = [content];
 
@@ -29,6 +30,7 @@ export const searchXrayRenewalCalendarEvent = (
     { content: callToActionText, label: "CTA Text" },
     { content: urlSlug, label: "Url Slug" },
     { content: eventDisplayName, label: "Event Display Name" },
+    { content: name, label: "Name" },
   ];
 
   match = findMatchInBlock(blockTexts, term, match);

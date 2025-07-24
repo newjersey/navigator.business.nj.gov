@@ -29,20 +29,24 @@ import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTa
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
+import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
+import FormationDateDeletionModalPreview from "@/lib/cms/previews/FormationDateDeletionModalPreview";
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
-import GovernmentContractingAnytimeAction from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
+import GovernmentContractingAnytimeActionPreview from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
 import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
 import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
+import NjedaPreview from "@/lib/cms/previews/NjedaPreview";
 import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
 import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
+import StarterKitsPreview from "@/lib/cms/previews/StarterKitsPreview";
 import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxAccessPreview from "@/lib/cms/previews/TaxAccessPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
@@ -102,10 +106,16 @@ const CMS = dynamic(
       registerPreview(CMS, "xray", XrayTaskPreview);
       registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
 
+      registerPreview(CMS, "funding-onboarding-modal-config", NjedaPreview);
+      registerPreview(CMS, "formationDateDeletionModal", FormationDateDeletionModalPreview);
+
+      registerPreview(CMS, "starterKits", StarterKitsPreview);
+
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
+      registerPreview(CMS, "check-account-email-page", LoginEmailCheckPreview);
 
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
@@ -119,7 +129,7 @@ const CMS = dynamic(
       registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-download", AnytimeActionTaxClearancePreview);
-      registerPreview(CMS, "government-contracting", GovernmentContractingAnytimeAction);
+      registerPreview(CMS, "government-contracting", GovernmentContractingAnytimeActionPreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);

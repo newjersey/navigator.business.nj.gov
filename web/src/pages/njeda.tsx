@@ -35,6 +35,7 @@ import { ReactElement, useEffect, useState } from "react";
 interface Props {
   fundings: Funding[];
   noAuth: boolean;
+  CMS_PREVIEW_ONLY_OPEN_MODAL?: number;
 }
 
 const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
@@ -50,7 +51,16 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
   const [numberOfEmployees, setNumberofEmployees] = useState<string>(
     business?.profileData.existingEmployees ?? "",
   );
-  const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(false);
+  const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(
+    props.CMS_PREVIEW_ONLY_OPEN_MODAL === undefined ? false : true,
+  );
+
+  useEffect(() => {
+    if (props.CMS_PREVIEW_ONLY_OPEN_MODAL !== undefined && props.CMS_PREVIEW_ONLY_OPEN_MODAL > 0) {
+      setShouldCloseModal(false);
+    }
+  }, [props.CMS_PREVIEW_ONLY_OPEN_MODAL]);
+
   const [filteredFundings, setFilteredFundings] = useState<Funding[]>(props.fundings);
   const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState<boolean>(false);
 
