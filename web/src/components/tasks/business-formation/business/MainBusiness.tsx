@@ -7,7 +7,7 @@ import { NonprofitProvisions } from "@/components/tasks/business-formation/busin
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { WillPracticeLaw } from "@/components/tasks/business-formation/business/WillPracticeLaw";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -30,9 +30,9 @@ export const MainBusiness = (): ReactElement => {
       <BusinessNameAndLegalStructure />
       {isForeignCorporation(state.formationFormData.legalType) && (
         <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
-          <FormationField fieldName="willPracticeLaw">
+          <ScrollableFormFieldWrapper fieldName="willPracticeLaw">
             <WillPracticeLaw />
-          </FormationField>
+          </ScrollableFormFieldWrapper>
         </WithErrorBar>
       )}
       <WithErrorBar
@@ -42,16 +42,16 @@ export const MainBusiness = (): ReactElement => {
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
             <WithErrorBar hasError={doesFieldHaveError("businessSuffix")} type="MOBILE-ONLY">
-              <FormationField fieldName="businessSuffix">
+              <ScrollableFormFieldWrapper fieldName="businessSuffix">
                 <SuffixDropdown />
-              </FormationField>
+              </ScrollableFormFieldWrapper>
             </WithErrorBar>
           </div>
           <div className="margin-top-2 tablet:grid-col-6">
             <WithErrorBar hasError={doesFieldHaveError("businessStartDate")} type="MOBILE-ONLY">
-              <FormationField fieldName="businessStartDate">
+              <ScrollableFormFieldWrapper fieldName="businessStartDate">
                 <FormationDate fieldName="businessStartDate" />
-              </FormationField>
+              </ScrollableFormFieldWrapper>
             </WithErrorBar>
           </div>
         </div>
@@ -68,9 +68,9 @@ export const MainBusiness = (): ReactElement => {
                   hasError={doesFieldHaveError("foreignStateOfFormation")}
                   type="MOBILE-ONLY"
                 >
-                  <FormationField fieldName="foreignStateOfFormation">
+                  <ScrollableFormFieldWrapper fieldName="foreignStateOfFormation">
                     <ForeignStateOfFormation />
-                  </FormationField>
+                  </ScrollableFormFieldWrapper>
                 </WithErrorBar>
               </div>
               <div className="margin-top-2 tablet:grid-col-6">
@@ -78,19 +78,19 @@ export const MainBusiness = (): ReactElement => {
                   hasError={doesFieldHaveError("foreignDateOfFormation")}
                   type="MOBILE-ONLY"
                 >
-                  <FormationField fieldName="foreignDateOfFormation">
+                  <ScrollableFormFieldWrapper fieldName="foreignDateOfFormation">
                     <FormationDate fieldName="foreignDateOfFormation" />
-                  </FormationField>
+                  </ScrollableFormFieldWrapper>
                 </WithErrorBar>
               </div>
             </div>
           </WithErrorBar>
 
           {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
-            <FormationField fieldName="foreignGoodStandingFile">
+            <ScrollableFormFieldWrapper fieldName="foreignGoodStandingFile">
               <hr className="margin-bottom-2 margin-top-3" aria-hidden={true} />
               <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           )}
         </>
       )}
@@ -106,7 +106,7 @@ export const MainBusiness = (): ReactElement => {
       {corpLegalStructures.includes(state.formationFormData.legalType) && (
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
-            <FormationField fieldName="businessTotalStock">
+            <ScrollableFormFieldWrapper fieldName="businessTotalStock">
               <BusinessFormationTextField
                 errorBarType="ALWAYS"
                 label={Config.formation.fields.businessTotalStock.label}
@@ -119,7 +119,7 @@ export const MainBusiness = (): ReactElement => {
                 fieldName={"businessTotalStock"}
                 validationText={Config.formation.fields.businessTotalStock.error}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
         </div>
       )}

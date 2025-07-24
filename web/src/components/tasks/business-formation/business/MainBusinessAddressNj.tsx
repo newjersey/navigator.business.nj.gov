@@ -7,7 +7,7 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -67,7 +67,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
       {isExpanded && (
         <>
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
-          <FormationField fieldName="addressLine1">
+          <ScrollableFormFieldWrapper fieldName="addressLine1">
             <BusinessFormationTextField
               label={Config.formation.fields.addressLine1.label}
               fieldName="addressLine1"
@@ -76,8 +76,8 @@ export const MainBusinessAddressNj = (): ReactElement => {
               errorBarType="ALWAYS"
               validationText={getFieldErrorLabel("addressLine1")}
             />
-          </FormationField>
-          <FormationField fieldName="addressLine2">
+          </ScrollableFormFieldWrapper>
+          <ScrollableFormFieldWrapper fieldName="addressLine2">
             <BusinessFormationTextField
               label={Config.formation.fields.addressLine2.label}
               secondaryLabel={Config.formation.general.optionalLabel}
@@ -86,7 +86,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
               validationText={getFieldErrorLabel("addressLine2")}
               className="margin-bottom-2"
             />
-          </FormationField>
+          </ScrollableFormFieldWrapper>
           <WithErrorBar
             hasError={doSomeFieldsHaveError([
               "addressState",
@@ -119,7 +119,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
                           {Config.formation.fields.addressState.label}
                         </ModifiedContent>
                       </strong>
-                      <FormationField fieldName="addressState">
+                      <ScrollableFormFieldWrapper fieldName="addressState">
                         <StateDropdown
                           fieldName="addressState"
                           value={"New Jersey"}
@@ -127,10 +127,10 @@ export const MainBusinessAddressNj = (): ReactElement => {
                           disabled={true}
                           onSelect={(): void => {}}
                         />
-                      </FormationField>
+                      </ScrollableFormFieldWrapper>
                     </div>
                     <div className="grid-col-7">
-                      <FormationField fieldName="addressZipCode">
+                      <ScrollableFormFieldWrapper fieldName="addressZipCode">
                         <BusinessFormationTextField
                           label={Config.formation.fields.addressZipCode.label}
                           numericProps={{ maxLength: 5 }}
@@ -139,7 +139,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
                           fieldName={"addressZipCode"}
                           validationText={getFieldErrorLabel("addressZipCode")}
                         />
-                      </FormationField>
+                      </ScrollableFormFieldWrapper>
                     </div>
                   </div>
                 </WithErrorBar>

@@ -4,7 +4,7 @@ import { FormationChooseDocuments } from "@/components/tasks/business-formation/
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/billing/FormationChooseNotifications";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -26,7 +26,7 @@ export const BillingStep = (): ReactElement => {
       >
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
-            <FormationField fieldName="contactFirstName">
+            <ScrollableFormFieldWrapper fieldName="contactFirstName">
               <BusinessFormationTextField
                 label={Config.formation.fields.contactFirstName.label}
                 fieldName="contactFirstName"
@@ -34,10 +34,10 @@ export const BillingStep = (): ReactElement => {
                 required={true}
                 validationText={getFieldErrorLabel("contactFirstName")}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
           <div className="margin-top-2 tablet:grid-col-6">
-            <FormationField fieldName="contactLastName">
+            <ScrollableFormFieldWrapper fieldName="contactLastName">
               <BusinessFormationTextField
                 label={Config.formation.fields.contactLastName.label}
                 fieldName="contactLastName"
@@ -45,13 +45,13 @@ export const BillingStep = (): ReactElement => {
                 required={true}
                 validationText={getFieldErrorLabel("contactLastName")}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
         </div>
       </WithErrorBar>
       <div className="grid-row grid-gap-1">
         <div className="margin-top-2 tablet:grid-col-6">
-          <FormationField fieldName="contactPhoneNumber">
+          <ScrollableFormFieldWrapper fieldName="contactPhoneNumber">
             <BusinessFormationTextField
               validationText={Config.formation.fields.contactPhoneNumber.error}
               label={Config.formation.fields.contactPhoneNumber.label}
@@ -62,7 +62,7 @@ export const BillingStep = (): ReactElement => {
               }}
               visualFilter={getPhoneNumberFormat}
             />
-          </FormationField>
+          </ScrollableFormFieldWrapper>
         </div>
       </div>
       <hr className="margin-y-3" />
