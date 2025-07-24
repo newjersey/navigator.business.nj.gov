@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -52,7 +52,7 @@ export const FormationRadio = (props: Props): ReactElement => {
           <Content>{props.subtitle}</Content>
         </div>
       )}
-      <FormationField fieldName={props.fieldName}>
+      <ScrollableFormFieldWrapper fieldName={props.fieldName}>
         <FormControl error={hasError}>
           <RadioGroup
             aria-label={camelCaseToSentence(props.fieldName)}
@@ -78,7 +78,7 @@ export const FormationRadio = (props: Props): ReactElement => {
           </RadioGroup>
           <FormHelperText>{hasError ? errorMessage : ""}</FormHelperText>
         </FormControl>
-      </FormationField>
+      </ScrollableFormFieldWrapper>
     </WithErrorBar>
   );
 };

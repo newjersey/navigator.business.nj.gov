@@ -1,5 +1,5 @@
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
@@ -17,7 +17,7 @@ export const FormationTextArea = (props: Props): ReactElement => {
 
   return (
     <div className="margin-top-1">
-      <FormationField fieldName={props.fieldName}>
+      <ScrollableFormFieldWrapper fieldName={props.fieldName}>
         <BusinessFormationTextField
           fieldName={props.fieldName}
           required={true}
@@ -36,7 +36,7 @@ export const FormationTextArea = (props: Props): ReactElement => {
             },
           }}
         />
-      </FormationField>
+      </ScrollableFormFieldWrapper>
       <div className="text-base-dark margin-top-1 margin-bottom-2">
         {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
         {Config.formation.general.charactersLabel}

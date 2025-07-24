@@ -7,6 +7,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 
 interface Props {
   onValidation: () => void;
@@ -47,33 +48,31 @@ export const NewJerseyAddress = (props: Props): ReactElement => {
                         {Config.formation.fields.addressState.label}
                       </ModifiedContent>
                     </strong>
-                    <div
-                      id={`question-addressState`}
-                      className="text-field-width-default add-spacing-on-ele-scroll"
-                    >
-                      <StateDropdown
-                        fieldName="addressState"
-                        value={"New Jersey"}
-                        validationText={Config.formation.fields.addressState.error}
-                        disabled={true}
-                        onSelect={(): void => {}}
-                      />
-                    </div>
+                    <ScrollableFormFieldWrapper fieldName={"addressState"}>
+                      <div className="text-field-width-default">
+                        <StateDropdown
+                          fieldName="addressState"
+                          value={"New Jersey"}
+                          validationText={Config.formation.fields.addressState.error}
+                          disabled={true}
+                          onSelect={(): void => {}}
+                        />
+                      </div>
+                    </ScrollableFormFieldWrapper>
                   </div>
                   <div className="grid-col-6">
-                    <div
-                      id={`question-addressZipCode`}
-                      className="text-field-width-default add-spacing-on-ele-scroll"
-                    >
-                      <AddressTextField
-                        label={Config.formation.fields.addressZipCode.label}
-                        numericProps={{ maxLength: 5 }}
-                        errorBarType="NEVER"
-                        validationText={getFieldErrorLabel("addressZipCode")}
-                        fieldName={"addressZipCode"}
-                        onValidation={props.onValidation}
-                      />
-                    </div>
+                    <ScrollableFormFieldWrapper fieldName={"addressZipCode"}>
+                      <div className="text-field-width-default">
+                        <AddressTextField
+                          label={Config.formation.fields.addressZipCode.label}
+                          numericProps={{ maxLength: 5 }}
+                          errorBarType="NEVER"
+                          validationText={getFieldErrorLabel("addressZipCode")}
+                          fieldName={"addressZipCode"}
+                          onValidation={props.onValidation}
+                        />
+                      </div>
+                    </ScrollableFormFieldWrapper>
                   </div>
                 </div>
               </WithErrorBar>

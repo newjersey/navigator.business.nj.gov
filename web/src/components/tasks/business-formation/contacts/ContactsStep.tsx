@@ -3,7 +3,7 @@ import { createSignedEmptyFormationObject } from "@/components/tasks/business-fo
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -47,14 +47,14 @@ export const ContactsStep = (): ReactElement => {
         {shouldShowMembers() && (
           <>
             <hr className="margin-y-3" />
-            <FormationField fieldName="members">
+            <ScrollableFormFieldWrapper fieldName="members">
               <Members hasError={doesFieldHaveError("members")} />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </>
         )}
         <hr className="margin-y-3" />
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
-          <FormationField fieldName="incorporators">
+          <ScrollableFormFieldWrapper fieldName="incorporators">
             <Addresses<FormationIncorporator>
               createEmptyAddress={(): FormationIncorporator => {
                 return createSignedEmptyFormationObject(
@@ -100,7 +100,7 @@ export const ContactsStep = (): ReactElement => {
               legalType={state.formationFormData.legalType}
               hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}
             />
-          </FormationField>
+          </ScrollableFormFieldWrapper>
         ) : (
           <Signatures />
         )}

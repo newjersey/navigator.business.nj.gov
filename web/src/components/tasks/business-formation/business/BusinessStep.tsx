@@ -4,7 +4,7 @@ import { MainBusinessAddressNj } from "@/components/tasks/business-formation/bus
 import { MainBusinessForeignAddressFlow } from "@/components/tasks/business-formation/business/MainBusinessForeignAddressFlow";
 import { PartnershipRights } from "@/components/tasks/business-formation/business/PartnershipRights";
 import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Fragment, ReactElement, useContext, useMemo } from "react";
@@ -28,7 +28,7 @@ export const BusinessStep = (): ReactElement => {
     return (
       <>
         <hr className="margin-y-3" aria-hidden={true} />
-        <FormationField fieldName="combinedInvestment">
+        <ScrollableFormFieldWrapper fieldName="combinedInvestment">
           <BusinessFormationTextBox
             maxChars={400}
             fieldName="combinedInvestment"
@@ -36,9 +36,9 @@ export const BusinessStep = (): ReactElement => {
             title={Config.formation.fields.combinedInvestment.label}
             contentMd={Config.formation.fields.combinedInvestment.body}
           />
-        </FormationField>
+        </ScrollableFormFieldWrapper>
         <hr className="margin-y-3" aria-hidden={true} />
-        <FormationField fieldName="withdrawals">
+        <ScrollableFormFieldWrapper fieldName="withdrawals">
           <BusinessFormationTextBox
             maxChars={400}
             fieldName="withdrawals"
@@ -46,11 +46,11 @@ export const BusinessStep = (): ReactElement => {
             title={Config.formation.fields.withdrawals.label}
             contentMd={Config.formation.fields.withdrawals.body}
           />
-        </FormationField>
+        </ScrollableFormFieldWrapper>
         <hr className="margin-y-3" aria-hidden={true} />
         <PartnershipRights />
         <hr className="margin-y-3" aria-hidden={true} />
-        <FormationField fieldName="dissolution">
+        <ScrollableFormFieldWrapper fieldName="dissolution">
           <BusinessFormationTextBox
             maxChars={400}
             fieldName="dissolution"
@@ -58,7 +58,7 @@ export const BusinessStep = (): ReactElement => {
             title={Config.formation.fields.dissolution.label}
             contentMd={Config.formation.fields.dissolution.body}
           />
-        </FormationField>
+        </ScrollableFormFieldWrapper>
       </>
     );
   };
@@ -66,7 +66,7 @@ export const BusinessStep = (): ReactElement => {
   const businessPurposeSection = (): ReactElement => (
     <>
       <hr className="margin-y-3" aria-hidden={true} key={"business-line-2"} />
-      <FormationField fieldName="businessPurpose">
+      <ScrollableFormFieldWrapper fieldName="businessPurpose">
         <BusinessFormationTextBox
           maxChars={300}
           fieldName="businessPurpose"
@@ -77,7 +77,7 @@ export const BusinessStep = (): ReactElement => {
           contentMd={Config.formation.fields.businessPurpose.body}
           isUnderline
         />
-      </FormationField>
+      </ScrollableFormFieldWrapper>
       <hr className="margin-y-3" aria-hidden={true} key={"business-line-3"} />
     </>
   );
