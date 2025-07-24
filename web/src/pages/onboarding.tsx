@@ -86,6 +86,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const { updateQueue, createUpdateQueue, hasCompletedFetch } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
   const { Config } = useConfig();
@@ -426,8 +427,10 @@ const OnboardingPage = (props: Props): ReactElement => {
         const banner = errors as ProfileError[];
         if (banner.length > 0) {
           setError(banner[0]);
+          errorRef.current?.focus();
+        } else {
+          headerRef.current?.focus();
         }
-        headerRef.current?.focus();
       } else {
         setError(undefined);
       }
@@ -492,7 +495,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                 {header()}
                 {!isLargeScreen && <hr />}
                 {error && (
-                  <Alert dataTestid={`banner-alert-${error}`} variant="error">
+                  <Alert dataTestid={`banner-alert-${error}`} variant="error" ref={errorRef}>
                     {OnboardingErrorLookup[error]}
                   </Alert>
                 )}
