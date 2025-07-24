@@ -65,8 +65,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
       return newAddress;
     });
   };
-  // const { business, userData } = useUserData();
-  const { business } = useUserData();
+  const { business, userData } = useUserData();
 
   const stepperSteps: StepperStep[] = [
     {
@@ -112,7 +111,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
   };
 
   useMountEffectWhenDefined(() => {
-    if (business) {
+    if (business && userData) {
       const {
         businessName,
         responsibleOwnerName,
@@ -136,7 +135,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         salesInfoStartDate,
         salesInfoSupplier,
         lastUpdatedISO,
-      } = getInitialData(business);
+      } = getInitialData(userData, business);
 
       setCigaretteLicenseData({
         businessName,

@@ -1,12 +1,13 @@
 import { LookupMunicipalityByName } from "@businessnjgovnavigator/shared/municipality";
 import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const getInitialTaxId = (business: Business | undefined): string => {
   return business?.cigaretteLicenseData?.taxId || business?.profileData.taxId || "";
 };
 
 export const getInitialData = (
+  userData: UserData,
   business: Business,
 ): {
   businessName: string;
@@ -72,8 +73,8 @@ export const getInitialData = (
   const mailingAddressState = business.cigaretteLicenseData?.mailingAddressState || undefined;
   const mailingAddressZipCode = business.cigaretteLicenseData?.mailingAddressZipCode || "";
   // TODO check if any of these fields need to come from userData or profileData
-  const contactName = business.cigaretteLicenseData?.contactName || "";
-  const contactEmail = business.cigaretteLicenseData?.contactEmail || "";
+  const contactName = business.cigaretteLicenseData?.contactName || userData.user.name || "";
+  const contactEmail = business.cigaretteLicenseData?.contactEmail || userData.user.email || "";
   const contactPhoneNumber = business.cigaretteLicenseData?.contactPhoneNumber || "";
   const salesInfoStartDate = business.cigaretteLicenseData?.salesInfoStartDate || "";
   const salesInfoSupplier = business.cigaretteLicenseData?.salesInfoSupplier || [];
