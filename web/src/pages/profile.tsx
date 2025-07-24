@@ -613,11 +613,7 @@ const ProfilePage = (props: Props): ReactElement => {
           heading={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
           subText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
         >
-          {
-            <>
-              <IndustryBasedNonEssentialQuestionsSection />
-            </>
-          }
+          <IndustryBasedNonEssentialQuestionsSection />
         </ProfileSubSection>
       </div>
     ),

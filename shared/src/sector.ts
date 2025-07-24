@@ -3,15 +3,17 @@ import SectorsJSON from "../../content/src/mappings/sectors.json";
 export interface SectorType {
   readonly id: string;
   readonly name: string;
+  readonly nonEssentialQuestionsIds: string[];
 }
 
-export const LookupSectorTypeById = (id: string): SectorType => {
+export const LookupSectorTypeById = (id: string | undefined): SectorType => {
   return (
     arrayOfSectors.find((x) => {
       return x.id === id;
     }) ?? {
       id: "",
       name: "",
+      nonEssentialQuestionsIds: [],
     }
   );
 };

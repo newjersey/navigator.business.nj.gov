@@ -3,30 +3,52 @@ import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-es
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import {
   doesIndustryHaveNonEssentialQuestions,
+  doesSectorHaveNonEssentialQuestions,
   getPersonaBasedNonEssentialQuestionsIds,
 } from "@/lib/utils/non-essential-questions-helpers";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export const IndustryBasedNonEssentialQuestionsSection = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
-  const nonEssentialQuestions = (): ReactElement[] => {
+  const hasNonEssentialQuestions =
+    doesIndustryHaveNonEssentialQuestions(state.profileData) ||
+    doesSectorHaveNonEssentialQuestions(state.profileData);
+
+  const getNonEssentialQuestions = (): ReactElement[] => {
+    let questionIds: string[] = [];
+    if (doesIndustryHaveNonEssentialQuestions(state.profileData)) {
+      questionIds = [
+        ...questionIds,
+        ...LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds,
+      ];
+    }
+    if (doesSectorHaveNonEssentialQuestions(state.profileData)) {
+      questionIds = [
+        ...questionIds,
+        ...LookupSectorTypeById(state.profileData.sectorId).nonEssentialQuestionsIds,
+      ];
+    }
+    // check for duplicate question IDs
+    questionIds = [...new Set(questionIds)];
+    return assembleNonEssentialQuestions(questionIds);
+  };
+
+  const assembleNonEssentialQuestions = (questionIds: string[]): ReactElement[] => {
     const nonEssentialQuestionsArray: ReactElement[] = [];
-    const questionIds = LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds;
     for (const question of questionIds) {
       nonEssentialQuestionsArray.push(
         <NonEssentialQuestion key={question} essentialQuestionId={question} />,
       );
     }
-
     return nonEssentialQuestionsArray;
   };
 
   return (
     <>
-      {doesIndustryHaveNonEssentialQuestions(state.profileData) && (
-        <div data-testid="non-essential-questions-wrapper">{nonEssentialQuestions()}</div>
+      {hasNonEssentialQuestions && (
+        <div data-testid="non-essential-questions-wrapper">{getNonEssentialQuestions()}</div>
       )}
       {getPersonaBasedNonEssentialQuestionsIds(state.profileData).map((questionId) => {
         return <NonEssentialQuestionForPersonas questionId={questionId} key={questionId} />;

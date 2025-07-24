@@ -2,103 +2,128 @@
   "arrayOfSectors": [
     {
       "id": "accommodation-and-food-services",
-      "name": "Accommodation and Food Services"
+      "name": "Accommodation and Food Services",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "administrative-and-employment-services",
-      "name": "Administrative and Employment Services"
+      "name": "Administrative and Employment Services",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "agriculture-forestry-fishing-and-hunting",
-      "name": "Agriculture, Forestry, Fishing and Hunting"
+      "name": "Agriculture, Forestry, Fishing and Hunting",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "arts-entertainment-and-recreation",
-      "name": "Arts, Entertainment, and Recreation"
+      "name": "Arts, Entertainment, and Recreation",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "cannabis",
-      "name": "Cannabis"
+      "name": "Cannabis",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "clean-energy",
-      "name": "Clean Energy"
+      "name": "Clean Energy",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "construction",
-      "name": "Construction"
+      "name": "Construction",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "digital-and-print-media",
-      "name": "Digital and Print Media"
+      "name": "Digital and Print Media",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "educational-services",
-      "name": "Educational Services"
+      "name": "Educational Services",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "finance-and-insurance",
-      "name": "Finance and Insurance"
+      "name": "Finance and Insurance",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "health-care-and-social-assistance",
-      "name": "Health Care and Social Assistance"
+      "name": "Health Care and Social Assistance",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "life-sciences",
-      "name": "Life Sciences"
+      "name": "Life Sciences",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "manufacturing",
-      "name": "Manufacturing"
+      "name": "Manufacturing",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "mining-quarrying-and-oil-and-gas-extraction",
-      "name": "Mining, Quarrying, and Oil and Gas Extraction"
+      "name": "Mining, Quarrying, and Oil and Gas Extraction",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "offshore-wind",
-      "name": "Offshore Wind"
+      "name": "Offshore Wind",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "organizational-or-financial-management",
-      "name": "Organizational or Financial Management Companies"
+      "name": "Organizational or Financial Management Companies",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "other-services",
-      "name": "Other Services"
+      "name": "Other Services",
+      "nonEssentialQuestionsIds": ["resale-tax-cert"]
     },
     {
       "id": "professional-scientific-and-technical-services",
-      "name": "Professional, Scientific, and Technical Services"
+      "name": "Professional, Scientific, and Technical Services",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "real-estate",
-      "name": "Real Estate and Leasing"
+      "name": "Real Estate and Leasing",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "retail-trade-and-ecommerce",
-      "name": "Retail Trade and E-Commerce"
+      "name": "Retail Trade and E-Commerce",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "technology",
-      "name": "Technology"
+      "name": "Technology",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "transportation-and-warehousing",
-      "name": "Transportation and Warehousing"
+      "name": "Transportation and Warehousing",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "utilities",
-      "name": "Utilities"
+      "name": "Utilities",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "waste-management-and-Remediation",
-      "name": "Waste Management and Remediation"
+      "name": "Waste Management and Remediation",
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "wholesale-trade",
-      "name": "Wholesale Trade"
+      "name": "Wholesale Trade",
+      "nonEssentialQuestionsIds": []
     }
   ]
 }

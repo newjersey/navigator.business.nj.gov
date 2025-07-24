@@ -158,6 +158,7 @@ export interface Opportunity {
 interface AnytimeAction {
   name: string;
   filename: string;
+  type: string;
   synonyms?: string[];
 }
 
@@ -176,7 +177,6 @@ export interface AnytimeActionTask extends AnytimeAction {
   contentMd: string;
   description?: string;
   searchMetaDataMatch?: string;
-  type: string;
 }
 
 export interface AnytimeActionCategory {
