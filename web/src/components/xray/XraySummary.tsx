@@ -160,14 +160,14 @@ export const XraySummary = (props: Props): ReactElement => {
           </div>
         </ResultsSectionAccordion>
       </div>
-      <div className={"font-open-sans-3 margin-top-2"}>
+      <div className={" font-body-2xs margin-top-2"}>
         <span className={"text-bold margin-right-05"}>
           {Config.xrayRegistrationTask.issuingAgencyText}:
         </span>
         {Config.xrayRegistrationTask.issuingAgency}
       </div>
       {xrayData && (
-        <div className={"text-base-dark margin-top-2 h6-styling text-italic"}>
+        <div className={"text-base-dark text-italic font-body-2xs"}>
           {templateEval(Config.xrayRegistrationTask.lastUpdatedText, {
             lastUpdatedFormattedValue: dayjs(xrayData.lastUpdatedISO).format(
               "MMMM Do, YYYY [at] ha",
