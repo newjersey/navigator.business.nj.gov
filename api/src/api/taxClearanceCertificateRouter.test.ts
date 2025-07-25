@@ -63,19 +63,31 @@ describe("taxClearanceCertificateRouterFactory", () => {
     expect(response.body).toEqual({ error: "some value" });
   });
 
-  it("unlink TaxId returns a successful response", async () => {
-    stubTaxClearanceCertificateClient.unlinkTaxId.mockResolvedValue({
-      success: true,
+  describe("unlinkTaxId", () => {
+    beforeEach(() => {
+      process.env.DEV_ONLY_UNLINK_TAX_ID = "true";
     });
-    const response = await request(app).post(`/unlinkTaxId`);
-    expect(response.status).toEqual(StatusCodes.OK);
-    expect(response.body).toEqual({ success: true });
-  });
 
-  it("unlink TaxId throws a server error", async () => {
-    stubTaxClearanceCertificateClient.unlinkTaxId.mockRejectedValue("some value");
-    const response = await request(app).post(`/unlinkTaxId`);
-    expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(response.body).toEqual({ error: "some value" });
+    it("returns an error if DEV_ONLY_UNLINK_TAX_ID is not enabled", async () => {
+      process.env.DEV_ONLY_UNLINK_TAX_ID = "false";
+      const response = await request(app).post(`/unlinkTaxId`);
+      expect(response.status).toEqual(StatusCodes.UNAUTHORIZED);
+    });
+
+    it("returns a successful response", async () => {
+      stubTaxClearanceCertificateClient.unlinkTaxId.mockResolvedValue({
+        success: true,
+      });
+      const response = await request(app).post(`/unlinkTaxId`);
+      expect(response.status).toEqual(StatusCodes.OK);
+      expect(response.body).toEqual({ success: true });
+    });
+
+    it("throws a server error", async () => {
+      stubTaxClearanceCertificateClient.unlinkTaxId.mockRejectedValue("some value");
+      const response = await request(app).post(`/unlinkTaxId`);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(response.body).toEqual({ error: "some value" });
+    });
   });
 });
