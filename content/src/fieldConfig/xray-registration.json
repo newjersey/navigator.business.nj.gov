@@ -40,6 +40,7 @@
     "annualFee": "Annual Fee: ${annualFee}",
     "issuingAgencyText": "Issuing Agency",
     "equipmentText": "Equipment",
-    "ariaLabel": "X-Ray Registration Task"
+    "ariaLabel": "X-Ray Registration Task",
+    "lastUpdatedText": "Last Updated: ${lastUpdatedFormattedValue}"
   }
 }

@@ -166,6 +166,15 @@ export const XraySummary = (props: Props): ReactElement => {
         </span>
         {Config.xrayRegistrationTask.issuingAgency}
       </div>
+      {xrayData && (
+        <div className={"text-base-dark margin-top-2 h6-styling text-italic"}>
+          {templateEval(Config.xrayRegistrationTask.lastUpdatedText, {
+            lastUpdatedFormattedValue: dayjs(xrayData.lastUpdatedISO).format(
+              "MMMM Do, YYYY [at] ha",
+            ),
+          })}
+        </div>
+      )}
     </div>
   );
 };

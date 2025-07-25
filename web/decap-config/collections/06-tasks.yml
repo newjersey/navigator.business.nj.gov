@@ -1076,6 +1076,7 @@ collections:
               - { label: Issuing Agency Text, name: issuingAgencyText, widget: string }
               - { label: Equipment Text, name: equipmentText, widget: string }
               - { label: Aria Label Text, name: ariaLabel, widget: string }
+              - { label: Last Updated Timestamp Text, name: lastUpdatedText, widget: string }
           - label: Xray Renewal
             name: xrayRenewal
             collapsed: false
