@@ -87,6 +87,7 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
               },
             ],
             form: "Form1",
+            type: "license-reinstatement",
           },
           {
             name: "anytime action license reinstatement name2",
@@ -103,6 +104,7 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
               },
             ],
             form: "Form2",
+            type: "license-reinstatement",
           },
         ]),
       );
@@ -170,6 +172,7 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
             categoryName: "Reactivate My Expired Permit, License or Registration",
           },
         ],
+        type: "license-reinstatement",
       });
     });
   });

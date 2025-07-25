@@ -358,6 +358,7 @@ export const generateAnytimeActionLicenseReinstatement = (
         categoryId: `something-id-something`,
       },
     ],
+    type: "license-reinstatement",
     ...overrides,
   };
 };

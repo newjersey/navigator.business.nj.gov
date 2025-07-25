@@ -256,6 +256,18 @@ collections:
               - label: Id
                 name: id
                 widget: hidden
+              - label: Non Essential Questions
+                name: nonEssentialQuestionsIds
+                widget: relation
+                multiple: true
+                required: false
+                default: []
+                collection: nonEssentialQuestionsCollection
+                search_fields:
+                  - nonEssentialQuestionsArray.*.id
+                value_field: nonEssentialQuestionsArray.*.id
+                display_fields:
+                  - nonEssentialQuestionsArray.*.id
       - label: "Tax Clearance Certificate Issuing Agencies"
         name: "arrayOfTaxClearanceCertificateIssuingAgencies"
         file: "content/src/mappings/taxClearanceCertificateIssuingAgencies.json"

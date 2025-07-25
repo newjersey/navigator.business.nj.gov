@@ -52,6 +52,7 @@ export const convertAnytimeActionLicenseReinstatementMd = (
     filename,
     ...anytimeActionGrayMatter,
     category: [permermitsAndLicenseReinstatementCategoryInfo],
+    type: "license-reinstatement",
   };
 };
 

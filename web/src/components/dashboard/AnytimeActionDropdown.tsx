@@ -70,7 +70,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
       props.anytimeActionLicenseReinstatements.filter(licenseReinstatementMatch).map((action) => {
         return {
           ...action,
-          type: "license-reinstatement",
         };
       }),
     ];
