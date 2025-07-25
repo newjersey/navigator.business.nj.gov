@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const DevOnlyUnlinkTaxIdButton = (props: Props): ReactElement => {
-  const isUnlinkButtonEnabled = process.env.STAGE !== "prod";
+  const isUnlinkButtonEnabled = process.env.DEV_ONLY_UNLINK_TAX_ID === "true";
   const { userData, refresh } = useUserData();
 
   const unlinkTaxId = async (): Promise<void> => {

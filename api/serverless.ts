@@ -59,6 +59,8 @@ const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 const healthCheckLambda = `businessnjgov-api-${stage}-healthCheck`;
 const healthCheckEventRule = `health_check_lambda_event_rule`;
 
+const devOnly_unlinkTaxId = process.env.DEV_ONLY_UNLINK_TAX_ID || "";
+
 const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
 const serverlessDeploymentS3Bucket =
   process.env.BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME || "default-bucket";
@@ -232,6 +234,7 @@ const serverlessConfiguration: AWS = {
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
       CMS_OAUTH_CLIENT_ID: cmsoAuthClientId,
       CMS_OAUTH_CLIENT_SECRET: cmsoAuthClientSecret,
+      DEV_ONLY_UNLINK_TAX_ID: devOnly_unlinkTaxId,
       DOCUMENT_S3_BUCKET: documentS3Bucket,
       DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID: dynamicsElevatorSafetyClientId,
       DYNAMICS_ELEVATOR_SAFETY_SECRET: dynamicsElevatorSafetySecret,
