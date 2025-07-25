@@ -1,5 +1,20 @@
 ---
-notesMd: ""
+notesMd: >-
+  Replaced old email address: mvcblsprocessing@mvc.nj.gov 
+
+
+  Feedback from SME:
+
+
+  They want us to mention that the user can submit the application via email MVCCorpcodes@mvc.nj.gov, in addition to the physical mailing address
+
+
+  They have asked us to add in the extension code for the phone number to make it easier for users to get through to a person (609) 292-6500 ext. 5003
+
+
+
+
+  mvccorpcodes@mvc.nj.gov
 summaryDescriptionMd: >
   If your business plans to **sell or lease 4 or more vehicles or boats in a
   given year,** you need a dealership license from the NJ Motor Vehicle
@@ -32,11 +47,11 @@ agencyAdditionalContext: Business Licensing Services Bureau
 
 You must submit copies of the following:
 
-* `Federal Taxpayer Identification Number (EIN)|ein`
-* `Certificate of Formation|certificate-formation`
-* `Certificate of Authority|certificate-authority-sales-tax`
-* `Certificate of Liability Insurance|liability-insurance`, in the required amounts for bodily injury and property 
-* `Surety bond|surety-bond`
+*  `Federal Taxpayer Identification Number (EIN)|ein` 
+*  `Certificate of Formation|certificate-formation` 
+*  `Certificate of Authority|certificate-authority-sales-tax` 
+*  `Certificate of Liability Insurance|liability-insurance` , in the required amounts for bodily injury and property
+*  `Surety bond|surety-bond` 
 * Driver’s licenses for all owners, members, and partners
 * Passport-size color photographs of all owners, members, and partners
 * Deed, lease, or purchase agreement for your business location. If leasing the property, the lease agreement must be for a minimum of 12 months.
@@ -47,8 +62,9 @@ Depending on your business type or dealership license, you may also need:
 
 * [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if you sell or lease under a different business names
 * [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf),  if you sell used vehicles only
-* `Franchise Agreement|franchise-agreement`, if you sell new vehicles only
-* Established `business location|dealership-business-location`, if you sell new and used vehicles
+*  `Franchise Agreement|franchise-agreement` , if you sell new vehicles only
+* Established `business location|dealership-business-location` , if you sell new and used vehicles
+
 ## How to Apply
 
 Fill out the appropriate forms:
@@ -58,7 +74,7 @@ Fill out the appropriate forms:
 * [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) (PDF)
 * [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) (PDF)
 
-Email your completed application to **mvcblsprocessing@mvc.nj.gov** or mail to:
+Email your completed application to mvccorpcodes@mvc.nj.gov or mail to:
 
 &nbsp;
 
@@ -76,7 +92,7 @@ P.O. Box 170
 
 Trenton, NJ 08666-0170
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * Dealership license certificate
 * Dealership license number
@@ -85,7 +101,7 @@ Trenton, NJ 08666-0170
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I sell or lease vehicles and boats without a dealership license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I sell or lease vehicles and boats without a dealership license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * You may be issued citations or fines
 * Your business may not be able to register vehicles or get dealership plates
@@ -93,7 +109,7 @@ Trenton, NJ 08666-0170
 
 :::
 
-:::callout{ showHeader="true" headerText="Questions?" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-6500" emailIconText=" mcscustomerservice@mvc.nj.gov" }
+:::callout{ showHeader="true" headerText="Questions?" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-6500, ext. 5003" emailIconText=" mcscustomerservice@mvc.nj.gov" }
 
 Call or email the NJ MVC at:
 
