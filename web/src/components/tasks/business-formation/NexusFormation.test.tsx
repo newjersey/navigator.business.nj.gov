@@ -6,7 +6,7 @@ import { LookupNexusStepIndexByName } from "@/components/tasks/business-formatio
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { TasksDisplayContent } from "@/lib/types/types";
+import { FormationDbaDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
@@ -92,7 +92,7 @@ const clickNext = (): void => {
 
 describe("<NexusFormationFlow />", () => {
   let initialBusiness: Business;
-  let displayContent: TasksDisplayContent;
+  let displayContent: FormationDbaDisplayContent;
 
   beforeEach(() => {
     jest.resetAllMocks();

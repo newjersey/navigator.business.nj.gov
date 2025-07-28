@@ -15,7 +15,12 @@ import { CigaretteLicense } from "@/components/tasks/cigarette-license/Cigarette
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
 import { Xray } from "@/components/xray/Xray";
-import { Roadmap, Task, TasksDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
+import {
+  FormationDbaDisplayContent,
+  Roadmap,
+  Task,
+  TaskWithLicenseTaskId,
+} from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
@@ -24,7 +29,7 @@ import { ReactElement } from "react";
 
 interface Props {
   task: Task | TaskWithLicenseTaskId;
-  displayContent: TasksDisplayContent;
+  displayContent: FormationDbaDisplayContent;
   business: Business;
   roadmap: Roadmap;
   CMS_ONLY_disable_default_functionality?: boolean;

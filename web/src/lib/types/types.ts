@@ -57,7 +57,7 @@ export const createEmptyDbaDisplayContent = (): FormationDbaContent => {
   };
 };
 
-export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
+export const createEmptyTaskDisplayContent = (): FormationDbaDisplayContent => {
   return {
     formationDbaContent: createEmptyDbaDisplayContent(),
   };
@@ -291,7 +291,7 @@ export type FormationDbaContent = {
   Authorize: TaskWithoutLinks;
   Formation: TaskWithoutLinks;
 };
-export type TasksDisplayContent = {
+export type FormationDbaDisplayContent = {
   formationDbaContent: FormationDbaContent;
 };
 
