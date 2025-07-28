@@ -1,6 +1,6 @@
 {
-  "id": "cdl-addon",
-  "displayname": "cdl-addon",
+  "id": "cdl-addOnWhenYes",
+  "displayname": "cdl-addOnWhenYes",
   "roadmapSteps": [
     {
       "step": 4,

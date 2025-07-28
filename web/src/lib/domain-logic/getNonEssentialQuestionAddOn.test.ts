@@ -1,25 +1,43 @@
-import { getNonEssentialQuestionAddOn } from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
+import {
+  getNonEssentialQuestionAddOnWhenNo,
+  getNonEssentialQuestionAddOnWhenYes,
+} from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
 
 jest.mock("../../../../content/src/roadmaps/nonEssentialQuestions.json", () => ({
   nonEssentialQuestionsArray: [
     {
       id: "test-non-essential",
       questionText: "Test Question?",
-      addOn: "testAddOn",
+      addOnWhenYes: "testAddOnWhenYes",
+      addOnWhenNo: "testAddOnWhenNo",
     },
   ],
 }));
 
-describe("getNonEssentialQuestionAddOn", () => {
+describe("getNonEssentialQuestionAddOnWhenYes", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
-  it("returns the question text if essential question exists", () => {
-    expect(getNonEssentialQuestionAddOn("test-non-essential")).toEqual("testAddOn");
+  it("returns the addOnWhenYes id if essential question exists has it has an applicable one", () => {
+    expect(getNonEssentialQuestionAddOnWhenYes("test-non-essential")).toEqual("testAddOnWhenYes");
   });
 
   it("returns undefined if essential question doesn't exist", () => {
-    expect(getNonEssentialQuestionAddOn("test-non-essential1")).toEqual(undefined);
+    expect(getNonEssentialQuestionAddOnWhenYes("test-non-essential1")).toEqual(undefined);
+  });
+});
+
+describe("getNonEssentialQuestionAddOnWhenNo", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it("returns the addOnWhenNo id if essential question exists has it has an applicable one", () => {
+    expect(getNonEssentialQuestionAddOnWhenNo("test-non-essential")).toEqual("testAddOnWhenNo");
+  });
+
+  it("returns undefined if essential question doesn't exist", () => {
+    expect(getNonEssentialQuestionAddOnWhenNo("test-non-essential1")).toEqual(undefined);
   });
 });

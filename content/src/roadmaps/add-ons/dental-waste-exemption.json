@@ -1,0 +1,12 @@
+{
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "dental-waste-exemption",
+      "required": true
+    }
+  ],
+  "id": "dental-waste-exemption",
+  "displayname": "dental-waste-exemption"
+}
