@@ -7,9 +7,9 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   defaultDisplayDateFormat,
+  FormationDbaDisplayContent,
   FormationSignedAddress,
   Task,
-  TasksDisplayContent,
 } from "@/lib/types/types";
 import { generateTask, randomPublicFilingLegalType } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
@@ -76,7 +76,7 @@ export const useSetupInitialMocks = (): void => {
 
 type PreparePageParams = {
   business: Partial<Business>;
-  displayContent: TasksDisplayContent;
+  displayContent: FormationDbaDisplayContent;
   municipalities?: Municipality[];
   task?: Task;
   isAuthenticated?: IsAuthenticated;

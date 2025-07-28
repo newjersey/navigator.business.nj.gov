@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { getMergedConfig } from "@/contexts/configContext";
-import { TasksDisplayContent } from "@/lib/types/types";
+import { FormationDbaDisplayContent } from "@/lib/types/types";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -42,7 +42,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 describe("Formation - BillingStep", () => {
-  const displayContent: TasksDisplayContent = {
+  const displayContent: FormationDbaDisplayContent = {
     formationDbaContent: generateFormationDbaContent({}),
   };
 
