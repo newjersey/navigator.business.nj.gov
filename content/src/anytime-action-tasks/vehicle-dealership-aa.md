@@ -1,5 +1,9 @@
 ---
 notesMd: >-
+  
+  Update: email should remain as mvcblsprocessing@mvc.nj.gov instead of being changed to MVCcorpcodes@Mvc.nj.gov
+
+
   Replaced old email address: mvcblsprocessing@mvc.nj.gov 
 
 
@@ -84,7 +88,7 @@ Fill out the appropriate forms:
 * [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) (PDF)
 * [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) (PDF)
 
-Email your completed application to mvccorpcodes@mvc.nj.gov or mail to:
+Email your completed application to mvcblsprocessing@mvc.nj.gov or mail to:
 
 &nbsp;
 
