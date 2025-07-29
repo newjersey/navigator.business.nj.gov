@@ -1,18 +1,17 @@
+import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
-import { Checkbox, FormControlLabel } from "@mui/material";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { ReactElement, useContext } from "react";
-import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
-import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { Content } from "@/components/Content";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
+import { MediaQueries } from "@/lib/PageSizes";
+import { StateObject } from "@businessnjgovnavigator/shared/states";
+import { Checkbox, FormControlLabel, useMediaQuery } from "@mui/material";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   className?: string;
@@ -76,7 +75,7 @@ export const MailingAddress = (props: Props): ReactElement => {
     if (field === "mailingAddressZipCode" && state.mailingAddressState?.shortCode === "NJ")
       return Config.cigaretteLicenseStep2.fields.mailingAddressZipCode.errorValidationTextAlt;
 
-    return Config.cigaretteLicenseStep2.fields[field].errorValidationText;
+    return Config.cigaretteLicenseStep2.fields[field].errorValidationText ?? "";
   };
 
   const validateLine1AndLine2 = (val: string, required: boolean): boolean => {
