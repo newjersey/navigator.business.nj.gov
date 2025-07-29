@@ -72,7 +72,6 @@ export const getInitialData = (
   const mailingAddressCity = business.cigaretteLicenseData?.mailingAddressCity || "";
   const mailingAddressState = business.cigaretteLicenseData?.mailingAddressState || undefined;
   const mailingAddressZipCode = business.cigaretteLicenseData?.mailingAddressZipCode || "";
-  // TODO check if any of these fields need to come from userData or profileData
   const contactName = business.cigaretteLicenseData?.contactName || userData.user.name || "";
   const contactEmail = business.cigaretteLicenseData?.contactEmail || userData.user.email || "";
   const contactPhoneNumber = business.cigaretteLicenseData?.contactPhoneNumber || "";

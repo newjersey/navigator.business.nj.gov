@@ -12,6 +12,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
+import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -19,7 +20,6 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { ReactElement, useContext } from "react";
-import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 
 interface Props {
   setStepIndex: (idx: number) => void;

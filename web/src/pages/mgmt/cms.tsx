@@ -103,6 +103,8 @@ const CMS = dynamic(
       registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
 
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-step2", CigaretteLicensePreview);
+
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);

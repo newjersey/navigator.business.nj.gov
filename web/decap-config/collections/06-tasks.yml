@@ -928,12 +928,121 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - {
-                  label: "Business Name Error Text",
-                  name: "businessNameErrorText",
-                  widget: "string",
-                  required: true,
-                }
+              - label: "Licensee Information Header"
+                name: "licenseeInformationHeader"
+                widget: "string"
+                required: true
+
+              - label: "Licensee Information Description"
+                name: "licenseeInformationDescription"
+                widget: "text"
+                required: true
+
+              - label: "Business Address Header"
+                name: "businessAddressHeader"
+                widget: "string"
+                required: true
+
+              - label: "Business Address Description"
+                name: "businessAddressDescription"
+                widget: "text"
+                required: true
+
+              - label: "Mailing Address Header"
+                name: "mailingAddressHeader"
+                widget: "string"
+                required: true
+
+              - label: "Mailing Address Description"
+                name: "mailingAddressDescription"
+                widget: "text"
+                required: true
+
+              - label: "Mailing Is Same Check"
+                name: "mailingIsSameCheck"
+                widget: "string"
+                required: true
+
+              - label: "Fields"
+                name: "fields"
+                widget: "object"
+                fields:
+                  - label: "Mailing Address Line 1"
+                    name: "mailingAddressLine1"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+                      - label: "Error Validation Text"
+                        name: "errorValidationText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Mailing Address Line 2"
+                    name: "mailingAddressLine2"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Validation Text"
+                        name: "errorValidationText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Mailing Address City"
+                    name: "mailingAddressCity"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Mailing Address State"
+                    name: "mailingAddressState"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Mailing Address Zip Code"
+                    name: "mailingAddressZipCode"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+                      - label: "Error Validation Text"
+                        name: "errorValidationText"
+                        widget: "string"
+                        required: true
+                      - label: "Error Validation Text Alt"
+                        name: "errorValidationTextAlt"
+                        widget: "string"
+                        required: true
       - label: "Cigarette License Shared"
         name: "cigaretteLicense-shared"
         file: "content/src/fieldConfig/cigarette-license-shared.json"
