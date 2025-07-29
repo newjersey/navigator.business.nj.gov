@@ -78,7 +78,7 @@ Fill out the appropriate forms:
 * [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) (PDF)
 * [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) (PDF)
 
-Email your completed application to mvccorpcodes@mvc.nj.gov or mail to:
+Email your completed application to mvcblsprocessing@mvc.nj.gov or mail to:
 
 &nbsp;
 
