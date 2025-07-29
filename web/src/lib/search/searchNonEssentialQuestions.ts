@@ -18,12 +18,14 @@ export const searchNonEssentialQuestions = (
 
     const id = nonEssentialQuestion.id.toLowerCase();
     const questionText = nonEssentialQuestion.questionText.toLowerCase();
-    const addOn = nonEssentialQuestion.addOn.toLowerCase();
+    const addOnWhenYes = nonEssentialQuestion.addOnWhenYes?.toLowerCase();
+    const addOnWhenNo = nonEssentialQuestion.addOnWhenNo?.toLowerCase();
 
     const labelledTexts = [
       { content: id, label: "ID" },
       { content: questionText, label: "Question" },
-      { content: addOn, label: "Add On" },
+      { content: addOnWhenYes, label: "Yes Add On" },
+      { content: addOnWhenNo, label: "No Add On" },
     ];
 
     match = findMatchInLabelledText(labelledTexts, term, match);

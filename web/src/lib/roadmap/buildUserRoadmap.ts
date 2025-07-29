@@ -1,6 +1,9 @@
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
-import { getNonEssentialQuestionAddOn } from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
+import {
+  getNonEssentialQuestionAddOnWhenNo,
+  getNonEssentialQuestionAddOnWhenYes,
+} from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
 import { isInterstateLogisticsApplicable } from "@/lib/domain-logic/isInterstateLogisticsApplicable";
 import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMovingApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
@@ -262,13 +265,27 @@ const getIndustryBasedAddOns = (
 
   if (industry.nonEssentialQuestionsIds) {
     for (const questionId in profileData.nonEssentialRadioAnswers) {
-      const addOnToAdd = getNonEssentialQuestionAddOn(questionId);
-      if (
-        addOnToAdd &&
-        profileData.nonEssentialRadioAnswers[questionId] &&
-        industry.nonEssentialQuestionsIds.includes(questionId)
-      ) {
-        addOns.push(addOnToAdd);
+      const addOnToAddWhenYes =
+        profileData.nonEssentialRadioAnswers[questionId] === true &&
+        getNonEssentialQuestionAddOnWhenYes(questionId) !== undefined
+          ? getNonEssentialQuestionAddOnWhenYes(questionId)
+          : undefined;
+
+      const addOnToAddWhenNo =
+        profileData.nonEssentialRadioAnswers[questionId] === false &&
+        getNonEssentialQuestionAddOnWhenNo(questionId) !== undefined
+          ? getNonEssentialQuestionAddOnWhenNo(questionId)
+          : undefined;
+
+      const applicableToIndustry = industry.nonEssentialQuestionsIds.includes(questionId);
+
+      if (applicableToIndustry) {
+        if (addOnToAddWhenYes) {
+          addOns.push(addOnToAddWhenYes);
+        }
+        if (addOnToAddWhenNo) {
+          addOns.push(addOnToAddWhenNo);
+        }
       }
     }
   }

@@ -555,7 +555,8 @@ export type OutageConfig = {
 export interface NonEssentialQuestion {
   id: string;
   questionText: string;
-  addOn: string;
+  addOnWhenYes?: string;
+  addOnWhenNo?: string;
 }
 
 export interface PageMetadata {

@@ -306,8 +306,18 @@ collections:
               - label: Question
                 name: questionText
                 widget: markdown
-              - label: Add On
-                name: addOn
+              - label: Add On When Answered Yes
+                name: addOnWhenYes
+                required: false
+                widget: "relation"
+                default: []
+                collection: "addons"
+                search_fields: [displayname]
+                value_field: "{{fields.id}}"
+                display_fields: [displayname]
+                options_length: 9999
+              - label: Add On When Answered No
+                name: addOnWhenNo
                 required: false
                 widget: "relation"
                 default: []

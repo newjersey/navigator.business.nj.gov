@@ -1,0 +1,12 @@
+{
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "dental-waste-registration",
+      "required": true
+    }
+  ],
+  "id": "dental-waste-registration",
+  "displayname": "dental-waste-registration"
+}

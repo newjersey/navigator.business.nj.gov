@@ -1,7 +1,20 @@
+import { NonEssentialQuestion } from "@/lib/types/types";
 import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
 
-export const getNonEssentialQuestionAddOn = (essentialQuestionId: string): string | undefined => {
+const getNonEssentialQuestion = (essentialQuestionId: string): NonEssentialQuestion | undefined => {
   return NonEssentialQuestions.nonEssentialQuestionsArray.find(
     (questionObj) => questionObj.id === essentialQuestionId,
-  )?.addOn;
+  );
+};
+
+export const getNonEssentialQuestionAddOnWhenYes = (
+  essentialQuestionId: string,
+): string | undefined => {
+  return getNonEssentialQuestion(essentialQuestionId)?.addOnWhenYes;
+};
+
+export const getNonEssentialQuestionAddOnWhenNo = (
+  essentialQuestionId: string,
+): string | undefined => {
+  return getNonEssentialQuestion(essentialQuestionId)?.addOnWhenNo;
 };
