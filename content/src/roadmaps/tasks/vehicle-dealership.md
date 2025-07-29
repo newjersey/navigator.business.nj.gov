@@ -1,5 +1,9 @@
 ---
 notesMd: >-
+  Update: email should remain as mvcblsprocessing@mvc.nj.gov instead of being
+  changed to MVCcorpcodes@Mvc.nj.gov
+
+
   Replaced old email address: mvcblsprocessing@mvc.nj.gov 
 
 
