@@ -1,6 +1,8 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { UsagesList } from "@/components/search/UsagesList";
+import cmsMapJson from "@/lib/cms/CollectionMap.json";
 import { Match } from "@/lib/search/typesForSearch";
+import { CMSMap } from "@/lib/types/types";
 import { ReactElement, useEffect, useState } from "react";
 interface Props {
   matches: Match[];
@@ -12,7 +14,7 @@ export const MatchList = (props: Props): ReactElement => {
 
   const [expandedMatches, setExpandedMatches] = useState<boolean>(false);
   const collapsedMatches = props.matches.slice(0, COLLAPSED_LEN);
-
+  const cmsMap: CMSMap = cmsMapJson;
   useEffect(() => {
     setExpandedMatches(false);
   }, [props.matches]);
@@ -36,7 +38,7 @@ export const MatchList = (props: Props): ReactElement => {
           <li key={match.filename}>
             {match.cmsCollectionName && (
               <a
-                href={`/mgmt/cms#/collections/${match.cmsCollectionName}/entries/${match.filename}`}
+                href={`/mgmt/cms#/collections/${cmsMap[match.filename]?.[props.collectionLabel] ?? null}/entries/${match.filename}`}
                 target="_blank"
                 rel="noreferrer"
               >
