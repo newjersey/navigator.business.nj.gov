@@ -6,6 +6,7 @@ export const searchSteps = (
   steps: Step[],
   term: string,
   params: { filename: string },
+  displayTitle: string,
   cmsCollectionName: string,
 ): Match[] => {
   const matches: Match[] = [];
@@ -15,6 +16,7 @@ export const searchSteps = (
       filename: params.filename,
       snippets: [],
       cmsCollectionName: cmsCollectionName,
+      displayTitle: displayTitle,
     };
 
     const name = step.name.toLowerCase();
@@ -28,7 +30,7 @@ export const searchSteps = (
     match = findMatchInLabelledText(labelledTexts, term, match);
 
     if (match.snippets.length > 0) {
-      match.filename = `${match.filename} (Step ${step.stepNumber})`;
+      match.displayTitle = `${match.displayTitle} (Step ${step.stepNumber})`;
       matches.push(match);
     }
   }
