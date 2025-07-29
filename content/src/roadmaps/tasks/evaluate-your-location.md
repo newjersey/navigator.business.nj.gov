@@ -22,11 +22,13 @@ callToActionText: ""
 * **Complete Financing and Contingencies:** Finalize your financing arrangements and work through any contingencies outlined in the purchase agreement, such as obtaining necessary permits or approvals.
 * **Conduct Title Search and Obtain Title Insurance:** A title search is conducted to ensure there are no outstanding liens or ownership issues with the property. Title insurance is typically obtained to protect against any unforeseen title problems.
 
-**Additional Considerations:** 
+:::infoAlert 
+ If you sell real estate with a value of more than $1 million, you are responsible for an additional fee at closing. You can find more details about the fee on the [Realty Transfer Fee page](https://www.nj.gov/treasury/taxation/realty.shtml) on the Division of Taxation website.
+:::
 
-If you sell real estate with a value of more than $1 million, you are responsible for an additional fee at closing. You can find more details about the fee on the [Realty Transfer Fee page](https://www.nj.gov/treasury/taxation/realty.shtml) on the Division of Taxation website.
 
-Remember that the process of acquiring commercial real estate can be complex, and regulations may vary depending on the location and property type. It's crucial to seek guidance from experienced professionals throughout the entire process to ensure a successful acquisition.
+
+**Additional Considerations:** Remember that the process of acquiring commercial real estate can be complex, and regulations may vary depending on the location and property type. It's crucial to seek guidance from experienced professionals throughout the entire process to ensure a successful acquisition.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
