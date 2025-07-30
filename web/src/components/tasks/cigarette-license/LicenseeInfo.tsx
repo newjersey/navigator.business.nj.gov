@@ -12,6 +12,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
+import { ContactInformation } from "@/components/tasks/cigarette-license/fields/ContactInformation";
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
@@ -98,7 +99,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           fullWidth
         >
           {/* do we need to override text? */}
-          <ResponsibleOwnerName inputWidth="full" />
+          <ResponsibleOwnerName inputWidth="full" required />
         </ProfileField>
         <ProfileField
           fieldName="tradeName"
@@ -106,7 +107,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           hideLine
           fullWidth
         >
-          <TradeName inputWidth="full" />
+          <TradeName inputWidth="full" required />
         </ProfileField>
       </div>
       <div className="margin-y-2">
@@ -143,6 +144,12 @@ export const LicenseeInfo = (props: Props): ReactElement => {
       <p>{Config.cigaretteLicenseStep2.mailingAddressDescription}</p>
 
       <MailingAddress />
+
+      {/* Contact Information*/}
+      <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.contactInformationHeader}</h2>
+      <p>{Config.cigaretteLicenseStep2.contactInformationDescription}</p>
+
+      <ContactInformation />
 
       {/* footer */}
       <HorizontalLine />
