@@ -26,6 +26,7 @@ id: asbestos-notification
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/a\
   sbestos/index.shtml "
 callToActionText: Submit My Notification of Asbestos Abatement
+industryId: remediation-waste
 agencyAdditionalContext: NJ Department of Labor and Workforce Development,
   Asbestos Control and Licensing Section and NJ Department of Health and Senior
   Services, Consumer and Environmental Health Services
@@ -106,8 +107,7 @@ If work must start in less than 10 days, include a letter from the building owne
 
 :::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-* You can't remove asbestos in New Jersey and may be subject to legal consequences, including fines
-* Each day you work without notice counts as a separate violation
+You can't remove asbestos in New Jersey and may be subject to legal consequences, including fines. Each day you work without notice counts as a separate violation.
 
 :::
 
