@@ -106,7 +106,7 @@ interface Props {
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
-  tasksDisplayContent: FormationDbaDisplayContent;
+  formationDbaContent: FormationDbaDisplayContent;
   addOns: IndustryRoadmap[];
   industries: Industry[];
 }
@@ -311,7 +311,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     );
 
     const businessFormationInfo: TaskWithoutLinks[] = Object.values(
-      props.tasksDisplayContent.formationDbaContent,
+      props.formationDbaContent.formationDbaContent,
     );
     setBusinessFormationMatches(
       searchBusinessFormation(businessFormationInfo, lowercaseTerm, "business-formation-dba-tasks"),
@@ -516,7 +516,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
-      tasksDisplayContent: loadFormationDbaContent(),
+      formationDbaContent: loadFormationDbaContent(),
       addOns: loadAllAddOns(),
       industries: getIndustries(),
     },
