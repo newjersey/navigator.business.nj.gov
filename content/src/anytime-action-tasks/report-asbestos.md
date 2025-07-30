@@ -23,6 +23,8 @@ issuingAgency: " NJ Department of Labor and Workforce Development, Asbestos
 callToActionText: Submit My Notification of Asbestos Abatement
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/a\
   sbestos/index.shtml "
+synonyms:
+  - asbestos, abatement
 ---
 ## Asbestos Work That Does Not Require Notification
 
