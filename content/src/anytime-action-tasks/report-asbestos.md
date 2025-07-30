@@ -28,3 +28,42 @@ You don’t need a Notification of Asbestos Abatement if **any** of the followin
 * You’re working on roofing or exterior siding that contains asbestos, unless it’s for demolition
 * You’re only selling or storing asbestos, not disturbing it
 * Your company is using your own trained employees to handle asbestos at your own facility, and those employees are covered by federal Occupational Safety and Health Administration (OSHA) rules
+
+## Application Requirements
+
+### Notification
+
+* Name of building owner
+* Name and license number of abatement contractor
+* Name and address of monitoring firm hired by building owner
+* Project manager name and phone number
+* All agencies you are alerting asbestos removal to 
+* Applicable fees paid
+
+### Facility 
+
+* Name and address of the facility where you will remove asbestos
+* Type of facility (for example, school, commercial building, home)
+* Current use of facility (or prior use if it is being demolished)
+* Number of floors, square footage, and age of facility
+
+### Project
+
+* Start and planned end date of asbestos work
+* Name and address of the OSHA monitor
+* Occupancy status of facility during asbestos removal
+* Scope of the work (renovation, mini-enclosure, etc.)
+
+### Asbestos-Containing Material
+
+* Location of asbestos in the building and if only maintenance staff use this area or not
+* Description of asbestos-containing material
+* Amount of material in square or linear feet
+* Type of work (removal, repair, encapsulation, or enclosure)
+
+### Waste Disposal
+
+* Name, address, and ID number of waste hauler
+* Cubic yards of waste
+* Disposal date
+* Name and address of landfill
