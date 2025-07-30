@@ -4,7 +4,8 @@
   "canHavePermanentLocation": true,
   "name": "Remediation and Waste Services",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "asbestos-abatement-question"
   ],
   "displayname": "remediation-waste",
   "industryOnboardingQuestions": {
