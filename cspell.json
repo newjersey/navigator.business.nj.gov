@@ -246,7 +246,8 @@
     "WREB",
     "XRSY",
     "Yamileth",
-    "YTTW"
+    "YTTW",
+    "revegetation"
   ],
   "ignorePaths": [
     "node_modules/**",
