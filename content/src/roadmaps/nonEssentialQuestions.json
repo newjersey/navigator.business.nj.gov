@@ -240,7 +240,7 @@
       "id": "public-works-contracting-question"
     },
     {
-      "addOn": [],
+      "addOn": "notify-asbestos",
       "anytimeActions": [],
       "questionText": "Will you or your company work with asbestos?",
       "id": "asbestos-abatement-question"
