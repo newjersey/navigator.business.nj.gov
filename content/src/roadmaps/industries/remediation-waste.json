@@ -4,10 +4,49 @@
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 50,
+      "task": "determine-naics-code",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 96,
+      "task": "business-structure",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 8,
+      "task": "bank-account"
+    },
+    {
       "step": 4,
       "weight": 1,
       "task": "asbestos-notification",
       "required": false
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "manage-business-vehicles"
     }
   ],
   "name": "Remediation and Waste Services",
@@ -36,5 +75,5 @@
   "isEnabled": false,
   "additionalSearchTerms": "abatement, asbestos, asbestos containing material, disposal, waste hauling, waste transport, hazardous waste, environmental remediation, waste removal, mold, lead, soil, oil spill cleanup, toxic, biohazard, crime scene cleanup, mine reclamation, waste treatment, revegetation, solid waste, waste management, asbestos removal contractor, lead paint removal contractor, site remediation, landfill, materials recovery, septic tank, solid waste combustor, solid waste incinerator, medical waste",
   "id": "remediation-waste",
-  "description": "Offers abatement services to clean up or remove harmful materials. Handles waste by collecting, hauling, treating, or getting rid of it safely."
+  "description": "Offers abatement services to clean up or remove harmful materials. Handles waste by collecting, hauling, treating, or getting rid of it safely"
 }
