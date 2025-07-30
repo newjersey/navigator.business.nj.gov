@@ -43,7 +43,7 @@ You don’t need a Notification of Asbestos Abatement if **any** of the followin
 
 ## Application Requirements
 
-**You must have a New Jersey asbestos license, and employees with asbestos permits. \[add links!]**
+**You must have a New Jersey asbestos license, and employees with asbestos permits.** 
 
 ### Project Contact and Compliance Information
 
