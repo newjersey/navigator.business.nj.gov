@@ -238,6 +238,12 @@
       "anytimeActions": [],
       "questionText": "Do you plan to work on `public works|public-works` projects?",
       "id": "public-works-contracting-question"
+    },
+    {
+      "addOn": [],
+      "anytimeActions": [],
+      "questionText": "Will you or your company work with asbestos?",
+      "id": "asbestos-abatement-question"
     }
   ]
 }
