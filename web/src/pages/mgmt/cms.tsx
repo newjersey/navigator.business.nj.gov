@@ -30,11 +30,13 @@ import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePrevie
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
+import EmergencyTripPermitPreview from "@/lib/cms/previews/EmergencyTripPermitPreview";
 import FormationDateDeletionModalPreview from "@/lib/cms/previews/FormationDateDeletionModalPreview";
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
 import GovernmentContractingAnytimeActionPreview from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
+import LegalMessagePreview from "@/lib/cms/previews/LegalMessagePreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
 import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
@@ -45,6 +47,7 @@ import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
 import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
+import SelfRegistrationPreview from "@/lib/cms/previews/SelfRegistrationPreview";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
 import StarterKitsPreview from "@/lib/cms/previews/StarterKitsPreview";
 import TaskPreview from "@/lib/cms/previews/TaskPreview";
@@ -91,6 +94,7 @@ const CMS = dynamic(
 
       registerPreview(CMS, "tasks", TaskPreview);
       registerPreview(CMS, "license-tasks", TaskPreview);
+      registerPreview(CMS, "abc-emergency-trip-permit", EmergencyTripPermitPreview);
       registerPreview(CMS, "webflow-licenses", TaskPreview);
       registerPreview(CMS, "funding-opportunities", FundingsPreview);
       registerPreview(CMS, "archived-funding-opportunities", FundingsPreview);
@@ -116,6 +120,10 @@ const CMS = dynamic(
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
       registerPreview(CMS, "check-account-email-page", LoginEmailCheckPreview);
+
+      registerPreview(CMS, "selfRegistration", SelfRegistrationPreview);
+
+      registerPreview(CMS, "legalMessageDefaults", LegalMessagePreview);
 
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
