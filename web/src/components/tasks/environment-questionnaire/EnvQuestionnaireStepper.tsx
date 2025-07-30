@@ -105,6 +105,15 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     </div>
   );
 
+  const allOptionsAsFalse = (mediaArea: MediaArea): Record<QuestionnaireFieldIds, boolean> => {
+    const mediaAreaOptions = Object.keys(Config.envQuestionPage[mediaArea].questionnaireOptions);
+    const allOptionsAsFalse = {} as Record<QuestionnaireFieldIds, boolean>;
+    for (const option of mediaAreaOptions) {
+      allOptionsAsFalse[option as QuestionnaireFieldIds] = false;
+    }
+    return allOptionsAsFalse;
+  };
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (mediaArea === undefined) return;
     const value: QuestionnaireFieldIds = event.target.id as QuestionnaireFieldIds;
@@ -115,7 +124,8 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
         envContext.setQuestionnaireData((prevData) => ({
           ...prevData,
           [mediaArea]: {
-            [value]: event.target.checked,
+            ...allOptionsAsFalse(mediaArea),
+            [noSelectionOption]: event.target.checked,
           },
         }));
       }
