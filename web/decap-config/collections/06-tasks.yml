@@ -1178,7 +1178,7 @@ collections:
         name: abc-emergency-trip-permit
         file: content/src/fieldConfig/abc-emergency-trip-permit.json
         editor:
-          preview: false
+          preview: true
         fields:
           - label: "ABC Emergency Trip Permit"
             name: abcEmergencyTripPermit

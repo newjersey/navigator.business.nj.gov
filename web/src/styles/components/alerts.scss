@@ -24,3 +24,9 @@
   border-right-color: variables.$secondary;
   color: variables.$base-darkest;
 }
+
+.disable-position-for-cms div {
+  position: unset;
+  transform: unset;
+  -webkit-transform: unset;
+}
