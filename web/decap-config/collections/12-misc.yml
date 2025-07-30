@@ -480,7 +480,7 @@ collections:
         name: "legalMessageDefaults"
         file: "content/src/fieldConfig/legal-message-defaults.json"
         editor:
-          preview: false
+          preview: true
         fields:
           - label: Legal Messages
             name: legalMessageDefaults
@@ -605,7 +605,7 @@ collections:
         name: "selfRegistration"
         file: "content/src/fieldConfig/self-registration.json"
         editor:
-          preview: false
+          preview: true
         fields:
           - label: Self Registration
             name: selfRegistration
