@@ -10,8 +10,10 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import {
   generateBusiness,
+  generateEnvironmentData,
   generateEnvironmentQuestionnaireData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test/factories";
@@ -41,73 +43,85 @@ describe("<CheckEnvPermits />", () => {
   const setShowNeedsAccountModal = jest.fn();
   const setShowContinueWithoutSaving = jest.fn();
 
-  describe("questionnaire", () => {
-    it("opens 'Needs Account' modal when the stepper is clicked and updates step", async () => {
-      render(
-        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
+  const renderComponent = (environmentData?: Partial<EnvironmentData>): void => {
+    render(
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(
+          generateBusiness({
+            environmentData: generateEnvironmentData({ ...environmentData }),
+          }),
+        )}
+      >
+        <EnvPermit task={generateTask({})} />
+      </WithStatefulUserData>,
+    );
+  };
+
+  const renderComponentWithNeedsAccountContext = ({
+    isAuthenticated,
+    userWantsToContinueWithoutSaving,
+  }: {
+    isAuthenticated?: boolean;
+    userWantsToContinueWithoutSaving?: boolean;
+  }): void => {
+    render(
+      withNeedsAccountContext(
+        <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
+          <EnvPermit task={generateTask({})} />
+        </WithStatefulUserData>,
+        isAuthenticated ? IsAuthenticated.TRUE : IsAuthenticated.FALSE,
+        {
           setShowNeedsAccountModal: setShowNeedsAccountModal,
-        }),
-      );
-      fireEvent.click(screen.getByTestId(`stepper-1`));
-      await waitFor(() => {
-        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-      });
-      expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
-    });
-
-    it("opens 'Needs Account' modal when the start button is clicked and updates step", async () => {
-      render(
-        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
-          setShowNeedsAccountModal: setShowNeedsAccountModal,
-        }),
-      );
-      startQuestionnaire();
-      await waitFor(() => {
-        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-      });
-      expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
-    });
-
-    it("sets returnToLink on 'Needs Account Modal' opening", async () => {
-      render(
-        withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-          IsAuthenticated.FALSE,
-          {
-            setShowNeedsAccountModal: setShowNeedsAccountModal,
-          },
-        ),
-      );
-      startQuestionnaire();
-      await waitFor(() => {
-        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-      });
-      expect(currentBusiness().preferences.returnToLink).toEqual(ROUTES.envPermit);
-    });
-
-    it("sets showContinueWithoutSaving to true when on the first step, is not authenticated and user hasn't clicked continue without saving", async () => {
-      render(
-        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
           setShowContinueWithoutSaving: setShowContinueWithoutSaving,
-        }),
-      );
-      startQuestionnaire();
-      await waitFor(() => {
-        return expect(setShowContinueWithoutSaving).toHaveBeenCalledWith(true);
-      });
-    });
+          userWantsToContinueWithoutSaving: userWantsToContinueWithoutSaving ?? false,
+        },
+      ),
+    );
+  };
 
-    it("doesn't open 'Needs Account' modal when continueWithoutSaving is true", async () => {
-      render(
-        withNeedsAccountContext(<EnvPermit task={generateTask({})} />, IsAuthenticated.FALSE, {
-          userWantsToContinueWithoutSaving: true,
-        }),
-      );
-      startQuestionnaire();
-      await waitFor(() => {
-        return expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
+  describe("questionnaire", () => {
+    describe("Needs Account modal", () => {
+      it("opens 'Needs Account' modal when the stepper is clicked and updates step", async () => {
+        renderComponentWithNeedsAccountContext({});
+        fireEvent.click(screen.getByTestId(`stepper-1`));
+        await waitFor(() => {
+          return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+        });
+        expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
+      });
+
+      it("opens 'Needs Account' modal when the start button is clicked and updates step", async () => {
+        renderComponentWithNeedsAccountContext({});
+        startQuestionnaire();
+        await waitFor(() => {
+          return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+        });
+        expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
+      });
+
+      it("sets returnToLink on 'Needs Account Modal' opening", async () => {
+        renderComponentWithNeedsAccountContext({});
+        startQuestionnaire();
+        await waitFor(() => {
+          return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+        });
+        expect(currentBusiness().preferences.returnToLink).toEqual(ROUTES.envPermit);
+      });
+
+      it("sets showContinueWithoutSaving to true when on the first step, is not authenticated and user hasn't clicked continue without saving", async () => {
+        renderComponentWithNeedsAccountContext({});
+        startQuestionnaire();
+        await waitFor(() => {
+          return expect(setShowContinueWithoutSaving).toHaveBeenCalledWith(true);
+        });
+      });
+
+      it("doesn't open 'Needs Account' modal when continueWithoutSaving is true", async () => {
+        renderComponentWithNeedsAccountContext({ userWantsToContinueWithoutSaving: true });
+        startQuestionnaire();
+        await waitFor(() => {
+          return expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
+        });
       });
     });
 
@@ -118,7 +132,7 @@ describe("<CheckEnvPermits />", () => {
       ["drinkingWater", 4],
       ["wasteWater", 5],
     ])("renders the %s step", async (mediaArea, stepIndex) => {
-      render(<EnvPermit task={generateTask({})} />);
+      renderComponent();
       fireEvent.click(screen.getByTestId(`stepper-${stepIndex}`));
       await waitFor(() => {
         expect(screen.getByTestId(`${mediaArea}-questionnaire`)).toBeInTheDocument();
@@ -126,7 +140,7 @@ describe("<CheckEnvPermits />", () => {
     });
 
     it("steps forward in the questionnaire when Save and Continue is clicked", async () => {
-      render(<EnvPermit task={generateTask({})} />);
+      renderComponent();
       fireEvent.click(screen.getByTestId(`stepper-1`));
       expect(screen.getByTestId(`air-questionnaire`)).toBeInTheDocument();
       goToNextStep();
@@ -135,7 +149,7 @@ describe("<CheckEnvPermits />", () => {
     });
 
     it("steps backward in the questionnaire when Back is clicked", async () => {
-      render(<EnvPermit task={generateTask({})} />);
+      renderComponent();
       fireEvent.click(screen.getByTestId(`stepper-2`));
       expect(screen.getByTestId(`land-questionnaire`)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.envQuestionPage.generic.backButtonText));
@@ -144,7 +158,7 @@ describe("<CheckEnvPermits />", () => {
     });
 
     it("throws an error if nothing is selected and navigates to step one", () => {
-      render(<EnvPermit task={generateTask({})} />);
+      renderComponent();
       fireEvent.click(screen.getByTestId(`stepper-5`));
       saveAndSeeResults();
       expect(screen.getByTestId("stepper-error-alert")).toBeInTheDocument();
@@ -152,7 +166,7 @@ describe("<CheckEnvPermits />", () => {
     });
 
     it("navigates to the appropriate step when the step is clicked within the error alert", () => {
-      render(<EnvPermit task={generateTask({})} />);
+      renderComponent();
       fireEvent.click(screen.getByTestId(`stepper-5`));
       saveAndSeeResults();
       const errorAlert = screen.getByTestId("stepper-error-alert");
@@ -166,11 +180,7 @@ describe("<CheckEnvPermits />", () => {
     });
 
     it("saves the questionnaire data when the Save and Continue button is clicked on the final page", () => {
-      render(
-        <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
-          <EnvPermit task={generateTask({})} />
-        </WithStatefulUserData>,
-      );
+      renderComponent();
       startQuestionnaire();
       fireEvent.click(screen.getByTestId("constructionActivities"));
       goToNextStep();
@@ -195,33 +205,59 @@ describe("<CheckEnvPermits />", () => {
       );
       expect(currentBusiness().environmentData?.submitted).toBe(true);
     });
+
+    it("clears everything if 'none of the above' is selected", () => {
+      renderComponent({
+        questionnaireData: generateEnvironmentQuestionnaireData({
+          airOverrides: { constructionActivities: true },
+          landOverrides: { propertyAssessment: true },
+          wasteOverrides: { compostWaste: true },
+          drinkingWaterOverrides: { combinedWellCapacity: true },
+          wasteWaterOverrides: { localSewage: true },
+        }),
+        submitted: false,
+      });
+      startQuestionnaire();
+      expect(getCheckBoxByTestId("constructionActivities")).toBeChecked();
+      fireEvent.click(screen.getByTestId("noAir"));
+      expect(getCheckBoxByTestId("noAir")).toBeChecked();
+      expect(getCheckBoxByTestId("constructionActivities")).not.toBeChecked();
+    });
+
+    it("clears 'none of the above' if something else is selected", () => {
+      renderComponent({
+        questionnaireData: generateEnvironmentQuestionnaireData({
+          airOverrides: { noAir: true },
+          landOverrides: { propertyAssessment: true },
+          wasteOverrides: { compostWaste: true },
+          drinkingWaterOverrides: { combinedWellCapacity: true },
+          wasteWaterOverrides: { localSewage: true },
+        }),
+        submitted: false,
+      });
+      startQuestionnaire();
+      expect(getCheckBoxByTestId("noAir")).toBeChecked();
+      fireEvent.click(screen.getByTestId("constructionActivities"));
+      expect(getCheckBoxByTestId("constructionActivities")).toBeChecked();
+      expect(getCheckBoxByTestId("noAir")).not.toBeChecked();
+    });
   });
 
   describe("results", () => {
     describe("applicable", () => {
-      const businessWithApplicableSubmittedQuestionnaire = generateBusiness({
-        environmentData: {
-          submitted: true,
-          questionnaireData: generateEnvironmentQuestionnaireData({
-            airOverrides: { constructionActivities: true },
-            landOverrides: { noLand: true },
-            wasteOverrides: { noWaste: true },
-            drinkingWaterOverrides: { combinedWellCapacity: true },
-            wasteWaterOverrides: { localSewage: true },
-          }),
-        },
-      });
+      const submittedQuestionnaire = {
+        submitted: true,
+        questionnaireData: generateEnvironmentQuestionnaireData({
+          airOverrides: { constructionActivities: true },
+          landOverrides: { noLand: true },
+          wasteOverrides: { noWaste: true },
+          drinkingWaterOverrides: { combinedWellCapacity: true },
+          wasteWaterOverrides: { localSewage: true },
+        }),
+      };
 
       it("displays only the applicable contact cards", async () => {
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(
-              businessWithApplicableSubmittedQuestionnaire,
-            )}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        renderComponent(submittedQuestionnaire);
         expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
         fireEvent.click(screen.getByText(Config.envResultsPage.contactDep.title));
         expect(screen.getByTestId("contact-air")).toBeInTheDocument();
@@ -232,15 +268,7 @@ describe("<CheckEnvPermits />", () => {
       });
 
       it("displays only the applicable responses", async () => {
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(
-              businessWithApplicableSubmittedQuestionnaire,
-            )}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        renderComponent(submittedQuestionnaire);
         expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
         fireEvent.click(screen.getByText(Config.envResultsPage.seeYourResponses.title));
         expect(screen.getByTestId("air-responses")).toBeInTheDocument();
@@ -251,15 +279,7 @@ describe("<CheckEnvPermits />", () => {
       });
 
       it("only shows the applicable media areas in the description", () => {
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(
-              businessWithApplicableSubmittedQuestionnaire,
-            )}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        renderComponent(submittedQuestionnaire);
         const applicableMediaAreas = `${Config.envResultsPage.summary.mediaAreaText.air}, ${Config.envResultsPage.summary.mediaAreaText.drinkingWater}, and ${Config.envResultsPage.summary.mediaAreaText.wasteWater}`;
         expect(screen.getByTestId("applicable-media-areas")).toHaveTextContent(
           applicableMediaAreas,
@@ -267,22 +287,15 @@ describe("<CheckEnvPermits />", () => {
       });
 
       it("displays the media areas joined by an 'and' in the description when only two media areas are applicable", () => {
-        const businessWithTwoApplicableMediaArea = generateBusiness({
-          environmentData: {
-            submitted: true,
-            questionnaireData: generateEnvironmentQuestionnaireData({
-              airOverrides: { constructionActivities: true },
-              drinkingWaterOverrides: { combinedWellCapacity: true },
-            }),
-          },
-        });
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(businessWithTwoApplicableMediaArea)}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        const envDataWithTwoApplicableMediaArea = {
+          submitted: true,
+          questionnaireData: generateEnvironmentQuestionnaireData({
+            airOverrides: { constructionActivities: true },
+            drinkingWaterOverrides: { combinedWellCapacity: true },
+          }),
+        };
+
+        renderComponent(envDataWithTwoApplicableMediaArea);
         const applicableMediaAreas = `${Config.envResultsPage.summary.mediaAreaText.air} and ${Config.envResultsPage.summary.mediaAreaText.drinkingWater}`;
         expect(screen.getByTestId("applicable-media-areas")).toHaveTextContent(
           applicableMediaAreas,
@@ -290,21 +303,13 @@ describe("<CheckEnvPermits />", () => {
       });
 
       it("displays a single media area in the description when only one is applicable", () => {
-        const businessWithOneApplicableMediaArea = generateBusiness({
-          environmentData: {
-            submitted: true,
-            questionnaireData: generateEnvironmentQuestionnaireData({
-              drinkingWaterOverrides: { combinedWellCapacity: true },
-            }),
-          },
-        });
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(businessWithOneApplicableMediaArea)}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        const envDataWithOneApplicableMediaArea = {
+          submitted: true,
+          questionnaireData: generateEnvironmentQuestionnaireData({
+            drinkingWaterOverrides: { combinedWellCapacity: true },
+          }),
+        };
+        renderComponent(envDataWithOneApplicableMediaArea);
         const applicableMediaAreas = `${Config.envResultsPage.summary.mediaAreaText.drinkingWater}`;
         expect(screen.getByTestId("applicable-media-areas")).toHaveTextContent(
           applicableMediaAreas,
@@ -312,15 +317,7 @@ describe("<CheckEnvPermits />", () => {
       });
 
       it("takes the user back to step 0 when the Edit button is clicked", () => {
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(
-              businessWithApplicableSubmittedQuestionnaire,
-            )}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        renderComponent(submittedQuestionnaire);
         expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
         fireEvent.click(screen.getByText(Config.envResultsPage.editText));
         expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
@@ -328,59 +325,33 @@ describe("<CheckEnvPermits />", () => {
     });
 
     describe("not applicable", () => {
-      const businessWithNonApplicableSubmittedQuestionnaire = generateBusiness({
-        environmentData: {
-          submitted: true,
-          questionnaireData: generateEnvironmentQuestionnaireData({
-            airOverrides: { noAir: true },
-            landOverrides: { noLand: true },
-            wasteOverrides: { noWaste: true },
-            drinkingWaterOverrides: { noDrinkingWater: true },
-            wasteWaterOverrides: { noWasteWater: true },
-          }),
-        },
-      });
+      const envDataWithNotApplicableSubmittedQuestionnaire = {
+        submitted: true,
+        questionnaireData: generateEnvironmentQuestionnaireData({
+          airOverrides: { noAir: true },
+          landOverrides: { noLand: true },
+          wasteOverrides: { noWaste: true },
+          drinkingWaterOverrides: { noDrinkingWater: true },
+          wasteWaterOverrides: { noWasteWater: true },
+        }),
+      };
 
       it("shows the low applicablity summary page", () => {
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(
-              businessWithNonApplicableSubmittedQuestionnaire,
-            )}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        renderComponent(envDataWithNotApplicableSubmittedQuestionnaire);
         expect(
           screen.getByText(Config.envResultsPage.lowApplicability.summaryLineOne),
         ).toBeInTheDocument();
       });
 
       it("takes the user back to step zero when the Edit button is clicked", () => {
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(
-              businessWithNonApplicableSubmittedQuestionnaire,
-            )}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        renderComponent(envDataWithNotApplicableSubmittedQuestionnaire);
         expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
         fireEvent.click(screen.getByText(Config.envResultsPage.editText));
         expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
       });
 
       it("takes the user back to step zero when 'redo this form' is clicked", () => {
-        render(
-          <WithStatefulUserData
-            initialUserData={generateUserDataForBusiness(
-              businessWithNonApplicableSubmittedQuestionnaire,
-            )}
-          >
-            <EnvPermit task={generateTask({})} />
-          </WithStatefulUserData>,
-        );
+        renderComponent(envDataWithNotApplicableSubmittedQuestionnaire);
         expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
         fireEvent.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
         expect(screen.getByText(Config.envQuestionPage.instructions.lineOne)).toBeInTheDocument();
@@ -399,4 +370,8 @@ const saveAndSeeResults = (): void => {
 
 const startQuestionnaire = (): void => {
   fireEvent.click(screen.getByText(Config.envQuestionPage.generic.startingButtonText));
+};
+
+const getCheckBoxByTestId = (testId: string): HTMLInputElement => {
+  return within(screen.getByTestId(testId) as HTMLInputElement).getByRole("checkbox");
 };
