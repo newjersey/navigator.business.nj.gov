@@ -1,6 +1,6 @@
 import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
-import { loadRoadmapSideBarDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
+import { loadFormationDbaContent, loadRoadmapSideBarDisplayContent } from "./loadDisplayContent";
 
 jest.mock("fs");
 jest.mock("process", () => ({
@@ -49,7 +49,7 @@ describe("loadDisplayContent", () => {
     it("returns formationDbaContent from markdown", () => {
       const introParagraph = "### I am a header\n\nI am a description";
       mockedFs.readFileSync.mockReturnValue(introParagraph);
-      expect(loadTasksDisplayContent().formationDbaContent.Authorize.contentMd).toEqual(
+      expect(loadFormationDbaContent().formationDbaContent.Authorize.contentMd).toEqual(
         "### I am a header\n\nI am a description",
       );
     });

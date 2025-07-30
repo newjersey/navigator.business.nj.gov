@@ -6,7 +6,7 @@ import {
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { FormationStepNames, TasksDisplayContent } from "@/lib/types/types";
+import { FormationDbaDisplayContent, FormationStepNames } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
@@ -110,7 +110,7 @@ const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<BusinessFormationPaginator />", () => {
   let business: Business;
-  let displayContent: TasksDisplayContent;
+  let displayContent: FormationDbaDisplayContent;
 
   beforeEach(() => {
     jest.resetAllMocks();

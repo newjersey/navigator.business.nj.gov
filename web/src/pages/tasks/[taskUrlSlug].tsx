@@ -11,11 +11,11 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadFormationDbaContent } from "@/lib/static/loadDisplayContent";
 import { loadAllHousingMunicipalities } from "@/lib/static/loadHousingMunicipalities";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
-import { Task, TasksDisplayContent } from "@/lib/types/types";
+import { FormationDbaDisplayContent, Task } from "@/lib/types/types";
 import { getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import {
   businessStructureTaskId,
@@ -31,7 +31,7 @@ import { ReactElement, useMemo } from "react";
 
 interface Props {
   task: Task;
-  displayContent: TasksDisplayContent;
+  displayContent: FormationDbaDisplayContent;
   municipalities: Municipality[];
   housingMunicipalities: HousingMunicipality[];
 }
@@ -138,7 +138,7 @@ export const getStaticProps = ({
   return {
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),
-      displayContent: loadTasksDisplayContent(),
+      displayContent: loadFormationDbaContent(),
       municipalities: loadAllMunicipalities(),
       housingMunicipalities: loadAllHousingMunicipalities(),
     },

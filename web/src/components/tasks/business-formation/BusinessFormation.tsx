@@ -17,7 +17,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import { Task, TasksDisplayContent } from "@/lib/types/types";
+import { FormationDbaDisplayContent, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
@@ -40,7 +40,7 @@ import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
   task: Task | undefined;
-  displayContent: TasksDisplayContent;
+  displayContent: FormationDbaDisplayContent;
 }
 
 export const BusinessFormation = (props: Props): ReactElement => {

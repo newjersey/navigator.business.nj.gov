@@ -1,8 +1,8 @@
 import {
   FormationDbaContent,
+  FormationDbaDisplayContent,
   RoadmapDisplayContent,
   SidebarCardContent,
-  TasksDisplayContent,
   TaskWithoutLinks,
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
@@ -59,7 +59,7 @@ const getDbaTasks = (): FormationDbaContent => {
   };
 };
 
-export const loadTasksDisplayContent = (): TasksDisplayContent => {
+export const loadFormationDbaContent = (): FormationDbaDisplayContent => {
   return {
     formationDbaContent: getDbaTasks(),
   };

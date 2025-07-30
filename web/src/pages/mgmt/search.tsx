@@ -39,8 +39,8 @@ import {
   loadAllContextualInfo,
 } from "@/lib/static/loadContextualInfo";
 import {
+  loadFormationDbaContent,
   loadRoadmapSideBarDisplayContent,
-  loadTasksDisplayContent,
 } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -61,6 +61,7 @@ import {
   Certification,
   ContextualInfoFile,
   Filing,
+  FormationDbaDisplayContent,
   Funding,
   LicenseEventType,
   NonEssentialQuestion,
@@ -69,7 +70,6 @@ import {
   SidebarCardContent,
   Step,
   Task,
-  TasksDisplayContent,
   TaskWithoutLinks,
   WebflowLicense,
   XrayRenewalCalendarEventType,
@@ -106,7 +106,7 @@ interface Props {
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
-  tasksDisplayContent: TasksDisplayContent;
+  formationDbaContent: FormationDbaDisplayContent;
   addOns: IndustryRoadmap[];
   industries: Industry[];
 }
@@ -311,7 +311,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     );
 
     const businessFormationInfo: TaskWithoutLinks[] = Object.values(
-      props.tasksDisplayContent.formationDbaContent,
+      props.formationDbaContent.formationDbaContent,
     );
     setBusinessFormationMatches(
       searchBusinessFormation(businessFormationInfo, lowercaseTerm, "business-formation-dba-tasks"),
@@ -516,7 +516,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
-      tasksDisplayContent: loadTasksDisplayContent(),
+      formationDbaContent: loadFormationDbaContent(),
       addOns: loadAllAddOns(),
       industries: getIndustries(),
     },
