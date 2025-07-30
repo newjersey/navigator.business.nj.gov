@@ -362,7 +362,6 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const hasBusinessPersonaChanged =
         profileData.businessPersona !== updateQueue.currentBusiness().profileData.businessPersona;
-
       if (page.current === 1 && hasBusinessPersonaChanged) {
         newProfileData = {
           ...emptyProfileData,
@@ -389,9 +388,18 @@ const OnboardingPage = (props: Props): ReactElement => {
         setCurrentFlow(getFlow(profileData));
       }
 
+      if (
+        newProfileData.businessPersona === "FOREIGN" &&
+        newProfileData.foreignBusinessTypeIds.length === 0 &&
+        page.current === 2
+      )
+        return;
+
       const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
       setAnalyticsDimensions(newProfileData);
+
+      console.log(page.current);
 
       if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
         router &&
