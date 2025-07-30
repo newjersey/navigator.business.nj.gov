@@ -180,6 +180,22 @@ describe("onboarding - foreign business", () => {
       ).toBeInTheDocument();
     });
 
+    it("prevents user from moving past Step 2 if you check a foreign business type and uncheck it leaving no foreign business type checked", async () => {
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+      page.checkByLabelText(transactionsInNJ);
+      page.checkByLabelText(transactionsInNJ);
+      page.clickNext();
+      await waitFor(() => {
+        expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      });
+      expect(
+        screen.getByText(
+          Config.profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired,
+        ),
+      ).toBeInTheDocument();
+    });
+
     it("allows user to move past Step 2 if you have made a selection", async () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
