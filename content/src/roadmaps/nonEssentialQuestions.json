@@ -151,7 +151,7 @@
       "addOnWhenYes": "community-rtk-survey"
     },
     {
-      "questionText": "Do you plan to fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
+      "questionText": "Do you plan to fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/crtk/rtknaics.pdf)?",
       "id": "other-businesses-CRTK-survey",
       "addOnWhenNo": "",
       "addOnWhenYes": "community-rtk-survey"
@@ -245,7 +245,9 @@
       "questionText": "Will you buy products for resale, or will you sell products to resellers?",
       "addOnWhenNo": "",
       "addOnWhenYes": "resale-certificate",
-      "anytimeActions": ["resale-tax-certificate"]
+      "anytimeActions": [
+        "resale-tax-certificate"
+      ]
     },
     {
       "addOnWhenNo": "",
@@ -258,7 +260,9 @@
       "questionText": "You are a demo industry user. This is an example non-essential question that is being used to add an Anytime Action. Answering \"yes\" will add the Anytime Action \"Demo Anytime Action\".",
       "addOnWhenNo": "",
       "addOnWhenYes": "",
-      "anytimeActions": ["demo-only"]
+      "anytimeActions": [
+        "demo-only"
+      ]
     },
     {
       "id": "well-driller",
