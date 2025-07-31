@@ -8,8 +8,15 @@ applyToAllUsers: true
 industryIds: []
 sectorIds: []
 urlSlug: close-your-business
-summaryDescriptionMd: "If you plan to sell, close, or move your business,
-  complete the following steps:"
+summaryDescriptionMd: >-
+  
+
+  :::infoAlert 
+   If you sell real estate with a value of more than $1 million, you are responsible for an additional fee at closing. You can find more details about the fee on the [Realty Transfer Fee page](https://www.nj.gov/treasury/taxation/realty.shtml) on the Division of Taxation website.
+  :::
+
+
+  If you plan to sell, close, or move your business, complete the following steps:
 callToActionText: File to Close Your Business
 callToActionLink: https://www.njportal.com/dor/annualreports
 synonyms:

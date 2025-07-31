@@ -18,7 +18,9 @@
     {
       "id": "arts-entertainment-and-recreation",
       "name": "Arts, Entertainment, and Recreation",
-      "nonEssentialQuestionsIds": []
+      "nonEssentialQuestionsIds": [
+        "resale-tax-cert"
+      ]
     },
     {
       "id": "cannabis",
@@ -83,7 +85,9 @@
     {
       "id": "other-services",
       "name": "Other Services",
-      "nonEssentialQuestionsIds": ["resale-tax-cert"]
+      "nonEssentialQuestionsIds": [
+        "resale-tax-cert"
+      ]
     },
     {
       "id": "professional-scientific-and-technical-services",

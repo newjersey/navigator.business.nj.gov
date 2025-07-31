@@ -3,5 +3,4 @@ header: Prevailing Wage
 id: prevailing-wage
 displayname: prevailing-wage
 ---
-
-Prevailing wage refers to the wage and benefit rates that are based on the specific craft or trade and the location of the work.
+Prevailing wage means the typical pay and benefits given to workers in a certain job or trade, based on where the work is being done.

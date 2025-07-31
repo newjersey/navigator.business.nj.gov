@@ -1,0 +1,12 @@
+{
+  "roadmapSteps": [
+    {
+      "task": "asbestos-notification",
+      "weight": 1,
+      "step": 4,
+      "required": true
+    }
+  ],
+  "id": "notify-asbestos",
+  "displayname": "notify-asbestos"
+}
