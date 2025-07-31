@@ -8,6 +8,7 @@ import { housingRouterFactory } from "@api/housingRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
+import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
 import { userRouterFactory } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
@@ -15,6 +16,7 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
+import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
 import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
@@ -254,6 +256,15 @@ const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
 });
 const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
+// TODO fill in correct values
+const cigaretteLicenseClient = ApiCigaretteLicenseClient(logger, {
+  baseUrl: "",
+  apiKey: "",
+  merchantCode: "",
+  merchantKey: "",
+  serviceCode: "",
+});
+
 const BUSINESS_NAME_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
     ? "http://localhost:9000"
@@ -447,6 +458,7 @@ app.use(
     logger,
   ),
 );
+app.use("/api", cigaretteLicenseRouterFactory(cigaretteLicenseClient, dynamoDataClient, logger));
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient, logger));
 app.use(
   "/api",
