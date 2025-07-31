@@ -243,7 +243,9 @@
       "addOn": "notify-asbestos",
       "anytimeActions": [],
       "questionText": "Will you or your company work with asbestos?",
-      "id": "asbestos-abatement-question"
+      "id": "asbestos-abatement-question",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "notify-asbestos"
     }
   ]
 }
