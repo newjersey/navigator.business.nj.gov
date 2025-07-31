@@ -3,244 +3,291 @@
     {
       "id": "ticket-broker-resell",
       "questionText": "Do you plan to resell admission tickets to places of entertainment and charge more than the original price?",
-      "addOn": "ticket-broker-reseller"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "ticket-broker-reseller"
     },
     {
       "id": "multiple-dwelling-register",
       "questionText": "Do you plan to own a multiple dwelling, such as an apartment or condominium complex?",
-      "addOn": "multiple-dwelling-registration"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "multiple-dwelling-registration"
     },
     {
       "id": "hotel-register",
       "questionText": "Do you plan to own a hotel, motel, or guesthouse with 10 rooms or more?",
-      "addOn": "lodging-hotel-registration"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "lodging-hotel-registration"
     },
     {
       "id": "carnival-ride-permitting",
       "questionText": "Do you plan to own and/or operate a carnival or amusement ride?",
-      "addOn": "entertainment-carnival-ride-permit"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "entertainment-carnival-ride-permit"
     },
     {
       "id": "carnival-fire-licenses",
       "questionText": "Do you plan to own and/or operate a traveling carnival or circus?",
-      "addOn": "entertainment-carnival-fire-licenses"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "entertainment-carnival-fire-licenses"
     },
     {
       "id": "hotel-food",
       "questionText": "Do you plan to serve food?",
-      "addOn": "lodging-food"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "lodging-food"
     },
     {
       "id": "hotel-liquor",
       "questionText": "Do you plan to serve liquor, including beer or wine?",
-      "addOn": "lodging-liquor"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "lodging-liquor"
     },
     {
-      "addOn": "weights-measures-add",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "weights-measures-add",
       "id": "weights-measures",
       "questionText": "Do you plan to use a weighing or measuring device, such as a scale or meter, for your business?"
     },
     {
       "questionText": "Are you a dentist?",
-      "addOn": "healthcare-dentist",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "healthcare-dentist",
       "id": "dentist"
+    },
+    {
+      "questionText": "Does your dental office generate amalgam waste?",
+      "addOnWhenYes": "dental-waste-registration",
+      "id": "dental-amalgam-waste",
+      "addOnWhenNo": "dental-waste-exemption"
     },
     {
       "id": "special-permit-dentistry",
       "questionText": "Do you specialize in any area of dentistry, such as orthodontics or oral surgery?",
-      "addOn": "healthcare-dental-specialty"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "healthcare-dental-specialty"
     },
     {
       "id": "dental-hygienist",
       "questionText": "Are you a dental hygienist?",
-      "addOn": "healthcare-dental-hygienist"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "healthcare-dental-hygienist"
     },
     {
       "id": "freestanding-residential-health-care-license",
       "questionText": "Do you plan to own and/or operate a `free-standing residential health care facility?|residential-health-care-facility`",
-      "addOn": "healthcare-freestanding-facility-license"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "healthcare-freestanding-facility-license"
     },
     {
       "id": "rooming-boarding-house-owner",
       "questionText": "Do you plan to own and/or operate a rooming or boarding house?",
-      "addOn": "lodging-rooming-boarding-house"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "lodging-rooming-boarding-house"
     },
     {
-      "addOn": "entertainment-agency-registration",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "entertainment-agency-registration",
       "id": "entertainment-agency-register",
       "questionText": "Do you plan to provide entertainment booking services in New Jersey?"
     },
     {
       "questionText": "Do you plan to offer electrologist/electrolysis services?",
-      "addOn": "cosmetology-electrologist-license",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "cosmetology-electrologist-license",
       "id": "electrologist"
     },
     {
       "id": "petcare-cds-shelter",
       "questionText": "Do you plan to store sodium pentobarbital for animal euthanasia?",
-      "addOn": "petcare-shelter"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "petcare-shelter"
     },
     {
       "id": "petcare-cds-trainer",
       "questionText": "Do you plan to train dogs to detect illegal substances?",
-      "addOn": "petcare-trainer"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "petcare-trainer"
     },
     {
       "id": "cds-lab-research ",
       "questionText": "Do you plan to test or research Controlled Dangerous Substances (CDS)?",
-      "addOn": "other-lab-research"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "other-lab-research"
     },
     {
       "questionText": "Do you plan to make, buy, or sell products that contain Controlled Dangerous Substances (CDS)?",
-      "addOn": "other-cds-supply",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "other-cds-supply",
       "id": "cds-supply"
     },
     {
       "questionText": "Do you plan to sell cigarettes, have a cigarette vending machine, or be a cigarette manufacturer sales representative?",
       "id": "cigarette-manufacture-sell",
-      "addOn": "cigarettes-add"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "cigarettes-add"
     },
     {
-      "addOn": "planner",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "planner",
       "id": "planning-services",
       "questionText": "Do you plan to offer professional planning services?"
     },
     {
-      "addOn": "healthcare-xray-reg",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "healthcare-xray-reg",
       "id": "healthcare-xray-regis",
       "questionText": "Do you plan to be using x-ray machines?"
     },
     {
       "questionText": "Are you an optometrist?",
       "id": "healthcare-optometrist ",
-      "addOn": "healthcare-tpa"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "healthcare-tpa"
     },
     {
       "questionText": "Do you plan to deliver packages by air (for example, by airplane or helicopter)?",
       "id": "courier-CRTK-survey",
-      "addOn": "community-rtk-survey"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "community-rtk-survey"
     },
     {
       "questionText": "Do you plan to fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
       "id": "other-businesses-CRTK-survey",
-      "addOn": "community-rtk-survey"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "community-rtk-survey"
     },
     {
       "questionText": "Do you plan to sell lawn and garden supplies, flowers, or florists’ supplies?",
       "id": "lawn-businesses-CRTK-survey",
-      "addOn": "community-rtk-survey"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "community-rtk-survey"
     },
     {
       "questionText": "Do you plan to do management consulting services (not including manufacturing management, physical distribution, and site location consulting)?",
       "id": "logistics-CRTK-survey",
-      "addOn": "community-rtk-survey"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "community-rtk-survey"
     },
     {
       "id": "pest-pesticide-dealer-licensing",
       "questionText": "Do you plan to sell pesticides?",
-      "addOn": "pest-pesticide-dealer-license"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "pest-pesticide-dealer-license"
     },
     {
       "id": "retail-pesticide-dealer-licensing",
       "questionText": "Do you plan to sell pesticides?",
-      "addOn": "retail-pesticide-dealer-license"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "retail-pesticide-dealer-license"
     },
     {
       "id": "pesticides-applicator-licensing",
       "questionText": "Do you plan to use pesticides or offer pesticide application services?",
-      "addOn": "multi-pest-applicator-license"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "multi-pest-applicator-license"
     },
     {
       "id": "crematory",
       "questionText": "Will you be constructing and/or operating a crematory?",
-      "addOn": "crematory-application-funeral"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "crematory-application-funeral"
     },
     {
       "questionText": "Will your business or facility use a boiler with a significant heating capacity?",
       "id": "inspect-boiler",
-      "addOn": "boiler"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "boiler"
     },
     {
       "id": "regulated-medical-waste-question",
       "questionText": "Will your business have `Regulated Medical Waste (RMW)|regulated-medical-waste` ?",
-      "addOn": "regulated-medical-waste-generator-registration"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "regulated-medical-waste-generator-registration"
     },
     {
       "id": "business-vehicle-irp",
       "questionText": "Will you operate vehicles over 26,000 pounds, or that have 3 or more axles, in 2 or more states or Canadian provinces?",
-      "addOn": "vehicle-irp"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "vehicle-irp"
     },
     {
       "id": "inspect-pv",
       "questionText": "Will your business or facility use a large pressure vessel (a vessel without a \"UM\" stamp)?",
-      "addOn": "pv-certificate"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "pv-certificate"
     },
     {
       "id": "inspect-fridge",
       "questionText": "Will your business or facility use a large refrigerator or cooling system?",
-      "addOn": "refrigeration-certificate"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "refrigeration-certificate"
     },
     {
       "id": "bus-initial-inspection",
-      "addOn": "transportation-initial-inspection",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "transportation-initial-inspection",
       "questionText": "Will your business use commercial vehicles, such as school or shuttle buses, to transport passengers?"
     },
     {
       "id": "insurance-producer",
       "questionText": "Will you sell, solicit, or negotiate insurance products?",
-      "addOn": "produce-insurance"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "produce-insurance"
     },
     {
       "id": "sell-milk-question",
       "questionText": "Will you sell milk or other milk products, such as yogurt or cream?",
-      "addOn": "sell-milk"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "sell-milk"
     },
     {
       "id": "resale-tax-cert",
       "questionText": "Will you buy products for resale, or will you sell products to resellers?",
-      "addOn": "resale-certificate",
-      "anytimeActions": [
-        "resale-tax-certificate"
-      ]
+      "addOnWhenNo": "",
+      "addOnWhenYes": "resale-certificate",
+      "anytimeActions": ["resale-tax-certificate"]
     },
     {
-      "addOn": "vehicle-cpcn",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "vehicle-cpcn",
       "questionText": "“Will your business provide intrastate transportation of passengers to and from **casinos in Atlantic city,** or **in exchange for compensation** from passengers or groups?”",
       "id": "mvc-cpcn"
     },
     {
       "id": "demo-only",
       "questionText": "You are a demo industry user. This is an example non-essential question that is being used to add an Anytime Action. Answering \"yes\" will add the Anytime Action \"Demo Anytime Action\".",
-      "addOn": "",
-      "anytimeActions": [
-        "demo-only"
-      ]
+      "addOnWhenNo": "",
+      "addOnWhenYes": "",
+      "anytimeActions": ["demo-only"]
     },
     {
       "id": "well-driller",
       "questionText": "Do you plan to install, repair, or modify wells for your customer’s business?\n",
-      "addOn": "construction-well-driller-license"
+      "addOnWhenNo": "",
+      "addOnWhenYes": "construction-well-driller-license"
     },
     {
-      "addOn": "vehicle-dealership-neq",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "vehicle-dealership-neq",
       "anytimeActions": [],
       "id": "vehicle-dealership-q",
       "questionText": "Will your business sell or lease 4 or more vehicles or boats in a given year?"
     },
     {
-      "addOn": "cdl-addon",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "cdl-addOnWhenYes",
       "anytimeActions": [],
       "id": "cdl-neq",
       "questionText": "Will your business use commercial vehicles weighing over 26,000 pounds to haul loads or transport passengers?"
     },
     {
-      "addOn": [],
+      "addOnWhenNo": "",
+      "addOnWhenYes": "",
       "anytimeActions": [],
       "questionText": "Do you plan to work on `public works|public-works` projects?",
       "id": "public-works-contracting-question"
     },
     {
-      "addOn": "notify-asbestos",
       "anytimeActions": [],
       "questionText": "Will you or your company work with asbestos?",
       "id": "asbestos-abatement-question",

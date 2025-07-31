@@ -310,7 +310,6 @@ collections:
                 name: addOnWhenYes
                 required: false
                 widget: "relation"
-                default: []
                 collection: "addons"
                 search_fields: [displayname]
                 value_field: "{{fields.id}}"
@@ -320,7 +319,6 @@ collections:
                 name: addOnWhenNo
                 required: false
                 widget: "relation"
-                default: []
                 collection: "addons"
                 search_fields: [displayname]
                 value_field: "{{fields.id}}"
