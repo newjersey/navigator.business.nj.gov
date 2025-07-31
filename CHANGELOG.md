@@ -1,3 +1,28 @@
+# [2025.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.16.0...v2025.17.0) (2025-07-31)
+
+
+### Bug Fixes
+
+* [AB[#14389](https://github.com/newjersey/navigator.business.nj.gov/issues/14389)] Replace snack bar with page level error on onboarding ([ab54ab7](https://github.com/newjersey/navigator.business.nj.gov/commit/ab54ab7ebd3a32941927fc244517f7a2384a74b1))
+* [AB[#14929](https://github.com/newjersey/navigator.business.nj.gov/issues/14929)] remove unused alert body field from cms ([fcb693c](https://github.com/newjersey/navigator.business.nj.gov/commit/fcb693c3db91db3ae28b34cbe5f755639db6d764))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] flatten cigarette license object ([efa0b7e](https://github.com/newjersey/navigator.business.nj.gov/commit/efa0b7ee1a44784311b0b04bf2112bd877908d53))
+* [AB[#15014](https://github.com/newjersey/navigator.business.nj.gov/issues/15014)] Resolve Untracked Sections in CMS ([c2f3f02](https://github.com/newjersey/navigator.business.nj.gov/commit/c2f3f0295d9d8822c3cf4df5e92ba75d5263061f))
+* [AB[#15014](https://github.com/newjersey/navigator.business.nj.gov/issues/15014)] Resolve Untracked Sections in CMS ([4aef9bf](https://github.com/newjersey/navigator.business.nj.gov/commit/4aef9bf6ace0271b027b63454a5ffea3d9272e94))
+* [AB[#7218](https://github.com/newjersey/navigator.business.nj.gov/issues/7218)] content updates for env permit ([45ba861](https://github.com/newjersey/navigator.business.nj.gov/commit/45ba861cca3f32a9dcf8a7ab28d51c6e35d15dad))
+* added ERISA to cspell words ([15498c6](https://github.com/newjersey/navigator.business.nj.gov/commit/15498c6de0b050d6583b753541bd279c51035ae8))
+* **deps:** update dependency axios to v1.11.0 [security] ([f54ffe7](https://github.com/newjersey/navigator.business.nj.gov/commit/f54ffe74e359cc4cc39c89df959ca88427db19e3))
+
+
+### Features
+
+* [AB[#13035](https://github.com/newjersey/navigator.business.nj.gov/issues/13035)] Preview Improvements, Formation Date Deletion Modal ([4987f8e](https://github.com/newjersey/navigator.business.nj.gov/commit/4987f8e026903f144f3f69661a8e87a65ed1921b))
+* [AB[#13035](https://github.com/newjersey/navigator.business.nj.gov/issues/13035)] Preview Improvements, NJEDA and Email Login Check ([5dd8611](https://github.com/newjersey/navigator.business.nj.gov/commit/5dd86110e81e653f148478faa856231f27d58184))
+* [AB[#13035](https://github.com/newjersey/navigator.business.nj.gov/issues/13035)] Preview Improvements, starter kits page ([8c92af1](https://github.com/newjersey/navigator.business.nj.gov/commit/8c92af18110f714a6eeb5371f0305f9c1698513b))
+* [AB[#13423](https://github.com/newjersey/navigator.business.nj.gov/issues/13423)] fixed registration status enablement ([b3a1a47](https://github.com/newjersey/navigator.business.nj.gov/commit/b3a1a4767d8e94c8615515d0a0aa582d6638f907))
+* [AB[#13902](https://github.com/newjersey/navigator.business.nj.gov/issues/13902)] Add Tax Clearance Cypress Test ([977b341](https://github.com/newjersey/navigator.business.nj.gov/commit/977b341e8ae0231591c3732b684f2525955a4e4f))
+* [AB[#14389](https://github.com/newjersey/navigator.business.nj.gov/issues/14389)] Replace snack bar with page level error on onboarding ([036cfff](https://github.com/newjersey/navigator.business.nj.gov/commit/036cfffac8810ff45644689ee3148cb040dca5c6))
+* [AB[#15159](https://github.com/newjersey/navigator.business.nj.gov/issues/15159)] add non-essential questions to industry sectors ([d05e044](https://github.com/newjersey/navigator.business.nj.gov/commit/d05e044bdf9b68a28ade2d5134e0e2902f9aa96a))
+
 # [2025.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.15.1...v2025.16.0) (2025-07-21)
 
 
