@@ -43,6 +43,8 @@ export const MISSING_FIELD =
   "Mandatory Field Missing. TaxpayerId, TaxpayerName, AddressLine1, City, State, Zip, Agency name, Rep Id and RepName are required.";
 export const NATURAL_PROGRAM_ERROR = "Error calling Natural Program. Please try again later.";
 
+("Business Status Verification Failed.");
+
 const makeTaxClearanceRequest = async (
   config: Config,
   requestBody: Record<string, unknown>,
@@ -149,6 +151,20 @@ export const ApiTaxClearanceCertificateClient = (
 
     return makeTaxClearanceRequest(config, postBody)
       .then((response: AxiosResponse) => {
+        // If one of the required keys is not present, the response
+        // is likely an object representing an indexed HTML string,
+        // which we often get as a result of a firewall.
+        if (response.data.certificate === undefined) {
+          const htmlString = Object.keys(response.data)
+            .sort((a, b) => Number.parseInt(a) - Number.parseInt(b))
+            .map((key) => response.data[key])
+            .join("");
+
+          const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Error: Received HTML response indicating a potential firewall issue. ${htmlString}`;
+          logWriter.LogError(errorMessage);
+          throw errorMessage;
+        }
+
         logWriter.LogInfo(
           `Tax Clearance Certificate Client - Id:${logId} - Response received: ${JSON.stringify({
             ...response.data,
@@ -353,7 +369,25 @@ export const ApiTaxClearanceCertificateClient = (
     };
 
     return makeTaxClearanceRequest(config, healthCheckBody)
-      .then(() => {
+      .then((response) => {
+        if (response.data.certificate === undefined) {
+          const htmlString = Object.keys(response.data)
+            .sort((a, b) => Number.parseInt(a) - Number.parseInt(b))
+            .map((key) => response.data[key])
+            .join("");
+
+          logWriter.LogError(
+            `Tax Clearance Certificate Health Check Failed - Id:${logId} - Potential Firewall Error: ${htmlString}`,
+          );
+          return {
+            success: false,
+            error: {
+              message: ReasonPhrases.BAD_GATEWAY,
+              timeout: false,
+            },
+          } as HealthCheckMetadata;
+        }
+
         return {
           success: true,
           data: {
@@ -362,6 +396,14 @@ export const ApiTaxClearanceCertificateClient = (
         } as HealthCheckMetadata;
       })
       .catch((error: AxiosError) => {
+        if (error.status === 400) {
+          return {
+            success: true,
+            data: {
+              message: ReasonPhrases.OK,
+            },
+          } as HealthCheckMetadata;
+        }
         logWriter.LogError(
           `Tax Clearance Certificate Health Check Failed - Id:${logId} - Error:`,
           error,
