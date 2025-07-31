@@ -291,6 +291,19 @@ describe("TaxClearanceCertificateClient", () => {
     spyOnLogError.mockRestore();
   });
 
+  it("throws error when receiving a response without a certificate property", async () => {
+    mockAxios.post.mockResolvedValue({
+      response: { data: {} },
+    });
+    await expect(
+      client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
+    ).rejects.toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+  });
+
   it("throws error when error response is unknown", async () => {
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.INTERNAL_SERVER_ERROR },
@@ -477,8 +490,21 @@ describe("TaxClearanceCertificateClient", () => {
 
   describe("health", () => {
     it("returns a passing health check if data can be retrieved successfully", async () => {
-      mockAxios.post.mockResolvedValue({});
+      mockAxios.post.mockResolvedValue({ data: { certificate: [1] } });
       expect(await client.health()).toEqual({ success: true, data: { message: "OK" } });
+    });
+
+    it("returns a failing health check if data might be an HTML firewall response", async () => {
+      mockAxios.post.mockResolvedValue({
+        data: { "0": "<", "1": "h", "2": "t", "3": "m", "4": "l" },
+      });
+      expect(await client.health()).toEqual({
+        success: false,
+        error: {
+          message: ReasonPhrases.BAD_GATEWAY,
+          timeout: false,
+        },
+      });
     });
 
     it("returns a failing health check if unexpected data is retrieved", async () => {
