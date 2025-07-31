@@ -94,8 +94,6 @@ export type CigaretteLicenseGetOrderByTokenResponse = {
 };
 
 export type CigaretteLicenseOrderDetails = {
-  serviceName: string;
-  orderAmount: number;
   orderId: number;
   orderStatus: string;
   timestamp: string;

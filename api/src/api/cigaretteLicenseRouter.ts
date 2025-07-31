@@ -26,7 +26,7 @@ export const cigaretteLicenseRouterFactory = (
   const router = Router();
 
   router.post(
-    "/prepare-payment",
+    "/cigarette-license/prepare-payment",
     async (req: ExpressRequestBody<CigaretteLicensePostBody>, res) => {
       const { userData } = req.body;
       const method = req.method;
@@ -49,40 +49,38 @@ export const cigaretteLicenseRouterFactory = (
               )}ms`,
             );
             res.status(status).json(paymentResponse.errorResult);
-          } else {
-            const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
-              ...business,
-              cigaretteLicenseData: {
-                ...business.cigaretteLicenseData,
-                paymentInfo: {
-                  token: paymentResponse.token,
-                },
-              },
-            }));
-
-            await databaseClient.put(userDataWithResponse);
-            const status = StatusCodes.OK;
-            res.status(status).json(userDataWithResponse);
-            logger.LogInfo(
-              `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, duration: ${getDurationMs(
-                requestStart,
-              )}ms`,
-            );
+            return;
           }
-        })
-        .catch(() => {
-          const status = StatusCodes.INTERNAL_SERVER_ERROR;
-          logger.LogError(
-            `${method} ${endpoint} - Failed to submit cigarette license payment: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+          const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+            ...business,
+            cigaretteLicenseData: {
+              ...business.cigaretteLicenseData,
+              paymentInfo: {
+                token: paymentResponse.token,
+              },
+            },
+          }));
+
+          await databaseClient.put(userDataWithResponse);
+          const status = StatusCodes.OK;
+          res.status(status).json(paymentResponse);
+          logger.LogInfo(
+            `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, duration: ${getDurationMs(
               requestStart,
             )}ms`,
+          );
+        })
+        .catch((error: Error) => {
+          const status = StatusCodes.INTERNAL_SERVER_ERROR;
+          logger.LogError(
+            `${method} ${endpoint} - Failed to submit cigarette license payment: status: ${status}, userId: ${userId}, duration: ${getDurationMs(requestStart)}, error: ${error.message}`,
           );
           res.status(status).json();
         });
     },
   );
 
-  router.get("/get-order-by-token", async (req, res) => {
+  router.get("/cigarette-license/get-order-by-token", async (req, res) => {
     const signedInUserId = getSignedInUserId(req);
     const userData = await databaseClient.get(signedInUserId);
     const currentBusiness = getCurrentBusiness(userData);
@@ -110,7 +108,11 @@ export const cigaretteLicenseRouterFactory = (
     cigaretteLicenseClient
       .getOrderByToken(currentBusiness.cigaretteLicenseData?.paymentInfo?.token)
       .then(async (getOrderResponse: CigaretteLicenseGetOrderByTokenResponse) => {
-        if (getOrderResponse.matchingOrders === 0 || getOrderResponse.errorResult) {
+        if (
+          getOrderResponse.matchingOrders === 0 ||
+          getOrderResponse.errorResult ||
+          !getOrderResponse.orders
+        ) {
           const status = StatusCodes.OK;
           logger.LogError(
             `${method} ${endpoint} - Failed to get cigarette license order by token: error: ${getOrderResponse.errorResult?.userMessage}, userId: ${userId}, duration: ${getDurationMs(
@@ -118,42 +120,39 @@ export const cigaretteLicenseRouterFactory = (
             )}ms`,
           );
           res.status(status).json(getOrderResponse.errorResult);
-        } else {
-          const order: CigaretteLicenseOrderDetails = getOrderResponse.orders
-            ? getOrderResponse.orders[0]
-            : {
-                orderId: 0,
-                orderStatus: "",
-                timestamp: "",
-              };
-          const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
-            ...business,
-            cigaretteLicenseData: {
-              ...business.cigaretteLicenseData,
-              paymentInfo: {
-                ...business.cigaretteLicenseData?.paymentInfo,
-                orderId: order.orderId,
-                orderStatus: order.orderStatus,
-                orderTimestamp: order.timestamp,
-              },
-            },
-          }));
-          const status = StatusCodes.OK;
-          logger.LogInfo(
-            `[END] ${method} ${endpoint} - Retrieved cigarette license order by token: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
-              requestStart,
-            )}ms`,
-          );
-          await databaseClient.put(userDataWithResponse);
-          res.status(status).json(userDataWithResponse);
+          return;
         }
+
+        const order: CigaretteLicenseOrderDetails = getOrderResponse.orders[0];
+        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
+          cigaretteLicenseData: {
+            ...business.cigaretteLicenseData,
+            paymentInfo: {
+              ...business.cigaretteLicenseData?.paymentInfo,
+              orderId: order.orderId,
+              orderStatus: order.orderStatus,
+              orderTimestamp: order.timestamp,
+            },
+          },
+        }));
+        await databaseClient.put(userDataWithResponse);
+        // TODO: Make call to send email confirmation
+
+        const status = StatusCodes.OK;
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - Retrieved cigarette license order by token: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        res.status(status).json(userDataWithResponse);
       })
-      .catch(() => {
+      .catch((error: Error) => {
         const status = StatusCodes.INTERNAL_SERVER_ERROR;
         logger.LogError(
           `${method} ${endpoint} - Failed to get cigarette license order by token: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
             requestStart,
-          )}ms`,
+          )}, error: ${error.message}`,
         );
         res.status(status).json();
       });
