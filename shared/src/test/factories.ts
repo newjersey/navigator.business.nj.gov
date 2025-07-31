@@ -460,6 +460,9 @@ export const generateCigaretteLicenseData = (
     contactEmail: `some-email-${randomInt()}`,
     salesInfoStartDate: "08/31/2025",
     salesInfoSupplier: [],
+    signerName: `some-signer-name-${randomInt()}`,
+    signerRelationship: `some-signer-relationship-${randomInt()}`,
+    signature: false,
     lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
