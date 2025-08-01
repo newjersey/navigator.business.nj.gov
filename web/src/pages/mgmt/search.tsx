@@ -253,24 +253,27 @@ const SearchContentPage = (props: Props): ReactElement => {
       Steps.steps as Step[],
       lowercaseTerm,
       {
-        filename: "Steps",
+        filename: "steps",
       },
+      "Steps",
       "steps",
     );
     const domesticEmployerStepsMatches = searchSteps(
       DomesticEmployerSteps.steps as Step[],
       lowercaseTerm,
       {
-        filename: "Steps - Domestic Employer",
+        filename: "steps-domestic-employer",
       },
+      "Steps - Domestic Employer",
       "steps-domestic-employer",
     );
     const foreignStepsMatches = searchSteps(
       ForeignSteps.steps as Step[],
       lowercaseTerm,
       {
-        filename: "Steps - Dakota",
+        filename: "steps-foreign",
       },
+      "Steps - Dakota",
       "steps-foreign",
     );
     setStepsMatches([
@@ -362,7 +365,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const certCollection = {
     "Cert Opps - Content": certMatches,
-    "Cert Opps - Archive": certArchiveMatches,
+    "Cert Opps - Archived": certArchiveMatches,
   };
 
   const fundingCollection = {
@@ -371,7 +374,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const roadmapsCollection = {
     "Roadmaps - Settings": stepsMatches,
-    "Roadmaps - Non Essential Question": nonEssentialQuestionsMatches,
+    "Roadmaps - Non Essential Questions": nonEssentialQuestionsMatches,
     "Roadmaps - Industries": industryMatches,
   };
 
@@ -389,12 +392,13 @@ const SearchContentPage = (props: Props): ReactElement => {
   };
 
   const anytimeActionCollection = {
-    "Anytime Action Tasks": anytimeActionTaskMatches,
-    "Anytime Action License Reinstatements": anytimeActionLicenseReinstatementMatches,
+    "Anytime Actions Tasks": anytimeActionTaskMatches,
+    "Anytime Action With Consumer Affairs License Integrations (Reinstatements)":
+      anytimeActionLicenseReinstatementMatches,
   };
 
   const renewalCalendarCollection = {
-    "Xray Calendar Event": xrayRenewalCalendarEventMatches,
+    "Xray Renewal Calendar Event": xrayRenewalCalendarEventMatches,
   };
 
   const authedView = (
