@@ -256,13 +256,12 @@ const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
 });
 const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
-// TODO fill in correct values
 const cigaretteLicenseClient = ApiCigaretteLicenseClient(logger, {
-  baseUrl: "",
-  apiKey: "",
-  merchantCode: "",
-  merchantKey: "",
-  serviceCode: "",
+  baseUrl: process.env.CIGARETTE_LICENSE_BASE_URL || "",
+  apiKey: process.env.CIGARETTE_LICENSE_API_KEY || "",
+  merchantCode: process.env.CIGARETTE_LICENSE_MERCHANT_CODE || "",
+  merchantKey: process.env.CIGARETTE_LICENSE_MERCHANT_KEY || "",
+  serviceCode: process.env.CIGARETTE_LICENSE_SERVICE_CODE || "",
 });
 
 const BUSINESS_NAME_BASE_URL =
