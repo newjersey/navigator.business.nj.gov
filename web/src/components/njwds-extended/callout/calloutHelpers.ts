@@ -32,7 +32,7 @@ export const CALLOUT_STYLES: Record<CalloutTypes, CalloutStyling> = {
   quickReference: {
     backgroundColor: "bg-base-lightest",
     textColor: "text-primary-darker",
-    headerIcon: "",
+    headerIcon: "callout-quickReference-icon",
   },
 };
 
