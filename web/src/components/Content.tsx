@@ -6,7 +6,7 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { Callout } from "@/components/njwds-extended/callout/Callout";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
@@ -59,10 +59,9 @@ export const Content = (props: ContentProps): ReactNode => {
     },
     callout: (props: any): ReactElement => {
       return (
-        <Callout
+        <LargeCallout
           showHeader={props.showHeader}
           headerText={props.headerText}
-          showIcon={props.showIcon}
           calloutType={props.calloutType}
           amountIconText={props.amountIconText}
           filingTypeIconText={props.filingTypeIconText}
@@ -71,7 +70,7 @@ export const Content = (props: ContentProps): ReactNode => {
           emailIconText={props.emailIconText}
         >
           {props.children}
-        </Callout>
+        </LargeCallout>
       );
     },
     infoAlert: (props: any): ReactElement => {

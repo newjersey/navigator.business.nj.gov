@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { Callout } from "@/components/njwds-extended/callout/Callout";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -218,10 +218,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
           displaySocialEquityPriorityType) && (
           <>
             <hr />
-            <Callout
+            <LargeCallout
               calloutType="conditional"
               headerText={Config.cannabisPriorityStatus.greenBoxHeadingText}
-              showIcon={true}
             >
               <ul>
                 {displayMWPriorityType && (
@@ -234,7 +233,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                   <li>{Config.cannabisPriorityStatus.greenBoxSocialEquityText}</li>
                 )}
               </ul>
-            </Callout>
+            </LargeCallout>
           </>
         )}
       </div>

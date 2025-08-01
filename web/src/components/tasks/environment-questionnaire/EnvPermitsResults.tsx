@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Callout } from "@/components/njwds-extended/callout/Callout";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ContactDep } from "@/components/tasks/environment-questionnaire/results/ContactDep";
 import { PersonalizedSupport } from "@/components/tasks/environment-questionnaire/results/PersonalizedSupport";
@@ -65,7 +65,7 @@ export const EnvPermitsResults = (): ReactElement => {
             <Content>{Config.envResultsPage.lowApplicability.summaryLineTwo}</Content>
           </div>
         </div>
-        <Callout calloutType={"quickReference"}>
+        <LargeCallout calloutType={"quickReference"}>
           <span>
             {Config.envResultsPage.lowApplicability.callout}
             <UnStyledButton
@@ -76,7 +76,7 @@ export const EnvPermitsResults = (): ReactElement => {
               {Config.envResultsPage.lowApplicability.calloutRedo}
             </UnStyledButton>
           </span>
-        </Callout>
+        </LargeCallout>
       </>
     );
   };

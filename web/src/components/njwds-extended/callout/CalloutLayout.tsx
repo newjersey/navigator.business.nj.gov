@@ -11,7 +11,7 @@ export interface CalloutStyling {
 export interface CalloutLayoutProps {
   styling: CalloutStyling;
   headingText?: string;
-  showIcon: boolean;
+  showIcon?: boolean;
   showHeader: boolean;
   iconItems: IconTextProps[];
   children?: ReactNode;

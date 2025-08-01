@@ -10,7 +10,6 @@ export type CalloutTypes = "informational" | "conditional" | "warning" | "quickR
 export interface CalloutProps extends IconProps {
   calloutType: CalloutTypes;
   showHeader?: string | boolean;
-  showIcon?: string | boolean;
   headerText?: string;
 }
 
@@ -49,10 +48,9 @@ const getDefaultHeadingText = (config: ConfigType, calloutType: CalloutTypes): s
   return key ? config.calloutDefaults[key] : "";
 };
 
-export const Callout = (props: PropsWithChildren<CalloutProps>): ReactElement => {
+export const LargeCallout = (props: PropsWithChildren<CalloutProps>): ReactElement => {
   const { Config } = useConfig();
   const styling = CALLOUT_STYLES[props.calloutType];
-  const showIcon = Boolean(props.showIcon) && props.calloutType !== "quickReference";
   const showHeader = Boolean(props.showHeader ?? false);
 
   const headingText =
@@ -66,7 +64,6 @@ export const Callout = (props: PropsWithChildren<CalloutProps>): ReactElement =>
     <CalloutLayout
       styling={styling}
       headingText={headingText}
-      showIcon={showIcon}
       showHeader={showHeader}
       iconItems={iconItems}
     >

@@ -1,3 +1,4 @@
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitCountryDropdown";
 import { EmergencyTripPermitDatePicker } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitDatePicker";
@@ -8,7 +9,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
-import { Callout } from "@/components/njwds-extended/callout/Callout";
 
 export const TripStep = (): ReactElement => {
   const { Config } = useConfig();
@@ -73,9 +73,9 @@ export const TripStep = (): ReactElement => {
         </div>
       </form>
       <div>
-        <Callout calloutType="informational" showIcon="true" showHeader>
+        <LargeCallout calloutType="informational" showHeader>
           {Config.abcEmergencyTripPermit.steps.trip.informationalCallOutText}
-        </Callout>
+        </LargeCallout>
       </div>
     </>
   );
