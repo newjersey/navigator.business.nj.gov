@@ -37,7 +37,7 @@ isSbe: false
 - An estimate of the number of employees you will have after 3 years in the UEZ program
 - Estimated total amount of projected capital investment. Calculate this using the [capital investment workbook](https://www.nj.gov/dca/uez/forms/pdf/5-CapitalInvestWkbk-Cert.xls) (Excel file download)
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An Urban Enterprise Zone (UEZ) certification.
 

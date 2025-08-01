@@ -22,7 +22,7 @@ issuingAgency: Department of Environmental Protection, Radiation Protection Elem
 - New Jersey Environmental Management System (NJEMS) bill ID, if applicable
 - Applicable fees paid
 
-:::callout{showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{showHeader="true" headerText="" calloutType="conditional" }
 
 You will not receive a confirmation after renewing your registration. However, you can confirm by
 emailing bxc@dep.nj.gov.

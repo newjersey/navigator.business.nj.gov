@@ -36,13 +36,13 @@ webflowId: 66e9d9648d1f1a667a8f04ab
 - Criminal background check
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 You can't work as an electrologist in New Jersey and may be subject to significant fines and legal penalties.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An electrologist license number.
 

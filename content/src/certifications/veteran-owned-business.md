@@ -30,7 +30,7 @@ isSbe: false
 - Proof of Honorable Discharge from the US Military form DD-214 for the majority of owner(s)
 - Proof of New Jersey residency for majority owner(s)
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Veteran-Owned Business certificate.
 

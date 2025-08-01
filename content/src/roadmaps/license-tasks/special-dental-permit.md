@@ -47,13 +47,13 @@ P.O. Box 45005
 \
 Newark, NJ 07101
 
-:::callout{ showHeader="true" headerText="What if I don't get this certificate?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this certificate?" calloutType="warning" }
 
 You can’t advertise dental specialty services. Doing so may result in legal consequences, including fines.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A specialty permit including a number, sent to your mailing address on record.
 

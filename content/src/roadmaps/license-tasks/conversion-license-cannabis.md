@@ -31,7 +31,7 @@ licenseCertificationClassification: LICENSE
 - \[]{cannabis-final-agreements} Final agreements, such as signed vendor contracts, if applicable
 - \[]{cannabis-priority-status-proof} Proof you still meet the requirements to be a `Social Equity Business|social-equity-business-cannabis` , `Diversely-Owned Business|diversely-owned-business-cannabis` , and `Impact Zone Business|impact-zone-business-cannabis` , if applicable
 
-:::callout{ showHeader="true" headerText="Once approved, you will have:" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once approved, you will have:" calloutType="conditional" }
 
 A conversion license, which you need to legally run your cannabis business.
 

@@ -38,7 +38,7 @@ To schedule an inspection, contact the NJ MVC School Bus Inspection Unit at **(6
 
 After passing inspection, take Form SS-14 to any NJ Motor Vehicle Agency to purchase license plates and registration.
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Form SS-14 "Authorization to Issue School Bus License Plates"
 - MVC-issued inspection sticker, to be displayed on the vehicle

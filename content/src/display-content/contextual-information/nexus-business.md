@@ -11,7 +11,7 @@ A nexus business is an out-of-state business (also known as a foreign business) 
 - You have property, including inventory housed in a 3rd party warehouse
 - You have company-operated vehicles making business-related stops (deliveries or pickups)
 
-:::callout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you have a licensing agreement with a business in New Jersey, this may qualify you as a nexus business.
 

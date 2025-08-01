@@ -32,7 +32,7 @@ This application needs to be notarized.
 - Information on your business's gross revenue for the last 3 completed tax years
 - Business formation date (for LLC, C corps, LPs and LLPs) You can find this date on your `Certificate of Formation|certificate-formation`
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Small Business Enterprise certificate.
 

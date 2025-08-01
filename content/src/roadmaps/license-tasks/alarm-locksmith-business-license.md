@@ -30,13 +30,13 @@ webflowId: 6721493ccddf06cbf7fe46b4
 - Applicable fees paid (the Advisory Committee will send a license fee letter once the application is approved)
 - The affidavit on the application executed before a notary public
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If your business qualifier licensee fails to renew their license, the business license will expire.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A business license number.
 

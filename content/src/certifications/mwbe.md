@@ -36,7 +36,7 @@ isSbe: false
 - An applicant's certificate of birth, motor vehicle driver's license, passport, or another acceptable form of identification
 - An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Minority/Women-Owned Business Enterprise certificate.
 

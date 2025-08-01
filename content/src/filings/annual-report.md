@@ -19,13 +19,13 @@ callToActionText: File Your Annual Report
 - Names and addresses of all business partners
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Confirmation of submission of your annual report
 
 :::
 
-:::callout{ showHeader="true" headerText="What if do not complete my report?" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if do not complete my report?" calloutType="conditional" }
 
 After 2 missed annual reports, you may lose your authority to do business in New Jersey, your `Business Registration Certificate|business-reg-certificate\` may be invalidated, and you could lose access to state services, including funding opportunities and licenses.
 
