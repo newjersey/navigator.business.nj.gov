@@ -31,7 +31,7 @@ ${einInputComponent}
 
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - An EIN
 - An EIN Certificate (the document indicating your EIN)

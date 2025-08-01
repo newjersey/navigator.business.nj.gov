@@ -28,13 +28,13 @@ webflowId: 648b6ec542e491936c7da99e
 - Original fingerprint receipt from `IdentoGo|identogo`
 - Applicable fees paid
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+:::callout{ showHeader="false" headerText="" calloutType="informational" }
 
 You must also complete, sign, and notarize an [Employee Statement Form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) for each of your employees. The form must be kept with your business records
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A registration confirmation for each of your employees.
 

@@ -25,7 +25,7 @@ synonyms:
 - Certificate of general liability insurance
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An electrical contracting business permit.
 

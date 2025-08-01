@@ -18,7 +18,7 @@ licenseCertificationClassification: ""
 licenseName: ""
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A food safety management certificate.
 

@@ -40,7 +40,7 @@ You need your desired business name.
 
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A registered trade name.
 

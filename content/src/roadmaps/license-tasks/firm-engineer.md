@@ -33,13 +33,13 @@ webflowId: 6414793b798bdb29a5fe9567
 - The number of shares issued (if the firm is a corporation)
 - Applicable fees paid
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+:::callout{ showHeader="false" headerText="" calloutType="informational" }
 
 The application must be notarized.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate of authorization with an authorization number for your firm.
 

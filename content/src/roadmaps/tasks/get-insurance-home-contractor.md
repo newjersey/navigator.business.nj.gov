@@ -22,7 +22,7 @@ callToActionText: ""
 
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Certificate of Insurance.
 

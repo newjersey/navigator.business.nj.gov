@@ -41,7 +41,7 @@ publishStageArchive: ""
 
 Venture funds must be actively investing in New Jersey’s innovative industries.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive investment capital commitments up to $10M.
 

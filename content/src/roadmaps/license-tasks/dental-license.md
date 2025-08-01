@@ -53,13 +53,13 @@ verify the information and return the form with the appropriate fee to receive y
 - List of past professional license applications including dates, if applicable
 - Explanation of license suspension, denial, revocation, or surrender, if applicable
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" calloutType="conditional" }
 
 You cannot legally perform dentistry and may be subject to significant fines.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A dental license number, valid for 2 years.
 

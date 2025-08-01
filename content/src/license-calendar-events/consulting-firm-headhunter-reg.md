@@ -19,5 +19,5 @@ callToActionText: Renew My Consulting Firm (Headhunter) Registration
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
 A renewed consulting firm (headhunter) registration valid for one year. It will be sent to your mailing address on file.

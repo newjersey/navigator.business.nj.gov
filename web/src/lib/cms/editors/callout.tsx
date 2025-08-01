@@ -10,13 +10,6 @@ export default {
       options: ["conditional", "informational", "warning", "quickReference"],
     },
     {
-      name: "showIcon",
-      label: "Header Icon",
-      widget: "boolean",
-      default: false,
-      hint: "quickReference does not have a header icon",
-    },
-    {
       name: "showHeader",
       label: "Show Header?",
       widget: "boolean",
@@ -166,7 +159,7 @@ export default {
     phoneIconText: string;
     emailIconText: string;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
+    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
   },
   toPreview: (obj: {
     showHeader: boolean;
@@ -180,6 +173,6 @@ export default {
     phoneIconText: string;
     emailIconText: string;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
+    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
   },
 };
