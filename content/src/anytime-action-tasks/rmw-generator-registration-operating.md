@@ -74,7 +74,7 @@ You need to update your registration if your facility changes:
 - Registration number, if you are updating your registration
 - Applicable fees paid
 
-  :::callout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
   Each year, NJDEP will email you a bill to renew your registration. The annual fee is due within 30 days of the billing date.
 
@@ -82,13 +82,13 @@ You need to update your registration if your facility changes:
 
   If you have questions about RMW registration, email mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3.
 
-  :::callout{ showHeader="true" headerText="What if I don’t register?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="What if I don’t register?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
   If your business generates RMW without a registration, you may face penalties.
 
   :::
 
-  :::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
   An RMW generator ID number, sent to your email address by NJDEP.
 

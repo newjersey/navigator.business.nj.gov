@@ -18,7 +18,7 @@ callToActionText: ""
 - **Microbusinesses**: If you plan on being a `microbusiness|microbusiness-cannabis`, consider site requirements such as operating in an area no larger than 2,500 square feet
 - **Impact Zone Businesses:** If you qualify as an `Impact Zone Business|impact-zone-business-cannabis`, you can get priority review and approval in the cannabis license application process
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A viable site in a community that allows your cannabis business activities.
 

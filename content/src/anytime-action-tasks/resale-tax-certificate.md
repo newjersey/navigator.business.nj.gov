@@ -28,7 +28,7 @@ synonyms:
   - sales tax
 ---
 
-:::callout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
 
@@ -59,13 +59,13 @@ If you are a seller, you must:
 - Keep sales slips, receipts, statements, cash register tapes, or guest checks documenting the sale for 4 years
 - Provide certificates and any documentation upon request to the New Jersey Division of Taxation
 
-:::callout{ showHeader="true" headerText="" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you are buying products to resell without the Sales Tax Resale Certificate, you could be overpaying taxes.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A completed Sales Tax Resale Certificate.
 

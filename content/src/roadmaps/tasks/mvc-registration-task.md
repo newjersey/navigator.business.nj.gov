@@ -1,7 +1,7 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText="Keep in mind:"
+  :::largeCallout{ showHeader="true" headerText="Keep in mind:"
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -59,11 +59,11 @@ If applicable, you may also need:
 - Lease/Finance agreement
 - Fees paid, based on your vehicle type and weight
 
-:::callout{ showHeader="true" headerText="What if I don't register my vehicle?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't register my vehicle?" calloutType="warning" }
 If you use an unregistered vehicle for your business, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
 
 - A valid registration card
 - A valid license plate

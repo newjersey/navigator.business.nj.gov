@@ -45,7 +45,7 @@ Email the [pesticide applicator business license application (VPA-013) form](htt
 You will receive a license invoice from the Department of Environmental Protection (DEP). You must pay the fee for the license to be valid.
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A business license sent via mail.
 

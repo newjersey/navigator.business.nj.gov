@@ -74,13 +74,13 @@ P.O. Box 170
 
 Trenton, NJ 08666-0170
 
-:::callout{ showHeader="true" headerText="Keep in mind:" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="Keep in mind:" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You cannot register or title vehicles in your business's name without the MVC EIN. You also can't do other business-related transactions with the Motor Vehicle Commission.
 
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
 A 15-digit EIN by mail or email, depending on how you applied and the contact information you provided.
 :::
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov

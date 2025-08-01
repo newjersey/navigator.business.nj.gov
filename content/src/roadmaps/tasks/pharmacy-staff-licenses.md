@@ -23,7 +23,7 @@ webflowType: individual-license
 - [Pharmacist collaborative practice](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
 - [Immunization approvals](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Confirmation that your pharmacy staff is licensed.
 

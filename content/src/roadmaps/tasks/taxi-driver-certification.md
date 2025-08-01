@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText=""
+  :::largeCallout{ showHeader="true" headerText=""
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -56,13 +56,13 @@ Trenton, NJ 08666
 
 The process takes about 2 weeks after the application is received. The letter of qualification or disqualification will only be mailed to the employer.
 
-:::callout{ showHeader="true" headerText="What if I don't get this permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A letter of qualification or disqualification for the driver.
 

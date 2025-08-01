@@ -74,13 +74,13 @@ The certification must be signed by the principal executive officer.
 
 Select the option to apply for a TWBR (Temporary Workers Bill of Rights) certification after signing in or creating an account.
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You will have to pay a penalty for each day that an agency makes DCPs without a valid certification.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A paper certificate with a certification number beginning with "CA" followed by 6 digits.
 

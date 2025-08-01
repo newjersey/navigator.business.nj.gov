@@ -1,40 +1,14 @@
-import { CalloutLayout, CalloutStyling } from "@/components/njwds-extended/callout/CalloutLayout";
+import { CalloutLayout } from "@/components/njwds-extended/callout/CalloutLayout";
 import { ConfigType } from "@/contexts/configContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import type { PropsWithChildren, ReactElement } from "react";
 
-import { getIconItems, IconProps } from "@/components/njwds-extended/callout/calloutHelpers";
-
-export type CalloutTypes = "informational" | "conditional" | "warning" | "quickReference";
-
-export interface CalloutProps extends IconProps {
-  calloutType: CalloutTypes;
-  showHeader?: string | boolean;
-  headerText?: string;
-}
-
-const CALLOUT_STYLES: Record<CalloutTypes, CalloutStyling> = {
-  informational: {
-    backgroundColor: "bg-accent-cool-lightest",
-    textColor: "text-accent-cool-more-dark",
-    headerIcon: "callout-informational-icon",
-  },
-  conditional: {
-    backgroundColor: "bg-primary-extra-light",
-    textColor: "text-primary-darker",
-    headerIcon: "callout-conditional-icon",
-  },
-  warning: {
-    backgroundColor: "bg-warning-extra-light",
-    textColor: "text-accent-warm-darker",
-    headerIcon: "callout-warning-icon",
-  },
-  quickReference: {
-    backgroundColor: "bg-base-lightest",
-    textColor: "text-primary-darker",
-    headerIcon: "",
-  },
-};
+import {
+  CALLOUT_STYLES,
+  CalloutTypes,
+  getIconItems,
+  LargeCalloutProps,
+} from "@/components/njwds-extended/callout/calloutHelpers";
 
 const HEADING_TEXT_KEYS: Record<CalloutTypes, keyof ConfigType["calloutDefaults"]> = {
   informational: "informationalHeadingDefaultText",
@@ -48,7 +22,7 @@ const getDefaultHeadingText = (config: ConfigType, calloutType: CalloutTypes): s
   return key ? config.calloutDefaults[key] : "";
 };
 
-export const LargeCallout = (props: PropsWithChildren<CalloutProps>): ReactElement => {
+export const LargeCallout = (props: PropsWithChildren<LargeCalloutProps>): ReactElement => {
   const { Config } = useConfig();
   const styling = CALLOUT_STYLES[props.calloutType];
   const showHeader = Boolean(props.showHeader ?? false);

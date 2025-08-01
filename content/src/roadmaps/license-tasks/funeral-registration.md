@@ -70,13 +70,13 @@ P.O. Box 45009
 
 Newark, NJ 07101
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 You can’t legally operate a funeral home or mortuary establishment.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An emailed approval letter with your registration number, followed by a mailed certificate of registration sent to your mailing address.
 

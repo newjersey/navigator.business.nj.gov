@@ -12,7 +12,7 @@ callToActionLink: https://www.nj.gov/health/lh/documents/LocalHealthDirectory.pd
 callToActionText: Contact My Department of Health
 ---
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A health certificate from your local Department of Health.
 

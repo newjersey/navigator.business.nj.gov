@@ -50,7 +50,7 @@ summaryDescriptionMd: >
   * **Boat dealership**
 
 
-  :::callout{ showHeader="true" headerText=""  calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText=""  calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
   You will need to apply for more than one license if your business plans to both sell and lease vehicles or boats.
@@ -107,7 +107,7 @@ P.O. Box 170
 
 Trenton, NJ 08666-0170
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - Dealership license certificate
 - Dealership license number
@@ -116,7 +116,7 @@ Trenton, NJ 08666-0170
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I sell or lease vehicles and boats without a dealership license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I sell or lease vehicles and boats without a dealership license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - You may be issued citations or fines
 - Your business may not be able to register vehicles or get dealership plates
@@ -124,7 +124,7 @@ Trenton, NJ 08666-0170
 
 :::
 
-:::callout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-6500, ext. 5003" emailIconText=" mcscustomerservice@mvc.nj.gov" }
+:::largeCallout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-6500, ext. 5003" emailIconText=" mcscustomerservice@mvc.nj.gov" }
 
 Call or email the NJ MVC at:
 

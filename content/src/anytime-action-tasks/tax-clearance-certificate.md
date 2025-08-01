@@ -41,13 +41,13 @@ You can request your tax clearance certificate through the [Premier Business Ser
 - Zip code where you receive tax forms
 - Name of agency from which you will be applying for assistance
 
-:::callout{ showHeader="true" headerText="What happens if I’m not in good standing with my taxes?" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What happens if I’m not in good standing with my taxes?" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you have not filed or paid all required tax obligations, the Division of Taxation will not issue you a tax clearance certificate. However, you will receive instructions on what needs to be resolved to receive your tax clearance certificate.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A PDF copy of your tax clearance certificate that can be saved or printed.
 

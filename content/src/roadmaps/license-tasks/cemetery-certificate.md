@@ -58,13 +58,13 @@ P.O. Box 45036
 
 Newark, NJ 07101
 
-:::callout{ showHeader="true" headerText="What if I don't get this certificate?" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this certificate?" calloutType="conditional" }
 
 You cannot legally own or operate a cemetery company.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate of authority number, valid indefinitely.
 

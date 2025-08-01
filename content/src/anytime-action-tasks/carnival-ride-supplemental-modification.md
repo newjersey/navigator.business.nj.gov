@@ -38,13 +38,13 @@ synonyms:
 - Reason for the change
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this certification?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this certification?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you don’t get a Supplemental Modification Certification, you won’t be able to make changes to your ride.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A Supplemental Modification Certification for your ride.
 

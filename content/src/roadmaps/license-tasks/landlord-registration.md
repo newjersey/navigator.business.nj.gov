@@ -34,7 +34,7 @@ You can find your local clerk's office through the [${municipalityName} website]
 
 ## ${endLocationDependentSection}
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Certificate of Registration.
 

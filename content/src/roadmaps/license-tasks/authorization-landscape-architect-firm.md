@@ -34,7 +34,7 @@ webflowId: 66aceed5b3aedbec5e3d51bf
 - A notary signature and seal on the form
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A certificate of authorization with a number.
 

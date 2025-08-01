@@ -29,13 +29,13 @@ Complete an exemption form if any of the following are true:
 
 Note: If you complete an exemption form and CRTK says your business is exempt, you do not need to complete an exemption form every year.
 
-:::callout{ showHeader="true" headerText="What if I don't complete this task?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this task?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you don’t complete the survey or request an exemption by the deadline, you may receive significant fines and penalties.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A completed CRTK survey or an exemption.
 

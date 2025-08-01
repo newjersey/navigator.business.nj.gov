@@ -118,19 +118,19 @@ PO Box 252
 
 Trenton, NJ 08646-0252
 
-:::callout{ showHeader="false" headerText="" calloutType="informational" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="informational" }
 
 Learn about the age of sale (21) and the proper way to check an I.D. by visiting [Tobacco-Free for a Healthy New Jersey](https://www.tobaccofreenj.com/stomp).
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 You may not sell, manufacture, or have a vending machine with cigarettes. You may also be subject to significant fines and legal penalties, including imprisonment.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A printed license, sent directly to your business location.
 

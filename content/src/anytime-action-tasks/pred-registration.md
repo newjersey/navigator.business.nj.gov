@@ -47,13 +47,13 @@ It’s best to hire a real estate or land use attorney to handle the legal paper
 
 Want to register without a lawyer or have questions about the process? Contact the NJ Department of Community Affairs, Bureau of Homeowner Protection at (609) 984-7905.
 
-:::callout{ showHeader="true" headerText="What happens if I don't register?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What happens if I don't register?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you don’t register, you won’t be able to legally market, sell, or transfer ownership of any homes or units in the development. Also, you may be subject to fines and penalties.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - A registered development
 - An official `public offering statement|public-offering-statement` that you must share with all potential buyers

@@ -42,7 +42,7 @@ webflowId: 64ca743aafbb5a2c98163f9a
 - Notarized affidavit
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A cosmetology teacher license.
 

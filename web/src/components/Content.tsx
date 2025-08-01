@@ -57,7 +57,7 @@ export const Content = (props: ContentProps): ReactNode => {
     note: (props: any): ReactElement => {
       return <Alert variant="note">{props.children}</Alert>;
     },
-    callout: (props: any): ReactElement => {
+    largeCallout: (props: any): ReactElement => {
       return (
         <LargeCallout
           showHeader={props.showHeader}

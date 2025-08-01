@@ -23,7 +23,7 @@ callToActionText: ""
 - [The Latin American Economic Development Association of Southern New Jersey](http://www.laeda.com/) offers support to all entrepreneurs
 - [UCEDC](https://ucedc.com/) provides low cost or free classes and paid business mentoring services
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A business plan.
 

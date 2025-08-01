@@ -13,7 +13,7 @@ export interface CalloutLayoutProps {
   headingText?: string;
   showIcon?: boolean;
   showHeader: boolean;
-  iconItems: IconTextProps[];
+  iconItems?: IconTextProps[];
   children?: ReactNode;
 }
 
@@ -33,10 +33,12 @@ export const CalloutLayout = (props: CalloutLayoutProps): ReactElement => {
           )}
           <span className="text-bold">{props.headingText}</span>
         </div>
-        <div className="margin-top-105">
-          <div>{props.children}</div>
-          <IconTextList items={props.iconItems} />
-        </div>
+        {(props.children || (props.iconItems && props.iconItems.length > 0)) && (
+          <div className="margin-top-105">
+            <div>{props.children}</div>
+            <IconTextList items={props.iconItems} />
+          </div>
+        )}
       </div>
     );
   }

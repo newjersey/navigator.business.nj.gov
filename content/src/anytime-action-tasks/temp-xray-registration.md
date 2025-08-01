@@ -16,7 +16,7 @@ summaryDescriptionMd: >-
   You need to submit the registration form within 30 days of installation.
 
 
-  :::callout{ showHeader="true" headerText=""  calloutType="informational" }
+  :::largeCallout{ showHeader="true" headerText=""  calloutType="informational" }
 
 
   Submit a [disposition form](https://www.nj.gov/dep/rpp/reg/dispo.htm) when you remove the x-ray machine from your premises.
@@ -45,7 +45,7 @@ callToActionLink: https://www.nj.gov/dep/rpp/reg/temp.htm
 - Vehicle/trailer facility year, make, model, state, plate number, VIN, and copy of registration, if applicable
 - Max energy (kVp, mA, and MeV), if applicable
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A copy of your temporary registration number and a Facility ID for a new location sent via mail.
 

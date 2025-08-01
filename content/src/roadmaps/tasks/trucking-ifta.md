@@ -90,7 +90,7 @@ If you apply by mail, include a copy of your proof of `Federal Tax ID number.|fe
 
 After receiving your license and decals, you must file fuel taxes quarterly.
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - An IFTA license, which must be carried in each vehicle at all times
 - A set of IFTA decals for each vehicle, which must be put on the exterior of the cab on both sides
@@ -99,14 +99,14 @@ IFTA licenses must be renewed once per year online.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don’t license my vehicles under the IFTA?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t license my vehicles under the IFTA?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - You may receive fines and penalties
 - Your vehicles may be impounded until you properly register them
 - Your business may experience delays in operations, affecting delivery schedules and reputation
   :::
 
-:::callout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9400" emailIconText="mcscustomerservice@mvc.nj.gov" }
+:::largeCallout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9400" emailIconText="mcscustomerservice@mvc.nj.gov" }
 
 Contact the MVC at:
 

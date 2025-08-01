@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText=""
+  :::largeCallout{ showHeader="true" headerText=""
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -34,13 +34,13 @@ Before scheduling your initial inspection, make sure that:
 
 ## How to Schedule Your Inspection
 
-:::callout{ showHeader="true" headerText="School Buses:" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText=" (609) 633-9473" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="School Buses:" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText=" (609) 633-9473" emailIconText="" }
 
 Call the MVC School Bus Inspection Unit to schedule an initial inspection.
 
 :::
 
-:::callout{ showHeader="true" headerText="Commercial Buses:" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="609) 777-4196." emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="Commercial Buses:" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="609) 777-4196." emailIconText="" }
 
 Call the MVC Commercial Bus Inspection Unit at to schedule an initial inspection.
 
@@ -48,7 +48,7 @@ Call the MVC Commercial Bus Inspection Unit at to schedule an initial inspection
 
 You'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site.
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 **Commercial buses:**
 
@@ -63,7 +63,7 @@ You'll be asked to provide information about the bus(es), location, and facility
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't get an initial bus inspection?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get an initial bus inspection?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - You cannot legally transport passengers in the vehicle
 - You will not receive the certificates and documentation necessary to register the bus for the appropriate plates

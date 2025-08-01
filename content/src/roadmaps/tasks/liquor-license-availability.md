@@ -27,7 +27,7 @@ You can find your local clerk's office through the [${municipalityName} website]
 
 ## ${endLocationDependentSection}
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A site and restaurant policies that meet the requirements in the [Alcoholic Beverage Control (ABC) Handbook](https://www.nj.gov/oag/abc/downloads/abchandbook02.pdf).
 

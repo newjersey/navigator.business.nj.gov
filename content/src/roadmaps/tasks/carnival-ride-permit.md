@@ -41,13 +41,13 @@ Apply for a ride permit at least 30 days from your first day of operation. The p
 
 You will get a renewal application and instructions in the mail each year when it's time to renew your permit.
 
-:::callout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you are installing your ride in a permanent location or moving it to one, send a copy of your permit application, ride plans, and specifications to your local construction office and the Department of Community Affairs (DCA).
 
 :::
 
-:::callout{ showHeader="true" headerText="Once approved, you will get:" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once approved, you will get:" calloutType="conditional" }
 
 An NJ serial number plate for each ride mailed to you
 

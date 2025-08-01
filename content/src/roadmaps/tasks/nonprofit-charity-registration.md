@@ -1,7 +1,7 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText=""
+  :::largeCallout{ showHeader="true" headerText=""
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -39,13 +39,13 @@ The following charities are not required to register:
 - Any IRS correspondence received during the reported fiscal year
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don’t register my business as a charity?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t register my business as a charity?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 Your business will be considered an unregistered practice and unable to legally conduct fundraising activities.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A charity registration number.
 

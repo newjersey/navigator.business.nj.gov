@@ -18,13 +18,13 @@ agencyAdditionalContext: New Jersey Department of Treasury
 - An existing S corporation designation with the IRS
 - `Entity ID|entity-id`
 
-:::callout{ showHeader="true" headerText="What if I don't complete this form?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this form?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you do not file for an S corporation designation with the State but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A letter confirming your S corporation status with the State of New Jersey.
 

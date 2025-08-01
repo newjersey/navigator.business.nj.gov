@@ -21,7 +21,7 @@ callToActionText: Learn About New Jersey's Labor Laws
 - Required workplace notices
 - Child labor
 
-:::callout{ showHeader="true" headerText="What if I don't follow New Jersey labor laws?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't follow New Jersey labor laws?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 There may be civil or criminal penalties.
 

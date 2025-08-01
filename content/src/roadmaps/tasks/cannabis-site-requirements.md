@@ -31,7 +31,7 @@ callToActionText: ""
 - **`Certificate of Occupancy or Approval|certificate-occupancy`:** Speak to your local building/construction department to certify that your space is safe for occupancy
 - **`Life Hazard Use|life-hazard-use` or `Non-Life Hazard Use|non-life-hazard-use` registration:** Contact your `Local Enforcing Agency|lea` to see if you need to register as a Life Hazard Use or Non-Life Hazard Use. Your use type depends on whether your business poses a significant fire hazard. Your use type determines when and how often your fire inspections will occur once your site is open
 
-:::callout{ showHeader="true" headerText="Once completed, you will know:" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will know:" calloutType="conditional" }
 
 - The site-related permits and inspections you need to apply for a conversion or annual cannabis license and operate your cannabis business
 - The process for meeting your local government and CRC site requirements

@@ -37,7 +37,7 @@ These are the basic application requirements for all types of wells. There may b
 - Applicable fees paid
 - Construction deviation information (changes to the approved construction project), if applicable
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A well permit sent via email.
 

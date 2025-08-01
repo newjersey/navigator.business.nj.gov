@@ -15,7 +15,7 @@ When you authorize your business, make sure your business name and designator ma
 
 If you don't get this certificate, your application may be rejected, and your filing fees may not be refunded.
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 Proof that your business is registered for taxes and can legally operate in New Jersey.
 

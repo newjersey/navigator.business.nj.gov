@@ -35,13 +35,13 @@ You must also complete a Board-approved course in local anesthesia administratio
 
 Your application must be signed in front of and by a notary public.
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 If you practice dental hygiene without a license, you may face criminal, civil, or administrative penalties.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A 7-character license number, beginning with “LA” sent by mail.
 

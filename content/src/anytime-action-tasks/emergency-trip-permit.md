@@ -48,7 +48,7 @@ The permit is valid for 24 hours from your pickup or delivery date. You can appl
 
 If you have questions about the permit, contact ABC at (609) 984-2830.
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A downloadable PDF copy of the emergency trip permit, which you can print out or show on your phone.
 

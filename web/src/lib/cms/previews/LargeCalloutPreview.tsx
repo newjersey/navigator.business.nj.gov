@@ -5,7 +5,7 @@ import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ReactElement } from "react";
 
-const CalloutPreview = (props: PreviewProps): ReactElement => {
+const LargeCalloutPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -37,4 +37,4 @@ const CalloutPreview = (props: PreviewProps): ReactElement => {
   );
 };
 
-export default CalloutPreview;
+export default LargeCalloutPreview;

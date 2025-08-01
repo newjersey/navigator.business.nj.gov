@@ -54,7 +54,7 @@ publishStageArchive: ""
 - Must replace 75% or more of existing high global warming potential (GWP) refrigerants with lower GWP alternatives
 - The 75% switching requirement applies only to the portions of the building within the tenant’s lease or the building systems affecting the tenant’s space
 
-:::callout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Grant awards will cover 50% of eligible project costs up to a maximum award of $1,000,000 per project (with a minimum award amount of $50,000 per project).
 

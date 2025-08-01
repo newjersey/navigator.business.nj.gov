@@ -1,7 +1,7 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText="Keep in mind:"
+  :::largeCallout{ showHeader="true" headerText="Keep in mind:"
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -74,11 +74,11 @@ For vessels, you will need:
 - Proof of sales tax payment or exemption
 - USCG documentation, if the vessel is documented with the U.S. Coast Guard
 
-:::callout{ showHeader="true" headerText="What if I don't get a title?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get a title?" calloutType="warning" }
 If you operate a vehicle or vessel under an individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
 A Certificate of Title showing business ownership of the vehicles or vessels intended for business use.
 :::
 

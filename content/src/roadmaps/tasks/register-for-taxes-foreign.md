@@ -45,7 +45,7 @@ ${taxInputComponent}
 
 ---
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - `Business Registration Certificate (BRC)|business-reg-certificate`
 - `NJ Tax ID|tax-id`

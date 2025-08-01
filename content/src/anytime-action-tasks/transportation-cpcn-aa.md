@@ -13,7 +13,7 @@ sectorIds:
   - health-care-and-social-assistance
 urlSlug: transportation-cpcn-aa
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText=""
+  :::largeCallout{ showHeader="true" headerText=""
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -153,7 +153,7 @@ After submission of your petition, the NJ MVC will assign you a docket number. Y
 
 Once your Notice is published, you must obtain proof of this from the newspaper. This is called an `Affidavit of Publication|affidavit-publication`, and it must be forwarded to the above NJ MVC mailing address.
 
-:::callout{ showHeader="true" headerText="What if I don’t get a CPCN?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t get a CPCN?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - You risk fines and penalties imposed by enforcement agencies
 - Your vehicles may be impounded
@@ -161,13 +161,13 @@ Once your Notice is published, you must obtain proof of this from the newspaper.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A Certificate of Public Convenience and Necessity (CPCN) mailed to you.
 
 :::
 
-:::callout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 777-4186" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 777-4186" emailIconText="" }
 
 Call the number below:
 :::

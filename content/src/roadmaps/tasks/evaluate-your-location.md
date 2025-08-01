@@ -29,7 +29,7 @@ If you sell real estate with a value of more than $1 million, you are responsibl
 
 **Additional Considerations:** Remember that the process of acquiring commercial real estate can be complex, and regulations may vary depending on the location and property type. It's crucial to seek guidance from experienced professionals throughout the entire process to ensure a successful acquisition.
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A viable shop location and can start to plan for site renovations.
 

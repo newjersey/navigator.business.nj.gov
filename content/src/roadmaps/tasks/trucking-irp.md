@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: >
-  :::callout{ showHeader="true" headerText=""
+  :::largeCallout{ showHeader="true" headerText=""
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -69,21 +69,21 @@ Fill out form IRP-7, linked at the bottom of the page, and mail it to:
 > Trenton, NJ 08666
 > &nbsp;
 
-:::callout{ showHeader="true" headerText="What if I don’t register with the IRP?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t register with the IRP?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - Operating a vehicle that requires IRP registration without proper credentials can result in fines and penalties imposed by enforcement agencies.
 - Your vehicles may be impounded until proper registration is obtained.
 - Your business may experience delays in operations, affecting delivery schedules and reputation.
 
 :::
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - Apportioned license plates, indicating that the vehicle is registered under the IRP.
 - Cab card, listing the jurisdictions in which the vehicle is authorized to operate and the registered weights for each.
 
 :::
 
-:::callout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9400" emailIconText="mcscustomerservice@mvc.nj.gov" }
+:::largeCallout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9400" emailIconText="mcscustomerservice@mvc.nj.gov" }
 
 Contact the MVC at:
 

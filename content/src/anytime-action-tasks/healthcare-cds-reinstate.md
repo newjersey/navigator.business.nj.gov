@@ -41,7 +41,7 @@ Your reinstatement application must be signed in front of and by a notary public
 \
 Email your completed CDS application to the New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will email you an invoice to pay your fee online.
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 The same CDS registration number.
 

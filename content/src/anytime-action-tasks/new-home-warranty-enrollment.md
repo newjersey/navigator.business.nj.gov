@@ -31,7 +31,7 @@ synonyms:
   - fire marshal
 ---
 
-:::callout{ showHeader="true" headerText="Keep in mind:" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="Keep in mind:" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You are required to enroll the new homes to get a Certificate of Occupancy or a temporary Certificate of Occupancy. The homes you build cannot be legally occupied.
 
@@ -80,13 +80,13 @@ You are required to enroll the new homes to get a Certificate of Occupancy or a 
 - Copy of the construction contract between you and the homeowner, showing the total construction cost for the home. The total cost will be used to calculate the warranty premium payment
 - Notarized letter from the homeowner stating that home was built for their personal use and will not be listed for sale
 
-:::callout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You must print all 5 copies of the completed application on U.S. legal size paper (8.5 x 14.0 inches). Then, submit all 5 copies to the Department of Community Affairs at least 10 weeks before the listed warranty coverage start date.
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Four approved copies of the `Certificate of Participation|certificate-participation` for each home you enrolled in the State warranty plan:
 

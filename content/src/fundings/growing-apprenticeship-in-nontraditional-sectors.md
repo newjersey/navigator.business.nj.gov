@@ -39,7 +39,7 @@ publishStageArchive: null
 - Any employer, trade association, labor organization, and others providing apprenticeship programs for their industry
 - While all industries are encouraged to apply, preference will be given to targeted sectors including: Advanced Manufacturing Bio Pharma/Life Sciences Energy, Utilities and Infrastructure Retail, Hospitality and Tourism Financial Services/Insurance Transportation, Logistics and Distribution Information Technology/Cyber Security, Renewable Energy, Healthcare, Other Science, Technology, Engineering, and Mathematics (STEM) related sectors/occupations Construction & Building Trades Public Service.
 
-:::callout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Eligible applicants can request funding up to $12,000 per registered apprentice to:
 

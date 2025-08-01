@@ -41,13 +41,13 @@ agencyAdditionalContext: Bureau of Housing Inspection
 - Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't register?" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't register?" calloutType="warning" }
 
 If you don’t register your retreat center or lodging facility, you may be subject to fines. If the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy` .
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Certificate of Registration with a 10-digit registration number, which you need to recertify your registration every year.
 

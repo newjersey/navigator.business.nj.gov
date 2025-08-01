@@ -1,5 +1,5 @@
 export default {
-  id: "callout",
+  id: "largeCallout",
   label: "Large Callout Block",
   fields: [
     {
@@ -66,7 +66,7 @@ export default {
   ],
 
   // eslint-disable-next-line unicorn/better-regex
-  pattern: /:::callout[^:::]*?:::/gs,
+  pattern: /:::largeCallout[^:::]*?:::/gs,
   collapsed: false,
   summary: "{{fields.title}}",
   fromBlock: (
@@ -91,7 +91,7 @@ export default {
     const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^:::{}]*)/gms;
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
 
-    // If we just have :::callout {}\n:::, then we need to return some default values instead.
+    // If we just have :::largeCallout {}\n:::, then we need to return some default values instead.
     const defaultCalloutContents =
       'showHeader="false" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText=""';
 
@@ -159,7 +159,7 @@ export default {
     phoneIconText: string;
     emailIconText: string;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
+    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
   },
   toPreview: (obj: {
     showHeader: boolean;
@@ -173,6 +173,6 @@ export default {
     phoneIconText: string;
     emailIconText: string;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
+    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
   },
 };

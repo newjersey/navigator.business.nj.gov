@@ -31,7 +31,7 @@ callToActionLink: https://dep.nj.gov/online/
 - Applicable fees paid
 - Pumping equipment details, such as license number, if applicable
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 An approved well record sent via email.
 

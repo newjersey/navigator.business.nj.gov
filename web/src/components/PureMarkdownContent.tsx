@@ -40,7 +40,7 @@ const customRemarkPlugin: Plugin = () => {
           case "note":
             data.hProperties = { header: node.attributes.header };
             break;
-          case "callout":
+          case "largeCallout":
             data.hProperties = {
               headerText:
                 node.attributes.headerText?.length > 0 ? node.attributes.headerText : undefined,

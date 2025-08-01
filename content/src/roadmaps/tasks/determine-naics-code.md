@@ -18,7 +18,7 @@ id: determine-naics-code
 
 ${naicsCodeLookupComponent}
 
-:::callout{ showHeader="true" headerText="Why do I need a NAICS code?" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="Why do I need a NAICS code?" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 To [register for NJ state taxes and employer purposes](/tasks/register-for-taxes).
 

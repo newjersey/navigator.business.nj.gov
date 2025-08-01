@@ -44,7 +44,7 @@ publishStageArchive: ""
 - The project must in a net positive benefit to the State
 - Must meet specific cost thresholds, depending on where the project is located
 
-:::callout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Total award cap of $42M, but residential projects also receiving Low-Income Housing Tax Credits (LIHTC), or projects located in certain economically disadvantaged locations may receive up to $60M
 - Tax credits equal to 45% of project costs up to $42M

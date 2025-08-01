@@ -18,7 +18,7 @@ Some banks may request other documentation in addition to what is listed below. 
 
 - `Business Registration Certificate|business-reg-certificate`
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A business bank account.
 

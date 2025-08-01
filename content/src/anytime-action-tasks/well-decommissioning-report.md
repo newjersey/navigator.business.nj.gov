@@ -32,7 +32,7 @@ callToActionLink: https://dep.nj.gov/online/
 - Specific decommissioning details, such as the amount of grout used
 - Certification PIN
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 An approved well decommissioning report sent via email.
 

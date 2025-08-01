@@ -22,7 +22,7 @@ sectorIds:
   - retail-trade-and-ecommerce
 urlSlug: trucking-irp-aa
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText=""
+  :::largeCallout{ showHeader="true" headerText=""
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -80,7 +80,7 @@ PO Box 178
 Trenton, NJ 08666
 &nbsp;
 
-:::callout{ showHeader="true" headerText="What if I don’t register with the IRP?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t register with the IRP?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - Operating a vehicle that requires IRP registration without proper credentials can result in fines and penalties imposed by enforcement agencies.
 - Your vehicles may be impounded until proper registration is obtained.
@@ -88,7 +88,7 @@ Trenton, NJ 08666
 
 :::
 
-:::callout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - Apportioned license plates, indicating that the vehicle is registered under the IRP.
 - Cab card, listing the jurisdictions in which the vehicle is authorized to operate and the registered weights for each.
