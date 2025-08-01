@@ -1,6 +1,6 @@
 export default {
   id: "callout",
-  label: "Callout Block",
+  label: "Large Callout Block",
   fields: [
     {
       name: "calloutType",
