@@ -19,6 +19,7 @@ describe("healthCheck", () => {
       webserviceLicenseStatus: "PASS",
       webserviceFormation: "PASS",
       taxClearance: "PASS",
+      xrayRegistration: "PASS",
     });
   });
 
@@ -33,6 +34,7 @@ describe("healthCheck", () => {
       webserviceLicenseStatus: "FAIL",
       webserviceFormation: "FAIL",
       taxClearance: "FAIL",
+      xrayRegistration: "FAIL",
     });
   });
 
@@ -47,6 +49,7 @@ describe("healthCheck", () => {
       webserviceLicenseStatus: "ERROR",
       webserviceFormation: "ERROR",
       taxClearance: "ERROR",
+      xrayRegistration: "ERROR",
     });
   });
 });

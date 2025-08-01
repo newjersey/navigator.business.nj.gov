@@ -16,6 +16,7 @@ import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
+import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
 import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
@@ -356,6 +357,10 @@ const updateLicenseStatus = updateLicenseStatusFactory(
   rgbLicenseStatusClient,
 );
 
+const xrayRegistrationHealthCheckClient = XrayRegistrationHealthCheckClient(logger, {
+  orgUrl: XRAY_REGISTRATION_STATUS_BASE_URL,
+});
+
 const xrayRegistrationSearch = XrayRegistrationSearchClient(
   logger,
   XRAY_REGISTRATION_STATUS_BASE_URL,
@@ -474,6 +479,7 @@ app.use(
       ["webservice/license-status", webServiceLicenseStatusHealthCheckClient],
       ["webservice/formation", formationHealthCheckClient],
       ["tax-clearance", taxClearanceHealthCheckClient],
+      ["xray-registration", xrayRegistrationHealthCheckClient],
     ]),
     logger,
   ),
