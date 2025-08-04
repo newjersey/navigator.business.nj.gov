@@ -3,17 +3,12 @@ import { Match } from "@/lib/search/typesForSearch";
 import { WebflowLicense } from "@/lib/types/types";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 
-export const searchWebflowLicenses = (
-  licenses: WebflowLicense[],
-  term: string,
-  cmsCollectionName: string,
-): Match[] => {
+export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const license of licenses) {
     let match: Match = {
       filename: license.filename,
-      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 

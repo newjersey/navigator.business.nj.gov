@@ -7,17 +7,12 @@ import { Match } from "@/lib/search/typesForSearch";
 import { Certification } from "@/lib/types/types";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
 
-export const searchCertifications = (
-  certifications: Certification[],
-  term: string,
-  cmsCollectionName: string,
-): Match[] => {
+export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const cert of certifications) {
     let match: Match = {
       filename: cert.filename,
-      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 

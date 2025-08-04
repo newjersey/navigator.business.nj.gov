@@ -36,15 +36,18 @@ export const MatchList = (props: Props): ReactElement => {
       <ul>
         {(expandedMatches ? props.matches : collapsedMatches).map((match) => (
           <li key={match.filename}>
-            {match.cmsCollectionName && (
+            {cmsMap[match.filename]?.[props.collectionLabel] ? (
               <a
-                href={`/mgmt/cms#/collections/${cmsMap[match.filename]?.[props.collectionLabel] ?? null}/entries/${match.filename}`}
+                href={`/mgmt/cms#/collections/${cmsMap[match.filename][props.collectionLabel]}/entries/${match.filename}`}
                 target="_blank"
                 rel="noreferrer"
               >
                 <b>{match.displayTitle || match.filename}</b>
               </a>
+            ) : (
+              <b>{match.displayTitle || match.filename}</b>
             )}
+
             <ul>
               <li>
                 Snipet(s):

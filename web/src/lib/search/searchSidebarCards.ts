@@ -2,18 +2,13 @@ import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers"
 import { Match } from "@/lib/search/typesForSearch";
 import { SidebarCardContent } from "@/lib/types/types";
 
-export const searchSidebarCards = (
-  sidebarCards: SidebarCardContent[],
-  term: string,
-  cmsCollectionName: string,
-): Match[] => {
+export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const card of sidebarCards) {
     let match: Match = {
       filename: card.id,
       snippets: [],
-      cmsCollectionName: cmsCollectionName,
     };
 
     const content = card.contentMd.toLowerCase();
