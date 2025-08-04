@@ -11,6 +11,8 @@
     "mailingIsSameCheck": "Mailing address is the same as the business address",
     "contactInformationHeader": "Contact Information",
     "contactInformationDescription": "Tell us who to contact for any questions or updates.",
+    "backButtonText": "Back",
+    "nextButtonText": "Next",
     "fields": {
       "mailingAddressLine1": {
         "label": "Mailing Address Line 1",

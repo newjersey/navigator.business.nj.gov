@@ -8,14 +8,6 @@ type AddressErrorsResponse = {
   doSomeFieldsHaveError: (fields: AddressFields[]) => boolean;
   getFieldErrorLabel: (field: AddressFields) => string;
   doesRequiredFieldHaveError: (field: AddressFields) => boolean;
-  doesRequiredFieldHaveErrorWithAdditionalData: (
-    field: AddressFields,
-    additionalData?: { [key: string]: string | undefined },
-  ) => boolean;
-  doesFieldHaveErrorWithAdditionalData: (
-    field: AddressFields,
-    additionalData?: { [key: string]: string | undefined },
-  ) => boolean;
 };
 
 export const useAddressErrors = (): AddressErrorsResponse => {
@@ -41,26 +33,6 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     );
   };
 
-  // Enhanced version that also checks additional address data
-  const doesRequiredFieldHaveErrorWithAdditionalData = (
-    field: AddressFields,
-    additionalData?: { [key: string]: string | undefined },
-  ): boolean => {
-    const businessAddressHasData =
-      additionalData &&
-      additionalData[field] &&
-      additionalData[field] !== "" &&
-      additionalData[field] !== undefined;
-
-    // If business address has data, field is valid
-    if (businessAddressHasData) {
-      return false;
-    }
-
-    // Otherwise, check formation address
-    return doesRequiredFieldHaveError(field as FieldsForAddressErrorHandling);
-  };
-
   const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
     if (!validatedFields.has(field)) {
       return false;
@@ -70,26 +42,6 @@ export const useAddressErrors = (): AddressErrorsResponse => {
       formationAddressData: state.formationAddressData,
     });
     return addressFieldErrorState.hasError;
-  };
-
-  // Enhanced version that also checks additional address data
-  const doesFieldHaveErrorWithAdditionalData = (
-    field: AddressFields,
-    additionalData?: { [key: string]: string | undefined },
-  ): boolean => {
-    const businessAddressHasData =
-      additionalData &&
-      additionalData[field] &&
-      additionalData[field] !== "" &&
-      additionalData[field] !== undefined;
-
-    // If business address has data, field is valid
-    if (businessAddressHasData) {
-      return false;
-    }
-
-    // Otherwise, check formation address
-    return doesFieldHaveError(field as FieldsForAddressErrorHandling);
   };
 
   const doSomeFieldsHaveError = (fields: AddressFields[]): boolean => {
@@ -115,7 +67,5 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     doSomeFieldsHaveError,
     getFieldErrorLabel,
     doesRequiredFieldHaveError,
-    doesRequiredFieldHaveErrorWithAdditionalData,
-    doesFieldHaveErrorWithAdditionalData,
   };
 };

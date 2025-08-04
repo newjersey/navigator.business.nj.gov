@@ -182,7 +182,6 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     }
   }, business);
 
-  console.log(formContextState);
   return (
     <>
       <TaskHeader task={props.task} />

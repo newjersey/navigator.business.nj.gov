@@ -9,6 +9,7 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
@@ -159,13 +160,20 @@ export const LicenseeInfo = (props: Props): ReactElement => {
       <CtaContainer>
         <ActionBarLayout>
           <LiveChatHelpButton />
+          <SecondaryButton
+            isColor="primary"
+            onClick={() => props.setStepIndex(0)}
+            dataTestId="back"
+          >
+            {Config.cigaretteLicenseStep2.backButtonText}
+          </SecondaryButton>
           <PrimaryButton
             isColor="primary"
             onClick={() => props.setStepIndex(1)}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >
-            {Config.cigaretteLicenseStep1.continueButtonText}
+            {Config.cigaretteLicenseStep2.nextButtonText}
           </PrimaryButton>
         </ActionBarLayout>
       </CtaContainer>
