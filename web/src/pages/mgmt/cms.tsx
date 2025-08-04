@@ -3,6 +3,7 @@ import ContextEditor from "@/lib/cms/editors/context-info";
 import IconWidgetEditor from "@/lib/cms/editors/icon";
 import AlertEditor from "@/lib/cms/editors/infoAlert";
 import { default as LargeCallout } from "@/lib/cms/editors/large-callout";
+import { default as MiniCallout } from "@/lib/cms/editors/mini-callout";
 import Note from "@/lib/cms/editors/note";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { WriteOnceReadOnlyNoSpaceControl } from "@/lib/cms/fields/writeoncereadonlynospacefield";
@@ -89,6 +90,8 @@ const CMS = dynamic(
       CMS.registerEditorComponent(CannabisLocationAlert);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(LargeCallout);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(MiniCallout);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(IconWidgetEditor);
 
