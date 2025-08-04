@@ -4,6 +4,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { getPhoneNumberFormat, validateEmail } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
 
 export const ContactInformation = (): ReactElement => {
@@ -48,6 +49,7 @@ export const ContactInformation = (): ReactElement => {
               fieldName="contactName"
               handleChange={(val) => handleChange(val, "contactName")}
               onValidation={(fieldName, invalid, value) => setIsContactNameValid(!invalid)}
+              additionalValidationIsValid={validateEmail}
               error={isContactNameValid}
               validationText="Contact name is required"
               required={true}
@@ -71,6 +73,8 @@ export const ContactInformation = (): ReactElement => {
               inputWidth="full"
               formContext={DataFormErrorMapContext}
               value={state.contactPhoneNumber}
+              visualFilter={getPhoneNumberFormat}
+              numericProps={{ maxLength: 10, minLength: 10 }}
             />
           </span>
         </div>
@@ -86,6 +90,7 @@ export const ContactInformation = (): ReactElement => {
           // handleChange={(value: string) => handleFieldChange("contactEmail", value)}
           handleChange={(val) => handleChange(val, "contactEmail")}
           onValidation={(fieldName, invalid, value) => setIsContactEmailValid(!invalid)}
+          additionalValidationIsValid={validateEmail}
           error={isContactEmailValid}
           validationText="Valid email address is required"
           required={true}
