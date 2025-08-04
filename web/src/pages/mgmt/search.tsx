@@ -187,14 +187,12 @@ const SearchContentPage = (props: Props): ReactElement => {
       updateSearchState({ error: { message: error as string, term: searchState.term } });
       console.error(error);
     }
-    setTaskMatches(
-      searchTasks(props.tasks, lowercaseTerm, "tasks", props.industries, props.addOns),
-    );
+    setTaskMatches(searchTasks(props.tasks, lowercaseTerm, props.industries, props.addOns));
     setLicenseTaskMatches(
       searchTasks(
         props.licenseTasks,
         lowercaseTerm,
-        "license-tasks",
+
         props.industries,
         props.addOns,
       ),
@@ -203,7 +201,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       searchTasks(
         props.municipalTasks,
         lowercaseTerm,
-        "municipal-tasks",
+
         props.industries,
         props.addOns,
       ),
@@ -212,70 +210,42 @@ const SearchContentPage = (props: Props): ReactElement => {
       searchTasks(
         props.raffleBingoSteps,
         lowercaseTerm,
-        "raffle-bingo-steps",
+
         props.industries,
         props.addOns,
       ),
     );
-    setEnvTaskMatches(
-      searchTasks(props.envTasks, lowercaseTerm, "", props.industries, props.addOns),
-    );
-    setCertMatches(
-      searchCertifications(props.certifications, lowercaseTerm, "certification-opportunities"),
-    );
-    setCertArchiveMatches(
-      searchCertifications(
-        props.archivedCertifications,
-        lowercaseTerm,
-        "archived-certification-opportunities",
-      ),
-    );
-    setFundingMatches(searchFundings(props.fundings, lowercaseTerm, "funding-opportunities"));
+    setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm, props.industries, props.addOns));
+    setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
+    setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
+    setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(
-      searchIndustries(
-        getIndustries({ overrideShowDisabledIndustries: true }),
-        lowercaseTerm,
-        "roadmaps",
-      ),
+      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm),
     );
-    setAnytimeActionTaskMatches(
-      searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm, "anytime-action-tasks"),
-    );
+    setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
     setAnytimeActionLicenseReinstatementMatches(
       searchAnytimeActionLicenseReinstatements(
         props.anytimeActionLicenseReinstatements,
         lowercaseTerm,
-        "anytime-action-license-reinstatements",
       ),
     );
 
-    const defaultStepsMatches = searchSteps(
-      Steps.steps as Step[],
-      lowercaseTerm,
-      {
-        filename: "steps",
-      },
-      "Steps",
-      "steps",
-    );
+    const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, {
+      filename: "steps",
+      displayTitle: "Steps",
+    });
     const domesticEmployerStepsMatches = searchSteps(
       DomesticEmployerSteps.steps as Step[],
       lowercaseTerm,
       {
         filename: "steps-domestic-employer",
+        displayTitle: "Steps - Domestic Employer",
       },
-      "Steps - Domestic Employer",
-      "steps-domestic-employer",
     );
-    const foreignStepsMatches = searchSteps(
-      ForeignSteps.steps as Step[],
-      lowercaseTerm,
-      {
-        filename: "steps-foreign",
-      },
-      "Steps - Dakota",
-      "steps-foreign",
-    );
+    const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
+      filename: "steps-foreign",
+      displayTitle: "Steps - Dakota",
+    });
     setStepsMatches([
       ...defaultStepsMatches,
       ...domesticEmployerStepsMatches,
@@ -286,39 +256,26 @@ const SearchContentPage = (props: Props): ReactElement => {
       searchNonEssentialQuestions(
         NonEssentialQuestions.nonEssentialQuestionsArray as NonEssentialQuestion[],
         lowercaseTerm,
-        "nonEssentialQuestionsCollection",
       ),
     );
 
-    setWebflowLicenseMatches(
-      searchWebflowLicenses(props.webflowLicenses, lowercaseTerm, "webflow-licenses"),
-    );
-    setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm, "filings"));
-    setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm, "roadmap-sidebar-card"));
-    setContextualInfoMatches(
-      searchContextualInfo(props.contextualInfo, lowercaseTerm, "contextual-information"),
-    );
+    setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
+    setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
+    setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
+    setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
     setArchivedContextualInfoMatches(
-      searchContextualInfo(props.archivedContextualInfo, lowercaseTerm, "archived-contextual-info"),
+      searchContextualInfo(props.archivedContextualInfo, lowercaseTerm),
     );
-    setLicenseCalendarEventMatches(
-      searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm, "license-calendar-events"),
-    );
+    setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
 
     setXrayRenewalCalendarEventMatches(
-      searchXrayRenewalCalendarEvent(
-        props.xrayRenewalCalendarEvent,
-        lowercaseTerm,
-        "xray-calendar-event",
-      ),
+      searchXrayRenewalCalendarEvent(props.xrayRenewalCalendarEvent, lowercaseTerm),
     );
 
     const businessFormationInfo: TaskWithoutLinks[] = Object.values(
       props.formationDbaContent.formationDbaContent,
     );
-    setBusinessFormationMatches(
-      searchBusinessFormation(businessFormationInfo, lowercaseTerm, "business-formation-dba-tasks"),
-    );
+    setBusinessFormationMatches(searchBusinessFormation(businessFormationInfo, lowercaseTerm));
     updateSearchState({ hasSearched: true });
   };
 

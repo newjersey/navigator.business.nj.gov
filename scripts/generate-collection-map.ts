@@ -15,7 +15,7 @@ for (const collection of fs.readdirSync(collectionDirectory)) {
   for (const section of collectionData) {
     if (section.name.endsWith("-label")) continue;
 
-    const label = section.label; // The lable attribute
+    const label = section.label;
     const collectionName = section["name"];
 
     if (section.folder) {

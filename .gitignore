@@ -93,6 +93,7 @@ web/fundings.csv
 
 # yaml file generated from yarn build
 web/public/mgmt/config.yml
+web/src/lib/cms/CollectionMap.json
 
 # sql
 sql/dol_employer_rates.sql
