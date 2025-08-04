@@ -1,6 +1,8 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { UsagesList } from "@/components/search/UsagesList";
+import cmsMapJson from "@/lib/cms/CollectionMap.json";
 import { Match } from "@/lib/search/typesForSearch";
+import { CMSMap } from "@/lib/types/types";
 import { ReactElement, useEffect, useState } from "react";
 interface Props {
   matches: Match[];
@@ -12,7 +14,7 @@ export const MatchList = (props: Props): ReactElement => {
 
   const [expandedMatches, setExpandedMatches] = useState<boolean>(false);
   const collapsedMatches = props.matches.slice(0, COLLAPSED_LEN);
-
+  const cmsMap: CMSMap = cmsMapJson;
   useEffect(() => {
     setExpandedMatches(false);
   }, [props.matches]);
@@ -24,7 +26,6 @@ export const MatchList = (props: Props): ReactElement => {
   const toggleExpanded = (): void => {
     setExpandedMatches((prev) => !prev);
   };
-
   return (
     <div className="margin-top-3 margin-left-6">
       <span className="font-body-lg">
@@ -34,14 +35,16 @@ export const MatchList = (props: Props): ReactElement => {
       <ul>
         {(expandedMatches ? props.matches : collapsedMatches).map((match) => (
           <li key={match.filename}>
-            {match.cmsCollectionName && (
+            {cmsMap[match.filename]?.[props.collectionLabel] ? (
               <a
-                href={`/mgmt/cms#/collections/${match.cmsCollectionName}/entries/${match.filename}`}
+                href={`/mgmt/cms#/collections/${cmsMap[match.filename][props.collectionLabel]}/entries/${match.filename}`}
                 target="_blank"
                 rel="noreferrer"
               >
                 <b>{match.displayTitle || match.filename}</b>
               </a>
+            ) : (
+              <b>{match.displayTitle || match.filename}</b>
             )}
             <ul>
               <li>

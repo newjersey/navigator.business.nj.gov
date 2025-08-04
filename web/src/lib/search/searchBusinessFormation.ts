@@ -2,18 +2,13 @@ import { findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { TaskWithoutLinks } from "@/lib/types/types";
 
-export const searchBusinessFormation = (
-  tasks: TaskWithoutLinks[],
-  term: string,
-  cmsCollectionName: string,
-): Match[] => {
+export const searchBusinessFormation = (tasks: TaskWithoutLinks[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const task of tasks) {
     let match: Match = {
       filename: task.id,
       snippets: [],
-      cmsCollectionName: cmsCollectionName,
     };
 
     const name = task.name.toLowerCase();

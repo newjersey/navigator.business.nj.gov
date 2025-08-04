@@ -2,17 +2,13 @@ import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers"
 import { Match } from "@/lib/search/typesForSearch";
 import { Filing } from "@/lib/types/types";
 
-export const searchTaxFilings = (
-  filings: Filing[],
-  term: string,
-  cmsCollectionName: string,
-): Match[] => {
+export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const filing of filings) {
     let match: Match = {
       filename: filing.filename,
-      cmsCollectionName: cmsCollectionName,
+
       snippets: [],
     };
 

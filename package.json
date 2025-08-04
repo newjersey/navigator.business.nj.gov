@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "yarn verify:node && yarn decap:build-config && yarn workspaces foreach -ptvi run build",
+    "build": "yarn verify:node && yarn decap:build-config && yarn cms:map && yarn workspaces foreach -ptvi run build",
     "build:clean": "yarn clean && yarn build",
     "clean": "yarn workspaces foreach -v run clean",
     "cms:proxy": "yarn dlx decap-server",
@@ -31,7 +31,8 @@
     "test:watch": "yarn test --watch",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.9.2",
-    "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify"
+    "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify",
+    "cms:map": "yarn dlx tsx scripts/generate-collection-map.ts"
   },
   "dependencies": {
     "@aws-crypto/client-node": "4.2.1",

@@ -10,7 +10,7 @@ import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency"
 export const searchTasks = (
   tasks: Task[],
   term: string,
-  cmsCollectionName: string,
+
   industries: Industry[],
   addOns: IndustryRoadmap[],
 ): Match[] => {
@@ -19,7 +19,6 @@ export const searchTasks = (
   for (const task of tasks) {
     let match: Match = {
       filename: task.filename,
-      cmsCollectionName: cmsCollectionName,
       snippets: [],
     };
 

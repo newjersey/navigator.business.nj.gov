@@ -649,3 +649,5 @@ export type ProfileContentField = Exclude<
   (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
   "businessPersona"
 >;
+
+export type CMSMap = Record<string, Record<string, string>>;

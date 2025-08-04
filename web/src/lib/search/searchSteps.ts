@@ -5,8 +5,7 @@ import { Step } from "@/lib/types/types";
 export const searchSteps = (
   steps: Step[],
   term: string,
-  params: { filename: string },
-  cmsCollectionName: string,
+  params: { filename: string; displayTitle: string },
 ): Match[] => {
   const matches: Match[] = [];
 
@@ -14,7 +13,7 @@ export const searchSteps = (
     let match: Match = {
       filename: params.filename,
       snippets: [],
-      cmsCollectionName: cmsCollectionName,
+      displayTitle: params.displayTitle,
     };
 
     const name = step.name.toLowerCase();

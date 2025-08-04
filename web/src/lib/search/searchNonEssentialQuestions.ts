@@ -5,7 +5,6 @@ import { NonEssentialQuestion } from "@/lib/types/types";
 export const searchNonEssentialQuestions = (
   nonEssentialQuestions: NonEssentialQuestion[],
   term: string,
-  cmsCollectionName: string,
 ): Match[] => {
   const matches: Match[] = [];
 
@@ -13,7 +12,6 @@ export const searchNonEssentialQuestions = (
     let match: Match = {
       filename: "nonEssentialQuestionsArray",
       snippets: [],
-      cmsCollectionName: cmsCollectionName,
     };
 
     const id = nonEssentialQuestion.id.toLowerCase();
