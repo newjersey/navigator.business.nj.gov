@@ -37,13 +37,13 @@ synonyms:
 
 Your reinstatement application must be signed in front of and by a notary public.
 
-:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't reinstate my registration?" calloutType="warning" }
 
 You cannot dispense or store sodium pentobarbital and may be subject to legal consequences if you do so.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same CDS registration number.
 

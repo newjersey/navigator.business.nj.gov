@@ -1,6 +1,6 @@
 export default {
-  id: "callout",
-  label: "Callout Block",
+  id: "largeCallout",
+  label: "Large Callout Block",
   fields: [
     {
       name: "calloutType",
@@ -8,13 +8,6 @@ export default {
       widget: "select",
       default: "conditional",
       options: ["conditional", "informational", "warning", "quickReference"],
-    },
-    {
-      name: "showIcon",
-      label: "Header Icon",
-      widget: "boolean",
-      default: false,
-      hint: "quickReference does not have a header icon",
     },
     {
       name: "showHeader",
@@ -73,7 +66,7 @@ export default {
   ],
 
   // eslint-disable-next-line unicorn/better-regex
-  pattern: /:::callout[^:::]*?:::/gs,
+  pattern: /:::largeCallout[^:::]*?:::/gs,
   collapsed: false,
   summary: "{{fields.title}}",
   fromBlock: (
@@ -83,7 +76,6 @@ export default {
     headerText: string;
     body: string;
     calloutType: string;
-    showIcon: boolean;
     amountIconText: string;
     filingTypeIconText: string;
     frequencyIconText: string;
@@ -98,9 +90,9 @@ export default {
     const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^:::{}]*)/gms;
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
 
-    // If we just have :::callout {}\n:::, then we need to return some default values instead.
+    // If we just have :::largeCallout {}\n:::, then we need to return some default values instead.
     const defaultCalloutContents =
-      'showHeader="false" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText=""';
+      'showHeader="false" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText=""';
 
     const calloutParameters = calloutMatch?.groups?.parameters ?? defaultCalloutContents;
     const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
@@ -110,9 +102,6 @@ export default {
 
     const headerTextMatch = calloutParameters.match(/headerText="(?<headerText>[^"]+)"/);
     const headerTextValue = headerTextMatch?.groups?.headerText.trim() ?? "";
-
-    const showIconMatch = calloutParameters.match(/showIcon="(?<showIcon>[^"]+)"/);
-    const showIconValue = showIconMatch?.groups?.showIcon.trim() === "true";
 
     const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
     const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
@@ -142,7 +131,6 @@ export default {
     return {
       calloutType: calloutTypeValue,
       showHeader: showHeaderValue,
-      showIcon: showIconValue,
       headerText: headerTextValue,
       amountIconText: amountIconTextValue,
       filingTypeIconText: filingTypeIconTextValue,
@@ -159,27 +147,25 @@ export default {
     headerText: string;
     body: string;
     calloutType: string;
-    showIcon: boolean;
     amountIconText: string;
     filingTypeIconText: string;
     frequencyIconText: string;
     phoneIconText: string;
     emailIconText: string;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
+    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
   },
   toPreview: (obj: {
     showHeader: boolean;
     headerText: string;
     body: string;
     calloutType: string;
-    showIcon: boolean;
     amountIconText: string;
     filingTypeIconText: string;
     frequencyIconText: string;
     phoneIconText: string;
     emailIconText: string;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
+    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
   },
 };

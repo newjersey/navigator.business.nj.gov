@@ -58,7 +58,7 @@ webflowId: 66aceedd6ba3dffa8ac9d30b
 - Warehouse insurance (Warehousemen Legal Liability Insurance)
 - Warehouse section in tariff
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A public movers license and/or a warehousemen license.
 

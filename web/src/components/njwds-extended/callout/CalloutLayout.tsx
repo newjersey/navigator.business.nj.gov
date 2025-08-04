@@ -1,19 +1,13 @@
-import { IconTextProps } from "@/components/njwds-extended/callout/calloutHelpers";
+import { CalloutStyling, IconTextProps } from "@/components/njwds-extended/callout/calloutHelpers";
 import { IconTextList } from "@/components/njwds-extended/callout/CalloutIcons";
 import type { ReactElement, ReactNode } from "react";
-
-export interface CalloutStyling {
-  backgroundColor: string;
-  textColor: string;
-  headerIcon: string;
-}
 
 export interface CalloutLayoutProps {
   styling: CalloutStyling;
   headingText?: string;
-  showIcon: boolean;
+  showIcon?: boolean;
   showHeader: boolean;
-  iconItems: IconTextProps[];
+  iconItems?: IconTextProps[];
   children?: ReactNode;
 }
 
@@ -33,10 +27,12 @@ export const CalloutLayout = (props: CalloutLayoutProps): ReactElement => {
           )}
           <span className="text-bold">{props.headingText}</span>
         </div>
-        <div className="margin-top-105">
-          <div>{props.children}</div>
-          <IconTextList items={props.iconItems} />
-        </div>
+        {(props.children || (props.iconItems && props.iconItems.length > 0)) && (
+          <div className="margin-top-105">
+            <div>{props.children}</div>
+            <IconTextList items={props.iconItems} />
+          </div>
+        )}
       </div>
     );
   }

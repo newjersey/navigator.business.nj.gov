@@ -34,13 +34,13 @@ webflowType: object-vehicle
 webflowId: 65bd67f31de3409a62b43e80
 ---
 
-:::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="Keep in mind:" calloutType="informational" }
 
 You need to get a new certificate for each home you are renting out every 6 months or when a new tenant moves in.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A valid certificate, if you pass the inspection.
 

@@ -37,7 +37,7 @@ isSbe: false
 - The names and addresses of members of the board of directors (c-corps only)
 - The number of shares of stock issued and outstanding (c-corps only)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A LGBTQ+ certificate.
 

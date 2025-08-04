@@ -42,7 +42,7 @@ descriptionMd: NJ Ignite provides rent support for technology startups that are
 - Collaborative workplaces can be entities with a minimum of 5 unique paying tenants over the last 2 years.
 - Renters and collaborative workplaces must apply together
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Benefits for Renters: Rent support grants
 - Benefits for Collaborative Workspaces: A tenant attraction tool

@@ -26,13 +26,13 @@ If you are interested in continuing to employ, place, arrange for the placement 
 - Certificate of Accreditation
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate of registration and registration number, beginning with “HP” and followed by 7 digits.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't renew my registration?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't renew my registration?" calloutType="conditional" }
 
 You may be required to pay penalties and/or ordered to cease and desist from operating as a Health Care Service Firm until you have obtained registration.
 

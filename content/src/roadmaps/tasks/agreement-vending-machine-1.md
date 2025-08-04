@@ -18,7 +18,7 @@ industryId: vending-machine
 - **Agreement length:** Determine the ideal length of your agreement by analyzing a few `contract considerations|lease-considerations`
 - **Liability:** Determine who will be the responsible party for damages to the vending machine and under what circumstances
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A signed location agreement.
 

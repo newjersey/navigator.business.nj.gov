@@ -28,12 +28,9 @@ formName: SS-4
 1. [Get your EIN](https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online)
 2. Save your EIN
 
-
-
-
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - An EIN
 - An EIN Certificate (the document indicating your EIN)

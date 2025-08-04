@@ -35,7 +35,7 @@ callToActionLink: "https://rgbportal.dca.njoag.gov/"
 - Warehouse legal liability insurance, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same public movers license and/or warehousemen license number.
 

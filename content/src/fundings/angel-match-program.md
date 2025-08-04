@@ -55,7 +55,7 @@ maxEmployeesRequired: 100
 - No more than 100 total employees working for the company
 - Company must be registered in New Jersey and in good standing as certified by a valid NJ Tax Clearance Certificate
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive a `convertible note|convertible-note` from $100,000 to $500,000 with a 10-year maturity, a 3% interest rate, and no payments for the first seven years.
 

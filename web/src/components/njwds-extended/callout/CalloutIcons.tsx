@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import type { ReactElement, ReactNode } from "react";
 
 interface IconTextListProps {
-  items: IconTextProps[];
+  items?: IconTextProps[];
 }
 
 const IconTextItem = (props: IconTextProps): ReactElement => {

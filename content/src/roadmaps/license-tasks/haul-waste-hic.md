@@ -26,7 +26,7 @@ summaryDescriptionMd: "Waste facilities will **only** allow registered vehicles 
 - Home improvement contractor official registration document (also known as a registration card)
 - Copy of your certificate of liability insurance
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A New Jersey Department of Environmental Protection (DEP) account number (if this is your first time working with DEP)
 - A decal for all necessary vehicles (this is your vehicle's proof of registration and needs to be attached to your vehicle)

@@ -18,7 +18,7 @@ callToActionText: ""
 - **Placement terms:** Determine if your business will offer a 1-time placement or temporary placement services
 - **Fees:** Determine the party responsible for the cost of the placement fee
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Determined the requirements for your employment and personnel services agency.
 

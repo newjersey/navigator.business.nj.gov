@@ -41,7 +41,7 @@ publishStageArchive: ""
 
 - Businesses, individuals, or municipalities in New Jersey performing remediation or cleanup of contaminated and underutilized sites
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Grants of up to $5M per year for municipal and county redevelopment authorities
 - Loans up to $500,000 per year for private entities and $2M per year for public entities

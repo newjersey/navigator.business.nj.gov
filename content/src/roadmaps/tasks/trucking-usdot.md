@@ -27,7 +27,7 @@ The form can only be signed by an authorized official, like the owner, a partner
 - Names and titles of the company officers
 - A `process agent|process-agent` , already filed with the Federal Motor Carrier Safety Administration (FMCSA)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A USDoT registration number
 - Authority to Operate (known as an MC number)

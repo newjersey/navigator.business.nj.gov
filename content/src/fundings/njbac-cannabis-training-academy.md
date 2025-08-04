@@ -46,7 +46,7 @@ publishStageArchive: Do Not Publish
 - Individuals who are considering applying for a conditional or annual license
 - Must be in the `Impact Zone|impactzonebusiness-cannabis`, `social equity business|socialequitybusiness-cannabis`, `diversely owned | diverselyownedbusiness-cannabis`, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Assistance filling out application to the New Jersey Cannabis Regulatory Commission, whether it is conditional, annual or conversion
 - General training to create and run a sustainable business operation

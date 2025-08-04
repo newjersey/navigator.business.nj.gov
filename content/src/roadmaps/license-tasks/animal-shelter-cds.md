@@ -53,13 +53,13 @@ licenseCertificationClassification: undefined
 - The name and title of everyone who will have access to the CDS
 - Security measures in place to prevent loss or theft of the CDS
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" }
 
 You cannot legally dispense or store sodium pentobarbital and may be subject to legal consequences if you do.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A CDS registration certificate sent to your mailing address, valid for 1 year.
 

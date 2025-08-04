@@ -27,7 +27,7 @@ callToActionText: Apply to Your State Bar Association
 - Certificate of Good Standing from any states where you’ve been admitted to practice law, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The State Bar will notify you via email with instructions on when to attend the ceremony to swear the Oath of Admission and sign the attorney’s roll.
 

@@ -1,7 +1,7 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, RefObject } from "react";
-import { Callout } from "../njwds-extended/callout/Callout";
+import { LargeCallout } from "../njwds-extended/callout/LargeCallout";
 
 interface Props {
   permitsRef: RefObject<HTMLDivElement>;
@@ -27,7 +27,7 @@ export const ProfileLinkToPermitsTabCallout = (props: Props): ReactElement => {
   };
 
   return (
-    <Callout
+    <LargeCallout
       calloutType="informational"
       showHeader
       headerText={Config.profileDefaults.fields.nonEssentialQuestions.default.linkToPermitsHeader}
@@ -37,6 +37,6 @@ export const ProfileLinkToPermitsTabCallout = (props: Props): ReactElement => {
         {Config.profileDefaults.fields.nonEssentialQuestions.default.linkToPermitsTextButton}
       </UnStyledButton>{" "}
       {Config.profileDefaults.fields.nonEssentialQuestions.default.linkToPermitsTextAfterButton}
-    </Callout>
+    </LargeCallout>
   );
 };

@@ -33,7 +33,7 @@ webflowId: 66aceedbaae39d8674b278ad
 - A criminal background check, and pass
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A real estate broker license.
 

@@ -36,7 +36,7 @@ webflowId: 5f7729541a08097ccbbb2ecb
 - Color photographs of each officer at the shop
 - Color photographs of the facility displaying the advertised sign
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An auto-body repair license.
 

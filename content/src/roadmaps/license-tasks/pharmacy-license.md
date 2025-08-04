@@ -39,7 +39,7 @@ licenseName: Pharmacy-Pharmacy
 - \[]{pharmacist-signage} A picture of any exterior signage (if available at the time of your application)
 - \[]{pharmacist-inspection} A site inspection date
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A pharmacy permit
 - A permit number

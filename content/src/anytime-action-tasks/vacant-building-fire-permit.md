@@ -30,13 +30,13 @@ callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summa
 
 Contact your town's `Local Enforcing Agency (LEA)|lea` to apply for the permit. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 This page does not list all business activities that require a fire permit. You may need to get other fire permits depending on your business activity, so check requirements with your LEA.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A fire permit to own a vacant or unoccupied property.
 

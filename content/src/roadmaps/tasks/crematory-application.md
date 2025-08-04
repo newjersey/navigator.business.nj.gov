@@ -54,7 +54,7 @@ webflowType: business-license
 - Proposed cremation authorization forms
 - Proposed receipt forms
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 You will need a notary signature and seal on your application form.
 
@@ -71,13 +71,13 @@ Newark, NJ 07101
 
 &nbsp;
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 If you construct or operate a crematory without a license, you may face penalties determined by the Board.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An approval letter with a Cemetery Board Certificate of Authority.
 

@@ -19,7 +19,7 @@ id: cannabis-bank-account
 
 - `Business Registration Certificate|business-reg-certificate`
 
-:::callout{ showHeader="true" headerText="After you complete this task, you will have:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="After you complete this task, you will have:" calloutType="conditional" }
 
 A business bank account.
 

@@ -68,13 +68,13 @@ webflowId: 6721493f43b6800b762e24ab
 - CDS customer verification protocol (how you check and confirm that your customers are allowed to buy CDS)
 - A description of the CDS security and accountability measures in place for inventory control and to prevent loss or theft of the CDS
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" }
 
 You cannot handle, store, manufacture, or distribute CDS or products containing CDS.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A CDS registration certificate sent to your mailing address.
 

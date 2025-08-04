@@ -21,7 +21,7 @@ summaryDescriptionMd: >-
   You'll need to check license requirements with the county and/or local Department of Health in every county where you plan to do business.
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Department of Health license.
 

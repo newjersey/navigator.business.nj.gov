@@ -12,7 +12,7 @@ id: determine-payment-structure
 - Accept payment directly from your customer
 - Bill `Medicaid|Medicaid` through contractor work with `Logisticare|logisticare` or a medical care facility, like a nursing home
 
-:::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will know:" calloutType="conditional" }
 
 The best payment structure for your business. If you plan to apply for Logisticare, we have instructions for this after you register and form your business.
 

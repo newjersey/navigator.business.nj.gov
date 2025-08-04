@@ -22,12 +22,10 @@ webflowId: 66aceed7a35295b74def2eb8
 
 - Five or fewer children under your care
 - Daycare Administrator:
-
   - Bachelor's degree, or
   - Three years of management experience in human services, child care services, child development, education, nursing, social work, or business
 
 - Staff:
-
   - Must be 18 years old
   - Associate's degree in human services, child care services, child development, education, nursing or social work and one year of experience working with children, or
   - High school diploma and 3 years of work experience with children under 13 years old, or
@@ -43,7 +41,7 @@ webflowId: 66aceed7a35295b74def2eb8
 - Family daycare inspection by a Child Care Resource and Referral Agency
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Certificate of Registration for your family daycare.
 

@@ -17,7 +17,7 @@ agencyAdditionalContext: Board of Nursing
 
 - Criminal background check
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Your individual license (if you are also acting as a caretaker)
 - Confirmed your staff is properly licensed

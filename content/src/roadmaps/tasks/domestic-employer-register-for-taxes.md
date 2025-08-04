@@ -37,7 +37,7 @@ summaryDescriptionMd: >-
   * Gross Income Tax withholding
 
 
-  :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+  :::largeCallout{ showHeader="false" headerText=""  calloutType="informational" }
 
 
   For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights: What employers need to know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml).
@@ -53,20 +53,21 @@ callToActionText: Register for State Taxes
 agencyId: nj-taxation
 formName: NJ-Reg
 ---
+
 ## Application Requirements
 
-* [NAICS code](/tasks/naics-code-determination): ${naicsCode}
-* Social Security number
-* Estimated start date
-* Description of the type of work
-* Estimated number of employees
-* Anticipated first payroll withholding date for employees
+- [NAICS code](/tasks/naics-code-determination): ${naicsCode}
+- Social Security number
+- Estimated start date
+- Description of the type of work
+- Estimated number of employees
+- Anticipated first payroll withholding date for employees
 
-- - -
+---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
-* A `NJ Tax ID|tax-id` 
-* A `Business Tax PIN|tax-pin`
+- A `NJ Tax ID|tax-id`
+- A `Business Tax PIN|tax-pin`
 
 :::

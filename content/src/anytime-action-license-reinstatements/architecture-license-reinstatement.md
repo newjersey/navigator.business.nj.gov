@@ -40,7 +40,7 @@ synonyms:
 - A criminal background check, if applicable
 - List of licenses or certificates, past and present, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same license number.
 

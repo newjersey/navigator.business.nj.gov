@@ -26,7 +26,7 @@ agencyId: nj-consumer-affairs
 - [Dietitians and nutritionists](https://www.njconsumeraffairs.gov/dan/Pages/default.aspx)
 - [Dental hygienists and dental assistants](https://www.njconsumeraffairs.gov/den/Pages/default.aspx)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Confirmation that your healthcare staff is licensed.
 

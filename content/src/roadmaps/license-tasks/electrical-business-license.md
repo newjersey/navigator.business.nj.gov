@@ -33,13 +33,13 @@ webflowId: 6414793c685ea9e0d858aa8f
 - Name and address for all the business owners
 - List of all the names of business officers and anyone who owns 10% or more of stock in the business
 
-:::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="informational" }
 
 The application needs to be notarized.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An electrical contracting business permit.
 

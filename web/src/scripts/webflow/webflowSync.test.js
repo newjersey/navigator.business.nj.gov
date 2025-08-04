@@ -47,7 +47,7 @@ const fundingMd = [
       "- Must be a New Jersey-based clean energy and clean technology company\n" +
       "- Company must have 50 or fewer full-time employees\n" +
       "\n" +
-      ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+      ':::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }\n' +
       "\n" +
       "Vouchers totaling up to $15,000 per year\n" +
       "\n" +
@@ -95,7 +95,7 @@ const fundingMd = [
       "- Equipment cannot be planned to go out of use in the next 5 years\n" +
       "- Priority is given to urban areas, high frequency of use, and older models\n" +
       "\n" +
-      ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+      ':::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }\n' +
       "\n" +
       "Award of up to $100,000 per piece of equipment purchased or replaced\n" +
       "\n" +
@@ -134,7 +134,7 @@ const fundingMd = [
       "\n" +
       "- Businesses in accelerator programs and graduates of approved accelerators\n" +
       "\n" +
-      ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+      ':::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }\n' +
       "\n" +
       "> - 1:1 matching event sponsorship up to $100,000 for accelerator programs\n" +
       "> - 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies\n" +
@@ -288,7 +288,9 @@ describe("webflow syncing", () => {
     loadAllFundings.mockReturnValue(fundingMd);
     fs.readFileSync.mockImplementation((e) => {
       const original = jest.requireActual("fs");
-      return e.includes("sectors.json") ? JSON.stringify({ arrayOfSectors }) : original.readFileSync(e);
+      return e.includes("sectors.json")
+        ? JSON.stringify({ arrayOfSectors })
+        : original.readFileSync(e);
     });
     axios.mockImplementation((request) => {
       if (request.url.includes(sectorCollectionId) && request.method === "get") {
@@ -446,14 +448,19 @@ describe("webflow syncing", () => {
     it("reorders sectors", async () => {
       axios.mockImplementation((request) => {
         if (request.url.includes(sectorCollectionId) && request.method === "get") {
-          const sectors = [...webflowSectors, { name: "Zzzzzzz", slug: "zzzzzz", id: randomInt(10) }];
+          const sectors = [
+            ...webflowSectors,
+            { name: "Zzzzzzz", slug: "zzzzzz", id: randomInt(10) },
+          ];
           return {
             data: { items: formatResponseItems(sectors), pagination: { total: 1 } },
           };
         }
       });
       fs.readFileSync.mockImplementation(() => {
-        return JSON.stringify({ arrayOfSectors: [...arrayOfSectors, { name: "Zzzzzzz", id: "zzzzzz" }] });
+        return JSON.stringify({
+          arrayOfSectors: [...arrayOfSectors, { name: "Zzzzzzz", id: "zzzzzz" }],
+        });
       });
 
       const updatedSectors = await getSortedSectors();
@@ -487,7 +494,7 @@ describe("webflow syncing", () => {
           return contentMdToObject("## Eligibility\n ### Benefits\n");
         }).toThrow("Benefits section missing");
         expect(() => {
-          return contentMdToObject('## Eligibility\n:::callout{ headerText="Benefits" }\n');
+          return contentMdToObject('## Eligibility\n:::largeCallout{ headerText="Benefits" }\n');
         }).not.toThrow("Benefits section missing");
 
         const sampleMd =
@@ -500,7 +507,7 @@ describe("webflow syncing", () => {
           "eligibility stuff\n" +
           "- bullet\n" +
           "\n" +
-          ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+          ':::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }\n' +
           ">\n" +
           "> benefit section\n" +
           ":::";
@@ -523,12 +530,12 @@ describe("webflow syncing", () => {
           "eligibility stuff\n" +
           "- bullet\n" +
           "\n" +
-          ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+          ':::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }\n' +
           ">\n" +
           "> benefit section\n" +
           ":::";
         expect(contentMdToObject(sampleMd)["program-overview"]).toEqual(
-          "<p>Qualified Incentive Track Summary</p>"
+          "<p>Qualified Incentive Track Summary</p>",
         );
       });
 
@@ -543,7 +550,7 @@ describe("webflow syncing", () => {
           "eligibility stuff\n" +
           "- bullet\n" +
           "\n" +
-          ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+          ':::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }\n' +
           ">\n" +
           "> benefit section\n" +
           ":::";
@@ -596,7 +603,7 @@ describe("webflow syncing", () => {
       ]);
 
       await expect(getNewFundings()).rejects.toThrow(
-        "Agency Types for agency lol are mis-matched in nj-accelerate. Please check with Webflow."
+        "Agency Types for agency lol are mis-matched in nj-accelerate. Please check with Webflow.",
       );
     });
 
@@ -625,7 +632,7 @@ describe("webflow syncing", () => {
       ]);
 
       await expect(getNewFundings()).rejects.toThrow(
-        "Funding Types for funding type lol are mis-matched in nj-accelerate. Please check with Webflow."
+        "Funding Types for funding type lol are mis-matched in nj-accelerate. Please check with Webflow.",
       );
     });
 
@@ -635,7 +642,9 @@ describe("webflow syncing", () => {
           return { data: { items: formatResponseItems(webflowSectors), pagination: { total: 1 } } };
         }
         if (request.url.includes(fundingCollectionId) && request.method === "get") {
-          const filteredFundings = fundings.filter((item) => item.fieldData.slug !== "nj-accelerate");
+          const filteredFundings = fundings.filter(
+            (item) => item.fieldData.slug !== "nj-accelerate",
+          );
           return {
             data: {
               items: filteredFundings,
@@ -656,7 +665,9 @@ describe("webflow syncing", () => {
           return { data: { items: webflowSectors, pagination: { total: 1 } } };
         }
         if (request.url.includes(fundingCollectionId) && request.method === "get") {
-          const filteredFundings = fundings.filter((item) => item.fieldData.slug !== "nj-accelerate");
+          const filteredFundings = fundings.filter(
+            (item) => item.fieldData.slug !== "nj-accelerate",
+          );
           return {
             data: {
               items: filteredFundings,
@@ -804,9 +815,9 @@ describe("webflow syncing", () => {
         it("should throw error if non-rate limit error occurs", async () => {
           const error = { response: { status: 500 } };
 
-          await expect(catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2")).rejects.toEqual(
-            error
-          );
+          await expect(
+            catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2"),
+          ).rejects.toEqual(error);
           expect(mockRetryFunc).not.toHaveBeenCalled();
         });
       });

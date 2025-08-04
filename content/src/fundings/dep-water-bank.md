@@ -38,7 +38,7 @@ publishStageArchive: ""
 - Applicants with drinking water projects can be public community water systems privately and publicly owned, and nonprofit non-community water systems (as defined by the [National Primary Drinking Water Regulations](https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations))
 - All applicants must also satisfy the [Water Bank's creditworthiness standards](https://www.njib.gov/nj/Legal+Structure+%252F+Policies.44) (PDF named Amended and Restated Credit Policy” under the “Policies and Procedures” section)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive loans with principal forgiveness and below-market interest rates.
 

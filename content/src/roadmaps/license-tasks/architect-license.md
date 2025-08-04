@@ -70,7 +70,7 @@ If you are applying through NCARB, in addition to the above, you need to submit:
 
 - NCARB record
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An architect license.
 

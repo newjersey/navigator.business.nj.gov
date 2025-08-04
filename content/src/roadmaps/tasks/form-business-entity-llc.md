@@ -21,7 +21,7 @@ agencyId: nj-revenue-enterprise-services
 - `Registered agent|registered-agent`
 - Credit card or E-check payment
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - `Entity ID|entity-id`
 - `Certificate of Formation,|certificate-formation` Incorporation, or Authorization as applicable

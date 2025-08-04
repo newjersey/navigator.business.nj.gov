@@ -57,7 +57,7 @@ publishStageArchive: ""
 - 50% or more of the work is conducted in NJ
 - Applicant must obtain a signed approval letter from a participating university/college, Federal lab, or non-profit organization confirming that the facility is capable and willing to provide the services that will be supported by the voucher (current list of [participating facilities](https://www.google.com/maps/d/u/0/viewer?mid=1GcLO30HifmkWSqbI8UEBH7vS0lLOHNq1&ll=40.19013658561744%2C-74.98789639237287&z=17))
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 This program is a $275,000 pilot program. Eligible applicants can apply for vouchers of up to $25,000 to help offset the cost of leveraging R&D resources, facilities, and equipment at the state’s academic universities, colleges, federal, and non-profit laboratories to advance their technology development.
 

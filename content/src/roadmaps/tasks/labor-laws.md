@@ -9,20 +9,19 @@ callToActionLink: https://business.nj.gov/pages/employer-requirements
 callToActionText: Learn About New Jersey's Labor Laws
 ---
 
+- Minimum wage and overtime wage rates
+- Earned sick leave
+- Family leave
+- Unpaid or withheld wages
+- Fringe benefits
+- Worker compensation
+- Disability insurance
+- Health or life insurance
+- Unemployment
+- Required workplace notices
+- Child labor
 
-* Minimum wage and overtime wage rates
-* Earned sick leave
-* Family leave
-* Unpaid or withheld wages
-* Fringe benefits
-* Worker compensation
-* Disability insurance
-* Health or life insurance
-* Unemployment
-* Required workplace notices
-* Child labor
-
-:::callout{ showHeader="true" headerText="What if I don't follow New Jersey labor laws?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't follow New Jersey labor laws?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 There may be civil or criminal penalties.
 

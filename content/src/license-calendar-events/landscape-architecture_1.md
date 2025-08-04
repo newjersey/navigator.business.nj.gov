@@ -20,7 +20,7 @@ callToActionText: Renew My Certificate of Authorization
 - Current mailing address
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An updated copy of the renewed Certificate of Authorization to Offer Landscape Architectural Services, valid for 2 years. It will be sent to your mailing address on file.
 

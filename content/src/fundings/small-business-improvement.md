@@ -59,7 +59,7 @@ priority: true
 - Rent or own and operate from a facility
 - Meet SBA definition of a small business
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Grants are equal to 50% of eligible total project costs up to $50,000.
 

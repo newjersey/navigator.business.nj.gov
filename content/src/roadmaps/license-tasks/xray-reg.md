@@ -36,13 +36,13 @@ licenseCertificationClassification: undefined
 - Vehicle/trailer facility year, make, model, state, plate number, VIN, and copy of registration, if applicable
 - Max energy (kVp, mA, and MeV), if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 DEP will provide the registration number and a Facility ID for a new location via mail after you submit the registration form.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A copy of your registration number sent via mail.
 

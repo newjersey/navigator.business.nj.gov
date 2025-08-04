@@ -26,7 +26,7 @@ webflowId: 66aceedc4608b342d5f0e6fb
 - Professional liability insurance (see application for minimum amount per occurrence and aggregate amount per policy year)
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A massage therapy employer license number.
 

@@ -16,7 +16,7 @@ callToActionText: ""
 - **Zoning permits/approval:** Obtain zoning approval from your local zoning office
 - **Sign permits:** Obtain signage approvals from your local building/ construction department or zoning office
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Zoning approval
 - Sign permits

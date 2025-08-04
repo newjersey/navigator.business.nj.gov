@@ -60,7 +60,7 @@ priority: true
 - Small businesses must be in operation for at least 1 full year and nonprofits in operation for at least 3 full years
 - The business or nonprofit must not have more than $3M in total revenue
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive financing up to $500,000.
 

@@ -25,7 +25,7 @@ synonyms:
 - Employment history since your license expired or was placed on inactive status
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same license number.
 

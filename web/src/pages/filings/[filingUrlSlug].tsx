@@ -4,7 +4,7 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";
-import { Callout } from "@/components/njwds-extended/callout/Callout";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
@@ -107,7 +107,7 @@ export const FilingElement = (props: {
           props.filing.filingMethod ||
           props.filing.frequency ||
           props.filing.agency === "New Jersey Division of Taxation") && (
-          <Callout calloutType="conditional" showHeader={false}>
+          <LargeCallout calloutType="conditional" showHeader={false}>
             <div className="flex flex-column">
               {props.filing.taxRates && (
                 <>
@@ -162,7 +162,7 @@ export const FilingElement = (props: {
                 </span>
               )}
             </div>
-          </Callout>
+          </LargeCallout>
         )}
 
         {props.filing.additionalInfo ? (

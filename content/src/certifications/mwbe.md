@@ -19,23 +19,24 @@ applicableOwnershipTypes:
   - minority-owned
 isSbe: false
 ---
+
 ## Eligibility Criteria
 
-* Principal place of business in the State of New Jersey
-* 51% of the business is owned and controlled by a minority and/or a woman
+- Principal place of business in the State of New Jersey
+- 51% of the business is owned and controlled by a minority and/or a woman
 
 ## Application Needs
 
-* The names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership
-* The names and addresses of the officers of the business
-* The names and addresses of members of the board of directors (c-corps only)
-* The number of shares of stock issued and outstanding (c-corps only)
-* The articles of incorporation, bylaws, partnership agreements, or joint venture agreements (as applicable)
-* Organizational charts
-* An applicant's certificate of birth, motor vehicle driver's license, passport, or another acceptable form of identification
-* An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business
+- The names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership
+- The names and addresses of the officers of the business
+- The names and addresses of members of the board of directors (c-corps only)
+- The number of shares of stock issued and outstanding (c-corps only)
+- The articles of incorporation, bylaws, partnership agreements, or joint venture agreements (as applicable)
+- Organizational charts
+- An applicant's certificate of birth, motor vehicle driver's license, passport, or another acceptable form of identification
+- An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Minority/Women-Owned Business Enterprise certificate.
 

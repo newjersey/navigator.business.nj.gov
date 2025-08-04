@@ -24,7 +24,7 @@ agencyAdditionalContext: Federal Motor Carrier Safety Administration
 - Names and titles of the company officers
 - A `process agent|process-agent` , already filed with Federal Motor Carrier Safety Administration (FMCSA)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A USDoT number.
 

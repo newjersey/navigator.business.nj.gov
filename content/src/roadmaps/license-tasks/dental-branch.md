@@ -30,13 +30,13 @@ Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dent
 \
 Your branch office registration is linked to your dental license and should be renewed at the same time.
 
-:::callout{ showHeader="true" headerText="What if I don't get this registration?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this registration?" calloutType="conditional" }
 
 You cannot practice dentistry in any branch office where you are not registered and may face fines and disciplinary actions if you do so.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A branch office certificate, valid for 2 years.
 

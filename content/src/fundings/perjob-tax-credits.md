@@ -54,7 +54,7 @@ publishStageArchive: ""
 - Can demonstrate the award of tax credits is a “material factor” in their decision to locate in New Jersey versus an out-of-state alternative location
 - Create at least 35 new, full-time jobs (requirement may be lower if business is primarily engaged in a targeted industry or meets the definition of a "small business")
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Annual base per-new job tax credits from $500,000 - $8,000 per job per year depending on project location and other aspects of the project
 - Bonuses are also available on project location, industry, and alignment with other policy objectives

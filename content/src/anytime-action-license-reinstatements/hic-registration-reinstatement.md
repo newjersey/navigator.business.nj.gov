@@ -22,7 +22,7 @@ synonyms:
 - Photocopy of a certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same New Jersey home improvement contractor (NJHIC) number.
 

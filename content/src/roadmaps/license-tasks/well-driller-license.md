@@ -52,7 +52,7 @@ Schedule your exam on the [NGWA website](https://test-takers.psiexams.com/ngwa).
 - Notarized application
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A well driller’s license sent via email.
 

@@ -21,7 +21,7 @@ callToActionText: Renew My Business License
 - Current business address
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An updated copy of the renewed fire alarm, burglar alarm, and locksmith business license, valid for 3 years.
 

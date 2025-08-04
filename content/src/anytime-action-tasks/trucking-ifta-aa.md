@@ -38,38 +38,44 @@ issuingAgency: New Jersey Motor Vehicle Commission
 callToActionText: Apply for an IFTA Account
 callToActionLink: https://www.nj.gov/mvc/pdf/commercial/IFTA_1.pdf
 ---
+
 &nbsp;
 
 ## Vehicle Requirements
 
 Vehicles require IFTA registration if they:
-* Will be operated within 1 or more states or provinces
-* Will transport persons for compensation, such as charter buses and airport shuttles
-* Will be used mainly to move freight or `cargo|cargo`
+
+- Will be operated within 1 or more states or provinces
+- Will transport persons for compensation, such as charter buses and airport shuttles
+- Will be used mainly to move freight or `cargo|cargo`
 
 Additionally, vehicles must also meet **at least 1 of the following:**
-* Have 2 axles and a gross vehicle weight over 26,000 lbs
-* Have 3 or more axles, regardless of weight
-* Are part of a combination vehicle, with a total weight over 26,000 lbs
 
-Vehicles that **do not** need to register with the IFTA include: 
-* Government vehicles
-* Vehicles with restricted plates
-* Recreational vehicles
+- Have 2 axles and a gross vehicle weight over 26,000 lbs
+- Have 3 or more axles, regardless of weight
+- Are part of a combination vehicle, with a total weight over 26,000 lbs
+
+Vehicles that **do not** need to register with the IFTA include:
+
+- Government vehicles
+- Vehicles with restricted plates
+- Recreational vehicles
 
 &nbsp;
 
 ## Application Requirements
 
-* Proof of business address, such as bank statements or a certificate of formation
-* `USDoT Number|usdot-number`
-* `NJ Tax ID|tax-id` or Social Security Number (SSN)
-* Truck information, such as the Vehicle Identification Number (VIN#), fuel type, and number of axles
+- Proof of business address, such as bank statements or a certificate of formation
+- `USDoT Number|usdot-number`
+- `NJ Tax ID|tax-id` or Social Security Number (SSN)
+- Truck information, such as the Vehicle Identification Number (VIN#), fuel type, and number of axles
 
 &nbsp;
 
 ## How to Apply
+
 Fill out the application linked below bring it to the MVC Trenton office located at:
+
 > 120 South Stockton St.
 > &nbsp;
 >
@@ -82,7 +88,7 @@ Or mail to:
 >
 > 225 East State St
 > &nbsp;
-> 
+>
 > P.O. Box 133
 > &nbsp;
 >
@@ -94,21 +100,23 @@ If you apply by mail, include a copy of your proof of `Federal Tax ID number.|fe
 
 After receiving your license and decals, you must file fuel taxes quarterly.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-* An IFTA license, which must be carried in each vehicle at all times
-* A set of IFTA decals for each vehicle, which must be put on the exterior of the cab on both sides
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+- An IFTA license, which must be carried in each vehicle at all times
+- A set of IFTA decals for each vehicle, which must be put on the exterior of the cab on both sides
 
 IFTA licenses must be renewed once per year online.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don’t license my vehicles under the IFTA?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-* You may receive fines and penalties
-* Your vehicles may be impounded until you properly register them
-* Your business may experience delays in operations, affecting delivery schedules and reputation
-:::
+:::largeCallout{ showHeader="true" headerText="What if I don’t license my vehicles under the IFTA?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-:::callout{ showHeader="true" headerText="Questions?" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9400" emailIconText="mcscustomerservice@mvc.nj.gov" }
+- You may receive fines and penalties
+- Your vehicles may be impounded until you properly register them
+- Your business may experience delays in operations, affecting delivery schedules and reputation
+  :::
+
+:::largeCallout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-9400" emailIconText="mcscustomerservice@mvc.nj.gov" }
 
 Contact the MVC at:
 

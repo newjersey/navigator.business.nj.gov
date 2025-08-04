@@ -20,7 +20,7 @@ id: logistics-site-evaluation
 - **Zoning:** Consult with your local government's zoning office to determine if the site is suitable for your business. Find out [how zoning may impact your site](https://business.nj.gov/pages/select-a-location) selection
 - **Tenant improvements:** Identify any repairs, renovations, or construction the site may need. Make sure to consider federal requirements for `ADA compliance|ada` . Learn about other [site considerations](https://business.nj.gov/pages/leasing-tips) before signing your lease
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A viable warehouse space for your business.
 

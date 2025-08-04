@@ -19,7 +19,7 @@ agencyId: nj-motor-vehicle
 - Commercial insurance policy number and insurance provider name
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A commercial vehicle registration.
 

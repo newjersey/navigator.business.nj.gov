@@ -27,10 +27,8 @@ callToActionText: ""
 - The resolution or letter must show that your business location is approved for cannabis activities and that your business will not exceed any local limits on the number of licensed cannabis businesses, if they have set a limit
 - The resolution or letter must comply with [Section VIII of the Notice of Application Acceptance](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Zoning approval and a resolution or letter of support, which are required to apply for a conversion or annual cannabis license.
-
 
 :::

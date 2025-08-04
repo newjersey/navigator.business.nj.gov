@@ -20,7 +20,7 @@ disclaimerText: "You can renew your license 60 days before it expires and up to 
 - Copy of written contract, if claiming security requirement exemption
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An updated certificate of registration.
 

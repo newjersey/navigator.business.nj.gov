@@ -25,22 +25,23 @@ synonyms:
   - license renewal
   - restore
 ---
+
 ## Application Requirements
 
-* New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Schedule(s) of the controlled dangerous substances
-* Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
-* Social Security number
-* CDS registration number
-* DEA registration number
-* Signed attestation (included in application)
-* Applicable fees paid, once the NJ DCU has sent an invoice
+- New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
+- Schedule(s) of the controlled dangerous substances
+- Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
+- Social Security number
+- CDS registration number
+- DEA registration number
+- Signed attestation (included in application)
+- Applicable fees paid, once the NJ DCU has sent an invoice
 
 Your reinstatement application must be signed in front of and by a notary public.\
 \
 Email your completed CDS application to the New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will email you an invoice to pay your fee online.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 The same CDS registration number.
 

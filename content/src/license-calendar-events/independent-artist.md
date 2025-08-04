@@ -20,6 +20,8 @@ callToActionText: Renew My Entertainment Agency Registration
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A renewed entertainment agency registration valid for 1 year. It will be sent to your mailing address on file.
+
+:::

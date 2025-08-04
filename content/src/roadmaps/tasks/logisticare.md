@@ -25,7 +25,7 @@ callToActionText: Apply for Logisticare
 - Service area
 - Service hours
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Logisticare billing information for your transportation business.
 

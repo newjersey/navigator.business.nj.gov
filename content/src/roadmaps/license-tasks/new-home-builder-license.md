@@ -51,13 +51,13 @@ webflowId: 66199db280f3348a209cfe30
 Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A builder registration card and number, which must be shown to your local Construction Official when you apply for a construction permit to build a new house.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't register?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't register?" calloutType="warning" }
 
 If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines.
 

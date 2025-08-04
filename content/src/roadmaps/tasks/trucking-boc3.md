@@ -26,7 +26,7 @@ required: true
 - Name, title, phone number, and signature of the person authorized to sign the form
 - Name and address of the processing agent for each state where you do business
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A designated process agent for your company
 - A filed BOC-3

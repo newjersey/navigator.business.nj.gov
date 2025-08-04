@@ -42,7 +42,7 @@ minEmployeesRequired: 250
 - At least 50% of employees must be involved in the manufacturing process
 - The energy and utility services must be consumed exclusively at the facility
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive a sales tax exemption for the purchase of electricity and natural gas for use at the facility.
 

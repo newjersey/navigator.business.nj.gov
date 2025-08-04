@@ -18,6 +18,7 @@ agency:
   - njdot
 isSbe: false
 ---
+
 ## Eligibility Criteria
 
 1. Must be a small business, according to [SBA size standards](https://www.sba.gov/size-standards/index.html)
@@ -27,11 +28,11 @@ isSbe: false
 
 ## Application Needs
 
-* Preferences are given to businesses whose principal place of business is in New Jersey but will accept applications from out-of-state businesses
-* Requires submission of documents to support personal net worth (PNW) and economic disadvantaged status.
-* Applicant(s) must participate in the on-site interview proceedings.
+- Preferences are given to businesses whose principal place of business is in New Jersey but will accept applications from out-of-state businesses
+- Requires submission of documents to support personal net worth (PNW) and economic disadvantaged status.
+- Applicant(s) must participate in the on-site interview proceedings.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An Emerging Small Business Enterprise certificate.
 

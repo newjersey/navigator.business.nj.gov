@@ -31,13 +31,13 @@ webflowId: 6761e5278bbf7849854e3228
 - Name change documentation, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 You can’t create master plans or provide any professional planning services.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate with your professional planner license number, valid for 2 years, sent to your mailing address.
 

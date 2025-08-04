@@ -37,13 +37,13 @@ Each owner or operator must submit an application and background check authoriza
 - A copy of a `Certificate of Occupancy or Approval|certificate-occupancy`
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 The Bureau of Rooming and Boarding House Standards will evaluate your rooming or boarding house after reviewing your application. You must pass the site evaluation to get your license.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A rooming or boarding house license, which you must renew every year.
 

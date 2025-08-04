@@ -29,7 +29,7 @@ summaryDescriptionMd: "You need an acupuncturist license to offer services as an
 - Passing scores on the Board-administered Acupuncture Safety and Jurisprudence examination in English
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An acupuncturist license number.
 
