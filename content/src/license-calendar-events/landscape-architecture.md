@@ -20,7 +20,7 @@ callToActionText: Renew My Landscape Architecture License
 - Current mailing address
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An updated copy of the renewed landscape architect license, valid for 2 years. It will be sent to your mailing address on file.
 

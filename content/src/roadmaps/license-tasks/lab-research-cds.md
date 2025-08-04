@@ -64,13 +64,13 @@ webflowId: 6721493e43b6800b762e2452
 - Specifications from the manufacturer for the CDS safe, steel cabinet, or vault
 - A description of the CDS security and accountability measures in place (or planned) for inventory control and to prevent loss or theft of the CDS
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" }
 
 You cannot legally handle, store, utilize, or otherwise conduct research or testing using any CDS.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A CDS registration certificate sent to your mailing address, valid for 1 year.
 

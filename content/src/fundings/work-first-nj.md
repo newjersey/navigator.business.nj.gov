@@ -42,7 +42,7 @@ publishStageArchive: ""
 
 The business must be registered in New Jersey.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive help finding employees by providing guidance on job matching or occupation-specific training programs.
 

@@ -42,7 +42,7 @@ publishStageArchive: ""
 
 The business must be registered in New Jersey.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive up to $25,000 in a federal bond insuring employers against theft, forgery, larceny, or embezzlement for a term of 6 months.
 

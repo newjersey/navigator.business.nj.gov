@@ -45,7 +45,7 @@ publishStageArchive: Do Not Publish
 - Company must be registered to do business in New Jersey and located in New Jersey
 - Company is able to demonstrate some signs of financial or operational traction
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.
 

@@ -11,19 +11,20 @@ callToActionLink: https://www.njportal.com/dor/scorp
 callToActionText: Apply for My S Corporation Status
 agencyAdditionalContext: New Jersey Department of Treasury
 ---
+
 ## Application Requirements
 
-* Signatures from all company shareholders granting permission to file for an S corporation designation
-* An existing S corporation designation with the IRS
-*  `Entity ID|entity-id` 
+- Signatures from all company shareholders granting permission to file for an S corporation designation
+- An existing S corporation designation with the IRS
+- `Entity ID|entity-id`
 
-  :::callout{ showHeader="true" headerText="What if I don't complete this form?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this form?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-  If you do not file for an S corporation designation with the State but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
+If you do not file for an S corporation designation with the State but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
 
-  :::
+:::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A letter confirming your S corporation status with the State of New Jersey.
 

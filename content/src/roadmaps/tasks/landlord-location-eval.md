@@ -30,7 +30,7 @@ callToActionText: ""
 - **Conduct a title search**: Make sure there are no outstanding liens or ownership issues with the property.
 - **Get title insurance**: Get title insurance to protect against unexpected title problems.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A suitable rental property.
 

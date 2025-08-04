@@ -15,13 +15,15 @@ issuingAgency: NJ Department of Environmental Protection, Division of Water
 callToActionText: File a Record for My Customer’s Well
 callToActionLink: https://dep.nj.gov/online/
 ---
+
 ## Record Requirements
+
 - Permit number
 - Location of the well
 - Local ID (name) of the well
 - Diameter of the well
 - Depth of the well
-- Capacity of the well 
+- Capacity of the well
 - Drilling method
 - Grouting method
 - Geologic log
@@ -29,7 +31,7 @@ callToActionLink: https://dep.nj.gov/online/
 - Applicable fees paid
 - Pumping equipment details, such as license number, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 An approved well record sent via email.
 

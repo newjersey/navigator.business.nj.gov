@@ -45,7 +45,7 @@ minEmployeesRequired: 1
 - Companies must produce content in New Jersey
 - Incurred for services performed and tangible personal property purchased through vendors whose primary place of business is located in Atlantic, Burlington, Camden, Cape May, Cumberland, Gloucester, Mercer or Salem County
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - A tax credit equal to 20% of qualified digital media production expenses, or
 - 25% of qualified digital media production expenses for services performed and tangible personal property purchased through vendors located in specific New Jersey counties

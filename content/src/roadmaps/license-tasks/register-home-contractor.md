@@ -42,14 +42,14 @@ webflowId: 66aceedf6ba3dffa8ac9d4f0
 - Name, address, and phone number of registered agent<insert contextual info>, if applicable
 - Child support information, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A New Jersey home improvement contractor (NJHIC) number
 - An official paper registration received by mail (also known as a registration card)
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="conditional" }
 
 - Unregistered contractors who sell or make home improvements may be subject to civil penalties and possibly criminal penalties.
 

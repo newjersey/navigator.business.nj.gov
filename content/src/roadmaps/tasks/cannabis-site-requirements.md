@@ -25,13 +25,13 @@ callToActionText: ""
 
 ## Safety Permits
 
-* **Fire protection permits:** Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
-* **Signage:** Speak to your local zoning office, building/construction department, and the CRC to make sure the signage you're proposing is permitted
-* **Construction permits:** Check with your local building/construction department for permit requirements before doing any construction. Find out the [requirements for a construction permit](https://business.nj.gov/pages/building-permits-and-inspections) at your site
-* **`Certificate of Occupancy or Approval|certificate-occupancy`:** Speak to your local building/construction department to certify that your space is safe for occupancy
-* **`Life Hazard Use|life-hazard-use` or `Non-Life Hazard Use|non-life-hazard-use` registration:** Contact your `Local Enforcing Agency|lea` to see if you need to register as a Life Hazard Use or Non-Life Hazard Use. Your use type depends on whether your business poses a significant fire hazard. Your use type determines when and how often your fire inspections will occur once your site is open
+- **Fire protection permits:** Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
+- **Signage:** Speak to your local zoning office, building/construction department, and the CRC to make sure the signage you're proposing is permitted
+- **Construction permits:** Check with your local building/construction department for permit requirements before doing any construction. Find out the [requirements for a construction permit](https://business.nj.gov/pages/building-permits-and-inspections) at your site
+- **`Certificate of Occupancy or Approval|certificate-occupancy`:** Speak to your local building/construction department to certify that your space is safe for occupancy
+- **`Life Hazard Use|life-hazard-use` or `Non-Life Hazard Use|non-life-hazard-use` registration:** Contact your `Local Enforcing Agency|lea` to see if you need to register as a Life Hazard Use or Non-Life Hazard Use. Your use type depends on whether your business poses a significant fire hazard. Your use type determines when and how often your fire inspections will occur once your site is open
 
-:::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will know:" calloutType="conditional" }
 
 - The site-related permits and inspections you need to apply for a conversion or annual cannabis license and operate your cannabis business
 - The process for meeting your local government and CRC site requirements

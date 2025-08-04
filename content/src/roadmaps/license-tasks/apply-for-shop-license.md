@@ -26,7 +26,7 @@ licenseName: "Cosmetology and Hairstyling-Shop"
 - \[]{general-cert-occupancy} Certificate of occupancy or approval
 - \[]{cosmo-floor-plan} Floor plan
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A cosmetology license.
 

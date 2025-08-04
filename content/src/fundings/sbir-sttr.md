@@ -72,7 +72,7 @@ Both Direct and Bridge Funding grants have the following requirements:
 - Be a recipient of a Federal SBIR/STTR Phase I, Fast Track, or Direct to Phase II grant or contract award within the last two years prior to the issuance of this Notice of Funding Availability
 - The applicant cannot have been awarded more than five Federal SBIR/STTR grants or contracts (Phase I, Fast-track, Direct to Phase II combined) throughout the lifetime of the company
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - $25,000 Direct Funding for SBIR/STTR Phase I, Fast Track, or Direct to Phase II award/contract winners
 - $50,000 Bridge Funding for SBIR/STTR Phase II applicants

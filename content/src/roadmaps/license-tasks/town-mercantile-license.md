@@ -8,7 +8,7 @@ urlSlug: town-mercantile-license
 name: Get Your Mercantile License if Your Town Requires It
 webflowName: "Businesses with a Physical Location: Mercantile License"
 summaryDescriptionMd: >-
-  
+
 
   :::note
    This screen guides your next steps. It does not submit your information for registration.
@@ -39,7 +39,7 @@ ${endLocationDependentSection}
 
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A mercantile license.
 

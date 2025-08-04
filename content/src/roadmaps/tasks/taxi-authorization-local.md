@@ -28,7 +28,7 @@ The license must be displayed on all the vehicles in your fleet
 - Copy of your personal driving record
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A license to operate in the town where you applied.
 

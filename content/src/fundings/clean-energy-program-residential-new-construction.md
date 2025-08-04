@@ -47,7 +47,7 @@ descriptionMd: The Residential New Construction (RNC) Program is designed to
 - Must use natural gas and/or electricity as the primary heating fuel supplied by a New Jersey investor‐owned utility
 - Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 The program offers builders and raters varying incentives from $500 to $6,000+ per home.
 

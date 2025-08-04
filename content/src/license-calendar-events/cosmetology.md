@@ -23,7 +23,7 @@ callToActionText: Renew My Cosmetology Shop License
 - Current business address
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A renewed cosmetology shop registration valid for two years. It will be sent to your business mailing address on file.
 

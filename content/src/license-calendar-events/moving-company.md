@@ -29,7 +29,7 @@ callToActionText: Renew My Public Movers and/or Warehousemen License
 - Registration account
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same license number.
 

@@ -16,21 +16,22 @@ synonyms:
 industryIds:
   - healthcare
 ---
+
 ## Application Requirements
 
-* Dental license number
-* Business name and address of the office branch you are registering
-* Applicable fees paid, once the New Jersey State Board of Dentistry sends an invoice
+- Dental license number
+- Business name and address of the office branch you are registering
+- Applicable fees paid, once the New Jersey State Board of Dentistry sends an invoice
 
 Email your completed application to dentistry@dca.njoag.gov. The New Jersey State Board of Dentistry will email you an invoice to pay your fee online.
 
-:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't reinstate my registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 Your branch office registration will become inactive.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A branch office certificate linked to your dental license.
 

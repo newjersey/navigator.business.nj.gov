@@ -51,7 +51,7 @@ To [verify your employees are licensed](https://newjersey.mylicense.com/verifica
 - Employee's license number
 - The city used in employee's license application
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A confirmation letter (sent via postal mail) with your massage therapy license number
 - Confirmation that the staff providing massage therapy services have a valid license

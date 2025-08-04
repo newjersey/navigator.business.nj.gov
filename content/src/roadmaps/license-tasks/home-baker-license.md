@@ -39,13 +39,13 @@ webflowId: 6414793b7e0fbe2794b95bfe
 - A copy of the certificate of completion of a food protection management program
 - Applicable fees paid
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="informational" }
 
 T﻿he application works best when completed online in the original PDF format.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A cottage food operator permit.
 

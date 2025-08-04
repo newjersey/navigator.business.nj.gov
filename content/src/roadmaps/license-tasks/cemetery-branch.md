@@ -35,13 +35,13 @@ P.O. Box 45036
 
 Newark, NJ 07101
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="conditional" }
 
 You can only sell at the main cemetery associated with your license.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A cemetery salesperson branch license number.
 

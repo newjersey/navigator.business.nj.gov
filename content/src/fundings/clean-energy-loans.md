@@ -55,7 +55,7 @@ maxEmployeesRequired: 750
 - Have a term sheet, letter of intent, draft agreement, commitment letter, or similar document from an eligible financial institution.
 - Not be enrolled in any other state State Small Business Credit Initiative (SSBCI) program
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Loans at 3% below the financial institution's interest rate
 - Minority-, Woman-, and Veteran-owned businesses receive an additional 1% interest rate reduction

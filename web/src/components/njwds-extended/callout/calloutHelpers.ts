@@ -1,3 +1,45 @@
+export type CalloutTypes = "informational" | "conditional" | "warning" | "quickReference";
+
+export interface CalloutStyling {
+  backgroundColor: string;
+  textColor: string;
+  headerIcon: string;
+}
+
+export interface LargeCalloutProps extends IconProps {
+  calloutType: CalloutTypes;
+  showHeader?: string | boolean;
+  headerText?: string;
+}
+
+export interface MiniCalloutProps {
+  calloutType: CalloutTypes;
+  headerText: string;
+}
+
+export const CALLOUT_STYLES: Record<CalloutTypes, CalloutStyling> = {
+  informational: {
+    backgroundColor: "bg-accent-cool-lightest",
+    textColor: "text-accent-cool-more-dark",
+    headerIcon: "callout-informational-icon",
+  },
+  conditional: {
+    backgroundColor: "bg-primary-extra-light",
+    textColor: "text-primary-darker",
+    headerIcon: "callout-conditional-icon",
+  },
+  warning: {
+    backgroundColor: "bg-warning-extra-light",
+    textColor: "text-accent-warm-darker",
+    headerIcon: "callout-warning-icon",
+  },
+  quickReference: {
+    backgroundColor: "bg-base-lightest",
+    textColor: "text-primary-darker",
+    headerIcon: "callout-quickReference-icon",
+  },
+};
+
 export type IconType = "phone" | "email" | "text";
 
 export interface IconProps {

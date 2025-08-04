@@ -52,7 +52,7 @@ descriptionMd: The Food Desert Relief Supermarket Tax Credit Program provides
 - Be open for business to the public within six months of the receipt of a temporary Certificate of Occupancy or within three years of executing the incentive award agreement corresponding to the project [subject to possible extensions approved by the NJ Economic Development Authority (NJEDA)]
 - Acceptance benefits from federal nutrition assistance programs, including SNAP and WIC, and to holding a public listening session in the FDC at least one a year
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Developers will be eligible to receive tax credits up to 40% of the total project cost for the first approved supermarket/grocery store in an FDC and up to 20% for the second approved supermarket/grocery store in an FDC, capped at the project financing gap
 - Owners/operators of supermarkets/grocery stores will be eligible to receive three years of tax credits up to 100% of initial operating costs for the first approved supermarket/grocery store in an FDC and up to 50% of initial operating costs for the second approved supermarket/grocery store in an FDC, capped at the initial operating shortfall

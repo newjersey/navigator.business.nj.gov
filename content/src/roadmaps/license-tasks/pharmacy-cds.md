@@ -19,7 +19,7 @@ licenseName: ""
 webflowId: 668d72eeb67e0989ab73ef3a
 ---
 
-:::callout{ calloutType="quickReference" }
+:::largeCallout{ calloutType="quickReference" }
 
 You must register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS
 registration. You will need your CDS number for this process. Email a copy of your DEA registration
@@ -44,13 +44,13 @@ to cds@dca.njoag.gov within 60 days of completing your CDS registration.
 Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The New
 Jersey Drug Control Unit (NJ DCU) will send you an invoice via email to pay your fee online.
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="conditional" }
 
 You cannot legally dispense any CDS and may be subject to legal consequences and fines if you do so.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Controlled Dangerous Substances (CDS) registration certificate.
 

@@ -81,7 +81,7 @@ You don’t need a Notification of Asbestos Abatement if **any** of the followin
 - Disposal date
 - Name and address of landfill
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-2159" emailIconText="asbestos@dol.nj.gov" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-2159" emailIconText="asbestos@dol.nj.gov" }
 
 Email the notification and a photo of your payment.
 
@@ -99,19 +99,19 @@ P.O. Box 949
 
 Trenton, NJ 08625-0949
 
-:::callout{ showHeader="true" headerText="Emergency Asbestos Work Notice" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="Emergency Asbestos Work Notice" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency. The letter should describe what the emergency is (loss of heat or hot water, flooding that damaged asbestos materials, fire damage, etc.). Explain what could happen if there is a delay. Wait for approval before starting work.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't submit my notification?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't submit my notification?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You can't remove asbestos in New Jersey and may be subject to legal consequences, including fines. Each day you work without notice counts as a separate violation.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - A filed Notification of Asbestos Abatement allowing you to legally remove asbestos in New Jersey
 - For emergency requests, you will receive an emailed approval or denial

@@ -1,4 +1,5 @@
-import { Callout, CalloutTypes } from "@/components/njwds-extended/callout/Callout";
+import { CalloutTypes } from "@/components/njwds-extended/callout/calloutHelpers";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { getMergedConfig } from "@/contexts/configContext";
 import { render, screen } from "@testing-library/react";
 
@@ -36,9 +37,9 @@ describe("Callout Component", () => {
   describe.each(CALLOUT_TYPES)("Header rendering for %s callout type", (calloutType) => {
     it("should display default header text when no custom text is provided", () => {
       render(
-        <Callout calloutType={calloutType} showHeader={true} headerText="">
+        <LargeCallout calloutType={calloutType} showHeader={true} headerText="">
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       const expectedText = getHeaderText(calloutType);
@@ -47,9 +48,9 @@ describe("Callout Component", () => {
 
     it("should hide header text when showHeader is false", () => {
       render(
-        <Callout calloutType={calloutType} showHeader={false} headerText="">
+        <LargeCallout calloutType={calloutType} showHeader={false} headerText="">
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       const expectedText = getHeaderText(calloutType);
@@ -58,39 +59,33 @@ describe("Callout Component", () => {
 
     it("should display custom header text instead of default text", () => {
       render(
-        <Callout calloutType={calloutType} showHeader={true} headerText={TEST_DATA.customHeader}>
+        <LargeCallout
+          calloutType={calloutType}
+          showHeader={true}
+          headerText={TEST_DATA.customHeader}
+        >
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       const defaultText = getHeaderText(calloutType);
       expect(screen.queryByText(defaultText)).not.toBeInTheDocument();
       expect(screen.getByText(TEST_DATA.customHeader)).toBeInTheDocument();
     });
-
-    it("should not display icon when showIcon is false", () => {
-      render(
-        <Callout calloutType={calloutType} showIcon={false}>
-          {BODY_TEXT}
-        </Callout>,
-      );
-
-      expect(screen.queryByTestId("callout-icon")).not.toBeInTheDocument();
-    });
   });
 
   describe("quickReference icon text and links", () => {
     it("should not display any links when no icon text is provided", () => {
-      render(<Callout calloutType="quickReference">{BODY_TEXT}</Callout>);
+      render(<LargeCallout calloutType="quickReference">{BODY_TEXT}</LargeCallout>);
 
       expect(screen.queryByRole("link")).not.toBeInTheDocument();
     });
 
     it("should render phone links with correct href format", () => {
       render(
-        <Callout calloutType="quickReference" phoneIconText={TEST_DATA.phone}>
+        <LargeCallout calloutType="quickReference" phoneIconText={TEST_DATA.phone}>
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       const phoneLink = screen.getByRole("link", { name: TEST_DATA.phone });
@@ -99,9 +94,9 @@ describe("Callout Component", () => {
 
     it("should render email links with correct href format", () => {
       render(
-        <Callout calloutType="quickReference" emailIconText={TEST_DATA.email}>
+        <LargeCallout calloutType="quickReference" emailIconText={TEST_DATA.email}>
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       const emailLink = screen.getByRole("link", { name: TEST_DATA.email });
@@ -110,13 +105,13 @@ describe("Callout Component", () => {
 
     it("should display phone and email links together when both are provided", () => {
       render(
-        <Callout
+        <LargeCallout
           calloutType="quickReference"
           phoneIconText={TEST_DATA.phone}
           emailIconText={TEST_DATA.email}
         >
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       const phoneLink = screen.getByRole("link", { name: TEST_DATA.phone });
@@ -128,14 +123,14 @@ describe("Callout Component", () => {
 
     it("should display text-based icons with correct content", () => {
       render(
-        <Callout
+        <LargeCallout
           calloutType="quickReference"
           amountIconText={TEST_DATA.amount}
           filingTypeIconText={TEST_DATA.filingType}
           frequencyIconText={TEST_DATA.frequency}
         >
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       expect(screen.getByText(TEST_DATA.amount)).toBeInTheDocument();
@@ -147,7 +142,7 @@ describe("Callout Component", () => {
       const { amount, filingType, phone, email } = TEST_DATA.mixedData;
 
       render(
-        <Callout
+        <LargeCallout
           calloutType="quickReference"
           amountIconText={amount}
           filingTypeIconText={filingType}
@@ -155,7 +150,7 @@ describe("Callout Component", () => {
           emailIconText={email}
         >
           {BODY_TEXT}
-        </Callout>,
+        </LargeCallout>,
       );
 
       expect(screen.getByText(amount)).toBeInTheDocument();
@@ -172,7 +167,7 @@ describe("Callout Component", () => {
       const { amount, filingType, phone, email } = TEST_DATA.mixedData;
 
       render(
-        <Callout
+        <LargeCallout
           calloutType="quickReference"
           amountIconText={amount}
           filingTypeIconText={filingType}

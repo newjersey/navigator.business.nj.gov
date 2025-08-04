@@ -1,5 +1,5 @@
 import { DocumentTile } from "@/components/DocumentTile";
-import { Callout } from "@/components/njwds-extended/callout/Callout";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
@@ -24,9 +24,9 @@ export const Download = (props: Props): ReactElement => {
             <Heading level={2}>{Config.taxClearanceCertificateDownload.headerTwoLabel}</Heading>
           </div>
         </div>
-        <Callout calloutType="warning" showIcon>
+        <LargeCallout calloutType="warning">
           {Config.taxClearanceCertificateDownload.calloutText}
-        </Callout>
+        </LargeCallout>
         <DocumentTile
           label={Config.taxClearanceCertificateDownload.buttonText}
           icon="formation-icon-blue"

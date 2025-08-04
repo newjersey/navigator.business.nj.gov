@@ -35,7 +35,7 @@ publishStageArchive: Do Not Publish
 
 - Available for eligible brownfield sites in the state for the purpose of assessing known or suspected site contamination
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 You receive a free environmental site assessment to evaluate contamination at brownfield sites.
 

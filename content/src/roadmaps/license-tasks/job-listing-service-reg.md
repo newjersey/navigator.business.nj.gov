@@ -38,7 +38,7 @@ licenseCertificationClassification: undefined
 - Explanation of license suspension, denial, or revocation, if applicable
 - Copy of contract(s) that are provided to job seekers, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A job listing service registration.
 

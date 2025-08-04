@@ -63,7 +63,7 @@ You and your tenant have a chance to settle the case before going to court. For 
 
 If the case goes to court and you win or your tenant doesn’t show up, you can request a warrant for removal. The warrant allows a court officer to evict the tenant. For more details about the court process, review the [New Jersey Courts' Landlord/Tenant Procedures](https://www.njcourts.gov/sites/default/files/forms/12822_lt_proc_notice.pdf).
 
-:::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will know:" calloutType="conditional" }
 
 The laws and process you need to follow to legally evict a tenant.
 

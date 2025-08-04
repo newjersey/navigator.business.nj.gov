@@ -49,13 +49,13 @@ P.O. Box 45012
 
 Newark, New Jersey 07101
 
-:::callout{ showHeader="true" headerText="What if I don't get this certificate?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this certificate?" calloutType="warning" }
 
 You can’t administer or prescribe TPAs to patients in any branch office that is not registered. Doing so may result in legal consequences, including fines.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A branch office TPA certification number.
 

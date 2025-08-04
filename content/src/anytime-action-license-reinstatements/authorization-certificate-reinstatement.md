@@ -20,7 +20,7 @@ synonyms:
 - Applicable fees paid
 - Ownership details, such as name and address of each officer, director, manager, and principal stakeholder, if there have been changes in the structure of the company since the last submission
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A reinstated certificate of authorization.
 

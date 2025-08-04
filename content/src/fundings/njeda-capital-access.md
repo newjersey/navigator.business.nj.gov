@@ -68,7 +68,7 @@ maxEmployeesRequired: 50
 - Be in business for at least 1 year before the date of application
 - Demonstrate the ability to repay the loan
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 This fund loans up to $250,000 with fixed interest rates and flexible spending guidelines. The working capital loan can be used to support payroll, supplies, rent, utilities, marketing, advertising, and other business operation expenses.
 

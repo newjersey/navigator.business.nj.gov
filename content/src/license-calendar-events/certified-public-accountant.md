@@ -31,7 +31,7 @@ Your accounting firm registration will expire every 3 years.
 - Current information for the Resident Manager-in-Charge, this must be the Certified Public Accountant that holds a license in the state
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A renewed accounting firm registration valid for 3 years. It will be sent to your business mailing address on file.
 

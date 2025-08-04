@@ -39,7 +39,7 @@ publishStageArchive: ""
 - Be registered with the State of NJ
 - Plan to provide substantive on-the-job training at your location or use approved virtual training that results in skill badges or industry-recognized credentials
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Employers can receive up to 50% wage subsidy for up to 6 months (with cap of $10,000 per employee and total cap of $40,000 across all employees)
 - Employees can receive $500 incentive for re-entering the workforce and receiving training from businesses with 100 or fewer employees

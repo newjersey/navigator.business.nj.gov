@@ -51,12 +51,11 @@ describe("<Content />", () => {
     expect(screen.getByText("body text")).toBeInTheDocument();
   });
 
-  it("renders callout content", () => {
-    const mdString = `:::callout{ showHeader="true" headerText="header" showIcon="true" calloutType="conditional" }\n\nbody text\n\n:::`;
+  it("renders largeCallout content", () => {
+    const mdString = `:::largeCallout{ showHeader="true" headerText="header" calloutType="conditional" }\n\nbody text\n\n:::`;
 
     render(<Content>{mdString}</Content>);
     expect(screen.getByText("header")).toBeInTheDocument();
     expect(screen.getByText("body text")).toBeInTheDocument();
-    expect(screen.getByTestId("callout-icon")).toBeInTheDocument();
   });
 });

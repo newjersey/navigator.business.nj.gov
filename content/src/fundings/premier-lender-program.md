@@ -57,7 +57,7 @@ publishStageArchive: null
 
 Businesses and nonprofits must commit to create or retain 1 new full-time job for every $65,000. There is an application fee of $1,000.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses can receive loan participation of up to $2 million or line of credit guarantees up to $750,000.
 

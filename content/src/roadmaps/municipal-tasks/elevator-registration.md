@@ -31,13 +31,13 @@ licenseCertificationClassification: undefined
 - Device specifications, such as travel distance, speed, and occupancy load
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An elevator registration number.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't register my elevator device(s)?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't register my elevator device(s)?" calloutType="conditional" }
 
 You will not be able to operate or modify the elevator device(s) without a registration. Also, if it is a newly-installed device(s), you will not be able to get a `Certificate of Occupancy or Approval|certificate-occupancy` for your space.
 

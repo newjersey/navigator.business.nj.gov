@@ -35,7 +35,7 @@ summaryDescriptionMd: "You need a certification to be a general real property ap
 - Child support information (if applicable)
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A 12-digit license number and your general real property appraiser certification
 

@@ -12,14 +12,15 @@ id: cannabis-insurance-policy
 callToActionLink: ""
 callToActionText: ""
 ---
+
 ## Common Types of Business Insurance
 
-* **Commercial general liability insurance:** Research coverage and pricing options for your industry and business size
-* **Workers' compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
-* **Professional liability insurance:** Protect your business from liability if you offer professional advice or medical services. ***This is required to apply for a cannabis license***
-* **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
+- **Commercial general liability insurance:** Research coverage and pricing options for your industry and business size
+- **Workers' compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
+- **Professional liability insurance:** Protect your business from liability if you offer professional advice or medical services. **_This is required to apply for a cannabis license_**
+- **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Certificate of Insurance.
 

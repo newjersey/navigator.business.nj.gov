@@ -22,13 +22,13 @@ licenseCertificationClassification: ""
 - Character statements from two New Jersey citizens who have known the applicant for at least 5 years
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 You must already have a licensed agent to be able to apply for an employment agency license. Select "Agent" on the dropdown in the form, if necessary.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A license to operate as an employment agency.
 

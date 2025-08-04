@@ -1,7 +1,7 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText="" showIcon="false"
+  :::largeCallout{ showHeader="true" headerText=""
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -22,7 +22,7 @@ summaryDescriptionMd: >-
   * **Special Bus Operations,** carrying passengers, not on a regular schedule, to or from a place in NJ for per-person compensation. The compensation may include special discounts or premiums for attractions that are served by the route. These trips are offered and arranged by the owner of the bus company.
 
 
-  Transportation services that do not require the CPCN include: 
+  Transportation services that do not require the CPCN include:
 
 
   * Taxicabs
@@ -44,6 +44,7 @@ agencyId: nj-motor-vehicle
 agencyAdditionalContext: Business Licensing Services Bureau – Passenger Carrier Unit
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
+
 &nbsp;
 
 ## Petition Instructions
@@ -56,7 +57,7 @@ Your petition should start off with the following:
 
 &nbsp;
 
-*“In the matter of the Petition for a Certificate of Public Convenience and Necessity for Conducting \[type of operation] by \[legal name of operator].​”*
+_“In the matter of the Petition for a Certificate of Public Convenience and Necessity for Conducting \[type of operation] by \[legal name of operator].​”_
 
 &nbsp;
 
@@ -68,11 +69,11 @@ In the body of your petition, include:​
 
 **2. Equipment details.** List all vehicles used in your service. Include:
 
-* Make and model
-* Year
-* Vehicle Identification Number (VIN)
-* Name of the owner
-* Terms of any lease.
+- Make and model
+- Year
+- Vehicle Identification Number (VIN)
+- Name of the owner
+- Terms of any lease.
 
 **3. Qualifications:** Describe your experience and qualifications relevant to the service you want to operate.
 
@@ -80,9 +81,9 @@ In the body of your petition, include:​
 
 **5. Business ownership and management information.** Provide:
 
-* Total number of shares issued, if applicable
-* Names and addresses of all those with more than 5% voting control
-* Names all officers, directors, members, and partners associated with the business
+- Total number of shares issued, if applicable
+- Names and addresses of all those with more than 5% voting control
+- Names all officers, directors, members, and partners associated with the business
 
 **6. Current financial information.** Provide your current income statement and balance sheet. If your business is not yet operational, skip this step and proceed to step 7.
 
@@ -142,26 +143,26 @@ Trenton, NJ 08666-0170
 
 After submission of your petition, the NJ MVC will assign you a docket number. You must then:
 
-* Publish the Notice of Petition in a newspaper. The MVC will designate this newspaper for you.
-* Send notices to municipal clerks where the service operates, as well as to competing carriers operating in the same area.
+- Publish the Notice of Petition in a newspaper. The MVC will designate this newspaper for you.
+- Send notices to municipal clerks where the service operates, as well as to competing carriers operating in the same area.
 
 Once your Notice is published, you must obtain proof of this from the newspaper. This is called an `Affidavit of Publication|affidavit-publication`, and it must be forwarded to the above NJ MVC mailing address.
 
-:::callout{ showHeader="true" headerText="What if I don’t get a CPCN?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t get a CPCN?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-* You risk fines and penalties imposed by enforcement agencies
-* Your vehicles may be impounded
-* Potential lawsuits or administrative actions may be taken against your business
+- You risk fines and penalties imposed by enforcement agencies
+- Your vehicles may be impounded
+- Potential lawsuits or administrative actions may be taken against your business
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A Certificate of Public Convenience and Necessity (CPCN) mailed to you.
 
 :::
 
-:::callout{ showHeader="true" headerText="Questions?" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 777-4186" emailIconText="CBIU@mvc.nj.gov" }
+:::largeCallout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 777-4186" emailIconText="CBIU@mvc.nj.gov" }
 
 Call or email the NJ MVC at:
 :::

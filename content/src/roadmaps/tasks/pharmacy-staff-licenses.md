@@ -14,15 +14,16 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Board of Pharmacy
 webflowType: individual-license
 ---
+
 ## Licensing Requirements
 
-* [Pharmacist](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
-* [Pharmacy technician](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx) 
-* [Pharmacist intern](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
-* [Pharmacist collaborative practice](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
-* [Immunization approvals](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx) 
+- [Pharmacist](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
+- [Pharmacy technician](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
+- [Pharmacist intern](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
+- [Pharmacist collaborative practice](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
+- [Immunization approvals](https://www.njconsumeraffairs.gov/phar/Pages/applications.aspx)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Confirmation that your pharmacy staff is licensed.
 

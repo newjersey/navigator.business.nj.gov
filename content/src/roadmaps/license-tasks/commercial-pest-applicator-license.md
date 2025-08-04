@@ -35,7 +35,7 @@ licenseCertificationClassification: undefined
 4. Pass the core exam and the category exam. You must pass the exams within a calendar year.
 5. Pay your license invoice. You must [pay the invoice](https://www9.nj.gov/DEP_RSP/Orchestrate.do?initiate=true&orchestrationId=NJDEP-EL-PayInvoice&service_category_id=30&service_class_id=109) for the license to be valid.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A license sent via mail.
 

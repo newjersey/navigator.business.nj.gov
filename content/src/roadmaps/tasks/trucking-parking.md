@@ -11,7 +11,7 @@ name: Obtain Zoning and Overnight Parking Approval, if Required
 id: trucking-parking
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Zoning approval.
 

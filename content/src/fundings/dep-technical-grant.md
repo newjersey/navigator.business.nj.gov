@@ -11,7 +11,7 @@ sidebarCardBodyText: Your nonprofit community group could receive funds from
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
-  :::infoAlert 
+  :::infoAlert
    See page 153 in the [regulations](https://dep.nj.gov/wp-content/uploads/rules/rules/njac7_26c.pdf) for more information about community groups.
   :::
 
@@ -33,15 +33,16 @@ county:
 sector: []
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Be a nonprofit community group
-* At least one member of the community group must live in the neighborhood in which the site is located
-* Be incorporated or in the process of incorporating
+- Be a nonprofit community group
+- At least one member of the community group must live in the neighborhood in which the site is located
+- Be incorporated or in the process of incorporating
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
-* Maximum of $10,000 for a single `Remedial Investigation (RI)|remedial-investigation` 
-* Maximum of $10,000 for a single `Remedial Action (RA)|remedial-action`
+- Maximum of $10,000 for a single `Remedial Investigation (RI)|remedial-investigation`
+- Maximum of $10,000 for a single `Remedial Action (RA)|remedial-action`
 
 :::

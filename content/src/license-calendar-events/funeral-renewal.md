@@ -23,13 +23,13 @@ callToActionText: "Renew My Funeral Home’s Registration "
 - Criminal history since last renewal, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don’t renew my registration? " showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t renew my registration? " calloutType="warning" }
 
 Your Certificate of Registration will expire and you won’t be able to legally operate a funeral home or mortuary establishment.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same registration number.
 

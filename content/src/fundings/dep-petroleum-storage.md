@@ -48,7 +48,7 @@ publishStageArchive: ""
 - **For a grant:** Businesses must have taxable income not exceeding $250,000 and a net worth not exceeding $500,000, excluding their primary residence and pension
 - Eligibility for independent institutions of higher education, nonprofit organizations, volunteer fire, ambulance, first aid, emergency or rescue company or squad, is defined in the UST Finance Act
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Grant recipients can receive up to $500,000 per site in a Metropolitan area and up to $1M per site if the project is located in a Suburban area
 - Loan recipients will not exceed $2M in an urban area, or not exceed $3M if the project site is located in a suburban area

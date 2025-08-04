@@ -29,11 +29,20 @@ divisionPhone: (609) 292-4860
 - Certification Personal Identification Number (PIN) that you created during registration
 
 :::infoAlert
+
 **Keep in mind:**
 If your dental office begins placing or removing amalgam fillings, your exemption no longer applies. You must install an approved `amalgam separator|amalgam-separator` and [register for a new dental amalgam certification](https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_quick_guide.pdf) with NJDEP. This ensures your office stays compliant with state environmental rules.
+
 :::
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" }
+
 If you don’t register, you may be subject to significant fines.
+
 :::
-:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional"}
+
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional"}
+
 A dental amalgam certification exemption.
+
+:::

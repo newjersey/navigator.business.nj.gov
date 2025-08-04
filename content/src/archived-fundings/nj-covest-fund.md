@@ -42,7 +42,7 @@ The NJ CoVest Fund provides seed funding to New Jersey technology and life scien
 - Early-stage technology and life science businesses located in physical commercial office, co-working, or incubator space in New Jersey
 - At least 2 full-time founders that have a financial commitment to the company, and a minimum of 50% of its W-2 employees in New Jersey
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Up to $250,000 is available
 

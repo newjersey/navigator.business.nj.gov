@@ -28,7 +28,7 @@ callToActionText: Renew My Telemarketing License
 - Explanation of license suspension, denial, or revocation, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An updated copy of the renewed telemarketing license, valid for one year.
 

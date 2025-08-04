@@ -26,7 +26,7 @@ webflowType: object-vehicle
 webflowId: 66aceed312f526cd0330fb48
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A fire permit for your food truck.
 :::

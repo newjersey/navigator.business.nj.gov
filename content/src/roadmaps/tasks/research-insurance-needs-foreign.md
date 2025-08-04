@@ -15,7 +15,7 @@ callToActionText: ""
 - **Commercial general liability insurance:** Confirm that your coverage includes work done in New Jersey
 - **`Workers' compensation insurance|workers-comp`**: The State of New Jersey requires that you obtain this insurance if you have NJ employees, or stockholders in a corporation do work for the company (even if they are not compensated).
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate of insurance with coverage in New Jersey.
 

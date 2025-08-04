@@ -13,7 +13,7 @@ callToActionText: ""
 
 - Your business's floor plan
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Approval from your local department of health.
 

@@ -41,11 +41,11 @@ icon: govt-purple.svg
 - Number of permits you are applying for (1-99)
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this permit?" calloutType="warning" }
 Without a permit, you cannot transport an ocean container on public roads. You may face fines if you do.
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
 
 - An Ocean Borne Container Permit, valid for 1 year
 - A permit sent to your mailing address

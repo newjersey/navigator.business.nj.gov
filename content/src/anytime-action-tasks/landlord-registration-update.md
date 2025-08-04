@@ -36,13 +36,13 @@ synonyms:
 
 Contact your municipal or town clerk. Each town has its own application form and process.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 If you are renting out a residential property with 3 or more units, you need to renew your registration with the Department of Community Affairs, Bureau of Housing Inspection.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An updated Certificate of Registration.
 

@@ -48,7 +48,7 @@ maxEmployeesRequired: 225
 - Fewer than 225 full-time employees, 75% of whom must work in NJ
 - Commercializes one or more of the following eligible technologies in the State: Advanced Computing, Advanced Materials, Biotechnology, Electronic Devices, Information Technology, Life Sciences, Medical Devices, Mobile Communications, Renewable Energy Technology, and Carbon Footprint Reduction Technology
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Tax credits that equal up to 20% of a qualified investment with a potential 5% bonus.
 

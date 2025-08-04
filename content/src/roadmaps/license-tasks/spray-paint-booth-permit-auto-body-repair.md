@@ -23,7 +23,7 @@ summaryDescriptionMd: "You need a spray paint booth permit if your business will
 - **Wetlands, existing flood hazard areas**: Related to potential disturbances caused by your business
 - **Right to know**: Due to hazardous material which may be stored on the site
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The permits required to operate a spray paint booth.
 

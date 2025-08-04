@@ -22,7 +22,7 @@ agencyId: nj-revenue-enterprise-services
 - `Registered agent|registered-agent`
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - `Entity ID|entity-id`
 - `Certificate of Authorization|certificate-formation`

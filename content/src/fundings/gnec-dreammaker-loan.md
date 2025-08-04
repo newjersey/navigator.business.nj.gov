@@ -48,7 +48,7 @@ priority: true
 - Submit a $100 application fee
 - Final approval is contingent on the credit committee
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Up to $30,000 in funding
 - No pre-payment penalties for this loan

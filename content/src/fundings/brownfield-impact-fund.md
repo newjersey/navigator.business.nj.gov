@@ -38,7 +38,7 @@ publishStageArchive: Do Not Publish
 
 - Funds must be allocated to environmental cleanup (not assessment or investigation)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 You receive low-interest (1-2%) loans of up to $350,000.
 

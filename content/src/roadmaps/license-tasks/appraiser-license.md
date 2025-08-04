@@ -41,7 +41,7 @@ webflowId: 640b8467b7c8237f0cdd1541
 - Employment record
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A 12-digit license number and your residential real property appraiser license.
 

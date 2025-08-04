@@ -20,5 +20,6 @@ callToActionText: Renew My Temporary Help Service Firm Registration
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 A renewed temporary help service firm registration valid for one year. It will be sent to your mailing address on file.
+:::

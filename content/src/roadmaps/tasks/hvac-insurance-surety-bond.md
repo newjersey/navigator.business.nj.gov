@@ -12,12 +12,13 @@ id: hvac-insurance-surety-bond
 callToActionLink: ""
 callToActionText: ""
 ---
+
 ## Other Common Types of Business Insurance
 
-* **Workers' compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
-* **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
+- **Workers' compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
+- **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A Certificate of Insurance and surety bond.
 

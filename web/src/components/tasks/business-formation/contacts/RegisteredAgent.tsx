@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
-import { Callout } from "@/components/njwds-extended/callout/Callout";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
@@ -17,7 +17,7 @@ import React, { ReactElement, useContext } from "react";
 const RegisteredAgentInfoCallout = (): ReactElement => {
   const { Config } = useConfig();
   return (
-    <Callout
+    <LargeCallout
       calloutType="informational"
       showHeader={true}
       headerText={Config.formation.registeredAgent.infoCalloutHeading}
@@ -31,7 +31,7 @@ const RegisteredAgentInfoCallout = (): ReactElement => {
         </ul>
         <p>{Config.formation.registeredAgent.infoCalloutFooter}</p>
       </div>
-    </Callout>
+    </LargeCallout>
   );
 };
 

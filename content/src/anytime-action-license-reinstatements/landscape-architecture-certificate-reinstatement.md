@@ -25,7 +25,7 @@ You must reinstate your Certificate of Authorization to Provide or Offer Landsca
 - License number, email, and address of responsible landscape architect
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A reinstated certificate of authorization
 

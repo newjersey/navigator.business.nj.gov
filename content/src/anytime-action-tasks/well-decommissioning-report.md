@@ -11,7 +11,7 @@ urlSlug: well-decommissioning-report
 summaryDescriptionMd: >
   1. You need to examine the well on site to determine if you require approval
   from the Department of Environmental Protection (DEP) to decommission the well
-  (take it out of service).  
+  (take it out of service).
 
   2. Decommission the well or apply for a decommissioning approval.
 
@@ -21,16 +21,18 @@ issuingAgency: NJ Department of Environmental Protection, Division of Water
 callToActionText: Decommission My Customer’s Well
 callToActionLink: https://dep.nj.gov/online/
 ---
+
 ## Report Requirements
-- Permit number or authorization number 
-- Facility name and ID of the drilling company 
-- Property owner’s name and address 
-- Well depth 
-- Local ID (name) of the well 
-- Specific decommissioning details, such as the amount of grout used 
+
+- Permit number or authorization number
+- Facility name and ID of the drilling company
+- Property owner’s name and address
+- Well depth
+- Local ID (name) of the well
+- Specific decommissioning details, such as the amount of grout used
 - Certification PIN
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 An approved well decommissioning report sent via email.
 
