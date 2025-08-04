@@ -13,6 +13,7 @@ const healthCheckEndPoints: Record<string, string> = {
   webserviceLicenseStatus: "webservice/license-status",
   webserviceFormation: "webservice/formation",
   taxClearance: "tax-clearance",
+  xrayRegistration: "xray-registration",
 };
 
 const healthCheck = async (type: string, url: string, logger: LogWriterType): Promise<Status> => {
