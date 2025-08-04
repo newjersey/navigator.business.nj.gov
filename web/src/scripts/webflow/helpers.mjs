@@ -90,6 +90,7 @@ export const contentToStrings = (content) => {
     ":::infoAlert",
     ":::callout",
     ":::largeCallout",
+    ":::miniCallout",
     ":::",
     /(\[]{.*})/g,
   ];

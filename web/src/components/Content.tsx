@@ -7,6 +7,7 @@ import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
+import { MiniCallout } from "@/components/njwds-extended/callout/MiniCallout";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
@@ -72,6 +73,9 @@ export const Content = (props: ContentProps): ReactNode => {
           {props.children}
         </LargeCallout>
       );
+    },
+    miniCallout: (props: any): ReactElement => {
+      return <MiniCallout headerText={props.headerText} calloutType={props.calloutType} />;
     },
     infoAlert: (props: any): ReactElement => {
       return <Alert variant="info">{props.children}</Alert>;

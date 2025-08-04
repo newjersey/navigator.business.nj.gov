@@ -68,6 +68,12 @@ const customRemarkPlugin: Plugin = () => {
                   : undefined,
             };
             break;
+          case "miniCallout":
+            data.hProperties = {
+              headerText: node.attributes.headerText,
+              calloutType: node.attributes.calloutType,
+            };
+            break;
           case "icon":
             data.hProperties = { type: node.attributes.type };
             break;
