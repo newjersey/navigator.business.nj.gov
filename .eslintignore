@@ -34,6 +34,7 @@ web/out/
 web/cypress/plugins
 web/cypress/support
 web/stories
+web/src/lib/cms/CollectionMap.json
 
 web/amplify/#current-cloud-backend/
 web/amplify/.config/local-*
