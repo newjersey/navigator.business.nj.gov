@@ -59,7 +59,7 @@ publishStageArchive: null
 - Have between 1-50 full-time workers at time of application
 - Have less than or equal to $5,000,000 in prior year sales revenue (excluding grant revenue)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 The award grants up to $75,000 per business to support research and development of their innovation.
 
