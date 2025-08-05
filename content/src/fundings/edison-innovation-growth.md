@@ -43,7 +43,7 @@ publishStageArchive: ""
 - The company must employ 75% of its W-2 employees in NJ or commit to growing 10 high-paying jobs over two years
 - The company must have received an Edison Innovation VC Growth Fund investment and be in good standing
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses can receive funding of up to $500,000.
 
