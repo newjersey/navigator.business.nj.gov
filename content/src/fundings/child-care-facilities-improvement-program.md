@@ -57,7 +57,7 @@ publishStageArchive: null
 - Labor and materials cost for interior and exterior facility improvements to create high quality early childhood learning environments. See the full list of [eligible facility improvement projects](https://www.njeda.com/wp-content/uploads/2022/05/Child-Care-Facilities-Improvement-Eligible-Projects.pdf)
 - Soft costs are capped at up to 20% of total grant and are limited to: architect fees, permit fees, construction management, freight and shipping delivery, environmental assessment
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 You receive a grant between $50,000 to $200,000.
 
