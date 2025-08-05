@@ -24,9 +24,9 @@ sectorIds:
   - mining-quarrying-and-oil-and-gas-extraction
 urlSlug: mvc-register
 summaryDescriptionMd: >-
-  :::infoAlert 
+  :::infoAlert
 
-  A Motor Vehicle Commission 
+  A Motor Vehicle Commission
 
   (MVC) Entity Identification Number (EIN) and title showing business ownership are required before registering a business vehicle.
 
@@ -48,41 +48,45 @@ issuingAgency: NJ Motor Vehicle Commission
 callToActionText: Register My Business Vehicle(s)
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 ---
+
 ## Application Requirements
 
 You will need:
-* `Tax ID number|tax-id`
-* **Motor Vehicle Commission** `(MVC) Entity Identification Number (EIN)|mvc-entity-id\` 
-* **[Application for Vehicle Registration (Form BA-49)](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)**
-* **Proof of Identity,** such as a valid driver’s license or other government-issued photo identification
-* **Proof of current insurance,** such as a card or policy declaration page
-* **Vehicle title** showing business ownership
+
+- `Tax ID number|tax-id`
+- **Motor Vehicle Commission** `(MVC) Entity Identification Number (EIN)|mvc-entity-id\`
+- **[Application for Vehicle Registration (Form BA-49)](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)**
+- **Proof of Identity,** such as a valid driver’s license or other government-issued photo identification
+- **Proof of current insurance,** such as a card or policy declaration page
+- **Vehicle title** showing business ownership
 
 You may also need:
-* **Manufacturer’s Certificate of Origin (MCO),** for new vehicles
-* **Emissions or Safety Inspection Certificate,** if applicable
-* **Weight Certificate,** for vehicles weighing over 26,000 pounds
-* **United State Department of Transportation (USDOT) number,** for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
-* **Agricultural Certificate number,** for certain types of farm-related vehicles
-* **Notarized Power of Attorney,** if applying on behalf of the business owner
-* **Lease/Finance agreement,** if registering a leased or financed vehicle
-* **Applicable fees paid,** based on vehicle type and weight
 
-:::infoAlert 
- You must register your vehicle in person. Complete the appropriate form and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
+- **Manufacturer’s Certificate of Origin (MCO),** for new vehicles
+- **Emissions or Safety Inspection Certificate,** if applicable
+- **Weight Certificate,** for vehicles weighing over 26,000 pounds
+- **United State Department of Transportation (USDOT) number,** for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
+- **Agricultural Certificate number,** for certain types of farm-related vehicles
+- **Notarized Power of Attorney,** if applying on behalf of the business owner
+- **Lease/Finance agreement,** if registering a leased or financed vehicle
+- **Applicable fees paid,** based on vehicle type and weight
+
+:::infoAlert
+You must register your vehicle in person. Complete the appropriate form and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
 :::
 
 &nbsp;
 
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
 
-:::callout{ showHeader="true" headerText="What if I don't register my vehicle?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't register my vehicle?" calloutType="warning" }
 
 If you use an unregistered vehicle for your business, you may be subject to vehicle impoundment, fines, or or eligibility issues with your insurance.
 
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
-* A valid registration card
-* A valid license plate
-:::
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
+
+- A valid registration card
+- A valid license plate
+  :::
