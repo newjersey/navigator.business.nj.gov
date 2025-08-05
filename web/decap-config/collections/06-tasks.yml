@@ -1042,6 +1042,46 @@ collections:
                         name: "errorValidationTextAlt"
                         widget: "string"
                         required: true
+
+                  - label: "Contact Name"
+                    name: "contactName"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Contact Phone Number"
+                    name: "contactPhoneNumber"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Contact Email"
+                    name: "contactEmail"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
       - label: "Cigarette License Shared"
         name: "cigaretteLicense-shared"
         file: "content/src/fieldConfig/cigarette-license-shared.json"

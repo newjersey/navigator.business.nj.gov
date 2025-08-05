@@ -70,12 +70,15 @@ export const MailingAddress = (props: Props): ReactElement => {
   };
 
   const getErrorMessage = (field: TextFields): string => {
-    if (!state[field]) return Config.cigaretteLicenseStep2.fields[field].errorRequiredText;
+    const fieldConfig = Config.cigaretteLicenseStep2.fields[field];
+
+    if (!state[field])
+      return (fieldConfig as { errorRequiredText?: string }).errorRequiredText || "";
 
     if (field === "mailingAddressZipCode" && state.mailingAddressState?.shortCode === "NJ")
       return Config.cigaretteLicenseStep2.fields.mailingAddressZipCode.errorValidationTextAlt;
 
-    return Config.cigaretteLicenseStep2.fields[field].errorValidationText ?? "";
+    return (fieldConfig as { errorValidationText?: string }).errorValidationText || "";
   };
 
   const validateLine1AndLine2 = (val: string, required: boolean): boolean => {
@@ -94,11 +97,11 @@ export const MailingAddress = (props: Props): ReactElement => {
   };
 
   const performValidation = (): void => {
-    setIsLine1Valid(validateLine1AndLine2(state.mailingAddressLine1, true));
-    setIsLine2Valid(validateLine1AndLine2(state.mailingAddressLine2, false));
+    setIsLine1Valid(validateLine1AndLine2(state.mailingAddressLine1 || "", true));
+    setIsLine2Valid(validateLine1AndLine2(state.mailingAddressLine2 || "", false));
     setIsCityValid(state.mailingAddressCity !== "");
     setIsStateValid(state.mailingAddressState !== undefined);
-    setIsZipCodeValid(validateZip(state.mailingAddressZipCode));
+    setIsZipCodeValid(validateZip(state.mailingAddressZipCode || ""));
   };
 
   return (
@@ -111,7 +114,7 @@ export const MailingAddress = (props: Props): ReactElement => {
             id="mailing-address-the-same"
           />
         }
-        label={Config.cigaretteLicenseStep2.mailingIsSameCheck}
+        label={Config.cigaretteLicenseStep2.mailingIsSameCheckbox}
       />
       {!state.mailingAddressIsTheSame && (
         <>
@@ -167,75 +170,90 @@ export const MailingAddress = (props: Props): ReactElement => {
               </label>
             </WithErrorBar>
           </div>
-          <div className={"grid-row grid-gap"}>
-            <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-              <WithErrorBar
-                className={"padding-bottom-1"}
-                hasError={isCityFieldInvalid}
-                type={"ALWAYS"}
-              >
-                <label htmlFor="mailingAddressCity">
+          <WithErrorBar
+            className={"padding-bottom-1"}
+            hasError={isCityFieldInvalid || isStateFieldInvalid || isZipCodeFieldInvalid}
+            type={"DESKTOP-ONLY"}
+          >
+            <div className="grid-row grid-gap-2 margin-top-2">
+              <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
+                <WithErrorBar
+                  className={"padding-bottom-1"}
+                  hasError={isCityFieldInvalid}
+                  type={"MOBILE-ONLY"}
+                >
+                  <label htmlFor="mailingAddressCity">
+                    <span className={"text-bold"}>
+                      <Content>
+                        {Config.cigaretteLicenseStep2.fields.mailingAddressCity.label}
+                      </Content>
+                    </span>
+                    <GenericTextField
+                      inputWidth={"full"}
+                      {...props}
+                      fieldName="mailingAddressCity"
+                      handleChange={(val) => handleChange(val, "mailingAddressCity")}
+                      disabled={state.mailingAddressIsTheSame}
+                      formContext={DataFormErrorMapContext}
+                      value={state.mailingAddressCity}
+                      error={isCityFieldInvalid}
+                      validationText={getErrorMessage("mailingAddressCity")}
+                      preventRefreshWhenUnmounted
+                      onValidation={performValidation}
+                    />
+                  </label>
+                </WithErrorBar>
+              </span>
+              <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
+                <WithErrorBar
+                  className={"padding-bottom-1"}
+                  hasError={isStateFieldInvalid || isZipCodeFieldInvalid}
+                  type={"MOBILE-ONLY"}
+                >
+                  <label htmlFor="mailingAddressState">
+                    <span className={"text-bold"}>
+                      <Content>
+                        {Config.cigaretteLicenseStep2.fields.mailingAddressState.label}
+                      </Content>
+                    </span>
+                    <StateDropdown
+                      fieldName="mailingAddressState"
+                      onSelect={(val) => handleChange(val, "mailingAddressState")}
+                      disabled={state.mailingAddressIsTheSame}
+                      value={state.mailingAddressState?.shortCode}
+                      error={isStateFieldInvalid}
+                      validationText={getErrorMessage("mailingAddressState")}
+                      onValidation={performValidation}
+                    />
+                  </label>
+                </WithErrorBar>
+              </span>
+
+              <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
+                <label htmlFor="mailingAddressZipCode">
                   <span className={"text-bold"}>
                     <Content>
-                      {Config.cigaretteLicenseStep2.fields.mailingAddressCity.label}
+                      {Config.cigaretteLicenseStep2.fields.mailingAddressZipCode.label}
                     </Content>
                   </span>
                   <GenericTextField
                     inputWidth={"full"}
                     {...props}
-                    fieldName="mailingAddressCity"
-                    handleChange={(val) => handleChange(val, "mailingAddressCity")}
+                    fieldName="mailingAddressZipCode"
+                    handleChange={(val) => handleChange(val, "mailingAddressZipCode")}
                     disabled={state.mailingAddressIsTheSame}
                     formContext={DataFormErrorMapContext}
-                    value={state.mailingAddressCity}
-                    error={isCityFieldInvalid}
-                    validationText={getErrorMessage("mailingAddressCity")}
+                    numericProps={{ maxLength: 5 }}
+                    value={state.mailingAddressZipCode}
+                    error={isZipCodeFieldInvalid}
+                    validationText={getErrorMessage("mailingAddressZipCode")}
                     preventRefreshWhenUnmounted
                     onValidation={performValidation}
                   />
                 </label>
-              </WithErrorBar>
-            </span>
-            <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
-              <label htmlFor="mailingAddressState">
-                <span className={"text-bold"}>
-                  <Content>{Config.cigaretteLicenseStep2.fields.mailingAddressState.label}</Content>
-                </span>
-                <StateDropdown
-                  fieldName="mailingAddressState"
-                  onSelect={(val) => handleChange(val, "mailingAddressState")}
-                  disabled={state.mailingAddressIsTheSame}
-                  value={state.mailingAddressState?.shortCode}
-                  error={isStateFieldInvalid}
-                  validationText={getErrorMessage("mailingAddressState")}
-                  onValidation={performValidation}
-                />
-              </label>
-            </span>
-            <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
-              <label htmlFor="mailingAddressZipCode">
-                <span className={"text-bold"}>
-                  <Content>
-                    {Config.cigaretteLicenseStep2.fields.mailingAddressZipCode.label}
-                  </Content>
-                </span>
-                <GenericTextField
-                  inputWidth={"full"}
-                  {...props}
-                  fieldName="mailingAddressZipCode"
-                  handleChange={(val) => handleChange(val, "mailingAddressZipCode")}
-                  disabled={state.mailingAddressIsTheSame}
-                  formContext={DataFormErrorMapContext}
-                  numericProps={{ maxLength: 5 }}
-                  value={state.mailingAddressZipCode}
-                  error={isZipCodeFieldInvalid}
-                  validationText={getErrorMessage("mailingAddressZipCode")}
-                  preventRefreshWhenUnmounted
-                  onValidation={performValidation}
-                />
-              </label>
-            </span>
-          </div>
+              </span>
+            </div>
+          </WithErrorBar>
         </>
       )}
     </div>

@@ -37,7 +37,7 @@ describe("<MailingAddress />", () => {
   });
 
   const renderComponent = (initialData?: Partial<CigaretteLicenseData>): void => {
-    const TestWrapper = (): JSX.Element => {
+    const TestComponent = (): JSX.Element => {
       const [cigaretteLicenseData, setCigaretteLicenseData] = useState<CigaretteLicenseData>({
         ...emptyCigaretteLicenseData,
         mailingAddressLine1: "123 Test St",
@@ -69,7 +69,7 @@ describe("<MailingAddress />", () => {
       );
     };
 
-    render(<TestWrapper />);
+    render(<TestComponent />);
   };
 
   describe("Basic Rendering", () => {

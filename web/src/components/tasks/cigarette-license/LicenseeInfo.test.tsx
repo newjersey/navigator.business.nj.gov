@@ -10,13 +10,10 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import * as useAddressErrorsModule from "@/lib/data-hooks/useAddressErrors";
 import * as useConfigModule from "@/lib/data-hooks/useConfig";
 import * as useUserDataModule from "@/lib/data-hooks/useUserData";
+
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import {
-  CigaretteLicenseData,
-  emptyCigaretteLicenseData,
-} from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
   generateFormationData,
@@ -24,8 +21,8 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { useState } from "react";
 
 const Config = getMergedConfig();
@@ -55,32 +52,23 @@ describe("<LicenseeInfo />", () => {
     });
   });
 
-  const renderComponent = (overrides?: Partial<Business>): void => {
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        businessName: "Test Business",
-        responsibleOwnerName: "John Doe",
-        tradeName: "Test Trade Name",
-        taxId: "123456789000",
-        encryptedTaxId: "123456789000",
-        legalStructureId: "limited-liability-company",
-      }),
-      formationData: generateFormationData({
-        formationFormData: generateFormationFormData({
-          addressLine1: "123 Test St",
-          addressLine2: "Suite 100",
-          addressCity: "Test City",
-          addressState: { shortCode: "NJ", name: "New Jersey" },
-          addressZipCode: "12345",
-        }),
-      }),
-      ...overrides,
-    });
+  const renderComponent = ({
+    business,
+    userData,
+    setStepIndex = jest.fn(),
+    runValidations = true,
+  }: {
+    business?: Business;
+    userData?: UserData;
+    setStepIndex?: (idx: number) => void;
+    runValidations?: boolean;
+  } = {}): void => {
+    const testBusiness = business ?? generateBusinessWithDefaults();
+    const testUserData = userData ?? generateUserDataForBusiness(testBusiness);
 
-    const userData = generateUserDataForBusiness(business);
     mockUseUserData.mockReturnValue({
-      userData,
-      business,
+      userData: testUserData,
+      business: testBusiness,
       isLoading: false,
       error: undefined,
       hasCompletedFetch: true,
@@ -89,17 +77,16 @@ describe("<LicenseeInfo />", () => {
       refresh: jest.fn(),
     });
 
-    const TestWrapper = (): JSX.Element => {
-      const [cigaretteLicenseData, setCigaretteLicenseData] =
-        useState<CigaretteLicenseData>(emptyCigaretteLicenseData);
-      const [profileData, setProfileData] = useState<ProfileData>(business.profileData);
+    const TestComponent = (): JSX.Element => {
+      const [cigaretteLicenseData, setCigaretteLicenseData] = useState(emptyCigaretteLicenseData);
+      const [profileData, setProfileData] = useState(testBusiness.profileData);
 
       return (
-        <WithStatefulUserData initialUserData={userData}>
+        <WithStatefulUserData initialUserData={testUserData}>
           <DataFormErrorMapContext.Provider
             value={{
               fieldStates: createDataFormErrorMap(),
-              runValidations: false,
+              runValidations,
               reducer: () => {},
             }}
           >
@@ -127,7 +114,7 @@ describe("<LicenseeInfo />", () => {
                     onBack: (): void => {},
                   }}
                 >
-                  <LicenseeInfo setStepIndex={jest.fn()} />
+                  <LicenseeInfo setStepIndex={setStepIndex} />
                 </ProfileDataContext.Provider>
               </CigaretteLicenseContext.Provider>
             </AddressContext.Provider>
@@ -136,11 +123,34 @@ describe("<LicenseeInfo />", () => {
       );
     };
 
-    render(<TestWrapper />);
+    render(<TestComponent />);
+  };
+
+  const generateBusinessWithDefaults = (overrides?: Partial<Business>): Business => {
+    return generateBusiness({
+      profileData: generateProfileData({
+        businessName: "Test Business",
+        responsibleOwnerName: "John Doe",
+        tradeName: "Test Trade Name",
+        taxId: "123456789000",
+        encryptedTaxId: "123456789000",
+        legalStructureId: "limited-liability-company",
+      }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({
+          addressLine1: "123 Test St",
+          addressLine2: "Suite 100",
+          addressCity: "Test City",
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+          addressZipCode: "12345",
+        }),
+      }),
+      ...overrides,
+    });
   };
 
   describe("Form Fields", () => {
-    it("renders all required fields", () => {
+    it("renders main section headers", () => {
       renderComponent();
 
       expect(
@@ -149,44 +159,65 @@ describe("<LicenseeInfo />", () => {
       expect(
         screen.getByText(Config.cigaretteLicenseStep2.licenseeInformationDescription),
       ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.cigaretteLicenseStep2.businessAddressHeader),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.cigaretteLicenseStep2.mailingAddressHeader),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.cigaretteLicenseStep2.contactInformationHeader),
+      ).toBeInTheDocument();
     });
+
+    it("renders business information fields", () => {
+      renderComponent();
+
+      expect(screen.getByRole("textbox", { name: /business name/i })).toBeInTheDocument();
+      expect(screen.getByLabelText(/tax id/i)).toBeInTheDocument();
+    });
+
+    it("renders both business and mailing address fields", () => {
+      renderComponent();
+
+      // Verify we have both business and mailing address fields (2 of each type)
+      const addressLine1Fields = screen.getAllByRole("textbox", { name: /address line1/i });
+      const addressCityFields = screen.getAllByRole("textbox", { name: /address city/i });
+      const addressStateFields = screen.getAllByRole("combobox", { name: /address state/i });
+      const addressZipFields = screen.getAllByRole("textbox", { name: /address zip code/i });
+
+      expect(addressLine1Fields).toHaveLength(2);
+      expect(addressCityFields).toHaveLength(2);
+      expect(addressStateFields).toHaveLength(2);
+      expect(addressZipFields).toHaveLength(2);
+    });
+
+    it("renders contact information fields", () => {
+      renderComponent();
+
+      expect(screen.getByRole("textbox", { name: /contact name/i })).toBeInTheDocument();
+      expect(screen.getByRole("textbox", { name: /contact phone number/i })).toBeInTheDocument();
+      expect(screen.getByRole("textbox", { name: /contact email/i })).toBeInTheDocument();
+    });
+
 
     it("pre-populates from business data", async () => {
       renderComponent();
 
-      await waitFor(() => {
-        expect(screen.getByRole("textbox", { name: /business name/i })).toBeInTheDocument();
-      });
+      const businessNameField = screen.getByRole("textbox", { name: /business name/i });
+      expect(businessNameField).toBeInTheDocument();
+      expect(businessNameField).toHaveValue("Test Business");
     });
 
     it("allows user interaction with business name field", () => {
       renderComponent();
 
-      // Find and interact with business name field
       const businessNameField = screen.getByRole("textbox", { name: /business name/i });
 
-      // Verify the field is interactive
       fireEvent.change(businessNameField, { target: { value: "New Business Name" } });
       expect(businessNameField).toHaveValue("New Business Name");
 
-      // Verify accessibility attributes
       expect(businessNameField).toHaveAttribute("aria-label", "Business name");
-    });
-  });
-
-  describe("Address Integration", () => {
-    it("renders mailing address component", () => {
-      renderComponent();
-
-      expect(screen.getByText("Mailing Address")).toBeInTheDocument();
-    });
-
-    it("shows different address checkbox", () => {
-      renderComponent();
-
-      expect(
-        screen.getByText("Mailing address is the same as the business address"),
-      ).toBeInTheDocument();
     });
   });
 
@@ -194,67 +225,10 @@ describe("<LicenseeInfo />", () => {
     it("calls setStepIndex when back button is clicked", () => {
       const mockSetStepIndex = jest.fn();
 
-      const TestWrapper = (): JSX.Element => {
-        const [cigaretteLicenseData, setCigaretteLicenseData] =
-          useState<CigaretteLicenseData>(emptyCigaretteLicenseData);
-        const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-
-        const business = generateBusiness({
-          profileData: generateProfileData({
-            businessName: "Test Business",
-            responsibleOwnerName: "John Doe",
-            tradeName: "Test Trade Name",
-            taxId: "123456789000",
-            encryptedTaxId: "123456789000",
-            legalStructureId: "limited-liability-company",
-          }),
-        });
-
-        const userData = generateUserDataForBusiness(business);
-
-        return (
-          <WithStatefulUserData initialUserData={userData}>
-            <DataFormErrorMapContext.Provider
-              value={{
-                fieldStates: createDataFormErrorMap(),
-                runValidations: false,
-                reducer: () => {},
-              }}
-            >
-              <AddressContext.Provider
-                value={{
-                  state: {
-                    formationAddressData: emptyFormationAddressData,
-                  },
-                  setAddressData: jest.fn(),
-                }}
-              >
-                <CigaretteLicenseContext.Provider
-                  value={{
-                    state: cigaretteLicenseData,
-                    setCigaretteLicenseData,
-                  }}
-                >
-                  <ProfileDataContext.Provider
-                    value={{
-                      state: {
-                        profileData,
-                        flow: "STARTING",
-                      },
-                      setProfileData,
-                      onBack: (): void => {},
-                    }}
-                  >
-                    <LicenseeInfo setStepIndex={mockSetStepIndex} />
-                  </ProfileDataContext.Provider>
-                </CigaretteLicenseContext.Provider>
-              </AddressContext.Provider>
-            </DataFormErrorMapContext.Provider>
-          </WithStatefulUserData>
-        );
-      };
-
-      render(<TestWrapper />);
+      renderComponent({
+        setStepIndex: mockSetStepIndex,
+        runValidations: false,
+      });
 
       const backButton = screen.getByText("Back");
       fireEvent.click(backButton);

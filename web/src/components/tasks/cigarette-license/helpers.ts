@@ -103,16 +103,3 @@ export const getInitialData = (
     lastUpdatedISO: business.cigaretteLicenseData?.lastUpdatedISO,
   };
 };
-
-// export const isAnyRequiredFieldEmpty = (cigaretteLicenseData: CigaretteLicenseData): boolean => {
-//   return (
-//     (cigaretteLicenseData.requestingAgencyId ?? "").trim() === "" ||
-//     (cigaretteLicenseData.businessName ?? "").trim() === "" ||
-//     (cigaretteLicenseData.addressLine1 ?? "").trim() === "" ||
-//     (cigaretteLicenseData.addressCity ?? "").trim() === "" ||
-//     cigaretteLicenseData.addressState === undefined ||
-//     (cigaretteLicenseData.addressZipCode ?? "").trim() === "" ||
-//     (cigaretteLicenseData.taxId ?? "").trim() === "" ||
-//     (cigaretteLicenseData.taxPin ?? "").trim() === ""
-//   );
-// };

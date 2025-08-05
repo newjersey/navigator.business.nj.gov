@@ -3,10 +3,17 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as useConfigModule from "@/lib/data-hooks/useConfig";
 import * as useUserDataModule from "@/lib/data-hooks/useUserData";
 import { generateRoadmap, generateTask } from "@/test/factories";
+import { fillText } from "@/test/helpers/helpers-testing-library-selectors";
 import { setMockRoadmapResponse } from "@/test/mock/mockUseRoadmap";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  generateBusiness,
+  generateFormationData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -100,6 +107,122 @@ describe("<CigaretteLicense />", () => {
         expect(
           screen.getByText(Config.cigaretteLicenseStep2.licenseeInformationHeader),
         ).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("Field Validation", () => {
+    describe("Licensee Info validations", () => {
+      const renderComponentOnStep2 = (): void => {
+        const business = generateBusiness({
+          profileData: emptyProfileData,
+          formationData: generateFormationData({
+            formationFormData: createEmptyFormationFormData(),
+          }),
+        });
+        renderComponent(business);
+
+        const secondTab = screen.getByRole("tab", { name: /Licensee Info/ });
+        fireEvent.click(secondTab);
+        expect(secondTab).toHaveAttribute("aria-selected", "true");
+      };
+
+      it("renders error for business name when empty and onBlur", () => {
+        renderComponentOnStep2();
+
+        fillText("Business name", "");
+        fireEvent.blur(screen.getByLabelText("Business name"));
+
+        expect(
+          screen.getByText(Config.cigaretteLicenseStep2.businessNameErrorText),
+        ).toBeInTheDocument();
+      });
+
+      it("renders error onBlur when tax id is invalid", () => {
+        renderComponentOnStep2();
+
+        fillText("Tax id", "");
+        fireEvent.blur(screen.getByLabelText("Tax id"));
+
+        expect(
+          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
+        ).toBeInTheDocument();
+
+        fillText("Tax id", "123456");
+        fireEvent.blur(screen.getByLabelText("Tax id"));
+
+        expect(
+          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
+        ).toBeInTheDocument();
+      });
+
+      it("renders error onBlur when address line 1 is empty", () => {
+        renderComponentOnStep2();
+
+        fillText("Address line1", "");
+        fireEvent.blur(screen.getByLabelText("Address line1"));
+
+        expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
+      });
+
+      it("renders error onBlur when contact information is empty", () => {
+        renderComponentOnStep2();
+
+        fillText("Contact name", "");
+        fireEvent.blur(screen.getByLabelText("Contact name"));
+
+        expect(screen.getByText("Contact name is required")).toBeInTheDocument();
+      });
+    });
+
+    describe("Business name field visibility based on business type", () => {
+      const renderComponentOnStep2WithBusinessType = (legalStructureId: string): void => {
+        const business = generateBusiness({
+          profileData: {
+            ...emptyProfileData,
+            legalStructureId,
+          },
+          formationData: generateFormationData({
+            formationFormData: createEmptyFormationFormData(),
+          }),
+        });
+        renderComponent(business);
+
+        const secondTab = screen.getByRole("tab", { name: /Licensee Info/ });
+        fireEvent.click(secondTab);
+        expect(secondTab).toHaveAttribute("aria-selected", "true");
+      };
+
+      it("shows responsible owner name and trade name fields for sole proprietorship", () => {
+        renderComponentOnStep2WithBusinessType("sole-proprietorship");
+
+        expect(screen.getByLabelText("Responsible owner name")).toBeInTheDocument();
+        expect(screen.getByLabelText("Trade name")).toBeInTheDocument();
+        expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
+      });
+
+      it("shows responsible owner name and trade name fields for general partnership", () => {
+        renderComponentOnStep2WithBusinessType("general-partnership");
+
+        expect(screen.getByLabelText("Responsible owner name")).toBeInTheDocument();
+        expect(screen.getByLabelText("Trade name")).toBeInTheDocument();
+        expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
+      });
+
+      it("shows business name field for LLC", () => {
+        renderComponentOnStep2WithBusinessType("limited-liability-company");
+
+        expect(screen.getByLabelText("Business name")).toBeInTheDocument();
+        expect(screen.queryByLabelText("Responsible owner name")).not.toBeInTheDocument();
+        expect(screen.queryByLabelText("Trade name")).not.toBeInTheDocument();
+      });
+
+      it("shows business name field for corporation", () => {
+        renderComponentOnStep2WithBusinessType("c-corporation");
+
+        expect(screen.getByLabelText("Business name")).toBeInTheDocument();
+        expect(screen.queryByLabelText("Responsible owner name")).not.toBeInTheDocument();
+        expect(screen.queryByLabelText("Trade name")).not.toBeInTheDocument();
       });
     });
   });
