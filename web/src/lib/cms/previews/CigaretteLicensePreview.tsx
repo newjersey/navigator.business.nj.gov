@@ -27,7 +27,7 @@ const CigaretteLicensePreview = (props: PreviewProps): ReactElement => {
         )}
         {tab === "step2" && (
           <>
-            <CigaretteLicense CMS_ONLY_stepIndex={1} task={task} />
+            <CigaretteLicense CMS_ONLY_stepIndex={1} task={task} CMS_ONLY_show_error />
           </>
         )}
         {tab === "shared" && (

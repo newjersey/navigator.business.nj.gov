@@ -30,6 +30,7 @@ import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 type Props = {
   task: Task;
   CMS_ONLY_stepIndex?: number;
+  CMS_ONLY_show_error?: boolean;
 };
 
 export const CigaretteLicense = (props: Props): ReactElement => {
@@ -102,8 +103,8 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         businessName: profileData.businessName,
         responsibleOwnerName: profileData.responsibleOwnerName,
         tradeName: profileData.tradeName,
-        taxId: profileData.taxId || "",
-        encryptedTaxId: profileData.taxId || "",
+        taxId: profileData.taxId,
+        encryptedTaxId: profileData.taxId,
       });
 
       return profileData;
@@ -216,7 +217,12 @@ export const CigaretteLicense = (props: Props): ReactElement => {
               }}
             >
               {stepIndex === 0 && <GeneralInfo setStepIndex={setStepIndex} />}
-              {stepIndex === 1 && <LicenseeInfo setStepIndex={setStepIndex} />}
+              {stepIndex === 1 && (
+                <LicenseeInfo
+                  setStepIndex={setStepIndex}
+                  CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                />
+              )}
               {stepIndex === 2 && <></>}
             </AddressContext.Provider>
           </ProfileDataContext.Provider>

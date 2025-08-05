@@ -1,6 +1,5 @@
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -9,35 +8,13 @@ import {
   CigaretteLicenseData,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 
-const Config = getMergedConfig();
-
-jest.mock("@/lib/data-hooks/useConfig", () => ({ useConfig: jest.fn() }));
-
-function mockMaterialUI(): typeof materialUi {
-  return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
-  };
-}
-
-jest.mock("@mui/material", () => mockMaterialUI());
-
-const mockUseConfig = jest.requireMock("@/lib/data-hooks/useConfig").useConfig;
-
 describe("<MailingAddress />", () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-    mockUseConfig.mockReturnValue({ Config });
-    (useMediaQuery as jest.Mock).mockImplementation(() => false); // Default to desktop
-  });
-
   const renderComponent = (initialData?: Partial<CigaretteLicenseData>): void => {
-    const TestWrapper = (): JSX.Element => {
+    const TestComponent = (): JSX.Element => {
       const [cigaretteLicenseData, setCigaretteLicenseData] = useState<CigaretteLicenseData>({
         ...emptyCigaretteLicenseData,
         mailingAddressLine1: "123 Test St",
@@ -69,7 +46,7 @@ describe("<MailingAddress />", () => {
       );
     };
 
-    render(<TestWrapper />);
+    render(<TestComponent />);
   };
 
   describe("Basic Rendering", () => {
@@ -102,7 +79,7 @@ describe("<MailingAddress />", () => {
   });
 
   describe("Checkbox Functionality", () => {
-    it("toggles same as business address checkbox", () => {
+    it("toggles same as business address checkbox", async () => {
       renderComponent();
 
       const checkbox = screen.getByRole("checkbox", {
@@ -110,7 +87,7 @@ describe("<MailingAddress />", () => {
       });
       expect(checkbox).not.toBeChecked();
 
-      fireEvent.click(checkbox);
+      await userEvent.click(checkbox);
 
       expect(checkbox).toBeChecked();
     });
@@ -155,75 +132,67 @@ describe("<MailingAddress />", () => {
   });
 
   describe("Form Interactions", () => {
-    it("allows editing address line 1", () => {
+    it("allows editing address line 1", async () => {
       renderComponent();
 
       const addressLine1Field = screen.getByDisplayValue("123 Test St");
-      fireEvent.change(addressLine1Field, { target: { value: "456 New St" } });
+      await userEvent.clear(addressLine1Field);
+      await userEvent.type(addressLine1Field, "456 New St");
+      await userEvent.tab();
 
       expect(addressLine1Field).toHaveValue("456 New St");
     });
 
-    it("allows editing city field", () => {
+    it("allows editing address line 2", async () => {
+      renderComponent();
+      const addressLine2Field = screen.getByDisplayValue("Suite 100");
+      await userEvent.clear(addressLine2Field);
+      await userEvent.type(addressLine2Field, "Suite 200");
+      await userEvent.tab();
+
+      expect(addressLine2Field).toHaveValue("Suite 200");
+    });
+
+    it("allows editing city field", async () => {
       renderComponent();
 
       const cityField = screen.getByDisplayValue("Test City");
-      fireEvent.change(cityField, { target: { value: "New City" } });
+      await userEvent.clear(cityField);
+      await userEvent.type(cityField, "New City");
+      await userEvent.tab();
 
       expect(cityField).toHaveValue("New City");
     });
 
-    it("allows editing zip code field", () => {
+    it("allows editing zip code field", async () => {
       renderComponent();
 
       const zipCodeField = screen.getByDisplayValue("12345");
-      fireEvent.change(zipCodeField, { target: { value: "54321" } });
+      await userEvent.clear(zipCodeField);
+      await userEvent.type(zipCodeField, "54321");
+      await userEvent.tab();
 
       expect(zipCodeField).toHaveValue("54321");
     });
   });
 
-  describe("Responsive Behavior", () => {
-    it("renders correctly on mobile", () => {
-      jest.requireMock("@mui/material").useMediaQuery.mockReturnValue(true);
+  it("has proper labels for all fields", () => {
+    renderComponent();
 
-      renderComponent();
-
-      expect(screen.getByDisplayValue("123 Test St")).toBeInTheDocument();
-      expect(screen.getByDisplayValue("Test City")).toBeInTheDocument();
-      expect(screen.getByDisplayValue("12345")).toBeInTheDocument();
-    });
-
-    it("renders correctly on desktop", () => {
-      jest.requireMock("@mui/material").useMediaQuery.mockReturnValue(false);
-
-      renderComponent();
-
-      expect(screen.getByDisplayValue("123 Test St")).toBeInTheDocument();
-      expect(screen.getByDisplayValue("Test City")).toBeInTheDocument();
-      expect(screen.getByDisplayValue("12345")).toBeInTheDocument();
-    });
+    expect(screen.getByLabelText("Mailing address line1")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mailing address line2")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mailing address city")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mailing address state")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mailing address zip code")).toBeInTheDocument();
   });
 
-  describe("Accessibility", () => {
-    it("has proper labels for all fields", () => {
-      renderComponent();
+  it("has proper checkbox accessibility", () => {
+    renderComponent();
 
-      expect(screen.getByLabelText("Mailing address line1")).toBeInTheDocument();
-      expect(screen.getByLabelText("Mailing address line2")).toBeInTheDocument();
-      expect(screen.getByLabelText("Mailing address city")).toBeInTheDocument();
-      expect(screen.getByLabelText("Mailing address state")).toBeInTheDocument();
-      expect(screen.getByLabelText("Mailing address zip code")).toBeInTheDocument();
+    const checkbox = screen.getByRole("checkbox", {
+      name: "Mailing address is the same as the business address",
     });
-
-    it("has proper checkbox accessibility", () => {
-      renderComponent();
-
-      const checkbox = screen.getByRole("checkbox", {
-        name: "Mailing address is the same as the business address",
-      });
-      expect(checkbox).toBeInTheDocument();
-      expect(checkbox).toHaveAttribute("id", "mailing-address-the-same");
-    });
+    expect(checkbox).toBeInTheDocument();
+    expect(checkbox).toHaveAttribute("id", "mailing-address-the-same");
   });
 });
