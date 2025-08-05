@@ -27,7 +27,7 @@ licenseCertificationClassification: ""
 - New Jersey insurance card or company name and policy number
 - Completed [Vehicle Registration Application Form](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A current and valid vehicle registration.
 
