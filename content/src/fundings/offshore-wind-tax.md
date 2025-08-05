@@ -43,7 +43,7 @@ priority: true
 
 Businesses must invest at least $17.5M in a qualified wind energy facility and employing at least 150 new, full-time employees.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses receive tax credits up to 100% of qualified investments.
 
