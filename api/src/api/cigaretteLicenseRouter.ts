@@ -1,12 +1,13 @@
 import { ExpressRequestBody } from "@api/types";
-import { DatabaseClient, CigaretteLicenseClient } from "@domain/types";
+import { type CryptoClient, DatabaseClient, CigaretteLicenseClient } from "@domain/types";
 import { getSignedInUserId } from "@api/userRouter";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
-  CigaretteLicensePreparePaymentResponse,
-  CigaretteLicenseGetOrderByTokenResponse,
-  CigaretteLicenseOrderDetails,
-} from "@client/ApiCigaretteLicenseHelpers";
+  EmailConfirmationResponse,
+  GetOrderByTokenResponse,
+  OrderDetails,
+  PreparePaymentResponse,
+} from "@shared/cigaretteLicense";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -14,13 +15,14 @@ import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
-type CigaretteLicensePostBody = {
+interface CigaretteLicensePreparePaymentBody {
   userData: UserData;
   returnUrl: string;
-};
+}
 
 export const cigaretteLicenseRouterFactory = (
   cigaretteLicenseClient: CigaretteLicenseClient,
+  cryptoClient: CryptoClient,
   databaseClient: DatabaseClient,
   logger: LogWriterType,
 ): Router => {
@@ -28,7 +30,7 @@ export const cigaretteLicenseRouterFactory = (
 
   router.post(
     "/cigarette-license/prepare-payment",
-    async (req: ExpressRequestBody<CigaretteLicensePostBody>, res) => {
+    async (req: ExpressRequestBody<CigaretteLicensePreparePaymentBody>, res) => {
       const { userData, returnUrl } = req.body;
       const method = req.method;
       const endpoint = req.originalUrl;
@@ -39,45 +41,53 @@ export const cigaretteLicenseRouterFactory = (
         `[START] ${method} ${endpoint} - Received cigarette license prepare-payment request for userId: ${userId}`,
       );
 
-      cigaretteLicenseClient
-        .preparePayment(userData, returnUrl)
-        .then(async (paymentResponse: CigaretteLicensePreparePaymentResponse) => {
-          if (!paymentResponse.token || paymentResponse.errorResult) {
-            const status = StatusCodes.OK;
-            logger.LogError(
-              `${method} ${endpoint} - Failed to submit cigarette license payment: error: ${paymentResponse.errorResult?.userMessage}, userId: ${userId}, duration: ${getDurationMs(
-                requestStart,
-              )}ms`,
-            );
-            res.status(status).json(paymentResponse.errorResult);
-            return;
-          }
-          const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
-            ...business,
-            cigaretteLicenseData: {
-              ...business.cigaretteLicenseData,
-              paymentInfo: {
-                token: paymentResponse.token,
-              },
-            },
-          }));
+      try {
+        const paymentResponse: PreparePaymentResponse = await cigaretteLicenseClient.preparePayment(
+          userData,
+          returnUrl,
+        );
 
-          await databaseClient.put(userDataWithResponse);
+        if (!paymentResponse.token || paymentResponse.errorResult) {
           const status = StatusCodes.OK;
-          res.status(status).json({ userData: userDataWithResponse, paymentInfo: paymentResponse });
-          logger.LogInfo(
-            `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+          logger.LogError(
+            `${method} ${endpoint} - Failed to submit cigarette license payment: error: ${paymentResponse.errorResult?.userMessage}, userId: ${userId}, duration: ${getDurationMs(
               requestStart,
             )}ms`,
           );
-        })
-        .catch((error: Error) => {
-          const status = StatusCodes.INTERNAL_SERVER_ERROR;
-          logger.LogError(
-            `${method} ${endpoint} - Failed to submit cigarette license payment: status: ${status}, userId: ${userId}, duration: ${getDurationMs(requestStart)}, error: ${error.message}`,
-          );
-          res.status(status).json(error);
-        });
+          res.status(status).json(paymentResponse.errorResult);
+          return;
+        }
+
+        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
+          cigaretteLicenseData: {
+            ...business.cigaretteLicenseData,
+            paymentInfo: {
+              token: paymentResponse.token,
+            },
+          },
+        }));
+
+        await databaseClient.put(userDataWithResponse);
+
+        const status = StatusCodes.OK;
+        res.status(status).json({ userData: userDataWithResponse, paymentInfo: paymentResponse });
+
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+      } catch (error) {
+        const status = StatusCodes.INTERNAL_SERVER_ERROR;
+        const message = error instanceof Error ? error.message : String(error);
+        logger.LogError(
+          `${method} ${endpoint} - Failed to submit cigarette license payment: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+            requestStart,
+          )}ms, error: ${message}`,
+        );
+        res.status(status).json(error);
+      }
     },
   );
 
@@ -85,7 +95,6 @@ export const cigaretteLicenseRouterFactory = (
     const signedInUserId = getSignedInUserId(req);
     const userData = await databaseClient.get(signedInUserId);
     const currentBusiness = getCurrentBusiness(userData);
-
     const method = req.method;
     const endpoint = req.originalUrl;
     const requestStart = Date.now();
@@ -106,58 +115,123 @@ export const cigaretteLicenseRouterFactory = (
       return;
     }
 
-    cigaretteLicenseClient
-      .getOrderByToken(currentBusiness.cigaretteLicenseData?.paymentInfo?.token)
-      .then(async (getOrderResponse: CigaretteLicenseGetOrderByTokenResponse) => {
-        if (
-          getOrderResponse.matchingOrders === 0 ||
-          getOrderResponse.errorResult ||
-          !getOrderResponse.orders
-        ) {
-          const status = StatusCodes.OK;
-          logger.LogError(
-            `${method} ${endpoint} - Failed to get cigarette license order by token: error: ${getOrderResponse.errorResult?.userMessage}, userId: ${userId}, duration: ${getDurationMs(
-              requestStart,
-            )}ms`,
-          );
-          res.status(status).json(getOrderResponse.errorResult);
-          return;
-        }
+    try {
+      const getOrderResponse: GetOrderByTokenResponse =
+        await cigaretteLicenseClient.getOrderByToken(
+          currentBusiness.cigaretteLicenseData.paymentInfo.token,
+        );
 
-        const order: CigaretteLicenseOrderDetails = getOrderResponse.orders[0];
-        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
-          ...business,
-          cigaretteLicenseData: {
-            ...business.cigaretteLicenseData,
-            paymentInfo: {
-              ...business.cigaretteLicenseData?.paymentInfo,
-              orderId: order.orderId,
-              orderStatus: order.orderStatus,
-              orderTimestamp: order.timestamp,
-            },
-          },
-        }));
-        await databaseClient.put(userDataWithResponse);
-        // TODO: Make call to send email confirmation
-
+      if (
+        getOrderResponse.matchingOrders === 0 ||
+        getOrderResponse.errorResult ||
+        !getOrderResponse.orders
+      ) {
         const status = StatusCodes.OK;
-        logger.LogInfo(
-          `[END] ${method} ${endpoint} - Retrieved cigarette license order by token: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+        logger.LogError(
+          `${method} ${endpoint} - Failed to get cigarette license order by token: error: ${getOrderResponse.errorResult?.userMessage}, userId: ${userId}, duration: ${getDurationMs(
             requestStart,
           )}ms`,
         );
-        res.status(status).json(userDataWithResponse);
-      })
-      .catch((error: Error) => {
-        const status = StatusCodes.INTERNAL_SERVER_ERROR;
-        logger.LogError(
-          `${method} ${endpoint} - Failed to get cigarette license order by token: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
-            requestStart,
-          )}, error: ${error.message}`,
-        );
-        res.status(status).json(error);
-      });
+        res.status(status).json(getOrderResponse.errorResult);
+        return;
+      }
+
+      const order: OrderDetails = getOrderResponse.orders[0];
+      const userDataWithOrderDetails = modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        cigaretteLicenseData: {
+          ...business.cigaretteLicenseData,
+          paymentInfo: {
+            ...business.cigaretteLicenseData?.paymentInfo,
+            orderId: order.orderId,
+            orderStatus: order.orderStatus,
+            orderTimestamp: order.timestamp,
+          },
+        },
+      }));
+
+      const userDataWithConfirmation = await sendEmailConfirmation(
+        userDataWithOrderDetails,
+        cigaretteLicenseClient,
+        cryptoClient,
+        logger,
+      );
+      await databaseClient.put(userDataWithConfirmation);
+
+      const status = StatusCodes.OK;
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - Retrieved cigarette license order by token: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+          requestStart,
+        )}ms`,
+      );
+
+      res.status(status).json(userDataWithConfirmation);
+    } catch (error) {
+      const status = StatusCodes.INTERNAL_SERVER_ERROR;
+      const message = error instanceof Error ? error.message : String(error);
+      logger.LogError(
+        `${method} ${endpoint} - Failed to get cigarette license order by token: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+          requestStart,
+        )}ms, error: ${message}`,
+      );
+      res.status(status).json(error);
+    }
   });
 
   return router;
+};
+
+export const sendEmailConfirmation = async (
+  userData: UserData,
+  cigaretteLicenseClient: CigaretteLicenseClient,
+  cryptoClient: CryptoClient,
+  logger: LogWriterType,
+): Promise<UserData> => {
+  const userId = userData.user.id;
+  const requestStart = Date.now();
+  logger.LogInfo(
+    `[START] - Received cigarette license send-email-confirmation request for userId: ${userId}`,
+  );
+
+  try {
+    const response: EmailConfirmationResponse = await cigaretteLicenseClient.sendEmailConfirmation(
+      userData,
+      cryptoClient,
+    );
+
+    if (response.statusCode !== 200) {
+      logger.LogError(
+        `Failed to send-email-confirmation: error: ${response.message}, userId: ${userId}, duration: ${getDurationMs(
+          requestStart,
+        )}ms`,
+      );
+      return userData;
+    }
+
+    const userDataWithConfirmation = modifyCurrentBusiness(userData, (business) => ({
+      ...business,
+      cigaretteLicenseData: {
+        ...business.cigaretteLicenseData,
+        paymentInfo: {
+          ...business.cigaretteLicenseData?.paymentInfo,
+          confirmationEmailsent: true,
+        },
+      },
+    }));
+
+    logger.LogInfo(
+      `[END] - Successfully sent email confirmation for userId: ${userId}, duration: ${getDurationMs(
+        requestStart,
+      )}ms`,
+    );
+
+    return userDataWithConfirmation;
+  } catch (error) {
+    logger.LogError(
+      `Exception during send-email-confirmation for userId: ${userId}, duration: ${getDurationMs(
+        requestStart,
+      )}ms, error: ${error}`,
+    );
+    return userData;
+  }
 };

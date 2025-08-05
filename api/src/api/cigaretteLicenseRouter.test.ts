@@ -1,12 +1,14 @@
-import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
+import { cigaretteLicenseRouterFactory, sendEmailConfirmation } from "@api/cigaretteLicenseRouter";
 import {
   mockSuccessPostResponse,
   mockSuccessGetResponse,
   mockErrorGetResponse,
   mockErrorPostResponse,
+  mockSuccessEmailResponse,
+  mockErrorEmailResponse,
 } from "@client/ApiCigaretteLicenseHelpers";
 import { getSignedInUserId } from "@api/userRouter";
-import { DatabaseClient, CigaretteLicenseClient } from "@domain/types";
+import { type CryptoClient, DatabaseClient, CigaretteLicenseClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -33,7 +35,10 @@ describe("cigaretteLicenseRouter", () => {
   let app: Express;
   let stubCigaretteLicenseClient: jest.Mocked<CigaretteLicenseClient>;
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
-  jest.mock("uuid", (): { v4: () => string } => ({ v4: () => "fake-uuid-value" }));
+  let stubCryptoClient: jest.Mocked<CryptoClient>;
+  jest.mock("node:crypto", () => ({
+    randomUUID: (): string => "fake-uuid-value",
+  }));
 
   beforeEach(async () => {
     jest.resetAllMocks();
@@ -41,7 +46,13 @@ describe("cigaretteLicenseRouter", () => {
     stubCigaretteLicenseClient = {
       preparePayment: jest.fn(),
       getOrderByToken: jest.fn(),
+      sendEmailConfirmation: jest.fn(),
       health: jest.fn(),
+    };
+    stubCryptoClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+      hashValue: jest.fn(),
     };
     stubDynamoDataClient = {
       migrateOutdatedVersionUsers: jest.fn(),
@@ -56,6 +67,7 @@ describe("cigaretteLicenseRouter", () => {
     app.use(
       cigaretteLicenseRouterFactory(
         stubCigaretteLicenseClient,
+        stubCryptoClient,
         stubDynamoDataClient,
         DummyLogWriter,
       ),
@@ -273,6 +285,49 @@ describe("cigaretteLicenseRouter", () => {
 
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("sendEmailConfirmation helper function", () => {
+    let userData: UserData;
+
+    beforeEach(() => {
+      userData = generateUserData({});
+    });
+
+    it("sends posted user data email-confirmation and returns updated user data with email confirmation", async () => {
+      stubCigaretteLicenseClient.sendEmailConfirmation.mockResolvedValue(mockSuccessEmailResponse);
+      const updatedUserData = await sendEmailConfirmation(
+        userData,
+        stubCigaretteLicenseClient,
+        stubCryptoClient,
+        DummyLogWriter,
+      );
+
+      const expectedModifiedUserData = modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        cigaretteLicenseData: {
+          ...business.cigaretteLicenseData,
+          paymentInfo: {
+            ...business.cigaretteLicenseData?.paymentInfo,
+            confirmationEmailsent: true,
+          },
+        },
+      }));
+
+      expect(updatedUserData).toEqual(expectedModifiedUserData);
+    });
+
+    it("returns existing userData if email-confirmation fails", async () => {
+      stubCigaretteLicenseClient.sendEmailConfirmation.mockResolvedValue(mockErrorEmailResponse);
+      const updatedUserData = await sendEmailConfirmation(
+        userData,
+        stubCigaretteLicenseClient,
+        stubCryptoClient,
+        DummyLogWriter,
+      );
+
+      expect(updatedUserData).toEqual(userData);
     });
   });
 });

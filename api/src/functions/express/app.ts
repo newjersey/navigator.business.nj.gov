@@ -259,11 +259,12 @@ const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
 const cigaretteLicenseClient = ApiCigaretteLicenseClient(logger, {
   baseUrl: process.env.CIGARETTE_LICENSE_BASE_URL || "",
-  emailConfirmationUrl: process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL || "",
   apiKey: process.env.CIGARETTE_LICENSE_API_KEY || "",
   merchantCode: process.env.CIGARETTE_LICENSE_MERCHANT_CODE || "",
   merchantKey: process.env.CIGARETTE_LICENSE_MERCHANT_KEY || "",
   serviceCode: process.env.CIGARETTE_LICENSE_SERVICE_CODE || "",
+  emailConfirmationUrl: process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL || "",
+  emailConfirmationKey: process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY || "",
 });
 const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
 
@@ -464,7 +465,15 @@ app.use(
     logger,
   ),
 );
-app.use("/api", cigaretteLicenseRouterFactory(cigaretteLicenseClient, dynamoDataClient, logger));
+app.use(
+  "/api",
+  cigaretteLicenseRouterFactory(
+    cigaretteLicenseClient,
+    AWSTaxIDEncryptionClient,
+    dynamoDataClient,
+    logger,
+  ),
+);
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient, logger));
 app.use(
   "/api",

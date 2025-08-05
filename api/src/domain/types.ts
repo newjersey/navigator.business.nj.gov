@@ -10,9 +10,10 @@ import { NameAvailability, NameAvailabilityResponse } from "@shared/businessName
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import {
-  CigaretteLicenseGetOrderByTokenResponse,
-  CigaretteLicensePreparePaymentResponse,
-} from "@client/ApiCigaretteLicenseHelpers";
+  GetOrderByTokenResponse,
+  PreparePaymentResponse,
+  EmailConfirmationResponse,
+} from "@shared/cigaretteLicense";
 import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   ElevatorSafetyDeviceInspectionDetails,
@@ -261,11 +262,12 @@ export interface TaxClearanceCertificateClient {
 }
 
 export interface CigaretteLicenseClient {
-  preparePayment: (
+  preparePayment: (userData: UserData, returnUrl: string) => Promise<PreparePaymentResponse>;
+  getOrderByToken: (token: string) => Promise<GetOrderByTokenResponse>;
+  sendEmailConfirmation: (
     userData: UserData,
-    returnUrl: string,
-  ) => Promise<CigaretteLicensePreparePaymentResponse>;
-  getOrderByToken: (token: string) => Promise<CigaretteLicenseGetOrderByTokenResponse>;
+    cryptoClient: CryptoClient,
+  ) => Promise<EmailConfirmationResponse>;
   health: () => Promise<HealthCheckMetadata>;
 }
 

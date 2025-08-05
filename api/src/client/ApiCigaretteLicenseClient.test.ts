@@ -1,3 +1,4 @@
+import { getCurrentBusiness } from "@shared/index";
 import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import {
   CigaretteLicenseApiConfig,
@@ -6,9 +7,15 @@ import {
   mockSuccessGetResponse,
   mockErrorGetResponse,
   mockErrorPostResponse,
-  PreparePaymentApiSubmission,
+  makeEmailConfirmationBody,
+  mockSuccessEmailResponse,
+  mockErrorEmailResponse,
 } from "@client/ApiCigaretteLicenseHelpers";
+import { PreparePaymentApiSubmission } from "@shared/cigaretteLicense";
+
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { CigaretteLicenseClient } from "@domain/types";
+import { type CryptoClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
 import {
   generateBusiness,
@@ -22,25 +29,38 @@ import { StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
-jest.mock("uuid", (): { v4: () => string } => ({ v4: () => "fake-uuid-value" }));
+jest.mock("node:crypto", () => ({
+  randomUUID: (): string => "fake-uuid-value",
+}));
 
 describe("CigaretteLicenseClient", () => {
   const config: CigaretteLicenseApiConfig = {
     baseUrl: "www.test.com",
-    emailConfirmationUrl: "www.test-email.com",
     apiKey: "fakeApiKey",
     merchantCode: "fakeMerchantCode",
     merchantKey: "fakeMerchantKey",
     serviceCode: "fakeServiceCode",
+    emailConfirmationUrl: "www.test-email.com",
+    emailConfirmationKey: "fake-email-key",
   };
   const returnUrl = "fake-return-url";
   let client: CigaretteLicenseClient;
+  let stubEncryptionDecryptionClient: jest.Mocked<CryptoClient>;
   let userData: UserData;
   let postBody: PreparePaymentApiSubmission;
 
   beforeEach(() => {
     jest.resetAllMocks();
     client = ApiCigaretteLicenseClient(DummyLogWriter, config);
+    stubEncryptionDecryptionClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn((value) => {
+        return new Promise((resolve) => {
+          resolve(value.replace("encrypted-", ""));
+        });
+      }),
+      hashValue: jest.fn(),
+    };
 
     userData = generateUserData({
       currentBusinessId: "123",
@@ -59,9 +79,6 @@ describe("CigaretteLicenseClient", () => {
       },
     });
     postBody = makePostBody(userData, returnUrl, config);
-
-    mockAxios.get.mockResolvedValue({ data: mockSuccessGetResponse });
-    mockAxios.post.mockResolvedValue({ data: mockSuccessPostResponse });
   });
 
   afterEach(() => {
@@ -69,6 +86,10 @@ describe("CigaretteLicenseClient", () => {
   });
 
   describe("prepare-payment", () => {
+    beforeEach(() => {
+      mockAxios.post.mockResolvedValue({ data: mockSuccessPostResponse });
+    });
+
     it("makes request to correct url with auth and data", async () => {
       await client.preparePayment(userData, returnUrl);
       expect(mockAxios.post).toHaveBeenCalledWith("www.test.com/tokens", postBody, {
@@ -143,6 +164,10 @@ describe("CigaretteLicenseClient", () => {
   describe("get-order-by-token", () => {
     const token = "mock-token";
 
+    beforeEach(() => {
+      mockAxios.get.mockResolvedValue({ data: mockSuccessGetResponse });
+    });
+
     it("makes request to correct url with auth and data", async () => {
       await client.getOrderByToken(token);
       expect(mockAxios.get).toHaveBeenCalledWith(`www.test.com/tokens/${token}`, {
@@ -208,6 +233,81 @@ describe("CigaretteLicenseClient", () => {
       expect(response.errorResult?.userMessage).toEqual(
         mockErrorGetResponse.errorResult?.userMessage,
       );
+    });
+  });
+
+  describe("send-email-confirmation", () => {
+    it("makes request to correct url with auth and data", async () => {
+      mockAxios.post.mockResolvedValue({ data: "Email confirmation successfully sent" });
+      const currentBusiness = getCurrentBusiness(userData);
+      const cigaretteLicenseData = currentBusiness.cigaretteLicenseData!;
+
+      const emailPostBody = await makeEmailConfirmationBody(
+        cigaretteLicenseData,
+        stubEncryptionDecryptionClient,
+      );
+      await client.sendEmailConfirmation(userData, stubEncryptionDecryptionClient);
+      expect(mockAxios.post).toHaveBeenCalledWith(config.emailConfirmationUrl, emailPostBody, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": config.emailConfirmationKey,
+        },
+      });
+    });
+
+    it("returns an error response of 400 if the cigaretteLicenseData doesn't exist", async () => {
+      const userWithoutCigaretteData = modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        cigaretteLicenseData: undefined,
+      }));
+      const response = await client.sendEmailConfirmation(
+        userWithoutCigaretteData,
+        stubEncryptionDecryptionClient,
+      );
+      expect(response.statusCode).toEqual(400);
+      expect(response.message).toEqual(
+        `The cigaretteLicenseData is not defined for user ${userData.user.id}`,
+      );
+    });
+
+    it("returns an error response of 409 if the cigarette license confirmation email has already been sent", async () => {
+      const userAlreadySentConfirmation = modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        cigaretteLicenseData: {
+          ...business.cigaretteLicenseData,
+          paymentInfo: {
+            ...business.cigaretteLicenseData?.paymentInfo,
+            confirmationEmailsent: true,
+          },
+        },
+      }));
+      const response = await client.sendEmailConfirmation(
+        userAlreadySentConfirmation,
+        stubEncryptionDecryptionClient,
+      );
+      expect(response.statusCode).toEqual(409);
+      expect(response.message).toEqual(
+        `The cigarette license confirmation email has already been sent for for user ${userData.user.id}`,
+      );
+    });
+
+    it("returns response of 200 and success message if confirmaiton is successful", async () => {
+      mockAxios.post.mockResolvedValue({
+        status: 200,
+        data: "Email confirmation successfully sent",
+      });
+      const response = await client.sendEmailConfirmation(userData, stubEncryptionDecryptionClient);
+
+      expect(response.statusCode).toEqual(StatusCodes.OK);
+      expect(response.message).toEqual(mockSuccessEmailResponse.message);
+    });
+
+    it("returns response of 500 and error message if an uknown error occurs", async () => {
+      mockAxios.post.mockRejectedValue(mockErrorEmailResponse);
+      const response = await client.sendEmailConfirmation(userData, stubEncryptionDecryptionClient);
+
+      expect(response.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(response.message).toEqual(mockErrorEmailResponse.message);
     });
   });
 });

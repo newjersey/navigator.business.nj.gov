@@ -1,14 +1,24 @@
-import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { type CryptoClient } from "@domain/types";
 import { UserData } from "@shared/userData";
-import { v4 as uuidv4 } from "uuid";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import {
+  CigaretteLicenseData,
+  EmailConfirmationResponse,
+  EmailConfirmationSubmission,
+  GetOrderByTokenResponse,
+  PreparePaymentApiSubmission,
+  PreparePaymentResponse,
+} from "@shared/cigaretteLicense";
+import { randomUUID } from "node:crypto";
 
 export type CigaretteLicenseApiConfig = {
   baseUrl: string;
-  emailConfirmationUrl: string;
   apiKey: string;
   merchantCode: string;
   merchantKey: string;
   serviceCode: string;
+  emailConfirmationUrl: string;
+  emailConfirmationKey: string;
 };
 
 export const makePostBody = (
@@ -18,7 +28,7 @@ export const makePostBody = (
 ): PreparePaymentApiSubmission => {
   const currentBusiness = getCurrentBusiness(userData);
   const cigaretteLicenseData = currentBusiness.cigaretteLicenseData;
-  const uniqueId = uuidv4();
+  const uniqueId = randomUUID();
 
   return {
     MerchantCode: config.merchantCode,
@@ -28,7 +38,6 @@ export const makePostBody = (
     LocalRef: uniqueId,
     OrderTotal: 50,
     PaymentType: "CC",
-    // TODO: Define these urls
     SuccessUrl: `${returnUrl}?completePayment=success`,
     FailureUrl: `${returnUrl}?completePayment=failure`,
     DuplicateUrl: `${returnUrl}?completePayment=duplicate`,
@@ -49,66 +58,50 @@ export const makePostBody = (
   };
 };
 
-export interface PreparePaymentApiSubmission {
-  MerchantCode: string;
-  MerchantKey: string;
-  ServiceCode: string;
-  UniqueTransId: string;
-  LocalRef: string;
-  OrderTotal: number;
-  PaymentType: string;
-  SuccessUrl: string;
-  FailureUrl: string;
-  DuplicateUrl: string;
-  CancelUrl: string;
-  Phone: string;
-  Email: string;
-  CompanyName: string;
-  CustomerAddress: {
-    Name: string;
-    Address1: string;
-    Address2: string;
-    City: string;
-    State: string;
-    Zip: string;
-    Country: string;
+export const makeEmailConfirmationBody = async (
+  cigaretteLicenseData: CigaretteLicenseData,
+  cryptoClient: CryptoClient,
+): Promise<EmailConfirmationSubmission> => {
+  return {
+    businessName: cigaretteLicenseData.businessName || "",
+    responsibleOwnerName: cigaretteLicenseData.responsibleOwnerName || "",
+    tradeName: cigaretteLicenseData.tradeName || "",
+    taxId: await cryptoClient.decryptValue(cigaretteLicenseData.encryptedTaxId || ""),
+    addressLine1: cigaretteLicenseData.addressLine1 || "",
+    addressLine2: cigaretteLicenseData.addressLine2 || "",
+    addressCity: cigaretteLicenseData.addressCity || "",
+    addressState: cigaretteLicenseData.addressState?.shortCode || "",
+    addressZipCode: cigaretteLicenseData.addressZipCode || "",
+    mailingAddressIsTheSame: !!cigaretteLicenseData.mailingAddressIsTheSame,
+    mailingAddressLine1: cigaretteLicenseData.mailingAddressLine1 || "",
+    mailingAddressLine2: cigaretteLicenseData.mailingAddressLine2 || "",
+    mailingAddressCity: cigaretteLicenseData.mailingAddressCity || "",
+    mailingAddressState: cigaretteLicenseData.mailingAddressState?.shortCode || "",
+    mailingAddressZipCode: cigaretteLicenseData.mailingAddressZipCode || "",
+    contactName: cigaretteLicenseData.contactName || "",
+    contactPhoneNumber: cigaretteLicenseData.contactPhoneNumber || "",
+    contactEmail: cigaretteLicenseData.contactEmail || "",
+    salesInfoStartDate: cigaretteLicenseData.salesInfoStartDate || "",
+    salesInfoSupplier: cigaretteLicenseData.salesInfoSupplier?.join(", ") || "",
+    signerName: cigaretteLicenseData.signerName || "",
+    signerRelationship: cigaretteLicenseData.signerRelationship || "",
+    signature: !!cigaretteLicenseData.signature,
+    paymentInfo: {
+      orderId: cigaretteLicenseData.paymentInfo?.orderId || 0,
+      orderStatus: cigaretteLicenseData.paymentInfo?.orderStatus || "",
+      orderTimestamp: cigaretteLicenseData.paymentInfo?.orderTimestamp || "",
+    },
   };
-}
-
-export type CigaretteLicensePaymentApiError = {
-  statusCode: number;
-  errorCode: number;
-  userMessage: string;
-  developerMessage: string;
 };
 
-export type CigaretteLicensePreparePaymentResponse = {
-  token: string;
-  legacyRedirectUrl?: string;
-  htmL5RedirectUrl?: string;
-  inContextRedirectUrl?: string;
-  errorResult?: CigaretteLicensePaymentApiError;
-};
-
-export type CigaretteLicenseGetOrderByTokenResponse = {
-  matchingOrders: number;
-  orders?: CigaretteLicenseOrderDetails[];
-  errorResult?: CigaretteLicensePaymentApiError;
-};
-
-export type CigaretteLicenseOrderDetails = {
-  orderId: number;
-  orderStatus: string;
-  timestamp: string;
-};
-
-export const mockSuccessPostResponse: CigaretteLicensePreparePaymentResponse = {
+export const mockSuccessPostResponse: PreparePaymentResponse = {
   token: "mock-token",
   legacyRedirectUrl: "mock-legacy-redirect-url",
   htmL5RedirectUrl: "mock-html5-redirect-url",
   inContextRedirectUrl: "mock-in-context-redirect-url",
 };
-export const mockErrorPostResponse: CigaretteLicensePreparePaymentResponse = {
+
+export const mockErrorPostResponse: PreparePaymentResponse = {
   token: "",
   errorResult: {
     statusCode: 500,
@@ -117,11 +110,13 @@ export const mockErrorPostResponse: CigaretteLicensePreparePaymentResponse = {
     developerMessage: "An unknown error occured",
   },
 };
-export const mockSuccessGetResponse: CigaretteLicenseGetOrderByTokenResponse = {
+
+export const mockSuccessGetResponse: GetOrderByTokenResponse = {
   matchingOrders: 1,
   orders: [{ orderId: 1234, orderStatus: "COMPLETE", timestamp: "now" }],
 };
-export const mockErrorGetResponse: CigaretteLicenseGetOrderByTokenResponse = {
+
+export const mockErrorGetResponse: GetOrderByTokenResponse = {
   matchingOrders: 0,
   errorResult: {
     statusCode: 500,
@@ -129,4 +124,14 @@ export const mockErrorGetResponse: CigaretteLicenseGetOrderByTokenResponse = {
     userMessage: "An unknown error occured",
     developerMessage: "An unknown error occured",
   },
+};
+
+export const mockSuccessEmailResponse: EmailConfirmationResponse = {
+  statusCode: 200,
+  message: "Email confirmation successfully sent",
+};
+
+export const mockErrorEmailResponse: EmailConfirmationResponse = {
+  statusCode: 500,
+  message: "Failed to send email confirmation",
 };
