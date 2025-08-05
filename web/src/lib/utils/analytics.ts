@@ -37,7 +37,13 @@ type EventType =
   | "tax_clearance_switch_step"
   | "tax_clearance_validation_error"
   | "tax_clearance_validation_success"
-  | "tool_tip_mouseover";
+  | "tool_tip_mouseover"
+  | "xray_lookup_failed"
+  | "xray_renewal_started_cta"
+  | "xray_renewal_started_expired_card"
+  | "xray_status_check_started"
+  | "xray_status_check_success_active"
+  | "xray_status_check_success_expired";
 
 const eventMap: Record<EventType, string> = {
   account_clicks: "account_clicks",
@@ -65,6 +71,12 @@ const eventMap: Record<EventType, string> = {
   tax_clearance_validation_error: "tax_clearance_validation_error",
   tax_clearance_validation_success: "tax_clearance_validation_success",
   tool_tip_mouseover: "tool_tip_mouseover",
+  xray_lookup_failed: "xray_lookup_failed",
+  xray_renewal_started_cta: "xray_renewal_started_cta",
+  xray_renewal_started_expired_card: "xray_renewal_started_expired_card",
+  xray_status_check_started: "xray_status_check_started",
+  xray_status_check_success_active: "xray_status_check_success_active",
+  xray_status_check_success_expired: "xray_status_check_success_expired",
 };
 
 type ParameterType =
@@ -180,7 +192,8 @@ type FormName =
   | "industry_essential_questions"
   | "name_search"
   | "account_setup"
-  | "task_address_form";
+  | "task_address_form"
+  | "xray_address_form";
 
 type OnTabName =
   | "start_application"
@@ -2506,6 +2519,75 @@ export default {
             clicked: "link_your_myNJ_account",
             item: "link_your_myNJ_account_link",
             clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    xray_registration_check_status_form: {
+      submit: {
+        status_lookup_initiated: () => {
+          eventRunner.track({
+            event: "xray_status_check_started",
+            legacy_event_action: "submit",
+            legacy_event_category: "xray_registration_check_status_form",
+            legacy_event_label: "status_lookup_initiated",
+            form_name: "xray_address_form",
+          });
+        },
+      },
+    },
+    xray_registration_check_status_results: {
+      appears: {
+        active_registration_found: () => {
+          eventRunner.track({
+            event: "xray_status_check_success_active",
+            legacy_event_action: "appears",
+            legacy_event_category: "xray_registration_check_status_results",
+            legacy_event_label: "active_registration_found",
+          });
+        },
+        expired_registration_found: () => {
+          eventRunner.track({
+            event: "xray_status_check_success_expired",
+            legacy_event_action: "appears",
+            legacy_event_category: "xray_registration_check_status_results",
+            legacy_event_label: "expired_registration_found",
+          });
+        },
+      },
+    },
+    xray_registration_check_status_error: {
+      appears: {
+        record_not_found_error: () => {
+          eventRunner.track({
+            event: "xray_lookup_failed",
+            legacy_event_action: "appears",
+            legacy_event_category: "xray_registration_check_status_error",
+            legacy_event_label: "record_not_found_error",
+          });
+        },
+      },
+    },
+    xray_registration_expired_cta: {
+      click: {
+        xray_renewal_started_cta: () => {
+          eventRunner.track({
+            event: "xray_renewal_started_cta",
+            legacy_event_action: "click",
+            legacy_event_category: "xray_registration_expired_cta",
+            legacy_event_label: "renew_registration_button",
+          });
+        },
+      },
+    },
+    xray_registration_expired_status_card: {
+      click: {
+        xray_renewal_started_expired_card: () => {
+          eventRunner.track({
+            event: "xray_renewal_started_expired_card",
+            legacy_event_action: "click",
+            legacy_event_category: "xray_registration_expired_status_card",
+            legacy_event_label: "renew_ref_link",
           });
         },
       },
