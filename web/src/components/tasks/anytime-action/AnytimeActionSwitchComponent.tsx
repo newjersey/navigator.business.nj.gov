@@ -20,9 +20,8 @@ export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
     props.anytimeActionTask.filename === "tax-clearance-certificate"
   )
     return <AnytimeActionTaxClearanceCertificate anytimeAction={props.anytimeActionTask} />;
-
-  const isABCETPApplicationEnabled = process.env.FEATURE_ABC_ETP_APPLICATION === "true";
-  if (isABCETPApplicationEnabled && props.anytimeActionTask.filename === "emergency-trip-permit") {
+  
+  if (props.anytimeActionTask.filename === "emergency-trip-permit") {
     return <EmergencyTripPermitWithValidation />;
   }
   return rswitch(props.anytimeActionTask.filename, {
