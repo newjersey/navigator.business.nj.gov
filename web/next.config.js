@@ -24,7 +24,6 @@ module.exports = withBundleAnalyzer({
     COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,
     DEV_ONLY_UNLINK_TAX_ID: process.env.DEV_ONLY_UNLINK_TAX_ID ?? "false",
     DISABLE_GTM: process.env.DISABLE_GTM,
-    FEATURE_ABC_ETP_APPLICATION: process.env.FEATURE_ABC_ETP_APPLICATION ?? "false",
     FEATURE_BUSINESS_FLP: process.env.FEATURE_BUSINESS_FLP ?? "false",
     FEATURE_CIGARETTE_LICENSE: process.env.FEATURE_CIGARETTE_LICENSE ?? "false",
     FEATURE_FORMATION_SURVEY: process.env.FEATURE_FORMATION_SURVEY ?? "false",
