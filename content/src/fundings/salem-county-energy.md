@@ -43,7 +43,7 @@ publishStageArchive: ""
 - The energy and utility services must be consumed exclusively at the facility
 - Must not be in default with any other state program
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 You can receive sales tax exemption for the purchase of electricity and natural gas for use at the manufacturing facility.
 
