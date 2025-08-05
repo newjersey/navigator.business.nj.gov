@@ -30,7 +30,7 @@ webflowId: 648b6ec5f6fdd6168465c7ab
 - Lien holder information and financing statement if the vehicle is leased or financed
 - [Application for Certificate of Ownership](https://www.state.nj.us/mvc/pdf/vehicles/luxtaxapp.pdf), if the vehicle is registered in another state
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A current and valid vehicle registration.
 
