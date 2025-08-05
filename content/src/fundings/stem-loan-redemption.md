@@ -55,7 +55,7 @@ Employees:
 
 Eligible occupations are listed in the [Higher Education Student Assistance Authority (HESAA) eligible high-growth STEM occupations list](https://www.hesaa.org/Documents/LoanRedemptionPrograms/STEMOccupations.pdf)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Up to $8,000 in student loan redemption while only contributing half that amount
 - HESAA matches each $1,000 contribution from participating employers for up to four years
