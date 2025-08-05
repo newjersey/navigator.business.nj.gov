@@ -23,7 +23,7 @@ synonyms:
 - The firm's resident manager information and license number
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate with the same license number indicating your firm registration is reinstated.
 

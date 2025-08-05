@@ -17,13 +17,13 @@ notesMd: >-
 
   \
 
-  1.        ‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document. 
+  1.        ‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document.
 
 
   This license is for rolled cigarettes only.  Other tobacco products do not require this license to be sold.
 
 
-  2.       The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed. 
+  2.       The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed.
 
 
   Both this and the supplier information are only needed if applicable to the license type selected at the top of the application.
@@ -70,30 +70,42 @@ industryId: ""
 formName: ""
 webflowType: business-license
 ---
-- - -
+
+---
 
 ## Application Requirements
+
 ### General Licensee
-* Business name
-*  `Trade name|alt-name-trade-name` , if applicable
-* 12-digit `New Jersey tax ID number|tax-id` 
-* Business address
-*  `Business type/structure|business-structure-learn-more`
-* Date cigarette sales will begin, if applicable
-* Applicable fees paid
+
+- Business name
+- `Trade name|alt-name-trade-name` , if applicable
+- 12-digit `New Jersey tax ID number|tax-id`
+- Business address
+- `Business type/structure|business-structure-learn-more`
+- Date cigarette sales will begin, if applicable
+- Applicable fees paid
+
 ### Owner
-* Name, address, and email of each owner
+
+- Name, address, and email of each owner
+
 ### Supplier
+
 For a retail over-the-counter license or a vending machine license (provide lists as necessary):
-* Supplier information, including name, address, and phone number, if applicable
-* Address where vending machine is located, if applicable
+
+- Supplier information, including name, address, and phone number, if applicable
+- Address where vending machine is located, if applicable
+
 ### Manufacturer Representative
-* Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id` , if applicable
+
+- Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id` , if applicable
 
 ## Vending Machines: Additional Requirements
+
 Check with your municipality for any additional requirements for owning and operating a vending machine in your location, if applicable.
 
 ## Additional Tax Requirements
+
 For more information on taxes and other requirements visit the [Cigarette Tax page](https://www.nj.gov/treasury/taxation/cigarette.shtml).
 
 &nbsp;
@@ -106,19 +118,19 @@ PO Box 252
 
 Trenton, NJ 08646-0252
 
-:::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="informational" }
 
 Learn about the age of sale (21) and the proper way to check an I.D. by visiting [Tobacco-Free for a Healthy New Jersey](https://www.tobaccofreenj.com/stomp).
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 You may not sell, manufacture, or have a vending machine with cigarettes. You may also be subject to significant fines and legal penalties, including imprisonment.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A printed license, sent directly to your business location.
 

@@ -21,5 +21,6 @@ callToActionText: " Renew My Consulting Firm/Temporary Help Service Firm"
 - `Surety bond|surety-bond` number and premium paid receipt
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 A renewed combined temporary help service and consulting firm (headhunter) registration valid for one year. It will be sent to your mailing address on file.
+:::

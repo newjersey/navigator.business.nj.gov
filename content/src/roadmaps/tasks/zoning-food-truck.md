@@ -14,7 +14,7 @@ summaryDescriptionMd: >-
   Zoning Office._**
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Zoning approval
 

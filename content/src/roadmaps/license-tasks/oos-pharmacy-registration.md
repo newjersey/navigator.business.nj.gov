@@ -57,13 +57,13 @@ licenseName: "Pharmacy-Out of State Pharmacy"
 
 Email your completed application to the New Jersey Board of Pharmacy at [oospharmacy@dca.njoag.gov](mailto:oospharmacy@dca.njoag.gov). They will email you an invoice and information on the next steps.
 
-:::callout{ showHeader="true" headerText="What if I don't get this registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this registration?" calloutType="warning" }
 
 Your pharmacy can’t ship or deliver prescription medications to patients in New Jersey. Doing so may result in fines and disciplinary actions imposed by the NJ Board of Pharmacy.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An emailed letter serving as a temporary permit, with a hard copy mailed to the pharmacy's address.
 

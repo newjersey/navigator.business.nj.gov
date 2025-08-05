@@ -53,7 +53,7 @@ summaryDescriptionMd: >-
   * Class A or B with “X” Endorsement, for vehicles that require a combination of Hazmat (“H”) and Tanker (“N”) endorsements, such as fuel tankers and chemical transport trucks
 
 
-  :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="Keep in mind:"  calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
   * Endorsements (“P,” “S,” “H,” “T,” “X”)  are only added to a CDL upon request and require that applicants pass [additional knowledge and skills tests.](https://www.nj.gov/mvc/drivertopics/cdlendorsements.htm)
@@ -91,7 +91,7 @@ callToActionLink: https://www.nj.gov/mvc/pdf/license/BA-208C.pdf
 - Additional skills tests, for specific endorsements
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test
 - CDL after passing the driving exam

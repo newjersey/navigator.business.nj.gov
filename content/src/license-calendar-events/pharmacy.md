@@ -22,7 +22,7 @@ callToActionText: Renew My Pharmacy Permit
 - Current business address
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A renewed pharmacy permit valid for 1 year. It will be mailed to your business mailing address on file.
 

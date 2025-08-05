@@ -4,7 +4,7 @@ notesMd: >-
   changed to MVCcorpcodes@Mvc.nj.gov
 
 
-  Replaced old email address: mvcblsprocessing@mvc.nj.gov 
+  Replaced old email address: mvcblsprocessing@mvc.nj.gov
 
 
   Feedback from SME:
@@ -36,7 +36,7 @@ summaryDescriptionMd: >
   * Boat dealership
 
 
-  :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText=""  calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
   You will need to apply for more than one license if your business plans to both sell and lease vehicles or boats.
@@ -47,36 +47,37 @@ id: vehicle-dealership
 agencyId: nj-motor-vehicle
 agencyAdditionalContext: Business Licensing Services Bureau
 ---
+
 ## Application Requirements
 
 You must submit copies of the following:
 
-*  `Federal Taxpayer Identification Number (EIN)|ein` 
-*  `Certificate of Formation|certificate-formation` 
-*  `Certificate of Authority|certificate-authority-sales-tax` 
-*  `Certificate of Liability Insurance|liability-insurance` , in the required amounts for bodily injury and property
-*  `Surety bond|surety-bond` 
-* Driver’s licenses for all owners, members, and partners
-* Passport-size color photographs of all owners, members, and partners
-* Deed, lease, or purchase agreement for your business location. If leasing the property, the lease agreement must be for a minimum of 12 months.
-* Phone bill or phone installation order with your business name and addresses listed on the document
-* Photographs or plans clearly showing the complete premises where you want to conduct your business
+- `Federal Taxpayer Identification Number (EIN)|ein`
+- `Certificate of Formation|certificate-formation`
+- `Certificate of Authority|certificate-authority-sales-tax`
+- `Certificate of Liability Insurance|liability-insurance` , in the required amounts for bodily injury and property
+- `Surety bond|surety-bond`
+- Driver’s licenses for all owners, members, and partners
+- Passport-size color photographs of all owners, members, and partners
+- Deed, lease, or purchase agreement for your business location. If leasing the property, the lease agreement must be for a minimum of 12 months.
+- Phone bill or phone installation order with your business name and addresses listed on the document
+- Photographs or plans clearly showing the complete premises where you want to conduct your business
 
 Depending on your business type or dealership license, you may also need:
 
-* [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if you sell or lease under a different business names
-* [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf),  if you sell used vehicles only
-*  `Franchise Agreement|franchise-agreement` , if you sell new vehicles only
-* Established `business location|dealership-business-location` , if you sell new and used vehicles
+- [Registration of Alternate Name Form C-150G](https://formfiles.justia.com/pdf/new-jersey/0080/40.pdf), if you sell or lease under a different business names
+- [Dealer Certification of License Location Type and Proper Walls Form BLS-158](https://www.nj.gov/mvc/pdf/business/Dealer%20Certificateof%20Licensed%20Location%20Type%20and%20Proper%20Walls.pdf), if you sell used vehicles only
+- `Franchise Agreement|franchise-agreement` , if you sell new vehicles only
+- Established `business location|dealership-business-location` , if you sell new and used vehicles
 
 ## How to Apply
 
 Fill out the appropriate forms:
 
-* [New and Used Car Dealership](https://www.nj.gov/mvc/pdf/business/newuseddealer.pdf) (PDF)
-* [Used Car Dealership](https://www.nj.gov/mvc/pdf/business/useddealer.pdf) (PDF)
-* [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) (PDF)
-* [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) (PDF)
+- [New and Used Car Dealership](https://www.nj.gov/mvc/pdf/business/newuseddealer.pdf) (PDF)
+- [Used Car Dealership](https://www.nj.gov/mvc/pdf/business/useddealer.pdf) (PDF)
+- [Leasing Dealership](https://www.nj.gov/mvc/pdf/business/leasingapp.pdf) (PDF)
+- [Boat Dealership](https://www.nj.gov/mvc/pdf/business/boatdeal.pdf) (PDF)
 
 Email your completed application to mvcblsprocessing@mvc.nj.gov or mail to:
 
@@ -96,24 +97,24 @@ P.O. Box 170
 
 Trenton, NJ 08666-0170
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-* Dealership license certificate
-* Dealership license number
-* Authorization to request dealership license plates
-* Access to temporary registration forms, title processing, and dealer tools
-
-:::
-
-:::callout{ showHeader="true" headerText="What if I sell or lease vehicles and boats without a dealership license?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-
-* You may be issued citations or fines
-* Your business may not be able to register vehicles or get dealership plates
-* Your business may be shut down by MVC enforcement
+- Dealership license certificate
+- Dealership license number
+- Authorization to request dealership license plates
+- Access to temporary registration forms, title processing, and dealer tools
 
 :::
 
-:::callout{ showHeader="true" headerText="Questions?" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-6500, ext. 5003" emailIconText=" mcscustomerservice@mvc.nj.gov" }
+:::largeCallout{ showHeader="true" headerText="What if I sell or lease vehicles and boats without a dealership license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+- You may be issued citations or fines
+- Your business may not be able to register vehicles or get dealership plates
+- Your business may be shut down by MVC enforcement
+
+:::
+
+:::largeCallout{ showHeader="true" headerText="Questions?" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-6500, ext. 5003" emailIconText=" mcscustomerservice@mvc.nj.gov" }
 
 Call or email the NJ MVC at:
 

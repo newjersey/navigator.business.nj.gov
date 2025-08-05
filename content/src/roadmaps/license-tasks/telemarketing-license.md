@@ -34,19 +34,19 @@ webflowId: 669ac522985e99ee52d4901b
 - Explanation of license suspension, denial, or revocation, if applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="warning" }
 
 As a Telemarketer, you must register with the [Federal Trade Commission's National Do Not Call Registry.](https://telemarketing.donotcall.gov/)
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="conditional" }
 
 You can't make telemarketing calls to residents of New Jersey, and you may be subject to significant fines and legal penalties.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A telemarketing license number.
 

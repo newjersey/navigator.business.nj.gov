@@ -26,7 +26,7 @@ Be sure to check the specific requirements for each type of work you, your emplo
 - [Master plumber](https://www.njconsumeraffairs.gov/plu/Pages/default.aspx)
 - [Pool and spa service contractor and pool and spa builder and installer](https://www.njconsumeraffairs.gov/pool/Pages/default.aspx)
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Confirmation that you, your employees, or subcontractors have the required trade licenses.
 

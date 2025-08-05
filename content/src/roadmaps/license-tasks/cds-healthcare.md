@@ -35,13 +35,13 @@ Email your completed CDS application to the New Jersey Drug Control Unit (DCU) a
 
 You must also register with the [U.S. Drug Enforcement Administration (DEA).](https://www.deadiversion.usdoj.gov/online_forms_apps.html) Email your DEA registration to the DCU within 60 days.
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" }
 
 You cannot legally dispense, prescribe, or store any CDS.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A CDS registration certificate sent to your mailing address, valid for 1 year.
 

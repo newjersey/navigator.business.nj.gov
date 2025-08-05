@@ -41,7 +41,7 @@ publishStageArchive: ""
 
 - Owners or operators of licensed child care centers or child care centers applying for a license through the Department of Children and Families (DCF)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Offers a grant reimbursement of up to $1500.
 

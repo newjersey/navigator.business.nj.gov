@@ -60,7 +60,7 @@ priority: true
 
 Small businesses, with particular emphasis on minority- and women-owned businesses, may apply.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Program includes a comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors.
 

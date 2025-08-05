@@ -1,8 +1,9 @@
-import Callout from "@/lib/cms/editors/callout";
 import CannabisLocationAlert from "@/lib/cms/editors/cannabisLocationAlert";
 import ContextEditor from "@/lib/cms/editors/context-info";
 import IconWidgetEditor from "@/lib/cms/editors/icon";
 import AlertEditor from "@/lib/cms/editors/infoAlert";
+import { default as LargeCallout } from "@/lib/cms/editors/large-callout";
+import { default as MiniCallout } from "@/lib/cms/editors/mini-callout";
 import Note from "@/lib/cms/editors/note";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { WriteOnceReadOnlyNoSpaceControl } from "@/lib/cms/fields/writeoncereadonlynospacefield";
@@ -27,7 +28,6 @@ import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/Anytime
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
 import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
-import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
 import EmergencyTripPermitPreview from "@/lib/cms/previews/EmergencyTripPermitPreview";
@@ -36,6 +36,7 @@ import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimS
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
 import GovernmentContractingAnytimeActionPreview from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
+import LargeCalloutPreview from "@/lib/cms/previews/LargeCalloutPreview";
 import LegalMessagePreview from "@/lib/cms/previews/LegalMessagePreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
 import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
@@ -88,7 +89,9 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(CannabisLocationAlert);
       // @ts-expect-error: No type definition available
-      CMS.registerEditorComponent(Callout);
+      CMS.registerEditorComponent(LargeCallout);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(MiniCallout);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(IconWidgetEditor);
 
@@ -195,7 +198,7 @@ const CMS = dynamic(
       registerPreview(CMS, "tax-access", TaxAccessPreview);
       registerPreview(CMS, "navigation-defaults", NavBarPreview);
 
-      registerPreview(CMS, "calloutDefaults", CalloutPreview);
+      registerPreview(CMS, "calloutDefaults", LargeCalloutPreview);
     });
   },
   { ssr: false, loading: Loading },

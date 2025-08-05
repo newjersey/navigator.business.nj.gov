@@ -29,7 +29,7 @@ summaryDescriptionMd: >-
   * Class A or B with “X” Endorsement, for vehicles that require a combination of Hazmat (“H”) and Tanker (“N”) endorsements, such as fuel tankers and chemical transport trucks
 
 
-  :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="Keep in mind:"  calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
   * Endorsements (“P,” “S,” “H,” “T,” “X”)  are only added to a CDL upon request and require that applicants pass [additional knowledge and skills tests.](https://www.nj.gov/mvc/drivertopics/cdlendorsements.htm)
@@ -48,34 +48,35 @@ callToActionText: Apply for My CDL
 agencyId: nj-motor-vehicle
 formName: BA-208C
 ---
+
 &nbsp;
+
 ## Eligibility Criteria
 
-* At least 18 years old, if operating only within NJ
-* At least 21 years old, if traveling across state lines
-* A clean driving record with fewer than five points
-* U.S. citizen or lawful permanent resident
-* Minimum of 20/40 vision in each eye with or without glasses
-* Ability to recognize red, green, and amber colors
+- At least 18 years old, if operating only within NJ
+- At least 21 years old, if traveling across state lines
+- A clean driving record with fewer than five points
+- U.S. citizen or lawful permanent resident
+- Minimum of 20/40 vision in each eye with or without glasses
+- Ability to recognize red, green, and amber colors
 
 ## Application Requirements
 
-* Basic New Jersey driver's license (Class D)
-* Proof of US citizenship, such as a verifiable Social Security Number
-* Completed [Holder Self-Certification](https://www.state.nj.us/mvc/pdf/drivertopics/CDSC-1.pdf)
-* [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by your healthcare provider, if applicable
-* Completed [Application for a Commercial Driver's License](https://www.state.nj.us/mvc/pdf/license/BA-208C.pdf)
-* Complete Entry-level Driver Training (ELDT), also known as Hazardous Materials Training, from an approved provider
-* Successfully completion of skills tests, including a vehicle inspection test, basic vehicle control test, and on-road test
-* Additional skills tests, for specific endorsements
-* Applicable fees paid
+- Basic New Jersey driver's license (Class D)
+- Proof of US citizenship, such as a verifiable Social Security Number
+- Completed [Holder Self-Certification](https://www.state.nj.us/mvc/pdf/drivertopics/CDSC-1.pdf)
+- [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by your healthcare provider, if applicable
+- Completed [Application for a Commercial Driver's License](https://www.state.nj.us/mvc/pdf/license/BA-208C.pdf)
+- Complete Entry-level Driver Training (ELDT), also known as Hazardous Materials Training, from an approved provider
+- Successfully completion of skills tests, including a vehicle inspection test, basic vehicle control test, and on-road test
+- Additional skills tests, for specific endorsements
+- Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test
 - CDL after passing the driving exam
 
 :::
-
 
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov

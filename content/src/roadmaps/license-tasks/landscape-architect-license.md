@@ -43,7 +43,7 @@ In addition, you will need to contact the Council of Landscape Architectural Reg
 - Five reference forms
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A landscape architect license number.
 

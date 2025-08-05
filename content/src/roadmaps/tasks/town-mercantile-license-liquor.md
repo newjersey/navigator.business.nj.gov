@@ -30,7 +30,7 @@ ${endLocationDependentSection}
 
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A liquor license
 - A mercantile license

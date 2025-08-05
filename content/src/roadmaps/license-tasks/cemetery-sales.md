@@ -44,13 +44,13 @@ licenseCertificationClassification: undefined
 - Details of any current work managing funeral homes, if applicable
 - Details of any current work in mortuary science, if applicable
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 You cannot sell graves, crypts, or niches.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A cemetery salesperson license, sent to the cemetery.
 

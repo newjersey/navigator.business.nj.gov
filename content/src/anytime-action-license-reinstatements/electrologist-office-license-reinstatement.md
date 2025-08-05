@@ -26,5 +26,5 @@ urlSlug: electrologist-office-license-reinstatement
 - Reinstatement questions answered by the office manager of the electrologist's office
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 The same license number.

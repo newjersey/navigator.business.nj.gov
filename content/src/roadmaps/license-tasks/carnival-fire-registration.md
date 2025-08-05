@@ -36,7 +36,7 @@ Before registering, ask your town clerk about any other specific permits or rule
 - Copy of a Certificate of Insurance
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once approved, you will have:" calloutType="conditional" }
 
 A carnival registration certificate, which is valid for one year and not transferable.
 

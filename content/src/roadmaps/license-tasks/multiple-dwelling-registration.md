@@ -56,13 +56,13 @@ If your multiple dwelling was built before 1978, you also need the:
 - List of seasonal rental units rented for less than six months each year
 - List of units occupied by you, the owner
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Certificate of Registration with a 10-digit registration number, which you need to recertify your registration every year.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't register?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't register?" calloutType="conditional" }
 
 If you don’t register your multiple dwelling, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code Certificate of Occupancy.
 

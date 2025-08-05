@@ -44,7 +44,7 @@ publishStageArchive: Do Not Publish
 - Equipment cannot be planned to go out of use in the next 5 years
 - Priority is given to urban areas, high frequency of use, and older models
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Award of up to $100,000 per piece of equipment purchased or replaced.
 

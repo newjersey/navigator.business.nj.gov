@@ -45,7 +45,7 @@ required: true
 - Business address (this may be a home address if you are a home-based business)
 - `Registered agent|registered-agent`
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - `Entity ID|entity-id`
 - `Certificate of Authorization|certificate-formation` ,

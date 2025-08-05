@@ -61,12 +61,12 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 - Total axle weight
 - Total axle spacing
 
-:::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this permit?" calloutType="warning" }
 If you don't get this permit and your combination vehicle, trailer, and load meet the Code 23 OS/OW (30-day) Permit requirements, you may face fines.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 

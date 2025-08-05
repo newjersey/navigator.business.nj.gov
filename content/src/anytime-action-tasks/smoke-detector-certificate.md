@@ -37,7 +37,7 @@ synonyms:
 
 You must pass an inspection before you can get the certificate. Contact your `Local Enforcing Agency (LEA)|lea` to schedule an inspection. Your LEA can be the local fire department or the state Division of Fire Safety.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A valid smoke detector, carbon monoxide detector, and fire extinguisher certificate, if you pass the inspection.
 

@@ -44,7 +44,7 @@ webflowId: 5f772935f278cc9d99b0ce1e
 - Background check and a fingerprint check
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Commercial Driver’s License (CDL) with P and S endorsements.
 

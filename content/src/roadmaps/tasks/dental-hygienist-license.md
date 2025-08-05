@@ -55,13 +55,13 @@ Send verification of any licenses you already hold to [dentistry@dca.njoag.gov](
 
 4. After you receive fingerprint instructions, follow the instructions to submit your fingerprints.
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 If you practice dental hygiene without a license, you may face criminal, civil, or administrative penalties.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A 12-character license number, beginning with “22HI,” sent by mail.
 

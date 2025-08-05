@@ -42,7 +42,7 @@ webflowId: 5f772993a195c8849e15b18f
 - A copy of a Certificate of Insurance showing the purchase of a $3,000 `surety bond|surety-bond` and a minimum of $500,000 in liability insurance
 - Detailed information and police records if you answered “yes” to any of the questions related to moral character and criminal background
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An HVACR contractor license.
 

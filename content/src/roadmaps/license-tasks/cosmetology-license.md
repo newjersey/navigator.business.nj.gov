@@ -34,7 +34,7 @@ webflowId: 64ca743a7c4e7f4f3a3c50f2
 - Proof of passing the cosmetology licensing examination
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - Your individual license or a manager with a license
 - Confirmed your staff have their cosmetology license

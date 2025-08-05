@@ -36,7 +36,7 @@ webflowId: 66aceedf6ba3dffa8ac9d488
 
 - You don’t need any supplemental documents for this application
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A notary public commission certificate
 - An oath qualification certificate

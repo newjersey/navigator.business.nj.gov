@@ -44,13 +44,13 @@ webflowId: 67100850618dd6edbee87473
 - The name and title of everyone who will have access to the CDS (not applicable for law enforcement officers)
 - Security measures in place to prevent loss or theft of the CDS (not applicable for law enforcement officers)
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" }
 
 You cannot store or use any CDS for training purposes and may be subject to legal consequences if you do.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A CDS registration certificate sent to your mailing address, valid for 1 year.
 

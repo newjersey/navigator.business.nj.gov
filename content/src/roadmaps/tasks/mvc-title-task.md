@@ -1,7 +1,7 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false"
+  :::largeCallout{ showHeader="true" headerText="Keep in mind:"
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -50,33 +50,35 @@ callToActionText: Get My Vehicle Title
 agencyId: nj-motor-vehicle
 formName: OS/SS-UTA
 ---
+
 ## Application Requirements
+
 For vehicles, you will need:
 
-* Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
-* Proof of ownership, such as a `Manufacturer’s Certificate of Origin (MCO)|manufacturers-cert-of-origin`
-* [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
-* Proof of Identity, such as a valid driver’s license or other government-issued photo identification
-* Lienholder information if adding or removing a lien from a title
-* Odometer disclosure statement if the vehicle is less than 10 years old
-* Notarized `Power of Attorney (POA)|power-of-attorney` if acting on behalf of the business owner
-* Proof of sales tax payment or exemption
-* Bill of sale if the vehicle was purchased from a private seller
-* Proof of address to confirm New Jersey residency
+- Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
+- Proof of ownership, such as a `Manufacturer’s Certificate of Origin (MCO)|manufacturers-cert-of-origin`
+- [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
+- Proof of Identity, such as a valid driver’s license or other government-issued photo identification
+- Lienholder information if adding or removing a lien from a title
+- Odometer disclosure statement if the vehicle is less than 10 years old
+- Notarized `Power of Attorney (POA)|power-of-attorney` if acting on behalf of the business owner
+- Proof of sales tax payment or exemption
+- Bill of sale if the vehicle was purchased from a private seller
+- Proof of address to confirm New Jersey residency
 
 For vessels, you will need:
 
-* [Boat Registration Application (Form BA-51)](https://www.nj.gov/mvc/pdf/vehicles/BA-51.pdf)
-* [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
-* Hull Identification Number (HIN), the vessel equivalent of a Vehicle Identification Number (VIN)
-* Proof of sales tax payment or exemption
-* USCG documentation, if the vessel is documented with the U.S. Coast Guard
+- [Boat Registration Application (Form BA-51)](https://www.nj.gov/mvc/pdf/vehicles/BA-51.pdf)
+- [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
+- Hull Identification Number (HIN), the vessel equivalent of a Vehicle Identification Number (VIN)
+- Proof of sales tax payment or exemption
+- USCG documentation, if the vessel is documented with the U.S. Coast Guard
 
-:::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get a title?" calloutType="warning" }
 If you operate a vehicle or vessel under an individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional" }
 A Certificate of Title showing business ownership of the vehicles or vessels intended for business use.
 :::
 

@@ -47,7 +47,7 @@ callToActionText: Renew My PWCR Application
 You can renew for 1 year or 2 years. Two-year renewal is an option only if you have been continuously registered for the last 2 years and you have not violated any regulations.
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A new PWCR certificate indicating compliance with PWCRA.
 

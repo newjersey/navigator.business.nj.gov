@@ -35,7 +35,7 @@ summaryDescriptionMd: "You need to register as a health club in New Jersey if yo
 - Membership term details, as applicable
 - `Certificate of Formation|certificate-formation`
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 - A certificate of registration
 

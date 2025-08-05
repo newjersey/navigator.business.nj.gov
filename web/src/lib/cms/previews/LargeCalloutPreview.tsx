@@ -1,29 +1,28 @@
-import { Callout } from "@/components/njwds-extended/callout/Callout";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ReactElement } from "react";
 
-const CalloutPreview = (props: PreviewProps): ReactElement => {
+const LargeCalloutPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <Callout calloutType="informational" showIcon="true" showHeader>
+        <LargeCallout calloutType="informational" showHeader>
           Body Text
-        </Callout>
-        <Callout calloutType="conditional" showIcon="true" showHeader>
+        </LargeCallout>
+        <LargeCallout calloutType="conditional" showHeader>
           Body Text
-        </Callout>
-        <Callout calloutType="warning" showIcon="true" showHeader>
+        </LargeCallout>
+        <LargeCallout calloutType="warning" showHeader>
           Body Text
-        </Callout>
-        <Callout
+        </LargeCallout>
+        <LargeCallout
           calloutType="quickReference"
-          showIcon="true"
           showHeader
           amountIconText="Amount Icon"
           filingTypeIconText="Filing Type Icon"
@@ -32,10 +31,10 @@ const CalloutPreview = (props: PreviewProps): ReactElement => {
           emailIconText="Email Icon"
         >
           Body Text
-        </Callout>
+        </LargeCallout>
       </div>
     </ConfigContext.Provider>
   );
 };
 
-export default CalloutPreview;
+export default LargeCalloutPreview;

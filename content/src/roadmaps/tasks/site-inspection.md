@@ -13,7 +13,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A cosmetology shop license.
 

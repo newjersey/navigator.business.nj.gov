@@ -51,7 +51,7 @@ publishStageArchive: Do Not Publish
 
 Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 You can receive company-tailored training to ensure an appropriate pipeline of employees.
 

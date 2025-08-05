@@ -19,7 +19,7 @@ callToActionText: ""
 - **Start date:** Identify a start date on your location that considers industry licenses, or other activities that are out of your control
 - **Contract length:** Determine your ideal lease length by analyzing a few `contract considerations|lease-considerations`
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A signed contract with the property owner.
 

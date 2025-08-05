@@ -53,13 +53,13 @@ licenseCertificationClassification: undefined
 - A completed [background check authorization form](https://www.nj.gov/dca/codes/forms/pdf_rooming/Notice_Auth.pdf)
 - A copy of a `Certificate of Continuing Occupancy (CCO)|certificate-continuing-occupancy` from your municipality, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 You also need to schedule a preliminary meeting and site survey with the Bureau of Rooming and Boarding House Standards. The Bureau will review the facility's conditions for licensure and operation.
 
 :::
 
-:::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once approved, you will have:" calloutType="conditional" }
 
 A free-standing residential health care facility license, which you must renew every year.
 

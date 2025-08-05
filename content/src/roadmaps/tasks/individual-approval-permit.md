@@ -31,13 +31,13 @@ webflowType: object-vehicle
 - [Specific engineering requirements](https://www.nj.gov/dca/codes/forms/pdf_rides/IA_application.pdf) for new rides, rides with a New Jersey serial number, or `service-proven rides|service-proven-ride` , as applicable
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
 
 Apply at least 60 days before the date you plan to set up your ride in New Jersey
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An `individual approval|individual-approval` number for the ride, which you need to apply for a ride permit
 

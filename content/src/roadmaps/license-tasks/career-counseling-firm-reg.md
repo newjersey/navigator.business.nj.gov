@@ -42,7 +42,7 @@ webflowId: 65bd67f3ba805962d4de11b5
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A career counseling firm registration.
 

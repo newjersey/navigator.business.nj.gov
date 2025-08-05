@@ -40,13 +40,13 @@ webflowId: 5f772960a67e4a21735c0f36
 - The names, addresses, phone numbers, email addresses, and signatures of 5 people unrelated to each of the applicants that can provide character references
 - Applicable fees paid
 
-:::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="informational" }
 
 The application must be notarized. Once it's approved you'll be required to send in your certificate of formation.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A private detective agency license.
 

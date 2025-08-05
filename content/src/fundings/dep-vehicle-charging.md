@@ -41,7 +41,7 @@ publishStageArchive: ""
 - Public, workplaces, and multi-unit residential dwellings are eligible
 - Charging stations can't be placed in private residential dwellings
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Businesses and others can be reimbursed for 100% of the costs if on government property and 80% of costs if on private property, up to a maximum of:
 

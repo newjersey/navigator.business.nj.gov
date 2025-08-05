@@ -44,7 +44,7 @@ publishStageArchive: ""
 - Manufacturing goods or producing services that contain at least 51% U.S. content
 - Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - $15,000-$25,000 per company per grant cycle
 - Website and e-commerce fees to attract international buyers, along with designs for international marketing media

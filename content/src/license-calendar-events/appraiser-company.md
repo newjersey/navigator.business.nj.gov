@@ -16,19 +16,20 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: "Renew My Appraisal Management Company License "
 ---
+
 ## Application Requirements
 
-* Disciplinary actions of the `controlling person,|controlling-person` owners, or compliance officers since last renewal, if applicable
-* Criminal history of the controlling person, owners, or `compliance officers|compliance-officer` since last renewal, if applicable
-* Applicable fees paid
+- Disciplinary actions of the `controlling person,|controlling-person` owners, or compliance officers since last renewal, if applicable
+- Criminal history of the controlling person, owners, or `compliance officers|compliance-officer` since last renewal, if applicable
+- Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t renew my registration?" calloutType="warning" }
 
 Your real estate appraisal management company cannot operate in New Jersey. Offering these services without a valid registration may result in fines and other legal consequences.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same 12-digit appraisal management company registration number.
 

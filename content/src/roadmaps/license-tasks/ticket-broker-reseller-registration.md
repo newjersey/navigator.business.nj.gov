@@ -33,7 +33,7 @@ summaryDescriptionMd: "You need to register as a ticket broker if you resell adm
 - `Certificate of Formation|certificate-formation`
 - `Surety bond|surety-bond`
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate of registration.
 

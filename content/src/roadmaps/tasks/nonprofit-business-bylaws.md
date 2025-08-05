@@ -30,7 +30,7 @@ Some steps to get started include:
 
 Have your leadership team review and sign the bylaws to make them official. It’s okay to keep things simple at first and have your bylaws grow with your business.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 Bylaws to document your business operations.
 

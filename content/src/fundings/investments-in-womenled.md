@@ -45,7 +45,7 @@ publishStageArchive: ""
 - Typically seeking to raise $250,000-$2M
 - Company must have annual run-rate revenue of over $1M and over 40% of gross margin
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.
 

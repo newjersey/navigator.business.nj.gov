@@ -24,7 +24,7 @@ licenseName: ""
 - **Shelter:** House animals surrendered by their owners
 - **Pet Shop:** Display animals for sale but are not part of a kennel
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A license from your local government for every type of service provided by your business.
 

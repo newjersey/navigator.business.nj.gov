@@ -45,7 +45,7 @@ publishStageArchive: ""
 
 The business must be registered in New Jersey.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 The tax credit ranges from $2,400 to up to $9,600 per employee hired.
 

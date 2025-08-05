@@ -40,12 +40,11 @@ const customRemarkPlugin: Plugin = () => {
           case "note":
             data.hProperties = { header: node.attributes.header };
             break;
-          case "callout":
+          case "largeCallout":
             data.hProperties = {
               headerText:
                 node.attributes.headerText?.length > 0 ? node.attributes.headerText : undefined,
               showHeader: node.attributes.showHeader === "true",
-              showIcon: node.attributes.showIcon === "true",
               calloutType: node.attributes.calloutType,
               amountIconText:
                 node.attributes.amountIconText?.length > 0
@@ -67,6 +66,12 @@ const customRemarkPlugin: Plugin = () => {
                 node.attributes.emailIconText?.length > 0
                   ? node.attributes.emailIconText
                   : undefined,
+            };
+            break;
+          case "miniCallout":
+            data.hProperties = {
+              headerText: node.attributes.headerText,
+              calloutType: node.attributes.calloutType,
             };
             break;
           case "icon":

@@ -50,7 +50,7 @@ priority: true
 - Pledge a collateral for the loan
 - Final approval is contingent on the credit committee
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - $30,001 to $100,000 in funding
 - No pre-payment penalties for this loan

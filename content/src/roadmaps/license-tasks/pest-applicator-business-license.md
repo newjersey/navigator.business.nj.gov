@@ -14,7 +14,7 @@ summaryDescriptionMd: >-
   You must apply for your  `pesticide|pesticide` applicator business license if
   you do any of the following in New Jersey:
 
-  * You offer pesticide application services (for example, pest extermination) 
+  * You offer pesticide application services (for example, pest extermination)
 
   * Your work includes pesticide application (for example, pet grooming)
 
@@ -26,17 +26,18 @@ callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-busappl.htm
 webflowId: 67a38776f8b25424993772fa
 licenseCertificationClassification: undefined
 ---
+
 ## Eligibility Criteria
 
-* You have a staff member who has their commercial pesticide applicator license
-* $300,000 liability insurance if work does not include `fumigation|fumigation`
-* $500,000 liability insurance if work does include fumigation
+- You have a staff member who has their commercial pesticide applicator license
+- $300,000 liability insurance if work does not include `fumigation|fumigation`
+- $500,000 liability insurance if work does include fumigation
 
 ## Application Requirements
 
-* Name and license of the certified pesticide applicator
-* Name and phone number of the [liability insurance agent](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/insurance_coverage_verification_vpi-001-fillable.pdf)
-* Applicable fees paid
+- Name and license of the certified pesticide applicator
+- Name and phone number of the [liability insurance agent](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/insurance_coverage_verification_vpi-001-fillable.pdf)
+- Applicable fees paid
 
 Email the [pesticide applicator business license application (VPA-013) form](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/ab_license_application_vpa-013_fillable.pdf) to pestcertcourses@dep.nj.gov.
 :::infoAlert
@@ -44,7 +45,7 @@ Email the [pesticide applicator business license application (VPA-013) form](htt
 You will receive a license invoice from the Department of Environmental Protection (DEP). You must pay the fee for the license to be valid.
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A business license sent via mail.
 

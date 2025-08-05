@@ -22,7 +22,7 @@ callToActionText: ""
 - **`Certificate of Occupancy or Approval|certificate-occupancy`**: Contact your local building/construction department to confirm your space is safe for people to live in
 - **`Life Hazard Use|life-hazard-use` or `Non-Life Hazard Use|non-life-hazard-use` registration**: Contact your `Local Enforcing Agency|lea` to see if you need to register as a Life Hazard Use or Non-Life Hazard Use. What you register as depends on whether your business use poses a significant fire risk
 
-:::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will know:" calloutType="conditional" }
 
 The permits and inspections required to make your rental property safe and livable.
 

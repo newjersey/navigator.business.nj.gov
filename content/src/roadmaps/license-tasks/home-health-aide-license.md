@@ -33,13 +33,13 @@ webflowId: 66aceed816add4cacea7d7ff
 * General liability insurance certificate
 * NJ License of a Health Care Practitioner Supervisor, Registered Nurse, or Licensed Physician
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="conditional" }
 
 You may be subject to legal enforcement action, including penalties and fines.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Health Care Service Firm Registration.
 

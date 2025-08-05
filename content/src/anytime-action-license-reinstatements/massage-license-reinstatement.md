@@ -15,17 +15,16 @@ synonyms:
   - license renewal
   - restore
 ---
+
 ## Application Requirements
 
-* Expired registration number
-* Business address
-* Written statement about whether the business has been active since the business license expired and the types of services that have been provided
-* Criminal background check
-* Applicable fees paid once the Board has sent an invoice
+- Expired registration number
+- Business address
+- Written statement about whether the business has been active since the business license expired and the types of services that have been provided
+- Criminal background check
+- Applicable fees paid once the Board has sent an invoice
 
-
-
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 The same massage and bodywork business license
 

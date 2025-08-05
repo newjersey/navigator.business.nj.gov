@@ -31,7 +31,7 @@ webflowId: 64ca743a83dad99752b4e0df
 - Letter of reference for the supervising teacher
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A cosmetology school license.
 

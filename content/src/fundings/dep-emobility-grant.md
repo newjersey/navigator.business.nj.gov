@@ -39,7 +39,7 @@ publishStageArchive: ""
 - Methods to ensure equity
 - Technology (hardware, software, data collection, etc.)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Previous awards have ranged between $100K to $8M.
 

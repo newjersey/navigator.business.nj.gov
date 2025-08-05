@@ -33,7 +33,7 @@ licenseName: Consulting Firms/Temporary Help Services-Temporary Help Service
 
 Click the "Register My Temporary Help Service" button below and select "Consulting Firm/Temporary Help Service."
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A temporary help service registration.
 

@@ -36,7 +36,7 @@ licenseName: Consulting Firms/Temporary Help Services-Consulting Firm/Temporary 
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A combined temporary help service and consulting firm (headhunter) registration.
 

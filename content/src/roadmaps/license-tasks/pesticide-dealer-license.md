@@ -22,7 +22,7 @@ summaryDescriptionMd: "You must apply for your certified `pesticide|pesticide` d
 2. Pass the exam.
 3. Pay your license invoice. You must pay the invoice for the license to be valid.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A license sent via mail.
 

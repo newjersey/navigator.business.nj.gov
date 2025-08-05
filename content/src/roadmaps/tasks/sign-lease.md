@@ -21,7 +21,7 @@ callToActionText: ""
 - **Lease length:** Determine your ideal lease length by analyzing a few lease considerations
 - **Tenant improvements:** Know who handles repairs and maintenance for `tenant improvements|tenant-improvements` and how to submit requests. Find out if you can make alterations or improvements to your space. Clarify any restrictions, approval processes, and cost coverage.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A signed lease.
 

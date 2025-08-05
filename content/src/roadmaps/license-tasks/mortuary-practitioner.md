@@ -50,14 +50,14 @@ P.O. Box 45009
 
 Newark, NJ 07101
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 - You can’t legally practice mortuary science, including funeral directing and embalming
 - You can’t be the manager or licensee-in-charge of any mortuary establishment
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 An identification card with your license number, valid for 2 years.
 

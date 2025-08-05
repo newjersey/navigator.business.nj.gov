@@ -49,7 +49,7 @@ publishStageArchive: null
 - Entities who are developing new, or building upon existing Registered Apprenticeship programs
 - Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
 
-:::callout{ showHeader="true" headerText="Benefit" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefit" calloutType="conditional" }
 
 Eligible applicants can apply for funding up to $8,000 per participant for:
 

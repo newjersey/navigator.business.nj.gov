@@ -56,13 +56,13 @@ licenseCertificationClassification: undefined
 
 Have your current and complete NCEES record transmitted to the NJ State Board of Professional Engineers and Land Surveyors after submitting your land surveyor license application.
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
 
 You can’t legally offer or provide land surveying services.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A certificate with your professional land surveyor license number, valid for 2 years, sent to your mailing address.
 

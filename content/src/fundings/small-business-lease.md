@@ -63,7 +63,7 @@ descriptionMd: The Small Business Lease Grant supports the growth and success of
 
 Small businesses and nonprofits must be entering a new market-rate lease, lease amendment, or lease extension for at least a 5-year term that includes at least 250 square feet of street-level space.
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Business receive two grant awards of 20% of the annual lease payment.
 

@@ -22,7 +22,7 @@ callToActionText: ""
 - **Tenant improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease
 - **Undesirable agreements:** Beware of any language that requires you to surrender any of your business ownership or equity to a landlord as a condition of leasing your space
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A signed lease or letter of intent to lease for your business site, which is required to apply for a conversion or annual cannabis license.
 

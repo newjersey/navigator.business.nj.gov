@@ -90,7 +90,7 @@ insurance company will contact you to set up future inspections.
 Even though they keep track of the due dates, it’s your responsibility to make sure all required
 equipment gets inspected.
 
-:::callout{ showHeader="true" headerText="To register a new boiler and schedule the first inspection:" showIcon="false" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-2921" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="To register a new boiler and schedule the first inspection:" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-2921" emailIconText="" }
 
 Call the NJ Bureau of Boiler and
 Pressure Vessel Compliance.
@@ -113,7 +113,7 @@ P.O. Box 392
 
 Trenton, NJ 08625-0392
 
-:::callout{ showHeader="true" headerText="What if I don't get my boiler inspected?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get my boiler inspected?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - If your equipment is not inspected as required, it could pose serious safety risks. You could face
   fines or legal penalties for non-compliance
@@ -122,7 +122,7 @@ Trenton, NJ 08625-0392
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A Certificate of Inspection with a jurisdiction number mailed to the address the business owner
 provides after a satisfactory inspection. This certificate must be framed and posted where equipment

@@ -27,13 +27,13 @@ synonyms:
 
    Newark, New Jersey 07101
 
-:::callout{ showHeader="true" headerText="What if I don't reinstate my license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't reinstate my license?" calloutType="warning" }
 
 Your cemetery salesperson license will expire. Any associated branch license(s) will be inactive.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same cemetery salesperson license number.
 

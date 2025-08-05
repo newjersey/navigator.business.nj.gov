@@ -31,7 +31,7 @@ You need to reinstate your license as a landscape architect if it is expired or 
 - A list of the New Jersey projects you signed and sealed after the license lapsed or a letter certifying that you did not sign any works after the license lapsed
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same license number.
 

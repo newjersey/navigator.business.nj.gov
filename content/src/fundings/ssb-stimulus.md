@@ -58,7 +58,7 @@ Any small New Jersey business with the following can apply:
 - A gross revenue below $12M
 - A [Minority or Women-owned Business Enterprise Certification](https://business.nj.gov/pages/mwbe)
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Each program provides grants to cover 75% of eligible project costs, with a cap of up to $500,000 per business, per program with two tiers of incentive caps.
 

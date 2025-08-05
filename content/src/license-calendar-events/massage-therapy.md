@@ -30,7 +30,7 @@ You will only see the option to renew online 60 days prior to your expiration da
 - Certificate of completion for continuing education
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 The same massage and bodywork business license number.
 

@@ -68,13 +68,13 @@ You will then receive an email with your Vendor ID number and login link.
 - Tax ID certification statement
 - `NIGP commodity code|nigp-commodity-code`
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A confirmation email.
 
 :::
 
-:::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="informational" }
 
 On the [Vendor](https://www.nj.gov/treasury/purchase/vendor.shtml) page, click on the Vendors Quick Reference Guides tab. Next, click on the Registration Guide for more information about registering.
 

@@ -59,13 +59,13 @@ You also need last year’s total number of prescriptions for compounded human d
 - Mailed, shipped, or delivered to other states (sterile only)
 - Mailed, shipped, or delivered to patients in New Jersey (sterile and non-sterile)
 
-:::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t renew my registration?" calloutType="warning" }
 
 Your current registration will expire and you will need to reapply for a new registration before resuming any pharmacy-related services to patients in New Jersey.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A hardcopy registration mailed to the pharmacy with an updated expiration date.
 

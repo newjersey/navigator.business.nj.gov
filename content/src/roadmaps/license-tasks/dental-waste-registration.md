@@ -33,11 +33,14 @@ divisionPhone: (609) 292-4860
 - Name of Licensed Recycling Contractor (if you have sent amalgam out for recycling)
 - Certification Personal Identification Number (PIN) that you created during registration
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you don’t register, you may be subject to significant fines, and you may have to apply for a SIU permit.
 
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional"}
+:::largeCallout{ showHeader="true" headerText="Once completed, you will have:" calloutType="conditional"}
+
 A dental amalgam certificate, valid for 1 year, or a dental amalgam certification exemption.
+
+:::

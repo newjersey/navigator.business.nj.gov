@@ -25,7 +25,7 @@ Specific liability insurance may be required for business owners who have physic
 - **Commercial General Liability Insurance:** Research coverage and pricing options for your industry and business size
 - **Workers' Compensation Insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
 A Certificate of Insurance.
 

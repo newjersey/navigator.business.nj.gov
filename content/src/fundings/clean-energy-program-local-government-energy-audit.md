@@ -52,7 +52,7 @@ The program is open to:
 - New Jersey state colleges or universities, county colleges, and public schools
 - 501(c)(3) non-profit agencies
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 - Up to a value of $150,000 per program year, per applicant
 - For larger applicants, if the audit cost exceeds or is expected to exceed $150,000, there is a potential larger cost cap for applicants pursuing the Energy Savings Improvement Program and eligible healthcare entities, not to exceed $300,000

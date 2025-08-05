@@ -38,7 +38,7 @@ The following items are examples of activities eligible to apply for funding:
 - Non-road diesel-to-electric replacements
 - On-road vehicle electrification projects
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 Previous reimbursement awards have ranged from $8,000 to $8M.
 

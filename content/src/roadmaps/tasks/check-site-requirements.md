@@ -18,7 +18,7 @@ summaryDescriptionMd: >-
 4. **`Certificate of Occupancy or Approval|certificate-occupancy`**: Speak to your local building/construction department to certify that your space is safe for occupancy.
 5. **`Life Hazard Use|life-hazard-use` or `Non-Life Hazard Use|non-life-hazard-use` registration**: Contact your `Local Enforcing Agency|lea` to see if you need to register as a Life Hazard Use or Non-Life Hazard Use. Your Use Type depends on whether your business poses a significant fire hazard. Once your Use Type is identified, you will need to register and potentially make construction improvements to your site. Once your business is up and running, your Use Type will determine when and how often your routine fire inspections will occur.
 
-:::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Once completed, you will know:" calloutType="conditional" }
 
 - The permits and inspections required to open and operate your commercial space
 - The process for getting those permits and inspections
