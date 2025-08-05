@@ -2,18 +2,13 @@ import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers"
 import { Match } from "@/lib/search/typesForSearch";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
 
-export const searchIndustries = (
-  industries: Industry[],
-  term: string,
-  cmsCollectionName: string,
-): Match[] => {
+export const searchIndustries = (industries: Industry[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const industry of industries) {
     let match: Match = {
       filename: industry.id,
       snippets: [],
-      cmsCollectionName: cmsCollectionName,
     };
 
     const name = industry.name.toLowerCase();

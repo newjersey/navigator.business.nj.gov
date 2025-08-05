@@ -42,7 +42,6 @@ describe("usageHelpers", () => {
     return [
       {
         filename: filename,
-        cmsCollectionName: "",
         displayTitle: "displayTitle",
         snippets: ["", ""],
         additionalUsageLocations: { taskDependencies: [], industries: [], addOns: [] },
