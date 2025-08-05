@@ -62,7 +62,7 @@ publishStageArchive: ""
 - Loan interest (if applicable)
 - Utilities
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 
 You will receive up to $250,000 to cover eligible pre-development soft costs.
 
