@@ -13,13 +13,3 @@ export const CigaretteLicenseContext = createContext<CigaretteLicenseContextType
   state: emptyCigaretteLicenseData,
   setCigaretteLicenseData: () => {},
 });
-
-// type CigaretteLicenseFields = keyof CigaretteLicenseData;
-
-// const taxClearanceCertificateFields = Object.keys(
-//   emptyTaxClearanceCertificateData,
-// ) as CigaretteLicenseFields[];
-
-// export const taxClearanceFieldErrorMap = createReducedFieldStates(taxClearanceCertificateFields);
-// export const TaxClearanceCertificateFormContext =
-//   createFormContext<typeof taxClearanceFieldErrorMap>();

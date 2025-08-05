@@ -14,7 +14,10 @@ import {
   RoadmapTaskData,
   TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
-import { CigaretteLicenseData, emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import {
+  CigaretteLicenseData,
+  emptyCigaretteLicenseData,
+} from "@businessnjgovnavigator/shared/cigaretteLicense";
 
 export type DataFormErrorMapFields =
   | keyof ProfileData

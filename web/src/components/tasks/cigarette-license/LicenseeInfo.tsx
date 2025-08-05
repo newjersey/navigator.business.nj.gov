@@ -79,7 +79,6 @@ export const LicenseeInfo = (props: Props): ReactElement => {
 
       <div className="margin-y-2">
         <ProfileField
-          // locked={shouldLockFormationFields}
           fieldName={"businessName"}
           hideLine
           fullWidth
@@ -99,7 +98,6 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           hideLine
           fullWidth
         >
-          {/* do we need to override text? */}
           <ResponsibleOwnerName inputWidth="full" required />
         </ProfileField>
         <ProfileField

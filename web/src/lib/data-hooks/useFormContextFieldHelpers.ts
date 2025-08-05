@@ -18,7 +18,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       RegisterForOnSubmit: (isValidFunc: () => boolean): void => {},
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      setIsValid: (isValid: boolean): void => {console.log("contextless setIsValid", isValid)},
+      setIsValid: (isValid: boolean): void => {},
       isFormFieldInvalid: false,
     };
   }

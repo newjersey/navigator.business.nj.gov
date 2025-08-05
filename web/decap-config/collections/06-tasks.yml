@@ -937,6 +937,16 @@ collections:
                 widget: "text"
                 required: true
 
+              - label: "Business Name Text"
+                name: "businessNameText"
+                widget: "string"
+                required: true
+
+              - label: "Business Name Error Text"
+                name: "businessNameErrorText"
+                widget: "string"
+                required: true
+
               - label: "Business Address Header"
                 name: "businessAddressHeader"
                 widget: "string"
@@ -957,8 +967,18 @@ collections:
                 widget: "text"
                 required: true
 
-              - label: "Mailing Is Same Check"
-                name: "mailingIsSameCheck"
+              - label: "Contact Information Header"
+                name: "contactInformationHeader"
+                widget: "string"
+                required: true
+
+              - label: "Contact Information Description"
+                name: "contactInformationDescription"
+                widget: "text"
+                required: true
+
+              - label: "Mailing Is Same Checkbox"
+                name: "mailingIsSameCheckbox"
                 widget: "string"
                 required: true
 
@@ -1042,6 +1062,56 @@ collections:
                         name: "errorValidationTextAlt"
                         widget: "string"
                         required: true
+
+                  - label: "Contact Name"
+                    name: "contactName"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Contact Phone Number"
+                    name: "contactPhoneNumber"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
+                  - label: "Contact Email"
+                    name: "contactEmail"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+
+              - label: "Back Button Text"
+                name: "backButtonText"
+                widget: "string"
+                required: true
+
+              - label: "Next Button Text"
+                name: "nextButtonText"
+                widget: "string"
+                required: true
+
       - label: "Cigarette License Shared"
         name: "cigaretteLicense-shared"
         file: "content/src/fieldConfig/cigarette-license-shared.json"

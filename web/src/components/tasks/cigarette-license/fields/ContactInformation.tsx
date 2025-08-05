@@ -3,11 +3,13 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getPhoneNumberFormat, validateEmail } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
 
 export const ContactInformation = (): ReactElement => {
+  const { Config } = useConfig();
   const { setIsValid: setIsContactNameValid, isFormFieldInvalid: isContactNameValid } =
     useFormContextFieldHelpers("contactName", DataFormErrorMapContext);
   const {
@@ -31,8 +33,6 @@ export const ContactInformation = (): ReactElement => {
     }
   };
 
-  console.log(DataFormErrorMapContext);
-  console.log(isContactPhoneNumberValid, isContactNameValid);
   return (
     <>
       <WithErrorBar
@@ -40,34 +40,36 @@ export const ContactInformation = (): ReactElement => {
         type="ALWAYS"
         className="margin-bottom-2"
       >
-        <div className={"grid-row grid-gap"}>
-          <span className="grid-col">
+        <div className="grid-row grid-gap-2">
+          <span className="grid-col-6">
             <strong>
-              <Content>Contact Name</Content>
+              <Content>{Config.cigaretteLicenseStep2.fields.contactName.label}</Content>
             </strong>
             <GenericTextField
               fieldName="contactName"
               handleChange={(val) => handleChange(val, "contactName")}
-              onValidation={(fieldName, invalid, value) => setIsContactNameValid(!invalid)}
+              onValidation={(fieldName, invalid) => setIsContactNameValid(!invalid)}
               additionalValidationIsValid={validateEmail}
               error={isContactNameValid}
-              validationText="Contact name is required"
+              validationText={Config.cigaretteLicenseStep2.fields.contactName.errorRequiredText}
               required={true}
               autoComplete="name"
               formContext={DataFormErrorMapContext}
               value={state.contactName}
             />
           </span>
-          <span className="grid-col">
+          <span className="grid-col-6">
             <strong>
-              <Content>Phone Number</Content>
+              <Content>{Config.cigaretteLicenseStep2.fields.contactPhoneNumber.label}</Content>
             </strong>
             <GenericTextField
               fieldName="contactPhoneNumber"
               handleChange={(val) => handleChange(val, "contactPhoneNumber")}
-              onValidation={(fieldName, invalid, value) => setIsContactPhoneNumberValid(!invalid)}
+              onValidation={(fieldName, invalid) => setIsContactPhoneNumberValid(!invalid)}
               error={isContactPhoneNumberValid}
-              validationText="Valid phone number is required"
+              validationText={
+                Config.cigaretteLicenseStep2.fields.contactPhoneNumber.errorRequiredText
+              }
               required={true}
               autoComplete="tel"
               inputWidth="full"
@@ -80,19 +82,21 @@ export const ContactInformation = (): ReactElement => {
         </div>
       </WithErrorBar>
 
-      <WithErrorBar hasError={isContactEmailValid} type="ALWAYS" className="margin-bottom-2">
+      <WithErrorBar
+        hasError={isContactEmailValid}
+        type="ALWAYS"
+        className="margin-top-2 margin-bottom-2"
+      >
         <strong>
-          <Content>Email Address</Content>
+          <Content>{Config.cigaretteLicenseStep2.fields.contactEmail.label}</Content>
         </strong>
         <GenericTextField
           fieldName="contactEmail"
-          // value={formData.contactEmail}
-          // handleChange={(value: string) => handleFieldChange("contactEmail", value)}
           handleChange={(val) => handleChange(val, "contactEmail")}
-          onValidation={(fieldName, invalid, value) => setIsContactEmailValid(!invalid)}
+          onValidation={(fieldName, invalid) => setIsContactEmailValid(!invalid)}
           additionalValidationIsValid={validateEmail}
           error={isContactEmailValid}
-          validationText="Valid email address is required"
+          validationText={Config.cigaretteLicenseStep2.fields.contactEmail.errorRequiredText}
           required={true}
           autoComplete="email"
           type="email"
