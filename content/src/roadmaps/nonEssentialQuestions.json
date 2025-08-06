@@ -285,13 +285,6 @@
       "questionText": "Will your business use commercial vehicles weighing over 26,000 pounds to haul loads or transport passengers?"
     },
     {
-      "addOnWhenNo": "",
-      "addOnWhenYes": "",
-      "anytimeActions": [],
-      "questionText": "Do you plan to work on `public works|public-works` projects?",
-      "id": "public-works-contracting-question"
-    },
-    {
       "anytimeActions": [],
       "questionText": "Will you or your company work with asbestos?",
       "id": "asbestos-abatement-question",
