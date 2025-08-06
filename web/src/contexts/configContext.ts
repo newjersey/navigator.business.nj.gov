@@ -71,6 +71,8 @@ import * as XrayRegistration from "@businessnjgovnavigator/content/fieldConfig/x
 import * as XrayRenewal from "@businessnjgovnavigator/content/fieldConfig/xray-renewal.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
+import * as PassengerTransportCdl from "@businessnjgovnavigator/content/fieldConfig/passenger-transport-cdl-tab1.json";
+import * as PassengerTransportCdl2 from "@businessnjgovnavigator/content/fieldConfig/passenger-transport-cdl-tab2.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -79,6 +81,8 @@ const merged = JSON.parse(
   JSON.stringify(
     merge(
       LegalMessageDefaults,
+      PassengerTransportCdl,
+      PassengerTransportCdl2,
       SectionHeaders,
       TaskProgressCard,
       BetaBar,
@@ -160,6 +164,8 @@ const merged = JSON.parse(
 
 export type ConfigType = typeof LegalMessageDefaults &
   typeof SectionHeaders &
+  typeof PassengerTransportCdl &
+  typeof PassengerTransportCdl2 &
   typeof TaskProgressCard &
   typeof BetaBar &
   typeof SelfRegistration &
@@ -235,6 +241,8 @@ export type ConfigType = typeof LegalMessageDefaults &
 export const getMergedConfig = (): ConfigType => {
   return merge(
     LegalMessageDefaults,
+    PassengerTransportCdl,
+    PassengerTransportCdl2,
     SectionHeaders,
     TaskProgressCard,
     BetaBar,
