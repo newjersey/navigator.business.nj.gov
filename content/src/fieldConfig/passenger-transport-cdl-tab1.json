@@ -1,0 +1,19 @@
+{
+  "passengerTransportCdlTabOne": {
+    "disabledTooltipText": "Select and then save to complete this task.",
+    "headerText": "Tell Us About Your Business",
+    "firstQuestionLabel": "Is your passenger transport vehicle a school bus?",
+    "firstQuestionTrueText": "Yes",
+    "firstQuestionFalseText": "No",
+    "firstQuestionInputErrorText": "Select “Yes” or “No” to continue.",
+    "firstQuestionAlertFieldNameText": "School Bus",
+    "secondQuestionLabel": "Is your passenger transport vehicle designed to carry 16 or more passengers, including the driver?",
+    "secondQuestionTrueText": "Yes",
+    "secondQuestionFalseText": "No",
+    "secondQuestionInputErrorText": "Select “Yes” or “No” to continue.",
+    "secondQuestionAlertFieldNameText": "16 or More Passengers",
+    "bodyText": "A Commercial Driver License (CDL) is required to operate large, heavy, or specialized commercial vehicles. A business owner only needs a CDL if they themselves plan to drive these vehicles. Otherwise, it is their responsibility to make sure their drivers have CDLs.\n\nTo learn more about getting a commercial drivers license (CDL) types, visit the [Motor Vehicle Commission’s page on vehicle types](https://www.nj.gov/mvc/drivertopics/cdl.htm).",
+    "saveButton": "Save and See My Results",
+    "pageLevelAlertText": "Missing or invalid information. Review the following fields:"
+  }
+}
