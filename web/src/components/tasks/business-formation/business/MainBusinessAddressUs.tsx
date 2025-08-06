@@ -1,7 +1,7 @@
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -15,7 +15,7 @@ export const MainBusinessAddressUs = (): ReactElement => {
 
   return (
     <>
-      <FormationField fieldName="addressLine1">
+      <ScrollableFormFieldWrapper fieldName="addressLine1">
         <BusinessFormationTextField
           label={Config.formation.fields.addressLine1.label}
           fieldName="addressLine1"
@@ -24,8 +24,8 @@ export const MainBusinessAddressUs = (): ReactElement => {
           errorBarType="ALWAYS"
           validationText={getFieldErrorLabel("addressLine1")}
         />
-      </FormationField>
-      <FormationField fieldName="addressLine2">
+      </ScrollableFormFieldWrapper>
+      <ScrollableFormFieldWrapper fieldName="addressLine2">
         <BusinessFormationTextField
           label={Config.formation.fields.addressLine2.label}
           secondaryLabel={Config.formation.general.optionalLabel}
@@ -34,14 +34,14 @@ export const MainBusinessAddressUs = (): ReactElement => {
           validationText={getFieldErrorLabel("addressLine2")}
           className="margin-bottom-2"
         />
-      </FormationField>
+      </ScrollableFormFieldWrapper>
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressCity"])}
         type="DESKTOP-ONLY"
       >
         <div className="grid-row grid-gap-1">
           <div className="grid-col-12 tablet:grid-col-6">
-            <FormationField fieldName="addressCity">
+            <ScrollableFormFieldWrapper fieldName="addressCity">
               <BusinessFormationTextField
                 errorBarType="MOBILE-ONLY"
                 label={Config.formation.fields.addressCity.label}
@@ -49,7 +49,7 @@ export const MainBusinessAddressUs = (): ReactElement => {
                 required={true}
                 validationText={getFieldErrorLabel("addressCity")}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
           <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
             <WithErrorBar
@@ -61,7 +61,7 @@ export const MainBusinessAddressUs = (): ReactElement => {
                   <strong>
                     <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
                   </strong>
-                  <FormationField fieldName="addressState">
+                  <ScrollableFormFieldWrapper fieldName="addressState">
                     <StateDropdown
                       fieldName="addressState"
                       value={state.formationFormData.addressState?.name}
@@ -78,10 +78,10 @@ export const MainBusinessAddressUs = (): ReactElement => {
                         });
                       }}
                     />
-                  </FormationField>
+                  </ScrollableFormFieldWrapper>
                 </div>
                 <div className="grid-col-7">
-                  <FormationField fieldName="addressZipCode">
+                  <ScrollableFormFieldWrapper fieldName="addressZipCode">
                     <BusinessFormationTextField
                       label={Config.formation.fields.addressZipCode.label}
                       numericProps={{ maxLength: 5 }}
@@ -90,7 +90,7 @@ export const MainBusinessAddressUs = (): ReactElement => {
                       fieldName="addressZipCode"
                       validationText={Config.formation.fields.addressZipCode.foreign.errorUS}
                     />
-                  </FormationField>
+                  </ScrollableFormFieldWrapper>
                 </div>
               </div>
             </WithErrorBar>

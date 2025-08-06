@@ -9,7 +9,7 @@ import {
   createSignedEmptyFormationObject,
   needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -274,7 +274,7 @@ export const Signatures = (): ReactElement => {
 
     return (
       <>
-        <FormationField fieldName="signers">
+        <ScrollableFormFieldWrapper fieldName="signers">
           <GenericTextField
             inputWidth="full"
             value={state.formationFormData.signers[index].name}
@@ -289,7 +289,7 @@ export const Signatures = (): ReactElement => {
             ariaLabel={`Signer ${index}`}
             required={true}
           />
-        </FormationField>
+        </ScrollableFormFieldWrapper>
       </>
     );
   };

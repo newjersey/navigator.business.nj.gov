@@ -1,5 +1,5 @@
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -79,7 +79,7 @@ export const PaymentTypeTable = (): ReactElement => {
   const hasError = doesFieldHaveError(fieldName);
 
   return (
-    <FormationField fieldName={fieldName}>
+    <ScrollableFormFieldWrapper fieldName={fieldName}>
       <WithErrorBar hasError={hasError} type="ALWAYS">
         <table className="business-formation-table business-formation-payment">
           <thead>
@@ -190,6 +190,6 @@ export const PaymentTypeTable = (): ReactElement => {
           </tfoot>
         </table>
       </WithErrorBar>
-    </FormationField>
+    </ScrollableFormFieldWrapper>
   );
 };
