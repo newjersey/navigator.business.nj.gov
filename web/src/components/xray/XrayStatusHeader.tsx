@@ -1,5 +1,6 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import type { XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
@@ -105,6 +106,7 @@ export const XrayStatusHeader = (props: Props): ReactElement => {
                 isTextBold={false}
                 className={`text-error-darker text-normal padding-0 margin-left-05`}
                 onClick={() => {
+                  analytics.event.xray_registration_expired_status_card.click.xray_renewal_started_expired_card();
                   router && router.push(Config.xrayRegistrationTask.renewRegistrationLink);
                 }}
               >

@@ -152,7 +152,12 @@ export type LegacyEventCategory =
   | "tax_registration_modal"
   | "tax_registration_nudge_button"
   | "tooltip"
-  | "view_my_violation_note_button_click";
+  | "view_my_violation_note_button_click"
+  | "xray_registration_expired_status_card"
+  | "xray_registration_expired_cta"
+  | "xray_registration_check_status_error"
+  | "xray_registration_check_status_form"
+  | "xray_registration_check_status_results";
 
 export type LegacyEventAction =
   | "appear"
@@ -167,6 +172,7 @@ export type LegacyEventAction =
   | "submit";
 
 export type LegacyEventLabel =
+  | "active_registration_found"
   | "address_is_same_as_account_holder"
   | "annual_cannabis_license"
   | "arrive_calendar_access_v2"
@@ -191,6 +197,7 @@ export type LegacyEventLabel =
   | "error_remain_at_formation"
   | "expand_account_menu"
   | "expand_contract"
+  | "expired_registration_found"
   | "fail_application_not_found"
   | "finish_additional_business_onboarding"
   | "finish_onboarding"
@@ -250,6 +257,9 @@ export type LegacyEventLabel =
   | "refresh_name_search_field"
   | "remain_on_tax_clearance_error"
   | "remain_on_tax_clearance_sucess_screen"
+  | "record_not_found_error"
+  | "renew_ref_link"
+  | "renew_registration_button"
   | "save_profile_changes"
   | "selected_completed_status"
   | "selected_in_progress_status"
@@ -263,6 +273,7 @@ export type LegacyEventLabel =
   | "signers_submitted_with_formation"
   | "skip_to_main_content"
   | "social_equity_business"
+  | "status_lookup_initiated"
   | "submitted_address_form"
   | "success_application_found"
   | "tax_calendar_business_does_not_exist"
