@@ -9,6 +9,10 @@ import {
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
+import {
+  CigaretteLicenseGetOrderByTokenResponse,
+  CigaretteLicensePreparePaymentResponse,
+} from "@client/ApiCigaretteLicenseHelpers";
 import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   ElevatorSafetyDeviceInspectionDetails,
@@ -254,6 +258,15 @@ export interface TaxClearanceCertificateClient {
   ) => Promise<TaxClearanceCertificateResponse>;
   health: () => Promise<HealthCheckMetadata>;
   unlinkTaxId: (userData: UserData, databaseClient: DatabaseClient) => Promise<UnlinkTaxIdResponse>;
+}
+
+export interface CigaretteLicenseClient {
+  preparePayment: (
+    userData: UserData,
+    returnUrl: string,
+  ) => Promise<CigaretteLicensePreparePaymentResponse>;
+  getOrderByToken: (token: string) => Promise<CigaretteLicenseGetOrderByTokenResponse>;
+  health: () => Promise<HealthCheckMetadata>;
 }
 
 export interface XrayRegistrationStatusLookup {

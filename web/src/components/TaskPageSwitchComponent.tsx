@@ -26,6 +26,7 @@ import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
+import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
 
 interface Props {
   task: Task | TaskWithLicenseTaskId;
@@ -83,6 +84,7 @@ export const TaskPageSwitchComponent = ({
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,
     "air-permitting": <EnvPermit task={task} />,
+    "passenger-transport-cdl": <PassengerTransportCdl task={task} />,
     "cigarette-license":
       isCigaretteLicenseEnabled && !CMS_ONLY_disable_default_functionality ? (
         <CigaretteLicense task={task} />
