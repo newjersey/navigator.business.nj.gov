@@ -19,7 +19,7 @@ interface Props {
   dataFormErrorMap?: FormContextType<DataFormErrorMap, unknown>;
 }
 
-export const UnitesStatesAddress = (props: Props): ReactElement => {
+export const UnitedStatesAddress = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();
   const { state, setAddressData } = useContext(AddressContext);
