@@ -60,6 +60,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
+import PassengerTransportCdlPreview from "@/lib/cms/previews/PassengerTransportCdlPreview";
 
 const CMS_CONFIG = {};
 const Loading = (): ReactElement => {
@@ -112,6 +113,8 @@ const CMS = dynamic(
       registerPreview(CMS, "xray-renewal-config", XrayRenewalCalendarEventPreview);
       registerPreview(CMS, "xray", XrayTaskPreview);
       registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
+      registerPreview(CMS, "passenger-transport-cdl-tab1", PassengerTransportCdlPreview);
+      registerPreview(CMS, "passenger-transport-cdl-tab2", PassengerTransportCdlPreview);
 
       registerPreview(CMS, "funding-onboarding-modal-config", NjedaPreview);
       registerPreview(CMS, "formationDateDeletionModal", FormationDateDeletionModalPreview);

@@ -1119,6 +1119,200 @@ collections:
               - { label: Hide Button Text Mobile, name: hideButtonTextMobile, widget: string }
               - { label: Locked Pre-TaxId Text, name: lockedPostText, widget: string }
               - { label: Locked Post-TaxId Text, name: lockedPreText, widget: string }
+  - name: "passenger-transport-cdl"
+    label: "Tasks - Passenger Transport CDL"
+    delete: false
+    create: false
+    files:
+      - label: "Tab 1 (Questionnaire)"
+        name: "passenger-transport-cdl-tab1"
+        file: "content/src/fieldConfig/passenger-transport-cdl-tab1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Passenger Transport CDL Tab One
+            name: passengerTransportCdlTabOne
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Disabled Tooltip Text, name: disabledTooltipText, widget: string }
+              - { label: Page Level Alert Text, name: pageLevelAlertText, widget: string }
+              - {
+                  label: First Question Alert Field Name Text,
+                  name: firstQuestionAlertFieldNameText,
+                  widget: string,
+                }
+              - {
+                  label: Second Question Alert Field Name Text,
+                  name: secondQuestionAlertFieldNameText,
+                  widget: string,
+                }
+              - { label: Header Text, name: headerText, widget: string }
+              - { label: First Question Label, name: firstQuestionLabel, widget: string }
+              - { label: First Question True Text, name: firstQuestionTrueText, widget: string }
+              - { label: First Question False Text, name: firstQuestionFalseText, widget: string }
+              - {
+                  label: First Question Input Error Text,
+                  name: firstQuestionInputErrorText,
+                  widget: string,
+                }
+
+              - { label: Second Question Label, name: secondQuestionLabel, widget: string }
+              - { label: Second Question True Text, name: secondQuestionTrueText, widget: string }
+              - { label: Second Question False Text, name: secondQuestionFalseText, widget: string }
+              - {
+                  label: Second Question Input Error Text,
+                  name: secondQuestionInputErrorText,
+                  widget: string,
+                }
+
+              - { label: Body Text, name: bodyText, widget: markdown }
+              - { label: Save Button, name: saveButton, widget: string }
+      - label: "Tab 2 (Results)"
+        name: "passenger-transport-cdl-tab2"
+        file: "content/src/fieldConfig/passenger-transport-cdl-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Passenger Transport CDL Tab Two
+            name: passengerTransportCdlTabTwo
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header Text (Shared), name: headerText, widget: string }
+              - { label: Success Alert Text (Shared), name: successAlertText, widget: string }
+              - {
+                  label: Success Alert Button Text (Shared),
+                  name: successAlertButtonText,
+                  widget: string,
+                }
+              - { label: Body Text (Shared), name: bodyText, widget: markdown }
+              - {
+                  label: Info Accordion Header Without School Bus Endorsement Text (Shared),
+                  name: infoAccordionHeaderWithoutSText,
+                  widget: string,
+                }
+              - {
+                  label: Info Accordion Header With School Bus Endorsement Text (Shared),
+                  name: infoAccordionHeaderWithSText,
+                  widget: string,
+                }
+              - {
+                  label: Eligibility Accordion Header Text (Shared),
+                  name: eligibilityAccordionHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Eligibility Accordion Text (Shared),
+                  name: eligibilityAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Requirements Accordion Header Text (Shared),
+                  name: requirementsAccordionHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Contact Accordion Header Text (Shared),
+                  name: contactAccordionHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Contact Accordion Text (Shared),
+                  name: contactAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Response Accordion Header Text (Shared),
+                  name: responseAccordionHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Issuing Agency Label Text (Shared),
+                  name: issuingAgencyLabelText,
+                  widget: string,
+                }
+              - { label: Issuing Agency Text (Shared), name: issuingAgencyText, widget: string }
+              - {
+                  label: Class C With S Text (Below Body Text),
+                  name: classCWithSText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class C With S Info Accordion Text,
+                  name: classCWithSInfoAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class C With S Req Accordion Text,
+                  name: classCWithSReqAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class C With S Res Accordion Text,
+                  name: classCWithSResAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B With S Text (Below Body Text),
+                  name: classBWithSText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B With S Info Accordion Text,
+                  name: classBWithSInfoAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B With S Req Accordion Text,
+                  name: classBWithSReqAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B With S Res Accordion Text,
+                  name: classBWithSResAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class C Without S Text (Below Body Text),
+                  name: classCWithoutSText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class C Without S Info Accordion Text,
+                  name: classCWithoutSInfoAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class C Without S Req Accordion Text,
+                  name: classCWithoutSReqAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class C Without S Res Accordion Text,
+                  name: classCWithoutSResAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B Without S Text (Below Body Text),
+                  name: classBWithoutSText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B Without S Info Accordion Text,
+                  name: classBWithoutSInfoAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B Without S Req Accordion Text,
+                  name: classBWithoutSReqAccordionText,
+                  widget: markdown,
+                }
+              - {
+                  label: Class B Without S Res Accordion Text,
+                  name: classBWithoutSResAccordionText,
+                  widget: markdown,
+                }
   - name: "municipal-tasks"
     label: "Tasks - Municipal"
     folder: "content/src/roadmaps/municipal-tasks"

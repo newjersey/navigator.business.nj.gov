@@ -48,7 +48,7 @@ import {
 } from "../profileData";
 import { RoadmapTaskData } from "../roadmapTaskData";
 import { arrayOfSectors, SectorType } from "../sector";
-import { StateObject, arrayOfStateObjects as states } from "../states";
+import { arrayOfStateObjects as states, StateObject } from "../states";
 import {
   taxClearanceCertificateAgencies,
   TaxClearanceCertificateData,
@@ -630,6 +630,8 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
 export const generateRoadmapTaskData = (overrides: Partial<RoadmapTaskData>): RoadmapTaskData => {
   return {
     manageBusinessVehicles: !(randomInt() % 2),
+    passengerTransportSchoolBus: !(randomInt() % 2),
+    passengerTransportSixteenOrMorePassengers: !(randomInt() % 2),
     ...overrides,
   };
 };
