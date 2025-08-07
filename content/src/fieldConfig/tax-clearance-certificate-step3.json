@@ -10,7 +10,7 @@
     "secondSectionHeader": "Business Information",
     "stateTaxIdLabel": "NJ State Tax ID",
     "errorTextIneligible": "This business is not currently eligible for this certificate",
-    "errorTextStatusVerification": "The status of this business could not be verified",
+    "errorTextStatusVerification": "The status of this business could not be verified.",
     "errorTextMissingField": "Your request was missing required fields. Ensure that all required fields are completed",
     "errorTextSystem": "Something went wrong. Review your information and try again later",
     "errorTextValidation": "**Some of the entries in your submission were not valid** \n\nReview your information and try again.",
