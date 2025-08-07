@@ -23,7 +23,7 @@ summaryDescriptionMd: >
   3. You can have someone else complete the application for you without certifying it. Then certify the application yourself.
 
 
-  Update your registration if you are changing, for example:
+  You may need to update your registration if you are changing, for example:
 
   - The tank operator
 
@@ -52,11 +52,11 @@ callToActionLink: " https://dep.nj.gov/online/ "
 - Copy of insurance policy
 
 #### Registration and Validation
-- Class A and B operator  <insert contextual information>registration numbers and validation numbers or the ICC certification number listed on the operator certificate
+- `Class A|class-a-operator` and `class B|class-b-operator` operator  <insert contextual information>registration numbers and validation numbers or the ICC certification number listed on the operator certificate
 
 #### General Application Requirements
 - Contact information of the property owner, UST facility owner, UST facility operator, class A operator, class B operator, fee billing contact, and installer
-- UST facility owner’s business entity ID <insert contextual information>
+- UST facility owner’s `business entity ID|entity-id` 
 - Certification PIN (facility owner or third party)
 - Applicable fees paid
 - Authorization form, if applicable 
