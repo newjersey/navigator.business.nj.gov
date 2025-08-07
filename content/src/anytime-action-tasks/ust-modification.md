@@ -47,8 +47,8 @@ callToActionLink: " https://dep.nj.gov/online/ "
 - Effective date of policy
 - Insurance coverage start date (retroactive date) 
 - Policy number
-- Amount for limit of liability <insert contextual information>
-- Amount for limit of defense costs <insert contextual information>
+- `Amount for limit of liability|limit-of-liability-amount`
+- Amount for `limit of defense costs |limit-defense-costs-amount`
 - Copy of insurance policy
 
 #### Registration and Validation
