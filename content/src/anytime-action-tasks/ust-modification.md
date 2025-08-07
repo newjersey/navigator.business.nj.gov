@@ -52,7 +52,7 @@ callToActionLink: " https://dep.nj.gov/online/ "
 - Copy of insurance policy
 
 #### Registration and Validation
-- `Class A|class-a-operator` and `class B|class-b-operator` operator  <insert contextual information>registration numbers and validation numbers or the ICC certification number listed on the operator certificate
+- `Class A|class-a-operator` and `class B|class-b-operator` operator  registration numbers and validation numbers or the ICC certification number listed on the operator certificate
 
 #### General Application Requirements
 - Contact information of the property owner, UST facility owner, UST facility operator, class A operator, class B operator, fee billing contact, and installer
