@@ -35,7 +35,7 @@ const AccountSetupPage = (): ReactElement => {
   const { setRegistrationStatus } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const queryAnalyticsOccurred = useRef<boolean>(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useMountEffectWhenDefined(() => {
     if (!userData) return;
     setUser(userData.user);
@@ -57,22 +57,27 @@ const AccountSetupPage = (): ReactElement => {
 
   FormFuncWrapper(
     async (): Promise<void> => {
-      if (!updateQueue || !router) return;
+      setIsSubmitting(true);
+      try {
+        if (!updateQueue || !router) return;
 
-      updateQueue.queueUser(user);
-      let userDataWithUser = updateQueue.current();
+        updateQueue.queueUser(user);
+        let userDataWithUser = updateQueue.current();
 
-      if (user.receiveNewsletter) {
-        userDataWithUser = await api.postNewsletter(userDataWithUser);
+        if (user.receiveNewsletter) {
+          userDataWithUser = await api.postNewsletter(userDataWithUser);
+        }
+
+        if (user.userTesting) {
+          userDataWithUser = await api.postUserTesting(userDataWithUser);
+        }
+
+        await updateQueue.queue(userDataWithUser).update();
+        analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
+        onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });
+      } finally {
+        setIsSubmitting(false);
       }
-
-      if (user.userTesting) {
-        userDataWithUser = await api.postUserTesting(userDataWithUser);
-      }
-
-      await updateQueue.queue(userDataWithUser).update();
-      analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
-      onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });
     },
     (isValid) => {
       if (isValid) {
@@ -113,7 +118,6 @@ const AccountSetupPage = (): ReactElement => {
     if (state.activeUser?.encounteredMyNjLinkingError) return Config.accountSetup.existingAccount;
     return Config.accountSetup.default;
   };
-
   return (
     <PageSkeleton showNavBar logoOnly="NAVIGATOR_MYNJ_LOGO">
       <main id="main" className="padding-top-4 desktop:padding-top-8">
@@ -132,6 +136,7 @@ const AccountSetupPage = (): ReactElement => {
                 isColor="primary"
                 isSubmitButton={true}
                 isRightMarginRemoved={true}
+                isLoading={isSubmitting}
               >
                 {getContent().submitButton}
               </PrimaryButton>
