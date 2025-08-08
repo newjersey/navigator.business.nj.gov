@@ -167,7 +167,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           </SecondaryButton>
           <PrimaryButton
             isColor="primary"
-            onClick={() => props.setStepIndex(1)}
+            onClick={() => props.setStepIndex(2)}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >
