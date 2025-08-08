@@ -60,7 +60,7 @@ callToActionLink: " https://dep.nj.gov/online/ "
 
 #### General Application Requirements
 
-* Contact information of the property owner, UST facility owner, UST facility operator, class A operator, class B operator, fee billing contact, and installer
+* Contact information of the property owner, UST facility owner, UST facility operator, class A operator, class B operator, and fee billing contact 
 * UST facility owner’s `business entity ID|entity-id` 
 * Certification PIN (facility owner or third party)
 * Applicable fees paid
