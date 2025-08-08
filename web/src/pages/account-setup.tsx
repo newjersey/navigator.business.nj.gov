@@ -58,26 +58,23 @@ const AccountSetupPage = (): ReactElement => {
   FormFuncWrapper(
     async (): Promise<void> => {
       setIsSubmitting(true);
-      try {
-        if (!updateQueue || !router) return;
 
-        updateQueue.queueUser(user);
-        let userDataWithUser = updateQueue.current();
+      if (!updateQueue || !router) return;
 
-        if (user.receiveNewsletter) {
-          userDataWithUser = await api.postNewsletter(userDataWithUser);
-        }
+      updateQueue.queueUser(user);
+      let userDataWithUser = updateQueue.current();
 
-        if (user.userTesting) {
-          userDataWithUser = await api.postUserTesting(userDataWithUser);
-        }
-
-        await updateQueue.queue(userDataWithUser).update();
-        analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
-        onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });
-      } finally {
-        setIsSubmitting(false);
+      if (user.receiveNewsletter) {
+        userDataWithUser = await api.postNewsletter(userDataWithUser);
       }
+
+      if (user.userTesting) {
+        userDataWithUser = await api.postUserTesting(userDataWithUser);
+      }
+
+      await updateQueue.queue(userDataWithUser).update();
+      analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
+      onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });
     },
     (isValid) => {
       if (isValid) {
