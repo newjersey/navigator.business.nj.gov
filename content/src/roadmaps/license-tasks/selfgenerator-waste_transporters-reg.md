@@ -58,6 +58,8 @@ divisionPhone: (609) 292-7081
 
 **Note:** Some industries may need to submit extra documents. You can check the specific requirements in the application form.
 
+&nbsp;
+
 Mail your completed application and the required documents to:
 
 New Jersey Department of Environmental Protection
