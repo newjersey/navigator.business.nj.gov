@@ -66,6 +66,9 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
       return Config.taxClearanceCertificateStep3.errorTextValidation;
     }
 
+    if (errorType === "BUSINESS_STATUS_VERIFICATION_ERROR") {
+      return Config.taxClearanceCertificateStep3.errorTextStatusVerification;
+    }
     if (
       errorType === "MISSING_FIELD" ||
       errorType === "TAX_ID_MISSING_FIELD" ||
