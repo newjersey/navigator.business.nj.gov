@@ -290,6 +290,14 @@
       "id": "asbestos-abatement-question",
       "addOnWhenNo": "",
       "addOnWhenYes": "notify-asbestos"
+    },
+    {
+      "anytimeActions": [
+        "ust-registration-renewal",
+        "ust-modification"
+      ],
+      "id": "ust-reg-renewal",
+      "questionText": "Does your business have an underground storage tank?"
     }
   ]
 }
