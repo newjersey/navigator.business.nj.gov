@@ -11,7 +11,7 @@ summaryDescriptionMd: >-2
   :::infoAlert 
    **Keep in mind:**
 
-  This registration does not allow you to transport waste for others. If you need to do that, apply for an A-901 license.
+  This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/wastedecals/commercial-solid-waste-transporters/).
 
   :::
 industryId:
@@ -53,17 +53,24 @@ divisionPhone: (609) 292-7081
 * Notarized affidavit stating you only transport your waste that you generated (included in the application form)
 * Valid insurance information for all vehicles
 * Valid motor vehicle registrations for all vehicles (must be registered as Commercial)
-* A copy of the Tax clearance certificate
+* A copy of the [Tax clearance certificate](https://account.business.nj.gov/actions/tax-clearance-certificate-apply)
 * A Copy of Lease Agreement and Certification for any leased vehicles signed by lessor and lessee
 
-Note: Some industries may need to submit extra documents. You can check the specific requirements in the application form.
+**Note:** Some industries may need to submit extra documents. You can check the specific requirements in the application form.
 
 Mail your completed application and the required documents to:
 
 New Jersey Department of Environmental Protection
+
 Division of Compliance Operations and Coordination
+
+
 Bureau of Licensing & Registrations
+
+
 9 Ewing Street, Mail Code 09-01
+
+
 Trenton, NJ 08625-0420
 
 :::infoAlert 
@@ -71,9 +78,9 @@ Trenton, NJ 08625-0420
 
 * Application approved: You will get a bill (pay online or by check). You will receive your decals (in 8–10 weeks). Do not transport waste until you get them.
 * Application not approved or incomplete:  NJDEP will email you with the next steps or missing info.
-:::
+  :::
 
-:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you don’t register, you cannot legally transport waste, and you may be subject to significant fines.
 
