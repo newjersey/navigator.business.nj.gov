@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/TYTR_ACE_App/ProcessCertificate/businessClearance",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.taxpayerId == '777777777111')]"
+      },
+      {
+        "matchesJsonPath": "$[?(@.taxpayerPin == '3889')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "bodyFileName": "tax-clearance-business-status-verification-failed.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

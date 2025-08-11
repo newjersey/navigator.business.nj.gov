@@ -1,5 +1,6 @@
 import {
   ApiTaxClearanceCertificateClient,
+  BUSINESS_STATUS_VERIFICATION_ERROR,
   FAILED_TAX_ID_AND_PIN_VALIDATION,
   INELIGIBLE_TAX_CLEARANCE_FORM,
   MISSING_FIELD,
@@ -349,6 +350,24 @@ describe("TaxClearanceCertificateClient", () => {
       error: {
         message: FAILED_TAX_ID_AND_PIN_VALIDATION,
         type: "FAILED_TAX_ID_AND_PIN_VALIDATION",
+      },
+    });
+  });
+
+  it("returns BUSINESS_STATUS_VERIFICATION_ERROR error", async () => {
+    mockAxios.post.mockRejectedValue({
+      response: { status: StatusCodes.BAD_REQUEST, data: BUSINESS_STATUS_VERIFICATION_ERROR },
+    });
+    expect(
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
+    ).toEqual({
+      error: {
+        message: BUSINESS_STATUS_VERIFICATION_ERROR,
+        type: "BUSINESS_STATUS_VERIFICATION_ERROR",
       },
     });
   });
