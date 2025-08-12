@@ -295,10 +295,6 @@ const serverlessConfiguration: AWS = {
       CIGARETTE_LICENSE_MERCHANT_CODE: cigaretteLicenseMerchantCode,
       CIGARETTE_LICENSE_MERCHANT_KEY: cigaretteLicenseMerchantKey,
       CIGARETTE_LICENSE_SERVICE_CODE: cigaretteLicenseServiceCode,
-      CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL:
-        stage === "local"
-          ? "${ssm:/dev/cigarette_license_email_confirmation_url}"
-          : `\${ssm:/${stage}/cigarette_license_email_confirmation_url}`,
       CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY: cigaretteLicenseEmailConfirmationKey,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,

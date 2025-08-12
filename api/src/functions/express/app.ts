@@ -263,9 +263,6 @@ const cigaretteLicenseClient = ApiCigaretteLicenseClient(logger, {
   merchantCode: process.env.CIGARETTE_LICENSE_MERCHANT_CODE || "",
   merchantKey: process.env.CIGARETTE_LICENSE_MERCHANT_KEY || "",
   serviceCode: process.env.CIGARETTE_LICENSE_SERVICE_CODE || "",
-  emailConfirmationUrl:
-    process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL ||
-    "http://localhost:9000/cigarette-license/send-email-confirmation",
   emailConfirmationKey: process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY || "",
 });
 const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
