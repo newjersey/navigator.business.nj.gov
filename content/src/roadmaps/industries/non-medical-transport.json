@@ -88,6 +88,12 @@
       "step": 4,
       "task": "trucking-cdl",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 18,
+      "task": "passenger-transport-cdl",
+      "required": true
     }
   ],
   "name": "Non-Medical Transport",
