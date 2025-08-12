@@ -172,8 +172,9 @@ export const PassengerTransportCdlQuestion = (props: Props): ReactElement => {
             )}
           </WithErrorBar>
         </ScrollableFormFieldWrapper>
-
-        <Content>{Config.passengerTransportCdlTabOne.bodyText}</Content>
+        <div className="margin-top-3">
+          <Content>{Config.passengerTransportCdlTabOne.bodyText}</Content>
+        </div>
         <div className="margin-top-3 flex flex-justify-end">
           <PrimaryButton isColor="accent-cooler" isSubmitButton onClick={scrollToTop}>
             {Config.passengerTransportCdlTabOne.saveButton}
