@@ -79,7 +79,7 @@ Trenton, NJ 08625-0420
 * Application not approved or incomplete:  NJDEP will email you with the next steps or missing info.
   :::
 
-:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If you don’t register, you cannot legally transport waste, and you may be subject to significant fines.
 
