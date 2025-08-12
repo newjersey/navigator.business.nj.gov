@@ -19,7 +19,7 @@
     "classBWithSText": "**Class B** with **“P” and “S” Endorsements**",
     "classCWithoutSInfoAccordionText": "* **CDL Class C** is for vehicles designed to transport 16 or more passengers, including the driver.\n* **“P” Endorsement** - Designates the vehicle as one that transports passengers",
     "classBWithoutSInfoAccordionText": "* **CDL Class B** for vehicles weighing 26,001 or more lbs that aren’t towing a heavy trailer.\n* **“P” Endorsement** - Designates the vehicle as one that transports passengers",
-    "requirementsAccordionHeaderText": "Application Requirement",
+    "requirementsAccordionHeaderText": "Application Requirements",
     "infoAccordionHeaderWithSText": "School Bus Information",
     "contactAccordionText": ":::largeCallout{ showHeader=\"true\" headerText=\"Passenger Transport Requirements\" showIcon=\"false\" calloutType=\"quickReference\" amountIconText=\"\" filingTypeIconText=\"\" frequencyIconText=\"\" phoneIconText=\"(609) 292-6500\" emailIconText=\"mcscustomerservice@mvc.nj.gov\" }\n\nQuestions? Contact the New Jersey Motor Vehicle commission.\n\n:::",
     "eligibilityAccordionHeaderText": "Eligibility Criteria",
