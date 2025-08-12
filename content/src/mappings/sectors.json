@@ -85,10 +85,7 @@
     {
       "id": "other-services",
       "name": "Other Services",
-      "nonEssentialQuestionsIds": [
-        "resale-tax-cert",
-        "ust-reg-renewal"
-      ]
+      "nonEssentialQuestionsIds": []
     },
     {
       "id": "professional-scientific-and-technical-services",
