@@ -17,6 +17,7 @@ import { HealthCheckMethod, HealthCheckMetadata } from "@domain/types";
 import { UserData } from "@shared/userData";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { getCigLicenseEmailUrl } from "@libs/ssmUtils";
 
 export const ApiCigaretteLicenseClient = (
   logger: LogWriterType,
@@ -123,6 +124,7 @@ export const ApiCigaretteLicenseClient = (
     const logId = logger.GetId();
     const currentBusiness = getCurrentBusiness(userData);
     const cigaretteLicenseData = currentBusiness.cigaretteLicenseData;
+    const cigLicenseEmailUrl = await getCigLicenseEmailUrl();
 
     if (!cigaretteLicenseData) {
       const errorMessage = `Cigarette License Client - Id:${logId} - cigarette license data is not defined`;
@@ -146,12 +148,12 @@ export const ApiCigaretteLicenseClient = (
 
     logger.LogInfo(
       `Cigarette License Client - Id:${logId} - Sending request to ${
-        config.emailConfirmationUrl
+        cigLicenseEmailUrl
       } data: ${JSON.stringify(postBody)}`,
     );
 
     return axios
-      .post(config.emailConfirmationUrl, postBody, {
+      .post(cigLicenseEmailUrl, postBody, {
         headers: {
           "Content-Type": "application/json",
           "x-api-key": config.emailConfirmationKey,

@@ -16,7 +16,6 @@ export type CigaretteLicenseApiConfig = {
   merchantCode: string;
   merchantKey: string;
   serviceCode: string;
-  emailConfirmationUrl: string;
   emailConfirmationKey: string;
 };
 
