@@ -60,6 +60,13 @@
       "weight": 14,
       "task": "mvc-registration-task",
       "required": true
+    },
+    {
+      "weight": 15,
+      "step": 4,
+      "task": "passenger-transport-cdl",
+      "licenseTask": "",
+      "required": true
     }
   ],
   "name": "Car Service",
