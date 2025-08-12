@@ -62,7 +62,7 @@ divisionPhone: (609) 292-7081
 
 &nbsp;
 
-Mail your completed application and the required documents to:
+**Mail your completed application and the required documents to:**
 
 New Jersey Department of Environmental Protection
 
