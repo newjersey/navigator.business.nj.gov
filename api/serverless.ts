@@ -112,8 +112,6 @@ const cigaretteLicenseApiKey = process.env.CIGARETTE_LICENSE_API_KEY || "";
 const cigaretteLicenseMerchantCode = process.env.CIGARETTE_LICENSE_MERCHANT_CODE || "";
 const cigaretteLicenseMerchantKey = process.env.CIGARETTE_LICENSE_MERCHANT_KEY || "";
 const cigaretteLicenseServiceCode = process.env.CIGARETTE_LICENSE_SERVICE_CODE || "";
-const cigaretteLicenseEmailConfirmationUrl =
-  process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL || "";
 const cigaretteLicenseEmailConfirmationKey =
   process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY || "";
 
@@ -297,7 +295,10 @@ const serverlessConfiguration: AWS = {
       CIGARETTE_LICENSE_MERCHANT_CODE: cigaretteLicenseMerchantCode,
       CIGARETTE_LICENSE_MERCHANT_KEY: cigaretteLicenseMerchantKey,
       CIGARETTE_LICENSE_SERVICE_CODE: cigaretteLicenseServiceCode,
-      CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL: cigaretteLicenseEmailConfirmationUrl,
+      CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL:
+        stage === "local"
+          ? "${ssm:/dev/cigarette_license_email_confirmation_url}"
+          : `\${ssm:/${stage}/cigarette_license_email_confirmation_url}`,
       CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY: cigaretteLicenseEmailConfirmationKey,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
