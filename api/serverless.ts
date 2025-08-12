@@ -107,6 +107,16 @@ const etpApiAccount = process.env.ABC_ETP_API_ACCOUNT || "";
 const etpApiKey = process.env.ABC_ETP_API_KEY || "";
 const etpApiBaseUrl = process.env.ABC_ETP_API_BASE_URL || "";
 
+const cigaretteLicenseBaseUrl = process.env.CIGARETTE_LICENSE_BASE_URL || "";
+const cigaretteLicenseApiKey = process.env.CIGARETTE_LICENSE_API_KEY || "";
+const cigaretteLicenseMerchantCode = process.env.CIGARETTE_LICENSE_MERCHANT_CODE || "";
+const cigaretteLicenseMerchantKey = process.env.CIGARETTE_LICENSE_MERCHANT_KEY || "";
+const cigaretteLicenseServiceCode = process.env.CIGARETTE_LICENSE_SERVICE_CODE || "";
+const cigaretteLicenseEmailConfirmationUrl =
+  process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL || "";
+const cigaretteLicenseEmailConfirmationKey =
+  process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -282,6 +292,13 @@ const serverlessConfiguration: AWS = {
       ABC_ETP_API_ACCOUNT: etpApiAccount,
       ABC_ETP_API_KEY: etpApiKey,
       ABC_ETP_API_BASE_URL: etpApiBaseUrl,
+      CIGARETTE_LICENSE_BASE_URL: cigaretteLicenseBaseUrl,
+      CIGARETTE_LICENSE_API_KEY: cigaretteLicenseApiKey,
+      CIGARETTE_LICENSE_MERCHANT_CODE: cigaretteLicenseMerchantCode,
+      CIGARETTE_LICENSE_MERCHANT_KEY: cigaretteLicenseMerchantKey,
+      CIGARETTE_LICENSE_SERVICE_CODE: cigaretteLicenseServiceCode,
+      CIGARETTE_LICENSE_EMAIL_CONFIRMATION_URL: cigaretteLicenseEmailConfirmationUrl,
+      CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY: cigaretteLicenseEmailConfirmationKey,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
