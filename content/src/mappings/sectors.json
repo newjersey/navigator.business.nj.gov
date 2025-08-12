@@ -85,7 +85,9 @@
     {
       "id": "other-services",
       "name": "Other Services",
-      "nonEssentialQuestionsIds": []
+      "nonEssentialQuestionsIds": [
+        "resale-tax-cert"
+      ]
     },
     {
       "id": "professional-scientific-and-technical-services",
