@@ -4,9 +4,7 @@ id: ust-registration-renewal
 name: Renew Your Underground Storage Tank (UST) Registration
 category:
   - purchase-new-products-or-equipment
-industryIds:
-  - auto-body-repair
-  - generic
+industryIds: []
 sectorIds: []
 urlSlug: UST-registration-renewal
 summaryDescriptionMd: >-
