@@ -296,7 +296,7 @@
         "ust-registration-renewal",
         "ust-modification"
       ],
-      "id": "ust-reg-renewal",
+      "id": "ust-reg",
       "questionText": "Does your business have an underground storage tank?"
     }
   ]
