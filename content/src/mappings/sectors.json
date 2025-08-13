@@ -86,7 +86,8 @@
       "id": "other-services",
       "name": "Other Services",
       "nonEssentialQuestionsIds": [
-        "resale-tax-cert"
+        "resale-tax-cert",
+        "ust-reg"
       ]
     },
     {
