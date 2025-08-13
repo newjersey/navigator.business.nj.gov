@@ -25,12 +25,22 @@ import {
 import { UserData } from "@shared/userData";
 import axios from "axios";
 import { StatusCodes } from "http-status-codes";
+import { getCigLicenseEmailUrl } from "@libs/ssmUtils";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 jest.mock("node:crypto", () => ({
   randomUUID: (): string => "fake-uuid-value",
 }));
+jest.mock("@libs/ssmUtils", () => ({
+  getCigLicenseEmailUrl: jest.fn(),
+  isKillSwitchOn: jest.fn(),
+  updateKillSwitch: jest.fn(),
+}));
+
+const mockGetCigLicenseEmailUrl = getCigLicenseEmailUrl as jest.MockedFunction<
+  typeof getCigLicenseEmailUrl
+>;
 
 describe("CigaretteLicenseClient", () => {
   const config: CigaretteLicenseApiConfig = {
@@ -39,7 +49,6 @@ describe("CigaretteLicenseClient", () => {
     merchantCode: "fakeMerchantCode",
     merchantKey: "fakeMerchantKey",
     serviceCode: "fakeServiceCode",
-    emailConfirmationUrl: "www.test-email.com",
     emailConfirmationKey: "fake-email-key",
   };
   const returnUrl = "fake-return-url";
@@ -228,13 +237,15 @@ describe("CigaretteLicenseClient", () => {
 
   describe("send-email-confirmation", () => {
     it("makes request to correct url with auth and data", async () => {
+      const mockEmailUrl = "https://example.com/confirm";
+      mockGetCigLicenseEmailUrl.mockResolvedValue(mockEmailUrl);
       mockAxios.post.mockResolvedValue({ data: "Email confirmation successfully sent" });
       const currentBusiness = getCurrentBusiness(userData);
       const cigaretteLicenseData = currentBusiness.cigaretteLicenseData!;
 
       const emailPostBody = await makeEmailConfirmationBody(cigaretteLicenseData, decryptedTaxId);
       await client.sendEmailConfirmation(userData, decryptedTaxId);
-      expect(mockAxios.post).toHaveBeenCalledWith(config.emailConfirmationUrl, emailPostBody, {
+      expect(mockAxios.post).toHaveBeenCalledWith(mockEmailUrl, emailPostBody, {
         headers: {
           "Content-Type": "application/json",
           "x-api-key": config.emailConfirmationKey,
