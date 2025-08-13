@@ -5,7 +5,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { Autocomplete, Checkbox, InputLabel, TextField } from "@mui/material";
+import { Autocomplete, Checkbox, TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { ReactElement, useContext } from "react";
@@ -148,72 +148,78 @@ export const SalesInfo = (props: Props): ReactElement => {
     useContext(CigaretteLicenseContext);
   return (
     <>
-      <h2>Sales Information</h2>
+      <h2>{Config.cigaretteLicenseStep3.salesInformationHeader}</h2>
 
-      <InputLabel htmlFor="start-date-picker" className="margin-top-2">
-        Start Date of Cigarette Sales
-      </InputLabel>
+      <div className="margin-top-3">
+        {/* this margin is being overridden for some reason */}
+        <label htmlFor="start-date-picker" className="text-bold">
+          {Config.cigaretteLicenseStep3.salesStartDateLabel}
+        </label>
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          onChange={(newValue: DateObject | null) => {
-            if (newValue) {
-              setCigaretteLicenseData((cigaretteLicenseData) => {
-                return { ...cigaretteLicenseData, salesInfoStartDate: newValue.format() };
-              });
-            }
-          }}
-          value={cigaretteLicenseData.salesInfoStartDate}
-          renderInput={(params): JSX.Element => {
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            onChange={(newValue: DateObject | null) => {
+              if (newValue) {
+                setCigaretteLicenseData((cigaretteLicenseData) => {
+                  return { ...cigaretteLicenseData, salesInfoStartDate: newValue.format() };
+                });
+              }
+            }}
+            value={cigaretteLicenseData.salesInfoStartDate}
+            renderInput={(params): JSX.Element => {
+              return (
+                <div className="width-100">
+                  <TextField
+                    id="start-date-picker"
+                    {...params}
+                    variant="outlined"
+                    error={false}
+                    sx={{
+                      svg: { fill: "#4b7600" },
+                    }}
+                    inputProps={{
+                      ...params.inputProps,
+                      "aria-label": Config.cigaretteLicenseStep3.salesStartDateLabel,
+                    }}
+                    style={{ maxWidth: 450 }}
+                    value={cigaretteLicenseData.salesInfoStartDate}
+                  />
+                </div>
+              );
+            }}
+          ></DatePicker>
+        </LocalizationProvider>
+      </div>
+
+      <div className="margin-top-3">
+        <label htmlFor="supplier-select" className="text-bold">
+          {Config.cigaretteLicenseStep3.selectSupplierLabel}
+        </label>
+
+        <Autocomplete
+          multiple
+          id="supplier-select"
+          options={suppliers}
+          disableCloseOnSelect
+          getOptionLabel={(option) => option.name}
+          renderOption={(props, option, { selected }) => {
+            const { key, ...optionProps } = props;
             return (
-              <div className="width-100">
-                <TextField
-                  id="start-date-picker"
-                  {...params}
-                  variant="outlined"
-                  error={false}
-                  sx={{
-                    svg: { fill: "#4b7600" },
-                  }}
-                  inputProps={{
-                    ...params.inputProps,
-                    "aria-label": "Start Date of Cigarette Sales",
-                  }}
-                  value={cigaretteLicenseData.salesInfoStartDate}
+              <li key={key} {...optionProps}>
+                <Checkbox
+                  icon={icon}
+                  checkedIcon={checkedIcon}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
                 />
-              </div>
+                {option.name}
+              </li>
             );
           }}
-        ></DatePicker>
-      </LocalizationProvider>
-
-      <InputLabel htmlFor="supplier-select" className="margin-top-2">
-        Select a Supplier
-      </InputLabel>
-
-      <Autocomplete
-        multiple
-        id="supplier-select"
-        options={suppliers}
-        disableCloseOnSelect
-        getOptionLabel={(option) => option.name}
-        renderOption={(props, option, { selected }) => {
-          const { key, ...optionProps } = props;
-          return (
-            <li key={key} {...optionProps}>
-              <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option.name}
-            </li>
-          );
-        }}
-        style={{ width: 500 }}
-        renderInput={(params) => <TextField {...params} />}
-      />
+          style={{ maxWidth: 450 }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </div>
       <HorizontalLine />
       <span className="h5-styling">{Config.cigaretteLicenseShared.issuingAgencyLabelText}: </span>
       <span className="h6-styling">{Config.cigaretteLicenseShared.issuingAgencyText}</span>
@@ -225,7 +231,7 @@ export const SalesInfo = (props: Props): ReactElement => {
             onClick={() => props.setStepIndex(1)}
             dataTestId="back"
           >
-            {Config.cigaretteLicenseStep2.backButtonText}
+            {Config.cigaretteLicenseStep3.backButtonText}
           </SecondaryButton>
           <PrimaryButton
             isColor="primary"
@@ -233,7 +239,7 @@ export const SalesInfo = (props: Props): ReactElement => {
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >
-            {Config.cigaretteLicenseStep2.nextButtonText}
+            {Config.cigaretteLicenseStep3.nextButtonText}
           </PrimaryButton>
         </ActionBarLayout>
       </CtaContainer>

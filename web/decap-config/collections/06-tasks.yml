@@ -1081,7 +1081,47 @@ collections:
                         name: "errorRequiredText"
                         widget: "string"
                         required: true
-
+      - label: "Cigarette License Step 3"
+        name: "cigaretteLicense-step3"
+        file: "content/src/fieldConfig/cigarette-license-step3.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cigarette License Step 3
+            name: cigaretteLicenseStep3
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "Sales Information Header",
+                  name: "salesInformationHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Cigarette Sales Start Date Label",
+                  name: "salesStartDateLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Select Supplier Dropdown Label",
+                  name: "selectSupplierLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Back Button Text",
+                  name: "backButtonText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Next Button Text",
+                  name: "nextButtonText",
+                  widget: "string",
+                  required: true,
+                }
       - label: "Cigarette License Shared"
         name: "cigaretteLicense-shared"
         file: "content/src/fieldConfig/cigarette-license-shared.json"

@@ -17,6 +17,7 @@ import * as CheckAccountEmailPage from "@businessnjgovnavigator/content/fieldCon
 import * as CigaretteLicenseShared from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-shared.json";
 import * as CigaretteLicenseStep1 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step1.json";
 import * as CigaretteLicenseStep2 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step2.json";
+import * as CigaretteLicenseStep3 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step3.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
 import * as DashboardModals from "@businessnjgovnavigator/content/fieldConfig/dashboard-modals.json";
@@ -49,6 +50,8 @@ import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/ne
 import * as FundingsOnboarding from "@businessnjgovnavigator/content/fieldConfig/njeda-fundings-onboarding.json";
 import * as OnboardingDefaults from "@businessnjgovnavigator/content/fieldConfig/onboarding-defaults.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
+import * as PassengerTransportCdl from "@businessnjgovnavigator/content/fieldConfig/passenger-transport-cdl-tab1.json";
+import * as PassengerTransportCdl2 from "@businessnjgovnavigator/content/fieldConfig/passenger-transport-cdl-tab2.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
 import * as RegisteredForTaxesModal from "@businessnjgovnavigator/content/fieldConfig/registered-for-taxes-modal.json";
 import * as SearchBusinessNameTask from "@businessnjgovnavigator/content/fieldConfig/search-business-name-task.json";
@@ -72,8 +75,6 @@ import * as XrayRegistration from "@businessnjgovnavigator/content/fieldConfig/x
 import * as XrayRenewal from "@businessnjgovnavigator/content/fieldConfig/xray-renewal.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
-import * as PassengerTransportCdl from "@businessnjgovnavigator/content/fieldConfig/passenger-transport-cdl-tab1.json";
-import * as PassengerTransportCdl2 from "@businessnjgovnavigator/content/fieldConfig/passenger-transport-cdl-tab2.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -110,6 +111,7 @@ const merged = JSON.parse(
       CigaretteLicenseShared,
       CigaretteLicenseStep1,
       CigaretteLicenseStep2,
+      CigaretteLicenseStep3,
       NexusNameSearch,
       NexusDbaFormation,
       NaicsCode,
@@ -193,6 +195,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof CigaretteLicenseShared &
   typeof CigaretteLicenseStep1 &
   typeof CigaretteLicenseStep2 &
+  typeof CigaretteLicenseStep3 &
   typeof NexusNameSearch &
   typeof NexusDbaFormation &
   typeof NaicsCode &
@@ -272,6 +275,7 @@ export const getMergedConfig = (): ConfigType => {
     CigaretteLicenseShared,
     CigaretteLicenseStep1,
     CigaretteLicenseStep2,
+    CigaretteLicenseStep3,
     NexusNameSearch,
     NexusDbaFormation,
     NaicsCode,

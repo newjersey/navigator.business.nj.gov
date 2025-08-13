@@ -1,0 +1,9 @@
+{
+  "cigaretteLicenseStep3": {
+    "salesInformationHeader": "Sales Information",
+    "salesStartDateLabel": "Start Date of Cigarette Sales",
+    "selectSupplierLabel": "Select a Supplier",
+    "backButtonText": "Back",
+    "nextButtonText": "Next"
+  }
+}
