@@ -153,6 +153,14 @@
           "description": "Which type of construction do you plan to do?"
         }
       },
+      "publicWorksContractor": {
+        "default": {
+          "header": "",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you plan to work on a `public works|public-works` project?"
+        }
+      },
       "dateOfFormation": {
         "default": {
           "header": "Business Effective Date",
@@ -468,7 +476,7 @@
       "backButtonText": "Cancel",
       "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
-      "errorDefaultTextBody":  "Review your information in the fields marked below.",
+      "errorDefaultTextBody": "Review your information in the fields marked below.",
       "errorTextBody": "Review your information in the ${fieldText} marked below.",
       "errorAlertMultipleFields": "fields",
       "errorErrorAlertOneField": "field",

@@ -21,6 +21,7 @@ const profileData: ProfileData = {
   isChildcareForSixOrMore: true,
   petCareHousing: false,
   willSellPetCareItems: false,
+  publicWorksContractor: undefined,
   constructionType: undefined,
   residentialConstructionType: undefined,
   employmentPersonnelServiceType: "JOB_SEEKERS",
