@@ -293,8 +293,8 @@
     },
     {
       "anytimeActions": [
-        "ust-registration-renewal",
-        "ust-modification"
+        "ust-modification",
+        "ust-registration-renewal"
       ],
       "id": "ust-reg",
       "questionText": "Does your business have an underground storage tank?"
