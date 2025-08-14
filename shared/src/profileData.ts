@@ -47,6 +47,7 @@ export interface IndustrySpecificData {
   readonly hasThreeOrMoreRentalUnits: boolean | undefined;
   readonly travelingCircusOrCarnivalOwningBusiness: boolean | undefined;
   readonly vacantPropertyOwner: boolean | undefined;
+  readonly publicWorksContractor: boolean | undefined;
 }
 
 type IndustrySpecificDataChoices = {
@@ -79,6 +80,7 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   hasThreeOrMoreRentalUnits: booleanChoice,
   travelingCircusOrCarnivalOwningBusiness: booleanChoice,
   vacantPropertyOwner: booleanChoice,
+  publicWorksContractor: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -107,6 +109,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   hasThreeOrMoreRentalUnits: undefined,
   travelingCircusOrCarnivalOwningBusiness: undefined,
   vacantPropertyOwner: undefined,
+  publicWorksContractor: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {

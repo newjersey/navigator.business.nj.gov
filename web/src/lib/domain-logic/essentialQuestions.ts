@@ -168,6 +168,13 @@ export const EssentialQuestions: EssentialQuestion[] = [
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.isConstructionTypeApplicable;
+    },
+    fieldName: "publicWorksContractor",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isEmploymentAndPersonnelTypeApplicable;
     },
     fieldName: "employmentPersonnelServiceType",
