@@ -84,12 +84,6 @@
       "task": "mvc-registration-task"
     },
     {
-      "weight": 17,
-      "step": 4,
-      "task": "trucking-cdl",
-      "required": true
-    },
-    {
       "step": 4,
       "weight": 18,
       "task": "passenger-transport-cdl",
