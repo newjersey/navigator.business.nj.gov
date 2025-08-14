@@ -86,7 +86,7 @@
       "required": false
     }
   ],
-  "name": "Car Service",
+  "name": "Transportation and Car Service",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "business-vehicle-irp",
@@ -101,7 +101,7 @@
     "isTransportation": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
+  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service, passenger transport",
   "id": "car-service",
   "description": "Offers transportation services in vehicles with any capacity",
   "webflowId": "656a1362f637cd08076d3599"
