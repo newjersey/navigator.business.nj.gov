@@ -1,0 +1,23 @@
+{
+  "cigaretteLicenseConfirmation": {
+    "amountPaid": "Amount paid",
+    "businessAddressLine1": "Business Address Line 1",
+    "businessAddressLine2": "Business Address Line 2",
+    "confirmationNumber": "Confirmation number",
+    "dateSubmitted": "Date submitted",
+    "issuingAgency": "**Issuing Agency:** NJ Division of Revenue and Enterprise Services",
+    "licenseeInformationHeader": "Licensee Information",
+    "mailingAddressLine1": "Mailing Address Line 1",
+    "mailingAddressLine2": "Mailing Address Line 2",
+    "needHelpHeader": "Need Help?",
+    "needHelpInfo": "Please contact DORES by [submitting a General Inquiry Form](https://www.nj.gov/treasury/revenue/revgencode.shtml).",
+    "paymentSuccessfulHeader": "Your Payment Was Successful",
+    "paymentSuccessfulInfo": "Your application has been submitted to the NJ Division of Revenue and Enterprise Services (DORES) for review.",
+    "submissionDetails": "Submission Details",
+    "suppliers": "Suppliers",
+    "whatHappensNextBullet1": "If approved, your license will be included with the letter.",
+    "whatHappensNextBullet2": "If denied, the letter will explain the reasons for denial and how to re-apply.",
+    "whatHappensNextHeader": "What Happens Next",
+    "whatHappensNextInfo": "DORES will review your application and send a decision letter to the mailing address you provided."
+  }
+}

@@ -16,6 +16,9 @@ import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fie
 import * as CheckAccountEmailPage from "@businessnjgovnavigator/content/fieldConfig/check-account-email-page.json";
 import * as CigaretteLicenseShared from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-shared.json";
 import * as CigaretteLicenseStep1 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step1.json";
+import * as CigaretteLicenseStep2 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step2.json";
+import * as CigaretteLicenseStep3 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step3.json";
+import * as CigaretteLicenseConfirmation from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-confirmation.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
 import * as DashboardModals from "@businessnjgovnavigator/content/fieldConfig/dashboard-modals.json";
@@ -108,6 +111,9 @@ const merged = JSON.parse(
       CannabisLicenseConditionalTab2,
       CigaretteLicenseShared,
       CigaretteLicenseStep1,
+      CigaretteLicenseStep2,
+      CigaretteLicenseStep3,
+      CigaretteLicenseConfirmation,
       NexusNameSearch,
       NexusDbaFormation,
       NaicsCode,
@@ -190,6 +196,9 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof CannabisLicenseConditionalTab2 &
   typeof CigaretteLicenseShared &
   typeof CigaretteLicenseStep1 &
+  typeof CigaretteLicenseStep2 &
+  typeof CigaretteLicenseStep3 &
+  typeof CigaretteLicenseConfirmation &
   typeof NexusNameSearch &
   typeof NexusDbaFormation &
   typeof NaicsCode &
@@ -268,6 +277,9 @@ export const getMergedConfig = (): ConfigType => {
     CannabisLicenseConditionalTab2,
     CigaretteLicenseShared,
     CigaretteLicenseStep1,
+    CigaretteLicenseStep2,
+    CigaretteLicenseStep3,
+    CigaretteLicenseConfirmation,
     NexusNameSearch,
     NexusDbaFormation,
     NaicsCode,
