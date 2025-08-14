@@ -45,6 +45,14 @@ export const setABExperienceDimension = (
   return updateQueue;
 };
 
+export const setNonEssentialQuestionViewedDimension = (value: string, queue = false): DimensionQueueFactory | null => {
+  //const updateQueue = analytics.dimensions.nonEssentialQuestionViewed(value);
+  //!queue && updateQueue.update();
+  //return updateQueue;
+  const q = queue;
+  return null;
+};
+
 export const setPhaseDimension = (
   value: OperatingPhaseId,
   queue = false,

@@ -26,6 +26,10 @@ jest.mock("@/components/Content", () => ({
   Content: (({ children }) => <div>{children}</div>) as React.FC<{ children: React.ReactNode }>,
 }));
 
+jest.mock("@/lib/utils/useIntersectionOnElement", () => ({
+  useIntersectionOnElement: jest.fn(),
+}));
+
 const Config = getMergedConfig();
 
 const renderPersonalizeYourTasksTab = ({

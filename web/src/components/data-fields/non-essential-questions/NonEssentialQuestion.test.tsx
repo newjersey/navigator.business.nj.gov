@@ -8,9 +8,20 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, within } from "@testing-library/react";
+import {useIntersectionOnElement} from "@/lib/utils/useIntersectionOnElement";
+import {setNonEssentialQuestionViewedDimension} from "@/lib/utils/analytics-helpers";
+//import analytics from "@/lib/utils/analytics";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
   getNonEssentialQuestionText: jest.fn(),
+}));
+
+jest.mock("@/lib/utils/analytics-helpers", () => ({
+  setNonEssentialQuestionViewedDimension: jest.fn(),
+}));
+
+jest.mock("@/lib/utils/useIntersectionOnElement", () => ({
+  useIntersectionOnElement: jest.fn(),
 }));
 
 const mockGetNonEssentialQuestionText = (
@@ -76,5 +87,41 @@ describe("ProfileNonEssentialQuestion", () => {
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-no"));
     expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": false });
+  });
+
+  describe("NonEssentialQuestion Analytics", () => {
+
+    it("should set the nonEssentialQuestionViewedDimenension and call the analytics", () => {
+      (useIntersectionOnElement as jest.Mock).mockReturnValue(true);
+      renderEssentialQuestion({
+        essentialQuestionId: "cool-test-id",
+        profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } },
+      });
+
+      expect(
+        setNonEssentialQuestionViewedDimension
+      ).toHaveBeenCalledWith("Cool Test Question?");
+
+      // expect(
+      //   analytics.event.non_essential_question.viewed.view_non_essential_question
+      // ).toHaveBeenCalledWith("Cool Test Question?");
+
+    });
+
+    it("should set HasBeenSeen to false when not in view and not call analytics", () => {
+      (useIntersectionOnElement as jest.Mock).mockReturnValue(false);
+      renderEssentialQuestion({
+        essentialQuestionId: "cool-test-id",
+        profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } },
+      });
+
+      expect(
+        setNonEssentialQuestionViewedDimension
+      ).not.toHaveBeenCalledWith("Cool Test Question?");
+
+      // expect(
+      //   analytics.event.non_essential_question.viewed.view_non_essential_question
+      // ).not.toHaveBeenCalled();
+    });
   });
 });

@@ -4,7 +4,9 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { convertTextToMarkdownBold } from "@/lib/utils/content-helpers";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import React, {ReactElement, useContext, useEffect, useRef, useState} from "react";
+import {useIntersectionOnElement} from "@/lib/utils/useIntersectionOnElement"
+import {setNonEssentialQuestionViewedDimension} from "@/lib/utils/analytics-helpers";
 
 interface Props {
   essentialQuestionId: string;
@@ -14,6 +16,10 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
   const nonEssentialQuestionText = getNonEssentialQuestionText(props.essentialQuestionId);
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+  const nonEssentialQuestion = useRef(null);
+  const [hasBeenSeen, setHasBeenSeen] = useState(false);
+  const nonEssentialQuestionInViewPort = useIntersectionOnElement(nonEssentialQuestion, "-50px");
+
 
   const handleChange = (event: React.ChangeEvent<{ name?: string; value: string }>): void => {
     setProfileData({
@@ -24,6 +30,19 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
       },
     });
   };
+
+  useEffect(() => {
+    if (!(nonEssentialQuestionInViewPort && !hasBeenSeen)) {
+      return;
+    }
+
+    if (nonEssentialQuestionText) {
+      setNonEssentialQuestionViewedDimension(nonEssentialQuestionText);
+      console.log(nonEssentialQuestionText);
+    }
+    setHasBeenSeen(true)
+    console.log(hasBeenSeen);
+  }, [nonEssentialQuestionInViewPort, hasBeenSeen, nonEssentialQuestionText]);
 
   return (
     <>
