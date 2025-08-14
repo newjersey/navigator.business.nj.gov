@@ -72,7 +72,7 @@
   "industryOnboardingQuestions": {
     "canBeReseller": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "cemetary, burial, graveyard, grave, crematory, mausoleum, niche, crypt ",
   "id": "cemetery",
   "description": "Offers burial plots, mausoleum spaces, and other services for the dead"
