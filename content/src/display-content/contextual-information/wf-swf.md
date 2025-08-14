@@ -1,5 +1,5 @@
 ---
-header: Workforce Development Partnership Fun (WF) and Supplemental Workforce
+header: Workforce Development Partnership Fund (WF) and Supplemental Workforce
   Fund (SWF)
 id: wf-swf
 displayname: wf-swf
