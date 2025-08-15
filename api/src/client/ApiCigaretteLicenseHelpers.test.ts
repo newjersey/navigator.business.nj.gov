@@ -32,6 +32,7 @@ describe("ApiCigaretteLicenseHelpers", () => {
       merchantCode: "TEST_MERCHANT",
       merchantKey: "TEST_KEY",
       serviceCode: "TEST_SERVICE",
+      emailConfirmationUrl: "TEST_EMAIL_URL",
       emailConfirmationKey: "TEST_EMAIL_KEY",
     };
 

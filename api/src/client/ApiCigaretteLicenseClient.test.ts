@@ -25,7 +25,7 @@ import {
 import { UserData } from "@shared/userData";
 import axios from "axios";
 import { StatusCodes } from "http-status-codes";
-import { getCigLicenseEmailUrl } from "@libs/ssmUtils";
+import { getConfigValue } from "@libs/ssmUtils";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -33,23 +33,30 @@ jest.mock("node:crypto", () => ({
   randomUUID: (): string => "fake-uuid-value",
 }));
 jest.mock("@libs/ssmUtils", () => ({
-  getCigLicenseEmailUrl: jest.fn(),
+  getConfigValue: jest.fn(),
   isKillSwitchOn: jest.fn(),
   updateKillSwitch: jest.fn(),
 }));
-
-const mockGetCigLicenseEmailUrl = getCigLicenseEmailUrl as jest.MockedFunction<
-  typeof getCigLicenseEmailUrl
->;
+const mockGetConfigValue = getConfigValue as jest.MockedFunction<typeof getConfigValue>;
 
 describe("CigaretteLicenseClient", () => {
+  const mockValues = {
+    cigarette_license_base_url: "https://test-api.example.com",
+    cigarette_license_api_key: "test-api-key",
+    cigarette_license_merchant_code: "TEST_MERCHANT",
+    cigarette_license_merchant_key: "test-merchant-key",
+    cigarette_license_service_code: "TEST_SERVICE",
+    cigarette_license_email_confirmation_url: "https://test-email.example.com",
+    cigarette_license_email_confirmation_key: "test-email-key",
+  };
   const config: CigaretteLicenseApiConfig = {
-    baseUrl: "www.test.com",
-    apiKey: "fakeApiKey",
-    merchantCode: "fakeMerchantCode",
-    merchantKey: "fakeMerchantKey",
-    serviceCode: "fakeServiceCode",
-    emailConfirmationKey: "fake-email-key",
+    baseUrl: mockValues.cigarette_license_base_url,
+    apiKey: mockValues.cigarette_license_api_key,
+    merchantCode: mockValues.cigarette_license_merchant_code,
+    merchantKey: mockValues.cigarette_license_merchant_key,
+    serviceCode: mockValues.cigarette_license_service_code,
+    emailConfirmationUrl: mockValues.cigarette_license_email_confirmation_url,
+    emailConfirmationKey: mockValues.cigarette_license_email_confirmation_key,
   };
   const returnUrl = "fake-return-url";
   const decryptedTaxId = "decrypted-tax-id";
@@ -59,7 +66,10 @@ describe("CigaretteLicenseClient", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    client = ApiCigaretteLicenseClient(DummyLogWriter, config);
+    client = ApiCigaretteLicenseClient(DummyLogWriter);
+    mockGetConfigValue.mockImplementation((param) => {
+      return Promise.resolve(mockValues[param] || "");
+    });
 
     userData = generateUserData({
       currentBusinessId: "123",
@@ -91,12 +101,16 @@ describe("CigaretteLicenseClient", () => {
 
     it("makes request to correct url with auth and data", async () => {
       await client.preparePayment(userData, returnUrl);
-      expect(mockAxios.post).toHaveBeenCalledWith("www.test.com/tokens", postBody, {
-        headers: {
-          "Content-Type": "application/json",
-          ApiKey: config.apiKey,
+      expect(mockAxios.post).toHaveBeenCalledWith(
+        `${mockValues.cigarette_license_base_url}/tokens`,
+        postBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            ApiKey: config.apiKey,
+          },
         },
-      });
+      );
     });
 
     it("fires all logs request when successful api response is returned", async () => {
@@ -169,14 +183,17 @@ describe("CigaretteLicenseClient", () => {
 
     it("makes request to correct url with auth and data", async () => {
       await client.getOrderByToken(token);
-      expect(mockAxios.get).toHaveBeenCalledWith(`www.test.com/tokens/${token}`, {
-        headers: {
-          "Content-Type": "application/json",
-          ApiKey: config.apiKey,
-          MerchantCode: config.merchantCode,
-          MerchantKey: config.merchantKey,
+      expect(mockAxios.get).toHaveBeenCalledWith(
+        `${mockValues.cigarette_license_base_url}/tokens/${token}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            ApiKey: config.apiKey,
+            MerchantCode: config.merchantCode,
+            MerchantKey: config.merchantKey,
+          },
         },
-      });
+      );
     });
 
     it("fires all logs request when successful api response is returned", async () => {
@@ -237,20 +254,22 @@ describe("CigaretteLicenseClient", () => {
 
   describe("send-email-confirmation", () => {
     it("makes request to correct url with auth and data", async () => {
-      const mockEmailUrl = "https://example.com/confirm";
-      mockGetCigLicenseEmailUrl.mockResolvedValue(mockEmailUrl);
       mockAxios.post.mockResolvedValue({ data: "Email confirmation successfully sent" });
       const currentBusiness = getCurrentBusiness(userData);
       const cigaretteLicenseData = currentBusiness.cigaretteLicenseData!;
 
       const emailPostBody = await makeEmailConfirmationBody(cigaretteLicenseData, decryptedTaxId);
       await client.sendEmailConfirmation(userData, decryptedTaxId);
-      expect(mockAxios.post).toHaveBeenCalledWith(mockEmailUrl, emailPostBody, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": config.emailConfirmationKey,
+      expect(mockAxios.post).toHaveBeenCalledWith(
+        mockValues.cigarette_license_email_confirmation_url,
+        emailPostBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": config.emailConfirmationKey,
+          },
         },
-      });
+      );
     });
 
     it("returns an error response of 400 if the cigaretteLicenseData doesn't exist", async () => {

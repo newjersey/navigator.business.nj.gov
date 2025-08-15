@@ -17,16 +17,26 @@ import { HealthCheckMethod, HealthCheckMetadata } from "@domain/types";
 import { UserData } from "@shared/userData";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { getCigLicenseEmailUrl } from "@libs/ssmUtils";
+import { getConfigValue } from "@libs/ssmUtils";
 
-export const ApiCigaretteLicenseClient = (
-  logger: LogWriterType,
-  config: CigaretteLicenseApiConfig,
-): CigaretteLicenseClient => {
+export const getConfig = async (): Promise<CigaretteLicenseApiConfig> => {
+  return {
+    baseUrl: await getConfigValue("cigarette_license_base_url"),
+    apiKey: await getConfigValue("cigarette_license_api_key"),
+    merchantCode: await getConfigValue("cigarette_license_merchant_code"),
+    merchantKey: await getConfigValue("cigarette_license_merchant_key"),
+    serviceCode: await getConfigValue("cigarette_license_service_code"),
+    emailConfirmationUrl: await getConfigValue("cigarette_license_email_confirmation_url"),
+    emailConfirmationKey: await getConfigValue("cigarette_license_email_confirmation_key"),
+  };
+};
+
+export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicenseClient => {
   const preparePayment = async (
     userData: UserData,
     returnUrl: string,
   ): Promise<PreparePaymentResponse> => {
+    const config = await getConfig();
     const logId = logger.GetId();
     const postBody = makePostBody(userData, returnUrl, config);
 
@@ -73,6 +83,7 @@ export const ApiCigaretteLicenseClient = (
   };
 
   const getOrderByToken = async (token: string): Promise<GetOrderByTokenResponse> => {
+    const config = await getConfig();
     const logId = logger.GetId();
 
     logger.LogInfo(
@@ -121,10 +132,10 @@ export const ApiCigaretteLicenseClient = (
     userData: UserData,
     decryptedTaxId: string,
   ): Promise<EmailConfirmationResponse> => {
+    const config = await getConfig();
     const logId = logger.GetId();
     const currentBusiness = getCurrentBusiness(userData);
     const cigaretteLicenseData = currentBusiness.cigaretteLicenseData;
-    const cigLicenseEmailUrl = await getCigLicenseEmailUrl();
 
     if (!cigaretteLicenseData) {
       const errorMessage = `Cigarette License Client - Id:${logId} - cigarette license data is not defined`;
@@ -148,12 +159,12 @@ export const ApiCigaretteLicenseClient = (
 
     logger.LogInfo(
       `Cigarette License Client - Id:${logId} - Sending request to ${
-        cigLicenseEmailUrl
+        config.emailConfirmationUrl
       } data: ${JSON.stringify(postBody)}`,
     );
 
     return axios
-      .post(cigLicenseEmailUrl, postBody, {
+      .post(config.emailConfirmationUrl, postBody, {
         headers: {
           "Content-Type": "application/json",
           "x-api-key": config.emailConfirmationKey,
@@ -187,6 +198,7 @@ export const ApiCigaretteLicenseClient = (
   };
 
   const health: HealthCheckMethod = async (): Promise<HealthCheckMetadata> => {
+    const config = await getConfig();
     const userData = ApiCigaretteLicenseHealth;
     const postBody = makePostBody(userData, "returnUrl", config);
     const logId = logger.GetId();

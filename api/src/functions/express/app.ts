@@ -257,14 +257,7 @@ const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
 });
 const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
-const cigaretteLicenseClient = ApiCigaretteLicenseClient(logger, {
-  baseUrl: process.env.CIGARETTE_LICENSE_BASE_URL || "http://localhost:9000/cigarette-license",
-  apiKey: process.env.CIGARETTE_LICENSE_API_KEY || "",
-  merchantCode: process.env.CIGARETTE_LICENSE_MERCHANT_CODE || "",
-  merchantKey: process.env.CIGARETTE_LICENSE_MERCHANT_KEY || "",
-  serviceCode: process.env.CIGARETTE_LICENSE_SERVICE_CODE || "",
-  emailConfirmationKey: process.env.CIGARETTE_LICENSE_EMAIL_CONFIRMATION_KEY || "",
-});
+const cigaretteLicenseClient = ApiCigaretteLicenseClient(logger);
 const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
 
 const BUSINESS_NAME_BASE_URL =
