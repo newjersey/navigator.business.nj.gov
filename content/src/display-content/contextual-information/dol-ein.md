@@ -12,7 +12,7 @@ Your Department of Labor and Workforce Services (DOL) Employer Identification Nu
 
 &nbsp;
 
-It starts with 0, then your 12-digit NJ Tax ID, and ends with 00 (or a 2-digit code if your employee leasing company gave you one). Your NJ Tax ID is the number you use to pay your State taxes.
+It starts with 0, then your 12-digit NJ Tax ID, and ends with 00 (or a 2-digit code if your employee leasing company gave you one). Your NJ Tax ID is the number you use to pay State taxes.
 
 &nbsp;
 
@@ -22,11 +22,7 @@ If you **do** have an assigned 2-digit code, such as “15,” your DOL EIN woul
 
 &nbsp;
 
-Your DOL EIN is used to register for [Employer Access](https://www.nj.gov/labor/ea/employer-services/register-update/employeraccess.shtml).
-
-&nbsp;
-
-You may also see your DOL EIN referred to as your:
+You may also see your DOL EIN referred to as:
 
 * 15-digit Employer Identification Number (EIN)
 * NJ-EIN, or
