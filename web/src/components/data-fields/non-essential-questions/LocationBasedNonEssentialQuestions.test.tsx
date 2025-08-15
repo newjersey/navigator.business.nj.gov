@@ -1,5 +1,4 @@
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -12,6 +11,7 @@ import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
 import { OperatingPhase, OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 

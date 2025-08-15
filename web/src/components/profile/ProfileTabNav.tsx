@@ -1,7 +1,6 @@
 import { ProfileTab } from "@/components/profile/ProfileTab";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileTabs } from "@/lib/types/types";
 import {
   isNexusBusiness,
   isOwningBusiness,
@@ -9,6 +8,7 @@ import {
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext, useRef } from "react";
 

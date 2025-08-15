@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   allFormationLegalTypes,
   FormationLegalType,
 } from "@businessnjgovnavigator/shared/formationData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 
 const Config = getMergedConfig();
 

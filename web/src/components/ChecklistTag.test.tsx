@@ -1,4 +1,4 @@
-import { getMergedConfig } from "@/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { render, screen } from "@testing-library/react";
 import { ChecklistTag } from "./ChecklistTag";
 

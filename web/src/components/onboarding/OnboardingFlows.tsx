@@ -4,7 +4,7 @@ import { Industry } from "@/components/data-fields/Industry";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
-import { FlowType, OnboardingErrors } from "@/lib/types/types";
+import { FlowType, OnboardingErrors } from "@businessnjgovnavigator/shared/types";
 import { ReactNode } from "react";
 
 type OnboardingPage = {

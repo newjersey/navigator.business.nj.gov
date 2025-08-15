@@ -385,6 +385,7 @@ if (stage !== contentEnv && stage !== testEnv) {
   serverlessConfiguration.functions = {
     ...serverlessConfiguration.functions,
     healthCheck: healthCheck(
+      // registered here?
       env.CI
         ? {
             securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],

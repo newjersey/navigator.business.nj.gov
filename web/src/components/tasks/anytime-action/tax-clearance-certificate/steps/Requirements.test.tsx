@@ -1,7 +1,7 @@
-import { ConfigContext, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
+import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Requirements } from "./Requirements";
 

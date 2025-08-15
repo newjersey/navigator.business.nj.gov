@@ -1,6 +1,5 @@
 import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateAnytimeActionLicenseReinstatement,
@@ -14,6 +13,10 @@ import {
   generateLicenseDetails,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
+import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";

@@ -1,5 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
-import { ProfileTabs } from "@/lib/types/types";
 import { Business } from "@businessnjgovnavigator/shared";
 import {
   isDomesticEmployerBusiness,
@@ -8,6 +6,8 @@ import {
   isStartingBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { hasCompletedBusinessStructure } from "@businessnjgovnavigator/shared/domain-logic/hasCompletedBusinessStructure";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 
 const Config = getMergedConfig();
 

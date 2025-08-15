@@ -1,7 +1,5 @@
 import { SidebarCardFormationNudge } from "@/components/dashboard/SidebarCardFormationNudge";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
-import { SidebarCardContent } from "@/lib/types/types";
 import { generateRoadmap, generateSidebarCardContent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -12,7 +10,9 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
+import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

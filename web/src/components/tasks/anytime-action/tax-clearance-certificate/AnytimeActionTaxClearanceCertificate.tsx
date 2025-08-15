@@ -11,7 +11,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { emptyTaxClearanceCertificateData } from "@businessnjgovnavigator/shared";
 import {
@@ -20,6 +19,10 @@ import {
 } from "@businessnjgovnavigator/shared/formationData";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@businessnjgovnavigator/shared/types";
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 
 interface Props {

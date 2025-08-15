@@ -13,8 +13,8 @@ import {
   noneOfTheAbovePriorityId,
   priorityTypesObj,
 } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { CallToActionHyperlink } from "@/lib/types/types";
 import { openInNewTab, useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { CallToActionHyperlink } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 

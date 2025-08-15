@@ -2,12 +2,13 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { AnytimeActionLicenseReinstatementElement } from "@/components/tasks/anytime-action/AnytimeActionLicenseReinstatementElement";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+
 import {
-  AnytimeActionLicenseReinstatementUrlSlugParam,
+  AnytimeActionLicenseReinstatementUrlSlugParameter,
   loadAllAnytimeActionLicenseReinstatementsUrlSlugs,
   loadAnytimeActionLicenseReinstatementsByUrlSlug,
-} from "@/lib/static/loadAnytimeActionLicenseReinstatements";
-import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
+} from "@businessnjgovnavigator/shared/static";
+import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
@@ -32,7 +33,7 @@ const AnytimeActionLicenseReinstatementPage = (props: Props): ReactElement => {
 };
 
 export const getStaticPaths =
-  (): GetStaticPathsResult<AnytimeActionLicenseReinstatementUrlSlugParam> => {
+  (): GetStaticPathsResult<AnytimeActionLicenseReinstatementUrlSlugParameter> => {
     const paths = loadAllAnytimeActionLicenseReinstatementsUrlSlugs();
     return {
       paths,
@@ -43,7 +44,7 @@ export const getStaticPaths =
 export const getStaticProps = ({
   params,
 }: {
-  params: AnytimeActionLicenseReinstatementUrlSlugParam;
+  params: AnytimeActionLicenseReinstatementUrlSlugParameter;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {

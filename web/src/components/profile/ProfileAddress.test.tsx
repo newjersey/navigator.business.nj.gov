@@ -1,5 +1,4 @@
 import { ProfileAddress } from "@/components/profile/ProfileAddress";
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateAddress } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
@@ -9,6 +8,7 @@ import {
   emptyFormationAddressData,
 } from "@businessnjgovnavigator/shared/formationData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateFormationData,

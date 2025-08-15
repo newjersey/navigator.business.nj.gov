@@ -2,7 +2,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@/lib/types/types";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, RefObject } from "react";
 
 interface Props {

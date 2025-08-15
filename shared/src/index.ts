@@ -27,6 +27,7 @@ export * from "./industry";
 export * from "./intHelpers";
 export * from "./legalStructure";
 export * from "./license";
+export * from "./markdownReader";
 export * from "./municipality";
 export * from "./operatingPhase";
 export * from "./ownership";

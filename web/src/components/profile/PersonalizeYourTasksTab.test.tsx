@@ -1,7 +1,7 @@
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
-import { getMergedConfig } from "@/contexts/configContext";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import React from "react";

@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import * as getNonEssentialAddOnModule from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
@@ -19,6 +18,7 @@ import {
   emptyIndustrySpecificData,
   ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
   getNonEssentialQuestionAddOnWhenYes: jest.fn(),

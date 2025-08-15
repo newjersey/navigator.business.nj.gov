@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   defaultDateDelimiter,
   defaultDateFormat,
@@ -6,6 +5,7 @@ import {
   getCurrentDateInNewJersey,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import dayjs from "dayjs";
 
 const Config = getMergedConfig();

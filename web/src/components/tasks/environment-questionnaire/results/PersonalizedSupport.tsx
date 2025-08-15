@@ -1,6 +1,6 @@
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { getMergedConfig } from "@/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { ReactElement } from "react";
 
 export const PersonalizedSupport = (): ReactElement => {

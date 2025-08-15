@@ -1,3 +1,4 @@
+import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
 import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
@@ -8,15 +9,15 @@ import { housingRouterFactory } from "@api/housingRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
-import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
 import { userRouterFactory } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
+import { checkAnytimeActionCategoryUsage } from "@businessnjgovnavigator/api/src/cms-integrity-tests/anytimeActionCategoryUsage";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
+import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
-import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
@@ -85,6 +86,8 @@ import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
+
+checkAnytimeActionCategoryUsage();
 
 const app = setupExpress();
 
@@ -490,6 +493,7 @@ app.use(
 );
 app.use("/api", decryptionRouterFactory(AWSTaxIDEncryptionClient, logger));
 app.use(
+  // here we are setting up all the healthcheck endpoints for the application in general on the API express side.
   "/health",
   healthCheckRouterFactory(
     new Map<string, HealthCheckMethod>([

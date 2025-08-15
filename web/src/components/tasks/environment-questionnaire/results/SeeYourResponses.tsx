@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
 import {
   MediaArea,
@@ -8,6 +7,7 @@ import {
   QuestionnaireConfig,
   QuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared/environment";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { ReactElement, useContext } from "react";
 
 export const SeeYourResponses = (): ReactElement => {

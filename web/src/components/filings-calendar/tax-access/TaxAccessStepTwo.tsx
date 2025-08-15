@@ -20,7 +20,6 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
-import { FieldStateActionKind } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
@@ -30,6 +29,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { isOwningBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ReactElement, useState } from "react";
 

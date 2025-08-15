@@ -1,5 +1,5 @@
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
-import { Roadmap } from "@/lib/types/types";
+import { Roadmap } from "@businessnjgovnavigator/shared/src/types/types";
 import { EOL } from "os";
 
 describe("roadmapBuilder", () => {

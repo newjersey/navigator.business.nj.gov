@@ -11,16 +11,21 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
-import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
-import { loadAllCertifications } from "@/lib/static/loadCertifications";
-import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
-import { loadAllFundings } from "@/lib/static/loadFundings";
-import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { loadXrayRenewalCalendarEvent } from "@/lib/static/loadXrayRenewalCalendarEvent";
 
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+
+import { Municipality, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import {
+  loadAllAnytimeActionLicenseReinstatements,
+  loadAllAnytimeActionTasks,
+  loadAllCertifications,
+  loadAllFundings,
+  loadAllLicenseCalendarEvents,
+  loadAllMunicipalities,
+  loadOperateReferences,
+  loadRoadmapSideBarDisplayContent,
+  loadXrayRenewalCalendarEvent,
+} from "@businessnjgovnavigator/shared/static";
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -30,10 +35,7 @@ import {
   OperateReference,
   RoadmapDisplayContent,
   XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Municipality } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";

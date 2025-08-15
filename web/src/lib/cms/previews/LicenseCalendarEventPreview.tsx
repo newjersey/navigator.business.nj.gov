@@ -3,13 +3,13 @@ import { LicenseElement } from "@/components/tasks/license-calendar-event/Licens
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { LicenseEventType } from "@/lib/types/types";
 import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generateLicenseDetails,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
+import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const LicenseCalendarEventPreview = (props: PreviewProps): ReactElement => {

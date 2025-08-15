@@ -1,5 +1,4 @@
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
@@ -14,6 +13,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateProfileData,

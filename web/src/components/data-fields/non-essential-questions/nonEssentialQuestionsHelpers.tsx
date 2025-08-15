@@ -1,6 +1,6 @@
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { ProfileContentField } from "@/lib/types/types";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 export const NonEssentialQuestionForPersonas = (props: {

@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { MediaArea } from "@businessnjgovnavigator/shared/environment";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { ReactElement, useContext } from "react";
 
 export const ContactDep = (): ReactElement => {

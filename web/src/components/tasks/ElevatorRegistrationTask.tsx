@@ -13,7 +13,6 @@ import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesCo
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { ElevatorRegistrationSearchError, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
@@ -21,6 +20,7 @@ import {
   ElevatorSafetyAddress,
   ElevatorSafetyRegistrationSummary,
 } from "@businessnjgovnavigator/shared/elevatorSafety";
+import { ElevatorRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";

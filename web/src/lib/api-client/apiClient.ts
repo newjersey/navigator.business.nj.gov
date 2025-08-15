@@ -1,5 +1,4 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
-import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
   ElevatorSafetyRegistrationSummary,
@@ -16,6 +15,7 @@ import {
   UnlinkTaxIdResponse,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { SelfRegResponse } from "@businessnjgovnavigator/shared/types";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";

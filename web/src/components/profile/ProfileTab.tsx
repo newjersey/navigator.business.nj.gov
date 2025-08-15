@@ -1,5 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
-import { ProfileTabs } from "@/lib/types/types";
+import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, forwardRef } from "react";
 
 interface Props {

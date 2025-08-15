@@ -1,11 +1,10 @@
 import { Xray } from "@/components/xray/Xray";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { Task, XrayRenewalCalendarEventType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { generateTask, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateFormationData,
@@ -13,6 +12,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
+import { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
 import type { Business } from "@businessnjgovnavigator/shared/userData";
 import type { XrayData } from "@businessnjgovnavigator/shared/xray";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

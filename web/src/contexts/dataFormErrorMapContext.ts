@@ -1,5 +1,4 @@
 import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
-import { profileFieldsFromConfig, ReducedFieldStates } from "@/lib/types/types";
 import {
   BusinessUser,
   EmergencyTripPermitApplicationInfo,
@@ -14,6 +13,7 @@ import {
   RoadmapTaskData,
   TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
+import { profileFieldsFromConfig, ReducedFieldStates } from "@businessnjgovnavigator/shared/types";
 
 export type DataFormErrorMapFields =
   | keyof ProfileData

@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
-import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -13,6 +12,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateFormationData,

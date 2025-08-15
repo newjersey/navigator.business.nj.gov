@@ -12,11 +12,6 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   Business,
@@ -24,6 +19,11 @@ import {
   LookupLegalStructureById,
   LookupOperatingPhaseById,
 } from "@businessnjgovnavigator/shared";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 

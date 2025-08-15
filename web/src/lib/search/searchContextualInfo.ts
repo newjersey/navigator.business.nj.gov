@@ -1,6 +1,6 @@
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { ContextualInfoFile } from "@/lib/types/types";
+import { ContextualInfoFile } from "@businessnjgovnavigator/shared/types";
 
 export const searchContextualInfo = (
   contextualInfo: ContextualInfoFile[],

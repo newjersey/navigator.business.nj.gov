@@ -16,6 +16,7 @@ const healthCheckEndPoints: Record<string, string> = {
   xrayRegistration: "xray-registration",
 };
 
+// its pinging out live express app API endpoint and then logging to cloud watch specific details based on the reponse
 const healthCheck = async (type: string, url: string, logger: LogWriterType): Promise<Status> => {
   return axios
     .get(`${url}/health/${type}`)

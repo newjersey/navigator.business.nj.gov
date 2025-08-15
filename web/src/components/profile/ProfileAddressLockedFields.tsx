@@ -1,9 +1,9 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
 import { AddressContext } from "@/contexts/addressContext";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationBusinessLocationType } from "@businessnjgovnavigator/shared/formationData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {

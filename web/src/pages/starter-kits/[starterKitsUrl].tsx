@@ -1,14 +1,12 @@
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { StarterKitsBody } from "@/components/starter-kits/StarterKitsBody";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createStarterKitProfileData,
   insertIndustryContent,
   insertRoadmapSteps,
 } from "@/lib/domain-logic/starterKits";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { Roadmap } from "@/lib/types/types";
 import {
   getAllStarterKitUrls,
   STARTER_KITS_GENERIC_SLUG,
@@ -16,6 +14,8 @@ import {
 } from "@/lib/utils/starterKits";
 import { emptyRoadmapTaskData, Industry } from "@businessnjgovnavigator/shared";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { Roadmap } from "@businessnjgovnavigator/shared/types";
 import type { GetStaticPathsResult } from "next";
 import type { ReactElement } from "react";
 

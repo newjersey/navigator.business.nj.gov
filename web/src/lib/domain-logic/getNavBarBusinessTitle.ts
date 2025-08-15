@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   Business,
   LookupIndustryById,
@@ -9,6 +8,7 @@ import {
   isOwningBusiness,
   isRemoteWorkerOrSellerBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 
 export const getNavBarBusinessTitle = (
   business: Business | undefined,

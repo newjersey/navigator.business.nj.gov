@@ -7,7 +7,6 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { IndustryRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
 import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
 import { searchBusinessFormation } from "@/lib/search/searchBusinessFormation";
@@ -26,35 +25,34 @@ import { searchTaxFilings } from "@/lib/search/searchTaxFilings";
 import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
-import { loadAllAddOns } from "@/lib/static/loadAllAddOns";
-import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
-import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
+import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
+import DomesticEmployerSteps from "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json";
+import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
+import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
+import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
 import {
+  loadAllAddOns,
+  loadAllAnytimeActionLicenseReinstatements,
+  loadAllAnytimeActionTasks,
   loadAllArchivedCertifications,
-  loadAllCertifications,
-} from "@/lib/static/loadCertifications";
-import { loadCmsConfig } from "@/lib/static/loadCmsConfig";
-import {
   loadAllArchivedContextualInfo,
+  loadAllCertifications,
   loadAllContextualInfo,
-} from "@/lib/static/loadContextualInfo";
-import {
-  loadFormationDbaContent,
-  loadRoadmapSideBarDisplayContent,
-} from "@/lib/static/loadDisplayContent";
-import { loadAllFilings } from "@/lib/static/loadFilings";
-import { loadAllFundings } from "@/lib/static/loadFundings";
-import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
-import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
-import {
-  loadAllEnvTasks,
+  loadAllEnvironmentTasks,
+  loadAllFilings,
+  loadAllFundings,
+  loadAllLicenseCalendarEvents,
   loadAllLicenseTasks,
   loadAllMunicipalTasks,
+  loadAllPageMetadata,
   loadAllRaffleBingoSteps,
   loadAllTasksOnly,
-} from "@/lib/static/loadTasks";
-import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
-import { loadXrayRenewalCalendarEvent } from "@/lib/static/loadXrayRenewalCalendarEvent";
+  loadAllWebflowLicenses,
+  loadCmsConfig,
+  loadFormationDbaContent,
+  loadRoadmapSideBarDisplayContent,
+  loadXrayRenewalCalendarEvent,
+} from "@businessnjgovnavigator/shared/static";
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -63,6 +61,7 @@ import {
   Filing,
   FormationDbaDisplayContent,
   Funding,
+  IndustryRoadmap,
   LicenseEventType,
   NonEssentialQuestion,
   PageMetadata,
@@ -73,12 +72,7 @@ import {
   TaskWithoutLinks,
   WebflowLicense,
   XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
-import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
-import DomesticEmployerSteps from "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json";
-import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
-import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
-import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
+} from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -462,7 +456,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       licenseTasks: loadAllLicenseTasks(),
       raffleBingoSteps: loadAllRaffleBingoSteps(),
       municipalTasks: loadAllMunicipalTasks(),
-      envTasks: loadAllEnvTasks(),
+      envTasks: loadAllEnvironmentTasks(),
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),
       fundings: loadAllFundings(),

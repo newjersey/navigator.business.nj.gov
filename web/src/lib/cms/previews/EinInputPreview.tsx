@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { EinDisplay } from "@/components/tasks/EinDisplay";
 import { EinInput } from "@/components/tasks/EinInput";
-import { ConfigContext } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement } from "react";
 
 const EinInputPreview = (props: PreviewProps): ReactElement => {

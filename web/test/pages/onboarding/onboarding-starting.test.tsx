@@ -1,5 +1,4 @@
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
-import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -24,6 +23,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 

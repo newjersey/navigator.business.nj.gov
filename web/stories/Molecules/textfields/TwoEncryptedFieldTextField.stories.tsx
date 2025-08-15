@@ -1,7 +1,6 @@
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -12,9 +11,13 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  ConfigContext,
+  ConfigType,
+  getMergedConfig,
+} from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-
 const Template = () => {
   const taxId = "2";
   const [config, setConfig] = useState<ConfigType>(getMergedConfig());

@@ -1,5 +1,9 @@
-import { FieldErrorType, FieldStateActionKind, FormContextType } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
+import {
+  FieldErrorType,
+  FieldStateActionKind,
+  FormContextType,
+} from "@businessnjgovnavigator/shared/types";
 import { Context, useContext, useEffect, useMemo } from "react";
 
 const debug = false;

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { displayContent } from "@/components/tasks/business-formation/contacts/testHelpers";
-import { getMergedConfig } from "@/contexts/configContext";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import {
   FormationPageHelpers,
@@ -13,6 +12,7 @@ import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { screen } from "@testing-library/react";
