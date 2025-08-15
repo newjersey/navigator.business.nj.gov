@@ -1,7 +1,7 @@
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   filterRandomIndustry,
   generateBusiness,

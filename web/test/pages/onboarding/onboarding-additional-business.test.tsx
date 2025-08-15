@@ -16,7 +16,7 @@ import {
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";

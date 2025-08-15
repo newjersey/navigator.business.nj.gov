@@ -7,7 +7,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { selectByValue } from "@/test/pages/profile/profile-helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateProfileData,

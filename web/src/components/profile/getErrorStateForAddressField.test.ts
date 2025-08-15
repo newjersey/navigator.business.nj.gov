@@ -5,7 +5,7 @@ import {
 } from "@/lib/utils/formation-helpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateAddress } from "@/test/factories";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 const Config = getMergedConfig();
 

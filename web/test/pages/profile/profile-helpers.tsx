@@ -18,9 +18,9 @@ import {
   ProfileData,
   TaskProgress,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";

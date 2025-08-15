@@ -4,11 +4,11 @@ import {
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";
 import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   isOwningBusiness,
   isRemoteWorkerOrSellerBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 
 export const getNavBarBusinessTitle = (
   business: Business | undefined,

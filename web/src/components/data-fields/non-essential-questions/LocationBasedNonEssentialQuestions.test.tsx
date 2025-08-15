@@ -9,9 +9,9 @@ import { randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/fact
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { OperatingPhase, OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 

@@ -22,8 +22,8 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 

@@ -1,6 +1,6 @@
 import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
 import { Business, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FlowType, Page } from "@businessnjgovnavigator/shared/src/types/types";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { getFlow, templateEval } from "./helpers";

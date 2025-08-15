@@ -1,7 +1,7 @@
 import { LoginEmailCheck } from "@/components/LoginEmailCheck";
 import * as api from "@/lib/api-client/apiClient";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

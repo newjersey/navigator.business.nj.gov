@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertTaskMd } from "../markdownReader";
 import { Task, TaskDependencies, TaskLink, TaskWithoutLinks } from "../types/types";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";

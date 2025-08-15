@@ -8,8 +8,8 @@ import {
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@/lib/utils/formation-helpers";
 import { templateEval } from "@/lib/utils/helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FormationAddress } from "@businessnjgovnavigator/shared/index";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   AddressFieldErrorState,
   AddressFields,

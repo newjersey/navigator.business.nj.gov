@@ -3,8 +3,8 @@ import * as api from "@/lib/api-client/apiClient";
 import analytics from "@/lib/utils/analytics";
 import { generateTask, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateFormationData,

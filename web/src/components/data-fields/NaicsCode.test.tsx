@@ -12,7 +12,7 @@ import {
   TaxFilingState,
 } from "@businessnjgovnavigator/shared";
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 

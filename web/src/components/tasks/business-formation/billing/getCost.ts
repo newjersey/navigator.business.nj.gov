@@ -1,5 +1,5 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FormationLegalType } from "@businessnjgovnavigator/shared/formationData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 
 const Config = getMergedConfig();
 

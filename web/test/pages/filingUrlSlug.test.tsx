@@ -9,7 +9,7 @@ import {
   getCurrentDate,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Filing, taxFilingMethod } from "@businessnjgovnavigator/shared/types";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";

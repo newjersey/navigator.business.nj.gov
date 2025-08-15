@@ -15,7 +15,7 @@ import analytics from "@/lib/utils/analytics";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { useMediaQuery } from "@mui/material";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";

@@ -20,12 +20,12 @@ import {
   generateProfileData,
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared/";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import {
   ConfigContext,
   ConfigType,
   getMergedConfig,
-} from "@businessnjgovnavigator/shared/src/contexts/configContext";
+} from "@businessnjgovnavigator/shared/contexts";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { createEmptyDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";

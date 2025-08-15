@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { loadFormationDbaContent, loadRoadmapSideBarDisplayContent } from "./loadDisplayContent";
 import { mockReadDirectoryReturn } from "./mockHelpers";
 

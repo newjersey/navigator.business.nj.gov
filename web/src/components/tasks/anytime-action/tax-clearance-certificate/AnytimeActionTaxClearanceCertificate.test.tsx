@@ -33,7 +33,7 @@ import {
   TaxClearanceCertificateResponse,
   TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";

@@ -1,13 +1,13 @@
 import { Content } from "@/components/Content";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   MediaArea,
   Questionnaire,
   QuestionnaireConfig,
   QuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared/environment";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { ReactElement, useContext } from "react";
 
 export const SeeYourResponses = (): ReactElement => {

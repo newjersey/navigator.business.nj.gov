@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertCertificationMd } from "../markdownReader";
 import { Certification } from "../types/types";
 import { getFileNameByUrlSlug } from "./helpers";

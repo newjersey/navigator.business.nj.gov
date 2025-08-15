@@ -24,8 +24,8 @@ import {
   PublicFilingLegalType,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 

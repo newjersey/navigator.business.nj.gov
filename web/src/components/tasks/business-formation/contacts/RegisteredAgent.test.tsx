@@ -3,7 +3,7 @@ import { getPageHelper } from "@/components/tasks/business-formation/contacts/te
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 
 import { generateMunicipality } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { screen, waitFor } from "@testing-library/react";
 

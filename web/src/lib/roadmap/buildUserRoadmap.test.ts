@@ -12,13 +12,13 @@ import {
   LegalStructures,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
   ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
   getNonEssentialQuestionAddOnWhenYes: jest.fn(),

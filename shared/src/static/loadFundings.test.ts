@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { loadAllFundings, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "./loadFundings";
 import { mockReadDirectoryReturn } from "./mockHelpers";
 

@@ -10,12 +10,12 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import {
   ConfigContext,
   ConfigType,
   getMergedConfig,
-} from "@businessnjgovnavigator/shared/src/contexts/configContext";
+} from "@businessnjgovnavigator/shared/contexts";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 const Template = () => {

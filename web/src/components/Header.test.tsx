@@ -11,9 +11,9 @@ import {
   getCurrentDateInNewJersey,
   randomInt,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateProfileData,

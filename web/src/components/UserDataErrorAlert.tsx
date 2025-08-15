@@ -1,6 +1,6 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 

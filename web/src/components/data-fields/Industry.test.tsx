@@ -14,13 +14,13 @@ import {
   generateProfileData,
   randomIndustry,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   ProfileData,
   createEmptyProfileData,
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/profileData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 

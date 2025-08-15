@@ -1,7 +1,7 @@
 import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

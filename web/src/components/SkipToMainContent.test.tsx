@@ -1,6 +1,6 @@
 import { SkipToMainContent } from "@/components/SkipToMainContent";
 import analytics from "@/lib/utils/analytics";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

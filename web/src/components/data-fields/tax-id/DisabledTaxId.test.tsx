@@ -2,7 +2,7 @@ import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import * as api from "@/lib/api-client/apiClient";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

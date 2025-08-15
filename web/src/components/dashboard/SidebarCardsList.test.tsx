@@ -10,8 +10,8 @@ import {
 } from "@/test/factories";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { OperatingPhaseId, OperatingPhases, generateUser } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";

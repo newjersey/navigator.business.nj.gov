@@ -1,6 +1,6 @@
-import fs from "fs";
 import * as yaml from "js-yaml";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 const configPath = path.join(process.cwd(), "public", "mgmt", "config.yml");
 

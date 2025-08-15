@@ -87,9 +87,9 @@ import {
   naicsCodeTaskId,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
 import { OnboardingStatus, ProfileTabs, profileTabs } from "@businessnjgovnavigator/shared/types";
 import deepEqual from "fast-deep-equal/es6/react";

@@ -5,7 +5,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement, useState } from "react";

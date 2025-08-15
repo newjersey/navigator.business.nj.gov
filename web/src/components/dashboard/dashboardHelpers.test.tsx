@@ -2,8 +2,8 @@ import {
   getPersonalizeTaskButtonTabValue,
   getRoadmapHeadingText,
 } from "@/components/dashboard/dashboardHelpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateProfileData,

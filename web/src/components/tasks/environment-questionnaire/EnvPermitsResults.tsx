@@ -6,7 +6,7 @@ import { ContactDep } from "@/components/tasks/environment-questionnaire/results
 import { PersonalizedSupport } from "@/components/tasks/environment-questionnaire/results/PersonalizedSupport";
 import { SeeYourResponses } from "@/components/tasks/environment-questionnaire/results/SeeYourResponses";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement, useContext } from "react";
 
 export const EnvPermitsResults = (): ReactElement => {

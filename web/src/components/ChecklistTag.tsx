@@ -1,6 +1,6 @@
 import { Icon } from "@/components/njwds/Icon";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { CheckoffStatus } from "@businessnjgovnavigator/shared/license";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { ReactElement } from "react";
 
 interface Props {

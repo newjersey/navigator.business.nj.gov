@@ -6,7 +6,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { convertTaskMd } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateUserData } from "@businessnjgovnavigator/shared/test";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

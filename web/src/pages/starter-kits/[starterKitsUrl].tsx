@@ -13,8 +13,8 @@ import {
   StarterKitsUrl,
 } from "@/lib/utils/starterKits";
 import { emptyRoadmapTaskData, Industry } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { Roadmap } from "@businessnjgovnavigator/shared/types";
 import type { GetStaticPathsResult } from "next";
 import type { ReactElement } from "react";

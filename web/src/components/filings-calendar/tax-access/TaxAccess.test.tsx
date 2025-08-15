@@ -8,8 +8,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateProfileData,

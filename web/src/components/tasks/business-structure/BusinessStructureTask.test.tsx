@@ -11,8 +11,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateBusiness,
   generateFormationData,

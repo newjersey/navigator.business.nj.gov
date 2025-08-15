@@ -1,7 +1,7 @@
 import { XrayStatus } from "@/components/xray/XrayStatus";
 import { generateEmptyFormationData } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateFormationData,

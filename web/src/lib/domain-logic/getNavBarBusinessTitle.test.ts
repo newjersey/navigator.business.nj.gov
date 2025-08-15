@@ -10,7 +10,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 
 const Config = getMergedConfig();

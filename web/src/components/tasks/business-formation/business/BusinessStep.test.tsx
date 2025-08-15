@@ -26,11 +26,11 @@ import {
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   corpLegalStructures,
   publicFilingLegalTypes,
 } from "@businessnjgovnavigator/shared/formationData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import { defaultDisplayDateFormat } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";

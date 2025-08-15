@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { Municipality, MunicipalityDetail } from "../municipality";
 
 const recordsDirectory = path.join(process.cwd(), "../shared/src/static");

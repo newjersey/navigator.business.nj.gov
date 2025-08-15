@@ -16,7 +16,7 @@ import {
   generateUser,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";

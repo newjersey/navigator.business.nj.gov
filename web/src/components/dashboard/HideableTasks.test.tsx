@@ -6,7 +6,7 @@ import {
   WithStatefulUserData,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generatePreferences,

@@ -27,8 +27,8 @@ import {
   TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
 import {
   generateLicenseData,
   generatePreferences,

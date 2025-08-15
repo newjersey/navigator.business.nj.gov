@@ -20,7 +20,7 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import {
   Certification,

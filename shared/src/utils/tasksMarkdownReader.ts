@@ -1,6 +1,6 @@
-import fs from "fs";
 import matter from "gray-matter";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { LicenseName } from "../license";
 import {
   AnytimeActionCategoryMapping,

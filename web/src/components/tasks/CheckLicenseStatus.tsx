@@ -9,7 +9,7 @@ import {
   LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LicenseSearchError } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
