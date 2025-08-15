@@ -22,10 +22,6 @@ If you **do** have an assigned 2-digit code, such as “15,” your DOL EIN woul
 
 &nbsp;
 
-Your DOL EIN is used to register for [Employer Access](https://www.nj.gov/labor/ea/employer-services/register-update/employeraccess.shtml).
-
-&nbsp;
-
 You may also see your DOL EIN referred to as your:
 
 * 15-digit Employer Identification Number (EIN)
