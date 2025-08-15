@@ -22,7 +22,7 @@ If you **do** have an assigned 2-digit code, such as “15,” your DOL EIN woul
 
 &nbsp;
 
-You may also see your DOL EIN referred to as your:
+You may also see your DOL EIN referred to as:
 
 * 15-digit Employer Identification Number (EIN)
 * NJ-EIN, or
