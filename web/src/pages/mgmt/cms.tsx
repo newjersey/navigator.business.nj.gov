@@ -45,6 +45,7 @@ import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPrevie
 import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
 import NjedaPreview from "@/lib/cms/previews/NjedaPreview";
 import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
+import PassengerTransportCdlPreview from "@/lib/cms/previews/PassengerTransportCdlPreview";
 import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
@@ -60,7 +61,6 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
-import PassengerTransportCdlPreview from "@/lib/cms/previews/PassengerTransportCdlPreview";
 
 const CMS_CONFIG = {};
 const Loading = (): ReactElement => {
@@ -123,6 +123,7 @@ const CMS = dynamic(
 
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-step2", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-step3", CigaretteLicensePreview);
 
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
 

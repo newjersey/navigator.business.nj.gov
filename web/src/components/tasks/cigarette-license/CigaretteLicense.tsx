@@ -110,6 +110,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
       return profileData;
     });
   };
+  console.log(formContextState);
 
   useMountEffectWhenDefined(() => {
     if (business && userData) {

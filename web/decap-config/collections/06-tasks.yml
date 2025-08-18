@@ -1098,18 +1098,42 @@ collections:
                   widget: "string",
                   required: true,
                 }
-              - {
-                  label: "Cigarette Sales Start Date Label",
-                  name: "salesStartDateLabel",
-                  widget: "string",
-                  required: true,
-                }
-              - {
-                  label: "Select Supplier Dropdown Label",
-                  name: "selectSupplierLabel",
-                  widget: "string",
-                  required: true,
-                }
+              - label: "Fields"
+                name: "fields"
+                widget: "object"
+                fields:
+                  - label: "Start Date of Sales"
+                    name: "startDateOfSales"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+                      - label: "Error Validation Text"
+                        name: "errorValidationText"
+                        widget: "string"
+                        required: true
+                  - label: "Select A Supplier"
+                    name: "selectSupplierLabel"
+                    widget: "object"
+                    fields:
+                      - label: "Label"
+                        name: "label"
+                        widget: "string"
+                        required: true
+                      - label: "Error Required Text"
+                        name: "errorRequiredText"
+                        widget: "string"
+                        required: true
+                      - label: "Error Validation Text"
+                        name: "errorValidationText"
+                        widget: "string"
+                        required: true
               - {
                   label: "Back Button Text",
                   name: "backButtonText",

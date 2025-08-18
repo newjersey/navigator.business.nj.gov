@@ -175,6 +175,66 @@ describe("<CigaretteLicense />", () => {
       });
     });
 
+    describe("Sales Info validations", () => {
+      const renderComponentOnStep3 = (): void => {
+        const business = generateBusiness({
+          profileData: emptyProfileData,
+          formationData: generateFormationData({
+            formationFormData: createEmptyFormationFormData(),
+          }),
+        });
+        renderComponent(business);
+
+        const thirdTab = screen.getByRole("tab", { name: /Sales Info/ });
+        fireEvent.click(thirdTab);
+        expect(thirdTab).toHaveAttribute("aria-selected", "true");
+      };
+
+      it("renders error for sales info start date when empty and onBlur", () => {
+        renderComponentOnStep3();
+
+        //TODO: replace with config references?
+        fillText("Start Date of Cigarette Sales", "");
+        fireEvent.blur(screen.getByLabelText("Start Date of Cigarette Sales"));
+
+        expect(
+          screen.getByText(Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText),
+        ).toBeInTheDocument();
+      });
+
+      it("renders error for sales info start date when date is invalid", () => {
+        renderComponentOnStep3();
+
+        fillText("Start Date of Cigarette Sales", "1");
+        fireEvent.blur(screen.getByLabelText("Start Date of Cigarette Sales"));
+
+        expect(
+          screen.getByText(Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText),
+        ).toBeInTheDocument();
+      });
+
+      it("clears error for sales info start date when valid", () => {
+        renderComponentOnStep3();
+        fillText("Start Date of Cigarette Sales", "1");
+        fireEvent.blur(screen.getByLabelText("Start Date of Cigarette Sales"));
+        fireEvent.click(screen.getByLabelText(/Choose date/));
+        const dateButton = screen.getByRole("gridcell");
+        fireEvent.click(dateButton);
+        expect(
+          screen.getByText(Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText),
+        ).toNotBeInTheDocument();
+      });
+
+      // t("renders error for select supplier start date", () => {
+      //   renderComponentOnStep3();
+
+      //   fillText("Select a Supplier", "");
+      //   fireEvent.blur(screen.getByLabelText("Select a Supplier"));
+
+      //   // expect(screen.getByText("WRONG")).toBeInTheDocument();
+      // });
+    });
+
     describe("Business name field visibility based on business type", () => {
       const renderComponentOnStep2WithBusinessType = (legalStructureId: string): void => {
         const business = generateBusiness({
