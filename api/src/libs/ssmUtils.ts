@@ -12,17 +12,6 @@ export type CONFIG_VARS =
   | "cigarette_license_email_confirmation_url"
   | "cigarette_license_email_confirmation_key";
 
-const WIREMOCK_VALUES: Record<CONFIG_VARS, string> = {
-  cigarette_license_base_url: "http://localhost:9000/cigarette-license",
-  cigarette_license_api_key: "mock-api-key-12345",
-  cigarette_license_merchant_code: "MOCK_MERCHANT_001",
-  cigarette_license_merchant_key: "mock-merchant-key-abcdef",
-  cigarette_license_service_code: "MOCK_SERVICE_CODE",
-  cigarette_license_email_confirmation_url:
-    "http://localhost:9000/cigarette-license/send-email-confirmation",
-  cigarette_license_email_confirmation_key: "mock-confirmation-key-xyz789",
-};
-
 let cache: {
   value?: boolean;
   expiresAt?: number;
@@ -30,11 +19,6 @@ let cache: {
 
 export const getConfigValue = async (paramName: CONFIG_VARS): Promise<string> => {
   try {
-    if (process.env.STAGE === "local") {
-      const mockValue = WIREMOCK_VALUES[paramName];
-      return mockValue;
-    }
-
     const ssmPath = `/${process.env.STAGE}/${paramName}`;
     const command = new GetParameterCommand({
       Name: ssmPath,
