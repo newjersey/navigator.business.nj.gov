@@ -9,7 +9,12 @@ summaryDescriptionMd: >+
   :::infoAlert 
    **Keep in mind:**
 
-  This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/wastedecals/commercial-solid-waste-transporters/).
+  * In order for your registration application to approved you need to send a Tax Clerance Certifiacte that proves that your business is in good standing with your taxes
+
+  * You can only get Self-generator decals if your business vehicles are registeres a commercial vehicles
+
+  * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/wastedecals/commercial-solid-waste-transporters/).
+
 
   :::
 
@@ -77,8 +82,8 @@ Trenton, NJ 08625-0420
 :::infoAlert 
  **After you apply:**
 
-* Application approved: You will get a bill (pay online or by check). You will receive your decals (in 8–10 weeks). Do not transport waste until you get them.
-* Application not approved or incomplete:  NJDEP will email you with the next steps or missing info.
+* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them.
+* Application not approved or incomplete: NJDEP will email you with the next steps or missing info.
   :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
