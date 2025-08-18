@@ -1223,6 +1223,150 @@ collections:
                   widget: "string",
                   required: true,
                 }
+              - {
+                  label: "Alert Submission Error",
+                  name: "alertPaymentError",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Alert Invalid Fields Error",
+                  name: "alertInvalidFields",
+                  widget: "markdown",
+                  required: true,
+                }
+              - label: "Alert Field Names"
+                name: "alertFieldNames"
+                collapsed: true
+                widget: object
+                fields:
+                  - {
+                      label: "Business Name Field Label",
+                      name: "businessName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Responsible Owner Name Field Label",
+                      name: "responsibleOwnerName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Trade Name Field Label",
+                      name: "tradeName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - { label: "Tax ID Field Label", name: "taxId", widget: "string", required: true }
+                  - {
+                      label: "Address Line 1 Field Label",
+                      name: "addressLine1",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address Line 2 Field Label",
+                      name: "addressLine2",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address City Field Label",
+                      name: "addressCity",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address State Field Label",
+                      name: "addressState",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address ZIP Code Field Label",
+                      name: "addressZipCode",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address Line 1 Field Label",
+                      name: "mailingAddressLine1",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address Line 2 Field Label",
+                      name: "mailingAddressLine2",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address City Field Label",
+                      name: "mailingAddressCity",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address State Field Label",
+                      name: "mailingAddressState",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address ZIP Code Field Label",
+                      name: "mailingAddressZipCode",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Contact Name Field Label",
+                      name: "contactName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Contact Phone Number Field Label",
+                      name: "contactPhoneNumber",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Contact Email Field Label",
+                      name: "contactEmail",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Sales Start Date Field Label",
+                      name: "salesInfoStartDate",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Suppliers Field Label",
+                      name: "salesInfoSupplier",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Signer Name Field Label",
+                      name: "signerName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Signer Relationship Field Label",
+                      name: "signerRelationship",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Signature Field Label",
+                      name: "signature",
+                      widget: "string",
+                      required: true,
+                    }
       - label: "Cigarette License Confirmation"
         name: "cigaretteLicense-confirmation"
         file: "content/src/fieldConfig/cigarette-license-confirmation.json"

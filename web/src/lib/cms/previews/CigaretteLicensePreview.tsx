@@ -1,4 +1,5 @@
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
+import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
@@ -33,6 +34,42 @@ const CigaretteLicensePreview = (props: PreviewProps): ReactElement => {
         {tab === "shared" && (
           <>
             <CigaretteLicense task={task} />
+            <div className="margin-top-8">
+              <p>
+                <strong>Example Alert with all field errors</strong>
+              </p>
+              <CigaretteLicenseAlert
+                fieldErrors={[
+                  "businessName",
+                  "responsibleOwnerName",
+                  "tradeName",
+                  "taxId",
+                  "addressLine1",
+                  "addressLine2",
+                  "addressCity",
+                  "addressState",
+                  "addressZipCode",
+                  "mailingAddressLine1",
+                  "mailingAddressLine2",
+                  "mailingAddressCity",
+                  "mailingAddressState",
+                  "mailingAddressZipCode",
+                  "contactName",
+                  "contactPhoneNumber",
+                  "contactEmail",
+                  "salesInfoStartDate",
+                  "salesInfoSupplier",
+                  "signerName",
+                  "signerRelationship",
+                  "signature",
+                ]}
+                setStepIndex={() => null}
+              />
+              <p>
+                <strong>Example Alert with submission error</strong>
+              </p>
+              <CigaretteLicenseAlert fieldErrors={[]} setStepIndex={() => null} hasResponseError />
+            </div>
           </>
         )}
       </div>
