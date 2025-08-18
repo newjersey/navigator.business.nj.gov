@@ -16,6 +16,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { StepperStep, Task } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
 import {
   CigaretteLicenseData,
   emptyCigaretteLicenseData,
@@ -37,7 +38,8 @@ type Props = {
 export const CigaretteLicense = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
-  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+  const { getInvalidFieldIds, state: formContextState } =
+    useFormContextHelper(createDataFormErrorMap());
 
   const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);
   const [formationAddressData, setAddressData] =
@@ -199,6 +201,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
   return (
     <>
       <TaskHeader task={props.task} />
+      <CigaretteLicenseAlert fieldErrors={getInvalidFieldIds()} setStepIndex={setStepIndex} />
       <HorizontalStepper
         steps={stepperSteps}
         currentStep={stepIndex}

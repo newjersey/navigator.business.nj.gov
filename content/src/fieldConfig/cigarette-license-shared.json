@@ -5,6 +5,32 @@
     "stepperThreeLabel": "Sales Info",
     "stepperFourLabel": "Review & Pay",
     "issuingAgencyText": "NJ Division of Revenue and Enterprise Services",
-    "issuingAgencyLabelText": "Issuing Agency"
+    "issuingAgencyLabelText": "Issuing Agency",
+    "alertPaymentError": "**This service is temporarily unavailable.** Try again later.",
+    "alertInvalidFields": "**Missing or invalid information.** Review the following fields:",
+    "alertFieldNames": {
+      "businessName": "Business Name",
+      "responsibleOwnerName": "Responsible Owner Name",
+      "tradeName": "Trade Name",
+      "taxId": "Tax ID",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "addressCity": "City",
+      "addressState": "State",
+      "addressZipCode": "ZIP Code",
+      "mailingAddressLine1": "Mailing Address Line 1",
+      "mailingAddressLine2": "Mailing Address Line 2",
+      "mailingAddressCity": "Mailing City",
+      "mailingAddressState": "Mailing State",
+      "mailingAddressZipCode": "Mailing ZIP Code",
+      "contactName": "Contact Name",
+      "contactPhoneNumber": "Contact Phone Number",
+      "contactEmail": "Contact Email",
+      "salesInfoStartDate": "Sales Start Date",
+      "salesInfoSupplier": "Suppliers",
+      "signerName": "Signer Name",
+      "signerRelationship": "Signer Relationship",
+      "signature": "Signature"
+    }
   }
 }
