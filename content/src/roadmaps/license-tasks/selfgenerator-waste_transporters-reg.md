@@ -80,18 +80,18 @@ Trenton, NJ 08625-0420
 :::infoAlert
  **After you apply:**
 
-* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them.
-* Application not approved or incomplete: NJDEP will email you with the next steps or missing info.
+* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them
+* Application not approved or incomplete: NJDEP will email you with the next steps or missing info
   :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If you don’t register, you cannot legally transport waste, and you may be subject to significant fines.
+If you don’t register, you cannot legally transport waste, and you may be subject to significant fines
 
 :::
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A registration and decals for your waste transport vehicles.
+A registration and decals for your waste transport vehicles
 
 :::
