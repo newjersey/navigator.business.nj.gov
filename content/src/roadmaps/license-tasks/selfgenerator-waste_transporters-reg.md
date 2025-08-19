@@ -77,7 +77,7 @@ Bureau of Licensing & Registrations
 
 Trenton, NJ 08625-0420
 
-:::infoAlert\
+:::infoAlert
  **After you apply:**
 
 * Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them.
