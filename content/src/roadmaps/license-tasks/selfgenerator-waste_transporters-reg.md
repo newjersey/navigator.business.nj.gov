@@ -80,8 +80,8 @@ Trenton, NJ 08625-0420
 :::infoAlert
  **After you apply:**
 
-* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them
-* Application not approved or incomplete: NJDEP will email you with the next steps or missing info
+* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them.
+* Application not approved or incomplete: NJDEP will email you with the next steps or missing information
   :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
