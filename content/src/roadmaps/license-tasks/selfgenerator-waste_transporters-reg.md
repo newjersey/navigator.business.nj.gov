@@ -9,9 +9,9 @@ summaryDescriptionMd: >-
   :::infoAlert 
    **Keep in mind:**
 
-  * To register, you have to get a Tax Clearance Certificate. This document shows that your business is in good standing with taxes
+  * To register, you have to get a [tax clearance certificate](/actions/tax-clearance-certificate-apply). This document shows that your business is in good standing with taxes
 
-  * You can only get registration decals for business vehicles registered as commercial vehicles
+  * You can only get registration decals for [business vehicles registered as commercial vehicles](https://www.nj.gov/mvc/vehicles/commvehinfo.htm#39)
 
   * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/wastedecals/commercial-solid-waste-transporters/).
 
@@ -58,8 +58,8 @@ divisionPhone: (609) 292-7081
 * Notarized affidavit stating you only transport your waste that you generated (included in the application form)
 * Valid insurance information for all vehicles
 * Valid motor vehicle registrations for all vehicles (must be registered as Commercial)
-* A copy of the [Tax clearance certificate](/actions/tax-clearance-certificate-apply)
-* A Copy of [Lease Agreement and Certification](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf) for any leased vehicles signed by lessor and lessee
+* A copy of your tax clearance certificate
+* A Copy of the [lease agreement and certification](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf) for any leased vehicles signed by lessor and lessee
 
 **Note:** Some industries may need to submit extra documents. You can check the specific requirements in the application form.
 
@@ -77,7 +77,7 @@ Bureau of Licensing & Registrations
 
 Trenton, NJ 08625-0420
 
-:::infoAlert  
+:::infoAlert\
  **After you apply:**
 
 * Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them.
