@@ -9,7 +9,7 @@ summaryDescriptionMd: >-
   :::infoAlert 
    **Keep in mind:**
 
-  * To get your registration approved, you must get a Tax Clearance Certificate that shows that your business is in good standing with taxes
+  * To register, you have to get a Tax Clearance Certificate. This document shows that your business is in good standing with taxes
 
   * You can only get registration decals for business vehicles registered as commercial vehicles
 
