@@ -2,8 +2,8 @@ import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { Certification } from "@/lib/types/types";
 import { CertificationElement } from "@/pages/certification/[certificationUrlSlug]";
+import { Certification } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const CertificationsPreview = (props: PreviewProps): ReactElement => {

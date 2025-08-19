@@ -1,6 +1,6 @@
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
+import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
 
 export const searchAnytimeActionLicenseReinstatements = (
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[],

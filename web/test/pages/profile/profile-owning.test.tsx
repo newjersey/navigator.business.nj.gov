@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect */
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
@@ -24,6 +23,7 @@ import {
   LookupSectorTypeById,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";

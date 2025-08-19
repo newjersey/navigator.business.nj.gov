@@ -2,11 +2,18 @@ import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  ConfigContext,
+  ConfigType,
+  getMergedConfig,
+} from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
@@ -16,7 +23,7 @@ const Template = () => {
   mergedConfig.formation.fields.additionalProvisions.label = "Text Area Header";
   const [config, setConfig] = useState<ConfigType>(mergedConfig);
   const [profileData, setProfileData] = useState<ProfileData>(
-    generateProfileData({ businessName: "displayed text" })
+    generateProfileData({ businessName: "displayed text" }),
   );
   const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 

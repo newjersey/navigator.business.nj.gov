@@ -7,7 +7,6 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
 import { openInNewTab } from "@/lib/utils/helpers";
 import {
   HousingAddress,
@@ -15,6 +14,7 @@ import {
   parseDate,
   toProperCase,
 } from "@businessnjgovnavigator/shared";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Box } from "@mui/material";
 import { ReactElement } from "react";
 

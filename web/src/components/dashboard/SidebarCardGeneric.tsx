@@ -4,7 +4,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
-import { SidebarCardContent } from "@/lib/types/types";
+import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 import { ModifiedContent } from "../ModifiedContent";
 

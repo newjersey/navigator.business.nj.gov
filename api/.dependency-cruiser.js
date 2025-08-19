@@ -179,6 +179,26 @@ module.exports = {
       to: { path: "uuid" },
     },
     {
+      from: { path: "../shared" },
+      to: { path: "fs" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "path" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "js-yaml" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "gray-matter" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "react" },
+    },
+    {
       from: { path: "src/db/migrations" },
       to: { path: "uuid" },
     },

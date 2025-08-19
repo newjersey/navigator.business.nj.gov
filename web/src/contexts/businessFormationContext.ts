@@ -1,4 +1,3 @@
-import { createEmptyDbaDisplayContent, FormationDbaContent } from "@/lib/types/types";
 import {
   createEmptyFormationFormData,
   FieldsForErrorHandling,
@@ -6,6 +5,10 @@ import {
   InputFile,
   NameAvailability,
 } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyDbaDisplayContent,
+  FormationDbaContent,
+} from "@businessnjgovnavigator/shared/types";
 import { createContext } from "react";
 
 interface BusinessFormationState {

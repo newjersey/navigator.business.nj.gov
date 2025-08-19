@@ -1,5 +1,4 @@
 import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
-import { ConfigType } from "@/contexts/configContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -7,8 +6,9 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isMunicipalityRequired } from "@/lib/domain-logic/isMunicipalityRequired";
-import { FormContextFieldProps } from "@/lib/types/types";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props extends FormContextFieldProps {

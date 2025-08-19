@@ -11,9 +11,9 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FieldStateActionKind } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
+import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
 import { FormControl } from "@mui/material";
 import { ReactElement, useState } from "react";
 

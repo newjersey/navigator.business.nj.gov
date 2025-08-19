@@ -1,7 +1,7 @@
 import * as useRoadmapModule from "@/lib/data-hooks/useRoadmap";
 import { CurrentAndNextSection } from "@/lib/data-hooks/useRoadmap";
-import { Roadmap, Task } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
+import { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
 import { SectionType, sectionNames } from "@businessnjgovnavigator/shared/userData";
 
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;

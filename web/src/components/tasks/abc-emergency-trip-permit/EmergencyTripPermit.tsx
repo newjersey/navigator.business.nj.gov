@@ -15,18 +15,18 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { postEmergencyTripPermitApplication } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import {
-  EmergencyTripPermitFieldErrorState,
-  FieldStateActionKind,
-  ReducedFieldStates,
-  StepperStep,
-} from "@/lib/types/types";
 import { scrollToTop } from "@/lib/utils/helpers";
 import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
   generateNewEmergencyTripPermitData,
 } from "@businessnjgovnavigator/shared";
+import {
+  EmergencyTripPermitFieldErrorState,
+  FieldStateActionKind,
+  ReducedFieldStates,
+  StepperStep,
+} from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useState } from "react";
 

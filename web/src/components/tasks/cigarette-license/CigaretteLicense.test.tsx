@@ -1,6 +1,6 @@
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

@@ -1,7 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import Link from "next/link";
 import { ReactElement } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";

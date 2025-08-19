@@ -1,5 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
-import { OperateReference } from "@/lib/types/types";
 import { generateLicenseEvent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import * as shared from "@businessnjgovnavigator/shared";
 import {
@@ -12,10 +10,12 @@ import {
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateLicenseData,
   generateXrayRegistrationData,
 } from "@businessnjgovnavigator/shared/test";
+import { OperateReference } from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";

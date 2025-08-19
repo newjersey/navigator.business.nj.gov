@@ -3,7 +3,7 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { StepperStep, Task } from "@/lib/types/types";
+import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useState } from "react";
 import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 

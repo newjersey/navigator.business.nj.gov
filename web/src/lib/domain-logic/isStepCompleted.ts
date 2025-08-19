@@ -1,4 +1,4 @@
-import { Roadmap, Step } from "@/lib/types/types";
+import { Roadmap, Step } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
 export const isStepCompleted = (

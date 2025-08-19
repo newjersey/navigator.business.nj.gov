@@ -3,8 +3,8 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { DevOnlyUnlinkTaxIdButton } from "@/components/tasks/anytime-action/tax-clearance-certificate/DevOnlyUnlinkTaxIdButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@/lib/types/types";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

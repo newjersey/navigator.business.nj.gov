@@ -7,7 +7,6 @@ import {
 import { isInterstateLogisticsApplicable } from "@/lib/domain-logic/isInterstateLogisticsApplicable";
 import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMovingApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
-import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   determineForeignBusinessType,
@@ -18,6 +17,7 @@ import {
   RoadmapTaskData,
 } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
+import { Roadmap } from "@businessnjgovnavigator/shared/types";
 
 export const buildUserRoadmap = async (
   profileData: ProfileData,

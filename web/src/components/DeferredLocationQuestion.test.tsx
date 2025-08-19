@@ -1,5 +1,4 @@
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
-import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import analytics from "@/lib/utils/analytics";
 import { generateRoadmap } from "@/test/factories";
@@ -10,6 +9,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import {
   generateBusiness,

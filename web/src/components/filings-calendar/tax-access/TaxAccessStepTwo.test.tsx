@@ -1,5 +1,4 @@
 import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalType } from "@/test/factories";
@@ -23,6 +22,7 @@ import {
   OperatingPhases,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateGetFilingResponse,

@@ -2,7 +2,7 @@ import { Authorization } from "@/components/tasks/business-formation/dba/Authori
 import { DbaResolution } from "@/components/tasks/business-formation/dba/DbaResolution";
 import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { NexusSearchBusinessNameStep } from "@/components/tasks/business-formation/name/NexusSearchBusinessNameStep";
-import { DbaStepNames } from "@/lib/types/types";
+import { DbaStepNames } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 export const DbaFormationSteps: { component: ReactElement; step: DbaStepNames }[] = [

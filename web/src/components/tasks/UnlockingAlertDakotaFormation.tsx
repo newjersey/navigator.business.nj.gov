@@ -1,6 +1,6 @@
 import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { TaskLink } from "@/lib/types/types";
+import { TaskLink } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

@@ -1,6 +1,6 @@
 import { CalloutTypes } from "@/components/njwds-extended/callout/calloutHelpers";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
-import { getMergedConfig } from "@/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

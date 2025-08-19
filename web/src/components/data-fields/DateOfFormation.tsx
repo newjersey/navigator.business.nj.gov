@@ -1,5 +1,4 @@
 import { GenericTextField } from "@/components/GenericTextField";
-import { ConfigType } from "@/contexts/configContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -13,6 +12,7 @@ import {
   getCurrentDate,
   parseDate,
 } from "@businessnjgovnavigator/shared";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { TextFieldProps } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

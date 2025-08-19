@@ -1,8 +1,8 @@
 import { LookupStepIndexByName } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
-import { EmergencyTripPermitStepNames } from "@/lib/types/types";
 import { scrollToTop } from "@/lib/utils/helpers";
+import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {

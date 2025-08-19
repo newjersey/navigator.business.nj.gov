@@ -2,9 +2,9 @@ import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc
 import { getStepFromFieldName } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { EmergencyTripPermitStepNames } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
+import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
 import { useContext } from "react";
 
 type EmergencyTripPermitErrorsResponse = {

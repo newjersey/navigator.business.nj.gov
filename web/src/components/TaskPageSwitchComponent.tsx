@@ -14,19 +14,19 @@ import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/Cannabis
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
+import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
 import { Xray } from "@/components/xray/Xray";
+import { rswitch } from "@/lib/utils/helpers";
+import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
+import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import {
   FormationDbaDisplayContent,
   Roadmap,
   Task,
   TaskWithLicenseTaskId,
-} from "@/lib/types/types";
-import { rswitch } from "@/lib/utils/helpers";
-import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+} from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
-import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
 
 interface Props {
   task: Task | TaskWithLicenseTaskId;

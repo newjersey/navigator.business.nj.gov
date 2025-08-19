@@ -1,7 +1,7 @@
 import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
-import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));

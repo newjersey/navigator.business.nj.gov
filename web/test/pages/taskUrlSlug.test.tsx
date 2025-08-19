@@ -1,6 +1,4 @@
 import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
-import { getMergedConfig } from "@/contexts/configContext";
-import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
   generateStep,
@@ -29,7 +27,9 @@ import {
   generateUserDataForBusiness,
   LookupTaskAgencyById,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+import { createEmptyTaskDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";

@@ -1,8 +1,8 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { getMergedConfig } from "@/contexts/configContext";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement, useState } from "react";

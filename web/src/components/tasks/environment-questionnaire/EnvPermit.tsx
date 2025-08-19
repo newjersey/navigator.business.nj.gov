@@ -5,12 +5,12 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { Task } from "@/lib/types/types";
 import {
   generateEmptyEnvironmentQuestionnaireData,
   MediaArea,
   Questionnaire,
 } from "@businessnjgovnavigator/shared/environment";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 import { EnvPermitsResults } from "./EnvPermitsResults";
