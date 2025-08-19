@@ -58,7 +58,7 @@ divisionPhone: (609) 292-7081
 * Notarized affidavit stating you only transport your waste that you generated (included in the application form)
 * Valid insurance information for all vehicles
 * Valid motor vehicle registrations for all vehicles (must be registered as Commercial)
-* A copy of the [Tax clearance certificate](https://account.business.nj.gov/actions/tax-clearance-certificate-apply)
+* A copy of the [Tax clearance certificate](/actions/tax-clearance-certificate-apply)
 * A Copy of [Lease Agreement and Certification](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf) for any leased vehicles signed by lessor and lessee
 
 **Note:** Some industries may need to submit extra documents. You can check the specific requirements in the application form.
