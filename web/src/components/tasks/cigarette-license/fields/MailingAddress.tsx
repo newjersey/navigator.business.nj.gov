@@ -124,7 +124,7 @@ export const MailingAddress = (props: Props): ReactElement => {
       />
       {!state.mailingAddressIsTheSame && (
         <>
-          <div className="margin-y-2">
+          <div id="question-mailingAddressLine1" className="margin-y-2">
             <WithErrorBar
               className={"padding-bottom-1"}
               hasError={props.CMS_ONLY_show_error || isLine1FieldInvalid}
@@ -150,7 +150,7 @@ export const MailingAddress = (props: Props): ReactElement => {
               </label>
             </WithErrorBar>
           </div>
-          <div className="margin-y-2">
+          <div id="question-mailingAddressLine2" className="margin-y-2">
             <WithErrorBar
               className={"padding-bottom-1"}
               hasError={props.CMS_ONLY_show_error || isLine2FieldInvalid}
@@ -191,7 +191,7 @@ export const MailingAddress = (props: Props): ReactElement => {
                   hasError={props.CMS_ONLY_show_error || isCityFieldInvalid}
                   type={"MOBILE-ONLY"}
                 >
-                  <label htmlFor="mailingAddressCity">
+                  <label id="question-mailingAddressCity" htmlFor="mailingAddressCity">
                     <span className={"text-bold"}>
                       <Content>
                         {Config.cigaretteLicenseStep2.fields.mailingAddressCity.label}
@@ -221,7 +221,7 @@ export const MailingAddress = (props: Props): ReactElement => {
                   }
                   type={"MOBILE-ONLY"}
                 >
-                  <label htmlFor="mailingAddressState">
+                  <label id="question-mailingAddressState" htmlFor="mailingAddressState">
                     <span className={"text-bold"}>
                       <Content>
                         {Config.cigaretteLicenseStep2.fields.mailingAddressState.label}
@@ -241,7 +241,7 @@ export const MailingAddress = (props: Props): ReactElement => {
               </span>
 
               <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
-                <label htmlFor="mailingAddressZipCode">
+                <label id="question-mailingAddressZipCode" htmlFor="mailingAddressZipCode">
                   <span className={"text-bold"}>
                     <Content>
                       {Config.cigaretteLicenseStep2.fields.mailingAddressZipCode.label}
