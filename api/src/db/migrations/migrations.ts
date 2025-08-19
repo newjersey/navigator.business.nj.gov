@@ -174,6 +174,7 @@ import { migrate_v169_to_v170 } from "@db/migrations/v170_consolidate_environmen
 import { migrate_v170_to_v171 } from "@db/migrations/v171_flatten_cigarette_license";
 import { migrate_v171_to_v172 } from "@db/migrations/v172_add_cig_license_payment_info";
 import { migrate_v172_to_v173 } from "@db/migrations/v173_add_school_bus_passenger_transport";
+import { migrate_v173_to_v174 } from "@db/migrations/v174_add_public_works_contractor";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -352,6 +353,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v170_to_v171,
   migrate_v171_to_v172,
   migrate_v172_to_v173,
+  migrate_v173_to_v174,
 ];
 
-export { generatev173UserData as CURRENT_GENERATOR } from "@db/migrations/v173_add_school_bus_passenger_transport";
+export { generatev174UserData as CURRENT_GENERATOR } from "@db/migrations/v174_add_public_works_contractor";

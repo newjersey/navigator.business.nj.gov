@@ -27,6 +27,8 @@ import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/tas
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
+import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
+import { TaskHeader } from "@/components/TaskHeader";
 
 interface Props {
   task: Task | TaskWithLicenseTaskId;
@@ -80,6 +82,7 @@ export const TaskPageSwitchComponent = ({
   const isCigaretteLicenseEnabled = process.env.FEATURE_CIGARETTE_LICENSE === "true";
 
   return rswitch(task.id, {
+    pwcr: <GovernmentContractingElement headerOverride={<TaskHeader task={task} />} />,
     "env-permitting": <EnvPermit task={task} />,
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,

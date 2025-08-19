@@ -281,6 +281,7 @@ export const generateIndustrySpecificData = (
     hasThreeOrMoreRentalUnits: !(randomInt() % 2),
     travelingCircusOrCarnivalOwningBusiness: !(randomInt() % 2),
     vacantPropertyOwner: !(randomInt() % 2),
+    publicWorksContractor: !(randomInt() % 2),
     ...overrides,
   };
 };
