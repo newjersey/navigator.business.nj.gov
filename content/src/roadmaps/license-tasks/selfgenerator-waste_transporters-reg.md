@@ -9,9 +9,9 @@ summaryDescriptionMd: >+
   :::infoAlert 
    **Keep in mind:**
 
-  * In order for your registration application to approved you need to send a Tax Clerance Certifiacte that proves that your business is in good standing with your taxes
+  * To get your registration approved, you must get a Tax Clearance Certificate that shows that your business is in good standing with taxes
 
-  * You can only get Self-generator decals if your business vehicles are registeres a commercial vehicles
+  * You can only get registration decals for business vehicles registered as commercial vehicles
 
   * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/wastedecals/commercial-solid-waste-transporters/).
 
