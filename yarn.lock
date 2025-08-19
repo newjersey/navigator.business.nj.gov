@@ -5106,7 +5106,7 @@ __metadata:
     js-yaml: 4.1.0
     jsonwebtoken: 9.0.2
     kill-port: 1.6.1
-    lint-staged: 15.5.2
+    lint-staged: 16.1.5
     lodash: 4.17.21
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     next: 15.3.5
@@ -16656,10 +16656,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1":
-  version: 5.4.1
-  resolution: "chalk@npm:5.4.1"
-  checksum: 0c656f30b782fed4d99198825c0860158901f449a6b12b818b0aabad27ec970389e7e8767d0e00762175b23620c812e70c4fd92c0210e55fc2d993638b74e86e
+"chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1, chalk@npm:^5.5.0":
+  version: 5.6.0
+  resolution: "chalk@npm:5.6.0"
+  checksum: 245d4b53c29c88da9e291f318c86b6b3ee65aa81568f9e10fafc984a6ef520412dee513057d07cc0f4614ab5a46cb07a0394fab3794d88d48c89c17b2d8fbf7f
   languageName: node
   linkType: hard
 
@@ -17337,6 +17337,13 @@ __metadata:
   version: 13.1.0
   resolution: "commander@npm:13.1.0"
   checksum: 8ca2fcb33caf2aa06fba3722d7a9440921331d54019dabf906f3603313e7bf334b009b862257b44083ff65d5a3ab19e83ad73af282bd5319f01dc228bdf87ef0
+  languageName: node
+  linkType: hard
+
+"commander@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "commander@npm:14.0.0"
+  checksum: 6e9bdaf2e8e4f512855ffc10579eeae2e84c4a7697a91b1a5f62aab3c9849182207855268dd7c3952ae7a2334312a7138f58e929e4b428aef5bf8af862685c9b
   languageName: node
   linkType: hard
 
@@ -18384,15 +18391,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4, debug@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "debug@npm:4.4.0"
+"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4, debug@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "debug@npm:4.4.1"
   dependencies:
     ms: ^2.1.3
   peerDependenciesMeta:
     supports-color:
       optional: true
-  checksum: fb42df878dd0e22816fc56e1fdca9da73caa85212fbe40c868b1295a6878f9101ae684f4eeef516c13acfc700f5ea07f1136954f43d4cd2d477a811144136479
+  checksum: a43826a01cda685ee4cec00fb2d3322eaa90ccadbef60d9287debc2a886be3e835d9199c80070ede75a409ee57828c4c6cd80e4b154f2843f0dc95a570dc0729
   languageName: node
   linkType: hard
 
@@ -26332,23 +26339,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:15.5.2":
-  version: 15.5.2
-  resolution: "lint-staged@npm:15.5.2"
+"lint-staged@npm:16.1.5":
+  version: 16.1.5
+  resolution: "lint-staged@npm:16.1.5"
   dependencies:
-    chalk: ^5.4.1
-    commander: ^13.1.0
-    debug: ^4.4.0
-    execa: ^8.0.1
+    chalk: ^5.5.0
+    commander: ^14.0.0
+    debug: ^4.4.1
     lilconfig: ^3.1.3
-    listr2: ^8.2.5
+    listr2: ^9.0.1
     micromatch: ^4.0.8
+    nano-spawn: ^1.0.2
     pidtree: ^0.6.0
     string-argv: ^0.3.2
-    yaml: ^2.7.0
+    yaml: ^2.8.1
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 70380f07be12b3557ae5857a6f081c03f3c62774afd3015ca77dd20fbad991c3b28de4981c3a7b0c61d482c1b3a0d2310f031f9d3ae36cb0e21e1e8a674ed30e
+  checksum: 992d13bc29491227b4bdb7a1b28edbb5367f6dcec54258a28460662531bf19a701e386b56325c4c7f6f0809a4d1fd81f5a61d34df05a4caad6f5f41dce56456c
   languageName: node
   linkType: hard
 
@@ -26373,9 +26380,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"listr2@npm:^8.2.5":
-  version: 8.2.5
-  resolution: "listr2@npm:8.2.5"
+"listr2@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "listr2@npm:9.0.1"
   dependencies:
     cli-truncate: ^4.0.0
     colorette: ^2.0.20
@@ -26383,7 +26390,7 @@ __metadata:
     log-update: ^6.1.0
     rfdc: ^1.4.1
     wrap-ansi: ^9.0.0
-  checksum: 0ca2387b067eb11bbe91863f36903f3a5a040790422a499cc1a15806d8497979e7d1990bd129061c0510906b2971eaa97a74a9635e3ec5abd5830c9749b655b9
+  checksum: 7880c3732951d07c1d81eeccb46a7ce4f2274b6974e0f929a5c6f5386a304c65da102bc646b8372c55ba5cc5e5510b634c15c13b6492663f2a59b401ace3abbe
   languageName: node
   linkType: hard
 
@@ -28474,6 +28481,13 @@ __metadata:
   version: 0.0.8
   resolution: "mute-stream@npm:0.0.8"
   checksum: ff48d251fc3f827e5b1206cda0ffdaec885e56057ee86a3155e1951bc940fd5f33531774b1cc8414d7668c10a8907f863f6561875ee6e8768931a62121a531a1
+  languageName: node
+  linkType: hard
+
+"nano-spawn@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "nano-spawn@npm:1.0.2"
+  checksum: 195eb751f5f32bebb622c57e3fdb2ebac8b9ffea301c94412a0fb0d3c0035854884e505a0518ff2dd50faf12d005843a0409b1316dd3746e3c5e696a77ccff16
   languageName: node
   linkType: hard
 
@@ -37286,12 +37300,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.7.0, yaml@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "yaml@npm:2.7.1"
+"yaml@npm:^2.7.1, yaml@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "yaml@npm:2.8.1"
   bin:
     yaml: bin.mjs
-  checksum: 385f8115ddfafdf8e599813cca8b2bf4e3f6a01b919fff5ae7da277e164df684d7dfe558b4085172094792b5a04786d3c55fa8b74abb0ee029873f031150bb80
+  checksum: 35b46150d48bc1da2fd5b1521a48a4fa36d68deaabe496f3c3fa9646d5796b6b974f3930a02c4b5aee6c85c860d7d7f79009416724465e835f40b87898c36de4
   languageName: node
   linkType: hard
 
