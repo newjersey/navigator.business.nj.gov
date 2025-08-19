@@ -5,6 +5,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import {
   currentBusiness,
   currentUserData,
@@ -86,6 +87,7 @@ describe("profile - owning existing business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({});
+    useMockIntersectionObserver();
     setupStatefulUserDataContext();
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);

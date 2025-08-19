@@ -8,6 +8,7 @@ import { getFlow } from "@/lib/utils/helpers";
 import { randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { OperatingPhase, OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
@@ -17,9 +18,14 @@ import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
+jest.mock("@/lib/utils/useIntersectionOnElement", () => ({
+  useIntersectionOnElement: jest.fn(),
+}));
+
 describe("LocationBasedNonEssentialQuestions", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockIntersectionObserver();
   });
 
   const renderComponent = (profileData: ProfileData): void => {
