@@ -132,6 +132,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           onValidation={onValidation}
           dataFormErrorMap={dataFormErrorMap}
           isFullWidth
+          stateInputLocked
         />
       </div>
       <HorizontalLine />
