@@ -136,7 +136,11 @@
       "addOnWhenNo": "",
       "addOnWhenYes": "healthcare-xray-reg",
       "id": "healthcare-xray-regis",
-      "questionText": "Do you plan to be using x-ray machines?"
+      "questionText": "Do you plan to be using x-ray machines?",
+      "anytimeActions": [
+        "temp-xray-registration",
+        "xray-disposition-form"
+      ]
     },
     {
       "questionText": "Are you an optometrist?",
