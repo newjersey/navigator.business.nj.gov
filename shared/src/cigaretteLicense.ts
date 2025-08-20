@@ -31,6 +31,7 @@ export interface CigaretteLicenseData {
 
 export type CigaretteLicensePaymentInfo = {
   token?: string;
+  paymentComplete?: boolean;
   orderId?: number;
   orderStatus?: string;
   orderTimestamp?: string;
@@ -65,8 +66,9 @@ export const emptyCigaretteLicenseData: CigaretteLicenseData = {
   signature: false,
 };
 
-export const emptyCigaretteLicensePaymentInfo = {
+export const emptyCigaretteLicensePaymentInfo: CigaretteLicensePaymentInfo = {
   token: "",
+  paymentComplete: false,
   orderId: undefined,
   orderStatus: "",
   orderTimestamp: "",
@@ -134,7 +136,7 @@ export interface EmailConfirmationSubmission {
 
 export type PaymentApiError = {
   statusCode: number;
-  errorCode: number;
+  errorCode: string;
   userMessage: string;
   developerMessage: string;
 };
