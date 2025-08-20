@@ -151,7 +151,7 @@ describe("<LicenseeInfo />", () => {
         businessAddressContainer.getByRole("textbox", { name: /address line1/i }),
       ).toBeInTheDocument();
       expect(
-        businessAddressContainer.getByRole("textbox", { name: /address city/i }),
+        businessAddressContainer.getByRole("combobox", { name: /address municipality/i }),
       ).toBeInTheDocument();
       expect(
         businessAddressContainer.getByRole("combobox", { name: /address state/i }),
