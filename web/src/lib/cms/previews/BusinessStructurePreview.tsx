@@ -1,9 +1,9 @@
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 

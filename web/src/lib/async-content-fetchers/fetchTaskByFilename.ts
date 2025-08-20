@@ -1,5 +1,5 @@
-import { Task, TaskDependencies, TaskLink } from "@/lib/types/types";
-import { convertTaskMd } from "@/lib/utils/markdownReader";
+import { convertTaskMd } from "@businessnjgovnavigator/shared";
+import { Task, TaskDependencies, TaskLink } from "@businessnjgovnavigator/shared/types";
 
 export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
   const taskWithoutLinks = convertTaskMd(await fetchTaskFile(filename));

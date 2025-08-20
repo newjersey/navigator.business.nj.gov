@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect */
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -47,6 +46,7 @@ import {
   randomElementFromArray,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateFormationFormData,

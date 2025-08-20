@@ -13,7 +13,6 @@ import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { LicenseSearchError, TaskWithLicenseTaskId } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
@@ -23,6 +22,7 @@ import {
   taskIdLicenseNameMapping,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { LicenseSearchError, TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";

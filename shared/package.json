@@ -23,6 +23,8 @@
   "dependencies": {
     "@businessnjgovnavigator/content": "*",
     "dayjs": "1.11.13",
+    "gray-matter": "4.0.3",
+    "js-yaml": "4.1.0",
     "lodash": "4.17.21",
     "uuid": "9.0.1"
   },
@@ -30,6 +32,7 @@
     "@jest/types": "29.6.3",
     "@types/jest": "29.5.14",
     "@types/node": "20.19.7",
+    "@types/react": "18.2.79",
     "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",

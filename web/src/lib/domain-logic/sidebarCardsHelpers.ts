@@ -1,4 +1,7 @@
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
+import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
+import { arrayOfOwnershipTypes } from "@businessnjgovnavigator/shared/ownership";
 import {
   Certification,
   County,
@@ -6,10 +9,7 @@ import {
   Funding,
   FundingStatusOrder,
   SidebarCardContent,
-} from "@/lib/types/types";
-import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
-import { arrayOfOwnershipTypes } from "@businessnjgovnavigator/shared/ownership";
+} from "@businessnjgovnavigator/shared/types";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const getHiddenCertifications = (

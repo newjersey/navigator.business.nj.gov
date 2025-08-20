@@ -2,12 +2,12 @@ import {
   OPPORTUNITY_CARD_MAX_BODY_CHARS,
   OpportunityCard,
 } from "@/components/dashboard/OpportunityCard";
-import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
 import { generateOpportunity } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));

@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
-import { getMergedConfig } from "@/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
 

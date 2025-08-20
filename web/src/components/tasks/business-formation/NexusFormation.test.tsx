@@ -3,10 +3,8 @@
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { FormationDbaDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
@@ -27,6 +25,8 @@ import {
   generateFormationSubmitResponse,
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 

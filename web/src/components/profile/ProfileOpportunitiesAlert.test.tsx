@@ -1,5 +1,4 @@
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
-import { getMergedConfig } from "@/contexts/configContext";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
@@ -8,6 +7,7 @@ import {
   generateProfileData,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

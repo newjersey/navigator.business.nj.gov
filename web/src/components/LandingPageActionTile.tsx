@@ -1,4 +1,4 @@
-import { ActionTile } from "@/lib/types/types";
+import { ActionTile } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 export const LandingPageActionTile = (props: ActionTile): ReactElement => {

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ContextInfoElement } from "@/components/ContextInfoElement";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import analytics from "@/lib/utils/analytics";
+import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext } from "react";
 
 export const ContextualInfoPanel = (): ReactElement => {

@@ -13,13 +13,13 @@ import {
   Start,
   Updates,
 } from "@/components/navbar/shared-submenu-components";
-import { getMergedConfig } from "@/contexts/configContext";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateProfileData,

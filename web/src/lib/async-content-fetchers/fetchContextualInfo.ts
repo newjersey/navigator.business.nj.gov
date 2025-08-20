@@ -1,5 +1,5 @@
-import { ContextualInfo } from "@/contexts/contextualInfoContext";
-import { convertContextualInfoMd } from "@/lib/utils/markdownReader";
+import { convertContextualInfoMd } from "@businessnjgovnavigator/shared";
+import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
 
 export const fetchContextualInfo = async (id: string): Promise<ContextualInfo> => {
   try {

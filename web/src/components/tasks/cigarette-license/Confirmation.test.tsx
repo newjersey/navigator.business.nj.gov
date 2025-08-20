@@ -1,11 +1,11 @@
 import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
-import { getMergedConfig } from "@/contexts/configContext";
 import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { render, screen } from "@testing-library/react";
-import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 
 const Config = getMergedConfig();
 

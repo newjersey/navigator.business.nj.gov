@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect */
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -33,6 +32,7 @@ import {
   ProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   filterRandomIndustry,
   generateFormationData,

@@ -1,7 +1,6 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -17,6 +16,7 @@ import {
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import {
   generatePreferences,
   generateProfileData,

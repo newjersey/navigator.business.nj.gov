@@ -10,8 +10,8 @@ import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
+import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
 import { TextField, useMediaQuery } from "@mui/material";
 import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
 

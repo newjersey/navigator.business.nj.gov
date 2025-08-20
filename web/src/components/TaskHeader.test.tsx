@@ -1,6 +1,4 @@
 import { TaskHeader } from "@/components/TaskHeader";
-import { getMergedConfig } from "@/contexts/configContext";
-import { Task } from "@/lib/types/types";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -15,11 +13,14 @@ import {
   generateUserDataForBusiness,
   TaskProgress,
 } from "@businessnjgovnavigator/shared";
+
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateGetFilingResponse,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 

@@ -1,6 +1,6 @@
 import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateAnytimeActionTask } from "@/test/factories";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

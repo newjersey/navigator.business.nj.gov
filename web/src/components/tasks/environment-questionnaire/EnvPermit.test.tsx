@@ -1,5 +1,4 @@
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateTask } from "@/test/factories";
@@ -10,6 +9,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import {
   generateBusiness,

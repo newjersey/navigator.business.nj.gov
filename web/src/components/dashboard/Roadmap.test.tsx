@@ -1,5 +1,4 @@
 import { Roadmap } from "@/components/dashboard/Roadmap";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   generateTask,
   operatingPhasesDisplayingBusinessStructurePrompt,
@@ -14,6 +13,7 @@ import {
   generateBusiness,
   generateProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

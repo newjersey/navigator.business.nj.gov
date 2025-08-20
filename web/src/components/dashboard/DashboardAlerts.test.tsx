@@ -1,5 +1,4 @@
 import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
-import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -9,6 +8,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { act, render, screen } from "@testing-library/react";

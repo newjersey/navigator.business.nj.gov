@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { getMergedConfig } from "@/contexts/configContext";
 import { flattenObject } from "@/lib/utils/helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import fs from "fs";
 import path from "path";
 

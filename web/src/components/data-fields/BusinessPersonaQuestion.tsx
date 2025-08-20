@@ -1,14 +1,14 @@
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { ConfigType } from "@/contexts/configContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { FormContextFieldProps } from "@/lib/types/types";
 import { BusinessPersona } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 

@@ -1,7 +1,5 @@
 import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundingNudge";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { SidebarCardContent } from "@/lib/types/types";
 import {
   generateEmptyFormationData,
   generateSidebarCardContent,
@@ -25,6 +23,7 @@ import {
   OperatingPhases,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -37,6 +36,7 @@ import {
   randomIndustry,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
+import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
