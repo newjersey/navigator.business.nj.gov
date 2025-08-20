@@ -8,7 +8,7 @@ import {
   LegalStructures,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared";
 import { LighthouseConfig, Pa11yThresholds } from "../types";
 
 const Config = getMergedConfig();
