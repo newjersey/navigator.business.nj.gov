@@ -188,7 +188,10 @@
       "id": "pesticides-applicator-licensing",
       "questionText": "Do you plan to use pesticides or offer pesticide application services?",
       "addOnWhenNo": "",
-      "addOnWhenYes": "multi-pest-applicator-license"
+      "addOnWhenYes": "multi-pest-applicator-license",
+      "anytimeActions": [
+        "commercial-pest-applicator-license-recert"
+      ]
     },
     {
       "id": "crematory",
