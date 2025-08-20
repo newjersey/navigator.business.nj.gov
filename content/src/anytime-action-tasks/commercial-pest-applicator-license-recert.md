@@ -4,8 +4,7 @@ id: commercial-pest-applicator-license-recert
 name: Recertify Your Commercial Pesticide Applicator License
 category:
   - reactivate-my-expired-permit-license-or-registration
-industryIds:
-  - pest-control
+industryIds: []
 sectorIds: []
 urlSlug: commercial-pest-applicator-license-recert
 summaryDescriptionMd: " You must recertify your commercial `pesticide|pesticide`
