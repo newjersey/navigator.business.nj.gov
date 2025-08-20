@@ -104,63 +104,69 @@ export const cigaretteLicenseRouterFactory = (
       `[START] ${method} ${endpoint} - Received Get Cigarette License Order By Token request for userId: ${userId}`,
     );
 
-    if (!currentBusiness.cigaretteLicenseData?.paymentInfo?.token) {
+    if (!currentBusiness?.cigaretteLicenseData?.paymentInfo?.token) {
       const status = StatusCodes.BAD_REQUEST;
       logger.LogError(
         `${method} ${endpoint} - No cigarette license order token found for userId: ${userId}, status: ${status}, duration: ${getDurationMs(
           requestStart,
         )}ms`,
       );
-      res.status(status).send("No cigarette license order token");
+      res.status(status).send(userData);
       return;
     }
 
     try {
-      const getOrderResponse: GetOrderByTokenResponse =
-        await cigaretteLicenseClient.getOrderByToken(
-          currentBusiness.cigaretteLicenseData.paymentInfo.token,
-        );
+      let updatedUserData = userData;
 
-      if (
-        getOrderResponse.matchingOrders === 0 ||
-        getOrderResponse.errorResult ||
-        !getOrderResponse.orders
-      ) {
-        const status = StatusCodes.OK;
-        logger.LogError(
-          `${method} ${endpoint} - Failed to get cigarette license order by token: error: ${getOrderResponse.errorResult?.userMessage}, userId: ${userId}, duration: ${getDurationMs(
-            requestStart,
-          )}ms`,
-        );
-        res.status(status).json(getOrderResponse.errorResult);
-        return;
+      if (!currentBusiness?.cigaretteLicenseData?.paymentInfo?.orderId) {
+        const getOrderResponse: GetOrderByTokenResponse =
+          await cigaretteLicenseClient.getOrderByToken(
+            currentBusiness.cigaretteLicenseData.paymentInfo.token,
+          );
+
+        if (
+          getOrderResponse.matchingOrders === 0 ||
+          getOrderResponse.errorResult ||
+          !getOrderResponse.orders
+        ) {
+          const status = StatusCodes.OK;
+          logger.LogError(
+            `${method} ${endpoint} - Failed to get cigarette license order by token: error: ${getOrderResponse.errorResult?.userMessage}, userId: ${userId}, duration: ${getDurationMs(
+              requestStart,
+            )}ms`,
+          );
+          res.status(status).send(updatedUserData);
+          return;
+        }
+        const order: OrderDetails = getOrderResponse.orders[0];
+        updatedUserData = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
+          cigaretteLicenseData: {
+            ...business.cigaretteLicenseData,
+            paymentInfo: {
+              ...business.cigaretteLicenseData?.paymentInfo,
+              orderId: order.orderId,
+              orderStatus: order.orderStatus,
+              orderTimestamp: order.timestamp,
+            },
+          },
+        }));
       }
 
-      const order: OrderDetails = getOrderResponse.orders[0];
-      const userDataWithOrderDetails = modifyCurrentBusiness(userData, (business) => ({
-        ...business,
-        cigaretteLicenseData: {
-          ...business.cigaretteLicenseData,
-          paymentInfo: {
-            ...business.cigaretteLicenseData?.paymentInfo,
-            orderId: order.orderId,
-            orderStatus: order.orderStatus,
-            orderTimestamp: order.timestamp,
-          },
-        },
-      }));
+      if (!currentBusiness?.cigaretteLicenseData?.paymentInfo?.confirmationEmailsent) {
+        const decryptedTaxId = await cryptoClient.decryptValue(
+          currentBusiness.cigaretteLicenseData.encryptedTaxId || "",
+        );
 
-      const decryptedTaxId = await cryptoClient.decryptValue(
-        currentBusiness.cigaretteLicenseData.encryptedTaxId || "",
-      );
+        updatedUserData = await sendEmailConfirmation(
+          updatedUserData,
+          decryptedTaxId,
+          cigaretteLicenseClient,
+          logger,
+        );
+      }
 
-      const userDataWithConfirmation = await sendEmailConfirmation(
-        userDataWithOrderDetails,
-        decryptedTaxId,
-        cigaretteLicenseClient,
-        logger,
-      );
-      await databaseClient.put(userDataWithConfirmation);
+      await databaseClient.put(updatedUserData);
 
       const status = StatusCodes.OK;
       logger.LogInfo(
@@ -169,7 +175,7 @@ export const cigaretteLicenseRouterFactory = (
         )}ms`,
       );
 
-      res.status(status).json(userDataWithConfirmation);
+      res.status(status).json(updatedUserData);
     } catch (error) {
       const status = StatusCodes.INTERNAL_SERVER_ERROR;
       const message = error instanceof Error ? error.message : String(error);

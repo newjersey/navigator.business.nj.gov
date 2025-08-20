@@ -6,6 +6,8 @@ import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
 import { AddressContext } from "@/contexts/addressContext";
+import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import {
   createDataFormErrorMap,
@@ -20,6 +22,7 @@ import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
   emptyCigaretteLicenseData,
+  SubmissionError,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import {
   emptyFormationAddressData,
@@ -27,7 +30,8 @@ import {
 } from "@businessnjgovnavigator/shared/formationData";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
-import { Dispatch, ReactElement, SetStateAction, useState } from "react";
+import { Dispatch, ReactElement, SetStateAction, useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/compat/router";
 
 type Props = {
   task: Task;
@@ -38,6 +42,10 @@ type Props = {
 export const CigaretteLicense = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
+  const { business, userData, updateQueue } = useUserData();
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
+  const router = useRouter();
+  const [submissionError, setSubmissionError] = useState<SubmissionError>(undefined);
   const { getInvalidFieldIds, state: formContextState } =
     useFormContextHelper(createDataFormErrorMap());
 
@@ -69,7 +77,6 @@ export const CigaretteLicense = (props: Props): ReactElement => {
       return newAddress;
     });
   };
-  const { business, userData } = useUserData();
 
   const stepperSteps: StepperStep[] = [
     {
@@ -93,6 +100,44 @@ export const CigaretteLicense = (props: Props): ReactElement => {
       isComplete: false,
     },
   ];
+
+  const handlePaymentSuccess = useCallback(() => {
+    if (!updateQueue || !business) return;
+
+    queueUpdateTaskProgress("cigarette-license", "COMPLETED");
+    updateQueue
+      ?.queueBusiness({
+        ...updateQueue.currentBusiness(),
+        cigaretteLicenseData: {
+          ...business.cigaretteLicenseData,
+          lastUpdatedISO: new Date(Date.now()).toISOString(),
+          paymentInfo: {
+            ...business.cigaretteLicenseData?.paymentInfo,
+            paymentComplete: true,
+          },
+        },
+      })
+      .update();
+  }, [updateQueue, business, queueUpdateTaskProgress]);
+
+  useEffect(() => {
+    if (!router?.isReady) return;
+
+    if (
+      checkQueryValue(router, QUERIES.completePayment, "failure") ||
+      checkQueryValue(router, QUERIES.completePayment, "duplicate")
+    ) {
+      setStepIndex(3);
+      setSubmissionError("PAYMENT");
+    }
+    if (checkQueryValue(router, QUERIES.completePayment, "cancel")) {
+      setStepIndex(3);
+    }
+    if (checkQueryValue(router, QUERIES.completePayment, "success")) {
+      handlePaymentSuccess();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
 
   const setProfile: Dispatch<SetStateAction<ProfileData>> = (action) => {
     setProfileData((prevProfileData) => {
@@ -186,22 +231,26 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     }
   }, business);
 
-  if (
-    business?.cigaretteLicenseData?.paymentInfo?.orderId &&
-    business?.cigaretteLicenseData?.paymentInfo?.confirmationEmailsent
-  ) {
-    return (
-      <div className="flex flex-column space-between min-height-38rem">
-        <TaskHeader task={props.task} />
-        <ConfirmationPage business={business} />
-      </div>
-    );
-  }
+  const shouldShowConfirmation = (): boolean => {
+    const paymentComplete = business?.cigaretteLicenseData?.paymentInfo?.paymentComplete;
+    const taskComplete = business?.taskProgress["cigarette-license"] === "COMPLETED";
 
-  return (
+    return paymentComplete || taskComplete;
+  };
+
+  return shouldShowConfirmation() ? (
+    <div className="flex flex-column space-between min-height-38rem">
+      <TaskHeader task={props.task} />
+      <ConfirmationPage business={business!} />
+    </div>
+  ) : (
     <>
       <TaskHeader task={props.task} />
-      <CigaretteLicenseAlert fieldErrors={getInvalidFieldIds()} setStepIndex={setStepIndex} />
+      <CigaretteLicenseAlert
+        fieldErrors={getInvalidFieldIds()}
+        setStepIndex={setStepIndex}
+        submissionError={submissionError}
+      />
       <HorizontalStepper
         steps={stepperSteps}
         currentStep={stepIndex}

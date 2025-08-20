@@ -27,6 +27,7 @@ export interface QUERY_PARAMS_VALUES {
   fromFunding: "true";
   fromOnboarding: "true";
   completeFiling: "true" | "false";
+  completePayment: "success" | "failure" | "duplicate" | "cancel";
   success: "true";
   additionalBusiness: "true";
   path: "businessFormation";
@@ -42,6 +43,7 @@ export enum QUERIES {
   businessMunicipality = "businessMunicipality",
   code = "code",
   completeFiling = "completeFiling",
+  completePayment = "completePayment",
   deferredQuestionAnswered = "deferredQuestionAnswered",
   flow = "flow",
   fromAdditionalBusiness = "fromAdditionalBusiness",
