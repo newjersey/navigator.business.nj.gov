@@ -72,7 +72,12 @@ class OnboardingSharedElementsWithIndustryQuestion extends OnboardingSharedEleme
   getResidentialConstructionTypeItemsRadio(value?: ResidentialConstructionType) {
     return cy.get(`input[name="residential-construction-type"]${`[value="${value}"]`}`);
   }
-
+  getCommercialConstructionTypeItemsRadio(value?: boolean) {
+    return cy.get(`input[name="public-works-contractor"]${`[value="${value}"]`}`);
+  }
+  selectCommercialConstructionTypeItemsRadio(value: boolean) {
+    this.getCommercialConstructionTypeItemsRadio(value).check();
+  }
   getPropertyLeaseTypeRadio(value?: PropertyLeaseType) {
     return cy.get(`input[name="property-lease-type"]${`[value="${value}"]`}`);
   }
