@@ -44,6 +44,10 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
       "Some of the entries in your submission were not valid",
     ],
     [
+      "BUSINESS_STATUS_VERIFICATION_ERROR" as TaxClearanceCertificateResponseErrorType,
+      Config.taxClearanceCertificateStep3.errorTextStatusVerification,
+    ],
+    [
       "MISSING_FIELD" as TaxClearanceCertificateResponseErrorType,
       Config.taxClearanceCertificateStep3.errorTextMissingField,
     ],

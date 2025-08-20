@@ -934,7 +934,17 @@ collections:
 
               - label: "Licensee Information Description"
                 name: "licenseeInformationDescription"
-                widget: "text"
+                widget: "markdown"
+                required: true
+
+              - label: "Business Name Text"
+                name: "businessNameText"
+                widget: "string"
+                required: true
+
+              - label: "Business Name Error Text"
+                name: "businessNameErrorText"
+                widget: "string"
                 required: true
 
               - label: "Business Address Header"
@@ -944,7 +954,7 @@ collections:
 
               - label: "Business Address Description"
                 name: "businessAddressDescription"
-                widget: "text"
+                widget: "markdown"
                 required: true
 
               - label: "Mailing Address Header"
@@ -954,11 +964,21 @@ collections:
 
               - label: "Mailing Address Description"
                 name: "mailingAddressDescription"
-                widget: "text"
+                widget: "markdown"
                 required: true
 
-              - label: "Mailing Is Same Check"
-                name: "mailingIsSameCheck"
+              - label: "Contact Information Header"
+                name: "contactInformationHeader"
+                widget: "string"
+                required: true
+
+              - label: "Contact Information Description"
+                name: "contactInformationDescription"
+                widget: "markdown"
+                required: true
+
+              - label: "Mailing Is Same Checkbox"
+                name: "mailingIsSameCheckbox"
                 widget: "string"
                 required: true
 
@@ -1081,6 +1101,16 @@ collections:
                         name: "errorRequiredText"
                         widget: "string"
                         required: true
+
+              - label: "Back Button Text"
+                name: "backButtonText"
+                widget: "string"
+                required: true
+
+              - label: "Next Button Text"
+                name: "nextButtonText"
+                widget: "string"
+                required: true
       - label: "Cigarette License Step 3"
         name: "cigaretteLicense-step3"
         file: "content/src/fieldConfig/cigarette-license-step3.json"
@@ -1190,6 +1220,260 @@ collections:
               - {
                   label: "Issuing Agency Text",
                   name: "issuingAgencyText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Alert Submission Error",
+                  name: "alertPaymentError",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Alert Invalid Fields Error",
+                  name: "alertInvalidFields",
+                  widget: "markdown",
+                  required: true,
+                }
+              - label: "Alert Field Names"
+                name: "alertFieldNames"
+                collapsed: true
+                widget: object
+                fields:
+                  - {
+                      label: "Business Name Field Label",
+                      name: "businessName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Responsible Owner Name Field Label",
+                      name: "responsibleOwnerName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Trade Name Field Label",
+                      name: "tradeName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - { label: "Tax ID Field Label", name: "taxId", widget: "string", required: true }
+                  - {
+                      label: "Address Line 1 Field Label",
+                      name: "addressLine1",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address Line 2 Field Label",
+                      name: "addressLine2",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address City Field Label",
+                      name: "addressCity",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address State Field Label",
+                      name: "addressState",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Address ZIP Code Field Label",
+                      name: "addressZipCode",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address Line 1 Field Label",
+                      name: "mailingAddressLine1",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address Line 2 Field Label",
+                      name: "mailingAddressLine2",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address City Field Label",
+                      name: "mailingAddressCity",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address State Field Label",
+                      name: "mailingAddressState",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address ZIP Code Field Label",
+                      name: "mailingAddressZipCode",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Contact Name Field Label",
+                      name: "contactName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Contact Phone Number Field Label",
+                      name: "contactPhoneNumber",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Contact Email Field Label",
+                      name: "contactEmail",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Sales Start Date Field Label",
+                      name: "salesInfoStartDate",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Suppliers Field Label",
+                      name: "salesInfoSupplier",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Signer Name Field Label",
+                      name: "signerName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Signer Relationship Field Label",
+                      name: "signerRelationship",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Signature Field Label",
+                      name: "signature",
+                      widget: "string",
+                      required: true,
+                    }
+      - label: "Cigarette License Confirmation"
+        name: "cigaretteLicense-confirmation"
+        file: "content/src/fieldConfig/cigarette-license-confirmation.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cigarette License Confirmation
+            name: cigaretteLicenseConfirmation
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Amount Paid", name: "amountPaid", widget: "string", required: true }
+              - {
+                  label: "Business Address Line 1",
+                  name: "businessAddressLine1",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Business Address Line 2",
+                  name: "businessAddressLine2",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Confirmation Number",
+                  name: "confirmationNumber",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Date Submitted", name: "dateSubmitted", widget: "string", required: true }
+              - {
+                  label: "Issuing Agency",
+                  name: "issuingAgency",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Licensee Information Header",
+                  name: "licenseeInformationHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Mailing Address Line 1",
+                  name: "mailingAddressLine1",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Mailing Address Line 2",
+                  name: "mailingAddressLine2",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Need Help Header",
+                  name: "needHelpHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Need Help Info",
+                  name: "needHelpInfo",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Payment Successful Header",
+                  name: "paymentSuccessfulHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Payment Successful Info",
+                  name: "paymentSuccessfulInfo",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Submission Details",
+                  name: "submissionDetails",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Suppliers", name: "suppliers", widget: "string", required: true }
+              - {
+                  label: "What Happens Next Bullet 1",
+                  name: "whatHappensNextBullet1",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "What Happens Next Bullet 2",
+                  name: "whatHappensNextBullet2",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "What Happens Next Header",
+                  name: "whatHappensNextHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "What Happens Next Info",
+                  name: "whatHappensNextInfo",
                   widget: "string",
                   required: true,
                 }

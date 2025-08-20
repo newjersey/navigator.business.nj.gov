@@ -182,6 +182,13 @@ const getIndustryBasedAddOns = (
     }
   }
 
+  if (
+    getIsApplicableToFunctionByFieldName("publicWorksContractor")(industryId) &&
+    profileData.publicWorksContractor
+  ) {
+    addOns.push("public-works-contractor");
+  }
+
   if (industryId === "employment-agency") {
     if (profileData.employmentPersonnelServiceType === "JOB_SEEKERS") {
       addOns.push("employment-agency-job-seekers");

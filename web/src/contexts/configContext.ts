@@ -14,6 +14,7 @@ import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfi
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as CheckAccountEmailPage from "@businessnjgovnavigator/content/fieldConfig/check-account-email-page.json";
+import * as CigaretteLicenseConfirmation from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-confirmation.json";
 import * as CigaretteLicenseShared from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-shared.json";
 import * as CigaretteLicenseStep1 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step1.json";
 import * as CigaretteLicenseStep2 from "@businessnjgovnavigator/content/fieldConfig/cigarette-license-step2.json";
@@ -112,6 +113,7 @@ const merged = JSON.parse(
       CigaretteLicenseStep1,
       CigaretteLicenseStep2,
       CigaretteLicenseStep3,
+      CigaretteLicenseConfirmation,
       NexusNameSearch,
       NexusDbaFormation,
       NaicsCode,
@@ -196,6 +198,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof CigaretteLicenseStep1 &
   typeof CigaretteLicenseStep2 &
   typeof CigaretteLicenseStep3 &
+  typeof CigaretteLicenseConfirmation &
   typeof NexusNameSearch &
   typeof NexusDbaFormation &
   typeof NaicsCode &
@@ -276,6 +279,7 @@ export const getMergedConfig = (): ConfigType => {
     CigaretteLicenseStep1,
     CigaretteLicenseStep2,
     CigaretteLicenseStep3,
+    CigaretteLicenseConfirmation,
     NexusNameSearch,
     NexusDbaFormation,
     NaicsCode,

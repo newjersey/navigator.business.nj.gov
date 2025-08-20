@@ -1,5 +1,7 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskHeader } from "@/components/TaskHeader";
+import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
+import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 import { SalesInfo } from "@/components/tasks/cigarette-license/fields/SalesInfo";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
@@ -31,12 +33,14 @@ import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 type Props = {
   task: Task;
   CMS_ONLY_stepIndex?: number;
+  CMS_ONLY_show_error?: boolean;
 };
 
 export const CigaretteLicense = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
-  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+  const { getInvalidFieldIds, state: formContextState } =
+    useFormContextHelper(createDataFormErrorMap());
 
   const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);
   const [formationAddressData, setAddressData] =
@@ -103,14 +107,13 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         businessName: profileData.businessName,
         responsibleOwnerName: profileData.responsibleOwnerName,
         tradeName: profileData.tradeName,
-        taxId: profileData.taxId || "",
-        encryptedTaxId: profileData.taxId || "",
+        taxId: profileData.taxId,
+        encryptedTaxId: profileData.taxId,
       });
 
       return profileData;
     });
   };
-  console.log(formContextState);
 
   useMountEffectWhenDefined(() => {
     if (business && userData) {
@@ -184,9 +187,22 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     }
   }, business);
 
+  if (
+    business?.cigaretteLicenseData?.paymentInfo?.orderId &&
+    business?.cigaretteLicenseData?.paymentInfo?.confirmationEmailsent
+  ) {
+    return (
+      <div className="flex flex-column space-between min-height-38rem">
+        <TaskHeader task={props.task} />
+        <ConfirmationPage business={business} />
+      </div>
+    );
+  }
+
   return (
     <>
       <TaskHeader task={props.task} />
+      <CigaretteLicenseAlert fieldErrors={getInvalidFieldIds()} setStepIndex={setStepIndex} />
       <HorizontalStepper
         steps={stepperSteps}
         currentStep={stepIndex}
@@ -218,7 +234,12 @@ export const CigaretteLicense = (props: Props): ReactElement => {
               }}
             >
               {stepIndex === 0 && <GeneralInfo setStepIndex={setStepIndex} />}
-              {stepIndex === 1 && <LicenseeInfo setStepIndex={setStepIndex} />}
+              {stepIndex === 1 && (
+                <LicenseeInfo
+                  setStepIndex={setStepIndex}
+                  CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                />
+              )}
               {stepIndex === 2 && <SalesInfo setStepIndex={setStepIndex} />}
             </AddressContext.Provider>
           </ProfileDataContext.Provider>

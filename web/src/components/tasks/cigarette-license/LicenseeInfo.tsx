@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
@@ -20,11 +21,12 @@ import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
+import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
 import { ReactElement, useContext } from "react";
 
 interface Props {
   setStepIndex: (idx: number) => void;
+  CMS_ONLY_show_error?: boolean;
 }
 
 export const LicenseeInfo = (props: Props): ReactElement => {
@@ -32,11 +34,6 @@ export const LicenseeInfo = (props: Props): ReactElement => {
   const { business } = useUserData();
   const hasSubmittedTaxData =
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
-
-  const shouldShowTradeNameElements = (): boolean => {
-    if (!business) return false;
-    return LookupLegalStructureById(business.profileData.legalStructureId).hasTradeName;
-  };
 
   const dataFormErrorMap = useContext(DataFormErrorMapContext);
 
@@ -73,16 +70,16 @@ export const LicenseeInfo = (props: Props): ReactElement => {
   return (
     <>
       <h2 className="margin-bottom-2">{Config.cigaretteLicenseStep2.licenseeInformationHeader}</h2>
-      <p className="margin-bottom-3">
+      <Content className="margin-bottom-3">
         {Config.cigaretteLicenseStep2.licenseeInformationDescription}
-      </p>
+      </Content>
 
       <div className="margin-y-2">
         <ProfileField
           fieldName={"businessName"}
           hideLine
           fullWidth
-          isVisible={!shouldShowTradeNameElements()}
+          isVisible={!isTradeNameLegalStructureApplicable(business?.profileData.legalStructureId)}
         >
           <BusinessName
             inputWidth="full"
@@ -93,7 +90,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
         </ProfileField>
         <ProfileField
           fieldName="responsibleOwnerName"
-          isVisible={shouldShowTradeNameElements()}
+          isVisible={isTradeNameLegalStructureApplicable(business?.profileData.legalStructureId)}
           locked={hasSubmittedTaxData}
           hideLine
           fullWidth
@@ -102,7 +99,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
         </ProfileField>
         <ProfileField
           fieldName="tradeName"
-          isVisible={shouldShowTradeNameElements()}
+          isVisible={isTradeNameLegalStructureApplicable(business?.profileData.legalStructureId)}
           hideLine
           fullWidth
         >
@@ -113,7 +110,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
         <ProfileField fieldName="taxId" noLabel fullWidth>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
 
-          <div className="max-width-38rem">
+          <div className="max-width-30rem">
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
@@ -128,29 +125,34 @@ export const LicenseeInfo = (props: Props): ReactElement => {
         </ProfileField>
       </div>
 
-      {/* Business Address */}
       <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.businessAddressHeader}</h2>
       <p>{Config.cigaretteLicenseStep2.businessAddressDescription}</p>
-      <UnitedStatesAddress
-        onValidation={onValidation}
-        dataFormErrorMap={dataFormErrorMap}
-        isFullWidth
-      />
+      <div data-testid="business-address-section" className="margin-y-4">
+        <UnitedStatesAddress
+          onValidation={onValidation}
+          dataFormErrorMap={dataFormErrorMap}
+          isFullWidth
+          stateInputLocked
+        />
+      </div>
       <HorizontalLine />
 
-      {/* Mailing Address */}
       <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.mailingAddressHeader}</h2>
-      <p>{Config.cigaretteLicenseStep2.mailingAddressDescription}</p>
+      <Content>{Config.cigaretteLicenseStep2.mailingAddressDescription}</Content>
 
-      <MailingAddress />
+      <div data-testid="mailing-address-section" className="margin-y-2">
+        <MailingAddress CMS_ONLY_show_error={props.CMS_ONLY_show_error} />
+      </div>
 
-      {/* Contact Information*/}
+      <HorizontalLine />
+
       <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.contactInformationHeader}</h2>
-      <p>{Config.cigaretteLicenseStep2.contactInformationDescription}</p>
+      <Content>{Config.cigaretteLicenseStep2.contactInformationDescription}</Content>
 
-      <ContactInformation />
+      <div className="margin-y-2">
+        <ContactInformation CMS_ONLY_show_error={props.CMS_ONLY_show_error} />
+      </div>
 
-      {/* footer */}
       <HorizontalLine />
       <span className="h5-styling">{Config.cigaretteLicenseShared.issuingAgencyLabelText}: </span>
       <span className="h6-styling">{Config.cigaretteLicenseShared.issuingAgencyText}</span>
@@ -167,7 +169,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           </SecondaryButton>
           <PrimaryButton
             isColor="primary"
-            onClick={() => props.setStepIndex(2)}
+            onClick={() => props.setStepIndex(1)}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >

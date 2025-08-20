@@ -1,0 +1,6 @@
+{
+  "token": "00000000-1111-2222-3333-444444444444",
+  "legacyRedirectUrl": "https://success.com?token=00000000-1111-2222-3333-444444444444",
+  "htmL5RedirectUrl": "https://success.com?token=00000000-1111-2222-3333-444444444444",
+  "inContextRedirectUrl": "https://success.com?token=00000000-1111-2222-3333-444444444444"
+}

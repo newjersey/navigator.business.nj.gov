@@ -1,0 +1,10 @@
+{
+  "token": "",
+  "errorResult": {
+    "statusCode": 500,
+    "errorCode": "140",
+    "userMessage": "There was an issue with this prepare payment request",
+    "developerMessage": "There was an issue with this prepare payment request",
+    "validationErrors": []
+  }
+}

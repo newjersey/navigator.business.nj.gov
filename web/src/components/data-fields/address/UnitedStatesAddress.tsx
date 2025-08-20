@@ -17,6 +17,7 @@ interface Props {
   isFullWidth?: boolean;
   excludeNJ?: boolean | true;
   dataFormErrorMap?: FormContextType<DataFormErrorMap, unknown>;
+  stateInputLocked?: boolean;
 }
 
 export const UnitedStatesAddress = (props: Props): ReactElement => {
@@ -94,7 +95,7 @@ export const UnitedStatesAddress = (props: Props): ReactElement => {
                             });
                           }}
                           error={doesFieldHaveError("addressState") || isAddressStateInvalid}
-                          disabled={false}
+                          disabled={props.stateInputLocked || false}
                           onValidation={props.onValidation}
                           excludeNJ={props.excludeNJ}
                         />

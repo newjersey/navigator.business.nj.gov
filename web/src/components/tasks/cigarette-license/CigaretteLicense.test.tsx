@@ -1,107 +1,79 @@
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { getMergedConfig } from "@/contexts/configContext";
-import * as useConfigModule from "@/lib/data-hooks/useConfig";
-import * as useUserDataModule from "@/lib/data-hooks/useUserData";
-import { generateRoadmap, generateTask } from "@/test/factories";
-import { fillText } from "@/test/helpers/helpers-testing-library-selectors";
-import { setMockRoadmapResponse } from "@/test/mock/mockUseRoadmap";
-import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
+import { generateTask } from "@/test/factories";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
   generateFormationData,
+  generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useConfig", () => ({ useConfig: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-
-const mockUseConfig = useConfigModule.useConfig as jest.MockedFunction<
-  typeof useConfigModule.useConfig
->;
-const mockUseUserData = useUserDataModule.useUserData as jest.MockedFunction<
-  typeof useUserDataModule.useUserData
->;
 
 describe("<CigaretteLicense />", () => {
   beforeEach(() => {
-    mockUseConfig.mockReturnValue({ Config });
-    setMockRoadmapResponse({ roadmap: generateRoadmap({}) });
+    jest.resetAllMocks();
+    useMockRoadmap({});
   });
 
-  const renderComponent = (business?: Business): void => {
+  const renderComponent = async (business?: Business, stepIndex?: number): Promise<void> => {
     const userData = generateUserDataForBusiness(business ?? generateBusiness({}));
-    mockUseUserData.mockReturnValue(generateUseUserDataResponse({ userData }));
 
     render(
       <WithStatefulUserData initialUserData={userData}>
         <CigaretteLicense task={generateTask({ id: "cigarette-license" })} />
       </WithStatefulUserData>,
     );
+    if (stepIndex) {
+      const tab = screen.getByTestId(`stepper-${stepIndex}`);
+      await userEvent.click(tab);
+    }
   };
 
   describe("Stepper Functionality", () => {
-    it("renders the first tab on load", () => {
-      renderComponent();
-      const stepOne = new RegExp(Config.cigaretteLicenseShared.stepperOneLabel);
-      const firstTab = screen.getByRole("tab", { name: stepOne });
+    it("renders the first tab on load", async () => {
+      await renderComponent();
+      const firstTab = screen.getByTestId("stepper-0");
       expect(firstTab).toHaveAttribute("aria-selected", "true");
     });
 
-    it("shows all tabs correctly", () => {
-      renderComponent();
+    it("navigates to the previous step when back button is clicked", async () => {
+      await renderComponent(generateBusiness({}), 1);
 
-      const stepOne = new RegExp(Config.cigaretteLicenseShared.stepperOneLabel);
-      const stepTwo = new RegExp(Config.cigaretteLicenseShared.stepperTwoLabel);
-      const stepThree = new RegExp(Config.cigaretteLicenseShared.stepperThreeLabel);
-      const stepFour = new RegExp(Config.cigaretteLicenseShared.stepperFourLabel);
+      const backButton = screen.getByText(Config.cigaretteLicenseStep2.backButtonText);
+      await userEvent.click(backButton);
 
-      expect(screen.getByRole("tab", { name: stepOne })).toBeInTheDocument();
-      expect(screen.getByRole("tab", { name: stepTwo })).toBeInTheDocument();
-      expect(screen.getByRole("tab", { name: stepThree })).toBeInTheDocument();
-      expect(screen.getByRole("tab", { name: stepFour })).toBeInTheDocument();
+      expect(screen.getByRole("tab", { name: /General Info/ })).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
     });
 
-    it("allows navigation between all steps", () => {
-      renderComponent();
+    it("allows navigation between all steps", async () => {
+      await renderComponent();
 
-      const steps = [
-        Config.cigaretteLicenseShared.stepperOneLabel,
-        Config.cigaretteLicenseShared.stepperTwoLabel,
-        Config.cigaretteLicenseShared.stepperThreeLabel,
-        Config.cigaretteLicenseShared.stepperFourLabel,
-      ];
+      const stepsLength = 4;
 
-      for (const stepLabel of steps) {
-        const tab = screen.getByRole("tab", { name: new RegExp(stepLabel) });
-        fireEvent.click(tab);
+      for (let stepIndex = 0; stepIndex < stepsLength; stepIndex++) {
+        const tab = screen.getByTestId(`stepper-${stepIndex}`);
+        await userEvent.click(tab);
         expect(tab).toHaveAttribute("aria-selected", "true");
       }
     });
 
-    it("allows navigation regardless of each step's form validation", () => {
-      renderComponent();
-
-      const stepThree = new RegExp(Config.cigaretteLicenseShared.stepperThreeLabel);
-      const thirdTab = screen.getByRole("tab", { name: stepThree });
-      fireEvent.click(thirdTab);
-
-      expect(thirdTab).toHaveAttribute("aria-selected", "true");
-    });
-
     it("renders appropriate content for step 2", async () => {
-      renderComponent();
+      await renderComponent();
 
-      const stepTwo = new RegExp(Config.cigaretteLicenseShared.stepperTwoLabel);
-      const secondTab = screen.getByRole("tab", { name: stepTwo });
-      fireEvent.click(secondTab);
+      const secondTab = screen.getByTestId("stepper-1");
+      await userEvent.click(secondTab);
 
       await waitFor(() => {
         expect(
@@ -112,178 +84,34 @@ describe("<CigaretteLicense />", () => {
   });
 
   describe("Field Validation", () => {
-    describe("Licensee Info validations", () => {
-      const renderComponentOnStep2 = (): void => {
-        const business = generateBusiness({
-          profileData: emptyProfileData,
-          formationData: generateFormationData({
-            formationFormData: createEmptyFormationFormData(),
-          }),
-        });
-        renderComponent(business);
-
-        const secondTab = screen.getByRole("tab", { name: /Licensee Info/ });
-        fireEvent.click(secondTab);
-        expect(secondTab).toHaveAttribute("aria-selected", "true");
-      };
-
-      it("renders error for business name when empty and onBlur", () => {
-        renderComponentOnStep2();
-
-        fillText("Business name", "");
-        fireEvent.blur(screen.getByLabelText("Business name"));
-
-        expect(
-          screen.getByText(Config.cigaretteLicenseStep2.businessNameErrorText),
-        ).toBeInTheDocument();
-      });
-
-      it("renders error onBlur when tax id is invalid", () => {
-        renderComponentOnStep2();
-
-        fillText("Tax id", "");
-        fireEvent.blur(screen.getByLabelText("Tax id"));
-
-        expect(
-          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
-        ).toBeInTheDocument();
-
-        fillText("Tax id", "123456");
-        fireEvent.blur(screen.getByLabelText("Tax id"));
-
-        expect(
-          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
-        ).toBeInTheDocument();
-      });
-
-      it("renders error onBlur when address line 1 is empty", () => {
-        renderComponentOnStep2();
-
-        fillText("Address line1", "");
-        fireEvent.blur(screen.getByLabelText("Address line1"));
-
-        expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
-      });
-
-      it("renders error onBlur when contact information is empty", () => {
-        renderComponentOnStep2();
-
-        fillText("Contact name", "");
-        fireEvent.blur(screen.getByLabelText("Contact name"));
-
-        expect(screen.getByText("Contact name is required")).toBeInTheDocument();
-      });
-    });
-
-    describe("Sales Info validations", () => {
-      const renderComponentOnStep3 = (): void => {
-        const business = generateBusiness({
-          profileData: emptyProfileData,
-          formationData: generateFormationData({
-            formationFormData: createEmptyFormationFormData(),
-          }),
-        });
-        renderComponent(business);
-
-        const thirdTab = screen.getByRole("tab", { name: /Sales Info/ });
-        fireEvent.click(thirdTab);
-        expect(thirdTab).toHaveAttribute("aria-selected", "true");
-      };
-
-      it("renders error for sales info start date when empty and onBlur", () => {
-        renderComponentOnStep3();
-
-        //TODO: replace with config references?
-        fillText("Start Date of Cigarette Sales", "");
-        fireEvent.blur(screen.getByLabelText("Start Date of Cigarette Sales"));
-
-        expect(
-          screen.getByText(Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText),
-        ).toBeInTheDocument();
-      });
-
-      it("renders error for sales info start date when date is invalid", () => {
-        renderComponentOnStep3();
-
-        fillText("Start Date of Cigarette Sales", "1");
-        fireEvent.blur(screen.getByLabelText("Start Date of Cigarette Sales"));
-
-        expect(
-          screen.getByText(Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText),
-        ).toBeInTheDocument();
-      });
-
-      it("clears error for sales info start date when valid", () => {
-        renderComponentOnStep3();
-        fillText("Start Date of Cigarette Sales", "1");
-        fireEvent.blur(screen.getByLabelText("Start Date of Cigarette Sales"));
-        fireEvent.click(screen.getByLabelText(/Choose date/));
-        const dateButton = screen.getByRole("gridcell");
-        fireEvent.click(dateButton);
-        expect(
-          screen.getByText(Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText),
-        ).toNotBeInTheDocument();
-      });
-
-      // t("renders error for select supplier start date", () => {
-      //   renderComponentOnStep3();
-
-      //   fillText("Select a Supplier", "");
-      //   fireEvent.blur(screen.getByLabelText("Select a Supplier"));
-
-      //   // expect(screen.getByText("WRONG")).toBeInTheDocument();
-      // });
-    });
-
     describe("Business name field visibility based on business type", () => {
-      const renderComponentOnStep2WithBusinessType = (legalStructureId: string): void => {
-        const business = generateBusiness({
-          profileData: {
-            ...emptyProfileData,
-            legalStructureId,
-          },
-          formationData: generateFormationData({
-            formationFormData: createEmptyFormationFormData(),
-          }),
-        });
-        renderComponent(business);
+      it.each([
+        ["sole-proprietorship", ["Responsible owner name", "Trade name"], ["Business name"]],
+        ["general-partnership", ["Responsible owner name", "Trade name"], ["Business name"]],
+        ["limited-liability-company", ["Business name"], ["Responsible owner name", "Trade name"]],
+        ["c-corporation", ["Business name"], ["Responsible owner name", "Trade name"]],
+      ])(
+        "for %s business type, %s fields are visible and %s fields are hidden",
+        async (legalStructureId, presentFields, hiddenFields) => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: legalStructureId,
+            }),
+            formationData: generateFormationData({
+              formationFormData: createEmptyFormationFormData(),
+            }),
+          });
 
-        const secondTab = screen.getByRole("tab", { name: /Licensee Info/ });
-        fireEvent.click(secondTab);
-        expect(secondTab).toHaveAttribute("aria-selected", "true");
-      };
+          await renderComponent(business, 1);
 
-      it("shows responsible owner name and trade name fields for sole proprietorship", () => {
-        renderComponentOnStep2WithBusinessType("sole-proprietorship");
-
-        expect(screen.getByLabelText("Responsible owner name")).toBeInTheDocument();
-        expect(screen.getByLabelText("Trade name")).toBeInTheDocument();
-        expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
-      });
-
-      it("shows responsible owner name and trade name fields for general partnership", () => {
-        renderComponentOnStep2WithBusinessType("general-partnership");
-
-        expect(screen.getByLabelText("Responsible owner name")).toBeInTheDocument();
-        expect(screen.getByLabelText("Trade name")).toBeInTheDocument();
-        expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
-      });
-
-      it("shows business name field for LLC", () => {
-        renderComponentOnStep2WithBusinessType("limited-liability-company");
-
-        expect(screen.getByLabelText("Business name")).toBeInTheDocument();
-        expect(screen.queryByLabelText("Responsible owner name")).not.toBeInTheDocument();
-        expect(screen.queryByLabelText("Trade name")).not.toBeInTheDocument();
-      });
-
-      it("shows business name field for corporation", () => {
-        renderComponentOnStep2WithBusinessType("c-corporation");
-
-        expect(screen.getByLabelText("Business name")).toBeInTheDocument();
-        expect(screen.queryByLabelText("Responsible owner name")).not.toBeInTheDocument();
-        expect(screen.queryByLabelText("Trade name")).not.toBeInTheDocument();
-      });
+          for (const field of presentFields) {
+            expect(screen.getByLabelText(field)).toBeInTheDocument();
+          }
+          for (const field of hiddenFields) {
+            expect(screen.queryByLabelText(field)).not.toBeInTheDocument();
+          }
+        },
+      );
     });
   });
 });

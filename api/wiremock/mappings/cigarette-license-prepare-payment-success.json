@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/cigarette-license/tokens",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.CompanyName === 'Mock Success Company')]"
+      },
+      {
+        "matchesJsonPath": "$[?(@.Email === 'mock-success@test.com')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "cigarette-license-prepare-payment-success.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

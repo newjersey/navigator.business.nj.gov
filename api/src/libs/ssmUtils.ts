@@ -3,10 +3,36 @@ import { GetParameterCommand, PutParameterCommand, SSMClient } from "@aws-sdk/cl
 const ssmClient = new SSMClient({});
 const parameterName = `/${process.env.STAGE}/feature-flag/users-migration/kill-switch`;
 
+export type CONFIG_VARS =
+  | "cigarette_license_base_url"
+  | "cigarette_license_api_key"
+  | "cigarette_license_merchant_code"
+  | "cigarette_license_merchant_key"
+  | "cigarette_license_service_code"
+  | "cigarette_license_email_confirmation_url"
+  | "cigarette_license_email_confirmation_key";
+
 let cache: {
   value?: boolean;
   expiresAt?: number;
 } = {};
+
+export const getConfigValue = async (paramName: CONFIG_VARS): Promise<string> => {
+  try {
+    const ssmPath = `/${process.env.STAGE}/${paramName}`;
+    const command = new GetParameterCommand({
+      Name: ssmPath,
+    });
+
+    const response = await ssmClient.send(command);
+    const paramValue = response.Parameter?.Value ?? "";
+
+    return paramValue;
+  } catch (error) {
+    console.error(`Failed to read parameter ${paramName}:`, error);
+    return "";
+  }
+};
 
 export const isKillSwitchOn = async (): Promise<boolean> => {
   const now = Date.now();

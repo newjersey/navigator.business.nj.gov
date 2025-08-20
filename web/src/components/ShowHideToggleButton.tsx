@@ -32,7 +32,11 @@ export const ShowHideToggleButton = ({
   };
 
   return (
-    <UnStyledButton className="padding-x-1 width-100" onClick={toggle}>
+    <UnStyledButton
+      dataTestid="tax-id-show-hide-button"
+      className="padding-x-1 width-100"
+      onClick={toggle}
+    >
       <ButtonIcon svgFilename={status === "text-view" ? "hide" : "show"} />
       <span className="underline">
         {status === "text-view" ? hideButtonText() : showButtonText()}

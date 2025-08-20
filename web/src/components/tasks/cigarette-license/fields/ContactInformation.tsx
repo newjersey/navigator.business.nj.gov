@@ -8,7 +8,11 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { getPhoneNumberFormat, validateEmail } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
 
-export const ContactInformation = (): ReactElement => {
+interface Props {
+  CMS_ONLY_show_error?: boolean;
+}
+
+export const ContactInformation = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { setIsValid: setIsContactNameValid, isFormFieldInvalid: isContactNameValid } =
     useFormContextFieldHelpers("contactName", DataFormErrorMapContext);
@@ -36,12 +40,12 @@ export const ContactInformation = (): ReactElement => {
   return (
     <>
       <WithErrorBar
-        hasError={isContactNameValid || isContactPhoneNumberValid}
+        hasError={props.CMS_ONLY_show_error || isContactNameValid || isContactPhoneNumberValid}
         type="ALWAYS"
         className="margin-bottom-2"
       >
-        <div className="grid-row grid-gap-2">
-          <span className="grid-col-6">
+        <div className="grid-row grid-gap-2 margin-y-2">
+          <span id="question-contactName" className="grid-col-6">
             <strong>
               <Content>{Config.cigaretteLicenseStep2.fields.contactName.label}</Content>
             </strong>
@@ -50,15 +54,16 @@ export const ContactInformation = (): ReactElement => {
               handleChange={(val) => handleChange(val, "contactName")}
               onValidation={(fieldName, invalid) => setIsContactNameValid(!invalid)}
               additionalValidationIsValid={validateEmail}
-              error={isContactNameValid}
+              error={props.CMS_ONLY_show_error || isContactNameValid}
               validationText={Config.cigaretteLicenseStep2.fields.contactName.errorRequiredText}
               required={true}
               autoComplete="name"
               formContext={DataFormErrorMapContext}
               value={state.contactName}
+              preventRefreshWhenUnmounted
             />
           </span>
-          <span className="grid-col-6">
+          <span id="question-contactPhoneNumber" className="grid-col-6">
             <strong>
               <Content>{Config.cigaretteLicenseStep2.fields.contactPhoneNumber.label}</Content>
             </strong>
@@ -66,8 +71,10 @@ export const ContactInformation = (): ReactElement => {
               fieldName="contactPhoneNumber"
               handleChange={(val) => handleChange(val, "contactPhoneNumber")}
               onValidation={(fieldName, invalid) => setIsContactPhoneNumberValid(!invalid)}
-              error={isContactPhoneNumberValid}
-              validationText={Config.cigaretteLicenseStep2.fields.contactPhoneNumber.errorRequiredText}
+              error={props.CMS_ONLY_show_error || isContactPhoneNumberValid}
+              validationText={
+                Config.cigaretteLicenseStep2.fields.contactPhoneNumber.errorRequiredText
+              }
               required={true}
               autoComplete="tel"
               inputWidth="full"
@@ -75,34 +82,38 @@ export const ContactInformation = (): ReactElement => {
               value={state.contactPhoneNumber}
               visualFilter={getPhoneNumberFormat}
               numericProps={{ maxLength: 10, minLength: 10 }}
+              preventRefreshWhenUnmounted
             />
           </span>
         </div>
       </WithErrorBar>
 
-      <WithErrorBar
-        hasError={isContactEmailValid}
-        type="ALWAYS"
-        className="margin-top-2 margin-bottom-2"
-      >
-        <strong>
-          <Content>{Config.cigaretteLicenseStep2.fields.contactEmail.label}</Content>
-        </strong>
-        <GenericTextField
-          fieldName="contactEmail"
-          handleChange={(val) => handleChange(val, "contactEmail")}
-          onValidation={(fieldName, invalid) => setIsContactEmailValid(!invalid)}
-          additionalValidationIsValid={validateEmail}
-          error={isContactEmailValid}
-          validationText={Config.cigaretteLicenseStep2.fields.contactEmail.errorRequiredText}
-          required={true}
-          autoComplete="email"
-          type="email"
-          inputWidth="full"
-          formContext={DataFormErrorMapContext}
-          value={state.contactEmail}
-        />
-      </WithErrorBar>
+      <div id="question-contactEmail">
+        <WithErrorBar
+          hasError={props.CMS_ONLY_show_error || isContactEmailValid}
+          type="ALWAYS"
+          className="margin-top-2 margin-bottom-2"
+        >
+          <strong>
+            <Content>{Config.cigaretteLicenseStep2.fields.contactEmail.label}</Content>
+          </strong>
+          <GenericTextField
+            fieldName="contactEmail"
+            handleChange={(val) => handleChange(val, "contactEmail")}
+            onValidation={(fieldName, invalid) => setIsContactEmailValid(!invalid)}
+            additionalValidationIsValid={validateEmail}
+            error={props.CMS_ONLY_show_error || isContactEmailValid}
+            validationText={Config.cigaretteLicenseStep2.fields.contactEmail.errorRequiredText}
+            required={true}
+            autoComplete="email"
+            type="email"
+            inputWidth="full"
+            formContext={DataFormErrorMapContext}
+            value={state.contactEmail}
+            preventRefreshWhenUnmounted
+          />
+        </WithErrorBar>
+      </div>
     </>
   );
 };

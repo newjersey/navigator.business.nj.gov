@@ -1,4 +1,4 @@
-import { AnytimeActionGovernmentContractingElement } from "@/components/tasks/anytime-action/AnytimeActionGovernmentContractingElement";
+import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateAnytimeActionTask } from "@/test/factories";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -8,7 +8,7 @@ const Config = getMergedConfig();
 describe("AnytimeActionGovernmentContractingElement", () => {
   const renderComponent = (): void => {
     const task = generateAnytimeActionTask({ filename: "government-contracting" });
-    render(<AnytimeActionGovernmentContractingElement governmentContractingTask={task} />);
+    render(<GovernmentContractingElement anytimeActionHeaderText={task.name} />);
   };
 
   it("renders first tab", () => {

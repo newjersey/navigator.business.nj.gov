@@ -399,8 +399,6 @@ const OnboardingPage = (props: Props): ReactElement => {
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
       setAnalyticsDimensions(newProfileData);
 
-      console.log(page.current);
-
       if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
         router &&
           (await router.push({

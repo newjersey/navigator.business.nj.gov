@@ -1280,4 +1280,66 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("business-vehicle");
     });
   });
+
+  describe("if industry is construction", () => {
+    describe("residentialConstructionType", () => {
+      it("adds construction-home-renovation add-on if HOME_RENOVATIONS", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            residentialConstructionType: "HOME_RENOVATIONS",
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-home-renovation",
+        );
+      });
+
+      it("adds construction-new-home-construction add-on if NEW_HOME_CONSTRUCTION", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            residentialConstructionType: "NEW_HOME_CONSTRUCTION",
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-new-home-construction",
+        );
+      });
+
+      it("adds construction-home-renovation and construction-new-home-construction add-on if BOTH", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            residentialConstructionType: "BOTH",
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-home-renovation",
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-new-home-construction",
+        );
+      });
+    });
+
+    describe("publicWorksContractor", () => {
+      it("adds public-works-contractor add-on if True", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            publicWorksContractor: true,
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "public-works-contractor",
+        );
+      });
+    });
+  });
 });

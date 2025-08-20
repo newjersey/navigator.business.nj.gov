@@ -111,7 +111,7 @@ describe("Onboarding for all industries when starting a business [feature] [all]
           onOnboardingPageStartingBusiness
             .getConstructionTypeItemsRadio(constructionType)
             .should("be.checked");
-          if (residentialConstructionTypeApplicable) {
+          if (constructionType === "RESIDENTIAL") {
             onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("exist");
             const residentialConstructionChoices = [
               "NEW_HOME_CONSTRUCTION",
@@ -132,6 +132,17 @@ describe("Onboarding for all industries when starting a business [feature] [all]
             onOnboardingPageStartingBusiness
               .getResidentialConstructionTypeRadio()
               .should("not.exist");
+
+            const selectValue = Boolean(randomInt() % 2);
+            onOnboardingPageStartingBusiness
+              .getCommercialConstructionTypeItemsRadio(selectValue)
+              .should("exist");
+            onOnboardingPageStartingBusiness.selectCommercialConstructionTypeItemsRadio(
+              selectValue,
+            );
+            onOnboardingPageStartingBusiness
+              .getCommercialConstructionTypeItemsRadio(selectValue)
+              .should("be.checked");
           }
         }
 

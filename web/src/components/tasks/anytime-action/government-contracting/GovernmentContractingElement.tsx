@@ -6,15 +6,16 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { AnytimeActionTask, StepperStep } from "@/lib/types/types";
+import { StepperStep } from "@/lib/types/types";
 import { ReactElement, useState } from "react";
 
 interface Props {
-  governmentContractingTask: AnytimeActionTask;
+  anytimeActionHeaderText?: string;
   CMS_ONLY_stepIndex?: number;
+  headerOverride?: ReactElement;
 }
 
-export const AnytimeActionGovernmentContractingElement = (props: Props): ReactElement => {
+export const GovernmentContractingElement = (props: Props): ReactElement => {
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex || 0);
   const { Config } = useConfig();
   let bodyText = "";
@@ -75,14 +76,25 @@ export const AnytimeActionGovernmentContractingElement = (props: Props): ReactEl
     },
   ];
 
+  const extraMargin = props.anytimeActionHeaderText ? "margin-x-4" : "";
+
   return (
     <div className="flex flex-column space-between min-height-38rem">
-      <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
-        <div className="padding-y-4 margin-x-4 margin-bottom-2">
-          <h1>{props.governmentContractingTask.name}</h1>
-        </div>
+      <div
+        className={
+          props.anytimeActionHeaderText
+            ? `bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg`
+            : ""
+        }
+      >
+        {props.headerOverride && props.headerOverride}
+        {props.anytimeActionHeaderText && (
+          <div className="padding-y-4 margin-x-4 margin-bottom-2">
+            <h1>{props.anytimeActionHeaderText}</h1>
+          </div>
+        )}
         <div className="bg-white">
-          <div className="margin-top-3 margin-x-4">
+          <div className={`margin-top-3 ${extraMargin}`}>
             <HorizontalStepper
               steps={stepperSteps}
               currentStep={stepIndex}
@@ -91,7 +103,7 @@ export const AnytimeActionGovernmentContractingElement = (props: Props): ReactEl
               }}
             />
           </div>
-          <div className={"margin-x-4 padding-bottom-1"}>
+          <div className={`${extraMargin} padding-bottom-1`}>
             <Content>{bodyText}</Content>
             {ctaText && ctaLink && (
               <SingleCtaLink

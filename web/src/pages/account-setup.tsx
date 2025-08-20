@@ -35,7 +35,7 @@ const AccountSetupPage = (): ReactElement => {
   const { setRegistrationStatus } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const queryAnalyticsOccurred = useRef<boolean>(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useMountEffectWhenDefined(() => {
     if (!userData) return;
     setUser(userData.user);
@@ -57,6 +57,8 @@ const AccountSetupPage = (): ReactElement => {
 
   FormFuncWrapper(
     async (): Promise<void> => {
+      setIsSubmitting(true);
+
       if (!updateQueue || !router) return;
 
       updateQueue.queueUser(user);
@@ -113,7 +115,6 @@ const AccountSetupPage = (): ReactElement => {
     if (state.activeUser?.encounteredMyNjLinkingError) return Config.accountSetup.existingAccount;
     return Config.accountSetup.default;
   };
-
   return (
     <PageSkeleton showNavBar logoOnly="NAVIGATOR_MYNJ_LOGO">
       <main id="main" className="padding-top-4 desktop:padding-top-8">
@@ -132,6 +133,7 @@ const AccountSetupPage = (): ReactElement => {
                 isColor="primary"
                 isSubmitButton={true}
                 isRightMarginRemoved={true}
+                isLoading={isSubmitting}
               >
                 {getContent().submitButton}
               </PrimaryButton>

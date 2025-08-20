@@ -20,7 +20,7 @@
         "errorValidationText": "Address Line 1 must be 35 characters or fewer."
       },
       "mailingAddressLine2": {
-        "label": "Mailing Address Line 2",
+        "label": "**Mailing Address Line 2** (Optional)",
         "errorValidationText": "Address Line 2 must be 35 characters or fewer."
       },
       "mailingAddressCity": {

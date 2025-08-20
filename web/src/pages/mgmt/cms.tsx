@@ -28,6 +28,7 @@ import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/Anytime
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
 import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
+import CigaretteLicenseConfirmationPreview from "@/lib/cms/previews/CigaretteLicenseConfirmationPreview";
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
 import EmergencyTripPermitPreview from "@/lib/cms/previews/EmergencyTripPermitPreview";
@@ -126,6 +127,7 @@ const CMS = dynamic(
       registerPreview(CMS, "cigaretteLicense-step3", CigaretteLicensePreview);
 
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-confirmation", CigaretteLicenseConfirmationPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
       registerPreview(CMS, "check-account-email-page", LoginEmailCheckPreview);

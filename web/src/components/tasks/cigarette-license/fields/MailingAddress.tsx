@@ -13,8 +13,11 @@ import { StateObject } from "@businessnjgovnavigator/shared/states";
 import { Checkbox, FormControlLabel, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
+const MAX_CHAR_ADDRESS_FIELD = 35;
+
 interface Props {
   className?: string;
+  CMS_ONLY_show_error?: boolean;
 }
 
 export const MailingAddress = (props: Props): ReactElement => {
@@ -55,7 +58,6 @@ export const MailingAddress = (props: Props): ReactElement => {
         ...state,
         mailingAddressIsTheSame: false,
       });
-      performValidation();
     } else {
       setCigaretteLicenseData({
         ...state,
@@ -72,6 +74,10 @@ export const MailingAddress = (props: Props): ReactElement => {
   const getErrorMessage = (field: TextFields): string => {
     const fieldConfig = Config.cigaretteLicenseStep2.fields[field];
 
+    if (field === "mailingAddressLine2" && props.CMS_ONLY_show_error) {
+      return Config.cigaretteLicenseStep2.fields.mailingAddressLine2.errorValidationText;
+    }
+
     if (!state[field])
       return (fieldConfig as { errorRequiredText?: string }).errorRequiredText || "";
 
@@ -84,7 +90,7 @@ export const MailingAddress = (props: Props): ReactElement => {
   const validateLine1AndLine2 = (val: string, required: boolean): boolean => {
     if (required && val === "") return false;
 
-    return val.length <= 35;
+    return val.length <= MAX_CHAR_ADDRESS_FIELD;
   };
 
   const validateZip = (zip: string): boolean => {
@@ -105,7 +111,7 @@ export const MailingAddress = (props: Props): ReactElement => {
   };
 
   return (
-    <div>
+    <div className="margin-y-2">
       <FormControlLabel
         control={
           <Checkbox
@@ -118,10 +124,10 @@ export const MailingAddress = (props: Props): ReactElement => {
       />
       {!state.mailingAddressIsTheSame && (
         <>
-          <div className="margin-y-2">
+          <div id="question-mailingAddressLine1" className="margin-y-2">
             <WithErrorBar
               className={"padding-bottom-1"}
-              hasError={isLine1FieldInvalid}
+              hasError={props.CMS_ONLY_show_error || isLine1FieldInvalid}
               type={"ALWAYS"}
             >
               <label htmlFor="mailingAddressLine1">
@@ -136,7 +142,7 @@ export const MailingAddress = (props: Props): ReactElement => {
                   disabled={state.mailingAddressIsTheSame}
                   formContext={DataFormErrorMapContext}
                   value={state.mailingAddressLine1}
-                  error={isLine1FieldInvalid}
+                  error={props.CMS_ONLY_show_error || isLine1FieldInvalid}
                   validationText={getErrorMessage("mailingAddressLine1")}
                   preventRefreshWhenUnmounted
                   onValidation={performValidation}
@@ -144,16 +150,14 @@ export const MailingAddress = (props: Props): ReactElement => {
               </label>
             </WithErrorBar>
           </div>
-          <div className="margin-y-2">
+          <div id="question-mailingAddressLine2" className="margin-y-2">
             <WithErrorBar
               className={"padding-bottom-1"}
-              hasError={isLine2FieldInvalid}
+              hasError={props.CMS_ONLY_show_error || isLine2FieldInvalid}
               type={"ALWAYS"}
             >
               <label htmlFor="mailingAddressLine2">
-                <span className={"text-bold"}>
-                  <Content>{Config.cigaretteLicenseStep2.fields.mailingAddressLine2.label}</Content>
-                </span>
+                <Content>{Config.cigaretteLicenseStep2.fields.mailingAddressLine2.label}</Content>
                 <GenericTextField
                   inputWidth={"full"}
                   {...props}
@@ -162,7 +166,7 @@ export const MailingAddress = (props: Props): ReactElement => {
                   disabled={state.mailingAddressIsTheSame}
                   formContext={DataFormErrorMapContext}
                   value={state.mailingAddressLine2}
-                  error={isLine2FieldInvalid}
+                  error={props.CMS_ONLY_show_error || isLine2FieldInvalid}
                   validationText={getErrorMessage("mailingAddressLine2")}
                   preventRefreshWhenUnmounted
                   onValidation={performValidation}
@@ -172,17 +176,22 @@ export const MailingAddress = (props: Props): ReactElement => {
           </div>
           <WithErrorBar
             className={"padding-bottom-1"}
-            hasError={isCityFieldInvalid || isStateFieldInvalid || isZipCodeFieldInvalid}
+            hasError={
+              props.CMS_ONLY_show_error ||
+              isCityFieldInvalid ||
+              isStateFieldInvalid ||
+              isZipCodeFieldInvalid
+            }
             type={"DESKTOP-ONLY"}
           >
             <div className="grid-row grid-gap-2 margin-top-2">
               <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
                 <WithErrorBar
                   className={"padding-bottom-1"}
-                  hasError={isCityFieldInvalid}
+                  hasError={props.CMS_ONLY_show_error || isCityFieldInvalid}
                   type={"MOBILE-ONLY"}
                 >
-                  <label htmlFor="mailingAddressCity">
+                  <label id="question-mailingAddressCity" htmlFor="mailingAddressCity">
                     <span className={"text-bold"}>
                       <Content>
                         {Config.cigaretteLicenseStep2.fields.mailingAddressCity.label}
@@ -196,7 +205,7 @@ export const MailingAddress = (props: Props): ReactElement => {
                       disabled={state.mailingAddressIsTheSame}
                       formContext={DataFormErrorMapContext}
                       value={state.mailingAddressCity}
-                      error={isCityFieldInvalid}
+                      error={props.CMS_ONLY_show_error || isCityFieldInvalid}
                       validationText={getErrorMessage("mailingAddressCity")}
                       preventRefreshWhenUnmounted
                       onValidation={performValidation}
@@ -207,10 +216,12 @@ export const MailingAddress = (props: Props): ReactElement => {
               <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
                 <WithErrorBar
                   className={"padding-bottom-1"}
-                  hasError={isStateFieldInvalid || isZipCodeFieldInvalid}
+                  hasError={
+                    props.CMS_ONLY_show_error || isStateFieldInvalid || isZipCodeFieldInvalid
+                  }
                   type={"MOBILE-ONLY"}
                 >
-                  <label htmlFor="mailingAddressState">
+                  <label id="question-mailingAddressState" htmlFor="mailingAddressState">
                     <span className={"text-bold"}>
                       <Content>
                         {Config.cigaretteLicenseStep2.fields.mailingAddressState.label}
@@ -221,7 +232,7 @@ export const MailingAddress = (props: Props): ReactElement => {
                       onSelect={(val) => handleChange(val, "mailingAddressState")}
                       disabled={state.mailingAddressIsTheSame}
                       value={state.mailingAddressState?.shortCode}
-                      error={isStateFieldInvalid}
+                      error={props.CMS_ONLY_show_error || isStateFieldInvalid}
                       validationText={getErrorMessage("mailingAddressState")}
                       onValidation={performValidation}
                     />
@@ -230,7 +241,7 @@ export const MailingAddress = (props: Props): ReactElement => {
               </span>
 
               <span className={`${isMobile ? "grid-col-6" : "grid-col-3"}`}>
-                <label htmlFor="mailingAddressZipCode">
+                <label id="question-mailingAddressZipCode" htmlFor="mailingAddressZipCode">
                   <span className={"text-bold"}>
                     <Content>
                       {Config.cigaretteLicenseStep2.fields.mailingAddressZipCode.label}
@@ -245,10 +256,11 @@ export const MailingAddress = (props: Props): ReactElement => {
                     formContext={DataFormErrorMapContext}
                     numericProps={{ maxLength: 5 }}
                     value={state.mailingAddressZipCode}
-                    error={isZipCodeFieldInvalid}
+                    error={props.CMS_ONLY_show_error || isZipCodeFieldInvalid}
                     validationText={getErrorMessage("mailingAddressZipCode")}
                     preventRefreshWhenUnmounted
                     onValidation={performValidation}
+                    data-testid="mailing-address-zip-code"
                   />
                 </label>
               </span>

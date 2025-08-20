@@ -42,6 +42,7 @@ export const FAILED_TAX_ID_AND_PIN_VALIDATION =
 export const MISSING_FIELD =
   "Mandatory Field Missing. TaxpayerId, TaxpayerName, AddressLine1, City, State, Zip, Agency name, Rep Id and RepName are required.";
 export const NATURAL_PROGRAM_ERROR = "Error calling Natural Program. Please try again later.";
+export const BUSINESS_STATUS_VERIFICATION_ERROR = "Business Status Verification Failed.";
 
 const makeTaxClearanceRequest = async (
   config: Config,
@@ -219,6 +220,14 @@ export const ApiTaxClearanceCertificateClient = (
             return {
               error: {
                 type: "FAILED_TAX_ID_AND_PIN_VALIDATION",
+                message: errorMessage,
+              },
+            };
+          }
+          if (errorMessage === BUSINESS_STATUS_VERIFICATION_ERROR) {
+            return {
+              error: {
+                type: "BUSINESS_STATUS_VERIFICATION_ERROR",
                 message: errorMessage,
               },
             };
