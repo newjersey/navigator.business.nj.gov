@@ -61,7 +61,7 @@ divisionPhone: (609) 292-7081
 * A copy of your tax clearance certificate
 * A Copy of the [lease agreement and certification](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf) for any leased vehicles signed by lessor and lessee
 
-**Note:** Some industries may need to submit extra documents. You can check the specific requirements in the application form.
+**Note:** Some industries may need to submit extra documents. You can check the specific requirements in the [application form](https://dep.nj.gov/wp-content/uploads/wastedecals/transporter-registration-initial-application-solid-medical-waste-self-generator-revised-6-24-2025.pdf).
 
 &nbsp;
 
