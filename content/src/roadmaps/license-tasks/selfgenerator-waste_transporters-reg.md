@@ -13,7 +13,7 @@ summaryDescriptionMd: >-
 
   * You can only get registration decals for [business vehicles registered as commercial vehicles](https://www.nj.gov/mvc/vehicles/commvehinfo.htm#39). Passenger (“Pass”) or Passenger-Commercial (“Pass-Com”) vehicle registrations are not acceptable.
 
-  * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/wastedecals/commercial-solid-waste-transporters/).
+  * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/dshw/swpl/a-901/).
 
 
   :::
