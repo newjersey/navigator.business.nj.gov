@@ -12,4 +12,4 @@ On NJSTART you can:
 
 * Search bidding opportunities
 * Save copies of documents needed for bidding opportunities
-* Search existing contracts to help find subcontracting opportunities
+* Search existing contracts to find subcontracting opportunities
