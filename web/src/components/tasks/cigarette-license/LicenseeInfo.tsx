@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
+import { NewJerseyAddress } from "@/components/data-fields/address/NewJerseyAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
@@ -128,11 +128,10 @@ export const LicenseeInfo = (props: Props): ReactElement => {
       <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.businessAddressHeader}</h2>
       <p>{Config.cigaretteLicenseStep2.businessAddressDescription}</p>
       <div data-testid="business-address-section" className="margin-y-4">
-        <UnitedStatesAddress
+        <NewJerseyAddress
           onValidation={onValidation}
-          dataFormErrorMap={dataFormErrorMap}
           isFullWidth
-          stateInputLocked
+          dataFormErrorMap={dataFormErrorMap}
         />
       </div>
       <HorizontalLine />
