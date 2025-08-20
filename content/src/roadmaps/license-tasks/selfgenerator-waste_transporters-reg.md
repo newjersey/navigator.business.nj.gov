@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
 
   * To register, you have to get a [tax clearance certificate](/actions/tax-clearance-certificate-apply). This document shows that your business is in good standing with taxes
 
-  * You can only get registration decals for [business vehicles registered as commercial vehicles](https://www.nj.gov/mvc/vehicles/commvehinfo.htm#39). passenger (Pass) or passenger-commercial (Pass-Com) vehicle registrations are not acceptable.
+  * You can only get registration decals for [business vehicles registered as commercial vehicles](https://www.nj.gov/mvc/vehicles/commvehinfo.htm#39). Passenger (Pass) or passenger-commercial (Pass-Com) vehicle registrations are not acceptable.
 
   * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/dshw/swpl/a-901/).
 
