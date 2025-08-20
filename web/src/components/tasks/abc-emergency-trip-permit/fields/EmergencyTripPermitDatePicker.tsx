@@ -1,7 +1,6 @@
 import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
-import { FieldStateActionKind } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import {
   DateObject,
@@ -10,6 +9,7 @@ import {
   getEarliestPermitDate,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
+import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

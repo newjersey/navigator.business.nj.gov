@@ -1,7 +1,7 @@
 import { GenericButton } from "@/components/njwds-extended/GenericButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { CallToActionHyperlink } from "@/lib/types/types";
+import { CallToActionHyperlink } from "@businessnjgovnavigator/shared/types";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import {
   KeyboardEvent,

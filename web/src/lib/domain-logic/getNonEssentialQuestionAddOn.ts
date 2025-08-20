@@ -1,5 +1,5 @@
-import { NonEssentialQuestion } from "@/lib/types/types";
 import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
+import { NonEssentialQuestion } from "@businessnjgovnavigator/shared/types";
 
 const getNonEssentialQuestion = (essentialQuestionId: string): NonEssentialQuestion | undefined => {
   return NonEssentialQuestions.nonEssentialQuestionsArray.find(

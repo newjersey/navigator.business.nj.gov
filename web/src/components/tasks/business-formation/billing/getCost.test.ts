@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
-import { getMergedConfig } from "@/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   allFormationLegalTypes,
   FormationLegalType,

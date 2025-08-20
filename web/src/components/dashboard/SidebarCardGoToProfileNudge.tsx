@@ -1,7 +1,7 @@
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 

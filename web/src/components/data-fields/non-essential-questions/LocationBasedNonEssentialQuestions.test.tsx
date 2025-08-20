@@ -1,5 +1,4 @@
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -10,6 +9,7 @@ import { randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/fact
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { OperatingPhase, OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";

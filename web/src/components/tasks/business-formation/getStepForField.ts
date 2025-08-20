@@ -1,5 +1,5 @@
-import { FormationStepNames } from "@/lib/types/types";
 import { FieldsForErrorHandling } from "@businessnjgovnavigator/shared";
+import { FormationStepNames } from "@businessnjgovnavigator/shared/types";
 
 export const getStepForField = (field: FieldsForErrorHandling): FormationStepNames => {
   switch (field) {

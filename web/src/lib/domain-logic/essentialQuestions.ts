@@ -1,10 +1,10 @@
-import { ProfileContentField } from "@/lib/types/types";
 import {
   emptyIndustrySpecificData,
   Industry,
   IndustrySpecificData,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 
 export const getResetIndustrySpecificData = (
   industryId: string | undefined,

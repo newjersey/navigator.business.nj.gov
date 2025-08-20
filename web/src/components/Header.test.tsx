@@ -1,5 +1,4 @@
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
@@ -12,6 +11,7 @@ import {
   getCurrentDateInNewJersey,
   randomInt,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {

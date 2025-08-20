@@ -1,7 +1,6 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { Icon } from "@/components/njwds/Icon";
-import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -10,6 +9,7 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement, useContext, useMemo } from "react";
 
 export const NaicsCode = (): ReactElement => {

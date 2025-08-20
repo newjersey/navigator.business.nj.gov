@@ -3,7 +3,7 @@ import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepI
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
-import * as types from "@/lib/types/types";
+import * as types from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 import { ModifiedContent } from "./ModifiedContent";
 

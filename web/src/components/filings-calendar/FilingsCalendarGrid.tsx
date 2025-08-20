@@ -5,12 +5,12 @@ import {
   isCalendarMonthLessThanCurrentMonth,
   sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   LicenseEventType,
   OperateReference,
   XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+} from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 

@@ -1,6 +1,6 @@
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { XrayRenewalCalendarEventType } from "@/lib/types/types";
+import { XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
 
 export const searchXrayRenewalCalendarEvent = (
   renewalCalendarEvent: XrayRenewalCalendarEventType,

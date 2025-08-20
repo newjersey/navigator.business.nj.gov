@@ -3,7 +3,7 @@ import {
   SidebarPageLayoutProps,
 } from "@/components/njwds-layout/SidebarPageLayout";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props extends Omit<SidebarPageLayoutProps, "navChildren"> {

@@ -30,8 +30,6 @@ import {
   ROUTES,
   routeShallowWithQuery,
 } from "@/lib/domain-logic/routes";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { FlowType, OnboardingErrors, Page, ProfileError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   sendOnboardingOnSubmitEvents,
@@ -65,6 +63,13 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
+import {
+  FlowType,
+  OnboardingErrors,
+  Page,
+  ProfileError,
+} from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";

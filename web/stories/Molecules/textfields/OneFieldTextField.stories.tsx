@@ -1,10 +1,13 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { ConfigContext, ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
@@ -57,7 +60,9 @@ const Template = () => {
                 inputWidth={"reduced"}
                 required={true}
                 error
-                validationText={mergedConfig.profileDefaults.fields.dateOfFormation.default.errorTextRequired}
+                validationText={
+                  mergedConfig.profileDefaults.fields.dateOfFormation.default.errorTextRequired
+                }
               />
             </ProfileField>
           </WithErrorBar>

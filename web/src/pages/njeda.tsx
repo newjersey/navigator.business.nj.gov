@@ -19,14 +19,14 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { filterFundings, sortFundingsForUser } from "@/lib/domain-logic/sidebarCardsHelpers";
-import { loadAllFundings } from "@/lib/static/loadFundings";
-import { Funding } from "@/lib/types/types";
 import {
   createEmptyUser,
   createEmptyUserData,
   OperatingPhaseId,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { loadAllFundings } from "@businessnjgovnavigator/shared/static";
+import { Funding } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/compat/router";

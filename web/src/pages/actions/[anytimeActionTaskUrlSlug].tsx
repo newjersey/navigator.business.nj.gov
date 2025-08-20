@@ -3,11 +3,12 @@ import { AnytimeActionSwitchComponent } from "@/components/tasks/anytime-action/
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import {
-  AnytimeActionTaskUrlSlugParam,
+  AnytimeActionTaskUrlSlugParameter,
   loadAllAnytimeActionTaskUrlSlugs,
   loadAnytimeActionTaskByUrlSlug,
-} from "@/lib/static/loadAnytimeActionTasks";
-import { AnytimeActionTask } from "@/lib/types/types";
+} from "@businessnjgovnavigator/shared/static";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
+
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
@@ -29,7 +30,7 @@ const AnytimeActionTaskPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionTaskUrlSlugParam> => {
+export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionTaskUrlSlugParameter> => {
   const paths = loadAllAnytimeActionTaskUrlSlugs(false);
   return {
     paths,
@@ -40,7 +41,7 @@ export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionTaskUrlSlugP
 export const getStaticProps = ({
   params,
 }: {
-  params: AnytimeActionTaskUrlSlugParam;
+  params: AnytimeActionTaskUrlSlugParameter;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {

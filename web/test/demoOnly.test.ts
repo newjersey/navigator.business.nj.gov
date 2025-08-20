@@ -1,4 +1,4 @@
-import { loadAnytimeActionTasksByFileName } from "@/lib/static/loadAnytimeActionTasks";
+import { loadAnytimeActionTasksByFileName } from "@businessnjgovnavigator/shared/static";
 import { nonEssentialQuestionsArray } from "../../content/src/roadmaps/nonEssentialQuestions.json";
 import { LookupIndustryById } from "../../shared/lib/shared/src";
 

@@ -6,7 +6,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { StepperStep } from "@/lib/types/types";
+import { StepperStep } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useState } from "react";
 
 interface Props {

@@ -3,10 +3,10 @@ import { DbaUnavailable } from "@/components/tasks/business-formation/name/DbaUn
 import { NexusAvailable } from "@/components/tasks/business-formation/name/NexusAvailable";
 import { NexusSearchBusinessNameStep } from "@/components/tasks/business-formation/name/NexusSearchBusinessNameStep";
 import { NexusUnavailable } from "@/components/tasks/business-formation/name/NexusUnavailable";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement } from "react";
 
 const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {

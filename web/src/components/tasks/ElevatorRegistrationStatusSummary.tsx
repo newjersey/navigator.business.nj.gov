@@ -4,13 +4,13 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
 import { toProperCase } from "@businessnjgovnavigator/shared";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   ElevatorSafetyAddress,
   ElevatorSafetyRegistrationSummary,
 } from "@businessnjgovnavigator/shared/elevatorSafety";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Box } from "@mui/material";
 import { ReactElement } from "react";
 

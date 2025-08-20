@@ -1,5 +1,4 @@
 import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import {
@@ -7,6 +6,7 @@ import {
   generateProfileData,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({

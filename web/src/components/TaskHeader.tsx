@@ -4,12 +4,12 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
 import {
   getModifiedTaskBooleanUndefined,
   getModifiedTaskContent,
 } from "@/lib/utils/roadmap-helpers";
 import { TaskProgress, isFormationTask } from "@businessnjgovnavigator/shared";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { Step } from "@/lib/types/types";
+import { Step } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactElement => {

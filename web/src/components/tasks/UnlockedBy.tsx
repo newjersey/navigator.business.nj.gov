@@ -3,7 +3,7 @@ import { UnlockingAlertDakotaFormation } from "@/components/tasks/UnlockingAlert
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

@@ -1,9 +1,9 @@
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { CallToActionHyperlink, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { ProfileData } from "@businessnjgovnavigator/shared/index";
+import { CallToActionHyperlink, Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

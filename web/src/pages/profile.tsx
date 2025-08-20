@@ -48,7 +48,6 @@ import { ProfileTabPanel } from "@/components/profile/ProfileTabPanel";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -63,8 +62,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
+
 import analytics from "@/lib/utils/analytics";
 import {
   getFlow,
@@ -89,8 +87,11 @@ import {
   naicsCodeTaskId,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
+import { OnboardingStatus, ProfileTabs, profileTabs } from "@businessnjgovnavigator/shared/types";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";

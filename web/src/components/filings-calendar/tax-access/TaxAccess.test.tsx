@@ -1,5 +1,4 @@
 import { TaxAccess } from "@/components/filings-calendar/tax-access/TaxAccess";
-import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import {
@@ -9,6 +8,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,

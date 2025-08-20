@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
@@ -18,6 +17,7 @@ import {
   LookupIndustryById,
   getIndustries,
 } from "@businessnjgovnavigator/shared";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";

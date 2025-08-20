@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -6,6 +5,7 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   castPublicFilingLegalTypeToFormationType,
   FormationFormData,

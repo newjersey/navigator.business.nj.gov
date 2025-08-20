@@ -6,9 +6,9 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
+import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, useRef, useState } from "react";
 

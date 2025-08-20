@@ -1,10 +1,12 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskHeader } from "@/components/TaskHeader";
+import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
+import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
+import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
 import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -14,9 +16,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { StepperStep, Task } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
 import {
   CigaretteLicenseData,
   emptyCigaretteLicenseData,
@@ -26,8 +26,8 @@ import {
   FormationAddress,
 } from "@businessnjgovnavigator/shared/formationData";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
-import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 
 type Props = {
   task: Task;
