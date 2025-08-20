@@ -1,18 +1,17 @@
 {
   "cigaretteLicenseStep2": {
-    "licenseeInformationHeader": "Licensee Information",
-    "licenseeInformationDescription": "Tell us about the business applying for this license.",
-    "businessNameErrorText": "Business name is required.",
-    "businessNameText": "Enter the legal name of your business.",
     "businessAddressHeader": "Business Address",
-    "businessAddressDescription": "Tell us where your business is located.",
-    "mailingAddressHeader": "Mailing Address",
-    "mailingAddressDescription": "Tell us where to send your license.",
-    "mailingIsSameCheckbox": "Mailing address is the same as the business address",
-    "contactInformationHeader": "Contact Information",
-    "contactInformationDescription": "Tell us who to contact for any questions or updates.",
     "backButtonText": "Back",
+    "businessAddressDescription": "Tell us where your business is located.",
+    "businessNameErrorText": "Business name is required.",
+    "contactInformationDescription": "Tell us who to contact for any questions or updates.",
     "nextButtonText": "Next",
+    "mailingAddressDescription": "Tell us where to send your license.",
+    "licenseeInformationDescription": "Tell us about the business applying for this license.",
+    "licenseeInformationHeader": "Licensee Information",
+    "mailingAddressHeader": "Mailing Address",
+    "businessNameText": "Enter the legal name of your business.",
+    "contactInformationHeader": "Contact Information",
     "fields": {
       "mailingAddressLine1": {
         "label": "Mailing Address Line 1",
@@ -34,8 +33,8 @@
       "mailingAddressZipCode": {
         "label": "Zip Code",
         "errorRequiredText": "Enter a zip code.",
-        "errorValidationText": "Enter a 5 digit Zip Code.",
-        "errorValidationTextAlt": "Enter a NJ Zip Code."
+        "errorValidationText": "Enter a 5-digit Zip Code.",
+        "errorValidationTextAlt": "Enter a NJ zip code."
       },
       "contactName": {
         "label": "Contact Name",
@@ -49,6 +48,7 @@
         "label": "Email Address",
         "errorRequiredText": "Valid email address is required."
       }
-    }
+    },
+    "mailingIsSameCheckbox": "Mailing address is the same as the business address"
   }
 }
