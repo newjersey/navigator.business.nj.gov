@@ -16,6 +16,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@aws-sdk/client-cloudwatch" },
+    },
+    {
+      from: {},
       to: { path: "@aws-sdk/client-ssm" },
     },
     {
