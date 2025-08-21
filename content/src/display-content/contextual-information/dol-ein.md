@@ -12,7 +12,7 @@ Your Department of Labor and Workforce Services (DOL) Employer Identification Nu
 
 &nbsp;
 
-It starts with 0, then your 12-digit NJ Tax ID, and ends with 00 (or a 2-digit code if your employee leasing company gave you one). Your NJ Tax ID is the number you use to pay State taxes.
+It starts with 0, then your 12-digit `NJ Tax ID,|tax-id` and ends with 00 (or a 2-digit code if your employee leasing company gave you one).
 
 &nbsp;
 
