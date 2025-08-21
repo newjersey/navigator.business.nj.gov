@@ -6,7 +6,8 @@
     "stepperFourLabel": "Review & Pay",
     "issuingAgencyText": "NJ Division of Revenue and Enterprise Services",
     "issuingAgencyLabelText": "Issuing Agency",
-    "alertPaymentError": "**This service is temporarily unavailable.** Try again later.",
+    "alertPaymentError": "**Something went wrong**. Review your information and try again later.",
+    "alertServiceUnavailable": "**This service is temporarily unavailable**. Try again later.",
     "alertInvalidFields": "**Missing or invalid information.** Review the following fields:",
     "alertFieldNames": {
       "businessName": "Business Name",
