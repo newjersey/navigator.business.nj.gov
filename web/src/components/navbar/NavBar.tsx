@@ -3,7 +3,7 @@ import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 

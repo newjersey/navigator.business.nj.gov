@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { randomHomeBasedIndustry } from "@/test/factories";
@@ -20,6 +19,7 @@ import {
   OperatingPhaseId,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen, waitFor } from "@testing-library/react";

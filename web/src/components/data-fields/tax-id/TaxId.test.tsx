@@ -1,5 +1,4 @@
 import { TaxId, Props as TaxIdProps } from "@/components/data-fields/tax-id/TaxId";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
@@ -9,6 +8,7 @@ import {
   generateUserDataForBusiness,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

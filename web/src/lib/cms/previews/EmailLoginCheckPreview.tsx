@@ -1,8 +1,8 @@
 import { LoginEmailCheck } from "@/components/LoginEmailCheck";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement } from "react";
 
 const LoginEmailCheckPreview = (props: PreviewProps): ReactElement => {

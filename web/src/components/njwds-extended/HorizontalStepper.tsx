@@ -1,7 +1,7 @@
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
-import { StepperStep } from "@/lib/types/types";
 import { scrollToTopOfElement } from "@/lib/utils/helpers";
+import { StepperStep } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {

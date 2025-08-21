@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@/lib/types/types";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext } from "react";
 
 interface Props {

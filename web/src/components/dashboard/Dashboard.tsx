@@ -16,6 +16,12 @@ import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
+import {
+  isDomesticEmployerBusiness,
+  isNexusBusiness,
+  isStartingBusiness,
+} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -25,13 +31,7 @@ import {
   OperateReference,
   RoadmapDisplayContent,
   XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
-import {
-  isDomesticEmployerBusiness,
-  isNexusBusiness,
-  isStartingBusiness,
-} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+} from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 

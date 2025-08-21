@@ -1,6 +1,6 @@
 import { CalloutLayout } from "@/components/njwds-extended/callout/CalloutLayout";
-import { ConfigType } from "@/contexts/configContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import type { PropsWithChildren, ReactElement } from "react";
 
 import {

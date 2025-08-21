@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { Industry } from "@/components/data-fields/Industry";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/cases-helpers";
 import {
@@ -15,6 +14,7 @@ import {
   generateProfileData,
   randomIndustry,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,

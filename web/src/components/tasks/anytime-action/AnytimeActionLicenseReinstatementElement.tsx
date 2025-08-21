@@ -4,7 +4,6 @@ import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { LicenseCurrentStatusComponent } from "@/components/tasks/LicenseCurrentStatusComponent";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
 import {
   Business,
   defaultDateFormat,
@@ -12,6 +11,7 @@ import {
   licenseSearchDateFormat,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared/";
+import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

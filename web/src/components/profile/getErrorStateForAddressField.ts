@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import {
-  AddressFieldErrorState,
-  AddressFields,
-  FieldsForAddressErrorHandling,
-} from "@/lib/types/types";
 import {
   BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@/lib/utils/formation-helpers";
 import { templateEval } from "@/lib/utils/helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FormationAddress } from "@businessnjgovnavigator/shared/index";
+import {
+  AddressFieldErrorState,
+  AddressFields,
+  FieldsForAddressErrorHandling,
+} from "@businessnjgovnavigator/shared/types";
 
 export const getErrorStateForAddressField = ({
   field,

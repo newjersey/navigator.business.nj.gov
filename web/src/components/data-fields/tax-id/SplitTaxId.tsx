@@ -7,7 +7,6 @@ import {
 } from "@/components/data-fields/tax-id/TaxIdFormContext";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ShowHideStatus } from "@/components/ShowHideToggleButton";
-import { ConfigType } from "@/contexts/configContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -16,6 +15,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { MediaQueries } from "@/lib/PageSizes";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 

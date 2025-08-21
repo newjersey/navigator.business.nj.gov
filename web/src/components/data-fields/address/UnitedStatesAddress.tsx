@@ -1,5 +1,6 @@
 import { AddressLines1And2 } from "@/components/data-fields/address/AddressLines1And2";
 import { AddressTextField } from "@/components/data-fields/address/AddressTextField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -7,10 +8,9 @@ import { AddressContext } from "@/contexts/addressContext";
 import { DataFormErrorMap } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormContextType } from "@/lib/types/types";
 import { StateObject } from "@businessnjgovnavigator/shared/states";
+import { FormContextType } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext } from "react";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 
 interface Props {
   onValidation: () => void;

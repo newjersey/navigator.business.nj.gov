@@ -2,9 +2,9 @@ import { SidebarCardFormationNudge } from "@/components/dashboard/SidebarCardFor
 import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundingNudge";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { SidebarCardGoToProfileNudge } from "@/components/dashboard/SidebarCardGoToProfileNudge";
-import { SidebarCardContent } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
+import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 type Props = {

@@ -5,7 +5,6 @@ import {
   onlyHasErrorIfEmpty,
   onlyHasErrorIfUndefined,
 } from "@/components/tasks/business-formation/getErrorStateForFormationField";
-import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateInputFile } from "@/test/factories";
 import {
@@ -23,6 +22,7 @@ import {
   publicFilingLegalTypes,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 const Config = getMergedConfig();
 

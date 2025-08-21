@@ -1,7 +1,7 @@
-import { ProfileContentField } from "@/lib/types/types";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { LookupSectorTypeById } from "@businessnjgovnavigator/shared/sector";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 
 export const hasNonEssentialQuestions = (profileData: ProfileData): boolean => {
   if (

@@ -1,5 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
-import { defaultDisplayDateFormat } from "@/lib/types/types";
 import { generateFormationDbaContent, generateTask } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -27,10 +25,13 @@ import {
   randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
+
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   corpLegalStructures,
   publicFilingLegalTypes,
 } from "@businessnjgovnavigator/shared/formationData";
+import { defaultDisplayDateFormat } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 

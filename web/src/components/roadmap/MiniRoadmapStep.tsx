@@ -3,7 +3,7 @@ import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepI
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { Step } from "@/lib/types/types";
+import { Step } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useEffect, useMemo, useState } from "react";
 
 interface Props {

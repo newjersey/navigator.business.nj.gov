@@ -1,7 +1,7 @@
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { OutageAlertType, OutageConfig } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
+import { OutageAlertType, OutageConfig } from "@businessnjgovnavigator/shared/types";
 import axios from "axios";
 import { ReactElement, useContext, useState } from "react";
 

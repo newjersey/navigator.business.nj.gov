@@ -1,5 +1,4 @@
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
-import { getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
@@ -13,6 +12,7 @@ import {
   TaxFilingState,
 } from "@businessnjgovnavigator/shared";
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 

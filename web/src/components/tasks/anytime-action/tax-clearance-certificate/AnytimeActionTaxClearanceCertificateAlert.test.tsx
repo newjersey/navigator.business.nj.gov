@@ -1,6 +1,6 @@
 import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
-import { getMergedConfig } from "@/contexts/configContext";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

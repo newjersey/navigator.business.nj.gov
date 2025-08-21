@@ -1,11 +1,11 @@
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

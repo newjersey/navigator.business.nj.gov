@@ -7,12 +7,12 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import {
   AnytimeActionCategory,
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
-} from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
+} from "@businessnjgovnavigator/shared/types";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { orderBy, unionBy } from "lodash";
 import { useRouter } from "next/compat/router";

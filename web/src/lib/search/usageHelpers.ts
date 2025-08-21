@@ -1,7 +1,7 @@
-import { IndustryRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Match } from "@/lib/search/typesForSearch";
 import TaskDependencies from "@businessnjgovnavigator/content/roadmaps/task-dependencies.json";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
+import { IndustryRoadmap } from "@businessnjgovnavigator/shared/types";
 
 const addTaskDependency = (match: Match, dependency: string): void => {
   if (!match.additionalUsageLocations) {

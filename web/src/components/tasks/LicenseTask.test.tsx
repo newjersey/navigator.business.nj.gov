@@ -1,5 +1,4 @@
 import { LicenseTask } from "@/components/tasks/LicenseTask";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { generateLicenseTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -18,6 +17,7 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { generateLicenseDetails, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateFormationFormData,

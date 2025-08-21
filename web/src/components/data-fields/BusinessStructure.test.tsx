@@ -1,5 +1,4 @@
 import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import {
@@ -13,6 +12,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 

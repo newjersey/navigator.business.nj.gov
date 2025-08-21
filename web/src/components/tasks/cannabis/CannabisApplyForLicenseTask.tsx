@@ -9,9 +9,9 @@ import {
   PriorityApplicationType,
   priorityTypesObj,
 } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
