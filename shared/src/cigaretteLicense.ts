@@ -73,6 +73,8 @@ export const emptyCigaretteLicensePaymentInfo = {
   confirmationEmailsent: false,
 };
 
+export type SubmissionError = "PAYMENT" | "UNAVAILABLE" | undefined;
+
 export interface PreparePaymentApiSubmission {
   MerchantCode: string;
   MerchantKey: string;

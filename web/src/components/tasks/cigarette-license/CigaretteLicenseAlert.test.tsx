@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
 import { getMergedConfig } from "@/contexts/configContext";
 import userEvent from "@testing-library/user-event";
+import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
 
 describe("CigaretteLicenseAlert", () => {
   const Config = getMergedConfig();
@@ -9,7 +10,7 @@ describe("CigaretteLicenseAlert", () => {
 
   const defaultProps = {
     fieldErrors: [],
-    hasResponseError: false,
+    submissionError: undefined,
     setStepIndex: mockSetStepIndex,
   };
 
@@ -36,24 +37,40 @@ describe("CigaretteLicenseAlert", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders alert with response error only", () => {
+  it("renders alert with payment error only", () => {
+    const submissionError: SubmissionError = "PAYMENT";
     const props = {
       ...defaultProps,
-      hasResponseError: true,
+      submissionError,
     };
 
     render(<CigaretteLicenseAlert {...props} />);
 
     expect(screen.getByRole("alert")).toBeInTheDocument();
     // getByTestId needed - markdown content renders across multiple lines
-    expect(screen.getByTestId("cigarette-license-response-error")).toBeInTheDocument();
+    expect(screen.getByTestId("cigarette-license-payment-error")).toBeInTheDocument();
+  });
+
+  it("renders alert with unavailable error only", () => {
+    const submissionError: SubmissionError = "UNAVAILABLE";
+    const props = {
+      ...defaultProps,
+      submissionError,
+    };
+
+    render(<CigaretteLicenseAlert {...props} />);
+
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+    // getByTestId needed - markdown content renders across multiple lines
+    expect(screen.getByTestId("cigarette-license-unavailable-error")).toBeInTheDocument();
   });
 
   it("renders alert with both field errors and response error", () => {
+    const submissionError: SubmissionError = "PAYMENT";
     const props = {
       ...defaultProps,
       fieldErrors: ["businessName"],
-      hasResponseError: true,
+      submissionError,
     };
 
     render(<CigaretteLicenseAlert {...props} />);
@@ -61,7 +78,7 @@ describe("CigaretteLicenseAlert", () => {
     expect(screen.getByRole("alert")).toBeInTheDocument();
     // getByTestId needed - markdown content renders across multiple lines
     expect(screen.getByTestId("cigarette-license-error-alert")).toBeInTheDocument();
-    expect(screen.getByTestId("cigarette-license-response-error")).toBeInTheDocument();
+    expect(screen.getByTestId("cigarette-license-payment-error")).toBeInTheDocument();
     expect(
       screen.getByText(Config.cigaretteLicenseShared.alertFieldNames.businessName),
     ).toBeInTheDocument();

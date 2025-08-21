@@ -66,9 +66,21 @@ const CigaretteLicensePreview = (props: PreviewProps): ReactElement => {
                 setStepIndex={() => null}
               />
               <p>
-                <strong>Example Alert with submission error</strong>
+                <strong>Example Alert with payment error</strong>
               </p>
-              <CigaretteLicenseAlert fieldErrors={[]} setStepIndex={() => null} hasResponseError />
+              <CigaretteLicenseAlert
+                fieldErrors={[]}
+                setStepIndex={() => null}
+                submissionError="PAYMENT"
+              />
+              <p>
+                <strong>Example Alert with unavailable error</strong>
+              </p>
+              <CigaretteLicenseAlert
+                fieldErrors={[]}
+                setStepIndex={() => null}
+                submissionError="UNAVAILABLE"
+              />
             </div>
           </>
         )}

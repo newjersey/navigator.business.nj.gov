@@ -1224,8 +1224,14 @@ collections:
                   required: true,
                 }
               - {
-                  label: "Alert Submission Error",
+                  label: "Alert Payment Error",
                   name: "alertPaymentError",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Alert Service Unavailable Error",
+                  name: "alertServiceUnavailable",
                   widget: "markdown",
                   required: true,
                 }
