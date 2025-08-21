@@ -1,3 +1,39 @@
+# [2025.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.17.0...v2025.18.0) (2025-08-21)
+
+
+### Bug Fixes
+
+* [#AB00000] move cig license env vars ([2611b86](https://github.com/newjersey/navigator.business.nj.gov/commit/2611b860b7cd21813f9c0dd7526e95c53c3ba79e)), closes [#AB00000](https://github.com/newjersey/navigator.business.nj.gov/issues/AB00000)
+* [#AB15504] adding ssm setup for cigarette_license_email_confirmation_url ([b86593f](https://github.com/newjersey/navigator.business.nj.gov/commit/b86593fc23e00691a37bd536b488413eab28bc49)), closes [#AB15504](https://github.com/newjersey/navigator.business.nj.gov/issues/AB15504)
+* [#AB15504] adding ssm setup for cigarette_license_email_confirmation_url ([188a0be](https://github.com/newjersey/navigator.business.nj.gov/commit/188a0befae8d16e55d98f66efe86ce812341624d)), closes [#AB15504](https://github.com/newjersey/navigator.business.nj.gov/issues/AB15504)
+* [AB[#14009](https://github.com/newjersey/navigator.business.nj.gov/issues/14009)] update cigLicense submission errors ([6b18da2](https://github.com/newjersey/navigator.business.nj.gov/commit/6b18da2cbd699b1838786b198f4bfa99f6a61f09))
+* [AB[#14388](https://github.com/newjersey/navigator.business.nj.gov/issues/14388)] User can bypass checkboxes on Out-of-State business Onboarding Step 2 ([a0eaa7d](https://github.com/newjersey/navigator.business.nj.gov/commit/a0eaa7d12fe09719cf3b260e22974faeccf9ca80))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] update AddressComponents for CigLicense ([4d28382](https://github.com/newjersey/navigator.business.nj.gov/commit/4d28382d58d510cda2c92ed84b8045089c7b79a7))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] update nj address for cig license ([8b88e62](https://github.com/newjersey/navigator.business.nj.gov/commit/8b88e624b4d004a5144900d49e2296382826a965))
+* [AB[#15313](https://github.com/newjersey/navigator.business.nj.gov/issues/15313)] log firewall errors and fix health check ([cbe814c](https://github.com/newjersey/navigator.business.nj.gov/commit/cbe814c4da80713739ef9da9634abb73ff686932))
+* [AB[#15336](https://github.com/newjersey/navigator.business.nj.gov/issues/15336)] prevent duplicate myNJ self-registration calls ([b8dc0ff](https://github.com/newjersey/navigator.business.nj.gov/commit/b8dc0ff99ed808f7b94acadc6f24e4d46213de5a))
+* [AB[#15336](https://github.com/newjersey/navigator.business.nj.gov/issues/15336)] prevent duplicate myNJ self-registration calls ([ff226cd](https://github.com/newjersey/navigator.business.nj.gov/commit/ff226cd63e97d8faf067d7e88a4e4e386a39aeb7))
+* [AB[#15397](https://github.com/newjersey/navigator.business.nj.gov/issues/15397)] env permit none of the above option and test refactors ([85a733e](https://github.com/newjersey/navigator.business.nj.gov/commit/85a733ed8a50a45381b12e4bff89f7ce29c66b73))
+* [AB[#15504](https://github.com/newjersey/navigator.business.nj.gov/issues/15504)] add cig license env vars to serverless ([7ad529a](https://github.com/newjersey/navigator.business.nj.gov/commit/7ad529af9623636327c96d76c0b8fcd11f9b78a4))
+* non-essential questions ([41aea6d](https://github.com/newjersey/navigator.business.nj.gov/commit/41aea6d6d7097c4bd7aacf9a6d3ce07369273db5))
+* xray timestamp styling ([4004968](https://github.com/newjersey/navigator.business.nj.gov/commit/40049689cb8e991367d961fb11fb43b527f2b1c6))
+
+
+### Features
+
+* [#AB15554] cigarette license confirmation page ([9674b75](https://github.com/newjersey/navigator.business.nj.gov/commit/9674b75e2d31197b3c40d4b5ce949d6186d54cbc)), closes [#AB15554](https://github.com/newjersey/navigator.business.nj.gov/issues/AB15554)
+* [AB[#11351](https://github.com/newjersey/navigator.business.nj.gov/issues/11351)] xray registration health check ([fdce5d6](https://github.com/newjersey/navigator.business.nj.gov/commit/fdce5d61a185982895fbd877e73294775a50782b))
+* [AB[#13035](https://github.com/newjersey/navigator.business.nj.gov/issues/13035)] added CMS Preview for Emergency Trip Permit, legal message, self registration ([f1f6bbe](https://github.com/newjersey/navigator.business.nj.gov/commit/f1f6bbec23ab2f6c6bf4726f09061d96db0066cd))
+* [AB[#14009](https://github.com/newjersey/navigator.business.nj.gov/issues/14009)] cig license alert box ([b21b9d3](https://github.com/newjersey/navigator.business.nj.gov/commit/b21b9d341bbb874b4ff6df8a20dc68efb1892485))
+* [AB[#14214](https://github.com/newjersey/navigator.business.nj.gov/issues/14214)] add client/route/helpers for cigarette-license ([ed32106](https://github.com/newjersey/navigator.business.nj.gov/commit/ed3210638a22acac5c3bf88d671d2d5403e63341))
+* [AB[#14772](https://github.com/newjersey/navigator.business.nj.gov/issues/14772)] xray analytics events ([bf3605b](https://github.com/newjersey/navigator.business.nj.gov/commit/bf3605b69d47f9acfe187a360ade00b92e19f6ce))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] lock state input for business address in cigarette step 2 ([e8bd56f](https://github.com/newjersey/navigator.business.nj.gov/commit/e8bd56f33b15bd7b7cb756a608f69f320cddfe4f))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] step 2 of cigarette license ([e0c8ef2](https://github.com/newjersey/navigator.business.nj.gov/commit/e0c8ef258b9816fa67dd9f4a93471c03aba8fff2))
+* [AB[#15038](https://github.com/newjersey/navigator.business.nj.gov/issues/15038)] added miniCallout to the CMS ([922be8a](https://github.com/newjersey/navigator.business.nj.gov/commit/922be8a84414166d4f6d599b13cdb3031b374000))
+* [AB[#15038](https://github.com/newjersey/navigator.business.nj.gov/issues/15038)] renamed callout to largeCallout throughout the code base ([5bd4cee](https://github.com/newjersey/navigator.business.nj.gov/commit/5bd4cee967b6dcb1fc2aeebb4241508a4b182363))
+* [AB[#6519](https://github.com/newjersey/navigator.business.nj.gov/issues/6519)] dental waste & addOnWhenNo ([4ebfdf6](https://github.com/newjersey/navigator.business.nj.gov/commit/4ebfdf67e805fa55fd48f4e0fa983abecde3b301))
+* [AB[#8748](https://github.com/newjersey/navigator.business.nj.gov/issues/8748)] added timestamp to status check of xray ([1ed1a5d](https://github.com/newjersey/navigator.business.nj.gov/commit/1ed1a5dc94c17bd68d9d24d12f551f5fdc6747bb))
+
 # [2025.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.16.0...v2025.17.0) (2025-07-31)
 
 
