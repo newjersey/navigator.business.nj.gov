@@ -7,7 +7,6 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: () => void;
-  error?: boolean;
 }
 
 export const AddressMunicipalityDropdown = (props: Props): ReactElement => {
@@ -26,7 +25,7 @@ export const AddressMunicipalityDropdown = (props: Props): ReactElement => {
       onValidation={props.onValidation}
       municipalities={municipalities}
       fieldName={"addressMunicipality"}
-      error={doesFieldHaveError("addressMunicipality") || props.error}
+      error={doesFieldHaveError("addressMunicipality")}
       value={state.formationAddressData.addressMunicipality}
       onSelect={onSelect}
       helperText={getFieldErrorLabel("addressMunicipality")}

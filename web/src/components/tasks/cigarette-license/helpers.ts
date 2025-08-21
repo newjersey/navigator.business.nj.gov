@@ -58,10 +58,7 @@ export const getInitialData = (
       ?.displayName ||
     business.formationData.formationFormData.addressCity ||
     "";
-  const addressState =
-    business.cigaretteLicenseData?.addressState ||
-    business.formationData?.formationFormData?.addressState ||
-    undefined;
+  const addressState = { name: "New Jersey", shortCode: "NJ" } as StateObject;
   const addressZipCode =
     business.cigaretteLicenseData?.addressZipCode ||
     business.formationData.formationFormData.addressZipCode ||
