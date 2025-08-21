@@ -1,12 +1,15 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import {
+  CigaretteLicenseData,
+  SubmissionError,
+} from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { ReactElement } from "react";
 
 interface Props {
   fieldErrors: string[];
-  hasResponseError?: boolean;
+  submissionError?: SubmissionError;
   setStepIndex: (step: number) => void;
 }
 
@@ -38,7 +41,7 @@ export const CigaretteLicenseAlert = (props: Props): ReactElement | null => {
     }
   };
 
-  const hasErrors = props.fieldErrors.length > 0 || props.hasResponseError;
+  const hasErrors = props.fieldErrors.length > 0 || props.submissionError;
 
   return hasErrors ? (
     <Alert className="margin-top-4" variant="error" dataTestid={"cigarette-license-error-alert"}>
@@ -65,9 +68,14 @@ export const CigaretteLicenseAlert = (props: Props): ReactElement | null => {
           </ul>
         </>
       )}
-      {props.hasResponseError && (
-        <div data-testid="cigarette-license-response-error">
+      {props.submissionError === "PAYMENT" && (
+        <div data-testid="cigarette-license-payment-error">
           <Content>{Config.cigaretteLicenseShared.alertPaymentError}</Content>
+        </div>
+      )}
+      {props.submissionError === "UNAVAILABLE" && (
+        <div data-testid="cigarette-license-unavailable-error">
+          <Content>{Config.cigaretteLicenseShared.alertServiceUnavailable}</Content>
         </div>
       )}
     </Alert>
