@@ -2677,6 +2677,27 @@ collections:
                               widget: "string",
                             }
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Public Works
+                    name: publicWorksContractor
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - {
+                              label: "Radio Button Yes / True Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No / False Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - { label: "Description", name: "description", widget: "markdown" }
                   - label: Employment and Personnel Service Type
                     name: employmentPersonnelServiceType
                     collapsed: true
