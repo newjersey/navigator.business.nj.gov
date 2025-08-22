@@ -78,7 +78,7 @@ Trenton, New Jersey 08625-0093
 * If your application is approved, you will get a bill (to pay online or by check)
 * After you pay, the application goes to the NJ State Police for investigation, and they will contact you for fingerprinting
 * You must submit the A-901 Update Form every November 1st —  even if your A-901 license has not yet been approved
-* If your license is approved, you need to apply for a Certificate of Public Convenience and Necessity (CPCN)
+* If your license is approved, you need to [apply for a Certificate of Public Convenience and Necessity (CPCN)](/actions/tax-clearance-certificate-apply)
   :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
