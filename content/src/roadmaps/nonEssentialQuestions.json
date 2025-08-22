@@ -190,7 +190,8 @@
       "addOnWhenNo": "",
       "addOnWhenYes": "multi-pest-applicator-license",
       "anytimeActions": [
-        "commercial-pest-applicator-license-recert"
+        "commercial-pest-applicator-license-recert",
+        "commercial-pest-applicator-license-renewal"
       ]
     },
     {
