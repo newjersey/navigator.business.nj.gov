@@ -4,7 +4,8 @@ id: commercial-pest-applicator-license-renewal
 name: Renew Your Commercial Pesticide Applicator License
 category:
   - purchase-new-products-or-equipment
-industryIds: []
+industryIds:
+  - pest-control
 sectorIds: []
 urlSlug: commercial-pest-applicator-license-renewal
 summaryDescriptionMd: "You must renew your commercial pesticide applicator license once a year. "
