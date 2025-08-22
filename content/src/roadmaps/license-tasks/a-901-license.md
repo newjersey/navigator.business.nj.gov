@@ -42,11 +42,11 @@ divisionPhone: (609) 292-7081
 
 ### Required Documents
 
-* Completed and signed registration form
+* Completed and signed [registration form](https://dep.nj.gov/wp-content/uploads/wastedecals/transporter-registration-initial-application-solid-medical-waste-licensed-revised-6-24-2025.pdf)
 * Notarized affidavit stating that you will only transport waste that you generated (included in the application form)
 * Valid insurance information for all vehicles
 * Valid motor vehicle commercial registrations for all vehicles
-* Copy of the lease agreement and certification for any leased vehicles, signed by the lessor and the lessee
+* Copy of the [lease agreement and certification for any leased vehicles](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf), signed by the lessor and the lessee
 * A copy of your tax clearance certificate
 * Completed business concern disclosure statement form 
 * Personal history disclosure statement forms for each owner, officer, family member, key employee, and salesperson
@@ -60,11 +60,14 @@ Please email the application with legible scans of all required documentation to
 
 &nbsp; 
 
-New Jersey Department of Law & Public Safety
-Division of Law, Environmental Permitting &
-Counseling Section
+New Jersey Department of Law & Public Safety Division of Law, 
+
+Environmental Permitting & Counseling Section
+
 ATTENTION: A901 Unit
+
 25 Market Street, P.O. Box 093
+
 Trenton, New Jersey 08625-0093
 
 :::infoAlert 
