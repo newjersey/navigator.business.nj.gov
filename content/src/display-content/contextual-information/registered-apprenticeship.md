@@ -6,6 +6,6 @@ header: Registered Apprenticeship Program
 id: registered-apprenticeship
 displayname: registered-apprenticeship
 ---
-A Registered Apprenticeship Program is a training program approved by the U.S. Department of Labor. Employers can find new skilled workers and help employees learn new skills. Apprentices get paid to learn a job through hands-on experience and classroom work.\
+A Registered Apprenticeship Program is a training program approved by the [U.S. Department of Labor](https://www.apprenticeship.gov/employers/explore-apprenticeship). Employers can find new skilled workers and help employees learn new skills. Apprentices get paid to learn a job through hands-on experience and classroom work.\
 \
 These programs make it easier to fill jobs, keep employees longer, and grow your business.
