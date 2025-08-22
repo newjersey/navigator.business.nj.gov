@@ -64,7 +64,7 @@ New Jersey Department of Law & Public Safety Division of Law,
 
 Environmental Permitting & Counseling Section
 
-ATTENTION: A901 Unit
+Attention: A901 Unit
 
 25 Market Street, P.O. Box 093
 
@@ -81,9 +81,9 @@ Trenton, New Jersey 08625-0093
 * If your license is approved, you need to apply for a Certificate of Public Convenience and Necessity (CPCN)
   :::
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 If you don’t have a license and your trucks do not have the required decals, you cannot legally transport waste, and you may be subject to significant fines.
 :::
 
-:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional"}
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 An A-901 license and decals for your waste transport vehicles.
