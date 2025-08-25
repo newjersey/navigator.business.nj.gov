@@ -6,6 +6,7 @@ id: social-affair-nonprofit
 name: " Apply for a Social Affair Permit to Serve Alcohol"
 category:
   - set-up-at-a-temporary-location
+description: For nonprofits only.
 applyToAllUsers: true
 industryIds: []
 sectorIds: []
@@ -20,5 +21,23 @@ summaryDescriptionMd: " If your nonprofit plans to serve or sell alcohol in open
 * The permit is temporary and only valid for a specific event, date, and location
 * No more than **25** social affair permits may be issued to a **single location** in a calendar year
 * No more than **12** social affair permits may be issued to a **single nonprofit** in a calendar year
+
+:::
+
+## Application Requirements 
+
+* Your nonprofit legal entity type (for example, Partnership, Incorporated Club, etc.)
+* A document proving nonprofit status 
+* Event’s location name and address
+* Event start and end dates
+* A sketch or site plan of the event
+* Details about the event, such as the type of alcohol, security plans, any alcoholic beverage licenses held by the event location, estimated age group of event attendees, etc.
+* Applicable fees paid
+
+You must apply for this permit through ABC’s online POSSE system. If you do not have an account, you will need to register first.
+
+:::largeCallout{ showHeader="true" headerText=" What if I don’t get a social affair permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+You may be subject to significant fines and legal penalties if your nonprofit holds an event and serves alcohol.
 
 :::
