@@ -4,4 +4,5 @@ header: Class A Operator
 id: class-a-operator
 displayname: class-a-operator
 ---
-A class A operator is the person who is in charge of operating and maintaining the tanks. 
+
+A class A operator is the person who is in charge of operating and maintaining the tanks.

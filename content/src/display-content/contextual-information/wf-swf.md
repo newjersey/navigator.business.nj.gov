@@ -4,6 +4,7 @@ header: Workforce Development Partnership Fund (WF) and Supplemental Workforce
 id: wf-swf
 displayname: wf-swf
 ---
+
 The Workforce Development Partnership Fund (WF) helps pay for job training programs in New Jersey. It funds free services like the State’s [One-Stop Career Centers](https://www.nj.gov/labor/career-services/contact-us/one-stops/).
 
 The Supplemental Workforce Fund (SWF) pays for training in basic job skills, like team building and conflict resolution.

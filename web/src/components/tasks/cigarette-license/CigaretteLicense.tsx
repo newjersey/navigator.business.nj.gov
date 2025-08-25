@@ -2,6 +2,7 @@ import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper
 import { TaskHeader } from "@/components/TaskHeader";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
 import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
+import { SalesInfo } from "@/components/tasks/cigarette-license/fields/SalesInfo";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
@@ -239,7 +240,12 @@ export const CigaretteLicense = (props: Props): ReactElement => {
                   CMS_ONLY_show_error={props.CMS_ONLY_show_error}
                 />
               )}
-              {stepIndex === 2 && <></>}
+              {stepIndex === 2 && (
+                <SalesInfo
+                  setStepIndex={setStepIndex}
+                  CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                />
+              )}
             </AddressContext.Provider>
           </ProfileDataContext.Provider>
         </CigaretteLicenseContext.Provider>

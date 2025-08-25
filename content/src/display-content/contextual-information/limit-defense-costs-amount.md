@@ -4,4 +4,5 @@ header: Amount for Limit of Defense Cost
 id: limit-defense-costs-amount
 displayname: limit-defense-costs-amount
 ---
-The coverage amount for legal support costs. 
+
+The coverage amount for legal support costs.

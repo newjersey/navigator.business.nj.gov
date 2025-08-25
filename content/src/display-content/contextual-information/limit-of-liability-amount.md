@@ -4,4 +4,5 @@ header: Amount for Limit of Liability
 id: limit-of-liability-amount
 displayname: limit-of-liability-amount
 ---
+
 The coverage amount that the insurance policy offers.

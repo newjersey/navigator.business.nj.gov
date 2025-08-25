@@ -4,4 +4,5 @@ header: Class B Operator
 id: class-b-operator
 displayname: class-b-operator
 ---
+
 A class B operator is the person who takes care of the everyday parts of operating and maintaining the tanks.

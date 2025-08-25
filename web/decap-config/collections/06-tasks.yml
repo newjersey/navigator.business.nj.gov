@@ -1149,7 +1149,7 @@ collections:
                         widget: "string"
                         required: true
                   - label: "Select A Supplier"
-                    name: "selectSupplierLabel"
+                    name: "selectASupplier"
                     widget: "object"
                     fields:
                       - label: "Label"
