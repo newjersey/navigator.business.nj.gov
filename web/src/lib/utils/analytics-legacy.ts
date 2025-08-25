@@ -157,7 +157,8 @@ export type LegacyEventCategory =
   | "xray_registration_expired_cta"
   | "xray_registration_check_status_error"
   | "xray_registration_check_status_form"
-  | "xray_registration_check_status_results";
+  | "xray_registration_check_status_results"
+  | string;
 
 export type LegacyEventAction =
   | "appear"
@@ -169,7 +170,8 @@ export type LegacyEventAction =
   | "mouseover"
   | "response"
   | "scroll"
-  | "submit";
+  | "submit"
+  | string;
 
 export type LegacyEventLabel =
   | "active_registration_found"
@@ -297,4 +299,5 @@ export type LegacyEventLabel =
   | "yes_i_offer_public_accounting"
   | "yes_more_than_6_childred"
   | "yes_moving_across_state_lines"
-  | "yes_require_liquor_license";
+  | "yes_require_liquor_license"
+  | string;

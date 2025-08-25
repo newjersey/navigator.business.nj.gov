@@ -43,7 +43,9 @@ type EventType =
   | "xray_renewal_started_expired_card"
   | "xray_status_check_started"
   | "xray_status_check_success_active"
-  | "xray_status_check_success_expired";
+  | "xray_status_check_success_expired"
+  | "non_essential_question_view"
+  | string;
 
 const eventMap: Record<EventType, string> = {
   account_clicks: "account_clicks",
@@ -2588,6 +2590,30 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "xray_registration_expired_status_card",
             legacy_event_label: "renew_ref_link",
+          });
+        },
+      },
+    },
+    non_essential_question_view: {
+      view: {
+        non_essential_question_view: (question: string) => {
+          eventRunner.track({
+            event: "non_essential_question_view",
+            legacy_event_action: "view",
+            legacy_event_category: `non_essential_question_view_${question}`,
+            legacy_event_label: "non_essential_question_radio_button",
+          });
+        },
+      },
+    },
+    non_essential_question_set: {
+      view: {
+        non_essential_question_set: (question: string, value: string) => {
+          eventRunner.track({
+            event: "non_essential_question_view",
+            legacy_event_action: "set",
+            legacy_event_category: `non_essential_question_${question}_${value}`,
+            legacy_event_label: "non_essential_question_radio_button",
           });
         },
       },
