@@ -18,3 +18,15 @@ id: social-affair-permit
 * No more than **12** social affair permits may be issued to a **single nonprofit** in a calendar year
 
 :::
+
+## Application Requirements
+
+* Your nonprofit legal entity type (for example, Partnership, Incorporated Club, etc.)
+* A document proving nonprofit status 
+* Event’s location name and address
+* Event start and end dates
+* A sketch or site plan of the event
+* Details about the event, such as the type of alcohol, security plans, any alcoholic beverage licenses held by the event location, estimated age group of event attendees, etc.
+* Applicable fees paid
+
+You must apply for this permit through ABC’s online POSSE system. If you do not have an account, you will need to register first.
