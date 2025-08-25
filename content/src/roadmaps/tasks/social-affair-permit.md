@@ -33,7 +33,7 @@ callToActionText: Apply for My Social Affair Permit
 
 You must apply for this permit through ABC’s online POSSE system. If you do not have an account, you will need to register first.
 
-:::largeCallout{ showHeader="true" headerText="What happens if I don’t get a social affair permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t get a social affair permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You may be subject to significant fines and legal penalties if your nonprofit holds an event and serves alcohol.
 
