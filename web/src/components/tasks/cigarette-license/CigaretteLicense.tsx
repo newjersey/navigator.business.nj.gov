@@ -240,7 +240,12 @@ export const CigaretteLicense = (props: Props): ReactElement => {
                   CMS_ONLY_show_error={props.CMS_ONLY_show_error}
                 />
               )}
-              {stepIndex === 2 && <SalesInfo setStepIndex={setStepIndex} />}
+              {stepIndex === 2 && (
+                <SalesInfo
+                  setStepIndex={setStepIndex}
+                  CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                />
+              )}
             </AddressContext.Provider>
           </ProfileDataContext.Provider>
         </CigaretteLicenseContext.Provider>

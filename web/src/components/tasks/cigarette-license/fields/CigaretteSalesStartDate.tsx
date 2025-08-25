@@ -8,8 +8,11 @@ import { TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { ReactElement, useContext } from "react";
+interface Props {
+  CMS_ONLY_show_error?: boolean;
+}
 
-export const CigaretteSalesStartDate = (): ReactElement => {
+export const CigaretteSalesStartDate = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state: cigaretteLicenseData, setCigaretteLicenseData } =
     useContext(CigaretteLicenseContext);
@@ -25,7 +28,7 @@ export const CigaretteSalesStartDate = (): ReactElement => {
 
   return (
     <div id="question-salesInfoStartDate">
-      <WithErrorBar hasError={isFormFieldInvalid} type={"ALWAYS"}>
+      <WithErrorBar hasError={props.CMS_ONLY_show_error || isFormFieldInvalid} type={"ALWAYS"}>
         <label htmlFor="sales-start-date-picker" className="text-bold">
           {Config.cigaretteLicenseStep3.fields.startDateOfSales.label}
         </label>
@@ -49,7 +52,7 @@ export const CigaretteSalesStartDate = (): ReactElement => {
                     id="sales-start-date-picker"
                     {...params}
                     variant="outlined"
-                    error={isFormFieldInvalid}
+                    error={props.CMS_ONLY_show_error || isFormFieldInvalid}
                     sx={{
                       svg: { fill: "#4b7600" },
                     }}
@@ -63,7 +66,7 @@ export const CigaretteSalesStartDate = (): ReactElement => {
                       performValidation(cigaretteLicenseData.salesInfoStartDate);
                     }}
                     helperText={
-                      isFormFieldInvalid &&
+                      (props.CMS_ONLY_show_error || isFormFieldInvalid) &&
                       Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText
                     }
                   />

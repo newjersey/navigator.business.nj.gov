@@ -12,6 +12,7 @@ import { CigaretteSupplierDropdown } from "@/components/tasks/cigarette-license/
 
 interface Props {
   setStepIndex: (step: number) => void;
+  CMS_ONLY_show_error?: boolean;
 }
 
 export const SalesInfo = (props: Props): ReactElement => {
@@ -19,12 +20,11 @@ export const SalesInfo = (props: Props): ReactElement => {
   return (
     <>
       <h2>{Config.cigaretteLicenseStep3.salesInformationHeader}</h2>
-
       <div>
-        <CigaretteSalesStartDate />
+        <CigaretteSalesStartDate CMS_ONLY_show_error={props.CMS_ONLY_show_error} />
       </div>
       <div className="margin-top-3">
-        <CigaretteSupplierDropdown />
+        <CigaretteSupplierDropdown CMS_ONLY_show_error={props.CMS_ONLY_show_error} />
       </div>
       <HorizontalLine />
       <span className="h5-styling">{Config.cigaretteLicenseShared.issuingAgencyLabelText}: </span>

@@ -133,7 +133,11 @@ const supplierNames = suppliers.map((supplier) => supplier.name);
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export const CigaretteSupplierDropdown = (): ReactElement => {
+interface Props {
+  CMS_ONLY_show_error?: boolean;
+}
+
+export const CigaretteSupplierDropdown = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state: cigaretteLicenseData, setCigaretteLicenseData } =
     useContext(CigaretteLicenseContext);
@@ -144,7 +148,7 @@ export const CigaretteSupplierDropdown = (): ReactElement => {
   );
   return (
     <div id="question-salesInfoSupplier">
-      <WithErrorBar hasError={isFormFieldInvalid} type={"ALWAYS"}>
+      <WithErrorBar hasError={props.CMS_ONLY_show_error || isFormFieldInvalid} type={"ALWAYS"}>
         <label htmlFor="supplier-select" className="text-bold">
           {Config.cigaretteLicenseStep3.fields.selectASupplier.label}
         </label>
@@ -180,12 +184,12 @@ export const CigaretteSupplierDropdown = (): ReactElement => {
           renderInput={(params) => (
             <TextField
               {...params}
-              error={isFormFieldInvalid}
+              error={props.CMS_ONLY_show_error || isFormFieldInvalid}
               onBlur={() => {
                 if (cigaretteLicenseData.salesInfoSupplier?.length === 0) setIsValid(false);
               }}
               helperText={
-                isFormFieldInvalid &&
+                (props.CMS_ONLY_show_error || isFormFieldInvalid) &&
                 Config.cigaretteLicenseStep3.fields.selectASupplier.errorRequiredText
               }
             />
