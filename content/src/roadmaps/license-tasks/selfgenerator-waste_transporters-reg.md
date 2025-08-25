@@ -37,7 +37,7 @@ divisionPhone: (609) 292-7081
 *  `USDOT number|usdot-number` , if you transport waste across state lines
 * Lessor's USDOT number(s), if applicable
 * Division of Consumer Affairs Registration or License Number, if applicable
-* Previous New Jersey Department of Environmental Protection (NJDEP) registration number, if applicable
+* Previous New Jersey Department of Environmental Protection (NJDEP) waste transporter registration number, if applicable
 * Applicable fees paid, once the NJDEP sends an invoice
 
 ### Company Ownership Information
@@ -67,13 +67,17 @@ divisionPhone: (609) 292-7081
 
 **Mail your completed application and the required documents to:**
 
-New Jersey Department of Environmental Protection
+Department of Environmental Protection
 
-Division of Compliance Operations and Coordination
+Division of Waste & UST Compliance and Enforcement
 
-Bureau of Licensing & Registrations
+Bureau of Hazardous Waste Compliance & Enforcement
 
-9 Ewing Street, Mail Code 09-01
+Vehicle Registration Unit
+
+9 Ewing Street
+
+PO Box 420, Mail Code 09-01
 
 Trenton, NJ 08625-0420
 
