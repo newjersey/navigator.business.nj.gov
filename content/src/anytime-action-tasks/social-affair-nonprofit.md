@@ -41,3 +41,9 @@ You must apply for this permit through ABC’s online POSSE system. If you do no
 You may be subject to significant fines and legal penalties if your nonprofit holds an event and serves alcohol.
 
 :::
+
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+A social affair permit, valid for a single event. Once your application is approved, you can download the permit from your online POSSE account.
+
+:::
