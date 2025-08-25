@@ -1,5 +1,8 @@
 ---
 notesMd: >-
+  8.8.25: Internal review complete, making edits and republishing 
+
+
   6.25.25: Added exempted activities section, waiting for async SME review
 
 
@@ -23,7 +26,7 @@ urlSlug: asbestos-notification
 displayname: asbestos-notification
 name: Report Your Asbestos Work
 id: asbestos-notification
-callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/asbestos/index.shtml"
+callToActionLink: https://www.nj.gov/labor/safetyandhealth/programs-services/asbestos/index.shtml
 callToActionText: Submit My Notification of Asbestos Abatement
 industryId: remediation-waste
 agencyAdditionalContext: NJ Department of Labor and Workforce Development,
@@ -40,7 +43,7 @@ You don’t need a Notification of Asbestos Abatement if **any** of the followin
 - The work is limited repair, such as sealing with duct tape, cement, or other materials
 - You’re working on roofing or exterior siding that contains asbestos, unless it’s for demolition
 - You’re only selling or storing asbestos, not disturbing it
-- Your company is using your own trained employees to handle asbestos at your own facility, and those employees are covered by federal Occupational Safety and Health Administration (OSHA) rules
+- Your company's building has asbestos, and you have trained employees who can remove it. These employees must follow safety rules set by the Occupational Safety and Health Administration (OSHA)
 
 ## Application Requirements
 
@@ -55,7 +58,7 @@ You don’t need a Notification of Asbestos Abatement if **any** of the followin
 
 ### Facility
 
-- Name and address of the facility where you will remove asbestos
+- Name and address of facility where you will remove asbestos
 - Type of facility (for example, school, commercial building, home)
 - Current use of facility (or prior use if it is being demolished)
 - Number of floors, square footage, and age of facility
@@ -101,7 +104,7 @@ Trenton, NJ 08625-0949
 
 :::largeCallout{ showHeader="true" headerText="Emergency Asbestos Work Notice" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency. The letter should describe what the emergency is (loss of heat or hot water, flooding that damaged asbestos materials, fire damage, etc.). Explain what could happen if there is a delay. Wait for approval before starting work.
+If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency. The letter should describe what the emergency is (for example, loss of heat or hot water, flooding that damaged asbestos materials, fire damage, etc.). Explain what could happen if there is a delay. Wait for approval before starting work.
 
 :::
 

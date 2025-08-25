@@ -1,8 +1,6 @@
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
-import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
@@ -23,6 +21,8 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 

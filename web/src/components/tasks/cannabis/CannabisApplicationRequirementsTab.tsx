@@ -8,7 +8,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement } from "react";
 

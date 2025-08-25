@@ -1,8 +1,8 @@
 import { LandingPageActionTile } from "@/components/LandingPageActionTile";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
-import { ActionTile } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { ActionTile } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 

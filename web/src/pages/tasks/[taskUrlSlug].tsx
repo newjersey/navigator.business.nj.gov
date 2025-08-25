@@ -11,11 +11,6 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { loadFormationDbaContent } from "@/lib/static/loadDisplayContent";
-import { loadAllHousingMunicipalities } from "@/lib/static/loadHousingMunicipalities";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
-import { FormationDbaDisplayContent, Task } from "@/lib/types/types";
 import { getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import {
   businessStructureTaskId,
@@ -24,6 +19,15 @@ import {
   HousingMunicipality,
   Municipality,
 } from "@businessnjgovnavigator/shared";
+import {
+  loadAllHousingMunicipalities,
+  loadAllMunicipalities,
+  loadAllTaskUrlSlugs,
+  loadFormationDbaContent,
+  loadTaskByUrlSlug,
+  TaskUrlSlugParameter,
+} from "@businessnjgovnavigator/shared/static";
+import { FormationDbaDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
@@ -122,7 +126,7 @@ const TaskPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
+export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParameter> => {
   const paths = loadAllTaskUrlSlugs();
   return {
     paths,
@@ -133,7 +137,7 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
 export const getStaticProps = ({
   params,
 }: {
-  params: TaskUrlSlugParam;
+  params: TaskUrlSlugParameter;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {

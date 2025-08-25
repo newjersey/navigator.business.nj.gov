@@ -5,8 +5,8 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
 import { scrollToTop, useMountEffect } from "@/lib/utils/helpers";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useState } from "react";
 
 interface Props {

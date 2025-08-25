@@ -68,7 +68,8 @@
   "name": "Auto-Body Repair",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "vehicle-dealership-q"
+    "vehicle-dealership-q",
+    "ust-reg"
   ],
   "displayname": "auto-body-repair",
   "industryOnboardingQuestions": {

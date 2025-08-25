@@ -1,5 +1,4 @@
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
-import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -23,6 +22,7 @@ import {
   generateProfileData,
   OperatingPhaseId,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 

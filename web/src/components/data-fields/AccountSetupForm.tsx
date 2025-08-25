@@ -9,9 +9,9 @@ import {
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
-import { FormContextFieldProps } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 

@@ -1,13 +1,13 @@
 import { AddressLines1And2 } from "@/components/data-fields/address/AddressLines1And2";
 import { AddressMunicipalityDropdown } from "@/components/data-fields/address/AddressMunicipalityDropdown";
 import { AddressTextField } from "@/components/data-fields/address/AddressTextField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 
 interface Props {
   onValidation: () => void;

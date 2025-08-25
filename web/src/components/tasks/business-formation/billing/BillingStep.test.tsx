@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { getMergedConfig } from "@/contexts/configContext";
-import { FormationDbaDisplayContent } from "@/lib/types/types";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -18,6 +16,8 @@ import {
   generateUser,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
 

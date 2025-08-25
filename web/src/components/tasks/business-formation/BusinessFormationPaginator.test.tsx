@@ -3,10 +3,8 @@ import {
   BusinessFormationStepsConfiguration,
   LookupStepIndexByName,
 } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
-import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { FormationDbaDisplayContent, FormationStepNames } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
@@ -42,6 +40,7 @@ import {
   ProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateFormationFormData,
@@ -49,6 +48,10 @@ import {
   generateMunicipality,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
+import {
+  FormationDbaDisplayContent,
+  FormationStepNames,
+} from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";

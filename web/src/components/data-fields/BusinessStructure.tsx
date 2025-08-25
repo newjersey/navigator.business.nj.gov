@@ -1,5 +1,4 @@
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
-import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -7,6 +6,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 

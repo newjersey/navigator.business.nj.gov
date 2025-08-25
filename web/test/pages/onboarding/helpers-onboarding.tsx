@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
@@ -22,6 +21,7 @@ import {
   getIndustries,
   industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ThemeProvider, createTheme } from "@mui/material";
 import {
   fireEvent,

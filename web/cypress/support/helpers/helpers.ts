@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import { onBusinessStructurePage } from "@businessnjgovnavigator/cypress/support/page_objects/businessStructurePage";
 import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
@@ -9,6 +8,7 @@ import {
   LegalStructures,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared";
 import { LighthouseConfig, Pa11yThresholds } from "../types";
 
 const Config = getMergedConfig();

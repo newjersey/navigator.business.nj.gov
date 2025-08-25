@@ -6,8 +6,7 @@ import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { AuthContext, initialState } from "@/contexts/authContext";
-import { getMergedConfig } from "@/contexts/configContext";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
@@ -20,7 +19,6 @@ import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { Roadmap, UserDataError } from "@/lib/types/types";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -29,6 +27,8 @@ import {
   OperatingPhaseId,
   RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
 import { Hub, type HubCapsule } from "aws-amplify/utils";

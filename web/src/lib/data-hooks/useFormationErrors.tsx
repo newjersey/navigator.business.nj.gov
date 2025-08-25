@@ -4,11 +4,11 @@ import { getStepForField } from "@/components/tasks/business-formation/getStepFo
 import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationFieldErrorState, FormationStepNames } from "@/lib/types/types";
 import {
   FieldsForErrorHandling,
   FormationFields,
 } from "@businessnjgovnavigator/shared/formationData";
+import { FormationFieldErrorState, FormationStepNames } from "@businessnjgovnavigator/shared/types";
 import { useContext, useMemo } from "react";
 
 type FormationErrorsResponse = {

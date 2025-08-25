@@ -1,8 +1,8 @@
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import {
   generateBusiness,

@@ -4,12 +4,12 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { FormContextFieldProps } from "@/lib/types/types";
 import {
   LegalStructure,
   LegalStructures,
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";
+import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";

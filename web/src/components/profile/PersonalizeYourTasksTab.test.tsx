@@ -1,6 +1,6 @@
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
-import { getMergedConfig } from "@/contexts/configContext";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
@@ -24,6 +24,10 @@ jest.mock("@/components/njwds/Icon", () => ({
 
 jest.mock("@/components/Content", () => ({
   Content: (({ children }) => <div>{children}</div>) as React.FC<{ children: React.ReactNode }>,
+}));
+
+jest.mock("@/lib/utils/useIntersectionOnElement", () => ({
+  useIntersectionOnElement: jest.fn(),
 }));
 
 const Config = getMergedConfig();

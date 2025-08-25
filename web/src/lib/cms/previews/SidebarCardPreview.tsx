@@ -2,7 +2,7 @@ import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { SidebarCardContent } from "@/lib/types/types";
+import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const RoadmapSidebarCardPreview = (props: PreviewProps): ReactElement => {

@@ -1,7 +1,7 @@
 import { Alert } from "@/components/njwds-extended/Alert";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { UserDataError } from "@/lib/types/types";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const Config = getMergedConfig();

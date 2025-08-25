@@ -1,7 +1,6 @@
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
 import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -13,6 +12,7 @@ import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
 import {
   generateBusiness,

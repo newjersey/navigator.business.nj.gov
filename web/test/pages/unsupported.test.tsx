@@ -1,9 +1,9 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import UnsupportedPage from "@/pages/unsupported";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));

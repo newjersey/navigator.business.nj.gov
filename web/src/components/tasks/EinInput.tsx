@@ -5,9 +5,9 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext, useState } from "react";
 
 interface Props {

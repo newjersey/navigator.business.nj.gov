@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect */
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -13,6 +12,7 @@ import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-u
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -33,6 +33,7 @@ import {
   ProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   filterRandomIndustry,
   generateFormationData,
@@ -118,6 +119,7 @@ describe("profile - shared", () => {
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
+    useMockIntersectionObserver();
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });

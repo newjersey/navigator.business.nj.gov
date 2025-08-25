@@ -2,10 +2,10 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Card } from "@/components/starter-kits/Card";
 import { StepSection } from "@/components/starter-kits/StepSection";
-import { getMergedConfig } from "@/contexts/configContext";
-import { Roadmap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
+import { Roadmap } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "rehype-react/lib";
 
 interface StarterKitsBodyProps {

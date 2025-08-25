@@ -1,5 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
-import { Filing, taxFilingMethod } from "@/lib/types/types";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -11,6 +9,8 @@ import {
   getCurrentDate,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { Filing, taxFilingMethod } from "@businessnjgovnavigator/shared/types";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";

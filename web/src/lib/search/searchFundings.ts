@@ -4,8 +4,8 @@ import {
   findMatchInListText,
 } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { Funding } from "@/lib/types/types";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
+import { Funding } from "@businessnjgovnavigator/shared/types";
 
 export const searchFundings = (fundings: Funding[], term: string): Match[] => {
   const matches: Match[] = [];

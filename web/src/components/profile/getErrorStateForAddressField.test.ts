@@ -1,11 +1,11 @@
 import { getErrorStateForAddressField } from "@/components/profile/getErrorStateForAddressField";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@/lib/utils/formation-helpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateAddress } from "@/test/factories";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 const Config = getMergedConfig();
 

@@ -6,7 +6,7 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

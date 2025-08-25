@@ -1,10 +1,5 @@
+import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
 import { createContext, Dispatch, SetStateAction } from "react";
-
-export interface ContextualInfo {
-  isVisible: boolean;
-  header: string;
-  markdown: string;
-}
 
 export interface ContextualInfoContextType {
   contextualInfo: ContextualInfo;

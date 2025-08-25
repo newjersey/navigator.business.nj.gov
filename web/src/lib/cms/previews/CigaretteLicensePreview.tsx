@@ -1,11 +1,11 @@
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { TaskWithLicenseTaskId } from "@/lib/types/types";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const CigaretteLicensePreview = (props: PreviewProps): ReactElement => {
@@ -71,9 +71,21 @@ const CigaretteLicensePreview = (props: PreviewProps): ReactElement => {
                 setStepIndex={() => null}
               />
               <p>
-                <strong>Example Alert with submission error</strong>
+                <strong>Example Alert with payment error</strong>
               </p>
-              <CigaretteLicenseAlert fieldErrors={[]} setStepIndex={() => null} hasResponseError />
+              <CigaretteLicenseAlert
+                fieldErrors={[]}
+                setStepIndex={() => null}
+                submissionError="PAYMENT"
+              />
+              <p>
+                <strong>Example Alert with unavailable error</strong>
+              </p>
+              <CigaretteLicenseAlert
+                fieldErrors={[]}
+                setStepIndex={() => null}
+                submissionError="UNAVAILABLE"
+              />
             </div>
           </>
         )}

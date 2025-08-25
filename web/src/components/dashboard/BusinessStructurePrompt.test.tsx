@@ -1,9 +1,9 @@
 import { BusinessStructurePrompt } from "@/components/dashboard/BusinessStructurePrompt";
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { fireEvent, render, screen } from "@testing-library/react";
 

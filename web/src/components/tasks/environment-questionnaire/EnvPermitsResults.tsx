@@ -5,8 +5,8 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ContactDep } from "@/components/tasks/environment-questionnaire/results/ContactDep";
 import { PersonalizedSupport } from "@/components/tasks/environment-questionnaire/results/PersonalizedSupport";
 import { SeeYourResponses } from "@/components/tasks/environment-questionnaire/results/SeeYourResponses";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement, useContext } from "react";
 
 export const EnvPermitsResults = (): ReactElement => {

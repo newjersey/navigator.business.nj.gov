@@ -17,7 +17,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import { FormationDbaDisplayContent, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
@@ -35,6 +34,7 @@ import {
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
+import { FormationDbaDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 

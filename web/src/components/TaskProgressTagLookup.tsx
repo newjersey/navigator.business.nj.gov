@@ -1,6 +1,6 @@
 import { Tag } from "@/components/njwds-extended/Tag";
-import { getMergedConfig } from "@/contexts/configContext";
 import { TaskProgress } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement } from "react";
 
 const Config = getMergedConfig();

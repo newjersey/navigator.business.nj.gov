@@ -130,8 +130,8 @@ export const LicenseeInfo = (props: Props): ReactElement => {
       <div data-testid="business-address-section" className="margin-y-4">
         <UnitedStatesAddress
           onValidation={onValidation}
-          dataFormErrorMap={dataFormErrorMap}
           isFullWidth
+          dataFormErrorMap={dataFormErrorMap}
           stateInputLocked
         />
       </div>

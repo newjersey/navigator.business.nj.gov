@@ -1,18 +1,18 @@
-import { Task } from "@/lib/types/types";
-import React, { ReactElement } from "react";
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { TaskHeader } from "@/components/TaskHeader";
+import { PassengerTransportCdlQuestion } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdlQuestion";
+import { PassengerTransportCdlResult } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdlResult";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
 } from "@/contexts/dataFormErrorMapContext";
-import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { PassengerTransportCdlQuestion } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdlQuestion";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { isBoolean } from "lodash";
-import { PassengerTransportCdlResult } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdlResult";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { Content } from "@/components/Content";
+import React, { ReactElement } from "react";
 
 interface Props {
   task: Task;

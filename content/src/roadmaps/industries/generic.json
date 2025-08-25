@@ -64,7 +64,8 @@
     "inspect-fridge",
     "inspect-pv",
     "bus-initial-inspection",
-    "resale-tax-cert"
+    "resale-tax-cert",
+    "ust-reg"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {

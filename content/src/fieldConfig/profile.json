@@ -155,10 +155,9 @@
       },
       "publicWorksContractor": {
         "default": {
-          "header": "",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
-          "description": "Do you plan to work on a `public works|public-works` project?"
+          "description": "Do you plan to work on `public works|public-works` projects?"
         }
       },
       "dateOfFormation": {

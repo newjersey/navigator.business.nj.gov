@@ -10,8 +10,8 @@ import {
   PriorityType,
   priorityTypesObj,
 } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { Task } from "@/lib/types/types";
 import { templateEval, useMountEffect } from "@/lib/utils/helpers";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
 

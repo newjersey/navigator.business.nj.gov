@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   MediaArea,
   Questionnaire,

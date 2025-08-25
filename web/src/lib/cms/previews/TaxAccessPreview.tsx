@@ -1,10 +1,10 @@
 import { TaxAccessStepOne } from "@/components/filings-calendar/tax-access/TaxAccessStepOne";
 import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from "@/test/factories";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
 

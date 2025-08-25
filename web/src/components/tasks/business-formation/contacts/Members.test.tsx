@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 
-import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   FormationPageHelpers,
@@ -17,6 +16,7 @@ import {
   generateMunicipality,
   generateUnitedStatesStateDropdownOption,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

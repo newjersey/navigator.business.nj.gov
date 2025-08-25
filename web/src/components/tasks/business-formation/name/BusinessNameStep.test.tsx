@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -15,6 +14,7 @@ import {
   generateFormationFormData,
   NameAvailability,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 

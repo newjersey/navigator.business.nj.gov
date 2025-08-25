@@ -1,7 +1,7 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileTabSubText } from "@/components/profile/ProfileTabSubText";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileTabs } from "@/lib/types/types";
+import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, forwardRef } from "react";
 
 interface Props {

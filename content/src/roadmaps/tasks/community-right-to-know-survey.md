@@ -1,9 +1,8 @@
 ---
 summaryDescriptionMd: >-
   If your business falls under an [industry in this
-  list](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf), you need
-  to complete the Community Right to Know (CRTK) survey or apply for an
-  exemption.
+  list](https://www.nj.gov/dep/enforcement/opppc/crtk/rtknaics.pdf), you need to
+  complete the Community Right to Know (CRTK) survey or apply for an exemption.
 
   Businesses report certain chemicals they have on-site, known as `Environmental Hazardous Substances (EHS)|environmental-hazardous-substances`, to the CRTK program. CRTK uses this information to help New Jersey businesses and communities stay safe.
 urlSlug: community-right-to-know-survey

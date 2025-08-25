@@ -1,10 +1,10 @@
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { NameAvailability } from "@businessnjgovnavigator/shared/";
+import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
 import { FormEvent, useContext, useState } from "react";
 
 export const useBusinessNameSearch = ({

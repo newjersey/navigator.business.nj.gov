@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -17,6 +16,7 @@ import {
   OperatingPhaseId,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateUser,

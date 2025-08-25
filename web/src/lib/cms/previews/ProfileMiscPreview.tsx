@@ -2,12 +2,12 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import Profile from "@/pages/profile";
 import { createEmptyProfileData, generateBusiness } from "@businessnjgovnavigator/shared";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement, useState } from "react";
 
 const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
-import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
@@ -12,6 +11,7 @@ import {
   generateFormationSigner,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 

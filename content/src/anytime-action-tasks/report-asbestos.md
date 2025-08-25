@@ -13,15 +13,15 @@ summaryDescriptionMd: >-
   contains more than 1% asbestos, you must submit a Notification of Asbestos
   Abatement. This tells the State when and where asbestos work will happen. All
   asbestos abatement work must be done by a licensed asbestos abatement
-  contractor.
+  contractor. 
 
 
-  Send this form at least **10 days before the work begins**. If your plans or the scope changes, such as placing the project on hold or taking it off hold, you may have to submit an updated form or payment.
+  Send this form **at least 10 days before the work begins**.  If your plans or the scope changes, such as placing the project on hold or taking it off hold, you may have to submit an updated form or payment.
 issuingAgency: " NJ Department of Labor and Workforce Development, Asbestos
   Control and Licensing Section and NJ Department of Health and Senior Services,
   Consumer and Environmental Health Services"
 callToActionText: Submit My Notification of Asbestos Abatement
-callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/asbestos/index.shtml"
+callToActionLink: https://www.nj.gov/labor/safetyandhealth/programs-services/asbestos/index.shtml
 synonyms:
   - asbestos, abatement
 ---
@@ -35,7 +35,7 @@ You don’t need a Notification of Asbestos Abatement if **any** of the followin
 - The work is limited repair, such as sealing with duct tape, cement, or other materials
 - You’re working on roofing or exterior siding that contains asbestos, unless it’s for demolition
 - You’re only selling or storing asbestos, not disturbing it
-- Your company is using your own trained employees to handle asbestos at your own facility, and those employees are covered by federal Occupational Safety and Health Administration (OSHA) rules
+- Your company's building has asbestos, and you have trained employees who can remove it. These employees must follow safety rules set by the Occupational Safety and Health Administration (OSHA)
 
 ## Application Requirements
 
@@ -50,7 +50,7 @@ You don’t need a Notification of Asbestos Abatement if **any** of the followin
 
 ### Facility
 
-- Name and address of the facility where you will remove asbestos
+- Name and address of facility where you will remove asbestos
 - Type of facility (for example, school, commercial building, home)
 - Current use of facility (or prior use if it is being demolished)
 - Number of floors, square footage, and age of facility
@@ -94,7 +94,7 @@ Trenton, NJ 08625-0949
 
 :::largeCallout{ showHeader="true" headerText="Emergency Asbestos Work Notice" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency. The letter should describe what the emergency is (loss of heat or hot water, flooding that damaged asbestos materials, fire damage, etc.). Explain what could happen if there is a delay. Wait for approval before starting work.
+If work must start in less than 10 days, include a letter from the building owner or engineer explaining the emergency. The letter should describe what the emergency is (for example, loss of heat or hot water, flooding that damaged asbestos materials, fire damage, etc.). Explain what could happen if there is a delay. Wait for approval before starting work.
 
 :::
 

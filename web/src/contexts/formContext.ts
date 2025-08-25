@@ -1,4 +1,8 @@
-import { FieldErrorType, FormContextType, ReducedFieldStates } from "@/lib/types/types";
+import {
+  FieldErrorType,
+  FormContextType,
+  ReducedFieldStates,
+} from "@businessnjgovnavigator/shared/types";
 import { Context, createContext } from "react";
 
 export const createReducedFieldStates = <

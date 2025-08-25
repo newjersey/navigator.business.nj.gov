@@ -24,7 +24,6 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   getConfigFieldByLegalStructure,
@@ -32,6 +31,7 @@ import {
   useMountEffect,
 } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
+import { FormationStepNames, StepperStep } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 

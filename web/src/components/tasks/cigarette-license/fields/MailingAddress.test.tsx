@@ -1,6 +1,5 @@
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -11,6 +10,7 @@ import {
   CigaretteLicenseData,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test/factories";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

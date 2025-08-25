@@ -1,5 +1,4 @@
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -25,6 +24,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateGetFilingResponse,

@@ -1,4 +1,4 @@
-import { Roadmap } from "@/lib/types/types";
+import { Roadmap } from "@businessnjgovnavigator/shared/types";
 import { SectionType } from "@businessnjgovnavigator/shared/userData";
 import { cloneDeep } from "lodash";
 

@@ -2,12 +2,12 @@ import { AnytimeActionLicenseReinstatementElement } from "@/components/tasks/any
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
 import {
   generateBusiness,
   generateLicenseDetails,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
+import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactElement => {

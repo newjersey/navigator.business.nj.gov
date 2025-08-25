@@ -4,7 +4,7 @@ import { InstructionsStep } from "@/components/tasks/abc-emergency-trip-permit/s
 import { RequestorStep } from "@/components/tasks/abc-emergency-trip-permit/steps/RequestorStep";
 import { ReviewStep } from "@/components/tasks/abc-emergency-trip-permit/steps/ReviewStep";
 import { TripStep } from "@/components/tasks/abc-emergency-trip-permit/steps/TripStep";
-import { EmergencyTripPermitStepNames } from "@/lib/types/types";
+import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 export const EmergencyTripPermitSteps: {

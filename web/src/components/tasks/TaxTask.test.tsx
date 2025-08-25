@@ -1,7 +1,5 @@
 import { TaxTask } from "@/components/tasks/TaxTask";
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   generateTask,
@@ -26,6 +24,8 @@ import {
   generateUserDataForBusiness,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";

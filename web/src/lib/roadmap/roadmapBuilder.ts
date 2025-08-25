@@ -1,6 +1,6 @@
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
-import { Roadmap } from "@/lib/types/types";
 import { SectionType } from "@businessnjgovnavigator/shared";
+import { IndustryRoadmap, Roadmap } from "@businessnjgovnavigator/shared/types";
 
 export const buildRoadmap = async ({
   industryId,
@@ -269,10 +269,4 @@ export interface AddOn {
 export interface TaskModification {
   taskToReplaceFilename: string;
   replaceWithFilename: string;
-}
-
-export interface IndustryRoadmap {
-  id: string;
-  roadmapSteps: AddOn[];
-  modifications: TaskModification[];
 }

@@ -1,5 +1,5 @@
-import { EmergencyTripPermitStepNames } from "@/lib/types/types";
 import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared";
+import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
 
 export const EmergencyTripPermitStepsConfiguration: {
   name: EmergencyTripPermitStepNames;

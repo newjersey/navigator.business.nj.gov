@@ -1,32 +1,4 @@
 import { ActiveUser } from "@/lib/auth/AuthContext";
-import {
-  AllCounties,
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
-  Certification,
-  County,
-  FormationDbaContent,
-  Funding,
-  FundingBusinessStage,
-  FundingCertifications,
-  FundingHomeBased,
-  FundingProgramFrequency,
-  FundingStatus,
-  FundingType,
-  LicenseEventType,
-  NaicsCodeObject,
-  OperateReference,
-  Opportunity,
-  OutageConfig,
-  Roadmap,
-  SidebarCardContent,
-  Step,
-  Task,
-  TaskLink,
-  TaskWithLicenseTaskId,
-  TaskWithoutLinks,
-  XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   arrayOfFundingAgencies,
@@ -61,6 +33,34 @@ import {
   randomIndustry,
   randomSector,
 } from "@businessnjgovnavigator/shared/test";
+import {
+  AllCounties,
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+  Certification,
+  County,
+  FormationDbaContent,
+  Funding,
+  FundingBusinessStage,
+  FundingCertifications,
+  FundingHomeBased,
+  FundingProgramFrequency,
+  FundingStatus,
+  FundingType,
+  LicenseEventType,
+  NaicsCodeObject,
+  OperateReference,
+  Opportunity,
+  OutageConfig,
+  Roadmap,
+  SidebarCardContent,
+  Step,
+  Task,
+  TaskLink,
+  TaskWithLicenseTaskId,
+  TaskWithoutLinks,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();

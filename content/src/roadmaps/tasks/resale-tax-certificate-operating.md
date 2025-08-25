@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
   You cannot use the Sales Tax Resale Certificate for items or equipment that you will not resell. For example, if you are an electronics retailer who buys computers to resell, you cannot use the resale certificate to buy a computer to use in your home or office.
 
 
-  :::largeCallout{ showHeader="true" headerText=""  calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 
   * On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
@@ -36,7 +36,7 @@ agencyId: nj-taxation
 
 If you are the reseller, complete the Sales Tax Resale Certificate with:
 
-- Your business name and address are registered with the New Jersey Division of Taxation
+- Your business name and address that are registered with the New Jersey Division of Taxation
 - Your `New Jersey Tax ID|tax-id`
 - Your type of business
 - A description of the property or services you are buying

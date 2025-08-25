@@ -1,4 +1,4 @@
-import { getMergedConfig } from "@/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FileInput } from "./FileInput";
 

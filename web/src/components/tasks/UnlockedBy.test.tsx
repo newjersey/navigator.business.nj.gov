@@ -1,7 +1,7 @@
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { generateTask } from "@/test/factories";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

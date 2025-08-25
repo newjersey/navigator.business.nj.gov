@@ -1,5 +1,4 @@
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import {
@@ -8,6 +7,7 @@ import {
   ProfileData,
   generateBusiness,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateGetFilingResponse,

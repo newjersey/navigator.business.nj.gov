@@ -1,8 +1,8 @@
 import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
-import { getMergedConfig } from "@/contexts/configContext";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateProfileData,

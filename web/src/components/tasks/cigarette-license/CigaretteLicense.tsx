@@ -17,7 +17,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { StepperStep, Task } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
@@ -28,6 +27,7 @@ import {
   FormationAddress,
 } from "@businessnjgovnavigator/shared/formationData";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 
 type Props = {

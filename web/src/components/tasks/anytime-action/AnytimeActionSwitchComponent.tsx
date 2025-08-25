@@ -2,8 +2,8 @@ import { EmergencyTripPermitWithValidation } from "@/components/tasks/abc-emerge
 import { AnytimeActionElement } from "@/components/tasks/anytime-action/AnytimeActionElement";
 import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
 import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
-import { AnytimeActionTask } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {
