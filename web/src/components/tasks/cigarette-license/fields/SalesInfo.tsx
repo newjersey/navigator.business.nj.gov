@@ -20,8 +20,7 @@ export const SalesInfo = (props: Props): ReactElement => {
     <>
       <h2>{Config.cigaretteLicenseStep3.salesInformationHeader}</h2>
 
-      <div className="margin-top-3">
-        {/* this margin is being overridden for some reason */}
+      <div>
         <CigaretteSalesStartDate />
       </div>
       <div className="margin-top-3">

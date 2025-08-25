@@ -35,7 +35,7 @@ export const CigaretteSalesStartDate = (): ReactElement => {
               setCigaretteLicenseData((cigaretteLicenseData) => {
                 return {
                   ...cigaretteLicenseData,
-                  salesInfoStartDate: newValue ? newValue.format() : undefined,
+                  salesInfoStartDate: newValue ? newValue.format() : "",
                 };
               });
 
@@ -60,7 +60,6 @@ export const CigaretteSalesStartDate = (): ReactElement => {
                     style={{ maxWidth: 450 }}
                     value={cigaretteLicenseData.salesInfoStartDate}
                     onBlur={() => {
-                      console.log(cigaretteLicenseData.salesInfoStartDate);
                       performValidation(cigaretteLicenseData.salesInfoStartDate);
                     }}
                     helperText={
