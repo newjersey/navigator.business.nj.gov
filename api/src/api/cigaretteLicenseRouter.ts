@@ -54,7 +54,7 @@ export const cigaretteLicenseRouterFactory = (
               requestStart,
             )}ms`,
           );
-          res.status(status).json(paymentResponse.errorResult);
+          res.status(status).json({ userData, paymentInfo: paymentResponse });
           return;
         }
 

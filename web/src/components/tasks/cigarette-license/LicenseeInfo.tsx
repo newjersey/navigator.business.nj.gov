@@ -16,6 +16,7 @@ import { ProfileField } from "@/components/profile/ProfileField";
 import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { ContactInformation } from "@/components/tasks/cigarette-license/fields/ContactInformation";
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
+import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -36,6 +37,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
 
   const dataFormErrorMap = useContext(DataFormErrorMapContext);
+  const { saveCigaretteLicenseData } = useContext(CigaretteLicenseContext);
 
   const { doesRequiredFieldHaveError, doesFieldHaveError } = useAddressErrors();
   const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
@@ -169,7 +171,10 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           </SecondaryButton>
           <PrimaryButton
             isColor="primary"
-            onClick={() => props.setStepIndex(1)}
+            onClick={() => {
+              props.setStepIndex(2);
+              saveCigaretteLicenseData();
+            }}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >

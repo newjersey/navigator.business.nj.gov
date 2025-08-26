@@ -1176,6 +1176,238 @@ collections:
                   widget: "string",
                   required: true,
                 }
+      - label: "Cigarette License Step 4"
+        name: "cigaretteLicense-step4"
+        file: "content/src/fieldConfig/cigarette-license-step4.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cigarette License Step 4
+            name: cigaretteLicenseStep4
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "Review and Pay Header",
+                  name: "reviewAndPayHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Business Address Header",
+                  name: "businessAddressHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Mailing Address Header",
+                  name: "mailingAddressHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Contact Information Header",
+                  name: "contactInformationHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Sales Information Header",
+                  name: "salesInformationHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Back Button Text",
+                  name: "backButtonText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Submit and Pay Button Text",
+                  name: "submitAndPayButtonText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Alert Before Submit",
+                  name: "alertBeforeSubmit",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Issuing Agency",
+                  name: "issuingAgency",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Signer Name Label",
+                  name: "signerNameLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Signer Relationship Label",
+                  name: "signerRelationshipLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Signer Relationship Error Text",
+                  name: "signerRelationshipErrorText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Signer Name Error Text",
+                  name: "signerNameErrorText",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Sign Label", name: "signLabel", widget: "string", required: true }
+              - {
+                  label: "Total Label Text",
+                  name: "totalLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Payment Header", name: "paymentHeader", widget: "string", required: true }
+              - {
+                  label: "Services Label Text",
+                  name: "servicesLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Cost Label Text",
+                  name: "costLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Cost Value", name: "costValue", widget: "string", required: true }
+              - {
+                  label: "Fees Subject To Change",
+                  name: "feesSubjectToChange",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Signers Description",
+                  name: "signersDescription",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Signers Confirmation Text",
+                  name: "signersConfirmationText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Retail Over The Counter License Label Text",
+                  name: "retailOverTheCounterLicenseLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Signers Header", name: "signersHeader", widget: "string", required: true }
+              - label: "Review Items"
+                name: "reviewItems"
+                collapsed: true
+                widget: object
+                fields:
+                  - {
+                      label: "Business Name",
+                      name: "businessName",
+                      widget: "string",
+                      required: true,
+                    }
+                  - { label: "Tax ID", name: "taxId", widget: "string", required: true }
+                  - {
+                      label: "Business Address Line 1",
+                      name: "businessAddressLine1",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Business Address Line 2",
+                      name: "businessAddressLine2",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Business Address City",
+                      name: "businessAddressCity",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Business Address State",
+                      name: "businessAddressState",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Business Address Zip Code",
+                      name: "businessAddressZipCode",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address Line 1",
+                      name: "mailingAddressLine1",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address Line 2",
+                      name: "mailingAddressLine2",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address City",
+                      name: "mailingAddressCity",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address State",
+                      name: "mailingAddressState",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Mailing Address Zip Code",
+                      name: "mailingAddressZipCode",
+                      widget: "string",
+                      required: true,
+                    }
+                  - { label: "Contact Name", name: "contactName", widget: "string", required: true }
+                  - {
+                      label: "Contact Phone Number",
+                      name: "contactPhoneNumber",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Contact Email",
+                      name: "contactEmail",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Sales Info Start Date",
+                      name: "salesInfoStartDate",
+                      widget: "string",
+                      required: true,
+                    }
+                  - {
+                      label: "Sales Info Supplier",
+                      name: "salesInfoSupplier",
+                      widget: "string",
+                      required: true,
+                    }
       - label: "Cigarette License Shared"
         name: "cigaretteLicense-shared"
         file: "content/src/fieldConfig/cigarette-license-shared.json"

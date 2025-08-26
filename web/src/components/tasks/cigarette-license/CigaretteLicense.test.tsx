@@ -1,12 +1,13 @@
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
+import { postCigaretteLicensePreparePayment, postUserData } from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulUserData, currentBusiness } from "@/test/mock/withStatefulUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
-import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { useMockRouter } from "@/test/mock/mockRouter";
 import { QUERIES } from "@/lib/domain-logic/routes";
+import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import {
   generateBusiness,
   generateCigaretteLicenseData,
@@ -20,7 +21,19 @@ import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postUserData: jest.fn(),
+  postCigaretteLicensePreparePayment: jest.fn(),
+}));
+
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+
+const mockApi = {
+  postUserData: postUserData as jest.MockedFunction<typeof postUserData>,
+  postCigaretteLicensePreparePayment: postCigaretteLicensePreparePayment as jest.MockedFunction<
+    typeof postCigaretteLicensePreparePayment
+  >,
+};
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
 describe("<CigaretteLicense />", () => {
@@ -120,26 +133,259 @@ describe("<CigaretteLicense />", () => {
     });
   });
 
+  describe("Review Step Submit Functionality", () => {
+    beforeEach(() => {
+      useMockRouter({});
+      mockPush.mockClear();
+
+      mockApi.postUserData.mockResolvedValue(generateUserDataForBusiness(generateBusiness({})));
+      mockApi.postCigaretteLicensePreparePayment.mockResolvedValue({
+        userData: generateUserDataForBusiness(generateBusiness({})),
+        paymentInfo: {
+          token: "test-token",
+          errorResult: undefined,
+        },
+      });
+    });
+
+    const renderReviewStep = async (business?: Business): Promise<void> => {
+      const userData = generateUserDataForBusiness(business ?? generateBusiness({}));
+
+      render(
+        <WithStatefulUserData initialUserData={userData}>
+          <CigaretteLicense task={generateTask({ id: "cigarette-license" })} />
+        </WithStatefulUserData>,
+      );
+
+      const reviewTab = screen.getByTestId("stepper-3");
+      await userEvent.click(reviewTab);
+    };
+
+    const createValidBusiness = (): Business => {
+      return generateBusiness({
+        cigaretteLicenseData: generateCigaretteLicenseData({
+          signature: true,
+          signerName: "Test Signer Name",
+          signerRelationship: "Test Signer Relationship",
+          mailingAddressIsTheSame: true,
+          mailingAddressLine1: "some-mailing-address-1",
+          mailingAddressCity: "some-mailing-city",
+          mailingAddressState: { shortCode: "NJ", name: "New Jersey" },
+          mailingAddressZipCode: "12345",
+        }),
+      });
+    };
+
+    it("successfully submits cigarette license application and redirects", async () => {
+      await renderReviewStep(createValidBusiness());
+
+      const submitButton = screen.getByRole("button", { name: /submit/i });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(mockApi.postUserData).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockApi.postCigaretteLicensePreparePayment).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
+    });
+
+    it("handles internal API error and sets submission error to UNAVAILABLE", async () => {
+      mockApi.postCigaretteLicensePreparePayment.mockRejectedValue(new Error("API Error"));
+
+      await renderReviewStep(createValidBusiness());
+
+      const submitButton = screen.getByRole("button", { name: /submit/i });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(mockApi.postUserData).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockApi.postCigaretteLicensePreparePayment).toHaveBeenCalled();
+      });
+
+      expect(screen.getByText("This service is temporarily unavailable")).toBeInTheDocument();
+
+      expect(mockPush).not.toHaveBeenCalled();
+    });
+
+    it("handles payment error response and sets submission error to UNAVAILABLE", async () => {
+      mockApi.postCigaretteLicensePreparePayment.mockResolvedValue({
+        userData: generateUserDataForBusiness(generateBusiness({})),
+        paymentInfo: {
+          token: "",
+          errorResult: {
+            statusCode: 400,
+            errorCode: "PAYMENT_ERROR",
+            userMessage: "Payment failed",
+            developerMessage: "Payment processing error",
+          },
+        },
+      });
+
+      await renderReviewStep(createValidBusiness());
+
+      const submitButton = screen.getByRole("button", { name: /submit/i });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(mockApi.postUserData).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockApi.postCigaretteLicensePreparePayment).toHaveBeenCalled();
+      });
+
+      expect(screen.getByText("This service is temporarily unavailable")).toBeInTheDocument();
+
+      await waitFor(() => {
+        expect(mockPush).not.toHaveBeenCalled();
+      });
+    });
+
+    it("handles missing payment token and does not redirect", async () => {
+      mockApi.postCigaretteLicensePreparePayment.mockResolvedValue({
+        userData: generateUserDataForBusiness(generateBusiness({})),
+        paymentInfo: {
+          token: "",
+          errorResult: undefined,
+        },
+      });
+
+      await renderReviewStep(createValidBusiness());
+
+      const submitButton = screen.getByRole("button", { name: /submit/i });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(mockApi.postUserData).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockApi.postCigaretteLicensePreparePayment).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockPush).not.toHaveBeenCalled();
+      });
+    });
+
+    it("copies business address to mailing address when mailingAddressIsTheSame is true and validation passes", async () => {
+      const business = generateBusiness({
+        cigaretteLicenseData: generateCigaretteLicenseData({
+          signature: true,
+          signerName: "Test Signer Name",
+          signerRelationship: "Test Signer Relationship",
+          mailingAddressIsTheSame: true,
+          mailingAddressLine1: "",
+          mailingAddressLine2: "",
+          mailingAddressCity: "",
+          mailingAddressState: undefined,
+          mailingAddressZipCode: "",
+          addressLine1: "123 Business St",
+          addressLine2: "Suite 100",
+          addressCity: "Business City",
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+          addressZipCode: "12345",
+        }),
+      });
+
+      await renderReviewStep(business);
+
+      const submitButton = screen.getByRole("button", { name: /submit/i });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(mockApi.postUserData).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockApi.postCigaretteLicensePreparePayment).toHaveBeenCalled();
+      });
+
+      // Verify that the mailing address fields are now populated with business address values
+      expect(screen.getAllByText("123 Business St")).toHaveLength(2);
+      expect(screen.getAllByText("Suite 100")).toHaveLength(2);
+      expect(screen.getAllByText("Business City")).toHaveLength(2);
+      expect(screen.getAllByText("New Jersey")).toHaveLength(2);
+      expect(screen.getAllByText("12345")).toHaveLength(2);
+    });
+
+    it("does not copy business address to mailing address when mailingAddressIsTheSame is false", async () => {
+      const business = generateBusiness({
+        cigaretteLicenseData: generateCigaretteLicenseData({
+          signature: true,
+          signerName: "Test Signer Name",
+          signerRelationship: "Test Signer Relationship",
+          mailingAddressIsTheSame: false,
+          mailingAddressLine1: "456 Mailing Ave",
+          mailingAddressLine2: "Apt 2B",
+          mailingAddressCity: "Mailing City",
+          mailingAddressState: { shortCode: "NY", name: "New York" },
+          mailingAddressZipCode: "67890",
+          addressLine1: "123 Business St",
+          addressLine2: "Suite 100",
+          addressCity: "Business City",
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+          addressZipCode: "12345",
+        }),
+      });
+
+      await renderReviewStep(business);
+
+      const submitButton = screen.getByRole("button", { name: /submit/i });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(mockApi.postUserData).toHaveBeenCalled();
+      });
+
+      await waitFor(() => {
+        expect(mockApi.postCigaretteLicensePreparePayment).toHaveBeenCalled();
+      });
+
+      expect(screen.getByText("456 Mailing Ave")).toBeInTheDocument();
+      expect(screen.getByText("Apt 2B")).toBeInTheDocument();
+      expect(screen.getByText("Mailing City")).toBeInTheDocument();
+      expect(screen.getByText("New York")).toBeInTheDocument();
+      expect(screen.getByText("67890")).toBeInTheDocument();
+
+      // Verify that business address fields are still different
+      expect(screen.getByText("123 Business St")).toBeInTheDocument();
+      expect(screen.getByText("Suite 100")).toBeInTheDocument();
+      expect(screen.getByText("Business City")).toBeInTheDocument();
+      expect(screen.getByText("New Jersey")).toBeInTheDocument();
+      expect(screen.getByText("12345")).toBeInTheDocument();
+    });
+  });
+
   describe("query param completePayment", () => {
     it("completePayment=failure show alert on review step", async () => {
       useMockRouter({ isReady: true, query: { [QUERIES.completePayment]: "failure" } });
       await renderComponent();
 
-      expect(screen.getByRole("alert")).toBeInTheDocument();
+      expect(screen.getByRole("alert", { name: "error" })).toBeInTheDocument();
     });
 
     it("completePayment=duplicate show alert on review step", async () => {
       useMockRouter({ isReady: true, query: { [QUERIES.completePayment]: "duplicate" } });
       await renderComponent();
 
-      expect(screen.getByRole("alert")).toBeInTheDocument();
+      expect(screen.getByRole("alert", { name: "error" })).toBeInTheDocument();
     });
 
     it("completePayment=cancel show review step with no alert", async () => {
       useMockRouter({ isReady: true, query: { [QUERIES.completePayment]: "cancel" } });
       await renderComponent();
 
-      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      expect(screen.queryByRole("alert", { name: "error" })).not.toBeInTheDocument();
     });
 
     it("completePayment=success should update task and cigarette paymentInfo", async () => {

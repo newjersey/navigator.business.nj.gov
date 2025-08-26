@@ -31,6 +31,9 @@ export const getInitialData = (
   contactEmail: string;
   salesInfoStartDate: string;
   salesInfoSupplier: string[];
+  signerName: string;
+  signerRelationship: string;
+  signature: boolean;
   lastUpdatedISO?: string;
 } => {
   const businessName =
@@ -74,6 +77,9 @@ export const getInitialData = (
   const contactPhoneNumber = business.cigaretteLicenseData?.contactPhoneNumber || "";
   const salesInfoStartDate = business.cigaretteLicenseData?.salesInfoStartDate || "";
   const salesInfoSupplier = business.cigaretteLicenseData?.salesInfoSupplier || [];
+  const signerName = business.cigaretteLicenseData?.signerName || "";
+  const signerRelationship = business.cigaretteLicenseData?.signerRelationship || "";
+  const signature = business.cigaretteLicenseData?.signature || false;
 
   return {
     businessName,
@@ -97,6 +103,9 @@ export const getInitialData = (
     contactEmail,
     salesInfoStartDate,
     salesInfoSupplier,
+    signerName,
+    signerRelationship,
+    signature,
     lastUpdatedISO: business.cigaretteLicenseData?.lastUpdatedISO,
   };
 };

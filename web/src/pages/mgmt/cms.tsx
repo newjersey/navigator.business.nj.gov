@@ -125,6 +125,7 @@ const CMS = dynamic(
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-step2", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-step3", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-step4", CigaretteLicensePreview);
 
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
       registerPreview(CMS, "cigaretteLicense-confirmation", CigaretteLicenseConfirmationPreview);
