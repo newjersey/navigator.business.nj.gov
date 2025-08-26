@@ -19,6 +19,7 @@ import * as CigaretteLicenseShared from "../../../content/src/fieldConfig/cigare
 import * as CigaretteLicenseStep1 from "../../../content/src/fieldConfig/cigarette-license-step1.json";
 import * as CigaretteLicenseStep2 from "../../../content/src/fieldConfig/cigarette-license-step2.json";
 import * as CigaretteLicenseStep3 from "../../../content/src/fieldConfig/cigarette-license-step3.json";
+import * as CigaretteLicenseStep4 from "../../../content/src/fieldConfig/cigarette-license-step4.json";
 import * as DashboardCalendar from "../../../content/src/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "../../../content/src/fieldConfig/dashboard-defaults.json";
 import * as DashboardModals from "../../../content/src/fieldConfig/dashboard-modals.json";
@@ -113,6 +114,7 @@ const merged = JSON.parse(
       CigaretteLicenseStep1,
       CigaretteLicenseStep2,
       CigaretteLicenseStep3,
+      CigaretteLicenseStep4,
       CigaretteLicenseConfirmation,
       NexusNameSearch,
       NexusDbaFormation,
@@ -198,6 +200,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof CigaretteLicenseStep1 &
   typeof CigaretteLicenseStep2 &
   typeof CigaretteLicenseStep3 &
+  typeof CigaretteLicenseStep4 &
   typeof CigaretteLicenseConfirmation &
   typeof NexusNameSearch &
   typeof NexusDbaFormation &
@@ -279,6 +282,7 @@ export const getMergedConfig = (): ConfigType => {
     CigaretteLicenseStep1,
     CigaretteLicenseStep2,
     CigaretteLicenseStep3,
+    CigaretteLicenseStep4,
     CigaretteLicenseConfirmation,
     NexusNameSearch,
     NexusDbaFormation,
