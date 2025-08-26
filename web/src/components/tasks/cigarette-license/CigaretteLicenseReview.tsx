@@ -1,0 +1,450 @@
+import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { Icon } from "@/components/njwds/Icon";
+import { CigaretteSignatures } from "@/components/tasks/cigarette-license/CigaretteSignatures";
+import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
+import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
+import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
+import { AddressContext } from "@/contexts/addressContext";
+import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import * as api from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
+import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { useRouter } from "next/compat/router";
+import { ReactElement, useContext } from "react";
+
+interface Props {
+  setStepIndex: (step: number) => void;
+  setSubmissionError: (error: SubmissionError) => void;
+  CMS_ONLY_show_error?: boolean;
+}
+
+export const CigaretteLicenseReview = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+  const {
+    state: cigaretteLicenseData,
+    saveCigaretteLicenseData,
+    setCigaretteLicenseData,
+  } = useContext(CigaretteLicenseContext);
+  const { state: profileDataState } = useContext(ProfileDataContext);
+  const { state: addressState } = useContext(AddressContext);
+  const { userData, business } = useUserData();
+  const profileData = profileDataState.profileData;
+  const formationAddressData = addressState.formationAddressData;
+  const router = useRouter();
+
+  const { setIsValid: setIsValidBusinessName } = useFormContextFieldHelpers(
+    "businessName",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidResponsibleOwnerName } = useFormContextFieldHelpers(
+    "responsibleOwnerName",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidTradeName } = useFormContextFieldHelpers(
+    "tradeName",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidTaxId } = useFormContextFieldHelpers(
+    "taxId",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
+    "addressLine1",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidAddressCity } = useFormContextFieldHelpers(
+    "addressCity",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidAddressState } = useFormContextFieldHelpers(
+    "addressState",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidAddressZipCode } = useFormContextFieldHelpers(
+    "addressZipCode",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidMailingAddressLine1 } = useFormContextFieldHelpers(
+    "mailingAddressLine1",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidMailingAddressCity } = useFormContextFieldHelpers(
+    "mailingAddressCity",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidMailingAddressState } = useFormContextFieldHelpers(
+    "mailingAddressState",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidMailingAddressZipCode } = useFormContextFieldHelpers(
+    "mailingAddressZipCode",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidSalesInfoStartDate } = useFormContextFieldHelpers(
+    "salesInfoStartDate",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidSalesInfoSupplier } = useFormContextFieldHelpers(
+    "salesInfoSupplier",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidContactName } = useFormContextFieldHelpers(
+    "contactName",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidContactPhoneNumber } = useFormContextFieldHelpers(
+    "contactPhoneNumber",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidContactEmail } = useFormContextFieldHelpers(
+    "contactEmail",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidSignature } = useFormContextFieldHelpers(
+    "signature",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidSignerRelationship } = useFormContextFieldHelpers(
+    "signerRelationship",
+    DataFormErrorMapContext,
+  );
+  const { setIsValid: setIsValidSignerName } = useFormContextFieldHelpers(
+    "signerName",
+    DataFormErrorMapContext,
+  );
+
+  const validateAllFieldsWithData = (data: typeof cigaretteLicenseData): boolean => {
+    let isValid = true;
+
+    if (isTradeNameLegalStructureApplicable(profileData.legalStructureId)) {
+      const isResponsibleOwnerNameValid = data.responsibleOwnerName !== "";
+      const isTradeNameValid = data.tradeName !== "";
+      setIsValidResponsibleOwnerName(isResponsibleOwnerNameValid);
+      setIsValidTradeName(isTradeNameValid);
+      if (!isResponsibleOwnerNameValid || !isTradeNameValid) isValid = false;
+    } else {
+      const isBusinessNameValid = data.businessName !== "";
+      setIsValidBusinessName(isBusinessNameValid);
+      if (!isBusinessNameValid) isValid = false;
+    }
+
+    const validations = [
+      { field: data.taxId, setter: setIsValidTaxId },
+      { field: data.addressLine1, setter: setIsValidAddressLine1 },
+      { field: data.addressCity, setter: setIsValidAddressCity },
+      { field: data.addressState, setter: setIsValidAddressState },
+      { field: data.addressZipCode, setter: setIsValidAddressZipCode },
+      { field: data.mailingAddressLine1, setter: setIsValidMailingAddressLine1 },
+      { field: data.mailingAddressCity, setter: setIsValidMailingAddressCity },
+      { field: data.mailingAddressState, setter: setIsValidMailingAddressState },
+      {
+        field: data.mailingAddressZipCode,
+        setter: setIsValidMailingAddressZipCode,
+      },
+      { field: data.salesInfoStartDate, setter: setIsValidSalesInfoStartDate },
+      { field: data.salesInfoSupplier, setter: setIsValidSalesInfoSupplier },
+      { field: data.contactName, setter: setIsValidContactName },
+      { field: data.contactPhoneNumber, setter: setIsValidContactPhoneNumber },
+      { field: data.contactEmail, setter: setIsValidContactEmail },
+      { field: data.signature, setter: setIsValidSignature },
+      { field: data.signerRelationship, setter: setIsValidSignerRelationship },
+      { field: data.signerName, setter: setIsValidSignerName },
+    ];
+
+    for (const { field, setter } of validations) {
+      setter(!!field);
+      if (!field) isValid = false;
+    }
+
+    return isValid;
+  };
+
+  const copyAddress = (): void => {
+    setCigaretteLicenseData((prev) => ({
+      ...prev,
+      mailingAddressLine1: prev.addressLine1,
+      mailingAddressLine2: prev.addressLine2,
+      mailingAddressCity: prev.addressCity,
+      mailingAddressState: prev.addressState,
+      mailingAddressZipCode: prev.addressZipCode,
+    }));
+  };
+
+  const handleSubmit = async (): Promise<void> => {
+    let dataToValidate = { ...cigaretteLicenseData };
+
+    if (cigaretteLicenseData.mailingAddressIsTheSame) {
+      dataToValidate = {
+        ...dataToValidate,
+        mailingAddressLine1: cigaretteLicenseData.addressLine1,
+        mailingAddressLine2: cigaretteLicenseData.addressLine2,
+        mailingAddressCity: cigaretteLicenseData.addressCity,
+        mailingAddressState: cigaretteLicenseData.addressState,
+        mailingAddressZipCode: cigaretteLicenseData.addressZipCode,
+      };
+    }
+
+    const isValid = validateAllFieldsWithData(dataToValidate);
+    const returnUrl = window.location.href;
+
+    if (!isValid) return;
+
+    if (cigaretteLicenseData.mailingAddressIsTheSame) {
+      copyAddress();
+    }
+
+    saveCigaretteLicenseData();
+    props.setSubmissionError(undefined);
+
+    if (!userData || !business?.cigaretteLicenseData) return;
+
+    try {
+      await api.postUserData(userData);
+      const cigaretteLicenseResponse = await api.postCigaretteLicensePreparePayment(
+        userData,
+        returnUrl,
+      );
+
+      if (cigaretteLicenseResponse && typeof cigaretteLicenseResponse === "object") {
+        if (cigaretteLicenseResponse.paymentInfo?.errorResult) {
+          props.setSubmissionError("UNAVAILABLE");
+          return;
+        }
+
+        if (
+          cigaretteLicenseResponse.paymentInfo?.token &&
+          cigaretteLicenseResponse.userData &&
+          router
+        ) {
+          await router.replace(returnUrl);
+        }
+      }
+    } catch {
+      props.setSubmissionError("UNAVAILABLE");
+    }
+  };
+
+  return (
+    <>
+      <Alert variant="info" className="margin-bottom-4">
+        <Content>{Config.cigaretteLicenseStep4.alertBeforeSubmit}</Content>
+      </Alert>
+
+      <ReviewSection
+        headingText={Config.cigaretteLicenseStep4.reviewAndPayHeader}
+        editHandleButtonClick={() => props.setStepIndex(1)}
+      >
+        {isTradeNameLegalStructureApplicable(profileData.legalStructureId) ? (
+          <>
+            <ReviewLineItem
+              label={Config.profileDefaults.fields.responsibleOwnerName.default.header}
+              value={cigaretteLicenseData.responsibleOwnerName || profileData.responsibleOwnerName}
+              noColonAfterLabel
+            />
+            <ReviewLineItem
+              label={Config.profileDefaults.fields.tradeName.default.header}
+              value={cigaretteLicenseData.tradeName || profileData.tradeName}
+              noColonAfterLabel
+            />
+          </>
+        ) : (
+          <ReviewLineItem
+            label={Config.profileDefaults.fields.businessName.default.header}
+            value={cigaretteLicenseData.businessName || profileData.businessName}
+            noColonAfterLabel
+          />
+        )}
+        <ReviewLineItem
+          label={Config.profileDefaults.fields.taxId.default.header}
+          value={cigaretteLicenseData.taxId || profileData.taxId}
+          noColonAfterLabel
+        />
+
+        <ReviewSubSection header={Config.cigaretteLicenseStep4.businessAddressHeader}>
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.businessAddressLine1}
+            value={cigaretteLicenseData.addressLine1}
+            noColonAfterLabel
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.businessAddressLine2}
+            value={cigaretteLicenseData.addressLine2}
+            noColonAfterLabel
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.businessAddressCity}
+            value={cigaretteLicenseData.addressCity}
+            noColonAfterLabel
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.businessAddressState}
+            value={cigaretteLicenseData.addressState?.name}
+            noColonAfterLabel
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.businessAddressZipCode}
+            value={cigaretteLicenseData.addressZipCode || formationAddressData.addressZipCode}
+            noColonAfterLabel
+          />
+        </ReviewSubSection>
+
+        <ReviewSubSection header={Config.cigaretteLicenseStep4.mailingAddressHeader}>
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.mailingAddressLine1}
+            value={
+              cigaretteLicenseData.mailingAddressIsTheSame
+                ? cigaretteLicenseData.addressLine1
+                : cigaretteLicenseData.mailingAddressLine1
+            }
+            noColonAfterLabel
+            dataTestId="mailing-address-line1"
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.mailingAddressLine2}
+            value={
+              cigaretteLicenseData.mailingAddressIsTheSame
+                ? cigaretteLicenseData.addressLine2
+                : cigaretteLicenseData.mailingAddressLine2
+            }
+            noColonAfterLabel
+            dataTestId="mailing-address-line2"
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.mailingAddressCity}
+            value={
+              cigaretteLicenseData.mailingAddressIsTheSame
+                ? cigaretteLicenseData.addressCity
+                : cigaretteLicenseData.mailingAddressCity
+            }
+            noColonAfterLabel
+            dataTestId="mailing-address-city"
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.mailingAddressState}
+            value={
+              cigaretteLicenseData.mailingAddressIsTheSame
+                ? cigaretteLicenseData.addressState?.name
+                : cigaretteLicenseData.mailingAddressState?.name
+            }
+            noColonAfterLabel
+            dataTestId="mailing-address-state"
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.mailingAddressZipCode}
+            value={
+              cigaretteLicenseData.mailingAddressIsTheSame
+                ? cigaretteLicenseData.addressZipCode || formationAddressData.addressZipCode
+                : cigaretteLicenseData.mailingAddressZipCode
+            }
+            noColonAfterLabel
+            dataTestId="mailing-address-zipcode"
+          />
+        </ReviewSubSection>
+
+        <ReviewSubSection header={Config.cigaretteLicenseStep4.contactInformationHeader}>
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.contactName}
+            value={cigaretteLicenseData.contactName}
+            noColonAfterLabel
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.contactPhoneNumber}
+            value={cigaretteLicenseData.contactPhoneNumber}
+            noColonAfterLabel
+          />
+          <ReviewLineItem
+            label={Config.cigaretteLicenseStep4.reviewItems.contactEmail}
+            value={cigaretteLicenseData.contactEmail}
+            noColonAfterLabel
+          />
+        </ReviewSubSection>
+      </ReviewSection>
+
+      <ReviewSection
+        headingText={Config.cigaretteLicenseStep4.salesInformationHeader}
+        editHandleButtonClick={() => props.setStepIndex(2)}
+      >
+        <ReviewLineItem
+          label={Config.cigaretteLicenseStep4.reviewItems.salesInfoStartDate}
+          value={cigaretteLicenseData.salesInfoStartDate}
+          noColonAfterLabel
+        />
+        <ReviewLineItem
+          label={Config.cigaretteLicenseStep4.reviewItems.salesInfoSupplier}
+          value={cigaretteLicenseData.salesInfoSupplier?.join(", ")}
+          noColonAfterLabel
+        />
+      </ReviewSection>
+
+      <div className="margin-top-4">
+        <Heading level={2}>{Config.cigaretteLicenseStep4.paymentHeader}</Heading>
+        <div className="grid-row grid-gap margin-top-2">
+          <div className="grid-col-8">
+            <Content>{Config.cigaretteLicenseStep4.servicesLabelText}</Content>
+          </div>
+          <div className="grid-col-4">
+            <Content>{Config.cigaretteLicenseStep4.costLabelText}</Content>
+          </div>
+        </div>
+
+        <HorizontalLine />
+
+        <div className="grid-row grid-gap margin-top-1">
+          <div className="grid-col-8">
+            <Content>{Config.cigaretteLicenseStep4.retailOverTheCounterLicenseLabelText}</Content>
+          </div>
+          <div className="grid-col-4">
+            <span>{Config.cigaretteLicenseStep4.costValue}</span>
+          </div>
+        </div>
+        <div className="grid-row grid-gap margin-top-2 bg-base-extra-light padding-2">
+          <div className="grid-col-8">
+            <Content>{Config.cigaretteLicenseStep4.totalLabelText}</Content>
+          </div>
+          <div className="grid-col-4">
+            <span className="text-bold">{Config.cigaretteLicenseStep4.costValue}</span>
+          </div>
+        </div>
+        <p className="text-small margin-top-2">
+          {Config.cigaretteLicenseStep4.feesSubjectToChange}
+        </p>
+      </div>
+
+      <HorizontalLine />
+
+      <div>
+        <CigaretteSignatures CMS_ONLY_show_error={props.CMS_ONLY_show_error} />
+      </div>
+
+      <HorizontalLine />
+
+      <Content>{Config.cigaretteLicenseStep4.issuingAgency}</Content>
+
+      <CtaContainer>
+        <ActionBarLayout>
+          <LiveChatHelpButton />
+          <SecondaryButton isColor="primary" onClick={() => props.setStepIndex(2)}>
+            {Config.cigaretteLicenseStep4.backButtonText}
+          </SecondaryButton>
+          <PrimaryButton isColor="primary" onClick={handleSubmit}>
+            {Config.cigaretteLicenseStep4.submitAndPayButtonText}
+            <Icon iconName="launch" className="margin-left-1" />
+          </PrimaryButton>
+        </ActionBarLayout>
+      </CtaContainer>
+    </>
+  );
+};
