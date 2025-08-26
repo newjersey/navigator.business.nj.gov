@@ -1,0 +1,67 @@
+name: Build and Tag Custom Node Image (Dry Run)
+description: Build a custom Node.js Docker image without pushing
+
+inputs:
+  image-name:
+    description: The base name of the Docker image tag
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build Docker Image (Dry Run)
+      shell: bash
+      run: |
+        IMAGE_BASE="dummy/navigator_builder"  # Just a placeholder
+        IMAGE_NAME="${{ inputs.image-name }}"
+        SHA_TAG="${GITHUB_SHA::8}"
+
+        echo "Building Docker image tags:"
+        echo "  $IMAGE_BASE:$IMAGE_NAME-$SHA_TAG"
+        echo "  $IMAGE_BASE:$IMAGE_NAME"
+        echo "  $IMAGE_BASE:$IMAGE_NAME-latest"
+
+    #        docker build -f BuilderImage.Dockerfile . \
+    #          -t "$IMAGE_BASE:$IMAGE_NAME-$SHA_TAG" \
+    #          -t "$IMAGE_BASE:$IMAGE_NAME" \
+    #          -t "$IMAGE_BASE:$IMAGE_NAME-latest"
+
+    - name: Skip Push (Dry Run)
+      shell: bash
+      run: |
+        echo "Skipping docker push in dry run mode"
+
+#name: Build and Push Custom Node Image
+#description: Build and push a custom Node.js Docker image to ECR
+#inputs:
+#  image-name:
+#    description: The base name of the Docker image to tag and push
+#    required: true
+#
+#runs:
+#  using: "composite"
+#  steps:
+#    - name: Build Docker Image
+#      shell: bash
+#      run: |
+#        IMAGE_BASE="${{ secrets.AWS_ACCOUNT_ID_DEV }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/navigator_builder"
+#        IMAGE_NAME="${{ inputs.image-name }}"
+#        SHA_TAG="${GITHUB_SHA::8}"
+#
+#        docker build -f BuilderImage.Dockerfile . \
+#          -t "$IMAGE_BASE:$IMAGE_NAME-$SHA_TAG" \
+#          -t "$IMAGE_BASE:$IMAGE_NAME" \
+#          -t "$IMAGE_BASE:$IMAGE_NAME-latest"
+#
+#    - name: Push Builder Docker Image
+#      shell: bash
+#      run: |
+#        IMAGE_BASE="${{ secrets.AWS_ACCOUNT_ID_DEV }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/navigator_builder"
+#        IMAGE_NAME="${{ inputs.image-name }}"
+#        SHA_TAG="${GITHUB_SHA::8}"
+#
+#        aws ecr get-login-password --region "${{ secrets.AWS_REGION }}" | docker login --username AWS --password-stdin "$IMAGE_BASE"
+#
+#        docker push "$IMAGE_BASE:$IMAGE_NAME-$SHA_TAG"
+#        docker push "$IMAGE_BASE:$IMAGE_NAME"
+#        docker push "$IMAGE_BASE:$IMAGE_NAME-latest"

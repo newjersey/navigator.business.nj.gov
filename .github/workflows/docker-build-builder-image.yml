@@ -1,0 +1,84 @@
+name: Docker Build Builder Image
+on:
+  push:
+    branches:
+      - main
+      - migrateMergeContentJobToGithubActions
+  workflow_call:
+
+jobs:
+  docker-build-builder-image:
+    name: Docker Build Builder Image
+    runs-on: ubuntu-latest
+    container:
+      image: cimg/node:20.10.0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: set-dev-env-vars
+        uses: ./.github/actions/set-dev-env-vars
+        with:
+          admin_password: ${{ secrets.ADMIN_PASSWORD }}
+          abc_etp_api_key: ${{ secrets.ABC_ETP_API_KEY_STAGING }}
+          abc_etp_api_account: ${{ secrets.ABC_ETP_API_ACCOUNT_STAGING }}
+          abc_etp_api_base_url: ${{ secrets.ABC_ETP_API_BASE_URL_STAGING }}
+          airtable_users_table: ${{ secrets.AIRTABLE_USERS_TABLE_DEV }}
+          api_base_url: ${{ secrets.API_BASE_URL_AWS_DEV }}
+          auth_domain: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID_DEV }}
+          aws_crypto_context_origin: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+          aws_crypto_context_stage: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          aws_crypto_context_tax_id_encryption_purpose:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+          aws_crypto_context_tax_id_hashing_purpose:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          aws_crypto_tax_id_encryption_key: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+          aws_crypto_tax_id_hashing_key: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          business_name_base_url: ${{ secrets.BUSINESS_NAME_BASE_URL_DEV }}
+          cognito_identity_pool_id: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          cognito_user_pool_id: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+          cognito_web_client_id: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          dev_only_unlink_tax_id: ${{ vars.DEV_ONLY_UNLINK_TAX_ID_DEV }}
+          check_dead_links: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          dynamics_elevator_safety_client_id: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID }}
+          dynamics_elevator_safety_secret: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_SECRET }}
+          dynamics_elevator_safety_tenant_id: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID }}
+          dynamics_elevator_safety_url: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_URL }}
+          dynamics_fire_safety_client_id: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          dynamics_fire_safety_secret: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          dynamics_fire_safety_tenant_id: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          dynamics_fire_safety_url: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+          dynamics_housing_client_id: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          dynamics_housing_secret: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          dynamics_housing_tenant_id: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          dynamics_housing_url: ${{ secrets.DYNAMICS_HOUSING_URL }}
+          dynamics_license_status_client_id: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          dynamics_license_status_secret: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          dynamics_license_status_tenant_id: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          dynamics_license_status_url: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
+          feature_abc_etp_application: ${{ vars.FEATURE_ABC_ETP_APPLICATION_DEV }}
+          feature_cigarette_license: ${{ vars.FEATURE_CIGARETTE_LICENSE_DEV }}
+          feature_formation_survey: ${{ vars.FEATURE_FORMATION_SURVEY_DEV }}
+          feature_login_page: ${{ vars.FEATURE_LOGIN_PAGE_DEV }}
+          feature_modify_business_page: ${{ vars.FEATURE_MODIFY_BUSINESS_PAGE_DEV }}
+          feature_tax_clearance_certificate: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          formation_api_account: ${{ secrets.FORMATION_API_ACCOUNT_DEV }}
+          formation_api_base_url: ${{ secrets.FORMATION_API_BASE_URL_DEV }}
+          formation_api_key: ${{ secrets.FORMATION_API_KEY_DEV }}
+          gov2go_registration_api_key: ${{ secrets.GOV2GO_REGISTRATION_API_KEY_DEV }}
+          gov2go_registration_base_url: ${{ secrets.GOV2GO_REGISTRATION_BASE_URL_DEV }}
+          license_status_base_url: ${{ secrets.LICENSE_STATUS_BASE_URL_DEV }}
+          my_nj_role_name: ${{ vars.MYNJ_ROLE_NAME_DEV }}
+          my_nj_service_token: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
+          my_nj_service_url: ${{ secrets.MYNJ_SERVICE_URL_DEV }}
+          tax_clearance_certificate_password: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          tax_clearance_certificate_url: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+          tax_clearance_certificate_user_name:
+            ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
+          xray_registration_status_base_url: ${{ secrets.XRAY_REGISTRATION_STATUS_BASE_URL_DEV }}
+          biz_nj_sls_deployment_bucket_name: ${{ secrets.BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_DEV}}
+          serverless_access_key: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}
+
+      - name: Dummy Docker Build
+        uses: ./.github/actions/docker-setup-navigator-builder-image
