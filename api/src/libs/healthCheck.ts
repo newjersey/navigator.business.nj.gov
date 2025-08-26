@@ -8,7 +8,7 @@ type StatusResult = Record<string, Status>;
 const cw = new CloudWatchClient({ region: process.env.AWS_REGION ?? "us-east-1" });
 
 const healthCheckEndPoints: Record<string, string> = {
-  self: "breaking-bad",
+  self: "self",
   elevator: "dynamics/elevator",
   fireSafety: "dynamics/fire-safety",
   housing: "dynamics/housing",
