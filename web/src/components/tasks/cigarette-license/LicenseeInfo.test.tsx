@@ -8,7 +8,6 @@ import {
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-selectors";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
@@ -29,14 +28,7 @@ import { useState } from "react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-
 describe("<LicenseeInfo />", () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-    useMockRoadmap({});
-  });
-
   const renderComponent = ({
     business,
     userData,
