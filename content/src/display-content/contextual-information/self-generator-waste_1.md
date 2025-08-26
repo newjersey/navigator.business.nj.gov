@@ -1,5 +1,6 @@
 ---
-header: Self-Generator
+notesMd: ""
+header: Self-Generator Waste Transporter
 id: self-generator-waste
 displayname: self-generator-waste
 ---
