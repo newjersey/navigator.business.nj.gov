@@ -1,0 +1,31 @@
+name: Docker Build Builder Image
+on:
+  push:
+    branches:
+      - main
+      - migrateMergeContentJobToGithubActions
+  workflow_call:
+
+jobs:
+  docker-build-builder-image:
+    name: Docker Build Builder Image
+    runs-on: ubuntu-latest
+    container:
+      image: cimg/node:20.10.0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: set-dev-env-vars
+        uses: ./.github/actions/set-dev-env-vars
+        with:
+          admin_password: ${{ secrets.ADMIN_PASSWORD }}
+          abc_etp_api_key: ${{ secrets.ABC_ETP_API_KEY_STAGING }}
+          abc_etp_api_account: ${{ secrets.ABC_ETP_API_ACCOUNT_STAGING }}
+          abc_etp_api_base_url: ${{ secrets.ABC_ETP_API_BASE_URL_STAGING }}
+          airtable_users_table: ${{ secrets.AIRTABLE_USERS_TABLE_DEV }}
+          api_base_url: ${{ secrets.API_BASE_URL_AWS_DEV }}
+          auth_domain: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID_DEV }}
+      - name: Dummy Docker Build
+        uses: ./.github/actions/docker-setup-navigator-builder-image

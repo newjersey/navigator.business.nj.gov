@@ -1,0 +1,22 @@
+name: Install AWS CLI
+description: "Installs AWS CLI v2"
+runs:
+  using: "composite"
+  steps:
+    - name: Install AWS CLI
+      shell: bash
+      run: |
+        # Download AWS CLI v2 (silent, show errors only)
+        curl -sS "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+        # Unzip quietly
+        unzip -q awscliv2.zip
+
+        # Install (suppress output unless error occurs)
+        sudo ./aws/install >/dev/null 2>&1
+
+        # Clean up
+        rm -rf awscliv2.zip aws
+
+        # Confirm installation
+        aws --version
