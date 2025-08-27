@@ -64,7 +64,8 @@
   "name": "Home Improvement Contractor",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "cdl-neq"
+    "cdl-neq",
+    "selfgenerator-transporter-registration"
   ],
   "displayname": "home-contractor",
   "industryOnboardingQuestions": {
