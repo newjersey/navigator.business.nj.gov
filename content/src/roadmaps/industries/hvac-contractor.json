@@ -53,7 +53,8 @@
   "name": "HVAC Contractor",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "cdl-neq"
+    "cdl-neq",
+    "selfgenerator-transporter-registration"
   ],
   "displayname": "hvac-contractor",
   "industryOnboardingQuestions": {
