@@ -9,11 +9,11 @@ summaryDescriptionMd: >-
   :::infoAlert 
    **Keep in mind:**
 
-  * To register, you have to get a [tax clearance certificate](/actions/tax-clearance-certificate-apply). This document shows that your business is in good standing with taxes.
+  * To register, you have to get a [tax clearance certificate](/actions/tax-clearance-certificate-apply). This document shows that your business is in good standing with taxes
 
-  * You can only get registration decals for [business vehicles registered as commercial vehicles](https://www.nj.gov/mvc/vehicles/commvehinfo.htm#39). Passenger (Pass) or passenger-commercial (Pass-Com) vehicle registrations are not acceptable.
+  * You can only get registration decals for [business vehicles registered as commercial vehicles](https://www.nj.gov/mvc/vehicles/commvehinfo.htm#39). Passenger (Pass) or passenger-commercial (Pass-Com) vehicle registrations are not acceptable
 
-  * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/dshw/swpl/a-901/).
+  * This registration does not allow you to transport waste for others. If you need to do that, [apply for an A-901 license](https://dep.nj.gov/dshw/swpl/a-901/)
 
 
   :::
@@ -84,18 +84,18 @@ Trenton, NJ 08625-0420
 :::infoAlert
  **After you apply:**
 
-* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them.
+* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them
 * Application not approved or incomplete: NJDEP will email you with the next steps or missing information
   :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-If you don’t register, you cannot legally transport waste, and you may be subject to significant fines
+If you don’t register, you cannot legally transport waste, and you may be subject to significant fines.
 
 :::
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A registration and decals for your waste transport vehicles
+A registration and decals for your waste transport vehicles.
 
 :::
