@@ -28,6 +28,7 @@ industryId:
 callToActionText: Apply for My Self-Generator Transporters Registration
 callToActionLink: https://dep.nj.gov/wp-content/uploads/wastedecals/transporter-registration-initial-application-solid-medical-waste-self-generator-revised-6-24-2025.pdf
 agencyId: njdep
+agencyAdditionalContext: Division of Waste & UST Compliance and Enforcement
 divisionPhone: (609) 292-7081
 ---
 ## Application Requirements
