@@ -25,7 +25,7 @@ divisionPhone: (609) 292-7081
 *  `USDOT number|usdot-number` , if you transport waste across state lines
 * Lessor's USDOT number(s), if applicable
 * Insurance company name and policy number
-* Previous New Jersey Department of Environmental Protection (NJDEP) - registration number, if applicable
+* Previous New Jersey Department of Environmental Protection (NJDEP) waste transporter registration number, if applicable
 * Applicable fees paid once NJDEP sends an invoice
 
 ### Company Ownership Information
