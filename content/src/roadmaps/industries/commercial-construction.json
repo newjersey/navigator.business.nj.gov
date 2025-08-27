@@ -49,7 +49,8 @@
     "business-vehicle-irp",
     "well-driller",
     "vehicle-dealership-q",
-    "cdl-neq"
+    "cdl-neq",
+    "selfgenerator-transporter-registration"
   ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
