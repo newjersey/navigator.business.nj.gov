@@ -9,7 +9,7 @@ summaryDescriptionMd: >-
   :::infoAlert 
    **Keep in mind:**
 
-  * To register, you have to get a [tax clearance certificate](/actions/tax-clearance-certificate-apply). This document shows that your business is in good standing with taxes
+  * To register, you have to get a [tax clearance certificate](/actions/tax-clearance-certificate-apply). This document shows that your business is in good standing with taxes.
 
   * You can only get registration decals for [business vehicles registered as commercial vehicles](https://www.nj.gov/mvc/vehicles/commvehinfo.htm#39). Passenger (Pass) or passenger-commercial (Pass-Com) vehicle registrations are not acceptable.
 
