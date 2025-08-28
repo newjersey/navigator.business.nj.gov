@@ -343,6 +343,28 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
     );
   };
 
+  it("trims leading and trailing whitespace from licenseType and professionName", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "12345",
+        checklistItem: "Item 1",
+        checkoffStatus: "Completed",
+        licenseStatus: "Active",
+        issueDate: undefined,
+        dateThisStatus: undefined,
+        expirationDate: undefined,
+        professionName: " Pharmacy ",
+        licenseType: " Pharmacy ",
+      }),
+    ]);
+    const nameAndAddress = generateLicenseSearchNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+    const result = await searchLicenseStatus(nameAndAddress);
+    expect(Object.keys(result)).toContain("Pharmacy-Pharmacy");
+  });
+
   describe("detailed address matching logic", () => {
     it("matches on address ignoring spaces and non-alphanumeric characters", async () => {
       stubLicenseStatusClient.search.mockResolvedValue([entityWithAddress(" 123    Main St.  ! ")]);
