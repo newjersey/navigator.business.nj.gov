@@ -1,3 +1,12 @@
+# [2025.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.18.0...v2025.19.0) (2025-08-28)
+
+
+### Features
+
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] content fixes for cigarette step 2 ([09cc62b](https://github.com/newjersey/navigator.business.nj.gov/commit/09cc62bf1d0311fe6c946f3dfef4d1ce85b135a2))
+* [AB[#15475](https://github.com/newjersey/navigator.business.nj.gov/issues/15475)] Webflow - update custom dropdown links ([4ec3dc6](https://github.com/newjersey/navigator.business.nj.gov/commit/4ec3dc60c9afb5512be62c5fc1206364361106dc))
+* [AB[#8391](https://github.com/newjersey/navigator.business.nj.gov/issues/8391)] Add analytics events to CMS generated non-essential questions ([0d8ff85](https://github.com/newjersey/navigator.business.nj.gov/commit/0d8ff85eb4f37b49f2f3cb7d5e13a3d1b1376c3f))
+
 # [2025.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.17.0...v2025.18.0) (2025-08-21)
 
 
