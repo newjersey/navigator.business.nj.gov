@@ -105,6 +105,7 @@ export interface PreparePaymentApiSubmission {
 
 export interface EmailConfirmationSubmission {
   businessName: string;
+  businessType: string;
   responsibleOwnerName: string;
   tradeName: string;
   taxId: string;
