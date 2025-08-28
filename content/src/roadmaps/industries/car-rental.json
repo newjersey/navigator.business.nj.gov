@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "532111",
+  "naicsCodes": "532111, 441110, 441120",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [

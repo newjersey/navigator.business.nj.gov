@@ -248,7 +248,8 @@
     "Yamileth",
     "YTTW",
     "revegetation",
-    "NJLWD"
+    "NJLWD",
+    "selfgenerator"
   ],
   "ignorePaths": [
     "node_modules/**",
