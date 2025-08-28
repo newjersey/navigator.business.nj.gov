@@ -2,7 +2,7 @@
   "cigaretteLicenseStep2": {
     "businessAddressHeader": "Business Address",
     "backButtonText": "Back",
-    "businessAddressDescription": "Tell us where your business is located **(no P.O. boxes)**.",
+    "businessAddressDescription": "Tell us where your business is located (no P.O. boxes).",
     "businessNameErrorText": "Business name is required.",
     "contactInformationDescription": "Tell us who to contact for any questions or updates.",
     "nextButtonText": "Next",
