@@ -136,6 +136,7 @@ export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicen
     const logId = logger.GetId();
     const currentBusiness = getCurrentBusiness(userData);
     const cigaretteLicenseData = currentBusiness.cigaretteLicenseData;
+    const legalStructureId = currentBusiness.profileData.legalStructureId || "";
 
     if (!cigaretteLicenseData) {
       const errorMessage = `Cigarette License Client - Id:${logId} - cigarette license data is not defined`;
@@ -155,7 +156,11 @@ export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicen
       };
     }
 
-    const postBody = await makeEmailConfirmationBody(cigaretteLicenseData, decryptedTaxId);
+    const postBody = await makeEmailConfirmationBody(
+      cigaretteLicenseData,
+      legalStructureId,
+      decryptedTaxId,
+    );
 
     logger.LogInfo(
       `Cigarette License Client - Id:${logId} - Sending request to ${

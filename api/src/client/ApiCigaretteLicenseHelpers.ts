@@ -59,10 +59,12 @@ export const makePostBody = (
 
 export const makeEmailConfirmationBody = async (
   cigaretteLicenseData: CigaretteLicenseData,
+  legalStructureId: string,
   decryptedTaxId: string,
 ): Promise<EmailConfirmationSubmission> => {
   return {
     businessName: cigaretteLicenseData.businessName || "",
+    businessType: legalStructureId,
     responsibleOwnerName: cigaretteLicenseData.responsibleOwnerName || "",
     tradeName: cigaretteLicenseData.tradeName || "",
     taxId: decryptedTaxId,
