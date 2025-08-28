@@ -1,5 +1,5 @@
 ---
-licenseName: ""
+licenseName: "Real Estate Appraisers-Appraisal Management Company"
 id: appraiser-company-register
 displayname: appraiser-company-registration
 urlSlug: appraiser-company-registration
