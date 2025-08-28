@@ -176,7 +176,11 @@
       "id": "pest-pesticide-dealer-licensing",
       "questionText": "Do you plan to sell pesticides?",
       "addOnWhenNo": "",
-      "addOnWhenYes": "pest-pesticide-dealer-license"
+      "addOnWhenYes": "pest-pesticide-dealer-license",
+      "anytimeActions": [
+        "pesticide-dealer-license-renewal",
+        "pesticide-dealer-business-license"
+      ]
     },
     {
       "id": "retail-pesticide-dealer-licensing",
