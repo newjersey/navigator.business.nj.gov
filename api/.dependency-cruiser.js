@@ -44,6 +44,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@aws-sdk/client-sns" },
+    },
+    {
+      from: {},
       to: { path: "@smithy/node-http-handler" },
     },
     {

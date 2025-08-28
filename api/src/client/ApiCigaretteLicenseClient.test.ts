@@ -1,21 +1,22 @@
-import { getCurrentBusiness } from "@shared/index";
 import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import {
   CigaretteLicenseApiConfig,
+  makeEmailConfirmationBody,
   makePostBody,
-  mockSuccessPostResponse,
-  mockSuccessGetResponse,
+  mockErrorEmailResponse,
   mockErrorGetResponse,
   mockErrorPostResponse,
-  makeEmailConfirmationBody,
   mockSuccessEmailResponse,
-  mockErrorEmailResponse,
+  mockSuccessGetResponse,
+  mockSuccessPostResponse,
 } from "@client/ApiCigaretteLicenseHelpers";
 import { PreparePaymentApiSubmission } from "@shared/cigaretteLicense";
+import { getCurrentBusiness } from "@shared/index";
 
-import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { CigaretteLicenseClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
+import { CIGARETTE_CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
   generateCigaretteLicenseData,
@@ -25,7 +26,6 @@ import {
 import { UserData } from "@shared/userData";
 import axios from "axios";
 import { StatusCodes } from "http-status-codes";
-import { getConfigValue } from "@libs/ssmUtils";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -37,7 +37,10 @@ jest.mock("@libs/ssmUtils", () => ({
   isKillSwitchOn: jest.fn(),
   updateKillSwitch: jest.fn(),
 }));
-const mockGetConfigValue = getConfigValue as jest.MockedFunction<typeof getConfigValue>;
+
+const mockGetConfigValue = getConfigValue as jest.MockedFunction<
+  (paramName: CIGARETTE_CONFIG_VARS) => Promise<string>
+>;
 
 describe("CigaretteLicenseClient", () => {
   const mockValues = {
