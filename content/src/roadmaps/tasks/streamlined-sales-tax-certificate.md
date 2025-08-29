@@ -28,6 +28,8 @@ urlSlug: streamlined-sales-tax-certificate
 displayname: streamlined-sales-tax-certificate
 name: Register for Streamlined Sales Tax
 id: streamlined-sales-tax-certificate
+callToActionText: Register for Streamlined Sales Tax
+agencyId: nj-taxation
 ---
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
