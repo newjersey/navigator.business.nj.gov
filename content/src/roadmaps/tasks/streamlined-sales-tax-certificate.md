@@ -28,6 +28,7 @@ urlSlug: streamlined-sales-tax-certificate
 displayname: streamlined-sales-tax-certificate
 name: Register for Streamlined Sales Tax
 id: streamlined-sales-tax-certificate
+callToActionLink: https://www.sstregister.org/
 callToActionText: Register for Streamlined Sales Tax
 agencyId: nj-taxation
 ---
