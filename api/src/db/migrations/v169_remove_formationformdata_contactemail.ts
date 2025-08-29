@@ -12,15 +12,17 @@ export const migrate_v168_to_v169 = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v169UserData => {
-  return {
-    ...v168Data,
-    businesses: Object.fromEntries(
-      Object.values(v168Data.businesses)
-        .map((business: v168Business) => migrate_v168Business_to_v169Business(business))
-        .map((currBusiness: v169Business) => [currBusiness.id, currBusiness]),
-    ),
-    version: 169,
-  } as v169UserData;
+  const updatedUserData = structuredClone(v168Data) as v169UserData;
+  const updatedBusinesss = Object.fromEntries(
+    Object.values(v168Data.businesses)
+      .map((business: v168Business) => migrate_v168Business_to_v169Business(business))
+      .map((currBusiness: v169Business) => [currBusiness.id, currBusiness]),
+  );
+
+  updatedUserData.businesses = updatedBusinesss;
+  updatedUserData.version = 169;
+
+  return updatedUserData;
 };
 
 /*
@@ -40,16 +42,8 @@ interface TEMP_Business extends v168Business {
 }
 
 export const migrate_v168Business_to_v169Business = (business: v168Business): v169Business => {
-  const businessWithContactEmail: TEMP_Business = {
-    ...business,
-    formationData: {
-      ...business.formationData,
-      formationFormData: {
-        ...business.formationData.formationFormData,
-        contactEmail: "",
-      },
-    },
-  };
+  const businessWithContactEmail = structuredClone(business) as TEMP_Business;
+  businessWithContactEmail.formationData.formationFormData.contactEmail = "";
 
   const businessWithoutContactEmail: v169Business = businessWithContactEmail;
   delete businessWithContactEmail.formationData.formationFormData.contactEmail;
