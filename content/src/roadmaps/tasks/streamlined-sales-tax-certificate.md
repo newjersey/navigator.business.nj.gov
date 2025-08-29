@@ -1,8 +1,10 @@
 ---
 summaryDescriptionMd: >-
-  If you are a 'remote seller|remote-seller', you must register with the New
-  Jersey Division of Revenue and Enterprise Services to collect and send sales
-  tax to the State. &nbsp;
+  If you are a 
+
+   `remote seller|remote-seller` 
+
+  , you must register with the New Jersey Division of Revenue and Enterprise Services to collect and send sales tax to the State. &nbsp;
 
 
   But if you sell in more than one state, you can simplify this process. Register for sales taxes in multiple states at the same time through the Streamlined Sales Tax Registration System (SSTRS).
