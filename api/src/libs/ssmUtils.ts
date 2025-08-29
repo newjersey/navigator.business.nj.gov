@@ -3,7 +3,9 @@ import { GetParameterCommand, PutParameterCommand, SSMClient } from "@aws-sdk/cl
 const ssmClient = new SSMClient({});
 const parameterName = `/${process.env.STAGE}/feature-flag/users-migration/kill-switch`;
 
-export type CONFIG_VARS =
+export type CONFIG_VARS = "cms_alerts_sns_topic_arn" | CIGARETTE_CONFIG_VARS;
+
+export type CIGARETTE_CONFIG_VARS =
   | "cigarette_license_base_url"
   | "cigarette_license_api_key"
   | "cigarette_license_merchant_code"
