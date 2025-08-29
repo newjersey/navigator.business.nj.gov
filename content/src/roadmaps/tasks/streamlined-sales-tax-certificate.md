@@ -37,3 +37,15 @@ id: streamlined-sales-tax-certificate
 * You don’t have to use SSTRS to register for sales taxes, but it’s free and can save you time
 
 :::
+
+
+
+## Application Requirements
+
+### Business Information
+
+* Business name, address, and phone number
+* NAICS Code 
+* Business structure <contextual info>
+* Employer Identification Number (EIN)<contextual info>
+* Trade name or alternate name<contextual info>, if different from business's legal name
