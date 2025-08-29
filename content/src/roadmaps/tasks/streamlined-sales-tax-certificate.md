@@ -45,7 +45,7 @@ id: streamlined-sales-tax-certificate
 ### Business Information
 
 * Business name, address, and phone number
-* NAICS Code 
+*    `NAICS Code|naics` 
 * Business structure <contextual info>
 * Employer Identification Number (EIN)<contextual info>
 * Trade name or alternate name<contextual info>, if different from business's legal name
