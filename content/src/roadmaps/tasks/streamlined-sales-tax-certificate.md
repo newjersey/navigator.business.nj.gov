@@ -1,15 +1,15 @@
 ---
 summaryDescriptionMd: >-
   If you are a , you must register with the New Jersey Division of Revenue and
-  Enterprise Services to collect and send sales tax to the State. But if you
-  sell in more than one state, you can simplify this process. Register for sales
-  taxes in multiple states at the same time through the Streamlined Sales Tax
-  Registration System (SSTRS).
-
-  &ebsp;
+  Enterprise Services to collect and send sales tax to the State. &nbsp;
 
 
-  New Jersey, along with many other states, is part of the Streamlined Sales Tax program (SST). If you sell in SST states, you can register for sales taxes in those states through SSTRS. This can help you save time and avoid confusion.
+  But if you sell in more than one state, you can simplify this process. Register for sales taxes in multiple states at the same time through the Streamlined Sales Tax Registration System (SSTRS).
+
+  &nbsp;
+
+
+  New Jersey, along with many other states, is part of the Streamlined Sales Tax program (SST). If you sell in SST states, you can register for sales taxes in those states through SSTRS. This can help you save time and avoid confusion. &nbsp;
 
 
   Marketplace facilitators<contextual info> and marketplace sellers<contextual info> can also register through SSTRS.
