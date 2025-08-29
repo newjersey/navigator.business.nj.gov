@@ -55,6 +55,7 @@ describe("<SalesInfo />", () => {
                 value={{
                   state: cigaretteLicenseData,
                   setCigaretteLicenseData,
+                  saveCigaretteLicenseData: jest.fn(),
                 }}
               >
                 <ProfileDataContext.Provider

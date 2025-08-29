@@ -70,7 +70,7 @@ export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicen
         );
         const errorResponse: PaymentApiError = {
           statusCode: 500,
-          errorCode: "500",
+          errorCode: "139",
           userMessage: "An unknown error occured",
           developerMessage: JSON.stringify(error),
         };
@@ -116,7 +116,7 @@ export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicen
         );
         const errorResponse: PaymentApiError = {
           statusCode: 500,
-          errorCode: "500",
+          errorCode: "139",
           userMessage: "An unknown error occured",
           developerMessage: JSON.stringify(error),
         };

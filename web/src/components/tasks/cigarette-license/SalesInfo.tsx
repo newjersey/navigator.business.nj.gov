@@ -5,10 +5,11 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 import { CigaretteSalesStartDate } from "@/components/tasks/cigarette-license/fields/CigaretteSalesStartDate";
 import { CigaretteSupplierDropdown } from "@/components/tasks/cigarette-license/fields/CigaretteSupplierDropdown";
+import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 
 interface Props {
   setStepIndex: (step: number) => void;
@@ -17,6 +18,8 @@ interface Props {
 
 export const SalesInfo = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const { saveCigaretteLicenseData } = useContext(CigaretteLicenseContext);
+
   return (
     <>
       <h2>{Config.cigaretteLicenseStep3.salesInformationHeader}</h2>
@@ -35,7 +38,10 @@ export const SalesInfo = (props: Props): ReactElement => {
           </SecondaryButton>
           <PrimaryButton
             isColor="primary"
-            onClick={() => props.setStepIndex(3)}
+            onClick={() => {
+              props.setStepIndex(3);
+              saveCigaretteLicenseData();
+            }}
             isRightMarginRemoved={true}
           >
             {Config.cigaretteLicenseStep3.nextButtonText}

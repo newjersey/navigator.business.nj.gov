@@ -139,10 +139,12 @@ export type PaymentApiError = {
   errorCode: string;
   userMessage: string;
   developerMessage: string;
+  validationErrors?: string[];
 };
 
 export type PreparePaymentResponse = {
   token: string;
+  statusCode?: number;
   legacyRedirectUrl?: string;
   htmL5RedirectUrl?: string;
   inContextRedirectUrl?: string;
