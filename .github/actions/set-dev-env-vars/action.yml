@@ -1,0 +1,49 @@
+name: Set Environment Variables for Development Environment
+description: Set the environment variables for the dev environment
+inputs:
+  admin_password:
+    description: "The admin password to use"
+    required: true
+  abc_etp_api_key:
+    description: "The api account key for ABC ETP"
+    required: true
+  abc_etp_api_account:
+    description: "The api account for ABC ETP"
+    required: true
+  abc_etp_api_base_url:
+    description: "The base url for ABC ETP"
+    required: true
+  airtable_users_table:
+    description: "Airtable Users Table"
+    required: true
+  api_base_url:
+    description: "API Base URL"
+    required: true
+  auth_domain:
+    description: "Cognito Auth Domain"
+    required: true
+  aws_access_key_id:
+    description: "AWS Access Key ID for bfs-navigator"
+    required: true
+  aws_account_id:
+    description: "AWS Account ID"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name:
+      shell: bash
+      run: |
+        echo "Simulating Set Dev Env Vars"
+        echo "ADMIN_PASSWORD=${{ inputs.admin_password }}" >> $GITHUB_ENV
+        echo "ABC_ETP_API_KEY=${{ inputs.abc_etp_api_key}}" >> $GITHUB_ENV
+        echo "ABC_ETP_API_ACCOUNT=${{ inputs.abc_etp_api_account}}" >> $GITHUB_ENV
+        echo "ABC_ETP_API_BASE_URL=${{ inputs.abc_etp_api_base_url}}" >> $GITHUB_ENV
+        echo "AIRTABLE_USERS_TABLE=${{ inputs.airtable_users_table}}" >> $GITHUB_ENV
+        echo "API_BASE_URL=${{ inputs.api_base_url}}" >> $GITHUB_ENV
+        echo "AUTH_DOMAIN=${{ inputs.auth_domain}}" >> $GITHUB_ENV
+        echo "AWS_ACCESS_KEY_ID=${{ inputs.aws_access_key_id}}" >> $GITHUB_ENV
+        echo "AWS_ACCOUNT_ID=${{ inputs.aws_account_id}}" >> $GITHUB_ENV
