@@ -5,6 +5,7 @@ import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmat
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
+import { SalesInfo } from "@/components/tasks/cigarette-license/SalesInfo";
 import { AddressContext } from "@/contexts/addressContext";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -288,7 +289,12 @@ export const CigaretteLicense = (props: Props): ReactElement => {
                   CMS_ONLY_show_error={props.CMS_ONLY_show_error}
                 />
               )}
-              {stepIndex === 2 && <></>}
+              {stepIndex === 2 && (
+                <SalesInfo
+                  setStepIndex={setStepIndex}
+                  CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                />
+              )}
             </AddressContext.Provider>
           </ProfileDataContext.Provider>
         </CigaretteLicenseContext.Provider>
