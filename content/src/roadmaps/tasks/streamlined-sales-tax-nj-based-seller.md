@@ -1,5 +1,5 @@
 ---
-notesMd: This applies to NJ-based businesses that sell in other states
+notesMd: "**This applies to NJ-based businesses that sell in other states**"
 summaryDescriptionMd: >-
   If your business is based in New Jersey but you also sell in more than one
   state, you can register for sales taxes in multiple states at the same time
