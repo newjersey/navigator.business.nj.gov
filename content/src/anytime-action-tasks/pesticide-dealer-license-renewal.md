@@ -8,15 +8,16 @@ industryIds: []
 sectorIds: []
 urlSlug: pesticide-dealer-license-renewal
 summaryDescriptionMd: |+
-  You must renew your certified pesticide dealer license once a year. 
+  You must renew your certified pesticide dealer license once a year.
 
 
 issuingAgency: Department of Environmental Protection (DEP)
 callToActionText: Renew My Certified Pesticide Dealer License
-callToActionLink: "https://www9.nj.gov/DEP_RSP/Orchestrate.do?initiate=true&orc\
-  hestrationId=NJDEP-EL-PayInvoice&service_category_id=30&service_class_id=109 "
+callToActionLink: "https://www9.nj.gov/DEP_RSP/Orchestrate.do?initiate=true&orchestrationId=NJDEP-EL-PayInvoice&service_category_id=30&service_class_id=109"
 ---
+
 ## Renewal Requirements
+
 - Invoice number
 - License number
 - Applicable fees paid
