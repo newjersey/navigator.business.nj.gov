@@ -50,10 +50,18 @@ id: streamlined-sales-tax-certificate
 *    `Employer Identification Number (EIN)|ein` 
 *    `Trade name or alternate name|alt-name-trade-name` if different from business's legal name
 
-
+  &nbsp;
 
 ### Contact Information
 
 * Contact name
 * Contact phone number
 * Contact email
+
+
+
+:::largeCallout{ showHeader="true" headerText=" What if I don't register for SST?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+If you don't register for SST, you must register for sales taxes separately with the New Jersey Division of Revenue and Enterprise Services. You also may need to register with all other states where you sell products or services.
+
+:::
