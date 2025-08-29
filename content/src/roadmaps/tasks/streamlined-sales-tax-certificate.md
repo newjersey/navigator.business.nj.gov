@@ -49,3 +49,11 @@ id: streamlined-sales-tax-certificate
 *    `Business structure|business-structure-learn-more` 
 *    `Employer Identification Number (EIN)|ein` 
 *    `Trade name or alternate name|alt-name-trade-name` if different from business's legal name
+
+
+
+### Contact Information
+
+* Contact name
+* Contact phone number
+* Contact email
