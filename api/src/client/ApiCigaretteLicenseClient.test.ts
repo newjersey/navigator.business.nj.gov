@@ -140,7 +140,7 @@ describe("CigaretteLicenseClient", () => {
       const result = await client.preparePayment(userData, returnUrl);
 
       expect(result.errorResult).toBeDefined();
-      expect(result.errorResult?.errorCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(result.errorResult?.errorCode).toBe(mockErrorPostResponse.errorResult?.errorCode);
 
       expect(spyOnLogError.mock.calls[0]).toEqual([
         `Cigarette License Client - Id:test - Unknown error received: ${JSON.stringify(mockErrorPostResponse)}`,
@@ -221,7 +221,7 @@ describe("CigaretteLicenseClient", () => {
       const result = await client.getOrderByToken(token);
 
       expect(result.errorResult).toBeDefined();
-      expect(result.errorResult?.errorCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(result.errorResult?.errorCode).toBe(mockErrorGetResponse.errorResult?.errorCode);
 
       expect(spyOnLogError.mock.calls[0]).toEqual([
         `Cigarette License Client - Id:test - Unknown error received: ${JSON.stringify(mockErrorGetResponse)}`,

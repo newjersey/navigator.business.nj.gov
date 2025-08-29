@@ -20,7 +20,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 
-export const getUserData = (id: string): Promise<UserData> => {
+export const getUserData = async (id: string): Promise<UserData> => {
   return get<UserData>(`/users/${id}`).then((userData) => {
     setPhaseDimension(getCurrentBusiness(userData).profileData.operatingPhase);
     return userData;
@@ -92,6 +92,10 @@ export const postTaxClearanceCertificate = (
   userData: UserData,
 ): Promise<TaxClearanceCertificateResponse> => {
   return post(`/postTaxClearanceCertificate`, userData);
+};
+
+export const cigaretteLicenseConfirmPayment = (): Promise<UserData> => {
+  return get(`/cigarette-license/get-order-by-token`);
 };
 
 export const unlinkTaxId = (userData: UserData): Promise<UnlinkTaxIdResponse> => {

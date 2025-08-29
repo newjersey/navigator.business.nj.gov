@@ -268,14 +268,14 @@ describe("cigaretteLicenseRouter", () => {
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedModifiedUserData);
     });
 
-    it("returns errorResult info if no matching orders are found", async () => {
+    it("returns previous userData if no matching orders are found", async () => {
       stubCigaretteLicenseClient.getOrderByToken.mockResolvedValue(mockErrorGetResponse);
 
       const response = await request(app).get("/cigarette-license/get-order-by-token");
 
       expect(response.status).toEqual(StatusCodes.OK);
       expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
-      expect(response.body).toEqual(mockErrorPostResponse.errorResult);
+      expect(response.body).toEqual(signedInUser);
     });
 
     it("returns 500 reponse if unknown error occurs", async () => {

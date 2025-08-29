@@ -18,6 +18,11 @@
     "licenseeInformationHeader": "Licensee Information",
     "submissionDetails": "Submission Details",
     "issuingAgency": "**Issuing Agency:** NJ Division of Revenue and Enterprise Services",
-    "confirmationNumber": "Confirmation number"
+    "confirmationNumber": "Confirmation number",
+    "cantCompleteFilingAlert": "We received your payment, but we couldn’t complete your filing.",
+    "cantCompleteFilingMessage1": "Select “Try Again” and we’ll resend your filing details. **Do not** submit payment again.",
+    "cantCompleteFilingMessage2": "If you are still having trouble after trying again, select “Start a Live Chat” to get help.",
+    "tryAgainButton": "Try Again",
+    "startLiveChatButton": "Start a Live Chat"
   }
 }

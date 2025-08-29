@@ -1483,6 +1483,36 @@ collections:
                   widget: "string",
                   required: true,
                 }
+              - {
+                  label: "Cant Complete Filing Alert",
+                  name: "cantCompleteFilingAlert",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Cant Complete Filing Message Line 1",
+                  name: "cantCompleteFilingMessage1",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Cant Complete Filing Message Line 2",
+                  name: "cantCompleteFilingMessage2",
+                  widget: "markdown",
+                  required: true,
+                }
+              - {
+                  label: "Try Again Button",
+                  name: "tryAgainButton",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Start a Live Chat Button",
+                  name: "startLiveChatButton",
+                  widget: "string",
+                  required: true,
+                }
   - name: "ein-task"
     label: "Tasks - EIN"
     delete: false

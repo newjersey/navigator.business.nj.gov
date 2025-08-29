@@ -104,7 +104,7 @@ export const mockErrorPostResponse: PreparePaymentResponse = {
   token: "",
   errorResult: {
     statusCode: 500,
-    errorCode: 500,
+    errorCode: "500",
     userMessage: "An unknown error occured",
     developerMessage: "An unknown error occured",
   },
@@ -119,7 +119,7 @@ export const mockErrorGetResponse: GetOrderByTokenResponse = {
   matchingOrders: 0,
   errorResult: {
     statusCode: 500,
-    errorCode: 500,
+    errorCode: "500",
     userMessage: "An unknown error occured",
     developerMessage: "An unknown error occured",
   },
