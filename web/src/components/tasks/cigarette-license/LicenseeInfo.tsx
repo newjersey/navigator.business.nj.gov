@@ -15,11 +15,14 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { ContactInformation } from "@/components/tasks/cigarette-license/fields/ContactInformation";
+import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { shouldLockBusinessAddress } from "@/components/tasks/cigarette-license/helpers";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
@@ -35,6 +38,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
   const { business } = useUserData();
   const hasSubmittedTaxData =
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
+  const hasFormedBusiness = hasCompletedFormation(business);
 
   const dataFormErrorMap = useContext(DataFormErrorMapContext);
   const { saveCigaretteLicenseData } = useContext(CigaretteLicenseContext);
@@ -78,6 +82,7 @@ export const LicenseeInfo = (props: Props): ReactElement => {
 
       <div className="margin-y-2">
         <ProfileField
+          locked={hasSubmittedTaxData || hasFormedBusiness}
           fieldName={"businessName"}
           hideLine
           fullWidth
@@ -93,13 +98,14 @@ export const LicenseeInfo = (props: Props): ReactElement => {
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={isTradeNameLegalStructureApplicable(business?.profileData.legalStructureId)}
-          locked={hasSubmittedTaxData}
+          locked={hasSubmittedTaxData || hasFormedBusiness}
           hideLine
           fullWidth
         >
           <ResponsibleOwnerName inputWidth="full" required />
         </ProfileField>
         <ProfileField
+          locked={hasSubmittedTaxData || hasFormedBusiness}
           fieldName="tradeName"
           isVisible={isTradeNameLegalStructureApplicable(business?.profileData.legalStructureId)}
           hideLine
@@ -130,12 +136,16 @@ export const LicenseeInfo = (props: Props): ReactElement => {
       <h2 className="padding-top-2">{Config.cigaretteLicenseStep2.businessAddressHeader}</h2>
       <p>{Config.cigaretteLicenseStep2.businessAddressDescription}</p>
       <div data-testid="business-address-section" className="margin-y-4">
-        <UnitedStatesAddress
-          onValidation={onValidation}
-          isFullWidth
-          dataFormErrorMap={dataFormErrorMap}
-          stateInputLocked
-        />
+        {shouldLockBusinessAddress(business) ? (
+          <ProfileAddressLockedFields businessLocation="US" />
+        ) : (
+          <UnitedStatesAddress
+            onValidation={onValidation}
+            isFullWidth
+            dataFormErrorMap={dataFormErrorMap}
+            stateInputLocked
+          />
+        )}
       </div>
       <HorizontalLine />
 
