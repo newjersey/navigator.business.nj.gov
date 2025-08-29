@@ -25,6 +25,7 @@ import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 const Config = getMergedConfig();
 
@@ -47,37 +48,39 @@ describe("<LicenseeInfo />", () => {
       const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
       return (
         <WithStatefulUserData initialUserData={testUserData}>
-          <DataFormErrorMapContext.Provider value={formContextState}>
-            <AddressContext.Provider
-              value={{
-                state: {
-                  formationAddressData: emptyFormationAddressData,
-                },
-                setAddressData: jest.fn(),
-              }}
-            >
-              <CigaretteLicenseContext.Provider
+          <ThemeProvider theme={createTheme()}>
+            <DataFormErrorMapContext.Provider value={formContextState}>
+              <AddressContext.Provider
                 value={{
-                  state: cigaretteLicenseData,
-                  setCigaretteLicenseData,
-                  saveCigaretteLicenseData: jest.fn(),
+                  state: {
+                    formationAddressData: emptyFormationAddressData,
+                  },
+                  setAddressData: jest.fn(),
                 }}
               >
-                <ProfileDataContext.Provider
+                <CigaretteLicenseContext.Provider
                   value={{
-                    state: {
-                      profileData,
-                      flow: "STARTING",
-                    },
-                    setProfileData,
-                    onBack: (): void => {},
+                    state: cigaretteLicenseData,
+                    setCigaretteLicenseData,
+                    saveCigaretteLicenseData: jest.fn(),
                   }}
                 >
-                  <LicenseeInfo setStepIndex={jest.fn()} />
-                </ProfileDataContext.Provider>
-              </CigaretteLicenseContext.Provider>
-            </AddressContext.Provider>
-          </DataFormErrorMapContext.Provider>
+                  <ProfileDataContext.Provider
+                    value={{
+                      state: {
+                        profileData,
+                        flow: "STARTING",
+                      },
+                      setProfileData,
+                      onBack: (): void => {},
+                    }}
+                  >
+                    <LicenseeInfo setStepIndex={jest.fn()} />
+                  </ProfileDataContext.Provider>
+                </CigaretteLicenseContext.Provider>
+              </AddressContext.Provider>
+            </DataFormErrorMapContext.Provider>
+          </ThemeProvider>
         </WithStatefulUserData>
       );
     };
@@ -194,6 +197,61 @@ describe("<LicenseeInfo />", () => {
 
       expect(businessNameField).toHaveValue("New Business Name");
       expect(businessNameField).toHaveAttribute("aria-label", "Business name");
+    });
+  });
+
+  describe("Locks Fields", () => {
+    it("pre-populates businessNameField and taxIdField when taxData has been submitted", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessName: "Test Business",
+          legalStructureId: "limited-liability-company",
+        }),
+        taxFilingData: {
+          state: "SUCCESS",
+          filings: [],
+        },
+      });
+      renderComponent({ business });
+
+      const businessNameField = screen.queryByRole("textbox", { name: /business name/i });
+      expect(businessNameField).not.toBeInTheDocument();
+      const businessNameValue = screen.getByText("Test Business");
+      expect(businessNameValue).toBeInTheDocument();
+
+      const taxIdField = screen.queryByRole("Tax id");
+      expect(taxIdField).not.toBeInTheDocument();
+      const taxIdValue = screen.getByText("****-****-****");
+      expect(taxIdValue).toBeInTheDocument();
+    });
+
+    it("pre-populates business address if a business has formed", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessName: "Test Business",
+          legalStructureId: "limited-liability-company",
+        }),
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+          formationFormData: generateFormationFormData({
+            addressLine1: "Test Address Line 1",
+            addressCity: "Test City",
+            addressMunicipality: undefined,
+            addressZipCode: "07000",
+          }),
+        }),
+      });
+      renderComponent({ business });
+
+      const businessNameField = screen.queryByRole("textbox", { name: /business name/i });
+      expect(businessNameField).not.toBeInTheDocument();
+      const businessNameValue = screen.getByText("Test Business");
+      expect(businessNameValue).toBeInTheDocument();
+
+      const addressLine1Field = screen.queryByRole("textbox", { name: /address line 1/i });
+      expect(addressLine1Field).not.toBeInTheDocument();
+      const addressValue = screen.getByTestId("locked-profileAddressLine1");
+      expect(addressValue).toBeInTheDocument();
     });
   });
 
