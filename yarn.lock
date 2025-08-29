@@ -4902,7 +4902,7 @@ __metadata:
     "@types/jest": 29.5.14
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
-    "@types/node": 20.19.7
+    "@types/node": 20.19.11
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.3
     "@types/xml2js": 0.4.14
@@ -4957,7 +4957,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 20.19.7
+    "@types/node": 20.19.11
     cross-env: 7.0.3
     cspell: 9.2.0
     prettier: 3.6.2
@@ -5039,7 +5039,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 20.19.7
+    "@types/node": 20.19.11
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -5172,7 +5172,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.14
-    "@types/node": 20.19.7
+    "@types/node": 20.19.11
     "@types/react": 18.2.79
     "@types/uuid": 10.0.0
     "@typescript-eslint/eslint-plugin": 7.18.0
@@ -5250,7 +5250,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 20.19.7
+    "@types/node": 20.19.11
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -13251,12 +13251,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.19.7, @types/node@npm:>=6":
-  version: 20.19.7
-  resolution: "@types/node@npm:20.19.7"
+"@types/node@npm:*, @types/node@npm:20.19.11, @types/node@npm:>=6":
+  version: 20.19.11
+  resolution: "@types/node@npm:20.19.11"
   dependencies:
     undici-types: ~6.21.0
-  checksum: 1608f602bd13351373efe033e4690b43def672afd5345b10655d9fa003d82e8082cbbe5b0b03e099a986f63a5de21068cfc7b077b8198f5a60e04cada6054bf8
+  checksum: 8e41e75abd1a50dfba18eed3eb5a8c5e6aa4e46ec840aad645056a678c5b2ee1bd28dbb3bfcc41c7b5c73e9997a39210bd9705466c0c568691baeecef8b23df7
   languageName: node
   linkType: hard
 
@@ -21288,14 +21288,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatted@npm:^3.2.9":
-  version: 3.3.1
-  resolution: "flatted@npm:3.3.1"
-  checksum: 85ae7181650bb728c221e7644cbc9f4bf28bc556f2fc89bb21266962bdf0ce1029cc7acc44bb646cd469d9baac7c317f64e841c4c4c00516afa97320cdac7f94
-  languageName: node
-  linkType: hard
-
-"flatted@npm:^3.3.3":
+"flatted@npm:^3.2.9, flatted@npm:^3.3.3":
   version: 3.3.3
   resolution: "flatted@npm:3.3.3"
   checksum: 8c96c02fbeadcf4e8ffd0fa24983241e27698b0781295622591fc13585e2f226609d95e422bcf2ef044146ffacb6b68b1f20871454eddf75ab3caa6ee5f4a1fe
@@ -29906,14 +29899,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "picomatch@npm:4.0.2"
-  checksum: a7a5188c954f82c6585720e9143297ccd0e35ad8072231608086ca950bee672d51b0ef676254af0788205e59bd4e4deb4e7708769226bed725bf13370a7d1464
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^4.0.3":
+"picomatch@npm:^4.0.2, picomatch@npm:^4.0.3":
   version: 4.0.3
   resolution: "picomatch@npm:4.0.3"
   checksum: 6817fb74eb745a71445debe1029768de55fd59a42b75606f478ee1d0dc1aa6e78b711d041a7c9d5550e042642029b7f373dc1a43b224c4b7f12d23436735dba0
@@ -34660,17 +34646,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.12":
-  version: 0.2.13
-  resolution: "tinyglobby@npm:0.2.13"
-  dependencies:
-    fdir: ^6.4.4
-    picomatch: ^4.0.2
-  checksum: 3a2e87a2518cb3616057b0aa58be4f17771ae78c6890556516ae1e631f8ce4cfee1ba1dcb62fcc54a64e2bdd6c3104f4f3d021e1a3e3f8fb0875bca380b913e5
-  languageName: node
-  linkType: hard
-
-"tinyglobby@npm:^0.2.14":
+"tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.14":
   version: 0.2.14
   resolution: "tinyglobby@npm:0.2.14"
   dependencies:
