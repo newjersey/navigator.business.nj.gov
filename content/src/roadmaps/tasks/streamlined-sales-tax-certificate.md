@@ -1,21 +1,29 @@
 ---
 summaryDescriptionMd: >-
-  If you are a 
+  
 
-   `remote seller,|remote-seller` 
+  If you are a `remote seller,|remote-seller` you must register with the New Jersey
 
-  , you must register with the New Jersey Division of Revenue and Enterprise Services to collect and send sales tax to the State. &nbsp;
-
-
-  But if you sell in more than one state, you can simplify this process. Register for sales taxes in multiple states at the same time through the Streamlined Sales Tax Registration System (SSTRS).
+   Division of Revenue and Enterprise Services to collect and send sales tax to the State. 
 
   &nbsp;
 
 
-  New Jersey, along with many other states, is part of the Streamlined Sales Tax program (SST). If you sell in SST states, you can register for sales taxes in those states through SSTRS. This can help you save time and avoid confusion. &nbsp;
+  But if you sell in more than one state, you can simplify this process. Register for sales taxes in multiple states at the same time through the Streamlined Sales Tax Registration System (SSTRS).
 
 
-  Marketplace facilitators<contextual info> and marketplace sellers<contextual info> can also register through SSTRS.
+
+  &nbsp;
+
+
+  New Jersey, along with many other states, is part of the Streamlined Sales Tax program (SST). If you sell in SST states, you can register for sales taxes in those states through SSTRS. This can help you save time and avoid confusion. 
+
+
+  &nbsp;
+
+
+
+   `Marketplace facilitators|marketplace-facilitator` and `marketplace sellers|marketplace-seller` can also register through SSTRS.
 urlSlug: streamlined-sales-tax-certificate
 displayname: streamlined-sales-tax-certificate
 name: Register for Streamlined Sales Tax
