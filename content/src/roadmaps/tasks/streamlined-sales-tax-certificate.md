@@ -65,3 +65,11 @@ id: streamlined-sales-tax-certificate
 If you don't register for SST, you must register for sales taxes separately with the New Jersey Division of Revenue and Enterprise Services. You also may need to register with all other states where you sell products or services.
 
 :::
+
+
+
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+A sales tax registration number for New Jersey and any other states where you registered.
+
+:::
