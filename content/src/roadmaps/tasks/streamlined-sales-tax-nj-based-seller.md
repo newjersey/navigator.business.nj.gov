@@ -20,6 +20,9 @@ urlSlug: streamlined-sales-tax-NJ-based-seller
 displayname: streamlined-sales-tax-NJ-based-seller
 name: Register for Streamlined Sales and Use Tax
 id: streamlined-sales-tax-nj-based-seller
+callToActionLink: https://www.sstregister.org/
+callToActionText: Register for Streamlined Sales Tax
+agencyId: nj-taxation
 ---
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
