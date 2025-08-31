@@ -173,7 +173,7 @@
     "cat": "0.2.0",
     "check-node-version": "4.2.1",
     "clean-webpack-plugin": "4.0.0",
-    "copy-webpack-plugin": "13.0.0",
+    "copy-webpack-plugin": "13.0.1",
     "cross-env": "7.0.3",
     "cspell": "9.2.0",
     "cypress": "14.5.1",
