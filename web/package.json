@@ -135,7 +135,7 @@
     "babel-jest": "29.7.0",
     "babel-loader": "10.0.0",
     "clean-webpack-plugin": "4.0.0",
-    "copy-webpack-plugin": "13.0.0",
+    "copy-webpack-plugin": "13.0.1",
     "cross-env": "7.0.3",
     "cspell": "9.2.0",
     "cypress": "14.5.1",
