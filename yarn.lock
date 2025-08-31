@@ -5068,7 +5068,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 9.2.0
-    cypress: 14.5.1
+    cypress: 14.5.4
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -5270,7 +5270,7 @@ __metadata:
     copy-webpack-plugin: 13.0.0
     cross-env: 7.0.3
     cspell: 9.2.0
-    cypress: 14.5.1
+    cypress: 14.5.4
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -5930,9 +5930,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^3.0.8":
-  version: 3.0.8
-  resolution: "@cypress/request@npm:3.0.8"
+"@cypress/request@npm:^3.0.9":
+  version: 3.0.9
+  resolution: "@cypress/request@npm:3.0.9"
   dependencies:
     aws-sign2: ~0.7.0
     aws4: ^1.8.0
@@ -5940,7 +5940,7 @@ __metadata:
     combined-stream: ~1.0.6
     extend: ~3.0.2
     forever-agent: ~0.6.1
-    form-data: ~4.0.0
+    form-data: ~4.0.4
     http-signature: ~1.4.0
     is-typedarray: ~1.0.0
     isstream: ~0.1.2
@@ -5952,7 +5952,7 @@ __metadata:
     tough-cookie: ^5.0.0
     tunnel-agent: ^0.6.0
     uuid: ^8.3.2
-  checksum: 0a80d5872c6a82b74ed639be773ea68f5047aea63e9e6a10e64eda73ebab9c0ee0a7435df4b11ededc49a7e186884aa7997143effd21ef6321e233489764668b
+  checksum: d22327b6fc52c8c6bbfa82b3a5b40f890f869da615c0dd494b3bf2c016eb3b1875082b451571d6b109a84c7e73a5869e9a997cdb71716e46900f607002e6afd0
   languageName: node
   linkType: hard
 
@@ -17852,11 +17852,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:14.5.1":
-  version: 14.5.1
-  resolution: "cypress@npm:14.5.1"
+"cypress@npm:14.5.4":
+  version: 14.5.4
+  resolution: "cypress@npm:14.5.4"
   dependencies:
-    "@cypress/request": ^3.0.8
+    "@cypress/request": ^3.0.9
     "@cypress/xvfb": ^1.2.4
     "@types/sinonjs__fake-timers": 8.1.1
     "@types/sizzle": ^2.3.2
@@ -17902,7 +17902,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 9fe575c8403f5919bd22dc09990de232b2b013735fb686684dd010ebcb306e93d2246d9621294c8a4b7ac67c961ede5a16bc29f7d746f21d2eb28dfc0e9ae9e1
+  checksum: 5fe95e88a6af1a454021a00490e051e658254744d14f0f51ecadb98ad2a37097f4774163423384a5a7d847496e5bb5b46cdf9c68007a86530659758edf1a9405
   languageName: node
   linkType: hard
 
@@ -21421,7 +21421,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0, form-data@npm:^4.0.4, form-data@npm:~4.0.0":
+"form-data@npm:^4.0.0, form-data@npm:^4.0.4, form-data@npm:~4.0.4":
   version: 4.0.4
   resolution: "form-data@npm:4.0.4"
   dependencies:
