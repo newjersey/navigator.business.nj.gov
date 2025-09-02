@@ -62,7 +62,7 @@
     "canBeReseller": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R, contractor",
+  "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R, contractor ",
   "id": "hvac-contractor",
   "description": "Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration systems (HVACR)",
   "webflowId": "656a1362ec40f516ab69a690"
