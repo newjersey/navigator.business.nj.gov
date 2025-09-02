@@ -53,7 +53,6 @@ export const ContactInformation = (props: Props): ReactElement => {
               fieldName="contactName"
               handleChange={(val) => handleChange(val, "contactName")}
               onValidation={(fieldName, invalid) => setIsContactNameValid(!invalid)}
-              additionalValidationIsValid={validateEmail}
               error={props.CMS_ONLY_show_error || isContactNameValid}
               validationText={Config.cigaretteLicenseStep2.fields.contactName.errorRequiredText}
               required={true}
