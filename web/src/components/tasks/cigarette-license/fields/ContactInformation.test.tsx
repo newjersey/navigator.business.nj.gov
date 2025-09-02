@@ -32,6 +32,7 @@ describe("<ContactInformation />", () => {
             value={{
               state: cigaretteLicenseData,
               setCigaretteLicenseData,
+              saveCigaretteLicenseData: jest.fn(),
             }}
           >
             <ContactInformation />

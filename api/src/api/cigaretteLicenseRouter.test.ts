@@ -144,7 +144,7 @@ describe("cigaretteLicenseRouter", () => {
       expect(response.status).toEqual(StatusCodes.OK);
 
       expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
-      expect(response.body).toEqual(mockErrorPostResponse.errorResult);
+      expect(response.body).toEqual({ userData, paymentInfo: mockErrorPostResponse });
     });
 
     it("returns 500 reponse if unknown error occurs", async () => {

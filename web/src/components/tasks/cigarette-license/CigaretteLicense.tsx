@@ -1,14 +1,13 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
+import { CigaretteLicenseReview } from "@/components/tasks/cigarette-license/CigaretteLicenseReview";
 import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
 import { SalesInfo } from "@/components/tasks/cigarette-license/SalesInfo";
 import { AddressContext } from "@/contexts/addressContext";
-import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
-import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import {
   createDataFormErrorMap,
@@ -18,7 +17,9 @@ import {
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
@@ -31,8 +32,8 @@ import {
 } from "@businessnjgovnavigator/shared/formationData";
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
-import { Dispatch, ReactElement, SetStateAction, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/compat/router";
+import { Dispatch, ReactElement, SetStateAction, useCallback, useEffect, useState } from "react";
 
 type Props = {
   task: Task;
@@ -79,6 +80,39 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     });
   };
 
+  const doesStepHaveError = (step: number): boolean => {
+    const invalidFieldIds = getInvalidFieldIds();
+    if (invalidFieldIds.length === 0) {
+      return false;
+    }
+
+    const stepFields: Record<number, string[]> = {
+      1: [
+        "addressLine1",
+        "addressLine2",
+        "addressCity",
+        "addressState",
+        "addressZipCode",
+        "contactName",
+        "contactPhoneNumber",
+        "contactEmail",
+        "responsibleOwnerName",
+        "tradeName",
+        "taxId",
+        "businessName",
+        "mailingAddressLine1",
+        "mailingAddressLine2",
+        "mailingAddressCity",
+        "mailingAddressState",
+        "mailingAddressZipCode",
+      ],
+      2: ["salesInfoStartDate", "salesInfoSupplier"],
+      3: ["signature", "signerRelationship", "signerName"],
+    };
+
+    return stepFields[step]?.some((fieldId) => invalidFieldIds.includes(fieldId)) ?? false;
+  };
+
   const stepperSteps: StepperStep[] = [
     {
       name: Config.cigaretteLicenseShared.stepperOneLabel,
@@ -87,17 +121,17 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     },
     {
       name: Config.cigaretteLicenseShared.stepperTwoLabel,
-      hasError: false,
+      hasError: doesStepHaveError(1),
       isComplete: false,
     },
     {
       name: Config.cigaretteLicenseShared.stepperThreeLabel,
-      hasError: false,
+      hasError: doesStepHaveError(2),
       isComplete: false,
     },
     {
       name: Config.cigaretteLicenseShared.stepperFourLabel,
-      hasError: false,
+      hasError: doesStepHaveError(3),
       isComplete: false,
     },
   ];
@@ -160,6 +194,21 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     });
   };
 
+  const saveCigaretteLicenseData = (): void => {
+    if (!business) {
+      return;
+    }
+    updateQueue
+      ?.queueBusiness({
+        ...updateQueue.currentBusiness(),
+        cigaretteLicenseData: {
+          ...cigaretteLicenseData,
+        },
+        lastUpdatedISO: new Date(Date.now()).toISOString(),
+      })
+      .update();
+  };
+
   useMountEffectWhenDefined(() => {
     if (business && userData) {
       const {
@@ -184,6 +233,9 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         contactEmail,
         salesInfoStartDate,
         salesInfoSupplier,
+        signerName,
+        signerRelationship,
+        signature,
         lastUpdatedISO,
       } = getInitialData(userData, business);
 
@@ -209,6 +261,9 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         contactEmail,
         salesInfoStartDate,
         salesInfoSupplier,
+        signerName,
+        signerRelationship,
+        signature,
         lastUpdatedISO,
       });
 
@@ -256,6 +311,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         steps={stepperSteps}
         currentStep={stepIndex}
         onStepClicked={function (step: number): void {
+          saveCigaretteLicenseData();
           setStepIndex(step);
         }}
       />
@@ -264,6 +320,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
           value={{
             state: cigaretteLicenseData,
             setCigaretteLicenseData,
+            saveCigaretteLicenseData,
           }}
         >
           <ProfileDataContext.Provider
@@ -292,6 +349,13 @@ export const CigaretteLicense = (props: Props): ReactElement => {
               {stepIndex === 2 && (
                 <SalesInfo
                   setStepIndex={setStepIndex}
+                  CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                />
+              )}
+              {stepIndex === 3 && (
+                <CigaretteLicenseReview
+                  setStepIndex={setStepIndex}
+                  setSubmissionError={setSubmissionError}
                   CMS_ONLY_show_error={props.CMS_ONLY_show_error}
                 />
               )}
