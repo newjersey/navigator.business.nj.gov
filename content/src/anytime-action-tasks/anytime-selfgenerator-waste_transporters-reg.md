@@ -102,6 +102,6 @@ If you don’t register, you cannot legally transport waste, and you may be subj
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A registration and decals for your waste transport vehicles.
+A registration and decals for your waste transport vehicles. 
 
 :::
