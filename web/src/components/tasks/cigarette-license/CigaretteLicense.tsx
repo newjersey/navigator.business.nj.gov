@@ -4,7 +4,10 @@ import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/Ciga
 import { CigaretteLicenseReview } from "@/components/tasks/cigarette-license/CigaretteLicenseReview";
 import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
-import { getInitialData } from "@/components/tasks/cigarette-license/helpers";
+import {
+  getInitialData,
+  isAnyRequiredFieldEmpty,
+} from "@/components/tasks/cigarette-license/helpers";
 import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
 import { SalesInfo } from "@/components/tasks/cigarette-license/SalesInfo";
 import { AddressContext } from "@/contexts/addressContext";
@@ -117,22 +120,34 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     {
       name: Config.cigaretteLicenseShared.stepperOneLabel,
       hasError: false,
-      isComplete: false,
+      isComplete: stepIndex > 0,
     },
     {
       name: Config.cigaretteLicenseShared.stepperTwoLabel,
       hasError: doesStepHaveError(1),
-      isComplete: false,
+      isComplete: !isAnyRequiredFieldEmpty(
+        cigaretteLicenseData,
+        1,
+        business?.profileData.legalStructureId,
+      ),
     },
     {
       name: Config.cigaretteLicenseShared.stepperThreeLabel,
       hasError: doesStepHaveError(2),
-      isComplete: false,
+      isComplete: !isAnyRequiredFieldEmpty(
+        cigaretteLicenseData,
+        2,
+        business?.profileData.legalStructureId,
+      ),
     },
     {
       name: Config.cigaretteLicenseShared.stepperFourLabel,
       hasError: doesStepHaveError(3),
-      isComplete: false,
+      isComplete: !isAnyRequiredFieldEmpty(
+        cigaretteLicenseData,
+        3,
+        business?.profileData.legalStructureId,
+      ),
     },
   ];
 

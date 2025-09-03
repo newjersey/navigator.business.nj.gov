@@ -1,3 +1,5 @@
+import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
+import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { LookupMunicipalityByName } from "@businessnjgovnavigator/shared/municipality";
 import { StateObject } from "@businessnjgovnavigator/shared/states";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
@@ -124,4 +126,69 @@ export const shouldLockBusinessAddress = (business?: Business): boolean => {
   if (!addressLine1 || !addressCity || !addressZipCode) return false;
 
   return true;
+};
+
+export const isAnyRequiredFieldEmpty = (
+  data: CigaretteLicenseData,
+  stepIndex: number,
+  legalStructureId?: string,
+): boolean => {
+  switch (stepIndex) {
+    case 1: {
+      const businessNameFields = isTradeNameLegalStructureApplicable(legalStructureId)
+        ? {
+            responsibleOwnerName: data.responsibleOwnerName === "",
+            tradeName: data.tradeName === "",
+          }
+        : {
+            businessName: data.businessName === "",
+          };
+
+      const mailingAddressFields = data.mailingAddressIsTheSame
+        ? {}
+        : {
+            mailingAddressLine1: data.mailingAddressLine1 === "",
+            mailingAddressCity: data.mailingAddressCity === "",
+            mailingAddressState: data.mailingAddressState === undefined,
+            mailingAddressZipCode: data.mailingAddressZipCode === "",
+          };
+
+      const step1Fields = {
+        ...businessNameFields,
+        taxId: data.taxId === "",
+        addressLine1: data.addressLine1 === "",
+        addressCity: data.addressCity === "",
+        addressState: data.addressState === undefined,
+        addressZipCode: data.addressZipCode === "",
+        contactName: data.contactName === "",
+        contactPhoneNumber: data.contactPhoneNumber === "",
+        contactEmail: data.contactEmail === "",
+        ...mailingAddressFields,
+      };
+
+      return Object.values(step1Fields).some(Boolean);
+    }
+
+    case 2: {
+      const step2Fields = {
+        salesInfoStartDate: data.salesInfoStartDate === "",
+        salesInfoSupplier: data.salesInfoSupplier === undefined,
+      };
+
+      return Object.values(step2Fields).some(Boolean);
+    }
+
+    case 3: {
+      const step3Fields = {
+        signature: data.signature === false,
+        signerRelationship: data.signerRelationship === "",
+        signerName: data.signerName === "",
+      };
+
+      return Object.values(step3Fields).some(Boolean);
+    }
+
+    default:
+      return false;
+  }
 };
