@@ -43,19 +43,19 @@
       "task": "get-insurance"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 20,
       "licenseTask": "architect-license",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 25,
       "task": "architect-are-exam",
       "required": true
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 30,
       "licenseTask": "authorization-architect-firm",
       "required": true
