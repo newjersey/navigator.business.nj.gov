@@ -40,7 +40,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
   } = useContext(CigaretteLicenseContext);
   const { state: profileDataState } = useContext(ProfileDataContext);
   const { state: addressState } = useContext(AddressContext);
-  const { userData, business } = useUserData();
+  const { userData, business, updateQueue } = useUserData();
   const profileData = profileDataState.profileData;
   const [loading, setLoading] = useState(false);
   const formationAddressData = addressState.formationAddressData;
@@ -239,6 +239,19 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
           cigaretteLicenseResponse.userData &&
           router
         ) {
+          updateQueue
+            ?.queueBusiness({
+              ...updateQueue.currentBusiness(),
+              cigaretteLicenseData: {
+                ...business.cigaretteLicenseData,
+                lastUpdatedISO: new Date(Date.now()).toISOString(),
+                paymentInfo: {
+                  ...business.cigaretteLicenseData?.paymentInfo,
+                  token: cigaretteLicenseResponse.paymentInfo.token,
+                },
+              },
+            })
+            .update();
           await router.replace(cigaretteLicenseResponse.paymentInfo?.htmL5RedirectUrl);
         }
       }
