@@ -89,17 +89,17 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
+export const postTaxClearanceCertificate = (
+  userData: UserData,
+): Promise<TaxClearanceCertificateResponse> => {
+  return post(`/postTaxClearanceCertificate`, userData);
+};
+
 export const postCigaretteLicensePreparePayment = (
   userData: UserData,
   returnUrl: string,
 ): Promise<{ userData: UserData; paymentInfo: PreparePaymentResponse }> => {
   return post(`/cigarette-license/prepare-payment`, { userData, returnUrl }, false);
-};
-
-export const postTaxClearanceCertificate = (
-  userData: UserData,
-): Promise<TaxClearanceCertificateResponse> => {
-  return post(`/postTaxClearanceCertificate`, userData);
 };
 
 export const cigaretteLicenseConfirmPayment = (): Promise<UserData> => {
