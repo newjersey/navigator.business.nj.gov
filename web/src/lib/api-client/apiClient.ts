@@ -99,7 +99,7 @@ export const postCigaretteLicensePreparePayment = (
   userData: UserData,
   returnUrl: string,
 ): Promise<{ userData: UserData; paymentInfo: PreparePaymentResponse }> => {
-  return post(`/cigarette-license/prepare-payment`, { userData, returnUrl }, false);
+  return post(`/cigarette-license/prepare-payment`, { userData, returnUrl });
 };
 
 export const cigaretteLicenseConfirmPayment = (): Promise<UserData> => {
