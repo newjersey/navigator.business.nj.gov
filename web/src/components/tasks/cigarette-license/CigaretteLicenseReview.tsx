@@ -23,7 +23,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
 import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
@@ -42,6 +42,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
   const { state: addressState } = useContext(AddressContext);
   const { userData, business } = useUserData();
   const profileData = profileDataState.profileData;
+  const [loading, setLoading] = useState(false);
   const formationAddressData = addressState.formationAddressData;
   const router = useRouter();
 
@@ -184,6 +185,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
   };
 
   const handleSubmit = async (): Promise<void> => {
+    setLoading(true);
     let dataToValidate = { ...cigaretteLicenseData };
 
     if (cigaretteLicenseData.mailingAddressIsTheSame) {
@@ -198,9 +200,12 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
     }
 
     const isValid = validateAllFieldsWithData(dataToValidate);
-    const returnUrl = window.location.href;
+    const returnUrl = window.location.origin + window.location.pathname;
 
-    if (!isValid) return;
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
 
     if (cigaretteLicenseData.mailingAddressIsTheSame) {
       copyAddress();
@@ -209,7 +214,10 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
     saveCigaretteLicenseData();
     props.setSubmissionError(undefined);
 
-    if (!userData || !business?.cigaretteLicenseData) return;
+    if (!userData || !business?.cigaretteLicenseData) {
+      setLoading(false);
+      return;
+    }
 
     try {
       await api.postUserData(userData);
@@ -221,18 +229,21 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
       if (cigaretteLicenseResponse && typeof cigaretteLicenseResponse === "object") {
         if (cigaretteLicenseResponse.paymentInfo?.errorResult) {
           props.setSubmissionError("UNAVAILABLE");
+          setLoading(false);
           return;
         }
 
         if (
           cigaretteLicenseResponse.paymentInfo?.token &&
+          cigaretteLicenseResponse.paymentInfo?.htmL5RedirectUrl &&
           cigaretteLicenseResponse.userData &&
           router
         ) {
-          await router.replace(returnUrl);
+          await router.replace(cigaretteLicenseResponse.paymentInfo?.htmL5RedirectUrl);
         }
       }
     } catch {
+      setLoading(false);
       props.setSubmissionError("UNAVAILABLE");
     }
   };
@@ -439,7 +450,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
           <SecondaryButton isColor="primary" onClick={() => props.setStepIndex(2)}>
             {Config.cigaretteLicenseStep4.backButtonText}
           </SecondaryButton>
-          <PrimaryButton isColor="primary" onClick={handleSubmit}>
+          <PrimaryButton isLoading={loading} isColor="primary" onClick={handleSubmit}>
             {Config.cigaretteLicenseStep4.submitAndPayButtonText}
             <Icon iconName="launch" className="margin-left-1" />
           </PrimaryButton>
