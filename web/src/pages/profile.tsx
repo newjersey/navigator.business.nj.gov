@@ -39,7 +39,6 @@ import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileLinkToPermitsTabCallout } from "@/components/profile/ProfileLinkToPermitsTabCallout";
-import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
@@ -63,6 +62,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 
+import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
 import analytics from "@/lib/utils/analytics";
 import {
   getFlow,
@@ -82,7 +82,6 @@ import {
   formationTaskId,
   hasCompletedFormation,
   LookupLegalStructureById,
-  LookupOperatingPhaseById,
   Municipality,
   naicsCodeTaskId,
   ProfileData,
@@ -97,7 +96,6 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
 
 interface Props {
   municipalities: Municipality[];
@@ -308,10 +306,6 @@ const ProfilePage = (props: Props): ReactElement => {
     return LookupLegalStructureById(business.profileData.legalStructureId).hasTradeName;
   };
 
-  const displayOpportunityAlert = LookupOperatingPhaseById(
-    profileData.operatingPhase,
-  ).displayProfileOpportunityAlert;
-
   const displayRaffleBingoGameQuestion = (): boolean => {
     if (!business) return false;
     return profileData.legalStructureId === "nonprofit";
@@ -326,7 +320,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
           fieldName="businessName"
@@ -462,7 +455,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
         <ProfileField ignoreContextualInfo fieldName="businessName">
           <BusinessName />
         </ProfileField>
@@ -533,7 +525,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
           fieldName="businessName"
@@ -712,7 +703,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
           ignoreContextualInfo

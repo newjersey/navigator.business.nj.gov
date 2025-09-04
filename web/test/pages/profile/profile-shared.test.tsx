@@ -9,10 +9,10 @@ import {
   randomTradeNameLegalStructure,
 } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -22,7 +22,6 @@ import {
   Business,
   BusinessPersona,
   businessPersonas,
-  emptyProfileData,
   ForeignBusinessTypeId,
   generateBusiness,
   generateMunicipality,
@@ -45,11 +44,8 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   chooseTab,
   clickSave,
-  fillText,
   generateBusinessForProfile,
   getForeignNexusProfileFields,
-  phasesWhereGoToProfileDoesNotShow,
-  phasesWhereGoToProfileShows,
   renderPage,
   selectByText,
   selectByValue,
@@ -425,123 +421,6 @@ describe("profile - shared", () => {
             screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
           ).toBeInTheDocument();
         },
-      );
-    });
-  });
-
-  describe("profile opportunities alert", () => {
-    it.each(phasesWhereGoToProfileShows)("displays alert for %s", (operatingPhase) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase,
-          dateOfFormation: undefined,
-        }),
-      });
-      renderPage({ business });
-
-      expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
-    });
-
-    it.each(phasesWhereGoToProfileDoesNotShow)(
-      "does not display alert for %s",
-      (operatingPhase) => {
-        const business = generateBusinessForProfile({
-          profileData: generateProfileData({
-            operatingPhase,
-            dateOfFormation: undefined,
-          }),
-        });
-        renderPage({ business });
-
-        expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
-      },
-    );
-
-    it("does display date of formation question when legal structure is undefined", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          businessPersona: "OWNING",
-        },
-      });
-      renderPage({ business });
-      expect(
-        within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-      expect(
-        within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-    });
-
-    it("does not display date of formation question when it is a Trade Name legal structure", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          businessPersona: "OWNING",
-          legalStructureId: randomTradeNameLegalStructure(),
-        },
-      });
-      renderPage({ business });
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header),
-      ).not.toBeInTheDocument();
-      expect(screen.queryByTestId("effective-date")).not.toBeInTheDocument();
-    });
-
-    it("does display date of formation question when it is a not a Trade Name legal structure", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          businessPersona: "OWNING",
-          legalStructureId: randomPublicFilingLegalStructure(),
-        },
-      });
-      renderPage({ business });
-      expect(
-        within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-      expect(
-        within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-    });
-
-    it("removes question from alert when it gets answered", () => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          dateOfFormation: undefined,
-          existingEmployees: undefined,
-          legalStructureId: randomPublicFilingLegalStructure(),
-          businessPersona: randomInt() % 2 ? "STARTING" : "OWNING",
-        }),
-      });
-      renderPage({ business });
-
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.dateOfFormation.default.header,
-      );
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header,
-      );
-
-      fillText("Existing employees", "12");
-
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.dateOfFormation.default.header,
-      );
-      expect(screen.getByTestId("opp-alert")).not.toHaveTextContent(
-        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header,
       );
     });
   });
