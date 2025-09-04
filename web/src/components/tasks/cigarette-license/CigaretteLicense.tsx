@@ -36,7 +36,15 @@ import {
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
-import { Dispatch, ReactElement, SetStateAction, useCallback, useEffect, useState } from "react";
+import {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type Props = {
   task: Task;
@@ -59,6 +67,8 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     useState<FormationAddress>(emptyFormationAddressData);
   const [cigaretteLicenseData, setCigaretteLicenseData] =
     useState<CigaretteLicenseData>(emptyCigaretteLicenseData);
+
+  const errorAlertRef = useRef<HTMLDivElement>(null);
 
   const setAddress: Dispatch<SetStateAction<FormationAddress>> = (action) => {
     setAddressData((prevAddress) => {
@@ -318,6 +328,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     <>
       <TaskHeader task={props.task} />
       <CigaretteLicenseAlert
+        ref={errorAlertRef}
         fieldErrors={getInvalidFieldIds()}
         setStepIndex={setStepIndex}
         submissionError={submissionError}
@@ -372,6 +383,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
                   setStepIndex={setStepIndex}
                   setSubmissionError={setSubmissionError}
                   CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                  errorAlertRef={errorAlertRef}
                 />
               )}
             </AddressContext.Provider>
