@@ -1,0 +1,13 @@
+name: Docker Setup Navigator Builder Image
+description: Set up the Docker environment for the Business Navigator Builder image
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install AWS CLI
+      uses: ./.github/actions/install-awscli
+    - name: Build And Push Custom Node Image
+      uses: ./.github/actions/build-and-push-custom-node-image
+      with:
+        image-name: "dummy-image"

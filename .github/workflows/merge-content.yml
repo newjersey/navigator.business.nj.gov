@@ -1,0 +1,40 @@
+name: Merge Content
+on:
+  workflow_call:
+
+jobs:
+  merge-content:
+    name: Merge Content
+    runs-on: ubuntu-latest
+    #    container:
+    #      image: ${{secrets.AWS_ACCOUNT_ID_DEV}}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+    env:
+      STAGE: content
+      AWS_ACCOUNT_ID_DEV: dummy_account_id
+      AWS_REGION: dummy_region
+      AWS_ACCESS_KEY_ID_DEV: dummy_access
+      AWS_SECRET_ACCESS_KEY_DEV: dummy_secret
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git User
+        run: |
+          git config --global user.email "business-engineering@innovation.nj.gov"
+          git config --global user.name "NJ Innovation CI"
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: List branches
+        run: git branch -a
+
+      - name: Merge origin/main into content-repo (Dry Run)
+        run: |
+          git checkout content-repo
+          git merge --no-commit --no-ff origin/main || echo "Merge would conflict!"
+
+      - name: Simulate push
+        run: echo "git push would happen here (dry run)"

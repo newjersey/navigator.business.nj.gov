@@ -1,0 +1,22 @@
+name: Merge Content Workflow
+run-name: Merge Content-Repo
+
+on:
+  push:
+    branches:
+      - main
+      - migrateMergeContentJobToGithubActions
+
+jobs:
+  docker-build-builder-image:
+    uses: ./.github/workflows/docker-build-builder-image.yml
+
+  build-with-image:
+    name: Build With Image
+    needs: docker-build-builder-image
+    uses: ./.github/workflows/build.yml
+
+  merge-content:
+    name: Merge Content
+    needs: build-with-image
+    uses: ./.github/workflows/merge-content.yml
