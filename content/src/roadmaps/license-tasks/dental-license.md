@@ -15,7 +15,7 @@ agencyId: nj-consumer-affairs
 webflowId: 669ac515985e99ee52d48390
 licenseCertificationClassification: undefined
 ---
-:::largeCallout{ showHeader="false" headerText="" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 Once your application has been approved, you will receive an Initial Registration Form. You must
 verify the information and return the form with the appropriate fee to receive your dental license.
