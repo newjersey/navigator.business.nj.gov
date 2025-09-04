@@ -13,6 +13,9 @@ notesMd: >-
 
 
   6.3.25: This is a work in progress; drafted here in the early stage to see how the callouts and overall layout appear
+
+
+  Draft Document: https://docs.google.com/document/d/16SDcwVjI4j_6HXntd3eatGnL3Hh8TjP2BTamIKMiBIs/edit?tab=t.0
 summaryDescriptionMd: >-
   If you are removing more than 3 square or linear feet of material that
   contains more than 1% asbestos, you must submit a Notification of Asbestos
