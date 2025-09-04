@@ -2911,11 +2911,6 @@ collections:
                       name: lockedFieldTooltipText,
                       widget: string,
                     }
-                  - {
-                      label: Profile Completion Alert,
-                      name: profileCompletionAlert,
-                      widget: markdown,
-                    }
                   - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
 
   - label: "Fundings Onboarding Page"
