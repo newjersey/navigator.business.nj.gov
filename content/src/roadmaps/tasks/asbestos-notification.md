@@ -21,6 +21,9 @@ summaryDescriptionMd: >-
   contractor.
 
 
+  &nbsp;
+
+
   Send this form at least **10 days before the work begins**. If your plans or the scope changes, such as placing the project on hold or taking it off hold, you may have to submit an updated form or payment.
 urlSlug: asbestos-notification
 displayname: asbestos-notification
@@ -90,6 +93,8 @@ Email the notification and a photo of your payment.
 :::
 
 Mail your check or money order to:
+
+&nbsp;
 
 NJ Department of Labor & Workforce Development
 
