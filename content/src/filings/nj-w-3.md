@@ -2,7 +2,9 @@
 urlSlug: nj-w-3
 name: Employer Withholding Tax
 extension: false
-summaryDescriptionMd: \
+summaryDescriptionMd: Employers must report the monthly tax remitted (paid),
+  wages paid, and withholdings. This form is part of your business's gross
+  income tax filing.
 treasuryLink: https://www.nj.gov/treasury/taxation/businesses/payroll/index.shtml
 taxRates: Tax rates vary. Refer to the [New Jersey Income Tax Withholding
   Instructions](https://www.state.nj.us/treasury/taxation/pdf/current/njwt.pdf)
@@ -21,6 +23,4 @@ id: nj-w-3
 callToActionLink: https://www.nj.gov/treasury/taxation/businesses/payroll/payroll-filing.shtml
 callToActionText: File and Pay
 ---
-Employers must report the monthly tax remitted, wages paid, and withholdings. This form is part of your business's gross income tax filing.
-
 Any person or business withholding New Jersey Income Tax must file this year-end reconciliation.
