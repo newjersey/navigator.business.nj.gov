@@ -69,20 +69,8 @@
           "header": "New Jersey Tax ID",
           "headerContextualInfo": "tax-id",
           "description": "",
-          "errorTextRequired": "Enter a 12-digit Tax ID",
+          "errorTextRequired": "Enter a 12-digit Tax ID.",
           "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
-        }
-      },
-      "taxPin": {
-        "default": {
-          "header": "Tax PIN",
-          "headerContextualInfo": "tax-pin",
-          "errorTextRequired": "Tax PIN must be 4 digits.",
-          "description": "",
-          "showButtonText": "Show",
-          "hideButtonText": "Hide",
-          "showButtonTextMobile": "Show Tax PIN",
-          "hideButtonTextMobile": "Hide Tax PIN"
         }
       },
       "requiresCpa": {
@@ -128,6 +116,18 @@
           "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
         }
       },
+      "taxPin": {
+        "default": {
+          "header": "Tax PIN",
+          "headerContextualInfo": "tax-pin",
+          "errorTextRequired": "Tax PIN must be 4 digits.",
+          "description": "",
+          "showButtonText": "Show",
+          "hideButtonText": "Hide",
+          "showButtonTextMobile": "Show Tax PIN",
+          "hideButtonTextMobile": "Hide Tax PIN"
+        }
+      },
       "elevatorOwningBusiness": {
         "default": {
           "header": "Elevator Owning Business",
@@ -153,13 +153,6 @@
           "description": "Which type of construction do you plan to do?"
         }
       },
-      "publicWorksContractor": {
-        "default": {
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you plan to work on `public works|public-works` projects?"
-        }
-      },
       "dateOfFormation": {
         "default": {
           "header": "Business Effective Date",
@@ -171,14 +164,14 @@
       },
       "nonEssentialQuestions": {
         "default": {
-          "sectionHeader": "Discover Industry Licenses and Permits",
-          "sectionSubText": "Depending on your industry, you might see additional questions. Answering these questions will give you additional tasks to complete that may be required for your business.",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "optionalText": "(Optional)",
-          "linkToPermitsHeader": "Keep in mind:",
           "linkToPermitsTextBeforeButton": "Answer",
           "linkToPermitsTextButton": "more questions",
+          "radioButtonFalseText": "No",
+          "sectionSubText": "Depending on your industry, you might see additional questions. Answering these questions will give you additional tasks to complete that may be required for your business.",
+          "radioButtonTrueText": "Yes",
+          "optionalText": "(Optional)",
+          "linkToPermitsHeader": "Keep in mind:",
+          "sectionHeader": "Discover Industry Licenses and Permits",
           "linkToPermitsTextAfterButton": "to check if you need additional licenses or permits."
         }
       },
@@ -205,6 +198,13 @@
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Do you own and/or operate a traveling carnival or circus?"
+        }
+      },
+      "publicWorksContractor": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you plan to work on `public works|public-works` projects?"
         }
       },
       "tradeName": {
@@ -472,42 +472,42 @@
       }
     },
     "default": {
-      "backButtonText": "Cancel",
-      "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
-      "certificationDocFileTitle": "Certified Copy of Formation",
-      "errorDefaultTextBody": "Review your information in the fields marked below.",
-      "errorTextBody": "Review your information in the ${fieldText} marked below.",
-      "errorAlertMultipleFields": "fields",
-      "errorErrorAlertOneField": "field",
+      "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
+      "annualReportDeadlineSubText": "Tell us when you officially started your business and we'll add your Annual Report deadline to your Calendar.",
       "errorTextHeader": "Error",
-      "escapeModalBody": "You have unsaved changes that will be lost.",
+      "secondaryNavigationAriaLabel": "",
+      "filterCertificationsAndFundingHeader": "Filter Certifications and Funding Opportunities",
+      "profileTabPersonalizeYourTasksTitle": "Personalize My Experience",
+      "backButtonText": "Cancel",
+      "errorDefaultTextBody": "Review your information in the fields marked below.",
+      "profileAddressNotProvided": "Address not provided",
+      "profileTabPermitsTitle": "Permits & Licenses",
       "escapeModalEscape": "Go back",
-      "escapeModalHeader": "Are you sure you want to continue?",
-      "escapeModalReturn": "Continue without saving",
+      "escapeModalBody": "You have unsaved changes that will be lost.",
+      "standingDocFileTitle": "Certificate of Good Standing",
+      "errorErrorAlertOneField": "field",
+      "profileTabDocsTitle": "Reference Documents",
+      "profilePageTitlePrefix": "Profile For",
+      "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
       "essentialQuestionAlertText": "Complete all required fields.",
       "formationDocFileTitle": "Official Formation Document",
-      "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
-      "annualReportDeadlineHeader": "Add Your Annual Report Deadline",
-      "annualReportDeadlineSubText": "Tell us when you officially started your business and we'll add your Annual Report deadline to your Calendar.",
-      "filterCertificationsAndFundingHeader": "Filter Certifications and Funding Opportunities",
       "filterCertificationsAndFundingSubText": "Answer a few questions to find State certifications and funding programs in your For You section.",
-      "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
-      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete.",
-      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us make recommendations for your business. We do not submit information for registration.",
-      "permitsAndLicensesSubText": "Answer a few questions to find out what licenses and permits you may need and discover funding programs to help your business grow. New items will appear on your Starter Kit or your For You section.",
-      "profileAddressNotProvided": "Address not provided",
-      "profilePageTitlePrefix": "Profile For",
-      "profileTabDocsTitle": "Reference Documents",
-      "profileTabInfoTitle": "Business Information",
-      "profileTabNoteTitle": "Notes",
+      "errorTextBody": "Review your information in the ${fieldText} marked below.",
+      "annualReportDeadlineHeader": "Add Your Annual Report Deadline",
+      "escapeModalHeader": "Are you sure you want to continue?",
       "profileTabNumbersTitle": "Reference Numbers",
-      "profileTabPermitsTitle": "Permits & Licenses",
-      "profileTabPersonalizeYourTasksTitle": "Personalize My Experience",
+      "profileTabNoteTitle": "Notes",
+      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us make recommendations for your business. We do not submit information for registration.",
+      "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
       "saveButtonText": "Save",
-      "secondaryNavigationAriaLabel": "",
-      "standingDocFileTitle": "Certificate of Good Standing",
-      "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
-      "successTextHeader": "Business Profile Saved"
+      "permitsAndLicensesSubText": "Answer a few questions to find out what licenses and permits you may need and discover funding programs to help your business grow. New items will appear on your Starter Kit or your For You section.",
+      "escapeModalReturn": "Continue without saving",
+      "errorAlertMultipleFields": "fields",
+      "successTextHeader": "Business Profile Saved",
+      "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
+      "certificationDocFileTitle": "Certified Copy of Formation",
+      "profileTabInfoTitle": "Business Information",
+      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete."
     }
   }
 }
