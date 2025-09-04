@@ -186,7 +186,6 @@ describe("Onboarding for all industries when out of state nexus business [featur
 
         onOnboardingPageNexusBusiness.clickShowMyGuide();
         cy.url().should("include", "dashboard");
-        cy.get('[data-testid="header-link-to-profile"]');
       });
     }
   });
@@ -213,7 +212,6 @@ describe("Onboarding for all industries when out of state nexus business [featur
 
       onOnboardingPageNexusBusiness.clickNext();
       cy.url().should("include", "dashboard");
-      cy.get('[data-testid="header-link-to-profile"]');
     });
   });
 
@@ -237,7 +235,6 @@ describe("Onboarding for all industries when out of state nexus business [featur
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
-        cy.get('[data-testid="header-link-to-profile"]');
       });
     });
 
@@ -261,7 +258,6 @@ describe("Onboarding for all industries when out of state nexus business [featur
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
-        cy.get('[data-testid="header-link-to-profile"]');
       });
     });
   });
@@ -286,7 +282,6 @@ describe("Onboarding for all industries when out of state nexus business [featur
         onOnboardingPageRemoteSellerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
-        cy.get('[data-testid="header-link-to-profile"]');
       });
     });
 
@@ -310,7 +305,6 @@ describe("Onboarding for all industries when out of state nexus business [featur
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
-        cy.get('[data-testid="header-link-to-profile"]');
       });
     });
   });

@@ -4,9 +4,6 @@
     "defaultHeaderText": "Hello, ${name}",
     "starterKitText": "Your ${industry} Starter Kit",
     "genericStarterKitText": "Your Starter Kit",
-    "newJerseyDateBodyText": "ET",
-    "guestModeToProfileButtonText": "Guest Account",
-    "genericToProfileButtonText": "Business Profile",
     "personalizeMyTasksButtonText": "Personalize My Experience"
   },
   "dashboardRoadmapHeaderDefaults": {

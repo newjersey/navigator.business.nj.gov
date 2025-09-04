@@ -19,7 +19,6 @@ describe("Onboarding for all sectors as an existing business [feature] [all] [gr
 
         onOnboardingPageExistingBusiness.clickShowMyGuide();
         cy.url().should("include", "dashboard");
-        cy.get('[data-testid="header-link-to-profile"]');
       });
     }
   });
@@ -39,7 +38,6 @@ describe("Onboarding for all sectors as an existing business [feature] [all] [gr
 
       onOnboardingPageExistingBusiness.clickShowMyGuide();
       cy.url().should("include", "dashboard");
-      cy.get('[data-testid="header-link-to-profile"]');
     });
   });
 });
