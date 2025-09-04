@@ -709,17 +709,6 @@ collections:
                   name: starterKitText,
                   widget: string,
                 }
-              - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
-              - {
-                  label: Guest Mode - To Profile Button Text,
-                  name: guestModeToProfileButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Generic - To Profile Button Text,
-                  name: genericToProfileButtonText,
-                  widget: string,
-                }
   - label: Task Defaults
     name: taskDefaults
     delete: false

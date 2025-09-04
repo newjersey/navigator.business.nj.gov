@@ -94,7 +94,7 @@ describe("Performance and Accessability - Onboarding [all] [group4]", () => {
 //       industry,
 //     });
 //
-//     onDashboardPage.getEditProfileLink().should("exist");
+//     onDashboardPage.getDashboardHeader().should("exist");
 //
 //     cy.lighthouse(undefined, lighthouseDesktopConfig);
 //     cy.pa11y(defaultPa11yThresholds);

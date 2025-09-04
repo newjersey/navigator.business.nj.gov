@@ -27,7 +27,7 @@ describe.skip(
       completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
       completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
-      onDashboardPage.getEditProfileLink().should("exist");
+      onDashboardPage.getDashboardHeader().should("exist");
       cy.visit("/profile");
       cy.get('input[data-testid="businessName"]').type(businessName);
       onProfilePage.getSaveButton().first().click();
@@ -51,7 +51,7 @@ describe.skip(
       completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
       completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
-      onDashboardPage.getEditProfileLink().should("exist");
+      onDashboardPage.getDashboardHeader().should("exist");
       openFormationDateModal();
       selectDate("04/2021");
       selectLocation("Allendale");
@@ -70,7 +70,7 @@ describe.skip(
       completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
       completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
-      onDashboardPage.getEditProfileLink().should("exist");
+      onDashboardPage.getDashboardHeader().should("exist");
       cy.visit("/profile");
       cy.get('input[data-testid="businessName"]').type(businessName);
       onProfilePage.getSaveButton().first().click();

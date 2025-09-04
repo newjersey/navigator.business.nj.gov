@@ -37,7 +37,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         completeExistingBusinessOnboarding({});
         cy.url().should("contain", "/dashboard");
         // check dashboard
-        onDashboardPage.getEditProfileLink().should("exist");
+        onDashboardPage.getDashboardHeader().should("exist");
       });
     });
 
@@ -53,7 +53,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         completeBusinessStructureTask({ legalStructureId });
 
         // check dashboard
-        onDashboardPage.getEditProfileLink().should("exist");
+        onDashboardPage.getDashboardHeader().should("exist");
 
         // step 1
         cy.get('[id="plan-content"]').should("be.visible");
@@ -128,7 +128,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         completeBusinessStructureTask({ legalStructureId });
 
         // editing data in the Profile page
-        onDashboardPage.clickEditProfileLink();
+        onDashboardPage.clickEditProfileInDropdown();
         cy.url().should("contain", "/profile");
 
         cy.get('[aria-label="Industry"]').first().click({ force: true });
@@ -140,7 +140,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.url().should("contain", "/dashboard");
 
         // check dashboard
-        onDashboardPage.getEditProfileLink().should("exist");
 
         cy.get('[data-task="check-site-requirements"]').should("exist");
         cy.get('[data-task="food-safety-course"]').should("exist");
