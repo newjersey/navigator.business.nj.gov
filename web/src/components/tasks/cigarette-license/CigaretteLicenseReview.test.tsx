@@ -23,6 +23,9 @@ import { useState } from "react";
 describe("<CigaretteLicenseReview />", () => {
   const mockSetStepIndex = jest.fn();
   const mockSetSubmissionError = jest.fn();
+  const mockErrorAlertRef = {
+    current: {} as HTMLDivElement,
+  };
 
   const renderComponent = ({
     business,
@@ -73,6 +76,7 @@ describe("<CigaretteLicenseReview />", () => {
                   <CigaretteLicenseReview
                     setStepIndex={mockSetStepIndex}
                     setSubmissionError={mockSetSubmissionError}
+                    errorAlertRef={mockErrorAlertRef}
                   />
                 </ProfileDataContext.Provider>
               </CigaretteLicenseContext.Provider>
