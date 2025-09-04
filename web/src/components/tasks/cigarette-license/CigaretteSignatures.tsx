@@ -43,7 +43,7 @@ export const CigaretteSignatures = (props: Props): ReactElement => {
 
   return (
     <div className="grid-col" data-testid="signers-section">
-      <Heading level={2} styleVariant={"h3"}>
+      <Heading level={3} styleVariant={"h3"}>
         {Config.cigaretteLicenseStep4.signersHeader}
       </Heading>
 
@@ -106,9 +106,9 @@ export const CigaretteSignatures = (props: Props): ReactElement => {
         </div>
       </div>
 
-      <p className="margin-bottom-2">
-        <em>* {Config.cigaretteLicenseStep4.signersConfirmationText}</em>
-      </p>
+      <div className="margin-bottom-2">
+        <Content>{Config.cigaretteLicenseStep4.signersConfirmationText}</Content>
+      </div>
     </div>
   );
 };

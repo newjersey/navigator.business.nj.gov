@@ -19,9 +19,9 @@
     "servicesLabelText": "**Services**",
     "costLabelText": "**\\* Cost**",
     "costValue": "$50.00",
-    "feesSubjectToChange": "*Fees are subject to change. Your total amount may vary.*",
+    "feesSubjectToChange": "_\\*Fees are subject to change. Your total amount may vary._",
     "signersDescription": "An authorized signer should sign below by adding their full name.",
-    "signersConfirmationText": "By checking this box, I confirm that I'm an authorized signer.",
+    "signersConfirmationText": "_\\* By checking this box, I confirm that I'm an authorized signer._",
     "retailOverTheCounterLicenseLabelText": "Retail Over-the-Counter License",
     "signersHeader": "Signers",
     "reviewItems": {

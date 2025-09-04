@@ -45,6 +45,7 @@ import {
   SetStateAction,
   useCallback,
   useContext,
+  useRef,
   useEffect,
   useState,
 } from "react";
@@ -71,6 +72,8 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     useState<FormationAddress>(emptyFormationAddressData);
   const [cigaretteLicenseData, setCigaretteLicenseData] =
     useState<CigaretteLicenseData>(emptyCigaretteLicenseData);
+
+  const errorAlertRef = useRef<HTMLDivElement>(null);
 
   const setAddress: Dispatch<SetStateAction<FormationAddress>> = (action) => {
     setAddressData((prevAddress) => {
@@ -340,6 +343,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     <>
       <TaskHeader task={props.task} />
       <CigaretteLicenseAlert
+        ref={errorAlertRef}
         fieldErrors={getInvalidFieldIds()}
         setStepIndex={setStepIndex}
         submissionError={submissionError}
@@ -387,6 +391,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
                   setStepIndex={setStepIndex}
                   setSubmissionError={setSubmissionError}
                   CMS_ONLY_show_error={props.CMS_ONLY_show_error}
+                  errorAlertRef={errorAlertRef}
                 />
               )}
             </AddressContext.Provider>
