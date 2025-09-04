@@ -16,6 +16,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop, templateEval } from "@/lib/utils/helpers";
 import {
   MediaArea,
@@ -159,6 +160,14 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
         steps={steps}
         currentStep={envContext.state.stepIndex}
         onStepClicked={(newStep) => {
+          const category = EnvPermitConfiguration.find((s) => newStep == s.stepIndex)
+            .name.toLowerCase()
+            .split(" ")
+            .join("_");
+          analytics.event.gen_guidance_stepper_step_category.click.general_guidance_step(
+            newStep,
+            category,
+          );
           if (
             envContext.state.stepIndex === 0 &&
             isAuthenticated === IsAuthenticated.FALSE &&

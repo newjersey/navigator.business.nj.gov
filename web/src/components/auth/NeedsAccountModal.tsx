@@ -30,6 +30,7 @@ export const NeedsAccountModal = (): ReactElement => {
     if (isAuthenticated === IsAuthenticated.TRUE) {
       setShowNeedsAccountModal(false);
     }
+    analytics.event.gen_guidance_stepper_save_modal_displayed.appears.general_guidance_save_modal_displayed();
   }, isAuthenticated);
 
   if (isAuthenticated === IsAuthenticated.TRUE) {
@@ -65,6 +66,7 @@ export const NeedsAccountModal = (): ReactElement => {
                 className={"margin-top-05"}
                 isFullWidthOnDesktop
                 onClick={() => {
+                  analytics.event.gen_guidance_stepper_continue_without_saving.click.general_guidance_continue_wo_saving();
                   setUserWantsToContinueWithoutSaving(true);
                   setShowNeedsAccountModal(false);
                 }}
