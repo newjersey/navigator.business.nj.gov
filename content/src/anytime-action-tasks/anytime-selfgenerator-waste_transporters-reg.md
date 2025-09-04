@@ -3,14 +3,8 @@ id: anytime-selfgenerator-waste–transporters-reg
 name: Apply for Your Self-Generator Waste Transporter Registration
 category:
   - purchase-new-products-or-equipment
-industryIds:
-  - commercial-construction
-  - hvac-contractor
-  - electrical-contractor
-  - home-contractor
-  - interior-designer
-sectorIds:
-  - construction
+industryIds: []
+sectorIds: []
 urlSlug: anytime-selfgenerator-waste–transporters-reg
 summaryDescriptionMd: >-2
    
