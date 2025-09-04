@@ -143,6 +143,8 @@ describe("<CigaretteLicense />", () => {
         userData: generateUserDataForBusiness(generateBusiness({})),
         paymentInfo: {
           token: "test-token",
+          legacyRedirectUrl: "https://success.com?token=test-token",
+          htmL5RedirectUrl: "https://success.com?token=test-token",
           errorResult: undefined,
         },
       });
