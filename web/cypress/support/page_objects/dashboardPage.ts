@@ -1,6 +1,6 @@
 export class DashboardPage {
-  getEditProfileLink = () => {
-    return cy.get('[data-testid="header-link-to-profile"]');
+  getDashboardHeader = () => {
+    return cy.get('[data-testid="dashboard-header"]');
   };
 
   getDropdown = () => {
@@ -16,7 +16,8 @@ export class DashboardPage {
   };
 
   clickEditProfileLink = () => {
-    this.getEditProfileLink().first().click();
+    cy.get('[data-testid="nav-bar-desktop-dropdown-button"]').first().click();
+    cy.get('[data-testid="profile-link"]').first().click();
   };
 
   clickEditProfileInDropdown = () => {
@@ -39,7 +40,9 @@ export class DashboardPage {
   }
 
   getHomeBased(radio?: boolean) {
-    return cy.get(`input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
   }
 
   getTaxFilingCalendar() {

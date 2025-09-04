@@ -187,7 +187,6 @@ describe("Onboarding for all industries when starting a business [feature] [all]
 
         onOnboardingPageStartingBusiness.clickShowMyGuide();
         cy.url().should("include", "dashboard");
-        cy.get('[data-testid="header-link-to-profile"]');
       });
     }
   });
@@ -209,7 +208,6 @@ describe("Onboarding for all industries when starting a business [feature] [all]
 
       onOnboardingPageStartingBusiness.clickNext();
       cy.url().should("include", "dashboard");
-      cy.get('[data-testid="header-link-to-profile"]');
     });
   });
 });

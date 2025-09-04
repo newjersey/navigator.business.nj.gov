@@ -25,7 +25,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.url().should("contain", "/dashboard");
 
     // check dashboard
-    onDashboardPage.getEditProfileLink().should("exist");
+    onDashboardPage.getDashboardHeader().should("exist");
 
     cy.get('[data-testid="needs-account-alert"]').should("be.visible");
 
@@ -56,7 +56,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get('[data-testid="needs-account-alert"]').should("not.exist");
 
     // try editing data in the Profile page
-    onDashboardPage.clickEditProfileLink();
+    onDashboardPage.clickEditProfileInDropdown();
 
     cy.get('input[aria-label="Business name"]').clear();
     cy.get('input[aria-label="Business name"]').type("Applebee's");
