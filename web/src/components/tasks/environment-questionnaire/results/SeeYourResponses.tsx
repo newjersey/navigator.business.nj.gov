@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   MediaArea,
@@ -48,7 +49,13 @@ export const SeeYourResponses = (): ReactElement => {
   }
 
   return (
-    <ResultsSectionAccordion title={Config.envResultsPage.seeYourResponses.title}>
+    <ResultsSectionAccordion
+      title={Config.envResultsPage.seeYourResponses.title}
+      onOpenFunc={
+        analytics.event.gen_guidance_stepper_responses_accordion_opened.click
+          .general_guidance_resp_accordion_opened
+      }
+    >
       <div>
         {mediaAreas.map((mediaArea) => (
           <div key={mediaArea}>

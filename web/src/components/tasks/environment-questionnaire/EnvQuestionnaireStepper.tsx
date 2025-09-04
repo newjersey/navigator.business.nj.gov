@@ -16,6 +16,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop, templateEval } from "@/lib/utils/helpers";
 import {
   MediaArea,
@@ -143,6 +144,31 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     }
   };
 
+  const handleOnStepClick = (newStep: number): void => {
+    const category = EnvPermitConfiguration.find((s) => newStep === s.stepIndex);
+
+    if (!category) return;
+
+    const categoryName = category.name.toLowerCase().split(" ").join("_");
+    analytics.event.gen_guidance_stepper_step_category.click.general_guidance_step(
+      newStep,
+      categoryName,
+    );
+
+    if (
+      envContext.state.stepIndex === 0 &&
+      isAuthenticated === IsAuthenticated.FALSE &&
+      userWantsToContinueWithoutSaving === false
+    ) {
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
+      setShowContinueWithoutSaving(true);
+      setShowNeedsAccountModal(true);
+      envContext.setStepIndex(newStep);
+      return;
+    }
+    envContext.setStepIndex(newStep);
+  };
+
   const nextButtonText = (): string => {
     if (envContext.state.stepIndex === 0) return Config.envQuestionPage.generic.startingButtonText;
     if (envContext.state.stepIndex === 5) return Config.envQuestionPage.generic.endingButtonText;
@@ -158,20 +184,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
       <HorizontalStepper
         steps={steps}
         currentStep={envContext.state.stepIndex}
-        onStepClicked={(newStep) => {
-          if (
-            envContext.state.stepIndex === 0 &&
-            isAuthenticated === IsAuthenticated.FALSE &&
-            userWantsToContinueWithoutSaving === false
-          ) {
-            updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
-            setShowContinueWithoutSaving(true);
-            setShowNeedsAccountModal(true);
-            envContext.setStepIndex(newStep);
-            return;
-          }
-          envContext.setStepIndex(newStep);
-        }}
+        onStepClicked={handleOnStepClick}
         inlineDialog
         environmentPermit
       />
