@@ -1,6 +1,10 @@
 ---
+urlSlug: ppt-10
 name: Petroleum Products Gross Receipts Tax
-callToActionLink: https://www.nj.gov/treasury/taxation/petroleum.shtml
+extension: false
+summaryDescriptionMd: All companies that have receipts from sales of petroleum
+  products must file a quarterly return.
+treasuryLink: null
 taxRates: |
   
   - Gasoline & LPG per gallon: $0.402
@@ -8,16 +12,13 @@ taxRates: |
   - Fuel Oil per gallon: $0.124
   - Aviation Fuel per gallon: $0.04
   - Other Gross Receipts: 7%
-filingDetails: null
-agency: New Jersey Division of Taxation
-additionalInfo: null
-urlSlug: ppt-10
-id: ppt-10
-callToActionText: File and Pay
-frequency: Quarterly (*due on the 25th day of the following quarter)*
 filingMethod: online
-treasuryLink: null
-extension: false
+filingDetails: null
+frequency: Quarterly (*due on the 25th day of the following quarter)*
+additionalInfo: null
+agency: New Jersey Division of Taxation
+id: ppt-10
+callToActionLink: https://www.nj.gov/treasury/taxation/petroleum.shtml
+callToActionText: File and Pay
 ---
-
-All companies that have receipts from sales of petroleum products must file a quarterly return with form PPT-10, and make monthly remittances (form PPT-41).
+Businesses must use form PPT-10 and make monthly remittances, which means payment (form PPT-41) to be compliant.

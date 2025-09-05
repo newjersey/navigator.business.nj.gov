@@ -13,6 +13,11 @@
       "weight": 2,
       "task": "register-for-taxes-foreign",
       "required": true
+    },
+    {
+      "step": 1,
+      "weight": 3,
+      "task": "streamlined-sales-tax-certificate"
     }
   ]
 }

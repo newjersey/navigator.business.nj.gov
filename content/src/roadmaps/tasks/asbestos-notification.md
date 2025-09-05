@@ -13,12 +13,18 @@ notesMd: >-
 
 
   6.3.25: This is a work in progress; drafted here in the early stage to see how the callouts and overall layout appear
+
+
+  Draft Document: https://docs.google.com/document/d/16SDcwVjI4j_6HXntd3eatGnL3Hh8TjP2BTamIKMiBIs/edit?tab=t.0
 summaryDescriptionMd: >-
   If you are removing more than 3 square or linear feet of material that
   contains more than 1% asbestos, you must submit a Notification of Asbestos
   Abatement. This tells the State when and where asbestos work will happen. All
   asbestos abatement work must be done by a licensed asbestos abatement
   contractor.
+
+
+  &nbsp;
 
 
   Send this form at least **10 days before the work begins**. If your plans or the scope changes, such as placing the project on hold or taking it off hold, you may have to submit an updated form or payment.
@@ -90,6 +96,8 @@ Email the notification and a photo of your payment.
 :::
 
 Mail your check or money order to:
+
+&nbsp;
 
 NJ Department of Labor & Workforce Development
 

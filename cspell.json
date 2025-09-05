@@ -249,7 +249,8 @@
     "YTTW",
     "revegetation",
     "NJLWD",
-    "selfgenerator"
+    "selfgenerator",
+    "SSTRS"
   ],
   "ignorePaths": [
     "node_modules/**",
