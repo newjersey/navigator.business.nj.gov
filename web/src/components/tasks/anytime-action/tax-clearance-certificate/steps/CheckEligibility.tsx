@@ -24,6 +24,7 @@ import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
@@ -122,7 +123,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
           </ProfileField>
         </div>
         <div className="margin-y-2">
-          {shouldLockFormationFields ? (
+          {shouldLockBusinessAddress(business) ? (
             <ProfileAddressLockedFields businessLocation="US" />
           ) : (
             <UnitedStatesAddress

@@ -157,10 +157,16 @@ describe("ApiCigaretteLicenseHelpers", () => {
     it("should create email confirmation body with all fields", async () => {
       const decryptedTaxId =
         mockCigaretteLicenseData.encryptedTaxId?.replace("encrypted-", "") || "";
-      const result = await makeEmailConfirmationBody(mockCigaretteLicenseData, decryptedTaxId);
+      const legalStructureId = "limited-liability-corporation";
+      const result = await makeEmailConfirmationBody(
+        mockCigaretteLicenseData,
+        legalStructureId,
+        decryptedTaxId,
+      );
 
       expect(result).toEqual({
         businessName: mockCigaretteLicenseData.businessName,
+        businessType: legalStructureId,
         responsibleOwnerName: mockCigaretteLicenseData.responsibleOwnerName,
         tradeName: mockCigaretteLicenseData.tradeName,
         taxId: mockCigaretteLicenseData.encryptedTaxId?.replace("encrypted-", ""),

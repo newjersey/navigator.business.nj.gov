@@ -22,7 +22,7 @@ import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { shouldLockBusinessAddress } from "@/components/tasks/cigarette-license/helpers";
+import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
