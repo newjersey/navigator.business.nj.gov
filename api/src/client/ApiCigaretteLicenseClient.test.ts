@@ -259,9 +259,14 @@ describe("CigaretteLicenseClient", () => {
     it("makes request to correct url with auth and data", async () => {
       mockAxios.post.mockResolvedValue({ data: "Email confirmation successfully sent" });
       const currentBusiness = getCurrentBusiness(userData);
+      const legalStructureId = currentBusiness.profileData.legalStructureId || "";
       const cigaretteLicenseData = currentBusiness.cigaretteLicenseData!;
 
-      const emailPostBody = await makeEmailConfirmationBody(cigaretteLicenseData, decryptedTaxId);
+      const emailPostBody = await makeEmailConfirmationBody(
+        cigaretteLicenseData,
+        legalStructureId,
+        decryptedTaxId,
+      );
       await client.sendEmailConfirmation(userData, decryptedTaxId);
       expect(mockAxios.post).toHaveBeenCalledWith(
         mockValues.cigarette_license_email_confirmation_url,
