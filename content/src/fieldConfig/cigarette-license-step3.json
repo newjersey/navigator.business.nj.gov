@@ -8,7 +8,7 @@
         "errorValidationText": ""
       },
       "selectASupplier": {
-        "label": "Select a Supplier",
+        "label": "Suppliers",
         "errorRequiredText": "At least one supplier is required.",
         "errorValidationText": ""
       }
