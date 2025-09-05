@@ -10,6 +10,7 @@ interface Props {
   headingStyleOverride?: string;
   summaryClass?: string;
   children: ReactNode;
+  onOpenFunc?: () => void;
 }
 
 export const ResultsSectionAccordion = (props: Props): ReactElement => {
@@ -19,7 +20,15 @@ export const ResultsSectionAccordion = (props: Props): ReactElement => {
   return (
     <div data-testid={`section-${sectionName}`}>
       <SectionAccordionContext.Provider value={{ isOpen }}>
-        <Accordion expanded={isOpen} onChange={() => setIsOpen(!isOpen)}>
+        <Accordion
+          expanded={isOpen}
+          onChange={() => {
+            if (props.onOpenFunc && !isOpen) {
+              props.onOpenFunc();
+            }
+            setIsOpen(!isOpen);
+          }}
+        >
           <AccordionSummary
             className={props.summaryClass}
             expandIcon={
