@@ -240,31 +240,51 @@ export const ConfirmationPage = (props: Props): ReactElement => {
             <div className="grid-row">
               <ReviewLineItem
                 label={Config.cigaretteLicenseConfirmation.mailingAddressLine1}
-                value={cigLicenseData?.mailingAddressLine1}
+                value={
+                  cigLicenseData?.mailingAddressIsTheSame
+                    ? cigLicenseData?.addressLine1
+                    : cigLicenseData?.mailingAddressLine1
+                }
                 marginOverride="width-full margin-top-1"
                 noColonAfterLabel
               />
               <ReviewLineItem
                 label={Config.cigaretteLicenseConfirmation.mailingAddressLine2}
-                value={cigLicenseData?.mailingAddressLine2}
+                value={
+                  cigLicenseData?.mailingAddressIsTheSame
+                    ? cigLicenseData?.addressLine2
+                    : cigLicenseData?.mailingAddressLine2
+                }
                 marginOverride="width-full margin-top-1"
                 noColonAfterLabel
               />
               <ReviewLineItem
                 label={Config.formation.fields.addressCity.label}
-                value={cigLicenseData?.mailingAddressCity}
+                value={
+                  cigLicenseData?.mailingAddressIsTheSame
+                    ? cigLicenseData?.addressCity
+                    : cigLicenseData?.mailingAddressCity
+                }
                 marginOverride="width-full margin-top-2"
                 noColonAfterLabel
               />
               <ReviewLineItem
                 label={Config.formation.fields.addressState.label}
-                value={cigLicenseData?.mailingAddressState?.shortCode}
+                value={
+                  cigLicenseData?.mailingAddressIsTheSame
+                    ? cigLicenseData?.addressState?.shortCode
+                    : cigLicenseData?.mailingAddressState?.shortCode
+                }
                 marginOverride="width-full margin-top-2"
                 noColonAfterLabel
               />
               <ReviewLineItem
                 label={Config.formation.fields.addressZipCode.label}
-                value={cigLicenseData?.mailingAddressZipCode}
+                value={
+                  cigLicenseData?.mailingAddressIsTheSame
+                    ? cigLicenseData?.addressZipCode
+                    : cigLicenseData?.mailingAddressZipCode
+                }
                 marginOverride="width-full margin-top-2"
                 noColonAfterLabel
               />

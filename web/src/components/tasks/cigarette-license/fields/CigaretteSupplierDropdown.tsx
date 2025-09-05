@@ -157,7 +157,7 @@ export const CigaretteSupplierDropdown = (props: Props): ReactElement => {
     setCigaretteLicenseData((data) => {
       return { ...data, salesInfoSupplier: newValue };
     });
-    if (newValue.length > 0) setIsValid(true);
+    setIsValid(newValue.length > 0);
   };
 
   const renderOption = (

@@ -21,6 +21,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
+import { scrollToTopOfElement } from "@/lib/utils/helpers";
 import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useState } from "react";
@@ -29,15 +30,13 @@ interface Props {
   setStepIndex: (step: number) => void;
   setSubmissionError: (error: SubmissionError) => void;
   CMS_ONLY_show_error?: boolean;
+  errorAlertRef: React.RefObject<HTMLDivElement>;
 }
 
 export const CigaretteLicenseReview = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const {
-    state: cigaretteLicenseData,
-    saveCigaretteLicenseData,
-    setCigaretteLicenseData,
-  } = useContext(CigaretteLicenseContext);
+  const { state: cigaretteLicenseData, saveCigaretteLicenseData } =
+    useContext(CigaretteLicenseContext);
   const { state: profileDataState } = useContext(ProfileDataContext);
   const { state: addressState } = useContext(AddressContext);
   const { userData, business, updateQueue } = useUserData();
@@ -128,41 +127,53 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
   );
 
   const validateAllFieldsWithData = (data: typeof cigaretteLicenseData): boolean => {
+    let dataToValidate = { ...data };
+
+    if (data.mailingAddressIsTheSame) {
+      dataToValidate = {
+        ...dataToValidate,
+        mailingAddressLine1: data.addressLine1,
+        mailingAddressLine2: data.addressLine2,
+        mailingAddressCity: data.addressCity,
+        mailingAddressState: data.addressState,
+        mailingAddressZipCode: data.addressZipCode,
+      };
+    }
+
     let isValid = true;
 
     if (isTradeNameLegalStructureApplicable(profileData.legalStructureId)) {
-      const isResponsibleOwnerNameValid = data.responsibleOwnerName !== "";
-      const isTradeNameValid = data.tradeName !== "";
+      const isResponsibleOwnerNameValid = dataToValidate.responsibleOwnerName !== "";
+      const isTradeNameValid = dataToValidate.tradeName !== "";
       setIsValidResponsibleOwnerName(isResponsibleOwnerNameValid);
       setIsValidTradeName(isTradeNameValid);
       if (!isResponsibleOwnerNameValid || !isTradeNameValid) isValid = false;
     } else {
-      const isBusinessNameValid = data.businessName !== "";
+      const isBusinessNameValid = dataToValidate.businessName !== "";
       setIsValidBusinessName(isBusinessNameValid);
       if (!isBusinessNameValid) isValid = false;
     }
 
     const validations = [
-      { field: data.taxId, setter: setIsValidTaxId },
-      { field: data.addressLine1, setter: setIsValidAddressLine1 },
-      { field: data.addressCity, setter: setIsValidAddressCity },
-      { field: data.addressState, setter: setIsValidAddressState },
-      { field: data.addressZipCode, setter: setIsValidAddressZipCode },
-      { field: data.mailingAddressLine1, setter: setIsValidMailingAddressLine1 },
-      { field: data.mailingAddressCity, setter: setIsValidMailingAddressCity },
-      { field: data.mailingAddressState, setter: setIsValidMailingAddressState },
+      { field: dataToValidate.taxId, setter: setIsValidTaxId },
+      { field: dataToValidate.addressLine1, setter: setIsValidAddressLine1 },
+      { field: dataToValidate.addressCity, setter: setIsValidAddressCity },
+      { field: dataToValidate.addressState, setter: setIsValidAddressState },
+      { field: dataToValidate.addressZipCode, setter: setIsValidAddressZipCode },
+      { field: dataToValidate.mailingAddressLine1, setter: setIsValidMailingAddressLine1 },
+      { field: dataToValidate.mailingAddressCity, setter: setIsValidMailingAddressCity },
+      { field: dataToValidate.mailingAddressState, setter: setIsValidMailingAddressState },
       {
-        field: data.mailingAddressZipCode,
+        field: dataToValidate.mailingAddressZipCode,
         setter: setIsValidMailingAddressZipCode,
       },
-      { field: data.salesInfoStartDate, setter: setIsValidSalesInfoStartDate },
-      { field: data.salesInfoSupplier, setter: setIsValidSalesInfoSupplier },
-      { field: data.contactName, setter: setIsValidContactName },
-      { field: data.contactPhoneNumber, setter: setIsValidContactPhoneNumber },
-      { field: data.contactEmail, setter: setIsValidContactEmail },
-      { field: data.signature, setter: setIsValidSignature },
-      { field: data.signerRelationship, setter: setIsValidSignerRelationship },
-      { field: data.signerName, setter: setIsValidSignerName },
+      { field: dataToValidate.salesInfoStartDate, setter: setIsValidSalesInfoStartDate },
+      { field: dataToValidate.contactName, setter: setIsValidContactName },
+      { field: dataToValidate.contactPhoneNumber, setter: setIsValidContactPhoneNumber },
+      { field: dataToValidate.contactEmail, setter: setIsValidContactEmail },
+      { field: dataToValidate.signature, setter: setIsValidSignature },
+      { field: dataToValidate.signerRelationship, setter: setIsValidSignerRelationship },
+      { field: dataToValidate.signerName, setter: setIsValidSignerName },
     ];
 
     for (const { field, setter } of validations) {
@@ -170,45 +181,27 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
       if (!field) isValid = false;
     }
 
-    return isValid;
-  };
+    const isSalesInfoSupplierValid = !!(
+      dataToValidate.salesInfoSupplier && dataToValidate.salesInfoSupplier.length > 0
+    );
+    setIsValidSalesInfoSupplier(isSalesInfoSupplierValid);
+    if (!isSalesInfoSupplierValid) isValid = false;
 
-  const copyAddress = (): void => {
-    setCigaretteLicenseData((prev) => ({
-      ...prev,
-      mailingAddressLine1: prev.addressLine1,
-      mailingAddressLine2: prev.addressLine2,
-      mailingAddressCity: prev.addressCity,
-      mailingAddressState: prev.addressState,
-      mailingAddressZipCode: prev.addressZipCode,
-    }));
+    return isValid;
   };
 
   const handleSubmit = async (): Promise<void> => {
     setLoading(true);
-    let dataToValidate = { ...cigaretteLicenseData };
 
-    if (cigaretteLicenseData.mailingAddressIsTheSame) {
-      dataToValidate = {
-        ...dataToValidate,
-        mailingAddressLine1: cigaretteLicenseData.addressLine1,
-        mailingAddressLine2: cigaretteLicenseData.addressLine2,
-        mailingAddressCity: cigaretteLicenseData.addressCity,
-        mailingAddressState: cigaretteLicenseData.addressState,
-        mailingAddressZipCode: cigaretteLicenseData.addressZipCode,
-      };
-    }
-
-    const isValid = validateAllFieldsWithData(dataToValidate);
+    const isValid = validateAllFieldsWithData(cigaretteLicenseData);
     const returnUrl = window.location.origin + window.location.pathname;
 
     if (!isValid) {
       setLoading(false);
+      if (props.errorAlertRef.current) {
+        scrollToTopOfElement(props.errorAlertRef.current, { focusElement: true });
+      }
       return;
-    }
-
-    if (cigaretteLicenseData.mailingAddressIsTheSame) {
-      copyAddress();
     }
 
     saveCigaretteLicenseData();
@@ -230,6 +223,11 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
         if (cigaretteLicenseResponse.paymentInfo?.errorResult) {
           props.setSubmissionError("UNAVAILABLE");
           setLoading(false);
+          setTimeout(() => {
+            if (props.errorAlertRef.current) {
+              scrollToTopOfElement(props.errorAlertRef.current, { focusElement: true });
+            }
+          }, 100);
           return;
         }
 
@@ -258,6 +256,11 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
     } catch {
       setLoading(false);
       props.setSubmissionError("UNAVAILABLE");
+      setTimeout(() => {
+        if (props.errorAlertRef.current) {
+          scrollToTopOfElement(props.errorAlertRef.current, { focusElement: true });
+        }
+      }, 100);
     }
   };
 
@@ -293,6 +296,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
         )}
         <ReviewLineItem
           label={Config.profileDefaults.fields.taxId.default.header}
+          labelContextualInfo={Config.profileDefaults.fields.taxId.default.headerContextualInfo}
           value={cigaretteLicenseData.taxId || profileData.taxId}
           noColonAfterLabel
         />
@@ -442,9 +446,9 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
             <span className="text-bold">{Config.cigaretteLicenseStep4.costValue}</span>
           </div>
         </div>
-        <p className="text-small margin-top-2">
-          {Config.cigaretteLicenseStep4.feesSubjectToChange}
-        </p>
+        <div className="text-small margin-top-2">
+          <Content>{Config.cigaretteLicenseStep4.feesSubjectToChange}</Content>
+        </div>
       </div>
 
       <HorizontalLine />

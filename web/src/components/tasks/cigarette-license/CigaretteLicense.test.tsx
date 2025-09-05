@@ -174,6 +174,7 @@ describe("<CigaretteLicense />", () => {
           mailingAddressCity: "some-mailing-city",
           mailingAddressState: { shortCode: "NJ", name: "New Jersey" },
           mailingAddressZipCode: "12345",
+          salesInfoSupplier: ["Test Supplier"],
         }),
       });
     };
@@ -296,6 +297,7 @@ describe("<CigaretteLicense />", () => {
           addressCity: "Business City",
           addressState: { shortCode: "NJ", name: "New Jersey" },
           addressZipCode: "12345",
+          salesInfoSupplier: ["Test Supplier"],
         }),
       });
 
@@ -337,6 +339,7 @@ describe("<CigaretteLicense />", () => {
           addressCity: "Business City",
           addressState: { shortCode: "NJ", name: "New Jersey" },
           addressZipCode: "12345",
+          salesInfoSupplier: ["Test Supplier"],
         }),
       });
 
