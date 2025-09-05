@@ -4,12 +4,12 @@
     "fields": {
       "startDateOfSales": {
         "label": "Start Date of Cigarette Sales",
-        "errorRequiredText": "A valid date is required.",
+        "errorRequiredText": "Enter date in format MM/DD/YYYY.",
         "errorValidationText": ""
       },
       "selectASupplier": {
         "label": "Suppliers",
-        "errorRequiredText": "At least one supplier is required.",
+        "errorRequiredText": "Choose at least one supplier.",
         "errorValidationText": ""
       }
     },
