@@ -12,6 +12,8 @@ import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo"
 import { SalesInfo } from "@/components/tasks/cigarette-license/SalesInfo";
 import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -36,7 +38,16 @@ import {
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
-import { Dispatch, ReactElement, SetStateAction, useCallback, useEffect, useState } from "react";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type Props = {
   task: Task;
@@ -53,6 +64,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
   const [submissionError, setSubmissionError] = useState<SubmissionError>(undefined);
   const { getInvalidFieldIds, state: formContextState } =
     useFormContextHelper(createDataFormErrorMap());
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);
   const [formationAddressData, setAddressData] =
@@ -309,6 +321,16 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     return paymentComplete || taskComplete;
   };
 
+  const onStepClick = (step: number): void => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).update();
+      setShowNeedsAccountModal(true);
+    } else {
+      saveCigaretteLicenseData();
+      setStepIndex(step);
+    }
+  };
+
   return shouldShowConfirmation() ? (
     <div className="flex flex-column space-between min-height-38rem">
       <TaskHeader task={props.task} />
@@ -322,14 +344,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         setStepIndex={setStepIndex}
         submissionError={submissionError}
       />
-      <HorizontalStepper
-        steps={stepperSteps}
-        currentStep={stepIndex}
-        onStepClicked={function (step: number): void {
-          saveCigaretteLicenseData();
-          setStepIndex(step);
-        }}
-      />
+      <HorizontalStepper steps={stepperSteps} currentStep={stepIndex} onStepClicked={onStepClick} />
       <DataFormErrorMapContext.Provider value={formContextState}>
         <CigaretteLicenseContext.Provider
           value={{
