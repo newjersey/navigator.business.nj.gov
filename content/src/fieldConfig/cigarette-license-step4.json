@@ -41,7 +41,7 @@
       "contactPhoneNumber": "Phone Number",
       "contactEmail": "Email Address",
       "salesInfoStartDate": "Start Date of Cigarette Sales",
-      "salesInfoSupplier": "Select a Supplier"
+      "salesInfoSupplier": "Suppliers"
     }
   }
 }
