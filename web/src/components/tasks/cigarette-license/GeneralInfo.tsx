@@ -3,9 +3,13 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
@@ -13,6 +17,17 @@ interface Props {
 
 export const GeneralInfo = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { updateQueue } = useUserData();
+
+  const onContinueClick = (): void => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).update();
+      setShowNeedsAccountModal(true);
+    } else {
+      props.setStepIndex(1);
+    }
+  };
 
   return (
     <>
@@ -25,7 +40,7 @@ export const GeneralInfo = (props: Props): ReactElement => {
           <LiveChatHelpButton />
           <PrimaryButton
             isColor="primary"
-            onClick={() => props.setStepIndex(1)}
+            onClick={onContinueClick}
             dataTestId="cta-primary-1"
             isRightMarginRemoved={true}
           >

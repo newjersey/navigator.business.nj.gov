@@ -14,6 +14,7 @@ export const ROUTES = {
   starterKits: "/starter-kits",
   login: "/login",
   njeda: "/njeda",
+  cigaretteLicense: "/tasks/cigarette-license",
   taxClearanceCertificate: "/actions/tax-clearance-certificate-apply",
   envPermit: "tasks/env-permitting",
 };
