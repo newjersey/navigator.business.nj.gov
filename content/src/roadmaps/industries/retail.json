@@ -70,7 +70,8 @@
     "inspect-pv",
     "inspect-fridge",
     "sell-milk-question",
-    "cdl-neq"
+    "cdl-neq",
+    "streamlined-sales-tax-registration"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {
