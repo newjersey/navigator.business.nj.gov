@@ -1,7 +1,7 @@
 import {
   determineLicenseStatus,
   WebserviceLicenseStatusProcessorClient,
-} from "@client/WebserviceLicenseStatusProcessorClient";
+} from "@client/webservice/WebserviceLicenseStatusProcessorClient";
 import { LicenseStatusClient, NO_ADDRESS_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
 import { parseDateWithFormat } from "@shared/dateHelpers";
 import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
