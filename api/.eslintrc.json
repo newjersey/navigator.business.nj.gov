@@ -25,7 +25,8 @@
       "error",
       {
         "cases": {
-          "camelCase": true
+          "camelCase": true,
+          "pascalCase": true
         }
       }
     ],

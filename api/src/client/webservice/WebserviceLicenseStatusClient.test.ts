@@ -1,4 +1,4 @@
-import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
+import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
 import { LicenseStatusClient } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateLicenseEntity } from "@test/factories";
