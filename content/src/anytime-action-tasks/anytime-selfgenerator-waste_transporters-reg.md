@@ -7,9 +7,8 @@ industryIds: []
 sectorIds:
   - construction
 urlSlug: anytime-selfgenerator-waste–transporters-reg
-summaryDescriptionMd: >-2
-   
-
+summaryDescriptionMd: >-
+  
   :::infoAlert 
    **Keep in mind:**
 
