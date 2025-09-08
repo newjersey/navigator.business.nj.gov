@@ -65,7 +65,8 @@
     "inspect-pv",
     "bus-initial-inspection",
     "resale-tax-cert",
-    "ust-reg"
+    "ust-reg",
+    "streamlined-sales-tax-registration"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
