@@ -4,7 +4,8 @@ name: Apply for Your Self-Generator Waste Transporter Registration
 category:
   - purchase-new-products-or-equipment
 industryIds: []
-sectorIds: []
+sectorIds:
+  - construction
 urlSlug: anytime-selfgenerator-waste–transporters-reg
 summaryDescriptionMd: >-2
    
