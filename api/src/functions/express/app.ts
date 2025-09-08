@@ -46,8 +46,8 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
-import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
-import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
+import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
+import { WebserviceLicenseStatusProcessorClient } from "@client/webservice/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoDataClient } from "@db/DynamoDataClient";
