@@ -3,7 +3,7 @@
     "businessAddressHeader": "Business Address",
     "backButtonText": "Back",
     "businessAddressDescription": "Tell us where your business is located (no P.O. boxes).",
-    "businessNameErrorText": "Business name is required.",
+    "businessNameErrorText": "Enter the business name.",
     "contactInformationDescription": "Tell us who to contact for any questions or updates.",
     "nextButtonText": "Next",
     "mailingAddressDescription": "Tell us where to send your license.",
@@ -38,15 +38,15 @@
       },
       "contactName": {
         "label": "Contact Name",
-        "errorRequiredText": "Contact name is required."
+        "errorRequiredText": "Enter a contact name."
       },
       "contactPhoneNumber": {
         "label": "Phone Number",
-        "errorRequiredText": "Valid phone number is required."
+        "errorRequiredText": "Enter a valid phone number."
       },
       "contactEmail": {
         "label": "Email Address",
-        "errorRequiredText": "Valid email address is required."
+        "errorRequiredText": "Enter a valid email address."
       }
     },
     "mailingIsSameCheckbox": "Mailing address is the same as the business address."
