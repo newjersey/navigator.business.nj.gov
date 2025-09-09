@@ -8,10 +8,6 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@serverless/typescript" },
-    },
-    {
-      from: {},
       to: { path: "@aws-sdk/client-s3" },
     },
     {
@@ -163,6 +159,10 @@ module.exports = {
       to: { path: "src/libs" },
     },
     {
+      from: { path: "src/libs" },
+      to: { path: "cdk" },
+    },
+    {
       from: { path: "src/api" },
       to: { path: "src/api" },
     },
@@ -177,6 +177,10 @@ module.exports = {
     {
       from: { path: "src/client" },
       to: { path: "src/libs" },
+    },
+    {
+      from: { path: "src/client" },
+      to: { path: "src/functions" },
     },
     {
       from: { path: "src/functions" },
