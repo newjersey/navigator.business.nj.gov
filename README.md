@@ -16,8 +16,7 @@ Everything is written in **TypeScript** and runs on **Node.js**.
 The frontend is **React** via **Next.js** and deployed in **Docker containers** on an **AWS Elastic
 Container Service** cluster.
 
-The backend is an **Express** app deployed as an **AWS Lambda** function using **Serverless
-Framework**. It connects to an **AWS DynamoDB** instance that is also configured through
+The backend is an **Express** app deployed as an **AWS Lambda** function using **AWS Cloud Development Kit**. It connects to an **AWS DynamoDB** instance that is also configured through
 **Terraform**.
 
 The app uses **AWS Cognito** (through **AWS Amplify**) to handle authentication for registered
@@ -32,7 +31,7 @@ CI/CD.
 
 You will need Node.js (with Yarn installed via `npm` or `corepack`) installed for primary
 development. Additionally, for running the server in local development mode, you will need a Java
-runtime (for `serverless-dynamodb`) and Python (for the AWS CLI and some of our scripts) installed
+runtime (DynamoDB Local and other dependencies now run inside Docker containers) and Python (for the AWS CLI and some of our scripts) installed
 (details below).
 
 We recommend using WSL2 if developing on Windows.
@@ -63,9 +62,8 @@ You will then setup your AWS credentials:
 aws configure
 ```
 
-Clone the code and navigate to the root of this repository. There is an install script that will
-install all `yarn` packages for both the frontend and backend. It will also set up serverless's
-local DynamoDB.
+Clone the code and navigate to the root of this repository. There is an installation script that will
+install all `yarn` packages for both the frontend and backend. It also sets up the local DynamoDB.
 
 ```shell
 ./scripts/install.sh
@@ -141,7 +139,7 @@ yarn start:dev
 #### Troubleshooting
 
 If you get an error from serverless that looks like `Inaccessible host: localhost at port 8000`,
-this is likely a permissions error. To solve, grant the `./api/.dynamodb` folder write permissions
+this is likely a permissions' error. To solve, grant the `./api/.dynamodb` folder write permissions
 on your machine.
 
 ### Deploying
@@ -227,17 +225,15 @@ make use of the `useUserData` wrapper around this hook.
 
 ## Backend deep-dive
 
-The backend code lives in `./api`. It uses [Serverless Framework](https://www.serverless.com/) for
+The backend code lives in `./api`. It uses [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html) for
 handling the integration with AWS Lambdas.
 
-We use Serverless Framework to deploy the backend app. If you do this locally, your local
-`serverless` CLI needs to be configured with AWS credentials.
-
-Locally, it uses `serverless-offline` and `serverless-dynamodb` to run and simulate the AWS
-environment. Everything AWS and serverless is configured in `./api/serverless.ts`.
+We use CDK to deploy the backend app. If you deploy from your local machine,
+your AWS CLI must be configured with valid AWS credentials.
 
 The backend app itself is defined in `src/functions/migrate.ts` and is mostly a regular Express app,
-except it wraps its export in `serverless` to become a handler. Then, `src/functions/index.ts`
+except it wraps its export in `serverless-http` to become a handler. Locally, the Express app runs normally.
+API gateway routing is configured using AWS CDK in the  `/api/cdk/lib/api-stack.ts`  file, which
 defines the config structure that proxies all routes through to be handled by the Express routing
 system.
 
@@ -303,13 +299,13 @@ following actions:
 
 ## Ports
 
-| service            | local dev & CI feature tests | local feature tests | unit tests |
-| ------------------ | ---------------------------- | ------------------- | ---------- |
-| Next.js frontend   | 3000                         | 3001                |            |
-| Serverless backend | 5002                         | 5001                |            |
-| DynamoDB           | 8000                         | 8001                |            |
-| Lambda port        | 5050                         | 5051                |            |
-| Dynalite local     |                              |                     | 8002       |
+| service          | local dev & CI feature tests | local feature tests | unit tests |
+|------------------| ---------------------------- | ------------------- | ---------- |
+| Next.js frontend | 3000                         | 3001                |            |
+| CDK backend      | 5002                         | 5001                |            |
+| DynamoDB         | 8000                         | 8001                |            |
+| Lambda port      | 5050                         | 5051                |            |
+| Dynalite local   |                              |                     | 8002       |
 
 ## Business.NJ.gov
 

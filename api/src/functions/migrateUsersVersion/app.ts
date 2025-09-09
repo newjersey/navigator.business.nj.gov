@@ -18,7 +18,7 @@ import {
 import { LogWriter } from "@libs/logWriter";
 import { isKillSwitchOn } from "@libs/ssmUtils";
 
-export default async function handler(): Promise<void> {
+export const handler = async (): Promise<void> => {
   const logger = LogWriter(`UsersSchemaMigration/${STAGE}`, "MigrationLogs");
   const killSwitchOn = await isKillSwitchOn();
   if (killSwitchOn) {
@@ -46,4 +46,4 @@ export default async function handler(): Promise<void> {
     isKillSwitchOn,
   );
   await dynamoDataClient.migrateOutdatedVersionUsers();
-}
+};

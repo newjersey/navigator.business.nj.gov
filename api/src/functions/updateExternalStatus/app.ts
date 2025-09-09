@@ -20,7 +20,7 @@ import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 
-export default async function handler(): Promise<void> {
+export const handler = async (): Promise<void> => {
   const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
@@ -78,4 +78,4 @@ export default async function handler(): Promise<void> {
 
   await addNewsletterBatch(addNewsletter, dbClient);
   await addToUserTestingBatch(addToAirtableUserTesting, dbClient);
-}
+};

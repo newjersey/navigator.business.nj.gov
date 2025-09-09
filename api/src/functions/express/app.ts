@@ -88,6 +88,7 @@ import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
 import { employerRatesRouterFactory } from "@api/employerRatesRouter";
 import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
+import { MockCryptoClient } from "@client/MockCryptoClient";
 
 const app = setupExpress();
 
@@ -301,21 +302,25 @@ const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
-const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-  stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-});
+const AWSTaxIDEncryptionClient = IS_OFFLINE
+  ? new MockCryptoClient()
+  : AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
+      stage: AWS_CRYPTO_CONTEXT_STAGE,
+      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+    });
 
-const AWSTaxIDHashingClient = AWSCryptoFactory(
-  AWS_CRYPTO_TAX_ID_HASHING_KEY,
-  {
-    stage: AWS_CRYPTO_CONTEXT_STAGE,
-    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
-    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-  },
-  AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
-);
+const AWSTaxIDHashingClient = IS_OFFLINE
+  ? new MockCryptoClient()
+  : AWSCryptoFactory(
+      AWS_CRYPTO_TAX_ID_HASHING_KEY,
+      {
+        stage: AWS_CRYPTO_CONTEXT_STAGE,
+        purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+        origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+      },
+      AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+    );
 
 const taxFilingClient = ApiTaxFilingClient(
   {
@@ -508,6 +513,10 @@ app.use(
   ),
 );
 
+app.get("/api/ready", (_req, res) => {
+  res.status(200).send(`ready from : ${process.env.AWS_LAMBDA_FUNCTION_NAME}`);
+});
+
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
 
 app.post("/api/mgmt/auth", (req, res) => {
@@ -525,3 +534,10 @@ app.post("/api/mgmt/auth", (req, res) => {
 });
 
 export const handler = serverless(app);
+
+if (require.main === module) {
+  const port = process.env.PORT || 5002;
+  app.listen(port, () => {
+    console.log(`Local API running on http://localhost:${port}`);
+  });
+}

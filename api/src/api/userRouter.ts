@@ -260,7 +260,6 @@ export const userRouterFactory = (
     const method = req.method;
     const endpoint = req.originalUrl;
     const requestStart = Date.now();
-
     logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${postedUserBodyId}`);
 
     if (signedInUserId !== postedUserBodyId) {
