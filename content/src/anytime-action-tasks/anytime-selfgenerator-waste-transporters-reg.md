@@ -14,7 +14,6 @@ sectorIds:
 urlSlug: anytime-selfgenerator-waste-transporters-reg
 summaryDescriptionMd: >-
   
-
   :::infoAlert
    **Keep in mind:**
 
