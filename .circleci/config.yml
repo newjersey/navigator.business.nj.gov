@@ -188,6 +188,13 @@ commands:
             yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE}
             --region us-east-1
 
+  deploy-cdk:
+    steps:
+      - run:
+          name: Deploy CDK
+          command:
+            yarn workspace @businessnjgovnavigator/api/cdk cdk deploy --verbose --region us-east-1
+
   set-shared-stage-env-vars:
     steps:
       - run:
@@ -525,6 +532,14 @@ commands:
           docker_layer_caching: true
       - deploy-serverless
 
+  deploy-setup-cdk:
+    steps:
+      - configure-and-build
+      - setup_remote_docker:
+          version: edge
+          docker_layer_caching: true
+      - deploy-cdk
+
   deploy-content-env:
     steps:
       - deploy-setup
@@ -538,7 +553,7 @@ commands:
 
   deploy-testing-env:
     steps:
-      - deploy-setup
+      - deploy-setup-cdk
       - package-webapp-docker:
           image-name: bfs-navigator-testing
       - run:

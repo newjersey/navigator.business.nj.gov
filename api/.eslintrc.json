@@ -46,6 +46,14 @@
   },
   "overrides": [
     {
+      "files": ["cdk/bin/**/*", "cdk/lib/**/*", "cdk/test/**/*"],
+      "rules": {
+        "no-restricted-imports": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "no-undef": "off"
+      }
+    },
+    {
       "files": ["**/*.test.*"],
       "plugins": ["jest", "jest-formatting"],
       "extends": ["plugin:jest/recommended", "plugin:jest-formatting/recommended"],

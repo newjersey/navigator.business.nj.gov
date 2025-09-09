@@ -1,0 +1,12 @@
+# Ignore compiled JS output only
+lib/**/*.js
+bin/**/*.js
+test/**/*.js
+
+# Local CDK / build outputs
+cdk.out/
+dist/
+node_modules/
+
+# Misc
+*.log
