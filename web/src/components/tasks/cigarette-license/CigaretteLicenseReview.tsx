@@ -16,6 +16,7 @@ import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
@@ -407,7 +408,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
       >
         <ReviewLineItem
           label={Config.cigaretteLicenseStep4.reviewItems.salesInfoStartDate}
-          value={cigaretteLicenseData.salesInfoStartDate}
+          value={formatUTCDate(cigaretteLicenseData.salesInfoStartDate || "")}
           noColonAfterLabel
         />
         <ReviewLineItem
