@@ -69,7 +69,7 @@ divisionPhone: (609) 292-7081
 * A copy of your Certificate of Authority to do business in New Jersey, if an out-of-state business
 * A copy of the `Certificate of Good Standing|good-standing` (for New Jersey Corporations and Limited Liability Companies)
 
-Please email the application with legible scans of all required documentation to michael.gage@dep.nj.gov. If you can't scan, mail the original hard copy to:
+Please email the application with legible scans of all required documentation to  lru@dep.nj.gov. If you can't scan, mail the original hard copy to:
 
 &nbsp; 
 
