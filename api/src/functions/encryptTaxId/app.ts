@@ -12,12 +12,15 @@ import {
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
-import { LogWriter } from "@libs/logWriter";
+import { ConsoleLogWriter, LogWriter } from "@libs/logWriter";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { encryptTaxIdBatch } from "src/domain/user/encryptTaxIdBatch";
 
 export default async function handler(): Promise<void> {
-  const logger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+  const logger =
+    process.env.STAGE === "local"
+      ? ConsoleLogWriter
+      : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {

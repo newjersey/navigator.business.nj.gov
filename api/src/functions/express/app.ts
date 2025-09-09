@@ -80,7 +80,7 @@ import {
   STAGE,
 } from "@functions/config";
 import { setupExpress } from "@libs/express";
-import { LogWriter } from "@libs/logWriter";
+import { ConsoleLogWriter, LogWriter } from "@libs/logWriter";
 import { isKillSwitchOn } from "@libs/ssmUtils";
 import bodyParser from "body-parser";
 import { StatusCodes } from "http-status-codes";
@@ -91,11 +91,18 @@ import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
+import { MockCryptoClient } from "@client/MockCryptoClient";
 
 const app = setupExpress();
 
-const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
-const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+const logger =
+  process.env.STAGE === "local"
+    ? ConsoleLogWriter
+    : LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
+const dataLogger =
+  process.env.STAGE === "local"
+    ? ConsoleLogWriter
+    : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
 const XRAY_REGISTRATION_STATUS_BASE_URL =
   process.env.XRAY_REGISTRATION_STATUS_BASE_URL || "http://localhost:9000";
@@ -252,12 +259,13 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
   housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
 });
 
+const ORG_URL =
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : process.env.TAX_CLEARANCE_CERTIFICATE_URL;
+
 const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
-  orgUrl:
-    process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
-      ? "http://localhost:9000"
-      : process.env.TAX_CLEARANCE_CERTIFICATE_URL ||
-        `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`,
+  orgUrl: ORG_URL!,
   userName: process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "",
   password: process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "",
 });
@@ -269,9 +277,9 @@ const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
 
 const BUSINESS_NAME_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
-    ? "http://localhost:9000"
-    : process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
-const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : process.env.BUSINESS_NAME_BASE_URL;
+const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL!, logger);
 
 const GOV_DELIVERY_BASE_URL =
   process.env.GOV_DELIVERY_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -290,8 +298,8 @@ const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
 const FORMATION_API_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
-    ? "http://localhost:9000"
-    : process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : process.env.FORMATION_API_BASE_URL;
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
 const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
@@ -304,21 +312,25 @@ const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
-const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-  stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-});
+const AWSTaxIDEncryptionClient = IS_OFFLINE
+  ? new MockCryptoClient()
+  : AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
+      stage: AWS_CRYPTO_CONTEXT_STAGE,
+      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+    });
 
-const AWSTaxIDHashingClient = AWSCryptoFactory(
-  AWS_CRYPTO_TAX_ID_HASHING_KEY,
-  {
-    stage: AWS_CRYPTO_CONTEXT_STAGE,
-    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
-    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-  },
-  AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
-);
+const AWSTaxIDHashingClient = IS_OFFLINE
+  ? new MockCryptoClient()
+  : AWSCryptoFactory(
+      AWS_CRYPTO_TAX_ID_HASHING_KEY,
+      {
+        stage: AWS_CRYPTO_CONTEXT_STAGE,
+        purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+        origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+      },
+      AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+    );
 
 const taxFilingClient = ApiTaxFilingClient(
   {
@@ -404,7 +416,7 @@ const apiFormationClient = ApiFormationClient(
   {
     account: FORMATION_API_ACCOUNT,
     key: FORMATION_API_KEY,
-    baseUrl: FORMATION_API_BASE_URL,
+    baseUrl: FORMATION_API_BASE_URL!,
   },
   logger,
 );
@@ -541,3 +553,10 @@ app.post("/api/mgmt/auth", (req, res) => {
 });
 
 export const handler = serverless(app);
+
+if (require.main === module) {
+  const port = process.env.PORT || 5002;
+  app.listen(port, () => {
+    console.log(`Local API running on http://localhost:${port}`);
+  });
+}

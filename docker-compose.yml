@@ -1,98 +1,124 @@
-version: "3.8"
-
 services:
   dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    container_name: dynamodb-local
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
-    image: "amazon/dynamodb-local:latest"
-    container_name: "dynamodb-local"
+    working_dir: /home/dynamodblocal
     volumes:
       - db_data:/home/dynamodblocal/data
-    working_dir: /home/dynamodblocal
     ports:
       - "8000:8000"
     user: root
-  dynamodb-maint:
+
+  dynamodb-init:
+    image: amazon/aws-cli
     depends_on:
-      - "dynamodb-local"
-    links:
-      - "dynamodb-local"
-    environment:
-      - AWS_PROFILE=nj-default
+      - dynamodb-local
     volumes:
       - ~/.aws/credentials:/root/.aws/credentials:ro
-      - type: bind
-        source: ./api/users-dynamodb-schema.json
-        target: /users-dynamodb-schema.json
-      - type: bind
-        source: ./api/businesses-dynamodb-schema.json
-        target: /businesses-dynamodb-schema.json
-    image: amazon/aws-cli
-    command: >
-      /bin/sh -c "
-        dynamodb create-table --cli-input-json file:///users-dynamodb-schema.json --endpoint-url
-      http://dynamodb-local:8000 --region us-east-1
-        dynamodb create-table --cli-input-json file:///businesses-dynamodb-schema.json
-      --endpoint-url http://dynamodb-local:8000 --region us-east-1 "
+      - ./api/users-dynamodb-schema.json:/users-dynamodb-schema.json:ro
+      - ./api/businesses-dynamodb-schema.json:/businesses-dynamodb-schema.json:ro
+    entrypoint: ""
+    command: |
+      bash -c "
+        echo 'Waiting for DynamoDB Local to be ready...';
+        until curl -s http://dynamodb-local:8000 > /dev/null; do
+          echo 'DynamoDB Local not yet ready, retrying in 3s...';
+          sleep 3;
+        done;
+        echo 'DynamoDB Local is ready!';
+
+        echo 'Creating users-table-local...';
+        aws dynamodb create-table --cli-input-json file:///users-dynamodb-schema.json --endpoint-url http://dynamodb-local:8000 --region us-east-1;
+
+        echo 'Creating businesses-table-local...';
+        aws dynamodb create-table --cli-input-json file:///businesses-dynamodb-schema.json --endpoint-url http://dynamodb-local:8000 --region us-east-1;
+
+        echo 'Tables created successfully:';
+        aws dynamodb list-tables --endpoint-url http://dynamodb-local:8000 --region us-east-1;
+      "
+
   dynamodb-admin:
     image: aaronshaf/dynamodb-admin
-    links:
-      - "dynamodb-local"
-    ports:
-      - 8008:8001
+    depends_on:
+      - dynamodb-local
     environment:
       - DYNAMO_ENDPOINT=http://dynamodb-local:8000
+    ports:
+      - "8001:8001"
+
   wiremock:
-    image: node:14.18-slim
+    image: node:22-bullseye
+    platform: linux/amd64
     volumes:
-      - ./api:/api
+      - .:/workspace
       - wiremock_modules:/root/.jdeploy
-      - api_node_modules:/api/node_modules
+    working_dir: /workspace/apis
     ports:
       - "9000:9000"
-    working_dir: /api
-    command: bash -c "npm install && npm run start:wiremock"
+    environment:
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+    command: |
+      bash -c "
+        apt-get update && \
+        apt-get install -y build-essential python3 libnss3 libxss1 libatk1.0-0 libgtk-3-0 libgbm-dev libasound2 libxtst6 xauth xvfb default-jre && \
+        yarn install && \
+        yarn start:wiremock
+      "
+
   api:
+    image: node:22-bullseye
     depends_on:
-      - wiremock
-      - "dynamodb-local"
-    links:
-      - wiremock
-      - "dynamodb-local"
-    image: node:14.18-slim
+      dynamodb-init:
+        condition: service_completed_successfully
     volumes:
       - ~/.aws/credentials:/root/.aws/credentials:ro
-      - ./api:/api
-      - ./scripts:/scripts
-      - api_node_modules:/api/node_modules
+      - ./:/workspace
+      - ./scripts:/workspace/scripts
+      - api_node_modules:/workspace/api/node_modules
+      - yarn_cache:/workspace/.yarn/cache
+    working_dir: /workspace/api
     ports:
       - "5002:5002"
-    working_dir: /api
+    env_file:
+      - ./api/.env
     environment:
-      - AWS_PROFILE=nj-default
+      - YARN_CACHE_FOLDER=/workspace/.yarn-cache
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_REGION=us-east-1
+      - AWS_SECRET_ACCESS_KEY=local
       - IS_DOCKER=true
-    command: bash -c "npx wait-on tcp:wiremock:9000 && npm run start"
-    # this is waiting on wiremock as the npm installation for the api folder is executed there.
+      - DYNAMODB_ENDPOINT=http://dynamodb-local:8000
+      - USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH=true
+      - TAX_CLEARANCE_CERTIFICATE_URL=http://wiremock:9000
+      - BUSINESS_NAME_BASE_URL=http://wiremock:9000
+      - FORMATION_API_BASE_URL=http://wiremock:9000
+      - DYNAMODB_PORT=8000
+    command: bash -c "./scripts/start-all-lambdas.sh"
+
   web:
+    image: node:22-bullseye
     depends_on:
       - api
-    image: node:14.18-slim
     stdin_open: true
-    links:
-      - api
     volumes:
-      - ./web:/web
-      - web_node_modules:/web/node_modules
-      - /web/.next
-      - ./scripts:/scripts
-      - npm_logs:/root/.npm/_logs
+      - ./:/workspace
+      - web_node_modules:/workspace/node_modules
+      - yarn_cache:/workspace/.yarn/cache
+    working_dir: /workspace/web
     ports:
       - "3000:3000"
-    working_dir: /web
-    command: bash -c "npm install --no-optional && npm run dev"
+    environment:
+      - YARN_CACHE_FOLDER=/workspace/.yarn/cache
+      - NODE_ENV=development
+      - npm_config_platform=linux
+      - npm_config_arch=x64
+      - npm_config_build_from_source=true
+    command: bash -c "./scripts/start-web.sh"
+
 volumes:
-  npm_logs: {}
   db_data: {}
-  next_data: {}
   web_node_modules: {}
   api_node_modules: {}
   wiremock_modules: {}
+  yarn_cache: {}

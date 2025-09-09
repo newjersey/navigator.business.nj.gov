@@ -15,11 +15,14 @@ import {
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
-import { LogWriter } from "@libs/logWriter";
+import { ConsoleLogWriter, LogWriter } from "@libs/logWriter";
 import { isKillSwitchOn } from "@libs/ssmUtils";
 
-export default async function handler(): Promise<void> {
-  const logger = LogWriter(`UsersSchemaMigration/${STAGE}`, "MigrationLogs");
+export const handler = async (): Promise<void> => {
+  const logger =
+    process.env.STAGE === "local"
+      ? ConsoleLogWriter
+      : LogWriter(`UsersSchemaMigration/${STAGE}`, "MigrationLogs");
   const killSwitchOn = await isKillSwitchOn();
   if (killSwitchOn) {
     logger.LogInfo("Migration skipped — kill switch is ON");
@@ -46,4 +49,4 @@ export default async function handler(): Promise<void> {
     isKillSwitchOn,
   );
   await dynamoDataClient.migrateOutdatedVersionUsers();
-}
+};
