@@ -29,6 +29,10 @@ export const createDynamoDbClient = (
       new DynamoDBClient({
         region: "us-east-1",
         endpoint: `http://${dynamoDbEndpoint}:${dynamoPort}`,
+        credentials: {
+          accessKeyId: "local",
+          secretAccessKey: "local",
+        },
       }),
       dynamoDbTranslateConfig,
     );

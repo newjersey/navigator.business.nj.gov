@@ -159,6 +159,10 @@ module.exports = {
       to: { path: "src/libs" },
     },
     {
+      from: { path: "src/libs" },
+      to: { path: "cdk" },
+    },
+    {
       from: { path: "src/api" },
       to: { path: "src/api" },
     },
