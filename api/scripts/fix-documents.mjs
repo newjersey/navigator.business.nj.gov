@@ -15,7 +15,12 @@ import {
   AdminGetUserCommand,
   CognitoIdentityProviderClient,
 } from "@aws-sdk/client-cognito-identity-provider";
-import { DynamoDBClient, GetItemCommand, ScanCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+import {
+  DynamoDBClient,
+  GetItemCommand,
+  ScanCommand,
+  UpdateItemCommand,
+} from "@aws-sdk/client-dynamodb";
 import { CopyObjectCommand, DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
@@ -74,7 +79,7 @@ async function findAffectedBusinesses() {
               console.log(
                 `Found affected business: ${business.businessId} - ${
                   business.data?.profileData?.businessName || "unnamed"
-                }`
+                }`,
               );
             }
           } catch (error) {
@@ -87,7 +92,9 @@ async function findAffectedBusinesses() {
         if (error.name === "ProvisionedThroughputExceededException") {
           retries++;
           const delay = Math.pow(2, retries) * 100; // Exponential backoff
-          console.log(`Throughput exceeded. Retrying in ${delay}ms (attempt ${retries}/${maxRetries})`);
+          console.log(
+            `Throughput exceeded. Retrying in ${delay}ms (attempt ${retries}/${maxRetries})`,
+          );
           await new Promise((resolve) => setTimeout(resolve, delay));
         } else {
           console.error(`Error scanning DynamoDB table: ${error}`);
@@ -147,7 +154,9 @@ async function getBusinessById(businessId) {
     const business = unmarshall(response.Item);
     const docUrl = business?.data?.profileData?.documents?.[DOCUMENT_TYPE];
     if (!docUrl || !docUrl.includes("undefined")) {
-      console.log(`Business ${businessId} is not affected (no document URL or no 'undefined' in URL)`);
+      console.log(
+        `Business ${businessId} is not affected (no document URL or no 'undefined' in URL)`,
+      );
       return [];
     }
 
@@ -182,7 +191,7 @@ function exportToCSV(data, filename = "affected-businesses.csv") {
             const value = row[header] || "";
             return value.toString().includes(",") ? `"${value}"` : value;
           })
-          .join(",")
+          .join(","),
       ),
     ].join("\n");
 
@@ -202,7 +211,9 @@ async function getUserCustomIdentityId(userId) {
 
     const response = await cognitoClient.send(new AdminGetUserCommand(params));
 
-    const customIdentityAttribute = response?.UserAttributes.find((el) => el.Name === "custom:identityId");
+    const customIdentityAttribute = response?.UserAttributes.find(
+      (el) => el.Name === "custom:identityId",
+    );
 
     const customIdentityId = customIdentityAttribute?.Value;
 

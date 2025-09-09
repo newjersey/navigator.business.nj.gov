@@ -5,6 +5,11 @@ export default {
       "@swc/jest",
       {
         jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: false,
+            decorators: true,
+          },
           keepClassNames: true,
         },
       },

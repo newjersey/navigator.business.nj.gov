@@ -36,6 +36,52 @@ commands:
       - run:
           name: Install Dynamodb local
           command: yarn workspace @businessnjgovnavigator/api install-dynamo-local
+  start-dynamodb:
+    steps:
+      - run:
+          name: Start DynamoDB
+          background: true
+          command: |
+            cd api
+            echo "Starting DynamoDB Local..."
+            java -Djava.library.path=.dynamodb/DynamoDBLocal_lib \
+                 -jar .dynamodb/DynamoDBLocal.jar \
+                 -sharedDb -port 8000 > dynamodb.log 2>&1
+  wait-for-dynamodb:
+    steps:
+      - run:
+          name: Wait for DynamoDB Local to be ready
+          command: |
+            echo "Waiting for DynamoDB Local to be ready..."
+            ATTEMPTS=0
+            until curl -s http://localhost:8000 >/dev/null; do
+              ATTEMPTS=$((ATTEMPTS+1))
+              if [ "$ATTEMPTS" -ge 20 ]; then
+                echo "DynamoDB did not start within expected time. Dumping logs:"
+                cat api/dynamodb.log || true
+                exit 1
+              fi
+              echo "DynamoDB not ready, retrying... ($ATTEMPTS)"
+              sleep 3
+            done
+            echo "DynamoDB Local is ready!"
+  initialize-dynamodb-tables:
+    steps:
+      - run:
+          name: Initialize DynamoDB Tables
+          command: |
+            echo "Creating tables..."
+            cd api
+            aws dynamodb create-table \
+              --cli-input-json file://users-dynamodb-schema.json \
+              --endpoint-url http://localhost:8000 \
+              --region us-east-1 || echo "users table already exists"
+
+            aws dynamodb create-table \
+              --cli-input-json file://businesses-dynamodb-schema.json \
+              --endpoint-url http://localhost:8000 \
+              --region us-east-1 || echo "businesses table already exists"
+            echo "Tables initialized!"
 
   configure:
     steps:
@@ -108,11 +154,14 @@ commands:
       - run:
           name: Start services
           command:
-            yarn workspace @businessnjgovnavigator/api start & yarn workspace
+            yarn workspace @businessnjgovnavigator/api start:hotReload & yarn workspace
             @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web
             start
           background: true
           no_output_timeout: 30m
+      - run:
+          name: Wait for API to be full ready
+          command: ./scripts/wait-for-api.sh
       - run:
           name: Run Tests
           no_output_timeout: 30m
@@ -187,6 +236,25 @@ commands:
           command:
             yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE}
             --region us-east-1
+
+  deploy-cdk:
+    steps:
+      #      - run:
+      #          name: Clear CDK Context
+      #          command: |
+      #            yarn workspace @businessnjgovnavigator/api-cdk cdk context --clear
+      #      - run:
+      #          name: CDK Bootstrap (temporary)
+      #          command: |
+      #            yarn workspace @businessnjgovnavigator/api-cdk cdk bootstrap aws://$AWS_ACCOUNT_ID_DEV/us-east-1 \
+      #              --bootstrap-bucket-name cdk-biz-nj-assets-$AWS_ACCOUNT_ID_DEV-us-east-1 \
+      #              --qualifier biz-nj \
+      #              --trust arn:aws:iam::$AWS_ACCOUNT_ID_DEV:user/system/bfs-navigator \
+      #              --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess
+      - run:
+          name: Deploy CDK
+          command: |
+            yarn workspace @businessnjgovnavigator/api-cdk cdk deploy --all --qualifier biz-nj --verbose --region us-east-1 --require-approval never
 
   set-shared-stage-env-vars:
     steps:
@@ -276,8 +344,13 @@ commands:
       - run:
           name: Set Cypress Environment Variables
           command: |
+            echo 'export AWS_REGION=us-east-1' >> $BASH_ENV
+            echo 'export IS_OFFLINE=true' >> $BASH_ENV
+            echo 'export STAGE=local' >> $BASH_ENV
+            echo 'export DYNAMODB_ENDPOINT=http://localhost:8000' >> $BASH_ENV
+            echo 'export DYNAMO_PORT=8000' >> $BASH_ENV
             echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_DEV' >> $BASH_ENV
-            echo 'export API_BASE_URL=http://localhost:5002/local' >> $BASH_ENV
+            echo 'export API_BASE_URL=http://localhost:5002' >> $BASH_ENV
             echo 'export USE_FAKE_SELF_REG=true' >> $BASH_ENV
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
@@ -285,14 +358,14 @@ commands:
             echo 'export USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH=true' >> $BASH_ENV
 
             echo 'export ADMIN_PASSWORD=Test1!' >> $BASH_ENV
-            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID=local' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_STAGE=$AWS_CRYPTO_CONTEXT_STAGE_DEV' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE=$AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE=$AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY=$AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV' >> $BASH_ENV
             echo 'export AWS_CRYPTO_TAX_ID_HASHING_KEY=$AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV' >> $BASH_ENV
-            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=local' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV
@@ -500,6 +573,12 @@ commands:
       - run:
           name: Set Testing Environment Variables
           command: |
+            echo 'export API_GATEWAY_ID=$API_GATEWAY_ID_TESTING' >> $BASH_ENV
+            echo 'export API_GATEWAY_ROOT_RESOURCE_ID=$API_GATEWAY_ROOT_RESOURCE_ID_TESTING' >> $BASH_ENV
+            echo 'export VPC_ID=$VPC_ID_AWS_TESTING' >> $BASH_ENV
+            echo 'export SUBNET_ID_01=$SUBNET_ID_01_AWS_TESTING' >> $BASH_ENV
+            echo 'export SUBNET_ID_02=$SUBNET_ID_02_AWS_TESTING' >> $BASH_ENV
+            echo 'export SG_ID=$SG_ID_AWS_TESTING' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_TESTING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_TESTING' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE=$AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE' >> $BASH_ENV
@@ -525,6 +604,14 @@ commands:
           docker_layer_caching: true
       - deploy-serverless
 
+  deploy-setup-cdk:
+    steps:
+      - configure-and-build
+      - setup_remote_docker:
+          version: edge
+          docker_layer_caching: true
+      - deploy-cdk
+
   deploy-content-env:
     steps:
       - deploy-setup
@@ -538,7 +625,7 @@ commands:
 
   deploy-testing-env:
     steps:
-      - deploy-setup
+      - deploy-setup-cdk
       - package-webapp-docker:
           image-name: bfs-navigator-testing
       - run:
@@ -846,12 +933,15 @@ jobs:
           at: .
       - configure-and-build
       - install-dynamodb
+      - start-dynamodb
+      - wait-for-dynamodb
+      - initialize-dynamodb-tables
       - perform-integration-tests:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
           browser: << parameters.browser >>
     environment:
-      CYPRESS_API_BASE_URL: http://localhost:5002/local
+      CYPRESS_API_BASE_URL: http://localhost:5002
 
   smoke-tests:
     parameters:

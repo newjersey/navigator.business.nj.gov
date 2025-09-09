@@ -174,6 +174,7 @@ export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
 
 export const get = async <T>(url: string, auth = true): Promise<T> => {
   const authHeader = auth ? await authConfig() : {};
+  console.log(`Get  API_BASE URL and api from APIClient: ${apiBaseUrl}/api${url}`);
   return axios
     .get(`${apiBaseUrl}/api${url}`, authHeader)
     .then((response) => {

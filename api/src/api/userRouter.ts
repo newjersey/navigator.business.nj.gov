@@ -119,8 +119,12 @@ export const getSignedInUser = (req: Request): CognitoJWTPayload => {
   return jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
 };
 
-export const getSignedInUserId = (req: Request): string => {
+export const getSignedInUserId = (req: Request, res?: Response): string => {
   const signedInUser = getSignedInUser(req);
+  if (!signedInUser) {
+    if (res) res.status(401).json({ error: "Unauthorized" });
+    return "";
+  }
   const myNJIdentityPayload = signedInUser.identities?.find((it) => {
     return it.providerName === "myNJ";
   });
@@ -251,6 +255,9 @@ export const userRouterFactory = (
         }
       });
   });
+  router.get("/ping", (req, res) => {
+    res.status(200).send("User router alive");
+  });
 
   router.post("/users", async (req, res) => {
     let userData = req.body as UserData;
@@ -261,6 +268,10 @@ export const userRouterFactory = (
     const endpoint = req.originalUrl;
     const requestStart = Date.now();
 
+    if (!signedInUserId) {
+      logger.LogInfo("No signed-in user found — skipping user creation");
+      return res.status(200).json({ message: "Route reachable, no auth" });
+    }
     logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${postedUserBodyId}`);
 
     if (signedInUserId !== postedUserBodyId) {
