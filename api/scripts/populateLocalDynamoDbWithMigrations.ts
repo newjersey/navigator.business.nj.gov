@@ -26,7 +26,7 @@ import { generateUserData } from "@shared/test";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
 
 const BATCH_SIZE = 25;
-const dynamoDb = createDynamoDbClient(true, false, 8000);
+const dynamoDb = createDynamoDbClient(false, 8000);
 
 const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
@@ -35,7 +35,7 @@ const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_K
 });
 const isKillSwitchOn = async (): Promise<boolean> => {
   return false;
-}
+};
 class BasicLogger {
   private id: string;
 

@@ -51,11 +51,6 @@
       "groupName": "testing-library"
     },
     {
-      "matchPackageNames": ["@serverless/typescript"],
-      "matchPackagePrefixes": ["serverless"],
-      "groupName": "serverless"
-    },
-    {
       "matchPackagePrefixes": ["@storybook"],
       "groupName": "storybook"
     },
