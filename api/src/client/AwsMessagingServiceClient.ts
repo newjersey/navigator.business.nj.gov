@@ -1,16 +1,17 @@
 import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
 import { HealthCheckMetadata, MessagingServiceClient } from "@domain/types";
+import { STAGE } from "@functions/config";
 import { LogWriterType } from "@libs/logWriter";
 import { ReasonPhrases } from "http-status-codes";
 
 export const AwsMessagingServiceClient = (config: {
   logWriter: LogWriterType;
 }): MessagingServiceClient => {
+  const isLocal = STAGE === "local";
+
   const logId = config.logWriter.GetId();
   const lambdaClient = new LambdaClient({});
-
-  const stage = process.env.STAGE || "local";
-  const functionName = stage === "local" ? "sendEmailTest" : `messaging-service-${stage}`;
+  const functionName = isLocal ? "sendEmailTest" : `messaging-service-${STAGE}`;
 
   const sendMessage = async (
     userId: string,

@@ -1,7 +1,8 @@
 {
   "env": {
     "es2021": true,
-    "jest": true
+    "jest": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -45,6 +46,39 @@
     ]
   },
   "overrides": [
+    {
+      "files": ["lib/**/*.js"],
+      "env": { "node": true },
+      "rules": {
+        "no-undef": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    },
+    {
+      "files": ["**/*.js"],
+      "parser": "espree",
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "no-undef": "off",
+        "eqeqeq": "off",
+        "unicorn/no-null": "off",
+        "unicorn/no-useless-undefined": "off",
+        "unicorn/prefer-node-protocol": "off",
+        "jest-formatting/padding-around-describe-blocks": "off",
+        "jest-formatting/padding-around-before-each-blocks": "off",
+        "jest-formatting/padding-around-test-blocks": "off"
+      }
+    },
+    {
+      "files": ["cdk/bin/**/*", "cdk/lib/**/*", "cdk/test/**/*", "api/lib/api/scripts/**/*"],
+      "rules": {
+        "no-restricted-imports": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "no-undef": "off"
+      }
+    },
     {
       "files": ["**/*.test.*"],
       "plugins": ["jest", "jest-formatting"],
