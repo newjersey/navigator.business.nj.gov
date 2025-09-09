@@ -20,7 +20,7 @@ const getApplicationsByType = async (): Promise<any> => {
       headers: {
         Authorization: `Bearer ${AUTH_TOKEN}`,
       },
-    }
+    },
   );
   return response.data.value;
 };
@@ -33,7 +33,7 @@ const getApplicationsByBusinessId = async (businessId: string): Promise<any> => 
       headers: {
         Authorization: `Bearer ${AUTH_TOKEN}`,
       },
-    }
+    },
   );
   return response.data.value;
 };
@@ -72,8 +72,8 @@ const getBusinessesWithMultipleValidMainApps = async (): Promise<void> => {
   console.log(
     businessAndValidMainApps.filter(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (app: any) => app.applicationIds.length > 1
-    )
+      (app: any) => app.applicationIds.length > 1,
+    ),
   );
 };
 

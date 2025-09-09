@@ -525,3 +525,10 @@ app.post("/api/mgmt/auth", (req, res) => {
 });
 
 export const handler = serverless(app);
+
+if (require.main === module) {
+  const port = process.env.PORT || 5002;
+  app.listen(port, () => {
+    console.log(`Local API running on http://localhost:${port}`);
+  });
+}
