@@ -293,7 +293,7 @@
       "@semantic-release/git"
     ]
   },
-  "packageManager": "yarn@3.8.7",
+  "packageManager": "yarn@4.9.4",
   "resolutions": {
     "trim@0.0.1": "1.0.1",
     "postcss": "8.5.6",
