@@ -1,5 +1,5 @@
 ---
-id: anytime-selfgenerator-waste–transporters-reg
+id: anytime-selfgenerator-waste-transporters-reg
 name: Apply for Your Self-Generator Waste Transporter Registration
 category:
   - purchase-new-products-or-equipment
@@ -13,7 +13,7 @@ sectorIds:
   - construction
 urlSlug: anytime-selfgenerator-waste-transporters-reg
 summaryDescriptionMd: >-
-  
+
   :::infoAlert
    **Keep in mind:**
 
