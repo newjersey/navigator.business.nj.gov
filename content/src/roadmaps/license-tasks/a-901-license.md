@@ -73,15 +73,19 @@ Please email the application with legible scans of all required documentation to
 
 &nbsp; 
 
-New Jersey Department of Law & Public Safety Division of Law, 
+Department of Environmental Protection
 
-Environmental Permitting & Counseling Section
+Division of Waste & UST Compliance and Enforcement
 
-Attention: A901 Unit
+Bureau of Hazardous Waste Compliance & Enforcement
 
-25 Market Street, P.O. Box 093
+Vehicle Registration Unit
 
-Trenton, New Jersey 08625-0093
+9 Ewing Street
+
+PO Box 420, Mail Code 09-01
+
+Trenton, NJ 08625-0420
 
 :::infoAlert 
  **After you apply:**
