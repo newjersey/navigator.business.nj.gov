@@ -1,3 +1,3 @@
-import { setup } from "jest-dynalite";
-
-setup("api/");
+// import { setup } from "jest-dynalite";
+//
+// setup("api/");

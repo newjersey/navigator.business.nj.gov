@@ -6,7 +6,8 @@ const parameterName = `/${process.env.STAGE}/feature-flag/users-migration/kill-s
 export type CONFIG_VARS =
   | "cms_alerts_sns_topic_arn"
   | CIGARETTE_CONFIG_VARS
-  | "employer_rates_base_url";
+  | "employer_rates_base_url"
+  | "config/application";
 
 export type CIGARETTE_CONFIG_VARS =
   | "cigarette_license_base_url"
@@ -30,9 +31,7 @@ export const getConfigValue = async (paramName: CONFIG_VARS): Promise<string> =>
     });
 
     const response = await ssmClient.send(command);
-    const paramValue = response.Parameter?.Value ?? "";
-
-    return paramValue;
+    return response.Parameter?.Value ?? "";
   } catch (error) {
     console.error(`Failed to read parameter ${paramName}:`, error);
     return "";
