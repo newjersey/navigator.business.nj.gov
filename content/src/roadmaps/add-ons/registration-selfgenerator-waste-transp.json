@@ -4,9 +4,9 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 10,
+      "weight": 110,
       "task": "",
-      "licenseTask": "selfgenerator-waste–transporters-reg",
+      "licenseTask": "selfgenerator-waste-transporters-reg",
       "required": true
     }
   ]

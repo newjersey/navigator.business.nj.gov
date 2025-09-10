@@ -1,8 +1,7 @@
 ---
-notesMd: ""
 header: Self-Generator Waste Transporter
-id: self-generator-waste
-displayname: self-generator-waste
+id: selfgenerator-waste-transporter
+displayname: selfgenerator-waste-transporter
 ---
 A self-generator waste transporter is a business that transports only the waste it generates. 
 

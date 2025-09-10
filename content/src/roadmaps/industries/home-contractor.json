@@ -51,12 +51,6 @@
     },
     {
       "step": 4,
-      "weight": 200,
-      "licenseTask": "haul-waste-hic",
-      "required": true
-    },
-    {
-      "step": 4,
       "weight": 99,
       "task": "manage-business-vehicles"
     }
@@ -73,8 +67,8 @@
     "canBeReseller": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "renovation, home renovation, home contractor, residential remodeler, home remodeler",
+  "additionalSearchTerms": "renovation, home renovation, home contractor, residential remodeler, home remodeler ",
   "id": "home-contractor",
-  "description": "Repairing or renovating residential or non-commercial properties",
+  "description": "Repairing or renovating residential or non-commercial properties ",
   "webflowId": "656a13623bf23c3979606d9d"
 }
