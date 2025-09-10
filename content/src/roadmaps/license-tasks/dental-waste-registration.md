@@ -13,10 +13,15 @@ agencyAdditionalContext: Bureau of Surface Water and Pretreatment Permitting
 divisionPhone: (609) 292-4860
 industryId: healthcare
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "
-:::infoAlert
- **Keep in mind:**
-If your office discharges wastewater to a septic system, contact the [Bureau of Groundwater, Residuals, and Permit Administration](https://dep.nj.gov/dwq/contact-us/#bgwrpa). They will help you find out if you are a `Significant Indirect User (SIU)|significant-indirect-user` and if you need a SIU permit. ::: If your dental office handles `amalgam waste|amalgam-waste` by placing or removing amalgam fillings, you must register for dental waste management. This allows you to get a dental amalgam certification. You must renew it every year."
+summaryDescriptionMd: >-
+  :::infoAlert
+
+  **Keep in mind:**
+  If your office discharges wastewater to a septic system, contact the [Bureau of Groundwater, Residuals, and Permit Administration](https://dep.nj.gov/dwq/contact-us/#bgwrpa). They will help you find out if you are a `Significant Indirect User (SIU)|significant-indirect-user` and if you need a SIU permit.
+
+  :::
+
+  If your dental office handles `amalgam waste|amalgam-waste` by placing or removing amalgam fillings, you must register for dental waste management. This allows you to get a dental amalgam certification. You must renew it every year.
 ---
 
 ## Application Requirements
