@@ -55,7 +55,7 @@
       "id": "dentist"
     },
     {
-      "questionText": "Does your dental office generate amalgam waste?",
+      "questionText": "Does your dental office generate `amalgalm waste|amalgam-waste`?",
       "addOnWhenYes": "dental-waste-registration",
       "id": "dental-amalgam-waste",
       "addOnWhenNo": "dental-waste-exemption"
