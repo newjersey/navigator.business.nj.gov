@@ -57,6 +57,7 @@ import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { XrayData, XrayRegistrationStatus } from "../xray";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
+import { EmployerRatesRequest, EmployerRatesResponse } from "../employerRates";
 
 export const generateFormationSubmitResponse = (
   overrides: Partial<FormationSubmitResponse>,
@@ -751,4 +752,42 @@ export const generateEmergencyTripPermitApplicationData = (
 
 export const generateNjZipCode = (): string => {
   return `0${randomIntFromInterval("7", "8")}${randomInt(3)}`;
+};
+
+export const generateEmployerRatesRequestData = (
+  overrides: Partial<EmployerRatesRequest>,
+): EmployerRatesRequest => {
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    email: `some-email-${randomInt()}`,
+    ein: `some-ein-${randomInt()}`,
+    qtr: randomInt(),
+    year: randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateEmployerRatesResponse = (
+  overrides: Partial<EmployerRatesResponse>,
+): EmployerRatesResponse => {
+  return {
+    employerUiRate: `some-employer-ui-rate-${randomInt()}`,
+    employerWfRate: `some-employer-wf-rate-${randomInt()}`,
+    employerHcRate: `some-employer-hc-rate-${randomInt()}`,
+    employerDiRate: `some-employer-di-rate-${randomInt()}`,
+    workerUiRate: `some-worker-ui-rate-${randomInt()}`,
+    workerWfRate: `some-worker-wf-rate-${randomInt()}`,
+    workerHcRate: `some-worker-hc-rate-${randomInt()}`,
+    workerDiRate: `some-worker-di-rate-${randomInt()}`,
+    workerFliRate: `some-worker-fli-rate-${randomInt()}`,
+    totalDi: `some-total-di-${randomInt()}`,
+    totalUiHcWf: `some-total-ui-hc-wf-${randomInt()}`,
+    totalFli: `some-total-fli-${randomInt()}`,
+    taxableWageBase: `some-taxable-wage-base-${randomInt()}`,
+    baseWeekAmt: `some-base-week-amt-${randomInt()}`,
+    numberOfBaseWeeks: `some-number-of-base-weeks-${randomInt()}`,
+    taxableWageBaseDiFli: `some-taxable-wage-base-di-fli-${randomInt()}`,
+    error: `some-error-${randomInt()}`,
+    ...overrides,
+  };
 };
