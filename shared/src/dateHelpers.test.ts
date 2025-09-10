@@ -154,6 +154,12 @@ describe("dateHelpers", () => {
       expect(result).toBe("01-15-2024");
     });
 
+    it("formats valid UTC date string with timezone offset", () => {
+      const utcDate = "2024-01-15T10:30:00-04:00";
+      const result = formatUTCDate(utcDate);
+      expect(result).toBe("01-15-2024");
+    });
+
     it("formats UTC date with custom formatter", () => {
       const utcDate = "2024-01-15T10:30:00Z";
       const result = formatUTCDate(utcDate, "YYYY-MM-DD");
@@ -163,18 +169,6 @@ describe("dateHelpers", () => {
     it("returns empty string for empty input", () => {
       const result = formatUTCDate("");
       expect(result).toBe("");
-    });
-
-    it("returns original string for invalid UTC format", () => {
-      const invalidDate = "2024-01-15";
-      const result = formatUTCDate(invalidDate);
-      expect(result).toBe("2024-01-15");
-    });
-
-    it("returns original string for non-UTC timezone format", () => {
-      const timezoneDate = "2024-01-15T10:30:00+05:00";
-      const result = formatUTCDate(timezoneDate);
-      expect(result).toBe("2024-01-15T10:30:00+05:00");
     });
 
     it("returns original string for completely invalid format", () => {
