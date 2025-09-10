@@ -73,15 +73,12 @@ export const formatUTCDate = (utcDateString: string, formatter: string = "MM-DD-
     return "";
   }
 
-  const utcDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
-
-  const isValidUTCFormat = utcDateRegex.test(utcDateString);
-
-  if (!isValidUTCFormat) {
+  const parsedDate = dayjs(utcDateString);
+  if (!parsedDate.isValid()) {
     return utcDateString;
   }
 
-  return dayjs(utcDateString).format(formatter);
+  return parsedDate.format(formatter);
 };
 
 export const formatDate = (date: string): string => {
