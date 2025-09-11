@@ -241,6 +241,7 @@ export const updateExistingBusinessProfilePage = ({
   taxPin,
 }: Partial<ExistingProfileData>): void => {
   cy.url().should("contain", "/dashboard");
+  cy.wait(1500);
   onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");
   cy.wait(1000);
