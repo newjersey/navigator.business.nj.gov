@@ -75,7 +75,7 @@ webflowId: 66aceed2f2985d567ecd3031
 * A copy of your Certificate of Authority to do business in New Jersey, if an out-of-state business
 * A copy of the `Certificate of Good Standing|good-standing` (for New Jersey Corporations and Limited Liability Companies)
 
-Please email the application with legible scans of all required documentation to  lru@dep.nj.gov. If you can't scan, mail the original hard copy to:
+Please email the application with legible scans of all required documentation to  lru@dep.nj.gov. If you can't scan, mail the original paper copy to:
 
 &nbsp; 
 
@@ -100,7 +100,7 @@ Trenton, NJ 08625-0420
 * After you pay, the application goes to the NJ State Police for investigation, and they will contact you for fingerprinting
 * You must [submit the A-901 Update Form](https://dep.nj.gov/wp-content/uploads/dshw/a901/a901_annual_update.pdf) every November 1st —  even if your A-901 license has not yet been approved
 * If your license is approved, you need to [apply for a Certificate of Public Convenience and Necessity (CPCN)](https://dep.nj.gov/dshw/swpl/cpcn/)
-* After you get your A-901 license and CPCN, you must apply to register as an A-901 license transporter 
+* After you get your A-901 license and CPCN, you must apply to register as an A-901 licensed transporter 
   :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
