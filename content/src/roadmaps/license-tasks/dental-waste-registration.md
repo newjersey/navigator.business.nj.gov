@@ -4,7 +4,7 @@ webflowId: 68a74f502c50a0c1dcbd0ccb
 urlSlug: dental-waste-registration
 name: Apply for Your Dental Waste Registration
 displayname: dental-waste-registration
-webflowName: N/A
+webflowName: Apply for Your Dental Waste Registration
 filename: dental-waste-registration
 callToActionLink: https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_quick_guide.pdf
 callToActionText: Apply for My Dental Waste Registration
