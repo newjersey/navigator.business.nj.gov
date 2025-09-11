@@ -46,7 +46,8 @@
   "name": "Remediation and Waste Services",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "asbestos-abatement-question"
+    "asbestos-abatement-question",
+    "waste-transporter-license-a-901"
   ],
   "displayname": "remediation-waste",
   "industryOnboardingQuestions": {
