@@ -50,7 +50,8 @@
     "well-driller",
     "vehicle-dealership-q",
     "cdl-neq",
-    "selfgenerator-transporter-registration"
+    "selfgenerator-transporter-registration",
+    "waste-transporter-license-a-901"
   ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
