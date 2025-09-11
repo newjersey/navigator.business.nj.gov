@@ -102,7 +102,7 @@ callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-
 * Details about the event, such as the type of alcohol, security plans, any alcoholic beverage licenses held by the event location, estimated age group of event attendees, etc.
 * Applicable fees paid
 
-You must apply for this permit through ABC’s online POSSE system. If you do not have an account, you will need to register first.
+You must apply for this permit through ABC’s online POSSE system. If you do not have an account, you will need to register first. The POSSE system makes sure your application is sent to the city clerk and the chief of police for signatures. Both must sign before you can get the permit.
 
 :::largeCallout{ showHeader="true" headerText="What if I don’t get a social affair permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
