@@ -1,8 +1,8 @@
 ---
 licenseName: ""
-id: selfgenerator-waste–transporters-reg
-displayname: selfgenerator-waste–transporters-reg
-urlSlug: selfgenerator-waste–transporters-reg
+id: selfgenerator-waste-transporters-reg
+displayname: selfgenerator-waste-transporters-reg
+urlSlug: selfgenerator-waste-transporters-reg
 name: Apply for Your Self-Generator Waste Transporter Registration
 webflowName: "  "
 summaryDescriptionMd: >-

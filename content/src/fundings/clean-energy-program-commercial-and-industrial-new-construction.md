@@ -1,5 +1,5 @@
 ---
-name: New Jersey’s Clean Energy Program – Commercial & Industrial New Construction
+name: New Jersey’s Clean Energy Program - Commercial & Industrial New Construction
 displayName: cinc-clean-energy
 urlSlug: njcep-cinc
 id: clean-energy-program-commercial-and-industrial-new-construction
