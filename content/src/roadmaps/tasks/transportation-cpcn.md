@@ -41,7 +41,7 @@ id: transportation-cpcn
 callToActionLink: ""
 callToActionText: ""
 agencyId: nj-motor-vehicle
-agencyAdditionalContext: Business Licensing Services Bureau – Passenger Carrier Unit
+agencyAdditionalContext: Business Licensing Services Bureau - Passenger Carrier Unit
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
 
