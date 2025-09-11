@@ -30,11 +30,27 @@ class NoSpaceControl extends Component<NoSpaceProps, NoSpaceState> {
   }
 
   isValid = (): { error?: { message?: string } } => {
-    if (this.props.value?.includes(" ")) {
+    const value = this.props.value;
+    if (value?.includes(" ")) {
       return { error: { message: "error: cannot contain whitespaces!" } };
-    } else {
-      return {};
     }
+    // Regex for various dash characters, excluding the standard hyphen-minus (U+002D).
+    // Unicode code points:
+    // \u2010: HYPHEN
+    // \u2011: NON-BREAKING HYPHEN
+    // \u2012: FIGURE DASH
+    // \u2013: EN DASH
+    // \u2014: EM DASH
+    // \u2015: HORIZONTAL BAR
+    // \u2212: MINUS SIGN
+    // \uFE58: SMALL EM DASH
+    // \uFE63: SMALL HYPHEN-MINUS
+    // \uFF0D: FULLWIDTH HYPHEN-MINUS
+    const unsupportedDashRegex = /[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/;
+    if (value && unsupportedDashRegex.test(value)) {
+      return { error: { message: "Unsupported dash type. Please use a hyphen (-) instead." } };
+    }
+    return {};
   };
 
   // NOTE: This prevents the cursor from jumping to the end of the text for
