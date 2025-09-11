@@ -127,6 +127,7 @@ export interface FormationMember extends FormationAddress {
 }
 
 export type InFormInBylaws = "IN_BYLAWS" | "IN_FORM" | undefined;
+export type HowToProceedOptions = "DIFFERENT_NAME" | "KEEP_NAME" | "CANCEL_NAME";
 
 export interface FormationFormData extends FormationAddress {
   readonly legalType: FormationLegalType;
@@ -181,6 +182,8 @@ export interface FormationFormData extends FormationAddress {
   readonly foreignDateOfFormation: string | undefined; // YYYY-MM-DD
   readonly willPracticeLaw: boolean | undefined;
   readonly isVeteranNonprofit: boolean | undefined;
+  readonly checkNameReservation: boolean;
+  readonly howToProceed: HowToProceedOptions;
 }
 
 export type FormationFields = keyof FormationFormData;
@@ -223,6 +226,8 @@ export type FormationTextField = Exclude<
   | "foreignGoodStandingFile"
   | "willPracticeLaw"
   | "isVeteranNonprofit"
+  | "checkNameReservation"
+  | "howToProceed"
 >;
 
 export const createEmptyFormationAddress = (): FormationAddress => {
@@ -317,6 +322,8 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     foreignStateOfFormation: undefined,
     willPracticeLaw: false,
     isVeteranNonprofit: undefined,
+    checkNameReservation: false,
+    howToProceed: "DIFFERENT_NAME",
   };
 };
 

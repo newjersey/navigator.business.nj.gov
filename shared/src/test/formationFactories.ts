@@ -271,6 +271,8 @@ export const generateFormationFormData = (
       : undefined,
     willPracticeLaw: isCorp ? !!(randomInt() % 2) : undefined,
     isVeteranNonprofit: isNonprofit ? !!(randomInt() % 2) : undefined,
+    checkNameReservation: false,
+    howToProceed: "DIFFERENT_NAME",
     ...overrides,
   };
 };

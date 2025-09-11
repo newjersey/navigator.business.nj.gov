@@ -27,6 +27,37 @@
       "infoCalloutFooter": "If you or whoever you choose is not able to meet the requirements, you can search the internet to find a professional registered agent service. Carefully research the registered agent to make sure they are authorized in New Jersey.",
       "manualEntryCheckboxLabel": "Can't find your ID? Enter information manually instead."
     },
+    "checkNameReservation": {
+      "header": "Check Name Reservation",
+      "didYouUseFormRadio": {
+        "label": "Did you use the [UNRR-1 form](https://www.nj.gov/treasury/revenue/dcr/pdforms/unrr1.pdf) to reserve a business name with the State of New Jersey?",
+        "option1": "No, I haven’t reserved a name (Name reservations are not needed to form a business)",
+        "option2": "Yes, I submitted the UNRR-1 form to reserve a name"
+      },
+      "alreadyReservedAlertHeader": "**If you’ve already reserved a business name, you cannot register with that business name on our online  system. You can still complete other steps on this site.**",
+      "alreadyReservedAlertInfo": "Choose how you’d like to continue.",
+      "howWouldYouLikeToProceedRadio": {
+        "label": "How would you like to proceed?",
+        "option1": "Register with a different business name (Fastest option)",
+        "option2": "Keep reserved name and mail formation paperwork (Processing time can take up to 14 days)",
+        "option3": "Cancel name reservation ($50 fee; Processing time can take up to 48 hours)"
+      },
+      "registerDifferentNameHeader": "Register with a Different Business Name",
+      "registerDifferentNameLine1": "Use a different business name for legal purposes. Once you find an available name, you can use it to form your business on this site.",
+      "registerDifferentNameLine2": "This legal name will only be used for official state registration purposes.",
+      "keepNameHeader": "Keep Reserved Name and Mail Formation Paperwork",
+      "keepNameStep1": "**Step 1:** [Download the paper form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf).",
+      "keepNameStep2": "**Step 2:** Fill out the form. Mail it and the $125 filing fee to:",
+      "keepNameStep3": "**Step 3:** When you’re done, check the “TO DO” box on this web page to mark the task complete.",
+      "keepNameAddressLine1": "_NJ DIVISION OF REVENUE & ENTERPRISE SERVICES CLIENT REGISTRATION_",
+      "keepNameAddressLine2": "_PO BOX 252_",
+      "keepNameAddressLine3": "_TRENTON, NEW JERSEY 08646-0252_",
+      "cancelNameHeader": "Cancel Name Reservation",
+      "cancelNameStep1": "**Step 1:** Go to the [Business Charter Amendment Service website](https://www.njportal.com/DOR/BusinessAmendments/) to cancel your business name reservation. There’s a $50 fee.",
+      "cancelNameStep2": "**Step 2:** Wait 24–48 hours for our system to recognize the cancellation. We recommend returning to our site frequently to check if the business name reservation is canceled. Once the business name is released, it will be available on a first come, first served basis.",
+      "cancelNameStep3": "**Step 3:** You can complete the other sections on this site (business, contacts, billing, review) while you wait on the cancellation.",
+      "cancelNameStep4": "**Step 4:** Once the business name is released, you’ll be able to enter it here and continue your registration."
+    },
     "general": {
       "helpButtonText": "Help",
       "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
@@ -56,7 +87,7 @@
       "removeSectionText": "Remove"
     },
     "intro": {
-      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nYou will need to fill out an [application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) to register if you choose to `reserve your business name.|name-reservation` Business name reservations only last six months. If you are not able to complete the online application [fill out the paper application](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf).",
+      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.",
       "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available.",
       "certificateOfGoodStandingAlert": {
         "beginning": "Before starting this task, you must:",

@@ -136,6 +136,8 @@ const formationData: FormationData = {
     incorporators: undefined,
     willPracticeLaw: false,
     isVeteranNonprofit: false,
+    checkNameReservation: false,
+    howToProceed: "DIFFERENT_NAME",
   },
   completedFilingPayment: false,
   lastVisitedPageIndex: 0,
