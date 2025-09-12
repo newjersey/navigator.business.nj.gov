@@ -1835,15 +1835,18 @@ describe("profile - starting business", () => {
     });
 
     describe("FEATURE_EMPLOYER_RATES", () => {
-      it("renders employer rates when feature flag is enabled", () => {
+      it("renders employer rates when feature flag is enabled", async () => {
         process.env.FEATURE_EMPLOYER_RATES = "true";
+        console.log("FEATURE_EMPLOYER_RATES", process.env.FEATURE_EMPLOYER_RATES);
         const business = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
           }),
         });
         renderPage({ business });
-        expect(screen.getByTestId("employer-rates-section")).toBeInTheDocument();
+        await waitFor(() => {
+          expect(screen.getByTestId("employer-rates-section")).toBeInTheDocument();
+        });
       });
     });
   });
