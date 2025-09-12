@@ -392,8 +392,20 @@ collections:
           hint: "This is the name displayed internally in CMS list.",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Title (Navigator)", name: "name", widget: "string" }
-      - { label: "Title (Webflow)", name: "webflowName", widget: "string" }
+      - {
+          label: "Title (Navigator)",
+          name: "name",
+          widget: "string",
+          required: true,
+          hint: "This is the task name displayed to users in My Account.",
+        }
+      - {
+          label: "Title (Webflow)",
+          name: "webflowName",
+          widget: "string",
+          required: true,
+          hint: "This is the name displayed to users on the Webflow site.",
+        }
       - {
           label: "Summary Description (Webflow and Navigator)",
           name: "summaryDescriptionMd",
@@ -420,12 +432,14 @@ collections:
           name: "callToActionText",
           widget: "string",
           required: false,
+          hint: "Must be supplied to display a CTA button on the Webflow site.",
         }
       - {
           label: "Call To Action Link (Webflow & Navigator)",
           name: "callToActionLink",
           widget: "string",
           required: false,
+          hint: "Must be supplied to display a CTA button on the Webflow site.",
         }
       - {
           label: "Industry (Webflow - archive)",
