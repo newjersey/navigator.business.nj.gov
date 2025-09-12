@@ -16,14 +16,15 @@ import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement } from "@/lib/utils/helpers";
 import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useState } from "react";
 
@@ -192,6 +193,8 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
   };
 
   const handleSubmit = async (): Promise<void> => {
+    analytics.event.cigarette_license.click.step_four_submit_button();
+
     setLoading(true);
 
     const isValid = validateAllFieldsWithData(cigaretteLicenseData);
@@ -199,6 +202,8 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
 
     if (!isValid) {
       setLoading(false);
+      analytics.event.cigarette_license.submit.validation_error();
+
       if (props.errorAlertRef.current) {
         scrollToTopOfElement(props.errorAlertRef.current, { focusElement: true });
       }
@@ -222,6 +227,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
 
       if (cigaretteLicenseResponse && typeof cigaretteLicenseResponse === "object") {
         if (cigaretteLicenseResponse.paymentInfo?.errorResult) {
+          analytics.event.cigarette_license.submit.service_error();
           props.setSubmissionError("UNAVAILABLE");
           setLoading(false);
           setTimeout(() => {
@@ -256,6 +262,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
       }
     } catch {
       setLoading(false);
+      analytics.event.cigarette_license.submit.service_error();
       props.setSubmissionError("UNAVAILABLE");
       setTimeout(() => {
         if (props.errorAlertRef.current) {
@@ -465,7 +472,13 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
       <CtaContainer>
         <ActionBarLayout>
           <LiveChatHelpButton />
-          <SecondaryButton isColor="primary" onClick={() => props.setStepIndex(2)}>
+          <SecondaryButton
+            isColor="primary"
+            onClick={() => {
+              analytics.event.cigarette_license.click.switch_to_step_three();
+              props.setStepIndex(2);
+            }}
+          >
             {Config.cigaretteLicenseStep4.backButtonText}
           </SecondaryButton>
           <PrimaryButton isLoading={loading} isColor="primary" onClick={handleSubmit}>
