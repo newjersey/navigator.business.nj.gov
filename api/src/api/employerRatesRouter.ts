@@ -15,7 +15,7 @@ type EmployerRatesRequestBody = {
 export const employerRatesRouterFactory = (
   employerRatesClient: EmployerRatesClient,
   logger: LogWriterType,
-) => {
+): Router => {
   const router = Router();
 
   router.post(

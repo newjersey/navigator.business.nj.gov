@@ -10,9 +10,9 @@ import { NameAvailability, NameAvailabilityResponse } from "@shared/businessName
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import {
+  EmailConfirmationResponse,
   GetOrderByTokenResponse,
   PreparePaymentResponse,
-  EmailConfirmationResponse,
 } from "@shared/cigaretteLicense";
 import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
@@ -40,6 +40,7 @@ import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFilin
 import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
+import { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
 
 export interface DatabaseClient {
   migrateOutdatedVersionUsers: () => Promise<{
@@ -140,6 +141,10 @@ export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string) => Promise<LicenseEntity[]>;
   health: HealthCheckMethod;
+}
+
+export interface EmployerRatesClient {
+  getEmployerRates: (employerRatesRequest: EmployerRatesRequest) => Promise<EmployerRatesResponse>;
 }
 
 export interface UserTestingClient {
