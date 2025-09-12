@@ -12,20 +12,20 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { getInitialTaxId } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { ContactInformation } from "@/components/tasks/cigarette-license/fields/ContactInformation";
-import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
+import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -182,7 +182,10 @@ export const LicenseeInfo = (props: Props): ReactElement => {
           <PrimaryButton
             isColor="primary"
             onClick={() => {
+              analytics.event.cigarette_license.click.switch_to_step_three();
+
               props.setStepIndex(2);
+
               saveCigaretteLicenseData();
             }}
             dataTestId="cta-primary-1"

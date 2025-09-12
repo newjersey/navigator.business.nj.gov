@@ -5,6 +5,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
 
 import { CigaretteSalesStartDate } from "@/components/tasks/cigarette-license/fields/CigaretteSalesStartDate";
@@ -39,6 +40,7 @@ export const SalesInfo = (props: Props): ReactElement => {
           <PrimaryButton
             isColor="primary"
             onClick={() => {
+              analytics.event.cigarette_license.click.switch_to_step_four();
               props.setStepIndex(3);
               saveCigaretteLicenseData();
             }}

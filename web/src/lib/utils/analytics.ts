@@ -2132,6 +2132,63 @@ export default {
         },
       },
     },
+    // Move this to the right place in alphabet
+    cigarette_license: {
+      click: {
+        switch_to_step_one: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_1",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_one",
+          });
+        },
+        switch_to_step_two: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_2",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_two",
+          });
+        },
+        switch_to_step_three: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_3",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_three",
+          });
+        },
+        switch_to_step_four: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_4",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_four",
+          });
+        },
+      },
+      submit: {
+        validation_error: () => {
+          eventRunner.track({
+            event: "form_validation",
+            legacy_event_category: "cigarette_license_task_validation_error",
+            legacy_event_action: "submit",
+            legacy_event_label: "cigarette_submission_error",
+          });
+        },
+      },
+      appears: {
+        validation_success: () => {
+          eventRunner.track({
+            event: "form_validation",
+            legacy_event_category: "cigarette_license_task_validation_success",
+            legacy_event_action: "appear",
+            legacy_event_label: "cigarette_submission_success_screen",
+          });
+        },
+      },
+    },
     tax_registration_snackbar: {
       submit: {
         show_tax_registration_success_snackbar: () => {
