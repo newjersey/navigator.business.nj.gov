@@ -7,6 +7,7 @@ import { WithStatefulUserData, currentBusiness } from "@/test/mock/withStatefulU
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 import { QUERIES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import {
   generateBusiness,
@@ -35,6 +36,35 @@ const mockApi = {
   >,
 };
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      cigarette_license: {
+        click: {
+          switch_to_step_one: jest.fn(),
+          switch_to_step_two: jest.fn(),
+          switch_to_step_three: jest.fn(),
+          switch_to_step_four: jest.fn(),
+          step_one_continue_button: jest.fn(),
+          step_two_continue_button: jest.fn(),
+          step_three_continue_button: jest.fn(),
+          step_four_submit_button: jest.fn(),
+        },
+        submit: {
+          validation_error: jest.fn(),
+          service_error: jest.fn(),
+        },
+        appears: { validation_success: jest.fn() },
+      },
+    },
+  };
+}
 
 describe("<CigaretteLicense />", () => {
   beforeEach(() => {
@@ -69,6 +99,9 @@ describe("<CigaretteLicense />", () => {
       const backButton = screen.getByText(Config.cigaretteLicenseStep2.backButtonText);
       await userEvent.click(backButton);
 
+      expect(mockAnalytics.event.cigarette_license.click.switch_to_step_one).toHaveBeenCalledTimes(
+        1,
+      );
       expect(screen.getByRole("tab", { name: /General Info/ })).toHaveAttribute(
         "aria-selected",
         "true",
@@ -83,6 +116,13 @@ describe("<CigaretteLicense />", () => {
       for (let stepIndex = 0; stepIndex < stepsLength; stepIndex++) {
         const tab = screen.getByTestId(`stepper-${stepIndex}`);
         await userEvent.click(tab);
+        const switchToStepAnalyticsEvents = [
+          mockAnalytics.event.cigarette_license.click.switch_to_step_one,
+          mockAnalytics.event.cigarette_license.click.switch_to_step_two,
+          mockAnalytics.event.cigarette_license.click.switch_to_step_three,
+          mockAnalytics.event.cigarette_license.click.switch_to_step_four,
+        ];
+        expect(switchToStepAnalyticsEvents[stepIndex]).toHaveBeenCalledTimes(1);
         expect(tab).toHaveAttribute("aria-selected", "true");
       }
     });
@@ -185,6 +225,10 @@ describe("<CigaretteLicense />", () => {
       const submitButton = screen.getByRole("button", { name: /submit/i });
       await userEvent.click(submitButton);
 
+      expect(
+        mockAnalytics.event.cigarette_license.click.step_four_submit_button,
+      ).toHaveBeenCalledTimes(1);
+
       await waitFor(() => {
         expect(mockApi.postUserData).toHaveBeenCalled();
       });
@@ -215,7 +259,7 @@ describe("<CigaretteLicense />", () => {
       });
 
       expect(screen.getByText("This service is temporarily unavailable")).toBeInTheDocument();
-
+      expect(mockAnalytics.event.cigarette_license.submit.service_error).toHaveBeenCalledTimes(1);
       expect(mockPush).not.toHaveBeenCalled();
     });
 
@@ -247,7 +291,7 @@ describe("<CigaretteLicense />", () => {
       });
 
       expect(screen.getByText("This service is temporarily unavailable")).toBeInTheDocument();
-
+      expect(mockAnalytics.event.cigarette_license.submit.service_error).toHaveBeenCalledTimes(1);
       await waitFor(() => {
         expect(mockPush).not.toHaveBeenCalled();
       });
@@ -427,6 +471,10 @@ describe("<CigaretteLicense />", () => {
       await act(async () => {
         await renderComponent(business);
       });
+
+      expect(
+        mockAnalytics.event.cigarette_license.appears.validation_success,
+      ).toHaveBeenCalledTimes(1);
 
       await waitFor(() => {
         expect(screen.queryByRole("tablist")).not.toBeInTheDocument();

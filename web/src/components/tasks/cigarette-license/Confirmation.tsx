@@ -1,21 +1,21 @@
 import { Content } from "@/components/Content";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { Business } from "@businessnjgovnavigator/shared/userData";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
-import analytics from "@/lib/utils/analytics";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
+import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
+import * as api from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
-import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { useEffect, useRef, useState, ReactElement } from "react";
+import analytics from "@/lib/utils/analytics";
 import {
   CigaretteLicenseData,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import * as api from "@/lib/api-client/apiClient";
+import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { Business } from "@businessnjgovnavigator/shared/userData";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   business: Business;
@@ -114,6 +114,7 @@ export const ConfirmationPage = (props: Props): ReactElement => {
   }
 
   if (status === "CONFIRMED") {
+    analytics.event.cigarette_license.appears.validation_success();
     return (
       <>
         <div className="maxw-tablet margin-x-auto">
