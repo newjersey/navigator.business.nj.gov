@@ -22,19 +22,22 @@ export const CigaretteSalesStartDate = (props: Props): ReactElement => {
     DataFormErrorMapContext,
   );
 
-  const performValidation = (salesInfoStartDate?: string): void => {
-    setIsValid(!!salesInfoStartDate && salesInfoStartDate !== "Invalid Date");
+  const updateFormValidation = (salesInfoStartDate?: string): void => {
+    setIsValid(!!salesInfoStartDate);
   };
 
   const onChange = (newValue: DateObject | null): void => {
+    const isDateValid = newValue && newValue.isValid();
+    const newDateValue = isDateValid ? newValue.toISOString() : "";
+
     setCigaretteLicenseData((cigaretteLicenseData) => {
       return {
         ...cigaretteLicenseData,
-        salesInfoStartDate: newValue ? newValue.format() : "",
+        salesInfoStartDate: newDateValue,
       };
     });
 
-    performValidation(newValue?.format());
+    updateFormValidation(newDateValue);
   };
 
   const renderInput = (params: TextFieldProps): JSX.Element => (
@@ -54,7 +57,7 @@ export const CigaretteSalesStartDate = (props: Props): ReactElement => {
         style={{ maxWidth: 450 }}
         value={cigaretteLicenseData.salesInfoStartDate}
         onBlur={() => {
-          performValidation(cigaretteLicenseData.salesInfoStartDate);
+          updateFormValidation(cigaretteLicenseData.salesInfoStartDate);
         }}
         helperText={
           (props.CMS_ONLY_show_error || isFormFieldInvalid) &&
