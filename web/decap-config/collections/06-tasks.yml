@@ -544,6 +544,7 @@ collections:
           label: "Summary Description (Webflow and Navigator)",
           name: "summaryDescriptionMd",
           widget: "markdown",
+          required: false,
         }
       - {
           label: "Detailed Description (Navigator)",
