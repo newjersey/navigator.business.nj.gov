@@ -1,14 +1,14 @@
 ---
+id: cable-tv-company-public
 displayname: cable-tv-company-public
-id: "cable-tv-company-public"
-webflowId: "5f7728e9f17efb6651eefb30"
-urlSlug: "cable-tv-company-public"
-webflowName: "Cable TV Company (Public)"
-callToActionLink: "http://state.nj.us/bpu/about/divisions/cable/"
-callToActionText: ""
+urlSlug: cable-tv-company-public
+webflowName: Cable TV Company (Public)
 agencyId: public-utilities
-agencyAdditionalContext: "State Franchising Authority, Office of Cable TV"
-divisionPhone: "(973) 648-2670"
-webflowIndustry: "Cable TV"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: State Franchising Authority, Office of Cable TV
+callToActionText: Learn About the Office of Cable Television and Telecommunications
+callToActionLink: http://state.nj.us/bpu/about/divisions/cable/
+webflowIndustry: Cable TV
+divisionPhone: (973) 648-2670
+webflowId: 5f7728e9f17efb6651eefb30
+licenseCertificationClassification: LICENSE
 ---
