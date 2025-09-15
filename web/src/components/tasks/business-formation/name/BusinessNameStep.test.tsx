@@ -17,6 +17,7 @@ import {
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -236,6 +237,93 @@ describe("Formation - BusinessNameStep", () => {
       expect(
         screen.getByText(Config.formation.fields.businessName.errorInlineEmpty),
       ).toBeInTheDocument();
+    });
+  });
+
+  describe("check name reservation sections", () => {
+    it("if checkNameReservation is 'NO', it shows normal business name section", async () => {
+      getPageHelper();
+
+      const noButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option1,
+      });
+      await userEvent.click(noButton);
+
+      const checkAvailableNamesSection = screen.getByText(
+        Config.formation.fields.businessName.header,
+      );
+      expect(checkAvailableNamesSection).toBeInTheDocument();
+    });
+
+    it("if checkNameReservation is 'YES', it shows How Would You Like to Proceed Section", async () => {
+      getPageHelper();
+
+      const yesButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(yesButton);
+
+      const howWouldYouLikeToProceed = screen.getByText(
+        Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.label,
+      );
+      expect(howWouldYouLikeToProceed).toBeInTheDocument();
+    });
+
+    it("if checkNameReservation is 'YES' and howWouldYouLikeToProceed is 'DIFFERENT_NAME' it shows Register With Differnt Name Section", async () => {
+      getPageHelper();
+
+      const noButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(noButton);
+
+      const differentNameButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option1,
+      });
+      await userEvent.click(differentNameButton);
+
+      const registerDifferentNameSection = screen.getByText(
+        Config.formation.checkNameReservation.registerDifferentNameHeader,
+      );
+      expect(registerDifferentNameSection).toBeInTheDocument();
+    });
+
+    it("if checkNameReservation is 'YES' and howWouldYouLikeToProceed is 'KEEP_NAME' it shows Keep Reserved Name Section", async () => {
+      getPageHelper();
+
+      const noButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(noButton);
+
+      const keepNameButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option2,
+      });
+      await userEvent.click(keepNameButton);
+
+      const keepNameSection = screen.getByText(
+        Config.formation.checkNameReservation.keepNameHeader,
+      );
+      expect(keepNameSection).toBeInTheDocument();
+    });
+
+    it("if checkNameReservation is 'YES' and howWouldYouLikeToProceed is 'CANCEL_NAME' it shows Cancel Name Section", async () => {
+      getPageHelper();
+
+      const noButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(noButton);
+
+      const cancelNameButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option3,
+      });
+      await userEvent.click(cancelNameButton);
+
+      const cancelNameSection = screen.getByText(
+        Config.formation.checkNameReservation.cancelNameHeader,
+      );
+      expect(cancelNameSection).toBeInTheDocument();
     });
   });
 
