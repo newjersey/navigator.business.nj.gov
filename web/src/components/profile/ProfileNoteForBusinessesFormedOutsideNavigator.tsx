@@ -1,4 +1,4 @@
-import { Alert } from "@/components/njwds-extended/Alert";
+import { Content } from "@/components/Content";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { shouldShowDisclaimerForProfileNotSubmittingData } from "@/lib/domain-logic/shouldShowDisclaimerForProfileNotSubmittingData";
@@ -18,8 +18,6 @@ export const ProfileNoteDisclaimerForSubmittingData = (props: Props): ReactEleme
   }
 
   return (
-    <Alert variant="warning">
-      {Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}
-    </Alert>
+    <Content>{Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}</Content>
   );
 };

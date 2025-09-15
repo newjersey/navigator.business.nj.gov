@@ -439,13 +439,16 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
-        expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
-        ).toBeInTheDocument();
+        const calloutText =
+          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+            /headerText="([^"]*)"/,
+          )?.[1];
+        expect(calloutText).toBeDefined();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
 
-    it("shows the Note Alert for OWNING businesses and authenticated", () => {
+    it("shows the callout for OWNING businesses and authenticated", () => {
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
           completedFilingPayment: true,
@@ -455,13 +458,16 @@ describe("profile - shared", () => {
         }),
       });
       renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-      expect(
-        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
-      ).toBeInTheDocument();
+      const calloutText =
+        Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+          /headerText="([^"]*)"/,
+        )?.[1];
+      expect(calloutText).toBeDefined();
+      expect(screen.getByText(calloutText!)).toBeInTheDocument();
     });
 
     it.each(nonOwningPersonas)(
-      "does NOT show Note Alert for %s business that paid via the Navigator and are authenticated",
+      "does NOT show Note Callout for %s business that paid via the Navigator and are authenticated",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -473,11 +479,12 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        expect(
-          screen.queryByText(
-            Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator,
-          ),
-        ).not.toBeInTheDocument();
+        const calloutText =
+          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+            /headerText="([^"]*)"/,
+          )?.[1];
+        expect(calloutText).toBeDefined();
+        expect(screen.queryByText(calloutText!)).not.toBeInTheDocument();
       },
     );
 
@@ -494,11 +501,12 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        expect(
-          screen.queryByText(
-            Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator,
-          ),
-        ).not.toBeInTheDocument();
+        const calloutText =
+          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+            /headerText="([^"]*)"/,
+          )?.[1];
+        expect(calloutText).toBeDefined();
+        expect(screen.queryByText(calloutText!)).not.toBeInTheDocument();
       },
     );
 
@@ -515,9 +523,12 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
-        ).toBeInTheDocument();
+        const calloutText =
+          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+            /headerText="([^"]*)"/,
+          )?.[1];
+        expect(calloutText).toBeDefined();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
   });
