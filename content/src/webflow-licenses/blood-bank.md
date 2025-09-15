@@ -1,12 +1,13 @@
 ---
+id: blood-bank
 displayname: blood-bank
-id: "blood-bank"
-webflowId: "640b83fe13ec834decff8f24"
-urlSlug: "blood-bank"
-webflowName: "Blood Bank"
-callToActionLink: "http://www.communitybloodservices.org/"
-agencyAdditionalContext: "Community Blood Services"
-divisionPhone: "(201) 444-3900"
-webflowIndustry: "Blood Bank"
-licenseCertificationClassification: "FOR DONATING BLOOD"
+urlSlug: blood-bank
+webflowName: Blood Bank
+agencyAdditionalContext: Community Blood Services
+callToActionText: Learn About Community Blood Services
+callToActionLink: http://www.communitybloodservices.org/
+webflowIndustry: Blood Bank
+licenseCertificationClassification: FOR DONATING BLOOD
+divisionPhone: (201) 444-3900
+webflowId: 640b83fe13ec834decff8f24
 ---
