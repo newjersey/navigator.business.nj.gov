@@ -1,13 +1,13 @@
 ---
+id: advertising-regular
 displayname: advertising-regular
-id: "advertising-regular"
-webflowId: "5f7728de5adbb97443052cf5"
-urlSlug: "advertising-regular"
-webflowName: "Advertising (Regular)"
-callToActionLink: "http://ftc.gov/tips-advice/business-center/advertising-and-marketing"
-callToActionText: ""
-agencyAdditionalContext: "Federal Trade Commission"
+urlSlug: advertising-regular
+webflowName: Advertising (Regular)
+agencyAdditionalContext: Federal Trade Commission
+callToActionText: Learn About Advertising Requirements
+callToActionLink: http://ftc.gov/tips-advice/business-center/advertising-and-marketing
+webflowIndustry: Advertising
+licenseCertificationClassification: REGULATIONS
 divisionPhone: ""
-webflowIndustry: "Advertising"
-licenseCertificationClassification: "REGULATIONS"
+webflowId: 5f7728de5adbb97443052cf5
 ---
