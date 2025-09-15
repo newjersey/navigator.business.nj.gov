@@ -1,14 +1,14 @@
 ---
+id: bonding-company
 displayname: bonding-company
-id: "bonding-company"
-webflowId: "5f7729698075e831d2a8d96f"
-urlSlug: "bonding-company"
-webflowName: "Bonding Company"
-callToActionLink: "http://nj.gov/treasury/revenue/filecollagbond.shtml"
-callToActionText: ""
+urlSlug: bonding-company
+webflowName: Bonding Company
 agencyId: nj-revenue-enterprise-services
-agencyAdditionalContext: "Business Services Bureau Corporate"
-divisionPhone: "(609) 292-9292"
-webflowIndustry: "Bonding Company"
-licenseCertificationClassification: "CERTIFICATE OF AUTHORITY"
+agencyAdditionalContext: Business Services Bureau Corporate
+callToActionText: Learn About Collection Agency Bonds
+callToActionLink: http://nj.gov/treasury/revenue/filecollagbond.shtml
+webflowIndustry: Bonding Company
+divisionPhone: (609) 292-9292
+webflowId: 5f7729698075e831d2a8d96f
+licenseCertificationClassification: CERTIFICATE OF AUTHORITY
 ---
