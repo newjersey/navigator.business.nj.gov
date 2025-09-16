@@ -1,14 +1,14 @@
 ---
+id: electrical-inspector-ucc
 displayname: electrical-inspector-ucc
-id: "electrical-inspector-ucc"
-webflowId: "5f7729869491d50131036b59"
-urlSlug: "electrical-inspector-ucc"
-webflowName: "Electrical Inspector (UCC)"
-callToActionLink: "http://nj.gov/dca/divisions/codes/offices/licensing_cont_ed.html"
-callToActionText: ""
+urlSlug: electrical-inspector-ucc
+webflowName: Electrical Inspector (UCC)
 agencyId: nj-community-affairs
-agencyAdditionalContext: "Bureau of Code Services, Licensing Unit"
-divisionPhone: "(609) 984-7834"
-webflowIndustry: "Electrical Inspector"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Bureau of Code Services, Licensing Unit
+callToActionText: ""
+callToActionLink: Train To Be an Electrical Inspector
+webflowIndustry: Electrical Inspector
+divisionPhone: (609) 984-7834
+webflowId: 5f7729869491d50131036b59
+licenseCertificationClassification: LICENSE
 ---
