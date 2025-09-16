@@ -6,7 +6,7 @@ webflowName: Certified Environmental Laboratory (Medical)
 agencyId: nj-health
 agencyAdditionalContext: Division of Health Facilities Evaluation and Licensing,
   Clinical Laboratory Improvement Service
-callToActionText: Learn About Certified Labs
+callToActionText: Learn About the Clinical Laboratory Licensing Program
 callToActionLink: https://nj.gov/health/phel/clinical-lab-imp-services/
 webflowIndustry: Certified Environmental Laboratory
 divisionPhone: (609) 292-3950
