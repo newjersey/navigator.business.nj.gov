@@ -96,6 +96,7 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { EmployerRates } from "@/components/profile/EmployerRates";
 
 interface Props {
   municipalities: Municipality[];
@@ -127,6 +128,8 @@ const ProfilePage = (props: Props): ReactElement => {
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
   const profileAlertRef = useRef<HTMLDivElement>(null);
+
+  const FEATURE_EMPLOYER_RATES_ENABLED = process.env.FEATURE_EMPLOYER_RATES === "true";
 
   const getInitTab = (): ProfileTabs => {
     if (props.CMS_ONLY_tab) return props.CMS_ONLY_tab;
@@ -523,9 +526,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
-
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-
         <ProfileField
           fieldName="businessName"
           locked={shouldLockFormationFields}
@@ -534,7 +535,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <BusinessName />
         </ProfileField>
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -542,25 +542,20 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ResponsibleOwnerName />
         </ProfileField>
-
         <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
           <TradeName />
         </ProfileField>
-
         <ProfileAddress />
-
         <ProfileField fieldName="industryId">
           <Industry />
           <ProfileLinkToPermitsTabCallout permitsRef={permitsRef} setProfileTab={setProfileTab} />
         </ProfileField>
-
         <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeBusiness}
         >
           <Sectors />
         </ProfileField>
-
         <ProfileField
           fieldName="legalStructureId"
           noLabel
@@ -571,7 +566,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <BusinessStructure />
         </ProfileField>
-
         <ProfileField
           fieldName="raffleBingoGames"
           isVisible={displayRaffleBingoGameQuestion()}
@@ -581,7 +575,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <RaffleBingoGamesQuestion />
         </ProfileField>
-
         <ProfileField
           fieldName="dateOfFormation"
           isVisible={!!business?.profileData.dateOfFormation}
@@ -590,8 +583,9 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <DateOfFormation futureAllowed />
         </ProfileField>
-
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
+
+        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
       </div>
     ),
     permits: (

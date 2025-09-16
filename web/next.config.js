@@ -40,6 +40,7 @@ module.exports = withBundleAnalyzer({
     USE_BASIC_AUTH: process.env.USE_BASIC_AUTH,
     USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH:
       process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH ?? "false",
+    FEATURE_EMPLOYER_RATES: process.env.FEATURE_EMPLOYER_RATES ?? "false",
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
