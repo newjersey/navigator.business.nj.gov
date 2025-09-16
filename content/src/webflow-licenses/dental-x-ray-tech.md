@@ -1,14 +1,14 @@
 ---
+id: dental-x-ray-tech
 displayname: dental-x-ray-tech
-id: "dental-x-ray-tech"
-webflowId: "5f7728fc1a08091cedbb2ec6"
-urlSlug: "dental-x-ray-tech"
-webflowName: "Dental X-Ray Tech"
-callToActionLink: "http://state.nj.us/dep/rpp/"
-callToActionText: ""
+urlSlug: dental-x-ray-tech
+webflowName: Dental X-Ray Tech
 agencyId: njdep
-agencyAdditionalContext: "Bureau of Radiologic Health"
-divisionPhone: "(609) 984-5890"
-webflowIndustry: "Dental X-ray"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Bureau of Radiologic Health
+callToActionText: Become a Dental X-Ray Tech
+callToActionLink: http://state.nj.us/dep/rpp/
+webflowIndustry: Dental X-ray
+divisionPhone: (609) 984-5890
+webflowId: 5f7728fc1a08091cedbb2ec6
+licenseCertificationClassification: LICENSE
 ---
