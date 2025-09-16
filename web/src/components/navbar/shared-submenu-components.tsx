@@ -137,9 +137,9 @@ export const ProfileMenuItem = (props: {
 
   const userData = props.userData;
   if (!userData) return [];
+  const hasMultipleBusinesses = Object.keys(userData.businesses).length > 1;
   return orderBusinessIdsByDateCreated(userData).flatMap((businessId, i) => {
     const isCurrent = businessId === userData.currentBusinessId;
-
     const businessMenuItems = [
       NavMenuItem({
         onClick: async (): Promise<void> => {
@@ -159,18 +159,54 @@ export const ProfileMenuItem = (props: {
     ];
 
     if (isCurrent) {
-      const profileLink = NavMenuItem({
-        onClick: (): void => {
-          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-          router && router.push(ROUTES.profile);
-        },
-        selected: isProfileSelected && isCurrent,
-        itemText: Config.navigationDefaults.profileLinkText,
-        key: `profile-title-${businessId}`,
-        dataTestid: `profile-link`,
-        className: `profile-menu-item ${isCurrent ? "current" : ""}`,
-      });
-      businessMenuItems.push(profileLink);
+      let profileLink;
+      if (process.env.FEATURE_SHOW_REMOVE_BUSINESS === "true") {
+        profileLink = NavMenuItem({
+          onClick: (): void => {
+            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+            router && router.push(ROUTES.profile);
+          },
+          selected: isProfileSelected && isCurrent,
+          icon: <ButtonIcon svgFilename="arrow-forward" />,
+          itemText: Config.navigationDefaults.backToProfileLinkText,
+          key: `profile-title-${businessId}`,
+          dataTestid: `profile-link`,
+          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
+          reducedLeftMargin: true,
+          padLeft: true,
+        });
+        businessMenuItems.push(profileLink);
+
+        if (hasMultipleBusinesses) {
+          const removeBusinessLink = NavMenuItem({
+            onClick: (): void => {
+              router && router.push(ROUTES.profile);
+            },
+            selected: isProfileSelected && isCurrent,
+            icon: <ButtonIcon svgFilename="delete-outline" />,
+            itemText: Config.navigationDefaults.removeBusinessLinkText,
+            key: `remove-business-${businessId}`,
+            dataTestid: `remove-business-link`,
+            className: `profile-menu-item ${isCurrent ? "current" : ""}`,
+            reducedLeftMargin: true,
+            padLeft: true,
+          });
+          businessMenuItems.push(removeBusinessLink);
+        }
+      } else {
+        profileLink = NavMenuItem({
+          onClick: (): void => {
+            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+            router && router.push(ROUTES.profile);
+          },
+          selected: isProfileSelected && isCurrent,
+          itemText: Config.navigationDefaults.profileLinkText,
+          key: `profile-title-${businessId}`,
+          dataTestid: `profile-link`,
+          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
+        });
+        businessMenuItems.push(profileLink);
+      }
     }
 
     businessMenuItems.push(<hr className="margin-0 hr-2px" key={`profile-break-${i}`} />);

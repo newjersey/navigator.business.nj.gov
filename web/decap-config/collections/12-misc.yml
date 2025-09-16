@@ -3124,6 +3124,8 @@ collections:
                   widget: string,
                 }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
+              - { label: Back To Profile Link Text, name: backToProfileLinkText, widget: string }
+              - { label: Remove Business Text, name: removeBusinessLinkText, widget: string }
               - { label: NavBar Guest Business text, name: navBarGuestBusinessText, widget: string }
               - { label: NavBar Guest Account text, name: navBarGuestAccountText, widget: string }
               - {
