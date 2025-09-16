@@ -85,6 +85,8 @@ import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
+import { employerRatesRouterFactory } from "@api/employerRatesRouter";
+import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
 
 const app = setupExpress();
 
@@ -293,6 +295,8 @@ const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
   ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
   : process.env.GOV2GO_REGISTRATION_BASE_URL || "";
 
+const EmployerRatesClient = WebserviceEmployerRatesClient(logger);
+
 const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
@@ -484,6 +488,7 @@ app.use(
   taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSTaxIDEncryptionClient, logger),
 );
 app.use("/api", decryptionRouterFactory(AWSTaxIDEncryptionClient, logger));
+app.use("/api", employerRatesRouterFactory(EmployerRatesClient, logger));
 app.use(
   "/health",
   healthCheckRouterFactory(

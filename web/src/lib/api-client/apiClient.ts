@@ -4,6 +4,8 @@ import {
   ElevatorSafetyRegistrationSummary,
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
+  EmployerRatesRequest,
+  EmployerRatesResponse,
   FacilityDetails,
   getCurrentBusiness,
   HousingRegistrationRequestLookupResponse,
@@ -124,6 +126,13 @@ export const postTaxFilingsLookup = (props: {
   encryptedTaxId: string;
 }): Promise<UserData> => {
   return post(`/taxFilings/lookup`, props);
+};
+
+export const checkEmployerRates = (props: {
+  employerRates: EmployerRatesRequest;
+  userData: UserData;
+}): Promise<EmployerRatesResponse> => {
+  return post(`/checkEmployerRates`, props);
 };
 
 export const decryptValue = (props: { encryptedValue: string }): Promise<string> => {

@@ -7,6 +7,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import axios from "axios";
 import {
+  checkEmployerRates,
   checkLicenseStatus,
   get,
   getUserData,
@@ -18,6 +19,10 @@ import {
   postUserData,
   postUserEmailCheck,
 } from "./apiClient";
+import {
+  generateEmployerRatesRequestData,
+  generateEmployerRatesResponse,
+} from "@businessnjgovnavigator/shared";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -131,5 +136,24 @@ describe("apiClient", () => {
     expect(mockAxios.post).toHaveBeenCalledWith("/api/postTaxClearanceCertificate", userData, {
       headers: { Authorization: "Bearer some-token" },
     });
+  });
+
+  it("gets employer rates request", async () => {
+    const employerRatesRequest = generateEmployerRatesRequestData({});
+    const userData = generateUserData({});
+    const employerRatesResponse = generateEmployerRatesResponse({});
+    mockAxios.post.mockResolvedValue({ data: employerRatesResponse });
+
+    expect(await checkEmployerRates({ employerRates: employerRatesRequest, userData })).toEqual(
+      employerRatesResponse,
+    );
+
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/checkEmployerRates",
+      { employerRates: employerRatesRequest, userData },
+      {
+        headers: { Authorization: "Bearer some-token" },
+      },
+    );
   });
 });
