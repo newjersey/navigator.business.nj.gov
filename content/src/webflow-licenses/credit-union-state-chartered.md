@@ -1,14 +1,14 @@
 ---
+id: credit-union-state-chartered
 displayname: credit-union-state-chartered
-id: "credit-union-state-chartered"
-webflowId: "5f772924a536a3b4e2c0b340"
-urlSlug: "credit-union-state-chartered"
-webflowName: "Credit Union-State Chartered"
-callToActionLink: "http://state.nj.us/dobi/division_banking/depositories/cdcus.htm"
-callToActionText: ""
+urlSlug: credit-union-state-chartered
+webflowName: Credit Union-State Chartered
 agencyId: nj-banking-insurance
 agencyAdditionalContext: ""
+callToActionText: Learn About Credit Unions
+callToActionLink: http://state.nj.us/dobi/division_banking/depositories/cdcus.htm
+webflowIndustry: Credit Union
 divisionPhone: ""
-webflowIndustry: "Credit Union"
+webflowId: 5f772924a536a3b4e2c0b340
 licenseCertificationClassification: ""
 ---
