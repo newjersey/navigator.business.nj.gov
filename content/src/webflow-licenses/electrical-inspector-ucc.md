@@ -5,8 +5,8 @@ urlSlug: electrical-inspector-ucc
 webflowName: Electrical Inspector (UCC)
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Code Services, Licensing Unit
-callToActionText: ""
-callToActionLink: Train To Be an Electrical Inspector
+callToActionText: Train To Be an Electrical Inspector
+callToActionLink: https://mycareer.nj.gov/training/25748
 webflowIndustry: Electrical Inspector
 divisionPhone: (609) 984-7834
 webflowId: 5f7729869491d50131036b59
