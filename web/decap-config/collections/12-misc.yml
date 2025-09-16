@@ -2839,7 +2839,7 @@ collections:
                   - {
                       label: Note for Businesses Formed Outside Navigator,
                       name: noteForBusinessesFormedOutsideNavigator,
-                      widget: string,
+                      widget: markdown,
                     }
                   - {
                       label: Annual Report Deadline Header Text,
