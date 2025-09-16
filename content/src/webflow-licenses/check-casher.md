@@ -1,14 +1,14 @@
 ---
+id: check-casher
 displayname: check-casher
-id: "check-casher"
-webflowId: "5f77292428e855a1071958c1"
-urlSlug: "check-casher"
-webflowName: "Check Casher"
-callToActionLink: "http://state.nj.us/dobi/proposed/pn05_089.pdf"
-callToActionText: ""
+urlSlug: check-casher
+webflowName: Check Casher
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Office of Consumer Finance, License Services"
-divisionPhone: "(609) 292-7272"
-webflowIndustry: "Check Cashier"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Office of Consumer Finance, License Services
+callToActionText: Apply for a Check Casher License
+callToActionLink: https://www.nj.gov/dobi/banklicensing/checkcasher.html
+webflowIndustry: Check Cashier
+divisionPhone: (609) 292-7272
+webflowId: 5f77292428e855a1071958c1
+licenseCertificationClassification: LICENSE
 ---
