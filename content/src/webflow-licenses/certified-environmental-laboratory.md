@@ -1,14 +1,14 @@
 ---
+id: certified-environmental-laboratory
 displayname: certified-environmental-laboratory
-id: "certified-environmental-laboratory"
-webflowId: "5f7728fbf17efb302ceefb31"
-urlSlug: "certified-environmental-laboratory"
-webflowName: "Certified Environmental Laboratory"
-callToActionLink: "http://nj.gov/dep/enforcement/oqa/certlabs.htm"
-callToActionText: ""
+urlSlug: certified-environmental-laboratory
+webflowName: Certified Environmental Laboratory
 agencyId: njdep
-agencyAdditionalContext: "Office of Quality Assurance"
-divisionPhone: "(609) 292-3950"
-webflowIndustry: "Certified Environmental Laboratory"
-licenseCertificationClassification: "CERTIFICATE"
+agencyAdditionalContext: Office of Quality Assurance
+callToActionText: Learn About Certified Labs
+callToActionLink: http://nj.gov/dep/enforcement/oqa/certlabs.htm
+webflowIndustry: Certified Environmental Laboratory
+divisionPhone: (609) 292-3950
+webflowId: 5f7728fbf17efb302ceefb31
+licenseCertificationClassification: CERTIFICATE
 ---
