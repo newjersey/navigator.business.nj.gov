@@ -176,6 +176,45 @@ describe("shared-submenu-components", () => {
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
+    it("renders ProfileMenuItem to return back to profile and navigates correctly onClick", () => {
+      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
+      const userData = generateUserData({});
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.navigationDefaults.backToProfileLinkText));
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
+    });
+
+    it("does not render RemoveThisBusinessMenuItem when there is only one business", () => {
+      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
+      const userData = generateUserData({});
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
+      expect(
+        screen.queryByText(Config.navigationDefaults.removeBusinessLinkText),
+      ).not.toBeInTheDocument();
+    });
+
+    it("renders RemoveThisBusinessMenuItem when there is more then one business", () => {
+      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
+      const userData = generateUserData({
+        currentBusinessId: "biz-1",
+        businesses: {
+          ["biz-1"]: generateBusiness({ id: "biz-1" }),
+          ["biz-2"]: generateBusiness({ id: "biz-2" }),
+        },
+      });
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
+      expect(
+        screen.getByText(Config.navigationDefaults.removeBusinessLinkText),
+      ).toBeInTheDocument();
+    });
+
     it("renders multiple businesses", () => {
       const firstBusiness = generateBusiness({
         profileData: generateProfileData({
@@ -206,6 +245,7 @@ describe("shared-submenu-components", () => {
     });
 
     it("only shows profile link for current business", () => {
+      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
       const firstBusiness = generateBusiness({
         profileData: generateProfileData({ businessName: "first-biz" }),
       });
