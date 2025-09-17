@@ -49,6 +49,7 @@ export const healthCheckRouterFactory = (clients: HealthChecks, logger: LogWrite
 
   for (const [endpoint, client] of clients) {
     router.get(`/${endpoint}`, async (_req, res) => {
+      console.log({ logger });
       logger.LogInfo(`[START]- Performing health check for endpoint: ${endpoint}`);
       const timestamp = requestTimestamp();
       const method = _req.method;

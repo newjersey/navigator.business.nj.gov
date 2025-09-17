@@ -1105,10 +1105,10 @@ workflows:
             - build
       - deploy-dev:
           name: dev-deploy
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
           requires:
             - build
       - deploy-content:

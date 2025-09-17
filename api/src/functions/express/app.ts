@@ -261,6 +261,7 @@ const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
 const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
 const cigaretteLicenseEmailClient = CigaretteLicenseEmailClient(logger);
+const cigaretteLicenseEmailClientHealthCheckClient = cigaretteLicenseEmailClient.health;
 const cigaretteLicenseClient = ApiCigaretteLicenseClient(cigaretteLicenseEmailClient, logger);
 const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
 
@@ -499,7 +500,7 @@ app.use(
       ["tax-clearance", taxClearanceHealthCheckClient],
       ["xray-registration", xrayRegistrationHealthCheckClient],
       ["cigarette-license", cigaretteLicenseHealthCheckClient],
-      ["cigarette-email-client", cigaretteLicenseEmailClient.health],
+      ["cigarette-email-client", cigaretteLicenseEmailClientHealthCheckClient],
     ]),
     logger,
   ),
