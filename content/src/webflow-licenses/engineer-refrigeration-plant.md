@@ -6,7 +6,7 @@ webflowName: Engineer, Refrigeration Plant
 agencyId: njdol
 agencyAdditionalContext: Office of Boiler and Pressure Vessel Compliance
 callToActionText: Apply for a Stationary Engineer License
-callToActionLink: http://nj.gov/labor/lsse/content/boiler_faqs.html
+callToActionLink: https://www.nj.gov/labor/safetyandhealth/programs-services/boiler-pressure-vessel-compliance/
 webflowIndustry: Refrigeration Plant Engineer
 divisionPhone: (609) 292-2345
 webflowId: 5f77298ae022944cf3eaa5cd
