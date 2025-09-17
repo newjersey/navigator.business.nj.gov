@@ -157,10 +157,13 @@ export const getErrorStateForFormationField = (inputParams: {
     const exists = !!formationFormData.businessName;
     const isAvailable = businessNameAvailability?.status === "AVAILABLE";
     const isValid = exists && isAvailable;
+    const isConfirmed = formationFormData.businessNameConfirmation;
     let label = errorState.label;
 
     if (!exists) {
       label = Config.formation.fields.businessName.errorInlineEmpty;
+    } else if (!isConfirmed) {
+      label = Config.formation.fields.businessName.confirmBusinessNameError;
     } else if (businessNameAvailability?.status === undefined) {
       label = Config.formation.fields.businessName.errorInlineNeedsToSearch;
     } else if (businessNameAvailability?.status !== "AVAILABLE") {

@@ -12,12 +12,21 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
 import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
 import { TextField, useMediaQuery } from "@mui/material";
-import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
+import {
+  FocusEvent,
+  FormEvent,
+  ReactElement,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 
 export const BusinessName = (): ReactElement => {
   const FIELD_NAME = "businessName";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const [confirmationValue, setConfirmationValue] = useState("");
   const { business } = useUserData();
   const {
     currentName,
@@ -27,6 +36,7 @@ export const BusinessName = (): ReactElement => {
     onBlurNameField,
     onChangeNameField,
     searchBusinessName,
+    resetNameAvailability,
   } = useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
   const { doesFieldHaveError } = useFormationErrors();
   const mountEffectOccurred = useRef<boolean>(false);
@@ -54,18 +64,24 @@ export const BusinessName = (): ReactElement => {
   };
 
   const doSearch = (event: FormEvent<HTMLFormElement>): void => {
+    if (!state.formationFormData.businessNameConfirmation) {
+      event.preventDefault();
+      return;
+    }
+
     searchBusinessName(event).catch(() => {});
     setFieldsInteracted([FIELD_NAME]);
   };
 
   const hasError = doesFieldHaveError(FIELD_NAME);
+
   return (
-    <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
+    <form onSubmit={doSearch} className="usa-prose margin-top-1 grid-container padding-0">
       <WithErrorBar hasError={hasError} type="DESKTOP-ONLY">
-        <div className="text-bold margin-top-1">{Config.formation.fields.businessName.label}</div>
         <div className={isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"}>
           <div className={isTabletAndUp ? "grid-col-8" : ""}>
             <WithErrorBar hasError={hasError} type="MOBILE-ONLY">
+              <div className="text-bold">{Config.formation.fields.businessName.label}</div>
               <TextField
                 autoComplete="no"
                 value={currentName}
@@ -74,11 +90,42 @@ export const BusinessName = (): ReactElement => {
                   setFormationFormData({
                     ...state.formationFormData,
                     businessName: event.target.value,
+                    businessNameConfirmation: false,
                   });
+                  setConfirmationValue("");
                 }}
                 variant="outlined"
                 inputProps={{
                   "aria-label": "Search business name",
+                }}
+                error={hasError}
+                onBlur={(event: FocusEvent<HTMLInputElement>): void => {
+                  setFieldsInteracted([FIELD_NAME]);
+                  onBlurNameField(event.target.value);
+                }}
+              />
+              <div className="text-bold margin-top-1">
+                {Config.formation.fields.businessName.confirmBusinessNameLabel}
+              </div>
+              <TextField
+                autoComplete="no"
+                value={
+                  state.formationFormData.businessNameConfirmation
+                    ? state.formationFormData.businessName
+                    : confirmationValue
+                }
+                onChange={(event): void => {
+                  resetNameAvailability();
+                  setConfirmationValue(event.target.value);
+                  setFormationFormData({
+                    ...state.formationFormData,
+                    businessNameConfirmation:
+                      state.formationFormData.businessName === event.target.value,
+                  });
+                }}
+                variant="outlined"
+                inputProps={{
+                  "aria-label": "Confirm business name",
                 }}
                 error={hasError}
                 helperText={
@@ -90,9 +137,9 @@ export const BusinessName = (): ReactElement => {
                       }).label
                     : undefined
                 }
-                onBlur={(event: FocusEvent<HTMLInputElement>): void => {
+                onBlur={(): void => {
+                  resetNameAvailability();
                   setFieldsInteracted([FIELD_NAME]);
-                  onBlurNameField(event.target.value);
                 }}
               />
               {state.businessNameAvailability?.status === "UNAVAILABLE" && (
@@ -125,7 +172,11 @@ export const BusinessName = (): ReactElement => {
               )}
             </WithErrorBar>
           </div>
-          <div className="margin-top-05">
+          <div
+            style={{
+              marginTop: isTabletAndUp ? "123px" : "8px",
+            }}
+          >
             <SecondaryButton
               isColor="primary"
               onClick={(): void => {}}
