@@ -38,6 +38,7 @@ describe("<NavBarDesktop />", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
+    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   const quickLinksExist = (): void => {
