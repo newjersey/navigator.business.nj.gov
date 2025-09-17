@@ -1,14 +1,14 @@
 ---
+id: freight-rail-freight-tariff
 displayname: freight-rail-freight-tariff
-id: "freight-rail-freight-tariff"
-webflowId: "5f77295738625436d2bb0e46"
-urlSlug: "freight-rail-freight-tariff"
-webflowName: "Freight - Rail Freight Tariff"
-callToActionLink: "http://nj.gov/transportation/about/rules/"
-callToActionText: ""
+urlSlug: freight-rail-freight-tariff
+webflowName: Freight - Rail Freight Tariff
 agencyId: njdot
-agencyAdditionalContext: "Motor Vehicles Commission, Office of Regulatory Affairs"
-divisionPhone: "(609) 777-4379"
-webflowIndustry: "Freight"
-licenseCertificationClassification: "CONTACT"
+agencyAdditionalContext: Motor Vehicles Commission, Office of Regulatory Affairs
+callToActionText: Learn About Regulations
+callToActionLink: http://nj.gov/transportation/about/rules/
+webflowIndustry: Freight
+divisionPhone: (609) 777-4379
+webflowId: 5f77295738625436d2bb0e46
+licenseCertificationClassification: CONTACT
 ---
