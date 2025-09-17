@@ -4,7 +4,7 @@ id: selfgenerator-waste-transporters-reg
 webflowId: 68c318ee5a03214a02f9e6d0
 urlSlug: selfgenerator-waste-transporters-reg
 name: Apply for Your Self-Generator Waste Transporter Registration
-displayname: sselfgenerator-waste-transporters-reg
+displayname: selfgenerator-waste-transporters-reg
 webflowName: Apply for Your Self-Generator Waste Transporter Registration
 filename: selfgenerator-waste-transporters-reg
 callToActionLink: https://dep.nj.gov/wastedecals/self-generator-solid-waste-transporters/

@@ -2,7 +2,7 @@
 id: bio-analytical-laboratory-director
 displayname: bio-analytical-laboratory-director
 urlSlug: bio-analytical-laboratory-director
-webflowName: Bio-analytical Laboratory Director
+webflowName: Bioanalytical Laboratory Director
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Medical Examiners
 callToActionText: Get a Bioanalytical Lab Director License
