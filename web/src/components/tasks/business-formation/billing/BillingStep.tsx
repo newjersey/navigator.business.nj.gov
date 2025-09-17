@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/billing/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/billing/FormationChooseNotifications";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -17,9 +17,7 @@ export const BillingStep = (): ReactElement => {
 
   return (
     <div data-testid="billing-step">
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.sections.contactInfoHeader}
-      </Heading>
+      <Heading level={2}>{Config.formation.sections.contactInfoHeader}</Heading>
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
         type="DESKTOP-ONLY"
@@ -66,9 +64,7 @@ export const BillingStep = (): ReactElement => {
         </div>
       </div>
       <hr className="margin-y-3" />
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.sections.servicesHeader}
-      </Heading>
+      <Heading level={2}>{Config.formation.sections.servicesHeader}</Heading>
       <Content>{Config.formation.sections.servicesDescription}</Content>
       <FormationChooseDocuments />
       <PaymentTypeTable />

@@ -83,9 +83,7 @@ const LegalStructureRadio = forwardRef(
             </Alert>
           </div>
         )}
-        <Heading level={2} styleVariant="h3">
-          {Config.businessStructureTask.radioQuestionHeader}
-        </Heading>
+        <Heading level={2}>{Config.businessStructureTask.radioQuestionHeader}</Heading>
         <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS">
           <div className="margin-top-3">
             <FormControl variant="outlined" fullWidth>

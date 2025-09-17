@@ -34,19 +34,19 @@ const Template = () => {
 
   return (
     <div>
-      <Heading level={2} styleVariant="h1Large" className="margin-y-4">
+      <Heading level={2} className="margin-y-4">
         Primary Gradient
       </Heading>
       <div className="margin-y-2">
         <div>{PrimaryGradient}</div>
       </div>
-      <Heading level={2} styleVariant="h1Large" className="margin-y-4">
+      <Heading level={2} className="margin-y-4">
         Secondary Gradient
       </Heading>
       <div className="margin-y-2">
         <div>{SecondaryGradient}</div>
       </div>
-      <Heading level={2} styleVariant="h1Large" className="margin-y-4">
+      <Heading level={2} className="margin-y-4">
         Tertiary Gradient
       </Heading>
       <div className="margin-y-2">

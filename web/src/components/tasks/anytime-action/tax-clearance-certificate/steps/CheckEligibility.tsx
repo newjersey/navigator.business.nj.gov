@@ -24,9 +24,9 @@ import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useState } from "react";
 
@@ -95,7 +95,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
   return (
     <>
       <div>
-        <Heading level={2} styleVariant={"h3"}>
+        <Heading level={2}>
           {Config.taxClearanceCertificateStep2.requestingAgencySectionHeader}
         </Heading>
         <div id={`question-requestingAgencyId`} data-testid={"requestingAgency"}>
@@ -103,7 +103,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
         </div>
         <HorizontalLine />
         <div className="margin-top-3">
-          <Heading level={2} styleVariant={"h3"}>
+          <Heading level={2}>
             {Config.taxClearanceCertificateStep2.businessInformationSectionHeader}
           </Heading>
         </div>

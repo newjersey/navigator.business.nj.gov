@@ -177,7 +177,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
 
   return (
     <div className={"bg-accent-cooler-50 padding-2 radius-lg"}>
-      <h2 className={`font-normal ${isMobile ? `margin-bottom-neg-05` : `margin-bottom-neg-2`}`}>
+      <h2 className={`${isMobile ? `margin-bottom-neg-05` : `margin-bottom-neg-2`}`}>
         {Config.envQuestionPage.generic.title}
       </h2>
       <HorizontalStepper
