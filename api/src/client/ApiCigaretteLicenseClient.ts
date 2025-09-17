@@ -1,23 +1,27 @@
-import { CigaretteLicenseClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
+import { ApiCigaretteLicenseHealth } from "@client/ApiCigaretteLicenseHealth";
 import {
   CigaretteLicenseApiConfig,
-  makePostBody,
   makeEmailConfirmationBody,
+  makePostBody,
 } from "@client/ApiCigaretteLicenseHelpers";
+import {
+  CigaretteLicenseClient,
+  EmailClient,
+  HealthCheckMetadata,
+  HealthCheckMethod,
+} from "@domain/types";
+import { LogWriterType } from "@libs/logWriter";
+import { getConfigValue } from "@libs/ssmUtils";
 import {
   EmailConfirmationResponse,
   GetOrderByTokenResponse,
   PaymentApiError,
   PreparePaymentResponse,
 } from "@shared/cigaretteLicense";
-import { ApiCigaretteLicenseHealth } from "@client/ApiCigaretteLicenseHealth";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { HealthCheckMethod, HealthCheckMetadata } from "@domain/types";
 import { UserData } from "@shared/userData";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { getConfigValue } from "@libs/ssmUtils";
 
 export const getConfig = async (): Promise<CigaretteLicenseApiConfig> => {
   return {
@@ -26,12 +30,13 @@ export const getConfig = async (): Promise<CigaretteLicenseApiConfig> => {
     merchantCode: await getConfigValue("cigarette_license_merchant_code"),
     merchantKey: await getConfigValue("cigarette_license_merchant_key"),
     serviceCode: await getConfigValue("cigarette_license_service_code"),
-    emailConfirmationUrl: await getConfigValue("cigarette_license_email_confirmation_url"),
-    emailConfirmationKey: await getConfigValue("cigarette_license_email_confirmation_key"),
   };
 };
 
-export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicenseClient => {
+export const ApiCigaretteLicenseClient = (
+  emailClient: EmailClient,
+  logger: LogWriterType,
+): CigaretteLicenseClient => {
   const preparePayment = async (
     userData: UserData,
     returnUrl: string,
@@ -132,7 +137,6 @@ export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicen
     userData: UserData,
     decryptedTaxId: string,
   ): Promise<EmailConfirmationResponse> => {
-    const config = await getConfig();
     const logId = logger.GetId();
     const currentBusiness = getCurrentBusiness(userData);
     const cigaretteLicenseData = currentBusiness.cigaretteLicenseData;
@@ -162,44 +166,7 @@ export const ApiCigaretteLicenseClient = (logger: LogWriterType): CigaretteLicen
       decryptedTaxId,
     );
 
-    logger.LogInfo(
-      `Cigarette License Client - Id:${logId} - Sending request to ${
-        config.emailConfirmationUrl
-      } data: ${JSON.stringify(postBody)}`,
-    );
-
-    return axios
-      .post(config.emailConfirmationUrl, postBody, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": config.emailConfirmationKey,
-        },
-      })
-      .then((response: AxiosResponse) => {
-        logger.LogInfo(
-          `Cigarette License Client - Id:${logId} - Response received: ${JSON.stringify(
-            response.data,
-          )}`,
-        );
-        const successResponse: EmailConfirmationResponse = {
-          statusCode: response.status,
-          message: response.data,
-        };
-        return successResponse;
-      })
-      .catch((error: AxiosError) => {
-        logger.LogError(
-          `Cigarette License Client - Id:${logId} - Unknown error received: ${JSON.stringify(
-            error,
-          )}`,
-        );
-        const errorResponse: EmailConfirmationResponse = {
-          statusCode: 500,
-          message: error.message,
-        };
-
-        return errorResponse;
-      });
+    return await emailClient.sendEmail(postBody);
   };
 
   const health: HealthCheckMethod = async (): Promise<HealthCheckMetadata> => {

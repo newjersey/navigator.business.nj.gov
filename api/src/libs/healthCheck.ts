@@ -1,6 +1,6 @@
+import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
 
 type Status = "PASS" | "FAIL" | "ERROR";
 type StatusResult = Record<string, Status>;
@@ -17,6 +17,8 @@ const healthCheckEndPoints: Record<string, string> = {
   webserviceFormation: "webservice/formation",
   taxClearance: "tax-clearance",
   xrayRegistration: "xray-registration",
+  cigaretteLicense: "cigarette-license",
+  cigaretteEmailClient: "cigarette-email-client",
 };
 
 const healthCheck = async (type: string, url: string, logger: LogWriterType): Promise<Status> => {
