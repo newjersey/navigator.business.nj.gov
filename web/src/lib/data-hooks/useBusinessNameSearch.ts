@@ -26,6 +26,7 @@ export const useBusinessNameSearch = ({
   ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
   setCurrentName: (name: string) => void;
   resetSearch: () => void;
+  resetNameAvailability: () => void;
 } => {
   const { business } = useUserData();
   const {
@@ -91,6 +92,10 @@ export const useBusinessNameSearch = ({
     setCurrentName("");
   };
 
+  const resetNameAvailability = (): void => {
+    setNameAvailability(emptyNameAvailability);
+  };
+
   const searchBusinessName = async (
     event?: FormEvent<HTMLFormElement>,
   ): Promise<{ nameAvailability: NameAvailability; submittedName: string }> => {
@@ -150,5 +155,6 @@ export const useBusinessNameSearch = ({
     onBlurNameField,
     searchBusinessName,
     resetSearch,
+    resetNameAvailability,
   };
 };

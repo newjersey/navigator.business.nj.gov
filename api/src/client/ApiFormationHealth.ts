@@ -85,6 +85,7 @@ const formationData: FormationData = {
     addressZipCode: "23859",
     legalType: "foreign-limited-liability-company",
     businessName: "some-business-name-72304745",
+    businessNameConfirmation: true,
     businessSuffix: "LLC",
     businessStartDate: getCurrentDateInNewJerseyISOString(),
     businessTotalStock: "",

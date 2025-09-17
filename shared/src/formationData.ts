@@ -132,6 +132,7 @@ export type HowToProceedOptions = "DIFFERENT_NAME" | "KEEP_NAME" | "CANCEL_NAME"
 export interface FormationFormData extends FormationAddress {
   readonly legalType: FormationLegalType;
   readonly businessName: string;
+  readonly businessNameConfirmation: boolean;
   readonly businessSuffix: BusinessSuffix | undefined;
   readonly businessTotalStock: string;
   readonly businessStartDate: string; // YYYY-MM-DD
@@ -228,6 +229,7 @@ export type FormationTextField = Exclude<
   | "isVeteranNonprofit"
   | "checkNameReservation"
   | "howToProceed"
+  | "businessNameConfirmation"
 >;
 
 export const createEmptyFormationAddress = (): FormationAddress => {
@@ -273,6 +275,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     ...createEmptyFormationAddress(),
     legalType: defaultFormationLegalType,
     businessName: "",
+    businessNameConfirmation: false,
     businessSuffix: undefined,
     businessTotalStock: "",
     businessStartDate: "",

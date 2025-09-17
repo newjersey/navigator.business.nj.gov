@@ -238,6 +238,16 @@ collections:
                           name: "errorInlineNeedsToSearch",
                           widget: "string",
                         }
+                      - {
+                          label: "Confirm Business Name Label",
+                          name: "confirmBusinessNameLabel",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Confirm Business Name Error",
+                          name: "confirmBusinessNameError",
+                          widget: "string",
+                        }
                       - label: Overrides
                         name: overrides
                         collapsed: false

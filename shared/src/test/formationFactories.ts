@@ -210,6 +210,7 @@ export const generateFormationFormData = (
     ...businessAddress,
     legalType: legalStructureId,
     businessName: `some-business-name-${randomInt()}`,
+    businessNameConfirmation: true,
     businessSuffix: randomBusinessSuffix(legalStructureId),
     businessStartDate: getCurrentDate().add(1, "days").format(defaultDateFormat),
     businessTotalStock: isCorp ? (randomInt().toString() ?? "") : "",

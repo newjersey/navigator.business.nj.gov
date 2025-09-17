@@ -295,7 +295,9 @@
         "alertUnavailable": "\"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
         "label": "Business Name",
         "description": "We’ll check to see if your desired business name is available. Once you find an available name, you can use it to complete this form.\n\nWhat do you want to name your business?",
-        "errorInlineNeedsToSearch": "Confirm the availability of your business name."
+        "errorInlineNeedsToSearch": "Check the availability of your business name.",
+        "confirmBusinessNameLabel": "Confirm Business Name",
+        "confirmBusinessNameError": "Business names must match."
       },
       "agentOfficeAddressLine2": {
         "label": "Office Address Line 2"
