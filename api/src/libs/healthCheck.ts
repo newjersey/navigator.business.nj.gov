@@ -1,6 +1,6 @@
+import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
 
 type Status = "PASS" | "FAIL" | "ERROR";
 type StatusResult = Record<string, Status>;
@@ -17,6 +17,8 @@ const healthCheckEndPoints: Record<string, string> = {
   webserviceFormation: "webservice/formation",
   taxClearance: "tax-clearance",
   xrayRegistration: "xray-registration",
+  cigaretteEmailClient: "cigarette-email-client",
+  cigaretteLicense: "cigarette-license",
 };
 
 const healthCheck = async (type: string, url: string, logger: LogWriterType): Promise<Status> => {
@@ -78,9 +80,12 @@ export const runHealthChecks = async (logger: LogWriterType): Promise<StatusResu
     logger.LogError("API URL is undefined");
     throw new Error("API URL is undefined");
   }
-  const results: Record<string, Status> = {};
-  for (const type in healthCheckEndPoints) {
-    results[type] = await healthCheck(healthCheckEndPoints[type] ?? "", url, logger);
-  }
-  return results;
+
+  const entries = Object.entries(healthCheckEndPoints).map(([type, endpoint]) =>
+    healthCheck(endpoint ?? "", url, logger).then((result) => [type, result] as const),
+  );
+
+  const resolved = await Promise.all(entries);
+
+  return Object.fromEntries(resolved);
 };
