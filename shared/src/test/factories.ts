@@ -1,7 +1,7 @@
 import { randomElementFromArray } from "../arrayHelpers";
 import { BusinessUser } from "../businessUser";
 import { TaxFilingCalendarEvent } from "../calendarEvent";
-import { CigaretteLicenseData } from "../cigaretteLicense";
+import { CigaretteLicenseData, EmailConfirmationSubmission } from "../cigaretteLicense";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
@@ -48,7 +48,7 @@ import {
 } from "../profileData";
 import { RoadmapTaskData } from "../roadmapTaskData";
 import { arrayOfSectors, SectorType } from "../sector";
-import { arrayOfStateObjects as states, StateObject } from "../states";
+import { StateObject, arrayOfStateObjects as states } from "../states";
 import {
   taxClearanceCertificateAgencies,
   TaxClearanceCertificateData,
@@ -466,6 +466,43 @@ export const generateCigaretteLicenseData = (
     signerRelationship: `some-signer-relationship-${randomInt()}`,
     signature: false,
     lastUpdatedISO: getCurrentDateISOString(),
+    ...overrides,
+  };
+};
+
+export const generateEmailConfirmationSubmission = (
+  overrides: Partial<EmailConfirmationSubmission>,
+): EmailConfirmationSubmission => {
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    businessType: randomLegalStructure().name,
+    responsibleOwnerName: `some-owner-name-${randomInt()}`,
+    tradeName: `some-trade-name-${randomInt()}`,
+    taxId: maskingCharacter.repeat(7) + randomInt(12).toString().slice(-5),
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressState: generateUnitedStatesStateDropdownOption({}).name,
+    addressZipCode: randomInt(5).toString(),
+    mailingAddressIsTheSame: false,
+    mailingAddressLine1: `some-mailing-address-1-${randomInt()}`,
+    mailingAddressLine2: `some-mailing-address-2-${randomInt()}`,
+    mailingAddressCity: `some-mailing-city-${randomInt()}`,
+    mailingAddressState: generateUnitedStatesStateDropdownOption({}).name,
+    mailingAddressZipCode: randomInt(5).toString(),
+    contactName: `some-contact-name-${randomInt()}`,
+    contactPhoneNumber: `some-phone-number-${randomInt()}`,
+    contactEmail: `some-email-${randomInt()}@example.com`,
+    salesInfoStartDate: "08/31/2025",
+    salesInfoSupplier: `some-sales-info-supplier-${randomInt()}`,
+    signerName: `some-signer-name-${randomInt()}`,
+    signerRelationship: `some-signer-relationship-${randomInt()}`,
+    signature: true,
+    paymentInfo: {
+      orderId: randomInt(),
+      orderStatus: "COMPLETED",
+      orderTimestamp: getCurrentDateISOString(),
+    },
     ...overrides,
   };
 };

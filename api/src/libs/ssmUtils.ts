@@ -5,15 +5,18 @@ const parameterName = `/${process.env.STAGE}/feature-flag/users-migration/kill-s
 
 export type CONFIG_VARS =
   | "cms_alerts_sns_topic_arn"
-  | CIGARETTE_CONFIG_VARS
-  | "employer_rates_base_url";
+  | "employer_rates_base_url"
+  | CIGARETTE_PAYMENT_CONFIG_VARS
+  | CIGARETTE_EMAIL_CONFIG_VARS;
 
-export type CIGARETTE_CONFIG_VARS =
+export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_base_url"
   | "cigarette_license_api_key"
   | "cigarette_license_merchant_code"
   | "cigarette_license_merchant_key"
-  | "cigarette_license_service_code"
+  | "cigarette_license_service_code";
+
+export type CIGARETTE_EMAIL_CONFIG_VARS =
   | "cigarette_license_email_confirmation_url"
   | "cigarette_license_email_confirmation_key";
 
