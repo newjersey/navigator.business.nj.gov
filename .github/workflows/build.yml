@@ -1,0 +1,55 @@
+name: Build
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    #    container: Since we currently don't have a Docker image for this, we will run it in a dry-run mode.
+    #      image: ${{secrets.AWS_ACCOUNT_ID_DEV}}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+    env:
+      STAGE: dev
+      AWS_ACCOUNT_ID_DEV: dummy_account_id
+      AWS_REGION: dummy_region
+      AWS_ACCESS_KEY_ID_DEV: dummy_access
+      AWS_SECRET_ACCESS_KEY_DEV: dummy_secret
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials (Dry Run)
+        run: echo "Skipping AWS credential setup"
+
+      - name: Authenticate ECR (Dry Run)
+        run: echo "Skipping ECR login"
+
+      - name: Configure and Build (Dry Run)
+        run: echo "Simulating configure-and-build step"
+
+      - name: Store Cache (Dry Run)
+        run: echo "Simulating store-cache step"
+#      - name: Configure AWS Credentials
+#        uses: ./.github/actions/configure-aws-credentials
+#
+#      - name: Authenticate ECR
+#        uses: ./.github/actions/authenticate-aws-ecr
+#
+#      - name: Checkout Code
+#        uses: actions/checkout@v2
+#
+#      - name: Set Dev Env Vars (Skipped temporarily)
+#        if: false
+#        run: echo "Skipping until script is added"
+#
+#      - name: Configure and Build
+#        uses: ./.github/actions/configure-and-build
+#
+#      - name: Store Cache
+#        uses: ./.github/actions/store-cache
+#
+#      - name: Upload build artifacts
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: build-workspace
+#          path: ./*
