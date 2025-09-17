@@ -1,13 +1,13 @@
-import React, { ReactElement } from "react";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Content } from "@/components/Content";
-import { isUndefined } from "lodash";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
+import { isUndefined } from "lodash";
+import React, { ReactElement } from "react";
 
 interface Content {
   dataTestId: string;
@@ -98,9 +98,7 @@ export const PassengerTransportCdlResult = (props: Props): ReactElement => {
 
   return (
     <div data-testid={getEndorsementText().dataTestId}>
-      <Heading level={2} styleVariant="h3">
-        {Config.passengerTransportCdlTabTwo.headerText}
-      </Heading>
+      <Heading level={2}>{Config.passengerTransportCdlTabTwo.headerText}</Heading>
       <Alert variant="success">
         {Config.passengerTransportCdlTabTwo.successAlertText}{" "}
         <UnStyledButton onClick={handleEditClick} isUnderline>

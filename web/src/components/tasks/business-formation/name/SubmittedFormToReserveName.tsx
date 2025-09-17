@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { BusinessName } from "@/components/tasks/business-formation/name/BusinessName";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { HowToProceedOptions } from "@businessnjgovnavigator/shared/formationData";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { HowToProceedOptions } from "@businessnjgovnavigator/shared/formationData";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
@@ -69,7 +69,7 @@ export const SubmittedFormToReserveName = (): ReactElement => {
 
       {state.formationFormData.howToProceed === "DIFFERENT_NAME" && (
         <>
-          <Heading level={2} styleVariant={"h3"}>
+          <Heading level={2}>
             {Config.formation.checkNameReservation.registerDifferentNameHeader}
           </Heading>
           <div>{Config.formation.checkNameReservation.registerDifferentNameLine1}</div>
@@ -82,9 +82,7 @@ export const SubmittedFormToReserveName = (): ReactElement => {
 
       {state.formationFormData.howToProceed === "KEEP_NAME" && (
         <>
-          <Heading level={2} styleVariant={"h3"}>
-            {Config.formation.checkNameReservation.keepNameHeader}
-          </Heading>
+          <Heading level={2}>{Config.formation.checkNameReservation.keepNameHeader}</Heading>
           <Content className="margin-y-2">
             {Config.formation.checkNameReservation.keepNameStep1}
           </Content>
@@ -111,9 +109,7 @@ export const SubmittedFormToReserveName = (): ReactElement => {
 
       {state.formationFormData.howToProceed === "CANCEL_NAME" && (
         <>
-          <Heading level={2} styleVariant={"h3"}>
-            {Config.formation.checkNameReservation.cancelNameHeader}
-          </Heading>
+          <Heading level={2}>{Config.formation.checkNameReservation.cancelNameHeader}</Heading>
           <Content className="margin-y-2">
             {Config.formation.checkNameReservation.cancelNameStep1}
           </Content>

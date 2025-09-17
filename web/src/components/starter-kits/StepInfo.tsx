@@ -10,9 +10,7 @@ export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactEleme
           <strong>STEP {props.step.stepNumber}</strong>
         </span>
       </div>
-      <Heading level={3} styleVariant="h4">
-        {props.step.name.replace("${OoS}", "")}
-      </Heading>
+      <Heading level={3}>{props.step.name.replace("${OoS}", "")}</Heading>
       <p>{props.step.description}</p>
       <strong className="text-base-dark">
         {props.step.timeEstimate && `(${props.step.timeEstimate})`}

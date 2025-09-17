@@ -78,7 +78,7 @@ export const NonprofitProvisions = (): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <Heading level={2} styleVariant="h3" className="margin-0-override">
+        <Heading level={2} className="margin-0-override">
           {Config.formation.nonprofitProvisions.label}
         </Heading>
       </div>

@@ -86,7 +86,6 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
           <div>
             <Heading
               level={2}
-              styleVariant="h4"
               className="margin-bottom-1 padding-top-2 border-bottom-2px border-base-lightest padding-bottom-1"
             >
               {Config.licenseSearchTask.applicationChecklistItemsText}

@@ -143,9 +143,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
 
   return (
     <div className={"anytime-action-dropdown-container"}>
-      <Heading level={2} className={"h2-styling text-medium"}>
-        {Config.dashboardAnytimeActionDefaults.defaultHeaderText}
-      </Heading>
+      <Heading level={2}>{Config.dashboardAnytimeActionDefaults.defaultHeaderText}</Heading>
       <HorizontalLine ariaHidden={true} />
       <div className="text-bold">
         {Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}

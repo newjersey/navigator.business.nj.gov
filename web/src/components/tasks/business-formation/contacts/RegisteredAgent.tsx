@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -292,9 +292,7 @@ export const RegisteredAgent = (): ReactElement => {
 
   return (
     <>
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.registeredAgent.label}
-      </Heading>
+      <Heading level={2}>{Config.formation.registeredAgent.label}</Heading>
       <Content className="margin-bottom-2">
         {Config.formation.registeredAgent.sectionDescription}
       </Content>

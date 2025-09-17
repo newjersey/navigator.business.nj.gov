@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Content } from "@/components/Content";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -9,7 +10,6 @@ import {
   createSignedEmptyFormationObject,
   needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -316,9 +316,7 @@ export const Signatures = (): ReactElement => {
   return (
     <>
       <div className="grid-col" data-testid="signers-section">
-        <Heading level={2} styleVariant={"h3"}>
-          {Config.formation.fields.signers.label}
-        </Heading>
+        <Heading level={2}>{Config.formation.fields.signers.label}</Heading>
         <Content>{getDescription()}</Content>
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`} data-testid="signers-0">

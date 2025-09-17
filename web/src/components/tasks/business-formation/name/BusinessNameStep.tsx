@@ -24,9 +24,7 @@ export const BusinessNameStep = (): ReactElement => {
 
   return (
     <div data-testid="business-name-step">
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.checkNameReservation.header}
-      </Heading>
+      <Heading level={2}>{Config.formation.checkNameReservation.header}</Heading>
       <div id="checkNameReservation" className="padding-top-1">
         <Content className="text-bold">
           {Config.formation.checkNameReservation.didYouUseFormRadio.label}
@@ -62,9 +60,7 @@ export const BusinessNameStep = (): ReactElement => {
         ) : (
           <>
             <hr className="margin-y-3" />
-            <Heading level={2} styleVariant={"h3"}>
-              {Config.formation.fields.businessName.header}
-            </Heading>
+            <Heading level={2}>{Config.formation.fields.businessName.header}</Heading>
             <Content>{Config.formation.fields.businessName.description}</Content>
             <BusinessName />
           </>
