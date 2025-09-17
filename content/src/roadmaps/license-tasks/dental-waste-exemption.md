@@ -4,7 +4,7 @@ webflowId: 68a74f5042ecf3c564531891
 urlSlug: dental-waste-exemption
 name: Apply for Your Dental Waste Exemption
 displayname: dental-waste-exemption
-webflowName:
+webflowName: Apply for Your Dental Waste Exemption
 filename: dental-waste-exemption
 callToActionLink: https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_exempt_quick_guide.pdf
 callToActionText: Apply for My Dental Waste Exemption

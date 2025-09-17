@@ -25,7 +25,7 @@
     {
       "step": 4,
       "weight": 2,
-      "task": "social-affair-permit"
+      "licenseTask": "social-affair"
     }
   ],
   "modifications": [

@@ -1,12 +1,13 @@
 ---
+id: forklift
 displayname: forklift
-id: "forklift"
-webflowId: "640b84677bfdab3457e1cefc"
-urlSlug: "forklift"
-webflowName: "Forklift"
-callToActionLink: "http://osha.gov/"
+urlSlug: forklift
+webflowName: Forklift
 agencyAdditionalContext: "OSHA: Occupational Safety and Health Administration"
-divisionPhone: "(212) 337-2372"
-webflowIndustry: "Forklift"
-licenseCertificationClassification: "CERTIFICATE"
+callToActionText: Learn About OSHA
+callToActionLink: http://osha.gov/
+webflowIndustry: Forklift
+licenseCertificationClassification: CERTIFICATE
+divisionPhone: (212) 337-2372
+webflowId: 640b84677bfdab3457e1cefc
 ---
