@@ -95,6 +95,7 @@ describe("shared-submenu-components", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
+    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   const Config = getMergedConfig();
@@ -245,7 +246,6 @@ describe("shared-submenu-components", () => {
     });
 
     it("only shows profile link for current business", () => {
-      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
       const firstBusiness = generateBusiness({
         profileData: generateProfileData({ businessName: "first-biz" }),
       });

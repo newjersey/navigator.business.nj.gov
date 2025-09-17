@@ -61,6 +61,7 @@ describe("<NavBarMobile />", () => {
     useMockUserData({});
     setLargeScreen(false);
     useMockBusiness(generateBusinessNamedBusiness());
+    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   describe("landing configuration", () => {
