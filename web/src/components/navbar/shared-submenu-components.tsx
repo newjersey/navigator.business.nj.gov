@@ -180,9 +180,8 @@ export const ProfileMenuItem = (props: {
         if (hasMultipleBusinesses) {
           const removeBusinessLink = NavMenuItem({
             onClick: (): void => {
-              router && router.push(ROUTES.profile);
+              router && router.push(ROUTES.dashboard);
             },
-            selected: isProfileSelected && isCurrent,
             icon: <ButtonIcon svgFilename="delete-outline" />,
             itemText: Config.navigationDefaults.removeBusinessLinkText,
             key: `remove-business-${businessId}`,
