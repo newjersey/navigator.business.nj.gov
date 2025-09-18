@@ -1,14 +1,14 @@
 ---
+id: job-fair
 displayname: job-fair
-id: "job-fair"
-webflowId: "5f772997a67e4ae1e45c0f39"
-urlSlug: "job-fair"
-webflowName: "Job Fair"
-callToActionLink: "http://njconsumeraffairs.gov/bme/Pages/applications.aspx"
-callToActionText: ""
+urlSlug: job-fair
+webflowName: Job Fair
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "Regulated Business Unit"
-divisionPhone: "(973) 504-6370"
-webflowIndustry: "Job Fair"
-licenseCertificationClassification: "LICENSE (IF RESUMES ARE COLLECTED & REGISTRATION FEE CHARGED ATTENDEES)"
+agencyAdditionalContext: Regulated Business Unit
+callToActionText: Learn About Job Fairs
+callToActionLink: https://www.nj.gov/labor/career-services/job-search/job-fairs-recruitments/
+webflowIndustry: Job Fair
+divisionPhone: (973) 504-6370
+webflowId: 5f772997a67e4ae1e45c0f39
+licenseCertificationClassification: LICENSE (IF RESUMES ARE COLLECTED & REGISTRATION FEE CHARGED ATTENDEES)
 ---
