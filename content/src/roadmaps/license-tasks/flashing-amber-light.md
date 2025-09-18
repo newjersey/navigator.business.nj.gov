@@ -13,8 +13,15 @@ summaryDescriptionMd: You need a Flashing Amber Light permit to use amber
   lights warn others of potential hazards when you work on public roads.
 industryId:
   - commercial-construction
+  - auto-body-repair
+  - logistics
+  - security
+  - trucking
+  - remediation-waste
+  - generic
 callToActionText: Apply for My Flashing Amber Light Permit
 callToActionLink: https://www.nj.gov/mvc/about/forms.htm#lightpermits
+agencyId: nj-motor-vehicle
 ---
 ## Eligible Types of Work
 
