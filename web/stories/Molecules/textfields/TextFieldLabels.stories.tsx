@@ -52,6 +52,11 @@ const Template = () => {
           hasSetStateFirstTime: false,
           businessNameAvailability: undefined,
           dbaBusinessNameAvailability: undefined,
+          reviewCheckboxes: {
+            namesAddressesDatesChecked: false,
+            permanentRecordChecked: false,
+            correctionFeesChecked: false,
+          },
         },
         setFormationFormData: () => {},
         setBusinessNameAvailability: () => {},
@@ -61,6 +66,8 @@ const Template = () => {
         setFieldsInteracted: () => {},
         setHasBeenSubmitted: () => {},
         setForeignGoodStandingFile: () => {},
+        setReviewCheckboxes: () => {},
+        allConfirmationsChecked: () => false,
       }}
     >
       <DataFormErrorMapContext.Provider value={formContextState}>

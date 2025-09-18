@@ -7,6 +7,7 @@ import { ReviewAdditionalProvisions } from "@/components/tasks/business-formatio
 import { ReviewBillingContact } from "@/components/tasks/business-formation/review/ReviewBillingContact";
 import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
+import { ReviewConfirmation } from "@/components/tasks/business-formation/review/ReviewConfirmation";
 import { ReviewForeignCertificate } from "@/components/tasks/business-formation/review/ReviewForeignCertificate";
 import { ReviewIsVeteranNonprofit } from "@/components/tasks/business-formation/review/ReviewIsVeteranNonprofit";
 import { ReviewMainBusinessLocation } from "@/components/tasks/business-formation/review/ReviewMainBusinessLocation";
@@ -50,6 +51,15 @@ export const ReviewStep = (): ReactElement => {
 
   return (
     <>
+      <Alert variant="warning" className="margin-bottom-4">
+        <Content
+          onClick={(): void => {
+            analytics.event.business_formation_review_amendments_external_link.click.go_to_Treasury_amendments_page();
+          }}
+        >
+          {Config.formation.sections.review.warningAlert}
+        </Content>
+      </Alert>
       <div data-testid="review-step">
         <BusinessFormationReviewSection stepName={"Business"} dataTestId="edit-business-name-step">
           <BusinessNameAndLegalStructure isReviewStep />
@@ -95,15 +105,7 @@ export const ReviewStep = (): ReactElement => {
           <ReviewBillingContact />
           <ReviewBillingServices />
         </BusinessFormationReviewSection>
-        <Alert variant="info">
-          <Content
-            onClick={(): void => {
-              analytics.event.business_formation_review_amendments_external_link.click.go_to_Treasury_amendments_page();
-            }}
-          >
-            {Config.formation.general.amendmentInfo}
-          </Content>
-        </Alert>
+        <ReviewConfirmation />
       </div>
     </>
   );

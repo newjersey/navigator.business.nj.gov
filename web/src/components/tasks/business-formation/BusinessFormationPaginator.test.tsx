@@ -568,6 +568,7 @@ describe("<BusinessFormationPaginator />", () => {
         expect(
           screen.queryByText(Config.formation.errorBanner.incompleteStepsError),
         ).not.toBeInTheDocument();
+        await page.checkAllReviewCheckboxes();
         await page.clickSubmit();
 
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
@@ -720,6 +721,7 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage({ business: filledInBusiness, displayContent });
         await page.fillAndSubmitBusinessNameStep();
         await page.stepperClickToReviewStep();
+        await page.checkAllReviewCheckboxes();
         await page.clickSubmit();
         await waitFor(() => {
           return expect(mockPush).toHaveBeenCalledWith("www.example.com");
@@ -775,6 +777,7 @@ describe("<BusinessFormationPaginator />", () => {
             );
 
             await page.stepperClickToReviewStep();
+            await page.checkAllReviewCheckboxes();
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
               "ERROR",
@@ -1398,6 +1401,7 @@ describe("<BusinessFormationPaginator />", () => {
               const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
+              await page.checkAllReviewCheckboxes();
               await page.clickSubmit();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
                 "ERROR",
@@ -2190,6 +2194,41 @@ describe("<BusinessFormationPaginator />", () => {
           );
         });
       });
+    });
+  });
+
+  describe("review confirmation checkboxes", () => {
+    let page: FormationPageHelpers;
+
+    beforeEach(async () => {
+      page = preparePage({ business, displayContent });
+      await page.stepperClickToBillingStep();
+      page.completeRequiredBillingFields();
+      await page.stepperClickToReviewStep();
+    });
+
+    it("prevents submission when review confirmation checkboxes are not checked", async () => {
+      await page.clickSubmit();
+
+      expect(
+        screen.getByText(Config.formation.sections.review.confirmationBox.confirmationError),
+      ).toBeInTheDocument();
+
+      expect(screen.getByTestId("review-step")).toBeInTheDocument();
+    });
+
+    it("allows submission when all review confirmation checkboxes are checked", async () => {
+      await page.checkAllReviewCheckboxes();
+
+      await page.clickSubmit();
+
+      expect(
+        screen.queryByText(Config.formation.sections.review.confirmationBox.confirmationError),
+      ).not.toBeInTheDocument();
+
+      expect(
+        screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+      ).toBeInTheDocument();
     });
   });
 
