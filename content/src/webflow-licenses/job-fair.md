@@ -5,7 +5,7 @@ urlSlug: job-fair
 webflowName: Job Fair
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Regulated Business Unit
-callToActionText: Learn About Job Fairs
+callToActionText: Attend a Job Fair
 callToActionLink: https://www.nj.gov/labor/career-services/job-search/job-fairs-recruitments/
 webflowIndustry: Job Fair
 divisionPhone: (973) 504-6370
