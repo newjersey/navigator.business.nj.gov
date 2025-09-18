@@ -48,7 +48,7 @@ Your vehicle must also be registered under one of these NJ Motor Vehicle Commiss
 * Code 52: Agricultural Tractor
 * Code 56: Contractor Equipment In-Transit 
 
-Find out more about these codes from the NJ MVC. 
+[Find out more about these codes](https://www.nj.gov/mvc/vehicles/commvehinfo.htm) from the NJ MVC. 
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
