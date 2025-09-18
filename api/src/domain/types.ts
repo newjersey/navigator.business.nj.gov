@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  EmailConfirmationSubmission,
   FacilityDetails,
   TaxClearanceCertificateResponse,
   UnlinkTaxIdResponse,
@@ -10,9 +11,9 @@ import { NameAvailability, NameAvailabilityResponse } from "@shared/businessName
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import {
+  EmailConfirmationResponse,
   GetOrderByTokenResponse,
   PreparePaymentResponse,
-  EmailConfirmationResponse,
 } from "@shared/cigaretteLicense";
 import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
@@ -38,6 +39,7 @@ import {
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
+import { AxiosResponse } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
@@ -259,6 +261,16 @@ export interface TaxClearanceCertificateClient {
   ) => Promise<TaxClearanceCertificateResponse>;
   health: () => Promise<HealthCheckMetadata>;
   unlinkTaxId: (userData: UserData, databaseClient: DatabaseClient) => Promise<UnlinkTaxIdResponse>;
+}
+
+export interface PowerAutomateClient {
+  startWorkflow: (props: { body?: object; headers?: object }) => Promise<AxiosResponse>;
+  health: () => Promise<HealthCheckMetadata>;
+}
+
+export interface EmailClient {
+  sendEmail: (postBody: EmailConfirmationSubmission) => Promise<EmailConfirmationResponse>;
+  health: () => Promise<HealthCheckMetadata>;
 }
 
 export interface CigaretteLicenseClient {

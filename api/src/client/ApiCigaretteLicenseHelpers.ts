@@ -1,5 +1,3 @@
-import { UserData } from "@shared/userData";
-import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
   CigaretteLicenseData,
   EmailConfirmationResponse,
@@ -8,6 +6,8 @@ import {
   PreparePaymentApiSubmission,
   PreparePaymentResponse,
 } from "@shared/cigaretteLicense";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { UserData } from "@shared/userData";
 import { randomUUID } from "node:crypto";
 
 export type CigaretteLicenseApiConfig = {
@@ -16,8 +16,6 @@ export type CigaretteLicenseApiConfig = {
   merchantCode: string;
   merchantKey: string;
   serviceCode: string;
-  emailConfirmationUrl: string;
-  emailConfirmationKey: string;
 };
 
 export const makePostBody = (
