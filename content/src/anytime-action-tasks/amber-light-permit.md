@@ -36,7 +36,7 @@ Your vehicle must also be registered under one of these NJ Motor Vehicle Commiss
 
 * Code 11: Commercial Truck or Tractor
 * Code 16: Aggregate Haulers 
-* Code 23: Overweight/Overdimensional Trailer 
+* Code 23: [Overweight/Overdimensional Trailer](https://www.nj.gov/mvc/vehicles/overdimcode23.htm) 
 * Code 31: Farm Truck
 * Code 32: Light-Medium Weight Tow Truck
 * Code 33: Heavy Duty Tow Truck
@@ -46,7 +46,7 @@ Your vehicle must also be registered under one of these NJ Motor Vehicle Commiss
 * Code 52: Agricultural Tractor
 * Code 56: Contractor Equipment In-Transit 
 
-Find out more about these codes from the NJ MVC. 
+[Find out more about these codes](https://www.nj.gov/mvc/vehicles/commvehinfo.htm) from the NJ MVC. 
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
