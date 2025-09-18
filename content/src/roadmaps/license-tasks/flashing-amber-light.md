@@ -39,4 +39,22 @@ Your vehicle must also be registered under one of these NJ Motor Vehicle Commiss
 * Code 52: Agricultural Tractor
 * Code 56: Contractor Equipment In-Transit 
 
-Find out more about these codes from the NJ MVC.
+Find out more about these codes from the NJ MVC. 
+
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+* After you fill out the form, **the chief law enforcement official in your county must sign** it
+* The form has 3 different applications. Make sure you **use the first form** for tow trucks, service vehicles, snow removal and/or sanding vehicles, and security service vehicles. The other 2 forms are for employees of State contractors
+
+:::
+
+## Application Requirements
+
+### Business
+
+* Business name
+* Business address, phone number, and email
+* Entity ID \[insert CI] 
+* Contact name
+* Description of the type of service and location (county) where the amber light will be used
+* Applicable fees paid
