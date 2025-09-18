@@ -17,6 +17,7 @@ urlSlug: amber-light-permit
 summaryDescriptionMd: You need a Flashing Amber Light permit to use amber
   (yellow) warning lights on your vehicle for certain types of work. These
   lights warn others of potential hazards when you work on public roads.
+issuingAgency: NJ Motor Vehicle Commission
 callToActionText: Apply for My Flashing Amber Light Permit
 callToActionLink: https://www.nj.gov/mvc/about/forms.htm#lightpermits
 ---
