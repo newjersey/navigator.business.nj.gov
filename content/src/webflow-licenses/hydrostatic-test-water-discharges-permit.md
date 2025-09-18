@@ -1,14 +1,14 @@
 ---
+id: hydrostatic-test-water-discharges-permit
 displayname: hydrostatic-test-water-discharges-permit
-id: "hydrostatic-test-water-discharges-permit"
-webflowId: "5f77290a8e9f8750706859b4"
-urlSlug: "hydrostatic-test-water-discharges-permit"
-webflowName: "Hydrostatic Test Water Discharges Permit"
-callToActionLink: "http://state.nj.us/dep/dwq/pdf/oysterck_pubnotice.pdf"
-callToActionText: ""
+urlSlug: hydrostatic-test-water-discharges-permit
+webflowName: Hydrostatic Test Water Discharges Permit
 agencyId: njdep
-agencyAdditionalContext: "Bureau of Point Source Permitting Region"
-divisionPhone: "(609) 292-4860"
-webflowIndustry: "Hydrostatic Water Discharge"
-licenseCertificationClassification: "CONTACT"
+agencyAdditionalContext: Bureau of Point Source Permitting Region
+callToActionText: Get Your Hydrostatic Test Water Discharge Permit
+callToActionLink: https://dep.nj.gov/dwq/permitting_information/permits_application_forms_and_checklists/
+webflowIndustry: Hydrostatic Water Discharge
+divisionPhone: (609) 292-4860
+webflowId: 5f77290a8e9f8750706859b4
+licenseCertificationClassification: CONTACT
 ---
