@@ -51,3 +51,25 @@ Find out more about these codes from the NJ MVC.
 * The form has 3 different applications. Make sure you **use the first form** for tow trucks, service vehicles, snow removal and/or sanding vehicles, and security service vehicles. The other 2 forms are for employees of State contractors
 
 :::
+
+## Application Requirements
+
+### Business 
+
+* Business name
+* Business address, phone number, and email
+* Entity ID \[insert CI] 
+* Contact name
+* Description of the type of service and location (county) where the amber light will be used
+* Applicable fees paid
+
+### Vehicle 
+
+* Name of registered owner/lessee
+* Relationship of registered owner/lessee to applicant (for example, self or supervisor)
+* Address of registered owner/lessee 
+* License plate number
+* Vehicle year, make, and model
+* Vehicle Identification Number (VIN)
+* Copy of the vehicle registration
+* Copy of the lease agreement, if the vehicle is leased
