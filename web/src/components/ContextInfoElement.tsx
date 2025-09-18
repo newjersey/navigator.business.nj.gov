@@ -24,9 +24,7 @@ export const ContextInfoElement = forwardRef(
         >
           <Icon className="font-sans-xl" iconName="close" />
         </button>
-        <Heading level={2} styleVariant="h3">
-          {props.header}
-        </Heading>
+        <Heading level={2}>{props.header}</Heading>
         <Content>{props.markdown}</Content>
       </aside>
     );

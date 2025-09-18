@@ -21,9 +21,7 @@ export const DbaNameSearch = (): ReactElement => {
 
   return (
     <>
-      <Heading level={2} styleVariant="h3">
-        {Config.nexusNameSearch.dbaNameHeader}
-      </Heading>
+      <Heading level={2}>{Config.nexusNameSearch.dbaNameHeader}</Heading>
       <Content>{Config.nexusNameSearch.dbaNameDescription}</Content>
       <SearchBusinessNameForm
         unavailable={DbaUnavailable}

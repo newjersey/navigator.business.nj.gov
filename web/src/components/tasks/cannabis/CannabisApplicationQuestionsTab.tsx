@@ -25,13 +25,13 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
       <Content>{Config.cannabisApplyForLicense.applicationQuestionsText}</Content>
       <HorizontalLine />
       <div className="margin-top-2">
-        <Heading level={2} styleVariant="h3" className="margin-bottom-2 text-normal">
+        <Heading level={2} className="margin-bottom-2">
           {Config.cannabisApplyForLicense.businessSizeHeader}
         </Heading>
         <MicrobusinessRadioQuestion />
       </div>
       <div className="margin-top-4 margin-bottom-2">
-        <Heading level={2} styleVariant="h3" className="margin-bottom-2 text-normal">
+        <Heading level={2} className="margin-bottom-2">
           {Config.cannabisApplyForLicense.priorityStatusHeader}
         </Heading>
         {!props.noPriorityStatus && (

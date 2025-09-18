@@ -44,7 +44,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
 
   return (
     <>
-      <Heading level={2} styleVariant="h3" className="margin-bottom-05-override">
+      <Heading level={2} className="margin-bottom-05-override">
         {contentFromConfig.header}
       </Heading>
       <Content>{contentFromConfig.description}</Content>

@@ -30,7 +30,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
           id="dialog-modal"
           className="display-flex flex-row flex-align-center break-word flex-fill"
         >
-          <Heading level={0} styleVariant="h2" className="padding-x-1 margin-0-override">
+          <Heading level={0} deprecatedStyleVariant="h2" className="padding-x-1 margin-0-override">
             {props.title}
           </Heading>
         </DialogTitle>

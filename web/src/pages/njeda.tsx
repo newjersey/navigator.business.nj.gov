@@ -167,7 +167,6 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
           </div>
           <Heading
             level={1}
-            styleVariant="h1"
             className="text-base-darkest margin-bottom-4 desktop:margin-bottom-3 text-accent-cool-darker"
           >
             {Config.fundingsOnboardingModal.pageHeader.headerText}

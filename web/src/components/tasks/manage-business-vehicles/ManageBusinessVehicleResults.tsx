@@ -26,9 +26,7 @@ export const ManageBusinessVehicleResults = (props: Props): ReactElement => {
 
   return (
     <div>
-      <Heading level={2} styleVariant="h3">
-        {Config.manageBusinessVehicles.resultsScreenHeaderText}
-      </Heading>
+      <Heading level={2}>{Config.manageBusinessVehicles.resultsScreenHeaderText}</Heading>
       <Alert variant="success">
         {Config.manageBusinessVehicles.successAlertText}{" "}
         <UnStyledButton onClick={handleClick} isUnderline>

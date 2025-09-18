@@ -66,9 +66,7 @@ export const LoginEmailCheck = (): ReactElement => {
 
   return (
     <div className="email-check-card padding-5 desktop:margin-x-2 radius-md">
-      <Heading level={1} styleVariant="h2">
-        {Config.checkAccountEmailPage.header}
-      </Heading>
+      <Heading level={1}>{Config.checkAccountEmailPage.header}</Heading>
       <WithErrorBar hasError={Boolean(emailError)} type="ALWAYS">
         <InputLabel htmlFor="email">Email</InputLabel>
         <GenericTextField

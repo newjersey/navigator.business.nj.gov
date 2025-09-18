@@ -32,7 +32,7 @@ export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
     return (
       <div ref={ref} data-testid="profile-tab-header">
         <hr className="desktop:margin-top-0 margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <Heading level={2} className="margin-bottom-4" style={{ fontWeight: 300 }}>
+        <Heading level={2} className="margin-bottom-4">
           {getTitle()}
         </Heading>
         {(props.tab === "permits" || props.tab === "personalize") && (

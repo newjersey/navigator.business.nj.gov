@@ -1,5 +1,6 @@
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { Content } from "@/components/Content";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -7,7 +8,6 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -50,7 +50,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
         data-testid={"main-business-address-container-header"}
         className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2"
       >
-        <Heading level={2} styleVariant="h3" className="margin-0-override">
+        <Heading level={2} className="margin-0-override">
           {Config.formation.sections.addressHeader}{" "}
           <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
         </Heading>

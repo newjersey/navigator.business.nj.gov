@@ -90,7 +90,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
         </div>
       )}
       <div className={"display-none desktop:display-block"}>
-        <Heading level={2} className="margin-top-0 font-weight-normal">
+        <Heading level={2} className="margin-top-0">
           {Config.dashboardDefaults.sidebarHeading}
           <span data-testid="for-you-counter" className="margin-left-05 text-base">
             ({props.cardCount})

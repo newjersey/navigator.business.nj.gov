@@ -178,9 +178,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       )}
       {business && !showRadioQuestion && (
         <>
-          <Heading level={2} styleVariant="h3">
-            {Config.businessStructureTask.completedHeader}
-          </Heading>
+          <Heading level={2}>{Config.businessStructureTask.completedHeader}</Heading>
           <Alert variant="success">
             <div
               className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`}

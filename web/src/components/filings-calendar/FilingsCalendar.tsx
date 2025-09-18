@@ -143,7 +143,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       <div className="calendar-container" data-testid="filings-calendar">
         <div className="flex mobile-lg:flex-align-end flex-justify flex-column mobile-lg:flex-row">
           <div className="flex flex-align-end">
-            <Heading level={2} className="margin-bottom-0 text-medium">
+            <Heading level={2} className="margin-bottom-0">
               {Config.dashboardDefaults.calendarHeader}
             </Heading>
             <div
