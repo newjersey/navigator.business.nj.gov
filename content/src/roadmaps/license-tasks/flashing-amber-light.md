@@ -97,7 +97,7 @@ P.O. Box 171
 
 Trenton, NJ 08666-0171
 
-:::largeCallout{ showHeader="true" headerText="What if I don’t get a flashing amber lights permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t get a flashing amber light permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You may be subject to fines and legal penalties if you use a flashing amber light without a valid permit.
 
