@@ -1,8 +1,5 @@
 ---
-notesMd: |-
-  8.12.25: Updated with revisions based on internal content review 
-
-  7.31.25: WIP, has not been reviewed yet
+notesMd: ""
 header: Department of Labor and Workforce Services (DOL) Employer Identification
   Number (EIN)
 id: dol-ein
