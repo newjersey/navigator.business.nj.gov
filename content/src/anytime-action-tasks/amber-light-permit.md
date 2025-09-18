@@ -57,16 +57,18 @@ Your vehicle must also be registered under one of these NJ Motor Vehicle Commiss
 
 ## Application Requirements
 
-### Business 
+### Business
 
 * Business name
 * Business address, phone number, and email
-* Entity ID \[insert CI] 
+*  `Entity ID|entity-id` 
+
+
 * Contact name
 * Description of the type of service and location (county) where the amber light will be used
 * Applicable fees paid
 
-### Vehicle 
+### Vehicle
 
 * Name of registered owner/lessee
 * Relationship of registered owner/lessee to applicant (for example, self or supervisor)
@@ -93,7 +95,7 @@ P.O. Box 171
 
 Trenton, NJ 08666-0171
 
-:::largeCallout{ showHeader="true" headerText=" What if I don’t get a flashing amber light permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don’t get a flashing amber light permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You may be subject to fines and legal penalties if you use a flashing amber light without a valid permit.
 
