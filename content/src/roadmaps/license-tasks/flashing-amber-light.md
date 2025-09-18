@@ -71,3 +71,31 @@ Find out more about these codes from the NJ MVC.
 * Vehicle Identification Number (VIN)
 * Copy of the vehicle registration
 * Copy of the lease agreement, if the vehicle is leased
+
+:::largeCallout{ showHeader="false" headerText="" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 292-6500" emailIconText="" }
+
+Call the NJ MVC with any questions.
+
+:::
+
+Mail your completed application with all required documents and fees to:
+
+NJ Motor Vehicle Commission
+
+Business Licensing Services Bureau
+
+P.O. Box 171
+
+Trenton, NJ 08666-0171
+
+:::largeCallout{ showHeader="true" headerText="What if I don’t get a flashing amber lights permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+You may be subject to fines and legal penalties if you use a flashing amber light without a valid permit.
+
+:::
+
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+
+A flashing amber light permit, valid for 4 years, sent to your mailing address. You must keep the permit in the vehicle with you at all times.
+
+:::
