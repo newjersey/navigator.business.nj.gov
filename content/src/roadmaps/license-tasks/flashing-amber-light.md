@@ -64,8 +64,6 @@ Your vehicle must also be registered under one of these NJ Motor Vehicle Commiss
 * Business name
 * Business address, phone number, and email
 *  `Entity ID|entity-id` 
-
-
 * Contact name
 * Description of the type of service and location (county) where the amber light will be used
 * Applicable fees paid
@@ -105,6 +103,6 @@ You may be subject to fines and legal penalties if you use a flashing amber ligh
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-A flashing amber light permit, valid for 4 years, sent to your mailing address. You must keep the permit in the vehicle with you at all times.
+A flashing amber light permit, valid for 4 years, sent to your mailing address. You must keep the permit in the vehicle at all times.
 
 :::
