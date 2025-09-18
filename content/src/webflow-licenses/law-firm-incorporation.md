@@ -5,7 +5,7 @@ urlSlug: law-firm-incorporation
 webflowName: Law Firm (Incorporation)
 agencyId: nj-revenue-enterprise-services
 agencyAdditionalContext: Business Services
-callToActionText: Incorporate as a Law Firm
+callToActionText: Start a Law Firm
 callToActionLink: http://state.nj.us/treasury/revenue/
 webflowIndustry: Law Firm
 divisionPhone: (609) 292-9292
