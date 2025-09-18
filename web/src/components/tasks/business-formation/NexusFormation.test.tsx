@@ -166,6 +166,7 @@ describe("<NexusFormationFlow />", () => {
     await page.uploadFile(file);
     await page.completeWillPracticeLaw();
     await page.stepperClickToReviewStep();
+    await page.checkAllReviewCheckboxes();
     await page.clickSubmit();
 
     const base64String = Buffer.from("my cool file contents", "utf8").toString("base64");

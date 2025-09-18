@@ -230,6 +230,7 @@ export type FormationPageHelpers = {
     fieldName: string,
   ) => Promise<void>;
   clickSubmit: () => Promise<void>;
+  checkAllReviewCheckboxes: () => Promise<void>;
   selectDate: (
     value: DateObject,
     fieldType: "Business start date" | "Foreign date of formation",
@@ -517,6 +518,22 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
+  const checkAllReviewCheckboxes = async (): Promise<void> => {
+    const namesDatesBox = within(
+      screen.getByTestId("names-addresses-dates-checkbox-container"),
+    ).getByRole("checkbox");
+    const permanentRecordBox = within(
+      screen.getByTestId("permanent-record-checkbox-container"),
+    ).getByRole("checkbox");
+    const correctionFeesBox = within(
+      screen.getByTestId("correction-fees-checkbox-container"),
+    ).getByRole("checkbox");
+
+    await userEvent.click(namesDatesBox);
+    await userEvent.click(permanentRecordBox);
+    await userEvent.click(correctionFeesBox);
+  };
+
   const selectDate = (
     value: DateObject,
     fieldType: "Business start date" | "Foreign date of formation",
@@ -587,6 +604,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillAddressModal,
     fillAndSubmitAddressModal,
     clickSubmit,
+    checkAllReviewCheckboxes,
     clickSubmitAndGetError,
     selectDate,
     stepperClickToBusinessNameStep,

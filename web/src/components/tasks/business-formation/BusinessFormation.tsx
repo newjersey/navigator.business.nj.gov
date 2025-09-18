@@ -68,6 +68,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(
     undefined,
   );
+  const [reviewCheckboxes, setReviewCheckboxes] = useState({
+    namesAddressesDatesChecked: false,
+    permanentRecordChecked: false,
+    correctionFeesChecked: false,
+  });
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
@@ -261,6 +266,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
     return Config.formation.intro.default;
   };
 
+  const allConfirmationsChecked = (): boolean => {
+    return (
+      reviewCheckboxes.correctionFeesChecked &&
+      reviewCheckboxes.namesAddressesDatesChecked &&
+      reviewCheckboxes.permanentRecordChecked
+    );
+  };
+
   return (
     <BusinessFormationContext.Provider
       value={{
@@ -275,6 +288,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           hasBeenSubmitted,
           hasSetStateFirstTime,
           foreignGoodStandingFile,
+          reviewCheckboxes,
         },
         setFormationFormData,
         setBusinessNameAvailability,
@@ -284,6 +298,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setFieldsInteracted,
         setHasBeenSubmitted,
         setForeignGoodStandingFile,
+        setReviewCheckboxes,
+        allConfirmationsChecked,
       }}
     >
       <div className="flex flex-column min-height-38rem" data-testid="formation-form">

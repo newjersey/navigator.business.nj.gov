@@ -37,8 +37,14 @@ import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from
 
 export const BusinessFormationPaginator = (): ReactElement => {
   const { updateQueue, business } = useUserData();
-  const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
-    useContext(BusinessFormationContext);
+  const {
+    state,
+    setStepIndex,
+    setHasBeenSubmitted,
+    setFormationFormData,
+    setFieldsInteracted,
+    allConfirmationsChecked,
+  } = useContext(BusinessFormationContext);
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const { doesStepHaveError, isStepCompleted, allCurrentErrorsForStep, getApiErrorMessage } =
@@ -56,9 +62,15 @@ export const BusinessFormationPaginator = (): ReactElement => {
     hasSubmitted: boolean;
   }): { stepsWithErrors: StepperStep[]; stepStates: StepperStep[] } => {
     const stepStates = BusinessFormationStepsConfiguration.map((value) => {
+      let hasError = doesStepHaveError(value.name, overrides);
+
+      if (value.name === "Review" && !allConfirmationsChecked() && state.hasBeenSubmitted) {
+        hasError = true;
+      }
+
       return {
         name: value.name,
-        hasError: doesStepHaveError(value.name, overrides),
+        hasError,
         isComplete: isStepCompleted(value.name),
       };
     });
@@ -125,7 +137,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
     if (isSubmittingFromFinalStep) {
       setHasBeenSubmitted(true);
       const { stepsWithErrors } = determineStepsStates({ hasSubmitted: true });
-      if (stepsWithErrors.length > 0) {
+
+      if (stepsWithErrors.length > 0 || !allConfirmationsChecked()) {
         scrollToTopOfElement(errorAlertRef.current, { focusElement: true });
         return;
       }
