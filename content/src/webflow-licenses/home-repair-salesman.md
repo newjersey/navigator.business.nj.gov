@@ -1,14 +1,14 @@
 ---
+id: home-repair-salesman
 displayname: home-repair-salesman
-id: "home-repair-salesman"
-webflowId: "5f7729922f04da2d7158b5f6"
-urlSlug: "home-repair-salesman"
-webflowName: "Home Repair Salesman"
-callToActionLink: "http://nj.gov/dobi/division_consumers/finance/personalfinance_menu.htm"
-callToActionText: ""
+urlSlug: home-repair-salesman
+webflowName: Home Repair Salesman
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "Home Improvement Contract Registration"
-divisionPhone: "(888) 656-6225"
-webflowIndustry: "Home Repair Sales"
-licenseCertificationClassification: "REGISTRATION"
+agencyAdditionalContext: Home Improvement Contract Registration
+callToActionText: Become a Home Repair Salesperson
+callToActionLink: https://www.nj.gov/dobi/banklicensing/homerepaircont.html
+webflowIndustry: Home Repair Sales
+divisionPhone: (888) 656-6225
+webflowId: 5f7729922f04da2d7158b5f6
+licenseCertificationClassification: REGISTRATION
 ---
