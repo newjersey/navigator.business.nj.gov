@@ -58,3 +58,16 @@ Find out more about these codes from the NJ MVC.
 * Contact name
 * Description of the type of service and location (county) where the amber light will be used
 * Applicable fees paid
+
+
+
+### Vehicle 
+
+* Name of registered owner/lessee
+* Relationship of registered owner/lessee to applicant (for example, self or supervisor)
+* Address of registered owner/lessee 
+* License plate number
+* Vehicle year, make, and model
+* Vehicle Identification Number (VIN)
+* Copy of the vehicle registration
+* Copy of the lease agreement, if the vehicle is leased
