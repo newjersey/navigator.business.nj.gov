@@ -93,8 +93,6 @@ const app = setupExpress();
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
-// runCmsIntegrityTests(STAGE);
-
 const XRAY_REGISTRATION_STATUS_BASE_URL =
   process.env.XRAY_REGISTRATION_STATUS_BASE_URL || "http://localhost:9000";
 
