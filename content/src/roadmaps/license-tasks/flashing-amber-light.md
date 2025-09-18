@@ -1,0 +1,24 @@
+---
+notesMd: "Working doc:
+  https://docs.google.com/document/d/1J9l9n_cAurZ1fKzk4hGbzABD68rV-WNCi_4q_rImQ\
+  x0/edit?tab=t.zc2285uxxift#heading=h.m209clcqp04w"
+licenseName: ""
+id: flashing-amber-light
+displayname: flashing-amber-light
+urlSlug: flashing-amber-light
+name: Apply for a Flashing Amber Light Permit
+webflowName: Flashing Amber Light Permit
+summaryDescriptionMd: You need a Flashing Amber Light permit to use amber
+  (yellow) warning lights on your vehicle for certain types of work. These
+  lights warn others of potential hazards when you work on public roads.
+industryId:
+  - commercial-construction
+---
+## Eligible Types of Work
+
+To qualify for a flashing amber light permit, your work must be in 1 of these areas:
+
+* Towing
+* Maintenance, inspection, or repair work on or along public highways, or transporting or guiding large loads 
+* Snow removal or sanding (must have a snow removal or sanding contract with a government agency)
+* Security services
