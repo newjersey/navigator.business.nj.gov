@@ -22,3 +22,21 @@ To qualify for a flashing amber light permit, your work must be in 1 of these ar
 * Maintenance, inspection, or repair work on or along public highways, or transporting or guiding large loads 
 * Snow removal or sanding (must have a snow removal or sanding contract with a government agency)
 * Security services
+
+## Eligible Commercial Vehicle Registration Codes
+
+Your vehicle must also be registered under one of these NJ Motor Vehicle Commission (MVC) commercial codes:
+
+* Code 11: Commercial Truck or Tractor
+* Code 16: Aggregate Haulers 
+* Code 23: Overweight/Overdimensional Trailer 
+* Code 31: Farm Truck
+* Code 32: Light-Medium Weight Tow Truck
+* Code 33: Heavy Duty Tow Truck
+* Code 39: Solid Waste 
+* Code 41: Constructor 
+* Code 51:  Farm Use 
+* Code 52: Agricultural Tractor
+* Code 56: Contractor Equipment In-Transit 
+
+Find out more about these codes from the NJ MVC.
