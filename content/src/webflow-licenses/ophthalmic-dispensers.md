@@ -5,7 +5,7 @@ urlSlug: ophthalmic-dispensers
 webflowName: Ophthalmic Dispensers
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Examiners of Ophthalmic Dispensers and Technicians
-callToActionText: Learn About the Board of Optometrists
+callToActionText: Become an Ophthalmic Dispenser
 callToActionLink: https://www.njconsumeraffairs.gov/oph/Pages/applications.aspx
 webflowIndustry: Ophthalmic Dispensers
 divisionPhone: (973) 504-6435
