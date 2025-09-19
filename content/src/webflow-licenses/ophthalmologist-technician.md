@@ -1,14 +1,14 @@
 ---
+id: ophthalmologist-technician
 displayname: ophthalmologist-technician
-id: "ophthalmologist-technician"
-webflowId: "5f7729a84ad0ae1f91a54a5d"
-urlSlug: "ophthalmologist-technician"
-webflowName: "Ophthalmologist Technician"
-callToActionLink: "http://njconsumeraffairs.gov/opt"
-callToActionText: ""
+urlSlug: ophthalmologist-technician
+webflowName: Ophthalmologist Technician
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "Board of Examiners of Ophthalmic Dispensers and Technicians"
-divisionPhone: "(973) 504-6435"
-webflowIndustry: "Ophthalmologist Technician"
-licenseCertificationClassification: "REGISTRATION/LICENSE"
+agencyAdditionalContext: Board of Examiners of Ophthalmic Dispensers and Technicians
+callToActionText: Learn About the Board of Optometrists
+callToActionLink: http://njconsumeraffairs.gov/opt
+webflowIndustry: Ophthalmologist Technician
+divisionPhone: (973) 504-6435
+webflowId: 5f7729a84ad0ae1f91a54a5d
+licenseCertificationClassification: REGISTRATION/LICENSE
 ---
