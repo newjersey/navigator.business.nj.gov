@@ -12,19 +12,20 @@ import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo"
 import { SalesInfo } from "@/components/tasks/cigarette-license/SalesInfo";
 import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
   pickData,
 } from "@/contexts/dataFormErrorMapContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
+import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   CigaretteLicenseData,
@@ -38,15 +39,14 @@ import {
 import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import {
   Dispatch,
   ReactElement,
   SetStateAction,
   useCallback,
   useContext,
-  useRef,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -324,12 +324,23 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     return paymentComplete || taskComplete;
   };
 
+  const fireAnalyticsEvent = (step: number): void => {
+    const analyticsEvent = [
+      analytics.event.cigarette_license.click.switch_to_step_one,
+      analytics.event.cigarette_license.click.switch_to_step_two,
+      analytics.event.cigarette_license.click.switch_to_step_three,
+      analytics.event.cigarette_license.click.switch_to_step_four,
+    ];
+    analyticsEvent[step]();
+  };
+
   const onStepClick = (step: number): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).update();
       setShowNeedsAccountModal(true);
     } else {
       saveCigaretteLicenseData();
+      fireAnalyticsEvent(step);
       setStepIndex(step);
     }
   };

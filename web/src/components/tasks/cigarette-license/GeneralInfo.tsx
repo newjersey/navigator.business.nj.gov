@@ -3,12 +3,13 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -25,6 +26,7 @@ export const GeneralInfo = (props: Props): ReactElement => {
       updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).update();
       setShowNeedsAccountModal(true);
     } else {
+      analytics.event.cigarette_license.click.step_one_continue_button();
       props.setStepIndex(1);
     }
   };

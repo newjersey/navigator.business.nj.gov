@@ -2002,7 +2002,102 @@ export default {
         },
       },
     },
-
+    cigarette_license: {
+      click: {
+        switch_to_step_one: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_1",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_one",
+          });
+        },
+        switch_to_step_two: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_2",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_two",
+          });
+        },
+        switch_to_step_three: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_3",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_three",
+          });
+        },
+        switch_to_step_four: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_4",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_four",
+          });
+        },
+        step_one_continue_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_1_continue_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_two",
+          });
+        },
+        step_two_continue_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_2_continue_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_three",
+          });
+        },
+        step_three_continue_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_3_continue_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_four",
+          });
+        },
+        step_four_submit_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_4_submit_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_success_screen_or_error_screen",
+          });
+        },
+      },
+      submit: {
+        validation_error: () => {
+          eventRunner.track({
+            event: "cigarette_license_task_validation_error",
+            legacy_event_category: "cigarette_license_task_step_4_submit_button",
+            legacy_event_action: "submit",
+            legacy_event_label: "remain_on_cigarette_license_step_4_validation_error",
+          });
+        },
+        service_error: () => {
+          eventRunner.track({
+            event: "cigarette_license_task_service_error",
+            legacy_event_category: "cigarette_license_task_step_4_submit_button",
+            legacy_event_action: "submit",
+            legacy_event_label: "remain_on_cigarette_license_step_4_service_error",
+          });
+        },
+      },
+      appears: {
+        validation_success: () => {
+          eventRunner.track({
+            event: "cigarette_license_task_validation_success",
+            legacy_event_category: "cigarette_license_task_success_screen",
+            legacy_event_action: "appear",
+            legacy_event_label: "arrive_on_cigarette_submission_success_screen",
+          });
+        },
+      },
+    },
     tax_calendar_register_button: {
       click: {
         show_myNJ_registration_prompt_modal: () => {
