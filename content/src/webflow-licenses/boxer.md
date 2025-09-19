@@ -5,7 +5,7 @@ urlSlug: boxer
 webflowName: Boxer
 agencyId: law-public-safety
 agencyAdditionalContext: State Athletic Control Board
-callToActionText: Get Your Professional Boxer License
+callToActionText: Get Licensed as a Boxing Contestant
 callToActionLink: https://www.nj.gov/oag/sacb/licensing-application.html
 webflowIndustry: Boxer
 divisionPhone: (609) 292-0317
