@@ -425,9 +425,9 @@ describe("profile - shared", () => {
     });
   });
 
-  describe("Special Note Alert for Businesses Formed outside the Navigator", () => {
+  describe("Callout that the profile helps with recommendations", () => {
     it.each(businessPersonas)(
-      "shows the Note Alert for all personas when unauthenticated for %s",
+      "shows the callout for all personas when unauthenticated for %s",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -440,7 +440,7 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
         const calloutText =
-          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
             /headerText="([^"]*)"/,
           )?.[1];
         expect(calloutText).toBeDefined();
@@ -459,7 +459,7 @@ describe("profile - shared", () => {
       });
       renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
       const calloutText =
-        Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+        Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
           /headerText="([^"]*)"/,
         )?.[1];
       expect(calloutText).toBeDefined();
@@ -467,7 +467,7 @@ describe("profile - shared", () => {
     });
 
     it.each(nonOwningPersonas)(
-      "does NOT show Note Callout for %s business that paid via the Navigator and are authenticated",
+      "shows the callout for %s business that paid via the Navigator and are authenticated",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -480,16 +480,16 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         const calloutText =
-          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
             /headerText="([^"]*)"/,
           )?.[1];
         expect(calloutText).toBeDefined();
-        expect(screen.queryByText(calloutText!)).not.toBeInTheDocument();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
 
     it.each(nonOwningPersonas)(
-      "does NOT show Note Alert for %s business that have not paid and not formed and are authenticated",
+      "shows the callout for %s business that have not paid and not formed and are authenticated",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -502,16 +502,16 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         const calloutText =
-          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
             /headerText="([^"]*)"/,
           )?.[1];
         expect(calloutText).toBeDefined();
-        expect(screen.queryByText(calloutText!)).not.toBeInTheDocument();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
 
     it.each(businessPersonas)(
-      "shows Note alert for %s business that set DateOfFormation but did NOT pay",
+      "shows the callout for %s business that set DateOfFormation but did NOT pay",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -524,7 +524,7 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         const calloutText =
-          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator.match(
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
             /headerText="([^"]*)"/,
           )?.[1];
         expect(calloutText).toBeDefined();

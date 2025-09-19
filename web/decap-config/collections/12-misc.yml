@@ -2837,8 +2837,8 @@ collections:
                       widget: string,
                     }
                   - {
-                      label: Note for Businesses Formed Outside Navigator,
-                      name: noteForBusinessesFormedOutsideNavigator,
+                      label: Your Profile Helps With Recommendations Callout,
+                      name: yourProfileHelpsWithRecommendationsCallout,
                       widget: markdown,
                     }
                   - {
