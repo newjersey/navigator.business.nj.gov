@@ -6,7 +6,7 @@ webflowName: Operating Engineer (Pressure Vessel)
 agencyId: njdol
 agencyAdditionalContext: Office of Boiler and Pressure Vessel Compliance
 callToActionText: Become a Boiler Operator
-callToActionLink: http://nj.gov/labor/lsse/content/contact_us.html
+callToActionLink: https://www.nj.gov/labor/safetyandhealth/programs-services/boiler-pressure-vessel-compliance/
 webflowIndustry: Engineer
 divisionPhone: (609) 292-2345
 webflowId: 5f7729512f04da521958b5f3
