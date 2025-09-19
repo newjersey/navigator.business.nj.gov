@@ -46,6 +46,18 @@
   },
   "overrides": [
     {
+      "files": ["cdk/bin/*"],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    },
+    {
+      "files": ["cdk/lib/*"],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    },
+    {
       "files": ["**/*.test.*"],
       "plugins": ["jest", "jest-formatting"],
       "extends": ["plugin:jest/recommended", "plugin:jest-formatting/recommended"],
