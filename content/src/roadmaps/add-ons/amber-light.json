@@ -1,0 +1,12 @@
+{
+  "id": "amber-light",
+  "displayname": "amber-light",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 10,
+      "licenseTask": "flashing-amber-light",
+      "required": true
+    }
+  ]
+}
