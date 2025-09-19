@@ -208,6 +208,7 @@ export type FormationPageHelpers = {
   getStepStateInStepper: (index: number | undefined) => string;
   searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
   fillAndBlurBusinessName: (businessName?: string) => Promise<void>;
+  fillAndBlurBusinessNameConfirmation: (businessNameConfirmation?: string) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
   getInputElementByLabel: (label: string) => HTMLInputElement;
@@ -229,6 +230,7 @@ export type FormationPageHelpers = {
     fieldName: string,
   ) => Promise<void>;
   clickSubmit: () => Promise<void>;
+  checkAllReviewCheckboxes: () => Promise<void>;
   selectDate: (
     value: DateObject,
     fieldType: "Business start date" | "Foreign date of formation",
@@ -250,6 +252,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     businessName = "Default Test Name",
   ): Promise<void> => {
     fillText("Search business name", businessName);
+    fillText("Confirm business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
     fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
@@ -262,6 +265,13 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const fillAndBlurBusinessName = async (businessName = "Default Test Name"): Promise<void> => {
     fillText("Search business name", businessName);
     fireEvent.blur(screen.getByLabelText("Search business name"));
+  };
+
+  const fillAndBlurBusinessNameConfirmation = async (
+    businessNameConfirmation = "Default Test Name",
+  ): Promise<void> => {
+    fillText("Confirm business name", businessNameConfirmation);
+    fireEvent.blur(screen.getByLabelText("Confirm business name"));
   };
 
   const submitNexusBusinessNameStep = async (): Promise<void> => {
@@ -508,6 +518,22 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
+  const checkAllReviewCheckboxes = async (): Promise<void> => {
+    const namesDatesBox = within(
+      screen.getByTestId("names-addresses-dates-checkbox-container"),
+    ).getByRole("checkbox");
+    const permanentRecordBox = within(
+      screen.getByTestId("permanent-record-checkbox-container"),
+    ).getByRole("checkbox");
+    const correctionFeesBox = within(
+      screen.getByTestId("correction-fees-checkbox-container"),
+    ).getByRole("checkbox");
+
+    await userEvent.click(namesDatesBox);
+    await userEvent.click(permanentRecordBox);
+    await userEvent.click(correctionFeesBox);
+  };
+
   const selectDate = (
     value: DateObject,
     fieldType: "Business start date" | "Foreign date of formation",
@@ -551,6 +577,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillText,
     fillAndSubmitBusinessNameStep,
     fillAndBlurBusinessName,
+    fillAndBlurBusinessNameConfirmation,
     submitBusinessNameStep,
     submitBusinessStep,
     submitContactsStep,
@@ -577,6 +604,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillAddressModal,
     fillAndSubmitAddressModal,
     clickSubmit,
+    checkAllReviewCheckboxes,
     clickSubmitAndGetError,
     selectDate,
     stepperClickToBusinessNameStep,

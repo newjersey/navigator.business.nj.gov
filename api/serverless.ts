@@ -44,8 +44,6 @@ const usersTable = `users-table-${stage}`;
 const businessesTable = `businesses-table-${stage}`;
 const ssmLocation = stage === "local" ? "dev" : stage;
 
-const contentEnv = "content";
-const testEnv = "testing";
 const devEnv = "dev";
 
 const adminPassword = process.env.ADMIN_PASSWORD ?? "";
@@ -153,6 +151,11 @@ const serverlessConfiguration: AWS = {
         statements: [
           {
             Effect: "Allow",
+            Action: ["sns:Publish"],
+            Resource: `arn:aws:sns:${region}:${account_id}:bfs-navigator-dev-cms-alert-topic`,
+          },
+          {
+            Effect: "Allow",
             Action: "lambda:InvokeFunction",
             Resource: `arn:aws:lambda:${region}:*:function:${healthCheckLambda}`,
             Condition: {
@@ -185,6 +188,7 @@ const serverlessConfiguration: AWS = {
             Action: ["ssm:GetParameter", "ssm:PutParameter"],
             Resource: [
               `arn:aws:ssm:${region}:${account_id}:parameter/${stage}/feature-flag/users-migration/kill-switch`,
+              `arn:aws:ssm:${region}:${account_id}:parameter/${stage}/cms_alerts_sns_topic_arn`,
             ],
           },
           {
@@ -286,6 +290,10 @@ const serverlessConfiguration: AWS = {
     logRetentionInDays: 180,
   },
 
+  package: {
+    patterns: ["../content/src/**"],
+  },
+
   functions: {},
 };
 
@@ -365,24 +373,20 @@ serverlessConfiguration.functions = {
         }
       : undefined,
   ),
+
+  healthCheck: healthCheck(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined,
+  ),
 };
 
-if (stage !== contentEnv && stage !== testEnv) {
-  serverlessConfiguration.functions = {
-    ...serverlessConfiguration.functions,
-    healthCheck: healthCheck(
-      env.CI
-        ? {
-            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
-            subnetIds: [
-              "${self:custom.config.infrastructure.SUBNET_01}",
-              "${self:custom.config.infrastructure.SUBNET_02}",
-            ],
-          }
-        : undefined,
-    ),
-  };
-}
 if (stage === devEnv) {
   serverlessConfiguration.functions = {
     ...serverlessConfiguration.functions,

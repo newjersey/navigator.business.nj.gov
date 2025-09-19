@@ -238,6 +238,16 @@ collections:
                           name: "errorInlineNeedsToSearch",
                           widget: "string",
                         }
+                      - {
+                          label: "Confirm Business Name Label",
+                          name: "confirmBusinessNameLabel",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Confirm Business Name Error",
+                          name: "confirmBusinessNameError",
+                          widget: "string",
+                        }
                       - label: Overrides
                         name: overrides
                         collapsed: false
@@ -1160,6 +1170,33 @@ collections:
                           name: "billingContactHeader",
                           widget: "string",
                         }
+                      - { label: "Warning alert", name: "warningAlert", widget: "markdown" }
+                      - label: "Confirmation box"
+                        name: confirmationBox
+                        widget: object
+                        fields:
+                          - { label: "Title", name: "title", widget: "string" }
+                          - {
+                              label: "Names addresses dates checkbox",
+                              name: "namesAddressesDatesCheckbox",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Permanent record checkbox",
+                              name: "permanentRecordCheckbox",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Correction fees checkbox",
+                              name: "correctionFeesCheckbox",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Confirmation error",
+                              name: "confirmationError",
+                              widget: "string",
+                            }
+
               - label: Error Banner
                 name: errorBanner
                 collapsed: true
@@ -1241,7 +1278,6 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: "Amendment Info Alert", name: "amendmentInfo", widget: "markdown" }
                   - {
                       label: "Not entered text - review page",
                       name: "notEntered",

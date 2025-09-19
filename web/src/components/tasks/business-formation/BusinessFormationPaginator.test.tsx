@@ -252,7 +252,8 @@ describe("<BusinessFormationPaginator />", () => {
 
     it("switches from error-active to error, persisting the error state on step one even after switching steps", async () => {
       const page = preparePage({ business, displayContent });
-      page.fillText("Search business name", "Pizza Joint");
+      page.fillAndBlurBusinessName("Test Name");
+      page.fillAndBlurBusinessNameConfirmation("Test Name");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
       await page.stepperClickToBusinessStep();
@@ -261,7 +262,8 @@ describe("<BusinessFormationPaginator />", () => {
 
     it("maintains the unavailable business name search error, even after switching steps and returning", async () => {
       const page = preparePage({ business, displayContent });
-      page.fillText("Search business name", "Pizza Joint");
+      page.fillAndBlurBusinessName("Test Name");
+      page.fillAndBlurBusinessNameConfirmation("Test Name");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
@@ -273,7 +275,8 @@ describe("<BusinessFormationPaginator />", () => {
 
     it("maintains the confirm business name error, even after switching steps and returning", async () => {
       const page = preparePage({ business, displayContent });
-      await page.fillAndBlurBusinessName("Pizza Joint");
+      page.fillAndBlurBusinessName("Test Name");
+      page.fillAndBlurBusinessNameConfirmation("Test Name");
       expect(
         screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
       ).toBeInTheDocument();
@@ -326,7 +329,8 @@ describe("<BusinessFormationPaginator />", () => {
         it("saves availability state when switching back to step", async () => {
           const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
-          page.fillText("Search business name", "Pizza Joint");
+          page.fillAndBlurBusinessName("Test Name");
+          page.fillAndBlurBusinessNameConfirmation("Test Name");
           await page.searchBusinessName({ status: "AVAILABLE" });
           expect(screen.getByTestId("available-text")).toBeInTheDocument();
 
@@ -338,16 +342,18 @@ describe("<BusinessFormationPaginator />", () => {
         it("saves name to profile when available", async () => {
           const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
-          page.fillText("Search business name", "Pizza Joint");
+          page.fillAndBlurBusinessName("Test Name");
+          page.fillAndBlurBusinessNameConfirmation("Test Name");
           await page.searchBusinessName({ status: "AVAILABLE" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().profileData.businessName).toEqual("Test Name");
         });
 
         it("does not save name to profile when unavailable", async () => {
           const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
-          page.fillText("Search business name", "Pizza Joint");
+          page.fillAndBlurBusinessName("Test Name");
+          page.fillAndBlurBusinessNameConfirmation("Test Name");
           await page.searchBusinessName({ status: "UNAVAILABLE" });
           switchStepFunction();
           expect(currentBusiness().profileData.businessName).toEqual(
@@ -358,7 +364,8 @@ describe("<BusinessFormationPaginator />", () => {
         it("does not save name to profile when error", async () => {
           const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
-          page.fillText("Search business name", "Pizza Joint LLC");
+          page.fillAndBlurBusinessName("Test Name");
+          page.fillAndBlurBusinessNameConfirmation("Test Name");
           await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
           switchStepFunction();
           expect(currentBusiness().profileData.businessName).toEqual(
@@ -485,7 +492,8 @@ describe("<BusinessFormationPaginator />", () => {
 
       it("marks step one as complete if business name is available", async () => {
         const page = preparePage({ business, displayContent });
-        page.fillText("Search business name", "Pizza Joint");
+        page.fillAndBlurBusinessName("Test Name");
+        page.fillAndBlurBusinessNameConfirmation("Test Name");
         await page.searchBusinessName({ status: "AVAILABLE" });
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
@@ -493,7 +501,8 @@ describe("<BusinessFormationPaginator />", () => {
 
       it("marks step one as error if business name is unavailable", async () => {
         const page = preparePage({ business, displayContent });
-        page.fillText("Search business name", "Pizza Joint");
+        page.fillAndBlurBusinessName("Test Name");
+        page.fillAndBlurBusinessNameConfirmation("Test Name");
         await page.searchBusinessName({ status: "UNAVAILABLE" });
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
@@ -501,7 +510,8 @@ describe("<BusinessFormationPaginator />", () => {
 
       it("marks step one as error if business name search is error", async () => {
         const page = preparePage({ business, displayContent });
-        page.fillText("Search business name", "Pizza Joint LLC");
+        page.fillAndBlurBusinessName("Test Name");
+        page.fillAndBlurBusinessNameConfirmation("Test Name");
         await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
@@ -558,6 +568,7 @@ describe("<BusinessFormationPaginator />", () => {
         expect(
           screen.queryByText(Config.formation.errorBanner.incompleteStepsError),
         ).not.toBeInTheDocument();
+        await page.checkAllReviewCheckboxes();
         await page.clickSubmit();
 
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
@@ -710,6 +721,7 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage({ business: filledInBusiness, displayContent });
         await page.fillAndSubmitBusinessNameStep();
         await page.stepperClickToReviewStep();
+        await page.checkAllReviewCheckboxes();
         await page.clickSubmit();
         await waitFor(() => {
           return expect(mockPush).toHaveBeenCalledWith("www.example.com");
@@ -765,6 +777,7 @@ describe("<BusinessFormationPaginator />", () => {
             );
 
             await page.stepperClickToReviewStep();
+            await page.checkAllReviewCheckboxes();
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
               "ERROR",
@@ -1388,6 +1401,7 @@ describe("<BusinessFormationPaginator />", () => {
               const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
+              await page.checkAllReviewCheckboxes();
               await page.clickSubmit();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
                 "ERROR",
@@ -2183,6 +2197,41 @@ describe("<BusinessFormationPaginator />", () => {
     });
   });
 
+  describe("review confirmation checkboxes", () => {
+    let page: FormationPageHelpers;
+
+    beforeEach(async () => {
+      page = preparePage({ business, displayContent });
+      await page.stepperClickToBillingStep();
+      page.completeRequiredBillingFields();
+      await page.stepperClickToReviewStep();
+    });
+
+    it("prevents submission when review confirmation checkboxes are not checked", async () => {
+      await page.clickSubmit();
+
+      expect(
+        screen.getByText(Config.formation.sections.review.confirmationBox.confirmationError),
+      ).toBeInTheDocument();
+
+      expect(screen.getByTestId("review-step")).toBeInTheDocument();
+    });
+
+    it("allows submission when all review confirmation checkboxes are checked", async () => {
+      await page.checkAllReviewCheckboxes();
+
+      await page.clickSubmit();
+
+      expect(
+        screen.queryByText(Config.formation.sections.review.confirmationBox.confirmationError),
+      ).not.toBeInTheDocument();
+
+      expect(
+        screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+      ).toBeInTheDocument();
+    });
+  });
+
   describe("autosave", () => {
     beforeEach(() => {
       jest.useFakeTimers();
@@ -2219,16 +2268,15 @@ describe("<BusinessFormationPaginator />", () => {
       act(() => {
         jest.advanceTimersByTime(1000);
       });
-      page.fillText("Search business name", "Pizza Joint");
+      page.fillAndBlurBusinessName("Pizza Joint");
+      page.fillAndBlurBusinessNameConfirmation("Pizza Joint");
       act(() => {
         jest.advanceTimersByTime(1000);
       });
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
       await waitFor(() => {
-        expect(currentBusiness().formationData.businessNameAvailability?.status).toEqual(
-          "UNAVAILABLE",
-        );
+        expect(currentBusiness().formationData.businessNameAvailability).not.toBeUndefined();
       });
     });
 

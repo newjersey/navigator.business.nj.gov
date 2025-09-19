@@ -80,7 +80,6 @@
       "submitButtonText": "Submit & Pay",
       "radioYesText": "Yes",
       "viewMoreButtonText": "Read more",
-      "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
       "viewLessButtonText": "Read less",
       "genericErrorText": "This field requires information.",
       "ariaContextStepperStateComplete": "Complete",
@@ -103,7 +102,15 @@
       "notificationsHeader": "Notifications",
       "review": {
         "nameLabel": "Full Name",
-        "billingContactHeader": "Billing Contact Information"
+        "billingContactHeader": "Billing Contact Information",
+        "warningAlert": "**Review carefully before you submit.** If you need to correct any errors (even a simple typo) after filing, you will need to file a [correction](https://www.njportal.com/dor/businessamendments) and be charged an additional fee. This fee could be **over $100**. Also, your approval could be delayed up to **2 weeks**.",
+        "confirmationBox": {
+          "title": "Ready to Submit?",
+          "namesAddressesDatesCheckbox": "Yes, I have carefully checked all **names, addresses,** and **dates**, and confirm they are correct and complete.",
+          "permanentRecordCheckbox": "Yes, I understand that after I submit, filing becomes a permanent public record, and **filing false information may result in penalties**.",
+          "correctionFeesCheckbox": "Yes, I understand if I need to correct any errors after I submit, I'll have to file a [correction](https://www.njportal.com/dor/businessamendments), could pay **over $100** outside of this website, and my approval may be delayed up to 2 weeks.",
+          "confirmationError": "Select all three checkboxes if you understand and want to continue."
+        }
       },
       "contactInfoHeader": "Billing Contact Information",
       "servicesDescription": "Use the table below to select all the services you’d like to purchase as well as the payment type."
@@ -295,7 +302,9 @@
         "alertUnavailable": "\"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
         "label": "Business Name",
         "description": "We’ll check to see if your desired business name is available. Once you find an available name, you can use it to complete this form.\n\nWhat do you want to name your business?",
-        "errorInlineNeedsToSearch": "Confirm the availability of your business name."
+        "errorInlineNeedsToSearch": "Check the availability of your business name.",
+        "confirmBusinessNameLabel": "Confirm Business Name",
+        "confirmBusinessNameError": "Business names must match."
       },
       "agentOfficeAddressLine2": {
         "label": "Office Address Line 2"
