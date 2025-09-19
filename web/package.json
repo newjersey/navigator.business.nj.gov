@@ -137,7 +137,7 @@
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "13.0.1",
     "cross-env": "7.0.3",
-    "cspell": "9.2.0",
+    "cspell": "9.2.1",
     "cypress": "14.5.4",
     "cypress-dotenv": "3.0.1",
     "cypress-wait-until": "3.0.2",
