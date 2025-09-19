@@ -1,14 +1,14 @@
 ---
+id: marriage-and-family-therapist
 displayname: marriage-and-family-therapist
-id: "marriage-and-family-therapist"
-webflowId: "5f77299a2edc670afab4a70b"
-urlSlug: "marriage-and-family-therapist"
-webflowName: "Marriage and Family Therapist"
-callToActionLink: "http://njconsumeraffairs.gov/mft"
-callToActionText: ""
+urlSlug: marriage-and-family-therapist
+webflowName: Marriage and Family Therapist
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "State Board of Marriage and Family Therapy Examiners"
-divisionPhone: "(973) 504-6582"
-webflowIndustry: "Marriage Family Therapist"
-licenseCertificationClassification: "REGISTRATION/LICENSE"
+agencyAdditionalContext: State Board of Marriage and Family Therapy Examiners
+callToActionText: Become a Marriage and Family Therapist
+callToActionLink: http://njconsumeraffairs.gov/mft
+webflowIndustry: Marriage Family Therapist
+divisionPhone: (973) 504-6582
+webflowId: 5f77299a2edc670afab4a70b
+licenseCertificationClassification: REGISTRATION/LICENSE
 ---
