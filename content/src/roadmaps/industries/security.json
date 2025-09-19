@@ -69,7 +69,8 @@
   "nonEssentialQuestionsIds": [
     "bus-initial-inspection",
     "vehicle-dealership-q",
-    "cdl-neq"
+    "cdl-neq",
+    "flashing-light-permit"
   ],
   "displayname": "security",
   "industryOnboardingQuestions": {
