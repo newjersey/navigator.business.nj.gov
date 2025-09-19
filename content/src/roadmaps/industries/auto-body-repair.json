@@ -69,7 +69,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "vehicle-dealership-q",
-    "ust-reg"
+    "ust-reg",
+    "flashing-light-permit"
   ],
   "displayname": "auto-body-repair",
   "industryOnboardingQuestions": {
