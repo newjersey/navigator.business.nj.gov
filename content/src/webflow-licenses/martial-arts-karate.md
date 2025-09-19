@@ -4,7 +4,8 @@ displayname: martial-arts-karate
 urlSlug: martial-arts-karate
 webflowName: Martial Arts (Karate)
 agencyId: local-health
-callToActionLink: Get Licensed as a Martial Arts Contestant
+callToActionText: Get Licensed as a Martial Arts Contestant
+callToActionLink: https://www.nj.gov/oag/sacb/licensing-application.html
 webflowIndustry: Martial Arts
 licenseCertificationClassification: LICENSE
 divisionPhone: ""
