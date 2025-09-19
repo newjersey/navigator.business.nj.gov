@@ -51,7 +51,8 @@
     "vehicle-dealership-q",
     "cdl-neq",
     "selfgenerator-transporter-registration",
-    "waste-transporter-license-a-901"
+    "waste-transporter-license-a-901",
+    "flashing-light-permit"
   ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
