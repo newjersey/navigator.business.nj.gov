@@ -1,8 +1,5 @@
 .input-error-bar {
-  left: -13px !important;
   margin-left: 0 !important;
-  padding-left: 13px !important;
-  margin-right: -17px !important;
   position: relative;
 }
 
@@ -10,6 +7,8 @@
   border-left-width: 4px;
   border-left-color: #d54309;
   border-left-style: solid;
+  padding-left: 13px !important;
   left: -17px !important;
+  width: calc(100% + 17px);
   margin-bottom: 1em;
 }
