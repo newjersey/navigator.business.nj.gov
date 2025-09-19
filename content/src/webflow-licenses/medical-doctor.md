@@ -1,12 +1,13 @@
 ---
+id: medical-doctor
 displayname: medical-doctor
-id: "medical-doctor"
-webflowId: "640b8467c486a0718ad86ce8"
-urlSlug: "medical-doctor"
-webflowName: "Medical Doctor"
-callToActionLink: "http://njconsumeraffairs.gov/bme/Pages/applications.aspx"
+urlSlug: medical-doctor
+webflowName: Medical Doctor
 agencyId: nj-consumer-affairs
-divisionPhone: "(609) 826-7100"
-webflowIndustry: "Medical Doctor"
-licenseCertificationClassification: "LICENSE"
+callToActionText: Apply for a Medical License
+callToActionLink: http://njconsumeraffairs.gov/bme/Pages/applications.aspx
+webflowIndustry: Medical Doctor
+licenseCertificationClassification: LICENSE
+divisionPhone: (609) 826-7100
+webflowId: 640b8467c486a0718ad86ce8
 ---
