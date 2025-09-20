@@ -27,7 +27,7 @@ pathspec==0.12.1
 pexpect==4.9.0
 pillow==11.3.0
 platformdirs==4.3.8
-prompt_toolkit==3.0.51
+prompt_toolkit==3.0.52
 ptyprocess==0.7.0
 pure_eval==0.2.3
 pycparser==2.22
