@@ -4799,7 +4799,7 @@ __metadata:
     serverless-prune-plugin: 2.1.0
     simple-oauth2: 5.1.0
     supertest: 6.3.4
-    ts-jest: 29.4.0
+    ts-jest: 29.4.2
     ts-loader: 9.5.2
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
@@ -5008,7 +5008,7 @@ __metadata:
     style-loader: 3.3.4
     supertest: 6.3.4
     swr: 1.3.0
-    ts-jest: 29.4.0
+    ts-jest: 29.4.2
     ts-loader: 9.5.2
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
@@ -5051,7 +5051,7 @@ __metadata:
     lodash: 4.17.21
     prettier: 3.6.2
     rimraf: 6.0.1
-    ts-jest: 29.4.0
+    ts-jest: 29.4.2
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
     typescript: 5.8.3
@@ -5188,7 +5188,7 @@ __metadata:
     storybook: 7.6.20
     style-loader: 3.3.4
     swr: 1.3.0
-    ts-jest: 29.4.0
+    ts-jest: 29.4.2
     ts-loader: 9.5.2
     ts-node: 10.9.2
     typescript: 5.8.3
@@ -22279,7 +22279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.7.7":
+"handlebars@npm:^4.7.7, handlebars@npm:^4.7.8":
   version: 4.7.8
   resolution: "handlebars@npm:4.7.8"
   dependencies:
@@ -35287,13 +35287,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:29.4.0":
-  version: 29.4.0
-  resolution: "ts-jest@npm:29.4.0"
+"ts-jest@npm:29.4.2":
+  version: 29.4.2
+  resolution: "ts-jest@npm:29.4.2"
   dependencies:
     bs-logger: ^0.2.6
-    ejs: ^3.1.10
     fast-json-stable-stringify: ^2.1.0
+    handlebars: ^4.7.8
     json5: ^2.2.3
     lodash.memoize: ^4.1.2
     make-error: ^1.3.6
@@ -35323,7 +35323,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: 4083840a71c89fa41a75afd8a48329e9138bc2856ce86fe0de4f25b9417bbd1595d5fa18c9f6fa77161629a2cabcaf6ed9db8f5441c6890a466cc62da4ba8da4
+  checksum: c7f2f6b946dd4d198ba986da90086f1ae4582b83e51f230f21ac531b33017b9fdf956e891addb97e1cabd7a860bfd43cc79b67be072d5089d8ed44fbad688146
   languageName: node
   linkType: hard
 
