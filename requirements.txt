@@ -32,7 +32,7 @@ ptyprocess==0.7.0
 pure_eval==0.2.3
 pycparser==2.22
 Pygments==2.19.2
-pyparsing==3.2.3
+pyparsing==3.2.4
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.1
 PyYAML==6.0.2
