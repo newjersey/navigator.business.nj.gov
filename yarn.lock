@@ -4885,8 +4885,8 @@ __metadata:
     "@storybook/theming": 7.6.20
     "@swc/core": 1.12.11
     "@swc/jest": 0.2.39
-    "@testing-library/dom": 10.4.0
-    "@testing-library/jest-dom": 6.6.3
+    "@testing-library/dom": 10.4.1
+    "@testing-library/jest-dom": 6.8.0
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     "@types/broken-link-checker": 0.7.3
@@ -5100,8 +5100,8 @@ __metadata:
     "@storybook/theming": 7.6.20
     "@swc/core": 1.12.11
     "@swc/jest": 0.2.39
-    "@testing-library/dom": 10.4.0
-    "@testing-library/jest-dom": 6.6.3
+    "@testing-library/dom": 10.4.1
+    "@testing-library/jest-dom": 6.8.0
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     "@types/broken-link-checker": 0.7.3
@@ -12551,34 +12551,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:10.4.0":
-  version: 10.4.0
-  resolution: "@testing-library/dom@npm:10.4.0"
+"@testing-library/dom@npm:10.4.1":
+  version: 10.4.1
+  resolution: "@testing-library/dom@npm:10.4.1"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/runtime": ^7.12.5
     "@types/aria-query": ^5.0.1
     aria-query: 5.3.0
-    chalk: ^4.1.0
     dom-accessibility-api: ^0.5.9
     lz-string: ^1.5.0
+    picocolors: 1.1.1
     pretty-format: ^27.0.2
-  checksum: bb128b90be0c8cd78c5f5e67aa45f53de614cc048a2b50b230e736ec710805ac6c73375af354b83c74d710b3928d52b83a273a4cb89de4eb3efe49e91e706837
+  checksum: 3887fe95594b6d9467a804e2cc82e719c57f4d55d7d9459b72a949b3a8189db40375b89034637326d4be559f115abc6b6bcfcc6fec0591c4a4d4cdde96751a6c
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:6.6.3":
-  version: 6.6.3
-  resolution: "@testing-library/jest-dom@npm:6.6.3"
+"@testing-library/jest-dom@npm:6.8.0":
+  version: 6.8.0
+  resolution: "@testing-library/jest-dom@npm:6.8.0"
   dependencies:
     "@adobe/css-tools": ^4.4.0
     aria-query: ^5.0.0
-    chalk: ^3.0.0
     css.escape: ^1.5.1
     dom-accessibility-api: ^0.6.3
-    lodash: ^4.17.21
+    picocolors: ^1.1.1
     redent: ^3.0.0
-  checksum: c1dc4260b05309a0084416639006cd105849acc5b102bef682a3b19bd6fce07ff6762085fc7f2599546c995a2fc66fdb1d70e50e22a634a0098524056cc9e511
+  checksum: a3cfb162b6ec6e98277187d9488234ba3e3ee25f24a86facdae092dbe54a015c845bcb81daa6de7afadcac5a5fe25becd7c7e9b67bb01ee4ccf7d67ee907adc9
   languageName: node
   linkType: hard
 
@@ -30165,7 +30164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picocolors@npm:^1.0.0, picocolors@npm:^1.1.1":
+"picocolors@npm:1.1.1, picocolors@npm:^1.0.0, picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
   checksum: e1cf46bf84886c79055fdfa9dcb3e4711ad259949e3565154b004b260cd356c5d54b31a1437ce9782624bf766272fe6b0154f5f0c744fb7af5d454d2b60db045
