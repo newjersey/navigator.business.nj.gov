@@ -4761,7 +4761,7 @@ __metadata:
     "@types/jest": 29.5.14
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
-    "@types/node": 20.19.16
+    "@types/node": 20.19.17
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.3
     "@types/xml2js": 0.4.14
@@ -4816,7 +4816,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 20.19.16
+    "@types/node": 20.19.17
     cross-env: 7.0.3
     cspell: 9.2.1
     prettier: 3.6.2
@@ -4899,7 +4899,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 20.19.16
+    "@types/node": 20.19.17
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -5032,7 +5032,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.14
-    "@types/node": 20.19.16
+    "@types/node": 20.19.17
     "@types/react": 18.2.79
     "@types/uuid": 10.0.0
     "@typescript-eslint/eslint-plugin": 7.18.0
@@ -5110,7 +5110,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 20.19.16
+    "@types/node": 20.19.17
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -13197,12 +13197,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.19.16":
-  version: 20.19.16
-  resolution: "@types/node@npm:20.19.16"
+"@types/node@npm:20.19.17":
+  version: 20.19.17
+  resolution: "@types/node@npm:20.19.17"
   dependencies:
     undici-types: ~6.21.0
-  checksum: e78e32efbec84065c78dd8462cb069efce79d801ebf1aec6a7a004baf8cd2f4f17319abfdee59b60f0ba269ebb7ff098734842fe5e1b382cfaf2495d7c8add8d
+  checksum: facdb62f39dc01fda2822cda491bd6826dd10e5d9ab83d482e0b032a8fc28ad7e70345b20f6f0f284c9fdf8873d83c7be5ce55e19425cd973beb84f2f7fb0862
   languageName: node
   linkType: hard
 
