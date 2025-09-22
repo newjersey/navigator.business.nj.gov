@@ -56,6 +56,7 @@ import * as PassengerTransportCdl from "../../../content/src/fieldConfig/passeng
 import * as PassengerTransportCdl2 from "../../../content/src/fieldConfig/passenger-transport-cdl-tab2.json";
 import * as Profile from "../../../content/src/fieldConfig/profile.json";
 import * as RegisteredForTaxesModal from "../../../content/src/fieldConfig/registered-for-taxes-modal.json";
+import * as RemoveBusinessModal from "../../../content/src/fieldConfig/remove-business-modal.json";
 import * as SearchBusinessNameTask from "../../../content/src/fieldConfig/search-business-name-task.json";
 import * as SectionHeaders from "../../../content/src/fieldConfig/section-headers.json";
 import * as SelfRegistration from "../../../content/src/fieldConfig/self-registration.json";
@@ -166,6 +167,7 @@ const merged = JSON.parse(
       AbcEmergencyTripPermit,
       FilingDefaults,
       FormationDataDeletionModal,
+      RemoveBusinessModal,
     ),
   ),
 );
@@ -248,7 +250,8 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof TaxClearanceCertificateDownload &
   typeof AbcEmergencyTripPermit &
   typeof FilingDefaults &
-  typeof FormationDataDeletionModal;
+  typeof FormationDataDeletionModal &
+  typeof RemoveBusinessModal;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -331,6 +334,7 @@ export const getMergedConfig = (): ConfigType => {
     AbcEmergencyTripPermit,
     FilingDefaults,
     FormationDataDeletionModal,
+    RemoveBusinessModal,
   );
 };
 

@@ -1,6 +1,7 @@
 import { AuthContext } from "@/contexts/authContext";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -70,6 +71,25 @@ export const withNeedsAccountContext = (
     >
       {subject}
     </NeedsAccountContext.Provider>
+  );
+};
+
+export const withRemoveBusinessContext = (
+  subject: ReactElement,
+  context?: {
+    showRemoveBusinessModal: boolean;
+    setShowRemoveBusinessModal: (value: boolean) => void;
+  },
+): ReactElement => {
+  return (
+    <RemoveBusinessContext.Provider
+      value={{
+        showRemoveBusinessModal: context?.showRemoveBusinessModal ?? false,
+        setShowRemoveBusinessModal: context?.setShowRemoveBusinessModal || jest.fn(),
+      }}
+    >
+      {subject}
+    </RemoveBusinessContext.Provider>
   );
 };
 

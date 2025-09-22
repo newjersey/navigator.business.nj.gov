@@ -40,6 +40,8 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
+import { RemoveBusinessModal } from "@/components/auth/RemoveBusinessModal";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -62,6 +64,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const [showNeedsAccountSnackbar, setShowNeedsAccountSnackbar] = useState<boolean>(false);
   const [showNeedsAccountModal, setShowNeedsAccountModal] = useState<boolean>(false);
+  const [showRemoveBusinessModal, setShowRemoveBusinessModal] = useState<boolean>(false);
 
   const [showContinueWithoutSaving, setShowContinueWithoutSaving] = useState<boolean>(false);
   const [userWantsToContinueWithoutSaving, setUserWantsToContinueWithoutSaving] =
@@ -257,10 +260,18 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                               setUserWantsToContinueWithoutSaving,
                             }}
                           >
-                            <ContextualInfoPanel />
-                            <Component {...pageProps} />
-                            <NeedsAccountModal />
-                            <RegistrationStatusSnackbar />
+                            <RemoveBusinessContext.Provider
+                              value={{
+                                showRemoveBusinessModal,
+                                setShowRemoveBusinessModal,
+                              }}
+                            >
+                              <ContextualInfoPanel />
+                              <Component {...pageProps} />
+                              <RemoveBusinessModal />
+                              <NeedsAccountModal />
+                              <RegistrationStatusSnackbar />
+                            </RemoveBusinessContext.Provider>
                           </NeedsAccountContext.Provider>
                         </RoadmapContext.Provider>
                       </ContextualInfoContext.Provider>
