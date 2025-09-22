@@ -51,10 +51,10 @@ export default {
       body: calloutBody,
     };
   },
-  toBlock: (obj: { calloutType: string; body: string; }): string => {
+  toBlock: (obj: { calloutType: string; body: string }): string => {
     return `:::miniCallout{ calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
   },
-  toPreview: (obj: { calloutType: string; body: string; }): string => {
+  toPreview: (obj: { calloutType: string; body: string }): string => {
     return `:::miniCallout{ calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
   },
 };
