@@ -28,8 +28,8 @@ You can file it online or by mail. When you file, include any updated informatio
 1. File online: for the fastest turnaround time
 2. Mail the form: Select the right form for your business type:
 
-* Corporation (Form C-152) 
-* LLC  (Form L-108) 
-* Limited Partnership (Form LP-152)
+* [Corporation (Form C-152) ](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)
+* [LLC (Form L-108) ](https://nj.gov/treasury/revenue/dcr/pdforms/l108.pdf)
+* [Limited Partnership (Form LP-152)](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)
 
-To learn more about filing fees and correction forms for other business types, go to the FAQs on the DORES website.
+To learn more about filing fees and correction forms for other business types, [go to the FAQs](https://www.njportal.com/DOR/BusinessAmendments/Home/FAQ/) on the DORES website.
