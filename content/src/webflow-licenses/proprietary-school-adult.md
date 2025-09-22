@@ -6,7 +6,7 @@ webflowName: Adult Proprietary School
 agencyId: njdol
 agencyAdditionalContext: Adult Private Schools Licensing and Credentials
 callToActionText: Find Training Opportunities
-callToActionLink: https://www.nj.gov/labor/labormarketinformation/contact-us/COEI.shtml
+callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-criminal-justice-home/
 webflowIndustry: Adult School
 divisionPhone: (609) 292-7272
 webflowId: 5f7729525ddf762af53ac436
