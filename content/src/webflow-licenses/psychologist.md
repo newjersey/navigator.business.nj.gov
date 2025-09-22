@@ -1,12 +1,13 @@
 ---
+id: psychologist
 displayname: psychologist
-id: "psychologist"
-webflowId: "640b8467b71e322050d8d407"
-urlSlug: "psychologist"
-webflowName: "Psychologist"
-callToActionLink: "http://njconsumeraffairs.gov/psy/"
+urlSlug: psychologist
+webflowName: Psychologist
 agencyId: nj-consumer-affairs
-divisionPhone: "(973) 504-6470"
-webflowIndustry: "Psychologist"
-licenseCertificationClassification: "REGISTERED/LICENSE"
+callToActionText: Register as a Licensed Psychologist
+callToActionLink: http://njconsumeraffairs.gov/psy/
+webflowIndustry: Psychologist
+licenseCertificationClassification: REGISTERED/LICENSE
+divisionPhone: (973) 504-6470
+webflowId: 640b8467b71e322050d8d407
 ---
