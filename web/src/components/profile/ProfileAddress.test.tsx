@@ -849,7 +849,6 @@ describe("<ProfileAddress  />", () => {
           addressLine2: "Suite 123",
         });
 
-        console.log("addy", address);
         useMockBusiness(
           generateBusiness({
             profileData: generateProfileData({
