@@ -5,7 +5,7 @@ urlSlug: plant-exporter-export-to-foreign-countries
 webflowName: Plant Exporter (Export to Foreign Countries)
 agencyId: agriculture
 agencyAdditionalContext: Division of Plant Industry
-callToActionText: Learn About Phytosanitary Inspection and Certification
+callToActionText: Learn About Exporting Plants
 callToActionLink: http://nj.gov/agriculture/divisions/pi/serv/exports.html
 webflowIndustry: Plant Exporter
 divisionPhone: (609) 406-6939
