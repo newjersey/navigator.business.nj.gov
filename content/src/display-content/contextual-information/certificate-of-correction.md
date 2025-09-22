@@ -31,3 +31,5 @@ You can file it online or by mail. When you file, include any updated informatio
 * Corporation (Form C-152) 
 * LLC  (Form L-108) 
 * Limited Partnership (Form LP-152)
+
+To learn more about filing fees and correction forms for other business types, go to the FAQs on the DORES website.
