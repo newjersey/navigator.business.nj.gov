@@ -13,7 +13,8 @@ export default {
       name: "headerText",
       label: "Header Text",
       default: "",
-      widget: "string",
+      widget: "markdown",
+      hint: "text is bolded for all callout types except for warning callout type which can include unbolded text and links",
     },
   ],
 
