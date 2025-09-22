@@ -11,7 +11,7 @@ A Certificate of Correction is a form you can file with the New Jersey Division 
 
 **Amendment:** update information if something changed later (for example, a new address, new owner, or name change)
 
-If you’re unsure about which is right for you, ask an attorney or DORES.
+If you’re unsure about which is right for you, ask an attorney or [DORES](https://www.nj.gov/treasury/revenue/revgencode.shtml).
 
 #### What are some examples of Corrections?
 
@@ -28,8 +28,6 @@ You can file it online or by mail. When you file, include any updated informatio
 1. File online: for the fastest turnaround time
 2. Mail the form: Select the right form for your business type:
 
-Corporation (Form C-152) 
-
-LLC  (Form L-108) 
-
-Limited Partnership (Form LP-152)
+* Corporation (Form C-152) 
+* LLC  (Form L-108) 
+* Limited Partnership (Form LP-152)
