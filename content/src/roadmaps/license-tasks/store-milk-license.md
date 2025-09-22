@@ -39,7 +39,7 @@ licenseCertificationClassification: undefined
 - Previous owner’s `NJ Department of Agriculture (NJDA) ID|njda-id` , if known
 - Weekly average quarts of milk sold by the previous owner in the past 2 months, if known
 
-You can [apply for your license online](https://www-agr.state.nj.us/agriculture/AG_NJFARMS/welcome.html) or [by mail](https://www.nj.gov/agriculture/pdf/storemilklic.pdf). You also need to pay all applicable fees based on whether you’re opening a new store or taking over an existing one.
+You can [apply for your license online](https://www-agr.nj.gov/agriculture/AG_NJFARMS/welcome.html) or [by mail](https://www.nj.gov/agriculture/pdf/storemilklic.pdf). You also need to pay all applicable fees based on whether you’re opening a new store or taking over an existing one.
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
