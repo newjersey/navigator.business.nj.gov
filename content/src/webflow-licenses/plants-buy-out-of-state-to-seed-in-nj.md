@@ -5,7 +5,7 @@ urlSlug: plants-buy-out-of-state-to-seed-in-nj
 webflowName: Plants (Buy Out of State to Seed in NJ)
 agencyId: agriculture
 agencyAdditionalContext: Division of Plant Industry
-callToActionText: Learn About Agricultural Seed Dealers
+callToActionText: Find Agricultural Seed Dealers
 callToActionLink: http://nj.gov/agriculture/divisions/pi/serv/exports.html
 webflowIndustry: Plants
 divisionPhone: (609) 406-6939
