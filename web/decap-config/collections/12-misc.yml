@@ -424,6 +424,39 @@ collections:
                   name: lockedStatusTooltipText,
                   widget: text,
                 }
+  - label: Remove Business Modal
+    name: removeBusinessModal
+    delete: false
+    create: false
+    files:
+      - label: Remove Business Modal
+        name: "removeBusinessModal"
+        file: "content/src/fieldConfig/remove-business-modal.json"
+        editor:
+          preview: true
+        fields:
+          - label: Remove Business Modal
+            name: removeBusinessModal
+            collapsed: false
+            widget: object
+            summary: "{{removeBusinessModal}}"
+            fields:
+              - { label: Header, name: header, widget: string }
+              - {
+                  label: Filing Official Business Closure Text,
+                  name: filingOfficialBusinessClosureText,
+                  widget: markdown,
+                }
+              - { label: Business Removal Text Text, name: businessRemovalText, widget: markdown }
+              - { label: Save button text, name: irreversibleOperationText, widget: string }
+              - { label: Save button text, name: removeBusinessButtonText, widget: string }
+              - { label: Cancel button text, name: cancelButtonText, widget: string }
+              - { label: Agreement checkbox text, name: agreementCheckboxText, widget: string }
+              - {
+                  label: Agreement checkbox error text,
+                  name: agreementCheckboxErrorText,
+                  widget: string,
+                }
   - label: Tax Task - Tax Registration Modal
     name: registeredForTaxesModal
     delete: false
