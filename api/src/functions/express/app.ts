@@ -18,6 +18,7 @@ import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
+import { CigaretteLicenseEmailClient } from "@client/CigaretteLicenseEmailClient";
 import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
 import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
@@ -259,7 +260,8 @@ const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
 });
 const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
-const cigaretteLicenseClient = ApiCigaretteLicenseClient(logger);
+const cigaretteLicenseEmailClient = CigaretteLicenseEmailClient(logger);
+const cigaretteLicenseClient = ApiCigaretteLicenseClient(cigaretteLicenseEmailClient, logger);
 const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
 
 const BUSINESS_NAME_BASE_URL =
@@ -500,6 +502,7 @@ app.use(
       ["tax-clearance", taxClearanceHealthCheckClient],
       ["xray-registration", xrayRegistrationHealthCheckClient],
       ["cigarette-license", cigaretteLicenseHealthCheckClient],
+      ["cigarette-email-client", cigaretteLicenseEmailClient.health],
     ]),
     logger,
   ),

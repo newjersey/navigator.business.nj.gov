@@ -1,9 +1,8 @@
 import {
-  makePostBody,
-  makeEmailConfirmationBody,
   CigaretteLicenseApiConfig,
+  makeEmailConfirmationBody,
+  makePostBody,
 } from "@client/ApiCigaretteLicenseHelpers";
-import { randomUUID } from "node:crypto";
 import { CigaretteLicenseData, CigaretteLicensePaymentInfo } from "@shared/cigaretteLicense";
 import {
   generateBusiness,
@@ -11,6 +10,7 @@ import {
   generateUser,
   generateUserData,
 } from "@shared/test";
+import { randomUUID } from "node:crypto";
 
 jest.mock("node:crypto", () => ({
   randomUUID: jest.fn(),
@@ -32,8 +32,6 @@ describe("ApiCigaretteLicenseHelpers", () => {
       merchantCode: "TEST_MERCHANT",
       merchantKey: "TEST_KEY",
       serviceCode: "TEST_SERVICE",
-      emailConfirmationUrl: "TEST_EMAIL_URL",
-      emailConfirmationKey: "TEST_EMAIL_KEY",
     };
 
     const returnUrl = "https://example.com/return";
