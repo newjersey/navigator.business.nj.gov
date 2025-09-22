@@ -186,10 +186,7 @@ const serverlessConfiguration: AWS = {
           {
             Effect: "Allow",
             Action: ["ssm:GetParameter", "ssm:PutParameter"],
-            Resource: [
-              `arn:aws:ssm:${region}:${account_id}:parameter/${stage}/feature-flag/users-migration/kill-switch`,
-              `arn:aws:ssm:${region}:${account_id}:parameter/${stage}/cms_alerts_sns_topic_arn`,
-            ],
+            Resource: [`arn:aws:ssm:${region}:${account_id}:parameter/${stage}/*`],
           },
           {
             Effect: "Allow",
