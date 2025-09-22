@@ -1,14 +1,14 @@
 ---
+id: race-regatta
 displayname: race-regatta
-id: "race-regatta"
-webflowId: "5f7729649491d5352b036b58"
-urlSlug: "race-regatta"
-webflowName: "Race/Regatta"
-callToActionLink: "http://nj.gov/oag/racing/"
-callToActionText: ""
+urlSlug: race-regatta
+webflowName: Race/Regatta
 agencyId: law-public-safety
-agencyAdditionalContext: "Division of State Police"
-divisionPhone: "(609) 882-2000  6173"
-webflowIndustry: "Race Regatta"
-licenseCertificationClassification: "PERMIT"
+agencyAdditionalContext: Division of State Police
+callToActionText: Learn About the NJ Racing Commission
+callToActionLink: http://nj.gov/oag/racing/
+webflowIndustry: Race Regatta
+divisionPhone: (609) 882-2000  6173
+webflowId: 5f7729649491d5352b036b58
+licenseCertificationClassification: PERMIT
 ---
