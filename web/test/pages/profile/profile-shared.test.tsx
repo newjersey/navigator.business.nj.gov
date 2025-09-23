@@ -439,10 +439,8 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /headerText="([^"]*)"/,
-          )?.[1];
+        const calloutText = Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(/}\s*\*{2}([^*]+)\*{2}\s*:::/)?.[1];
+
         expect(calloutText).toBeDefined();
         expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
@@ -458,10 +456,8 @@ describe("profile - shared", () => {
         }),
       });
       renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-      const calloutText =
-        Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-          /headerText="([^"]*)"/,
-        )?.[1];
+      const calloutText = Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(/}\s*\*{2}([^*]+)\*{2}\s*:::/)?.[1];
+
       expect(calloutText).toBeDefined();
       expect(screen.getByText(calloutText!)).toBeInTheDocument();
     });
@@ -479,10 +475,8 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /headerText="([^"]*)"/,
-          )?.[1];
+        const calloutText = Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(/}\s*\*{2}([^*]+)\*{2}\s*:::/)?.[1];
+
         expect(calloutText).toBeDefined();
         expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
@@ -501,10 +495,8 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /headerText="([^"]*)"/,
-          )?.[1];
+        const calloutText = Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(/}\s*\*{2}([^*]+)\*{2}\s*:::/)?.[1];
+
         expect(calloutText).toBeDefined();
         expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
@@ -523,10 +515,8 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /headerText="([^"]*)"/,
-          )?.[1];
+        const calloutText = Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(/}\s*\*{2}([^*]+)\*{2}\s*:::/)?.[1];
+
         expect(calloutText).toBeDefined();
         expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },

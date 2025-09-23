@@ -497,7 +497,7 @@
       "escapeModalHeader": "Are you sure you want to continue?",
       "profileTabNumbersTitle": "Reference Numbers",
       "profileTabNoteTitle": "Notes",
-      "yourProfileHelpsWithRecommendationsCallout": ":::miniCallout{ headerText=\"**Your profile helps us make recommendations for your business.**\" calloutType=\"informational\"  }\n\n:::",
+      "yourProfileHelpsWithRecommendationsCallout": ":::miniCallout{ calloutType=\"informational\"  }\n**Your profile helps us make recommendations for your business.**\n:::",
       "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
       "saveButtonText": "Save",
       "permitsAndLicensesSubText": "Answer a few questions to find out what licenses and permits you may need and discover funding programs to help your business grow. New items will appear on your Starter Kit or your For You section.",

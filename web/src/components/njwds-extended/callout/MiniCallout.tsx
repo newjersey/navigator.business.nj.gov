@@ -1,11 +1,10 @@
-import { Content } from "@/components/Content";
 import {
   CALLOUT_STYLES,
   MiniCalloutProps,
 } from "@/components/njwds-extended/callout/calloutHelpers";
-import type { ReactElement } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 
-export const MiniCallout = (props: MiniCalloutProps): ReactElement => {
+export const MiniCallout = (props: PropsWithChildren<MiniCalloutProps>): ReactElement => {
   const styling = CALLOUT_STYLES[props.calloutType];
 
   return (
@@ -14,7 +13,7 @@ export const MiniCallout = (props: MiniCalloutProps): ReactElement => {
     >
       <div className="flex">
         <div className={styling.headerIcon} aria-hidden="true" data-testid="callout-icon" />
-        <Content>{props.headerText}</Content>
+        <div>{props.children}</div>
       </div>
     </div>
   );

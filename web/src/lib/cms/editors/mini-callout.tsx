@@ -10,11 +10,11 @@ export default {
       options: ["conditional", "informational", "warning", "quickReference"],
     },
     {
-      name: "headerText",
-      label: "Header Text",
+      name: "body",
+      label: "Body Text",
       default: "",
+      required: true,
       widget: "markdown",
-      hint: "text is bolded for all callout types except for warning callout type which can include unbolded text and links",
     },
   ],
 
@@ -25,7 +25,7 @@ export default {
   fromBlock: (
     match: RegExpMatchArray,
   ): {
-    headerText: string;
+    body: string;
     calloutType: string;
   } => {
     // We can safely assume there will be a single match; else we wouldn't be inside this function.
@@ -37,27 +37,24 @@ export default {
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
 
     // If we just have :::miniCallout {}\n:::, then we need to return some default values instead.
-    const defaultCalloutContents = 'headerText="" calloutType="conditional"';
+    const defaultCalloutContents = 'calloutType="conditional"';
 
     const calloutParameters = calloutMatch?.groups?.parameters ?? defaultCalloutContents;
 
-    const headerTextMatch = calloutParameters.match(/headerText="(?<headerText>[^"]+)"/);
-    const headerTextValue = headerTextMatch?.groups?.headerText.trim() ?? "";
+    const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
 
     const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
     const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
 
     return {
       calloutType: calloutTypeValue,
-      headerText: headerTextValue,
+      body: calloutBody,
     };
   },
-
-  // Function to create a text block from an instance of this component
-  toBlock: (obj: { headerText: string; calloutType: string }): string => {
-    return `:::miniCallout{ headerText="${obj.headerText}" calloutType="${obj.calloutType}"  }\n\n:::`;
+  toBlock: (obj: { calloutType: string; body: string; }): string => {
+    return `:::miniCallout{ calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
   },
-  toPreview: (obj: { headerText: string; calloutType: string }): string => {
-    return `:::miniCallout{ headerText="${obj.headerText}" calloutType="${obj.calloutType}"  }\n\n:::`;
+  toPreview: (obj: { calloutType: string; body: string; }): string => {
+    return `:::miniCallout{ calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
   },
 };
