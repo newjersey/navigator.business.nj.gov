@@ -11,7 +11,7 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import type { Business } from "@businessnjgovnavigator/shared/userData";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -128,5 +128,79 @@ describe("<XrayStatus />", () => {
     expect(getAddressLine1Field().value).toBe("");
     expect(getAddressLine2Field().value).toBe("");
     expect(getZipCodeField().value).toBe("");
+  });
+
+  it("shows validation errors when submitting form with empty required fields", async () => {
+    renderComponent({
+      xrayRegistrationData: {
+        facilityDetails: undefined,
+      },
+      formationData: generateEmptyFormationData(),
+      profileData: generateProfileData({
+        businessName: "",
+      }),
+    });
+
+    const submitButton = screen.getByTestId("check-status-submit");
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Enter your business name.")).toBeInTheDocument();
+    });
+
+    expect(screen.getByText("Enter your facility's street name and number")).toBeInTheDocument();
+    expect(screen.getByText("Enter your Zip code")).toBeInTheDocument();
+    expect(screen.getByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
+    expect(
+      screen.getByText("Review the following fields for errors and missing information:"),
+    ).toBeInTheDocument();
+  });
+
+  it("removes validation errors when filling out previously empty required fields", async () => {
+    renderComponent({
+      xrayRegistrationData: {
+        facilityDetails: undefined,
+      },
+      formationData: generateEmptyFormationData(),
+      profileData: generateProfileData({
+        businessName: "",
+      }),
+    });
+
+    const submitButton = screen.getByTestId("check-status-submit");
+    const businessNameField = getBusinessNameField();
+    const addressLine1Field = getAddressLine1Field();
+    const zipCodeField = getZipCodeField();
+
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Enter your business name.")).toBeInTheDocument();
+    });
+
+    fireEvent.change(businessNameField, { target: { value: "Test Business" } });
+    fireEvent.blur(businessNameField);
+
+    await waitFor(() => {
+      expect(screen.queryByText("Enter your business name.")).not.toBeInTheDocument();
+    });
+
+    fireEvent.change(addressLine1Field, { target: { value: "123 Test Street" } });
+    fireEvent.blur(addressLine1Field);
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText("Enter your facility's street name and number"),
+      ).not.toBeInTheDocument();
+    });
+
+    fireEvent.change(zipCodeField, { target: { value: "12345" } });
+    fireEvent.blur(zipCodeField);
+
+    await waitFor(() => {
+      expect(screen.queryByText("Enter your Zip code")).not.toBeInTheDocument();
+    });
+
+    expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
   });
 });

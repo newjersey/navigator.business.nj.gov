@@ -13,6 +13,7 @@ import {
   type ReactElement,
   type ReactNode,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -24,6 +25,18 @@ const useStyles = makeStyles(() => {
           display: "none",
         },
     },
+    errorLink: {
+      color: "#0071bc",
+      textDecoration: "underline",
+      cursor: "pointer",
+      background: "none",
+      border: "none",
+      padding: 0,
+      font: "inherit",
+      "&:hover": {
+        textDecoration: "none",
+      },
+    },
   });
 });
 
@@ -31,6 +44,12 @@ interface Props {
   onSubmit: (facilityDetails: FacilityDetails) => void;
   error: XraySearchError | undefined;
   isLoading: boolean;
+}
+
+interface FieldErrors {
+  businessName?: string;
+  addressLine1?: string;
+  addressZipCode?: string;
 }
 
 const Config = getMergedConfig();
@@ -49,7 +68,13 @@ export const XrayStatus = (props: Props): ReactElement => {
     addressLine2: "",
     addressZipCode: "",
   });
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const { business } = useUserData();
+
+  const businessNameRef = useRef<HTMLInputElement>(null);
+  const addressLine1Ref = useRef<HTMLInputElement>(null);
+  const addressZipCodeRef = useRef<HTMLInputElement>(null);
+  const errorAlertRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!business) return;
@@ -86,8 +111,42 @@ export const XrayStatus = (props: Props): ReactElement => {
     }
   }, [business]);
 
+  useEffect(() => {
+    if (Object.keys(fieldErrors).length > 0 && errorAlertRef.current) {
+      errorAlertRef.current.focus();
+    }
+  }, [fieldErrors]);
+
+  const validateForm = (): FieldErrors => {
+    const errors: FieldErrors = {};
+
+    if (!formValues.businessName?.trim()) {
+      errors.businessName = "Enter your business name.";
+    }
+
+    if (!formValues.addressLine1?.trim()) {
+      errors.addressLine1 = "Enter your facility's street name and number";
+    }
+
+    if (!formValues.addressZipCode?.trim()) {
+      errors.addressZipCode = "Enter your Zip code";
+    } else if (!/^\d{5}(-\d{4})?$/.test(formValues.addressZipCode.trim())) {
+      errors.addressZipCode = "Enter a valid 5-digit zip code";
+    }
+
+    return errors;
+  };
+
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
+    const errors = validateForm();
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     analytics.event.task_address_form.submit.submitted_address_form();
     props.onSubmit(formValues);
   };
@@ -105,7 +164,109 @@ export const XrayStatus = (props: Props): ReactElement => {
     };
   };
 
+  const handleBlurForKey = (key: keyof FacilityDetails): (() => void) => {
+    return (): void => {
+      if (fieldErrors[key as keyof FieldErrors]) {
+        const value = formValues[key];
+
+        if (key === "businessName" && value?.trim()) {
+          setFieldErrors((prevErrors) => {
+            const newErrors = { ...prevErrors };
+            delete newErrors.businessName;
+            return newErrors;
+          });
+        } else if (key === "addressLine1" && value?.trim()) {
+          setFieldErrors((prevErrors) => {
+            const newErrors = { ...prevErrors };
+            delete newErrors.addressLine1;
+            return newErrors;
+          });
+        } else if (
+          key === "addressZipCode" &&
+          value?.trim() &&
+          /^\d{5}(-\d{4})?$/.test(value.trim())
+        ) {
+          setFieldErrors((prevErrors) => {
+            const newErrors = { ...prevErrors };
+            delete newErrors.addressZipCode;
+            return newErrors;
+          });
+        }
+      }
+    };
+  };
+
+  const focusOnField = (fieldName: keyof FieldErrors): void => {
+    const refs = {
+      businessName: businessNameRef,
+      addressLine1: addressLine1Ref,
+      addressZipCode: addressZipCodeRef,
+    };
+
+    const ref = refs[fieldName];
+    if (ref?.current) {
+      ref.current.focus();
+    }
+  };
+
   const getErrorAlert = (): ReactNode => {
+    const hasFieldErrors = Object.keys(fieldErrors).length > 0;
+
+    if (hasFieldErrors) {
+      return (
+        <div
+          ref={errorAlertRef}
+          role="alert"
+          aria-live="assertive"
+          tabIndex={-1}
+          className="margin-bottom-3"
+        >
+          <Alert dataTestid="error-alert-FIELDS_REQUIRED" variant="error">
+            <div>
+              <p className="margin-bottom-2">
+                <strong>Review the following fields for errors and missing information:</strong>
+              </p>
+              <ul className="margin-bottom-0">
+                {fieldErrors.businessName && (
+                  <li>
+                    <button
+                      type="button"
+                      className={classes.errorLink}
+                      onClick={() => focusOnField("businessName")}
+                    >
+                      Business Name
+                    </button>
+                  </li>
+                )}
+                {fieldErrors.addressLine1 && (
+                  <li>
+                    <button
+                      type="button"
+                      className={classes.errorLink}
+                      onClick={() => focusOnField("addressLine1")}
+                    >
+                      Facility Address Line 1
+                    </button>
+                  </li>
+                )}
+                {fieldErrors.addressZipCode && (
+                  <li>
+                    <button
+                      type="button"
+                      className={classes.errorLink}
+                      onClick={() => focusOnField("addressZipCode")}
+                    >
+                      Zip Code
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </Alert>
+        </div>
+      );
+    }
+
     if (!props.error) {
       return <></>;
     } else if (props.error === "NOT_FOUND") {
@@ -132,6 +293,9 @@ export const XrayStatus = (props: Props): ReactElement => {
           <label className="text-bold" htmlFor="business-name">
             {Config.xrayRegistrationTask.businessNameLabel}
           </label>
+          <div className={"text-base-darkest"}>
+            Enter your business name exactly as it appears on your x-ray registration form.
+          </div>
           <TextField
             value={formValues?.businessName}
             onChange={handleChangeForKey("businessName")}
@@ -140,12 +304,23 @@ export const XrayStatus = (props: Props): ReactElement => {
               id: "business-name",
               "data-testid": "business-name",
             }}
+            inputRef={businessNameRef}
+            onBlur={handleBlurForKey("businessName")}
+            className={fieldErrors.businessName}
           />
+          {fieldErrors.businessName && (
+            <div id="business-name-error" className={"text-error-dark"}>
+              {fieldErrors.businessName}
+            </div>
+          )}
         </div>
         <div className="margin-bottom-2">
           <label className="text-bold" htmlFor="address-1">
             {Config.xrayRegistrationTask.address1Label}
           </label>
+          <div className={"text-base-darkest"}>
+            Enter the address of the facility exactly as it appears on your x-ray registration form.
+          </div>
           <TextField
             value={formValues?.addressLine1}
             onChange={handleChangeForKey("addressLine1")}
@@ -154,8 +329,17 @@ export const XrayStatus = (props: Props): ReactElement => {
               id: "address-1",
               "data-testid": "address-1",
             }}
+            inputRef={addressLine1Ref}
+            onBlur={handleBlurForKey("addressLine1")}
+            className={fieldErrors.addressLine1}
           />
+          {fieldErrors.addressLine1 && (
+            <div id="address-1-error" className={"text-error-dark"}>
+              {fieldErrors.addressLine1}
+            </div>
+          )}
         </div>
+
         <div className="margin-bottom-2">
           <label className="text-bold" htmlFor="address-2">
             {Config.xrayRegistrationTask.address2Label}
@@ -185,7 +369,14 @@ export const XrayStatus = (props: Props): ReactElement => {
                 type: "number",
               }}
               className={`${classes.addressZipCodeField}`}
+              inputRef={addressZipCodeRef}
+              onBlur={handleBlurForKey("addressZipCode")}
             />
+            {fieldErrors.addressZipCode && (
+              <div id="zip-code-error" className={"text-error-dark"}>
+                {fieldErrors.addressZipCode}
+              </div>
+            )}
           </div>
           <div className="flex-half padding-left-1">
             <label className="text-bold" htmlFor="state">
