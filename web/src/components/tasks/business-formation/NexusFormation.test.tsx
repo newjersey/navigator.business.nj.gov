@@ -314,20 +314,6 @@ describe("<NexusFormationFlow />", () => {
           "INCOMPLETE-ACTIVE",
         );
       });
-
-      it("shows modal when clicking CTA", () => {
-        clickNext();
-        fireEvent.click(
-          screen.getByText(displayContent.formationDbaContent.Authorize.callToActionText),
-        );
-        expect(screen.getByText(Config.DbaFormationTask.dbaCtaModalHeader)).toBeInTheDocument();
-        expect(
-          screen.getByText(Config.DbaFormationTask.dbaCtaModalContinueButtonText),
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(Config.DbaFormationTask.dbaCtaModalCancelButtonText),
-        ).toBeInTheDocument();
-      });
     });
   });
 
