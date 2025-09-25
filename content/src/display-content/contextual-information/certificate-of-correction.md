@@ -36,7 +36,7 @@ You can file it online or by mail. When you file, include any updated informatio
 1. [File online](https://www.njportal.com/DOR/BusinessAmendments/): for the fastest turnaround time
 2. Mail the form: Select the right form for your business type:
 
-* [Corporation (Form C-152) ](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)
+* [Corporation (Form C-152) ](https://www.nj.gov/treasury/revenue/dcr/pdforms/c152.pdf)
 * [LLC (Form L-108) ](https://nj.gov/treasury/revenue/dcr/pdforms/l108.pdf)
 * [Limited Partnership (Form LP-152)](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)
 
