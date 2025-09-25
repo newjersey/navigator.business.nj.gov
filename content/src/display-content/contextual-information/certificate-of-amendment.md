@@ -11,9 +11,8 @@ different from a&nbsp; `Certificate of Correction.|certificate-of-correction`
 
 #### How is an Amendment different from a Correction?
 
-**Amendment:** update information if something changed later (for example, a new address, new owner, or name change)
-
-**Correction:** fix an error or typo made when you first completed the business registration paperwork
+* **Amendment:** update information if something changed later (for example, a new address, new owner, or name change)
+* **Correction:** fix an error or typo made when you first completed the business registration paperwork
 
 If you’re unsure about which is right for you, ask an attorney or DORES.
 
