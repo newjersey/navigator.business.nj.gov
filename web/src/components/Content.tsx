@@ -107,10 +107,19 @@ export const Content = (props: ContentProps): ReactNode => {
 const Link = (onClick?: (url?: string) => void): any => {
   return Object.assign(
     (props: any): ReactElement => {
+      const childrenContent =
+        props.children && Array.isArray(props.children) ? props.children[0] : props.children;
+
+      if (!props.href) {
+        return <>{childrenContent || ""}</>;
+      }
+
+      const linkText = childrenContent || props.href;
+
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
           <ExternalLink href={props.href} onClick={(): void => onClick && onClick(props.href)}>
-            {props.children[0]}
+            {linkText}
           </ExternalLink>
         );
       }
@@ -120,7 +129,7 @@ const Link = (onClick?: (url?: string) => void): any => {
           className="usa-link"
           onClick={(): void => (onClick ? onClick(props.href) : undefined)}
         >
-          {props.children[0]}
+          {linkText}
         </a>
       );
     },
@@ -170,6 +179,8 @@ const OutlineBox = (props: any): ReactElement => {
 const ListOrCheckbox = (props: any): ReactElement => {
   if (
     props.children &&
+    Array.isArray(props.children) &&
+    props.children.length > 0 &&
     typeof props.children[0] === "string" &&
     props.children[0].startsWith("[]")
   ) {
