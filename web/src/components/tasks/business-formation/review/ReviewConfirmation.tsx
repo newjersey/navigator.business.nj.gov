@@ -13,7 +13,7 @@ export const ReviewConfirmation = (): ReactElement => {
 
   return (
     <div className="margin-top-4">
-      <div className="bg-base-lightest padding-x-5 padding-y-3 radius-md">
+      <div className="bg-base-extra-light padding-3 radius-md">
         <Heading level={2}>{Config.formation.sections.review.confirmationBox.title}</Heading>
 
         <WithErrorBar hasError={!allConfirmationsChecked() && state.hasBeenSubmitted} type="ALWAYS">

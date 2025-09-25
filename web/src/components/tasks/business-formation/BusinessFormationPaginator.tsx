@@ -541,7 +541,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
           onStepClicked={(step: number): void => {
             onMoveToStep(step, { moveType: "STEPPER" });
           }}
-          suppressRefocusBehavior={selectedStepHasErrors}
+          suppressRefocusBehavior={selectedStepHasErrors || currentStepName === "Review"}
         />
       </div>
       <div className="fg1 flex flex-column space-between" role={"tabpanel"}>
