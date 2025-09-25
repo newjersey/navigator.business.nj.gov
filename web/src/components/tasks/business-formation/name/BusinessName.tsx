@@ -84,6 +84,7 @@ export const BusinessName = (): ReactElement => {
               <div className="text-bold">{Config.formation.fields.businessName.label}</div>
               <TextField
                 autoComplete="no"
+                id={`question-${FIELD_NAME}`}
                 value={currentName}
                 onChange={(event): void => {
                   onChangeNameField(event.target.value);
