@@ -777,6 +777,11 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - {
+                          label: "Keep In Mind Callout",
+                          name: "keepInMindCallout",
+                          widget: "markdown",
+                        }
+                      - {
                           label: "Error banner - signer title",
                           name: "errorBannerSignerTitle",
                           widget: "string",

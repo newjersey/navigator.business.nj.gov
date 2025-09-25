@@ -24,6 +24,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
 import { ChangeEvent, ReactElement, ReactNode, useContext, useMemo } from "react";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 
 export const Signatures = (): ReactElement => {
   const FIELD_NAME = "signers";
@@ -318,6 +319,9 @@ export const Signatures = (): ReactElement => {
       <div className="grid-col" data-testid="signers-section">
         <Heading level={2}>{Config.formation.fields.signers.label}</Heading>
         <Content>{getDescription()}</Content>
+        <LargeCallout calloutType="informational">
+          <Content>{Config.formation.fields.signers.keepInMindCallout}</Content>
+        </LargeCallout>
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`} data-testid="signers-0">
             {atLeastOneSignerExists && (
