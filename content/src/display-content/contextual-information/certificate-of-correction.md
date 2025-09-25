@@ -40,6 +40,6 @@ You can file it online or by mail. When you file, include any updated informatio
 * [LLC (Form L-108) ](https://nj.gov/treasury/revenue/dcr/pdforms/l108.pdf)
 * [Limited Partnership (Form LP-152)](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)
 
-  [](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)&nbsp;
+&nbsp;
 
 To learn more about filing fees and correction forms for other business types, [go to the FAQs](https://www.njportal.com/DOR/BusinessAmendments/Home/FAQ/) on the DORES website.
