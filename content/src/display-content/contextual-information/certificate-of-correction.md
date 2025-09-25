@@ -11,9 +11,8 @@ different from a&nbsp; `Certificate of Amendment.|certificate-of-amendment`
 
 #### How is a Correction different from an Amendment?
 
-**Correction:** fix an error or typo made when you first completed the business formation paperwork
-
-**Amendment:** update information if something changed later (for example, a new address, new owner, or name change)
+* **Correction:** fix an error or typo made when you first completed the business formation paperwork
+* **Amendment:** update information if something changed later (for example, a new address, new owner, or name change)
 
 If you’re unsure about which is right for you, ask an attorney or [DORES](https://www.nj.gov/treasury/revenue/revgencode.shtml).
 
@@ -36,7 +35,7 @@ You can file it online or by mail. When you file, include any updated informatio
 1. [File online](https://www.njportal.com/DOR/BusinessAmendments/): for the fastest turnaround time
 2. Mail the form: Select the right form for your business type:
 
-* [Corporation (Form C-152) ](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)
+* [Corporation (Form C-152) ](https://www.nj.gov/treasury/revenue/dcr/pdforms/c152.pdf)
 * [LLC (Form L-108) ](https://nj.gov/treasury/revenue/dcr/pdforms/l108.pdf)
 * [Limited Partnership (Form LP-152)](https://www.nj.gov/treasury/revenue/dcr/pdforms/lp152.pdf)
 
