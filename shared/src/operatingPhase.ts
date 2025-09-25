@@ -18,6 +18,7 @@ export interface OperatingPhase {
   readonly displayGoToProfileNudge: boolean;
   readonly displayAnytimeActions: boolean;
   readonly displaySidebarCardNotRegistered: boolean;
+  readonly displayEmployerRatesInProfile: boolean;
 }
 
 export interface UnknownOperatingPhase extends Omit<OperatingPhase, "id"> {
@@ -63,6 +64,7 @@ export const LookupOperatingPhaseById = (
       displayGoToProfileNudge: false,
       displayAnytimeActions: false,
       displaySidebarCardNotRegistered: false,
+      displayEmployerRatesInProfile: false,
     }
   );
 };
@@ -88,6 +90,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: true,
+    displayEmployerRatesInProfile: false,
   },
   {
     id: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
@@ -109,6 +112,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: true,
+    displayEmployerRatesInProfile: false,
   },
   {
     id: OperatingPhaseId.GUEST_MODE_OWNING,
@@ -130,6 +134,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: true,
     displayAnytimeActions: true,
     displaySidebarCardNotRegistered: true,
+    displayEmployerRatesInProfile: false,
   },
   {
     id: OperatingPhaseId.FORMED,
@@ -151,6 +156,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
+    displayEmployerRatesInProfile: false,
   },
   {
     id: OperatingPhaseId.NEEDS_TO_FORM,
@@ -172,6 +178,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
+    displayEmployerRatesInProfile: false,
   },
   {
     id: OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
@@ -193,6 +200,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
+    displayEmployerRatesInProfile: false,
   },
   {
     id: OperatingPhaseId.UP_AND_RUNNING,
@@ -214,6 +222,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: true,
     displayAnytimeActions: true,
     displaySidebarCardNotRegistered: false,
+    displayEmployerRatesInProfile: true,
   },
   {
     id: OperatingPhaseId.UP_AND_RUNNING_OWNING,
@@ -235,6 +244,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: true,
     displayAnytimeActions: true,
     displaySidebarCardNotRegistered: false,
+    displayEmployerRatesInProfile: true,
   },
   {
     id: OperatingPhaseId.REMOTE_SELLER_WORKER,
@@ -256,6 +266,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
+    displayEmployerRatesInProfile: false,
   },
   {
     id: OperatingPhaseId.DOMESTIC_EMPLOYER,
@@ -277,5 +288,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
+    displayEmployerRatesInProfile: false,
   },
 ];
