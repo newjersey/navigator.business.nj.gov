@@ -6,7 +6,7 @@ urlSlug: authorize-business-entity
 displayname: authorize-business-entity
 name: Authorize Your Business Entity
 id: authorize-business-entity
-callToActionLink: https://www.nj.gov/treasury/revenue/pdf/2000.pdf
+callToActionLink: https://www.nj.gov/treasury/revenue/pdf/NJ_Public_Records_Filing.pdf
 callToActionText: Authorize My Business
 agencyId: nj-revenue-enterprise-services
 required: true
