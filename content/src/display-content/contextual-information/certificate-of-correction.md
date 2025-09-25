@@ -11,9 +11,8 @@ different from a&nbsp; `Certificate of Amendment.|certificate-of-amendment`
 
 #### How is a Correction different from an Amendment?
 
-**Correction:** fix an error or typo made when you first completed the business formation paperwork
-
-**Amendment:** update information if something changed later (for example, a new address, new owner, or name change)
+* **Correction:** fix an error or typo made when you first completed the business formation paperwork
+* **Amendment:** update information if something changed later (for example, a new address, new owner, or name change)
 
 If you’re unsure about which is right for you, ask an attorney or [DORES](https://www.nj.gov/treasury/revenue/revgencode.shtml).
 
