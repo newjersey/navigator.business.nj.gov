@@ -732,6 +732,7 @@ jobs:
           name: Glob, Split, and Run Unit Tests
           command: |
             yarn test:ci --shard=$(expr $CIRCLE_NODE_INDEX + 1)/$CIRCLE_NODE_TOTAL
+          max_auto_reruns: 1
       - store_test_results:
           path: coverage/test_results
       - store_artifacts:
