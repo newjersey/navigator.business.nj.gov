@@ -223,7 +223,7 @@
     "serverless-prune-plugin": "2.1.0",
     "storybook": "7.6.20",
     "style-loader": "3.3.4",
-    "supertest": "6.3.4",
+    "supertest": "7.1.4",
     "ts-jest": "29.4.4",
     "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
