@@ -216,7 +216,7 @@
     "sass-loader": "14.2.1",
     "seedrandom": "^3.0.5",
     "semantic-release": "19.0.5",
-    "serverless": "4.17.1",
+    "serverless": "4.19.1",
     "serverless-dynamodb": "0.2.56",
     "serverless-offline": "14.4.0",
     "serverless-offline-ssm": "6.2.0",
