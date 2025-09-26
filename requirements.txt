@@ -1,6 +1,6 @@
 asttokens==3.0.0
 black==25.9.0
-cachetools==6.1.0
+cachetools==6.2.0
 certifi==2025.7.9
 cffi==1.17.1
 charset-normalizer==3.4.3
