@@ -4776,7 +4776,7 @@ __metadata:
     dedent: 1.6.0
     dependency-cruiser: 16.10.4
     eslint: 8.57.1
-    eslint-config-prettier: 9.1.0
+    eslint-config-prettier: 9.1.2
     eslint-plugin-jest: 27.9.0
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-unicorn: 51.0.1
@@ -4939,8 +4939,8 @@ __metadata:
     dotenv: 17.2.2
     dynamodb-admin: 5.1.3
     eslint: 8.57.1
-    eslint-config-next: 15.3.5
-    eslint-config-prettier: 9.1.0
+    eslint-config-next: 15.5.4
+    eslint-config-prettier: 9.1.2
     eslint-plugin-cypress: 2.15.2
     eslint-plugin-jest: 27.9.0
     eslint-plugin-jest-dom: 5.5.0
@@ -5040,7 +5040,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 8.57.1
-    eslint-config-prettier: 9.1.0
+    eslint-config-prettier: 9.1.2
     eslint-plugin-jest: 27.9.0
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-unicorn: 51.0.1
@@ -5139,8 +5139,8 @@ __metadata:
     dependency-cruiser: 16.10.4
     dotenv: 17.2.2
     eslint: 8.57.1
-    eslint-config-next: 15.3.5
-    eslint-config-prettier: 9.1.0
+    eslint-config-next: 15.5.4
+    eslint-config-prettier: 9.1.2
     eslint-plugin-cypress: 2.15.2
     eslint-plugin-jest: 27.9.0
     eslint-plugin-jest-formatting: 3.1.0
@@ -8047,6 +8047,15 @@ __metadata:
   dependencies:
     fast-glob: 3.3.1
   checksum: 0302f6b17189e6c6c40eef4fa9853c7e98a19958331b1ef2108092a8e5c4ff7870ad743556af17dc01b2f17d56776d987f2c63f45df193be630a8248f77c5f78
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:15.5.4":
+  version: 15.5.4
+  resolution: "@next/eslint-plugin-next@npm:15.5.4"
+  dependencies:
+    fast-glob: 3.3.1
+  checksum: 512e14a8ca34939a64fcab4f506f21bd8e68906283b5b943ef9e0f61c6c1bf072fff69db9d04e2d2e7c278fa62160c29450857582cda44516042e2de1568557a
   languageName: node
   linkType: hard
 
@@ -20328,11 +20337,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:15.3.5":
-  version: 15.3.5
-  resolution: "eslint-config-next@npm:15.3.5"
+"eslint-config-next@npm:15.5.4":
+  version: 15.5.4
+  resolution: "eslint-config-next@npm:15.5.4"
   dependencies:
-    "@next/eslint-plugin-next": 15.3.5
+    "@next/eslint-plugin-next": 15.5.4
     "@rushstack/eslint-patch": ^1.10.3
     "@typescript-eslint/eslint-plugin": ^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0
     "@typescript-eslint/parser": ^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -20348,18 +20357,18 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 47ef122e09e537f2dbba92a6a582619eba07410d328b49c25f504a4f968bf7ce93c6bc16a3644aa773cec7e87b71d4e8da0026ceba18c9e2943e5db4119ad0e4
+  checksum: f2a4a779d0523e655a04fa071e47e7e50ae89cff0194eda023eceb4d4762056e2a9d67900cff35a25c28696de2d91de5bb786eeda1e0f93b6d5c14bd9f5349d7
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:9.1.0":
-  version: 9.1.0
-  resolution: "eslint-config-prettier@npm:9.1.0"
+"eslint-config-prettier@npm:9.1.2":
+  version: 9.1.2
+  resolution: "eslint-config-prettier@npm:9.1.2"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: 9229b768c879f500ee54ca05925f31b0c0bafff3d9f5521f98ff05127356de78c81deb9365c86a5ec4efa990cb72b74df8612ae15965b14136044c73e1f6a907
+  checksum: e786b767331094fd024cb1b0899964a9da0602eaf4ebd617d6d9794752ccd04dbe997e3c14c17f256c97af20bee1c83c9273f69b74cb2081b6f514580d62408f
   languageName: node
   linkType: hard
 
