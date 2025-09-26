@@ -387,7 +387,7 @@
       },
       "members": {
         "addButtonText": "Add New Member",
-        "addressCheckboxText": "Use business address.",
+        "addressCheckboxText": "The address is the same as the business location.",
         "expandText": "Expand",
         "error": "Enter at least 1 member's name.",
         "successSnackbarBody": "A member has been added successfully.",
