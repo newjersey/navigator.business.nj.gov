@@ -78,6 +78,9 @@ export default createTheme({
         content: {
           margin: "0px !important",
         },
+        expandIconWrapper: {
+          alignSelf: "flex-start",
+        },
       },
     },
     MuiButtonBase: {
