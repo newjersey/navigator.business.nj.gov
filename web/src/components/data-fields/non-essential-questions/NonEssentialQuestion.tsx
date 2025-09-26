@@ -52,8 +52,8 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
     <>
       {nonEssentialQuestionText && (
         <>
-          <section ref={nonEssentialQuestion}>
-            <Content className={"margin-top-2"}>
+          <section ref={nonEssentialQuestion} className="margin-top-3">
+            <Content>
               {`${convertTextToMarkdownBold(nonEssentialQuestionText)} ${
                 Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText
               }`}
