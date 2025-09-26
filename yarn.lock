@@ -4992,7 +4992,7 @@ __metadata:
     remove-markdown: 0.6.2
     require-from-string: 2.0.2
     rimraf: 6.0.1
-    sass: 1.89.2
+    sass: 1.93.1
     sass-loader: 14.2.1
     seedrandom: ^3.0.5
     semantic-release: 19.0.5
@@ -5182,7 +5182,7 @@ __metadata:
     remove-markdown: 0.6.2
     require-from-string: 2.0.2
     rimraf: 6.0.1
-    sass: 1.89.2
+    sass: 1.93.1
     sass-loader: 14.2.1
     slick-carousel: 1.8.1
     storybook: 7.6.20
@@ -32867,9 +32867,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.89.2":
-  version: 1.89.2
-  resolution: "sass@npm:1.89.2"
+"sass@npm:1.93.1":
+  version: 1.93.1
+  resolution: "sass@npm:1.93.1"
   dependencies:
     "@parcel/watcher": ^2.4.1
     chokidar: ^4.0.0
@@ -32880,7 +32880,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 192a97ffe801d9377d10c0a8a129befe637438c5aa979a56db18fd95da2aa32b656715fa8a2959bfaf059b490792a783e605a94449d44fbbf44d8155aa981490
+  checksum: 3d8b641b497a5c58b2875c2843318c99e447cfb29adad2f6196fb6f6482ecb150f15059c73fa06dea4b6be50844232e0c7dd06725b0dba0a41c674d1bfcaaad7
   languageName: node
   linkType: hard
 
