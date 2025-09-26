@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ModifiedContent } from "@/components/ModifiedContent";
@@ -16,6 +16,7 @@ import {
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 
 interface DisplayContent {
   modalTitle: string;
@@ -246,22 +247,11 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       secondaryButtonText={Config.formation.general.backButtonText}
     >
       <>
-        {props.defaultAddress ? (
-          <FormGroup className="padding-y-1">
-            <FormControlLabel
-              data-testid={"default-checkbox"}
-              label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
-              control={
-                <Checkbox
-                  checked={useDefaultAddress}
-                  onChange={(event): void => checkBoxCheck(event.target.checked)}
-                />
-              }
-            />
-          </FormGroup>
-        ) : (
-          <div className={"padding-top-2"} />
-        )}
+        <div className="padding-bottom-1 padding-top-05">
+          <LargeCallout calloutType="informational">
+            <Content>{Config.formation.fields.signers.keepInMindCallout}</Content>
+          </LargeCallout>
+        </div>
         <div data-testid={`${props.fieldName}-address-modal`}>
           <WithErrorBar
             hasError={!!addressErrorMap["addressName"].invalid}
@@ -287,6 +277,22 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               autoComplete="name"
             />
           </WithErrorBar>
+          {props.defaultAddress ? (
+            <FormGroup className="margin-y-2">
+              <FormControlLabel
+                data-testid={"address-is-the-same-modal-checkbox"}
+                label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
+                control={
+                  <Checkbox
+                    checked={useDefaultAddress}
+                    onChange={(event): void => checkBoxCheck(event.target.checked)}
+                  />
+                }
+              />
+            </FormGroup>
+          ) : (
+            <div className={"padding-top-2"} />
+          )}
           <WithErrorBar
             hasError={!!addressErrorMap["addressLine1"].invalid}
             type="ALWAYS"
