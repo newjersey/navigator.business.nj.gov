@@ -295,7 +295,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        page.selectCheckboxByTestId("address-is-the-same-modal-checkbox");
         expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
@@ -326,7 +326,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        page.selectCheckboxByTestId("address-is-the-same-modal-checkbox");
         expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
