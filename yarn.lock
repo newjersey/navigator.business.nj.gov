@@ -4929,7 +4929,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 9.2.1
     cypress: 14.5.4
-    cypress-axe: 1.6.0
+    cypress-axe: 1.7.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
     dayjs: 1.11.18
@@ -5131,7 +5131,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 9.2.1
     cypress: 14.5.4
-    cypress-axe: 1.6.0
+    cypress-axe: 1.7.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
     dayjs: 1.11.18
@@ -17900,13 +17900,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-axe@npm:1.6.0":
-  version: 1.6.0
-  resolution: "cypress-axe@npm:1.6.0"
+"cypress-axe@npm:1.7.0":
+  version: 1.7.0
+  resolution: "cypress-axe@npm:1.7.0"
   peerDependencies:
     axe-core: ^3 || ^4
-    cypress: ^10 || ^11 || ^12 || ^13 || ^14
-  checksum: 6f4d1a25f2f9fd8bfa080bbb24e27a09e5fccc970f099b109ae402b78a8be066155c1e42c819aac932308230b720e1efbb56c8730f444faa8a9197895418d434
+    cypress: ^10 || ^11 || ^12 || ^13 || ^14 || ^15
+  checksum: 918da6b90835576691e84b9b35139c527525c98c80cd3c67db2f4261d490f1edede99764405fde3eec95454e337c89780f85359a365b4db67158a14148b83337
   languageName: node
   linkType: hard
 

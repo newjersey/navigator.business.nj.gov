@@ -71,7 +71,7 @@
     "body-parser": "1.20.3",
     "broken-link-checker": "0.7.8",
     "cors": "2.8.5",
-    "cypress-axe": "1.6.0",
+    "cypress-axe": "1.7.0",
     "dayjs": "1.11.18",
     "decap-cms-app": "3.0.12",
     "dedent": "1.6.0",
