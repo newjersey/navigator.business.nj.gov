@@ -97,7 +97,6 @@ export const XraySummary = (props: Props): ReactElement => {
         <ResultsSectionAccordion
           title={Config.xrayRegistrationTask.equipmentText}
           headingStyleOverride={"font-open-sans-7"}
-          summaryClass={"height-5"}
           titleIcon={
             <Icon
               iconName={"build"}

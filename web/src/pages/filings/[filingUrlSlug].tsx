@@ -181,7 +181,7 @@ export const FilingElement = (props: {
                   .toLowerCase()
                   .replaceAll(" ", "-")}-content`}
               >
-                <Heading level={3} className="margin-y-3-override">
+                <Heading level={3} className="margin-0-override">
                   {Config.filingDefaults.additionalInfo}
                 </Heading>
               </AccordionSummary>

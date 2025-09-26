@@ -8,7 +8,6 @@ interface Props {
   title: string;
   titleIcon?: ReactNode;
   headingStyleOverride?: string;
-  summaryClass?: string;
   children: ReactNode;
   onOpenFunc?: () => void;
 }
@@ -30,7 +29,6 @@ export const ResultsSectionAccordion = (props: Props): ReactElement => {
           }}
         >
           <AccordionSummary
-            className={props.summaryClass}
             expandIcon={
               <Icon className={"usa-icon--size-5 margin-left-1"} iconName={"expand_more"} />
             }
