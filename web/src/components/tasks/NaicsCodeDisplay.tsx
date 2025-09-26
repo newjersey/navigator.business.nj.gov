@@ -29,40 +29,44 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
           {templateEval(Config.determineNaicsCode.successMessage, { code: props.code })}
         </Content>
       </Alert>
-      <div className="margin-left-3 flex">
-        <span className="text-bold margin-right-05">{props.code}</span>
-        {"-"}
-        <span className="margin-left-05 margin-right-2">
-          {lookupNaicsCode(props.code)?.SixDigitDescription}
-        </span>
-        {props.lockField ? (
-          <ArrowTooltip
-            title={Config.profileDefaults.default.lockedFieldTooltipText}
-            data-testid="naics-code-tooltip"
-          >
-            <div className="fdr fac font-body-lg">
-              <Icon iconName="help_outline" />
-            </div>
-          </ArrowTooltip>
-        ) : (
-          <>
-            <UnStyledButton
-              isUnderline
-              onClick={props.onEdit}
-              ariaLabel={`${Config.taskDefaults.editText} ${Config.determineNaicsCode.ariaLabelText}`}
+      <div className="margin-left-3 grid-row flex-row flex-justify-start">
+        <div className="margin-right-0 tablet:margin-right-4">
+          <span className="text-bold margin-right-05">{props.code}</span>
+          {"-"}
+          <span className="margin-left-05 ">
+            {lookupNaicsCode(props.code)?.SixDigitDescription}
+          </span>
+        </div>
+        <div>
+          {props.lockField ? (
+            <ArrowTooltip
+              title={Config.profileDefaults.default.lockedFieldTooltipText}
+              data-testid="naics-code-tooltip"
             >
-              {Config.taskDefaults.editText}
-            </UnStyledButton>
-            <span className="margin-x-105">|</span>
-            <UnStyledButton
-              isUnderline
-              onClick={props.onRemove}
-              ariaLabel={`${Config.taskDefaults.removeText} ${Config.determineNaicsCode.ariaLabelText}`}
-            >
-              {Config.taskDefaults.removeText}
-            </UnStyledButton>
-          </>
-        )}
+              <div className="fdr fac font-body-lg">
+                <Icon iconName="help_outline" />
+              </div>
+            </ArrowTooltip>
+          ) : (
+            <>
+              <UnStyledButton
+                isUnderline
+                onClick={props.onEdit}
+                ariaLabel={`${Config.taskDefaults.editText} ${Config.determineNaicsCode.ariaLabelText}`}
+              >
+                {Config.taskDefaults.editText}
+              </UnStyledButton>
+              <span className="margin-x-105">|</span>
+              <UnStyledButton
+                isUnderline
+                onClick={props.onRemove}
+                ariaLabel={`${Config.taskDefaults.removeText} ${Config.determineNaicsCode.ariaLabelText}`}
+              >
+                {Config.taskDefaults.removeText}
+              </UnStyledButton>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

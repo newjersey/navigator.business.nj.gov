@@ -926,7 +926,7 @@ const ProfilePage = (props: Props): ReactElement => {
             <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
             <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
               <main id="main" data-testid={"main"}>
-                <div className="padding-top-0 desktop:padding-top-3">
+                <div className="padding-top-0 padding-x-2 desktop:padding-top-3 desktop:padding-x-0">
                   <ProfileEscapeModal
                     isOpen={escapeModal}
                     close={(): void => setEscapeModal(false)}

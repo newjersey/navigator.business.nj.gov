@@ -96,7 +96,7 @@ collections:
                   widget: string,
                 }
               - { label: Address 1 Label, name: address1Label, widget: string }
-              - { label: Address 2 Label, name: address2Label, widget: string }
+              - { label: Address 2 Label, name: address2Label, widget: markdown }
               - { label: Municipality Label, name: municipalityLabel, widget: string }
               - { label: State label, name: stateLabel, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
@@ -213,7 +213,7 @@ collections:
                   widget: string,
                 }
               - { label: Address 1 Label, name: address1Label, widget: string }
-              - { label: Address 2 Label, name: address2Label, widget: string }
+              - { label: Address 2 Label, name: address2Label, widget: markdown }
               - { label: Municipality Label, name: municipalityLabel, widget: string }
               - { label: State label, name: stateLabel, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
