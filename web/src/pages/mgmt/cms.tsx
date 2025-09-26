@@ -50,6 +50,7 @@ import PassengerTransportCdlPreview from "@/lib/cms/previews/PassengerTransportC
 import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
+import RemoveBusinessModalPreview from "@/lib/cms/previews/RemoveBusinessModalPreview";
 import SelfRegistrationPreview from "@/lib/cms/previews/SelfRegistrationPreview";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
 import StarterKitsPreview from "@/lib/cms/previews/StarterKitsPreview";
@@ -119,6 +120,7 @@ const CMS = dynamic(
 
       registerPreview(CMS, "funding-onboarding-modal-config", NjedaPreview);
       registerPreview(CMS, "formationDateDeletionModal", FormationDateDeletionModalPreview);
+      registerPreview(CMS, "removeBusinessModal", RemoveBusinessModalPreview);
 
       registerPreview(CMS, "starterKits", StarterKitsPreview);
 

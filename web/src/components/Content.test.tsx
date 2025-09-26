@@ -60,10 +60,10 @@ describe("<Content />", () => {
   });
 
   it("renders miniCallout content", () => {
-    const mdString = `:::miniCallout{ headerText="header" calloutType="conditional" }\n\n:::`;
+    const mdString = `:::miniCallout{ calloutType="conditional" }\nbody text\n:::`;
 
     render(<Content>{mdString}</Content>);
-    expect(screen.getByText("header")).toBeInTheDocument();
+    expect(screen.getByText("body text")).toBeInTheDocument();
     expect(screen.getByTestId("callout-icon")).toBeInTheDocument();
   });
 });

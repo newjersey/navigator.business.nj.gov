@@ -15,6 +15,7 @@ import { openInNewTab } from "@/lib/utils/helpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext } from "react";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 
 export const LoginMenuItem = (): ReactElement => {
   const { Config } = useConfig();
@@ -130,6 +131,7 @@ export const ProfileMenuItem = (props: {
   userData?: UserData;
 }): ReactElement[] => {
   const { Config } = useConfig();
+  const { setShowRemoveBusinessModal } = useContext(RemoveBusinessContext);
 
   const { updateQueue } = useUserData();
   const router = useRouter();
@@ -180,7 +182,7 @@ export const ProfileMenuItem = (props: {
         if (hasMultipleBusinesses) {
           const removeBusinessLink = NavMenuItem({
             onClick: (): void => {
-              router && router.push(ROUTES.dashboard);
+              setShowRemoveBusinessModal(true);
             },
             icon: <ButtonIcon svgFilename="delete-outline" />,
             itemText: Config.navigationDefaults.removeBusinessLinkText,
