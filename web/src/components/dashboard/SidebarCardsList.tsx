@@ -186,13 +186,11 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
                 id="hidden-opportunity-header"
                 data-testid="hidden-opportunity-header"
               >
-                <div className="margin-y-2">
-                  <div className="flex flex-align-center margin-0-override text-normal">
-                    <div className="inline">
-                      {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
-                        count: String(hiddenOpportunitiesCount()),
-                      })}
-                    </div>
+                <div className="flex flex-align-center margin-0-override text-normal">
+                  <div className="inline">
+                    {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
+                      count: String(hiddenOpportunitiesCount()),
+                    })}
                   </div>
                 </div>
               </AccordionSummary>
