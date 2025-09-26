@@ -295,7 +295,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckboxByTestId("address-is-the-same-modal-checkbox");
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText, "dialog");
         expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
@@ -326,7 +326,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckboxByTestId("address-is-the-same-modal-checkbox");
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText, "dialog");
         expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
@@ -359,7 +359,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText, "dialog");
         expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
 
         page.clickAddressSubmit();
@@ -389,7 +389,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText, "dialog");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("");
@@ -410,7 +410,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText, "dialog");
         expect(
           screen.getByText(Config.formation.addressModal.addressLine1.error),
         ).toBeInTheDocument();
@@ -430,13 +430,15 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText, "dialog");
         expect(
-          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked,
+          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText, "dialog")
+            .checked,
         ).toEqual(true);
         page.fillText("Address zip code", "12345");
         expect(
-          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked,
+          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText, "dialog")
+            .checked,
         ).toEqual(false);
         expect(page.getInputElementByLabel("Address line1").disabled).toBe(false);
         expect(page.getInputElementByLabel("Address line2").disabled).toEqual(false);
