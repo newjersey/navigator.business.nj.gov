@@ -35,7 +35,7 @@ export const NonEssentialQuestionForPersonas = (props: {
   }, [nonEssentialQuestionInViewPort, hasBeenSeen, nonEssentialQuestionText, props.questionId]);
 
   return (
-    <section ref={nonEssentialQuestion}>
+    <section ref={nonEssentialQuestion} className="margin-top-3">
       <div data-testid="non-essential-questions-wrapper">
         <ProfileField
           fieldName={props.questionId}
