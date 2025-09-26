@@ -4772,7 +4772,7 @@ __metadata:
     body-parser: 1.20.3
     cors: 2.8.5
     cross-env: 7.0.3
-    dayjs: 1.11.13
+    dayjs: 1.11.18
     dedent: 1.6.0
     dependency-cruiser: 16.10.4
     eslint: 8.57.1
@@ -4932,7 +4932,7 @@ __metadata:
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
-    dayjs: 1.11.13
+    dayjs: 1.11.18
     decap-cms-app: 3.0.12
     dedent: 1.6.0
     dependency-cruiser: 16.10.4
@@ -5038,7 +5038,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
     cross-env: 7.0.3
-    dayjs: 1.11.13
+    dayjs: 1.11.18
     eslint: 8.57.1
     eslint-config-prettier: 9.1.0
     eslint-plugin-jest: 27.9.0
@@ -5134,7 +5134,7 @@ __metadata:
     cypress-axe: 1.6.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
-    dayjs: 1.11.13
+    dayjs: 1.11.18
     decap-cms-app: 3.0.12
     dependency-cruiser: 16.10.4
     dotenv: 17.2.2
@@ -18074,14 +18074,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.11.13":
-  version: 1.11.13
-  resolution: "dayjs@npm:1.11.13"
-  checksum: f388db88a6aa93956c1f6121644e783391c7b738b73dbc54485578736565c8931bdfba4bb94e9b1535c6e509c97d5deb918bbe1ae6b34358d994de735055cca9
-  languageName: node
-  linkType: hard
-
-"dayjs@npm:^1.10.4, dayjs@npm:^1.11.10":
+"dayjs@npm:1.11.18, dayjs@npm:^1.10.4, dayjs@npm:^1.11.10":
   version: 1.11.18
   resolution: "dayjs@npm:1.11.18"
   checksum: cc90054bad30ab011417a7a474b2ffa70e7a28ca6f834d7e86fe53a408a40a14c174f26155072628670e9eda4c48c4ed0d847d2edf83d47c0bfb78be15bbf2dd
