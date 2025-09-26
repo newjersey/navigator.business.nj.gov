@@ -263,7 +263,7 @@ describe("Formation - Addresses", () => {
           },
         );
         page.clickAddNewIncorporator();
-        fireEvent.click(screen.getByTestId("default-checkbox"));
+        fireEvent.click(screen.getByTestId("address-modal-checkbox"));
         expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");

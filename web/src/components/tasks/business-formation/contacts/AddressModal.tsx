@@ -280,7 +280,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           {props.defaultAddress ? (
             <FormGroup className="margin-y-2">
               <FormControlLabel
-                data-testid={"address-is-the-same-modal-checkbox"}
+                data-testid={"address-modal-checkbox"}
                 label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
                 control={
                   <Checkbox

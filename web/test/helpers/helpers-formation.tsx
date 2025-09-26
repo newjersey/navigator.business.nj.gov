@@ -211,12 +211,12 @@ export type FormationPageHelpers = {
   fillAndBlurBusinessNameConfirmation: (businessNameConfirmation?: string) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
-  getInputElementByLabel: (label: string) => HTMLInputElement;
+  getInputElementByLabel: (label: string, role?: string) => HTMLInputElement;
   getInputElementByTestId: (testId: string) => HTMLInputElement;
   getInputElementByParentTestId: (testId: string, params: { type: string }) => HTMLInputElement;
   getListBoxForInputElementByTestId: (testId: string) => Promise<HTMLInputElement>;
   selectByText: (label: string, value: string) => void;
-  selectCheckbox: (label: string) => void;
+  selectCheckbox: (label: string, role?: string) => void;
   selectCheckboxByTestId: (testId: string) => void;
   clickAddNewSigner: () => void;
   clickAddNewIncorporator: () => void;
@@ -421,7 +421,12 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.click(screen.getByTestId(testId));
   };
 
-  const getInputElementByLabel = (label: string): HTMLInputElement => {
+  const getInputElementByLabel = (label: string, role?: string): HTMLInputElement => {
+    if (role) {
+      const container = screen.getByRole(role);
+      return within(container).getByLabelText(label) as HTMLInputElement;
+    }
+
     return screen.getByLabelText(label) as HTMLInputElement;
   };
 
@@ -445,7 +450,13 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.click(listbox.getByText(value));
   };
 
-  const selectCheckbox = (label: string): void => {
+  const selectCheckbox = (label: string, role?: string): void => {
+    if (role) {
+      const container = screen.getByRole(role);
+      fireEvent.click(within(container).getByLabelText(label));
+      return;
+    }
+
     fireEvent.click(screen.getByLabelText(label));
   };
 
