@@ -30,7 +30,7 @@ platformdirs==4.4.0
 prompt_toolkit==3.0.52
 ptyprocess==0.7.0
 pure_eval==0.2.3
-pycparser==2.22
+pycparser==2.23
 Pygments==2.19.2
 pyparsing==3.2.4
 python-dateutil==2.9.0.post0
