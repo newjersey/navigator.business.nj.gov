@@ -17,6 +17,7 @@ export default {
     "<rootDir>/test/setupJestDynalite.ts",
     "<rootDir>/../shared/src/test/setupRandomSeed.ts",
   ],
+
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",

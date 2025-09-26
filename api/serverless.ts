@@ -38,7 +38,6 @@ const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
 const airtableUserResearchBaseId = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
 const airtableBaseUrl = process.env.AIRTABLE_BASE_URL || "";
 const airtableUsersTable = process.env.AIRTABLE_USERS_TABLE || "";
-
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 const businessesTable = `businesses-table-${stage}`;
