@@ -22,7 +22,7 @@ matplotlib==3.10.6
 mypy-extensions==1.1.0
 numpy==2.3.3
 packaging==25.0
-parso==0.8.4
+parso==0.8.5
 pathspec==0.12.1
 pexpect==4.9.0
 pillow==11.3.0
@@ -32,7 +32,7 @@ ptyprocess==0.7.0
 pure_eval==0.2.3
 pycparser==2.23
 Pygments==2.19.2
-pyparsing==3.2.4
+pyparsing==3.2.5
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.1
 PyYAML==6.0.2
