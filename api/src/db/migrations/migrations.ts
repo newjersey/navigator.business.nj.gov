@@ -178,6 +178,7 @@ import { migrate_v173_to_v174 } from "@db/migrations/v174_add_public_works_contr
 import { migrate_v174_to_v175 } from "@db/migrations/v175_add_payment_complete_to_cig_license";
 import { migrate_v175_to_v176 } from "@db/migrations/v176_add_check_name_reservation_options";
 import { migrate_v176_to_v177 } from "@db/migrations/v177_add_business_name_confirmation";
+import { migrate_v177_to_v178 } from "@db/migrations/v178_add_employer_access";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -360,6 +361,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v174_to_v175,
   migrate_v175_to_v176,
   migrate_v176_to_v177,
+  migrate_v177_to_v178,
 ];
 
-export { generatev177UserData as CURRENT_GENERATOR } from "@db/migrations/v177_add_business_name_confirmation";
+export { generatev178UserData as CURRENT_GENERATOR } from "@db/migrations/v178_add_employer_access";

@@ -96,7 +96,8 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { EmployerRates } from "@/components/profile/EmployerRates";
+import { EmployerRatesTemporary } from "@/components/employer-rates/EmployerRatesTemporary";
+import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 
 interface Props {
   municipalities: Municipality[];
@@ -584,8 +585,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <DateOfFormation futureAllowed />
         </ProfileField>
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
-
-        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
+        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRatesTemporary />}
       </div>
     ),
     permits: (
@@ -655,6 +655,7 @@ const ProfilePage = (props: Props): ReactElement => {
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
+        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
       </div>
     ),
     documents: (
@@ -805,6 +806,7 @@ const ProfilePage = (props: Props): ReactElement => {
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
+        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
       </div>
     ),
     documents: <></>,
