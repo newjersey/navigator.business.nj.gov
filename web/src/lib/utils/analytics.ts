@@ -1672,6 +1672,54 @@ export default {
         },
       },
     },
+    formation_task_name_reservation_yes_option: {
+      click: {
+        show_additional_options: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_yes_option",
+            legacy_event_label: "show_additional_options",
+          });
+        },
+      },
+    },
+    formation_task_name_reservation_different_name_option: {
+      click: {
+        continue_formation_task: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_different_name_option",
+            legacy_event_label: "continue_formation_task",
+          });
+        },
+      },
+    },
+    formation_task_name_reservation_keep_reservation_option: {
+      click: {
+        instruct_close_formation_task: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_keep_reservation_option",
+            legacy_event_label: "instruct_close_formation_task",
+          });
+        },
+      },
+    },
+    formation_task_name_reservation_cancel_reservation_option: {
+      click: {
+        continue_formation_task: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_cancel_reservation_option",
+            legacy_event_label: "continue_formation_task",
+          });
+        },
+      },
+    },
     business_formation_business_step_continue_button: {
       click: {
         arrive_on_business_formation_contacts_step: () => {
