@@ -1,3 +1,4 @@
+import analytics from "@/lib/utils/analytics";
 import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -26,6 +27,35 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      formation_task_name_reservation_yes_option: {
+        click: {
+          show_additional_options: jest.fn(),
+        },
+      },
+      formation_task_name_reservation_different_name_option: {
+        click: {
+          continue_formation_task: jest.fn(),
+        },
+      },
+      formation_task_name_reservation_keep_reservation_option: {
+        click: {
+          instruct_close_formation_task: jest.fn(),
+        },
+      },
+      formation_task_name_reservation_cancel_reservation_option: {
+        click: {
+          continue_formation_task: jest.fn(),
+        },
+      },
+    },
+  };
+}
+
 const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
@@ -33,11 +63,14 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
   searchBusinessName: jest.fn(),
 }));
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("Formation - BusinessNameStep", () => {
   beforeEach(() => {
@@ -278,13 +311,27 @@ describe("Formation - BusinessNameStep", () => {
       expect(howWouldYouLikeToProceed).toBeInTheDocument();
     });
 
+    it("fires name reservation analytics when 'YES' is selected", async () => {
+      getPageHelper();
+
+      const yesButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(yesButton);
+
+      expect(
+        mockAnalytics.event.formation_task_name_reservation_yes_option.click
+          .show_additional_options,
+      ).toHaveBeenCalledTimes(1);
+    });
+
     it("if checkNameReservation is 'YES' and howWouldYouLikeToProceed is 'DIFFERENT_NAME' it shows Register With Differnt Name Section", async () => {
       getPageHelper();
 
-      const noButton = screen.getByRole("radio", {
+      const yesButton = screen.getByRole("radio", {
         name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
       });
-      await userEvent.click(noButton);
+      await userEvent.click(yesButton);
 
       const differentNameButton = screen.getByRole("radio", {
         name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option1,
@@ -297,13 +344,41 @@ describe("Formation - BusinessNameStep", () => {
       expect(registerDifferentNameSection).toBeInTheDocument();
     });
 
+    it("fires different name analytics when 'DIFFERENT_NAME' option is selected", async () => {
+      getPageHelper();
+
+      const yesButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(yesButton);
+
+      await screen.findByText(
+        Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.label,
+      );
+
+      const keepNameButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option2,
+      });
+      await userEvent.click(keepNameButton);
+
+      const differentNameButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option1,
+      });
+      await userEvent.click(differentNameButton);
+
+      expect(
+        mockAnalytics.event.formation_task_name_reservation_different_name_option.click
+          .continue_formation_task,
+      ).toHaveBeenCalledTimes(1);
+    });
+
     it("if checkNameReservation is 'YES' and howWouldYouLikeToProceed is 'KEEP_NAME' it shows Keep Reserved Name Section", async () => {
       getPageHelper();
 
-      const noButton = screen.getByRole("radio", {
+      const yesButton = screen.getByRole("radio", {
         name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
       });
-      await userEvent.click(noButton);
+      await userEvent.click(yesButton);
 
       const keepNameButton = screen.getByRole("radio", {
         name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option2,
@@ -314,6 +389,25 @@ describe("Formation - BusinessNameStep", () => {
         Config.formation.checkNameReservation.keepNameHeader,
       );
       expect(keepNameSection).toBeInTheDocument();
+    });
+
+    it("fires keep name analytics when 'KEEP_NAME' option is selected", async () => {
+      getPageHelper();
+
+      const yesButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(yesButton);
+
+      const keepNameButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option2,
+      });
+      await userEvent.click(keepNameButton);
+
+      expect(
+        mockAnalytics.event.formation_task_name_reservation_keep_reservation_option.click
+          .instruct_close_formation_task,
+      ).toHaveBeenCalledTimes(1);
     });
 
     it("if checkNameReservation is 'YES' and howWouldYouLikeToProceed is 'CANCEL_NAME' it shows Cancel Name Section", async () => {
@@ -333,6 +427,25 @@ describe("Formation - BusinessNameStep", () => {
         Config.formation.checkNameReservation.cancelNameHeader,
       );
       expect(cancelNameSection).toBeInTheDocument();
+    });
+
+    it("fires cancel name analytics when 'CANCEL_NAME' option is selected", async () => {
+      getPageHelper();
+
+      const yesButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.didYouUseFormRadio.option2,
+      });
+      await userEvent.click(yesButton);
+
+      const cancelNameButton = screen.getByRole("radio", {
+        name: Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option3,
+      });
+      await userEvent.click(cancelNameButton);
+
+      expect(
+        mockAnalytics.event.formation_task_name_reservation_cancel_reservation_option.click
+          .continue_formation_task,
+      ).toHaveBeenCalledTimes(1);
     });
   });
 

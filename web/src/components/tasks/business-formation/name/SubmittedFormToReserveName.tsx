@@ -4,6 +4,7 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { BusinessName } from "@/components/tasks/business-formation/name/BusinessName";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { HowToProceedOptions } from "@businessnjgovnavigator/shared/formationData";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
@@ -17,6 +18,21 @@ export const SubmittedFormToReserveName = (): ReactElement => {
       ...prev,
       howToProceed: value as HowToProceedOptions,
     }));
+
+    switch (value) {
+      case "DIFFERENT_NAME": {
+        analytics.event.formation_task_name_reservation_different_name_option.click.continue_formation_task();
+        break;
+      }
+      case "KEEP_NAME": {
+        analytics.event.formation_task_name_reservation_keep_reservation_option.click.instruct_close_formation_task();
+        break;
+      }
+      case "CANCEL_NAME": {
+        analytics.event.formation_task_name_reservation_cancel_reservation_option.click.continue_formation_task();
+        break;
+      }
+    }
   };
 
   return (

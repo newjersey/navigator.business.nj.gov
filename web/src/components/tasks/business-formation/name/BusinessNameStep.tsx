@@ -4,6 +4,7 @@ import { BusinessName } from "@/components/tasks/business-formation/name/Busines
 import { SubmittedFormToReserveName } from "@/components/tasks/business-formation/name/SubmittedFormToReserveName";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
@@ -20,6 +21,10 @@ export const BusinessNameStep = (): ReactElement => {
       ...prev,
       checkNameReservation: boolValue,
     }));
+
+    if (boolValue) {
+      analytics.event.formation_task_name_reservation_yes_option.click.show_additional_options();
+    }
   };
 
   return (
