@@ -1035,11 +1035,6 @@ collections:
                       name: "sameAddressCheckbox",
                       widget: "string",
                     }
-                  - {
-                      label: "Checkbox label - use contact info",
-                      name: "sameContactCheckbox",
-                      widget: "string",
-                    }
                   - { label: "Note Title", name: "noteTitle", widget: "string" }
                   - { label: "Note Body", name: "noteBody", widget: "markdown" }
                   - {
