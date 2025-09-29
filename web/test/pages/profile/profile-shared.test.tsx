@@ -52,9 +52,12 @@ import {
 } from "@/test/pages/profile/profile-helpers";
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
+
+const initialFeatureEmployerRatesEnv = process.env.FEATURE_EMPLOYER_RATES;
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -119,6 +122,10 @@ describe("profile - shared", () => {
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
+  });
+
+  afterEach(() => {
+    process.env.FEATURE_EMPLOYER_RATES = initialFeatureEmployerRatesEnv;
   });
 
   it("shows loading page if page has not loaded yet", () => {
@@ -725,6 +732,34 @@ describe("profile - shared", () => {
           name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
         }),
       ).toBeInTheDocument();
+    });
+  });
+
+  describe("employer rates section", () => {
+    it("saves employerAccessRegistration when save button is clicked", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: undefined,
+        }),
+      });
+
+      renderPage({ business });
+      chooseTab("numbers");
+      const employerRatesSection = screen.getByTestId("employerAccess");
+      await userEvent.click(
+        within(employerRatesSection).getByRole("radio", {
+          name: Config.employerRates.employerAccessTrueText,
+        }),
+      );
+
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.employerAccessRegistration).toEqual(true);
+      });
     });
   });
 });

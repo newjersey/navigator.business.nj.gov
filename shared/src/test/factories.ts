@@ -48,7 +48,7 @@ import {
 } from "../profileData";
 import { RoadmapTaskData } from "../roadmapTaskData";
 import { arrayOfSectors, SectorType } from "../sector";
-import { StateObject, arrayOfStateObjects as states } from "../states";
+import { arrayOfStateObjects as states, StateObject } from "../states";
 import {
   taxClearanceCertificateAgencies,
   TaxClearanceCertificateData,
@@ -331,6 +331,8 @@ export const generateProfileData = (
     carnivalRideOwningBusiness: undefined,
     raffleBingoGames: undefined,
     businessOpenMoreThanTwoYears: undefined,
+    employerAccessRegistration: undefined,
+    deptOfLaborEin: `some-dept-of-labor-ein-${randomInt()}`,
     ...overrides,
   };
 };

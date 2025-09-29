@@ -1,13 +1,13 @@
 import { ReactElement, useState } from "react";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { EmployerRatesRequest, EmployerRatesResponse } from "@businessnjgovnavigator/shared/";
+import { EmployerRatesRequest, EmployerRatesResponse } from "@businessnjgovnavigator/shared/index";
 import * as api from "@/lib/api-client/apiClient";
 import { GenericTextField } from "@/components/GenericTextField";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 
-// TODO: clean up component when UI work begins
-export const EmployerRates = (): ReactElement => {
+// TODO: delete component after boomi runtime is available and we can validate the api
+export const EmployerRatesTemporary = (): ReactElement => {
   const { userData } = useUserData();
 
   const [response, setResponse] = useState<EmployerRatesResponse | null>(null);

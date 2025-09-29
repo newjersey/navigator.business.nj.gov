@@ -78,6 +78,7 @@ import * as XrayRegistration from "../../../content/src/fieldConfig/xray-registr
 import * as XrayRenewal from "../../../content/src/fieldConfig/xray-renewal.json";
 import * as CalloutAlerts from "../../../content/src/mappings/callout-alerts.json";
 import * as PageMetadata from "../../../content/src/page-metadata/page-metadata.json";
+import * as EmployerRates from "../../../content/src/fieldConfig/employer-rates.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -167,6 +168,7 @@ const merged = JSON.parse(
       AbcEmergencyTripPermit,
       FilingDefaults,
       FormationDataDeletionModal,
+      EmployerRates,
       RemoveBusinessModal,
     ),
   ),
@@ -251,6 +253,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof AbcEmergencyTripPermit &
   typeof FilingDefaults &
   typeof FormationDataDeletionModal &
+  typeof EmployerRates &
   typeof RemoveBusinessModal;
 
 export const getMergedConfig = (): ConfigType => {
