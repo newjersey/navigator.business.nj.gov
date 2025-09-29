@@ -16,11 +16,11 @@ export const checkAnytimeActionCategoryUsage = async (
         true,
       );
       if (AnytimeAction.category[0].categoryId === AnytimeAction.category[0].categoryName) {
-        const logMessage = `The *"${AnytimeAction.name}"* Anytime Action has a category that no longer exists *"${AnytimeAction.category[0].categoryId}"*, please replace this with a new category`;
+        const logMessage = `business-ux-content: The *"${AnytimeAction.name}"* Anytime Action has a category that no longer exists (*"${AnytimeAction.category[0].categoryId}"*). Please replace this with a new category.`;
         await publishSnsMessage(logMessage, topicArn, stage);
       }
     }
   } catch (error) {
-    logger.LogError(`Error When Running CMS integrity Tests: ${error}`);
+    logger.LogError(`Error when running CMS integrity tests: ${error}`);
   }
 };
