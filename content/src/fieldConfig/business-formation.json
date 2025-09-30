@@ -1,62 +1,31 @@
 {
   "formation": {
     "registeredAgent": {
-      "agentNumberLabel": "Registered Agent ID Number",
-      "agentNumberLabelSecondary": "(Not your telephone number)",
+      "infoCalloutHeading": "Keep in mind:",
       "radioButtonManualText": "Manually Identify Your Registered Agent",
       "checkboxUnCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now filled with the account holder information and locked",
-      "radioButtonNumberText": "Enter Your Registered Agent ID Number",
-      "radioButtonMyselfText": "Myself",
       "radioButtonAuthorizedRepText": "An authorized representative of the business (for example, an attorney, accountant, business partner, or manager)",
-      "radioButtonProfessionalServiceText": "A professional registered agent service",
+      "radioButtonNumberText": "Enter Your Registered Agent ID Number",
+      "manualEntryCheckboxLabel": "Can't find your ID? Enter information manually instead.",
+      "agentNumberLabel": "Registered Agent ID Number",
       "noteTitle": "Note: ",
-      "sameAddressCheckbox": "The address is the same as the business location.",
-      "noteBody": "By checking this box, the account holder information will be applied to the 'Registered Agent Name' and 'Registered Agent Email' fields. These fields will be locked.",
-      "label": "Registered Agent",
-      "sectionDescription": "All businesses in New Jersey must list a `registered agent|registered-agent` to receive official legal and tax documents on behalf of the business.",
-      "checkboxCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now editable",
-      "whoToListSubheading": "Who would you like to list as your registered agent?",
-      "infoCalloutHeading": "Keep in mind:",
       "infoCalloutIntro": "Whoever you choose as a registered agent (even if you choose yourself) must:",
+      "radioButtonProfessionalServiceText": "A professional registered agent service",
+      "agentNumberLabelSecondary": "(Not your telephone number)",
       "infoCalloutBullets": [
         "Be a New Jersey resident with a physical street address in New Jersey (no P.O. boxes or virtual mailboxes)",
         "Be available at that address during standard business hours (9:00 a.m.-5:00 p.m., Monday-Friday)",
         "Be willing to receive legal and tax mail on your business's behalf (your name will be listed on public records)",
         "Consent to be legally accountable for the business"
       ],
-      "infoCalloutFooter": "If you or whoever you choose is not able to meet the requirements, you can search the internet to find a professional registered agent service. Carefully research the registered agent to make sure they are authorized in New Jersey.",
-      "manualEntryCheckboxLabel": "Can't find your ID? Enter information manually instead."
-    },
-    "checkNameReservation": {
-      "header": "Check Name Reservation",
-      "didYouUseFormRadio": {
-        "label": "Did you use the [UNRR-1 form](https://www.nj.gov/treasury/revenue/dcr/pdforms/unrr1.pdf) to reserve a business name with the State of New Jersey?",
-        "option1": "No, I haven’t reserved a name (Name reservations are not needed to form a business)",
-        "option2": "Yes, I submitted the UNRR-1 form to reserve a name"
-      },
-      "alreadyReservedAlertHeader": "**If you’ve already reserved a business name, you cannot register with that business name on our online  system. You can still complete other steps on this site.**",
-      "alreadyReservedAlertInfo": "Choose how you’d like to continue.",
-      "howWouldYouLikeToProceedRadio": {
-        "label": "How would you like to proceed?",
-        "option1": "Register with a different business name (Fastest option)",
-        "option2": "Keep reserved name and mail formation paperwork (Processing time can take up to 14 days)",
-        "option3": "Cancel name reservation ($50 fee; Processing time can take up to 48 hours)"
-      },
-      "registerDifferentNameHeader": "Register with a Different Business Name",
-      "registerDifferentNameLine1": "Use a different business name for legal purposes. Once you find an available name, you can use it to form your business on this site.",
-      "registerDifferentNameLine2": "This legal name will only be used for official state registration purposes.",
-      "keepNameHeader": "Keep Reserved Name and Mail Formation Paperwork",
-      "keepNameStep1": "**Step 1:** [Download the Business Registration paperwork](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) (pages 23-24).",
-      "keepNameStep2": "**Step 2:** Fill out the paperwork on pages 23-24. Mail it and the $125 filing fee to:",
-      "keepNameStep3": "**Step 3:** When you’re done, check the “TO DO” box on this web page to mark the task complete.",
-      "keepNameAddressLine1": "_NJ Division of Revenue & Enterprise Services Client Registration_",
-      "keepNameAddressLine2": "_PO Box 252_",
-      "keepNameAddressLine3": "_Trenton, New Jersey 08646-0252_",
-      "cancelNameHeader": "Cancel Name Reservation",
-      "cancelNameStep1": "**Step 1:** Go to the [Business Charter Amendment Service website](https://www.njportal.com/DOR/BusinessAmendments/) to cancel your business name reservation. There’s a $50 fee.",
-      "cancelNameStep2": "**Step 2:** Wait 24–48 hours for our system to recognize the cancellation. We recommend returning to our site frequently to check if the business name reservation is canceled. Once the business name is released, it will be available on a first come, first served basis.",
-      "cancelNameStep3": "**Step 3:** You can complete the other sections on this site (business, contacts, billing, review) while you wait on the cancellation.",
-      "cancelNameStep4": "**Step 4:** Once the business name is released, you’ll be able to enter it here and continue your registration."
+      "sameAddressCheckbox": "The address is the same as the business location.",
+      "radioButtonMyselfText": "Myself",
+      "noteBody": "By checking this box, the account holder information will be applied to the 'Registered Agent Name' and 'Registered Agent Email' fields. These fields will be locked.",
+      "label": "Registered Agent",
+      "sectionDescription": "All businesses in New Jersey must list a `registered agent|registered-agent` to receive official legal and tax documents on behalf of the business.",
+      "whoToListSubheading": "Who would you like to list as your registered agent?",
+      "checkboxCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now editable",
+      "infoCalloutFooter": "If you or whoever you choose is not able to meet the requirements, you can search the internet to find a professional registered agent service. Carefully research the registered agent to make sure they are authorized in New Jersey."
     },
     "general": {
       "helpButtonText": "Help",
@@ -72,6 +41,7 @@
       "charactersLabel": "characters",
       "ariaContextStepperLabels": "Formation Stepper Navigation: ${stepName} Step, State: ${stepState}",
       "ariaContextWillLooseCalendarAndCertificationAccess": "You need to confirm your information to update your task status",
+      "removeSectionText": "Remove",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer.",
       "nextButtonText": "Save & Continue",
       "optionalLabel": "(Optional)",
@@ -82,8 +52,7 @@
       "viewMoreButtonText": "Read more",
       "viewLessButtonText": "Read less",
       "genericErrorText": "This field requires information.",
-      "ariaContextStepperStateComplete": "Complete",
-      "removeSectionText": "Remove"
+      "ariaContextStepperStateComplete": "Complete"
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.",
@@ -103,12 +72,12 @@
       "review": {
         "nameLabel": "Full Name",
         "billingContactHeader": "Billing Contact Information",
-        "warningAlert": "**Review carefully before you submit.** If you need to correct any errors (even a simple typo) after filing, you will need to file a [correction](https://www.njportal.com/dor/businessamendments) and pay an additional fee. This fee could be **over $100**. Also, your approval could be delayed up to **2 weeks**.",
+        "warningAlert": "**Review carefully before you submit.** If you need to correct any errors (even a simple typo) after \n\nfiling, you will need to file a `correction|certificate-of-correction` and pay an additional fee. This fee could be **over $100**. Also, your approval could be\n\ndelayed up to **2 weeks**.",
         "confirmationBox": {
           "title": "Ready to Submit?",
           "namesAddressesDatesCheckbox": "Yes, I have carefully checked all **names, addresses,** and **dates**, and confirm they are correct and complete.",
           "permanentRecordCheckbox": "Yes, I understand that after I submit, filing becomes a permanent public record, and **filing false information may result in penalties**.",
-          "correctionFeesCheckbox": "Yes, I understand if I need to correct any errors after I submit, I'll have to file a [correction](https://www.njportal.com/dor/businessamendments), could pay **over $100** outside of this website, and my approval may be delayed up to 2 weeks.",
+          "correctionFeesCheckbox": "Yes, I understand if I need to correct any errors after I submit, I'll have to file a\n\n `correction|certificate-of-correction` could pay **over $100** outside of this website, and my approval may be delayed up\n\nto 2 weeks.",
           "confirmationError": "Select all three checkboxes if you understand and want to continue."
         }
       },
@@ -126,6 +95,37 @@
       "errorOnStep": "Review the information in the fields below for errors or omissions:",
       "incompleteStepsError": "Check the steps below for missing information or errors:",
       "apiResubmitText": "After you make the correction, resubmit the form."
+    },
+    "checkNameReservation": {
+      "cancelNameStep1": "**Step 1:** Go to the [Business Charter Amendment Service website](https://www.njportal.com/DOR/BusinessAmendments/) to cancel your business name reservation. There’s a $50 fee.",
+      "cancelNameStep2": "**Step 2:** Wait 24–48 hours for our system to recognize the cancellation. We recommend returning to our site frequently to check if the business name reservation is canceled. Once the business name is released, it will be available on a first come, first served basis.",
+      "cancelNameStep3": "**Step 3:** You can complete the other sections on this site (business, contacts, billing, review) while you wait on the cancellation.",
+      "cancelNameStep4": "**Step 4:** Once the business name is released, you’ll be able to enter it here and continue your registration.",
+      "alreadyReservedAlertHeader": "**If you’ve already reserved a business name, you cannot register with that business name on our online  system. You can still complete other steps on this site.**",
+      "alreadyReservedAlertInfo": "Choose how you’d like to continue.",
+      "header": "Check Name Reservation",
+      "registerDifferentNameHeader": "Register with a Different Business Name",
+      "didYouUseFormRadio": {
+        "label": "Did you use the [UNRR-1 form](https://www.nj.gov/treasury/revenue/dcr/pdforms/unrr1.pdf) to reserve a business name with the State of New Jersey?",
+        "option1": "No, I haven’t reserved a name (Name reservations are not needed to form a business)",
+        "option2": "Yes, I submitted the UNRR-1 form to reserve a name"
+      },
+      "cancelNameHeader": "Cancel Name Reservation",
+      "keepNameStep1": "**Step 1:** [Download the Business Registration paperwork](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) (pages 23-24).",
+      "keepNameStep2": "**Step 2:** Fill out the paperwork on pages 23-24. Mail it and the $125 filing fee to:",
+      "keepNameStep3": "**Step 3:** When you’re done, check the “TO DO” box on this web page to mark the task complete.",
+      "howWouldYouLikeToProceedRadio": {
+        "label": "How would you like to proceed?",
+        "option1": "Register with a different business name (Fastest option)",
+        "option2": "Keep reserved name and mail formation paperwork (Processing time can take up to 14 days)",
+        "option3": "Cancel name reservation ($50 fee; Processing time can take up to 48 hours)"
+      },
+      "keepNameAddressLine1": "_NJ Division of Revenue & Enterprise Services Client Registration_",
+      "keepNameAddressLine2": "_PO Box 252_",
+      "keepNameAddressLine3": "_Trenton, New Jersey 08646-0252_",
+      "registerDifferentNameLine1": "Use a different business name for legal purposes. Once you find an available name, you can use it to form your business on this site.",
+      "keepNameHeader": "Keep Reserved Name and Mail Formation Paperwork",
+      "registerDifferentNameLine2": "This legal name will only be used for official state registration purposes."
     },
     "fields": {
       "paymentType": {
@@ -210,10 +210,8 @@
       },
       "signers": {
         "addButtonText": "Add New Signer",
-        "keepInMindCallout": "**Keep in mind:**\n\nNames must match legal documents (for example, birth certificate, driver’s license, or tax documents).",
-        "columnLabel": "Sign*",
-        "deleteLabel": "Remove",
-        "editLabel": "Edit",
+        "tableHeaderActions": "Actions",
+        "tableHeaderName": "Name",
         "overrides": {
           "limited-liability-partnership": {
             "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
@@ -222,25 +220,27 @@
             "description": "`Authorized representative(s)|authorized-representative` or `general partner(s)|general-partner` should sign below by adding their full name. You can have up to 10 signers listed."
           }
         },
+        "deleteLabel": "Remove",
         "aidText": "By checking this box, I confirm that I'm an authorized signer.",
         "nameLabel": "Signer Full Name",
         "errorBannerSignerName": "One or more Signer fields are empty.",
+        "editLabel": "Edit",
         "errorInlineNameAndSignature": "Enter a signer’s name and click the checkbox to authorize their signature.",
         "errorInlineSignerTitle": "Select a title.",
         "placeholder": "No Signers have been added",
+        "keepInMindCallout": "**Keep in mind:**\n\nNames must match legal documents (for example, birth certificate, driver’s license, or tax documents).",
         "label": "Signers",
         "errorInlineSignerName": "Enter a signer's name.",
         "errorInlineSignature": "Click the checkbox to authorize the signer’s signature.",
         "errorBannerCheckbox": "Sign by clicking the checkbox above.",
+        "tableHeaderSign": "Sign*",
+        "tableHeaderAddress": "Address",
         "errorBannerSignerTitle": "Select the signer titles below.",
         "errorBannerMinimum": "Enter at least 1 signer's name.",
-        "tableHeaderName": "Name",
-        "tableHeaderAddress": "Address",
-        "tableHeaderSign": "Sign*",
-        "tableHeaderActions": "Actions",
         "titleLabel": "Title",
         "description": "Authorized representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
-        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer."
+        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer.",
+        "columnLabel": "Sign*"
       },
       "addressLine1": {
         "label": "Address Line 1",
@@ -295,6 +295,7 @@
             "description": "Your business name must match **exactly** with the business name registered in your state of origin. You can find this on your original `Certificate of Formation|certificate-formation` and your `Certificate of Good Standing|good-standing` . **This search tool does not register your name with the State.**\n\nCheck if your business name is available in New Jersey."
           }
         },
+        "confirmBusinessNameLabel": "Confirm Business Name",
         "errorInlineEmpty": "Enter a business name to check availability.",
         "alertAvailable": "\"${name}\" is available. This name will be registered with the State after you submit the rest of this form.",
         "header": "Check Available Business Names",
@@ -303,9 +304,8 @@
         "alertUnavailable": "\"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
         "label": "Business Name",
         "description": "We’ll check to see if your desired business name is available. Once you find an available name, you can use it to complete this form.\n\nWhat do you want to name your business?",
-        "errorInlineNeedsToSearch": "Check the availability of your business name.",
-        "confirmBusinessNameLabel": "Confirm Business Name",
-        "confirmBusinessNameError": "Business names must match."
+        "confirmBusinessNameError": "Business names must match.",
+        "errorInlineNeedsToSearch": "Check the availability of your business name."
       },
       "agentOfficeAddressLine2": {
         "label": "Office Address Line 2"
