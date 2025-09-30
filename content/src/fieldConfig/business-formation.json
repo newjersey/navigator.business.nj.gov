@@ -77,7 +77,7 @@
           "title": "Ready to Submit?",
           "namesAddressesDatesCheckbox": "Yes, I have carefully checked all **names, addresses,** and **dates**, and confirm they are correct and complete.",
           "permanentRecordCheckbox": "Yes, I understand that after I submit, filing becomes a permanent public record, and **filing false information may result in penalties**.",
-          "correctionFeesCheckbox": "Yes, I understand if I need to correct any errors after I submit, I'll have to file a\n\n `correction|certificate-of-correction` could pay **over $100** outside of this website, and my approval may be delayed up to 2 weeks.",
+          "correctionFeesCheckbox": "Yes, I understand if I need to correct any errors after I submit, I'll have to file a\n\n `correction,|certificate-of-correction` could pay **over $100** outside of this website, and my approval may be delayed up to 2 weeks.",
           "confirmationError": "Select all three checkboxes if you understand and want to continue."
         }
       },
