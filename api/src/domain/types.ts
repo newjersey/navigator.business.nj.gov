@@ -79,7 +79,6 @@ export interface BusinessesDataClient {
   findAllByNAICSCode: (naicsCode: string) => Promise<Business[]>;
   findAllByIndustry: (industry: string) => Promise<Business[]>;
   findBusinessesByNamePrefix: (prefix: string) => Promise<Business[]>;
-  findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
   findAllByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
 }
 
