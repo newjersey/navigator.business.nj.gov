@@ -18,10 +18,6 @@
       "AttributeType": "S"
     },
     {
-      "AttributeName": "encryptedTaxId",
-      "AttributeType": "S"
-    },
-    {
       "AttributeName": "hashedTaxId",
       "AttributeType": "S"
     }
@@ -62,18 +58,6 @@
       "KeySchema": [
         {
           "AttributeName": "industry",
-          "KeyType": "HASH"
-        }
-      ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
-    },
-    {
-      "IndexName": "EncryptedTaxId",
-      "KeySchema": [
-        {
-          "AttributeName": "encryptedTaxId",
           "KeyType": "HASH"
         }
       ],
