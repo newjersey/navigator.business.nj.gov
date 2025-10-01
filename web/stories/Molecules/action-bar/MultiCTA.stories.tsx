@@ -11,10 +11,12 @@ const Template = () => {
       <CtaContainer>
         <ActionBarLayout
           stackOnLeft={
-            <div className="display-flex mobile-lg:display-block flex-justify-center">Float Left</div>
+            <div className="display-flex mobile-lg:display-block flex-justify-center">
+              Float Left
+            </div>
           }
         >
-          <LiveChatHelpButton />
+          <LiveChatHelpButton analyticsEvent={() => console.log("Help button clicked")} />
           <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" onClick={() => {}}>
               SecondaryButton

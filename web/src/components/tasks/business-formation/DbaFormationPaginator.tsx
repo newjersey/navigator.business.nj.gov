@@ -158,7 +158,9 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <LiveChatHelpButton />
+            <LiveChatHelpButton
+              analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+            />
             <ForwardButton />
           </ActionBarLayout>
         </CtaContainer>
@@ -167,7 +169,9 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <LiveChatHelpButton />
+            <LiveChatHelpButton
+              analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+            />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>
@@ -179,7 +183,9 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <LiveChatHelpButton />
+            <LiveChatHelpButton
+              analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+            />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>

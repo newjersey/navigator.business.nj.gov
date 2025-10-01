@@ -2578,6 +2578,48 @@ export default {
         },
       },
     },
+    cigarette_license_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "cigarette_license_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "cigarette_license_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
+    tax_clearance_anytime_action_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "tax_clearance_anytime_action_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "tax_clearance_anytime_action_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
+    remove_business_modal_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "remove_business_modal_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "remove_business_modal_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
     my_account: {
       click: {
         my_account: () => {
