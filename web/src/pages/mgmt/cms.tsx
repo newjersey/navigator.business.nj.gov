@@ -63,6 +63,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
+import EmployerRatesPreview from "@/lib/cms/previews/EmployerRatesPreview";
 
 const CMS_CONFIG = {};
 const Loading = (): ReactElement => {
@@ -165,6 +166,7 @@ const CMS = dynamic(
       // ----- Profile -----
       registerPreview(CMS, "profile-fields", ProfileFieldsPreview);
       registerPreview(CMS, "profile-misc", ProfilePreviewMisc);
+      registerPreview(CMS, "employer-rates", EmployerRatesPreview);
 
       registerPreview(CMS, "cannabisPriority-1", CannabisPriorityStatusPreview);
       registerPreview(CMS, "cannabisPriority-2", CannabisPriorityStatusPreview);

@@ -2934,6 +2934,55 @@ collections:
                       widget: string,
                     }
                   - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
+      - label: "Employer Rates"
+        name: "employer-rates"
+        file: "content/src/fieldConfig/employer-rates.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Employer Rates"
+            name: "employerRates"
+            widget: object
+            fields:
+              - { label: Header Text, name: sectionHeaderText, widget: string }
+              - { label: Below Header Text, name: belowSectionHeaderText, widget: markdown }
+              - {
+                  label: Employer Access Header Text,
+                  name: employerAccessHeaderText,
+                  widget: string,
+                }
+              - { label: Employer Access Question Text, name: employerAccessText, widget: markdown }
+              - {
+                  label: Employer Access Question Is True Text,
+                  name: employerAccessTrueText,
+                  widget: string,
+                }
+              - {
+                  label: Employer Access Question Is False Text,
+                  name: employerAccessFalseText,
+                  widget: string,
+                }
+              - {
+                  label: Employer Access CTA Button Text When True Selected,
+                  name: employerAccessYesButtonText,
+                  widget: string,
+                }
+
+              - {
+                  label: Employer Access No Body Text When False Selected,
+                  name: employerAccessNoBodyText,
+                  widget: markdown,
+                }
+              - {
+                  label: Employer Access CTA Button Text When False Selected,
+                  name: employerAccessNoButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Employer Access CTA Button Link When False Selected,
+                  name: employerAccessNoButtonLink,
+                  widget: string,
+                }
 
   - label: "Fundings Onboarding Page"
     name: "business-fundings-onboarding-page"
