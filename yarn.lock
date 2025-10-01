@@ -4021,7 +4021,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.18
     dedent: 1.7.0
-    dependency-cruiser: 16.10.4
+    dependency-cruiser: 17.0.1
     eslint: 8.57.1
     eslint-config-prettier: 9.1.2
     eslint-plugin-jest: 27.9.0
@@ -4182,7 +4182,7 @@ __metadata:
     dayjs: 1.11.18
     decap-cms-app: 3.0.12
     dedent: 1.7.0
-    dependency-cruiser: 16.10.4
+    dependency-cruiser: 17.0.1
     dotenv: 17.2.2
     dynamodb-admin: 5.1.3
     eslint: 8.57.1
@@ -4383,7 +4383,7 @@ __metadata:
     cypress-wait-until: 3.0.2
     dayjs: 1.11.18
     decap-cms-app: 3.0.12
-    dependency-cruiser: 16.10.4
+    dependency-cruiser: 17.0.1
     dotenv: 17.2.2
     eslint: 8.57.1
     eslint-config-next: 15.5.4
@@ -16164,13 +16164,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^13.1.0":
-  version: 13.1.0
-  resolution: "commander@npm:13.1.0"
-  checksum: 8ca2fcb33caf2aa06fba3722d7a9440921331d54019dabf906f3603313e7bf334b009b862257b44083ff65d5a3ab19e83ad73af282bd5319f01dc228bdf87ef0
-  languageName: node
-  linkType: hard
-
 "commander@npm:^14.0.0, commander@npm:^14.0.1":
   version: 14.0.1
   resolution: "commander@npm:14.0.1"
@@ -18145,9 +18138,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.10.4":
-  version: 16.10.4
-  resolution: "dependency-cruiser@npm:16.10.4"
+"dependency-cruiser@npm:17.0.1":
+  version: 17.0.1
+  resolution: "dependency-cruiser@npm:17.0.1"
   dependencies:
     acorn: ^8.15.0
     acorn-jsx: ^5.3.2
@@ -18155,20 +18148,18 @@ __metadata:
     acorn-loose: ^8.5.2
     acorn-walk: ^8.3.4
     ajv: ^8.17.1
-    commander: ^13.1.0
+    commander: ^14.0.0
     enhanced-resolve: ^5.18.2
     ignore: ^7.0.5
     interpret: ^3.1.1
     is-installed-globally: ^1.0.0
     json5: ^2.2.3
     memoize: ^10.1.0
-    picocolors: ^1.1.1
-    picomatch: ^4.0.2
+    picomatch: ^4.0.3
     prompts: ^2.4.2
     rechoir: ^0.8.0
     safe-regex: ^2.1.1
     semver: ^7.7.2
-    teamcity-service-messages: ^0.1.14
     tsconfig-paths-webpack-plugin: ^4.2.0
     watskeburt: ^4.2.3
   bin:
@@ -18178,7 +18169,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 2c2dc41bcb5a8f01ba256fdf5742299cb52e5a4933c4a6f31097df099a2d30817abbd84d072f86d895097bddd733225a12a76ac9502995129e08b927c25f20f2
+  checksum: f5ec1dde7759deb8beffb6ae20fd2de81992084b6781d62ea524dba888f1a4f3dd5e177ab779e5a85f6d3080a8ffd91999ee1971693c246dc2eed9db29185fe5
   languageName: node
   linkType: hard
 
@@ -33852,13 +33843,6 @@ __metadata:
     mkdirp: ^1.0.3
     yallist: ^4.0.0
   checksum: f1322768c9741a25356c11373bce918483f40fa9a25c69c59410c8a1247632487edef5fe76c5f12ac51a6356d2f1829e96d2bc34098668a2fc34d76050ac2b6c
-  languageName: node
-  linkType: hard
-
-"teamcity-service-messages@npm:^0.1.14":
-  version: 0.1.14
-  resolution: "teamcity-service-messages@npm:0.1.14"
-  checksum: b4f91d81158df1f977bdf10312779dc1bb47b3268dbdbab7cdf1e9d99591d2d4916af975fe059f62481bff1e7938dff1b46c05ba53545d53fd486de079879d9b
   languageName: node
   linkType: hard
 
