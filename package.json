@@ -30,7 +30,7 @@
     "test:python": "python -m unittest discover -b -s content/scripts -p \"test_*.py\" && python -m unittest discover -b -s scripts -p \"test_*.py\"",
     "test:watch": "yarn test --watch",
     "typecheck": "yarn workspaces foreach -v run typecheck",
-    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.9.2",
+    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.9.3",
     "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify",
     "cms:map": "yarn dlx tsx scripts/generate-collection-map.ts"
   },
@@ -242,7 +242,7 @@
     ]
   },
   "engines": {
-    "node": ">=22.16.0"
+    "node": ">=22.20.0"
   },
   "repository": {
     "type": "git",
