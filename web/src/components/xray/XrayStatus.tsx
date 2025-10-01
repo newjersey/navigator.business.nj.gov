@@ -25,18 +25,6 @@ const useStyles = makeStyles(() => {
           display: "none",
         },
     },
-    errorLink: {
-      color: "#0071bc",
-      textDecoration: "underline",
-      cursor: "pointer",
-      background: "none",
-      border: "none",
-      padding: 0,
-      font: "inherit",
-      "&:hover": {
-        textDecoration: "none",
-      },
-    },
   });
 });
 
@@ -70,10 +58,6 @@ export const XrayStatus = (props: Props): ReactElement => {
   });
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const { business } = useUserData();
-
-  const businessNameRef = useRef<HTMLInputElement>(null);
-  const addressLine1Ref = useRef<HTMLInputElement>(null);
-  const addressZipCodeRef = useRef<HTMLInputElement>(null);
   const errorAlertRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -196,19 +180,6 @@ export const XrayStatus = (props: Props): ReactElement => {
     };
   };
 
-  const focusOnField = (fieldName: keyof FieldErrors): void => {
-    const refs = {
-      businessName: businessNameRef,
-      addressLine1: addressLine1Ref,
-      addressZipCode: addressZipCodeRef,
-    };
-
-    const ref = refs[fieldName];
-    if (ref?.current) {
-      ref.current.focus();
-    }
-  };
-
   const getErrorAlert = (): ReactNode => {
     const hasFieldErrors = Object.keys(fieldErrors).length > 0;
 
@@ -229,35 +200,17 @@ export const XrayStatus = (props: Props): ReactElement => {
               <ul className="margin-bottom-0">
                 {fieldErrors.businessName && (
                   <li>
-                    <button
-                      type="button"
-                      className={classes.errorLink}
-                      onClick={() => focusOnField("businessName")}
-                    >
-                      Business Name
-                    </button>
+                    <a href="#question-business-name">Business Name</a>
                   </li>
                 )}
                 {fieldErrors.addressLine1 && (
                   <li>
-                    <button
-                      type="button"
-                      className={classes.errorLink}
-                      onClick={() => focusOnField("addressLine1")}
-                    >
-                      Facility Address Line 1
-                    </button>
+                    <a href="#question-address-line-1">Facility Address Line 1</a>
                   </li>
                 )}
                 {fieldErrors.addressZipCode && (
                   <li>
-                    <button
-                      type="button"
-                      className={classes.errorLink}
-                      onClick={() => focusOnField("addressZipCode")}
-                    >
-                      Zip Code
-                    </button>
+                    <a href="#question-zip-code">Zip Code</a>
                   </li>
                 )}
               </ul>
@@ -289,7 +242,7 @@ export const XrayStatus = (props: Props): ReactElement => {
       {getErrorAlert()}
       <p className="margin-bottom-4 margin-top-3">{Config.xrayRegistrationTask.checkStatusText}</p>
       <form onSubmit={onSubmit}>
-        <div className="margin-bottom-2">
+        <div className="margin-bottom-2" id="question-business-name">
           <label className="text-bold" htmlFor="business-name">
             {Config.xrayRegistrationTask.businessNameLabel}
           </label>
@@ -304,17 +257,13 @@ export const XrayStatus = (props: Props): ReactElement => {
               id: "business-name",
               "data-testid": "business-name",
             }}
-            inputRef={businessNameRef}
             onBlur={handleBlurForKey("businessName")}
-            className={fieldErrors.businessName}
+            error={!!fieldErrors.businessName}
+            helperText={fieldErrors.businessName}
           />
-          {fieldErrors.businessName && (
-            <div id="business-name-error" className={"text-error-dark"}>
-              {fieldErrors.businessName}
-            </div>
-          )}
         </div>
-        <div className="margin-bottom-2">
+
+        <div className="margin-bottom-2" id="question-address-line-1">
           <label className="text-bold" htmlFor="address-1">
             {Config.xrayRegistrationTask.address1Label}
           </label>
@@ -329,15 +278,10 @@ export const XrayStatus = (props: Props): ReactElement => {
               id: "address-1",
               "data-testid": "address-1",
             }}
-            inputRef={addressLine1Ref}
             onBlur={handleBlurForKey("addressLine1")}
-            className={fieldErrors.addressLine1}
+            error={!!fieldErrors.addressLine1}
+            helperText={fieldErrors.addressLine1}
           />
-          {fieldErrors.addressLine1 && (
-            <div id="address-1-error" className={"text-error-dark"}>
-              {fieldErrors.addressLine1}
-            </div>
-          )}
         </div>
 
         <div className="margin-bottom-2">
@@ -354,8 +298,9 @@ export const XrayStatus = (props: Props): ReactElement => {
             }}
           />
         </div>
+
         <div className="fdr flex-half">
-          <div className="flex-half padding-right-1">
+          <div className="flex-half padding-right-1" id="question-zip-code">
             <label className="text-bold" htmlFor="addressZipCode">
               {Config.xrayRegistrationTask.addressZipCodeLabel}
             </label>
@@ -368,15 +313,11 @@ export const XrayStatus = (props: Props): ReactElement => {
                 "data-testid": "addressZipCode",
                 type: "number",
               }}
-              className={`${classes.addressZipCodeField}`}
-              inputRef={addressZipCodeRef}
+              className={classes.addressZipCodeField}
               onBlur={handleBlurForKey("addressZipCode")}
+              error={!!fieldErrors.addressZipCode}
+              helperText={fieldErrors.addressZipCode}
             />
-            {fieldErrors.addressZipCode && (
-              <div id="zip-code-error" className={"text-error-dark"}>
-                {fieldErrors.addressZipCode}
-              </div>
-            )}
           </div>
           <div className="flex-half padding-left-1">
             <label className="text-bold" htmlFor="state">
@@ -397,6 +338,7 @@ export const XrayStatus = (props: Props): ReactElement => {
             />
           </div>
         </div>
+
         <div className="flex flex-row">
           <div className="mla margin-top-4">
             <SecondaryButton
