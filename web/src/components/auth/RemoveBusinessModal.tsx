@@ -17,6 +17,7 @@ import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitl
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { AuthContext } from "@/contexts/authContext";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   CMS_ONLY_fakeBusiness?: Business;
@@ -69,7 +70,9 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
     >
       <ReverseOrderInMobile>
         <>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.remove_business_modal_help_button.click.open_live_chat}
+          />
           <SecondaryButton
             isColor="border-dark-red"
             dataTestId="modal-button-secondary"

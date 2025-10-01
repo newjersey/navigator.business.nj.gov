@@ -471,7 +471,9 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
 
       <CtaContainer>
         <ActionBarLayout>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.cigarette_license_help_button.click.open_live_chat}
+          />
           <SecondaryButton
             isColor="primary"
             onClick={() => {

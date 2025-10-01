@@ -15,6 +15,7 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { postEmergencyTripPermitApplication } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import {
   EmergencyTripPermitApplicationInfo,
@@ -176,7 +177,9 @@ export const EmergencyTripPermit = (): ReactElement => {
       {EmergencyTripPermitSteps[stepIndex].component}
       <CtaContainer>
         <ActionBarLayout>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.emergency_trip_permit_help_button.click.open_live_chat}
+          />
           {stepIndex !== 0 && (
             <SecondaryButton
               onClick={() => {
