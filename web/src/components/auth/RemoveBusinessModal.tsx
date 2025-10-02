@@ -1,8 +1,8 @@
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { ReactElement, useContext, useRef, useState } from "react";
+import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
-import { Checkbox, FormControlLabel, useMediaQuery } from "@mui/material";
+import { Checkbox, useMediaQuery } from "@mui/material";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -32,7 +32,13 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
   const errorRef = useRef<HTMLDivElement>(null);
 
   const [checked, setChecked] = useState(false);
-  const [hasRemoveBusinessError, setRemoveBusinessError] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (error && errorRef.current) {
+      errorRef.current.focus();
+    }
+  }, [error]);
 
   useMountEffectWhenDefined(() => {
     setShowRemoveBusinessModal(false);
@@ -47,14 +53,13 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
 
   const close = (): void => {
     setChecked(false);
-    setRemoveBusinessError(false);
+    setError(false);
     setShowRemoveBusinessModal(false);
   };
 
   const removeBusiness = (): void => {
     if (!checked) {
-      setRemoveBusinessError(true);
-      errorRef.current?.focus();
+      setError(true);
       return;
     }
 
@@ -99,8 +104,8 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
       title={Config.removeBusinessModal.header}
       unpaddedChildren={buttonNode}
     >
-      {hasRemoveBusinessError && (
-        <Alert variant="error" dataTestid={"profile-error-alert"} ref={errorRef}>
+      {error && (
+        <Alert variant="error" dataTestid={"error-alert"} ref={errorRef}>
           <div>{Config.removeBusinessModal.agreementCheckboxErrorText}</div>
         </Alert>
       )}
@@ -121,24 +126,28 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
 
       <div className={"padding-5px"}>{Config.removeBusinessModal.irreversibleOperationText}</div>
 
-      <div className={"padding-205"}>
-        <WithErrorBar hasError={hasRemoveBusinessError} type={"ALWAYS"}>
-          <FormControlLabel
-            label={Config.removeBusinessModal.agreementCheckboxText}
-            control={
+      <div className={"padding-y-11px"}>
+        <WithErrorBar hasError={error} type={"ALWAYS"}>
+          <div className={"flex"}>
+            <div className={"flex fas"}>
               <Checkbox
                 data-testid="agree-checkbox"
                 checked={checked}
                 onChange={(e) => {
                   setChecked(e.target.checked);
-                  if (e.target.checked) setRemoveBusinessError(false);
+                  if (e.target.checked) setError(false);
                 }}
-                className={
-                  hasRemoveBusinessError ? "agreement-checkbox-error" : "agreement-checkbox-base"
-                }
+                className={error ? "agreement-checkbox-error" : "agreement-checkbox-base"}
+                sx={{
+                  alignSelf: {
+                    xs: "center",
+                    sm: "center",
+                  },
+                }}
               />
-            }
-          />
+            </div>
+            <div>{Config.removeBusinessModal.agreementCheckboxText}</div>
+          </div>
         </WithErrorBar>
       </div>
       <hr />

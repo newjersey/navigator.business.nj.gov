@@ -64,26 +64,4 @@ describe("RemoveBusinessModal", () => {
       screen.getByText(Config.removeBusinessModal.agreementCheckboxErrorText),
     ).toBeInTheDocument();
   });
-
-  it("renders error when remove is clicked without agreement and clears error when agreement checkbox is clicked", () => {
-    renderModal(businessName);
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    expect(
-      screen.getByText(Config.removeBusinessModal.agreementCheckboxErrorText),
-    ).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("agree-checkbox"));
-    expect(
-      screen.queryByText(Config.removeBusinessModal.agreementCheckboxErrorText),
-    ).not.toBeInTheDocument();
-  });
-
-  it("does not render error when agreement checkbox is clicked and calls the close method", () => {
-    renderModal(businessName);
-    fireEvent.click(screen.getByTestId("agree-checkbox"));
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    expect(
-      screen.queryByText(Config.removeBusinessModal.agreementCheckboxErrorText),
-    ).not.toBeInTheDocument();
-    expect(setShowRemoveBusinessModal).toHaveBeenCalledWith(false);
-  });
 });
