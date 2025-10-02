@@ -39,7 +39,9 @@ export const GeneralInfo = (props: Props): ReactElement => {
       <span className="h6-styling">{Config.cigaretteLicenseShared.issuingAgencyText}</span>
       <CtaContainer>
         <ActionBarLayout>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.cigarette_license_help_button.click.open_live_chat}
+          />
           <PrimaryButton
             isColor="primary"
             onClick={onContinueClick}

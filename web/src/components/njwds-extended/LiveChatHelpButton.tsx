@@ -1,10 +1,13 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import analytics from "@/lib/utils/analytics";
 import { ReactElement } from "react";
 
-export const LiveChatHelpButton = (props?: { onClick?: () => void }): ReactElement => {
+interface Props {
+  analyticsEvent: () => void;
+}
+
+export const LiveChatHelpButton = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (
@@ -15,13 +18,7 @@ export const LiveChatHelpButton = (props?: { onClick?: () => void }): ReactEleme
         isTextBold
         isIntercomEnabled
         dataTestid={"help-button"}
-        onClick={() => {
-          if (props?.onClick) {
-            props.onClick();
-          } else {
-            analytics.event.business_formation_help_button.click.open_live_chat();
-          }
-        }}
+        onClick={props.analyticsEvent}
       >
         <ButtonIcon svgFilename="help-circle-blue" sizePx="25px" />
         {Config.formation.general.helpButtonText}

@@ -395,7 +395,9 @@ export const BusinessFormationPaginator = (): ReactElement => {
     return (
       <CtaContainer>
         <ActionBarLayout stackOnLeft={stackOnLeft}>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+          />
           {shouldDisplayPreviousButton() && (
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <SecondaryButton

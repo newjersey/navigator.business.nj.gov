@@ -167,7 +167,11 @@ export const CheckEligibility = (props: Props): ReactElement => {
       </div>
       <CtaContainer>
         <ActionBarLayout>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={
+              analytics.event.tax_clearance_anytime_action_help_button.click.open_live_chat
+            }
+          />
           <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" onClick={handleBackButtonClick}>
               {Config.taxClearanceCertificateShared.backButtonText}
