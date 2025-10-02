@@ -1,4 +1,4 @@
-import { RemoveBusinessModal } from "@/components/auth/RemoveBusinessModal";
+import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";

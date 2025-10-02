@@ -41,7 +41,7 @@ import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
 import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
-import { RemoveBusinessModal } from "@/components/auth/RemoveBusinessModal";
+import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
