@@ -1,9 +1,9 @@
 {
   "removeBusinessModal": {
     "header": "Remove Business",
-    "filingOfficialBusinessClosureText": ":::miniCallout{ calloutType=\"warning\" }\nRemoving ***\"${businessName}\"*** from this account will ***NOT close*** your business in the state of New Jersey. [Learn more about filing an official business closure with the State.](https://account.business.nj.gov/actions/close-your-business)\n:::",
-    "businessRemovalText": "You are about to remove the ***\"${businessName}\"*** business from your Business.nj.gov Account.",
-    "irreversibleOperationText": "This operation is irreversible and will result in a complete deletion of all your account data associated with Business.NJ.gov. Your information will still be available in your myNewJersey account",
+    "filingOfficialBusinessClosureText": ":::miniCallout{ calloutType=\"warning\" }\nRemoving ***\"${businessName}\"*** from this account will ***NOT close*** your business in the state of New Jersey. [Learn more about filing an official business closure with the State.](https://business.nj.gov/pages/closing-your-business)\n:::",
+    "businessRemovalText": "You are about to remove the ***\"${businessName}\"*** business from your Business.NJ.gov Account.",
+    "irreversibleOperationText": "This operation is irreversible and will result in a complete deletion of all your account data associated with Business.NJ.gov. Your information will still be available in your myNewJersey account.",
     "cancelButtonText": "Cancel",
     "removeBusinessButtonText": "Remove My Business",
     "agreementCheckboxText": "Yes, I understand that all my business information will be removed permanently from Business.NJ.gov and I want to proceed.",
