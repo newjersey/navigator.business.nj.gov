@@ -41,7 +41,7 @@
     "@aws-sdk/util-base64-node": "3.209.0",
     "@aws-sdk/util-dynamodb": "3.896.0",
     "@businessnjgovnavigator/shared": "*",
-    "@serverless/typescript": "3.38.0",
+    "@serverless/typescript": "4.18.2",
     "@smithy/node-http-handler": "2.5.0",
     "airtable": "0.12.2",
     "axios": "1.12.2",
