@@ -104,4 +104,10 @@ describe("<DashboardAlerts />", () => {
     renderStatefulPage();
     expect(screen.getByTestId("needs-account-alert")).toBeInTheDocument();
   });
+
+  it("renders needs delete business snackbar when fromDeleteBusiness query parameter is provided", async () => {
+    useMockRouter({ isReady: true, query: { [QUERIES.fromDeleteBusiness]: "true" } });
+    renderStatefulPage();
+    expect(screen.getByTestId("delete-business-alert")).toBeInTheDocument();
+  });
 });

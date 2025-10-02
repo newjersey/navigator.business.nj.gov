@@ -18,6 +18,10 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { AuthContext } from "@/contexts/authContext";
 import analytics from "@/lib/utils/analytics";
+import { removeBusinessSoftDelete } from "@/lib/domain-logic/removeBusinessSoftDelete";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { useRouter } from "next/compat/router";
+import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 
 interface Props {
   CMS_ONLY_fakeBusiness?: Business;
@@ -25,21 +29,30 @@ interface Props {
 
 export const RemoveBusinessModal = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
+  const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { state } = useContext(AuthContext);
   const { showRemoveBusinessModal, setShowRemoveBusinessModal } = useContext(RemoveBusinessContext);
   const { Config } = useConfig();
+  const router = useRouter();
 
   const errorRef = useRef<HTMLDivElement>(null);
 
   const [checked, setChecked] = useState(false);
   const [error, setError] = useState(false);
+  const [businessName, setBusinessName] = useState<string>("");
 
   useEffect(() => {
     if (error && errorRef.current) {
       errorRef.current.focus();
     }
-  }, [error]);
+
+    if (showRemoveBusinessModal) {
+      setBusinessName(
+        getNavBarBusinessTitle(business, state.isAuthenticated === IsAuthenticated.TRUE),
+      );
+    }
+  }, [error, showRemoveBusinessModal, business, state.isAuthenticated]);
 
   useMountEffectWhenDefined(() => {
     setShowRemoveBusinessModal(false);
@@ -47,24 +60,57 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
 
   const isMobileAndUp = useMediaQuery(MediaQueries.mobileAndUp);
 
-  const businessName: string = getNavBarBusinessTitle(
-    business,
-    state.isAuthenticated === IsAuthenticated.TRUE,
-  );
-
   const close = (): void => {
     setChecked(false);
     setError(false);
     setShowRemoveBusinessModal(false);
   };
 
-  const removeBusiness = (): void => {
+  const removeBusiness = async (): Promise<void> => {
     if (!checked) {
       setError(true);
       return;
     }
 
-    close();
+    if (props.CMS_ONLY_fakeBusiness) {
+      close();
+    }
+
+    const userData = userDataFromHook.userData;
+    const newCurrentBusinessID = userData?.businesses
+      ? Object.values(userData.businesses)
+          .filter(
+            (b) =>
+              (b.dateDeletedISO === undefined || b.dateDeletedISO === "") && b.id !== business?.id,
+          )
+          .sort(
+            (a, b) => new Date(b.dateCreatedISO).getTime() - new Date(a.dateCreatedISO).getTime(),
+          )[0].id
+      : undefined;
+
+    if (
+      business !== undefined &&
+      newCurrentBusinessID !== undefined &&
+      userData !== undefined &&
+      updateQueue !== undefined
+    ) {
+      const newUserData = removeBusinessSoftDelete({
+        userData: userData,
+        idToSoftDelete: business.id,
+        newCurrentBusinessId: newCurrentBusinessID,
+      });
+
+      close();
+
+      await updateQueue?.queue(switchCurrentBusiness(newUserData, newCurrentBusinessID)).update();
+      router &&
+        (await router.push({
+          pathname: ROUTES.dashboard,
+          query: {
+            [QUERIES.fromDeleteBusiness]: "true",
+          },
+        }));
+    }
   };
   const buttonNode = (
     <div
@@ -134,7 +180,7 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
           <div className={"flex"}>
             <div className={"flex fas"}>
               <Checkbox
-                data-testid="agree-checkbox"
+                data-testid="agreement-checkbox"
                 checked={checked}
                 onChange={(e) => {
                   setChecked(e.target.checked);

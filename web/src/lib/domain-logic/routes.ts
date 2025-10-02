@@ -25,6 +25,7 @@ export interface QUERY_PARAMS_VALUES {
   fromFormBusinessEntity: "true" | "false";
   fromForming: "true";
   fromAdditionalBusiness: "true";
+  fromDeleteBusiness: "true";
   fromFunding: "true";
   fromOnboarding: "true";
   completeFiling: "true" | "false";
@@ -48,6 +49,7 @@ export enum QUERIES {
   deferredQuestionAnswered = "deferredQuestionAnswered",
   flow = "flow",
   fromAdditionalBusiness = "fromAdditionalBusiness",
+  fromDeleteBusiness = "fromDeleteBusiness",
   fromFormBusinessEntity = "fromFormBusinessEntity",
   fromForming = "fromForming",
   fromFunding = "fromFunding",
