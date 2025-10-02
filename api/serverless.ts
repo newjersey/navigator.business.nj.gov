@@ -142,7 +142,7 @@ const serverlessConfiguration: AWS = {
   provider: {
     name: "aws",
     deploymentBucket: serverlessDeploymentS3Bucket,
-    runtime: "nodejs20.x",
+    runtime: "nodejs22.x",
     stage: stage,
     region: region,
     iam: {
