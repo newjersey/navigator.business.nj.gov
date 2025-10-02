@@ -109,7 +109,8 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
           query: {
             [QUERIES.fromDeleteBusiness]: "true",
           },
-        }));
+        })) &&
+        router.reload();
     }
   };
   const buttonNode = (
