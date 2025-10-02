@@ -17,6 +17,9 @@ import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitl
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { AuthContext } from "@/contexts/authContext";
+import { removeBusinessSoftDelete } from "@/lib/domain-logic/removeBusinessSoftDelete";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { useRouter } from "next/compat/router";
 
 interface Props {
   CMS_ONLY_fakeBusiness?: Business;
@@ -24,10 +27,12 @@ interface Props {
 
 export const RemoveBusinessModal = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
+  const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { state } = useContext(AuthContext);
   const { showRemoveBusinessModal, setShowRemoveBusinessModal } = useContext(RemoveBusinessContext);
   const { Config } = useConfig();
+  const router = useRouter();
 
   const errorRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +43,7 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
     if (error && errorRef.current) {
       errorRef.current.focus();
     }
-  }, [error]);
+  }, [error, router?.query.fromDeleteBusiness]);
 
   useMountEffectWhenDefined(() => {
     setShowRemoveBusinessModal(false);
@@ -57,13 +62,49 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
     setShowRemoveBusinessModal(false);
   };
 
-  const removeBusiness = (): void => {
+  const removeBusiness = async (): Promise<void> => {
     if (!checked) {
       setError(true);
       return;
     }
 
-    close();
+    if (props.CMS_ONLY_fakeBusiness) {
+      close();
+    }
+
+    const userData = userDataFromHook.userData;
+    const newCurrentBusinessID = userData?.businesses
+      ? Object.values(userData.businesses)
+          .filter((b) => b.dateDeletedISO === undefined)
+          .sort(
+            (a, b) => new Date(b.dateCreatedISO).getTime() - new Date(a.dateCreatedISO).getTime(),
+          )[0].id
+      : undefined;
+
+    if (
+      business !== undefined &&
+      newCurrentBusinessID !== undefined &&
+      userData !== undefined &&
+      updateQueue !== undefined
+    ) {
+      await updateQueue
+        .queue(
+          removeBusinessSoftDelete({
+            userData: userData,
+            idToSoftDelete: business.id,
+            newCurrentBusinessId: newCurrentBusinessID,
+          }),
+        )
+        .update();
+
+      close();
+
+      router &&
+        (await router.push({
+          pathname: ROUTES.dashboard,
+          query: { [QUERIES.fromDeleteBusiness]: "true" },
+        }));
+    }
   };
   const buttonNode = (
     <div

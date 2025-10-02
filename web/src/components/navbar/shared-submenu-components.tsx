@@ -139,8 +139,16 @@ export const ProfileMenuItem = (props: {
 
   const userData = props.userData;
   if (!userData) return [];
-  const hasMultipleBusinesses = Object.keys(userData.businesses).length > 1;
+  const hasMultipleBusinesses =
+    Object.values(userData.businesses).filter((b) => b.dateDeletedISO === undefined).length > 1;
+
   return orderBusinessIdsByDateCreated(userData).flatMap((businessId, i) => {
+    const business = userData.businesses[businessId];
+
+    if (business.dateDeletedISO !== undefined) {
+      return [];
+    }
+
     const isCurrent = businessId === userData.currentBusinessId;
     const businessMenuItems = [
       NavMenuItem({

@@ -24,6 +24,7 @@ export interface Business {
   readonly id: string;
   readonly dateCreatedISO: string;
   readonly lastUpdatedISO: string;
+  readonly dateDeletedISO: string | undefined;
   readonly profileData: ProfileData;
   readonly onboardingFormProgress: OnboardingFormProgress;
   readonly taskProgress: Record<string, TaskProgress>;
@@ -55,6 +56,7 @@ export const createEmptyBusiness = ({
     id: businessId || createBusinessId(),
     dateCreatedISO: new Date(Date.now()).toISOString(),
     lastUpdatedISO: new Date(Date.now()).toISOString(),
+    dateDeletedISO: undefined,
     profileData: createEmptyProfileData(),
     onboardingFormProgress: "UNSTARTED",
     taskProgress: {},
