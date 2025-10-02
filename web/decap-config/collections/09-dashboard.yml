@@ -139,6 +139,16 @@ collections:
                   widget: text,
                 }
               - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
+              - {
+                  label: Remove Business Snackbar Title,
+                  name: removedBusinessSnackbarTitle,
+                  widget: text,
+                }
+              - {
+                  label: Remove Business Snackbar Body,
+                  name: removedBusinessSnackbarBody,
+                  widget: text,
+                }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
         file: "content/src/fieldConfig/dashboard-calendar.json"

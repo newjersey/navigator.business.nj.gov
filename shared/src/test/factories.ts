@@ -662,6 +662,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     version: CURRENT_VERSION,
     userId: generateUser({}).id,
     versionWhenCreated: CURRENT_VERSION,
+    dateDeletedISO: "",
     profileData,
     formationData,
     ...overrides,
