@@ -91,6 +91,16 @@ export const DashboardAlerts = (): ReactElement => {
     dataTestId: "needs-account-alert",
   });
 
+  const DeleteBusinessAlert = useQueryControlledAlert({
+    queryKey: QUERIES.fromDeleteBusiness,
+    pagePath: ROUTES.dashboard,
+    headerText: Config.dashboardDefaults.removedBusinessSnackbarTitle,
+    bodyText: Config.dashboardDefaults.removedBusinessSnackbarBody,
+    variant: "success",
+    dataTestId: "delete-business-alert",
+    delayInMilliseconds: 0,
+  });
+
   return (
     <div data-testid="dashboard-alerts">
       <>{ProfileUpdatedAlert}</>
@@ -102,6 +112,7 @@ export const DashboardAlerts = (): ReactElement => {
       <>{DeferredQuestionAnsweredAlert}</>
       <>{AdditionalBusinessAlert}</>
       <>{NeedsAccountAlert}</>
+      <>{DeleteBusinessAlert}</>
     </div>
   );
 };

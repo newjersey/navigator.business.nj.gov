@@ -36,6 +36,7 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
       } else {
         setAlertIsVisible(true);
       }
+
       redirect();
       effectOccurred.current = true;
     }
