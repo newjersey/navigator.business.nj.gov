@@ -362,17 +362,17 @@ export const ApiTaxClearanceCertificateClient = (
   const health = async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();
     const healthCheckBody = {
-      taxpayerId: "777777777771",
-      taxpayerPin: "3889",
+      taxpayerId: "123456789012",
+      taxpayerPin: "1234",
       taxpayerName: "RUBBLE, BARNEY",
-      repName: "TEST REP",
+      repName: "OOI Health Check",
       addressLine1: "Test Line 1",
       addressLine2: "Test Line 2",
-      city: "TEST City",
-      state: "FL",
-      zip: "08699",
+      city: "Test City",
+      state: "NJ",
+      zip: "01234",
       agencyName: "Sample Agency",
-      repId: "XDCFJHJHFH",
+      repId: "OOI-Health-Check",
     };
 
     return makeTaxClearanceRequest(config, healthCheckBody)
@@ -403,9 +403,11 @@ export const ApiTaxClearanceCertificateClient = (
         } as HealthCheckMetadata;
       })
       .catch((error: AxiosError) => {
-        // Taxation's API returns a 400 if they reject the certificate request,
-        // but it still means we are successfully hitting their server
-        if (error.status === 400) {
+        /*
+         * Note: The API will return a 400 if the certificate request is rejected, but it still means
+         * requests are successfully reaching the server and those responses will be treated as healthy.
+         */
+        if (error.status === 400 && error.message === FAILED_TAX_ID_AND_PIN_VALIDATION) {
           return {
             success: true,
             data: {
