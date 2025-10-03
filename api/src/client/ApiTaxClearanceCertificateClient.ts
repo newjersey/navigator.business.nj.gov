@@ -407,7 +407,7 @@ export const ApiTaxClearanceCertificateClient = (
          * Note: The API will return a 400 if the certificate request is rejected, but it still means
          * requests are successfully reaching the server and those responses will be treated as healthy.
          */
-        if (error.status === 400 && error.message === FAILED_TAX_ID_AND_PIN_VALIDATION) {
+        if (error.status === 400 && error.response?.data === FAILED_TAX_ID_AND_PIN_VALIDATION) {
           return {
             success: true,
             data: {

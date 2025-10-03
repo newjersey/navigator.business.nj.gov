@@ -516,7 +516,7 @@ describe("TaxClearanceCertificateClient", () => {
     it("returns a passing health check if service returns a 400 and 'FAILED_TAX_ID_AND_PIN_VALIDATION' error message", async () => {
       mockAxios.post.mockRejectedValue({
         status: StatusCodes.BAD_REQUEST,
-        message: FAILED_TAX_ID_AND_PIN_VALIDATION,
+        response: { data: FAILED_TAX_ID_AND_PIN_VALIDATION },
       });
       expect(await client.health()).toEqual({ success: true, data: { message: "OK" } });
     });
