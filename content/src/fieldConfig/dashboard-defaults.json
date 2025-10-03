@@ -11,8 +11,9 @@
     "DomesticEmployerRoadmapTasksHeaderText": "Tasks"
   },
   "dashboardAnytimeActionDefaults": {
-    "defaultHeaderText": "Manage My Business",
-    "defaultAutocompleteHeaderText": "Complete these common tasks for your business at anytime.",
-    "anytimeActionPageButtonText": "Start Now"
+    "defaultHeaderText": "Business Tasks To Stay on Track",
+    "searchFieldHeaderText": "Find What Your Business Needs",
+    "searchFieldHintText": "Search for what your business needs",
+    "commonBusinessTasksHeader": "Common Business Tasks"
   }
 }

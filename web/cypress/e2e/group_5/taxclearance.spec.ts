@@ -37,7 +37,7 @@ describe("Tax Clearance [feature] [all] [group5]", () => {
     onOnboardingPageExistingBusiness.clickShowMyGuide();
 
     cy.url().should("include", "dashboard");
-    cy.get('[data-testid="anytimeActionDropdown"]').click();
+    cy.get('[data-testid="anytimeActionSearch"]').click();
     cy.get('[data-testid="option"]').contains("Get a Tax Clearance Certificate").click();
     cy.get('[data-testid="anytimeActionPrimaryButton"]').click();
 
