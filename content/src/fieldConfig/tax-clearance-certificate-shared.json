@@ -8,6 +8,8 @@
     "singularErrorText": "**Missing or invalid information** \n\nReview the following field in the \"Check Eligibility\" step:",
     "stepperOneLabel": "Requirements",
     "stepperThreeLabel": "Review",
-    "stepperTwoLabel": "Check Eligibility"
+    "stepperTwoLabel": "Check Eligibility",
+    "liveChatLabelText": "Need help?",
+    "liveChatButtonText": "Chat With Us"
   }
 }

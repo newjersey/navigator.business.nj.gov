@@ -343,13 +343,6 @@ collections:
             widget: object
             fields:
               - {
-                  label: "Pre Header Error Text",
-                  name: "preHeaderErrorText",
-                  widget: "string",
-                  required: true,
-                  hint: Applies to steps 2 and 3,
-                }
-              - {
                   label: "Singular Error Text",
                   name: "singularErrorText",
                   widget: "string",
@@ -408,6 +401,18 @@ collections:
                   widget: "string",
                   required: true,
                   hint: Applies to step 2,
+                }
+              - {
+                  label: "Live Chat Label Text",
+                  name: "liveChatLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Live Chat Button Text",
+                  name: "liveChatButtonText",
+                  widget: "string",
+                  required: true,
                 }
       - label: "Tax Clearance Download Page"
         name: "taxClearanceCertificate-download"

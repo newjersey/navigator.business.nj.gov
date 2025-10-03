@@ -2604,6 +2604,16 @@ export default {
             clicked_to: "open_live_chat",
           });
         },
+        open_live_chat_from_error_alert: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "tax_clearance_anytime_action_error_alert_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "tax_clearance_anytime_action_error_alert_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
       },
     },
     remove_business_modal_help_button: {
