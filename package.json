@@ -61,7 +61,7 @@
     "@mui/styles": "5.18.0",
     "@mui/x-date-pickers": "5.0.20",
     "@newjersey/njwds": "0.3.0",
-    "@smithy/node-http-handler": "2.5.0",
+    "@smithy/node-http-handler": "4.3.0",
     "@storybook/addon-outline": "7.6.20",
     "@types/mdast": "4.0.4",
     "airtable": "0.12.2",
