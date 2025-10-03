@@ -1,13 +1,16 @@
 {
   "taxClearanceCertificateShared": {
+    "liveChatButtonText": "Chat With Us",
+    "preHeaderErrorText": ".",
     "backButtonText": "Back",
+    "stepperThreeLabel": "Review",
     "businessNameErrorText": "Enter a Business Name",
     "pluralErrorText": "**Missing or invalid information** \n\nReview the following fields in the \"Check Eligibility\" step:",
-    "requestingAgencyErrorText": "Select a Requesting Agency",
+    "stepperTwoLabel": "Check Eligibility",
     "saveButtonText": "Save & Continue",
+    "liveChatLabelText": "Need help?",
+    "requestingAgencyErrorText": "Select a Requesting Agency",
     "singularErrorText": "**Missing or invalid information** \n\nReview the following field in the \"Check Eligibility\" step:",
-    "stepperOneLabel": "Requirements",
-    "stepperThreeLabel": "Review",
-    "stepperTwoLabel": "Check Eligibility"
+    "stepperOneLabel": "Requirements"
   }
 }
