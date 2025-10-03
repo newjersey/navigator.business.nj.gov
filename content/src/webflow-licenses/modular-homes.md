@@ -1,14 +1,14 @@
 ---
+id: modular-homes
 displayname: modular-homes
-id: "modular-homes"
-webflowId: "5f77299de10decf559025081"
-urlSlug: "modular-homes"
-webflowName: "Modular Homes"
-callToActionLink: "http://nj.gov/dca/divisions/codes/offices/nhw_for_builders.html"
-callToActionText: ""
+urlSlug: modular-homes
+webflowName: Modular Homes
 agencyId: nj-community-affairs
-agencyAdditionalContext: "Division of Codes and Standards, Bureau of Homeowner Protection"
-divisionPhone: "(973) 504-6370"
-webflowIndustry: "Modular Homes"
-licenseCertificationClassification: "REGISTRATION & WARRANTING OF NEW HOMES"
+agencyAdditionalContext: Division of Codes and Standards, Bureau of Homeowner Protection
+callToActionText: Learn About Housing Resources
+callToActionLink: https://nj.gov/dca//dhcr/index.shtml
+webflowIndustry: Modular Homes
+divisionPhone: (973) 504-6370
+webflowId: 5f77299de10decf559025081
+licenseCertificationClassification: REGISTRATION & WARRANTING OF NEW HOMES
 ---

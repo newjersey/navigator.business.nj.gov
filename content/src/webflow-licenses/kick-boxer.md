@@ -1,14 +1,14 @@
 ---
+id: kick-boxer
 displayname: kick-boxer
-id: "kick-boxer"
-webflowId: "5f772961df77de6417e1a529"
-urlSlug: "kick-boxer"
-webflowName: "Kick Boxer"
-callToActionLink: "https://www.nj.gov/oag/sacb/licensing-application.html"
-callToActionText: ""
+urlSlug: kick-boxer
+webflowName: Kick Boxer
 agencyId: law-public-safety
-agencyAdditionalContext: "State Athletic Control Board"
-divisionPhone: "(609) 292-0317"
-webflowIndustry: "Kick Boxer"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: State Athletic Control Board
+callToActionText: Get Licensed as a Kickboxing Contestant
+callToActionLink: https://www.nj.gov/oag/sacb/licensing-application.html
+webflowIndustry: Kick Boxer
+divisionPhone: (609) 292-0317
+webflowId: 5f772961df77de6417e1a529
+licenseCertificationClassification: LICENSE
 ---

@@ -1,14 +1,14 @@
 ---
+id: pawn-shop
 displayname: pawn-shop
-id: "pawn-shop"
-webflowId: "5f77292b9a1bb879fab3b912"
-urlSlug: "pawn-shop"
-webflowName: "Pawn Shop"
-callToActionLink: "http://state.nj.us/dobi/index.html"
-callToActionText: ""
+urlSlug: pawn-shop
+webflowName: Pawn Shop
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Office of Consumer Finance, License Service"
-divisionPhone: "(609) 292-7272"
-webflowIndustry: "Pawn Shop"
-licenseCertificationClassification: "PERMIT"
+agencyAdditionalContext: Office of Consumer Finance, License Service
+callToActionText: Learn About Pawnbroker Licenses
+callToActionLink: http://state.nj.us/dobi/index.html
+webflowIndustry: Pawn Shop
+divisionPhone: (609) 292-7272
+webflowId: 5f77292b9a1bb879fab3b912
+licenseCertificationClassification: PERMIT
 ---

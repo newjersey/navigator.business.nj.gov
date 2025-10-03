@@ -1,14 +1,14 @@
 ---
+id: optometrist
 displayname: optometrist
-id: "optometrist"
-webflowId: "5f7729a8f278cc6eccb0ce24"
-urlSlug: "optometrist"
-webflowName: "Optometrist"
-callToActionLink: "http://njconsumeraffairs.gov/opt"
-callToActionText: ""
+urlSlug: optometrist
+webflowName: Optometrist
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "State Board of Optometrists"
-divisionPhone: "(973) 504-6435"
-webflowIndustry: "Optometrist"
-licenseCertificationClassification: "REGISTRATION/LICENSE"
+agencyAdditionalContext: State Board of Optometrists
+callToActionText: Apply for an Optometry License
+callToActionLink: http://njconsumeraffairs.gov/opt
+webflowIndustry: Optometrist
+divisionPhone: (973) 504-6435
+webflowId: 5f7729a8f278cc6eccb0ce24
+licenseCertificationClassification: REGISTRATION/LICENSE
 ---

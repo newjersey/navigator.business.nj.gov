@@ -47,7 +47,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "asbestos-abatement-question",
-    "waste-transporter-license-a-901"
+    "waste-transporter-license-a-901",
+    "flashing-light-permit"
   ],
   "displayname": "remediation-waste",
   "industryOnboardingQuestions": {
