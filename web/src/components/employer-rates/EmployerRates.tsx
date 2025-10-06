@@ -25,7 +25,7 @@ export const EmployerRates = (props: Props): ReactElement => {
         <Heading level={3}>{Config.employerRates.sectionHeaderText}</Heading>
         <Content>{Config.employerRates.belowSectionHeaderText}</Content>
 
-        <EmployerRatesQuestions CMS_ONLY_enable_preview />
+        <EmployerRatesQuestions CMS_ONLY_enable_preview={props.CMS_ONLY_enable_preview} />
       </div>
     </>
   );
