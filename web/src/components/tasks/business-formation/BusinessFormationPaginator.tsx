@@ -401,6 +401,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
           {shouldDisplayPreviousButton() && (
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <SecondaryButton
+                id="formation-previous-button"
                 isColor="primary"
                 onClick={onPreviousButtonClick}
                 dataTestId="previous-button"
@@ -411,6 +412,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
           )}
           <PrimaryButton
             isColor="primary"
+            id="formation-next-button"
             onClick={(): void => {
               onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
             }}

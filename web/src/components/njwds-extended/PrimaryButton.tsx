@@ -15,7 +15,7 @@ export type PrimaryButtonColors =
 
 type OmitGenericButtonProps = Omit<
   GenericButtonProps,
-  "size" | "id" | "isAriaControls" | "isAriaExpanded" | "isAriaHaspopup" | "className"
+  "size" | "isAriaControls" | "isAriaExpanded" | "isAriaHaspopup" | "className"
 >;
 
 interface Props extends OmitGenericButtonProps {
@@ -39,5 +39,7 @@ export const PrimaryButton = forwardRef(function PrimaryButton(
   props: Props,
   ref: Ref<HTMLButtonElement>,
 ): ReactElement {
-  return <GenericButton {...props} className={`${colors[props.isColor]}`} ref={ref} />;
+  return (
+    <GenericButton id={props.id} {...props} className={`${colors[props.isColor]}`} ref={ref} />
+  );
 });

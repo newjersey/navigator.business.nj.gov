@@ -6,7 +6,6 @@ type OmitGenericButtonProps = Omit<
   | "isUnBolded"
   | "isSmallerText"
   | "isLargeButton"
-  | "id"
   | "isAriaControls"
   | "isAriaExpanded"
   | "isAriaHaspopup"
@@ -35,6 +34,7 @@ export const SecondaryButton = (props: Props): ReactElement => {
     <GenericButton
       {...props}
       isVerticalPaddingRemoved={props.size === "small"}
+      id={props.id}
       className={classNames}
     />
   );

@@ -14,6 +14,7 @@ export const LiveChatHelpButton = (props: Props): ReactElement => {
     <div className="flex fac margin-top-3 mobile-lg:margin-top-0 mobile-lg:margin-left-auto mobile-lg:margin-right-3 width-full mobile-lg:width-auto">
       <UnStyledButton
         isBgTransparent
+        id="live-chat-help-button"
         className={"text-accent-cool-darker fjc padding-0"}
         isTextBold
         isIntercomEnabled

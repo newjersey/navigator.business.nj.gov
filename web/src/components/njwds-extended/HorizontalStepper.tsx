@@ -221,6 +221,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
               return (
                 <div
                   key={`${step.name}-${index}`}
+                  id={`stepper-step-${index + 1}-${step.name}`}
                   className={
                     `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
                     `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(
