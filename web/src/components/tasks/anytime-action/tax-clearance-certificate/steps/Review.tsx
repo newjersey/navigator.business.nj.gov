@@ -109,21 +109,20 @@ export const Review = (props: Props): ReactElement => {
   const handleSubmit = async (): Promise<void> => {
     setIsLoading(true);
 
-    if (!userData || !business?.taxClearanceCertificateData) return;
-
-    scrollToTop();
-    props.setResponseErrorType(undefined);
-    updateErrorMap(business.taxClearanceCertificateData);
-
-    if (isAnyRequiredFieldEmpty(business.taxClearanceCertificateData) || !props.isValid()) return;
-
     try {
+      if (!userData || !business?.taxClearanceCertificateData) return;
+
+      scrollToTop();
+      props.setResponseErrorType(undefined);
+      updateErrorMap(business.taxClearanceCertificateData);
+
+      if (isAnyRequiredFieldEmpty(business.taxClearanceCertificateData) || !props.isValid()) return;
+
       await api.postUserData(userData); // Need to assert that all businesses in a user's account have hashed data in DB
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
       if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
         props.setResponseErrorType(taxClearanceResponse.error.type);
-        setIsLoading(false);
         return;
       }
 
@@ -142,11 +141,11 @@ export const Review = (props: Props): ReactElement => {
         props.setCertificatePdfBlob(blob);
         props.setResponseErrorType(undefined);
         updateQueue?.queue(taxClearanceResponse.userData).update();
-        setIsLoading(false);
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();
       props.setResponseErrorType("SYSTEM_ERROR");
+    } finally {
       setIsLoading(false);
     }
   };
