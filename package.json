@@ -221,7 +221,7 @@
     "serverless-offline": "14.4.0",
     "serverless-offline-ssm": "6.2.0",
     "serverless-prune-plugin": "2.1.0",
-    "storybook": "7.6.20",
+    "storybook": "9.1.10",
     "style-loader": "3.3.4",
     "supertest": "6.3.4",
     "ts-jest": "29.4.4",
