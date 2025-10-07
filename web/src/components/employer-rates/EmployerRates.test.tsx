@@ -3,6 +3,7 @@ import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import { getMergedConfig, OperatingPhaseId } from "@businessnjgovnavigator/shared";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
@@ -18,12 +19,20 @@ describe("EmployerRates", () => {
     window.open = originalOpen;
   });
 
+  const renderComponents = (): void => {
+    render(
+      <ThemeProvider theme={createTheme()}>
+        <EmployerRates />
+      </ThemeProvider>,
+    );
+  };
+
   it("renders for up and running operating phase for starting persona", () => {
     useMockProfileData({
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
       businessPersona: "STARTING",
     });
-    render(<EmployerRates />);
+    renderComponents();
     expect(screen.getByText(Config.employerRates.sectionHeaderText)).toBeInTheDocument();
   });
 
@@ -32,7 +41,7 @@ describe("EmployerRates", () => {
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
       businessPersona: "FOREIGN",
     });
-    render(<EmployerRates />);
+    renderComponents();
     expect(screen.getByText(Config.employerRates.sectionHeaderText)).toBeInTheDocument();
   });
 
@@ -41,7 +50,7 @@ describe("EmployerRates", () => {
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
       businessPersona: "OWNING",
     });
-    render(<EmployerRates />);
+    renderComponents();
     expect(screen.getByText(Config.employerRates.sectionHeaderText)).toBeInTheDocument();
   });
 
@@ -52,7 +61,7 @@ describe("EmployerRates", () => {
         businessPersona: "OWNING",
         employerAccessRegistration: undefined,
       });
-      render(<EmployerRates />);
+      renderComponents();
 
       const falseRadio = screen.getByRole("radio", {
         name: Config.employerRates.employerAccessFalseText,
@@ -70,7 +79,7 @@ describe("EmployerRates", () => {
         businessPersona: "OWNING",
         employerAccessRegistration: false,
       });
-      render(<EmployerRates />);
+      renderComponents();
 
       const falseRadio = screen.getByRole("radio", {
         name: Config.employerRates.employerAccessFalseText,
@@ -84,7 +93,7 @@ describe("EmployerRates", () => {
         businessPersona: "OWNING",
         employerAccessRegistration: true,
       });
-      render(<EmployerRates />);
+      renderComponents();
 
       const trueRadio = screen.getByRole("radio", {
         name: Config.employerRates.employerAccessTrueText,
@@ -101,7 +110,7 @@ describe("EmployerRates", () => {
       employerAccessRegistration: false,
     });
 
-    render(<EmployerRates />);
+    renderComponents();
 
     const button = screen.getByRole("button", {
       name: Config.employerRates.employerAccessNoButtonText,
@@ -123,7 +132,7 @@ describe("EmployerRates", () => {
       employerAccessRegistration: true,
     });
 
-    render(<EmployerRates />);
+    renderComponents();
 
     await waitFor(() => {
       expect(
