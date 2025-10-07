@@ -181,13 +181,19 @@ export default createTheme({
     },
     MuiInputBase: {
       styleOverrides: {
-        root: { marginTop: "4px" },
+        root: {
+          marginTop: "4px",
+          backgroundColor: "#ffffff",
+        },
         input: { padding: "12.5px 12px" },
       },
     },
     MuiSelect: {
       styleOverrides: {
-        select: { padding: "12.5px 12px" },
+        select: {
+          padding: "12.5px 12px",
+          backgroundColor: "#ffffff",
+        },
       },
     },
     MuiAutocomplete: {
@@ -221,8 +227,12 @@ export default createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
+          backgroundColor: "#ffffff",
           "&.Mui-disabled": {
             backgroundColor: "#f0f0f0",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#38536f",
           },
           input: {
             padding: "12.5px 12px",

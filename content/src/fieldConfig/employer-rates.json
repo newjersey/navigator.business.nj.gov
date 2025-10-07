@@ -9,6 +9,12 @@
     "employerAccessNoBodyText": "To see your contribution rates, register for Employer Access. This links your account so we can show your rates.",
     "employerAccessNoButtonText": "Register for Employer Access",
     "employerAccessNoButtonLink": "https://twes.dol.nj.gov/EmployerValidator/homePage.htm",
-    "employerAccessYesButtonText": "Check My Contribution Rates"
+    "employerAccessYesButtonText": "Check My Contribution Rates",
+    "quarterOneLabel": "Jan.-Mar.",
+    "quarterTwoLabel": "Apr.-June",
+    "quarterThreeLabel": "July-Sept.",
+    "quarterFourLabel": "Oct.-Dec.",
+    "quarterDropdownLabelText": "**Quarter**",
+    "quarterDropdownTooltipText": "Rates for the upcoming year will be available on October 1."
   }
 }
