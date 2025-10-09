@@ -100,8 +100,24 @@ export const BusinessFormationPaginator = (): ReactElement => {
       business.formationData.lastVisitedPageIndex < 0
     ) {
       setStepIndex(0);
+      router?.replace(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, step: 0 },
+        },
+        undefined,
+        { shallow: true },
+      );
     } else {
       setStepIndex(business.formationData.lastVisitedPageIndex);
+      router?.replace(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, step: business.formationData.lastVisitedPageIndex },
+        },
+        undefined,
+        { shallow: true },
+      );
     }
   });
 
@@ -112,6 +128,14 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   const moveToStep = (stepIndex: number): void => {
     setStepIndex(stepIndex);
+    router?.replace(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, step: stepIndex },
+      },
+      undefined,
+      { shallow: true },
+    );
   };
 
   const isStep = (stepName: FormationStepNames): boolean => {
