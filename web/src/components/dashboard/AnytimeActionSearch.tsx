@@ -1,8 +1,4 @@
-import { HorizontalLine } from "@/components/HorizontalLine";
-import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -16,7 +12,7 @@ import {
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { orderBy, unionBy } from "lodash";
 import { useRouter } from "next/compat/router";
-import { ChangeEvent, type ReactElement, ReactNode, useState } from "react";
+import { type ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
@@ -48,11 +44,8 @@ const getBoldedTextComponent = (searchValue: string, textToBold: string): ReactN
   return <>{textToBold}</>;
 };
 
-export const AnytimeActionDropdown = (props: Props): ReactElement => {
+export const AnytimeActionSearch = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const [selectedAnytimeAction, setSelectedAnytimeAction] = useState<
-    AnytimeActionWithTypeAndCategory | undefined
-  >(undefined);
   const router = useRouter();
   const { business } = useUserData();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
@@ -130,35 +123,53 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     return licenseStatus === "EXPIRED";
   };
 
-  const handleChange = (
-    event: ChangeEvent<unknown>,
-    value: AnytimeActionWithTypeAndCategory | null,
-  ): void => {
-    if (value === null) {
-      setSelectedAnytimeAction(undefined);
-    } else {
-      setSelectedAnytimeAction(value);
+  const [isFocused, setIsFocused] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleAnytimeActionClick = (value: AnytimeActionWithTypeAndCategory): void => {
+    if (router && value && typeof value !== "string") {
+      analytics.event.anytime_action_button.click.go_to_anytime_action_screen(value.filename);
+      if (value.type === "task") {
+        router.push(`${ROUTES.anytimeActions}/${(value as AnytimeActionTask).urlSlug}`);
+      }
+      if (value.type === "license-reinstatement") {
+        router.push(
+          `${ROUTES.licenseReinstatement}/${(value as AnytimeActionLicenseReinstatement).urlSlug}`,
+        );
+      }
     }
   };
 
   return (
-    <div className={"anytime-action-dropdown-container"}>
-      <Heading level={2}>{Config.dashboardAnytimeActionDefaults.defaultHeaderText}</Heading>
-      <HorizontalLine ariaHidden={true} />
-      <div className="text-bold">
-        {Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}
-      </div>
+    <>
       <span className={isDesktopAndUp ? "flex" : "flex-column"}>
         <Autocomplete
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
           renderInput={(params): ReactElement => {
             return (
               <TextField
                 {...params}
                 inputProps={{
-                  "aria-label": "anytimeActionDropdown",
-                  "data-testid": "anytimeActionDropdown",
-                  className: "",
+                  "aria-label": "anytimeActionSearch",
+                  "data-testid": "anytimeActionSearch",
                   ...params.inputProps,
+                  className: `disable-focus-outline ${params.inputProps.className}`,
+                }}
+                placeholder={
+                  isFocused ? "" : Config.dashboardAnytimeActionDefaults.searchFieldHintText
+                }
+                onFocus={() => {
+                  setIsFocused(true);
+                  setOpen(true);
+                }}
+                onBlur={() => setIsFocused(false)}
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (
+                    <img className="" src="/img/search.svg" alt="" role="presentation" />
+                  ),
                 }}
                 variant="outlined"
               />
@@ -174,19 +185,24 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
               ],
             },
           }}
-          getOptionLabel={(option: AnytimeActionWithTypeAndCategory) => {
+          getOptionLabel={(option: AnytimeActionWithTypeAndCategory | string) => {
+            if (typeof option === "string") {
+              return option;
+            }
             return option.name;
           }}
           isOptionEqualToValue={(option, value) => {
             return option.name === value.name && option.filename === value.filename;
           }}
           groupBy={(option) => option.category[0].categoryName} // Currently just showing the first category
-          renderGroup={(params) => (
-            <li key={params.key} className="anytime-action-header-group">
-              <div className="text-secondary-vivid text-bold padding-left-2 ">{params.group}</div>
-              <ul className="anytime-action-dropdown-ul-list-container">{params.children}</ul>
-            </li>
-          )}
+          renderGroup={(params) => {
+            return (
+              <li key={params.key} className="anytime-action-header-group">
+                <div className="padding-left-2 text-base">{params.group}</div>
+                <ul className="anytime-action-dropdown-ul-list-container">{params.children}</ul>
+              </li>
+            );
+          }}
           options={getApplicableAnytimeActions()}
           filterOptions={(options, state) => {
             const searchValue = state.inputValue.toLowerCase();
@@ -207,82 +223,53 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
               );
             });
           }}
+          onChange={(event, value) => {
+            if (value !== null) {
+              handleAnytimeActionClick(value);
+            }
+          }}
           renderOption={(
             _props,
             option: AnytimeActionWithTypeAndCategory,
-            { selected, inputValue },
+            { inputValue },
           ): ReactElement => {
             const titleText = getBoldedTextComponent(inputValue, option.name);
             const descriptionText = getBoldedTextComponent(inputValue, option.description ?? "");
 
-            const newClassName = `${_props.className} anytime-action-dropdown-option ${
-              selected ? "bg-accent-cool-lightest" : ""
-            } fdc`;
-
             return (
+              // must fix for keyboard
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
               <li
                 data-testid={`${option.filename}-option`}
                 {..._props}
-                className={newClassName}
+                className={`${_props.className} anytime-action-dropdown-option fdr`}
                 key={option.filename}
+                onClick={() => {
+                  handleAnytimeActionClick(option);
+                }}
+                onKeyDown={(event: React.KeyboardEvent) => {
+                  if (event.key === "Enter") {
+                    handleAnytimeActionClick(option);
+                  }
+                }}
               >
-                {selected ? (
-                  <MenuOptionSelected secondaryText={descriptionText}>
-                    {titleText}
-                  </MenuOptionSelected>
-                ) : (
+                <img
+                  src="/img/subdirectory_arrow_right.svg"
+                  alt=""
+                  role="presentation"
+                  key={"subdirectory_arrow"}
+                />
+                <div className="fdc" key={option.filename}>
                   <MenuOptionUnselected secondaryText={descriptionText}>
                     {titleText}
                   </MenuOptionUnselected>
-                )}
+                </div>
               </li>
             );
           }}
-          onChange={handleChange}
-          className={
-            selectedAnytimeAction
-              ? `fg1 anytime-action-dropdown ${!isDesktopAndUp && "margin-bottom-1"}`
-              : " anytime-action-dropdown width-100"
-          }
+          className={" anytime-action-dropdown width-100 "}
         />
-        {selectedAnytimeAction && (
-          <span
-            className={
-              isDesktopAndUp
-                ? "anytime-action-primary-button"
-                : "anytime-action-primary-button-mobile"
-            }
-          >
-            {" "}
-            <PrimaryButton
-              isColor={"primary"}
-              dataTestId={"anytimeActionPrimaryButton"}
-              onClick={() => {
-                if (!router) return;
-                analytics.event.anytime_action_button.click.go_to_anytime_action_screen(
-                  selectedAnytimeAction.filename,
-                );
-                if (selectedAnytimeAction.type === "task") {
-                  router.push(
-                    `${ROUTES.anytimeActions}/${
-                      (selectedAnytimeAction as AnytimeActionTask).urlSlug
-                    }`,
-                  );
-                }
-                if (selectedAnytimeAction.type === "license-reinstatement") {
-                  router.push(
-                    `${ROUTES.licenseReinstatement}/${
-                      (selectedAnytimeAction as AnytimeActionLicenseReinstatement).urlSlug
-                    }`,
-                  );
-                }
-              }}
-            >
-              {Config.dashboardAnytimeActionDefaults.anytimeActionPageButtonText}
-            </PrimaryButton>
-          </span>
-        )}
       </span>
-    </div>
+    </>
   );
 };

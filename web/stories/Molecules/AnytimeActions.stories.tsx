@@ -1,10 +1,13 @@
-import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
-import { generateAnytimeActionLicenseReinstatement, generateAnytimeActionTask } from "@/test/factories";
+import { AnytimeActionSearch } from "@/components/dashboard/AnytimeActionSearch";
+import {
+  generateAnytimeActionLicenseReinstatement,
+  generateAnytimeActionTask,
+} from "@/test/factories";
 import { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof AnytimeActionDropdown> = {
+const meta: Meta<typeof AnytimeActionSearch> = {
   title: "Molecules/AnytimeAction",
-  component: AnytimeActionDropdown,
+  component: AnytimeActionSearch,
   decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
@@ -14,11 +17,13 @@ const meta: Meta<typeof AnytimeActionDropdown> = {
   },
 };
 export default meta;
-type Story = StoryObj<typeof AnytimeActionDropdown>;
+type Story = StoryObj<typeof AnytimeActionSearch>;
 
 export const AnytimeAction: Story = {
   args: {
-    anytimeActionTasks: [generateAnytimeActionTask({ name: "Some Anytime Action Text - Licenses Task" })],
+    anytimeActionTasks: [
+      generateAnytimeActionTask({ name: "Some Anytime Action Text - Licenses Task" }),
+    ],
     anytimeActionLicenseReinstatements: [
       generateAnytimeActionLicenseReinstatement({
         name: "Some Anytime Action Text - License",

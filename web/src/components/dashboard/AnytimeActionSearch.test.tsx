@@ -1,4 +1,3 @@
-import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -19,6 +18,7 @@ import {
 } from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen } from "@testing-library/react";
 
+import { AnytimeActionSearch } from "@/components/dashboard/AnytimeActionSearch";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
 import userEvent from "@testing-library/user-event";
 
@@ -42,7 +42,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
-describe("<AnytimeActionDropdown />", () => {
+describe("<AnytimeActionSearch />", () => {
   let anytimeActionTasks: AnytimeActionTask[] = [];
   let anytimeActionTasksFromNonEssentialQuestions: AnytimeActionTask[] = [];
   let anytimeActionLicenseReinstatement: AnytimeActionLicenseReinstatement[] = [];
@@ -106,9 +106,9 @@ describe("<AnytimeActionDropdown />", () => {
       ];
     });
 
-    const renderAnytimeActionDropdown = (): void => {
+    const renderAnytimeActionSearch = (): void => {
       render(
-        <AnytimeActionDropdown
+        <AnytimeActionSearch
           anytimeActionTasks={anytimeActionTasks}
           anytimeActionTasksFromNonEssentialQuestions={anytimeActionTasksFromNonEssentialQuestions}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
@@ -117,7 +117,7 @@ describe("<AnytimeActionDropdown />", () => {
     };
 
     it("shows all task categories and elements", () => {
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByText("Some Category")).toBeInTheDocument();
       expect(
@@ -146,7 +146,7 @@ describe("<AnytimeActionDropdown />", () => {
           category: [{ categoryName: "Category 2", categoryId: "category-2" }],
         }),
       ];
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       const category1Title = screen.getByText("Category 1");
       const category1Task1 = screen.getByText("category-1-task-name-1");
@@ -165,10 +165,9 @@ describe("<AnytimeActionDropdown />", () => {
     });
 
     it("routes to actions/url and triggers analytics when internal task clicked", () => {
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       fireEvent.click(screen.getByText("some-task-name"));
-      fireEvent.click(screen.getByTestId("anytimeActionPrimaryButton"));
       expect(mockPush).toHaveBeenCalledWith(`${ROUTES.anytimeActions}/some-url`);
       expect(
         mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen,
@@ -196,10 +195,9 @@ describe("<AnytimeActionDropdown />", () => {
         }),
       ];
 
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       fireEvent.click(screen.getByText("some-license-reinstatement-name"));
-      fireEvent.click(screen.getByTestId("anytimeActionPrimaryButton"));
       expect(mockPush).toHaveBeenCalledWith(`${ROUTES.licenseReinstatement}/some-url`);
       expect(
         mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen,
@@ -230,9 +228,9 @@ describe("<AnytimeActionDropdown />", () => {
       ];
     });
 
-    const renderAnytimeActionDropdown = (): void => {
+    const renderAnytimeActionSearch = (): void => {
       render(
-        <AnytimeActionDropdown
+        <AnytimeActionSearch
           anytimeActionTasks={anytimeActionTasks}
           anytimeActionTasksFromNonEssentialQuestions={anytimeActionTasksFromNonEssentialQuestions}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
@@ -264,7 +262,7 @@ describe("<AnytimeActionDropdown />", () => {
         }),
       ];
 
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       const taskGeneral = screen.getByText("some-task-name");
       const taskLicenseReinstatement = screen.getByText("some-license-reinstatement-name");
@@ -367,7 +365,7 @@ describe("<AnytimeActionDropdown />", () => {
           profileData: generateProfileData(businessProfileDataOverrides),
         });
         anytimeActionTasks = [generateAnytimeActionTask(taskOverrides)];
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
 
         expect(!!screen.queryByText(taskOverrides.name)).toBe(isShown);
@@ -393,7 +391,7 @@ describe("<AnytimeActionDropdown />", () => {
           name: "license - hvac-reinstatement",
         }),
       ];
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
 
       fireEvent.click(screen.getByLabelText("Open"));
 
@@ -410,7 +408,7 @@ describe("<AnytimeActionDropdown />", () => {
         anytimeActionTasks = [duplicateAnytimeAction, ...anytimeActionTasks];
         anytimeActionTasksFromNonEssentialQuestions = [duplicateAnytimeAction];
 
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(screen.getAllByText("same-anytime-action").length).toBe(1);
       });
@@ -425,7 +423,7 @@ describe("<AnytimeActionDropdown />", () => {
             vacantPropertyOwner: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(screen.queryByTestId("vacant-building-fire-permit-option")).not.toBeInTheDocument();
 
@@ -434,7 +432,7 @@ describe("<AnytimeActionDropdown />", () => {
             vacantPropertyOwner: true,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
       });
@@ -449,7 +447,7 @@ describe("<AnytimeActionDropdown />", () => {
             carnivalRideOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(
           screen.queryByTestId("carnival-ride-supplemental-modification-option"),
@@ -460,7 +458,7 @@ describe("<AnytimeActionDropdown />", () => {
             carnivalRideOwningBusiness: true,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(
           screen.getByTestId("carnival-ride-supplemental-modification-option"),
@@ -478,7 +476,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(
           screen.queryByTestId("operating-carnival-fire-permit-option"),
@@ -490,7 +488,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
       });
@@ -506,7 +504,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(
           screen.queryByTestId("operating-carnival-fire-permit-option"),
@@ -518,7 +516,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: true,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
       });
@@ -538,7 +536,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(
           screen.queryByTestId("operating-carnival-fire-permit-option"),
@@ -554,7 +552,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
       });
@@ -574,7 +572,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(
           screen.queryByTestId("carnival-ride-supplemental-modification-option"),
@@ -590,7 +588,7 @@ describe("<AnytimeActionDropdown />", () => {
             travelingCircusOrCarnivalOwningBusiness: false,
           }),
         });
-        renderAnytimeActionDropdown();
+        renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         expect(
           screen.getByTestId("carnival-ride-supplemental-modification-option"),
@@ -609,7 +607,7 @@ describe("<AnytimeActionDropdown />", () => {
           description: testDescription,
         }),
       ];
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByText(testDescription)).toBeInTheDocument();
     });
@@ -617,7 +615,7 @@ describe("<AnytimeActionDropdown />", () => {
     it("renders an anytime actions that match search value to a title with correct bolding", async () => {
       anytimeActionTasks = anytimeActionTasksAlternate;
 
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       await userEvent.type(screen.getByRole("combobox"), "test-title-3");
       expect(screen.getByText("test-title-3")).toBeInTheDocument();
@@ -631,7 +629,7 @@ describe("<AnytimeActionDropdown />", () => {
     it("returns no searched elements when nothing matches", async () => {
       anytimeActionTasks = anytimeActionTasksAlternate;
 
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByText("test-title-3")).toBeInTheDocument();
       expect(screen.getByText("Category 3")).toBeInTheDocument();
@@ -651,7 +649,7 @@ describe("<AnytimeActionDropdown />", () => {
     it("renders an anytime actions that match search value to a description with correct bolding", async () => {
       anytimeActionTasks = anytimeActionTasksAlternate;
 
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       await userEvent.type(screen.getByRole("combobox"), "test-description-3");
       expect(screen.getByText("test-description-3")).toBeInTheDocument();
@@ -672,7 +670,7 @@ describe("<AnytimeActionDropdown />", () => {
         generateAnytimeActionTask({ name: "task-2", applyToAllUsers: true }),
       ];
 
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       await userEvent.type(screen.getByRole("combobox"), "particular");
       expect(screen.getByText("task-1")).toBeInTheDocument();
@@ -693,7 +691,7 @@ describe("<AnytimeActionDropdown />", () => {
         }),
       ];
 
-      renderAnytimeActionDropdown();
+      renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       await userEvent.type(screen.getByRole("combobox"), "particular");
       expect(screen.getByText("task-1")).toBeInTheDocument();

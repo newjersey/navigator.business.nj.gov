@@ -15,6 +15,10 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
+
+  .MuiAutocomplete-endAdornment {
+    visibility: hidden;
+  }
 }
 .anytime-action-primary-button {
   margin-left: 1rem;
@@ -34,7 +38,7 @@
 li.anytime-action-dropdown-option.MuiAutocomplete-option {
   margin: 0;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
-  align-items: flex-start;
+  align-items: center;
 
   &.MuiAutocomplete-option[aria-selected="true"].Mui-focusVisible {
     filter: brightness(97%);
