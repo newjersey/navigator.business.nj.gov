@@ -3,7 +3,7 @@ import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 const Config = getMergedConfig();
 
-export interface employerRatesQuarterObject {
+export interface EmployerRatesQuarterObject {
   label: string;
   quarter: number;
   year: number;
@@ -19,7 +19,7 @@ const getLatestYear = (currentDate?: Dayjs): number => {
 
 const getEarliestYear = (currentDate?: Dayjs): number => getLatestYear(currentDate) - 4;
 
-const generateQuartersForYear = (year: number): employerRatesQuarterObject[] => {
+const generateQuartersForYear = (year: number): EmployerRatesQuarterObject[] => {
   return [4, 3, 2, 1].map((quarter) => {
     const quarterToConfigMapping = {
       1: Config.employerRates.quarterOneLabel,
@@ -38,7 +38,7 @@ const generateQuartersForYear = (year: number): employerRatesQuarterObject[] => 
 
 export const getEmployerAccessQuarterlyDropdownOptions = (
   currentDate?: Dayjs,
-): employerRatesQuarterObject[] => {
+): EmployerRatesQuarterObject[] => {
   const latestYear = getLatestYear(currentDate);
   const earliestYear = getEarliestYear(currentDate);
 

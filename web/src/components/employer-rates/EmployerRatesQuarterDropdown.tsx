@@ -2,14 +2,14 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 import { Content } from "@/components/Content";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { employerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import { EmployerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
 
 interface Props {
-  dropdownOptions: employerRatesQuarterObject[];
-  quarter: employerRatesQuarterObject;
-  setQuarter: (quarter: employerRatesQuarterObject) => void;
+  dropdownOptions: EmployerRatesQuarterObject[];
+  quarter: EmployerRatesQuarterObject;
+  setQuarter: (quarter: EmployerRatesQuarterObject) => void;
 }
 
 export const EmployerRatesQuarterDropdown = (props: Props): ReactElement => {
@@ -34,7 +34,7 @@ export const EmployerRatesQuarterDropdown = (props: Props): ReactElement => {
           onChange={(event): void => {
             const selection = props.dropdownOptions.find(
               (option) => option.label === event.target.value,
-            ) as employerRatesQuarterObject;
+            ) as EmployerRatesQuarterObject;
             props.setQuarter(selection);
           }}
           renderValue={(selected): ReactNode => selected}
