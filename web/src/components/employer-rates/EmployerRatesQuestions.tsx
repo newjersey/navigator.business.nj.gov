@@ -9,7 +9,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { EmployerRatesQuarterDropdown } from "@/components/employer-rates/EmployerRatesQuarterDropdown";
 import {
-  employerRatesQuarterObject,
+  EmployerRatesQuarterObject,
   getEmployerAccessQuarterlyDropdownOptions,
 } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -39,7 +39,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     employerAccessRegistration === "false" || props.CMS_ONLY_enable_preview;
 
   const dropdownOptions = getEmployerAccessQuarterlyDropdownOptions(getCurrentDate());
-  const [quarter, setQuarter] = useState<employerRatesQuarterObject>(dropdownOptions[0]);
+  const [quarter, setQuarter] = useState<EmployerRatesQuarterObject>(dropdownOptions[0]);
 
   return (
     <div className="bg-base-extra-light padding-205 margin-top-3 radius-lg">
