@@ -114,6 +114,15 @@ commands:
           background: true
           no_output_timeout: 30m
       - run:
+          name: Check environment variables
+          command: |
+            echo "STAGE is: $STAGE"
+            echo "NODE_ENV is: $NODE_ENV"
+            echo "CI is: $CI"
+            echo "AWS_ACCOUNT_ID_DEV is: $AWS_ACCOUNT_ID_DEV"
+            echo "Current working directory: $(pwd)"
+            ls -la
+      - run:
           name: Run Tests
           no_output_timeout: 30m
           command:
