@@ -36,7 +36,36 @@ commands:
       - run:
           name: Install Dynamodb local
           command: yarn workspace @businessnjgovnavigator/api install-dynamo-local
+  start-and-init-dynamodb:
+    steps:
+      - run:
+          name: Start DynamoDB and create tables
+          command: |
+            cd api
+            echo "Starting DynamoDB Local..."
+            java -Djava.library.path=.dynamodb/DynamoDBLocal_lib \
+                 -jar .dynamodb/DynamoDBLocal.jar \
+                 -sharedDb -port 8000 > dynamodb.log 2>&1 &
 
+            echo "Waiting for DynamoDB Local to be ready..."
+            until curl -s http://localhost:8000 >/dev/null; do
+              echo "DynamoDB not ready, retrying..."
+              sleep 2
+            done
+            echo "DynamoDB Local is ready!"
+
+            echo "Creating tables..."
+            aws dynamodb create-table \
+              --cli-input-json file://users-dynamodb-schema.json \
+              --endpoint-url http://localhost:8000 \
+              --region us-east-1 || echo "users table already exists"
+
+            aws dynamodb create-table \
+              --cli-input-json file://businesses-dynamodb-schema.json \
+              --endpoint-url http://localhost:8000 \
+              --region us-east-1 || echo "businesses table already exists"
+
+            echo "Tables initialized!"
   configure:
     steps:
       - bootstrap-code
@@ -114,6 +143,15 @@ commands:
           background: true
           no_output_timeout: 30m
       - run:
+          name: Check environment variables
+          command: |
+            echo "STAGE is: $STAGE"
+            echo "NODE_ENV is: $NODE_ENV"
+            echo "CI is: $CI"
+            echo "AWS_ACCOUNT_ID_DEV is: $AWS_ACCOUNT_ID_DEV"
+            echo "Current working directory: $(pwd)"
+            ls -la
+      - run:
           name: Run Tests
           no_output_timeout: 30m
           command:
@@ -187,6 +225,13 @@ commands:
           command:
             yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE}
             --region us-east-1
+
+  deploy-cdk:
+    steps:
+      - run:
+          name: Deploy CDK
+          command:
+            yarn workspace @businessnjgovnavigator/api/cdk cdk deploy --verbose --region us-east-1
 
   set-shared-stage-env-vars:
     steps:
@@ -277,7 +322,7 @@ commands:
           name: Set Cypress Environment Variables
           command: |
             echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_DEV' >> $BASH_ENV
-            echo 'export API_BASE_URL=http://localhost:5002/local' >> $BASH_ENV
+            echo 'export API_BASE_URL=http://localhost:5002' >> $BASH_ENV
             echo 'export USE_FAKE_SELF_REG=true' >> $BASH_ENV
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
@@ -525,6 +570,14 @@ commands:
           docker_layer_caching: true
       - deploy-serverless
 
+  deploy-setup-cdk:
+    steps:
+      - configure-and-build
+      - setup_remote_docker:
+          version: edge
+          docker_layer_caching: true
+      - deploy-cdk
+
   deploy-content-env:
     steps:
       - deploy-setup
@@ -538,7 +591,7 @@ commands:
 
   deploy-testing-env:
     steps:
-      - deploy-setup
+      - deploy-setup-cdk
       - package-webapp-docker:
           image-name: bfs-navigator-testing
       - run:
@@ -846,12 +899,13 @@ jobs:
           at: .
       - configure-and-build
       - install-dynamodb
+      - start-and-init-dynamodb
       - perform-integration-tests:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
           browser: << parameters.browser >>
     environment:
-      CYPRESS_API_BASE_URL: http://localhost:5002/local
+      CYPRESS_API_BASE_URL: http://localhost:5002
 
   smoke-tests:
     parameters:

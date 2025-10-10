@@ -1,4 +1,6 @@
 {
+  "TableName": "users-table-local",
+  "BillingMode": "PAY_PER_REQUEST",
   "AttributeDefinitions": [
     {
       "AttributeName": "userId",
@@ -24,10 +26,7 @@
           "KeyType": "HASH"
         }
       ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
+      "Projection": { "ProjectionType": "ALL" }
     }
-  ],
-  "TableName": "users-table-dev"
+  ]
 }
