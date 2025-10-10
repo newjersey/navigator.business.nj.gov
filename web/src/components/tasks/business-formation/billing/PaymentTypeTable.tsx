@@ -1,5 +1,5 @@
-import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
+import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -86,19 +86,17 @@ export const PaymentTypeTable = (): ReactElement => {
             <tr>
               <th className="text-bold">{Config.formation.fields.paymentType.label}</th>
               <th></th>
-              <th></th>
+              <th className="text-bold">{Config.formation.fields.paymentType.costColumnLabel}</th>
             </tr>
-            <tr>
-              <th colSpan={3}>
-                {hasError ? (
+            {hasError && (
+              <tr>
+                <th colSpan={3}>
                   <FormHelperText className={"text-error-dark"}>
                     {Config.formation.fields.paymentType.error}
                   </FormHelperText>
-                ) : (
-                  " "
-                )}
-              </th>
-            </tr>
+                </th>
+              </tr>
+            )}
           </thead>
           <tbody>
             <tr>
