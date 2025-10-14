@@ -358,7 +358,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
-        expect(screen.queryByTestId("anytimeActionDropdown")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("anytimeActionSearch")).not.toBeInTheDocument();
       },
     );
 
@@ -372,7 +372,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
-        expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();
+        expect(screen.getByTestId("anytimeActionSearch")).toBeInTheDocument();
       },
     );
   });

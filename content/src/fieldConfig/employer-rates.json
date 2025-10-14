@@ -9,6 +9,12 @@
     "employerAccessHeaderText": "Check Contribution Rates",
     "employerAccessTrueText": "Yes",
     "employerAccessNoButtonText": "Register for Employer Access",
-    "sectionHeaderText": "Employer Contribution Rates"
+    "sectionHeaderText": "Employer Contribution Rates",
+    "quarterOneLabel": "Jan.-Mar.",
+    "quarterTwoLabel": "Apr.-June",
+    "quarterThreeLabel": "July-Sept.",
+    "quarterFourLabel": "Oct.-Dec.",
+    "quarterDropdownLabelText": "**Quarter**",
+    "quarterDropdownTooltipText": "Rates for the upcoming year will be available on October 1."
   }
 }

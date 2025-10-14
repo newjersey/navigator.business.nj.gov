@@ -55,16 +55,14 @@ collections:
             widget: object
             fields:
               - { label: Default Header Text, name: defaultHeaderText, widget: string }
+              - { label: Search Field Header Text, name: searchFieldHeaderText, widget: string }
+              - { label: Search Field Hint Text, name: searchFieldHintText, widget: string }
               - {
-                  label: Default Autocomplete Header Text,
-                  name: defaultAutocompleteHeaderText,
+                  label: Common Business Tasks Header,
+                  name: commonBusinessTasksHeader,
                   widget: string,
                 }
-              - {
-                  label: Anytime Action Page Button Text,
-                  name: anytimeActionPageButtonText,
-                  widget: string,
-                }
+
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"

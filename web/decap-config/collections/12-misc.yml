@@ -2983,6 +2983,20 @@ collections:
                   name: employerAccessNoButtonLink,
                   widget: string,
                 }
+              - {
+                  label: Quarter Dropdown Label Text,
+                  name: quarterDropdownLabelText,
+                  widget: markdown,
+                }
+              - {
+                  label: Quarter Dropdown Tooltip Text,
+                  name: quarterDropdownTooltipText,
+                  widget: string,
+                }
+              - { label: Quarter Dropdown - Q1 Text, name: quarterOneLabel, widget: string }
+              - { label: Quarter Dropdown - Q2 Text, name: quarterTwoLabel, widget: string }
+              - { label: Quarter Dropdown - Q3 Text, name: quarterThreeLabel, widget: string }
+              - { label: Quarter Dropdown - Q4 Text, name: quarterFourLabel, widget: string }
 
   - label: "Fundings Onboarding Page"
     name: "business-fundings-onboarding-page"

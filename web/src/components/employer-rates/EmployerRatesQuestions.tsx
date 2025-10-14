@@ -7,6 +7,12 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isUndefined } from "lodash";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { EmployerRatesQuarterDropdown } from "@/components/employer-rates/EmployerRatesQuarterDropdown";
+import {
+  EmployerRatesQuarterObject,
+  getEmployerAccessQuarterlyDropdownOptions,
+} from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
@@ -31,6 +37,9 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     employerAccessRegistration === "true" || props.CMS_ONLY_enable_preview;
   const employerAccessRegistrationIsFalse =
     employerAccessRegistration === "false" || props.CMS_ONLY_enable_preview;
+
+  const dropdownOptions = getEmployerAccessQuarterlyDropdownOptions(getCurrentDate());
+  const [quarter, setQuarter] = useState<EmployerRatesQuarterObject>(dropdownOptions[0]);
 
   return (
     <div className="bg-base-extra-light padding-205 margin-top-3 radius-lg">
@@ -71,6 +80,11 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       {employerAccessRegistrationIsTrue && (
         <>
           <div role="status" aria-live="polite" className="margin-bottom-2">
+            <EmployerRatesQuarterDropdown
+              dropdownOptions={dropdownOptions}
+              quarter={quarter}
+              setQuarter={setQuarter}
+            />
             <SecondaryButton isColor="primary" onClick={() => {}}>
               {Config.employerRates.employerAccessYesButtonText}
             </SecondaryButton>
