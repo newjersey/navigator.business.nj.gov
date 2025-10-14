@@ -43,7 +43,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
 
   return (
     <div className="bg-base-extra-light padding-205 margin-top-3 radius-lg">
-      <Heading level={2}>{Config.employerRates.employerAccessHeaderText}</Heading>
+      <Heading level={4}>{Config.employerRates.employerAccessHeaderText}</Heading>
 
       <Content>{Config.employerRates.employerAccessText}</Content>
       <FormControl fullWidth>
@@ -76,7 +76,6 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
           />
         </RadioGroup>
       </FormControl>
-
       {employerAccessRegistrationIsTrue && (
         <>
           <div role="status" aria-live="polite" className="margin-bottom-2">
@@ -91,7 +90,6 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
           </div>
         </>
       )}
-
       {employerAccessRegistrationIsFalse && (
         <>
           <div role="status" aria-live="polite" className="margin-bottom-2">
