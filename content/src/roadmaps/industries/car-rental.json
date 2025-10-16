@@ -78,7 +78,7 @@
     "weights-measures",
     "bus-initial-inspection"
   ],
-  "displayname": "car-rental",
+  "displayname": "car-rental ",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "canBeReseller": false
