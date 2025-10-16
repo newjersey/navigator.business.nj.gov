@@ -1,19 +1,19 @@
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import { Heading } from "../njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Content } from "@/components/Content";
 import { EmployerRatesQuestions } from "./EmployerRatesQuestions";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
 }
 
 export const EmployerRates = (props: Props): ReactElement => {
-  const { business } = useUserData();
+  const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
-  const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
+  const operatingPhase = LookupOperatingPhaseById(state.profileData.operatingPhase);
 
   if (!operatingPhase.displayEmployerRatesInProfile && !props.CMS_ONLY_enable_preview) {
     return <></>;

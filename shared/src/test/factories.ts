@@ -332,7 +332,7 @@ export const generateProfileData = (
     raffleBingoGames: undefined,
     businessOpenMoreThanTwoYears: undefined,
     employerAccessRegistration: undefined,
-    deptOfLaborEin: `some-dept-of-labor-ein-${randomInt()}`,
+    deptOfLaborEin: randomInt(15).toString(),
     ...overrides,
   };
 };
