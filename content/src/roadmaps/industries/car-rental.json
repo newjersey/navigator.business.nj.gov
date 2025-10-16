@@ -65,6 +65,12 @@
       "weight": 19,
       "step": 4,
       "task": "vehicle-dealership"
+    },
+    {
+      "step": 4,
+      "task": "community-right-to-know-survey",
+      "licenseTask": "",
+      "weight": 20
     }
   ],
   "name": "Car Rental and Dealerships",
