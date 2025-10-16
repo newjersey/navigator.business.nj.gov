@@ -53,6 +53,7 @@ import {
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { DOL_EIN_CHARACTERS } from "@/components/employer-rates/EmployerRatesQuestions";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
@@ -759,6 +760,32 @@ describe("profile - shared", () => {
       clickSave();
       await waitFor(() => {
         expect(currentBusiness().profileData.employerAccessRegistration).toEqual(true);
+      });
+    });
+
+    it("updates DOL EIN, presses save, and persists to UserData", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: true,
+          deptOfLaborEin: "",
+        }),
+      });
+
+      renderPage({ business });
+      chooseTab("numbers");
+
+      const employerRatesSection = screen.getByTestId("employerAccess");
+      const textbox = within(employerRatesSection).getByRole("textbox");
+      const newEin = "1".repeat(DOL_EIN_CHARACTERS);
+      await userEvent.type(textbox, newEin);
+
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.deptOfLaborEin).toEqual(newEin);
       });
     });
   });

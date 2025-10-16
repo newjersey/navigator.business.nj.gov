@@ -1,11 +1,15 @@
 import { EmployerRates } from "@/components/employer-rates/EmployerRates";
-import { useMockProfileData } from "@/test/mock/mockUseUserData";
-import { getMergedConfig, OperatingPhaseId } from "@businessnjgovnavigator/shared";
+import { DOL_EIN_CHARACTERS } from "@/components/employer-rates/EmployerRatesQuestions";
+import {
+  generateProfileData,
+  getMergedConfig,
+  OperatingPhaseId,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createTheme, ThemeProvider } from "@mui/material";
-
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 
 const Config = getMergedConfig();
 const originalOpen = window.open;
@@ -19,49 +23,55 @@ describe("EmployerRates", () => {
     window.open = originalOpen;
   });
 
-  const renderComponents = (): void => {
+  const renderComponents = (overrides?: Partial<ProfileData>): void => {
+    const profileData = generateProfileData(overrides ?? {});
     render(
       <ThemeProvider theme={createTheme()}>
-        <EmployerRates />
+        <WithStatefulProfileData initialData={profileData}>
+          <EmployerRates />
+        </WithStatefulProfileData>
       </ThemeProvider>,
     );
   };
 
+  const OWNING_BASE = {
+    operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+    businessPersona: "OWNING" as const,
+  };
+
+  const renderComponentsWithOwning = (overrides?: Partial<ProfileData>): void => {
+    renderComponents({ ...OWNING_BASE, ...overrides });
+  };
+
   it("renders for up and running operating phase for starting persona", () => {
-    useMockProfileData({
+    renderComponents({
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
       businessPersona: "STARTING",
     });
-    renderComponents();
     expect(screen.getByText(Config.employerRates.sectionHeaderText)).toBeInTheDocument();
   });
 
   it("renders for up and running operating phase for foreign persona", () => {
-    useMockProfileData({
+    renderComponents({
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
       businessPersona: "FOREIGN",
     });
-    renderComponents();
     expect(screen.getByText(Config.employerRates.sectionHeaderText)).toBeInTheDocument();
   });
 
   it("renders for up and running owning operating phase", () => {
-    useMockProfileData({
+    renderComponents({
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
       businessPersona: "OWNING",
     });
-    renderComponents();
     expect(screen.getByText(Config.employerRates.sectionHeaderText)).toBeInTheDocument();
   });
 
   describe("employerAccessRegistration Input", () => {
-    it("doet not have a default value for employerAccessRegistration when undefined", () => {
-      useMockProfileData({
-        operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-        businessPersona: "OWNING",
+    it("does not have a default value for employerAccessRegistration when undefined", () => {
+      renderComponentsWithOwning({
         employerAccessRegistration: undefined,
       });
-      renderComponents();
 
       const falseRadio = screen.getByRole("radio", {
         name: Config.employerRates.employerAccessFalseText,
@@ -74,12 +84,9 @@ describe("EmployerRates", () => {
     });
 
     it("renders false when employerAccessRegistration is false", () => {
-      useMockProfileData({
-        operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-        businessPersona: "OWNING",
+      renderComponentsWithOwning({
         employerAccessRegistration: false,
       });
-      renderComponents();
 
       const falseRadio = screen.getByRole("radio", {
         name: Config.employerRates.employerAccessFalseText,
@@ -88,12 +95,9 @@ describe("EmployerRates", () => {
     });
 
     it("renders true when employerAccessRegistration is true", () => {
-      useMockProfileData({
-        operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-        businessPersona: "OWNING",
+      renderComponentsWithOwning({
         employerAccessRegistration: true,
       });
-      renderComponents();
 
       const trueRadio = screen.getByRole("radio", {
         name: Config.employerRates.employerAccessTrueText,
@@ -104,13 +108,9 @@ describe("EmployerRates", () => {
 
   it("opens link when clicking the employerAccessNoButtonText button", async () => {
     (window as Window & typeof globalThis).open = jest.fn();
-    useMockProfileData({
-      operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-      businessPersona: "OWNING",
+    renderComponentsWithOwning({
       employerAccessRegistration: false,
     });
-
-    renderComponents();
 
     const button = screen.getByRole("button", {
       name: Config.employerRates.employerAccessNoButtonText,
@@ -126,18 +126,106 @@ describe("EmployerRates", () => {
   });
 
   it("renders button that calls api", async () => {
-    useMockProfileData({
-      operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-      businessPersona: "OWNING",
+    renderComponentsWithOwning({
       employerAccessRegistration: true,
     });
-
-    renderComponents();
 
     await waitFor(() => {
       expect(
         screen.getByText(Config.employerRates.employerAccessYesButtonText),
       ).toBeInTheDocument();
     });
+  });
+
+  it("renders input error and alert when pressing submit with empty DOL EIN", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "",
+    });
+
+    const button = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    await userEvent.click(button);
+    expect(await screen.findByText(Config.employerRates.dolEinErrorText)).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+  });
+
+  it("limits DOL EIN input to DOL_EIN_CHARACTERS", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "",
+    });
+
+    const textbox = screen.getByRole("textbox");
+    const user = userEvent.setup();
+    const toType = "1".repeat(DOL_EIN_CHARACTERS + 1);
+    await user.type(textbox, toType);
+
+    expect((textbox as HTMLInputElement).value.length).toBe(DOL_EIN_CHARACTERS);
+  });
+
+  it("renders input error and alert when entering less than DOL_EIN_CHARACTERS and blurring", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "",
+    });
+
+    const textbox = screen.getByRole("textbox");
+    const user = userEvent.setup();
+    const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
+    await user.type(textbox, toType);
+    await user.tab();
+
+    expect(await screen.findByText(Config.employerRates.dolEinErrorText)).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+  });
+
+  it("clears input error and alert when input is cleared and blurred", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+    });
+
+    const textbox = screen.getByRole("textbox");
+    const user = userEvent.setup();
+
+    await user.clear(textbox);
+    await user.type(textbox, "1".repeat(DOL_EIN_CHARACTERS - 1));
+    await user.tab();
+
+    expect(await screen.findByText(Config.employerRates.dolEinErrorText)).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+
+    await user.clear(textbox);
+    await user.tab();
+
+    await waitFor(() => {
+      expect(screen.queryByText(Config.employerRates.dolEinErrorText)).not.toBeInTheDocument();
+    });
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
+  it("removes alert after clicking false/no radio button", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+
+    const falseRadio = screen.getByRole("radio", {
+      name: Config.employerRates.employerAccessFalseText,
+    });
+    await userEvent.click(falseRadio);
+
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 });
