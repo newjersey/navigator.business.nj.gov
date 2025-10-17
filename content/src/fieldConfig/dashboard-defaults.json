@@ -14,6 +14,7 @@
     "defaultHeaderText": "Business Tasks To Stay on Track",
     "searchFieldHeaderText": "Find What Your Business Needs",
     "searchFieldHintText": "Search for what your business needs",
-    "commonBusinessTasksHeader": "Common Business Tasks"
+    "commonBusinessTasksHeader": "Common Business Tasks",
+    "recommendedForYouCategoryHeader": "Recommended For You"
   }
 }

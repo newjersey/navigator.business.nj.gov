@@ -62,6 +62,15 @@ collections:
                   name: commonBusinessTasksHeader,
                   widget: string,
                 }
+              - {
+                  label: Recommended For You Category Header,
+                  name: recommendedForYouCategoryHeader,
+                  hint:
+                    this is not a normal category like the others in that information can
+                    conditionally move things into this field and it is controlled in each anytime
+                    action,
+                  widget: string,
+                }
 
       - label: "Snackbars"
         name: "dashboard-config-snackbars"

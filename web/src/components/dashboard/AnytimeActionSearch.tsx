@@ -53,8 +53,12 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
   const sectorId = business?.profileData.sectorId;
 
   const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
+    const anytimeActionTasks = moveAnytimeActionsToRecommendedForYouSection(
+      props.anytimeActionTasks,
+    );
+
     const [tasks, reinstatements] = [
-      props.anytimeActionTasks.filter(findMatch).map((action) => {
+      anytimeActionTasks.filter(findMatch).map((action) => {
         return {
           ...action,
           category: action.category,
@@ -81,6 +85,14 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
     return allActions.sort((a, b) => {
       const categoryA = a.category[0].categoryName.toLowerCase();
       const categoryB = b.category[0].categoryName.toLowerCase();
+
+      if (categoryA === RECOMMENDED_FOR_YOU_DISPLAY_TEXT.toLowerCase()) {
+        return -1;
+      }
+      if (categoryB === RECOMMENDED_FOR_YOU_DISPLAY_TEXT.toLowerCase()) {
+        return 1;
+      }
+
       return categoryA.localeCompare(categoryB);
     });
   };
@@ -121,6 +133,40 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
       business?.licenseData?.licenses?.[licenseNameFromAnytimeAction]?.licenseStatus;
 
     return licenseStatus === "EXPIRED";
+  };
+
+  const RECOMMENDED_FOR_YOU_DISPLAY_TEXT =
+    Config.dashboardAnytimeActionDefaults.recommendedForYouCategoryHeader;
+  const RECOMMENDED_FOR_YOU_ID = "recommended-for-you";
+
+  const moveAnytimeActionsToRecommendedForYouSection = (
+    anytimeActions: AnytimeActionTask[],
+  ): AnytimeActionTask[] => {
+    const anytimeActionsWithRecommendedForYouCategorysOverriden = anytimeActions;
+
+    for (const [
+      index,
+      anytimeAction,
+    ] of anytimeActionsWithRecommendedForYouCategorysOverriden.entries()) {
+      if (anytimeAction.moveToRecommendedForYouSection) {
+        anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryName =
+          RECOMMENDED_FOR_YOU_DISPLAY_TEXT;
+        anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryId =
+          RECOMMENDED_FOR_YOU_ID;
+      }
+      if (anytimeAction.nonEssentialQuestionsMoveToRecommendedAnytimeActionIds) {
+        for (const nonEssentialQuestionId of anytimeAction.nonEssentialQuestionsMoveToRecommendedAnytimeActionIds) {
+          if (business?.profileData.nonEssentialRadioAnswers[nonEssentialQuestionId]) {
+            anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryName =
+              RECOMMENDED_FOR_YOU_DISPLAY_TEXT;
+            anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryId =
+              RECOMMENDED_FOR_YOU_ID;
+          }
+        }
+      }
+    }
+
+    return anytimeActionsWithRecommendedForYouCategorysOverriden;
   };
 
   const [isFocused, setIsFocused] = useState(false);
