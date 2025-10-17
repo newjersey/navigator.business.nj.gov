@@ -35,7 +35,7 @@ const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_K
 });
 const isKillSwitchOn = async (): Promise<boolean> => {
   return false;
-}
+};
 class BasicLogger {
   private id: string;
 

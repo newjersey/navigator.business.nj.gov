@@ -2,12 +2,12 @@ import sharedConfig from "../jest.shared";
 
 const esModules = ["rehype-react", "remark-gfm", "remark-parse", "remark-rehype", "unified"];
 
-process.env = Object.assign(process.env, {
-  FEATURE_BUSINESS_FLP: "true",
-  FEATURE_LOGIN_PAGE: "true",
-  FEATURE_TAX_CLEARANCE_CERTIFICATE: "true",
-  WEBFLOW_API_TOKEN: 12345678910,
-});
+// process.env = Object.assign(process.env, {
+//   FEATURE_BUSINESS_FLP: "true",
+//   FEATURE_LOGIN_PAGE: "true",
+//   FEATURE_TAX_CLEARANCE_CERTIFICATE: "true",
+//   WEBFLOW_API_TOKEN: 12345678910,
+// });
 
 /** @type {import('jest').Config} */
 export default {

@@ -14,6 +14,6 @@
     "types": ["node", "jest"],
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "test/**/*.ts", "scripts/**/*.ts", "serverless.ts"],
+  "include": ["src/**/*.ts", "test/**/*.ts", "scripts/**/*.ts"],
   "exclude": ["node_modules/**/*", ".serverless/**/*", "_warmup/**/*", ".vscode/**/*"]
 }

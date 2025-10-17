@@ -17,6 +17,7 @@ export default {
     "<rootDir>/test/setupJestDynalite.ts",
     "<rootDir>/../shared/src/test/setupRandomSeed.ts",
   ],
+
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",
@@ -29,6 +30,7 @@ export default {
     "@wiremock/(.*)": "<rootDir>/wiremock/$1",
     "@scripts/(.*)": "<rootDir>/../scripts/$1",
   },
+  testPathIgnorePatterns: ["<rootDir>/lib/", "<rootDir>/node_modules/"],
   globalSetup: "<rootDir>/test/globalSetup.ts",
   globalTeardown: "<rootDir>/test/teardownTests.ts",
 };
