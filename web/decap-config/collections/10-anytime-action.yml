@@ -87,6 +87,24 @@ collections:
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
       - {
+          label: "Move to Recommended for You Section",
+          name: "moveToRecommendedForYouSection",
+          widget: "boolean",
+          required: false,
+        }
+      - label:
+          Non Essential Questions which will move this to recommended for you section if answered
+          yes
+        name: nonEssentialQuestionsMoveToRecommendedAnytimeActionIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "nonEssentialQuestionsCollection"
+        search_fields: ["nonEssentialQuestionsArray.*.id"]
+        value_field: "nonEssentialQuestionsArray.*.id"
+        display_fields: ["nonEssentialQuestionsArray.*.id"]
+      - {
           label: "Url Slug - Internal Routing",
           name: "urlSlug",
           widget: "no-space",
