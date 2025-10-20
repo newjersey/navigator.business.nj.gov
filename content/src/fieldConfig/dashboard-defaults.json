@@ -15,6 +15,7 @@
     "searchFieldHeaderText": "Find What Your Business Needs",
     "searchFieldHintText": "Search for what your business needs",
     "commonBusinessTasksHeader": "Common Business Tasks",
-    "recommendedForYouCategoryHeader": "Recommended For You"
+    "recommendedForYouCategoryHeader": "Recommended For You",
+    "searchHasNoOptionsText": "*No Options For \"${inputValue}\"*"
   }
 }

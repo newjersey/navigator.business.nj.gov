@@ -49,6 +49,10 @@ li.anytime-action-dropdown-option.MuiAutocomplete-option {
   }
 }
 
+.MuiAutocomplete-noOptions {
+  background-color: variables.$cool-extra-light;
+}
+
 .anytime-action-header-group {
   margin: 0;
 }
