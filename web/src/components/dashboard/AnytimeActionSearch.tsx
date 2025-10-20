@@ -1,9 +1,11 @@
-import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { Content } from "@/components/Content";
+import { AnytimeActionSearchElement } from "@/components/dashboard/AnytimeActionSearchElement";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
+import { templateEval } from "@/lib/utils/helpers";
 import {
   AnytimeActionCategory,
   AnytimeActionLicenseReinstatement,
@@ -171,6 +173,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
 
   const [isFocused, setIsFocused] = useState(false);
   const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const handleAnytimeActionClick = (value: AnytimeActionWithTypeAndCategory): void => {
     if (router && value && typeof value !== "string") {
@@ -221,6 +224,10 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
               />
             );
           }}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          inputValue={inputValue}
           componentsProps={{
             popper: {
               modifiers: [
@@ -244,7 +251,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
           renderGroup={(params) => {
             return (
               <li key={params.key} className="anytime-action-header-group">
-                <div className="padding-left-2 text-base">{params.group}</div>
+                <div className="padding-left-2 font-body-2xs text-base">{params.group}</div>
                 <ul className="anytime-action-dropdown-ul-list-container">{params.children}</ul>
               </li>
             );
@@ -274,6 +281,13 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
               handleAnytimeActionClick(value);
             }
           }}
+          noOptionsText={
+            <Content>
+              {templateEval(Config.dashboardAnytimeActionDefaults.searchHasNoOptionsText, {
+                inputValue: inputValue,
+              })}
+            </Content>
+          }
           renderOption={(
             _props,
             option: AnytimeActionWithTypeAndCategory,
@@ -306,9 +320,9 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
                   key={"subdirectory_arrow"}
                 />
                 <div className="fdc" key={option.filename}>
-                  <MenuOptionUnselected secondaryText={descriptionText}>
+                  <AnytimeActionSearchElement secondaryText={descriptionText}>
                     {titleText}
-                  </MenuOptionUnselected>
+                  </AnytimeActionSearchElement>
                 </div>
               </li>
             );

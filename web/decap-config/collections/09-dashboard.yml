@@ -71,6 +71,11 @@ collections:
                     action,
                   widget: string,
                 }
+              - {
+                  label: Search has No Options Text,
+                  name: searchHasNoOptionsText,
+                  widget: markdown,
+                }
 
       - label: "Snackbars"
         name: "dashboard-config-snackbars"

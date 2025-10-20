@@ -629,6 +629,9 @@ describe("<AnytimeActionSearch />", () => {
     it("returns no searched elements when nothing matches", async () => {
       anytimeActionTasks = anytimeActionTasksAlternate;
 
+      const inputText = "test-title-33333";
+      const noOptionsInputValue = `No Options For "${inputText}"`;
+
       renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByText("test-title-3")).toBeInTheDocument();
@@ -636,14 +639,15 @@ describe("<AnytimeActionSearch />", () => {
       expect(screen.getByText("test-title-2")).toBeInTheDocument();
       expect(screen.getByText("test-title-1")).toBeInTheDocument();
       expect(screen.getByText("Category 1")).toBeInTheDocument();
-      expect(screen.queryByText("No options")).not.toBeInTheDocument();
-      await userEvent.type(screen.getByRole("combobox"), "test-title-33333");
+      expect(screen.queryByText(noOptionsInputValue)).not.toBeInTheDocument();
+      await userEvent.type(screen.getByRole("combobox"), inputText);
+
       expect(screen.queryByText("test-title-3")).not.toBeInTheDocument();
       expect(screen.queryByText("Category 3")).not.toBeInTheDocument();
       expect(screen.queryByText("test-title-2")).not.toBeInTheDocument();
       expect(screen.queryByText("test-title-1")).not.toBeInTheDocument();
       expect(screen.queryByText("Category 1")).not.toBeInTheDocument();
-      expect(screen.getByText("No options")).toBeInTheDocument();
+      expect(screen.getByText(noOptionsInputValue)).toBeInTheDocument();
     });
 
     it("renders an anytime actions that match search value to a description with correct bolding", async () => {
