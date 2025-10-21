@@ -25,7 +25,7 @@ formName: NJ-Reg
 
 ## Application Requirements
 
-- `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
+- `Entity ID|entity-id-contextual-link` (not required for general partnership or sole proprietorship)
 - [NAICS code](/tasks/naics-code-determination): ${naicsCode}
 - `EIN|ein`
 - Estimated start date

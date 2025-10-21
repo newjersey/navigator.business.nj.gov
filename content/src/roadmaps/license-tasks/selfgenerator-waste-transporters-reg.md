@@ -28,7 +28,7 @@ summaryDescriptionMd: >-
 
 - Business name, address, and phone number
 - Contact name, address, email, and phone number
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Incorporation date
 - Last four digits of your Social Security number
 - `Employer Identification Number (EIN)|ein`

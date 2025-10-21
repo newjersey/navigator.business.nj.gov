@@ -1,7 +1,7 @@
 ---
-id: business-structure-learn-more
+id: business-structure-contextual-link
 header: Business Structures
-displayname: business-structure-learn-more
+displayname: business-structure-contextual-link
 ---
 
 Your business's business structure (also known as legal structure) defines your taxes, personal liability, partnerships, and registration requirements. Below is a list of common business structures, it is not an exhaustive list and it does not serve as legal or tax advice.

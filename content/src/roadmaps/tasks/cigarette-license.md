@@ -81,7 +81,7 @@ webflowType: business-license
 - `Trade name|alt-name-trade-name` , if applicable
 - 12-digit `New Jersey tax ID number|tax-id`
 - Business address
-- `Business type/structure|business-structure-learn-more`
+- `Business type/structure|business-structure-contextual-link`
 - Date cigarette sales will begin, if applicable
 - Applicable fees paid
 

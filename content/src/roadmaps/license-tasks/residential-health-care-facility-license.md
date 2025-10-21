@@ -24,7 +24,7 @@ licenseCertificationClassification: undefined
 
 - Business name
 - `Trade name|alt-name-trade-name` , if applicable
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - `Employee Identification Number (EIN)|ein`
 - Name and address of your `registered agent|registered-agent`
 - Name, address, and contact information of your facility

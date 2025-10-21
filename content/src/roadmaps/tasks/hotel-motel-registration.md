@@ -21,7 +21,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 
 - Business name
 - `Employee Identification Number (EIN)|ein`
-- `Entity ID|entity-id` or NJ corporate registration number
+- `Entity ID|entity-id-contextual-link` or NJ corporate registration number
 - `Form of property ownership|property-ownership`
 - `Property name and address|property-address`
 - Date when you acquired the property and building(s) on it, if you are the new owner
@@ -37,7 +37,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 - Name and address of your `mortgagee|mortgagee` , if applicable
 - Name and address of your `net lessee|net-lessee` , if applicable
 
-If your business is a `Corporation, Limited Liability Company (LLC),|business-structure-learn-more` `Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more` , you also need the following:
+If your business is a `Corporation, Limited Liability Company (LLC),|business-structure-contextual-link` `Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-contextual-link` , you also need the following:
 
 - Name and address of your `registered agent|registered-agent`
 - Name and address of each officer or partner

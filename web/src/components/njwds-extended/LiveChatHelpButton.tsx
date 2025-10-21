@@ -15,6 +15,7 @@ export const LiveChatHelpButton = (props: Props): ReactElement => {
       <UnStyledButton
         isBgTransparent
         className={"text-accent-cool-darker fjc padding-0"}
+        id="live-chat-help-button"
         isTextBold
         isIntercomEnabled
         dataTestid={"help-button"}

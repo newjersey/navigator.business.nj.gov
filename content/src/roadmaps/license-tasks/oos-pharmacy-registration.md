@@ -41,7 +41,7 @@ licenseName: "Pharmacy-Out of State Pharmacy"
 
 ### Ownership Information
 
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - `Registered agent|registered-agent` information, including address and phone number (if your pharmacy is a corporation)
 - Date of incorporation (if your pharmacy is a corporation)
 - A notarized affidavit completed by the designated owner, partner, or principal officer. If this person is not the PIC, the PIC must complete another affidavit (forms included in application)

@@ -31,51 +31,52 @@ divisionPhone: (609) 292-7081
 webflowType: business-license
 webflowId: 66aceed2f2985d567ecd3031
 ---
+
 ## Application Requirements
 
-* Business name, address, and phone number
-* Contact name, address, email, and phone number
-*  `Business structure|business-structure-learn-more` 
-* Last 4 digits of your Social Security number
-*  `Employer Identification Number (EIN)|ein` 
-* Incorporation date
-*  `USDOT number|usdot-number` , if you transport waste across state lines
-* Lessor's USDOT number(s), if applicable
-* Insurance company name and policy number
-* Previous New Jersey Department of Environmental Protection (NJDEP) waste transporter registration number, if applicable
-* Applicable fees paid once NJDEP sends an invoice
+- Business name, address, and phone number
+- Contact name, address, email, and phone number
+- `Business structure|business-structure-contextual-link`
+- Last 4 digits of your Social Security number
+- `Employer Identification Number (EIN)|ein`
+- Incorporation date
+- `USDOT number|usdot-number` , if you transport waste across state lines
+- Lessor's USDOT number(s), if applicable
+- Insurance company name and policy number
+- Previous New Jersey Department of Environmental Protection (NJDEP) waste transporter registration number, if applicable
+- Applicable fees paid once NJDEP sends an invoice
 
 ### Company Ownership Information
 
-* Name, EIN, and type of ownership for each owner
-* Each owner's share of the business (must total 100%)
+- Name, EIN, and type of ownership for each owner
+- Each owner's share of the business (must total 100%)
 
 ### Vehicle Information
 
-* Vehicle type (for example, vehicle, cab, trailer, or container)
-* Vehicle Identification Number (VIN)
-* License plate number and state
-* Leased vehicle status
+- Vehicle type (for example, vehicle, cab, trailer, or container)
+- Vehicle Identification Number (VIN)
+- License plate number and state
+- Leased vehicle status
 
 ### Required Documents
 
-* Completed and signed [registration form](https://dep.nj.gov/wp-content/uploads/wastedecals/transporter-registration-initial-application-solid-medical-waste-licensed-revised-6-24-2025.pdf)
-* Notarized affidavit stating that you will only transport waste that you generated (included in the application form)
-* Valid insurance information for all vehicles
-* Valid motor vehicle commercial registrations for all vehicles
-* Copy of the [lease agreement and certification for any leased vehicles](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf), signed by the lessor and the lessee
-* A copy of your tax clearance certificate
-* Completed business concern disclosure statement form 
-* Personal history disclosure statement forms for each owner, officer, family member, key employee, and salesperson
-* A copy of your `Certificate of Formation|certificate-formation` 
-* A copy of your `New Jersey certificate of authority for sales
-* tax|certificate-authority-sales-tax`
-* A copy of your Certificate of Authority to do business in New Jersey, if an out-of-state business
-* A copy of the `Certificate of Good Standing|good-standing` (for New Jersey Corporations and Limited Liability Companies)
+- Completed and signed [registration form](https://dep.nj.gov/wp-content/uploads/wastedecals/transporter-registration-initial-application-solid-medical-waste-licensed-revised-6-24-2025.pdf)
+- Notarized affidavit stating that you will only transport waste that you generated (included in the application form)
+- Valid insurance information for all vehicles
+- Valid motor vehicle commercial registrations for all vehicles
+- Copy of the [lease agreement and certification for any leased vehicles](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf), signed by the lessor and the lessee
+- A copy of your tax clearance certificate
+- Completed business concern disclosure statement form
+- Personal history disclosure statement forms for each owner, officer, family member, key employee, and salesperson
+- A copy of your `Certificate of Formation|certificate-formation`
+- A copy of your `New Jersey certificate of authority for sales
+- tax|certificate-authority-sales-tax`
+- A copy of your Certificate of Authority to do business in New Jersey, if an out-of-state business
+- A copy of the `Certificate of Good Standing|good-standing` (for New Jersey Corporations and Limited Liability Companies)
 
-Please email the application with legible scans of all required documentation to  lru@dep.nj.gov. If you can't scan, mail the original paper copy to:
+Please email the application with legible scans of all required documentation to lru@dep.nj.gov. If you can't scan, mail the original paper copy to:
 
-&nbsp; 
+&nbsp;
 
 Department of Environmental Protection
 
@@ -91,14 +92,14 @@ PO Box 420, Mail Code 09-01
 
 Trenton, NJ 08625-0420
 
-:::infoAlert 
- **After you apply:**
+:::infoAlert
+**After you apply:**
 
-* If your application is approved, you will get a bill (to pay online or by check)
-* After you pay, the application goes to the NJ State Police for investigation, and they will contact you for fingerprinting
-* You must [submit the A-901 Update Form](https://dep.nj.gov/wp-content/uploads/dshw/a901/a901_annual_update.pdf) every November 1st —  even if your A-901 license has not yet been approved
-* If your license is approved, you need to [apply for a Certificate of Public Convenience and Necessity (CPCN)](https://dep.nj.gov/dshw/swpl/cpcn/)
-* After you get your A-901 license and CPCN, you must apply to register as an A-901 licensed transporter 
+- If your application is approved, you will get a bill (to pay online or by check)
+- After you pay, the application goes to the NJ State Police for investigation, and they will contact you for fingerprinting
+- You must [submit the A-901 Update Form](https://dep.nj.gov/wp-content/uploads/dshw/a901/a901_annual_update.pdf) every November 1st — even if your A-901 license has not yet been approved
+- If your license is approved, you need to [apply for a Certificate of Public Convenience and Necessity (CPCN)](https://dep.nj.gov/dshw/swpl/cpcn/)
+- After you get your A-901 license and CPCN, you must apply to register as an A-901 licensed transporter
   :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
