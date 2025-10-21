@@ -441,7 +441,7 @@
       "entityId": {
         "default": {
           "header": "Entity ID",
-          "headerContextualInfo": "entity-id",
+          "headerContextualInfo": "entity-id-contextual-link",
           "description": ""
         }
       },

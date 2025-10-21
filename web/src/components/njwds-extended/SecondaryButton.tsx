@@ -6,7 +6,6 @@ type OmitGenericButtonProps = Omit<
   | "isUnBolded"
   | "isSmallerText"
   | "isLargeButton"
-  | "id"
   | "isAriaControls"
   | "isAriaExpanded"
   | "isAriaHaspopup"

@@ -25,7 +25,7 @@ licenseCertificationClassification: undefined
 ## Application Requirements
 
 - `Employer Identification Number (EIN)|ein` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
-- `Entity ID|entity-id` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
+- `Entity ID|entity-id-contextual-link` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
 - Building address where the device is located
 - Device information, including type, classification, ID number, manufacturer, model, and installation date
 - Device specifications, such as travel distance, speed, and occupancy load

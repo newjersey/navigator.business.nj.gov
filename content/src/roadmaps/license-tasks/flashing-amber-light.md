@@ -63,7 +63,7 @@ Your vehicle must also be registered under one of these NJ Motor Vehicle Commiss
 
 - Business name
 - Business address, phone number, and email
-- `Entity ID|entity-id`
+- `Entity ID|entity-id-contextual-link`
 - Contact name
 - Description of the type of service and location (county) where the amber light will be used
 - Applicable fees paid

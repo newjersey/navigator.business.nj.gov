@@ -28,7 +28,7 @@ callToActionLink: https://dep.nj.gov/dshw/swpl/a-901/
 
 - Business name, address, and phone number
 - Contact name, address, email, and phone number
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Last 4 digits of your Social Security number
 - `Employer Identification Number (EIN)|ein`
 - Incorporation date

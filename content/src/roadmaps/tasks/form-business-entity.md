@@ -1,7 +1,7 @@
 ---
 summaryDescriptionMd: To conduct business in New Jersey, you must register your
   business name and authorize your `business
-  structure|business-structure-learn-more` with the State.
+  structure|business-structure-contextual-link` with the State.
 urlSlug: business-entity-auth
 displayname: business-entity-auth
 name: Authorize Your Business Entity
@@ -24,7 +24,7 @@ agencyId: nj-revenue-enterprise-services
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
-- `Entity ID|entity-id`
+- `Entity ID|entity-id-contextual-link`
 - `Certificate of Authorization|certificate-formation`
 - `Certified copy|certified-copy` of Certificate of Authorization (optional with additional fee)
 - `Certificate of Good Standing|good-standing` (optional with additional fee)

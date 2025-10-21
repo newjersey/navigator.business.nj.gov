@@ -32,7 +32,7 @@ webflowId: 66aceedd6ba3dffa8ac9d30b
 ## Application Requirements (Moving)
 
 - Business name
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Business address
 - Registered agent (called “Designated agent” in the application)
 - Type(s) of license you are applying for (see explanation above)

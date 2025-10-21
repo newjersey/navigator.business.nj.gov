@@ -5,6 +5,7 @@ interface Props {
   className?: string;
   label?: string;
   "data-testid"?: string;
+  id?: string;
 }
 
 export const Icon = (props: Props): ReactElement => {
@@ -16,6 +17,7 @@ export const Icon = (props: Props): ReactElement => {
       focusable="false"
       role="img"
       data-testid={props["data-testid"]}
+      id={props.id}
       dangerouslySetInnerHTML={{
         __html: `<use xlink:href="/vendor/img/sprite.svg#${props.iconName}"></use>`,
       }}

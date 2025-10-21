@@ -56,7 +56,7 @@ You must have an active license or registration as one of the following:
 - `Trade name (DBA, or "doing business as" name)|alt-name-trade-name`, if applicable
 - Federal `employer identification number|ein`
 - Business address
-- `Business organization/structure|business-structure-learn-more\`
+- `Business organization/structure|business-structure-contextual-link\`
 - 9-digit `individual taxpayer identification number|itin`, if applicable
 - Social Security number, if a sole proprietorship
 - Owner’s information, including name, address, and email
