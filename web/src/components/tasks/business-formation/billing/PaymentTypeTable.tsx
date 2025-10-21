@@ -35,6 +35,12 @@ export const PaymentTypeTable = (): ReactElement => {
     state.formationFormData.legalType,
   );
 
+  // Try Looking for a site with a good table example that works with talkback, then pull up on PC and look at the actual DOM strucutre in comparison
+
+  // next plans, try switching HTMLFor for aria-labeled by and see if that fixes things with regards to getting into our checkboxes
+
+  // Try structuring semanitcally differently
+
   const [totalCost, setTotalCost] = useState<number>(officialFormationCost);
   const [creditCardCost, setCreditCardCost] = useState<number>(ccPaymentCostInitial);
   const [achCost, setAchCost] = useState<number>(achPaymentCost);
