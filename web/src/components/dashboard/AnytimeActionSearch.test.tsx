@@ -630,7 +630,7 @@ describe("<AnytimeActionSearch />", () => {
       anytimeActionTasks = anytimeActionTasksAlternate;
 
       const inputText = "test-title-33333";
-      const noOptionsInputValue = `No Options For "${inputText}"`;
+      const noOptionsInputValue = `No options for "${inputText}"`;
 
       renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
