@@ -51,7 +51,7 @@ There are two ways to apply online:
 * Apply without an account. If you have 30 or fewer vehicles, you can apply online as a guest without an account. You must complete your application in one session. The portal will not save your progress if you are a guest.
 :::
 
-:::largeCallout{ showHeader="true" headerText="What if I don't get this permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I do not renew my decals?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If your vehicles or containers do not have the required decals, you cannot legally transport waste, and you may be subject to significant fines.
 
