@@ -47,9 +47,8 @@ callToActionLink: https://dep.nj.gov/wastedecals/commercial-solid-waste-transpor
 
 There are two ways to apply online:
 
-\* Use your current NJDEP account or create a new one. This saves your progress and lets you finish your application across several sessions. If you have more than 30 vehicles, you must [create an NJDEP online account](https://my.nj.gov/signup/Signup).
-
-\* Apply without an account. If you have 30 or fewer vehicles, you can apply online as a guest without an account. You must complete your application in one session. The portal will not save your progress if you are a guest.
+* Use your current NJDEP account or create a new one. This saves your progress and lets you finish your application across several sessions. If you have more than 30 vehicles, you must create an NJDEP online account.
+* Apply without an account. If you have 30 or fewer vehicles, you can apply online as a guest without an account. You must complete your application in one session. The portal will not save your progress if you are a guest.
 :::
 
 :::largeCallout{ showHeader="true" headerText="What if I don't get this permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
