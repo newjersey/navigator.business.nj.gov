@@ -12,15 +12,16 @@ sectorIds:
   - waste-management-and-Remediation
 nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
 urlSlug: add-modify-a901-decals
-summaryDescriptionMd: >
+summaryDescriptionMd: >-
   If you have an A-901 license to transport waste and you're registered, you
   can:  
 
+
   * Get decals for extra vehicles or containers
 
-  * Update or replace your cab cards 
+  * Update or replace your `cab cards|vehicle-cab-card`
 
-  * Get replacement decals
+  * Replace lost or damaged decals
 
   * Deactivate a decal that is not in use
 issuingAgency: Department of Environmental Protection (DEP)
@@ -34,7 +35,7 @@ callToActionLink: https://dep.nj.gov/wastedecals/commercial-solid-waste-transpor
 
 ### New Equipment Registration
 
-* Vehicle Identification Number (VIN)
+* Vehicle Identification Number (VIN) 
 * Vehicle type (cab, single unit, or trailer)
 * License plate number
 * Scanned copy of the vehicle registration
@@ -50,8 +51,6 @@ There are two ways to apply online:
 
 \* Apply without an account. If you have 30 or fewer vehicles, you can apply online as a guest without an account. You must complete your application in one session. The portal will not save your progress if you are a guest.
 :::
-
-
 
 :::largeCallout{ showHeader="true" headerText="What if I don't get this permit?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
