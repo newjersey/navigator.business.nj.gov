@@ -8,7 +8,7 @@ export const WebserviceEmployerRatesClient = (logWriter: LogWriterType): Employe
   const getEmployerRates = async (
     employerRatesRequest: EmployerRatesRequest,
   ): Promise<EmployerRatesResponse> => {
-    const baseUrl = await getConfigValue("employer_rates_base_url");
+    const baseUrl = await getConfigValue("boomi-runtime/alb-url");
 
     const url = `${baseUrl}/ws/simple/queryDeptOfLaborEmployerRates`;
     const logId = logWriter.GetId();

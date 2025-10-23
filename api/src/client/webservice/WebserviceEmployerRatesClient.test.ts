@@ -29,7 +29,7 @@ describe("WebserviceEmployerRatesClient", () => {
     mockAxios.post.mockResolvedValue({ data: mockResponse });
 
     const result = await client.getEmployerRates(requestData);
-    expect(getConfigValue).toHaveBeenCalledWith("employer_rates_base_url");
+    expect(getConfigValue).toHaveBeenCalledWith("boomi-runtime/alb-url");
     expect(mockAxios.post).toHaveBeenCalledWith(
       "https://example.test/ws/simple/queryDeptOfLaborEmployerRates",
       requestData,
