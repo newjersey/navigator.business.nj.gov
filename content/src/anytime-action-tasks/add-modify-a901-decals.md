@@ -1,6 +1,6 @@
 ---
 id: add-modify-a901-decals
-name: Add Equipment, or Replace and Update Your A-901 Decals
+name: Add, Replace and Update Your A-901 Decals
 category:
   - manage-my-business-vehicles
   - purchase-new-products-or-equipment
@@ -19,7 +19,7 @@ summaryDescriptionMd: >-
 
   * Get decals for extra vehicles or containers
 
-  * Update or replace your `cab cards|vehicle-cab-card`
+  * Update or replace your `cab cards|vehicle-cab-card` 
 
   * Replace lost or damaged decals
 
