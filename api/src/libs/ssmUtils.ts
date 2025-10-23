@@ -3,9 +3,11 @@ import { GetParameterCommand, PutParameterCommand, SSMClient } from "@aws-sdk/cl
 const ssmClient = new SSMClient({});
 const parameterName = `/${process.env.STAGE}/feature-flag/users-migration/kill-switch`;
 
+type EMPLOYER_RATES_PATH = "boomi-runtime/alb-url";
+
 export type CONFIG_VARS =
   | "cms_alerts_sns_topic_arn"
-  | "employer_rates_base_url"
+  | EMPLOYER_RATES_PATH
   | CIGARETTE_PAYMENT_CONFIG_VARS
   | CIGARETTE_EMAIL_CONFIG_VARS;
 
