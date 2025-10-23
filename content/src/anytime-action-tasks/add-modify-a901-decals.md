@@ -47,11 +47,11 @@ callToActionLink: https://dep.nj.gov/wastedecals/commercial-solid-waste-transpor
 
 There are two ways to apply online:
 
-* Use your current NJDEP account or create a new one. This saves your progress and lets you finish your application across several sessions. If you have more than 30 vehicles, you must create an NJDEP online account.
+* Use your current NJDEP account or create a new one. This saves your progress and lets you finish your application across several sessions. If you have more than 30 vehicles, you must [create an NJDEP online account](https://my.nj.gov/signup/Signup).
 * Apply without an account. If you have 30 or fewer vehicles, you can apply online as a guest without an account. You must complete your application in one session. The portal will not save your progress if you are a guest.
-:::
+  :::
 
-:::largeCallout{ showHeader="true" headerText="What if I do not renew my decals?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if my equipment does not have valid decals?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 If your vehicles or containers do not have the required decals, you cannot legally transport waste, and you may be subject to significant fines.
 
