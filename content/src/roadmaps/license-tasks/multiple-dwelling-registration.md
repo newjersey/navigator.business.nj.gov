@@ -27,7 +27,7 @@ webflowId: 66aceede59cc2b46f7a6158c
 
 - Business name
 - `Employer Identification Number (EIN)|ein`
-- `Entity ID|entity-id` or NJ corporate registration number
+- `Entity ID|entity-id-contextual-link` or NJ corporate registration number
 - `Form of property ownership|property-ownership`
 - Property name and address
 - Date when you acquired the property, if you are the new owner of an existing property
@@ -44,7 +44,7 @@ webflowId: 66aceede59cc2b46f7a6158c
 - Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 - Applicable fees paid
 
-If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP),|business-structure-learn-more` `or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:
+If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP),|business-structure-contextual-link` `or Limited Liability Partnership (LLP)|business-structure-contextual-link`, you also need the:
 
 - Name and address of your `registered agent|registered-agent`
 - Name and address of each officer or partner

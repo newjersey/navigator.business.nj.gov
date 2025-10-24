@@ -1,6 +1,6 @@
 ---
-id: entity-id
-displayname: entity-id
+id: entity-id-contextual-link
+displayname: entity-id-contextual-link
 header: Entity ID
 ---
 

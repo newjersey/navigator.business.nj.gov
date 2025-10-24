@@ -55,7 +55,7 @@
       "ariaContextStepperStateComplete": "Complete"
     },
     "intro": {
-      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.",
+      "default": "This online application will register your business name and form your `business structure|business-structure-contextual-link` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id-contextual-link` immediately after payment is received.",
       "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available.",
       "certificateOfGoodStandingAlert": {
         "beginning": "Before starting this task, you must:",
@@ -97,7 +97,7 @@
       "apiResubmitText": "After you make the correction, resubmit the form."
     },
     "checkNameReservation": {
-      "cancelNameStep1": "**Step 1:** Go to the [Business Charter Amendment Service website](https://www.njportal.com/DOR/BusinessAmendments/) to cancel your business name reservation. There’s a $50 fee.",
+      "cancelNameStep1": "**Step 1:** Go to the [Business Charter Amendment Service website](https://www.njportal.com/DOR/BusinessAmendments/ 'business-charter-service-external-link') to cancel your business name reservation. There’s a $50 fee.",
       "cancelNameStep2": "**Step 2:** Wait 24–48 hours for our system to recognize the cancellation. We recommend returning to our site frequently to check if the business name reservation is canceled. Once the business name is released, it will be available on a first come, first served basis.",
       "cancelNameStep3": "**Step 3:** You can complete the other sections on this site (business, contacts, billing, review) while you wait on the cancellation.",
       "cancelNameStep4": "**Step 4:** Once the business name is released, you’ll be able to enter it here and continue your registration.",
@@ -106,12 +106,12 @@
       "header": "Check Name Reservation",
       "registerDifferentNameHeader": "Register with a Different Business Name",
       "didYouUseFormRadio": {
-        "label": "Did you use the [UNRR-1 form](https://www.nj.gov/treasury/revenue/dcr/pdforms/unrr1.pdf) to reserve a business name with the State of New Jersey?",
+        "label": "Did you use the [UNRR-1 form](https://www.nj.gov/treasury/revenue/dcr/pdforms/unrr1.pdf 'unrr-1-form-external-link') to reserve a business name with the State of New Jersey?",
         "option1": "No, I haven’t reserved a name (Name reservations are not needed to form a business)",
         "option2": "Yes, I submitted the UNRR-1 form to reserve a name"
       },
       "cancelNameHeader": "Cancel Name Reservation",
-      "keepNameStep1": "**Step 1:** [Download the Business Registration paperwork](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) (pages 23-24).",
+      "keepNameStep1": "**Step 1:** [Download the Business Registration paperwork](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf 'download-registration-paperwork-external-link') (pages 23-24).",
       "keepNameStep2": "**Step 2:** Fill out the paperwork on pages 23-24. Mail it and the $125 filing fee to:",
       "keepNameStep3": "**Step 3:** When you’re done, check the “TO DO” box on this web page to mark the task complete.",
       "howWouldYouLikeToProceedRadio": {
@@ -567,7 +567,7 @@
       "label": "Business Structure",
       "warningModalCancelButton": "Cancel",
       "warningModalHeader": "You Might Need a Different Form",
-      "contextualInfo": "business-structure-learn-more"
+      "contextualInfo": "business-structure-contextual-link"
     },
     "partnershipRights": {
       "label": "Partnership Rights",

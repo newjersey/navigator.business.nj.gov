@@ -118,7 +118,11 @@ const Link = (onClick?: (url?: string) => void): any => {
 
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
-          <ExternalLink href={props.href} onClick={(): void => onClick && onClick(props.href)}>
+          <ExternalLink
+            href={props.href}
+            id={props.title}
+            onClick={(): void => onClick && onClick(props.href)}
+          >
             {linkText}
           </ExternalLink>
         );
@@ -141,14 +145,17 @@ export const ExternalLink = ({
   children,
   href,
   onClick,
+  id,
 }: {
   children: string;
   href: string;
   onClick?: (url?: string) => void;
+  id?: string;
 }): ReactElement => {
   return (
     <a
       className="usa-link"
+      id={id}
       href={href}
       target="_blank"
       rel="noreferrer noopener"

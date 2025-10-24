@@ -45,16 +45,18 @@ export const BusinessNameStep = (): ReactElement => {
               labelPlacement="end"
               style={{ alignItems: "center" }}
               data-testid="check-name-reservation-option-1"
+              id="check-name-reservation-radio-label-1"
               value={false}
-              control={<Radio color="primary" />}
+              control={<Radio id="check-name-reservation-radio-button-1" color="primary" />}
               label={Config.formation.checkNameReservation.didYouUseFormRadio.option1}
             />
             <FormControlLabel
               labelPlacement="end"
               style={{ alignItems: "center" }}
               data-testid="check-name-reservation-option-2"
+              id="check-name-reservation-radio-label-2"
               value={true}
-              control={<Radio color="primary" />}
+              control={<Radio id="check-name-reservation-radio-button-2" color="primary" />}
               label={Config.formation.checkNameReservation.didYouUseFormRadio.option2}
             />
           </RadioGroup>

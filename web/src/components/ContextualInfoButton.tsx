@@ -40,7 +40,7 @@ export const ContextualInfoButton = (props: Props): ReactElement => {
   };
 
   return (
-    <UnStyledButton dataTestid={props.id} onClick={setContext}>
+    <UnStyledButton dataTestid={props.id} id={props.id} onClick={setContext}>
       <span className="dashed-underline line-height-body-5">
         <PureMarkdownContent>{props.text}</PureMarkdownContent>
       </span>

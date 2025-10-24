@@ -15,7 +15,7 @@ export type PrimaryButtonColors =
 
 type OmitGenericButtonProps = Omit<
   GenericButtonProps,
-  "size" | "id" | "isAriaControls" | "isAriaExpanded" | "isAriaHaspopup" | "className"
+  "size" | "isAriaControls" | "isAriaExpanded" | "isAriaHaspopup" | "className"
 >;
 
 interface Props extends OmitGenericButtonProps {

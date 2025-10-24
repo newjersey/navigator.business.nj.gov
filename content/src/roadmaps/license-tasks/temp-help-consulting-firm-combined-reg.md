@@ -25,7 +25,7 @@ licenseName: Consulting Firms/Temporary Help Services-Consulting Firm/Temporary 
 ### Application Requirements
 
 - `Employer Identification Number (EIN)|ein`
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Business address
 - `Registered agent|registered-agent` information, including address and phone number
 - Name, address, and business telephone number of each officer, director, principal, or representative with an ownership interest

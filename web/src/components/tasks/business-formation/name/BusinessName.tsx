@@ -110,6 +110,7 @@ export const BusinessName = (): ReactElement => {
               </div>
               <TextField
                 autoComplete="no"
+                id="question-confirm-business-name"
                 value={
                   state.formationFormData.businessNameConfirmation
                     ? state.formationFormData.businessName
@@ -185,6 +186,7 @@ export const BusinessName = (): ReactElement => {
               isSubmitButton={true}
               isRightMarginRemoved={true}
               dataTestId="business-name-search-submit"
+              id="business-name-availability-button"
               isNotFullWidthOnMobile={true}
             >
               {Config.searchBusinessNameTask.searchButtonText}

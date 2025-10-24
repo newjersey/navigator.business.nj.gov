@@ -58,24 +58,27 @@ export const SubmittedFormToReserveName = (): ReactElement => {
             labelPlacement="end"
             style={{ alignItems: "center" }}
             data-testid="how-to-proceed-option-1"
+            id="how-to-proceed-radio-label-1"
             value="DIFFERENT_NAME"
-            control={<Radio color="primary" />}
+            control={<Radio id="how-to-proceed-radio-button-1" color="primary" />}
             label={Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option1}
           />
           <FormControlLabel
             labelPlacement="end"
             style={{ alignItems: "center" }}
             data-testid="how-to-proceed-option-2"
+            id="how-to-proceed-radio-label-2"
             value="KEEP_NAME"
-            control={<Radio color="primary" />}
+            control={<Radio id="how-to-proceed-radio-button-2" color="primary" />}
             label={Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option2}
           />
           <FormControlLabel
             labelPlacement="end"
             style={{ alignItems: "center" }}
             data-testid="how-to-proceed-option-3"
+            id="how-to-proceed-radio-label-3"
             value="CANCEL_NAME"
-            control={<Radio color="primary" />}
+            control={<Radio id="how-to-proceed-radio-button-3" color="primary" />}
             label={Config.formation.checkNameReservation.howWouldYouLikeToProceedRadio.option3}
           />
         </RadioGroup>
