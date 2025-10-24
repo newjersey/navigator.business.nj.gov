@@ -88,6 +88,8 @@
     "summary": {
       "partOne": "Based on your answers, your business may be legally required to have Department of Environmental Protection (DEP)",
       "partTwo": "licenses or permits. Find out your business's requirements below.",
+      "partThree": "If your business activities or equipment change,",
+      "partFour": "redo this form.",
       "mediaAreaText": {
         "waste": "Waste",
         "land": "Watershed and Land Management",
@@ -99,7 +101,16 @@
     "personalizedSupport": {
       "title": "Contact DEP’s Small Business Assistance Program (SBAP)",
       "body": "An expert at SBAP can help you figure out which licenses or permits your business needs. SBAP does not regulate or enforce environmental rules.",
-      "contact": "SBAP@dep.nj.gov"
+      "contact": "SBAP@dep.nj.gov",
+      "successAlert": "Your support request was successfully completed! You can submit another in 14 days.",
+      "directContactInfo": "If you’d like to reach the SBAP directly, call them at 877-753-1151.",
+      "submissionCadence": "You can only submit one request every 14 days.",
+      "emailErrorText": "Email address must be valid.",
+      "generalErrorText": "There was an error submitting your request. Please try again later.",
+      "contactSbapButton": "Email SBAP",
+      "emailErrorAlertText": "Correct the field below.",
+      "generalErrorAlertText": "Something went wrong. Please try again later.",
+      "emailLabel": "Email Address"
     },
     "contactDep": {
       "title": "Contact DEP",
