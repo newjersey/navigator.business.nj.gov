@@ -2,6 +2,7 @@ import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
 import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
+import { employerRatesRouterFactory } from "@api/employerRatesRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
 import { healthCheckRouterFactory } from "@api/healthCheckRouter";
@@ -11,6 +12,7 @@ import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
 import { userRouterFactory } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
+import { checkTaskUsage } from "@businessnjgovnavigator/api/src/cms-integrity-tests/task";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
@@ -47,6 +49,7 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
+import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
 import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/webservice/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
@@ -86,8 +89,6 @@ import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
-import { employerRatesRouterFactory } from "@api/employerRatesRouter";
-import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
 
 const app = setupExpress();
 
@@ -109,6 +110,8 @@ const webserviceLicenseStatusProcessorClient = WebserviceLicenseStatusProcessorC
 );
 
 const DYNAMICS_LICENSE_STATUS_URL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
+
+checkTaskUsage("", "", logger);
 
 const dynamicsLicenseStatusAccessTokenClient = DynamicsAccessTokenClient(logger, {
   tenantId: process.env.DYNAMICS_LICENSE_STATUS_TENANT_ID || "",
