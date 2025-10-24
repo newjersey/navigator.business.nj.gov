@@ -45,6 +45,7 @@ type EventType =
   | "xray_status_check_success_active"
   | "xray_status_check_success_expired"
   | "non_essential_question_view"
+  | "environmental_requirements_sbap"
   | "env_requirements_assessment_started"
   | "env_stepper_step_viewed"
   | "env_final_cta_clicked"
@@ -92,6 +93,7 @@ const eventMap: Record<EventType, string> = {
   xray_status_check_started: "xray_status_check_started",
   xray_status_check_success_active: "xray_status_check_success_active",
   xray_status_check_success_expired: "xray_status_check_success_expired",
+  environmental_requirements_sbap: "environmental_requirements_sbap",
   env_requirements_assessment_started: "env_requirements_assessment_started",
   env_stepper_step_viewed: "env_stepper_step_viewed",
   env_final_cta_clicked: "env_final_cta_clicked",
@@ -2811,6 +2813,18 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "xray_registration_expired_status_card",
             legacy_event_label: "renew_ref_link",
+          });
+        },
+      },
+    },
+    email_sbap_clicked: {
+      click: {
+        email_sbap_clicked: () => {
+          eventRunner.track({
+            event: "email_sbap_clicked",
+            legacy_event_category: "support_request",
+            legacy_event_action: "email_button_click",
+            legacy_event_label: "environmental_requirements_sbap",
           });
         },
       },

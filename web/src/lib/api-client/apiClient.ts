@@ -2,6 +2,7 @@ import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
   ElevatorSafetyRegistrationSummary,
+  EmailMetaData,
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
   EmployerRatesRequest,
@@ -77,6 +78,10 @@ export const checkXrayRegistrationStatus = (
   facilityDetails: FacilityDetails,
 ): Promise<UserData> => {
   return post(`/xray-registration`, { facilityDetails });
+};
+
+export const sendEnvironmentPermitEmail = (emailMetaData: EmailMetaData): Promise<string> => {
+  return post(`/environment-permit-email`, { emailMetaData });
 };
 
 export const postBusinessFormation = (
