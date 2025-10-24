@@ -29,6 +29,11 @@ export const EnvPermit = (props: Props): ReactElement => {
   const [submitted, setSubmitted] = useState<boolean>(
     business?.environmentData?.submitted ?? false,
   );
+
+  const [emailSent, setEmailSent] = useState<boolean>(
+    business?.environmentData?.emailSent ?? false,
+  );
+
   const [stepIndex, setStepIndex] = useState<number>(0);
 
   const [questionnaireData, setQuestionnaireData] = useState(
@@ -97,10 +102,12 @@ export const EnvPermit = (props: Props): ReactElement => {
           questionnaireData,
           stepIndex,
           submitted,
+          emailSent,
         },
         setQuestionnaireData,
         setStepIndex,
         setSubmitted,
+        setEmailSent,
         onSubmit,
         onClickForEdit,
         applicableMediaAreas,

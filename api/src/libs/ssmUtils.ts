@@ -9,7 +9,8 @@ export type CONFIG_VARS =
   | "cms_alerts_sns_topic_arn"
   | EMPLOYER_RATES_PATH
   | CIGARETTE_PAYMENT_CONFIG_VARS
-  | CIGARETTE_EMAIL_CONFIG_VARS;
+  | CIGARETTE_EMAIL_CONFIG_VARS
+  | ENV_REQ_CONFIG_VARS;
 
 export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_base_url"
@@ -21,6 +22,10 @@ export type CIGARETTE_PAYMENT_CONFIG_VARS =
 export type CIGARETTE_EMAIL_CONFIG_VARS =
   | "cigarette_license_email_confirmation_url"
   | "cigarette_license_email_confirmation_key";
+
+export type ENV_REQ_CONFIG_VARS =
+  | "env_req_email_confirmation_url"
+  | "env_req_email_confirmation_key";
 
 let cache: {
   value?: boolean;

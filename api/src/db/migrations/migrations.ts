@@ -180,6 +180,7 @@ import { migrate_v175_to_v176 } from "@db/migrations/v176_add_check_name_reserva
 import { migrate_v176_to_v177 } from "@db/migrations/v177_add_business_name_confirmation";
 import { migrate_v177_to_v178 } from "@db/migrations/v178_add_employer_access";
 import { migrate_v178_to_v179 } from "@db/migrations/v179_add_business_deletion_date";
+import { migrate_v179_to_v180 } from "@db/migrations/v180_add_email_sent_environment_data";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -364,6 +365,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v176_to_v177,
   migrate_v177_to_v178,
   migrate_v178_to_v179,
+  migrate_v179_to_v180,
 ];
 
-export { generatev179UserData as CURRENT_GENERATOR } from "@db/migrations/v179_add_business_deletion_date";
+export { generatev180UserData as CURRENT_GENERATOR } from "@db/migrations/v180_add_email_sent_environment_data";
