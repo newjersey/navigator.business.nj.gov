@@ -200,6 +200,8 @@ collections:
                 fields:
                   - { label: Summary Text Pt.1, name: partOne, widget: string }
                   - { label: Summary Text Pt.2, name: partTwo, widget: string }
+                  - { label: Summary Text Pt.3, name: partThree, widget: string }
+                  - { label: Summary Text Pt.4, name: partFour, widget: string }
                   - label: Media Area Texts
                     name: mediaAreaText
                     collapsed: true
@@ -222,6 +224,15 @@ collections:
                   - { label: Title, name: title, widget: text }
                   - { label: Body, name: body, widget: markdown }
                   - { label: Contact, name: contact, widget: text }
+                  - { label: Success Alert, name: successAlert, widget: text }
+                  - { label: Direct Contact, name: directContactInfo, widget: text }
+                  - { label: Submission Cadence, name: submissionCadence, widget: text }
+                  - { label: Email Error, name: emailErrorText, widget: text }
+                  - { label: General Error, name: generalErrorText, widget: text }
+                  - { label: Email Error Alert, name: emailErrorAlertText, widget: text }
+                  - { label: General Error Alert, name: generalErrorAlertText, widget: text }
+                  - { label: Contact SBAP Button, name: contactSbapButton, widget: string }
+                  - { label: Email Address Label, name: emailLabel, widget: string }
               - label: Contact DEP
                 name: contactDep
                 collapsed: true

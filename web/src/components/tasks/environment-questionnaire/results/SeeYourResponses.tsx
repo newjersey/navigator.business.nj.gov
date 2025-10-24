@@ -1,37 +1,15 @@
 import { Content } from "@/components/Content";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
+import { optionsMarkedTrueForMediaArea } from "@/components/tasks/environment-questionnaire/results/helpers";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
 import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  MediaArea,
-  Questionnaire,
-  QuestionnaireConfig,
-  QuestionnaireFieldIds,
-} from "@businessnjgovnavigator/shared/environment";
+import { MediaArea, Questionnaire } from "@businessnjgovnavigator/shared/environment";
 import { ReactElement, useContext } from "react";
 
 export const SeeYourResponses = (): ReactElement => {
   const Config = getMergedConfig();
   const envContext = useContext(EnvPermitContext);
-
-  const optionsMarkedTrueForMediaArea = (
-    questionnaire: Questionnaire,
-    mediaArea: MediaArea,
-  ): string[] => {
-    if (!questionnaire) return [];
-
-    const optionsMarkedTrue: string[] = [];
-    const questionnaireConfig = Config.envQuestionPage[mediaArea]
-      .questionnaireOptions as QuestionnaireConfig;
-
-    for (const [optionId, selected] of Object.entries(questionnaire)) {
-      const text = questionnaireConfig[optionId as QuestionnaireFieldIds];
-      selected === true && optionsMarkedTrue.push(text);
-    }
-
-    return optionsMarkedTrue;
-  };
 
   const responses: Record<string, string[]> = {};
 

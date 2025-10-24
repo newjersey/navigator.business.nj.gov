@@ -2,6 +2,8 @@ import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
 import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
+import { employerRatesRouterFactory } from "@api/employerRatesRouter";
+import { environmentPermitEmailRouter } from "@api/environmentPermitEmailRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
 import { healthCheckRouterFactory } from "@api/healthCheckRouter";
@@ -15,6 +17,7 @@ import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClie
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
+import { ApiEnvPermitEmailClient } from "@client/ApiEnvPermitEmailClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
@@ -47,6 +50,7 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
+import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
 import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/webservice/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
@@ -86,8 +90,6 @@ import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
-import { employerRatesRouterFactory } from "@api/employerRatesRouter";
-import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
 
 const app = setupExpress();
 
@@ -379,6 +381,8 @@ const xrayRegistrationSearch = XrayRegistrationSearchClient(
 
 const xrayRegistrationLookup = XrayRegistrationLookupClient(xrayRegistrationSearch, logger);
 
+const environmentPermitEmailClient = ApiEnvPermitEmailClient(logger);
+
 const updateXrayStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookup);
 
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
@@ -509,6 +513,8 @@ app.use(
 );
 
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
+
+app.use("/api", environmentPermitEmailRouter(environmentPermitEmailClient, logger));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

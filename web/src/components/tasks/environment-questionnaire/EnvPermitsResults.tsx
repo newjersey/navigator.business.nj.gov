@@ -42,13 +42,27 @@ export const EnvPermitsResults = (): ReactElement => {
     analytics.event.gen_guidance_stepper_permits_required_displayed.appears.general_guidance_permits_req_displayed();
     return (
       <>
-        <div className={"padding-bottom-3"}>
+        <div>
           {Config.envResultsPage.summary.partOne}
           <span data-testid={"applicable-media-areas"} className={"text-bold margin-x-05"}>
             {applicableMediaAreasText()}
           </span>
           {Config.envResultsPage.summary.partTwo}
         </div>
+        <div className="margin-y-1">
+          {Config.envResultsPage.summary.partThree}
+          <UnStyledButton
+            isUnderline
+            className="margin-left-05"
+            onClick={() => {
+              analytics.event.gen_guidance_stepper_env_req_edits.click.general_guidance_env_req_edits();
+              envContext.onClickForEdit();
+            }}
+          >
+            {Config.envResultsPage.summary.partFour}
+          </UnStyledButton>
+        </div>
+        <hr />
         <PersonalizedSupport />
         <ContactDep />
         <SeeYourResponses />
