@@ -233,8 +233,6 @@ handling the integration with AWS Lambdas.
 We use Serverless Framework to deploy the backend app. If you do this locally, your local
 `serverless` CLI needs to be configured with AWS credentials.
 
-Locally, it uses `serverless-offline` and `serverless-dynamodb` to run and simulate the AWS
-environment. Everything AWS and serverless is configured in `./api/serverless.ts`.
 
 The backend app itself is defined in `src/functions/migrate.ts` and is mostly a regular Express app,
 except it wraps its export in `serverless` to become a handler. Then, `src/functions/index.ts`

@@ -12,7 +12,7 @@ import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 
-describe("Performance and Accessability - Landing Page [all] [group2]", () => {
+describe("Performance and Accessibility - Landing Page [all] [group2]", () => {
   describe("Desktop", () => {
     it("should pass the audits", () => {
       cy.visit("/");
@@ -35,7 +35,7 @@ describe("Performance and Accessability - Landing Page [all] [group2]", () => {
   });
 });
 
-describe("Performance and Accessability - Onboarding [all] [group4]", () => {
+describe("Performance and Accessibility - Onboarding [all] [group4]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
@@ -43,6 +43,7 @@ describe("Performance and Accessability - Onboarding [all] [group4]", () => {
   describe("Onboarding - starting flow", () => {
     describe("Step 1", () => {
       it("should pass the audits", () => {
+        cy.wait(1000);
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPage.selectBusinessPersona("STARTING");
 
