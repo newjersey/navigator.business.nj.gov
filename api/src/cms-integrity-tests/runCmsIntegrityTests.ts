@@ -9,5 +9,6 @@ export const runCmsIntegrityTests = async (stage: string, logger: LogWriterType)
 
   if (topicArnIsSetForThisEnvironment) {
     await checkAnytimeActionCategoryUsage(topicArn, stage, logger);
+    // need to add my checks here
   }
 };
