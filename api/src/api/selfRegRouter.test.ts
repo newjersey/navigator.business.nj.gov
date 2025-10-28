@@ -1,5 +1,5 @@
 import { selfRegRouterFactory } from "@api/selfRegRouter";
-import { DatabaseClient, SelfRegClient } from "@domain/types";
+import { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
@@ -16,6 +16,7 @@ describe("selfRegRouter", () => {
 
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
   let stubSelfRegClient: jest.Mocked<SelfRegClient>;
+  let stubMessagingServiceClient: jest.Mocked<MessagingServiceClient>;
 
   beforeEach(async () => {
     stubDynamoDataClient = {
@@ -33,8 +34,20 @@ describe("selfRegRouter", () => {
       resume: jest.fn(),
     };
 
+    stubMessagingServiceClient = {
+      sendEmail: jest.fn().mockResolvedValue({ success: true, messageId: "test-message-id" }),
+      health: jest.fn(),
+    };
+
     app = setupExpress(false);
-    app.use(selfRegRouterFactory(stubDynamoDataClient, stubSelfRegClient, DummyLogWriter));
+    app.use(
+      selfRegRouterFactory(
+        stubDynamoDataClient,
+        stubSelfRegClient,
+        stubMessagingServiceClient,
+        DummyLogWriter,
+      ),
+    );
   });
 
   afterAll(async () => {
@@ -70,6 +83,15 @@ describe("selfRegRouter", () => {
 
       expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
+
+      // Verify welcome email is sent
+      expect(stubMessagingServiceClient.sendEmail).toHaveBeenCalledWith(
+        stubRecordWithMyNJKey.user.email.toLowerCase(),
+        {
+          templateId: "welcome-email",
+          templateData: { name: stubRecordWithMyNJKey.user.name },
+        },
+      );
     });
 
     it("returns an INTERNAL SERVER ERROR when auth resume fails", async () => {
@@ -79,6 +101,9 @@ describe("selfRegRouter", () => {
       const response = await sendRequest(stubRecordWithMyNJKey);
       expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+
+      // Verify welcome email is NOT sent when registration fails
+      expect(stubMessagingServiceClient.sendEmail).not.toHaveBeenCalled();
     });
 
     it("returns a CONFLICT error when auth resume returns DUPLICATE_SIGNUP", async () => {
@@ -112,6 +137,14 @@ describe("selfRegRouter", () => {
 
       expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
+
+      expect(stubMessagingServiceClient.sendEmail).toHaveBeenCalledWith(
+        stubRecordNoKey.user.email.toLowerCase(),
+        {
+          templateId: "welcome-email",
+          templateData: { name: stubRecordNoKey.user.name },
+        },
+      );
     });
 
     it("returns an INTERNAL SERVER ERROR when auth grant fails", async () => {
@@ -129,6 +162,22 @@ describe("selfRegRouter", () => {
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
       expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
       expect(response.status).toEqual(StatusCodes.CONFLICT);
+    });
+
+    it("successfully completes registration even if email sending fails", async () => {
+      const selfRegResponse = generateSelfRegResponse({});
+      stubSelfRegClient.grant.mockResolvedValue(selfRegResponse);
+      stubMessagingServiceClient.sendEmail.mockResolvedValue({
+        success: false,
+        error: "Email service unavailable",
+      });
+
+      const response = await sendRequest(stubRecordNoKey);
+
+      expect(response.status).toEqual(StatusCodes.OK);
+      expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
+
+      expect(stubMessagingServiceClient.sendEmail).toHaveBeenCalled();
     });
   });
 
