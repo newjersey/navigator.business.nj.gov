@@ -1,4 +1,4 @@
-import { DatabaseClient, SelfRegClient } from "@domain/types";
+import { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { UserData } from "@shared/userData";
@@ -14,6 +14,7 @@ type Mutable<T> = {
 export const selfRegRouterFactory = (
   databaseClient: DatabaseClient,
   selfRegClient: SelfRegClient,
+  messagingServiceClient: MessagingServiceClient,
   logger: LogWriterType,
 ): Router => {
   const router = Router();
@@ -37,6 +38,26 @@ export const selfRegRouterFactory = (
         ? selfRegClient.resume(cleanedUserData.user.myNJUserKey)
         : selfRegClient.grant(cleanedUserData.user));
       const updatedUserData = await updateMyNJKey(cleanedUserData, selfRegResponse.myNJUserKey);
+
+      messagingServiceClient
+        .sendMessage(cleanedUserData.user.id, "welcome-email")
+        .then((result) => {
+          if (result.success) {
+            logger.LogInfo(
+              `Welcome message sent successfully for userId: ${cleanedUserData.user.id}, messageId: ${result.messageId}`,
+            );
+          } else {
+            logger.LogError(
+              `Failed to send welcome message for userId: ${cleanedUserData.user.id}: ${result.error}`,
+            );
+          }
+        })
+        .catch((error) => {
+          logger.LogError(
+            `Error sending welcome message for userId: ${cleanedUserData.user.id}: ${error instanceof Error ? error.message : String(error)}`,
+          );
+        });
+
       logger.LogInfo(
         `[END] ${method} ${endpoint} - status: ${status}, successfully completed self-registration for user: ${
           cleanedUserData.user.email

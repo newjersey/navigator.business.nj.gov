@@ -24,6 +24,7 @@ import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
 } from "@shared/emergencyTripPermit";
+import { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import {
@@ -42,7 +43,6 @@ import { Business, UserData } from "@shared/userData";
 import { AxiosResponse } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
-import { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
 
 export interface DatabaseClient {
   migrateOutdatedVersionUsers: () => Promise<{
@@ -307,3 +307,17 @@ export type UpdateXrayRegistration = (
   userData: UserData,
   facilityDetails: FacilityDetails,
 ) => Promise<UserData>;
+
+export interface MessagingServiceClient {
+  sendMessage: (
+    userId: string,
+    messageType: string,
+  ) => Promise<{ success: boolean; messageId?: string; error?: string }>;
+  health: HealthCheckMethod;
+}
+
+export interface MessageResponse {
+  success: boolean;
+  messageId?: string;
+  error?: string;
+}
