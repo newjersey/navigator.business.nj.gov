@@ -18,6 +18,7 @@
     "quarterDropdownTooltipText": "Rates for the upcoming year will be available on October 1.",
     "dolEinAlertLabelText": "DOL EIN",
     "dolEinLabelText": "***`DOL EIN|dol-ein`***",
-    "dolEinErrorText": "DOL EIN must be 15 digits."
+    "dolEinErrorText": "DOL EIN must be 15 digits.",
+    "serverErrorText": "**This service is temporarily unavailable.** Try again later."
   }
 }
