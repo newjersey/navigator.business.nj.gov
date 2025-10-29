@@ -1,3 +1,24 @@
+# [2025.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.21.0...v2025.22.0) (2025-10-29)
+
+
+### Bug Fixes
+
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] minor copy change to text ([104031b](https://github.com/newjersey/navigator.business.nj.gov/commit/104031b398f152a1bc5ece83dac06351ca7e2016))
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] test fix inline with copy change ([c20c5e1](https://github.com/newjersey/navigator.business.nj.gov/commit/c20c5e17b8fa9e0cf26811cdc018b88776af9438))
+* [AB[#16352](https://github.com/newjersey/navigator.business.nj.gov/issues/16352)] tax-clearance loading spinner ([a4ec889](https://github.com/newjersey/navigator.business.nj.gov/commit/a4ec889ccf04c1147ee7983fc61624441db59d25))
+* **deps:** update nextjs monorepo to v15.5.6 ([180cb59](https://github.com/newjersey/navigator.business.nj.gov/commit/180cb59fd8f25d54a820d5161a0747d880ab299b))
+
+
+### Features
+
+* [AB[#12618](https://github.com/newjersey/navigator.business.nj.gov/issues/12618)] formation billing cost column header added ([04c1e21](https://github.com/newjersey/navigator.business.nj.gov/commit/04c1e21e85704ce4d38a929831523aeeac729fef))
+* [AB[#16087](https://github.com/newjersey/navigator.business.nj.gov/issues/16087)] remove business functionality ([9e4966e](https://github.com/newjersey/navigator.business.nj.gov/commit/9e4966eac24dc6ce78c50331fe1194865455e11b))
+* [AB[#16087](https://github.com/newjersey/navigator.business.nj.gov/issues/16087)] remove business functionality ([b459323](https://github.com/newjersey/navigator.business.nj.gov/commit/b4593233ac4d9ced4910e8faf1ec8ea431bbae66))
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] anytime action search QA for no options and icon spacing ([184317d](https://github.com/newjersey/navigator.business.nj.gov/commit/184317d9eeeefb071b1917589dc7ae5d966ad8df))
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] dashboard anytime action dropdown to search field ([9d88ca3](https://github.com/newjersey/navigator.business.nj.gov/commit/9d88ca38074a9bcd825dfdb2df1a27c917d000fc))
+* [AB[#16205](https://github.com/newjersey/navigator.business.nj.gov/issues/16205)] added recommended for you section and CMS controls ([92b818d](https://github.com/newjersey/navigator.business.nj.gov/commit/92b818d10bb88c93afac72b88bba56d069b1e3d8))
+* [AB[#16230](https://github.com/newjersey/navigator.business.nj.gov/issues/16230)] add live chat help link in error messsage ([d31212e](https://github.com/newjersey/navigator.business.nj.gov/commit/d31212e7f8f2815ba3de38661d63d69545f12528))
+
 # [2025.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.20.0...v2025.21.0) (2025-10-03)
 
 
