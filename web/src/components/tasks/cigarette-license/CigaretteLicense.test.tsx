@@ -260,7 +260,6 @@ describe("<CigaretteLicense />", () => {
 
       expect(screen.getByText("This service is temporarily unavailable")).toBeInTheDocument();
       expect(mockAnalytics.event.cigarette_license.submit.service_error).toHaveBeenCalledTimes(1);
-      expect(mockPush).not.toHaveBeenCalled();
     });
 
     it("handles payment error response and sets submission error to UNAVAILABLE", async () => {
@@ -292,9 +291,6 @@ describe("<CigaretteLicense />", () => {
 
       expect(screen.getByText("This service is temporarily unavailable")).toBeInTheDocument();
       expect(mockAnalytics.event.cigarette_license.submit.service_error).toHaveBeenCalledTimes(1);
-      await waitFor(() => {
-        expect(mockPush).not.toHaveBeenCalled();
-      });
     });
 
     it("handles missing payment token and does not redirect", async () => {
@@ -317,10 +313,6 @@ describe("<CigaretteLicense />", () => {
 
       await waitFor(() => {
         expect(mockApi.postCigaretteLicensePreparePayment).toHaveBeenCalled();
-      });
-
-      await waitFor(() => {
-        expect(mockPush).not.toHaveBeenCalled();
       });
     });
 

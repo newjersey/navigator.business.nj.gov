@@ -3,6 +3,7 @@ import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { scrollToTopOfElement } from "@/lib/utils/helpers";
 import { StepperStep } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/compat/router";
 
 interface Props {
   steps: StepperStep[];
@@ -26,10 +27,24 @@ type StepperState =
 export const HorizontalStepper = (props: Props): ReactElement => {
   const [focusStep, setFocusStep] = useState(props.currentStep);
 
+  const router = useRouter();
   const { Config } = useConfig();
+
+  const updateStepInUrl = (step: number): void => {
+    router?.replace(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, step: step + 1 },
+      },
+      undefined,
+      { shallow: true },
+    );
+  };
 
   useEffect(() => {
     setFocusStep(props.currentStep);
+    updateStepInUrl(props.currentStep);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentStep]);
 
   useEffect(() => {
@@ -208,6 +223,11 @@ export const HorizontalStepper = (props: Props): ReactElement => {
 
   const divRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const handleClick = (index: number): void => {
+    props.onStepClicked(index);
+    updateStepInUrl(index);
+  };
+
   return (
     <>
       <div className={"horizontal-step-indicator display-block"}>
@@ -231,7 +251,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                   data-num={getIcon(index)}
                   data-state={determineState(index)}
                   data-testid={`stepper-${index}`}
-                  onClick={(): void => props.onStepClicked(index)}
+                  onClick={(): void => handleClick(index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   role="tab"
                   tabIndex={index === props.currentStep ? 0 : -1}
