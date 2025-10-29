@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import { ReactElement, useContext, useState } from "react";
 import { Heading } from "../njwds-extended/Heading";
 import { Content } from "@/components/Content";
@@ -17,6 +18,9 @@ import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableF
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { Alert } from "@/components/njwds-extended/Alert";
+import * as api from "@/lib/api-client/apiClient";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { EmployerRatesRequest } from "@businessnjgovnavigator/shared";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
@@ -27,6 +31,7 @@ export const DOL_EIN_CHARACTERS = 15;
 export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { userData } = useUserData();
 
   const initialEmployerAccess = isUndefined(state?.profileData.employerAccessRegistration)
     ? ""
@@ -44,6 +49,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const [quarter, setQuarter] = useState<EmployerRatesQuarterObject>(dropdownOptions[0]);
 
   const [dolEinError, setDolEinError] = useState<boolean>(previewMode || false);
+  const [serverError, setServerError] = useState<boolean>(previewMode || false);
 
   const handleDolEinChange = (value: string): void => {
     setProfileData((prev) => ({
@@ -58,6 +64,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     if (value === "false" && dolEinError) {
       setDolEinError(false);
     }
+    setServerError(false);
     setEmployerAccessRegistration(value);
     setProfileData((prev) => ({
       ...prev,
@@ -65,11 +72,38 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     }));
   };
 
-  const handleSubmit = (): void => {
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = (event: MouseEvent<Element>): void => {
+    if (!userData) return;
+    event.preventDefault();
+
+    if (serverError) {
+      setServerError(false);
+    }
+
     if (!isDolEinValid(state.profileData.deptOfLaborEin)) {
       setDolEinError(true);
       return;
     }
+
+    setLoading(true);
+    const employerRates = {
+      businessName: state.profileData.businessName,
+      email: userData.user.email,
+      ein: state.profileData.deptOfLaborEin,
+      qtr: quarter.quarter,
+      year: quarter.year,
+    } as EmployerRatesRequest;
+
+    api
+      .checkEmployerRates({ employerRates, userData })
+      //   .then((results) => {
+      //     setLoading(false);
+      //   })
+      .catch(() => {
+        setServerError(true);
+        setLoading(false);
+      });
   };
 
   return (
@@ -83,6 +117,14 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
             <li>
               <a href={`#question-dolEin`}>{Config.employerRates.dolEinAlertLabelText}</a>
             </li>
+          </Alert>
+        </div>
+      )}
+
+      {serverError && (
+        <div role="status" aria-live="polite" className="margin-y-2">
+          <Alert variant={"error"} dataTestid="serverError">
+            <Content>{Config.employerRates.serverErrorText}</Content>
           </Alert>
         </div>
       )}
@@ -129,7 +171,12 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
                   error={dolEinError}
                   validationText={Config.employerRates.dolEinErrorText}
                   onChange={handleDolEinChange}
-                  onValidation={(_, invalid) => setDolEinError(invalid)}
+                  onValidation={(_, invalid) => {
+                    if (invalid && serverError) {
+                      setServerError(false);
+                    }
+                    setDolEinError(invalid);
+                  }}
                   value={state.profileData.deptOfLaborEin}
                 />
               </div>
@@ -140,7 +187,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
             quarter={quarter}
             setQuarter={setQuarter}
           />
-          <SecondaryButton isColor="primary" onClick={handleSubmit}>
+          <SecondaryButton isColor="primary" onClick={handleSubmit} isLoading={loading}>
             {Config.employerRates.employerAccessYesButtonText}
           </SecondaryButton>
         </div>
