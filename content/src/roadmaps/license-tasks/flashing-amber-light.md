@@ -1,26 +1,17 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1J9l9n_cAurZ1fKzk4hGbzABD68rV-WNCi_4q_rImQx0/edit?tab=t.zc2285uxxift#heading=h.m209clcqp04w"
-licenseName: ""
 id: flashing-amber-light
-displayname: flashing-amber-light
+webflowId: 69022606b2fa68078fc7da85
 urlSlug: flashing-amber-light
 name: Apply for a Flashing Amber Light Permit
+displayname: flashing-amber-light
 webflowName: Flashing Amber Light Permit
-summaryDescriptionMd: You need a Flashing Amber Light permit to use amber
-  (yellow) warning lights on your vehicle for certain types of work. These
-  lights warn others of potential hazards when you work on public roads.
-industryId:
-  - commercial-construction
-  - auto-body-repair
-  - logistics
-  - security
-  - trucking
-  - remediation-waste
-  - generic
-callToActionText: Apply for My Flashing Amber Light Permit
+filename: flashing-amber-light
 callToActionLink: https://www.nj.gov/mvc/about/forms.htm#lightpermits
+callToActionText: Apply for My Flashing Amber Light Permit
 agencyId: nj-motor-vehicle
+industryId: commercial-construction,auto-body-repair,logistics,security,trucking,remediation-waste,generic
+licenseCertificationClassification: undefined
+summaryDescriptionMd: "You need a Flashing Amber Light permit to use amber (yellow) warning lights on your vehicle for certain types of work. These lights warn others of potential hazards when you work on public roads."
 ---
 
 ## Eligible Types of Work
