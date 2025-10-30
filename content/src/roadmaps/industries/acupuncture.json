@@ -59,7 +59,7 @@
   "displayname": "acupuncture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
