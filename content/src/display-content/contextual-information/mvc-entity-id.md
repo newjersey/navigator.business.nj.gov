@@ -1,5 +1,5 @@
 ---
-header: Motor Vehicle Commission EIN
+header: Motor Vehicle Commission MVC EIN
 id: mvc-entity-id
 displayname: mvc-ein
 ---
