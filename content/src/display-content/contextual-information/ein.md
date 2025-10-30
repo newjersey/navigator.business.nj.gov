@@ -1,5 +1,5 @@
 ---
-header: Employer Identification Number
+header: Employer Identification Number (EIN)
 id: ein
 displayname: ein
 ---
