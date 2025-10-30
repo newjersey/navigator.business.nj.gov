@@ -1,7 +1,7 @@
 ---
+header: Significantly Involved Person (SIP) for a Cannabis Business
 id: sip-cannabis
 displayname: sip-cannabis
-header: Significantly Involved Person
 ---
 
 A Significantly Involved Person is either:
