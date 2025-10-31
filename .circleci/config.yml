@@ -668,25 +668,6 @@ commands:
           image-name: bfs_navigator_builder-22_20_0
 
 jobs:
-  merge-content:
-    docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
-    steps:
-      - checkout
-      - run:
-          name: Update content-repo branch
-          command: |
-            export GIT_MERGE_AUTOEDIT=no
-            gh auth setup-git
-            git config --global user.email "business-engineering@innovation.nj.gov"
-            git config --global user.name  "NJ Innovation CI"
-            git checkout content-repo
-            git merge origin/main
-            git push
-
   build:
     docker:
       - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
@@ -1136,13 +1117,6 @@ workflows:
       #          - main
       #    requires:
       #      - dev-deploy
-      - merge-content:
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
 
   # browser-testing:
   #   triggers:

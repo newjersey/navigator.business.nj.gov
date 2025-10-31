@@ -31,4 +31,4 @@ jobs:
           git merge origin/main --no-edit
 
       - name: Push merged branch
-        run: echo "Would push to content-repo"
+        run: git push origin content-repo
