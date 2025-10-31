@@ -1,35 +1,77 @@
 import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import { DOL_EIN_CHARACTERS } from "@/components/employer-rates/EmployerRatesQuestions";
 import {
+  generateBusiness,
   generateProfileData,
+  generateUser,
+  generateUserDataForBusiness,
   getMergedConfig,
   OperatingPhaseId,
   ProfileData,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createTheme, ThemeProvider } from "@mui/material";
+import * as api from "@/lib/api-client/apiClient";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+
+jest.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
+  const actual = jest.requireActual("@businessnjgovnavigator/shared/dateHelpers");
+  const dayjsMod = jest.requireActual("dayjs");
+  const realDayjs = dayjsMod.default || dayjsMod;
+  return {
+    ...actual,
+    getCurrentDate: jest.fn(() => realDayjs("2023-10-01")),
+  };
+});
 
 const Config = getMergedConfig();
 const originalOpen = window.open;
 
+jest.mock("@/lib/api-client/apiClient", () => ({
+  checkEmployerRates: jest.fn(),
+}));
+
+const mockApi = api as jest.Mocked<typeof api>;
+
 describe("EmployerRates", () => {
+  let dateNowSpy: jest.SpyInstance<number, []>;
+
+  beforeAll(() => {
+    dateNowSpy = jest
+      .spyOn(Date, "now")
+      .mockReturnValue(new Date("2024-10-01T00:00:00Z").getTime());
+  });
+
   beforeEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   afterEach(() => {
     window.open = originalOpen;
   });
 
+  afterAll(() => {
+    dateNowSpy.mockRestore();
+  });
+
+  let userData: UserData;
+
   const renderComponents = (overrides?: Partial<ProfileData>): void => {
     const profileData = generateProfileData(overrides ?? {});
+    const business = generateBusiness({ profileData });
+    userData = generateUserDataForBusiness(business, {
+      user: generateUser({ id: business.userId, email: "test@msn.com" }),
+    });
     render(
       <ThemeProvider theme={createTheme()}>
-        <WithStatefulProfileData initialData={profileData}>
-          <EmployerRates />
-        </WithStatefulProfileData>
+        <WithStatefulUserData initialUserData={userData}>
+          <WithStatefulProfileData initialData={profileData}>
+            <EmployerRates />
+          </WithStatefulProfileData>
+        </WithStatefulUserData>
       </ThemeProvider>,
     );
   };
@@ -227,5 +269,106 @@ describe("EmployerRates", () => {
     await userEvent.click(falseRadio);
 
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
+  it("calls checkEmployerRates endpoint", async () => {
+    mockApi.checkEmployerRates.mockRejectedValue(new Error("500"));
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(mockApi.checkEmployerRates).toHaveBeenCalledWith({
+      employerRates: {
+        ein: "123451234512345",
+        businessName: "Test Business",
+        email: "test@msn.com",
+        qtr: 4,
+        year: 2024,
+      },
+      userData: userData,
+    });
+  });
+
+  it("renders a server error alert when the api call fails", async () => {
+    mockApi.checkEmployerRates.mockRejectedValue(new Error("500"));
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+    expect(screen.getByTestId("serverError")).toBeInTheDocument();
+  });
+
+  it("removes server error when radio selection changes", async () => {
+    mockApi.checkEmployerRates.mockRejectedValue(new Error("500"));
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+    expect(screen.getByTestId("serverError")).toBeInTheDocument();
+
+    const falseRadio = screen.getByRole("radio", {
+      name: Config.employerRates.employerAccessFalseText,
+    });
+    await userEvent.click(falseRadio);
+
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
+  it("removes server error when there is a dol ein error", async () => {
+    mockApi.checkEmployerRates.mockRejectedValue(new Error("500"));
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+    expect(screen.getByTestId("serverError")).toBeInTheDocument();
+
+    const textbox = screen.getByRole("textbox");
+    const user = userEvent.setup();
+    user.clear(textbox);
+    const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
+    await user.type(textbox, toType);
+    await user.tab();
+
+    expect(await screen.findByText(Config.employerRates.dolEinErrorText)).toBeInTheDocument();
+    expect(screen.queryByTestId("serverError")).not.toBeInTheDocument();
   });
 });

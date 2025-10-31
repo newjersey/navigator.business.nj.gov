@@ -2951,6 +2951,8 @@ collections:
                   name: employerAccessHeaderText,
                   widget: string,
                 }
+              - { label: DOL EIN Alert Label Text, name: dolEinAlertLabelText, widget: string }
+              - { label: Server Error Alert Text, name: serverErrorText, widget: markdown }
               - { label: Employer Access Question Text, name: employerAccessText, widget: markdown }
               - {
                   label: Employer Access Question Is True Text,
@@ -2962,7 +2964,6 @@ collections:
                   name: employerAccessFalseText,
                   widget: string,
                 }
-              - { label: DOL EIN Alert Label Text, name: dolEinAlertLabelText, widget: string }
               - { label: DOL EIN Label Text, name: dolEinLabelText, widget: markdown }
               - { label: DOL EIN Error Text, name: dolEinErrorText, widget: string }
               - {
