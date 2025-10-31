@@ -75,6 +75,7 @@ export interface BusinessesDataClient {
   get: (businessId: string) => Promise<Business>;
   put: (businessData: Business) => Promise<Business>;
   deleteBusinessById: (businessId: string) => Promise<void>;
+  deleteExpiredBusinesses: () => Promise<void>;
   findByBusinessName: (businessName: string) => Promise<Business | undefined>;
   findAllByNAICSCode: (naicsCode: string) => Promise<Business[]>;
   findAllByIndustry: (industry: string) => Promise<Business[]>;

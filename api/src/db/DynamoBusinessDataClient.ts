@@ -1,4 +1,11 @@
-import { AttributeValue, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import {
+  AttributeValue,
+  BatchWriteItemCommand,
+  BatchWriteItemCommandInput,
+  QueryCommand,
+  QueryCommandInput,
+  ScanCommand,
+} from "@aws-sdk/client-dynamodb";
 import {
   DeleteCommand,
   DynamoDBDocumentClient,
@@ -6,9 +13,9 @@ import {
   PutCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { BusinessesDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { Business } from "@shared/userData";
+import { BusinessesDataClient } from "@domain/types";
 
 export const DynamoBusinessDataClient = (
   db: DynamoDBDocumentClient,
@@ -163,10 +170,75 @@ export const DynamoBusinessDataClient = (
         throw new Error("Failed to delete business");
       });
   };
+
+  const deleteExpiredBusinesses = async (): Promise<void> => {
+    try {
+      const DAYS_TO_EXPIRE = 30;
+      const BATCH_SIZE = 30;
+      const cutoffDate = new Date(Date.now() - DAYS_TO_EXPIRE * 24 * 60 * 60 * 1000).toISOString();
+
+      const scanParams = {
+        TableName: tableName,
+        FilterExpression:
+          "attribute_exists(#data.#deleted) AND #data.#deleted <> :empty AND #data.#deleted < :cutoff",
+        ExpressionAttributeNames: {
+          "#data": "data",
+          "#deleted": "dateDeletedISO",
+        },
+        ExpressionAttributeValues: {
+          ":empty": { S: "" },
+          ":cutoff": { S: cutoffDate },
+        },
+        ProjectionExpression: "businessId, #data.#deleted",
+      };
+
+      const command = new ScanCommand(scanParams);
+      const result = await db.send(command);
+
+      if (!result.Items || result.Items.length === 0) {
+        logger.LogInfo("No deleted businesses found for cleanup.");
+        return;
+      }
+
+      logger.LogInfo(`Found ${result?.Items.length} expired businesses to delete.`);
+
+      const validItems = result.Items.filter(
+        (item) => item.businessId && item.businessId.S && item.businessId.S.trim() !== "",
+      );
+
+      const deleteRequests = validItems.map((item) => ({
+        DeleteRequest: {
+          Key: {
+            businessId: { S: item.businessId!.S! }, // non-null asserted now safe
+          },
+        },
+      }));
+
+      for (let i = 0; i < deleteRequests.length; i += BATCH_SIZE) {
+        const batch = deleteRequests.slice(i, i + BATCH_SIZE);
+        const batchParams: BatchWriteItemCommandInput = {
+          RequestItems: {
+            [tableName]: batch,
+          },
+        };
+        const batchResult = await db.send(new BatchWriteItemCommand(batchParams));
+
+        if (batchResult.UnprocessedItems && Object.keys(batchResult.UnprocessedItems).length > 0) {
+          logger.LogError("Some items were not processed:");
+        }
+
+        logger.LogInfo(`Deleted batch ${i / BATCH_SIZE + 1} (${batch.length} items)`);
+      }
+    } catch (error) {
+      logger.LogError(`Error deleting expired businesses: ${error}`);
+    }
+  };
+
   return {
     get,
     put,
     deleteBusinessById,
+    deleteExpiredBusinesses,
     findByBusinessName,
     findAllByIndustry,
     findAllByNAICSCode,

@@ -8,6 +8,7 @@ import { randomInt } from "@shared/intHelpers";
 import { generateBusiness, generateProfileData, generateTaxFilingData } from "@shared/test";
 import { CURRENT_VERSION } from "@shared/userData";
 import dayjs from "dayjs";
+import { Business } from "@businessnjgovnavigator/shared";
 
 // references jest-dynalite-config values
 const dbConfig = {
@@ -29,20 +30,25 @@ describe("DynamoBusinessesDataClient", () => {
   const industryId = "test-industry";
   const hashedTaxId = `some-hashed-tax-id-${randomInt()}`;
 
-  const businessData = generateBusiness({
-    profileData: generateProfileData({
-      dateOfFormation,
-      entityId: undefined,
-      legalStructureId: "limited-liability-company",
-      naicsCode,
-      industryId,
-      hashedTaxId,
-    }),
-    taxFilingData: generateTaxFilingData({
-      filings: [],
-    }),
-    version: CURRENT_VERSION,
-  });
+  const getBusiness = (business: Partial<Business>): Business => {
+    return generateBusiness({
+      profileData: generateProfileData({
+        dateOfFormation,
+        entityId: undefined,
+        legalStructureId: "limited-liability-company",
+        naicsCode,
+        industryId,
+        hashedTaxId,
+      }),
+      taxFilingData: generateTaxFilingData({
+        filings: [],
+      }),
+      dateDeletedISO: business.dateDeletedISO,
+      version: CURRENT_VERSION,
+    });
+  };
+
+  const businessData = getBusiness({});
 
   beforeEach(() => {
     logger = DummyLogWriter;
@@ -140,5 +146,59 @@ describe("DynamoBusinessesDataClient", () => {
     await expect(dynamoBusinessesDataClient.get(businessId)).rejects.toEqual(
       new Error(`Business with ID ${businessId} not found in table ${dbConfig.tableName}`),
     );
+  });
+
+  it("deletes a business when dateExpired ISO is greater than or equal to 30 days later", async () => {
+    const businessData = generateBusiness({
+      dateDeletedISO: new Date(Date.now() - 31 * 24 * 60 * 60 * 1000).toISOString(),
+    });
+    const businessId = businessData.id;
+    await dynamoBusinessesDataClient.put(businessData);
+
+    const expectedValueBeforeDelete = await dynamoBusinessesDataClient.get(businessId);
+    expect(expectedValueBeforeDelete).toBeDefined();
+    expect(expectedValueBeforeDelete).toEqual(businessData);
+    expect(expectedValueBeforeDelete.dateDeletedISO).toBeDefined();
+
+    await dynamoBusinessesDataClient.deleteExpiredBusinesses();
+    await expect(dynamoBusinessesDataClient.get(businessId)).rejects.toEqual(
+      new Error(`Business with ID ${businessId} not found in table ${dbConfig.tableName}`),
+    );
+  });
+
+  it("does not delete a business when dateExpired ISO is not set", async () => {
+    const businessData = generateBusiness({});
+    const businessId = businessData.id;
+    await dynamoBusinessesDataClient.put(businessData);
+
+    const expectedValueBeforeDelete = await dynamoBusinessesDataClient.get(businessId);
+    expect(expectedValueBeforeDelete).toBeDefined();
+    expect(expectedValueBeforeDelete).toEqual(businessData);
+    expect(expectedValueBeforeDelete.dateDeletedISO).toBeDefined();
+
+    await dynamoBusinessesDataClient.deleteExpiredBusinesses();
+    const expectedValue = await dynamoBusinessesDataClient.findByBusinessName(
+      businessData.profileData.businessName,
+    );
+    expect(expectedValue).toEqual(expectedValueBeforeDelete);
+  });
+
+  it("does not delete a business when dateExpired ISO is less than 30 days", async () => {
+    const businessData = generateBusiness({
+      dateDeletedISO: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    });
+    const businessId = businessData.id;
+    await dynamoBusinessesDataClient.put(businessData);
+
+    const expectedValueBeforeDelete = await dynamoBusinessesDataClient.get(businessId);
+    expect(expectedValueBeforeDelete).toBeDefined();
+    expect(expectedValueBeforeDelete).toEqual(businessData);
+    expect(expectedValueBeforeDelete.dateDeletedISO).toBeDefined();
+
+    await dynamoBusinessesDataClient.deleteExpiredBusinesses();
+    const expectedValue = await dynamoBusinessesDataClient.findByBusinessName(
+      businessData.profileData.businessName,
+    );
+    expect(expectedValue).toEqual(expectedValueBeforeDelete);
   });
 });
