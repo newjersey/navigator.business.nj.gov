@@ -1,5 +1,9 @@
 import { generateInputFile } from "@/test/factories";
 import {
+  generateEmployerRatesRequestData,
+  generateEmployerRatesResponse,
+} from "@businessnjgovnavigator/shared";
+import {
   generateLicenseSearchNameAndAddress,
   generateTaxIdAndBusinessName,
   generateUser,
@@ -18,11 +22,8 @@ import {
   postTaxFilingsOnboarding,
   postUserData,
   postUserEmailCheck,
+  sendEnvironmentPermitEmail,
 } from "./apiClient";
-import {
-  generateEmployerRatesRequestData,
-  generateEmployerRatesResponse,
-} from "@businessnjgovnavigator/shared";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -110,6 +111,26 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postNewsletter(userData)).toEqual(userData);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/external/newsletter", userData, {});
+  });
+
+  it("posts environmentPermitEmail without token", async () => {
+    const emailMetaData = {
+      userName: "Test User",
+      businessName: "Test Business",
+      email: "test@example.com",
+      industry: "generic",
+      location: "Trenton",
+      phase: "FORMED",
+      naicsCode: "12345",
+      questionnaireResponses: "RESPONSES",
+    };
+    mockAxios.post.mockResolvedValue({ data: "SUCCESS" });
+    expect(await sendEnvironmentPermitEmail(emailMetaData)).toEqual("SUCCESS");
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/environment-permit-email",
+      { emailMetaData },
+      {},
+    );
   });
 
   it("posts business formation request", async () => {
