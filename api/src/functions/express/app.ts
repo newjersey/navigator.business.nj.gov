@@ -49,6 +49,7 @@ import { RegulatedBusinessDynamicsLicenseHealthCheckClient } from "@client/dynam
 import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
+import { createMessagingServiceClient } from "@client/MessagingServiceClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
 import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
@@ -481,7 +482,17 @@ app.use(
   "/api",
   housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient, logger),
 );
-app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient, logger));
+
+const messagingServiceClient = createMessagingServiceClient({
+  // TODO: can probably change local to reach messaging-service-dev when lambdas are deployed
+  functionName: STAGE === "local" ? "sendEmailTest" : `messaging-service-${STAGE}`,
+  logWriter: logger,
+});
+
+app.use(
+  "/api",
+  selfRegRouterFactory(dynamoDataClient, selfRegClient, messagingServiceClient, logger),
+);
 app.use(
   "/api",
   formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }, logger),
@@ -507,6 +518,7 @@ app.use(
       ["xray-registration", xrayRegistrationHealthCheckClient],
       ["cigarette-license", cigaretteLicenseHealthCheckClient],
       ["cigarette-email-client", cigaretteLicenseEmailClient.health],
+      ["messaging-service", messagingServiceClient.health],
     ]),
     logger,
   ),

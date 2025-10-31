@@ -48,6 +48,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@aws-sdk/client-lambda" },
+    },
+    {
+      from: {},
       to: { path: "@smithy/node-http-handler" },
     },
     {

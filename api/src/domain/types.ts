@@ -307,3 +307,17 @@ export type UpdateXrayRegistration = (
   userData: UserData,
   facilityDetails: FacilityDetails,
 ) => Promise<UserData>;
+
+export interface MessagingServiceClient {
+  sendEmail: (
+    toEmailAddress: string,
+    options?: { templateId?: string; templateData?: Record<string, string> },
+  ) => Promise<{ success: boolean; messageId?: string; error?: string }>;
+  health: HealthCheckMethod;
+}
+
+export interface MessageResponse {
+  success: boolean;
+  messageId?: string;
+  error?: string;
+}
