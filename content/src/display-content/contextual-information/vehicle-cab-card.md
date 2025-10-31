@@ -1,5 +1,5 @@
 ---
-header: Cab card
+header: "Cab card "
 id: vehicle-cab-card
 displayname: vehicle-cab-card
 ---
