@@ -20,11 +20,10 @@ summaryDescriptionMd: >-
   You cannot request replacements for damaged or lost decals through the online service. To get the decals, email lru@dep.nj.gov. In your email, explain why you need a replacement decal. Include this information for each decal request:
 
 
-  * A scanned copy of the 
+  * A scanned copy of the `cab card|vehicle-cab-card` 
 
-     `cab card|vehicle-cab-card` 
+  , or
 
-    , or
   * The VIN, license plate number, and state of issuance
 
 
@@ -60,7 +59,7 @@ callToActionLink: "https://dep.nj.gov/wastedecals/ "
 * Scanned copy of the [lease agreement and certification](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf), if applicable
 
 :::infoAlert 
- **Keep in mind:**
+ **How to apply**
 
 There are two ways to apply online:
 
