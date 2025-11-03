@@ -1,9 +1,9 @@
 import * as cdk from "aws-cdk-lib";
-import { DataStack } from "../lib/dataStack";
-import { ApiStack } from "../lib/apiStack";
-import { LambdaStack } from "../lib/lambdaStack";
-import { IamStack } from "../lib/iamStack";
 import * as dotenv from "dotenv";
+import { ApiStack } from "../lib/apiStack";
+import { DataStack } from "../lib/dataStack";
+import { IamStack } from "../lib/iamStack";
+import { LambdaStack } from "../lib/lambdaStack";
 dotenv.config({ path: "../.env" });
 
 const app = new cdk.App();

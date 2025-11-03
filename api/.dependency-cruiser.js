@@ -20,6 +20,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@aws-sdk/client-ses" },
+    },
+    {
+      from: {},
       to: { path: "@aws-sdk/util-dynamodb" },
     },
     {
@@ -53,6 +57,10 @@ module.exports = {
     {
       from: {},
       to: { path: "util" },
+    },
+    {
+      from: {},
+      to: { path: "uuid" },
     },
     {
       from: {},

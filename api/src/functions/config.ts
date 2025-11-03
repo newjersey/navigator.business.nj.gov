@@ -1,6 +1,7 @@
 export const IS_DOCKER = process.env.IS_DOCKER === "true" || false;
 export const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 export const BUSINESSES_TABLE = process.env.BUSINESSES_TABLE || "businesses-table-local";
+export const MESSAGES_TABLE = process.env.MESSAGES_TABLE || "messages-table-local";
 export const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
 export const STAGE = process.env.STAGE || "local";
 
