@@ -1,15 +1,16 @@
+import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
 import { Stack, StackProps } from "aws-cdk-lib";
-import { Construct } from "constructs";
 import * as iam from "aws-cdk-lib/aws-iam";
-import { applyStandardTags } from "./stackUtils";
+import { Construct } from "constructs";
 import {
-  SERVICE_NAME,
-  DOCUMENT_S3_BUCKET_NAME,
-  USERS_TABLE,
-  BUSINESSES_TABLE,
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  BUSINESSES_TABLE,
   DEV_STAGE,
+  DOCUMENT_S3_BUCKET_NAME,
+  MESSAGES_TABLE,
+  USERS_TABLE,
 } from "./constants";
+import { applyStandardTags } from "./stackUtils";
 
 export interface IamStackProps extends StackProps {
   stage: string;
@@ -21,7 +22,7 @@ export class IamStack extends Stack {
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
-    this.serviceName = SERVICE_NAME;
+    this.serviceName = API_SERVICE_NAME;
 
     const putMetricDataPolicyInCloudwatch = new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
@@ -40,7 +41,9 @@ export class IamStack extends Stack {
     const messagingServiceInvokePolicy = new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
       actions: ["lambda:InvokeFunction"],
-      resources: [`arn:aws:lambda:${this.region}:*:function:messaging-service-*`],
+      resources: [
+        `arn:aws:lambda:${this.region}:*:function:${this.serviceName}-${props.stage}-messagingService`,
+      ],
       sid: "InvokeMessagingServiceLambda",
     });
 
@@ -78,11 +81,19 @@ export class IamStack extends Stack {
       ],
       resources: [
         `arn:aws:dynamodb:${this.region}:*:table/${USERS_TABLE}-${props.stage}`,
-        `arn:aws:dynamodb:${this.region}:*:table/${BUSINESSES_TABLE}-${props.stage}`,
         `arn:aws:dynamodb:${this.region}:*:table/${USERS_TABLE}-${props.stage}/index/*`,
+        `arn:aws:dynamodb:${this.region}:*:table/${BUSINESSES_TABLE}-${props.stage}`,
         `arn:aws:dynamodb:${this.region}:*:table/${BUSINESSES_TABLE}-${props.stage}/index/*`,
+        `arn:aws:dynamodb:${this.region}:*:table/${MESSAGES_TABLE}-${props.stage}`,
+        `arn:aws:dynamodb:${this.region}:*:table/${MESSAGES_TABLE}-${props.stage}/index/*`,
       ],
       sid: "DynamoDBAccessPolicy",
+    });
+
+    const sendEmailPolicy = new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ["ses:sendEmail", "ses:sendRawEmail"],
+      resources: [`arn:aws:ses:${this.region}:${this.account}:identity/business.nj.gov`],
     });
 
     const kmsEncryptPolicy = new iam.PolicyStatement({
@@ -132,6 +143,7 @@ export class IamStack extends Stack {
       s3ReadPolicy,
       kmsEncryptPolicy,
       messagingServiceInvokePolicy,
+      sendEmailPolicy,
     ];
 
     const appLogGroups = ["NavigatorWebService", "NavigatorDBClient", "HealthCheckService"];

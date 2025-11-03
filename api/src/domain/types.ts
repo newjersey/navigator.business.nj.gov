@@ -44,6 +44,24 @@ import { AxiosResponse } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
+export type MessageChannel = "email" | "sms" | "tts" | "whatsapp";
+export type MessageTemplateId = "welcome@v1";
+export type MessageTopic = "welcome";
+
+export interface MessageData {
+  taskId: string;
+  userId: string;
+  channel: MessageChannel;
+  templateId: MessageTemplateId;
+  topic: MessageTopic;
+  templateData: {
+    name: string;
+    business: string;
+  };
+  dueAt: string;
+  deliveredAt: string | undefined;
+  dateCreated: string;
+}
 export interface DatabaseClient {
   migrateOutdatedVersionUsers: () => Promise<{
     success: boolean;
@@ -80,6 +98,13 @@ export interface BusinessesDataClient {
   findAllByIndustry: (industry: string) => Promise<Business[]>;
   findBusinessesByNamePrefix: (prefix: string) => Promise<Business[]>;
   findAllByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
+}
+
+export interface MessagesDataClient {
+  get: (taskId: string) => Promise<MessageData>;
+  put: (messageData: MessageData) => Promise<MessageData>;
+  getMessagesDueAt: (dueAt: string) => Promise<MessageData[]>;
+  getMessagesByUserId: (userId: string) => Promise<MessageData[]>;
 }
 
 export interface BusinessNameClient {

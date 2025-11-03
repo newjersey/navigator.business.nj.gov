@@ -92,7 +92,7 @@ describe("AWSCryptoFactory", () => {
       expect(hash1).toEqual(hash2);
     });
 
-    it("should throw an error for empty or non-string input", async () => {
+    it("throws an error for empty or non-string input", async () => {
       await expect(client.hashValue("", 10)).rejects.toThrow(
         "Sensitive data must be a non-empty string",
       );
