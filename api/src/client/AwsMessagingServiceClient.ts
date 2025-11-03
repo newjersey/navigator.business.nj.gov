@@ -4,6 +4,8 @@ import { STAGE } from "@functions/config";
 import { LogWriterType } from "@libs/logWriter";
 import { ReasonPhrases } from "http-status-codes";
 
+const SERVICE_NAME = "businessnjgov-api-v2";
+
 export const AwsMessagingServiceClient = (config: {
   logWriter: LogWriterType;
 }): MessagingServiceClient => {
@@ -11,7 +13,7 @@ export const AwsMessagingServiceClient = (config: {
 
   const logId = config.logWriter.GetId();
   const lambdaClient = new LambdaClient({});
-  const functionName = isLocal ? "sendEmailTest" : `messaging-service-${STAGE}`;
+  const functionName = isLocal ? "sendEmailTest" : `${SERVICE_NAME}-${STAGE}-messagingService`;
 
   const sendMessage = async (
     userId: string,

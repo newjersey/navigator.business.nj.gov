@@ -20,6 +20,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@aws-sdk/client-ses" },
+    },
+    {
+      from: {},
       to: { path: "@aws-sdk/util-dynamodb" },
     },
     {
@@ -56,6 +60,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "uuid" },
+    },
+    {
+      from: {},
       to: { path: "simple-oauth2" },
     },
     {
@@ -75,11 +83,11 @@ module.exports = {
       to: { path: "winston-cloudwatch" },
     },
     {
-      from: { path: "src/db" },
+      from: { path: "src/db", path: "src/functions/messagingService" },
       to: { path: "fs" },
     },
     {
-      from: { path: "src/db" },
+      from: { path: "src/db", path: "src/functions/messagingService" },
       to: { path: "path" },
     },
     {
