@@ -81,7 +81,7 @@ export const checkXrayRegistrationStatus = (
 };
 
 export const sendEnvironmentPermitEmail = (emailMetaData: EmailMetaData): Promise<string> => {
-  return post(`/environment-permit-email`, { emailMetaData }, false);
+  return post(`/guest/environment-permit-email`, { emailMetaData }, false);
 };
 
 export const postBusinessFormation = (
