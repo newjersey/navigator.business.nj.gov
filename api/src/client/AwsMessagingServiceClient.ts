@@ -2,6 +2,7 @@ import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
 import { HealthCheckMetadata, MessagingServiceClient } from "@domain/types";
 import { STAGE } from "@functions/config";
 import { LogWriterType } from "@libs/logWriter";
+import { API_SERVICE_NAME } from "@shared/defaultConstants";
 import { ReasonPhrases } from "http-status-codes";
 
 export const AwsMessagingServiceClient = (config: {
@@ -11,7 +12,7 @@ export const AwsMessagingServiceClient = (config: {
 
   const logId = config.logWriter.GetId();
   const lambdaClient = new LambdaClient({});
-  const functionName = isLocal ? "sendEmailTest" : `messaging-service-${STAGE}`;
+  const functionName = isLocal ? "sendEmailTest" : `${API_SERVICE_NAME}-${STAGE}-messagingService`;
 
   const sendMessage = async (
     userId: string,
