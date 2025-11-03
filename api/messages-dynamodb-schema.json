@@ -1,0 +1,33 @@
+{
+  "TableName": "messages-table-dev",
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "taskId",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "dueAt",
+      "AttributeType": "S"
+    }
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "taskId",
+      "KeyType": "HASH"
+    }
+  ],
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "DueAtIndex",
+      "KeySchema": [
+        {
+          "AttributeName": "dueAt",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    }
+  ]
+}

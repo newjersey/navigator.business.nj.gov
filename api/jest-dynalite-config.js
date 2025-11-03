@@ -168,6 +168,47 @@ module.exports = {
         WriteCapacityUnits: 1,
       },
     },
+    {
+      TableName: "messages-table-test",
+      AttributeDefinitions: [
+        {
+          AttributeName: "taskId",
+          AttributeType: "S",
+        },
+        {
+          AttributeName: "dueAt",
+          AttributeType: "S",
+        },
+      ],
+      KeySchema: [
+        {
+          AttributeName: "taskId",
+          KeyType: "HASH",
+        },
+      ],
+      GlobalSecondaryIndexes: [
+        {
+          IndexName: "DueAtIndex",
+          KeySchema: [
+            {
+              AttributeName: "dueAt",
+              KeyType: "HASH",
+            },
+          ],
+          Projection: {
+            ProjectionType: "ALL",
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+      ],
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 1,
+        WriteCapacityUnits: 1,
+      },
+    },
   ],
   port: 8002,
 };
