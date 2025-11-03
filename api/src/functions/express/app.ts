@@ -514,7 +514,7 @@ app.use(
 
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
 
-app.use("/api", environmentPermitEmailRouter(environmentPermitEmailClient, logger));
+app.use("/api/guest", environmentPermitEmailRouter(environmentPermitEmailClient, logger));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {
