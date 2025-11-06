@@ -224,7 +224,6 @@ collections:
                   - { label: Title, name: title, widget: text }
                   - { label: Body, name: body, widget: markdown }
                   - { label: Contact, name: contact, widget: text }
-                  - { label: Success Alert, name: successAlert, widget: text }
                   - { label: Direct Contact, name: directContactInfo, widget: text }
                   - { label: Submission Cadence, name: submissionCadence, widget: text }
                   - { label: Email Error, name: emailErrorText, widget: text }
