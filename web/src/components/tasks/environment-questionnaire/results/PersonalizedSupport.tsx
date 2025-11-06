@@ -31,11 +31,17 @@ export const PersonalizedSupport = (): ReactElement => {
     const emailMetaData = {
       email: email ?? userData?.user.email ?? "N/A",
       userName: userData?.user.name ?? "N/A",
-      businessName: business?.profileData.businessName ?? "N/A",
+      businessName:
+        business?.profileData.businessName && business?.profileData.businessName !== ""
+          ? business.profileData.businessName
+          : "N/A",
       industry: business?.profileData.industryId ?? "N/A",
       location: business?.formationData.formationFormData.addressCity ?? "N/A",
       phase: business?.profileData.businessPersona ?? "N/A",
-      naicsCode: business?.profileData.naicsCode ?? "N/A",
+      naicsCode:
+        business?.profileData.naicsCode && business?.profileData.naicsCode !== ""
+          ? business?.profileData.naicsCode
+          : "N/A",
       questionnaireResponses: responsesToString(envContext.state.questionnaireData),
     };
     setIsLoading(true);
@@ -65,9 +71,6 @@ export const PersonalizedSupport = (): ReactElement => {
       }
     >
       <div className={"padding-205 margin-y-2 bg-base-extra-light text-body radius-lg"}>
-        {envContext.state.sbapEmailSent && (
-          <Alert variant="success">{Config.envResultsPage.personalizedSupport.successAlert}</Alert>
-        )}
         {error && (
           <Alert
             variant="error"
@@ -86,12 +89,12 @@ export const PersonalizedSupport = (): ReactElement => {
               : Config.envResultsPage.personalizedSupport.submissionCadence}
           </div>
           {envContext.state.sbapEmailSent !== true && (
-            <div className={`margin-top-1 ${error ? "" : "margin-x-2"}`}>
+            <div className={`margin-top-1 ${error ? "margin-x-2" : ""}`}>
               <WithErrorBar hasError={!!error} type="ALWAYS">
                 <InputLabel className="text-base-darkest text-bold" htmlFor="email">
                   {Config.envResultsPage.personalizedSupport.emailLabel}
                 </InputLabel>
-                <div className="fdr fww">
+                <div className="fdr fww space-between">
                   <GenericTextField
                     inputWidth="default"
                     fieldName="email"
@@ -113,6 +116,7 @@ export const PersonalizedSupport = (): ReactElement => {
                     isColor={"accent-cooler"}
                     onClick={onSubmit}
                     isLoading={isLoading}
+                    isRightMarginRemoved
                   >
                     {Config.envResultsPage.personalizedSupport.contactSbapButton}
                   </SecondaryButton>

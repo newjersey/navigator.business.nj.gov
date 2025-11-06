@@ -17,6 +17,7 @@ import {
   generateBusiness,
   generateEnvironmentData,
   generateEnvironmentQuestionnaireData,
+  generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test/factories";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -301,6 +302,41 @@ describe("<CheckEnvPermits />", () => {
             }),
           );
           expect(currentBusiness().environmentData?.sbapEmailSent).toBe(true);
+        });
+
+        it("submits an email request with N/A for fields that are empty when submit is clicked", async () => {
+          mockApi.sendEnvironmentPermitEmail.mockResolvedValue("SUCCESS");
+          const userData = generateUserDataForBusiness(
+            generateBusiness({
+              environmentData: generateEnvironmentData({ ...submittedQuestionnaire }),
+              profileData: generateProfileData({
+                businessName: "",
+                naicsCode: "",
+              }),
+            }),
+          );
+          render(
+            <WithStatefulUserData initialUserData={userData}>
+              <EnvPermit task={generateTask({})} />
+            </WithStatefulUserData>,
+          );
+          fireEvent.click(screen.getByText(Config.envResultsPage.personalizedSupport.title));
+          fireEvent.click(
+            screen.getByText(Config.envResultsPage.personalizedSupport.contactSbapButton),
+          );
+          await waitFor(() =>
+            expect(mockApi.sendEnvironmentPermitEmail).toHaveBeenCalledWith({
+              businessName: "N/A",
+              email: currentUserData().user.email,
+              industry: currentBusiness().profileData.industryId,
+              location: "N/A",
+              naicsCode: "N/A",
+              phase: currentBusiness().profileData.businessPersona,
+              questionnaireResponses:
+                "<ul><li>Air Requirements</li><ul><li>My business plans to conduct construction activities (crushers, conveyors, shredders, stationary engines, or equipment that generate dust).</li></ul><li>Drinking Water Requirements</li><ul><li>My business will have a combined well pump capacity of greater than 69 gallons per minute.</li></ul><li>Wastewater Requirements</li><ul><li>My business will release wastewater to a local sewage treatment plant.</li></ul></ul>",
+              userName: currentUserData().user.name,
+            }),
+          );
         });
 
         it("displays an error when the email is invalid", async () => {
