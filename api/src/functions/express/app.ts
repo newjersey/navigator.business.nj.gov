@@ -21,6 +21,7 @@ import { ApiEnvPermitEmailClient } from "@client/ApiEnvPermitEmailClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
+import { AwsMessagingServiceClient } from "@client/AwsMessagingServiceClient";
 import { CigaretteLicenseEmailClient } from "@client/CigaretteLicenseEmailClient";
 import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
@@ -481,7 +482,15 @@ app.use(
   "/api",
   housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient, logger),
 );
-app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient, logger));
+
+const messagingServiceClient = AwsMessagingServiceClient({
+  logWriter: logger,
+});
+
+app.use(
+  "/api",
+  selfRegRouterFactory(dynamoDataClient, selfRegClient, messagingServiceClient, logger),
+);
 app.use(
   "/api",
   formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }, logger),
@@ -507,6 +516,7 @@ app.use(
       ["xray-registration", xrayRegistrationHealthCheckClient],
       ["cigarette-license", cigaretteLicenseHealthCheckClient],
       ["cigarette-email-client", cigaretteLicenseEmailClient.health],
+      ["messaging-service", messagingServiceClient.health],
     ]),
     logger,
   ),

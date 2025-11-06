@@ -167,6 +167,12 @@ const serverlessConfiguration: AWS = {
           },
           {
             Effect: "Allow",
+            Action: "lambda:InvokeFunction",
+            Resource: `arn:aws:lambda:${region}:*:function:messaging-service-*`,
+            Sid: "InvokeMessagingServiceLambda",
+          },
+          {
+            Effect: "Allow",
             Action: [
               "dynamodb:Query",
               "dynamodb:Scan",
