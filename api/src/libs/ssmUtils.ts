@@ -10,7 +10,8 @@ export type CONFIG_VARS =
   | EMPLOYER_RATES_PATH
   | CIGARETTE_PAYMENT_CONFIG_VARS
   | CIGARETTE_EMAIL_CONFIG_VARS
-  | ENV_REQ_CONFIG_VARS;
+  | ENV_REQ_CONFIG_VARS
+  | USER_MESSAGING_CONFIG_VARS;
 
 export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_base_url"
@@ -27,12 +28,22 @@ export type ENV_REQ_CONFIG_VARS =
   | "env_req_email_confirmation_url"
   | "env_req_email_confirmation_key";
 
+export type USER_MESSAGING_CONFIG_VARS = "feature_welcome_email_enabled";
+
 let cache: {
   value?: boolean;
   expiresAt?: number;
 } = {};
 
 export const getConfigValue = async (paramName: CONFIG_VARS): Promise<string> => {
+  if (process.env.STAGE === "local") {
+    const envVarName = paramName.toUpperCase().replaceAll("-", "_");
+    const envValue = process.env[envVarName];
+    if (envValue !== undefined) {
+      return envValue;
+    }
+  }
+
   try {
     const ssmPath = `/${process.env.STAGE}/${paramName}`;
     const command = new GetParameterCommand({
