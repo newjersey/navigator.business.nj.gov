@@ -2,6 +2,7 @@ import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
+import { CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
 import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { generateSelfRegResponse } from "@test/factories";
@@ -10,6 +11,14 @@ import dayjs from "dayjs";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request, { Response } from "supertest";
+
+jest.mock("@libs/ssmUtils", () => ({
+  getConfigValue: jest.fn(),
+}));
+
+const mockGetConfigValue = getConfigValue as jest.MockedFunction<
+  (paramName: CONFIG_VARS) => Promise<string>
+>;
 
 describe("selfRegRouter", () => {
   let app: Express;
@@ -38,6 +47,8 @@ describe("selfRegRouter", () => {
       sendMessage: jest.fn().mockResolvedValue({ success: true, messageId: "test-message-id" }),
       health: jest.fn(),
     };
+
+    mockGetConfigValue.mockResolvedValue("true");
 
     app = setupExpress(false);
     app.use(
