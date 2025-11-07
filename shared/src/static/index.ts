@@ -14,6 +14,7 @@ export * from "./loadLicenseCalendarEvents";
 export * from "./loadMunicipalities";
 export * from "./loadOperateReferences";
 export * from "./loadPageMetadata";
+export * from "./loadTaskDependencies";
 export * from "./loadTasks";
 export * from "./loadWebflowLicenses";
 export * from "./loadXrayRenewalCalendarEvent";
