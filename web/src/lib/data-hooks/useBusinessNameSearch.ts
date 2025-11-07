@@ -130,16 +130,18 @@ export const useBusinessNameSearch = ({
           });
         }
         setNameAvailability({ ...result });
+        analytics.event.api_submit.success(
+          "treasury.revenue.formation_submission",
+          "name is available",
+        );
         return { nameAvailability: result, submittedName: currentName };
       })
       .catch((api_error) => {
         resetState();
         setIsLoading(false);
-        if (api_error === 400) {
-          setError("BAD_INPUT");
-        } else {
-          setError("SEARCH_FAILED");
-        }
+        const errorMessage = api_error === 400 ? "BAD_INPUT" : "SEARCH_FAILED";
+        setError(errorMessage);
+        analytics.event.api_submit.error("treasury.revenue.formation_submission", errorMessage);
         throw new Error("ERROR");
       });
   };
