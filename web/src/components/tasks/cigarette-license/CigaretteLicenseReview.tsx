@@ -257,12 +257,20 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
               },
             })
             .update();
+          analytics.event.api_submit.success(
+            "treasury.revenue.cigarette_prepare_payment",
+            "successfully prepared payment for cigarette license",
+          );
           await router.replace(cigaretteLicenseResponse.paymentInfo?.htmL5RedirectUrl);
         }
       }
     } catch {
       setLoading(false);
       analytics.event.cigarette_license.submit.service_error();
+      analytics.event.api_submit.error(
+        "treasury.revenue.cigarette_prepare_payment",
+        "error preparing payment for cigarette license",
+      );
       props.setSubmissionError("UNAVAILABLE");
       setTimeout(() => {
         if (props.errorAlertRef.current) {
