@@ -2,11 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {
-  findDeadContextualInfo,
-  findDeadLinks,
-  findDeadTasks,
-} from "@/lib/static/admin/findDeadLinks";
+import { findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 import { Options } from "broken-link-checker";
 import fs from "fs";
 
@@ -67,6 +63,8 @@ describe("findDeadLinks", () => {
     const displaySubfolderItem1 = "Display contents with `contextual info|info4` in it";
     const config = '{"testheader":"test"}';
     const fundings = "Funding Content";
+    const taskDependencyJson =
+      '{"dependencies": [{"task": "register-for-ein","taskDependencies": []}]}';
     const certifications = "Certification Content";
     const licenses = "License Content";
     const licenseTasks = "LicenseTask Content";
@@ -89,6 +87,7 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(displaySubfolderItem1)
       .mockReturnValueOnce(config)
       .mockReturnValueOnce(fundings)
+      .mockReturnValueOnce(taskDependencyJson)
       .mockReturnValueOnce(certifications)
       .mockReturnValueOnce(licenses)
       .mockReturnValueOnce(licenseTasks)
@@ -99,12 +98,6 @@ describe("findDeadLinks", () => {
   describe("findDeadTasks", () => {
     it("finds tasks that are not referenced in any add-ons or modifications", async () => {
       expect(await findDeadTasks()).toEqual(["dead-task.md"]);
-    });
-  });
-
-  describe("findDeadContextualInfo", () => {
-    it("finds contextual infos that are not referenced in any tasks or other infos", async () => {
-      expect(await findDeadContextualInfo()).toEqual(["dead-info.md"]);
     });
   });
 
