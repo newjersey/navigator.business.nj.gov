@@ -115,6 +115,10 @@ export const ConfirmationPage = (props: Props): ReactElement => {
 
   if (status === "CONFIRMED") {
     analytics.event.cigarette_license.appears.validation_success();
+    analytics.event.api_submit.success(
+      "treasury.revenue.cigarette_submission",
+      "successfully submitted cigarette license",
+    );
     return (
       <>
         <div className="maxw-tablet margin-x-auto">

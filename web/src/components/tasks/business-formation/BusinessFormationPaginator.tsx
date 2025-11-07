@@ -335,9 +335,17 @@ export const BusinessFormationPaginator = (): ReactElement => {
       router
     ) {
       analytics.event.business_formation.submit.go_to_NIC_formation_processing();
+      analytics.event.api_submit.success(
+        "treasury.revenue.formation_submission",
+        "successfully submitted formation",
+      );
       await router.replace(newBusiness.formationData.formationResponse.redirect);
     } else {
       analytics.event.business_formation.submit.error_remain_at_formation();
+      analytics.event.api_submit.error(
+        "treasury.revenue.formation_submission",
+        "error submitting formation",
+      );
       setIsLoading(false);
     }
   };

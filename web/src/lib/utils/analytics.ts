@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
   LegacyEventAction,
+  LegacyEventApiName,
   LegacyEventCategory,
   LegacyEventLabel,
 } from "@/lib/utils/analytics-legacy";
@@ -883,6 +884,24 @@ export default {
             item: "roadmap_section",
           });
         },
+      },
+    },
+    api_submit: {
+      success: (apiName: LegacyEventApiName, apiDetails?: string) => {
+        eventRunner.track({
+          event: "form_submits",
+          legacy_event_category: apiName,
+          legacy_event_action: "api_submit_success",
+          legacy_event_label: apiDetails,
+        });
+      },
+      error: (api_name: string, api_details?: string) => {
+        eventRunner.track({
+          event: "form_submits",
+          legacy_event_category: api_name,
+          legacy_event_action: "api_submit_error",
+          legacy_event_label: api_details,
+        });
       },
     },
     profile_save: {

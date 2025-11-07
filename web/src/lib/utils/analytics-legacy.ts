@@ -1,4 +1,12 @@
+export type LegacyEventApiName =
+  | "treasury.revenue.check_name"
+  | "treasury.revenue.formation_submission"
+  | "treasury.taxation.tax_clearance_submission"
+  | "treasury.revenue.cigarette_prepare_payment"
+  | "treasury.revenue.cigarette_submission";
+
 export type LegacyEventCategory =
+  | LegacyEventApiName
   | "account_menu_myNJ_account"
   | "account_menu_my_profile"
   | "account_name"
@@ -193,6 +201,8 @@ export type LegacyEventAction =
   | "response"
   | "scroll"
   | "submit"
+  | "api_submit_success"
+  | "api_submit_error"
   | string;
 
 export type LegacyEventLabel =

@@ -122,12 +122,21 @@ export const Review = (props: Props): ReactElement => {
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
       if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
+        analytics.event.api_submit.error(
+          "treasury.taxation.tax_clearance_submission",
+          taxClearanceResponse.error.message,
+        );
         props.setResponseErrorType(taxClearanceResponse.error.type);
         return;
       }
 
       if (taxClearanceResponse.certificatePdfArray) {
         analytics.event.tax_clearance.appears.validation_success();
+        analytics.event.api_submit.success(
+          "treasury.taxation.tax_clearance_submission",
+          "successfully submitted tax clearance certificate",
+        );
+
         const blob = new Blob(
           [
             new Uint8Array(
@@ -144,6 +153,10 @@ export const Review = (props: Props): ReactElement => {
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();
+      analytics.event.api_submit.error(
+        "treasury.taxation.tax_clearance_submission",
+        "there was an issue submitting tax clearance",
+      );
       props.setResponseErrorType("SYSTEM_ERROR");
     } finally {
       setIsLoading(false);
