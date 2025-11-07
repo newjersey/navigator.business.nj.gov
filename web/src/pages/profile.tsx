@@ -98,7 +98,6 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { EmployerRates } from "@/components/employer-rates/EmployerRates";
-import { EmployerRatesTemporary } from "@/components/employer-rates/EmployerRatesTemporary";
 
 interface Props {
   municipalities: Municipality[];
@@ -592,7 +591,6 @@ const ProfilePage = (props: Props): ReactElement => {
           <DateOfFormation futureAllowed />
         </ProfileField>
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
-        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRatesTemporary />}
       </div>
     ),
     contact: (
