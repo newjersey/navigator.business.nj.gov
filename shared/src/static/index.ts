@@ -9,6 +9,7 @@ export * from "./loadDisplayContent";
 export * from "./loadFilings";
 export * from "./loadFundings";
 export * from "./loadHousingMunicipalities";
+export * from "./loadIndustryJson";
 export * from "./loadLicenseCalendarEvents";
 export * from "./loadMunicipalities";
 export * from "./loadOperateReferences";
