@@ -1,4 +1,5 @@
 import { checkAnytimeActionCategoryUsage } from "@businessnjgovnavigator/api/src/cms-integrity-tests/anytimeActionCategoryUsage";
+import { checkTaskUsage } from "@businessnjgovnavigator/api/src/cms-integrity-tests/taskIntegrityTests";
 import { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
 
@@ -9,5 +10,6 @@ export const runCmsIntegrityTests = async (stage: string, logger: LogWriterType)
 
   if (topicArnIsSetForThisEnvironment) {
     await checkAnytimeActionCategoryUsage(topicArn, stage, logger);
+    await checkTaskUsage(topicArn, stage, logger);
   }
 };
