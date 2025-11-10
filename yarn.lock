@@ -4185,7 +4185,7 @@ __metadata:
     rimraf: 6.0.1
     serverless: 4.19.1
     serverless-dynamodb: 0.2.56
-    serverless-http: 3.2.0
+    serverless-http: 4.0.0
     serverless-offline: 14.4.0
     serverless-offline-ssm: 6.2.0
     serverless-prune-plugin: 2.1.0
@@ -4391,7 +4391,7 @@ __metadata:
     semantic-release: 19.0.5
     serverless: 4.19.1
     serverless-dynamodb: 0.2.56
-    serverless-http: 3.2.0
+    serverless-http: 4.0.0
     serverless-offline: 14.4.0
     serverless-offline-ssm: 6.2.0
     serverless-prune-plugin: 2.1.0
@@ -32414,10 +32414,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-http@npm:3.2.0":
-  version: 3.2.0
-  resolution: "serverless-http@npm:3.2.0"
-  checksum: aaa3b6e416ad25931bf00c3a1c31cb5f9a56c678ca8a6bc99749b90bb49ee6e8c53d7edd6bc0b587a171bb8c39c6093dc9980cb0142b8c18881533859d3b769f
+"serverless-http@npm:4.0.0":
+  version: 4.0.0
+  resolution: "serverless-http@npm:4.0.0"
+  checksum: 16903f36dfc4db66727dd1634c847647d8888429a15bc42a2e846e638166b09ba2fd8544d23150b4310cbb9cdee9e335e8354454bfb41b4abfd1c2f113707a23
   languageName: node
   linkType: hard
 
