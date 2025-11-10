@@ -5,6 +5,7 @@ web/node_modules
 /.pnp
 .pnp.js
 .yarn/cache
+.yarn-cache
 .yarn/install-state.gz
 
 # scripts

@@ -50,6 +50,7 @@ import { RegulatedBusinessDynamicsLicenseHealthCheckClient } from "@client/dynam
 import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
+import { MockCryptoClient } from "@client/MockCryptoClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
 import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
@@ -76,7 +77,6 @@ import {
   BUSINESSES_TABLE,
   DYNAMO_OFFLINE_PORT,
   IS_DOCKER,
-  IS_OFFLINE,
   STAGE,
 } from "@functions/config";
 import { setupExpress } from "@libs/express";
@@ -91,18 +91,15 @@ import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
-import { MockCryptoClient } from "@client/MockCryptoClient";
 
 const app = setupExpress();
 
-const logger =
-  process.env.STAGE === "local"
-    ? ConsoleLogWriter
-    : LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
-const dataLogger =
-  process.env.STAGE === "local"
-    ? ConsoleLogWriter
-    : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+const isLocal = STAGE === "local";
+
+const logger = isLocal ? ConsoleLogWriter : LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
+const dataLogger = isLocal
+  ? ConsoleLogWriter
+  : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
 const XRAY_REGISTRATION_STATUS_BASE_URL =
   process.env.XRAY_REGISTRATION_STATUS_BASE_URL || "http://localhost:9000";
@@ -292,7 +289,9 @@ const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_I
 const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 const AIRTABLE_BASE_URL =
   process.env.AIRTABLE_BASE_URL ||
-  (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
+  (STAGE === "local"
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : "https://api.airtable.com");
 
 const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
@@ -302,7 +301,7 @@ const FORMATION_API_BASE_URL =
     : process.env.FORMATION_API_BASE_URL;
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
-const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
+const GOV2GO_REGISTRATION_BASE_URL = isLocal
   ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
   : process.env.GOV2GO_REGISTRATION_BASE_URL || "";
 
@@ -312,7 +311,7 @@ const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
-const AWSTaxIDEncryptionClient = IS_OFFLINE
+const AWSTaxIDEncryptionClient = isLocal
   ? new MockCryptoClient()
   : AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
       stage: AWS_CRYPTO_CONTEXT_STAGE,
@@ -320,7 +319,7 @@ const AWSTaxIDEncryptionClient = IS_OFFLINE
       origin: AWS_CRYPTO_CONTEXT_ORIGIN,
     });
 
-const AWSTaxIDHashingClient = IS_OFFLINE
+const AWSTaxIDHashingClient = isLocal
   ? new MockCryptoClient()
   : AWSCryptoFactory(
       AWS_CRYPTO_TAX_ID_HASHING_KEY,
@@ -358,7 +357,7 @@ const airtableUserTestingClient = AirtableUserTestingClient(
   logger,
 );
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
-const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
+const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(
   dynamoDb,
   AWSTaxIDEncryptionClient,

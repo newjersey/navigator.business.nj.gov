@@ -17,13 +17,12 @@ export const unmarshallOptions = {
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
 
 export const createDynamoDbClient = (
-  isOffline: boolean,
   isDocker: boolean,
   dynamoPort: number,
 ): DynamoDBDocumentClient => {
   let dynamoDb: DynamoDBDocumentClient;
 
-  if (isOffline) {
+  if (process.env.STAGE === "local") {
     const dynamoDbEndpoint = isDocker ? "dynamodb-local" : "localhost";
     dynamoDb = DynamoDBDocumentClient.from(
       new DynamoDBClient({

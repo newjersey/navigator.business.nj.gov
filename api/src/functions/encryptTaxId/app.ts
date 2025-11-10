@@ -8,7 +8,6 @@ import {
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   DYNAMO_OFFLINE_PORT,
   IS_DOCKER,
-  IS_OFFLINE,
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
@@ -17,12 +16,13 @@ import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { encryptTaxIdBatch } from "src/domain/user/encryptTaxIdBatch";
 
 export default async function handler(): Promise<void> {
-  const logger =
-    process.env.STAGE === "local"
-      ? ConsoleLogWriter
-      : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+  const isLocal = STAGE === "local";
 
-  const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
+  const logger = isLocal
+    ? ConsoleLogWriter
+    : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+
+  const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
     stage: AWS_CRYPTO_CONTEXT_STAGE,
     purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
