@@ -294,7 +294,7 @@ const serverlessConfiguration: AWS = {
   },
 
   package: {
-    patterns: ["../content/src/**"],
+    patterns: ["../content/src/**", "../content/lib/**"],
   },
 
   functions: {},

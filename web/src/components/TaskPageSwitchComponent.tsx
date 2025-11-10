@@ -126,12 +126,6 @@ export const TaskPageSwitchComponent = ({
     "business-structure": (
       <BusinessStructureTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />
     ),
-    "search-business-name": (
-      <BusinessFormation
-        task={getTaskFromRoadmap(roadmap, task.id)}
-        displayContent={displayContent}
-      />
-    ),
     [formationTaskId]: (
       <BusinessFormation
         task={getTaskFromRoadmap(roadmap, task.id)}
