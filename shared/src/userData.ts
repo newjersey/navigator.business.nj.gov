@@ -1,3 +1,4 @@
+import { CRTKData } from "src/crtk";
 import { BusinessUser } from "./businessUser";
 import { CigaretteLicenseData } from "./cigaretteLicense";
 import { createBusinessId } from "./domain-logic/createBusinessId";
@@ -41,6 +42,7 @@ export interface Business {
   readonly versionWhenCreated: number;
   readonly version: number;
   readonly userId: string;
+  readonly crtkData: CRTKData | undefined;
 }
 
 export const CURRENT_VERSION = 181;
@@ -97,6 +99,7 @@ export const createEmptyBusiness = ({
     version: CURRENT_VERSION,
     versionWhenCreated: CURRENT_VERSION,
     userId: userId,
+    crtkData: undefined,
   };
 };
 
