@@ -1,5 +1,5 @@
 import * as api from "@/lib/api-client/apiClient";
-import DeadLinksPage from "@/pages/mgmt/deadlinks";
+import UnusedContent from "@/pages/mgmt/unusedContent";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Options } from "broken-link-checker";
 
@@ -42,9 +42,11 @@ jest.mock("broken-link-checker", () => {
 
 describe("Deadlinks page", () => {
   it("displays content when password is successful", async () => {
-    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} noAuth={true} />);
+    render(
+      <UnusedContent deadTasks={["task1"]} deadLicenseTasks={["licenseTask1"]} noAuth={true} />,
+    );
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
-    expect(screen.queryByText("info1")).not.toBeInTheDocument();
+    expect(screen.queryByText("licenseTask1")).not.toBeInTheDocument();
 
     mockApi.post.mockResolvedValue({});
 
@@ -52,14 +54,16 @@ describe("Deadlinks page", () => {
     fireEvent.click(screen.getByText("Submit"));
 
     await screen.findByText("task1");
-    expect(screen.getByText("info1")).toBeInTheDocument();
+    expect(screen.getByText("licenseTask1")).toBeInTheDocument();
     expect(screen.queryByLabelText("Password")).not.toBeInTheDocument();
   });
 
   it("hides content when password is unsuccessful", async () => {
-    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} noAuth={true} />);
+    render(
+      <UnusedContent deadTasks={["task1"]} deadLicenseTasks={["licenseTask1"]} noAuth={true} />,
+    );
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
-    expect(screen.queryByText("info1")).not.toBeInTheDocument();
+    expect(screen.queryByText("licenseTask1")).not.toBeInTheDocument();
 
     mockApi.post.mockRejectedValue({});
 
@@ -70,7 +74,7 @@ describe("Deadlinks page", () => {
       return expect(screen.getByText("Authentication failed")).toBeInTheDocument();
     });
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
-    expect(screen.queryByText("info1")).not.toBeInTheDocument();
+    expect(screen.queryByText("licenseTask1")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
 });
