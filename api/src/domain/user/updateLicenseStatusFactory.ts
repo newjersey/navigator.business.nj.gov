@@ -75,9 +75,17 @@ export const updateLicenseStatusFactory = (
     return Promise.allSettled([webserviceLicenseStatusPromise, rgbLicenseStatusPromise])
       .then(([webserviceLicenseStatusResults, rgbLicenseStatusResults]) => {
         const webserviceHasError = webserviceLicenseStatusResults.status === "rejected";
-        const webserviceHasInvalidMatch =
+
+        let webserviceHasInvalidMatch = false;
+        if (
           webserviceHasError &&
-          [NO_MATCH_ERROR].includes(webserviceLicenseStatusResults.reason.message);
+          Object.keys(webserviceLicenseStatusResults.reason).includes("message")
+        ) {
+          webserviceHasInvalidMatch = [NO_MATCH_ERROR].includes(
+            webserviceLicenseStatusResults.reason.message,
+          );
+        }
+
         const rgbHasError = rgbLicenseStatusResults.status === "rejected";
         const rgbHasInvalidMatch =
           rgbHasError &&

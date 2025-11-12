@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/ws/simple/queryLicenseStatuses",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.zipCode == '99999')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 500,
+    "bodyFileName": "webservice-license-status-response_error.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

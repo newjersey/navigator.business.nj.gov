@@ -1,0 +1,33 @@
+{
+  "message": "connect ETIMEDOUT http://localhost:9000/ws/simple/queryLicenseStatuses",
+  "name": "Error",
+  "stack": "Error: connect ETIMEDOUT http://localhost:9000/ws/simple/queryLicenseStatuses\n    at Function.AxiosError.from (/node_modules/axios/lib/core/AxiosError.js:96:14)\n    at RedirectableRequest.handleRequestError (/node_modules/axios/lib/adapters/http.js:638:25)\n    at RedirectableRequest.emit (node:events:518:28)\n    at ClientRequest.eventHandlers.<computed> (/node_modules/follow-redirects/index.js:49:24)\n    at ClientRequest.emit (node:events:518:28)\n    at emitErrorEvent (node:_http_client:104:11)\n    at Socket.socketErrorListener (node:_http_client:518:5)\n    at Socket.emit (node:events:518:28)\n    at emitErrorNT (node:internal/streams/destroy:170:8)\n    at emitErrorCloseNT (node:internal/streams/destroy:129:3)\n    at Axios.request (/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async <anonymous> (/src/client/webservice/WebserviceLicenseStatusProcessorClient.ts:22:40)\n    at async Promise.allSettled (index 0)",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": ["xhr", "http", "fetch"],
+    "transformRequest": [null],
+    "transformResponse": [null],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      "User-Agent": "axios/1.12.2",
+      "Content-Length": "69",
+      "Accept-Encoding": "gzip, compress, deflate, br"
+    },
+    "method": "post",
+    "url": "http://localhost:9000/ws/simple/queryLicenseStatuses",
+    "data": "{\"zipCode\":\"07055\",\"businessName\":\"mary-fer\\\" mexicana beauty salon\"}",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ETIMEDOUT"
+}
