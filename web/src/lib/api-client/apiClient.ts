@@ -1,6 +1,8 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
+  CRTKBusinessDetails,
+  CRTKData,
   ElevatorSafetyRegistrationSummary,
   EmailMetaData,
   EmergencyTripPermitApplicationInfo,
@@ -78,6 +80,12 @@ export const checkXrayRegistrationStatus = (
   facilityDetails: FacilityDetails,
 ): Promise<UserData> => {
   return post(`/xray-registration`, { facilityDetails });
+};
+
+export const searchBuisnessInCRTKDB = (
+  CRTKbusinessDetails: CRTKBusinessDetails,
+): Promise<CRTKData> => {
+  return post(`/crtk-lookup`, { CRTKbusinessDetails });
 };
 
 export const sendEnvironmentPermitEmail = (emailMetaData: EmailMetaData): Promise<string> => {
