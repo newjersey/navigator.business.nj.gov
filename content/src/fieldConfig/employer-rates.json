@@ -19,6 +19,7 @@
     "dolEinAlertLabelText": "DOL EIN",
     "dolEinLabelText": "***`DOL EIN|dol-ein`***",
     "dolEinErrorText": "DOL EIN must be 15 digits.",
-    "serverErrorText": "**This service is temporarily unavailable.** Try again later."
+    "serverErrorText": "**This service is temporarily unavailable.** Try again later.",
+    "noAccountErrorText": "**No account could be found.**"
   }
 }
