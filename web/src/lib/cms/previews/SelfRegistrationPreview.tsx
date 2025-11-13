@@ -85,11 +85,13 @@ const SelfRegistrationPreview = (props: PreviewProps): ReactElement => {
                 },
                 receiveNewsletter: false,
                 userTesting: false,
+                receiveUpdatesAndReminders: true,
                 accountCreationSource: "",
                 contactSharingWithAccountCreationPartner: false,
                 myNJUserKey: undefined,
                 intercomHash: undefined,
                 abExperience: "ExperienceA",
+                phoneNumber: undefined,
               }}
               setUser={function (user: BusinessUser): void {
                 console.error(user);

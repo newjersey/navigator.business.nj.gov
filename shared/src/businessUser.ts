@@ -17,8 +17,10 @@ export type BusinessUser = {
   readonly externalStatus: ExternalStatus;
   readonly receiveNewsletter: boolean;
   readonly userTesting: boolean;
+  readonly receiveUpdatesAndReminders: boolean;
   readonly accountCreationSource: string;
   readonly contactSharingWithAccountCreationPartner: boolean;
+  readonly phoneNumber?: string;
   readonly myNJUserKey?: string;
   readonly intercomHash?: string;
   readonly abExperience: ABExperience;
@@ -36,8 +38,10 @@ export const emptyBusinessUser: BusinessUser = {
   externalStatus: {},
   receiveNewsletter: true,
   userTesting: true,
+  receiveUpdatesAndReminders: true,
   accountCreationSource: "",
   contactSharingWithAccountCreationPartner: true,
+  phoneNumber: undefined,
   myNJUserKey: undefined,
   intercomHash: undefined,
   abExperience: decideABExperience(),

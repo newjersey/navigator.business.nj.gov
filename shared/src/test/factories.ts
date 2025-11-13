@@ -224,6 +224,7 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
     externalStatus: {},
     receiveNewsletter: true,
     userTesting: true,
+    receiveUpdatesAndReminders: true,
     accountCreationSource: `some-source-${randomInt()}`,
     contactSharingWithAccountCreationPartner: true,
     abExperience: randomInt() % 2 === 0 ? "ExperienceA" : "ExperienceB",

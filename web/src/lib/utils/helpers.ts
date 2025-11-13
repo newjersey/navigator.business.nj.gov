@@ -255,6 +255,14 @@ export const getPhoneNumberFormat = (phoneNumber: string): string => {
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
 
+export const validateOptionalPhoneNumber = (phoneNumber: string): boolean => {
+  if (!phoneNumber || phoneNumber.length === 0) {
+    return true;
+  }
+
+  return phoneNumber.length === 10;
+};
+
 export const getFlow = (data: UserData | ProfileData): FlowType => {
   const persona: BusinessPersona = isUserData(data)
     ? getCurrentBusiness(data).profileData.businessPersona

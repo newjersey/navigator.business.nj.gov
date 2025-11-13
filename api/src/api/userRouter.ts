@@ -392,6 +392,7 @@ export const userRouterFactory = (
       externalStatus: {},
       receiveNewsletter: true,
       userTesting: true,
+      receiveUpdatesAndReminders: true,
       abExperience: decideABExperience(),
       accountCreationSource: "Test Source",
       contactSharingWithAccountCreationPartner: true,

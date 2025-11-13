@@ -9,7 +9,11 @@ import {
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
-import { validateEmail } from "@/lib/utils/helpers";
+import {
+  getPhoneNumberFormat,
+  validateEmail,
+  validateOptionalPhoneNumber,
+} from "@/lib/utils/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -40,11 +44,20 @@ export const AccountSetupForm = (props: Props): ReactElement => {
     props.errorTypes,
   );
 
+  const phoneNumberFormContextHelpers = useFormContextFieldHelpers(
+    "phoneNumber",
+    DataFormErrorMapContext,
+    props.errorTypes,
+  );
+
   emailFormContextHelpers.RegisterForOnSubmit(() =>
     props.user.email ? validateEmail(props.user.email) : false,
   );
   nameFormContextHelpers.RegisterForOnSubmit(
     () => getFullNameErrorVariant(props.user.name) === "NO_ERROR",
+  );
+  phoneNumberFormContextHelpers.RegisterForOnSubmit(() =>
+    validateOptionalPhoneNumber(props.user.phoneNumber || ""),
   );
 
   const FullNameErrorMessageLookup: Record<FullNameErrorVariant, string> = {
@@ -73,6 +86,14 @@ export const AccountSetupForm = (props: Props): ReactElement => {
 
   const handleName = (value: string): void => {
     props.setUser({ ...props.user, name: value });
+  };
+
+  const handleUpdatesAndReminders = (value: boolean): void => {
+    props.setUser({ ...props.user, receiveUpdatesAndReminders: value });
+  };
+
+  const handlePhoneNumber = (value: string): void => {
+    props.setUser({ ...props.user, phoneNumber: value });
   };
 
   const handleEmail = (confirm = false) => {
@@ -109,7 +130,6 @@ export const AccountSetupForm = (props: Props): ReactElement => {
 
   return (
     <div className="tablet:padding-y-2">
-      <p className="padding-bottom-1">{Config.selfRegistration.signUpDescriptionText}</p>
       <div className="margin-top-2">
         <WithErrorBar hasError={nameFormContextHelpers.isFormFieldInvalid} type="ALWAYS">
           <label htmlFor="name" className="text-bold">
@@ -172,43 +192,86 @@ export const AccountSetupForm = (props: Props): ReactElement => {
           </WithErrorBar>
         </div>
       </WithErrorBar>
-      <FormGroup>
-        <FormControlLabel
-          label={Config.selfRegistration.newsletterCheckboxLabel}
-          control={
-            <Checkbox
-              checked={props.user.receiveNewsletter}
-              onChange={(event): void => handleNewsletter(event.target.checked)}
-              id="newsletterCheckbox"
-            />
-          }
-        />
-        <FormControlLabel
-          label={Config.selfRegistration.userTestingCheckboxLabel}
-          control={
-            <Checkbox
-              checked={props.user.userTesting}
-              onChange={(event): void => handleUserTesting(event.target.checked)}
-              id="contactMeCheckbox"
-            />
-          }
-        />
-
-        {props.user.accountCreationSource === "investNewark" && (
+      <WithErrorBar hasError={phoneNumberFormContextHelpers.isFormFieldInvalid} type="ALWAYS">
+        <div className="margin-top-2">
+          <label htmlFor="phoneNumber" className="text-bold">
+            {Config.selfRegistration.phoneNumberFieldLabel}
+          </label>
+          {Config.selfRegistration.phoneNumberFieldLabelOptional && (
+            <span className="margin-left-1">
+              {Config.selfRegistration.phoneNumberFieldLabelOptional}
+            </span>
+          )}
+          <GenericTextField
+            value={props.user.phoneNumber || ""}
+            fieldName={"phoneNumber"}
+            formContext={DataFormErrorMapContext}
+            error={phoneNumberFormContextHelpers.isFormFieldInvalid}
+            handleChange={handlePhoneNumber}
+            onValidation={(_, invalid): void => phoneNumberFormContextHelpers.setIsValid(!invalid)}
+            validationText={
+              phoneNumberFormContextHelpers.isFormFieldInvalid
+                ? Config.selfRegistration.errorTextPhoneNumber
+                : ""
+            }
+            required={false}
+            inputWidth="default"
+            visualFilter={getPhoneNumberFormat}
+            numericProps={{ maxLength: 10, minLength: 0 }}
+            additionalValidationIsValid={validateOptionalPhoneNumber}
+            autoComplete="tel"
+          />
+        </div>
+      </WithErrorBar>
+      <div className="margin-top-3">
+        <FormGroup>
           <FormControlLabel
-            label={Config.selfRegistration.investNewarkContactSharingCheckboxLabel}
+            label={Config.selfRegistration.updatesAndRemindersCheckboxLabel}
             control={
               <Checkbox
-                checked={props.user.contactSharingWithAccountCreationPartner}
-                onChange={(event): void =>
-                  handleContactSharingWithAccountCreationPartner(event.target.checked)
-                }
-                id="investNewarkCheckbox"
+                checked={props.user.receiveUpdatesAndReminders}
+                onChange={(event): void => handleUpdatesAndReminders(event.target.checked)}
+                id="updatesAndRemindersCheckbox"
               />
             }
           />
-        )}
-      </FormGroup>
+          <FormControlLabel
+            label={Config.selfRegistration.newsletterCheckboxLabel}
+            control={
+              <Checkbox
+                checked={props.user.receiveNewsletter}
+                onChange={(event): void => handleNewsletter(event.target.checked)}
+                id="newsletterCheckbox"
+              />
+            }
+          />
+          <FormControlLabel
+            label={Config.selfRegistration.userTestingCheckboxLabel}
+            control={
+              <Checkbox
+                checked={props.user.userTesting}
+                onChange={(event): void => handleUserTesting(event.target.checked)}
+                id="contactMeCheckbox"
+              />
+            }
+          />
+
+          {props.user.accountCreationSource === "investNewark" && (
+            <FormControlLabel
+              label={Config.selfRegistration.investNewarkContactSharingCheckboxLabel}
+              control={
+                <Checkbox
+                  checked={props.user.contactSharingWithAccountCreationPartner}
+                  onChange={(event): void =>
+                    handleContactSharingWithAccountCreationPartner(event.target.checked)
+                  }
+                  id="investNewarkCheckbox"
+                />
+              }
+            />
+          )}
+        </FormGroup>
+      </div>
     </div>
   );
 };
