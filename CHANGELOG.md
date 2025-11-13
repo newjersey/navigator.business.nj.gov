@@ -1,3 +1,22 @@
+# [2025.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.22.0...v2025.23.0) (2025-11-13)
+
+
+### Bug Fixes
+
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] continue without saving ([062aebc](https://github.com/newjersey/navigator.business.nj.gov/commit/062aebc359028c65f6b4ba6aeafab64e093a0e05))
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] env permit UI ([f3b6c85](https://github.com/newjersey/navigator.business.nj.gov/commit/f3b6c8566daf7ff8605769026c2fe3ca863aafa5))
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] update route for env permit email ([ab5f272](https://github.com/newjersey/navigator.business.nj.gov/commit/ab5f272003063408c17f014f30c2444251a6fe28))
+
+
+### Features
+
+* [AB[#16369](https://github.com/newjersey/navigator.business.nj.gov/issues/16369)] ID's added to all clickable elements ([be505d6](https://github.com/newjersey/navigator.business.nj.gov/commit/be505d6bc60878d1e60f2ad44a6d278aafd3144f))
+* [AB[#16377](https://github.com/newjersey/navigator.business.nj.gov/issues/16377)] stepper step query params ([8a5fbcb](https://github.com/newjersey/navigator.business.nj.gov/commit/8a5fbcb23bbc8493eafb80ae9361cd25572bda8c))
+* [AB[#16473](https://github.com/newjersey/navigator.business.nj.gov/issues/16473)] Add AWS Messaging Service Client for Email Communications ([a6f58bf](https://github.com/newjersey/navigator.business.nj.gov/commit/a6f58bf607c561e0b95b6417a8ca0cbae03faa86))
+* [AB[#16473](https://github.com/newjersey/navigator.business.nj.gov/issues/16473)] Add feature flag for welcome email and update SSM utils to look at local env ([14af574](https://github.com/newjersey/navigator.business.nj.gov/commit/14af574a33f093badf32079b7ad65677fe41c867))
+* [AB[#16656](https://github.com/newjersey/navigator.business.nj.gov/issues/16656)] refactor api_submit analytics ([559a41f](https://github.com/newjersey/navigator.business.nj.gov/commit/559a41fc089bf84e66ebd888b4af7f0c10ecc434))
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] env permit email req ([c458769](https://github.com/newjersey/navigator.business.nj.gov/commit/c4587693932e6c4b48ead96c2e084b505bff2f37))
+
 # [2025.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.21.0...v2025.22.0) (2025-10-29)
 
 
