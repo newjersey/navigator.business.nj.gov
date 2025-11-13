@@ -1,5 +1,8 @@
-import os
 import json
+import os
+
+# this file's use is deprecated
+# use the /mgmt/unusedContent page functionality instead
 
 
 def find_unused_task_files(root: str, directories: list[str]) -> None:
@@ -56,7 +59,7 @@ def get_task_names_from_roadmap_file(file_path: str) -> set[str]:
             roadmap_steps = roadmap_config["roadmapSteps"]
 
             task_names.update(
-              # reminder that curly braces are the syntax for set literals in Python when no keys are included
+                # reminder that curly braces are the syntax for set literals in Python when no keys are included
                 {step["task"] for step in roadmap_steps if "task" in step},
                 {
                     step["licenseTask"]
@@ -82,4 +85,6 @@ def get_all_task_markdown_filenames(root: str) -> list[str]:
 
 
 if __name__ == "__main__":
-    find_unused_task_files(root="../src/roadmaps", directories=["add-ons", "industries"])
+    find_unused_task_files(
+        root="../src/roadmaps", directories=["add-ons", "industries"]
+    )

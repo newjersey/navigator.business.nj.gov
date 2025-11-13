@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { AddOn, TaskModification } from "@/lib/roadmap/roadmapBuilder";
-import { IndustryRoadmap } from "@businessnjgovnavigator/shared/types";
+import { loadTaskDependenciesFile } from "@/lib/static/loadTaskDependencies";
+import { IndustryRoadmap, TaskDependencies } from "@businessnjgovnavigator/shared/types";
 import { HtmlUrlChecker } from "broken-link-checker";
 import fs from "fs";
 import matter from "gray-matter";
@@ -52,6 +53,7 @@ type Filenames = {
 
 type FileContents = {
   tasks: string[];
+  licenseTasks: string[];
   industries: Array<IndustryRoadmap>;
   addOns: Array<AddOn[]>;
   modifications: Array<TaskModification[]>;
@@ -113,6 +115,9 @@ const getContents = (filenames: Filenames): FileContents => {
   return {
     tasks: filenames.tasks.map((it) => {
       return matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content;
+    }),
+    licenseTasks: filenames.licenseTasks.map((it) => {
+      return matter(fs.readFileSync(path.join(roadmapsDir, "license-tasks", it), "utf8")).content;
     }),
     industries,
     addOns: addOns.map((i) => {
@@ -181,7 +186,7 @@ const isReferencedInARoadmap = async (
   for (const industry of contents.industries) {
     if (
       industry.roadmapSteps.some((it) => {
-        return it.task === filenameWithoutMd;
+        return it.task === filenameWithoutMd || it.licenseTask === filenameWithoutMd;
       })
     ) {
       containedInAnAddOn = true;
@@ -204,7 +209,7 @@ const isReferencedInARoadmap = async (
   for (const addOn of contents.addOns) {
     if (
       addOn.some((it) => {
-        return it.task === filenameWithoutMd;
+        return it.task === filenameWithoutMd || it.licenseTask === filenameWithoutMd;
       })
     ) {
       containedInAnAddOn = true;
@@ -227,13 +232,62 @@ const isReferencedInARoadmap = async (
   return containedInAModification || containedInAnAddOn;
 };
 
+const isReferencedInTaskDependencies = (filename: string): boolean => {
+  const filenameWithoutMd = filename.split(".md")[0];
+
+  const taskDependencies = loadTaskDependenciesFile().dependencies as unknown as TaskDependencies[];
+  for (const dependency of taskDependencies) {
+    if (dependency.task && dependency.task === filenameWithoutMd) {
+      return true;
+    }
+    if (dependency.licenseTask && dependency.licenseTask === filenameWithoutMd) {
+      return true;
+    }
+    if (dependency.taskDependencies) {
+      for (const taskDependency of dependency.taskDependencies) {
+        if (taskDependency === filenameWithoutMd) {
+          return true;
+        }
+      }
+    }
+    if (dependency.licenseTaskDependencies) {
+      for (const licenseTaskDependency of dependency.licenseTaskDependencies) {
+        if (licenseTaskDependency === filenameWithoutMd) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+};
+
 export const findDeadTasks = async (): Promise<string[]> => {
   const deadTasks = [];
   const filenames = getFilenames();
   const contents = getContents(filenames);
-  for (const filename of filenames.tasks) {
-    if (!(await isReferencedInARoadmap(filename, contents))) {
-      deadTasks.push(filename);
+  for (const taskFilename of filenames.tasks) {
+    if (!(await isReferencedInARoadmap(taskFilename, contents))) {
+      if (isReferencedInTaskDependencies(taskFilename)) {
+        deadTasks.push(`${taskFilename} (only used in task dependencies)`);
+      } else {
+        deadTasks.push(taskFilename);
+      }
+    }
+  }
+  return deadTasks;
+};
+
+export const findDeadLicenseTasks = async (): Promise<string[]> => {
+  const deadTasks = [];
+  const filenames = getFilenames();
+  const contents = getContents(filenames);
+  for (const licenseTaskFilename of filenames.licenseTasks) {
+    if (!(await isReferencedInARoadmap(licenseTaskFilename, contents))) {
+      if (isReferencedInTaskDependencies(licenseTaskFilename)) {
+        deadTasks.push(`${licenseTaskFilename} (only used in task dependencies)`);
+      } else {
+        deadTasks.push(licenseTaskFilename);
+      }
     }
   }
   return deadTasks;
