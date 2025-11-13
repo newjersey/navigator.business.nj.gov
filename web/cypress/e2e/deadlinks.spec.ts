@@ -1,10 +1,10 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-describe("deadlinks page [feature] [all] [group3]", () => {
+describe("unusedContent page [feature] [all] [group3]", () => {
   describe("when not authenticated with cognito", () => {
     beforeEach(() => {
       cy.clearCookies();
-      cy.visit("/mgmt/deadlinks")
+      cy.visit("/mgmt/unusedContent")
         // eslint-disable-next-line testing-library/await-async-utils
         .wait(5000);
     });
@@ -26,7 +26,7 @@ describe("deadlinks page [feature] [all] [group3]", () => {
     beforeEach(() => {
       cy.clearCookies();
       cy.loginByCognitoApi();
-      cy.visit("/mgmt/deadlinks")
+      cy.visit("/mgmt/unusedContent")
         // eslint-disable-next-line testing-library/await-async-utils
         .wait(5000);
     });
