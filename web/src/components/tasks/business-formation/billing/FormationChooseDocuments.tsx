@@ -61,14 +61,20 @@ export const FormationChooseDocuments = (): ReactElement => {
     });
   };
 
+  const costColumnHeader = Config.formation.fields.paymentType.costColumnLabel;
+
   return (
     <div className={`margin-top-3`}>
-      <table className="business-formation-table business-formation-document">
+      <table className="business-formation-table business-formation-document" role="table">
         <thead>
           <tr>
-            <th className="text-bold">{Config.formation.fields.paymentType.serviceColumnLabel}</th>
+            <th scope="col" role="columnheader" className="text-bold">
+              {Config.formation.fields.paymentType.serviceColumnLabel}
+            </th>
             <th></th>
-            <th className="text-bold">{Config.formation.fields.paymentType.costColumnLabel}</th>
+            <th scope="col" role="columnheader" className="text-bold">
+              {costColumnHeader}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -90,7 +96,10 @@ export const FormationChooseDocuments = (): ReactElement => {
                 />
               </label>
             </td>
-            <td className={"text-primary-dark text-bold"}>
+            <td
+              className={"text-primary-dark text-bold"}
+              aria-label={`${costColumnHeader} ${getDollarValue(officialFormationCost)}`}
+            >
               {getDollarValue(officialFormationCost)}
             </td>
           </tr>
@@ -129,6 +138,7 @@ export const FormationChooseDocuments = (): ReactElement => {
               className={
                 state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""
               }
+              aria-label={`${costColumnHeader} ${getDollarValue(certificateStandingCost)}`}
             >
               {getDollarValue(certificateStandingCost)}
             </td>
@@ -173,7 +183,9 @@ export const FormationChooseDocuments = (): ReactElement => {
                   : ""
               }
             >
-              {getDollarValue(certifiedCopyCost)}
+              <div aria-label={`${costColumnHeader} ${getDollarValue(certifiedCopyCost)}`}>
+                {getDollarValue(certifiedCopyCost)}
+              </div>
             </td>
           </tr>
         </tbody>
@@ -188,7 +200,10 @@ export const FormationChooseDocuments = (): ReactElement => {
             </td>
             <td colSpan={1}></td>
             <td colSpan={1}>
-              <div className="text-align-right text-bold" aria-label="Subtotal">
+              <div
+                className="text-align-right text-bold"
+                aria-label={`${Config.formation.fields.paymentType.costSubtotalLabel} ${getDollarValue(totalCost)}`}
+              >
                 {getDollarValue(totalCost)}
               </div>
             </td>
