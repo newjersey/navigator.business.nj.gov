@@ -651,6 +651,12 @@ collections:
               - { label: Name Label, name: nameFieldLabel, widget: string }
               - { label: Email Label, name: emailFieldLabel, widget: string }
               - { label: Confirm Email Label, name: confirmEmailFieldLabel, widget: string }
+              - { label: Phone Number Label, name: phoneNumberFieldLabel, widget: string }
+              - {
+                  label: Phone Number Label Optional,
+                  name: phoneNumberFieldLabelOptional,
+                  widget: string,
+                }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Close Button Text, name: closeButtonText, widget: string }
               - { label: Continue without Saving, name: continueWithoutSaving, widget: string }
@@ -675,9 +681,15 @@ collections:
                   name: errorTextEmailsNotMatching,
                   widget: string,
                 }
+              - { label: Error - Phone Number, name: errorTextPhoneNumber, widget: string }
               - { label: Error - Required Fields, name: errorTextRequiredFields, widget: string }
               - { label: Error - Duplicate Sign-up, name: errorTextDuplicateSignUp, widget: string }
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
+              - {
+                  label: Updates and Reminders Label,
+                  name: updatesAndRemindersCheckboxLabel,
+                  widget: string,
+                }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
               - {
