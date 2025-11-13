@@ -2,6 +2,7 @@ import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import { DOL_EIN_CHARACTERS } from "@/components/employer-rates/EmployerRatesQuestions";
 import {
   generateBusiness,
+  generateEmployerRatesResponse,
   generateProfileData,
   generateUser,
   generateUserDataForBusiness,
@@ -370,5 +371,92 @@ describe("EmployerRates", () => {
 
     expect(await screen.findByText(Config.employerRates.dolEinErrorText)).toBeInTheDocument();
     expect(screen.queryByTestId("serverError")).not.toBeInTheDocument();
+  });
+
+  it("renders noAccount error when checkEmployerRates returns an error string", async () => {
+    mockApi.checkEmployerRates.mockResolvedValue(
+      generateEmployerRatesResponse({
+        error: "some error",
+      }),
+    );
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+    expect(screen.getByTestId("noAccountError")).toBeInTheDocument();
+  });
+
+  it("removes noAccount error when radio selection changes", async () => {
+    mockApi.checkEmployerRates.mockResolvedValue(
+      generateEmployerRatesResponse({
+        error: "some error",
+      }),
+    );
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+    expect(screen.getByTestId("noAccountError")).toBeInTheDocument();
+
+    const falseRadio = screen.getByRole("radio", {
+      name: Config.employerRates.employerAccessFalseText,
+    });
+    await userEvent.click(falseRadio);
+
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
+  it("removes noAccount error when there is a dol ein error", async () => {
+    mockApi.checkEmployerRates.mockResolvedValue(
+      generateEmployerRatesResponse({
+        error: "some error",
+      }),
+    );
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+    expect(screen.getByTestId("noAccountError")).toBeInTheDocument();
+
+    const textbox = screen.getByRole("textbox");
+    const user = userEvent.setup();
+    user.clear(textbox);
+    const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
+    await user.type(textbox, toType);
+    await user.tab();
+
+    expect(await screen.findByText(Config.employerRates.dolEinErrorText)).toBeInTheDocument();
+    expect(screen.queryByTestId("noAccountError")).not.toBeInTheDocument();
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
   });
 });

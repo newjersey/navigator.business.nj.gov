@@ -2953,6 +2953,11 @@ collections:
                 }
               - { label: DOL EIN Alert Label Text, name: dolEinAlertLabelText, widget: string }
               - { label: Server Error Alert Text, name: serverErrorText, widget: markdown }
+              - {
+                  label: Unable To Perform User Validation Alert Text,
+                  name: noAccountErrorText,
+                  widget: markdown,
+                }
               - { label: Employer Access Question Text, name: employerAccessText, widget: markdown }
               - {
                   label: Employer Access Question Is True Text,
