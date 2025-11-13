@@ -67,7 +67,7 @@ aws configure
 ```
 
 Clone the code and navigate to the root of this repository. There is an installation script that will
-install all `yarn` packages for both the frontend and backend. It also sets up the local DynamoDB.
+install all required development tools and yarn packages.
 
 ```shell
 ./scripts/install.sh
@@ -93,14 +93,18 @@ Before you can run locally, you will need to:
 ### Run tests
 
 Before running tests that interact with the API or DynamoDB Local, make sure your Docker environment is running.
+
 - **macOS:** Start Colima (recommended)
+
 ```shell
 colima start
 
 ```
+
 - On Windows (WSL2) or Linux, start Docker Desktop or Docker Engine as usual.
 
 We use Jest for our TypeScript-based unit tests across our projects.
+
 ```shell
 # Run all unit tests
 yarn test
@@ -150,7 +154,6 @@ If you haven’t set up a Docker runtime yet, we recommend using Colima
 instead of Docker Desktop.
 Colima provides a lightweight, fast container runtime optimized for macOS development.
 
-
 1. Install Colima and Docker CLI:
    ```shell
    brew install colima docker
@@ -159,28 +162,34 @@ Colima provides a lightweight, fast container runtime optimized for macOS develo
    ```shell
    colima start --edit
    ```
-When the config file opens in your editor, set the following options:
+   When the config file opens in your editor, set the following options:
    ```shell
    # Colima configuration for development
-  arch: aarch64
-  cpu: 8
-  memory: 16
-  disk: 256
-  runtime: docker
-```
+   arch: aarch64
+   cpu: 8
+   memory: 16
+   disk: 256
+   runtime: docker
+   ```
+
+````
 3. Verify Colima is running:
    ```shell
    colima list
-   ```
+````
+
 4. Then, launch all the services
+
 ```shell
 yarn start:dev
 ```
 
-5. If you want to stop the services later, run:
-  ```shell
-  yarn services:down
+5. Terminating the application with Ctrl+C should run a cleanup command and terminate Docker processes. If you need to stop the services manually, run:
+
+```shell
+yarn services:down
 ```
+
 #### Troubleshooting
 
 If you get an error from serverless that looks like `Inaccessible host: localhost at port 8000`,
@@ -278,7 +287,7 @@ your AWS CLI must be configured with valid AWS credentials.
 
 The backend app itself is defined in `src/functions/migrate.ts` and is mostly a regular Express app,
 except it wraps its export in `serverless-http` to become a handler. Locally, the Express app runs normally.
-API gateway routing is configured using AWS CDK in the  `/api/cdk/lib/api-stack.ts`  file, which
+API gateway routing is configured using AWS CDK in the `/api/cdk/lib/api-stack.ts` file, which
 defines the config structure that proxies all routes through to be handled by the Express routing
 system.
 
@@ -330,7 +339,6 @@ following actions:
 3. **Creates a migration function** in the file with type signature
    `(v{X-1}UserData) => v{X}UserData`, which defines the way that the previous version of the object
    should be mapped to the new structure.
-
    - **Note:** `generate-new-migration.sh` currently only copies the previous migration function.
      _You must write your own updated migration function_. You should also test it to verify
      transformations are executed properly.
@@ -345,7 +353,7 @@ following actions:
 ## Ports
 
 | service          | local dev & CI feature tests | local feature tests | unit tests |
-|------------------| ---------------------------- | ------------------- | ---------- |
+| ---------------- | ---------------------------- | ------------------- | ---------- |
 | Next.js frontend | 3000                         | 3001                |            |
 | CDK backend      | 5002                         | 5001                |            |
 | DynamoDB         | 8000                         | 8001                |            |
