@@ -24,7 +24,7 @@
     "prettier:yamlOutput": "prettier -w web/public/mgmt/config.yml",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
-    "start:dev": "yarn services:up && yarn workspaces foreach -ptvi run dev",
+    "start:dev": "node scripts/start-dev.js",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest",
     "test:ci": "jest --colors --runInBand --ci",
