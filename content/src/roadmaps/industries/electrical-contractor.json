@@ -62,8 +62,7 @@
   ],
   "displayname": "electrical-contractor",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "electrician",

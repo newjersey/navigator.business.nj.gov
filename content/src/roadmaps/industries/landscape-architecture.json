@@ -69,8 +69,7 @@
   ],
   "displayname": "landscape architecture",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "landscape architect, engineer, consulting, landscape architectural services",

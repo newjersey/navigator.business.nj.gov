@@ -61,9 +61,7 @@
   "name": "Vending Machine",
   "nonEssentialQuestionsIds": ["weights-measures", "sell-milk-question"],
   "displayname": "vending-machine",
-  "industryOnboardingQuestions": {
-    "canBeReseller": false
-  },
+  "industryOnboardingQuestions": {},
   "isEnabled": true,
   "additionalSearchTerms": "vending machine service, vending machine business, snack machine, vending machine operator",
   "id": "vending-machine",

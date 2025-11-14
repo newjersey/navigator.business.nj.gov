@@ -63,8 +63,7 @@
   ],
   "displayname": "home-contractor",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "renovation, home renovation, home contractor, residential remodeler, home remodeler ",

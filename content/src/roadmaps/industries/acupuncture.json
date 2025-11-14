@@ -58,8 +58,7 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "acupuncture",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",

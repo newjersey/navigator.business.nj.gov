@@ -116,7 +116,6 @@ describe("usageHelpers", () => {
         isProvidesStaffingServicesApplicable: undefined,
         isCertifiedInteriorDesignerApplicable: undefined,
         isRealEstateAppraisalManagementApplicable: undefined,
-        canBeReseller: undefined,
         canBeHomeBased: undefined,
         isLiquorLicenseApplicable: undefined,
         isCpaRequiredApplicable: undefined,

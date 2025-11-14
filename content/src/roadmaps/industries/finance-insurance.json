@@ -57,8 +57,7 @@
   "nonEssentialQuestionsIds": ["weights-measures", "insurance-producer"],
   "displayname": "finance-insurance",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "Insurance agency, insurance broker, insurers, insurance agent, risk management, insurance, business insurance, auto insurance, car insurance, life insurance, home insurance, liability protection, financial protection services",

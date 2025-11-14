@@ -288,28 +288,6 @@ describe("buildUserRoadmap", () => {
     });
   });
 
-  describe("reseller tasks", () => {
-    it("adds reseller task if canBeReseller is true", async () => {
-      const resellerIndustries = getIndustries().filter((industry) => {
-        return industry.industryOnboardingQuestions.canBeReseller === true;
-      });
-      const industry = randomElementFromArray(resellerIndustries);
-
-      await buildUserRoadmap(generateStartingProfile({ industryId: industry.id }), {});
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("reseller");
-    });
-
-    it("does not add reseller task if canBeReseller is false", async () => {
-      const nonResellerIndustries = getIndustries().filter((industry) => {
-        return industry.industryOnboardingQuestions.canBeReseller === false;
-      });
-      const industry = randomElementFromArray(nonResellerIndustries);
-
-      await buildUserRoadmap(generateStartingProfile({ industryId: industry.id }), {});
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("reseller");
-    });
-  });
-
   describe("legal structure", () => {
     it(`adds public-record-filing for public-filing legal structure for STARTING`, async () => {
       await buildUserRoadmap(

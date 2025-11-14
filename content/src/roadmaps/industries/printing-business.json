@@ -57,8 +57,7 @@
   "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "printing-business",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "office printing, commercial printing, printing services",

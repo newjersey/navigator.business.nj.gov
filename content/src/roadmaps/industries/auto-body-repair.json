@@ -73,9 +73,7 @@
     "flashing-light-permit"
   ],
   "displayname": "auto-body-repair",
-  "industryOnboardingQuestions": {
-    "canBeReseller": false
-  },
+  "industryOnboardingQuestions": {},
   "modifications": [],
   "isEnabled": true,
   "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",

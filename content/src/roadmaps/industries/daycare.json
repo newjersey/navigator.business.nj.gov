@@ -49,13 +49,9 @@
     }
   ],
   "name": "Childcare Center",
-  "nonEssentialQuestionsIds": [
-    "mvc-cpcn",
-    "cdl-neq"
-  ],
+  "nonEssentialQuestionsIds": ["mvc-cpcn", "cdl-neq"],
   "displayname": "daycare",
   "industryOnboardingQuestions": {
-    "canBeReseller": false,
     "isChildcareForSixOrMore": true
   },
   "isEnabled": true,
