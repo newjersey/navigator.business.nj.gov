@@ -44,6 +44,26 @@ import { AxiosResponse } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
+export type MessageChannel = "email" | "sms" | "tts" | "whatsapp";
+export type MessageTemplateId = "welcome@v1";
+export type MessageTopic = "welcome";
+
+export interface MessageData {
+  taskId: string; // unique id for message task
+  userId: string; // user's id
+  channel: MessageChannel; // email | sms | tts | whatsapp
+  templateId: MessageTemplateId;
+  topic: MessageTopic; // welcome | taxReminder - TBD as comms generated
+  //     "userId" and "topic" used for deduplication
+  templateData: // used to construct the message from the template
+  {
+    name: string;
+    business: string;
+  };
+  dueAt: string; // date to deliver
+  deliveredAt: string; // remains undefined until message is sent
+  dateCreated: string;
+}
 export interface DatabaseClient {
   migrateOutdatedVersionUsers: () => Promise<{
     success: boolean;
@@ -80,6 +100,12 @@ export interface BusinessesDataClient {
   findAllByIndustry: (industry: string) => Promise<Business[]>;
   findBusinessesByNamePrefix: (prefix: string) => Promise<Business[]>;
   findAllByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
+}
+
+export interface MessagesDataClient {
+  get: (taskId: string) => Promise<MessageData>;
+  put: (messageData: MessageData) => Promise<MessageData>;
+  getMessagesDueAt: (dueAt: string) => Promise<MessageData[]>;
 }
 
 export interface BusinessNameClient {

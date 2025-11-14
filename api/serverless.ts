@@ -1,9 +1,12 @@
 import businessesDynamoDbSchema from "@businessnjgovnavigator/api/businesses-dynamodb-schema.json";
-import usersDynamoDbSchema from "@businessnjgovnavigator/api/users-dynamodb-schema.json";
+import { default as messagesDynamoDbSchema } from "@businessnjgovnavigator/api/messages-dynamodb-schema.json";
+import { default as usersDynamoDbSchema } from "@businessnjgovnavigator/api/users-dynamodb-schema.json";
+
 import encryptTaxId from "@functions/encryptTaxId";
 import express from "@functions/express";
 import githubOauth2 from "@functions/githubOauth2";
 import healthCheck from "@functions/healthCheck";
+import messagingService from "@functions/messagingService";
 import migrateUsersVersion from "@functions/migrateUsersVersion";
 import updateExternalStatus from "@functions/updateExternalStatus";
 import updateKillSwitchParameter from "@functions/updateKillSwitchParameter";
@@ -42,6 +45,8 @@ const airtableUsersTable = process.env.AIRTABLE_USERS_TABLE || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 const businessesTable = `businesses-table-${stage}`;
+const messagesTable = `messages-table-${stage}`;
+
 const ssmLocation = stage === "local" ? "dev" : stage;
 
 const devEnv = "dev";
@@ -149,6 +154,11 @@ const serverlessConfiguration: AWS = {
       role: {
         managedPolicies: ["arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"],
         statements: [
+          {
+            Effect: "Allow",
+            Action: ["ses:sendEmail", "ses:sendRawEmail"],
+            Resource: `arn:aws:sns:${region}:${account_id}: something something`,
+          },
           {
             Effect: "Allow",
             Action: ["sns:Publish"],
@@ -354,6 +364,17 @@ serverlessConfiguration.functions = {
         }
       : undefined,
   ),
+  messagingService: messagingService(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined,
+  ),
   migrateUsersVersion: migrateUsersVersion(
     env.CI
       ? {
@@ -424,6 +445,14 @@ if (!env.CI || stage === "local") {
         Properties: {
           ...businessesDynamoDbSchema,
           TableName: businessesTable,
+        },
+      },
+      MessagesDynamoDBTable: {
+        Type: "AWS::DynamoDB::Table",
+        DeletionPolicy: "Retain",
+        Properties: {
+          ...messagesDynamoDbSchema,
+          TableName: messagesTable,
         },
       },
       GatewayResponseDefault4XX: {
