@@ -65,13 +65,9 @@
     }
   ],
   "name": "Cemetery",
-  "nonEssentialQuestionsIds": [
-    "mvc-cpcn"
-  ],
+  "nonEssentialQuestionsIds": ["mvc-cpcn"],
   "displayname": "cemetery",
-  "industryOnboardingQuestions": {
-    "canBeReseller": false
-  },
+  "industryOnboardingQuestions": {},
   "isEnabled": true,
   "additionalSearchTerms": "cemetary, burial, graveyard, grave, crematory, mausoleum, niche, crypt ",
   "id": "cemetery",

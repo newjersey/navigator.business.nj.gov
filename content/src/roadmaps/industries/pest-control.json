@@ -67,13 +67,10 @@
     }
   ],
   "name": "Pest Control",
-  "nonEssentialQuestionsIds": [
-    "pest-pesticide-dealer-licensing"
-  ],
+  "nonEssentialQuestionsIds": ["pest-pesticide-dealer-licensing"],
   "displayname": "pest-control",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "exterminator, pest removal, pest management, bugs, insects, rodents, termites, roaches, pesticides",

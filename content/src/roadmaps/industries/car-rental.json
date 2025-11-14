@@ -74,14 +74,10 @@
     }
   ],
   "name": "Car Rental and Dealerships ",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "bus-initial-inspection"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "bus-initial-inspection"],
   "displayname": "car-rental ",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "canBeReseller": false
+    "canBeHomeBased": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "vehicle rental, vehicle dealership, car dealership, car rental, dealership, dealer, leasing, car leasing, vehicle leasing",

@@ -63,9 +63,7 @@
     "cdl-neq"
   ],
   "displayname": "lodging",
-  "industryOnboardingQuestions": {
-    "canBeReseller": false
-  },
+  "industryOnboardingQuestions": {},
   "isEnabled": true,
   "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host, rooming house, boarding house",
   "id": "lodging",

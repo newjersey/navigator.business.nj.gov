@@ -63,8 +63,7 @@
   ],
   "displayname": "e-commerce",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "online store, ecommerce, e-business, retail, online business, merchandise, retail, electronics retail, appliances retail",

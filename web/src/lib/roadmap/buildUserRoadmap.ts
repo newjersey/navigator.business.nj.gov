@@ -244,10 +244,6 @@ const getIndustryBasedAddOns = (
     addOns.push("will-sell-pet-care-items");
   }
 
-  if (industry.industryOnboardingQuestions.canBeReseller) {
-    addOns.push("reseller");
-  }
-
   if (
     profileData.propertyLeaseType === "LONG_TERM_RENTAL" ||
     profileData.propertyLeaseType === "BOTH"
