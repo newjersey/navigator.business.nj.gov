@@ -1266,7 +1266,7 @@ workflows:
     jobs:
       - docker-build-builder-image
 
-  build-testing-weekly:
+  deploy-testing-weekly-from-main:
     triggers:
       - schedule:
           # Every Saturday, at Noon.
@@ -1274,7 +1274,7 @@ workflows:
           filters:
             branches:
               only:
-                - testing-repo
+                - main
     jobs:
       - deploy-testing
   scheduled-daily-tests-content-repo:
