@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { getDollarValue } from "@/lib/utils/formatters";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -53,6 +54,14 @@ describe("Formation - BillingStep", () => {
 
   const subtotalLabel = Config.formation.fields.paymentType.costSubtotalLabel;
   const totalLabel = "Total";
+
+  const composeSubTotalAria = (subTotalNumber: number): string => {
+    return `${subtotalLabel} ${getDollarValue(subTotalNumber)}`;
+  };
+
+  const composeTotalAria = (totalNumber: number): string => {
+    return `* ${totalLabel} ${getDollarValue(totalNumber)}`;
+  };
 
   const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
@@ -160,8 +169,12 @@ describe("Formation - BillingStep", () => {
         const standingCost = Number.parseInt(Config.formation.fields.certificateOfStanding.cost);
         const expectedTotal = officialFormationCost + standingCost;
 
-        expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(expectedTotal.toString());
-        expect(screen.getByLabelText(totalLabel)).toHaveTextContent(expectedTotal.toString());
+        expect(
+          screen.getByRole("generic", { name: composeTotalAria(expectedTotal) }),
+        ).toHaveTextContent(getDollarValue(expectedTotal));
+        expect(
+          screen.getByRole("generic", { name: composeSubTotalAria(expectedTotal) }),
+        ).toHaveTextContent(getDollarValue(expectedTotal));
       });
     }
 
@@ -185,8 +198,12 @@ describe("Formation - BillingStep", () => {
         );
         const expectedTotal = officialFormationCost + standingCost;
 
-        expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(expectedTotal.toString());
-        expect(screen.getByLabelText(totalLabel)).toHaveTextContent(expectedTotal.toString());
+        expect(
+          screen.getByRole("generic", { name: composeSubTotalAria(expectedTotal) }),
+        ).toHaveTextContent(expectedTotal.toString());
+        expect(
+          screen.getByRole("generic", { name: composeTotalAria(expectedTotal) }),
+        ).toHaveTextContent(expectedTotal.toString());
       });
     }
   });
@@ -220,35 +237,55 @@ describe("Formation - BillingStep", () => {
       },
     );
 
-    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
-      officialFormationCost.toString(),
-    );
+    expect(
+      screen.getByRole("generic", { name: composeSubTotalAria(officialFormationCost) }),
+    ).toHaveTextContent(officialFormationCost.toString());
     page.selectCheckboxByTestId("certificateOfStanding");
-    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
-      (officialFormationCost + certificateStandingCost).toString(),
-    );
+    expect(
+      screen.getByRole("generic", {
+        name: composeSubTotalAria(officialFormationCost + certificateStandingCost),
+      }),
+    ).toHaveTextContent((officialFormationCost + certificateStandingCost).toString());
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
-    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
+    expect(
+      screen.getByRole("generic", {
+        name: composeSubTotalAria(
+          officialFormationCost + certificateStandingCost + certifiedCopyCost,
+        ),
+      }),
+    ).toHaveTextContent(
       (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString(),
     );
-    expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
+    expect(
+      screen.getByRole("generic", {
+        name: composeTotalAria(officialFormationCost + certificateStandingCost + certifiedCopyCost),
+      }),
+    ).toHaveTextContent(
       (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString(),
     );
     page.selectCheckboxByTestId("certificateOfStanding");
     const finalTotal = officialFormationCost + certifiedCopyCost;
 
-    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(finalTotal.toString());
-    expect(screen.getByLabelText(totalLabel)).toHaveTextContent(finalTotal.toString());
+    expect(
+      screen.getByRole("generic", { name: composeSubTotalAria(finalTotal) }),
+    ).toHaveTextContent(finalTotal.toString());
+    expect(screen.getByRole("generic", { name: composeTotalAria(finalTotal) })).toHaveTextContent(
+      finalTotal.toString(),
+    );
 
     fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
-    expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
-      (finalTotal + ccInitialCost + ccExtraCost).toString(),
-    );
+    expect(
+      screen.getByRole("generic", {
+        name: composeTotalAria(finalTotal + ccInitialCost + ccExtraCost),
+      }),
+    ).toHaveTextContent((finalTotal + ccInitialCost + ccExtraCost).toString());
     fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.achLabel));
     const numberOfDocuments = 2;
-    expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
-      (finalTotal + achCost * numberOfDocuments).toString(),
-    );
+    expect(
+      screen.getByRole("generic", {
+        name: composeTotalAria(finalTotal + achCost * numberOfDocuments),
+      }),
+    ).toHaveTextContent((finalTotal + achCost * numberOfDocuments).toString());
   });
 
   it("uses name from profile when business formation data is not set", async () => {
