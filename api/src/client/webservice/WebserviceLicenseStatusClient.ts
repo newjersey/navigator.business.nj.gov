@@ -32,7 +32,7 @@ export const WebserviceLicenseStatusClient = (
           `Webservice License Status Client - Error. - Id:${logId} - Error:`,
           error,
         );
-        throw error.response?.status;
+        throw error;
       });
   };
 
