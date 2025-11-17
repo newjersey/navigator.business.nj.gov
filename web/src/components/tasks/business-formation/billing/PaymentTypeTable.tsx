@@ -77,6 +77,7 @@ export const PaymentTypeTable = (): ReactElement => {
   };
 
   const hasError = doesFieldHaveError(fieldName);
+  const costColumnHeader = Config.formation.fields.paymentType.costColumnLabel;
 
   return (
     <ScrollableFormFieldWrapper fieldName={fieldName}>
@@ -86,7 +87,9 @@ export const PaymentTypeTable = (): ReactElement => {
             <tr>
               <th className="text-bold">{Config.formation.fields.paymentType.label}</th>
               <th></th>
-              <th className="text-bold">{Config.formation.fields.paymentType.costColumnLabel}</th>
+              <th className="text-bold" id="cost-column-header">
+                {costColumnHeader}
+              </th>
             </tr>
             {hasError && (
               <tr>
@@ -130,6 +133,7 @@ export const PaymentTypeTable = (): ReactElement => {
                 className={
                   state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""
                 }
+                aria-label={`${costColumnHeader} ${getDollarValue(creditCardCost)}`}
               >
                 {getDollarValue(creditCardCost)}
               </td>
@@ -165,6 +169,7 @@ export const PaymentTypeTable = (): ReactElement => {
                 className={
                   state.formationFormData.paymentType === "ACH" ? "text-primary-dark text-bold" : ""
                 }
+                aria-label={`${costColumnHeader} ${getDollarValue(achCost)}`}
               >
                 {getDollarValue(achCost)}
               </td>
@@ -180,7 +185,11 @@ export const PaymentTypeTable = (): ReactElement => {
                 </div>
               </td>
               <td colSpan={1}>
-                <div className="text-align-right text-bold" aria-label={"Total"}>
+                <div
+                  className="text-align-right text-bold"
+                  data-testid="something"
+                  aria-label={`${Config.formation.fields.paymentType.costTotalLabel} ${getDollarValue(totalCost)}`}
+                >
                   {getDollarValue(totalCost)}
                 </div>
               </td>
