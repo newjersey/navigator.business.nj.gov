@@ -9,13 +9,13 @@ commands:
           command: yarn info --json cypress | jq .children.Version > cypress.lock
       - restore_cache:
           keys:
-            - v20250501-cypress-deps-{{ checksum "cypress.lock" }}
+            - v20251118-cypress-deps-{{ checksum "cypress.lock" }}
       - restore_cache:
           keys:
-            - v20250501-yarn-deploy-deps-{{ checksum "yarn.lock" }}
-            - v20250501-yarn-deps-{{ checksum "yarn.lock" }}
-            - v20250501-yarn-deploy-deps-
-            - v20250501-yarn-deps-
+            - v20251118-yarn-deploy-deps-{{ checksum "yarn.lock" }}
+            - v20251118-yarn-deps-{{ checksum "yarn.lock" }}
+            - v20251118-yarn-deploy-deps-
+            - v20251118-yarn-deps-
       - run:
           name: Install yarn packages
           command: yarn install
@@ -195,11 +195,11 @@ commands:
           name: Check Cypress Version
           command: yarn info --json cypress | jq .children.Version > cypress.lock
       - save_cache:
-          key: v20250501-cypress-deps-{{ checksum "cypress.lock" }}
+          key: v20251118-cypress-deps-{{ checksum "cypress.lock" }}
           paths:
             - ~/.cache/Cypress
       - save_cache:
-          key: v20250501-yarn-deps-{{ checksum "yarn.lock" }}
+          key: v20251118-yarn-deps-{{ checksum "yarn.lock" }}
           paths:
             - ./.yarn/cache
             - ~/.npm-global
@@ -207,7 +207,7 @@ commands:
   store-deploy-cache:
     steps:
       - save_cache:
-          key: v20250501-yarn-deploy-deps-{{ checksum "yarn.lock" }}
+          key: v20251118-yarn-deploy-deps-{{ checksum "yarn.lock" }}
           paths:
             - ./.yarn/cache
             - ./web/.next/cache
