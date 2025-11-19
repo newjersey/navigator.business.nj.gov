@@ -1,0 +1,76 @@
+name: "Set Testing Environment Variables"
+description: "Sets environment variables specific to the testing stage."
+
+inputs:
+  API_BASE_URL:
+    description: "API Gateway base URL for the Testing environment."
+    required: true
+
+  AUTH_DOMAIN:
+    description: "Cognito authentication domain for the Testing environment."
+    required: true
+
+  AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY:
+    description: "KMS key used to encrypt Tax IDs in the Testing environment."
+    required: true
+
+  AWS_CRYPTO_TAX_ID_HASHING_KEY:
+    description: "KMS key used to hash Tax IDs in the Testing environment."
+    required: true
+
+  BASIC_AUTH_AGENCY_PASSWORD:
+    description: "Basic Auth password for agency endpoints in Testing."
+    required: true
+
+  BASIC_AUTH_AGENCY_USERNAME:
+    description: "Basic Auth username for agency endpoints in Testing."
+    required: true
+
+  COGNITO_IDENTITY_POOL_ID:
+    description: "Cognito Identity Pool ID for federated identities in the Testing environment."
+    required: true
+
+  COGNITO_WEB_CLIENT_ID:
+    description: "Cognito App Client ID used by the Testing frontend."
+    required: true
+
+  COGNITO_USER_POOL_ID:
+    description: "Cognito User Pool ID for the Testing environment."
+    required: true
+
+  MYNJ_ROLE_NAME:
+    description: "MyNJ role name used for SSO access in the Testing environment."
+    required: true
+
+  MYNJ_SERVICE_TOKEN:
+    description: "Service token used to authenticate with MyNJ APIs in Testing."
+    required: true
+
+  REDIRECT_URL:
+    description: "OAuth redirect URL used by the Testing frontend for Cognito authentication."
+    required: true
+
+  NEXT_PUBLIC_WEB_BASE_URL:
+    description: "Public-facing base URL for the Testing web frontend."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Export Testing Environment Variables
+      shell: bash
+      run: |
+        echo "API_BASE_URL=${{ inputs.API_BASE_URL }}" >> $GITHUB_ENV
+        echo "AUTH_DOMAIN=${{ inputs.AUTH_DOMAIN }}" >> $GITHUB_ENV
+
+        echo "AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY=${{ inputs.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_TAX_ID_HASHING_KEY=${{ inputs.AWS_CRYPTO_TAX_ID_HASHING_KEY }}" >> $GITHUB_ENV
+        echo "BASIC_AUTH_AGENCY_PASSWORD=${{ inputs.BASIC_AUTH_AGENCY_PASSWORD }}" >> $GITHUB_ENV
+        echo "BASIC_AUTH_AGENCY_USERNAME=${{ inputs.BASIC_AUTH_AGENCY_USERNAME }}" >> $GITHUB_ENV
+        echo "COGNITO_IDENTITY_POOL_ID=${{ inputs.COGNITO_IDENTITY_POOL_ID }}" >> $GITHUB_ENV
+        echo "COGNITO_WEB_CLIENT_ID=${{ inputs.COGNITO_WEB_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "COGNITO_USER_POOL_ID=${{ inputs.COGNITO_USER_POOL_ID }}" >> $GITHUB_ENV
+        echo "MYNJ_ROLE_NAME=${{ inputs.MYNJ_ROLE_NAME }}" >> $GITHUB_ENV
+        echo "MYNJ_SERVICE_TOKEN=${{ inputs.MYNJ_SERVICE_TOKEN }}" >> $GITHUB_ENV
+        echo "REDIRECT_URL=${{ inputs.REDIRECT_URL }}" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_WEB_BASE_URL=${{ inputs.NEXT_PUBLIC_WEB_BASE_URL }}" >> $GITHUB_ENV

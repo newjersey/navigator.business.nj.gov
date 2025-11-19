@@ -1,0 +1,16 @@
+name: "Generate Release Notes"
+description: "Runs semantic-release and creates a pull request to main."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate Release Notes
+      shell: bash
+      run: |
+        yarn semantic-release --branches "$GITHUB_REF_NAME"
+
+    - name: Create PR to main
+      shell: bash
+      run: |
+        git status
+        gh pr create --fill --base main --head "$GITHUB_REF_NAME"
