@@ -11,6 +11,12 @@
   "rebaseWhen": "conflicted",
   "packageRules": [
     {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["ci", "breaking-change"],
+      "automerge": false
+    },
+    {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
       "automergeStrategy": "rebase"

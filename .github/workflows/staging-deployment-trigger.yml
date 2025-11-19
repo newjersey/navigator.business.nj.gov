@@ -1,0 +1,14 @@
+name: Auto Deploy Staging on Push to Staging
+
+on:
+  push:
+    branches:
+      - "staging-*"
+
+jobs:
+  deploy-staging:
+    permissions:
+      contents: read
+      id-token: write
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@convertDeployJobsToGHA
+    secrets: inherit

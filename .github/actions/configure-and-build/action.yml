@@ -1,0 +1,46 @@
+name: Configure and Build
+description: Runs bootstrap-code and builds the project
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: 22.20.0
+        cache: yarn
+
+    - name: Determine Cypress Version
+      shell: bash
+      run: |
+        yarn info --json cypress | jq .children.Version > cypress.lock
+
+    - name: Restore Cypress Cache
+      uses: actions/cache@v5
+      with:
+        path: ~/.cache/Cypress
+        key: cypress-cache-${{ hashFiles('cypress.lock') }}
+        restore-keys: |
+          cypress-cache-
+
+    - name: Restore Yarn Cache
+      uses: actions/cache@v5
+      with:
+        path: .yarn/cache
+        key: yarn-cache-${{ hashFiles('yarn.lock') }}
+        restore-keys: |
+          yarn-cache-
+
+    - name: Install Dependencies
+      shell: bash
+      run: yarn install --immutable
+
+    - name: Verify Cypress Installation
+      shell: bash
+      run: yarn cypress install
+
+    - name: Build Application
+      shell: bash
+      run: yarn build

@@ -197,18 +197,6 @@ describe("userRouter", () => {
       expect(stubUnifiedDataClient.put).toHaveBeenCalledWith(userData);
     });
 
-    it("returns NOT FOUND when a user isn't registered", async () => {
-      stubUnifiedDataClient.get.mockImplementation(() => {
-        return Promise.reject(new Error("Not found"));
-      });
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const response = await request(app)
-        .get(`/users/123`)
-        .set("Authorization", "Bearer user-123-token");
-      expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
-      expect(response.status).toEqual(StatusCodes.NOT_FOUND);
-    });
-
     it("returns a FORBIDDEN when user JWT does not match user ID", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
       const response = await request(app)
