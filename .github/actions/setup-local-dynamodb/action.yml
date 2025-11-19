@@ -1,0 +1,57 @@
+name: "Setup Local DynamoDB"
+description:
+  "Installs, starts, waits for, and initializes DynamoDB Local for integration tests/local
+  development."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install DynamoDB Local
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/api install-dynamo-local
+
+    - name: Start DynamoDB Local
+      shell: bash
+      run: |
+        echo "Starting DynamoDB Local..."
+        cd api
+        java -Djava.library.path=.dynamodb/DynamoDBLocal_lib \
+             -jar .dynamodb/DynamoDBLocal.jar \
+             -sharedDb -port 8000 > dynamodb.log 2>&1 &
+        echo "DynamoDB Local started in background."
+
+    - name: Wait for DynamoDB Local
+      shell: bash
+      run: |
+        echo "Waiting for DynamoDB Local to be ready..."
+        ATTEMPTS=0
+        until curl -s http://localhost:8000 >/dev/null; do
+          ATTEMPTS=$((ATTEMPTS+1))
+          if [ "$ATTEMPTS" -ge 20 ]; then
+            echo "DynamoDB did not start within expected time. Dumping logs:"
+            cat api/dynamodb.log || true
+            exit 1
+          fi
+          echo "DynamoDB not ready, retrying... ($ATTEMPTS)"
+          sleep 3
+        done
+        echo "DynamoDB Local is ready!"
+
+    - name: Initialize DynamoDB Tables
+      shell: bash
+      run: |
+        echo "Initializing DynamoDB tables..."
+        cd api
+
+        aws dynamodb create-table \
+          --cli-input-json file://users-dynamodb-schema.json \
+          --endpoint-url http://localhost:8000 \
+          --region us-east-1 || echo "Users table already exists"
+
+        aws dynamodb create-table \
+          --cli-input-json file://businesses-dynamodb-schema.json \
+          --endpoint-url http://localhost:8000 \
+          --region us-east-1 || echo "Businesses table already exists"
+
+        echo "Tables initialized."

@@ -1,0 +1,44 @@
+name: "Perform Integration Tests"
+description: "Starts API, Wiremock, Web, and executes Cypress integration tests."
+
+inputs:
+  suite:
+    description: "The Cypress test suite group to run."
+    required: true
+  browser:
+    description: "Browser to use for Cypress."
+    required: true
+  enable-dashboard:
+    description: "Enable Cypress dashboard recording."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: 22.20.0
+        cache: yarn
+
+    - name: Configure and Build
+      uses: ./.github/actions/configure-and-build
+
+    - name: Setup Local DynamoDB
+      uses: ./.github/actions/setup-local-dynamodb
+
+    - name: Start Services
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/api start &
+        yarn workspace @businessnjgovnavigator/api start:wiremock &
+        yarn workspace @businessnjgovnavigator/web start &
+
+    - name: Run Cypress Integration Tests
+      shell: bash
+      working-directory: web
+      run: |
+        yarn cypress:run \
+          --browser=${{ inputs.browser }} \
+          --record=${{ inputs.enable-dashboard }} \
+          --env SUITE=${{ inputs.suite }}
