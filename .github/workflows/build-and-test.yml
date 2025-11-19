@@ -1,0 +1,643 @@
+name: Build and Test Navigator Project
+on:
+  push:
+    branches-ignore:
+      - "release-*"
+      - "staging-*"
+      - "testing-repo"
+      - "cms/**"
+      - "new-docker-image"
+      - "webflow-fundings-sync-*"
+      - "webflow-licenses-sync-*"
+      - "webflow-industries-sync-*"
+      - "webflow-sync-*"
+    tags-ignore:
+      - "env-update*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure and Build
+        uses: ./.github/actions/configure-and-build
+
+      - name: Run Code Quality Checks
+        uses: ./.github/actions/code-quality
+
+      - name: Upload Workspace Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace
+          path: ./
+          retention-days: 3
+  unit-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download workspace artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace
+          path: .
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+          cache: yarn
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Run Unit Tests (Shard ${{ matrix.shard }}/8)
+        run: |
+          echo "Running shard ${{ matrix.shard }} of 8"
+          yarn test:ci --shard=${{ matrix.shard }}/8
+
+      - name: Upload Jest Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-test-results-${{ matrix.shard }}
+          path: coverage/test_results
+          retention-days: 2
+
+      - name: Upload Jest Coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-coverage-${{ matrix.shard }}
+          path: coverage
+          retention-days: 3
+
+  integration-group-1:
+    name: Integration Tests - Group 1
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    if: |
+      github.ref_type == 'branch' &&
+      github.ref_name != 'content-repo'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: workspace
+          path: .
+
+      - uses: ./.github/actions/set-cypress-env-vars
+        with:
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+
+          AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN_DEV }}
+          AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+
+          CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_TEST_USER_EMAIL: ${{ vars.CYPRESS_TEST_USER_EMAIL }}
+
+          DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+
+          DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+
+          DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          DYNAMICS_LICENSE_STATUS_URL: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
+
+          FEATURE_SHOW_REMOVE_BUSINESS: ${{ vars.FEATURE_SHOW_REMOVE_BUSINESS_DEV }}
+          FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+          TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_USER_NAME:
+            ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_URL: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+
+      - uses: ./.github/actions/perform-integration-tests
+        with:
+          suite: group1
+          browser: chrome
+          enable-dashboard: true
+
+  integration-group-2:
+    name: Integration Tests - Group 2
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    if: |
+      github.ref_type == 'branch' &&
+      github.ref_name != 'content-repo'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: workspace
+          path: .
+      - uses: ./.github/actions/set-cypress-env-vars
+        with:
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+
+          AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN_DEV }}
+          AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+
+          CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_TEST_USER_EMAIL: ${{ vars.CYPRESS_TEST_USER_EMAIL }}
+
+          DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+
+          DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+
+          DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          DYNAMICS_LICENSE_STATUS_URL: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
+
+          FEATURE_SHOW_REMOVE_BUSINESS: ${{ vars.FEATURE_SHOW_REMOVE_BUSINESS_DEV }}
+          FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+          TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_USER_NAME:
+            ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_URL: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+      - uses: ./.github/actions/perform-integration-tests
+        with:
+          suite: group2
+          browser: chrome
+          enable-dashboard: true
+
+  integration-group-3:
+    name: Integration Tests - Group 3
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    if: |
+      github.ref_type == 'branch' &&
+      github.ref_name != 'content-repo'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: workspace
+          path: .
+      - uses: ./.github/actions/set-cypress-env-vars
+        with:
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+
+          AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN_DEV }}
+          AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+
+          CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_TEST_USER_EMAIL: ${{ vars.CYPRESS_TEST_USER_EMAIL }}
+
+          DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+
+          DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+
+          DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          DYNAMICS_LICENSE_STATUS_URL: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
+
+          FEATURE_SHOW_REMOVE_BUSINESS: ${{ vars.FEATURE_SHOW_REMOVE_BUSINESS_DEV }}
+          FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+          TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_USER_NAME:
+            ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_URL: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+      - uses: ./.github/actions/perform-integration-tests
+        with:
+          suite: group3
+          browser: chrome
+          enable-dashboard: true
+
+  integration-group-4:
+    name: Integration Tests - Group 4
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    if: |
+      github.ref_type == 'branch' &&
+      github.ref_name != 'content-repo'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: workspace
+          path: .
+      - uses: ./.github/actions/set-cypress-env-vars
+        with:
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+
+          AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN_DEV }}
+          AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+
+          CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_TEST_USER_EMAIL: ${{ vars.CYPRESS_TEST_USER_EMAIL }}
+
+          DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+
+          DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+
+          DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          DYNAMICS_LICENSE_STATUS_URL: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
+
+          FEATURE_SHOW_REMOVE_BUSINESS: ${{ vars.FEATURE_SHOW_REMOVE_BUSINESS_DEV }}
+          FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+          TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_USER_NAME:
+            ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_URL: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+      - uses: ./.github/actions/perform-integration-tests
+        with:
+          suite: group4
+          browser: chrome
+          enable-dashboard: true
+
+  integration-group-5:
+    name: Integration Tests - Group 5
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    if: |
+      github.ref_type == 'branch' &&
+      github.ref_name != 'content-repo'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: workspace
+          path: .
+      - uses: ./.github/actions/set-cypress-env-vars
+        with:
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+
+          AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN_DEV }}
+          AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+
+          CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_TEST_USER_EMAIL: ${{ vars.CYPRESS_TEST_USER_EMAIL }}
+
+          DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+
+          DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+
+          DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          DYNAMICS_LICENSE_STATUS_URL: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
+
+          FEATURE_SHOW_REMOVE_BUSINESS: ${{ vars.FEATURE_SHOW_REMOVE_BUSINESS_DEV }}
+          FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+          TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_USER_NAME:
+            ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_URL: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+      - uses: ./.github/actions/perform-integration-tests
+        with:
+          suite: group5
+          browser: chrome
+          enable-dashboard: true
+
+  deploy-dev:
+    needs:
+      - integration-group-1
+      - integration-group-2
+      - integration-group-3
+      - integration-group-4
+      - integration-group-5
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    environment: dev
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22.20.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+          cache: yarn
+
+      - name: Set Shared Stage Environment Variables
+        uses: ./.github/actions/set-shared-env-vars
+        with:
+          VPC_ID: ${{ vars.VPC_ID_AWS_DEV }}
+          SUBNET_ID_01: ${{ vars.SUBNET_ID_01_AWS_DEV }}
+          SUBNET_ID_02: ${{ vars.SUBNET_ID_02_AWS_DEV }}
+          SG_ID: ${{ vars.SG_ID_AWS_DEV }}
+          AWS_REGION: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+          STAGE: ${{ vars.STAGE_DEV }}
+          MYNJ_PROFILE_LINK: ${{ vars.MYNJ_PROFILE_LINK_SHARED }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+
+      - name: Set Dev Environment Variables
+        uses: ./.github/actions/set-dev-env-vars
+        with:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          ABC_ETP_API_KEY: ${{ secrets.ABC_ETP_API_KEY_STAGING }}
+          ABC_ETP_API_ACCOUNT: ${{ secrets.ABC_ETP_API_ACCOUNT_STAGING }}
+          ABC_ETP_API_BASE_URL: ${{ vars.ABC_ETP_API_BASE_URL_STAGING }}
+          AB_TESTING_EXPERIENCE_B_PERCENTAGE: ${{ vars.AB_TESTING_EXPERIENCE_B_PERCENTAGE_DEV }}
+          AIRTABLE_USERS_TABLE: ${{ vars.AIRTABLE_USERS_TABLE_DEV }}
+          API_BASE_URL: ${{ vars.API_BASE_URL_AWS_DEV }}
+          AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
+          AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+          AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID_DEV }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+          BASIC_AUTH_USERNAME: ${{ vars.BASIC_AUTH_USERNAME }}
+          BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_DEV }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          DEV_ONLY_UNLINK_TAX_ID: ${{ vars.DEV_ONLY_UNLINK_TAX_ID_DEV }}
+          DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID }}
+          DYNAMICS_ELEVATOR_SAFETY_SECRET: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_SECRET }}
+          DYNAMICS_ELEVATOR_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID }}
+          DYNAMICS_ELEVATOR_SAFETY_URL: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_URL }}
+          DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+          DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+          DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          DYNAMICS_LICENSE_STATUS_URL: ${{ vars.DYNAMICS_LICENSE_STATUS_URL_PROD }}
+          FEATURE_ABC_ETP_APPLICATION: ${{ vars.FEATURE_ABC_ETP_APPLICATION_DEV }}
+          FEATURE_CIGARETTE_LICENSE: ${{ vars.FEATURE_CIGARETTE_LICENSE_DEV }}
+          FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          FEATURE_FORMATION_SURVEY: ${{ vars.FEATURE_FORMATION_SURVEY_DEV }}
+          FEATURE_LOGIN_PAGE: ${{ vars.FEATURE_LOGIN_PAGE_DEV }}
+          FEATURE_MODIFY_BUSINESS_PAGE: ${{ vars.FEATURE_MODIFY_BUSINESS_PAGE_DEV }}
+          FEATURE_SHOW_REMOVE_BUSINESS: ${{ vars.FEATURE_SHOW_REMOVE_BUSINESS_DEV }}
+          FORMATION_API_ACCOUNT: ${{ secrets.FORMATION_API_ACCOUNT_DEV }}
+          FORMATION_API_KEY: ${{ secrets.FORMATION_API_KEY_DEV }}
+          FORMATION_API_BASE_URL: ${{ secrets.FORMATION_API_BASE_URL_DEV }}
+          GOV2GO_REGISTRATION_API_KEY: ${{ secrets.GOV2GO_REGISTRATION_API_KEY_DEV }}
+          GOV2GO_REGISTRATION_BASE_URL: ${{ secrets.GOV2GO_REGISTRATION_BASE_URL_DEV }}
+          LICENSE_STATUS_BASE_URL: ${{ vars.LICENSE_STATUS_BASE_URL_DEV }}
+          MYNJ_ROLE_NAME: ${{ vars.MYNJ_ROLE_NAME_DEV }}
+          MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
+          MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_DEV }}
+          NEXT_PUBLIC_WEB_BASE_URL: ${{ vars.WEB_BASE_URL_DEV }}
+          REDIRECT_URL: ${{ vars.REDIRECT_URL_DEV }}
+          SHOW_DISABLED_INDUSTRIES: ${{ vars.DEV_SHOW_DISABLED_INDUSTRIES }}
+          SMOKE_TEST_ENV: ${{ secrets.SMOKE_TEST_ENV_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_USER_NAME: ${{ vars.TAX_CLEARANCE_CERTIFICATE_USER_NAME }}
+          TAX_CLEARANCE_CERTIFICATE_URL: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+          USE_BASIC_AUTH: ${{ vars.USE_BASIC_AUTH_DEV }}
+          XRAY_REGISTRATION_STATUS_BASE_URL: ${{ secrets.XRAY_REGISTRATION_STATUS_BASE_URL_DEV }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+          FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+      - name: Download Build Workspace
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace
+          path: .
+
+      - name: Deploy Dev Environment
+        uses: ./.github/actions/deploy
+
+      - name: Deploy Storybook
+        uses: ./.github/actions/deploy-storybook
+
+  deploy-content:
+    needs:
+      - build
+    if: github.ref_name == 'content-repo'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    environment: content
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22.20.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+          cache: yarn
+
+      - name: Set Shared Stage Environment Variables
+        uses: ./.github/actions/set-shared-env-vars
+        with:
+          VPC_ID: ${{ secrets.VPC_ID_AWS_DEV }}
+          SUBNET_ID_01: ${{ secrets.SUBNET_ID_01_AWS_DEV }}
+          SUBNET_ID_02: ${{ secrets.SUBNET_ID_02_AWS_DEV }}
+          SG_ID: ${{ secrets.SG_ID_AWS_DEV }}
+          AWS_REGION: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+          STAGE: ${{ vars.STAGE_CONTENT }}
+          MYNJ_PROFILE_LINK: ${{ vars.MYNJ_PROFILE_LINK_SHARED }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+          AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+            ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+
+      - name: Set Dev Environment Variables
+        uses: ./.github/actions/set-dev-env-vars
+        with:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          ABC_ETP_API_KEY: ${{ secrets.ABC_ETP_API_KEY_STAGING }}
+          ABC_ETP_API_ACCOUNT: ${{ secrets.ABC_ETP_API_ACCOUNT_STAGING }}
+          ABC_ETP_API_BASE_URL: ${{ vars.ABC_ETP_API_BASE_URL_STAGING }}
+          AB_TESTING_EXPERIENCE_B_PERCENTAGE: ${{ vars.AB_TESTING_EXPERIENCE_B_PERCENTAGE_DEV }}
+          AIRTABLE_USERS_TABLE: ${{ vars.AIRTABLE_USERS_TABLE_DEV }}
+          API_BASE_URL: ${{ vars.API_BASE_URL_AWS_DEV }}
+          AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
+          AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+          AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+          AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID_DEV }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+          BASIC_AUTH_USERNAME: ${{ vars.BASIC_AUTH_USERNAME }}
+          BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_DEV }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+          DEV_ONLY_UNLINK_TAX_ID: ${{ vars.DEV_ONLY_UNLINK_TAX_ID_DEV }}
+          DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID }}
+          DYNAMICS_ELEVATOR_SAFETY_SECRET: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_SECRET }}
+          DYNAMICS_ELEVATOR_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID }}
+          DYNAMICS_ELEVATOR_SAFETY_URL: ${{ secrets.DYNAMICS_ELEVATOR_SAFETY_URL }}
+          DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+          DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+          DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+          DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+          DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+          DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+          DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+          DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+          DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+          DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+          DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+          DYNAMICS_LICENSE_STATUS_URL: ${{ vars.DYNAMICS_LICENSE_STATUS_URL_PROD }}
+          FEATURE_ABC_ETP_APPLICATION: ${{ vars.FEATURE_ABC_ETP_APPLICATION_DEV }}
+          FEATURE_CIGARETTE_LICENSE: ${{ vars.FEATURE_CIGARETTE_LICENSE_DEV }}
+          FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+          FEATURE_FORMATION_SURVEY: ${{ vars.FEATURE_FORMATION_SURVEY_DEV }}
+          FEATURE_LOGIN_PAGE: ${{ vars.FEATURE_LOGIN_PAGE_DEV }}
+          FEATURE_MODIFY_BUSINESS_PAGE: ${{ vars.FEATURE_MODIFY_BUSINESS_PAGE_DEV }}
+          FEATURE_SHOW_REMOVE_BUSINESS: ${{ vars.FEATURE_SHOW_REMOVE_BUSINESS_DEV }}
+          FORMATION_API_ACCOUNT: ${{ secrets.FORMATION_API_ACCOUNT_DEV }}
+          FORMATION_API_KEY: ${{ secrets.FORMATION_API_KEY_DEV }}
+          FORMATION_API_BASE_URL: ${{ secrets.FORMATION_API_BASE_URL_DEV }}
+          GOV2GO_REGISTRATION_API_KEY: ${{ secrets.GOV2GO_REGISTRATION_API_KEY_DEV }}
+          GOV2GO_REGISTRATION_BASE_URL: ${{ secrets.GOV2GO_REGISTRATION_BASE_URL_DEV }}
+          LICENSE_STATUS_BASE_URL: ${{ vars.LICENSE_STATUS_BASE_URL_DEV }}
+          MYNJ_ROLE_NAME: ${{ vars.MYNJ_ROLE_NAME_DEV }}
+          MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
+          MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_DEV }}
+          NEXT_PUBLIC_WEB_BASE_URL: ${{ vars.WEB_BASE_URL_DEV }}
+          REDIRECT_URL: ${{ vars.REDIRECT_URL_DEV }}
+          SHOW_DISABLED_INDUSTRIES: ${{ vars.DEV_SHOW_DISABLED_INDUSTRIES }}
+          SMOKE_TEST_ENV: ${{ secrets.SMOKE_TEST_ENV_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+          TAX_CLEARANCE_CERTIFICATE_USER_NAME: ${{ vars.TAX_CLEARANCE_CERTIFICATE_USER_NAME }}
+          TAX_CLEARANCE_CERTIFICATE_URL: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+          USE_BASIC_AUTH: ${{ vars.USE_BASIC_AUTH_DEV }}
+          XRAY_REGISTRATION_STATUS_BASE_URL: ${{ secrets.XRAY_REGISTRATION_STATUS_BASE_URL_DEV }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+          FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+      - name: Set Content Environment Variables
+        uses: ./.github/actions/set-content-env-vars
+        with:
+          API_BASE_URL: ${{ vars.API_BASE_URL_AWS_CONTENT }}
+          AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_CONTENT }}
+          MYNJ_ROLE_NAME: ${{ vars.MYNJ_ROLE_NAME_CONTENT }}
+          MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_CONTENT }}
+          AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_CONTENT }}
+          AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_CONTENT }}
+          SHOW_DISABLED_INDUSTRIES: ${{ vars.CONTENT_SHOW_DISABLED_INDUSTRIES }}
+          COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_CONTENT }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_CONTENT }}
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_CONTENT }}
+          REDIRECT_URL: ${{ vars.REDIRECT_URL_CONTENT }}
+          NEXT_PUBLIC_WEB_BASE_URL: ${{ vars.WEB_BASE_URL_CONTENT }}
+
+      - name: Deploy Content Environment
+        uses: ./.github/actions/deploy-content-env

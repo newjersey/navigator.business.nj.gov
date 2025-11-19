@@ -953,14 +953,14 @@ workflows:
           name: production-deploy
           requires:
             - prepare-release
-  deploy-testing-environment:
-    jobs:
-      - deploy-testing:
-          name: Deploy Testing
-          filters:
-            branches:
-              only:
-                - testing-repo
+  #  deploy-testing-environment:
+  #    jobs:
+  #      - deploy-testing:
+  #          name: Deploy Testing
+  #          filters:
+  #            branches:
+  #              only:
+  #                - testing-repo
 
   build-and-test:
     jobs:
@@ -1167,16 +1167,16 @@ workflows:
           requires:
             - build
 
-      #- smoke-tests:
-      #    name: Deployment Smoke Tests
-      #    enable-dashboard: true
-      #    suite: smoke
-      #    filters:
-      #      branches:
-      #        only:
-      #          - main
-      #    requires:
-      #      - dev-deploy
+  #      - smoke-tests:
+  #          name: Deployment Smoke Tests
+  #          enable-dashboard: true
+  #          suite: smoke
+  #          filters:
+  #            branches:
+  #              only:
+  #                - main
+  #          requires:
+  #            - dev-deploy
 
   # browser-testing:
   #   triggers:

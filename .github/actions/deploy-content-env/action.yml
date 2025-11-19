@@ -1,0 +1,20 @@
+name: "Deploy To Content Environment"
+description:
+  "Runs deploy-setup, packages the WebApp Docker image, and deploys the Content ECS service."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Deploy Setup
+      uses: ./.github/actions/deploy-setup
+    - name: Package WebApp Docker Image
+      uses: ./.github/actions/package-webapp-docker
+      with:
+        image-name: bfs-navigator-content
+
+    - name: Deploy WebApp to ECS
+      shell: bash
+      run: |
+        aws ecs update-service --cluster bfs_container_cluster \
+          --service bfs-navigator-content --region "$AWS_REGION" \
+          --force-new-deployment

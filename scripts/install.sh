@@ -38,7 +38,7 @@ colima start --cpu 8 --memory 16 --disk 256
 # arch: aarch64
 # runtime: docker
 
-# NVM
+# R
 if command -v nvm &> /dev/null; then
     echo "NVM is installed."
     nvm --version

@@ -1,0 +1,37 @@
+name: "Package WebApp Docker Image"
+description: "Builds and pushes the WebApp Docker image to ECR with multiple tags."
+
+inputs:
+  image-name:
+    description: "Base name for the Docker image"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build Web Docker Image
+      shell: bash
+      run: |
+        IMAGE_REPO="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers"
+        IMAGE_NAME="${{ inputs.image-name }}"
+        GIT_SHA="${GITHUB_SHA}"
+        echo "Building Docker image for $IMAGE_NAME"
+        docker build -f WebApp.Dockerfile . \
+          -t "$IMAGE_REPO:$IMAGE_NAME-$GIT_SHA" \
+          -t "$IMAGE_REPO:$IMAGE_NAME" \
+          -t "$IMAGE_REPO:$IMAGE_NAME-latest"
+    - name: Login to Amazon ECR
+      shell: bash
+      run: |
+        aws ecr get-login-password --region "$AWS_REGION" \
+          | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+    - name: Push Web Docker Image
+      shell: bash
+      run: |
+        IMAGE_REPO="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers"
+        IMAGE_NAME="${{ inputs.image-name }}"
+        GIT_SHA="${GITHUB_SHA}"
+        echo "Pushing Docker images for $IMAGE_NAME"
+        docker push "$IMAGE_REPO:$IMAGE_NAME-$GIT_SHA"
+        docker push "$IMAGE_REPO:$IMAGE_NAME"
+        docker push "$IMAGE_REPO:$IMAGE_NAME-latest"

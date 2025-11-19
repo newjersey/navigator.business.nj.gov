@@ -1,0 +1,41 @@
+name: "Build and Push Custom Node Image"
+description:
+  "Builds a custom Node builder Docker image and pushes it to ECR with SHA, version, and latest
+  tags."
+
+inputs:
+  image-name:
+    description: "Base name for the Docker image"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build Builder Docker Image
+      shell: bash
+      run: |
+        IMAGE_REPO="${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder"
+        IMAGE_NAME="${{ inputs.image-name }}"
+        GIT_SHA="${GITHUB_SHA}"
+
+        docker build -f BuilderImage.Dockerfile . \
+          -t "$IMAGE_REPO:$IMAGE_NAME-$GIT_SHA" \
+          -t "$IMAGE_REPO:$IMAGE_NAME" \
+          -t "$IMAGE_REPO:$IMAGE_NAME-latest"
+
+    - name: Login to Amazon ECR
+      shell: bash
+      run: |
+        aws ecr get-login-password --region "$AWS_REGION" \
+          | docker login --username AWS --password-stdin \
+            "${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+    - name: Push Builder Docker Image
+      shell: bash
+      run: |
+        IMAGE_REPO="${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder"
+        IMAGE_NAME="${{ inputs.image-name }}"
+        GIT_SHA="${GITHUB_SHA}"
+
+        docker push "$IMAGE_REPO:$IMAGE_NAME-$GIT_SHA"
+        docker push "$IMAGE_REPO:$IMAGE_NAME"
+        docker push "$IMAGE_REPO:$IMAGE_NAME-latest"
