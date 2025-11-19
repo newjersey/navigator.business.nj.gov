@@ -18,7 +18,8 @@ export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_api_key"
   | "cigarette_license_merchant_code"
   | "cigarette_license_merchant_key"
-  | "cigarette_license_service_code";
+  | "cigarette_license_service_code"
+  | "cigarette_license_sku";
 
 export type CIGARETTE_EMAIL_CONFIG_VARS =
   | "cigarette_license_email_confirmation_url"

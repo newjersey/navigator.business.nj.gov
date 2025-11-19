@@ -16,6 +16,7 @@ export type CigaretteLicenseApiConfig = {
   merchantCode: string;
   merchantKey: string;
   serviceCode: string;
+  sku: string;
 };
 
 export const makePostBody = (
@@ -33,7 +34,6 @@ export const makePostBody = (
     ServiceCode: config.serviceCode,
     UniqueTransId: uniqueId,
     LocalRef: uniqueId,
-    OrderTotal: 50,
     PaymentType: "CC",
     SuccessUrl: `${returnUrl}?completePayment=success`,
     FailureUrl: `${returnUrl}?completePayment=failure`,
@@ -52,6 +52,14 @@ export const makePostBody = (
       Zip: cigaretteLicenseData?.addressZipCode || "",
       Country: "US",
     },
+    LineItems: [
+      {
+        Sku: config.sku,
+        Description: "CM-100 Cigarette License Application",
+        UnitPrice: 50,
+        Quantity: 1,
+      },
+    ],
   };
 };
 

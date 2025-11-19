@@ -83,7 +83,6 @@ export interface PreparePaymentApiSubmission {
   ServiceCode: string;
   UniqueTransId: string;
   LocalRef: string;
-  OrderTotal: number;
   PaymentType: string;
   SuccessUrl: string;
   FailureUrl: string;
@@ -101,6 +100,12 @@ export interface PreparePaymentApiSubmission {
     Zip: string;
     Country: string;
   };
+  LineItems: {
+    Sku: string;
+    Description: string;
+    UnitPrice: number;
+    Quantity: number;
+  }[];
 }
 
 export interface EmailConfirmationSubmission {
