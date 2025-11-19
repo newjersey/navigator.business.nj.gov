@@ -1,0 +1,148 @@
+name: Release Pipeline
+
+on:
+  push:
+    branches:
+      - "release-*"
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@convertDeployJobsToGHA
+    secrets: inherit
+
+  production-hold:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    environment: prod
+    steps:
+      - run: echo "Awaiting approval for production release."
+
+  prepare-release:
+    needs: production-hold
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/generate-release-notes
+
+  deploy-production:
+    needs: prepare-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    environment: prod
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22.20.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+          cache: yarn
+
+      - name: Export Production Environment Variables
+        shell: bash
+        run: |
+          echo "AWS_REGION=${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}" >> $GITHUB_ENV
+          echo "VPC_ID=${{ vars.VPC_ID_AWS_PROD }}" >> $GITHUB_ENV
+          echo "SUBNET_ID_01=${{ vars.SUBNET_ID_01_AWS_PROD }}" >> $GITHUB_ENV
+          echo "SUBNET_ID_02=${{ vars.SUBNET_ID_02_AWS_PROD }}" >> $GITHUB_ENV
+          echo "SG_ID=${{ vars.SG_ID_AWS_PROD }}" >> $GITHUB_ENV
+          echo "STAGE=${{ vars.STAGE_PROD }}" >> $GITHUB_ENV
+          echo "MYNJ_PROFILE_LINK=${{ vars.MYNJ_PROFILE_LINK_PROD }}" >> $GITHUB_ENV
+          echo "AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE=${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}" >> $GITHUB_ENV
+          echo "AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE=${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}" >> $GITHUB_ENV
+
+          echo "API_BASE_URL=${{ vars.API_BASE_URL_AWS_PROD }}" >> $GITHUB_ENV
+          echo "AUTH_DOMAIN=${{ secrets.COGNITO_AUTH_DOMAIN_PROD }}" >> $GITHUB_ENV
+          echo "BUSINESS_NAME_BASE_URL=${{ secrets.BUSINESS_NAME_BASE_URL_PROD }}" >> $GITHUB_ENV
+
+          echo "COGNITO_IDENTITY_POOL_ID=${{ secrets.COGNITO_IDENTITY_POOL_ID_PROD }}" >> $GITHUB_ENV
+          echo "COGNITO_USER_POOL_ID=${{ secrets.COGNITO_USER_POOL_ID_PROD }}" >> $GITHUB_ENV
+          echo "COGNITO_WEB_CLIENT_ID=${{ secrets.COGNITO_WEB_CLIENT_ID_PROD }}" >> $GITHUB_ENV
+
+          echo "FORMATION_API_ACCOUNT=${{ secrets.FORMATION_API_ACCOUNT_PROD }}" >> $GITHUB_ENV
+          echo "FORMATION_API_BASE_URL=${{ secrets.FORMATION_API_BASE_URL_PROD }}" >> $GITHUB_ENV
+          echo "FORMATION_API_KEY=${{ secrets.FORMATION_API_KEY_PROD }}" >> $GITHUB_ENV
+
+          echo "GOV2GO_REGISTRATION_API_KEY=${{ secrets.GOV2GO_REGISTRATION_API_KEY_PROD }}" >> $GITHUB_ENV
+          echo "GOV2GO_REGISTRATION_BASE_URL=${{ secrets.GOV2GO_REGISTRATION_BASE_URL_PROD }}" >> $GITHUB_ENV
+
+          echo "LICENSE_STATUS_BASE_URL=${{ vars.LICENSE_STATUS_BASE_URL_PROD }}" >> $GITHUB_ENV
+
+          echo "MYNJ_ROLE_NAME=${{ vars.MYNJ_ROLE_NAME_PROD_STAGING }}" >> $GITHUB_ENV
+          echo "MYNJ_SERVICE_TOKEN=${{ secrets.MYNJ_SERVICE_TOKEN_PROD }}" >> $GITHUB_ENV
+          echo "MYNJ_SERVICE_URL=${{ secrets.MYNJ_SERVICE_URL_PROD }}" >> $GITHUB_ENV
+
+          echo "NEXT_PUBLIC_WEB_BASE_URL=${{ vars.WEB_BASE_URL_PROD }}" >> $GITHUB_ENV
+          echo "REDIRECT_URL=${{ vars.REDIRECT_URL_PROD }}" >> $GITHUB_ENV
+
+          echo "FEATURE_CIGARETTE_LICENSE=${{ vars.FEATURE_CIGARETTE_LICENSE_PROD }}" >> $GITHUB_ENV
+          echo "FEATURE_LOGIN_PAGE=${{ vars.FEATURE_LOGIN_PAGE_PROD }}" >> $GITHUB_ENV
+          echo "FEATURE_TAX_CLEARANCE_CERTIFICATE=${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_PROD }}" >> $GITHUB_ENV
+          echo "FEATURE_EMPLOYER_RATES=${{ vars.FEATURE_EMPLOYER_RATES_PROD }}" >> $GITHUB_ENV
+
+          echo "TAX_CLEARANCE_CERTIFICATE_PASSWORD=${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_PROD_STAGING }}" >> $GITHUB_ENV
+          echo "TAX_CLEARANCE_CERTIFICATE_USER_NAME=${{ vars.TAX_CLEARANCE_CERTIFICATE_USER_NAME }}" >> $GITHUB_ENV
+          echo "TAX_CLEARANCE_CERTIFICATE_URL=${{ secrets.TAX_CLEARANCE_CERTIFICATE_URL_PROD_STAGING }}" >> $GITHUB_ENV
+
+          echo "ABC_ETP_API_ACCOUNT=${{ secrets.ABC_ETP_API_ACCOUNT_PROD }}" >> $GITHUB_ENV
+          echo "ABC_ETP_API_BASE_URL=${{ vars.ABC_ETP_API_BASE_URL_PROD }}" >> $GITHUB_ENV
+          echo "ABC_ETP_API_KEY=${{ secrets.ABC_ETP_API_KEY_PROD }}" >> $GITHUB_ENV
+
+          echo "AIRTABLE_USERS_TABLE=${{ vars.AIRTABLE_USERS_TABLE_PROD }}" >> $GITHUB_ENV
+
+          echo "AWS_ACCOUNT_ID=${{ vars.AWS_ACCOUNT_ID_PROD }}" >> $GITHUB_ENV
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID_PROD }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}" >> $GITHUB_ENV
+
+          echo "AWS_CRYPTO_CONTEXT_ORIGIN=${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}" >> $GITHUB_ENV
+          echo "AWS_CRYPTO_CONTEXT_STAGE=${{ vars.AWS_CRYPTO_CONTEXT_STAGE_PROD }}" >> $GITHUB_ENV
+
+          echo "AWS_CRYPTO_TAX_ID_HASHING_KEY=${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_PROD }}" >> $GITHUB_ENV
+          echo "AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY=${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_PROD }}" >> $GITHUB_ENV
+
+          echo "CHECK_DEAD_LINKS=${{ vars.CHECK_DEAD_LINKS_PROD }}" >> $GITHUB_ENV
+
+          echo "DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID=${{ secrets.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_ELEVATOR_SAFETY_SECRET=${{ secrets.DYNAMICS_ELEVATOR_SAFETY_SECRET }}" >> $GITHUB_ENV
+          echo "DYNAMICS_ELEVATOR_SAFETY_TENANT_ID=${{ secrets.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_ELEVATOR_SAFETY_URL=${{ secrets.DYNAMICS_ELEVATOR_SAFETY_URL }}" >> $GITHUB_ENV
+
+          echo "DYNAMICS_FIRE_SAFETY_CLIENT_ID=${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_FIRE_SAFETY_SECRET=${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}" >> $GITHUB_ENV
+          echo "DYNAMICS_FIRE_SAFETY_TENANT_ID=${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_FIRE_SAFETY_URL=${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}" >> $GITHUB_ENV
+
+          echo "DYNAMICS_HOUSING_CLIENT_ID=${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_HOUSING_SECRET=${{ secrets.DYNAMICS_HOUSING_SECRET }}" >> $GITHUB_ENV
+          echo "DYNAMICS_HOUSING_TENANT_ID=${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_HOUSING_URL=${{ secrets.DYNAMICS_HOUSING_URL }}" >> $GITHUB_ENV
+
+          echo "DYNAMICS_LICENSE_STATUS_CLIENT_ID=${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_LICENSE_STATUS_SECRET=${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}" >> $GITHUB_ENV
+          echo "DYNAMICS_LICENSE_STATUS_TENANT_ID=${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}" >> $GITHUB_ENV
+          echo "DYNAMICS_LICENSE_STATUS_URL=${{ vars.DYNAMICS_LICENSE_STATUS_URL_PROD }}" >> $GITHUB_ENV
+
+          echo "FEATURE_ABC_ETP_APPLICATION=${{ vars.FEATURE_ABC_ETP_APPLICATION_PROD }}" >> $GITHUB_ENV
+          echo "FEATURE_FORMATION_SURVEY=${{ vars.FEATURE_FORMATION_SURVEY_PROD }}" >> $GITHUB_ENV
+
+          echo "OUTAGE_ALERT_CONFIG_URL=${{ vars.OUTAGE_ALERT_CONFIG_URL }}" >> $GITHUB_ENV
+          echo "DISABLE_GTM=true" >> $GITHUB_ENV
+
+      - name: Deploy to Production
+        uses: ./.github/actions/deploy
+        with:
+          service_name: bfs-navigator

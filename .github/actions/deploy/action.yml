@@ -1,0 +1,24 @@
+name: "Deploy to Environment"
+description: "Runs deploy-setup, packages the WebApp Docker image, and deploys the ECS service."
+
+inputs:
+  service_name:
+    description: "Identifier used for both the image name and ECS service name."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Deploy Setup
+      uses: ./.github/actions/deploy-setup
+    - name: Package WebApp Docker Image
+      uses: ./.github/actions/package-webapp-docker
+      with:
+        image-name: ${{ inputs.service_name }}
+
+    - name: Deploy WebApp to ECS
+      shell: bash
+      run: |
+        aws ecs update-service --cluster bfs_container_cluster \
+          --service ${{ inputs.service_name }} --region "$AWS_REGION" \
+          --force-new-deployment

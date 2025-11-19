@@ -1,0 +1,177 @@
+name: "Set Cypress Environment Variables"
+description:
+  "Sets environment variables required for Cypress integration testing. Static local values remain
+  hardcoded; secrets and environment-specific values are passed in as inputs."
+
+inputs:
+  COGNITO_WEB_CLIENT_ID:
+    description: "Cognito Web Client ID used for authentication during Cypress tests."
+    required: true
+  COGNITO_IDENTITY_POOL_ID:
+    description: "Cognito Identity Pool ID used for authenticated requests."
+    required: true
+  COGNITO_USER_POOL_ID:
+    description: "Cognito User Pool ID for application user authentication."
+    required: true
+
+  AWS_CRYPTO_CONTEXT_ORIGIN:
+    description: "KMS Crypto Context origin for hashing/encryption."
+    required: true
+  AWS_CRYPTO_CONTEXT_STAGE:
+    description: "KMS Crypto Context stage identifier."
+    required: true
+  AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+    description: "Purpose value for tax ID hashing operations."
+    required: true
+  AWS_CRYPTO_TAX_ID_HASHING_KEY:
+    description: "KMS key used for hashing tax IDs."
+    required: true
+  AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+    description: "Purpose value for tax ID encryption operations."
+    required: true
+  AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY:
+    description: "KMS key used for encrypting tax IDs."
+    required: true
+
+  DYNAMICS_FIRE_SAFETY_CLIENT_ID:
+    description: "Dynamics Fire Safety API client ID."
+    required: true
+  DYNAMICS_FIRE_SAFETY_SECRET:
+    description: "Dynamics Fire Safety API client secret."
+    required: true
+  DYNAMICS_FIRE_SAFETY_TENANT_ID:
+    description: "Dynamics Fire Safety tenant ID."
+    required: true
+  DYNAMICS_FIRE_SAFETY_URL:
+    description: "Base URL for Dynamics Fire Safety API."
+    required: true
+
+  DYNAMICS_HOUSING_CLIENT_ID:
+    description: "Dynamics Housing API client ID."
+    required: true
+  DYNAMICS_HOUSING_SECRET:
+    description: "Dynamics Housing API client secret."
+    required: true
+  DYNAMICS_HOUSING_TENANT_ID:
+    description: "Dynamics Housing tenant ID."
+    required: true
+  DYNAMICS_HOUSING_URL:
+    description: "Base URL for Dynamics Housing API."
+    required: true
+
+  DYNAMICS_LICENSE_STATUS_CLIENT_ID:
+    description: "Dynamics License Status API client ID."
+    required: true
+  DYNAMICS_LICENSE_STATUS_SECRET:
+    description: "Dynamics License Status API secret."
+    required: true
+  DYNAMICS_LICENSE_STATUS_TENANT_ID:
+    description: "Dynamics License Status tenant ID."
+    required: true
+  DYNAMICS_LICENSE_STATUS_URL:
+    description: "Base URL for Dynamics License Status API."
+    required: true
+
+  FEATURE_TAX_CLEARANCE_CERTIFICATE:
+    description: "Feature flag controlling Tax Clearance Certificate functionality."
+    required: true
+  FEATURE_EMPLOYER_RATES:
+    description: "Feature flag enabling employer rate lookup functionality."
+    required: true
+
+  TAX_CLEARANCE_CERTIFICATE_PASSWORD:
+    description: "Password for accessing the tax clearance certificate system."
+    required: true
+  TAX_CLEARANCE_CERTIFICATE_USER_NAME:
+    description: "Username for the tax clearance certificate system."
+    required: true
+  TAX_CLEARANCE_CERTIFICATE_URL:
+    description: "Endpoint URL for tax clearance certificate verification."
+    required: true
+
+  CHECK_DEAD_LINKS:
+    description: "Flag enabling dead-link checking during Cypress tests."
+    required: true
+
+  CYPRESS_RECORD_KEY:
+    description: "Cypress Dashboard Record Key."
+    required: true
+
+  CYPRESS_TEST_USER_PASSWORD:
+    description: "Cypress test user password."
+    required: true
+
+  CYPRESS_TEST_USER_EMAIL:
+    description: "Cypress test user email."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set Static Cypress Environment Variables
+      shell: bash
+      run: |
+        echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
+        echo "IS_OFFLINE=true" >> $GITHUB_ENV
+        echo "STAGE=local" >> $GITHUB_ENV
+        echo "DYNAMODB_ENDPOINT=http://localhost:8000" >> $GITHUB_ENV
+        echo "DYNAMO_PORT=8000" >> $GITHUB_ENV
+        echo "API_BASE_URL=http://localhost:5002" >> $GITHUB_ENV
+        echo "CYPRESS_API_BASE_URL=http://localhost:5002" >> $GITHUB_ENV
+        echo "USE_FAKE_SELF_REG=true" >> $GITHUB_ENV
+        echo "REDIRECT_URL=http://localhost:3000/" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_WEB_BASE_URL=http://localhost:3000" >> $GITHUB_ENV
+        echo "USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH=true" >> $GITHUB_ENV
+        echo "ADMIN_PASSWORD=Test1!" >> $GITHUB_ENV
+        echo "AWS_ACCESS_KEY_ID=local" >> $GITHUB_ENV
+        echo "AWS_SECRET_ACCESS_KEY=local" >> $GITHUB_ENV
+        echo "DEV_ONLY_UNLINK_TAX_ID=false" >> $GITHUB_ENV
+        echo "DISABLE_GTM=true" >> $GITHUB_ENV
+        echo "FEATURE_BUSINESS_FLP=false" >> $GITHUB_ENV
+        echo "FEATURE_CIGARETTE_LICENSE=true" >> $GITHUB_ENV
+        echo "FEATURE_LOGIN_PAGE=true" >> $GITHUB_ENV
+        echo "SKIP_SAVE_DOCUMENTS_TO_S3=true" >> $GITHUB_ENV
+
+    - name: Set Secret-backed Cypress Environment Variables
+      shell: bash
+      run: |
+        echo "CYPRESS_TEST_USER_EMAIL=${{ inputs.CYPRESS_TEST_USER_EMAIL }}" >> $GITHUB_ENV
+        echo "CYPRESS_TEST_USER_PASSWORD=${{ inputs.CYPRESS_TEST_USER_PASSWORD }}" >> $GITHUB_ENV
+        echo "CYPRESS_COGNITO_WEB_CLIENT_ID=${{ inputs.COGNITO_WEB_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "COGNITO_WEB_CLIENT_ID=${{ inputs.COGNITO_WEB_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "CYPRESS_COGNITO_IDENTITY_POOL_ID=${{ inputs.COGNITO_IDENTITY_POOL_ID }}" >> $GITHUB_ENV
+        echo "COGNITO_IDENTITY_POOL_ID=${{ inputs.COGNITO_IDENTITY_POOL_ID }}" >> $GITHUB_ENV
+        echo "COGNITO_USER_POOL_ID=${{ inputs.COGNITO_USER_POOL_ID }}" >> $GITHUB_ENV
+        echo "CYPRESS_COGNITO_USER_POOL_ID=${{ inputs.COGNITO_USER_POOL_ID }}" >> $GITHUB_ENV
+
+        echo "AWS_CRYPTO_CONTEXT_ORIGIN=${{ inputs.AWS_CRYPTO_CONTEXT_ORIGIN }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_CONTEXT_STAGE=${{ inputs.AWS_CRYPTO_CONTEXT_STAGE }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE=${{ inputs.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_TAX_ID_HASHING_KEY=${{ inputs.AWS_CRYPTO_TAX_ID_HASHING_KEY }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE=${{ inputs.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY=${{ inputs.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY }}" >> $GITHUB_ENV
+
+        echo "CHECK_DEAD_LINKS=${{ inputs.CHECK_DEAD_LINKS }}" >> $GITHUB_ENV
+        echo "CYPRESS_RECORD_KEY=${{ inputs.CYPRESS_RECORD_KEY }}" >> $GITHUB_ENV
+
+        echo "DYNAMICS_FIRE_SAFETY_CLIENT_ID=${{ inputs.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_FIRE_SAFETY_SECRET=${{ inputs.DYNAMICS_FIRE_SAFETY_SECRET }}" >> $GITHUB_ENV
+        echo "DYNAMICS_FIRE_SAFETY_TENANT_ID=${{ inputs.DYNAMICS_FIRE_SAFETY_TENANT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_FIRE_SAFETY_URL=${{ inputs.DYNAMICS_FIRE_SAFETY_URL }}" >> $GITHUB_ENV
+
+        echo "DYNAMICS_HOUSING_CLIENT_ID=${{ inputs.DYNAMICS_HOUSING_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_HOUSING_SECRET=${{ inputs.DYNAMICS_HOUSING_SECRET }}" >> $GITHUB_ENV
+        echo "DYNAMICS_HOUSING_TENANT_ID=${{ inputs.DYNAMICS_HOUSING_TENANT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_HOUSING_URL=${{ inputs.DYNAMICS_HOUSING_URL }}" >> $GITHUB_ENV
+
+        echo "DYNAMICS_LICENSE_STATUS_CLIENT_ID=${{ inputs.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_LICENSE_STATUS_SECRET=${{ inputs.DYNAMICS_LICENSE_STATUS_SECRET }}" >> $GITHUB_ENV
+        echo "DYNAMICS_LICENSE_STATUS_TENANT_ID=${{ inputs.DYNAMICS_LICENSE_STATUS_TENANT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_LICENSE_STATUS_URL=${{ inputs.DYNAMICS_LICENSE_STATUS_URL }}" >> $GITHUB_ENV
+
+        echo "FEATURE_TAX_CLEARANCE_CERTIFICATE=${{ inputs.FEATURE_TAX_CLEARANCE_CERTIFICATE }}" >> $GITHUB_ENV
+        echo "FEATURE_EMPLOYER_RATES=${{ inputs.FEATURE_EMPLOYER_RATES }}" >> $GITHUB_ENV
+
+        echo "TAX_CLEARANCE_CERTIFICATE_PASSWORD=${{ inputs.TAX_CLEARANCE_CERTIFICATE_PASSWORD }}" >> $GITHUB_ENV
+        echo "TAX_CLEARANCE_CERTIFICATE_USER_NAME=${{ inputs.TAX_CLEARANCE_CERTIFICATE_USER_NAME }}" >> $GITHUB_ENV
+        echo "TAX_CLEARANCE_CERTIFICATE_URL=${{ inputs.TAX_CLEARANCE_CERTIFICATE_URL }}" >> $GITHUB_ENV
