@@ -54,6 +54,7 @@ describe("CigaretteLicenseClient", () => {
     cigarette_license_merchant_code: "TEST_MERCHANT",
     cigarette_license_merchant_key: "test-merchant-key",
     cigarette_license_service_code: "TEST_SERVICE",
+    cigarette_license_sku: "TEST_SKU",
   };
   const config: CigaretteLicenseApiConfig = {
     baseUrl: mockValues.cigarette_license_base_url,
@@ -61,6 +62,7 @@ describe("CigaretteLicenseClient", () => {
     merchantCode: mockValues.cigarette_license_merchant_code,
     merchantKey: mockValues.cigarette_license_merchant_key,
     serviceCode: mockValues.cigarette_license_service_code,
+    sku: mockValues.cigarette_license_sku,
   };
   const returnUrl = "fake-return-url";
   const decryptedTaxId = "decrypted-tax-id";

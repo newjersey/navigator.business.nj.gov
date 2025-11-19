@@ -1,9 +1,11 @@
+import { PreparePaymentApiSubmission } from "@businessnjgovnavigator/shared";
 import {
   CigaretteLicenseApiConfig,
   makeEmailConfirmationBody,
   makePostBody,
 } from "@client/ApiCigaretteLicenseHelpers";
 import { CigaretteLicenseData, CigaretteLicensePaymentInfo } from "@shared/cigaretteLicense";
+import { randomInt } from "@shared/intHelpers";
 import {
   generateBusiness,
   generateCigaretteLicenseData,
@@ -32,18 +34,20 @@ describe("ApiCigaretteLicenseHelpers", () => {
       merchantCode: "TEST_MERCHANT",
       merchantKey: "TEST_KEY",
       serviceCode: "TEST_SERVICE",
+      sku: "TEST_SKU",
     };
 
     const returnUrl = "https://example.com/return";
 
+    const mockBusinessId = `some-business-id-${randomInt()}`;
     const mockUserData = generateUserData({
-      currentBusinessId: "123",
+      currentBusinessId: mockBusinessId,
       user: generateUser({
-        id: "user-id1",
-        name: "user-name1",
+        id: `some-user-id-${randomInt()}`,
+        name: `some-user-name-${randomInt()}`,
       }),
       businesses: {
-        123: generateBusiness({
+        [mockBusinessId]: generateBusiness({
           cigaretteLicenseData: generateCigaretteLicenseData({}),
         }),
       },
@@ -59,7 +63,6 @@ describe("ApiCigaretteLicenseHelpers", () => {
         ServiceCode: mockConfig.serviceCode,
         UniqueTransId: mockUniqueId,
         LocalRef: mockUniqueId,
-        OrderTotal: 50,
         PaymentType: "CC",
         SuccessUrl: `${returnUrl}?completePayment=success`,
         FailureUrl: `${returnUrl}?completePayment=failure`,
@@ -77,16 +80,20 @@ describe("ApiCigaretteLicenseHelpers", () => {
           Zip: currentBusiness.cigaretteLicenseData?.addressZipCode,
           Country: "US",
         },
-      });
+        LineItems: [
+          {
+            Sku: mockConfig.sku,
+            Description: "CM-100 Cigarette License Application",
+            UnitPrice: 50,
+            Quantity: 1,
+          },
+        ],
+      } as PreparePaymentApiSubmission);
     });
 
     it("should handle missing cigarette license data gracefully", () => {
       const userData = generateUserData({
         currentBusinessId: "123",
-        user: generateUser({
-          id: "user-id1",
-          name: "user-name1",
-        }),
         businesses: {
           123: generateBusiness({
             cigaretteLicenseData: undefined,
@@ -106,10 +113,6 @@ describe("ApiCigaretteLicenseHelpers", () => {
     it("should fall back to responsibleOwnerName when businessName is missing", () => {
       const userData = generateUserData({
         currentBusinessId: "123",
-        user: generateUser({
-          id: "user-id1",
-          name: "user-name1",
-        }),
         businesses: {
           123: generateBusiness({
             cigaretteLicenseData: generateCigaretteLicenseData({
@@ -124,10 +127,10 @@ describe("ApiCigaretteLicenseHelpers", () => {
       expect(result.CompanyName).toBe("test-responsible-owner-name");
     });
 
-    it("should use randomUUID for both UniqueTransId and LocalRef", () => {
-      makePostBody(mockUserData, returnUrl, mockConfig);
-
+    it("should use the same randomUUID for both UniqueTransId and LocalRef", () => {
+      const postBody = makePostBody(mockUserData, returnUrl, mockConfig);
       expect(mockRandomUUID).toHaveBeenCalledTimes(1);
+      expect(postBody.UniqueTransId).toBe(postBody.LocalRef);
     });
 
     it("should construct correct URLs with return URL", () => {
@@ -142,8 +145,8 @@ describe("ApiCigaretteLicenseHelpers", () => {
 
   describe("makeEmailConfirmationBody", () => {
     const mockPaymentInfo: CigaretteLicensePaymentInfo = {
-      token: "test-token",
-      orderId: 12345,
+      token: `some-token-${randomInt()}`,
+      orderId: randomInt(),
       orderStatus: "COMPLETE",
       orderTimestamp: new Date().toISOString(),
       confirmationEmailsent: false,

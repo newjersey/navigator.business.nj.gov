@@ -30,6 +30,7 @@ export const getConfig = async (): Promise<CigaretteLicenseApiConfig> => {
     merchantCode: await getConfigValue("cigarette_license_merchant_code"),
     merchantKey: await getConfigValue("cigarette_license_merchant_key"),
     serviceCode: await getConfigValue("cigarette_license_service_code"),
+    sku: await getConfigValue("cigarette_license_sku"),
   };
 };
 
