@@ -5,7 +5,7 @@ Office of Innovation. For info on the existing [Business.NJ.gov](https://busines
 please see the
 [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov).
 
-[![CircleCI build status](https://circleci.com/gh/newjersey/navigator.business.nj.gov/tree/main.svg?style=svg)](https://circleci.com/gh/newjersey/navigator.business.nj.gov/tree/main)
+[![GitHub Actions Build Status](https://github.com/newjersey/navigator.business.nj.gov/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/newjersey/navigator.business.nj.gov/actions/workflows/build-and-test.yml?query=branch%3Amain)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![semantic-release](https://img.shields.io/badge/semantic-release-e10079.svg?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
@@ -24,7 +24,7 @@ users. Unregistered users are able to browse the site in guest mode without savi
 DynamoDB database.
 
 We deploy using
-**[CircleCI](https://app.circleci.com/pipelines/github/newjersey/navigator.business.nj.gov)** for
+**[GitHub Actions ](https://github.com/newjersey/navigator.business.nj.gov/actions)** for
 CI/CD.
 
 ## Development
@@ -177,7 +177,7 @@ Use `ship-it` to run prettier, linting, and tests before pushing:
 ./scripts/ship-it.sh
 ```
 
-The CircleCI CI/CD (which is configured in `.circleci/config.yml`) will pick up the job and deploy
+The GitHub CI/CD (which is configured in `.github/workflows`) will pick up the job and deploy
 to the development environment for commits to the main branch.
 
 ## Frontend deep-dive
@@ -200,7 +200,7 @@ line in `_app.tsx`).
 For Next.js, environment variables are inserted at build time. In `./web/next.config.js`, the
 environment variables that the code will have access to are set up for the Next.js framework by
 pulling them in from the `.env` file. This works because the system that is building the Next.js
-code (via CircleCI workflow) has access to these variables via environment variables set during that
+code (via GitHub Actions workflow) has access to these variables via environment variables set during that
 build step.
 
 **Important**: This means that any time you build the app, the system building it (your local

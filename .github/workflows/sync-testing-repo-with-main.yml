@@ -1,0 +1,31 @@
+name: Sync testing-repo with main (weekly)
+
+on:
+  schedule:
+    - cron: "0 12 * * 6"
+  workflow_dispatch:
+
+jobs:
+  sync-testing-repo-weekly-from-main:
+    name: Sync testing-repo from main weekly
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout full repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git user
+        run: |
+          git config --global user.email "business-engineering@innovation.nj.gov"
+          git config --global user.name "NJ Innovation CI"
+
+      - name: Force sync testing-repo from main
+        run: |
+          git fetch origin
+          git checkout testing-repo || git checkout -b testing-repo
+          git reset --hard origin/main
+          git push origin testing-repo --force

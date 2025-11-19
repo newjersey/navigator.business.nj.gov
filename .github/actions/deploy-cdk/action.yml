@@ -1,0 +1,31 @@
+name: "Deploy CDK"
+description: "Clears CDK context, runs CDK bootstrap, and deploys all stacks."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Clear CDK Context
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/api-cdk cdk context --clear
+
+    - name: CDK Bootstrap
+      shell: bash
+      run: |
+        echo "Running CDK bootstrap for stage: $STAGE ..."
+        yarn workspace @businessnjgovnavigator/api-cdk cdk bootstrap aws://$AWS_ACCOUNT_ID/us-east-1 \
+          --bootstrap-bucket-name cdk-biz-nj-assets-$AWS_ACCOUNT_ID-us-east-1 \
+          --qualifier biz-nj \
+          --trust arn:aws:iam::$AWS_ACCOUNT_ID:user/system/bfs-navigator \
+          --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess || \
+          echo "Bootstrap already completed or not required."
+
+    - name: Deploy CDK
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy \
+          --all \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never

@@ -1,0 +1,35 @@
+name: "Code Quality Checks"
+description: "Runs typecheck, prettier, linting, spellcheck, and dependency checks."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Typecheck
+      shell: bash
+      run: |
+        yarn typecheck
+
+    - name: Run Cypress Typecheck
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/web typecheck:cypress
+
+    - name: Run Prettier
+      shell: bash
+      run: |
+        yarn prettier:check
+
+    - name: Run Linting
+      shell: bash
+      run: |
+        yarn lint
+
+    - name: Run Spell Checker
+      shell: bash
+      run: |
+        yarn run spellcheck
+
+    - name: Run Dependency Check
+      shell: bash
+      run: |
+        yarn dependency-check
