@@ -1,50 +1,91 @@
-import type { DatabaseClient, UpdateCRTK } from "@domain/types";
+import type { CRTKStatusLookup, DatabaseClient } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
 import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+
+// interface CRTKLookupRequest {
+//   businessName: string;
+//   addressLine1: string;
+//   city: string;
+//   addressZipCode: string;
+//   ein?: string;
+// }
 
 export const crtkLookupRouterFactory = (
-  updateCRTKStatus: UpdateCRTK,
+  crtkStatusLookup: CRTKStatusLookup,
   databaseClient: DatabaseClient,
   logger: LogWriterType,
 ): Router => {
   const router = Router();
 
   router.post("/crtk-lookup", async (req, res) => {
+    console.log({
+      crtkStatusLookup,
+      databaseClient,
+      logger,
+    });
+    const status = StatusCodes.OK;
+
+    res.status(status).json({
+      lastUpdatedISO: "2024-11-18T10:30:00Z",
+      CRTKBusinessDetails: {
+        businessName: "Acme Corporation",
+        addressLine1: "123 Main Street",
+        city: "San Francisco",
+        addressZipCode: "94102",
+      },
+      CRTKSearchResult: "FOUND",
+    });
+
     // const userId = getSignedInUserId(req);
     // const method = req.method;
     // const endpoint = req.originalUrl;
-    const requestStart = Date.now();
-    // const { facilityDetails } = req.body;
+    // const requestStart = Date.now();
 
-    console.log("--------------------");
-    console.log({ req, res, databaseClient, updateCRTKStatus, logger });
-    console.log("HIT BACKEND We cooking 🧑‍🍳🧑‍🍳🧑‍🍳");
-    console.log("Date Time", requestStart);
-    console.log("--------------------");
+    // const { businessName, addressLine1, city, addressZipCode, ein }: CRTKLookupRequest = req.body;
+    // logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${userId}`);
 
-    //logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${userId}`);
-    //const userData = await databaseClient.get(userId);
+    // const userData = await databaseClient.get(userId);
 
-    // updateXrayRegistrationStatus(userData, facilityDetails)
-    //   .then(async (response: UserData) => {
+    // crtkStatusLookup
+    //   .getStatus(businessName, addressLine1, city, addressZipCode, ein)
+    //   .then(async (crtkData) => {
+    //     // Update user data with CRTK results
+    //     const updatedUserData = {
+    //       ...userData,
+    //       businesses: {
+    //         ...userData.businesses,
+    //         [userData.currentBusinessId]: {
+    //           ...userData.businesses[userData.currentBusinessId],
+    //           crtkData: crtkData,
+    //         },
+    //       },
+    //     };
+
+    //     // Save updated data to database
+    //     const savedUserData = await databaseClient.put(updatedUserData);
     //     const status = StatusCodes.OK;
-    //     const updatedUserData = await databaseClient.put(response);
+
     //     logger.LogInfo(
-    //       `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, successfully updated x-ray registration, duration: ${getDurationMs(
-    //         requestStart,
-    //       )}ms`,
+    //       `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, ` +
+    //         `CRTK result: ${crtkData.CRTKSearchResult}, duration: ${getDurationMs(requestStart)}ms`,
     //     );
-    //     res.json(updatedUserData);
+
+    //     res.status(status).json(savedUserData);
     //   })
     //   .catch((error) => {
     //     const status = StatusCodes.INTERNAL_SERVER_ERROR;
     //     const message = error instanceof Error ? error.message : String(error);
+
     //     logger.LogError(
-    //       `${method} ${endpoint} - Failed to update x-ray registration: ${message}, status: ${status}, userId: ${userId}, duration: ${getDurationMs(
-    //         requestStart,
-    //       )}ms`,
+    //       `${method} ${endpoint} - Failed CRTK lookup: ${message}, ` +
+    //         `status: ${status}, userId: ${userId}, duration: ${getDurationMs(requestStart)}ms`,
     //     );
-    //     res.status(status).json({ error });
+
+    //     res.status(status).json({
+    //       error: "SEARCH_FAILED",
+    //       message: message,
+    //     });
     //   });
   });
 

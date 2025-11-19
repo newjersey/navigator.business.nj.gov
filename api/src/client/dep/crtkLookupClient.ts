@@ -77,7 +77,6 @@ export const CRTKLookupClient = (
       };
     }
 
-    // Take the first result (should be only one, especially with EIN)
     const crtkEntry = searchResults[0];
 
     const crtkData: CRTKData = {
