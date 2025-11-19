@@ -16,6 +16,7 @@ import {
   WasteWaterData,
 } from "../environment";
 
+import { EmployerRatesRequest, EmployerRatesResponse } from "../employerRates";
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -48,7 +49,7 @@ import {
 } from "../profileData";
 import { RoadmapTaskData } from "../roadmapTaskData";
 import { arrayOfSectors, SectorType } from "../sector";
-import { arrayOfStateObjects as states, StateObject } from "../states";
+import { StateObject, arrayOfStateObjects as states } from "../states";
 import {
   taxClearanceCertificateAgencies,
   TaxClearanceCertificateData,
@@ -57,7 +58,6 @@ import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { XrayData, XrayRegistrationStatus } from "../xray";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
-import { EmployerRatesRequest, EmployerRatesResponse } from "../employerRates";
 
 export const generateFormationSubmitResponse = (
   overrides: Partial<FormationSubmitResponse>,
@@ -666,6 +666,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     dateDeletedISO: "",
     profileData,
     formationData,
+    crtkData: undefined,
     ...overrides,
   };
 };

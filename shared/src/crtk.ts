@@ -11,6 +11,8 @@ export type CRTKBusinessDetails = {
   addressZipCode: string;
 };
 
+export type CRTKSearchResult = "FOUND" | "NOT_FOUND";
+
 export interface CRTKEntry {
   businessName?: string;
   streetAddress?: string;
@@ -18,7 +20,14 @@ export interface CRTKEntry {
   state?: string;
   zipCode?: string;
   ein?: string;
-  //TODO: Additional items from the request
+  facilityId?: string;
+  sicCode?: string;
+  naicsCode?: string;
+  naicsDescription?: string;
+  businessActivity?: string;
+  facilityType?: string;
+  facilityStatus?: string;
+  eligibility?: string;
+  userStatus?: string;
+  receivedDate?: string;
 }
-
-export type CRTKSearchResult = "FOUND" | "NOT_FOUND";

@@ -1,86 +1,83 @@
+// Update to accept crtkData prop instead of using mock data
 import { StatusResultHeader } from "@/components/crtk/crtkResultHeader";
+import type { CRTKData } from "@/components/crtk/crtkTypes";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Task } from "@businessnjgovnavigator/shared/types";
-//import type { CRTKFacilityDetails, CRTKSearchError } from "@businessnjgovnavigator/shared/";
 import { type ReactElement } from "react";
 
 type StatusType = "FOUND" | "NOT_FOUND";
 
-//mock stuff:
-const businessMock = {
-  bName: "ES Lawn Care",
-  bAddress: "123 TINSMITH CIRCLE, 08753 NJ",
-  status: "FOUND",
-};
-export interface CRTKFacilityDetails {
-  businessName: string;
-  businessStreetAddress: string;
-  city: string;
-  state: string;
-  zip: string;
-  ein: string;
-}
-
-export type CRTKSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
-
 interface Props {
   isLoading: boolean;
   task?: Task;
+  crtkData: CRTKData;
+  onSearchAgain?: () => void;
 }
 
 const Config = getMergedConfig();
 
-const statusContent = {
-  NOT_FOUND: {
-    header: "Buisness Not Found",
-    description: `${businessMock.bName} is not currently in the CRTK database.`,
-  },
-  FOUND: {
-    header: "Buiness Found",
-    description: `${businessMock.bName} is in the New Jersey Community Right to Know (CRTK) database. This means you may have chemical reporting requirements.`,
-  },
-};
-
-const CRTKContactInfo = (): ReactElement => {
-  return (
-    <>
-      <p className="margin-bottom-1 text-bold">If you have any questions, contact a CRTK expert:</p>
-      <ul>
-        <li>Phone: (609) 292-6714</li>
-        <li>
-          Email:{" "}
-          <a href="mailto:rts@dep.nj.gov" className="text-underline">
-            rts@dep.nj.gov
-          </a>
-        </li>
-      </ul>
-    </>
-  );
-};
-
 export const CRTKSearchResult = (props: Props): ReactElement => {
-  console.log(props);
+  const { crtkData } = props;
+  const status = crtkData.CRTKSearchResult as StatusType;
+  const businessDetails = crtkData.CRTKBusinessDetails;
+
+  const statusContent = {
+    NOT_FOUND: {
+      header: "Business Not Found",
+      description: `${businessDetails?.businessName} is not currently in the CRTK database.`,
+    },
+    FOUND: {
+      header: "Business Found",
+      description: `${businessDetails?.businessName} is in the New Jersey Community Right to Know (CRTK) database. This means you may have chemical reporting requirements.`,
+    },
+  };
+
+  const CRTKContactInfo = (): ReactElement => {
+    return (
+      <>
+        <p className="margin-bottom-1 text-bold">
+          If you have any questions, contact a CRTK expert:
+        </p>
+        <ul>
+          <li>Phone: (609) 292-6714</li>
+          <li>
+            Email:{" "}
+            <a href="mailto:rts@dep.nj.gov" className="text-underline">
+              rts@dep.nj.gov
+            </a>
+          </li>
+        </ul>
+      </>
+    );
+  };
+
   return (
     <>
       <div className="margin-bottom-4">
         <p className="text-base-darkest margin-bottom-2">{Config.crtkTask.introText}</p>
       </div>
       <div className="bg-accent-cooler-50 padding-2 margin-bottom-3 radius-lg">
-        <p className="text-base-dark text-bold margin-bottom-0">{businessMock.bName}</p>
-        <p className="text-base-dark margin-bottom-2">{businessMock.bAddress}</p>
+        <p className="text-base-dark text-bold margin-bottom-0">{businessDetails?.businessName}</p>
+        <p className="text-base-dark margin-bottom-2">
+          {businessDetails?.addressLine1}, {businessDetails?.city},{" "}
+          {businessDetails?.addressZipCode} NJ
+        </p>
 
         <div className="bg-white padding-4 radius-lg">
           <StatusResultHeader
-            status={businessMock.status as StatusType}
+            status={status}
             headerLabel={"Permit Status"}
             statusContent={statusContent}
             testIdPrefix="status"
           />
           <HorizontalLine customMargin={"margin-top-2"} />
-          {businessMock.status === "FOUND" ? (
+
+          {/* Conditional rendering based on status */}
+          {status === "FOUND" ? (
             <>
               <ResultsSectionAccordion
                 title={"Your CRTK Details"}
@@ -94,13 +91,13 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
               >
                 <div className="margin-top-1 font-open-sans-5">
                   <p className="margin-bottom-1">
-                    <strong>Facility Type:</strong> Lorem ipsum
+                    <strong>Facility Type:</strong> {crtkData.facilityType || "N/A"}
                   </p>
                   <p className="margin-bottom-1">
-                    <strong>Eligibility:</strong> Sit Dolor
+                    <strong>Eligibility:</strong> {crtkData.eligibility || "N/A"}
                   </p>
                   <p className="margin-bottom-1">
-                    <strong>Facility Status:</strong> Consectetur
+                    <strong>Facility Status:</strong> {crtkData.facilityStatus || "N/A"}
                   </p>
                 </div>
               </ResultsSectionAccordion>
@@ -172,10 +169,22 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
               </ResultsSectionAccordion>
             </>
           )}
+
+          {props.onSearchAgain && (
+            <div className="margin-top-3">
+              <PrimaryButton
+                isColor="outline"
+                onClick={props.onSearchAgain}
+                dataTestId="crtk-search-again"
+              >
+                Search Again
+              </PrimaryButton>
+            </div>
+          )}
         </div>
       </div>
 
-      {businessMock.status === "FOUND" && (
+      {status === "FOUND" && (
         <div className="bg-warning-lighter padding-2 margin-top-4 radius-lg">
           <div className="display-flex ">
             <div>
@@ -189,6 +198,7 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
           </div>
         </div>
       )}
+
       <div className="bg-info-lighter  padding-2 margin-top-2 radius-lg">
         <h3 className="margin-top-0 margin-bottom-1 text-accent-cool-more-dark text-bold">
           {Config.crtkTask.federalInfoTitle}

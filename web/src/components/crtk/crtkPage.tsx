@@ -1,10 +1,13 @@
 import { TaskHeader } from "@/components/TaskHeader";
 import { CRTKStatus } from "@/components/crtk/crtkForm";
 import { CRTKSearchResult } from "@/components/crtk/crtkSearchResult";
-
+import type { CRTKData } from "@/components/crtk/crtkTypes";
+import * as api from "@/lib/api-client/apiClient";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
 import { Box } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
+import type { CRTKFacilityDetails } from "./crtkForm";
 
 interface Props {
   task: Task;
@@ -13,78 +16,80 @@ interface Props {
 }
 
 export const CRTKPage = (props: Props): ReactElement => {
-  //  const { Config } = useConfig();
-  // const { roadmap } = useRoadmap();
-  //const { business, refresh } = useUserData();
+  const { business, refresh } = useUserData();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [crtkData, setCrtkData] = useState<CRTKData | undefined>(undefined);
+  const [searchError, setSearchError] = useState<string | undefined>(undefined);
 
-  // const [, setIsLoading] = useState<boolean>(false);
-  // const [, setXrayRegistrationData] = useState<XrayData | undefined>(undefined);
+  // Check if user already has CRTK data on mount
+  useEffect(() => {
+    if (!business) return;
 
-  // useEffect(() => {
-  //   if (!business) return;
+    const existingCrtkData = business.crtkData;
 
-  //   const hasValidData = business?.xrayRegistrationData?.status;
+    if (existingCrtkData?.CRTKSearchResult) {
+      setCrtkData(existingCrtkData);
+    }
+  }, [business]);
 
-  //   if (hasValidData) {
-  //     setTabIndex(STATUS_TAB_INDEX);
-  //     setXrayRegistrationData(business.xrayRegistrationData);
-  //   }
-  // }, [business]);
+  const handleSubmit = async (facilityDetails: CRTKFacilityDetails): Promise<void> => {
+    setSearchError(undefined);
+    setIsLoading(true);
 
-  // const goToRegistrationTab = (): void => {
-  //   setTabIndex(APPLICATION_TAB_INDEX);
-  // };
+    try {
+      const userData = await api.searchBuisnessInCRTKDB({
+        businessName: facilityDetails.businessName,
+        addressLine1: facilityDetails.businessStreetAddress,
+        city: facilityDetails.city,
+        addressZipCode: facilityDetails.zip,
+        //ein: facilityDetails.ein || undefined,
+      });
 
-  // const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
-  //   const index = Number.parseInt(newValue);
-  //   setTabIndex(index);
-  // };
+      console.log(userData);
 
-  // const allFieldsHaveValues = (facilityDetails: FacilityDetails): boolean => {
-  //   return !!(
-  //     facilityDetails.businessName &&
-  //     facilityDetails.addressLine1 &&
-  //     facilityDetails.addressZipCode
-  //   );
-  // };
+      //todo: update with userData.
+      //      const updatedCrtkData = userData.businesses[userData.currentBusinessId].crtkData;
+      const updatedCrtkData = "";
 
-  // const onSubmit = (facilityDetails: FacilityDetails): void => {
-  //   setError(undefined);
-  //   if (!allFieldsHaveValues(facilityDetails)) {
-  //     setError("FIELDS_REQUIRED");
-  //     return;
-  //   }
+      if (!updatedCrtkData) {
+        setSearchError("SEARCH_FAILED");
+        return;
+      }
 
-  //   setIsLoading(true);
-  //   api
-  //     .checkXrayRegistrationStatus(facilityDetails)
-  //     .then((userData: UserData) => {
-  //       const xrayRegistrationData =
-  //         userData.businesses[userData.currentBusinessId].xrayRegistrationData;
-  //       if (!xrayRegistrationData?.status && xrayRegistrationData?.machines?.length === 0) {
-  //         setError("NOT_FOUND");
-  //         setIsLoading(false);
-  //         return;
-  //       }
-  //       setXrayRegistrationData(xrayRegistrationData);
-  //     })
-  //     .catch(() => {
-  //       setError("SEARCH_FAILED");
-  //     })
-  //     .finally(async () => {
-  //       //refresh();
-  //       setIsLoading(false);
-  //     });
-  // };
+      setCrtkData(updatedCrtkData);
+
+      await refresh();
+    } catch (error) {
+      console.error("CRTK lookup failed", error);
+      setSearchError("SEARCH_FAILED");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSearchAgain = (): void => {
+    setCrtkData(undefined);
+    setSearchError(undefined);
+  };
 
   return (
     <div className="flex flex-column">
       <TaskHeader task={props.task} />
       <Box sx={{ width: "100%" }}>
-        {Math.random() > 0.5 ? (
-          <CRTKStatus task={props.task} onSubmit={() => {}} isLoading={false} />
+        {crtkData ? (
+          <CRTKSearchResult
+            task={props.task}
+            crtkData={crtkData}
+            isLoading={isLoading}
+            onSearchAgain={handleSearchAgain}
+          />
         ) : (
-          <CRTKSearchResult task={props.task} isLoading={false} />
+          <CRTKStatus
+            task={props.task}
+            onSubmit={handleSubmit}
+            isLoading={isLoading}
+            searchError={searchError}
+          />
         )}
       </Box>
     </div>

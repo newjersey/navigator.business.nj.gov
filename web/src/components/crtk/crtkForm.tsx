@@ -1,10 +1,8 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Task } from "@businessnjgovnavigator/shared/types";
-//import type { CRTKFacilityDetails, CRTKSearchError } from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
@@ -41,9 +39,10 @@ const useStyles = makeStyles(() => {
 });
 
 interface Props {
-  onSubmit: (facilityDetails: CRTKFacilityDetails) => void;
+  onSubmit: (facilityDetails: CRTKFacilityDetails) => Promise<void>;
   isLoading: boolean;
   task?: Task;
+  searchError?: string;
 }
 
 interface FieldErrors {
@@ -56,11 +55,11 @@ interface FieldErrors {
 
 const Config = getMergedConfig();
 
-// const CRTKErrorLookup: Record<CRTKSearchError, string> = {
-//   NOT_FOUND: Config.crtkTask.errorTextNotFound,
-//   FIELDS_REQUIRED: Config.crtkTask.errorTextFieldsRequired,
-//   SEARCH_FAILED: Config.crtkTask.errorTextSearchFailed,
-// };
+const CRTKErrorLookup: Record<CRTKSearchError, string> = {
+  NOT_FOUND: Config.crtkTask.errorTextNotFound || "Business not found in CRTK database",
+  FIELDS_REQUIRED: Config.crtkTask.errorTextFieldsRequired || "Please fill in all required fields",
+  SEARCH_FAILED: Config.crtkTask.errorTextSearchFailed || "Search failed. Please try again.",
+};
 
 export const CRTKStatus = (props: Props): ReactElement => {
   const classes = useStyles();
@@ -80,36 +79,32 @@ export const CRTKStatus = (props: Props): ReactElement => {
   useEffect(() => {
     if (!business) return;
 
-    //const crtkData = business.crtkData?.facilityDetails;
+    const crtkData = business.crtkData?.CRTKBusinessDetails;
 
-    //     const hasCRTKData =
-    //       crtkData?.businessName && crtkData?.businessStreetAddress && crtkData?.city && crtkData?.zip;
-
-    //     if (crtkData && hasCRTKData) {
-    //       setFormValues(crtkData);
-    //     } else if (business.formationData?.formationResponse?.success) {
-    //       setFormValues((prevValues) => {
-    //         return {
-    //           ...prevValues,
-    //           businessName: business.formationData.formationFormData.businessName,
-    //           businessStreetAddress: business.formationData.formationFormData.addressLine1,
-    //           city: business.formationData.formationFormData.addressCity || "",
-    //           state: "NJ",
-    //           zip: business.formationData.formationFormData.addressZipCode,
-    //         };
-    //       });
-    //     } else {
-    //       setFormValues((prevValues) => {
-    //         return {
-    //           ...prevValues,
-    //           businessName: business.profileData?.businessName,
-    //           businessStreetAddress: business.formationData?.formationFormData?.addressLine1,
-    //           city: business.formationData?.formationFormData?.addressCity || "",
-    //           state: "NJ",
-    //           zip: business.formationData?.formationFormData?.addressZipCode,
-    //         };
-    //       });
-    //     }
+    if (crtkData?.businessName && crtkData?.addressLine1) {
+      setFormValues({
+        businessName: crtkData.businessName,
+        businessStreetAddress: crtkData.addressLine1,
+        city: crtkData.city || "",
+        state: "NJ",
+        zip: crtkData.addressZipCode || "",
+        ein: "",
+      });
+    } else if (business.formationData?.formationResponse?.success) {
+      setFormValues({
+        businessName: business.formationData.formationFormData.businessName,
+        businessStreetAddress: business.formationData.formationFormData.addressLine1,
+        city: business.formationData.formationFormData.addressCity || "",
+        state: "NJ",
+        zip: business.formationData.formationFormData.addressZipCode,
+        ein: "",
+      });
+    } else if (business.profileData?.businessName) {
+      setFormValues((prev) => ({
+        ...prev,
+        businessName: business.profileData.businessName,
+      }));
+    }
   }, [business]);
 
   useEffect(() => {
@@ -146,7 +141,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
     return errors;
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     const errors = validateForm();
@@ -156,22 +151,8 @@ export const CRTKStatus = (props: Props): ReactElement => {
       return;
     }
 
-    api
-      .searchBuisnessInCRTKDB({
-        businessName: "Hola Moco",
-        addressLine1: "Conde",
-        city: "Paterson",
-        addressZipCode: "940022",
-      })
-      .then(() => {
-        console.log("successfull");
-      })
-      .catch(() => {
-        console.log("error!!");
-      });
-    console.log(formValues);
-
-    // props.onSubmit(formValues);
+    // Call parent's onSubmit handler
+    await props.onSubmit(formValues);
   };
 
   const handleChangeForKey = (
@@ -230,6 +211,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
   const getErrorAlert = (): ReactNode => {
     const hasFieldErrors = Object.keys(fieldErrors).length > 0;
 
+    // Show field validation errors
     if (hasFieldErrors) {
       return (
         <div
@@ -276,6 +258,19 @@ export const CRTKStatus = (props: Props): ReactElement => {
         </div>
       );
     }
+
+    // Show search/API errors
+    if (props.searchError) {
+      return (
+        <div className="margin-bottom-3">
+          <Alert dataTestid={`error-alert-${props.searchError}`} variant="error">
+            {CRTKErrorLookup[props.searchError as CRTKSearchError] || "An error occurred"}
+          </Alert>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   return (
@@ -290,6 +285,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
         <p className="text-base-dark margin-bottom-0">{Config.crtkTask.helperText}</p>
 
         {getErrorAlert()}
+
         <form onSubmit={onSubmit}>
           <div className="margin-bottom-2" id="question-business-name">
             <label className="text-bold" htmlFor="business-name">

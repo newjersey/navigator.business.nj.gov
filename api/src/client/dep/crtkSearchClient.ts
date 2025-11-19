@@ -8,7 +8,7 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Search by Business Name - Id:${logId}, Business Name: ${businessName}`);
     return await axios
-      .get(`${baseUrl}/crtk_by_business_name?namepart=${encodeURIComponent(businessName)}`)
+      .get(`${baseUrl}/crtk_by_facility_name?facility=${encodeURIComponent(businessName)}`)
       .then(async (response) => {
         if (response.data.data.length === 0) {
           throw new Error("NOT_FOUND");
@@ -16,13 +16,35 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
 
         return response.data.data.map((entry: { [x: string]: unknown }) => {
           return {
-            businessName: entry["BUSINESS_NAME"] ?? undefined,
-            streetAddress: entry["STREET_ADDRESS"] ?? undefined,
-            city: entry["CITY"] ?? undefined,
-            state: entry["STATE"] ?? undefined,
-            zipCode: entry["ZIP_CODE"] ?? undefined,
-            ein: entry["EIN"] ?? undefined,
-            //TODO: other fields returned in response
+            businessName: entry["FAC_NAME"] ?? undefined,
+            streetAddress: entry["PHYS_ADDR"] ?? undefined,
+            city: entry["PHYS_CITY"] ?? undefined,
+            state: entry["PHYS_STATE"] ?? undefined,
+            zipCode: entry["PHYS_ZIP"] ?? undefined,
+            ein: entry["FEIN"] ?? undefined,
+            // Additional fields from the API response:
+            facilityId: entry["FAC_ID"] ?? undefined,
+            sicCode: entry["SIC_CODE"] ?? undefined,
+            naicsCode: entry["NAICS_CODE"] ?? undefined,
+            description: entry["DESCRIPTION_1"] ?? undefined,
+            businessActivity: entry["BUSINESS_ACTIVITY"] ?? undefined,
+            type:
+              entry[
+                "DECODE(FACITS.B_FAC.FAC_TYP,'R','REGULATED','A','ADMINISTRATIVEONLY','E','NAICSEXEMPT','Z','NOFACILITYINNJ','P','PUBLICEMPLOYER',FACITS.B_FAC.FAC_TYP)"
+              ] ?? undefined,
+            status:
+              entry[
+                "DECODE(FACITS.B_FAC.FAC_STATUS,'A','ACTIVE','I','INACTIVE','C','CLOSED','O','OUTOFBUSINESS',FACITS.B_FAC.FAC_STATUS)"
+              ] ?? undefined,
+            eligibility:
+              entry[
+                "DECODE(FACITS.B_FAC.ELIGIBILITY,'F','EPCRAONLY','X','EXEMPT','Y','CRTK/RPPR',FACITS.B_FAC.ELIGIBILITY)"
+              ] ?? undefined,
+            userStatus:
+              entry[
+                "DECODE(FACITS.B_CRTK.USER_STATUS,'U','USER','A','USERABOVE','B','USERBELOW','N','NON-USER','J','N/A',FACITS.B_CRTK.USER_STATUS)"
+              ] ?? undefined,
+            receivedDate: entry["RCVD"] ?? undefined,
           };
         });
       })
@@ -52,7 +74,7 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
     );
     return await axios
       .get(
-        `${baseUrl}/crtk_by_address?address=${encodeURIComponent(
+        `${baseUrl}/crtk_by_address_and_zipcode?address=${encodeURIComponent(
           streetAddress,
         )}&zip=${encodeURIComponent(zipCode)}`,
       )
@@ -63,13 +85,34 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
 
         return response.data.data.map((entry: { [x: string]: unknown }) => {
           return {
-            businessName: entry["BUSINESS_NAME"] ?? undefined,
-            streetAddress: entry["STREET_ADDRESS"] ?? undefined,
-            city: entry["CITY"] ?? undefined,
-            state: entry["STATE"] ?? undefined,
-            zipCode: entry["ZIP_CODE"] ?? undefined,
-            ein: entry["EIN"] ?? undefined,
-            //TODO: other fields returned in response
+            businessName: entry["FAC_NAME"] ?? undefined,
+            streetAddress: entry["PHYS_ADDR"] ?? undefined,
+            city: entry["PHYS_CITY"] ?? undefined,
+            state: entry["PHYS_STATE"] ?? undefined,
+            zipCode: entry["PHYS_ZIP"] ?? undefined,
+            ein: entry["FEIN"] ?? undefined,
+            facilityId: entry["FAC_ID"] ?? undefined,
+            sicCode: entry["SIC_CODE"] ?? undefined,
+            naicsCode: entry["NAICS_CODE"] ?? undefined,
+            description: entry["DESCRIPTION_1"] ?? undefined,
+            businessActivity: entry["BUSINESS_ACTIVITY"] ?? undefined,
+            type:
+              entry[
+                "DECODE(FACITS.B_FAC.FAC_TYP,'R','REGULATED','A','ADMINISTRATIVEONLY','E','NAICSEXEMPT','Z','NOFACILITYINNJ','P','PUBLICEMPLOYER',FACITS.B_FAC.FAC_TYP)"
+              ] ?? undefined,
+            status:
+              entry[
+                "DECODE(FACITS.B_FAC.FAC_STATUS,'A','ACTIVE','I','INACTIVE','C','CLOSED','O','OUTOFBUSINESS',FACITS.B_FAC.FAC_STATUS)"
+              ] ?? undefined,
+            eligibility:
+              entry[
+                "DECODE(FACITS.B_FAC.ELIGIBILITY,'F','EPCRAONLY','X','EXEMPT','Y','CRTK/RPPR',FACITS.B_FAC.ELIGIBILITY)"
+              ] ?? undefined,
+            userStatus:
+              entry[
+                "DECODE(FACITS.B_CRTK.USER_STATUS,'U','USER','A','USERABOVE','B','USERBELOW','N','NON-USER','J','N/A',FACITS.B_CRTK.USER_STATUS)"
+              ] ?? undefined,
+            receivedDate: entry["RCVD"] ?? undefined,
           };
         });
       })
@@ -94,7 +137,7 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Search by EIN - Id:${logId}, EIN: ${ein}`);
     return await axios
-      .get(`${baseUrl}/crtk_by_ein?ein=${encodeURIComponent(ein)}`)
+      .get(`${baseUrl}/crtk_by_fein?fein=${encodeURIComponent(ein)}`)
       .then(async (response) => {
         if (response.data.data.length === 0) {
           throw new Error("NOT_FOUND");
@@ -102,13 +145,22 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
 
         return response.data.data.map((entry: { [x: string]: unknown }) => {
           return {
-            businessName: entry["BUSINESS_NAME"] ?? undefined,
-            streetAddress: entry["STREET_ADDRESS"] ?? undefined,
-            city: entry["CITY"] ?? undefined,
-            state: entry["STATE"] ?? undefined,
-            zipCode: entry["ZIP_CODE"] ?? undefined,
-            ein: entry["EIN"] ?? undefined,
-            //TODO: other fields returned in response
+            businessName: entry["FACILITY_NAME"] ?? undefined,
+            streetAddress: entry["PHYS_ADDR"] ?? undefined,
+            city: entry["PHYS_CITY"] ?? undefined,
+            state: entry["PHYS_STATE"] ?? undefined,
+            zipCode: entry["PHYS_ZIP"] ?? undefined,
+            ein: entry["FEIN"] ?? undefined,
+            facilityId: entry["FACILITY_ID"] ?? undefined,
+            sicCode: entry["SIC_CODE"] ?? undefined,
+            naicsCode: entry["NAICS_CODE"] ?? undefined,
+            description: entry["DESCRIPTION_1"] ?? undefined,
+            businessActivity: entry["BUSINESS_ACTIVITY"] ?? undefined,
+            type: entry["TYPE"] ?? undefined,
+            status: entry["STATUS"] ?? undefined,
+            eligibility: entry["ELGIBILITY"] ?? undefined,
+            userStatus: entry["USER_STATUS"] ?? undefined,
+            receivedDate: entry["RECEIVED_DATE"] ?? undefined,
           };
         });
       })

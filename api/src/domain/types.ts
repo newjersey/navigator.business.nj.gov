@@ -352,7 +352,7 @@ export interface CRTKSearch {
 }
 
 export interface UpdateCRTK {
-  (userData: UserData, businessDetails: CRTKBusinessDetails, ein?: string): Promise<UserData>;
+  (userData: UserData, businessDetails: CRTKBusinessDetails): Promise<UserData>;
 }
 
 export interface MessagingServiceClient {
