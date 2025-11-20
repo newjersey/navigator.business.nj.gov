@@ -1,17 +1,17 @@
 {
   "envQuestionPage": {
     "generic": {
-      "title": "Tell Us About Your Business",
-      "question": "Which of the following are true?",
-      "startingButtonText": "Start",
-      "buttonText": "Save and Continue",
       "endingButtonText": "Save & See My Results",
       "backButtonText": "Back",
-      "errorText": "Provide responses to the following sections:",
+      "question": "Which of the following are true?",
       "footerText": "To learn more about ${mediaAreaText} permits, visit ${mediaAreaLink}.",
-      "ariaContextInlineDialogInactive": "Inactive",
+      "ariaContextEnvStepperLabels": "Environment Permit Stepper Navigation: ${stepName} Step, State: ${stepState}",
       "ariaContextInlineDialogActive": "Active",
-      "ariaContextEnvStepperLabels": "Environment Permit Stepper Navigation: ${stepName} Step, State: ${stepState}"
+      "ariaContextInlineDialogInactive": "Inactive",
+      "errorText": "Provide responses to the following sections:",
+      "title": "Tell Us About Your Business",
+      "buttonText": "Save and Continue",
+      "startingButtonText": "Start"
     },
     "instructions": {
       "lineOne": "Do you need Department of Environmental Protection (DEP) permits for your business?",
@@ -68,23 +68,23 @@
       "mediaAreaText": "these criteria",
       "mediaAreaLink": "[NJDEP’s page on Water Quality](https://dep.nj.gov/dwq/wastewater/)",
       "questionnaireOptions": {
-        "sanitaryWaste": "My business will create `sanitary wastewater|sanitary-wastewater`.",
         "industrialWaste": "My business will create `industrial wastewater|industrial-wastewater`. ",
         "localSewage": "My business will release wastewater to a local `sewage treatment plant|sewage-treatment-plant`.",
-        "septicSystem": "My business will release wastewater to a `septic system|septic-system`. ",
         "streamsRiversOrLakes": "My business will release wastewater directly to streams, rivers, or lakes.",
-        "needsTreatment": "My business will create wastewater that needs to be treated before releasing into streams, rivers, lakes, sewage treatment plants, or septic systems.",
         "planningConstruction": "My business is planning construction for over 1 acre of land.",
         "stormWaterDischarge": "My business will have `stormwater discharge|stormwater-discharge` related to industrial activity. This includes activities such as warehousing, trucking, and recycling.",
+        "needsTreatment": "My business will create wastewater that needs to be treated before releasing into streams, rivers, lakes, sewage treatment plants, or septic systems.",
         "takeoverIndustrialStormWaterPermit": "My business is going to take over an existing business with an industrial stormwater permit.",
-        "noWasteWater": "None of the above apply."
+        "sanitaryWaste": "My business will create `sanitary wastewater|sanitary-wastewater`.",
+        "noWasteWater": "None of the above apply.",
+        "septicSystem": "My business will release wastewater to a `septic system|septic-system`. "
       }
     }
   },
   "envResultsPage": {
     "title": "Actions to Take",
     "editInfo": "Your answers were successfully completed!",
-    "editText": "Edit.",
+    "editText": "Edit",
     "summary": {
       "partOne": "Based on your answers, your business may be legally required to have Department of Environmental Protection (DEP)",
       "partTwo": "licenses or permits. Find out your business's requirements below.",
@@ -99,17 +99,17 @@
       }
     },
     "personalizedSupport": {
-      "title": "Contact DEP’s Small Business Assistance Program (SBAP)",
-      "body": "An expert at SBAP can help you figure out which licenses or permits your business needs. SBAP does not regulate or enforce environmental rules.",
       "contact": "SBAP@dep.nj.gov",
+      "body": "An expert at SBAP can help you figure out which licenses or permits your business needs. SBAP does not regulate or enforce environmental rules.",
       "directContactInfo": "If you’d like to reach the SBAP directly, call them at 877-753-1151.",
-      "submissionCadence": "You can only submit one request every 14 days.",
-      "emailErrorText": "Email address must be valid.",
+      "submissionCadence": "You can only submit this request once.",
+      "generalErrorAlertText": "Something went wrong. Please try again later.",
       "generalErrorText": "There was an error submitting your request. Please try again later.",
       "contactSbapButton": "Email SBAP",
-      "emailErrorAlertText": "Correct the field below.",
-      "generalErrorAlertText": "Something went wrong. Please try again later.",
-      "emailLabel": "Email Address"
+      "emailLabel": "Email Address",
+      "title": "Contact DEP’s Small Business Assistance Program (SBAP)",
+      "emailErrorText": "Email address must be valid.",
+      "emailErrorAlertText": "Correct the field below."
     },
     "contactDep": {
       "title": "Contact DEP",
@@ -120,7 +120,7 @@
         "contact": {
           "phoneInfo": "",
           "phone": "(609) 633-1418",
-          "form": "",
+          "form": "[Form](https://dep.nj.gov/wlm/contact-us/)",
           "email": ""
         }
       },
@@ -148,7 +148,7 @@
         "heading": "Wastewater Requirements",
         "bodyLink": "[Division of Water Quality](https://dep.nj.gov/dwq/contact-us/)",
         "contact": {
-          "phoneInfo": "",
+          "phoneInfo": "Division of Water Quality",
           "phone": "(609) 292-9977",
           "form": "",
           "email": "dwq@dep.nj.gov"
