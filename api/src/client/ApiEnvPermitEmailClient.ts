@@ -17,15 +17,17 @@ const getConfig = async (
 
 export const ApiEnvPermitEmailClient = (logWriter: LogWriterType): EnvironmentPermitEmailClient => {
   const sendEmail = async (emailMetaData: EmailMetaData): Promise<string> => {
-    const Config = await getConfig(logWriter);
-    logWriter.LogInfo(`TEMP Config Value: *******${Config.emailConfirmationKey.slice(-3)}`);
+    const config = await getConfig(logWriter);
     return await axios
-      .post(Config.emailConfirmationUrl, emailMetaData, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": Config.emailConfirmationKey,
+      .post(
+        config.emailConfirmationUrl,
+        { ...emailMetaData, "api-key": config.emailConfirmationKey },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      })
+      )
       .then((response) => {
         logWriter.LogInfo(
           `Email sent successfully for: ${emailMetaData.userName}, ${emailMetaData.businessName}`,

@@ -50,12 +50,15 @@ describe("ApiEnvPermitEmailClient", () => {
     const result = await emailClient.sendEmail(emailMetaData);
 
     expect(getConfigValue).toHaveBeenCalledTimes(2);
-    expect(axios.post).toHaveBeenCalledWith("https://test-api.example.com", emailMetaData, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "test-api-key",
+    expect(axios.post).toHaveBeenCalledWith(
+      "https://test-api.example.com",
+      { ...emailMetaData, "api-key": "test-api-key" },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
     expect(result).toBe("Email sent successfully");
   });
 
@@ -64,12 +67,15 @@ describe("ApiEnvPermitEmailClient", () => {
     const result = await emailClient.sendEmail(emailMetaData);
 
     expect(getConfigValue).toHaveBeenCalledTimes(2);
-    expect(axios.post).toHaveBeenCalledWith("https://test-api.example.com", emailMetaData, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "test-api-key",
+    expect(axios.post).toHaveBeenCalledWith(
+      "https://test-api.example.com",
+      { ...emailMetaData, "api-key": "test-api-key" },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     expect(result).toBe("Failed");
   });

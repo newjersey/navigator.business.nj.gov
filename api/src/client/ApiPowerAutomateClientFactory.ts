@@ -17,13 +17,16 @@ export const ApiPowerAutomateClientFactory = (config: Config): PowerAutomateClie
     headers?: object;
   }): Promise<AxiosResponse> => {
     return axios
-      .post(config.baseUrl, props.body, {
-        headers: {
-          ...props.headers,
-          "Content-Type": "application/json",
-          "x-api-key": config.apiKey,
+      .post(
+        config.baseUrl,
+        { ...props.body, "api-key": config.apiKey },
+        {
+          headers: {
+            ...props.headers,
+            "Content-Type": "application/json",
+          },
         },
-      })
+      )
       .then((response: AxiosResponse) => {
         config.logger.LogInfo(
           `Power Automate Client - Id:${logId} - Response received: ${JSON.stringify(response.data)}`,

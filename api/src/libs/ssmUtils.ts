@@ -58,12 +58,12 @@ export const getConfigValue = async (
     const response = await ssmClient.send(command);
     const paramValue = response.Parameter?.Value ?? "";
     logger?.LogInfo(
-      `Contains: ${response.Parameter?.Value ? `Value found: ********${paramValue.slice(-3)}` : "No value found"}`,
+      `SSM parameter ${paramName}: ${response.Parameter?.Value ? "Found" : "Not Found"}`,
     );
 
     return paramValue;
   } catch (error) {
-    console.error(`Failed to read parameter ${paramName}:`, error);
+    logger?.LogError(`SSM parameter ${paramName} Error: ${error}`);
     return "";
   }
 };
