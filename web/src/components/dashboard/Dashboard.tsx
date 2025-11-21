@@ -45,6 +45,7 @@ interface Props {
   elevatorViolations?: boolean;
   licenseEvents: LicenseEventType[];
   xrayRenewalEvent: XrayRenewalCalendarEventType;
+  commonBusinessTasks: (AnytimeActionLicenseReinstatement | AnytimeActionTask)[];
 }
 
 export const Dashboard = (props: Props): ReactElement => {
@@ -90,7 +91,7 @@ export const Dashboard = (props: Props): ReactElement => {
                         anytimeActionLicenseReinstatements={
                           props.anytimeActionLicenseReinstatements
                         }
-                        commonBusinessTasks={[]} // this will need value passed in whent he commonBusinessTask logic is added
+                        commonBusinessTasks={props.commonBusinessTasks}
                       />
                     )}
 
@@ -147,7 +148,7 @@ export const Dashboard = (props: Props): ReactElement => {
                         anytimeActionTasksFromNonEssentialQuestions
                       }
                       anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
-                      commonBusinessTasks={[]} // this will need value passed in whent he commonBusinessTask logic is added
+                      commonBusinessTasks={props.commonBusinessTasks}
                     />
                   )}
 

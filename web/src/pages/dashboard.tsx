@@ -25,6 +25,7 @@ import {
   loadOperateReferences,
   loadRoadmapSideBarDisplayContent,
   loadXrayRenewalCalendarEvent,
+  loadCommonBusinessTasks,
 } from "@businessnjgovnavigator/shared/static";
 import {
   AnytimeActionLicenseReinstatement,
@@ -52,6 +53,7 @@ interface Props {
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   licenseEvents: LicenseEventType[];
   xrayRenewalEvent: XrayRenewalCalendarEventType;
+  commonBusinessTasks: (AnytimeActionLicenseReinstatement | AnytimeActionTask)[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -136,6 +138,7 @@ const DashboardPage = (props: Props): ReactElement => {
               elevatorViolations={hasElevatorViolations}
               licenseEvents={props.licenseEvents}
               xrayRenewalEvent={props.xrayRenewalEvent}
+              commonBusinessTasks={props.commonBusinessTasks}
             />
           )}
         </main>
@@ -156,6 +159,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       licenseEvents: loadAllLicenseCalendarEvents(),
       xrayRenewalEvent: loadXrayRenewalCalendarEvent(),
+      commonBusinessTasks: loadCommonBusinessTasks(),
     },
   };
 };
