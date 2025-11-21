@@ -1839,12 +1839,14 @@ describe("profile - starting business", () => {
         process.env.FEATURE_EMPLOYER_RATES = "true";
         const business = generateBusinessForProfile({
           profileData: generateProfileData({
-            businessPersona: "STARTING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+            businessPersona: "OWNING" as const,
           }),
         });
         renderPage({ business });
+        chooseTab("numbers");
         await waitFor(() => {
-          expect(screen.getByTestId("employer-rates-section")).toBeInTheDocument();
+          expect(screen.getByTestId("employerAccess")).toBeInTheDocument();
         });
       });
     });
