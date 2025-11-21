@@ -11,7 +11,7 @@ cycler==0.12.1
 decorator==5.2.1
 executing==2.2.1
 fonttools==4.58.5
-idna==3.10
+idna==3.11
 ipdb==0.13.13
 ipython==9.5.0
 jedi==0.19.2
