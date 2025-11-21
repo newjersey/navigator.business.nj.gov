@@ -1,4 +1,5 @@
 import { GetParameterCommand, PutParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
+import { LogWriterType } from "@libs/logWriter";
 
 const ssmClient = new SSMClient({});
 const parameterName = `/${process.env.STAGE}/feature-flag/users-migration/kill-switch`;
@@ -36,7 +37,10 @@ let cache: {
   expiresAt?: number;
 } = {};
 
-export const getConfigValue = async (paramName: CONFIG_VARS): Promise<string> => {
+export const getConfigValue = async (
+  paramName: CONFIG_VARS,
+  logger?: LogWriterType,
+): Promise<string> => {
   if (process.env.STAGE === "local") {
     const envVarName = paramName.toUpperCase().replaceAll("-", "_");
     const envValue = process.env[envVarName];
@@ -47,12 +51,16 @@ export const getConfigValue = async (paramName: CONFIG_VARS): Promise<string> =>
 
   try {
     const ssmPath = `/${process.env.STAGE}/${paramName}`;
+    logger?.LogInfo(`Fetching SSM parameter: ${ssmPath}`);
     const command = new GetParameterCommand({
       Name: ssmPath,
     });
 
     const response = await ssmClient.send(command);
     const paramValue = response.Parameter?.Value ?? "";
+    logger?.LogInfo(
+      `Contains: ${response.Parameter?.Value ? `Value found: ********${paramValue.slice(-3)}` : "No value found"}`,
+    );
 
     return paramValue;
   } catch (error) {
