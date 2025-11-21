@@ -18,7 +18,7 @@ jedi==0.19.2
 kiwisolver==1.4.9
 Markdown==3.8.2
 matplotlib-inline==0.1.7
-matplotlib==3.10.6
+matplotlib==3.10.7
 mypy-extensions==1.1.0
 numpy==2.3.3
 packaging==25.0
