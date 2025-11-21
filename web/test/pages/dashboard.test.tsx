@@ -74,6 +74,7 @@ describe("dashboard page", () => {
           anytimeActionLicenseReinstatements={[]}
           licenseEvents={[]}
           xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+          commonBusinessTasks={[]}
         />
       </ThemeProvider>,
     );
@@ -97,6 +98,7 @@ describe("dashboard page", () => {
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
             xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+            commonBusinessTasks={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>,
