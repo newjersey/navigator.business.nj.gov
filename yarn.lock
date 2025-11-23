@@ -4218,7 +4218,7 @@ __metadata:
     dayjs: 1.11.18
     dedent: 1.7.0
     dependency-cruiser: 17.0.1
-    dotenv: 17.2.2
+    dotenv: 17.2.3
     esbuild: ^0.25.10
     eslint: 8.57.1
     eslint-config-prettier: 9.1.2
@@ -4382,7 +4382,7 @@ __metadata:
     decap-cms-app: 3.0.12
     dedent: 1.7.0
     dependency-cruiser: 17.0.1
-    dotenv: 17.2.2
+    dotenv: 17.2.3
     dynamodb-admin: 5.1.3
     esbuild: ^0.25.10
     eslint: 8.57.1
@@ -4581,7 +4581,7 @@ __metadata:
     dayjs: 1.11.18
     decap-cms-app: 3.0.12
     dependency-cruiser: 17.0.1
-    dotenv: 17.2.2
+    dotenv: 17.2.3
     eslint: 8.57.1
     eslint-config-next: 15.5.4
     eslint-config-prettier: 9.1.2
@@ -18763,10 +18763,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:17.2.2":
-  version: 17.2.2
-  resolution: "dotenv@npm:17.2.2"
-  checksum: 673825993b16a6722332b2e1f8c24b1c2ebe3dd3b81ae5df9be35f1483bf52e0b463555b09da65b756c7abee3cf55ba2ae2628c22874a899556fa787fac56019
+"dotenv@npm:17.2.3":
+  version: 17.2.3
+  resolution: "dotenv@npm:17.2.3"
+  checksum: fde23eb88649041ec7a0f6a47bbe59cac3c454fc2007cf2e40b9c984aaf0636347218c56cfbbf067034b0a73f530a2698a19b4058695787eb650ec69fe234624
   languageName: node
   linkType: hard
 
