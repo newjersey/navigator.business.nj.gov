@@ -24,7 +24,7 @@
     "@businessnjgovnavigator/content": "*",
     "dayjs": "1.11.18",
     "gray-matter": "4.0.3",
-    "js-yaml": "4.1.0",
+    "js-yaml": "4.1.1",
     "lodash": "4.17.21",
     "uuid": "9.0.1"
   },
