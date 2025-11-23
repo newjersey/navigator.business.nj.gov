@@ -4147,7 +4147,7 @@ __metadata:
     jest: 29.7.0
     prettier: 3.6.2
     prettier-plugin-organize-imports: 4.3.0
-    ts-jest: 29.4.4
+    ts-jest: 29.4.5
     ts-node: 10.9.2
     typescript: 5.9.2
   languageName: unknown
@@ -4216,7 +4216,7 @@ __metadata:
     serverless-http: 3.2.0
     simple-oauth2: 5.1.0
     supertest: 6.3.4
-    ts-jest: 29.4.4
+    ts-jest: 29.4.5
     ts-loader: 9.5.4
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
@@ -4427,7 +4427,7 @@ __metadata:
     style-loader: 3.3.4
     supertest: 6.3.4
     swr: 1.3.0
-    ts-jest: 29.4.4
+    ts-jest: 29.4.5
     ts-loader: 9.5.4
     ts-node: 10.9.2
     ts-node-dev: ^2.0.0
@@ -4472,7 +4472,7 @@ __metadata:
     lodash: 4.17.21
     prettier: 3.6.2
     rimraf: 6.1.2
-    ts-jest: 29.4.4
+    ts-jest: 29.4.5
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
     typescript: 5.9.2
@@ -4609,7 +4609,7 @@ __metadata:
     storybook: 7.6.20
     style-loader: 3.3.4
     swr: 1.3.0
-    ts-jest: 29.4.4
+    ts-jest: 29.4.5
     ts-loader: 9.5.4
     ts-node: 10.9.2
     typescript: 5.9.2
@@ -34336,9 +34336,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:29.4.4":
-  version: 29.4.4
-  resolution: "ts-jest@npm:29.4.4"
+"ts-jest@npm:29.4.5":
+  version: 29.4.5
+  resolution: "ts-jest@npm:29.4.5"
   dependencies:
     bs-logger: ^0.2.6
     fast-json-stable-stringify: ^2.1.0
@@ -34346,7 +34346,7 @@ __metadata:
     json5: ^2.2.3
     lodash.memoize: ^4.1.2
     make-error: ^1.3.6
-    semver: ^7.7.2
+    semver: ^7.7.3
     type-fest: ^4.41.0
     yargs-parser: ^21.1.1
   peerDependencies:
@@ -34372,7 +34372,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: 4cb712fd05363d1264aed544b78fb3a00ad28069b5d08ce6fc330f35dddcdecdf475d4855eefd0ef6cc01cdcf510b92f121d0d5b6d83029ad23e5750ae544d7c
+  checksum: b2ba677d32bd0024356ab8d43a1b88cb81ecad94be277b111975e626fd37a9ed17fd446a2e3a399a3c8534dcf89ea7c28a4bf4f094b153a4a9972c67b680ad0d
   languageName: node
   linkType: hard
 
