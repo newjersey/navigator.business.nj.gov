@@ -76,7 +76,7 @@
     "concurrently": "^9.2.1",
     "cross-env": "7.0.3",
     "dependency-cruiser": "17.0.1",
-    "dotenv": "17.2.2",
+    "dotenv": "17.2.3",
     "esbuild": "^0.25.10",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.2",
