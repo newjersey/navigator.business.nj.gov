@@ -234,7 +234,7 @@
     "tsconfig-paths": "4.2.0",
     "tsx": "4.20.6",
     "typescript": "5.9.2",
-    "webpack": "5.102.0",
+    "webpack": "5.103.0",
     "wiremock": "3.13.1",
     "yarn-workspace-sync-deps": "0.3.3"
   },
