@@ -174,7 +174,7 @@
     "@types/xml2js": "0.4.14",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
-    "aws-cdk": "2.1029.0",
+    "aws-cdk": "2.1033.0",
     "aws-cdk-lib": "^2.215.0",
     "babel-loader": "10.0.0",
     "cat": "0.2.0",
