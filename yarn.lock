@@ -4235,7 +4235,7 @@ __metadata:
     lodash: 4.17.21
     prettier: 3.6.2
     prettier-plugin-organize-imports: 4.3.0
-    rimraf: 6.0.1
+    rimraf: 6.1.2
     serverless-http: 3.2.0
     simple-oauth2: 5.1.0
     supertest: 6.3.4
@@ -4261,7 +4261,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 9.2.1
     prettier: 3.6.2
-    rimraf: 6.0.1
+    rimraf: 6.1.2
   languageName: unknown
   linkType: soft
 
@@ -4438,7 +4438,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.6.2
     require-from-string: 2.0.2
-    rimraf: 6.0.1
+    rimraf: 6.1.2
     sass: 1.93.2
     sass-loader: 14.2.1
     seedrandom: ^3.0.5
@@ -4494,7 +4494,7 @@ __metadata:
     js-yaml: 4.1.0
     lodash: 4.17.21
     prettier: 3.6.2
-    rimraf: 6.0.1
+    rimraf: 6.1.2
     ts-jest: 29.4.4
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
@@ -4625,7 +4625,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.6.2
     require-from-string: 2.0.2
-    rimraf: 6.0.1
+    rimraf: 6.1.2
     sass: 1.93.2
     sass-loader: 14.2.1
     slick-carousel: 1.8.1
@@ -20802,7 +20802,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"foreground-child@npm:^3.1.0, foreground-child@npm:^3.3.1":
+"foreground-child@npm:^3.1.0":
   version: 3.3.1
   resolution: "foreground-child@npm:3.3.1"
   dependencies:
@@ -21383,22 +21383,6 @@ __metadata:
   bin:
     glob: dist/esm/bin.mjs
   checksum: cda96c074878abca9657bd984d2396945cf0d64283f6feeb40d738fe2da642be0010ad5210a1646244a5fc3511b0cab5a374569b3de5a12b8a63d392f18c6043
-  languageName: node
-  linkType: hard
-
-"glob@npm:^11.0.0":
-  version: 11.1.0
-  resolution: "glob@npm:11.1.0"
-  dependencies:
-    foreground-child: ^3.3.1
-    jackspeak: ^4.1.1
-    minimatch: ^10.1.1
-    minipass: ^7.1.2
-    package-json-from-dist: ^1.0.0
-    path-scurry: ^2.0.0
-  bin:
-    glob: dist/esm/bin.mjs
-  checksum: 1cfbdc743db77688727411f00233404eb9c67d7c89a4ff1f8b8e60031382d4f695ecf60f279d0d45e5ba2377610572d013a858a433b45a133cf20aba6e3206e0
   languageName: node
   linkType: hard
 
@@ -23827,15 +23811,6 @@ __metadata:
     "@pkgjs/parseargs":
       optional: true
   checksum: be31027fc72e7cc726206b9f560395604b82e0fddb46c4cbf9f97d049bcef607491a5afc0699612eaa4213ca5be8fd3e1e7cd187b3040988b65c9489838a7c00
-  languageName: node
-  linkType: hard
-
-"jackspeak@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "jackspeak@npm:4.1.1"
-  dependencies:
-    "@isaacs/cliui": ^8.0.2
-  checksum: daca714c5adebfb80932c0b0334025307b68602765098d73d52ec546bc4defdb083292893384261c052742255d0a77d8fcf96f4c669bcb4a99b498b94a74955e
   languageName: node
   linkType: hard
 
@@ -28934,7 +28909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"package-json-from-dist@npm:^1.0.0":
+"package-json-from-dist@npm:^1.0.0, package-json-from-dist@npm:^1.0.1":
   version: 1.0.1
   resolution: "package-json-from-dist@npm:1.0.1"
   checksum: 58ee9538f2f762988433da00e26acc788036914d57c71c246bf0be1b60cdbd77dd60b6a3e1a30465f0b248aeb80079e0b34cb6050b1dfa18c06953bb1cbc7602
@@ -31794,15 +31769,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:6.0.1":
-  version: 6.0.1
-  resolution: "rimraf@npm:6.0.1"
+"rimraf@npm:6.1.2":
+  version: 6.1.2
+  resolution: "rimraf@npm:6.1.2"
   dependencies:
-    glob: ^11.0.0
-    package-json-from-dist: ^1.0.0
+    glob: ^13.0.0
+    package-json-from-dist: ^1.0.1
   bin:
     rimraf: dist/esm/bin.mjs
-  checksum: 8ba5b84131c1344e9417cb7e8c05d8368bb73cbe5dd4c1d5eb49fc0b558209781658d18c450460e30607d0b7865bb067482839a2f343b186b07ae87715837e66
+  checksum: 9b3e6f715b29a0245dcbc81783a7c8bd5a0804d52e0b36099856707df030dd3d31243f6fec2cc24be71bc2cc878139514fc8389d46cb0eb71255219585cd4cfd
   languageName: node
   linkType: hard
 
