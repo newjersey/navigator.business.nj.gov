@@ -1,4 +1,4 @@
-asttokens==3.0.0
+asttokens==3.0.1
 beautifulsoup4==4.13.4
 black==25.11.0
 cachetools==6.2.0
