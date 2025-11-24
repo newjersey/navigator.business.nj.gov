@@ -13,7 +13,7 @@ import {
 import { PreparePaymentApiSubmission } from "@shared/cigaretteLicense";
 import { getCurrentBusiness } from "@shared/index";
 
-import { CigaretteLicenseClient, EmailClient } from "@domain/types";
+import { CigaretteLicenseClient, PowerAutomateEmailClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
 import { CIGARETTE_PAYMENT_CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -42,7 +42,7 @@ const mockGetConfigValue = getConfigValue as jest.MockedFunction<
   (paramName: CIGARETTE_PAYMENT_CONFIG_VARS) => Promise<string>
 >;
 
-const mockEmailClient: jest.Mocked<EmailClient> = {
+const mockEmailClient: jest.Mocked<PowerAutomateEmailClient> = {
   sendEmail: jest.fn(),
   health: jest.fn(),
 };

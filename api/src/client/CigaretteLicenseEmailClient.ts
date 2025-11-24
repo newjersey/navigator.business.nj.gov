@@ -3,7 +3,7 @@ import {
   EmailConfirmationSubmission,
 } from "@businessnjgovnavigator/shared";
 import { ApiPowerAutomateClientFactory } from "@client/ApiPowerAutomateClientFactory";
-import { EmailClient, HealthCheckMetadata } from "@domain/types";
+import { HealthCheckMetadata, PowerAutomateEmailClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
@@ -18,7 +18,7 @@ const getConfig = async (): Promise<{
   };
 };
 
-export const CigaretteLicenseEmailClient = (logger: LogWriterType): EmailClient => {
+export const CigaretteLicenseEmailClient = (logger: LogWriterType): PowerAutomateEmailClient => {
   const logId = logger.GetId();
 
   const sendEmail = async (
