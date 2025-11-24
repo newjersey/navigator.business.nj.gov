@@ -14,16 +14,22 @@ export const ApiPowerAutomateClientFactory = (config: Config): PowerAutomateClie
 
   const startWorkflow = async (props: {
     body?: object;
-    headers?: object;
+    isHealthCheck?: boolean;
   }): Promise<AxiosResponse> => {
     return axios
-      .post(config.baseUrl, props.body, {
-        headers: {
-          ...props.headers,
-          "Content-Type": "application/json",
-          "x-api-key": config.apiKey,
+      .post(
+        config.baseUrl,
+        {
+          ...props.body,
+          "api-key": config.apiKey,
+          "health-check": props.isHealthCheck ? true : false,
         },
-      })
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      )
       .then((response: AxiosResponse) => {
         config.logger.LogInfo(
           `Power Automate Client - Id:${logId} - Response received: ${JSON.stringify(response.data)}`,
@@ -39,7 +45,7 @@ export const ApiPowerAutomateClientFactory = (config: Config): PowerAutomateClie
   };
 
   const health = async (): Promise<HealthCheckMetadata> => {
-    return startWorkflow({ headers: { "health-check": "active" } })
+    return startWorkflow({ isHealthCheck: true })
       .then((response) => {
         config.logger.LogInfo(
           `Power Automate Health Check - Id:${logId} - Response received: ${JSON.stringify(
