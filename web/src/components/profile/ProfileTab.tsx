@@ -6,7 +6,14 @@ interface Props {
   tab: ProfileTabs;
   activeTab: ProfileTabs;
   setProfileTab: (profileTab: ProfileTabs) => void;
-  tabIcon: "info-outline" | "bar-chart" | "content-paste" | "folder-open" | "edit" | "star";
+  tabIcon:
+    | "info-outline"
+    | "bar-chart"
+    | "content-paste"
+    | "folder-open"
+    | "edit"
+    | "star"
+    | "profile";
   tabText: string;
   onKeyDown?: (event: React.KeyboardEvent) => void;
 }

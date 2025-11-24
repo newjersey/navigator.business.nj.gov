@@ -2946,6 +2946,68 @@ collections:
                       widget: string,
                     }
                   - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
+                  - { label: Contact Tab Title, name: profileTabContactTitle, widget: string }
+                  - {
+                      label: Contact And Notifications Heading,
+                      name: contactInformationHeading,
+                      widget: string,
+                    }
+                  - {
+                      label: Contact Information Sub Text,
+                      name: contactInformationSubText,
+                      widget: markdown,
+                    }
+                  - {
+                      label: Contact And Notifications Sub Text,
+                      name: contactAndNotificationsSubText,
+                      widget: string,
+                    }
+                  - {
+                      label: Types Of Notifications Heading,
+                      name: typesOfNotificationsHeading,
+                      widget: string,
+                    }
+                  - {
+                      label: Types Of Notifications Sub Text,
+                      name: typesOfNotificationsSubText,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Incomplete Tasks Label,
+                      name: notificationIncompleteTasksLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Incomplete Tasks Description,
+                      name: notificationIncompleteTasksDescription,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Newsletter Label,
+                      name: notificationNewsletterLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Newsletter Description,
+                      name: notificationNewsletterDescription,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Product News Label,
+                      name: notificationProductNewsLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Product News Description,
+                      name: notificationProductNewsDescription,
+                      widget: string,
+                    }
+                  - {
+                      label: Security Matters Heading,
+                      name: securityMattersHeading,
+                      widget: string,
+                    }
+                  - { label: Security Matters Text, name: securityMattersText, widget: markdown }
       - label: "Employer Rates"
         name: "employer-rates"
         file: "content/src/fieldConfig/employer-rates.json"
