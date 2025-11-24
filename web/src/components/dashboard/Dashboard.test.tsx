@@ -114,6 +114,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
           xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+          commonBusinessTasks={[]}
         />
       </ThemeProvider>,
     );
@@ -136,6 +137,7 @@ describe("<DashboardOnDesktop />", () => {
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
             xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+            commonBusinessTasks={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>,
