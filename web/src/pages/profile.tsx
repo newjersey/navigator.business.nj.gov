@@ -29,6 +29,7 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
+import { ContactTabPanel } from "@/components/profile/ContactTabPanel";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
@@ -96,8 +97,8 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { EmployerRatesTemporary } from "@/components/employer-rates/EmployerRatesTemporary";
 import { EmployerRates } from "@/components/employer-rates/EmployerRates";
+import { EmployerRatesTemporary } from "@/components/employer-rates/EmployerRatesTemporary";
 
 interface Props {
   municipalities: Municipality[];
@@ -374,6 +375,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
       </div>
     ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+    ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
         <ProfileTabHeader tab="permits" />
@@ -467,6 +471,9 @@ const ProfilePage = (props: Props): ReactElement => {
           <ForeignBusinessTypeField required />
         </ProfileField>
       </div>
+    ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
     ),
     permits: <></>,
     numbers: (
@@ -587,6 +594,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
         {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRatesTemporary />}
       </div>
+    ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -738,6 +748,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <CertificationsAndFundingNonEssentialQuestions />
       </div>
     ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+    ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
         <ProfileTabHeader ref={permitsRef} tab="permits" />
@@ -833,6 +846,9 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+    ),
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />

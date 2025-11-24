@@ -500,7 +500,15 @@ export type FeedbackRequestModalNames =
   | "Request Submitted"
   | "Report Issue";
 
-const _profileTabs = ["info", "permits", "numbers", "documents", "notes", "personalize"] as const;
+const _profileTabs = [
+  "info",
+  "contact",
+  "permits",
+  "numbers",
+  "documents",
+  "notes",
+  "personalize",
+] as const;
 
 export type ProfileTabs = (typeof _profileTabs)[number];
 
