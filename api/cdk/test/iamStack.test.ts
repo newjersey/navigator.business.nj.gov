@@ -70,7 +70,7 @@ describe("IamStack", () => {
     }).not.toThrow();
   });
 
-  test("inline policy: SNS publish to CMS alert topic", () => {
+  test("does NOT include SNS publish policy outside dev", () => {
     expect(() => {
       template.hasResourceProperties("AWS::IAM::Policy", {
         PolicyDocument: {
@@ -84,7 +84,7 @@ describe("IamStack", () => {
           ]),
         },
       });
-    }).not.toThrow();
+    }).toThrow();
   });
 
   test("inline policy: SecretsManager GetSecretValue", () => {
@@ -194,6 +194,28 @@ describe("IamStack", () => {
               Action: "s3:GetObject",
               Resource: Match.stringLikeRegexp("arn:aws:s3:::.*"),
               Effect: "Allow",
+            }),
+          ]),
+        },
+      });
+    }).not.toThrow();
+  });
+
+  test("includes SNS publish policy in dev environment", () => {
+    const devApp = new App();
+    const devProps: IamStackProps = { stage: "dev" };
+    const devStack = new IamStack(devApp, "TestIamStackDev", devProps);
+    const devTemplate = Template.fromStack(devStack);
+
+    expect(() => {
+      devTemplate.hasResourceProperties("AWS::IAM::Policy", {
+        PolicyDocument: {
+          Statement: Match.arrayWith([
+            Match.objectLike({
+              Action: "sns:Publish",
+              Effect: "Allow",
+              Resource: Match.anyValue(),
+              Sid: "SnsPublishPolicyToCmsAlertTopic",
             }),
           ]),
         },
