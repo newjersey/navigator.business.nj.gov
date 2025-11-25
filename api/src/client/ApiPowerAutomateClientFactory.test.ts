@@ -27,36 +27,10 @@ describe("ApiPowerAutomateClient", () => {
 
       expect(mockAxios.post).toHaveBeenCalledWith(
         "some-base-url",
-        { some: "data" },
+        { "api-key": "some-api-key", "health-check": false, some: "data" },
         {
           headers: {
             "Content-Type": "application/json",
-            "x-api-key": "some-api-key",
-          },
-        },
-      );
-    });
-
-    it("making a post request with headers does not override the API key or Content-Type", async () => {
-      mockAxios.post.mockResolvedValue({ data: {} });
-
-      await client.startWorkflow({
-        body: { some: "data" },
-        headers: {
-          "some-header": "some-value",
-          "x-api-key": "wrong-api-key",
-          "Content-Type": "something/else",
-        },
-      });
-
-      expect(mockAxios.post).toHaveBeenCalledWith(
-        "some-base-url",
-        { some: "data" },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": "some-api-key",
-            "some-header": "some-value",
           },
         },
       );
@@ -95,18 +69,20 @@ describe("ApiPowerAutomateClient", () => {
       });
     });
 
-    it("requests to start the workflow include the health-check header", async () => {
+    it("requests to start the workflow include the health-check body param", async () => {
       mockAxios.post.mockResolvedValue({});
 
       await client.health();
 
-      expect(mockAxios.post).toHaveBeenCalledWith("some-base-url", undefined, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "some-api-key",
-          "health-check": "active",
+      expect(mockAxios.post).toHaveBeenCalledWith(
+        "some-base-url",
+        { "api-key": "some-api-key", "health-check": true },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
     });
   });
 });

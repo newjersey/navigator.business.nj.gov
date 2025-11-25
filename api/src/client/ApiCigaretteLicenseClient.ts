@@ -6,9 +6,9 @@ import {
 } from "@client/ApiCigaretteLicenseHelpers";
 import {
   CigaretteLicenseClient,
-  EmailClient,
   HealthCheckMetadata,
   HealthCheckMethod,
+  PowerAutomateEmailClient,
 } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
@@ -35,7 +35,7 @@ export const getConfig = async (): Promise<CigaretteLicenseApiConfig> => {
 };
 
 export const ApiCigaretteLicenseClient = (
-  emailClient: EmailClient,
+  emailClient: PowerAutomateEmailClient,
   logger: LogWriterType,
 ): CigaretteLicenseClient => {
   const preparePayment = async (

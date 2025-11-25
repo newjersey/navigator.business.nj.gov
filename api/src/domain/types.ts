@@ -272,7 +272,7 @@ export interface PowerAutomateClient {
   health: () => Promise<HealthCheckMetadata>;
 }
 
-export interface EmailClient {
+export interface PowerAutomateEmailClient {
   sendEmail: (postBody: EmailConfirmationSubmission) => Promise<EmailConfirmationResponse>;
   health: () => Promise<HealthCheckMetadata>;
 }
