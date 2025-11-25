@@ -193,6 +193,7 @@ export const GenericTextField = forwardRef(
             className: `${props.readOnly ? "bg-base-lightest" : ""}`,
             ...props.inputProps,
           }}
+          required={props.required}
           type={props.type}
           onFocus={props.onFocus}
           onKeyDown={props.onKeyDown}
