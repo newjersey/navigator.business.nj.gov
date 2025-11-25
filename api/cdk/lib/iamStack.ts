@@ -8,6 +8,7 @@ import {
   USERS_TABLE,
   BUSINESSES_TABLE,
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  DEV_STAGE,
 } from "./constants";
 
 export interface IamStackProps extends StackProps {
@@ -123,7 +124,6 @@ export class IamStack extends Stack {
 
     const inlinePolicies: iam.PolicyStatement[] = [
       putMetricDataPolicyInCloudwatch,
-      snsPublishPolicyToCmsAlertTopic,
       secretsManagerPolicy,
       s3WritePolicy,
       ssmPolicy,
@@ -153,9 +153,11 @@ export class IamStack extends Stack {
         }),
       );
     }
-
     for (const policy of inlinePolicies) {
       lambdaRole.addToPrincipalPolicy(policy);
+    }
+    if (props.stage === DEV_STAGE) {
+      lambdaRole.addToPrincipalPolicy(snsPublishPolicyToCmsAlertTopic);
     }
     applyStandardTags(lambdaRole, props.stage);
 
