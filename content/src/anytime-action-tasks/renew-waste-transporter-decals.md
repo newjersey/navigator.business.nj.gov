@@ -1,6 +1,6 @@
 ---
 id: renew-waste-transporter-decals
-name: Renew Your Self-Generator Waste Transporter Decals
+name: Renew Your Waste Transporter Decals
 category:
   - manage-my-business-vehicles
 industryIds: []
