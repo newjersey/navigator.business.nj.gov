@@ -110,7 +110,7 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
             <ScrollableFormFieldWrapper fieldName="agentName">
               <BusinessFormationTextField
                 label={Config.formation.fields.agentName.label}
-                required={true}
+                required
                 validationText={getFieldErrorLabel("agentName")}
                 errorBarType="MOBILE-ONLY"
                 fieldName="agentName"
@@ -126,7 +126,7 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
                 label={Config.formation.fields.agentEmail.label}
                 fieldName="agentEmail"
                 errorBarType="MOBILE-ONLY"
-                required={true}
+                required
                 validationText={getFieldErrorLabel("agentEmail")}
                 readOnly={shouldBeDisabled("agentEmail", "ACCOUNT")}
                 type="text"
@@ -154,7 +154,7 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
         <BusinessFormationTextField
           label={Config.formation.fields.agentOfficeAddressLine1.label}
           fieldName="agentOfficeAddressLine1"
-          required={true}
+          required
           validationText={getFieldErrorLabel("agentOfficeAddressLine1")}
           disabled={shouldBeDisabled("agentOfficeAddressLine1", "ADDRESS")}
           errorBarType="ALWAYS"
@@ -184,7 +184,7 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
                 <BusinessFormationTextField
                   label={Config.formation.fields.agentOfficeAddressCity.label}
                   fieldName="agentOfficeAddressCity"
-                  required={true}
+                  required
                   validationText={getFieldErrorLabel("agentOfficeAddressCity")}
                   disabled={shouldBeDisabled("agentOfficeAddressCity", "ADDRESS")}
                   errorBarType="NEVER"
@@ -222,7 +222,7 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
                       fieldName="agentOfficeAddressZipCode"
                       label={Config.formation.fields.agentOfficeAddressZipCode.label}
                       validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
-                      required={true}
+                      required
                       disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                     />
                   </ScrollableFormFieldWrapper>
@@ -355,7 +355,7 @@ export const RegisteredAgent = (): ReactElement => {
                     secondaryLabel={Config.formation.registeredAgent.agentNumberLabelSecondary}
                     numericProps={{ minLength: 4, maxLength: 7 }}
                     fieldName="agentNumber"
-                    required={true}
+                    required
                     validationText={Config.formation.fields.agentNumber.error}
                     errorBarType="ALWAYS"
                     disabled={state.formationFormData.showManualEntry}

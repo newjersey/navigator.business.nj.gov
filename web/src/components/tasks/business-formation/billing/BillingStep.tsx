@@ -29,7 +29,7 @@ export const BillingStep = (): ReactElement => {
                 label={Config.formation.fields.contactFirstName.label}
                 fieldName="contactFirstName"
                 errorBarType="MOBILE-ONLY"
-                required={true}
+                required
                 validationText={getFieldErrorLabel("contactFirstName")}
               />
             </ScrollableFormFieldWrapper>
@@ -40,7 +40,7 @@ export const BillingStep = (): ReactElement => {
                 label={Config.formation.fields.contactLastName.label}
                 fieldName="contactLastName"
                 errorBarType="MOBILE-ONLY"
-                required={true}
+                required
                 validationText={getFieldErrorLabel("contactLastName")}
               />
             </ScrollableFormFieldWrapper>
@@ -58,6 +58,7 @@ export const BillingStep = (): ReactElement => {
               numericProps={{
                 maxLength: 10,
               }}
+              required
               visualFilter={getPhoneNumberFormat}
             />
           </ScrollableFormFieldWrapper>
