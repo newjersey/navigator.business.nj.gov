@@ -3,6 +3,7 @@ import { Content } from "@/components/Content";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -24,7 +25,6 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
 import { ChangeEvent, ReactElement, ReactNode, useContext, useMemo } from "react";
-import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 
 export const Signatures = (): ReactElement => {
   const FIELD_NAME = "signers";
@@ -195,6 +195,8 @@ export const Signatures = (): ReactElement => {
             "aria-label": `Signer title ${index}`,
             "data-testid": `signer-title-${index}`,
           }}
+          SelectDisplayProps={{ "aria-required": "true" }}
+          required
           renderValue={(selected): ReactNode => {
             if (!selected) {
               return <></>;
@@ -288,7 +290,7 @@ export const Signatures = (): ReactElement => {
             fieldName="signer"
             className={`margin-top-0`}
             ariaLabel={`Signer ${index}`}
-            required={true}
+            required
           />
         </ScrollableFormFieldWrapper>
       </>

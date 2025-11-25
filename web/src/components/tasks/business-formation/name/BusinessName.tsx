@@ -18,8 +18,8 @@ import {
   ReactElement,
   useContext,
   useEffect,
-  useState,
   useRef,
+  useState,
 } from "react";
 
 export const BusinessName = (): ReactElement => {
@@ -95,6 +95,7 @@ export const BusinessName = (): ReactElement => {
                   });
                   setConfirmationValue("");
                 }}
+                required
                 variant="outlined"
                 inputProps={{
                   "aria-label": "Search business name",
@@ -125,6 +126,7 @@ export const BusinessName = (): ReactElement => {
                       state.formationFormData.businessName === event.target.value,
                   });
                 }}
+                required
                 variant="outlined"
                 inputProps={{
                   "aria-label": "Confirm business name",

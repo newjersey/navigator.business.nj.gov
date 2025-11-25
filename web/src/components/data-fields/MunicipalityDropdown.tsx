@@ -19,6 +19,7 @@ interface Props {
   ariaLabel?: string;
   validationLabel?: string;
   hideErrorLabel?: boolean;
+  required?: boolean;
 }
 
 export const MunicipalityDropdown = (props: Props): ReactElement => {
@@ -99,6 +100,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
                   backgroundColor: "#FFFFFF",
                 },
               }}
+              required={props.required}
             />
           </div>
         );

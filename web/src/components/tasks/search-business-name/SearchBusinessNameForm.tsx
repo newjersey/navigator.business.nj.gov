@@ -210,6 +210,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                     onChange={(event): void => {
                       onChangeNameField(event.target.value);
                     }}
+                    required
                     variant="outlined"
                     inputProps={{
                       "aria-label": props.config.inputLabel ?? "Search business name",

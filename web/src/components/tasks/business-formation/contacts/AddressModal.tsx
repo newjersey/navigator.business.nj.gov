@@ -3,6 +3,7 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -16,7 +17,6 @@ import {
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
-import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 
 interface DisplayContent {
   modalTitle: string;
@@ -273,7 +273,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               onValidation={onValidation}
               validationText={addressErrorMap["addressName"].label}
               fieldName="addressName"
-              required={true}
+              required
               autoComplete="name"
             />
           </WithErrorBar>
@@ -315,7 +315,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               autoComplete="address-line1"
               validationText={addressErrorMap["addressLine1"].label}
               disabled={shouldBeDisabled("addressLine1")}
-              required={true}
+              required
             />
           </WithErrorBar>
           <WithErrorBar
@@ -368,7 +368,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                     autoComplete="address-level2"
                     value={addressData.addressCity}
                     disabled={shouldBeDisabled("addressCity")}
-                    required={true}
+                    required
                     handleChange={(value: string): void => {
                       setAddressData((prevAddressData) => {
                         return { ...prevAddressData, addressCity: value };
@@ -408,7 +408,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                         autoComplete
                         disabled={shouldBeDisabled("addressState")}
                         onValidation={onValidation}
-                        required={true}
+                        required
                         excludeTerritories={isStarting}
                       />
                     </div>
@@ -435,7 +435,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                         value={addressData.addressZipCode}
                         validationText={addressErrorMap["addressZipCode"].label}
                         onValidation={onValidation}
-                        required={true}
+                        required
                       />
                     </div>
                   </div>

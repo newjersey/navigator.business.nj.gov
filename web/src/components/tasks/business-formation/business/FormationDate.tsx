@@ -139,6 +139,7 @@ export const FormationDate = (props: Props): ReactElement => {
                     sx={{
                       svg: { fill: "#4b7600" },
                     }}
+                    required
                     inputProps={{
                       ...params.inputProps,
                       placeholder: "",
