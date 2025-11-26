@@ -1,5 +1,5 @@
 import { App } from "aws-cdk-lib";
-import { Template, Match } from "aws-cdk-lib/assertions";
+import { Match, Template } from "aws-cdk-lib/assertions";
 import { DataStack, DataStackProps } from "../lib/dataStack";
 
 describe("DataStack", () => {
@@ -13,7 +13,7 @@ describe("DataStack", () => {
     app = new App();
   });
 
-  test("creates Users and Businesses tables in local stage", () => {
+  test("creates Users, Businesses, and Messages tables in local stage", () => {
     expect(() => {
       const stack = new DataStack(app, "TestDataStackLocal", defaultProps);
       const template = Template.fromStack(stack);
@@ -93,17 +93,39 @@ describe("DataStack", () => {
           }),
         ]),
       });
+
+      template.hasResourceProperties("AWS::DynamoDB::Table", {
+        TableName: "messages-table-local",
+        BillingMode: "PAY_PER_REQUEST",
+        KeySchema: Match.arrayWith([{ AttributeName: "taskId", KeyType: "HASH" }]),
+        AttributeDefinitions: Match.arrayWith([
+          { AttributeName: "taskId", AttributeType: "S" },
+          { AttributeName: "dueAt", AttributeType: "S" },
+        ]),
+        Tags: Match.arrayWith([{ Key: "STAGE", Value: "local" }]),
+      });
     }).not.toThrow();
   });
 
-  test("imports tables in non-local stage", () => {
+  test("validates that tables not created in Terraform are created in CDK", () => {
     expect(() => {
       process.env.CI = "true";
       const stack = new DataStack(app, "TestDataStackDev", {
         stage: "dev",
       });
       const template = Template.fromStack(stack);
-      template.resourceCountIs("AWS::DynamoDB::Table", 0);
+
+      template.resourceCountIs("AWS::DynamoDB::Table", 1);
+      template.hasResourceProperties("AWS::DynamoDB::Table", {
+        TableName: "messages-table-dev",
+        BillingMode: "PAY_PER_REQUEST",
+        KeySchema: Match.arrayWith([{ AttributeName: "taskId", KeyType: "HASH" }]),
+        AttributeDefinitions: Match.arrayWith([
+          { AttributeName: "taskId", AttributeType: "S" },
+          { AttributeName: "dueAt", AttributeType: "S" },
+        ]),
+        Tags: Match.arrayWith([{ Key: "STAGE", Value: "dev" }]),
+      });
     }).not.toThrow();
   });
 });
