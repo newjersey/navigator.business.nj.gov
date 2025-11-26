@@ -1,8 +1,8 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
+import { XrayRenewalCalendarEventType } from "../../types";
+import { Match, MatchFunction } from "./typesForSearch";
 
 export const searchXrayRenewalCalendarEvent = (
+  matchFunction: MatchFunction,
   renewalCalendarEvent: XrayRenewalCalendarEventType,
   term: string,
 ): Match[] => {
@@ -19,6 +19,7 @@ export const searchXrayRenewalCalendarEvent = (
   const urlSlug = renewalCalendarEvent.urlSlug.toLowerCase();
   const eventDisplayName = renewalCalendarEvent.eventDisplayName.toLowerCase();
   const name = renewalCalendarEvent.name.toLowerCase();
+  const summaryDescriptionMd = renewalCalendarEvent.summaryDescriptionMd?.toLowerCase();
 
   const blockTexts = [content];
 
@@ -29,10 +30,11 @@ export const searchXrayRenewalCalendarEvent = (
     { content: urlSlug, label: "Url Slug" },
     { content: eventDisplayName, label: "Event Display Name" },
     { content: name, label: "Name" },
+    { content: summaryDescriptionMd, label: "Summary Description MD" },
   ];
 
-  match = findMatchInBlock(blockTexts, term, match);
-  match = findMatchInLabelledText(labelledTexts, term, match);
+  match = matchFunction(blockTexts, term, match);
+  match = matchFunction(labelledTexts, term, match);
 
   if (match.snippets.length > 0) {
     matches.push(match);

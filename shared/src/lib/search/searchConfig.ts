@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { makeSnippet } from "@/lib/search/helpers";
-import { ConfigMatch, GroupedConfigMatch } from "@/lib/search/typesForSearch";
+import { makeSnippet } from "./helpers";
+import { ConfigMatch, GroupedConfigMatch } from "./typesForSearch";
 
 const collectionInfo = new Map<string, string[]>();
-export const searchConfig = (obj: any, term: string, cmsConfig: any): GroupedConfigMatch[] => {
-  const configMatches = searchObj(obj.default, term, [], []).map((it) => {
+export const searchConfig = (object: any, term: string, cmsConfig: any): GroupedConfigMatch[] => {
+  const configMatches = searchObject(object.default, term, [], []).map((it) => {
     const cmsPath = findCmsConfigPath(cmsConfig, it.keyPath);
     return {
       value: makeSnippet(it.value, term),
@@ -22,11 +22,7 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
   for (const match of configMatches) {
     const groupLabel = match.cmsLabelPath.slice(0, 2).join(" > ");
     const existingGroup = groupedConfigMatches[groupLabel];
-    if (existingGroup) {
-      groupedConfigMatches[groupLabel] = [...existingGroup, match];
-    } else {
-      groupedConfigMatches[groupLabel] = [match];
-    }
+    groupedConfigMatches[groupLabel] = existingGroup ? [...existingGroup, match] : [match];
   }
 
   return Object.keys(groupedConfigMatches).map((key) => ({
@@ -36,15 +32,15 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
   }));
 };
 
-const searchObj = (
-  obj: any,
+const searchObject = (
+  object: any,
   term: string,
   matches: JsonMatch[],
   keyPaths: string[],
 ): JsonMatch[] => {
-  if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {
-    for (const key of Object.keys(obj)) {
-      const value = obj[key];
+  if (typeof object === "object" && object !== null && !Array.isArray(object)) {
+    for (const key of Object.keys(object)) {
+      const value = object[key];
       if (typeof value === "string") {
         if (value.toLowerCase().includes(term)) {
           matches = [
@@ -56,7 +52,7 @@ const searchObj = (
           ];
         }
       } else if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-        matches = searchObj(value, term, matches, [...keyPaths, key]);
+        matches = searchObject(value, term, matches, [...keyPaths, key]);
       }
     }
 

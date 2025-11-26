@@ -1,8 +1,11 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { Filing } from "@businessnjgovnavigator/shared/types";
+import { Filing } from "../../types";
+import { Match, MatchFunction } from "./typesForSearch";
 
-export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
+export const searchTaxFilings = (
+  matchFunction: MatchFunction,
+  filings: Filing[],
+  term: string,
+): Match[] => {
   const matches: Match[] = [];
 
   for (const filing of filings) {
@@ -46,8 +49,8 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
       { content: urlSlug, label: "Url Slug" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
+    match = matchFunction(blockTexts, term, match);
+    match = matchFunction(labelledTexts, term, match);
 
     if (match.snippets.length > 0) {
       matches.push(match);

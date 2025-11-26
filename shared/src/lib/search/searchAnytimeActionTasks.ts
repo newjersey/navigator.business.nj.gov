@@ -1,8 +1,8 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
+import { AnytimeActionTask } from "../../types";
+import { Match, MatchFunction } from "./typesForSearch";
 
 export const searchAnytimeActionTasks = (
+  matchFunction: MatchFunction,
   anytimeActionTasks: AnytimeActionTask[],
   term: string,
 ): Match[] => {
@@ -33,8 +33,8 @@ export const searchAnytimeActionTasks = (
       { content: issuingAgency, label: "Issuing Agency" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
+    match = matchFunction(blockTexts, term, match);
+    match = matchFunction(labelledTexts, term, match);
 
     if (match.snippets.length > 0) {
       matches.push(match);

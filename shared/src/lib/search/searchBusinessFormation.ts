@@ -1,9 +1,14 @@
-import { findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { TaskWithoutLinks } from "@businessnjgovnavigator/shared/types";
+import { TaskWithoutLinks } from "../../types";
+import { Match, MatchFunction } from "./typesForSearch";
 
-export const searchBusinessFormation = (tasks: TaskWithoutLinks[], term: string): Match[] => {
+export const searchBusinessFormation = (
+  matchFunction: MatchFunction,
+  tasks: TaskWithoutLinks[],
+  term: string,
+): Match[] => {
   const matches: Match[] = [];
+
+  // console.log(tasks);
 
   for (const task of tasks) {
     let match: Match = {
@@ -22,7 +27,7 @@ export const searchBusinessFormation = (tasks: TaskWithoutLinks[], term: string)
       { content: callToActionText, label: "CTA Text" },
     ];
 
-    match = findMatchInLabelledText(labelledTexts, term, match);
+    match = matchFunction(labelledTexts, term, match);
 
     if (match.snippets.length > 0) {
       matches.push(match);

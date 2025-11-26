@@ -3,6 +3,7 @@ slug: pollutants
 filename: pollutants
 header: Pollutants
 displayname: Pollutants
+id: pollutants
 ---
 
 A pollutant is a harmful substance that is released into the environment. They come from various activities. Examples include:

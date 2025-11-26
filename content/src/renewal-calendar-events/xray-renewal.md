@@ -6,7 +6,7 @@ urlSlug: xray-renewal
 name: Renew Your X-Ray Machine Registration
 eventDisplayName: X-Ray Machine Registration Renewal Deadline
 summaryDescriptionMd: >-
-  You must renew your x-ray machine registration once a year.
+  You must renew your x-ray machine registration once a year. `fake|label`
 
   You can renew your license 60 days before it expires and up to 30 days after expiration.
 
@@ -20,7 +20,7 @@ issuingAgency: Department of Environmental Protection, Radiation Protection Elem
 
 - Invoice number
 - New Jersey Environmental Management System (NJEMS) bill ID, if applicable
-- Applicable fees paid
+- Applicable fees paid `fake|body`
 
 :::largeCallout{showHeader="true" headerText="" calloutType="conditional" }
 

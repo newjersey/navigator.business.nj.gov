@@ -1,13 +1,13 @@
-import {
-  findMatchInBlock,
-  findMatchInLabelledText,
-  findMatchInListText,
-} from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
-import { Certification } from "@businessnjgovnavigator/shared/types";
+import { LookupFundingAgencyById } from "../../fundingAgency";
+import { Certification } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "./helpers";
+import { Match, MatchFunction } from "./typesForSearch";
 
-export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
+export const searchCertifications = (
+  matchFunction: MatchFunction,
+  certifications: Certification[],
+  term: string,
+): Match[] => {
   const matches: Match[] = [];
 
   for (const cert of certifications) {

@@ -4,7 +4,7 @@ summaryDescriptionMd: >-
   incident.
 
 
-  To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+  To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth. `fake|label`
 urlSlug: insurance-policy
 displayname: insurance-policy
 name: Get an Insurance Policy
@@ -13,7 +13,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-## Common Types of Business Insurance
+## Common Types of Business Insurance `fake|body`
 
 - **Commercial general liability insurance:** Research coverage and pricing options for your industry and business size
 - **Workers' compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation

@@ -7,29 +7,35 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
-import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
-import { searchBusinessFormation } from "@/lib/search/searchBusinessFormation";
-import { searchCertifications } from "@/lib/search/searchCertifications";
-import { searchConfig } from "@/lib/search/searchConfig";
-import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
-import { searchFundings } from "@/lib/search/searchFundings";
-import { searchIndustries } from "@/lib/search/searchIndustries";
-import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
-import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
-import { searchXrayRenewalCalendarEvent } from "@/lib/search/searchRenewalCalendarEvents";
-import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
-import { searchSteps } from "@/lib/search/searchSteps";
-import { searchTasks } from "@/lib/search/searchTasks";
-import { searchTaxFilings } from "@/lib/search/searchTaxFilings";
-import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
-import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
 import DomesticEmployerSteps from "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
+import {
+  findMatchInLabelAndBlock,
+  searchAnytimeActionLicenseReinstatements,
+} from "@businessnjgovnavigator/shared/lib/search";
+import { searchAnytimeActionTasks } from "@businessnjgovnavigator/shared/lib/search/searchAnytimeActionTasks";
+import { searchBusinessFormation } from "@businessnjgovnavigator/shared/lib/search/searchBusinessFormation";
+import { searchCertifications } from "@businessnjgovnavigator/shared/lib/search/searchCertifications";
+import { searchConfig } from "@businessnjgovnavigator/shared/lib/search/searchConfig";
+import { searchContextualInfo } from "@businessnjgovnavigator/shared/lib/search/searchContextualInfo";
+import { searchFundings } from "@businessnjgovnavigator/shared/lib/search/searchFundings";
+import { searchIndustries } from "@businessnjgovnavigator/shared/lib/search/searchIndustries";
+import { searchLicenseEvents } from "@businessnjgovnavigator/shared/lib/search/searchLicenseEvents";
+import { searchNonEssentialQuestions } from "@businessnjgovnavigator/shared/lib/search/searchNonEssentialQuestions";
+import { searchXrayRenewalCalendarEvent } from "@businessnjgovnavigator/shared/lib/search/searchRenewalCalendarEvents";
+import { searchSidebarCards } from "@businessnjgovnavigator/shared/lib/search/searchSidebarCards";
+import { searchSteps } from "@businessnjgovnavigator/shared/lib/search/searchSteps";
+import { searchTasks } from "@businessnjgovnavigator/shared/lib/search/searchTasks";
+import { searchTaxFilings } from "@businessnjgovnavigator/shared/lib/search/searchTaxFilings";
+import { searchWebflowLicenses } from "@businessnjgovnavigator/shared/lib/search/searchWebflowLicenses";
+import {
+  GroupedConfigMatch,
+  Match,
+} from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 import {
   loadAllAddOns,
   loadAllAnytimeActionLicenseReinstatements,
@@ -181,9 +187,18 @@ const SearchContentPage = (props: Props): ReactElement => {
       updateSearchState({ error: { message: error as string, term: searchState.term } });
       console.error(error);
     }
-    setTaskMatches(searchTasks(props.tasks, lowercaseTerm, props.industries, props.addOns));
+    setTaskMatches(
+      searchTasks(
+        findMatchInLabelAndBlock,
+        props.tasks,
+        lowercaseTerm,
+        props.industries,
+        props.addOns,
+      ),
+    );
     setLicenseTaskMatches(
       searchTasks(
+        findMatchInLabelAndBlock,
         props.licenseTasks,
         lowercaseTerm,
 
@@ -193,6 +208,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     );
     setMunicipalTaskMatches(
       searchTasks(
+        findMatchInLabelAndBlock,
         props.municipalTasks,
         lowercaseTerm,
 
@@ -202,6 +218,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     );
     setRaffleBingoStepMatches(
       searchTasks(
+        findMatchInLabelAndBlock,
         props.raffleBingoSteps,
         lowercaseTerm,
 
@@ -209,16 +226,36 @@ const SearchContentPage = (props: Props): ReactElement => {
         props.addOns,
       ),
     );
-    setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm, props.industries, props.addOns));
-    setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
-    setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
-    setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
-    setIndustryMatches(
-      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm),
+    setEnvTaskMatches(
+      searchTasks(
+        findMatchInLabelAndBlock,
+        props.envTasks,
+        lowercaseTerm,
+        props.industries,
+        props.addOns,
+      ),
     );
-    setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
+    setCertMatches(
+      searchCertifications(findMatchInLabelAndBlock, props.certifications, lowercaseTerm),
+    );
+    setCertArchiveMatches(
+      searchCertifications(findMatchInLabelAndBlock, props.archivedCertifications, lowercaseTerm),
+    );
+    setFundingMatches(searchFundings(findMatchInLabelAndBlock, props.fundings, lowercaseTerm));
+    setIndustryMatches(
+      searchIndustries(
+        findMatchInLabelAndBlock,
+        getIndustries({ overrideShowDisabledIndustries: true }),
+        lowercaseTerm,
+      ),
+    );
+    //this one missed?
+    setAnytimeActionTaskMatches(
+      searchAnytimeActionTasks(findMatchInLabelAndBlock, props.anytimeActionTasks, lowercaseTerm),
+    );
     setAnytimeActionLicenseReinstatementMatches(
       searchAnytimeActionLicenseReinstatements(
+        findMatchInLabelAndBlock,
         props.anytimeActionLicenseReinstatements,
         lowercaseTerm,
       ),
@@ -253,23 +290,35 @@ const SearchContentPage = (props: Props): ReactElement => {
       ),
     );
 
-    setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
-    setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
-    setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
+    setWebflowLicenseMatches(
+      searchWebflowLicenses(findMatchInLabelAndBlock, props.webflowLicenses, lowercaseTerm),
+    );
+    setFilingMatches(searchTaxFilings(findMatchInLabelAndBlock, props.filings, lowercaseTerm));
+    setSidebarCardMatches(
+      searchSidebarCards(findMatchInLabelAndBlock, sidebarCards, lowercaseTerm),
+    );
     setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
     setArchivedContextualInfoMatches(
       searchContextualInfo(props.archivedContextualInfo, lowercaseTerm),
     );
-    setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
+    setLicenseCalendarEventMatches(
+      searchLicenseEvents(findMatchInLabelAndBlock, props.licenseCalendarEvents, lowercaseTerm),
+    );
 
     setXrayRenewalCalendarEventMatches(
-      searchXrayRenewalCalendarEvent(props.xrayRenewalCalendarEvent, lowercaseTerm),
+      searchXrayRenewalCalendarEvent(
+        findMatchInLabelAndBlock,
+        props.xrayRenewalCalendarEvent,
+        lowercaseTerm,
+      ),
     );
 
     const businessFormationInfo: TaskWithoutLinks[] = Object.values(
       props.formationDbaContent.formationDbaContent,
     );
-    setBusinessFormationMatches(searchBusinessFormation(businessFormationInfo, lowercaseTerm));
+    setBusinessFormationMatches(
+      searchBusinessFormation(findMatchInLabelAndBlock, businessFormationInfo, lowercaseTerm),
+    );
     updateSearchState({ hasSearched: true });
   };
 

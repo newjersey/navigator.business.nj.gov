@@ -1,12 +1,11 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { AddAddOnUsage, AddIndustryUsage, AddTaskDependencyUsage } from "@/lib/search/usageHelpers";
+import { Match, MatchFunction } from "./typesForSearch";
 
-import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
-import { IndustryRoadmap, Task } from "@businessnjgovnavigator/shared/types";
+import { Industry } from "../../industry";
+import { LookupTaskAgencyById } from "../../taskAgency";
+import { IndustryRoadmap, Task } from "../../types";
 
 export const searchTasks = (
+  matchFunction: MatchFunction,
   tasks: Task[],
   term: string,
   industries: Industry[],
@@ -43,17 +42,18 @@ export const searchTasks = (
       { content: urlSlug, label: "Url Slug" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
+    match = matchFunction(blockTexts, term, match);
+    match = matchFunction(labelledTexts, term, match);
 
     if (match.snippets.length > 0) {
       matches.push(match);
     }
   }
 
-  AddAddOnUsage(matches, addOns);
-  AddIndustryUsage(matches, industries);
-  AddTaskDependencyUsage(matches);
+  // for DEBUGGING, uncomment before the end
+  // AddAddOnUsage(matches, addOns);
+  // AddIndustryUsage(matches, industries);
+  // AddTaskDependencyUsage(matches);
 
   return matches;
 };

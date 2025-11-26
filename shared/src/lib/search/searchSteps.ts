@@ -1,19 +1,19 @@
-import { findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { Step } from "@businessnjgovnavigator/shared/types";
+import { Step } from "../../types";
+import { findMatchInLabelledText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchSteps = (
   steps: Step[],
   term: string,
-  params: { filename: string; displayTitle: string },
+  parameters: { filename: string; displayTitle: string },
 ): Match[] => {
   const matches: Match[] = [];
 
   for (const step of steps) {
     let match: Match = {
-      filename: params.filename,
+      filename: parameters.filename,
       snippets: [],
-      displayTitle: params.displayTitle,
+      displayTitle: parameters.displayTitle,
     };
 
     const name = step.name.toLowerCase();

@@ -22,7 +22,7 @@
       "radioButtonMyselfText": "Myself",
       "noteBody": "By checking this box, the account holder information will be applied to the 'Registered Agent Name' and 'Registered Agent Email' fields. These fields will be locked.",
       "label": "Registered Agent",
-      "sectionDescription": "All businesses in New Jersey must list a `registered agent|registered-agent` to receive official legal and tax documents on behalf of the business.",
+      "sectionDescription": "All businesses in New Jersey must `fake|label` list a `registered agent|registered-agent` to receive official legal and tax documents on behalf of the business.",
       "whoToListSubheading": "Who would you like to list as your registered agent?",
       "checkboxCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now editable",
       "infoCalloutFooter": "If you or whoever you choose is not able to meet the requirements, you can search the internet to find a professional registered agent service. Carefully research the registered agent to make sure they are authorized in New Jersey."

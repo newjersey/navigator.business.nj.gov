@@ -33,7 +33,7 @@ sectorIds:
 urlSlug: boiler
 summaryDescriptionMd: If your boiler is newly installed or recently replaced,
   **it must be registered and inspected within 30 days**. Your boiler may also
-  need to be inspected regularly to ensure it is working safely.
+  need to be inspected regularly to ensure it is working safely. `fake|label`
 issuingAgency: "New Jersey Department of Labor and Workforce Development,
   Division of Public Safety and Occupational Safety and Health, Bureau of Boiler
   and Pressure Vessel Compliance "
@@ -46,7 +46,7 @@ callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
 
 A steam or hot water boiler must be inspected if it meets the following condition:
 
-- Has 10 square feet or more of heating surface
+- Has 10 square feet or more of heating surface `fake|body`
 
 If the boiler has 1 of the following and serves a building with 6+ housing units or 25+ people, it
 also requires inspection:

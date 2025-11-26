@@ -1,4 +1,4 @@
-import { LabelledContent, LabelledContentList, Match } from "@/lib/search/typesForSearch";
+import { LabelledContent, LabelledContentList, Match, MatchFunction } from "./typesForSearch";
 
 const removeMarkdownStyling = (markdownInput: string | undefined): string | undefined => {
   if (markdownInput === undefined) {
@@ -8,6 +8,24 @@ const removeMarkdownStyling = (markdownInput: string | undefined): string | unde
     .replaceAll(/(\*\*|__)(.*?)\1/g, "$2")
     .replaceAll(/(\*|_)(.*?)\1/g, "$2");
   return nonMarkdownString;
+};
+
+export const findMatchInLabelAndBlock: MatchFunction = (blockTexts, term, match): Match => {
+  const firstElement = blockTexts.find((item) => item !== undefined);
+
+  if (firstElement === undefined) {
+    return match;
+  }
+  if (typeof firstElement === "string") {
+    match = findMatchInBlock(blockTexts as string[], term, match);
+  } else if (
+    typeof firstElement === "object" &&
+    "label" in firstElement &&
+    "content" in firstElement
+  ) {
+    match = findMatchInLabelledText(blockTexts as LabelledContent[], term, match);
+  }
+  return match;
 };
 
 export const findMatchInBlock = (

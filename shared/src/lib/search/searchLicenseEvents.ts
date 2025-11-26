@@ -1,8 +1,11 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
+import { LicenseEventType } from "../../types";
+import { Match, MatchFunction } from "./typesForSearch";
 
-export const searchLicenseEvents = (licenseEvents: LicenseEventType[], term: string): Match[] => {
+export const searchLicenseEvents = (
+  matchFunction: MatchFunction,
+  licenseEvents: LicenseEventType[],
+  term: string,
+): Match[] => {
   const matches: Match[] = [];
 
   for (const item of licenseEvents) {
@@ -15,6 +18,7 @@ export const searchLicenseEvents = (licenseEvents: LicenseEventType[], term: str
     const callToActionLink = item.callToActionLink?.toLowerCase();
     const callToActionText = item.callToActionText?.toLowerCase();
     const urlSlug = item.urlSlug.toLowerCase();
+    const summaryDescriptionMd = item.summaryDescriptionMd?.toLowerCase();
 
     const blockTexts = [content];
 
@@ -23,10 +27,11 @@ export const searchLicenseEvents = (licenseEvents: LicenseEventType[], term: str
       { content: callToActionLink, label: "CTA Link" },
       { content: callToActionText, label: "CTA Text" },
       { content: urlSlug, label: "Url Slug" },
+      { content: summaryDescriptionMd, label: "Summary Description MD" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
+    match = matchFunction(blockTexts, term, match);
+    match = matchFunction(labelledTexts, term, match);
 
     if (match.snippets.length > 0) {
       matches.push(match);

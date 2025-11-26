@@ -36,3 +36,9 @@ export type GroupedConfigMatch = {
   cmsFileName: string;
   matches: ConfigMatch[];
 };
+
+export type MatchFunction = (
+  textToSearch: (string | undefined | LabelledContent)[],
+  term: string,
+  match: Match,
+) => Match;
