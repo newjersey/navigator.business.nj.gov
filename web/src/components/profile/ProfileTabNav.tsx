@@ -13,6 +13,7 @@ import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext, useRef } from "react";
 
 const infoTab = "info";
+const contactTab = "contact";
 const permitsTab = "permits";
 const numbersTab = "numbers";
 const documentsTab = "documents";
@@ -49,6 +50,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
 
   const tabRefs = {
     [infoTab]: useRef<HTMLButtonElement>(null),
+    [contactTab]: useRef<HTMLButtonElement>(null),
     [permitsTab]: useRef<HTMLButtonElement>(null),
     [numbersTab]: useRef<HTMLButtonElement>(null),
     [documentsTab]: useRef<HTMLButtonElement>(null),
@@ -58,6 +60,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
 
   const availableTabs = [
     infoTab,
+    contactTab,
     ...(shouldShowPermits ? [permitsTab] : []),
     numbersTab,
     ...(shouldShowDocuments ? [documentsTab] : []),
@@ -111,6 +114,14 @@ export const ProfileTabNav = (props: Props): ReactElement => {
         tabText={Config.profileDefaults.default.profileTabInfoTitle}
         onKeyDown={(e) => handleKeyDown(e, infoTab)}
         ref={tabRefs[infoTab]}
+      />
+      <ProfileTab
+        {...props}
+        tab={contactTab}
+        tabIcon="profile"
+        tabText={Config.profileDefaults.default.profileTabContactTitle}
+        onKeyDown={(e) => handleKeyDown(e, contactTab)}
+        ref={tabRefs[contactTab]}
       />
       {shouldShowPermits && (
         <ProfileTab

@@ -16,6 +16,8 @@ export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
       switch (props.tab) {
         case "info":
           return Config.profileDefaults.default.profileTabInfoTitle;
+        case "contact":
+          return Config.profileDefaults.default.profileTabContactTitle;
         case "permits":
           return Config.profileDefaults.default.profileTabPermitsTitle;
         case "numbers":
@@ -35,6 +37,9 @@ export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
         <Heading level={2} className="margin-bottom-4">
           {getTitle()}
         </Heading>
+        {props.tab === "contact" && (
+          <ProfileTabSubText text={Config.profileDefaults.default.contactAndNotificationsSubText} />
+        )}
         {(props.tab === "permits" || props.tab === "personalize") && (
           <ProfileTabSubText text={Config.profileDefaults.default.permitsAndLicensesSubText} />
         )}

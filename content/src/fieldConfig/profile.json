@@ -507,6 +507,21 @@
       "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
       "profileTabInfoTitle": "Business Information",
+      "profileTabContactTitle": "Contact & Notifications",
+      "contactAndNotificationsSubText": "Choose how you want to stay informed. You can customize how you get messages, and you can choose which topics to receive.",
+      "contactInformationHeading": "Your Contact Information",
+      "contactInformationSubText": "We'll only use these details to contact you about your Business.NJ.gov account. Changes you make here won't affect your myNewJersey account and won't change your information on any official business forms with New Jersey (for example, tax filings). To update your myNewJersey login, visit [myNewJersey Account Settings](https://myt1.nj.gov/edituser/EditUserProfile).",
+      "errorTextEmail": "Enter a valid email address.",
+      "typesOfNotificationsHeading": "Types of Notifications",
+      "typesOfNotificationsSubText": "Select the types of updates that matter most to your business.",
+      "notificationIncompleteTasksLabel": "Incomplete tasks and general reminders",
+      "notificationIncompleteTasksDescription": "Stay on track with helpful nudges when you leave something unfinished.",
+      "notificationNewsletterLabel": "Business.NJ.gov Newsletter",
+      "notificationNewsletterDescription": "Get updates on the latest State news that could impact your business.",
+      "notificationProductNewsLabel": "Product news and feedback",
+      "notificationProductNewsDescription": "News about the website, feature releases, service updates, and opportunities to provide feedback.",
+      "securityMattersHeading": "Your Security Matters:",
+      "securityMattersText": "- You can update your contact information and notification preferences at any time.\n- We will **never** ask for your password, banking details, or Social Security number in an email or text.\n- All official messages will always come from **address@business.nj.gov** or appear in your account dashboard.\n- If you ever get an email that looks suspicious, report it at [cyber.nj.gov/report](https://cyber.nj.gov/report).",
       "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete."
     }
   }
