@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -249,7 +248,9 @@ export const ContactInformationTab = (): ReactElement => {
           <div className="flex">
             <div className="callout-quickReference-icon" aria-hidden="true" />
             <div className="flex-1">
-              <Heading level={4}>{Config.profileDefaults.default.securityMattersHeading}</Heading>
+              <div className="text-bold">
+                {Config.profileDefaults.default.securityMattersHeading}
+              </div>
               <Content>{Config.profileDefaults.default.securityMattersText}</Content>
             </div>
           </div>
