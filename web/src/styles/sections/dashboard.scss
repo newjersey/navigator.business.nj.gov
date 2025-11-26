@@ -3,3 +3,15 @@
 .blueRightGutter {
   background: linear-gradient(to right, variables.$white 70%, variables.$cool-extra-light 70% 100%);
 }
+
+.commonBusinessTasksHeader {
+  margin-top: 24px;
+}
+
+.commonBusinessTasksUnorderedList {
+  padding-inline-start: 24px;
+}
+
+.commonBusinessTasksList {
+  padding-left: 8px;
+}

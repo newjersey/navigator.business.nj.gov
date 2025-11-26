@@ -32,12 +32,12 @@ export const AnytimeActionContainer = (props: Props): ReactElement => {
       />
       {props.commonBusinessTasks.length > 0 && (
         <>
-          <Heading className={"padding-top-1"} level={3}>
+          <Heading className={"commonBusinessTasksHeader"} level={3}>
             {Config.dashboardAnytimeActionDefaults.commonBusinessTasksHeader}
           </Heading>
-          <ul>
+          <ul className={"commonBusinessTasksUnorderedList"}>
             {props.commonBusinessTasks.map((businessTask) => (
-              <li key={businessTask.urlSlug}>
+              <li className={"commonBusinessTasksList"} key={businessTask.urlSlug}>
                 <a className="usa-link" href={`actions/${businessTask.urlSlug}`}>
                   {businessTask.name}
                 </a>
