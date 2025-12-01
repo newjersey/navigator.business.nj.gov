@@ -33,7 +33,6 @@ describe("Automated Accessibilty Testing [feature] [all] [group1]", () => {
       onOnboardingPageStartingBusiness.clickNext();
 
       cy.url().should("include", "dashboard");
-      cy.get('[data-testid="header-link-to-profile"]');
       cy.checkA11y(undefined, {
         runOnly: {
           type: "tag",
@@ -74,7 +73,6 @@ describe("Automated Accessibilty Testing [feature] [all] [group1]", () => {
       onOnboardingPageStartingBusiness.clickNext();
 
       cy.url().should("include", "dashboard");
-      cy.get('[data-testid="header-link-to-profile"]');
       cy.checkA11y(undefined, {
         runOnly: {
           type: "tag",

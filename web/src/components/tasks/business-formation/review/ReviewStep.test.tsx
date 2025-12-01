@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
   generateFormationProfileData,
@@ -25,6 +24,7 @@ import {
   PublicFilingLegalType,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";

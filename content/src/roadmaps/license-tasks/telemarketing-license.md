@@ -21,7 +21,7 @@ webflowId: 669ac522985e99ee52d4901b
 ## Application Requirements
 
 - Business name, address, phone number, and email
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - `Employer Identification Number (EIN)|ein`
 - `Certificate of Formation|certificate-formation`
 - `Registered agent|registered-agent` information, including address and phone number

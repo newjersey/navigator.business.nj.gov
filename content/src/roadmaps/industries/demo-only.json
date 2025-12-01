@@ -21,14 +21,10 @@
     }
   ],
   "name": "Demo Only",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "demo-only"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "demo-only"],
   "displayname": "Demo Only",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
-    "canBeReseller": false,
     "isCannabisLicenseTypeApplicable": false,
     "isCpaRequiredApplicable": false,
     "isCarServiceApplicable": false,

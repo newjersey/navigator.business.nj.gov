@@ -1,12 +1,13 @@
 ---
+id: nurses-registry
 displayname: nurses-registry
-id: "nurses-registry"
-webflowId: "640b8467ea016663dd808039"
-urlSlug: "nurses-registry"
-webflowName: "Nurses Registry"
-callToActionLink: "http://njconsumeraffairs.gov/epservices/Pages/default.aspx"
+urlSlug: nurses-registry
+webflowName: Nurses Registry
 agencyId: nj-consumer-affairs
-divisionPhone: "(973) 504-6370"
-webflowIndustry: "Nurses Registry"
-licenseCertificationClassification: "LICENSE"
+callToActionText: Apply for a Nurses' Registry
+callToActionLink: http://njconsumeraffairs.gov/epservices/Pages/default.aspx
+webflowIndustry: Nurses Registry
+licenseCertificationClassification: LICENSE
+divisionPhone: (973) 504-6370
+webflowId: 640b8467ea016663dd808039
 ---

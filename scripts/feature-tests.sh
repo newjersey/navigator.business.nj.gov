@@ -10,7 +10,7 @@ API_PORT=5001
 LAMBDA_PORT=5051
 DYNAMO_PORT=8001
 WIREMOCK_PORT=9001
-API_BASE_URL=http://localhost:${API_PORT}/local
+API_BASE_URL=http://localhost:${API_PORT}
 
 npx kill-port ${WEB_PORT}
 npx kill-port ${API_PORT}

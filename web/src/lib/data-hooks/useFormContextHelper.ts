@@ -5,7 +5,7 @@ import {
   FormContextReducer,
   FormContextType,
   ReducedFieldStates,
-} from "@/lib/types/types";
+} from "@businessnjgovnavigator/shared/types";
 import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
 
 const debug = false;

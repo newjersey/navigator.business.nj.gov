@@ -1,14 +1,14 @@
 ---
+id: fishing-equipment-licenses
 displayname: fishing-equipment-licenses
-id: "fishing-equipment-licenses"
-webflowId: "5f7728ffef49622ad146d0d4"
-urlSlug: "fishing-equipment-licenses"
-webflowName: "Fishing Equipment/Licenses"
-callToActionLink: "http://nj.gov/dep/fgw/"
-callToActionText: ""
+urlSlug: fishing-equipment-licenses
+webflowName: Fishing Equipment/Licenses
 agencyId: njdep
-agencyAdditionalContext: "Division of Fish and Wildlife"
-divisionPhone: "(609) 292-4860"
-webflowIndustry: "Fishing Equipment Licenses"
-licenseCertificationClassification: "CONTACT"
+agencyAdditionalContext: Division of Fish and Wildlife
+callToActionText: Learn About Fishing Licenses
+callToActionLink: https://dep.nj.gov/njfw/fishing/
+webflowIndustry: Fishing Equipment Licenses
+divisionPhone: (609) 292-4860
+webflowId: 5f7728ffef49622ad146d0d4
+licenseCertificationClassification: CONTACT
 ---

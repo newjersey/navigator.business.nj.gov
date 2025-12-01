@@ -16,6 +16,7 @@ export const encryptFieldsFactory = (
       encryptProfileTaxPin,
       encryptTaxClearanceTaxId,
       encryptTaxClearanceTaxPin,
+      encryptCigaretteLicenseTaxId,
     ];
     let encryptedUserData = userDataWithHashedTaxId;
 
@@ -138,6 +139,34 @@ const encryptTaxClearanceTaxPin = async (
           ...business.taxClearanceCertificateData,
           taxPin: maskedTaxPin,
           encryptedTaxPin: encryptedTaxPin,
+        }
+      : undefined,
+  }));
+};
+
+const encryptCigaretteLicenseTaxId = async (
+  userData: UserData,
+  cryptoClient: CryptoClient,
+): Promise<UserData> => {
+  const currentBusiness = getCurrentBusiness(userData);
+  if (
+    !currentBusiness.cigaretteLicenseData?.taxId ||
+    currentBusiness.cigaretteLicenseData?.taxId?.includes(maskingCharacter)
+  ) {
+    return userData;
+  }
+  const maskedTaxId = maskTaxId(currentBusiness.cigaretteLicenseData?.taxId as string);
+  const encryptedTaxId = await cryptoClient.encryptValue(
+    currentBusiness.cigaretteLicenseData?.taxId as string,
+  );
+
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
+    cigaretteLicenseData: business.cigaretteLicenseData
+      ? {
+          ...business.cigaretteLicenseData,
+          taxId: maskedTaxId,
+          encryptedTaxId: encryptedTaxId,
         }
       : undefined,
   }));

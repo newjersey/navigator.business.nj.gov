@@ -1,3 +1,177 @@
+# [2025.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.22.0...v2025.23.0) (2025-11-13)
+
+
+### Bug Fixes
+
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] continue without saving ([062aebc](https://github.com/newjersey/navigator.business.nj.gov/commit/062aebc359028c65f6b4ba6aeafab64e093a0e05))
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] env permit UI ([f3b6c85](https://github.com/newjersey/navigator.business.nj.gov/commit/f3b6c8566daf7ff8605769026c2fe3ca863aafa5))
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] update route for env permit email ([ab5f272](https://github.com/newjersey/navigator.business.nj.gov/commit/ab5f272003063408c17f014f30c2444251a6fe28))
+
+
+### Features
+
+* [AB[#16369](https://github.com/newjersey/navigator.business.nj.gov/issues/16369)] ID's added to all clickable elements ([be505d6](https://github.com/newjersey/navigator.business.nj.gov/commit/be505d6bc60878d1e60f2ad44a6d278aafd3144f))
+* [AB[#16377](https://github.com/newjersey/navigator.business.nj.gov/issues/16377)] stepper step query params ([8a5fbcb](https://github.com/newjersey/navigator.business.nj.gov/commit/8a5fbcb23bbc8493eafb80ae9361cd25572bda8c))
+* [AB[#16473](https://github.com/newjersey/navigator.business.nj.gov/issues/16473)] Add AWS Messaging Service Client for Email Communications ([a6f58bf](https://github.com/newjersey/navigator.business.nj.gov/commit/a6f58bf607c561e0b95b6417a8ca0cbae03faa86))
+* [AB[#16473](https://github.com/newjersey/navigator.business.nj.gov/issues/16473)] Add feature flag for welcome email and update SSM utils to look at local env ([14af574](https://github.com/newjersey/navigator.business.nj.gov/commit/14af574a33f093badf32079b7ad65677fe41c867))
+* [AB[#16656](https://github.com/newjersey/navigator.business.nj.gov/issues/16656)] refactor api_submit analytics ([559a41f](https://github.com/newjersey/navigator.business.nj.gov/commit/559a41fc089bf84e66ebd888b4af7f0c10ecc434))
+* [AB[#6215](https://github.com/newjersey/navigator.business.nj.gov/issues/6215)] env permit email req ([c458769](https://github.com/newjersey/navigator.business.nj.gov/commit/c4587693932e6c4b48ead96c2e084b505bff2f37))
+
+# [2025.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.21.0...v2025.22.0) (2025-10-29)
+
+
+### Bug Fixes
+
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] minor copy change to text ([104031b](https://github.com/newjersey/navigator.business.nj.gov/commit/104031b398f152a1bc5ece83dac06351ca7e2016))
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] test fix inline with copy change ([c20c5e1](https://github.com/newjersey/navigator.business.nj.gov/commit/c20c5e17b8fa9e0cf26811cdc018b88776af9438))
+* [AB[#16352](https://github.com/newjersey/navigator.business.nj.gov/issues/16352)] tax-clearance loading spinner ([a4ec889](https://github.com/newjersey/navigator.business.nj.gov/commit/a4ec889ccf04c1147ee7983fc61624441db59d25))
+* **deps:** update nextjs monorepo to v15.5.6 ([180cb59](https://github.com/newjersey/navigator.business.nj.gov/commit/180cb59fd8f25d54a820d5161a0747d880ab299b))
+
+
+### Features
+
+* [AB[#12618](https://github.com/newjersey/navigator.business.nj.gov/issues/12618)] formation billing cost column header added ([04c1e21](https://github.com/newjersey/navigator.business.nj.gov/commit/04c1e21e85704ce4d38a929831523aeeac729fef))
+* [AB[#16087](https://github.com/newjersey/navigator.business.nj.gov/issues/16087)] remove business functionality ([9e4966e](https://github.com/newjersey/navigator.business.nj.gov/commit/9e4966eac24dc6ce78c50331fe1194865455e11b))
+* [AB[#16087](https://github.com/newjersey/navigator.business.nj.gov/issues/16087)] remove business functionality ([b459323](https://github.com/newjersey/navigator.business.nj.gov/commit/b4593233ac4d9ced4910e8faf1ec8ea431bbae66))
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] anytime action search QA for no options and icon spacing ([184317d](https://github.com/newjersey/navigator.business.nj.gov/commit/184317d9eeeefb071b1917589dc7ae5d966ad8df))
+* [AB[#16202](https://github.com/newjersey/navigator.business.nj.gov/issues/16202)] dashboard anytime action dropdown to search field ([9d88ca3](https://github.com/newjersey/navigator.business.nj.gov/commit/9d88ca38074a9bcd825dfdb2df1a27c917d000fc))
+* [AB[#16205](https://github.com/newjersey/navigator.business.nj.gov/issues/16205)] added recommended for you section and CMS controls ([92b818d](https://github.com/newjersey/navigator.business.nj.gov/commit/92b818d10bb88c93afac72b88bba56d069b1e3d8))
+* [AB[#16230](https://github.com/newjersey/navigator.business.nj.gov/issues/16230)] add live chat help link in error messsage ([d31212e](https://github.com/newjersey/navigator.business.nj.gov/commit/d31212e7f8f2815ba3de38661d63d69545f12528))
+
+# [2025.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.20.0...v2025.21.0) (2025-10-03)
+
+
+### Bug Fixes
+
+* [AB[#13780](https://github.com/newjersey/navigator.business.nj.gov/issues/13780)] design qa updates ([77b2c19](https://github.com/newjersey/navigator.business.nj.gov/commit/77b2c19ed8bbbed75cb019483f65d8b9011bfe0c))
+* [AB[#14055](https://github.com/newjersey/navigator.business.nj.gov/issues/14055)] error handling bar css fix ([f237c45](https://github.com/newjersey/navigator.business.nj.gov/commit/f237c45950d25b26598e171033fdb50dcfcaaf49))
+* [AB[#15155](https://github.com/newjersey/navigator.business.nj.gov/issues/15155)] remove conditional rendering for profile callout and update copy ([288e3a8](https://github.com/newjersey/navigator.business.nj.gov/commit/288e3a8eccbb602df5c303c136f652ea9aedd7a3))
+* [AB[#15306](https://github.com/newjersey/navigator.business.nj.gov/issues/15306)] PR fixes for remove business modal ([22ffe38](https://github.com/newjersey/navigator.business.nj.gov/commit/22ffe389d1fb5330c07f568c17cb66c710209c24))
+* [AB[#15448](https://github.com/newjersey/navigator.business.nj.gov/issues/15448)] content acceptance ([1e55e5b](https://github.com/newjersey/navigator.business.nj.gov/commit/1e55e5b63e67405c73e70b76b26c994a57f05443))
+* [AB[#15448](https://github.com/newjersey/navigator.business.nj.gov/issues/15448)] content acceptance changes ([42121d3](https://github.com/newjersey/navigator.business.nj.gov/commit/42121d36347df17a1988f0115cc75c2058d67014))
+* [AB[#15515](https://github.com/newjersey/navigator.business.nj.gov/issues/15515)] address design corrections for review confirmation component ([f0f3816](https://github.com/newjersey/navigator.business.nj.gov/commit/f0f3816147dd0beb2a79c3d4e5d93591f7d2de6a))
+* [AB[#15884](https://github.com/newjersey/navigator.business.nj.gov/issues/15884)] fixing utc date and email html ([df25049](https://github.com/newjersey/navigator.business.nj.gov/commit/df250491a71610efffd91d6f0f76f7ef5bafae67))
+* [AB[#15907](https://github.com/newjersey/navigator.business.nj.gov/issues/15907)] add automatic rerun to mitigate ECONNRESET failures ([d9c3af6](https://github.com/newjersey/navigator.business.nj.gov/commit/d9c3af684d2adef0bf12be6925f09ce4153d073d))
+* [AB[#15921](https://github.com/newjersey/navigator.business.nj.gov/issues/15921)] content comment fixes ([6c01775](https://github.com/newjersey/navigator.business.nj.gov/commit/6c01775eea76245b0cc805c16a312b9515b90a41))
+* [AB[#15922](https://github.com/newjersey/navigator.business.nj.gov/issues/15922)] test-fixes ([7344354](https://github.com/newjersey/navigator.business.nj.gov/commit/73443548b850c5b95f8602fb349af8be3009227d))
+* [AB[#15942](https://github.com/newjersey/navigator.business.nj.gov/issues/15942)] fix start date of cig sales bug ([67b6eee](https://github.com/newjersey/navigator.business.nj.gov/commit/67b6eee14bba0bfb4cdafe68442c9b7f0b88a0ef))
+* [AB[#15980](https://github.com/newjersey/navigator.business.nj.gov/issues/15980)] make summary description optional in webflow licenses ([be72698](https://github.com/newjersey/navigator.business.nj.gov/commit/be726981784d5a2cd1d2486522309dcdae05e025))
+* [AB[#15980](https://github.com/newjersey/navigator.business.nj.gov/issues/15980)] make summary description optional in webflow licenses ([aeca1a0](https://github.com/newjersey/navigator.business.nj.gov/commit/aeca1a02cbbe6d87bc315c196f642d2028a94b0d))
+* allow 404 icon to display properly ([7b833ad](https://github.com/newjersey/navigator.business.nj.gov/commit/7b833adbf232506f4e6cf9ef482e79e1218d76d2))
+* **deps:** update aws-sdk ([a18017d](https://github.com/newjersey/navigator.business.nj.gov/commit/a18017d074e7c4fab8f91f2327212a16d77dda1d))
+* **deps:** update aws-sdk to v3.896.0 ([1347e08](https://github.com/newjersey/navigator.business.nj.gov/commit/1347e08370a91d963c8f2c91aea3cad5e64c9d24))
+* **deps:** update dependency aws-amplify to v6.15.6 ([96b2160](https://github.com/newjersey/navigator.business.nj.gov/commit/96b21605b77fb5f01d6394db49e60a02b41c98c5))
+* **deps:** update dependency axios to v1.12.0 [security] ([9520d6d](https://github.com/newjersey/navigator.business.nj.gov/commit/9520d6df89b778223e231a30a7630e06bcb1a729))
+* **deps:** update dependency axios to v1.12.2 ([2ed74c9](https://github.com/newjersey/navigator.business.nj.gov/commit/2ed74c9b306b6946fd8c19471234f8ec90413830))
+* **deps:** update dependency cypress-axe to v1.7.0 ([832af0f](https://github.com/newjersey/navigator.business.nj.gov/commit/832af0f948b40262f9b7feac1d754faaf0bbb419))
+* **deps:** update dependency dayjs to v1.11.18 ([d8d7b59](https://github.com/newjersey/navigator.business.nj.gov/commit/d8d7b595c645af32120a06a266576659048de58d))
+* **deps:** update dependency dedent to v1.7.0 ([08cc22b](https://github.com/newjersey/navigator.business.nj.gov/commit/08cc22b30e914cd6cf8e7a806fc552b7426c9664))
+* fix incorrectly formatted metadata on dental-waste-registration ([50cd0e7](https://github.com/newjersey/navigator.business.nj.gov/commit/50cd0e7dc8e5090069081831c7aa9019ec207d33))
+* replace existing dashes with hyphen-minus ([04d4fcb](https://github.com/newjersey/navigator.business.nj.gov/commit/04d4fcb0842801bb1ed3d1a928a89e643d9b2024))
+* selfgenerator anytime action ([68baed3](https://github.com/newjersey/navigator.business.nj.gov/commit/68baed385202ae153876835da946d5154b1b422d))
+* updating serveless.ts to fix systems manager vars ([300bf91](https://github.com/newjersey/navigator.business.nj.gov/commit/300bf9185fce0a7b9dff254f0b8a719bcbe66e12))
+
+
+### Features
+
+* [AB[#12866](https://github.com/newjersey/navigator.business.nj.gov/issues/12866)] Remove markdown formatting when searching in search tool ([b224fc1](https://github.com/newjersey/navigator.business.nj.gov/commit/b224fc1f4ef51a5d2031292fb753ea3dd132a828))
+* [AB[#14081](https://github.com/newjersey/navigator.business.nj.gov/issues/14081)] Enhancing Error Handling on X-Ray Status ([#11627](https://github.com/newjersey/navigator.business.nj.gov/issues/11627)) ([4d7d01c](https://github.com/newjersey/navigator.business.nj.gov/commit/4d7d01c14f070ae4baa31252ec2b411450d302f6))
+* [AB[#14787](https://github.com/newjersey/navigator.business.nj.gov/issues/14787)] health check lambda integration for slack cms integrity tests ([664ce1e](https://github.com/newjersey/navigator.business.nj.gov/commit/664ce1e09d584847fef4fa2873486f789f88681d))
+* [AB[#15155](https://github.com/newjersey/navigator.business.nj.gov/issues/15155)] convert alert on business profile page to callout ([ab50089](https://github.com/newjersey/navigator.business.nj.gov/commit/ab50089424336356fb295f704bd6aed0d2e4df42))
+* [AB[#15306](https://github.com/newjersey/navigator.business.nj.gov/issues/15306)] Add remove business modal ([24172fb](https://github.com/newjersey/navigator.business.nj.gov/commit/24172fbac5dd49f6bfc7b736e3b147d03ebca8ce))
+* [AB[#15448](https://github.com/newjersey/navigator.business.nj.gov/issues/15448)] additions to formation business name ([b46cfef](https://github.com/newjersey/navigator.business.nj.gov/commit/b46cfef8ade5cd546fb4732c74cffba952239340))
+* [AB[#15515](https://github.com/newjersey/navigator.business.nj.gov/issues/15515)] add confirmation checks and callout to business formation review ([e78b97c](https://github.com/newjersey/navigator.business.nj.gov/commit/e78b97cd1416b2020cff0ea0aa94f88e5bad8c11))
+* [AB[#15822](https://github.com/newjersey/navigator.business.nj.gov/issues/15822)] add Python script to parse content collections and generate CSV ([df13683](https://github.com/newjersey/navigator.business.nj.gov/commit/df13683317ed6c4d223c328176b498b14df5b5c6))
+* [AB[#15885](https://github.com/newjersey/navigator.business.nj.gov/issues/15885)] add analytics events for cigarette license ([5bd6414](https://github.com/newjersey/navigator.business.nj.gov/commit/5bd64141e9def37273c19c26a62c9252f98f0627))
+* [AB[#15921](https://github.com/newjersey/navigator.business.nj.gov/issues/15921)] adding business name confirmation ([29d8915](https://github.com/newjersey/navigator.business.nj.gov/commit/29d8915c2d7acea9161884a6489a7ba114abe4d4))
+* [AB[#15925](https://github.com/newjersey/navigator.business.nj.gov/issues/15925)] add analytics to Business Name Reservation Selection ([610a011](https://github.com/newjersey/navigator.business.nj.gov/commit/610a01166690b771aba2ac7c51d9b4e249625670))
+* [AB[#15926](https://github.com/newjersey/navigator.business.nj.gov/issues/15926)] updates to license-tasks CMS collection ([8e060bf](https://github.com/newjersey/navigator.business.nj.gov/commit/8e060bfcc842a2f47e4066d457ee64681924d012))
+* [AB[#15929](https://github.com/newjersey/navigator.business.nj.gov/issues/15929)] alert users to errant dashes ([d0994fa](https://github.com/newjersey/navigator.business.nj.gov/commit/d0994fa570bceb61524c0cb9a61b7d8b9420ad81))
+* [AB[#15961](https://github.com/newjersey/navigator.business.nj.gov/issues/15961)] remove before you start modal from dba formation step 3 ([229c5e7](https://github.com/newjersey/navigator.business.nj.gov/commit/229c5e70e4d3c6f96de9162bf898758cdd35f792))
+* [AB[#15998](https://github.com/newjersey/navigator.business.nj.gov/issues/15998)] add profile icon and remove business link under business dropdown ([fddbb83](https://github.com/newjersey/navigator.business.nj.gov/commit/fddbb8384028ec3cb4693296ded3172ede42de14))
+* [AB[#15998](https://github.com/newjersey/navigator.business.nj.gov/issues/15998)] add profile icon and remove business link under business dropdown ([c905c03](https://github.com/newjersey/navigator.business.nj.gov/commit/c905c0399d33a877f0502d5b3d513618e07707a1))
+* [AB[#15998](https://github.com/newjersey/navigator.business.nj.gov/issues/15998)] add profile icon and remove business link under business dropdown ([830a5f7](https://github.com/newjersey/navigator.business.nj.gov/commit/830a5f74362eadf4aa2f59b15d04102592504808))
+* [AB[#16241](https://github.com/newjersey/navigator.business.nj.gov/issues/16241)] Update analytics for live chat help buttons on non-formation pages ([d3ee442](https://github.com/newjersey/navigator.business.nj.gov/commit/d3ee442acce1d66d4f57d9f008be895e27909c04))
+* [AB[#7845](https://github.com/newjersey/navigator.business.nj.gov/issues/7845)] update header styles and H2 and H3 in CMS ([044a09e](https://github.com/newjersey/navigator.business.nj.gov/commit/044a09ed57aa00e8e88363c14d1af5cd6e485041))
+
+# [2025.20.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.19.0...v2025.20.0) (2025-09-10)
+
+
+### Bug Fixes
+
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] Step 2 Contact name bugfix ([56380d4](https://github.com/newjersey/navigator.business.nj.gov/commit/56380d48bfa80519749852c6e32e4be82f7dc61e))
+* [AB[#14931](https://github.com/newjersey/navigator.business.nj.gov/issues/14931)] correct Suppliers and Start Date Labels ([9a11eda](https://github.com/newjersey/navigator.business.nj.gov/commit/9a11eda25cbe6387d46c44ece6b13dc7c1a1579d))
+* [AB[#14931](https://github.com/newjersey/navigator.business.nj.gov/issues/14931)] label correction for step4 cig license ([ce33bc2](https://github.com/newjersey/navigator.business.nj.gov/commit/ce33bc2d744ad70a2e554cc4e48392af54709936))
+* [AB[#14932](https://github.com/newjersey/navigator.business.nj.gov/issues/14932)] removing false from apiclient ([408de63](https://github.com/newjersey/navigator.business.nj.gov/commit/408de63610acbdecd493cbe56f9515c3583bc9b7))
+* [AB[#15791](https://github.com/newjersey/navigator.business.nj.gov/issues/15791)] add isComplete stepper validation for cigarette license ([#11146](https://github.com/newjersey/navigator.business.nj.gov/issues/11146)) ([41babdb](https://github.com/newjersey/navigator.business.nj.gov/commit/41babdbc854b054f97dc419f607cd0ce4988c3fa))
+* [AB[#15791](https://github.com/newjersey/navigator.business.nj.gov/issues/15791)] cig license E2E ([a9edb35](https://github.com/newjersey/navigator.business.nj.gov/commit/a9edb35ff0c065df848b6ea75934b4d1da02eb0e))
+* [AB[#15791](https://github.com/newjersey/navigator.business.nj.gov/issues/15791)] End to end updates: page jump on alerts, mailing address updates ([16eec7a](https://github.com/newjersey/navigator.business.nj.gov/commit/16eec7a9dbe4570fd0ebe2be6064c9701fef1027))
+* [AB[#15791](https://github.com/newjersey/navigator.business.nj.gov/issues/15791)] format start date on CigLicenseReview ([1957f17](https://github.com/newjersey/navigator.business.nj.gov/commit/1957f1799e10ea574dd69a0f1c0cee538b54d671))
+* [AB[#15791](https://github.com/newjersey/navigator.business.nj.gov/issues/15791)] update cigarette signatures header to h2 ([329ea0e](https://github.com/newjersey/navigator.business.nj.gov/commit/329ea0ea7be15383e36875d4e2cfe2115db203c2))
+* [AB[#15809](https://github.com/newjersey/navigator.business.nj.gov/issues/15809)] force login for cigarette license ([e8c57a1](https://github.com/newjersey/navigator.business.nj.gov/commit/e8c57a1228abaec859d1d06ada09eee736f16787))
+* [AB[#15812](https://github.com/newjersey/navigator.business.nj.gov/issues/15812)] fix locked tax clearance address fields ([a6acc4f](https://github.com/newjersey/navigator.business.nj.gov/commit/a6acc4f01f67cb70d082cb3faea3b39e631a6804))
+* **deps:** update dependency next to v15.4.7 [security] ([56048ca](https://github.com/newjersey/navigator.business.nj.gov/commit/56048ca3126b0c90a3b84c8047c7669e302961b0))
+
+
+### Features
+
+* [AB[#13453](https://github.com/newjersey/navigator.business.nj.gov/issues/13453)] cig license payment redirect ([1f14995](https://github.com/newjersey/navigator.business.nj.gov/commit/1f14995d42e2b831e5e60044b6ca14f9b26eefc9))
+* [AB[#14007](https://github.com/newjersey/navigator.business.nj.gov/issues/14007)] lock cig license fields ([7f7b812](https://github.com/newjersey/navigator.business.nj.gov/commit/7f7b81287fdcdf0edb933fb4c8d3e8e775fba0b7))
+* [AB[#14787](https://github.com/newjersey/navigator.business.nj.gov/issues/14787)] create slack messages for CMS integrity tests ([6575321](https://github.com/newjersey/navigator.business.nj.gov/commit/657532170b82e4b02a3f39ea94093b853aeaf6ef))
+* [AB[#14931](https://github.com/newjersey/navigator.business.nj.gov/issues/14931)] step 3 of cigarette license ([6009256](https://github.com/newjersey/navigator.business.nj.gov/commit/6009256f5ed3361014e34250f05e4bdfdf62bbd1))
+* [AB[#14932](https://github.com/newjersey/navigator.business.nj.gov/issues/14932)] Cigarette License Step 4 ([be8a07e](https://github.com/newjersey/navigator.business.nj.gov/commit/be8a07e86603a08a0c77eca8394f1d3b53febe27))
+* [AB[#15109](https://github.com/newjersey/navigator.business.nj.gov/issues/15109)] removed date and profile link from dashbaord ([3d51823](https://github.com/newjersey/navigator.business.nj.gov/commit/3d51823a07c2beff217d9ca5ef0c67bf6ce69b8a))
+* [AB[#15307](https://github.com/newjersey/navigator.business.nj.gov/issues/15307)] remove informational callout from business profile ([233ac42](https://github.com/newjersey/navigator.business.nj.gov/commit/233ac42ae02c255d2a8b1c841fd4e9fadb7bd95a))
+* [AB[#15381](https://github.com/newjersey/navigator.business.nj.gov/issues/15381)] added GA to env perm stepper ([c1610f2](https://github.com/newjersey/navigator.business.nj.gov/commit/c1610f23cbd7646f5aa3b6216a244988db120cf2))
+* [AB[#15656](https://github.com/newjersey/navigator.business.nj.gov/issues/15656)] adding cig license email html ([1e0bef3](https://github.com/newjersey/navigator.business.nj.gov/commit/1e0bef312971311b7c34d240c7ae96e29fe0c432))
+* [AB[#15791](https://github.com/newjersey/navigator.business.nj.gov/issues/15791)] encrypt cig sales tax id ([98e5ad6](https://github.com/newjersey/navigator.business.nj.gov/commit/98e5ad68d2013939b149c133d5a9a0985a6963f0))
+* [AB[#8305](https://github.com/newjersey/navigator.business.nj.gov/issues/8305)] add license checks for architecture and real eastate appraisal ([db36f15](https://github.com/newjersey/navigator.business.nj.gov/commit/db36f15d166fdbd2a6d7d4387df7e20289799823))
+
+# [2025.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.18.0...v2025.19.0) (2025-08-28)
+
+
+### Features
+
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] content fixes for cigarette step 2 ([09cc62b](https://github.com/newjersey/navigator.business.nj.gov/commit/09cc62bf1d0311fe6c946f3dfef4d1ce85b135a2))
+* [AB[#15475](https://github.com/newjersey/navigator.business.nj.gov/issues/15475)] Webflow - update custom dropdown links ([4ec3dc6](https://github.com/newjersey/navigator.business.nj.gov/commit/4ec3dc60c9afb5512be62c5fc1206364361106dc))
+* [AB[#8391](https://github.com/newjersey/navigator.business.nj.gov/issues/8391)] Add analytics events to CMS generated non-essential questions ([0d8ff85](https://github.com/newjersey/navigator.business.nj.gov/commit/0d8ff85eb4f37b49f2f3cb7d5e13a3d1b1376c3f))
+
+# [2025.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.17.0...v2025.18.0) (2025-08-21)
+
+
+### Bug Fixes
+
+* [#AB00000] move cig license env vars ([2611b86](https://github.com/newjersey/navigator.business.nj.gov/commit/2611b860b7cd21813f9c0dd7526e95c53c3ba79e)), closes [#AB00000](https://github.com/newjersey/navigator.business.nj.gov/issues/AB00000)
+* [#AB15504] adding ssm setup for cigarette_license_email_confirmation_url ([b86593f](https://github.com/newjersey/navigator.business.nj.gov/commit/b86593fc23e00691a37bd536b488413eab28bc49)), closes [#AB15504](https://github.com/newjersey/navigator.business.nj.gov/issues/AB15504)
+* [#AB15504] adding ssm setup for cigarette_license_email_confirmation_url ([188a0be](https://github.com/newjersey/navigator.business.nj.gov/commit/188a0befae8d16e55d98f66efe86ce812341624d)), closes [#AB15504](https://github.com/newjersey/navigator.business.nj.gov/issues/AB15504)
+* [AB[#14009](https://github.com/newjersey/navigator.business.nj.gov/issues/14009)] update cigLicense submission errors ([6b18da2](https://github.com/newjersey/navigator.business.nj.gov/commit/6b18da2cbd699b1838786b198f4bfa99f6a61f09))
+* [AB[#14388](https://github.com/newjersey/navigator.business.nj.gov/issues/14388)] User can bypass checkboxes on Out-of-State business Onboarding Step 2 ([a0eaa7d](https://github.com/newjersey/navigator.business.nj.gov/commit/a0eaa7d12fe09719cf3b260e22974faeccf9ca80))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] update AddressComponents for CigLicense ([4d28382](https://github.com/newjersey/navigator.business.nj.gov/commit/4d28382d58d510cda2c92ed84b8045089c7b79a7))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] update nj address for cig license ([8b88e62](https://github.com/newjersey/navigator.business.nj.gov/commit/8b88e624b4d004a5144900d49e2296382826a965))
+* [AB[#15313](https://github.com/newjersey/navigator.business.nj.gov/issues/15313)] log firewall errors and fix health check ([cbe814c](https://github.com/newjersey/navigator.business.nj.gov/commit/cbe814c4da80713739ef9da9634abb73ff686932))
+* [AB[#15336](https://github.com/newjersey/navigator.business.nj.gov/issues/15336)] prevent duplicate myNJ self-registration calls ([b8dc0ff](https://github.com/newjersey/navigator.business.nj.gov/commit/b8dc0ff99ed808f7b94acadc6f24e4d46213de5a))
+* [AB[#15336](https://github.com/newjersey/navigator.business.nj.gov/issues/15336)] prevent duplicate myNJ self-registration calls ([ff226cd](https://github.com/newjersey/navigator.business.nj.gov/commit/ff226cd63e97d8faf067d7e88a4e4e386a39aeb7))
+* [AB[#15397](https://github.com/newjersey/navigator.business.nj.gov/issues/15397)] env permit none of the above option and test refactors ([85a733e](https://github.com/newjersey/navigator.business.nj.gov/commit/85a733ed8a50a45381b12e4bff89f7ce29c66b73))
+* [AB[#15504](https://github.com/newjersey/navigator.business.nj.gov/issues/15504)] add cig license env vars to serverless ([7ad529a](https://github.com/newjersey/navigator.business.nj.gov/commit/7ad529af9623636327c96d76c0b8fcd11f9b78a4))
+* non-essential questions ([41aea6d](https://github.com/newjersey/navigator.business.nj.gov/commit/41aea6d6d7097c4bd7aacf9a6d3ce07369273db5))
+* xray timestamp styling ([4004968](https://github.com/newjersey/navigator.business.nj.gov/commit/40049689cb8e991367d961fb11fb43b527f2b1c6))
+
+
+### Features
+
+* [#AB15554] cigarette license confirmation page ([9674b75](https://github.com/newjersey/navigator.business.nj.gov/commit/9674b75e2d31197b3c40d4b5ce949d6186d54cbc)), closes [#AB15554](https://github.com/newjersey/navigator.business.nj.gov/issues/AB15554)
+* [AB[#11351](https://github.com/newjersey/navigator.business.nj.gov/issues/11351)] xray registration health check ([fdce5d6](https://github.com/newjersey/navigator.business.nj.gov/commit/fdce5d61a185982895fbd877e73294775a50782b))
+* [AB[#13035](https://github.com/newjersey/navigator.business.nj.gov/issues/13035)] added CMS Preview for Emergency Trip Permit, legal message, self registration ([f1f6bbe](https://github.com/newjersey/navigator.business.nj.gov/commit/f1f6bbec23ab2f6c6bf4726f09061d96db0066cd))
+* [AB[#14009](https://github.com/newjersey/navigator.business.nj.gov/issues/14009)] cig license alert box ([b21b9d3](https://github.com/newjersey/navigator.business.nj.gov/commit/b21b9d341bbb874b4ff6df8a20dc68efb1892485))
+* [AB[#14214](https://github.com/newjersey/navigator.business.nj.gov/issues/14214)] add client/route/helpers for cigarette-license ([ed32106](https://github.com/newjersey/navigator.business.nj.gov/commit/ed3210638a22acac5c3bf88d671d2d5403e63341))
+* [AB[#14772](https://github.com/newjersey/navigator.business.nj.gov/issues/14772)] xray analytics events ([bf3605b](https://github.com/newjersey/navigator.business.nj.gov/commit/bf3605b69d47f9acfe187a360ade00b92e19f6ce))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] lock state input for business address in cigarette step 2 ([e8bd56f](https://github.com/newjersey/navigator.business.nj.gov/commit/e8bd56f33b15bd7b7cb756a608f69f320cddfe4f))
+* [AB[#14930](https://github.com/newjersey/navigator.business.nj.gov/issues/14930)] step 2 of cigarette license ([e0c8ef2](https://github.com/newjersey/navigator.business.nj.gov/commit/e0c8ef258b9816fa67dd9f4a93471c03aba8fff2))
+* [AB[#15038](https://github.com/newjersey/navigator.business.nj.gov/issues/15038)] added miniCallout to the CMS ([922be8a](https://github.com/newjersey/navigator.business.nj.gov/commit/922be8a84414166d4f6d599b13cdb3031b374000))
+* [AB[#15038](https://github.com/newjersey/navigator.business.nj.gov/issues/15038)] renamed callout to largeCallout throughout the code base ([5bd4cee](https://github.com/newjersey/navigator.business.nj.gov/commit/5bd4cee967b6dcb1fc2aeebb4241508a4b182363))
+* [AB[#6519](https://github.com/newjersey/navigator.business.nj.gov/issues/6519)] dental waste & addOnWhenNo ([4ebfdf6](https://github.com/newjersey/navigator.business.nj.gov/commit/4ebfdf67e805fa55fd48f4e0fa983abecde3b301))
+* [AB[#8748](https://github.com/newjersey/navigator.business.nj.gov/issues/8748)] added timestamp to status check of xray ([1ed1a5d](https://github.com/newjersey/navigator.business.nj.gov/commit/1ed1a5dc94c17bd68d9d24d12f551f5fdc6747bb))
+
 # [2025.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.16.0...v2025.17.0) (2025-07-31)
 
 

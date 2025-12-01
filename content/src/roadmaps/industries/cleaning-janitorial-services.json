@@ -52,8 +52,7 @@
   "nonEssentialQuestionsIds": ["weights-measures", "pesticides-applicator-licensing"],
   "displayname": "cleaning-janitorial-services",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "cleaning lady, house cleaner, maid service, maid, cleaning company, cleaning crew, commercial cleaning service, cleaning and maintenance, turnover service,  ",

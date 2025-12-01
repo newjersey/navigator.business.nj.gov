@@ -7,13 +7,15 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+
+import { templateEval } from "@/lib/utils/helpers";
 import {
-  CertificationUrlSlugParam,
+  CertificationUrlSlugParameter,
   loadAllCertificationUrlSlugs,
   loadCertificationByUrlSlug,
-} from "@/lib/static/loadCertifications";
-import { Certification } from "@/lib/types/types";
-import { templateEval } from "@/lib/utils/helpers";
+} from "@businessnjgovnavigator/shared/static";
+import { Certification } from "@businessnjgovnavigator/shared/types";
+
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
@@ -68,7 +70,7 @@ const CertificationPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<CertificationUrlSlugParam> => {
+export const getStaticPaths = (): GetStaticPathsResult<CertificationUrlSlugParameter> => {
   const paths = loadAllCertificationUrlSlugs();
   return {
     paths,
@@ -79,7 +81,7 @@ export const getStaticPaths = (): GetStaticPathsResult<CertificationUrlSlugParam
 export const getStaticProps = ({
   params,
 }: {
-  params: CertificationUrlSlugParam;
+  params: CertificationUrlSlugParameter;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {

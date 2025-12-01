@@ -1,5 +1,4 @@
 import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { generateAnytimeActionTask } from "@/test/factories";
@@ -34,6 +33,7 @@ import {
   TaxClearanceCertificateResponse,
   TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";

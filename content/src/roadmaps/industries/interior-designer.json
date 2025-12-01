@@ -55,14 +55,17 @@
     }
   ],
   "name": "Interior Design",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "selfgenerator-transporter-registration"
+  ],
   "displayname": "interior-designer",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isCertifiedInteriorDesignerApplicable": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "interior decorating, design studio, interior designer, home interior designer",
+  "additionalSearchTerms": "interior decorating, design studio, interior designer, home interior designer ",
   "id": "interior-designer",
   "description": "Plans and executes designs for architectural interiors",
   "webflowId": "656a1363ce71bd6be5205c65"

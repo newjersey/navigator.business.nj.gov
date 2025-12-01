@@ -1,24 +1,27 @@
 ---
-licenseName: ""
 id: dental-waste-registration
-displayname: dental-waste-registration
+webflowId: 68a74f502c50a0c1dcbd0ccb
 urlSlug: dental-waste-registration
 name: Apply for Your Dental Waste Registration
-webflowName: N/A
-summaryDescriptionMd: >-
-
-  :::infoAlert
-   **Keep in mind:**
-  If your office discharges wastewater to a septic system, contact the [Bureau of Groundwater, Residuals, and Permit Administration](https://dep.nj.gov/dwq/contact-us/#bgwrpa). They will help you find out if you are a `Significant Indirect User (SIU)|significant-indirect-user` and if you need a SIU permit.
-  :::
-  If your dental office handles `amalgam waste|amalgam-waste` by placing or removing amalgam fillings, you must register for dental waste management. This allows you to get a dental amalgam certification. You must renew it every year.
-industryId:
-  - healthcare
-callToActionText: Apply for My Dental Waste Registration
+displayname: dental-waste-registration
+webflowName: Apply for Your Dental Waste Registration
+filename: dental-waste-registration
 callToActionLink: https://dep.nj.gov/wp-content/uploads/dwq/2023_portal_version_dental_new_user_quick_guide.pdf
+callToActionText: Apply for My Dental Waste Registration
 agencyId: njdep
 agencyAdditionalContext: Bureau of Surface Water and Pretreatment Permitting
 divisionPhone: (609) 292-4860
+industryId: healthcare
+licenseCertificationClassification: undefined
+summaryDescriptionMd: >-
+  :::infoAlert
+
+  **Keep in mind:**
+  If your office discharges wastewater to a septic system, contact the [Bureau of Groundwater, Residuals, and Permit Administration](https://dep.nj.gov/dwq/contact-us/#bgwrpa). They will help you find out if you are a `Significant Indirect User (SIU)|significant-indirect-user` and if you need a SIU permit.
+
+  :::
+
+  If your dental office handles `amalgam waste|amalgam-waste` by placing or removing amalgam fillings, you must register for dental waste management. This allows you to get a dental amalgam certification. You must renew it every year.
 ---
 
 ## Application Requirements

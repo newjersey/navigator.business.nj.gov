@@ -5,8 +5,9 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ContactDep } from "@/components/tasks/environment-questionnaire/results/ContactDep";
 import { PersonalizedSupport } from "@/components/tasks/environment-questionnaire/results/PersonalizedSupport";
 import { SeeYourResponses } from "@/components/tasks/environment-questionnaire/results/SeeYourResponses";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import analytics from "@/lib/utils/analytics";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement, useContext } from "react";
 
 export const EnvPermitsResults = (): ReactElement => {
@@ -38,15 +39,30 @@ export const EnvPermitsResults = (): ReactElement => {
   };
 
   const highApplicability = (): ReactElement => {
+    analytics.event.gen_guidance_stepper_permits_required_displayed.appears.general_guidance_permits_req_displayed();
     return (
       <>
-        <div className={"padding-bottom-3"}>
+        <div>
           {Config.envResultsPage.summary.partOne}
           <span data-testid={"applicable-media-areas"} className={"text-bold margin-x-05"}>
             {applicableMediaAreasText()}
           </span>
           {Config.envResultsPage.summary.partTwo}
         </div>
+        <div className="margin-y-1">
+          {Config.envResultsPage.summary.partThree}
+          <UnStyledButton
+            isUnderline
+            className="margin-left-05"
+            onClick={() => {
+              analytics.event.gen_guidance_stepper_env_req_edits.click.general_guidance_env_req_edits();
+              envContext.onClickForEdit();
+            }}
+          >
+            {Config.envResultsPage.summary.partFour}
+          </UnStyledButton>
+        </div>
+        <hr />
         <PersonalizedSupport />
         <ContactDep />
         <SeeYourResponses />
@@ -55,6 +71,7 @@ export const EnvPermitsResults = (): ReactElement => {
   };
 
   const lowApplicability = (): ReactElement => {
+    analytics.event.gen_guidance_stepper_no_permits_displayed.appears.general_guidance_no_permits_displayed();
     return (
       <>
         <div className={"padding-y-1"}>
@@ -71,7 +88,10 @@ export const EnvPermitsResults = (): ReactElement => {
             <UnStyledButton
               className={"margin-left-05"}
               isUnderline
-              onClick={envContext.onClickForEdit}
+              onClick={() => {
+                analytics.event.gen_guidance_stepper_env_req_edits.click.general_guidance_env_req_edits();
+                envContext.onClickForEdit();
+              }}
             >
               {Config.envResultsPage.lowApplicability.calloutRedo}
             </UnStyledButton>
@@ -86,7 +106,13 @@ export const EnvPermitsResults = (): ReactElement => {
       <h2>{Config.envResultsPage.title}</h2>
       <Alert variant={"success"}>
         <span className={"margin-right-05"}>{Config.envResultsPage.editInfo}</span>
-        <UnStyledButton isUnderline onClick={envContext.onClickForEdit}>
+        <UnStyledButton
+          isUnderline
+          onClick={() => {
+            analytics.event.gen_guidance_stepper_env_req_edits.click.general_guidance_env_req_edits();
+            envContext.onClickForEdit();
+          }}
+        >
           {Config.envResultsPage.editText}
         </UnStyledButton>
       </Alert>

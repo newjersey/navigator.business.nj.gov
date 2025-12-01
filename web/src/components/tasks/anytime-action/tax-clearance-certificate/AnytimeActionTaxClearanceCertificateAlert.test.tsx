@@ -1,9 +1,29 @@
 import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
-import { getMergedConfig } from "@/contexts/configContext";
+import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
-import { render, screen } from "@testing-library/react";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      tax_clearance_anytime_action_help_button: {
+        click: {
+          open_live_chat: jest.fn(),
+          open_live_chat_from_error_alert: jest.fn(),
+        },
+      },
+    },
+  };
+}
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   it("displays single field text in header if there is only one error", () => {
@@ -44,6 +64,10 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
       "Some of the entries in your submission were not valid",
     ],
     [
+      "BUSINESS_STATUS_VERIFICATION_ERROR" as TaxClearanceCertificateResponseErrorType,
+      Config.taxClearanceCertificateStep3.errorTextStatusVerification,
+    ],
+    [
       "MISSING_FIELD" as TaxClearanceCertificateResponseErrorType,
       Config.taxClearanceCertificateStep3.errorTextMissingField,
     ],
@@ -76,5 +100,22 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
       expect(screen.getByRole("alert")).toBeInTheDocument();
       expect(screen.getByText(expectedMessage)).toBeInTheDocument();
     });
+  });
+
+  it("fires the correct analytics event when live chat button is clicked", async () => {
+    render(
+      <AnytimeActionTaxClearanceCertificateAlert
+        fieldErrors={["requestingAgencyId"]}
+        setStepIndex={() => {}}
+      />,
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", { name: Config.taxClearanceCertificateShared.liveChatButtonText }),
+    );
+    expect(
+      mockAnalytics.event.tax_clearance_anytime_action_help_button.click
+        .open_live_chat_from_error_alert,
+    ).toHaveBeenCalledTimes(1);
   });
 });

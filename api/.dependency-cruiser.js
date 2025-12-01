@@ -8,11 +8,11 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@serverless/typescript" },
+      to: { path: "@aws-sdk/client-s3" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/client-s3" },
+      to: { path: "@aws-sdk/client-cloudwatch" },
     },
     {
       from: {},
@@ -37,6 +37,14 @@ module.exports = {
     {
       from: {},
       to: { path: "@aws-sdk/util-base64-node" },
+    },
+    {
+      from: {},
+      to: { path: "@aws-sdk/client-sns" },
+    },
+    {
+      from: {},
+      to: { path: "@aws-sdk/client-lambda" },
     },
     {
       from: {},
@@ -151,6 +159,10 @@ module.exports = {
       to: { path: "src/libs" },
     },
     {
+      from: { path: "src/libs" },
+      to: { path: "cdk" },
+    },
+    {
       from: { path: "src/api" },
       to: { path: "src/api" },
     },
@@ -167,6 +179,10 @@ module.exports = {
       to: { path: "src/libs" },
     },
     {
+      from: { path: "src/client" },
+      to: { path: "src/functions" },
+    },
+    {
       from: { path: "src/functions" },
       to: { path: "src/" },
     },
@@ -177,6 +193,26 @@ module.exports = {
     {
       from: { path: "../shared" },
       to: { path: "uuid" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "fs" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "path" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "js-yaml" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "gray-matter" },
+    },
+    {
+      from: { path: "../shared" },
+      to: { path: "react" },
     },
     {
       from: { path: "src/db/migrations" },

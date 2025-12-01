@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -107,10 +107,10 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
       >
         <div className="grid-row grid-gap-1 margin-bottom-2">
           <div className="grid-col-12 tablet:grid-col-6">
-            <FormationField fieldName="agentName">
+            <ScrollableFormFieldWrapper fieldName="agentName">
               <BusinessFormationTextField
                 label={Config.formation.fields.agentName.label}
-                required={true}
+                required
                 validationText={getFieldErrorLabel("agentName")}
                 errorBarType="MOBILE-ONLY"
                 fieldName="agentName"
@@ -118,21 +118,21 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
                 type="text"
                 inputProps={{ id: "agent-name-id" }}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
           <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
-            <FormationField fieldName="agentEmail">
+            <ScrollableFormFieldWrapper fieldName="agentEmail">
               <BusinessFormationTextField
                 label={Config.formation.fields.agentEmail.label}
                 fieldName="agentEmail"
                 errorBarType="MOBILE-ONLY"
-                required={true}
+                required
                 validationText={getFieldErrorLabel("agentEmail")}
                 readOnly={shouldBeDisabled("agentEmail", "ACCOUNT")}
                 type="text"
                 inputProps={{ id: "agent-email-id" }}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
         </div>
       </WithErrorBar>
@@ -150,17 +150,17 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
           />
         </div>
       )}
-      <FormationField fieldName="agentOfficeAddressLine1">
+      <ScrollableFormFieldWrapper fieldName="agentOfficeAddressLine1">
         <BusinessFormationTextField
           label={Config.formation.fields.agentOfficeAddressLine1.label}
           fieldName="agentOfficeAddressLine1"
-          required={true}
+          required
           validationText={getFieldErrorLabel("agentOfficeAddressLine1")}
           disabled={shouldBeDisabled("agentOfficeAddressLine1", "ADDRESS")}
           errorBarType="ALWAYS"
         />
-      </FormationField>
-      <FormationField fieldName="agentOfficeAddressLine2">
+      </ScrollableFormFieldWrapper>
+      <ScrollableFormFieldWrapper fieldName="agentOfficeAddressLine2">
         <BusinessFormationTextField
           label={Config.formation.fields.agentOfficeAddressLine2.label}
           fieldName="agentOfficeAddressLine2"
@@ -169,7 +169,7 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
           errorBarType="ALWAYS"
           className={"margin-top-2"}
         />
-      </FormationField>
+      </ScrollableFormFieldWrapper>
       <WithErrorBar
         type="DESKTOP-ONLY"
         hasError={doSomeFieldsHaveError(["agentOfficeAddressCity", "agentOfficeAddressZipCode"])}
@@ -180,16 +180,16 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
               hasError={doesFieldHaveError("agentOfficeAddressCity")}
               type="MOBILE-ONLY"
             >
-              <FormationField fieldName="agentOfficeAddressCity">
+              <ScrollableFormFieldWrapper fieldName="agentOfficeAddressCity">
                 <BusinessFormationTextField
                   label={Config.formation.fields.agentOfficeAddressCity.label}
                   fieldName="agentOfficeAddressCity"
-                  required={true}
+                  required
                   validationText={getFieldErrorLabel("agentOfficeAddressCity")}
                   disabled={shouldBeDisabled("agentOfficeAddressCity", "ADDRESS")}
                   errorBarType="NEVER"
                 />
-              </FormationField>
+              </ScrollableFormFieldWrapper>
             </WithErrorBar>
           </div>
           <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
@@ -204,7 +204,7 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
                       {Config.formation.fields.agentOfficeAddressState.label}
                     </ModifiedContent>
                   </strong>
-                  <FormationField fieldName="agentOfficeAddressState">
+                  <ScrollableFormFieldWrapper fieldName="agentOfficeAddressState">
                     <StateDropdown
                       fieldName="agentOfficeAddressState"
                       value="New Jersey"
@@ -212,20 +212,20 @@ const RegisteredAgentManualEntryFields = (): ReactElement => {
                       disabled={true}
                       onSelect={(): void => {}}
                     />
-                  </FormationField>
+                  </ScrollableFormFieldWrapper>
                 </div>
                 <div className="grid-col-7">
-                  <FormationField fieldName="agentOfficeAddressZipCode">
+                  <ScrollableFormFieldWrapper fieldName="agentOfficeAddressZipCode">
                     <BusinessFormationTextField
                       errorBarType="NEVER"
                       numericProps={{ maxLength: 5 }}
                       fieldName="agentOfficeAddressZipCode"
                       label={Config.formation.fields.agentOfficeAddressZipCode.label}
                       validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
-                      required={true}
+                      required
                       disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                     />
-                  </FormationField>
+                  </ScrollableFormFieldWrapper>
                 </div>
               </div>
             </WithErrorBar>
@@ -292,9 +292,7 @@ export const RegisteredAgent = (): ReactElement => {
 
   return (
     <>
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.registeredAgent.label}
-      </Heading>
+      <Heading level={2}>{Config.formation.registeredAgent.label}</Heading>
       <Content className="margin-bottom-2">
         {Config.formation.registeredAgent.sectionDescription}
       </Content>
@@ -351,19 +349,19 @@ export const RegisteredAgent = (): ReactElement => {
           {state.formationFormData.agentType === "PROFESSIONAL_SERVICE" && (
             <div data-testid="agent-professional-service">
               <div className="margin-top-3">
-                <FormationField fieldName="agentNumber">
+                <ScrollableFormFieldWrapper fieldName="agentNumber">
                   <BusinessFormationTextField
                     label={Config.formation.registeredAgent.agentNumberLabel}
                     secondaryLabel={Config.formation.registeredAgent.agentNumberLabelSecondary}
                     numericProps={{ minLength: 4, maxLength: 7 }}
                     fieldName="agentNumber"
-                    required={true}
+                    required
                     validationText={Config.formation.fields.agentNumber.error}
                     errorBarType="ALWAYS"
                     disabled={state.formationFormData.showManualEntry}
                     helperText={Config.formation.fields.agentNumber.helperText}
                   />
-                </FormationField>
+                </ScrollableFormFieldWrapper>
               </div>
               <FormControlLabel
                 control={

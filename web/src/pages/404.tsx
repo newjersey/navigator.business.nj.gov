@@ -13,8 +13,8 @@ const PageNotFound = (): ReactElement => {
       <main className="page-not-found usa-section padding-top-8 desktop:padding-top-15" id="main">
         <SingleColumnContainer>
           <div className="flex flex-column flex-align-center">
-            <img src="./img/page-not-found-icon.svg" alt="404 icon" />
-            <h1 className="h2-styling margin-top-4 text-accent-cool-darker">
+            <img src="/img/page-not-found-icon.svg" alt="404 icon" />
+            <h1 className="margin-top-4 text-accent-cool-darker">
               {Config.pageNotFoundError.errorHeader}
             </h1>
             <div className="text-align-center">

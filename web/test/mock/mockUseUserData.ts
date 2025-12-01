@@ -1,6 +1,5 @@
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
-import { UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import {
   generateProfileData,
@@ -9,6 +8,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
+import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;

@@ -22,7 +22,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 
 - Business name
 - `Employee Identification Number (EIN)|ein`
-- `Entity ID|entity-id` or NJ corporate registration number
+- `Entity ID|entity-id-contextual-link` or NJ corporate registration number
 - `Form of property ownership|property-ownership`
 - Name and address of each officer
 - Name and address of your `registered agent|registered-agent`

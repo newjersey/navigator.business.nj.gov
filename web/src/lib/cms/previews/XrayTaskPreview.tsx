@@ -3,8 +3,8 @@ import { XrayTabOne } from "@/components/xray/XrayTabOne";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { Task } from "@/lib/types/types";
 import { generateXrayRegistrationData } from "@businessnjgovnavigator/shared/test";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const XrayTaskPreview = (props: PreviewProps): ReactElement => {

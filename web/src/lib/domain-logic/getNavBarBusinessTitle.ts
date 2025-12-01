@@ -1,10 +1,10 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   Business,
   LookupIndustryById,
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";
 import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   isOwningBusiness,
   isRemoteWorkerOrSellerBusiness,

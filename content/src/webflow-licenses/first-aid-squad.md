@@ -1,14 +1,14 @@
 ---
+id: first-aid-squad
 displayname: first-aid-squad
-id: "first-aid-squad"
-webflowId: "5f7729493862544011bb0e45"
-urlSlug: "first-aid-squad"
-webflowName: "First Aid Squad"
-callToActionLink: "http://state.nj.us/health/ems/"
-callToActionText: ""
+urlSlug: first-aid-squad
+webflowName: First Aid Squad
 agencyId: health-senior-services
-agencyAdditionalContext: "Office of Emergency Medical Services"
-divisionPhone: "(609) 633-7777"
-webflowIndustry: "First Aid"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Office of Emergency Medical Services
+callToActionText: Learn About Emergency Medical Services
+callToActionLink: http://state.nj.us/health/ems/
+webflowIndustry: First Aid
+divisionPhone: (609) 633-7777
+webflowId: 5f7729493862544011bb0e45
+licenseCertificationClassification: LICENSE
 ---

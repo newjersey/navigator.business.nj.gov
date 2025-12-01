@@ -6,16 +6,16 @@ const Template = () => {
   const renderColor = (variable: string) => (
     <div className="bg-white width-mobile-lg height-mobile-lg ">
       <div className="margin-y-6" key={variable}>
-        <Heading level={2} styleVariant="h1">
-          Shadow {variable}
-        </Heading>
+        <Heading level={2}>Shadow {variable}</Heading>
         <div className="display-flex flex-column">
           <div>Reg</div>
           <div className={`drop-shadow-${variable} width-mobile height-10`} />
         </div>
         <div className="display-flex flex-column margin-top-2">
           <div>On Hover</div>
-          <div className={`drop-shadow-${variable}-on-hover width-mobile height-10 bg-base-lightest`} />
+          <div
+            className={`drop-shadow-${variable}-on-hover width-mobile height-10 bg-base-lightest`}
+          />
         </div>
       </div>
     </div>
@@ -23,14 +23,12 @@ const Template = () => {
 
   return (
     <div className="grid-container">
-      <Heading level={1} styleVariant="h1Large" className="margin-y-4">
+      <Heading level={1} className="margin-y-4">
         Drop Shadows
       </Heading>
       <div className="bg-white width-mobile-lg height-mobile-lg">
         <div className="grid-row margin-y-6">
-          <Heading level={2} styleVariant="h1">
-            Shadow None
-          </Heading>
+          <Heading level={2}>Shadow None</Heading>
           <div className="width-mobile height-10 border-base-light border-1px" />
         </div>
       </div>

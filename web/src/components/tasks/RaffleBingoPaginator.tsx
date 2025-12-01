@@ -11,8 +11,8 @@ import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar"
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { StepperStep, Task } from "@/lib/types/types";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared";
+import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 

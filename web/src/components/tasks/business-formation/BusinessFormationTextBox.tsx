@@ -47,7 +47,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
   return (
     <div data-testid={`formation-text-box-${props.fieldName}`}>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <Heading level={2} styleVariant="h3" className="margin-0-override">
+        <Heading level={2} className="margin-0-override">
           {props.title}{" "}
           {props.required ? (
             <></>

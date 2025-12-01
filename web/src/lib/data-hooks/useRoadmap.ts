@@ -1,8 +1,8 @@
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { Roadmap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
 import { SectionType, TaskProgress, sectionNames } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
 

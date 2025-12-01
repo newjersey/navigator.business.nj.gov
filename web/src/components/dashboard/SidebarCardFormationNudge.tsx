@@ -3,9 +3,9 @@ import { FormationDateModal } from "@/components/FormationDateModal";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
-import { SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { formationTaskId } from "@businessnjgovnavigator/shared/";
+import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useState } from "react";
 

@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
-import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement, useContext } from "react";
 
 export const HomeContractor = (): ReactElement => {

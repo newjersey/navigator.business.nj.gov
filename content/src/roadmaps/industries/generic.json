@@ -64,12 +64,14 @@
     "inspect-fridge",
     "inspect-pv",
     "bus-initial-inspection",
-    "resale-tax-cert"
+    "resale-tax-cert",
+    "ust-reg",
+    "streamlined-sales-tax-registration",
+    "flashing-light-permit"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "id": "generic",

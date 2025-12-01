@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/cigarette-license/tokens/[^/]+"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "cigarette-license-get-order-success.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

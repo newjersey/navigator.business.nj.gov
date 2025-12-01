@@ -1,14 +1,14 @@
 ---
+id: alien-labor-certification
 displayname: alien-labor-certification
-id: "alien-labor-certification"
-webflowId: "5f77294de022944a11eaa5c7"
-urlSlug: "alien-labor-certification"
-webflowName: "Alien Labor Certification"
-callToActionLink: "https://nj.gov/labor/handbook/chap3/chap3sec3GrantEmployerServices.html"
-callToActionText: ""
+urlSlug: alien-labor-certification
+webflowName: Alien Labor Certification
 agencyId: njdol
 agencyAdditionalContext: ""
-divisionPhone: "(609) 777-1838"
-webflowIndustry: "Seasonal Labor"
-licenseCertificationClassification: "ALIEN LABOR CERTIFICATION PROGRAM"
+callToActionText: Learn About Foreign Labor Certification
+callToActionLink: https://nj.gov/labor/handbook/chap3/chap3sec3GrantEmployerServices.html
+webflowIndustry: Seasonal Labor
+divisionPhone: (609) 777-1838
+webflowId: 5f77294de022944a11eaa5c7
+licenseCertificationClassification: ALIEN LABOR CERTIFICATION PROGRAM
 ---

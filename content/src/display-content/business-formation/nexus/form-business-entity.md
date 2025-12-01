@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: You must register your business name and authorize your
-  `business structure|business-structure-learn-more` with the State.
+  `business structure|business-structure-contextual-link` with the State.
 urlSlug: form-business-entity
 displayname: form-business-entity
 name: Form Your Business Entity
@@ -24,7 +24,7 @@ required: true
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
-- `Entity ID|entity-id`
+- `Entity ID|entity-id-contextual-link`
 - `Certificate of Authorization|certificate-formation`
 - `Certified copy|certified-copy` of Certificate of Authorization (optional with additional fee)
 - `Certificate of Good Standing|good-standing` (optional with additional fee)
