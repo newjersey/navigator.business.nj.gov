@@ -1,0 +1,29 @@
+@use "../sass-files/mixin";
+@use "../sass-files/variables";
+
+.login-support-content {
+  p:not(:first-child) {
+    margin-top: 1em !important;
+  }
+
+  div:has(img) {
+    padding-left: 1.75em;
+
+    img {
+      @include mixin.addDropShadow(variables.$drop-shadow-md);
+    }
+  }
+
+  .logout-button-unstyled {
+    color: variables.$accent-cool-darker;
+
+    &:hover {
+      color: variables.$accent-cool-more-dark !important;
+    }
+
+    div {
+      text-decoration: underline;
+      text-underline-offset: 0.25rem;
+    }
+  }
+}
