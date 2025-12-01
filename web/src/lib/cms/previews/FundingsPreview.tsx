@@ -2,8 +2,8 @@ import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { Funding } from "@/lib/types/types";
 import { FundingElement } from "@/pages/funding/[fundingUrlSlug]";
+import { Funding } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const FundingsPreview = (props: PreviewProps): ReactElement => {

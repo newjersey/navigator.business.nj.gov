@@ -17,7 +17,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx
 
 ## Application Requirements
 
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Date of last renewal
 - Manager’s license number, or the license number of the licensee-in-charge
 - Documentation of any changes to the funeral home’s manager or licensee-in-charge, if applicable

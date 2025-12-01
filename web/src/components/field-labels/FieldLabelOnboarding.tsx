@@ -4,7 +4,7 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { FlowType, ProfileContentField } from "@/lib/types/types";
+import { FlowType, ProfileContentField } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -30,7 +30,7 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
 
   return (
     <>
-      <Heading level={2} styleVariant="h3" className="margin-bottom-05-override">
+      <Heading level={2} className="margin-bottom-05-override">
         {contentFromConfig.headerContextualInfo ? (
           <ContextualInfoButton
             text={contentFromConfig.header}

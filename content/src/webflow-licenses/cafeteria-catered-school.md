@@ -1,14 +1,15 @@
 ---
+id: cafeteria-catered-school
 displayname: cafeteria-catered-school
-id: "cafeteria-catered-school"
-webflowId: "5f77293c6f3d8d8dfc75ef30"
-urlSlug: "cafeteria-catered-school"
-webflowName: "Cafeteria, Catered School"
-callToActionLink: "http://nj.gov/health/ceohs/sanitation-safety/general-sanitation/"
-callToActionText: ""
+urlSlug: cafeteria-catered-school
+webflowName: Cafeteria, Catered School
 agencyId: nj-health
-agencyAdditionalContext: "Consumer Environmental Health Services, Public Health Sanitation and Safety Program"
-divisionPhone: "(609) 826-4941"
-webflowIndustry: "Cafeteria"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Consumer Environmental Health Services, Public Health
+  Sanitation and Safety Program
+callToActionText: Learn About the Public Health and Food Protection Program
+callToActionLink: http://nj.gov/health/ceohs/sanitation-safety/general-sanitation/
+webflowIndustry: Cafeteria
+divisionPhone: (609) 826-4941
+webflowId: 5f77293c6f3d8d8dfc75ef30
+licenseCertificationClassification: LICENSE
 ---

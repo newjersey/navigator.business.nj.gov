@@ -2,10 +2,10 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Card } from "@/components/starter-kits/Card";
 import { StepSection } from "@/components/starter-kits/StepSection";
-import { getMergedConfig } from "@/contexts/configContext";
-import { Roadmap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
+import { Roadmap } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "rehype-react/lib";
 
 interface StarterKitsBodyProps {
@@ -30,7 +30,7 @@ export const StarterKitsBody = (props: StarterKitsBodyProps): ReactElement => {
     <>
       <section className="bg-cool-extra-light window-width-shadow-cool-extra-light flex flex-justify padding-y-4 desktop:padding-y-8 padding-x-2 desktop:padding-x-0">
         <div className={"text-center desktop:text-left desktop:grid-col-5"}>
-          <Heading level={1} styleVariant="h1Large" className="display-only-desktop">
+          <Heading level={1} deprecatedStyleVariant="h1Large" className="display-only-desktop">
             {props.heroTitle}
             <br />
           </Heading>

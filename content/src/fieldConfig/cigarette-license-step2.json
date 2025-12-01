@@ -1,0 +1,54 @@
+{
+  "cigaretteLicenseStep2": {
+    "businessAddressHeader": "Business Address",
+    "backButtonText": "Back",
+    "businessAddressDescription": "Tell us where your business is located (no P.O. boxes).",
+    "businessNameErrorText": "Enter the business name.",
+    "contactInformationDescription": "Tell us who to contact for any questions or updates.",
+    "nextButtonText": "Next",
+    "mailingAddressDescription": "Tell us where to send your license.",
+    "licenseeInformationDescription": "Tell us about the business applying for this license.",
+    "licenseeInformationHeader": "Licensee Information",
+    "mailingAddressHeader": "Mailing Address",
+    "businessNameText": "Enter the legal name of your business.",
+    "contactInformationHeader": "Contact Information",
+    "fields": {
+      "mailingAddressLine1": {
+        "label": "Mailing Address Line 1",
+        "errorRequiredText": "Enter your mailing address (street name and number).",
+        "errorValidationText": "Address Line 1 must be 35 characters or fewer."
+      },
+      "mailingAddressLine2": {
+        "label": "**Mailing Address Line 2** (Optional)",
+        "errorValidationText": "Address Line 2 must be 35 characters or fewer."
+      },
+      "mailingAddressCity": {
+        "label": "City",
+        "errorRequiredText": "Enter a city."
+      },
+      "mailingAddressState": {
+        "label": "State",
+        "errorRequiredText": "Enter a state."
+      },
+      "mailingAddressZipCode": {
+        "label": "Zip Code",
+        "errorRequiredText": "Enter a zip code.",
+        "errorValidationText": "Enter a 5-digit zip code.",
+        "errorValidationTextAlt": "Enter a NJ zip code."
+      },
+      "contactName": {
+        "label": "Contact Name",
+        "errorRequiredText": "Enter a contact name."
+      },
+      "contactPhoneNumber": {
+        "label": "Phone Number",
+        "errorRequiredText": "Enter a valid phone number."
+      },
+      "contactEmail": {
+        "label": "Email Address",
+        "errorRequiredText": "Enter a valid email address."
+      }
+    },
+    "mailingIsSameCheckbox": "Mailing address is the same as the business address."
+  }
+}

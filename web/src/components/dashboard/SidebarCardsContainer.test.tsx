@@ -1,11 +1,4 @@
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
-import { getMergedConfig } from "@/contexts/configContext";
-import {
-  Certification,
-  Funding,
-  RoadmapDisplayContent,
-  SidebarCardContent,
-} from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
@@ -27,7 +20,14 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
+import {
+  Certification,
+  Funding,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 

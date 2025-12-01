@@ -4,8 +4,7 @@ id: temp-xray-registration
 name: Register Your Temporary X-Ray Machine
 category:
   - purchase-new-products-or-equipment
-industryIds:
-  - healthcare
+industryIds: []
 sectorIds: []
 urlSlug: temp-xray-registration
 summaryDescriptionMd: >-

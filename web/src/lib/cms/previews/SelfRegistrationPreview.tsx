@@ -1,7 +1,6 @@
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { AccountSetupForm } from "@/components/data-fields/AccountSetupForm";
-import { ConfigContext } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -12,12 +11,13 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { OnboardingErrors } from "@/lib/types/types";
 import {
   BusinessUser,
   RegistrationStatus,
   registrationStatusList,
 } from "@businessnjgovnavigator/shared/businessUser";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { OnboardingErrors } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useState } from "react";
 
 const SelfRegistrationPreview = (props: PreviewProps): ReactElement => {
@@ -85,11 +85,13 @@ const SelfRegistrationPreview = (props: PreviewProps): ReactElement => {
                 },
                 receiveNewsletter: false,
                 userTesting: false,
+                receiveUpdatesAndReminders: true,
                 accountCreationSource: "",
                 contactSharingWithAccountCreationPartner: false,
                 myNJUserKey: undefined,
                 intercomHash: undefined,
                 abExperience: "ExperienceA",
+                phoneNumber: undefined,
               }}
               setUser={function (user: BusinessUser): void {
                 console.error(user);

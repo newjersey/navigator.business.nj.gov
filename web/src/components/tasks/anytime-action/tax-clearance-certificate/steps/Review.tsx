@@ -109,26 +109,34 @@ export const Review = (props: Props): ReactElement => {
   const handleSubmit = async (): Promise<void> => {
     setIsLoading(true);
 
-    if (!userData || !business?.taxClearanceCertificateData) return;
-
-    scrollToTop();
-    props.setResponseErrorType(undefined);
-    updateErrorMap(business.taxClearanceCertificateData);
-
-    if (isAnyRequiredFieldEmpty(business.taxClearanceCertificateData) || !props.isValid()) return;
-
     try {
+      if (!userData || !business?.taxClearanceCertificateData) return;
+
+      scrollToTop();
+      props.setResponseErrorType(undefined);
+      updateErrorMap(business.taxClearanceCertificateData);
+
+      if (isAnyRequiredFieldEmpty(business.taxClearanceCertificateData) || !props.isValid()) return;
+
       await api.postUserData(userData); // Need to assert that all businesses in a user's account have hashed data in DB
       const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
       if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
+        analytics.event.api_submit.error(
+          "treasury.taxation.tax_clearance_submission",
+          taxClearanceResponse.error.message,
+        );
         props.setResponseErrorType(taxClearanceResponse.error.type);
-        setIsLoading(false);
         return;
       }
 
       if (taxClearanceResponse.certificatePdfArray) {
         analytics.event.tax_clearance.appears.validation_success();
+        analytics.event.api_submit.success(
+          "treasury.taxation.tax_clearance_submission",
+          "successfully submitted tax clearance certificate",
+        );
+
         const blob = new Blob(
           [
             new Uint8Array(
@@ -142,11 +150,15 @@ export const Review = (props: Props): ReactElement => {
         props.setCertificatePdfBlob(blob);
         props.setResponseErrorType(undefined);
         updateQueue?.queue(taxClearanceResponse.userData).update();
-        setIsLoading(false);
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();
+      analytics.event.api_submit.error(
+        "treasury.taxation.tax_clearance_submission",
+        "there was an issue submitting tax clearance",
+      );
       props.setResponseErrorType("SYSTEM_ERROR");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -205,7 +217,11 @@ export const Review = (props: Props): ReactElement => {
       <div className="margin-top-5">
         <CtaContainer>
           <ActionBarLayout>
-            <LiveChatHelpButton />
+            <LiveChatHelpButton
+              analyticsEvent={
+                analytics.event.tax_clearance_anytime_action_help_button.click.open_live_chat
+              }
+            />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <SecondaryButton
                 isColor="primary"

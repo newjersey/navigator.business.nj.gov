@@ -77,7 +77,7 @@ export const Hero = (): ReactElement => {
         <div className="border-top-1 border-primary width-6 margin-auto" />
 
         <div className={"margin-y-3 margin-x-2"}>
-          <Heading level={2} styleVariant="h2" className="text-align-center">
+          <Heading level={2} className="text-align-center">
             {landingPageConfig.tileTitleText}
           </Heading>
         </div>
@@ -104,7 +104,7 @@ export const Hero = (): ReactElement => {
                 }`}
               >
                 <div className="border-top-1 border-primary" />
-                <Heading level={2} styleVariant="h1" className="margin-y-4 desktop:margin-y-3">
+                <Heading level={2} className="margin-y-4 desktop:margin-y-3">
                   {landingPageConfig.section2HeaderText}
                 </Heading>
                 <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
@@ -139,7 +139,7 @@ export const Hero = (): ReactElement => {
               }`}
             >
               <div className="border-top-1 border-accent-cool-darker"></div>
-              <Heading level={2} styleVariant="h1" className="margin-y-4 desktop:margin-y-3">
+              <Heading level={2} className="margin-y-4 desktop:margin-y-3">
                 {landingPageConfig.section3HeaderText}
               </Heading>
               <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">

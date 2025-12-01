@@ -16,7 +16,7 @@
     "businessOwnerDescription": "Enter your full name exactly as it appears in the \"Responsible Owner Name\" section of your tax confirmation email.",
     "failedTaxIdHelper": "Enter the 12-digit Tax ID shown in your tax confirmation email.",
     "taxFieldErrorName": "New Jersey Tax ID",
-    "legalStructureDropDownHeader": "**`Business Structure|business-structure-learn-more`**",
+    "legalStructureDropDownHeader": "**`Business Structure|business-structure-contextual-link`**",
     "stepTwoBackButton": "Back",
     "businessFieldHeader": "Business Name",
     "stepOneErrorBanner": "Complete the field below.",

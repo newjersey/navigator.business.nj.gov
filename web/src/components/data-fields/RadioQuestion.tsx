@@ -3,7 +3,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField, profileFieldsFromConfig } from "@/lib/types/types";
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,
@@ -11,6 +10,7 @@ import {
   kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
 import { ProfileData } from "@businessnjgovnavigator/shared/index";
+import { ProfileContentField, profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 

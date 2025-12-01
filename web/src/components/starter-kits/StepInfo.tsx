@@ -1,5 +1,5 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { Step } from "@/lib/types/types";
+import { Step } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactElement => {
@@ -10,9 +10,7 @@ export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactEleme
           <strong>STEP {props.step.stepNumber}</strong>
         </span>
       </div>
-      <Heading level={3} styleVariant="h4">
-        {props.step.name.replace("${OoS}", "")}
-      </Heading>
+      <Heading level={3}>{props.step.name.replace("${OoS}", "")}</Heading>
       <p>{props.step.description}</p>
       <strong className="text-base-dark">
         {props.step.timeEstimate && `(${props.step.timeEstimate})`}

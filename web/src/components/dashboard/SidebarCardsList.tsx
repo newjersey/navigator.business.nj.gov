@@ -6,9 +6,9 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
+import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, useRef, useState } from "react";
 
@@ -90,7 +90,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
         </div>
       )}
       <div className={"display-none desktop:display-block"}>
-        <Heading level={2} className="margin-top-0 font-weight-normal">
+        <Heading level={2} className="margin-top-0">
           {Config.dashboardDefaults.sidebarHeading}
           <span data-testid="for-you-counter" className="margin-left-05 text-base">
             ({props.cardCount})
@@ -186,13 +186,11 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
                 id="hidden-opportunity-header"
                 data-testid="hidden-opportunity-header"
               >
-                <div className="margin-y-2">
-                  <div className="flex flex-align-center margin-0-override text-normal">
-                    <div className="inline">
-                      {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
-                        count: String(hiddenOpportunitiesCount()),
-                      })}
-                    </div>
+                <div className="flex flex-align-center margin-0-override text-normal">
+                  <div className="inline">
+                    {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
+                      count: String(hiddenOpportunitiesCount()),
+                    })}
                   </div>
                 </div>
               </AccordionSummary>

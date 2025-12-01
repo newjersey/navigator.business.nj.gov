@@ -1,6 +1,7 @@
 import { AddressLines1And2 } from "@/components/data-fields/address/AddressLines1And2";
 import { AddressMunicipalityDropdown } from "@/components/data-fields/address/AddressMunicipalityDropdown";
 import { AddressTextField } from "@/components/data-fields/address/AddressTextField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -47,33 +48,31 @@ export const NewJerseyAddress = (props: Props): ReactElement => {
                         {Config.formation.fields.addressState.label}
                       </ModifiedContent>
                     </strong>
-                    <div
-                      id={`question-addressState`}
-                      className="text-field-width-default add-spacing-on-ele-scroll"
-                    >
-                      <StateDropdown
-                        fieldName="addressState"
-                        value={"New Jersey"}
-                        validationText={Config.formation.fields.addressState.error}
-                        disabled={true}
-                        onSelect={(): void => {}}
-                      />
-                    </div>
+                    <ScrollableFormFieldWrapper fieldName={"addressState"}>
+                      <div className="text-field-width-default">
+                        <StateDropdown
+                          fieldName="addressState"
+                          value={"New Jersey"}
+                          validationText={Config.formation.fields.addressState.error}
+                          disabled={true}
+                          onSelect={(): void => {}}
+                        />
+                      </div>
+                    </ScrollableFormFieldWrapper>
                   </div>
                   <div className="grid-col-6">
-                    <div
-                      id={`question-addressZipCode`}
-                      className="text-field-width-default add-spacing-on-ele-scroll"
-                    >
-                      <AddressTextField
-                        label={Config.formation.fields.addressZipCode.label}
-                        numericProps={{ maxLength: 5 }}
-                        errorBarType="NEVER"
-                        validationText={getFieldErrorLabel("addressZipCode")}
-                        fieldName={"addressZipCode"}
-                        onValidation={props.onValidation}
-                      />
-                    </div>
+                    <ScrollableFormFieldWrapper fieldName={"addressZipCode"}>
+                      <div className="text-field-width-default">
+                        <AddressTextField
+                          label={Config.formation.fields.addressZipCode.label}
+                          numericProps={{ maxLength: 5 }}
+                          errorBarType="NEVER"
+                          validationText={getFieldErrorLabel("addressZipCode")}
+                          fieldName={"addressZipCode"}
+                          onValidation={props.onValidation}
+                        />
+                      </div>
+                    </ScrollableFormFieldWrapper>
                   </div>
                 </div>
               </WithErrorBar>

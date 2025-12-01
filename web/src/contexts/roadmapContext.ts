@@ -1,4 +1,4 @@
-import { Roadmap } from "@/lib/types/types";
+import { Roadmap } from "@businessnjgovnavigator/shared/types";
 import { createContext } from "react";
 
 export interface RoadmapContextType {

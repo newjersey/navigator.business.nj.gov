@@ -4,7 +4,6 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Hero } from "@/components/njwds/Hero";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { AuthContext } from "@/contexts/authContext";
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -16,6 +15,7 @@ import analytics from "@/lib/utils/analytics";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { useMediaQuery } from "@mui/material";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
@@ -114,7 +114,6 @@ const Home = (): ReactElement => {
                 <div className="landing-feature-text">
                   <Heading
                     level={2}
-                    styleVariant="h1"
                     className="text-base-darkest margin-bottom-4 desktop:margin-bottom-3"
                   >
                     {headingText}
@@ -126,7 +125,6 @@ const Home = (): ReactElement => {
               <>
                 <Heading
                   level={2}
-                  styleVariant="h1"
                   className="text-base-darkest margin-right-2 margin-left-2 margin-top-10"
                 >
                   {headingText}
@@ -161,11 +159,7 @@ const Home = (): ReactElement => {
           <Hero />
           <section ref={sectionHowItWorks} aria-label={landingPageConfig.section4HeaderText}>
             <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
-              <Heading
-                level={2}
-                styleVariant="h1"
-                className="text-accent-cool-darker margin-bottom-6 padding-top-6"
-              >
+              <Heading level={2} className="text-accent-cool-darker margin-bottom-6 padding-top-6">
                 {landingPageConfig.section4HeaderText}
               </Heading>
               <div

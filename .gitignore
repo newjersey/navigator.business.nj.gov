@@ -7,6 +7,9 @@ web/node_modules
 .yarn/cache
 .yarn/install-state.gz
 
+.yarn-cache
+api/lib
+
 # scripts
 get-user-location-output.csv
 report-industries-and-non-essential-questions.csv

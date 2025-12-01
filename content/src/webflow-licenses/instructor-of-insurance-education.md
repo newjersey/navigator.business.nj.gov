@@ -1,14 +1,14 @@
 ---
+id: instructor-of-insurance-education
 displayname: instructor-of-insurance-education
-id: "instructor-of-insurance-education"
-webflowId: "5f7729262f04daea3758b5ed"
-urlSlug: "instructor-of-insurance-education"
-webflowName: "Instructor of Insurance Education"
-callToActionLink: "https://nj.gov/dobi/inslic.htm"
-callToActionText: ""
+urlSlug: instructor-of-insurance-education
+webflowName: Instructor of Insurance Education
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Division of Insurance Licensing and Education"
-divisionPhone: "(609) 292-7272  50552"
-webflowIndustry: "Insurance Instructor"
-licenseCertificationClassification: "LICENSE/REGISTER"
+agencyAdditionalContext: Division of Insurance Licensing and Education
+callToActionText: Become a Licensed Insurance Education Instructor
+callToActionLink: https://nj.gov/dobi/inslic.htm
+webflowIndustry: Insurance Instructor
+divisionPhone: (609) 292-7272  50552
+webflowId: 5f7729262f04daea3758b5ed
+licenseCertificationClassification: LICENSE/REGISTER
 ---

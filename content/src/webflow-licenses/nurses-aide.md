@@ -1,12 +1,13 @@
 ---
+id: nurses-aide
 displayname: nurses-aide
-id: "nurses-aide"
-webflowId: "640b84676976aa344ddd0927"
-urlSlug: "nurses-aide"
-webflowName: "Nurses Aide"
-callToActionLink: "http://njconsumeraffairs.gov/nur/pages/applications.aspx"
+urlSlug: nurses-aide
+webflowName: Nurses Aide
 agencyId: nj-consumer-affairs
-divisionPhone: "(973) 504-6430"
-webflowIndustry: "Nurses Aide"
-licenseCertificationClassification: "CERTIFICATION"
+callToActionText: Learn about the NJ Board of Nursing
+callToActionLink: http://njconsumeraffairs.gov/nur/pages/applications.aspx
+webflowIndustry: Nurses Aide
+licenseCertificationClassification: CERTIFICATION
+divisionPhone: (973) 504-6430
+webflowId: 640b84676976aa344ddd0927
 ---

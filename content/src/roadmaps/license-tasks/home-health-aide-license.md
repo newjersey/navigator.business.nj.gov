@@ -23,7 +23,7 @@ webflowId: 66aceed816add4cacea7d7ff
 
 - `Employer Identification Number (EIN)|ein`
 
-* `Business Structure|business-structure-learn-more`
+* `Business Structure|business-structure-contextual-link`
 * `Certificate of Formation|certificate-formation`
 * General demographic information about your clients (age, disability status)
 * The name and home address of each officer, director, and principal

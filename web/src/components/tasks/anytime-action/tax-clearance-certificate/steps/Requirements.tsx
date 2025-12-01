@@ -41,7 +41,11 @@ export const Requirements = (props: Props): ReactElement => {
       <span className="h6-styling">{Config.taxClearanceCertificateStep1.issuingAgencyText}</span>
       <CtaContainer>
         <ActionBarLayout>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={
+              analytics.event.tax_clearance_anytime_action_help_button.click.open_live_chat
+            }
+          />
           <PrimaryButton
             isColor="primary"
             onClick={onContinueClick}

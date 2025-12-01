@@ -1,5 +1,6 @@
 {
-  "TableName": "businesses-table-dev",
+  "TableName": "businesses-table-local",
+  "BillingMode": "PAY_PER_REQUEST",
   "AttributeDefinitions": [
     {
       "AttributeName": "businessId",
@@ -15,10 +16,6 @@
     },
     {
       "AttributeName": "industry",
-      "AttributeType": "S"
-    },
-    {
-      "AttributeName": "encryptedTaxId",
       "AttributeType": "S"
     },
     {
@@ -41,9 +38,7 @@
           "KeyType": "HASH"
         }
       ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
+      "Projection": { "ProjectionType": "ALL" }
     },
     {
       "IndexName": "NaicsCode",
@@ -53,9 +48,7 @@
           "KeyType": "HASH"
         }
       ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
+      "Projection": { "ProjectionType": "ALL" }
     },
     {
       "IndexName": "Industry",
@@ -65,21 +58,7 @@
           "KeyType": "HASH"
         }
       ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
-    },
-    {
-      "IndexName": "EncryptedTaxId",
-      "KeySchema": [
-        {
-          "AttributeName": "encryptedTaxId",
-          "KeyType": "HASH"
-        }
-      ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
+      "Projection": { "ProjectionType": "ALL" }
     },
     {
       "IndexName": "HashedTaxId",
@@ -89,9 +68,7 @@
           "KeyType": "HASH"
         }
       ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      }
+      "Projection": { "ProjectionType": "ALL" }
     }
   ]
 }

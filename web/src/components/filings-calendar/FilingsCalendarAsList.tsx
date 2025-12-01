@@ -6,11 +6,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { getXrayRenewalEvent } from "@/lib/domain-logic/getXrayRenewalEvent";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
 import { groupBy } from "@/lib/utils/helpers";
 import {
   LicenseCalendarEvent,
@@ -19,6 +14,11 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useEffect, useState } from "react";
 

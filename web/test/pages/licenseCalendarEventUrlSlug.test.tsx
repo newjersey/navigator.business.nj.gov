@@ -1,4 +1,3 @@
-import { LicenseEventType } from "@/lib/types/types";
 import LicenseCalendarEventPage from "@/pages/license-calendar-event/[licenseCalendarEventUrlSlug]";
 import { generateLicenseEvent } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -10,6 +9,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
+import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 

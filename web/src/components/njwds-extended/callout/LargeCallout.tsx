@@ -1,6 +1,5 @@
-import { CalloutLayout } from "@/components/njwds-extended/callout/CalloutLayout";
-import { ConfigType } from "@/contexts/configContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import type { PropsWithChildren, ReactElement } from "react";
 
 import {
@@ -9,6 +8,7 @@ import {
   getIconItems,
   LargeCalloutProps,
 } from "@/components/njwds-extended/callout/calloutHelpers";
+import { IconTextList } from "@/components/njwds-extended/callout/CalloutIcons";
 
 const HEADING_TEXT_KEYS: Record<CalloutTypes, keyof ConfigType["calloutDefaults"]> = {
   informational: "informationalHeadingDefaultText",
@@ -25,7 +25,6 @@ const getDefaultHeadingText = (config: ConfigType, calloutType: CalloutTypes): s
 export const LargeCallout = (props: PropsWithChildren<LargeCalloutProps>): ReactElement => {
   const { Config } = useConfig();
   const styling = CALLOUT_STYLES[props.calloutType];
-  const showHeader = Boolean(props.showHeader ?? false);
 
   const headingText =
     typeof props.headerText === "string" && props.headerText.length > 0
@@ -34,14 +33,28 @@ export const LargeCallout = (props: PropsWithChildren<LargeCalloutProps>): React
 
   const iconItems = getIconItems(props);
 
+  if (props.showHeader && headingText) {
+    return (
+      <div
+        className={`padding-205 radius-md margin-y-2 ${styling.backgroundColor} ${styling.textColor}`}
+      >
+        <span className="text-bold">{headingText}</span>
+        {(props.children || (iconItems && iconItems.length > 0)) && (
+          <div className="margin-top-105">
+            <div>{props.children}</div>
+            <IconTextList items={iconItems} />
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <CalloutLayout
-      styling={styling}
-      headingText={headingText}
-      showHeader={showHeader}
-      iconItems={iconItems}
-    >
-      {props.children}
-    </CalloutLayout>
+    <div className={`padding-205 radius-md margin-y-2 ${styling.backgroundColor}`}>
+      <div className="text-primary-darker">
+        <div className="flex">{props.children}</div>
+        <IconTextList items={iconItems} />
+      </div>
+    </div>
   );
 };

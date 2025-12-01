@@ -1,5 +1,4 @@
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
-import { getMergedConfig } from "@/contexts/configContext";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -10,6 +9,7 @@ import {
   generateProfileData,
   generateUserData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
@@ -61,6 +61,7 @@ describe("<NavBarMobile />", () => {
     useMockUserData({});
     setLargeScreen(false);
     useMockBusiness(generateBusinessNamedBusiness());
+    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   describe("landing configuration", () => {

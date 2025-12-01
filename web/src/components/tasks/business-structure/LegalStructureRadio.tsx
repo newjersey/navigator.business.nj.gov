@@ -2,7 +2,6 @@ import { Content } from "@/components/Content";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { ConfigType } from "@/contexts/configContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -15,6 +14,7 @@ import {
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { orderBy } from "lodash";
 import React, { ForwardedRef, forwardRef, ReactElement, useContext } from "react";
@@ -83,9 +83,7 @@ const LegalStructureRadio = forwardRef(
             </Alert>
           </div>
         )}
-        <Heading level={2} styleVariant="h3">
-          {Config.businessStructureTask.radioQuestionHeader}
-        </Heading>
+        <Heading level={2}>{Config.businessStructureTask.radioQuestionHeader}</Heading>
         <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS">
           <div className="margin-top-3">
             <FormControl variant="outlined" fullWidth>

@@ -1,10 +1,10 @@
 ---
+header: Employer Identification Number (EIN)
 id: ein
-header: Employer Identification Number
 displayname: ein
 ---
 
-An Employer Identification Number (EIN, also known as a Federal Employer Identification Number or Federal Tax Identification Number) is a 9-digit number given to businesses and organizations by the U.S. Internal Revenue Service (IRS).
+An Employer Identification Number (EIN, also known as a Federal Employer Identification Number, FEIN, or Federal Tax Identification Number) is a 9-digit number given to businesses and organizations by the U.S. Internal Revenue Service (IRS).
 
 Your EIN is a unique identifier, like a Social Security number (SSN), but for your business. This number never expires.
 

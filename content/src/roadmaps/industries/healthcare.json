@@ -89,8 +89,7 @@
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, advanced practice nurse, midwives, midwifery, certified nurse midwife, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian, healthcare facility, healthcare center, nursing home, assisted living, electrolysis, electrologist, optometry, health care, dentist, dental, hygienist, endodontics, oral or maxillofacial surgery, oral or maxillofacial radiology, oral pathology, orthodontics, pediatric dentistry, pedodontics, periodontics, prosthodontics, public health",
