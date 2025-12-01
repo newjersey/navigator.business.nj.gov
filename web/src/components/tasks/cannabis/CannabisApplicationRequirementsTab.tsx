@@ -8,7 +8,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -46,7 +46,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={expandIcon()}
               >
-                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
+                <Heading level={2} className="margin-0-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
                 </Heading>
               </AccordionSummary>
@@ -65,7 +65,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={expandIcon()}
               >
-                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
+                <Heading level={2} className="margin-0-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
                 </Heading>
               </AccordionSummary>
@@ -85,7 +85,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
                 expandIcon={expandIcon()}
               >
-                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
+                <Heading level={2} className="margin-0-override">
                   {Config.cannabisApplyForLicense.microbusinessApplicationNeeds}
                 </Heading>
               </AccordionSummary>
@@ -105,7 +105,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
                 expandIcon={expandIcon()}
               >
-                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
+                <Heading level={2} className="margin-0-override">
                   {Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}
                 </Heading>
               </AccordionSummary>

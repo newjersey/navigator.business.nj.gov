@@ -65,8 +65,7 @@
   ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "canBeReseller": false
+    "canBeHomeBased": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "health spa, strength training and conditioning, athletic club, boxing club, fitness center, gym, swim club, sports club, exercise, electrolysis, electrologist",

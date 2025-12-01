@@ -53,7 +53,8 @@
       "licenseTask": "cosmetology-license",
       "weight": 12,
       "required": true
-    },  {
+    },
+    {
       "step": 4,
       "weight": 17,
       "task": "resale-tax-certificate-operating"
@@ -67,9 +68,7 @@
   "name": "Cosmetology",
   "nonEssentialQuestionsIds": ["electrologist"],
   "displayname": "cosmetology",
-  "industryOnboardingQuestions": {
-    "canBeReseller": false
-  },
+  "industryOnboardingQuestions": {},
   "modifications": [
     {
       "taskToReplaceFilename": "check-site-requirements",

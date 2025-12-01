@@ -1,4 +1,4 @@
-import { getMergedConfig } from "@/contexts/configContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ProfileLinkToPermitsTabCallout } from "./ProfileLinkToPermitsTabCallout";
 

@@ -1,26 +1,30 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
-import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
   ElevatorSafetyRegistrationSummary,
+  EmailMetaData,
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
+  EmployerRatesRequest,
+  EmployerRatesResponse,
   FacilityDetails,
   getCurrentBusiness,
   HousingRegistrationRequestLookupResponse,
   InputFile,
   LicenseSearchNameAndAddress,
   NameAvailability,
+  PreparePaymentResponse,
   PropertyInterestType,
   TaxClearanceCertificateResponse,
   UnlinkTaxIdResponse,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { SelfRegResponse } from "@businessnjgovnavigator/shared/types";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 
-export const getUserData = (id: string): Promise<UserData> => {
+export const getUserData = async (id: string): Promise<UserData> => {
   return get<UserData>(`/users/${id}`).then((userData) => {
     setPhaseDimension(getCurrentBusiness(userData).profileData.operatingPhase);
     return userData;
@@ -76,6 +80,10 @@ export const checkXrayRegistrationStatus = (
   return post(`/xray-registration`, { facilityDetails });
 };
 
+export const sendEnvironmentPermitEmail = (emailMetaData: EmailMetaData): Promise<string> => {
+  return post(`/guest/environment-permit-email`, { emailMetaData }, false);
+};
+
 export const postBusinessFormation = (
   userData: UserData,
   returnUrl: string,
@@ -92,6 +100,17 @@ export const postTaxClearanceCertificate = (
   userData: UserData,
 ): Promise<TaxClearanceCertificateResponse> => {
   return post(`/postTaxClearanceCertificate`, userData);
+};
+
+export const postCigaretteLicensePreparePayment = (
+  userData: UserData,
+  returnUrl: string,
+): Promise<{ userData: UserData; paymentInfo: PreparePaymentResponse }> => {
+  return post(`/cigarette-license/prepare-payment`, { userData, returnUrl });
+};
+
+export const cigaretteLicenseConfirmPayment = (): Promise<UserData> => {
+  return get(`/cigarette-license/get-order-by-token`);
 };
 
 export const unlinkTaxId = (userData: UserData): Promise<UnlinkTaxIdResponse> => {
@@ -112,6 +131,13 @@ export const postTaxFilingsLookup = (props: {
   encryptedTaxId: string;
 }): Promise<UserData> => {
   return post(`/taxFilings/lookup`, props);
+};
+
+export const checkEmployerRates = (props: {
+  employerRates: EmployerRatesRequest;
+  userData: UserData;
+}): Promise<EmployerRatesResponse> => {
+  return post(`/checkEmployerRates`, props);
 };
 
 export const decryptValue = (props: { encryptedValue: string }): Promise<string> => {

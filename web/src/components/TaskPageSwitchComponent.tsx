@@ -1,4 +1,5 @@
 import { TaskBody } from "@/components/TaskBody";
+import { TaskHeader } from "@/components/TaskHeader";
 import { EinTask } from "@/components/tasks/EinTask";
 import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
 import { HotelMotelRegistrationTask } from "@/components/tasks/HotelMotelRegistrationTask";
@@ -7,6 +8,7 @@ import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwe
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
 import { TaxTask } from "@/components/tasks/TaxTask";
+import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
@@ -14,16 +16,17 @@ import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/Cannabis
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
+import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
 import { Xray } from "@/components/xray/Xray";
+import { rswitch } from "@/lib/utils/helpers";
+import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
+import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import {
   FormationDbaDisplayContent,
   Roadmap,
   Task,
   TaskWithLicenseTaskId,
-} from "@/lib/types/types";
-import { rswitch } from "@/lib/utils/helpers";
-import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+} from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
@@ -79,10 +82,12 @@ export const TaskPageSwitchComponent = ({
   const isCigaretteLicenseEnabled = process.env.FEATURE_CIGARETTE_LICENSE === "true";
 
   return rswitch(task.id, {
+    pwcr: <GovernmentContractingElement headerOverride={<TaskHeader task={task} />} />,
     "env-permitting": <EnvPermit task={task} />,
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,
     "air-permitting": <EnvPermit task={task} />,
+    "passenger-transport-cdl": <PassengerTransportCdl task={task} />,
     "cigarette-license":
       isCigaretteLicenseEnabled && !CMS_ONLY_disable_default_functionality ? (
         <CigaretteLicense task={task} />
@@ -120,12 +125,6 @@ export const TaskPageSwitchComponent = ({
     "register-for-taxes": <TaxTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />,
     "business-structure": (
       <BusinessStructureTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />
-    ),
-    "search-business-name": (
-      <BusinessFormation
-        task={getTaskFromRoadmap(roadmap, task.id)}
-        displayContent={displayContent}
-      />
     ),
     [formationTaskId]: (
       <BusinessFormation

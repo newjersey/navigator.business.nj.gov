@@ -12,9 +12,9 @@ import {
   sortCertifications,
   sortFundingsForUser,
 } from "@/lib/domain-logic/sidebarCardsHelpers";
-import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {

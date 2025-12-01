@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/cigarette-license/send-email-confirmation",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.businessName !== 'Mock Success Company')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "body": "There was an issue sending the email confirmation.",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

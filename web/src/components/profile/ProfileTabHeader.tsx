@@ -1,7 +1,7 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileTabSubText } from "@/components/profile/ProfileTabSubText";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileTabs } from "@/lib/types/types";
+import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, forwardRef } from "react";
 
 interface Props {
@@ -16,6 +16,8 @@ export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
       switch (props.tab) {
         case "info":
           return Config.profileDefaults.default.profileTabInfoTitle;
+        case "contact":
+          return Config.profileDefaults.default.profileTabContactTitle;
         case "permits":
           return Config.profileDefaults.default.profileTabPermitsTitle;
         case "numbers":
@@ -32,9 +34,12 @@ export const ProfileTabHeader = forwardRef<HTMLDivElement, Props>(
     return (
       <div ref={ref} data-testid="profile-tab-header">
         <hr className="desktop:margin-top-0 margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <Heading level={2} className="margin-bottom-4" style={{ fontWeight: 300 }}>
+        <Heading level={2} className="margin-bottom-4">
           {getTitle()}
         </Heading>
+        {props.tab === "contact" && (
+          <ProfileTabSubText text={Config.profileDefaults.default.contactAndNotificationsSubText} />
+        )}
         {(props.tab === "permits" || props.tab === "personalize") && (
           <ProfileTabSubText text={Config.profileDefaults.default.permitsAndLicensesSubText} />
         )}

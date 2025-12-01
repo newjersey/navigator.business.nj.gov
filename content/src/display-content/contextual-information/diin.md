@@ -2,7 +2,7 @@
 notesMd: "Planning doc:
   https://docs.google.com/document/d/1yoHDEM7vMXgHyWt9CmHKB6Uloz7lFQ_6B3h8jKfc4\
   JU/edit?tab=t.0 "
-header: Division Issued Identification Number
+header: Division Issued Identification Number (DIIN)
 id: DIIN
 displayname: DIIN
 ---

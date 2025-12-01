@@ -1,0 +1,13 @@
+{
+  "id": "registration-selfgenerator-waste-transp",
+  "displayname": "registration-selfgenerator-waste-transp",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 110,
+      "task": "",
+      "licenseTask": "selfgenerator-waste-transporters-reg",
+      "required": true
+    }
+  ]
+}

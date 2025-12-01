@@ -1,12 +1,13 @@
 ---
+id: prosthesis
 displayname: prosthesis
-id: "prosthesis"
-webflowId: "640b846750786eb161348e82"
-urlSlug: "prosthesis"
-webflowName: "Prosthesis"
-callToActionLink: "http://njconsumeraffairs.gov/orth/Pages/applications.aspx"
+urlSlug: prosthesis
+webflowName: Prosthesis
 agencyId: nj-consumer-affairs
-divisionPhone: "(973) 504-6445"
-webflowIndustry: "Prosthesis"
-licenseCertificationClassification: "REGISTRATION/LICENSE"
+callToActionText: Apply for a Prosthetist License
+callToActionLink: http://njconsumeraffairs.gov/orth/Pages/applications.aspx
+webflowIndustry: Prosthesis
+licenseCertificationClassification: REGISTRATION/LICENSE
+divisionPhone: (973) 504-6445
+webflowId: 640b846750786eb161348e82
 ---

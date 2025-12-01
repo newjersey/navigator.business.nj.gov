@@ -15,18 +15,19 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { postEmergencyTripPermitApplication } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import {
-  EmergencyTripPermitFieldErrorState,
-  FieldStateActionKind,
-  ReducedFieldStates,
-  StepperStep,
-} from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
   generateNewEmergencyTripPermitData,
 } from "@businessnjgovnavigator/shared";
+import {
+  EmergencyTripPermitFieldErrorState,
+  FieldStateActionKind,
+  ReducedFieldStates,
+  StepperStep,
+} from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useState } from "react";
 
@@ -176,7 +177,9 @@ export const EmergencyTripPermit = (): ReactElement => {
       {EmergencyTripPermitSteps[stepIndex].component}
       <CtaContainer>
         <ActionBarLayout>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.emergency_trip_permit_help_button.click.open_live_chat}
+          />
           {stepIndex !== 0 && (
             <SecondaryButton
               onClick={() => {

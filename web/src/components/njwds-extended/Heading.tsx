@@ -1,10 +1,15 @@
 import { ReactElement } from "react";
 
 type HeadingLevel = 0 | 1 | 2 | 3 | 4;
-type HeadingStyleVariant = "h1" | "h1Large" | "h2" | "h3" | "h4" | "h5" | "h6" | "rawElement";
+/**
+ * @deprecated Don't use this as it's considered bad accessibility practice.
+ */
+interface HeadingStyleVariant {
+  variant: "h1" | "h1Large" | "h2" | "h3" | "h4" | "h5" | "h6" | "rawElement";
+}
 
 type HeadingStyles = {
-  [variant in HeadingStyleVariant]: string;
+  [variant in HeadingStyleVariant["variant"]]: string;
 };
 
 const variantClasses: HeadingStyles = {
@@ -20,7 +25,7 @@ const variantClasses: HeadingStyles = {
 
 const determineClassNames = (
   level: HeadingLevel,
-  styleVariant?: HeadingStyleVariant | undefined,
+  deprecatedStyleVariant?: HeadingStyleVariant["variant"] | undefined,
   className?: string | undefined,
 ): string => {
   const classStrings = [];
@@ -44,8 +49,8 @@ const determineClassNames = (
       break;
   }
 
-  if (styleVariant) {
-    styleClass = variantClasses[styleVariant];
+  if (deprecatedStyleVariant) {
+    styleClass = variantClasses[deprecatedStyleVariant];
   }
 
   if (styleClass.length > 0) {
@@ -63,13 +68,16 @@ const determineClassNames = (
 
 interface Props extends React.HTMLProps<HTMLHeadingElement> {
   level: HeadingLevel;
-  styleVariant?: HeadingStyleVariant | undefined;
+  /**
+   * @deprecated This prop is deprecated. Please don't override default header styling, contact design instead (this is an accessibility best practice)
+   */
+  deprecatedStyleVariant?: HeadingStyleVariant["variant"] | undefined;
 }
 
 export const Heading: React.FC<Props> = (props) => {
   let headingElement: ReactElement;
-  const { level, styleVariant, children, className, ...defaultProps } = props;
-  const classList = determineClassNames(level, styleVariant, className);
+  const { level, deprecatedStyleVariant, children, className, ...defaultProps } = props;
+  const classList = determineClassNames(level, deprecatedStyleVariant, className);
 
   switch (level) {
     case 1:

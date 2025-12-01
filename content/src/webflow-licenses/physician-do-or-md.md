@@ -1,12 +1,13 @@
 ---
+id: physician-do-or-md
 displayname: physician-do-or-md
-id: "physician-do-or-md"
-webflowId: "640b84677bfdab9c9fe1cef8"
-urlSlug: "physician-do-or-md"
-webflowName: "Physician (DO or MD)"
-callToActionLink: "http://njconsumeraffairs.gov/bme"
+urlSlug: physician-do-or-md
+webflowName: Physician (DO or MD)
 agencyId: nj-consumer-affairs
-divisionPhone: "(973) 826-7100"
-webflowIndustry: "Physician"
-licenseCertificationClassification: "LICENSE"
+callToActionText: Apply for Your Physician License
+callToActionLink: http://njconsumeraffairs.gov/bme
+webflowIndustry: Physician
+licenseCertificationClassification: LICENSE
+divisionPhone: (973) 826-7100
+webflowId: 640b84677bfdab9c9fe1cef8
 ---

@@ -16,6 +16,9 @@
     "additionalBusinessSnackbarHeader": "Additional business added",
     "calendarSnackbarHeading": "Your annual reporting deadline was added",
     "needsAccountSnackbarTitle": "Business information received",
-    "needsAccountSnackbarBody": "Save your progress by linking your Business.NJ.gov account with myNewJersey."
+    "needsAccountSnackbarBody": "Save your progress by linking your Business.NJ.gov account with myNewJersey.",
+    "removedBusinessSnackbarTitle": "Your Business has been removed",
+    "removedBusinessSnackbarBody": "Your business has been removed from My Account."
+
   }
 }

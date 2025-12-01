@@ -31,7 +31,7 @@ isSbe: false
 - Business address, including `block and lot numbers|block-lot-number` . Find this on your tax bill or your landlord’s property tax bill
 - `6-digit NAICS code|naics`
 - `4-digit Standard Industrial Classification (SIC) code|sic-code`
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Business formation documents, such as a `Certificate of Formation or Certificate of Authority|certificate-formation`
 - Number of current employees
 - An estimate of the number of employees you will have after 3 years in the UEZ program

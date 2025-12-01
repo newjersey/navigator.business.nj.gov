@@ -6,7 +6,6 @@ import { ReactElement } from "react";
 
 export const DashboardAlerts = (): ReactElement => {
   const { Config } = useConfig();
-
   const secondSnackbarTimeDelay = Config.dashboardDefaults.timeDelayBetweenMultipleSnackbars;
 
   const ProfileUpdatedAlert = useQueryControlledAlert({
@@ -68,7 +67,7 @@ export const DashboardAlerts = (): ReactElement => {
     queryKey: QUERIES.deferredQuestionAnswered,
     pagePath: ROUTES.dashboard,
     headerText: Config.dashboardDefaults.deferredOnboardingSnackbarHeader,
-    bodyText: Config.dashboardDefaults.deferredOnboardingSnackbarBody,
+    bodyText: Config.dashboardDefaults.removedBusinessSnackbarBody,
     variant: "success",
     dataTestId: "deferredQuestionAnswered-alert",
   });
@@ -91,6 +90,15 @@ export const DashboardAlerts = (): ReactElement => {
     dataTestId: "needs-account-alert",
   });
 
+  const DeleteBusinessAlert = useQueryControlledAlert({
+    queryKey: QUERIES.fromDeleteBusiness,
+    pagePath: ROUTES.dashboard,
+    headerText: Config.dashboardDefaults.removedBusinessSnackbarTitle,
+    bodyText: Config.dashboardDefaults.removedBusinessSnackbarBody,
+    variant: "success",
+    dataTestId: "delete-business-alert",
+  });
+
   return (
     <div data-testid="dashboard-alerts">
       <>{ProfileUpdatedAlert}</>
@@ -102,6 +110,7 @@ export const DashboardAlerts = (): ReactElement => {
       <>{DeferredQuestionAnsweredAlert}</>
       <>{AdditionalBusinessAlert}</>
       <>{NeedsAccountAlert}</>
+      <>{DeleteBusinessAlert}</>
     </div>
   );
 };

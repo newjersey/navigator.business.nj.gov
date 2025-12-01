@@ -1,6 +1,6 @@
+import { Content } from "@/components/Content";
 import { BackButtonForLayout } from "@/components/njwds-layout/BackButtonForLayout";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
-import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -17,19 +17,15 @@ export const ProfileTabPanel = (props: ProfileTabPanelProps): ReactElement => {
   const userDataFromHook = useUserData();
   const business = userDataFromHook.business;
   const { isAuthenticated } = useContext(NeedsAccountContext);
+  const { Config } = useConfig();
+  const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
 
   const titleOverColumns: React.ReactNode = (
     <>
       <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
-      <ProfileNoteDisclaimerForSubmittingData
-        business={business}
-        isAuthenticated={isAuthenticated}
-      />
+      <Content>{Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout}</Content>
     </>
   );
-
-  const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
-  const { Config } = useConfig();
 
   return (
     <>

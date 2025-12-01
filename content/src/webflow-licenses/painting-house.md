@@ -1,14 +1,14 @@
 ---
+id: painting-house
 displayname: painting-house
-id: "painting-house"
-webflowId: "5f772911614a2d913ad207a1"
-urlSlug: "painting-house"
-webflowName: "Painting House"
-callToActionLink: "http://nj.gov/dep/enforcement/"
-callToActionText: ""
+urlSlug: painting-house
+webflowName: Painting House
 agencyId: njdep
-agencyAdditionalContext: "Compliance and Enforcement"
+agencyAdditionalContext: Compliance and Enforcement
+callToActionText: Learn About the Office of Enforcement Policy
+callToActionLink: http://nj.gov/dep/enforcement/
+webflowIndustry: Painting House
 divisionPhone: "(888) 656-6225 #21"
-webflowIndustry: "Painting House"
-licenseCertificationClassification: "PERMIT/LICENSE (LEAD BASED)"
+webflowId: 5f772911614a2d913ad207a1
+licenseCertificationClassification: PERMIT/LICENSE (LEAD BASED)
 ---

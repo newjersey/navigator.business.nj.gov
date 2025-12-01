@@ -1,5 +1,4 @@
 import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
-import { getMergedConfig } from "@/contexts/configContext";
 import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import analytics from "@/lib/utils/analytics";
 import * as helpers from "@/lib/utils/helpers";
@@ -11,6 +10,7 @@ import {
 } from "@/test/factories";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { OperatingPhaseId, OperatingPhases, generateUser } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";

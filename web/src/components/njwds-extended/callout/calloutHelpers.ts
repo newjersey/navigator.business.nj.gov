@@ -14,7 +14,6 @@ export interface LargeCalloutProps extends IconProps {
 
 export interface MiniCalloutProps {
   calloutType: CalloutTypes;
-  headerText: string;
 }
 
 export const CALLOUT_STYLES: Record<CalloutTypes, CalloutStyling> = {

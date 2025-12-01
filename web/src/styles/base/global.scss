@@ -131,3 +131,8 @@ ol {
   outline: 0.25rem solid variables.$accent-cool-darker !important;
   outline-offset: 0 !important;
 }
+
+.disable-focus-outline,
+.disable-focus-outline:focus {
+  outline: unset !important;
+}

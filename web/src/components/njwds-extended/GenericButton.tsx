@@ -74,10 +74,13 @@ export const GenericButton = forwardRef(function GenericButton(
     })
     .join(" ");
 
+  const isLoading = Boolean(props.isLoading);
   return (
     <button
+      disabled={isLoading}
+      aria-disabled={isLoading}
       className={className}
-      onClick={props.onClick}
+      onClick={isLoading ? undefined : props.onClick}
       ref={ref}
       {...(props.isSubmitButton ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestId ? { "data-testid": props.dataTestId } : {})}

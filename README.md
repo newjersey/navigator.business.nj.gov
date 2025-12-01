@@ -16,8 +16,7 @@ Everything is written in **TypeScript** and runs on **Node.js**.
 The frontend is **React** via **Next.js** and deployed in **Docker containers** on an **AWS Elastic
 Container Service** cluster.
 
-The backend is an **Express** app deployed as an **AWS Lambda** function using **Serverless
-Framework**. It connects to an **AWS DynamoDB** instance that is also configured through
+The backend is an **Express** app deployed as an **AWS Lambda** function using **AWS Cloud Development Kit**. It connects to an **AWS DynamoDB** instance that is also configured through
 **Terraform**.
 
 The app uses **AWS Cognito** (through **AWS Amplify**) to handle authentication for registered
@@ -31,9 +30,8 @@ CI/CD.
 ## Development
 
 You will need Node.js (with Yarn installed via `npm` or `corepack`) installed for primary
-development. Additionally, for running the server in local development mode, you will need a Java
-runtime (for `serverless-dynamodb`) and Python (for the AWS CLI and some of our scripts) installed
-(details below).
+development. Additionally, for running the server in local development mode, you will need
+Python (for the AWS CLI and some of our scripts) installed (details below).
 
 We recommend using WSL2 if developing on Windows.
 
@@ -44,8 +42,13 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
 - [Node.js 22 "Jod" LTS](https://nodejs.org/en/download/) (We recommend using
   [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If installing via
   package manager, we suggest installing `corepack` if available separately.)
+- [Docker](https://www.docker.com/) — required for running containers locally
+  - **macOS:** We recommend using [Colima](https://github.com/abiosoft/colima) as your Docker runtime
+    - **Recommended Colima Configuration:** aarch64, cpu: 8, memory: 16, disk: 256, runtime: docker
+    - You can manually configure Colima with `colima start --edit` or the script `install.sh` will configure automatically.
+  - **Windows (WSL2):** Use Docker Desktop with WSL2 integration enabled
+  - **Linux:** Use the native Docker Engine installation
 - [AWS CLI](https://aws.amazon.com/cli/)
-- [JRE/JDK 17.x or newer](https://jdk.java.net/)
 - [Python 3.13](https://www.python.org/downloads/)
 - [yarn](https://yarnpkg.com/)
 - [wget](https://www.gnu.org/software/wget/)
@@ -63,9 +66,8 @@ You will then setup your AWS credentials:
 aws configure
 ```
 
-Clone the code and navigate to the root of this repository. There is an install script that will
-install all `yarn` packages for both the frontend and backend. It will also set up serverless's
-local DynamoDB.
+Clone the code and navigate to the root of this repository. There is an installation script that will
+install all required development tools, yarn packages, and execute a yarn build.
 
 ```shell
 ./scripts/install.sh
@@ -78,12 +80,13 @@ Before you can run locally, you will need to:
 - create a `./web/.env` that includes all the values laid out in the `./web/.env-template` file.
 - create a `./api/.env` that includes all the values laid out in the `./api/.env-template` file.
 - create a `.venv` virtual environment and install requirements if working on Python
+  - _Note: The application does not need a venv. This step is only required to run Python helper scripts._
   ```shell
   python3 -m venv .venv
   source .venv/bin/activate
   pip install -r requirements.txt
   ```
-- do an initial build
+- do an initial build (skip if you ran `install.sh`)
   ```shell
   yarn build
   ```
@@ -101,10 +104,16 @@ yarn test <path to test file> -t "<part of test name>" --watch
 ```
 
 We use Cypress for end-to-end (e2e) testing. You can run these tests locally as follows. Since some
-Cypress tests only run in the CI environment, they require running a local instance of the
-application to test against.
+Cypress tests only run in the CI environment, they require **running a local instance of the
+application** to test against.
 
 ```shell
+# Terminal window 1
+yarn start:dev
+```
+
+```shell
+# Terminal window 2
 ./scripts/local-feature-tests.sh
 ```
 
@@ -132,17 +141,33 @@ yarn test:python
 
 ### Running locally
 
-Start the services:
+Before starting the app, make sure your Docker environment is running. This is required for DynamoDB Local.
+
+_Note:_ If you ran the `install.sh` script, you should have Colima installed and running on your machine already. The script also sets Colima as a service for Homebrew to start on machine login.
+
+#### First-Time Setup
+
+You will need to have all dependencies installed. If you haven't done so, you can install all required technologies by running `./scripts/install.sh` from the root directory.
+
+1. Build the application
+
+```shell
+yarn build # This happens in the install.sh script as well.
+```
+
+2. Launch all the services
 
 ```shell
 yarn start:dev
 ```
 
-#### Troubleshooting
+3. Open the application in your browser. The frontend is available at [localhost:3000](http://localhost:3000)
 
-If you get an error from serverless that looks like `Inaccessible host: localhost at port 8000`,
-this is likely a permissions error. To solve, grant the `./api/.dynamodb` folder write permissions
-on your machine.
+4. Terminate the application with `Ctrl+C`. A cleanup script will tear down the Docker processes. If you need to stop the Docker containers manually, run:
+
+```shell
+yarn services:down
+```
 
 ### Deploying
 
@@ -227,17 +252,12 @@ make use of the `useUserData` wrapper around this hook.
 
 ## Backend deep-dive
 
-The backend code lives in `./api`. It uses [Serverless Framework](https://www.serverless.com/) for
+The backend code lives in `./api`. It uses [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html) for
 handling the integration with AWS Lambdas.
 
-We use Serverless Framework to deploy the backend app. If you do this locally, your local
-`serverless` CLI needs to be configured with AWS credentials.
-
-Locally, it uses `serverless-offline` and `serverless-dynamodb` to run and simulate the AWS
-environment. Everything AWS and serverless is configured in `./api/serverless.ts`.
-
-The backend app itself is defined in `src/functions/migrate.ts` and is mostly a regular Express app,
-except it wraps its export in `serverless` to become a handler. Then, `src/functions/index.ts`
+We use CDK to deploy the backend app. The backend app itself is defined in `api/src/functions/express/app.ts` and is mostly a regular Express app,
+except it wraps its export in `serverless-http` to become a handler. Locally, the Express app runs normally.
+API gateway routing is configured using AWS CDK in the `api/cdk/lib/apiStack.ts` file, which
 defines the config structure that proxies all routes through to be handled by the Express routing
 system.
 
@@ -289,7 +309,6 @@ following actions:
 3. **Creates a migration function** in the file with type signature
    `(v{X-1}UserData) => v{X}UserData`, which defines the way that the previous version of the object
    should be mapped to the new structure.
-
    - **Note:** `generate-new-migration.sh` currently only copies the previous migration function.
      _You must write your own updated migration function_. You should also test it to verify
      transformations are executed properly.
@@ -306,8 +325,9 @@ following actions:
 | service            | local dev & CI feature tests | local feature tests | unit tests |
 | ------------------ | ---------------------------- | ------------------- | ---------- |
 | Next.js frontend   | 3000                         | 3001                |            |
-| Serverless backend | 5002                         | 5001                |            |
+| CDK backend        | 5002                         | 5001                |            |
 | DynamoDB           | 8000                         | 8001                |            |
+| DynamoDB Admin GUI | 8001                         | 8001                |            |
 | Lambda port        | 5050                         | 5051                |            |
 | Dynalite local     |                              |                     | 8002       |
 

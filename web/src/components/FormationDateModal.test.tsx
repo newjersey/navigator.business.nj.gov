@@ -1,5 +1,4 @@
 import { FormationDateModal } from "@/components/FormationDateModal";
-import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
@@ -19,6 +18,7 @@ import {
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

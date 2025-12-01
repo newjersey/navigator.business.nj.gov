@@ -11,7 +11,7 @@ describe("Heading component", () => {
 
   it("should render an h2 with h3-styling when so desired", async () => {
     render(
-      <Heading level={2} styleVariant="h3">
+      <Heading level={2} deprecatedStyleVariant="h3">
         {sampleHeadingText}
       </Heading>,
     );
@@ -22,7 +22,7 @@ describe("Heading component", () => {
 
   it("should render an h3 with no styling when so desired", async () => {
     render(
-      <Heading level={3} styleVariant="rawElement">
+      <Heading level={3} deprecatedStyleVariant="rawElement">
         {sampleHeadingText}
       </Heading>,
     );

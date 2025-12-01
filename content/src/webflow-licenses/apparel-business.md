@@ -1,14 +1,14 @@
 ---
+id: apparel-business
 displayname: apparel-business
-id: "apparel-business"
-webflowId: "5f77294d90d9accc271309db"
-urlSlug: "apparel-business"
-webflowName: "Apparel Business"
-callToActionLink: "http://nj.gov/labor/wc/wc_index.html"
-callToActionText: ""
+urlSlug: apparel-business
+webflowName: Apparel Business
 agencyId: njdol
 agencyAdditionalContext: ""
-divisionPhone: "(609) 984-3008"
-webflowIndustry: "Apparel Manufacturer"
-licenseCertificationClassification: "CERTIFICATE"
+callToActionText: Register Your Apparel Business
+callToActionLink: http://nj.gov/labor/wc/wc_index.html
+webflowIndustry: Apparel Manufacturer
+divisionPhone: (609) 984-3008
+webflowId: 5f77294d90d9accc271309db
+licenseCertificationClassification: CERTIFICATE
 ---

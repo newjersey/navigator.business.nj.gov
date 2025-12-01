@@ -1,11 +1,12 @@
 import { AuthContext } from "@/contexts/authContext";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { Roadmap, UserDataError } from "@/lib/types/types";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
@@ -70,6 +71,25 @@ export const withNeedsAccountContext = (
     >
       {subject}
     </NeedsAccountContext.Provider>
+  );
+};
+
+export const withRemoveBusinessContext = (
+  subject: ReactElement,
+  context?: {
+    showRemoveBusinessModal: boolean;
+    setShowRemoveBusinessModal: (value: boolean) => void;
+  },
+): ReactElement => {
+  return (
+    <RemoveBusinessContext.Provider
+      value={{
+        showRemoveBusinessModal: context?.showRemoveBusinessModal ?? false,
+        setShowRemoveBusinessModal: context?.setShowRemoveBusinessModal || jest.fn(),
+      }}
+    >
+      {subject}
+    </RemoveBusinessContext.Provider>
   );
 };
 

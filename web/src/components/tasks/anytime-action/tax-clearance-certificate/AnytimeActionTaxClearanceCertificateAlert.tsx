@@ -1,10 +1,12 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { DevOnlyUnlinkTaxIdButton } from "@/components/tasks/anytime-action/tax-clearance-certificate/DevOnlyUnlinkTaxIdButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {
@@ -66,6 +68,9 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
       return Config.taxClearanceCertificateStep3.errorTextValidation;
     }
 
+    if (errorType === "BUSINESS_STATUS_VERIFICATION_ERROR") {
+      return Config.taxClearanceCertificateStep3.errorTextStatusVerification;
+    }
     if (
       errorType === "MISSING_FIELD" ||
       errorType === "TAX_ID_MISSING_FIELD" ||
@@ -92,7 +97,7 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
               <Content>{Config.taxClearanceCertificateShared.pluralErrorText}</Content>
             )}
           </div>
-          <ul>
+          <ul className="margin-bottom-neg-05">
             {fieldErrors.map((id) => (
               <li key={`${id}`} id={`label-${id}`}>
                 <a
@@ -113,6 +118,20 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
           <Content>{getTaxClearanceErrorMessage(props.responseErrorType)}</Content>
         </div>
       )}
+      <p>
+        {Config.taxClearanceCertificateShared.liveChatLabelText}{" "}
+        <UnStyledButton
+          className="margin-top-1"
+          isIntercomEnabled
+          isUnderline
+          onClick={
+            analytics.event.tax_clearance_anytime_action_help_button.click
+              .open_live_chat_from_error_alert
+          }
+        >
+          {Config.taxClearanceCertificateShared.liveChatButtonText}
+        </UnStyledButton>
+      </p>
       {props.responseErrorType === "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT" && (
         <DevOnlyUnlinkTaxIdButton setResponseErrorType={props.setResponseErrorType} />
       )}

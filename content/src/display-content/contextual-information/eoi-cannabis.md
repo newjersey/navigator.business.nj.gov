@@ -1,7 +1,7 @@
 ---
+header: Entity of Interest (EOI) for a Cannabis Business
 id: eoi-cannabis
 displayname: eoi-cannabis
-header: Entity of Interest
 ---
 
 An Entity of Interest is any entity involved in the financing, operations, or management of an applicant or license-holder. This can include owners, management services contractors, financial sources, and may include Vendor-Contractors, but does not include passive investors.

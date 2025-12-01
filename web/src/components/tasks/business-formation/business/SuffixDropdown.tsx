@@ -82,10 +82,16 @@ export const SuffixDropdown = (): ReactElement => {
           autoComplete="no"
           labelId="business-suffix-label"
           id="business-suffix"
-          SelectDisplayProps={{ "data-testid": "business-suffix-main" } as MySelectDisplayProps}
+          SelectDisplayProps={
+            {
+              "data-testid": "business-suffix-main",
+              "aria-required": "true",
+            } as MySelectDisplayProps
+          }
           displayEmpty
           value={state.formationFormData.businessSuffix || ""}
           onChange={handleChange}
+          required
           onBlur={(): void => setFieldsInteracted([FIELD])}
           inputProps={{ "data-testid": "business-suffix" }}
           renderValue={(selected): ReactNode => {

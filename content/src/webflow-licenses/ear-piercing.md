@@ -1,12 +1,13 @@
 ---
+id: ear-piercing
 displayname: ear-piercing
-id: "ear-piercing"
-webflowId: "640b84672c7bed5b165ac404"
-urlSlug: "ear-piercing"
-webflowName: "Ear Piercing"
-callToActionLink: ""
+urlSlug: ear-piercing
+webflowName: Ear Piercing
 agencyId: municipal-clerk
+callToActionText: Learn About NJ Body Art Regulations
+callToActionLink: https://www.nj.gov/health/ceohs/phfpp/body_art/
+webflowIndustry: Ear
+licenseCertificationClassification: CONTACT
 divisionPhone: ""
-webflowIndustry: "Ear"
-licenseCertificationClassification: "CONTACT"
+webflowId: 640b84672c7bed5b165ac404
 ---

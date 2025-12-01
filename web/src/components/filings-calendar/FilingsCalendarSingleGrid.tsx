@@ -9,11 +9,6 @@ import {
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { getXrayRenewalEvent } from "@/lib/domain-logic/getXrayRenewalEvent";
 import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
-import {
   Business,
   defaultDateFormat,
   getCurrentDate,
@@ -23,6 +18,11 @@ import {
   TaxFilingCalendarEvent,
   XrayRegistrationCalendarEvent,
 } from "@businessnjgovnavigator/shared";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
 import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 

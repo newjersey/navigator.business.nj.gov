@@ -8,7 +8,8 @@ export type TaxClearanceCertificateResponseErrorType =
   | "TAX_ID_MISSING_FIELD"
   | "TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE"
   | "SYSTEM_ERROR"
-  | "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT";
+  | "TAX_ID_IN_USE_BY_ANOTHER_BUSINESS_ACCOUNT"
+  | "BUSINESS_STATUS_VERIFICATION_ERROR";
 
 type ErrorResponse = {
   error: {
