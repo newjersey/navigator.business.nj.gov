@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { ReactElement } from "react";
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 export const ProfileTabSubText = (props: Props): ReactElement => {
   return (
     <div data-testid="profile-tab-sub-text" className="margin-bottom-4">
-      {props.text}
+      <Content>{props.text}</Content>
     </div>
   );
 };

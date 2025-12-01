@@ -57,8 +57,7 @@
   ],
   "displayname": "real-estate-investor",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "investor, property investor, rental property, apartment, residential ",

@@ -1,14 +1,14 @@
 ---
+id: painting-spray
 displayname: painting-spray
-id: "painting-spray"
-webflowId: "5f7729119a1bb864c0b3b90f"
-urlSlug: "painting-spray"
-webflowName: "Painting, Spray"
-callToActionLink: "http://nj.gov/dep/"
-callToActionText: ""
+urlSlug: painting-spray
+webflowName: Painting, Spray
 agencyId: njdep
-agencyAdditionalContext: "Compliance and Enforcement"
+agencyAdditionalContext: Compliance and Enforcement
+callToActionText: Learn About the Department of Environmental Protection
+callToActionLink: http://nj.gov/dep/
+webflowIndustry: Spray Painting
 divisionPhone: "(888) 656-6225 #21"
-webflowIndustry: "Spray Painting"
-licenseCertificationClassification: "PERMIT/LICENSE (LEAD BASED)"
+webflowId: 5f7729119a1bb864c0b3b90f
+licenseCertificationClassification: PERMIT/LICENSE (LEAD BASED)
 ---

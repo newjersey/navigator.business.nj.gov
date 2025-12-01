@@ -1,6 +1,6 @@
 import { XraySummary } from "@/components/xray/XraySummary";
-import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import type { XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
 import { fireEvent, render, screen } from "@testing-library/react";

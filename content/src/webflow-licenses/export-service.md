@@ -1,13 +1,13 @@
 ---
+id: export-service
 displayname: export-service
-id: "export-service"
-webflowId: "5f7728dd5ef8c17113019ebb"
-urlSlug: "export-service"
-webflowName: "Export Service"
-callToActionLink: "http://export.gov/"
-callToActionText: ""
-agencyAdditionalContext: "International Trade Administration"
-divisionPhone: "(202) 326-2221"
-webflowIndustry: "Export Service"
-licenseCertificationClassification: "REGULATIONS"
+urlSlug: export-service
+webflowName: Export Service
+agencyAdditionalContext: International Trade Administration
+callToActionText: Learn About Exports
+callToActionLink: https://www.nj.gov/state/bac/business-support/exports/
+webflowIndustry: Export Service
+licenseCertificationClassification: REGULATIONS
+divisionPhone: (202) 326-2221
+webflowId: 5f7728dd5ef8c17113019ebb
 ---

@@ -31,7 +31,7 @@ webflowId: 66aceedf6ba3dffa8ac9d4f0
 - Business name
 - `EIN|ein`
 - Social Security number (SSN)
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Copy of the Trade Name Certificate, Certificate of Incorporation, or `Certificate of Formation|certificate-formation` (depending on the structure of your business)
 - A certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
 - Name, home address, business address, and business telephone number of each owner, officer, director, principal, and stakeholders with an ownership interest of 10% or more in the business and the percentage of ownership held. Include the same information for each member if the business structure is a partnership

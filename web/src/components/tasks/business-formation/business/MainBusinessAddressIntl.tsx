@@ -1,7 +1,7 @@
 import { CountryDropdown } from "@/components/CountryDropdown";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -16,7 +16,7 @@ export const MainBusinessAddressIntl = (): ReactElement => {
 
   return (
     <>
-      <FormationField fieldName="addressLine1">
+      <ScrollableFormFieldWrapper fieldName="addressLine1">
         <BusinessFormationTextField
           label={Config.formation.fields.addressLine1.label}
           fieldName="addressLine1"
@@ -25,8 +25,8 @@ export const MainBusinessAddressIntl = (): ReactElement => {
           errorBarType="ALWAYS"
           validationText={getFieldErrorLabel("addressLine1")}
         />
-      </FormationField>
-      <FormationField fieldName="addressLine2">
+      </ScrollableFormFieldWrapper>
+      <ScrollableFormFieldWrapper fieldName="addressLine2">
         <BusinessFormationTextField
           label={Config.formation.fields.addressLine2.label}
           secondaryLabel={Config.formation.general.optionalLabel}
@@ -35,7 +35,7 @@ export const MainBusinessAddressIntl = (): ReactElement => {
           validationText={getFieldErrorLabel("addressLine2")}
           className="margin-bottom-2"
         />
-      </FormationField>
+      </ScrollableFormFieldWrapper>
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["addressCity", "addressProvince"])}
         type="DESKTOP-ONLY"
@@ -43,7 +43,7 @@ export const MainBusinessAddressIntl = (): ReactElement => {
       >
         <div className="grid-row grid-gap-1">
           <div className="tablet:grid-col-6 margin-bottom-2 tablet:margin-bottom-0">
-            <FormationField fieldName="addressCity">
+            <ScrollableFormFieldWrapper fieldName="addressCity">
               <BusinessFormationTextField
                 label={Config.formation.fields.addressCity.label}
                 fieldName="addressCity"
@@ -51,10 +51,10 @@ export const MainBusinessAddressIntl = (): ReactElement => {
                 errorBarType="MOBILE-ONLY"
                 validationText={getFieldErrorLabel("addressCity")}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
           <div className="tablet:grid-col-6">
-            <FormationField fieldName="addressProvince">
+            <ScrollableFormFieldWrapper fieldName="addressProvince">
               <BusinessFormationTextField
                 errorBarType="MOBILE-ONLY"
                 label={Config.formation.fields.addressProvince.label}
@@ -62,7 +62,7 @@ export const MainBusinessAddressIntl = (): ReactElement => {
                 required={true}
                 validationText={getFieldErrorLabel("addressProvince")}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
         </div>
       </WithErrorBar>
@@ -70,7 +70,7 @@ export const MainBusinessAddressIntl = (): ReactElement => {
         <strong>
           <ModifiedContent>{Config.formation.fields.addressCountry.label}</ModifiedContent>
         </strong>
-        <FormationField fieldName="addressCountry">
+        <ScrollableFormFieldWrapper fieldName="addressCountry">
           <CountryDropdown
             useFullName
             excludeUS
@@ -90,12 +90,12 @@ export const MainBusinessAddressIntl = (): ReactElement => {
               setFieldsInteracted(["addressCountry"]);
             }}
           />
-        </FormationField>
+        </ScrollableFormFieldWrapper>
       </WithErrorBar>
 
       <div className="grid-row grid-gap-1 margin-top-2">
         <div className="tablet:grid-col-6">
-          <FormationField fieldName="addressZipCode">
+          <ScrollableFormFieldWrapper fieldName="addressZipCode">
             <BusinessFormationTextField
               label={Config.formation.fields.addressZipCode.foreign.label}
               valueFilter={formatIntlPostalCode}
@@ -104,7 +104,7 @@ export const MainBusinessAddressIntl = (): ReactElement => {
               fieldName="addressZipCode"
               validationText={Config.formation.fields.addressZipCode.foreign.errorIntl}
             />
-          </FormationField>
+          </ScrollableFormFieldWrapper>
         </div>
       </div>
     </>

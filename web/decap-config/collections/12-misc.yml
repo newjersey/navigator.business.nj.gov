@@ -424,6 +424,39 @@ collections:
                   name: lockedStatusTooltipText,
                   widget: text,
                 }
+  - label: Remove Business Modal
+    name: removeBusinessModal
+    delete: false
+    create: false
+    files:
+      - label: Remove Business Modal
+        name: "removeBusinessModal"
+        file: "content/src/fieldConfig/remove-business-modal.json"
+        editor:
+          preview: true
+        fields:
+          - label: Remove Business Modal
+            name: removeBusinessModal
+            collapsed: false
+            widget: object
+            summary: "{{removeBusinessModal}}"
+            fields:
+              - { label: Header, name: header, widget: string }
+              - {
+                  label: Filing Official Business Closure Text,
+                  name: filingOfficialBusinessClosureText,
+                  widget: markdown,
+                }
+              - { label: Business Removal Text Text, name: businessRemovalText, widget: markdown }
+              - { label: Save button text, name: irreversibleOperationText, widget: string }
+              - { label: Save button text, name: removeBusinessButtonText, widget: string }
+              - { label: Cancel button text, name: cancelButtonText, widget: string }
+              - { label: Agreement checkbox text, name: agreementCheckboxText, widget: string }
+              - {
+                  label: Agreement checkbox error text,
+                  name: agreementCheckboxErrorText,
+                  widget: string,
+                }
   - label: Tax Task - Tax Registration Modal
     name: registeredForTaxesModal
     delete: false
@@ -618,6 +651,12 @@ collections:
               - { label: Name Label, name: nameFieldLabel, widget: string }
               - { label: Email Label, name: emailFieldLabel, widget: string }
               - { label: Confirm Email Label, name: confirmEmailFieldLabel, widget: string }
+              - { label: Phone Number Label, name: phoneNumberFieldLabel, widget: string }
+              - {
+                  label: Phone Number Label Optional,
+                  name: phoneNumberFieldLabelOptional,
+                  widget: string,
+                }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Close Button Text, name: closeButtonText, widget: string }
               - { label: Continue without Saving, name: continueWithoutSaving, widget: string }
@@ -642,9 +681,15 @@ collections:
                   name: errorTextEmailsNotMatching,
                   widget: string,
                 }
+              - { label: Error - Phone Number, name: errorTextPhoneNumber, widget: string }
               - { label: Error - Required Fields, name: errorTextRequiredFields, widget: string }
               - { label: Error - Duplicate Sign-up, name: errorTextDuplicateSignUp, widget: string }
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
+              - {
+                  label: Updates and Reminders Label,
+                  name: updatesAndRemindersCheckboxLabel,
+                  widget: string,
+                }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
               - {
@@ -707,17 +752,6 @@ collections:
               - {
                   label: Starter Kit Header - Other Industries,
                   name: starterKitText,
-                  widget: string,
-                }
-              - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
-              - {
-                  label: Guest Mode - To Profile Button Text,
-                  name: guestModeToProfileButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Generic - To Profile Button Text,
-                  name: genericToProfileButtonText,
                   widget: string,
                 }
   - label: Task Defaults
@@ -2677,6 +2711,27 @@ collections:
                               widget: "string",
                             }
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Public Works
+                    name: publicWorksContractor
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - {
+                              label: "Radio Button Yes / True Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No / False Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - { label: "Description", name: "description", widget: "markdown" }
                   - label: Employment and Personnel Service Type
                     name: employmentPersonnelServiceType
                     collapsed: true
@@ -2827,9 +2882,9 @@ collections:
                       widget: string,
                     }
                   - {
-                      label: Note for Businesses Formed Outside Navigator,
-                      name: noteForBusinessesFormedOutsideNavigator,
-                      widget: string,
+                      label: Your Profile Helps With Recommendations Callout,
+                      name: yourProfileHelpsWithRecommendationsCallout,
+                      widget: markdown,
                     }
                   - {
                       label: Annual Report Deadline Header Text,
@@ -2890,12 +2945,141 @@ collections:
                       name: lockedFieldTooltipText,
                       widget: string,
                     }
+                  - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
+                  - { label: Contact Tab Title, name: profileTabContactTitle, widget: string }
                   - {
-                      label: Profile Completion Alert,
-                      name: profileCompletionAlert,
+                      label: Contact And Notifications Heading,
+                      name: contactInformationHeading,
+                      widget: string,
+                    }
+                  - {
+                      label: Contact Information Sub Text,
+                      name: contactInformationSubText,
                       widget: markdown,
                     }
-                  - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
+                  - {
+                      label: Contact And Notifications Sub Text,
+                      name: contactAndNotificationsSubText,
+                      widget: string,
+                    }
+                  - {
+                      label: Types Of Notifications Heading,
+                      name: typesOfNotificationsHeading,
+                      widget: string,
+                    }
+                  - {
+                      label: Types Of Notifications Sub Text,
+                      name: typesOfNotificationsSubText,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Incomplete Tasks Label,
+                      name: notificationIncompleteTasksLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Incomplete Tasks Description,
+                      name: notificationIncompleteTasksDescription,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Newsletter Label,
+                      name: notificationNewsletterLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Newsletter Description,
+                      name: notificationNewsletterDescription,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Product News Label,
+                      name: notificationProductNewsLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Notification Product News Description,
+                      name: notificationProductNewsDescription,
+                      widget: string,
+                    }
+                  - {
+                      label: Security Matters Heading,
+                      name: securityMattersHeading,
+                      widget: string,
+                    }
+                  - { label: Security Matters Text, name: securityMattersText, widget: markdown }
+      - label: "Employer Rates"
+        name: "employer-rates"
+        file: "content/src/fieldConfig/employer-rates.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Employer Rates"
+            name: "employerRates"
+            widget: object
+            fields:
+              - { label: Header Text, name: sectionHeaderText, widget: string }
+              - { label: Below Header Text, name: belowSectionHeaderText, widget: markdown }
+              - {
+                  label: Employer Access Header Text,
+                  name: employerAccessHeaderText,
+                  widget: string,
+                }
+              - { label: DOL EIN Alert Label Text, name: dolEinAlertLabelText, widget: string }
+              - { label: Server Error Alert Text, name: serverErrorText, widget: markdown }
+              - {
+                  label: Unable To Perform User Validation Alert Text,
+                  name: noAccountErrorText,
+                  widget: markdown,
+                }
+              - { label: Employer Access Question Text, name: employerAccessText, widget: markdown }
+              - {
+                  label: Employer Access Question Is True Text,
+                  name: employerAccessTrueText,
+                  widget: string,
+                }
+              - {
+                  label: Employer Access Question Is False Text,
+                  name: employerAccessFalseText,
+                  widget: string,
+                }
+              - { label: DOL EIN Label Text, name: dolEinLabelText, widget: markdown }
+              - { label: DOL EIN Error Text, name: dolEinErrorText, widget: string }
+              - {
+                  label: Quarter Dropdown Label Text,
+                  name: quarterDropdownLabelText,
+                  widget: markdown,
+                }
+              - {
+                  label: Quarter Dropdown Tooltip Text,
+                  name: quarterDropdownTooltipText,
+                  widget: string,
+                }
+              - { label: Quarter Dropdown - Q1 Text, name: quarterOneLabel, widget: string }
+              - { label: Quarter Dropdown - Q2 Text, name: quarterTwoLabel, widget: string }
+              - { label: Quarter Dropdown - Q3 Text, name: quarterThreeLabel, widget: string }
+              - { label: Quarter Dropdown - Q4 Text, name: quarterFourLabel, widget: string }
+              - {
+                  label: Employer Access CTA Button Text When True Selected,
+                  name: employerAccessYesButtonText,
+                  widget: string,
+                }
+
+              - {
+                  label: Employer Access No Body Text When False Selected,
+                  name: employerAccessNoBodyText,
+                  widget: markdown,
+                }
+              - {
+                  label: Employer Access CTA Button Text When False Selected,
+                  name: employerAccessNoButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Employer Access CTA Button Link When False Selected,
+                  name: employerAccessNoButtonLink,
+                  widget: string,
+                }
 
   - label: "Fundings Onboarding Page"
     name: "business-fundings-onboarding-page"
@@ -3119,6 +3303,8 @@ collections:
                   widget: string,
                 }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
+              - { label: Back To Profile Link Text, name: backToProfileLinkText, widget: string }
+              - { label: Remove Business Text, name: removeBusinessLinkText, widget: string }
               - { label: NavBar Guest Business text, name: navBarGuestBusinessText, widget: string }
               - { label: NavBar Guest Account text, name: navBarGuestAccountText, widget: string }
               - {

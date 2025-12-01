@@ -46,12 +46,13 @@
   "name": "Remediation and Waste Services",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "asbestos-abatement-question"
+    "asbestos-abatement-question",
+    "waste-transporter-license-a-901",
+    "flashing-light-permit"
   ],
   "displayname": "remediation-waste",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
     "isCannabisLicenseTypeApplicable": false,
     "isCpaRequiredApplicable": false,
     "isCarServiceApplicable": false,
@@ -66,8 +67,9 @@
     "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "abatement, asbestos, asbestos containing material, disposal, waste hauling, waste transport, hazardous waste, environmental remediation, waste removal, mold, lead, soil, oil spill cleanup, toxic, biohazard, crime scene cleanup, mine reclamation, waste treatment, revegetation, solid waste, waste management, asbestos removal contractor, lead paint removal contractor, site remediation, landfill, materials recovery, septic tank, solid waste combustor, solid waste incinerator, medical waste",
   "id": "remediation-waste",
-  "description": "Offers abatement services to clean up or remove harmful materials. Handles waste by collecting, hauling, treating, or getting rid of it safely"
+  "description": "Offers abatement services to clean up or remove harmful materials. Handles waste by collecting, hauling, treating, or getting rid of it safely",
+  "webflowId": "68a7501fbf7e85d7b58fcc9f"
 }

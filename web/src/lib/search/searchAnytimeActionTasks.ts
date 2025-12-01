@@ -1,6 +1,6 @@
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { AnytimeActionTask } from "@/lib/types/types";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
 
 export const searchAnytimeActionTasks = (
   anytimeActionTasks: AnytimeActionTask[],

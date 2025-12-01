@@ -1,9 +1,9 @@
 import { Xray } from "@/components/xray/Xray";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { Task, XrayRenewalCalendarEventType } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { generateTask, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   generateBusiness,
@@ -12,6 +12,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
+import { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
 import type { Business } from "@businessnjgovnavigator/shared/userData";
 import type { XrayData } from "@businessnjgovnavigator/shared/xray";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -20,6 +21,51 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   checkXrayRegistrationStatus: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
+
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+jest.mock("@/lib/utils/helpers", () => {
+  return {
+    ...jest.requireActual("@/lib/utils/helpers"),
+    openInNewTab: jest.fn(),
+  };
+});
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      xray_registration_check_status_form: {
+        submit: {
+          status_lookup_initiated: jest.fn(),
+        },
+      },
+      xray_registration_check_status_results: {
+        appears: {
+          active_registration_found: jest.fn(),
+          expired_registration_found: jest.fn(),
+        },
+      },
+      xray_registration_check_status_error: {
+        appears: {
+          record_not_found_error: jest.fn(),
+        },
+      },
+      xray_registration_expired_cta: {
+        click: {
+          xray_renewal_started_cta: jest.fn(),
+        },
+      },
+      xray_registration_expired_status_card: {
+        click: {
+          xray_renewal_started_expired_card: jest.fn(),
+        },
+      },
+    },
+  };
+}
 
 const Config = getMergedConfig();
 
@@ -71,9 +117,54 @@ describe("<Xray />", () => {
       renderRenewalWithBusinessData();
       expect(screen.getByText(Config.xrayRenewal.tab1Text)).toBeInTheDocument();
     });
+
+    it("fires renewal analytics event when 'Renew My X-Ray Machine Registration' is clicked", async () => {
+      renderRenewalWithBusinessData();
+      expect(screen.getByText(Config.xrayRenewal.callToActionPrimaryText)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.xrayRenewal.callToActionPrimaryText));
+      expect(
+        mockAnalytics.event.xray_registration_expired_cta.click.xray_renewal_started_cta,
+      ).toHaveBeenCalled();
+    });
   });
 
   describe("search", () => {
+    const userDataWithValidResponse = generateUserDataForBusiness(
+      generateBusiness({
+        xrayRegistrationData: {
+          facilityDetails: {
+            businessName: "Valid Business",
+            addressLine1: "123 Main St",
+            addressLine2: "",
+            addressZipCode: "12345",
+          },
+          status: "ACTIVE",
+          expirationDate: getCurrentDate().add(2, "month").toString(),
+          machines: [
+            {
+              registrationNumber: "12345A",
+              roomId: "01",
+              registrationCategory: "DENTIST",
+              name: "CORP",
+              modelNumber: "some-model-number",
+              serialNumber: "some-serial-number",
+              annualFee: 94,
+            },
+          ],
+        },
+      }),
+    );
+
+    const userDataWithErrorResponse = generateUserDataForBusiness(
+      generateBusiness({
+        xrayRegistrationData: {
+          status: undefined,
+          machines: [],
+          expirationDate: undefined,
+        },
+      }),
+    );
+
     it("displays the search page if xray registration data is unavailable", () => {
       renderTaskWithBusinessData();
       goToCheckStatusTab();
@@ -81,33 +172,7 @@ describe("<Xray />", () => {
     });
 
     it("displays the summary screen when the form is submitted sucessfully", async () => {
-      mockApi.checkXrayRegistrationStatus.mockResolvedValue(
-        generateUserDataForBusiness(
-          generateBusiness({
-            xrayRegistrationData: {
-              facilityDetails: {
-                businessName: "Valid Business",
-                addressLine1: "123 Main St",
-                addressLine2: "",
-                addressZipCode: "12345",
-              },
-              status: "ACTIVE",
-              expirationDate: getCurrentDate().add(2, "month").toString(),
-              machines: [
-                {
-                  registrationNumber: "12345A",
-                  roomId: "01",
-                  registrationCategory: "DENTIST",
-                  name: "CORP",
-                  modelNumber: "some-model-number",
-                  serialNumber: "some-serial-number",
-                  annualFee: 94,
-                },
-              ],
-            },
-          }),
-        ),
-      );
+      mockApi.checkXrayRegistrationStatus.mockResolvedValue(userDataWithValidResponse);
       renderTaskWithBusinessData();
       goToCheckStatusTab();
       fillOutSearchTab("Valid Business", "123 Main St", "12345");
@@ -138,17 +203,7 @@ describe("<Xray />", () => {
     });
 
     it("displays NOT_FOUND error when api return empty xrayRegistration data", async () => {
-      mockApi.checkXrayRegistrationStatus.mockResolvedValue(
-        generateUserDataForBusiness(
-          generateBusiness({
-            xrayRegistrationData: {
-              status: undefined,
-              machines: [],
-              expirationDate: undefined,
-            },
-          }),
-        ),
-      );
+      mockApi.checkXrayRegistrationStatus.mockResolvedValue(userDataWithErrorResponse);
       renderTaskWithBusinessData();
       goToCheckStatusTab();
       expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
@@ -169,6 +224,89 @@ describe("<Xray />", () => {
       fireEvent.submit(screen.getByTestId("check-status-submit"));
       await waitFor(() => {
         expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
+      });
+    });
+
+    describe("analytics", () => {
+      it("fires error analytics event when the api returns empty xrayRegistration data", async () => {
+        mockApi.checkXrayRegistrationStatus.mockResolvedValue(userDataWithErrorResponse);
+        renderTaskWithBusinessData();
+        goToCheckStatusTab();
+        expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+        fillOutSearchTab("Invalid Business", "123 Main St", "12345");
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(
+            mockAnalytics.event.xray_registration_check_status_error.appears.record_not_found_error,
+          ).toHaveBeenCalled();
+        });
+      });
+
+      it("fires submit analytics event when submit is clicked", async () => {
+        mockApi.checkXrayRegistrationStatus.mockResolvedValue(userDataWithValidResponse);
+        renderTaskWithBusinessData();
+        goToCheckStatusTab();
+        fillOutSearchTab("Valid Business", "123 Main St", "12345");
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(
+            mockAnalytics.event.xray_registration_check_status_form.submit.status_lookup_initiated,
+          ).toHaveBeenCalled();
+        });
+      });
+
+      it("fires active registration found analytics event when xray registration status is ACTIVE", async () => {
+        mockApi.checkXrayRegistrationStatus.mockResolvedValue(userDataWithValidResponse);
+        renderTaskWithBusinessData();
+        goToCheckStatusTab();
+        fillOutSearchTab("Valid Business", "123 Main St", "12345");
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(
+            mockAnalytics.event.xray_registration_check_status_results.appears
+              .active_registration_found,
+          ).toHaveBeenCalled();
+        });
+      });
+
+      it("fires expired registration found analytics event when xray registration status is EXPIRED", async () => {
+        mockApi.checkXrayRegistrationStatus.mockResolvedValue(
+          generateUserDataForBusiness(
+            generateBusiness({
+              xrayRegistrationData: {
+                facilityDetails: {
+                  businessName: "Valid Business",
+                  addressLine1: "123 Main St",
+                  addressLine2: "",
+                  addressZipCode: "12345",
+                },
+                status: "EXPIRED",
+                expirationDate: getCurrentDate().subtract(2, "month").toString(),
+                machines: [
+                  {
+                    registrationNumber: "12345A",
+                    roomId: "01",
+                    registrationCategory: "DENTIST",
+                    name: "CORP",
+                    modelNumber: "some-model-number",
+                    serialNumber: "some-serial-number",
+                    annualFee: 94,
+                  },
+                ],
+              },
+            }),
+          ),
+        );
+        renderTaskWithBusinessData();
+        goToCheckStatusTab();
+        fillOutSearchTab("Valid Business", "123 Main St", "12345");
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(
+            mockAnalytics.event.xray_registration_check_status_results.appears
+              .expired_registration_found,
+          ).toHaveBeenCalled();
+        });
       });
     });
   });
@@ -225,6 +363,15 @@ describe("<Xray />", () => {
       renderWithXrayData({ status: "INACTIVE" });
       fireEvent.click(screen.getByText(Config.xrayRegistrationTask.editButtonText));
       expect(screen.getByText(Config.xrayRegistrationTask.checkStatusText)).toBeInTheDocument();
+    });
+
+    it("fires renewal analytics event when 'Renew your registration now' is clicked", () => {
+      renderWithXrayData({ status: "EXPIRED" });
+      fireEvent.click(screen.getByText(Config.xrayRegistrationTask.expiredDescriptionCallToAction));
+      expect(
+        mockAnalytics.event.xray_registration_expired_status_card.click
+          .xray_renewal_started_expired_card,
+      ).toHaveBeenCalled();
     });
   });
 

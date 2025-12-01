@@ -12,11 +12,6 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   Business,
@@ -24,6 +19,11 @@ import {
   LookupLegalStructureById,
   LookupOperatingPhaseById,
 } from "@businessnjgovnavigator/shared";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 
@@ -143,7 +143,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       <div className="calendar-container" data-testid="filings-calendar">
         <div className="flex mobile-lg:flex-align-end flex-justify flex-column mobile-lg:flex-row">
           <div className="flex flex-align-end">
-            <Heading level={2} className="margin-bottom-0 text-medium">
+            <Heading level={2} className="margin-bottom-0">
               {Config.dashboardDefaults.calendarHeader}
             </Heading>
             <div

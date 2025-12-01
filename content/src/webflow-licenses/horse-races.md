@@ -1,14 +1,14 @@
 ---
+id: horse-races
 displayname: horse-races
-id: "horse-races"
-webflowId: "5f7729618e9f8777bc6859bf"
-urlSlug: "horse-races"
-webflowName: "Horse Races"
-callToActionLink: "http://nj.gov/oag/racing/licensing_forms.html"
-callToActionText: ""
+urlSlug: horse-races
+webflowName: Horse Races
 agencyId: law-public-safety
-agencyAdditionalContext: "NJ Racing Commission"
-divisionPhone: "(609) 292-0613"
-webflowIndustry: "Horse Races"
-licenseCertificationClassification: "PERMIT"
+agencyAdditionalContext: NJ Racing Commission
+callToActionText: Learn About the NJ Racing Commission
+callToActionLink: https://www.njoag.gov/about/divisions-and-offices/nj-racing-commission-home/
+webflowIndustry: Horse Races
+divisionPhone: (609) 292-0613
+webflowId: 5f7729618e9f8777bc6859bf
+licenseCertificationClassification: PERMIT
 ---

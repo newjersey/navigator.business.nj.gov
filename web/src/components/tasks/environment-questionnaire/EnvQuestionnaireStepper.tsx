@@ -16,6 +16,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop, templateEval } from "@/lib/utils/helpers";
 import {
   MediaArea,
@@ -143,6 +144,30 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     }
   };
 
+  const handleOnStepClick = (newStep: number): void => {
+    const category = EnvPermitConfiguration.find((s) => newStep === s.stepIndex);
+
+    if (!category) return;
+
+    const categoryName = category.name.toLowerCase().split(" ").join("_");
+    analytics.event.gen_guidance_stepper_step_category.click.general_guidance_step(
+      newStep,
+      categoryName,
+    );
+
+    const userNotAuthandDoesntWantToSave =
+      envContext.state.stepIndex === 0 &&
+      isAuthenticated === IsAuthenticated.FALSE &&
+      userWantsToContinueWithoutSaving === false;
+
+    if (userNotAuthandDoesntWantToSave) {
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
+      setShowContinueWithoutSaving(true);
+      setShowNeedsAccountModal(true);
+    }
+    envContext.setStepIndex(newStep);
+  };
+
   const nextButtonText = (): string => {
     if (envContext.state.stepIndex === 0) return Config.envQuestionPage.generic.startingButtonText;
     if (envContext.state.stepIndex === 5) return Config.envQuestionPage.generic.endingButtonText;
@@ -152,26 +177,13 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
 
   return (
     <div className={"bg-accent-cooler-50 padding-2 radius-lg"}>
-      <h2 className={`font-normal ${isMobile ? `margin-bottom-neg-05` : `margin-bottom-neg-2`}`}>
+      <h2 className={`${isMobile ? `margin-bottom-neg-05` : `margin-bottom-neg-2`}`}>
         {Config.envQuestionPage.generic.title}
       </h2>
       <HorizontalStepper
         steps={steps}
         currentStep={envContext.state.stepIndex}
-        onStepClicked={(newStep) => {
-          if (
-            envContext.state.stepIndex === 0 &&
-            isAuthenticated === IsAuthenticated.FALSE &&
-            userWantsToContinueWithoutSaving === false
-          ) {
-            updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
-            setShowContinueWithoutSaving(true);
-            setShowNeedsAccountModal(true);
-            envContext.setStepIndex(newStep);
-            return;
-          }
-          envContext.setStepIndex(newStep);
-        }}
+        onStepClicked={handleOnStepClick}
         inlineDialog
         environmentPermit
       />
@@ -273,11 +285,16 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
             ) {
               updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
               setShowContinueWithoutSaving(true);
+              analytics.event.gen_guidance_stepper_save_modal_displayed.appears.general_guidance_save_modal_displayed();
               setShowNeedsAccountModal(true);
               envContext.setStepIndex(envContext.state.stepIndex + 1);
               return;
             }
             if (envContext.state.stepIndex < 5) {
+              if (userWantsToContinueWithoutSaving === true && envContext.state.stepIndex === 1) {
+                analytics.event.gen_guidance_stepper_continue_without_saving.click.general_guidance_continue_wo_saving();
+              }
+
               envContext.setStepIndex(envContext.state.stepIndex + 1);
             }
             if (envContext.state.stepIndex === 5) {

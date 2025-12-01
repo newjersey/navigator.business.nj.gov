@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect */
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -10,6 +9,7 @@ import {
   randomTradeNameLegalStructure,
 } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -22,7 +22,6 @@ import {
   Business,
   BusinessPersona,
   businessPersonas,
-  emptyProfileData,
   ForeignBusinessTypeId,
   generateBusiness,
   generateMunicipality,
@@ -33,6 +32,7 @@ import {
   ProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   filterRandomIndustry,
   generateFormationData,
@@ -44,20 +44,21 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   chooseTab,
   clickSave,
-  fillText,
   generateBusinessForProfile,
   getForeignNexusProfileFields,
-  phasesWhereGoToProfileDoesNotShow,
-  phasesWhereGoToProfileShows,
   renderPage,
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { DOL_EIN_CHARACTERS } from "@/components/employer-rates/EmployerRatesQuestions";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
+
+const initialFeatureEmployerRatesEnv = process.env.FEATURE_EMPLOYER_RATES;
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -118,9 +119,14 @@ describe("profile - shared", () => {
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
+    useMockIntersectionObserver();
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
+  });
+
+  afterEach(() => {
+    process.env.FEATURE_EMPLOYER_RATES = initialFeatureEmployerRatesEnv;
   });
 
   it("shows loading page if page has not loaded yet", () => {
@@ -427,126 +433,9 @@ describe("profile - shared", () => {
     });
   });
 
-  describe("profile opportunities alert", () => {
-    it.each(phasesWhereGoToProfileShows)("displays alert for %s", (operatingPhase) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase,
-          dateOfFormation: undefined,
-        }),
-      });
-      renderPage({ business });
-
-      expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
-    });
-
-    it.each(phasesWhereGoToProfileDoesNotShow)(
-      "does not display alert for %s",
-      (operatingPhase) => {
-        const business = generateBusinessForProfile({
-          profileData: generateProfileData({
-            operatingPhase,
-            dateOfFormation: undefined,
-          }),
-        });
-        renderPage({ business });
-
-        expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
-      },
-    );
-
-    it("does display date of formation question when legal structure is undefined", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          businessPersona: "OWNING",
-        },
-      });
-      renderPage({ business });
-      expect(
-        within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-      expect(
-        within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-    });
-
-    it("does not display date of formation question when it is a Trade Name legal structure", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          businessPersona: "OWNING",
-          legalStructureId: randomTradeNameLegalStructure(),
-        },
-      });
-      renderPage({ business });
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header),
-      ).not.toBeInTheDocument();
-      expect(screen.queryByTestId("effective-date")).not.toBeInTheDocument();
-    });
-
-    it("does display date of formation question when it is a not a Trade Name legal structure", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          businessPersona: "OWNING",
-          legalStructureId: randomPublicFilingLegalStructure(),
-        },
-      });
-      renderPage({ business });
-      expect(
-        within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-      expect(
-        within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header,
-        ),
-      ).toBeInTheDocument();
-    });
-
-    it("removes question from alert when it gets answered", () => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-          dateOfFormation: undefined,
-          existingEmployees: undefined,
-          legalStructureId: randomPublicFilingLegalStructure(),
-          businessPersona: randomInt() % 2 ? "STARTING" : "OWNING",
-        }),
-      });
-      renderPage({ business });
-
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.dateOfFormation.default.header,
-      );
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header,
-      );
-
-      fillText("Existing employees", "12");
-
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        Config.profileDefaults.fields.dateOfFormation.default.header,
-      );
-      expect(screen.getByTestId("opp-alert")).not.toHaveTextContent(
-        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header,
-      );
-    });
-  });
-
-  describe("Special Note Alert for Businesses Formed outside the Navigator", () => {
+  describe("Callout that the profile helps with recommendations", () => {
     it.each(businessPersonas)(
-      "shows the Note Alert for all personas when unauthenticated for %s",
+      "shows the callout for all personas when unauthenticated for %s",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -558,13 +447,18 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
-        expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
-        ).toBeInTheDocument();
+
+        const calloutText =
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+          )?.[1];
+
+        expect(calloutText).toBeDefined();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
 
-    it("shows the Note Alert for OWNING businesses and authenticated", () => {
+    it("shows the callout for OWNING businesses and authenticated", () => {
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
           completedFilingPayment: true,
@@ -574,13 +468,18 @@ describe("profile - shared", () => {
         }),
       });
       renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-      expect(
-        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
-      ).toBeInTheDocument();
+
+      const calloutText =
+        Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+          /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+        )?.[1];
+
+      expect(calloutText).toBeDefined();
+      expect(screen.getByText(calloutText!)).toBeInTheDocument();
     });
 
     it.each(nonOwningPersonas)(
-      "does NOT show Note Alert for %s business that paid via the Navigator and are authenticated",
+      "shows the callout for %s business that paid via the Navigator and are authenticated",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -592,16 +491,19 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        expect(
-          screen.queryByText(
-            Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator,
-          ),
-        ).not.toBeInTheDocument();
+
+        const calloutText =
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+          )?.[1];
+
+        expect(calloutText).toBeDefined();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
 
     it.each(nonOwningPersonas)(
-      "does NOT show Note Alert for %s business that have not paid and not formed and are authenticated",
+      "shows the callout for %s business that have not paid and not formed and are authenticated",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -613,16 +515,19 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        expect(
-          screen.queryByText(
-            Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator,
-          ),
-        ).not.toBeInTheDocument();
+
+        const calloutText =
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+          )?.[1];
+
+        expect(calloutText).toBeDefined();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
 
     it.each(businessPersonas)(
-      "shows Note alert for %s business that set DateOfFormation but did NOT pay",
+      "shows the callout for %s business that set DateOfFormation but did NOT pay",
       (persona) => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
@@ -634,9 +539,14 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
-        expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator),
-        ).toBeInTheDocument();
+
+        const calloutText =
+          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+          )?.[1];
+
+        expect(calloutText).toBeDefined();
+        expect(screen.getByText(calloutText!)).toBeInTheDocument();
       },
     );
   });
@@ -823,6 +733,60 @@ describe("profile - shared", () => {
           name: Config.profileDefaults.default.profileTabPersonalizeYourTasksTitle,
         }),
       ).toBeInTheDocument();
+    });
+  });
+
+  describe("employer rates section", () => {
+    it("saves employerAccessRegistration when save button is clicked", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: undefined,
+        }),
+      });
+
+      renderPage({ business });
+      chooseTab("numbers");
+      const employerRatesSection = screen.getByTestId("employerAccess");
+      await userEvent.click(
+        within(employerRatesSection).getByRole("radio", {
+          name: Config.employerRates.employerAccessTrueText,
+        }),
+      );
+
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.employerAccessRegistration).toEqual(true);
+      });
+    });
+
+    it("updates DOL EIN, presses save, and persists to UserData", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: true,
+          deptOfLaborEin: "",
+        }),
+      });
+
+      renderPage({ business });
+      chooseTab("numbers");
+
+      const employerRatesSection = screen.getByTestId("employerAccess");
+      const textbox = within(employerRatesSection).getByRole("textbox");
+      const newEin = "1".repeat(DOL_EIN_CHARACTERS);
+      await userEvent.type(textbox, newEin);
+
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.deptOfLaborEin).toEqual(newEin);
+      });
     });
   });
 });

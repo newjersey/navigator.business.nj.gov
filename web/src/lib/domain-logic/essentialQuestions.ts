@@ -1,10 +1,10 @@
-import { ProfileContentField } from "@/lib/types/types";
 import {
   emptyIndustrySpecificData,
   Industry,
   IndustrySpecificData,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 
 export const getResetIndustrySpecificData = (
   industryId: string | undefined,
@@ -164,6 +164,13 @@ export const EssentialQuestions: EssentialQuestion[] = [
       return !!industry.industryOnboardingQuestions.isConstructionTypeApplicable;
     },
     fieldName: "residentialConstructionType",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.isConstructionTypeApplicable;
+    },
+    fieldName: "publicWorksContractor",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,

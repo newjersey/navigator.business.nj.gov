@@ -1,6 +1,6 @@
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
-import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 describe("getProfileErrorAlertText", () => {
   const config = getMergedConfig();

@@ -28,6 +28,7 @@ import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/Anytime
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
 import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
+import CigaretteLicenseConfirmationPreview from "@/lib/cms/previews/CigaretteLicenseConfirmationPreview";
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
 import EmergencyTripPermitPreview from "@/lib/cms/previews/EmergencyTripPermitPreview";
@@ -45,9 +46,11 @@ import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPrevie
 import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
 import NjedaPreview from "@/lib/cms/previews/NjedaPreview";
 import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
+import PassengerTransportCdlPreview from "@/lib/cms/previews/PassengerTransportCdlPreview";
 import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
+import RemoveBusinessModalPreview from "@/lib/cms/previews/RemoveBusinessModalPreview";
 import SelfRegistrationPreview from "@/lib/cms/previews/SelfRegistrationPreview";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
 import StarterKitsPreview from "@/lib/cms/previews/StarterKitsPreview";
@@ -60,6 +63,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
+import EmployerRatesPreview from "@/lib/cms/previews/EmployerRatesPreview";
 
 const CMS_CONFIG = {};
 const Loading = (): ReactElement => {
@@ -112,14 +116,22 @@ const CMS = dynamic(
       registerPreview(CMS, "xray-renewal-config", XrayRenewalCalendarEventPreview);
       registerPreview(CMS, "xray", XrayTaskPreview);
       registerPreview(CMS, "manage-business-vehicles", ManageBusinessVehiclesTaskPreview);
+      registerPreview(CMS, "passenger-transport-cdl-tab1", PassengerTransportCdlPreview);
+      registerPreview(CMS, "passenger-transport-cdl-tab2", PassengerTransportCdlPreview);
 
       registerPreview(CMS, "funding-onboarding-modal-config", NjedaPreview);
       registerPreview(CMS, "formationDateDeletionModal", FormationDateDeletionModalPreview);
+      registerPreview(CMS, "removeBusinessModal", RemoveBusinessModalPreview);
 
       registerPreview(CMS, "starterKits", StarterKitsPreview);
 
       registerPreview(CMS, "cigaretteLicense-step1", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-step2", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-step3", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-step4", CigaretteLicensePreview);
+
       registerPreview(CMS, "cigaretteLicense-shared", CigaretteLicensePreview);
+      registerPreview(CMS, "cigaretteLicense-confirmation", CigaretteLicenseConfirmationPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
       registerPreview(CMS, "check-account-email-page", LoginEmailCheckPreview);
@@ -154,6 +166,7 @@ const CMS = dynamic(
       // ----- Profile -----
       registerPreview(CMS, "profile-fields", ProfileFieldsPreview);
       registerPreview(CMS, "profile-misc", ProfilePreviewMisc);
+      registerPreview(CMS, "employer-rates", EmployerRatesPreview);
 
       registerPreview(CMS, "cannabisPriority-1", CannabisPriorityStatusPreview);
       registerPreview(CMS, "cannabisPriority-2", CannabisPriorityStatusPreview);

@@ -12,7 +12,7 @@ Businesses choose to get an alternate name if they want to have different busine
 
 To complete this application, you must have:
 
-- `Entity ID|entity-id`
+- `Entity ID|entity-id-contextual-link`
 - Desired alternate name
 
 After you complete this task, you will have:

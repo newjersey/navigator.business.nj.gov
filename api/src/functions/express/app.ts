@@ -1,6 +1,9 @@
+import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
 import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
+import { employerRatesRouterFactory } from "@api/employerRatesRouter";
+import { environmentPermitEmailRouter } from "@api/environmentPermitEmailRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
 import { healthCheckRouterFactory } from "@api/healthCheckRouter";
@@ -13,9 +16,13 @@ import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
+import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
+import { ApiEnvPermitEmailClient } from "@client/ApiEnvPermitEmailClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
+import { AwsMessagingServiceClient } from "@client/AwsMessagingServiceClient";
+import { CigaretteLicenseEmailClient } from "@client/CigaretteLicenseEmailClient";
 import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
 import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
@@ -43,9 +50,11 @@ import { RegulatedBusinessDynamicsLicenseHealthCheckClient } from "@client/dynam
 import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
+import { MockCryptoClient } from "@client/MockCryptoClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
-import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
-import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
+import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
+import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
+import { WebserviceLicenseStatusProcessorClient } from "@client/webservice/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoDataClient } from "@db/DynamoDataClient";
@@ -68,11 +77,10 @@ import {
   BUSINESSES_TABLE,
   DYNAMO_OFFLINE_PORT,
   IS_DOCKER,
-  IS_OFFLINE,
   STAGE,
 } from "@functions/config";
 import { setupExpress } from "@libs/express";
-import { LogWriter } from "@libs/logWriter";
+import { ConsoleLogWriter, LogWriter } from "@libs/logWriter";
 import { isKillSwitchOn } from "@libs/ssmUtils";
 import bodyParser from "body-parser";
 import { StatusCodes } from "http-status-codes";
@@ -86,8 +94,12 @@ import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInt
 
 const app = setupExpress();
 
-const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
-const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+const isLocal = STAGE === "local";
+
+const logger = isLocal ? ConsoleLogWriter : LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
+const dataLogger = isLocal
+  ? ConsoleLogWriter
+  : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
 const XRAY_REGISTRATION_STATUS_BASE_URL =
   process.env.XRAY_REGISTRATION_STATUS_BASE_URL || "http://localhost:9000";
@@ -244,22 +256,27 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
   housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
 });
 
+const ORG_URL =
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : process.env.TAX_CLEARANCE_CERTIFICATE_URL;
+
 const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
-  orgUrl:
-    process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
-      ? "http://localhost:9000"
-      : process.env.TAX_CLEARANCE_CERTIFICATE_URL ||
-        `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`,
+  orgUrl: ORG_URL!,
   userName: process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "",
   password: process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "",
 });
 const taxClearanceHealthCheckClient = taxClearanceCertificateClient.health;
 
+const cigaretteLicenseEmailClient = CigaretteLicenseEmailClient(logger);
+const cigaretteLicenseClient = ApiCigaretteLicenseClient(cigaretteLicenseEmailClient, logger);
+const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
+
 const BUSINESS_NAME_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
-    ? "http://localhost:9000"
-    : process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
-const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : process.env.BUSINESS_NAME_BASE_URL;
+const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL!, logger);
 
 const GOV_DELIVERY_BASE_URL =
   process.env.GOV_DELIVERY_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -272,39 +289,47 @@ const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_I
 const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 const AIRTABLE_BASE_URL =
   process.env.AIRTABLE_BASE_URL ||
-  (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
+  (STAGE === "local"
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : "https://api.airtable.com");
 
 const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
 const FORMATION_API_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
-    ? "http://localhost:9000"
-    : process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+    : process.env.FORMATION_API_BASE_URL;
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
-const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
+const GOV2GO_REGISTRATION_BASE_URL = isLocal
   ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
   : process.env.GOV2GO_REGISTRATION_BASE_URL || "";
+
+const EmployerRatesClient = WebserviceEmployerRatesClient(logger);
 
 const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
-const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-  stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-});
+const AWSTaxIDEncryptionClient = isLocal
+  ? new MockCryptoClient()
+  : AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
+      stage: AWS_CRYPTO_CONTEXT_STAGE,
+      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+    });
 
-const AWSTaxIDHashingClient = AWSCryptoFactory(
-  AWS_CRYPTO_TAX_ID_HASHING_KEY,
-  {
-    stage: AWS_CRYPTO_CONTEXT_STAGE,
-    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
-    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-  },
-  AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
-);
+const AWSTaxIDHashingClient = isLocal
+  ? new MockCryptoClient()
+  : AWSCryptoFactory(
+      AWS_CRYPTO_TAX_ID_HASHING_KEY,
+      {
+        stage: AWS_CRYPTO_CONTEXT_STAGE,
+        purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+        origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+      },
+      AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+    );
 
 const taxFilingClient = ApiTaxFilingClient(
   {
@@ -332,7 +357,7 @@ const airtableUserTestingClient = AirtableUserTestingClient(
   logger,
 );
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
-const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
+const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(
   dynamoDb,
   AWSTaxIDEncryptionClient,
@@ -368,6 +393,8 @@ const xrayRegistrationSearch = XrayRegistrationSearchClient(
 
 const xrayRegistrationLookup = XrayRegistrationLookupClient(xrayRegistrationSearch, logger);
 
+const environmentPermitEmailClient = ApiEnvPermitEmailClient(logger);
+
 const updateXrayStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookup);
 
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
@@ -388,7 +415,7 @@ const apiFormationClient = ApiFormationClient(
   {
     account: FORMATION_API_ACCOUNT,
     key: FORMATION_API_KEY,
-    baseUrl: FORMATION_API_BASE_URL,
+    baseUrl: FORMATION_API_BASE_URL!,
   },
   logger,
 );
@@ -452,12 +479,29 @@ app.use(
     logger,
   ),
 );
+app.use(
+  "/api",
+  cigaretteLicenseRouterFactory(
+    cigaretteLicenseClient,
+    AWSTaxIDEncryptionClient,
+    dynamoDataClient,
+    logger,
+  ),
+);
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient, logger));
 app.use(
   "/api",
   housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient, logger),
 );
-app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient, logger));
+
+const messagingServiceClient = AwsMessagingServiceClient({
+  logWriter: logger,
+});
+
+app.use(
+  "/api",
+  selfRegRouterFactory(dynamoDataClient, selfRegClient, messagingServiceClient, logger),
+);
 app.use(
   "/api",
   formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }, logger),
@@ -468,6 +512,7 @@ app.use(
   taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSTaxIDEncryptionClient, logger),
 );
 app.use("/api", decryptionRouterFactory(AWSTaxIDEncryptionClient, logger));
+app.use("/api", employerRatesRouterFactory(EmployerRatesClient, logger));
 app.use(
   "/health",
   healthCheckRouterFactory(
@@ -480,12 +525,17 @@ app.use(
       ["webservice/formation", formationHealthCheckClient],
       ["tax-clearance", taxClearanceHealthCheckClient],
       ["xray-registration", xrayRegistrationHealthCheckClient],
+      ["cigarette-license", cigaretteLicenseHealthCheckClient],
+      ["cigarette-email-client", cigaretteLicenseEmailClient.health],
+      ["messaging-service", messagingServiceClient.health],
     ]),
     logger,
   ),
 );
 
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
+
+app.use("/api/guest", environmentPermitEmailRouter(environmentPermitEmailClient, logger));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {
@@ -502,3 +552,10 @@ app.post("/api/mgmt/auth", (req, res) => {
 });
 
 export const handler = serverless(app);
+
+if (require.main === module) {
+  const port = process.env.PORT || 5002;
+  app.listen(port, () => {
+    console.log(`Local API running on http://localhost:${port}`);
+  });
+}

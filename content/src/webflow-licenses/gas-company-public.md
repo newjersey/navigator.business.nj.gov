@@ -1,14 +1,14 @@
 ---
+id: gas-company-public
 displayname: gas-company-public
-id: "gas-company-public"
-webflowId: "5f7728ea1a08099cc1bb2ec4"
-urlSlug: "gas-company-public"
-webflowName: "Gas Company-Public"
-callToActionLink: "https://www.nj.gov/bpu/about/divisions/energy/thirdparty.html"
-callToActionText: ""
+urlSlug: gas-company-public
+webflowName: Gas Company-Public
 agencyId: public-utilities
 agencyAdditionalContext: ""
-divisionPhone: "(800) 624-0331"
-webflowIndustry: "Gas Utility"
-licenseCertificationClassification: "APPROVAL"
+callToActionText: Register a Public Gas Company
+callToActionLink: https://www.nj.gov/bpu/about/divisions/energy/thirdparty.html
+webflowIndustry: Gas Utility
+divisionPhone: (800) 624-0331
+webflowId: 5f7728ea1a08099cc1bb2ec4
+licenseCertificationClassification: APPROVAL
 ---

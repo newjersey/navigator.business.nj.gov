@@ -1,8 +1,8 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { MenuItem, MenuList } from "@mui/material";
 import { ReactElement } from "react";
 

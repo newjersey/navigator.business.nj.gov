@@ -13,13 +13,13 @@ import {
   Start,
   Updates,
 } from "@/components/navbar/shared-submenu-components";
-import { getMergedConfig } from "@/contexts/configContext";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateProfileData,
@@ -95,6 +95,7 @@ describe("shared-submenu-components", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
+    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   const Config = getMergedConfig();
@@ -174,6 +175,45 @@ describe("shared-submenu-components", () => {
       expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
+    });
+
+    it("renders ProfileMenuItem to return back to profile and navigates correctly onClick", () => {
+      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
+      const userData = generateUserData({});
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.navigationDefaults.backToProfileLinkText));
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
+    });
+
+    it("does not render RemoveThisBusinessMenuItem when there is only one business", () => {
+      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
+      const userData = generateUserData({});
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
+      expect(
+        screen.queryByText(Config.navigationDefaults.removeBusinessLinkText),
+      ).not.toBeInTheDocument();
+    });
+
+    it("renders RemoveThisBusinessMenuItem when there is more then one business", () => {
+      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
+      const userData = generateUserData({
+        currentBusinessId: "biz-1",
+        businesses: {
+          ["biz-1"]: generateBusiness({ id: "biz-1" }),
+          ["biz-2"]: generateBusiness({ id: "biz-2" }),
+        },
+      });
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
+      );
+      expect(
+        screen.getByText(Config.navigationDefaults.removeBusinessLinkText),
+      ).toBeInTheDocument();
     });
 
     it("renders multiple businesses", () => {

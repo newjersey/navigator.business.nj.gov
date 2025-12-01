@@ -21,6 +21,7 @@ const profileData: ProfileData = {
   isChildcareForSixOrMore: true,
   petCareHousing: false,
   willSellPetCareItems: false,
+  publicWorksContractor: undefined,
   constructionType: undefined,
   residentialConstructionType: undefined,
   employmentPersonnelServiceType: "JOB_SEEKERS",
@@ -67,6 +68,8 @@ const profileData: ProfileData = {
   travelingCircusOrCarnivalOwningBusiness: undefined,
   vacantPropertyOwner: undefined,
   businessOpenMoreThanTwoYears: undefined,
+  employerAccessRegistration: undefined,
+  deptOfLaborEin: "",
 };
 
 const formationData: FormationData = {
@@ -84,6 +87,7 @@ const formationData: FormationData = {
     addressZipCode: "23859",
     legalType: "foreign-limited-liability-company",
     businessName: "some-business-name-72304745",
+    businessNameConfirmation: true,
     businessSuffix: "LLC",
     businessStartDate: getCurrentDateInNewJerseyISOString(),
     businessTotalStock: "",
@@ -135,6 +139,8 @@ const formationData: FormationData = {
     incorporators: undefined,
     willPracticeLaw: false,
     isVeteranNonprofit: false,
+    checkNameReservation: false,
+    howToProceed: "DIFFERENT_NAME",
   },
   completedFilingPayment: false,
   lastVisitedPageIndex: 0,

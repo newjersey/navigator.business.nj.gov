@@ -4,8 +4,7 @@ id: xray-disposition-form
 name: Submit Your X-Ray Machine Disposition Form
 category:
   - sell-or-close-my-business
-industryIds:
-  - healthcare
+industryIds: []
 sectorIds: []
 urlSlug: xray-disposition-form
 summaryDescriptionMd: You must submit the x-ray machine disposition form within

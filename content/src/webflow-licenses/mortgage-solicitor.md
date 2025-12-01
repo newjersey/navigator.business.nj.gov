@@ -1,14 +1,14 @@
 ---
+id: mortgage-solicitor
 displayname: mortgage-solicitor
-id: "mortgage-solicitor"
-webflowId: "5f77292a147ced832426bf3e"
-urlSlug: "mortgage-solicitor"
-webflowName: "Mortgage Solicitor"
-callToActionLink: "http://nj.gov/dobi/banklicensing/rmla/qiresmortbroker.html"
-callToActionText: ""
+urlSlug: mortgage-solicitor
+webflowName: Mortgage Solicitor
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Office of Consumer Finance, License Services"
-divisionPhone: "(609) 292-7272"
-webflowIndustry: "Mortgage Solicitor"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Office of Consumer Finance, License Services
+callToActionText: Learn About Mortgage Broker Licensing
+callToActionLink: http://nj.gov/dobi/banklicensing/rmla/qiresmortbroker.html
+webflowIndustry: Mortgage Solicitor
+divisionPhone: (609) 292-7272
+webflowId: 5f77292a147ced832426bf3e
+licenseCertificationClassification: LICENSE
 ---

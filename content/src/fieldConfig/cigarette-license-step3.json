@@ -1,0 +1,19 @@
+{
+  "cigaretteLicenseStep3": {
+    "salesInformationHeader": "Sales Information",
+    "fields": {
+      "startDateOfSales": {
+        "label": "Start Date of Cigarette Sales",
+        "errorRequiredText": "Enter date in format MM/DD/YYYY.",
+        "errorValidationText": ""
+      },
+      "selectASupplier": {
+        "label": "Suppliers",
+        "errorRequiredText": "Choose at least one supplier.",
+        "errorValidationText": ""
+      }
+    },
+    "backButtonText": "Back",
+    "nextButtonText": "Next"
+  }
+}

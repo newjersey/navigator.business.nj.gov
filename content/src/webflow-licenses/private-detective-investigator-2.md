@@ -1,14 +1,14 @@
 ---
+id: private-detective-investigator-2
 displayname: private-detective-investigator-2
-id: "private-detective-investigator-2"
-webflowId: "5f77296338625456e5bb0e47"
-urlSlug: "private-detective-investigator-2"
-webflowName: "Private Detective/Investigator (Individuals)"
-callToActionLink: "http://njsp.org/private-detective/private-detective-rules.shtml"
-callToActionText: ""
+urlSlug: private-detective-investigator-2
+webflowName: Private Detective/Investigator (Individuals)
 agencyId: law-public-safety
-agencyAdditionalContext: "Division of State Police"
-divisionPhone: "(609) 882-2000"
-webflowIndustry: "Private Detective"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Division of State Police
+callToActionText: Apply for a Private Detective License
+callToActionLink: https://www.nj.gov/njsp/private-detective/index.shtml
+webflowIndustry: Private Detective
+divisionPhone: (609) 882-2000
+webflowId: 5f77296338625456e5bb0e47
+licenseCertificationClassification: LICENSE
 ---

@@ -1,12 +1,13 @@
 ---
+id: orthotics-certified
 displayname: orthotics-certified
-id: "orthotics-certified"
-webflowId: "640b8467ee255a7fdb6ba0e5"
-urlSlug: "orthotics-certified"
-webflowName: "Orthotics-Certified"
-callToActionLink: "http://njconsumeraffairs.gov/orth"
+urlSlug: orthotics-certified
+webflowName: Orthotics-Certified
 agencyId: nj-consumer-affairs
-divisionPhone: "(973) 504-6445"
-webflowIndustry: "Orthotics"
-licenseCertificationClassification: "REGISTRATION/LICENSE"
+callToActionText: Become a Certified Orthotist
+callToActionLink: http://njconsumeraffairs.gov/orth
+webflowIndustry: Orthotics
+licenseCertificationClassification: REGISTRATION/LICENSE
+divisionPhone: (973) 504-6445
+webflowId: 640b8467ee255a7fdb6ba0e5
 ---

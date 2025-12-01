@@ -1,0 +1,25 @@
+{
+  "employerRates": {
+    "employerAccessYesButtonText": "Check My Contribution Rates",
+    "employerAccessNoButtonLink": "https://twes.dol.nj.gov/EmployerValidator/homePage.htm",
+    "employerAccessText": "Is your business registered with [Employer Access?](https://www.nj.gov/labor/ea/employer-services/register-update/employeraccess.shtml)",
+    "belowSectionHeaderText": "New Jersey sets your payroll tax rates each year based on your business’s history. These rates fund programs like unemployment and disability. Knowing your rates helps you plan costs and avoid paying too much.",
+    "employerAccessNoBodyText": "To see your contribution rates, register for Employer Access. This links your account so we can show your rates.",
+    "employerAccessFalseText": "No",
+    "employerAccessHeaderText": "Check Contribution Rates",
+    "employerAccessTrueText": "Yes",
+    "employerAccessNoButtonText": "Register for Employer Access",
+    "sectionHeaderText": "Employer Contribution Rates",
+    "quarterOneLabel": "Jan.-Mar.",
+    "quarterTwoLabel": "Apr.-June",
+    "quarterThreeLabel": "July-Sept.",
+    "quarterFourLabel": "Oct.-Dec.",
+    "quarterDropdownLabelText": "**Quarter**",
+    "quarterDropdownTooltipText": "Rates for the upcoming year will be available on October 1.",
+    "dolEinAlertLabelText": "DOL EIN",
+    "dolEinLabelText": "***`DOL EIN|dol-ein`***",
+    "dolEinErrorText": "DOL EIN must be 15 digits.",
+    "serverErrorText": "**This service is temporarily unavailable.** Try again later.",
+    "noAccountErrorText": "**No account could be found.**"
+  }
+}

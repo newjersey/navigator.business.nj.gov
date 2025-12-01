@@ -4,9 +4,9 @@ import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { XrayStatusHeader } from "@/components/xray/XrayStatusHeader";
 
-import type { ConfigType } from "@/contexts/configContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import type { XrayData, XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
 import dayjs from "dayjs";
@@ -97,7 +97,6 @@ export const XraySummary = (props: Props): ReactElement => {
         <ResultsSectionAccordion
           title={Config.xrayRegistrationTask.equipmentText}
           headingStyleOverride={"font-open-sans-7"}
-          summaryClass={"height-5"}
           titleIcon={
             <Icon
               iconName={"build"}

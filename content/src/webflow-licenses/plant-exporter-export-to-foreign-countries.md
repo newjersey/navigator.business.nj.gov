@@ -1,14 +1,14 @@
 ---
+id: plant-exporter-export-to-foreign-countries
 displayname: plant-exporter-export-to-foreign-countries
-id: "plant-exporter-export-to-foreign-countries"
-webflowId: "5f7728e390d9ac73241306f5"
-urlSlug: "plant-exporter-export-to-foreign-countries"
-webflowName: "Plant Exporter (Export to Foreign Countries)"
-callToActionLink: "http://nj.gov/agriculture/divisions/pi/serv/exports.html"
-callToActionText: ""
+urlSlug: plant-exporter-export-to-foreign-countries
+webflowName: Plant Exporter (Export to Foreign Countries)
 agencyId: agriculture
-agencyAdditionalContext: "Division of Plant Industry"
-divisionPhone: "(609) 406-6939"
-webflowIndustry: "Plant Exporter"
-licenseCertificationClassification: "CERTIFICATE OF INSPECTION"
+agencyAdditionalContext: Division of Plant Industry
+callToActionText: Learn About Exporting Plants
+callToActionLink: http://nj.gov/agriculture/divisions/pi/serv/exports.html
+webflowIndustry: Plant Exporter
+divisionPhone: (609) 406-6939
+webflowId: 5f7728e390d9ac73241306f5
+licenseCertificationClassification: CERTIFICATE OF INSPECTION
 ---

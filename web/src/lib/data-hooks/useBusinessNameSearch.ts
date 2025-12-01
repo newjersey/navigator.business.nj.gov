@@ -1,10 +1,10 @@
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { NameAvailability } from "@businessnjgovnavigator/shared/";
+import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
 import { FormEvent, useContext, useState } from "react";
 
 export const useBusinessNameSearch = ({
@@ -26,6 +26,7 @@ export const useBusinessNameSearch = ({
   ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
   setCurrentName: (name: string) => void;
   resetSearch: () => void;
+  resetNameAvailability: () => void;
 } => {
   const { business } = useUserData();
   const {
@@ -91,6 +92,10 @@ export const useBusinessNameSearch = ({
     setCurrentName("");
   };
 
+  const resetNameAvailability = (): void => {
+    setNameAvailability(emptyNameAvailability);
+  };
+
   const searchBusinessName = async (
     event?: FormEvent<HTMLFormElement>,
   ): Promise<{ nameAvailability: NameAvailability; submittedName: string }> => {
@@ -125,16 +130,18 @@ export const useBusinessNameSearch = ({
           });
         }
         setNameAvailability({ ...result });
+        analytics.event.api_submit.success(
+          "treasury.revenue.formation_submission",
+          "name is available",
+        );
         return { nameAvailability: result, submittedName: currentName };
       })
       .catch((api_error) => {
         resetState();
         setIsLoading(false);
-        if (api_error === 400) {
-          setError("BAD_INPUT");
-        } else {
-          setError("SEARCH_FAILED");
-        }
+        const errorMessage = api_error === 400 ? "BAD_INPUT" : "SEARCH_FAILED";
+        setError(errorMessage);
+        analytics.event.api_submit.error("treasury.revenue.formation_submission", errorMessage);
         throw new Error("ERROR");
       });
   };
@@ -150,5 +157,6 @@ export const useBusinessNameSearch = ({
     onBlurNameField,
     searchBusinessName,
     resetSearch,
+    resetNameAvailability,
   };
 };

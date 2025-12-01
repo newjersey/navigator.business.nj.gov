@@ -1,7 +1,7 @@
 import {
   loadAllAnytimeActionTaskUrlSlugs,
   loadAnytimeActionTaskByUrlSlug,
-} from "@/lib/static/loadAnytimeActionTasks";
+} from "@businessnjgovnavigator/shared/static";
 
 describe("anytimeAction Category Integrity", () => {
   it("makes sure that all loaded anytime actions, use a valid category from the mapping", () => {

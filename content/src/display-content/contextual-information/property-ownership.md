@@ -13,7 +13,7 @@ The form of property ownership defines how a person or business entity legally h
 - How ownership interest is divided among multiple parties
 - What happens to the property in certain scenarios, such as a sale or death of an owner
 
-If your business owns the property as an asset, your `business structure|business-structure-learn-more` will determine how the property is legally owned.
+If your business owns the property as an asset, your `business structure|business-structure-contextual-link` will determine how the property is legally owned.
 
 Common forms of property ownership include:
 

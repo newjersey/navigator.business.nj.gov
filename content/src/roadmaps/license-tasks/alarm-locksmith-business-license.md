@@ -4,7 +4,7 @@ id: alarm-locksmith-business-license
 displayname: alarm-locksmith-business-license
 urlSlug: alarm-locksmith-business-license
 name: Apply for Your Fire Alarm, Burglar Alarm and Locksmith Business License
-webflowName: "  "
+webflowName: Apply for Your Fire Alarm, Burglar Alarm and Locksmith Business License
 summaryDescriptionMd: You need a business license if your company provides
   burglar alarm, fire alarm, and locksmith services.
 industryId: electrical-contractor
@@ -21,7 +21,7 @@ webflowId: 6721493ccddf06cbf7fe46b4
 ## Application Requirements
 
 - Business name, address, phone number, and mail
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Copy of the `trade name certificate|alt-name-trade-name` if your business name is not the same as the licensee's name
 - `Employer Identification Number (EIN)|ein`
 - If not submitting for a corporation, list the names and addresses of the business owners

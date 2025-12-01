@@ -31,9 +31,7 @@ export const FormationChooseNotifications = (): ReactElement => {
 
   return (
     <div className="margin-top-3">
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.sections.notificationsHeader}
-      </Heading>
+      <Heading level={2}>{Config.formation.sections.notificationsHeader}</Heading>
       <Content>{Config.formation.sections.notificationsDescription}</Content>
       <FormGroup>
         <FormControlLabel

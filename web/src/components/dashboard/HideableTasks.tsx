@@ -38,7 +38,7 @@ export const HideableTasks = (): ReactElement => {
   return (
     <div className="margin-top-7" data-testid="hideableTasks">
       <div className={`flex flex-align-center margin-bottom-205`}>
-        <Heading level={2} className="margin-bottom-0 text-medium">
+        <Heading level={2} className="margin-bottom-0">
           {Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText}
         </Heading>
         <div className={`mla`}>

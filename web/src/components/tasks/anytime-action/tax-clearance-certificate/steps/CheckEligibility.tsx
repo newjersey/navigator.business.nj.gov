@@ -1,4 +1,4 @@
-import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
+import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
@@ -26,6 +26,7 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useState } from "react";
 
@@ -94,7 +95,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
   return (
     <>
       <div>
-        <Heading level={2} styleVariant={"h3"}>
+        <Heading level={2}>
           {Config.taxClearanceCertificateStep2.requestingAgencySectionHeader}
         </Heading>
         <div id={`question-requestingAgencyId`} data-testid={"requestingAgency"}>
@@ -102,7 +103,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
         </div>
         <HorizontalLine />
         <div className="margin-top-3">
-          <Heading level={2} styleVariant={"h3"}>
+          <Heading level={2}>
             {Config.taxClearanceCertificateStep2.businessInformationSectionHeader}
           </Heading>
         </div>
@@ -122,10 +123,10 @@ export const CheckEligibility = (props: Props): ReactElement => {
           </ProfileField>
         </div>
         <div className="margin-y-2">
-          {shouldLockFormationFields ? (
+          {shouldLockBusinessAddress(business) ? (
             <ProfileAddressLockedFields businessLocation="US" />
           ) : (
-            <UnitesStatesAddress
+            <UnitedStatesAddress
               onValidation={onValidation}
               dataFormErrorMap={dataFormErrorMap}
               isFullWidth
@@ -166,7 +167,11 @@ export const CheckEligibility = (props: Props): ReactElement => {
       </div>
       <CtaContainer>
         <ActionBarLayout>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={
+              analytics.event.tax_clearance_anytime_action_help_button.click.open_live_chat
+            }
+          />
           <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" onClick={handleBackButtonClick}>
               {Config.taxClearanceCertificateShared.backButtonText}
