@@ -21,10 +21,8 @@ export const CRTKPage = (props: Props): ReactElement => {
   const [crtkData, setCrtkData] = useState<CRTKData | undefined>(undefined);
   const [searchError, setSearchError] = useState<string | undefined>(undefined);
 
-  // Check if user already has CRTK data on mount
   useEffect(() => {
     if (!business) return;
-
     const existingCrtkData = business.crtkData;
 
     if (existingCrtkData?.CRTKSearchResult) {
@@ -42,21 +40,21 @@ export const CRTKPage = (props: Props): ReactElement => {
         addressLine1: facilityDetails.businessStreetAddress,
         city: facilityDetails.city,
         addressZipCode: facilityDetails.zip,
-        //ein: facilityDetails.ein || undefined,
+        ein: facilityDetails.ein || undefined,
       });
 
-      console.log(userData);
+      // console.log(userData.businesses[userData.currentBusinessId].crtkData);
 
       //todo: update with userData.
       //      const updatedCrtkData = userData.businesses[userData.currentBusinessId].crtkData;
-      const updatedCrtkData = "";
+      //const updatedCrtkData = "";
 
-      if (!updatedCrtkData) {
-        setSearchError("SEARCH_FAILED");
-        return;
-      }
+      // if (!updatedCrtkData) {
+      //   setSearchError("SEARCH_FAILED");
+      //   return;
+      // }
 
-      setCrtkData(updatedCrtkData);
+      setCrtkData(userData);
 
       await refresh();
     } catch (error) {

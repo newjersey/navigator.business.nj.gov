@@ -72,6 +72,7 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
     logWriter.LogInfo(
       `CRTK Search by Address - Id:${logId}, Address: ${streetAddress}, Zip: ${zipCode}`,
     );
+
     return await axios
       .get(
         `${baseUrl}/crtk_by_address_and_zipcode?address=${encodeURIComponent(

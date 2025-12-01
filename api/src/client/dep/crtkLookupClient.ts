@@ -29,7 +29,7 @@ export const CRTKLookupClient = (
         addressResults = await crtkSearchClient.searchByAddress(addressLine1, addressZipCode);
         businessNameResults = await crtkSearchClient.searchByBusinessName(businessName);
 
-        const matchingEntry = addressResults.find((addrEntry) =>
+        const crtkRegisteredBusiness = addressResults.find((addrEntry) =>
           businessNameResults.some(
             (nameEntry) =>
               nameEntry.businessName?.toLowerCase() === addrEntry.businessName?.toLowerCase() &&
@@ -37,8 +37,8 @@ export const CRTKLookupClient = (
           ),
         );
 
-        if (matchingEntry) {
-          searchResults = [matchingEntry];
+        if (crtkRegisteredBusiness) {
+          searchResults = [crtkRegisteredBusiness];
         } else if (addressResults.length > 0) {
           searchResults = addressResults;
         } else if (businessNameResults.length > 0) {
@@ -57,9 +57,11 @@ export const CRTKLookupClient = (
             city,
             addressZipCode,
           },
+          CRTKEntry: {},
           lastUpdatedISO: new Date().toISOString(),
         };
       }
+
       throw error;
     }
 
@@ -74,6 +76,7 @@ export const CRTKLookupClient = (
           addressZipCode,
         },
         lastUpdatedISO: new Date().toISOString(),
+        CRTKEntry: {},
       };
     }
 
@@ -88,6 +91,7 @@ export const CRTKLookupClient = (
         city: crtkEntry.city || city,
         addressZipCode: crtkEntry.zipCode || addressZipCode,
       },
+      CRTKEntry: crtkEntry,
     };
 
     logWriter.LogInfo(

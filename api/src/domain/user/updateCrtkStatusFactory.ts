@@ -5,10 +5,10 @@ import { Business, UserData } from "@shared/userData";
 
 export const updateCRTKStatusFactory = (crtkLookupClient: CRTKStatusLookup): UpdateCRTK => {
   return async (userData: UserData, businessDetails: CRTKBusinessDetails): Promise<UserData> => {
-    const { businessName, addressLine1, city, addressZipCode } = businessDetails;
+    const { businessName, addressLine1, city, addressZipCode, ein } = businessDetails;
 
     return crtkLookupClient
-      .getStatus(businessName, addressLine1, city, addressZipCode)
+      .getStatus(businessName, addressLine1, city, addressZipCode, ein)
       .then((response) => {
         const updatedBusinessData: Business = {
           ...userData.businesses[userData.currentBusinessId],
