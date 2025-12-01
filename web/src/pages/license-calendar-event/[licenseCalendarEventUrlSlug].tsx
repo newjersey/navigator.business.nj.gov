@@ -2,13 +2,14 @@ import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { LicenseElement } from "@/components/tasks/license-calendar-event/LicenseCalendarEventElement";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+
+import { LicenseEventSubtype } from "@businessnjgovnavigator/shared";
 import {
-  LicenseCalendarEventUrlSlugParam,
+  LicenseCalendarEventUrlSlugParameter,
   loadAllLicenseCalendarEventUrlSlugs,
   loadLicenseCalendarEventByUrlSlug,
-} from "@/lib/static/loadLicenseCalendarEvents";
-import { LicenseEventType } from "@/lib/types/types";
-import { LicenseEventSubtype } from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/static";
+import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
@@ -37,7 +38,7 @@ const LicenseCalendarEventPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<LicenseCalendarEventUrlSlugParam> => {
+export const getStaticPaths = (): GetStaticPathsResult<LicenseCalendarEventUrlSlugParameter> => {
   const paths = loadAllLicenseCalendarEventUrlSlugs();
   return {
     paths,
@@ -48,7 +49,7 @@ export const getStaticPaths = (): GetStaticPathsResult<LicenseCalendarEventUrlSl
 export const getStaticProps = ({
   params,
 }: {
-  params: LicenseCalendarEventUrlSlugParam;
+  params: LicenseCalendarEventUrlSlugParameter;
 }): GetStaticPropsResult<Props> => {
   const licenseEventType = params.licenseCalendarEventUrlSlug
     .split("-")

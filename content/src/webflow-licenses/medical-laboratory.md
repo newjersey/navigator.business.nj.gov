@@ -1,14 +1,14 @@
 ---
+id: medical-laboratory
 displayname: medical-laboratory
-id: "medical-laboratory"
-webflowId: "5f77299cdd6a49425e9b606b"
-urlSlug: "medical-laboratory"
-webflowName: "Medical Laboratory"
-callToActionLink: "http://njconsumeraffairs.gov/bme/Pages/applications.aspx"
-callToActionText: ""
+urlSlug: medical-laboratory
+webflowName: Medical Laboratory
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "NJ State Board of Medical Examiners"
-divisionPhone: "(609) 826-7100"
-webflowIndustry: "Medical Laboratory"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: NJ State Board of Medical Examiners
+callToActionText: Learn About the State Board of Medical Examiners
+callToActionLink: http://njconsumeraffairs.gov/bme/Pages/applications.aspx
+webflowIndustry: Medical Laboratory
+divisionPhone: (609) 826-7100
+webflowId: 5f77299cdd6a49425e9b606b
+licenseCertificationClassification: LICENSE
 ---

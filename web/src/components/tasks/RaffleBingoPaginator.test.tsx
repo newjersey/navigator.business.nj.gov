@@ -1,14 +1,14 @@
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
-import { getMergedConfig } from "@/contexts/configContext";
-import { Task } from "@/lib/types/types";
 import { getTaskStatusUpdatedMessage } from "@/lib/utils/helpers";
-import { convertTaskMd } from "@/lib/utils/markdownReader";
 import { generateTask } from "@/test/factories";
 import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { convertTaskMd } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateUserData } from "@businessnjgovnavigator/shared/test";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));

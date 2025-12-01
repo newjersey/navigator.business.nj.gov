@@ -86,13 +86,16 @@
       "id": "other-services",
       "name": "Other Services",
       "nonEssentialQuestionsIds": [
-        "resale-tax-cert"
+        "resale-tax-cert",
+        "streamlined-sales-tax-registration"
       ]
     },
     {
       "id": "professional-scientific-and-technical-services",
       "name": "Professional, Scientific, and Technical Services",
-      "nonEssentialQuestionsIds": []
+      "nonEssentialQuestionsIds": [
+        "streamlined-sales-tax-registration"
+      ]
     },
     {
       "id": "real-estate",
@@ -102,12 +105,16 @@
     {
       "id": "retail-trade-and-ecommerce",
       "name": "Retail Trade and E-Commerce",
-      "nonEssentialQuestionsIds": []
+      "nonEssentialQuestionsIds": [
+        "streamlined-sales-tax-registration"
+      ]
     },
     {
       "id": "technology",
       "name": "Technology",
-      "nonEssentialQuestionsIds": []
+      "nonEssentialQuestionsIds": [
+        "streamlined-sales-tax-registration"
+      ]
     },
     {
       "id": "transportation-and-warehousing",
@@ -127,7 +134,9 @@
     {
       "id": "wholesale-trade",
       "name": "Wholesale Trade",
-      "nonEssentialQuestionsIds": []
+      "nonEssentialQuestionsIds": [
+        "streamlined-sales-tax-registration"
+      ]
     }
   ]
 }

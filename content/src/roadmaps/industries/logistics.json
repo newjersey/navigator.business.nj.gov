@@ -67,7 +67,8 @@
     "weights-measures",
     "logistics-CRTK-survey",
     "regulated-medical-waste-question",
-    "vehicle-dealership-q"
+    "vehicle-dealership-q",
+    "flashing-light-permit"
   ],
   "displayname": "logistics",
   "industryOnboardingQuestions": {

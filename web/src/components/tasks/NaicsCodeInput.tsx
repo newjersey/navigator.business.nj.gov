@@ -4,15 +4,15 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
-import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Business, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 

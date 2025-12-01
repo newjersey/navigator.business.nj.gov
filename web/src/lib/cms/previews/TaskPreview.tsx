@@ -2,13 +2,16 @@ import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { createEmptyTaskDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
 import { generateRoadmap } from "@/test/factories";
 import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
+import {
+  createEmptyTaskDisplayContent,
+  TaskWithLicenseTaskId,
+} from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const TaskPreview = (props: PreviewProps): ReactElement => {

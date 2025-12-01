@@ -1,6 +1,6 @@
 import { PersonalizeMyTasksButton } from "@/components/PersonalizeMyTasksButton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
+import { AnytimeActionContainer } from "@/components/dashboard/AnytimeActionContainer";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolationsCard";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
@@ -16,6 +16,12 @@ import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
+import {
+  isDomesticEmployerBusiness,
+  isNexusBusiness,
+  isStartingBusiness,
+} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -25,13 +31,7 @@ import {
   OperateReference,
   RoadmapDisplayContent,
   XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
-import {
-  isDomesticEmployerBusiness,
-  isNexusBusiness,
-  isStartingBusiness,
-} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+} from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -45,6 +45,7 @@ interface Props {
   elevatorViolations?: boolean;
   licenseEvents: LicenseEventType[];
   xrayRenewalEvent: XrayRenewalCalendarEventType;
+  commonBusinessTasks: (AnytimeActionLicenseReinstatement | AnytimeActionTask)[];
 }
 
 export const Dashboard = (props: Props): ReactElement => {
@@ -82,7 +83,7 @@ export const Dashboard = (props: Props): ReactElement => {
                     {props.elevatorViolations && <ElevatorViolationsCard />}
 
                     {operatingPhase.displayAnytimeActions && (
-                      <AnytimeActionDropdown
+                      <AnytimeActionContainer
                         anytimeActionTasks={props.anytimeActionTasks}
                         anytimeActionTasksFromNonEssentialQuestions={
                           anytimeActionTasksFromNonEssentialQuestions
@@ -90,6 +91,7 @@ export const Dashboard = (props: Props): ReactElement => {
                         anytimeActionLicenseReinstatements={
                           props.anytimeActionLicenseReinstatements
                         }
+                        commonBusinessTasks={props.commonBusinessTasks}
                       />
                     )}
 
@@ -140,12 +142,13 @@ export const Dashboard = (props: Props): ReactElement => {
                 <div className="margin-top-3">
                   {props.elevatorViolations && <ElevatorViolationsCard />}
                   {operatingPhase.displayAnytimeActions && (
-                    <AnytimeActionDropdown
+                    <AnytimeActionContainer
                       anytimeActionTasks={props.anytimeActionTasks}
                       anytimeActionTasksFromNonEssentialQuestions={
                         anytimeActionTasksFromNonEssentialQuestions
                       }
                       anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+                      commonBusinessTasks={props.commonBusinessTasks}
                     />
                   )}
 

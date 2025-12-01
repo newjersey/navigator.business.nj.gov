@@ -49,15 +49,10 @@
     }
   ],
   "name": "Travel Agency",
-  "nonEssentialQuestionsIds": [
-    "bus-initial-inspection",
-    "mvc-cpcn",
-    "cdl-neq"
-  ],
+  "nonEssentialQuestionsIds": ["bus-initial-inspection", "mvc-cpcn", "cdl-neq"],
   "displayname": "travel-agent",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "home-based travel agent",

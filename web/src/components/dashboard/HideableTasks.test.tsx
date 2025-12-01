@@ -1,5 +1,4 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -7,6 +6,7 @@ import {
   WithStatefulUserData,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generatePreferences,

@@ -1,14 +1,14 @@
 ---
+id: electrical-sub-code-ucc
 displayname: electrical-sub-code-ucc
-id: "electrical-sub-code-ucc"
-webflowId: "5f772986862dc166babe49a4"
-urlSlug: "electrical-sub-code-ucc"
-webflowName: "Electrical Sub code (UCC)"
-callToActionLink: "http://nj.gov/dca/divisions/codes/offices/licensing_cont_ed.html"
-callToActionText: ""
+urlSlug: electrical-sub-code-ucc
+webflowName: Electrical Sub code (UCC)
 agencyId: nj-community-affairs
-agencyAdditionalContext: "Bureau of Code Services, Licensing Unit"
-divisionPhone: "(609) 984-7834"
-webflowIndustry: "Electrical Sub code"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Bureau of Code Services, Licensing Unit
+callToActionText: Learn About the Division of Codes and Standards
+callToActionLink: https://nj.gov/dca/codes/index.shtml
+webflowIndustry: Electrical Sub code
+divisionPhone: (609) 984-7834
+webflowId: 5f772986862dc166babe49a4
+licenseCertificationClassification: LICENSE
 ---

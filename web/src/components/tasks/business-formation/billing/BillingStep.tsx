@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/billing/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/billing/FormationChooseNotifications";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -17,41 +17,39 @@ export const BillingStep = (): ReactElement => {
 
   return (
     <div data-testid="billing-step">
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.sections.contactInfoHeader}
-      </Heading>
+      <Heading level={2}>{Config.formation.sections.contactInfoHeader}</Heading>
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
         type="DESKTOP-ONLY"
       >
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
-            <FormationField fieldName="contactFirstName">
+            <ScrollableFormFieldWrapper fieldName="contactFirstName">
               <BusinessFormationTextField
                 label={Config.formation.fields.contactFirstName.label}
                 fieldName="contactFirstName"
                 errorBarType="MOBILE-ONLY"
-                required={true}
+                required
                 validationText={getFieldErrorLabel("contactFirstName")}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
           <div className="margin-top-2 tablet:grid-col-6">
-            <FormationField fieldName="contactLastName">
+            <ScrollableFormFieldWrapper fieldName="contactLastName">
               <BusinessFormationTextField
                 label={Config.formation.fields.contactLastName.label}
                 fieldName="contactLastName"
                 errorBarType="MOBILE-ONLY"
-                required={true}
+                required
                 validationText={getFieldErrorLabel("contactLastName")}
               />
-            </FormationField>
+            </ScrollableFormFieldWrapper>
           </div>
         </div>
       </WithErrorBar>
       <div className="grid-row grid-gap-1">
         <div className="margin-top-2 tablet:grid-col-6">
-          <FormationField fieldName="contactPhoneNumber">
+          <ScrollableFormFieldWrapper fieldName="contactPhoneNumber">
             <BusinessFormationTextField
               validationText={Config.formation.fields.contactPhoneNumber.error}
               label={Config.formation.fields.contactPhoneNumber.label}
@@ -60,15 +58,14 @@ export const BillingStep = (): ReactElement => {
               numericProps={{
                 maxLength: 10,
               }}
+              required
               visualFilter={getPhoneNumberFormat}
             />
-          </FormationField>
+          </ScrollableFormFieldWrapper>
         </div>
       </div>
       <hr className="margin-y-3" />
-      <Heading level={2} styleVariant={"h3"}>
-        {Config.formation.sections.servicesHeader}
-      </Heading>
+      <Heading level={2}>{Config.formation.sections.servicesHeader}</Heading>
       <Content>{Config.formation.sections.servicesDescription}</Content>
       <FormationChooseDocuments />
       <PaymentTypeTable />

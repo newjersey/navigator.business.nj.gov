@@ -57,8 +57,7 @@
   ],
   "displayname": "event-planning",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "planner, organizer, coordinator, party planner",

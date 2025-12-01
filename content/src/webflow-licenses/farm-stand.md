@@ -1,12 +1,13 @@
 ---
+id: farm-stand
 displayname: farm-stand
-id: "farm-stand"
-webflowId: "640b84675717cb075a0a738a"
-urlSlug: "farm-stand"
-webflowName: "Farm Stand"
-callToActionLink: ""
+urlSlug: farm-stand
+webflowName: Farm Stand
 agencyId: local-health
+callToActionText: Learn About Farm Stands and Markets
+callToActionLink: https://www.nj.gov/agriculture/divisions/md/prog/communityfarmers.shtml
+webflowIndustry: Farm Stand
+licenseCertificationClassification: LICENSE
 divisionPhone: ""
-webflowIndustry: "Farm Stand"
-licenseCertificationClassification: "LICENSE"
+webflowId: 640b84675717cb075a0a738a
 ---

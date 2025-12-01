@@ -64,8 +64,7 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "detective",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "background check, private investigator, PI, private detective",

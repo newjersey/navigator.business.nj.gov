@@ -7,13 +7,15 @@ import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task, XrayRenewalCalendarEventType } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
+import { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
 import type { UserData } from "@businessnjgovnavigator/shared/userData";
 import type {
   FacilityDetails,
   XrayData,
+  XrayRegistrationStatus,
   XraySearchError,
 } from "@businessnjgovnavigator/shared/xray";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
@@ -66,6 +68,15 @@ export const Xray = (props: Props): ReactElement => {
     );
   };
 
+  const xrayStatusAnalytics = (status: XrayRegistrationStatus | undefined): void => {
+    if (status === "EXPIRED") {
+      analytics.event.xray_registration_check_status_results.appears.expired_registration_found();
+    }
+    if (status === "ACTIVE") {
+      analytics.event.xray_registration_check_status_results.appears.active_registration_found();
+    }
+  };
+
   const onSubmit = (facilityDetails: FacilityDetails): void => {
     setError(undefined);
     if (!allFieldsHaveValues(facilityDetails)) {
@@ -74,6 +85,7 @@ export const Xray = (props: Props): ReactElement => {
     }
 
     setIsLoading(true);
+    analytics.event.xray_registration_check_status_form.submit.status_lookup_initiated();
     api
       .checkXrayRegistrationStatus(facilityDetails)
       .then((userData: UserData) => {
@@ -82,8 +94,10 @@ export const Xray = (props: Props): ReactElement => {
         if (!xrayRegistrationData?.status && xrayRegistrationData?.machines?.length === 0) {
           setError("NOT_FOUND");
           setIsLoading(false);
+          analytics.event.xray_registration_check_status_error.appears.record_not_found_error();
           return;
         }
+        xrayStatusAnalytics(xrayRegistrationData?.status);
         setXrayRegistrationData(xrayRegistrationData);
       })
       .catch(() => {
@@ -190,6 +204,7 @@ export const Xray = (props: Props): ReactElement => {
                 xrayContent={xrayContent}
                 ctaPrimaryText={xrayContent.callToActionPrimaryText}
                 ctaPrimaryOnClick={(callToActionLink: string): void => {
+                  analytics.event.xray_registration_expired_cta.click.xray_renewal_started_cta();
                   openInNewTab(callToActionLink);
                 }}
                 ctaSecondaryText={xrayContent.callToActionSecondaryText}

@@ -77,7 +77,6 @@
   "displayname": "funeral",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
     "isCannabisLicenseTypeApplicable": false,
     "isCpaRequiredApplicable": false,
     "isCarServiceApplicable": false,

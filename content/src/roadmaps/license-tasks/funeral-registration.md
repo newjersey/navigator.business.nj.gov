@@ -31,7 +31,7 @@ webflowId: 6761e527ee5119895f67bf4a
 ## Application Requirements
 
 - The exact name of the funeral home
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Full name and home address of each owner
 - A letter forwarded to the State Board of Mortuary Science by the funeral home’s owner appointing a licensed funeral director as manager
 - A letter forwarded to the State Board of Mortuary Science by the funeral home manager stating they accept their position as manager

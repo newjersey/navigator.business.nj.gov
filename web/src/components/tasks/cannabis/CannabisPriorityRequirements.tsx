@@ -13,8 +13,8 @@ import {
   noneOfTheAbovePriorityId,
   priorityTypesObj,
 } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { CallToActionHyperlink } from "@/lib/types/types";
 import { openInNewTab, useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { CallToActionHyperlink } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 
@@ -149,7 +149,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.minorityOrWomenHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3-override">
+                <Heading level={3} className="margin-0-override">
                   {Config.cannabisPriorityStatus.minorityOrWomenHeaderText}
                 </Heading>
               </AccordionSummary>
@@ -167,7 +167,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.veteranHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3-override">
+                <Heading level={3} className="margin-0-override">
                   {Config.cannabisPriorityStatus.veteranHeaderText}
                 </Heading>
               </AccordionSummary>
@@ -185,7 +185,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.socialEquityHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3-override">
+                <Heading level={3} className="margin-0-override">
                   {Config.cannabisPriorityStatus.socialEquityHeaderText}
                 </Heading>
               </AccordionSummary>
@@ -202,7 +202,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
               <AccordionSummary
                 aria-controls={`${Config.cannabisPriorityStatus.impactZoneHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3-override">
+                <Heading level={3} className="margin-0-override">
                   {Config.cannabisPriorityStatus.impactZoneHeaderText}
                 </Heading>
               </AccordionSummary>

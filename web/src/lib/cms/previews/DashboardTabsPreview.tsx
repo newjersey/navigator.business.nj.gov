@@ -1,9 +1,9 @@
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateCertification, generateFunding } from "@/test/factories";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement } from "react";
 
 const DashboardTabsPreview = (props: PreviewProps): ReactElement => {

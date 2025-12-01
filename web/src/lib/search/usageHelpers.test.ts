@@ -1,4 +1,3 @@
-import { IndustryRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Match } from "@/lib/search/typesForSearch";
 import {
   AddAddOnUsage,
@@ -15,6 +14,7 @@ import {
   composeIsLicenseTaskDependencyString,
   composeIsTaskDependencyTaskString,
 } from "@/lib/search/usageHelpers";
+import { IndustryRoadmap } from "@businessnjgovnavigator/shared/types";
 
 jest.mock("@businessnjgovnavigator/content/roadmaps/task-dependencies.json", () => ({
   dependencies: [
@@ -116,7 +116,6 @@ describe("usageHelpers", () => {
         isProvidesStaffingServicesApplicable: undefined,
         isCertifiedInteriorDesignerApplicable: undefined,
         isRealEstateAppraisalManagementApplicable: undefined,
-        canBeReseller: undefined,
         canBeHomeBased: undefined,
         isLiquorLicenseApplicable: undefined,
         isCpaRequiredApplicable: undefined,
@@ -161,14 +160,12 @@ describe("usageHelpers", () => {
             weight: 1,
             task: "task-match",
             licenseTask: "",
-            required: false,
           },
           {
             step: 1,
             weight: 1,
             task: "",
             licenseTask: "license-task-match",
-            required: false,
           },
         ],
         modifications: [

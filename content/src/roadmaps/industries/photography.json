@@ -57,8 +57,7 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "photography",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "freelance photographer, professional photographer, photographer, media, event photographer, video",

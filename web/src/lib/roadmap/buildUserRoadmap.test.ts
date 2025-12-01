@@ -1,4 +1,3 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import * as getNonEssentialAddOnModule from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
@@ -13,6 +12,7 @@ import {
   LegalStructures,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
   createEmptyProfileData,
@@ -285,28 +285,6 @@ describe("buildUserRoadmap", () => {
           "permanent-location-business",
         );
       });
-    });
-  });
-
-  describe("reseller tasks", () => {
-    it("adds reseller task if canBeReseller is true", async () => {
-      const resellerIndustries = getIndustries().filter((industry) => {
-        return industry.industryOnboardingQuestions.canBeReseller === true;
-      });
-      const industry = randomElementFromArray(resellerIndustries);
-
-      await buildUserRoadmap(generateStartingProfile({ industryId: industry.id }), {});
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("reseller");
-    });
-
-    it("does not add reseller task if canBeReseller is false", async () => {
-      const nonResellerIndustries = getIndustries().filter((industry) => {
-        return industry.industryOnboardingQuestions.canBeReseller === false;
-      });
-      const industry = randomElementFromArray(nonResellerIndustries);
-
-      await buildUserRoadmap(generateStartingProfile({ industryId: industry.id }), {});
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("reseller");
     });
   });
 
@@ -1278,6 +1256,68 @@ describe("buildUserRoadmap", () => {
       const profileData = generateStartingProfile({});
       buildUserRoadmap(profileData, generateRoadmapTaskData({ manageBusinessVehicles: true }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("business-vehicle");
+    });
+  });
+
+  describe("if industry is construction", () => {
+    describe("residentialConstructionType", () => {
+      it("adds construction-home-renovation add-on if HOME_RENOVATIONS", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            residentialConstructionType: "HOME_RENOVATIONS",
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-home-renovation",
+        );
+      });
+
+      it("adds construction-new-home-construction add-on if NEW_HOME_CONSTRUCTION", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            residentialConstructionType: "NEW_HOME_CONSTRUCTION",
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-new-home-construction",
+        );
+      });
+
+      it("adds construction-home-renovation and construction-new-home-construction add-on if BOTH", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            residentialConstructionType: "BOTH",
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-home-renovation",
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "construction-new-home-construction",
+        );
+      });
+    });
+
+    describe("publicWorksContractor", () => {
+      it("adds public-works-contractor add-on if True", () => {
+        buildUserRoadmap(
+          generateStartingProfile({
+            publicWorksContractor: true,
+            industryId: "commercial-construction",
+          }),
+          {},
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "public-works-contractor",
+        );
+      });
     });
   });
 });

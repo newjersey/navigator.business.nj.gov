@@ -49,13 +49,10 @@
     }
   ],
   "name": "Graphic Design",
-  "nonEssentialQuestionsIds": [
-    "resale-tax-cert"
-  ],
+  "nonEssentialQuestionsIds": ["resale-tax-cert"],
   "displayname": "graphic-design",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "media services, freelancer, freelance art, visual design, illustrator",

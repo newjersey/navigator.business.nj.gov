@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "532111",
+  "naicsCodes": "532111, 441110, 441120",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -65,17 +65,19 @@
       "weight": 19,
       "step": 4,
       "task": "vehicle-dealership"
+    },
+    {
+      "step": 4,
+      "task": "community-right-to-know-survey",
+      "licenseTask": "",
+      "weight": 20
     }
   ],
-  "name": "Car Rental and Dealerships",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "bus-initial-inspection"
-  ],
-  "displayname": "car-rental",
+  "name": "Car Rental and Dealerships ",
+  "nonEssentialQuestionsIds": ["weights-measures", "bus-initial-inspection"],
+  "displayname": "car-rental ",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "canBeReseller": false
+    "canBeHomeBased": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "vehicle rental, vehicle dealership, car dealership, car rental, dealership, dealer, leasing, car leasing, vehicle leasing",

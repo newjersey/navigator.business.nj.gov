@@ -1,6 +1,6 @@
 import { findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { TaskWithoutLinks } from "@/lib/types/types";
+import { TaskWithoutLinks } from "@businessnjgovnavigator/shared/types";
 
 export const searchBusinessFormation = (tasks: TaskWithoutLinks[], term: string): Match[] => {
   const matches: Match[] = [];

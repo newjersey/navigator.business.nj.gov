@@ -1,14 +1,15 @@
 ---
+id: medical-devices
 displayname: medical-devices
-id: "medical-devices"
-webflowId: "5f7729449491d5bd24036b55"
-urlSlug: "medical-devices"
-webflowName: "Medical Devices"
-callToActionLink: "http://state.nj.us/health/ceohs/environmental-occupational/contact.shtml"
-callToActionText: ""
+urlSlug: medical-devices
+webflowName: Medical Devices
 agencyId: nj-health
-agencyAdditionalContext: "Consumer Environmental Health Services, Public Health Sanitation and Safety Program"
-divisionPhone: "(609) 826-4920"
-webflowIndustry: "Medical Devices"
-licenseCertificationClassification: "REGISTRATION"
+agencyAdditionalContext: Consumer Environmental Health Services, Public Health
+  Sanitation and Safety Program
+callToActionText: Learn About the Department of Health
+callToActionLink: http://state.nj.us/health/ceohs/environmental-occupational/contact.shtml
+webflowIndustry: Medical Devices
+divisionPhone: (609) 826-4920
+webflowId: 5f7729449491d5bd24036b55
+licenseCertificationClassification: REGISTRATION
 ---

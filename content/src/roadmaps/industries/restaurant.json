@@ -74,7 +74,6 @@
   ],
   "displayname": "restaurant",
   "industryOnboardingQuestions": {
-    "canBeReseller": false,
     "isLiquorLicenseApplicable": true
   },
   "isEnabled": true,

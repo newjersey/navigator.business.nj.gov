@@ -1,10 +1,4 @@
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
-import { getMergedConfig } from "@/contexts/configContext";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateLicenseEvent,
@@ -33,6 +27,7 @@ import {
   TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   generateLicenseData,
@@ -42,6 +37,11 @@ import {
   generateXrayRegistrationData,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
+import {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";

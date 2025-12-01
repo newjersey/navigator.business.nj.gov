@@ -13,7 +13,7 @@ export const ProfileSubSection = (props: Props): ReactElement => {
   return (
     <>
       <div data-testid="profile-tab-header" className="margin-top-5">
-        <Heading level={3} style={{ fontWeight: 300, marginBottom: "0.75rem" }}>
+        <Heading level={3} style={{ marginBottom: "0.75rem" }}>
           {props.heading}
         </Heading>
         <ProfileTabSubText text={props.subText} />

@@ -8,6 +8,7 @@ interface Props {
     | ((event: React.MouseEvent) => Promise<void>)
     | ((event: React.MouseEvent) => void);
   dataTestid?: string;
+  id?: string;
   isUnderline?: boolean;
   isSmallerText?: boolean;
   isTextBold?: boolean;
@@ -69,6 +70,7 @@ export const UnStyledButton = forwardRef(
         {...(props.isButtonALink ? { role: "link" } : {})}
         {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
         {...(props.ariaLabel ? { "aria-label": props.ariaLabel } : {})}
+        {...(props.id ? { id: props.id } : {})}
       >
         <div
           ref={widthRef}

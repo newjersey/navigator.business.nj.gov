@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
   LegacyEventAction,
+  LegacyEventApiName,
   LegacyEventCategory,
   LegacyEventLabel,
 } from "@/lib/utils/analytics-legacy";
@@ -37,7 +38,29 @@ type EventType =
   | "tax_clearance_switch_step"
   | "tax_clearance_validation_error"
   | "tax_clearance_validation_success"
-  | "tool_tip_mouseover";
+  | "tool_tip_mouseover"
+  | "xray_lookup_failed"
+  | "xray_renewal_started_cta"
+  | "xray_renewal_started_expired_card"
+  | "xray_status_check_started"
+  | "xray_status_check_success_active"
+  | "xray_status_check_success_expired"
+  | "non_essential_question_view"
+  | "environmental_requirements_sbap"
+  | "env_requirements_assessment_started"
+  | "env_stepper_step_viewed"
+  | "env_final_cta_clicked"
+  | "env_question_answered"
+  | "env_permits_required_displayed"
+  | "env_no_permits_displayed"
+  | "env_responses_edit_started"
+  | "env_help_sbap_opened"
+  | "env_help_dep_opened"
+  | "env_help_responses_opened"
+  | "env_save_progress_prompted"
+  | "env_continue_without_auth"
+  | "env_contact_info_engaged"
+  | string;
 
 const eventMap: Record<EventType, string> = {
   account_clicks: "account_clicks",
@@ -65,6 +88,26 @@ const eventMap: Record<EventType, string> = {
   tax_clearance_validation_error: "tax_clearance_validation_error",
   tax_clearance_validation_success: "tax_clearance_validation_success",
   tool_tip_mouseover: "tool_tip_mouseover",
+  xray_lookup_failed: "xray_lookup_failed",
+  xray_renewal_started_cta: "xray_renewal_started_cta",
+  xray_renewal_started_expired_card: "xray_renewal_started_expired_card",
+  xray_status_check_started: "xray_status_check_started",
+  xray_status_check_success_active: "xray_status_check_success_active",
+  xray_status_check_success_expired: "xray_status_check_success_expired",
+  environmental_requirements_sbap: "environmental_requirements_sbap",
+  env_requirements_assessment_started: "env_requirements_assessment_started",
+  env_stepper_step_viewed: "env_stepper_step_viewed",
+  env_final_cta_clicked: "env_final_cta_clicked",
+  env_question_answered: "env_question_answered",
+  env_permits_required_displayed: "env_permits_required_displayed",
+  env_no_permits_displayed: "env_no_permits_displayed",
+  env_responses_edit_started: "env_responses_edit_started",
+  env_help_sbap_opened: "env_help_sbap_opened",
+  env_help_dep_opened: "env_help_dep_opened",
+  env_help_responses_opened: "env_help_responses_opened",
+  env_save_progress_prompted: "env_save_progress_prompted",
+  env_continue_without_auth: "env_continue_without_auth",
+  env_contact_info_engaged: "env_contact_info_engaged",
 };
 
 type ParameterType =
@@ -180,7 +223,8 @@ type FormName =
   | "industry_essential_questions"
   | "name_search"
   | "account_setup"
-  | "task_address_form";
+  | "task_address_form"
+  | "xray_address_form";
 
 type OnTabName =
   | "start_application"
@@ -840,6 +884,24 @@ export default {
             item: "roadmap_section",
           });
         },
+      },
+    },
+    api_submit: {
+      success: (apiName: LegacyEventApiName, apiDetails?: string) => {
+        eventRunner.track({
+          event: "form_submits",
+          legacy_event_category: apiName,
+          legacy_event_action: "api_submit_success",
+          legacy_event_label: apiDetails,
+        });
+      },
+      error: (api_name: string, api_details?: string) => {
+        eventRunner.track({
+          event: "form_submits",
+          legacy_event_category: api_name,
+          legacy_event_action: "api_submit_error",
+          legacy_event_label: api_details,
+        });
       },
     },
     profile_save: {
@@ -1631,6 +1693,54 @@ export default {
         },
       },
     },
+    formation_task_name_reservation_yes_option: {
+      click: {
+        show_additional_options: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_yes_option",
+            legacy_event_label: "show_additional_options",
+          });
+        },
+      },
+    },
+    formation_task_name_reservation_different_name_option: {
+      click: {
+        continue_formation_task: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_different_name_option",
+            legacy_event_label: "continue_formation_task",
+          });
+        },
+      },
+    },
+    formation_task_name_reservation_keep_reservation_option: {
+      click: {
+        instruct_close_formation_task: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_keep_reservation_option",
+            legacy_event_label: "instruct_close_formation_task",
+          });
+        },
+      },
+    },
+    formation_task_name_reservation_cancel_reservation_option: {
+      click: {
+        continue_formation_task: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "formation_task_name_reservation_cancel_reservation_option",
+            legacy_event_label: "continue_formation_task",
+          });
+        },
+      },
+    },
     business_formation_business_step_continue_button: {
       click: {
         arrive_on_business_formation_contacts_step: () => {
@@ -1961,7 +2071,102 @@ export default {
         },
       },
     },
-
+    cigarette_license: {
+      click: {
+        switch_to_step_one: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_1",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_one",
+          });
+        },
+        switch_to_step_two: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_2",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_two",
+          });
+        },
+        switch_to_step_three: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_3",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_three",
+          });
+        },
+        switch_to_step_four: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "cigarette_license_switch_to_step_4",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_four",
+          });
+        },
+        step_one_continue_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_1_continue_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_two",
+          });
+        },
+        step_two_continue_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_2_continue_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_three",
+          });
+        },
+        step_three_continue_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_3_continue_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_step_four",
+          });
+        },
+        step_four_submit_button: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "cigarette_license_task_step_4_submit_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_cigarette_success_screen_or_error_screen",
+          });
+        },
+      },
+      submit: {
+        validation_error: () => {
+          eventRunner.track({
+            event: "cigarette_license_task_validation_error",
+            legacy_event_category: "cigarette_license_task_step_4_submit_button",
+            legacy_event_action: "submit",
+            legacy_event_label: "remain_on_cigarette_license_step_4_validation_error",
+          });
+        },
+        service_error: () => {
+          eventRunner.track({
+            event: "cigarette_license_task_service_error",
+            legacy_event_category: "cigarette_license_task_step_4_submit_button",
+            legacy_event_action: "submit",
+            legacy_event_label: "remain_on_cigarette_license_step_4_service_error",
+          });
+        },
+      },
+      appears: {
+        validation_success: () => {
+          eventRunner.track({
+            event: "cigarette_license_task_validation_success",
+            legacy_event_category: "cigarette_license_task_success_screen",
+            legacy_event_action: "appear",
+            legacy_event_label: "arrive_on_cigarette_submission_success_screen",
+          });
+        },
+      },
+    },
     tax_calendar_register_button: {
       click: {
         show_myNJ_registration_prompt_modal: () => {
@@ -2394,6 +2599,58 @@ export default {
         },
       },
     },
+    cigarette_license_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "cigarette_license_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "cigarette_license_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
+    tax_clearance_anytime_action_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "tax_clearance_anytime_action_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "tax_clearance_anytime_action_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+        open_live_chat_from_error_alert: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "tax_clearance_anytime_action_error_alert_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "tax_clearance_anytime_action_error_alert_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
+    remove_business_modal_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "remove_business_modal_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "remove_business_modal_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
     my_account: {
       click: {
         my_account: () => {
@@ -2506,6 +2763,255 @@ export default {
             clicked: "link_your_myNJ_account",
             item: "link_your_myNJ_account_link",
             clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    xray_registration_check_status_form: {
+      submit: {
+        status_lookup_initiated: () => {
+          eventRunner.track({
+            event: "xray_status_check_started",
+            legacy_event_action: "submit",
+            legacy_event_category: "xray_registration_check_status_form",
+            legacy_event_label: "status_lookup_initiated",
+            form_name: "xray_address_form",
+          });
+        },
+      },
+    },
+    xray_registration_check_status_results: {
+      appears: {
+        active_registration_found: () => {
+          eventRunner.track({
+            event: "xray_status_check_success_active",
+            legacy_event_action: "appears",
+            legacy_event_category: "xray_registration_check_status_results",
+            legacy_event_label: "active_registration_found",
+          });
+        },
+        expired_registration_found: () => {
+          eventRunner.track({
+            event: "xray_status_check_success_expired",
+            legacy_event_action: "appears",
+            legacy_event_category: "xray_registration_check_status_results",
+            legacy_event_label: "expired_registration_found",
+          });
+        },
+      },
+    },
+    xray_registration_check_status_error: {
+      appears: {
+        record_not_found_error: () => {
+          eventRunner.track({
+            event: "xray_lookup_failed",
+            legacy_event_action: "appears",
+            legacy_event_category: "xray_registration_check_status_error",
+            legacy_event_label: "record_not_found_error",
+          });
+        },
+      },
+    },
+    xray_registration_expired_cta: {
+      click: {
+        xray_renewal_started_cta: () => {
+          eventRunner.track({
+            event: "xray_renewal_started_cta",
+            legacy_event_action: "click",
+            legacy_event_category: "xray_registration_expired_cta",
+            legacy_event_label: "renew_registration_button",
+          });
+        },
+      },
+    },
+    xray_registration_expired_status_card: {
+      click: {
+        xray_renewal_started_expired_card: () => {
+          eventRunner.track({
+            event: "xray_renewal_started_expired_card",
+            legacy_event_action: "click",
+            legacy_event_category: "xray_registration_expired_status_card",
+            legacy_event_label: "renew_ref_link",
+          });
+        },
+      },
+    },
+    email_sbap_clicked: {
+      click: {
+        email_sbap_clicked: () => {
+          eventRunner.track({
+            event: "email_sbap_clicked",
+            legacy_event_category: "support_request",
+            legacy_event_action: "email_button_click",
+            legacy_event_label: "environmental_requirements_sbap",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_initiated: {
+      arrive: {
+        general_guidance_initiated: () => {
+          eventRunner.track({
+            event: "env_requirements_assessment_started",
+            legacy_event_action: "arrive",
+            legacy_event_category: "environmental_requirements_assessment",
+            legacy_event_label: "general_guidance_initiated",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_step_category: {
+      click: {
+        general_guidance_step: (step: number, category: string) => {
+          eventRunner.track({
+            event: "env_stepper_step_viewed",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_stepper",
+            legacy_event_label: `step_${step}_${category}` as LegacyEventLabel,
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_save_see_results: {
+      click: {
+        general_guidance_save_see_results: () => {
+          eventRunner.track({
+            event: "env_final_cta_clicked",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_final_cta",
+            legacy_event_label: "save_see_results_clicked",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_permits_required_displayed: {
+      appears: {
+        general_guidance_permits_req_displayed: () => {
+          eventRunner.track({
+            event: "env_permits_required_displayed",
+            legacy_event_action: "appears",
+            legacy_event_category: "environmental_requirements_results",
+            legacy_event_label: "permits_required_displayed",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_no_permits_displayed: {
+      appears: {
+        general_guidance_no_permits_displayed: () => {
+          eventRunner.track({
+            event: "env_no_permits_displayed",
+            legacy_event_action: "appears",
+            legacy_event_category: "environmental_requirements_results",
+            legacy_event_label: "no_permits_needed_displayed",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_env_req_edits: {
+      click: {
+        general_guidance_env_req_edits: () => {
+          eventRunner.track({
+            event: "env_responses_edit_started",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_edit",
+            legacy_event_label: "edit_responses_clicked",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_contact_info_engagement: {
+      mouseover: {
+        general_guidance_contact_info_engage: () => {
+          eventRunner.track({
+            event: "env_contact_info_engaged",
+            legacy_event_action: "mouseover",
+            legacy_event_category: "environmental_requirements_contact",
+            legacy_event_label: "contact_info_hovered",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_continue_without_saving: {
+      click: {
+        general_guidance_continue_wo_saving: () => {
+          eventRunner.track({
+            event: "env_continue_without_auth",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_save",
+            legacy_event_label: "continue_without_saving_clicked",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_save_modal_displayed: {
+      appears: {
+        general_guidance_save_modal_displayed: () => {
+          eventRunner.track({
+            event: "env_save_progress_prompted",
+            legacy_event_action: "appears",
+            legacy_event_category: "environmental_requirements_save",
+            legacy_event_label: "mynewjersey_modal_displayed",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_responses_accordion_opened: {
+      click: {
+        general_guidance_resp_accordion_opened: () => {
+          eventRunner.track({
+            event: "env_help_responses_opened",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_help",
+            legacy_event_label: "responses_accordion_opened",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_dep_accordion_opened: {
+      click: {
+        general_guidance_dep_accordion_opened: () => {
+          eventRunner.track({
+            event: "env_help_dep_opened",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_help",
+            legacy_event_label: "dep_accordion_opened",
+          });
+        },
+      },
+    },
+    gen_guidance_stepper_sbap_accordion_opened: {
+      click: {
+        general_guidance_sbap_accordion_opened: () => {
+          eventRunner.track({
+            event: "env_help_sbap_opened",
+            legacy_event_action: "click",
+            legacy_event_category: "environmental_requirements_help",
+            legacy_event_label: "sbap_accordion_opened",
+          });
+        },
+      },
+    },
+    non_essential_question_view: {
+      view: {
+        non_essential_question_view: (question: string) => {
+          eventRunner.track({
+            event: "non_essential_question_view",
+            legacy_event_action: "view",
+            legacy_event_category: `non_essential_question_view_${question}`,
+            legacy_event_label: "non_essential_question_radio_button",
+          });
+        },
+      },
+    },
+    non_essential_question_set: {
+      view: {
+        non_essential_question_set: (question: string, value: string) => {
+          eventRunner.track({
+            event: "non_essential_question_view",
+            legacy_event_action: "set",
+            legacy_event_category: `non_essential_question_${question}_${value}`,
+            legacy_event_label: "non_essential_question_radio_button",
           });
         },
       },

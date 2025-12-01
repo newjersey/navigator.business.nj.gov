@@ -1,14 +1,14 @@
 ---
+id: money-order-seller
 displayname: money-order-seller
-id: "money-order-seller"
-webflowId: "5f772929c8aaf5eacbc9b52b"
-urlSlug: "money-order-seller"
-webflowName: "Money Order Seller"
-callToActionLink: "http://nj.gov/dobi/division_banking/licensees/bnklic_menu.htm"
-callToActionText: ""
+urlSlug: money-order-seller
+webflowName: Money Order Seller
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Office of Consumer Finance, License Services"
-divisionPhone: "(609) 292-7272"
-webflowIndustry: "Money Order"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Office of Consumer Finance, License Services
+callToActionText: Learn About Banking Licenses
+callToActionLink: http://nj.gov/dobi/division_banking/licensees/bnklic_menu.htm
+webflowIndustry: Money Order
+divisionPhone: (609) 292-7272
+webflowId: 5f772929c8aaf5eacbc9b52b
+licenseCertificationClassification: LICENSE
 ---

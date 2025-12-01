@@ -1,6 +1,6 @@
 import { getErrorStateForAddressField } from "@/components/profile/getErrorStateForAddressField";
 import { AddressContext } from "@/contexts/addressContext";
-import { AddressFields, FieldsForAddressErrorHandling } from "@/lib/types/types";
+import { AddressFields, FieldsForAddressErrorHandling } from "@businessnjgovnavigator/shared/types";
 import { useContext } from "react";
 
 type AddressErrorsResponse = {

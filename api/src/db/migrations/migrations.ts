@@ -173,6 +173,15 @@ import { migrate_v168_to_v169 } from "@db/migrations/v169_remove_formationformda
 import { migrate_v169_to_v170 } from "@db/migrations/v170_consolidate_environment_data";
 import { migrate_v170_to_v171 } from "@db/migrations/v171_flatten_cigarette_license";
 import { migrate_v171_to_v172 } from "@db/migrations/v172_add_cig_license_payment_info";
+import { migrate_v172_to_v173 } from "@db/migrations/v173_add_school_bus_passenger_transport";
+import { migrate_v173_to_v174 } from "@db/migrations/v174_add_public_works_contractor";
+import { migrate_v174_to_v175 } from "@db/migrations/v175_add_payment_complete_to_cig_license";
+import { migrate_v175_to_v176 } from "@db/migrations/v176_add_check_name_reservation_options";
+import { migrate_v176_to_v177 } from "@db/migrations/v177_add_business_name_confirmation";
+import { migrate_v177_to_v178 } from "@db/migrations/v178_add_employer_access";
+import { migrate_v178_to_v179 } from "@db/migrations/v179_add_business_deletion_date";
+import { migrate_v179_to_v180 } from "@db/migrations/v180_add_email_sent_environment_data";
+import { migrate_v180_to_v181 } from "@db/migrations/v181_add_updates_reminders_and_phone_number";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -350,6 +359,15 @@ export const Migrations: MigrationFunction[] = [
   migrate_v169_to_v170,
   migrate_v170_to_v171,
   migrate_v171_to_v172,
+  migrate_v172_to_v173,
+  migrate_v173_to_v174,
+  migrate_v174_to_v175,
+  migrate_v175_to_v176,
+  migrate_v176_to_v177,
+  migrate_v177_to_v178,
+  migrate_v178_to_v179,
+  migrate_v179_to_v180,
+  migrate_v180_to_v181,
 ];
 
-export { generatev172UserData as CURRENT_GENERATOR } from "@db/migrations/v172_add_cig_license_payment_info";
+export { generatev181UserData as CURRENT_GENERATOR } from "@db/migrations/v181_add_updates_reminders_and_phone_number";

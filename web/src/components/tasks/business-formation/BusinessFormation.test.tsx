@@ -1,6 +1,4 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { Task } from "@/lib/types/types";
 import { getDollarValue } from "@/lib/utils/formatters";
 import {
   generateEmptyFormationData,
@@ -27,6 +25,7 @@ import {
   getCurrentDateInNewJerseyFormatted,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateFormationSubmitResponse,
@@ -34,6 +33,7 @@ import {
   generateProfileData,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test/";
+import { Task } from "@businessnjgovnavigator/shared/types";
 
 import { Content } from "@/components/Content";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";

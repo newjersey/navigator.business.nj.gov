@@ -6,7 +6,7 @@ agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6245
 filename: alarm-locksmith-license
 name: Apply for Your Fire Alarm License, Burglar Alarm or Locksmith License
-webflowName: fire-burglar-locksmith-alarm-systems-if-over-10-volts
+webflowName: Fire Alarm License, Burglar Alarm or Locksmith License
 summaryDescriptionMd: You must have a license to work as a locksmith and
   install, service, or maintain burglar alarms, fire alarms, or electronic
   security systems in New Jersey.

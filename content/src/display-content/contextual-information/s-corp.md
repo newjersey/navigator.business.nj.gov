@@ -1,7 +1,7 @@
 ---
+header: S Corporation (S-corp)
 id: s-corp
 displayname: s-corp
-header: S Corporation
 ---
 
 S corporations are entities that choose to pass corporate income, some losses, deductions, and credits to their shareholders for federal and state tax purposes. This allows S corporations to avoid double taxation on the corporate income. Shareholders of S corporations report the flow-through of income and losses on their personal tax returns to be assessed at their individual income tax rates.

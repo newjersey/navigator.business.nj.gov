@@ -47,7 +47,7 @@ summaryDescriptionMd: >-
 
   * Charter buses
 issuingAgency: NJ Motor Vehicle Commission | Business Licensing Services Bureau
-  – Passenger Carrier Unit
+  - Passenger Carrier Unit
 ---
 
 &nbsp;

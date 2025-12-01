@@ -1,0 +1,24 @@
+{
+  "extends": "../../.eslintrc.json",
+  "env": {
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*"],
+      "rules": {
+        "no-restricted-imports": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "no-undef": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "unicorn/no-null": "off",
+        "eqeqeq": "off",
+        "jest-formatting/padding-around-describe-blocks": "off",
+        "jest-formatting/padding-around-before-each-blocks": "off",
+        "jest-formatting/padding-around-test-blocks": "off"
+      }
+    }
+  ]
+}

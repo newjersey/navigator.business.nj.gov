@@ -232,7 +232,7 @@ export const userRouterFactory = (
       })
       .catch((error: Error) => {
         if (error.message === "Not found") {
-          if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
+          if (["dev", "local"].includes(process.env.STAGE || "")) {
             logger.LogInfo(
               `${method} ${endpoint} - user not found, creating empty user, userId: ${requestedUserId}`,
             );
@@ -392,6 +392,7 @@ export const userRouterFactory = (
       externalStatus: {},
       receiveNewsletter: true,
       userTesting: true,
+      receiveUpdatesAndReminders: true,
       abExperience: decideABExperience(),
       accountCreationSource: "Test Source",
       contactSharingWithAccountCreationPartner: true,

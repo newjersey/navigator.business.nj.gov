@@ -1,9 +1,9 @@
 import { EmergencyTripPermitWithValidation } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWithValidation";
 import { AnytimeActionElement } from "@/components/tasks/anytime-action/AnytimeActionElement";
-import { AnytimeActionGovernmentContractingElement } from "@/components/tasks/anytime-action/AnytimeActionGovernmentContractingElement";
+import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
 import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
-import { AnytimeActionTask } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 interface Props {
@@ -27,9 +27,7 @@ export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
   }
   return rswitch(props.anytimeActionTask.filename, {
     "government-contracting": (
-      <AnytimeActionGovernmentContractingElement
-        governmentContractingTask={props.anytimeActionTask}
-      />
+      <GovernmentContractingElement anytimeActionHeaderText={props.anytimeActionTask.name} />
     ),
     default: <AnytimeActionElement anytimeAction={props.anytimeActionTask} />,
   });

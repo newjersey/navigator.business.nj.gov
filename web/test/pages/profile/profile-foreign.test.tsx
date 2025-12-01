@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect */
-import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { allLegalStructuresOfType, randomHomeBasedIndustry } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
@@ -22,6 +21,7 @@ import {
   ProfileData,
   TaxFilingData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateTaxFilingData,

@@ -1,5 +1,5 @@
-import { ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { merge } from "lodash";
 import { useEffect, useState } from "react";
 

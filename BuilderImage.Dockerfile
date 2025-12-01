@@ -1,22 +1,24 @@
-FROM cimg/node:22.16.0-browsers
+FROM cimg/node:22.20.0-browsers
 
 USER root
 
 WORKDIR /app
 
-
-#Install Other tools. JDK, awscli, githubcli
+# Install Other tools: JDK, AWS CLI v2, GitHub CLI
 RUN apt-get update && \
-    apt install -y openjdk-11-jdk-headless && \
-    apt-get install -y awscli && \
-    #Github CLI
+    apt-get install -y openjdk-11-jdk-headless unzip curl && \
+    # Install AWS CLI v2
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -rf awscliv2.zip aws && \
+    # Install GitHub CLI
     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
-    apt update && \
-    apt -y install gh
+    apt-get update && apt-get install -y gh
 
-# Tools/Dependencies needed for Browser
-RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb libu2f-udev
+# Tools/Dependencies needed for Browsers
+RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth xvfb libu2f-udev
 
 # Install Yarn via Corepack
 RUN corepack enable
@@ -35,7 +37,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     apt-get update -y && \
     apt-get install -y microsoft-edge-stable
 
-# Install Browsers.
 # Firefox
 RUN wget --no-verbose -O /tmp/firefox.tar.xz 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' \
     && tar -C /opt -xf /tmp/firefox.tar.xz \

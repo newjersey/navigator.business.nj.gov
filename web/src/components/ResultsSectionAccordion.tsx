@@ -8,8 +8,8 @@ interface Props {
   title: string;
   titleIcon?: ReactNode;
   headingStyleOverride?: string;
-  summaryClass?: string;
   children: ReactNode;
+  onOpenFunc?: () => void;
 }
 
 export const ResultsSectionAccordion = (props: Props): ReactElement => {
@@ -19,9 +19,16 @@ export const ResultsSectionAccordion = (props: Props): ReactElement => {
   return (
     <div data-testid={`section-${sectionName}`}>
       <SectionAccordionContext.Provider value={{ isOpen }}>
-        <Accordion expanded={isOpen} onChange={() => setIsOpen(!isOpen)}>
+        <Accordion
+          expanded={isOpen}
+          onChange={() => {
+            if (props.onOpenFunc && !isOpen) {
+              props.onOpenFunc();
+            }
+            setIsOpen(!isOpen);
+          }}
+        >
           <AccordionSummary
-            className={props.summaryClass}
             expandIcon={
               <Icon className={"usa-icon--size-5 margin-left-1"} iconName={"expand_more"} />
             }

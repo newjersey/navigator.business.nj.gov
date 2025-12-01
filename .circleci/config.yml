@@ -19,28 +19,61 @@ commands:
       - run:
           name: Install yarn packages
           command: yarn install
-  validate-serverless-access-key:
-    steps:
-      - run:
-          name: Validate Serverless Access Key
-          command: |
-            echo "Validating SERVERLESS_ACCESS_KEY"
-            if [ -z "${SERVERLESS_ACCESS_KEY}" ]; then
-              echo "Error: SERVERLESS_ACCESS_KEY is not set"
-              exit 1
-            else
-              echo "SERVERLESS_ACCESS_KEY is set"
-            fi
   install-dynamodb:
     steps:
       - run:
           name: Install Dynamodb local
           command: yarn workspace @businessnjgovnavigator/api install-dynamo-local
+  start-dynamodb:
+    steps:
+      - run:
+          name: Start DynamoDB
+          background: true
+          command: |
+            cd api
+            echo "Starting DynamoDB Local..."
+            java -Djava.library.path=.dynamodb/DynamoDBLocal_lib \
+                 -jar .dynamodb/DynamoDBLocal.jar \
+                 -sharedDb -port 8000 > dynamodb.log 2>&1
+  wait-for-dynamodb:
+    steps:
+      - run:
+          name: Wait for DynamoDB Local to be ready
+          command: |
+            echo "Waiting for DynamoDB Local to be ready..."
+            ATTEMPTS=0
+            until curl -s http://localhost:8000 >/dev/null; do
+              ATTEMPTS=$((ATTEMPTS+1))
+              if [ "$ATTEMPTS" -ge 20 ]; then
+                echo "DynamoDB did not start within expected time. Dumping logs:"
+                cat api/dynamodb.log || true
+                exit 1
+              fi
+              echo "DynamoDB not ready, retrying... ($ATTEMPTS)"
+              sleep 3
+            done
+            echo "DynamoDB Local is ready!"
+  initialize-dynamodb-tables:
+    steps:
+      - run:
+          name: Initialize DynamoDB Tables
+          command: |
+            echo "Creating tables..."
+            cd api
+            aws dynamodb create-table \
+              --cli-input-json file://users-dynamodb-schema.json \
+              --endpoint-url http://localhost:8000 \
+              --region us-east-1 || echo "users table already exists"
+
+            aws dynamodb create-table \
+              --cli-input-json file://businesses-dynamodb-schema.json \
+              --endpoint-url http://localhost:8000 \
+              --region us-east-1 || echo "businesses table already exists"
+            echo "Tables initialized!"
 
   configure:
     steps:
       - bootstrap-code
-      - validate-serverless-access-key
   configure-smoke-test:
     steps:
       - run: sudo apt update
@@ -180,13 +213,26 @@ commands:
             - ./web/.next/cache
             - ~/.npm-global
 
-  deploy-serverless:
+  deploy-cdk:
     steps:
       - run:
-          name: Deploy Serverless
-          command:
-            yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE}
-            --region us-east-1
+          name: Clear CDK Context
+          command: |
+            yarn workspace @businessnjgovnavigator/api-cdk cdk context --clear
+      - run:
+          name: CDK Bootstrap
+          command: |
+            echo "Running CDK bootstrap for stage: $STAGE ..."
+            yarn workspace @businessnjgovnavigator/api-cdk cdk bootstrap aws://$AWS_ACCOUNT_ID/us-east-1 \
+              --bootstrap-bucket-name cdk-biz-nj-assets-$AWS_ACCOUNT_ID-us-east-1 \
+              --qualifier biz-nj \
+              --trust arn:aws:iam::$AWS_ACCOUNT_ID:user/system/bfs-navigator \
+              --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess || \
+              echo "Bootstrap already completed or not required."
+      - run:
+          name: Deploy CDK
+          command: |
+            yarn workspace @businessnjgovnavigator/api-cdk cdk deploy --all --qualifier biz-nj --verbose --region us-east-1 --require-approval never
 
   set-shared-stage-env-vars:
     steps:
@@ -199,6 +245,10 @@ commands:
       - run:
           name: Set Development Environment Variables
           command: |
+            echo 'export VPC_ID=$VPC_ID_AWS_DEV' >> $BASH_ENV
+            echo 'export SUBNET_ID_01=$SUBNET_ID_01_AWS_DEV' >> $BASH_ENV
+            echo 'export SUBNET_ID_02=$SUBNET_ID_02_AWS_DEV' >> $BASH_ENV
+            echo 'export SG_ID=$SG_ID_AWS_DEV' >> $BASH_ENV
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_DEV' >> $BASH_ENV
             echo 'export ABC_ETP_API_ACCOUNT=$ABC_ETP_API_ACCOUNT_STAGING' >> $BASH_ENV
             echo 'export ABC_ETP_API_BASE_URL=$ABC_ETP_API_BASE_URL_STAGING' >> $BASH_ENV
@@ -218,7 +268,6 @@ commands:
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
             echo 'export BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD' >> $BASH_ENV
             echo 'export BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME' >> $BASH_ENV
-            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_DEV' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_DEV' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV' >> $BASH_ENV
@@ -242,12 +291,13 @@ commands:
             echo 'export DYNAMICS_LICENSE_STATUS_TENANT_ID=$DYNAMICS_LICENSE_STATUS_TENANT_ID_DEV' >> $BASH_ENV
             echo 'export DYNAMICS_LICENSE_STATUS_URL=$DYNAMICS_LICENSE_STATUS_URL_DEV' >> $BASH_ENV
             echo 'export FEATURE_ABC_ETP_APPLICATION=$FEATURE_ABC_ETP_APPLICATION_DEV' >> $BASH_ENV
+            echo 'export FEATURE_EMPLOYER_RATES=$FEATURE_EMPLOYER_RATES_DEV' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_DEV' >> $BASH_ENV
             echo 'export FEATURE_CIGARETTE_LICENSE=$FEATURE_CIGARETTE_LICENSE_DEV' >> $BASH_ENV
-            echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_DEV' >> $BASH_ENV
             echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_DEV' >> $BASH_ENV
             echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_DEV' >> $BASH_ENV
             echo 'export FEATURE_MODIFY_BUSINESS_PAGE=$FEATURE_MODIFY_BUSINESS_PAGE_DEV' >> $BASH_ENV
+            echo 'export FEATURE_SHOW_REMOVE_BUSINESS=$FEATURE_SHOW_REMOVE_BUSINESS_DEV' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV' >> $BASH_ENV
             echo 'export FORMATION_API_ACCOUNT=$FORMATION_API_ACCOUNT_DEV' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_DEV' >> $BASH_ENV
@@ -260,7 +310,6 @@ commands:
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_DEV' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_DEV' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_DEV' >> $BASH_ENV
-            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_DEV' >> $BASH_ENV
             echo 'export SHOW_DISABLED_INDUSTRIES=$DEV_SHOW_DISABLED_INDUSTRIES' >> $BASH_ENV
             echo 'export SMOKE_TEST_ENV=$SMOKE_TEST_ENV_DEV' >> $BASH_ENV
             echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV' >> $BASH_ENV
@@ -274,8 +323,12 @@ commands:
       - run:
           name: Set Cypress Environment Variables
           command: |
-            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_DEV' >> $BASH_ENV
-            echo 'export API_BASE_URL=http://localhost:5002/local' >> $BASH_ENV
+            echo 'export AWS_REGION=us-east-1' >> $BASH_ENV
+            echo 'export IS_OFFLINE=true' >> $BASH_ENV
+            echo 'export STAGE=local' >> $BASH_ENV
+            echo 'export DYNAMODB_ENDPOINT=http://localhost:8000' >> $BASH_ENV
+            echo 'export DYNAMO_PORT=8000' >> $BASH_ENV
+            echo 'export API_BASE_URL=http://localhost:5002' >> $BASH_ENV
             echo 'export USE_FAKE_SELF_REG=true' >> $BASH_ENV
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
@@ -283,14 +336,14 @@ commands:
             echo 'export USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH=true' >> $BASH_ENV
 
             echo 'export ADMIN_PASSWORD=Test1!' >> $BASH_ENV
-            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID=local' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_STAGE=$AWS_CRYPTO_CONTEXT_STAGE_DEV' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE=$AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE=$AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY=$AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV' >> $BASH_ENV
             echo 'export AWS_CRYPTO_TAX_ID_HASHING_KEY=$AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV' >> $BASH_ENV
-            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=local' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV
@@ -315,7 +368,9 @@ commands:
             echo 'export FEATURE_CIGARETTE_LICENSE=true' >> $BASH_ENV
             echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_DEV' >> $BASH_ENV
             echo 'export FEATURE_LOGIN_PAGE=true' >> $BASH_ENV
+            echo 'export FEATURE_SHOW_REMOVE_BUSINESS=$FEATURE_SHOW_REMOVE_BUSINESS_DEV' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV' >> $BASH_ENV
+            echo 'export FEATURE_EMPLOYER_RATES=$FEATURE_EMPLOYER_RATES_DEV' >> $BASH_ENV
             echo 'export SKIP_SAVE_DOCUMENTS_TO_S3=true' >> $BASH_ENV
             echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV' >> $BASH_ENV
             echo 'export TAX_CLEARANCE_CERTIFICATE_URL=$TAX_CLEARANCE_CERTIFICATE_URL_DEV' >> $BASH_ENV
@@ -325,15 +380,18 @@ commands:
       - run:
           name: Set Staging Environment Variables
           command: |
+            echo 'export VPC_ID=$VPC_ID_AWS_STAGING' >> $BASH_ENV
+            echo 'export SUBNET_ID_01=$SUBNET_ID_01_AWS_STAGING' >> $BASH_ENV
+            echo 'export SUBNET_ID_02=$SUBNET_ID_02_AWS_STAGING' >> $BASH_ENV
+            echo 'export SG_ID=$SG_ID_AWS_STAGING' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_STAGING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_STAGING' >> $BASH_ENV
-            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_STAGING' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_STAGING' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_STAGING' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_STAGING' >> $BASH_ENV
             echo 'export FEATURE_CIGARETTE_LICENSE=$FEATURE_CIGARETTE_LICENSE_STAGING' >> $BASH_ENV
-            echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_STAGING' >> $BASH_ENV
+            echo 'export FEATURE_EMPLOYER_RATES=$FEATURE_EMPLOYER_RATES_STAGING' >> $BASH_ENV
             echo 'export FORMATION_API_ACCOUNT=$FORMATION_API_ACCOUNT_STAGING' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export FORMATION_API_KEY=$FORMATION_API_KEY_STAGING' >> $BASH_ENV
@@ -345,7 +403,6 @@ commands:
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_STAGING' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_STAGING' >> $BASH_ENV
-            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_STAGING' >> $BASH_ENV
             echo 'export XRAY_REGISTRATION_STATUS_BASE_URL=$XRAY_REGISTRATION_STATUS_BASE_URL_STAGING' >> $BASH_ENV
 
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_STAGING' >> $BASH_ENV
@@ -386,6 +443,7 @@ commands:
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_STAGING' >> $BASH_ENV
             echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_STAGING' >> $BASH_ENV
             echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_STAGING' >> $BASH_ENV
+            echo 'export FEATURE_SHOW_REMOVE_BUSINESS=$FEATURE_SHOW_REMOVE_BUSINESS_STAGING' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_STAGING' >> $BASH_ENV
             echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_STAGING' >> $BASH_ENV
             echo 'export TAX_CLEARANCE_CERTIFICATE_URL=$TAX_CLEARANCE_CERTIFICATE_URL_STAGING' >> $BASH_ENV
@@ -397,14 +455,16 @@ commands:
       - run:
           name: Set Production Environment Variables
           command: |
+            echo 'export VPC_ID=$VPC_ID_AWS_PROD' >> $BASH_ENV
+            echo 'export SUBNET_ID_01=$SUBNET_ID_01_AWS_PROD' >> $BASH_ENV
+            echo 'export SUBNET_ID_02=$SUBNET_ID_02_AWS_PROD' >> $BASH_ENV
+            echo 'export SG_ID=$SG_ID_AWS_PROD' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
-            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_PROD' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_PROD' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_PROD' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_PROD' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_PROD' >> $BASH_ENV
-            echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_PROD' >> $BASH_ENV
             echo 'export FORMATION_API_ACCOUNT=$FORMATION_API_ACCOUNT_PROD' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_PROD' >> $BASH_ENV
             echo 'export FORMATION_API_KEY=$FORMATION_API_KEY_PROD' >> $BASH_ENV
@@ -417,13 +477,15 @@ commands:
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_PROD' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_PROD' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV
-            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_PROD' >> $BASH_ENV
             echo 'export XRAY_REGISTRATION_STATUS_BASE_URL=$XRAY_REGISTRATION_STATUS_BASE_URL_PROD' >> $BASH_ENV
 
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_PROD' >> $BASH_ENV
             echo 'export FEATURE_CIGARETTE_LICENSE=$FEATURE_CIGARETTE_LICENSE_PROD' >> $BASH_ENV
             echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_PROD' >> $BASH_ENV
+            echo 'export FEATURE_SHOW_REMOVE_BUSINESS=$FEATURE_SHOW_REMOVE_BUSINESS_PROD' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_PROD' >> $BASH_ENV
+            echo 'export FEATURE_EMPLOYER_RATES=$FEATURE_EMPLOYER_RATES_PROD' >> $BASH_ENV
+
             echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_PROD' >> $BASH_ENV
             echo 'export TAX_CLEARANCE_CERTIFICATE_URL=$TAX_CLEARANCE_CERTIFICATE_URL_PROD' >> $BASH_ENV
             echo 'export TAX_CLEARANCE_CERTIFICATE_USER_NAME=$TAX_CLEARANCE_CERTIFICATE_USER_NAME_PROD' >> $BASH_ENV
@@ -470,8 +532,10 @@ commands:
       - run:
           name: Set Content Environment Variables
           command: |
-            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_CONTENT' >> $BASH_ENV
-            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_CONTENT' >> $BASH_ENV
+            echo 'export VPC_ID=$VPC_ID_AWS_DEV' >> $BASH_ENV
+            echo 'export SUBNET_ID_01=$SUBNET_ID_01_AWS_DEV' >> $BASH_ENV
+            echo 'export SUBNET_ID_02=$SUBNET_ID_02_AWS_DEV' >> $BASH_ENV
+            echo 'export SG_ID=$SG_ID_AWS_DEV' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_CONTENT' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_CONTENT' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_CONTENT' >> $BASH_ENV
@@ -491,6 +555,10 @@ commands:
       - run:
           name: Set Testing Environment Variables
           command: |
+            echo 'export VPC_ID=$VPC_ID_AWS_DEV' >> $BASH_ENV
+            echo 'export SUBNET_ID_01=$SUBNET_ID_01_AWS_DEV' >> $BASH_ENV
+            echo 'export SUBNET_ID_02=$SUBNET_ID_02_AWS_DEV' >> $BASH_ENV
+            echo 'export SG_ID=$SG_ID_AWS_DEV' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_TESTING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_TESTING' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE=$AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE' >> $BASH_ENV
@@ -498,7 +566,6 @@ commands:
             echo 'export AWS_CRYPTO_TAX_ID_HASHING_KEY=$AWS_CRYPTO_TAX_ID_HASHING_KEY_TESTING' >> $BASH_ENV
             echo 'export BASIC_AUTH_AGENCY_PASSWORD=$BASIC_AUTH_AGENCY_PASSWORD_TESTING' >> $BASH_ENV
             echo 'export BASIC_AUTH_AGENCY_USERNAME=$BASIC_AUTH_AGENCY_USERNAME_TESTING' >> $BASH_ENV
-            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_TESTING' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_ACCESSIBILITY_TESTING' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_ACCESSIBILITY_TESTING' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_ACCESSIBILITY_TESTING' >> $BASH_ENV
@@ -506,7 +573,6 @@ commands:
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_TESTING' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_TESTING' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_ACCESSIBILITY_TESTING' >> $BASH_ENV
-            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_TESTING' >> $BASH_ENV
 
   deploy-setup:
     steps:
@@ -514,7 +580,7 @@ commands:
       - setup_remote_docker:
           version: edge
           docker_layer_caching: true
-      - deploy-serverless
+      - deploy-cdk
 
   deploy-content-env:
     steps:
@@ -656,31 +722,12 @@ commands:
           docker_layer_caching: true
       - checkout
       - build-and-push-custom-node-image:
-          image-name: bfs_navigator_builder-22_16_0
+          image-name: bfs_navigator_builder-22_20_0
 
 jobs:
-  merge-content:
-    docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
-    steps:
-      - checkout
-      - run:
-          name: Update content-repo branch
-          command: |
-            export GIT_MERGE_AUTOEDIT=no
-            gh auth setup-git
-            git config --global user.email "business-engineering@innovation.nj.gov"
-            git config --global user.name  "NJ Innovation CI"
-            git checkout content-repo
-            git merge origin/main
-            git push
-
   build:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -695,7 +742,7 @@ jobs:
 
   lint:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -708,7 +755,7 @@ jobs:
 
   test:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -723,6 +770,7 @@ jobs:
           name: Glob, Split, and Run Unit Tests
           command: |
             yarn test:ci --shard=$(expr $CIRCLE_NODE_INDEX + 1)/$CIRCLE_NODE_TOTAL
+          max_auto_reruns: 1
       - store_test_results:
           path: coverage/test_results
       - store_artifacts:
@@ -731,7 +779,7 @@ jobs:
 
   prepare-release:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -745,7 +793,7 @@ jobs:
     environment:
       STAGE: content
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -761,7 +809,7 @@ jobs:
     environment:
       STAGE: testing
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -777,7 +825,7 @@ jobs:
     environment:
       STAGE: dev
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -794,7 +842,7 @@ jobs:
     environment:
       STAGE: staging
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -807,7 +855,7 @@ jobs:
     environment:
       STAGE: prod
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -826,7 +874,7 @@ jobs:
         type: string
         default: "chrome"
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-22_20_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -836,12 +884,15 @@ jobs:
           at: .
       - configure-and-build
       - install-dynamodb
+      - start-dynamodb
+      - wait-for-dynamodb
+      - initialize-dynamodb-tables
       - perform-integration-tests:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
           browser: << parameters.browser >>
     environment:
-      CYPRESS_API_BASE_URL: http://localhost:5002/local
+      CYPRESS_API_BASE_URL: http://localhost:5002
 
   smoke-tests:
     parameters:
@@ -1126,13 +1177,6 @@ workflows:
       #          - main
       #    requires:
       #      - dev-deploy
-      - merge-content:
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
 
   # browser-testing:
   #   triggers:
@@ -1219,7 +1263,7 @@ workflows:
     jobs:
       - docker-build-builder-image
 
-  build-testing-weekly:
+  deploy-testing-weekly-from-main:
     triggers:
       - schedule:
           # Every Saturday, at Noon.
@@ -1227,7 +1271,7 @@ workflows:
           filters:
             branches:
               only:
-                - testing-repo
+                - main
     jobs:
       - deploy-testing
   scheduled-daily-tests-content-repo:
