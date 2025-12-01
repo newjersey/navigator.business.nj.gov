@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Content } from "@/components/Content";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -9,7 +11,6 @@ import {
   createSignedEmptyFormationObject,
   needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -194,6 +195,8 @@ export const Signatures = (): ReactElement => {
             "aria-label": `Signer title ${index}`,
             "data-testid": `signer-title-${index}`,
           }}
+          SelectDisplayProps={{ "aria-required": "true" }}
+          required
           renderValue={(selected): ReactNode => {
             if (!selected) {
               return <></>;
@@ -274,7 +277,7 @@ export const Signatures = (): ReactElement => {
 
     return (
       <>
-        <FormationField fieldName="signers">
+        <ScrollableFormFieldWrapper fieldName="signers">
           <GenericTextField
             inputWidth="full"
             value={state.formationFormData.signers[index].name}
@@ -287,9 +290,9 @@ export const Signatures = (): ReactElement => {
             fieldName="signer"
             className={`margin-top-0`}
             ariaLabel={`Signer ${index}`}
-            required={true}
+            required
           />
-        </FormationField>
+        </ScrollableFormFieldWrapper>
       </>
     );
   };
@@ -316,10 +319,11 @@ export const Signatures = (): ReactElement => {
   return (
     <>
       <div className="grid-col" data-testid="signers-section">
-        <Heading level={2} styleVariant={"h3"}>
-          {Config.formation.fields.signers.label}
-        </Heading>
+        <Heading level={2}>{Config.formation.fields.signers.label}</Heading>
         <Content>{getDescription()}</Content>
+        <LargeCallout calloutType="informational">
+          <Content>{Config.formation.fields.signers.keepInMindCallout}</Content>
+        </LargeCallout>
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`} data-testid="signers-0">
             {atLeastOneSignerExists && (

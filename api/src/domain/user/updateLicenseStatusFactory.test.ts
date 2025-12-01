@@ -262,8 +262,27 @@ describe("updateLicenseStatus", () => {
       );
     });
 
-    it("returns empty license object when data of current task to have error license data when webservice receives NO_MATCH_ERROR and rgb also fails", async () => {
-      stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error(NO_MATCH_ERROR));
+    it("throws error if SearchLicenseStatus client error is missing a message", async () => {
+      const testError = { name: "fake-error" };
+
+      stubWebserviceLicenseStatusSearch.mockRejectedValue(testError);
+      stubRGBLicenseStatusSearch.mockRejectedValue(testError);
+
+      userData = modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        licenseData: generateLicenseData({}),
+      }));
+
+      await expect(updateLicenseStatus(userData, nameAndAddress)).rejects.toThrow(
+        JSON.stringify({
+          webserviceErrorMessage: testError,
+          rgbErrorMessage: testError,
+        }),
+      );
+    });
+
+    it("returns empty license object when data of current task to have error license data when webservice receives NO_ADDRESS_MATCH_ERROR and rgb also fails", async () => {
+      stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error(NO_ADDRESS_MATCH_ERROR));
       stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
       userData = modifyCurrentBusiness(userData, (business) => ({

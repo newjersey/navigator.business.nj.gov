@@ -1,14 +1,14 @@
 ---
+id: midwife-lay
 displayname: midwife-lay
-id: "midwife-lay"
-webflowId: "5f77299c306c6c3f77066fa0"
-urlSlug: "midwife-lay"
-webflowName: "Midwife/Lay"
-callToActionLink: "https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx"
-callToActionText: ""
+urlSlug: midwife-lay
+webflowName: Midwife/Lay
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "Board of Medical Examiners"
+agencyAdditionalContext: Board of Medical Examiners
+callToActionText: Get a Midwife License
+callToActionLink: https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx
+webflowIndustry: Midwife
 divisionPhone: ""
-webflowIndustry: "Midwife"
-licenseCertificationClassification: "LICENSE"
+webflowId: 5f77299c306c6c3f77066fa0
+licenseCertificationClassification: LICENSE
 ---

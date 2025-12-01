@@ -1,9 +1,8 @@
 import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Content } from "@/components/Content";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ElevatorRegistrationSearchError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   ElevatorSafetyAddress,
@@ -11,6 +10,8 @@ import {
   Municipality,
   toProperCase,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { ElevatorRegistrationSearchError } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
 
@@ -133,7 +134,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
       {Config.elevatorRegistrationSearchTask.registrationSearchPrompt}
       <form onSubmit={onSubmit} className={"padding-top-1"}>
         <div className="margin-bottom-2">
-          <label htmlFor="address-1">{Config.elevatorRegistrationSearchTask.address1Label}</label>
+          <label htmlFor="address-1">
+            <strong>{Config.elevatorRegistrationSearchTask.address1Label}</strong>
+          </label>
           <TextField
             value={formValues.address1}
             onChange={handleChangeForKey("address1")}
@@ -145,7 +148,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-2">{Config.elevatorRegistrationSearchTask.address2Label}</label>
+          <label htmlFor="address-2">
+            <Content>{Config.elevatorRegistrationSearchTask.address2Label}</Content>
+          </label>
           <TextField
             value={formValues.address2}
             onChange={handleChangeForKey("address2")}
@@ -159,7 +164,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
             <label htmlFor="municipality">
-              {Config.elevatorRegistrationSearchTask.municipalityLabel}
+              <strong>{Config.elevatorRegistrationSearchTask.municipalityLabel}</strong>
             </label>
             <MunicipalityDropdown
               fieldName={"municipalities"}
@@ -173,7 +178,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
             />
           </div>
           <div className="flex-half padding-left-1">
-            <label htmlFor="state">{Config.elevatorRegistrationSearchTask.stateLabel}</label>
+            <label htmlFor="state">
+              <strong>{Config.elevatorRegistrationSearchTask.stateLabel}</strong>
+            </label>
             <TextField
               value={"New Jersey"}
               onChange={(): void => {}}

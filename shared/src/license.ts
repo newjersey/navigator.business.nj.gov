@@ -89,8 +89,8 @@ export const enabledLicensesSources = {
 
 export const taskIdLicenseNameMapping = {
   "apply-for-shop-license": "Cosmetology and Hairstyling-Shop",
-  "appraiser-license": "Real Estate Appraisers-Appraisal Management Company",
-  "architect-license": "Architecture-Certificate of Authorization",
+  "appraiser-company-register": "Real Estate Appraisers-Appraisal Management Company",
+  "authorization-architect-firm": "Architecture-Certificate of Authorization",
   "electrologist-office-license": "Electrologists-Premises",
   "health-club-registration": "Health Club Services",
   "home-health-aide-license": "Health Care Services",

@@ -7,7 +7,6 @@ import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -16,13 +15,18 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { createEmptyDbaDisplayContent } from "@/lib/types/types";
 import {
   generateFormationFormData,
   generateProfileData,
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared/";
+import {
+  ConfigContext,
+  ConfigType,
+  getMergedConfig,
+} from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { createEmptyDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
@@ -48,6 +52,11 @@ const Template = () => {
           hasSetStateFirstTime: false,
           businessNameAvailability: undefined,
           dbaBusinessNameAvailability: undefined,
+          reviewCheckboxes: {
+            namesAddressesDatesChecked: false,
+            permanentRecordChecked: false,
+            correctionFeesChecked: false,
+          },
         },
         setFormationFormData: () => {},
         setBusinessNameAvailability: () => {},
@@ -57,6 +66,8 @@ const Template = () => {
         setFieldsInteracted: () => {},
         setHasBeenSubmitted: () => {},
         setForeignGoodStandingFile: () => {},
+        setReviewCheckboxes: () => {},
+        allConfirmationsChecked: () => false,
       }}
     >
       <DataFormErrorMapContext.Provider value={formContextState}>

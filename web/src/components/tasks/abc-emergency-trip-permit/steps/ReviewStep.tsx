@@ -8,7 +8,7 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
-import { EmergencyTripPermitStepNames } from "@/lib/types/types";
+import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 

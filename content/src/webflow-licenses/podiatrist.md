@@ -1,12 +1,13 @@
 ---
+id: podiatrist
 displayname: podiatrist
-id: "podiatrist"
-webflowId: "640b8468826e9b70f4767c11"
-urlSlug: "podiatrist"
-webflowName: "Podiatrist"
-callToActionLink: "http://njconsumeraffairs.gov/elec/Pages/FAQ.aspx"
+urlSlug: podiatrist
+webflowName: Podiatrist
 agencyId: nj-consumer-affairs
-divisionPhone: "(973) 826-7100"
-webflowIndustry: "Podiatrist"
-licenseCertificationClassification: "LICENSE"
+callToActionText: Apply for a Podiatry License
+callToActionLink: https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx
+webflowIndustry: Podiatrist
+licenseCertificationClassification: LICENSE
+divisionPhone: (973) 826-7100
+webflowId: 640b8468826e9b70f4767c11
 ---

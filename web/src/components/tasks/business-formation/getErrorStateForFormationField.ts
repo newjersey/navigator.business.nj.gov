@@ -4,11 +4,9 @@ import {
   isBusinessStartDateValid,
   isDateValid,
 } from "@/components/tasks/business-formation/business/BusinessDateValidators";
-import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import { FormationFieldErrorState } from "@/lib/types/types";
 import {
   BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
@@ -21,6 +19,8 @@ import {
   InputFile,
   NameAvailability,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { FormationFieldErrorState } from "@businessnjgovnavigator/shared/types";
 
 export const onlyHasErrorIfEmpty: FormationFields[] = [
   "contactPhoneNumber",
@@ -157,10 +157,13 @@ export const getErrorStateForFormationField = (inputParams: {
     const exists = !!formationFormData.businessName;
     const isAvailable = businessNameAvailability?.status === "AVAILABLE";
     const isValid = exists && isAvailable;
+    const isConfirmed = formationFormData.businessNameConfirmation;
     let label = errorState.label;
 
     if (!exists) {
       label = Config.formation.fields.businessName.errorInlineEmpty;
+    } else if (!isConfirmed) {
+      label = Config.formation.fields.businessName.confirmBusinessNameError;
     } else if (businessNameAvailability?.status === undefined) {
       label = Config.formation.fields.businessName.errorInlineNeedsToSearch;
     } else if (businessNameAvailability?.status !== "AVAILABLE") {

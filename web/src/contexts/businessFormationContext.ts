@@ -1,4 +1,3 @@
-import { createEmptyDbaDisplayContent, FormationDbaContent } from "@/lib/types/types";
 import {
   createEmptyFormationFormData,
   FieldsForErrorHandling,
@@ -6,6 +5,10 @@ import {
   InputFile,
   NameAvailability,
 } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyDbaDisplayContent,
+  FormationDbaContent,
+} from "@businessnjgovnavigator/shared/types";
 import { createContext } from "react";
 
 interface BusinessFormationState {
@@ -19,6 +22,7 @@ interface BusinessFormationState {
   interactedFields: FieldsForErrorHandling[];
   hasSetStateFirstTime: boolean;
   foreignGoodStandingFile: InputFile | undefined;
+  reviewCheckboxes: ReviewCheckboxes;
 }
 
 interface BusinessFormationContextType {
@@ -36,6 +40,14 @@ interface BusinessFormationContextType {
     React.SetStateAction<NameAvailability | undefined>
   >;
   setForeignGoodStandingFile: (file: InputFile | undefined) => void;
+  setReviewCheckboxes: React.Dispatch<React.SetStateAction<ReviewCheckboxes>>;
+  allConfirmationsChecked: () => boolean;
+}
+
+interface ReviewCheckboxes {
+  namesAddressesDatesChecked: boolean;
+  permanentRecordChecked: boolean;
+  correctionFeesChecked: boolean;
 }
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
@@ -53,6 +65,11 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     hasSetStateFirstTime: false,
     businessNameAvailability: undefined,
     dbaBusinessNameAvailability: undefined,
+    reviewCheckboxes: {
+      namesAddressesDatesChecked: false,
+      permanentRecordChecked: false,
+      correctionFeesChecked: false,
+    },
   },
   setFormationFormData: () => {},
   setStepIndex: () => {},
@@ -62,4 +79,6 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   setBusinessNameAvailability: () => {},
   setDbaBusinessNameAvailability: () => {},
   setForeignGoodStandingFile: () => {},
+  setReviewCheckboxes: () => {},
+  allConfirmationsChecked: () => false,
 });

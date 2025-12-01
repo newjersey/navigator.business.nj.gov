@@ -1,14 +1,14 @@
 ---
+id: casino-key-employee
 displayname: casino-key-employee
-id: "casino-key-employee"
-webflowId: "5f77295eecb74e2b5223aad7"
-urlSlug: "casino-key-employee"
-webflowName: "Casino - Key Employee"
-callToActionLink: "http://nj.gov/oag/ge/licensing.htm"
-callToActionText: ""
+urlSlug: casino-key-employee
+webflowName: Casino - Key Employee
 agencyId: law-public-safety
-agencyAdditionalContext: "Casino Control Commission"
-divisionPhone: "(609) 441-3422"
-webflowIndustry: "Casino Key Employee"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Casino Control Commission
+callToActionText: Learn About Key Employee Requirements
+callToActionLink: https://www.nj.gov/casinos/services/licensing/
+webflowIndustry: Casino Key Employee
+divisionPhone: (609) 441-3422
+webflowId: 5f77295eecb74e2b5223aad7
+licenseCertificationClassification: LICENSE
 ---

@@ -64,8 +64,7 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "telemarketing",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "telemarketer, phone banking, call center",

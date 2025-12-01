@@ -61,16 +61,10 @@
     }
   ],
   "name": "Home Health Aide Placement",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "bus-initial-inspection",
-    "mvc-cpcn",
-    "cdl-neq"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "bus-initial-inspection", "mvc-cpcn", "cdl-neq"],
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "caregiver, care services, health care service firm, health care service",

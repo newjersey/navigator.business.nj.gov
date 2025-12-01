@@ -21,7 +21,7 @@ formName: NJ-Reg
 
 ## Application Requirements
 
-- `Entity ID|entity-id` (required only for LLC, Corporations, LLP or LP Nexus businesses)
+- `Entity ID|entity-id-contextual-link` (required only for LLC, Corporations, LLP or LP Nexus businesses)
 - [NAICS code](/tasks/naics-code-determination): ${naicsCode}
 - `EIN|ein`
 - Estimated start date in New Jersey

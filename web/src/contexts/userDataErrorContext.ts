@@ -1,4 +1,4 @@
-import { UserDataError } from "@/lib/types/types";
+import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { createContext } from "react";
 
 export interface UserDataErrorContextType {

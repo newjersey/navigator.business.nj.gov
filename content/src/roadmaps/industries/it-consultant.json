@@ -46,7 +46,8 @@
       "step": 4,
       "task": "resale-tax-certificate-operating",
       "weight": 10
-    }, {
+    },
+    {
       "step": 4,
       "weight": 99,
       "task": "manage-business-vehicles"
@@ -57,7 +58,6 @@
   "displayname": "it-consultant",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
     "isProvidesStaffingServicesApplicable": true
   },
   "isEnabled": true,

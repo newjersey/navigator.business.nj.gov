@@ -3,7 +3,7 @@ import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehic
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const ManageBusinessVehiclesTaskPreview = (props: PreviewProps): ReactElement => {

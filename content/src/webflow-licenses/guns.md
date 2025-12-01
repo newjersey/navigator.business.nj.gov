@@ -1,14 +1,14 @@
 ---
+id: guns
 displayname: guns
-id: "guns"
-webflowId: "5f7729619a1bb8d37fb3b917"
-urlSlug: "guns"
-webflowName: "Guns"
-callToActionLink: "http://njsp.org/firearms/fars.shtml"
-callToActionText: ""
+urlSlug: guns
+webflowName: Guns
 agencyId: law-public-safety
-agencyAdditionalContext: "Division of State Police"
-divisionPhone: "(609) 882-2000"
-webflowIndustry: "Guns"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Division of State Police
+callToActionText: Learn About Firearms Licensing
+callToActionLink: https://njsp.njoag.gov/firearms-investigation-licensing-bureau/
+webflowIndustry: Guns
+divisionPhone: (609) 882-2000
+webflowId: 5f7729619a1bb8d37fb3b917
+licenseCertificationClassification: LICENSE
 ---

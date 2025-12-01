@@ -67,10 +67,6 @@ module.exports = {
           AttributeType: "S",
         },
         {
-          AttributeName: "encryptedTaxId",
-          AttributeType: "S",
-        },
-        {
           AttributeName: "hashedTaxId",
           AttributeType: "S",
         },
@@ -119,22 +115,6 @@ module.exports = {
           KeySchema: [
             {
               AttributeName: "industry",
-              KeyType: "HASH",
-            },
-          ],
-          Projection: {
-            ProjectionType: "ALL",
-          },
-          ProvisionedThroughput: {
-            ReadCapacityUnits: 1,
-            WriteCapacityUnits: 1,
-          },
-        },
-        {
-          IndexName: "EncryptedTaxId",
-          KeySchema: [
-            {
-              AttributeName: "encryptedTaxId",
               KeyType: "HASH",
             },
           ],

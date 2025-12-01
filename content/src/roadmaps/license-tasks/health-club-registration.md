@@ -22,7 +22,7 @@ summaryDescriptionMd: "You need to register as a health club in New Jersey if yo
 
 - Business name
 - `Employer Identification Number (EIN)|ein`
-- `Business structure|business-structure-learn-more`
+- `Business structure|business-structure-contextual-link`
 - Business address
 - `Registered agent|registered-agent` information, including address and phone number
 - All other names under which you do business (DBA or “doing business as” names)

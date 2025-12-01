@@ -4,8 +4,8 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskCtaLinks } from "@/components/TaskCtaLinks";
 import { TaskHeader } from "@/components/TaskHeader";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { Task } from "@/lib/types/types";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode } from "react";
 

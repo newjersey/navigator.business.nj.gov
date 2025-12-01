@@ -1,13 +1,13 @@
 ---
+id: phone-wiring
 displayname: phone-wiring
-id: "phone-wiring"
-webflowId: "5f7729b015a3950288f71660"
-urlSlug: "phone-wiring"
-webflowName: "Phone Wiring"
-callToActionLink: "https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx"
-callToActionText: ""
-agencyAdditionalContext: "Board of Examiners of Electrical Contractors"
-divisionPhone: "(973)504-6410"
-webflowIndustry: "Telephone Wiring"
-licenseCertificationClassification: "CONTACT"
+urlSlug: phone-wiring
+webflowName: Phone Wiring
+agencyAdditionalContext: Board of Examiners of Electrical Contractors
+callToActionText: Become an Electrical Contractor
+callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
+webflowIndustry: Telephone Wiring
+licenseCertificationClassification: CONTACT
+divisionPhone: (973)504-6410
+webflowId: 5f7729b015a3950288f71660
 ---

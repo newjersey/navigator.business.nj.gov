@@ -11,7 +11,6 @@ import {
   sortFundingsForUser,
 } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
-import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import {
   generateCertification,
   generateFunding,
@@ -26,6 +25,7 @@ import {
   generatePreferences,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
+import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 
 describe("sidebarCard Helpers", () => {
   describe("getHiddenCertifications", () => {

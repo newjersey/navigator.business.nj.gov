@@ -210,6 +210,7 @@ export const generateFormationFormData = (
     ...businessAddress,
     legalType: legalStructureId,
     businessName: `some-business-name-${randomInt()}`,
+    businessNameConfirmation: true,
     businessSuffix: randomBusinessSuffix(legalStructureId),
     businessStartDate: getCurrentDate().add(1, "days").format(defaultDateFormat),
     businessTotalStock: isCorp ? (randomInt().toString() ?? "") : "",
@@ -271,6 +272,8 @@ export const generateFormationFormData = (
       : undefined,
     willPracticeLaw: isCorp ? !!(randomInt() % 2) : undefined,
     isVeteranNonprofit: isNonprofit ? !!(randomInt() % 2) : undefined,
+    checkNameReservation: false,
+    howToProceed: "DIFFERENT_NAME",
     ...overrides,
   };
 };

@@ -3,7 +3,11 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
 
-import { FieldErrorType, FormContextFieldProps, FormContextType } from "@/lib/types/types";
+import {
+  FieldErrorType,
+  FormContextFieldProps,
+  FormContextType,
+} from "@businessnjgovnavigator/shared/types";
 import {
   ChangeEvent,
   Context,
@@ -189,6 +193,7 @@ export const GenericTextField = forwardRef(
             className: `${props.readOnly ? "bg-base-lightest" : ""}`,
             ...props.inputProps,
           }}
+          required={props.required}
           type={props.type}
           onFocus={props.onFocus}
           onKeyDown={props.onKeyDown}

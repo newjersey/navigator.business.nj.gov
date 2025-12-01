@@ -1,14 +1,14 @@
 ---
+id: milk-weighed-sampler
 displayname: milk-weighed-sampler
-id: "milk-weighed-sampler"
-webflowId: "5f7728e38075e87980a8d937"
-urlSlug: "milk-weighed-sampler"
-webflowName: "Milk Weighed/Sampler"
-callToActionLink: "http://nj.gov/agriculture/divisions/md/prog/dairy.html"
-callToActionText: ""
+urlSlug: milk-weighed-sampler
+webflowName: Milk Weighed/Sampler
 agencyId: agriculture
-agencyAdditionalContext: "Division of Dairy and Commodity Regulation"
-divisionPhone: "(609) 292-5648"
-webflowIndustry: "Milk Weighed and Sampler"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Division of Dairy and Commodity Regulation
+callToActionText: Get a Milk Weigher and Sampler Certificate
+callToActionLink: http://nj.gov/agriculture/divisions/md/prog/dairy.html
+webflowIndustry: Milk Weighed and Sampler
+divisionPhone: (609) 292-5648
+webflowId: 5f7728e38075e87980a8d937
+licenseCertificationClassification: LICENSE
 ---

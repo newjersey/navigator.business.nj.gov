@@ -1,8 +1,12 @@
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import {
+  ConfigContext,
+  ConfigType,
+  getMergedConfig,
+} from "@businessnjgovnavigator/shared/contexts";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
@@ -74,7 +78,9 @@ const Template = () => {
               },
             }}
             error
-            validationText={mergedConfig.profileDefaults.fields[fieldName].default.errorTextRequired}
+            validationText={
+              mergedConfig.profileDefaults.fields[fieldName].default.errorTextRequired
+            }
           />
           <div className="text-base-dark margin-top-1 margin-bottom-2">
             {10} / {500} {config.formation.general.charactersLabel}

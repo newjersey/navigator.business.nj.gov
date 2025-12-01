@@ -1,13 +1,13 @@
 ---
+id: elected-office
 displayname: elected-office
-id: "elected-office"
-webflowId: "5f7728dbb0544ffb79366144"
-urlSlug: "elected-office"
-webflowName: "Elected Office"
-callToActionLink: "http://njelections.org/"
-callToActionText: ""
-agencyAdditionalContext: "Department of State, Division of Elections"
-divisionPhone: "(609) 292-3760"
-webflowIndustry: "Elected Office"
-licenseCertificationClassification: "CERTIFICATE"
+urlSlug: elected-office
+webflowName: Elected Office
+agencyAdditionalContext: Department of State, Division of Elections
+callToActionText: Learn About NJ Elections
+callToActionLink: http://njelections.org/
+webflowIndustry: Elected Office
+licenseCertificationClassification: CERTIFICATE
+divisionPhone: (609) 292-3760
+webflowId: 5f7728dbb0544ffb79366144
 ---

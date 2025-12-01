@@ -90,6 +90,12 @@ export const createStarterKitProfileData = (industry: Industry): ProfileData => 
           [essentialQuestion.fieldName]: "BOTH",
         };
       }
+      if (essentialQuestion.fieldName === "publicWorksContractor") {
+        newProfileData = {
+          ...newProfileData,
+          [essentialQuestion.fieldName]: true,
+        };
+      }
       if (essentialQuestion.fieldName === "employmentPersonnelServiceType") {
         newProfileData = {
           ...newProfileData,

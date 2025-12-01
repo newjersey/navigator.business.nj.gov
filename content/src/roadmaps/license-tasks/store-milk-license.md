@@ -1,19 +1,21 @@
 ---
 id: store-milk-license
-webflowId: 685b037975a935f5a4a16f84
+displayname: store-milk-license
 urlSlug: store-milk-license
 name: Apply for Your Store Milk License
-displayname: store-milk-license
 webflowName: "Retail: Store Milk License"
-filename: store-milk-license
-callToActionLink: https://www-agr.state.nj.us/agriculture/AG_NJFARMS/welcome.html
+summaryDescriptionMd: You need a store milk license to sell milk or milk
+  products at retail locations, such as convenience stores, cafes, or milk
+  vending machines in New Jersey.
+industryId: retail
 callToActionText: Apply for My Store Milk License
+callToActionLink: https://www-agr.nj.gov/agriculture/AG_NJFARMS/welcome.html
 agencyAdditionalContext: NJ Department of Agriculture, Division of Marketing and Development
 divisionPhone: (609) 913-6517
-industryId: retail
+filename: store-milk-license
 webflowType: business-license
+webflowId: 685b037975a935f5a4a16f84
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a store milk license to sell milk or milk products at retail locations, such as convenience stores, cafes, or milk vending machines in New Jersey."
 ---
 
 ## Application Requirements
@@ -37,7 +39,7 @@ summaryDescriptionMd: "You need a store milk license to sell milk or milk produc
 - Previous owner’s `NJ Department of Agriculture (NJDA) ID|njda-id` , if known
 - Weekly average quarts of milk sold by the previous owner in the past 2 months, if known
 
-You can [apply for your license online](https://www-agr.state.nj.us/agriculture/AG_NJFARMS/welcome.html) or [by mail](https://www.nj.gov/agriculture/pdf/storemilklic.pdf). You also need to pay all applicable fees based on whether you’re opening a new store or taking over an existing one.
+You can [apply for your license online](https://www-agr.nj.gov/agriculture/AG_NJFARMS/welcome.html) or [by mail](https://www.nj.gov/agriculture/pdf/storemilklic.pdf). You also need to pay all applicable fees based on whether you’re opening a new store or taking over an existing one.
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 

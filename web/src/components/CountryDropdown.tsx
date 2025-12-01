@@ -119,6 +119,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
             onSubmit={onValidation}
             autoComplete={props.autoComplete ? "country" : "no"}
             variant="outlined"
+            required={props.required}
             onClick={(): void => {
               if (!props.disabled) {
                 setOpen(true);

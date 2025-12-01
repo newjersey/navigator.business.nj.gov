@@ -54,8 +54,7 @@
   ],
   "displayname": "courier",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "messenger service, same day delivery service",

@@ -50,7 +50,6 @@ const LookupIndustryById = (id) => {
         isProvidesStaffingServicesApplicable: undefined,
         isCertifiedInteriorDesignerApplicable: undefined,
         isRealEstateAppraisalManagementApplicable: undefined,
-        canBeReseller: undefined,
         canBeHomeBased: undefined,
         isLiquorLicenseApplicable: undefined,
         isCpaRequiredApplicable: undefined,
@@ -304,5 +303,4 @@ if (process.env.NODE_ENV === "test") {
   console.log("--preview = Preview Licenses to Create and Update");
   process.exit(1);
 }
-export { };
-
+export {};

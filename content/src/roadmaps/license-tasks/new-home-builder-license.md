@@ -15,7 +15,7 @@ summaryDescriptionMd: You must register as a new home builder with the State if
 industryId:
   - commercial-construction
 callToActionText: Register My Business as a New Home Builder
-callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/nhwprenew.pdf
+callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_nhw/nhwprenew.pdf
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Homeowner Protection
 divisionPhone: (609) 984-7905
