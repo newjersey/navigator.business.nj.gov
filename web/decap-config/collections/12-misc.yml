@@ -3028,6 +3028,11 @@ collections:
               - { label: DOL EIN Alert Label Text, name: dolEinAlertLabelText, widget: string }
               - { label: Server Error Alert Text, name: serverErrorText, widget: markdown }
               - {
+                  label: Server Error Alert Try Again Text,
+                  name: serverErrorTryAgainText,
+                  widget: markdown,
+                }
+              - {
                   label: Unable To Perform User Validation Alert Text,
                   name: noAccountErrorText,
                   widget: markdown,
@@ -3080,6 +3085,86 @@ collections:
                   name: employerAccessNoButtonLink,
                   widget: string,
                 }
+              - {
+                  label: Config Rates Success Header Text,
+                  name: configRatesSuccessHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Worker Rates Table Header Text,
+                  name: workerRatesTableHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Employer Rates Table Header Text,
+                  name: employerRatesTableHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Total Contribution Rates Table Header Text,
+                  name: totalContributionsSuccessHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Unemployment Insurance Row Text,
+                  name: unemploymentInsuranceRow,
+                  widget: string,
+                }
+              - {
+                  label: Disability Insurance Row Text,
+                  name: disabilityInsuranceRow,
+                  widget: string,
+                }
+              - {
+                  label: Workforce Development Row Text,
+                  name: workforceDevelopmentRow,
+                  widget: string,
+                }
+              - {
+                  label: Healthcare Subsidy Fund Row Text,
+                  name: healthcareSubsidyFundRow,
+                  widget: string,
+                }
+              - {
+                  label: Healthcare Subsidy Fund Tooltip Text,
+                  name: healthcareSubsidyFundTooltipText,
+                  widget: string,
+                }
+              - {
+                  label: Family Leave Insurance Row Text,
+                  name: familyLeaveInsuranceRow,
+                  widget: string,
+                }
+              - { label: Success Alert Text, name: successAlertText, widget: string }
+              - {
+                  label: Unemployment Healthcare Family Leave Label Text,
+                  name: uiHcWFLabelText,
+                  widget: string,
+                }
+              - { label: Disability Insurance Label Text, name: diLabelText, widget: string }
+              - { label: Family Leave Insurance Label Text, name: fliLabelText, widget: string }
+              - {
+                  label: Taxable Wage Base Label Text,
+                  name: taxableWageBaseLabelText,
+                  widget: string,
+                }
+              - {
+                  label: Taxable Wage Base DiFli Label Text,
+                  name: taxableWageBaseDiFliLabelText,
+                  widget: string,
+                }
+              - {
+                  label: Base Week Amount Label Text,
+                  name: baseWeekAmountLabelText,
+                  widget: string,
+                }
+              - {
+                  label: Number of Base Weeks Label Text,
+                  name: numberOfBaseWeeksLabelText,
+                  widget: string,
+                }
+              - { label: Edit Quarter Button Text, name: editQuarterButtonText, widget: string }
+              - { label: No Employer Rates Fli Text, name: noEmployerRatesFliText, widget: string }
 
   - label: "Fundings Onboarding Page"
     name: "business-fundings-onboarding-page"

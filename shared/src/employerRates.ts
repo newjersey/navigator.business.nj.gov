@@ -17,8 +17,8 @@ export type EmployerRatesResponse = {
   workerDiRate: string;
   workerFliRate: string;
   totalDi: string;
-  totalUiHcWf: string;
-  totalFli: string;
+  TotalUiHcWf: string;
+  TotalFli: string;
   taxableWageBase: string;
   baseWeekAmt: string;
   numberOfBaseWeeks: string;

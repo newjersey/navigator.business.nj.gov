@@ -196,3 +196,44 @@ table.emergency-trip-permit-review {
     padding: 0;
   }
 }
+
+.employer-rates-success-table {
+  border: 0;
+  text-align: left;
+
+  thead {
+    th {
+      border: 0;
+    }
+  }
+
+  tbody {
+    border: 0;
+    tr:nth-child(even) {
+      background: #f7f7f7;
+    }
+    tr {
+      border: 0;
+      border-bottom: thin solid variables.$base-light;
+
+      td,
+      th {
+        height: 1rem;
+        border: 0;
+      }
+    }
+  }
+  margin-bottom: 2rem;
+}
+
+.employer-rates-quarterly-table {
+  td:nth-child(n + 2) {
+    text-align: left;
+  }
+}
+
+.employer-rates-total-table {
+  td:nth-child(2) {
+    text-align: left;
+  }
+}

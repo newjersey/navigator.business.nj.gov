@@ -18,7 +18,9 @@ export const EmployerRatesQuarterDropdown = (props: Props): ReactElement => {
   return (
     <div className="text-field-width-reduced margin-y-2">
       <div className="fdr fac">
-        <Content>{Config.employerRates.quarterDropdownLabelText}</Content>
+        <strong>
+          <Content>{Config.employerRates.quarterDropdownLabelText}</Content>
+        </strong>
         <div className="margin-left-05">
           <ArrowTooltip title={Config.employerRates.quarterDropdownTooltipText}>
             <div className="fdr fac font-body-lg">

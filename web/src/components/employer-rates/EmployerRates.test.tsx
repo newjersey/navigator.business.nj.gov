@@ -1,5 +1,4 @@
 import { EmployerRates } from "@/components/employer-rates/EmployerRates";
-import { DOL_EIN_CHARACTERS } from "@/components/employer-rates/EmployerRatesQuestions";
 import {
   generateBusiness,
   generateEmployerRatesResponse,
@@ -17,6 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import * as api from "@/lib/api-client/apiClient";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
 
 jest.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
   const actual = jest.requireActual("@businessnjgovnavigator/shared/dateHelpers");
@@ -458,5 +458,80 @@ describe("EmployerRates", () => {
     expect(await screen.findByText(Config.employerRates.dolEinErrorText)).toBeInTheDocument();
     expect(screen.queryByTestId("noAccountError")).not.toBeInTheDocument();
     expect(await screen.findByRole("alert")).toBeInTheDocument();
+  });
+
+  it("removes the question and shows the success tables on successful response", async () => {
+    mockApi.checkEmployerRates.mockResolvedValue(
+      generateEmployerRatesResponse({
+        error: "",
+      }),
+    );
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(screen.getByRole("alert", { name: "success" })).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: "Quarterly Contribution Rates" })).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: "Total Contribution Rates" })).toBeInTheDocument();
+
+    expect(
+      screen.queryByRole("heading", { name: Config.employerRates.employerAccessHeaderText }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: Config.employerRates.employerAccessYesButtonText }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("goes back to the question view if user edits quarter", async () => {
+    mockApi.checkEmployerRates.mockResolvedValue(
+      generateEmployerRatesResponse({
+        error: "",
+      }),
+    );
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(screen.getByRole("alert", { name: "success" })).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: "Quarterly Contribution Rates" })).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: "Total Contribution Rates" })).toBeInTheDocument();
+
+    const editQuarter = screen.getByRole("button", {
+      name: Config.employerRates.editQuarterButtonText,
+    });
+
+    await userEvent.click(editQuarter);
+    expect(screen.queryByRole("alert", { name: "success" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("table", { name: "Quarterly Contribution Rates" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("table", { name: "Total Contribution Rates" }),
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.getByRole("heading", { name: Config.employerRates.employerAccessHeaderText }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: Config.employerRates.employerAccessYesButtonText }),
+    ).toBeInTheDocument();
   });
 });

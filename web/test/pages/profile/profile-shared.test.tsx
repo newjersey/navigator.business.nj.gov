@@ -53,7 +53,7 @@ import {
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { DOL_EIN_CHARACTERS } from "@/components/employer-rates/EmployerRatesQuestions";
+import { DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
