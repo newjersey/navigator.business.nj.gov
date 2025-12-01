@@ -53,7 +53,7 @@ export const ConfigMatchList = (props: Props): ReactElement => {
             )}
             <ul>
               <li>
-                Snipet(s):
+                Snippet(s):
                 <ul>
                   <li>{match.value}</li>
                 </ul>

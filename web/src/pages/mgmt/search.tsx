@@ -426,6 +426,10 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={{ "Page Metadata": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
+      <MatchCollection
+        matchedCollections={{ "Login Support Page": [] }}
+        groupedConfigMatches={groupedConfigMatches}
+      />
     </div>
   );
 

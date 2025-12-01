@@ -163,6 +163,9 @@ export const onGuestSignIn = async ({
       case ROUTES.njeda: {
         break;
       }
+      case ROUTES.loginSupport: {
+        break;
+      }
       default: {
         setRegistrationDimension("Not Started");
         push(ROUTES.landing);

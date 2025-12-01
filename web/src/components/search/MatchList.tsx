@@ -50,7 +50,7 @@ export const MatchList = (props: Props): ReactElement => {
 
             <ul>
               <li>
-                Snipet(s):
+                Snippet(s):
                 <ul>
                   {match.snippets.map((snippet, i) => (
                     <li key={i}>{snippet}</li>
