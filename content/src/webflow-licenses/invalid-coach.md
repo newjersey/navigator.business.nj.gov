@@ -1,14 +1,14 @@
 ---
+id: invalid-coach
 displayname: invalid-coach
-id: "invalid-coach"
-webflowId: "5f77294a5ddf7683313ac435"
-urlSlug: "invalid-coach"
-webflowName: "Invalid Coach"
-callToActionLink: "http://nj.gov/health/ems/education/"
-callToActionText: ""
+urlSlug: invalid-coach
+webflowName: Invalid Coach
 agencyId: health-senior-services
-agencyAdditionalContext: "Office of Emergency Medical Services"
-divisionPhone: "(609) 633-7777"
-webflowIndustry: "Invalid Coach"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Office of Emergency Medical Services
+callToActionText: Learn About Emergency Medical Services
+callToActionLink: http://nj.gov/health/ems/education/
+webflowIndustry: Invalid Coach
+divisionPhone: (609) 633-7777
+webflowId: 5f77294a5ddf7683313ac435
+licenseCertificationClassification: LICENSE
 ---

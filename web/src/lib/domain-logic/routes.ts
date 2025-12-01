@@ -14,6 +14,7 @@ export const ROUTES = {
   starterKits: "/starter-kits",
   login: "/login",
   njeda: "/njeda",
+  cigaretteLicense: "/tasks/cigarette-license",
   taxClearanceCertificate: "/actions/tax-clearance-certificate-apply",
   envPermit: "tasks/env-permitting",
 };
@@ -24,9 +25,11 @@ export interface QUERY_PARAMS_VALUES {
   fromFormBusinessEntity: "true" | "false";
   fromForming: "true";
   fromAdditionalBusiness: "true";
+  fromDeleteBusiness: "true";
   fromFunding: "true";
   fromOnboarding: "true";
   completeFiling: "true" | "false";
+  completePayment: "success" | "failure" | "duplicate" | "cancel";
   success: "true";
   additionalBusiness: "true";
   path: "businessFormation";
@@ -42,9 +45,11 @@ export enum QUERIES {
   businessMunicipality = "businessMunicipality",
   code = "code",
   completeFiling = "completeFiling",
+  completePayment = "completePayment",
   deferredQuestionAnswered = "deferredQuestionAnswered",
   flow = "flow",
   fromAdditionalBusiness = "fromAdditionalBusiness",
+  fromDeleteBusiness = "fromDeleteBusiness",
   fromFormBusinessEntity = "fromFormBusinessEntity",
   fromForming = "fromForming",
   fromFunding = "fromFunding",

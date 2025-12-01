@@ -13,6 +13,7 @@ interface Props {
   marginOverride?: string;
   formatter?: (value: string) => string;
   noColonAfterLabel?: boolean;
+  ignoreContent?: boolean;
 }
 
 export const ReviewLineItem = (props: Props): ReactElement => {
@@ -32,9 +33,13 @@ export const ReviewLineItem = (props: Props): ReactElement => {
         )}
       </div>
       {props.value ? (
-        <Content className={"grid-col flex-7"}>
-          {props.formatter ? props.formatter(props.value) : props.value}
-        </Content>
+        props.ignoreContent ? (
+          <p className={"grid-col flex-7"}>{props.value}</p>
+        ) : (
+          <Content className={"grid-col flex-7"}>
+            {props.formatter ? props.formatter(props.value) : props.value}
+          </Content>
+        )
       ) : (
         <div className={"grid-col flex-7"}>
           <ReviewNotEntered />

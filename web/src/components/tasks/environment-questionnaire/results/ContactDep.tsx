@@ -1,9 +1,10 @@
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { MediaArea } from "@businessnjgovnavigator/shared/environment";
 import { ReactElement, useContext } from "react";
 
@@ -27,12 +28,25 @@ export const ContactDep = (): ReactElement => {
             {contactConfig.contact.phoneInfo && (
               <span className="margin-right-05">{contactConfig.contact.phoneInfo}</span>
             )}
-            <a className={"text-base-darkest"} href={`tel:${contactConfig.contact.phone}`}>
+            <a
+              className={"text-base-darkest"}
+              href={`tel:${contactConfig.contact.phone}`}
+              onMouseEnter={
+                analytics.event.gen_guidance_stepper_contact_info_engagement.mouseover
+                  .general_guidance_contact_info_engage
+              }
+            >
               {contactConfig.contact.phone}
             </a>
           </div>
           {contactConfig.contact.form && (
-            <div className="flex flex-align-center margin-top-05">
+            <div
+              className="flex flex-align-center margin-top-05"
+              onMouseEnter={
+                analytics.event.gen_guidance_stepper_contact_info_engagement.mouseover
+                  .general_guidance_contact_info_engage
+              }
+            >
               <Icon className={"margin-right-1"} iconName={"language"} />
               <Content className={"text-underline text-base-darkest"}>
                 {contactConfig.contact.form}
@@ -40,7 +54,13 @@ export const ContactDep = (): ReactElement => {
             </div>
           )}
           {contactConfig.contact.email && (
-            <div className="flex flex-align-center margin-top-05">
+            <div
+              className="flex flex-align-center margin-top-05"
+              onMouseEnter={
+                analytics.event.gen_guidance_stepper_contact_info_engagement.mouseover
+                  .general_guidance_contact_info_engage
+              }
+            >
               <Icon className={"margin-right-1"} iconName={"alternate_email"} />
               <a
                 href={`mailto:${contactConfig.contact.email}`}
@@ -56,7 +76,13 @@ export const ContactDep = (): ReactElement => {
   };
 
   return (
-    <ResultsSectionAccordion title={Config.envResultsPage.contactDep.title}>
+    <ResultsSectionAccordion
+      title={Config.envResultsPage.contactDep.title}
+      onOpenFunc={
+        analytics.event.gen_guidance_stepper_dep_accordion_opened.click
+          .general_guidance_dep_accordion_opened
+      }
+    >
       {envContext.applicableMediaAreas().map((mediaArea) => {
         return (
           <div key={mediaArea} data-testid={`contact-${mediaArea}`}>

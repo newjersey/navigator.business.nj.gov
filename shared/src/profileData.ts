@@ -47,6 +47,7 @@ export interface IndustrySpecificData {
   readonly hasThreeOrMoreRentalUnits: boolean | undefined;
   readonly travelingCircusOrCarnivalOwningBusiness: boolean | undefined;
   readonly vacantPropertyOwner: boolean | undefined;
+  readonly publicWorksContractor: boolean | undefined;
 }
 
 type IndustrySpecificDataChoices = {
@@ -79,6 +80,7 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   hasThreeOrMoreRentalUnits: booleanChoice,
   travelingCircusOrCarnivalOwningBusiness: booleanChoice,
   vacantPropertyOwner: booleanChoice,
+  publicWorksContractor: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -107,6 +109,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   hasThreeOrMoreRentalUnits: undefined,
   travelingCircusOrCarnivalOwningBusiness: undefined,
   vacantPropertyOwner: undefined,
+  publicWorksContractor: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {
@@ -139,6 +142,8 @@ export interface ProfileData extends IndustrySpecificData {
   readonly communityAffairsAddress?: CommunityAffairsAddress;
   readonly raffleBingoGames: boolean | undefined;
   readonly businessOpenMoreThanTwoYears: boolean | undefined;
+  readonly employerAccessRegistration: boolean | undefined;
+  readonly deptOfLaborEin: string;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -171,6 +176,8 @@ export const emptyProfileData: ProfileData = {
   communityAffairsAddress: undefined,
   raffleBingoGames: undefined,
   businessOpenMoreThanTwoYears: undefined,
+  employerAccessRegistration: undefined,
+  deptOfLaborEin: "",
   ...emptyIndustrySpecificData,
 };
 

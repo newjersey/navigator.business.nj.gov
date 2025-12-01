@@ -68,6 +68,19 @@ export const advancedDateLibrary = (): void => {
   dayjs.extend(advancedFormat);
 };
 
+export const formatUTCDate = (utcDateString: string, formatter: string = "MM-DD-YYYY"): string => {
+  if (!utcDateString) {
+    return "";
+  }
+
+  const parsedDate = dayjs(utcDateString);
+  if (!parsedDate.isValid()) {
+    return utcDateString;
+  }
+
+  return parsedDate.format(formatter);
+};
+
 export const formatDate = (date: string): string => {
   if (!date) {
     return "";

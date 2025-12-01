@@ -1,5 +1,4 @@
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
-import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -8,6 +7,7 @@ import {
   generateMunicipality,
   generateProfileData,
 } from "@businessnjgovnavigator/shared";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement } from "react";
 
 const DeferredLocationPreview = (props: PreviewProps): ReactElement => {

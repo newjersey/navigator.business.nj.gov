@@ -1,5 +1,9 @@
 import { generateInputFile } from "@/test/factories";
 import {
+  generateEmployerRatesRequestData,
+  generateEmployerRatesResponse,
+} from "@businessnjgovnavigator/shared";
+import {
   generateLicenseSearchNameAndAddress,
   generateTaxIdAndBusinessName,
   generateUser,
@@ -7,6 +11,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import axios from "axios";
 import {
+  checkEmployerRates,
   checkLicenseStatus,
   get,
   getUserData,
@@ -17,6 +22,7 @@ import {
   postTaxFilingsOnboarding,
   postUserData,
   postUserEmailCheck,
+  sendEnvironmentPermitEmail,
 } from "./apiClient";
 
 jest.mock("axios");
@@ -107,6 +113,26 @@ describe("apiClient", () => {
     expect(mockAxios.post).toHaveBeenCalledWith("/api/external/newsletter", userData, {});
   });
 
+  it("posts environmentPermitEmail without token", async () => {
+    const emailMetaData = {
+      userName: "Test User",
+      businessName: "Test Business",
+      email: "test@example.com",
+      industry: "generic",
+      location: "Trenton",
+      phase: "FORMED",
+      naicsCode: "12345",
+      questionnaireResponses: "RESPONSES",
+    };
+    mockAxios.post.mockResolvedValue({ data: "SUCCESS" });
+    expect(await sendEnvironmentPermitEmail(emailMetaData)).toEqual("SUCCESS");
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/guest/environment-permit-email",
+      { emailMetaData },
+      {},
+    );
+  });
+
   it("posts business formation request", async () => {
     const inputUserData = generateUserData({});
     const responseUserData = generateUserData({});
@@ -131,5 +157,24 @@ describe("apiClient", () => {
     expect(mockAxios.post).toHaveBeenCalledWith("/api/postTaxClearanceCertificate", userData, {
       headers: { Authorization: "Bearer some-token" },
     });
+  });
+
+  it("gets employer rates request", async () => {
+    const employerRatesRequest = generateEmployerRatesRequestData({});
+    const userData = generateUserData({});
+    const employerRatesResponse = generateEmployerRatesResponse({});
+    mockAxios.post.mockResolvedValue({ data: employerRatesResponse });
+
+    expect(await checkEmployerRates({ employerRates: employerRatesRequest, userData })).toEqual(
+      employerRatesResponse,
+    );
+
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/checkEmployerRates",
+      { employerRates: employerRatesRequest, userData },
+      {
+        headers: { Authorization: "Bearer some-token" },
+      },
+    );
   });
 });

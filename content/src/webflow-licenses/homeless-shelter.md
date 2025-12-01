@@ -1,14 +1,14 @@
 ---
+id: homeless-shelter
 displayname: homeless-shelter
-id: "homeless-shelter"
-webflowId: "5f7729925ef8c11c45019ec8"
-urlSlug: "homeless-shelter"
-webflowName: "Homeless Shelter"
-callToActionLink: "http://nj.gov/dca/divisions/codes/offices/roomingboarding.html"
-callToActionText: ""
+urlSlug: homeless-shelter
+webflowName: Homeless Shelter
 agencyId: nj-community-affairs
-agencyAdditionalContext: "Bureau of Rooming and Boarding Home Standards"
-divisionPhone: "(609) 984-1706"
-webflowIndustry: "Homeless Shelter"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Bureau of Rooming and Boarding Home Standards
+callToActionText: Learn About Housing Resources
+callToActionLink: https://nj.gov/dca//dhcr/index.shtml
+webflowIndustry: Homeless Shelter
+divisionPhone: (609) 984-1706
+webflowId: 5f7729925ef8c11c45019ec8
+licenseCertificationClassification: LICENSE
 ---

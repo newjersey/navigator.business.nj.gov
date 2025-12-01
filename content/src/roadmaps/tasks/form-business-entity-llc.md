@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: You must register your business name and form your
-  `business structure|business-structure-learn-more` with the State.
+  `business structure|business-structure-contextual-link` with the State.
 urlSlug: form-business-entity
 displayname: form-business-entity-llc
 name: Check Available Names and Form Your Business
@@ -23,7 +23,7 @@ agencyId: nj-revenue-enterprise-services
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 
-- `Entity ID|entity-id`
+- `Entity ID|entity-id-contextual-link`
 - `Certificate of Formation,|certificate-formation` Incorporation, or Authorization as applicable
 - `Certified copy|certified-copy` of Certificate of Formation, Incorporation, or Authorization (optional with additional fee)
 - `Certificate of Good Standing|good-standing` (optional with additional fee)

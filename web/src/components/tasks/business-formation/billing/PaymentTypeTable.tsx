@@ -1,5 +1,5 @@
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -77,28 +77,29 @@ export const PaymentTypeTable = (): ReactElement => {
   };
 
   const hasError = doesFieldHaveError(fieldName);
+  const costColumnHeader = Config.formation.fields.paymentType.costColumnLabel;
 
   return (
-    <FormationField fieldName={fieldName}>
+    <ScrollableFormFieldWrapper fieldName={fieldName}>
       <WithErrorBar hasError={hasError} type="ALWAYS">
         <table className="business-formation-table business-formation-payment">
           <thead>
             <tr>
               <th className="text-bold">{Config.formation.fields.paymentType.label}</th>
               <th></th>
-              <th></th>
+              <th className="text-bold" id="cost-column-header">
+                {costColumnHeader}
+              </th>
             </tr>
-            <tr>
-              <th colSpan={3}>
-                {hasError ? (
+            {hasError && (
+              <tr>
+                <th colSpan={3}>
                   <FormHelperText className={"text-error-dark"}>
                     {Config.formation.fields.paymentType.error}
                   </FormHelperText>
-                ) : (
-                  " "
-                )}
-              </th>
-            </tr>
+                </th>
+              </tr>
+            )}
           </thead>
           <tbody>
             <tr>
@@ -132,6 +133,7 @@ export const PaymentTypeTable = (): ReactElement => {
                 className={
                   state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""
                 }
+                aria-label={`${costColumnHeader} ${getDollarValue(creditCardCost)}`}
               >
                 {getDollarValue(creditCardCost)}
               </td>
@@ -167,6 +169,7 @@ export const PaymentTypeTable = (): ReactElement => {
                 className={
                   state.formationFormData.paymentType === "ACH" ? "text-primary-dark text-bold" : ""
                 }
+                aria-label={`${costColumnHeader} ${getDollarValue(achCost)}`}
               >
                 {getDollarValue(achCost)}
               </td>
@@ -182,7 +185,11 @@ export const PaymentTypeTable = (): ReactElement => {
                 </div>
               </td>
               <td colSpan={1}>
-                <div className="text-align-right text-bold" aria-label={"Total"}>
+                <div
+                  className="text-align-right text-bold"
+                  data-testid="something"
+                  aria-label={`${Config.formation.fields.paymentType.costTotalLabel} ${getDollarValue(totalCost)}`}
+                >
                   {getDollarValue(totalCost)}
                 </div>
               </td>
@@ -190,6 +197,6 @@ export const PaymentTypeTable = (): ReactElement => {
           </tfoot>
         </table>
       </WithErrorBar>
-    </FormationField>
+    </ScrollableFormFieldWrapper>
   );
 };

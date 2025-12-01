@@ -11,9 +11,9 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import { StepperStep } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {

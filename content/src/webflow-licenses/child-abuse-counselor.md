@@ -1,14 +1,14 @@
 ---
+id: child-abuse-counselor
 displayname: child-abuse-counselor
-id: "child-abuse-counselor"
-webflowId: "5f772980eb5558041efeb5a3"
-urlSlug: "child-abuse-counselor"
-webflowName: "Child Abuse Counselor"
-callToActionLink: "http://njconsumeraffairs.gov/sw/Pages/default.aspx"
-callToActionText: ""
+urlSlug: child-abuse-counselor
+webflowName: Child Abuse Counselor
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "State Board of Social Work Examiners"
-divisionPhone: "(973) 504-6495"
-webflowIndustry: "Child Abuse Counselor"
-licenseCertificationClassification: "REGISTRATION/LICENSE"
+agencyAdditionalContext: State Board of Social Work Examiners
+callToActionText: Become a Social Worker
+callToActionLink: http://njconsumeraffairs.gov/sw/Pages/default.aspx
+webflowIndustry: Child Abuse Counselor
+divisionPhone: (973) 504-6495
+webflowId: 5f772980eb5558041efeb5a3
+licenseCertificationClassification: REGISTRATION/LICENSE
 ---

@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { Industry } from "@/components/data-fields/Industry";
-import { getMergedConfig } from "@/contexts/configContext";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/cases-helpers";
 import {
@@ -9,20 +8,22 @@ import {
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { WithStatefulProfileData, currentProfileData } from "@/test/mock/withStatefulProfileData";
+import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import {
   filterRandomIndustry,
   generateProfileData,
   randomIndustry,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
-  ProfileData,
   createEmptyProfileData,
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
+import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -98,7 +99,8 @@ describe("<Industry />", () => {
       return (
         eq.fieldName !== "residentialConstructionType" &&
         eq.fieldName !== "employmentPlacementType" &&
-        eq.fieldName !== "hasThreeOrMoreRentalUnits"
+        eq.fieldName !== "hasThreeOrMoreRentalUnits" &&
+        eq.fieldName !== "publicWorksContractor"
       );
     });
 
@@ -239,6 +241,24 @@ describe("<Industry />", () => {
         ).not.toBeInTheDocument();
       });
 
+      it("shows residentialConstructionType question if constructionType `BOTH` was selected", () => {
+        renderComponent();
+        selectIndustry("commercial-construction");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(
+          screen.queryByTestId(
+            "industry-specific-commercial-construction-residentialConstructionType",
+          ),
+        ).not.toBeInTheDocument();
+        fireEvent.click(screen.getByDisplayValue("BOTH"));
+        expect(
+          screen.getByTestId(
+            "industry-specific-commercial-construction-residentialConstructionType",
+          ),
+        ).toBeInTheDocument();
+        expect(currentProfileData().constructionType).toEqual("BOTH");
+      });
+
       it("resets constructionType and residentialConstructionType if industry changes", () => {
         renderComponent();
         selectIndustry("commercial-construction");
@@ -261,6 +281,63 @@ describe("<Industry />", () => {
         selectIndustry("petcare");
         expect(currentProfileData().constructionType).toEqual(undefined);
         expect(currentProfileData().residentialConstructionType).toEqual(undefined);
+      });
+
+      it("shows publicWorksContractor question if constructionType `COMMERCIAL_OR_INDUSTRIAL` was selected", async () => {
+        renderComponent();
+        const user = userEvent.setup();
+        selectIndustry("commercial-construction");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(
+          screen.queryByTestId("industry-specific-commercial-construction-publicWorksContractor"),
+        ).not.toBeInTheDocument();
+        const firstEssentialQuestion = screen.getByDisplayValue("COMMERCIAL_OR_INDUSTRIAL");
+        await user.click(firstEssentialQuestion);
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-publicWorksContractor"),
+        ).toBeInTheDocument();
+        expect(currentProfileData().constructionType).toEqual("COMMERCIAL_OR_INDUSTRIAL");
+      });
+
+      it("shows publicWorksContractor question if constructionType `BOTH` was selected", async () => {
+        renderComponent();
+        const user = userEvent.setup();
+        selectIndustry("commercial-construction");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(
+          screen.queryByTestId("industry-specific-commercial-construction-publicWorksContractor"),
+        ).not.toBeInTheDocument();
+        await user.click(screen.getByDisplayValue("BOTH"));
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-publicWorksContractor"),
+        ).toBeInTheDocument();
+        expect(currentProfileData().constructionType).toEqual("BOTH");
+      });
+
+      it("resets constructionType and publicWorksContractor if industry changes", async () => {
+        renderComponent();
+        const user = userEvent.setup();
+        selectIndustry("commercial-construction");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(currentProfileData().publicWorksContractor).toEqual(undefined);
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-constructionType"),
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByTestId("industry-specific-commercial-construction-publicWorksContractor"),
+        ).not.toBeInTheDocument();
+
+        const firstEssentialQuestion = screen.getByDisplayValue("COMMERCIAL_OR_INDUSTRIAL");
+        await user.click(firstEssentialQuestion);
+        const secondEssentialQuestion = screen.getByDisplayValue("true");
+        await user.click(secondEssentialQuestion);
+
+        expect(currentProfileData().constructionType).toEqual("COMMERCIAL_OR_INDUSTRIAL");
+        expect(currentProfileData().publicWorksContractor).toEqual(true);
+
+        selectIndustry("petcare");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(currentProfileData().publicWorksContractor).toEqual(undefined);
       });
 
       it("profile data correctly updates when employment placement question is selected `employers` and selects `temporary` for employmentPlacementType", () => {

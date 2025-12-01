@@ -8,14 +8,15 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { templateEval } from "@/lib/utils/helpers";
+
+import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/";
 import {
-  FundingUrlSlugParam,
+  FundingUrlSlugParameter,
   loadAllFundingUrlSlugs,
   loadFundingByUrlSlug,
-} from "@/lib/static/loadFundings";
-import { Funding } from "@/lib/types/types";
-import { templateEval } from "@/lib/utils/helpers";
-import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
+} from "@businessnjgovnavigator/shared/static";
+import { Funding } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -102,7 +103,7 @@ const FundingPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<FundingUrlSlugParam> => {
+export const getStaticPaths = (): GetStaticPathsResult<FundingUrlSlugParameter> => {
   const paths = loadAllFundingUrlSlugs();
   return {
     paths,
@@ -113,7 +114,7 @@ export const getStaticPaths = (): GetStaticPathsResult<FundingUrlSlugParam> => {
 export const getStaticProps = ({
   params,
 }: {
-  params: FundingUrlSlugParam;
+  params: FundingUrlSlugParameter;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {

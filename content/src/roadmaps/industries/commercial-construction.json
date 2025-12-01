@@ -49,17 +49,19 @@
     "business-vehicle-irp",
     "well-driller",
     "vehicle-dealership-q",
-    "cdl-neq"
+    "cdl-neq",
+    "selfgenerator-transporter-registration",
+    "waste-transporter-license-a-901",
+    "flashing-light-permit"
   ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
     "isConstructionTypeApplicable": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "build, builds, building, buildings, development, home builder, commercial, industrial, renovation, remodeling, developer, mixed use, subdivision, multiple dwelling, planned real estate",
+  "additionalSearchTerms": "build, builds, building, buildings, development, home builder, commercial, industrial, renovation, remodeling, developer, mixed use, subdivision, multiple dwelling, planned real estate, well drilling",
   "id": "commercial-construction",
-  "description": "Builds or maintains physical structures, such as buildings, houses, and roads",
+  "description": "Builds or maintains physical structures, such as buildings, houses, and roads ",
   "webflowId": "65b41d2d3d0fa463cd97855a"
 }

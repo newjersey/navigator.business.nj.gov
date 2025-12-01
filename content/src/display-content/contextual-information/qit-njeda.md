@@ -1,7 +1,7 @@
 ---
+header: Qualified Incentive Tract (QIT-NJEDA)
 id: qit-njeda
 displayname: qit-njeda
-header: Qualified Incentive Tract
 ---
 
 A qualified incentive tract is a population census tract that meets either of the following criteria:

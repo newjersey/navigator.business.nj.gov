@@ -1,8 +1,9 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
+import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
 import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
@@ -39,7 +40,7 @@ export const ContextualInfoButton = (props: Props): ReactElement => {
   };
 
   return (
-    <UnStyledButton dataTestid={props.id} onClick={setContext}>
+    <UnStyledButton dataTestid={props.id} id={props.id} onClick={setContext}>
       <span className="dashed-underline line-height-body-5">
         <PureMarkdownContent>{props.text}</PureMarkdownContent>
       </span>

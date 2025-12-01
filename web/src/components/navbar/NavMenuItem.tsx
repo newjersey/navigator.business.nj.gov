@@ -11,6 +11,7 @@ interface Props {
   key: string;
   dataTestid?: string;
   reducedLeftMargin?: boolean;
+  padLeft?: boolean;
 }
 
 export const NavMenuItem = (props: Props): ReactElement => {
@@ -24,7 +25,8 @@ export const NavMenuItem = (props: Props): ReactElement => {
       onMouseOut={(): void => setIsHovered(false)}
       className={`font-body-2xs menu-item-focus nav-menu-item-container ${props.className} ${
         props.selected ? "bg-primary-extra-light-mui-selected-override text-bold " : ""
-      }`}
+      }
+      ${props.padLeft ? "padLeft " : ""}`}
       selected={props.selected}
       key={props.key}
     >

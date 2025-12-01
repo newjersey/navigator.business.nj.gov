@@ -1,14 +1,14 @@
 ---
+id: court-reporter
 displayname: court-reporter
-id: "court-reporter"
-webflowId: "5f772983614a2d7668d207b5"
-urlSlug: "court-reporter"
-webflowName: "Court Reporter"
-callToActionLink: "http://njcourts.gov/"
-callToActionText: ""
+urlSlug: court-reporter
+webflowName: Court Reporter
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "State Board of Shorthand Reporters"
-divisionPhone: "(973) 504-6490"
-webflowIndustry: "Court Reporter"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: State Board of Shorthand Reporters
+callToActionText: Become a Court Reporter
+callToActionLink: http://njcourts.gov/
+webflowIndustry: Court Reporter
+divisionPhone: (973) 504-6490
+webflowId: 5f772983614a2d7668d207b5
+licenseCertificationClassification: LICENSE
 ---

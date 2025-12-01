@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  EmailConfirmationSubmission,
   FacilityDetails,
   TaxClearanceCertificateResponse,
   UnlinkTaxIdResponse,
@@ -9,6 +10,11 @@ import {
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
+import {
+  EmailConfirmationResponse,
+  GetOrderByTokenResponse,
+  PreparePaymentResponse,
+} from "@shared/cigaretteLicense";
 import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   ElevatorSafetyDeviceInspectionDetails,
@@ -18,6 +24,7 @@ import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
 } from "@shared/emergencyTripPermit";
+import { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import {
@@ -33,6 +40,7 @@ import {
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
+import { AxiosResponse } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
@@ -71,7 +79,6 @@ export interface BusinessesDataClient {
   findAllByNAICSCode: (naicsCode: string) => Promise<Business[]>;
   findAllByIndustry: (industry: string) => Promise<Business[]>;
   findBusinessesByNamePrefix: (prefix: string) => Promise<Business[]>;
-  findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
   findAllByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
 }
 
@@ -135,6 +142,10 @@ export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string) => Promise<LicenseEntity[]>;
   health: HealthCheckMethod;
+}
+
+export interface EmployerRatesClient {
+  getEmployerRates: (employerRatesRequest: EmployerRatesRequest) => Promise<EmployerRatesResponse>;
 }
 
 export interface UserTestingClient {
@@ -256,6 +267,26 @@ export interface TaxClearanceCertificateClient {
   unlinkTaxId: (userData: UserData, databaseClient: DatabaseClient) => Promise<UnlinkTaxIdResponse>;
 }
 
+export interface PowerAutomateClient {
+  startWorkflow: (props: { body?: object; headers?: object }) => Promise<AxiosResponse>;
+  health: () => Promise<HealthCheckMetadata>;
+}
+
+export interface PowerAutomateEmailClient {
+  sendEmail: (postBody: EmailConfirmationSubmission) => Promise<EmailConfirmationResponse>;
+  health: () => Promise<HealthCheckMetadata>;
+}
+
+export interface CigaretteLicenseClient {
+  preparePayment: (userData: UserData, returnUrl: string) => Promise<PreparePaymentResponse>;
+  getOrderByToken: (token: string) => Promise<GetOrderByTokenResponse>;
+  sendEmailConfirmation: (
+    userData: UserData,
+    decryptedTaxId: string,
+  ) => Promise<EmailConfirmationResponse>;
+  health: () => Promise<HealthCheckMetadata>;
+}
+
 export interface XrayRegistrationStatusLookup {
   getStatus: (
     businessName: string,
@@ -276,3 +307,17 @@ export type UpdateXrayRegistration = (
   userData: UserData,
   facilityDetails: FacilityDetails,
 ) => Promise<UserData>;
+
+export interface MessagingServiceClient {
+  sendMessage: (
+    userId: string,
+    messageType: string,
+  ) => Promise<{ success: boolean; messageId?: string; error?: string }>;
+  health: HealthCheckMethod;
+}
+
+export interface MessageResponse {
+  success: boolean;
+  messageId?: string;
+  error?: string;
+}

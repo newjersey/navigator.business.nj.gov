@@ -1,4 +1,3 @@
-export const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false;
 export const IS_DOCKER = process.env.IS_DOCKER === "true" || false;
 export const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 export const BUSINESSES_TABLE = process.env.BUSINESSES_TABLE || "businesses-table-local";

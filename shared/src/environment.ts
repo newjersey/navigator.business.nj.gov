@@ -1,6 +1,7 @@
 export type EnvironmentData = {
   questionnaireData?: QuestionnaireData;
   submitted?: boolean;
+  sbapEmailSent?: boolean;
 };
 
 export type QuestionnaireData = {
@@ -111,4 +112,19 @@ export const generateEmptyEnvironmentQuestionnaireData = (): QuestionnaireData =
       noWasteWater: false,
     },
   };
+};
+
+export type EnvironmentPermitEmailClient = {
+  sendEmail: (emailMetaData: EmailMetaData) => Promise<string>;
+};
+
+export type EmailMetaData = {
+  email: string;
+  userName: string;
+  businessName: string;
+  industry: string;
+  location: string;
+  phase: string;
+  naicsCode: string;
+  questionnaireResponses: string;
 };

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -246,22 +247,11 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       secondaryButtonText={Config.formation.general.backButtonText}
     >
       <>
-        {props.defaultAddress ? (
-          <FormGroup className="padding-y-1">
-            <FormControlLabel
-              data-testid={"default-checkbox"}
-              label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
-              control={
-                <Checkbox
-                  checked={useDefaultAddress}
-                  onChange={(event): void => checkBoxCheck(event.target.checked)}
-                />
-              }
-            />
-          </FormGroup>
-        ) : (
-          <div className={"padding-top-2"} />
-        )}
+        <div className="padding-bottom-1 padding-top-05">
+          <LargeCallout calloutType="informational">
+            <Content>{Config.formation.fields.signers.keepInMindCallout}</Content>
+          </LargeCallout>
+        </div>
         <div data-testid={`${props.fieldName}-address-modal`}>
           <WithErrorBar
             hasError={!!addressErrorMap["addressName"].invalid}
@@ -283,10 +273,26 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               onValidation={onValidation}
               validationText={addressErrorMap["addressName"].label}
               fieldName="addressName"
-              required={true}
+              required
               autoComplete="name"
             />
           </WithErrorBar>
+          {props.defaultAddress ? (
+            <FormGroup className="margin-y-2">
+              <FormControlLabel
+                data-testid={"address-modal-checkbox"}
+                label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
+                control={
+                  <Checkbox
+                    checked={useDefaultAddress}
+                    onChange={(event): void => checkBoxCheck(event.target.checked)}
+                  />
+                }
+              />
+            </FormGroup>
+          ) : (
+            <div className={"padding-top-2"} />
+          )}
           <WithErrorBar
             hasError={!!addressErrorMap["addressLine1"].invalid}
             type="ALWAYS"
@@ -309,7 +315,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               autoComplete="address-line1"
               validationText={addressErrorMap["addressLine1"].label}
               disabled={shouldBeDisabled("addressLine1")}
-              required={true}
+              required
             />
           </WithErrorBar>
           <WithErrorBar
@@ -362,7 +368,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                     autoComplete="address-level2"
                     value={addressData.addressCity}
                     disabled={shouldBeDisabled("addressCity")}
-                    required={true}
+                    required
                     handleChange={(value: string): void => {
                       setAddressData((prevAddressData) => {
                         return { ...prevAddressData, addressCity: value };
@@ -402,7 +408,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                         autoComplete
                         disabled={shouldBeDisabled("addressState")}
                         onValidation={onValidation}
-                        required={true}
+                        required
                         excludeTerritories={isStarting}
                       />
                     </div>
@@ -429,7 +435,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                         value={addressData.addressZipCode}
                         validationText={addressErrorMap["addressZipCode"].label}
                         onValidation={onValidation}
-                        required={true}
+                        required
                       />
                     </div>
                   </div>

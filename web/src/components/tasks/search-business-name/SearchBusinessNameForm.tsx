@@ -8,13 +8,13 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   determineIfNexusDbaNameNeeded,
   emptyProfileData,
   NameAvailability,
 } from "@businessnjgovnavigator/shared/";
+import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import { FormEvent, ReactElement, useCallback, useContext, useEffect, useRef } from "react";
 
@@ -210,6 +210,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                     onChange={(event): void => {
                       onChangeNameField(event.target.value);
                     }}
+                    required
                     variant="outlined"
                     inputProps={{
                       "aria-label": props.config.inputLabel ?? "Search business name",

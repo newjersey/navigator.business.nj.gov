@@ -4,9 +4,6 @@
     "defaultHeaderText": "Hello, ${name}",
     "starterKitText": "Your ${industry} Starter Kit",
     "genericStarterKitText": "Your Starter Kit",
-    "newJerseyDateBodyText": "ET",
-    "guestModeToProfileButtonText": "Guest Account",
-    "genericToProfileButtonText": "Business Profile",
     "personalizeMyTasksButtonText": "Personalize My Experience"
   },
   "dashboardRoadmapHeaderDefaults": {
@@ -14,8 +11,11 @@
     "DomesticEmployerRoadmapTasksHeaderText": "Tasks"
   },
   "dashboardAnytimeActionDefaults": {
-    "defaultHeaderText": "Manage My Business",
-    "defaultAutocompleteHeaderText": "Complete these common tasks for your business at anytime.",
-    "anytimeActionPageButtonText": "Start Now"
+    "defaultHeaderText": "Business Tasks To Stay on Track",
+    "searchFieldHeaderText": "Find What Your Business Needs",
+    "searchFieldHintText": "Search for what your business needs",
+    "commonBusinessTasksHeader": "Common Business Tasks",
+    "recommendedForYouCategoryHeader": "Recommended For You",
+    "searchHasNoOptionsText": "*No options for \"${inputValue}\"*"
   }
 }

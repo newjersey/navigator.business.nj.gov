@@ -110,13 +110,9 @@
     }
   ],
   "name": "Food Truck",
-  "nonEssentialQuestionsIds": [
-    "weights-measures"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "food-truck",
-  "industryOnboardingQuestions": {
-    "canBeReseller": false
-  },
+  "industryOnboardingQuestions": {},
   "isEnabled": true,
   "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart, food vendor",
   "id": "food-truck",

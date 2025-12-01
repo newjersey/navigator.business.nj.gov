@@ -1,5 +1,4 @@
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import { generateSidebarCardContent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -19,6 +18,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
+import { RoadmapDisplayContent, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
@@ -74,6 +74,7 @@ describe("dashboard page", () => {
           anytimeActionLicenseReinstatements={[]}
           licenseEvents={[]}
           xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+          commonBusinessTasks={[]}
         />
       </ThemeProvider>,
     );
@@ -97,6 +98,7 @@ describe("dashboard page", () => {
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
             xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+            commonBusinessTasks={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>,

@@ -1,8 +1,8 @@
 import { SectorModal } from "@/components/dashboard/SectorModal";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const submitSectorModal = (): void => {

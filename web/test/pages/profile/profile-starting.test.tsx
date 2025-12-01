@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect */
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -14,6 +13,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -47,6 +47,7 @@ import {
   randomElementFromArray,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateFormationFormData,
@@ -107,6 +108,8 @@ jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn()
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
+const initialFeatureEmployerRatesEnv = process.env.FEATURE_EMPLOYER_RATES;
+
 describe("profile - starting business", () => {
   let businessFromSetup: Business;
 
@@ -116,6 +119,7 @@ describe("profile - starting business", () => {
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
+    useMockIntersectionObserver();
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
@@ -124,6 +128,10 @@ describe("profile - starting business", () => {
         businessPersona: "STARTING",
       }),
     });
+  });
+
+  afterEach(() => {
+    process.env.FEATURE_EMPLOYER_RATES = initialFeatureEmployerRatesEnv;
   });
 
   describe("locks fields when formation getFiling success", () => {
@@ -1824,6 +1832,21 @@ describe("profile - starting business", () => {
 
       expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
       expect(screen.queryByTestId("locked-profileAddressMuniStateZip")).not.toBeInTheDocument();
+    });
+
+    describe("FEATURE_EMPLOYER_RATES", () => {
+      it("renders employer rates when feature flag is enabled", async () => {
+        process.env.FEATURE_EMPLOYER_RATES = "true";
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+          }),
+        });
+        renderPage({ business });
+        await waitFor(() => {
+          expect(screen.getByTestId("employer-rates-section")).toBeInTheDocument();
+        });
+      });
     });
   });
 

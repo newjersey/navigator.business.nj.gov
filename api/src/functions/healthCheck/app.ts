@@ -1,8 +1,13 @@
+import { runCmsIntegrityTests } from "@businessnjgovnavigator/api/src/cms-integrity-tests/runCmsIntegrityTests";
 import { STAGE } from "@functions/config";
 import { runHealthChecks } from "@libs/healthCheck";
-import { LogWriter } from "@libs/logWriter";
+import { ConsoleLogWriter, LogWriter } from "@libs/logWriter";
 
-export default async function handler(): Promise<void> {
-  const logger = LogWriter(`HealthCheckService/${STAGE}`, "ApiLogs");
-  await runHealthChecks(logger);
-}
+export const handler = async (): Promise<void> => {
+  const isLocal = STAGE === "local";
+
+  const logger = isLocal ? ConsoleLogWriter : LogWriter(`HealthCheckService/${STAGE}`, "ApiLogs");
+  await (["content", "testing"].includes(STAGE)
+    ? runCmsIntegrityTests(STAGE, logger)
+    : runHealthChecks(logger));
+};

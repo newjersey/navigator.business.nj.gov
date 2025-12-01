@@ -19,7 +19,6 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { Task } from "@/lib/types/types";
 import {
   getFlow,
   scrollToTopOfElement,
@@ -30,6 +29,7 @@ import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared"
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useEffect, useRef, useState } from "react";
 
@@ -178,9 +178,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       )}
       {business && !showRadioQuestion && (
         <>
-          <Heading level={2} styleVariant="h3">
-            {Config.businessStructureTask.completedHeader}
-          </Heading>
+          <Heading level={2}>{Config.businessStructureTask.completedHeader}</Heading>
           <Alert variant="success">
             <div
               className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`}

@@ -238,6 +238,16 @@ collections:
                           name: "errorInlineNeedsToSearch",
                           widget: "string",
                         }
+                      - {
+                          label: "Confirm Business Name Label",
+                          name: "confirmBusinessNameLabel",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Confirm Business Name Error",
+                          name: "confirmBusinessNameError",
+                          widget: "string",
+                        }
                       - label: Overrides
                         name: overrides
                         collapsed: false
@@ -767,6 +777,11 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - {
+                          label: "Keep In Mind Callout",
+                          name: "keepInMindCallout",
+                          widget: "markdown",
+                        }
+                      - {
                           label: "Error banner - signer title",
                           name: "errorBannerSignerTitle",
                           widget: "string",
@@ -1020,11 +1035,6 @@ collections:
                       name: "sameAddressCheckbox",
                       widget: "string",
                     }
-                  - {
-                      label: "Checkbox label - use contact info",
-                      name: "sameContactCheckbox",
-                      widget: "string",
-                    }
                   - { label: "Note Title", name: "noteTitle", widget: "string" }
                   - { label: "Note Body", name: "noteBody", widget: "markdown" }
                   - {
@@ -1038,6 +1048,76 @@ collections:
                       widget: "string",
                     }
                   - { label: "Info callout footer", name: "infoCalloutFooter", widget: "string" }
+              - label: Check Name Reservation Section
+                name: checkNameReservation
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Header", name: "header", widget: "string" }
+                  - label: "Did You Use Form Radio Button"
+                    name: "didYouUseFormRadio"
+                    widget: "object"
+                    fields:
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Option 1", name: "option1", widget: "string" }
+                      - { label: "Option 2", name: "option2", widget: "string" }
+                  - {
+                      label: "Already Reserved Name Alert Header",
+                      name: "alreadyReservedAlertHeader",
+                      widget: "markdown",
+                    }
+                  - {
+                      label: "Already Reserved Name Alert Info",
+                      name: "alreadyReservedAlertInfo",
+                      widget: "string",
+                    }
+                  - label: "How Would Uou Like to Proceed Radio Button"
+                    name: "howWouldYouLikeToProceedRadio"
+                    widget: "object"
+                    fields:
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Option 1", name: "option1", widget: "string" }
+                      - { label: "Option 2", name: "option2", widget: "string" }
+                      - { label: "Option 3", name: "option3", widget: "string" }
+                  - {
+                      label: "Register Different Name Header",
+                      name: "registerDifferentNameHeader",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Register Different Name Line 1",
+                      name: "registerDifferentNameLine1",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Register Different Name Line 2",
+                      name: "registerDifferentNameLine2",
+                      widget: "string",
+                    }
+                  - { label: "Keep Name Header", name: "keepNameHeader", widget: "string" }
+                  - { label: "Keep Name Step1", name: "keepNameStep1", widget: "markdown" }
+                  - { label: "Keep Name Step2", name: "keepNameStep2", widget: "markdown" }
+                  - { label: "Keep Name Step3", name: "keepNameStep3", widget: "markdown" }
+                  - {
+                      label: "Keep Name Address Line 1",
+                      name: "keepNameAddressLine1",
+                      widget: "markdown",
+                    }
+                  - {
+                      label: "Keep Name Address Line 2",
+                      name: "keepNameAddressLine2",
+                      widget: "markdown",
+                    }
+                  - {
+                      label: "Keep Name Address Line 3",
+                      name: "keepNameAddressLine3",
+                      widget: "markdown",
+                    }
+                  - { label: "Cancel Name Header", name: "cancelNameHeader", widget: "string" }
+                  - { label: "Cancel Name Step1", name: "cancelNameStep1", widget: "markdown" }
+                  - { label: "Cancel Name Step2", name: "cancelNameStep2", widget: "markdown" }
+                  - { label: "Cancel Name Step3", name: "cancelNameStep3", widget: "markdown" }
+                  - { label: "Cancel Name Step4", name: "cancelNameStep4", widget: "markdown" }
               - label: Sections
                 name: sections
                 collapsed: true
@@ -1090,6 +1170,33 @@ collections:
                           name: "billingContactHeader",
                           widget: "string",
                         }
+                      - { label: "Warning alert", name: "warningAlert", widget: "markdown" }
+                      - label: "Confirmation box"
+                        name: confirmationBox
+                        widget: object
+                        fields:
+                          - { label: "Title", name: "title", widget: "string" }
+                          - {
+                              label: "Names addresses dates checkbox",
+                              name: "namesAddressesDatesCheckbox",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Permanent record checkbox",
+                              name: "permanentRecordCheckbox",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Correction fees checkbox",
+                              name: "correctionFeesCheckbox",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Confirmation error",
+                              name: "confirmationError",
+                              widget: "string",
+                            }
+
               - label: Error Banner
                 name: errorBanner
                 collapsed: true
@@ -1171,7 +1278,6 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: "Amendment Info Alert", name: "amendmentInfo", widget: "markdown" }
                   - {
                       label: "Not entered text - review page",
                       name: "notEntered",

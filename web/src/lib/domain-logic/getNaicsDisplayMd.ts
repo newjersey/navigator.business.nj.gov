@@ -1,5 +1,5 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 export const getNaicsDisplayMd = (naicsCode: string): string => {
   const Config = getMergedConfig();

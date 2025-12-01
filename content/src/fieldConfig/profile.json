@@ -69,20 +69,8 @@
           "header": "New Jersey Tax ID",
           "headerContextualInfo": "tax-id",
           "description": "",
-          "errorTextRequired": "Enter a 12-digit Tax ID",
+          "errorTextRequired": "Enter a 12-digit Tax ID.",
           "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
-        }
-      },
-      "taxPin": {
-        "default": {
-          "header": "Tax PIN",
-          "headerContextualInfo": "tax-pin",
-          "errorTextRequired": "Tax PIN must be 4 digits.",
-          "description": "",
-          "showButtonText": "Show",
-          "hideButtonText": "Hide",
-          "showButtonTextMobile": "Show Tax PIN",
-          "hideButtonTextMobile": "Hide Tax PIN"
         }
       },
       "requiresCpa": {
@@ -119,13 +107,25 @@
             "propertyInNJ": "I am looking to contract with New Jersey state or local government, or school districts",
             "companyOperatedVehiclesInNJ": "I have company-operated vehicles making business-related stops (deliveries or pickups) in New Jersey",
             "employeesInNJ": "I have employees who live in New Jersey",
-            "transactionsInNJ": "I have more than 200 separate taxable transactions in New Jersey in the current or prior calendar year",
-            "revenueInNJ": "My taxable transactions in New Jersey exceeded $100,000 in the last calendar year",
+            "transactionsInNJ": "I have more than 200 separate taxable transactions in New Jersey in the current or previous calendar year",
+            "revenueInNJ": "My taxable transactions in New Jersey exceeded $100,000 in the current or previous calendar year",
             "none": "None of the above"
           },
           "REMOTE_WORKER": "It sounds like you have `Remote Workers|remote-worker` .",
           "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
           "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
+        }
+      },
+      "taxPin": {
+        "default": {
+          "header": "Tax PIN",
+          "headerContextualInfo": "tax-pin",
+          "errorTextRequired": "Tax PIN must be 4 digits.",
+          "description": "",
+          "showButtonText": "Show",
+          "hideButtonText": "Hide",
+          "showButtonTextMobile": "Show Tax PIN",
+          "hideButtonTextMobile": "Hide Tax PIN"
         }
       },
       "elevatorOwningBusiness": {
@@ -164,14 +164,14 @@
       },
       "nonEssentialQuestions": {
         "default": {
-          "sectionHeader": "Discover Industry Licenses and Permits",
-          "sectionSubText": "Depending on your industry, you might see additional questions. Answering these questions will give you additional tasks to complete that may be required for your business.",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "optionalText": "(Optional)",
-          "linkToPermitsHeader": "Keep in mind:",
           "linkToPermitsTextBeforeButton": "Answer",
           "linkToPermitsTextButton": "more questions",
+          "radioButtonFalseText": "No",
+          "sectionSubText": "Depending on your industry, you might see additional questions. Answering these questions will give you additional tasks to complete that may be required for your business.",
+          "radioButtonTrueText": "Yes",
+          "optionalText": "(Optional)",
+          "linkToPermitsHeader": "Keep in mind:",
+          "sectionHeader": "Discover Industry Licenses and Permits",
           "linkToPermitsTextAfterButton": "to check if you need additional licenses or permits."
         }
       },
@@ -198,6 +198,13 @@
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Do you own and/or operate a traveling carnival or circus?"
+        }
+      },
+      "publicWorksContractor": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you plan to work on `public works|public-works` projects?"
         }
       },
       "tradeName": {
@@ -434,7 +441,7 @@
       "entityId": {
         "default": {
           "header": "Entity ID",
-          "headerContextualInfo": "entity-id",
+          "headerContextualInfo": "entity-id-contextual-link",
           "description": ""
         }
       },
@@ -465,43 +472,57 @@
       }
     },
     "default": {
+      "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
+      "contactInformationSubText": "We'll only use these details to contact you about your Business.NJ.gov account. Changes you make here won't affect your myNewJersey account and won't change your information on any official business forms with New Jersey (for example, tax filings). To update your myNewJersey login, visit [myNewJersey Account Settings](https://myt1.nj.gov/edituser/EditUserProfile).",
+      "annualReportDeadlineSubText": "Tell us when you officially started your business and we'll add your Annual Report deadline to your Calendar.",
+      "errorTextHeader": "Error",
+      "secondaryNavigationAriaLabel": "",
+      "profileTabContactTitle": "Contact & Notifications",
+      "filterCertificationsAndFundingHeader": "Filter Certifications and Funding Opportunities",
+      "profileTabPersonalizeYourTasksTitle": "Personalize My Experience",
+      "notificationProductNewsDescription": "News about the website, feature releases, service updates, and opportunities to provide feedback.",
       "backButtonText": "Cancel",
+      "errorTextEmail": "Enter a valid email address.",
+      "errorDefaultTextBody": "Review your information in the fields marked below.",
+      "typesOfNotificationsHeading": "Types of Notifications",
+      "profileAddressNotProvided": "Address not provided",
+      "profileTabPermitsTitle": "Permits & Licenses",
+      "escapeModalEscape": "Go back",
+      "escapeModalBody": "You have unsaved changes that will be lost.",
+      "notificationIncompleteTasksLabel": "Incomplete tasks and general reminders",
+      "notificationNewsletterLabel": "Business.NJ.gov Newsletter",
+      "standingDocFileTitle": "Certificate of Good Standing",
+      "errorErrorAlertOneField": "field",
+      "securityMattersHeading": "Your Security Matters:",
+      "profileTabDocsTitle": "Reference Documents",
+      "profilePageTitlePrefix": "Profile For",
+      "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
+      "essentialQuestionAlertText": "Complete all required fields.",
+      "typesOfNotificationsSubText": "Select the types of updates that matter most to your business.",
+      "formationDocFileTitle": "Official Formation Document",
+      "filterCertificationsAndFundingSubText": "Answer a few questions to find State certifications and funding programs in your For You section.",
+      "contactInformationHeading": "Your Contact Information",
+      "notificationIncompleteTasksDescription": "Stay on track with helpful nudges when you leave something unfinished.",
+      "errorTextBody": "Review your information in the ${fieldText} marked below.",
+      "notificationNewsletterDescription": "Get updates on the latest State news that could impact your business.",
+      "yourProfileHelpsWithRecommendationsCallout": ":::miniCallout{ calloutType=\"informational\"  }\n**Your profile helps us make recommendations for your business.**\n:::",
+      "annualReportDeadlineHeader": "Add Your Annual Report Deadline",
+      "escapeModalHeader": "Are you sure you want to continue?",
+      "profileTabNumbersTitle": "Reference Numbers",
+      "profileTabNoteTitle": "Notes",
+      "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
+      "saveButtonText": "Save",
+      "contactAndNotificationsSubText": "Choose how you want to stay informed. You can customize how you get messages, and you can choose which topics to receive.",
+      "permitsAndLicensesSubText": "Answer a few questions to find out what licenses and permits you may need and discover funding programs to help your business grow. New items will appear on your Starter Kit or your For You section.",
+      "escapeModalReturn": "Continue without saving",
+      "errorAlertMultipleFields": "fields",
+      "successTextHeader": "Business Profile Saved",
+      "notificationProductNewsLabel": "Product news and feedback",
       "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
-      "errorDefaultTextBody":  "Review your information in the fields marked below.",
-      "errorTextBody": "Review your information in the ${fieldText} marked below.",
-      "errorAlertMultipleFields": "fields",
-      "errorErrorAlertOneField": "field",
-      "errorTextHeader": "Error",
-      "escapeModalBody": "You have unsaved changes that will be lost.",
-      "escapeModalEscape": "Go back",
-      "escapeModalHeader": "Are you sure you want to continue?",
-      "escapeModalReturn": "Continue without saving",
-      "essentialQuestionAlertText": "Complete all required fields.",
-      "formationDocFileTitle": "Official Formation Document",
-      "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
-      "annualReportDeadlineHeader": "Add Your Annual Report Deadline",
-      "annualReportDeadlineSubText": "Tell us when you officially started your business and we'll add your Annual Report deadline to your Calendar.",
-      "filterCertificationsAndFundingHeader": "Filter Certifications and Funding Opportunities",
-      "filterCertificationsAndFundingSubText": "Answer a few questions to find State certifications and funding programs in your For You section.",
-      "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
-      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete.",
-      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us make recommendations for your business. We do not submit information for registration.",
-      "permitsAndLicensesSubText": "Answer a few questions to find out what licenses and permits you may need and discover funding programs to help your business grow. New items will appear on your Starter Kit or your For You section.",
-      "profileAddressNotProvided": "Address not provided",
-      "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:",
-      "profilePageTitlePrefix": "Profile For",
-      "profileTabDocsTitle": "Reference Documents",
       "profileTabInfoTitle": "Business Information",
-      "profileTabNoteTitle": "Notes",
-      "profileTabNumbersTitle": "Reference Numbers",
-      "profileTabPermitsTitle": "Permits & Licenses",
-      "profileTabPersonalizeYourTasksTitle": "Personalize My Experience",
-      "saveButtonText": "Save",
-      "secondaryNavigationAriaLabel": "",
-      "standingDocFileTitle": "Certificate of Good Standing",
-      "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
-      "successTextHeader": "Business Profile Saved"
+      "securityMattersText": "- You can update your contact information and notification preferences at any time.\n- We will **never** ask for your password, banking details, or Social Security number in an email or text.\n- All official messages will always come from **address@business.nj.gov** or appear in your account dashboard.\n- If you ever get an email that looks suspicious, report it at [cyber.nj.gov/report](https://cyber.nj.gov/report).",
+      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete."
     }
   }
 }

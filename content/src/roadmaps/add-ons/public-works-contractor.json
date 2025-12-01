@@ -1,0 +1,12 @@
+{
+  "displayname": "public-works-contractor",
+  "id": "public-works-contractor",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "pwcr",
+      "required": true
+    }
+  ]
+}

@@ -5,7 +5,8 @@ displayname: dental-license
 urlSlug: dental-license
 name: Apply for Your Dental License
 webflowName: "Healthcare: Dental License"
-summaryDescriptionMd: You need a dental license if you own a dental practice or perform dentistry in New Jersey.
+summaryDescriptionMd: You need a dental license if you own a dental practice or
+  perform dentistry in New Jersey.
 industryId:
   - healthcare
 callToActionText: Apply for My Dental License
@@ -14,8 +15,7 @@ agencyId: nj-consumer-affairs
 webflowId: 669ac515985e99ee52d48390
 licenseCertificationClassification: undefined
 ---
-
-:::largeCallout{ calloutType="quickReference" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 Once your application has been approved, you will receive an Initial Registration Form. You must
 verify the information and return the form with the appropriate fee to receive your dental license.
@@ -24,42 +24,42 @@ verify the information and return the form with the appropriate fee to receive y
 
 ## Eligibility Criteria
 
-- Be at least 18 years old
-- Have or will have completed a doctorate in dentistry from a school accredited by the Commission on
+* Be at least 18 years old
+* Have or will have completed a doctorate in dentistry from a school accredited by the Commission on
   Dental Accreditation (CODA)
-- Have a National Board dental personal identification number (DENTPIN)
-- Pass the American Board of Dental Examiners (ADEX) examination
-- Complete the online New Jersey Law and Jurisprudence Orientation Program (instructions will be
+* Have a National Board dental personal identification number (DENTPIN)
+* Pass the American Board of Dental Examiners (ADEX) examination
+* Complete the online New Jersey Law and Jurisprudence Orientation Program (instructions will be
   emailed to you after submitting your dental license application)
 
 ## Application Requirements
 
-- Business name and address
-- The address you want printed on your license
-- National Board dental personal identification number (DENTPIN)
-- Social Security number (SSN), or Individual Taxpayer Identification number (ITIN)
-- Dental school information, including dates of attendance and date your degree was issued
-- Official dental school transcripts emailed to the New Jersey Board of Dentistry at
+* Business name and address
+* The address you want printed on your license
+* National Board dental personal identification number (DENTPIN)
+* Social Security number (SSN), or Individual Taxpayer Identification number (ITIN)
+* Dental school information, including dates of attendance and date your degree was issued
+* Official dental school transcripts emailed to the New Jersey Board of Dentistry at
   [dentistry@dca.njoag.gov](mailto:Dentistry@dca.njoag.gov)
-- Names and addresses of all jobs, residencies, or training programs since graduating from dental
+* Names and addresses of all jobs, residencies, or training programs since graduating from dental
   school
-- Uploaded photo ID
-- A 2x2 inch photo of your head and shoulders taken in the last 6 months
-- Criminal history background check (fingerprinting information will be emailed to you after
+* Uploaded photo ID
+* A 2x2 inch photo of your head and shoulders taken in the last 6 months
+* Criminal history background check (fingerprinting information will be emailed to you after
   submitting your application)
-- Applicable fees paid
-- Name change documentation, if applicable
-- Criminal history, if applicable
-- List of past professional license applications including dates, if applicable
-- Explanation of license suspension, denial, revocation, or surrender, if applicable
+* Applicable fees paid
+* Name change documentation, if applicable
+* Criminal history, if applicable
+* List of past professional license applications including dates, if applicable
+* Explanation of license suspension, denial, revocation, or surrender, if applicable
 
-:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 You cannot legally perform dentistry and may be subject to significant fines.
 
 :::
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A dental license number, valid for 2 years.
 

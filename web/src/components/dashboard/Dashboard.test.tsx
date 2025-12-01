@@ -1,13 +1,4 @@
 import { Dashboard } from "@/components/dashboard/Dashboard";
-import { getMergedConfig } from "@/contexts/configContext";
-import {
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
-  LicenseEventType,
-  OperateReference,
-  RoadmapDisplayContent,
-  SidebarCardContent,
-} from "@/lib/types/types";
 import {
   generateAnytimeActionTask,
   generateSidebarCardContent,
@@ -39,6 +30,15 @@ import {
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+  LicenseEventType,
+  OperateReference,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -114,6 +114,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
           xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+          commonBusinessTasks={[]}
         />
       </ThemeProvider>,
     );
@@ -136,6 +137,7 @@ describe("<DashboardOnDesktop />", () => {
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
             xrayRenewalEvent={generateXrayRenewalCalendarEvent({})}
+            commonBusinessTasks={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>,
@@ -358,7 +360,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
-        expect(screen.queryByTestId("anytimeActionDropdown")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("anytimeActionSearch")).not.toBeInTheDocument();
       },
     );
 
@@ -372,7 +374,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
-        expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();
+        expect(screen.getByTestId("anytimeActionSearch")).toBeInTheDocument();
       },
     );
   });

@@ -52,7 +52,8 @@
       "step": 4,
       "weight": 3,
       "task": "resale-tax-certificate-operating"
-    }, {
+    },
+    {
       "step": 4,
       "weight": 99,
       "task": "manage-business-vehicles"
@@ -62,8 +63,7 @@
   "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "home-baker",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "cottage foods",

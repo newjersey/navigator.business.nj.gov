@@ -52,7 +52,7 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
 
   return (
     <div data-testid="license-current-status-component">
-      <Heading level={2} styleVariant={"h3"}>
+      <Heading level={2}>
         {
           Config.anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
             .licenseStatusHeaderText
@@ -71,7 +71,7 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
               <Icon className={"usa-icon--size-3 text-base-light"} iconName="expand_more" />
             }
           >
-            <Heading level={3} styleVariant={"h4"} className="margin-0-override">
+            <Heading level={3} className="margin-0-override">
               {Config.licenseSearchTask.applicationChecklistItemsText}
             </Heading>
           </AccordionSummary>

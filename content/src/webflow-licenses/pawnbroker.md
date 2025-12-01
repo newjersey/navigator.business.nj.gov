@@ -1,14 +1,14 @@
 ---
+id: pawnbroker
 displayname: pawnbroker
-id: "pawnbroker"
-webflowId: "5f77292b8150be1726f3be24"
-urlSlug: "pawnbroker"
-webflowName: "Pawnbroker"
-callToActionLink: "http://state.nj.us/dobi/index.html"
-callToActionText: ""
+urlSlug: pawnbroker
+webflowName: Pawnbroker
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Office of Consumer Finance, License Service"
-divisionPhone: "(609) 292-7272"
-webflowIndustry: "Pawnbroker"
-licenseCertificationClassification: "PERMIT"
+agencyAdditionalContext: Office of Consumer Finance, License Service
+callToActionText: Get a Pawnbroker License
+callToActionLink: https://www.nj.gov/dobi/banklicensing/pawnbroker.html
+webflowIndustry: Pawnbroker
+divisionPhone: (609) 292-7272
+webflowId: 5f77292b8150be1726f3be24
+licenseCertificationClassification: PERMIT
 ---

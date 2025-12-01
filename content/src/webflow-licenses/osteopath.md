@@ -1,14 +1,14 @@
 ---
+id: osteopath
 displayname: osteopath
-id: "osteopath"
-webflowId: "5f7729a9dd6a4950c09b606d"
-urlSlug: "osteopath"
-webflowName: "Osteopath"
-callToActionLink: "http://njconsumeraffairs.gov/bme"
-callToActionText: ""
+urlSlug: osteopath
+webflowName: Osteopath
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "Board of Medical Examiners, Certified Nurse Midwife Committee"
-divisionPhone: "(973) 826-7100"
-webflowIndustry: "Osteopath"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Board of Medical Examiners, Certified Nurse Midwife Committee
+callToActionText: Apply for Doctor of Osteopathy Licensure
+callToActionLink: http://njconsumeraffairs.gov/bme
+webflowIndustry: Osteopath
+divisionPhone: (973) 826-7100
+webflowId: 5f7729a9dd6a4950c09b606d
+licenseCertificationClassification: LICENSE
 ---

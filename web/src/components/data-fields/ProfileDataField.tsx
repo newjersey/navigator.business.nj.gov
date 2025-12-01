@@ -3,7 +3,7 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@/lib/types/types";
+import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 import { OutlinedInputProps, TextFieldProps } from "@mui/material";
 import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 

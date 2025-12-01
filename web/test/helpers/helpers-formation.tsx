@@ -1,16 +1,9 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
-import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import {
-  defaultDisplayDateFormat,
-  FormationDbaDisplayContent,
-  FormationSignedAddress,
-  Task,
-} from "@/lib/types/types";
 import { generateTask, randomPublicFilingLegalType } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -40,11 +33,18 @@ import {
   publicFilingLegalTypes,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateProfileData,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
+import {
+  defaultDisplayDateFormat,
+  FormationDbaDisplayContent,
+  FormationSignedAddress,
+  Task,
+} from "@businessnjgovnavigator/shared/types";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -208,14 +208,15 @@ export type FormationPageHelpers = {
   getStepStateInStepper: (index: number | undefined) => string;
   searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
   fillAndBlurBusinessName: (businessName?: string) => Promise<void>;
+  fillAndBlurBusinessNameConfirmation: (businessNameConfirmation?: string) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
-  getInputElementByLabel: (label: string) => HTMLInputElement;
+  getInputElementByLabel: (label: string, role?: string) => HTMLInputElement;
   getInputElementByTestId: (testId: string) => HTMLInputElement;
   getInputElementByParentTestId: (testId: string, params: { type: string }) => HTMLInputElement;
   getListBoxForInputElementByTestId: (testId: string) => Promise<HTMLInputElement>;
   selectByText: (label: string, value: string) => void;
-  selectCheckbox: (label: string) => void;
+  selectCheckbox: (label: string, role?: string) => void;
   selectCheckboxByTestId: (testId: string) => void;
   clickAddNewSigner: () => void;
   clickAddNewIncorporator: () => void;
@@ -229,6 +230,7 @@ export type FormationPageHelpers = {
     fieldName: string,
   ) => Promise<void>;
   clickSubmit: () => Promise<void>;
+  checkAllReviewCheckboxes: () => Promise<void>;
   selectDate: (
     value: DateObject,
     fieldType: "Business start date" | "Foreign date of formation",
@@ -250,6 +252,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     businessName = "Default Test Name",
   ): Promise<void> => {
     fillText("Search business name", businessName);
+    fillText("Confirm business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
     fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
@@ -262,6 +265,13 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const fillAndBlurBusinessName = async (businessName = "Default Test Name"): Promise<void> => {
     fillText("Search business name", businessName);
     fireEvent.blur(screen.getByLabelText("Search business name"));
+  };
+
+  const fillAndBlurBusinessNameConfirmation = async (
+    businessNameConfirmation = "Default Test Name",
+  ): Promise<void> => {
+    fillText("Confirm business name", businessNameConfirmation);
+    fireEvent.blur(screen.getByLabelText("Confirm business name"));
   };
 
   const submitNexusBusinessNameStep = async (): Promise<void> => {
@@ -411,7 +421,12 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.click(screen.getByTestId(testId));
   };
 
-  const getInputElementByLabel = (label: string): HTMLInputElement => {
+  const getInputElementByLabel = (label: string, role?: string): HTMLInputElement => {
+    if (role) {
+      const container = screen.getByRole(role);
+      return within(container).getByLabelText(label) as HTMLInputElement;
+    }
+
     return screen.getByLabelText(label) as HTMLInputElement;
   };
 
@@ -435,7 +450,13 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.click(listbox.getByText(value));
   };
 
-  const selectCheckbox = (label: string): void => {
+  const selectCheckbox = (label: string, role?: string): void => {
+    if (role) {
+      const container = screen.getByRole(role);
+      fireEvent.click(within(container).getByLabelText(label));
+      return;
+    }
+
     fireEvent.click(screen.getByLabelText(label));
   };
 
@@ -508,6 +529,22 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
+  const checkAllReviewCheckboxes = async (): Promise<void> => {
+    const namesDatesBox = within(
+      screen.getByTestId("names-addresses-dates-checkbox-container"),
+    ).getByRole("checkbox");
+    const permanentRecordBox = within(
+      screen.getByTestId("permanent-record-checkbox-container"),
+    ).getByRole("checkbox");
+    const correctionFeesBox = within(
+      screen.getByTestId("correction-fees-checkbox-container"),
+    ).getByRole("checkbox");
+
+    await userEvent.click(namesDatesBox);
+    await userEvent.click(permanentRecordBox);
+    await userEvent.click(correctionFeesBox);
+  };
+
   const selectDate = (
     value: DateObject,
     fieldType: "Business start date" | "Foreign date of formation",
@@ -551,6 +588,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillText,
     fillAndSubmitBusinessNameStep,
     fillAndBlurBusinessName,
+    fillAndBlurBusinessNameConfirmation,
     submitBusinessNameStep,
     submitBusinessStep,
     submitContactsStep,
@@ -577,6 +615,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillAddressModal,
     fillAndSubmitAddressModal,
     clickSubmit,
+    checkAllReviewCheckboxes,
     clickSubmitAndGetError,
     selectDate,
     stepperClickToBusinessNameStep,

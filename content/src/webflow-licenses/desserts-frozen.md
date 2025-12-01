@@ -1,14 +1,15 @@
 ---
+id: desserts-frozen
 displayname: desserts-frozen
-id: "desserts-frozen"
-webflowId: "5f77293ee022945832eaa5c5"
-urlSlug: "desserts-frozen"
-webflowName: "Desserts (Frozen)"
-callToActionLink: "http://nj.gov/health/ceohs/index.shtml"
-callToActionText: ""
+urlSlug: desserts-frozen
+webflowName: Desserts (Frozen)
 agencyId: nj-health
-agencyAdditionalContext: "Office of Consumer Environmental Health Services, Public Health Sanitation and Safety Program"
-divisionPhone: "(609) 826-4941"
-webflowIndustry: "Frozen Desserts"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Office of Consumer Environmental Health Services,
+  Public Health Sanitation and Safety Program
+callToActionText: Apply for a Frozen Dessert License
+callToActionLink: http://nj.gov/health/ceohs/index.shtml
+webflowIndustry: Frozen Desserts
+divisionPhone: (609) 826-4941
+webflowId: 5f77293ee022945832eaa5c5
+licenseCertificationClassification: LICENSE
 ---
