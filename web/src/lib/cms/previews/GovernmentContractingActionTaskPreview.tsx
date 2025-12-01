@@ -1,11 +1,11 @@
-import { AnytimeActionGovernmentContractingElement } from "@/components/tasks/anytime-action/AnytimeActionGovernmentContractingElement";
+import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
-import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { AnytimeActionTask } from "@/lib/types/types";
-import { ReactElement } from "react";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
-import { ConfigContext } from "@/contexts/configContext";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
+import { ReactElement } from "react";
 
 const GovernmentContractingAnytimeActionPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
@@ -19,23 +19,23 @@ const GovernmentContractingAnytimeActionPreview = (props: PreviewProps): ReactEl
           file
         </h2>
         <div className="margin-bottom-10" />
-        <AnytimeActionGovernmentContractingElement
-          governmentContractingTask={anytimeAction}
+        <GovernmentContractingElement
+          anytimeActionHeaderText={anytimeAction.name}
           CMS_ONLY_stepIndex={0}
         />
         <div className="margin-bottom-10" />
-        <AnytimeActionGovernmentContractingElement
-          governmentContractingTask={anytimeAction}
+        <GovernmentContractingElement
+          anytimeActionHeaderText={anytimeAction.name}
           CMS_ONLY_stepIndex={1}
         />
         <div className="margin-bottom-10" />
-        <AnytimeActionGovernmentContractingElement
-          governmentContractingTask={anytimeAction}
+        <GovernmentContractingElement
+          anytimeActionHeaderText={anytimeAction.name}
           CMS_ONLY_stepIndex={2}
         />
         <div className="margin-bottom-10" />
-        <AnytimeActionGovernmentContractingElement
-          governmentContractingTask={anytimeAction}
+        <GovernmentContractingElement
+          anytimeActionHeaderText={anytimeAction.name}
           CMS_ONLY_stepIndex={3}
         />
       </div>

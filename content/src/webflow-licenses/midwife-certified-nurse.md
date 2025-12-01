@@ -1,14 +1,14 @@
 ---
+id: midwife-certified-nurse
 displayname: midwife-certified-nurse
-id: "midwife-certified-nurse"
-webflowId: "5f77299c4bc777eca1a6e255"
-urlSlug: "midwife-certified-nurse"
-webflowName: "Midwife, Certified Nurse"
-callToActionLink: "https://www.njconsumeraffairs.gov/mid/Pages/default.aspx"
-callToActionText: ""
+urlSlug: midwife-certified-nurse
+webflowName: Midwife, Certified Nurse
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: "Midwifery Liaison Committee"
+agencyAdditionalContext: Midwifery Liaison Committee
+callToActionText: Get Licensed as a Certified Nurse Midwife
+callToActionLink: https://www.njconsumeraffairs.gov/mid/Pages/default.aspx
+webflowIndustry: Midwife
 divisionPhone: ""
-webflowIndustry: "Midwife"
-licenseCertificationClassification: "LICENSE/REGISTRATION"
+webflowId: 5f77299c4bc777eca1a6e255
+licenseCertificationClassification: LICENSE/REGISTRATION
 ---

@@ -2,7 +2,7 @@ import { AnytimeActionSwitchComponent } from "@/components/tasks/anytime-action/
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { AnytimeActionTask } from "@/lib/types/types";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
 const AnytimeActionTaskPreview = (props: PreviewProps): ReactElement => {

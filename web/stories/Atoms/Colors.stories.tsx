@@ -18,7 +18,7 @@ const Template = () => {
 
   const neutralBase = (
     <div className="flex flex-row">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Neutral/Base
       </Heading>
       {renderColor("base-extra-light", "#f8f8f8")}
@@ -33,7 +33,7 @@ const Template = () => {
 
   const primary = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Primary
       </Heading>
       {renderColor("primary-extra-extra-light", "#fbfdf9")}
@@ -52,7 +52,7 @@ const Template = () => {
 
   const secondary = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Secondary
       </Heading>
       {renderColor("secondary-lighter", "#cfe8ff")}
@@ -67,7 +67,7 @@ const Template = () => {
 
   const accentCool = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Accent Cool
       </Heading>
       {renderColor("accent-cool-lightest", "#ecf4fb")}
@@ -84,7 +84,7 @@ const Template = () => {
 
   const accentWarm = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Accent Warm
       </Heading>
       {renderColor("accent-warm-extra-light", "#fff4dc")}
@@ -98,7 +98,7 @@ const Template = () => {
 
   const success = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Success
       </Heading>
       {renderColor("success-extra-light", "#ecf3ec")}
@@ -112,7 +112,7 @@ const Template = () => {
 
   const info = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Info
       </Heading>
       {renderColor("info-extra-light", "#e7f6f8")}
@@ -127,7 +127,7 @@ const Template = () => {
 
   const warning = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Warning
       </Heading>
       {renderColor("warning-extra-light", "#faf3d1")}
@@ -140,7 +140,7 @@ const Template = () => {
 
   const error = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Error
       </Heading>
       {renderColor("error-extra-light", "#f4e3db")}
@@ -153,7 +153,7 @@ const Template = () => {
 
   const shades = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Shades
       </Heading>
       {renderColor("white", "#ffffff")}
@@ -163,7 +163,7 @@ const Template = () => {
 
   const coolNeutral = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Cool Neutral
       </Heading>
       {renderColor("cool-extra-light", "#f9fbfb")}
@@ -173,7 +173,7 @@ const Template = () => {
 
   const accentCooler = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Accent Cooler
       </Heading>
       {renderColor("accent-cooler-lightest", "#ece6f2")}
@@ -186,7 +186,7 @@ const Template = () => {
 
   const accentHot = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Accent Hot
       </Heading>
       {renderColor("accent-hot-extra-light", "#fae8e0")}
@@ -197,7 +197,7 @@ const Template = () => {
 
   const accentSemiCool = (
     <div className="flex flex-row margin-top-4">
-      <Heading level={3} styleVariant="h1" className="margin-right-4 width-card-lg">
+      <Heading level={3} className="margin-right-4 width-card-lg">
         Accent Semi Cool
       </Heading>
       {renderColor("accent-semi-cool-extra-light", "#effffb")}
@@ -214,7 +214,7 @@ const Template = () => {
 
   return (
     <div>
-      <Heading level={2} styleVariant="h1Large" className="margin-y-4">
+      <Heading level={2} className="margin-y-4">
         Theme Palette
       </Heading>
       <div className="margin-y-6">
@@ -224,7 +224,7 @@ const Template = () => {
         <div>{accentCool}</div>
         <div>{accentWarm}</div>
       </div>
-      <Heading level={2} styleVariant="h1Large" className="margin-bottom-4 margin-top-10">
+      <Heading level={2} className="margin-bottom-4 margin-top-10">
         Alert Palette
       </Heading>
       <div className="margin-y-6">
@@ -234,7 +234,7 @@ const Template = () => {
         <div>{error}</div>
         <div>{shades}</div>
       </div>
-      <Heading level={2} styleVariant="h1Large" className="margin-bottom-4 margin-top-10">
+      <Heading level={2} className="margin-bottom-4 margin-top-10">
         New Colors
       </Heading>
       <div>{coolNeutral}</div>

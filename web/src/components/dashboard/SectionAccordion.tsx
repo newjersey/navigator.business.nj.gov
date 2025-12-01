@@ -59,14 +59,12 @@ export const SectionAccordion = (props: Props): ReactElement => {
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
           >
-            <div className="margin-y-05">
-              <Heading
-                level={3}
-                className={`flex flex-align-center margin-0-override ${headerClasses}`}
-              >
-                <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
-              </Heading>
-            </div>
+            <Heading
+              level={3}
+              className={`flex flex-align-center margin-0-override ${headerClasses}`}
+            >
+              <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
+            </Heading>
           </AccordionSummary>
           <AccordionDetails>{props.children}</AccordionDetails>
         </Accordion>

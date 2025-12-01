@@ -103,12 +103,6 @@ export const DynamoBusinessDataClient = (
     });
   };
 
-  const findByEncryptedTaxId = (encryptedTaxId: string): Promise<Business | undefined> => {
-    return findSingleBusinessByIndex("EncryptedTaxId", "encryptedTaxId = :encryptedTaxId", {
-      ":encryptedTaxId": { S: encryptedTaxId },
-    });
-  };
-
   const findAllByHashedTaxId = (hashedTaxId: string): Promise<Business[]> => {
     return findAllBusinessesByIndex("HashedTaxId", "hashedTaxId = :hashedTaxId", {
       ":hashedTaxId": { S: hashedTaxId },
@@ -139,7 +133,6 @@ export const DynamoBusinessDataClient = (
       Item: {
         businessId: businessData.id,
         industry: businessData.profileData.industryId,
-        encryptedTaxId: businessData.profileData.encryptedTaxId,
         hashedTaxId: businessData.profileData.hashedTaxId,
         data: businessData,
         businessName: businessName === "" ? undefined : businessData.profileData.businessName,
@@ -175,7 +168,6 @@ export const DynamoBusinessDataClient = (
     put,
     deleteBusinessById,
     findByBusinessName,
-    findByEncryptedTaxId,
     findAllByIndustry,
     findAllByNAICSCode,
     findBusinessesByNamePrefix,

@@ -1,5 +1,3 @@
-import { Content } from "@/components/Content";
-import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
@@ -27,7 +25,6 @@ export const DbaFormationPaginator = (): ReactElement => {
 
   const stepperRef = useRef<HTMLDivElement>(null);
   const isMounted = useRef(false);
-  const [showCtaModal, setShowCtaModal] = useState<boolean>(false);
 
   const [stepperState, setStepperState] = useState(
     DbaFormationStepsConfiguration.map((value, index) => {
@@ -161,7 +158,9 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <LiveChatHelpButton />
+            <LiveChatHelpButton
+              analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+            />
             <ForwardButton />
           </ActionBarLayout>
         </CtaContainer>
@@ -170,7 +169,9 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <LiveChatHelpButton />
+            <LiveChatHelpButton
+              analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+            />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>
@@ -182,15 +183,13 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <LiveChatHelpButton />
+            <LiveChatHelpButton
+              analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+            />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>
-            <a
-              href={state.dbaContent.Authorize.callToActionLink}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <div className={"margin-top-1"}>
               <PrimaryButton
                 isColor="primary"
                 isRightMarginRemoved={true}
@@ -200,13 +199,13 @@ export const DbaFormationPaginator = (): ReactElement => {
                       Config.taskDefaults.defaultCallToActionText,
                     state.dbaContent.Authorize.callToActionLink as string,
                   );
-                  setShowCtaModal(true);
+                  openInNewTab(state.dbaContent.Authorize.callToActionLink);
                 }}
               >
                 {state.dbaContent.Authorize.callToActionText ||
                   Config.taskDefaults.defaultCallToActionText}
               </PrimaryButton>
-            </a>
+            </div>
           </ActionBarLayout>
         </CtaContainer>
       );
@@ -216,18 +215,6 @@ export const DbaFormationPaginator = (): ReactElement => {
   return (
     <>
       <div ref={stepperRef}>
-        <ModalTwoButton
-          isOpen={showCtaModal}
-          close={(): void => setShowCtaModal(false)}
-          title={Config.DbaFormationTask.dbaCtaModalHeader}
-          primaryButtonText={Config.DbaFormationTask.dbaCtaModalContinueButtonText}
-          primaryButtonOnClick={(): void => {
-            openInNewTab(state.dbaContent.Authorize.callToActionLink);
-          }}
-          secondaryButtonText={Config.DbaFormationTask.dbaCtaModalCancelButtonText}
-        >
-          <Content>{Config.DbaFormationTask.dbaCtaModalBody}</Content>
-        </ModalTwoButton>
         {DbaFormationStepsConfiguration[state.stepIndex].disableStepper ? (
           <></>
         ) : (

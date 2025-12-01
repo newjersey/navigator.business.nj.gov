@@ -1,13 +1,13 @@
 ---
+id: franchise
 displayname: franchise
-id: "franchise"
-webflowId: "5f7728df5ddf76c5173ac42d"
-urlSlug: "franchise"
-webflowName: "Franchise"
-callToActionLink: "https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/franchise-rule"
-callToActionText: ""
-agencyAdditionalContext: "Federal Trade Commission"
+urlSlug: franchise
+webflowName: Franchise
+agencyAdditionalContext: Federal Trade Commission
+callToActionText: Learn About the Franchise Rule
+callToActionLink: https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/franchise-rule
+webflowIndustry: Franchise
+licenseCertificationClassification: CONTACT
 divisionPhone: ""
-webflowIndustry: "Franchise"
-licenseCertificationClassification: "CONTACT"
+webflowId: 5f7728df5ddf76c5173ac42d
 ---

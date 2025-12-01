@@ -16,9 +16,9 @@ import {
 } from "@/components/navbar/shared-submenu-components";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
-import { Task } from "@/lib/types/types";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 

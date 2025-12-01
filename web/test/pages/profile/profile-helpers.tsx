@@ -1,6 +1,4 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { WithStatefulDataFieldFormContext } from "@/test/mock/withStatefulProfileData";
@@ -20,8 +18,10 @@ import {
   ProfileData,
   TaskProgress,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";

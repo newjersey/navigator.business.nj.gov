@@ -41,7 +41,7 @@ export const Content = (props: ContentProps): ReactNode => {
     a: Link(props.onClick),
     h2: (props: any): ReactElement => {
       return (
-        <Heading level={2} styleVariant="h3" style={{ marginTop: "1rem" }}>
+        <Heading level={2} style={{ marginTop: "1rem" }}>
           {props.children}
         </Heading>
       );
@@ -75,7 +75,7 @@ export const Content = (props: ContentProps): ReactNode => {
       );
     },
     miniCallout: (props: any): ReactElement => {
-      return <MiniCallout headerText={props.headerText} calloutType={props.calloutType} />;
+      return <MiniCallout calloutType={props.calloutType}>{props.children}</MiniCallout>;
     },
     infoAlert: (props: any): ReactElement => {
       return <Alert variant="info">{props.children}</Alert>;
@@ -107,10 +107,23 @@ export const Content = (props: ContentProps): ReactNode => {
 const Link = (onClick?: (url?: string) => void): any => {
   return Object.assign(
     (props: any): ReactElement => {
+      const childrenContent =
+        props.children && Array.isArray(props.children) ? props.children[0] : props.children;
+
+      if (!props.href) {
+        return <>{childrenContent || ""}</>;
+      }
+
+      const linkText = childrenContent || props.href;
+
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
-          <ExternalLink href={props.href} onClick={(): void => onClick && onClick(props.href)}>
-            {props.children[0]}
+          <ExternalLink
+            href={props.href}
+            id={props.title}
+            onClick={(): void => onClick && onClick(props.href)}
+          >
+            {linkText}
           </ExternalLink>
         );
       }
@@ -120,7 +133,7 @@ const Link = (onClick?: (url?: string) => void): any => {
           className="usa-link"
           onClick={(): void => (onClick ? onClick(props.href) : undefined)}
         >
-          {props.children[0]}
+          {linkText}
         </a>
       );
     },
@@ -132,14 +145,17 @@ export const ExternalLink = ({
   children,
   href,
   onClick,
+  id,
 }: {
   children: string;
   href: string;
   onClick?: (url?: string) => void;
+  id?: string;
 }): ReactElement => {
   return (
     <a
       className="usa-link"
+      id={id}
       href={href}
       target="_blank"
       rel="noreferrer noopener"
@@ -170,6 +186,8 @@ const OutlineBox = (props: any): ReactElement => {
 const ListOrCheckbox = (props: any): ReactElement => {
   if (
     props.children &&
+    Array.isArray(props.children) &&
+    props.children.length > 0 &&
     typeof props.children[0] === "string" &&
     props.children[0].startsWith("[]")
   ) {

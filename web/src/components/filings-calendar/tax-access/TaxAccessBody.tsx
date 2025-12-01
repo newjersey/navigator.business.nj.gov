@@ -18,7 +18,7 @@ export const TaxAccessBody = (props: Props): ReactElement => {
     <>
       {props.showHeader && (
         <div className="margin-y-3">
-          <Heading level={4} styleVariant="h4" className="margin-bottom-4">
+          <Heading level={4} className="margin-bottom-4">
             {getHeader()}
           </Heading>
         </div>

@@ -1,0 +1,28 @@
+{
+  "cigaretteLicenseConfirmation": {
+    "needHelpHeader": "Need Help?",
+    "amountPaid": "Amount paid",
+    "needHelpInfo": "Contact DORES by [submitting a General Inquiry Form](https://www.nj.gov/treasury/revenue/revgencode.shtml).",
+    "suppliers": "Suppliers",
+    "businessAddressLine1": "Business Address Line 1",
+    "businessAddressLine2": "Business Address Line 2",
+    "dateSubmitted": "Date submitted",
+    "whatHappensNextHeader": "What Happens Next",
+    "paymentSuccessfulHeader": "Your Payment Was Successful",
+    "paymentSuccessfulInfo": "Your application has been submitted to the NJ Division of Revenue and Enterprise Services (DORES) for review.",
+    "whatHappensNextInfo": "DORES will review your application and send a decision letter to the mailing address you provided.",
+    "whatHappensNextBullet1": "If approved, your license will be included with the letter",
+    "whatHappensNextBullet2": "If denied, the letter will explain the reason(s) for denial and how to reapply",
+    "mailingAddressLine1": "Mailing Address Line 1",
+    "mailingAddressLine2": "Mailing Address Line 2",
+    "licenseeInformationHeader": "Licensee Information",
+    "submissionDetails": "Submission Details",
+    "issuingAgency": "**Issuing Agency:** NJ Division of Revenue and Enterprise Services",
+    "confirmationNumber": "Confirmation number",
+    "cantCompleteFilingAlert": "We received your payment, but we couldn’t complete your filing.",
+    "cantCompleteFilingMessage1": "Select “Try Again” and we’ll resend your filing details. **Do not** submit payment again.",
+    "cantCompleteFilingMessage2": "If you are still having trouble after trying again, select “Start a Live Chat” to get help.",
+    "tryAgainButton": "Try Again",
+    "startLiveChatButton": "Start a Live Chat"
+  }
+}

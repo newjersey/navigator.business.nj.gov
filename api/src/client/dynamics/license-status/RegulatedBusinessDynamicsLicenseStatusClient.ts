@@ -19,7 +19,7 @@ interface RgbApiConfiguration {
   rgbChecklistItemsClient: ChecklistItemsForAllApplicationsClient;
 }
 
-const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false; // this variable exists in updateLicenseStatusFactory; enable both for debugging
+const DEBUG = false; // this variable exists in updateLicenseStatusFactory; enable both for debugging
 
 export const RegulatedBusinessDynamicsLicenseStatusClient = (
   rgbApiConfiguration: RgbApiConfiguration,
@@ -35,7 +35,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
         nameAndAddress.name,
       );
 
-    if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
+    if (DEBUG) {
       console.log({
         functionName: "getMatchedBusinessIdsAndNames",
         results: matchedBusinessIdsAndNames,
@@ -48,7 +48,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
         matchedBusinessIdsAndNames,
       );
 
-    if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
+    if (DEBUG) {
       console.log({
         functionName: "getBusinessAddressesForAllBusinessIds",
         results: businessAddressesForAllBusinessIds,
@@ -60,7 +60,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
       nameAndAddress,
     );
 
-    if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
+    if (DEBUG) {
       console.log({
         functionName: "searchBusinessAddressesForMatches",
         results: matchedBusinessIdAndNameByAddress,
@@ -73,7 +73,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
         matchedBusinessIdAndNameByAddress,
       );
 
-    if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
+    if (DEBUG) {
       console.log({
         functionName: "getLicenseApplicationIdsForAllBusinessIds",
         results: applicationIdsForAllBusinessIdsResponse,
@@ -88,7 +88,7 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
 
     const results = formatRegulatedBusinessDynamicsApplications(applicationsWithChecklistItems);
 
-    if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
+    if (DEBUG) {
       console.log({
         functionName: "formatRegulatedBusinessDynamicsApplications",
         results: results,

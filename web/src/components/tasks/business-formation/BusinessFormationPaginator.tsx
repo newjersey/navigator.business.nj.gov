@@ -24,7 +24,6 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   getConfigFieldByLegalStructure,
@@ -32,13 +31,20 @@ import {
   useMountEffect,
 } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
+import { FormationStepNames, StepperStep } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const BusinessFormationPaginator = (): ReactElement => {
   const { updateQueue, business } = useUserData();
-  const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
-    useContext(BusinessFormationContext);
+  const {
+    state,
+    setStepIndex,
+    setHasBeenSubmitted,
+    setFormationFormData,
+    setFieldsInteracted,
+    allConfirmationsChecked,
+  } = useContext(BusinessFormationContext);
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const { doesStepHaveError, isStepCompleted, allCurrentErrorsForStep, getApiErrorMessage } =
@@ -56,9 +62,15 @@ export const BusinessFormationPaginator = (): ReactElement => {
     hasSubmitted: boolean;
   }): { stepsWithErrors: StepperStep[]; stepStates: StepperStep[] } => {
     const stepStates = BusinessFormationStepsConfiguration.map((value) => {
+      let hasError = doesStepHaveError(value.name, overrides);
+
+      if (value.name === "Review" && !allConfirmationsChecked() && state.hasBeenSubmitted) {
+        hasError = true;
+      }
+
       return {
         name: value.name,
-        hasError: doesStepHaveError(value.name, overrides),
+        hasError,
         isComplete: isStepCompleted(value.name),
       };
     });
@@ -72,8 +84,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const { stepsWithErrors, stepStates } = determineStepsStates();
 
   const selectedStepHasErrors =
-    (state.hasBeenSubmitted && stepStates[state.stepIndex].hasError && state.stepIndex !== 0) ??
-    false;
+    (state.hasBeenSubmitted && stepStates[state.stepIndex].hasError) ?? false;
 
   useEffect(() => {
     if (isMounted.current && selectedStepHasErrors) {
@@ -125,7 +136,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
     if (isSubmittingFromFinalStep) {
       setHasBeenSubmitted(true);
       const { stepsWithErrors } = determineStepsStates({ hasSubmitted: true });
-      if (stepsWithErrors.length > 0) {
+
+      if (stepsWithErrors.length > 0 || !allConfirmationsChecked()) {
         scrollToTopOfElement(errorAlertRef.current, { focusElement: true });
         return;
       }
@@ -323,9 +335,17 @@ export const BusinessFormationPaginator = (): ReactElement => {
       router
     ) {
       analytics.event.business_formation.submit.go_to_NIC_formation_processing();
+      analytics.event.api_submit.success(
+        "treasury.revenue.formation_submission",
+        "successfully submitted formation",
+      );
       await router.replace(newBusiness.formationData.formationResponse.redirect);
     } else {
       analytics.event.business_formation.submit.error_remain_at_formation();
+      analytics.event.api_submit.error(
+        "treasury.revenue.formation_submission",
+        "error submitting formation",
+      );
       setIsLoading(false);
     }
   };
@@ -383,11 +403,14 @@ export const BusinessFormationPaginator = (): ReactElement => {
     return (
       <CtaContainer>
         <ActionBarLayout stackOnLeft={stackOnLeft}>
-          <LiveChatHelpButton />
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.business_formation_help_button.click.open_live_chat}
+          />
           {shouldDisplayPreviousButton() && (
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <SecondaryButton
                 isColor="primary"
+                id="formation-previous-button"
                 onClick={onPreviousButtonClick}
                 dataTestId="previous-button"
               >
@@ -401,6 +424,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
               onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
             }}
             isRightMarginRemoved={true}
+            id="formation-next-button"
             isLoading={isLoading}
             dataTestId="next-button"
           >
@@ -483,27 +507,25 @@ export const BusinessFormationPaginator = (): ReactElement => {
         },
       );
 
-      const fieldsWithErrors = dedupedFieldErrors
-        .filter((fieldError) => fieldError.field !== "businessName")
-        .map((fieldError) => {
-          let configFieldName = fieldError.field as ConfigFormationFields;
+      const fieldsWithErrors = dedupedFieldErrors.map((fieldError) => {
+        let configFieldName = fieldError.field as ConfigFormationFields;
 
-          if (fieldError.field === "members") {
-            configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
-          }
+        if (fieldError.field === "members") {
+          configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
+        }
 
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const label = (Config.formation.fields as any)[configFieldName].label;
-          return {
-            name: configFieldName,
-            label,
-            children: getApiErrorMessage(fieldError.field) && (
-              <ul>
-                <li>{getApiErrorMessage(fieldError.field)}</li>
-              </ul>
-            ),
-          };
-        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const label = (Config.formation.fields as any)[configFieldName].label;
+        return {
+          name: configFieldName,
+          label,
+          children: getApiErrorMessage(fieldError.field) && (
+            <ul>
+              <li>{getApiErrorMessage(fieldError.field)}</li>
+            </ul>
+          ),
+        };
+      });
 
       return (
         <FieldEntryAlert
@@ -531,7 +553,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
           onStepClicked={(step: number): void => {
             onMoveToStep(step, { moveType: "STEPPER" });
           }}
-          suppressRefocusBehavior={selectedStepHasErrors}
+          suppressRefocusBehavior={selectedStepHasErrors || currentStepName === "Review"}
         />
       </div>
       <div className="fg1 flex flex-column space-between" role={"tabpanel"}>

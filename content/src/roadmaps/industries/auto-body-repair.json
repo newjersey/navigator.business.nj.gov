@@ -68,12 +68,12 @@
   "name": "Auto-Body Repair",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "vehicle-dealership-q"
+    "vehicle-dealership-q",
+    "ust-reg",
+    "flashing-light-permit"
   ],
   "displayname": "auto-body-repair",
-  "industryOnboardingQuestions": {
-    "canBeReseller": false
-  },
+  "industryOnboardingQuestions": {},
   "modifications": [],
   "isEnabled": true,
   "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",

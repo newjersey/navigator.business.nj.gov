@@ -70,7 +70,6 @@
   "industryOnboardingQuestions": {
     "isPetCareHousingApplicable": true,
     "canBeHomeBased": true,
-    "canBeReseller": false,
     "willSellPetCareItems": true
   },
   "isEnabled": true,

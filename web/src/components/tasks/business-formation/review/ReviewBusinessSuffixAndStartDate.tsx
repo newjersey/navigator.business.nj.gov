@@ -1,10 +1,10 @@
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { defaultDisplayDateFormat } from "@/lib/types/types";
 import { isForeignCorporation } from "@/lib/utils/helpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDisplayDateFormat } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext } from "react";
 
 export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {

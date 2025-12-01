@@ -52,7 +52,7 @@ publishStageArchive: ""
 
 ## Eligibility
 
-- Businesses must commit to creating or maintaining 1 job for every $65,000 of assistance. There is an application fee of $1,000.
+Businesses must commit to creating or maintaining 1 job for every $65,000 of assistance. There is an application fee of $1,000.
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
 

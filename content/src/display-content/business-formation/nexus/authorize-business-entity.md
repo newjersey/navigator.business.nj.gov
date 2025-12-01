@@ -1,12 +1,12 @@
 ---
 summaryDescriptionMd: You must register your business name and
   `authorize|certificate-formation` your `business
-  structure|business-structure-learn-more` with the State.
+  structure|business-structure-contextual-link` with the State.
 urlSlug: authorize-business-entity
 displayname: authorize-business-entity
 name: Authorize Your Business Entity
 id: authorize-business-entity
-callToActionLink: https://www.nj.gov/treasury/revenue/pdf/2000.pdf
+callToActionLink: https://www.nj.gov/treasury/revenue/pdf/NJ_Public_Records_Filing.pdf
 callToActionText: Authorize My Business
 agencyId: nj-revenue-enterprise-services
 required: true
@@ -45,9 +45,9 @@ required: true
 - Business address (this may be a home address if you are a home-based business)
 - `Registered agent|registered-agent`
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-- `Entity ID|entity-id`
+- `Entity ID|entity-id-contextual-link`
 - `Certificate of Authorization|certificate-formation` ,
 - `Certified copy|certified-copy` of Certificate of Authorization (optional with additional fee)
 - `Certificate of Good Standing|good-standing` (optional with additional fee)

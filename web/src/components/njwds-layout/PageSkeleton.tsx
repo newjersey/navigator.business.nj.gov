@@ -4,7 +4,7 @@ import { PageFooter } from "@/components/PageFooter";
 import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Banner } from "@/components/njwds/Banner";
-import { Task } from "@/lib/types/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import React, { ReactElement } from "react";
 
 interface Props {

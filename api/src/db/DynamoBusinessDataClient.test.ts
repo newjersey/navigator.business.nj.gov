@@ -27,7 +27,6 @@ describe("DynamoBusinessesDataClient", () => {
   const dateOfFormation = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
   const naicsCode = "12345";
   const industryId = "test-industry";
-  const encryptedTaxId = "test-id-12345";
   const hashedTaxId = `some-hashed-tax-id-${randomInt()}`;
 
   const businessData = generateBusiness({
@@ -37,7 +36,6 @@ describe("DynamoBusinessesDataClient", () => {
       legalStructureId: "limited-liability-company",
       naicsCode,
       industryId,
-      encryptedTaxId,
       hashedTaxId,
     }),
     taxFilingData: generateTaxFilingData({
@@ -128,20 +126,6 @@ describe("DynamoBusinessesDataClient", () => {
     expect(expectedValue).toHaveLength(1);
     expect(expectedValue[0]).toBeDefined();
     expect(expectedValue[0]).toEqual(businessData);
-  });
-
-  it("should return undefined for a non-existent encrypted tax ID", async () => {
-    const randomEncryptedTaxId = `some-encryptedId-${randomInt()}`;
-    expect(
-      await dynamoBusinessesDataClient.findByEncryptedTaxId(randomEncryptedTaxId),
-    ).toBeUndefined();
-  });
-
-  it("finds a business by the encryptedId", async () => {
-    await dynamoBusinessesDataClient.put(businessData);
-    const expectedValue = await dynamoBusinessesDataClient.findByEncryptedTaxId(encryptedTaxId);
-    expect(expectedValue).toBeDefined();
-    expect(expectedValue).toEqual(businessData);
   });
 
   it("deletes a business by the ID", async () => {

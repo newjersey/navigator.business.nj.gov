@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ConfigType } from "@/contexts/configContext";
-import { profileFieldsFromConfig } from "@/lib/types/types";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
 import { merge } from "lodash";
 
 type FieldContent = {

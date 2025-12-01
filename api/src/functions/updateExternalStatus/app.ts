@@ -10,19 +10,22 @@ import {
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   DYNAMO_OFFLINE_PORT,
   IS_DOCKER,
-  IS_OFFLINE,
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
-import { LogWriter } from "@libs/logWriter";
+import { ConsoleLogWriter, LogWriter } from "@libs/logWriter";
 import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 
-export default async function handler(): Promise<void> {
-  const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
-  const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
+export const handler = async (): Promise<void> => {
+  const isLocal = STAGE === "local";
+
+  const dataLogger = isLocal
+    ? ConsoleLogWriter
+    : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+  const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
     stage: AWS_CRYPTO_CONTEXT_STAGE,
     purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
@@ -34,11 +37,11 @@ export default async function handler(): Promise<void> {
     USERS_TABLE,
     dataLogger,
   );
-  const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
+  const logger = isLocal ? ConsoleLogWriter : LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 
   const GOV_DELIVERY_BASE_URL =
     process.env.GOV_DELIVERY_BASE_URL ||
-    (IS_OFFLINE
+    (isLocal
       ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
       : "https://api.govdelivery.com");
   const GOV_DELIVERY_API_KEY = process.env.GOV_DELIVERY_API_KEY || "tempkey";
@@ -49,9 +52,7 @@ export default async function handler(): Promise<void> {
   const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
   const AIRTABLE_BASE_URL =
     process.env.AIRTABLE_BASE_URL ||
-    (IS_OFFLINE
-      ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
-      : "https://api.airtable.com");
+    (isLocal ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
   const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 
   const newsletterGovDeliveryClient = GovDeliveryNewsletterClient({
@@ -78,4 +79,4 @@ export default async function handler(): Promise<void> {
 
   await addNewsletterBatch(addNewsletter, dbClient);
   await addToUserTestingBatch(addToAirtableUserTesting, dbClient);
-}
+};
