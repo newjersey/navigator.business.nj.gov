@@ -13,13 +13,13 @@ import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesCo
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { HotelMotelRegistrationSearchError, Task } from "@/lib/types/types";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
   HousingAddress,
   HousingRegistrationRequestLookupResponse,
 } from "@businessnjgovnavigator/shared";
+import { HotelMotelRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";

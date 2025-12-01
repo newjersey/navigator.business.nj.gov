@@ -1,5 +1,6 @@
 import {
   ApiTaxClearanceCertificateClient,
+  BUSINESS_STATUS_VERIFICATION_ERROR,
   FAILED_TAX_ID_AND_PIN_VALIDATION,
   INELIGIBLE_TAX_CLEARANCE_FORM,
   MISSING_FIELD,
@@ -353,6 +354,24 @@ describe("TaxClearanceCertificateClient", () => {
     });
   });
 
+  it("returns BUSINESS_STATUS_VERIFICATION_ERROR error", async () => {
+    mockAxios.post.mockRejectedValue({
+      response: { status: StatusCodes.BAD_REQUEST, data: BUSINESS_STATUS_VERIFICATION_ERROR },
+    });
+    expect(
+      await client.postTaxClearanceCertificate(
+        userData,
+        stubEncryptionDecryptionClient,
+        stubDatabaseClient,
+      ),
+    ).toEqual({
+      error: {
+        message: BUSINESS_STATUS_VERIFICATION_ERROR,
+        type: "BUSINESS_STATUS_VERIFICATION_ERROR",
+      },
+    });
+  });
+
   it("returns NATURAL_PROGRAM_ERROR error", async () => {
     mockAxios.post.mockRejectedValue({
       response: { status: StatusCodes.BAD_REQUEST, data: NATURAL_PROGRAM_ERROR },
@@ -491,6 +510,14 @@ describe("TaxClearanceCertificateClient", () => {
   describe("health", () => {
     it("returns a passing health check if data can be retrieved successfully", async () => {
       mockAxios.post.mockResolvedValue({ data: { certificate: [1] } });
+      expect(await client.health()).toEqual({ success: true, data: { message: "OK" } });
+    });
+
+    it("returns a passing health check if service returns a 400 and 'FAILED_TAX_ID_AND_PIN_VALIDATION' error message", async () => {
+      mockAxios.post.mockRejectedValue({
+        status: StatusCodes.BAD_REQUEST,
+        response: { data: FAILED_TAX_ID_AND_PIN_VALIDATION },
+      });
       expect(await client.health()).toEqual({ success: true, data: { message: "OK" } });
     });
 

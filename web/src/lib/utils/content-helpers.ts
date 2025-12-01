@@ -6,3 +6,9 @@ export const convertTextToMarkdownBold = (text: string): string => {
 
   return `__${trimmedText}__`;
 };
+
+export const removeContextualInfoFormatting = (sentence: string): string => {
+  return sentence.replaceAll(/`([^`|]+)\|[^`]+`/g, (match, firstText) => {
+    return firstText.trim();
+  });
+};

@@ -92,11 +92,6 @@ collections:
             widget: boolean
             default: false
             required: false
-          - label: Reseller
-            name: canBeReseller
-            widget: boolean
-            default: false
-            required: false
           - label: Transportation
             name: isTransportation
             widget: boolean

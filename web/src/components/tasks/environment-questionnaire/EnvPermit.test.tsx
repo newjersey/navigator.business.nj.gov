@@ -1,5 +1,5 @@
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
-import { getMergedConfig } from "@/contexts/configContext";
+import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateTask } from "@/test/factories";
@@ -7,16 +7,20 @@ import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
+  currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import {
   generateBusiness,
   generateEnvironmentData,
   generateEnvironmentQuestionnaireData,
+  generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test/factories";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
@@ -25,6 +29,10 @@ const Config = getMergedConfig();
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+
+jest.mock("@/lib/api-client/apiClient", () => ({ sendEnvironmentPermitEmail: jest.fn() }));
+
+const mockApi = api as jest.Mocked<typeof api>;
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -42,16 +50,24 @@ describe("<CheckEnvPermits />", () => {
 
   const setShowNeedsAccountModal = jest.fn();
   const setShowContinueWithoutSaving = jest.fn();
+  const existingEmail = "emailInUserData@email.com";
 
   const renderComponent = (environmentData?: Partial<EnvironmentData>): void => {
+    const userData = generateUserDataForBusiness(
+      generateBusiness({
+        environmentData: generateEnvironmentData({ ...environmentData }),
+      }),
+    );
+    const userDataWithEmail: UserData = {
+      ...userData,
+      user: {
+        ...userData.user,
+        email: existingEmail,
+      },
+    };
+
     render(
-      <WithStatefulUserData
-        initialUserData={generateUserDataForBusiness(
-          generateBusiness({
-            environmentData: generateEnvironmentData({ ...environmentData }),
-          }),
-        )}
-      >
+      <WithStatefulUserData initialUserData={userDataWithEmail}>
         <EnvPermit task={generateTask({})} />
       </WithStatefulUserData>,
     );
@@ -255,6 +271,86 @@ describe("<CheckEnvPermits />", () => {
           wasteWaterOverrides: { localSewage: true },
         }),
       };
+
+      describe("personalized support", () => {
+        it("pre-populates the email from user data", async () => {
+          renderComponent(submittedQuestionnaire);
+          expect(screen.getByText(Config.envResultsPage.title)).toBeInTheDocument();
+          fireEvent.click(screen.getByText(Config.envResultsPage.personalizedSupport.title));
+          const emailField = screen.getByLabelText("Email Address");
+          expect(emailField).toHaveValue(existingEmail);
+        });
+
+        it("submits an email request when submit is clicked and updates userData", async () => {
+          mockApi.sendEnvironmentPermitEmail.mockResolvedValue("SUCCESS");
+          renderComponent(submittedQuestionnaire);
+          fireEvent.click(screen.getByText(Config.envResultsPage.personalizedSupport.title));
+          fireEvent.click(
+            screen.getByText(Config.envResultsPage.personalizedSupport.contactSbapButton),
+          );
+          await waitFor(() =>
+            expect(mockApi.sendEnvironmentPermitEmail).toHaveBeenCalledWith({
+              businessName: currentBusiness().profileData.businessName,
+              email: currentUserData().user.email,
+              industry: currentBusiness().profileData.industryId,
+              location: "N/A",
+              naicsCode: currentBusiness().profileData.naicsCode,
+              phase: currentBusiness().profileData.businessPersona,
+              questionnaireResponses:
+                "<ul><li>Air Requirements</li><ul><li>My business plans to conduct construction activities (crushers, conveyors, shredders, stationary engines, or equipment that generate dust).</li></ul><li>Drinking Water Requirements</li><ul><li>My business will have a combined well pump capacity of greater than 69 gallons per minute.</li></ul><li>Wastewater Requirements</li><ul><li>My business will release wastewater to a local sewage treatment plant.</li></ul></ul>",
+              userName: currentUserData().user.name,
+            }),
+          );
+          expect(currentBusiness().environmentData?.sbapEmailSent).toBe(true);
+        });
+
+        it("submits an email request with N/A for fields that are empty when submit is clicked", async () => {
+          mockApi.sendEnvironmentPermitEmail.mockResolvedValue("SUCCESS");
+          const userData = generateUserDataForBusiness(
+            generateBusiness({
+              environmentData: generateEnvironmentData({ ...submittedQuestionnaire }),
+              profileData: generateProfileData({
+                businessName: "",
+                naicsCode: "",
+              }),
+            }),
+          );
+          render(
+            <WithStatefulUserData initialUserData={userData}>
+              <EnvPermit task={generateTask({})} />
+            </WithStatefulUserData>,
+          );
+          fireEvent.click(screen.getByText(Config.envResultsPage.personalizedSupport.title));
+          fireEvent.click(
+            screen.getByText(Config.envResultsPage.personalizedSupport.contactSbapButton),
+          );
+          await waitFor(() =>
+            expect(mockApi.sendEnvironmentPermitEmail).toHaveBeenCalledWith({
+              businessName: "N/A",
+              email: currentUserData().user.email,
+              industry: currentBusiness().profileData.industryId,
+              location: "N/A",
+              naicsCode: "N/A",
+              phase: currentBusiness().profileData.businessPersona,
+              questionnaireResponses:
+                "<ul><li>Air Requirements</li><ul><li>My business plans to conduct construction activities (crushers, conveyors, shredders, stationary engines, or equipment that generate dust).</li></ul><li>Drinking Water Requirements</li><ul><li>My business will have a combined well pump capacity of greater than 69 gallons per minute.</li></ul><li>Wastewater Requirements</li><ul><li>My business will release wastewater to a local sewage treatment plant.</li></ul></ul>",
+              userName: currentUserData().user.name,
+            }),
+          );
+        });
+
+        it("displays an error when the email is invalid", async () => {
+          renderComponent(submittedQuestionnaire);
+          fireEvent.click(screen.getByText(Config.envResultsPage.personalizedSupport.title));
+          const emailField = screen.getByLabelText("Email Address");
+          fireEvent.change(emailField, { target: { value: "badEmail" } });
+          fireEvent.click(
+            screen.getByText(Config.envResultsPage.personalizedSupport.contactSbapButton),
+          );
+          await waitFor(() => expect(mockApi.sendEnvironmentPermitEmail).not.toHaveBeenCalled());
+          expect(screen.getByTestId("email-error-alert")).toBeInTheDocument();
+        });
+      });
 
       it("displays only the applicable contact cards", async () => {
         renderComponent(submittedQuestionnaire);

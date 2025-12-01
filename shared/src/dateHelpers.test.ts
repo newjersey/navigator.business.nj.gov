@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import {
   formatDate,
+  formatUTCDate,
   getCurrentDateFormatted,
   getDateInCurrentYear,
   getLicenseDate,
@@ -137,6 +138,43 @@ describe("dateHelpers", () => {
 
     it("returns original input for garbage date", () => {
       expect(formatDate("abc/defg")).toBe("abc/defg");
+    });
+  });
+
+  describe("formatUTCDate", () => {
+    it("formats valid UTC date string with default formatter", () => {
+      const utcDate = "2024-01-15T10:30:00Z";
+      const result = formatUTCDate(utcDate);
+      expect(result).toBe("01-15-2024");
+    });
+
+    it("formats valid UTC date string with milliseconds", () => {
+      const utcDate = "2024-01-15T10:30:00.123Z";
+      const result = formatUTCDate(utcDate);
+      expect(result).toBe("01-15-2024");
+    });
+
+    it("formats valid UTC date string with timezone offset", () => {
+      const utcDate = "2024-01-15T10:30:00-04:00";
+      const result = formatUTCDate(utcDate);
+      expect(result).toBe("01-15-2024");
+    });
+
+    it("formats UTC date with custom formatter", () => {
+      const utcDate = "2024-01-15T10:30:00Z";
+      const result = formatUTCDate(utcDate, "YYYY-MM-DD");
+      expect(result).toBe("2024-01-15");
+    });
+
+    it("returns empty string for empty input", () => {
+      const result = formatUTCDate("");
+      expect(result).toBe("");
+    });
+
+    it("returns original string for completely invalid format", () => {
+      const invalidFormat = "not a date";
+      const result = formatUTCDate(invalidFormat);
+      expect(result).toBe("not a date");
     });
   });
 });

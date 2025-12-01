@@ -1,0 +1,11 @@
+{
+  "id": "nj-seller-streamlined-sales-tax",
+  "displayname": "nj-seller-streamlined-sales-tax",
+  "roadmapSteps": [
+    {
+      "step": 2,
+      "weight": 100,
+      "task": "streamlined-sales-tax-nj-based-seller"
+    }
+  ]
+}

@@ -3,10 +3,8 @@
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { FormationDbaDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
@@ -27,6 +25,8 @@ import {
   generateFormationSubmitResponse,
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
@@ -166,6 +166,7 @@ describe("<NexusFormationFlow />", () => {
     await page.uploadFile(file);
     await page.completeWillPracticeLaw();
     await page.stepperClickToReviewStep();
+    await page.checkAllReviewCheckboxes();
     await page.clickSubmit();
 
     const base64String = Buffer.from("my cool file contents", "utf8").toString("base64");
@@ -312,20 +313,6 @@ describe("<NexusFormationFlow />", () => {
         expect(page.getStepStateInStepper(LookupDbaStepIndexByName("Authorize Business"))).toEqual(
           "INCOMPLETE-ACTIVE",
         );
-      });
-
-      it("shows modal when clicking CTA", () => {
-        clickNext();
-        fireEvent.click(
-          screen.getByText(displayContent.formationDbaContent.Authorize.callToActionText),
-        );
-        expect(screen.getByText(Config.DbaFormationTask.dbaCtaModalHeader)).toBeInTheDocument();
-        expect(
-          screen.getByText(Config.DbaFormationTask.dbaCtaModalContinueButtonText),
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(Config.DbaFormationTask.dbaCtaModalCancelButtonText),
-        ).toBeInTheDocument();
       });
     });
   });

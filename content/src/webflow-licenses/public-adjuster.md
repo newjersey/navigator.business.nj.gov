@@ -1,14 +1,14 @@
 ---
+id: public-adjuster
 displayname: public-adjuster
-id: "public-adjuster"
-webflowId: "5f77292b4ad0ae0e6ba54a52"
-urlSlug: "public-adjuster"
-webflowName: "Public Adjuster"
-callToActionLink: "https://nj.gov/dobi/inslic.htm"
-callToActionText: ""
+urlSlug: public-adjuster
+webflowName: Public Adjuster
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Division of License Processing"
-divisionPhone: "(609) 292-4337"
-webflowIndustry: "Public Adjuster"
-licenseCertificationClassification: "LICENSE/REGISTRATION"
+agencyAdditionalContext: Division of License Processing
+callToActionText: Apply for a Public Adjuster License
+callToActionLink: https://nj.gov/dobi/inslic.htm
+webflowIndustry: Public Adjuster
+divisionPhone: (609) 292-4337
+webflowId: 5f77292b4ad0ae0e6ba54a52
+licenseCertificationClassification: LICENSE/REGISTRATION
 ---

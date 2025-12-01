@@ -47,7 +47,8 @@
       "weight": 10,
       "task": "resale-tax-certificate-operating",
       "licenseTask": ""
-    },  {
+    },
+    {
       "step": 4,
       "weight": 99,
       "task": "manage-business-vehicles"
@@ -57,12 +58,12 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "cigarette-manufacture-sell",
-    "other-businesses-CRTK-survey"
+    "other-businesses-CRTK-survey",
+    "streamlined-sales-tax-registration"
   ],
   "displayname": "e-commerce",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false
+    "canBeHomeBased": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "online store, ecommerce, e-business, retail, online business, merchandise, retail, electronics retail, appliances retail",

@@ -22,11 +22,9 @@ export const ContextInfoElement = forwardRef(
           aria-label="close panel"
           onClick={props.close}
         >
-          <Icon className="font-sans-xl" iconName="close" />
+          <Icon id="info-panel-close-button" className="font-sans-xl" iconName="close" />
         </button>
-        <Heading level={2} styleVariant="h3">
-          {props.header}
-        </Heading>
+        <Heading level={2}>{props.header}</Heading>
         <Content>{props.markdown}</Content>
       </aside>
     );

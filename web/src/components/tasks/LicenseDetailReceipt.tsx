@@ -3,7 +3,6 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LicenseStatusHeader } from "@/components/tasks/LicenseStatusHeader";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -12,6 +11,7 @@ import {
   LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import type { ReactElement } from "react";
 
 interface Props {
@@ -86,7 +86,6 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
           <div>
             <Heading
               level={2}
-              styleVariant="h4"
               className="margin-bottom-1 padding-top-2 border-bottom-2px border-base-lightest padding-bottom-1"
             >
               {Config.licenseSearchTask.applicationChecklistItemsText}

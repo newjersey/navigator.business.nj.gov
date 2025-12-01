@@ -22,6 +22,16 @@ api/src/setupTests.js
 api/src/teardownTests.js
 # Large file with binary/hex contents
 api/wiremock/__files/tax-clearance-success.json
+api/cdk.out
+api/lib/
+api/dist/
+
+api/cdk.context.json
+api/node_modules
+api/cdk/**/*.js
+api/cdk/lib/**/*.js
+api/cdk/bin/**/*.js
+api/cdk/test/**/*.js
 
 # web
 web/.next
@@ -49,3 +59,4 @@ web/amplifyconfiguration.json
 web/amplify-build-config.json
 web/amplify-gradle-config.json
 web/amplifytools.xcconfig
+web/next-env.d.ts

@@ -1,6 +1,6 @@
 import { IntlAddress } from "@/components/data-fields/address/IntlAddress";
 import { NewJerseyAddress } from "@/components/data-fields/address/NewJerseyAddress";
-import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
+import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
 import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
 import { AddressContext } from "@/contexts/addressContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -153,7 +153,7 @@ export const ProfileAddress = (): ReactElement => {
               <NewJerseyAddress onValidation={onValidation} />
             )}
             {state.formationAddressData.businessLocationType === "US" && (
-              <UnitesStatesAddress onValidation={onValidation} />
+              <UnitedStatesAddress onValidation={onValidation} />
             )}
           </div>
         </div>

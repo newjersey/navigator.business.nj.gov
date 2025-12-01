@@ -9,6 +9,7 @@ interface EnvPermitState {
   questionnaireData: QuestionnaireData;
   stepIndex: number;
   submitted: boolean;
+  sbapEmailSent: boolean;
 }
 
 interface EnvPermitContextType {
@@ -17,6 +18,7 @@ interface EnvPermitContextType {
   setStepIndex: React.Dispatch<React.SetStateAction<number>>;
   onSubmit?: (event?: FormEvent<HTMLFormElement>) => void;
   setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailSent: React.Dispatch<React.SetStateAction<boolean>>;
   onClickForEdit: () => void;
   applicableMediaAreas: () => MediaArea[];
   mediaAreasWithErrors: () => MediaArea[];
@@ -27,10 +29,12 @@ export const EnvPermitContext = createContext<EnvPermitContextType>({
     stepIndex: 0,
     questionnaireData: generateEmptyEnvironmentQuestionnaireData(),
     submitted: false,
+    sbapEmailSent: false,
   },
   setStepIndex: () => {},
   onSubmit: () => {},
   setSubmitted: () => {},
+  setEmailSent: () => {},
   onClickForEdit: () => {},
   applicableMediaAreas: () => [],
   mediaAreasWithErrors: () => [],

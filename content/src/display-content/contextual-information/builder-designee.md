@@ -7,4 +7,4 @@ id: builder-designee
 displayname: builder-designee
 ---
 
-A builder designee is a partner, officer, or director of a home builder business who is in charge of on-site construction work. The builder designee must complete Schedule A of the [new home builder registration application](https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/nhwprenew.pdf).
+A builder designee is a partner, officer, or director of a home builder business who is in charge of on-site construction work. The builder designee must complete Schedule A of the [new home builder registration application](https://www.nj.gov/dca/codes/forms/pdf_nhw/nhwprenew.pdf).

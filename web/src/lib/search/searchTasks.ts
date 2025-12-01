@@ -1,11 +1,10 @@
-import { IndustryRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { AddAddOnUsage, AddIndustryUsage, AddTaskDependencyUsage } from "@/lib/search/usageHelpers";
-import { Task } from "@/lib/types/types";
 
 import { Industry } from "@businessnjgovnavigator/shared/industry";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
+import { IndustryRoadmap, Task } from "@businessnjgovnavigator/shared/types";
 
 export const searchTasks = (
   tasks: Task[],

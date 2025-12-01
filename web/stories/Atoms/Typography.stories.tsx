@@ -19,7 +19,9 @@ const Template = () => {
             {section.usaProseElement && renderWithUSAProse(section.usaProseElement)}
           </div>
           <div className="grid-col-2 margin-right-3">{renderWithUSAProse(section.usaProseCSS)}</div>
-          <div className="grid-col-2 margin-right-3">{section.element && renderElement(section.element)}</div>
+          <div className="grid-col-2 margin-right-3">
+            {section.element && renderElement(section.element)}
+          </div>
           <div className="grid-col-2">{renderElement(section.cSS)}</div>
         </div>
       </div>
@@ -82,17 +84,9 @@ const Template = () => {
 
   const h2Unbolded = {
     title: <div>H2 Unbolded</div>,
-    usaProseElement: (
-      <Heading level={2} className="font-weight-normal">
-        Hello
-      </Heading>
-    ),
+    usaProseElement: <Heading level={2}>Hello</Heading>,
     usaProseCSS: <div className="h2-styling font-weight-normal">Hello</div>,
-    element: (
-      <Heading level={2} className="font-weight-normal">
-        Hello
-      </Heading>
-    ),
+    element: <Heading level={2}>Hello</Heading>,
     cSS: <div className="h2-styling font-weight-normal">Hello</div>,
   };
 
@@ -200,9 +194,7 @@ const Template = () => {
         <div className={`grid-row padding-1`}>
           <div className="grid-col-2 margin-right-3">H Element Text Normal</div>
           <div className="grid-col-auto">
-            <Heading level={3} className={"font-weight-normal"}>
-              This is heading text with normal font weight
-            </Heading>
+            <Heading level={3}>This is heading text with normal font weight</Heading>
           </div>
         </div>
       </div>

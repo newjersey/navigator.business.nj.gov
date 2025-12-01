@@ -29,6 +29,7 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
+import { ContactTabPanel } from "@/components/profile/ContactTabPanel";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
@@ -39,7 +40,6 @@ import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileLinkToPermitsTabCallout } from "@/components/profile/ProfileLinkToPermitsTabCallout";
-import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
@@ -48,7 +48,6 @@ import { ProfileTabPanel } from "@/components/profile/ProfileTabPanel";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
-import { getMergedConfig } from "@/contexts/configContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -63,8 +62,8 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
+
+import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
 import analytics from "@/lib/utils/analytics";
 import {
   getFlow,
@@ -84,18 +83,22 @@ import {
   formationTaskId,
   hasCompletedFormation,
   LookupLegalStructureById,
-  LookupOperatingPhaseById,
   Municipality,
   naicsCodeTaskId,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
+import { OnboardingStatus, ProfileTabs, profileTabs } from "@businessnjgovnavigator/shared/types";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { EmployerRates } from "@/components/employer-rates/EmployerRates";
+import { EmployerRatesTemporary } from "@/components/employer-rates/EmployerRatesTemporary";
 
 interface Props {
   municipalities: Municipality[];
@@ -127,6 +130,8 @@ const ProfilePage = (props: Props): ReactElement => {
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
   const profileAlertRef = useRef<HTMLDivElement>(null);
+
+  const FEATURE_EMPLOYER_RATES_ENABLED = process.env.FEATURE_EMPLOYER_RATES === "true";
 
   const getInitTab = (): ProfileTabs => {
     if (props.CMS_ONLY_tab) return props.CMS_ONLY_tab;
@@ -262,6 +267,8 @@ const ProfilePage = (props: Props): ReactElement => {
       analytics.event.profile_formation_date.submit.formation_date_changed();
     }
 
+    sendChangedNonEssentialQuestionAnalytics(prevProfileData, newProfileData);
+
     const municipalityEnteredForFirstTime =
       prevProfileData.municipality === undefined && newProfileData.municipality !== undefined;
 
@@ -304,10 +311,6 @@ const ProfilePage = (props: Props): ReactElement => {
     return LookupLegalStructureById(business.profileData.legalStructureId).hasTradeName;
   };
 
-  const displayOpportunityAlert = LookupOperatingPhaseById(
-    profileData.operatingPhase,
-  ).displayProfileOpportunityAlert;
-
   const displayRaffleBingoGameQuestion = (): boolean => {
     if (!business) return false;
     return profileData.legalStructureId === "nonprofit";
@@ -322,7 +325,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
           fieldName="businessName"
@@ -372,6 +374,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
       </div>
+    ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -458,7 +463,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
         <ProfileField ignoreContextualInfo fieldName="businessName">
           <BusinessName />
         </ProfileField>
@@ -467,6 +471,9 @@ const ProfilePage = (props: Props): ReactElement => {
           <ForeignBusinessTypeField required />
         </ProfileField>
       </div>
+    ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
     ),
     permits: <></>,
     numbers: (
@@ -527,10 +534,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
-
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-
         <ProfileField
           fieldName="businessName"
           locked={shouldLockFormationFields}
@@ -539,7 +543,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <BusinessName />
         </ProfileField>
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -547,25 +550,20 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ResponsibleOwnerName />
         </ProfileField>
-
         <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
           <TradeName />
         </ProfileField>
-
         <ProfileAddress />
-
         <ProfileField fieldName="industryId">
           <Industry />
           <ProfileLinkToPermitsTabCallout permitsRef={permitsRef} setProfileTab={setProfileTab} />
         </ProfileField>
-
         <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeBusiness}
         >
           <Sectors />
         </ProfileField>
-
         <ProfileField
           fieldName="legalStructureId"
           noLabel
@@ -576,7 +574,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <BusinessStructure />
         </ProfileField>
-
         <ProfileField
           fieldName="raffleBingoGames"
           isVisible={displayRaffleBingoGameQuestion()}
@@ -586,7 +583,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <RaffleBingoGamesQuestion />
         </ProfileField>
-
         <ProfileField
           fieldName="dateOfFormation"
           isVisible={!!business?.profileData.dateOfFormation}
@@ -595,9 +591,12 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <DateOfFormation futureAllowed />
         </ProfileField>
-
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
+        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRatesTemporary />}
       </div>
+    ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -666,6 +665,7 @@ const ProfilePage = (props: Props): ReactElement => {
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
+        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
       </div>
     ),
     documents: (
@@ -708,7 +708,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
-        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
           ignoreContextualInfo
@@ -748,6 +747,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <CertificationsAndFundingNonEssentialQuestions />
       </div>
+    ),
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -817,6 +819,7 @@ const ProfilePage = (props: Props): ReactElement => {
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
+        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
       </div>
     ),
     documents: <></>,
@@ -843,6 +846,9 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
+    contact: (
+      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+    ),
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
@@ -938,7 +944,7 @@ const ProfilePage = (props: Props): ReactElement => {
             <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
             <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
               <main id="main" data-testid={"main"}>
-                <div className="padding-top-0 desktop:padding-top-3">
+                <div className="padding-top-0 padding-x-2 desktop:padding-top-3 desktop:padding-x-0">
                   <ProfileEscapeModal
                     isOpen={escapeModal}
                     close={(): void => setEscapeModal(false)}

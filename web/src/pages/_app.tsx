@@ -6,8 +6,7 @@ import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { AuthContext, initialState } from "@/contexts/authContext";
-import { getMergedConfig } from "@/contexts/configContext";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
@@ -20,7 +19,6 @@ import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { Roadmap, UserDataError } from "@/lib/types/types";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -29,6 +27,8 @@ import {
   OperatingPhaseId,
   RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
 import { Hub, type HubCapsule } from "aws-amplify/utils";
@@ -40,6 +40,8 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
+import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -62,6 +64,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const [showNeedsAccountSnackbar, setShowNeedsAccountSnackbar] = useState<boolean>(false);
   const [showNeedsAccountModal, setShowNeedsAccountModal] = useState<boolean>(false);
+  const [showRemoveBusinessModal, setShowRemoveBusinessModal] = useState<boolean>(false);
 
   const [showContinueWithoutSaving, setShowContinueWithoutSaving] = useState<boolean>(false);
   const [userWantsToContinueWithoutSaving, setUserWantsToContinueWithoutSaving] =
@@ -257,10 +260,18 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                               setUserWantsToContinueWithoutSaving,
                             }}
                           >
-                            <ContextualInfoPanel />
-                            <Component {...pageProps} />
-                            <NeedsAccountModal />
-                            <RegistrationStatusSnackbar />
+                            <RemoveBusinessContext.Provider
+                              value={{
+                                showRemoveBusinessModal,
+                                setShowRemoveBusinessModal,
+                              }}
+                            >
+                              <ContextualInfoPanel />
+                              <Component {...pageProps} />
+                              <RemoveBusinessModal />
+                              <NeedsAccountModal />
+                              <RegistrationStatusSnackbar />
+                            </RemoveBusinessContext.Provider>
                           </NeedsAccountContext.Provider>
                         </RoadmapContext.Provider>
                       </ContextualInfoContext.Provider>

@@ -138,6 +138,7 @@ export const StateDropdown = (props: Props): ReactElement => {
                 setOpen(true);
               }
             }}
+            required={props.required}
             error={props.error}
             helperText={props.error && props.validationText}
           />

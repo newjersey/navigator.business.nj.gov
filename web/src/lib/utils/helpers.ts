@@ -1,15 +1,14 @@
-import { ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { FlowType, OnboardingStatus } from "@/lib/types/types";
 import {
   BusinessPersona,
   FormationLegalType,
-  Municipality,
-  MunicipalityDetail,
   ProfileData,
   TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
+import { FlowType, OnboardingStatus } from "@businessnjgovnavigator/shared/types";
+
 import { useEffect, useRef } from "react";
 
 export const useMountEffect = (fun: () => void): void => {
@@ -256,6 +255,14 @@ export const getPhoneNumberFormat = (phoneNumber: string): string => {
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
 
+export const validateOptionalPhoneNumber = (phoneNumber: string): boolean => {
+  if (!phoneNumber || phoneNumber.length === 0) {
+    return true;
+  }
+
+  return phoneNumber.length === 10;
+};
+
 export const getFlow = (data: UserData | ProfileData): FlowType => {
   const persona: BusinessPersona = isUserData(data)
     ? getCurrentBusiness(data).profileData.businessPersona
@@ -288,17 +295,6 @@ export const flattenObject = (obj: any): any => {
   } else {
     return obj;
   }
-};
-
-export const mapMunicipalityDetailToMunicipality = (
-  municipalityDetail: MunicipalityDetail,
-): Municipality => {
-  return {
-    displayName: municipalityDetail.townDisplayName,
-    id: municipalityDetail.id,
-    name: municipalityDetail.townName,
-    county: municipalityDetail.countyName,
-  };
 };
 
 export const isForeignCorporation = (legalStructure: FormationLegalType): boolean => {

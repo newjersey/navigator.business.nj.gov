@@ -16,7 +16,7 @@ agencyAdditionalContext: New Jersey Department of Treasury
 
 - Signatures from all company shareholders granting permission to file for an S corporation designation
 - An existing S corporation designation with the IRS
-- `Entity ID|entity-id`
+- `Entity ID|entity-id-contextual-link`
 
 :::largeCallout{ showHeader="true" headerText="What if I don't complete this form?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 

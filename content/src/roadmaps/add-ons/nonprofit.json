@@ -21,6 +21,11 @@
       "step": 3,
       "weight": 20,
       "task": "nonprofit-charity-registration"
+    },
+    {
+      "step": 4,
+      "weight": 2,
+      "licenseTask": "social-affair"
     }
   ],
   "modifications": [

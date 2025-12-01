@@ -7,7 +7,7 @@
       "formationDocLabel": "Official Formation Document (PDF)",
       "subheader": "You have successfully formed your business entity and registered your business name!",
       "header": "Hooray!",
-      "entityIdLabel": "`Entity ID|entity-id`",
+      "entityIdLabel": "`Entity ID|entity-id-contextual-link`",
       "confirmationNumberLabel": "Confirmation Number:",
       "amendmentText": "**Made a mistake?** File an [amendment online](https://www.njportal.com/dor/businessamendments).",
       "surveyLinkText": "[Share your feedback](https://www.surveymonkey.com/r/Y6HL5VC) to help us improve."

@@ -1,12 +1,12 @@
 import { runHealthChecks } from "@libs/healthCheck";
-import { LogWriter } from "@libs/logWriter";
+import { DummyLogWriter } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("healthCheck", () => {
-  const logger = LogWriter(`HealthCheckService`, "ApiLogs");
+  const logger = DummyLogWriter;
 
   it("returns an object with pass statuses if success is true", async () => {
     mockAxios.get.mockResolvedValue({ data: { success: true } });
@@ -20,6 +20,8 @@ describe("healthCheck", () => {
       webserviceFormation: "PASS",
       taxClearance: "PASS",
       xrayRegistration: "PASS",
+      cigaretteLicense: "PASS",
+      cigaretteEmailClient: "PASS",
     });
   });
 
@@ -35,6 +37,8 @@ describe("healthCheck", () => {
       webserviceFormation: "FAIL",
       taxClearance: "FAIL",
       xrayRegistration: "FAIL",
+      cigaretteLicense: "FAIL",
+      cigaretteEmailClient: "FAIL",
     });
   });
 
@@ -50,6 +54,8 @@ describe("healthCheck", () => {
       webserviceFormation: "ERROR",
       taxClearance: "ERROR",
       xrayRegistration: "ERROR",
+      cigaretteLicense: "ERROR",
+      cigaretteEmailClient: "ERROR",
     });
   });
 });

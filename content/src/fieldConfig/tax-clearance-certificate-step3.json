@@ -2,17 +2,18 @@
   "taxClearanceCertificateStep3": {
     "addressLabel": "Address",
     "firstSectionHeader": "Reason for Certification",
+    "errorTextStatusVerification": "We could not verify the status of this business.",
+    "errorTextSystem": "Something went wrong. Review your information and try again later",
     "editButtonText": "Edit",
+    "errorTextMissingField": "Your request was missing required fields. Ensure that all required fields are completed",
     "businessNameLabel": "Business Name",
     "taxPinLabel": "Tax PIN",
     "mainTitleHeader": "Check Eligibility",
-    "certificationReasonLabel": "What agency is requesting the Tax Clearance Certificate?",
-    "secondSectionHeader": "Business Information",
-    "stateTaxIdLabel": "NJ State Tax ID",
-    "errorTextIneligible": "This business is not currently eligible for this certificate",
-    "errorTextMissingField": "Your request was missing required fields. Ensure that all required fields are completed",
-    "errorTextSystem": "Something went wrong. Review your information and try again later",
     "errorTextValidation": "**Some of the entries in your submission were not valid** \n\nReview your information and try again.",
-    "errorTextPreviouslyReceivedCertificate": "**Tax ID is in use by another business account** \n\nReturn to the \"Check Eligibility\" step to confirm your tax ID."
+    "errorTextIneligible": "This business is not currently eligible for this certificate",
+    "certificationReasonLabel": "What agency is requesting the Tax Clearance Certificate?",
+    "errorTextPreviouslyReceivedCertificate": "**Tax ID is in use by another business account** \n\nReturn to the \"Check Eligibility\" step to confirm your tax ID.",
+    "secondSectionHeader": "Business Information",
+    "stateTaxIdLabel": "NJ State Tax ID"
   }
 }

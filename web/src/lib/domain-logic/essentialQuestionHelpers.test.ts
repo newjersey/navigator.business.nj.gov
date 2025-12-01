@@ -41,6 +41,7 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
         isChildcareForSixOrMore: true,
         isPetCareHousingApplicable: true,
         isEmploymentAndPersonnelTypeApplicable: true,
+        isConstructionTypeApplicable: true,
       },
       isEnabled: true,
       additionalSearchTerms: "",
@@ -428,6 +429,30 @@ describe("hasEssentialQuestion", () => {
         ).toEqual(true);
         expect(
           getIsApplicableToFunctionByFieldName("employmentPlacementType")("fake-industry-with-eq"),
+        ).toEqual(true);
+      });
+    });
+
+    describe("isConstructionTypeApplicable", () => {
+      it("returns false when no industry is supplied", () => {
+        expect(getIsApplicableToFunctionByFieldName("constructionType")(undefined)).toEqual(false);
+      });
+
+      it("returns false when industry does not exist", () => {
+        expect(getIsApplicableToFunctionByFieldName("constructionType")("fake-industry")).toEqual(
+          false,
+        );
+      });
+
+      it("returns false when industry does not have a construction type option", () => {
+        expect(
+          getIsApplicableToFunctionByFieldName("constructionType")("fake-industry-with-no-eq"),
+        ).toEqual(false);
+      });
+
+      it("returns true when industry has a construction type option", () => {
+        expect(
+          getIsApplicableToFunctionByFieldName("constructionType")("fake-industry-with-eq"),
         ).toEqual(true);
       });
     });

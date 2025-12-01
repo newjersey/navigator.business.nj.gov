@@ -8,21 +8,22 @@ import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
-import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCalendarEvents";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import {
-  FilingUrlSlugParam,
-  loadAllFilingUrlSlugs,
-  loadFilingByUrlSlug,
-} from "@/lib/static/loadFilings";
-import { Filing, TaxFilingMethod } from "@/lib/types/types";
+
 import {
   defaultDateFormat,
   parseDateWithFormat,
   TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  FilingUrlSlugParameter,
+  loadAllFilingUrlSlugs,
+  loadFilingByUrlSlug,
+} from "@businessnjgovnavigator/shared/static";
+import { Filing, TaxFilingMethod } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -180,7 +181,7 @@ export const FilingElement = (props: {
                   .toLowerCase()
                   .replaceAll(" ", "-")}-content`}
               >
-                <Heading level={3} className="margin-y-3-override">
+                <Heading level={3} className="margin-0-override">
                   {Config.filingDefaults.additionalInfo}
                 </Heading>
               </AccordionSummary>
@@ -238,7 +239,7 @@ const FilingPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<FilingUrlSlugParam> => {
+export const getStaticPaths = (): GetStaticPathsResult<FilingUrlSlugParameter> => {
   const paths = loadAllFilingUrlSlugs();
   return {
     paths,
@@ -249,7 +250,7 @@ export const getStaticPaths = (): GetStaticPathsResult<FilingUrlSlugParam> => {
 export const getStaticProps = ({
   params,
 }: {
-  params: FilingUrlSlugParam;
+  params: FilingUrlSlugParameter;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {

@@ -6,7 +6,11 @@ import {
   ForeignProfileData,
   StartingProfileData,
 } from "@businessnjgovnavigator/cypress/support/types";
-import { Industry, LookupLegalStructureById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
+import {
+  Industry,
+  LookupLegalStructureById,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared/";
 
 export const checkNewBusinessProfilePage = ({
   businessName,
@@ -21,7 +25,7 @@ export const checkNewBusinessProfilePage = ({
   entityId = "",
 }: Partial<StartingProfileData & { businessName: string }>): void => {
   cy.url().should("contain", "/dashboard");
-  onDashboardPage.clickEditProfileLink();
+  onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");
   cy.wait(1000);
 
@@ -80,7 +84,7 @@ export const checkExistingBusinessProfilePage = ({
   taxPin = "",
 }: Partial<ExistingProfileData>): void => {
   cy.url().should("contain", "/dashboard");
-  onDashboardPage.clickEditProfileLink();
+  onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");
 
   cy.wait(1000);
@@ -92,7 +96,10 @@ export const checkExistingBusinessProfilePage = ({
       expect(value).to.contain(LookupSectorTypeById(sectorId as string).name);
     });
   if (numberOfEmployees !== undefined) {
-    onProfilePage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
+    onProfilePage
+      .getNumberOfEmployees()
+      .invoke("prop", "value")
+      .should("contain", numberOfEmployees);
   }
   if (townDisplayName !== undefined) {
     onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
@@ -137,7 +144,7 @@ export const updateNewBusinessProfilePage = ({
   entityId,
 }: Partial<StartingProfileData & { businessName: string }>): void => {
   cy.url().should("contain", "/dashboard");
-  onDashboardPage.clickEditProfileLink();
+  onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");
   cy.wait(1000);
 
@@ -159,7 +166,7 @@ export const updateNewBusinessProfilePage = ({
       .should("contain", legalStructureId);
     onProfilePage.clickSaveButton(); // save because changing legal structure can change fields
     cy.wait(1000);
-    onDashboardPage.clickEditProfileLink();
+    onDashboardPage.clickEditProfileInDropdown();
     cy.url().should("contain", "/profile");
     cy.wait(1000);
 
@@ -234,7 +241,8 @@ export const updateExistingBusinessProfilePage = ({
   taxPin,
 }: Partial<ExistingProfileData>): void => {
   cy.url().should("contain", "/dashboard");
-  onDashboardPage.clickEditProfileLink();
+  cy.wait(1500);
+  onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");
   cy.wait(1000);
 
@@ -255,7 +263,10 @@ export const updateExistingBusinessProfilePage = ({
 
   if (numberOfEmployees) {
     onProfilePage.typeNumberOfEmployees(numberOfEmployees);
-    onProfilePage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
+    onProfilePage
+      .getNumberOfEmployees()
+      .invoke("prop", "value")
+      .should("contain", numberOfEmployees);
   }
 
   if (townDisplayName) {
@@ -313,7 +324,10 @@ export const updateExistingBusinessProfilePage = ({
   onProfilePage.clickSaveButton();
   cy.url().should("contain", "/dashboard");
 };
-export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<ForeignProfileData>): void => {
+export const updateForeignBusinessProfilePage = ({
+  taxId,
+  notes,
+}: Partial<ForeignProfileData>): void => {
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");

@@ -25,6 +25,7 @@ export const FormationMunicipality = (): ReactElement => {
       validationLabel="Error"
       value={state.formationFormData.addressMunicipality}
       onSelect={onSelect}
+      required
       helperText={getFieldErrorLabel("addressMunicipality")}
     />
   );

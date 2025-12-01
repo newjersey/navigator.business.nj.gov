@@ -209,7 +209,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
 
   const doesNotShowHomeBasedBusinessQuestionAtAll = (): void => {
     onDashboardPage.getHomeBased().should("not.exist");
-    onDashboardPage.clickEditProfileLink();
+    onDashboardPage.clickEditProfileInDropdown();
     cy.url().should("contain", "/profile");
     cy.wait(1000);
     onProfilePage.getHomeBased().should("not.exist");
@@ -227,7 +227,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
   const showsAndAnswersHomeBasedBusinessQuestionOnDashboard = (): void => {
     selectHomeBased(true);
 
-    onDashboardPage.clickEditProfileLink();
+    onDashboardPage.clickEditProfileInDropdown();
     cy.url().should("contain", "/profile");
     cy.wait(1000);
 
@@ -237,7 +237,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const goToProfile = (): void => {
-    onDashboardPage.clickEditProfileLink();
+    onDashboardPage.clickEditProfileInDropdown();
     cy.url().should("contain", "/profile");
     cy.wait(1000);
   };

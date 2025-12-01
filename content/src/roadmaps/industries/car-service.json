@@ -57,12 +57,36 @@
     },
     {
       "step": 4,
-      "weight": 14,
+      "task": "transportation-inspection",
+      "weight": 14
+    },
+    {
+      "weight": 15,
+      "required": true,
+      "step": 4,
+      "task": "trucking-irp"
+    },
+    {
+      "weight": 16,
+      "step": 4,
+      "required": true,
+      "task": "trucking-ifta"
+    },
+    {
+      "step": 4,
+      "weight": 17,
       "task": "mvc-registration-task",
       "required": true
+    },
+    {
+      "weight": 18,
+      "step": 4,
+      "task": "passenger-transport-cdl",
+      "licenseTask": "",
+      "required": false
     }
   ],
-  "name": "Car Service",
+  "name": "Transportation and Car Service",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "business-vehicle-irp",
@@ -77,7 +101,7 @@
     "isTransportation": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
+  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service, passenger transport",
   "id": "car-service",
   "description": "Offers transportation services in vehicles with any capacity",
   "webflowId": "656a1362f637cd08076d3599"

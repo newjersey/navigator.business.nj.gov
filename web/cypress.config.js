@@ -46,6 +46,9 @@ export default defineConfig({
       return config;
     },
     baseUrl: "http://localhost:3000",
+    env: {
+      API_BASE_URL: "http://localhost:5002",
+    },
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
     retries: {
       runMode: 2,
