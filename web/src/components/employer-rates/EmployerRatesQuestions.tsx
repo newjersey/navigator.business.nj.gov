@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import type { Dispatch, MouseEvent, SetStateAction } from "react";
 import { ReactElement, useContext, useState } from "react";
 import { Heading } from "../njwds-extended/Heading";
 import { Content } from "@/components/Content";
@@ -13,25 +13,25 @@ import {
   getEmployerAccessQuarterlyDropdownOptions,
 } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { GenericTextField } from "@/components/GenericTextField";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { Alert } from "@/components/njwds-extended/Alert";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { EmployerRatesRequest, EmployerRatesResponse } from "@businessnjgovnavigator/shared";
+import { DolEin, DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
+  setResponse: Dispatch<SetStateAction<false | EmployerRatesResponse>>;
+  quarter: EmployerRatesQuarterObject;
+  setQuarter: Dispatch<SetStateAction<EmployerRatesQuarterObject>>;
 }
-
-export const DOL_EIN_CHARACTERS = 15;
 
 export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const { userData } = useUserData();
+  const { userData, updateQueue } = useUserData();
 
   const initialEmployerAccess = isUndefined(state?.profileData.employerAccessRegistration)
     ? ""
@@ -46,7 +46,6 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     employerAccessRegistration === "false" || previewMode;
 
   const dropdownOptions = getEmployerAccessQuarterlyDropdownOptions(getCurrentDate());
-  const [quarter, setQuarter] = useState<EmployerRatesQuarterObject>(dropdownOptions[0]);
 
   const [dolEinError, setDolEinError] = useState<boolean>(previewMode || false);
   const [serverError, setServerError] = useState<boolean>(previewMode || false);
@@ -92,13 +91,15 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       return;
     }
 
+    updateQueue?.queueProfileData({ deptOfLaborEin: state.profileData.deptOfLaborEin }).update();
+
     setLoading(true);
     const employerRates = {
       businessName: state.profileData.businessName,
       email: userData.user.email,
       ein: state.profileData.deptOfLaborEin,
-      qtr: quarter.quarter,
-      year: quarter.year,
+      qtr: props.quarter.quarter,
+      year: props.quarter.year,
     } as EmployerRatesRequest;
 
     api
@@ -109,6 +110,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
           setNoAccountError(true);
           return;
         }
+        props.setResponse(results);
       })
       .catch(() => {
         setServerError(true);
@@ -134,7 +136,11 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       {serverError && (
         <div className="margin-y-2">
           <Alert variant={"error"} dataTestid="serverError">
-            <Content>{Config.employerRates.serverErrorText}</Content>
+            <strong>
+              <span>{Config.employerRates.serverErrorText}</span>
+            </strong>
+
+            <span>{Config.employerRates.serverErrorTryAgainText}</span>
           </Alert>
         </div>
       )}
@@ -142,7 +148,9 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       {noAccountError && (
         <div className="margin-y-2">
           <Alert variant={"error"} dataTestid="noAccountError">
-            <Content>{Config.employerRates.noAccountErrorText}</Content>
+            <strong>
+              <Content>{Config.employerRates.noAccountErrorText}</Content>
+            </strong>
           </Alert>
         </div>
       )}
@@ -176,37 +184,26 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       {shouldShowEmployerAccessInputFields && (
         <div role="status" aria-live="polite" className="margin-y-2">
           <WithErrorBar hasError={dolEinError} type="ALWAYS">
-            <Content>{Config.employerRates.dolEinLabelText}</Content>
-
-            <ScrollableFormFieldWrapper fieldName={"dolEin"}>
-              <div className="text-field-width-reduced">
-                <GenericTextField
-                  numericProps={{
-                    maxLength: DOL_EIN_CHARACTERS,
-                  }}
-                  fieldName={"dolEin"}
-                  inputWidth={"default"}
-                  error={dolEinError}
-                  validationText={Config.employerRates.dolEinErrorText}
-                  onChange={handleDolEinChange}
-                  onValidation={(_, invalid) => {
-                    if (invalid && serverError) {
-                      setServerError(false);
-                    }
-                    if (invalid && noAccountError) {
-                      setNoAccountError(false);
-                    }
-                    setDolEinError(invalid);
-                  }}
-                  value={state.profileData.deptOfLaborEin}
-                />
-              </div>
-            </ScrollableFormFieldWrapper>
+            <DolEin
+              onValidation={(_, invalid) => {
+                if (invalid && serverError) {
+                  setServerError(false);
+                }
+                if (invalid && noAccountError) {
+                  setNoAccountError(false);
+                }
+                setDolEinError(invalid);
+              }}
+              handleChange={handleDolEinChange}
+              value={state.profileData.deptOfLaborEin}
+              error={dolEinError}
+              validationText={Config.employerRates.dolEinErrorText}
+            />
           </WithErrorBar>
           <EmployerRatesQuarterDropdown
             dropdownOptions={dropdownOptions}
-            quarter={quarter}
-            setQuarter={setQuarter}
+            quarter={props.quarter}
+            setQuarter={props.setQuarter}
           />
           <SecondaryButton isColor="primary" onClick={handleSubmit} isLoading={loading}>
             {Config.employerRates.employerAccessYesButtonText}
