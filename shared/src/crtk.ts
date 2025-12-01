@@ -1,7 +1,8 @@
 export type CRTKData = {
-  lastUpdatedISO?: string;
+  lastUpdatedISO: string;
   CRTKBusinessDetails?: CRTKBusinessDetails;
-  CRTKSearchResult?: CRTKSearchResult;
+  CRTKSearchResult: CRTKSearchResult;
+  CRTKEntry: CRTKEntry;
 };
 
 export type CRTKBusinessDetails = {
@@ -9,8 +10,8 @@ export type CRTKBusinessDetails = {
   addressLine1: string;
   city: string;
   addressZipCode: string;
+  ein?: string;
 };
-
 export type CRTKSearchResult = "FOUND" | "NOT_FOUND";
 
 export interface CRTKEntry {
