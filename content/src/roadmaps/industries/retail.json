@@ -71,7 +71,8 @@
     "inspect-fridge",
     "sell-milk-question",
     "cdl-neq",
-    "streamlined-sales-tax-registration"
+    "streamlined-sales-tax-registration",
+    "crtk-applicable-naics-codes"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {},

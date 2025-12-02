@@ -67,7 +67,8 @@
     "resale-tax-cert",
     "ust-reg",
     "streamlined-sales-tax-registration",
-    "flashing-light-permit"
+    "flashing-light-permit",
+    "crtk-applicable-naics-codes"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {

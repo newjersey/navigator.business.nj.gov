@@ -70,7 +70,8 @@
       "step": 4,
       "task": "community-right-to-know-survey",
       "licenseTask": "",
-      "weight": 20
+      "weight": 20,
+      "required": true
     }
   ],
   "name": "Car Rental and Dealerships ",
