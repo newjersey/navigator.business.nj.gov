@@ -1,14 +1,19 @@
 import * as cdk from "aws-cdk-lib";
-import { Stack, Duration, Size } from "aws-cdk-lib";
-import * as logs from "aws-cdk-lib/aws-logs";
-import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
-import { Construct } from "constructs";
-import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
-import { IVpc, ISecurityGroup, ISubnet } from "aws-cdk-lib/aws-ec2";
-import { Role } from "aws-cdk-lib/aws-iam";
-import { IConstruct } from "constructs";
-import path from "node:path";
+import { Duration, RemovalPolicy, Size, Stack } from "aws-cdk-lib";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
+import {
+  AttributeType,
+  BillingMode,
+  GlobalSecondaryIndexProps,
+  Table,
+} from "aws-cdk-lib/aws-dynamodb";
+import { ISecurityGroup, ISubnet, IVpc } from "aws-cdk-lib/aws-ec2";
+import { Role } from "aws-cdk-lib/aws-iam";
+import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
+import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+import * as logs from "aws-cdk-lib/aws-logs";
+import { Construct, IConstruct } from "constructs";
+import path from "node:path";
 
 /**
  * Apply standard tags to a given resource.
@@ -37,7 +42,7 @@ export interface LambdaFunctionProps {
   ephemeralStorageSize?: Size;
 }
 
-export function createLambdaFunction(stack: Stack, props: LambdaFunctionProps): NodejsFunction {
+export function createLambda(stack: Stack, props: LambdaFunctionProps): NodejsFunction {
   const logGroup = new logs.LogGroup(stack, `${props.id}-LogGroup`, {
     logGroupName: `/aws/lambda/${props.functionName}`,
     retention: logs.RetentionDays.SIX_MONTHS,
@@ -120,6 +125,29 @@ export const attachLambdaToResource = (
   } else {
     console.debug(`OPTIONS already exists for ${resource.path}, skipping duplicate.`);
   }
+};
+
+export interface DynamoDBProps {
+  stage: string;
+  id: string;
+  tableName: string;
+  removalPolicy: RemovalPolicy;
+  partitionKey: { name: string; type: AttributeType };
+  billingMode?: BillingMode;
+  globalSecondaryIndices?: Array<GlobalSecondaryIndexProps>;
+}
+export const createDynamoDBTable = (scope: Construct, props: DynamoDBProps): Table => {
+  const table = new Table(scope, props.id, {
+    tableName: props.tableName,
+    partitionKey: props.partitionKey,
+    billingMode: props.billingMode ?? BillingMode.PAY_PER_REQUEST,
+    removalPolicy: props.removalPolicy,
+  });
+  for (const indexProps of props.globalSecondaryIndices ?? []) {
+    table.addGlobalSecondaryIndex(indexProps);
+  }
+  applyStandardTags(table, props.stage);
+  return table;
 };
 
 export const exportLambdaArn = (

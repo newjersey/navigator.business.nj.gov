@@ -1,7 +1,7 @@
+import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
 import { App } from "aws-cdk-lib";
-import { Template, Match } from "aws-cdk-lib/assertions";
+import { Match, Template } from "aws-cdk-lib/assertions";
 import { IamStack, IamStackProps } from "../lib/iamStack";
-import { SERVICE_NAME } from "../lib/constants";
 
 describe("IamStack", () => {
   let app: App;
@@ -18,7 +18,7 @@ describe("IamStack", () => {
   test("creates the lambda IAM role with correct name", () => {
     expect(() => {
       template.hasResourceProperties("AWS::IAM::Role", {
-        RoleName: `${SERVICE_NAME}-local-lambdaRole`,
+        RoleName: `${API_SERVICE_NAME}-local-lambdaRole`,
         AssumeRolePolicyDocument: {
           Statement: Match.arrayWith([
             Match.objectLike({

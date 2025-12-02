@@ -1,10 +1,10 @@
-import { Stack, StackProps, CfnOutput } from "aws-cdk-lib";
-import { Construct } from "constructs";
+import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
+import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as cognito from "aws-cdk-lib/aws-cognito";
-import { applyStandardTags, attachLambdaToResource } from "./stackUtils";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
-import { SERVICE_NAME } from "./constants";
+import { Construct } from "constructs";
+import { applyStandardTags, attachLambdaToResource } from "./stackUtils";
 
 interface LambdaConfig {
   lambda?: IFunction;
@@ -68,7 +68,7 @@ export class ApiStack extends Stack {
       return;
     }
     this.restApi = new apigateway.RestApi(this, `APIGatewayRestApi-${props.stage}`, {
-      restApiName: `${SERVICE_NAME}-${props.stage}`,
+      restApiName: `${API_SERVICE_NAME}-${props.stage}`,
       description: `API Gateway managed by CDK for stage: ${props.stage}`,
       deployOptions: {
         stageName: props.stage,
@@ -90,7 +90,7 @@ export class ApiStack extends Stack {
 
     new CfnOutput(this, "ApiGatewayId", {
       value: this.restApi.restApiId,
-      exportName: `${SERVICE_NAME}-${props.stage}-ApiGatewayId`,
+      exportName: `${API_SERVICE_NAME}-${props.stage}-ApiGatewayId`,
     });
   }
 

@@ -37,7 +37,7 @@ describe("DynamoUserDataClient", () => {
     dynamoUserDataClient = DynamoUserDataClient(client, cryptoClient, dbConfig.tableName, logger);
   });
 
-  it("should throw an error when attempting to retrieve a non-existent user by ID", async () => {
+  it("throws an error when attempting to retrieve a non-existent user by ID", async () => {
     const randomUserId = `user-id-${randomInt()}`;
     await expect(dynamoUserDataClient.get(randomUserId)).rejects.toEqual(new Error("Not found"));
   });

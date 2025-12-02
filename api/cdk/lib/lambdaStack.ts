@@ -1,23 +1,24 @@
+import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
 import { Duration, Size, Stack, StackProps } from "aws-cdk-lib";
-import { Construct } from "constructs";
-import {
-  CONTENT_STAGE,
-  SERVICE_NAME,
-  TESTING_STAGE,
-  PROD_STAGE,
-  DEV_STAGE,
-  BUSINESSES_TABLE,
-  USERS_TABLE,
-} from "./constants";
+import { ISecurityGroup, ISubnet, IVpc, SecurityGroup, Subnet, Vpc } from "aws-cdk-lib/aws-ec2";
 import * as events from "aws-cdk-lib/aws-events";
 import * as targets from "aws-cdk-lib/aws-events-targets";
+import * as iam from "aws-cdk-lib/aws-iam";
+import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
 import * as sns from "aws-cdk-lib/aws-sns";
 import * as subs from "aws-cdk-lib/aws-sns-subscriptions";
-import * as iam from "aws-cdk-lib/aws-iam";
+import { Construct } from "constructs";
 import path from "node:path";
-import { ISecurityGroup, ISubnet, IVpc, SecurityGroup, Subnet, Vpc } from "aws-cdk-lib/aws-ec2";
-import { createLambdaFunction, exportLambdaArn } from "./stackUtils";
-import { Runtime, IFunction } from "aws-cdk-lib/aws-lambda";
+import {
+  BUSINESSES_TABLE,
+  CONTENT_STAGE,
+  DEV_STAGE,
+  MESSAGES_TABLE,
+  PROD_STAGE,
+  TESTING_STAGE,
+  USERS_TABLE,
+} from "./constants";
+import { createLambda, exportLambdaArn } from "./stackUtils";
 
 export interface LambdaStackProps extends StackProps {
   stage: string;
@@ -41,7 +42,7 @@ export class LambdaStack extends Stack {
 
   constructor(scope: Construct, id: string, props: LambdaStackProps) {
     super(scope, id, props);
-    this.serviceName = SERVICE_NAME;
+    this.serviceName = API_SERVICE_NAME;
 
     /**
      * Environment Variables for Express lambda
@@ -121,6 +122,7 @@ export class LambdaStack extends Stack {
     const airtableBaseUrl = process.env.AIRTABLE_BASE_URL || "";
     const airtableUsersTable = process.env.AIRTABLE_USERS_TABLE || "";
     const usersTable = `${USERS_TABLE}-${props.stage}`;
+    const messagesTable = `${MESSAGES_TABLE}-${props.stage}`;
     const documentS3Bucket = `nj-bfs-user-documents-${props.stage}`;
     const businessesTable = `${BUSINESSES_TABLE}-${props.stage}`;
     const dynamoOfflinePort = process.env.DYNAMO_PORT || "8000";
@@ -158,7 +160,7 @@ export class LambdaStack extends Stack {
             vpcSubnets: { subnets: this.subnets },
           };
 
-    this.lambdas.express = createLambdaFunction(this, {
+    this.lambdas.express = createLambda(this, {
       role: props.lambdaRole,
       id: `${this.serviceName}-${props.stage}-express`,
       stage: props.stage,
@@ -237,7 +239,7 @@ export class LambdaStack extends Stack {
     });
 
     if (props.stage === DEV_STAGE) {
-      this.lambdas.githubOauth2 = createLambdaFunction(this, {
+      this.lambdas.githubOauth2 = createLambda(this, {
         role: props.lambdaRole,
         id: `${this.serviceName}-${props.stage}-githubOauth2`,
         stage: props.stage,
@@ -257,7 +259,7 @@ export class LambdaStack extends Stack {
     }
 
     if (props.stage !== CONTENT_STAGE && props.stage !== TESTING_STAGE) {
-      this.lambdas.healthCheck = createLambdaFunction(this, {
+      this.lambdas.healthCheck = createLambda(this, {
         role: props.lambdaRole,
         id: `${this.serviceName}-${props.stage}-healthCheck`,
         stage: props.stage,
@@ -285,7 +287,7 @@ export class LambdaStack extends Stack {
       scheduleRule.addTarget(new targets.LambdaFunction(this.lambdas.healthCheck, {}));
     }
 
-    this.lambdas.migrateUsersVersion = createLambdaFunction(this, {
+    this.lambdas.migrateUsersVersion = createLambda(this, {
       role: props.lambdaRole,
       id: `${this.serviceName}-${props.stage}-migrateUsersVersion`,
       stage: props.stage,
@@ -318,7 +320,7 @@ export class LambdaStack extends Stack {
     });
     scheduleRule.addTarget(new targets.LambdaFunction(this.lambdas.migrateUsersVersion));
 
-    this.lambdas.updateExternalStatus = createLambdaFunction(this, {
+    this.lambdas.updateExternalStatus = createLambda(this, {
       role: props.lambdaRole,
       id: `${this.serviceName}-${props.stage}-updateExternalStatus`,
       stage: props.stage,
@@ -349,7 +351,7 @@ export class LambdaStack extends Stack {
       },
     });
 
-    this.lambdas.updateKillSwitchParameter = createLambdaFunction(this, {
+    this.lambdas.updateKillSwitchParameter = createLambda(this, {
       role: props.lambdaRole,
       id: `${this.serviceName}-${props.stage}-updateKillSwitchParameter`,
       stage: props.stage,
@@ -363,6 +365,29 @@ export class LambdaStack extends Stack {
       ...vpcProps,
       environment: {
         API_BASE_URL: apiBaseUrl,
+      },
+    });
+
+    this.lambdas.messagingService = createLambda(this, {
+      role: props.lambdaRole,
+      id: `${this.serviceName}-${props.stage}-messagingService`,
+      stage: props.stage,
+      functionName: `${this.serviceName}-${props.stage}-messagingService`,
+      entry: path.join(__dirname, "../../src/functions/messagingService/app.ts"),
+      handler: "handler",
+      runtime: Runtime.NODEJS_22_X,
+      timeout: Duration.seconds(30),
+      memorySize: 1024,
+      ephemeralStorageSize: Size.mebibytes(512),
+      ...vpcProps,
+      environment: {
+        API_BASE_URL: apiBaseUrl,
+        AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
+        AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
+        AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE: awsCryptoContextTaxIdEncryptionPurpose,
+        AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
+        USERS_TABLE: usersTable,
+        MESSAGES_TABLE: messagesTable,
       },
     });
 
