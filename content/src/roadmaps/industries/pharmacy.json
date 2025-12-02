@@ -67,7 +67,8 @@
     {
       "step": 4,
       "weight": 14,
-      "task": "community-right-to-know-survey"
+      "task": "community-right-to-know-survey",
+      "required": true
     },
     {
       "step": 4,
