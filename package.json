@@ -236,7 +236,7 @@
     "tsx": "4.20.6",
     "typescript": "5.9.3",
     "webpack": "5.103.0",
-    "wiremock": "3.13.1",
+    "wiremock": "3.13.2",
     "yarn-workspace-sync-deps": "0.3.3"
   },
   "workspaces": {
