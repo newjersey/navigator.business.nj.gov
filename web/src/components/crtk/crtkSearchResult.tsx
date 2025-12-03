@@ -28,11 +28,11 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
   const statusContent = {
     NOT_FOUND: {
       header: "Business Not Found",
-      description: `${businessDetails?.businessName} is not currently in the CRTK database.`,
+      description: `${businessDetails?.businessName || "Your business"} is not currently in the CRTK database.`,
     },
     FOUND: {
       header: "Business Found",
-      description: `${businessDetails?.businessName} is in the New Jersey Community Right to Know (CRTK) database. This means you may have chemical reporting requirements.`,
+      description: `${businessDetails?.businessName || "Your business"} is in the New Jersey Community Right to Know (CRTK) database. This means you may have chemical reporting requirements.`,
     },
   };
 
@@ -91,13 +91,13 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
               >
                 <div className="margin-top-1 font-open-sans-5">
                   <p className="margin-bottom-1">
-                    <strong>Facility Type:</strong> {crtkData.facilityType || "N/A"}
+                    <strong>Facility Type:</strong> {crtkData.CRTKEntry.facilityType || "N/A"}
                   </p>
                   <p className="margin-bottom-1">
-                    <strong>Eligibility:</strong> {crtkData.eligibility || "N/A"}
+                    <strong>Eligibility:</strong> {crtkData.CRTKEntry.eligibility || "N/A"}
                   </p>
                   <p className="margin-bottom-1">
-                    <strong>Facility Status:</strong> {crtkData.facilityStatus || "N/A"}
+                    <strong>Facility Status:</strong> {crtkData.CRTKEntry.facilityStatus || "N/A"}
                   </p>
                 </div>
               </ResultsSectionAccordion>

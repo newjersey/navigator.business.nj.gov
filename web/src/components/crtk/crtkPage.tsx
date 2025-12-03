@@ -4,14 +4,13 @@ import { CRTKSearchResult } from "@/components/crtk/crtkSearchResult";
 import type { CRTKData } from "@/components/crtk/crtkTypes";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
+import { Task } from "@businessnjgovnavigator/shared/types";
 import { Box } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 import type { CRTKFacilityDetails } from "./crtkForm";
 
 interface Props {
   task: Task;
-  renewal?: XrayRenewalCalendarEventType;
   CMS_ONLY_disable_overlay?: boolean;
 }
 
@@ -48,7 +47,15 @@ export const CRTKPage = (props: Props): ReactElement => {
         return;
       }
 
-      setCrtkData(crtkSearchResponse);
+      const updatedCrtkData: CRTKData | undefined =
+        crtkSearchResponse?.businesses[crtkSearchResponse.currentBusinessId].crtkData;
+
+      if (!updatedCrtkData) {
+        setSearchError("SEARCH_FAILED");
+        return;
+      }
+
+      setCrtkData(updatedCrtkData);
 
       await refresh();
     } catch (error) {

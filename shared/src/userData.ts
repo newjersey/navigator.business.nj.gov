@@ -1,6 +1,6 @@
-import { CRTKData } from "src/crtk";
 import { BusinessUser } from "./businessUser";
 import { CigaretteLicenseData } from "./cigaretteLicense";
+import { CRTKData } from "./crtk";
 import { createBusinessId } from "./domain-logic/createBusinessId";
 import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
