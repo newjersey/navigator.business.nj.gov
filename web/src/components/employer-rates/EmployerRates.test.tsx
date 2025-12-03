@@ -491,6 +491,35 @@ describe("EmployerRates", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("goes to the success table if response does not contain error field", async () => {
+    const response = generateEmployerRatesResponse({});
+    delete response.error;
+    mockApi.checkEmployerRates.mockResolvedValue(response);
+
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    const submit = await screen.findByRole("button", {
+      name: Config.employerRates.employerAccessYesButtonText,
+    });
+
+    await userEvent.click(submit);
+
+    expect(screen.getByRole("alert", { name: "success" })).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: "Quarterly Contribution Rates" })).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: "Total Contribution Rates" })).toBeInTheDocument();
+
+    expect(
+      screen.queryByRole("heading", { name: Config.employerRates.employerAccessHeaderText }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: Config.employerRates.employerAccessYesButtonText }),
+    ).not.toBeInTheDocument();
+  });
+
   it("goes back to the question view if user edits quarter", async () => {
     mockApi.checkEmployerRates.mockResolvedValue(
       generateEmployerRatesResponse({

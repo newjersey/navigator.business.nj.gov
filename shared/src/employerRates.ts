@@ -23,5 +23,5 @@ export type EmployerRatesResponse = {
   baseWeekAmt: string;
   numberOfBaseWeeks: string;
   taxableWageBaseDiFli: string;
-  error: string;
+  error?: string;
 };
