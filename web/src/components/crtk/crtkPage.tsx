@@ -35,7 +35,7 @@ export const CRTKPage = (props: Props): ReactElement => {
     setIsLoading(true);
 
     try {
-      const userData = await api.searchBuisnessInCRTKDB({
+      const crtkSearchResponse = await api.searchBuisnessInCRTKDB({
         businessName: facilityDetails.businessName,
         addressLine1: facilityDetails.businessStreetAddress,
         city: facilityDetails.city,
@@ -43,18 +43,12 @@ export const CRTKPage = (props: Props): ReactElement => {
         ein: facilityDetails.ein || undefined,
       });
 
-      // console.log(userData.businesses[userData.currentBusinessId].crtkData);
+      if (!crtkSearchResponse) {
+        setSearchError("SEARCH_FAILED");
+        return;
+      }
 
-      //todo: update with userData.
-      //      const updatedCrtkData = userData.businesses[userData.currentBusinessId].crtkData;
-      //const updatedCrtkData = "";
-
-      // if (!updatedCrtkData) {
-      //   setSearchError("SEARCH_FAILED");
-      //   return;
-      // }
-
-      setCrtkData(userData);
+      setCrtkData(crtkSearchResponse);
 
       await refresh();
     } catch (error) {
