@@ -106,7 +106,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       .checkEmployerRates({ employerRates, userData })
       .then((results: EmployerRatesResponse) => {
         setLoading(false);
-        if (results.error.length > 0) {
+        if (results.error) {
           setNoAccountError(true);
           return;
         }
