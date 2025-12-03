@@ -2,7 +2,6 @@ import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
   CRTKBusinessDetails,
-  CRTKData,
   ElevatorSafetyRegistrationSummary,
   EmailMetaData,
   EmergencyTripPermitApplicationInfo,
@@ -84,7 +83,7 @@ export const checkXrayRegistrationStatus = (
 
 export const searchBuisnessInCRTKDB = (
   CRTKbusinessDetails: CRTKBusinessDetails,
-): Promise<CRTKData> => {
+): Promise<UserData> => {
   return post(`/crtk-lookup`, { CRTKbusinessDetails });
 };
 

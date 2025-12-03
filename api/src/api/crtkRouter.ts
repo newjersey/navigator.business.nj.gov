@@ -25,14 +25,14 @@ export const crtkLookupRouterFactory = (
     updateCRTKUser(userData, businessDetails)
       .then(async (response: UserData) => {
         const status = StatusCodes.OK;
-        const updatedUserData = await databaseClient.put(response);
+        await databaseClient.put(response);
 
         logger.LogInfo(
           `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, successfully completed CRTK lookup, duration: ${getDurationMs(
             requestStart,
           )}ms`,
         );
-        res.json(updatedUserData);
+        res.json(response);
       })
       .catch((error) => {
         const status = StatusCodes.INTERNAL_SERVER_ERROR;
