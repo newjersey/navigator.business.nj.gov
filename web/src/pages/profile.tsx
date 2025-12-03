@@ -592,7 +592,6 @@ const ProfilePage = (props: Props): ReactElement => {
           <DateOfFormation futureAllowed />
         </ProfileField>
         <CertificationsAndFundingNonEssentialQuestions showCannabisAlert />
-        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRatesTemporary />}
       </div>
     ),
     contact: (
