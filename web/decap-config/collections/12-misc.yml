@@ -647,7 +647,6 @@ collections:
             summary: "{{selfRegistration}}"
             fields:
               - { label: Sign-up Header, name: signUpTitleText, widget: string }
-              - { label: Sign-up Description, name: signUpDescriptionText, widget: string }
               - { label: Name Label, name: nameFieldLabel, widget: string }
               - { label: Email Label, name: emailFieldLabel, widget: string }
               - { label: Confirm Email Label, name: confirmEmailFieldLabel, widget: string }
