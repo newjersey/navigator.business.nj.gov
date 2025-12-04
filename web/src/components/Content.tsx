@@ -24,6 +24,7 @@ interface ContentProps {
   overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
   onClick?: (url?: string) => void;
   customComponents?: Record<string, ReactElement>;
+  showLaunchIcon?: boolean;
 }
 
 export const Content = (props: ContentProps): ReactNode => {
@@ -38,7 +39,7 @@ export const Content = (props: ContentProps): ReactNode => {
           return <>{`\`${props.children}\``}</>;
         }
       : ContextualInfoLink,
-    a: Link(props.onClick),
+    a: Link(props.onClick, props.showLaunchIcon ?? true),
     h2: (props: any): ReactElement => {
       return (
         <Heading level={2} style={{ marginTop: "1rem" }}>
@@ -104,7 +105,7 @@ export const Content = (props: ContentProps): ReactNode => {
   );
 };
 
-const Link = (onClick?: (url?: string) => void): any => {
+const Link = (onClick?: (url?: string) => void, showLaunchIcon?: boolean): any => {
   return Object.assign(
     (props: any): ReactElement => {
       const childrenContent =
@@ -122,6 +123,7 @@ const Link = (onClick?: (url?: string) => void): any => {
             href={props.href}
             id={props.title}
             onClick={(): void => onClick && onClick(props.href)}
+            showLaunchIcon={showLaunchIcon}
           >
             {linkText}
           </ExternalLink>
@@ -146,11 +148,13 @@ export const ExternalLink = ({
   href,
   onClick,
   id,
+  showLaunchIcon = true,
 }: {
   children: string;
   href: string;
   onClick?: (url?: string) => void;
   id?: string;
+  showLaunchIcon?: boolean;
 }): ReactElement => {
   return (
     <a
@@ -166,7 +170,7 @@ export const ExternalLink = ({
       }}
     >
       {children}
-      <Icon iconName="launch" />
+      {showLaunchIcon && <Icon iconName="launch" />}
     </a>
   );
 };

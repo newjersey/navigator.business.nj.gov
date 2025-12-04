@@ -23,6 +23,11 @@ collections:
             fields:
               - { label: "Page Title", name: "pageTitle", widget: "string" }
               - { label: "Last Updated Date", name: "lastUpdated", widget: "string" }
+              - {
+                  label: "Multiple Accounts Callout",
+                  name: "multipleAccountsCallout",
+                  widget: markdown,
+                }
               - label: "Steps"
                 name: "steps"
                 widget: list
@@ -35,6 +40,11 @@ collections:
                       required: false,
                     }
                   - { label: "Image Alt Text", name: "imageAlt", widget: "string", required: false }
+              - {
+                  label: "Logout If Still Having Trouble",
+                  name: "logoutIfStillHavingTrouble",
+                  widget: "string",
+                }
               - label: "Support Callout"
                 name: "supportCallout"
                 widget: object
