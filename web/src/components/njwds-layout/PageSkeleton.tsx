@@ -11,6 +11,7 @@ interface Props {
   children: React.ReactNode;
   landingPage?: boolean;
   isLoginPage?: boolean;
+  isSeoStarterKit?: boolean;
   showNavBar?: boolean;
   task?: Task;
   showSidebar?: boolean;
@@ -31,6 +32,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
           <NavBar
             landingPage={props.landingPage}
             isLoginPage={props.isLoginPage}
+            isSeoStarterKit={props.isSeoStarterKit}
             task={props.task}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}
