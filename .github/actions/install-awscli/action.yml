@@ -1,0 +1,11 @@
+name: "Install AWS CLI"
+description: "Installs the AWS CLI using apt-get."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install AWS CLI
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli

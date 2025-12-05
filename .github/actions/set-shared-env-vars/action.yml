@@ -1,0 +1,51 @@
+name: "Set Dev Network Variables"
+description:
+  "Exports the shared AWS networking variables (VPC, subnets, security group) used by Dev, Testing,
+  and Content environments."
+
+inputs:
+  AWS_REGION:
+    description: "AWS region where Testing resources are deployed (e.g., us-east-1)."
+    required: true
+  VPC_ID:
+    description: "AWS VPC ID used by Dev, Testing, and Content ECS/Lambda resources."
+    required: true
+  SUBNET_ID_01:
+    description: "Primary private subnet ID used for ECS/Lambda deployments."
+    required: true
+  SUBNET_ID_02:
+    description: "Secondary private subnet ID used for ECS/Lambda deployments."
+    required: true
+  SG_ID:
+    description: "Security Group ID providing network access control for the application."
+    required: true
+  STAGE:
+    description: "Deployment Stage"
+    required: true
+  MYNJ_PROFILE_LINK:
+    description: "MyNJ profile link for the environment."
+    required: true
+
+  AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+    description: "Crypto context string used for hashing Tax IDs in Testing."
+    required: true
+
+  AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+    description: "KMS encryption purpose for tax ID."
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Export Dev Network Variables
+      shell: bash
+      run: |
+        echo "AWS_REGION=${{ inputs.AWS_REGION }}" >> $GITHUB_ENV
+        echo "VPC_ID=${{ inputs.VPC_ID }}" >> $GITHUB_ENV
+        echo "SUBNET_ID_01=${{ inputs.SUBNET_ID_01 }}" >> $GITHUB_ENV
+        echo "SUBNET_ID_02=${{ inputs.SUBNET_ID_02 }}" >> $GITHUB_ENV
+        echo "SG_ID=${{ inputs.SG_ID }}" >> $GITHUB_ENV
+        echo "STAGE=${{ inputs.STAGE }}" >> $GITHUB_ENV
+        echo "MYNJ_PROFILE_LINK=${{ inputs.MYNJ_PROFILE_LINK }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE=${{ inputs.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE=${{ inputs.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}" >> $GITHUB_ENV

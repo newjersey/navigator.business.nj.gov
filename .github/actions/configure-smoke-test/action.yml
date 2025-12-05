@@ -1,0 +1,13 @@
+name: "Configure Smoke Test"
+description: "Updates apt packages and bootstraps code for smoke tests."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Update apt
+      shell: bash
+      run: |
+        sudo apt update
+
+    - name: Bootstrap Code
+      uses: ./.github/actions/bootstrap-code

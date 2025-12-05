@@ -1,0 +1,325 @@
+name: "Set Development Environment Variables"
+description:
+  "Sets all development environment variables that serve as the base configuration for dev, testing,
+  and content."
+
+inputs:
+  ADMIN_PASSWORD:
+    description: "Default admin password for development authentication."
+    required: true
+
+  ABC_ETP_API_KEY:
+    description: "API key for the ABC ETP service (dev/staging version)."
+    required: true
+
+  ABC_ETP_API_ACCOUNT:
+    description: "ABC ETP API account ID used in development."
+    required: true
+
+  ABC_ETP_API_BASE_URL:
+    description: "Base URL for ABC ETP API used during development."
+    required: true
+
+  AB_TESTING_EXPERIENCE_B_PERCENTAGE:
+    description: "Percentage threshold for A/B testing for dev."
+    required: true
+
+  AIRTABLE_USERS_TABLE:
+    description: "Airtable table name for dev user records."
+    required: true
+
+  API_BASE_URL:
+    description: "API base URL for the dev backend."
+    required: true
+
+  AUTH_DOMAIN:
+    description: "Cognito auth domain for development."
+    required: true
+
+  AWS_CRYPTO_CONTEXT_ORIGIN:
+    description: "KMS crypto context: origin value for dev."
+    required: true
+
+  AWS_CRYPTO_CONTEXT_STAGE:
+    description: "KMS crypto context: stage identifier for dev."
+    required: true
+
+  AWS_ACCOUNT_ID:
+    description: "AWS account ID for dev operations."
+    required: true
+
+  AWS_ACCESS_KEY_ID:
+    description: "AWS Access Key ID for development."
+    required: true
+
+  AWS_SECRET_ACCESS_KEY:
+    description: "AWS Secret Access Key for development."
+    required: true
+
+  BASIC_AUTH_PASSWORD:
+    description: "Basic auth password for development."
+    required: true
+
+  BASIC_AUTH_USERNAME:
+    description: "Basic auth username for development."
+    required: true
+
+  BUSINESS_NAME_BASE_URL:
+    description: "Business name search endpoint for dev."
+    required: true
+
+  COGNITO_IDENTITY_POOL_ID:
+    description: "Cognito Identity Pool ID for dev."
+    required: true
+
+  COGNITO_USER_POOL_ID:
+    description: "Cognito User Pool ID for dev."
+    required: true
+
+  COGNITO_WEB_CLIENT_ID:
+    description: "Cognito Web Client ID for dev login flows."
+    required: true
+
+  CHECK_DEAD_LINKS:
+    description: "Feature toggle: enable dead link checker in dev."
+    required: true
+
+  DEV_ONLY_UNLINK_TAX_ID:
+    description: "Toggle to allow removing linked tax IDs in dev only."
+    required: true
+
+  DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID:
+    description: "Dynamics Elevator Safety Client ID (dev)."
+    required: true
+  DYNAMICS_ELEVATOR_SAFETY_SECRET:
+    description: "Dynamics Elevator Safety Client Secret (dev)."
+    required: true
+  DYNAMICS_ELEVATOR_SAFETY_TENANT_ID:
+    description: "Dynamics Elevator Safety Tenant ID (dev)."
+    required: true
+  DYNAMICS_ELEVATOR_SAFETY_URL:
+    description: "Dynamics Elevator Safety API base URL (dev)."
+    required: true
+
+  DYNAMICS_FIRE_SAFETY_CLIENT_ID:
+    description: "Dynamics Fire Safety Client ID (dev)."
+    required: true
+  DYNAMICS_FIRE_SAFETY_SECRET:
+    description: "Dynamics Fire Safety Client Secret (dev)."
+    required: true
+  DYNAMICS_FIRE_SAFETY_TENANT_ID:
+    description: "Dynamics Fire Safety Tenant ID (dev)."
+    required: true
+  DYNAMICS_FIRE_SAFETY_URL:
+    description: "Dynamics Fire Safety API base URL (dev)."
+    required: true
+
+  DYNAMICS_HOUSING_CLIENT_ID:
+    description: "Dynamics Housing Client ID (dev)."
+    required: true
+  DYNAMICS_HOUSING_SECRET:
+    description: "Dynamics Housing Client Secret (dev)."
+    required: true
+  DYNAMICS_HOUSING_TENANT_ID:
+    description: "Dynamics Housing Tenant ID (dev)."
+    required: true
+  DYNAMICS_HOUSING_URL:
+    description: "Dynamics Housing base URL (dev)."
+    required: true
+
+  DYNAMICS_LICENSE_STATUS_CLIENT_ID:
+    description: "Dynamics License Status Client ID (dev)."
+    required: true
+  DYNAMICS_LICENSE_STATUS_SECRET:
+    description: "Dynamics License Status Client Secret (dev)."
+    required: true
+  DYNAMICS_LICENSE_STATUS_TENANT_ID:
+    description: "Dynamics License Status Tenant ID (dev)."
+    required: true
+  DYNAMICS_LICENSE_STATUS_URL:
+    description: "Dynamics License Status API URL (dev)."
+    required: true
+
+  FEATURE_ABC_ETP_APPLICATION:
+    description: "Feature flag: ABC ETP application (dev)."
+    required: true
+
+  FEATURE_CIGARETTE_LICENSE:
+    description: "Feature flag: Cigarette licensing (dev)."
+    required: true
+
+  FEATURE_TAX_CLEARANCE_CERTIFICATE:
+    description: "Feature flag: Tax Clearance Certificate (dev)."
+    required: true
+
+  FEATURE_FORMATION_SURVEY:
+    description: "Feature flag: Formation Survey (dev)."
+    required: true
+
+  FEATURE_LOGIN_PAGE:
+    description: "Feature flag: new login page (dev)."
+    required: true
+
+  FEATURE_MODIFY_BUSINESS_PAGE:
+    description: "Feature flag: Modify Business page (dev)."
+    required: true
+
+  FEATURE_SHOW_REMOVE_BUSINESS:
+    description: "Feature flag: ability to remove a business (dev)."
+    required: true
+
+  FORMATION_API_ACCOUNT:
+    description: "Account ID for Formation API (dev)."
+    required: true
+
+  FORMATION_API_KEY:
+    description: "API key for Formation API (dev)."
+    required: true
+
+  FORMATION_API_BASE_URL:
+    description: "Base URL for Formation API (dev)."
+    required: true
+
+  GOV2GO_REGISTRATION_API_KEY:
+    description: "API key for Gov2Go registration (dev)."
+    required: true
+
+  GOV2GO_REGISTRATION_BASE_URL:
+    description: "Gov2Go registration service URL (dev)."
+    required: true
+
+  LICENSE_STATUS_BASE_URL:
+    description: "NJ License Status base API URL (dev)."
+    required: true
+
+  MYNJ_ROLE_NAME:
+    description: "MyNJ role name for dev."
+    required: true
+
+  MYNJ_SERVICE_TOKEN:
+    description: "MyNJ service token for dev API calls."
+    required: true
+
+  MYNJ_SERVICE_URL:
+    description: "MyNJ API base URL for dev."
+    required: true
+
+  NEXT_PUBLIC_WEB_BASE_URL:
+    description: "Frontend web base URL used in dev."
+    required: true
+
+  REDIRECT_URL:
+    description: "Auth/Cognito redirect URL for dev."
+    required: true
+
+  SHOW_DISABLED_INDUSTRIES:
+    description: "Toggle to show disabled industries in dev."
+    required: true
+
+  SMOKE_TEST_ENV:
+    description: "Identifier for automated smoke testing in dev."
+    required: true
+
+  TAX_CLEARANCE_CERTIFICATE_PASSWORD:
+    description: "Password for the Tax Clearance Certificate system (dev)."
+    required: true
+
+  TAX_CLEARANCE_CERTIFICATE_USER_NAME:
+    description: "Username for the Tax Clearance Certificate system (dev)."
+    required: true
+
+  TAX_CLEARANCE_CERTIFICATE_URL:
+    description: "Endpoint for Tax Clearance Certificate access (dev)."
+    required: true
+
+  USE_BASIC_AUTH:
+    description: "Whether to require basic auth in dev."
+    required: true
+
+  XRAY_REGISTRATION_STATUS_BASE_URL:
+    description: "Base URL for XRay Registration service (dev)."
+    required: true
+
+  AWS_CRYPTO_TAX_ID_HASHING_KEY:
+    description: "KMS key for hashing tax IDs (dev)."
+    required: true
+
+  AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY:
+    description: "Encryption KMS key for tax IDs (dev)."
+    required: true
+
+  FEATURE_EMPLOYER_RATES:
+    description: "Feature flag: Employer rate lookup (dev)."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Export Development Environment Variables
+      shell: bash
+      run: |
+        echo "ADMIN_PASSWORD=${{ inputs.ADMIN_PASSWORD }}" >> $GITHUB_ENV
+        echo "ABC_ETP_API_KEY=${{ inputs.ABC_ETP_API_KEY }}" >> $GITHUB_ENV
+        echo "ABC_ETP_API_ACCOUNT=${{ inputs.ABC_ETP_API_ACCOUNT }}" >> $GITHUB_ENV
+        echo "ABC_ETP_API_BASE_URL=${{ inputs.ABC_ETP_API_BASE_URL }}" >> $GITHUB_ENV
+        echo "AB_TESTING_EXPERIENCE_B_PERCENTAGE=${{ inputs.AB_TESTING_EXPERIENCE_B_PERCENTAGE }}" >> $GITHUB_ENV
+        echo "AIRTABLE_USERS_TABLE=${{ inputs.AIRTABLE_USERS_TABLE }}" >> $GITHUB_ENV
+        echo "API_BASE_URL=${{ inputs.API_BASE_URL }}" >> $GITHUB_ENV
+        echo "AUTH_DOMAIN=${{ inputs.AUTH_DOMAIN }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_CONTEXT_ORIGIN=${{ inputs.AWS_CRYPTO_CONTEXT_ORIGIN }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_CONTEXT_STAGE=${{ inputs.AWS_CRYPTO_CONTEXT_STAGE }}" >> $GITHUB_ENV
+        echo "AWS_ACCOUNT_ID=${{ inputs.AWS_ACCOUNT_ID }}" >> $GITHUB_ENV
+        echo "AWS_ACCESS_KEY_ID=${{ inputs.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+        echo "AWS_SECRET_ACCESS_KEY=${{ inputs.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+        echo "BASIC_AUTH_PASSWORD=${{ inputs.BASIC_AUTH_PASSWORD }}" >> $GITHUB_ENV
+        echo "BASIC_AUTH_USERNAME=${{ inputs.BASIC_AUTH_USERNAME }}" >> $GITHUB_ENV
+        echo "BUSINESS_NAME_BASE_URL=${{ inputs.BUSINESS_NAME_BASE_URL }}" >> $GITHUB_ENV
+        echo "COGNITO_IDENTITY_POOL_ID=${{ inputs.COGNITO_IDENTITY_POOL_ID }}" >> $GITHUB_ENV
+        echo "COGNITO_USER_POOL_ID=${{ inputs.COGNITO_USER_POOL_ID }}" >> $GITHUB_ENV
+        echo "COGNITO_WEB_CLIENT_ID=${{ inputs.COGNITO_WEB_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "CHECK_DEAD_LINKS=${{ inputs.CHECK_DEAD_LINKS }}" >> $GITHUB_ENV
+        echo "DEV_ONLY_UNLINK_TAX_ID=${{ inputs.DEV_ONLY_UNLINK_TAX_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID=${{ inputs.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_ELEVATOR_SAFETY_SECRET=${{ inputs.DYNAMICS_ELEVATOR_SAFETY_SECRET }}" >> $GITHUB_ENV
+        echo "DYNAMICS_ELEVATOR_SAFETY_TENANT_ID=${{ inputs.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_ELEVATOR_SAFETY_URL=${{ inputs.DYNAMICS_ELEVATOR_SAFETY_URL }}" >> $GITHUB_ENV
+        echo "DYNAMICS_FIRE_SAFETY_CLIENT_ID=${{ inputs.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_FIRE_SAFETY_SECRET=${{ inputs.DYNAMICS_FIRE_SAFETY_SECRET }}" >> $GITHUB_ENV
+        echo "DYNAMICS_FIRE_SAFETY_TENANT_ID=${{ inputs.DYNAMICS_FIRE_SAFETY_TENANT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_FIRE_SAFETY_URL=${{ inputs.DYNAMICS_FIRE_SAFETY_URL }}" >> $GITHUB_ENV
+        echo "DYNAMICS_HOUSING_CLIENT_ID=${{ inputs.DYNAMICS_HOUSING_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_HOUSING_SECRET=${{ inputs.DYNAMICS_HOUSING_SECRET }}" >> $GITHUB_ENV
+        echo "DYNAMICS_HOUSING_TENANT_ID=${{ inputs.DYNAMICS_HOUSING_TENANT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_HOUSING_URL=${{ inputs.DYNAMICS_HOUSING_URL }}" >> $GITHUB_ENV
+        echo "DYNAMICS_LICENSE_STATUS_CLIENT_ID=${{ inputs.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_LICENSE_STATUS_SECRET=${{ inputs.DYNAMICS_LICENSE_STATUS_SECRET }}" >> $GITHUB_ENV
+        echo "DYNAMICS_LICENSE_STATUS_TENANT_ID=${{ inputs.DYNAMICS_LICENSE_STATUS_TENANT_ID }}" >> $GITHUB_ENV
+        echo "DYNAMICS_LICENSE_STATUS_URL=${{ inputs.DYNAMICS_LICENSE_STATUS_URL }}" >> $GITHUB_ENV
+        echo "FEATURE_ABC_ETP_APPLICATION=${{ inputs.FEATURE_ABC_ETP_APPLICATION }}" >> $GITHUB_ENV
+        echo "FEATURE_CIGARETTE_LICENSE=${{ inputs.FEATURE_CIGARETTE_LICENSE }}" >> $GITHUB_ENV
+        echo "FEATURE_TAX_CLEARANCE_CERTIFICATE=${{ inputs.FEATURE_TAX_CLEARANCE_CERTIFICATE }}" >> $GITHUB_ENV
+        echo "FEATURE_FORMATION_SURVEY=${{ inputs.FEATURE_FORMATION_SURVEY }}" >> $GITHUB_ENV
+        echo "FEATURE_LOGIN_PAGE=${{ inputs.FEATURE_LOGIN_PAGE }}" >> $GITHUB_ENV
+        echo "FEATURE_MODIFY_BUSINESS_PAGE=${{ inputs.FEATURE_MODIFY_BUSINESS_PAGE }}" >> $GITHUB_ENV
+        echo "FEATURE_SHOW_REMOVE_BUSINESS=${{ inputs.FEATURE_SHOW_REMOVE_BUSINESS }}" >> $GITHUB_ENV
+        echo "FORMATION_API_ACCOUNT=${{ inputs.FORMATION_API_ACCOUNT }}" >> $GITHUB_ENV
+        echo "FORMATION_API_KEY=${{ inputs.FORMATION_API_KEY }}" >> $GITHUB_ENV
+        echo "FORMATION_API_BASE_URL=${{ inputs.FORMATION_API_BASE_URL }}" >> $GITHUB_ENV
+        echo "GOV2GO_REGISTRATION_API_KEY=${{ inputs.GOV2GO_REGISTRATION_API_KEY }}" >> $GITHUB_ENV
+        echo "GOV2GO_REGISTRATION_BASE_URL=${{ inputs.GOV2GO_REGISTRATION_BASE_URL }}" >> $GITHUB_ENV
+        echo "LICENSE_STATUS_BASE_URL=${{ inputs.LICENSE_STATUS_BASE_URL }}" >> $GITHUB_ENV
+        echo "MYNJ_ROLE_NAME=${{ inputs.MYNJ_ROLE_NAME }}" >> $GITHUB_ENV
+        echo "MYNJ_SERVICE_TOKEN=${{ inputs.MYNJ_SERVICE_TOKEN }}" >> $GITHUB_ENV
+        echo "MYNJ_SERVICE_URL=${{ inputs.MYNJ_SERVICE_URL }}" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_WEB_BASE_URL=${{ inputs.NEXT_PUBLIC_WEB_BASE_URL }}" >> $GITHUB_ENV
+        echo "REDIRECT_URL=${{ inputs.REDIRECT_URL }}" >> $GITHUB_ENV
+        echo "SHOW_DISABLED_INDUSTRIES=${{ inputs.SHOW_DISABLED_INDUSTRIES }}" >> $GITHUB_ENV
+        echo "SMOKE_TEST_ENV=${{ inputs.SMOKE_TEST_ENV }}" >> $GITHUB_ENV
+        echo "TAX_CLEARANCE_CERTIFICATE_PASSWORD=${{ inputs.TAX_CLEARANCE_CERTIFICATE_PASSWORD }}" >> $GITHUB_ENV
+        echo "TAX_CLEARANCE_CERTIFICATE_USER_NAME=${{ inputs.TAX_CLEARANCE_CERTIFICATE_USER_NAME }}" >> $GITHUB_ENV
+        echo "TAX_CLEARANCE_CERTIFICATE_URL=${{ inputs.TAX_CLEARANCE_CERTIFICATE_URL }}" >> $GITHUB_ENV
+        echo "USE_BASIC_AUTH=${{ inputs.USE_BASIC_AUTH }}" >> $GITHUB_ENV
+        echo "XRAY_REGISTRATION_STATUS_BASE_URL=${{ inputs.XRAY_REGISTRATION_STATUS_BASE_URL }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_TAX_ID_HASHING_KEY=${{ inputs.AWS_CRYPTO_TAX_ID_HASHING_KEY }}" >> $GITHUB_ENV
+        echo "AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY=${{ inputs.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY }}" >> $GITHUB_ENV
+        echo "FEATURE_EMPLOYER_RATES=${{ inputs.FEATURE_EMPLOYER_RATES }}" >> $GITHUB_ENV
