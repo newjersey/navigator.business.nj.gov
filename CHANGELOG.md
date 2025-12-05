@@ -1,3 +1,32 @@
+# [2025.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.23.0...v2025.24.0) (2025-12-05)
+
+
+### Bug Fixes
+
+* [AB[#15527](https://github.com/newjersey/navigator.business.nj.gov/issues/15527)] fix styling for Dashboard ([a66f3e2](https://github.com/newjersey/navigator.business.nj.gov/commit/a66f3e2db61184c3cc6fc4db419b550a7846a134))
+* [AB[#16705](https://github.com/newjersey/navigator.business.nj.gov/issues/16705)] return the entire error from Webservice license search ([d9a7f0a](https://github.com/newjersey/navigator.business.nj.gov/commit/d9a7f0a78fedfc373d17b0c307d555d8b5c3a7c1))
+* [AB[#16848](https://github.com/newjersey/navigator.business.nj.gov/issues/16848)] reconfigures PowerAutomate client to pass API key as a body param ([d298f3f](https://github.com/newjersey/navigator.business.nj.gov/commit/d298f3fb5f91b2b534ec14a218bf4fd624837275))
+* [AB[#16870](https://github.com/newjersey/navigator.business.nj.gov/issues/16870)] restrict snsPublishPolicyToCmsAlertTopic to dev ([24bccde](https://github.com/newjersey/navigator.business.nj.gov/commit/24bccdebd36b3e5badfad68538b8446eac04a048))
+* **deps:** update dependency aws-amplify to v6.15.8 ([00e04b3](https://github.com/newjersey/navigator.business.nj.gov/commit/00e04b365208f93a3874e7167a4a442574b4d6b1))
+* **deps:** update dependency dayjs to v1.11.19 ([aa44718](https://github.com/newjersey/navigator.business.nj.gov/commit/aa44718cc39f58f255b1010fcf3b615e7cb30a26))
+* **deps:** update dependency js-yaml to v4.1.1 [security] ([2c887c0](https://github.com/newjersey/navigator.business.nj.gov/commit/2c887c08e4b01b11dacca8d75bd3c0a071e5113a))
+* **deps:** update dependency rehype-rewrite to v4.0.3 ([e97d9c1](https://github.com/newjersey/navigator.business.nj.gov/commit/e97d9c155fe9feb34a63f07f63e363876acb3f13))
+* retrigger wofkflow in circleCI ([cd7490c](https://github.com/newjersey/navigator.business.nj.gov/commit/cd7490cf5ff10593cf6889796c441777f76787c4))
+
+
+### Features
+
+* [AB[#12619](https://github.com/newjersey/navigator.business.nj.gov/issues/12619)] table labels on talkback read column header before cost content and total and subtotal content ([97d5407](https://github.com/newjersey/navigator.business.nj.gov/commit/97d5407c5ab9b5cf3df084dfc58da23a9118a55d))
+* [AB[#12620](https://github.com/newjersey/navigator.business.nj.gov/issues/12620)] WCAG formation required fields not announced as such ([d614e78](https://github.com/newjersey/navigator.business.nj.gov/commit/d614e78e62df590387b942c5950c37f40bd8702a))
+* [AB[#15527](https://github.com/newjersey/navigator.business.nj.gov/issues/15527)] Dashboard restyling - Business Tasks to Stay on Track ([c9d2f8f](https://github.com/newjersey/navigator.business.nj.gov/commit/c9d2f8f3718ea91acdd5d2dd519fb8d33a768c20))
+* [AB[#15816](https://github.com/newjersey/navigator.business.nj.gov/issues/15816)] create CDK resources ([8d36602](https://github.com/newjersey/navigator.business.nj.gov/commit/8d3660281eff87004714660f323874bb6195b654))
+* [AB[#16133](https://github.com/newjersey/navigator.business.nj.gov/issues/16133)] Add Contact & Notifications profile tab ([9244eb2](https://github.com/newjersey/navigator.business.nj.gov/commit/9244eb2ad3b63c359cdf9ecbff5ec67b9214ef5b))
+* [AB[#16133](https://github.com/newjersey/navigator.business.nj.gov/issues/16133)] Fix styling in your security matters box ([be38697](https://github.com/newjersey/navigator.business.nj.gov/commit/be38697a9d8420c5c717d28f733b0b3939b3c06b))
+* [AB[#16357](https://github.com/newjersey/navigator.business.nj.gov/issues/16357)] Add 'updates and reminders' notification option and phone number to account creation page ([ef5ab92](https://github.com/newjersey/navigator.business.nj.gov/commit/ef5ab9264c320611732e4583e0867ebc21e8f7b4))
+* [AB[#16471](https://github.com/newjersey/navigator.business.nj.gov/issues/16471)] create messaging service lambda ([3a8e2fa](https://github.com/newjersey/navigator.business.nj.gov/commit/3a8e2fabb89b5b38120dcd7ebec77f5329f8dace))
+* [AB[#16473](https://github.com/newjersey/navigator.business.nj.gov/issues/16473)] Add feature flag for welcome email and update SSM utils to look at local env ([31cccc5](https://github.com/newjersey/navigator.business.nj.gov/commit/31cccc58473043a2dc887f44c805d49110929af3))
+* [AB[#16629](https://github.com/newjersey/navigator.business.nj.gov/issues/16629)] remove the reseller addon ([1470c72](https://github.com/newjersey/navigator.business.nj.gov/commit/1470c722ff9fea6590e44baccb255060c6b78124))
+
 # [2025.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.22.0...v2025.23.0) (2025-11-13)
 
 
