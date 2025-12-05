@@ -1,12 +1,12 @@
 ---
-id: pbs
 header: Premier Business Services
+id: pbs
 displayname: pbs
 ---
 
 [Premier Business Services](https://www-njlib.nj.gov/NJ_PREMIER_EBIZ/jsp/home.jsp) (PBS) provides access to all New Jersey electronic tax filing and payment services that apply to your business, as well as access to your filing/payment history.
 
-To add a business to your Premier Business Services (PBS) account, login to the MyNewJersey Portal and follow the steps below.
+To add a business to your Premier Business Services (PBS) account, log in to the MyNewJersey Portal and follow the steps below.
 
 1. Enter your Business Information.
 2. Read and Agree to the Agreement/Terms Of Use.
