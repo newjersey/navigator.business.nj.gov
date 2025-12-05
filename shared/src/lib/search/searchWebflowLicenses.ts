@@ -1,7 +1,7 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
-import { WebflowLicense } from "@businessnjgovnavigator/shared/types";
+import { LookupTaskAgencyById } from "../../taskAgency";
+import { WebflowLicense } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string): Match[] => {
   const matches: Match[] = [];

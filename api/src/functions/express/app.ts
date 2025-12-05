@@ -13,6 +13,7 @@ import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
 import { userRouterFactory } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
+import { checkContextualInfoLinksUsage } from "@businessnjgovnavigator/api/src/cms-integrity-tests/contextualInfoLinks";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
@@ -100,6 +101,8 @@ const logger = isLocal ? ConsoleLogWriter : LogWriter(`NavigatorWebService/${STA
 const dataLogger = isLocal
   ? ConsoleLogWriter
   : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+
+checkContextualInfoLinksUsage("", "", logger);
 
 const XRAY_REGISTRATION_STATUS_BASE_URL =
   process.env.XRAY_REGISTRATION_STATUS_BASE_URL || "http://localhost:9000";

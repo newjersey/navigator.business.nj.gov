@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { makeSnippet } from "@/lib/search/helpers";
-import { ConfigMatch, GroupedConfigMatch } from "@/lib/search/typesForSearch";
+import { makeSnippet } from "./helpers";
+import { ConfigMatch, GroupedConfigMatch } from "./typesForSearch";
 
 const collectionInfo = new Map<string, string[]>();
-export const searchConfig = (obj: any, term: string, cmsConfig: any): GroupedConfigMatch[] => {
-  const configMatches = searchObj(obj.default, term, [], []).map((it) => {
+export const searchConfig = (
+  object: any,
+  term: string | RegExp,
+  cmsConfig: any,
+): GroupedConfigMatch[] => {
+  const configMatches = searchObject(object.default, term, [], []).map((it) => {
     const cmsPath = findCmsConfigPath(cmsConfig, it.keyPath);
     return {
       value: makeSnippet(it.value, term),
@@ -22,11 +26,7 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
   for (const match of configMatches) {
     const groupLabel = match.cmsLabelPath.slice(0, 2).join(" > ");
     const existingGroup = groupedConfigMatches[groupLabel];
-    if (existingGroup) {
-      groupedConfigMatches[groupLabel] = [...existingGroup, match];
-    } else {
-      groupedConfigMatches[groupLabel] = [match];
-    }
+    groupedConfigMatches[groupLabel] = existingGroup ? [...existingGroup, match] : [match];
   }
 
   return Object.keys(groupedConfigMatches).map((key) => ({
@@ -36,27 +36,46 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
   }));
 };
 
-const searchObj = (
-  obj: any,
-  term: string,
+const searchObject = (
+  object: any,
+  term: string | RegExp,
   matches: JsonMatch[],
   keyPaths: string[],
 ): JsonMatch[] => {
-  if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {
-    for (const key of Object.keys(obj)) {
-      const value = obj[key];
+  if (typeof object === "object" && object !== null && !Array.isArray(object)) {
+    for (const key of Object.keys(object)) {
+      const value = object[key];
       if (typeof value === "string") {
-        if (value.toLowerCase().includes(term)) {
-          matches = [
-            ...matches,
-            {
-              value: value,
-              keyPath: [...keyPaths, key],
-            },
-          ];
+        if (typeof term === "string") {
+          if (value.toLowerCase().includes(term)) {
+            matches = [
+              ...matches,
+              {
+                value: value,
+                keyPath: [...keyPaths, key],
+              },
+            ];
+          }
+        }
+        // maybe this is what I should have done everywhere?
+        // like the term can be a regex or a string, if string will see if contains, if regex will see if regex matches?
+        else if (term.constructor === RegExp) {
+          const regexMatches = [...value.matchAll(term)];
+          const contextualInfoFileNames = regexMatches.map((match) => match[1]);
+          if (contextualInfoFileNames.length > 0) {
+            for (const conextualInfoFileName of contextualInfoFileNames) {
+              matches = [
+                ...matches,
+                {
+                  value: conextualInfoFileName,
+                  keyPath: [...keyPaths, key],
+                },
+              ];
+            }
+          }
         }
       } else if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-        matches = searchObj(value, term, matches, [...keyPaths, key]);
+        matches = searchObject(value, term, matches, [...keyPaths, key]);
       }
     }
 

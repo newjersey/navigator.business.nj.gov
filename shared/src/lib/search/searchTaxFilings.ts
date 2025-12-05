@@ -1,6 +1,6 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { Filing } from "@businessnjgovnavigator/shared/types";
+import { Filing } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
   const matches: Match[] = [];

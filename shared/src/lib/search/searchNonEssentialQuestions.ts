@@ -1,6 +1,6 @@
-import { findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { NonEssentialQuestion } from "@businessnjgovnavigator/shared/types";
+import { NonEssentialQuestion } from "../../types";
+import { findMatchInLabelledText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchNonEssentialQuestions = (
   nonEssentialQuestions: NonEssentialQuestion[],

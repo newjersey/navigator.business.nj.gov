@@ -1,10 +1,9 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { AddAddOnUsage, AddIndustryUsage, AddTaskDependencyUsage } from "@/lib/search/usageHelpers";
+import { Match } from "./typesForSearch";
 
-import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
-import { IndustryRoadmap, Task } from "@businessnjgovnavigator/shared/types";
+import { Industry } from "../../industry";
+import { LookupTaskAgencyById } from "../../taskAgency";
+import { IndustryRoadmap, Task } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
 
 export const searchTasks = (
   tasks: Task[],
@@ -51,9 +50,10 @@ export const searchTasks = (
     }
   }
 
-  AddAddOnUsage(matches, addOns);
-  AddIndustryUsage(matches, industries);
-  AddTaskDependencyUsage(matches);
+  // for DEBUGGING, uncomment before the end
+  // AddAddOnUsage(matches, addOns);
+  // AddIndustryUsage(matches, industries);
+  // AddTaskDependencyUsage(matches);
 
   return matches;
 };

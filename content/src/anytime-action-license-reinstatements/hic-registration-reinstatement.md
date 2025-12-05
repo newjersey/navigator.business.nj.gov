@@ -7,7 +7,7 @@ licenseName: Home Improvement Contractors-Home Improvement Business Contr
 name: Apply to Reinstate Your Home Improvement Contractor Registration
 urlSlug: hic-registration-reinstatement
 summaryDescriptionMd: Your home improvement contractor (HIC) registration has
-  expired and you can apply to reinstate it.
+  expired and you can apply to reinstate it. `fake|labelHIC`
 issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My HIC Registration
 callToActionLink: https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx
@@ -21,6 +21,8 @@ synonyms:
 - License number
 - Photocopy of a certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
 - Applicable fees paid
+
+`fake|bodyHIC`
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
 

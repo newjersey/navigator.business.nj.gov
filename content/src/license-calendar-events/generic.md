@@ -39,7 +39,7 @@ callToActionText: Renew My PWCR Application
 - Registered apprenticeship certification statement
 - List any notice of violations received from NJDOL, USDOL, or any other state or federal labor law within the last 5 years
 - List of all `prevailing wage|prevailing-wage` `crafts|craft`
-- Applicable fees paid
+- Applicable fees paid `fake|body`
 - `Registered agent|registered-agent` , if applicable
 - Permit to maintain payroll records outside of New Jersey, if applicable
 

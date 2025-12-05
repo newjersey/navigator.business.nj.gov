@@ -6,10 +6,10 @@ id: funeral-reinstatement
 licenseName: Mortuary Science-Funeral Home
 name: " Reinstate Your Funeral Home’s Certificate of Registration "
 urlSlug: funeral-reinstatement
-summaryDescriptionMd: If your certificate of registration expired less than 30
+summaryDescriptionMd: If your certificate `fake|label0` of registration expired less than 30
   days ago, [you can renew online](https://newjersey.mylicense.com/). If your
   registration has been expired for more than 30 days or is inactive, you need
-  to reinstate it.
+  to reinstate it. `fake|label`
 issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Certificate of Registration
 callToActionLink: https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx
@@ -18,11 +18,11 @@ callToActionLink: https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx
 ## Application Requirements
 
 - `Business structure|business-structure-contextual-link`
-- Date of last renewal
-- Manager’s license number, or the license number of the licensee-in-charge
+- Date of last renewal `fake|body1`
+- `fake|body2` Manager’s license number, or the license number of the licensee-in-charge
 - Documentation of any changes to the funeral home’s manager or licensee-in-charge, if applicable
 - A letter from the new funeral home manager stating they accept their position as manager, if applicable
-- Documentation of any change of ownership, including a copy of the `Certificate of Formation (or Certificate of Incorporation),|certificate-formation` if applicable
+- Documentation of any change of ownership, including a copy of the `Certificate of Formation (or Certificate of Incorporation),|certificate-formation@@@@` if applicable
 - Full name and home address of each new owner, if applicable
 - Additional funeral home name(s), address(es), and license number(s), if managing more than 1 funeral home
 - Details of any license denial, revocation, suspension, or surrender since last renewal, if applicable

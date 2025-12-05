@@ -1,4 +1,4 @@
-import { LabelledContent, LabelledContentList, Match } from "@/lib/search/typesForSearch";
+import { LabelledContent, LabelledContentList, Match } from "./typesForSearch";
 
 const removeMarkdownStyling = (markdownInput: string | undefined): string | undefined => {
   if (markdownInput === undefined) {
@@ -24,7 +24,10 @@ export const findMatchInBlock = (
   return match;
 };
 
-export const makeSnippet = (text: string, term: string): string => {
+export const makeSnippet = (text: string, term: string | RegExp): string => {
+  if (term instanceof RegExp) {
+    return text;
+  }
   const index = text.toLowerCase().indexOf(term.toLowerCase());
   const startIndex = index - 50 < 0 ? 0 : index - 50;
   const endIndex = term.length + index + 50;
