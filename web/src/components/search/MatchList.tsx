@@ -1,7 +1,7 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { UsagesList } from "@/components/search/UsagesList";
 import cmsMapJson from "@/lib/cms/CollectionMap.json";
-import { Match } from "@/lib/search/typesForSearch";
+import { Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 import { CMSMap } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useEffect, useState } from "react";
 interface Props {

@@ -1,7 +1,7 @@
-import { Match } from "@/lib/search/typesForSearch";
-import TaskDependencies from "@businessnjgovnavigator/content/roadmaps/task-dependencies.json";
-import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { IndustryRoadmap } from "@businessnjgovnavigator/shared/types";
+import TaskDependencies from "../../../../content/src/roadmaps/task-dependencies.json";
+import { Industry } from "../../industry";
+import { Match } from "../../lib/search/typesForSearch";
+import { IndustryRoadmap } from "../../types";
 
 const addTaskDependency = (match: Match, dependency: string): void => {
   if (!match.additionalUsageLocations) {
@@ -65,7 +65,7 @@ export const AddTaskDependencyUsage = (matches: Match[]): void => {
         for (const TaskDependnecy of dependency.taskDependencies) {
           if (match.filename === TaskDependnecy) {
             const addedPhrase = composeIsTaskDependencyTaskString(
-              dependency.task ?? dependency.licenseTask,
+              dependency.task ?? dependency.licenseTask ?? "",
             );
             addTaskDependency(matches[index], addedPhrase);
           }
@@ -75,7 +75,7 @@ export const AddTaskDependencyUsage = (matches: Match[]): void => {
         for (const LicenseTaskDependnecy of dependency.licenseTaskDependencies) {
           if (match.filename === LicenseTaskDependnecy) {
             const addedPhrase = composeIsLicenseTaskDependencyString(
-              dependency.task ?? dependency.licenseTask,
+              dependency.task ?? dependency.licenseTask ?? "",
             );
             addTaskDependency(matches[index], addedPhrase);
           }

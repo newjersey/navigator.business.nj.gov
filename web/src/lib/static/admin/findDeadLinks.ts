@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { AddOn, TaskModification } from "@/lib/roadmap/roadmapBuilder";
-import { IndustryRoadmap } from "@businessnjgovnavigator/shared/types";
+import { loadTaskDependenciesFile } from "@businessnjgovnavigator/shared/static";
+import { IndustryRoadmap, TaskDependencies } from "@businessnjgovnavigator/shared/types";
 import { HtmlUrlChecker } from "broken-link-checker";
 import fs from "fs";
 import matter from "gray-matter";

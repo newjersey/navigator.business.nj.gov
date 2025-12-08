@@ -1,6 +1,6 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { Industry } from "@businessnjgovnavigator/shared/industry";
+import { Industry } from "../../industry";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchIndustries = (industries: Industry[], term: string): Match[] => {
   const matches: Match[] = [];

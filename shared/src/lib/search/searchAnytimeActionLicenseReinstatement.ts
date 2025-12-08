@@ -1,6 +1,6 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
+import { AnytimeActionLicenseReinstatement } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "../search/helpers";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchAnytimeActionLicenseReinstatements = (
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[],
@@ -8,12 +8,32 @@ export const searchAnytimeActionLicenseReinstatements = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  for (const anytimeActionLicenseReinstatement of anytimeActionLicenseReinstatements) {
+  const AnytimeActionDatas: FileData[] = getAnytimeActionLicenseReinstatementsData(
+    anytimeActionLicenseReinstatements,
+  );
+
+  for (const AnytimeActionData of AnytimeActionDatas) {
     let match: Match = {
-      filename: anytimeActionLicenseReinstatement.filename,
+      filename: AnytimeActionData.fileName,
       snippets: [],
     };
 
+    match = findMatchInLabelledText(AnytimeActionData.labelledTexts, term, match);
+    match = findMatchInBlock(AnytimeActionData.blockTexts, term, match);
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getAnytimeActionLicenseReinstatementsData = (
+  anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[],
+): FileData[] => {
+  const AnytimeActionLicenseReinstatementsData: FileData[] = [];
+
+  for (const anytimeActionLicenseReinstatement of anytimeActionLicenseReinstatements) {
     const content = anytimeActionLicenseReinstatement.contentMd.toLowerCase();
     const summary = anytimeActionLicenseReinstatement.summaryDescriptionMd?.toLowerCase();
     const name = anytimeActionLicenseReinstatement.name.toLowerCase();
@@ -33,13 +53,12 @@ export const searchAnytimeActionLicenseReinstatements = (
       { content: issuingAgency, label: "Issuing Agency" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    AnytimeActionLicenseReinstatementsData.push({
+      fileName: anytimeActionLicenseReinstatement.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [],
+    });
   }
-
-  return matches;
+  return AnytimeActionLicenseReinstatementsData;
 };

@@ -1,11 +1,7 @@
-import {
-  findMatchInBlock,
-  findMatchInLabelledText,
-  findMatchInListText,
-} from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
-import { Funding } from "@businessnjgovnavigator/shared/types";
+import { LookupFundingAgencyById } from "../../fundingAgency";
+import { Funding } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchFundings = (fundings: Funding[], term: string): Match[] => {
   const matches: Match[] = [];

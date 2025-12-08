@@ -1,11 +1,7 @@
-import {
-  findMatchInBlock,
-  findMatchInLabelledText,
-  findMatchInListText,
-} from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
-import { Certification } from "@businessnjgovnavigator/shared/types";
+import { LookupFundingAgencyById } from "../../fundingAgency";
+import { Certification } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
   const matches: Match[] = [];
@@ -42,6 +38,14 @@ export const searchCertifications = (certifications: Certification[], term: stri
       { content: agencyIDs, label: "Agency ID" },
       { content: agencyNames, label: "Agency Names" },
     ];
+
+    // if (term) {
+    //   matchTerm();
+    // } else if (isRegex) {
+    //   matchRegex();
+    // }
+
+    // Solution here is to pass the information back up for the purposes of having the matching and post processing happen in the caller.
 
     match = findMatchInBlock(blockTexts, term, match);
     match = findMatchInLabelledText(labelledTexts, term, match);

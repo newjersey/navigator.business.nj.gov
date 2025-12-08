@@ -1,6 +1,6 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
+import { XrayRenewalCalendarEventType } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchXrayRenewalCalendarEvent = (
   renewalCalendarEvent: XrayRenewalCalendarEventType,
@@ -19,6 +19,7 @@ export const searchXrayRenewalCalendarEvent = (
   const urlSlug = renewalCalendarEvent.urlSlug.toLowerCase();
   const eventDisplayName = renewalCalendarEvent.eventDisplayName.toLowerCase();
   const name = renewalCalendarEvent.name.toLowerCase();
+  const summaryDescriptionMd = renewalCalendarEvent.summaryDescriptionMd?.toLowerCase();
 
   const blockTexts = [content];
 
@@ -29,6 +30,7 @@ export const searchXrayRenewalCalendarEvent = (
     { content: urlSlug, label: "Url Slug" },
     { content: eventDisplayName, label: "Event Display Name" },
     { content: name, label: "Name" },
+    { content: summaryDescriptionMd, label: "Summary Description MD" },
   ];
 
   match = findMatchInBlock(blockTexts, term, match);

@@ -1,6 +1,6 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
+import { SidebarCardContent } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { Match } from "./typesForSearch";
 
 export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: string): Match[] => {
   const matches: Match[] = [];
