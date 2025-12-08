@@ -1,6 +1,6 @@
 import { Step } from "../../types";
 import { findMatchInLabelledText } from "./helpers";
-import { Match } from "./typesForSearch";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchSteps = (
   steps: Step[],
@@ -9,13 +9,30 @@ export const searchSteps = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  for (const step of steps) {
+  const stepData = getStepData(steps);
+
+  for (const stepDataItem of stepData) {
     let match: Match = {
       filename: parameters.filename,
       snippets: [],
       displayTitle: parameters.displayTitle,
     };
 
+    match = findMatchInLabelledText(stepDataItem.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      match.displayTitle = `${match.displayTitle} (Step ${stepDataItem.stepNumber})`;
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getStepData = (steps: Step[]): Array<FileData & { stepNumber: number }> => {
+  const stepData: Array<FileData & { stepNumber: number }> = [];
+
+  for (const step of steps) {
     const name = step.name.toLowerCase();
     const description = step.description.toLowerCase();
 
@@ -24,13 +41,14 @@ export const searchSteps = (
       { content: name, label: "Name" },
     ];
 
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      match.displayTitle = `${match.displayTitle} (Step ${step.stepNumber})`;
-      matches.push(match);
-    }
+    stepData.push({
+      fileName: step.stepNumber.toString(),
+      labelledTexts,
+      blockTexts: [], // No blockTexts needed for steps
+      listTexts: [], // No listTexts needed for steps
+      stepNumber: step.stepNumber,
+    });
   }
 
-  return matches;
+  return stepData;
 };

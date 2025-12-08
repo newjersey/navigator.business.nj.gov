@@ -1,6 +1,6 @@
 import { NonEssentialQuestion } from "../../types";
 import { findMatchInLabelledText } from "./helpers";
-import { Match } from "./typesForSearch";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchNonEssentialQuestions = (
   nonEssentialQuestions: NonEssentialQuestion[],
@@ -8,12 +8,31 @@ export const searchNonEssentialQuestions = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  for (const nonEssentialQuestion of nonEssentialQuestions) {
+  const questionData = getNonEssentialQuestionData(nonEssentialQuestions);
+
+  for (const questionDataItem of questionData) {
     let match: Match = {
       filename: "nonEssentialQuestionsArray",
       snippets: [],
     };
 
+    match = findMatchInLabelledText(questionDataItem.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      match.displayTitle = `Non Essential Questions (question ${questionDataItem.fileName})`;
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getNonEssentialQuestionData = (
+  nonEssentialQuestions: NonEssentialQuestion[],
+): FileData[] => {
+  const questionData: FileData[] = [];
+
+  for (const nonEssentialQuestion of nonEssentialQuestions) {
     const id = nonEssentialQuestion.id.toLowerCase();
     const questionText = nonEssentialQuestion.questionText.toLowerCase();
     const addOnWhenYes = nonEssentialQuestion.addOnWhenYes?.toLowerCase();
@@ -26,13 +45,13 @@ export const searchNonEssentialQuestions = (
       { content: addOnWhenNo, label: "No Add On" },
     ];
 
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      match.displayTitle = `Non Essential Questions (question ${nonEssentialQuestion.id})`;
-      matches.push(match);
-    }
+    questionData.push({
+      fileName: nonEssentialQuestion.id,
+      labelledTexts,
+      blockTexts: [], // No blockTexts needed for non-essential questions
+      listTexts: [], // No listTexts needed for non-essential questions
+    });
   }
 
-  return matches;
+  return questionData;
 };

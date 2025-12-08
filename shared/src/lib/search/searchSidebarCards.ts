@@ -1,16 +1,33 @@
 import { SidebarCardContent } from "../../types";
 import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
-import { Match } from "./typesForSearch";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: string): Match[] => {
   const matches: Match[] = [];
 
-  for (const card of sidebarCards) {
+  const sidebarCardData = getSidebarCardData(sidebarCards);
+
+  for (const cardData of sidebarCardData) {
     let match: Match = {
-      filename: card.id,
+      filename: cardData.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(cardData.blockTexts, term, match);
+    match = findMatchInLabelledText(cardData.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getSidebarCardData = (sidebarCards: SidebarCardContent[]): FileData[] => {
+  const sidebarCardData: FileData[] = [];
+
+  for (const card of sidebarCards) {
     const content = card.contentMd.toLowerCase();
     const id = card.id.toLowerCase();
     const header = card.header?.toLowerCase();
@@ -28,13 +45,13 @@ export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: str
       { content: ctaText, label: "CTA Text" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    sidebarCardData.push({
+      fileName: card.id,
+      labelledTexts,
+      blockTexts,
+      listTexts: [], // No listTexts needed for sidebar cards
+    });
   }
 
-  return matches;
+  return sidebarCardData;
 };

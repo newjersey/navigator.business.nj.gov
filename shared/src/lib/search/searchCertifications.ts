@@ -1,17 +1,35 @@
 import { LookupFundingAgencyById } from "../../fundingAgency";
 import { Certification } from "../../types";
 import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "./helpers";
-import { Match } from "./typesForSearch";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
   const matches: Match[] = [];
 
-  for (const cert of certifications) {
+  const certificationData = getCertificationData(certifications);
+
+  for (const certData of certificationData) {
     let match: Match = {
-      filename: cert.filename,
+      filename: certData.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(certData.blockTexts, term, match);
+    match = findMatchInLabelledText(certData.labelledTexts, term, match);
+    match = findMatchInListText(certData.listTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getCertificationData = (certifications: Certification[]): FileData[] => {
+  const certificationData: FileData[] = [];
+
+  for (const cert of certifications) {
     const content = cert.contentMd.toLowerCase();
     const name = cert.name.toLowerCase();
     const sidebarCardBodyText = cert.sidebarCardBodyText.toLowerCase();
@@ -39,22 +57,13 @@ export const searchCertifications = (certifications: Certification[], term: stri
       { content: agencyNames, label: "Agency Names" },
     ];
 
-    // if (term) {
-    //   matchTerm();
-    // } else if (isRegex) {
-    //   matchRegex();
-    // }
-
-    // Solution here is to pass the information back up for the purposes of having the matching and post processing happen in the caller.
-
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-    match = findMatchInListText(listTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    certificationData.push({
+      fileName: cert.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts,
+    });
   }
 
-  return matches;
+  return certificationData;
 };

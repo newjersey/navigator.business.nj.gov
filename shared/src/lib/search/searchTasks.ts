@@ -1,14 +1,13 @@
-import { Match } from "./typesForSearch";
-
+import { Industry } from "../../industry";
 import {
   AddAddOnUsage,
   AddIndustryUsage,
   AddTaskDependencyUsage,
-} from "src/lib/search/usageHelpers";
-import { Industry } from "../../industry";
+} from "../../lib/search/usageHelpers";
 import { LookupTaskAgencyById } from "../../taskAgency";
 import { IndustryRoadmap, Task } from "../../types";
 import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchTasks = (
   tasks: Task[],
@@ -18,12 +17,34 @@ export const searchTasks = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  for (const task of tasks) {
+  const taskData = getTaskData(tasks);
+
+  for (const taskDataItem of taskData) {
     let match: Match = {
-      filename: task.filename,
+      filename: taskDataItem.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(taskDataItem.blockTexts, term, match);
+    match = findMatchInLabelledText(taskDataItem.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  // for DEBUGGING, uncomment before the end
+  AddAddOnUsage(matches, addOns);
+  AddIndustryUsage(matches, industries);
+  AddTaskDependencyUsage(matches);
+
+  return matches;
+};
+
+export const getTaskData = (tasks: Task[]): FileData[] => {
+  const taskData: FileData[] = [];
+
+  for (const task of tasks) {
     const content = task.contentMd?.toLowerCase();
     const name = task.name?.toLowerCase();
     const cta = task.callToActionText?.toLowerCase();
@@ -47,18 +68,13 @@ export const searchTasks = (
       { content: urlSlug, label: "Url Slug" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    taskData.push({
+      fileName: task.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [], // No listTexts needed for tasks
+    });
   }
 
-  // for DEBUGGING, uncomment before the end
-  AddAddOnUsage(matches, addOns);
-  AddIndustryUsage(matches, industries);
-  AddTaskDependencyUsage(matches);
-
-  return matches;
+  return taskData;
 };

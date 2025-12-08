@@ -1,6 +1,6 @@
 import { ContextualInfoFile } from "../../types";
 import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
-import { Match } from "./typesForSearch";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchContextualInfo = (
   contextualInfo: ContextualInfoFile[],
@@ -8,12 +8,29 @@ export const searchContextualInfo = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  for (const info of contextualInfo) {
+  const contextualInfoData = getContextualInfoData(contextualInfo);
+
+  for (const infoData of contextualInfoData) {
     let match: Match = {
-      filename: info.filename,
+      filename: infoData.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(infoData.blockTexts, term, match);
+    match = findMatchInLabelledText(infoData.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getContextualInfoData = (contextualInfo: ContextualInfoFile[]): FileData[] => {
+  const contextualInfoData: FileData[] = [];
+
+  for (const info of contextualInfo) {
     const content = info.markdown.toLowerCase();
     const filename = info.filename.toLowerCase();
     const header = info.header.toLowerCase();
@@ -25,13 +42,13 @@ export const searchContextualInfo = (
       { content: header, label: "Header" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    contextualInfoData.push({
+      fileName: info.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [],
+    });
   }
 
-  return matches;
+  return contextualInfoData;
 };
