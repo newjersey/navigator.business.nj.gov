@@ -10,7 +10,8 @@ import {
 } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import * as mockRouter from "@/test/mock/mockRouter";
+import { mockRouterEvents, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -40,11 +41,14 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { useRouter } from "next/compat/router";
 
+import { DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   chooseTab,
   clickSave,
+  fillText,
   generateBusinessForProfile,
+  getBusinessProfileInputFieldName,
   getForeignNexusProfileFields,
   renderPage,
   selectByText,
@@ -53,7 +57,7 @@ import {
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
+import { act } from "react-dom/test-utils";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
@@ -115,7 +119,8 @@ const nonOwningPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 describe("profile - shared", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    mockRouterEvents.reset();
+    useMockRouter({ isReady: true });
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
@@ -346,6 +351,110 @@ describe("profile - shared", () => {
     expect(
       mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time,
     ).not.toHaveBeenCalled();
+  });
+
+  describe("escape modal unsaved changes guard", () => {
+    const makeBusiness = (): Business => {
+      return generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+        }),
+      });
+    };
+
+    it("shows escape modal when navigation is intercepted by unsaved changes guard", async () => {
+      const business = makeBusiness();
+      renderPage({ business });
+      const inputFieldName = getBusinessProfileInputFieldName(business);
+      fillText(inputFieldName, "Some New Business Name");
+
+      await act(async () => {
+        try {
+          mockRouterEvents.emit("routeChangeStart", "/dashboard");
+        } catch {
+          // expected
+        }
+      });
+
+      expect(
+        await screen.findByText(Config.profileDefaults.default.escapeModalReturn),
+      ).toBeInTheDocument();
+    });
+
+    it("saves and redirects to the pending url after unsaved changes interception", async () => {
+      const business = makeBusiness();
+      renderPage({ business });
+      const inputFieldName = getBusinessProfileInputFieldName(business);
+      fillText(inputFieldName, "Some New Business Name");
+
+      await act(async () => {
+        try {
+          mockRouterEvents.emit("routeChangeStart", "/dashboard");
+        } catch {
+          // expected
+        }
+      });
+
+      fireEvent.click(
+        await screen.findByRole("button", {
+          name: Config.profileDefaults.default.escapeModalSaveChanges,
+        }),
+      );
+      await waitFor(() => {
+        expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard");
+      });
+    });
+
+    it("leaves without saving when secondary modal button is clicked", async () => {
+      const business = makeBusiness();
+      renderPage({ business });
+      const inputFieldName = getBusinessProfileInputFieldName(business);
+      fillText(inputFieldName, "Another Business Name");
+
+      await act(async () => {
+        try {
+          mockRouterEvents.emit("routeChangeStart", "/dashboard");
+        } catch {
+          // expected
+        }
+      });
+
+      fireEvent.click(
+        await screen.findByRole("button", {
+          name: Config.profileDefaults.default.escapeModalReturn,
+        }),
+      );
+      await waitFor(() => {
+        expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard");
+      });
+    });
+
+    it("keeps editing when tertiary modal button is clicked", async () => {
+      const business = makeBusiness();
+      renderPage({ business });
+      const inputFieldName = getBusinessProfileInputFieldName(business);
+      fillText(inputFieldName, "Yet Another Business Name");
+
+      await act(async () => {
+        try {
+          mockRouterEvents.emit("routeChangeStart", "/dashboard");
+        } catch {
+          // expected
+        }
+      });
+
+      fireEvent.click(
+        await screen.findByRole("button", {
+          name: Config.profileDefaults.default.escapeModalEscape,
+        }),
+      );
+      await waitFor(() =>
+        expect(
+          screen.queryByText(Config.profileDefaults.default.escapeModalReturn),
+        ).not.toBeInTheDocument(),
+      );
+      expect(mockRouter.mockPush).not.toHaveBeenCalledWith("/dashboard");
+    });
   });
 
   describe("Numbers Section", () => {

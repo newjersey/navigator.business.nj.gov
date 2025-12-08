@@ -11,6 +11,7 @@ interface Props {
   children: ReactNode;
   unpaddedChildren?: ReactNode;
   maxWidth?: boolean;
+  hasDividers?: boolean;
 }
 
 export const ModalZeroButton = (props: Props): ReactElement => {
@@ -47,7 +48,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
           </IconButton>
         )}
       </div>
-      <DialogContent sx={{ padding: 0 }} dividers>
+      <DialogContent sx={{ padding: 0 }} dividers={props.hasDividers ?? true}>
         <div className="padding-x-4 margin-bottom-4 margin-top-2" data-testid="modal-body">
           {props.children}
         </div>

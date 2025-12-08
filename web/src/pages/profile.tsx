@@ -59,6 +59,7 @@ import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useUnsavedChangesGuard } from "@/lib/data-hooks/useUnsavedChangesGuard";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
@@ -110,8 +111,11 @@ const ProfilePage = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const [escapeModal, setEscapeModal] = useState<boolean>(false);
+  const [escapeModalOpen, setEscapeModalOpen] = useState<boolean>(false);
+  const [pendingNavigationUrl, setPendingNavigationUrl] = useState<string | null>(null);
+  const [postSaveRedirectUrl, setPostSaveRedirectUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSavingFromModal, setIsSavingFromModal] = useState<boolean>(false);
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] =
     useState<boolean>(false);
@@ -155,6 +159,22 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const permitsRef = useRef<HTMLDivElement>(null);
 
+  const hasUnsavedChanges = useMemo(
+    () => business !== undefined && !deepEqual(profileData, business.profileData),
+    [profileData, business],
+  );
+
+  const {
+    isBlocked,
+    pendingUrl,
+    allowNavigation,
+    reset: resetNavigationGuard,
+  } = useUnsavedChangesGuard({
+    hasUnsavedChanges,
+  });
+
+  const showEscapeModal = escapeModalOpen || isBlocked;
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const redirect = (
     params?: { [key: string]: any },
@@ -179,11 +199,32 @@ const ProfilePage = (props: Props): ReactElement => {
     if (isStartingBusiness(business)) {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
-    if (deepEqual(profileData, business.profileData)) {
-      router && (await redirect(undefined, router.replace));
+    if (hasUnsavedChanges) {
+      setPendingNavigationUrl(`${ROUTES.dashboard}`);
+      setEscapeModalOpen(true);
     } else {
-      setEscapeModal(true);
+      router && (await redirect(undefined, router.replace));
     }
+  };
+
+  const closeEscapeModal = (): void => {
+    setEscapeModalOpen(false);
+    setPendingNavigationUrl(null);
+    resetNavigationGuard();
+  };
+
+  const handleLeaveWithoutSaving = (): void => {
+    const targetUrl = pendingNavigationUrl || pendingUrl || ROUTES.dashboard;
+    closeEscapeModal();
+    allowNavigation();
+    router?.push(targetUrl);
+  };
+
+  const handleSaveAndLeave = (): void => {
+    setIsSavingFromModal(true);
+    setPostSaveRedirectUrl(pendingNavigationUrl || pendingUrl || ROUTES.dashboard);
+    closeEscapeModal();
+    onSubmit();
   };
 
   const showNeedsAccountModalForGuest = (): (() => void) | undefined => {
@@ -251,8 +292,19 @@ const ProfilePage = (props: Props): ReactElement => {
           .update()
           .then(async () => {
             setIsLoading(false);
+            setIsSavingFromModal(false);
             setAlert("SUCCESS");
-            await redirect({ success: true });
+            if (postSaveRedirectUrl) {
+              allowNavigation();
+              await router?.push(postSaveRedirectUrl);
+              setPostSaveRedirectUrl(null);
+            } else {
+              await redirect({ success: true });
+            }
+          })
+          .catch(() => {
+            setIsLoading(false);
+            setIsSavingFromModal(false);
           });
       })();
     },
@@ -944,11 +996,11 @@ const ProfilePage = (props: Props): ReactElement => {
               <main id="main" data-testid={"main"}>
                 <div className="padding-top-0 padding-x-2 desktop:padding-top-3 desktop:padding-x-0">
                   <ProfileEscapeModal
-                    isOpen={escapeModal}
-                    close={(): void => setEscapeModal(false)}
-                    primaryButtonOnClick={(): void => {
-                      redirect();
-                    }}
+                    isOpen={showEscapeModal}
+                    close={closeEscapeModal}
+                    onSaveChanges={handleSaveAndLeave}
+                    onLeaveWithoutSaving={handleLeaveWithoutSaving}
+                    isLoading={isLoading || isSavingFromModal}
                   />
                   <FormationDateDeletionModal
                     isOpen={isFormationDateDeletionModalOpen}
