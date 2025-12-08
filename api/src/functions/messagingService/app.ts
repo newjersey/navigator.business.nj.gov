@@ -1,3 +1,4 @@
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
@@ -17,6 +18,140 @@ import {
 } from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
 import { v4 as uuidv4 } from "uuid";
+
+export interface SimpleSendRequest {
+  userId: string;
+  action: string;
+  messageType: string;
+}
+
+const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
+  stage: AWS_CRYPTO_CONTEXT_STAGE,
+  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+});
+
+export const handler = async (
+  event: SimpleSendRequest,
+): Promise<{ statusCode: number; messageId: string; body: string }> => {
+  const logger = LogWriter(`HealthCheckService/${STAGE}`, "ApiLogs");
+  const logId = logger.GetId();
+  const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
+  const messageDataClient = DynamoMessagesDataClient(dynamoDb, MESSAGES_TABLE, logger);
+  const userDataClient = DynamoUserDataClient(
+    dynamoDb,
+    AWSTaxIDEncryptionClient,
+    USERS_TABLE,
+    logger,
+  );
+
+  const s3 = new S3Client({});
+  const emailsBucketName = process.env.EMAILS_BUCKET;
+  if (!emailsBucketName) throw new Error("MessagingServiceClient - EMAILS_BUCKET is not set.");
+
+  const writeToS3 = async (props: { filename: string; content: string }): Promise<void> => {
+    await s3
+      .send(
+        new PutObjectCommand({
+          Bucket: emailsBucketName,
+          Key: props.filename,
+          Body: props.content,
+          ContentType: "text/plain",
+        }),
+      )
+      .then(() => {
+        logger.LogInfo(
+          `MessagingServiceClient - Id:${logId} - Successfully wrote ${props.filename} to ${emailsBucketName}.`,
+        );
+      })
+      .catch((error) => {
+        logger.LogInfo(
+          `MessagingServiceClient - Id:${logId} - Failed to write ${props.filename} to ${emailsBucketName}. Received error: ${error}`,
+        );
+      });
+  };
+
+  const userData = await userDataClient.get(event.userId);
+  const userName = userData.user.name || "Business Owner";
+  const businessName =
+    userData.businesses[userData.currentBusinessId].profileData.businessName || "your business";
+  const toEmail = userData.user.email;
+
+  const htmlBody = welcomeHtmlTemplate
+    .replaceAll("{{userName}}", userName)
+    .replaceAll("{{businessName}}", businessName);
+
+  const sesClient = new SESClient({});
+  const input = {
+    Source: "no-reply@business.nj.gov",
+    Destination: {
+      ToAddresses: [toEmail],
+      CcAddresses: [],
+      BccAddresses: [],
+    },
+    Message: {
+      Subject: {
+        Data: "Welcome to Business.NJ.gov",
+        Charset: "utf8",
+      },
+      Body: {
+        Text: {
+          Data: "Welcome to Business.NJ.gov",
+          Charset: "utf8",
+        },
+        Html: {
+          Data: htmlBody,
+          Charset: "utf8",
+        },
+      },
+    },
+    ReplyToAddresses: ["help@business.nj.gov"],
+    ReturnPath: "help@business.nj.gov",
+    Tags: [
+      {
+        Name: "type",
+        Value: "welcome-email",
+      },
+    ],
+  };
+
+  logger.LogInfo(`Sending email to ${toEmail}`);
+  const command = new SendEmailCommand(input);
+  const messageTaskId = uuidv4();
+  const currentDate = new Date().toISOString();
+  const message = {
+    taskId: messageTaskId,
+    userId: event.userId,
+    channel: "email" as MessageChannel,
+    templateId: "welcome@v1" as MessageTemplateId,
+    topic: "welcome" as MessageTopic,
+    templateData: {
+      name: userName || "",
+      business: businessName,
+    },
+    dueAt: currentDate,
+    deliveredAt: currentDate,
+    dateCreated: currentDate,
+  };
+  try {
+    const sendEmailOutput = await sesClient.send(command);
+    logger.LogInfo(`Successfully sent email to ${toEmail}, ${JSON.stringify(sendEmailOutput)}`);
+    await messageDataClient.put(message);
+    logger.LogInfo(`Successfully logged message ${messageTaskId}`);
+    writeToS3({
+      filename: `${message.deliveredAt}-${message.taskId}`,
+      content: input.toString(),
+    });
+  } catch (error) {
+    logger.LogError(`Error sending or logging message ${messageTaskId} to ${toEmail}: ${error}`);
+  }
+
+  return {
+    statusCode: 200,
+    messageId: messageTaskId,
+    body: JSON.stringify(message),
+  };
+};
 
 const welcomeHtmlTemplate = `<!doctype html>
 <html lang="en">
@@ -87,105 +222,3 @@ const welcomeHtmlTemplate = `<!doctype html>
     </div>
   </body>
 </html>`;
-
-export interface SimpleSendRequest {
-  userId: string;
-  action: string;
-  messageType: string;
-}
-
-const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-  stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-});
-
-export const handler = async (
-  event: SimpleSendRequest,
-): Promise<{ statusCode: number; messageId: string; body: string }> => {
-  const logger = LogWriter(`HealthCheckService/${STAGE}`, "ApiLogs");
-  const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
-  const messageDataClient = DynamoMessagesDataClient(dynamoDb, MESSAGES_TABLE, logger);
-  const userDataClient = DynamoUserDataClient(
-    dynamoDb,
-    AWSTaxIDEncryptionClient,
-    USERS_TABLE,
-    logger,
-  );
-
-  const userData = await userDataClient.get(event.userId);
-  const userName = userData.user.name || "Business Owner";
-  const businessName =
-    userData.businesses[userData.currentBusinessId].profileData.businessName || "your business";
-  const toEmail = userData.user.email;
-
-  const htmlBody = welcomeHtmlTemplate
-    .replaceAll("{{userName}}", userName)
-    .replaceAll("{{businessName}}", businessName);
-
-  const sesClient = new SESClient({});
-  const input = {
-    Source: "no-reply@business.nj.gov",
-    Destination: {
-      ToAddresses: [toEmail],
-      CcAddresses: [],
-      BccAddresses: [],
-    },
-    Message: {
-      Subject: {
-        Data: "Welcome to Business.NJ.gov",
-        Charset: "utf8",
-      },
-      Body: {
-        Text: {
-          Data: "Welcome to Business.NJ.gov",
-          Charset: "utf8",
-        },
-        Html: {
-          Data: htmlBody,
-          Charset: "utf8",
-        },
-      },
-    },
-    ReplyToAddresses: ["help@business.nj.gov"],
-    ReturnPath: "help@business.nj.gov",
-    Tags: [
-      {
-        Name: "type",
-        Value: "welcome-email",
-      },
-    ],
-  };
-
-  logger.LogInfo(`Sending email to ${toEmail}`);
-  const command = new SendEmailCommand(input);
-  const messageTaskId = uuidv4();
-  const message = {
-    taskId: messageTaskId,
-    userId: event.userId,
-    channel: "email" as MessageChannel,
-    templateId: "welcome@v1" as MessageTemplateId,
-    topic: "welcome" as MessageTopic,
-    templateData: {
-      name: userName || "",
-      business: businessName,
-    },
-    dueAt: new Date().toISOString(),
-    deliveredAt: new Date().toISOString(),
-    dateCreated: new Date().toISOString(),
-  };
-  try {
-    const sendEmailOutput = await sesClient.send(command);
-    logger.LogInfo(`Successfully sent email to ${toEmail}, ${JSON.stringify(sendEmailOutput)}`);
-    await messageDataClient.put(message);
-    logger.LogInfo(`Successfully logged message ${messageTaskId}`);
-  } catch (error) {
-    logger.LogError(`Error sending or logging message ${messageTaskId} to ${toEmail}: ${error}`);
-  }
-
-  return {
-    statusCode: 200,
-    messageId: messageTaskId,
-    body: JSON.stringify(message),
-  };
-};
