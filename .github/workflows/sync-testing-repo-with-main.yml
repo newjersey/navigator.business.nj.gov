@@ -1,0 +1,16 @@
+name: Schedule Testing Repo With Main branch
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  test-schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print schedule confirmation
+        run: |
+          echo "Scheduled workflow triggered at: $(date -u)"
+          echo "Running from branch: $GITHUB_REF"
+          echo "Triggered by on by sync with main workflow"
