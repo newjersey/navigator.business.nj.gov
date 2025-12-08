@@ -61,7 +61,6 @@ describe("<NavBarMobile />", () => {
     useMockUserData({});
     setLargeScreen(false);
     useMockBusiness(generateBusinessNamedBusiness());
-    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   describe("landing configuration", () => {
@@ -201,7 +200,9 @@ describe("<NavBarMobile />", () => {
           userData={userData}
         />,
       );
-      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.backToProfileLinkText),
+      ).not.toBeInTheDocument();
       expect(
         screen.queryByText(Config.navigationDefaults.addBusinessButton),
       ).not.toBeInTheDocument();
@@ -210,7 +211,7 @@ describe("<NavBarMobile />", () => {
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
@@ -251,7 +252,9 @@ describe("<NavBarMobile />", () => {
           userData={userData}
         />,
       );
-      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.backToProfileLinkText),
+      ).not.toBeInTheDocument();
       expect(
         screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText),
       ).not.toBeInTheDocument();
@@ -259,7 +262,7 @@ describe("<NavBarMobile />", () => {
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
       expect(
         screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText),
       ).toBeInTheDocument();
