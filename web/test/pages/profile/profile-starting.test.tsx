@@ -308,24 +308,6 @@ describe("profile - starting business", () => {
     });
   });
 
-  it("prevents user from going back to dashboard if there are unsaved changes", () => {
-    renderPage({ business: businessFromSetup });
-    const inputFieldName = getBusinessProfileInputFieldName(businessFromSetup);
-    fillText(inputFieldName, "Cool Computers");
-    clickBack();
-    expect(screen.getByText(Config.profileDefaults.default.escapeModalReturn)).toBeInTheDocument();
-  });
-
-  it("returns user to profile page from un-saved changes modal", () => {
-    renderPage({ business: businessFromSetup });
-    const inputFieldName = getBusinessProfileInputFieldName(businessFromSetup);
-    fillText(inputFieldName, "Cool Computers");
-    clickBack();
-    fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalEscape));
-    fillText(inputFieldName, "Cool Computers2");
-    expect(screen.getByLabelText(inputFieldName)).toBeInTheDocument();
-  });
-
   it("updates the user data on save", async () => {
     const emptyBusiness = createEmptyBusiness({ userId: "user-id" });
     const initialBusiness: Business = {

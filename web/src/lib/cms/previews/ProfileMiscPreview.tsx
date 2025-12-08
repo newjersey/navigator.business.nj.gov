@@ -33,7 +33,8 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
         <ProfileEscapeModal
           isOpen={modalOpen}
           close={(): void => setModalOpen(false)}
-          primaryButtonOnClick={(): void => setModalOpen(false)}
+          onSaveChanges={(): void => setModalOpen(false)}
+          onLeaveWithoutSaving={(): void => setModalOpen(false)}
         />
         <hr className="margin-y-4" />
 
