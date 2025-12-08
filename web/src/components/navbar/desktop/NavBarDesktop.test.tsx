@@ -38,7 +38,6 @@ describe("<NavBarDesktop />", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
-    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   const quickLinksExist = (): void => {
@@ -143,7 +142,9 @@ describe("<NavBarDesktop />", () => {
         />,
       );
 
-      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.backToProfileLinkText),
+      ).not.toBeInTheDocument();
       expect(screen.queryByTestId("business-title-0")).not.toBeInTheDocument();
       expect(
         screen.queryByText(Config.navigationDefaults.addBusinessButton),
@@ -151,7 +152,7 @@ describe("<NavBarDesktop />", () => {
       expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-bar-desktop-dropdown-button"));
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
       expect(screen.getByTestId("business-title-0")).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
@@ -180,7 +181,9 @@ describe("<NavBarDesktop />", () => {
         />,
       );
 
-      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.backToProfileLinkText),
+      ).not.toBeInTheDocument();
       expect(
         screen.getByText(Config.navigationDefaults.navBarGuestBusinessText),
       ).toBeInTheDocument();
@@ -188,7 +191,7 @@ describe("<NavBarDesktop />", () => {
         screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText),
       ).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-bar-desktop-dropdown-button"));
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
       expect(screen.getAllByText(Config.navigationDefaults.navBarGuestBusinessText)).toHaveLength(
         2,
       );
