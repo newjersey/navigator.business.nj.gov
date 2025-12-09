@@ -42,7 +42,7 @@ export const getStepData = (steps: Step[]): Array<FileData & { stepNumber: numbe
     ];
 
     stepData.push({
-      fileName: step.stepNumber.toString(),
+      fileName: `step file, ${name}: ${step.stepNumber.toString()}`,
       labelledTexts,
       blockTexts: [], // No blockTexts needed for steps
       listTexts: [], // No listTexts needed for steps

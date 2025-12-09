@@ -8,7 +8,7 @@ export const searchAnytimeActionTasks = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  const AnytimeActionDatas: FileData[] = getAnytimeActionTasks(anytimeActionTasks);
+  const AnytimeActionDatas: FileData[] = getAnytimeActionTasksData(anytimeActionTasks);
 
   for (const anytimeActionData of AnytimeActionDatas) {
     let match: Match = {
@@ -27,7 +27,7 @@ export const searchAnytimeActionTasks = (
   return matches;
 };
 
-export const getAnytimeActionTasks = (anytimeActionTasks: AnytimeActionTask[]): FileData[] => {
+export const getAnytimeActionTasksData = (anytimeActionTasks: AnytimeActionTask[]): FileData[] => {
   const AnytimeActionTasksData: FileData[] = [];
 
   for (const anytimeAction of anytimeActionTasks) {

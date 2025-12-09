@@ -8,18 +8,20 @@ export const searchXrayRenewalCalendarEvent = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  const eventData = getXrayRenewalCalendarEventData(renewalCalendarEvent);
+  const eventDatas = getXrayRenewalCalendarEventData(renewalCalendarEvent);
 
-  let match: Match = {
-    filename: eventData.fileName,
-    snippets: [],
-  };
+  for (const eventData of eventDatas) {
+    let match: Match = {
+      filename: eventData.fileName,
+      snippets: [],
+    };
 
-  match = findMatchInBlock(eventData.blockTexts, term, match);
-  match = findMatchInLabelledText(eventData.labelledTexts, term, match);
+    match = findMatchInBlock(eventData.blockTexts, term, match);
+    match = findMatchInLabelledText(eventData.labelledTexts, term, match);
 
-  if (match.snippets.length > 0) {
-    matches.push(match);
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
   }
 
   return matches;
@@ -27,7 +29,7 @@ export const searchXrayRenewalCalendarEvent = (
 
 export const getXrayRenewalCalendarEventData = (
   renewalCalendarEvent: XrayRenewalCalendarEventType,
-): FileData => {
+): FileData[] => {
   const content = renewalCalendarEvent.contentMd.toLowerCase();
   const filename = renewalCalendarEvent.filename.toLowerCase();
   const callToActionLink = renewalCalendarEvent.callToActionLink?.toLowerCase();
@@ -49,10 +51,12 @@ export const getXrayRenewalCalendarEventData = (
     { content: summaryDescriptionMd, label: "Summary Description MD" },
   ];
 
-  return {
-    fileName: renewalCalendarEvent.filename,
-    labelledTexts,
-    blockTexts,
-    listTexts: [], // No listTexts needed for this event type
-  };
+  return [
+    {
+      fileName: renewalCalendarEvent.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [], // No listTexts needed for this event type
+    },
+  ];
 };
