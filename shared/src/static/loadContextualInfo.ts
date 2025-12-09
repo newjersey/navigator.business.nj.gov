@@ -30,6 +30,7 @@ export const loadAllArchivedContextualInfo = (): ContextualInfoFile[] => {
 
 const loadContextualInfo = (directory: string): ContextualInfoFile[] => {
   const fileNames = fs.readdirSync(directory);
+  console.log(fileNames);
   return fileNames.map((fileName) => {
     const fullPath = path.join(directory, `${fileName}`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
