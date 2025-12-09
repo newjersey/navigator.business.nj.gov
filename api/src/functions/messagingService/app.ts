@@ -17,77 +17,14 @@ import {
 } from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
 import { v4 as uuidv4 } from "uuid";
+import { WelcomeEmailB} from "@businessnjgovnavigator/react-email/emails/welcomeEmailB"
+// ^ Getting VSCode error "but '--jsx' is not set", not sure what is happening there.
+// I created a tsconfig.json and set jsx, but that didn't seem to do it.
+// i also edited api/tsconfig.paths.json but that might not have done anything
+import { render, pretty } from '@react-email/render';
 
-const welcomeHtmlTemplate = `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to Business.NJ.gov</title>
-  </head>
-  <body
-    style="
-      font-family:
-        &quot;Public Sans Web&quot;,
-        -apple-system,
-        BlinkMacSystemFont,
-        &quot;Segoe UI&quot;,
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-      line-height: 160%;
-      color: #1b1b1b;
-      background-color: #f8f8f8;
-      margin: 0;
-      padding: 1.5rem;
-    "
-  >
-    <div
-      style="
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #ffffff;
-        padding: 2rem;
-        border-radius: 0.5rem;
-      "
-    >
-      <h1
-        style="
-          color: #4b7600;
-          font-size: 2rem;
-          font-weight: 700;
-          line-height: 120%;
-          margin: 0 0 1rem 0;
-        "
-      >
-        Welcome {{userName}}!
-      </h1>
-      <p style="margin: 0 0 1rem 0">
-        Thank you for registering <strong>{{businessName}}</strong> with Business.NJ.gov Navigator.
-      </p>
-      <p style="margin: 0 0 1rem 0">
-        We're here to help guide you through starting and running your business in New Jersey.
-      </p>
-      <p style="margin: 0">
-        Best regards,<br />
-        <strong>The Business.NJ.gov Team</strong>
-      </p>
-    </div>
-    <div
-      style="
-        max-width: 600px;
-        margin: 1rem auto 0;
-        text-align: center;
-        font-size: 0.875rem;
-        color: #5c5c5c;
-      "
-    >
-      <p style="margin: 0">State of New Jersey | Business.NJ.gov</p>
-    </div>
-  </body>
-</html>`;
 
+const welcomeHtmlTemplate = await pretty(await render(<WelcomeEmailB />));
 export interface SimpleSendRequest {
   userId: string;
   action: string;
