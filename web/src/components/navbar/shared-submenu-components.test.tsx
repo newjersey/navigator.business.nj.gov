@@ -95,7 +95,6 @@ describe("shared-submenu-components", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
-    process.env.FEATURE_SHOW_REMOVE_BUSINESS = "false";
   });
 
   const Config = getMergedConfig();
@@ -172,13 +171,12 @@ describe("shared-submenu-components", () => {
       render(
         <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
       );
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.navigationDefaults.backToProfileLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("renders ProfileMenuItem to return back to profile and navigates correctly onClick", () => {
-      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
       const userData = generateUserData({});
       render(
         <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
@@ -189,7 +187,6 @@ describe("shared-submenu-components", () => {
     });
 
     it("does not render RemoveThisBusinessMenuItem when there is only one business", () => {
-      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
       const userData = generateUserData({});
       render(
         <ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />,
@@ -200,7 +197,6 @@ describe("shared-submenu-components", () => {
     });
 
     it("renders RemoveThisBusinessMenuItem when there is more then one business", () => {
-      process.env.FEATURE_SHOW_REMOVE_BUSINESS = "true";
       const userData = generateUserData({
         currentBusinessId: "biz-1",
         businesses: {
@@ -263,7 +259,7 @@ describe("shared-submenu-components", () => {
         <ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />,
       );
 
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
     });
   });
 
