@@ -49,3 +49,8 @@ export interface FileData {
   blockTexts: string[];
   listTexts: LabelledContentList[];
 }
+
+export interface MatchComparitor {
+  regex?: RegExp;
+  term?: string;
+}

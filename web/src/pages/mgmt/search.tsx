@@ -179,7 +179,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     const lowercaseTerm = searchState.term.toLowerCase();
 
     try {
-      setGroupedConfigMatches(searchConfig(Config, lowercaseTerm, props.cmsConfig));
+      setGroupedConfigMatches(searchConfig(Config, { term: lowercaseTerm }, props.cmsConfig));
     } catch (error) {
       updateSearchState({ error: { message: error as string, term: searchState.term } });
       console.error(error);

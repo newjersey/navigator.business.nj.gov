@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { makeSnippet } from "./helpers";
-import { ConfigMatch, GroupedConfigMatch } from "./typesForSearch";
+import { ConfigMatch, GroupedConfigMatch, MatchComparitor } from "./typesForSearch";
 
 const collectionInfo = new Map<string, string[]>();
 export const searchConfig = (
   object: any,
-  term: string | RegExp,
+  matchComparitor: MatchComparitor,
   cmsConfig: any,
 ): GroupedConfigMatch[] => {
-  const configMatches = searchObject(object.default, term, [], []).map((it) => {
+  const configMatches = searchObject(object.default, matchComparitor, [], []).map((it) => {
     const cmsPath = findCmsConfigPath(cmsConfig, it.keyPath);
     return {
-      value: makeSnippet(it.value, term),
+      value: makeSnippet(it.value, matchComparitor),
       cmsLabelPath: cmsPath,
     };
   });
@@ -38,7 +38,7 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
 
 const searchObject = (
   object: any,
-  term: string | RegExp,
+  matchComparitor: MatchComparitor,
   matches: JsonMatch[],
   keyPaths: string[],
 ): JsonMatch[] => {
@@ -46,8 +46,8 @@ const searchObject = (
     for (const key of Object.keys(object)) {
       const value = object[key];
       if (typeof value === "string") {
-        if (typeof term === "string") {
-          if (value.toLowerCase().includes(term)) {
+        if (matchComparitor.term) {
+          if (value.toLowerCase().includes(matchComparitor.term)) {
             matches = [
               ...matches,
               {
@@ -56,11 +56,8 @@ const searchObject = (
               },
             ];
           }
-        }
-        // maybe this is what I should have done everywhere?
-        // like the term can be a regex or a string, if string will see if contains, if regex will see if regex matches?
-        else if (term.constructor === RegExp) {
-          const regexMatches = [...value.matchAll(term)];
+        } else if (matchComparitor.regex) {
+          const regexMatches = [...value.matchAll(matchComparitor.regex)];
           const contextualInfoFileNames = regexMatches.map((match) => match[1]);
           if (contextualInfoFileNames.length > 0) {
             for (const conextualInfoFileName of contextualInfoFileNames) {
@@ -75,7 +72,7 @@ const searchObject = (
           }
         }
       } else if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-        matches = searchObject(value, term, matches, [...keyPaths, key]);
+        matches = searchObject(value, matchComparitor, matches, [...keyPaths, key]);
       }
     }
 

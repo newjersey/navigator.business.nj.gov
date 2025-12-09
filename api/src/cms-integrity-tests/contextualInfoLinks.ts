@@ -1,6 +1,7 @@
-import { getIndustries } from "@businessnjgovnavigator/shared";
+import { getIndustries, getMergedConfig } from "@businessnjgovnavigator/shared";
 import { LogWriterType } from "@libs/logWriter";
 import {
+  ConfigMatch,
   FileData,
   getAnytimeActionLicenseReinstatementsData,
   getAnytimeActionTasksData,
@@ -17,6 +18,7 @@ import {
   getWebflowLicenseData,
   getXrayRenewalCalendarEventData,
   Match,
+  searchConfig,
 } from "@shared/lib/search";
 import {
   loadAllAnytimeActionLicenseReinstatements,
@@ -31,6 +33,7 @@ import {
   loadAllMunicipalTasks,
   loadAllTasksOnly,
   loadAllWebflowLicenses,
+  loadCmsConfig,
   loadDomesticStepsJsonPathTestJsonForTest,
   loadForeignStepsJsonPathTestJsonForTest,
   loadFormationDbaContent,
@@ -161,21 +164,25 @@ export const checkContextualInfoLinksUsage = async (
       ...findMatchingContextualInfo(getTaskData(loadAllLicenseTasks())), // file was renamed, make sure that doesn't screw up webflow sync. ask in PR comments
     ];
 
-    // const Config = getMergedConfig();
-
-    // const configMatches: ConfigMatch[] = [];
-
-    // const conextualInfoInstanceMatch = searchConfig(Config, regexGlobal, loadCmsConfig(true)); // this one needs to be done seperately
-    // for (const configMatch of conextualInfoInstanceMatch) {
-    //   for (const innerMatch of configMatch.matches) {
-    //     if (!allContextualInfoFileNames.has(innerMatch.value)) {
-    //       configMatches.push(innerMatch);
-    //     }
-    //   }
-    // }
-
-    // console.log("configMatches:", JSON.stringify(configMatches));
     console.log("matches:", JSON.stringify(matches));
+
+    const Config = getMergedConfig();
+
+    const configMatches: ConfigMatch[] = [];
+
+    const conextualInfoInstanceMatch = searchConfig(
+      Config,
+      { regex: regexGlobal },
+      loadCmsConfig(true),
+    ); // this one needs to be done seperately
+    for (const configMatch of conextualInfoInstanceMatch) {
+      for (const innerMatch of configMatch.matches) {
+        if (!allContextualInfoFileNames.has(innerMatch.value)) {
+          configMatches.push(innerMatch);
+        }
+      }
+    }
+    console.log("configMatches:", JSON.stringify(configMatches));
   } catch (error) {
     logger.LogError(`Error when running CMS integrity tests: ${error}`);
     console.log("error in CMS search", error);
