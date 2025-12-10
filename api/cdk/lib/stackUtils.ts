@@ -10,7 +10,7 @@ import {
 import { ISecurityGroup, ISubnet, IVpc } from "aws-cdk-lib/aws-ec2";
 import { Role } from "aws-cdk-lib/aws-iam";
 import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
-import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+import { NodejsFunction, NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
 import * as logs from "aws-cdk-lib/aws-logs";
 import { Construct, IConstruct } from "constructs";
 import path from "node:path";
@@ -40,6 +40,7 @@ export interface LambdaFunctionProps {
   timeout?: Duration;
   memorySize?: number;
   ephemeralStorageSize?: Size;
+  bundling?: NodejsFunctionProps["bundling"];
 }
 
 export function createLambda(stack: Stack, props: LambdaFunctionProps): NodejsFunction {
@@ -67,6 +68,7 @@ export function createLambda(stack: Stack, props: LambdaFunctionProps): NodejsFu
       externalModules: [],
       minify: true,
       sourceMap: true,
+      ...props.bundling,
     },
     logGroup,
     timeout: props.timeout ?? Duration.seconds(30),

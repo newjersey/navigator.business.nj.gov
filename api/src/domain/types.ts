@@ -45,7 +45,7 @@ import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
 export type MessageChannel = "email" | "sms" | "tts" | "whatsapp";
-export type MessageTemplateId = "welcome@v1";
+export type MessageTemplateId = "welcome_version-B";
 export type MessageTopic = "welcome";
 
 export interface MessageData {
@@ -55,8 +55,7 @@ export interface MessageData {
   templateId: MessageTemplateId;
   topic: MessageTopic;
   templateData: {
-    name: string;
-    business: string;
+    [key: string]: any;
   };
   dueAt: string;
   deliveredAt: string | undefined;

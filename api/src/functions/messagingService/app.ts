@@ -1,9 +1,14 @@
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { SESClient, SendEmailCommand, SendEmailCommandInput } from "@aws-sdk/client-ses";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoMessagesDataClient } from "@db/DynamoMessagesDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { type MessageChannel, type MessageTemplateId, type MessageTopic } from "@domain/types";
+import {
+  MessageData,
+  type MessageChannel,
+  type MessageTemplateId,
+  type MessageTopic,
+} from "@domain/types";
 import {
   AWS_CRYPTO_CONTEXT_ORIGIN,
   AWS_CRYPTO_CONTEXT_STAGE,
@@ -17,76 +22,8 @@ import {
 } from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
 import { v4 as uuidv4 } from "uuid";
-
-const welcomeHtmlTemplate = `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to Business.NJ.gov</title>
-  </head>
-  <body
-    style="
-      font-family:
-        &quot;Public Sans Web&quot;,
-        -apple-system,
-        BlinkMacSystemFont,
-        &quot;Segoe UI&quot;,
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-      line-height: 160%;
-      color: #1b1b1b;
-      background-color: #f8f8f8;
-      margin: 0;
-      padding: 1.5rem;
-    "
-  >
-    <div
-      style="
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #ffffff;
-        padding: 2rem;
-        border-radius: 0.5rem;
-      "
-    >
-      <h1
-        style="
-          color: #4b7600;
-          font-size: 2rem;
-          font-weight: 700;
-          line-height: 120%;
-          margin: 0 0 1rem 0;
-        "
-      >
-        Welcome {{userName}}!
-      </h1>
-      <p style="margin: 0 0 1rem 0">
-        Thank you for registering <strong>{{businessName}}</strong> with Business.NJ.gov Navigator.
-      </p>
-      <p style="margin: 0 0 1rem 0">
-        We're here to help guide you through starting and running your business in New Jersey.
-      </p>
-      <p style="margin: 0">
-        Best regards,<br />
-        <strong>The Business.NJ.gov Team</strong>
-      </p>
-    </div>
-    <div
-      style="
-        max-width: 600px;
-        margin: 1rem auto 0;
-        text-align: center;
-        font-size: 0.875rem;
-        color: #5c5c5c;
-      "
-    >
-      <p style="margin: 0">State of New Jersey | Business.NJ.gov</p>
-    </div>
-  </body>
-</html>`;
+// eslint-disable-next-line no-restricted-imports
+import welcomeHtmlTemplate from "./emails/welcomeEmail.html";
 
 export interface SimpleSendRequest {
   userId: string;
@@ -103,7 +40,9 @@ const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_K
 export const handler = async (
   event: SimpleSendRequest,
 ): Promise<{ statusCode: number; messageId: string; body: string }> => {
-  const logger = LogWriter(`HealthCheckService/${STAGE}`, "ApiLogs");
+  // TODO: Need a new log stream for the messaging service
+  const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
+  const sesClient = new SESClient({});
   const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const messageDataClient = DynamoMessagesDataClient(dynamoDb, MESSAGES_TABLE, logger);
   const userDataClient = DynamoUserDataClient(
@@ -114,78 +53,103 @@ export const handler = async (
   );
 
   const userData = await userDataClient.get(event.userId);
-  const userName = userData.user.name || "Business Owner";
-  const businessName =
-    userData.businesses[userData.currentBusinessId].profileData.businessName || "your business";
+
   const toEmail = userData.user.email;
+  const command = buildWelcomeEmail({ toEmail });
+  const message = buildMessageRecord({
+    userId: userData.user.id,
+    channel: "email",
+    templateId: "welcome_version-B",
+    topic: "welcome",
+    templateData: { name: userData.user.name || "" },
+  });
 
-  const htmlBody = welcomeHtmlTemplate
-    .replaceAll("{{userName}}", userName)
-    .replaceAll("{{businessName}}", businessName);
+  try {
+    logger.LogInfo(`Sending email to ${toEmail}`);
+    const sendEmailOutput = await sesClient.send(command);
+    logger.LogInfo(`Successfully sent email to ${toEmail}, ${JSON.stringify(sendEmailOutput)}`);
+    await messageDataClient.put(message);
+    logger.LogInfo(`Successfully logged message ${message.taskId}`);
+  } catch (error) {
+    logger.LogError(`Error sending or logging message ${message.taskId} to ${toEmail}: ${error}`);
+  }
 
-  const sesClient = new SESClient({});
-  const input = {
+  return {
+    statusCode: 200,
+    messageId: message.taskId,
+    body: JSON.stringify(message),
+  };
+};
+
+const buildWelcomeEmail = (props: { toEmail: string }): SendEmailCommand => {
+  const htmlBody = welcomeHtmlTemplate;
+  return buildSesEmailCommand({
+    toEmail: props.toEmail,
+    emailType: "welcome-email",
+    subject: "Welcome to Business.NJ.gov",
+    htmlBody,
+  });
+};
+
+const buildMessageRecord = (props: {
+  userId: string;
+  channel: MessageChannel;
+  templateId: MessageTemplateId;
+  topic: MessageTopic;
+  templateData: { [key: string]: string | object | [] };
+}): MessageData => {
+  const messageTaskId = uuidv4();
+  const currentDate = new Date().toISOString();
+  return {
+    taskId: messageTaskId,
+    userId: props.userId,
+    channel: props.channel,
+    templateId: props.templateId,
+    topic: props.topic,
+    templateData: props.templateData,
+    dueAt: currentDate,
+    deliveredAt: currentDate,
+    dateCreated: currentDate,
+  };
+};
+
+const buildSesEmailCommand = (props: {
+  toEmail: string;
+  emailType: string;
+  subject: string;
+  fallbackText?: string;
+  htmlBody: string;
+}): SendEmailCommand => {
+  const input: SendEmailCommandInput = {
     Source: "no-reply@business.nj.gov",
     Destination: {
-      ToAddresses: [toEmail],
+      ToAddresses: [props.toEmail],
       CcAddresses: [],
       BccAddresses: [],
     },
     Message: {
       Subject: {
-        Data: "Welcome to Business.NJ.gov",
+        Data: props.subject,
         Charset: "utf8",
       },
       Body: {
         Text: {
-          Data: "Welcome to Business.NJ.gov",
+          Data: props.fallbackText ?? props.subject,
           Charset: "utf8",
         },
         Html: {
-          Data: htmlBody,
+          Data: props.htmlBody,
           Charset: "utf8",
         },
       },
     },
-    ReplyToAddresses: ["help@business.nj.gov"],
-    ReturnPath: "help@business.nj.gov",
+    ReplyToAddresses: ["support@business.nj.gov"],
     Tags: [
       {
         Name: "type",
-        Value: "welcome-email",
+        Value: props.emailType,
       },
     ],
   };
-
-  logger.LogInfo(`Sending email to ${toEmail}`);
-  const command = new SendEmailCommand(input);
-  const messageTaskId = uuidv4();
-  const message = {
-    taskId: messageTaskId,
-    userId: event.userId,
-    channel: "email" as MessageChannel,
-    templateId: "welcome@v1" as MessageTemplateId,
-    topic: "welcome" as MessageTopic,
-    templateData: {
-      name: userName || "",
-      business: businessName,
-    },
-    dueAt: new Date().toISOString(),
-    deliveredAt: new Date().toISOString(),
-    dateCreated: new Date().toISOString(),
-  };
-  try {
-    const sendEmailOutput = await sesClient.send(command);
-    logger.LogInfo(`Successfully sent email to ${toEmail}, ${JSON.stringify(sendEmailOutput)}`);
-    await messageDataClient.put(message);
-    logger.LogInfo(`Successfully logged message ${messageTaskId}`);
-  } catch (error) {
-    logger.LogError(`Error sending or logging message ${messageTaskId} to ${toEmail}: ${error}`);
-  }
-
-  return {
-    statusCode: 200,
-    messageId: messageTaskId,
-    body: JSON.stringify(message),
-  };
+  return new SendEmailCommand(input);
 };
