@@ -20,7 +20,6 @@ export const xrayRegistrationRouterFactory = (
     const requestStart = Date.now();
     const { facilityDetails } = req.body;
     logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${userId}`);
-
     const userData = await databaseClient.get(userId);
     updateXrayRegistrationStatus(userData, facilityDetails)
       .then(async (response: UserData) => {
