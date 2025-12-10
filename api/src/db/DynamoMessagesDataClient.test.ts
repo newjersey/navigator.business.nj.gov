@@ -16,7 +16,7 @@ const generateMessageData = (overrides?: Partial<MessageData>): MessageData => {
     taskId: uuidv4(),
     userId: `user-${randomInt()}`,
     channel: "email",
-    templateId: "welcome@v1",
+    templateId: "welcome_version-B",
     topic: "welcome",
     templateData: {
       name: "Test User",

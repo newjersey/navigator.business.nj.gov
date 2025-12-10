@@ -379,6 +379,9 @@ export class LambdaStack extends Stack {
       timeout: Duration.seconds(30),
       memorySize: 1024,
       ephemeralStorageSize: Size.mebibytes(512),
+      bundling: {
+        loader: { ".html": "text" },
+      },
       ...vpcProps,
       environment: {
         API_BASE_URL: apiBaseUrl,
