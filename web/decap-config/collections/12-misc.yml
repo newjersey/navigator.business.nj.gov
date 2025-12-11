@@ -2835,9 +2835,19 @@ collections:
                 widget: object
                 fields:
                   - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
-                  - { label: Escape Model - Body, name: escapeModalBody, widget: string }
-                  - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
-                  - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
+                  - { label: Escape Modal - Body, name: escapeModalBody, widget: string }
+                  - { label: Escape Modal - Question, name: escapeModalQuestion, widget: string }
+                  - { label: Escape Modal - Keep Editing, name: escapeModalEscape, widget: string }
+                  - {
+                      label: Escape Modal - Leave Without Saving,
+                      name: escapeModalReturn,
+                      widget: string,
+                    }
+                  - {
+                      label: Escape Modal - Save Changes,
+                      name: escapeModalSaveChanges,
+                      widget: string,
+                    }
                   - { label: Success Alert - Header, name: successTextHeader, widget: string }
                   - { label: Success Alert - Body, name: successTextBody, widget: string }
                   - { label: Error Alert - Header, name: errorTextHeader, widget: string }
