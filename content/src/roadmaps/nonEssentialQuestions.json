@@ -137,10 +137,7 @@
       "addOnWhenYes": "healthcare-xray-reg",
       "id": "healthcare-xray-regis",
       "questionText": "Do you plan to be using x-ray machines?",
-      "anytimeActions": [
-        "temp-xray-registration",
-        "xray-disposition-form"
-      ]
+      "anytimeActions": ["temp-xray-registration", "xray-disposition-form"]
     },
     {
       "questionText": "Are you an optometrist?",
@@ -177,20 +174,14 @@
       "questionText": "Do you plan to sell pesticides?",
       "addOnWhenNo": "",
       "addOnWhenYes": "pest-pesticide-dealer-license",
-      "anytimeActions": [
-        "pesticide-dealer-license-renewal",
-        "pesticide-dealer-business-license"
-      ]
+      "anytimeActions": ["pesticide-dealer-license-renewal", "pesticide-dealer-business-license"]
     },
     {
       "id": "retail-pesticide-dealer-licensing",
       "questionText": "Do you plan to sell pesticides?",
       "addOnWhenNo": "",
       "addOnWhenYes": "retail-pesticide-dealer-license",
-      "anytimeActions": [
-        "pesticide-dealer-license-renewal",
-        "pesticide-dealer-business-license"
-      ]
+      "anytimeActions": ["pesticide-dealer-license-renewal", "pesticide-dealer-business-license"]
     },
     {
       "id": "pesticides-applicator-licensing",
@@ -262,9 +253,7 @@
       "questionText": "Will you buy products for resale, or will you sell products to resellers?",
       "addOnWhenNo": "",
       "addOnWhenYes": "resale-certificate",
-      "anytimeActions": [
-        "resale-tax-certificate"
-      ]
+      "anytimeActions": ["resale-tax-certificate"]
     },
     {
       "addOnWhenNo": "",
@@ -277,9 +266,7 @@
       "questionText": "You are a demo industry user. This is an example non-essential question that is being used to add an Anytime Action. Answering \"yes\" will add the Anytime Action \"Demo Anytime Action\".",
       "addOnWhenNo": "",
       "addOnWhenYes": "",
-      "anytimeActions": [
-        "demo-only"
-      ]
+      "anytimeActions": ["demo-only"]
     },
     {
       "id": "well-driller",
@@ -309,10 +296,7 @@
       "addOnWhenYes": "notify-asbestos"
     },
     {
-      "anytimeActions": [
-        "ust-modification",
-        "ust-registration-renewal"
-      ],
+      "anytimeActions": ["ust-modification", "ust-registration-renewal"],
       "id": "ust-reg",
       "questionText": "Does your business have an underground storage tank?"
     },
@@ -339,6 +323,12 @@
       "questionText": "Will you use flashing amber (yellow) lights on your business vehicle?",
       "addOnWhenYes": "amber-light",
       "id": "flashing-light-permit"
+    },
+    {
+      "questionText": "Will your business fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
+      "id": "crtk-applicable-naics-codes",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "community-rtk-survey"
     }
   ]
 }
