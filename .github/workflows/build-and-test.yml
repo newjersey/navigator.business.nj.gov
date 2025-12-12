@@ -392,7 +392,7 @@ jobs:
           enable-dashboard: true
 
   deploy-dev:
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-dev-environment.yml@convertDeployJobsToGHA
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-dev-environment.yml@updateDeployJobReferences
     secrets: inherit
     permissions:
       contents: read
@@ -406,7 +406,7 @@ jobs:
     if: github.ref_name == 'main'
 
   deploy-content:
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@convertDeployJobsToGHA
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@updateDeployJobReferences
     secrets: inherit
     permissions:
       contents: read
