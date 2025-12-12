@@ -4827,7 +4827,7 @@ __metadata:
     lint-staged: 16.2.7
     lodash: 4.17.21
     nc: "git+https://github.com/dsueltenfuss/nc.git"
-    next: 15.5.8
+    next: 15.5.9
     next-router-mock: 0.9.13
     next-seo: 6.8.0
     prettier: 3.6.2
@@ -5014,7 +5014,7 @@ __metadata:
     jest-junit: 16.0.0
     js-yaml: 4.1.1
     lodash: 4.17.21
-    next: 15.5.8
+    next: 15.5.9
     next-router-mock: 0.9.13
     next-seo: 6.8.0
     prettier: 3.6.2
@@ -7884,10 +7884,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:15.5.8":
-  version: 15.5.8
-  resolution: "@next/env@npm:15.5.8"
-  checksum: e0abf8c84c6cfd59a0a2d64fe61bd7440e6e2c0b742f6015a635baf63c212456e096ce0511c45b6ae4f693f1b01ad903ac0dc86722082a2dc5153874858c1175
+"@next/env@npm:15.5.9":
+  version: 15.5.9
+  resolution: "@next/env@npm:15.5.9"
+  checksum: b7c5e0509c1b2ef6d249bd0f17b9383539bd2b16a8c56f590275bddead6e0ef59a70475f579db1062f14a58fc8da869eb048244c1f2418f5148ce249bb50c6b7
   languageName: node
   linkType: hard
 
@@ -28413,11 +28413,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:15.5.8":
-  version: 15.5.8
-  resolution: "next@npm:15.5.8"
+"next@npm:15.5.9":
+  version: 15.5.9
+  resolution: "next@npm:15.5.9"
   dependencies:
-    "@next/env": 15.5.8
+    "@next/env": 15.5.9
     "@next/swc-darwin-arm64": 15.5.7
     "@next/swc-darwin-x64": 15.5.7
     "@next/swc-linux-arm64-gnu": 15.5.7
@@ -28468,7 +28468,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 17dcef444465226a162cee513896fa6b7e6096a5616a79a63c2e3c20a35ce07890b6a46198f17d83c08eed40b5aa0bc6b6be2ad686d9faf9a8ddb15355a6ffce
+  checksum: ad59f966a28cff60051740391cee8b2d7974283a4f85fb644c38c211f5a294c9bc90479adec25adaec8a89205c4d36cbc8cfc5362d90665da7905b017ab61d44
   languageName: node
   linkType: hard
 
