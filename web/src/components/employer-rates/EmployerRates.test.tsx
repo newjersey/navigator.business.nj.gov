@@ -16,7 +16,10 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import * as api from "@/lib/api-client/apiClient";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
+import {
+  DOL_EIN_CHARACTERS,
+  DOL_EIN_CHARACTERS_WITH_FORMATTING,
+} from "@/components/data-fields/DolEin";
 
 jest.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
   const actual = jest.requireActual("@businessnjgovnavigator/shared/dateHelpers");
@@ -33,6 +36,7 @@ const originalOpen = window.open;
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   checkEmployerRates: jest.fn(),
+  decryptValue: jest.fn(),
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -207,7 +211,7 @@ describe("EmployerRates", () => {
     const toType = "1".repeat(DOL_EIN_CHARACTERS + 1);
     await user.type(textbox, toType);
 
-    expect((textbox as HTMLInputElement).value.length).toBe(DOL_EIN_CHARACTERS);
+    expect((textbox as HTMLInputElement).value.length).toBe(DOL_EIN_CHARACTERS_WITH_FORMATTING);
   });
 
   it("renders input error and alert when entering less than DOL_EIN_CHARACTERS and blurring", async () => {
@@ -229,6 +233,7 @@ describe("EmployerRates", () => {
   it("clears input error and alert when input is cleared and blurred", async () => {
     renderComponentsWithOwning({
       employerAccessRegistration: true,
+      deptOfLaborEin: "",
     });
 
     const textbox = screen.getByRole("textbox");
@@ -346,6 +351,7 @@ describe("EmployerRates", () => {
 
   it("removes server error when there is a dol ein error", async () => {
     mockApi.checkEmployerRates.mockRejectedValue(new Error("500"));
+    mockApi.decryptValue.mockResolvedValue("123451234512345");
 
     renderComponentsWithOwning({
       employerAccessRegistration: true,
@@ -364,6 +370,11 @@ describe("EmployerRates", () => {
 
     const textbox = screen.getByRole("textbox");
     const user = userEvent.setup();
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: Config.profileDefaults.fields.deptOfLaborEin.default.showButtonText,
+      }),
+    );
     user.clear(textbox);
     const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
     await user.type(textbox, toType);
@@ -432,6 +443,7 @@ describe("EmployerRates", () => {
         error: "some error",
       }),
     );
+    mockApi.decryptValue.mockResolvedValue("123451234512345");
 
     renderComponentsWithOwning({
       employerAccessRegistration: true,
@@ -450,6 +462,11 @@ describe("EmployerRates", () => {
 
     const textbox = screen.getByRole("textbox");
     const user = userEvent.setup();
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: Config.profileDefaults.fields.deptOfLaborEin.default.showButtonText,
+      }),
+    );
     user.clear(textbox);
     const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
     await user.type(textbox, toType);

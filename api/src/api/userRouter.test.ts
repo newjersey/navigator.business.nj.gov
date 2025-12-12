@@ -1290,12 +1290,13 @@ describe("userRouter", () => {
     });
 
     describe("when user changes Tax ID and Tax PIN", () => {
-      it("encrypts and masks the tax id and tax pin before getting put into the user data client", async () => {
+      it("encrypts and masks the tax id and tax pin and dol ein before getting put into the user data client", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         stubCryptoEncryptionClient.encryptValue.mockImplementation((valueToBeEncrypted: string) => {
           const encryptedValues: { [key: string]: string } = {
             "123456789000": "encrypted-tax-id",
             "1234": "encrypted-tax-pin",
+            "54321": "encrypted-dol-ein",
           };
           return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
         });
@@ -1312,6 +1313,7 @@ describe("userRouter", () => {
               encryptedTaxId: undefined,
               taxPin: "1234",
               encryptedTaxPin: undefined,
+              deptOfLaborEin: "54321",
             }),
           }),
           { user: oldUserData.user },
@@ -1334,6 +1336,7 @@ describe("userRouter", () => {
           encryptedTaxId: "encrypted-tax-id",
           taxPin: "****",
           encryptedTaxPin: "encrypted-tax-pin",
+          deptOfLaborEin: "encrypted-dol-ein",
         });
       });
     });

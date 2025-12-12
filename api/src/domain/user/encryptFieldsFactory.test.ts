@@ -14,17 +14,19 @@ describe("encryptFieldsFactory", () => {
   let stubCryptoEncryptionClient: jest.Mocked<CryptoClient>;
   let stubCryptoHashingClient: jest.Mocked<CryptoClient>;
   let encryptTaxId: EncryptTaxId;
-  const numFieldsToEncrypt = 5;
+  const numFieldsToEncrypt = 6;
   const profileTaxId = "123456789000";
   const profileTaxPin = "1234";
   const taxClearanceTaxId = "111111111111";
   const taxClearanceTaxPin = "1111";
   const cigaretteTaxId = "111111111119";
+  const deptOfLaborEin = "555555555555555";
   const encryptedProfileTaxId = "encrypted-123456789000";
   const encryptedProfileTaxPin = "encrypted-1234";
   const encryptedTaxClearanceTaxId = "encrypted-111111111111";
   const encryptedTaxClearanceTaxPin = "encrypted-1111";
   const encryptedCigaretteTaxId = "encrypted-111111111119";
+  const encryptedDeptOfLaborEin = "encrypted-555555555555555";
 
   const generateUnencryptedUserData = (
     profileDataOverrides = {},
@@ -38,6 +40,7 @@ describe("encryptFieldsFactory", () => {
           encryptedTaxId: undefined,
           taxPin: profileTaxPin,
           encryptedTaxPin: undefined,
+          deptOfLaborEin: deptOfLaborEin,
           ...profileDataOverrides,
         }),
         taxClearanceCertificateData: generateTaxClearanceCertificateData({
@@ -70,6 +73,7 @@ describe("encryptFieldsFactory", () => {
         encryptedTaxId: encryptedProfileTaxId,
         taxPin: "****",
         encryptedTaxPin: encryptedProfileTaxPin,
+        deptOfLaborEin: encryptedDeptOfLaborEin,
         ...profileDataOverrides,
       },
       taxClearanceCertificateData: business.taxClearanceCertificateData
@@ -104,6 +108,7 @@ describe("encryptFieldsFactory", () => {
           [taxClearanceTaxId]: encryptedTaxClearanceTaxId,
           [taxClearanceTaxPin]: encryptedTaxClearanceTaxPin,
           [cigaretteTaxId]: encryptedCigaretteTaxId,
+          [deptOfLaborEin]: encryptedDeptOfLaborEin,
         };
         return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
       }),
@@ -127,6 +132,7 @@ describe("encryptFieldsFactory", () => {
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxId);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxPin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(cigaretteTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(deptOfLaborEin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledTimes(numFieldsToEncrypt);
 
     const expectedUserData = getExpectedEncryptedCurrentBusiness(userData);
@@ -144,6 +150,7 @@ describe("encryptFieldsFactory", () => {
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxId);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxPin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(cigaretteTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(deptOfLaborEin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledTimes(numFieldsToEncrypt - 1);
 
     const expectedUserData = getExpectedEncryptedCurrentBusiness(userData, {
@@ -164,6 +171,7 @@ describe("encryptFieldsFactory", () => {
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxId);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxPin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(cigaretteTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(deptOfLaborEin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledTimes(numFieldsToEncrypt - 1);
 
     const expectedUserData = getExpectedEncryptedCurrentBusiness(userData, {
@@ -188,6 +196,7 @@ describe("encryptFieldsFactory", () => {
     expect(stubCryptoEncryptionClient.encryptValue).not.toHaveBeenCalledWith(taxClearanceTaxId);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxPin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(cigaretteTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(deptOfLaborEin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledTimes(numFieldsToEncrypt - 1);
 
     const expectedUserData = getExpectedEncryptedCurrentBusiness(
@@ -217,6 +226,7 @@ describe("encryptFieldsFactory", () => {
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxId);
     expect(stubCryptoEncryptionClient.encryptValue).not.toHaveBeenCalledWith(taxClearanceTaxPin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(cigaretteTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(deptOfLaborEin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledTimes(numFieldsToEncrypt - 1);
 
     const expectedUserData = getExpectedEncryptedCurrentBusiness(
@@ -246,6 +256,7 @@ describe("encryptFieldsFactory", () => {
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxId);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxPin);
     expect(stubCryptoEncryptionClient.encryptValue).not.toHaveBeenCalledWith(cigaretteTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(deptOfLaborEin);
     expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledTimes(numFieldsToEncrypt - 1);
 
     const expectedUserData = getExpectedEncryptedCurrentBusiness(
