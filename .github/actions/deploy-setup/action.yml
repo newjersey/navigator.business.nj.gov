@@ -1,0 +1,14 @@
+name: "Deploy Setup"
+description: "Runs configure-and-build, sets up Docker Buildx and triggers CDK deployment."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure and Build
+      uses: ./.github/actions/configure-and-build
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Deploy CDK
+      uses: ./.github/actions/deploy-cdk

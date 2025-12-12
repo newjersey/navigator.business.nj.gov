@@ -1,0 +1,16 @@
+name: "Deploy Storybook"
+description: "Clears the Storybook S3 bucket and deploys the Storybook site."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Clear Storybook S3 Bucket
+      shell: bash
+      run: |
+        aws s3 rm s3://$STORYBOOK_S3_BUCKET --recursive
+
+    - name: Deploy Storybook
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/web deploy:storybook \
+          --bucket-path $STORYBOOK_S3_BUCKET --aws-profile=NONE
