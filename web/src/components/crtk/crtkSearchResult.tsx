@@ -91,13 +91,13 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
               >
                 <div className="margin-top-1 font-open-sans-5">
                   <p className="margin-bottom-1">
-                    <strong>Facility Type:</strong> {crtkData.CRTKEntry.facilityType || "N/A"}
+                    <strong>Facility Type:</strong> {crtkData.CRTKEntry.type || "N/A"}
                   </p>
                   <p className="margin-bottom-1">
                     <strong>Eligibility:</strong> {crtkData.CRTKEntry.eligibility || "N/A"}
                   </p>
                   <p className="margin-bottom-1">
-                    <strong>Facility Status:</strong> {crtkData.CRTKEntry.facilityStatus || "N/A"}
+                    <strong>Facility Status:</strong> {crtkData.CRTKEntry.status || "N/A"}
                   </p>
                 </div>
               </ResultsSectionAccordion>

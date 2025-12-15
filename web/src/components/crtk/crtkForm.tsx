@@ -128,10 +128,6 @@ export const CRTKStatus = (props: Props): ReactElement => {
       errors.city = "Enter your city.";
     }
 
-    if (!formValues.state?.trim()) {
-      errors.state = "Enter your state.";
-    }
-
     if (!formValues.zip?.trim()) {
       errors.zip = "Enter your zip code.";
     } else if (!/^\d{5}$/.test(formValues.zip.trim())) {
@@ -151,7 +147,6 @@ export const CRTKStatus = (props: Props): ReactElement => {
       return;
     }
 
-    // Call parent's onSubmit handler
     await props.onSubmit(formValues);
   };
 

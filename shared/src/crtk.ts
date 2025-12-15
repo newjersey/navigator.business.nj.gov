@@ -26,9 +26,9 @@ export interface CRTKEntry {
   naicsCode?: string;
   naicsDescription?: string;
   businessActivity?: string;
-  facilityType?: string;
+  type?: string;
   facilityStatus?: string;
   eligibility?: string;
-  userStatus?: string;
+  status?: string;
   receivedDate?: string;
 }

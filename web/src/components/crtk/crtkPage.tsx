@@ -35,10 +35,10 @@ export const CRTKPage = (props: Props): ReactElement => {
 
     try {
       const crtkSearchResponse = await api.searchBuisnessInCRTKDB({
-        businessName: facilityDetails.businessName,
-        addressLine1: facilityDetails.businessStreetAddress,
-        city: facilityDetails.city,
-        addressZipCode: facilityDetails.zip,
+        businessName: facilityDetails.businessName.trim().toUpperCase(),
+        addressLine1: facilityDetails.businessStreetAddress.trim().toUpperCase(),
+        city: facilityDetails.city.trim().toUpperCase(),
+        addressZipCode: facilityDetails.zip.trim(),
         ein: facilityDetails.ein || undefined,
       });
 
