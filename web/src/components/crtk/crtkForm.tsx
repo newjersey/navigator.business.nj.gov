@@ -35,6 +35,10 @@ const useStyles = makeStyles(() => {
           display: "none",
         },
     },
+    errorField: {
+      borderLeft: "4px solid #b50909",
+      paddingLeft: "0.5rem",
+    },
   });
 });
 
@@ -79,31 +83,15 @@ export const CRTKStatus = (props: Props): ReactElement => {
   useEffect(() => {
     if (!business) return;
 
-    const crtkData = business.crtkData?.CRTKBusinessDetails;
-
-    if (crtkData?.businessName && crtkData?.addressLine1) {
+    if (business?.formationData?.formationFormData) {
       setFormValues({
-        businessName: crtkData.businessName,
-        businessStreetAddress: crtkData.addressLine1,
-        city: crtkData.city || "",
-        state: "NJ",
-        zip: crtkData.addressZipCode || "",
-        ein: "",
-      });
-    } else if (business.formationData?.formationResponse?.success) {
-      setFormValues({
-        businessName: business.formationData.formationFormData.businessName,
+        businessName: business?.profileData.businessName || "",
         businessStreetAddress: business.formationData.formationFormData.addressLine1,
-        city: business.formationData.formationFormData.addressCity || "",
+        city: business.formationData.formationFormData.addressMunicipality?.displayName || "",
         state: "NJ",
         zip: business.formationData.formationFormData.addressZipCode,
         ein: "",
       });
-    } else if (business.profileData?.businessName) {
-      setFormValues((prev) => ({
-        ...prev,
-        businessName: business.profileData.businessName,
-      }));
     }
   }, [business]);
 
@@ -128,6 +116,10 @@ export const CRTKStatus = (props: Props): ReactElement => {
       errors.city = "Enter your city.";
     }
 
+    if (!formValues.state?.trim()) {
+      errors.state = "Enter your state.";
+    }
+
     if (!formValues.zip?.trim()) {
       errors.zip = "Enter your zip code.";
     } else if (!/^\d{5}$/.test(formValues.zip.trim())) {
@@ -147,6 +139,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
       return;
     }
 
+    // Call parent's onSubmit handler
     await props.onSubmit(formValues);
   };
 
@@ -282,7 +275,10 @@ export const CRTKStatus = (props: Props): ReactElement => {
         {getErrorAlert()}
 
         <form onSubmit={onSubmit}>
-          <div className="margin-bottom-2" id="question-business-name">
+          <div
+            className={`margin-bottom-2 ${fieldErrors.businessName ? classes.errorField : ""}`}
+            id="question-business-name"
+          >
             <label className="text-bold" htmlFor="business-name">
               {Config.crtkTask.businessNameLabel}
             </label>
@@ -300,7 +296,10 @@ export const CRTKStatus = (props: Props): ReactElement => {
             />
           </div>
 
-          <div className="margin-bottom-2" id="question-business-street-address">
+          <div
+            className={`margin-bottom-2 ${fieldErrors.businessStreetAddress ? classes.errorField : ""}`}
+            id="question-business-street-address"
+          >
             <label className="text-bold" htmlFor="business-street-address">
               {Config.crtkTask.businessStreetAddressLabel}
             </label>
@@ -318,62 +317,67 @@ export const CRTKStatus = (props: Props): ReactElement => {
             />
           </div>
 
-          <div className="fdr flex-half margin-bottom-2">
-            <div className="flex-half padding-right-1" id="question-city">
-              <label className="text-bold" htmlFor="city">
-                {Config.crtkTask.cityLabel}
-              </label>
-              <TextField
-                value={formValues?.city}
-                onChange={handleChangeForKey("city")}
-                variant="outlined"
-                inputProps={{
-                  id: "city",
-                  "data-testid": "city",
-                }}
-                onBlur={handleBlurForKey("city")}
-                error={!!fieldErrors.city}
-                helperText={fieldErrors.city}
-              />
+          <div className={`fdr margin-bottom-2 ${fieldErrors.zip ? classes.errorField : ""}`}>
+            <div className={`flex-1 padding-right-1 `}>
+              <div id="question-city">
+                <label className="text-bold" htmlFor="city">
+                  {Config.crtkTask.cityLabel}
+                </label>
+                <TextField
+                  value={formValues?.city}
+                  onChange={handleChangeForKey("city")}
+                  variant="outlined"
+                  inputProps={{
+                    id: "city",
+                    "data-testid": "city",
+                  }}
+                  onBlur={handleBlurForKey("city")}
+                  error={!!fieldErrors.city}
+                  helperText={fieldErrors.city}
+                />
+              </div>
             </div>
-            <div className="flex-half padding-left-1" id="question-state">
-              <label className="text-bold" htmlFor="state">
-                {Config.crtkTask.stateLabel}
-              </label>
-              <TextField
-                value={"NJ"}
-                onChange={(): void => {}}
-                variant="outlined"
-                inputProps={{
-                  id: "state",
-                  "data-testid": "state",
-                  style: {
-                    color: "#1b1b1b",
-                  },
-                }}
-                disabled
-              />
+            <div className="flex-1 padding-x-1">
+              <div id="question-state">
+                <label className="text-bold" htmlFor="state">
+                  {Config.crtkTask.stateLabel}
+                </label>
+                <TextField
+                  value={"NJ"}
+                  onChange={(): void => {}}
+                  variant="outlined"
+                  inputProps={{
+                    id: "state",
+                    "data-testid": "state",
+                    style: {
+                      color: "#1b1b1b",
+                    },
+                  }}
+                  disabled
+                />
+              </div>
             </div>
-          </div>
-
-          <div className="margin-bottom-2" id="question-zip">
-            <label className="text-bold" htmlFor="zip">
-              {Config.crtkTask.zipLabel}
-            </label>
-            <TextField
-              value={formValues?.zip}
-              onChange={handleChangeForKey("zip")}
-              variant="outlined"
-              inputProps={{
-                id: "zip",
-                "data-testid": "zip",
-                type: "number",
-              }}
-              className={classes.zipCodeField}
-              onBlur={handleBlurForKey("zip")}
-              error={!!fieldErrors.zip}
-              helperText={fieldErrors.zip}
-            />
+            <div className={`flex-1 padding-left-1`}>
+              <div id="question-zip">
+                <label className="text-bold" htmlFor="zip">
+                  {Config.crtkTask.zipLabel}
+                </label>
+                <TextField
+                  value={formValues?.zip}
+                  onChange={handleChangeForKey("zip")}
+                  variant="outlined"
+                  inputProps={{
+                    id: "zip",
+                    "data-testid": "zip",
+                    type: "number",
+                  }}
+                  className={classes.zipCodeField}
+                  onBlur={handleBlurForKey("zip")}
+                  error={!!fieldErrors.zip}
+                  helperText={fieldErrors.zip}
+                />
+              </div>
+            </div>
           </div>
 
           <div className="margin-bottom-2">
