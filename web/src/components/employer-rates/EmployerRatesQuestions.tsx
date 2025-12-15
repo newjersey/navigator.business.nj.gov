@@ -20,6 +20,8 @@ import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { EmployerRatesRequest, EmployerRatesResponse } from "@businessnjgovnavigator/shared";
 import { DolEin, DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
@@ -32,6 +34,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { userData, updateQueue } = useUserData();
+  const { setIsValid } = useFormContextFieldHelpers("deptOfLaborEin", DataFormErrorMapContext);
 
   const initialEmployerAccess = isUndefined(state?.profileData.employerAccessRegistration)
     ? ""
@@ -63,6 +66,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const handleRadioChange = (value: string): void => {
     if (value === "false" && dolEinError) {
       setDolEinError(false);
+      setIsValid(true);
     }
     if (value === "false" && noAccountError) {
       setNoAccountError(false);
@@ -74,6 +78,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     setProfileData((prev) => ({
       ...prev,
       employerAccessRegistration: value === "true",
+      deptOfLaborEin: "",
     }));
   };
 
@@ -88,6 +93,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
 
     if (!isDolEinValid(state.profileData.deptOfLaborEin)) {
       setDolEinError(true);
+      setIsValid(false);
       return;
     }
 
@@ -193,11 +199,14 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
                   setNoAccountError(false);
                 }
                 setDolEinError(invalid);
+                setIsValid(!invalid);
               }}
               handleChange={handleDolEinChange}
               value={state.profileData.deptOfLaborEin}
               error={dolEinError}
               validationText={Config.employerRates.dolEinErrorText}
+              startHidden={state.profileData.deptOfLaborEin.length > 0}
+              editable
             />
           </WithErrorBar>
           <EmployerRatesQuarterDropdown

@@ -897,5 +897,87 @@ describe("profile - shared", () => {
         expect(currentBusiness().profileData.deptOfLaborEin).toEqual(newEin);
       });
     });
+
+    it("prevents saving DOL EIN if the number of characters is incorrect", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: true,
+          deptOfLaborEin: "",
+        }),
+      });
+
+      renderPage({ business });
+      chooseTab("numbers");
+
+      const employerRatesSection = screen.getByTestId("employerAccess");
+      const textbox = within(employerRatesSection).getByRole("textbox");
+      const newEin = "123";
+      await userEvent.type(textbox, newEin);
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+
+      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      expect(screen.getAllByRole("alert").length).toBe(2);
+    });
+
+    it("allows save if DOL EIN is the correct number of characters", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: true,
+          deptOfLaborEin: "",
+        }),
+      });
+
+      renderPage({ business });
+      chooseTab("numbers");
+
+      const employerRatesSection = screen.getByTestId("employerAccess");
+      const textbox = within(employerRatesSection).getByRole("textbox");
+      const newEin = "1".repeat(15);
+      await userEvent.type(textbox, newEin);
+
+      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
+    });
+
+    it("allows save if DOL EIN is incorrect number of characters but user changes employer access radio", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: true,
+          deptOfLaborEin: "",
+        }),
+      });
+
+      renderPage({ business });
+      chooseTab("numbers");
+
+      const employerRatesSection = screen.getByTestId("employerAccess");
+      const textbox = within(employerRatesSection).getByRole("textbox");
+      const newEin = "1".repeat(10);
+      await userEvent.type(textbox, newEin);
+      await userEvent.tab();
+
+      expect(screen.getAllByRole("alert").length).toBe(2);
+
+      await userEvent.click(
+        within(employerRatesSection).getByRole("radio", {
+          name: Config.employerRates.employerAccessFalseText,
+        }),
+      );
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
+    });
   });
 });
