@@ -22,12 +22,14 @@ import { EmployerRatesRequest, EmployerRatesResponse } from "@businessnjgovnavig
 import { DolEin, DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { useMountEffect } from "@/lib/utils/helpers";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
   setResponse: Dispatch<SetStateAction<false | EmployerRatesResponse>>;
   quarter: EmployerRatesQuarterObject;
   setQuarter: Dispatch<SetStateAction<EmployerRatesQuarterObject>>;
+  handleChangeOverride?: (() => void) | undefined;
 }
 
 export const EmployerRatesQuestions = (props: Props): ReactElement => {
@@ -35,6 +37,16 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { userData, updateQueue } = useUserData();
   const { setIsValid } = useFormContextFieldHelpers("deptOfLaborEin", DataFormErrorMapContext);
+  const [showEmployerAccessRadio, setShowEmployerAccessRadio] = useState<boolean>(true);
+
+  useMountEffect(() => {
+    if (
+      state?.profileData.employerAccessRegistration === true &&
+      state?.profileData.deptOfLaborEin.length > 0
+    ) {
+      setShowEmployerAccessRadio(false);
+    }
+  });
 
   const initialEmployerAccess = isUndefined(state?.profileData.employerAccessRegistration)
     ? ""
@@ -55,10 +67,14 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const [noAccountError, setNoAccountError] = useState<boolean>(previewMode || false);
 
   const handleDolEinChange = (value: string): void => {
-    setProfileData((prev) => ({
-      ...prev,
-      deptOfLaborEin: value,
-    }));
+    if (props.handleChangeOverride) {
+      props.handleChangeOverride();
+    } else {
+      setProfileData((prev) => ({
+        ...prev,
+        deptOfLaborEin: value,
+      }));
+    }
   };
 
   const isDolEinValid = (value: string): boolean => value.length === DOL_EIN_CHARACTERS;
@@ -86,6 +102,11 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const handleSubmit = (event: MouseEvent<Element>): void => {
     if (!userData) return;
     event.preventDefault();
+
+    if (props.handleChangeOverride) {
+      props.handleChangeOverride();
+      return;
+    }
 
     if (serverError) {
       setServerError(false);
@@ -125,7 +146,9 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="bg-base-extra-light padding-205 margin-top-3 radius-lg">
+    <div
+      className={`${showEmployerAccessRadio ? "bg-base-extra-light padding-205 margin-top-3 radius-lg" : "padding-top-1 margin-top-3 radius-lg"}`}
+    >
       <Heading level={4}>{Config.employerRates.employerAccessHeaderText}</Heading>
 
       {dolEinError && (
@@ -161,31 +184,34 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
         </div>
       )}
 
-      <Content>{Config.employerRates.employerAccessText}</Content>
+      {showEmployerAccessRadio && (
+        <>
+          <Content>{Config.employerRates.employerAccessText}</Content>
+          <FormControl fullWidth>
+            <RadioGroup
+              name="employerAccess"
+              value={employerAccessRegistration}
+              onChange={(event) => handleRadioChange(event.target.value)}
+            >
+              <FormControlLabel
+                style={{ alignItems: "center" }}
+                labelPlacement="end"
+                value="true"
+                control={<Radio color={"primary"} />}
+                label={Config.employerRates.employerAccessTrueText}
+              />
 
-      <FormControl fullWidth>
-        <RadioGroup
-          name="employerAccess"
-          value={employerAccessRegistration}
-          onChange={(event) => handleRadioChange(event.target.value)}
-        >
-          <FormControlLabel
-            style={{ alignItems: "center" }}
-            labelPlacement="end"
-            value="true"
-            control={<Radio color={"primary"} />}
-            label={Config.employerRates.employerAccessTrueText}
-          />
-
-          <FormControlLabel
-            style={{ alignItems: "center" }}
-            labelPlacement="end"
-            value="false"
-            control={<Radio color={"primary"} />}
-            label={Config.employerRates.employerAccessFalseText}
-          />
-        </RadioGroup>
-      </FormControl>
+              <FormControlLabel
+                style={{ alignItems: "center" }}
+                labelPlacement="end"
+                value="false"
+                control={<Radio color={"primary"} />}
+                label={Config.employerRates.employerAccessFalseText}
+              />
+            </RadioGroup>
+          </FormControl>
+        </>
+      )}
 
       {shouldShowEmployerAccessInputFields && (
         <div role="status" aria-live="polite" className="margin-y-2">
@@ -206,7 +232,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
               error={dolEinError}
               validationText={Config.employerRates.dolEinErrorText}
               startHidden={state.profileData.deptOfLaborEin.length > 0}
-              editable
+              editable={showEmployerAccessRadio}
             />
           </WithErrorBar>
           <EmployerRatesQuarterDropdown

@@ -17,6 +17,7 @@ import { Heading } from "@/components/njwds-extended/Heading";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
+  handleChangeOverride?: (() => void) | undefined;
 }
 
 export const EmployerRates = (props: Props): ReactElement => {
@@ -48,6 +49,7 @@ export const EmployerRates = (props: Props): ReactElement => {
             setQuarter={setQuarter}
             setResponse={setResponse}
             CMS_ONLY_enable_preview={props.CMS_ONLY_enable_preview}
+            handleChangeOverride={props.handleChangeOverride}
           />
         )}
 
