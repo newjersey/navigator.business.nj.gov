@@ -1,16 +1,33 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { Filing } from "@businessnjgovnavigator/shared/types";
+import { Filing } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
   const matches: Match[] = [];
 
-  for (const filing of filings) {
+  const filingData = getFilingData(filings);
+
+  for (const filingDataItem of filingData) {
     let match: Match = {
-      filename: filing.filename,
+      filename: filingDataItem.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(filingDataItem.blockTexts, term, match);
+    match = findMatchInLabelledText(filingDataItem.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getFilingData = (filings: Filing[]): FileData[] => {
+  const filingData: FileData[] = [];
+
+  for (const filing of filings) {
     const content = filing.contentMd.toLowerCase();
     const summary = filing.summaryDescriptionMd?.toLowerCase();
     const details = filing.filingDetails?.toLowerCase();
@@ -33,6 +50,7 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     if (rates) {
       blockTexts.push(rates);
     }
+
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
       { content: ctaLink, label: "CTA Link" },
@@ -46,13 +64,13 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
       { content: urlSlug, label: "Url Slug" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    filingData.push({
+      fileName: filing.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [], // No listTexts needed for tax filings
+    });
   }
 
-  return matches;
+  return filingData;
 };

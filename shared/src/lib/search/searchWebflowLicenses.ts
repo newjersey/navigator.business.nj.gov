@@ -1,18 +1,35 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
-import { WebflowLicense } from "@businessnjgovnavigator/shared/types";
+import { LookupTaskAgencyById } from "../../taskAgency";
+import { WebflowLicense } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string): Match[] => {
   const matches: Match[] = [];
 
-  for (const license of licenses) {
+  const licenseData = getWebflowLicenseData(licenses);
+
+  for (const licenseDataItem of licenseData) {
     let match: Match = {
-      filename: license.filename,
+      filename: licenseDataItem.fileName,
       snippets: [],
     };
 
-    const content = license.contentMd?.toLowerCase();
+    match = findMatchInBlock(licenseDataItem.blockTexts, term, match);
+    match = findMatchInLabelledText(licenseDataItem.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getWebflowLicenseData = (licenses: WebflowLicense[]): FileData[] => {
+  const licenseData: FileData[] = [];
+
+  for (const license of licenses) {
+    const content = license.contentMd?.toLowerCase() ?? "";
     const name = license.webflowName?.toLowerCase();
     const cta = license.callToActionText?.toLowerCase();
     const ctaLink = license.callToActionLink?.toLowerCase();
@@ -39,13 +56,13 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
       { content: urlSlug, label: "Url Slug" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    licenseData.push({
+      fileName: license.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [], // No listTexts needed for webflow licenses
+    });
   }
 
-  return matches;
+  return licenseData;
 };

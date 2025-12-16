@@ -1,4 +1,5 @@
-import { Match } from "@/lib/search/typesForSearch";
+import { IndustryRoadmap } from "../../types";
+import { Match } from "./typesForSearch";
 import {
   AddAddOnUsage,
   AddIndustryUsage,
@@ -13,10 +14,9 @@ import {
   composeIndstryTaskString,
   composeIsLicenseTaskDependencyString,
   composeIsTaskDependencyTaskString,
-} from "@/lib/search/usageHelpers";
-import { IndustryRoadmap } from "@businessnjgovnavigator/shared/types";
+} from "./usageHelpers";
 
-jest.mock("@businessnjgovnavigator/content/roadmaps/task-dependencies.json", () => ({
+jest.mock("../../../../content/src/roadmaps/task-dependencies.json", () => ({
   dependencies: [
     {
       task: "task-name",
@@ -37,18 +37,18 @@ jest.mock("@businessnjgovnavigator/content/roadmaps/task-dependencies.json", () 
   ],
 }));
 
-describe("usageHelpers", () => {
-  const createMatches = (filename: string): Match[] => {
-    return [
-      {
-        filename: filename,
-        displayTitle: "displayTitle",
-        snippets: ["", ""],
-        additionalUsageLocations: { taskDependencies: [], industries: [], addOns: [] },
-      },
-    ];
-  };
+const createMatches = (filename: string): Match[] => {
+  return [
+    {
+      filename: filename,
+      displayTitle: "displayTitle",
+      snippets: ["", ""],
+      additionalUsageLocations: { taskDependencies: [], industries: [], addOns: [] },
+    },
+  ];
+};
 
+describe("usageHelpers", () => {
   describe("taskDependency", () => {
     it("task match", () => {
       const matches = createMatches("task-name");

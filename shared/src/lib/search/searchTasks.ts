@@ -1,10 +1,13 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { AddAddOnUsage, AddIndustryUsage, AddTaskDependencyUsage } from "@/lib/search/usageHelpers";
-
-import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
-import { IndustryRoadmap, Task } from "@businessnjgovnavigator/shared/types";
+import { Industry } from "../../industry";
+import {
+  AddAddOnUsage,
+  AddIndustryUsage,
+  AddTaskDependencyUsage,
+} from "../../lib/search/usageHelpers";
+import { LookupTaskAgencyById } from "../../taskAgency";
+import { IndustryRoadmap, Task } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchTasks = (
   tasks: Task[],
@@ -14,12 +17,33 @@ export const searchTasks = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  for (const task of tasks) {
+  const taskData = getTaskData(tasks);
+
+  for (const taskDataItem of taskData) {
     let match: Match = {
-      filename: task.filename,
+      filename: taskDataItem.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(taskDataItem.blockTexts, term, match);
+    match = findMatchInLabelledText(taskDataItem.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  AddAddOnUsage(matches, addOns);
+  AddIndustryUsage(matches, industries);
+  AddTaskDependencyUsage(matches);
+
+  return matches;
+};
+
+export const getTaskData = (tasks: Task[]): FileData[] => {
+  const taskData: FileData[] = [];
+
+  for (const task of tasks) {
     const content = task.contentMd?.toLowerCase();
     const name = task.name?.toLowerCase();
     const cta = task.callToActionText?.toLowerCase();
@@ -43,17 +67,13 @@ export const searchTasks = (
       { content: urlSlug, label: "Url Slug" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    taskData.push({
+      fileName: task.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [], // No listTexts needed for tasks
+    });
   }
 
-  AddAddOnUsage(matches, addOns);
-  AddIndustryUsage(matches, industries);
-  AddTaskDependencyUsage(matches);
-
-  return matches;
+  return taskData;
 };
