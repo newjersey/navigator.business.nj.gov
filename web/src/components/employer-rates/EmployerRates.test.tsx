@@ -130,7 +130,7 @@ describe("EmployerRates", () => {
       expect(trueRadio).not.toBeChecked();
     });
 
-    it("renders false when employerAccessRegistration is false", () => {
+    it("renders false selection when employerAccessRegistration is false", () => {
       renderComponentsWithOwning({
         employerAccessRegistration: false,
       });
@@ -139,17 +139,6 @@ describe("EmployerRates", () => {
         name: Config.employerRates.employerAccessFalseText,
       });
       expect(falseRadio).toBeChecked();
-    });
-
-    it("renders true when employerAccessRegistration is true", () => {
-      renderComponentsWithOwning({
-        employerAccessRegistration: true,
-      });
-
-      const trueRadio = screen.getByRole("radio", {
-        name: Config.employerRates.employerAccessTrueText,
-      });
-      expect(trueRadio).toBeChecked();
     });
   });
 
@@ -257,9 +246,14 @@ describe("EmployerRates", () => {
 
   it("removes alert after clicking false/no radio button", async () => {
     renderComponentsWithOwning({
-      employerAccessRegistration: true,
+      employerAccessRegistration: undefined,
       deptOfLaborEin: "",
     });
+
+    const trueRadio = screen.getByRole("radio", {
+      name: Config.employerRates.employerAccessTrueText,
+    });
+    await userEvent.click(trueRadio);
 
     const submit = await screen.findByRole("button", {
       name: Config.employerRates.employerAccessYesButtonText,
@@ -327,10 +321,18 @@ describe("EmployerRates", () => {
     mockApi.checkEmployerRates.mockRejectedValue(new Error("500"));
 
     renderComponentsWithOwning({
-      employerAccessRegistration: true,
-      deptOfLaborEin: "123451234512345",
+      employerAccessRegistration: undefined,
+      deptOfLaborEin: "",
       businessName: "Test Business",
     });
+
+    const trueRadio = screen.getByRole("radio", {
+      name: Config.employerRates.employerAccessTrueText,
+    });
+    await userEvent.click(trueRadio);
+
+    const textbox = screen.getByRole("textbox");
+    await userEvent.type(textbox, "123451234512345");
 
     const submit = await screen.findByRole("button", {
       name: Config.employerRates.employerAccessYesButtonText,
@@ -351,13 +353,15 @@ describe("EmployerRates", () => {
 
   it("removes server error when there is a dol ein error", async () => {
     mockApi.checkEmployerRates.mockRejectedValue(new Error("500"));
-    mockApi.decryptValue.mockResolvedValue("123451234512345");
 
     renderComponentsWithOwning({
       employerAccessRegistration: true,
-      deptOfLaborEin: "123451234512345",
+      deptOfLaborEin: "",
       businessName: "Test Business",
     });
+    const textbox = screen.getByRole("textbox");
+    const user = userEvent.setup();
+    await userEvent.type(textbox, "123451234512345");
 
     const submit = await screen.findByRole("button", {
       name: Config.employerRates.employerAccessYesButtonText,
@@ -368,13 +372,6 @@ describe("EmployerRates", () => {
     expect(await screen.findByRole("alert")).toBeInTheDocument();
     expect(screen.getByTestId("serverError")).toBeInTheDocument();
 
-    const textbox = screen.getByRole("textbox");
-    const user = userEvent.setup();
-    await userEvent.click(
-      screen.getByRole("button", {
-        name: Config.profileDefaults.fields.deptOfLaborEin.default.showButtonText,
-      }),
-    );
     user.clear(textbox);
     const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
     await user.type(textbox, toType);
@@ -415,10 +412,18 @@ describe("EmployerRates", () => {
     );
 
     renderComponentsWithOwning({
-      employerAccessRegistration: true,
-      deptOfLaborEin: "123451234512345",
+      employerAccessRegistration: undefined,
+      deptOfLaborEin: "",
       businessName: "Test Business",
     });
+
+    const trueRadio = screen.getByRole("radio", {
+      name: Config.employerRates.employerAccessTrueText,
+    });
+    await userEvent.click(trueRadio);
+
+    const textbox = screen.getByRole("textbox");
+    await userEvent.type(textbox, "123451234512345");
 
     const submit = await screen.findByRole("button", {
       name: Config.employerRates.employerAccessYesButtonText,
@@ -443,13 +448,15 @@ describe("EmployerRates", () => {
         error: "some error",
       }),
     );
-    mockApi.decryptValue.mockResolvedValue("123451234512345");
 
     renderComponentsWithOwning({
       employerAccessRegistration: true,
-      deptOfLaborEin: "123451234512345",
+      deptOfLaborEin: "",
       businessName: "Test Business",
     });
+    const user = userEvent.setup();
+    const textbox = screen.getByRole("textbox");
+    await userEvent.type(textbox, "123451234512345");
 
     const submit = await screen.findByRole("button", {
       name: Config.employerRates.employerAccessYesButtonText,
@@ -459,14 +466,6 @@ describe("EmployerRates", () => {
 
     expect(await screen.findByRole("alert")).toBeInTheDocument();
     expect(screen.getByTestId("noAccountError")).toBeInTheDocument();
-
-    const textbox = screen.getByRole("textbox");
-    const user = userEvent.setup();
-    await userEvent.click(
-      screen.getByRole("button", {
-        name: Config.profileDefaults.fields.deptOfLaborEin.default.showButtonText,
-      }),
-    );
     user.clear(textbox);
     const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
     await user.type(textbox, toType);
@@ -579,5 +578,45 @@ describe("EmployerRates", () => {
     expect(
       screen.getByRole("button", { name: Config.employerRates.employerAccessYesButtonText }),
     ).toBeInTheDocument();
+  });
+
+  it("does not display radio question if user has already set employerAccessRegistration value and EIN value", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    expect(screen.queryByRole("radiogroup")).not.toBeInTheDocument();
+  });
+
+  it("does display radio question if employerAccessRegistration is true but not EIN was not entered", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "",
+      businessName: "Test Business",
+    });
+
+    expect(screen.getByRole("radiogroup")).toBeInTheDocument();
+  });
+
+  it("does display radio question if employerAccessRegistration is false", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: false,
+      deptOfLaborEin: "",
+      businessName: "Test Business",
+    });
+
+    expect(screen.getByRole("radiogroup")).toBeInTheDocument();
+  });
+
+  it("does not let user edit DOL EIN if it has previously been entered", async () => {
+    renderComponentsWithOwning({
+      employerAccessRegistration: true,
+      deptOfLaborEin: "123451234512345",
+      businessName: "Test Business",
+    });
+
+    expect(screen.queryByRole("textbox", { name: "Dol ein" })).not.toBeInTheDocument();
   });
 });

@@ -715,7 +715,9 @@ const ProfilePage = (props: Props): ReactElement => {
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
-        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
+        {FEATURE_EMPLOYER_RATES_ENABLED && (
+          <EmployerRates handleChangeOverride={showNeedsAccountModalForGuest()} />
+        )}
       </div>
     ),
     documents: (
@@ -869,7 +871,9 @@ const ProfilePage = (props: Props): ReactElement => {
             handleChangeOverride={showNeedsAccountModalForGuest()}
           />
         </ProfileField>
-        {FEATURE_EMPLOYER_RATES_ENABLED && <EmployerRates />}
+        {FEATURE_EMPLOYER_RATES_ENABLED && (
+          <EmployerRates handleChangeOverride={showNeedsAccountModalForGuest()} />
+        )}
       </div>
     ),
     documents: <></>,
