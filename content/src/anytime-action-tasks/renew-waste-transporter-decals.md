@@ -7,7 +7,6 @@ industryIds: []
 sectorIds:
   - construction
   - waste-management-and-Remediation
-  - mining-quarrying-and-oil-and-gas-extraction
 nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
 urlSlug: renew-waste-transporter-decals
 summaryDescriptionMd: You must renew your waste transporter vehicle and
