@@ -30,7 +30,9 @@ export type ENV_REQ_CONFIG_VARS =
   | "env_req_email_confirmation_url"
   | "env_req_email_confirmation_key";
 
-export type USER_MESSAGING_CONFIG_VARS = "feature_welcome_email_enabled";
+export type USER_MESSAGING_CONFIG_VARS =
+  | "feature_welcome_email_enabled"
+  | "feature_reminder_emails_enabled";
 
 let cache: {
   value?: boolean;
