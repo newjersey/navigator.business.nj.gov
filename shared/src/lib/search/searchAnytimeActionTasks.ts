@@ -1,6 +1,6 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
+import { AnytimeActionTask } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchAnytimeActionTasks = (
   anytimeActionTasks: AnytimeActionTask[],
@@ -8,12 +8,29 @@ export const searchAnytimeActionTasks = (
 ): Match[] => {
   const matches: Match[] = [];
 
-  for (const anytimeAction of anytimeActionTasks) {
+  const AnytimeActionDatas: FileData[] = getAnytimeActionTasksData(anytimeActionTasks);
+
+  for (const anytimeActionData of AnytimeActionDatas) {
     let match: Match = {
-      filename: anytimeAction.filename,
+      filename: anytimeActionData.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(anytimeActionData.blockTexts, term, match);
+    match = findMatchInLabelledText(anytimeActionData.labelledTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getAnytimeActionTasksData = (anytimeActionTasks: AnytimeActionTask[]): FileData[] => {
+  const AnytimeActionTasksData: FileData[] = [];
+
+  for (const anytimeAction of anytimeActionTasks) {
     const content = anytimeAction.contentMd.toLowerCase();
     const summary = anytimeAction.summaryDescriptionMd?.toLowerCase();
     const name = anytimeAction.name.toLowerCase();
@@ -33,13 +50,13 @@ export const searchAnytimeActionTasks = (
       { content: issuingAgency, label: "Issuing Agency" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    AnytimeActionTasksData.push({
+      fileName: anytimeAction.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts: [],
+    });
   }
 
-  return matches;
+  return AnytimeActionTasksData;
 };

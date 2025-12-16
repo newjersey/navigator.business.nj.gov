@@ -1,4 +1,4 @@
-import { LabelledContent, LabelledContentList, Match } from "@/lib/search/typesForSearch";
+import { LabelledContent, LabelledContentList, Match, MatchComparitor } from "./typesForSearch";
 
 const removeMarkdownStyling = (markdownInput: string | undefined): string | undefined => {
   if (markdownInput === undefined) {
@@ -18,17 +18,23 @@ export const findMatchInBlock = (
   for (const blockText of blockTexts) {
     const blockTextProcessed = removeMarkdownStyling(blockText);
     if (blockTextProcessed?.includes(term)) {
-      match.snippets.push(makeSnippet(blockTextProcessed, term));
+      match.snippets.push(makeSnippet(blockTextProcessed, { term }));
     }
   }
   return match;
 };
 
-export const makeSnippet = (text: string, term: string): string => {
-  const index = text.toLowerCase().indexOf(term.toLowerCase());
-  const startIndex = index - 50 < 0 ? 0 : index - 50;
-  const endIndex = term.length + index + 50;
-  return text.slice(startIndex, endIndex);
+export const makeSnippet = (text: string, matchComparitor: MatchComparitor): string => {
+  if (matchComparitor.regex) {
+    return text;
+  }
+  if (matchComparitor.term) {
+    const index = text.toLowerCase().indexOf(matchComparitor.term.toLowerCase());
+    const startIndex = index - 50 < 0 ? 0 : index - 50;
+    const endIndex = matchComparitor.term.length + index + 50;
+    return text.slice(startIndex, endIndex);
+  }
+  return text;
 };
 
 export const findMatchInLabelledText = (

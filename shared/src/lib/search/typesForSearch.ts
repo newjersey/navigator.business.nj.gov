@@ -36,3 +36,15 @@ export type GroupedConfigMatch = {
   cmsFileName: string;
   matches: ConfigMatch[];
 };
+
+export interface FileData {
+  fileName: string;
+  labelledTexts: LabelledContent[];
+  blockTexts: string[];
+  listTexts: LabelledContentList[];
+}
+
+export interface MatchComparitor {
+  regex?: RegExp;
+  term?: string;
+}

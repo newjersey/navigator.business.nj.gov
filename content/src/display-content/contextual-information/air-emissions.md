@@ -3,6 +3,7 @@ slug: air-emissions
 filename: air-emissions
 header: Air Emissions
 displayname: Air Emissions
+id: air-emissions
 ---
 
 Air emissions is the discharge of a pollutant into the environment.

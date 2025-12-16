@@ -1,21 +1,35 @@
-import {
-  findMatchInBlock,
-  findMatchInLabelledText,
-  findMatchInListText,
-} from "@/lib/search/helpers";
-import { Match } from "@/lib/search/typesForSearch";
-import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
-import { Funding } from "@businessnjgovnavigator/shared/types";
+import { LookupFundingAgencyById } from "../../fundingAgency";
+import { Funding } from "../../types";
+import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "./helpers";
+import { FileData, Match } from "./typesForSearch";
 
 export const searchFundings = (fundings: Funding[], term: string): Match[] => {
   const matches: Match[] = [];
 
-  for (const funding of fundings) {
+  const fundingData = getFundingData(fundings);
+
+  for (const fundData of fundingData) {
     let match: Match = {
-      filename: funding.filename,
+      filename: fundData.fileName,
       snippets: [],
     };
 
+    match = findMatchInBlock(fundData.blockTexts, term, match);
+    match = findMatchInLabelledText(fundData.labelledTexts, term, match);
+    match = findMatchInListText(fundData.listTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+
+  return matches;
+};
+
+export const getFundingData = (fundings: Funding[]): FileData[] => {
+  const fundingData: FileData[] = [];
+
+  for (const funding of fundings) {
     const content = funding.contentMd.toLowerCase();
     const name = funding.name.toLowerCase();
     const sidebarCardBodyText = funding.sidebarCardBodyText.toLowerCase();
@@ -63,14 +77,13 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
       { content: sectors, label: "Sector" },
     ];
 
-    match = findMatchInBlock(blockTexts, term, match);
-    match = findMatchInLabelledText(labelledTexts, term, match);
-    match = findMatchInListText(listTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
+    fundingData.push({
+      fileName: funding.filename,
+      labelledTexts,
+      blockTexts,
+      listTexts,
+    });
   }
 
-  return matches;
+  return fundingData;
 };
