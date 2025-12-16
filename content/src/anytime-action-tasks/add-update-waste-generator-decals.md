@@ -8,7 +8,6 @@ industryIds: []
 sectorIds:
   - construction
   - waste-management-and-Remediation
-  - mining-quarrying-and-oil-and-gas-extraction
 nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
 urlSlug: add-update-waste-generator-decals
 summaryDescriptionMd: >-
