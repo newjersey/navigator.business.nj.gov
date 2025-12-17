@@ -1,28 +1,12 @@
 import { LookupTaskAgencyById } from "../../taskAgency";
 import { WebflowLicense } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string): Match[] => {
-  const matches: Match[] = [];
-
   const licenseData = getWebflowLicenseData(licenses);
 
-  for (const licenseDataItem of licenseData) {
-    let match: Match = {
-      filename: licenseDataItem.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(licenseDataItem.blockTexts, term, match);
-    match = findMatchInLabelledText(licenseDataItem.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(licenseData, term);
 };
 
 export const getWebflowLicenseData = (licenses: WebflowLicense[]): FileData[] => {

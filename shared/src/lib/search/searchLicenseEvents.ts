@@ -1,27 +1,11 @@
 import { LicenseEventType } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchLicenseEvents = (licenseEvents: LicenseEventType[], term: string): Match[] => {
-  const matches: Match[] = [];
-
   const licenseEventData = getLicenseEventData(licenseEvents);
 
-  for (const eventData of licenseEventData) {
-    let match: Match = {
-      filename: eventData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(eventData.blockTexts, term, match);
-    match = findMatchInLabelledText(eventData.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(licenseEventData, term);
 };
 
 export const getLicenseEventData = (licenseEvents: LicenseEventType[]): FileData[] => {

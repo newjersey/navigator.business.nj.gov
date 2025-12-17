@@ -1,27 +1,11 @@
 import { SidebarCardContent } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: string): Match[] => {
-  const matches: Match[] = [];
-
   const sidebarCardData = getSidebarCardData(sidebarCards);
 
-  for (const cardData of sidebarCardData) {
-    let match: Match = {
-      filename: cardData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(cardData.blockTexts, term, match);
-    match = findMatchInLabelledText(cardData.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(sidebarCardData, term);
 };
 
 export const getSidebarCardData = (sidebarCards: SidebarCardContent[]): FileData[] => {

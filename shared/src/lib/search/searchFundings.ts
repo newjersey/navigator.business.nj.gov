@@ -1,29 +1,12 @@
 import { LookupFundingAgencyById } from "../../fundingAgency";
 import { Funding } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchFundings = (fundings: Funding[], term: string): Match[] => {
-  const matches: Match[] = [];
-
   const fundingData = getFundingData(fundings);
 
-  for (const fundData of fundingData) {
-    let match: Match = {
-      filename: fundData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(fundData.blockTexts, term, match);
-    match = findMatchInLabelledText(fundData.labelledTexts, term, match);
-    match = findMatchInListText(fundData.listTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(fundingData, term);
 };
 
 export const getFundingData = (fundings: Funding[]): FileData[] => {
