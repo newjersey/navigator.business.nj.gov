@@ -10,7 +10,9 @@ import {
   generateFormationFormData,
   generateMunicipality,
   generateProfileData,
+  getMergedConfig,
   Municipality,
+  OperatingPhaseId,
 } from "@businessnjgovnavigator/shared";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -18,11 +20,13 @@ import {
   chooseTab,
   clickSave,
   fillText,
+  generateBusinessForProfile,
   getBusinessProfileInputFieldName,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
 import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
@@ -32,6 +36,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("profile - guest mode", () => {
   let setShowNeedsAccountModal: jest.Mock;
+  const Config = getMergedConfig();
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -79,6 +84,49 @@ describe("profile - guest mode", () => {
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Tax pin"), { target: { value: "123456789" } });
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+    });
+
+    it("opens Needs Account modal when user tries to enter DOL EIN", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: true,
+          deptOfLaborEin: "",
+        }),
+      });
+
+      renderPage({ business, isAuthenticated: IsAuthenticated.FALSE, setShowNeedsAccountModal });
+      chooseTab("numbers");
+
+      const textbox = screen.getByRole("textbox", { name: "Dol ein" });
+      await userEvent.type(textbox, "1");
+
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+    });
+
+    it("opens Needs Account modal when user tries to check employer contribution rates", async () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+          businessPersona: "OWNING",
+          employerAccessRegistration: true,
+          deptOfLaborEin: "",
+        }),
+      });
+
+      renderPage({ business, isAuthenticated: IsAuthenticated.FALSE, setShowNeedsAccountModal });
+      chooseTab("numbers");
+
+      await userEvent.click(
+        screen.getByRole("button", { name: Config.employerRates.employerAccessYesButtonText }),
+      );
+
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
   });
