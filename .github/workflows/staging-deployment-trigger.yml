@@ -10,5 +10,5 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@convertDeployJobsToGHA
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@main
     secrets: inherit

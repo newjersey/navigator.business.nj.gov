@@ -93,7 +93,7 @@ env: &integration-env
 jobs:
   build:
     if: >
-      (
+      github.event_name == 'push' || (
         github.event_name == 'pull_request' &&
         github.event.pull_request.draft == false
       ) || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
@@ -123,6 +123,9 @@ jobs:
   unit-tests:
     if: &tests_allowed >
       github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (
+        github.event_name == 'push' &&
+        github.ref_name == 'main'
+      ) || (
         github.event_name == 'pull_request' &&
         github.event.pull_request.draft == false &&
         !startsWith(github.event.pull_request.head.ref, 'release-') &&
@@ -276,7 +279,7 @@ jobs:
           enable-dashboard: true
 
   deploy-dev:
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-dev-environment.yml@convertDeployJobsToGHA
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-dev-environment.yml@main
     secrets: inherit
     permissions:
       contents: read
@@ -290,7 +293,7 @@ jobs:
     if: github.ref_name == 'main'
 
   deploy-content:
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@convertDeployJobsToGHA
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@main
     secrets: inherit
     permissions:
       contents: read

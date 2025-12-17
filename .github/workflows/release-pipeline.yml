@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy-staging:
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@convertDeployJobsToGHA
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@main
     secrets: inherit
 
   production-hold:
