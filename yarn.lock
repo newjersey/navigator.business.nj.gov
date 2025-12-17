@@ -4828,7 +4828,7 @@ __metadata:
     lodash: 4.17.21
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     next: 15.5.9
-    next-router-mock: 0.9.13
+    next-router-mock: 1.0.4
     next-seo: 6.8.0
     prettier: 3.6.2
     prettier-plugin-organize-imports: 4.3.0
@@ -5015,7 +5015,7 @@ __metadata:
     js-yaml: 4.1.1
     lodash: 4.17.21
     next: 15.5.9
-    next-router-mock: 0.9.13
+    next-router-mock: 1.0.4
     next-seo: 6.8.0
     prettier: 3.6.2
     prettier-plugin-organize-imports: 4.3.0
@@ -28385,13 +28385,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-router-mock@npm:0.9.13":
-  version: 0.9.13
-  resolution: "next-router-mock@npm:0.9.13"
+"next-router-mock@npm:1.0.4":
+  version: 1.0.4
+  resolution: "next-router-mock@npm:1.0.4"
   peerDependencies:
     next: ">=10.0.0"
     react: ">=17.0.0"
-  checksum: e6f9bae52cdd4905f628addc14abd1fe9aac7e8a3dbc50d438e82c9c0472cba850a7a624fbd94e68c00b61fd07803a2754587db2ec0fffbd3c45a896c6193bf2
+  checksum: 7099dfd8a9c279194d9b9824e734275968678605e75fbbbf1a6138370f5c6b3b18867459853b2fbf346c50b32d6807d8babbf6c7d1a52c3ce5631f8745333fc2
   languageName: node
   linkType: hard
 
