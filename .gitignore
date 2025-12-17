@@ -16,6 +16,7 @@ report-industries-and-non-essential-questions.csv
 
 # testing
 /coverage
+coverage/
 
 # next.js
 web/.next/

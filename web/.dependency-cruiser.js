@@ -342,6 +342,12 @@ module.exports = {
       from: { path: "src/scripts" },
       to: { path: "../shared" },
     },
+    {
+      from: { path: "../content/build.ts" },
+      to: { path: "../shared" },
+      comment:
+        "Allow content build script to import from shared (build script is standalone executable)",
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */

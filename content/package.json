@@ -5,18 +5,28 @@
   "private": true,
   "main": "src",
   "scripts": {
-    "build": "node ./build.js",
+    "build": "tsx -r tsconfig-paths/register ./build.ts",
     "clean": "rimraf lib",
     "dev": "yarn build",
+    "test": "vitest run",
     "prettier": "prettier --write . --ignore-path=../.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=../.eslintignore",
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json"
   },
+  "dependencies": {
+    "gray-matter": "4.0.3"
+  },
   "devDependencies": {
+    "@businessnjgovnavigator/shared": "*",
     "@types/node": "20.19.17",
+    "@vitest/coverage-v8": "2.1.8",
     "cross-env": "7.0.3",
     "cspell": "9.3.2",
     "prettier": "3.6.2",
-    "rimraf": "6.1.2"
+    "rimraf": "6.1.2",
+    "tsconfig-paths": "4.2.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "2.1.8"
   }
 }
