@@ -2,8 +2,11 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ConfigMatchList } from "@/components/search/ConfigMatchList";
 import { MatchList } from "@/components/search/MatchList";
-import { cmsCollections } from "@/lib/search/cmsCollections";
-import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
+import { cmsCollections } from "@businessnjgovnavigator/shared/lib/search/cmsCollections";
+import {
+  GroupedConfigMatch,
+  Match,
+} from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 

@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { loadYamlFiles } from "@/lib/static/admin/loadYamlFiles";
-
+import { loadYamlFiles } from "@businessnjgovnavigator/shared/static";
 type AnyObject = { [key: string]: any };
 
 function countKeyValuePair(
