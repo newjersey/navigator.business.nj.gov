@@ -32,3 +32,10 @@ jobs:
 
       - name: Push merged branch
         run: git push origin content-repo
+  deploy-content:
+    needs: merge-content
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@main
+    secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
