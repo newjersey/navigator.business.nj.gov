@@ -5,6 +5,7 @@ import * as events from "aws-cdk-lib/aws-events";
 import * as targets from "aws-cdk-lib/aws-events-targets";
 import * as iam from "aws-cdk-lib/aws-iam";
 import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
+import { IBucket } from "aws-cdk-lib/aws-s3";
 import * as sns from "aws-cdk-lib/aws-sns";
 import * as subs from "aws-cdk-lib/aws-sns-subscriptions";
 import { Construct } from "constructs";
@@ -23,6 +24,7 @@ import { createLambda, exportLambdaArn } from "./stackUtils";
 export interface LambdaStackProps extends StackProps {
   stage: string;
   lambdaRole: iam.Role;
+  messagesBucket: IBucket;
 }
 
 export class LambdaStack extends Stack {
@@ -391,8 +393,11 @@ export class LambdaStack extends Stack {
         AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
         USERS_TABLE: usersTable,
         MESSAGES_TABLE: messagesTable,
+        MESSAGES_BUCKET: props.messagesBucket.bucketName,
       },
     });
+
+    props.messagesBucket.grantWrite(this.lambdas.messagingService);
 
     const topic = sns.Topic.fromTopicArn(
       this,

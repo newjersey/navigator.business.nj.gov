@@ -29,6 +29,7 @@ export default {
     "@test/(.*)": "<rootDir>/test/$1",
     "@wiremock/(.*)": "<rootDir>/wiremock/$1",
     "@scripts/(.*)": "<rootDir>/../scripts/$1",
+    "\\.(html|txt)$": "<rootDir>/test/jestRawLoader.js",
   },
   testPathIgnorePatterns: ["<rootDir>/lib/", "<rootDir>/node_modules/"],
   globalSetup: "<rootDir>/test/globalSetup.ts",

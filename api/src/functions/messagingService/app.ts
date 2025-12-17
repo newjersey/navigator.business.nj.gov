@@ -1,3 +1,4 @@
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { SendEmailCommand, SendEmailCommandInput, SESClient } from "@aws-sdk/client-ses";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
@@ -20,7 +21,7 @@ import {
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
-import { LogWriter } from "@libs/logWriter";
+import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { getConfigValue, USER_MESSAGING_CONFIG_VARS } from "@libs/ssmUtils";
 import { v4 as uuidv4 } from "uuid";
 // eslint-disable-next-line no-restricted-imports
@@ -48,6 +49,11 @@ export const handler = async (
   // TODO: Need a new log stream for the messaging service
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
   const sesClient = new SESClient({});
+  const logId = logger.GetId();
+
+  const s3Client = new S3Client({});
+  const messagesBucketName = process.env.MESSAGES_BUCKET;
+  if (!messagesBucketName) throw new Error("MessagingServiceClient - MESSAGES_BUCKET is not set.");
   const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const messageDataClient = DynamoMessagesDataClient(dynamoDb, MESSAGES_TABLE, logger);
   const userDataClient = DynamoUserDataClient(
@@ -62,7 +68,7 @@ export const handler = async (
   const isReminderEmail = event.messageType === "reminder-email";
   if (isReminderEmail && !userData.user.receiveUpdatesAndReminders) {
     logger.LogInfo(
-      `Skipping ${event.messageType} email for userId: ${event.userId} - user is not subscribed to reminders`,
+      `MessagingServiceClient - Skipping ${event.messageType} email for userId: ${event.userId} - user is not subscribed to reminders`,
     );
     return {
       statusCode: 200,
@@ -82,7 +88,7 @@ export const handler = async (
       "true"
   ) {
     logger.LogInfo(
-      `Skipping ${event.messageType} email for userId: ${event.userId} - reminder emails feature is not enabled`,
+      `MessagingServiceClient - Skipping ${event.messageType} email for userId: ${event.userId} - reminder emails feature is not enabled`,
     );
     return {
       statusCode: 200,
@@ -122,13 +128,25 @@ export const handler = async (
   }
 
   try {
-    logger.LogInfo(`Sending email to ${toEmail}`);
+    logger.LogInfo(`MessagingServiceClient - Sending email to ${toEmail}`);
     const sendEmailOutput = await sesClient.send(command);
-    logger.LogInfo(`Successfully sent email to ${toEmail}, ${JSON.stringify(sendEmailOutput)}`);
+    logger.LogInfo(
+      `MessagingServiceClient - Successfully sent email to ${toEmail}, ${JSON.stringify(sendEmailOutput)}`,
+    );
     await messageDataClient.put(message);
-    logger.LogInfo(`Successfully logged message ${message.taskId}`);
+    logger.LogInfo(`MessagingServiceClient - Successfully logged message ${message.taskId}`);
+    await writeToS3({
+      s3Client,
+      bucketName: messagesBucketName,
+      filename: `${message.deliveredAt}-${message.taskId}`,
+      content: JSON.stringify(command.input, undefined, 2),
+      logger,
+      logId,
+    });
   } catch (error) {
-    logger.LogError(`Error sending or logging message ${message.taskId} to ${toEmail}: ${error}`);
+    logger.LogError(
+      `MessagingServiceClient - Error sending or logging message ${message.taskId} to ${toEmail}: ${error}`,
+    );
   }
 
   return {
@@ -218,4 +236,33 @@ const buildSesEmailCommand = (props: {
     ],
   };
   return new SendEmailCommand(input);
+};
+
+const writeToS3 = async (props: {
+  s3Client: S3Client;
+  bucketName: string;
+  filename: string;
+  content: string;
+  logger: LogWriterType;
+  logId: string;
+}): Promise<void> => {
+  await props.s3Client
+    .send(
+      new PutObjectCommand({
+        Bucket: props.bucketName,
+        Key: props.filename,
+        Body: props.content,
+        ContentType: "text/plain",
+      }),
+    )
+    .then(() => {
+      props.logger.LogInfo(
+        `MessagingServiceClient - Id:${props.logId} - Successfully wrote ${props.filename} to ${props.bucketName}.`,
+      );
+    })
+    .catch((error) => {
+      props.logger.LogInfo(
+        `MessagingServiceClient - Id:${props.logId} - Failed to write ${props.filename} to ${props.bucketName}. Received error: ${error}`,
+      );
+    });
 };

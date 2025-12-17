@@ -1,7 +1,8 @@
 import { App } from "aws-cdk-lib";
-import { Template, Match } from "aws-cdk-lib/assertions";
-import { LambdaStack, LambdaStackProps } from "../lib/lambdaStack";
+import { Match, Template } from "aws-cdk-lib/assertions";
+import { IBucket } from "aws-cdk-lib/aws-s3";
 import { IamStack, IamStackProps } from "../lib/iamStack";
+import { LambdaStack, LambdaStackProps } from "../lib/lambdaStack";
 
 describe("LambdaStack", () => {
   let app: App;
@@ -15,6 +16,10 @@ describe("LambdaStack", () => {
     const defaultProps: LambdaStackProps = {
       stage: "local",
       lambdaRole: iamStack.role,
+      messagesBucket: {
+        bucketName: "messages-bucket-local",
+        grantWrite: () => {},
+      } as unknown as IBucket,
     };
 
     stack = new LambdaStack(app, "TestLambdaStack", defaultProps);
