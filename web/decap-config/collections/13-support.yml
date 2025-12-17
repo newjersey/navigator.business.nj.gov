@@ -21,6 +21,21 @@ collections:
             collapsed: false
             widget: object
             fields:
+              - { label: "Unlinked Account", name: "unlinkedAccount", widget: "string" }
+              - { label: "Having Trouble", name: "havingTrouble", widget: "string" }
+              - { label: "Logout Button Text", name: "logoutButtonText", widget: "string" }
+              - {
+                  label: "Logout Button Text Unlinked",
+                  name: "logoutButtonTextUnlinked",
+                  widget: "string",
+                }
+              - { label: "Logout And Try Again", name: "logoutAndTryAgain", widget: "string" }
+              - {
+                  label: "Logout And Try Again Unlinked",
+                  name: "logoutAndTryAgainUnlinked",
+                  widget: "string",
+                }
+              - { label: "For More Assistance", name: "forMoreAssistance", widget: "string" }
               - { label: "Page Title", name: "pageTitle", widget: "string" }
               - { label: "Last Updated Date", name: "lastUpdated", widget: "string" }
               - {

@@ -151,8 +151,10 @@ export const onGuestSignIn = async ({
         break;
       }
       case ROUTES.loading: {
-        setRegistrationDimension("Began Onboarding");
-        push(ROUTES.onboarding);
+        if (!encounteredMyNjLinkingError) {
+          setRegistrationDimension("Began Onboarding");
+          push(ROUTES.onboarding);
+        }
         break;
       }
       case ROUTES.login: {
