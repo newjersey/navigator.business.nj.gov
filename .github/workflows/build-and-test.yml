@@ -291,3 +291,13 @@ jobs:
       - integration-group-4
       - integration-group-5
     if: github.ref_name == 'main'
+
+  deploy-content:
+    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@main
+    secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
+    needs:
+      - build
+    if: github.ref_name == 'content-repo'
