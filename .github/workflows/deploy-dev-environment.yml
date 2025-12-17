@@ -120,3 +120,5 @@ jobs:
 
       - name: Deploy Storybook
         uses: ./.github/actions/deploy-storybook
+        with:
+          storybook_s3_bucket: ${{ vars.STORYBOOK_S3_BUCKET }}
