@@ -5,10 +5,12 @@ import { IntercomScript } from "@/components/IntercomScript";
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
+import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
@@ -40,8 +42,6 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
-import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
-import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -97,7 +97,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     event:
       | "signedIn"
       | "signUp"
-      | "signOut"
+      | "signedOut"
       | "signIn_failure"
       | "tokenRefresh"
       | "tokenRefresh_failure"
@@ -115,7 +115,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         break;
       case "signUp":
         break;
-      case "signOut":
+      case "signedOut":
         break;
       case "signIn_failure":
         console.error("user sign in failed");
@@ -128,7 +128,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       case "configured":
         break;
       default:
-        console.error("unknown payload type");
+        console.error(`unknown payload type: ${data.payload.event}`);
         break;
     }
   };

@@ -232,6 +232,7 @@ export const userRouterFactory = (
       })
       .catch((error: Error) => {
         if (error.message === "Not found") {
+          // Temporarily disabled for testing timeout error message
           if (["dev", "local"].includes(process.env.STAGE || "")) {
             logger.LogInfo(
               `${method} ${endpoint} - user not found, creating empty user, userId: ${requestedUserId}`,

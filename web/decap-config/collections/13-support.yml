@@ -21,6 +21,16 @@ collections:
             collapsed: false
             widget: object
             fields:
+              - {
+                  label: "Authenticated Timeout Error Message",
+                  name: "timeoutErrorMessageAuthenticated",
+                  widget: "string",
+                }
+              - {
+                  label: "Unauthenticated Timeout Error Message",
+                  name: "timeoutErrorMessageUnauthenticated",
+                  widget: "string",
+                }
               - { label: "Page Title", name: "pageTitle", widget: "string" }
               - { label: "Last Updated Date", name: "lastUpdated", widget: "string" }
               - {

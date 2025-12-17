@@ -9,15 +9,25 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 
 const LoadingPage = (): ReactElement => {
+  // debugger;
   const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowError(true);
+    }, 5000);
+
+    return (): void => clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
     /**
@@ -28,7 +38,7 @@ const LoadingPage = (): ReactElement => {
     if (!router?.isReady) {
       return;
     }
-
+    // debugger;
     if (router.query[QUERIES.code]) {
       getActiveUser().then((currentUser) => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
@@ -43,7 +53,7 @@ const LoadingPage = (): ReactElement => {
       });
     } else {
       if (loginPageEnabled) {
-        router && router.push(ROUTES.login);
+        router.push(ROUTES.login);
       } else {
         triggerSignIn();
       }
@@ -51,6 +61,7 @@ const LoadingPage = (): ReactElement => {
   }, [router, dispatch, loginPageEnabled]);
 
   useMountEffectWhenDefined(() => {
+    // debugger;
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
     if (business?.onboardingFormProgress && !onboardingCompleted(business)) {
@@ -70,7 +81,7 @@ const LoadingPage = (): ReactElement => {
     }
   }, userData);
 
-  return <LoadingPageComponent />;
+  return <LoadingPageComponent hasError={showError} />;
 };
 
 export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {
