@@ -1,27 +1,11 @@
 import { Filing } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
-  const matches: Match[] = [];
-
   const filingData = getFilingData(filings);
 
-  for (const filingDataItem of filingData) {
-    let match: Match = {
-      filename: filingDataItem.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(filingDataItem.blockTexts, term, match);
-    match = findMatchInLabelledText(filingDataItem.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(filingData, term);
 };
 
 export const getFilingData = (filings: Filing[]): FileData[] => {

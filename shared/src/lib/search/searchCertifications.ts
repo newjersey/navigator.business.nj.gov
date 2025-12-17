@@ -1,29 +1,12 @@
 import { LookupFundingAgencyById } from "../../fundingAgency";
 import { Certification } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
-  const matches: Match[] = [];
-
   const certificationData = getCertificationData(certifications);
 
-  for (const certData of certificationData) {
-    let match: Match = {
-      filename: certData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(certData.blockTexts, term, match);
-    match = findMatchInLabelledText(certData.labelledTexts, term, match);
-    match = findMatchInListText(certData.listTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(certificationData, term);
 };
 
 export const getCertificationData = (certifications: Certification[]): FileData[] => {

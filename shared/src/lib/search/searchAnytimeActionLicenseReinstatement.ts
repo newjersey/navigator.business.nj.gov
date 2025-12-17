@@ -1,31 +1,16 @@
 import { AnytimeActionLicenseReinstatement } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "../search/helpers";
+import { convertFileDataToMatchList } from "../search/helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchAnytimeActionLicenseReinstatements = (
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[],
   term: string,
 ): Match[] => {
-  const matches: Match[] = [];
-
   const AnytimeActionDatas: FileData[] = getAnytimeActionLicenseReinstatementsData(
     anytimeActionLicenseReinstatements,
   );
 
-  for (const AnytimeActionData of AnytimeActionDatas) {
-    let match: Match = {
-      filename: AnytimeActionData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInLabelledText(AnytimeActionData.labelledTexts, term, match);
-    match = findMatchInBlock(AnytimeActionData.blockTexts, term, match);
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(AnytimeActionDatas, term);
 };
 
 export const getAnytimeActionLicenseReinstatementsData = (

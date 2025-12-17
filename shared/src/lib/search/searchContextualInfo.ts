@@ -1,30 +1,14 @@
 import { ContextualInfoFile } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchContextualInfo = (
   contextualInfo: ContextualInfoFile[],
   term: string,
 ): Match[] => {
-  const matches: Match[] = [];
-
   const contextualInfoData = getContextualInfoData(contextualInfo);
 
-  for (const infoData of contextualInfoData) {
-    let match: Match = {
-      filename: infoData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(infoData.blockTexts, term, match);
-    match = findMatchInLabelledText(infoData.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(contextualInfoData, term);
 };
 
 export const getContextualInfoData = (contextualInfo: ContextualInfoFile[]): FileData[] => {

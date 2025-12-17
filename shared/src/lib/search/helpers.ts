@@ -1,4 +1,10 @@
-import { LabelledContent, LabelledContentList, Match, MatchComparitor } from "./typesForSearch";
+import {
+  FileData,
+  LabelledContent,
+  LabelledContentList,
+  Match,
+  MatchComparitor,
+} from "./typesForSearch";
 
 const removeMarkdownStyling = (markdownInput: string | undefined): string | undefined => {
   if (markdownInput === undefined) {
@@ -65,4 +71,24 @@ export const findMatchInListText = (
     }
   }
   return match;
+};
+
+export const convertFileDataToMatchList = (fileData: FileData[], term: string): Match[] => {
+  const matches: Match[] = [];
+
+  for (const fileDataItem of fileData) {
+    let match: Match = {
+      filename: fileDataItem.fileName,
+      snippets: [],
+    };
+
+    match = findMatchInBlock(fileDataItem.blockTexts, term, match);
+    match = findMatchInLabelledText(fileDataItem.labelledTexts, term, match);
+    match = findMatchInListText(fileDataItem.listTexts, term, match);
+
+    if (match.snippets.length > 0) {
+      matches.push(match);
+    }
+  }
+  return matches;
 };

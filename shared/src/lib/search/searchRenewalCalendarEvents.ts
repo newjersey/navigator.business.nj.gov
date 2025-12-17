@@ -1,30 +1,14 @@
 import { XrayRenewalCalendarEventType } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchXrayRenewalCalendarEvent = (
   renewalCalendarEvent: XrayRenewalCalendarEventType,
   term: string,
 ): Match[] => {
-  const matches: Match[] = [];
-
   const eventDatas = getXrayRenewalCalendarEventData(renewalCalendarEvent);
 
-  for (const eventData of eventDatas) {
-    let match: Match = {
-      filename: eventData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(eventData.blockTexts, term, match);
-    match = findMatchInLabelledText(eventData.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(eventDatas, term);
 };
 
 export const getXrayRenewalCalendarEventData = (

@@ -1,30 +1,14 @@
 import { AnytimeActionTask } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchAnytimeActionTasks = (
   anytimeActionTasks: AnytimeActionTask[],
   term: string,
 ): Match[] => {
-  const matches: Match[] = [];
-
   const AnytimeActionDatas: FileData[] = getAnytimeActionTasksData(anytimeActionTasks);
 
-  for (const anytimeActionData of AnytimeActionDatas) {
-    let match: Match = {
-      filename: anytimeActionData.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(anytimeActionData.blockTexts, term, match);
-    match = findMatchInLabelledText(anytimeActionData.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(AnytimeActionDatas, term);
 };
 
 export const getAnytimeActionTasksData = (anytimeActionTasks: AnytimeActionTask[]): FileData[] => {
