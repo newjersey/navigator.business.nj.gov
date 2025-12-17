@@ -1,26 +1,11 @@
 import { TaskWithoutLinks } from "../../types";
-import { findMatchInLabelledText } from "../search/helpers";
+import { convertFileDataToMatchList } from "../search/helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchBusinessFormation = (tasks: TaskWithoutLinks[], term: string): Match[] => {
-  const matches: Match[] = [];
-
   const BusinessFormationDatas = getBusinessFormationData(tasks);
 
-  for (const task of BusinessFormationDatas) {
-    let match: Match = {
-      filename: task.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInLabelledText(task.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
-
-  return matches;
+  return convertFileDataToMatchList(BusinessFormationDatas, term);
 };
 
 export const getBusinessFormationData = (tasks: TaskWithoutLinks[]): FileData[] => {

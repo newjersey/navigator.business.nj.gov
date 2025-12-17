@@ -6,7 +6,7 @@ import {
 } from "../../lib/search/usageHelpers";
 import { LookupTaskAgencyById } from "../../taskAgency";
 import { IndustryRoadmap, Task } from "../../types";
-import { findMatchInBlock, findMatchInLabelledText } from "./helpers";
+import { convertFileDataToMatchList } from "./helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchTasks = (
@@ -15,23 +15,11 @@ export const searchTasks = (
   industries: Industry[],
   addOns: IndustryRoadmap[],
 ): Match[] => {
-  const matches: Match[] = [];
+  let matches: Match[] = [];
 
   const taskData = getTaskData(tasks);
 
-  for (const taskDataItem of taskData) {
-    let match: Match = {
-      filename: taskDataItem.fileName,
-      snippets: [],
-    };
-
-    match = findMatchInBlock(taskDataItem.blockTexts, term, match);
-    match = findMatchInLabelledText(taskDataItem.labelledTexts, term, match);
-
-    if (match.snippets.length > 0) {
-      matches.push(match);
-    }
-  }
+  matches = convertFileDataToMatchList(taskData, term);
 
   AddAddOnUsage(matches, addOns);
   AddIndustryUsage(matches, industries);
