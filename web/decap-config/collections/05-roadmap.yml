@@ -319,9 +319,12 @@ collections:
                 value_field: "{{fields.id}}"
                 display_fields: [displayname]
                 options_length: 9999
-              - label: Anytime Actions Tasks
+              - label: Anytime Actions Tasks (Added when Non Essential Question is Answered Yes)
                 name: anytimeActions
-                hint: Anytime Actions related to reinstatements are not included in this dropdown
+                hint:
+                  (Anytime Actions chosen will automatically be displayed in the Recommended for You
+                  section for the user)(Anytime Actions related to reinstatements are not included
+                  in this dropdown)
                 required: false
                 default: []
                 widget: relation
