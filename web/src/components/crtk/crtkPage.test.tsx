@@ -199,9 +199,10 @@ describe("<CRTKPage />", () => {
     });
 
     it("displays field validation errors when required fields are empty", async () => {
-      renderWithBusinessData();
+      renderWithBusinessData({
+        formationData: undefined,
+      });
 
-      // Submit form without filling any fields
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
       await waitFor(() => {
