@@ -13,7 +13,7 @@ jobs:
       SUBNET_ID_01: ${{ vars.SUBNET_ID_01_AWS_DEV }}
       SUBNET_ID_02: ${{ vars.SUBNET_ID_02_AWS_DEV }}
       SG_ID: ${{ vars.SG_ID_AWS_DEV }}
-      STAGE: ${{ vars.STAGE_DEV }}
+      STAGE: ${{ vars.STAGE_CONTENT}}
       MYNJ_PROFILE_LINK: ${{ vars.MYNJ_PROFILE_LINK_SHARED }}
       AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
         ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}

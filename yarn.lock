@@ -4784,6 +4784,7 @@ __metadata:
     "@types/xml2js": 0.4.14
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
+    "@vitest/coverage-v8": 2.1.8
     airtable: 0.12.2
     aws-amplify: 6.15.8
     aws-cdk: 2.1033.0
@@ -4888,6 +4889,7 @@ __metadata:
     unified: 10.1.2
     unist-util-visit: 5.0.0
     uuid: 9.0.1
+    vitest: 2.1.8
     webpack: 5.103.0
     winston: 3.17.0
     winston-cloudwatch: 6.3.0

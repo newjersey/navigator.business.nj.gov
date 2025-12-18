@@ -252,7 +252,9 @@
     "revegetation",
     "NJLWD",
     "selfgenerator",
-    "SSTRS"
+    "SSTRS",
+    "nbsp",
+    "cemetary"
   ],
   "ignorePaths": [
     "node_modules/**",
