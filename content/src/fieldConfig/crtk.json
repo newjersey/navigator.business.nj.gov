@@ -6,7 +6,7 @@
     "businessStreetAddressLabel": "Business Street Address",
     "cityLabel": "City",
     "stateLabel": "State",
-    "zipLabel": "Zip",
+    "zipLabel": "Zip Code",
     "einLabel": "Employer Identification Number (EIN)",
     "einOptionalText": "(Optional)",
     "submitText": "Search for My Business",
@@ -17,6 +17,13 @@
     "warningText": "Businesses that do not meet their CRTK requirements may receive thousands in fines and penalties.",
     "federalInfoTitle": "Important: Federal Requirements May Also Apply",
     "federalInfoText": "You may also be subject to federal Emergency Planning and Community Right-to-Know Act (EPCRA) reporting.",
-    "federalLinkText": "Learn more: EPA EPCRA website →"
+    "federalLinkText": "Learn more: EPA EPCRA website →",
+    "titleText": "Tell Us About Your Business",
+
+    "errorTextForm": "Review the following fields for errors and missing information:",
+    "businessNameError": "Enter your business name.",
+    "businessStreetAddressError": "Enter your business street address.",
+    "businessCityError": "Enter your city.",
+    "businessZipError": "Enter your zip code."
   }
 }

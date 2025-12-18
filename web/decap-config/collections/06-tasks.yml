@@ -2531,3 +2531,52 @@ collections:
                   name: businessStructureNotSelectedAlertText,
                   widget: string,
                 }
+
+  - name: "crtk"
+    label: "CRTK"
+    delete: false
+    create: false
+    files:
+      - label: "Community right to know"
+        name: "crtk"
+        file: content/src/fieldConfig/crtk.json
+        editor:
+          preview: true
+        fields:
+          - label: CRTK Task
+            name: crtkTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Title Text, name: titleText, widget: string }
+              - { label: Intro Text, name: introText, widget: string }
+              - { label: Helper Text, name: helperText, widget: string }
+              - { label: Business Name Label, name: businessNameLabel, widget: string }
+              - {
+                  label: Business Street Address Label,
+                  name: businessStreetAddressLabel,
+                  widget: string,
+                }
+              - { label: City Label, name: cityLabel, widget: string }
+              - { label: State Label, name: stateLabel, widget: string }
+              - { label: Zip Label, name: zipLabel, widget: string }
+              - { label: EIN Label, name: einLabel, widget: string }
+              - { label: EIN Optional Text, name: einOptionalText, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - { label: Error Text Form, name: errorTextForm, widget: string }
+              - { label: Business Name Error, name: businessNameError, widget: string }
+              - {
+                  label: Business Street Address Error,
+                  name: businessStreetAddressError,
+                  widget: string,
+                }
+              - { label: Business City Error, name: businessCityError, widget: string }
+              - { label: Business Zip Error, name: businessZipError, widget: string }
+              - { label: Error Text Not Found, name: errorTextNotFound, widget: string }
+              - { label: Error Text Fields Required, name: errorTextFieldsRequired, widget: string }
+              - { label: Error Text Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Warning Title, name: warningTitle, widget: string }
+              - { label: Warning Text, name: warningText, widget: string }
+              - { label: Federal Info Title, name: federalInfoTitle, widget: string }
+              - { label: Federal Info Text, name: federalInfoText, widget: string }
+              - { label: Federal Link Text, name: federalLinkText, widget: string }

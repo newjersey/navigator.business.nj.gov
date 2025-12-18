@@ -105,23 +105,19 @@ export const CRTKStatus = (props: Props): ReactElement => {
     const errors: FieldErrors = {};
 
     if (!formValues.businessName?.trim()) {
-      errors.businessName = "Enter your business name.";
+      errors.businessName = Config.crtkTask.businessNameError;
     }
 
     if (!formValues.businessStreetAddress?.trim()) {
-      errors.businessStreetAddress = "Enter your business street address.";
+      errors.businessStreetAddress = Config.crtkTask.businessStreetAddressError;
     }
 
     if (!formValues.city?.trim()) {
-      errors.city = "Enter your city.";
-    }
-
-    if (!formValues.state?.trim()) {
-      errors.state = "Enter your state.";
+      errors.city = Config.crtkTask.businessCityError;
     }
 
     if (!formValues.zip?.trim()) {
-      errors.zip = "Enter your zip code.";
+      errors.zip = Config.crtkTask.businessZipError;
     } else if (!/^\d{5}$/.test(formValues.zip.trim())) {
       errors.zip = "Enter a valid 5-digit zip code.";
     }
@@ -212,32 +208,34 @@ export const CRTKStatus = (props: Props): ReactElement => {
           <Alert dataTestid="error-alert-FIELDS_REQUIRED" variant="error">
             <div>
               <p className="margin-bottom-2">
-                <strong>Review the following fields for errors and missing information:</strong>
+                <strong>{Config.crtkTask.errorTextForm}</strong>
               </p>
               <ul className="margin-bottom-0">
                 {fieldErrors.businessName && (
                   <li>
-                    <a href="#question-business-name">Business Name</a>
+                    <a href="#question-business-name">{Config.crtkTask.businessNameLabel}</a>
                   </li>
                 )}
                 {fieldErrors.businessStreetAddress && (
                   <li>
-                    <a href="#question-business-street-address">Business Street Address</a>
+                    <a href="#question-business-street-address">
+                      {Config.crtkTask.businessStreetAddressLabel}
+                    </a>
                   </li>
                 )}
                 {fieldErrors.city && (
                   <li>
-                    <a href="#question-city">City</a>
+                    <a href="#question-city">{Config.crtkTask.cityLabel}</a>
                   </li>
                 )}
                 {fieldErrors.state && (
                   <li>
-                    <a href="#question-state">State</a>
+                    <a href="#question-state">{Config.crtkTask.stateLabel}</a>
                   </li>
                 )}
                 {fieldErrors.zip && (
                   <li>
-                    <a href="#question-zip">Zip</a>
+                    <a href="#question-zip">{Config.crtkTask.zipLabel}</a>
                   </li>
                 )}
               </ul>
@@ -268,7 +266,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
       </div>
       <div className="bg-accent-cooler-50 padding-2 margin-bottom-3">
         <h2 className="margin-top-0 margin-bottom-1 text-accent-cooler">
-          Tell Us About Your Business
+          {Config.crtkTask.titleText}
         </h2>
         <p className="text-base-dark margin-bottom-0">{Config.crtkTask.helperText}</p>
 
