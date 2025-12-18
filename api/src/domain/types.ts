@@ -45,8 +45,8 @@ import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
 export type MessageChannel = "email" | "sms" | "tts" | "whatsapp";
-export type MessageTemplateId = "welcome_version-B";
-export type MessageTopic = "welcome";
+export type MessageTemplateId = "welcome_version-B" | "test-reminder-v1";
+export type MessageTopic = "welcome" | "reminder";
 
 export interface MessageData {
   taskId: string;
