@@ -226,7 +226,7 @@
     "sass-loader": "14.2.1",
     "seedrandom": "^3.0.5",
     "semantic-release": "19.0.5",
-    "storybook": "7.6.20",
+    "storybook": "7.6.21",
     "style-loader": "3.3.4",
     "supertest": "6.3.4",
     "ts-jest": "29.4.5",
