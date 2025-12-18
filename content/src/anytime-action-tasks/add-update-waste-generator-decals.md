@@ -8,7 +8,7 @@ industryIds: []
 sectorIds:
   - construction
   - waste-management-and-Remediation
-moveToRecommendedForYouSection: true
+moveToRecommendedForYouSection: false
 nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
 urlSlug: add-update-waste-generator-decals
 summaryDescriptionMd: >-
