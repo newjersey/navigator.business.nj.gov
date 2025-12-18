@@ -69,7 +69,7 @@
   "displayname": "cemetery",
   "industryOnboardingQuestions": {},
   "isEnabled": true,
-  "additionalSearchTerms": "cemetary, burial, graveyard, grave, crematory, mausoleum, niche, crypt ",
+  "additionalSearchTerms": "cemetery, burial, graveyard, grave, crematory, mausoleum, niche, crypt ",
   "id": "cemetery",
   "description": "Offers burial plots, mausoleum spaces, and other services for the dead",
   "webflowId": "68a7501ebf7e85d7b58fcc50"
