@@ -29,8 +29,8 @@ describe("<CRTKSearchResult />", () => {
       naicsCode: "424690",
       naicsDescription: "Other Chemical and Allied Products Merchant Wholesalers",
       businessActivity: "RAW MATERIAL RECEIVING, STORAGE AND DISTRIBUTION",
-      facilityType: "REGULATED",
-      facilityStatus: "ACTIVE",
+      type: "REGULATED",
+      status: "ACTIVE",
       eligibility: "CRTK/RPPR",
       userStatus: "USER ABOVE",
       receivedDate: "2025-03-11T20:27:35.000Z",
@@ -97,9 +97,9 @@ describe("<CRTKSearchResult />", () => {
       renderComponent({
         CRTKSearchResult: "FOUND",
         CRTKEntry: {
-          facilityType: undefined,
+          type: undefined,
           eligibility: undefined,
-          facilityStatus: undefined,
+          status: undefined,
         },
       });
       fireEvent.click(screen.getByText("Your CRTK Details"));
@@ -111,9 +111,9 @@ describe("<CRTKSearchResult />", () => {
       renderComponent({
         CRTKSearchResult: "FOUND",
         CRTKEntry: {
-          facilityType: "REGULATED",
+          type: "REGULATED",
           eligibility: undefined,
-          facilityStatus: "ACTIVE",
+          status: "ACTIVE",
         },
       });
       fireEvent.click(screen.getByText("Your CRTK Details"));
@@ -315,8 +315,8 @@ describe("<CRTKSearchResult />", () => {
       renderComponent({
         CRTKSearchResult: "FOUND",
         CRTKEntry: {
-          facilityType: undefined,
-          facilityStatus: undefined,
+          type: undefined,
+          status: undefined,
           eligibility: undefined,
         },
       });

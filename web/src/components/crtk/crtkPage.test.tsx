@@ -35,8 +35,8 @@ describe("<CRTKPage />", () => {
       naicsCode: "424690",
       naicsDescription: "Other Chemical and Allied Products Merchant Wholesalers",
       businessActivity: "RAW MATERIAL RECEIVING, STORAGE AND DISTRIBUTION",
-      facilityType: "REGULATED",
-      facilityStatus: "ACTIVE",
+      type: "REGULATED",
+      status: "ACTIVE",
       eligibility: "CRTK/RPPR",
       userStatus: "USER ABOVE",
       receivedDate: "2025-03-11T20:27:35.000Z",
@@ -363,7 +363,7 @@ describe("<CRTKPage />", () => {
         CRTKEntry: {
           businessName: "Existing Business",
           facilityId: "12345",
-          facilityStatus: "ACTIVE",
+          status: "ACTIVE",
         },
       });
 
