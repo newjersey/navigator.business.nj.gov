@@ -298,7 +298,7 @@ collections:
                 }
 
   - name: "tasks"
-    label: "Tasks - All"
+    label: "Tasks - All (not mapped to Webflow/static site)"
     folder: "content/src/roadmaps/tasks"
     summary: "{{displayname}} - {{name}}"
     identifier_field: "{{id}}"
