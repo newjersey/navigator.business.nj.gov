@@ -4,7 +4,7 @@ displayname: workers-compensation-insurance-company
 urlSlug: workers-compensation-insurance-company
 webflowName: Workers Compensation Insurance Company
 agencyId: nj-banking-insurance
-callToActionText: Visit the Compensation Rating and Inspection Bureau
+callToActionText: Visit the NJ CRIB
 callToActionLink: https://www.njcrib.com/
 webflowIndustry: Workers Compensation
 licenseCertificationClassification: APPROVAL
