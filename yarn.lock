@@ -4670,6 +4670,7 @@ __metadata:
     winston-cloudwatch: 6.3.0
     wiremock: 3.13.2
     xml2js: 0.6.2
+    zod: 4.3.5
   languageName: unknown
   linkType: soft
 
@@ -4913,6 +4914,7 @@ __metadata:
     wiremock: 3.13.2
     xml2js: 0.6.2
     yarn-workspace-sync-deps: 0.3.3
+    zod: 4.3.5
   languageName: unknown
   linkType: soft
 
@@ -39356,6 +39358,13 @@ __metadata:
   version: 0.8.15
   resolution: "zen-observable@npm:0.8.15"
   checksum: b7289084bc1fc74a559b7259faa23d3214b14b538a8843d2b001a35e27147833f4107590b1b44bf5bc7f6dfe6f488660d3a3725f268e09b3925b3476153b7821
+  languageName: node
+  linkType: hard
+
+"zod@npm:4.3.5":
+  version: 4.3.5
+  resolution: "zod@npm:4.3.5"
+  checksum: 68691183a91c67c4102db20139f3b5af288c59b4b11eb2239d712aae99dc6c1cecaeebcb0c012b44489771be05fecba21e79f65af4b3163b220239ef0af3ec49
   languageName: node
   linkType: hard
 
