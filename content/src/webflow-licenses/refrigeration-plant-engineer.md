@@ -5,7 +5,7 @@ urlSlug: refrigeration-plant-engineer
 webflowName: Refrigeration Plant Engineer
 agencyId: njdol
 agencyAdditionalContext: Office of Boiler and Pressure Vessel Compliance
-callToActionText: Become a Refrigeration Plant Engineer
+callToActionText: Become an Engineer
 callToActionLink: http://nj.gov/labor/lsse/content/bbpvc.html
 webflowIndustry: Refrigeration Plant Engineer
 divisionPhone: (609) 292-2345
