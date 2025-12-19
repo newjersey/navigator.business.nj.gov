@@ -36,30 +36,30 @@ const migrate_v180Business_to_v181Business = (business: v180Business): v181Busin
 export interface v181IndustrySpecificData {
   liquorLicense: boolean;
   requiresCpa: boolean;
-  homeBasedBusiness: boolean | undefined;
+  homeBasedBusiness?: boolean | undefined;
   providesStaffingService: boolean;
   certifiedInteriorDesigner: boolean;
   realEstateAppraisalManagement: boolean;
-  cannabisLicenseType: v181CannabisLicenseType;
-  cannabisMicrobusiness: boolean | undefined;
-  constructionRenovationPlan: boolean | undefined;
-  carService: v181CarServiceType | undefined;
+  cannabisLicenseType?: v181CannabisLicenseType;
+  cannabisMicrobusiness?: boolean | undefined;
+  constructionRenovationPlan?: boolean | undefined;
+  carService?: v181CarServiceType | undefined;
   interstateTransport: boolean;
-  interstateLogistics: boolean | undefined;
-  interstateMoving: boolean | undefined;
-  isChildcareForSixOrMore: boolean | undefined;
-  petCareHousing: boolean | undefined;
-  willSellPetCareItems: boolean | undefined;
+  interstateLogistics?: boolean | undefined;
+  interstateMoving?: boolean | undefined;
+  isChildcareForSixOrMore?: boolean | undefined;
+  petCareHousing?: boolean | undefined;
+  willSellPetCareItems?: boolean | undefined;
   constructionType: v181ConstructionType;
   residentialConstructionType: v181ResidentialConstructionType;
   employmentPersonnelServiceType: v181EmploymentAndPersonnelServicesType;
   employmentPlacementType: v181EmploymentPlacementType;
-  carnivalRideOwningBusiness: boolean | undefined;
+  carnivalRideOwningBusiness?: boolean | undefined;
   propertyLeaseType: v181PropertyLeaseType;
-  hasThreeOrMoreRentalUnits: boolean | undefined;
-  travelingCircusOrCarnivalOwningBusiness: boolean | undefined;
-  vacantPropertyOwner: boolean | undefined;
-  publicWorksContractor: boolean | undefined;
+  hasThreeOrMoreRentalUnits?: boolean | undefined;
+  travelingCircusOrCarnivalOwningBusiness?: boolean | undefined;
+  vacantPropertyOwner?: boolean | undefined;
+  publicWorksContractor?: boolean | undefined;
 }
 
 export type v181PropertyLeaseType = "SHORT_TERM_RENTAL" | "LONG_TERM_RENTAL" | "BOTH" | undefined;
@@ -88,15 +88,15 @@ export interface v181Business {
   onboardingFormProgress: v181OnboardingFormProgress;
   taskProgress: Record<string, v181TaskProgress>;
   taskItemChecklist: Record<string, boolean>;
-  licenseData: v181LicenseData | undefined;
+  licenseData?: v181LicenseData | undefined;
   preferences: v181Preferences;
   taxFilingData: v181TaxFilingData;
   formationData: v181FormationData;
-  environmentData: v181EnvironmentData | undefined;
-  xrayRegistrationData: v181XrayData | undefined;
+  environmentData?: v181EnvironmentData | undefined;
+  xrayRegistrationData?: v181XrayData | undefined;
   roadmapTaskData: v181RoadmapTaskData;
-  taxClearanceCertificateData: v181TaxClearanceCertificateData | undefined;
-  cigaretteLicenseData: v181CigaretteLicenseData | undefined;
+  taxClearanceCertificateData?: v181TaxClearanceCertificateData | undefined;
+  cigaretteLicenseData?: v181CigaretteLicenseData | undefined;
   version: number;
   versionWhenCreated: number;
   userId: string;
@@ -165,7 +165,7 @@ export type v181BusinessUser = {
   phoneNumber?: string;
 };
 
-interface v181ProfileDocuments {
+export interface v181ProfileDocuments {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
@@ -203,7 +203,7 @@ type v181ForeignBusinessTypeId =
   | "transactionsInNJ"
   | "none";
 
-type v181Municipality = {
+export type v181Municipality = {
   name: string;
   displayName: string;
   county: string;
@@ -213,7 +213,7 @@ type v181Municipality = {
 type v181TaxFilingState = "SUCCESS" | "FAILED" | "UNREGISTERED" | "PENDING" | "API_ERROR";
 type v181TaxFilingErrorFields = "businessName" | "formFailure";
 
-type v181TaxFilingData = {
+export type v181TaxFilingData = {
   state?: v181TaxFilingState;
   lastUpdatedISO?: string;
   registeredISO?: string;
@@ -242,10 +242,10 @@ export interface v181LicenseSearchNameAndAddress extends v181LicenseSearchAddres
   name: string;
 }
 
-type v181LicenseDetails = {
+export type v181LicenseDetails = {
   nameAndAddress: v181LicenseSearchNameAndAddress;
   licenseStatus: v181LicenseStatus;
-  expirationDateISO: string | undefined;
+  expirationDateISO?: string | undefined;
   lastUpdatedISO: string;
   checklistItems: v181LicenseStatusItem[];
 };
@@ -274,12 +274,12 @@ export type v181LicenseName = (typeof v181taskIdLicenseNameMapping)[v181LicenseT
 
 type v181Licenses = Partial<Record<v181LicenseName, v181LicenseDetails>>;
 
-type v181LicenseData = {
+export type v181LicenseData = {
   lastUpdatedISO: string;
   licenses?: v181Licenses;
 };
 
-type v181Preferences = {
+export type v181Preferences = {
   roadmapOpenSections: v181SectionType[];
   roadmapOpenSteps: number[];
   hiddenFundingIds: string[];
@@ -292,7 +292,7 @@ type v181Preferences = {
   isNonProfitFromFunding?: boolean;
 };
 
-type v181LicenseStatusItem = {
+export type v181LicenseStatusItem = {
   title: string;
   status: v181CheckoffStatus;
 };
@@ -329,19 +329,19 @@ const v181LicenseStatuses: v181LicenseStatus[] = [
 ];
 
 const v181SectionNames = ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"] as const;
-type v181SectionType = (typeof v181SectionNames)[number];
+export type v181SectionType = (typeof v181SectionNames)[number];
 
-type v181ExternalStatus = {
+export type v181ExternalStatus = {
   newsletter?: v181NewsletterResponse;
   userTesting?: v181UserTestingResponse;
 };
 
-interface v181NewsletterResponse {
+export interface v181NewsletterResponse {
   success?: boolean;
   status: v181NewsletterStatus;
 }
 
-interface v181UserTestingResponse {
+export interface v181UserTestingResponse {
   success?: boolean;
   status: v181UserTestingStatus;
 }
@@ -372,22 +372,22 @@ type v181NameAvailabilityStatus =
   | "RESTRICTED_ERROR"
   | undefined;
 
-interface v181NameAvailabilityResponse {
+export interface v181NameAvailabilityResponse {
   status: v181NameAvailabilityStatus;
   similarNames: string[];
   invalidWord?: string;
 }
 
-interface v181NameAvailability extends v181NameAvailabilityResponse {
+export interface v181NameAvailability extends v181NameAvailabilityResponse {
   lastUpdatedTimeStamp: string;
 }
 
 export interface v181FormationData {
   formationFormData: v181FormationFormData;
-  businessNameAvailability: v181NameAvailability | undefined;
-  dbaBusinessNameAvailability: v181NameAvailability | undefined;
-  formationResponse: v181FormationSubmitResponse | undefined;
-  getFilingResponse: v181GetFilingResponse | undefined;
+  businessNameAvailability?: v181NameAvailability | undefined;
+  dbaBusinessNameAvailability?: v181NameAvailability | undefined;
+  formationResponse?: v181FormationSubmitResponse | undefined;
+  getFilingResponse?: v181GetFilingResponse | undefined;
   completedFilingPayment: boolean;
   lastVisitedPageIndex: number;
 }
@@ -453,17 +453,17 @@ export interface v181FormationFormData extends v181FormationAddress {
   readonly howToProceed: v181HowToProceedOptions;
 }
 
-type v181ForeignGoodStandingFileObject = {
+export type v181ForeignGoodStandingFileObject = {
   Extension: "PDF" | "PNG";
   Content: string;
 };
 
-type v181StateObject = {
+export type v181StateObject = {
   shortCode: string;
   name: string;
 };
 
-interface v181FormationAddress {
+export interface v181FormationAddress {
   readonly addressLine1: string;
   readonly addressLine2: string;
   readonly addressCity?: string;
@@ -472,7 +472,7 @@ interface v181FormationAddress {
   readonly addressProvince?: string;
   readonly addressZipCode: string;
   readonly addressCountry: string;
-  readonly businessLocationType: v181FormationBusinessLocationType | undefined;
+  readonly businessLocationType?: v181FormationBusinessLocationType | undefined;
 }
 
 type v181FormationBusinessLocationType = "US" | "INTL" | "NJ";
@@ -487,15 +487,15 @@ type v181SignerTitle =
   | "Chairman of the Board"
   | "CEO";
 
-interface v181FormationSigner {
+export interface v181FormationSigner {
   readonly name: string;
   readonly signature: boolean;
   readonly title: v181SignerTitle;
 }
 
-interface v181FormationIncorporator extends v181FormationSigner, v181FormationAddress {}
+export interface v181FormationIncorporator extends v181FormationSigner, v181FormationAddress {}
 
-interface v181FormationMember extends v181FormationAddress {
+export interface v181FormationMember extends v181FormationAddress {
   readonly name: string;
 }
 
@@ -559,22 +559,22 @@ export const AllBusinessSuffixes = [
 
 type v181BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
-type v181FormationSubmitResponse = {
+export type v181FormationSubmitResponse = {
   success: boolean;
-  token: string | undefined;
-  formationId: string | undefined;
-  redirect: string | undefined;
+  token?: string | undefined;
+  formationId?: string | undefined;
+  redirect?: string | undefined;
   errors: v181FormationSubmitError[];
-  lastUpdatedISO: string | undefined;
+  lastUpdatedISO?: string | undefined;
 };
 
-type v181FormationSubmitError = {
+export type v181FormationSubmitError = {
   field: string;
   type: "FIELD" | "UNKNOWN" | "RESPONSE";
   message: string;
 };
 
-type v181GetFilingResponse = {
+export type v181GetFilingResponse = {
   success: boolean;
   entityId: string;
   transactionDate: string;
@@ -649,17 +649,17 @@ export type v181WasteWaterFieldIds =
 export type v181WasteWaterData = Record<v181WasteWaterFieldIds, boolean>;
 
 export type v181TaxClearanceCertificateData = {
-  requestingAgencyId: string | undefined;
-  businessName: string | undefined;
-  addressLine1: string | undefined;
-  addressLine2: string | undefined;
-  addressCity: string | undefined;
+  requestingAgencyId?: string | undefined;
+  businessName?: string | undefined;
+  addressLine1?: string | undefined;
+  addressLine2?: string | undefined;
+  addressCity?: string | undefined;
   addressState?: v181StateObject | undefined;
-  addressZipCode: string | undefined;
-  taxId: string | undefined;
-  taxPin: string | undefined;
-  hasPreviouslyReceivedCertificate: boolean | undefined;
-  lastUpdatedISO: string | undefined;
+  addressZipCode?: string | undefined;
+  taxId?: string | undefined;
+  taxPin?: string | undefined;
+  hasPreviouslyReceivedCertificate?: boolean | undefined;
+  lastUpdatedISO?: string | undefined;
 };
 
 export type v181CigaretteLicenseData = {
