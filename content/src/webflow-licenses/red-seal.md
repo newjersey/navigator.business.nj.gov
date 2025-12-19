@@ -5,7 +5,7 @@ urlSlug: red-seal
 webflowName: Red Seal
 agencyId: njdol
 agencyAdditionalContext: Office of Boiler and Pressure Vessel Compliance
-callToActionText: Learn About Becoming a Red Seal Engineer
+callToActionText: Become a Red Seal Engineer
 callToActionLink: https://thetrainingcenter.com/red-seal-engineer-1b
 webflowIndustry: Red Seal
 divisionPhone: (609) 292-2345
