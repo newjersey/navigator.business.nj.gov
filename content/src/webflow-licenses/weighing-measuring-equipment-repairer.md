@@ -1,12 +1,13 @@
 ---
+id: weighing-measuring-equipment-repairer
 displayname: weighing-measuring-equipment-repairer
-id: "weighing-measuring-equipment-repairer"
-webflowId: "640b84678862444f752626c7"
-urlSlug: "weighing-measuring-equipment-repairer"
-webflowName: "Weighing & Measuring Equipment Repairer"
-callToActionLink: "https://www.njconsumeraffairs.gov/OWM"
+urlSlug: weighing-measuring-equipment-repairer
+webflowName: Weighing & Measuring Equipment Repairer
 agencyId: law-public-safety
-divisionPhone: "(732) 815-4840"
-webflowIndustry: "Weighing and Measuring"
-licenseCertificationClassification: "LICENSE"
+callToActionText: Get a Repairman's License
+callToActionLink: https://www.njconsumeraffairs.gov/OWM
+webflowIndustry: Weighing and Measuring
+licenseCertificationClassification: LICENSE
+divisionPhone: (732) 815-4840
+webflowId: 640b84678862444f752626c7
 ---
