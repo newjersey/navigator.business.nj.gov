@@ -102,6 +102,7 @@ describe("EmployerRates", () => {
     renderComponents({
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
       businessPersona: "FOREIGN",
+      foreignBusinessTypeIds: ["employeesInNJ"],
     });
     expect(screen.getByText(Config.employerRates.sectionHeaderText)).toBeInTheDocument();
   });
