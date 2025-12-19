@@ -1,14 +1,14 @@
 ---
+id: radon-measurement-specialist-technician
 displayname: radon-measurement-specialist-technician
-id: "radon-measurement-specialist-technician"
-webflowId: "5f77291ceb55581b71feb59b"
-urlSlug: "radon-measurement-specialist-technician"
-webflowName: "Radon Measurement - Specialist/Technician"
-callToActionLink: "http://state.nj.us/dep/rpp/tec/diagrt.htm"
-callToActionText: ""
+urlSlug: radon-measurement-specialist-technician
+webflowName: Radon Measurement - Specialist/Technician
 agencyId: njdep
-agencyAdditionalContext: "Bureau of Radiological Health"
-divisionPhone: "(609) 984-5400"
-webflowIndustry: "Radon Measurement"
-licenseCertificationClassification: "CONTACT"
+agencyAdditionalContext: Bureau of Radiological Health
+callToActionText: Become a Radon Tech
+callToActionLink: https://www.nj.gov/dep/rpp/radon/rad_cert_req.html
+webflowIndustry: Radon Measurement
+divisionPhone: (609) 984-5400
+webflowId: 5f77291ceb55581b71feb59b
+licenseCertificationClassification: CONTACT
 ---
