@@ -5,7 +5,7 @@ urlSlug: wildlife
 webflowName: Wildlife
 agencyId: njdep
 agencyAdditionalContext: Division of Fish and Wildlife (no cats or dogs)
-callToActionText: Learn About Wildlife Permits
+callToActionText: Get a Wildlife Permit
 callToActionLink: http://state.nj.us/dep/fgw/exotic_apps.htm
 webflowIndustry: Wildlife
 divisionPhone: (908) 735-6200
