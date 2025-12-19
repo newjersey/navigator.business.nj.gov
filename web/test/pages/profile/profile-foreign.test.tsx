@@ -638,6 +638,47 @@ describe("profile-foreign", () => {
         ).toBeInTheDocument();
       },
     );
+
+    it("shows the employer rates section if the business has remoteWorker foreignBusinessId", () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: ["employeesInNJ"],
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+          }),
+        }),
+      });
+      chooseTab("numbers");
+      expect(
+        screen.getByRole("heading", { name: Config.employerRates.sectionHeaderText }),
+      ).toBeInTheDocument();
+    });
+
+    it("doesn't show the employer rates section if the business doesn't have remote workers", () => {
+      process.env.FEATURE_EMPLOYER_RATES = "true";
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: [
+              "employeeOrContractorInNJ",
+              "officeInNJ",
+              "propertyInNJ",
+              "companyOperatedVehiclesInNJ",
+              "revenueInNJ",
+              "transactionsInNJ",
+            ],
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+          }),
+        }),
+      });
+      chooseTab("numbers");
+      expect(
+        screen.queryByRole("heading", { name: Config.employerRates.sectionHeaderText }),
+      ).not.toBeInTheDocument();
+    });
   });
 
   describe("non essential questions", () => {
