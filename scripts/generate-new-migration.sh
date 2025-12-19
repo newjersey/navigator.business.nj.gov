@@ -58,6 +58,22 @@ import { migrate_v${MOST_RECENT_VERSION_NUMBER}_to_v${NEW_VERSION_NUMBER} } from
 ## Update generator function in migrations.ts
 sed -i.bak "s|v${MOST_RECENT_VERSION_NUMBER}UserData as CURRENT_GENERATOR } from \"@db/migrations/${MOST_RECENT_FILENAME_WITHOUT_FILETYPE}\"|v${NEW_VERSION_NUMBER}UserData as CURRENT_GENERATOR } from \"@db/migrations/v${NEW_VERSION_NUMBER}_${NEW_FILENAME}\"|g" "migrations.ts"
 
+# Update ZodSchema files
+cd "$PROJECT_ROOT/api/src/db/zodSchema/"
+ZOD_SCHEMA_FILE="$PROJECT_ROOT/api/src/db/zodSchema/zodSchemas.ts"
+ZOD_SCHEMA_TEST_FILE="$PROJECT_ROOT/api/src/db/zodSchema/zodSchemas.test.ts"
+
+echo "Updating Zod schema imports and schema version numbers"
+# Replace filename references
+sed -i.bak "s/${MOST_RECENT_FILENAME_WITHOUT_FILETYPE}/v${NEW_VERSION_NUMBER}_${NEW_FILENAME}/g" \
+  "$ZOD_SCHEMA_FILE" \
+  "$ZOD_SCHEMA_TEST_FILE"
+
+# Replace version references
+sed -i.bak "s/${MOST_RECENT_VERSION_NUMBER}/${NEW_VERSION_NUMBER}/g" \
+  "$ZOD_SCHEMA_FILE" \
+  "$ZOD_SCHEMA_TEST_FILE"
+
 echo "Cleaning up backup files..."
 cd "$PROJECT_ROOT"
 find . -not -path "*/node_modules/*" -name "*.bak" -delete
