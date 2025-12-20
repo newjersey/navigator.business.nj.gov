@@ -23,7 +23,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { render, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -110,7 +110,7 @@ describe("loading page", () => {
     expect(mockPush).toHaveBeenCalledWith("/tasks/some-task");
   });
 
-  it("triggers onGuestSignIn with encounteredMyNjLinkingError param when user has signin error", async () => {
+  it("triggers error message when user has a myNJ linking signin error", async () => {
     setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
     useMockRouter({ isReady: true, asPath: signInSamlError });
     mockSigninHelper.onGuestSignIn.mockResolvedValue();
@@ -118,12 +118,7 @@ describe("loading page", () => {
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
 
     expect(mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account).toHaveBeenCalled();
-    return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalledWith({
-      push: expect.anything(),
-      pathname: expect.anything(),
-      dispatch: expect.anything(),
-      encounteredMyNjLinkingError: true,
-    });
+    expect(screen.getByText("Login Issues Help page")).toBeInTheDocument();
   });
 
   it("redirects to the email check login page as a fallback if other conditions aren't met and the login page is enabled", async () => {

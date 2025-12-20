@@ -11,9 +11,13 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   hasError?: boolean;
+  isLinkingError?: boolean;
 }
 
-export const LoadingPageComponent = ({ hasError = false }: Props): ReactElement => {
+export const LoadingPageComponent = ({
+  hasError = false,
+  isLinkingError = false,
+}: Props): ReactElement => {
   const { Config } = useConfig();
   const { state: authState } = useContext(AuthContext);
 
@@ -28,24 +32,43 @@ export const LoadingPageComponent = ({ hasError = false }: Props): ReactElement 
         }}
         className="logout-button-unstyled"
       >
-        Logout
+        {Config.loginSupportPage.logoutButtonText}
       </UnStyledButton>
     ),
   };
+
+  const renderErrorState = () => {
+    const titleMessage = isLinkingError
+      ? Config.loginSupportPage.unlinkedAccount
+      : Config.loginSupportPage.havingTrouble;
+
+    const titleClassName = isLinkingError ? undefined : "text-bold";
+
+    return (
+      <div className="margin-top-neg-4 text-center">
+        <p className={titleClassName}>{titleMessage}</p>
+
+        {isLoggedIn && (
+          <Content customComponents={customComponents}>
+            {isLinkingError
+              ? Config.loginSupportPage.logoutAndTryAgainUnlinked
+              : Config.loginSupportPage.logoutAndTryAgain}
+          </Content>
+        )}
+
+        <Content className="margin-y-3" showLaunchIcon={false}>
+          {Config.loginSupportPage.forMoreAssistance}
+        </Content>
+      </div>
+    );
+  };
+
   return (
     <PageSkeleton showNavBar logoOnly="NAVIGATOR_LOGO">
       <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
         <SingleColumnContainer>
           <PageCircularIndicator />
-          {hasError && (
-            <div className="margin-top-4 text-center">
-              <Content customComponents={customComponents}>
-                {isLoggedIn
-                  ? Config.loginSupportPage.timeoutErrorMessageAuthenticated
-                  : Config.loginSupportPage.timeoutErrorMessageUnauthenticated}
-              </Content>
-            </div>
-          )}
+          {hasError && renderErrorState()}
         </SingleColumnContainer>
       </main>
     </PageSkeleton>

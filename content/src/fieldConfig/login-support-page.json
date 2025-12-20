@@ -1,7 +1,12 @@
 {
   "loginSupportPage": {
-    "timeoutErrorMessageAuthenticated": "Having trouble logging in? ~~logoutButton~~ and try again or visit our [Login Issues Help page](/support/login).",
-    "timeoutErrorMessageUnauthenticated": "Having trouble logging in? Visit our [Login Issues Help page](/support/login).",
+    "unlinkedAccount": "It looks like you haven’t linked your myNewJersey account.",
+    "havingTrouble": "Having trouble logging in?",
+    "logoutButtonText": "Log out",
+    "logoutButtonTextUnlinked": "log out",
+    "logoutAndTryAgain": "~~logoutButton~~ and try again.",
+    "logoutAndTryAgainUnlinked": "Please ~~logoutButton~~ and try again.",
+    "forMoreAssistance": "For more assistance, visit our [Login Issues Help page](support/login).",
     "pageTitle": "Having trouble logging in to Business.NJ.gov?",
     "lastUpdated": "Nov 5, 2025",
     "multipleAccountsCallout": ":::miniCallout{ calloutType=\"informational\" }\n**If you have multiple myNewJersey accounts, use the email linked to your business.**\n:::",

@@ -1,7 +1,6 @@
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -14,7 +13,6 @@ import { ReactElement, useContext, useEffect, useState } from "react";
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 
 const LoadingPage = (): ReactElement => {
-  // debugger;
   const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
@@ -38,19 +36,13 @@ const LoadingPage = (): ReactElement => {
     if (!router?.isReady) {
       return;
     }
-    // debugger;
     if (router.query[QUERIES.code]) {
       getActiveUser().then((currentUser) => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
       });
     } else if (router && router.asPath && router.asPath.includes(signInSamlError)) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
-      onGuestSignIn({
-        push: router.push,
-        pathname: router.pathname,
-        dispatch,
-        encounteredMyNjLinkingError: true,
-      });
+      setShowError(true);
     } else {
       if (loginPageEnabled) {
         router.push(ROUTES.login);
@@ -61,7 +53,6 @@ const LoadingPage = (): ReactElement => {
   }, [router, dispatch, loginPageEnabled]);
 
   useMountEffectWhenDefined(() => {
-    // debugger;
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
     if (business?.onboardingFormProgress && !onboardingCompleted(business)) {
@@ -81,7 +72,12 @@ const LoadingPage = (): ReactElement => {
     }
   }, userData);
 
-  return <LoadingPageComponent hasError={showError} />;
+  return (
+    <LoadingPageComponent
+      hasError={showError}
+      isLinkingError={router?.asPath.includes(signInSamlError)}
+    />
+  );
 };
 
 export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {
