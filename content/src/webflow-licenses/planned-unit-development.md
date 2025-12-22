@@ -5,7 +5,7 @@ urlSlug: planned-unit-development
 webflowName: Planned Unit Development
 agencyId: nj-community-affairs
 agencyAdditionalContext: Construction Code Element, Planned real Estate Development (PRED)
-callToActionText: Learn About the Division of Codes and Standards
+callToActionText: Learn About Codes
 callToActionLink: http://nj.gov/dca/divisions/codes/
 webflowIndustry: Planned Unit
 divisionPhone: ""
