@@ -6,7 +6,7 @@ webflowName: Plush Toys
 agencyId: nj-health
 agencyAdditionalContext: Consumer Environmental Health Services, Public Health
   Sanitation and Safety Program
-callToActionText: Visit the NJ Department of Health
+callToActionText: Visit the NJ DOH
 callToActionLink: https://nj.gov/health/
 webflowIndustry: Plush Toys
 divisionPhone: (609) 826-4941
