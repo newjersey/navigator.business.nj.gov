@@ -5,7 +5,7 @@ urlSlug: oil-distribution-company-public
 webflowName: Oil Distribution Company - Public
 agencyId: public-utilities
 agencyAdditionalContext: ""
-callToActionText: Learn About the Board of Public Utilities
+callToActionText: Learn About the BPU
 callToActionLink: https://nj.gov/bpu/
 webflowIndustry: Oil Distribution
 divisionPhone: (800) 624-0331
