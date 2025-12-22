@@ -5,7 +5,7 @@ urlSlug: pump-installer
 webflowName: Pump Installer
 agencyId: njdep
 agencyAdditionalContext: Land Use Management Water Supply Allocation Well Permitting and Regulations
-callToActionText: Apply for a Pump Installer License
+callToActionText: Become an Installer
 callToActionLink: http://state.nj.us/dep/watersupply/g_boards_le.html
 webflowIndustry: Pump Installer
 divisionPhone: (609) 984-6831
