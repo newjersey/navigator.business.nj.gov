@@ -4,7 +4,7 @@ displayname: prosthesis
 urlSlug: prosthesis
 webflowName: Prosthesis
 agencyId: nj-consumer-affairs
-callToActionText: Apply for a Prosthetist License
+callToActionText: Get a Prosthetist License
 callToActionLink: http://njconsumeraffairs.gov/orth/Pages/applications.aspx
 webflowIndustry: Prosthesis
 licenseCertificationClassification: REGISTRATION/LICENSE
