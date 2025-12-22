@@ -5,7 +5,7 @@ urlSlug: paramedic
 webflowName: Paramedic
 agencyId: health-senior-services
 agencyAdditionalContext: Office of Emergency Medical Services
-callToActionText: Learn About Emergency Medical Services
+callToActionText: Learn About EMS
 callToActionLink: http://state.nj.us/health/ems/
 webflowIndustry: Paramedic
 divisionPhone: (609) 633-7777
