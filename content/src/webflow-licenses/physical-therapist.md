@@ -4,7 +4,7 @@ displayname: physical-therapist
 urlSlug: physical-therapist
 webflowName: Physical Therapist
 agencyId: nj-consumer-affairs
-callToActionText: Become a Licensed Physical Therapist
+callToActionText: Become a PT
 callToActionLink: http://njconsumeraffairs.gov/pt/Pages/applications.aspx
 webflowIndustry: Physical Therapist
 licenseCertificationClassification: REGISTRATION/LICENSE
