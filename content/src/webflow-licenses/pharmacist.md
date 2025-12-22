@@ -4,7 +4,7 @@ displayname: pharmacist
 urlSlug: pharmacist
 webflowName: Pharmacist
 agencyId: nj-consumer-affairs
-callToActionText: Apply for Your Pharmacist License
+callToActionText: Get a Pharmacist License
 callToActionLink: http://njconsumeraffairs.gov/phar
 webflowIndustry: Pharmacist
 licenseCertificationClassification: REGISTRATION/LICENSE
