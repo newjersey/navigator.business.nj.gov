@@ -5,7 +5,7 @@ urlSlug: mortgage-solicitor
 webflowName: Mortgage Solicitor
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Office of Consumer Finance, License Services
-callToActionText: Learn About Mortgage Broker Licensing
+callToActionText: Learn About Licensing
 callToActionLink: http://nj.gov/dobi/banklicensing/rmla/qiresmortbroker.html
 webflowIndustry: Mortgage Solicitor
 divisionPhone: (609) 292-7272
