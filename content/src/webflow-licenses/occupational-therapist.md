@@ -5,7 +5,7 @@ urlSlug: occupational-therapist
 webflowName: Occupational Therapist
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Occupational Therapy Board
-callToActionText: Get Licensed as an Occupational Therapist
+callToActionText: Get OT Licenses
 callToActionLink: http://njconsumeraffairs.gov/ot
 webflowIndustry: Occupational Therapist
 divisionPhone: (973) 504-6570
