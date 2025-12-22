@@ -5,7 +5,7 @@ urlSlug: proprietary-school-adult
 webflowName: Adult Proprietary School
 agencyId: njdol
 agencyAdditionalContext: Adult Private Schools Licensing and Credentials
-callToActionText: Find Training Opportunities
+callToActionText: Find Trainings
 callToActionLink: https://www.nj.gov/labor/labormarketinformation/contact-us/COEI.shtml
 webflowIndustry: Adult School
 divisionPhone: (609) 292-7272
