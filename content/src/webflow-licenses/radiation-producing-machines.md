@@ -5,7 +5,7 @@ urlSlug: radiation-producing-machines
 webflowName: Radiation Producing Machines
 agencyId: njdep
 agencyAdditionalContext: Bureau of Radiologic Health
-callToActionText: Learn About Radiation Producing Machines
+callToActionText: Learn About RPMs
 callToActionLink: http://state.nj.us/dep/rpp/brh/index.htm
 webflowIndustry: Radiation Machine
 divisionPhone: (609) 984-5890
