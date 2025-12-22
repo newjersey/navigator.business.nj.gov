@@ -93,7 +93,10 @@ export class IamStack extends Stack {
     const sendEmailPolicy = new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
       actions: ["ses:sendEmail", "ses:sendRawEmail"],
-      resources: [`arn:aws:ses:${this.region}:${this.account}:identity/business.nj.gov`],
+      resources: [
+        `arn:aws:ses:${this.region}:${this.account}:identity/business.nj.gov`,
+        `arn:aws:ses:${this.region}:${this.account}:configuration-set/*`,
+      ],
     });
 
     const kmsEncryptPolicy = new iam.PolicyStatement({
