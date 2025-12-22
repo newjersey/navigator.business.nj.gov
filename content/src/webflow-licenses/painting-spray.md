@@ -5,7 +5,7 @@ urlSlug: painting-spray
 webflowName: Painting, Spray
 agencyId: njdep
 agencyAdditionalContext: Compliance and Enforcement
-callToActionText: Learn About the Department of Environmental Protection
+callToActionText: Learn About the DEP
 callToActionLink: http://nj.gov/dep/
 webflowIndustry: Spray Painting
 divisionPhone: "(888) 656-6225 #21"
