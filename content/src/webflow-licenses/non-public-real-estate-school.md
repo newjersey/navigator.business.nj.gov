@@ -5,7 +5,7 @@ urlSlug: non-public-real-estate-school
 webflowName: Non-Public Real Estate School
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Real Estate Commission
-callToActionText: Learn About the NJ Real Estate Commission
+callToActionText: Learn About Licensing
 callToActionLink: http://state.nj.us/dobi/division_rec/licensing/reclic_menu.htm
 webflowIndustry: Real Estate School
 divisionPhone: (609) 292-7272
