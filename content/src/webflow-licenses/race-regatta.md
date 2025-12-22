@@ -5,7 +5,7 @@ urlSlug: race-regatta
 webflowName: Race/Regatta
 agencyId: law-public-safety
 agencyAdditionalContext: Division of State Police
-callToActionText: Learn About the NJ Racing Commission
+callToActionText: Learn About Racing
 callToActionLink: https://www.njoag.gov/about/divisions-and-offices/nj-racing-commission-home/
 webflowIndustry: Race Regatta
 divisionPhone: (609) 882-2000  6173
