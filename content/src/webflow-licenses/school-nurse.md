@@ -1,14 +1,14 @@
 ---
+id: school-nurse
 displayname: school-nurse
-id: "school-nurse"
-webflowId: "5f7729365ddf76c0d73ac433"
-urlSlug: "school-nurse"
-webflowName: "School Nurse"
-callToActionLink: "http://state.nj.us/education/students/safety/health/nurse/"
-callToActionText: ""
+urlSlug: school-nurse
+webflowName: School Nurse
 agencyId: education
-agencyAdditionalContext: "Division of Licensing and Credentials"
-divisionPhone: "(609) 292-2070"
-webflowIndustry: "School Nurse"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Division of Licensing and Credentials
+callToActionText: Get a Certificate
+callToActionLink: https://www.nj.gov/education/certification/edsrvs/
+webflowIndustry: School Nurse
+divisionPhone: (609) 292-2070
+webflowId: 5f7729365ddf76c0d73ac433
+licenseCertificationClassification: LICENSE
 ---
