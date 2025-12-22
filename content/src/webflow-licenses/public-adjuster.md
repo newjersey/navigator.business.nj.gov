@@ -5,7 +5,7 @@ urlSlug: public-adjuster
 webflowName: Public Adjuster
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Division of License Processing
-callToActionText: Become a Public Adjuster
+callToActionText: Become an Adjuster
 callToActionLink: https://nj.gov/dobi/inslic.htm
 webflowIndustry: Public Adjuster
 divisionPhone: (609) 292-4337
