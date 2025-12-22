@@ -4,7 +4,7 @@ displayname: physician-assistant
 urlSlug: physician-assistant
 webflowName: Physician Assistant
 agencyId: nj-consumer-affairs
-callToActionText: Become a Physician Assistant
+callToActionText: Become a PA
 callToActionLink: http://njconsumeraffairs.gov/elec/Pages/FAQ.aspx
 webflowIndustry: Physician Assistant
 licenseCertificationClassification: LICENSE
