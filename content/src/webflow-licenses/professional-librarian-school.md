@@ -5,7 +5,7 @@ urlSlug: professional-librarian-school
 webflowName: Professional School Librarian
 agencyId: education
 agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials
-callToActionText: Get a Professional Librarian Certificate
+callToActionText: Get a Certificate
 callToActionLink: http://tesu.edu/
 webflowIndustry: Librarian
 divisionPhone: (609) 292-2070
