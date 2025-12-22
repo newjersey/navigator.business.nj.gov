@@ -246,6 +246,10 @@ module.exports = {
       to: { path: "src/api" },
     },
     {
+      from: { path: "src/domain/types" },
+      to: { path: "src/libs/constants" },
+    },
+    {
       from: { path: "src/domain" },
       to: { path: "src/client" },
     },
