@@ -9,6 +9,11 @@ import {
   XrayRegistrationEntry,
   XrayRegistrationStatusResponse,
 } from "@businessnjgovnavigator/shared";
+import {
+  REMINDER_EMAIL_CONFIG_SET_NAME,
+  WELCOME_EMAIL_A_CONFIG_SET_NAME,
+  WELCOME_EMAIL_B_CONFIG_SET_NAME,
+} from "@libs/constants";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -50,6 +55,10 @@ import * as https from "node:https";
 export type MessageChannel = "email" | "sms" | "tts" | "whatsapp";
 export type MessageTemplateId = "welcome_version-B" | "test-reminder-v1";
 export type MessageTopic = "welcome" | "reminder";
+export type EmailType =
+  | typeof WELCOME_EMAIL_A_CONFIG_SET_NAME
+  | typeof WELCOME_EMAIL_B_CONFIG_SET_NAME
+  | typeof REMINDER_EMAIL_CONFIG_SET_NAME;
 
 export interface MessageData {
   taskId: string;
