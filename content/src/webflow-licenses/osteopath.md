@@ -5,7 +5,7 @@ urlSlug: osteopath
 webflowName: Osteopath
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Medical Examiners, Certified Nurse Midwife Committee
-callToActionText: Apply for Doctor of Osteopathy Licensure
+callToActionText: Apply for a License
 callToActionLink: http://njconsumeraffairs.gov/bme
 webflowIndustry: Osteopath
 divisionPhone: (973) 826-7100
