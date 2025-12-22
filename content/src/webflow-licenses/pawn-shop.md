@@ -5,7 +5,7 @@ urlSlug: pawn-shop
 webflowName: Pawn Shop
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Office of Consumer Finance, License Service
-callToActionText: Learn About Pawnbroker Licenses
+callToActionText: Learn About Licenses
 callToActionLink: http://state.nj.us/dobi/index.html
 webflowIndustry: Pawn Shop
 divisionPhone: (609) 292-7272
