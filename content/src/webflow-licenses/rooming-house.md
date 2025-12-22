@@ -1,12 +1,13 @@
 ---
+id: rooming-house
 displayname: rooming-house
-id: "rooming-house"
-webflowId: "640b846742a73c66f87d84ca"
-urlSlug: "rooming-house"
-webflowName: "Rooming House"
-callToActionLink: "http://state.nj.us/dca/divisions/codes/offices/roomingboarding.html"
+urlSlug: rooming-house
+webflowName: Rooming House
 agencyId: nj-community-affairs
-divisionPhone: "(609) 984-1706"
-webflowIndustry: "Rooming House"
-licenseCertificationClassification: "LICENSE"
+callToActionText: Visit the DCA
+callToActionLink: http://state.nj.us/dca/divisions/codes/offices/roomingboarding.html
+webflowIndustry: Rooming House
+licenseCertificationClassification: LICENSE
+divisionPhone: (609) 984-1706
+webflowId: 640b846742a73c66f87d84ca
 ---
