@@ -6,11 +6,16 @@ runs:
   steps:
     - name: Generate Release Notes
       shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         yarn semantic-release --branches "$GITHUB_REF_NAME"
 
     - name: Create PR to main
       shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         git status
+        git fetch origin main:refs/remotes/origin/main
         gh pr create --fill --base main --head "$GITHUB_REF_NAME"
