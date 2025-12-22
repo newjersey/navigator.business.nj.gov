@@ -19,7 +19,7 @@ import {
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { AnytimeActionSearch } from "@/components/dashboard/AnytimeActionSearch";
-import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
+import { getMergedConfig, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
 import userEvent from "@testing-library/user-event";
 
 function setupMockAnalytics(): typeof analytics {
@@ -49,6 +49,8 @@ describe("<AnytimeActionSearch />", () => {
 
   const taskName = "some-task-name";
   const licenseReinstatementName = "some-license-reinstatement-name";
+
+  const Config = getMergedConfig();
 
   const anytimeActionTasksAlternate = [
     generateAnytimeActionTask({
@@ -226,6 +228,7 @@ describe("<AnytimeActionSearch />", () => {
           filename: "some-filename-license",
         }),
       ];
+      anytimeActionTasksFromNonEssentialQuestions = [];
     });
 
     const renderAnytimeActionSearch = (): void => {
@@ -398,6 +401,60 @@ describe("<AnytimeActionSearch />", () => {
       expect(screen.queryByText("license - hvac-reinstatement")).not.toBeInTheDocument();
     });
 
+    it("creates and moves anytime action to recommended for you section when flag is set", () => {
+      anytimeActionTasks = [
+        generateAnytimeActionTask({
+          filename: "vacant-building-fire-permit",
+          moveToRecommendedForYouSection: true,
+        }),
+        ...anytimeActionTasks,
+      ];
+      anytimeActionTasksFromNonEssentialQuestions = [];
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          vacantPropertyOwner: true,
+        }),
+      });
+      renderAnytimeActionSearch();
+      fireEvent.click(screen.getByLabelText("Open"));
+      const nonEssentialAnytimeAction = screen.getByTestId("vacant-building-fire-permit-option");
+      const recommendedForYouCategory = screen.getByText(
+        Config.dashboardAnytimeActionDefaults.recommendedForYouCategoryHeader,
+      );
+      const category1Title = screen.getByText("Some Category");
+      expect(recommendedForYouCategory.compareDocumentPosition(nonEssentialAnytimeAction)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      );
+      expect(nonEssentialAnytimeAction.compareDocumentPosition(category1Title)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      );
+    });
+
+    it("does not creates recommended for you section when flag is set and nonEssentialQuestions is empty", () => {
+      anytimeActionTasks = [
+        generateAnytimeActionTask({
+          filename: "vacant-building-fire-permit",
+          moveToRecommendedForYouSection: false,
+        }),
+        ...anytimeActionTasks,
+      ];
+
+      anytimeActionTasksFromNonEssentialQuestions = [];
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          vacantPropertyOwner: true,
+        }),
+      });
+      renderAnytimeActionSearch();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.dashboardAnytimeActionDefaults.recommendedForYouCategoryHeader),
+      ).not.toBeInTheDocument();
+    });
+
     describe("non essential questions", () => {
       it("duplicate Anytime Actions added via non-essential questions are removed", () => {
         const duplicateAnytimeAction = generateAnytimeActionTask({
@@ -413,10 +470,35 @@ describe("<AnytimeActionSearch />", () => {
         expect(screen.getAllByText("same-anytime-action").length).toBe(1);
       });
 
+      it("promotes non essential questions to the recommended for you section", () => {
+        anytimeActionTasksFromNonEssentialQuestions = [
+          generateAnytimeActionTask({ filename: "vacant-building-fire-permit" }),
+          ...anytimeActionTasksFromNonEssentialQuestions,
+        ];
+
+        useMockBusiness({
+          profileData: generateProfileData({
+            vacantPropertyOwner: true,
+          }),
+        });
+        renderAnytimeActionSearch();
+        fireEvent.click(screen.getByLabelText("Open"));
+        const nonEssentialAnytimeAction = screen.getByTestId("vacant-building-fire-permit-option");
+        const recommendedForYouCategory = screen.getByText(
+          Config.dashboardAnytimeActionDefaults.recommendedForYouCategoryHeader,
+        );
+        const category1Title = screen.getByText("Some Category");
+        expect(recommendedForYouCategory.compareDocumentPosition(nonEssentialAnytimeAction)).toBe(
+          Node.DOCUMENT_POSITION_FOLLOWING,
+        );
+        expect(nonEssentialAnytimeAction.compareDocumentPosition(category1Title)).toBe(
+          Node.DOCUMENT_POSITION_FOLLOWING,
+        );
+      });
+
       it("adds vacant property anytime action for vacant property owners", () => {
         anytimeActionTasks = [
           generateAnytimeActionTask({ filename: "vacant-building-fire-permit" }),
-          ...anytimeActionTasks,
         ];
         useMockBusiness({
           profileData: generateProfileData({
@@ -440,7 +522,6 @@ describe("<AnytimeActionSearch />", () => {
       it("adds fire carnival modification for carnival ride owning businesses", () => {
         anytimeActionTasks = [
           generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
-          ...anytimeActionTasks,
         ];
         useMockBusiness({
           profileData: generateProfileData({
@@ -468,7 +549,6 @@ describe("<AnytimeActionSearch />", () => {
       it("adds operating carnival fire permit for carnival owning businesses", () => {
         anytimeActionTasks = [
           generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
-          ...anytimeActionTasks,
         ];
         useMockBusiness({
           profileData: generateProfileData({
@@ -496,7 +576,6 @@ describe("<AnytimeActionSearch />", () => {
       it("adds operating carnival fire permit for traveling circus or carnival owning businesses", () => {
         anytimeActionTasks = [
           generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
-          ...anytimeActionTasks,
         ];
         useMockBusiness({
           profileData: generateProfileData({
@@ -524,7 +603,6 @@ describe("<AnytimeActionSearch />", () => {
       it("adds operating carnival fire permit for traveling circus or carnival owning businesses based on non-essential question answers", () => {
         anytimeActionTasks = [
           generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
-          ...anytimeActionTasks,
         ];
         useMockBusiness({
           profileData: generateProfileData({
@@ -560,7 +638,6 @@ describe("<AnytimeActionSearch />", () => {
       it("adds carnival ride supplemental modification for traveling circus or carnival owning businesses based on non-essential question answers", () => {
         anytimeActionTasks = [
           generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
-          ...anytimeActionTasks,
         ];
         useMockBusiness({
           profileData: generateProfileData({

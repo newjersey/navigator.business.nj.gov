@@ -165,7 +165,6 @@ export interface AnytimeActionTask extends AnytimeAction {
   callToActionText?: string;
   issuingAgency?: string;
   moveToRecommendedForYouSection?: boolean;
-  nonEssentialQuestionsMoveToRecommendedAnytimeActionIds?: string[];
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;
