@@ -5,7 +5,7 @@ urlSlug: asbestos-removal-contractor-or-company
 webflowName: Asbestos Removal (Contractor or Company)
 agencyId: njdol
 agencyAdditionalContext: Asbestos Control and Licensing
-callToActionText: Get Your Asbestos License
+callToActionText: Get an Asbestos License
 callToActionLink: http://nj.gov/labor/lsse/employee/asbestos_control_and_licensing.html
 webflowIndustry: Asbestos Removal
 divisionPhone: (609) 633-3760
