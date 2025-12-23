@@ -3,7 +3,7 @@ id: sewer-company-public
 displayname: sewer-company-public
 urlSlug: sewer-company-public
 webflowName: Sewer Company Public
-agencyId: public-utilities
+agencyId: njdep
 agencyAdditionalContext: ""
 callToActionText: Find Licenses
 callToActionLink: https://www.state.nj.us/dep/watersupply/wsw.html
