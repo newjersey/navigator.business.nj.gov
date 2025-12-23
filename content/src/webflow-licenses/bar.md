@@ -5,7 +5,7 @@ urlSlug: bar
 webflowName: Bar
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage, Control Licensing Bureau
-callToActionText: Learn About Liquor License Requirements
+callToActionText: Find License Requirements
 callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
 webflowIndustry: Bar
 divisionPhone: (609) 984-2736
