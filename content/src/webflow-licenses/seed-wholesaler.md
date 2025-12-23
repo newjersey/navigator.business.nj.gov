@@ -1,14 +1,14 @@
 ---
+id: seed-wholesaler
 displayname: seed-wholesaler
-id: "seed-wholesaler"
-webflowId: "5f7728e6eb55585c5afeb56d"
-urlSlug: "seed-wholesaler"
-webflowName: "Seed Wholesaler"
-callToActionLink: "http://nj.gov/agriculture/divisions/pi/"
-callToActionText: ""
+urlSlug: seed-wholesaler
+webflowName: Seed Wholesaler
 agencyId: agriculture
-agencyAdditionalContext: "Division of Plant Industry"
-divisionPhone: "(609) 947-7512"
-webflowIndustry: "Seed Wholesale"
-licenseCertificationClassification: "CERTIFICATE OF VARIETAL PURITY"
+agencyAdditionalContext: Division of Plant Industry
+callToActionText: Become a Seedsman
+callToActionLink: http://nj.gov/agriculture/divisions/pi/
+webflowIndustry: Seed Wholesale
+divisionPhone: (609) 947-7512
+webflowId: 5f7728e6eb55585c5afeb56d
+licenseCertificationClassification: CERTIFICATE OF VARIETAL PURITY
 ---
