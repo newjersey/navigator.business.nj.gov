@@ -7,22 +7,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-staging:
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@main
-    secrets: inherit
+  # deploy-staging:
+  #   uses: ./.github/workflows/deploy-staging-environment.yml
+  #   secrets: inherit
+  #   permissions:
+  #     contents: read
+  #     id-token: write
 
-  production-hold:
-    needs: deploy-staging
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    environment: prod
-    steps:
-      - run: echo "Awaiting approval for production release."
+  # production-hold:
+  #   needs: deploy-staging
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     id-token: write
+  #   environment: prod
+  #   steps:
+  #     - run: echo "Awaiting approval for production release."
 
   prepare-release:
-    needs: production-hold
+    # needs: production-hold
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -31,6 +34,20 @@ jobs:
     environment: prod
     steps:
       - uses: actions/checkout@v6
+      - name: Set up Node.js 22.20.0
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.20.0
+          cache: yarn
+      - uses: actions/cache@v5
+        with:
+          path: .yarn/cache
+          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-cache-
+      - name: Install Dependencies
+        shell: bash
+        run: yarn install --immutable
       - uses: ./.github/actions/generate-release-notes
 
   deploy-production:
