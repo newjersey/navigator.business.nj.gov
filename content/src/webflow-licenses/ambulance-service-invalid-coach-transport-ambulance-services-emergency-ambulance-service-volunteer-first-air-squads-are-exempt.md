@@ -6,7 +6,7 @@ webflowName: Ambulance Service (Invalid Coach, Transport Ambulance Services,
   Emergency Ambulance Service) *Volunteer First Air Squads are Exempt
 agencyId: health-senior-services
 agencyAdditionalContext: Office of Emergency Medical Services
-callToActionText: Learn More About Emergency Medical Services
+callToActionText: Learn About EMS
 callToActionLink: http://nj.gov/health/ems/education/
 webflowIndustry: Ambulance
 divisionPhone: (609) 633-7777
