@@ -4,7 +4,7 @@ displayname: bakery-wholesale-or-in-house-commercial-retail
 urlSlug: bakery-wholesale-or-in-house-commercial-retail
 webflowName: Bakery Wholesale or In-House (Commercial & Retail)
 agencyId: municipal-clerk
-callToActionText: Learn About Commercial and Retail Bakery Requirements
+callToActionText: Learn About Requirements
 callToActionLink: https://www.nj.gov/health/ceohs/phfpp/
 webflowIndustry: Bakery Wholesale
 licenseCertificationClassification: CONTACT
