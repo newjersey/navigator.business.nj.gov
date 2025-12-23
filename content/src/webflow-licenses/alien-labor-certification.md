@@ -5,7 +5,7 @@ urlSlug: alien-labor-certification
 webflowName: Alien Labor Certification
 agencyId: njdol
 agencyAdditionalContext: ""
-callToActionText: Learn About Foreign Labor Certification
+callToActionText: Learn About Certification
 callToActionLink: https://nj.gov/labor/handbook/chap3/chap3sec3GrantEmployerServices.html
 webflowIndustry: Seasonal Labor
 divisionPhone: (609) 777-1838
