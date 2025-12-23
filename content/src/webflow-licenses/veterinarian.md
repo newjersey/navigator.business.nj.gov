@@ -1,13 +1,16 @@
 ---
+id: veterinarian
 displayname: veterinarian
-id: "veterinarian"
-webflowId: "640b8468ad1bc3470af63cb3"
-urlSlug: "veterinarian"
-name: "Veterinarian"
-filename: "veterinarian"
-callToActionLink: "http://njconsumeraffairs.gov/vet"
+urlSlug: veterinarian
+name: Veterinarian
+webflowName: Veterinarian
 agencyId: nj-consumer-affairs
-divisionPhone: "(973)504-6500"
-industryId: "Veterinarian"
-licenseCertificationClassification: "REGISTRATION/LICENSE"
+industryId: Veterinarian
+callToActionText: Get Licensed
+webflowIndustry: Veterinarian
+divisionPhone: (973)504-6500
+filename: veterinarian
+callToActionLink: http://njconsumeraffairs.gov/vet
+webflowId: 640b8468ad1bc3470af63cb3
+licenseCertificationClassification: REGISTRATION/LICENSE
 ---
