@@ -4,7 +4,7 @@ displayname: shellfish-special-permit-programs
 urlSlug: shellfish-special-permit-programs
 webflowName: Shellfish Special Permit Programs
 agencyId: njdep
-agencyAdditionalContext: Bureau of Marine Water Classification and Analysis
+agencyAdditionalContext: NJ Commercial Shellfish Aquaculture
 callToActionText: Find Permits
 callToActionLink: https://dep.nj.gov/aquaculture/
 webflowIndustry: Shellfish Program
