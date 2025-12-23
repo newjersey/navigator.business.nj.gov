@@ -5,7 +5,7 @@ urlSlug: auto-emissions-repairs-technician
 webflowName: Auto Emissions Repairs/ Technician
 agencyId: njdep
 agencyAdditionalContext: Emission Repair Facility (ERF) Registration
-callToActionText: Become a Certified Emission Repair Technician
+callToActionText: Get Certified
 callToActionLink: http://state.nj.us/mvcbiz/BusinessServices/ERF.htm
 webflowIndustry: Auto Emissions
 divisionPhone: (609) 292-7953
