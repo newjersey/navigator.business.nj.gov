@@ -5,7 +5,7 @@ urlSlug: bartending-school
 webflowName: Bartending School
 agencyId: njdol
 agencyAdditionalContext: Private School Unit
-callToActionText: Learn About Starting a Bartending School
+callToActionText: Start a School
 callToActionLink: https://nj.gov/education/cte/postsec/ppcs/
 webflowIndustry: Bartending School
 divisionPhone: (609) 984-2242
