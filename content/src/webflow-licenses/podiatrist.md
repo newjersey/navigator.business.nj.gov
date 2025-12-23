@@ -4,7 +4,7 @@ displayname: podiatrist
 urlSlug: podiatrist
 webflowName: Podiatrist
 agencyId: nj-consumer-affairs
-callToActionText: Apply for a Podiatry License
+callToActionText: Apply for a License
 callToActionLink: https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx
 webflowIndustry: Podiatrist
 licenseCertificationClassification: LICENSE
