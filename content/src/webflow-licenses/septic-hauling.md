@@ -4,7 +4,7 @@ displayname: septic-hauling
 urlSlug: septic-hauling
 webflowName: Septic Hauling
 agencyId: njdep
-agencyAdditionalContext: Environmental Enforcement
+agencyAdditionalContext: Bureau of Solid Waste Compliance & Enforcement
 callToActionText: Visit the SWCE
 callToActionLink: http://nj.gov/dep/enforcement/sw.html
 webflowIndustry: Septic Hauling
