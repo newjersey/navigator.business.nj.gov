@@ -6,7 +6,7 @@ webflowName: Cafeteria, Catered School
 agencyId: nj-health
 agencyAdditionalContext: Consumer Environmental Health Services, Public Health
   Sanitation and Safety Program
-callToActionText: Learn About Food Protection
+callToActionText: Learn About Food Safety
 callToActionLink: http://nj.gov/health/ceohs/sanitation-safety/general-sanitation/
 webflowIndustry: Cafeteria
 divisionPhone: (609) 826-4941
