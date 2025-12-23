@@ -42,7 +42,7 @@ publishStageArchive: ""
 * Install permanent charging infrastructure in New Jersey
 * Provide documentation that identifies a fleet operator meeting the program's eligibility requirements
 
-## Benefits of the program:
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 * Businesses can get back  50% to 65% of their project costs, depending on bonus criteria
 * Grants range from $50,000 to $5 million
