@@ -5,7 +5,7 @@ urlSlug: bonds
 webflowName: Bonds
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Bureau of Securities
-callToActionText: Learn About the Bureau of Securities
+callToActionText: Learn About the BOS
 callToActionLink: http://njconsumeraffairs.gov/bos
 webflowIndustry: Bond
 divisionPhone: (973) 504-3600
