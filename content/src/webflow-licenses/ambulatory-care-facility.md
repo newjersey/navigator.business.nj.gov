@@ -5,7 +5,7 @@ urlSlug: ambulatory-care-facility
 webflowName: Ambulatory Care Facility
 agencyId: nj-health
 agencyAdditionalContext: ""
-callToActionText: Learn About Ambulatory Care Facilities
+callToActionText: Learn About Facilities
 callToActionLink: http://state.nj.us/health/healthfacilities/about-us/facility-types/
 webflowIndustry: Ambulatory Care
 divisionPhone: (609) 826-4935
