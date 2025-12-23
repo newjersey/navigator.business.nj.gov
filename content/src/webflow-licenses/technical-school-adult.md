@@ -1,14 +1,14 @@
 ---
+id: technical-school-adult
 displayname: technical-school-adult
-id: "technical-school-adult"
-webflowId: "5f77295428e8559bb31958c2"
-urlSlug: "technical-school-adult"
-webflowName: "Technical School Adult"
-callToActionLink: "http://teachercertificationdegrees.com/certification/new-jersey/"
-callToActionText: ""
+urlSlug: technical-school-adult
+webflowName: Technical School Adult
 agencyId: njdol
-agencyAdditionalContext: "Adult Private Schools Licensing and Credentials"
-divisionPhone: "(609) 292-7272"
-webflowIndustry: "Technical School"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Adult Private Schools Licensing and Credentials
+callToActionText: Get a Certificate
+callToActionLink: http://teachercertificationdegrees.com/certification/new-jersey/
+webflowIndustry: Technical School
+divisionPhone: (609) 292-7272
+webflowId: 5f77295428e8559bb31958c2
+licenseCertificationClassification: LICENSE
 ---
