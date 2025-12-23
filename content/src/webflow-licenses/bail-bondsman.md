@@ -5,7 +5,7 @@ urlSlug: bail-bondsman
 webflowName: Bail Bondsman
 agencyId: nj-banking-insurance
 agencyAdditionalContext: ""
-callToActionText: Apply To Be a Bail Bondsman
+callToActionText: Become a Bondsman
 callToActionLink: http://state.nj.us/dobi/inslic.htm
 webflowIndustry: Bail Bondsman
 divisionPhone: (609) 292-4337 ext-50552
