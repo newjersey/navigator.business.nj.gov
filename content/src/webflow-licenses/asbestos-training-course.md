@@ -5,7 +5,7 @@ urlSlug: asbestos-training-course
 webflowName: Asbestos Training Course
 agencyId: nj-health
 agencyAdditionalContext: Consumer Environmental Health Services
-callToActionText: Learn About Asbestos Training
+callToActionText: Learn About Training
 callToActionLink: http://nj.gov/health/ceohs/asbestos/
 webflowIndustry: Asbestos Training
 divisionPhone: (609) 631-6749
