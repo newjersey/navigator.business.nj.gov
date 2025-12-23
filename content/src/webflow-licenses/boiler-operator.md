@@ -5,7 +5,7 @@ urlSlug: boiler-operator
 webflowName: Boiler Operator
 agencyId: njdol
 agencyAdditionalContext: Office of Boiler and Pressure Vessel Compliance
-callToActionText: Get a Boiler Operator License
+callToActionText: Become an Operator
 callToActionLink: http://nj.gov/dca/divisions/codes/offices/roomingboarding.html
 webflowIndustry: Boiler Operator
 divisionPhone: (609) 292-2345
