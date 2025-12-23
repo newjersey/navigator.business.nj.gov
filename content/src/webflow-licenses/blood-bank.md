@@ -4,7 +4,7 @@ displayname: blood-bank
 urlSlug: blood-bank
 webflowName: Blood Bank
 agencyAdditionalContext: Community Blood Services
-callToActionText: Learn About Community Blood Services
+callToActionText: Learn About Services
 callToActionLink: http://www.communitybloodservices.org/
 webflowIndustry: Blood Bank
 licenseCertificationClassification: FOR DONATING BLOOD
