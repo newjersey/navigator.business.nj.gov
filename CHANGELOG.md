@@ -1,3 +1,10 @@
+## [2025.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.0...v2025.25.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* adding missing env vars ([5fd3189](https://github.com/newjersey/navigator.business.nj.gov/commit/5fd3189964968a7016022e4dac6f841219f46c74))
+
 # [2025.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.24.0...v2025.25.0) (2025-12-23)
 
 
