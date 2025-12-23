@@ -4,7 +4,7 @@ displayname: attorney-at-law
 urlSlug: attorney-at-law
 webflowName: Attorney-at-Law
 agencyAdditionalContext: New Jersey Board of Bar Examiners
-callToActionText: Apply for an Attorney License
+callToActionText: Apply for a License
 callToActionLink: http://njbarexams.org/home
 webflowIndustry: Attorney
 licenseCertificationClassification: CERTIFICATE OF ADMISSION
