@@ -7,6 +7,23 @@ on:
   workflow_dispatch:
 
 jobs:
+  deploy-staging:
+    uses: ./.github/workflows/deploy-staging-environment.yml
+    secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
+
+  production-hold:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    environment: prod
+    steps:
+      - run: echo "Awaiting approval for production release."
+
   prepare-release:
     needs: production-hold
     runs-on: ubuntu-latest
