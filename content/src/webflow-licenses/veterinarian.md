@@ -2,7 +2,7 @@
 id: veterinarian
 displayname: veterinarian
 urlSlug: veterinarian
-name: Veterinarian
+name: ""
 webflowName: Veterinarian
 agencyId: nj-consumer-affairs
 industryId: Veterinarian
