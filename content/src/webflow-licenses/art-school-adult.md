@@ -5,7 +5,7 @@ urlSlug: art-school-adult
 webflowName: Adult Art School
 agencyId: education
 agencyAdditionalContext: Division of Vocational Education Postsecondary, Special Services Bureau
-callToActionText: Learn About Postsecondary Private Career Schools
+callToActionText: Learn About Career Schools
 callToActionLink: http://nj.gov/education/cte/
 webflowIndustry: Art School
 divisionPhone: "(609) 292-2070  (Press # 3)"
