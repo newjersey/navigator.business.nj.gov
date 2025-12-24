@@ -6,7 +6,7 @@ webflowName: Community Residence for Developmentally Disabled (Group Home,
   Supervised Apartment)
 agencyId: nj-human-services
 agencyAdditionalContext: Division of Developmental Disabilities, Office of Licensing and Inspection
-callToActionText: Learn About the Division of Family Development
+callToActionText: Learn About the DFD
 callToActionLink: http://nj.gov/humanservices/clients/family/
 webflowIndustry: Community Residence
 divisionPhone: (609) 984-5321
