@@ -5,7 +5,7 @@ urlSlug: diagnostic-radiologic-technologist
 webflowName: Diagnostic Radiologic Technologist
 agencyId: njdep
 agencyAdditionalContext: Bureau of Radiologic Health
-callToActionText: Become an X-Ray Tech
+callToActionText: Become a Tech
 callToActionLink: http://state.nj.us/dep/rpp/
 webflowIndustry: X-ray Technologist
 divisionPhone: (609) 984-5890
