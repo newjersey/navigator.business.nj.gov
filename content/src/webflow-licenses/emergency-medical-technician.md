@@ -5,7 +5,7 @@ urlSlug: emergency-medical-technician
 webflowName: Emergency Medical Technician
 agencyId: nj-health
 agencyAdditionalContext: Environmental and Occupational Health Services, Emergency Response Coordination
-callToActionText: Learn About Emergency Medical Services
+callToActionText: Learn About EMS
 callToActionLink: http://nj.gov/health/ems/
 webflowIndustry: Emergency Medical Technician
 divisionPhone: (609) 633-7777
