@@ -1,0 +1,63 @@
+collections:
+  - name: "support-label"
+    label: "ℹ️ SUPPORT"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "login-support-page"
+    label: "Login Support Page"
+    delete: false
+    create: false
+    files:
+      - label: "Login Support Page"
+        name: "login-support-page"
+        file: "content/src/fieldConfig/login-support-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Login Support Page"
+            name: loginSupportPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Page Title", name: "pageTitle", widget: "string" }
+              - { label: "Last Updated Date", name: "lastUpdated", widget: "string" }
+              - {
+                  label: "Multiple Accounts Callout",
+                  name: "multipleAccountsCallout",
+                  widget: markdown,
+                }
+              - {
+                  label: "myNewJersey Intro Content",
+                  name: "myNewJerseyIntroContent",
+                  widget: "string",
+                }
+              - label: "Steps"
+                name: "steps"
+                widget: list
+                fields:
+                  - { label: "Step Content (Markdown)", name: "content", widget: "markdown" }
+                  - {
+                      label: "Image Path (e.g., /img/login-support-home-login.png)",
+                      name: "imagePath",
+                      widget: "string",
+                      required: false,
+                    }
+                  - { label: "Image Alt Text", name: "imageAlt", widget: "string", required: false }
+              - {
+                  label: "Logout If Still Having Trouble",
+                  name: "logoutIfStillHavingTrouble",
+                  widget: "string",
+                  hint:
+                    "This field is conditionally rendered. It will only display when a user is
+                    detected to be logged in.",
+                }
+              - { label: "Logout Button Text", name: "logoutButtonText", widget: "string" }
+              - label: "Support Callout"
+                name: "supportCallout"
+                widget: object
+                fields:
+                  - { label: "Header", name: "header", widget: "string" }
+                  - { label: "Body Text", name: "body", widget: "string" }
+                  - { label: "Button Text", name: "buttonText", widget: "string" }

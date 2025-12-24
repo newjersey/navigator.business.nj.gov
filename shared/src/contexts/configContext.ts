@@ -28,6 +28,7 @@ import * as DashboardTabs from "../../../content/src/fieldConfig/dashboard-tabs.
 import * as DeferredLocation from "../../../content/src/fieldConfig/deferred-location.json";
 import * as Ein from "../../../content/src/fieldConfig/ein.json";
 import * as ElevatorRegistration from "../../../content/src/fieldConfig/elevator-registration.json";
+import * as EmployerRates from "../../../content/src/fieldConfig/employer-rates.json";
 import * as EnvironmentQuestionnaire from "../../../content/src/fieldConfig/env-questionnaire.json";
 import * as FilingDefaults from "../../../content/src/fieldConfig/filing-defaults.json";
 import * as Footer from "../../../content/src/fieldConfig/footer.json";
@@ -44,6 +45,7 @@ import * as LandingPageExperienceB from "../../../content/src/fieldConfig/landin
 import * as LandingPage from "../../../content/src/fieldConfig/landing-page.json";
 import * as LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
 import * as LicenseSearchTask from "../../../content/src/fieldConfig/license-search-task.json";
+import * as LoginSupportPage from "../../../content/src/fieldConfig/login-support-page.json";
 import * as ManageBusinessVehicles from "../../../content/src/fieldConfig/manage-business-vehicles.json";
 import * as NaicsCode from "../../../content/src/fieldConfig/naics-code.json";
 import * as NavigationDefaults from "../../../content/src/fieldConfig/navigation-defaults.json";
@@ -78,7 +80,6 @@ import * as XrayRegistration from "../../../content/src/fieldConfig/xray-registr
 import * as XrayRenewal from "../../../content/src/fieldConfig/xray-renewal.json";
 import * as CalloutAlerts from "../../../content/src/mappings/callout-alerts.json";
 import * as PageMetadata from "../../../content/src/page-metadata/page-metadata.json";
-import * as EmployerRates from "../../../content/src/fieldConfig/employer-rates.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -170,6 +171,7 @@ const merged = JSON.parse(
       FormationDataDeletionModal,
       EmployerRates,
       RemoveBusinessModal,
+      LoginSupportPage,
     ),
   ),
 );
@@ -254,7 +256,8 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof FilingDefaults &
   typeof FormationDataDeletionModal &
   typeof EmployerRates &
-  typeof RemoveBusinessModal;
+  typeof RemoveBusinessModal &
+  typeof LoginSupportPage;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -338,6 +341,7 @@ export const getMergedConfig = (): ConfigType => {
     FilingDefaults,
     FormationDataDeletionModal,
     RemoveBusinessModal,
+    LoginSupportPage,
   );
 };
 

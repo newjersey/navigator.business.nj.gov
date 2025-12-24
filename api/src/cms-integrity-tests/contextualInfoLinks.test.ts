@@ -20,7 +20,7 @@ const composeErrorMessage = (numberOfExpectedCollections: number): string => {
   return `We expected ${numberOfExpectedCollections} number of collections in our CMS. You have likely added a new collection to the CMS and now must add to the Contextual Info Search tool to make sure any contextual info links that may ever be used in that new collection can be caught. Look at contextualInfoLinks.ts and the files in shared/lib/search for more details`;
 };
 
-const expectedNumberofCollections = 11;
+const expectedNumberofCollections = 12;
 
 describe("ContextualInfoLinks", () => {
   describe("findMatchingContextualInfo", () => {
