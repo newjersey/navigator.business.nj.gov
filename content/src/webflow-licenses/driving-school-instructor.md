@@ -5,7 +5,7 @@ urlSlug: driving-school-instructor
 webflowName: Driving School Instructor
 agencyId: njdot
 agencyAdditionalContext: Motor Vehicle Commission, Driving School Unit
-callToActionText: Become a Driving School Instructor
+callToActionText: Become an Instructor
 callToActionLink: http://state.nj.us/mvc/license/driveschool.htm
 webflowIndustry: Driving School Instructor
 divisionPhone: (609) 292-6500  5094
