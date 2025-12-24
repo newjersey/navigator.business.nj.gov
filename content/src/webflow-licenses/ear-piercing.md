@@ -4,7 +4,7 @@ displayname: ear-piercing
 urlSlug: ear-piercing
 webflowName: Ear Piercing
 agencyId: municipal-clerk
-callToActionText: Body Art Regulations
+callToActionText: Find Regulations
 callToActionLink: https://www.nj.gov/health/ceohs/phfpp/body_art/
 webflowIndustry: Ear
 licenseCertificationClassification: CONTACT
