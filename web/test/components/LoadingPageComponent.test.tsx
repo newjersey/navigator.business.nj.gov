@@ -34,7 +34,9 @@ describe("LoadingPageComponent", () => {
         expect(screen.getByText(Config.loginSupportPage.unlinkedAccount)).toBeInTheDocument();
 
         expect(
-          screen.getByRole("button", { name: Config.loginSupportPage.logoutButtonTextUnlinked }),
+          screen.getByRole("button", {
+            name: Config.loginSupportPage.logoutButtonText.toLowerCase(),
+          }),
         ).toBeInTheDocument();
         expect(screen.getByText(/please/i)).toBeInTheDocument();
         expect(screen.getByText(/and try again/i)).toBeInTheDocument();
