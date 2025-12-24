@@ -5,7 +5,7 @@ urlSlug: forester-professional
 webflowName: Forester, Professional
 agencyId: njdep
 agencyAdditionalContext: New Jersey Forest Service
-callToActionText: Become a Forest Industry Professional
+callToActionText: Become a Professional
 callToActionLink: http://state.nj.us/dep/parksandforests/forest/
 webflowIndustry: Forester
 divisionPhone: (609) 292-2520
