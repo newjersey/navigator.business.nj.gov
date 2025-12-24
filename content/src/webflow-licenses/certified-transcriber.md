@@ -4,7 +4,7 @@ displayname: certified-transcriber
 urlSlug: certified-transcriber
 webflowName: Certified Transcriber
 agencyAdditionalContext: Superior Court Appellate
-callToActionText: Become a Certified Transcriber
+callToActionText: Get Certified
 callToActionLink: http://njcourts.gov/
 webflowIndustry: Transcriber
 licenseCertificationClassification: CERTIFICATION
