@@ -24,11 +24,6 @@ collections:
               - { label: "Unlinked Account", name: "unlinkedAccount", widget: "string" }
               - { label: "Having Trouble", name: "havingTrouble", widget: "string" }
               - { label: "Logout Button Text", name: "logoutButtonText", widget: "string" }
-              - {
-                  label: "Logout Button Text Unlinked",
-                  name: "logoutButtonTextUnlinked",
-                  widget: "string",
-                }
               - { label: "Logout And Try Again", name: "logoutAndTryAgain", widget: "string" }
               - {
                   label: "Logout And Try Again Unlinked",

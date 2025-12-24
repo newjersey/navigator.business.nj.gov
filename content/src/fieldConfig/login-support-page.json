@@ -3,7 +3,6 @@
     "unlinkedAccount": "It looks like you haven’t linked your myNewJersey account.",
     "havingTrouble": "Having trouble logging in?",
     "logoutButtonText": "Log out",
-    "logoutButtonTextUnlinked": "log out",
     "logoutAndTryAgain": "~~logoutButton~~ and try again.",
     "logoutAndTryAgainUnlinked": "Please ~~logoutButton~~ and try again.",
     "forMoreAssistance": "For more assistance, visit our [Login Issues Help page](support/login).",
@@ -43,7 +42,6 @@
       }
     ],
     "logoutIfStillHavingTrouble": "If you're still having trouble, ~~logoutButton~~ to reset your session on [account.business.nj.gov](https://account.business.nj.gov), and repeat the steps above.",
-    "logoutButtonText": "log out",
     "supportCallout": {
       "header": "Dedicated Business Experts ready to help",
       "body": "Still having issues? Chat with a business advocate based in New Jersey.",

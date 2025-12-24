@@ -28,7 +28,7 @@ const LoginSupportPage = (): ReactElement => {
         }}
         className="logout-button-unstyled"
       >
-        {loginSupport.logoutButtonText}
+        {loginSupport.logoutButtonText.toLowerCase()}
       </UnStyledButton>
     ),
   };

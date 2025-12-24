@@ -33,7 +33,7 @@ export const LoadingPageComponent = ({
         className="logout-button-unstyled"
       >
         {isLinkingError
-          ? Config.loginSupportPage.logoutButtonTextUnlinked
+          ? Config.loginSupportPage.logoutButtonText.toLowerCase()
           : Config.loginSupportPage.logoutButtonText}
       </UnStyledButton>
     ),
