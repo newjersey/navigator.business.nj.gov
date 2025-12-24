@@ -5,7 +5,7 @@ urlSlug: fish-commercial-fresh-water-fish-shellfish
 webflowName: "Fish, Commercial (Fresh Water: Fish, Shellfish)"
 agencyId: njdep
 agencyAdditionalContext: Division of Fish and Wildlife, Bureau of Freshwater Fisheries
-callToActionText: Get a Commercial Fishing License
+callToActionText: Get a License
 callToActionLink: https://dep.nj.gov/njfw/fishing/marine/commercial-licenses-and-permits/
 webflowIndustry: Fish
 divisionPhone: (609) 292-2965
