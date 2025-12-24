@@ -5,7 +5,7 @@ urlSlug: firearms-retail-wholesale-and-manufacture
 webflowName: Firearms (Retail, Wholesale and Manufacture)
 agencyId: law-public-safety
 agencyAdditionalContext: Division of State Police
-callToActionText: Learn About Firearms Dealer Licensing
+callToActionText: Learn About Dealer Licensing
 callToActionLink: https://njsp.njoag.gov/firearms-dealer-licensing-amp-regulation-unit/
 webflowIndustry: Firearms
 divisionPhone: (609) 882-2000
