@@ -5,7 +5,6 @@ export const snsClient = new SNSClient({});
 export const publishSnsMessage = async (
   message: string,
   topicArn: string,
-  stage: string,
 ): Promise<PublishCommandOutput | void> => {
   const formattedMessage = {
     version: "1.0",
@@ -13,18 +12,22 @@ export const publishSnsMessage = async (
     content: {
       textType: "client-markdown",
       title: `:warning: CMS Integrity Test Failure`,
-      description: `Environment: *${stage}* \n ${message}`,
+      description: `${message}`,
     },
     metadata: {
       enableCustomActions: true,
     },
   };
 
-  const response = await snsClient.send(
-    new PublishCommand({
-      Message: JSON.stringify(formattedMessage),
-      TopicArn: topicArn,
-    }),
-  );
-  return response;
+  try {
+    const response = await snsClient.send(
+      new PublishCommand({
+        Message: JSON.stringify(formattedMessage),
+        TopicArn: topicArn,
+      }),
+    );
+    return response;
+  } catch (error) {
+    console.error(`Error when trying to send AWS SNS message: ${error}`);
+  }
 };
