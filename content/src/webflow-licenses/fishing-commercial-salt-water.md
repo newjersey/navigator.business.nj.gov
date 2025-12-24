@@ -5,7 +5,7 @@ urlSlug: fishing-commercial-salt-water
 webflowName: Fishing, Commercial Salt Water
 agencyId: njdep
 agencyAdditionalContext: Division of Fish and Wildlife, Marine Fisheries Administration
-callToActionText: Get a Commercial Fishing License
+callToActionText: Get a License
 callToActionLink: https://dep.nj.gov/njfw/fishing/marine/commercial/
 webflowIndustry: Commercial Fishing
 divisionPhone: (609) 748-2020
