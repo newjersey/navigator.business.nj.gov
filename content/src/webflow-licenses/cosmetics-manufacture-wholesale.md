@@ -8,7 +8,7 @@ webflowName: Cosmetics (Manufacture/Wholesale)
 agencyId: nj-health
 agencyAdditionalContext: Environmental and Occupational Health Services, Public
   Health Sanitation and Safety Program
-callToActionText: Apply for a Wholesale Cosmetic License
+callToActionText: Apply for a License
 callToActionLink: http://nj.gov/health/ceohs/index.shtml
 webflowIndustry: Cosmetics
 divisionPhone: (609) 826-4935
