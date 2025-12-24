@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const getCRTKConfig = async () => {
   return {
-    baseUrl: await getConfigValue("crtk_base_url"),
+    baseUrl: await getConfigValue("dep_base_url"),
   };
 };
 
