@@ -5,7 +5,7 @@ urlSlug: certified-pool-operator
 webflowName: Certified Pool Operator
 agencyId: nj-health
 agencyAdditionalContext: Consumer Environmental Health Services, Public Health and General Sanitation
-callToActionText: Become a Certified Pool Operator
+callToActionText: Get Certified
 callToActionLink: http://nj.gov/health/ceohs/sanitation-safety/
 webflowIndustry: Certified Pool Operator
 divisionPhone: (609) 826-4935
