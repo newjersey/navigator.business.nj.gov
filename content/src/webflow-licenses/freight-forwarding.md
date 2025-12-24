@@ -4,7 +4,7 @@ displayname: freight-forwarding
 urlSlug: freight-forwarding
 webflowName: Freight Forwarding
 agencyAdditionalContext: Federal Maritime Administration
-callToActionText: Learn About the Maritime Administration
+callToActionText: Learn About MARAD
 callToActionLink: http://maritime.dot.gov/
 webflowIndustry: Freight Forwarding
 licenseCertificationClassification: REGISTRATION/LICENSE
