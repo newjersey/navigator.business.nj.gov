@@ -4,7 +4,7 @@ displayname: franchise
 urlSlug: franchise
 webflowName: Franchise
 agencyAdditionalContext: Federal Trade Commission
-callToActionText: Learn About the Franchise Rule
+callToActionText: Learn Franchise Rules
 callToActionLink: https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/franchise-rule
 webflowIndustry: Franchise
 licenseCertificationClassification: CONTACT
