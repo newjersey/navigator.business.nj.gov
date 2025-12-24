@@ -1,4 +1,4 @@
-import { loadAllContextualInfo } from "@shared/static";
+import { loadAllContextualInfo } from "@businessnjgovnavigator/shared/src/static";
 
 export const conextualLinkRegexGlobal = /[^`|]*`[^|]+\|([^`]+)`/g;
 export const allContextualInfoFileNames = (): Set<string> =>
