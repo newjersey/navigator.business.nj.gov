@@ -5,7 +5,7 @@ urlSlug: drug-abuse-counselor
 webflowName: Drug Abuse Counselor
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Marriage and Family Therapy Examiners
-callToActionText: Become a Drug Abuse Counselor
+callToActionText: Become a Counselor
 callToActionLink: http://njconsumeraffairs.gov/mft/Pages/default.aspx
 webflowIndustry: Substance Counselor
 divisionPhone: (973) 504-6415
