@@ -401,14 +401,11 @@ const environmentPermitEmailClient = ApiEnvPermitEmailClient(logger);
 
 const updateXrayStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookup);
 
-//TODO: Update Base URL to what would be expected
-const crtkSearch = CRTKSearchClient(logger, XRAY_REGISTRATION_STATUS_BASE_URL);
+const crtkSearch = CRTKSearchClient(logger);
 
 const crtkLookup = CRTKLookupClient(crtkSearch, logger);
 
 const updateCRTKStatus = updateCRTKStatusFactory(crtkLookup);
-
-//------ TODO: End of CRTK Addition remove before commiting
 
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 

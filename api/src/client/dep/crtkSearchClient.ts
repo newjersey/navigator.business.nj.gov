@@ -1,14 +1,22 @@
 import type { CRTKSearch } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
+import { getConfigValue } from "@libs/ssmUtils";
 import type { CRTKEntry } from "@shared/crtk";
 import axios from "axios";
 
-export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRTKSearch => {
+export const getCRTKConfig = async () => {
+  return {
+    baseUrl: await getConfigValue("crtk_base_url"),
+  };
+};
+
+export const CRTKSearchClient = (logWriter: LogWriterType): CRTKSearch => {
   const searchByBusinessName = async (businessName: string): Promise<CRTKEntry[]> => {
+    const config = await getCRTKConfig();
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Search by Business Name - Id:${logId}, Business Name: ${businessName}`);
     return await axios
-      .get(`${baseUrl}/crtk_by_facility_name?facility=${encodeURIComponent(businessName)}`)
+      .get(`${config.baseUrl}/crtk_by_facility_name?facility=${encodeURIComponent(businessName)}`)
       .then(async (response) => {
         if (response.data.data.length === 0) {
           throw new Error("NOT_FOUND");
@@ -68,6 +76,7 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
   };
 
   const searchByAddress = async (streetAddress: string, zipCode: string): Promise<CRTKEntry[]> => {
+    const config = await getCRTKConfig();
     const logId = logWriter.GetId();
     logWriter.LogInfo(
       `CRTK Search by Address - Id:${logId}, Address: ${streetAddress}, Zip: ${zipCode}`,
@@ -75,7 +84,7 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
 
     return await axios
       .get(
-        `${baseUrl}/crtk_by_address_and_zipcode?address=${encodeURIComponent(
+        `${config.baseUrl}/crtk_by_address_and_zipcode?address=${encodeURIComponent(
           streetAddress,
         )}&zip=${encodeURIComponent(zipCode)}`,
       )
@@ -135,10 +144,11 @@ export const CRTKSearchClient = (logWriter: LogWriterType, baseUrl: string): CRT
   };
 
   const searchByEIN = async (ein: string): Promise<CRTKEntry[]> => {
+    const config = await getCRTKConfig();
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Search by EIN - Id:${logId}, EIN: ${ein}`);
     return await axios
-      .get(`${baseUrl}/crtk_by_fein?fein=${encodeURIComponent(ein)}`)
+      .get(`${config.baseUrl}/crtk_by_fein?fein=${encodeURIComponent(ein)}`)
       .then(async (response) => {
         if (response.data.data.length === 0) {
           throw new Error("NOT_FOUND");
