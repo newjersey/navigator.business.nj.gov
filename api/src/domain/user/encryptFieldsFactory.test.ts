@@ -270,4 +270,21 @@ describe("encryptFieldsFactory", () => {
     );
     expect(response).toEqual(expectedUserData);
   });
+
+  it("does not encrypt dol ein if it is already encrypted", async () => {
+    const userData = generateUnencryptedUserData({ deptOfLaborEin: encryptedDeptOfLaborEin });
+    const response = await encryptTaxId(userData);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(profileTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(profileTaxPin);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(taxClearanceTaxPin);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledWith(cigaretteTaxId);
+    expect(stubCryptoEncryptionClient.encryptValue).not.toHaveBeenCalledWith(deptOfLaborEin);
+    expect(stubCryptoEncryptionClient.encryptValue).toHaveBeenCalledTimes(numFieldsToEncrypt - 1);
+
+    const expectedUserData = getExpectedEncryptedCurrentBusiness(userData, {
+      deptOfLaborEin: encryptedDeptOfLaborEin,
+    });
+    expect(response).toEqual(expectedUserData);
+  });
 });

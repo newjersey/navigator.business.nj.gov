@@ -1284,7 +1284,7 @@ describe("userRouter", () => {
           const encryptedValues: { [key: string]: string } = {
             "123456789000": "encrypted-tax-id",
             "1234": "encrypted-tax-pin",
-            "54321": "encrypted-dol-ein",
+            "123456789012345": "encrypted-dol-ein",
           };
           return Promise.resolve(encryptedValues[valueToBeEncrypted] ?? "unexpected value");
         });
@@ -1301,7 +1301,7 @@ describe("userRouter", () => {
               encryptedTaxId: undefined,
               taxPin: "1234",
               encryptedTaxPin: undefined,
-              deptOfLaborEin: "54321",
+              deptOfLaborEin: "123456789012345",
             }),
           }),
           { user: oldUserData.user },
