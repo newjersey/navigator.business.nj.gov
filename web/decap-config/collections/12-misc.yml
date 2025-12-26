@@ -3174,6 +3174,7 @@ collections:
                 }
               - { label: Edit Quarter Button Text, name: editQuarterButtonText, widget: string }
               - { label: No Employer Rates Fli Text, name: noEmployerRatesFliText, widget: string }
+              - { label: Business Name Error Link, name: businessNameErrorLink, widget: string }
 
   - label: "Fundings Onboarding Page"
     name: "business-fundings-onboarding-page"

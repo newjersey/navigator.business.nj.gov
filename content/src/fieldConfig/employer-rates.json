@@ -41,7 +41,8 @@
     "baseWeekAmountLabelText": "Base Week Amount",
     "numberOfBaseWeeksLabelText": "Number of Base Weeks",
     "editQuarterButtonText": "Edit Quarter",
-    "noEmployerRatesFliText": "None"
+    "noEmployerRatesFliText": "None",
+    "businessNameErrorLink": "/profile?tab=info"
 
   }
 }
