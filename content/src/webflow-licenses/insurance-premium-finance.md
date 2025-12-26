@@ -5,7 +5,7 @@ urlSlug: insurance-premium-finance
 webflowName: Insurance Premium Finance
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Office of Consumer Finance, License Services
-callToActionText: Get an Insurance Premium Finance Company License
+callToActionText: Get a License
 callToActionLink: http://state.nj.us/dobi/banklicensing/inspremfincom.html
 webflowIndustry: Insurance Premium Finance
 divisionPhone: (609) 292-7272
