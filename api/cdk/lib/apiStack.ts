@@ -1,10 +1,15 @@
-import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
+import {
+  API_SERVICE_NAME,
+  REMINDER_EMAIL_CONFIG_SET_NAME,
+  WELCOME_EMAIL_A_CONFIG_SET_NAME,
+  WELCOME_EMAIL_B_CONFIG_SET_NAME,
+} from "@businessnjgovnavigator/api/src/libs/constants";
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
 import { Construct } from "constructs";
-import { applyStandardTags, attachLambdaToResource } from "./stackUtils";
+import { applyStandardTags, attachLambdaToResource, createSesConfigSet } from "./stackUtils";
 
 interface LambdaConfig {
   lambda?: IFunction;
@@ -92,6 +97,10 @@ export class ApiStack extends Stack {
       value: this.restApi.restApiId,
       exportName: `${API_SERVICE_NAME}-${props.stage}-ApiGatewayId`,
     });
+
+    createSesConfigSet(this, WELCOME_EMAIL_A_CONFIG_SET_NAME);
+    createSesConfigSet(this, WELCOME_EMAIL_B_CONFIG_SET_NAME);
+    createSesConfigSet(this, REMINDER_EMAIL_CONFIG_SET_NAME);
   }
 
   private addGatewayResponses() {
