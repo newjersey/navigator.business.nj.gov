@@ -19,7 +19,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { EmployerRatesRequest, EmployerRatesResponse } from "@businessnjgovnavigator/shared";
-import { DolEin, DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
+import { DOL_EIN_CHARACTERS, DolEin } from "@/components/data-fields/DolEin";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useMountEffect } from "@/lib/utils/helpers";
@@ -167,7 +167,9 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
             {dolEinError && <li>{Config.employerRates.dolEinAlertLabelText}</li>}
             {noBusinessNameError && (
               <li>
-                <a href={"/profile?tab=info"}>Business Name</a>
+                <a href={"/profile?tab=info"}>
+                  {Config.profileDefaults.fields.businessName.default.header}
+                </a>
               </li>
             )}
           </Alert>
