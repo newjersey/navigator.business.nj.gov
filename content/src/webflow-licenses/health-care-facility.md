@@ -6,7 +6,7 @@ webflowName: Health Care Facility
 agencyId: nj-health
 agencyAdditionalContext: Division of Health Facilities Evaluation and Licensing,
   Certificate of Need and Health Care Facility Licensure
-callToActionText: Learn About Health Care Facility Licensing
+callToActionText: Learn About Licensing
 callToActionLink: http://nj.gov/health/healthfacilities/certificate-need/
 webflowIndustry: Health Care Facility
 divisionPhone: (609) 292-5960
