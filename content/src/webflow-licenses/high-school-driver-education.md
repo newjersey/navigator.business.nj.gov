@@ -5,7 +5,7 @@ urlSlug: high-school-driver-education
 webflowName: High School Driver Education
 agencyId: njdot
 agencyAdditionalContext: Motor Vehicle Commission, Business License Compliance
-callToActionText: Get a Driving School License
+callToActionText: Get a License
 callToActionLink: http://state.nj.us/mvc/license/driveschoollic.htm
 webflowIndustry: Driver Education
 divisionPhone: (609) 292-6500  5094
