@@ -5,7 +5,7 @@ urlSlug: marriage-associate-counselor
 webflowName: Marriage Associate Counselor
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Marriage and Family Therapy Examiners
-callToActionText: Become a Marriage Counselor
+callToActionText: Become a Counselor
 callToActionLink: http://njconsumeraffairs.gov/mft
 webflowIndustry: Marriage Counselor
 divisionPhone: (973) 504-6582
