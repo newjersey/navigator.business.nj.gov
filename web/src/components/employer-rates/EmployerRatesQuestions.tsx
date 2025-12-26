@@ -17,9 +17,14 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { Alert } from "@/components/njwds-extended/Alert";
 import * as api from "@/lib/api-client/apiClient";
+import { decryptValue } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { EmployerRatesRequest, EmployerRatesResponse } from "@businessnjgovnavigator/shared";
-import { DolEin, DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
+import {
+  DOL_EIN_CHARACTERS,
+  EmployerRatesRequest,
+  EmployerRatesResponse,
+} from "@businessnjgovnavigator/shared";
+import { DolEin } from "@/components/data-fields/DolEin";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useMountEffect } from "@/lib/utils/helpers";
@@ -77,7 +82,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     }
   };
 
-  const isDolEinValid = (value: string): boolean => value.length === DOL_EIN_CHARACTERS;
+  const isDolEinValid = (value: string): boolean => !!value && value.length === DOL_EIN_CHARACTERS;
 
   const handleRadioChange = (value: string): void => {
     if (value === "false" && dolEinError) {
@@ -99,7 +104,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   };
 
   const [loading, setLoading] = useState(false);
-  const handleSubmit = (event: MouseEvent<Element>): void => {
+  const handleSubmit = async (event: MouseEvent<Element>): Promise<void> => {
     if (!userData) return;
     event.preventDefault();
 
@@ -112,19 +117,28 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       setServerError(false);
     }
 
-    if (!isDolEinValid(state.profileData.deptOfLaborEin)) {
+    let dolEinValue = state.profileData.deptOfLaborEin;
+    if (!!dolEinValue && !isDolEinValid(dolEinValue)) {
+      await decryptValue({
+        encryptedValue: state.profileData.deptOfLaborEin,
+      }).then((value) => {
+        dolEinValue = value;
+      });
+    }
+
+    if (!isDolEinValid(dolEinValue)) {
       setDolEinError(true);
       setIsValid(false);
       return;
     }
 
-    updateQueue?.queueProfileData({ deptOfLaborEin: state.profileData.deptOfLaborEin }).update();
+    updateQueue?.queueProfileData({ deptOfLaborEin: dolEinValue }).update();
 
     setLoading(true);
     const employerRates = {
       businessName: state.profileData.businessName,
       email: userData.user.email,
-      ein: state.profileData.deptOfLaborEin,
+      ein: dolEinValue,
       qtr: props.quarter.quarter,
       year: props.quarter.year,
     } as EmployerRatesRequest;
