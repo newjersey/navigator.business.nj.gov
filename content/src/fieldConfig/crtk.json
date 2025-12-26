@@ -1,0 +1,29 @@
+{
+  "crtkTask": {
+    "introText": "Businesses in certain industries must report chemicals they have on-site to the Community Right to Know (CRTK) program. These chemicals are known as Environmental Hazardous Substances (EHS). Reporting EHS helps keep New Jersey communities and businesses safe.",
+    "helperText": "Enter your information exactly as it appears in your business tax registration documents.",
+    "businessNameLabel": "Business Name",
+    "businessStreetAddressLabel": "Business Street Address",
+    "cityLabel": "City",
+    "stateLabel": "State",
+    "zipLabel": "Zip Code",
+    "einLabel": "Employer Identification Number (EIN)",
+    "einOptionalText": "(Optional)",
+    "submitText": "Search for My Business",
+    "errorTextNotFound": "We couldn't find a business matching the information you provided. Please check your entries and try again, or contact the NJDEP for assistance.",
+    "errorTextFieldsRequired": "Please fill out all required fields.",
+    "errorTextSearchFailed": "We're having trouble searching for your business right now. Please try again later or contact support if the problem persists.",
+    "warningTitle": "What if I don't complete this task?",
+    "warningText": "Businesses that do not meet their CRTK requirements may receive thousands in fines and penalties.",
+    "federalInfoTitle": "Important: Federal Requirements May Also Apply",
+    "federalInfoText": "You may also be subject to federal Emergency Planning and Community Right-to-Know Act (EPCRA) reporting.",
+    "federalLinkText": "Learn more: EPA EPCRA website →",
+    "titleText": "Tell Us About Your Business",
+
+    "errorTextForm": "Review the following fields for errors and missing information:",
+    "businessNameError": "Enter your business name.",
+    "businessStreetAddressError": "Enter your business street address.",
+    "businessCityError": "Enter your city.",
+    "businessZipError": "Enter your zip code."
+  }
+}
