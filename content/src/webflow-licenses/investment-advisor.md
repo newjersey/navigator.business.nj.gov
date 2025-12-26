@@ -5,7 +5,7 @@ urlSlug: investment-advisor
 webflowName: Investment Advisor
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Bureau of Securities
-callToActionText: Become an Investment Advisor
+callToActionText: Get Registered
 callToActionLink: https://www.njconsumeraffairs.gov/bos/bosforms/Instructions4-Investment-Advisers-and-Investment-Adviser-Representatives.pdf
 webflowIndustry: Investment Advisor
 divisionPhone: (973) 504-3600
