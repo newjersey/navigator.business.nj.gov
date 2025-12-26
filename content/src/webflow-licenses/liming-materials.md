@@ -5,7 +5,7 @@ urlSlug: liming-materials
 webflowName: Liming Materials
 agencyId: agriculture
 agencyAdditionalContext: Agricultural Chemistry
-callToActionText: Learn About the NJ Liming Materials Act
+callToActionText: Get Registered
 callToActionLink: http://nj.gov/agriculture/divisions/md/prog/agriculturalchemistry.html
 webflowIndustry: Liming Materials
 divisionPhone: (609) 984-8421
