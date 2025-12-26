@@ -63,7 +63,11 @@ collections:
                     "This field is conditionally rendered. It will only display when a user is
                     detected to be logged in.",
                 }
-              - { label: "Logout Button Text", name: "logoutButtonText", widget: "string" }
+              - {
+                  label: "Logout Button Text (Trouble Flow)",
+                  name: "logoutButtonTextTrouble",
+                  widget: "string",
+                }
               - label: "Support Callout"
                 name: "supportCallout"
                 widget: object
