@@ -5,7 +5,7 @@ urlSlug: inspector-fire-protection-ucc
 webflowName: Inspector-Fire Protection (UCC)
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Code Services, Licensing Unit
-callToActionText: Become an Fire Protection Inspector
+callToActionText: Become an Inspector
 callToActionLink: https://www.nj.gov/dca/codes/offices/licensing_cont_ed.shtml
 webflowIndustry: Fire Inspector
 divisionPhone: (609) 984-7834
