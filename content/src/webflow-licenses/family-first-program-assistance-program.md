@@ -5,7 +5,7 @@ urlSlug: family-first-program-assistance-program
 webflowName: Family First Program (Assistance Program)
 agencyId: nj-human-services
 agencyAdditionalContext: Division of Family Development (Family First Program)
-callToActionText: Learn About Work First New Jersey
+callToActionText: Visit Work First NJ
 callToActionLink: https://www.nj.gov/humanservices/wfnj/
 webflowIndustry: Family First Program
 divisionPhone: (609) 588-2000
