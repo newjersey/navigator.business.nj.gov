@@ -5,7 +5,7 @@ urlSlug: livestock-dealer
 webflowName: Livestock Dealer
 agencyId: agriculture
 agencyAdditionalContext: Division of Animal Health
-callToActionText: Learn About the Division of Animal Health
+callToActionText: Find Divisions
 callToActionLink: http://state.nj.us/agriculture/divisions/
 webflowIndustry: Livestock Dealer
 divisionPhone: (609) 671-6400
