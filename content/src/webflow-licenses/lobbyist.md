@@ -5,7 +5,7 @@ urlSlug: lobbyist
 webflowName: Lobbyist
 agencyId: law-public-safety
 agencyAdditionalContext: Election Law Enforcement
-callToActionText: Learn About the Department of Law and Public Safety
+callToActionText: Learn About the DLPS
 callToActionLink: https://www.njoag.gov/
 webflowIndustry: Lobbyist
 divisionPhone: (609) 292-8700
