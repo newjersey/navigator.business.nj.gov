@@ -5,7 +5,7 @@ urlSlug: lead-abatement-contractor-or-companies
 webflowName: Lead Abatement Contractor or Companies
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Code Services, Asbestos and Lead Safety
-callToActionText: Become a Lead Abatement Contractor
+callToActionText: Become a Contractor
 callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_lead/Lead_Abate_Cntr_App.pdf
 webflowIndustry: Lead
 divisionPhone: (609) 633-6224
