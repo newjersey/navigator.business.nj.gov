@@ -5,7 +5,7 @@ urlSlug: drop-zone-parachuting
 webflowName: Drop Zone (Parachuting)
 agencyId: njdot
 agencyAdditionalContext: Division of Aeronautics
-callToActionText: Learn About Aeronautical Licensing
+callToActionText: Learn About Licensing
 callToActionLink: https://nj.gov/transportation/freight/aviation/faqs.shtm#registration
 webflowIndustry: Drop Zone
 divisionPhone: (609) 530-2913
