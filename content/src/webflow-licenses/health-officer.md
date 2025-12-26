@@ -5,7 +5,7 @@ urlSlug: health-officer
 webflowName: Health Officer
 agencyId: nj-health
 agencyAdditionalContext: Office of Local Health
-callToActionText: Learn About the Department of Health
+callToActionText: Learn About the DOH
 callToActionLink: http://state.nj.us/health/
 webflowIndustry: Health Officer
 divisionPhone: (609) 292-4993
