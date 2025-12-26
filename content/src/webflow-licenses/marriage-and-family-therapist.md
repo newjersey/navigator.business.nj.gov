@@ -5,7 +5,7 @@ urlSlug: marriage-and-family-therapist
 webflowName: Marriage and Family Therapist
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Marriage and Family Therapy Examiners
-callToActionText: Become a Marriage and Family Therapist
+callToActionText: Become a Therapist
 callToActionLink: http://njconsumeraffairs.gov/mft
 webflowIndustry: Marriage Family Therapist
 divisionPhone: (973) 504-6582
