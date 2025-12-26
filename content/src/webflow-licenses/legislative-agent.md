@@ -5,7 +5,7 @@ urlSlug: legislative-agent
 webflowName: Legislative Agent
 agencyId: law-public-safety
 agencyAdditionalContext: Election Law Enforcement
-callToActionText: Learn About the Department of Law and Public Safety
+callToActionText: Learn About the DLPS
 callToActionLink: http://state.nj.us/lps/
 webflowIndustry: Legislative Agent
 divisionPhone: (609) 292-8700
