@@ -14,6 +14,8 @@ import {
 } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 import { EmployerRatesQuestions } from "@/components/employer-rates/EmployerRatesQuestions";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { intersection } from "lodash";
+import { RemoteWorkerBusinessTypeIds } from "@businessnjgovnavigator/shared";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
@@ -33,6 +35,13 @@ export const EmployerRates = (props: Props): ReactElement => {
     !operatingPhase.displayEmployerRatesInProfile &&
     !props.CMS_ONLY_enable_preview &&
     !FEATURE_EMPLOYER_RATES_ENABLED
+  ) {
+    return <></>;
+  }
+
+  if (
+    state.profileData.businessPersona === "FOREIGN" &&
+    intersection(state.profileData.foreignBusinessTypeIds, RemoteWorkerBusinessTypeIds).length === 0
   ) {
     return <></>;
   }
