@@ -20,6 +20,7 @@ import * as CigaretteLicenseStep1 from "../../../content/src/fieldConfig/cigaret
 import * as CigaretteLicenseStep2 from "../../../content/src/fieldConfig/cigarette-license-step2.json";
 import * as CigaretteLicenseStep3 from "../../../content/src/fieldConfig/cigarette-license-step3.json";
 import * as CigaretteLicenseStep4 from "../../../content/src/fieldConfig/cigarette-license-step4.json";
+import * as CRTKTask from "../../../content/src/fieldConfig/crtk.json";
 import * as DashboardCalendar from "../../../content/src/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "../../../content/src/fieldConfig/dashboard-defaults.json";
 import * as DashboardModals from "../../../content/src/fieldConfig/dashboard-modals.json";
@@ -171,6 +172,7 @@ const merged = JSON.parse(
       FormationDataDeletionModal,
       EmployerRates,
       RemoveBusinessModal,
+      CRTKTask,
       LoginSupportPage,
     ),
   ),
@@ -257,6 +259,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof FormationDataDeletionModal &
   typeof EmployerRates &
   typeof RemoveBusinessModal &
+  typeof CRTKTask &
   typeof LoginSupportPage;
 
 export const getMergedConfig = (): ConfigType => {
@@ -342,6 +345,7 @@ export const getMergedConfig = (): ConfigType => {
     FormationDataDeletionModal,
     RemoveBusinessModal,
     LoginSupportPage,
+    CRTKTask,
   );
 };
 
