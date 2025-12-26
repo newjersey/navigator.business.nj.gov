@@ -4,7 +4,7 @@ displayname: master-hearth-specialist
 urlSlug: master-hearth-specialist
 webflowName: Master Hearth Specialist
 agencyId: nj-consumer-affairs
-callToActionText: Become a Licensed Master Hearth Specialist
+callToActionText: Get Licensed
 callToActionLink: https://www.njconsumeraffairs.gov/mhs
 webflowIndustry: Hearth Specialist, Chimney, Fueled Patio Appliances, Inserts, Gas Logs & Piping
 licenseCertificationClassification: License
