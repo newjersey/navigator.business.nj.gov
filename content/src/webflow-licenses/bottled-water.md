@@ -4,7 +4,7 @@ displayname: bottled-water
 urlSlug: bottled-water
 webflowName: Bottled Water
 agencyAdditionalContext: Food and Drug Administration, Compliance Department
-callToActionText: Learn About the Bottled Water Project
+callToActionText: Visit the NJ DOH
 callToActionLink: http://nj.gov/health/ceohs/
 webflowIndustry: Bottled Water
 licenseCertificationClassification: LABELS/REGULATIONS
