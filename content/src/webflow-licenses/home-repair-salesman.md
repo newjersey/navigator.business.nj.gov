@@ -5,7 +5,7 @@ urlSlug: home-repair-salesman
 webflowName: Home Repair Salesman
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Home Improvement Contract Registration
-callToActionText: Become a Home Repair Salesperson
+callToActionText: Get a License
 callToActionLink: https://www.nj.gov/dobi/banklicensing/homerepaircont.html
 webflowIndustry: Home Repair Sales
 divisionPhone: (888) 656-6225
