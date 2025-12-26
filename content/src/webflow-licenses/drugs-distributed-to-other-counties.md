@@ -5,7 +5,7 @@ urlSlug: drugs-distributed-to-other-counties
 webflowName: Drugs (Distributed to other counties)
 agencyId: nj-health
 agencyAdditionalContext: ""
-callToActionText: Learn About Export Documents
+callToActionText: Learn About Certificates
 callToActionLink: http://state.nj.us/health/ceohs/food-drug-safety/cert-free-sale/
 webflowIndustry: Drug Exports
 divisionPhone: (609) 826-4935
