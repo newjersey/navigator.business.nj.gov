@@ -64,7 +64,7 @@ collections:
                     detected to be logged in.",
                 }
               - { label: "Logout Button Text", name: "logoutButtonText", widget: "string" }
-              - label: "Support Callout"
+              - label: "Suppor2t Callout"
                 name: "supportCallout"
                 widget: object
                 fields:
