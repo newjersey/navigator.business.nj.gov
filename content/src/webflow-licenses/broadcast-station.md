@@ -4,7 +4,7 @@ displayname: broadcast-station
 urlSlug: broadcast-station
 webflowName: Broadcast Station
 agencyAdditionalContext: Federal Communications Commission
-callToActionText: Learn About Broadcast Licensing
+callToActionText: Learn About Licensing
 callToActionLink: http://fcc.gov/licensing
 webflowIndustry: Broadcast Station
 licenseCertificationClassification: LICENSE/REGULATIONS
