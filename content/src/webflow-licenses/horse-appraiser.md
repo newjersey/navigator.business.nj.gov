@@ -4,7 +4,7 @@ displayname: horse-appraiser
 urlSlug: horse-appraiser
 webflowName: Horse Appraiser
 agencyAdditionalContext: American Society of Equine Appraisers
-callToActionText: Become a Horse Appraiser
+callToActionText: Become an Appraiser
 callToActionLink: https://equineappraiser.com/
 webflowIndustry: Horse Appraiser
 licenseCertificationClassification: CERTIFICATION
