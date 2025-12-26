@@ -5,7 +5,7 @@ urlSlug: home-for-the-aged
 webflowName: Home For The Aged
 agencyId: nj-health
 agencyAdditionalContext: Services Division of Long Term Care Systems
-callToActionText: Learn About Nursing Home Licensing
+callToActionText: Learn About Licensing
 callToActionLink: http://state.nj.us/health/healthfacilities/certification-licensing/index.shtml
 webflowIndustry: Home for the Aged
 divisionPhone: (609) 292-8773
