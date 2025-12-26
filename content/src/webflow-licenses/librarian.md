@@ -5,7 +5,7 @@ urlSlug: librarian
 webflowName: Librarian
 agencyId: education
 agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials
-callToActionText: Apply for NJ Educator Certification
+callToActionText: Apply for Certification
 callToActionLink: https://www.nj.gov/education/certification/apply/index.shtml
 webflowIndustry: Librarian
 divisionPhone: (609) 292-2070
