@@ -4,7 +4,7 @@ import { getConfigValue } from "@libs/ssmUtils";
 import type { CRTKEntry } from "@shared/crtk";
 import axios from "axios";
 
-export const getCRTKConfig = async () => {
+export const getCRTKConfig = async (): Promise<{ baseUrl: string }> => {
   return {
     baseUrl: await getConfigValue("dep_base_url"),
   };
