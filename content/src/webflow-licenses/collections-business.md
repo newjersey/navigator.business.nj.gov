@@ -5,7 +5,7 @@ urlSlug: collections-business
 webflowName: Collections Business
 agencyId: nj-revenue-enterprise-services
 agencyAdditionalContext: Business Services Bureau Corp. Records
-callToActionText: Learn About Collection Agency Bonds
+callToActionText: Apply for a Bond
 callToActionLink: http://state.nj.us/treasury/revenue/collectionbonds.pdf
 webflowIndustry: Collections Business
 divisionPhone: (609) 292-9292
