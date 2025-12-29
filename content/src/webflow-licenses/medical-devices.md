@@ -6,7 +6,7 @@ webflowName: Medical Devices
 agencyId: nj-health
 agencyAdditionalContext: Consumer Environmental Health Services, Public Health
   Sanitation and Safety Program
-callToActionText: Learn About the Department of Health
+callToActionText: Learn About the DOH
 callToActionLink: http://state.nj.us/health/ceohs/environmental-occupational/contact.shtml
 webflowIndustry: Medical Devices
 divisionPhone: (609) 826-4920
