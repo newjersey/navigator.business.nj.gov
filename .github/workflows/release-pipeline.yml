@@ -158,7 +158,7 @@ jobs:
           echo "FEATURE_FORMATION_SURVEY=${{ vars.FEATURE_FORMATION_SURVEY_PROD }}" >> $GITHUB_ENV
 
           echo "OUTAGE_ALERT_CONFIG_URL=${{ vars.OUTAGE_ALERT_CONFIG_URL }}" >> $GITHUB_ENV
-          echo "DISABLE_GTM=true" >> $GITHUB_ENV
+          echo "DISABLE_GTM=false" >> $GITHUB_ENV
           echo "GOOGLE_TAG_MANAGER_ID=${{ secrets.GOOGLE_TAG_MANAGER_ID }}" >> $GITHUB_ENV
 
       - name: Deploy to Production
