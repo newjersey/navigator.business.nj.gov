@@ -4,7 +4,7 @@ displayname: ophthalmologist
 urlSlug: ophthalmologist
 webflowName: Ophthalmologist
 agencyId: nj-consumer-affairs
-callToActionText: Become an Ophthalmologist
+callToActionText: Apply for a License
 callToActionLink: https://www.njconsumeraffairs.gov/oph/Pages/applications.aspx
 webflowIndustry: Ophthalmologist
 licenseCertificationClassification: LICENSE
