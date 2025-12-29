@@ -5,7 +5,7 @@ urlSlug: payroll-records
 webflowName: Payroll Records
 agencyId: njdol
 agencyAdditionalContext: Division of Workplace Standards, Office of Wage and Hour Compliance
-callToActionText: Learn About Keeping Payroll Records
+callToActionText: Visit NJ DOL
 callToActionLink: https://nj.gov/labor/handbook/content/contents.html
 webflowIndustry: Payroll Records
 divisionPhone: (609) 292-9664
