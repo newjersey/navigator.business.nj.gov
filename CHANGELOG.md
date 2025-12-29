@@ -1,3 +1,10 @@
+## [2025.25.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.2...v2025.25.3) (2025-12-29)
+
+
+### Bug Fixes
+
+* enable gtm in production ([33c30a0](https://github.com/newjersey/navigator.business.nj.gov/commit/33c30a0274f3b4631fe24e8f3716c7840d23a030))
+
 ## [2025.25.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.1...v2025.25.2) (2025-12-29)
 
 
