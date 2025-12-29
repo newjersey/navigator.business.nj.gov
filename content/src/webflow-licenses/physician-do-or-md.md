@@ -4,7 +4,7 @@ displayname: physician-do-or-md
 urlSlug: physician-do-or-md
 webflowName: Physician (DO or MD)
 agencyId: nj-consumer-affairs
-callToActionText: Apply for Your Physician License
+callToActionText: Apply for a License
 callToActionLink: http://njconsumeraffairs.gov/bme
 webflowIndustry: Physician
 licenseCertificationClassification: LICENSE
