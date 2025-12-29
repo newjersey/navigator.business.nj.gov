@@ -1,5 +1,6 @@
 import { TaskBody } from "@/components/TaskBody";
 import { TaskHeader } from "@/components/TaskHeader";
+import { CRTKPage } from "@/components/crtk/crtkPage";
 import { EinTask } from "@/components/tasks/EinTask";
 import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
 import { HotelMotelRegistrationTask } from "@/components/tasks/HotelMotelRegistrationTask";
@@ -131,6 +132,9 @@ export const TaskPageSwitchComponent = ({
         task={getTaskFromRoadmap(roadmap, task.id)}
         displayContent={displayContent}
       />
+    ),
+    "community-right-to-know-survey": (
+      <CRTKPage task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality} />
     ),
     default: <TaskBody task={task} business={business} roadmap={roadmap} />,
   });

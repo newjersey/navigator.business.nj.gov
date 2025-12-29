@@ -1,4 +1,4 @@
-import { SESClient, SendEmailCommand, SendEmailCommandInput } from "@aws-sdk/client-ses";
+import { SendEmailCommand, SendEmailCommandInput, SESClient } from "@aws-sdk/client-ses";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoMessagesDataClient } from "@db/DynamoMessagesDataClient";
@@ -21,9 +21,12 @@ import {
   USERS_TABLE,
 } from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
+import { getConfigValue, USER_MESSAGING_CONFIG_VARS } from "@libs/ssmUtils";
 import { v4 as uuidv4 } from "uuid";
 // eslint-disable-next-line no-restricted-imports
 import welcomeHtmlTemplate from "./emails/welcomeEmail.html";
+// eslint-disable-next-line no-restricted-imports
+import testReminderHtmlTemplate from "./emails/testReminderEmail.html";
 
 export interface SimpleSendRequest {
   userId: string;
@@ -54,15 +57,67 @@ export const handler = async (
 
   const userData = await userDataClient.get(event.userId);
 
+  const isReminderEmail = event.messageType === "reminder-email";
+  if (isReminderEmail && !userData.user.receiveUpdatesAndReminders) {
+    logger.LogInfo(
+      `Skipping ${event.messageType} email for userId: ${event.userId} - user is not subscribed to reminders`,
+    );
+    return {
+      statusCode: 200,
+      messageId: "skipped",
+      body: JSON.stringify({
+        skipped: true,
+        reason: "user_not_subscribed",
+        userId: event.userId,
+        messageType: event.messageType,
+      }),
+    };
+  }
+
+  if (
+    isReminderEmail &&
+    (await getConfigValue("feature_reminder_emails_enabled" as USER_MESSAGING_CONFIG_VARS)) !==
+      "true"
+  ) {
+    logger.LogInfo(
+      `Skipping ${event.messageType} email for userId: ${event.userId} - reminder emails feature is not enabled`,
+    );
+    return {
+      statusCode: 200,
+      messageId: "skipped",
+      body: JSON.stringify({
+        skipped: true,
+        reason: "feature_not_enabled",
+        userId: event.userId,
+        messageType: event.messageType,
+      }),
+    };
+  }
+
   const toEmail = userData.user.email;
-  const command = buildWelcomeEmail({ toEmail });
-  const message = buildMessageRecord({
-    userId: userData.user.id,
-    channel: "email",
-    templateId: "welcome_version-B",
-    topic: "welcome",
-    templateData: { name: userData.user.name || "" },
-  });
+
+  let command: SendEmailCommand;
+  let message: MessageData;
+
+  if (isReminderEmail) {
+    command = buildReminderEmail({ toEmail });
+    message = buildMessageRecord({
+      userId: userData.user.id,
+      channel: "email",
+      templateId: "test-reminder-v1",
+      topic: "reminder",
+      templateData: {},
+    });
+  } else {
+    command = buildWelcomeEmail({ toEmail });
+    message = buildMessageRecord({
+      userId: userData.user.id,
+      channel: "email",
+      templateId: "welcome_version-B",
+      topic: "welcome",
+      templateData: { name: userData.user.name || "" },
+    });
+  }
 
   try {
     logger.LogInfo(`Sending email to ${toEmail}`);
@@ -88,6 +143,15 @@ const buildWelcomeEmail = (props: { toEmail: string }): SendEmailCommand => {
     emailType: "welcome-email",
     subject: "Welcome to Business.NJ.gov",
     htmlBody,
+  });
+};
+
+const buildReminderEmail = (props: { toEmail: string }): SendEmailCommand => {
+  return buildSesEmailCommand({
+    toEmail: props.toEmail,
+    emailType: "test-reminder-email",
+    subject: "Incomplete Tasks Reminder - Business.NJ.gov",
+    htmlBody: testReminderHtmlTemplate,
   });
 };
 

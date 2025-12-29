@@ -26,7 +26,7 @@ export const ModalThreeButton = (props: Props): ReactElement => {
 
   const buttonRow = (
     <div
-      className={`padding-x-4 padding-y-3 ${
+      className={`padding-y-3 ${
         isMobileAndUp
           ? "flex flex-row flex-align-center flex-justify-end"
           : "flex flex-column flex-align-center gap-2"
@@ -71,10 +71,10 @@ export const ModalThreeButton = (props: Props): ReactElement => {
       title={props.title}
       hasDividers={false}
       unpaddedChildren={
-        <>
+        <div className="padding-x-4">
           <hr />
           {buttonRow}
-        </>
+        </div>
       }
     >
       {props.children}

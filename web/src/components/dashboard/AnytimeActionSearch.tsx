@@ -12,7 +12,7 @@ import {
   AnytimeActionTask,
 } from "@businessnjgovnavigator/shared/types";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
-import { orderBy, unionBy } from "lodash";
+import { orderBy } from "lodash";
 import { useRouter } from "next/compat/router";
 import { type ReactElement, ReactNode, useState } from "react";
 
@@ -73,20 +73,27 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
       }),
     ];
 
-    const deduplicatedTasks = unionBy(
+    const deduplicatedTasks = removeNonEssentialAnytimeActionTasksFromGenericAnytimeActionList(
       tasks,
       props.anytimeActionTasksFromNonEssentialQuestions,
-      "name",
     );
 
-    const orderedTasks = orderBy(deduplicatedTasks, ["name"]);
-    const orderedReinstatements = orderBy(reinstatements, ["name"]);
+    const nonEssentialAnytimeActionsWithRecommendedCategory =
+      moveNonEssentialAnyTimeActionsToRecommendeForYou(
+        props.anytimeActionTasksFromNonEssentialQuestions,
+      );
+    const allTasks = [...nonEssentialAnytimeActionsWithRecommendedCategory, ...deduplicatedTasks];
 
-    const allActions = [...orderedTasks, ...orderedReinstatements];
+    const allActions = [...allTasks, ...reinstatements];
+    const allActionsOrdered = orderBy(allActions, ["name"]);
 
-    return allActions.sort((a, b) => {
+    return allActionsOrdered.sort((a, b) => {
       const categoryA = a.category[0].categoryName.toLowerCase();
       const categoryB = b.category[0].categoryName.toLowerCase();
+
+      if (categoryA === categoryB) {
+        return 0;
+      }
 
       if (categoryA === RECOMMENDED_FOR_YOU_DISPLAY_TEXT.toLowerCase()) {
         return -1;
@@ -141,6 +148,39 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
     Config.dashboardAnytimeActionDefaults.recommendedForYouCategoryHeader;
   const RECOMMENDED_FOR_YOU_ID = "recommended-for-you";
 
+  const moveNonEssentialAnyTimeActionsToRecommendeForYou = (
+    nonEssentialAnytimeActions: AnytimeActionTask[],
+  ): AnytimeActionTask[] => {
+    const nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden =
+      nonEssentialAnytimeActions;
+    for (const [index] of nonEssentialAnytimeActions.entries()) {
+      nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden[
+        index
+      ].category[0].categoryName = RECOMMENDED_FOR_YOU_DISPLAY_TEXT;
+      nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden[index].category[0].categoryId =
+        RECOMMENDED_FOR_YOU_ID;
+    }
+    return nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden;
+  };
+
+  const removeNonEssentialAnytimeActionTasksFromGenericAnytimeActionList = (
+    anytimeActionsRoot: AnytimeActionTask[],
+    anytimeActionsToRemoveFromRoot: AnytimeActionTask[],
+  ): AnytimeActionTask[] => {
+    const anytimeActionsToRemoveFromRootUrlSlugs = new Set(
+      anytimeActionsToRemoveFromRoot.map((anytimeAction) => anytimeAction.urlSlug),
+    );
+
+    const anytimeActionsRootRemoved = anytimeActionsRoot.filter((anytimeAction) => {
+      if (anytimeActionsToRemoveFromRootUrlSlugs.has(anytimeAction.urlSlug)) {
+        return false;
+      }
+      return true;
+    });
+
+    return anytimeActionsRootRemoved;
+  };
+
   const moveAnytimeActionsToRecommendedForYouSection = (
     anytimeActions: AnytimeActionTask[],
   ): AnytimeActionTask[] => {
@@ -155,16 +195,6 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
           RECOMMENDED_FOR_YOU_DISPLAY_TEXT;
         anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryId =
           RECOMMENDED_FOR_YOU_ID;
-      }
-      if (anytimeAction.nonEssentialQuestionsMoveToRecommendedAnytimeActionIds) {
-        for (const nonEssentialQuestionId of anytimeAction.nonEssentialQuestionsMoveToRecommendedAnytimeActionIds) {
-          if (business?.profileData.nonEssentialRadioAnswers[nonEssentialQuestionId]) {
-            anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryName =
-              RECOMMENDED_FOR_YOU_DISPLAY_TEXT;
-            anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryId =
-              RECOMMENDED_FOR_YOU_ID;
-          }
-        }
       }
     }
 

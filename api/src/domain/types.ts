@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  CRTKBusinessDetails,
+  CRTKData,
   EmailConfirmationSubmission,
   FacilityDetails,
   TaxClearanceCertificateResponse,
@@ -15,6 +17,7 @@ import {
   GetOrderByTokenResponse,
   PreparePaymentResponse,
 } from "@shared/cigaretteLicense";
+import { CRTKEntry } from "@shared/crtk";
 import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   ElevatorSafetyDeviceInspectionDetails,
@@ -45,8 +48,8 @@ import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
 export type MessageChannel = "email" | "sms" | "tts" | "whatsapp";
-export type MessageTemplateId = "welcome_version-B";
-export type MessageTopic = "welcome";
+export type MessageTemplateId = "welcome_version-B" | "test-reminder-v1";
+export type MessageTopic = "welcome" | "reminder";
 
 export interface MessageData {
   taskId: string;
@@ -331,6 +334,26 @@ export type UpdateXrayRegistration = (
   userData: UserData,
   facilityDetails: FacilityDetails,
 ) => Promise<UserData>;
+
+export interface CRTKStatusLookup {
+  getStatus: (
+    businessName: string,
+    addressLine1: string,
+    city: string,
+    addressZipCode: string,
+    ein?: string,
+  ) => Promise<CRTKData>;
+}
+
+export interface CRTKSearch {
+  searchByBusinessName: (businessName: string) => Promise<CRTKEntry[]>;
+  searchByAddress: (streetAddress: string, zipCode: string) => Promise<CRTKEntry[]>;
+  searchByEIN: (ein: string) => Promise<CRTKEntry[]>;
+}
+
+export interface UpdateCRTK {
+  (userData: UserData, businessDetails: CRTKBusinessDetails): Promise<UserData>;
+}
 
 export interface MessagingServiceClient {
   sendMessage: (

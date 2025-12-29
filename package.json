@@ -226,7 +226,7 @@
     "sass-loader": "14.2.1",
     "seedrandom": "^3.0.5",
     "semantic-release": "19.0.5",
-    "storybook": "7.6.20",
+    "storybook": "7.6.21",
     "style-loader": "3.3.4",
     "supertest": "6.3.4",
     "ts-jest": "29.4.5",
@@ -236,7 +236,7 @@
     "tsconfig-paths": "4.2.0",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "vitest": "2.1.8",
+    "vitest": "2.1.9",
     "webpack": "5.103.0",
     "wiremock": "3.13.2",
     "yarn-workspace-sync-deps": "0.3.3"

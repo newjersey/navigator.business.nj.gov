@@ -109,4 +109,8 @@ export const cmsCollections = [
       "Formation Date Deletion Modal",
     ],
   },
+  {
+    label: "ℹ️ SUPPORT",
+    children: ["Login Support Page"],
+  },
 ];
