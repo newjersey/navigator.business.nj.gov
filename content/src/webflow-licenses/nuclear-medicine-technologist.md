@@ -5,7 +5,7 @@ urlSlug: nuclear-medicine-technologist
 webflowName: Nuclear Medicine Technologist
 agencyId: njdep
 agencyAdditionalContext: Bureau of Radiologic Health
-callToActionText: Learn About Technologist Licensing
+callToActionText: Learn About Licensing
 callToActionLink: http://state.nj.us/dep/rpp/brh/index.htm
 webflowIndustry: Nuclear Medicine Technologist
 divisionPhone: (609) 984-5890
