@@ -1,3 +1,5 @@
+export const DOL_EIN_CHARACTERS = 15;
+
 export type EmployerRatesRequest = {
   businessName: string;
   email: string;
