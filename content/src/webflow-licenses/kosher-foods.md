@@ -4,7 +4,7 @@ displayname: kosher-foods
 urlSlug: kosher-foods
 webflowName: Kosher Foods
 agencyId: nj-consumer-affairs
-callToActionText: Learn About the Kosher Fraud Enforcement Unit
+callToActionText: Learn About Enforcement
 callToActionLink: https://www.njconsumeraffairs.gov/kosher
 webflowIndustry: Kosher Foods
 licenseCertificationClassification: REGULATION
