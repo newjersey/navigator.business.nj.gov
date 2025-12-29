@@ -4,7 +4,7 @@ displayname: nurses-aide
 urlSlug: nurses-aide
 webflowName: Nurses Aide
 agencyId: nj-consumer-affairs
-callToActionText: Learn about the NJ Board of Nursing
+callToActionText: Find Licenses
 callToActionLink: http://njconsumeraffairs.gov/nur/pages/applications.aspx
 webflowIndustry: Nurses Aide
 licenseCertificationClassification: CERTIFICATION
