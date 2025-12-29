@@ -5,7 +5,7 @@ urlSlug: midwife-certified-nurse
 webflowName: Midwife, Certified Nurse
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Midwifery Liaison Committee
-callToActionText: Get Licensed as a Certified Nurse Midwife
+callToActionText: Get a CNM License
 callToActionLink: https://www.njconsumeraffairs.gov/mid/Pages/default.aspx
 webflowIndustry: Midwife
 divisionPhone: ""
