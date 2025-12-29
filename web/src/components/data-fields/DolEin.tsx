@@ -9,6 +9,7 @@ import { InputAdornment } from "@mui/material";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
 import { useMountEffect } from "@/lib/utils/helpers";
+import { DOL_EIN_CHARACTERS } from "@businessnjgovnavigator/shared";
 
 interface Props {
   editable?: boolean;
@@ -20,7 +21,6 @@ interface Props {
   startHidden?: boolean;
 }
 
-export const DOL_EIN_CHARACTERS = 15;
 export const DOL_EIN_CHARACTERS_WITH_FORMATTING = 20;
 
 export const DolEin = (props: Props): ReactElement => {

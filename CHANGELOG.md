@@ -1,3 +1,39 @@
+## [2025.25.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.1...v2025.25.2) (2025-12-29)
+
+
+### Bug Fixes
+
+* add gtm secret to release pipeline ([8d42927](https://github.com/newjersey/navigator.business.nj.gov/commit/8d4292798a56b4091f4b15be4f8cef15f8e04cf6))
+
+## [2025.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.0...v2025.25.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* adding missing env vars ([5fd3189](https://github.com/newjersey/navigator.business.nj.gov/commit/5fd3189964968a7016022e4dac6f841219f46c74))
+
+# [2025.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.24.0...v2025.25.0) (2025-12-23)
+
+
+### Bug Fixes
+
+* [AB[#15848](https://github.com/newjersey/navigator.business.nj.gov/issues/15848)] Fix edge handling for error field ([d224c67](https://github.com/newjersey/navigator.business.nj.gov/commit/d224c676453d700f21d87ec2c17f3fc61137332b))
+* [AB[#16685](https://github.com/newjersey/navigator.business.nj.gov/issues/16685)] remove FEATURE_SHOW_REMOVE_BUSINESS flag ([25e2511](https://github.com/newjersey/navigator.business.nj.gov/commit/25e2511a9d0851c8ad6c9d618e1878dc6d8f0b32))
+* **deps:** update dependency next to v15.5.7 [security] ([7275983](https://github.com/newjersey/navigator.business.nj.gov/commit/7275983ab84948926de60b825e9bdafef144faea))
+* **deps:** update dependency next to v15.5.8 [security] ([8bcd277](https://github.com/newjersey/navigator.business.nj.gov/commit/8bcd277383b268e14e958a27caadfc13734ec20d))
+* **deps:** update dependency next to v15.5.9 [security] ([23a3a47](https://github.com/newjersey/navigator.business.nj.gov/commit/23a3a47f4a14bf94a596eae65cba223c9b0a2160))
+* remove deploy content from merge-content ([5580ffa](https://github.com/newjersey/navigator.business.nj.gov/commit/5580ffa31b40c665231d597f903d813b7e0c1019))
+* update deployment for content-repo ([a2b52b3](https://github.com/newjersey/navigator.business.nj.gov/commit/a2b52b39549440f42fad456dfc85905518f1ee43))
+
+
+### Features
+
+* [AB[#15848](https://github.com/newjersey/navigator.business.nj.gov/issues/15848)] Add success response for employer rates call ([8ccd113](https://github.com/newjersey/navigator.business.nj.gov/commit/8ccd113f8a8cb6a902e2d88cedfb27bf74f42390))
+* [AB[#16118](https://github.com/newjersey/navigator.business.nj.gov/issues/16118)] implement simple welcome email in html ([772f698](https://github.com/newjersey/navigator.business.nj.gov/commit/772f69869f21fa255e4725dc1b73b5afd8ac2cc2))
+* [AB[#16139](https://github.com/newjersey/navigator.business.nj.gov/issues/16139)] Encrypt DOL EIN field ([4d3c4d6](https://github.com/newjersey/navigator.business.nj.gov/commit/4d3c4d63a4001c0350ec5fa1b0d754c3aa700f81))
+* [AB[#16676](https://github.com/newjersey/navigator.business.nj.gov/issues/16676)] Replace stale handling of unsaved changes on profile with new modal and updated navigation interception logic ([771c947](https://github.com/newjersey/navigator.business.nj.gov/commit/771c9479f4b7c0b01096054460a99b96d9226eef))
+* [AB[#16850](https://github.com/newjersey/navigator.business.nj.gov/issues/16850)] Show encrypted DOL EIN for returning users ([f090534](https://github.com/newjersey/navigator.business.nj.gov/commit/f0905341c6e2589c0da4c9fe7f30feea73680dcf))
+
 # [2025.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.23.0...v2025.24.0) (2025-12-05)
 
 

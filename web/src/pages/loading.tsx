@@ -1,7 +1,6 @@
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -9,7 +8,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 
@@ -18,6 +17,15 @@ const LoadingPage = (): ReactElement => {
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowError(true);
+    }, 5000);
+
+    return (): void => clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
     /**
@@ -28,22 +36,16 @@ const LoadingPage = (): ReactElement => {
     if (!router?.isReady) {
       return;
     }
-
     if (router.query[QUERIES.code]) {
       getActiveUser().then((currentUser) => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
       });
-    } else if (router && router.asPath && router.asPath.includes(signInSamlError)) {
+    } else if (router?.asPath?.includes(signInSamlError)) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
-      onGuestSignIn({
-        push: router.push,
-        pathname: router.pathname,
-        dispatch,
-        encounteredMyNjLinkingError: true,
-      });
+      setShowError(true);
     } else {
       if (loginPageEnabled) {
-        router && router.push(ROUTES.login);
+        router.push(ROUTES.login);
       } else {
         triggerSignIn();
       }
@@ -70,7 +72,12 @@ const LoadingPage = (): ReactElement => {
     }
   }, userData);
 
-  return <LoadingPageComponent />;
+  return (
+    <LoadingPageComponent
+      hasError={showError}
+      isLinkingError={router?.asPath?.includes(signInSamlError) ?? false}
+    />
+  );
 };
 
 export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {

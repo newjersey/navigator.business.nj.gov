@@ -4,6 +4,7 @@ import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { maskingCharacter } from "@shared/profileData";
 import { Business, UserData } from "@shared/userData";
+import { DOL_EIN_CHARACTERS } from "@shared/employerRates";
 
 export const encryptFieldsFactory = (
   encryptionDecryptionClient: CryptoClient,
@@ -201,7 +202,7 @@ const encryptDeptOfLaborEin = async (
   cryptoClient: CryptoClient,
 ): Promise<UserData> => {
   const currentBusiness = getCurrentBusiness(userData);
-  if (!currentBusiness.profileData.deptOfLaborEin) {
+  if (currentBusiness.profileData.deptOfLaborEin.length !== DOL_EIN_CHARACTERS) {
     return userData;
   }
   const encryptedDolEin = await cryptoClient.encryptValue(

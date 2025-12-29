@@ -23,6 +23,7 @@ import {
   Business,
   BusinessPersona,
   businessPersonas,
+  DOL_EIN_CHARACTERS,
   ForeignBusinessTypeId,
   generateBusiness,
   generateMunicipality,
@@ -40,8 +41,6 @@ import {
   generateTaxFilingData,
 } from "@businessnjgovnavigator/shared/test";
 import { useRouter } from "next/compat/router";
-
-import { DOL_EIN_CHARACTERS } from "@/components/data-fields/DolEin";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   chooseTab,
@@ -940,7 +939,7 @@ describe("profile - shared", () => {
 
       const employerRatesSection = screen.getByTestId("employerAccess");
       const textbox = within(employerRatesSection).getByRole("textbox");
-      const newEin = "1".repeat(15);
+      const newEin = "1".repeat(DOL_EIN_CHARACTERS);
       await userEvent.type(textbox, newEin);
 
       await userEvent.click(screen.getByRole("button", { name: "Save" }));

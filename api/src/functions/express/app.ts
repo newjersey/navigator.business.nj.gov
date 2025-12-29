@@ -1,4 +1,5 @@
 import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
+import { crtkLookupRouterFactory } from "@api/crtkRouter";
 import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
@@ -23,6 +24,8 @@ import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertifi
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { AwsMessagingServiceClient } from "@client/AwsMessagingServiceClient";
 import { CigaretteLicenseEmailClient } from "@client/CigaretteLicenseEmailClient";
+import { CRTKLookupClient } from "@client/dep/crtkLookupClient";
+import { CRTKSearchClient } from "@client/dep/crtkSearchClient";
 import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
 import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
 import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
@@ -63,6 +66,7 @@ import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
+import { updateCRTKStatusFactory } from "@domain/user/updateCrtkStatusFactory";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
 import { updateXrayRegistrationStatusFactory } from "@domain/user/updateXrayRegistrationStatusFactory";
@@ -397,6 +401,12 @@ const environmentPermitEmailClient = ApiEnvPermitEmailClient(logger);
 
 const updateXrayStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookup);
 
+const crtkSearch = CRTKSearchClient(logger);
+
+const crtkLookup = CRTKLookupClient(crtkSearch, logger);
+
+const updateCRTKStatus = updateCRTKStatusFactory(crtkLookup);
+
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 
 const myNJSelfRegClient = MyNJSelfRegClientFactory(
@@ -534,6 +544,7 @@ app.use(
 );
 
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
+app.use("/api", crtkLookupRouterFactory(updateCRTKStatus, dynamoDataClient, logger));
 
 app.use("/api/guest", environmentPermitEmailRouter(environmentPermitEmailClient, logger));
 

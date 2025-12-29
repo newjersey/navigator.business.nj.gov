@@ -8,8 +8,11 @@ on:
 
 jobs:
   deploy-staging:
-    uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-staging-environment.yml@main
+    uses: ./.github/workflows/deploy-staging-environment.yml
     secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
 
   production-hold:
     needs: deploy-staging
@@ -31,6 +34,20 @@ jobs:
     environment: prod
     steps:
       - uses: actions/checkout@v6
+      - name: Set up Node.js 22.20.0
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.20.0
+          cache: yarn
+      - uses: actions/cache@v5
+        with:
+          path: .yarn/cache
+          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-cache-
+      - name: Install Dependencies
+        shell: bash
+        run: yarn install --immutable
       - uses: ./.github/actions/generate-release-notes
 
   deploy-production:
@@ -79,6 +96,7 @@ jobs:
 
           echo "GOV2GO_REGISTRATION_API_KEY=${{ secrets.GOV2GO_REGISTRATION_API_KEY_PROD }}" >> $GITHUB_ENV
           echo "GOV2GO_REGISTRATION_BASE_URL=${{ secrets.GOV2GO_REGISTRATION_BASE_URL_PROD }}" >> $GITHUB_ENV
+          echo "GOV_DELIVERY_BASE_URL=${{ secrets.GOV_DELIVERY_BASE_URL }}" >> $GITHUB_ENV
 
           echo "LICENSE_STATUS_BASE_URL=${{ vars.LICENSE_STATUS_BASE_URL_PROD }}" >> $GITHUB_ENV
 
@@ -141,6 +159,7 @@ jobs:
 
           echo "OUTAGE_ALERT_CONFIG_URL=${{ vars.OUTAGE_ALERT_CONFIG_URL }}" >> $GITHUB_ENV
           echo "DISABLE_GTM=true" >> $GITHUB_ENV
+          echo "GOOGLE_TAG_MANAGER_ID=${{ secrets.GOOGLE_TAG_MANAGER_ID }}" >> $GITHUB_ENV
 
       - name: Deploy to Production
         uses: ./.github/actions/deploy
