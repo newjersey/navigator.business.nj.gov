@@ -1,3 +1,10 @@
+## [2025.25.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.1...v2025.25.2) (2025-12-29)
+
+
+### Bug Fixes
+
+* add gtm secret to release pipeline ([8d42927](https://github.com/newjersey/navigator.business.nj.gov/commit/8d4292798a56b4091f4b15be4f8cef15f8e04cf6))
+
 ## [2025.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.0...v2025.25.1) (2025-12-23)
 
 
