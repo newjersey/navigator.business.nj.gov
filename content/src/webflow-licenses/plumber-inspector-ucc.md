@@ -4,7 +4,7 @@ displayname: plumber-inspector-ucc
 urlSlug: plumber-inspector-ucc
 webflowName: Plumber Inspector (UCC)
 agencyId: nj-community-affairs
-callToActionText: Become a Plumbing Inspector
+callToActionText: Become an Inspector
 callToActionLink: https://www.nj.gov/dca/codes/offices/licensing_cont_ed.shtml
 webflowIndustry: Plumber Inspector
 licenseCertificationClassification: LICENSE
