@@ -91,6 +91,26 @@ module.exports = {
       to: { path: "path" },
     },
     {
+      from: { path: "src/functions/messagingService/reactEmail" },
+      to: { path: "@react-email/components" },
+    },
+    {
+      from: { path: "src/functions/messagingService/reactEmail" },
+      to: { path: "@react-email/render" },
+    },
+    {
+      from: { path: "src/functions/messagingService/reactEmail" },
+      to: { path: "url" },
+    },
+    {
+      from: { path: "src/functions/messagingService/reactEmail" },
+      to: { path: "path" },
+    },
+    {
+      from: { path: "src/functions/messagingService/reactEmail" },
+      to: { path: "fs" },
+    },
+    {
       from: {},
       to: { path: "https" },
     },

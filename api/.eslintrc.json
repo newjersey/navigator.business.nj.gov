@@ -128,6 +128,12 @@
         "unicorn/switch-case-braces": "off",
         "unicorn/prefer-at": "off"
       }
+    },
+    {
+      "files": ["src/functions/messagingService/reactEmail/**"],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
     }
   ]
 }
