@@ -101,3 +101,6 @@ web/src/lib/cms/CollectionMap.json
 
 # sql
 sql/dol_employer_rates.sql
+
+# React Email generated HTML templates
+api/src/functions/messagingService/email-templates/*.html

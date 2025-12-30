@@ -33,6 +33,8 @@ api/cdk/lib/**/*.js
 api/cdk/bin/**/*.js
 api/cdk/test/**/*.js
 
+api/src/functions/messagingService/email-templates/
+
 # web
 web/.next
 amplify
