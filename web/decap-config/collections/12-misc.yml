@@ -2956,6 +2956,18 @@ collections:
                     }
                   - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
                   - { label: Contact Tab Title, name: profileTabContactTitle, widget: string }
+                  - label: Profile Tab Slugs
+                    name: profileTabSlugs
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Info Slug, name: info, widget: no-space }
+                      - { label: Contact Slug, name: contact, widget: no-space }
+                      - { label: Permits Slug, name: permits, widget: no-space }
+                      - { label: Numbers Slug, name: numbers, widget: no-space }
+                      - { label: Documents Slug, name: documents, widget: no-space }
+                      - { label: Notes Slug, name: notes, widget: no-space }
+                      - { label: Personalize Slug, name: personalize, widget: no-space }
                   - {
                       label: Contact And Notifications Heading,
                       name: contactInformationHeading,
