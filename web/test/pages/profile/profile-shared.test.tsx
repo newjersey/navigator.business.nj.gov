@@ -1,5 +1,6 @@
 /* eslint-disable jest/expect-expect */
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import Profile from "@/pages/profile";
@@ -20,6 +21,17 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  chooseTab,
+  clickSave,
+  fillText,
+  generateBusinessForProfile,
+  getBusinessProfileInputFieldName,
+  getForeignNexusProfileFields,
+  renderPage,
+  selectByText,
+  selectByValue,
+} from "@/test/pages/profile/profile-helpers";
+import {
   Business,
   BusinessPersona,
   businessPersonas,
@@ -34,32 +46,26 @@ import {
   ProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   filterRandomIndustry,
   generateFormationData,
   generateTaxFilingData,
 } from "@businessnjgovnavigator/shared/test";
-import { useRouter } from "next/compat/router";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import {
-  chooseTab,
-  clickSave,
-  fillText,
-  generateBusinessForProfile,
-  getBusinessProfileInputFieldName,
-  getForeignNexusProfileFields,
-  renderPage,
-  selectByText,
-  selectByValue,
-} from "@/test/pages/profile/profile-helpers";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
+
+const goToInfoTab = async (): Promise<void> => {
+  await act(async () => {
+    chooseTab("info");
+  });
+  await screen.findByRole("tabpanel", { name: Config.profileDefaults.default.profileTabInfoTitle });
+};
 
 const initialFeatureEmployerRatesEnv = process.env.FEATURE_EMPLOYER_RATES;
 
@@ -313,6 +319,7 @@ describe("profile - shared", () => {
 
     const randomMunicipality = generateMunicipality({});
     renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
+    await goToInfoTab();
     selectByText("Location", randomMunicipality.displayName);
     expect(screen.getByLabelText("Location")).toHaveValue(randomMunicipality.displayName);
     fireEvent.blur(screen.getByLabelText("Location"));
@@ -342,6 +349,7 @@ describe("profile - shared", () => {
     });
 
     renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
+    await goToInfoTab();
     selectByText("Location", randomMunicipality.displayName);
     clickSave();
     await waitFor(() => {
@@ -400,6 +408,7 @@ describe("profile - shared", () => {
     it("shows escape modal when navigation is intercepted by unsaved changes guard", async () => {
       const business = makeBusiness();
       renderPage({ business });
+      await goToInfoTab();
       const inputFieldName = getBusinessProfileInputFieldName(business);
       fillText(inputFieldName, "Some New Business Name");
 
@@ -419,6 +428,7 @@ describe("profile - shared", () => {
     it("saves and redirects to the pending url after unsaved changes interception", async () => {
       const business = makeBusiness();
       renderPage({ business });
+      await goToInfoTab();
       const inputFieldName = getBusinessProfileInputFieldName(business);
       fillText(inputFieldName, "Some New Business Name");
 
@@ -443,6 +453,7 @@ describe("profile - shared", () => {
     it("leaves without saving when secondary modal button is clicked", async () => {
       const business = makeBusiness();
       renderPage({ business });
+      await goToInfoTab();
       const inputFieldName = getBusinessProfileInputFieldName(business);
       fillText(inputFieldName, "Another Business Name");
 
@@ -467,6 +478,7 @@ describe("profile - shared", () => {
     it("keeps editing when tertiary modal button is clicked", async () => {
       const business = makeBusiness();
       renderPage({ business });
+      await goToInfoTab();
       const inputFieldName = getBusinessProfileInputFieldName(business);
       fillText(inputFieldName, "Yet Another Business Name");
 
@@ -720,6 +732,7 @@ describe("profile - shared", () => {
           },
         });
         renderPage({ business });
+        await goToInfoTab();
         selectByValue("Industry", "test-industry-with-no-non-essential-questions");
         clickSave();
         await waitFor(() => {
@@ -743,6 +756,7 @@ describe("profile - shared", () => {
             }),
           }),
         });
+        await goToInfoTab();
         expect(
           screen.getByText(Config.profileDefaults.default.cannabisLocationAlert),
         ).toBeInTheDocument();
@@ -764,6 +778,7 @@ describe("profile - shared", () => {
             }),
           }),
         });
+        await goToInfoTab();
         expect(
           screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert),
         ).not.toBeInTheDocument();
@@ -795,6 +810,7 @@ describe("profile - shared", () => {
           }),
         });
         renderPage({ business });
+        await goToInfoTab();
         clickSave();
         const profileAlert = screen.getByTestId("profile-error-alert");
         await waitFor(() => {
@@ -808,14 +824,6 @@ describe("profile - shared", () => {
   });
 
   describe("sets init profile tab", () => {
-    const mockRouter = (query = {}): void => {
-      (useRouter as jest.Mock).mockImplementation(() => ({
-        query,
-        push: jest.fn(),
-        pathname: "/",
-      }));
-    };
-
     it("should use the default tab when no query param is set", () => {
       const business = generateBusinessForProfile({});
 
@@ -827,7 +835,12 @@ describe("profile - shared", () => {
     });
 
     it("should use the default tab when query param is set to an invalid tab value", () => {
-      mockRouter({ [QUERIES.tab]: "invalid-value" });
+      window.history.replaceState({}, "", "/profile?tab=invalid-value");
+      useMockRouter({
+        isReady: true,
+        pathname: "/profile",
+        query: { [QUERIES.tab]: "invalid-value" },
+      });
 
       const business = generateBusinessForProfile({});
 
@@ -839,7 +852,12 @@ describe("profile - shared", () => {
     });
 
     it("should be set to the query param tab when query param is set", () => {
-      mockRouter({ [QUERIES.tab]: "notes" });
+      window.history.replaceState({}, "", "/profile?tab=notes");
+      useMockRouter({
+        isReady: true,
+        pathname: "/profile",
+        query: { [QUERIES.tab]: "notes" },
+      });
 
       const business = generateBusinessForProfile({});
 
@@ -855,6 +873,34 @@ describe("profile - shared", () => {
           name: Config.profileDefaults.default.profileTabNoteTitle,
         }),
       ).toBeInTheDocument();
+    });
+  });
+
+  describe("tab query param syncing", () => {
+    beforeEach(() => {
+      window.history.replaceState({}, "", "/profile");
+      useMockRouter({ isReady: true, query: {} });
+    });
+
+    it("updates the tab query param when navigating between tabs", async () => {
+      const business = generateBusinessForProfile({});
+      renderPage({ business });
+
+      await act(async () => {
+        chooseTab("numbers");
+      });
+
+      await waitFor(() => {
+        expect(window.location.search).toContain(`?${QUERIES.tab}=reference-numbers`);
+      });
+
+      await act(async () => {
+        chooseTab("contact");
+      });
+
+      await waitFor(() => {
+        expect(window.location.search).toContain(`?${QUERIES.tab}=contact-notifications`);
+      });
     });
   });
 
