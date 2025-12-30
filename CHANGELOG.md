@@ -1,3 +1,27 @@
+# [2025.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.3...v2025.26.0) (2025-12-29)
+
+
+### Bug Fixes
+
+* [AB[#17106](https://github.com/newjersey/navigator.business.nj.gov/issues/17106)] add missing env var needed for signup ([8395207](https://github.com/newjersey/navigator.business.nj.gov/commit/83952079147833da8aafd95f437e26a299ec4001))
+* add gtm secret to release pipeline ([02d6ec9](https://github.com/newjersey/navigator.business.nj.gov/commit/02d6ec9d7d6371b1727af2405d17126b6676f2a3))
+* change stage to content in deploy-content ([d3ba14f](https://github.com/newjersey/navigator.business.nj.gov/commit/d3ba14f7b26d0f4514c9df48cf58b846d4f2f019))
+* DOL EIN encryption ([b68e15d](https://github.com/newjersey/navigator.business.nj.gov/commit/b68e15dd65d2ed0d0f8526aaf095de886c586570))
+* duplicate CMS key and casing for login pages ([12eabb8](https://github.com/newjersey/navigator.business.nj.gov/commit/12eabb8b292d4666e90e470d73ce864caff79196))
+* duplicate field name in Decap YAML ([9e23622](https://github.com/newjersey/navigator.business.nj.gov/commit/9e2362259d151ca19ce9e775c5414f29cb32d50b))
+* reuse dev aws credentials for testing ([3db2c68](https://github.com/newjersey/navigator.business.nj.gov/commit/3db2c681d11f9c2a3496b2b339a583eeb09fa178))
+
+
+### Features
+
+* [AB[#16364](https://github.com/newjersey/navigator.business.nj.gov/issues/16364)] check user subcription before reminder emails ([da960cf](https://github.com/newjersey/navigator.business.nj.gov/commit/da960cf29d2cd73aef4554be91a1b94a1da2d9ec))
+* [AB[#16676](https://github.com/newjersey/navigator.business.nj.gov/issues/16676)] design updates for unsaved changes modal in profile ([bfe889d](https://github.com/newjersey/navigator.business.nj.gov/commit/bfe889dcce8666fdf0725662704b729ca2368567))
+* [AB[#16693](https://github.com/newjersey/navigator.business.nj.gov/issues/16693)] Enable employer rates section for foreign and nexus remote workers ([218a935](https://github.com/newjersey/navigator.business.nj.gov/commit/218a935fb4a11a078bc41e1444f9ff6de4192d4a))
+* [AB[#16989](https://github.com/newjersey/navigator.business.nj.gov/issues/16989)] Add UTM analytics urls to welcome email B ([bc6b5fc](https://github.com/newjersey/navigator.business.nj.gov/commit/bc6b5fc27a6be9bb04c17030c2b07810db5727ff))
+* [AB[#17075](https://github.com/newjersey/navigator.business.nj.gov/issues/17075)] auto promotion for non essential questions associated with anytime actions to recommended for you category ([5a23a91](https://github.com/newjersey/navigator.business.nj.gov/commit/5a23a914b547b578eacb920a1bf237bf08fdbfd4))
+* add login help page ([542e810](https://github.com/newjersey/navigator.business.nj.gov/commit/542e81005668b842022fb7969a15f66fc9d3ec2b))
+* improve login  error handling on `/loading` ([43c36be](https://github.com/newjersey/navigator.business.nj.gov/commit/43c36be2cd9807e23561ee0dcbdd57105a79e69d))
+
 ## [2025.25.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.2...v2025.25.3) (2025-12-29)
 
 
