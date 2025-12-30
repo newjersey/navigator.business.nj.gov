@@ -299,6 +299,7 @@ const ProfilePage = (props: Props): ReactElement => {
               await router?.push(postSaveRedirectUrl);
               setPostSaveRedirectUrl(null);
             } else {
+              allowNavigation();
               await redirect({ success: true });
             }
           })

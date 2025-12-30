@@ -361,6 +361,42 @@ describe("profile - shared", () => {
       });
     };
 
+    it("does not show escape modal when saving changes", async () => {
+      const initialIndustry = filterRandomIndustry(() => true);
+      const updatedIndustry = filterRandomIndustry(
+        (industry: Industry) => industry.id !== initialIndustry.id,
+      );
+
+      mockRouter.mockPush.mockImplementation(async (url: string) => {
+        try {
+          mockRouterEvents.emit("routeChangeStart", url);
+        } catch {
+          // expected when navigation is blocked
+        }
+        return {};
+      });
+
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: initialIndustry.id,
+        }),
+      });
+
+      renderPage({ business });
+
+      selectByText("Industry", updatedIndustry.name);
+      clickSave();
+
+      await waitFor(() => {
+        expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true");
+      });
+
+      expect(
+        screen.queryByText(Config.profileDefaults.default.escapeModalReturn),
+      ).not.toBeInTheDocument();
+    });
+
     it("shows escape modal when navigation is intercepted by unsaved changes guard", async () => {
       const business = makeBusiness();
       renderPage({ business });
