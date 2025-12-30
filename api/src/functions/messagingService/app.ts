@@ -24,7 +24,9 @@ import { LogWriter } from "@libs/logWriter";
 import { getConfigValue, USER_MESSAGING_CONFIG_VARS } from "@libs/ssmUtils";
 import { v4 as uuidv4 } from "uuid";
 // eslint-disable-next-line no-restricted-imports
-import welcomeHtmlTemplate from "./emails/welcomeEmail.html";
+import welcomeEmailShortVersionTemplate from "./email-templates/welcomeEmailShortVersion.html";
+// eslint-disable-next-line no-restricted-imports
+import welcomeEmailShortVersionPlaintext from "./email-templates/welcomeEmailShortVersion.txt";
 // eslint-disable-next-line no-restricted-imports
 import testReminderHtmlTemplate from "./emails/testReminderEmail.html";
 
@@ -137,12 +139,12 @@ export const handler = async (
 };
 
 const buildWelcomeEmail = (props: { toEmail: string }): SendEmailCommand => {
-  const htmlBody = welcomeHtmlTemplate;
   return buildSesEmailCommand({
     toEmail: props.toEmail,
     emailType: "welcome-email",
     subject: "Welcome to Business.NJ.gov",
-    htmlBody,
+    htmlBody: welcomeEmailShortVersionTemplate,
+    fallbackText: welcomeEmailShortVersionPlaintext,
   });
 };
 

@@ -11,7 +11,8 @@
       "@api/*": ["src/api/*"],
       "@test/*": ["test/*"],
       "@wiremock/*": ["wiremock/*"],
-      "@businessnjgovnavigator/api/*": ["./*"]
+      "@businessnjgovnavigator/api/*": ["./*"],
+      "@businessnjgovnavigator/react-email": ["src/functions/messagingService/reactEmail"]
     }
   }
 }
