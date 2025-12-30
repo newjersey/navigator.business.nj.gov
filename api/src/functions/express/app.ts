@@ -285,7 +285,7 @@ const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL!, logger
 const GOV_DELIVERY_BASE_URL =
   process.env.GOV_DELIVERY_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const GOV_DELIVERY_API_KEY = process.env.GOV_DELIVERY_API_KEY || "testkey";
-const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "NJGOV_17";
+const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "";
 const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID;
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "AIRTABLE_API_KEY";
@@ -347,8 +347,9 @@ const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   topic: GOV_DELIVERY_TOPIC,
   apiKey: GOV_DELIVERY_API_KEY,
   logWriter: logger,
+  // TODO: This is no longer our domain. Can we change this? Make it a variable.
   siteUrl: "navigator.business.nj.gov",
-  urlQuestion: GOV_DELIVERY_URL_QUESTION_ID,
+  urlQuestion: GOV_DELIVERY_URL_QUESTION_ID, // TODO: What is this? Currently undefined.
 });
 
 const airtableUserTestingClient = AirtableUserTestingClient(
