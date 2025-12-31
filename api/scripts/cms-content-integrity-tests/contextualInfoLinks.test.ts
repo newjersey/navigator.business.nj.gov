@@ -1,12 +1,10 @@
-import { findMatchingContextualInfo } from "@businessnjgovnavigator/api/src/cms-integrity-tests/contextualInfoLinks";
-import * as sharedContextualInfoUtils from "@businessnjgovnavigator/api/src/cms-integrity-tests/contextualInfoLinksUtil";
+import { findMatchingContextualInfo } from "@businessnjgovnavigator/api/scripts/cms-content-integrity-tests/contextualInfoLinks";
+import * as sharedContextualInfoUtils from "@businessnjgovnavigator/api/scripts/cms-content-integrity-tests/contextualInfoLinksUtil";
 import { FileData } from "@shared/lib/search";
 import { loadYamlFiles } from "@shared/static";
 
-jest.mock("@businessnjgovnavigator/api/src/cms-integrity-tests/contextualInfoLinksUtil", () => ({
-  ...jest.requireActual(
-    "@businessnjgovnavigator/api/src/cms-integrity-tests/contextualInfoLinksUtil",
-  ),
+jest.mock("./contextualInfoLinksUtil", () => ({
+  ...jest.requireActual("./contextualInfoLinksUtil"),
   allContextualInfoFileNames: jest.fn(),
 }));
 
@@ -47,9 +45,13 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([
-        { filename: "filename", snippets: [DOES_NOT_EXISTS_CONTEXTUAL_INFO_FILE] },
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([
+        {
+          filename: "filename",
+          snippets: [DOES_NOT_EXISTS_CONTEXTUAL_INFO_FILE],
+          displayTitle: "Display Title",
+        },
       ]);
     });
 
@@ -72,8 +74,8 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([]);
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([]);
     });
 
     it("finds a non-existant contextual info block text", () => {
@@ -93,9 +95,13 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([
-        { filename: "filename", snippets: [DOES_NOT_EXISTS_CONTEXTUAL_INFO_FILE] },
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([
+        {
+          filename: "filename",
+          snippets: [DOES_NOT_EXISTS_CONTEXTUAL_INFO_FILE],
+          displayTitle: "Display Title",
+        },
       ]);
     });
 
@@ -116,8 +122,8 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([]);
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([]);
     });
 
     it("finds a non-existant contextual info in list text", () => {
@@ -142,9 +148,13 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([
-        { filename: "filename", snippets: [DOES_NOT_EXISTS_CONTEXTUAL_INFO_FILE] },
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([
+        {
+          filename: "filename",
+          snippets: [DOES_NOT_EXISTS_CONTEXTUAL_INFO_FILE],
+          displayTitle: "Display Title",
+        },
       ]);
     });
 
@@ -170,8 +180,8 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([]);
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([]);
     });
 
     it("finds matches across all 3 when all 3 have matches", () => {
@@ -197,8 +207,14 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([{ filename: "filename", snippets: [content2, content1, content3] }]);
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([
+        {
+          filename: "filename",
+          snippets: [content2, content1, content3],
+          displayTitle: "Display Title",
+        },
+      ]);
     });
 
     it("finds multiple matches within the same string", () => {
@@ -235,11 +251,12 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([
         {
           filename: "filename",
           snippets: [content2, content2, content1, content1, content3, content3],
+          displayTitle: "Display Title",
         },
       ]);
     });
@@ -288,10 +305,14 @@ describe("ContextualInfoLinks", () => {
         },
       ];
 
-      const macthes = findMatchingContextualInfo(fileDataArray);
-      expect(macthes).toEqual([
-        { filename: "filename", snippets: [content2, content22] },
-        { filename: "filename2", snippets: [content21, content1, content3, content23] },
+      const matches = findMatchingContextualInfo(fileDataArray, "Display Title");
+      expect(matches).toEqual([
+        { filename: "filename", snippets: [content2, content22], displayTitle: "Display Title" },
+        {
+          filename: "filename2",
+          snippets: [content21, content1, content3, content23],
+          displayTitle: "Display Title",
+        },
       ]);
     });
   });
