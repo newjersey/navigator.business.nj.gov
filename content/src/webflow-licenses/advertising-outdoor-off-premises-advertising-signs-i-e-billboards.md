@@ -6,7 +6,7 @@ webflowName: Outdoor Advertising (Off-premises Advertising Signs, i.e. Billboard
 agencyId: njdot
 agencyAdditionalContext: Office of Outdoor Advertising
 callToActionText: Apply for a Permit
-callToActionLink: http://state.nj.us/transportation/business/outdoor/
+callToActionLink: https://www.nj.gov/transportation/business/epermits/oda/overview.shtm
 webflowIndustry: Advertising
 divisionPhone: (609) 530-3337
 webflowId: 5f7729678075e880daa8d96e
