@@ -5,7 +5,7 @@ urlSlug: casino
 webflowName: Casino
 agencyId: law-public-safety
 agencyAdditionalContext: Casino Control Commission
-callToActionText: Learn About Casino Licensing
+callToActionText: Learn About Licensing
 callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-gaming-enforcement-home/casino-licensing/
 webflowIndustry: Casino
 divisionPhone: (609) 441-3422
