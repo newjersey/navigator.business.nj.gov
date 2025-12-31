@@ -5,7 +5,7 @@ urlSlug: dental-x-ray-tech
 webflowName: Dental X-Ray Tech
 agencyId: njdep
 agencyAdditionalContext: Bureau of Radiologic Health
-callToActionText: Become a Dental X-Ray Tech
+callToActionText: Get Licensed
 callToActionLink: http://state.nj.us/dep/rpp/
 webflowIndustry: Dental X-ray
 divisionPhone: (609) 984-5890
