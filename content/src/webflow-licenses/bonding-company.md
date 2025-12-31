@@ -5,7 +5,7 @@ urlSlug: bonding-company
 webflowName: Bonding Company
 agencyId: nj-revenue-enterprise-services
 agencyAdditionalContext: Business Services Bureau Corporate
-callToActionText: Learn About Collection Agency Bonds
+callToActionText: Get Licensed
 callToActionLink: http://nj.gov/treasury/revenue/filecollagbond.shtml
 webflowIndustry: Bonding Company
 divisionPhone: (609) 292-9292
