@@ -4,7 +4,7 @@ displayname: colleges-universities
 urlSlug: colleges-universities
 webflowName: Colleges & Universities
 agencyAdditionalContext: Commission on Higher Education
-callToActionText: Learn About NJ Higher Education
+callToActionText: Learn About Higher Education
 callToActionLink: https://nj.gov/highereducation/
 webflowIndustry: Colleges
 licenseCertificationClassification: LICENSE
