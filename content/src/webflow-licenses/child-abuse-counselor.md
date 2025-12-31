@@ -5,7 +5,7 @@ urlSlug: child-abuse-counselor
 webflowName: Child Abuse Counselor
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Social Work Examiners
-callToActionText: Become a Social Worker
+callToActionText: Get Licensed
 callToActionLink: http://njconsumeraffairs.gov/sw/Pages/default.aspx
 webflowIndustry: Child Abuse Counselor
 divisionPhone: (973) 504-6495
