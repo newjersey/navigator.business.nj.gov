@@ -6,7 +6,7 @@ webflowName: Asbestos Safety Control Monitoring Company (Third Party Agency for 
 agencyId: nj-community-affairs
 agencyAdditionalContext: Codes and Regulations
 callToActionText: Get Registered
-callToActionLink: http://state.nj.us/dca/divisions/codes/codreg/
+callToActionLink: https://www.nj.gov/dca/codes/offices/asbestos.shtml
 webflowIndustry: Asbestos Monitoring
 divisionPhone: (609) 633-6224
 webflowId: 5f772971b0544f387536617c
