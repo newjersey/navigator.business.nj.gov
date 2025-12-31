@@ -5,7 +5,7 @@ urlSlug: air-ambulance
 webflowName: Air Ambulance
 agencyId: health-senior-services
 agencyAdditionalContext: Office of Emergency Medical Services
-callToActionText: "Learn About Air Medical Services "
+callToActionText: Learn About EMS
 callToActionLink: http://state.nj.us/health/ems/
 webflowIndustry: Ambulance
 divisionPhone: (609) 633-7777
