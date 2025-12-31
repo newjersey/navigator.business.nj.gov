@@ -6,7 +6,7 @@ webflowName: Agricultural Crew Leader (Bringing Seasonal Farm Labor into NJ to W
 agencyId: njdol
 agencyAdditionalContext: ""
 callToActionText: Get Registered
-callToActionLink: http://nj.gov/labor/wagehour/lawregs/agriculture_law.html
+callToActionLink: https://www.nj.gov/labor/wageandhour/registration-permits/register/agriculturalregistration.shtml
 webflowIndustry: Agricultural Crew
 divisionPhone: (609) 292-2515
 webflowId: 5f77294ddd6a49eddc9b6064
