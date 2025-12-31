@@ -5,7 +5,7 @@ urlSlug: amusement-games-arcades-seashore-amusement-parks-county-state-fairs
 webflowName: Amusement Games & Arcades (Seashore, Amusement Parks, County & State Fairs)
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Office of Legalized Games of Chance
-callToActionText: Learn About Amusement Games
+callToActionText: Visit the LGCCC
 callToActionLink: http://njconsumeraffairs.gov/lgccc
 webflowIndustry: Amusement
 divisionPhone: (973) 273-8000
