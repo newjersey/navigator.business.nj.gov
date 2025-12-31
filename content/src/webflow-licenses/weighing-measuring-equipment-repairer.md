@@ -4,7 +4,7 @@ displayname: weighing-measuring-equipment-repairer
 urlSlug: weighing-measuring-equipment-repairer
 webflowName: Weighing & Measuring Equipment Repairer
 agencyId: law-public-safety
-callToActionText: Get a Repairman's License
+callToActionText: Get a License
 callToActionLink: https://www.njconsumeraffairs.gov/OWM
 webflowIndustry: Weighing and Measuring
 licenseCertificationClassification: LICENSE
