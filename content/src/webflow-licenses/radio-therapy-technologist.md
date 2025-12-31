@@ -5,7 +5,7 @@ urlSlug: radio-therapy-technologist
 webflowName: Radio Therapy Technologist
 agencyId: njdep
 agencyAdditionalContext: Bureau of Radiologic Heath
-callToActionText: Become a Radiation Therapy Tech
+callToActionText: Get Licensed
 callToActionLink: http://state.nj.us/dep/rpp/tec/diagrt.htm
 webflowIndustry: Radio Therapy Technologist
 divisionPhone: (609) 984-5890
