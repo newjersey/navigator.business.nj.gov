@@ -5,7 +5,7 @@ urlSlug: wine-making-home
 webflowName: Wine Making (at Home)
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcohol Beverages, State Licensing Unit
-callToActionText: Get a Home Wine Making Permit
+callToActionText: Get a Permit
 callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
 webflowIndustry: Wine Making
 divisionPhone: (609) 984-2830
