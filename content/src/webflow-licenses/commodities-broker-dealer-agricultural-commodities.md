@@ -5,7 +5,7 @@ urlSlug: commodities-broker-dealer-agricultural-commodities
 webflowName: Commodities Broker & Dealer (Agricultural Commodities)
 agencyId: agriculture
 agencyAdditionalContext: Marketing and Development Bureau
-callToActionText: Learn About Agricultural Licensing
+callToActionText: Learn About Licensing
 callToActionLink: https://www.nj.gov/agriculture/divisions/md/prog/licensing.html
 webflowIndustry: Commodities Broker
 divisionPhone: (609) 292-5576
