@@ -5,7 +5,7 @@ urlSlug: water-supply-and-wastewater-operator
 webflowName: Water Supply and Wastewater Operator
 agencyId: njdep
 agencyAdditionalContext: Examining and Licensing Unit
-callToActionText: Become a Licensed Operator
+callToActionText: Get Licensed
 callToActionLink: http://state.nj.us/dep/exams/wsw.htm
 webflowIndustry: Water Supply and Wastewater
 divisionPhone: (609) 777-1013
