@@ -549,6 +549,49 @@ describe("EmployerRates", () => {
         userData,
       });
     });
+
+    it("shows business name error if user has a valid DOL EIN and submits without a business name", async () => {
+      renderComponentsWithOwning({
+        employerAccessRegistration: true,
+        deptOfLaborEin: "012345678901234",
+        businessName: "",
+      });
+
+      const submit = await screen.findByRole("button", {
+        name: Config.employerRates.employerAccessYesButtonText,
+      });
+      await userEvent.click(submit);
+
+      expect(screen.getByRole("alert")).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: "Business Name" })).toBeInTheDocument();
+      expect(screen.getAllByRole("listitem").length).toBe(1);
+    });
+
+    it("shows combined business name and DOL EIN error if both are invalid", async () => {
+      renderComponentsWithOwning({
+        deptOfLaborEin: "",
+        businessName: "",
+      });
+      const user = userEvent.setup();
+
+      const trueRadio = screen.getByRole("radio", {
+        name: Config.employerRates.employerAccessTrueText,
+      });
+      await userEvent.click(trueRadio);
+
+      const textbox = screen.getByRole("textbox");
+      const toType = "1".repeat(1);
+      await user.type(textbox, toType);
+
+      const submit = await screen.findByRole("button", {
+        name: Config.employerRates.employerAccessYesButtonText,
+      });
+      await userEvent.click(submit);
+
+      expect(screen.getByRole("alert")).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: "Business Name" })).toBeInTheDocument();
+      expect(screen.getAllByRole("listitem").length).toBe(2);
+    });
   });
 
   describe("successful submission response page", () => {

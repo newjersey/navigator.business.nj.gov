@@ -70,6 +70,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const [dolEinError, setDolEinError] = useState<boolean>(previewMode || false);
   const [serverError, setServerError] = useState<boolean>(previewMode || false);
   const [noAccountError, setNoAccountError] = useState<boolean>(previewMode || false);
+  const [noBusinessNameError, setNoBusinessNameError] = useState<boolean>(previewMode || false);
 
   const handleDolEinChange = (value: string): void => {
     if (props.handleChangeOverride) {
@@ -85,15 +86,14 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
   const isDolEinValid = (value: string): boolean => !!value && value.length === DOL_EIN_CHARACTERS;
 
   const handleRadioChange = (value: string): void => {
-    if (value === "false" && dolEinError) {
+    if (value === "false") {
       setDolEinError(false);
-      setIsValid(true);
-    }
-    if (value === "false" && noAccountError) {
       setNoAccountError(false);
-    }
-    if (value === "false" && serverError) {
       setServerError(false);
+      setNoBusinessNameError(false);
+      if (dolEinError) {
+        setIsValid(true);
+      }
     }
     setEmployerAccessRegistration(value);
     setProfileData((prev) => ({
@@ -110,6 +110,11 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
 
     if (props.handleChangeOverride) {
       props.handleChangeOverride();
+      return;
+    }
+
+    if (!state.profileData.businessName) {
+      setNoBusinessNameError(true);
       return;
     }
 
@@ -165,13 +170,18 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     >
       <Heading level={4}>{Config.employerRates.employerAccessHeaderText}</Heading>
 
-      {dolEinError && (
+      {(dolEinError || noBusinessNameError) && (
         <div className="margin-y-2">
           <Alert variant={"error"}>
             <div>{getProfileErrorAlertText(1)}</div>
-            <li>
-              <a href={`#question-dolEin`}>{Config.employerRates.dolEinAlertLabelText}</a>
-            </li>
+            {dolEinError && <li>{Config.employerRates.dolEinAlertLabelText}</li>}
+            {noBusinessNameError && (
+              <li>
+                <a href={Config.employerRates.businessNameErrorLink}>
+                  {Config.profileDefaults.fields.businessName.default.header}
+                </a>
+              </li>
+            )}
           </Alert>
         </div>
       )}
@@ -232,11 +242,10 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
           <WithErrorBar hasError={dolEinError} type="ALWAYS">
             <DolEin
               onValidation={(_, invalid) => {
-                if (invalid && serverError) {
-                  setServerError(false);
-                }
-                if (invalid && noAccountError) {
-                  setNoAccountError(false);
+                if (invalid) {
+                  if (serverError) setServerError(false);
+                  if (noAccountError) setNoAccountError(false);
+                  if (state.profileData.businessName === "") setNoBusinessNameError(true);
                 }
                 setDolEinError(invalid);
                 setIsValid(!invalid);
