@@ -4,7 +4,7 @@ displayname: psychologist
 urlSlug: psychologist
 webflowName: Psychologist
 agencyId: nj-consumer-affairs
-callToActionText: Register as a Psychologist
+callToActionText: Get Registered
 callToActionLink: http://njconsumeraffairs.gov/psy/
 webflowIndustry: Psychologist
 licenseCertificationClassification: REGISTERED/LICENSE
