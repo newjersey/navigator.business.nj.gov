@@ -5,7 +5,7 @@ urlSlug: chiropractor
 webflowName: Chiropractor
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Chiropractic Examiners
-callToActionText: Apply for a Chiropractic License
+callToActionText: Get Licensed
 callToActionLink: https://www.njconsumeraffairs.gov/chi/Pages/applications.aspx
 webflowIndustry: Chiropractor
 divisionPhone: (973) 504-6395
