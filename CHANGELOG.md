@@ -1,3 +1,12 @@
+## [2025.26.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.26.0...v2025.26.1) (2025-12-30)
+
+
+### Bug Fixes
+
+* [AB[#17110](https://github.com/newjersey/navigator.business.nj.gov/issues/17110)] allow navigation on profile save: fixes industry saving bug ([b14d273](https://github.com/newjersey/navigator.business.nj.gov/commit/b14d273e80f8ba53fb64dee49770016be6809f00))
+* [AB[#17114](https://github.com/newjersey/navigator.business.nj.gov/issues/17114)] adds MLO license check and xray endpoints as vars ([a074228](https://github.com/newjersey/navigator.business.nj.gov/commit/a0742285edbd7a3d93f20ba688fd78488a65cfcd))
+* [AB[#17114](https://github.com/newjersey/navigator.business.nj.gov/issues/17114)] fixes missing configuration values ([6d9b3bb](https://github.com/newjersey/navigator.business.nj.gov/commit/6d9b3bb7b3d6b4576fcb8a09723eac053eb60ef6))
+
 # [2025.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.25.3...v2025.26.0) (2025-12-29)
 
 

@@ -400,6 +400,9 @@ describe("<DashboardOnDesktop />", () => {
   });
 
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
+    const mockDate = new Date("2020-04-13T00:00:00.000+08:00");
+    jest.setSystemTime(new Date(mockDate));
+
     const dueDate = getCurrentDate().add(1, "days");
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
