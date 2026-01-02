@@ -3,7 +3,7 @@ id: individual-producer-license
 displayname: individual-producer-license
 urlSlug: individual-producer-license
 name: Apply for an Insurance Individual Producer License
-webflowName: Insurance Individual Producer License
+webflowName: "Finance and Insurance: Individual Producer License"
 summaryDescriptionMd: You must have an individual `producer|insurance-producer`
   license to legally sell, solicit, or negotiate insurance products.
 industryId: generic
