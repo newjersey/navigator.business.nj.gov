@@ -4,7 +4,7 @@ id: license-massage-therapy
 displayname: license-massage-therapy
 urlSlug: massage-therapy-license
 name: Get Your Massage Therapy Business License
-webflowName: "Massage Therapy: Massage Therapy Business License"
+webflowName: Massage Therapy Business License
 summaryDescriptionMd: If you will employ others to offer massage therapy
   services, you need to register your business as a massage therapy employer.
 industryId: massage-therapy
