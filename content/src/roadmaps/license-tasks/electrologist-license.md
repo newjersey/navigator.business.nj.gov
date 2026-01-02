@@ -1,18 +1,18 @@
 ---
 id: electrologist-license
-filename: electrologist-license
 displayname: electrologist-license
 urlSlug: electrologist-license
+agencyId: nj-consumer-affairs
+divisionPhone: (973) 504-6377
+filename: electrologist-license
 name: Apply for Your Electrologist License
-webflowName: Electrologist
+webflowName: Electrologist License
 summaryDescriptionMd: You must have a license to work as an electrologist in New Jersey.
 industryId: healthcare
 callToActionText: Apply for My Electrologist License
 callToActionLink: https://www.njconsumeraffairs.gov/eac/Applications/Application-for-Licensure-as-an-Electrologist.pdf
-licenseCertificationClassification: undefined
-agencyId: nj-consumer-affairs
-divisionPhone: (973) 504-6377
 webflowId: 66e9d9648d1f1a667a8f04ab
+licenseCertificationClassification: undefined
 ---
 
 ## Eligibility Criteria
