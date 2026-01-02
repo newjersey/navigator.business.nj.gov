@@ -5,7 +5,7 @@ id: rmw-generator-registration
 displayname: rmw-generator-registration
 urlSlug: rmw-generator-registration
 name: Complete Your Regulated Medical Waste Generator Registration
-webflowName: Complete Your Regulated Medical Waste Generator Registration
+webflowName: Regulated Medical Waste Generator Registration
 summaryDescriptionMd: If your business produces `Regulated Medical Waste
   (RMW)|regulated-medical-waste` , you must register with the New Jersey
   Department of Environmental Protection (NJDEP) as an RMW generator.
