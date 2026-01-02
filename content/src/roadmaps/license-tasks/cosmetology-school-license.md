@@ -4,7 +4,7 @@ id: cosmetology-school-license
 displayname: cosmetology-school-license
 urlSlug: cosmetology-school-license
 name: Get Your Cosmetology School License
-webflowName: "Cosmetologist: Cosmetology School License"
+webflowName: Cosmetology School License
 summaryDescriptionMd: If you want to operate a cosmetology school in New Jersey,
   you need a cosmetology school license.
 industryId: cosmetology
