@@ -83,13 +83,29 @@ describe("<DeferredLocationQuestion />", () => {
     expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
   });
 
-  it("shows inner content without question nor success banner when already location saved", () => {
+  it("shows inner content with success banner when already location saved", () => {
     const municipality = generateMunicipality({});
     const business = generateBusiness({ profileData: generateProfileData({ municipality }) });
     renderComponent({ initialBusiness: business, innerContent: "inner-content" });
     expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
     expect(screen.getByText("inner-content")).toBeInTheDocument();
+    expect(screen.getByTestId("city-success-banner")).toBeInTheDocument();
+  });
+
+  it("shows question form when Remove City is clicked from saved location", async () => {
+    const municipality = generateMunicipality({ displayName: "Allendale" });
+    const business = generateBusiness({ profileData: generateProfileData({ municipality }) });
+    renderComponent({ initialBusiness: business, innerContent: "inner-content" });
+
+    expect(screen.getByTestId("city-success-banner")).toBeInTheDocument();
+    expect(screen.getByText("inner-content")).toBeInTheDocument();
+    expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
+
+    expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
     expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
+    expect(screen.queryByText("inner-content")).not.toBeInTheDocument();
   });
 
   describe("when saving location", () => {
@@ -119,22 +135,6 @@ describe("<DeferredLocationQuestion />", () => {
     it("shows inner content and banner on save", async () => {
       await selectNewarkAndSave();
       expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
-      expect(screen.getByText("inner-content")).toBeInTheDocument();
-    });
-
-    it("shows location question when edit button is clicked", async () => {
-      await selectNewarkAndSave();
-      fireEvent.click(screen.getByText(Config.deferredLocation.editText));
-      expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
-      expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
-    });
-
-    it("shows inner content when saving location after editing", async () => {
-      await selectNewarkAndSave();
-      fireEvent.click(screen.getByText(Config.deferredLocation.editText));
-      selectLocationByText("Absecon");
-      fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
-      await screen.findByTestId("city-success-banner");
       expect(screen.getByText("inner-content")).toBeInTheDocument();
     });
 

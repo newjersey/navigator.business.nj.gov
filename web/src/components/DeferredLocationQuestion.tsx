@@ -8,7 +8,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   innerContent: string;
@@ -22,10 +22,8 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const updateQueue = userDataFromHook.updateQueue;
 
-  const [showSuccessBanner, setShowSuccessBanner] = useState<boolean>(
-    props.CMS_ONLY_showSuccessBanner ?? false,
-  );
-  const [showEditLocation, setShowEditLocation] = useState<boolean>(false);
+  const showSuccessBanner =
+    props.CMS_ONLY_showSuccessBanner ?? business?.profileData.municipality !== undefined;
 
   const label = (
     <>
@@ -34,11 +32,9 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
     </>
   );
 
-  const shouldShowQuestion = business?.profileData.municipality === undefined || showEditLocation;
+  const shouldShowQuestion = business?.profileData.municipality === undefined;
 
   const onSaveNewLocation = (): void => {
-    setShowSuccessBanner(true);
-    setShowEditLocation(false);
     business?.profileData.municipality === undefined &&
       updateQueue?.currentBusiness().profileData.municipality !== undefined &&
       analytics.event.task_location_question.submit.location_entered_for_first_time();
@@ -65,10 +61,6 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
               })}
             </Content>
           </div>
-          <UnStyledButton isUnderline onClick={(): void => setShowEditLocation(true)}>
-            {Config.deferredLocation.editText}
-          </UnStyledButton>
-          <span className="margin-x-105">|</span>
           <UnStyledButton isUnderline onClick={onRemoveLocation}>
             {Config.deferredLocation.removeText}
           </UnStyledButton>
