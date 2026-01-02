@@ -1,10 +1,10 @@
 ---
-licenseName: "Telemarketers"
+licenseName: Telemarketers
 id: telemarketing-license
 displayname: telemarketing-license
 urlSlug: telemarketing-license
 name: Apply for Your Telemarketing License
-webflowName: "Telemarketing: Telemarketing License"
+webflowName: Telemarketing License
 summaryDescriptionMd: If you or your company makes telemarketing sales calls to
   customers in New Jersey, you need a telemarketing license.
 industryId: telemarketing
