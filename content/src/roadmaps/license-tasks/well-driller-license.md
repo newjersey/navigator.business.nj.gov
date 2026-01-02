@@ -13,16 +13,19 @@ agencyAdditionalContext: Division of Water Supply and Geoscience
 divisionPhone: 609-984-683
 industryId: commercial-construction
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You must apply for your well driller license to construct wells in New Jersey.
+summaryDescriptionMd: >-
+  You must apply for your well driller license to construct wells in New Jersey.
 
-There are 7 well driller license types. Each one has different exam and experience requirements. Review the [Appendix A in the application](https://www.nj.gov/dep/watersupply/pdf/license-app-well-driller.pdf) to meet the requirements for your license type.
 
-The requirements below cover the minimum for all licenses."
+  There are 7 well driller license types. Each one has different exam and experience requirements. Review the [Appendix A in the application](https://www.nj.gov/dep/watersupply/pdf/license-app-well-driller.pdf) to meet the requirements for your license type.
+
+
+  The requirements below cover the minimum for all licenses.
 ---
 
 ## Application Requirements
 
-#### Education/Training
+### Education/Training
 
 - Passing scores on all National Groundwater Association (NGWA) technical exams
 - Passing score on the NJ regulation exams for your license type
@@ -31,11 +34,11 @@ The requirements below cover the minimum for all licenses."
 
 Schedule your exam on the [NGWA website](https://test-takers.psiexams.com/ngwa).
 
-#### Personal Documents
+### Personal Documents
 
 - Last four numbers of your Social Security number (SSN)
 
-#### Employment Background
+### Employment Background
 
 - Current employer
 - Proof of experience as a journeyman well driller for the minimum amount of years for your license type. See [Appendix A in the license application](https://www.nj.gov/dep/watersupply/pdf/license-app-well-driller.pdf).
@@ -47,7 +50,7 @@ Schedule your exam on the [NGWA website](https://test-takers.psiexams.com/ngwa).
 - Current NJ well driller or pump installer license numbers, if applicable
 - Copy of out-of-state well driller or pump installer license, if applicable
 
-#### General Application Requirements
+### General Application Requirements
 
 - Notarized application
 - Applicable fees paid
