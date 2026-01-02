@@ -4,7 +4,7 @@ id: detective-agency-license
 displayname: detective-agency-license
 urlSlug: detective-agency-license
 name: Obtain Your Detective Agency License
-webflowName: "Detective: Detective Agency License"
+webflowName: Detective Agency License
 summaryDescriptionMd: >
   You need a license to operate a detective agency. To prepare for the
   application, consider reading the [Private Detective License Application
