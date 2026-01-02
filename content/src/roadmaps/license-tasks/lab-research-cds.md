@@ -5,8 +5,7 @@ displayname: lab-research-cds
 urlSlug: lab-research-cds
 name: Apply for Your Analytical Lab or Researcher’s Controlled Dangerous
   Substances Registration
-webflowName: "All Other Businesses: Analytical Lab or Researcher Controlled
-  Dangerous Substances Registration"
+webflowName: Analytical Lab or Researcher Controlled Dangerous Substances Registration
 summaryDescriptionMd: >-
   You need a Controlled Dangerous Substances (CDS) registration if you, your
   business, or your facility handle, store, or use CDS for research purposes or
