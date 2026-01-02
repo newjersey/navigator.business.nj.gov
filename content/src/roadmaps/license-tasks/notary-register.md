@@ -4,7 +4,7 @@ id: notary-register
 displayname: notary-register
 urlSlug: notary-certificate
 name: Register as a Notary Public
-webflowName: "Notary Public: Notary Public Certificate"
+webflowName: Notary Public Certificate
 summaryDescriptionMd: >-
   :::infoAlert
    A notary public who is not a licensed attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
