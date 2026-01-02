@@ -1,9 +1,10 @@
 ---
+licenseName: Pharmacy-Pharmacy
 id: pharmacy-license
 displayname: pharmacy-permit
 urlSlug: pharmacy-license
 name: Apply for Your Pharmacy Permit
-webflowName: "Pharmacy: Pharmacy Permit"
+webflowName: Pharmacy Permit
 summaryDescriptionMd: >
   Your pharmacy business needs a permit in order to operate. The permit
   application process includes a site inspection. Once a permit is issued, your
@@ -19,7 +20,6 @@ agencyAdditionalContext: Board of Pharmacy
 divisionPhone: (973) 504-6450
 webflowType: business-license
 webflowId: 640b8467a1b0444c01a311c3
-licenseName: Pharmacy-Pharmacy
 ---
 
 ## Application Requirements
