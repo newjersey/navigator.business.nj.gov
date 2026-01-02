@@ -4,7 +4,7 @@ id: home-health-aide-license
 displayname: home-health-aide-license
 urlSlug: health-care-services-firm-license
 name: Register Your Health Care Service Firm, if Applicable
-webflowName: Register Your Health Care Service Firm, if Applicable
+webflowName: Health Care Service Registration
 summaryDescriptionMd: You need to register as a health care service firm if you
   are employing individuals to provide health care, personal care, or companion
   services in the personal residence of a person with a disability or is age 60
