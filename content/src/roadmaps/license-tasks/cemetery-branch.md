@@ -5,7 +5,7 @@ licenseName: ""
 id: cemetery-branch
 displayname: cemetery-branch
 urlSlug: cemetery-branch
-name: Apply for Your Cemetery Salesperson Branch License, if applicable
+name: Apply for Your Cemetery Salesperson Branch License, if Applicable
 webflowName: "Cemetery: Cemetery Salesperson Branch License "
 summaryDescriptionMd: You need a Cemetery Salesperson Branch license to sell at
   more than one location. You must already have a Cemetery Salesperson license
