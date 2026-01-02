@@ -3,7 +3,7 @@ id: cemetery-sales
 displayname: cemetery-sales
 urlSlug: cemetery-sales
 name: Apply for Your Cemetery Salesperson License
-webflowName: "Cemetery: Cemetery Salesperson License"
+webflowName: Cemetery Salesperson License
 summaryDescriptionMd: >-
   You need a cemetery salesperson license if your main job is selling graves,
   crypts, or niches.
@@ -13,11 +13,11 @@ summaryDescriptionMd: >-
 industryId: cemetery
 callToActionText: Apply for My Cemetery Salesperson License
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Cemetery Board
 webflowType: individual-license
 webflowId: 66f3197f52d588875cacb919
-licenseCertificationClassification: undefined
 ---
 
 ## Application Requirements
