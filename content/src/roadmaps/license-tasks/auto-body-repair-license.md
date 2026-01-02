@@ -4,7 +4,7 @@ id: auto-body-repair-license
 displayname: auto-body-repair-license
 urlSlug: auto-body-repair-license
 name: Get Your Auto-Body Repair License
-webflowName: "Auto-Body Repair: Business License"
+webflowName: Auto-Body Repair Business License
 summaryDescriptionMd: |
   You need a license to open an auto-body repair business.
 formName: BLC-25
