@@ -1,7 +1,5 @@
 ---
-notesMd: "* h2 and h3 still look the same, using h3 per Spencer but ideally we
-  want the h3's to be visually differentiated from the h2. Will need to update
-  this task once this is remedied."
+notesMd: ""
 licenseName: Cemetery-Cemetery
 id: cemetery-certificate
 displayname: cemetery-certificate
