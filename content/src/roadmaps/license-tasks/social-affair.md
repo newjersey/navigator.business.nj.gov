@@ -3,8 +3,8 @@ filename: social-affair
 id: social-affair
 displayname: social-affair
 urlSlug: social-affair
-name: Social Affair Permit to Serve Alcohol
-webflowName: Apply for a Social Affair Permit to Serve Alcohol
+name: Apply for a Social Affair Permit to Serve Alcohol
+webflowName: Social Affair Permit to Serve Alcohol
 summaryDescriptionMd: If your nonprofit plans to serve or sell alcohol in open
   containers at an event, you need a Social Affair Permit. This permit is given
   by New Jersey’s Division of Alcoholic Beverage Control (ABC). Submit your
