@@ -4,7 +4,7 @@ id: certified-interior-designer
 displayname: certified-interior-designer
 urlSlug: certified-interior-designer
 name: Become a Certified Interior Designer
-webflowName: "Interior Design: Interior Designer Certification"
+webflowName: Interior Designer Certification
 summaryDescriptionMd: >
   You can only legally use the title of Certified Interior Designer if you’ve
   been certified by the New Jersey Interior Design Examination and Evaluation
