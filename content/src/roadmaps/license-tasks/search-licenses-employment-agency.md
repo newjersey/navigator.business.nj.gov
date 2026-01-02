@@ -4,7 +4,7 @@ id: search-licenses-employment-agency
 displayname: search-licenses-employment-agency
 urlSlug: search-licenses-employment-agency
 name: Apply for an Employment Agency License
-webflowName: "Employment Agency: Employment Agency License"
+webflowName: Employment Agency License
 summaryDescriptionMd: You need to obtain an employment agency license before
   offering staffing services. Call or email Employment and Personnel Services to
   find out how to register.
