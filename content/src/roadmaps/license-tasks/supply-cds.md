@@ -5,8 +5,8 @@ displayname: supply-cds
 urlSlug: supply-cds
 name: Apply for Your Manufacturer or Wholesaler/Distributor Controlled Dangerous
   Substances Registration
-webflowName: "All Other Businesses: Manufacturer or Wholesaler/Distributor
-  Controlled Dangerous Substances Registration"
+webflowName: Manufacturer or Wholesaler/Distributor Controlled Dangerous
+  Substances Registration
 summaryDescriptionMd: >-
   You need a Controlled Dangerous Substances (CDS) registration if you
   manufacture, repackage, label, or buy and sell any products containing CDS.
