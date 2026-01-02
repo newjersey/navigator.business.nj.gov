@@ -4,7 +4,7 @@ id: architect-license
 displayname: architect-license
 urlSlug: architect-license
 name: Apply for Your Architect License
-webflowName: "Architecture: Architect License"
+webflowName: Architect License
 summaryDescriptionMd: |
   You or any staff providing architectural services need an architect license.
 industryId:
