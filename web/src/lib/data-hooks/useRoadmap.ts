@@ -34,18 +34,18 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
 
   const rebuildRoadmap = !roadmap || roadmap?.steps.length === 0 || roadmap?.tasks.length === 0;
 
-  useMountEffectWhenDefined(() => {
-    if (rebuildRoadmap) {
-      buildAndSetRoadmap();
-    }
-  }, business);
-
   const buildAndSetRoadmap = async (): Promise<void> => {
     if (business?.onboardingFormProgress === "COMPLETED") {
       const roadmap = await buildUserRoadmap(business.profileData, business.roadmapTaskData);
       setRoadmap(roadmap);
     }
   };
+
+  useMountEffectWhenDefined(() => {
+    if (rebuildRoadmap) {
+      buildAndSetRoadmap();
+    }
+  }, business);
 
   const tasksInSection = (section: SectionType): Task[] => {
     if (!roadmap) return [];

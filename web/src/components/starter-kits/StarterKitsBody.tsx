@@ -6,7 +6,7 @@ import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
 import { Roadmap } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "rehype-react/lib";
+import { ReactElement } from "react";
 
 interface StarterKitsBodyProps {
   heroTitle: string;

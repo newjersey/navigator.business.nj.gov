@@ -17,4 +17,6 @@ export default {
     ],
   ],
   testTimeout: 20000,
+  // Reduce parallel workers to prevent resource contention in React 19 async operations
+  maxWorkers: "75%",
 };

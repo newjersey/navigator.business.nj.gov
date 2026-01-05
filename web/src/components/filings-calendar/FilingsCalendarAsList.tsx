@@ -38,7 +38,10 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     useState<number>(LIST_VIEW_MORE_INCREMENT);
 
   useEffect(() => {
-    setNumberOfVisibleCalendarEntries(LIST_VIEW_MORE_INCREMENT);
+    const timeoutId = setTimeout(() => {
+      setNumberOfVisibleCalendarEntries(LIST_VIEW_MORE_INCREMENT);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [props.activeYear]);
 
   const licenseCalendarEvents = getLicenseCalendarEvents(

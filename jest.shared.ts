@@ -16,4 +16,7 @@ export default {
     ],
   },
   watchPathIgnorePatterns: ["coverage"],
+  // Limit parallel execution to reduce resource contention and timing issues
+  // 50% workers provides good balance between speed and reliability
+  maxWorkers: "50%",
 };

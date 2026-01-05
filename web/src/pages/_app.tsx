@@ -29,7 +29,7 @@ import {
   OperatingPhaseId,
   RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
@@ -157,30 +157,36 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const isSeoPage = router && router.pathname.includes("/starter-kits");
 
-  const heroTitle = insertIndustryContent(
-    config.starterKits.hero.title,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const heroTitle = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.hero?.title ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const description = insertIndustryContent(
-    config.starterKits.seo.description,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const description = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.seo?.description ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const imageAlt = insertIndustryContent(
-    config.starterKits.seo.imageAltText,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const imageAlt = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.seo?.imageAltText ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const DEFAULT_BASE_URL = "https://navigator.business.nj.gov/dashboard";
+  const DEFAULT_BASE_URL = "https://account.business.nj.gov/dashboard";
   const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL ?? DEFAULT_BASE_URL;
   const imageUrl = new URL("/img/team-success.jpg", baseUrl).href;
 
   return (
-    <>
+    <ConfigContext.Provider value={{ config, setOverrides: () => {} }}>
       <Head>
         <meta name="viewport" content="width=360, initial-scale=1" />
         {isSeoPage && (
@@ -283,7 +289,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           </ThemeProvider>
         </StyledEngineProvider>
       </IntercomContext.Provider>
-    </>
+    </ConfigContext.Provider>
   );
 };
 

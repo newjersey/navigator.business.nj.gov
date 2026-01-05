@@ -18,6 +18,8 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     mockedFs = fs as jest.Mocked<typeof fs>;
+    // Mock existsSync to return true for the expected path structure
+    mockedFs.existsSync = jest.fn().mockReturnValue(true);
   });
 
   describe("loadAllAnytimeActionLicenseReinstatements", () => {

@@ -1,0 +1,38 @@
+Remaining 29 Failing Test Files After useConfig Fix
+=====================================================
+
+1. web/src/components/FormationDateModal.test.tsx
+2. web/src/components/dashboard/DashboardAlerts.test.tsx
+3. web/src/components/dashboard/Roadmap.test.tsx
+4. web/src/components/data-fields/tax-id/DisabledTaxId.test.tsx
+5. web/src/components/data-fields/tax-id/TaxId.test.tsx
+6. web/src/components/filings-calendar/FilingsCalendar.test.tsx
+7. web/src/components/filings-calendar/tax-access/TaxAccess.test.tsx
+8. web/src/components/navbar/mobile/NavBarMobile.test.tsx
+9. web/src/components/navbar/mobile/NavBarMobileAccountSlideOutMenu.test.tsx
+10. web/src/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu.test.tsx
+11. web/src/components/tasks/LicenseTask.test.tsx
+12. web/src/components/tasks/RaffleBingoPaginator.test.tsx
+13. web/src/components/tasks/TaxTask.test.tsx
+14. web/src/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWithValidation.test.tsx
+15. web/src/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate.test.tsx
+16. web/src/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceSteps.test.tsx
+17. web/src/components/tasks/business-formation/BusinessFormationPaginator.test.tsx
+18. web/src/components/tasks/cannabis/CannabisPriorityStatusTask.test.tsx
+19. web/src/components/tasks/cigarette-license/LicenseeInfo.test.tsx
+20. web/src/components/xray/Xray.test.tsx
+21. web/src/components/xray/XrayStatus.test.tsx
+22. web/src/lib/data-hooks/useUserData.test.tsx
+23. web/src/scripts/webflow/webflowSync.test.js
+24. web/test/pages/loading.test.tsx
+25. web/test/pages/onboarding/onboarding-additional-business.test.tsx
+26. web/test/pages/onboarding/onboarding-foreign.test.tsx
+27. web/test/pages/onboarding/onboarding-shared.test.tsx
+28. web/test/pages/onboarding/onboarding-starting.test.tsx
+29. web/test/pages/profile/profile-starting.test.tsx
+
+Main Error Patterns:
+====================
+1. TestingLibraryElementError - Elements not found or text split across elements
+2. React act() warnings - State updates not wrapped properly (24 occurrences)
+3. Missing test-ids or labels - Component structure changes in MUI 7

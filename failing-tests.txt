@@ -1,0 +1,94 @@
+2025:FAIL web web/src/components/tasks/RaffleBingoPaginator.test.tsx
+2052:FAIL web web/src/components/FormationDateModal.test.tsx
+2077:FAIL web web/test/pages/onboarding/onboarding-additional-business.test.tsx
+2442:FAIL web web/src/components/tasks/TaxTask.test.tsx
+2473:FAIL web web/src/components/filings-calendar/FilingsCalendar.test.tsx
+2492:FAIL web web/src/components/tasks/cannabis/CannabisPriorityStatusTask.test.tsx
+5938:FAIL web web/src/components/tasks/LicenseTask.test.tsx
+7585:FAIL web web/src/components/tasks/ElevatorRegistrationTask.test.tsx
+8051:FAIL web web/src/components/njwds-layout/PageSkeleton.test.tsx
+8131:FAIL web web/src/components/filings-calendar/tax-access/TaxAccess.test.tsx
+8185:FAIL web web/src/lib/data-hooks/useUserData.test.tsx
+8238:FAIL web web/src/components/data-fields/tax-id/TaxId.test.tsx
+9235:FAIL web web/src/components/tasks/cigarette-license/CigaretteLicense.test.tsx
+9840:FAIL web web/src/components/xray/XrayStatus.test.tsx
+9892:FAIL web web/src/components/tasks/business-formation/success/FormationSuccessPage.test.tsx
+9986:FAIL web web/test/pages/loading.test.tsx
+10175:FAIL web web/src/components/xray/Xray.test.tsx
+10699:FAIL web web/src/components/data-fields/NaicsCode.test.tsx
+11082:FAIL web web/src/components/data-fields/non-essential-questions/NonEssentialQuestion.test.tsx
+11308:FAIL web web/src/components/navbar/mobile/NavBarMobile.test.tsx
+12122:FAIL web web/src/components/crtk/crtkPage.test.tsx
+12649:FAIL web web/test/pages/roadmap.test.tsx
+12740:FAIL web web/src/components/data-fields/TaxPin.test.tsx
+13125:FAIL web web/src/components/dashboard/BusinessStructurePrompt.test.tsx
+13276:FAIL web web/src/components/dashboard/Roadmap.test.tsx
+18641:FAIL web web/test/pages/onboarding/onboarding-shared.test.tsx (5.907 s)
+19532:FAIL web web/src/components/data-fields/DolEin.test.tsx
+19729:FAIL web web/src/components/FieldEntryAlert.test.tsx
+19970:FAIL web web/src/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu.test.tsx
+20235:FAIL web web/src/components/navbar/mobile/NavBarMobileAccountSlideOutMenu.test.tsx
+20371:FAIL web web/src/components/dashboard/DashboardAlerts.test.tsx
+20620:FAIL web web/src/components/data-fields/tax-id/DisabledTaxId.test.tsx
+20714:FAIL web web/src/components/CongratulatoryModal.test.tsx
+20775:FAIL web web/src/scripts/webflow/webflowSync.test.js
+20883:FAIL web web/src/components/LandingPageTiles.test.tsx
+21064:FAIL web web/src/components/CannabisLocationAlert.test.tsx
+21158:FAIL web web/src/components/navbar/desktop/NavBarDesktopQuickLinks.test.tsx
+21339:FAIL web web/src/components/tasks/UnlockedBy.test.tsx
+21409:FAIL web web/test/pages/onboarding/onboarding-starting.test.tsx (6.552 s)
+24576:FAIL web web/src/components/tasks/cigarette-license/LicenseeInfo.test.tsx (9.243 s)
+25024:FAIL web web/src/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWithValidation.test.tsx (24.253 s)
+25064:FAIL web web/test/pages/onboarding/onboarding-foreign.test.tsx
+25254:FAIL web web/src/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate.test.tsx (40.576 s)
+35088:FAIL web web/test/pages/profile/profile-starting.test.tsx (91.617 s)
+35309:FAIL web web/src/components/LoginEmailCheck.test.tsx
+35333:FAIL web web/test/pages/login.test.tsx
+35344:FAIL web web/src/components/tasks/business-formation/BusinessFormationPaginator.test.tsx (204.36 s)
+35378:FAIL web/src/components/tasks/RaffleBingoPaginator.test.tsx
+35395:FAIL web/src/components/FormationDateModal.test.tsx
+35412:FAIL web/test/pages/onboarding/onboarding-additional-business.test.tsx
+35777:FAIL web/src/components/tasks/TaxTask.test.tsx
+35795:FAIL web/src/components/filings-calendar/FilingsCalendar.test.tsx
+35814:FAIL web/src/components/tasks/cannabis/CannabisPriorityStatusTask.test.tsx
+39253:FAIL web/src/components/tasks/LicenseTask.test.tsx
+40900:FAIL web/src/components/tasks/ElevatorRegistrationTask.test.tsx
+41366:FAIL web/src/components/njwds-layout/PageSkeleton.test.tsx
+41427:FAIL web/src/components/filings-calendar/tax-access/TaxAccess.test.tsx
+41478:FAIL web/src/lib/data-hooks/useUserData.test.tsx
+41495:FAIL web/src/components/data-fields/tax-id/TaxId.test.tsx
+42488:FAIL web/src/components/tasks/cigarette-license/CigaretteLicense.test.tsx
+43073:FAIL web/src/components/xray/XrayStatus.test.tsx
+43125:FAIL web/src/components/tasks/business-formation/success/FormationSuccessPage.test.tsx
+43219:FAIL web/test/pages/loading.test.tsx
+43401:FAIL web/src/components/xray/Xray.test.tsx
+43902:FAIL web/src/components/data-fields/NaicsCode.test.tsx
+44275:FAIL web/src/components/data-fields/non-essential-questions/NonEssentialQuestion.test.tsx
+44462:FAIL web/src/components/navbar/mobile/NavBarMobile.test.tsx
+45276:FAIL web/src/components/crtk/crtkPage.test.tsx
+45803:FAIL web/test/pages/roadmap.test.tsx
+45894:FAIL web/src/components/data-fields/TaxPin.test.tsx
+46267:FAIL web/src/components/dashboard/BusinessStructurePrompt.test.tsx
+46418:FAIL web/src/components/dashboard/Roadmap.test.tsx
+51777:FAIL web/test/pages/onboarding/onboarding-shared.test.tsx (5.907 s)
+52668:FAIL web/src/components/data-fields/DolEin.test.tsx
+52855:FAIL web/src/components/FieldEntryAlert.test.tsx
+53096:FAIL web/src/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu.test.tsx
+53337:FAIL web/src/components/navbar/mobile/NavBarMobileAccountSlideOutMenu.test.tsx
+53473:FAIL web/src/components/dashboard/DashboardAlerts.test.tsx
+53714:FAIL web/src/components/data-fields/tax-id/DisabledTaxId.test.tsx
+53808:FAIL web/src/components/CongratulatoryModal.test.tsx
+53869:FAIL web/src/scripts/webflow/webflowSync.test.js
+53888:FAIL web/src/components/LandingPageTiles.test.tsx
+54069:FAIL web/src/components/CannabisLocationAlert.test.tsx
+54163:FAIL web/src/components/navbar/desktop/NavBarDesktopQuickLinks.test.tsx
+54344:FAIL web/src/components/tasks/UnlockedBy.test.tsx
+54405:FAIL web/test/pages/onboarding/onboarding-starting.test.tsx (6.552 s)
+57545:FAIL web/src/components/tasks/cigarette-license/LicenseeInfo.test.tsx (9.243 s)
+57712:FAIL web/src/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWithValidation.test.tsx (24.253 s)
+57730:FAIL web/test/pages/onboarding/onboarding-foreign.test.tsx
+57737:FAIL web/src/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate.test.tsx (40.576 s)
+62461:FAIL web/test/pages/profile/profile-starting.test.tsx (91.617 s)
+62639:FAIL web/src/components/LoginEmailCheck.test.tsx
+62646:FAIL web/test/pages/login.test.tsx
+62653:FAIL web/src/components/tasks/business-formation/BusinessFormationPaginator.test.tsx (204.36 s)

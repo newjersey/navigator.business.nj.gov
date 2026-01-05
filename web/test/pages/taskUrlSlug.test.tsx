@@ -8,6 +8,7 @@ import {
   operatingPhasesNotDisplayingBusinessStructurePrompt,
   randomPublicFilingLegalType,
 } from "@/test/factories";
+import { withConfig } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   setMockRoadmapResponse,
@@ -54,18 +55,20 @@ const setLargeScreen = (value = true): void => {
 
 const renderPage = (task: Task, initialBusiness?: Business): void => {
   render(
-    <materialUi.ThemeProvider theme={materialUi.createTheme()}>
-      <WithStatefulUserData
-        initialUserData={generateUserDataForBusiness(initialBusiness ?? generateBusiness({}))}
-      >
-        <TaskPage
-          task={task}
-          displayContent={createEmptyTaskDisplayContent()}
-          municipalities={[]}
-          housingMunicipalities={[]}
-        />
-      </WithStatefulUserData>
-    </materialUi.ThemeProvider>,
+    withConfig(
+      <materialUi.ThemeProvider theme={materialUi.createTheme()}>
+        <WithStatefulUserData
+          initialUserData={generateUserDataForBusiness(initialBusiness ?? generateBusiness({}))}
+        >
+          <TaskPage
+            task={task}
+            displayContent={createEmptyTaskDisplayContent()}
+            municipalities={[]}
+            housingMunicipalities={[]}
+          />
+        </WithStatefulUserData>
+      </materialUi.ThemeProvider>,
+    ),
   );
 };
 

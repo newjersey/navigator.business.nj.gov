@@ -8,13 +8,15 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { findButton } from "@/test/helpers/accessible-queries";
 import {
   businessStructureTaskId,
   generateBusiness,
   generateProfileData,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -46,14 +48,15 @@ describe("<Roadmap />", () => {
           expect(screen.getByTestId("business-structure-prompt")).toBeInTheDocument();
         });
 
-        it("routes user to task page on button click", () => {
+        it("routes user to task page on button click", async () => {
           useMockRoadmap({
             tasks: [
               generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" }),
             ],
           });
           render(<Roadmap />);
-          fireEvent.click(screen.getByText(Config.businessStructurePrompt.buttonText));
+          const button = await findButton(Config.businessStructurePrompt.buttonText);
+          await userEvent.click(button);
           expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
         });
       });

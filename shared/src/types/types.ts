@@ -76,7 +76,8 @@ export type FormationFieldErrorState = {
   label: string;
 };
 
-export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
+export const getProfileFieldsFromConfig = (): Record<string, unknown> =>
+  getMergedConfig().profileDefaults?.fields ?? {};
 
 export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
@@ -650,7 +651,8 @@ export interface FormContextType<T, FieldError = FieldErrorType> {
 export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
 
 export type ProfileContentField = Exclude<
-  (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
+  (keyof ProfileData | keyof IndustrySpecificData) &
+    keyof ReturnType<typeof getProfileFieldsFromConfig>,
   "businessPersona"
 >;
 

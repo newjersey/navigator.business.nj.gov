@@ -21,9 +21,25 @@ interface Props {
   onSearchAgain?: () => void;
 }
 
-const Config = getMergedConfig();
+const CRTKContactInfo = (): ReactElement => {
+  return (
+    <>
+      <p className="margin-bottom-1 text-bold">If you have any questions, contact a CRTK expert:</p>
+      <ul>
+        <li>Phone: (609) 292-6714</li>
+        <li>
+          Email:{" "}
+          <a href="mailto:rtk@dep.nj.gov" className="text-underline">
+            rtk@dep.nj.gov
+          </a>
+        </li>
+      </ul>
+    </>
+  );
+};
 
 export const CRTKSearchResult = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
   const { crtkData } = props;
   const status = crtkData.CRTKSearchResult as StatusType;
   const businessDetails = crtkData.CRTKBusinessDetails;
@@ -37,25 +53,6 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
       header: "Business Found",
       description: `${businessDetails?.businessName || "Your business"} is in the New Jersey Community Right to Know (CRTK) database. This means you may have chemical reporting requirements.`,
     },
-  };
-
-  const CRTKContactInfo = (): ReactElement => {
-    return (
-      <>
-        <p className="margin-bottom-1 text-bold">
-          If you have any questions, contact a CRTK expert:
-        </p>
-        <ul>
-          <li>Phone: (609) 292-6714</li>
-          <li>
-            Email:{" "}
-            <a href="mailto:rtk@dep.nj.gov" className="text-underline">
-              rtk@dep.nj.gov
-            </a>
-          </li>
-        </ul>
-      </>
-    );
   };
 
   return (

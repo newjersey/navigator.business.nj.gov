@@ -1,6 +1,7 @@
 import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   composeOnBoardingTitle,
@@ -23,7 +24,8 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -52,10 +54,10 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
 describe("onboarding - owning a business", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockConfig();
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockEmptyApiSignups();
-    jest.useFakeTimers();
   });
 
   describe("page 1", () => {
@@ -66,17 +68,17 @@ describe("onboarding - owning a business", () => {
       expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     });
 
-    it("displays the sector dropdown after radio selected", () => {
+    it("displays the sector dropdown after radio selected", async () => {
       const { page } = renderPage({});
       expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
-      page.chooseRadio("business-persona-owning");
+      await page.chooseRadio("business-persona-owning");
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
     });
 
     it("does not allow OWNING user persona to move past Step 1 if user has not entered a sector", async () => {
       const { page } = renderPage({ userData: undefined });
-      page.chooseRadio("business-persona-owning");
-      fireEvent.click(screen.getByTestId("next"));
+      await page.chooseRadio("business-persona-owning");
+      await userEvent.click(screen.getByTestId("next"));
       await waitFor(() => {
         expect(
           screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
@@ -95,9 +97,9 @@ describe("onboarding - owning a business", () => {
       });
 
       const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
-      page.chooseRadio("business-persona-owning");
-      page.chooseRadio("business-persona-starting");
-      page.clickNext();
+      await page.chooseRadio("business-persona-owning");
+      await page.chooseRadio("business-persona-starting");
+      await page.clickNext();
       await waitFor(() => {
         expect(currentBusiness().profileData.operatingPhase).toBe(OperatingPhaseId.GUEST_MODE);
       });
@@ -107,8 +109,8 @@ describe("onboarding - owning a business", () => {
       const userData = generateTestUserData({ sectorId: undefined });
       useMockRouter({ isReady: true, query: { page: "1" } });
       const { page } = renderPage({ userData });
-      page.selectByValue("Sector", "clean-energy");
-      page.clickNext();
+      await page.selectByValue("Sector", "clean-energy");
+      await page.clickNext();
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
@@ -123,8 +125,8 @@ describe("onboarding - owning a business", () => {
   it("shows correct next-button text on page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("business-persona-owning");
-    page.selectByValue("Sector", "clean-energy");
+    await page.chooseRadio("business-persona-owning");
+    await page.selectByValue("Sector", "clean-energy");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
     expect(page1.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
@@ -135,9 +137,9 @@ describe("onboarding - owning a business", () => {
     const initialBusiness = initialUserData.businesses[initialUserData.currentBusinessId];
     const { page } = renderPage({ userData: initialUserData });
 
-    page.chooseRadio("business-persona-owning");
-    page.selectByValue("Sector", "clean-energy");
-    page.clickNext();
+    await page.chooseRadio("business-persona-owning");
+    await page.selectByValue("Sector", "clean-energy");
+    await page.clickNext();
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalled();
     });
@@ -206,7 +208,7 @@ describe("onboarding - owning a business", () => {
         Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText,
       ),
     ).toBeChecked();
-    page.clickNext();
+    await page.clickNext();
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalled();
     });

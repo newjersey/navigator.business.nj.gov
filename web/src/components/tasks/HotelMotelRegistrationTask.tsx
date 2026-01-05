@@ -20,7 +20,7 @@ import {
   HousingRegistrationRequestLookupResponse,
 } from "@businessnjgovnavigator/shared";
 import { HotelMotelRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 

@@ -40,7 +40,10 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
         props.essentialQuestionId,
       );
     }
-    setHasBeenSeen(true);
+    const timeoutId = setTimeout(() => {
+      setHasBeenSeen(true);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [
     nonEssentialQuestionInViewPort,
     hasBeenSeen,

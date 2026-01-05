@@ -31,7 +31,10 @@ export const NonEssentialQuestionForPersonas = (props: {
         props.questionId,
       );
     }
-    setHasBeenSeen(true);
+    const timeoutId = setTimeout(() => {
+      setHasBeenSeen(true);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [nonEssentialQuestionInViewPort, hasBeenSeen, nonEssentialQuestionText, props.questionId]);
 
   return (

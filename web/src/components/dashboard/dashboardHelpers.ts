@@ -9,9 +9,8 @@ import {
 import { hasCompletedBusinessStructure } from "@businessnjgovnavigator/shared/domain-logic/hasCompletedBusinessStructure";
 import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 
-const Config = getMergedConfig();
-
 export const getRoadmapHeadingText = (industryId?: string): string => {
+  const Config = getMergedConfig();
   return industryId === "domestic-employer"
     ? Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText
     : Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText;

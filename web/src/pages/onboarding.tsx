@@ -75,7 +75,7 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
+import { CSSTransition } from "@/components/transitions/CssTransition";
 
 interface Props {
   municipalities: Municipality[];

@@ -40,15 +40,18 @@ interface FieldErrors {
   addressZipCode?: string;
 }
 
-const Config = getMergedConfig();
-
-const XrayRegistrationErrorLookup: Record<XraySearchError, string> = {
-  NOT_FOUND: Config.xrayRegistrationTask.errorTextNotFound,
-  FIELDS_REQUIRED: Config.xrayRegistrationTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.xrayRegistrationTask.errorTextSearchFailed,
+const getXrayRegistrationErrorLookup = (): Record<XraySearchError, string> => {
+  const Config = getMergedConfig();
+  return {
+    NOT_FOUND: Config.xrayRegistrationTask.errorTextNotFound,
+    FIELDS_REQUIRED: Config.xrayRegistrationTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.xrayRegistrationTask.errorTextSearchFailed,
+  };
 };
 
 export const XrayStatus = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
+  const XrayRegistrationErrorLookup = getXrayRegistrationErrorLookup();
   const classes = useStyles();
   const [formValues, setFormValues] = useState<FacilityDetails>({
     businessName: "",
@@ -70,29 +73,32 @@ export const XrayStatus = (props: Props): ReactElement => {
       nameAndAddress?.addressLine1 &&
       nameAndAddress?.addressZipCode;
 
-    if (nameAndAddress && hasNameAndAddress) {
-      setFormValues(nameAndAddress);
-    } else if (business.formationData?.formationResponse?.success) {
-      setFormValues((prevValues) => {
-        return {
-          ...prevValues,
-          businessName: business.formationData.formationFormData.businessName,
-          addressLine1: business.formationData.formationFormData.addressLine1,
-          addressLine2: business.formationData.formationFormData.addressLine2 || "",
-          addressZipCode: business.formationData.formationFormData.addressZipCode,
-        };
-      });
-    } else {
-      setFormValues((prevValues) => {
-        return {
-          ...prevValues,
-          businessName: business.profileData?.businessName,
-          addressLine1: business.formationData?.formationFormData?.addressLine1,
-          addressLine2: business.formationData?.formationFormData?.addressLine2 || "",
-          addressZipCode: business.formationData?.formationFormData?.addressZipCode,
-        };
-      });
-    }
+    const timeoutId = setTimeout(() => {
+      if (nameAndAddress && hasNameAndAddress) {
+        setFormValues(nameAndAddress);
+      } else if (business.formationData?.formationResponse?.success) {
+        setFormValues((prevValues) => {
+          return {
+            ...prevValues,
+            businessName: business.formationData.formationFormData.businessName,
+            addressLine1: business.formationData.formationFormData.addressLine1,
+            addressLine2: business.formationData.formationFormData.addressLine2 || "",
+            addressZipCode: business.formationData.formationFormData.addressZipCode,
+          };
+        });
+      } else {
+        setFormValues((prevValues) => {
+          return {
+            ...prevValues,
+            businessName: business.profileData?.businessName,
+            addressLine1: business.formationData?.formationFormData?.addressLine1,
+            addressLine2: business.formationData?.formationFormData?.addressLine2 || "",
+            addressZipCode: business.formationData?.formationFormData?.addressZipCode,
+          };
+        });
+      }
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [business]);
 
   useEffect(() => {

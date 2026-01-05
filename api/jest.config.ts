@@ -17,6 +17,8 @@ export default {
     "<rootDir>/test/setupJestDynalite.ts",
     "<rootDir>/../shared/src/test/setupRandomSeed.ts",
   ],
+  // Limit concurrent tests to prevent DynamoDB connection issues
+  maxConcurrency: 10,
 
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",

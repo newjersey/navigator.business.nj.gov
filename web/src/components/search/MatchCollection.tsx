@@ -19,7 +19,10 @@ export const MatchCollection = (props: Props): ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsOpen(true);
+    const timeoutId = setTimeout(() => {
+      setIsOpen(true);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [props]);
 
   const firstLabel = Object.keys(props.matchedCollections)[0];

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars, jest/no-jasmine-globals, no-undef, jest/no-conditional-expect */
 import { arrayOfSectors, randomInt } from "@businessnjgovnavigator/shared";
 import * as axios from "axios";
 import fs from "fs";
@@ -797,6 +797,10 @@ describe("webflow syncing", () => {
           jest.useRealTimers();
         });
 
+        afterEach(() => {
+          jest.useRealTimers();
+        });
+
         it("should retry function after waiting if rate limit error occurs", async () => {
           jest.useFakeTimers();
 
@@ -816,12 +820,20 @@ describe("webflow syncing", () => {
         });
 
         it("should throw error if non-rate limit error occurs", async () => {
+          const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
           const error = { response: { status: 500 } };
 
-          await expect(
-            catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2"),
-          ).rejects.toEqual(error);
+          try {
+            await catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2");
+            // If we get here, the function didn't throw
+            fail("Expected function to throw");
+          } catch (thrownError) {
+            // Function threw as expected
+            expect(thrownError).toBe(error);
+          }
+
           expect(mockRetryFunc).not.toHaveBeenCalled();
+          consoleErrorSpy.mockRestore();
         });
       });
     });

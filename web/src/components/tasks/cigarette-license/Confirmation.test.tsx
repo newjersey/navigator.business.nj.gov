@@ -1,5 +1,6 @@
 import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 import * as api from "@/lib/api-client/apiClient";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -18,6 +19,10 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<ConfirmationPage />", () => {
+  beforeEach(() => {
+    useMockConfig();
+  });
+
   const mockCigaretteLicenseData: CigaretteLicenseData = {
     paymentInfo: {
       token: "12345",

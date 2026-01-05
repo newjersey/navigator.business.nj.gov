@@ -8,7 +8,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useRef, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 export interface Props
   extends Omit<
@@ -35,7 +35,7 @@ export const TaxId = (props: Props): ReactElement => {
     return "SPLIT";
   };
 
-  const initialType = useRef<"FULL" | "SPLIT">(getFieldType());
+  const initialType = getFieldType();
 
   const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
@@ -93,7 +93,7 @@ export const TaxId = (props: Props): ReactElement => {
     return true;
   };
 
-  if (initialType.current === "FULL") {
+  if (initialType === "FULL") {
     return (
       <SingleTaxId
         getShowHideToggleButton={getShowHideToggleButton}

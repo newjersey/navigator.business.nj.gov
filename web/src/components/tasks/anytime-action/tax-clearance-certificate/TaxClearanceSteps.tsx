@@ -30,6 +30,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
   const { state: taxClearanceCertificateData } = useContext(TaxClearanceCertificateDataContext);
   const { updateQueue } = useUserData();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
+  const [downloadTimestamp] = useState(() => Date.now());
 
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const [responseErrorType, setResponseErrorType] = useState<
@@ -101,7 +102,10 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
   ];
 
   useEffect(() => {
-    setResponseErrorType(undefined);
+    const timeoutId = setTimeout(() => {
+      setResponseErrorType(undefined);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [
     taxClearanceCertificateData.requestingAgencyId,
     taxClearanceCertificateData.businessName,
@@ -119,7 +123,7 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
       {props.certificatePdfBlob ? (
         <Download
           certificatePdfBlob={props.certificatePdfBlob}
-          downloadFilename={`Tax Clearance Certificate - ${Date.now()}`}
+          downloadFilename={`Tax Clearance Certificate - ${downloadTimestamp}`}
         />
       ) : (
         <>

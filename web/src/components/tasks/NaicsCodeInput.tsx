@@ -26,15 +26,14 @@ interface Props {
 
 type NaicsErrorTypes = "length" | "invalid";
 
-const Config = getMergedConfig();
-const errorMessages: Record<NaicsErrorTypes, string> = {
-  invalid: Config.determineNaicsCode.invalidValidationErrorText,
-  length: Config.determineNaicsCode.lengthValidationErrorText,
-};
-
 const REQUIRED_LENGTH = 6;
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
+  const errorMessages: Record<NaicsErrorTypes, string> = {
+    invalid: Config.determineNaicsCode.invalidValidationErrorText,
+    length: Config.determineNaicsCode.lengthValidationErrorText,
+  };
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const updateQueue = userDataFromHook.updateQueue;

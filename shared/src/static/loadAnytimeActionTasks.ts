@@ -5,19 +5,28 @@ import { convertAnytimeActionTaskMd } from "../utils/tasksMarkdownReader";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 
 type PathParameters<P> = { params: P; locale?: string };
-const anytimeActionsTaskDirectoryApp = path.join(
-  process.cwd(),
-  "..",
-  "content",
-  "src",
-  "anytime-action-tasks",
-);
-const anytimeActionsTaskDirectoryTest = path.join(
-  process.cwd(),
-  "content",
-  "src",
-  "anytime-action-tasks",
-);
+
+// Helper to find content directory from different test contexts
+const findContentDirectory = (): string => {
+  const possiblePaths = [
+    path.join(process.cwd(), "..", "content", "src", "anytime-action-tasks"),
+    path.join(process.cwd(), "content", "src", "anytime-action-tasks"),
+    path.join(process.cwd(), "..", "..", "content", "src", "anytime-action-tasks"),
+  ];
+
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      return p;
+    }
+  }
+
+  throw new Error(
+    `Could not find content/src/anytime-action-tasks directory. Tried: ${possiblePaths.join(", ")}`,
+  );
+};
+
+let anytimeActionsTaskDirectoryApp: string | undefined;
+let anytimeActionsTaskDirectoryTest: string | undefined;
 
 export type AnytimeActionTaskUrlSlugParameter = {
   anytimeActionTaskUrlSlug: string;
@@ -25,7 +34,13 @@ export type AnytimeActionTaskUrlSlugParameter = {
 
 const getAnytimeActionsTaskDirectory = (isTest: boolean): string => {
   if (isTest) {
+    if (!anytimeActionsTaskDirectoryTest) {
+      anytimeActionsTaskDirectoryTest = findContentDirectory();
+    }
     return anytimeActionsTaskDirectoryTest;
+  }
+  if (!anytimeActionsTaskDirectoryApp) {
+    anytimeActionsTaskDirectoryApp = findContentDirectory();
   }
   return anytimeActionsTaskDirectoryApp;
 };

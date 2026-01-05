@@ -63,6 +63,8 @@ export const GenericTextField = forwardRef(
       | null
       | undefined,
   ): ReactElement => {
+    const { numericProps, visualFilter: propsVisualFilter, value: propsValue } = props;
+
     const widthStyling =
       props.inputWidth === "reduced"
         ? "text-field-width-reduced"
@@ -72,72 +74,84 @@ export const GenericTextField = forwardRef(
 
     const { Config } = useConfig();
 
-    let visualFilter = props.visualFilter;
-    let valueFilter = props.valueFilter;
-    let additionalValidationIsValid = props.additionalValidationIsValid;
-    let fieldOptions = props.fieldOptions;
-
-    const value = useMemo(
+    // Compute filters and validators based on numericProps
+    const regex = useMemo(
       () =>
-        visualFilter
-          ? visualFilter(props.value?.toString() ?? "")
-          : (props.value?.toString() ?? ""),
-      [props.value, visualFilter],
+        numericProps
+          ? (value: string): string => {
+              if (props.allowMasking) {
+                return value.replace(numericProps?.trimLeadingZeroes ? /^0+|\D/g : /[^\d*]/g, "");
+              }
+              return value.replace(numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g, "");
+            }
+          : undefined,
+      [numericProps, props.allowMasking],
     );
+
+    const maxLength = numericProps?.maxLength;
+
+    const valueFilter =
+      numericProps && regex
+        ? (value: string): string => {
+            return maxLength ? regex(value).slice(0, maxLength) : regex(value);
+          }
+        : props.valueFilter;
+
+    const validMinimumValue = numericProps
+      ? (value: string): boolean => {
+          if (!props.required && value.length === 0) {
+            return true;
+          }
+          if (numericProps?.minLength) {
+            return value.length >= numericProps.minLength;
+          }
+          if (numericProps?.maxLength) {
+            return value.length >= numericProps.maxLength;
+          }
+          return true;
+        }
+      : undefined;
+
+    const additionalValidationIsValid =
+      numericProps && validMinimumValue
+        ? (returnedValue: string): boolean => {
+            return ![
+              validMinimumValue(returnedValue),
+              returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
+              props.additionalValidationIsValid
+                ? props.additionalValidationIsValid(returnedValue)
+                : true,
+            ].some((i) => {
+              return !i;
+            });
+          }
+        : props.additionalValidationIsValid;
+
+    const fieldOptions = numericProps
+      ? {
+          ...props.fieldOptions,
+          inputProps: { ...props.fieldOptions?.inputProps, inputMode: "numeric" as const },
+        }
+      : props.fieldOptions;
+
+    const value = useMemo(() => {
+      const visualFilter =
+        numericProps && regex
+          ? (value: string): string => {
+              return propsVisualFilter ? propsVisualFilter(regex(value)) : regex(value);
+            }
+          : propsVisualFilter;
+
+      return visualFilter
+        ? visualFilter(propsValue?.toString() ?? "")
+        : (propsValue?.toString() ?? "");
+    }, [propsValue, numericProps, regex, propsVisualFilter]);
 
     const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
       props.fieldName,
       props.formContext,
       props.errorTypes,
     );
-
-    if (props.numericProps) {
-      const regex = (value: string): string => {
-        if (props.allowMasking) {
-          return value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /[^\d*]/g, "");
-        }
-        return value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g, "");
-      };
-
-      visualFilter = (value: string): string => {
-        return props.visualFilter ? props.visualFilter(regex(value)) : regex(value);
-      };
-
-      const maxLength = props.numericProps?.maxLength;
-
-      valueFilter = (value: string): string => {
-        return maxLength ? regex(value).slice(0, maxLength) : regex(value);
-      };
-
-      const validMinimumValue = (value: string): boolean => {
-        if (!props.required && value.length === 0) {
-          return true;
-        }
-        if (props.numericProps?.minLength) {
-          return value.length >= props.numericProps.minLength;
-        }
-        if (props.numericProps?.maxLength) {
-          return value.length >= props.numericProps.maxLength;
-        }
-        return true;
-      };
-
-      additionalValidationIsValid = (returnedValue: string): boolean => {
-        return ![
-          validMinimumValue(returnedValue),
-          returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
-          props.additionalValidationIsValid
-            ? props.additionalValidationIsValid(returnedValue)
-            : true,
-        ].some((i) => {
-          return !i;
-        });
-      };
-      fieldOptions = {
-        ...fieldOptions,
-        inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" },
-      };
-    }
 
     const isFieldValid = (currentValue: string): boolean => {
       const value = valueFilter ? valueFilter(currentValue) : currentValue;

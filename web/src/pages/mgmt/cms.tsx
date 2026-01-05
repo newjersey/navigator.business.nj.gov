@@ -245,20 +245,6 @@ const registerPreview = (
 };
 
 const Admin = (): ReactElement => {
-  useMountEffect(() => {
-    setInterval(() => {
-      window.location.reload();
-    }, 3600000);
-
-    setInterval(() => {
-      printFieldWithErrorToConsole();
-    }, 1000 * 30);
-
-    setInterval(() => {
-      updateRequiredFieldErrorMessage();
-    }, 1000 * 2);
-  });
-
   const updateRequiredFieldErrorMessage = (): void => {
     const alertElement = document.querySelector(".css-83ylea-toast-danger-Toast");
     if (alertElement) {
@@ -297,6 +283,20 @@ const Admin = (): ReactElement => {
       }
     }
   };
+
+  useMountEffect(() => {
+    setInterval(() => {
+      window.location.reload();
+    }, 3600000);
+
+    setInterval(() => {
+      printFieldWithErrorToConsole();
+    }, 1000 * 30);
+
+    setInterval(() => {
+      updateRequiredFieldErrorMessage();
+    }, 1000 * 2);
+  });
 
   return (
     <>

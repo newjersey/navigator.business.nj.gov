@@ -103,27 +103,27 @@ describe("profile - owning existing business", () => {
     renderPage({ business });
 
     fillText(inputFieldName, "Cool Computers");
-    clickSave();
+    await clickSave();
     await waitFor(() => {
       return expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true");
     });
   });
 
-  it("prevents user from going back to dashboard if there are unsaved changes", () => {
+  it("prevents user from going back to dashboard if there are unsaved changes", async () => {
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
     renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
-    clickBack();
+    await clickBack();
     expect(screen.getByText(Config.profileDefaults.default.escapeModalReturn)).toBeInTheDocument();
   });
 
-  it("returns user to profile page from un-saved changes modal", () => {
+  it("returns user to profile page from un-saved changes modal", async () => {
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
     renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
-    clickBack();
+    await clickBack();
     fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalEscape));
     expect(screen.getByLabelText(inputFieldName)).toBeInTheDocument();
   });
@@ -147,14 +147,14 @@ describe("profile - owning existing business", () => {
     fillText("Date of formation", date.format("MM/YYYY"));
     fillText("Address line1", "123 main st");
     fillText("Address line2", "apt 1");
-    selectByText("Address municipality", randomMunicipality.displayName);
+    await selectByText("Address municipality", randomMunicipality.displayName);
     fillText("Address zip code", "08123");
 
-    selectByValue("Sector", "clean-energy");
+    await selectByValue("Sector", "clean-energy");
     fillText("Existing employees", "123");
-    selectByText("Location", randomMunicipality.displayName);
-    selectByValue("Ownership", "veteran-owned");
-    selectByValue("Ownership", "woman-owned");
+    await selectByText("Location", randomMunicipality.displayName);
+    await selectByValue("Ownership", "veteran-owned");
+    await selectByValue("Ownership", "woman-owned");
 
     chooseTab("permits");
     chooseRadio("home-based-business-radio-true");
@@ -168,7 +168,7 @@ describe("profile - owning existing business", () => {
 
     chooseTab("notes");
     fillText("Notes", "whats appppppp", "textarea");
-    clickSave();
+    await clickSave();
 
     await waitFor(() => {
       expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
@@ -292,7 +292,7 @@ describe("profile - owning existing business", () => {
 
     fillText("Employer id", "123490");
     fireEvent.blur(screen.queryByLabelText("Employer id") as HTMLElement);
-    clickSave();
+    await clickSave();
     await waitFor(() => {
       expect(
         screen.getByText(
@@ -313,7 +313,7 @@ describe("profile - owning existing business", () => {
     renderPage({ business });
     fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
 
-    clickSave();
+    await clickSave();
     await waitFor(() => {
       expect(
         screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
@@ -325,7 +325,7 @@ describe("profile - owning existing business", () => {
   it("returns user back to dashboard", async () => {
     renderPage({ business });
 
-    clickBack();
+    await clickBack();
     await waitFor(() => {
       return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
@@ -334,8 +334,8 @@ describe("profile - owning existing business", () => {
   it("returns user to dashboard from un-saved changes modal", async () => {
     const randomMunicipality = generateMunicipality({});
     renderPage({ business, municipalities: [randomMunicipality] });
-    selectByText("Location", randomMunicipality.displayName);
-    clickBack();
+    await selectByText("Location", randomMunicipality.displayName);
+    await clickBack();
     fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalReturn));
     await waitFor(() => {
       expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
@@ -498,8 +498,8 @@ describe("profile - owning existing business", () => {
         }),
       });
       renderPage({ business });
-      clickSave();
-      const profileAlert = screen.getByTestId("profile-error-alert");
+      await clickSave();
+      const profileAlert = await screen.findByTestId("profile-error-alert");
       await waitFor(() => {
         expect(profileAlert).toBeInTheDocument();
       });
@@ -524,8 +524,8 @@ describe("profile - owning existing business", () => {
         renderPage({ business });
         fillText("Address line1", "Cool Computers");
 
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();
         });
@@ -558,8 +558,8 @@ describe("profile - owning existing business", () => {
         renderPage({ business });
         fillText("Address zip code", "08123");
 
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();
         });
@@ -593,8 +593,8 @@ describe("profile - owning existing business", () => {
         renderPage({ business });
         fillText("Address zip code", "123");
 
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();
         });
@@ -628,14 +628,16 @@ describe("profile - owning existing business", () => {
         });
         renderPage({ business, municipalities: [randomMunicipality] });
 
-        selectByText("Address municipality", randomMunicipality.displayName);
-        expect(screen.getByLabelText("Address municipality")).toHaveValue(
-          randomMunicipality.displayName,
-        );
+        await selectByText("Address municipality", randomMunicipality.displayName);
+        await waitFor(() => {
+          expect(screen.getByLabelText("Address municipality")).toHaveValue(
+            randomMunicipality.displayName,
+          );
+        });
         fireEvent.blur(screen.getByLabelText("Address municipality"));
 
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
 
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();
@@ -669,8 +671,8 @@ describe("profile - owning existing business", () => {
         renderPage({ business });
         fillText("Address line1", "a".repeat(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1));
 
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
 
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();
@@ -704,8 +706,8 @@ describe("profile - owning existing business", () => {
         renderPage({ business });
         fillText("Address line2", "a");
 
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
 
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();
@@ -739,8 +741,8 @@ describe("profile - owning existing business", () => {
         renderPage({ business });
         fillText("Address line2", "a".repeat(BUSINESS_ADDRESS_LINE_2_MAX_CHAR + 1));
 
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
 
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();

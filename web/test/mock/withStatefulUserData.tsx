@@ -1,6 +1,7 @@
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   StatefulDataContext,
@@ -47,6 +48,8 @@ const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).use
 export const setupStatefulUserDataContext = (): void => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useMockRoadmap({});
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useMockConfig();
   mockUseUserData.mockImplementation(() => {
     const { genericData, update } = useContext(StatefulDataContext);
     const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);

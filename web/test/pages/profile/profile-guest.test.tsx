@@ -1,5 +1,6 @@
 /* eslint-disable jest/expect-expect */
 import * as mockRouter from "@/test/mock/mockRouter";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
@@ -41,6 +42,7 @@ describe("profile - guest mode", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     setShowNeedsAccountModal = jest.fn();
+    useMockConfig();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
@@ -140,7 +142,7 @@ describe("profile - guest mode", () => {
       });
       const inputFieldName = getBusinessProfileInputFieldName(initialBusiness);
       fillText(inputFieldName, "Cool Computers");
-      clickSave();
+      await clickSave();
       await waitFor(() => {
         return expect(mockRouter.mockPush).toHaveBeenCalled();
       });

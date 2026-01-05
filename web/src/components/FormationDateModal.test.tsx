@@ -19,7 +19,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -140,7 +140,7 @@ describe("<FormationDateModal />", () => {
     expect(screen.getByText("Location")).toBeInTheDocument();
   });
 
-  it("does not show location field if user is dakota nexus with no new jersey location", () => {
+  it("does not show location field if user is dakota nexus with no new jersey location", async () => {
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({
@@ -150,7 +150,10 @@ describe("<FormationDateModal />", () => {
         }),
       }),
     );
-    expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
+    // React 19: Wait for async state update (profileData set via setTimeout)
+    await waitFor(() => {
+      expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
+    });
   });
 
   it("shows error when user saves without entering location", () => {

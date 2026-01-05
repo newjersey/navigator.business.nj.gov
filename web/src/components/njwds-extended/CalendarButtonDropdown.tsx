@@ -115,7 +115,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
       </UnStyledButton>
       <Popper
         open={open}
-        anchorEl={anchorRef.current}
+        anchorEl={(): HTMLElement => anchorRef.current as HTMLElement}
         className="z-100"
         role={undefined}
         transition

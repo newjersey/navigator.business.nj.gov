@@ -18,7 +18,7 @@ import type {
   XrayRegistrationStatus,
   XraySearchError,
 } from "@businessnjgovnavigator/shared/xray";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 
@@ -46,8 +46,11 @@ export const Xray = (props: Props): ReactElement => {
     const hasValidData = business?.xrayRegistrationData?.status;
 
     if (hasValidData) {
-      setTabIndex(STATUS_TAB_INDEX);
-      setXrayRegistrationData(business.xrayRegistrationData);
+      const timeoutId = setTimeout(() => {
+        setTabIndex(STATUS_TAB_INDEX);
+        setXrayRegistrationData(business.xrayRegistrationData);
+      }, 0);
+      return (): void => clearTimeout(timeoutId);
     }
   }, [business]);
 

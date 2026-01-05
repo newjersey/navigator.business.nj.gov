@@ -84,99 +84,24 @@ import * as PageMetadata from "../../../content/src/page-metadata/page-metadata.
 
 import { merge } from "lodash";
 import { createContext } from "react";
+import { getDefaultConfig } from "./defaultConfig";
 
-const merged = JSON.parse(
-  JSON.stringify(
-    merge(
-      LegalMessageDefaults,
-      PassengerTransportCdl,
-      PassengerTransportCdl2,
-      SectionHeaders,
-      TaskProgressCard,
-      BetaBar,
-      SelfRegistration,
-      SkipToMainContent,
-      TaxCalendar,
-      OnboardingDefaults,
-      FormationDateModal,
-      FundingDefaults,
-      TaskProgress,
-      TaskDefaults,
-      SearchBusinessNameTask,
-      Footer,
-      RegisteredForTaxesModal,
-      UnsupportedNavigatorUserPage,
-      AutosaveDefaults,
-      HeaderDefaults,
-      Profile,
-      CannabisPriorityStatusTab1,
-      CannabisPriorityStatusTab2,
-      CannabisLicenseTab1,
-      CannabisLicenseAnnualTab2,
-      CannabisLicenseConditionalTab2,
-      CigaretteLicenseShared,
-      CigaretteLicenseStep1,
-      CigaretteLicenseStep2,
-      CigaretteLicenseStep3,
-      CigaretteLicenseStep4,
-      CigaretteLicenseConfirmation,
-      NexusNameSearch,
-      NexusDbaFormation,
-      NaicsCode,
-      Ein,
-      TaxId,
-      CannabisLicenseEligibilityModal,
-      FormationInterimSuccessPage,
-      FormationSuccessPage,
-      PageNotFoundError,
-      SiteWideErrorMessages,
-      DeferredLocation,
-      DashboardSnackbars,
-      DashboardCalendar,
-      DashboardTabs,
-      DashboardModals,
-      BusinessFormation,
-      TaxAccess,
-      BusinessStructureTask,
-      BusinessStructurePrompt,
-      AccountSetup,
-      NavigationDefaults,
-      PageMetadata,
-      GovernmentContracting,
-      NavigationDefaults,
-      DashboardDefaults,
-      PageMetadata,
-      CalloutDefaults,
-      ElevatorRegistration,
-      StarterKits,
-      HousingRegistrationSearchTask,
-      anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
-      CalloutAlerts,
-      EnvironmentQuestionnaire,
-      CheckAccountEmailPage,
-      LicenseSearchTask,
-      LandingPage,
-      FundingsOnboarding,
-      LandingPageExperienceB,
-      TaxClearanceCertificateStep1,
-      TaxClearanceCertificateStep2,
-      TaxClearanceCertificateStep3,
-      TaxClearanceCertificateShared,
-      TaxClearanceCertificateDownload,
-      FundingsOnboarding,
-      ManageBusinessVehicles,
-      XrayRegistration,
-      XrayRenewal,
-      AbcEmergencyTripPermit,
-      FilingDefaults,
-      FormationDataDeletionModal,
-      EmployerRates,
-      RemoveBusinessModal,
-      CRTKTask,
-      LoginSupportPage,
-    ),
-  ),
-);
+// Filter out undefined/null/empty imports at module load time to prevent them from overriding defaults
+const hasContent = (config: unknown): boolean => {
+  if (!config || typeof config !== "object") return false;
+  return Object.keys(config as Record<string, unknown>).length > 0;
+};
+
+// Helper to unwrap JSON imports - handles both direct imports and default-wrapped imports
+const unwrapConfig = (config: unknown): unknown => {
+  if (!config) return config;
+  // If the import has a 'default' property and only that property, unwrap it
+  const keys = Object.keys(config as Record<string, unknown>);
+  if (keys.length === 1 && keys[0] === "default") {
+    return (config as Record<string, unknown>).default;
+  }
+  return config;
+};
 
 export type ConfigType = typeof LegalMessageDefaults &
   typeof SectionHeaders &
@@ -263,7 +188,8 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof LoginSupportPage;
 
 export const getMergedConfig = (): ConfigType => {
-  return merge(
+  // Filter out undefined/null/empty imports to prevent them from overriding defaults
+  const configs = [
     LegalMessageDefaults,
     PassengerTransportCdl,
     PassengerTransportCdl2,
@@ -305,6 +231,7 @@ export const getMergedConfig = (): ConfigType => {
     FormationInterimSuccessPage,
     FormationSuccessPage,
     PageNotFoundError,
+    SiteWideErrorMessages,
     DeferredLocation,
     DashboardSnackbars,
     DashboardModals,
@@ -317,7 +244,6 @@ export const getMergedConfig = (): ConfigType => {
     NavigationDefaults,
     PageMetadata,
     DashboardDefaults,
-    PageMetadata,
     GovernmentContracting,
     CalloutDefaults,
     ElevatorRegistration,
@@ -331,7 +257,6 @@ export const getMergedConfig = (): ConfigType => {
     LandingPage,
     FundingsOnboarding,
     LandingPageExperienceB,
-    FundingsOnboarding,
     TaxClearanceCertificateStep1,
     TaxClearanceCertificateStep2,
     TaxClearanceCertificateStep3,
@@ -343,10 +268,50 @@ export const getMergedConfig = (): ConfigType => {
     AbcEmergencyTripPermit,
     FilingDefaults,
     FormationDataDeletionModal,
+    EmployerRates,
     RemoveBusinessModal,
     LoginSupportPage,
     CRTKTask,
-  );
+  ]
+    .map((config) => unwrapConfig(config))
+    .filter((config) => hasContent(config));
+
+  const defaultConfig = getDefaultConfig();
+
+  // If no valid configs to merge, just return defaults
+  if (configs.length === 0) {
+    return defaultConfig as unknown as ConfigType;
+  }
+
+  // Start with a fresh copy of defaults, then merge configs on top
+  const mergedConfig = merge({}, defaultConfig, ...configs);
+
+  // Ensure all critical top-level properties exist by falling back to defaults
+  // This handles cases where JSON imports fail during SSG
+  const criticalProperties = [
+    "profileDefaults",
+    "pagesMetadata",
+    "navigationDefaults",
+    "filingDefaults",
+    "taskDefaults",
+    "calloutDefaults",
+    "selfRegistration",
+    "accountSetup",
+    "siteWideErrorMessages",
+  ] as const;
+
+  for (const property of criticalProperties) {
+    if (!mergedConfig[property] || typeof mergedConfig[property] !== "object") {
+      mergedConfig[property] = defaultConfig[property];
+    }
+  }
+
+  // Final safety check - if still invalid, return defaults
+  if (!mergedConfig || !mergedConfig.pagesMetadata) {
+    return defaultConfig as unknown as ConfigType;
+  }
+
+  return mergedConfig;
 };
 
 export interface ConfigContextType {
@@ -355,6 +320,6 @@ export interface ConfigContextType {
 }
 
 export const ConfigContext = createContext<ConfigContextType>({
-  config: merged,
+  config: getDefaultConfig() as unknown as ConfigType,
   setOverrides: () => {},
 });

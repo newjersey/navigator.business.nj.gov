@@ -11,7 +11,8 @@ interface Props {
 }
 
 export const ProfileErrorAlert = (props: Props): ReactElement | null => {
-  const displayProfileErrorAlert = (): boolean => props.fieldErrors.length > 0;
+  const { fieldErrors, profileAlertRef } = props;
+  const displayProfileErrorAlert = (): boolean => fieldErrors.length > 0;
   const { Config } = useConfig();
 
   const getLabel = (field: string): string => {
@@ -30,10 +31,10 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
   };
 
   const errorFieldsIds = (): string[] => {
-    return props.fieldErrors.map((error) => {
+    return fieldErrors.map((error) => {
       switch (error) {
         case "willSellPetCareItems":
-          if (!props.fieldErrors.includes("petCareHousing")) {
+          if (!fieldErrors.includes("petCareHousing")) {
             return "petCareHousing";
           }
           return error;
@@ -50,7 +51,7 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
   if (!displayProfileErrorAlert()) return null;
 
   return (
-    <Alert variant="error" dataTestid={"profile-error-alert"} ref={props.profileAlertRef}>
+    <Alert variant="error" dataTestid={"profile-error-alert"} ref={profileAlertRef}>
       <div>{getProfileErrorAlertText(errorFieldsIds().length)}</div>
       <ul>
         {errorFieldsIds().map((id) => (

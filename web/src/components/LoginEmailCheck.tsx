@@ -21,6 +21,7 @@ export const LoginEmailCheck = (): ReactElement => {
   const router = useRouter();
 
   const { dispatch } = useContext(AuthContext);
+  const { Config } = useConfig();
 
   const handleSubmit = (email: string): void => {
     const isValidEmail = validateEmail(email);
@@ -50,8 +51,6 @@ export const LoginEmailCheck = (): ReactElement => {
       }
     }
   };
-
-  const { Config } = useConfig();
 
   const handleTextInputChange = (value: string): void => {
     setEmail(value);

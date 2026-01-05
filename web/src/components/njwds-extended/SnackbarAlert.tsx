@@ -28,6 +28,7 @@ export const SnackbarAlert = (props: Props): ReactElement => {
       ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
       role="alert"
       aria-live="polite"
+      TransitionProps={{ timeout: process.env.NODE_ENV === "test" ? 0 : undefined }}
       {...props.snackBarProps}
     >
       <div>
