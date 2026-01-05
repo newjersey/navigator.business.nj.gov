@@ -5,8 +5,10 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
+import { templateEval } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Task } from "@businessnjgovnavigator/shared/types";
+import dayjs from "dayjs";
 import { type ReactElement } from "react";
 
 type StatusType = "FOUND" | "NOT_FOUND";
@@ -46,8 +48,8 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
           <li>Phone: (609) 292-6714</li>
           <li>
             Email:{" "}
-            <a href="mailto:rts@dep.nj.gov" className="text-underline">
-              rts@dep.nj.gov
+            <a href="mailto:rtk@dep.nj.gov" className="text-underline">
+              rtk@dep.nj.gov
             </a>
           </li>
         </ul>
@@ -210,6 +212,16 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
           {Config.crtkTask.federalLinkText}
         </a>
       </div>
+
+      {crtkData && (
+        <div className={"text-base-dark text-italic font-body-2xs"}>
+          {templateEval(Config.crtkTask.lastUpdatedText, {
+            lastUpdatedFormattedValue: dayjs(crtkData.lastUpdatedISO).format(
+              "MMMM Do, YYYY [at] ha",
+            ),
+          })}
+        </div>
+      )}
     </>
   );
 };
