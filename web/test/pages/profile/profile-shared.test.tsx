@@ -56,7 +56,7 @@ import {
 import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { act } from "react-dom/test-utils";
+import { act } from "react";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;

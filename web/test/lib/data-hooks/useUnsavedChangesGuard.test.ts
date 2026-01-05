@@ -1,7 +1,7 @@
 import { useUnsavedChangesGuard } from "@/lib/data-hooks/useUnsavedChangesGuard";
 import { mockRouterEvents, useMockRouter } from "@/test/mock/mockRouter";
 import { renderHook } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { act } from "react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 

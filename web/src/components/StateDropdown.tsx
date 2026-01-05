@@ -104,8 +104,9 @@ export const StateDropdown = (props: Props): ReactElement => {
       onBlur={onValidation}
       onSubmit={onValidation}
       renderOption={(_props, option, { selected }): JSX.Element => {
+        const { key, ...otherProps } = _props;
         return (
-          <li {..._props} data-testid={option.shortCode}>
+          <li key={key} {...otherProps} data-testid={option.shortCode}>
             {selected ? (
               <MenuOptionSelected>
                 {props.useFullName ? option.name : option.shortCode}

@@ -143,8 +143,9 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
       renderOption={(props, option, { selected }): JSX.Element => {
+        const { key, ...otherProps } = props;
         return (
-          <li {...props}>
+          <li key={key} {...otherProps}>
             {selected ? (
               <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
                 <MenuOptionSelected secondaryText={option.description}>

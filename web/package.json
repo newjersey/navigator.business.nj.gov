@@ -5,7 +5,7 @@
   "scripts": {
     "airtable:dump": "node src/scripts/airtableDump.js",
     "airtable:fetch-opps": "node src/scripts/airtableOpportunityDump.js",
-    "build": "yarn next build && yarn run sitemap",
+    "build": "yarn next build --webpack && yarn run sitemap",
     "build-storybook": "storybook build",
     "clean": "rimraf .next public/vendor",
     "cypress:open": "cypress open",
@@ -13,7 +13,7 @@
     "cypress:run:feature": "cypress run --record false --env SUITE=feature",
     "cypress:run:ci": "cypress run --record false --env SUITE=ci",
     "deploy:storybook": "storybook-to-aws-s3 --out=.storybook/build",
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "eslint": "eslint",
     "export:funding": "ts-node ./src/scripts/fundingExport.mjs",
     "dependency-check": "yarn depcruise --config .dependency-cruiser.js src",
@@ -66,11 +66,11 @@
     "gray-matter": "4.0.3",
     "js-yaml": "4.1.1",
     "lodash": "4.17.21",
-    "next": "15.5.9",
+    "next": "16.1.1",
     "next-seo": "6.8.0",
-    "react": "18.2.0",
+    "react": "18.3.1",
     "react-clamp-lines": "3.0.3",
-    "react-dom": "18.2.0",
+    "react-dom": "18.3.1",
     "react-slick": "0.30.0",
     "react-transition-group": "4.4.5",
     "rehype-format": "5.0.1",
@@ -94,7 +94,7 @@
     "@cypress-audit/pa11y": "1.4.2",
     "@jest/types": "29.6.3",
     "@mui/system": "5.18.0",
-    "@next/bundle-analyzer": "15.5.6",
+    "@next/bundle-analyzer": "16.1.1",
     "@next/eslint-plugin-next": "15.5.6",
     "@storybook/addon-actions": "7.6.20",
     "@storybook/addon-designs": "7.0.9",
@@ -122,8 +122,8 @@
     "@types/js-yaml": "4.0.9",
     "@types/lodash": "4.17.20",
     "@types/node": "20.19.17",
-    "@types/react": "18.2.79",
-    "@types/react-dom": "18.2.25",
+    "@types/react": "18.3.27",
+    "@types/react-dom": "18.3.7",
     "@types/react-slick": "0.23.13",
     "@types/react-swipeable-views": "0.13.6",
     "@types/react-transition-group": "4.4.12",
@@ -174,5 +174,9 @@
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
     "webpack": "5.103.0"
+  },
+  "resolutions": {
+    "@types/react": "18.3.27",
+    "@types/react-dom": "18.3.7"
   }
 }

@@ -67,8 +67,9 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
       renderOption={(props, option, { selected }): JSX.Element => {
+        const { key, ...otherProps } = props;
         return (
-          <li {...props}>
+          <li key={key} {...otherProps}>
             {selected ? (
               <MenuOptionSelected>{option.displayName}</MenuOptionSelected>
             ) : (

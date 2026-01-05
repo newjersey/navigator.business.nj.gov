@@ -96,8 +96,9 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
           }}
           onChange={handleChange}
           renderOption={(_props, option, { selected }): JSX.Element => {
+            const { key, ...otherProps } = _props;
             return (
-              <li {..._props}>
+              <li key={key} {...otherProps}>
                 {selected ? (
                   <MenuOptionSelected>{option.displayTime}</MenuOptionSelected>
                 ) : (

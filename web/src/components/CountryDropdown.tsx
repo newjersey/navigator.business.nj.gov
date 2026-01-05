@@ -89,8 +89,9 @@ export const CountryDropdown = (props: Props): ReactElement => {
       onBlur={onValidation}
       onSubmit={onValidation}
       renderOption={(_props, option, { selected }): JSX.Element => {
+        const { key, ...otherProps } = _props;
         return (
-          <li {..._props}>
+          <li key={key} {...otherProps}>
             {selected ? (
               <MenuOptionSelected>
                 {props.useFullName ? option.name : option.shortCode}
