@@ -4,12 +4,12 @@ import fs from "fs";
 import orderBy from "lodash";
 import path from "path";
 import { fileURLToPath } from "url";
-import { wait } from "./helpers2.mjs";
+import { wait } from "./helpers.mjs";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 import { allIndustryId, sectorCollectionId } from "./webflowIds.mjs";
 
 const sectorDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`,
 );
 const getSectors = () => {
   return JSON.parse(fs.readFileSync(path.join(sectorDir, "sectors.json"), "utf8")).arrayOfSectors;
@@ -24,7 +24,7 @@ const getOverlappingSectorsFunc = (currentSectors) => {
     return new Set(
       getSectors().map((item) => {
         return item.id;
-      })
+      }),
     ).has(item.fieldData.slug);
   });
 };
@@ -37,7 +37,7 @@ const getUpdatedSectors = async () => {
   const sectorNames = new Set(
     getSectors().map((item) => {
       return item.name;
-    })
+    }),
   );
   const overlappingSectors = await getOverlappingSectors();
 
