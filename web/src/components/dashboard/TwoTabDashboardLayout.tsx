@@ -4,7 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { Certification, Funding } from "@businessnjgovnavigator/shared/types";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Tab from "@mui/material/Tab";
 import * as React from "react";
 import { ReactElement, ReactNode, useEffect } from "react";

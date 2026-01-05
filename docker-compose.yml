@@ -47,6 +47,16 @@ services:
     ports:
       - "8001:8001"
 
+  webapp:
+    build:
+      context: .
+      dockerfile: WebApp.Dockerfile
+    container_name: webapp
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./web/.env
+
   # wiremock:
   #   build:
   #     context: .

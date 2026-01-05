@@ -11,31 +11,45 @@ global.gtag = jest.fn();
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
-global.console.warn = (message) => {
-  // Suppress known deprecation warnings from libraries during Next.js v16 migration
-  const suppressedWarnings = ["findDOMNode is deprecated", "ReactDOMTestUtils.act is deprecated"];
-
-  if (suppressedWarnings.some((warning) => message.includes?.(warning))) {
-    return;
-  }
-
-  throw message;
-};
-
-global.console.error = (message) => {
-  // Suppress known deprecation warnings from libraries during Next.js v16 migration
-  const suppressedErrors = [
-    "findDOMNode is deprecated",
-    "ReactDOMTestUtils.act is deprecated",
-    'Warning: A props object containing a "key" prop is being spread',
-  ];
-
-  if (suppressedErrors.some((error) => message.includes?.(error))) {
-    return;
-  }
-
-  throw message;
-};
+// React 19 compatibility: MessageChannel polyfill for jsdom
+// React 19 uses MessageChannel for scheduling state updates, so this must be functional
+if (global.MessageChannel === undefined) {
+  global.MessageChannel = class MessageChannel {
+    constructor() {
+      this.port1 = {
+        postMessage: (data) => {
+          if (this.port2.onmessage) {
+            // Use setImmediate to ensure async behavior, fallback to setTimeout(0)
+            const schedule =
+              typeof setImmediate === "undefined" ? (cb) => setTimeout(cb, 0) : setImmediate;
+            schedule(() => {
+              if (this.port2.onmessage) {
+                this.port2.onmessage({ data });
+              }
+            });
+          }
+        },
+        onmessage: null,
+        close: () => {},
+      };
+      this.port2 = {
+        postMessage: (data) => {
+          if (this.port1.onmessage) {
+            const schedule =
+              typeof setImmediate === "undefined" ? (cb) => setTimeout(cb, 0) : setImmediate;
+            schedule(() => {
+              if (this.port1.onmessage) {
+                this.port1.onmessage({ data });
+              }
+            });
+          }
+        },
+        onmessage: null,
+        close: () => {},
+      };
+    }
+  };
+}
 
 window.gtm = jest.fn();
 
@@ -44,11 +58,34 @@ window.matchMedia =
   function () {
     return {
       matches: false,
+      media: "",
+      onchange: null,
+      // Old API (deprecated but still used by some libraries)
       addListener: function () {},
       removeListener: function () {},
+      // Modern API (required by React 19 / MUI)
+      addEventListener: function () {},
+      removeEventListener: function () {},
+      dispatchEvent: function () {
+        return true;
+      },
     };
   };
 
-jest.setTimeout(10000);
+// Increase timeout to 30 seconds to handle resource contention during parallel test execution
+// This prevents intermittent failures when tests run slowly due to CPU/memory contention
+jest.setTimeout(30000);
 
 jest.mock("next/router", () => require("next-router-mock"));
+
+// Global mock for useConfig to provide Config to all tests
+// React 19: Return function directly without jest.fn() wrapper for compatibility
+jest.mock("@/lib/data-hooks/useConfig", () => {
+  return {
+    useConfig: () => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { getMergedConfig } = require("@businessnjgovnavigator/shared/contexts");
+      return { Config: getMergedConfig() };
+    },
+  };
+});

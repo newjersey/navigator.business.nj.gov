@@ -15,7 +15,10 @@ export const ConfigMatchList = (props: Props): ReactElement => {
   const collapsedMatches = props.matches.slice(0, COLLAPSED_LEN);
 
   useEffect(() => {
-    setExpanded(false);
+    const timeoutId = setTimeout(() => {
+      setExpanded(false);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [props.matches]);
 
   if (props.matches.length === 0) {

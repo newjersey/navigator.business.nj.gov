@@ -8,8 +8,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
 
 import { Checkbox } from "@mui/material";
-import { useState } from "react";
-import { ReactElement } from "rehype-react/lib";
+import { ReactElement, useState } from "react";
 
 interface Props {
   onSearchAgain: () => void;

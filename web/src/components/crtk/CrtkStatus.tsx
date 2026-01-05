@@ -60,15 +60,14 @@ interface FieldErrors {
   zip?: string;
 }
 
-const Config = getMergedConfig();
-
-const CrtkErrorLookup: Record<CrtkSearchError, string> = {
-  NOT_FOUND: Config.crtkTask.errorTextNotFound || "Business not found in CRTK database",
-  FIELDS_REQUIRED: Config.crtkTask.errorTextFieldsRequired || "Please fill in all required fields",
-  SEARCH_FAILED: Config.crtkTask.errorTextSearchFailed || "Search failed. Please try again.",
-};
-
 export const CrtkStatus = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
+  const CrtkErrorLookup: Record<CrtkSearchError, string> = {
+    NOT_FOUND: Config.crtkTask.errorTextNotFound || "Business not found in CRTK database",
+    FIELDS_REQUIRED:
+      Config.crtkTask.errorTextFieldsRequired || "Please fill in all required fields",
+    SEARCH_FAILED: Config.crtkTask.errorTextSearchFailed || "Search failed. Please try again.",
+  };
   const classes = useStyles();
   const [formValues, setFormValues] = useState<CrtkFacilityDetails>({
     businessName: "",
@@ -87,14 +86,17 @@ export const CrtkStatus = (props: Props): ReactElement => {
     if (!business) return;
 
     if (business?.formationData?.formationFormData) {
-      setFormValues({
-        businessName: business?.profileData.businessName || "",
-        businessStreetAddress: business.formationData.formationFormData.addressLine1,
-        city: business.formationData.formationFormData.addressMunicipality?.displayName || "",
-        state: "NJ",
-        zip: business.formationData.formationFormData.addressZipCode,
-        ein: "",
-      });
+      const timeoutId = setTimeout(() => {
+        setFormValues({
+          businessName: business?.profileData.businessName || "",
+          businessStreetAddress: business.formationData.formationFormData.addressLine1,
+          city: business.formationData.formationFormData.addressMunicipality?.displayName || "",
+          state: "NJ",
+          zip: business.formationData.formationFormData.addressZipCode,
+          ein: "",
+        });
+      }, 0);
+      return (): void => clearTimeout(timeoutId);
     }
   }, [business]);
 

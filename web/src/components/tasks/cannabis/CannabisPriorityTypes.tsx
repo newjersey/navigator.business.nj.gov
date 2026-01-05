@@ -46,15 +46,19 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       return business.taskItemChecklist[key];
     });
 
-    if (priorityTypeSelected || business.taskItemChecklist[noneOfTheAbovePriorityId]) {
-      setDisplayNextTabButton(true);
-    } else {
-      setDisplayNextTabButton(false);
-    }
+    const timeoutId = setTimeout(() => {
+      if (priorityTypeSelected || business.taskItemChecklist[noneOfTheAbovePriorityId]) {
+        setDisplayNextTabButton(true);
+      } else {
+        setDisplayNextTabButton(false);
+      }
+    }, 0);
 
     if (priorityTypeSelected && business.taskItemChecklist[noneOfTheAbovePriorityId]) {
       updateQueue.queueTaskItemChecklist({ [noneOfTheAbovePriorityId]: false }).update();
     }
+
+    return (): void => clearTimeout(timeoutId);
   }, [business, updateQueue]);
 
   useEffect(() => {
@@ -87,13 +91,17 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       | "phrase1"
       | "phrase2"
       | "phrase3";
-    if (priorityStatusArray.length > 0 && priorityStatusArray.length < 4) {
-      setEligibiltyPhrase(
-        templateEval(Config.cannabisPriorityStatus[configLocation], priorityStatusesAsIndexMap),
-      );
-    } else {
-      setEligibiltyPhrase("");
-    }
+
+    const timeoutId = setTimeout(() => {
+      if (priorityStatusArray.length > 0 && priorityStatusArray.length < 4) {
+        setEligibiltyPhrase(
+          templateEval(Config.cannabisPriorityStatus[configLocation], priorityStatusesAsIndexMap),
+        );
+      } else {
+        setEligibiltyPhrase("");
+      }
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [business, Config.cannabisPriorityStatus]);
 
   const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

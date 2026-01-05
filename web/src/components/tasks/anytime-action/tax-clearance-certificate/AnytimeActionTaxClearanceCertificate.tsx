@@ -5,7 +5,6 @@ import { AddressContext } from "@/contexts/addressContext";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
-  pickData,
 } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
@@ -23,7 +22,8 @@ import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
 } from "@businessnjgovnavigator/shared/types";
-import { Dispatch, ReactElement, SetStateAction, useState } from "react";
+import { Dispatch, ReactElement, SetStateAction, useCallback, useMemo, useState } from "react";
+import { flushSync } from "react-dom";
 
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
@@ -43,57 +43,59 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
     props.CMS_ONLY_certificatePdfBlob || undefined,
   );
 
-  const setAddress: Dispatch<SetStateAction<FormationAddress>> = (action) => {
-    setAddressData((prevAddress) => {
-      const newAddress =
-        typeof action === "function"
-          ? (action as (prevState: FormationAddress) => FormationAddress)(prevAddress)
-          : action;
+  // React 19 fix: Use useCallback to create stable function references
+  const setAddress = useCallback<Dispatch<SetStateAction<FormationAddress>>>((action) => {
+    setAddressData(action);
+  }, []);
 
-      const relevantFields = pickData(newAddress, [
-        "addressLine1",
-        "addressLine2",
-        "addressCity",
-        "addressState",
-        "addressZipCode",
-      ]);
-      setTaxClearanceCertificateData({
-        ...taxClearanceCertificateData,
-        ...relevantFields,
-      });
+  const setProfile = useCallback<Dispatch<SetStateAction<ProfileData>>>((action) => {
+    setProfileData(action);
+  }, []);
 
-      return newAddress;
-    });
-  };
-
-  const setProfile: Dispatch<SetStateAction<ProfileData>> = (action) => {
-    setProfileData((prevProfileData) => {
-      const profileData =
-        typeof action === "function"
-          ? (action as (prevState: ProfileData) => ProfileData)(prevProfileData)
-          : action;
-
-      const relevantFields = pickData(profileData, ["businessName", "taxId", "taxPin"]);
-      setTaxClearanceCertificateData({
-        ...taxClearanceCertificateData,
-        ...relevantFields,
-      });
-
-      return profileData;
-    });
-  };
-
-  const saveTaxClearanceCertificateData = (): void => {
-    if (!business) {
+  const saveTaxClearanceCertificateData = async (): Promise<void> => {
+    if (!business || !updateQueue) {
       return;
     }
-    updateQueue
+
+    // React 19 fix: Read current state values and merge them
+    // Build data by merging local state contexts
+    const dataToSave = {
+      ...taxClearanceCertificateData,
+      businessName: profileData.businessName || taxClearanceCertificateData.businessName,
+      taxId: profileData.taxId || taxClearanceCertificateData.taxId,
+      taxPin: profileData.taxPin || taxClearanceCertificateData.taxPin,
+      // Clear encrypted fields if plaintext changed
+      encryptedTaxId:
+        profileData.taxId === taxClearanceCertificateData.taxId
+          ? profileData.encryptedTaxId
+          : undefined,
+      encryptedTaxPin:
+        profileData.taxPin === taxClearanceCertificateData.taxPin
+          ? profileData.encryptedTaxPin
+          : undefined,
+      addressLine1: formationAddressData.addressLine1 || taxClearanceCertificateData.addressLine1,
+      addressLine2: formationAddressData.addressLine2 || taxClearanceCertificateData.addressLine2,
+      addressCity: formationAddressData.addressCity || taxClearanceCertificateData.addressCity,
+      addressState: formationAddressData.addressState || taxClearanceCertificateData.addressState,
+      addressZipCode:
+        formationAddressData.addressZipCode || taxClearanceCertificateData.addressZipCode,
+    };
+
+    // React 19 fix: Use flushSync to force setState to complete before calling update()
+    // This prevents "Cannot update component while rendering" error
+    flushSync(() => {
+      setTaxClearanceCertificateData(dataToSave);
+    });
+
+    // Update backend - now that local state is flushed, this is safe
+    await updateQueue
       ?.queueBusiness({
         ...updateQueue.currentBusiness(),
-        taxClearanceCertificateData,
+        taxClearanceCertificateData: dataToSave,
         profileData: {
-          ...business.profileData,
-          taxId: taxClearanceCertificateData.taxId,
+          ...updateQueue.currentBusiness().profileData,
+          taxId: dataToSave.taxId,
+          encryptedTaxId: dataToSave.encryptedTaxId,
         },
         lastUpdatedISO: new Date(Date.now()).toISOString(),
       })
@@ -134,23 +136,30 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
         lastUpdatedISO,
       });
 
-      setProfileData({
-        ...profileData,
-        businessName,
-        taxId,
-        encryptedTaxId,
-        taxPin,
-        encryptedTaxPin,
+      // React 19: Use callback to avoid stale closure values during batched updates
+      setProfileData((latestProfileData) => {
+        // Only initialize if not already set (first render)
+        if (latestProfileData.taxId) {
+          return latestProfileData; // User has already typed, don't overwrite
+        }
+        return {
+          ...latestProfileData,
+          businessName,
+          taxId,
+          encryptedTaxId,
+          taxPin,
+          encryptedTaxPin,
+        };
       });
 
-      setAddressData({
-        ...formationAddressData,
-        addressLine1,
-        addressLine2,
-        addressCity,
-        addressState,
-        addressZipCode,
-      });
+      setAddressData((latestAddressData) => ({
+        ...latestAddressData,
+        addressLine1: latestAddressData.addressLine1 || addressLine1,
+        addressLine2: latestAddressData.addressLine2 || addressLine2,
+        addressCity: latestAddressData.addressCity || addressCity,
+        addressState: latestAddressData.addressState || addressState,
+        addressZipCode: latestAddressData.addressZipCode || addressZipCode,
+      }));
     }
   }, business);
 
@@ -161,30 +170,40 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
 
+  // React 19 fix: Memoize context values to prevent unnecessary re-renders that cause component remounts
+  const taxClearanceContextValue = useMemo(
+    () => ({
+      state: taxClearanceCertificateData,
+      setTaxClearanceCertificateData,
+    }),
+    [taxClearanceCertificateData],
+  );
+
+  const profileContextValue = useMemo(
+    () => ({
+      state: {
+        profileData: profileData,
+        flow: getFlow(profileData),
+      },
+      setProfileData: setProfile,
+      onBack: (): void => {},
+    }),
+    [profileData, setProfile],
+  );
+
+  const addressContextValue = useMemo(
+    () => ({
+      state: { formationAddressData },
+      setAddressData: setAddress,
+    }),
+    [formationAddressData, setAddress],
+  );
+
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
-      <TaxClearanceCertificateDataContext.Provider
-        value={{
-          state: taxClearanceCertificateData,
-          setTaxClearanceCertificateData,
-        }}
-      >
-        <ProfileDataContext.Provider
-          value={{
-            state: {
-              profileData: profileData,
-              flow: getFlow(profileData),
-            },
-            setProfileData: setProfile,
-            onBack: (): void => {},
-          }}
-        >
-          <AddressContext.Provider
-            value={{
-              state: { formationAddressData },
-              setAddressData: setAddress,
-            }}
-          >
+      <TaxClearanceCertificateDataContext.Provider value={taxClearanceContextValue}>
+        <ProfileDataContext.Provider value={profileContextValue}>
+          <AddressContext.Provider value={addressContextValue}>
             <div className="min-height-38rem">
               <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
                 <div className="padding-y-4 margin-x-4 margin-bottom-2">

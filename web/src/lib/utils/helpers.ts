@@ -94,6 +94,10 @@ export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
 };
 
 export const templateEval = (template: string, args: Record<string, string>): string => {
+  // React 19: Handle undefined template gracefully to avoid runtime errors
+  if (!template) {
+    return "";
+  }
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}}`;

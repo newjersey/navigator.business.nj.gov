@@ -20,7 +20,7 @@ import {
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
+import { ChangeEvent, FocusEvent, ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   handleChange?: () => void;
@@ -118,7 +118,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       groupBy={(): string => {
         return "DEFAULT-GROUP";
       }}
-      renderGroup={(params): JSX.Element => {
+      renderGroup={(params): ReactNode => {
         return (
           <div key={params.key}>
             {searchText.length > 0 && (
@@ -142,7 +142,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       onChange={handleIndustry}
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
-      renderOption={(props, option, { selected }): JSX.Element => {
+      renderOption={(props, option, { selected }): ReactNode => {
         const { key, ...otherProps } = props;
         return (
           <li key={key} {...otherProps}>
@@ -164,7 +164,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
           </li>
         );
       }}
-      renderInput={(params): JSX.Element => {
+      renderInput={(params): ReactNode => {
         return (
           <div className="text-field-width-default">
             <TextField

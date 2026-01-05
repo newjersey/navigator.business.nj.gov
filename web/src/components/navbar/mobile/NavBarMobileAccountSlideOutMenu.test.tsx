@@ -1,7 +1,8 @@
 import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
 import analytics from "@/lib/utils/analytics";
+import userEvent from "@testing-library/user-event";
 import { MenuItem } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
@@ -59,7 +60,7 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
 
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-account-open");
     expect(openMenuIcon).toBeInTheDocument();
-    fireEvent.click(openMenuIcon);
+    await userEvent.click(openMenuIcon);
 
     expect(openSideBar).toHaveBeenCalled();
     await waitFor(() => {
@@ -78,12 +79,12 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
       />,
     );
 
-    expect(screen.getByText(innerMenuTitle)).toBeInTheDocument();
-    expect(screen.getByText(subMenuText)).toBeInTheDocument();
+    expect(await screen.findByText(innerMenuTitle)).toBeInTheDocument();
+    expect(await screen.findByText(subMenuText)).toBeInTheDocument();
 
-    const closeMenuIcon = screen.getByTestId("nav-menu-mobile-account-close");
+    const closeMenuIcon = await screen.findByTestId("nav-menu-mobile-account-close");
     expect(closeMenuIcon).toBeInTheDocument();
-    fireEvent.click(closeMenuIcon);
+    await userEvent.click(closeMenuIcon);
 
     expect(closeSideBar).toHaveBeenCalled();
 
@@ -105,12 +106,12 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
       />,
     );
 
-    expect(screen.getByText(innerMenuTitle)).toBeInTheDocument();
-    expect(screen.getByText(subMenuText)).toBeInTheDocument();
+    expect(await screen.findByText(innerMenuTitle)).toBeInTheDocument();
+    expect(await screen.findByText(subMenuText)).toBeInTheDocument();
 
-    const closeMenuIcon = screen.getByTestId("nav-menu-mobile-account-close-click-outside");
+    const closeMenuIcon = await screen.findByTestId("nav-menu-mobile-account-close-click-outside");
     expect(closeMenuIcon).toBeInTheDocument();
-    fireEvent.click(closeMenuIcon);
+    await userEvent.click(closeMenuIcon);
 
     expect(closeSideBar).toHaveBeenCalled();
 
@@ -119,7 +120,7 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
     });
   });
 
-  it("renders submenu content", () => {
+  it("renders submenu content", async () => {
     render(
       <NavBarMobileAccountSlideOutMenu
         subMenuElement={[<MenuItem key={subMenuText}>{subMenuText}</MenuItem>]}
@@ -129,6 +130,6 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
         title={innerMenuTitle}
       />,
     );
-    expect(screen.getByText(subMenuText)).toBeInTheDocument();
+    expect(await screen.findByText(subMenuText)).toBeInTheDocument();
   });
 });

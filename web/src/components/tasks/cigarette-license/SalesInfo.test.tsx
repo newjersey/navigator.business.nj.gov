@@ -18,7 +18,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { SUPPLIER_NAMES } from "@/components/tasks/cigarette-license/fields/CigaretteSupplierDropdown";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 const Config = getMergedConfig();
 
@@ -35,7 +35,7 @@ describe("<SalesInfo />", () => {
       business ?? generateBusiness({ cigaretteLicenseData: emptyCigaretteLicenseData });
     const testUserData = userData ?? generateUserDataForBusiness(testBusiness);
 
-    const TestComponent = (): JSX.Element => {
+    const TestComponent = (): ReactNode => {
       const [cigaretteLicenseData, setCigaretteLicenseData] = useState(emptyCigaretteLicenseData);
       const [profileData, setProfileData] = useState(testBusiness.profileData);
 

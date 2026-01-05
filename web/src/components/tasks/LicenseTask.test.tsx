@@ -25,7 +25,8 @@ import {
   generateLicenseStatusItem,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 window.open = jest.fn();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -63,7 +64,8 @@ describe("<LicenseTask />", () => {
     jest.resetAllMocks();
     useMockBusiness(generateBusiness({}));
     useMockRoadmap({});
-    jest.useFakeTimers();
+    // React 19: Use real timers to avoid conflicts with async waitFor in findBy* queries
+    jest.useRealTimers();
   });
 
   describe("task status checkbox", () => {
@@ -77,7 +79,7 @@ describe("<LicenseTask />", () => {
         ),
       });
       renderTaskWithStatefulData(business);
-      fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+      await userEvent.click(screen.getByTestId("change-task-progress-checkbox"));
       await waitFor(() => {
         expect(screen.getByTestId("COMPLETED")).toBeInTheDocument();
       });
@@ -85,7 +87,7 @@ describe("<LicenseTask />", () => {
       expect(screen.queryByTestId("status-info-tooltip")).not.toBeInTheDocument();
     });
 
-    it("task status checkbox is not editable when lastUpdatedISO has a value", () => {
+    it("task status checkbox is not editable when lastUpdatedISO has a value", async () => {
       setupStatefulUserDataContext();
       const business = generateBusiness({
         taskProgress: { [task.id]: "TO_DO" },
@@ -96,7 +98,7 @@ describe("<LicenseTask />", () => {
       });
       renderTaskWithStatefulData(business);
       expect(screen.getByTestId("TO_DO")).toBeInTheDocument();
-      fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+      await userEvent.click(screen.getByTestId("change-task-progress-checkbox"));
       expect(screen.getByTestId("TO_DO")).toBeInTheDocument();
       expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
       expect(screen.queryByTestId("COMPLETED")).not.toBeInTheDocument();
@@ -121,15 +123,15 @@ describe("<LicenseTask />", () => {
       expect(screen.getByText(task.contentMd)).toBeInTheDocument();
     });
 
-    it("starts on application tab when no licenseData and visits status tab by clicking secondary button", () => {
+    it("starts on application tab when no licenseData and visits status tab by clicking secondary button", async () => {
       useMockBusiness({ licenseData: undefined });
       renderTask();
       expect(screen.queryByTestId("business-name")).not.toBeInTheDocument();
-      fireEvent.click(screen.getByTestId("cta-secondary"));
+      await userEvent.click(screen.getByTestId("cta-secondary"));
       expect(screen.getByTestId("business-name")).toBeInTheDocument();
     });
 
-    it("starts on application tab when lastUpdatedISO is empty and visits status tab by clicking secondary button", () => {
+    it("starts on application tab when lastUpdatedISO is empty and visits status tab by clicking secondary button", async () => {
       useMockBusiness({
         licenseData: generateLicenseData(
           {},
@@ -144,19 +146,19 @@ describe("<LicenseTask />", () => {
         ),
       });
       renderTask();
-      fireEvent.click(screen.getByTestId("cta-secondary"));
+      await userEvent.click(screen.getByTestId("cta-secondary"));
       expect(getValue("business-name")).toEqual("My Cool Nail Salon");
     });
 
-    it("starts on application tab when no licenseData and visits status tab by clicking second tab button", () => {
+    it("starts on application tab when no licenseData and visits status tab by clicking second tab button", async () => {
       useMockBusiness({ licenseData: undefined });
       renderTask();
       expect(screen.queryByTestId("business-name")).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+      await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
       expect(screen.getByTestId("business-name")).toBeInTheDocument();
     });
 
-    it("starts on application tab when lastUpdatedISO is empty and visits status tab by second tab button", () => {
+    it("starts on application tab when lastUpdatedISO is empty and visits status tab by second tab button", async () => {
       useMockBusiness({
         licenseData: generateLicenseData(
           {},
@@ -171,14 +173,14 @@ describe("<LicenseTask />", () => {
         ),
       });
       renderTask();
-      fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+      await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
       expect(getValue("business-name")).toEqual("My Cool Nail Salon");
     });
 
-    it("opens external link in new tab", () => {
+    it("opens external link in new tab", async () => {
       useMockBusiness({ licenseData: undefined });
       renderTask();
-      fireEvent.click(screen.getByTestId("cta-primary"));
+      await userEvent.click(screen.getByTestId("cta-primary"));
       expect(mockWindowOpen).toHaveBeenCalledWith(
         task.callToActionLink,
         "_blank",
@@ -207,7 +209,7 @@ describe("<LicenseTask />", () => {
           ),
         });
         renderTask();
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
 
         await waitFor(() => {
           expect(getValue("business-name")).toEqual("Applebees");
@@ -233,7 +235,7 @@ describe("<LicenseTask />", () => {
           }),
         });
         renderTask();
-        fireEvent.click(screen.getByTestId("cta-secondary"));
+        await userEvent.click(screen.getByTestId("cta-secondary"));
 
         await waitFor(() => {
           expect(getValue("business-name")).toEqual("Apple Pies Rock");
@@ -267,7 +269,7 @@ describe("<LicenseTask />", () => {
           }),
         });
         renderTask();
-        fireEvent.click(screen.getByTestId("cta-secondary"));
+        await userEvent.click(screen.getByTestId("cta-secondary"));
 
         await waitFor(() => {
           expect(getValue("business-name")).toEqual("Apple Pies Rock");
@@ -296,7 +298,7 @@ describe("<LicenseTask />", () => {
         });
 
         renderTask();
-        fireEvent.click(screen.getByTestId("cta-secondary"));
+        await userEvent.click(screen.getByTestId("cta-secondary"));
         await waitFor(() => {
           expect(getValue("business-name")).toEqual("Applebees");
         });
@@ -332,7 +334,7 @@ describe("<LicenseTask />", () => {
         });
 
         renderTask();
-        fireEvent.click(screen.getByTestId("cta-secondary"));
+        await userEvent.click(screen.getByTestId("cta-secondary"));
         await waitFor(() => {
           expect(getValue("business-name")).toEqual("Applebees");
         });
@@ -343,7 +345,7 @@ describe("<LicenseTask />", () => {
     });
 
     describe("license search", () => {
-      it("goes directly to license detail receipt screen and shows data from licenseData when lastUpdatedISO is a non empty string", () => {
+      it("goes directly to license detail receipt screen and shows data from licenseData when lastUpdatedISO is a non empty string", async () => {
         useMockBusiness({
           taskProgress: { [task.id]: "COMPLETED" },
           licenseData: generateLicenseData(
@@ -358,7 +360,8 @@ describe("<LicenseTask />", () => {
         });
         renderTask();
 
-        expect(screen.getByTestId("permit-ACTIVE")).toBeInTheDocument();
+        // React 19: Wait for async rendering to complete
+        expect(await screen.findByTestId("permit-ACTIVE")).toBeInTheDocument();
         expect(mockApi.checkLicenseStatus).not.toHaveBeenCalled();
       });
 
@@ -388,12 +391,12 @@ describe("<LicenseTask />", () => {
         });
         renderTaskWithStatefulData(business);
 
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
-        fillText("business-name", "My Cool Nail Salon");
-        fillText("address-1", "123 Main St");
-        fillText("address-2", "Suite 1");
-        fillText("zipcode", "12345");
-        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await fillText("business-name", "My Cool Nail Salon");
+        await fillText("address-1", "123 Main St");
+        await fillText("address-2", "Suite 1");
+        await fillText("zipcode", "12345");
+        await userEvent.click(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
           expect(screen.getByText("Draft")).toBeInTheDocument();
         });
@@ -447,12 +450,12 @@ describe("<LicenseTask />", () => {
           ),
         );
         renderTask();
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
-        fillText("business-name", "My Cool Nail Salon");
-        fillText("address-1", "123 Main St");
-        fillText("address-2", "Suite 1");
-        fillText("zipcode", "12345");
-        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await fillText("business-name", "My Cool Nail Salon");
+        await fillText("address-1", "123 Main St");
+        await fillText("address-2", "Suite 1");
+        await fillText("zipcode", "12345");
+        await userEvent.click(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
           expect(screen.getByTestId("licenseDetailReceipt")).toBeInTheDocument();
         });
@@ -481,7 +484,7 @@ describe("<LicenseTask />", () => {
           },
         });
         renderTask();
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
         const userData = generateUserDataForBusiness(
           generateBusiness({
@@ -493,7 +496,7 @@ describe("<LicenseTask />", () => {
           }),
         );
         mockApi.checkLicenseStatus.mockResolvedValue(userData);
-        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await userEvent.click(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
           expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
         });
@@ -508,7 +511,7 @@ describe("<LicenseTask />", () => {
           },
         });
         renderTask();
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         await waitFor(() => {
           expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
         });
@@ -526,10 +529,10 @@ describe("<LicenseTask />", () => {
           ),
         });
         renderTask();
-        fireEvent.click(screen.getByTestId("cta-secondary"));
+        await userEvent.click(screen.getByTestId("cta-secondary"));
         mockApi.checkLicenseStatus.mockRejectedValue(500);
         expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
-        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await userEvent.click(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
           expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
         });
@@ -555,9 +558,9 @@ describe("<LicenseTask />", () => {
           }),
         });
         renderTask();
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
-        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await userEvent.click(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
           expect(screen.getByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
         });
@@ -596,11 +599,11 @@ describe("<LicenseTask />", () => {
           ),
         );
         renderTask();
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         await waitFor(() => {
           expect(screen.getByTestId("check-status-submit")).toBeInTheDocument();
         });
-        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await userEvent.click(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
           expect(screen.getByText("application fee")).toBeInTheDocument();
         });
@@ -610,7 +613,7 @@ describe("<LicenseTask />", () => {
         expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
       });
 
-      it("displays name and address on receipt screen", () => {
+      it("displays name and address on receipt screen", async () => {
         useMockBusiness({
           licenseData: generateLicenseData(
             {},
@@ -627,14 +630,14 @@ describe("<LicenseTask />", () => {
           ),
         });
         renderTask();
-        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await userEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         expect(screen.getByText("My Cool Nail Salon".toUpperCase())).toBeInTheDocument();
         expect(screen.getByText("123 Main St Suite 1, 12345 NJ")).toBeInTheDocument();
       });
     });
 
     describe("edit button", () => {
-      it("displays check license status screen when edit button is clicked on receipt screen", () => {
+      it("displays check license status screen when edit button is clicked on receipt screen", async () => {
         useMockBusiness({
           licenseData: generateLicenseData(
             {},
@@ -645,8 +648,10 @@ describe("<LicenseTask />", () => {
         });
 
         renderTask();
-        fireEvent.click(screen.getByTestId("edit-button"));
-        expect(screen.getByTestId("business-name")).toBeInTheDocument();
+        // React 19: Wait for async rendering before interaction
+        const editButton = await screen.findByTestId("edit-button");
+        await userEvent.click(editButton);
+        expect(await screen.findByTestId("business-name")).toBeInTheDocument();
       });
     });
 
@@ -666,7 +671,8 @@ describe("<LicenseTask />", () => {
           ),
         });
         renderTask();
-        expect(screen.getByText("application fee")).toBeInTheDocument();
+        // React 19: Wait for async rendering to complete
+        expect(await screen.findByText("application fee")).toBeInTheDocument();
         expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
         expect(screen.getByText("Active")).toBeInTheDocument();
       });
@@ -687,7 +693,8 @@ describe("<LicenseTask />", () => {
         });
         renderTask();
 
-        expect(screen.getByText("Application")).toBeInTheDocument();
+        // React 19: Wait for async rendering to complete
+        expect(await screen.findByText("Application")).toBeInTheDocument();
         expect(screen.getByTestId("item-PENDING")).toBeInTheDocument();
 
         const permitStatusElement = screen.getAllByText("Pending")[0] as HTMLElement;
@@ -709,15 +716,20 @@ describe("<LicenseTask />", () => {
           ),
         });
         renderTask();
-        expect(screen.getByText("application fee")).toBeInTheDocument();
+        // React 19: Wait for async rendering to complete
+        expect(await screen.findByText("application fee")).toBeInTheDocument();
         expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
         expect(screen.getByText("Expired")).toBeInTheDocument();
       });
     });
   });
 
-  const fillText = (testid: string, value: string): void => {
-    fireEvent.change(screen.getByTestId(testid), { target: { value: value } });
+  const fillText = async (testid: string, value: string): Promise<void> => {
+    const element = screen.getByTestId(testid);
+    await userEvent.clear(element);
+    if (value) {
+      await userEvent.type(element, value);
+    }
   };
 
   const getValue = (testid: string): string => {

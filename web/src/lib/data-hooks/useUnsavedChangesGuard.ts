@@ -22,7 +22,10 @@ export const useUnsavedChangesGuard = ({
   const isNavigationAllowedRef = useRef(false);
 
   const hasUnsavedChangesRef = useRef(hasUnsavedChanges);
-  hasUnsavedChangesRef.current = hasUnsavedChanges;
+
+  useEffect(() => {
+    hasUnsavedChangesRef.current = hasUnsavedChanges;
+  }, [hasUnsavedChanges]);
 
   const allowNavigation = useCallback(() => {
     isNavigationAllowedRef.current = true;

@@ -8,21 +8,25 @@ import { NavBarVerticalLineDivider } from "@/components/navbar/desktop/NavBarDes
 import { NavBarDesktopWrapper } from "@/components/navbar/desktop/NavBarDesktopWrapper";
 import { NavBarLogoOnlyDesktop } from "@/components/navbar/desktop/NavBarLogoOnlyDesktop";
 import {
-  AddBusinessItem,
+  createAddBusinessItems,
+  createProfileMenuItems,
   GetStartedMenuItem,
   LogoutMenuItem,
   MyNjMenuItem,
-  ProfileMenuItem,
   RegisterMenuItem,
 } from "@/components/navbar/shared-submenu-components";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { UserData, getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/compat/router";
 
 interface Props {
   previousBusinessId?: string | undefined;
@@ -39,16 +43,34 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   const [open, setOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
-  const handleClose = (
-    event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>,
-  ): void => {
-    if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
-    if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
-      return;
-    }
+  // React 19: Call all hooks unconditionally at the top
+  const { setShowRemoveBusinessModal } = useContext(RemoveBusinessContext);
+  const { updateQueue } = useUserData();
+  const router = useRouter();
+  const isProfileSelected = router?.route === ROUTES.profile;
 
+  // Simple close function for menu items (doesn't access refs)
+  const closeMenu = useCallback((): void => {
     setOpen(false);
-  };
+  }, []);
+
+  const handleClose = useCallback(
+    (
+      event?:
+        | MouseEvent
+        | TouchEvent
+        | React.MouseEvent<HTMLLIElement>
+        | React.MouseEvent<Document>,
+    ): void => {
+      if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
+      if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+        return;
+      }
+
+      setOpen(false);
+    },
+    [props.CMS_PREVIEW_ONLY_SHOW_MENU],
+  );
 
   const prevOpen = useRef(open);
   useEffect(() => {
@@ -162,15 +184,19 @@ export const NavBarDesktop = (props: Props): ReactElement => {
                 </div>
               }
               subMenuElement={[
-                <ProfileMenuItem
-                  userData={props.userData}
-                  handleClose={handleClose}
-                  isAuthenticated={isAuthenticated}
-                  key="profile"
-                />,
-                <AddBusinessItem handleClose={handleClose} key="addBusiness" />,
-                <MyNjMenuItem handleClose={handleClose} key="MyNJ" />,
-                <LogoutMenuItem handleClose={handleClose} key="Logout" />,
+                ...createProfileMenuItems(
+                  props.userData,
+                  closeMenu,
+                  isAuthenticated,
+                  Config,
+                  setShowRemoveBusinessModal,
+                  updateQueue,
+                  router,
+                  isProfileSelected,
+                ),
+                ...createAddBusinessItems(closeMenu, Config, router),
+                <MyNjMenuItem handleClose={closeMenu} key="MyNJ" />,
+                <LogoutMenuItem handleClose={closeMenu} key="Logout" />,
               ]}
             />
           </div>
@@ -202,12 +228,16 @@ export const NavBarDesktop = (props: Props): ReactElement => {
                 </div>
               }
               subMenuElement={[
-                <ProfileMenuItem
-                  userData={props.userData}
-                  handleClose={handleClose}
-                  isAuthenticated={isAuthenticated}
-                  key="profile"
-                />,
+                ...createProfileMenuItems(
+                  props.userData,
+                  closeMenu,
+                  isAuthenticated,
+                  Config,
+                  setShowRemoveBusinessModal,
+                  updateQueue,
+                  router,
+                  isProfileSelected,
+                ),
                 <RegisterMenuItem key="register" />,
               ]}
             />

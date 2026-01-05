@@ -13,6 +13,13 @@ import { ReactElement, ReactNode, useContext, useEffect, useMemo, useState } fro
 type Props = {
   template?: (props: { children: ReactNode }) => ReactElement;
 };
+
+const SimpleDiv = (props: { children: ReactNode }): ReactElement => (
+  <div className="flex">
+    <div>{props.children}</div>
+  </div>
+);
+
 export const DisabledTaxId = (props: Props): ReactElement => {
   const fieldName = "taxId";
 
@@ -24,10 +31,6 @@ export const DisabledTaxId = (props: Props): ReactElement => {
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
     getInitialShowHideStatus(state.profileData.taxId),
   );
-  useEffect(() => {
-    setTaxIdDisplayStatus(getInitialShowHideStatus(state.profileData.taxId));
-    updateSplitTaxId(state.profileData.taxId ?? "");
-  }, [state.profileData.taxId, state.profileData.encryptedTaxId]);
 
   const [locationValue, setLocationValue] = useState(
     state.profileData[fieldName]?.trim().slice(9, 12) ?? "",
@@ -35,6 +38,19 @@ export const DisabledTaxId = (props: Props): ReactElement => {
   const [taxIdValue, setTaxIdValue] = useState(
     state.profileData[fieldName]?.trim().slice(0, 9) ?? "",
   );
+
+  const updateSplitTaxId = (taxId: string): void => {
+    setTaxIdValue(taxId.trim().slice(0, 9));
+    setLocationValue(taxId.trim().slice(9, 12));
+  };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setTaxIdDisplayStatus(getInitialShowHideStatus(state.profileData.taxId));
+      updateSplitTaxId(state.profileData.taxId ?? "");
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
+  }, [state.profileData.taxId, state.profileData.encryptedTaxId]);
 
   const getShowHideToggleButton = (): ReactElement => {
     return (
@@ -48,11 +64,6 @@ export const DisabledTaxId = (props: Props): ReactElement => {
         hideOverrideText={Config.taxId.hideButtonTextMobile}
       />
     );
-  };
-
-  const updateSplitTaxId = (taxId: string): void => {
-    setTaxIdValue(taxId.trim().slice(0, 9));
-    setLocationValue(taxId.trim().slice(9, 12));
   };
 
   const getDecryptedTaxId = async (): Promise<string> => {
@@ -80,12 +91,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     toggleTaxIdDisplay();
   };
 
-  const SimpleDiv = (props: { children: ReactNode }): ReactElement => (
-    <div className="flex">
-      <div>{props.children}</div>
-    </div>
-  );
-  const Element = props.template ?? SimpleDiv;
+  const Element = useMemo(() => props.template ?? SimpleDiv, [props.template]);
   const value = useMemo(() => {
     return formatTaxId(taxIdValue + locationValue);
   }, [locationValue, taxIdValue]);

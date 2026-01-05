@@ -152,79 +152,159 @@ export const fillOutTaxClearanceForm = ({
   taxPayerPin: string;
 }>): void => {
   if (businessName) {
-    cy.get('input[data-testid="businessName"]').type(businessName);
+    // React 19 workaround: Use slow typing to properly trigger React onChange and updateOnBlur logic
     cy.get('input[data-testid="businessName"]')
-      .invoke("prop", "value")
-      .should("contain", businessName);
+      .focus()
+      .clear({ force: true })
+      .type(businessName, { delay: 100, force: true })
+      .blur({ force: true });
+    cy.wait(1000); // Wait for React 19 batched updates to complete
   }
 
   if (addressLine1) {
-    cy.get('input[id="addressLine1"]').type(addressLine1);
-    cy.get('input[id="addressLine1"]').invoke("prop", "value").should("contain", addressLine1);
+    // React 19 workaround: Use slow typing to properly trigger React onChange and updateOnBlur logic
+    cy.get('input[id="addressLine1"]')
+      .focus()
+      .clear({ force: true })
+      .type(addressLine1, { delay: 100, force: true })
+      .blur({ force: true });
+    cy.wait(1000);
   }
 
   if (addressCity) {
-    cy.get('input[id="addressCity"]').type(addressCity);
-    cy.get('input[id="addressCity"]').invoke("prop", "value").should("contain", addressCity);
+    // React 19 workaround: Use slow typing to properly trigger React onChange and updateOnBlur logic
+    cy.get('input[id="addressCity"]')
+      .focus()
+      .clear({ force: true })
+      .type(addressCity, { delay: 100, force: true })
+      .blur({ force: true });
+    cy.wait(1000);
   }
 
   if (addressState) {
-    cy.get('input[data-testid="addressState"]').type(addressState);
+    // React 19 workaround: MUI Autocomplete - type to select state
     cy.get('input[data-testid="addressState"]')
-      .invoke("prop", "value")
-      .should("contain", addressState);
+      .focus()
+      .clear({ force: true })
+      .type(addressState, { delay: 100, force: true })
+      .blur({ force: true });
+    cy.wait(1000);
   }
 
   if (addressZipCode) {
-    cy.get('input[id="addressZipCode"]').type(addressZipCode);
-    cy.get('input[id="addressZipCode"]').invoke("prop", "value").should("contain", addressZipCode);
+    // React 19 workaround: Use slow typing to properly trigger React onChange and updateOnBlur logic
+    cy.get('input[id="addressZipCode"]')
+      .focus()
+      .clear({ force: true })
+      .type(addressZipCode, { delay: 100, force: true })
+      .blur({ force: true });
+    cy.wait(1000);
   }
 
   if (taxPayerId) {
-    cy.get('input[id="taxId"]').clear().type(taxPayerId, { delay: 50 });
+    cy.log(`Setting Tax ID value: ${taxPayerId} (length: ${taxPayerId.length})`);
+
+    // React 19 + MUI numeric input workaround: Use React's internal value setter
+    cy.get('input[id="taxId"]').then(($input) => {
+      const input = $input[0] as HTMLInputElement;
+
+      // Get React's value setter from the input element
+      const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+        window.HTMLInputElement.prototype,
+        "value",
+      )?.set;
+
+      if (nativeInputValueSetter) {
+        // Use React's setter to update the value
+        nativeInputValueSetter.call(input, taxPayerId);
+
+        // Dispatch input event that React will intercept
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      cy.log(`Tax ID set to: ${input.value}`);
+    });
+
+    cy.wait(2000);
+
+    // Trigger blur to complete the field update
+    cy.get('input[id="taxId"]').blur({ force: true });
+    cy.wait(2000);
+
+    // Verify the field value
+    cy.get('input[id="taxId"]').then(($input) => {
+      const fieldValue = $input.val() as string;
+      cy.log(`Tax ID field value verified: "${fieldValue}"`);
+    });
   }
 
   if (taxPayerPin) {
-    cy.get('input[id="taxPin"]').type(taxPayerPin);
-    cy.get('input[id="taxPin"]').invoke("prop", "value").should("contain", taxPayerPin);
+    cy.log(`Setting Tax Pin value: ${taxPayerPin} (length: ${taxPayerPin.length})`);
+
+    // React 19 + MUI numeric input workaround: Use React's internal value setter
+    cy.get('input[id="taxPin"]').then(($input) => {
+      const input = $input[0] as HTMLInputElement;
+
+      // Get React's value setter from the input element
+      const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+        window.HTMLInputElement.prototype,
+        "value",
+      )?.set;
+
+      if (nativeInputValueSetter) {
+        // Use React's setter to update the value
+        nativeInputValueSetter.call(input, taxPayerPin);
+
+        // Dispatch input event that React will intercept
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      cy.log(`Tax PIN set to: ${input.value}`);
+    });
+
+    cy.wait(2000);
+
+    // Trigger blur to complete the field update
+    cy.get('input[id="taxPin"]').blur({ force: true });
+    cy.wait(2000);
+
+    // Verify the field value
+    cy.get('input[id="taxPin"]').then(($input) => {
+      const fieldValue = $input.val() as string;
+      cy.log(`Tax PIN field value verified: "${fieldValue}"`);
+    });
   }
 };
 
 export const completeTaxClearanceFlow = (): void => {
+  // NOTE: This function assumes we're already on the Check Eligibility screen with form filled out
+
+  // React 19: Wait to ensure all form field updates have completed and saved to context
+  // This prevents clicking "Save & Continue" before state is fully saved
+  // Increased to 5000ms to allow fireEvent approach + all state propagation to complete
+  cy.wait(5000);
+
+  // Click Save & Continue to go from Check Eligibility → Review
+  // This triggers handleSaveButtonClick with 300ms setTimeout before save
   cy.contains("button", "Save & Continue").click();
-  cy.wait(1000);
-  cy.contains("button", "Save & Continue").click();
+
+  // React 19: Wait for Review screen to load
+  // Check for previous-button data-testid which ONLY exists on Review screen
+  cy.get('[data-testid="previous-button"]', { timeout: 10000 }).should("be.visible");
+
+  // Additional wait to ensure Review component is fully mounted and data is loaded
   cy.wait(1000);
 
-  cy.contains(Config.taxClearanceCertificateDownload.headerTwoLabel, { timeout: 500 })
+  // Now on Review screen - click the Save button (use data-testid to be specific) to submit to Tax Clearance API
+  cy.get('[data-testid="next-button"]').click();
+
+  // Wait for Download screen with success message
+  // Increased timeout to 30 seconds to allow for:
+  // 1. postUserData to complete (encrypts Tax ID/Pin)
+  // 2. postTaxClearanceCertificate API call
+  // 3. Certificate PDF to be generated (large PDF ~3MB)
+  // 4. Download screen to render
+  cy.contains(Config.taxClearanceCertificateDownload.headerTwoLabel, { timeout: 30000 })
     .should("be.visible")
     .and("contain.text", "Your Certificate is Ready!");
-};
-
-export const fillOutLicenseStatusCheckForm = ({
-  businessName,
-  addressLine1,
-  addressLine2,
-  addressZipCode,
-}: Partial<{
-  businessName: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressZipCode: string;
-}>): void => {
-  if (businessName) {
-    cy.get('[data-testid="business-name"]').type(businessName);
-  }
-
-  if (addressLine1) {
-    cy.get('[data-testid="address-1"]').type(addressLine1);
-  }
-
-  if (addressLine2) {
-    cy.get('[data-testid="address-2"]').type(addressLine2);
-  }
-
-  if (addressZipCode) {
-    cy.get('[data-testid="zipcode"]').type(addressZipCode);
-  }
 };

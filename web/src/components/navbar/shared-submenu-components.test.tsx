@@ -133,7 +133,7 @@ describe("shared-submenu-components", () => {
     fireEvent.click(screen.getByText(Config.navigationDefaults.addBusinessButton));
     expect(mockPush).toHaveBeenCalledWith({
       pathname: ROUTES.onboarding,
-      query: { additionalBusiness: "true" },
+      query: { additionalBusiness: "true", page: 1 },
     });
   });
 

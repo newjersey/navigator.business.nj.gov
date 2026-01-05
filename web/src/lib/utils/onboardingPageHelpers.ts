@@ -5,8 +5,6 @@ import { FlowType, Page } from "@businessnjgovnavigator/shared/types";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { getFlow, templateEval } from "./helpers";
 
-const Config = getMergedConfig();
-
 export const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
   starting: "STARTING",
   "out-of-state": "FOREIGN",
@@ -38,6 +36,7 @@ export const pageQueryParamisValid = (
 };
 
 export const evalHeaderStepsTemplate = (page: Page): string => {
+  const Config = getMergedConfig();
   return templateEval(Config.onboardingDefaults.stepXTemplate, {
     currentPage: page.current.toString(),
   });

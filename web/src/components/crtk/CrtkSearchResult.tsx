@@ -24,9 +24,25 @@ interface Props {
   onResubmit: (facilityDetails: CrtkFacilityDetails) => Promise<void>;
 }
 
-const Config = getMergedConfig();
+const CrtkContactInfo = (): ReactElement => {
+  return (
+    <>
+      <p className="margin-bottom-1 text-bold">If you have any questions, contact a CRTK expert:</p>
+      <ul>
+        <li>Phone: (609) 292-6714</li>
+        <li>
+          Email:{" "}
+          <a href="mailto:rtk@dep.nj.gov" className="text-underline">
+            rtk@dep.nj.gov
+          </a>
+        </li>
+      </ul>
+    </>
+  );
+};
 
 export const CrtkSearchResult = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
   const { crtkData } = props;
   const status = crtkData.crtkSearchResult as StatusType;
   const businessDetails = crtkData.crtkBusinessDetails;
@@ -36,23 +52,6 @@ export const CrtkSearchResult = (props: Props): ReactElement => {
       header: "Business Found",
       description: `${businessDetails?.businessName || "Your business"} is in the New Jersey Community Right to Know (CRTK) database. This means you may have chemical reporting requirements.`,
     },
-  };
-
-  const CrtkContactInfo = (): ReactElement => {
-    return (
-      <>
-        <p className="margin-bottom-1 text-bold">{Config.crtkTask.contactCrtkExpertTitle}</p>
-        <ul>
-          <li>Phone: (609) 292-6714</li>
-          <li>
-            Email:{" "}
-            <a href="mailto:rtk@dep.nj.gov" className="text-underline">
-              rtk@dep.nj.gov
-            </a>
-          </li>
-        </ul>
-      </>
-    );
   };
 
   const CrtkFound = (): ReactElement => {
@@ -67,10 +66,9 @@ export const CrtkSearchResult = (props: Props): ReactElement => {
             {businessDetails?.addressZipCode} NJ
             {props.onSearchAgain && (
               <>
-                {" "}
                 <button
                   onClick={props.onSearchAgain}
-                  className="usa-button usa-button--unstyled text-primary text-underline"
+                  className="text-primary text-underline padding-left-1 bg-transparent border-0 cursor-pointer"
                   data-testid="crtk-edit-business-info"
                 >
                   Edit

@@ -12,7 +12,7 @@ import {
   Checkbox,
   TextField,
 } from "@mui/material";
-import { HTMLAttributes, ReactElement, SyntheticEvent, useContext } from "react";
+import { HTMLAttributes, ReactElement, SyntheticEvent, useContext, ReactNode } from "react";
 
 const SUPPLIERS = [
   { licenseNumber: 501, name: "A TRENK, INC" },
@@ -166,7 +166,7 @@ export const CigaretteSupplierDropdown = (props: Props): ReactElement => {
     },
     option: string,
     { selected }: AutocompleteRenderOptionState,
-  ): JSX.Element => {
+  ): ReactNode => {
     const { key, ...optionProps } = props;
     return (
       <li key={key} {...optionProps}>
@@ -181,7 +181,7 @@ export const CigaretteSupplierDropdown = (props: Props): ReactElement => {
     );
   };
 
-  const renderInput = (params: AutocompleteRenderInputParams): JSX.Element => (
+  const renderInput = (params: AutocompleteRenderInputParams): ReactNode => (
     <TextField
       {...params}
       error={props.CMS_ONLY_show_error || isFormFieldInvalid}

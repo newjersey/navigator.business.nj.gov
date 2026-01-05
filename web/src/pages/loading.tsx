@@ -42,7 +42,8 @@ const LoadingPage = (): ReactElement => {
       });
     } else if (router?.asPath?.includes(signInSamlError)) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
-      setShowError(true);
+      // Set error state when SAML error is detected
+      setTimeout(() => setShowError(true), 0);
     } else {
       if (loginPageEnabled) {
         router.push(ROUTES.login);

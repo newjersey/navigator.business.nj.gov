@@ -5,7 +5,9 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import LoadingPage, { signInSamlError } from "@/pages/loading";
 import { withAuth } from "@/test/helpers/helpers-renderers";
+import { findLink } from "@/test/helpers/accessible-queries";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import {
   generateUseUserDataResponse,
   setMockUserDataResponse,
@@ -23,7 +25,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -52,6 +54,7 @@ const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
 describe("loading page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockConfig();
     useMockRouter({});
   });
 
@@ -118,7 +121,7 @@ describe("loading page", () => {
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
 
     expect(mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account).toHaveBeenCalled();
-    expect(screen.getByText("Login Issues Help page")).toBeInTheDocument();
+    expect(await findLink(/login issues help/i)).toBeInTheDocument();
   });
 
   it("redirects to the email check login page as a fallback if other conditions aren't met and the login page is enabled", async () => {

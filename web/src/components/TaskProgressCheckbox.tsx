@@ -2,7 +2,7 @@ import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { getTaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { TaskStatusTaxRegistrationSnackbar } from "@/components/TaskStatusTaxRegistrationSnackbar";
 import { Icon } from "@/components/njwds/Icon";
@@ -36,8 +36,11 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
   const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] =
     useState<boolean>(false);
+  // React 19: Counter to force FormationDateModal remount when opened
+  const [formationModalResetKey, setFormationModalResetKey] = useState(0);
   const router = useRouter();
   const { Config } = useConfig();
+  const TaskProgressTagLookup = getTaskProgressTagLookup();
 
   const updateTaskProgressDueToWiremockFormationCompletion =
     process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH === "true" &&
@@ -78,6 +81,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     if (isFormationTask(props.taskId)) {
       if (nextStatus === "COMPLETED" && currentOpenModal === undefined) {
         setCurrentOpenModal("formation");
+        // Increment reset key to force modal remount with fresh state
+        setFormationModalResetKey((prev) => prev + 1);
         analytics.event.task_status_checkbox.click_completed.show_formation_date_modal();
         return;
       }
@@ -248,6 +253,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       />
 
       <FormationDateModal
+        key={`${business?.id ?? "no-business"}-${formationModalResetKey}`}
         isOpen={currentOpenModal === "formation"}
         close={(): void => setCurrentOpenModal(undefined)}
         onSave={(config): void => setToNextStatus(config)}

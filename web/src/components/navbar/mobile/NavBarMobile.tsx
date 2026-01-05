@@ -7,21 +7,25 @@ import { NavBarMobileHomeLogo } from "@/components/navbar/mobile/NavBarMobileHom
 import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
 import { NavBarMobileWrapper } from "@/components/navbar/mobile/NavBarMobileWrapper";
 import {
-  AddBusinessItem,
+  createAddBusinessItems,
+  createProfileMenuItems,
   GetStartedMenuItem,
   LoginMenuItem,
   LogoutMenuItem,
   MyNjMenuItem,
-  ProfileMenuItem,
   RegisterMenuItem,
 } from "@/components/navbar/shared-submenu-components";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
+import { useRouter } from "next/compat/router";
 
 interface Props {
   scrolled: boolean;
@@ -37,6 +41,12 @@ interface Props {
 
 export const NavBarMobile = (props: Props): ReactElement => {
   const { Config } = useConfig();
+
+  // React 19: Call all hooks unconditionally at the top
+  const { setShowRemoveBusinessModal } = useContext(RemoveBusinessContext);
+  const { updateQueue } = useUserData();
+  const router = useRouter();
+  const isProfileSelected = router?.route === ROUTES.profile;
 
   const isAuthenticated = props.variant === NavBarVariant.FULL_AUTHENTICATED;
   const isLanding = props.variant === NavBarVariant.FULL_LANDING;
@@ -162,13 +172,17 @@ export const NavBarMobile = (props: Props): ReactElement => {
             hideMiniRoadmap={props.hideMiniRoadmap}
             task={props.task}
             subMenuElement={[
-              <ProfileMenuItem
-                userData={props.userData}
-                handleClose={closeSideBar}
-                key="profile"
-                isAuthenticated={isAuthenticated}
-              />,
-              <AddBusinessItem handleClose={closeSideBar} key="business" />,
+              ...createProfileMenuItems(
+                props.userData,
+                closeSideBar,
+                isAuthenticated,
+                Config,
+                setShowRemoveBusinessModal,
+                updateQueue,
+                router,
+                isProfileSelected,
+              ),
+              ...createAddBusinessItems(closeSideBar, Config, router),
               <MyNjMenuItem handleClose={closeSideBar} key="MyNJ" />,
               <LogoutMenuItem handleClose={closeSideBar} key="logout" />,
             ]}
@@ -197,12 +211,16 @@ export const NavBarMobile = (props: Props): ReactElement => {
             hideMiniRoadmap={props.hideMiniRoadmap}
             task={props.task}
             subMenuElement={[
-              <ProfileMenuItem
-                handleClose={closeSideBar}
-                userData={props.userData}
-                isAuthenticated={isAuthenticated}
-                key="profile"
-              />,
+              ...createProfileMenuItems(
+                props.userData,
+                closeSideBar,
+                isAuthenticated,
+                Config,
+                setShowRemoveBusinessModal,
+                updateQueue,
+                router,
+                isProfileSelected,
+              ),
               <RegisterMenuItem key="register" />,
               <LoginMenuItem key="login" />,
             ]}

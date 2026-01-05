@@ -73,7 +73,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
       </GenericButton>
       <Popper
         open={open}
-        anchorEl={anchorRef.current}
+        anchorEl={(): HTMLElement => anchorRef.current as HTMLElement}
         role={undefined}
         placement="bottom-end"
         transition

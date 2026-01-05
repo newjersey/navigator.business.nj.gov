@@ -1,3 +1,26 @@
+// Mock getMergedConfig before other imports to ensure employerRates is available
+jest.mock("@businessnjgovnavigator/shared/contexts", () => {
+  const actual = jest.requireActual("@businessnjgovnavigator/shared/contexts");
+  const originalGetMergedConfig = actual.getMergedConfig;
+
+  return {
+    ...actual,
+    getMergedConfig: jest.fn(() => {
+      const config = originalGetMergedConfig();
+      return {
+        ...config,
+        employerRates: config.employerRates || {
+          quarterOneLabel: "Jan-Mar.",
+          quarterTwoLabel: "Apr-June",
+          quarterThreeLabel: "July-Sept.",
+          quarterFourLabel: "Oct-Dec.",
+          ...config.employerRates,
+        },
+      };
+    }),
+  };
+});
+
 import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import {
   DOL_EIN_CHARACTERS,
@@ -20,6 +43,7 @@ import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { DOL_EIN_CHARACTERS_WITH_FORMATTING } from "@/components/data-fields/DolEin";
 import { getEmployerAccessQuarterlyDropdownOptions } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 
 jest.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
   const actual = jest.requireActual("@businessnjgovnavigator/shared/dateHelpers");
@@ -52,6 +76,7 @@ describe("EmployerRates", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    useMockConfig();
   });
 
   afterEach(() => {

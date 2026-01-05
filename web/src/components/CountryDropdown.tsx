@@ -6,7 +6,7 @@ import {
   CountriesObject,
 } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FocusEvent, ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   value: string | undefined;
@@ -88,7 +88,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
       onInputChange={handleInputChange}
       onBlur={onValidation}
       onSubmit={onValidation}
-      renderOption={(_props, option, { selected }): JSX.Element => {
+      renderOption={(_props, option, { selected }): ReactNode => {
         const { key, ...otherProps } = _props;
         return (
           <li key={key} {...otherProps}>
@@ -104,7 +104,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
           </li>
         );
       }}
-      renderInput={(params): JSX.Element => {
+      renderInput={(params): ReactNode => {
         return (
           <TextField
             {...params}

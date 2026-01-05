@@ -1,6 +1,7 @@
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import {
   generateProfileData,
   generateUserData,
@@ -14,24 +15,29 @@ import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
 export const useMockBusiness = (overrides: Partial<Business>): void => {
+  useMockConfig();
   const business = generateBusiness(overrides);
   setMockUserDataResponse({ userData: generateUserDataForBusiness(business) });
 };
 
 export const useMockUserData = (overrides: Partial<UserData>): void => {
+  useMockConfig();
   const userData = generateUserData(overrides);
   setMockUserDataResponse({ userData });
 };
 
 export const useUndefinedUserData = (): void => {
+  useMockConfig();
   setMockUserDataResponse({ userData: undefined });
 };
 
 export const useMockUserDataError = (error: UserDataError): void => {
+  useMockConfig();
   setMockUserDataResponse({ error });
 };
 
 export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
+  useMockConfig();
   const business = generateBusiness({
     profileData: generateProfileData(profileData),
     onboardingFormProgress: "COMPLETED",

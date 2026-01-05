@@ -30,7 +30,11 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
 
   useEffect(() => {
     if (!business) return;
-    setProfileData(business.profileData);
+    // Use setTimeout to avoid cascading renders
+    const timeoutId = setTimeout(() => {
+      setProfileData(business.profileData);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [business]);
 
   FormFuncWrapper(async () => {

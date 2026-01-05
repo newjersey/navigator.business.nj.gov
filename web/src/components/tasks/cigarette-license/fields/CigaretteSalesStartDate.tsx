@@ -7,7 +7,8 @@ import { DateObject } from "@businessnjgovnavigator/shared/dateHelpers";
 import { TextField, TextFieldProps } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { ReactElement, useContext } from "react";
+import dayjs from "dayjs";
+import { ReactElement, useContext, ReactNode } from "react";
 interface Props {
   CMS_ONLY_show_error?: boolean;
 }
@@ -26,9 +27,10 @@ export const CigaretteSalesStartDate = (props: Props): ReactElement => {
     setIsValid(!!salesInfoStartDate);
   };
 
-  const onChange = (newValue: DateObject | null): void => {
-    const isDateValid = newValue && newValue.isValid();
-    const newDateValue = isDateValid ? newValue.toISOString() : "";
+  const onChange = (newValue: unknown): void => {
+    const dateObj = newValue as DateObject | null;
+    const isDateValid = dateObj && dateObj.isValid();
+    const newDateValue = isDateValid ? dateObj.toISOString() : "";
 
     setCigaretteLicenseData((cigaretteLicenseData) => {
       return {
@@ -40,33 +42,6 @@ export const CigaretteSalesStartDate = (props: Props): ReactElement => {
     updateFormValidation(newDateValue);
   };
 
-  const renderInput = (params: TextFieldProps): JSX.Element => (
-    <div className="width-100">
-      <TextField
-        id="sales-start-date-picker"
-        {...params}
-        variant="outlined"
-        error={props.CMS_ONLY_show_error || isFormFieldInvalid}
-        sx={{
-          svg: { fill: "#4b7600" },
-        }}
-        inputProps={{
-          ...params.inputProps,
-          "aria-label": Config.cigaretteLicenseStep3.fields.startDateOfSales.label,
-        }}
-        style={{ maxWidth: 450 }}
-        value={cigaretteLicenseData.salesInfoStartDate}
-        onBlur={() => {
-          updateFormValidation(cigaretteLicenseData.salesInfoStartDate);
-        }}
-        helperText={
-          (props.CMS_ONLY_show_error || isFormFieldInvalid) &&
-          Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText
-        }
-      />
-    </div>
-  );
-
   return (
     <div id="question-salesInfoStartDate">
       <WithErrorBar hasError={props.CMS_ONLY_show_error || isFormFieldInvalid} type={"ALWAYS"}>
@@ -75,10 +50,41 @@ export const CigaretteSalesStartDate = (props: Props): ReactElement => {
         </label>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+            enableAccessibleFieldDOMStructure={false}
             onChange={onChange}
-            value={cigaretteLicenseData.salesInfoStartDate}
-            renderInput={renderInput}
-          ></DatePicker>
+            value={
+              cigaretteLicenseData.salesInfoStartDate
+                ? dayjs(cigaretteLicenseData.salesInfoStartDate)
+                : null
+            }
+            slotProps={{
+              textField: {
+                id: "sales-start-date-picker",
+                variant: "outlined",
+                error: props.CMS_ONLY_show_error || isFormFieldInvalid,
+                sx: {
+                  svg: { fill: "#4b7600" },
+                },
+                inputProps: {
+                  "aria-label": Config.cigaretteLicenseStep3.fields.startDateOfSales.label,
+                },
+                style: { maxWidth: 450 },
+                onBlur: () => {
+                  updateFormValidation(cigaretteLicenseData.salesInfoStartDate);
+                },
+                helperText:
+                  (props.CMS_ONLY_show_error || isFormFieldInvalid) &&
+                  Config.cigaretteLicenseStep3.fields.startDateOfSales.errorRequiredText,
+              },
+            }}
+            slots={{
+              textField: (params: TextFieldProps): ReactNode => (
+                <div className="width-100">
+                  <TextField {...params} />
+                </div>
+              ),
+            }}
+          />
         </LocalizationProvider>
       </WithErrorBar>
     </div>

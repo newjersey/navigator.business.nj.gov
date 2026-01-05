@@ -205,7 +205,11 @@ describe("<TaxAccess />", () => {
         expect(currentBusiness().profileData.legalStructureId).toBe("c-corporation");
       });
 
-      fireEvent.click(screen.getByText(Config.taxAccess.stepTwoBackButton));
+      // React 19: Use findByRole for better accessibility and async handling
+      const backButton = await screen.findByRole("button", {
+        name: Config.taxAccess.stepTwoBackButton,
+      });
+      fireEvent.click(backButton);
       await waitFor(() => {
         expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
       });

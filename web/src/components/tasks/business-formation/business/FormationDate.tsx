@@ -20,7 +20,7 @@ import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { ReactElement, useContext, useMemo } from "react";
+import { ReactElement, useContext, useMemo, ReactNode } from "react";
 
 advancedDateLibrary();
 type Props = {
@@ -95,6 +95,7 @@ export const FormationDate = (props: Props): ReactElement => {
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker
+            enableAccessibleFieldDOMStructure={false}
             minDate={getMinDate()}
             disabled={
               props.fieldName === "businessStartDate" &&
@@ -113,42 +114,44 @@ export const FormationDate = (props: Props): ReactElement => {
                   )
                 : null
             }
-            inputFormat={dateFormat}
-            onChange={(newValue: DateObject | null): void => {
-              if (newValue) {
-                handleChange(newValue.format(defaultDateFormat));
+            format={dateFormat}
+            onChange={(newValue: unknown): void => {
+              const dateObj = newValue as DateObject | null;
+              if (dateObj) {
+                handleChange(dateObj.format(defaultDateFormat));
               }
-              if (newValue === null) {
+              if (dateObj === null) {
                 handleChange("");
               }
             }}
-            renderInput={(params): JSX.Element => {
-              return (
-                <div className="width-100">
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    error={doesFieldHaveError(props.fieldName)}
-                    onBlur={(): void => {
-                      setFieldsInteracted([props.fieldName]);
-                    }}
-                    helperText={
-                      doesFieldHaveError(props.fieldName) &&
-                      contentProps[props.fieldName].helperText
-                    }
-                    sx={{
-                      svg: { fill: "#4b7600" },
-                    }}
-                    required
-                    inputProps={{
-                      ...params.inputProps,
-                      placeholder: "",
-                      "aria-label": camelCaseToSentence(props.fieldName),
-                      "data-testid": `date-${props.fieldName}`,
-                    }}
-                  />
-                </div>
-              );
+            slotProps={{
+              textField: {
+                variant: "outlined",
+                error: doesFieldHaveError(props.fieldName),
+                onBlur: (): void => {
+                  setFieldsInteracted([props.fieldName]);
+                },
+                helperText:
+                  doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText,
+                sx: {
+                  svg: { fill: "#4b7600" },
+                },
+                required: true,
+                inputProps: {
+                  placeholder: "",
+                  "aria-label": camelCaseToSentence(props.fieldName),
+                  "data-testid": `date-${props.fieldName}`,
+                },
+              },
+            }}
+            slots={{
+              textField: (params): ReactNode => {
+                return (
+                  <div className="width-100">
+                    <TextField {...params} />
+                  </div>
+                );
+              },
             }}
           />
         </LocalizationProvider>
