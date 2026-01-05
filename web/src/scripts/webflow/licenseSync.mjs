@@ -17,8 +17,8 @@ import {
   contentToStrings,
   getHtml,
   resolveApiPromises,
+  wait,
 } from "./helpers.mjs";
-import { wait } from "./helpers2.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 import { licenseCollectionId } from "./webflowIds.mjs";
