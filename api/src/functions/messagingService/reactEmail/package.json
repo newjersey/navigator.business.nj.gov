@@ -1,0 +1,20 @@
+{
+  "name": "@businessnjgovnavigator/react-email",
+  "type": "module",
+  "packageManager": "yarn@3.8.7",
+  "devDependencies": {
+    "@react-email/preview-server": "5.0.6",
+    "react-email": "5.0.6"
+  },
+  "dependencies": {
+    "@react-email/components": "1.0.1",
+    "@react-email/render": "2.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tsx": "4.21.0"
+  },
+  "scripts": {
+    "dev": "email dev",
+    "build": "tsx build.tsx"
+  }
+}
