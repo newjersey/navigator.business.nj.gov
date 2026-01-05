@@ -7,8 +7,8 @@ import {
   contentToStrings,
   getHtml,
   resolveApiPromises,
+  wait,
 } from "./helpers.mjs";
-import { wait } from "./helpers2.mjs";
 import { createItem, deleteItem, getAllItems, getCollection, modifyItem } from "./methods.mjs";
 import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs";
 import { certificationCollectionId, fundingCollectionId } from "./webflowIds.mjs";
@@ -184,7 +184,7 @@ const getFundingFromMd = (i, sectors) => {
   })?.id;
   if (fundingType === undefined) {
     throw new Error(
-      `Funding Types for funding type ${i.fundingType} are mis-matched in ${i.id}. Please check with Webflow.`
+      `Funding Types for funding type ${i.fundingType} are mis-matched in ${i.id}. Please check with Webflow.`,
     );
   }
   const agency = agencyMap[i.agency[0]]?.id;
@@ -193,7 +193,7 @@ const getFundingFromMd = (i, sectors) => {
         You will have to create the agency in Webflow, then call the collection details endpoint
         with the fundingCollectionId to get the ID of the option, then adding it to agencyMap. */
     throw new Error(
-      `Agency Types for agency ${i.agency[0]} are mis-matched in ${i.id}. Please check with Webflow.`
+      `Agency Types for agency ${i.agency[0]} are mis-matched in ${i.id}. Please check with Webflow.`,
     );
   }
   const status = fundingStatusMap.find((v) => {
@@ -201,7 +201,7 @@ const getFundingFromMd = (i, sectors) => {
   })?.id;
   if (status === undefined) {
     throw new Error(
-      `Funding Status Types for funding status type ${i.status} are mis-matched in ${i.id}. Please check with Webflow.`
+      `Funding Status Types for funding status type ${i.status} are mis-matched in ${i.id}. Please check with Webflow.`,
     );
   }
 
@@ -210,7 +210,7 @@ const getFundingFromMd = (i, sectors) => {
       (cert) =>
         fundingCertificationsMap.find((v) => {
           return v.slug === cert;
-        })?.id
+        })?.id,
     ) ?? [];
 
   return {
@@ -225,7 +225,8 @@ const getFundingFromMd = (i, sectors) => {
     "last-updated": new Date(Date.now()).toISOString(),
     "funding-status": status,
     "funding-type": fundingType,
-    "industry-reference": industryReferenceArray.length > 0 ? industryReferenceArray : [allIndustryId],
+    "industry-reference":
+      industryReferenceArray.length > 0 ? industryReferenceArray : [allIndustryId],
   };
 };
 
@@ -246,7 +247,7 @@ const getNewFundings = async () => {
   const currentIdArray = new Set(
     current.map((sec) => {
       return sec.fieldData.slug;
-    })
+    }),
   );
   return getFilteredFundings()
     .filter((i) => {
@@ -292,7 +293,7 @@ const updateFundings = async () => {
       fundings.find((i) => {
         return i.id === item.fieldData.slug;
       }),
-      sectors
+      sectors,
     );
     console.info(`Attempting to modify ${funding.slug}`);
     try {

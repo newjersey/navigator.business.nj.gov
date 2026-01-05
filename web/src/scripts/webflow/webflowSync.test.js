@@ -13,7 +13,6 @@ import {
   updateFundings,
 } from "./fundingSync.mjs";
 import { catchRateLimitErrorAndRetry } from "./helpers.mjs";
-import { wait } from "./helpers2.mjs";
 import {
   allIndustryId,
   createNewSectors,
@@ -265,12 +264,6 @@ jest.mock("fs", () => {
   return {
     ...original,
     readFileSync: jest.fn(),
-  };
-});
-
-jest.mock("./helpers2.mjs", () => {
-  return {
-    wait: jest.fn(),
   };
 });
 
@@ -801,15 +794,25 @@ describe("webflow syncing", () => {
 
         beforeEach(() => {
           mockRetryFunc = jest.fn();
+          jest.useRealTimers();
         });
 
         it("should retry function after waiting if rate limit error occurs", async () => {
+          jest.useFakeTimers();
+
+          const setTimeoutSpy = jest.spyOn(globalThis, "setTimeout");
           const error = { response: { status: 429 } };
 
-          await catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2");
+          catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2");
+          await jest.advanceTimersByTimeAsync(65000);
+
+          expect(setTimeoutSpy).toHaveBeenCalled();
+          const lastCall = setTimeoutSpy.mock.calls.at(-1);
+          expect(lastCall[1]).toBe(65000);
 
           expect(mockRetryFunc).toHaveBeenCalledWith("arg1", "arg2");
-          expect(wait).toHaveBeenCalledWith(65000);
+
+          setTimeoutSpy.mockRestore();
         });
 
         it("should throw error if non-rate limit error occurs", async () => {

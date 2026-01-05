@@ -6,7 +6,6 @@ import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
-import { wait } from "./helpers2.mjs";
 
 const RATE_LIMIT_WAIT_SECONDS = 20;
 
@@ -114,4 +113,10 @@ export const getHtml = (arrayOfStrings, start, stop) => {
     })
     .join(" ")
     .trim();
+};
+
+export const wait = (milliseconds = 10000) => {
+  return new Promise((resolve) => {
+    return setTimeout(resolve, milliseconds);
+  });
 };
