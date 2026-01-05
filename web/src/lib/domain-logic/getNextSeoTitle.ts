@@ -1,8 +1,7 @@
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
-const config = getMergedConfig();
-
 export const getNextSeoTitle = (pageName: string): string => {
+  const config = getMergedConfig();
   const baseURL = new URL(process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "http://localhost:3000");
 
   const baseTitle = `${pageName} | ${config.pagesMetadata.titlePostfix}`;

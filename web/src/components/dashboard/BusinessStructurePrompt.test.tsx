@@ -3,7 +3,6 @@ import { generateTask } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -11,8 +10,6 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
 describe("<BusinessStructurePrompt />", () => {
-  const Config = getMergedConfig();
-
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -55,7 +52,7 @@ describe("<BusinessStructurePrompt />", () => {
 
   it("routes user to business structure task page on button click", () => {
     render(<BusinessStructurePrompt />);
-    fireEvent.click(screen.getByText(Config.businessStructurePrompt.buttonText));
+    fireEvent.click(screen.getByTestId("business-structure-prompt-button"));
     expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
   });
 });

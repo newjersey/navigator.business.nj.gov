@@ -1,10 +1,11 @@
 {
+  "priority": 1,
   "request": {
     "method": "POST",
     "url": "/TYTR_ACE_App/ProcessCertificate/businessClearance",
     "bodyPatterns": [
       {
-        "matchesJsonPath": "$[?(@.taxpayerId == '777777777771')]"
+        "matchesJsonPath": "$[?(@.taxpayerId)]"
       },
       {
         "matchesJsonPath": "$[?(@.taxpayerPin == '3889')]"

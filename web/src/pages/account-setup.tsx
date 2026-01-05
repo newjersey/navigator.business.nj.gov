@@ -25,6 +25,21 @@ import { OnboardingErrors } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
+// We should try not to do this; if you do need to disable typescript please include a comment justifying why.
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+const parseAndSendAnalyticsEvent = (source: string): void => {
+  const possibleAnalyticsEvents = Object.keys(analytics.event);
+
+  if (
+    possibleAnalyticsEvents.includes(source) && // @ts-ignore
+    Object.keys(analytics.event[source]).includes("click") && // @ts-ignore
+    Object.keys(analytics.event[source].click).includes("go_to_NavigatorAccount_setup")
+  ) {
+    // @ts-ignore
+    analytics.event[source].click.go_to_NavigatorAccount_setup();
+  }
+};
+
 const AccountSetupPage = (): ReactElement => {
   usePageWithNeedsAccountSnackbar();
   const { Config } = useConfig();
@@ -95,21 +110,6 @@ const AccountSetupPage = (): ReactElement => {
       queryAnalyticsOccurred.current = true;
     }
   }, [router]);
-
-  // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-  /* eslint-disable @typescript-eslint/ban-ts-comment */
-  const parseAndSendAnalyticsEvent = (source: string): void => {
-    const possibleAnalyticsEvents = Object.keys(analytics.event);
-
-    if (
-      possibleAnalyticsEvents.includes(source) && // @ts-ignore
-      Object.keys(analytics.event[source]).includes("click") && // @ts-ignore
-      Object.keys(analytics.event[source].click).includes("go_to_NavigatorAccount_setup")
-    ) {
-      // @ts-ignore
-      analytics.event[source].click.go_to_NavigatorAccount_setup();
-    }
-  };
 
   const getContent = (): typeof Config.accountSetup.default => {
     if (state.activeUser?.encounteredMyNjLinkingError) return Config.accountSetup.existingAccount;

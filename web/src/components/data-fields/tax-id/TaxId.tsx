@@ -1,6 +1,5 @@
 import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { SingleTaxId } from "@/components/data-fields/tax-id/SingleTaxId";
-import { SplitTaxId } from "@/components/data-fields/tax-id/SplitTaxId";
 import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
@@ -8,7 +7,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useRef, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 export interface Props
   extends Omit<
@@ -21,21 +20,9 @@ export interface Props
 }
 
 export const TaxId = (props: Props): ReactElement => {
-  const fieldName = "taxId";
-
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
-
-  const getFieldType = (): "FULL" | "SPLIT" => {
-    const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
-    if (initialValue === 0 || initialValue === 12) {
-      return "FULL";
-    }
-    return "SPLIT";
-  };
-
-  const initialType = useRef<"FULL" | "SPLIT">(getFieldType());
 
   const taxIdIsEncrypted = isEncrypted(state.profileData.taxId, state.profileData.encryptedTaxId);
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<ShowHideStatus>(
@@ -83,34 +70,39 @@ export const TaxId = (props: Props): ReactElement => {
   };
 
   const additionalValidationIsValid = (value: string): boolean => {
-    if (
-      !(value.length === 0 || value.length === 12) &&
-      (props.dbBusinessTaxId !== value || props.required)
-    ) {
-      return false;
+    // Clean both values for comparison (remove all non-digits)
+    const cleanValue = value.replaceAll(/\D/g, "");
+    const cleanDbValue = (props.dbBusinessTaxId || "").replaceAll(/\D/g, "");
+
+    // Empty value is valid only if not required
+    if (cleanValue.length === 0) {
+      return !props.required;
     }
 
-    return true;
+    // 12 digits is always valid
+    if (cleanValue.length === 12) {
+      return true;
+    }
+
+    // 9 digits is valid if:
+    // 1. No existing DB value (new entry), OR
+    // 2. Matches the existing DB value (unchanged)
+    if (cleanValue.length === 9) {
+      return cleanDbValue.length === 0 || cleanDbValue === cleanValue;
+    }
+
+    // Invalid: 1-8, 10-11, 13+ digits
+    // But allow if unchanged from DB value (for partially masked values)
+    return cleanDbValue === cleanValue;
   };
 
-  if (initialType.current === "FULL") {
-    return (
-      <SingleTaxId
-        getShowHideToggleButton={getShowHideToggleButton}
-        taxIdDisplayStatus={taxIdDisplayStatus}
-        additionalValidationIsValid={additionalValidationIsValid}
-        validationText={Config.profileDefaults.fields.taxId.default.errorTextRequired}
-        {...props}
-      />
-    );
-  } else {
-    return (
-      <SplitTaxId
-        getShowHideToggleButton={getShowHideToggleButton}
-        taxIdDisplayStatus={taxIdDisplayStatus}
-        additionalValidationIsValid={additionalValidationIsValid}
-        {...props}
-      />
-    );
-  }
+  return (
+    <SingleTaxId
+      getShowHideToggleButton={getShowHideToggleButton}
+      taxIdDisplayStatus={taxIdDisplayStatus}
+      additionalValidationIsValid={additionalValidationIsValid}
+      validationText={Config.profileDefaults.fields.taxId.default.errorTextRequired}
+      {...props}
+    />
+  );
 };

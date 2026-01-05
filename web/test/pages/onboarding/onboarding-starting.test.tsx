@@ -1,6 +1,7 @@
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import * as mockRouter from "@/test/mock/mockRouter";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
@@ -25,7 +26,7 @@ import {
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { act, screen, waitFor, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -51,10 +52,18 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
 describe("onboarding - starting a business", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockConfig();
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
-    jest.useFakeTimers();
+    // React 19: Use real timers to avoid conflicts with async waitFor in findBy* queries
+    jest.useRealTimers();
+  });
+
+  afterEach(() => {
+    // Clean up timers to prevent state leakage between tests
+    jest.clearAllTimers();
+    jest.useRealTimers();
   });
 
   describe("page 2", () => {
@@ -62,17 +71,19 @@ describe("onboarding - starting a business", () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
-      page.clickNext();
+      await page.clickNext();
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
+      });
     });
 
     it("allows user to move past Step 2 if you have selected an industry", async () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
-      page.selectByText("Industry", "All Other Businesses");
-      page.clickNext();
+      await page.selectByText("Industry", "All Other Businesses");
+      await page.clickNext();
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalledWith({
           pathname: ROUTES.dashboard,
@@ -91,7 +102,7 @@ describe("onboarding - starting a business", () => {
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
 
-        page.clickNext();
+        await page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
         expect(
@@ -110,8 +121,12 @@ describe("onboarding - starting a business", () => {
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
 
-        page.chooseEssentialQuestionRadio(industryId, 0);
-        page.clickNext();
+        await page.chooseEssentialQuestionRadio(industryId, 0);
+        // React 19: Wait for form state to update after essential question selection before proceeding
+        await waitFor(() => {
+          expect(screen.getByTestId("next")).toBeEnabled();
+        });
+        await page.clickNext();
         await waitFor(() => {
           expect(mockPush).toHaveBeenCalledWith({
             pathname: ROUTES.dashboard,
@@ -131,12 +146,12 @@ describe("onboarding - starting a business", () => {
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
 
-        page.clickNext();
+        await page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
         expect(
           screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
         ).toBeInTheDocument();
-        page.chooseEssentialQuestionRadio(industryId, 0);
+        await page.chooseEssentialQuestionRadio(industryId, 0);
         expect(
           screen.queryByText(Config.siteWideErrorMessages.errorRadioButton),
         ).not.toBeInTheDocument();
@@ -153,7 +168,7 @@ describe("onboarding - starting a business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
 
-      page.clickNext();
+      await page.clickNext();
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
       expect(
@@ -169,8 +184,12 @@ describe("onboarding - starting a business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
 
-      page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
-      page.clickNext();
+      await page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
+      // React 19: Wait for form state to update after essential question selection before proceeding
+      await waitFor(() => {
+        expect(screen.getByTestId("next")).toBeEnabled();
+      });
+      await page.clickNext();
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalledWith({
           pathname: ROUTES.dashboard,
@@ -187,12 +206,12 @@ describe("onboarding - starting a business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
 
-      page.clickNext();
+      await page.clickNext();
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
       expect(
         screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
       ).toBeInTheDocument();
-      page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
+      await page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
       expect(
         screen.queryByText(Config.siteWideErrorMessages.errorRadioButton),
       ).not.toBeInTheDocument();
@@ -202,7 +221,7 @@ describe("onboarding - starting a business", () => {
   it("changes url pathname every time a user goes to a different page", async () => {
     const { page } = renderPage({});
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
 
     await page.visitStep(2);
     expect(mockRouter.mockPush).toHaveBeenCalledWith(
@@ -216,7 +235,7 @@ describe("onboarding - starting a business", () => {
   it("shows correct next-button text on each page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(
@@ -259,12 +278,12 @@ describe("onboarding - starting a business", () => {
     const businessId = initialUserData.currentBusinessId;
     const { page } = renderPage({ userData: initialUserData });
 
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
 
-    page.selectByValue("Industry", "e-commerce");
-    page.clickNext();
+    await page.selectByValue("Industry", "e-commerce");
+    await page.clickNext();
 
     const expectedUserData: UserData = {
       ...initialUserData,
@@ -301,17 +320,25 @@ describe("onboarding - starting a business", () => {
 
   it("removes required fields error when user goes back", async () => {
     const { page } = renderPage({});
-    page.chooseRadio("business-persona-foreign");
+    await page.chooseRadio("business-persona-foreign");
     await page.visitStep(2);
-    act(() => {
-      return page.clickNext();
-    });
+    await page.clickNext();
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
-    expect(screen.getByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).toBeInTheDocument();
-    page.clickBack();
+    // React 19: Wait for validation to complete and error banner to appear
     expect(
-      screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE"),
-    ).not.toBeInTheDocument();
+      await screen.findByTestId(
+        "banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE",
+        {},
+        { timeout: 5000 },
+      ),
+    ).toBeInTheDocument();
+    await page.clickBack();
+    // React 19: Wait for error banner to be removed after navigation
+    await waitFor(() => {
+      expect(
+        screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE"),
+      ).not.toBeInTheDocument();
+    });
   });
 
   describe("domestic employer", () => {

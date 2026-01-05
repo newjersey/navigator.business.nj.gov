@@ -36,7 +36,7 @@ import {
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { FormationDbaDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 
 interface Props {
   task: Task | undefined;
@@ -58,7 +58,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
   const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
-  const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
+  const [getCompletedFilingApiCallOccurred, setGetCompletedFilingApiCallOccurred] =
+    useState<boolean>(false);
   const [businessNameAvailability, setBusinessNameAvailability] = useState<
     NameAvailability | undefined
   >(undefined);
@@ -144,14 +145,17 @@ export const BusinessFormation = (props: Props): ReactElement => {
       return;
     }
     if (checkQueryValue(router, QUERIES.completeFiling, "false")) {
-      setStepIndex(LookupStepIndexByName("Review"));
+      const timeoutId = setTimeout(() => {
+        setStepIndex(LookupStepIndexByName("Review"));
+      }, 0);
       router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
+      return (): void => clearTimeout(timeoutId);
     }
   }, [router, props.task?.urlSlug]);
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
-      if (!business || getCompletedFilingApiCallOccurred.current) {
+      if (!business || getCompletedFilingApiCallOccurred) {
         return false;
       }
       const completeFilingQueryParamExists =
@@ -167,7 +171,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       }
       if (shouldFetchCompletedFiling()) {
         setIsLoadingGetFiling(true);
-        getCompletedFilingApiCallOccurred.current = true;
+        setGetCompletedFilingApiCallOccurred(true);
         await api
           .getCompletedFiling()
           .then((newUserData) => {
@@ -188,7 +192,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           });
       }
     })();
-  }, [updateQueue, router, props.task?.urlSlug, business]);
+  }, [updateQueue, router, props.task?.urlSlug, business, getCompletedFilingApiCallOccurred]);
 
   if (!props.task) return <></>;
 
@@ -229,7 +233,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const errorFetchingFilings =
     business?.formationData.completedFilingPayment &&
     !isLoadingGetFiling &&
-    getCompletedFilingApiCallOccurred.current &&
+    getCompletedFilingApiCallOccurred &&
     !business.formationData.getFilingResponse?.success;
 
   if (errorFetchingFilings) {

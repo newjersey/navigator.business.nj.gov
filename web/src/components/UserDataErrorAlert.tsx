@@ -4,15 +4,18 @@ import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
-const Config = getMergedConfig();
-const UserDataErrorLookup: Record<UserDataError, string> = {
-  NO_DATA: Config.siteWideErrorMessages.errorTextNoData,
-  CACHED_ONLY: Config.siteWideErrorMessages.errorTextCachedOnly,
-  UPDATE_FAILED: Config.siteWideErrorMessages.errorTextUpdateFailed,
+const getUserDataErrorLookup = (): Record<UserDataError, string> => {
+  const Config = getMergedConfig();
+  return {
+    NO_DATA: Config.siteWideErrorMessages.errorTextNoData,
+    CACHED_ONLY: Config.siteWideErrorMessages.errorTextCachedOnly,
+    UPDATE_FAILED: Config.siteWideErrorMessages.errorTextUpdateFailed,
+  };
 };
 
 export const UserDataErrorAlert = (): ReactElement => {
   const { error } = useUserData();
+  const UserDataErrorLookup = getUserDataErrorLookup();
 
   return error ? (
     <Alert dataTestid={`error-alert-${error}`} variant="error">

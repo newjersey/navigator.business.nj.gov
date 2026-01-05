@@ -59,11 +59,12 @@ export const DateOfFormation = (props: Props): ReactElement => {
   RegisterForOnSubmit(isValid);
   const onValidation = (): void => setIsValid(isValid());
 
-  const handleChange = (date: DateObject | null): void => {
-    setDateValue(date);
+  const handleChange = (date: unknown): void => {
+    const dateObj = date as DateObject | null;
+    setDateValue(dateObj);
     setProfileData({
       ...state.profileData,
-      [fieldName]: date?.isValid() ? date?.date(1).format(defaultDateFormat) : undefined,
+      [fieldName]: dateObj?.isValid() ? dateObj?.date(1).format(defaultDateFormat) : undefined,
     });
   };
 
@@ -73,10 +74,9 @@ export const DateOfFormation = (props: Props): ReactElement => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Picker
+        enableAccessibleFieldDOMStructure={false}
         views={["year", "month"]}
-        inputFormat={"MM/YYYY"}
-        disableMaskedInput={false}
-        mask={"__/____"}
+        format={"MM/YYYY"}
         disableFuture={!props.futureAllowed}
         openTo="year"
         disabled={props.disabled}
@@ -84,28 +84,40 @@ export const DateOfFormation = (props: Props): ReactElement => {
         value={dateValue}
         onClose={onValidation}
         onChange={handleChange}
-        onError={(hasError: string | null): void => {
+        onError={(hasError): void => {
           setDateError(!!hasError);
         }}
-        renderInput={(params: TextFieldProps): ReactElement => {
-          return (
-            <GenericTextField
-              inputWidth={props.inputWidth || "reduced"}
-              fieldName={fieldName}
-              onValidation={onValidation}
-              validationText={errorText}
-              error={isFormFieldInvalid}
-              inputProps={params.InputProps}
-              fieldOptions={{
-                ...params,
-                inputProps: {
-                  ...params.inputProps,
-                },
-                error: isFormFieldInvalid,
-                sx: { svg: { fill: "#4b7600" } },
-              }}
-            />
-          );
+        slotProps={{
+          textField: {
+            inputProps: {
+              placeholder: "__/____",
+            },
+            error: isFormFieldInvalid,
+            sx: { svg: { fill: "#4b7600" } },
+          },
+        }}
+        slots={{
+          textField: (params: TextFieldProps): ReactElement => {
+            return (
+              <GenericTextField
+                inputWidth={props.inputWidth || "reduced"}
+                fieldName={fieldName}
+                onValidation={onValidation}
+                validationText={errorText}
+                error={isFormFieldInvalid}
+                inputProps={params.InputProps}
+                fieldOptions={{
+                  ...params,
+                  inputProps: {
+                    ...params.inputProps,
+                    placeholder: "__/____",
+                  },
+                  error: isFormFieldInvalid,
+                  sx: { svg: { fill: "#4b7600" } },
+                }}
+              />
+            );
+          },
         }}
       />
     </LocalizationProvider>

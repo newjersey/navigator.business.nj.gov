@@ -14,7 +14,8 @@
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json --no-progress"
   },
   "dependencies": {
-    "gray-matter": "4.0.3"
+    "gray-matter": "4.0.3",
+    "tsx": "4.21.0"
   },
   "devDependencies": {
     "@businessnjgovnavigator/shared": "*",
@@ -25,7 +26,6 @@
     "prettier": "3.6.2",
     "rimraf": "6.1.2",
     "tsconfig-paths": "4.2.0",
-    "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vitest": "2.1.9"
   }

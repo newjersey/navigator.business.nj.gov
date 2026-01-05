@@ -15,7 +15,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { UpdateQueue } from "@/lib/UpdateQueue";
-import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
+import { authReducer } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
@@ -29,7 +29,7 @@ import {
   OperatingPhaseId,
   RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
@@ -50,7 +50,7 @@ ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
-  const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer, initialState);
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
   const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(
@@ -163,30 +163,36 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const isSeoPage = router && router.pathname.includes("/starter-kits");
 
-  const heroTitle = insertIndustryContent(
-    config.starterKits.hero.title,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const heroTitle = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.hero?.title ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const description = insertIndustryContent(
-    config.starterKits.seo.description,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const description = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.seo?.description ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const imageAlt = insertIndustryContent(
-    config.starterKits.seo.imageAltText,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const imageAlt = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.seo?.imageAltText ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const DEFAULT_BASE_URL = "https://navigator.business.nj.gov/dashboard";
+  const DEFAULT_BASE_URL = "https://account.business.nj.gov/dashboard";
   const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL ?? DEFAULT_BASE_URL;
   const imageUrl = new URL("/img/team-success.jpg", baseUrl).href;
 
   return (
-    <>
+    <ConfigContext.Provider value={{ config, setOverrides: () => {} }}>
       <Head>
         <meta name="viewport" content="width=360, initial-scale=1" />
         {isSeoPage && (
@@ -289,7 +295,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           </ThemeProvider>
         </StyledEngineProvider>
       </IntercomContext.Provider>
-    </>
+    </ConfigContext.Provider>
   );
 };
 

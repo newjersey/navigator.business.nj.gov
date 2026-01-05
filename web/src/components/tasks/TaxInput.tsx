@@ -52,7 +52,10 @@ export const TaxInput = (props: Props): ReactElement => {
 
   useEffect(() => {
     if (!business) return;
-    setProfileData(business.profileData);
+    const timeoutId = setTimeout(() => {
+      setProfileData(business.profileData);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [business]);
 
   useMountEffectWhenDefined(() => {

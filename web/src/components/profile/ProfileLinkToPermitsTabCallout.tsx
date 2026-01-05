@@ -4,7 +4,7 @@ import { ReactElement, RefObject } from "react";
 import { LargeCallout } from "../njwds-extended/callout/LargeCallout";
 
 interface Props {
-  permitsRef: RefObject<HTMLDivElement>;
+  permitsRef: RefObject<HTMLDivElement | null>;
   setProfileTab: (profileTab: "permits") => void;
 }
 

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import rehypeReact from "rehype-react";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
@@ -21,8 +22,9 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
     .use(customRemarkPlugin)
     .use(remarkRehype)
     .use(rehypeReact, {
-      createElement: React.createElement,
-      Fragment: React.Fragment,
+      jsx,
+      jsxs,
+      Fragment,
       components: props.components,
     })
     .processSync(props.children).result;

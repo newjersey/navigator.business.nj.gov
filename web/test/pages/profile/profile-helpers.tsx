@@ -25,6 +25,7 @@ import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 
@@ -97,25 +98,32 @@ export const fillText = (label: string, value: string, selector?: string): void 
   fireEvent.blur(element);
 };
 
-export const selectByValue = (label: string, value: string): void => {
-  expect(screen.getByLabelText(label)).toBeInTheDocument();
-  fireEvent.mouseDown(screen.getByLabelText(label));
-  const listbox = within(screen.getByRole("listbox"));
+export const selectByValue = async (label: string, value: string): Promise<void> => {
+  const field = await screen.findByLabelText(label);
+  fireEvent.mouseDown(field);
+  // React 19: Wait for listbox to appear after mouseDown
+  const listbox = within(await screen.findByRole("listbox", {}, { timeout: 3000 }));
   fireEvent.click(listbox.getByTestId(value));
 };
 
-export const selectByText = (label: string, value: string): void => {
-  fireEvent.mouseDown(screen.getByLabelText(label));
-  const listbox = within(screen.getByRole("listbox"));
-  fireEvent.click(listbox.getByText(value));
+export const selectByText = async (label: string, value: string): Promise<void> => {
+  const field = await screen.findByLabelText(label);
+  fireEvent.mouseDown(field);
+  // React 19: Wait for listbox to appear after mouseDown
+  const listbox = within(await screen.findByRole("listbox", {}, { timeout: 3000 }));
+  // React 19: Wait for option to render in listbox
+  const option = await listbox.findByText(value, {}, { timeout: 3000 });
+  fireEvent.click(option);
 };
 
-export const clickBack = (): void => {
-  fireEvent.click(screen.getAllByTestId("back")[0]);
+export const clickBack = async (): Promise<void> => {
+  const buttons = await screen.findAllByTestId("back");
+  await userEvent.click(buttons[0]);
 };
 
-export const clickSave = (): void => {
-  fireEvent.click(screen.getAllByTestId("save")[0]);
+export const clickSave = async (): Promise<void> => {
+  const buttons = await screen.findAllByTestId("save");
+  await userEvent.click(buttons[0]);
 };
 
 export const chooseRadio = (value: string): void => {
@@ -160,10 +168,10 @@ export const getBusinessProfileInputFieldName = (business: Business): string => 
     : "Business name";
 };
 
-export const removeLocationAndSave = (): void => {
+export const removeLocationAndSave = async (): Promise<void> => {
   fillText("Location", "");
   fireEvent.blur(screen.getByLabelText("Location"));
-  clickSave();
+  await clickSave();
 };
 
 export const expectLocationSavedAsUndefined = async (): Promise<void> => {

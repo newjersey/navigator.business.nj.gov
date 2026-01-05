@@ -32,7 +32,7 @@ interface Props {
   setStepIndex: (step: number) => void;
   setSubmissionError: (error: SubmissionError) => void;
   CMS_ONLY_show_error?: boolean;
-  errorAlertRef: React.RefObject<HTMLDivElement>;
+  errorAlertRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export const CigaretteLicenseReview = (props: Props): ReactElement => {

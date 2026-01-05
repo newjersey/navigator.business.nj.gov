@@ -2,7 +2,7 @@
 
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
+import { getProfileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
 import { merge } from "lodash";
 
 type FieldContent = {
@@ -20,7 +20,7 @@ interface ProfileFieldContent extends FieldContent {
 
 export const getProfileConfig = (props: {
   config: ConfigType;
-  fieldName: keyof typeof profileFieldsFromConfig;
+  fieldName: keyof ReturnType<typeof getProfileFieldsFromConfig>;
   onboarding?: boolean;
   persona?: BusinessPersona;
 }): any => {

@@ -1,5 +1,5 @@
 import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
-import { forwardRef, ReactElement, Ref } from "react";
+import { ReactElement } from "react";
 
 export type PrimaryButtonColors =
   | "primary"
@@ -20,6 +20,7 @@ type OmitGenericButtonProps = Omit<
 
 interface Props extends OmitGenericButtonProps {
   isColor: PrimaryButtonColors;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
 const colors = {
@@ -35,9 +36,10 @@ const colors = {
   "secondary-vivid-dark": "usa-button bg-secondary-vivid-dark",
 };
 
-export const PrimaryButton = forwardRef(function PrimaryButton(
-  props: Props,
-  ref: Ref<HTMLButtonElement>,
-): ReactElement {
-  return <GenericButton {...props} className={`${colors[props.isColor]}`} ref={ref} />;
-});
+export function PrimaryButton(props: Props): ReactElement {
+  return (
+    <GenericButton {...props} className={`${colors[props.isColor]}`}>
+      {props.children}
+    </GenericButton>
+  );
+}

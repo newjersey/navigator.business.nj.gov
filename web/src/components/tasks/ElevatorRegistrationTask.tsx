@@ -21,7 +21,7 @@ import {
   ElevatorSafetyRegistrationSummary,
 } from "@businessnjgovnavigator/shared/elevatorSafety";
 import { ElevatorRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 

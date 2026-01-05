@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import React, { forwardRef, ReactElement, Ref, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 export interface GenericButtonProps {
   children?: React.ReactNode;
@@ -25,12 +25,10 @@ export interface GenericButtonProps {
   isUnBolded?: boolean;
   isSmallerText?: boolean;
   isLargeButton?: boolean;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
-export const GenericButton = forwardRef(function GenericButton(
-  props: GenericButtonProps,
-  ref?: Ref<HTMLButtonElement> | undefined,
-): ReactElement {
+export function GenericButton(props: GenericButtonProps): ReactElement {
   const disabledClass = "usa-button--disabled";
   const showDisabledClass = props.isLoading ? disabledClass : "";
   const noRightMargin = props.isRightMarginRemoved ? "margin-right-0" : "margin-right-2";
@@ -44,7 +42,7 @@ export const GenericButton = forwardRef(function GenericButton(
   const isSmallerText = props.isSmallerText ? "font-body-2xs" : "";
   const isLargeButton = props.isLargeButton ? "usa-button--big" : "";
 
-  const widthRef = useRef<HTMLInputElement | null>(null);
+  const widthRef = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState<number>();
   const [height, setHeight] = useState<number>();
   useEffect(() => {
@@ -75,13 +73,14 @@ export const GenericButton = forwardRef(function GenericButton(
     .join(" ");
 
   const isLoading = Boolean(props.isLoading);
+  /* eslint-disable react-hooks/refs */
   return (
     <button
       disabled={isLoading}
       aria-disabled={isLoading}
       className={className}
       onClick={isLoading ? undefined : props.onClick}
-      ref={ref}
+      ref={props.ref}
       {...(props.isSubmitButton ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestId ? { "data-testid": props.dataTestId } : {})}
       {...(props.id ? { id: props.id } : {})}
@@ -105,4 +104,5 @@ export const GenericButton = forwardRef(function GenericButton(
       )}
     </button>
   );
-});
+  /* eslint-enable react-hooks/refs */
+}

@@ -7,6 +7,8 @@ import {
   randomNegativeFilteredIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
+import { withConfig } from "@/test/helpers/helpers-renderers";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import {
@@ -31,14 +33,17 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 describe("<Industry />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockConfig();
     useMockBusiness({});
   });
 
   const renderComponent = (profileData?: ProfileData): void => {
     render(
-      <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
-        <Industry />
-      </WithStatefulProfileData>,
+      withConfig(
+        <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
+          <Industry />
+        </WithStatefulProfileData>,
+      ),
     );
   };
 

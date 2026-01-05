@@ -11,7 +11,7 @@ import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigato
 import { Autocomplete, FormHelperText, TextField } from "@mui/material";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
-import { ChangeEvent, ReactElement, useContext, useState } from "react";
+import { ChangeEvent, ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;
@@ -95,7 +95,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
             setOpen(false);
           }}
           onChange={handleChange}
-          renderOption={(_props, option, { selected }): JSX.Element => {
+          renderOption={(_props, option, { selected }): ReactNode => {
             const { key, ...otherProps } = _props;
             return (
               <li key={key} {...otherProps}>
@@ -107,7 +107,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
               </li>
             );
           }}
-          renderInput={(params): JSX.Element => {
+          renderInput={(params): ReactNode => {
             return (
               <TextField
                 {...params}
