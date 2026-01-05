@@ -530,7 +530,16 @@
       "certificationDocFileTitle": "Certified Copy of Formation",
       "profileTabInfoTitle": "Business Information",
       "securityMattersText": "- You can update your contact information and notification preferences at any time.\n- We will **never** ask for your password, banking details, or Social Security number in an email or text.\n- All official messages will always come from **address@business.nj.gov** or appear in your account dashboard.\n- If you ever get an email that looks suspicious, report it at [cyber.nj.gov/report](https://cyber.nj.gov/report).",
-      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete."
+      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete.",
+      "profileTabSlugs": {
+        "info": "business-information",
+        "contact": "contact-notifications",
+        "permits": "permits-licenses",
+        "numbers": "reference-numbers",
+        "documents": "reference-documents",
+        "notes": "notes",
+        "personalize": "personalize"
+      }
     }
   }
 }

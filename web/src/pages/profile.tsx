@@ -64,6 +64,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 
+import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -97,8 +98,16 @@ import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { EmployerRates } from "@/components/employer-rates/EmployerRates";
+import {
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 interface Props {
   municipalities: Municipality[];
@@ -133,19 +142,51 @@ const ProfilePage = (props: Props): ReactElement => {
   const [formationAddressData, setAddressData] =
     useState<FormationAddress>(emptyFormationAddressData);
   const profileAlertRef = useRef<HTMLDivElement>(null);
+  const isUpdatingUrlFromTabRef = useRef<boolean>(false);
+  const lastUrlTabValueRef = useRef<string | null>(null);
+  const currentTabRef = useRef<ProfileTabs | null>(null);
 
   const FEATURE_EMPLOYER_RATES_ENABLED = process.env.FEATURE_EMPLOYER_RATES === "true";
+
+  const profileTabSlugs = useMemo(
+    () =>
+      (Config.profileDefaults.default as { profileTabSlugs?: Record<ProfileTabs, string> })
+        .profileTabSlugs!,
+    [Config],
+  );
+
+  const getProfileTabFromQueryValue = useCallback(
+    (tabValue: string | string[] | undefined): ProfileTabs | undefined => {
+      if (!tabValue) return undefined;
+      const tabValueAsString = Array.isArray(tabValue) ? tabValue[0] : tabValue;
+
+      const tabFromSlug = Object.entries(profileTabSlugs).find(
+        ([, slug]) => slug === tabValueAsString,
+      )?.[0] as ProfileTabs | undefined;
+
+      return (
+        tabFromSlug ??
+        (profileTabs.includes(tabValueAsString as ProfileTabs)
+          ? (tabValueAsString as ProfileTabs)
+          : undefined)
+      );
+    },
+    [profileTabSlugs],
+  );
+
+  const getQueryValueFromProfileTab = useCallback(
+    (tab: ProfileTabs): string => profileTabSlugs[tab],
+    [profileTabSlugs],
+  );
 
   const getInitTab = (): ProfileTabs => {
     if (props.CMS_ONLY_tab) return props.CMS_ONLY_tab;
 
-    const tabValue = router?.query[QUERIES.tab] as string;
+    const tabValueFromRouter = router?.query?.[QUERIES.tab];
 
-    const initTab = profileTabs.includes(tabValue as ProfileTabs)
-      ? (tabValue as ProfileTabs)
-      : profileTabs[0];
+    const initTab = getProfileTabFromQueryValue(tabValueFromRouter ?? undefined);
 
-    return initTab;
+    return initTab ?? profileTabs[0];
   };
 
   const {
@@ -156,6 +197,10 @@ const ProfilePage = (props: Props): ReactElement => {
     state: formContextState,
     getInvalidFieldIds,
   } = useFormContextHelper(createDataFormErrorMap(), getInitTab());
+
+  if (currentTabRef.current === null) {
+    currentTabRef.current = profileTab;
+  }
 
   const permitsRef = useRef<HTMLDivElement>(null);
 
@@ -243,6 +288,52 @@ const ProfilePage = (props: Props): ReactElement => {
       scrollToTopOfElement(profileAlertRef.current, { focusElement: true });
     }
   }, [hasErrors]);
+
+  useEffect(() => {
+    if (props.CMS_ONLY_tab || !router?.isReady || isUpdatingUrlFromTabRef.current) return;
+    if (typeof window === "undefined") return;
+
+    const url = new URL(window.location.href);
+    const urlTabValue = url.searchParams.get(QUERIES.tab);
+
+    if (urlTabValue === lastUrlTabValueRef.current) return;
+
+    const tabFromQuery = getProfileTabFromQueryValue(urlTabValue ?? undefined);
+    if (!tabFromQuery) return;
+
+    if (tabFromQuery !== currentTabRef.current) {
+      setProfileTab(tabFromQuery);
+    }
+  }, [
+    props.CMS_ONLY_tab,
+    router?.isReady,
+    router?.query,
+    setProfileTab,
+    getProfileTabFromQueryValue,
+  ]);
+
+  useEffect(() => {
+    currentTabRef.current = profileTab;
+    if (typeof window === "undefined" || !router?.isReady) return;
+
+    const tabQueryValue = getQueryValueFromProfileTab(profileTab);
+    const url = new URL(window.location.href);
+    const currentUrlTab = url.searchParams.get(QUERIES.tab);
+
+    if (currentUrlTab === tabQueryValue) {
+      lastUrlTabValueRef.current = currentUrlTab;
+      return;
+    }
+
+    isUpdatingUrlFromTabRef.current = true;
+    url.searchParams.set(QUERIES.tab, tabQueryValue);
+    window.history.replaceState({}, "", url.toString());
+    lastUrlTabValueRef.current = tabQueryValue;
+
+    requestAnimationFrame(() => {
+      isUpdatingUrlFromTabRef.current = false;
+    });
+  }, [profileTab, router, getQueryValueFromProfileTab]);
 
   FormFuncWrapper(
     () => {
