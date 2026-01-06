@@ -54,7 +54,7 @@ import {
 } from "@businessnjgovnavigator/shared/types";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 interface MockApiErrorTestData {
@@ -1571,13 +1571,8 @@ describe("<BusinessFormationPaginator />", () => {
           it.each([businessSuffix])(
             "removes %o API error when user selects from dropdown and then blur",
             async (testTitle, data) => {
-              const {
-                formationFormData,
-                formationResponse,
-                formationStepName,
-                dropDownLabel,
-                dropDownValue,
-              } = data;
+              const { formationFormData, formationResponse, formationStepName, dropDownValue } =
+                data;
               filledInBusiness = {
                 ...business,
                 formationData: {
@@ -1593,10 +1588,15 @@ describe("<BusinessFormationPaginator />", () => {
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
               expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
-              page.selectByText(dropDownLabel as string, dropDownValue as string);
-              fireEvent.focusOut(screen.getAllByLabelText(dropDownLabel as string)[0]);
+              const selectButton = screen.getByTestId("business-suffix-main");
+              fireEvent.mouseDown(selectButton);
+              const listbox = within(screen.getByRole("listbox"));
+              fireEvent.click(listbox.getByText(dropDownValue as string));
+              fireEvent.blur(selectButton);
 
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+              await waitFor(() => {
+                expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+              });
               expect(
                 screen.queryByText(Config.formation.errorBanner.errorOnStep),
               ).not.toBeInTheDocument();
