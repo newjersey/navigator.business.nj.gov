@@ -240,23 +240,31 @@ describe("TaxClearanceCertificateClient", () => {
 
   it("fires error log when error response is returned", async () => {
     const error = {
-      response: { status: StatusCodes.BAD_REQUEST, data: "Error Message" },
+      response: { status: StatusCodes.BAD_REQUEST, data: FAILED_TAX_ID_AND_PIN_VALIDATION },
     };
 
     const spyOnGetId = jest.spyOn(DummyLogWriter, "GetId").mockReturnValue("test");
     const spyOnLogError = jest.spyOn(DummyLogWriter, "LogError");
     mockAxios.post.mockRejectedValue(error);
-    await expect(
-      client.postTaxClearanceCertificate(
-        userData,
-        stubEncryptionDecryptionClient,
-        stubDatabaseClient,
-      ),
-    ).rejects.toEqual(StatusCodes.BAD_REQUEST);
+
+    const result = await client.postTaxClearanceCertificate(
+      userData,
+      stubEncryptionDecryptionClient,
+      stubDatabaseClient,
+    );
+
+    expect(result).toEqual({
+      error: {
+        message: FAILED_TAX_ID_AND_PIN_VALIDATION,
+        type: "FAILED_TAX_ID_AND_PIN_VALIDATION",
+      },
+    });
 
     expect(spyOnLogError.mock.calls[0]).toEqual([
-      "Tax Clearance Certificate Client - Id:test - Error",
-      error,
+      "Tax Clearance Certificate Client - Id:test - Error: FAILED_TAX_ID_AND_PIN_VALIDATION,",
+      {
+        response: { status: StatusCodes.BAD_REQUEST, data: FAILED_TAX_ID_AND_PIN_VALIDATION },
+      },
     ]);
 
     spyOnGetId.mockRestore();
@@ -265,25 +273,31 @@ describe("TaxClearanceCertificateClient", () => {
 
   it("removes auth object when logging error", async () => {
     const error = {
-      response: { status: StatusCodes.BAD_REQUEST, data: "Error Message" },
+      response: { status: StatusCodes.BAD_REQUEST, data: INELIGIBLE_TAX_CLEARANCE_FORM },
       config: { auth: { username: "username", password: "password" } },
     };
 
     const spyOnGetId = jest.spyOn(DummyLogWriter, "GetId").mockReturnValue("test");
     const spyOnLogError = jest.spyOn(DummyLogWriter, "LogError");
     mockAxios.post.mockRejectedValue(error);
-    await expect(
-      client.postTaxClearanceCertificate(
-        userData,
-        stubEncryptionDecryptionClient,
-        stubDatabaseClient,
-      ),
-    ).rejects.toEqual(StatusCodes.BAD_REQUEST);
+
+    const result = await client.postTaxClearanceCertificate(
+      userData,
+      stubEncryptionDecryptionClient,
+      stubDatabaseClient,
+    );
+
+    expect(result).toEqual({
+      error: {
+        message: INELIGIBLE_TAX_CLEARANCE_FORM,
+        type: "INELIGIBLE_TAX_CLEARANCE_FORM",
+      },
+    });
 
     expect(spyOnLogError.mock.calls[0]).toEqual([
-      "Tax Clearance Certificate Client - Id:test - Error",
+      "Tax Clearance Certificate Client - Id:test - Error: INELIGIBLE_TAX_CLEARANCE_FORM,",
       {
-        response: { status: StatusCodes.BAD_REQUEST, data: "Error Message" },
+        response: { status: StatusCodes.BAD_REQUEST, data: INELIGIBLE_TAX_CLEARANCE_FORM },
         config: {},
       },
     ]);
