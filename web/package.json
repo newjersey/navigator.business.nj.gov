@@ -24,7 +24,7 @@
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "sitemap": "yarn dlx tsx src/scripts/generateSitemap.ts",
     "snapshot:update": "jest --updateSnapshot",
-    "spellcheck": "cspell '**/*.md' '**/*.yml' --config ../cspell.json",
+    "spellcheck": "cspell '**/*.md' '**/*.yml' --config ../cspell.json --no-progress",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
