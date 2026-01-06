@@ -1,5 +1,6 @@
 import {
   TaxClearanceCertificateResponse,
+  TaxClearanceCertificateResponseErrorType,
   UnlinkTaxIdResponse,
 } from "@businessnjgovnavigator/shared";
 import {
@@ -189,14 +190,20 @@ export const ApiTaxClearanceCertificateClient = (
       })
       .catch((error: AxiosError) => {
         const sanitizedError = sanitizeAxiosError(error);
-        logWriter.LogError(
-          `Tax Clearance Certificate Client - Id:${logId} - Error`,
-          sanitizedError,
-        );
+        const logSpecificTaxClearanceError = (
+          errorType: TaxClearanceCertificateResponseErrorType,
+        ): void => {
+          logWriter.LogError(
+            `Tax Clearance Certificate Client - Id:${logId} - Error: ${errorType},`,
+            sanitizedError,
+          );
+        };
+
         const { response } = error;
         if (response?.status === StatusCodes.BAD_REQUEST) {
           const errorMessage = response.data as string;
           if (errorMessage === INELIGIBLE_TAX_CLEARANCE_FORM) {
+            logSpecificTaxClearanceError("INELIGIBLE_TAX_CLEARANCE_FORM");
             return {
               error: {
                 type: "INELIGIBLE_TAX_CLEARANCE_FORM",
@@ -209,6 +216,7 @@ export const ApiTaxClearanceCertificateClient = (
             errorMessage === TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE ||
             errorMessage === TAX_ID_MISSING_FIELD
           ) {
+            logSpecificTaxClearanceError("MISSING_FIELD");
             return {
               error: {
                 type: "MISSING_FIELD",
@@ -217,6 +225,7 @@ export const ApiTaxClearanceCertificateClient = (
             };
           }
           if (errorMessage === FAILED_TAX_ID_AND_PIN_VALIDATION) {
+            logSpecificTaxClearanceError("FAILED_TAX_ID_AND_PIN_VALIDATION");
             return {
               error: {
                 type: "FAILED_TAX_ID_AND_PIN_VALIDATION",
@@ -225,6 +234,7 @@ export const ApiTaxClearanceCertificateClient = (
             };
           }
           if (errorMessage === BUSINESS_STATUS_VERIFICATION_ERROR) {
+            logSpecificTaxClearanceError("BUSINESS_STATUS_VERIFICATION_ERROR");
             return {
               error: {
                 type: "BUSINESS_STATUS_VERIFICATION_ERROR",
@@ -233,6 +243,7 @@ export const ApiTaxClearanceCertificateClient = (
             };
           }
           if (errorMessage === NATURAL_PROGRAM_ERROR) {
+            logSpecificTaxClearanceError("NATURAL_PROGRAM_ERROR");
             return {
               error: {
                 type: "NATURAL_PROGRAM_ERROR",
