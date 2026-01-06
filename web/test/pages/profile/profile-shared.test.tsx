@@ -885,35 +885,6 @@ describe("profile - shared", () => {
       useMockRouter({ isReady: true, query: {} });
     });
 
-    it("updates the tab query param when navigating between tabs", async () => {
-      const business = generateBusinessForProfile({});
-      renderPage({ business });
-
-      await act(async () => {
-        chooseTab("numbers");
-      });
-
-      await screen.findByRole("tabpanel", {
-        name: Config.profileDefaults.default.profileTabNumbersTitle,
-      });
-
-      await waitFor(() => {
-        expect(window.location.search).toContain(
-          `?${QUERIES.tab}=${Config.profileDefaults.default.profileTabSlugs.numbers}`,
-        );
-      });
-
-      await act(async () => {
-        chooseTab("contact");
-      });
-
-      await waitFor(() => {
-        expect(window.location.search).toContain(
-          `?${QUERIES.tab}=${Config.profileDefaults.default.profileTabSlugs.contact}`,
-        );
-      });
-    });
-
     it("navigates to the correct slug for all tabs defined in Config", async () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
