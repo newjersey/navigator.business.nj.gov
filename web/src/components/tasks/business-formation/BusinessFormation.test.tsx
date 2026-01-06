@@ -39,7 +39,7 @@ import { Content } from "@/components/Content";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateStartingProfileData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
-import { act, fireEvent, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 function mockMaterialUI(): typeof materialUi {
@@ -332,7 +332,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "LLC");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("LLC"));
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
     fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
@@ -455,7 +457,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "LLC");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("LLC"));
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Foreign date of formation");
     page.fillText("Foreign state of formation", "MA");
@@ -560,7 +564,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "LLP");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("LLP"));
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
     fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
@@ -667,7 +673,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "LLP");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("LLP"));
 
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     const oneHundredAndThirtyDaysFromNow = getCurrentDate().add(3, "days");
@@ -781,7 +789,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "LP");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("LP"));
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
     fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
@@ -920,7 +930,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "CORPORATION");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("CORPORATION"));
     page.fillText("Business total stock", "123");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
@@ -1034,7 +1046,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "A NJ NONPROFIT CORPORATION");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("A NJ NONPROFIT CORPORATION"));
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
     page.chooseRadio("isVeteranNonprofit-true");
@@ -1154,7 +1168,9 @@ describe("<BusinessFormation />", () => {
 
     await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
 
-    page.selectByText("Business suffix", "A NJ NONPROFIT CORPORATION");
+    fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText("A NJ NONPROFIT CORPORATION"));
     const threeDaysFromNow = getCurrentDate().add(3, "days");
 
     page.selectDate(threeDaysFromNow, "Foreign date of formation");

@@ -67,9 +67,9 @@ describe("<ThreeYearSelector />", () => {
         years={["2024", "2025", "2026"]}
       />,
     );
-    expect(screen.getByTestId("year-selector-left")).not.toHaveClass("visibility-hidden");
+    expect(screen.getByTestId("year-selector-left")).toBeVisible();
     expect(screen.getByTestId("year-selector-left")).toBeEnabled();
-    expect(screen.getByTestId("year-selector-right")).not.toHaveClass("visibility-hidden");
+    expect(screen.getByTestId("year-selector-right")).toBeVisible();
     expect(screen.getByTestId("year-selector-right")).toBeEnabled();
   });
 
@@ -81,8 +81,7 @@ describe("<ThreeYearSelector />", () => {
         years={["2024", "2025", "2026"]}
       />,
     );
-    expect(screen.getByTestId("year-selector-left")).toHaveClass("visibility-hidden");
-    expect(screen.getByTestId("year-selector-left")).toBeDisabled();
+    expect(screen.queryByTestId("year-selector-left")).not.toBeInTheDocument();
   });
 
   it("hides the right chevron when at the end of the year array", () => {
@@ -93,7 +92,6 @@ describe("<ThreeYearSelector />", () => {
         years={["2024", "2025", "2026"]}
       />,
     );
-    expect(screen.getByTestId("year-selector-right")).toHaveClass("visibility-hidden");
-    expect(screen.getByTestId("year-selector-right")).toBeDisabled();
+    expect(screen.queryByTestId("year-selector-right")).not.toBeInTheDocument();
   });
 });

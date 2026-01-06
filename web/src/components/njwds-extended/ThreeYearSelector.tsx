@@ -24,19 +24,17 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
 
   return (
     <div className={props.className ?? ""}>
-      <IconButton
-        data-testid="year-selector-left"
-        aria-label="previous year"
-        className={`${props.years.indexOf(props.activeYear) === 0 ? "visibility-hidden" : ""}`}
-        disableFocusRipple={props.years.indexOf(props.activeYear) === 0}
-        disabled={props.years.indexOf(props.activeYear) === 0}
-        disableTouchRipple={props.years.indexOf(props.activeYear) === 0}
-        onClick={(): void => {
-          props.onChange(props.years[props.years.indexOf(props.activeYear) - 1]);
-        }}
-      >
-        <Icon className={`usa-icon--size-3 vam text-base`} iconName="navigate_before" />
-      </IconButton>
+      {props.years.indexOf(props.activeYear) !== 0 && (
+        <IconButton
+          data-testid="year-selector-left"
+          aria-label="previous year"
+          onClick={(): void => {
+            props.onChange(props.years[props.years.indexOf(props.activeYear) - 1]);
+          }}
+        >
+          <Icon className={`usa-icon--size-3 vam text-base`} iconName="navigate_before" />
+        </IconButton>
+      )}
       <CalendarButtonDropdown
         dropdownOptions={props.years.map((year) => {
           return {
@@ -64,24 +62,17 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
       >
         <div className="text-base text-bold">{props.activeYear}</div>
       </CalendarButtonDropdown>
-      <IconButton
-        data-testid="year-selector-right"
-        aria-label="next year"
-        className={`${props.years.indexOf(props.activeYear) === 2 ? "visibility-hidden" : ""}`}
-        disableFocusRipple={props.years.indexOf(props.activeYear) === 2}
-        disabled={props.years.indexOf(props.activeYear) === 2}
-        disableTouchRipple={props.years.indexOf(props.activeYear) === 2}
-        onClick={(): void => {
-          props.onChange(props.years[props.years.indexOf(props.activeYear) + 1]);
-        }}
-      >
-        <Icon
-          className={`usa-icon--size-3 vam text-base ${
-            props.years.indexOf(props.activeYear) === 2 ? "visibility-hidden" : ""
-          }`}
-          iconName="navigate_next"
-        />
-      </IconButton>
+      {props.years.indexOf(props.activeYear) !== props.years.length - 1 && (
+        <IconButton
+          data-testid="year-selector-right"
+          aria-label="next year"
+          onClick={(): void => {
+            props.onChange(props.years[props.years.indexOf(props.activeYear) + 1]);
+          }}
+        >
+          <Icon className={`usa-icon--size-3 vam text-base`} iconName="navigate_next" />
+        </IconButton>
+      )}
     </div>
   );
 };
