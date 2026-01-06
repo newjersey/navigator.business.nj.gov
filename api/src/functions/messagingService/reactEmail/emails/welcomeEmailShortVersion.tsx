@@ -20,7 +20,7 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
         <title>Welcome to Business.NJ.gov</title>
       </Head>
       <Container style={{ fontFamily: "sans-serif" }}>
-        <Header />
+        <Header utmString="?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-black-ribbon-header" />
 
         {/* Body section */}
         <Section style={{ padding: "0 24px" }}>
@@ -40,11 +40,11 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
           </Row>
           <Hr />
           <Row>
-            <Markdown>
+            <Markdown markdownCustomStyles={{ link: { color: "black" } }}>
               Congratulations on creating your account with
-              [Business.NJ.gov](https://account.business.nj.gov/dashboard).
+              **[Business.NJ.gov](https://account.business.nj.gov/dashboard?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-inline-message-business.nj.gov)**.
             </Markdown>
-            <Markdown>
+            <Markdown markdownContainerStyles={{ paddingBottom: "18px" }}>
               You've joined **200,000+ business owners** who've used the site to start, operate, and
               grow their businesses.
             </Markdown>
@@ -53,7 +53,7 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
           {/* Call to action section */}
           <Section
             style={{
-              backgroundColor: "#f9fbfb",
+              backgroundColor: "#F9FBFB",
               borderRadius: "20px",
               textAlign: "center",
               padding: "0 0 24px",
@@ -72,7 +72,7 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
                 Log In to Get Started
               </h2>
               <Button
-                href="https://account.business.nj.gov/dashboard"
+                href="https://account.business.nj.gov/dashboard?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-green-cta"
                 style={{
                   background: "#4b7600",
                   color: "#fff",
@@ -84,8 +84,13 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
               </Button>
             </Row>
             <Row>
-              <Text style={{ textDecoration: "underline", color: "#3D4551" }}>
-                https://account.business.nj.gov/dashboard
+              <Text>
+                <Link
+                  href="https://account.business.nj.gov/dashboard"
+                  style={{ textDecoration: "underline", color: "#3D4551" }}
+                >
+                  https://account.business.nj.gov/dashboard
+                </Link>
               </Text>
             </Row>
           </Section>
@@ -105,21 +110,21 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
               {/* Links */}
               <Link
                 style={{ color: "inherit", textDecoration: "underline" }}
-                href="https://business.nj.gov/privacy-policy"
+                href="https://business.nj.gov/privacy-policy?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-footer-privacy-policy"
               >
                 Privacy Policy
               </Link>{" "}
               <span style={{ padding: " 0 8px" }}>|</span>
               <Link
                 style={{ color: "inherit", textDecoration: "underline" }}
-                href="https://business.nj.gov/contact-us"
+                href="https://business.nj.gov/contact-us?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-footer-contact-us"
               >
                 Contact Us
               </Link>{" "}
               <span style={{ padding: " 0 8px" }}>|</span>
               <Link
                 style={{ color: "inherit", textDecoration: "underline" }}
-                href="https://account.business.nj.gov/profile"
+                href="https://account.business.nj.gov/profile?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-footer-manage-notifications"
               >
                 Manage Notifications
               </Link>
