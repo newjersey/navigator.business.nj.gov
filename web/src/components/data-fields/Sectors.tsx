@@ -88,8 +88,9 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
           return sector.name;
         }}
         renderOption={(props, option, { selected }): JSX.Element => {
+          const { key, ...otherProps } = props;
           return (
-            <li {...props}>
+            <li key={key} {...otherProps}>
               {selected ? (
                 <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
                   <MenuOptionSelected>{option.name}</MenuOptionSelected>

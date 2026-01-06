@@ -12,10 +12,28 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
 global.console.warn = (message) => {
+  // Suppress known deprecation warnings from libraries during Next.js v16 migration
+  const suppressedWarnings = ["findDOMNode is deprecated", "ReactDOMTestUtils.act is deprecated"];
+
+  if (suppressedWarnings.some((warning) => message.includes?.(warning))) {
+    return;
+  }
+
   throw message;
 };
 
 global.console.error = (message) => {
+  // Suppress known deprecation warnings from libraries during Next.js v16 migration
+  const suppressedErrors = [
+    "findDOMNode is deprecated",
+    "ReactDOMTestUtils.act is deprecated",
+    'Warning: A props object containing a "key" prop is being spread',
+  ];
+
+  if (suppressedErrors.some((error) => message.includes?.(error))) {
+    return;
+  }
+
   throw message;
 };
 
