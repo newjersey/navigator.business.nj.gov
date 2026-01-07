@@ -19,6 +19,7 @@ const healthCheckEndPoints: Record<string, string> = {
   xrayRegistration: "xray-registration",
   cigaretteEmailClient: "cigarette-email-client",
   cigaretteLicense: "cigarette-license",
+  taxFilingClient: "tax-filing-client",
 };
 
 const healthCheck = async (type: string, url: string, logger: LogWriterType): Promise<Status> => {

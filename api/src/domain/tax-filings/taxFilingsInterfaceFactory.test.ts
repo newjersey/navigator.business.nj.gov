@@ -38,6 +38,7 @@ describe("TaxFilingsInterfaceFactory", () => {
     taxFilingClient = {
       lookup: jest.fn(),
       onboarding: jest.fn(),
+      health: jest.fn(),
     };
     const dateNowStub = jest.fn(() => {
       return dateNow;

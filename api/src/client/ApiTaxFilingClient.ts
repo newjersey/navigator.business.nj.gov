@@ -1,5 +1,6 @@
 import { flattenDeDupAndConvertTaxFilings } from "@domain/tax-filings/taxIdHelper";
 import {
+  HealthCheckMetadata,
   TaxFilingClient,
   TaxFilingLookupResponse,
   TaxFilingOnboardingResponse,
@@ -8,7 +9,7 @@ import {
 } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
-import { StatusCodes } from "http-status-codes";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 type ApiConfig = {
   apiKey: string;
@@ -186,9 +187,51 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
     }
   };
 
+  const health = async (): Promise<HealthCheckMetadata> => {
+    return lookup({ taxId: "777777777771", businessName: "RUBB" })
+      .then((response) => {
+        if (response.state === "API_ERROR") {
+          logger.LogError(
+            `Tax Registration  Health Check - Id:${logId} - Error received: ${JSON.stringify(response.state)}`,
+          );
+          return {
+            success: false,
+            data: {
+              message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+            },
+          };
+        } else {
+          // Note: The API may return a 400 and a validation error message. This still indicates the service is available.
+          logger.LogInfo(
+            `Tax Registration Health Check - Id:${logId} - Response received: ${JSON.stringify(
+              response.state,
+            )}`,
+          );
+          return {
+            success: true,
+            data: {
+              message: ReasonPhrases.OK,
+            },
+          };
+        }
+      })
+      .catch((error) => {
+        logger.LogError(
+          `Tax Registration  Health Check - Id:${logId} - Error received: ${JSON.stringify(error)}`,
+        );
+        return {
+          success: false,
+          data: {
+            message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+          },
+        };
+      });
+  };
+
   return {
     lookup,
     onboarding,
+    health,
   };
 };
 

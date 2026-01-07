@@ -16,7 +16,8 @@ import {
   ApiTaxFilingOnboardingResponse,
 } from "@client/ApiTaxFilingClient";
 import { dateToShortISO } from "@domain/tax-filings/taxIdHelper";
-import { StatusCodes } from "http-status-codes";
+import { randomElementFromArray } from "@test/helpers";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -361,6 +362,39 @@ describe("ApiTaxFilingClient", () => {
         businessName: taxIdAndBusinessNameAndEmail.businessName,
       });
       expect(response).toEqual({ state: "API_ERROR" });
+    });
+  });
+
+  describe("health", () => {
+    it("returns a passing health check if the service is available", async () => {
+      const stubResponse = generateSuccessfulApiTaxFilingLookupResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+      expect(await client.health()).toEqual({ success: true, data: { message: ReasonPhrases.OK } });
+    });
+
+    it("returns a passing health check if the service returns a known validation error", async () => {
+      const state: "PENDING" | "FAILED" | "UNREGISTERED" = randomElementFromArray([
+        "PENDING",
+        "FAILED",
+        "UNREGISTERED",
+      ]);
+
+      const stubResponse = generateErroredApiTaxFilingLookupResponse({}, state);
+      mockAxios.post.mockRejectedValue({
+        response: { data: stubResponse, status: StatusCodes.BAD_REQUEST },
+      });
+
+      expect(await client.health()).toEqual({ success: true, data: { message: ReasonPhrases.OK } });
+    });
+
+    it("returns a failing health check if the service is unavailable", async () => {
+      mockAxios.post.mockRejectedValue({});
+
+      expect(await client.health()).toEqual({
+        success: false,
+        data: { message: ReasonPhrases.INTERNAL_SERVER_ERROR },
+      });
     });
   });
 });
