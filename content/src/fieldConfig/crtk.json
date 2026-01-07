@@ -6,7 +6,7 @@
     "businessStreetAddressLabel": "Business Street Address",
     "cityLabel": "City",
     "stateLabel": "State",
-    "zipLabel": "Zip Code",
+    "zipLabel": "Zip",
     "einLabel": "Employer Identification Number (EIN)",
     "einOptionalText": "(Optional)",
     "submitText": "Search for My Business",
@@ -24,6 +24,7 @@
     "businessNameError": "Enter your business name.",
     "businessStreetAddressError": "Enter your business street address.",
     "businessCityError": "Enter your city.",
-    "businessZipError": "Enter your zip code."
+    "businessZipError": "Enter your zip code.",
+    "lastUpdatedText": "Last Updated: ${lastUpdatedFormattedValue}"
   }
 }
