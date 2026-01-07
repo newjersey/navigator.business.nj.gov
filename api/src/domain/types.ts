@@ -140,6 +140,7 @@ export interface TaxFilingClient {
     email: string;
     businessName: string;
   }) => Promise<TaxFilingOnboardingResponse>;
+  health: () => Promise<HealthCheckMetadata>;
 }
 
 export interface TaxFilingInterface {
