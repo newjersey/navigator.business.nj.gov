@@ -8,10 +8,10 @@ Each `.tsx` file in the `./emails` folder is treated as an email. To preview and
 
 ```bash
 cd api/src/functions/messagingService/reactEmail
-yarn dev
+yarn dev:email
 ```
 
-This starts a preview app at `localhost:3000` where you can view emails, check compatibility across email clients, and check for spam / abuse indicators.
+This starts a preview app at `localhost:3001` where you can view emails, check compatibility across email clients, and check for spam / abuse indicators.
 
 ## Building
 
