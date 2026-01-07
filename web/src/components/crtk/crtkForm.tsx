@@ -367,7 +367,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
                   inputProps={{
                     id: "zip",
                     "data-testid": "zip",
-                    type: "number",
+                    maxLength: 5,
                   }}
                   className={classes.zipCodeField}
                   onBlur={handleBlurForKey("zip")}
