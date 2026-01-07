@@ -42,7 +42,7 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
           <Row>
             <Markdown markdownCustomStyles={{ link: { color: "black" } }}>
               Congratulations on creating your account with
-              **[Business.NJ.gov](https://account.business.nj.gov/dashboard?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-inline-message-business.nj.gov)**.
+              **[Business.NJ.gov](https://business.nj.gov/?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-inline-message-business.nj.gov)**.
             </Markdown>
             <Markdown markdownContainerStyles={{ paddingBottom: "18px" }}>
               You've joined **200,000+ business owners** who've used the site to start, operate, and
@@ -72,7 +72,7 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
                 Log In to Get Started
               </h2>
               <Button
-                href="https://account.business.nj.gov/dashboard?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-green-cta"
+                href="https://account.business.nj.gov/login?utm_source=myaccount-welcome-email&utm_medium=email&utm_campaign=welcome-email&utm_content=welcome-email-B-version1-green-cta"
                 style={{
                   background: "#4b7600",
                   color: "#fff",
@@ -86,10 +86,10 @@ export const WelcomeEmailShortVersion = (): JSX.Element => {
             <Row>
               <Text>
                 <Link
-                  href="https://account.business.nj.gov/dashboard"
+                  href="https://account.business.nj.gov/login"
                   style={{ textDecoration: "underline", color: "#3D4551" }}
                 >
-                  https://account.business.nj.gov/dashboard
+                  https://account.business.nj.gov/login
                 </Link>
               </Text>
             </Row>
