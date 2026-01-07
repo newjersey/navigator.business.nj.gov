@@ -536,9 +536,11 @@ app.use(
       ["webservice/formation", formationHealthCheckClient],
       ["tax-clearance", taxClearanceHealthCheckClient],
       ["xray-registration", xrayRegistrationHealthCheckClient],
+      // TODO: The following need CloudWatch metrics
       ["cigarette-license", cigaretteLicenseHealthCheckClient],
       ["cigarette-email-client", cigaretteLicenseEmailClient.health],
       ["messaging-service", messagingServiceClient.health],
+      ["tax-filing-client", taxFilingClient.health],
     ]),
     logger,
   ),

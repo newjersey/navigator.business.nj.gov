@@ -131,7 +131,7 @@ describe("<SidebarCardFundingNudge />", () => {
 
   const userDataWithPrefilledFields = generateTaxFilingUserData({
     publicFiling: true,
-    taxId: "123456789098",
+    taxId: "777777777771",
     businessName: "MrFakesHotDogBonanza",
     industryId: randomIndustry().id,
   });

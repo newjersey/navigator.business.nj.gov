@@ -37,7 +37,7 @@ describe.skip(
       clickModalSaveButton();
 
       onDashboardPage.registerForTaxes();
-      cy.get('input[name="taxId"]').type("123456789098");
+      cy.get('input[name="taxId"]').type("777777777771");
       cy.get("button").contains("Save").click();
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
       cy.get('[data-testid="cta-funding-nudge"]').first().click();
@@ -58,7 +58,7 @@ describe.skip(
       clickModalSaveButton();
 
       onDashboardPage.registerForTaxes();
-      cy.get('input[name="taxId"]').type("123456789098");
+      cy.get('input[name="taxId"]').type("777777777771");
       cy.get("button").contains("Save").click();
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
       cy.get('[data-testid="cta-funding-nudge"]').first().click();

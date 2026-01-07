@@ -22,6 +22,7 @@ describe("healthCheck", () => {
       xrayRegistration: "PASS",
       cigaretteLicense: "PASS",
       cigaretteEmailClient: "PASS",
+      taxFilingClient: "PASS",
     });
   });
 
@@ -39,6 +40,7 @@ describe("healthCheck", () => {
       xrayRegistration: "FAIL",
       cigaretteLicense: "FAIL",
       cigaretteEmailClient: "FAIL",
+      taxFilingClient: "FAIL",
     });
   });
 
@@ -56,6 +58,7 @@ describe("healthCheck", () => {
       xrayRegistration: "ERROR",
       cigaretteLicense: "ERROR",
       cigaretteEmailClient: "ERROR",
+      taxFilingClient: "ERROR",
     });
   });
 });
