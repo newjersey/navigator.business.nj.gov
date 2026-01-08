@@ -1,8 +1,9 @@
 ---
+licenseName: ""
 id: food-safety-course
 displayname: food-safety-course
 urlSlug: food-safety-course
-name: Complete Food Safety Course
+name: Complete Your Food Safety Course
 webflowName: "Restaurant: Food Safety Course"
 summaryDescriptionMd: >
   If your restaurant is serving anything that could cause a safety concern, such
@@ -15,7 +16,6 @@ industryId:
   - restaurant
 webflowId: 648b6ec5ff1d0d38af2f5a2d
 licenseCertificationClassification: ""
-licenseName: ""
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
