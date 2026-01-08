@@ -12,20 +12,39 @@ const IconTextItem = (props: IconTextProps): ReactElement => {
 
   let content: ReactNode;
 
-  if (props.type === "phone") {
-    content = (
-      <a className="usa-link" href={`tel:${props.text}`}>
-        {props.text}
-      </a>
-    );
-  } else if (props.type === "email") {
-    content = (
-      <a className="usa-link" href={`mailto:${props.text}`}>
-        {props.text}
-      </a>
-    );
-  } else {
-    content = <div className="text-primary-darker">{props.text}</div>;
+  switch (props.type) {
+    case "phone":
+      content = (
+        <>
+          {props.labelText && <span className="margin-right-05">{props.labelText}</span>}
+          <a className="usa-link" href={`tel:${props.text}`}>
+            {props.text}
+          </a>
+        </>
+      );
+      break;
+    case "email":
+      content = (
+        <a className="usa-link" href={`mailto:${props.text}`}>
+          {props.text}
+        </a>
+      );
+      break;
+    case "link": {
+      const match = props.text.match(/\[([^\]]+)]\(([^)]+)\)/);
+      const label = match?.[1] || props.text;
+      const href = match?.[2] || props.text;
+
+      content = (
+        <a className="usa-link" href={href} target="_blank" rel="noreferrer noopener">
+          {label}
+          <Icon className="margin-left-05" iconName="launch" />
+        </a>
+      );
+      break;
+    }
+    default:
+      content = <div className="text-primary-darker">{props.text}</div>;
   }
 
   const ariaLabel =
@@ -51,6 +70,7 @@ export const IconTextList = (props: IconTextListProps): ReactElement | null => {
           text={item.text}
           type={item.type}
           label={item.label}
+          labelText={item.labelText}
         />
       ))}
     </div>
