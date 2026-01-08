@@ -70,7 +70,7 @@ export const PersonalizedSupport = (): ReactElement => {
           .general_guidance_sbap_accordion_opened
       }
     >
-      <div className={"padding-205 margin-y-2 bg-base-extra-light text-body radius-lg"}>
+      <div className={"padding-205 margin-y-2 bg-base-lightest text-body radius-lg"}>
         {error && (
           <Alert
             variant="error"
