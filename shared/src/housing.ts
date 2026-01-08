@@ -1,4 +1,4 @@
-import { Municipality } from "./municipality";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 
 export type HousingPropertyInterestDetails = {
   createdOn: string;

@@ -1,17 +1,21 @@
 import type { Reducer } from "react";
-import { BusinessUser } from "../businessUser";
-import { getMergedConfig } from "../contexts/configContext";
-import { EmergencyTripPermitApplicationInfo } from "../emergencyTripPermit";
+import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts/configContext";
+import { EmergencyTripPermitApplicationInfo } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import {
   FieldsForErrorHandling,
   FormationAddress,
   FormationMember,
   FormationSigner,
-} from "../formationData";
-import { AddOn, TaskModification } from "../industry";
-import { LicenseName, LicenseTaskId } from "../license";
-import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
-import { SectionType, UserData } from "../userData";
+} from "@businessnjgovnavigator/shared/formationData";
+import { AddOn, TaskModification } from "@businessnjgovnavigator/shared/industry";
+import { LicenseName, LicenseTaskId } from "@businessnjgovnavigator/shared/license";
+import {
+  BusinessPersona,
+  IndustrySpecificData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import { SectionType, UserData } from "@businessnjgovnavigator/shared/userData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types

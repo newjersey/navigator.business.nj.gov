@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { convertXrayRenewalCalendarEventMd } from "../markdownReader";
-import { XrayRenewalCalendarEventType } from "../types/types";
+import { convertXrayRenewalCalendarEventMd } from "@businessnjgovnavigator/shared/markdownReader";
+import { XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types/types";
 
 export type XrayRenewalCalendarEventUrlSlugParameter = {
   xrayRenewalCalendarEventUrlSlug: string;

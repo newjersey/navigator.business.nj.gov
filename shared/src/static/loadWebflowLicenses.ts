@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { convertWebflowLicenseMd } from "../markdownReader";
-import { WebflowLicense } from "../types/types";
+import { convertWebflowLicenseMd } from "@businessnjgovnavigator/shared/markdownReader";
+import { WebflowLicense } from "@businessnjgovnavigator/shared/types/types";
 
 const webflowLicenseDirectory = path.join(
   process.cwd(),

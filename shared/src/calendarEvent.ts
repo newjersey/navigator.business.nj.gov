@@ -1,4 +1,4 @@
-import { LicenseName } from "./license";
+import { LicenseName } from "@businessnjgovnavigator/shared/license";
 
 export type CalendarEvent = {
   readonly dueDate: string; // YYYY-MM-DD
