@@ -33,35 +33,36 @@ export default {
       label: "Amount Icon Text",
       default: "",
       widget: "string",
-      hint: "This icon should only exist in the quick reference callout",
     },
     {
       name: "filingTypeIconText",
       label: "Filing Type Icon Text",
       default: "",
       widget: "string",
-      hint: "This icon should only exist in the quick reference callout",
     },
     {
       name: "frequencyIconText",
       label: "Frequency Icon Text",
       default: "",
       widget: "string",
-      hint: "This icon should only exist in the quick reference callout",
     },
     {
       name: "phoneIconText",
       label: "Phone Icon Text",
       default: "",
       widget: "string",
-      hint: "This icon should only exist in the quick reference callout; a phone link will render",
+    },
+    {
+      name: "phoneIconLabel",
+      label: "Phone Icon Label",
+      default: "",
+      widget: "string",
     },
     {
       name: "emailIconText",
       label: "Email Icon Text",
       default: "",
       widget: "string",
-      hint: "This icon should only exist in the quick reference callout; an email link will render",
     },
   ],
 
@@ -80,6 +81,7 @@ export default {
     filingTypeIconText: string;
     frequencyIconText: string;
     phoneIconText: string;
+    phoneIconLabel: string;
     emailIconText: string;
   } => {
     // We can safely assume there will be a single match; else we wouldn't be inside this function.
@@ -92,7 +94,7 @@ export default {
 
     // If we just have :::largeCallout {}\n:::, then we need to return some default values instead.
     const defaultCalloutContents =
-      'showHeader="false" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText=""';
+      'showHeader="false" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText=""';
 
     const calloutParameters = calloutMatch?.groups?.parameters ?? defaultCalloutContents;
     const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
@@ -125,6 +127,11 @@ export default {
     const phoneIconTextMatch = calloutParameters.match(/phoneIconText="(?<phoneIconText>[^"]+)"/);
     const phoneIconTextValue = phoneIconTextMatch?.groups?.phoneIconText?.trim() ?? "";
 
+    const phoneIconLabelMatch = calloutParameters.match(
+      /phoneIconLabel="(?<phoneIconLabel>[^"]+)"/,
+    );
+    const phoneIconLabelValue = phoneIconLabelMatch?.groups?.phoneIconLabel?.trim() ?? "";
+
     const emailIconTextMatch = calloutParameters.match(/emailIconText="(?<emailIconText>[^"]+)"/);
     const emailIconTextValue = emailIconTextMatch?.groups?.emailIconText?.trim() ?? "";
 
@@ -136,6 +143,7 @@ export default {
       filingTypeIconText: filingTypeIconTextValue,
       frequencyIconText: frequencyIconTextValue,
       phoneIconText: phoneIconTextValue,
+      phoneIconLabel: phoneIconLabelValue,
       emailIconText: emailIconTextValue,
       body: calloutBody,
     };
@@ -151,9 +159,10 @@ export default {
     filingTypeIconText: string;
     frequencyIconText: string;
     phoneIconText: string;
+    phoneIconLabel: string;
     emailIconText: string;
   }): string => {
-    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
+    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" phoneIconLabel="${obj.phoneIconLabel}" emailIconText="${obj.emailIconText}" }\n\n${obj.body}\n\n:::`;
   },
   toPreview: (obj: {
     showHeader: boolean;
@@ -164,8 +173,9 @@ export default {
     filingTypeIconText: string;
     frequencyIconText: string;
     phoneIconText: string;
+    phoneIconLabel: string;
     emailIconText: string;
   }): string => {
-    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
+    return `:::largeCallout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" calloutType="${obj.calloutType}" amountIconText="${obj.amountIconText}" filingTypeIconText="${obj.filingTypeIconText}" frequencyIconText="${obj.frequencyIconText}" phoneIconText="${obj.phoneIconText}" phoneIconLabel="${obj.phoneIconLabel}" emailIconText="${obj.emailIconText}" }\n${obj.body}\n:::`;
   },
 };
