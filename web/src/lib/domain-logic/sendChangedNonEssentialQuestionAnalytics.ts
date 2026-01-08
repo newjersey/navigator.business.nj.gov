@@ -1,6 +1,6 @@
+import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import analytics from "@/lib/utils/analytics";
 
 const Config = getMergedConfig();
 
@@ -99,13 +99,13 @@ export const sendChangedNonEssentialQuestionAnalytics = (
 
   if (
     didNonEssentialQuestionAnswerChange(
-      prevProfileData.vacantPropertyOwner,
-      newProfileData.vacantPropertyOwner,
+      prevProfileData.nonEssentialRadioAnswers["vacantPropertyOwner"],
+      newProfileData.nonEssentialRadioAnswers["vacantPropertyOwner"],
     )
   ) {
     analytics.event.non_essential_question_set.view.non_essential_question_set(
       "vacantPropertyOwner",
-      getNonEssentialQuestionAnswer(newProfileData.vacantPropertyOwner),
+      getNonEssentialQuestionAnswer(newProfileData.nonEssentialRadioAnswers["vacantPropertyOwner"]),
     );
   }
 };

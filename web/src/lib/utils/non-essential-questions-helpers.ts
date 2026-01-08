@@ -7,6 +7,7 @@ export const hasNonEssentialQuestions = (profileData: ProfileData): boolean => {
   if (
     doesIndustryHaveNonEssentialQuestions(profileData) ||
     doesSectorHaveNonEssentialQuestions(profileData) ||
+    getPersonaBasedNonEssentialQuestionsIdsFromProfile(profileData).length > 0 ||
     getPersonaBasedNonEssentialQuestionsIds(profileData).length > 0
   ) {
     return true;
@@ -28,24 +29,31 @@ export const doesSectorHaveNonEssentialQuestions = (profileData: ProfileData): b
   return false;
 };
 
-export const getPersonaBasedNonEssentialQuestionsIds = (
-  profileData: ProfileData,
-): ProfileContentField[] | [] => {
-  const nonEssentialQuesionIds: ProfileContentField[] = [];
+export const getPersonaBasedNonEssentialQuestionsIds = (profileData: ProfileData): string[] => {
+  const nonEssentialQuesionIds: string[] = [];
   if (profileData.businessPersona === "STARTING") {
     nonEssentialQuesionIds.push("vacantPropertyOwner");
   }
-  if (profileData.businessPersona === "OWNING") {
-    if (profileData.sectorId === "arts-entertainment-and-recreation") {
-      nonEssentialQuesionIds.push("carnivalRideOwningBusiness");
-      nonEssentialQuesionIds.push("travelingCircusOrCarnivalOwningBusiness");
-    }
-    if (
-      profileData.industryId === "real-estate-investor" ||
-      profileData.sectorId === "real-estate"
-    ) {
-      nonEssentialQuesionIds.push("vacantPropertyOwner");
-    }
+  if (
+    profileData.businessPersona === "OWNING" &&
+    (profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate")
+  ) {
+    nonEssentialQuesionIds.push("vacantPropertyOwner");
+  }
+
+  return nonEssentialQuesionIds;
+};
+
+export const getPersonaBasedNonEssentialQuestionsIdsFromProfile = (
+  profileData: ProfileData,
+): ProfileContentField[] | [] => {
+  const nonEssentialQuesionIds: ProfileContentField[] = [];
+  if (
+    profileData.businessPersona === "OWNING" &&
+    profileData.sectorId === "arts-entertainment-and-recreation"
+  ) {
+    nonEssentialQuesionIds.push("carnivalRideOwningBusiness");
+    nonEssentialQuesionIds.push("travelingCircusOrCarnivalOwningBusiness");
   }
 
   return nonEssentialQuesionIds;

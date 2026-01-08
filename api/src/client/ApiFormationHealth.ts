@@ -66,7 +66,6 @@ const profileData: ProfileData = {
   propertyLeaseType: undefined,
   hasThreeOrMoreRentalUnits: undefined,
   travelingCircusOrCarnivalOwningBusiness: undefined,
-  vacantPropertyOwner: undefined,
   businessOpenMoreThanTwoYears: undefined,
   employerAccessRegistration: undefined,
   deptOfLaborEin: "",

@@ -124,8 +124,6 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
           !!business?.profileData.carnivalRideOwningBusiness ||
           !!business?.profileData.travelingCircusOrCarnivalOwningBusiness
         );
-      case "vacant-building-fire-permit":
-        return !!business?.profileData.vacantPropertyOwner;
       default:
         return false;
     }

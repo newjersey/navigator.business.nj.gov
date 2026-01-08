@@ -5,6 +5,7 @@ import {
   doesIndustryHaveNonEssentialQuestions,
   doesSectorHaveNonEssentialQuestions,
   getPersonaBasedNonEssentialQuestionsIds,
+  getPersonaBasedNonEssentialQuestionsIdsFromProfile,
 } from "@/lib/utils/non-essential-questions-helpers";
 import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
@@ -30,6 +31,7 @@ export const IndustryBasedNonEssentialQuestionsSection = (): ReactElement => {
         ...LookupSectorTypeById(state.profileData.sectorId).nonEssentialQuestionsIds,
       ];
     }
+    questionIds = [...questionIds, ...getPersonaBasedNonEssentialQuestionsIds(state.profileData)];
     // check for duplicate question IDs
     questionIds = [...new Set(questionIds)];
     return assembleNonEssentialQuestions(questionIds);
@@ -50,7 +52,7 @@ export const IndustryBasedNonEssentialQuestionsSection = (): ReactElement => {
       {hasNonEssentialQuestions && (
         <div data-testid="non-essential-questions-wrapper">{getNonEssentialQuestions()}</div>
       )}
-      {getPersonaBasedNonEssentialQuestionsIds(state.profileData).map((questionId) => {
+      {getPersonaBasedNonEssentialQuestionsIdsFromProfile(state.profileData).map((questionId) => {
         return <NonEssentialQuestionForPersonas questionId={questionId} key={questionId} />;
       })}
     </>

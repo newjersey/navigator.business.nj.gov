@@ -406,16 +406,12 @@ describe("<AnytimeActionSearch />", () => {
         generateAnytimeActionTask({
           filename: "vacant-building-fire-permit",
           moveToRecommendedForYouSection: true,
+          applyToAllUsers: true,
         }),
         ...anytimeActionTasks,
       ];
       anytimeActionTasksFromNonEssentialQuestions = [];
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          vacantPropertyOwner: true,
-        }),
-      });
       renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       const nonEssentialAnytimeAction = screen.getByTestId("vacant-building-fire-permit-option");
@@ -436,17 +432,11 @@ describe("<AnytimeActionSearch />", () => {
         generateAnytimeActionTask({
           filename: "vacant-building-fire-permit",
           moveToRecommendedForYouSection: false,
+          applyToAllUsers: true,
         }),
-        ...anytimeActionTasks,
       ];
-
       anytimeActionTasksFromNonEssentialQuestions = [];
 
-      useMockBusiness({
-        profileData: generateProfileData({
-          vacantPropertyOwner: true,
-        }),
-      });
       renderAnytimeActionSearch();
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
@@ -460,6 +450,7 @@ describe("<AnytimeActionSearch />", () => {
         const duplicateAnytimeAction = generateAnytimeActionTask({
           filename: "same-anytime-action",
           name: "same-anytime-action",
+          applyToAllUsers: true,
         });
 
         anytimeActionTasks = [duplicateAnytimeAction, ...anytimeActionTasks];
@@ -476,11 +467,6 @@ describe("<AnytimeActionSearch />", () => {
           ...anytimeActionTasksFromNonEssentialQuestions,
         ];
 
-        useMockBusiness({
-          profileData: generateProfileData({
-            vacantPropertyOwner: true,
-          }),
-        });
         renderAnytimeActionSearch();
         fireEvent.click(screen.getByLabelText("Open"));
         const nonEssentialAnytimeAction = screen.getByTestId("vacant-building-fire-permit-option");
@@ -494,29 +480,6 @@ describe("<AnytimeActionSearch />", () => {
         expect(nonEssentialAnytimeAction.compareDocumentPosition(category1Title)).toBe(
           Node.DOCUMENT_POSITION_FOLLOWING,
         );
-      });
-
-      it("adds vacant property anytime action for vacant property owners", () => {
-        anytimeActionTasks = [
-          generateAnytimeActionTask({ filename: "vacant-building-fire-permit" }),
-        ];
-        useMockBusiness({
-          profileData: generateProfileData({
-            vacantPropertyOwner: false,
-          }),
-        });
-        renderAnytimeActionSearch();
-        fireEvent.click(screen.getByLabelText("Open"));
-        expect(screen.queryByTestId("vacant-building-fire-permit-option")).not.toBeInTheDocument();
-
-        useMockBusiness({
-          profileData: generateProfileData({
-            vacantPropertyOwner: true,
-          }),
-        });
-        renderAnytimeActionSearch();
-        fireEvent.click(screen.getByLabelText("Open"));
-        expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
       });
 
       it("adds fire carnival modification for carnival ride owning businesses", () => {

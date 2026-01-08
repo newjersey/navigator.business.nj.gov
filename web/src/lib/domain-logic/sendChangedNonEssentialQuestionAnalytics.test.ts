@@ -1,8 +1,8 @@
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
+import analytics from "@/lib/utils/analytics";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test/factories";
-import analytics from "@/lib/utils/analytics";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
   getNonEssentialQuestionText: jest.fn(),
@@ -37,7 +37,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -48,7 +47,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -83,7 +81,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -94,7 +91,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: false,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -114,7 +110,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -125,7 +120,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: true,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -146,7 +140,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -157,7 +150,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: true,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -174,22 +166,22 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
     (getNonEssentialQuestionText as jest.Mock).mockReturnValue("Question Text");
 
     prevProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
+      nonEssentialRadioAnswers: { vacantPropertyOwner: false },
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
     });
 
     newProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
+      nonEssentialRadioAnswers: {
+        vacantPropertyOwner: true,
+      },
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: true,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -210,7 +202,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -221,7 +212,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: true,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -242,7 +232,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -253,7 +242,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: true,
       plannedRenovationQuestion: undefined,
@@ -274,7 +262,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -285,7 +272,6 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
       travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: true,

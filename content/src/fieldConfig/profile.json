@@ -219,13 +219,6 @@
           "errorTextRequired": "Enter your trade name."
         }
       },
-      "vacantPropertyOwner": {
-        "default": {
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you own a vacant or unoccupied property in New Jersey with a total floor space of 2,500 square feet or more?"
-        }
-      },
       "ownershipTypeIds": {
         "default": {
           "header": "Business Ownership",

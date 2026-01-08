@@ -334,6 +334,13 @@
       "id": "crtk-applicable-naics-codes",
       "addOnWhenNo": "",
       "addOnWhenYes": "community-rtk-survey"
+    },
+    {
+      "questionText": "Do you own a vacant or unoccupied property in New Jersey with a total floor space of 2,500 square feet or more?",
+      "id": "vacantPropertyOwner",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "",
+      "anytimeActions": ["vacant-building-fire-permit"]
     }
   ]
 }

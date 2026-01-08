@@ -2615,27 +2615,6 @@ collections:
                               widget: "string",
                             }
                           - { label: "Description", name: "description", widget: "markdown" }
-                  - label: Vacant Property Owner
-                    name: vacantPropertyOwner
-                    collapsed: true
-                    widget: object
-                    fields:
-                      - label: Default
-                        name: "default"
-                        collapsed: false
-                        widget: object
-                        fields:
-                          - {
-                              label: "Radio Button Yes Text",
-                              name: "radioButtonTrueText",
-                              widget: "string",
-                            }
-                          - {
-                              label: "Radio Button No Text",
-                              name: "radioButtonFalseText",
-                              widget: "string",
-                            }
-                          - { label: "Description", name: "description", widget: "markdown" }
                   - label: Will Sell Pet Care Items
                     name: willSellPetCareItems
                     collapsed: true
