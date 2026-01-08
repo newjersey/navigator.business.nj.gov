@@ -237,8 +237,8 @@ describe("<CRTKSearchResult />", () => {
       (status: string) => {
         renderComponent({ CRTKSearchResult: status as "FOUND" | "NOT_FOUND" });
         fireEvent.click(screen.getByText("Next Steps"));
-        const emailLink = screen.getByRole("link", { name: /rts@dep.nj.gov/i });
-        expect(emailLink).toHaveAttribute("href", "mailto:rts@dep.nj.gov");
+        const emailLink = screen.getByRole("link", { name: /rtk@dep.nj.gov/i });
+        expect(emailLink).toHaveAttribute("href", "mailto:rtk@dep.nj.gov");
       },
     );
   });
