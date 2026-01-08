@@ -2,7 +2,6 @@ import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import {
   BusinessSuffix,
@@ -16,14 +15,7 @@ import {
   LpBusinessSuffix,
   NonprofitBusinessSuffix,
 } from "@businessnjgovnavigator/shared/";
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -62,7 +54,7 @@ export const SuffixDropdown = (): ReactElement => {
   return (
     <>
       <div>
-        <div>
+        <div id="business-suffix-label">
           <strong>
             <ContextualInfoButton
               text={Config.formation.fields.businessSuffix.label}
@@ -75,12 +67,9 @@ export const SuffixDropdown = (): ReactElement => {
         )}
       </div>
       <FormControl fullWidth error={doesFieldHaveError(FIELD)}>
-        <InputLabel id="business-suffix-label" className="visibility-hidden">
-          {camelCaseToSentence("businessSuffix")}
-        </InputLabel>
         <Select
           autoComplete="no"
-          labelId="business-suffix-label"
+          aria-labelledby="business-suffix-label"
           id="business-suffix"
           SelectDisplayProps={
             {
