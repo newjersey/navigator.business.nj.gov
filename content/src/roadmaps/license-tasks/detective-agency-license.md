@@ -3,7 +3,7 @@ licenseName: ""
 id: detective-agency-license
 displayname: detective-agency-license
 urlSlug: detective-agency-license
-name: Obtain Your Detective Agency License
+name: Get Your Detective Agency License
 webflowName: Detective Agency License
 summaryDescriptionMd: >
   You need a license to operate a detective agency. To prepare for the
@@ -23,30 +23,29 @@ divisionPhone: (609) 882-2000
 webflowType: business-license
 webflowId: 5f772960a67e4a21735c0f36
 ---
-
 ## Eligibility Criteria
 
-- At least 1 of the business owners has 5 years of full-time work experience as an investigator or a police officer
-- All applicants are at least 25 years old
-- Applicant and business associates are U.S. citizens
-- None of the applicants are active law enforcement officers
+* At least 1 of the business owners has 5 years of full-time work experience as an investigator or a police officer
+* All applicants are at least 25 years old
+* Applicant and business associates are U.S. citizens
+* None of the applicants are active law enforcement officers
 
 ## Application Requirements
 
-- The names and addresses of all the business owners
-- Two trade name options for your agency
-- A passport photo and personal information for the `qualifying applicant|qualifying-applicant` and all other business owners
-- The qualifying applicant's work history as an investigator, completed by their former employer
-- The names, addresses, phone numbers, email addresses, and signatures of 5 people unrelated to each of the applicants that can provide character references
-- Applicable fees paid
+* The names and addresses of all the business owners
+* Two trade name options for your agency
+* A passport photo and personal information for the `qualifying applicant|qualifying-applicant` and all other business owners
+* The qualifying applicant's work history as an investigator, completed by their former employer
+* The names, addresses, phone numbers, email addresses, and signatures of 5 people unrelated to each of the applicants that can provide character references
+* Applicable fees paid
 
-:::largeCallout{ showHeader="false" headerText="" calloutType="informational" }
+:::largeCallout{ showHeader="false" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 The application must be notarized. Once it's approved you'll be required to send in your certificate of formation.
 
 :::
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 A private detective agency license.
 
