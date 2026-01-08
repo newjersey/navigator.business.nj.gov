@@ -1,0 +1,49 @@
+name: Request Reviewers via Pickaroo
+
+on:
+  pull_request:
+    types: ["labeled"]
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    if: contains(github.event.pull_request.labels.*.name, 'request-review')
+    outputs:
+      reviewers:
+        ${{ steps.external-reviewers.outputs.reviewers }} ${{
+        steps.internal-reviewers.outputs.reviewers }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Generate GitHub App Token
+        id: generate_token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        with:
+          app-id: "2454947"
+          private-key: ${{ secrets.OOI_PULL_REQUEST_APP }}
+
+      - name: Select Internal Reviewers
+        id: internal-reviewers
+        uses: newjersey/innovation-shared-actions/.github/actions/pickaroo@main
+        with:
+          include_teams: "business-dev"
+          exclude_users: "NJ-Innovation-CI mjackson21"
+          number_of_reviewers: 2
+          token: ${{ steps.generate_token.outputs.token }}
+
+  notify-slack:
+    needs: assign-reviewers
+    if: needs.assign-reviewers.outputs.reviewers != ''
+    uses: newjersey/innovation-shared-actions/.github/workflows/slack.yml@main
+    with:
+      channel_id: "C04J8MTJNS2"
+      message:
+        "[ <${{ github.event.pull_request.html_url }}|PR Review> ] ${{ github.event.repository.name
+        }} - #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}"
+      thread_message:
+        "Hey ${{ needs.assign-reviewers.outputs.reviewers }}! Please review the above pull request
+        🙏"
+    secrets: inherit
