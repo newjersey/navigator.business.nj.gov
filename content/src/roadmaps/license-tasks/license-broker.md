@@ -3,7 +3,7 @@ licenseName: ""
 id: license-broker
 displayname: license-broker
 urlSlug: broker-license
-name: Obtain Your Real Estate Broker License
+name: Get Your Real Estate Broker License
 webflowName: Real Estate Broker License
 summaryDescriptionMd: If you own or plan to own a real estate agency, you need a
   real estate broker license.
