@@ -126,8 +126,7 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator
-
-      - name: Deploy Storybook
-        uses: ./.github/actions/deploy-storybook
-        with:
-          storybook_s3_bucket: ${{ vars.STORYBOOK_S3_BUCKET }}
+#      - name: Deploy Storybook
+#        uses: ./.github/actions/deploy-storybook
+#        with:
+#          storybook_s3_bucket: ${{ vars.STORYBOOK_S3_BUCKET }}
