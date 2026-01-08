@@ -3,7 +3,7 @@ licenseName: Home Improvement Contractors-Home Improvement Business Contr
 id: register-home-contractor
 displayname: register-home-contractor
 urlSlug: hic-license
-name: Obtain Your Home Improvement Contractor Registration
+name: Get Your Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
 summaryDescriptionMd: >-
   :::infoAlert
@@ -25,31 +25,30 @@ divisionPhone: (973) 424-8150
 webflowType: business-license
 webflowId: 66aceedf6ba3dffa8ac9d4f0
 ---
-
 ## Application Requirements
 
-- Business name
-- `EIN|ein`
-- Social Security number (SSN)
-- `Business structure|business-structure-contextual-link`
-- Copy of the Trade Name Certificate, Certificate of Incorporation, or `Certificate of Formation|certificate-formation` (depending on the structure of your business)
-- A certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
-- Name, home address, business address, and business telephone number of each owner, officer, director, principal, and stakeholders with an ownership interest of 10% or more in the business and the percentage of ownership held. Include the same information for each member if the business structure is a partnership
-- A criminal background check
-- Applicable fees paid
-- Copy of Alternate Name Form if your business has an alternate name
-- `Certificate of Authority|certificate-formation` , if applicable
-- Name, address, and phone number of registered agent<insert contextual info>, if applicable
-- Child support information, if applicable
+* Business name
+*  `EIN|ein` 
+* Social Security number (SSN)
+*  `Business structure|business-structure-contextual-link` 
+* Copy of the Trade Name Certificate, Certificate of Incorporation, or `Certificate of Formation|certificate-formation` (depending on the structure of your business)
+* A certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
+* Name, home address, business address, and business telephone number of each owner, officer, director, principal, and stakeholders with an ownership interest of 10% or more in the business and the percentage of ownership held. Include the same information for each member if the business structure is a partnership
+* A criminal background check
+* Applicable fees paid
+* Copy of Alternate Name Form if your business has an alternate name
+*  `Certificate of Authority|certificate-formation` , if applicable
+* Name, address, and phone number of registered agent<insert contextual info>, if applicable
+* Child support information, if applicable
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - A New Jersey home improvement contractor (NJHIC) number
 - An official paper registration received by mail (also known as a registration card)
 
 :::
 
-:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
 - Unregistered contractors who sell or make home improvements may be subject to civil penalties and possibly criminal penalties.
 
