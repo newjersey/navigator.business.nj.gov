@@ -22,13 +22,18 @@
       "id": "carnival-ride-permitting",
       "questionText": "Do you plan to own and/or operate a carnival or amusement ride?",
       "addOnWhenNo": "",
-      "addOnWhenYes": "entertainment-carnival-ride-permit"
+      "addOnWhenYes": "entertainment-carnival-ride-permit",
+      "anytimeActions": [
+        "carnival-ride-supplemental-modification",
+        "operating-carnival-fire-permit"
+      ]
     },
     {
       "id": "carnival-fire-licenses",
       "questionText": "Do you plan to own and/or operate a traveling carnival or circus?",
       "addOnWhenNo": "",
-      "addOnWhenYes": "entertainment-carnival-fire-licenses"
+      "addOnWhenYes": "entertainment-carnival-fire-licenses",
+      "anytimeActions": ["operating-carnival-fire-permit"]
     },
     {
       "id": "hotel-food",
