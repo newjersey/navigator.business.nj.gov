@@ -1,8 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { AnytimeActionTask } from "../types/types";
-import { convertAnytimeActionTaskMd } from "../utils/tasksMarkdownReader";
-import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types/types";
+import { convertAnytimeActionTaskMd } from "@businessnjgovnavigator/shared/utils/tasksMarkdownReader";
+import {
+  getFileNameByUrlSlug,
+  loadUrlSlugByFilename,
+} from "@businessnjgovnavigator/shared/static/helpers";
 
 type PathParameters<P> = { params: P; locale?: string };
 const anytimeActionsTaskDirectoryApp = path.join(

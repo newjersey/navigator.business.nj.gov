@@ -1,12 +1,15 @@
-import { randomElementFromArray } from "../arrayHelpers";
+import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
 import {
   NameAvailability,
   NameAvailabilityResponse,
   NameAvailabilityStatus,
-} from "../businessNameSearch";
-import { arrayOfCountriesObjects as countries } from "../countries";
-import { getCurrentDate, getCurrentDateISOString } from "../dateHelpers";
-import { defaultDateFormat } from "../defaultConstants";
+} from "@businessnjgovnavigator/shared/businessNameSearch";
+import { arrayOfCountriesObjects as countries } from "@businessnjgovnavigator/shared/countries";
+import {
+  getCurrentDate,
+  getCurrentDateISOString,
+} from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import {
   BusinessSignerTypeMap,
   BusinessSuffix,
@@ -23,10 +26,10 @@ import {
   foreignLegalTypePrefix,
   incorporationLegalStructures,
   publicFilingLegalTypes,
-} from "../formationData";
-import { randomInt, randomIntFromInterval } from "../intHelpers";
-import { Municipality } from "../municipality";
-import { arrayOfStateObjects as states } from "../states";
+} from "@businessnjgovnavigator/shared/formationData";
+import { randomInt, randomIntFromInterval } from "@businessnjgovnavigator/shared/intHelpers";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/states";
 
 export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {
   return {

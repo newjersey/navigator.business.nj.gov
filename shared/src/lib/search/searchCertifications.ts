@@ -1,7 +1,7 @@
-import { LookupFundingAgencyById } from "../../fundingAgency";
-import { Certification } from "../../types";
-import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
+import { Certification } from "@businessnjgovnavigator/shared/types";
+import { convertFileDataToMatchList } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import { FileData, Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
   const certificationData = getCertificationData(certifications);

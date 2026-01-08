@@ -1,4 +1,4 @@
-import municipalityJson from "../src/static/municipalities.json";
+import municipalityJson from "@businessnjgovnavigator/shared/static/municipalities.json";
 
 export type Municipality = {
   name: string;

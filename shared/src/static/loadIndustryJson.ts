@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Industry } from "../industry";
+import { Industry } from "@businessnjgovnavigator/shared/industry";
 
 const IndustryJsonPathTest = path.join(process.cwd(), "content", "lib", "industry.json");
 

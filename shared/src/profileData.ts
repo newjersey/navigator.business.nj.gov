@@ -1,6 +1,6 @@
-import { CommunityAffairsAddress } from "./housing";
-import { Municipality } from "./municipality";
-import { OperatingPhaseId } from "./operatingPhase";
+import { CommunityAffairsAddress } from "@businessnjgovnavigator/shared/housing";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 
 export interface ProfileDocuments {
   readonly formationDoc: string;

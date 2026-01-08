@@ -1,5 +1,5 @@
-import { AnytimeActionTask } from "../types";
-import { loadAnytimeActionTasksByFileName } from "./loadAnytimeActionTasks";
+import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
+import { loadAnytimeActionTasksByFileName } from "@businessnjgovnavigator/shared/static/loadAnytimeActionTasks";
 
 export const loadCommonBusinessTasks = (): AnytimeActionTask[] => {
   const fileNames = [

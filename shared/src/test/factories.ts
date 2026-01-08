@@ -1,11 +1,21 @@
-import { randomElementFromArray } from "../arrayHelpers";
-import { BusinessUser } from "../businessUser";
-import { TaxFilingCalendarEvent } from "../calendarEvent";
-import { CigaretteLicenseData, EmailConfirmationSubmission } from "../cigaretteLicense";
-import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
-import { defaultDateFormat } from "../defaultConstants";
-import { createBusinessId } from "../domain-logic/createBusinessId";
-import { EmergencyTripPermitApplicationInfo, getEarliestPermitDate } from "../emergencyTripPermit";
+import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
+import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared/calendarEvent";
+import {
+  CigaretteLicenseData,
+  EmailConfirmationSubmission,
+} from "@businessnjgovnavigator/shared/cigaretteLicense";
+import {
+  getCurrentDate,
+  getCurrentDateFormatted,
+  getCurrentDateISOString,
+} from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
+import { createBusinessId } from "@businessnjgovnavigator/shared/domain-logic/createBusinessId";
+import {
+  EmergencyTripPermitApplicationInfo,
+  getEarliestPermitDate,
+} from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import {
   AirData,
   DrinkingWaterData,
@@ -14,9 +24,12 @@ import {
   QuestionnaireData,
   WasteData,
   WasteWaterData,
-} from "../environment";
+} from "@businessnjgovnavigator/shared/environment";
 
-import { EmployerRatesRequest, EmployerRatesResponse } from "../employerRates";
+import {
+  EmployerRatesRequest,
+  EmployerRatesResponse,
+} from "@businessnjgovnavigator/shared/employerRates";
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -25,10 +38,10 @@ import {
   GetFilingResponse,
   PublicFilingLegalType,
   publicFilingLegalTypes,
-} from "../formationData";
-import { getIndustries, Industry } from "../industry";
-import { randomInt, randomIntFromInterval } from "../intHelpers";
-import { LegalStructure, LegalStructures } from "../legalStructure";
+} from "@businessnjgovnavigator/shared/formationData";
+import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
+import { randomInt, randomIntFromInterval } from "@businessnjgovnavigator/shared/intHelpers";
+import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared/legalStructure";
 import {
   LicenseData,
   LicenseDetails,
@@ -38,26 +51,34 @@ import {
   licenseStatuses,
   LicenseStatusItem,
   taskIdLicenseNameMapping,
-} from "../license";
-import { MunicipalityDetail } from "../municipality";
-import { OperatingPhaseId } from "../operatingPhase";
+} from "@businessnjgovnavigator/shared/license";
+import { MunicipalityDetail } from "@businessnjgovnavigator/shared/municipality";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import {
   BusinessPersona,
   IndustrySpecificData,
   maskingCharacter,
   ProfileData,
-} from "../profileData";
-import { RoadmapTaskData } from "../roadmapTaskData";
-import { arrayOfSectors, SectorType } from "../sector";
-import { StateObject, arrayOfStateObjects as states } from "../states";
+} from "@businessnjgovnavigator/shared/profileData";
+import { RoadmapTaskData } from "@businessnjgovnavigator/shared/roadmapTaskData";
+import { arrayOfSectors, SectorType } from "@businessnjgovnavigator/shared/sector";
+import { StateObject, arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/states";
 import {
   taxClearanceCertificateAgencies,
   TaxClearanceCertificateData,
-} from "../taxClearanceCertificate";
-import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
-import { XrayData, XrayRegistrationStatus } from "../xray";
-import { generateFormationFormData, generateMunicipality } from "./formationFactories";
+} from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import { TaxFilingData, TaxFilingLookUpRequest } from "@businessnjgovnavigator/shared/taxFiling";
+import {
+  Business,
+  CURRENT_VERSION,
+  Preferences,
+  UserData,
+} from "@businessnjgovnavigator/shared/userData";
+import { XrayData, XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
+import {
+  generateFormationFormData,
+  generateMunicipality,
+} from "@businessnjgovnavigator/shared/test/formationFactories";
 
 export const generateFormationSubmitResponse = (
   overrides: Partial<FormationSubmitResponse>,

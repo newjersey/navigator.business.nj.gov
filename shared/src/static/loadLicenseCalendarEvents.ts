@@ -1,8 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { convertLicenseCalendarEventMd } from "../markdownReader";
-import { LicenseEventType } from "../types/types";
-import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
+import { convertLicenseCalendarEventMd } from "@businessnjgovnavigator/shared/markdownReader";
+import { LicenseEventType } from "@businessnjgovnavigator/shared/types/types";
+import {
+  getFileNameByUrlSlug,
+  loadUrlSlugByFilename,
+} from "@businessnjgovnavigator/shared/static/helpers";
 
 type PathParameters<P> = { params: P; locale?: string };
 export type LicenseCalendarEventUrlSlugParameter = {

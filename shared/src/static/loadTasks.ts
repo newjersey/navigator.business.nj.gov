@@ -1,8 +1,16 @@
 import fs from "fs";
 import path from "path";
-import { convertTaskMd } from "../markdownReader";
-import { Task, TaskDependencies, TaskLink, TaskWithoutLinks } from "../types/types";
-import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
+import { convertTaskMd } from "@businessnjgovnavigator/shared/markdownReader";
+import {
+  Task,
+  TaskDependencies,
+  TaskLink,
+  TaskWithoutLinks,
+} from "@businessnjgovnavigator/shared/types/types";
+import {
+  getFileNameByUrlSlug,
+  loadUrlSlugByFilename,
+} from "@businessnjgovnavigator/shared/static/helpers";
 
 type PathParameters<P> = { params: P; locale?: string };
 export type TaskUrlSlugParameter = {

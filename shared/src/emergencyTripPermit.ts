@@ -1,7 +1,7 @@
 import { Dayjs } from "dayjs";
-import { getCurrentDateInNewJersey } from "./dateHelpers";
-import { defaultDateFormat } from "./defaultConstants";
-import { StateShortCodesDomestic } from "./states";
+import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
+import { StateShortCodesDomestic } from "@businessnjgovnavigator/shared/states";
 
 export interface EmergencyTripPermitApplicationInfo {
   payerFirstName?: string;

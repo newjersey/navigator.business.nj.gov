@@ -1,8 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { AnytimeActionLicenseReinstatement } from "../types/types";
-import { convertAnytimeActionLicenseReinstatementMd } from "../utils/tasksMarkdownReader";
-import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
+import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types/types";
+import { convertAnytimeActionLicenseReinstatementMd } from "@businessnjgovnavigator/shared/utils/tasksMarkdownReader";
+import {
+  getFileNameByUrlSlug,
+  loadUrlSlugByFilename,
+} from "@businessnjgovnavigator/shared/static/helpers";
 
 type PathParameters<P> = { params: P; locale?: string };
 const anytimeActionsLicenseReinstatementsDirectory = path.join(

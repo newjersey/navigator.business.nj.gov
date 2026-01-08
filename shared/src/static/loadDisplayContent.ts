@@ -1,13 +1,13 @@
 import fs from "fs";
 import path from "path";
-import { getMarkdown } from "../markdownReader";
+import { getMarkdown } from "@businessnjgovnavigator/shared/markdownReader";
 import {
   FormationDbaContent,
   FormationDbaDisplayContent,
   RoadmapDisplayContent,
   SidebarCardContent,
   TaskWithoutLinks,
-} from "../types/types";
+} from "@businessnjgovnavigator/shared/types/types";
 
 const displayContentDirectory = path.join(process.cwd(), "..", "content", "src", "display-content");
 

@@ -1,4 +1,4 @@
-import { StateObject } from "./states";
+import { StateObject } from "@businessnjgovnavigator/shared/states";
 
 export interface CigaretteLicenseData {
   businessName?: string;

@@ -1,7 +1,7 @@
-import { LookupLegalStructureById } from "../legalStructure";
-import { ProfileData } from "../profileData";
-import { determineForeignBusinessType } from "./businessPersonaHelpers";
-import { nexusLocationInNewJersey } from "./nexusLocationInNewJersey";
+import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { determineForeignBusinessType } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 
 const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
   "existingEmployees",
