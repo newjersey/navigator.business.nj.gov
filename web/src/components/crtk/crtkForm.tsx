@@ -264,13 +264,13 @@ export const CRTKStatus = (props: Props): ReactElement => {
   return (
     <>
       <div className="margin-bottom-4">
-        <p className="text-base-darkest margin-bottom-2">
+        <div className="text-base-darkest margin-bottom-2">
           <Content>
             {templateEval(Config.crtkTask.introText, {
               certainIndustriesLink: Config.crtkTask.certainIndustriesLink,
             })}
           </Content>
-        </p>
+        </div>
       </div>
       <div className="bg-accent-cooler-50 padding-2 margin-bottom-3">
         <h2 className="margin-top-0 margin-bottom-1 text-accent-cooler">

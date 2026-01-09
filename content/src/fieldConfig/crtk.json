@@ -1,7 +1,7 @@
 {
   "crtkTask": {
-    "introText": "Businesses in ${certainIndustriesLink} must report chemicals they have on-site to the Community Right to Know (CRTK) program. These chemicals are known as `Environmental Hazardous Substances (EHS)|environmental-hazardous-substances`. Reporting EHS helps keep New Jersey communities and businesses safe.",
-    "certainIndustriesLink": "[certain industries](https://www.nj.gov/dep/enforcement/opppc/crtk/rtknaics.pdf)",
+    "introText": "Businesses in certain ${certainIndustriesLink} must report chemicals they have on-site to the Community Right to Know (CRTK) program. These chemicals are known as `Environmental Hazardous Substances (EHS)|environmental-hazardous-substances`. Reporting EHS helps keep New Jersey communities and businesses safe.",
+    "certainIndustriesLink": "[industries](https://www.nj.gov/dep/enforcement/opppc/crtk/rtknaics.pdf)",
     "helperText": "Enter your information exactly as it appears in your business tax registration documents.",
     "businessNameLabel": "Business Name",
     "businessStreetAddressLabel": "Business Street Address",

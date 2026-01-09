@@ -61,13 +61,13 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
   return (
     <>
       <div className="margin-bottom-4">
-        <p className="text-base-darkest margin-bottom-2">
+        <div className="text-base-darkest margin-bottom-2">
           <Content>
             {templateEval(Config.crtkTask.introText, {
               certainIndustriesLink: Config.crtkTask.certainIndustriesLink,
             })}
           </Content>
-        </p>
+        </div>
       </div>
       <div className="bg-accent-cooler-50 padding-2 margin-bottom-3 radius-lg">
         <p className="text-base-dark text-bold margin-bottom-0">{businessDetails?.businessName}</p>
