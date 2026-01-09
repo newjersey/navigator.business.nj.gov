@@ -1,10 +1,10 @@
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
-import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 
 jest.mock("../../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
@@ -180,7 +180,9 @@ describe("ProfileNonEssentialQuestionsSection", () => {
       sectorId: "arts-entertainment-and-recreation",
     });
 
-    expect(screen.queryByText("Non Essential Question 1?")).not.toBeInTheDocument();
-    expect(screen.getByTestId("carnivalRideOwningBusiness-radio-group")).toBeInTheDocument();
+    expect(screen.getByTestId("carnivalRideOwningBusiness-essential-question")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("travelingCircusOrCarnivalOwningBusiness-essential-question"),
+    ).toBeInTheDocument();
   });
 });

@@ -9,11 +9,11 @@ import {
   randomNonHomeBasedIndustry,
   randomPublicFilingLegalStructure,
 } from "@/test/factories";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -1481,7 +1481,7 @@ describe("profile - starting business", () => {
       renderPage({ business });
       chooseTab("permits");
 
-      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+      expect(screen.getByTestId("vacantPropertyOwner-essential-question")).toBeInTheDocument();
     });
   });
 

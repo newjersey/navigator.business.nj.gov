@@ -1,11 +1,10 @@
 import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
-import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import {
   doesIndustryHaveNonEssentialQuestions,
   doesSectorHaveNonEssentialQuestions,
   getPersonaBasedNonEssentialQuestionsIds,
-  getPersonaBasedNonEssentialQuestionsIdsFromProfile,
+  hasNonEssentialQuestions,
 } from "@/lib/utils/non-essential-questions-helpers";
 import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
@@ -13,9 +12,7 @@ import { ReactElement, useContext } from "react";
 export const IndustryBasedNonEssentialQuestionsSection = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
-  const hasNonEssentialQuestions =
-    doesIndustryHaveNonEssentialQuestions(state.profileData) ||
-    doesSectorHaveNonEssentialQuestions(state.profileData);
+  const userHasNonEssentialQuestions: boolean = hasNonEssentialQuestions(state.profileData);
 
   const getNonEssentialQuestions = (): ReactElement[] => {
     let questionIds: string[] = [];
@@ -49,12 +46,9 @@ export const IndustryBasedNonEssentialQuestionsSection = (): ReactElement => {
 
   return (
     <>
-      {hasNonEssentialQuestions && (
+      {userHasNonEssentialQuestions && (
         <div data-testid="non-essential-questions-wrapper">{getNonEssentialQuestions()}</div>
       )}
-      {getPersonaBasedNonEssentialQuestionsIdsFromProfile(state.profileData).map((questionId) => {
-        return <NonEssentialQuestionForPersonas questionId={questionId} key={questionId} />;
-      })}
     </>
   );
 };

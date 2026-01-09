@@ -57,13 +57,6 @@
           "description": "Do you plan to move goods across state lines?"
         }
       },
-      "carnivalRideOwningBusiness": {
-        "default": {
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you own and/or operate a `carnival or amusement ride|carnival-amusement-ride` ?"
-        }
-      },
       "taxId": {
         "default": {
           "header": "New Jersey Tax ID",
@@ -197,13 +190,6 @@
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will you house animals?"
-        }
-      },
-      "travelingCircusOrCarnivalOwningBusiness": {
-        "default": {
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you own and/or operate a traveling carnival or circus?"
         }
       },
       "publicWorksContractor": {

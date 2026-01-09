@@ -1,13 +1,11 @@
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { LookupSectorTypeById } from "@businessnjgovnavigator/shared/sector";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 
 export const hasNonEssentialQuestions = (profileData: ProfileData): boolean => {
   if (
     doesIndustryHaveNonEssentialQuestions(profileData) ||
     doesSectorHaveNonEssentialQuestions(profileData) ||
-    getPersonaBasedNonEssentialQuestionsIdsFromProfile(profileData).length > 0 ||
     getPersonaBasedNonEssentialQuestionsIds(profileData).length > 0
   ) {
     return true;
@@ -31,6 +29,7 @@ export const doesSectorHaveNonEssentialQuestions = (profileData: ProfileData): b
 
 export const getPersonaBasedNonEssentialQuestionsIds = (profileData: ProfileData): string[] => {
   const nonEssentialQuesionIds: string[] = [];
+
   if (profileData.businessPersona === "STARTING") {
     nonEssentialQuesionIds.push("vacantPropertyOwner");
   }
@@ -40,14 +39,6 @@ export const getPersonaBasedNonEssentialQuestionsIds = (profileData: ProfileData
   ) {
     nonEssentialQuesionIds.push("vacantPropertyOwner");
   }
-
-  return nonEssentialQuesionIds;
-};
-
-export const getPersonaBasedNonEssentialQuestionsIdsFromProfile = (
-  profileData: ProfileData,
-): ProfileContentField[] | [] => {
-  const nonEssentialQuesionIds: ProfileContentField[] = [];
   if (
     profileData.businessPersona === "OWNING" &&
     profileData.sectorId === "arts-entertainment-and-recreation"

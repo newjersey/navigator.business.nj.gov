@@ -797,7 +797,7 @@ describe("profile - owning existing business", () => {
       renderPage({ business });
       chooseTab("permits");
 
-      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+      expect(screen.getByTestId("vacantPropertyOwner-essential-question")).toBeInTheDocument();
     });
 
     it("shows vacant building question for owning signed in users", async () => {
@@ -817,7 +817,7 @@ describe("profile - owning existing business", () => {
       renderPage({ business });
       chooseTab("permits");
 
-      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+      expect(screen.getByTestId("vacantPropertyOwner-essential-question")).toBeInTheDocument();
     });
   });
 

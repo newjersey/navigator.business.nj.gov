@@ -27,13 +27,15 @@ export const sendChangedNonEssentialQuestionAnalytics = (
 
   if (
     didNonEssentialQuestionAnswerChange(
-      prevProfileData.carnivalRideOwningBusiness,
-      newProfileData.carnivalRideOwningBusiness,
+      prevProfileData.nonEssentialRadioAnswers["carnivalRideOwningBusiness"],
+      newProfileData.nonEssentialRadioAnswers["carnivalRideOwningBusiness"],
     )
   ) {
     analytics.event.non_essential_question_set.view.non_essential_question_set(
       "carnivalRideOwningBusiness",
-      getNonEssentialQuestionAnswer(newProfileData.carnivalRideOwningBusiness),
+      getNonEssentialQuestionAnswer(
+        newProfileData.nonEssentialRadioAnswers["carnivalRideOwningBusiness"],
+      ),
     );
   }
 
@@ -51,13 +53,15 @@ export const sendChangedNonEssentialQuestionAnalytics = (
 
   if (
     didNonEssentialQuestionAnswerChange(
-      prevProfileData.travelingCircusOrCarnivalOwningBusiness,
-      newProfileData.travelingCircusOrCarnivalOwningBusiness,
+      prevProfileData.nonEssentialRadioAnswers["travelingCircusOrCarnivalOwningBusiness"],
+      newProfileData.nonEssentialRadioAnswers["travelingCircusOrCarnivalOwningBusiness"],
     )
   ) {
     analytics.event.non_essential_question_set.view.non_essential_question_set(
       "travelingCircusOrCarnivalOwningBusiness",
-      getNonEssentialQuestionAnswer(newProfileData.travelingCircusOrCarnivalOwningBusiness),
+      getNonEssentialQuestionAnswer(
+        newProfileData.nonEssentialRadioAnswers["travelingCircusOrCarnivalOwningBusiness"],
+      ),
     );
   }
 

@@ -34,9 +34,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -44,9 +42,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: { q1: true },
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -78,19 +74,15 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
     });
 
     newProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: false,
+      nonEssentialRadioAnswers: { carnivalRideOwningBusiness: false },
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -107,9 +99,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -117,9 +107,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: true,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -137,19 +125,17 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
     });
 
     newProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
+      nonEssentialRadioAnswers: {
+        travelingCircusOrCarnivalOwningBusiness: true,
+      },
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: true,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -167,9 +153,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: { vacantPropertyOwner: false },
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -179,9 +163,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
       nonEssentialRadioAnswers: {
         vacantPropertyOwner: true,
       },
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -199,9 +181,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -209,9 +189,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: true,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -229,9 +207,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -239,9 +215,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: true,
       plannedRenovationQuestion: undefined,
@@ -259,9 +233,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -269,9 +241,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: true,

@@ -341,6 +341,23 @@
       "addOnWhenNo": "",
       "addOnWhenYes": "",
       "anytimeActions": ["vacant-building-fire-permit"]
+    },
+    {
+      "questionText": "Do you own and/or operate a `carnival or amusement ride|carnival-amusement-ride` ?",
+      "id": "carnivalRideOwningBusiness",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "",
+      "anytimeActions": [
+        "carnival-ride-supplemental-modification",
+        "operating-carnival-fire-permit]"
+      ]
+    },
+    {
+      "questionText": "Do you own and/or operate a traveling carnival or circus?",
+      "id": "travelingCircusOrCarnivalOwningBusiness",
+      "addOnWhenNo": "",
+      "addOnWhenYes": "",
+      "anytimeActions": ["operating-carnival-fire-permit"]
     }
   ]
 }
