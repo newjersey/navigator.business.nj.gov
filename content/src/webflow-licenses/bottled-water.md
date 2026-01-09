@@ -4,8 +4,8 @@ displayname: bottled-water
 urlSlug: bottled-water
 webflowName: Bottled Water
 agencyAdditionalContext: Food and Drug Administration, Department of Health
-callToActionText: Visit the NJ DOH
-callToActionLink: http://nj.gov/health/ceohs/
+callToActionText: Apply for Certification
+callToActionLink: https://www.nj.gov/health/ceohs/phfpp/bottledwater/
 webflowIndustry: Bottled Water
 licenseCertificationClassification: LABELS/REGULATIONS
 divisionPhone: (908) 351-7931
