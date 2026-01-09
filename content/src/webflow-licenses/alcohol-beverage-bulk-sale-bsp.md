@@ -6,7 +6,7 @@ webflowName: Alcohol Beverage Bulk Sale (BSP)
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control
 callToActionText: Apply for a Permit
-callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
+callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/licensing-bureau-applications-and-information/permits/
 webflowIndustry: Alcohol Beverage Bulk Sale
 divisionPhone: (609) 984-2830
 webflowId: 5f772965f17efbd901eefb3a
