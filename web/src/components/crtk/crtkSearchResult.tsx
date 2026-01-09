@@ -1,4 +1,5 @@
 // Update to accept crtkData prop instead of using mock data
+import { Content } from "@/components/Content";
 import { StatusResultHeader } from "@/components/crtk/crtkResultHeader";
 import type { CRTKData } from "@/components/crtk/crtkTypes";
 import { HorizontalLine } from "@/components/HorizontalLine";
@@ -60,7 +61,13 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
   return (
     <>
       <div className="margin-bottom-4">
-        <p className="text-base-darkest margin-bottom-2">{Config.crtkTask.introText}</p>
+        <p className="text-base-darkest margin-bottom-2">
+          <Content>
+            {templateEval(Config.crtkTask.introText, {
+              certainIndustriesLink: Config.crtkTask.certainIndustriesLink,
+            })}
+          </Content>
+        </p>
       </div>
       <div className="bg-accent-cooler-50 padding-2 margin-bottom-3 radius-lg">
         <p className="text-base-dark text-bold margin-bottom-0">{businessDetails?.businessName}</p>
@@ -72,7 +79,7 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
         <div className="bg-white padding-4 radius-lg">
           <StatusResultHeader
             status={status}
-            headerLabel={"Permit Status"}
+            headerLabel={`Permit Status${status === "FOUND" ? ": In Review" : ""}`}
             statusContent={statusContent}
             testIdPrefix="status"
           />
@@ -171,28 +178,29 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
               </ResultsSectionAccordion>
             </>
           )}
-
-          {props.onSearchAgain && (
-            <div className="margin-top-3">
-              <PrimaryButton
-                isColor="outline"
-                onClick={props.onSearchAgain}
-                dataTestId="crtk-search-again"
-              >
-                Search Again
-              </PrimaryButton>
-            </div>
-          )}
         </div>
+        <p className="text-base-darkest font-body-2xs padding-top-2">
+          <span className="text-bold">Issuing Agency: </span> Community Right to Know, Office of
+          Enforcement Policy, NJ Department of Environmental Protection
+        </p>
+        {crtkData && (
+          <div className={"text-base-dark text-italic font-body-2xs"}>
+            {templateEval(Config.crtkTask.lastUpdatedText, {
+              lastUpdatedFormattedValue: dayjs(crtkData.lastUpdatedISO).format(
+                "MMMM Do, YYYY [at] ha",
+              ),
+            })}
+          </div>
+        )}
       </div>
 
       {status === "FOUND" && (
         <div className="bg-warning-lighter padding-2 margin-top-4 radius-lg">
           <div className="display-flex ">
             <div>
-              <h3 className="margin-top-0 margin-bottom-1 text-accent-warm-darker text-bold">
+              <p className="margin-top-0 margin-bottom-1 text-accent-warm-darker text-bold">
                 {Config.crtkTask.warningTitle}
-              </h3>
+              </p>
               <p className="margin-bottom-0 text-accent-warm-darker">
                 {Config.crtkTask.warningText}
               </p>
@@ -202,9 +210,9 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
       )}
 
       <div className="bg-info-lighter  padding-2 margin-top-2 radius-lg">
-        <h3 className="margin-top-0 margin-bottom-1 text-accent-cool-more-dark text-bold">
+        <p className="margin-top-0 margin-bottom-1 text-accent-cool-more-dark text-bold">
           {Config.crtkTask.federalInfoTitle}
-        </h3>
+        </p>
         <p className="margin-bottom-1 text-accent-cool-more-dark">
           {Config.crtkTask.federalInfoText}
         </p>
@@ -217,15 +225,29 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
           {Config.crtkTask.federalLinkText}
         </a>
       </div>
-      {crtkData && (
-        <div className={"text-base-dark text-italic font-body-2xs"}>
-          {templateEval(Config.crtkTask.lastUpdatedText, {
-            lastUpdatedFormattedValue: dayjs(crtkData.lastUpdatedISO).format(
-              "MMMM Do, YYYY [at] ha",
-            ),
-          })}
-        </div>
-      )}
+
+      <div className="bg-base-lightest padding-4 padding-x-4 margin-x-neg-4 margin-top-3 margin-bottom-neg-4 display-flex flex-justify-end border-bottom-1px radius-bottom-lg ">
+        {status === "FOUND" ? (
+          <a
+            href="https://www.nj.gov/dep/enforcement/opppc/crtk/crtkguidance.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="text-no-underline"
+          >
+            <PrimaryButton isColor="primary" dataTestId="crtk-complete-survey">
+              Complete the CRTK Survey or Exemption
+            </PrimaryButton>
+          </a>
+        ) : (
+          <PrimaryButton
+            isColor="primary"
+            onClick={props.onSearchAgain}
+            dataTestId="crtk-search-again"
+          >
+            Check Again
+          </PrimaryButton>
+        )}
+      </div>
     </>
   );
 };

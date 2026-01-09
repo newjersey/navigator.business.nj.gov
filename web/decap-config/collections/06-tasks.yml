@@ -2549,7 +2549,7 @@ collections:
             widget: object
             fields:
               - { label: Title Text, name: titleText, widget: string }
-              - { label: Intro Text, name: introText, widget: string }
+              - { label: Intro Text, name: introText, widget: markdown }
               - { label: Helper Text, name: helperText, widget: string }
               - { label: Business Name Label, name: businessNameLabel, widget: string }
               - {
@@ -2560,7 +2560,7 @@ collections:
               - { label: City Label, name: cityLabel, widget: string }
               - { label: State Label, name: stateLabel, widget: string }
               - { label: Zip Label, name: zipLabel, widget: string }
-              - { label: EIN Label, name: einLabel, widget: string }
+              - { label: EIN Label, name: einLabel, widget: markdown }
               - { label: EIN Optional Text, name: einOptionalText, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
               - { label: Error Text Form, name: errorTextForm, widget: string }
@@ -2581,3 +2581,4 @@ collections:
               - { label: Federal Info Text, name: federalInfoText, widget: string }
               - { label: Federal Link Text, name: federalLinkText, widget: string }
               - { label: Last Updated Timestamp Text, name: lastUpdatedText, widget: string }
+              - { label: certainIndustriesLink, name: certainIndustriesLink, widget: markdown }
