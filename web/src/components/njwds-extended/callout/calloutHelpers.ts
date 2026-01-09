@@ -39,7 +39,7 @@ export const CALLOUT_STYLES: Record<CalloutTypes, CalloutStyling> = {
   },
 };
 
-export type IconType = "phone" | "email" | "text";
+export type IconType = "phone" | "email" | "text" | "link";
 
 export interface IconProps {
   amountIconText?: string;
@@ -47,6 +47,7 @@ export interface IconProps {
   frequencyIconText?: string;
   phoneIconText?: string;
   emailIconText?: string;
+  linkIconText?: string;
 }
 
 export interface IconTextProps {
@@ -93,6 +94,12 @@ export const ICON_ITEMS: IconItem[] = [
     iconName: "alternate_email",
     type: "email",
     ariaLabelKey: "emailIconAriaLabel",
+  },
+  {
+    propName: "linkIconText",
+    iconName: "language",
+    type: "link",
+    ariaLabelKey: "linkIconAriaLabel",
   },
 ];
 
