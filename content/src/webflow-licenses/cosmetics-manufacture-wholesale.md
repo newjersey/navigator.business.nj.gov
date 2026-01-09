@@ -9,7 +9,7 @@ agencyId: nj-health
 agencyAdditionalContext: Environmental and Occupational Health Services, Public
   Health Sanitation and Safety Program
 callToActionText: Apply for a License
-callToActionLink: http://nj.gov/health/ceohs/index.shtml
+callToActionLink: https://www.nj.gov/health/ceohs/phfpp/wfc/
 webflowIndustry: Cosmetics
 divisionPhone: (609) 826-4935
 webflowId: 5f77293d6f3d8df32775ef31
