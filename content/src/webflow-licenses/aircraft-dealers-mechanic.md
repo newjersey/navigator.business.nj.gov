@@ -2,10 +2,10 @@
 id: aircraft-dealers-mechanic
 displayname: aircraft-dealers-mechanic
 urlSlug: aircraft-dealers-mechanic
-webflowName: Aircraft Dealers/ Mechanic
+webflowName: Aircraft Mechanic
 agencyAdditionalContext: Federal Aviation Administration
 callToActionText: Get Certified
-callToActionLink: https://www.faa.gov/licenses_certificates/aircraft_certification
+callToActionLink: https://www.faa.gov/mechanics/become
 webflowIndustry: Aircraft Dealer
 licenseCertificationClassification: CONTACT
 divisionPhone: (866) 635-5322
