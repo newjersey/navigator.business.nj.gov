@@ -6,7 +6,7 @@ webflowName: Apparel Business
 agencyId: njdol
 agencyAdditionalContext: ""
 callToActionText: Register a Business
-callToActionLink: http://nj.gov/labor/wc/wc_index.html
+callToActionLink: https://www.nj.gov/labor/wageandhour/registration-permits/register/apparelregistration.shtml
 webflowIndustry: Apparel Manufacturer
 divisionPhone: (609) 984-3008
 webflowId: 5f77294d90d9accc271309db
