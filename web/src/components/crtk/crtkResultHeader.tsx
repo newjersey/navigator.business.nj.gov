@@ -34,7 +34,10 @@ const defaultColorScheme: Record<StatusType, StatusColorScheme> = {
     bgHdrColor: "bg-base-dark",
     bgSubHdrColor: "bg-base-lighter",
     icon: (
-      <SearchIcon className="display-none tablet:display-block tablet:margin-left-1 radius-pill bg-base-dark text-white tablet:usa-icon--size-8" />
+      <SearchIcon
+        className="display-none tablet:display-block tablet:margin-left-1 radius-pill bg-base-dark text-white"
+        sx={{ fontSize: "1.5rem", padding: "0.2rem" }}
+      />
     ),
   },
   FOUND: {
