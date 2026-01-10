@@ -1,6 +1,8 @@
+import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { templateEval } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
@@ -262,7 +264,13 @@ export const CRTKStatus = (props: Props): ReactElement => {
   return (
     <>
       <div className="margin-bottom-4">
-        <p className="text-base-darkest margin-bottom-2">{Config.crtkTask.introText}</p>
+        <div className="text-base-darkest margin-bottom-2">
+          <Content>
+            {templateEval(Config.crtkTask.introText, {
+              certainIndustriesLink: Config.crtkTask.certainIndustriesLink,
+            })}
+          </Content>
+        </div>
       </div>
       <div className="bg-accent-cooler-50 padding-2 margin-bottom-3">
         <h2 className="margin-top-0 margin-bottom-1 text-accent-cooler">
@@ -379,9 +387,13 @@ export const CRTKStatus = (props: Props): ReactElement => {
           </div>
 
           <div className="margin-bottom-2">
-            <label className="text-bold" htmlFor="ein">
-              {Config.crtkTask.einLabel}{" "}
-              <span className="text-normal">{Config.crtkTask.einOptionalText}</span>
+            <label className="text-bold flex" htmlFor="ein">
+              <Content>
+                {templateEval(Config.crtkTask.einLabel, {
+                  certainIndustriesLink: Config.crtkTask.certainIndustriesLink,
+                })}
+              </Content>
+              <span className="text-normal"> {Config.crtkTask.einOptionalText}</span>
             </label>
             <TextField
               value={formValues?.ein}
@@ -395,7 +407,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
           </div>
 
           <div className="flex flex-row">
-            <div className="mla margin-top-4">
+            <div className="mla">
               <PrimaryButton
                 isColor="accent-cooler"
                 isSubmitButton={true}
@@ -413,17 +425,17 @@ export const CRTKStatus = (props: Props): ReactElement => {
       <div className="bg-warning-lighter padding-2 margin-top-4">
         <div className="display-flex ">
           <div>
-            <h3 className="margin-top-0 margin-bottom-1 text-accent-warm-darker text-bold">
+            <p className="margin-top-0 margin-bottom-1 text-accent-warm-darker text-bold">
               {Config.crtkTask.warningTitle}
-            </h3>
+            </p>
             <p className="margin-bottom-0 text-accent-warm-darker">{Config.crtkTask.warningText}</p>
           </div>
         </div>
       </div>
       <div className="bg-info-lighter  padding-2 margin-top-2 ">
-        <h3 className="margin-top-0 margin-bottom-1 text-accent-cool-more-dark text-bold">
+        <p className="margin-top-0 margin-bottom-1 text-accent-cool-more-dark text-bold">
           {Config.crtkTask.federalInfoTitle}
-        </h3>
+        </p>
         <p className="margin-bottom-1 text-accent-cool-more-dark">
           {Config.crtkTask.federalInfoText}
         </p>

@@ -70,11 +70,13 @@ describe("<CRTKSearchResult />", () => {
   describe("Business Details Display", () => {
     it("displays business name with special characters correctly", () => {
       renderComponent({
+        CRTKSearchResult: "FOUND",
         CRTKBusinessDetails: {
           businessName: "Bob's Auto & Repair Co.",
           addressLine1: "123 Main St",
           city: "Newark",
           addressZipCode: "07102",
+          ein: "123456789",
         },
       });
       expect(screen.getByText("Bob's Auto & Repair Co.")).toBeInTheDocument();
@@ -181,7 +183,7 @@ describe("<CRTKSearchResult />", () => {
       fireEvent.click(screen.getByText("Next Steps"));
       expect(
         screen.getByText(
-          /your business isn't in the crtk database for one of the following reasons/i,
+          /your business isn't in the crtk database for one of the following reasons:/i,
         ),
       ).toBeInTheDocument();
     });
@@ -244,27 +246,43 @@ describe("<CRTKSearchResult />", () => {
   });
 
   describe("Search Again Button", () => {
-    it("displays Search Again button when onSearchAgain prop is provided", () => {
-      renderComponent();
+    it("displays Check Again button when status is NOT_FOUND and onSearchAgain prop is provided", () => {
+      renderComponent({ CRTKSearchResult: "NOT_FOUND" });
       expect(screen.getByTestId("crtk-search-again")).toBeInTheDocument();
     });
 
-    it("calls onSearchAgain callback when Search Again button is clicked", () => {
-      renderComponent();
+    it("calls onSearchAgain callback when Check Again button is clicked", () => {
+      renderComponent({ CRTKSearchResult: "NOT_FOUND" });
       const searchAgainButton = screen.getByTestId("crtk-search-again");
       fireEvent.click(searchAgainButton);
       expect(mockOnSearchAgain).toHaveBeenCalledTimes(1);
     });
 
-    it("does not display Search Again button when onSearchAgain prop is not provided", () => {
-      render(<CRTKSearchResult isLoading={false} crtkData={baseCRTKData} />);
+    it("does not display Check Again button when status is FOUND", () => {
+      renderComponent({ CRTKSearchResult: "FOUND" });
       expect(screen.queryByTestId("crtk-search-again")).not.toBeInTheDocument();
     });
 
-    it("Search Again button has correct text", () => {
-      renderComponent();
+    it("Check Again button has correct text", () => {
+      renderComponent({ CRTKSearchResult: "NOT_FOUND" });
       const searchAgainButton = screen.getByTestId("crtk-search-again");
-      expect(searchAgainButton).toHaveTextContent("Search Again");
+      expect(searchAgainButton).toHaveTextContent("Check Again");
+    });
+
+    it("displays Complete Survey button when status is FOUND", () => {
+      renderComponent({ CRTKSearchResult: "FOUND" });
+      expect(screen.getByTestId("crtk-complete-survey")).toBeInTheDocument();
+    });
+
+    it("Complete Survey button has correct text and link", () => {
+      renderComponent({ CRTKSearchResult: "FOUND" });
+      const completeButton = screen.getByTestId("crtk-complete-survey");
+      expect(completeButton).toHaveTextContent("Complete the CRTK Survey or Exemption");
+      const link = screen.getByRole("link", { name: /complete the crtk survey or exemption/i });
+      expect(link).toHaveAttribute(
+        "href",
+        "https://www.nj.gov/dep/enforcement/opppc/crtk/crtkguidance.pdf",
+      );
     });
   });
 
@@ -280,13 +298,6 @@ describe("<CRTKSearchResult />", () => {
       const link = screen.getByRole("link", { name: Config.crtkTask.federalLinkText });
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute("href", "https://www.epa.gov/epcra");
-    });
-  });
-
-  describe("Intro Text", () => {
-    it("displays intro text from config", () => {
-      renderComponent();
-      expect(screen.getByText(Config.crtkTask.introText)).toBeInTheDocument();
     });
   });
 

@@ -272,7 +272,10 @@ describe("<CRTKPage />", () => {
   describe("search again functionality", () => {
     it("returns to search form when 'Search Again' button is clicked", async () => {
       renderWithBusinessData({
-        crtkData: generateCRTKData(),
+        crtkData: generateCRTKData({
+          CRTKSearchResult: "NOT_FOUND",
+          CRTKEntry: {},
+        }),
       });
 
       expect(screen.getByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
