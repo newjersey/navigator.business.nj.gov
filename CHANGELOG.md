@@ -1,3 +1,13 @@
+# [2026.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.27.0...v2026.0.0) (2026-01-12)
+
+
+* chore!: major version bump to 2026 ([64477be](https://github.com/newjersey/navigator.business.nj.gov/commit/64477be1dea571119eed257bf67895e041bda9b5))
+
+
+### BREAKING CHANGES
+
+* resolve to new year
+
 # [2025.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.26.1...v2025.27.0) (2026-01-12)
 
 
