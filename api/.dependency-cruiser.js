@@ -87,6 +87,10 @@ module.exports = {
       to: { path: "fs" },
     },
     {
+      from: {},
+      to: { path: "zod" },
+    },
+    {
       from: { path: "src/db" },
       to: { path: "path" },
     },
