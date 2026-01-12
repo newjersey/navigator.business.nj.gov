@@ -19,6 +19,9 @@ export const CRTKPage = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [crtkData, setCrtkData] = useState<CRTKData | undefined>(undefined);
   const [searchError, setSearchError] = useState<string | undefined>(undefined);
+  const [lastSearchParams, setLastSearchParams] = useState<CRTKFacilityDetails | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     if (!business) return;
@@ -32,6 +35,7 @@ export const CRTKPage = (props: Props): ReactElement => {
   const handleSubmit = async (facilityDetails: CRTKFacilityDetails): Promise<void> => {
     setSearchError(undefined);
     setIsLoading(true);
+    setLastSearchParams(facilityDetails);
 
     try {
       const crtkSearchResponse = await api.searchBuisnessInCRTKDB({
@@ -88,6 +92,7 @@ export const CRTKPage = (props: Props): ReactElement => {
             onSubmit={handleSubmit}
             isLoading={isLoading}
             searchError={searchError}
+            initialValues={lastSearchParams}
           />
         )}
       </Box>
