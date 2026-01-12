@@ -1,7 +1,6 @@
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { LookupSectorTypeById } from "@businessnjgovnavigator/shared/sector";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 
 export const hasNonEssentialQuestions = (profileData: ProfileData): boolean => {
   if (
@@ -28,10 +27,9 @@ export const doesSectorHaveNonEssentialQuestions = (profileData: ProfileData): b
   return false;
 };
 
-export const getPersonaBasedNonEssentialQuestionsIds = (
-  profileData: ProfileData,
-): ProfileContentField[] | [] => {
-  const nonEssentialQuesionIds: ProfileContentField[] = [];
+export const getPersonaBasedNonEssentialQuestionsIds = (profileData: ProfileData): string[] => {
+  const nonEssentialQuesionIds: string[] = [];
+
   if (profileData.businessPersona === "STARTING") {
     nonEssentialQuesionIds.push("vacantPropertyOwner");
   }

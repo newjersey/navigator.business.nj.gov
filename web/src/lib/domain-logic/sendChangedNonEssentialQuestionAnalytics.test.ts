@@ -1,8 +1,8 @@
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
+import analytics from "@/lib/utils/analytics";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test/factories";
-import analytics from "@/lib/utils/analytics";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
   getNonEssentialQuestionText: jest.fn(),
@@ -34,10 +34,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -45,10 +42,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: { q1: true },
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -80,21 +74,15 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
     });
 
     newProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: false,
+      nonEssentialRadioAnswers: { carnivalRideOwningBusiness: false },
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -111,10 +99,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -122,10 +107,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: true,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -143,21 +125,17 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
     });
 
     newProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
+      nonEssentialRadioAnswers: {
+        travelingCircusOrCarnivalOwningBusiness: true,
+      },
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: true,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -174,22 +152,18 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
     (getNonEssentialQuestionText as jest.Mock).mockReturnValue("Question Text");
 
     prevProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
+      nonEssentialRadioAnswers: { vacantPropertyOwner: false },
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
     });
 
     newProfile = generateProfileData({
-      nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
+      nonEssentialRadioAnswers: {
+        vacantPropertyOwner: true,
+      },
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: true,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -207,10 +181,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -218,10 +189,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: true,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -239,10 +207,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -250,10 +215,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: true,
       plannedRenovationQuestion: undefined,
@@ -271,10 +233,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     prevProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: undefined,
@@ -282,10 +241,7 @@ describe("sendChangedNonEssentialQuestionAnalytics", () => {
 
     newProfile = generateProfileData({
       nonEssentialRadioAnswers: {},
-      carnivalRideOwningBusiness: undefined,
       raffleBingoGames: undefined,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
-      vacantPropertyOwner: undefined,
       elevatorOwningBusiness: undefined,
       homeBasedBusiness: undefined,
       plannedRenovationQuestion: true,
