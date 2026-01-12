@@ -4,8 +4,8 @@ displayname: historic-preservation
 urlSlug: historic-preservation
 webflowName: Historic Preservation
 agencyId: njdep
-agencyAdditionalContext: Office of N J Heritage
-callToActionText: Learn About the Historic Preservation Office
+agencyAdditionalContext: Office of NJ Heritage
+callToActionText: Visit the HPO
 callToActionLink: http://nj.gov/dep/hpo/
 webflowIndustry: Historic Preservation
 divisionPhone: (609) 292-2023

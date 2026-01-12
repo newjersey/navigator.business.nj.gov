@@ -4,7 +4,7 @@ displayname: meat-poultry-labeling
 urlSlug: meat-poultry-labeling
 webflowName: Meat/Poultry Labeling
 agencyAdditionalContext: U.S. Department of Agriculture
-callToActionText: Learn About the Food Safety and Inspection Service
+callToActionText: Learn About Food Safety
 callToActionLink: http://usa.gov/federal-agencies/food-safety-and-inspection-service
 webflowIndustry: Meat and Poultry Labeling
 licenseCertificationClassification: LABELS

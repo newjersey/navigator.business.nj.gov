@@ -5,7 +5,7 @@ urlSlug: casino-key-employee
 webflowName: Casino - Key Employee
 agencyId: law-public-safety
 agencyAdditionalContext: Casino Control Commission
-callToActionText: Learn About Key Employee Requirements
+callToActionText: Read Requirements
 callToActionLink: https://www.nj.gov/casinos/services/licensing/
 webflowIndustry: Casino Key Employee
 divisionPhone: (609) 441-3422

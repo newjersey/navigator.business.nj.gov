@@ -4,7 +4,7 @@ displayname: home-inspection
 urlSlug: home-inspection
 webflowName: Home Inspection
 agencyId: law-public-safety
-callToActionText: Become a Home Inspector
+callToActionText: Become an Inspector
 callToActionLink: http://njconsumeraffairs.gov/hom/Pages/applications.aspx
 webflowIndustry: Home Inspection
 licenseCertificationClassification: LICENSE

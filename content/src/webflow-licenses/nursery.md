@@ -5,7 +5,7 @@ urlSlug: nursery
 webflowName: Nursery
 agencyId: agriculture
 agencyAdditionalContext: Division of Plant Industry
-callToActionText: Learn About Nursery Certification
+callToActionText: Learn About Certification
 callToActionLink: http://nj.gov/agriculture/divisions/pi/prog/nursery.html
 webflowIndustry: Nursery
 divisionPhone: (609) 406-6939

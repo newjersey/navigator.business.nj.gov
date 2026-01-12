@@ -6,7 +6,7 @@ webflowName: Day Care Center, Adult & Geriatric
 agencyId: nj-health
 agencyAdditionalContext: Division of Health Facilities, Evaluation and
   Licensing, Certificate of Need and Health Care, Facility Licensure
-callToActionText: Learn More About Adult Care Centers
+callToActionText: Visit the NJ DOH
 callToActionLink: http://nj.gov/health/fhs/index.shtml
 webflowIndustry: Day Care
 divisionPhone: (609) 292-5960

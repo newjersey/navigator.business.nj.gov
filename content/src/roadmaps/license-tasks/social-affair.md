@@ -1,16 +1,19 @@
 ---
+filename: social-affair
 id: social-affair
-webflowId: 6902260638a874c45142d3d3
+displayname: social-affair
 urlSlug: social-affair
 name: Apply for a Social Affair Permit to Serve Alcohol
-displayname: social-affair
-webflowName: Apply for a Social Affair Permit to Serve Alcohol
-filename: social-affair
-callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
-callToActionText: Apply for My Social Affair Permit
+webflowName: Social Affair Permit to Serve Alcohol
+summaryDescriptionMd: If your nonprofit plans to serve or sell alcohol in open
+  containers at an event, you need a Social Affair Permit. This permit is given
+  by New Jersey’s Division of Alcoholic Beverage Control (ABC). Submit your
+  application **at least 22 days before the event date**.
 industryId: architecture,auto-body-repair,cannabis,car-rental,car-service,cleaning-janitorial-services,cosmetology,daycare,certified-public-accountant,acupuncture,cemetery,courier,commercial-construction,detective,domestic-employer,electrical-contractor,e-commerce,employment-agency,event-planning,finance-insurance,engineering,freight-forwarding,food-truck,funeral,generic,health-club,graphic-design,home-baker,home-health-aide,healthcare,hvac-contractor,independent-artist,home-contractor,interior-designer,landscape-architecture,law-firm,it-consultant,lodging,lawn-care,logistics,management-consulting,massage-therapy,marketing-pr-consulting,moving-company,pest-control,notary-public,non-medical-transport,photography,pharmacy,petcare,printing-business,real-estate-appraisals,real-estate-investor,real-estate-broker,residential-landlord,remediation-waste,restaurant,school-bus,telemarketing,security,retail,travel-agent,vending-machine,trucking
+callToActionText: Apply for My Social Affair Permit
+callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
+webflowId: 6902260638a874c45142d3d3
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "If your nonprofit plans to serve or sell alcohol in open containers at an event, you need a Social Affair Permit. This permit is given by New Jersey’s Division of Alcoholic Beverage Control (ABC). Submit your application **at least 22 days before the event date**."
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }

@@ -5,7 +5,7 @@ urlSlug: home-tutoring
 webflowName: Home Tutoring
 agencyId: education
 agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials
-callToActionText: Learn About Teacher Certification
+callToActionText: Learn About Certification
 callToActionLink: https://nj.gov/education/license/teacher/
 webflowIndustry: Home Tutoring
 divisionPhone: (609) 292-2070

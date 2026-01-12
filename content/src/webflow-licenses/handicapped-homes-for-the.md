@@ -5,7 +5,7 @@ urlSlug: handicapped-homes-for-the
 webflowName: Handicapped, Homes For The
 agencyId: nj-human-services
 agencyAdditionalContext: Division of Development Disabilities, Office of Licensing and Inspection
-callToActionText: Learn About Disability Resources
+callToActionText: Learn About Resources
 callToActionLink: https://www.nj.gov/disabilities/
 webflowIndustry: Handicapped
 divisionPhone: (609) 984-5321

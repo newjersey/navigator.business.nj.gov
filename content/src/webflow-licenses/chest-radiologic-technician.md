@@ -5,7 +5,7 @@ urlSlug: chest-radiologic-technician
 webflowName: Chest Radiologic Technician
 agencyId: njdep
 agencyAdditionalContext: Radiologic Technology
-callToActionText: Learn About the Radiation Protection Element
+callToActionText: Learn About the RPP
 callToActionLink: http://state.nj.us/dep/rpp/
 webflowIndustry: X-ray Technician
 divisionPhone: (609) 984-5890

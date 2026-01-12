@@ -4,7 +4,7 @@ displayname: captain-chartered-fishing-boat
 urlSlug: captain-chartered-fishing-boat
 webflowName: Captain, Chartered Fishing Boat
 agencyAdditionalContext: US Coast Guard Licensing
-callToActionText: Get a Captain's License
+callToActionText: Get a License
 callToActionLink: http://wow.uscgaux.info/content.php?unit=054-09&category=captains-license-info
 webflowIndustry: Fishing Boat
 licenseCertificationClassification: LICENSE

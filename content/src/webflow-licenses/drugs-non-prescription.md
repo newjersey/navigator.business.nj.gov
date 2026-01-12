@@ -6,7 +6,7 @@ webflowName: Drugs (Non-Prescription or Not Cannabis)
 agencyId: nj-health
 agencyAdditionalContext: Division OF Epidemiology, Occupational and
   Environmental Health Services, Consumer Health Services
-callToActionText: Visit the NJ Department of Health
+callToActionText: Visit the NJ DOH
 callToActionLink: http://nj.gov/health/
 webflowIndustry: Non-Prescription Drugs
 divisionPhone: (609) 826-4935

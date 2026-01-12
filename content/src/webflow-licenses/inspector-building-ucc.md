@@ -4,7 +4,7 @@ displayname: inspector-building-ucc
 urlSlug: inspector-building-ucc
 webflowName: Inspector-Building (UCC)
 agencyId: nj-community-affairs
-callToActionText: Become a Building Inspector
+callToActionText: Become an Inspector
 callToActionLink: "Use this URL: https://www.nj.gov/dca/codes/offices/licensing_cont_ed.shtml"
 webflowIndustry: Building Inspector
 licenseCertificationClassification: LICENSE

@@ -1,18 +1,20 @@
 ---
 id: new-producer-license
-webflowId: 685b037951ad9419716d87ea
-urlSlug: new-producer-license
-name: Apply for an Insurance Business Entity Producer License
 displayname: new-business-producer-license
-webflowName: Insurance Company
-filename: new-producer-license
-callToActionLink: https://nipr.com/licensing-center/apply
-callToActionText: Apply for My Business Producer License
+urlSlug: new-producer-license
 agencyId: nj-banking-insurance
 divisionPhone: 609-292-7272
+filename: new-producer-license
+name: Apply for an Insurance Business Entity Producer License
+webflowName: "Finance and Insurance: Business Entity Producer License"
+summaryDescriptionMd: You must have a business `producer|insurance-producer`
+  license for your company to legally sell, solicit, or negotiate insurance
+  products.
 industryId: retail
+callToActionText: Apply for My Business Producer License
+callToActionLink: https://nipr.com/licensing-center/apply
+webflowId: 685b037951ad9419716d87ea
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You must have a business `producer|insurance-producer` license for your company to legally sell, solicit, or negotiate insurance products."
 ---
 
 :::infoAlert

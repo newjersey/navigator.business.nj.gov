@@ -5,7 +5,7 @@ urlSlug: public-utilities
 webflowName: Public Utilities
 agencyId: public-utilities
 agencyAdditionalContext: ""
-callToActionText: Learn About the Board of Public Utilities
+callToActionText: Learn about the BPU
 callToActionLink: https://nj.gov/bpu/
 webflowIndustry: Public Utility
 divisionPhone: (800) 624-0331

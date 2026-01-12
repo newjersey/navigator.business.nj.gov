@@ -4,7 +4,7 @@ displayname: nanny-agency
 urlSlug: nanny-agency
 webflowName: Nanny Agency
 agencyId: nj-consumer-affairs
-callToActionText: Learn About Childcare Licensing
+callToActionText: Get Childcare Licensing
 callToActionLink: https://www.nj.gov/dcf/about/divisions/ol/
 webflowIndustry: Nanny Agency
 licenseCertificationClassification: LICENSE

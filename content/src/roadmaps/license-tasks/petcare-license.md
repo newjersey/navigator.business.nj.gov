@@ -1,10 +1,11 @@
 ---
+licenseName: ""
 id: petcare-license
 displayname: petcare-license
 urlSlug: petcare-license
-name: Obtain an Animal Facilities License, if Required
+name: Get an Animal Facilities License, if Required
 webflowName: "Pet Care: Animal Facilities License"
-summaryDescriptionMd: >2-
+summaryDescriptionMd: >-2
    `Animal facilities|animal-facilities` need to apply for license(s) with their local government annually. Your facility may need multiple licenses depending on the services you provide.
 
   Check with your local government's department of health for specific license application requirements and to schedule a site inspection prior to your application.
@@ -14,7 +15,6 @@ industryId:
   - petcare
 webflowId: 648b6ec5a42a17d5fc33791d
 licenseCertificationClassification: ""
-licenseName: ""
 ---
 
 ## Common Types of Licenses

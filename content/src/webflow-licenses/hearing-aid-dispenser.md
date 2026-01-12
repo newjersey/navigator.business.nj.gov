@@ -5,7 +5,7 @@ urlSlug: hearing-aid-dispenser
 webflowName: Hearing Aid Dispenser
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Hearing Aid Dispensers Examining Committee
-callToActionText: Become a Hearing Aid Dispenser
+callToActionText: Become a Dispenser
 callToActionLink: https://www.njconsumeraffairs.gov/had/Pages/applications.aspx
 webflowIndustry: Hearing Aid
 divisionPhone: (973) 504-6233

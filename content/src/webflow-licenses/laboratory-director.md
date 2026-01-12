@@ -5,7 +5,7 @@ urlSlug: laboratory-director
 webflowName: Laboratory Director
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: ""
-callToActionText: Get a Bioanalytical Lab Director License
+callToActionText: Get a License
 callToActionLink: https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx
 webflowIndustry: Laboratory Director
 divisionPhone: (973) 504-6200

@@ -5,7 +5,7 @@ urlSlug: loan-company
 webflowName: Loan Company
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Office of Consumer Finance, License Services
-callToActionText: Learn About the Office of Consumer Finance
+callToActionText: Learn About the OCF
 callToActionLink: http://nj.gov/dobi/division_banking/ocf/index.htm
 webflowIndustry: Loan Company
 divisionPhone: (609) 292-7272

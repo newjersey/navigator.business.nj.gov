@@ -1,20 +1,20 @@
 ---
-id: "license-acupuncture"
-webflowId: "66aceed9453b76e2c7e41869"
-urlSlug: "acupuncture-license"
-name: "Apply for an Acupuncturist License, if Applicable"
-webflowName: "Acupuncture: Acupuncturist License"
-displayname: "license-acupuncture"
-callToActionLink: "https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx"
-callToActionText: "Apply for My License"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Board of Acupuncture"
-divisionPhone: "(973) 273-8092"
-industryId: "acupuncture"
-webflowType: "individual-license"
-licenseCertificationClassification: ""
 licenseName: ""
-summaryDescriptionMd: "You need an acupuncturist license to offer services as an acupuncturist."
+id: license-acupuncture
+displayname: license-acupuncture
+urlSlug: acupuncture-license
+name: Apply for an Acupuncturist License, if Applicable
+webflowName: Acupuncturist License
+summaryDescriptionMd: You need an acupuncturist license to offer services as an acupuncturist.
+industryId: acupuncture
+callToActionText: Apply for My License
+callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
+licenseCertificationClassification: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Acupuncture
+divisionPhone: (973) 273-8092
+webflowType: individual-license
+webflowId: 66aceed9453b76e2c7e41869
 ---
 
 ## Eligibility Criteria

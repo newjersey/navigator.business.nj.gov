@@ -5,7 +5,7 @@ urlSlug: painting-house
 webflowName: Painting House
 agencyId: njdep
 agencyAdditionalContext: Compliance and Enforcement
-callToActionText: Learn About the Office of Enforcement Policy
+callToActionText: Learn About Enforcement
 callToActionLink: http://nj.gov/dep/enforcement/
 webflowIndustry: Painting House
 divisionPhone: "(888) 656-6225 #21"

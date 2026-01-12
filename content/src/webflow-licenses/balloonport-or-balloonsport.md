@@ -2,11 +2,11 @@
 id: balloonport-or-balloonsport
 displayname: balloonport-or-balloonsport
 urlSlug: balloonport-or-balloonsport
-webflowName: Balloonport Or Balloonsport
+webflowName: Balloonspots
 agencyId: njdot
 agencyAdditionalContext: Aviation
-callToActionText: Learn About Balloonsport Permits
-callToActionLink: https://www.nj.gov/transportation/
+callToActionText: Learn About Permits
+callToActionLink: https://dot.nj.gov/transportation/business/epermits/
 webflowIndustry: Balloon
 divisionPhone: (609) 530-2900
 webflowId: 5f772967b4710ff2113c37bd

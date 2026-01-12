@@ -6,7 +6,7 @@ webflowName: Charitable Annuities
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Life Health Actuarial Services Department of Banking
   and Insurance, Real Estate Commission
-callToActionText: Apply for a Special Annuity Permit
+callToActionText: Get a Special Permit
 callToActionLink: http://nj.gov/dobi/division_insurance/pdfs/cga_perapp.pdf
 webflowIndustry: Charitable Annuity
 divisionPhone: (609) 292-7053/7055

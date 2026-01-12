@@ -4,7 +4,7 @@ displayname: osha
 urlSlug: osha
 webflowName: OSHA
 agencyAdditionalContext: "OSHA: Occupational Safety and Health Administration"
-callToActionText: Learn About the NJ OSHA Plan
+callToActionText: Find OSHA Information
 callToActionLink: https://www.osha.gov/stateplans/nj
 webflowIndustry: OSHA
 licenseCertificationClassification: CONTACT

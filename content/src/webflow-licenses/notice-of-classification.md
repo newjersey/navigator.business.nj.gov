@@ -4,7 +4,7 @@ displayname: notice-of-classification
 urlSlug: notice-of-classification
 webflowName: Notice Of Classification
 agencyAdditionalContext: Department of Treasury, Property Management
-callToActionText: Learn About the Division of Property Management and Construction
+callToActionText: Learn About the DPMC
 callToActionLink: http://nj.gov/treasury/dpmc/
 webflowIndustry: Notice of Classification
 licenseCertificationClassification: CONTACT

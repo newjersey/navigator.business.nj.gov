@@ -1,14 +1,14 @@
 ---
+id: statistical-organization
 displayname: statistical-organization
-id: "statistical-organization"
-webflowId: "5f77292f862dc1148cbe49a0"
-urlSlug: "statistical-organization"
-webflowName: "Statistical Organization"
-callToActionLink: "http://nj.gov/dobi/division_insurance/propcas.htm"
-callToActionText: ""
+urlSlug: statistical-organization
+webflowName: Statistical Organization
 agencyId: nj-banking-insurance
-agencyAdditionalContext: "Insurance Division"
-divisionPhone: "(609) 984-7310"
-webflowIndustry: "Statistical Organization"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Insurance Division
+callToActionText: Visit NJ DOBI
+callToActionLink: http://nj.gov/dobi/division_insurance/propcas.htm
+webflowIndustry: Statistical Organization
+divisionPhone: (609) 984-7310
+webflowId: 5f77292f862dc1148cbe49a0
+licenseCertificationClassification: LICENSE
 ---

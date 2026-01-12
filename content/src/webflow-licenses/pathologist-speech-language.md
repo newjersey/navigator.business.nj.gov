@@ -4,7 +4,7 @@ displayname: pathologist-speech-language
 urlSlug: pathologist-speech-language
 webflowName: Pathologist, Speech Language
 agencyId: nj-consumer-affairs
-callToActionText: Get a Speech Language Pathologist License
+callToActionText: Get a License
 callToActionLink: https://www.njconsumeraffairs.gov/aud/Pages/applications.aspx
 webflowIndustry: Speech Pathologist
 licenseCertificationClassification: LICENSE

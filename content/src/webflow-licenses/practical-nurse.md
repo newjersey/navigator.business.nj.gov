@@ -5,7 +5,7 @@ urlSlug: practical-nurse
 webflowName: Practical Nurse
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: NJ Board of Nursing
-callToActionText: Register as a Practical Nurse
+callToActionText: Get Registered
 callToActionLink: http://njconsumeraffairs.gov/nur/pages/applications.aspx
 webflowIndustry: Practical Nurse
 divisionPhone: (973) 504-6430

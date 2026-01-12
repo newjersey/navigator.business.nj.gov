@@ -4,7 +4,7 @@ displayname: alcoholism-counselor
 urlSlug: alcoholism-counselor
 webflowName: Alcoholism Counselor
 agencyAdditionalContext: Alcohol and Drug Counselor Committee
-callToActionText: "Get Certified as an Alcoholism Counselor "
+callToActionText: Get Certified
 callToActionLink: https://www.njconsumeraffairs.gov/adc/Pages/applications.aspx
 webflowIndustry: Alcoholism Counselor
 licenseCertificationClassification: CERTIFICATE

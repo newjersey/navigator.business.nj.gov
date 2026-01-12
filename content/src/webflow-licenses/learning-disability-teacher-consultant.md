@@ -5,7 +5,7 @@ urlSlug: learning-disability-teacher-consultant
 webflowName: Learning Disability Teacher/Consultant
 agencyId: education
 agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials
-callToActionText: Get a Learning Disabilities Teacher Certificate
+callToActionText: Get a Certificate
 callToActionLink: https://www.nj.gov/education/certification/edsrvs/endorsementsedsrvs/3300.shtml
 webflowIndustry: Learning Disability Teacher
 divisionPhone: (609) 292-2070

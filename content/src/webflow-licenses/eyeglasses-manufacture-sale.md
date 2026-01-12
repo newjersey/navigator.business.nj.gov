@@ -4,7 +4,7 @@ displayname: eyeglasses-manufacture-sale
 urlSlug: eyeglasses-manufacture-sale
 webflowName: Eyeglasses (Manufacture & Sale)
 agencyId: nj-consumer-affairs
-callToActionText: Learn About Manufacturing and Selling Eyeglasses
+callToActionText: Learn About Manufacturing
 callToActionLink: http://njconsumeraffairs.gov/oph/Pages/default.aspx
 webflowIndustry: Eyeglasses
 licenseCertificationClassification: LICENSE

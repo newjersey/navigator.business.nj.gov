@@ -6,8 +6,8 @@ webflowName: Desserts (Frozen)
 agencyId: nj-health
 agencyAdditionalContext: Office of Consumer Environmental Health Services,
   Public Health Sanitation and Safety Program
-callToActionText: Apply for a Frozen Dessert License
-callToActionLink: http://nj.gov/health/ceohs/index.shtml
+callToActionText: Apply for a License
+callToActionLink: https://www.nj.gov/health/ceohs/phfpp/dairy/index.shtml
 webflowIndustry: Frozen Desserts
 divisionPhone: (609) 826-4941
 webflowId: 5f77293ee022945832eaa5c5

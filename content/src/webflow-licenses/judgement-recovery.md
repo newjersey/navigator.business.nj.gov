@@ -5,7 +5,7 @@ urlSlug: judgement-recovery
 webflowName: Judgement Recovery
 agencyId: nj-revenue-enterprise-services
 agencyAdditionalContext: Business Tax Registration
-callToActionText: Learn About the Division of Revenue and Enterprise Services
+callToActionText: Learn About DORES
 callToActionLink: http://state.nj.us/treasury/revenue/
 webflowIndustry: Judgement Recovery
 divisionPhone: (866) 534-7789

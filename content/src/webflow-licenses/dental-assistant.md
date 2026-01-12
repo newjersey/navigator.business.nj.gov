@@ -5,7 +5,7 @@ urlSlug: dental-assistant
 webflowName: Dental Assistant
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Dentistry
-callToActionText: Become a Dental Assistant
+callToActionText: Get Licensed
 callToActionLink: http://njconsumeraffairs.gov/den/Pages/default.aspx
 webflowIndustry: Dental Assistant
 divisionPhone: (973) 504-6405

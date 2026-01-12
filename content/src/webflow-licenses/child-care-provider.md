@@ -5,7 +5,7 @@ urlSlug: child-care-provider
 webflowName: Child Care Provider
 agencyId: nj-children-families
 agencyAdditionalContext: Office of Licensing
-callToActionText: Learn About the Child Care Assistance Program
+callToActionText: Become a Provider
 callToActionLink: http://www.childcarenj.gov/Providers/How-to-Become-a-Provider
 webflowIndustry: Child Care
 divisionPhone: (609) 826-3999

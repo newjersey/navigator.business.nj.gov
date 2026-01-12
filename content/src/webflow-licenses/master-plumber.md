@@ -5,7 +5,7 @@ urlSlug: master-plumber
 webflowName: Master Plumber
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Examiners of Master Plumbers
-callToActionText: Get Licensed as a Master Plumber
+callToActionText: Get Licensed
 callToActionLink: http://njconsumeraffairs.gov/plu/Pages/applications.aspx
 webflowIndustry: Master Plumber
 divisionPhone: (973) 504-6420

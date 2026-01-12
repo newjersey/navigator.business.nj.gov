@@ -5,7 +5,7 @@ urlSlug: fishing-equipment-licenses
 webflowName: Fishing Equipment/Licenses
 agencyId: njdep
 agencyAdditionalContext: Division of Fish and Wildlife
-callToActionText: Learn About Fishing Licenses
+callToActionText: Find Licenses
 callToActionLink: https://dep.nj.gov/njfw/fishing/
 webflowIndustry: Fishing Equipment Licenses
 divisionPhone: (609) 292-4860

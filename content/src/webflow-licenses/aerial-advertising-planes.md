@@ -5,7 +5,7 @@ urlSlug: aerial-advertising-planes
 webflowName: Aerial Advertising (Planes)
 agencyId: njdot
 agencyAdditionalContext: Division of Aeronautics
-callToActionText: Apply for an Aerial Advertising License
+callToActionText: Apply for a License
 callToActionLink: https://www.state.nj.us/transportation/freight/aviation/forms.shtm
 webflowIndustry: Advertising
 divisionPhone: (609) 530-2900

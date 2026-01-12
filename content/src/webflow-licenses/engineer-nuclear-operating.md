@@ -6,7 +6,7 @@ webflowName: Engineer, Nuclear Operating
 agencyId: njdol
 agencyAdditionalContext: Division of Workplace Standards, Office of Boiler
   Operating Pressure Vessel Compliance
-callToActionText: Learn About Nuclear Engineer Licensing
+callToActionText: Learn About Licensing
 callToActionLink: http://nj.gov/labor/lsse/content/PSOSH_Forms.html
 webflowIndustry: Nuclear Engineer
 divisionPhone: (609) 292-2345

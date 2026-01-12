@@ -4,8 +4,8 @@ displayname: food-stamps
 urlSlug: food-stamps
 webflowName: Food Stamps
 agencyAdditionalContext: U.S. Department of Agriculture
-callToActionText: Learn About Food Distribution Programs
-callToActionLink: http://nj.gov/agriculture/divisions/fn/fooddistrib/tefap.html
+callToActionText: Learn About Food Distribution
+callToActionLink: https://www.nj.gov/agriculture/divisions/fn/fooddistrib/
 webflowIndustry: Food Stamps
 licenseCertificationClassification: CONTACT
 divisionPhone: (877) 823-4369

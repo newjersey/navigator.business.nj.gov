@@ -5,7 +5,7 @@ urlSlug: planner-in-training
 webflowName: Planner-In-Training
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Professional Planners
-callToActionText: Become a Planner-in-Training
+callToActionText: Become a Planner
 callToActionLink: http://njconsumeraffairs.gov/plan/Pages/default.aspx
 webflowIndustry: Planner In-Training
 divisionPhone: (973) 504-6465

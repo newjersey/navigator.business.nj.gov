@@ -5,7 +5,7 @@ urlSlug: drug-treatment-center
 webflowName: Drug Treatment Center
 agencyId: nj-health
 agencyAdditionalContext: ""
-callToActionText: Learn About Drug Treatment Centers
+callToActionText: Learn About Treatment Centers
 callToActionLink: http://nj.gov/health/
 webflowIndustry: Drug Treatment
 divisionPhone: (609) 292-5960

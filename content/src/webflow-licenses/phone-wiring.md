@@ -4,7 +4,7 @@ displayname: phone-wiring
 urlSlug: phone-wiring
 webflowName: Phone Wiring
 agencyAdditionalContext: Board of Examiners of Electrical Contractors
-callToActionText: Become an Electrical Contractor
+callToActionText: Become a Contractor
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
 webflowIndustry: Telephone Wiring
 licenseCertificationClassification: CONTACT

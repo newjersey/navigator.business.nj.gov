@@ -5,7 +5,7 @@ urlSlug: milk-weighed-sampler
 webflowName: Milk Weighed/Sampler
 agencyId: agriculture
 agencyAdditionalContext: Division of Dairy and Commodity Regulation
-callToActionText: Get a Milk Weigher and Sampler Certificate
+callToActionText: Get a Certificate
 callToActionLink: http://nj.gov/agriculture/divisions/md/prog/dairy.html
 webflowIndustry: Milk Weighed and Sampler
 divisionPhone: (609) 292-5648

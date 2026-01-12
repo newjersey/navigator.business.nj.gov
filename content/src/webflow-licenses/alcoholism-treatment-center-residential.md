@@ -5,7 +5,7 @@ urlSlug: alcoholism-treatment-center-residential
 webflowName: Alcoholism Treatment Center (Residential)
 agencyId: nj-health
 agencyAdditionalContext: ""
-callToActionText: Learn About Residential Treatment Centers
+callToActionText: Learn About Centers
 callToActionLink: http://state.nj.us/health/healthfacilities/
 webflowIndustry: Alcoholism Treatment
 divisionPhone: (609) 826-4935

@@ -1,20 +1,20 @@
 ---
+agencyId: nj-consumer-affairs
+divisionPhone: (973) 504-6377
+filename: electrologist-office-license
 licenseName: Electrologists-Premises
 id: electrologist-office-license
-filename: electrologist-office-license
 displayname: electrologist-office-license
 urlSlug: electrologist-office-license
 name: " Apply for Your Electrologist Office Premises"
-webflowName: electrologist-office-license
+webflowName: "Electrologist: Office License"
 summaryDescriptionMd: You must have an electrologist office premises license to
   offer electrolysis services in New Jersey.
 industryId: healthcare
 callToActionText: Contact the Electrologists Advisory Committee
 callToActionLink: https://www.njconsumeraffairs.gov/eac/Pages/default.aspx
-licenseCertificationClassification: ""
-agencyId: nj-consumer-affairs
-divisionPhone: (973) 504-6377
 webflowId: 66e9d9648d1f1a667a8f04eb
+licenseCertificationClassification: ""
 ---
 
 ## Application Requirements

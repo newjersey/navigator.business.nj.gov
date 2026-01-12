@@ -1,14 +1,14 @@
 ---
+id: teacher-of-practical-nursing
 displayname: teacher-of-practical-nursing
-id: "teacher-of-practical-nursing"
-webflowId: "5f77293990d9ac342c1309d9"
-urlSlug: "teacher-of-practical-nursing"
-webflowName: "Teacher of Practical Nursing"
-callToActionLink: "http://state.nj.us/education/license/faq.htm"
-callToActionText: ""
+urlSlug: teacher-of-practical-nursing
+webflowName: Teacher of Practical Nursing
 agencyId: education
-agencyAdditionalContext: "Division of Licensing, Office of Teacher Certification and Academic Credentials"
-divisionPhone: "(609) 292-2070"
-webflowIndustry: "Teacher of Practical Nursing"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials
+callToActionText: Find Certifications
+callToActionLink: https://www.nj.gov/education/certification/
+webflowIndustry: Teacher of Practical Nursing
+divisionPhone: (609) 292-2070
+webflowId: 5f77293990d9ac342c1309d9
+licenseCertificationClassification: LICENSE
 ---

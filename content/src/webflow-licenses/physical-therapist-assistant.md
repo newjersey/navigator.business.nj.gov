@@ -5,7 +5,7 @@ urlSlug: physical-therapist-assistant
 webflowName: Physical Therapist Assistant
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: NJ Board of Physical Therapy
-callToActionText: Become a Physical Therapy Assistant
+callToActionText: Become a PTA
 callToActionLink: http://njconsumeraffairs.gov/pt/Pages/applications.aspx
 webflowIndustry: Physical Therapist Assistant
 divisionPhone: (973)504-6455

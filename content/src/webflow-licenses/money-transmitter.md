@@ -5,7 +5,7 @@ urlSlug: money-transmitter
 webflowName: Money Transmitter
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Office of Consumer Finance, License Services
-callToActionText: Get a Money Transmitter License
+callToActionText: Get a License
 callToActionLink: http://nj.gov/dobi/division_banking/licensees/bnklic_menu.htm
 webflowIndustry: Money Transmitter
 divisionPhone: (609) 292-7272

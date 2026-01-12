@@ -5,7 +5,7 @@ urlSlug: aviation-facility-private
 webflowName: Aviation Facility (Private)
 agencyId: njdot
 agencyAdditionalContext: Aviation
-callToActionText: Learn About Private Aviation Facilities
+callToActionText: Learn About Facilities
 callToActionLink: https://www.state.nj.us/transportation/freight/aviation/forms.shtm
 webflowIndustry: Aviation Facility
 divisionPhone: (609) 530-2900

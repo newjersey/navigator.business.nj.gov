@@ -6,7 +6,7 @@ webflowName: Drugs (Manufacture, Wholesale to Medical Professionals)
 agencyId: nj-health
 agencyAdditionalContext: Division OF Epidemiology, Occupational and
   Environmental Health Services, Consumer Health Services
-callToActionText: Apply for a Manufacturer or Wholesaler or Drug License
+callToActionText: Apply for a License
 callToActionLink: https://www.nj.gov/health/ceohs/phfpp/dmd/
 webflowIndustry: Drug Manufacture
 divisionPhone: (609) 826-4935

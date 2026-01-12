@@ -1,19 +1,20 @@
 ---
 id: individual-producer-license
-webflowId: 685b03788c305737e9b9a249
+displayname: individual-producer-license
 urlSlug: individual-producer-license
 name: Apply for an Insurance Individual Producer License
-displayname: individual-producer-license
-webflowName: Apply for an Insurance Individual Producer License
-filename: individual-producer-license
-callToActionLink: https://nipr.com/licensing-center/apply
+webflowName: "Finance and Insurance: Individual Producer License"
+summaryDescriptionMd: You must have an individual `producer|insurance-producer`
+  license to legally sell, solicit, or negotiate insurance products.
+industryId: generic
 callToActionText: Apply for My Individual Producer License
+callToActionLink: https://nipr.com/licensing-center/apply
+licenseCertificationClassification: undefined
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Department of Banking and Insurance (NJDOBI)
 divisionPhone: (609)292-7272
-industryId: generic
-licenseCertificationClassification: undefined
-summaryDescriptionMd: "You must have an individual `producer|insurance-producer` license to legally sell, solicit, or negotiate insurance products."
+filename: individual-producer-license
+webflowId: 685b03788c305737e9b9a249
 ---
 
 :::infoAlert

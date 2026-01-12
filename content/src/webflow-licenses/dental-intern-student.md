@@ -5,7 +5,7 @@ urlSlug: dental-intern-student
 webflowName: Dental Intern/Student
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Dentistry
-callToActionText: Learn About Dental Licenses
+callToActionText: Find Licenses
 callToActionLink: http://njconsumeraffairs.gov/den/Pages/default.aspx
 webflowIndustry: Dental Intern
 divisionPhone: (973) 504-6405

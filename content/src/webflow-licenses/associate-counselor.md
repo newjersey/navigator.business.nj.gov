@@ -5,7 +5,7 @@ urlSlug: associate-counselor
 webflowName: Associate Counselor
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Marriage and Family Therapy Examiners
-callToActionText: Apply for an Associate Counselor License
+callToActionText: Apply for a License
 callToActionLink: https://www.njconsumeraffairs.gov/mft/Pages/applications.aspx
 webflowIndustry: Associate Counselor
 divisionPhone: (908) 504-6582

@@ -5,7 +5,7 @@ urlSlug: business-education
 webflowName: Business Education
 agencyId: education
 agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials
-callToActionText: Apply for NJ Educator Certification
+callToActionText: Apply for Certification
 callToActionLink: https://www.nj.gov/education/certification/apply/index.shtml
 webflowIndustry: Business Education
 divisionPhone: "(609) 376-3500 #3"

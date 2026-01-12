@@ -4,7 +4,7 @@ displayname: counselor-alcoholism-or-drug
 urlSlug: counselor-alcoholism-or-drug
 webflowName: Counselor, Alcoholism or Drug
 agencyAdditionalContext: Alcohol and Drug Counselor Committee
-callToActionText: Become an Alcohol and Drug Counselor
+callToActionText: Become a Counselor
 callToActionLink: https://www.njconsumeraffairs.gov/adc/Pages/applications.aspx
 webflowIndustry: Substance Counselor
 licenseCertificationClassification: CERTIFICATE

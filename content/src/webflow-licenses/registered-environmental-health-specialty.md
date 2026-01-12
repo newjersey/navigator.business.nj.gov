@@ -1,14 +1,14 @@
 ---
+id: registered-environmental-health-specialty
 displayname: registered-environmental-health-specialty
-id: "registered-environmental-health-specialty"
-webflowId: "5f772945386254aba0bb0e43"
-urlSlug: "registered-environmental-health-specialty"
-webflowName: "Registered Environmental Health Specialty"
-callToActionLink: "http://njconsumeraffairs.gov/hom/Pages/regulations.aspx"
-callToActionText: ""
+urlSlug: registered-environmental-health-specialty
+webflowName: Registered Environmental Health Specialty
 agencyId: nj-health
-agencyAdditionalContext: "Office of Local Health"
-divisionPhone: "(609) 292-4993"
-webflowIndustry: "Registered Environmental Health"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Office of Local Health
+callToActionText: Get an Environmental Health Specialty
+callToActionLink: https://www.nj.gov/health/ceohs/environmental-occupational/indoor-envi-consultant/
+webflowIndustry: Registered Environmental Health
+divisionPhone: (609) 292-4993
+webflowId: 5f772945386254aba0bb0e43
+licenseCertificationClassification: LICENSE
 ---

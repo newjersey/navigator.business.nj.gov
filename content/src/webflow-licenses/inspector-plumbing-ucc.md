@@ -5,7 +5,7 @@ urlSlug: inspector-plumbing-ucc
 webflowName: Inspector-Plumbing (UCC)
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Code Services, Licensing Unit
-callToActionText: Become a Plumbing Inspector
+callToActionText: Become an Inspector
 callToActionLink: https://www.nj.gov/dca/codes/offices/licensing_cont_ed.shtml
 webflowIndustry: Plumbing Inspector
 divisionPhone: (609) 984-7834

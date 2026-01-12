@@ -5,7 +5,7 @@ urlSlug: ophthalmologist-technician
 webflowName: Ophthalmologist Technician
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Examiners of Ophthalmic Dispensers and Technicians
-callToActionText: Become an Ophthalmic Technician
+callToActionText: Find Licenses
 callToActionLink: https://www.njconsumeraffairs.gov/oph/Pages/applications.aspx
 webflowIndustry: Ophthalmologist Technician
 divisionPhone: (973) 504-6435

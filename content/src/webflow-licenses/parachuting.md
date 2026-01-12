@@ -5,7 +5,7 @@ urlSlug: parachuting
 webflowName: Parachuting
 agencyId: njdot
 agencyAdditionalContext: Division of Aeronautics
-callToActionText: Learn About Aeronautical Permitting
+callToActionText: Get Aeronautic Permits
 callToActionLink: https://www.nj.gov/transportation/business/epermits/
 webflowIndustry: Parachuting
 divisionPhone: (609) 530-2913

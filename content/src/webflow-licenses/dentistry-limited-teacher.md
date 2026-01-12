@@ -4,7 +4,7 @@ displayname: dentistry-limited-teacher
 urlSlug: dentistry-limited-teacher
 webflowName: Dentistry-Limited Teacher
 agencyId: nj-consumer-affairs
-callToActionText: Visit the NJ State Board of Dentistry
+callToActionText: Visit the Dentistry Board
 callToActionLink: http://njconsumeraffairs.gov/den/Pages/default.aspx
 webflowIndustry: Dentistry Teacher
 licenseCertificationClassification: CERTIFICATE

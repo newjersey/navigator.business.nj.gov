@@ -5,7 +5,7 @@ urlSlug: radiologic-technologist
 webflowName: Radiologic Technologist
 agencyId: njdep
 agencyAdditionalContext: Bureau of Radiologic Heath
-callToActionText: Become a Radiologic Tech
+callToActionText: Get Licensed
 callToActionLink: http://state.nj.us/dep/rpp/tec/diagrt.htm
 webflowIndustry: Radiologic Technologist
 divisionPhone: (609) 984-5890

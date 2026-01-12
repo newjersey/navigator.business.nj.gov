@@ -5,7 +5,7 @@ urlSlug: business-school-adult
 webflowName: Business School (Adult)
 agencyId: education
 agencyAdditionalContext: ""
-callToActionText: Learn About Postsecondary Private Career Schools
+callToActionText: Learn About Career Schools
 callToActionLink: https://www.nj.gov/education/cte/postsec/ppcs/
 webflowIndustry: Business School
 divisionPhone: (609) 292-7272

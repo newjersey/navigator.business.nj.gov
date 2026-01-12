@@ -5,8 +5,8 @@ urlSlug: asbestos-worker-technician-or-supervisor-individuals
 webflowName: Asbestos Worker, Technician, or Supervisor (Individuals)
 agencyId: njdol
 agencyAdditionalContext: Asbestos Control and Licensing
-callToActionText: Apply for an Asbestos Permit
-callToActionLink: http://nj.gov/labor/lsse/employee/asbestos_control_and_licensing.html
+callToActionText: Get a Permit
+callToActionLink: https://www.nj.gov/labor/safetyandhealth/programs-services/asbestos/index.shtml#forms
 webflowIndustry: Asbestos
 divisionPhone: (609) 633-3760
 webflowId: 5f77294eb4710f7a7a3c37ba

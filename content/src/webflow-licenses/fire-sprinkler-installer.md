@@ -5,7 +5,7 @@ urlSlug: fire-sprinkler-installer
 webflowName: Fire Sprinkler/Installer
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety Contractor Certification Unit
-callToActionText: Learn About Fire Code Inspections
+callToActionText: Learn About Inspections
 callToActionLink: https://firesolutions.dca.nj.gov/
 webflowIndustry: Fire Sprinkler
 divisionPhone: (609) 984-7860

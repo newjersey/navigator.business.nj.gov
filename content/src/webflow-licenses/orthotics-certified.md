@@ -4,7 +4,7 @@ displayname: orthotics-certified
 urlSlug: orthotics-certified
 webflowName: Orthotics-Certified
 agencyId: nj-consumer-affairs
-callToActionText: Become a Certified Orthotist
+callToActionText: Get Certified
 callToActionLink: http://njconsumeraffairs.gov/orth
 webflowIndustry: Orthotics
 licenseCertificationClassification: REGISTRATION/LICENSE

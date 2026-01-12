@@ -5,7 +5,7 @@ urlSlug: first-aid-squad
 webflowName: First Aid Squad
 agencyId: health-senior-services
 agencyAdditionalContext: Office of Emergency Medical Services
-callToActionText: Learn About Emergency Medical Services
+callToActionText: Learn About EMS
 callToActionLink: http://state.nj.us/health/ems/
 webflowIndustry: First Aid
 divisionPhone: (609) 633-7777

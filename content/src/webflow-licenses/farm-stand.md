@@ -4,7 +4,7 @@ displayname: farm-stand
 urlSlug: farm-stand
 webflowName: Farm Stand
 agencyId: local-health
-callToActionText: Learn About Farm Stands and Markets
+callToActionText: Learn About Farm Stands
 callToActionLink: https://www.nj.gov/agriculture/divisions/md/prog/communityfarmers.shtml
 webflowIndustry: Farm Stand
 licenseCertificationClassification: LICENSE
