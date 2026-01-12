@@ -42,11 +42,8 @@ export interface IndustrySpecificData {
   readonly residentialConstructionType: ResidentialConstructionType;
   readonly employmentPersonnelServiceType: EmploymentAndPersonnelServicesType;
   readonly employmentPlacementType: EmploymentPlacementType;
-  readonly carnivalRideOwningBusiness: boolean | undefined;
   readonly propertyLeaseType: PropertyLeaseType;
   readonly hasThreeOrMoreRentalUnits: boolean | undefined;
-  readonly travelingCircusOrCarnivalOwningBusiness: boolean | undefined;
-  readonly vacantPropertyOwner: boolean | undefined;
   readonly publicWorksContractor: boolean | undefined;
 }
 
@@ -75,11 +72,8 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   residentialConstructionType: [...residentialConstructionOptions],
   employmentPersonnelServiceType: [...employmentPersonnelServiceOptions],
   employmentPlacementType: [...employmentPlacementOptions],
-  carnivalRideOwningBusiness: booleanChoice,
   propertyLeaseType: [...propertyLeaseTypeOptions],
   hasThreeOrMoreRentalUnits: booleanChoice,
-  travelingCircusOrCarnivalOwningBusiness: booleanChoice,
-  vacantPropertyOwner: booleanChoice,
   publicWorksContractor: booleanChoice,
 };
 
@@ -104,11 +98,8 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   residentialConstructionType: undefined,
   employmentPersonnelServiceType: undefined,
   employmentPlacementType: undefined,
-  carnivalRideOwningBusiness: undefined,
   propertyLeaseType: undefined,
   hasThreeOrMoreRentalUnits: undefined,
-  travelingCircusOrCarnivalOwningBusiness: undefined,
-  vacantPropertyOwner: undefined,
   publicWorksContractor: undefined,
 };
 
