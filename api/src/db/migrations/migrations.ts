@@ -182,6 +182,7 @@ import { migrate_v177_to_v178 } from "@db/migrations/v178_add_employer_access";
 import { migrate_v178_to_v179 } from "@db/migrations/v179_add_business_deletion_date";
 import { migrate_v179_to_v180 } from "@db/migrations/v180_add_email_sent_environment_data";
 import { migrate_v180_to_v181 } from "@db/migrations/v181_add_updates_reminders_and_phone_number";
+import { migrate_v181_to_v182 } from "@db/migrations/v182_move_profile_non_essential_questions_to_non_essential_questions_section";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -368,6 +369,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v178_to_v179,
   migrate_v179_to_v180,
   migrate_v180_to_v181,
+  migrate_v181_to_v182,
 ];
 
-export { generatev181UserData as CURRENT_GENERATOR } from "@db/migrations/v181_add_updates_reminders_and_phone_number";
+export { generatev182UserData as CURRENT_GENERATOR } from "@db/migrations/v182_move_profile_non_essential_questions_to_non_essential_questions_section";

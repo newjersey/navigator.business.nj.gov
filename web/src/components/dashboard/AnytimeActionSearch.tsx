@@ -111,29 +111,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
       return false;
     if (action.applyToAllUsers) return true;
     if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
-    if (isAnytimeActionFromNonEssentialQuestions(action)) return true;
     return !!(action.sectorIds && sectorId && action.sectorIds.includes(sectorId));
-  };
-
-  const isAnytimeActionFromNonEssentialQuestions = (action: AnytimeActionTask): boolean => {
-    switch (action.filename) {
-      case "carnival-ride-supplemental-modification":
-        return (
-          !!business?.profileData.carnivalRideOwningBusiness ||
-          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"]
-        );
-      case "operating-carnival-fire-permit":
-        return (
-          !!business?.profileData.carnivalRideOwningBusiness ||
-          !!business?.profileData.travelingCircusOrCarnivalOwningBusiness ||
-          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"] ||
-          !!business?.profileData.nonEssentialRadioAnswers["carnival-fire-licenses"]
-        );
-      case "vacant-building-fire-permit":
-        return !!business?.profileData.vacantPropertyOwner;
-      default:
-        return false;
-    }
   };
 
   const licenseReinstatementMatch = (action: AnytimeActionLicenseReinstatement): boolean => {
