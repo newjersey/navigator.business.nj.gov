@@ -253,7 +253,10 @@ const syncLicenses = async (params) => {
   console.log("updating licenses");
   const licensesAlreadyInWebflow = await getLicensesAlreadyInWebflow();
   await updateLicenses(licensesAlreadyInWebflow);
-  console.log("creating new licenses");
+  console.log("updating webflow-licenses");
+  const webflowLicensesToUpdate = await getWebflowLicensesAlreadyInWebflow();
+  await updateLicenses(webflowLicensesToUpdate);
+  console.log("creating new licenses (no new webflow-licenses will be created)");
   await wait();
   if (params.create) {
     await createNewLicenses();
@@ -277,8 +280,7 @@ if (process.env.NODE_ENV === "test") {
 } else if (argsInclude("--legacy-sync")) {
   await (async () => {
     const webflowLicensesToUpdate = await getWebflowLicensesAlreadyInWebflow();
-    const x = webflowLicensesToUpdate.slice(600, 700);
-    await updateLicenses(x);
+    await updateLicenses(webflowLicensesToUpdate);
     process.exit(0);
   })();
 } else if (argsInclude("--preview")) {
