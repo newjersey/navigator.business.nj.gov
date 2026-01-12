@@ -4,7 +4,7 @@ id: register-home-contractor
 displayname: register-home-contractor
 urlSlug: hic-license
 name: Get Your Home Improvement Contractor Registration
-webflowName: "Home Contractor: Home Improvement Contractor Registration"
+webflowName: Home Improvement Contractor Registration
 summaryDescriptionMd: >-
   :::infoAlert
    The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes an FAQ section.
