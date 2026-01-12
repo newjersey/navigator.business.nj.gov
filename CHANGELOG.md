@@ -1,3 +1,21 @@
+# [2025.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.26.1...v2025.27.0) (2026-01-12)
+
+
+### Bug Fixes
+
+* [AB[#13064](https://github.com/newjersey/navigator.business.nj.gov/issues/13064)] remove edit button on deferred location question ([d559d0e](https://github.com/newjersey/navigator.business.nj.gov/commit/d559d0ecede03f47eb51b2f47965131fa84ef89f))
+* [AB[#16898](https://github.com/newjersey/navigator.business.nj.gov/issues/16898)] prevent conflict when starting dev server, modify links ([17c42ad](https://github.com/newjersey/navigator.business.nj.gov/commit/17c42adfdab2aee724c897e2e980d6fe221f6764))
+* Fix filing calendar test that fails every Dec 31 ([6afe908](https://github.com/newjersey/navigator.business.nj.gov/commit/6afe908970f07738d2744594a051fb1fcf65ba34))
+
+
+### Features
+
+* [AB[#16648](https://github.com/newjersey/navigator.business.nj.gov/issues/16648)] Add business name error for users without a business name ([a4f175d](https://github.com/newjersey/navigator.business.nj.gov/commit/a4f175de030e2fd75796232d8a923ffac4cfdda4))
+* [AB[#16898](https://github.com/newjersey/navigator.business.nj.gov/issues/16898)] add utm links to email, fix styling ([d4ab7de](https://github.com/newjersey/navigator.business.nj.gov/commit/d4ab7de3f074fce3278fe9227ea0187d5a429752))
+* [AB[#16898](https://github.com/newjersey/navigator.business.nj.gov/issues/16898)] reimplement simple welcome email in React Email ([d5307b1](https://github.com/newjersey/navigator.business.nj.gov/commit/d5307b175092343805ffd027802621a54df7b1c0))
+* [AB[#16939](https://github.com/newjersey/navigator.business.nj.gov/issues/16939)] add/fix profile tab query params ([91a2c66](https://github.com/newjersey/navigator.business.nj.gov/commit/91a2c6682c0f1345a289d17b75f7edf7602886b8))
+* [AB[#16939](https://github.com/newjersey/navigator.business.nj.gov/issues/16939)] simplify profile tab link tests, removes flaky test ([2c7a47f](https://github.com/newjersey/navigator.business.nj.gov/commit/2c7a47ff63cccb788ef1db1eb12d71a8195d15f4))
+
 ## [2025.26.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.26.0...v2025.26.1) (2025-12-30)
 
 
