@@ -10,7 +10,7 @@ dueDate: ""
 summaryDescriptionMd: The Take Charge grant program helps businesses pay for
   electric vehicle charging stations. This program covers the cost of equipment
   and installation.
-callToActionLink: www.njeda.gov/takecharge
+callToActionLink: http://www.njeda.gov/takecharge
 callToActionText: Learn more
 fundingType: grant
 programFrequency: pilot

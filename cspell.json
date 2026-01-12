@@ -255,7 +255,16 @@
     "SSTRS",
     "EPCRA",
     "nbsp",
-    "cemetary"
+    "SACB",
+    "DOBI",
+    "MARAD",
+    "DPMC",
+    "SWCE",
+    "CEOHS",
+    "Balloonspots",
+    "DLPS",
+    "LCSW",
+    "CPSC"
   ],
   "ignorePaths": [
     "node_modules/**",
