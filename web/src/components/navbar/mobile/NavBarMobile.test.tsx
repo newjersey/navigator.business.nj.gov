@@ -270,6 +270,75 @@ describe("<NavBarMobile />", () => {
     });
   });
 
+  describe("logoOnly configuration with NAVIGATOR_LOGO", () => {
+    it("shows logo and my account link without MyNJ logo", () => {
+      render(
+        <NavBarMobile
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          isLanding={false}
+          scrolled={false}
+          task={undefined}
+          hideMiniRoadmap={true}
+          showSidebar={false}
+          previousBusinessId={undefined}
+          logoOnlyType="NAVIGATOR_LOGO"
+        />,
+      );
+
+      expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
+      expect(screen.queryByAltText("myNewJersey")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("nav-menu-mobile-account-open")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("nav-menu-mobile-quick-link-open")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("logoOnly configuration with NAVIGATOR_MYNJ_LOGO", () => {
+    it("shows logo, my account link, and MyNJ logo", () => {
+      render(
+        <NavBarMobile
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          isLanding={false}
+          scrolled={false}
+          task={undefined}
+          hideMiniRoadmap={true}
+          showSidebar={false}
+          previousBusinessId={undefined}
+          logoOnlyType="NAVIGATOR_MYNJ_LOGO"
+        />,
+      );
+
+      expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
+      expect(screen.getByAltText("myNewJersey")).toBeInTheDocument();
+      expect(screen.queryByTestId("nav-menu-mobile-account-open")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("nav-menu-mobile-quick-link-open")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("login page configuration", () => {
+    it("shows logo and my account text without link or login button", () => {
+      render(
+        <NavBarMobile
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          isLanding={false}
+          isLoginPage={true}
+          scrolled={false}
+          task={undefined}
+          hideMiniRoadmap={true}
+          showSidebar={false}
+          previousBusinessId={undefined}
+        />,
+      );
+
+      expect(screen.getByText("My Account")).toBeInTheDocument();
+      expect(screen.queryByTestId("nav-menu-mobile-account-open")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("nav-menu-mobile-quick-link-open")).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+    });
+  });
+
   describe("side bar and mini-roadmap", () => {
     it("does not display mini-roadmap when hideMiniRoadmap is true", () => {
       useMockBusiness({});

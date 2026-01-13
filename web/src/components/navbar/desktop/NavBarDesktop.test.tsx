@@ -201,4 +201,60 @@ describe("<NavBarDesktop />", () => {
       ).toBeInTheDocument();
     });
   });
+
+  describe("logoOnly configuration with NAVIGATOR_LOGO", () => {
+    it("shows logo and my account link without MyNJ logo", () => {
+      render(
+        <NavBarDesktop
+          isLanding={false}
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          logoOnlyType="NAVIGATOR_LOGO"
+        />,
+      );
+
+      quickLinksDoNotExist();
+      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+      expect(screen.queryByTestId("nav-bar-desktop-dropdown-button")).not.toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
+      expect(screen.queryByAltText("myNewJersey")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("logoOnly configuration with NAVIGATOR_MYNJ_LOGO", () => {
+    it("shows logo, my account link, and MyNJ logo", () => {
+      render(
+        <NavBarDesktop
+          isLanding={false}
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          logoOnlyType="NAVIGATOR_MYNJ_LOGO"
+        />,
+      );
+
+      quickLinksDoNotExist();
+      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+      expect(screen.queryByTestId("nav-bar-desktop-dropdown-button")).not.toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
+      expect(screen.getByAltText("myNewJersey")).toBeInTheDocument();
+    });
+  });
+
+  describe("login page configuration", () => {
+    it("shows logo and my account text without link or login button", () => {
+      render(
+        <NavBarDesktop
+          isLanding={false}
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          isLoginPage={true}
+        />,
+      );
+
+      quickLinksDoNotExist();
+      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+      expect(screen.queryByTestId("nav-bar-desktop-dropdown-button")).not.toBeInTheDocument();
+      expect(screen.getByText("My Account")).toBeInTheDocument();
+    });
+  });
 });
