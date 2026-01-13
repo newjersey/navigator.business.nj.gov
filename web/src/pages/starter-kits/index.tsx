@@ -1,4 +1,4 @@
-import { NavBar } from "@/components/navbar/NavBar";
+import { NavBar, NavBarVariant } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
@@ -10,7 +10,7 @@ import { ReactElement } from "react";
 const StarterKitsRootPage = (): ReactElement => {
   return (
     <PageSkeleton landingPage={true}>
-      <NavBar isSeoStarterKit={true} />
+      <NavBar variant={NavBarVariant.MINIMAL_WITH_LOGIN} />
       <main className="desktop:grid-container-widescreen desktop:padding-x-7">
         <SingleColumnContainer>
           <PageCircularIndicator />
