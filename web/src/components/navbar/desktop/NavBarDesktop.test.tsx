@@ -1,3 +1,4 @@
+import { NavBarVariant } from "@/components/navbar/NavBar";
 import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -64,18 +65,14 @@ describe("<NavBarDesktop />", () => {
 
   describe("landing configuration", () => {
     it("shows quick links, login and dropdown", () => {
-      render(
-        <NavBarDesktop isLanding={true} currentlyOnboarding={false} isAuthenticated={false} />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.FULL_LANDING} />);
       quickLinksExist();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
     });
 
     it("shows get started within the dropdown", () => {
-      render(
-        <NavBarDesktop isLanding={true} currentlyOnboarding={false} isAuthenticated={false} />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.FULL_LANDING} />);
       expect(screen.queryByText(Config.navigationDefaults.getStartedText)).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-bar-desktop-dropdown-button"));
       expect(screen.getByText(Config.navigationDefaults.getStartedText)).toBeInTheDocument();
@@ -84,14 +81,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("seo starter kits configuration", () => {
     it("shows logo and login", () => {
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isSeoStarterKit={true}
-        />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.MINIMAL_WITH_LOGIN} />);
 
       quickLinksDoNotExist();
       expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
@@ -101,9 +91,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("onboarding configuration", () => {
     it("shows login and dropdown", () => {
-      render(
-        <NavBarDesktop isLanding={false} currentlyOnboarding={true} isAuthenticated={false} />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN} />);
 
       quickLinksDoNotExist();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
@@ -112,9 +100,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("authenticated configuration", () => {
     it("shows quicklinks and dropdown", () => {
-      render(
-        <NavBarDesktop isLanding={false} currentlyOnboarding={false} isAuthenticated={true} />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.FULL_AUTHENTICATED} />);
       quickLinksExist();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
@@ -133,14 +119,7 @@ describe("<NavBarDesktop />", () => {
           [firstBusiness.id]: firstBusiness,
         },
       });
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={true}
-          userData={userData}
-        />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.FULL_AUTHENTICATED} userData={userData} />);
 
       expect(
         screen.queryByText(Config.navigationDefaults.backToProfileLinkText),
@@ -162,9 +141,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("guest configuration", () => {
     it("shows quicklinks, login and dropdown", () => {
-      render(
-        <NavBarDesktop isLanding={false} currentlyOnboarding={false} isAuthenticated={false} />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.FULL_GUEST} />);
       quickLinksExist();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
@@ -172,14 +149,7 @@ describe("<NavBarDesktop />", () => {
 
     it("shows profile and regsiter in dropdown", () => {
       const userData = generateUserData({});
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          userData={userData}
-        />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.FULL_GUEST} userData={userData} />);
 
       expect(
         screen.queryByText(Config.navigationDefaults.backToProfileLinkText),
@@ -204,14 +174,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("logoOnly configuration with NAVIGATOR_LOGO", () => {
     it("shows logo and my account link without MyNJ logo", () => {
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          logoOnlyType="NAVIGATOR_LOGO"
-        />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.LOGO_ONLY} logoVariant="NAVIGATOR_LOGO" />);
 
       quickLinksDoNotExist();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
@@ -223,14 +186,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("logoOnly configuration with NAVIGATOR_MYNJ_LOGO", () => {
     it("shows logo, my account link, and MyNJ logo", () => {
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          logoOnlyType="NAVIGATOR_MYNJ_LOGO"
-        />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.LOGO_ONLY} logoVariant="NAVIGATOR_MYNJ_LOGO" />);
 
       quickLinksDoNotExist();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
@@ -242,14 +198,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("login page configuration", () => {
     it("shows logo and my account text without link or login button", () => {
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLoginPage={true}
-        />,
-      );
+      render(<NavBarDesktop variant={NavBarVariant.LOGO_WITH_TEXT} />);
 
       quickLinksDoNotExist();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();

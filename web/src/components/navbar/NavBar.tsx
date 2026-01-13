@@ -62,37 +62,38 @@ export const NavBar = (props: Props): ReactElement => {
     return router?.pathname === ROUTES.onboarding;
   };
 
+  const deriveVariant = (): NavBarVariant => {
+    if (props.logoOnly) return NavBarVariant.LOGO_ONLY;
+    if (props.isLoginPage) return NavBarVariant.LOGO_WITH_TEXT;
+    if (props.isSeoStarterKit) return NavBarVariant.MINIMAL_WITH_LOGIN;
+    if (props.landingPage) return NavBarVariant.FULL_LANDING;
+    if (currentlyOnboarding()) return NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN;
+    if (isAuthenticated) return NavBarVariant.FULL_AUTHENTICATED;
+    return NavBarVariant.FULL_GUEST;
+  };
+
+  const variant = props.variant ?? deriveVariant();
+  const logoVariant = props.logoVariant ?? props.logoOnly;
+
   return (
     <>
       <div className="display-none desktop:display-inline">
         <NavBarDesktop
-          variant={props.variant}
-          logoVariant={props.logoVariant}
-          isSeoStarterKit={props.isSeoStarterKit}
-          isLanding={props.landingPage}
-          isLoginPage={props.isLoginPage}
-          logoOnlyType={props.logoOnly}
+          variant={variant}
+          logoVariant={logoVariant}
           previousBusinessId={props.previousBusinessId}
-          currentlyOnboarding={currentlyOnboarding()}
-          isAuthenticated={isAuthenticated}
           userData={userData}
         />
       </div>
       <div className="display-inline desktop:display-none">
         <NavBarMobile
-          variant={props.variant}
-          logoVariant={props.logoVariant}
-          isSeoStarterKit={props.isSeoStarterKit}
-          isLanding={props.landingPage}
-          isLoginPage={props.isLoginPage}
+          variant={variant}
+          logoVariant={logoVariant}
           scrolled={scrolled}
           task={props.task}
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           previousBusinessId={props.previousBusinessId}
-          logoOnlyType={props.logoOnly}
-          currentlyOnboarding={currentlyOnboarding()}
-          isAuthenticated={isAuthenticated}
           userData={userData}
         />
         <div className={scrolled ? "padding-top-6" : ""} />

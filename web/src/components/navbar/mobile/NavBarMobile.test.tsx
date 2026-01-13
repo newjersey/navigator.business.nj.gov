@@ -1,3 +1,4 @@
+import { NavBarVariant } from "@/components/navbar/NavBar";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -67,9 +68,7 @@ describe("<NavBarMobile />", () => {
     it("shows quick link and account icons", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={true}
+          variant={NavBarVariant.FULL_LANDING}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -85,9 +84,7 @@ describe("<NavBarMobile />", () => {
     it("renders getStarted and Login in account dropdown", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={true}
+          variant={NavBarVariant.FULL_LANDING}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -109,10 +106,7 @@ describe("<NavBarMobile />", () => {
     it("shows my account text and login button", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={false}
-          isSeoStarterKit={true}
+          variant={NavBarVariant.MINIMAL_WITH_LOGIN}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -130,9 +124,7 @@ describe("<NavBarMobile />", () => {
     it("shows account icon and not quick link icon", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={true}
-          isAuthenticated={false}
-          isLanding={false}
+          variant={NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -148,9 +140,7 @@ describe("<NavBarMobile />", () => {
     it("renders login in account dropdown", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={true}
-          isAuthenticated={false}
-          isLanding={false}
+          variant={NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -170,9 +160,7 @@ describe("<NavBarMobile />", () => {
     it("shows quick link and account icons", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={true}
-          isLanding={false}
+          variant={NavBarVariant.FULL_AUTHENTICATED}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -189,9 +177,7 @@ describe("<NavBarMobile />", () => {
       const userData = generateUserData({});
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={true}
-          isLanding={false}
+          variant={NavBarVariant.FULL_AUTHENTICATED}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -222,9 +208,7 @@ describe("<NavBarMobile />", () => {
     it("shows quick link and account icons", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={false}
+          variant={NavBarVariant.FULL_GUEST}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -241,9 +225,7 @@ describe("<NavBarMobile />", () => {
       const userData = generateUserData({});
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={false}
+          variant={NavBarVariant.FULL_GUEST}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -274,15 +256,13 @@ describe("<NavBarMobile />", () => {
     it("shows logo and my account link without MyNJ logo", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={false}
+          variant={NavBarVariant.LOGO_ONLY}
+          logoVariant="NAVIGATOR_LOGO"
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-          logoOnlyType="NAVIGATOR_LOGO"
         />,
       );
 
@@ -297,15 +277,13 @@ describe("<NavBarMobile />", () => {
     it("shows logo, my account link, and MyNJ logo", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={false}
+          variant={NavBarVariant.LOGO_ONLY}
+          logoVariant="NAVIGATOR_MYNJ_LOGO"
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
-          logoOnlyType="NAVIGATOR_MYNJ_LOGO"
         />,
       );
 
@@ -320,10 +298,7 @@ describe("<NavBarMobile />", () => {
     it("shows logo and my account text without link or login button", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={false}
-          isLoginPage={true}
+          variant={NavBarVariant.LOGO_WITH_TEXT}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -345,9 +320,7 @@ describe("<NavBarMobile />", () => {
       useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={true}
-          isLanding={false}
+          variant={NavBarVariant.FULL_AUTHENTICATED}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -372,9 +345,7 @@ describe("<NavBarMobile />", () => {
       );
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={true}
-          isLanding={false}
+          variant={NavBarVariant.FULL_AUTHENTICATED}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={false}
@@ -402,9 +373,7 @@ describe("<NavBarMobile />", () => {
       );
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
-          isAuthenticated={true}
-          isLanding={false}
+          variant={NavBarVariant.FULL_AUTHENTICATED}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={false}
