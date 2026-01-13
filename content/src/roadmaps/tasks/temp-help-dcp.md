@@ -38,35 +38,34 @@ webflowName: Temporary Workers Designated Classification Placements
 industryId: ""
 agencyId: njdol
 ---
-
 &nbsp;
 
 You must have an active license or registration as one of the following:
 
-- Temporary help service firm
-- Consulting firm
-- Consulting/temporary help service firm
-- Other employment and personnel services (for example, employment agency, entertainment agency, or nurse registry)
-- Career consulting/outplacement
-- Health care service firm
+* Temporary help service firm
+* Consulting firm
+* Consulting/temporary help service firm
+* Other employment and personnel services (for example, employment agency, entertainment agency, or nurse registry)
+* Career consulting/outplacement
+* Health care service firm
 
 ## Application Requirements
 
-- Business name
-- `Trade name (DBA, or "doing business as" name)|alt-name-trade-name`, if applicable
-- Federal `employer identification number|ein`
-- Business address
-- `Business organization/structure|business-structure-contextual-link\`
-- 9-digit `individual taxpayer identification number|itin`, if applicable
-- Social Security number, if a sole proprietorship
-- Owner’s information, including name, address, and email
-- `Registered agent information|registered-agent`, if applicable
-- 15-digit employer account number (usually in this format: 0-###-###-###/000-00), issued by the Department of Labor and Workforce Development for the payment of unemployment insurance contributions
-- Proof of valid workers’ compensation insurance covering all employees, including policy number, company name, and expiration date
-- Information about DCPs receiving permanent placements within the past 12 months, including number of placements and percentage of total workers placed
-- Revocation or suspension information within the last 5 years, if applicable
-- `Surety bond|surety-bond` information or exemption information
-- Applicable fees paid
+* Business name
+*  `Trade name (DBA, or "doing business as" name)|alt-name-trade-name` , if applicable
+* Federal `employer identification number|ein` 
+* Business address
+*  `Business organization/structure|business-structure-contextual-link` 
+* 9-digit `individual taxpayer identification number|itin` , if applicable
+* Social Security number, if a sole proprietorship
+* Owner’s information, including name, address, and email
+*  `Registered agent information|registered-agent` , if applicable
+* 15-digit employer account number (usually in this format: 0-###-###-###/000-00), issued by the Department of Labor and Workforce Development for the payment of unemployment insurance contributions
+* Proof of valid workers’ compensation insurance covering all employees, including policy number, company name, and expiration date
+* Information about DCPs receiving permanent placements within the past 12 months, including number of placements and percentage of total workers placed
+* Revocation or suspension information within the last 5 years, if applicable
+*  `Surety bond|surety-bond` information or exemption information
+* Applicable fees paid
 
 The certification must be signed by the principal executive officer.
 
