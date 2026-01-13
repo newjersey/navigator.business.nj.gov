@@ -18,6 +18,8 @@ export enum NavBarVariant {
 }
 
 type Props = {
+  variant?: NavBarVariant;
+  logoVariant?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   landingPage?: boolean;
   isLoginPage?: boolean;
   isSeoStarterKit?: boolean;
@@ -64,6 +66,8 @@ export const NavBar = (props: Props): ReactElement => {
     <>
       <div className="display-none desktop:display-inline">
         <NavBarDesktop
+          variant={props.variant}
+          logoVariant={props.logoVariant}
           isSeoStarterKit={props.isSeoStarterKit}
           isLanding={props.landingPage}
           isLoginPage={props.isLoginPage}
@@ -76,6 +80,8 @@ export const NavBar = (props: Props): ReactElement => {
       </div>
       <div className="display-inline desktop:display-none">
         <NavBarMobile
+          variant={props.variant}
+          logoVariant={props.logoVariant}
           isSeoStarterKit={props.isSeoStarterKit}
           isLanding={props.landingPage}
           isLoginPage={props.isLoginPage}
