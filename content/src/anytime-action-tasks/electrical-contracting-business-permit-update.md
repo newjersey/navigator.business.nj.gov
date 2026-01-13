@@ -53,7 +53,7 @@ If the business is a corporation, in addition to the above, provide the followin
 
 - Name and address of `registered agent|registered-agent`
 - Name of all officers and stakeholders who own at least 10% of stock
-- `Certificate of Formation|certificate-of-formation`
+- `Certificate of Formation|certificate-formation`
 - `Certificate of Good Standing|good-standing` , if the business formed over a year ago
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
