@@ -105,10 +105,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Set up Node.js 22.20.0
+      - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22.20.0
+          node-version-file: .nvmrc
           cache: yarn
 
       - name: Deploy to Staging

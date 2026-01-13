@@ -114,7 +114,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 22.20.0
+          node-version-file: .nvmrc
           cache: yarn
       - name: Download Build Workspace
         uses: actions/download-artifact@v6
