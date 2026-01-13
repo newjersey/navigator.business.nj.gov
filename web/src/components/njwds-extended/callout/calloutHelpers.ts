@@ -39,14 +39,16 @@ export const CALLOUT_STYLES: Record<CalloutTypes, CalloutStyling> = {
   },
 };
 
-export type IconType = "phone" | "email" | "text";
+export type IconType = "phone" | "email" | "text" | "link";
 
 export interface IconProps {
   amountIconText?: string;
   filingTypeIconText?: string;
   frequencyIconText?: string;
   phoneIconText?: string;
+  phoneIconLabel?: string;
   emailIconText?: string;
+  linkIconText?: string;
 }
 
 export interface IconTextProps {
@@ -54,6 +56,7 @@ export interface IconTextProps {
   text: string;
   type: IconType;
   label: string;
+  labelText?: string;
 }
 
 interface IconItem {
@@ -94,6 +97,12 @@ export const ICON_ITEMS: IconItem[] = [
     type: "email",
     ariaLabelKey: "emailIconAriaLabel",
   },
+  {
+    propName: "linkIconText",
+    iconName: "language",
+    type: "link",
+    ariaLabelKey: "linkIconAriaLabel",
+  },
 ];
 
 export const getIconItems = <T extends IconProps>(props: T): IconTextProps[] => {
@@ -104,12 +113,18 @@ export const getIconItems = <T extends IconProps>(props: T): IconTextProps[] => 
   for (const item of ICON_ITEMS) {
     const text = props[item.propName];
     if (text) {
-      iconItems.push({
+      const iconItem: IconTextProps = {
         iconName: item.iconName,
         text: text,
         type: item.type,
         label: item.ariaLabelKey,
-      });
+      };
+
+      if (item.propName === "phoneIconText" && props.phoneIconLabel) {
+        iconItem.labelText = props.phoneIconLabel;
+      }
+
+      iconItems.push(iconItem);
     }
   }
 
