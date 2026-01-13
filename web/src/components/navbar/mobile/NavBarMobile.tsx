@@ -28,15 +28,9 @@ interface Props {
   task?: Task;
   hideMiniRoadmap?: boolean;
   showSidebar?: boolean;
-  variant?: NavBarVariant;
+  variant: NavBarVariant;
   logoVariant?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
-  isSeoStarterKit?: boolean;
-  isLanding?: boolean;
-  isLoginPage?: boolean;
   previousBusinessId?: string | undefined;
-  logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
-  currentlyOnboarding?: boolean;
-  isAuthenticated?: boolean;
   userData?: UserData;
   CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
@@ -44,12 +38,14 @@ interface Props {
 export const NavBarMobile = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
+  const isAuthenticated = props.variant === NavBarVariant.FULL_AUTHENTICATED;
+  const isLanding = props.variant === NavBarVariant.FULL_LANDING;
   let currentBusiness = undefined;
   if (props.userData) {
     currentBusiness = getCurrentBusiness(props.userData);
   }
 
-  const navBarBusinessTitle = getNavBarBusinessTitle(currentBusiness, props.isAuthenticated);
+  const navBarBusinessTitle = getNavBarBusinessTitle(currentBusiness, isAuthenticated);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -64,25 +60,12 @@ export const NavBarMobile = (props: Props): ReactElement => {
     setIsSidebarOpen(false);
   };
 
-  const deriveVariant = (): NavBarVariant => {
-    if (props.logoOnlyType) return NavBarVariant.LOGO_ONLY;
-    if (props.isLoginPage) return NavBarVariant.LOGO_WITH_TEXT;
-    if (props.isSeoStarterKit) return NavBarVariant.MINIMAL_WITH_LOGIN;
-    if (props.isLanding) return NavBarVariant.FULL_LANDING;
-    if (props.currentlyOnboarding) return NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN;
-    if (props.isAuthenticated) return NavBarVariant.FULL_AUTHENTICATED;
-    return NavBarVariant.FULL_GUEST;
-  };
-
-  const variant = props.variant ?? deriveVariant();
-  const logoVariant = props.logoVariant ?? props.logoOnlyType;
-
-  switch (variant) {
+  switch (props.variant) {
     case NavBarVariant.LOGO_ONLY:
       return (
         <NavBarLogoOnlyMobile
           scrolled={scrolled}
-          showMyNjLogo={logoVariant === "NAVIGATOR_MYNJ_LOGO"}
+          showMyNjLogo={props.logoVariant === "NAVIGATOR_MYNJ_LOGO"}
         />
       );
 
@@ -122,7 +105,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
             businessNavBarTitle={navBarBusinessTitle}
           />
           <NavBarMobileAccountSlideOutMenu
-            isLanding={props.isLanding}
+            isLanding={isLanding}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}
             task={props.task}
@@ -150,7 +133,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
             businessNavBarTitle={navBarBusinessTitle}
           />
           <NavBarMobileAccountSlideOutMenu
-            isLanding={props.isLanding}
+            isLanding={isLanding}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}
             task={props.task}
@@ -174,7 +157,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
             businessNavBarTitle={navBarBusinessTitle}
           />
           <NavBarMobileAccountSlideOutMenu
-            isLanding={props.isLanding}
+            isLanding={isLanding}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}
             task={props.task}
@@ -183,7 +166,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
                 userData={props.userData}
                 handleClose={closeSideBar}
                 key="profile"
-                isAuthenticated={props.isAuthenticated}
+                isAuthenticated={isAuthenticated}
               />,
               <AddBusinessItem handleClose={closeSideBar} key="business" />,
               <MyNjMenuItem handleClose={closeSideBar} key="MyNJ" />,
@@ -209,7 +192,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
             businessNavBarTitle={navBarBusinessTitle}
           />
           <NavBarMobileAccountSlideOutMenu
-            isLanding={props.isLanding}
+            isLanding={isLanding}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}
             task={props.task}
@@ -217,7 +200,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
               <ProfileMenuItem
                 handleClose={closeSideBar}
                 userData={props.userData}
-                isAuthenticated={props.isAuthenticated}
+                isAuthenticated={isAuthenticated}
                 key="profile"
               />,
               <RegisterMenuItem key="register" />,

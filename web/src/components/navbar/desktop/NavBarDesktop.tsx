@@ -26,14 +26,8 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   previousBusinessId?: string | undefined;
-  variant?: NavBarVariant;
+  variant: NavBarVariant;
   logoVariant?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
-  isLanding?: boolean | undefined;
-  isLoginPage?: boolean;
-  isSeoStarterKit?: boolean;
-  logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
-  currentlyOnboarding?: boolean | undefined;
-  isAuthenticated?: boolean;
   userData?: UserData;
   CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
@@ -64,29 +58,17 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     prevOpen.current = open;
   }, [open]);
 
-  const textColor = props.isAuthenticated ? "primary" : "base";
-  const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
+  const isAuthenticated = props.variant === NavBarVariant.FULL_AUTHENTICATED;
+  const textColor = isAuthenticated ? "primary" : "base";
+  const navBarBusinessTitle = getNavBarBusinessTitle(business, isAuthenticated);
   const currentIndex =
     props.userData && business
       ? orderBusinessIdsByDateCreated(props.userData).indexOf(business.id)
       : 0;
 
-  const deriveVariant = (): NavBarVariant => {
-    if (props.logoOnlyType) return NavBarVariant.LOGO_ONLY;
-    if (props.isLoginPage) return NavBarVariant.LOGO_WITH_TEXT;
-    if (props.isSeoStarterKit) return NavBarVariant.MINIMAL_WITH_LOGIN;
-    if (props.isLanding) return NavBarVariant.FULL_LANDING;
-    if (props.currentlyOnboarding) return NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN;
-    if (props.isAuthenticated) return NavBarVariant.FULL_AUTHENTICATED;
-    return NavBarVariant.FULL_GUEST;
-  };
-
-  const variant = props.variant ?? deriveVariant();
-  const logoVariant = props.logoVariant ?? props.logoOnlyType;
-
-  switch (variant) {
+  switch (props.variant) {
     case NavBarVariant.LOGO_ONLY:
-      return <NavBarLogoOnlyDesktop logoType={logoVariant!} />;
+      return <NavBarLogoOnlyDesktop logoType={props.logoVariant!} />;
 
     case NavBarVariant.LOGO_WITH_TEXT:
       return (
@@ -183,7 +165,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
                 <ProfileMenuItem
                   userData={props.userData}
                   handleClose={handleClose}
-                  isAuthenticated={props.isAuthenticated}
+                  isAuthenticated={isAuthenticated}
                   key="profile"
                 />,
                 <AddBusinessItem handleClose={handleClose} key="addBusiness" />,
@@ -223,7 +205,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
                 <ProfileMenuItem
                   userData={props.userData}
                   handleClose={handleClose}
-                  isAuthenticated={props.isAuthenticated}
+                  isAuthenticated={isAuthenticated}
                   key="profile"
                 />,
                 <RegisterMenuItem key="register" />,
