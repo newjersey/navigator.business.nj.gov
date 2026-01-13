@@ -480,3 +480,16 @@ export type GetFilingResponse = {
   standingDoc: string;
   certifiedDoc: string;
 };
+
+export const BUSINESS_ADDRESS_LINE_1_MAX_CHAR = 35;
+export const BUSINESS_ADDRESS_LINE_2_MAX_CHAR = 35;
+export const BUSINESS_ADDRESS_CITY_MAX_CHAR = 30;
+export const BUSINESS_ADDRESS_PROVINCE_MAX_CHAR = 30;
+export const AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR = 35;
+export const AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR = 35;
+export const AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR = 30;
+export const AGENT_NAME_MAX_CHAR = 50;
+export const AGENT_EMAIL_MAX_CHAR = 50;
+export const CONTACT_FIRST_NAME_MAX_CHAR = 50;
+export const CONTACT_LAST_NAME_MAX_CHAR = 50;
+export const SIGNER_NAME_MAX_CHAR = 50;

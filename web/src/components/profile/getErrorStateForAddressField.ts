@@ -3,10 +3,6 @@
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import {
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
-} from "@/lib/utils/formation-helpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FormationAddress } from "@businessnjgovnavigator/shared/index";
@@ -15,6 +11,10 @@ import {
   AddressFields,
   FieldsForAddressErrorHandling,
 } from "@businessnjgovnavigator/shared/types";
+import {
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+} from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForAddressField = ({
   field,

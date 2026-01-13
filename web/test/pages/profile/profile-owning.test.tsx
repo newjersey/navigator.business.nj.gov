@@ -23,15 +23,13 @@ import {
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   randomInt,
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";
-import {
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
-} from "@/lib/utils/formation-helpers";
 import {
   chooseRadio,
   chooseTab,

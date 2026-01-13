@@ -2,6 +2,7 @@ import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/ty
 import { LogWriterType } from "@libs/logWriter";
 import { Business, CURRENT_VERSION, UserData } from "@shared/userData";
 import { chunk } from "lodash";
+import { parseUserData } from "@db/zodSchema/zodSchemas";
 
 export const DynamoDataClient = (
   userDataClient: UserDataClient,
@@ -67,6 +68,7 @@ export const DynamoDataClient = (
       usersToMigrate.map(async (user) => {
         await updateUserAndBusinesses(user);
         logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
+        parseUserData(logger, user);
       }),
     );
 
