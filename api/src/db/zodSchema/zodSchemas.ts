@@ -1,53 +1,112 @@
-import { z } from "zod";
+import { z, ZodTypeAny } from "zod";
 import {
-  v183CigaretteLicenseData,
-  v183CigaretteLicensePaymentInfo,
-  v183EnvironmentData,
-  v183FacilityDetails,
-  v183MachineDetails,
-  v183QuestionnaireData,
-  v183StateObject,
-  v183TaxClearanceCertificateData,
-  v183XrayData,
-  v183XrayRegistrationStatusResponse,
-  v183GetFilingResponse,
-  v183FormationSubmitError,
-  v183FormationSubmitResponse,
-  v183FormationSigner,
-  v183ForeignGoodStandingFileObject,
-  v183UserTestingResponse,
-  v183NewsletterResponse,
-  v183ExternalStatus,
-  v183CalendarEvent,
-  v183LicenseSearchAddress,
-  v183TaxFilingCalendarEvent,
-  v183LicenseSearchNameAndAddress,
-  v183TaxFilingData,
-  v183LicenseDetails,
-  v183Municipality,
-  v183ProfileDocuments,
-  v183BusinessUser,
-  v183CommunityAffairsAddress,
-  v183RoadmapTaskData,
-  v183FormationAddress,
-  v183LicenseData,
-  v183Preferences,
-  v183LicenseStatusItem,
-  v183FormationMember,
-  v183NameAvailability,
-  v183NameAvailabilityResponse,
-  v183IndustrySpecificData,
-  v183ProfileData,
-  v183FormationFormData,
-  v183FormationData,
-  v183Business,
-  v183UserData,
-} from "@db/migrations/v183_zod_changes";
+  v184CigaretteLicenseData,
+  v184CigaretteLicensePaymentInfo,
+  v184EnvironmentData,
+  v184FacilityDetails,
+  v184MachineDetails,
+  v184QuestionnaireData,
+  v184StateObject,
+  v184TaxClearanceCertificateData,
+  v184XrayData,
+  v184XrayRegistrationStatusResponse,
+  v184GetFilingResponse,
+  v184FormationSubmitError,
+  v184FormationSubmitResponse,
+  v184FormationSigner,
+  v184ForeignGoodStandingFileObject,
+  v184UserTestingResponse,
+  v184NewsletterResponse,
+  v184ExternalStatus,
+  v184CalendarEvent,
+  v184LicenseSearchAddress,
+  v184TaxFilingCalendarEvent,
+  v184LicenseSearchNameAndAddress,
+  v184TaxFilingData,
+  v184LicenseDetails,
+  v184Municipality,
+  v184ProfileDocuments,
+  v184BusinessUser,
+  v184CommunityAffairsAddress,
+  v184RoadmapTaskData,
+  v184FormationAddress,
+  v184LicenseData,
+  v184Preferences,
+  v184LicenseStatusItem,
+  v184FormationMember,
+  v184NameAvailability,
+  v184NameAvailabilityResponse,
+  v184IndustrySpecificData,
+  v184ProfileData,
+  v184FormationFormData,
+  v184FormationData,
+  v184Business,
+  v184UserData,
+} from "@db/migrations/v184_change_addresscountry_interstatetransport";
 import { LogWriterType } from "@libs/logWriter";
 import { UserData } from "@shared/userData";
+import {
+  AGENT_EMAIL_MAX_CHAR,
+  AGENT_NAME_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR,
+  BUSINESS_ADDRESS_CITY_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+  BUSINESS_ADDRESS_PROVINCE_MAX_CHAR,
+  CONTACT_FIRST_NAME_MAX_CHAR,
+  CONTACT_LAST_NAME_MAX_CHAR,
+  SIGNER_NAME_MAX_CHAR,
+} from "@shared/formationData";
+
+const isBase64Encoded = (str: string): boolean => {
+  if (!str) return false;
+
+  const trimmed = str.trim();
+
+  if (trimmed.length < 20) return false;
+
+  const base64Regex = /^(?:[\d+/A-Za-z]{4})*(?:[\d+/A-Za-z]{2}==|[\d+/A-Za-z]{3}=)?$/;
+
+  if (!base64Regex.test(trimmed)) return false;
+
+  return trimmed.length % 4 === 0;
+};
+
+const validateAllStringsForBase64 = (
+  obj: unknown,
+  ctx: z.RefinementCtx,
+  path: (string | number)[],
+): void => {
+  if (typeof obj === "string") {
+    if (isBase64Encoded(obj)) {
+      ctx.addIssue({
+        code: "custom",
+        message: `Field contains base64 encoded data which is not allowed`,
+        path: path,
+      });
+    }
+  } else if (Array.isArray(obj)) {
+    for (const [index, item] of obj.entries()) {
+      validateAllStringsForBase64(item, ctx, [...path, index]);
+    }
+  } else if (obj && typeof obj === "object") {
+    for (const [key, value] of Object.entries(obj)) {
+      validateAllStringsForBase64(value, ctx, [...path, key]);
+    }
+  }
+};
+
+export const withNoBase64Check = <T extends ZodTypeAny>(schema: T): T => {
+  return schema.superRefine((val, ctx) => {
+    validateAllStringsForBase64(val, ctx, []);
+  }) as T;
+};
 
 export const parseUserData = (logger: LogWriterType, userData: UserData): void => {
-  const result = v183UserDataSchema.safeParse(userData);
+  const schemaWithBase64Check = withNoBase64Check(v184UserDataSchema);
+  const result = schemaWithBase64Check.safeParse(userData);
 
   if (result.success) {
     logger.LogInfo(`Parsing successful, for UserId: ${userData.user.id}`);
@@ -61,9 +120,9 @@ export const parseUserData = (logger: LogWriterType, userData: UserData): void =
   }
 };
 
-export const v183XrayRegistrationStatusSchema = z.enum(["ACTIVE", "EXPIRED", "INACTIVE"]);
+export const v184XrayRegistrationStatusSchema = z.enum(["ACTIVE", "EXPIRED", "INACTIVE"]);
 
-export const v183WasteWaterFieldIdsSchema = z.enum([
+export const v184WasteWaterFieldIdsSchema = z.enum([
   "sanitaryWaste",
   "industrialWaste",
   "localSewage",
@@ -76,13 +135,13 @@ export const v183WasteWaterFieldIdsSchema = z.enum([
   "noWasteWater",
 ]);
 
-export const v183WasteWaterDataSchema = z.object(
+export const v184WasteWaterDataSchema = z.object(
   Object.fromEntries(
-    v183WasteWaterFieldIdsSchema.options.map((key) => [key, z.boolean()]),
-  ) as Record<(typeof v183WasteWaterFieldIdsSchema.options)[number], z.ZodBoolean>,
+    v184WasteWaterFieldIdsSchema.options.map((key) => [key, z.boolean()]),
+  ) as Record<(typeof v184WasteWaterFieldIdsSchema.options)[number], z.ZodBoolean>,
 );
 
-export const v183DrinkingWaterFieldIdsSchema = z.enum([
+export const v184DrinkingWaterFieldIdsSchema = z.enum([
   "ownWell",
   "combinedWellCapacity",
   "wellDrilled",
@@ -90,13 +149,13 @@ export const v183DrinkingWaterFieldIdsSchema = z.enum([
   "noDrinkingWater",
 ]);
 
-export const v183DrinkingWaterDataSchema = z.object(
+export const v184DrinkingWaterDataSchema = z.object(
   Object.fromEntries(
-    v183DrinkingWaterFieldIdsSchema.options.map((key) => [key, z.boolean()]),
-  ) as Record<(typeof v183DrinkingWaterFieldIdsSchema.options)[number], z.ZodBoolean>,
+    v184DrinkingWaterFieldIdsSchema.options.map((key) => [key, z.boolean()]),
+  ) as Record<(typeof v184DrinkingWaterFieldIdsSchema.options)[number], z.ZodBoolean>,
 );
 
-export const v183WasteFieldIdsSchema = z.enum([
+export const v184WasteFieldIdsSchema = z.enum([
   "transportWaste",
   "hazardousMedicalWaste",
   "compostWaste",
@@ -105,14 +164,14 @@ export const v183WasteFieldIdsSchema = z.enum([
   "noWaste",
 ]);
 
-export const v183WasteDataSchema = z.object(
-  Object.fromEntries(v183WasteFieldIdsSchema.options.map((key) => [key, z.boolean()])) as Record<
-    (typeof v183WasteFieldIdsSchema.options)[number],
+export const v184WasteDataSchema = z.object(
+  Object.fromEntries(v184WasteFieldIdsSchema.options.map((key) => [key, z.boolean()])) as Record<
+    (typeof v184WasteFieldIdsSchema.options)[number],
     z.ZodBoolean
   >,
 );
 
-export const v183LandFieldIdsSchema = z.enum([
+export const v184LandFieldIdsSchema = z.enum([
   "takeOverExistingBiz",
   "propertyAssessment",
   "constructionActivities",
@@ -120,28 +179,28 @@ export const v183LandFieldIdsSchema = z.enum([
   "noLand",
 ]);
 
-export const v183LandDataSchema = z.object(
-  Object.fromEntries(v183LandFieldIdsSchema.options.map((key) => [key, z.boolean()])) as Record<
-    (typeof v183LandFieldIdsSchema.options)[number],
+export const v184LandDataSchema = z.object(
+  Object.fromEntries(v184LandFieldIdsSchema.options.map((key) => [key, z.boolean()])) as Record<
+    (typeof v184LandFieldIdsSchema.options)[number],
     z.ZodBoolean
   >,
 );
 
-export const v183AirFieldIdsSchema = z.enum([
+export const v184AirFieldIdsSchema = z.enum([
   "emitPollutants",
   "emitEmissions",
   "constructionActivities",
   "noAir",
 ]);
 
-export const v183AirDataSchema = z.object(
-  Object.fromEntries(v183AirFieldIdsSchema.options.map((key) => [key, z.boolean()])) as Record<
-    (typeof v183AirFieldIdsSchema.options)[number],
+export const v184AirDataSchema = z.object(
+  Object.fromEntries(v184AirFieldIdsSchema.options.map((key) => [key, z.boolean()])) as Record<
+    (typeof v184AirFieldIdsSchema.options)[number],
     z.ZodBoolean
   >,
 );
 
-export const v183PaymentTypeSchema = z.union([z.enum(["CC", "ACH"]), z.undefined()]);
+export const v184PaymentTypeSchema = z.union([z.enum(["CC", "ACH"]), z.undefined()]);
 
 export const llcBusinessSuffixSchema = z.enum([
   "LLC",
@@ -203,11 +262,11 @@ export const AllBusinessSuffixesSchema = [
   ...nonprofitBusinessSuffixSchema.options,
 ] as const;
 
-export const v183BusinessSuffixSchema = z.enum(AllBusinessSuffixesSchema);
+export const v184BusinessSuffixSchema = z.enum(AllBusinessSuffixesSchema);
 
-export const v183FormationBusinessLocationTypeSchema = z.enum(["US", "INTL", "NJ"] as const);
+export const v184FormationBusinessLocationTypeSchema = z.enum(["US", "INTL", "NJ"] as const);
 
-export const v183SignerTitleSchema = z.enum([
+export const v184SignerTitleSchema = z.enum([
   "Authorized Representative",
   "Authorized Partner",
   "Incorporator",
@@ -218,9 +277,9 @@ export const v183SignerTitleSchema = z.enum([
   "CEO",
 ] as const);
 
-export const v183InFormInBylawsSchema = z.union([z.enum(["IN_BYLAWS", "IN_FORM"]), z.undefined()]);
+export const v184InFormInBylawsSchema = z.union([z.enum(["IN_BYLAWS", "IN_FORM"]), z.undefined()]);
 
-export const v183HowToProceedOptionsSchema = z.enum([
+export const v184HowToProceedOptionsSchema = z.enum([
   "DIFFERENT_NAME",
   "KEEP_NAME",
   "CANCEL_NAME",
@@ -234,7 +293,7 @@ export const externalStatusListSchema = z.enum([
 
 export const userTestingStatusListSchema = z.enum(externalStatusListSchema.options);
 
-export const v183UserTestingStatusSchema = z.enum(userTestingStatusListSchema.options);
+export const v184UserTestingStatusSchema = z.enum(userTestingStatusListSchema.options);
 
 export const newsletterStatusListSchema = z.enum([
   ...externalStatusListSchema.options,
@@ -246,7 +305,7 @@ export const newsletterStatusListSchema = z.enum([
   "QUESTION_WARNING",
 ]);
 
-export const v183NameAvailabilityStatusSchema = z.enum([
+export const v184NameAvailabilityStatusSchema = z.enum([
   "AVAILABLE",
   "DESIGNATOR_ERROR",
   "SPECIAL_CHARACTER_ERROR",
@@ -254,17 +313,17 @@ export const v183NameAvailabilityStatusSchema = z.enum([
   "RESTRICTED_ERROR",
 ]);
 
-export const v183NewsletterStatusSchema = z.enum(newsletterStatusListSchema.options);
+export const v184NewsletterStatusSchema = z.enum(newsletterStatusListSchema.options);
 
-export const v183SectionTypeSchema = z.enum([
+export const v184SectionTypeSchema = z.enum([
   "PLAN",
   "START",
   "DOMESTIC_EMPLOYER_SECTION",
 ] as const);
 
-export const v183CheckoffStatusSchema = z.enum(["ACTIVE", "PENDING", "UNKNOWN"] as const);
+export const v184CheckoffStatusSchema = z.enum(["ACTIVE", "PENDING", "UNKNOWN"] as const);
 
-export const v183LicenseStatusSchema = z.enum([
+export const v184LicenseStatusSchema = z.enum([
   "ACTIVE",
   "PENDING",
   "UNKNOWN",
@@ -279,22 +338,22 @@ export const v183LicenseStatusSchema = z.enum([
   "WITHDRAWN",
 ] as const);
 
-export const v183PropertyLeaseTypeSchema = z.union([
+export const v184PropertyLeaseTypeSchema = z.union([
   z.enum(["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"]),
   z.undefined(),
 ]);
 
-export const v183TaskProgressSchema = z.enum(["TO_DO", "COMPLETED"] as const);
+export const v184TaskProgressSchema = z.enum(["TO_DO", "COMPLETED"] as const);
 
-export const v183OnboardingFormProgressSchema = z.enum(["UNSTARTED", "COMPLETED"] as const);
+export const v184OnboardingFormProgressSchema = z.enum(["UNSTARTED", "COMPLETED"] as const);
 
-export const v183ABExperienceSchema = z.enum(["ExperienceA", "ExperienceB"] as const);
+export const v184ABExperienceSchema = z.enum(["ExperienceA", "ExperienceB"] as const);
 
-export const v183BusinessPersonaSchema = z.union([
+export const v184BusinessPersonaSchema = z.union([
   z.enum(["STARTING", "OWNING", "FOREIGN"]),
   z.undefined(),
 ]);
-export const v183OperatingPhaseSchema = z.union([
+export const v184OperatingPhaseSchema = z.union([
   z.enum([
     "GUEST_MODE",
     "NEEDS_TO_FORM",
@@ -307,32 +366,32 @@ export const v183OperatingPhaseSchema = z.union([
   z.undefined(),
 ]);
 
-export const v183CannabisLicenseTypeSchema = z.union([
+export const v184CannabisLicenseTypeSchema = z.union([
   z.enum(["CONDITIONAL", "ANNUAL"]),
   z.undefined(),
 ]);
-export const v183CarServiceTypeSchema = z.union([
+export const v184CarServiceTypeSchema = z.union([
   z.enum(["STANDARD", "HIGH_CAPACITY", "BOTH"]),
   z.undefined(),
 ]);
-export const v183ConstructionTypeSchema = z.union([
+export const v184ConstructionTypeSchema = z.union([
   z.enum(["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "BOTH"]),
   z.undefined(),
 ]);
-export const v183ResidentialConstructionTypeSchema = z.union([
+export const v184ResidentialConstructionTypeSchema = z.union([
   z.enum(["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"]),
   z.undefined(),
 ]);
-export const v183EmploymentAndPersonnelServicesTypeSchema = z.union([
+export const v184EmploymentAndPersonnelServicesTypeSchema = z.union([
   z.enum(["JOB_SEEKERS", "EMPLOYERS"]),
   z.undefined(),
 ]);
-export const v183EmploymentPlacementTypeSchema = z.union([
+export const v184EmploymentPlacementTypeSchema = z.union([
   z.enum(["TEMPORARY", "PERMANENT", "BOTH"]),
   z.undefined(),
 ]);
 
-export const v183ForeignBusinessTypeIdSchema = z.enum([
+export const v184ForeignBusinessTypeIdSchema = z.enum([
   "employeeOrContractorInNJ",
   "officeInNJ",
   "propertyInNJ",
@@ -343,17 +402,17 @@ export const v183ForeignBusinessTypeIdSchema = z.enum([
   "none",
 ] as const);
 
-export const v183TaxFilingStateSchema = z.enum([
+export const v184TaxFilingStateSchema = z.enum([
   "SUCCESS",
   "FAILED",
   "UNREGISTERED",
   "PENDING",
   "API_ERROR",
 ] as const);
-export const v183TaxFilingErrorFieldsSchema = z.enum(["businessName", "formFailure"] as const);
+export const v184TaxFilingErrorFieldsSchema = z.enum(["businessName", "formFailure"] as const);
 
 // Plain object mapping for license names
-const v183taskIdLicenseNameMapping = {
+const v184taskIdLicenseNameMapping = {
   "apply-for-shop-license": "Cosmetology and Hairstyling-Shop",
   "appraiser-license": "Real Estate Appraisers-Appraisal Management Company",
   "architect-license": "Architecture-Certificate of Authorization",
@@ -371,7 +430,7 @@ const v183taskIdLicenseNameMapping = {
   "telemarketing-license": "Telemarketers",
 } as const;
 
-export const v183taskIdLicenseNameMappingSchema = z.object({
+export const v184taskIdLicenseNameMappingSchema = z.object({
   "apply-for-shop-license": z.literal("Cosmetology and Hairstyling-Shop"),
   "appraiser-license": z.literal("Real Estate Appraisers-Appraisal Management Company"),
   "architect-license": z.literal("Architecture-Certificate of Authorization"),
@@ -395,12 +454,12 @@ export const v183taskIdLicenseNameMappingSchema = z.object({
   "telemarketing-license": z.literal("Telemarketers"),
 } as const);
 
-export const v183LicenseTaskIDSchema = z.enum(
-  Object.keys(v183taskIdLicenseNameMapping) as [string, ...string[]],
+export const v184LicenseTaskIDSchema = z.enum(
+  Object.keys(v184taskIdLicenseNameMapping) as [string, ...string[]],
 );
 
-export const v183LicenseNameSchema = z.enum(
-  Object.values(v183taskIdLicenseNameMapping) as [string, ...string[]],
+export const v184LicenseNameSchema = z.enum(
+  Object.values(v184taskIdLicenseNameMapping) as [string, ...string[]],
 );
 z.enum([
   "ACTIVE",
@@ -416,21 +475,21 @@ z.enum([
   "VOLUNTARY_SURRENDER",
   "WITHDRAWN",
 ] as const);
-export const v183SectionNamesSchema = z.enum([
+export const v184SectionNamesSchema = z.enum([
   "PLAN",
   "START",
   "DOMESTIC_EMPLOYER_SECTION",
 ] as const);
 
-export const v183QuestionnaireDataSchema: z.ZodType<v183QuestionnaireData> = z.object({
-  air: v183AirDataSchema,
-  land: v183LandDataSchema,
-  waste: v183WasteDataSchema,
-  drinkingWater: v183DrinkingWaterDataSchema,
-  wasteWater: v183WasteWaterDataSchema,
+export const v184QuestionnaireDataSchema: z.ZodType<v184QuestionnaireData> = z.object({
+  air: v184AirDataSchema,
+  land: v184LandDataSchema,
+  waste: v184WasteDataSchema,
+  drinkingWater: v184DrinkingWaterDataSchema,
+  wasteWater: v184WasteWaterDataSchema,
 });
 
-export const v183MachineDetailsSchema: z.ZodType<v183MachineDetails> = z.object({
+export const v184MachineDetailsSchema: z.ZodType<v184MachineDetails> = z.object({
   name: z.string().optional(),
   registrationNumber: z.string().optional(),
   roomId: z.string().optional(),
@@ -441,31 +500,31 @@ export const v183MachineDetailsSchema: z.ZodType<v183MachineDetails> = z.object(
   annualFee: z.number().optional(),
 });
 
-export const v183XrayRegistrationStatusResponseSchema: z.ZodType<v183XrayRegistrationStatusResponse> =
+export const v184XrayRegistrationStatusResponseSchema: z.ZodType<v184XrayRegistrationStatusResponse> =
   z.object({
-    machines: z.array(v183MachineDetailsSchema),
-    status: v183XrayRegistrationStatusSchema,
+    machines: z.array(v184MachineDetailsSchema),
+    status: v184XrayRegistrationStatusSchema,
     expirationDate: z.string().optional(),
     deactivationDate: z.string().optional(),
   });
 
-export const v183FacilityDetailsSchema: z.ZodType<v183FacilityDetails> = z.object({
+export const v184FacilityDetailsSchema: z.ZodType<v184FacilityDetails> = z.object({
   businessName: z.string(),
   addressLine1: z.string(),
   addressLine2: z.string().optional(),
   addressZipCode: z.string(),
 });
 
-export const v183XrayDataSchema: z.ZodType<v183XrayData> = z.object({
-  facilityDetails: v183FacilityDetailsSchema.optional(),
-  machines: z.array(v183MachineDetailsSchema).optional(),
-  status: v183XrayRegistrationStatusSchema.optional(),
+export const v184XrayDataSchema: z.ZodType<v184XrayData> = z.object({
+  facilityDetails: v184FacilityDetailsSchema.optional(),
+  machines: z.array(v184MachineDetailsSchema).optional(),
+  status: v184XrayRegistrationStatusSchema.optional(),
   expirationDate: z.string().optional(),
   deactivationDate: z.string().optional(),
   lastUpdatedISO: z.string().optional(),
 });
 
-export const v183CigaretteLicensePaymentInfoSchema: z.ZodType<v183CigaretteLicensePaymentInfo> =
+export const v184CigaretteLicensePaymentInfoSchema: z.ZodType<v184CigaretteLicensePaymentInfo> =
   z.object({
     token: z.string().optional(),
     paymentComplete: z.boolean().optional(),
@@ -475,12 +534,12 @@ export const v183CigaretteLicensePaymentInfoSchema: z.ZodType<v183CigaretteLicen
     confirmationEmailsent: z.boolean().optional(),
   });
 
-export const v183StateObjectSchema: z.ZodType<v183StateObject> = z.object({
+export const v184StateObjectSchema: z.ZodType<v184StateObject> = z.object({
   shortCode: z.string(),
   name: z.string(),
 });
 
-export const v183CigaretteLicenseDataSchema: z.ZodType<v183CigaretteLicenseData> = z.object({
+export const v184CigaretteLicenseDataSchema: z.ZodType<v184CigaretteLicenseData> = z.object({
   businessName: z.string().optional(),
   responsibleOwnerName: z.string().optional(),
   tradeName: z.string().optional(),
@@ -489,13 +548,13 @@ export const v183CigaretteLicenseDataSchema: z.ZodType<v183CigaretteLicenseData>
   addressLine1: z.string().optional(),
   addressLine2: z.string().optional(),
   addressCity: z.string().optional(),
-  addressState: v183StateObjectSchema.optional(),
+  addressState: v184StateObjectSchema.optional(),
   addressZipCode: z.string().optional(),
   mailingAddressIsTheSame: z.boolean().optional(),
   mailingAddressLine1: z.string().optional(),
   mailingAddressLine2: z.string().optional(),
   mailingAddressCity: z.string().optional(),
-  mailingAddressState: v183StateObjectSchema.optional(),
+  mailingAddressState: v184StateObjectSchema.optional(),
   mailingAddressZipCode: z.string().optional(),
   contactName: z.string().optional(),
   contactPhoneNumber: z.string().optional(),
@@ -506,17 +565,17 @@ export const v183CigaretteLicenseDataSchema: z.ZodType<v183CigaretteLicenseData>
   signerRelationship: z.string().optional(),
   signature: z.boolean().optional(),
   lastUpdatedISO: z.string().optional(),
-  paymentInfo: v183CigaretteLicensePaymentInfoSchema.optional(),
+  paymentInfo: v184CigaretteLicensePaymentInfoSchema.optional(),
 });
 
-export const v183TaxClearanceCertificateDataSchema: z.ZodType<v183TaxClearanceCertificateData> =
+export const v184TaxClearanceCertificateDataSchema: z.ZodType<v184TaxClearanceCertificateData> =
   z.object({
     requestingAgencyId: z.union([z.string(), z.undefined()]),
     businessName: z.union([z.string(), z.undefined()]),
     addressLine1: z.union([z.string(), z.undefined()]),
     addressLine2: z.union([z.string(), z.undefined()]),
     addressCity: z.union([z.string(), z.undefined()]),
-    addressState: v183StateObjectSchema.optional(),
+    addressState: v184StateObjectSchema.optional(),
     addressZipCode: z.string().optional(),
     taxId: z.union([z.string(), z.undefined()]),
     taxPin: z.union([z.string(), z.undefined()]),
@@ -524,13 +583,13 @@ export const v183TaxClearanceCertificateDataSchema: z.ZodType<v183TaxClearanceCe
     lastUpdatedISO: z.union([z.string(), z.undefined()]),
   });
 
-export const v183EnvironmentDataSchema: z.ZodType<v183EnvironmentData> = z.object({
-  questionnaireData: v183QuestionnaireDataSchema.optional(),
+export const v184EnvironmentDataSchema: z.ZodType<v184EnvironmentData> = z.object({
+  questionnaireData: v184QuestionnaireDataSchema.optional(),
   submitted: z.boolean().optional(),
   emailSent: z.boolean().optional(),
 });
 
-export const v183GetFilingResponseSchema: z.ZodType<v183GetFilingResponse> = z.object({
+export const v184GetFilingResponseSchema: z.ZodType<v184GetFilingResponse> = z.object({
   success: z.boolean(),
   entityId: z.string(),
   transactionDate: z.string(), // ISO 8601 date string
@@ -540,198 +599,214 @@ export const v183GetFilingResponseSchema: z.ZodType<v183GetFilingResponse> = z.o
   certifiedDoc: z.string(),
 });
 
-export const v183FormationSubmitErrorSchema: z.ZodType<v183FormationSubmitError> = z.object({
+export const v184FormationSubmitErrorSchema: z.ZodType<v184FormationSubmitError> = z.object({
   field: z.string(),
   type: z.enum(["FIELD", "UNKNOWN", "RESPONSE"]),
   message: z.string(),
 });
 
-export const v183FormationSubmitResponseSchema: z.ZodType<v183FormationSubmitResponse> = z.object({
+export const v184FormationSubmitResponseSchema: z.ZodType<v184FormationSubmitResponse> = z.object({
   success: z.boolean(),
   token: z.union([z.string(), z.undefined()]),
   formationId: z.union([z.string(), z.undefined()]),
   redirect: z.union([z.string(), z.undefined()]),
-  errors: z.array(v183FormationSubmitErrorSchema),
+  errors: z.array(v184FormationSubmitErrorSchema),
   lastUpdatedISO: z.union([z.string(), z.undefined()]),
 });
 
-export const v183FormationSignerSchema = z.object({
-  name: z.string(),
+export const v184FormationSignerSchema = z.object({
+  name: z.string().max(SIGNER_NAME_MAX_CHAR, {
+    message: `signer name cannot exceed ${SIGNER_NAME_MAX_CHAR} characters`,
+  }),
   signature: z.boolean(),
-  title: v183SignerTitleSchema,
-}) satisfies z.ZodType<v183FormationSigner>;
+  title: v184SignerTitleSchema,
+}) satisfies z.ZodType<v184FormationSigner>;
 
-export const v183ForeignGoodStandingFileObjectSchema: z.ZodType<v183ForeignGoodStandingFileObject> =
+export const v184ForeignGoodStandingFileObjectSchema: z.ZodType<v184ForeignGoodStandingFileObject> =
   z.object({
     Extension: z.enum(["PDF", "PNG"]),
     Content: z.string(),
   });
 
-export const v183NameAvailabilityResponseSchema = z.object({
-  status: v183NameAvailabilityStatusSchema,
+export const v184NameAvailabilityResponseSchema = z.object({
+  status: v184NameAvailabilityStatusSchema,
   similarNames: z.array(z.string()),
   invalidWord: z.string().optional(),
-}) satisfies z.ZodType<v183NameAvailabilityResponse>;
+}) satisfies z.ZodType<v184NameAvailabilityResponse>;
 
-export const v183NameAvailabilitySchema = v183NameAvailabilityResponseSchema.extend({
+export const v184NameAvailabilitySchema = v184NameAvailabilityResponseSchema.extend({
   lastUpdatedTimeStamp: z.string(),
-}) satisfies z.ZodType<v183NameAvailability>;
+}) satisfies z.ZodType<v184NameAvailability>;
 
-export const v183NewsletterResponseSchema: z.ZodType<v183NewsletterResponse> = z.object({
+export const v184NewsletterResponseSchema: z.ZodType<v184NewsletterResponse> = z.object({
   success: z.boolean().optional(),
-  status: v183NewsletterStatusSchema,
+  status: v184NewsletterStatusSchema,
 });
 
-export const v183UserTestingResponseSchema: z.ZodType<v183UserTestingResponse> = z.object({
+export const v184UserTestingResponseSchema: z.ZodType<v184UserTestingResponse> = z.object({
   success: z.boolean().optional(),
-  status: v183UserTestingStatusSchema,
+  status: v184UserTestingStatusSchema,
 });
 
-export const v183ExternalStatusSchema: z.ZodType<v183ExternalStatus> = z.object({
-  newsletter: v183NewsletterResponseSchema.optional(),
-  userTesting: v183UserTestingResponseSchema.optional(),
+export const v184ExternalStatusSchema: z.ZodType<v184ExternalStatus> = z.object({
+  newsletter: v184NewsletterResponseSchema.optional(),
+  userTesting: v184UserTestingResponseSchema.optional(),
 });
 
-export const v183CalendarEventSchema = z.object({
+export const v184CalendarEventSchema = z.object({
   dueDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
     message: "dueDate must be in YYYY-MM-DD format",
   }),
   calendarEventType: z.enum(["TAX-FILING", "LICENSE"]),
-}) satisfies z.ZodType<v183CalendarEvent>;
+}) satisfies z.ZodType<v184CalendarEvent>;
 
-export const v183LicenseSearchAddressSchema = z.object({
+export const v184LicenseSearchAddressSchema = z.object({
   addressLine1: z.string(),
   addressLine2: z.string(),
   zipCode: z.string(),
-}) satisfies z.ZodType<v183LicenseSearchAddress>;
+}) satisfies z.ZodType<v184LicenseSearchAddress>;
 
-export const v183TaxFilingCalendarEventSchema = v183CalendarEventSchema.extend({
+export const v184TaxFilingCalendarEventSchema = v184CalendarEventSchema.extend({
   identifier: z.string(),
   calendarEventType: z.literal("TAX-FILING"), // override enum to fixed value
-}) satisfies z.ZodType<v183TaxFilingCalendarEvent>;
+}) satisfies z.ZodType<v184TaxFilingCalendarEvent>;
 
-export const v183LicenseSearchNameAndAddressSchema = v183LicenseSearchAddressSchema.extend({
+export const v184LicenseSearchNameAndAddressSchema = v184LicenseSearchAddressSchema.extend({
   name: z.string(),
-}) satisfies z.ZodType<v183LicenseSearchNameAndAddress>;
+}) satisfies z.ZodType<v184LicenseSearchNameAndAddress>;
 
-export const v183TaxFilingDataSchema: z.ZodType<v183TaxFilingData> = z.object({
-  state: v183TaxFilingStateSchema.optional(),
+export const v184TaxFilingDataSchema: z.ZodType<v184TaxFilingData> = z.object({
+  state: v184TaxFilingStateSchema.optional(),
   lastUpdatedISO: z.string().optional(),
   registeredISO: z.string().optional(),
-  errorField: v183TaxFilingErrorFieldsSchema.optional(),
+  errorField: v184TaxFilingErrorFieldsSchema.optional(),
   businessName: z.string().optional(),
-  filings: z.array(v183TaxFilingCalendarEventSchema),
+  filings: z.array(v184TaxFilingCalendarEventSchema),
 });
 
-export const v183MunicipalitySchema: z.ZodType<v183Municipality> = z.object({
+export const v184MunicipalitySchema: z.ZodType<v184Municipality> = z.object({
   name: z.string(),
   displayName: z.string(),
   county: z.string(),
   id: z.string(),
 });
 
-export const v183LicenseStatusItemSchema: z.ZodType<v183LicenseStatusItem> = z.object({
+export const v184LicenseStatusItemSchema: z.ZodType<v184LicenseStatusItem> = z.object({
   title: z.string(),
-  status: v183CheckoffStatusSchema,
+  status: v184CheckoffStatusSchema,
 });
 
-export const v183LicenseDetailsSchema: z.ZodType<v183LicenseDetails> = z.object({
-  nameAndAddress: v183LicenseSearchNameAndAddressSchema,
-  licenseStatus: v183LicenseStatusSchema,
+export const v184LicenseDetailsSchema: z.ZodType<v184LicenseDetails> = z.object({
+  nameAndAddress: v184LicenseSearchNameAndAddressSchema,
+  licenseStatus: v184LicenseStatusSchema,
   expirationDateISO: z.union([z.string(), z.undefined()]),
   lastUpdatedISO: z.string(),
-  checklistItems: z.array(v183LicenseStatusItemSchema),
+  checklistItems: z.array(v184LicenseStatusItemSchema),
 });
 
-export const v183CommunityAffairsAddressSchema: z.ZodType<v183CommunityAffairsAddress> = z.object({
+export const v184CommunityAffairsAddressSchema: z.ZodType<v184CommunityAffairsAddress> = z.object({
   streetAddress1: z.string(),
   streetAddress2: z.string().optional(),
-  municipality: v183MunicipalitySchema,
+  municipality: v184MunicipalitySchema,
 });
 
-export const v183BusinessUserSchema: z.ZodType<v183BusinessUser> = z.object({
+export const v184BusinessUserSchema: z.ZodType<v184BusinessUser> = z.object({
   name: z.string().optional(),
   email: z.string(),
   id: z.string(),
   receiveNewsletter: z.boolean(),
   userTesting: z.boolean(),
   receiveUpdatesAndReminders: z.boolean(),
-  externalStatus: v183ExternalStatusSchema,
+  externalStatus: v184ExternalStatusSchema,
   myNJUserKey: z.string().optional(),
   intercomHash: z.string().optional(),
-  abExperience: v183ABExperienceSchema,
+  abExperience: v184ABExperienceSchema,
   accountCreationSource: z.string(),
   contactSharingWithAccountCreationPartner: z.boolean(),
   phoneNumber: z.string().optional(),
 });
 
-export const v183ProfileDocumentsSchema: z.ZodType<v183ProfileDocuments> = z.object({
+export const v184ProfileDocumentsSchema: z.ZodType<v184ProfileDocuments> = z.object({
   formationDoc: z.string(),
   standingDoc: z.string(),
   certifiedDoc: z.string(),
 });
 
-export const v183RoadmapTaskDataSchema: z.ZodType<v183RoadmapTaskData> = z.object({
+export const v184RoadmapTaskDataSchema: z.ZodType<v184RoadmapTaskData> = z.object({
   manageBusinessVehicles: z.boolean().optional(),
   passengerTransportSchoolBus: z.boolean().optional(),
   passengerTransportSixteenOrMorePassengers: z.boolean().optional(),
 });
 
-export const v183FormationAddressSchema = z.object({
-  addressLine1: z.string(),
-  addressLine2: z.string(),
-  addressCity: z.string().optional(),
-  addressState: v183StateObjectSchema.optional(),
-  addressMunicipality: v183MunicipalitySchema.optional(),
-  addressProvince: z.string().optional(),
+export const v184FormationAddressSchema = z.object({
+  addressLine1: z.string().max(BUSINESS_ADDRESS_LINE_1_MAX_CHAR, {
+    message: `address line 1 cannot exceed ${BUSINESS_ADDRESS_LINE_1_MAX_CHAR} characters`,
+  }),
+  addressLine2: z.string().max(BUSINESS_ADDRESS_LINE_2_MAX_CHAR, {
+    message: `address line 2 cannot exceed ${BUSINESS_ADDRESS_LINE_2_MAX_CHAR} characters`,
+  }),
+  addressCity: z
+    .string()
+    .max(BUSINESS_ADDRESS_CITY_MAX_CHAR, {
+      message: `address city cannot exceed ${BUSINESS_ADDRESS_CITY_MAX_CHAR} characters`,
+    })
+    .optional(),
+  addressState: v184StateObjectSchema.optional(),
+  addressMunicipality: v184MunicipalitySchema.optional(),
+  addressProvince: z
+    .string()
+    .max(BUSINESS_ADDRESS_PROVINCE_MAX_CHAR, {
+      message: `address province cannot exceed ${BUSINESS_ADDRESS_PROVINCE_MAX_CHAR} characters`,
+    })
+    .optional(),
   addressZipCode: z.string(),
-  addressCountry: z.string(),
-  businessLocationType: z.union([v183FormationBusinessLocationTypeSchema, z.undefined()]),
-}) satisfies z.ZodType<v183FormationAddress>;
+  addressCountry: z.string().optional(),
+  businessLocationType: z.union([v184FormationBusinessLocationTypeSchema, z.undefined()]),
+}) satisfies z.ZodType<v184FormationAddress>;
 
-export const v183FormationMemberSchema = v183FormationAddressSchema.extend({
+export const v184FormationMemberSchema = v184FormationAddressSchema.extend({
   name: z.string(),
-}) satisfies z.ZodType<v183FormationMember>;
+}) satisfies z.ZodType<v184FormationMember>;
 
-export const v183FormationIncorporatorSchema = z.object({
-  ...v183FormationSignerSchema.shape,
-  ...v183FormationAddressSchema.shape,
+export const v184FormationIncorporatorSchema = z.object({
+  ...v184FormationSignerSchema.shape,
+  ...v184FormationAddressSchema.shape,
 });
 
-export const v183IndustrySpecificDataSchema = z.object({
+export const v184IndustrySpecificDataSchema = z.object({
   liquorLicense: z.boolean(),
   requiresCpa: z.boolean(),
   homeBasedBusiness: z.boolean().optional(),
   providesStaffingService: z.boolean(),
   certifiedInteriorDesigner: z.boolean(),
   realEstateAppraisalManagement: z.boolean(),
-  cannabisLicenseType: v183CannabisLicenseTypeSchema,
+  cannabisLicenseType: v184CannabisLicenseTypeSchema,
   cannabisMicrobusiness: z.union([z.boolean(), z.undefined()]),
   constructionRenovationPlan: z.union([z.boolean(), z.undefined()]),
-  carService: z.union([v183CarServiceTypeSchema, z.undefined()]),
-  interstateTransport: z.boolean(),
+  carService: z.union([v184CarServiceTypeSchema, z.undefined()]),
+  interstateTransport: z.union([z.boolean(), z.undefined()]),
   interstateLogistics: z.union([z.boolean(), z.undefined()]),
   interstateMoving: z.union([z.boolean(), z.undefined()]),
   isChildcareForSixOrMore: z.union([z.boolean(), z.undefined()]),
   petCareHousing: z.union([z.boolean(), z.undefined()]),
   willSellPetCareItems: z.union([z.boolean(), z.undefined()]),
-  constructionType: v183ConstructionTypeSchema,
-  residentialConstructionType: v183ResidentialConstructionTypeSchema,
-  employmentPersonnelServiceType: v183EmploymentAndPersonnelServicesTypeSchema,
-  employmentPlacementType: v183EmploymentPlacementTypeSchema,
-  propertyLeaseType: v183PropertyLeaseTypeSchema,
+  constructionType: v184ConstructionTypeSchema,
+  residentialConstructionType: v184ResidentialConstructionTypeSchema,
+  employmentPersonnelServiceType: v184EmploymentAndPersonnelServicesTypeSchema,
+  employmentPlacementType: v184EmploymentPlacementTypeSchema,
+  propertyLeaseType: v184PropertyLeaseTypeSchema,
   hasThreeOrMoreRentalUnits: z.union([z.boolean(), z.undefined()]),
   publicWorksContractor: z.union([z.boolean(), z.undefined()]),
-}) satisfies z.ZodType<v183IndustrySpecificData>;
+}) satisfies z.ZodType<v184IndustrySpecificData>;
 
-export const v183ProfileDataSchema = v183IndustrySpecificDataSchema.extend({
-  businessPersona: v183BusinessPersonaSchema,
+export const v184ProfileDataSchema = v184IndustrySpecificDataSchema.extend({
+  businessPersona: v184BusinessPersonaSchema,
   businessName: z.string(),
   responsibleOwnerName: z.string(),
   tradeName: z.string(),
   industryId: z.union([z.string(), z.undefined()]),
   legalStructureId: z.union([z.string(), z.undefined()]),
-  municipality: z.union([v183MunicipalitySchema, z.undefined()]),
+  municipality: z.union([v184MunicipalitySchema, z.undefined()]),
   dateOfFormation: z.union([z.string(), z.undefined()]),
   entityId: z.union([z.string(), z.undefined()]),
   employerId: z.union([z.string(), z.undefined()]),
@@ -739,30 +814,30 @@ export const v183ProfileDataSchema = v183IndustrySpecificDataSchema.extend({
   hashedTaxId: z.union([z.string(), z.undefined()]),
   encryptedTaxId: z.union([z.string(), z.undefined()]),
   notes: z.string(),
-  documents: v183ProfileDocumentsSchema,
+  documents: v184ProfileDocumentsSchema,
   ownershipTypeIds: z.array(z.string()),
   existingEmployees: z.union([z.string(), z.undefined()]),
   taxPin: z.union([z.string(), z.undefined()]),
   encryptedTaxPin: z.union([z.string(), z.undefined()]),
   sectorId: z.union([z.string(), z.undefined()]),
   naicsCode: z.string(),
-  foreignBusinessTypeIds: z.array(v183ForeignBusinessTypeIdSchema),
+  foreignBusinessTypeIds: z.array(v184ForeignBusinessTypeIdSchema),
   nexusDbaName: z.string(),
-  operatingPhase: v183OperatingPhaseSchema,
+  operatingPhase: v184OperatingPhaseSchema,
   nonEssentialRadioAnswers: z.record(z.string(), z.union([z.boolean(), z.undefined()])),
   elevatorOwningBusiness: z.union([z.boolean(), z.undefined()]),
-  communityAffairsAddress: v183CommunityAffairsAddressSchema.optional(),
+  communityAffairsAddress: v184CommunityAffairsAddressSchema.optional(),
   plannedRenovationQuestion: z.union([z.boolean(), z.undefined()]),
   raffleBingoGames: z.union([z.boolean(), z.undefined()]),
   businessOpenMoreThanTwoYears: z.union([z.boolean(), z.undefined()]),
   employerAccessRegistration: z.union([z.boolean(), z.undefined()]),
   deptOfLaborEin: z.string(),
-}) satisfies z.ZodType<v183ProfileData>;
+}) satisfies z.ZodType<v184ProfileData>;
 
-export const v183FormationFormDataSchema = v183FormationAddressSchema.extend({
+export const v184FormationFormDataSchema = v184FormationAddressSchema.extend({
   businessName: z.string(),
   businessNameConfirmation: z.boolean(),
-  businessSuffix: z.union([v183BusinessSuffixSchema, z.undefined()]),
+  businessSuffix: z.union([v184BusinessSuffixSchema, z.undefined()]),
   businessTotalStock: z.string(),
   businessStartDate: z.string(), // YYYY-MM-DD
   businessPurpose: z.string(),
@@ -776,66 +851,80 @@ export const v183FormationFormDataSchema = v183FormationAddressSchema.extend({
   canMakeDistribution: z.union([z.boolean(), z.undefined()]),
   makeDistributionTerms: z.string(),
   hasNonprofitBoardMembers: z.union([z.boolean(), z.undefined()]),
-  nonprofitBoardMemberQualificationsSpecified: v183InFormInBylawsSchema,
+  nonprofitBoardMemberQualificationsSpecified: v184InFormInBylawsSchema,
   nonprofitBoardMemberQualificationsTerms: z.string(),
-  nonprofitBoardMemberRightsSpecified: v183InFormInBylawsSchema,
+  nonprofitBoardMemberRightsSpecified: v184InFormInBylawsSchema,
   nonprofitBoardMemberRightsTerms: z.string(),
-  nonprofitTrusteesMethodSpecified: v183InFormInBylawsSchema,
+  nonprofitTrusteesMethodSpecified: v184InFormInBylawsSchema,
   nonprofitTrusteesMethodTerms: z.string(),
-  nonprofitAssetDistributionSpecified: v183InFormInBylawsSchema,
+  nonprofitAssetDistributionSpecified: v184InFormInBylawsSchema,
   nonprofitAssetDistributionTerms: z.string(),
   additionalProvisions: z.union([z.array(z.string()), z.undefined()]),
   agentType: z.enum(["MYSELF", "AUTHORIZED_REP", "PROFESSIONAL_SERVICE"]),
   agentNumber: z.string(),
-  agentName: z.string(),
-  agentEmail: z.string(),
-  agentOfficeAddressLine1: z.string(),
-  agentOfficeAddressLine2: z.string(),
-  agentOfficeAddressCity: z.string(),
+  agentName: z.string().max(AGENT_NAME_MAX_CHAR, {
+    message: `agent name cannot exceed ${AGENT_NAME_MAX_CHAR} characters`,
+  }),
+  agentEmail: z.string().max(AGENT_EMAIL_MAX_CHAR, {
+    message: `agent email cannot exceed ${AGENT_EMAIL_MAX_CHAR} characters`,
+  }),
+  agentOfficeAddressLine1: z.string().max(AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR, {
+    message: `agent address line 1 cannot exceed ${AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR} characters`,
+  }),
+  agentOfficeAddressLine2: z.string().max(AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR, {
+    message: `agent address line 2 cannot exceed ${AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR} characters`,
+  }),
+  agentOfficeAddressCity: z.string().max(AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR, {
+    message: `agent address city cannot exceed ${AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR} characters`,
+  }),
   agentOfficeAddressZipCode: z.string(),
   agentUseAccountInfo: z.boolean(),
   agentUseBusinessAddress: z.boolean(),
-  members: z.union([z.array(v183FormationMemberSchema), z.undefined()]),
-  incorporators: z.union([z.array(v183FormationIncorporatorSchema), z.undefined()]),
-  signers: z.union([z.array(v183FormationSignerSchema), z.undefined()]),
-  paymentType: v183PaymentTypeSchema,
+  members: z.union([z.array(v184FormationMemberSchema), z.undefined()]),
+  incorporators: z.union([z.array(v184FormationIncorporatorSchema), z.undefined()]),
+  signers: z.union([z.array(v184FormationSignerSchema), z.undefined()]),
+  paymentType: v184PaymentTypeSchema,
   annualReportNotification: z.boolean(),
   corpWatchNotification: z.boolean(),
   officialFormationDocument: z.boolean(),
   certificateOfStanding: z.boolean(),
   certifiedCopyOfFormationDocument: z.boolean(),
-  contactFirstName: z.string(),
-  contactLastName: z.string(),
+  contactFirstName: z.string().max(CONTACT_FIRST_NAME_MAX_CHAR, {
+    message: `contact first name cannot exceed ${CONTACT_FIRST_NAME_MAX_CHAR} characters`,
+  }),
+  contactLastName: z.string().max(CONTACT_LAST_NAME_MAX_CHAR, {
+    message: `contact last name cannot exceed ${CONTACT_LAST_NAME_MAX_CHAR} characters`,
+  }),
   contactPhoneNumber: z.string(),
-  foreignStateOfFormation: z.union([v183StateObjectSchema, z.undefined()]),
+  foreignStateOfFormation: z.union([v184StateObjectSchema, z.undefined()]),
   foreignDateOfFormation: z.union([z.string(), z.undefined()]), // YYYY-MM-DD
-  foreignGoodStandingFile: z.union([v183ForeignGoodStandingFileObjectSchema, z.undefined()]),
+  foreignGoodStandingFile: z.union([v184ForeignGoodStandingFileObjectSchema, z.undefined()]),
   legalType: z.string(),
   willPracticeLaw: z.union([z.boolean(), z.undefined()]),
   isVeteranNonprofit: z.union([z.boolean(), z.undefined()]),
   checkNameReservation: z.boolean(),
-  howToProceed: v183HowToProceedOptionsSchema,
-}) satisfies z.ZodType<v183FormationFormData>;
+  howToProceed: v184HowToProceedOptionsSchema,
+}) satisfies z.ZodType<v184FormationFormData>;
 
-export const v183FormationDataSchema: z.ZodType<v183FormationData> = z.object({
-  formationFormData: v183FormationFormDataSchema,
-  businessNameAvailability: z.union([v183NameAvailabilitySchema, z.undefined()]),
-  dbaBusinessNameAvailability: z.union([v183NameAvailabilitySchema, z.undefined()]),
-  formationResponse: z.union([v183FormationSubmitResponseSchema, z.undefined()]),
-  getFilingResponse: z.union([v183GetFilingResponseSchema, z.undefined()]),
+export const v184FormationDataSchema: z.ZodType<v184FormationData> = z.object({
+  formationFormData: v184FormationFormDataSchema,
+  businessNameAvailability: z.union([v184NameAvailabilitySchema, z.undefined()]),
+  dbaBusinessNameAvailability: z.union([v184NameAvailabilitySchema, z.undefined()]),
+  formationResponse: z.union([v184FormationSubmitResponseSchema, z.undefined()]),
+  getFilingResponse: z.union([v184GetFilingResponseSchema, z.undefined()]),
   completedFilingPayment: z.boolean(),
   lastVisitedPageIndex: z.number(),
 });
 
-export const v183LicensesSchema = z.record(z.string(), v183LicenseDetailsSchema);
+export const v184LicensesSchema = z.record(z.string(), v184LicenseDetailsSchema);
 
-export const v183LicenseDataSchema: z.ZodType<v183LicenseData> = z.object({
+export const v184LicenseDataSchema: z.ZodType<v184LicenseData> = z.object({
   lastUpdatedISO: z.string(),
-  licenses: v183LicensesSchema.optional(),
+  licenses: v184LicensesSchema.optional(),
 });
 
-export const v183PreferencesSchema: z.ZodType<v183Preferences> = z.object({
-  roadmapOpenSections: z.array(v183SectionTypeSchema),
+export const v184PreferencesSchema: z.ZodType<v184Preferences> = z.object({
+  roadmapOpenSections: z.array(v184SectionTypeSchema),
   roadmapOpenSteps: z.array(z.number()),
   hiddenFundingIds: z.array(z.string()),
   hiddenCertificationIds: z.array(z.string()),
@@ -847,35 +936,35 @@ export const v183PreferencesSchema: z.ZodType<v183Preferences> = z.object({
   isNonProfitFromFunding: z.boolean().optional(),
 });
 
-export const v183BusinessSchema: z.ZodType<v183Business> = z.object({
+export const v184BusinessSchema: z.ZodType<v184Business> = z.object({
   id: z.string(),
   dateCreatedISO: z.string(),
   lastUpdatedISO: z.string(),
   dateDeletedISO: z.string(),
-  profileData: v183ProfileDataSchema,
-  onboardingFormProgress: v183OnboardingFormProgressSchema,
-  taskProgress: z.record(z.string(), v183TaskProgressSchema),
+  profileData: v184ProfileDataSchema,
+  onboardingFormProgress: v184OnboardingFormProgressSchema,
+  taskProgress: z.record(z.string(), v184TaskProgressSchema),
   taskItemChecklist: z.record(z.string(), z.boolean()),
-  licenseData: z.union([v183LicenseDataSchema, z.undefined()]),
-  preferences: v183PreferencesSchema,
-  taxFilingData: v183TaxFilingDataSchema,
-  formationData: v183FormationDataSchema,
-  environmentData: z.union([v183EnvironmentDataSchema, z.undefined()]),
-  xrayRegistrationData: z.union([v183XrayDataSchema, z.undefined()]),
-  roadmapTaskData: v183RoadmapTaskDataSchema,
-  taxClearanceCertificateData: z.union([v183TaxClearanceCertificateDataSchema, z.undefined()]),
-  cigaretteLicenseData: z.union([v183CigaretteLicenseDataSchema, z.undefined()]),
+  licenseData: z.union([v184LicenseDataSchema, z.undefined()]),
+  preferences: v184PreferencesSchema,
+  taxFilingData: v184TaxFilingDataSchema,
+  formationData: v184FormationDataSchema,
+  environmentData: z.union([v184EnvironmentDataSchema, z.undefined()]),
+  xrayRegistrationData: z.union([v184XrayDataSchema, z.undefined()]),
+  roadmapTaskData: v184RoadmapTaskDataSchema,
+  taxClearanceCertificateData: z.union([v184TaxClearanceCertificateDataSchema, z.undefined()]),
+  cigaretteLicenseData: z.union([v184CigaretteLicenseDataSchema, z.undefined()]),
   version: z.number(),
   versionWhenCreated: z.number(),
   userId: z.string(),
 });
 
-export const v183UserDataSchema: z.ZodType<v183UserData> = z.object({
-  user: v183BusinessUserSchema,
+export const v184UserDataSchema: z.ZodType<v184UserData> = z.object({
+  user: v184BusinessUserSchema,
   version: z.number(),
   lastUpdatedISO: z.string(),
   dateCreatedISO: z.string(),
   versionWhenCreated: z.number(),
-  businesses: z.record(z.string(), v183BusinessSchema),
+  businesses: z.record(z.string(), v184BusinessSchema),
   currentBusinessId: z.string(),
 });

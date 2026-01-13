@@ -184,6 +184,7 @@ import { migrate_v179_to_v180 } from "@db/migrations/v180_add_email_sent_environ
 import { migrate_v180_to_v181 } from "@db/migrations/v181_add_updates_reminders_and_phone_number";
 import { migrate_v181_to_v182 } from "@db/migrations/v182_move_profile_non_essential_questions_to_non_essential_questions_section";
 import { migrate_v182_to_v183 } from "@db/migrations/v183_zod_changes";
+import { migrate_v183_to_v184 } from "@db/migrations/v184_change_addresscountry_interstatetransport";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -372,6 +373,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v180_to_v181,
   migrate_v181_to_v182,
   migrate_v182_to_v183,
+  migrate_v183_to_v184,
 ];
 
-export { generatev183UserData as CURRENT_GENERATOR } from "@db/migrations/v183_zod_changes";
+export { generatev184UserData as CURRENT_GENERATOR } from "@db/migrations/v184_change_addresscountry_interstatetransport";

@@ -7,7 +7,6 @@ import { Migrations } from "@db/migrations/migrations";
 import { type CryptoClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
-import { parseUserData } from "@db/zodSchema/zodSchemas";
 
 const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -56,7 +55,6 @@ export const DynamoUserDataClient = (
 
   const doMigration = async (data: UserData): Promise<UserData> => {
     const migratedData = await migrateData(data, logger);
-    parseUserData(logger, data);
     await put(migratedData);
     return migratedData;
   };
