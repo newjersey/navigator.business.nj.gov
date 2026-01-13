@@ -40,11 +40,10 @@ county:
 sector: []
 publishStageArchive: null
 ---
-
 ## Eligibility
 
-- Individuals who are considering applying for a conditional or annual license
-- Must be in the `Impact Zone|impact-zone-business-cannabis` , `social equity business|social-equity-business-cannabis` , `diversely owned|diversely-owned-business-cannabis` , veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories
+* Individuals who are considering applying for a conditional or annual license
+* Must be in the `Impact Zone|impactzonebusiness-cannabis` , `social equity business|socialequitybusiness-cannabis` , `diversely owned| diverselyownedbusiness-cannabis` , veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
