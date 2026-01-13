@@ -7,6 +7,16 @@ import { Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
+export enum NavBarVariant {
+  LOGO_ONLY = "LOGO_ONLY",
+  LOGO_WITH_TEXT = "LOGO_WITH_TEXT",
+  MINIMAL_WITH_LOGIN = "MINIMAL_WITH_LOGIN",
+  FULL_LANDING = "FULL_LANDING",
+  MINIMAL_WITH_DISABLED_DROPDOWN = "MINIMAL_WITH_DISABLED_DROPDOWN",
+  FULL_AUTHENTICATED = "FULL_AUTHENTICATED",
+  FULL_GUEST = "FULL_GUEST",
+}
+
 type Props = {
   landingPage?: boolean;
   isLoginPage?: boolean;
