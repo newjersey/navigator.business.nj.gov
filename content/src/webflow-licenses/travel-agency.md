@@ -1,13 +1,13 @@
 ---
+id: travel-agency
 displayname: travel-agency
-id: "travel-agency"
-webflowId: "5f7728dbf17efb1a52eefb2d"
-urlSlug: "travel-agency"
-webflowName: "Travel Agency"
-callToActionLink: "http://asta.org/about/content.cfm?ItemNumber=746"
-callToActionText: ""
-agencyAdditionalContext: "American Society of Travel Agents"
-divisionPhone: "(800) 275-2782"
-webflowIndustry: "Agency"
-licenseCertificationClassification: "FOR RULES & REGULATIONS/CONTACT"
+urlSlug: travel-agency
+webflowName: Travel Agency
+agencyAdditionalContext: International Air Transport Association, Agency Department
+callToActionText: Visit the IATA
+callToActionLink: http://iata.org/Pages/default.aspx
+webflowIndustry: Agency
+licenseCertificationClassification: FOR RULES & REGULATIONS/CONTACT
+divisionPhone: (305) 264-7772 ext. 318
+webflowId: 5f7728df71c49e2d73913b7c
 ---
