@@ -1,4 +1,4 @@
-import { NavBar } from "@/components/navbar/NavBar";
+import { NavBar, NavBarVariant } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { StarterKitsBody } from "@/components/starter-kits/StarterKitsBody";
 import {
@@ -47,7 +47,7 @@ const StarterKitsPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton landingPage={true}>
-      <NavBar isSeoStarterKit={true} />
+      <NavBar variant={NavBarVariant.MINIMAL_WITH_LOGIN} />
       <main className="desktop:grid-container-widescreen desktop:padding-x-7">
         <StarterKitsBody
           stepsTitle={stepsTitle}
