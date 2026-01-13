@@ -4,11 +4,11 @@ import {
   allFormationLegalTypes,
   EmploymentPlacementType,
   FormationLegalType,
+  getMergedConfig,
   Industry,
   LegalStructures,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared";
 import { LighthouseConfig, Pa11yThresholds } from "../types";
 
 const Config = getMergedConfig();
@@ -199,4 +199,32 @@ export const completeTaxClearanceFlow = (): void => {
   cy.contains(Config.taxClearanceCertificateDownload.headerTwoLabel, { timeout: 500 })
     .should("be.visible")
     .and("contain.text", "Your Certificate is Ready!");
+};
+
+export const fillOutLicenseStatusCheckForm = ({
+  businessName,
+  addressLine1,
+  addressLine2,
+  addressZipCode,
+}: Partial<{
+  businessName: string;
+  addressLine1: string;
+  addressLine2: string;
+  addressZipCode: string;
+}>): void => {
+  if (businessName) {
+    cy.get('[data-testid="business-name"]').type(businessName);
+  }
+
+  if (addressLine1) {
+    cy.get('[data-testid="address-1"]').type(addressLine1);
+  }
+
+  if (addressLine2) {
+    cy.get('[data-testid="address-2"]').type(addressLine2);
+  }
+
+  if (addressZipCode) {
+    cy.get('[data-testid="zipcode"]').type(addressZipCode);
+  }
 };
