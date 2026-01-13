@@ -12,7 +12,6 @@ import React, { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
   children: React.ReactNode;
-  variant?: NavBarVariant;
   landingPage?: boolean;
   isLoginPage?: boolean;
   isSeoStarterKit?: boolean;
@@ -37,11 +36,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
     return router?.pathname === ROUTES.onboarding;
   };
 
-  const deriveVariant = (): NavBarVariant => {
-    // If variant explicitly provided, use it
-    if (props.variant) return props.variant;
-
-    // Otherwise derive from boolean props or context
+  const deriveNavBarVariant = (): NavBarVariant => {
     if (props.logoOnly) return NavBarVariant.LOGO_ONLY;
     if (props.isLoginPage) return NavBarVariant.LOGO_WITH_TEXT;
     if (props.isSeoStarterKit) return NavBarVariant.MINIMAL_WITH_LOGIN;
@@ -62,7 +57,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <div className="fit-screen-content">
         {props.showNavBar && (
           <NavBar
-            variant={deriveVariant()}
+            variant={deriveNavBarVariant()}
             logoVariant={logoVariant}
             task={props.task}
             showSidebar={props.showSidebar}
