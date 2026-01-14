@@ -74,8 +74,19 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
         <p className="text-base-dark margin-bottom-2">
           {businessDetails?.addressLine1}, {businessDetails?.city},{" "}
           {businessDetails?.addressZipCode} NJ
+          {props.onSearchAgain && (
+            <>
+              {" "}
+              <button
+                onClick={props.onSearchAgain}
+                className="usa-button usa-button--unstyled text-primary text-underline"
+                data-testid="crtk-edit-business-info"
+              >
+                Edit
+              </button>
+            </>
+          )}
         </p>
-
         <div className="bg-white padding-4 radius-lg">
           <StatusResultHeader
             status={status}
