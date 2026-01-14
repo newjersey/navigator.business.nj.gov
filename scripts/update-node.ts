@@ -39,11 +39,6 @@ const filesToUpdateDots = [
 ];
 
 /**
- * List of files to update with Node.js version in underscore notation (e.g. "18_18_2")
- */
-const filesToUpdateUnderscores = [".circleci/config.yml"];
-
-/**
  * Fetches all Node.js releases from the official distribution API
  *
  * @throws {Error} If the API request fails
@@ -257,7 +252,7 @@ async function main() {
     const args = process.argv.slice(2);
 
     const currentBranch = getCurrentBranchName();
-    if (currentBranch !== "heads/new-docker-image") {
+    if (currentBranch !== "new-docker-image") {
       throw new Error(
         'You must be on the "new-docker-image" branch to run this script.'
       );
@@ -267,19 +262,9 @@ async function main() {
     console.info(`Updating to Node.js ${nodeVersion} with npm ${npmVersion}`);
 
     const oldNodeVersionDots = await getCurrentNodeVersion();
-    const oldNodeVersionUnderscores = oldNodeVersionDots.replace(/\./g, "_");
-    const newNodeVersionUnderscores = nodeVersion.replace(/\./g, "_");
 
     for (const filePath of filesToUpdateDots) {
       await updateFile(filePath, oldNodeVersionDots, nodeVersion);
-    }
-
-    for (const filePath of filesToUpdateUnderscores) {
-      await updateFile(
-        filePath,
-        oldNodeVersionUnderscores,
-        newNodeVersionUnderscores
-      );
     }
 
     await fs.writeFile(path.resolve(".nvmrc"), nodeVersion + "\n", "utf8");
