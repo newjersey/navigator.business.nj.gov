@@ -85,7 +85,7 @@ jobs:
         id: build-ado-connection
         shell: bash
         run: |
-          python3 scripts/generate-ado-link.py "${{ github.event.pull_request.title }}"
+          python3 scripts/generate_ado_link.py "${{ github.event.pull_request.title }}"
       - name: Send Slack message
         uses: newjersey/innovation-shared-actions/.github/actions/slack-message@main
         with:
