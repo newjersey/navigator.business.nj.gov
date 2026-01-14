@@ -1,6 +1,6 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
-import { NavBarVariant } from "@/components/navbar/NavBar";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
 import { NavBarDesktopHomeLogo } from "@/components/navbar/desktop/NavBarDesktopHomeLogo";
 import { NavBarDesktopQuickLinks } from "@/components/navbar/desktop/NavBarDesktopQuickLinks";
