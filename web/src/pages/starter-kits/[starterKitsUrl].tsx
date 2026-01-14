@@ -1,4 +1,5 @@
-import { NavBar, NavBarVariant } from "@/components/navbar/NavBar";
+import { NavBar } from "@/components/navbar/NavBar";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { StarterKitsBody } from "@/components/starter-kits/StarterKitsBody";
 import {

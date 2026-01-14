@@ -1,4 +1,4 @@
-import { NavBarVariant } from "@/components/navbar/NavBar";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";

@@ -4,15 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useEffect, useState } from "react";
 
-export enum NavBarVariant {
-  LOGO_ONLY = "LOGO_ONLY",
-  LOGO_WITH_TEXT = "LOGO_WITH_TEXT",
-  MINIMAL_WITH_LOGIN = "MINIMAL_WITH_LOGIN",
-  FULL_LANDING = "FULL_LANDING",
-  MINIMAL_WITH_DISABLED_DROPDOWN = "MINIMAL_WITH_DISABLED_DROPDOWN",
-  FULL_AUTHENTICATED = "FULL_AUTHENTICATED",
-  FULL_GUEST = "FULL_GUEST",
-}
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 
 type Props = {
   variant: NavBarVariant;
@@ -22,7 +14,6 @@ type Props = {
   hideMiniRoadmap?: boolean;
   previousBusinessId?: string | undefined;
 };
-
 export const NavBar = (props: Props): ReactElement => {
   const [scrolled, setScrolled] = useState(false);
   const { userData } = useUserData();

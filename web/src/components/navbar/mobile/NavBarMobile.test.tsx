@@ -1,4 +1,4 @@
-import { NavBarVariant } from "@/components/navbar/NavBar";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";

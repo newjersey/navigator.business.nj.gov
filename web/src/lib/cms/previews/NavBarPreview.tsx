@@ -1,4 +1,4 @@
-import { NavBarVariant } from "@/components/navbar/NavBar";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
