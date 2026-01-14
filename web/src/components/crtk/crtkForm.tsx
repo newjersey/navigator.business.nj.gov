@@ -49,6 +49,7 @@ interface Props {
   isLoading: boolean;
   task?: Task;
   searchError?: string;
+  initialValues?: CRTKFacilityDetails;
 }
 
 interface FieldErrors {
