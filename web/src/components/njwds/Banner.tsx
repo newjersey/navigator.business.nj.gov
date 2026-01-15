@@ -19,7 +19,7 @@ export const Banner = (): ReactElement => {
             </div>
             <div className="flex row-desktop-column-mobile">
               <div className="margin-right-1 padding-right-1 desktop:border-right margin-y-05">
-                Governor Phil Murphy &bull; Lt. Governor Tahesha Way
+                Governor Mikie Sherrill &bull; Lt. Governor Dr. Dale G. Caldwell
               </div>
               <div className="margin-y-05">
                 <a href="https://nj.gov/subscribe/" target="_blank" rel="noreferrer">
