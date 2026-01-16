@@ -1,0 +1,101 @@
+name: Request Reviewers via Pickaroo
+
+on:
+  pull_request:
+    types: ["labeled"]
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    if: contains(github.event.pull_request.labels.*.name, 'request-review')
+    outputs:
+      reviewers:
+        ${{ steps.external-reviewers.outputs.reviewers }} ${{
+        steps.internal-reviewers.outputs.reviewers }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Generate GitHub App Token
+        id: generate_token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        with:
+          app-id: "2454947"
+          private-key: ${{ secrets.OOI_PULL_REQUEST_APP }}
+
+      - name: Select Internal Reviewers
+        id: internal-reviewers
+        uses: newjersey/innovation-shared-actions/.github/actions/pickaroo@main
+        with:
+          include_teams: "business-dev"
+          exclude_users: "NJ-Innovation-CI mjackson21"
+          number_of_reviewers: 2
+          token: ${{ steps.generate_token.outputs.token }}
+
+  post-slack-message:
+    needs: assign-reviewers
+    if: ${{ needs.assign-reviewers.outputs.reviewers != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: newjersey/innovation-shared-actions
+      - uses: actions/checkout@v6
+      - name: "Look up Slack user IDs"
+        id: lookup-slack-users
+        uses: newjersey/innovation-shared-actions/.github/actions/lookup-slack-users@main
+        with:
+          github_usernames: ${{ needs.assign-reviewers.outputs.reviewers }}
+          github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
+      - name: Build mentions
+        id: build-mentions
+        shell: bash
+        run: |
+          SLACK_USERS='${{ steps.lookup-slack-users.outputs.slack_users }}'
+          GITHUB_USERS='${{ steps.lookup-slack-users.outputs.github_users }}'
+
+          ALL_MENTIONS=$(echo "$SLACK_USERS $GITHUB_USERS" | jq -r -s '
+            (.[0] | map("<@" + . + ">")) + (.[1] | map("@" + .)) | join(", ")
+          ')
+
+          echo "mentions=$ALL_MENTIONS" >> $GITHUB_OUTPUT
+      - name: "Look up PR author in Slack"
+        id: lookup-pr-author
+        uses: newjersey/innovation-shared-actions/.github/actions/lookup-slack-users@main
+        with:
+          github_usernames: ${{ github.event.pull_request.user.login }}
+          github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
+      - name: Build author mention
+        id: build-author-mention
+        shell: bash
+        run: |
+          PR_AUTHOR_SLACK='${{ steps.lookup-pr-author.outputs.slack_users }}'
+          PR_AUTHOR_GITHUB='${{ steps.lookup-pr-author.outputs.github_users }}'
+
+          AUTHOR_MENTION=$(printf '%s %s' "$PR_AUTHOR_SLACK" "$PR_AUTHOR_GITHUB" | jq -r -s '
+            (.[0] | map("<@" + . + ">")) + (.[1] | map("@" + .)) | .[0]
+          ')
+
+          echo "author-mention=$AUTHOR_MENTION" >> $GITHUB_OUTPUT
+      - name: Build ADO connection
+        id: build-ado-connection
+        shell: bash
+        run: |
+          python3 scripts/generate_ado_link.py "${{ github.event.pull_request.title }}"
+      - name: Send Slack message
+        uses: newjersey/innovation-shared-actions/.github/actions/slack-message@main
+        with:
+          channel_id: ${{ secrets.SLACK_BIZX_ENG_CHANNEL_ID }}
+          message:
+            "[ <${{ github.event.pull_request.html_url }}|PR Review> ] ${{
+            github.event.repository.full_name}} - #${{ github.event.pull_request.number }} by ${{
+            steps.build-author-mention.outputs.author-mention }}:\n\n*${{
+            steps.build-ado-connection.outputs.pr_title }}*"
+          thread_message:
+            "Hey ${{ steps.build-mentions.outputs.mentions }}! Please take a look at this pull
+            request.️"
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}

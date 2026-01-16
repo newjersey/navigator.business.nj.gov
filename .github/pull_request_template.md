@@ -35,3 +35,4 @@ This pull request resolves [#0000](https://dev.azure.com/NJInnovation/Business%2
 - [ ] I have checked for and removed instances of unused config from CMS
 - [ ] If I added any new collections to the CMS config, then I updated the search tool and `cmsCollections.ts` (see CMS Additions in Engineering Reference/FAQ on the engineering documentation site)
 - [ ] I have updated relevant `.env` values in both `.env-template` and in Bitwarden
+- [ ] I have added the `request-reviewer` tag on github to request reviews
