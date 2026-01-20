@@ -1,3 +1,10 @@
+## [2026.0.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.0.0...v2026.0.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* [AB[#17115](https://github.com/newjersey/navigator.business.nj.gov/issues/17115)] update governor and lt. governor's names ([faff255](https://github.com/newjersey/navigator.business.nj.gov/commit/faff255a59ca099153ce564ab3b23d5cc79ba1d0))
+
 # [2026.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.27.0...v2026.0.0) (2026-01-12)
 
 
