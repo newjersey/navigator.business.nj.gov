@@ -21,9 +21,17 @@ import {
   getCurrentDateFormatted,
   publicFilingLegalTypes,
   randomElementFromArray,
+  AGENT_EMAIL_MAX_CHAR,
+  AGENT_NAME_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR,
+  BUSINESS_ADDRESS_CITY_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  CONTACT_FIRST_NAME_MAX_CHAR,
+  CONTACT_LAST_NAME_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-
 const Config = getMergedConfig();
 
 describe("getErrorStateForField", () => {
@@ -670,7 +678,7 @@ describe("getErrorStateForField", () => {
       expect(errorState3.label).toEqual(Config.formation.fields.agentEmail.error);
     });
 
-    it("has error if valid-format length is greater than 50 chars", () => {
+    it(`has error if valid-format length is greater than ${AGENT_EMAIL_MAX_CHAR} chars`, () => {
       const longFormEntry = `${Array(43).fill("A").join("")}@aol.com`;
       const formationFormData = generateFormationFormData({ agentEmail: longFormEntry });
       const errorState = getErrorStateForFormationField({ field: "agentEmail", formationFormData });
@@ -678,12 +686,12 @@ describe("getErrorStateForField", () => {
       expect(errorState.label).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentEmail.label,
-          maxLen: "50",
+          maxLen: AGENT_EMAIL_MAX_CHAR.toString(),
         }),
       );
     });
 
-    it("has no error if valid-format length is less than or equal to 50 chars", () => {
+    it(`has no error if valid-format length is less than or equal to ${AGENT_EMAIL_MAX_CHAR} chars`, () => {
       const longFormEntry = `${Array(42).fill("A").join("")}@aol.com`;
       const formationFormData = generateFormationFormData({ agentEmail: longFormEntry });
       const errorState = getErrorStateForFormationField({ field: "agentEmail", formationFormData });
@@ -980,8 +988,10 @@ describe("getErrorStateForField", () => {
         expect(errorState.label).toEqual(Config.formation.fields.addressLine1.error);
       });
 
-      it("has error if length is greater than 35 chars", () => {
-        const longFormEntry = Array(36).fill("A").join("");
+      it(`has error if length is greater than ${BUSINESS_ADDRESS_LINE_1_MAX_CHAR} chars`, () => {
+        const longFormEntry = Array(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1)
+          .fill("A")
+          .join("");
         const formationFormData = generateFormationFormData(
           { addressLine1: longFormEntry },
           { legalStructureId },
@@ -993,7 +1003,7 @@ describe("getErrorStateForField", () => {
         expect(errorState.hasError).toEqual(true);
         const expectedLabel = templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine1.label,
-          maxLen: "35",
+          maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR.toString(),
         });
         expect(errorState.label).toEqual(expectedLabel);
       });
@@ -1034,15 +1044,17 @@ describe("getErrorStateForField", () => {
         expect(errorState.label).toEqual(Config.formation.fields.addressLine1.error);
       });
 
-      it("has max length error when more than 35 characters", () => {
-        const tooLongData = Array(36).fill("A").join("");
+      it(`has max length error when more than ${BUSINESS_ADDRESS_LINE_1_MAX_CHAR} characters`, () => {
+        const tooLongData = Array(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1)
+          .fill("A")
+          .join("");
         const formationFormData = generateFormationFormData(
           { addressLine1: tooLongData },
           { legalStructureId },
         );
         const expectedLabel = templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine1.label,
-          maxLen: "35",
+          maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR.toString(),
         });
 
         const errorState = getErrorStateForFormationField({
@@ -1053,8 +1065,8 @@ describe("getErrorStateForField", () => {
         expect(errorState.label).toEqual(expectedLabel);
       });
 
-      it(`has no error if length is less than or equal to 35 chars`, () => {
-        const longFormEntry = Array(35).fill("A").join("");
+      it(`has no error if length is less than or equal to ${BUSINESS_ADDRESS_LINE_1_MAX_CHAR} chars`, () => {
+        const longFormEntry = Array(BUSINESS_ADDRESS_LINE_1_MAX_CHAR).fill("A").join("");
         const formationFormData = generateFormationFormData(
           { addressLine1: longFormEntry },
           { legalStructureId },
@@ -1156,56 +1168,56 @@ describe("getErrorStateForField", () => {
     }[] = [
       {
         field: "addressCity",
-        maxLen: 30,
+        maxLen: BUSINESS_ADDRESS_CITY_MAX_CHAR,
         labelWhenMissing: Config.formation.fields.addressCity.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressCity.label,
-          maxLen: "30",
+          maxLen: BUSINESS_ADDRESS_CITY_MAX_CHAR.toString(),
         }),
       },
       {
         field: "agentName",
-        maxLen: 50,
+        maxLen: AGENT_NAME_MAX_CHAR,
         labelWhenMissing: Config.formation.fields.agentName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentName.label,
-          maxLen: "50",
+          maxLen: AGENT_NAME_MAX_CHAR.toString(),
         }),
       },
       {
         field: "contactFirstName",
-        maxLen: 50,
+        maxLen: CONTACT_FIRST_NAME_MAX_CHAR,
         labelWhenMissing: Config.formation.fields.contactFirstName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.contactFirstName.label,
-          maxLen: "50",
+          maxLen: CONTACT_FIRST_NAME_MAX_CHAR.toString(),
         }),
       },
       {
         field: "contactLastName",
-        maxLen: 50,
+        maxLen: CONTACT_LAST_NAME_MAX_CHAR,
         labelWhenMissing: Config.formation.fields.contactLastName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.contactLastName.label,
-          maxLen: "50",
+          maxLen: CONTACT_LAST_NAME_MAX_CHAR.toString(),
         }),
       },
       {
         field: "agentOfficeAddressLine1",
-        maxLen: 35,
+        maxLen: AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR,
         labelWhenMissing: Config.formation.fields.agentOfficeAddressLine1.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentOfficeAddressLine1.label,
-          maxLen: "35",
+          maxLen: AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR.toString(),
         }),
       },
       {
         field: "agentOfficeAddressCity",
-        maxLen: 30,
+        maxLen: AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR,
         labelWhenMissing: Config.formation.fields.agentOfficeAddressCity.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentOfficeAddressCity.label,
-          maxLen: "30",
+          maxLen: AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR.toString(),
         }),
       },
     ];
@@ -1266,18 +1278,18 @@ describe("getErrorStateForField", () => {
     }[] = [
       {
         field: "addressLine2",
-        maxLen: 35,
+        maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine2.label,
-          maxLen: "35",
+          maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR.toString(),
         }),
       },
       {
         field: "agentOfficeAddressLine2",
-        maxLen: 35,
+        maxLen: AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentOfficeAddressLine2.label,
-          maxLen: "35",
+          maxLen: AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR.toString(),
         }),
       },
     ];

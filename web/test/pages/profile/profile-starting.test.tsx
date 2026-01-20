@@ -56,10 +56,6 @@ import {
 
 import analytics from "@/lib/utils/analytics";
 import {
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
-} from "@/lib/utils/formation-helpers";
-import {
   chooseRadio,
   chooseTab,
   clickBack,
@@ -82,6 +78,10 @@ import {
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import {
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+} from "@businessnjgovnavigator/shared";
 
 const Config = getMergedConfig();
 

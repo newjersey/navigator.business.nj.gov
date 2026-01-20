@@ -7,10 +7,6 @@ import {
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import {
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
-} from "@/lib/utils/formation-helpers";
 import { templateEval, validateEmail } from "@/lib/utils/helpers";
 import {
   FieldsForErrorHandling,
@@ -18,6 +14,18 @@ import {
   FormationFormData,
   InputFile,
   NameAvailability,
+  AGENT_EMAIL_MAX_CHAR,
+  AGENT_NAME_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR,
+  BUSINESS_ADDRESS_CITY_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+  BUSINESS_ADDRESS_PROVINCE_MAX_CHAR,
+  CONTACT_FIRST_NAME_MAX_CHAR,
+  CONTACT_LAST_NAME_MAX_CHAR,
+  SIGNER_NAME_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FormationFieldErrorState } from "@businessnjgovnavigator/shared/types";
@@ -192,7 +200,6 @@ export const getErrorStateForFormationField = (inputParams: {
 
   if (["signers", "incorporators"].includes(field)) {
     const newField = field as "signers" | "incorporators";
-    const SIGNER_NAME_MAX_LEN = 50;
     const someSignersMissingName = formationFormData[newField]?.some((signer) => {
       return !signer.name.trim();
     });
@@ -206,7 +213,7 @@ export const getErrorStateForFormationField = (inputParams: {
     });
 
     const someSignersTooLong = formationFormData[newField]?.some((signer) => {
-      return signer.name.length > SIGNER_NAME_MAX_LEN;
+      return signer.name.length > SIGNER_NAME_MAX_CHAR;
     });
 
     if (!formationFormData[newField] || formationFormData[newField]?.length === 0) {
@@ -239,7 +246,7 @@ export const getErrorStateForFormationField = (inputParams: {
         hasError: true,
         label: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: (Config.formation.fields as any)[field].label,
-          maxLen: SIGNER_NAME_MAX_LEN.toString(),
+          maxLen: SIGNER_NAME_MAX_CHAR.toString(),
         }),
       };
     }
@@ -343,27 +350,27 @@ export const getErrorStateForFormationField = (inputParams: {
   }
 
   if (field === "agentOfficeAddressLine1") {
-    return fieldWithMaxLength({ required: true, maxLen: 35 });
+    return fieldWithMaxLength({ required: true, maxLen: AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR });
   }
 
   if (field === "addressCity") {
-    return fieldWithMaxLength({ required: true, maxLen: 30 });
+    return fieldWithMaxLength({ required: true, maxLen: BUSINESS_ADDRESS_CITY_MAX_CHAR });
   }
 
   if (field === "addressProvince") {
-    return fieldWithMaxLength({ required: true, maxLen: 30 });
+    return fieldWithMaxLength({ required: true, maxLen: BUSINESS_ADDRESS_PROVINCE_MAX_CHAR });
   }
 
   if (field === "agentName") {
-    return fieldWithMaxLength({ required: true, maxLen: 50 });
+    return fieldWithMaxLength({ required: true, maxLen: AGENT_NAME_MAX_CHAR });
   }
 
   if (field === "contactFirstName") {
-    return fieldWithMaxLength({ required: true, maxLen: 50 });
+    return fieldWithMaxLength({ required: true, maxLen: CONTACT_FIRST_NAME_MAX_CHAR });
   }
 
   if (field === "contactLastName") {
-    return fieldWithMaxLength({ required: true, maxLen: 50 });
+    return fieldWithMaxLength({ required: true, maxLen: CONTACT_LAST_NAME_MAX_CHAR });
   }
 
   if (field === "addressLine2") {
@@ -371,7 +378,7 @@ export const getErrorStateForFormationField = (inputParams: {
   }
 
   if (field === "agentOfficeAddressLine2") {
-    return fieldWithMaxLength({ required: false, maxLen: 35 });
+    return fieldWithMaxLength({ required: false, maxLen: AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR });
   }
 
   if (field === "agentEmail") {
@@ -383,11 +390,11 @@ export const getErrorStateForFormationField = (inputParams: {
         label: Config.formation.fields.agentEmail.error,
       };
     }
-    return fieldWithMaxLength({ required: true, maxLen: 50 });
+    return fieldWithMaxLength({ required: true, maxLen: AGENT_EMAIL_MAX_CHAR });
   }
 
   if (field === "agentOfficeAddressCity") {
-    return fieldWithMaxLength({ required: true, maxLen: 30 });
+    return fieldWithMaxLength({ required: true, maxLen: AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR });
   }
 
   return { ...errorState, hasError: false };
