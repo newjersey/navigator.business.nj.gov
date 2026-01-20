@@ -1,34 +1,22 @@
 import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
-import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
+
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 
 type Props = {
-  landingPage?: boolean;
-  isLoginPage?: boolean;
-  isSeoStarterKit?: boolean;
+  variant: NavBarVariant;
+  logoVariant?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   task?: Task;
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
-  logoOnly?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   previousBusinessId?: string | undefined;
 };
-
 export const NavBar = (props: Props): ReactElement => {
   const [scrolled, setScrolled] = useState(false);
   const { userData } = useUserData();
-
-  const { state } = useContext(AuthContext);
-
-  const isAuthenticated = useMemo(() => {
-    return state.isAuthenticated === "TRUE";
-  }, [state.isAuthenticated]);
-
-  const router = useRouter();
 
   const handleScroll = (): void => {
     const offset = window.scrollY;
@@ -46,37 +34,25 @@ export const NavBar = (props: Props): ReactElement => {
     };
   }, []);
 
-  const currentlyOnboarding = (): boolean => {
-    return router?.pathname === ROUTES.onboarding;
-  };
-
   return (
     <>
       <div className="display-none desktop:display-inline">
         <NavBarDesktop
-          isSeoStarterKit={props.isSeoStarterKit}
-          isLanding={props.landingPage}
-          isLoginPage={props.isLoginPage}
-          logoOnlyType={props.logoOnly}
+          variant={props.variant}
+          logoVariant={props.logoVariant}
           previousBusinessId={props.previousBusinessId}
-          currentlyOnboarding={currentlyOnboarding()}
-          isAuthenticated={isAuthenticated}
           userData={userData}
         />
       </div>
       <div className="display-inline desktop:display-none">
         <NavBarMobile
-          isSeoStarterKit={props.isSeoStarterKit}
-          isLanding={props.landingPage}
-          isLoginPage={props.isLoginPage}
+          variant={props.variant}
+          logoVariant={props.logoVariant}
           scrolled={scrolled}
           task={props.task}
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           previousBusinessId={props.previousBusinessId}
-          logoOnlyType={props.logoOnly}
-          currentlyOnboarding={currentlyOnboarding()}
-          isAuthenticated={isAuthenticated}
           userData={userData}
         />
         <div className={scrolled ? "padding-top-6" : ""} />

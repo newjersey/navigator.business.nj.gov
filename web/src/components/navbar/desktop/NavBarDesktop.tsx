@@ -1,5 +1,6 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
 import { NavBarDesktopHomeLogo } from "@/components/navbar/desktop/NavBarDesktopHomeLogo";
 import { NavBarDesktopQuickLinks } from "@/components/navbar/desktop/NavBarDesktopQuickLinks";
@@ -25,12 +26,8 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   previousBusinessId?: string | undefined;
-  isLanding: boolean | undefined;
-  isLoginPage?: boolean;
-  isSeoStarterKit?: boolean;
-  logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
-  currentlyOnboarding: boolean | undefined;
-  isAuthenticated: boolean;
+  variant: NavBarVariant;
+  logoVariant?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   userData?: UserData;
   CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
@@ -61,159 +58,161 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     prevOpen.current = open;
   }, [open]);
 
-  const textColor = props.isAuthenticated ? "primary" : "base";
-  const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
+  const isAuthenticated = props.variant === NavBarVariant.FULL_AUTHENTICATED;
+  const textColor = isAuthenticated ? "primary" : "base";
+  const navBarBusinessTitle = getNavBarBusinessTitle(business, isAuthenticated);
   const currentIndex =
     props.userData && business
       ? orderBusinessIdsByDateCreated(props.userData).indexOf(business.id)
       : 0;
 
-  if (props.logoOnlyType) {
-    // loading/redirect/ethan onboarding
-    return <NavBarLogoOnlyDesktop logoType={props.logoOnlyType} />;
-  } else if (props.isLoginPage) {
-    return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-        <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} isLoginPage />
-      </NavBarDesktopWrapper>
-    );
-  } else if (props.isSeoStarterKit) {
-    // starter kits page for SEO
-    return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-        <NavBarDesktopHomeLogo previousBusinessId={undefined} />
-        <div className={"display-flex flex-row flex-align-center"}>
-          <NavBarLoginButton />
-        </div>
-      </NavBarDesktopWrapper>
-    );
-  } else if (props.isLanding) {
-    // landing
-    return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-        <NavBarDesktopHomeLogo previousBusinessId={undefined} />
-        <div className={"display-flex flex-row flex-align-center"}>
-          <NavBarDesktopQuickLinks />
-          <NavBarVerticalLineDivider />
-          <NavBarLoginButton />
-          <NavBarDesktopDropDown
-            anchorRef={anchorRef}
-            open={open}
-            setOpen={setOpen}
-            menuButtonTitle={Config.navigationDefaults.landingPageDropDownTitle}
-            dropDownTitle={Config.navigationDefaults.landingPageDropDownTitle}
-            handleClose={handleClose}
-            textColor={textColor}
-            icon={<Icon className="nav-bar-dropdown-account-icon" iconName="account_circle" />}
-            subMenuElement={[<GetStartedMenuItem key="GetStarted" />]}
-          />
-        </div>
-      </NavBarDesktopWrapper>
-    );
-  } else if (props.currentlyOnboarding) {
-    // onboarding
-    return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-        <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
-        <div className={"display-flex flex-row flex-align-center"}>
-          <NavBarDesktopDropDown
-            disabled={true}
-            anchorRef={anchorRef}
-            open={open}
-            setOpen={setOpen}
-            menuButtonTitle={navBarBusinessTitle}
-            dropDownTitle={navBarBusinessTitle}
-            handleClose={handleClose}
-            textColor={textColor}
-            icon={
-              <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon
-                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
-                  sizePx="35px"
-                />
-              </div>
-            }
-            subMenuElement={[]}
-          />
-        </div>
-      </NavBarDesktopWrapper>
-    );
-  } else if (props.isAuthenticated) {
-    // authed
-    return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-        <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
-        <div className={"display-flex flex-row flex-align-center"}>
-          <NavBarDesktopQuickLinks />
-          <NavBarVerticalLineDivider />
-          <NavBarDesktopDropDown
-            anchorRef={anchorRef}
-            open={open}
-            setOpen={setOpen}
-            menuButtonTitle={navBarBusinessTitle}
-            dropDownTitle={getUserNameOrEmail(props.userData)}
-            handleClose={handleClose}
-            textColor={textColor}
-            icon={
-              <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon
-                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
-                  sizePx="35px"
-                />
-              </div>
-            }
-            subMenuElement={[
-              <ProfileMenuItem
-                userData={props.userData}
-                handleClose={handleClose}
-                isAuthenticated={props.isAuthenticated}
-                key="profile"
-              />,
-              <AddBusinessItem handleClose={handleClose} key="addBusiness" />,
-              <MyNjMenuItem handleClose={handleClose} key="MyNJ" />,
-              <LogoutMenuItem handleClose={handleClose} key="Logout" />,
-            ]}
-          />
-        </div>
-      </NavBarDesktopWrapper>
-    );
-  } else {
-    // guest
-    return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-        <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
-        <div className={"display-flex flex-row flex-align-center"}>
-          <NavBarDesktopQuickLinks />
-          <NavBarVerticalLineDivider />
-          <NavBarLoginButton />
-          <NavBarDesktopDropDown
-            anchorRef={anchorRef}
-            open={open}
-            setOpen={setOpen}
-            menuButtonTitle={navBarBusinessTitle}
-            dropDownTitle={Config.navigationDefaults.navBarGuestAccountText}
-            handleClose={handleClose}
-            textColor={textColor}
-            icon={
-              <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon
-                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
-                  sizePx="35px"
-                />
-              </div>
-            }
-            subMenuElement={[
-              <ProfileMenuItem
-                userData={props.userData}
-                handleClose={handleClose}
-                isAuthenticated={props.isAuthenticated}
-                key="profile"
-              />,
-              <RegisterMenuItem key="register" />,
-            ]}
-          />
-        </div>
-      </NavBarDesktopWrapper>
-    );
+  switch (props.variant) {
+    case NavBarVariant.LOGO_ONLY:
+      return <NavBarLogoOnlyDesktop logoType={props.logoVariant!} />;
+
+    case NavBarVariant.LOGO_WITH_TEXT:
+      return (
+        <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+          <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} isLoginPage />
+        </NavBarDesktopWrapper>
+      );
+
+    case NavBarVariant.MINIMAL_WITH_LOGIN:
+      return (
+        <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+          <NavBarDesktopHomeLogo previousBusinessId={undefined} />
+          <div className={"display-flex flex-row flex-align-center"}>
+            <NavBarLoginButton />
+          </div>
+        </NavBarDesktopWrapper>
+      );
+
+    case NavBarVariant.FULL_LANDING:
+      return (
+        <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+          <NavBarDesktopHomeLogo previousBusinessId={undefined} />
+          <div className={"display-flex flex-row flex-align-center"}>
+            <NavBarDesktopQuickLinks />
+            <NavBarVerticalLineDivider />
+            <NavBarLoginButton />
+            <NavBarDesktopDropDown
+              anchorRef={anchorRef}
+              open={open}
+              setOpen={setOpen}
+              menuButtonTitle={Config.navigationDefaults.landingPageDropDownTitle}
+              dropDownTitle={Config.navigationDefaults.landingPageDropDownTitle}
+              handleClose={handleClose}
+              textColor={textColor}
+              icon={<Icon className="nav-bar-dropdown-account-icon" iconName="account_circle" />}
+              subMenuElement={[<GetStartedMenuItem key="GetStarted" />]}
+            />
+          </div>
+        </NavBarDesktopWrapper>
+      );
+
+    case NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN:
+      return (
+        <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+          <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
+          <div className={"display-flex flex-row flex-align-center"}>
+            <NavBarDesktopDropDown
+              disabled={true}
+              anchorRef={anchorRef}
+              open={open}
+              setOpen={setOpen}
+              menuButtonTitle={navBarBusinessTitle}
+              dropDownTitle={navBarBusinessTitle}
+              handleClose={handleClose}
+              textColor={textColor}
+              icon={
+                <div className={"margin-left-2px display-flex"}>
+                  <ButtonIcon
+                    svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                    sizePx="35px"
+                  />
+                </div>
+              }
+              subMenuElement={[]}
+            />
+          </div>
+        </NavBarDesktopWrapper>
+      );
+
+    case NavBarVariant.FULL_AUTHENTICATED:
+      return (
+        <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+          <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
+          <div className={"display-flex flex-row flex-align-center"}>
+            <NavBarDesktopQuickLinks />
+            <NavBarVerticalLineDivider />
+            <NavBarDesktopDropDown
+              anchorRef={anchorRef}
+              open={open}
+              setOpen={setOpen}
+              menuButtonTitle={navBarBusinessTitle}
+              dropDownTitle={getUserNameOrEmail(props.userData)}
+              handleClose={handleClose}
+              textColor={textColor}
+              icon={
+                <div className={"margin-left-2px display-flex"}>
+                  <ButtonIcon
+                    svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                    sizePx="35px"
+                  />
+                </div>
+              }
+              subMenuElement={[
+                <ProfileMenuItem
+                  userData={props.userData}
+                  handleClose={handleClose}
+                  isAuthenticated={isAuthenticated}
+                  key="profile"
+                />,
+                <AddBusinessItem handleClose={handleClose} key="addBusiness" />,
+                <MyNjMenuItem handleClose={handleClose} key="MyNJ" />,
+                <LogoutMenuItem handleClose={handleClose} key="Logout" />,
+              ]}
+            />
+          </div>
+        </NavBarDesktopWrapper>
+      );
+
+    case NavBarVariant.FULL_GUEST:
+      return (
+        <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+          <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
+          <div className={"display-flex flex-row flex-align-center"}>
+            <NavBarDesktopQuickLinks />
+            <NavBarVerticalLineDivider />
+            <NavBarLoginButton />
+            <NavBarDesktopDropDown
+              anchorRef={anchorRef}
+              open={open}
+              setOpen={setOpen}
+              menuButtonTitle={navBarBusinessTitle}
+              dropDownTitle={Config.navigationDefaults.navBarGuestAccountText}
+              handleClose={handleClose}
+              textColor={textColor}
+              icon={
+                <div className={"margin-left-2px display-flex"}>
+                  <ButtonIcon
+                    svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                    sizePx="35px"
+                  />
+                </div>
+              }
+              subMenuElement={[
+                <ProfileMenuItem
+                  userData={props.userData}
+                  handleClose={handleClose}
+                  isAuthenticated={isAuthenticated}
+                  key="profile"
+                />,
+                <RegisterMenuItem key="register" />,
+              ]}
+            />
+          </div>
+        </NavBarDesktopWrapper>
+      );
   }
 };

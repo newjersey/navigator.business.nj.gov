@@ -3,9 +3,13 @@ import { LegalMessage } from "@/components/LegalMessage";
 import { PageFooter } from "@/components/PageFooter";
 import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { NavBar } from "@/components/navbar/NavBar";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { Banner } from "@/components/njwds/Banner";
+import { AuthContext } from "@/contexts/authContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task } from "@businessnjgovnavigator/shared/types";
-import React, { ReactElement } from "react";
+import { useRouter } from "next/compat/router";
+import React, { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -17,10 +21,34 @@ interface Props {
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
   logoOnly?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
+  logoVariant?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   previousBusinessId?: string | undefined;
 }
 
 export const PageSkeleton = (props: Props): ReactElement => {
+  const { state } = useContext(AuthContext);
+  const router = useRouter();
+
+  const isAuthenticated = useMemo(() => {
+    return state.isAuthenticated === "TRUE";
+  }, [state.isAuthenticated]);
+
+  const currentlyOnboarding = (): boolean => {
+    return router?.pathname === ROUTES.onboarding;
+  };
+
+  const deriveNavBarVariant = (): NavBarVariant => {
+    if (props.logoOnly) return NavBarVariant.LOGO_ONLY;
+    if (props.isLoginPage) return NavBarVariant.LOGO_WITH_TEXT;
+    if (props.isSeoStarterKit) return NavBarVariant.MINIMAL_WITH_LOGIN;
+    if (props.landingPage) return NavBarVariant.FULL_LANDING;
+    if (currentlyOnboarding()) return NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN;
+    if (isAuthenticated) return NavBarVariant.FULL_AUTHENTICATED;
+    return NavBarVariant.FULL_GUEST;
+  };
+
+  const logoVariant = props.logoVariant ?? props.logoOnly;
+
   return (
     <>
       <section aria-label="Official government website">
@@ -30,13 +58,11 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <div className="fit-screen-content">
         {props.showNavBar && (
           <NavBar
-            landingPage={props.landingPage}
-            isLoginPage={props.isLoginPage}
-            isSeoStarterKit={props.isSeoStarterKit}
+            variant={deriveNavBarVariant()}
+            logoVariant={logoVariant}
             task={props.task}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}
-            logoOnly={props.logoOnly}
             previousBusinessId={props.previousBusinessId}
           />
         )}
