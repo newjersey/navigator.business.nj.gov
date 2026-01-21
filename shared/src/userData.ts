@@ -45,7 +45,7 @@ export interface Business {
   readonly crtkData: CRTKData | undefined;
 }
 
-export const CURRENT_VERSION = 185;
+export const CURRENT_VERSION = 186;
 
 export const createEmptyBusiness = ({
   userId,
