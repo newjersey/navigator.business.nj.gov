@@ -2,8 +2,8 @@ import fs from "fs";
 import path from "path";
 import { Industry } from "../industry";
 
-const IndustryJsonPathTest = path.join(process.cwd(), "content", "lib", "industry.json");
+const IndustryJsonPathTest = path.join(process.cwd(), "..", "content", "lib", "industry.json");
 
-export const getIndustryJsonForTest = (): Industry[] => {
+export const getIndustryJson = (): Industry[] => {
   return JSON.parse(fs.readFileSync(IndustryJsonPathTest, "utf8")).industries;
 };

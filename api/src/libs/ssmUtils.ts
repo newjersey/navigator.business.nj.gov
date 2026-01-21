@@ -42,7 +42,8 @@ let cache: {
 
 export const getConfigValue = async (
   paramName: CONFIG_VARS,
-  logger?: LogWriterType,
+  logger?: LogWriterType | undefined,
+  stageOverride?: string | undefined,
 ): Promise<string> => {
   if (process.env.STAGE === "local") {
     const envVarName = paramName.toUpperCase().replaceAll("-", "_");
@@ -53,7 +54,8 @@ export const getConfigValue = async (
   }
 
   try {
-    const ssmPath = `/${process.env.STAGE}/${paramName}`;
+    const stage = process.env.STAGE ?? stageOverride;
+    const ssmPath = `/${stage}/${paramName}`;
     logger?.LogInfo(`Fetching SSM parameter: ${ssmPath}`);
     const command = new GetParameterCommand({
       Name: ssmPath,
