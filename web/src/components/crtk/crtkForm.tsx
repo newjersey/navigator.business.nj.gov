@@ -264,6 +264,14 @@ export const CRTKStatus = (props: Props): ReactElement => {
 
   return (
     <>
+      <style>
+        {`
+             .btn-accent-cooler[data-testid="crtk-submit"] .MuiCircularProgress-root {
+              color: white !important;
+            }
+          `}
+      </style>
+
       <div className="margin-bottom-4">
         <div className="text-base-darkest margin-bottom-2">
           <Content>
