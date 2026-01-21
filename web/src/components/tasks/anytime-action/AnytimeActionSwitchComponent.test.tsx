@@ -26,20 +26,10 @@ describe("AnytimeActionSwitchComponent", () => {
     });
   });
 
-  describe("ABC ETP Feature Flag", () => {
-    it("renders emergency trip permit stepper if feature flag is true", () => {
-      process.env.FEATURE_ABC_ETP_APPLICATION = "true";
-      const task = generateAnytimeActionTask({ filename: "emergency-trip-permit" });
-      render(<AnytimeActionSwitchComponent anytimeActionTask={task} />);
-      const firstTab = screen.getAllByRole("tab")[0];
-      expect(firstTab).toHaveAttribute("aria-selected", "true");
-    });
-
-    it("does not render emergency trip permit stepper if feature flag is not true", () => {
-      process.env.FEATURE_ABC_ETP_APPLICATION = "some random string";
-      const task = generateAnytimeActionTask({ filename: "emergency-trip-permit" });
-      render(<AnytimeActionSwitchComponent anytimeActionTask={task} />);
-      expect(screen.queryByRole("tab")).not.toBeInTheDocument();
-    });
+  it("renders emergency trip permit stepper", () => {
+    const task = generateAnytimeActionTask({ filename: "emergency-trip-permit" });
+    render(<AnytimeActionSwitchComponent anytimeActionTask={task} />);
+    const firstTab = screen.getAllByRole("tab")[0];
+    expect(firstTab).toHaveAttribute("aria-selected", "true");
   });
 });
