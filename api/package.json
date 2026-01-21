@@ -18,7 +18,8 @@
     "start:wiremock": "wiremock --root-dir ./wiremock --port 9000",
     "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
     "test": "jest",
-    "typecheck": "tsc --noemit"
+    "typecheck": "tsc --noemit",
+    "cms-integrity-tests": "yarn dlx tsx ./scripts/cms-content-integrity-tests/runCmsIntegrityTests.ts"
   },
   "engines": {
     "node": ">=24.12.0"
