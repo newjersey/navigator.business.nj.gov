@@ -25,7 +25,7 @@
     "dayjs": "1.11.19",
     "gray-matter": "4.0.3",
     "js-yaml": "4.1.1",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "uuid": "9.0.1"
   },
   "devDependencies": {
