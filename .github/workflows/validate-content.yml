@@ -1,0 +1,73 @@
+name: Validate Content Changes
+
+on:
+  pull_request:
+    types: ["opened", "synchronize"]
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    if: github.base_ref == 'content-repo'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install Dependencies
+        run: yarn install --immutable --mode skip-build
+
+      - name: Run Spell Checker
+        id: spellcheck
+        continue-on-error: true
+        run: |
+          set +e  # Temporarily disable errexit to be able to capture the exit code
+          set -o pipefail
+          yarn spellcheck 2>&1 | tee spellcheck-output.txt
+          EXIT_CODE=$?
+          set -e
+          echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+
+          if [ $EXIT_CODE -ne 0 ]; then
+            UNKNOWN_WORDS=$(awk -F'[()]' '/Unknown word/ {print $2}' spellcheck-output.txt | sort -u | tr '\n' ',' | sed 's/,/, /g; s/, $//' || echo "")
+            echo "unknown_words=${UNKNOWN_WORDS}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build Spellcheck Error Message
+        id: build-spellcheck-error-message
+        if: steps.spellcheck.outputs.exit_code != '0'
+        run: |
+          cat > message.txt << 'SLACKMSG'
+          ⚠️ *Spell Check Failed*
+
+          <${{ github.event.pull_request.html_url }}|PR #${{ github.event.pull_request.number }}>: *${{ github.event.pull_request.title }}*
+
+          Please review and either:
+          1. Fix any typos in your content, OR
+          2. Add valid words to the <https://dev.account.business.nj.gov/mgmt/cms#/collections/spellcheck-exceptions/entries/spellcheck-exceptions|"Spell Check Exceptions" Collection> in the CMS
+
+          *Unknown words:* ${{ steps.spellcheck.outputs.unknown_words }}
+          SLACKMSG
+
+          # Convert to JSON-safe string
+          MESSAGE=$(jq -Rs . < message.txt)
+          echo "slack_message=${MESSAGE}" >> $GITHUB_OUTPUT
+
+      - name: Send Slack notification on failure
+        if: steps.spellcheck.outputs.exit_code != '0'
+        uses: slackapi/slack-github-action@v2
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          payload: |
+            channel: ${{ secrets.SLACK_BIZX_CONTENT_CHANNEL_ID }}
+            text: ${{ steps.build-spellcheck-error-message.outputs.slack_message }}
+
+      - name: Fail job if spellcheck failed
+        if: steps.spellcheck.outputs.exit_code != '0'
+        run: exit 1
