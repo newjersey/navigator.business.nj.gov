@@ -1,0 +1,34 @@
+collections:
+  - name: "spellcheck-dictionary"
+    label: "📖 SPELLCHECK DICTIONARY"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "spellcheck-exceptions"
+    label: "Spell Check Exceptions"
+    delete: false
+    create: false
+    editor:
+      preview: false
+    files:
+      - label: "Spell Check Exceptions"
+        name: "spellcheck-exceptions"
+        file: "content/src/spellcheck-exceptions.json"
+        fields:
+          - label: "Spell Check Exceptions"
+            name: "words"
+            widget: "list"
+            hint: >-
+              Add words that should be allowed in spell checking. These are typically acronyms
+              (e.g., NJEDA), proper nouns (e.g., Hunterdon), industry terms, or technical jargon.
+              Enter one word at a time using the "Add" button.
+            label_singular: "word"
+            summary: "{{fields.synonym}}"
+            required: false
+            allow_add: true
+            create: true
+            field:
+              name: "synonym"
+              label: "Word"
+              widget: "string"
