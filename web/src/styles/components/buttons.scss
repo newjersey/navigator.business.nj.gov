@@ -101,6 +101,9 @@
   &:active {
     background-color: variables.$accent-cooler-darker !important;
   }
+  .MuiCircularProgress-root {
+    color: white !important;
+  }
 }
 
 .btn-error-dark {
