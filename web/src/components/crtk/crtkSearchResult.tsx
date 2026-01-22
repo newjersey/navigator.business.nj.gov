@@ -76,10 +76,9 @@ export const CRTKSearchResult = (props: Props): ReactElement => {
           {businessDetails?.addressZipCode} NJ
           {props.onSearchAgain && (
             <>
-              {" "}
               <button
                 onClick={props.onSearchAgain}
-                className="usa-button usa-button--unstyled text-primary text-underline"
+                className="text-primary text-underline padding-left-1 bg-transparent border-0 cursor-pointer"
                 data-testid="crtk-edit-business-info"
               >
                 Edit
