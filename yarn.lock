@@ -4634,7 +4634,7 @@ __metadata:
     body-parser: 1.20.3
     concurrently: ^9.2.1
     cors: 2.8.5
-    cross-env: 7.0.3
+    cross-env: 10.1.0
     dayjs: 1.11.19
     dedent: 1.7.0
     dependency-cruiser: 17.3.1
@@ -4681,7 +4681,7 @@ __metadata:
     "@businessnjgovnavigator/shared": "*"
     "@types/node": 20.19.17
     "@vitest/coverage-v8": 2.1.8
-    cross-env: 7.0.3
+    cross-env: 10.1.0
     cspell: 9.3.2
     gray-matter: 4.0.3
     prettier: 3.6.2
@@ -4818,7 +4818,7 @@ __metadata:
     constructs: ^10.0.0
     copy-webpack-plugin: 13.0.1
     cors: 2.8.5
-    cross-env: 7.0.3
+    cross-env: 10.1.0
     cspell: 9.3.2
     cypress: 14.5.4
     cypress-axe: 1.7.0
@@ -4930,7 +4930,7 @@ __metadata:
     "@types/uuid": 10.0.0
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
-    cross-env: 7.0.3
+    cross-env: 10.1.0
     dayjs: 1.11.19
     eslint: 8.57.1
     eslint-config-prettier: 9.1.2
@@ -5021,7 +5021,7 @@ __metadata:
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
     copy-webpack-plugin: 13.0.1
-    cross-env: 7.0.3
+    cross-env: 10.1.0
     cspell: 9.3.2
     cypress: 14.5.4
     cypress-axe: 1.7.0
@@ -6041,6 +6041,13 @@ __metadata:
   version: 0.4.0
   resolution: "@emotion/weak-memoize@npm:0.4.0"
   checksum: db5da0e89bd752c78b6bd65a1e56231f0abebe2f71c0bd8fc47dff96408f7065b02e214080f99924f6a3bfe7ee15afc48dad999d76df86b39b16e513f7a94f52
+  languageName: node
+  linkType: hard
+
+"@epic-web/invariant@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@epic-web/invariant@npm:1.0.0"
+  checksum: 58e2029bd3362751f5afac2b3bdb6b4f6e38f888af7ee93a0d76e18c879586b130bf3b14588364fcf04a1423b5b917eacad5717d61224daac64350c7ae5fc95e
   languageName: node
   linkType: hard
 
@@ -18506,15 +18513,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:7.0.3":
-  version: 7.0.3
-  resolution: "cross-env@npm:7.0.3"
+"cross-env@npm:10.1.0":
+  version: 10.1.0
+  resolution: "cross-env@npm:10.1.0"
   dependencies:
-    cross-spawn: ^7.0.1
+    "@epic-web/invariant": ^1.0.0
+    cross-spawn: ^7.0.6
   bin:
-    cross-env: src/bin/cross-env.js
-    cross-env-shell: src/bin/cross-env-shell.js
-  checksum: 26f2f3ea2ab32617f57effb70d329c2070d2f5630adc800985d8b30b56e8bf7f5f439dd3a0358b79cee6f930afc23cf8e23515f17ccfb30092c6b62c6b630a79
+    cross-env: dist/bin/cross-env.js
+    cross-env-shell: dist/bin/cross-env-shell.js
+  checksum: bd7e013603df8dc3a5a2d259a84f43a62114486e141395668ea46e9c5d154b312ebf26486f30699ffe7ff8f275331e00e61d7a720d1593185fce685b0f1c3d9f
   languageName: node
   linkType: hard
 
@@ -18527,7 +18535,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.1, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
+"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
   version: 7.0.6
   resolution: "cross-spawn@npm:7.0.6"
   dependencies:
