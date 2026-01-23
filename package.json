@@ -233,7 +233,7 @@
     "semantic-release": "19.0.5",
     "storybook": "7.6.21",
     "style-loader": "4.0.0",
-    "supertest": "6.3.4",
+    "supertest": "7.2.2",
     "ts-jest": "29.4.5",
     "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
