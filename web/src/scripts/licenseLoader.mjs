@@ -4,15 +4,19 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const webflowLicenseDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/webflow-licenses`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/webflow-licenses`,
 );
 
 const navigatorLicenseDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/license-tasks`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/license-tasks`,
 );
 
 const municipalDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/municipal-tasks`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/municipal-tasks`,
+);
+
+const tasksAllDir = path.resolve(
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/tasks`,
 );
 
 const convertLicenseMd = (mdContents, filename) => {
@@ -56,7 +60,15 @@ export const loadAllNavigatorLicenses = () => {
     return loadLicenseByPath(fileName, fullPath);
   });
 
-  return navigatorLicenses.concat(municipalLicenses);
+  const tasksAllFileNames = fs.readdirSync(tasksAllDir);
+  const tasksAllLicenses = tasksAllFileNames
+    .map((fileName) => {
+      const fullPath = path.join(tasksAllDir, `${fileName}`);
+      return loadLicenseByPath(fileName, fullPath);
+    })
+    .filter((license) => license.syncToWebflow === true || license.syncToWebflow === "true");
+
+  return navigatorLicenses.concat(municipalLicenses, tasksAllLicenses);
 };
 
 const loadLicenseByPath = (fileName, fullPath) => {
@@ -75,12 +87,15 @@ const getMarkDownFromNavigatorDir = (fileName, filePath) => {
 export const loadNavigatorLicense = (fileName) => {
   const navigatorLicenseFile = path.join(navigatorLicenseDir, `${fileName}`);
   const municipalLicenseFile = path.join(municipalDir, `${fileName}`);
+  const tasksAllLicenseFile = path.join(tasksAllDir, `${fileName}`);
   const webflowLicenseFile = path.join(webflowLicenseDir, `${fileName}`);
 
   if (fs.existsSync(navigatorLicenseFile)) {
     return getMarkDownFromNavigatorDir(fileName, navigatorLicenseFile);
   } else if (fs.existsSync(municipalLicenseFile)) {
     return getMarkDownFromNavigatorDir(fileName, municipalLicenseFile);
+  } else if (fs.existsSync(tasksAllLicenseFile)) {
+    return getMarkDownFromNavigatorDir(fileName, tasksAllLicenseFile);
   } else if (fs.existsSync(webflowLicenseFile)) {
     return getMarkDownFromNavigatorDir(fileName, webflowLicenseFile);
   } else {
@@ -103,13 +118,17 @@ export const writeMarkdownString = (license) => {
     }${license.callToActionText ? `callToActionText: ${license.callToActionText}\n` : ""}${
       license.agencyId ? `agencyId: ${license.agencyId}\n` : ""
     }${
-      license.agencyAdditionalContext ? `agencyAdditionalContext: ${license.agencyAdditionalContext}\n` : ""
+      license.agencyAdditionalContext
+        ? `agencyAdditionalContext: ${license.agencyAdditionalContext}\n`
+        : ""
     }${license.divisionPhone ? `divisionPhone: ${license.divisionPhone}\n` : ""}${
       license.industryId ? `industryId: ${license.industryId}\n` : ""
     }${
       license.webflowType ? `webflowType: ${license.webflowType}\n` : ""
     }licenseCertificationClassification: ${license.licenseCertificationClassification}\n${
-      license.summaryDescriptionMd ? `summaryDescriptionMd: "${license.summaryDescriptionMd}"\n` : ""
+      license.summaryDescriptionMd
+        ? `summaryDescriptionMd: "${license.summaryDescriptionMd}"\n`
+        : ""
     }---\n` +
     `${license.contentMd}`
   );
