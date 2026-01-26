@@ -22,6 +22,11 @@ import {
 } from "@shared/test";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
 import dayjs from "dayjs";
+import { getConfigValue } from "@libs/ssmUtils";
+import { parseUserData } from "@db/zodSchema/zodSchemas";
+
+jest.mock("@libs/ssmUtils");
+jest.mock("@db/zodSchema/zodSchemas");
 
 // references jest-dynalite-config values
 const dbConfig = {
@@ -80,6 +85,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
   };
 
   beforeEach(() => {
+    jest.clearAllMocks();
     logger = DummyLogWriter;
     cryptoClient = {
       encryptValue: jest.fn(),
@@ -345,5 +351,42 @@ describe("User and Business Migration with DynamoDataClient", () => {
     expect(putBusinessesSpy).not.toHaveBeenCalled();
     expect(putUsersSpy).not.toHaveBeenCalled();
     expect(logger.LogInfo).toHaveBeenCalledWith("Migration halted: kill switch is ON");
+  });
+
+  it("should call parseUserData when zod_parsing_on feature flag is true", async () => {
+    (getConfigValue as jest.Mock).mockResolvedValue("true");
+    (parseUserData as jest.Mock).mockImplementation(() => {});
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result.success).toBe(true);
+    expect(result.migratedCount).toBe(1);
+    expect(getConfigValue).toHaveBeenCalledWith("zod_parsing_on", logger);
+    expect(parseUserData).toHaveBeenCalledWith(logger, userData);
+    expect(parseUserData).toHaveBeenCalledTimes(1);
+  });
+
+  it("should not call parseUserData when zod_parsing_on feature flag is false", async () => {
+    (getConfigValue as jest.Mock).mockResolvedValue("false");
+    (parseUserData as jest.Mock).mockImplementation(() => {});
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result.success).toBe(true);
+    expect(result.migratedCount).toBe(1);
+    expect(getConfigValue).toHaveBeenCalledWith("zod_parsing_on", logger);
+    expect(parseUserData).not.toHaveBeenCalled();
+  });
+
+  it("should not call parseUserData when zod_parsing_on feature flag is empty string", async () => {
+    (getConfigValue as jest.Mock).mockResolvedValue("");
+    (parseUserData as jest.Mock).mockImplementation(() => {});
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result.success).toBe(true);
+    expect(result.migratedCount).toBe(1);
+    expect(getConfigValue).toHaveBeenCalledWith("zod_parsing_on", logger);
+    expect(parseUserData).not.toHaveBeenCalled();
   });
 });
