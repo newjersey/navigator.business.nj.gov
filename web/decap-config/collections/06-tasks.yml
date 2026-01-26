@@ -329,7 +329,15 @@ collections:
           required: false,
         }
       - {
-          label: "Webflow Name (not being synced, only for reference and future expansion)",
+          label: "Sync to Webflow",
+          name: "syncToWebflow",
+          widget: "boolean",
+          required: false,
+          default: false,
+        }
+      - {
+          label: "Webflow Name",
+          hint: Required if "Sync to Webflow" is selected,
           name: "webflowName",
           widget: "string",
           required: false,
