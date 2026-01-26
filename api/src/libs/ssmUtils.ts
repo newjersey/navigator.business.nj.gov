@@ -13,7 +13,8 @@ export type CONFIG_VARS =
   | CIGARETTE_EMAIL_CONFIG_VARS
   | ENV_REQ_CONFIG_VARS
   | USER_MESSAGING_CONFIG_VARS
-  | "dep_base_url";
+  | "dep_base_url"
+  | "zod_parsing_on";
 
 export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_base_url"

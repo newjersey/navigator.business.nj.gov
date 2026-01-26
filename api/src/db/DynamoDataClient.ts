@@ -3,6 +3,7 @@ import { LogWriterType } from "@libs/logWriter";
 import { Business, CURRENT_VERSION, UserData } from "@shared/userData";
 import { chunk } from "lodash";
 import { parseUserData } from "@db/zodSchema/zodSchemas";
+import { getConfigValue } from "@libs/ssmUtils";
 
 export const DynamoDataClient = (
   userDataClient: UserDataClient,
@@ -20,6 +21,7 @@ export const DynamoDataClient = (
       let nextToken: string | undefined = undefined;
       let migratedCount = 0;
       const batchSize = 25;
+      const isZodParsingOn = await getConfigValue("zod_parsing_on", logger);
 
       do {
         const killSwitchOn = await isKillSwitchOn();
@@ -44,7 +46,7 @@ export const DynamoDataClient = (
             return { success: true, migratedCount };
           }
 
-          await processBatch(batch);
+          await processBatch(batch, isZodParsingOn);
           migratedCount += batch.length;
           logger.LogInfo(
             `Processed batch of ${batch.length} users. Total migrated so far: ${migratedCount}`,
@@ -63,12 +65,17 @@ export const DynamoDataClient = (
     }
   };
 
-  const processBatch = async (usersToMigrate: UserData[]): Promise<void> => {
+  const processBatch = async (
+    usersToMigrate: UserData[],
+    isZodParsingOn: string,
+  ): Promise<void> => {
     const results = await Promise.allSettled(
       usersToMigrate.map(async (user) => {
         await updateUserAndBusinesses(user);
         logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
-        parseUserData(logger, user);
+        if (isZodParsingOn === "true") {
+          parseUserData(logger, user);
+        }
       }),
     );
 
