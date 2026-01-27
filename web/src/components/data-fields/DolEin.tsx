@@ -8,7 +8,6 @@ import { ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggl
 import { InputAdornment } from "@mui/material";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
-import { useMountEffect } from "@/lib/utils/helpers";
 import { DOL_EIN_CHARACTERS } from "@businessnjgovnavigator/shared";
 
 interface Props {
@@ -29,22 +28,21 @@ export const DolEin = (props: Props): ReactElement => {
   const [showHideStatus, setShowHideStatus] = useState<ShowHideStatus>(
     props.startHidden ? "password-view" : "text-view",
   );
-  const [isEncrypted, setIsEncrypted] = useState(false);
   const value = props.value ?? state?.profileData.deptOfLaborEin;
 
-  useMountEffect(() => {
-    if (state.profileData.deptOfLaborEin.length > 0) {
-      setIsEncrypted(true);
-    }
-  });
+  const isEncrypted = (): boolean => {
+    return (
+      state.profileData.deptOfLaborEin.length > 0 &&
+      state.profileData.deptOfLaborEin.length !== DOL_EIN_CHARACTERS
+    );
+  };
 
   const toggleShowHide = async (): Promise<void> => {
-    if (showHideStatus === "password-view" && isEncrypted) {
+    if (showHideStatus === "password-view" && isEncrypted()) {
       await decryptValue({
         encryptedValue: state.profileData.deptOfLaborEin as string,
       }).then((decryptedValue) => {
         setProfileData({ ...state.profileData, deptOfLaborEin: decryptedValue });
-        setIsEncrypted(false);
       });
     }
 
