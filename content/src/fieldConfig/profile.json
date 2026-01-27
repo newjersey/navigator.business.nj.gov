@@ -121,12 +121,6 @@
           "hideButtonTextMobile": "Hide Tax PIN"
         }
       },
-      "deptOfLaborEin": {
-        "default": {
-          "showButtonText": "Show",
-          "hideButtonText": "Hide"
-        }
-      },
       "elevatorOwningBusiness": {
         "default": {
           "header": "Elevator Owning Business",
@@ -323,15 +317,21 @@
           "addText": "Add",
           "notEnteredText": "Not entered",
           "optionContent": {
-            "general-partnership": "In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities. [Learn more about General Partnerships.](https://business.nj.gov/pages/general-partnership) ",
-            "c-corporation": "A traditional Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. [Learn more about Corporations.](https://business.nj.gov/pages/c-corporation-c-corp) ",
-            "limited-liability-company": "An LLC is one of the most common business structures. In an LLC, there can be one or multiple owners, and they are not personally liable for company debts. [Learn more about Limited Liability Companies.](https://business.nj.gov/pages/limited-liability-company-llc) ",
-            "limited-liability-partnership": "Limited Liability Partnerships have general partners who own and operate the business, and limited partners who invest in the business, both types of partners have limited liability. [Learn more about Limited Liability Partnerships.](https://business.nj.gov/pages/llp-lp) ",
-            "limited-partnership": "Limited Partnerships have general partners who own and operate the business, and limited partners who invest in the business but have limited liability and oversight. [Learn more about Limited Partners.](https://business.nj.gov/pages/llp-lp) ",
-            "s-corporation": "A Corporation with an S Corporation Tax Designation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. You may elect S Corp status separately after you form and register for tax and employer purposes. [Learn more about Corporations with an S designation.](https://business.nj.gov/pages/s-corporation-s-corp) ",
-            "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more about Sole Proprietorships.](https://business.nj.gov/pages/sole-proprietorship) ",
-            "nonprofit": "Nonprofits are a type of C Corporation, but unlike a for-profit corporation, a nonprofit organization has a mission to benefit the public rather than generating profit. Nonprofits belong to the public, are governed by a board of trustees, and can qualify for tax-exemption. [Learn more about Nonprofits.](https://business.nj.gov/pages/nonprofit)"
+            "general-partnership": "In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities. [Learn more about General Partnerships.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=and%20potential%20partners-,General%20Partnership,-A%20General%20Partnership) ",
+            "c-corporation": "A traditional Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. [Learn more about Corporations.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=C%2DCorporation%20(C%2DCorp)) ",
+            "limited-liability-company": "An LLC is one of the most common business structures. In an LLC, there can be one or multiple owners, and they are not personally liable for company debts. [Learn more about Limited Liability Companies.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=Limited%20Liability%20Company%20(LLC)) ",
+            "limited-liability-partnership": "Limited Liability Partnerships have general partners who own and operate the business, and limited partners who invest in the business, both types of partners have limited liability. [Learn more about Limited Liability Partnerships.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=Limited%20Liability%20Partnership%20(LLP)) ",
+            "limited-partnership": "Limited Partnerships have general partners who own and operate the business, and limited partners who invest in the business but have limited liability and oversight. [Learn more about Limited Partners.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=Limited%20Partnership%20(LP)) ",
+            "s-corporation": "A Corporation with an S Corporation Tax Designation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. You may elect S Corp status separately after you form and register for tax and employer purposes. [Learn more about Corporations with an S designation.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=S%2DCorporation%20(S%2DCorp)) ",
+            "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more about Sole Proprietorships.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=as%20legal%20structures).-,Sole%20Proprietorship,-Sole%20Proprietorship%20is) ",
+            "nonprofit": "Nonprofits are a type of C Corporation, but unlike a for-profit corporation, a nonprofit organization has a mission to benefit the public rather than generating profit. Nonprofits belong to the public, are governed by a board of trustees, and can qualify for tax-exemption. [Learn more about Nonprofits.](https://business.nj.gov/pages/choose-a-business-structure#:~:text=2%%20of%20shares-,Nonprofit,-Nonprofits%20are%20a)"
           }
+        }
+      },
+      "deptOfLaborEin": {
+        "default": {
+          "showButtonText": "Show",
+          "hideButtonText": "Hide"
         }
       },
       "employerId": {
@@ -474,8 +474,6 @@
       "profileTabPermitsTitle": "Permits & Licenses",
       "escapeModalEscape": "Keep Editing",
       "escapeModalBody": "You've made changes to your profile that haven't been saved. If you leave this page now, those changes will be lost.",
-      "escapeModalQuestion": "Would you like to save your changes before leaving?",
-      "escapeModalSaveChanges": "Save Changes",
       "notificationIncompleteTasksLabel": "Incomplete tasks and general reminders",
       "notificationNewsletterLabel": "Business.NJ.gov Newsletter",
       "standingDocFileTitle": "Certificate of Good Standing",
@@ -484,6 +482,7 @@
       "profileTabDocsTitle": "Reference Documents",
       "profilePageTitlePrefix": "Profile For",
       "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
+      "escapeModalQuestion": "Would you like to save your changes before leaving?",
       "essentialQuestionAlertText": "Complete all required fields.",
       "typesOfNotificationsSubText": "Select the types of updates that matter most to your business.",
       "formationDocFileTitle": "Official Formation Document",
@@ -495,10 +494,20 @@
       "yourProfileHelpsWithRecommendationsCallout": ":::miniCallout{ calloutType=\"informational\"  }\n**Your profile helps us make recommendations for your business.**\n:::",
       "annualReportDeadlineHeader": "Add Your Annual Report Deadline",
       "escapeModalHeader": "Save Changes",
+      "escapeModalSaveChanges": "Save Changes",
       "profileTabNumbersTitle": "Reference Numbers",
       "profileTabNoteTitle": "Notes",
       "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
       "saveButtonText": "Save",
+      "profileTabSlugs": {
+        "info": "business-information",
+        "contact": "contact-notifications",
+        "permits": "permits-licenses",
+        "numbers": "reference-numbers",
+        "documents": "reference-documents",
+        "notes": "notes",
+        "personalize": "personalize"
+      },
       "contactAndNotificationsSubText": "Choose how you want to stay informed. You can customize how you get messages, and you can choose which topics to receive.",
       "permitsAndLicensesSubText": "Answer a few questions to find out what licenses and permits you may need and discover funding programs to help your business grow. New items will appear on your Starter Kit or your For You section.",
       "escapeModalReturn": "Leave Without Saving",
@@ -509,16 +518,7 @@
       "certificationDocFileTitle": "Certified Copy of Formation",
       "profileTabInfoTitle": "Business Information",
       "securityMattersText": "- You can update your contact information and notification preferences at any time.\n- We will **never** ask for your password, banking details, or Social Security number in an email or text.\n- All official messages will always come from **address@business.nj.gov** or appear in your account dashboard.\n- If you ever get an email that looks suspicious, report it at [cyber.nj.gov/report](https://cyber.nj.gov/report).",
-      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete.",
-      "profileTabSlugs": {
-        "info": "business-information",
-        "contact": "contact-notifications",
-        "permits": "permits-licenses",
-        "numbers": "reference-numbers",
-        "documents": "reference-documents",
-        "notes": "notes",
-        "personalize": "personalize"
-      }
+      "locationBasedRequirementsSubText": "If you require any permits or licenses based on your businesses location or renovation needs, new tasks will be available for you to complete."
     }
   }
 }
