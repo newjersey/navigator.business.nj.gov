@@ -72,7 +72,7 @@ export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(
   query: K,
   value: QUERY_PARAMS_VALUES[K],
 ): void => {
-  router.push({ query: { [query]: value } }, undefined, { shallow: true });
+  router.push({ query: { ...router.query, [query]: value } }, undefined, { shallow: true });
 };
 
 export const routeWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(

@@ -77,11 +77,11 @@ describe("<SidebarCardFormationNudge />", () => {
       expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith(
-          { query: { fromForming: "true" } },
+          expect.objectContaining({
+            query: expect.objectContaining({ fromForming: "true" }),
+          }),
           undefined,
-          {
-            shallow: true,
-          },
+          { shallow: true },
         );
       });
     });

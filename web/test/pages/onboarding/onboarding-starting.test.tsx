@@ -205,9 +205,11 @@ describe("onboarding - starting a business", () => {
     page.chooseRadio("business-persona-starting");
 
     await page.visitStep(2);
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, {
-      shallow: true,
-    });
+    expect(mockRouter.mockPush).toHaveBeenCalledWith(
+      expect.objectContaining({ query: expect.objectContaining({ page: 2 }) }),
+      undefined,
+      { shallow: true },
+    );
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
 

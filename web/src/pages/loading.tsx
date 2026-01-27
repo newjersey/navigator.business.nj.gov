@@ -56,7 +56,7 @@ const LoadingPage = (): ReactElement => {
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
     if (business?.onboardingFormProgress && !onboardingCompleted(business)) {
-      router && router.push(ROUTES.onboarding);
+      router && router.push({ pathname: ROUTES.onboarding, query: router.query });
     } else if (business.preferences.returnToLink) {
       const pageLink = business.preferences.returnToLink;
       updateQueue

@@ -89,7 +89,7 @@ describe("loading page", () => {
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     render(<LoadingPage />);
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
+    expect(mockPush).toHaveBeenCalledWith(expect.objectContaining({ pathname: ROUTES.onboarding }));
   });
 
   it("redirects user to returnToLink page url if they have one and resets returnToLink", async () => {

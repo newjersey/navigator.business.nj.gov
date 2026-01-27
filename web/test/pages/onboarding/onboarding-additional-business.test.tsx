@@ -48,7 +48,11 @@ describe("onboarding - additional business", () => {
     renderPage({});
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+      expect(mockPush).toHaveBeenCalledWith(
+        expect.objectContaining({ query: expect.objectContaining({ page: 1 }) }),
+        undefined,
+        { shallow: true },
+      );
     });
 
     const expectedTitle = templateEval(Config.onboardingDefaults.pageTitle, {
@@ -65,7 +69,11 @@ describe("onboarding - additional business", () => {
     const initialData = generateUserDataForBusiness(initialBusiness);
     renderPage({ userData: initialData });
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+      expect(mockPush).toHaveBeenCalledWith(
+        expect.objectContaining({ query: expect.objectContaining({ page: 1 }) }),
+        undefined,
+        { shallow: true },
+      );
     });
 
     const previousBusinessName = getNavBarBusinessTitle(
@@ -94,7 +102,11 @@ describe("onboarding - additional business", () => {
     const { page } = renderPage({ userData: initialData });
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+      expect(mockPush).toHaveBeenCalledWith(
+        expect.objectContaining({ query: expect.objectContaining({ page: 1 }) }),
+        undefined,
+        { shallow: true },
+      );
     });
 
     page.chooseRadio("business-persona-starting");
