@@ -264,7 +264,9 @@
     "Balloonspots",
     "DLPS",
     "LCSW",
-    "CPSC"
+    "CPSC",
+    "cemetary",
+    "NJDLWD"
   ],
   "ignorePaths": [
     "node_modules/**",
