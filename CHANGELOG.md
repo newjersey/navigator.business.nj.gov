@@ -1,3 +1,30 @@
+# [2026.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.0.1...v2026.1.0) (2026-01-27)
+
+
+### Bug Fixes
+
+* [AB[#17143](https://github.com/newjersey/navigator.business.nj.gov/issues/17143)] disable deploy-storybook step ([a925226](https://github.com/newjersey/navigator.business.nj.gov/commit/a925226f18e1e72ee0de93e5cf22c98f416db367))
+* **deps:** update dependency lodash to v4.17.23 [security] ([bfce394](https://github.com/newjersey/navigator.business.nj.gov/commit/bfce39439388a543c126c10f5d7904546d3288bb))
+* extract NavBarVariant to separate file to prevent circular imports ([bead381](https://github.com/newjersey/navigator.business.nj.gov/commit/bead38110edb2832253b723494dbf5d97d7e5d96))
+* Merge remote-trackng branch 'origin/main' into content-repo ([790ec89](https://github.com/newjersey/navigator.business.nj.gov/commit/790ec89c7f72e4f76dcb55d988b9bab9f57e3ccb))
+
+
+### Features
+
+* [AB[#15786](https://github.com/newjersey/navigator.business.nj.gov/issues/15786)] additional details from review ([6bb341e](https://github.com/newjersey/navigator.business.nj.gov/commit/6bb341ec893227e911e69795255a86e0f44a7139))
+* [AB[#15786](https://github.com/newjersey/navigator.business.nj.gov/issues/15786)] fixed design comments on form ([#12394](https://github.com/newjersey/navigator.business.nj.gov/issues/12394)) ([1c4e92c](https://github.com/newjersey/navigator.business.nj.gov/commit/1c4e92c61e34b3525ded038689e5c16ef8fd4240))
+* [AB[#15786](https://github.com/newjersey/navigator.business.nj.gov/issues/15786)] fixed spinner and underline text ([#12430](https://github.com/newjersey/navigator.business.nj.gov/issues/12430)) ([618ac89](https://github.com/newjersey/navigator.business.nj.gov/commit/618ac896622140738dc013bb3827ce4e84102876))
+* [AB[#15786](https://github.com/newjersey/navigator.business.nj.gov/issues/15786)] missing edit button to go back on form ([#12399](https://github.com/newjersey/navigator.business.nj.gov/issues/12399)) ([4eb0258](https://github.com/newjersey/navigator.business.nj.gov/commit/4eb0258c583810957a91716f9ef789f96772891e))
+* [AB[#15883](https://github.com/newjersey/navigator.business.nj.gov/issues/15883)] integrity tests now trigger via github actions ([a43ee27](https://github.com/newjersey/navigator.business.nj.gov/commit/a43ee279943d52c0ef9ba361b5345b056f7a5b87))
+* [AB[#16661](https://github.com/newjersey/navigator.business.nj.gov/issues/16661)] Automated Test for License Status Check ([d20a08c](https://github.com/newjersey/navigator.business.nj.gov/commit/d20a08c7af3042b23db2c7a4a611f2c8bc78b377))
+* [AB[#17071](https://github.com/newjersey/navigator.business.nj.gov/issues/17071)] added feature flag for zod on migration: ([ecdb9f7](https://github.com/newjersey/navigator.business.nj.gov/commit/ecdb9f746d3d7bd75215004d306e14f50b3c531d))
+* [AB[#17071](https://github.com/newjersey/navigator.business.nj.gov/issues/17071)] Validating User Data  - Implementing ZOD schema (Security ticket) ([64dd04b](https://github.com/newjersey/navigator.business.nj.gov/commit/64dd04b15549d8b31b4074106622656a0f830e10))
+* [AB[#17071](https://github.com/newjersey/navigator.business.nj.gov/issues/17071)] validing and fixing zod data ([a9caafb](https://github.com/newjersey/navigator.business.nj.gov/commit/a9caafba207d5fb2eb1405939d1675c14071075e))
+* [AB[#17071](https://github.com/newjersey/navigator.business.nj.gov/issues/17071)] validing and fixing zod data ([fd1a757](https://github.com/newjersey/navigator.business.nj.gov/commit/fd1a757e592d3ee12927a0371595c2fe3e86d94e))
+* [AB[#17071](https://github.com/newjersey/navigator.business.nj.gov/issues/17071)] validing and fixing zod data base 64 encoding ([64555d9](https://github.com/newjersey/navigator.business.nj.gov/commit/64555d9d58564545037f1c50939edb36c9251a6a))
+* [AB[#17081](https://github.com/newjersey/navigator.business.nj.gov/issues/17081)] sync changes made to the webflow-licenses collection ([80e2b1c](https://github.com/newjersey/navigator.business.nj.gov/commit/80e2b1c68216ca58a63690d15761637ea52581d1))
+* [AB[#17115](https://github.com/newjersey/navigator.business.nj.gov/issues/17115)] update governor and lt. governor's names ([1fa19ab](https://github.com/newjersey/navigator.business.nj.gov/commit/1fa19ab380e3ad6a928ed3a503a53b1a091aa39f))
+
 ## [2026.0.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.0.0...v2026.0.1) (2026-01-20)
 
 
