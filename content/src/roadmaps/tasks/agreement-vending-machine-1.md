@@ -10,7 +10,7 @@ displayname: agreement-vending-machine
 name: Sign a Location Agreement
 id: agreement-vending-machine
 syncToWebflow: true
-webflowName: Location Agreement
+webflowName: "Vending Machine Location Agreement "
 industryId: vending-machine
 ---
 ## Agreement Considerations
