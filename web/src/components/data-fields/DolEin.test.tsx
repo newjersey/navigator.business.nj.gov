@@ -108,8 +108,8 @@ describe("<DolEin />", () => {
     expect(screen.getByRole("textbox", { name: "Dol ein" })).toBeDisabled();
   });
 
-  it("decrypts einValue if it is filled out in userData on first render", async () => {
-    const einValue = "123456789012345";
+  it("decrypts einValue if it is filled out in userData on first render and encrypted", async () => {
+    const einValue = "encrypted:123456789012345";
     const decryptedEinValue = "111111111111111";
     mockApi.decryptValue.mockResolvedValue(decryptedEinValue);
     renderComponent(generateProfileData({ deptOfLaborEin: einValue }), {
@@ -126,6 +126,22 @@ describe("<DolEin />", () => {
     expect(screen.getByRole("textbox", { name: "Dol ein" })).toHaveValue(
       formatDolEin(decryptedEinValue),
     );
+  });
+
+  it("does not decrypt einValue if it is filled out in userData on first render and unencrypted", async () => {
+    const einValue = "123456789012345";
+    renderComponent(generateProfileData({ deptOfLaborEin: einValue }), {
+      startHidden: true,
+      editable: true,
+    });
+    expect(screen.getByRole("textbox", { name: "Dol ein" })).toHaveValue(formattedHiddenEin);
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: Config.profileDefaults.fields.deptOfLaborEin.default.showButtonText,
+      }),
+    );
+    expect(mockApi.decryptValue).not.toHaveBeenCalled();
+    expect(screen.getByRole("textbox", { name: "Dol ein" })).toHaveValue(formatDolEin(einValue));
   });
 
   it("does not decrypt on first render if userData has no einValue", async () => {
