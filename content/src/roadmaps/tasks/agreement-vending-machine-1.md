@@ -9,16 +9,17 @@ urlSlug: agreement-vending-machine
 displayname: agreement-vending-machine
 name: Sign a Location Agreement
 id: agreement-vending-machine
+syncToWebflow: true
+webflowName: Location Agreement
 industryId: vending-machine
 ---
-
 ## Agreement Considerations
 
-- **Payment:** How and how often will the site proprietor be paid
-- **Agreement length:** Determine the ideal length of your agreement by analyzing a few `contract considerations|lease-considerations`
-- **Liability:** Determine who will be the responsible party for damages to the vending machine and under what circumstances
+* **Payment:** How and how often will the site proprietor be paid
+* **Agreement length:** Determine the ideal length of your agreement by analyzing a few `contract considerations|lease-considerations` 
+* **Liability:** Determine who will be the responsible party for damages to the vending machine and under what circumstances
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 A signed location agreement.
 
