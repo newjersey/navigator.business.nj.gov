@@ -52,6 +52,30 @@ export class DashboardPage {
   registerForTaxes() {
     return cy.get('[data-testid="register-for-taxes"]').first().click();
   }
+
+  getRemoveBusinessLink = () => {
+    return cy.get('[data-testid="remove-business-link"]');
+  };
+
+  clickRemoveBusinessLink = () => {
+    this.getRemoveBusinessLink().click();
+  };
+
+  getRemoveBusinessModalCheckbox = () => {
+    return cy.get('[data-testid="agreement-checkbox"]');
+  };
+
+  getRemoveBusinessModalPrimaryButton = () => {
+    return cy.get('[data-testid="modal-button-primary"]');
+  };
+
+  getRemoveBusinessModalSecondaryButton = () => {
+    return cy.get('[data-testid="modal-button-secondary"]');
+  };
+
+  getRemoveBusinessModalErrorAlert = () => {
+    return cy.get('[data-testid="error-alert"]');
+  };
 }
 
 export const onDashboardPage = new DashboardPage();

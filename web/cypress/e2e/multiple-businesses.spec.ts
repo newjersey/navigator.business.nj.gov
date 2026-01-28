@@ -2,7 +2,7 @@ import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/s
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 
-describe.skip("Multiple Businesses [feature] [all] [group2]", () => {
+describe("Multiple Businesses [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
