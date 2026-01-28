@@ -150,7 +150,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           });
         })
         .catch(() => {
-          router && onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+          router &&
+            onGuestSignIn({
+              push: router.push,
+              pathname: router.pathname,
+              asPath: router.asPath,
+              dispatch,
+            });
         });
     }
   });

@@ -86,11 +86,13 @@ export const onSelfRegister = ({
 export const onGuestSignIn = async ({
   push,
   pathname,
+  asPath,
   dispatch,
   encounteredMyNjLinkingError,
 }: {
   push: (url: string) => Promise<boolean>;
   pathname: string;
+  asPath?: string;
   dispatch: Dispatch<AuthAction>;
   encounteredMyNjLinkingError?: boolean | undefined;
 }): Promise<void> => {
@@ -128,11 +130,13 @@ export const onGuestSignIn = async ({
     accountLinkingErrorStorage.setEncounteredMyNjLinkingError(encounteredMyNjLinkingError);
   }
   setUserId(activeUser.id, true);
+  const onboardingRoute =
+    asPath && asPath.startsWith(ROUTES.onboarding) ? asPath : ROUTES.onboarding;
   if (userData) {
     setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
     if (getCurrentBusiness(userData).onboardingFormProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
-      push(ROUTES.onboarding);
+      push(onboardingRoute);
     } else if (pathname === ROUTES.login) {
       setRegistrationDimension("Onboarded Guest");
       push(ROUTES.accountSetup);
@@ -153,13 +157,13 @@ export const onGuestSignIn = async ({
       case ROUTES.loading: {
         if (!encounteredMyNjLinkingError) {
           setRegistrationDimension("Began Onboarding");
-          push(ROUTES.onboarding);
+          push(onboardingRoute);
         }
         break;
       }
       case ROUTES.login: {
         setRegistrationDimension("Began Onboarding");
-        push(ROUTES.onboarding);
+        push(onboardingRoute);
         break;
       }
       case ROUTES.njeda: {
