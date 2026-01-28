@@ -1,5 +1,5 @@
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { Checkbox, useMediaQuery } from "@mui/material";
@@ -54,10 +54,6 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
     }
   }, [error, showRemoveBusinessModal, business, state.isAuthenticated]);
 
-  useMountEffectWhenDefined(() => {
-    setShowRemoveBusinessModal(false);
-  }, setShowRemoveBusinessModal);
-
   const isMobileAndUp = useMediaQuery(MediaQueries.mobileAndUp);
 
   const close = (): void => {
@@ -77,7 +73,7 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
     }
 
     const userData = userDataFromHook.userData;
-    const newCurrentBusinessID = userData?.businesses
+    const remainingBusinesses = userData?.businesses
       ? Object.values(userData.businesses)
           .filter(
             (b) =>
@@ -85,8 +81,9 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
           )
           .sort(
             (a, b) => new Date(b.dateCreatedISO).getTime() - new Date(a.dateCreatedISO).getTime(),
-          )[0].id
-      : undefined;
+          )
+      : [];
+    const newCurrentBusinessID = remainingBusinesses.length > 0 ? remainingBusinesses[0].id : undefined;
 
     if (
       business !== undefined &&
@@ -109,8 +106,7 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
           query: {
             [QUERIES.fromDeleteBusiness]: "true",
           },
-        })) &&
-        router.reload();
+        }));
     }
   };
   const buttonNode = (

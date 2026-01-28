@@ -47,6 +47,7 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
       isOpen={alertIsVisible}
       close={(): void => {
         setAlertIsVisible(false);
+        effectOccurred.current = false;
         redirect();
       }}
       heading={config.headerText}
