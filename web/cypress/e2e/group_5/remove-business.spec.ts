@@ -50,22 +50,29 @@ describe("Remove Business [feature] [all] [group5]", () => {
 
     // Successfully remove a business
     onDashboardPage.clickRemoveBusinessLink();
-    onDashboardPage.getRemoveBusinessModalCheckbox().should("exist");
+    // onDashboardPage.getRemoveBusinessModalCheckbox().should("exist");
     onDashboardPage.getRemoveBusinessModalCheckbox().click();
-    onDashboardPage.getRemoveBusinessModalPrimaryButton().should("exist");
-    onDashboardPage.getRemoveBusinessModalPrimaryButton().click();
+    // onDashboardPage.getRemoveBusinessModalPrimaryButton().should("exist");
+    const button = onDashboardPage.getRemoveBusinessModalPrimaryButton()
 
-    // // After removal, should redirect to dashboard and only one business should remain
-    // cy.url().should("contain", "/dashboard");
-    // cy.url().should("include", "fromDeleteBusiness=true");
+    cy.wait(1000);
+    button.click();
 
-    // // Wait for page to reload after removal
-    // cy.get('[data-testid="dashboard-header"]').should("exist");
 
-    // // Verify only one business remains
-    // onDashboardPage.getDropdown().click();
-    // cy.get('[data-testid="business-title-0"]').should("exist");
-    // cy.get('[data-testid="business-title-1"]').should("not.exist");
-    // cy.get('[data-testid="remove-business-link"]').should("not.exist"); // Should not exist with only one business
+    // After removal, should redirect to dashboard and only one business should remain
+    cy.url().should("contain", "/dashboard");
+    cy.url().should("include", "fromDeleteBusiness=true");
+
+    // Wait for page to reload after removal
+    cy.get('[data-testid="dashboard-header"]').should("exist");
+
+    // Verify only one business remains
+
+    onDashboardPage.getDropdown().click();
+    cy.get('[data-testid="business-title-0"]').should("exist");
+
+    cy.wait(1000);
+    cy.get('[data-testid="business-title-1"]').should("not.exist");
+    cy.get('[data-testid="remove-business-link"]').should("not.exist"); // Should not exist with only one business
   });
 });
