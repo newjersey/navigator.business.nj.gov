@@ -55,6 +55,12 @@
     },
     {
       "step": 4,
+      "weight": 16,
+      "task": "community-right-to-know-survey",
+      "required": true
+    },
+    {
+      "step": 4,
       "weight": 90,
       "task": "resale-tax-certificate-operating"
     },
