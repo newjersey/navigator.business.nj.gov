@@ -418,7 +418,14 @@ export const userRouterFactory = (
       const needsDba = determineIfNexusDbaNameNeeded(currentBusiness);
       const nameToSearch = needsDba
         ? currentBusiness.profileData.nexusDbaName
-        : currentBusiness.profileData.businessName;
+        : currentBusiness.formationData.formationFormData.businessName;
+
+      if (nameToSearch === "") {
+        logger.LogInfo("Skipping name availability search - no name entered yet");
+        return userData;
+      }
+      logger.LogInfo(`Executing name availability search for ${nameToSearch}`);
+
       const response = await timeStampBusinessSearch.search(nameToSearch);
 
       const nameAvailability: NameAvailability = {
