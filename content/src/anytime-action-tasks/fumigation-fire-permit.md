@@ -19,6 +19,7 @@ category:
 industryIds:
   - pest-control
 sectorIds: []
+moveToRecommendedForYouSection: true
 urlSlug: fumigation-fire-permit
 summaryDescriptionMd: You must have a fire permit to do `fumigation|` or thermal
   insecticide fogging for pest control. You need to apply for a permit and pass
@@ -27,18 +28,17 @@ issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
-
 ## How to Apply
 
 Contact the `Local Enforcing Agency (LEA)|lea` in the town where you plan to do the activity. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 This page does not list all business activities that require a fire permit. You may need to get other fire permits depending on your business activity, so check requirements with your LEA.
 
 :::
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 A fire permit to do fumigation or thermal insecticide fogging.
 
