@@ -13,6 +13,7 @@ category:
 industryIds: []
 sectorIds:
   - real-estate
+moveToRecommendedForYouSection: true
 urlSlug: landlord-registration-update
 summaryDescriptionMd: >-
   If you are renting out a one- or two-unit residential property, you must
