@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/crtk_by_facility_name?facility=TestBusiness"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "crtk-not-found-response.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

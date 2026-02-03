@@ -1,3 +1,4 @@
+import NaicsCodes from "@/lib/static/records/naics2022.json";
 import {
   BusinessPersona,
   FormationLegalType,
@@ -7,7 +8,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
-import { FlowType, OnboardingStatus } from "@businessnjgovnavigator/shared/types";
+import { FlowType, NaicsCodeObject, OnboardingStatus } from "@businessnjgovnavigator/shared/types";
 
 import { useEffect, useRef } from "react";
 
@@ -352,4 +353,10 @@ export const removeMarkdownFormatting = (markdownText: string): string => {
       // Remove all remaining line breaks
       .replaceAll(/(\r\n|\n|\r)/gm, "")
   );
+};
+
+export const getNaicsCode = (code: string): NaicsCodeObject | undefined => {
+  return (NaicsCodes as NaicsCodeObject[]).find((element) => {
+    return element?.SixDigitCode?.toString() === code;
+  });
 };

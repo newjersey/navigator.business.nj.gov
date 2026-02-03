@@ -1,14 +1,14 @@
 import { getSignedInUserId } from "@api/userRouter";
-import type { DatabaseClient, UpdateCRTK } from "@domain/types";
+import { CrtkBusinessDetails } from "@businessnjgovnavigator/shared";
+import type { DatabaseClient, UpdateCrtk } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import { CRTKBusinessDetails } from "@shared/crtk";
 import type { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const crtkLookupRouterFactory = (
-  updateCRTKUser: UpdateCRTK,
+  updateCrtkUser: UpdateCrtk,
   databaseClient: DatabaseClient,
   logger: LogWriterType,
 ): Router => {
@@ -18,11 +18,11 @@ export const crtkLookupRouterFactory = (
     const method = req.method;
     const endpoint = req.originalUrl;
     const requestStart = Date.now();
-    const businessDetails: CRTKBusinessDetails = req.body.CRTKbusinessDetails;
+    const businessDetails: CrtkBusinessDetails = req.body.crtkBusinessDetails;
     logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${userId}`);
 
     const userData = await databaseClient.get(userId);
-    updateCRTKUser(userData, businessDetails)
+    updateCrtkUser(userData, businessDetails)
       .then(async (response: UserData) => {
         const status = StatusCodes.OK;
         await databaseClient.put(response);

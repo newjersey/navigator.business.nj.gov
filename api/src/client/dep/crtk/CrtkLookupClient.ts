@@ -1,30 +1,30 @@
-import type { CRTKSearch, CRTKStatusLookup } from "@domain/types";
+import { CrtkData, CrtkEntry } from "@businessnjgovnavigator/shared";
+import { CrtkSearch, CrtkStatusLookup } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
-import type { CRTKData, CRTKEntry } from "@shared/crtk";
 
-export const CRTKLookupClient = (
-  crtkSearchClient: CRTKSearch,
+export const CrtkLookupClient = (
+  crtkSearchClient: CrtkSearch,
   logWriter: LogWriterType,
-): CRTKStatusLookup => {
+): CrtkStatusLookup => {
   const getStatus = async (
     businessName: string,
     addressLine1: string,
     city: string,
     addressZipCode: string,
     ein?: string,
-  ): Promise<CRTKData> => {
+  ): Promise<CrtkData> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Lookup - Id:${logId}`);
 
-    let searchResults: CRTKEntry[] = [];
+    let searchResults: CrtkEntry[] = [];
 
     try {
       if (ein) {
         logWriter.LogInfo(`CRTK Lookup - Id:${logId} - Searching by EIN: ${ein}`);
         searchResults = await crtkSearchClient.searchByEIN(ein);
       } else {
-        let addressResults: CRTKEntry[] = [];
-        let businessNameResults: CRTKEntry[] = [];
+        let addressResults: CrtkEntry[] = [];
+        let businessNameResults: CrtkEntry[] = [];
 
         addressResults = await crtkSearchClient.searchByAddress(addressLine1, addressZipCode);
         businessNameResults = await crtkSearchClient.searchByBusinessName(businessName);
@@ -50,14 +50,15 @@ export const CRTKLookupClient = (
       if (message === "NOT_FOUND") {
         logWriter.LogError(`CRTK Lookup - Id:${logId} - Error: No entries found`);
         return {
-          CRTKSearchResult: "NOT_FOUND",
-          CRTKBusinessDetails: {
+          crtkSearchResult: "NOT_FOUND",
+          crtkBusinessDetails: {
             businessName,
             addressLine1,
             city,
             addressZipCode,
+            ein,
           },
-          CRTKEntry: {},
+          crtkEntry: {},
           lastUpdatedISO: new Date().toISOString(),
         };
       }
@@ -68,34 +69,36 @@ export const CRTKLookupClient = (
     if (searchResults.length === 0) {
       logWriter.LogError(`CRTK Lookup - Id:${logId} - Error: No matching entries found`);
       return {
-        CRTKSearchResult: "NOT_FOUND",
-        CRTKBusinessDetails: {
+        crtkSearchResult: "NOT_FOUND",
+        crtkBusinessDetails: {
           businessName,
           addressLine1,
           city,
           addressZipCode,
+          ein,
         },
         lastUpdatedISO: new Date().toISOString(),
-        CRTKEntry: {},
+        crtkEntry: {},
       };
     }
 
     const crtkEntry = searchResults[0];
 
-    const crtkData: CRTKData = {
+    const crtkData: CrtkData = {
       lastUpdatedISO: new Date().toISOString(),
-      CRTKSearchResult: "FOUND",
-      CRTKBusinessDetails: {
+      crtkSearchResult: "FOUND",
+      crtkBusinessDetails: {
         businessName: crtkEntry.businessName || businessName,
         addressLine1: crtkEntry.streetAddress || addressLine1,
         city: crtkEntry.city || city,
         addressZipCode: crtkEntry.zipCode || addressZipCode,
+        ein: crtkEntry.ein || ein,
       },
-      CRTKEntry: crtkEntry,
+      crtkEntry: crtkEntry,
     };
 
     logWriter.LogInfo(
-      `CRTK Lookup Results - Id:${logId}, Result: ${crtkData.CRTKSearchResult}, Business: ${crtkData.CRTKBusinessDetails?.businessName}, EIN: ${ein || "N/A"}`,
+      `CRTK Lookup Results - Id:${logId}, Result: ${crtkData.crtkSearchResult}, Business: ${crtkData.crtkBusinessDetails?.businessName}, EIN: ${ein || "N/A"}`,
     );
 
     return crtkData;

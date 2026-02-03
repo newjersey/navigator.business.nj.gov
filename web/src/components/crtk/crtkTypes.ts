@@ -1,20 +1,20 @@
-export type CRTKData = {
+export type CrtkData = {
   lastUpdatedISO: string;
-  CRTKBusinessDetails?: CRTKBusinessDetails;
-  CRTKSearchResult: CRTKSearchResult;
-  CRTKEntry: CRTKEntry;
+  crtkBusinessDetails?: CrtkBusinessDetails;
+  crtkSearchResult: CrtkSearchResult;
+  crtkEntry: CrtkEntry;
 };
 
-export type CRTKBusinessDetails = {
+export type CrtkBusinessDetails = {
   businessName: string;
   addressLine1: string;
   city: string;
   addressZipCode: string;
   ein?: string;
 };
-export type CRTKSearchResult = "FOUND" | "NOT_FOUND";
+export type CrtkSearchResult = "FOUND" | "NOT_FOUND";
 
-export interface CRTKEntry {
+export interface CrtkEntry {
   businessName?: string;
   streetAddress?: string;
   city?: string;

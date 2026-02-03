@@ -1,7 +1,7 @@
-import { consolidatedEntries } from "@client/dep/consolidatedEntries";
-import { filterByOwnerType } from "@client/dep/filterByOwnerType";
-import { filterByUndefinedDisposalDate } from "@client/dep/filterByUndefinedDisposalDate";
-import { filterSquashByRegNumAndAddress } from "@client/dep/filterSquashByRegNumAndAddress";
+import { consolidatedEntries } from "@client/dep/xray/consolidatedEntries";
+import { filterByOwnerType } from "@client/dep/xray/filterByOwnerType";
+import { filterByUndefinedDisposalDate } from "@client/dep/xray/filterByUndefinedDisposalDate";
+import { filterSquashByRegNumAndAddress } from "@client/dep/xray/filterSquashByRegNumAndAddress";
 import type { XrayRegistrationSearch, XrayRegistrationStatusLookup } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
 import { getCurrentDate } from "@shared/dateHelpers";

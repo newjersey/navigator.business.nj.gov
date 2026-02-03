@@ -1,4 +1,5 @@
 import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
+import { crtkEmailRouter } from "@api/crtkEmailRouter";
 import { crtkLookupRouterFactory } from "@api/crtkRouter";
 import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
@@ -24,11 +25,12 @@ import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertifi
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { AwsMessagingServiceClient } from "@client/AwsMessagingServiceClient";
 import { CigaretteLicenseEmailClient } from "@client/CigaretteLicenseEmailClient";
-import { CRTKLookupClient } from "@client/dep/crtkLookupClient";
-import { CRTKSearchClient } from "@client/dep/crtkSearchClient";
-import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
-import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
-import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
+import { CrtkEmailClient } from "@client/CrtkEmailClient";
+import { CrtkLookupClient } from "@client/dep/crtk/CrtkLookupClient";
+import { CrtkSearchClient } from "@client/dep/crtk/CrtkSearchClient";
+import { XrayRegistrationHealthCheckClient } from "@client/dep/xray/XrayRegistrationHealthCheckClient";
+import { XrayRegistrationLookupClient } from "@client/dep/xray/XrayRegistrationLookupClient";
+import { XrayRegistrationSearchClient } from "@client/dep/xray/XrayRegistrationSearchClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
 import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionClient";
@@ -66,7 +68,7 @@ import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
-import { updateCRTKStatusFactory } from "@domain/user/updateCrtkStatusFactory";
+import { updateCrtkStatusFactory } from "@domain/user/updateCrtkStatusFactory";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
 import { updateXrayRegistrationStatusFactory } from "@domain/user/updateXrayRegistrationStatusFactory";
@@ -402,11 +404,13 @@ const environmentPermitEmailClient = ApiEnvPermitEmailClient(logger);
 
 const updateXrayStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookup);
 
-const crtkSearch = CRTKSearchClient(logger);
+const crtkSearch = CrtkSearchClient(logger);
 
-const crtkLookup = CRTKLookupClient(crtkSearch, logger);
+const crtkLookup = CrtkLookupClient(crtkSearch, logger);
 
-const updateCRTKStatus = updateCRTKStatusFactory(crtkLookup);
+const crtkEmailClient = CrtkEmailClient(logger);
+
+const updateCrtkStatus = updateCrtkStatusFactory(crtkLookup);
 
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 
@@ -547,9 +551,11 @@ app.use(
 );
 
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
-app.use("/api", crtkLookupRouterFactory(updateCRTKStatus, dynamoDataClient, logger));
+app.use("/api", crtkLookupRouterFactory(updateCrtkStatus, dynamoDataClient, logger));
 
 app.use("/api/guest", environmentPermitEmailRouter(environmentPermitEmailClient, logger));
+
+app.use("/api", crtkEmailRouter(crtkEmailClient, logger));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

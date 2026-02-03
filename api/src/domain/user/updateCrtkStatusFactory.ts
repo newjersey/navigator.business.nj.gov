@@ -1,10 +1,10 @@
-import { CRTKStatusLookup, UpdateCRTK } from "@domain/types";
-import { CRTKBusinessDetails } from "@shared/crtk";
+import { CrtkBusinessDetails } from "@businessnjgovnavigator/shared";
+import { CrtkStatusLookup, UpdateCrtk } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { Business, UserData } from "@shared/userData";
 
-export const updateCRTKStatusFactory = (crtkLookupClient: CRTKStatusLookup): UpdateCRTK => {
-  return async (userData: UserData, businessDetails: CRTKBusinessDetails): Promise<UserData> => {
+export const updateCrtkStatusFactory = (crtkLookupClient: CrtkStatusLookup): UpdateCrtk => {
+  return async (userData: UserData, businessDetails: CrtkBusinessDetails): Promise<UserData> => {
     const { businessName, addressLine1, city, addressZipCode, ein } = businessDetails;
 
     return crtkLookupClient
@@ -18,7 +18,7 @@ export const updateCRTKStatusFactory = (crtkLookupClient: CRTKStatusLookup): Upd
           },
           taskProgress: {
             ...userData.businesses[userData.currentBusinessId].taskProgress,
-            crtk: response.CRTKSearchResult === "FOUND" ? "COMPLETED" : "TO_DO",
+            crtk: response.crtkSearchResult === "FOUND" ? "COMPLETED" : "TO_DO",
           },
         };
 

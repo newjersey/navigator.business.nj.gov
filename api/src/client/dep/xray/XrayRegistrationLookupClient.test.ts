@@ -1,4 +1,4 @@
-import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
+import { XrayRegistrationLookupClient } from "@client/dep/xray/XrayRegistrationLookupClient";
 import type { XrayRegistrationSearch, XrayRegistrationStatusLookup } from "@domain/types";
 import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
 import { getCurrentDate } from "@shared/dateHelpers";
