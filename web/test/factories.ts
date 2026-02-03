@@ -4,6 +4,7 @@ import {
   arrayOfFundingAgencies,
   BusinessPersona,
   createEmptyFormationFormData,
+  CrtkData,
   FormationAddress,
   FormationData,
   FormationSubmitError,
@@ -583,3 +584,17 @@ export const operatingPhasesDisplayingBusinessStructurePrompt = OperatingPhases.
 export const operatingPhasesNotDisplayingBusinessStructurePrompt = OperatingPhases.filter(
   (phase) => !phase.displayBusinessStructurePrompt,
 ).map((phase) => phase.id);
+
+export const generateCrtkData = (overrides?: Partial<CrtkData>): CrtkData => ({
+  lastUpdatedISO: getCurrentDateISOString(),
+  crtkBusinessDetails: {
+    businessName: "Test Business",
+    addressLine1: "123 Main St",
+    city: "Hoboken",
+    addressZipCode: "07001",
+    ein: "1234567890",
+  },
+  crtkSearchResult: "NOT_FOUND",
+  crtkEntry: {},
+  ...overrides,
+});

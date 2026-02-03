@@ -18,7 +18,7 @@ import {
   useState,
 } from "react";
 
-export interface CRTKFacilityDetails {
+export interface CrtkFacilityDetails {
   businessName: string;
   businessStreetAddress: string;
   city: string;
@@ -27,7 +27,7 @@ export interface CRTKFacilityDetails {
   ein: string;
 }
 
-export type CRTKSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
+export type CrtkSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 const useStyles = makeStyles(() => {
   return createStyles({
@@ -45,11 +45,11 @@ const useStyles = makeStyles(() => {
 });
 
 interface Props {
-  onSubmit: (facilityDetails: CRTKFacilityDetails) => Promise<void>;
+  onSubmit: (facilityDetails: CrtkFacilityDetails) => Promise<void>;
   isLoading: boolean;
   task?: Task;
   searchError?: string;
-  initialValues?: CRTKFacilityDetails;
+  initialValues?: CrtkFacilityDetails;
 }
 
 interface FieldErrors {
@@ -62,15 +62,15 @@ interface FieldErrors {
 
 const Config = getMergedConfig();
 
-const CRTKErrorLookup: Record<CRTKSearchError, string> = {
+const CrtkErrorLookup: Record<CrtkSearchError, string> = {
   NOT_FOUND: Config.crtkTask.errorTextNotFound || "Business not found in CRTK database",
   FIELDS_REQUIRED: Config.crtkTask.errorTextFieldsRequired || "Please fill in all required fields",
   SEARCH_FAILED: Config.crtkTask.errorTextSearchFailed || "Search failed. Please try again.",
 };
 
-export const CRTKStatus = (props: Props): ReactElement => {
+export const CrtkStatus = (props: Props): ReactElement => {
   const classes = useStyles();
-  const [formValues, setFormValues] = useState<CRTKFacilityDetails>({
+  const [formValues, setFormValues] = useState<CrtkFacilityDetails>({
     businessName: "",
     businessStreetAddress: "",
     city: "",
@@ -143,7 +143,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
   };
 
   const handleChangeForKey = (
-    key: keyof CRTKFacilityDetails,
+    key: keyof CrtkFacilityDetails,
   ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
     return (event: ChangeEvent<HTMLInputElement>): void => {
       setFormValues((prevValues) => {
@@ -155,7 +155,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
     };
   };
 
-  const handleBlurForKey = (key: keyof CRTKFacilityDetails): (() => void) => {
+  const handleBlurForKey = (key: keyof CrtkFacilityDetails): (() => void) => {
     return (): void => {
       if (fieldErrors[key as keyof FieldErrors]) {
         const value = formValues[key];
@@ -253,7 +253,7 @@ export const CRTKStatus = (props: Props): ReactElement => {
       return (
         <div className="margin-bottom-3">
           <Alert dataTestid={`error-alert-${props.searchError}`} variant="error">
-            {CRTKErrorLookup[props.searchError as CRTKSearchError] || "An error occurred"}
+            {CrtkErrorLookup[props.searchError as CrtkSearchError] || "An error occurred"}
           </Alert>
         </div>
       );
