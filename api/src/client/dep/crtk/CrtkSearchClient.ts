@@ -1,22 +1,26 @@
-import type { CRTKSearch } from "@domain/types";
+import { CrtkEntry } from "@businessnjgovnavigator/shared";
+import { CrtkSearch } from "@domain/types";
+import { STAGE } from "@functions/config";
 import type { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
-import type { CRTKEntry } from "@shared/crtk";
 import axios from "axios";
 
-export const getCRTKConfig = async (): Promise<{ baseUrl: string }> => {
+export const getCrtkConfig = async (): Promise<{ baseUrl: string }> => {
   return {
     baseUrl: await getConfigValue("dep_base_url"),
   };
 };
 
-export const CRTKSearchClient = (logWriter: LogWriterType): CRTKSearch => {
-  const searchByBusinessName = async (businessName: string): Promise<CRTKEntry[]> => {
-    const config = await getCRTKConfig();
+export const CrtkSearchClient = (logWriter: LogWriterType): CrtkSearch => {
+  const isLocal = STAGE === "local";
+
+  const searchByBusinessName = async (businessName: string): Promise<CrtkEntry[]> => {
+    const config = await getCrtkConfig();
+    const baseUrl = isLocal ? "http://localhost:9000" : config.baseUrl;
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Search by Business Name - Id:${logId}, Business Name: ${businessName}`);
     return await axios
-      .get(`${config.baseUrl}/crtk_by_facility_name?facility=${encodeURIComponent(businessName)}`)
+      .get(`${baseUrl}/crtk_by_facility_name?facility=${encodeURIComponent(businessName)}`)
       .then(async (response) => {
         if (response.data.data.length === 0) {
           throw new Error("NOT_FOUND");
@@ -75,8 +79,9 @@ export const CRTKSearchClient = (logWriter: LogWriterType): CRTKSearch => {
       });
   };
 
-  const searchByAddress = async (streetAddress: string, zipCode: string): Promise<CRTKEntry[]> => {
-    const config = await getCRTKConfig();
+  const searchByAddress = async (streetAddress: string, zipCode: string): Promise<CrtkEntry[]> => {
+    const config = await getCrtkConfig();
+    const baseUrl = isLocal ? "http://localhost:9000" : config.baseUrl;
     const logId = logWriter.GetId();
     logWriter.LogInfo(
       `CRTK Search by Address - Id:${logId}, Address: ${streetAddress}, Zip: ${zipCode}`,
@@ -84,7 +89,7 @@ export const CRTKSearchClient = (logWriter: LogWriterType): CRTKSearch => {
 
     return await axios
       .get(
-        `${config.baseUrl}/crtk_by_address_and_zipcode?address=${encodeURIComponent(
+        `${baseUrl}/crtk_by_address_and_zipcode?address=${encodeURIComponent(
           streetAddress,
         )}&zip=${encodeURIComponent(zipCode)}`,
       )
@@ -143,12 +148,13 @@ export const CRTKSearchClient = (logWriter: LogWriterType): CRTKSearch => {
       });
   };
 
-  const searchByEIN = async (ein: string): Promise<CRTKEntry[]> => {
-    const config = await getCRTKConfig();
+  const searchByEIN = async (ein: string): Promise<CrtkEntry[]> => {
+    const config = await getCrtkConfig();
+    const baseUrl = isLocal ? "http://localhost:9000" : config.baseUrl;
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Search by EIN - Id:${logId}, EIN: ${ein}`);
     return await axios
-      .get(`${config.baseUrl}/crtk_by_fein?fein=${encodeURIComponent(ein)}`)
+      .get(`${baseUrl}/crtk_by_fein?fein=${encodeURIComponent(ein)}`)
       .then(async (response) => {
         if (response.data.data.length === 0) {
           throw new Error("NOT_FOUND");

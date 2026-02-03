@@ -15,7 +15,8 @@ export type CONFIG_VARS =
   | USER_MESSAGING_CONFIG_VARS
   | "dep_base_url"
   | "zod_parsing_on"
-  | "FEATURE_CIGARETTE_LICENSE";
+  | "FEATURE_CIGARETTE_LICENSE"
+  | CRTK_EMAIL_CONFIG_VARS;
 
 export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_base_url"
@@ -36,6 +37,8 @@ export type ENV_REQ_CONFIG_VARS =
 export type USER_MESSAGING_CONFIG_VARS =
   | "feature_welcome_email_enabled"
   | "feature_reminder_emails_enabled";
+
+export type CRTK_EMAIL_CONFIG_VARS = "crtk_email_url" | "crtk_email_key";
 
 let cache: {
   value?: boolean;

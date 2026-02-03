@@ -2591,3 +2591,76 @@ collections:
               - { label: Federal Link Text, name: federalLinkText, widget: string }
               - { label: Last Updated Timestamp Text, name: lastUpdatedText, widget: string }
               - { label: certainIndustriesLink, name: certainIndustriesLink, widget: markdown }
+              - { label: Modal Send To CRTK Title, name: modalSendToCrtkTitle, widget: string }
+              - {
+                  label: Modal Send Primary Button Text,
+                  name: modalSendPrimaryButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Modal Send Secondary Button Text,
+                  name: modalSendSecondaryButtonText,
+                  widget: string,
+                }
+              - { label: Send Confirmation Text, name: sendConfirmationText, widget: string }
+              - { label: Your Email Label, name: yourEmailLabel, widget: string }
+              - { label: Your Email Helper, name: yourEmailHelper, widget: string }
+              - { label: NAICS Code Label, name: naicsCodeLabel, widget: string }
+              - { label: NAICS Code Helper, name: naicsCodeHelper, widget: string }
+              - { label: Business Activities Label, name: businessActivitiesLabel, widget: string }
+              - {
+                  label: Business Activities Helper,
+                  name: businessActivitiesHelper,
+                  widget: string,
+                }
+              - {
+                  label: Business Activities Example,
+                  name: businessActivitiesExample,
+                  widget: string,
+                }
+              - { label: Character Count Helper, name: characterCountHelper, widget: string }
+              - { label: Materials Label, name: materialsLabel, widget: string }
+              - { label: Materials Helper, name: materialsHelper, widget: string }
+              - { label: Materials Example, name: materialsExample, widget: string }
+              - { label: Go Back Button Text, name: goBackButtonText, widget: string }
+              - { label: Biz Not In Database Text, name: bizNotInDatabaseText, widget: markdown }
+              - { label: What To Do Next Title, name: whatToDoNextTitle, widget: string }
+              - { label: What To Do Next Text, name: whatToDoNextText, widget: markdown }
+              - {
+                  label: Registered Business Checkbox Label,
+                  name: registeredBusinessCheckboxLabel,
+                  widget: string,
+                }
+              - { label: Business Not Found Title, name: businessNotFoundTitle, widget: string }
+              - { label: OK Button Text, name: okButtonText, widget: string }
+              - {
+                  label: Business Not Found Modal Content,
+                  name: businessNotFoundModalContent,
+                  widget: markdown,
+                }
+              - { label: CRTK Info Shared Title, name: crtkInfoSharedTitle, widget: string }
+              - { label: CRTK Info Shared Body, name: crtkInfoSharedBody, widget: markdown }
+              - { label: Check Your Status Text, name: checkYourStatusText, widget: string }
+              - { label: What Happens Next Title, name: whatHappensNextTitle, widget: string }
+              - { label: Review Timeline Text, name: reviewTimelineText, widget: string }
+              - { label: CRTK Will Contact Text, name: crtkWillContactText, widget: string }
+              - { label: Contact CRTK Expert Title, name: contactCrtkExpertTitle, widget: string }
+              - { label: Contact Phone, name: contactPhone, widget: string }
+              - { label: Contact Email, name: contactEmail, widget: string }
+              - { label: Submit Text, name: submitButtonText, widget: string }
+          - {
+              label: Regulated Business Warning,
+              name: regulatedBusinessWarningText,
+              widget: string,
+            }
+          - { label: Not Found Text, name: notFoundText, widget: string }
+          - { label: Change It Link Text, name: changeItLinkText, widget: string }
+          - { label: EHS Survey Text, name: ehsSurveyText, widget: string }
+          - { label: Email Error Alert Heading, name: emailErrorAlertHeadingText, widget: string }
+          - { label: Email Error Alert Body Text, name: emailErrorAlertBodyText, widget: string }
+          - { label: Email Error Text, name: emailErrorText, widget: string }
+          - { label: NAICS Code Error Text, name: naicsCodeErrorText, widget: string }
+          - { label: Fields Error Text, name: fieldsErrorText, widget: string }
+          - { label: CRTK Info Shared Pt One, name: crtkInfoSharedPtOne, widget: string }
+          - { label: CRTK Info Shared Pt Two, name: crtkInfoSharedPtTwo, widget: string }
+          - { label: CRTK Info Shared Pt Three, name: crtkInfoSharedPtThree, widget: string }

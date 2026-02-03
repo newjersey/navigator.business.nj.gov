@@ -1,30 +1,31 @@
-import { CRTKPage } from "@/components/crtk/crtkPage";
-import type { CRTKData } from "@/components/crtk/crtkTypes";
+import { CrtkPage } from "@/components/crtk/CrtkPage";
 import * as api from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
+import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import type { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
-  searchBuisnessInCRTKDB: jest.fn(),
+  searchBuisnessInCrtkDB: jest.fn(),
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
 
-describe("<CRTKPage />", () => {
-  const generateCRTKData = (overrides?: Partial<CRTKData>): CRTKData => ({
+describe("<CrtkPage />", () => {
+  const generateCrtkData = (overrides?: Partial<CrtkData>): CrtkData => ({
     lastUpdatedISO: "2025-01-15T10:30:00.000Z",
-    CRTKBusinessDetails: {
+    crtkBusinessDetails: {
       businessName: "M&U INTERNATIONAL LLC",
       addressLine1: "31 READINGTON RD",
       city: "BRANCHBURG TWP",
       addressZipCode: "08876",
       ein: "273265170",
     },
-    CRTKSearchResult: "FOUND",
-    CRTKEntry: {
+    crtkSearchResult: "FOUND",
+    crtkEntry: {
       businessName: "M&U INTERNATIONAL LLC",
       streetAddress: "31 READINGTON RD",
       city: "BRANCHBURG TWP",
@@ -38,7 +39,6 @@ describe("<CRTKPage />", () => {
       type: "REGULATED",
       status: "ACTIVE",
       eligibility: "CRTK/RPPR",
-      userStatus: "USER ABOVE",
       receivedDate: "2025-03-11T20:27:35.000Z",
     },
     ...overrides,
@@ -53,7 +53,7 @@ describe("<CRTKPage />", () => {
           }),
         )}
       >
-        <CRTKPage task={generateTask({ id: "crtk-registration" })} />
+        <CrtkPage task={generateTask({ id: "crtk-registration" })} />
       </WithStatefulUserData>,
     );
   };
@@ -93,7 +93,7 @@ describe("<CRTKPage />", () => {
       const task = generateTask({ id: "crtk-registration", name: "CRTK Registration" });
       render(
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
-          <CRTKPage task={task} />
+          <CrtkPage task={task} />
         </WithStatefulUserData>,
       );
       expect(screen.getByText("CRTK Registration")).toBeInTheDocument();
@@ -112,32 +112,43 @@ describe("<CRTKPage />", () => {
 
     it("displays the search results when CRTK data exists", () => {
       renderWithBusinessData({
-        crtkData: generateCRTKData(),
+        crtkData: generateCrtkData(),
       });
       // Should show business name and address
       expect(screen.getByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
       expect(screen.getByText(/31 READINGTON RD/)).toBeInTheDocument();
+    });
+
+    it("displays the not found flow when crtkSearchResult is NOT_FOUND", () => {
+      renderWithBusinessData({
+        crtkData: {
+          crtkSearchResult: "NOT_FOUND",
+          lastUpdatedISO: getCurrentDateISOString(),
+          crtkEntry: {},
+        },
+      });
+      expect(screen.getByTestId("crtk-not-found")).toBeInTheDocument();
     });
   });
 
   describe("search functionality", () => {
     const mockSuccessfulResponse = generateUserDataForBusiness(
       generateBusiness({
-        crtkData: generateCRTKData(),
+        crtkData: generateCrtkData(),
       }),
     );
 
     const mockNotFoundResponse = generateUserDataForBusiness(
       generateBusiness({
-        crtkData: generateCRTKData({
-          CRTKSearchResult: "NOT_FOUND",
-          CRTKEntry: {},
+        crtkData: generateCrtkData({
+          crtkSearchResult: "NOT_FOUND",
+          crtkEntry: {},
         }),
       }),
     );
 
     it("submits the form and displays results on successful search", async () => {
-      mockApi.searchBuisnessInCRTKDB.mockResolvedValue(mockSuccessfulResponse);
+      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
 
       renderWithBusinessData();
 
@@ -158,23 +169,19 @@ describe("<CRTKPage />", () => {
       expect(screen.getByText(/31 READINGTON RD/)).toBeInTheDocument();
     });
 
-    it("displays NOT_FOUND result when business is not in CRTK database", async () => {
-      mockApi.searchBuisnessInCRTKDB.mockResolvedValue(mockNotFoundResponse);
-
+    it("displays the not found flow when the business is not in CRTK database", async () => {
+      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockNotFoundResponse);
       renderWithBusinessData();
-
       fillOutSearchForm("Nonexistent Business", "123 Fake St", "Some City", "12345");
-
       fireEvent.click(screen.getByTestId("crtk-submit"));
-
       await waitFor(() => {
-        expect(screen.getByText("Business Not Found")).toBeInTheDocument();
+        expect(screen.getByTestId("crtk-not-found")).toBeInTheDocument();
       });
     });
 
     it("displays SEARCH_FAILED error when API call fails", async () => {
       const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-      mockApi.searchBuisnessInCRTKDB.mockRejectedValue(new Error("API Error"));
+      mockApi.searchBuisnessInCrtkDB.mockRejectedValue(new Error("API Error"));
 
       renderWithBusinessData();
 
@@ -184,7 +191,7 @@ describe("<CRTKPage />", () => {
 
       // Wait for the API call to complete
       await waitFor(() => {
-        expect(mockApi.searchBuisnessInCRTKDB).toHaveBeenCalled();
+        expect(mockApi.searchBuisnessInCrtkDB).toHaveBeenCalled();
       });
 
       // Wait for error to appear
@@ -223,7 +230,7 @@ describe("<CRTKPage />", () => {
     });
 
     it("submits form without EIN when EIN is not provided", async () => {
-      mockApi.searchBuisnessInCRTKDB.mockResolvedValue(mockSuccessfulResponse);
+      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
 
       renderWithBusinessData();
 
@@ -232,7 +239,7 @@ describe("<CRTKPage />", () => {
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
       await waitFor(() => {
-        expect(mockApi.searchBuisnessInCRTKDB).toHaveBeenCalledWith({
+        expect(mockApi.searchBuisnessInCrtkDB).toHaveBeenCalledWith({
           businessName: "M&U INTERNATIONAL LLC",
           addressLine1: "31 READINGTON RD",
           city: "BRANCHBURG TWP",
@@ -243,7 +250,7 @@ describe("<CRTKPage />", () => {
     });
 
     it("includes EIN in API call when provided", async () => {
-      mockApi.searchBuisnessInCRTKDB.mockResolvedValue(mockSuccessfulResponse);
+      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
 
       renderWithBusinessData();
 
@@ -258,7 +265,7 @@ describe("<CRTKPage />", () => {
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
       await waitFor(() => {
-        expect(mockApi.searchBuisnessInCRTKDB).toHaveBeenCalledWith({
+        expect(mockApi.searchBuisnessInCrtkDB).toHaveBeenCalledWith({
           businessName: "M&U INTERNATIONAL LLC",
           addressLine1: "31 READINGTON RD",
           city: "BRANCHBURG TWP",
@@ -272,13 +279,13 @@ describe("<CRTKPage />", () => {
   describe("search again functionality", () => {
     it("returns to search form when 'Search Again' button is clicked", async () => {
       renderWithBusinessData({
-        crtkData: generateCRTKData({
-          CRTKSearchResult: "NOT_FOUND",
-          CRTKEntry: {},
+        crtkData: generateCrtkData({
+          crtkSearchResult: "NOT_FOUND",
+          crtkEntry: {},
         }),
       });
 
-      expect(screen.getByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
+      expect(screen.getByTestId("crtk-not-found")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("crtk-search-again"));
 
@@ -290,7 +297,7 @@ describe("<CRTKPage />", () => {
 
     it("clears search error when searching again after an error", async () => {
       const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-      mockApi.searchBuisnessInCRTKDB.mockRejectedValueOnce(new Error("API Error"));
+      mockApi.searchBuisnessInCrtkDB.mockRejectedValueOnce(new Error("API Error"));
 
       renderWithBusinessData();
 
@@ -305,10 +312,10 @@ describe("<CRTKPage />", () => {
         { timeout: 2000 },
       );
 
-      mockApi.searchBuisnessInCRTKDB.mockResolvedValue(
+      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(
         generateUserDataForBusiness(
           generateBusiness({
-            crtkData: generateCRTKData(),
+            crtkData: generateCrtkData(),
           }),
         ),
       );
@@ -332,7 +339,7 @@ describe("<CRTKPage />", () => {
   describe("result display", () => {
     it("displays FOUND status with facility details", () => {
       renderWithBusinessData({
-        crtkData: generateCRTKData(),
+        crtkData: generateCrtkData(),
       });
 
       expect(screen.getByText("Business Found")).toBeInTheDocument();
@@ -342,29 +349,28 @@ describe("<CRTKPage />", () => {
       expect(screen.getByText(/CRTK\/RPPR/)).toBeInTheDocument();
     });
 
-    it("displays NOT_FOUND status with appropriate message", () => {
+    it("displays the not found flow when status is NOT_FOUND", () => {
       renderWithBusinessData({
-        crtkData: generateCRTKData({
-          CRTKSearchResult: "NOT_FOUND",
-          CRTKEntry: {},
+        crtkData: generateCrtkData({
+          crtkSearchResult: "NOT_FOUND",
+          crtkEntry: {},
         }),
       });
 
-      expect(screen.getByText("Business Not Found")).toBeInTheDocument();
-      expect(screen.getByText(/is not currently in the CRTK database/)).toBeInTheDocument();
+      expect(screen.getByTestId("crtk-not-found")).toBeInTheDocument();
     });
   });
 
   describe("data persistence", () => {
     it("displays existing CRTK data on component mount", () => {
-      const existingData = generateCRTKData({
-        CRTKBusinessDetails: {
+      const existingData = generateCrtkData({
+        crtkBusinessDetails: {
           businessName: "Existing Business",
           addressLine1: "456 Existing St",
           city: "Existing City",
           addressZipCode: "54321",
         },
-        CRTKEntry: {
+        crtkEntry: {
           businessName: "Existing Business",
           facilityId: "12345",
           status: "ACTIVE",
@@ -381,37 +387,12 @@ describe("<CRTKPage />", () => {
 
     it("does not display search form when CRTK data exists", () => {
       renderWithBusinessData({
-        crtkData: generateCRTKData(),
+        crtkData: generateCrtkData(),
       });
 
       expect(screen.queryByTestId("crtk-submit")).not.toBeInTheDocument();
 
       expect(screen.getByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
-    });
-  });
-
-  describe("edge cases", () => {
-    it("handles empty CRTK entry for NOT_FOUND result", async () => {
-      const notFoundData = generateUserDataForBusiness(
-        generateBusiness({
-          crtkData: generateCRTKData({
-            CRTKSearchResult: "NOT_FOUND",
-            CRTKEntry: {},
-          }),
-        }),
-      );
-
-      mockApi.searchBuisnessInCRTKDB.mockResolvedValue(notFoundData);
-
-      renderWithBusinessData();
-
-      fillOutSearchForm("Nonexistent Business", "123 Fake St", "Nowhere", "00000");
-
-      fireEvent.click(screen.getByTestId("crtk-submit"));
-
-      await waitFor(() => {
-        expect(screen.getByText("Business Not Found")).toBeInTheDocument();
-      });
     });
   });
 });
