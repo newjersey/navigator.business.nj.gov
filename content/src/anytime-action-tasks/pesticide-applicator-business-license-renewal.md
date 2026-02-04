@@ -7,11 +7,12 @@ category:
 industryIds:
   - pest-control
 sectorIds: []
+moveToRecommendedForYouSection: true
 urlSlug: pesticide-applicator-business-license-renewal
 summaryDescriptionMd: "You must renew your pesticide applicator business license once a year. "
 issuingAgency: Department of Environmental Protection
 callToActionText: Renew My Pesticide Applicator Business License
-callToActionLink: "https://www9.nj.gov/DEP_RSP/Orchestrate.do?initiate=true&orchestrationId=NJDEP-EL-PayInvoice&service_category_id=30&service_class_id=109"
+callToActionLink: https://www9.nj.gov/DEP_RSP/Orchestrate.do?initiate=true&orchestrationId=NJDEP-EL-PayInvoice&service_category_id=30&service_class_id=109
 ---
 
 ## Renewal Requirements
