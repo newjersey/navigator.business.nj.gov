@@ -9,6 +9,7 @@ sectorIds:
   - accommodation-and-food-services
   - digital-and-print-media
   - retail-trade-and-ecommerce
+moveToRecommendedForYouSection: true
 urlSlug: resale-tax-certificate
 summaryDescriptionMd: >-
   If your business buys items for resale, you need to complete the Sales Tax
@@ -27,14 +28,11 @@ callToActionLink: https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3
 synonyms:
   - sales tax
 ---
-
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
-- On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
-
-- To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
-
-- A `home improvement contractor|home-contractors-activities` cannot use the Sales Tax Resale Certificate
+* On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
+* To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
+* A `home improvement contractor|home-contractors-activities` cannot use the Sales Tax Resale Certificate
 
 :::
 
@@ -44,10 +42,10 @@ synonyms:
 
 If you are a reseller, complete the Sales Tax Resale Certificate with:
 
-- Your business name and address are registered with the New Jersey Division of Taxation
-- Your `New Jersey Tax ID|tax-id`
-- Your type of business
-- A description of the property or services you are buying
+* Your business name and address are registered with the New Jersey Division of Taxation
+* Your `New Jersey Tax ID|tax-id` 
+* Your type of business
+* A description of the property or services you are buying
 
 When buying your goods or services, give the completed certificate to the seller.
 
@@ -55,9 +53,9 @@ When buying your goods or services, give the completed certificate to the seller
 
 If you are a seller, you must:
 
-- Keep certificates for 4 years
-- Keep sales slips, receipts, statements, cash register tapes, or guest checks documenting the sale for 4 years
-- Provide certificates and any documentation upon request to the New Jersey Division of Taxation
+* Keep certificates for 4 years
+* Keep sales slips, receipts, statements, cash register tapes, or guest checks documenting the sale for 4 years
+* Provide certificates and any documentation upon request to the New Jersey Division of Taxation
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -71,4 +69,4 @@ A completed Sales Tax Resale Certificate.
 
 :::
 
-`|`
+ `|`
