@@ -60,6 +60,12 @@
       "weight": 21,
       "task": "trucking-cdl",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 22,
+      "task": "env-permitting",
+      "required": false
     }
   ],
   "name": "Logistics",

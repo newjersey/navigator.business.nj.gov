@@ -6,6 +6,7 @@ import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { createEmptyFormationFormData, emptyAddressData } from "@shared/formationData";
+import { randomInt } from "@shared/intHelpers";
 import { LicenseName } from "@shared/license";
 import {
   generateBusiness,
@@ -593,6 +594,51 @@ describe("userRouter", () => {
       });
 
       describe("when businessPersona is 'STARTING'", () => {
+        it("checks name availability using name from formationFormData", async () => {
+          const userData = generateUserDataForBusiness(
+            generateBusiness({
+              profileData: generateStartingProfileData({
+                businessName: "Business Name in Profile",
+              }),
+              formationData: generateFormationData({
+                businessNameAvailability: generateBusinessNameAvailability({
+                  status: "AVAILABLE",
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+                }),
+                formationFormData: generateFormationFormData({
+                  businessName: "Business Name in Formation Form Data",
+                }),
+              }),
+            }),
+          );
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+          await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(
+            "Business Name in Formation Form Data",
+          );
+        });
+
+        it("does not check name availability if formationFormData.businessName is an empty string", async () => {
+          const userData = generateUserDataForBusiness(
+            generateBusiness({
+              formationData: generateFormationData({
+                businessNameAvailability: generateBusinessNameAvailability({
+                  status: "AVAILABLE",
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+                }),
+                formationFormData: generateFormationFormData({
+                  businessName: "",
+                }),
+              }),
+            }),
+          );
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+          await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
+        });
+
         it("does not update business name search if businessNameAvailability is undefined", async () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
@@ -733,13 +779,38 @@ describe("userRouter", () => {
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(
-            getCurrentBusiness(userData).profileData.businessName,
+            getCurrentBusiness(userData).formationData.formationFormData.businessName,
           );
           expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
         });
       });
 
       describe("when businessPersona is 'FOREIGN' and Foreign type is Nexus", () => {
+        it("does not seach when nexusDbaName is an empty string", async () => {
+          const userData = generateUserDataForBusiness(
+            generateBusiness({
+              profileData: generateProfileData({
+                businessPersona: "FOREIGN",
+                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+              }),
+              formationData: generateFormationData({
+                completedFilingPayment: false,
+                businessNameAvailability: generateBusinessNameAvailability({
+                  status: "UNAVAILABLE",
+                }),
+                dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                  status: "AVAILABLE",
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+                }),
+              }),
+            }),
+          );
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+          await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
+        });
+
         it("does not recheck business name availability if businessNameAvailability and dbaBusinessNameAvailability are undefined", async () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
@@ -904,6 +975,7 @@ describe("userRouter", () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
               profileData: generateProfileData({
+                nexusDbaName: `some-dbaName-${randomInt()}`,
                 businessPersona: "FOREIGN",
                 foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               }),

@@ -89,14 +89,16 @@
       "step": 4,
       "weight": 32,
       "task": "trucking-cdl"
+    },
+    {
+      "step": 4,
+      "weight": 33,
+      "task": "env-permitting",
+      "required": false
     }
   ],
   "name": "Trucking",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "vehicle-dealership-q",
-    "flashing-light-permit"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "vehicle-dealership-q", "flashing-light-permit"],
   "displayname": "trucking",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

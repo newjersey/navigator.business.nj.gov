@@ -78,6 +78,12 @@
       "step": 4,
       "weight": 99,
       "task": "manage-business-vehicles"
+    },
+    {
+      "step": 4,
+      "weight": 36,
+      "task": "env-permitting",
+      "required": false
     }
   ],
   "name": "Cannabis",

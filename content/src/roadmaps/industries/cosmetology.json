@@ -61,6 +61,12 @@
     },
     {
       "step": 4,
+      "weight": 18,
+      "task": "env-permitting",
+      "required": false
+    },
+    {
+      "step": 4,
       "weight": 99,
       "task": "manage-business-vehicles"
     }

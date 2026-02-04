@@ -66,9 +66,15 @@
     },
     {
       "step": 4,
-      "weight": 14,
+      "weight": 13,
       "task": "community-right-to-know-survey",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 14,
+      "task": "env-permitting",
+      "required": false
     },
     {
       "step": 4,

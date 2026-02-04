@@ -41,6 +41,12 @@
       "step": 4,
       "weight": 99,
       "task": "manage-business-vehicles"
+    },
+    {
+      "step": 4,
+      "weight": 11,
+      "task": "env-permitting",
+      "required": false
     }
   ],
   "name": "Lawn Care",

@@ -29,7 +29,8 @@ export const DummyLogWriter: LogWriterType = {
 export const ConsoleLogWriter: LogWriterType = {
   LogError: async (message: string, details?: AxiosError): Promise<void> => {
     try {
-      console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
+      const jsonDetails = typeof details?.toJSON === "function" ? details.toJSON() : details;
+      console.error(`${message} - ${JSON.stringify(jsonDetails)}`);
     } catch (error) {
       console.error(`Error with LogError:${error}`);
     }
