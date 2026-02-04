@@ -7,9 +7,10 @@ category:
 industryIds:
   - pest-control
 sectorIds: []
+moveToRecommendedForYouSection: true
 urlSlug: commercial-pest-applicator-license-recert
-summaryDescriptionMd: " You must recertify your commercial `pesticide|pesticide`
-  applicator license every 5 years by October 31st. "
+summaryDescriptionMd: You must recertify your commercial `pesticide|pesticide`
+  applicator license every 5 years by October 31st.
 issuingAgency: Department of Environmental Protection
 callToActionText: Recertify My Commercial Pesticide Applicator License
 callToActionLink: "https://www.nj.gov/dep/enforcement/pcp/bpo-appcom.htm "
