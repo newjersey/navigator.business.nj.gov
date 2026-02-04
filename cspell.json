@@ -275,5 +275,17 @@
     "package.json",
     "content/lib/industry.json",
     "content/src/roadmaps/industries/cemetery.json"
+  ],
+  "overrides": [
+    {
+      "filename": "**/*.md",
+      "patterns": [
+        {
+          "name": "urlWrapped",
+          "pattern": "https?:\\/\\/(?:[^\\s\\)\\\\]|\\\\\\s*\\r?\\n\\s*)+"
+        }
+      ],
+      "ignoreRegExpList": ["urlWrapped"]
+    }
   ]
 }
