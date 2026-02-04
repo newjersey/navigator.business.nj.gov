@@ -63,9 +63,9 @@
     },
     {
       "step": 4,
-      "weight": 14,
-      "task": "community-right-to-know-survey",
-      "required": true
+      "weight": 22,
+      "task": "env-permitting",
+      "required": false
     }
   ],
   "name": "Logistics",
