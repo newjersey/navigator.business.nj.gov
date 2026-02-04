@@ -8,6 +8,7 @@ industryIds:
   - moving-company
 sectorIds:
   - transportation-and-warehousing
+moveToRecommendedForYouSection: true
 urlSlug: ocean-borne-container-permit
 summaryDescriptionMd: >+
   You need a permit to transport sealed ocean shipping containers on public
