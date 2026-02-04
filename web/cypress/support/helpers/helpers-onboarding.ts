@@ -8,8 +8,19 @@ import {
 } from "@businessnjgovnavigator/cypress/support/types";
 import { getIndustries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 import { randomInt } from "@businessnjgovnavigator/shared/lib/shared/src/intHelpers";
-import { carServiceOptions } from "@businessnjgovnavigator/shared/lib/shared/src/profileData";
-import { arrayOfSectors, LookupSectorTypeById } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
+import {
+  cannabisLicenseOptions,
+  carServiceOptions,
+  constructionOptions,
+  employmentPersonnelServiceOptions,
+  employmentPlacementOptions,
+  propertyLeaseTypeOptions,
+  residentialConstructionOptions,
+} from "@businessnjgovnavigator/shared/lib/shared/src/profileData";
+import {
+  arrayOfSectors,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared/lib/shared/src/sector";
 
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
@@ -24,6 +35,14 @@ export const completeNewBusinessOnboarding = ({
   isChildcareForSixOrMore = undefined,
   willSellPetCareItems = undefined,
   petCareHousing = undefined,
+  whatIsPropertyLeaseType = undefined,
+  hasThreeOrMoreRentalUnits = undefined,
+  cannabisLicenseType = undefined,
+  constructionType = undefined,
+  residentialConstructionType = undefined,
+  publicWorksContractor = undefined,
+  employmentPersonnelServiceType = undefined,
+  employmentPlacementType = undefined,
 }: Partial<StartingOnboardingData> & Partial<Registration>): void => {
   if (industry === undefined) {
     industry = randomElementFromArray(getIndustries()) as Industry;
@@ -65,13 +84,15 @@ export const completeNewBusinessOnboarding = ({
   }
 
   if (providesStaffingService === undefined) {
-    providesStaffingService = industry.industryOnboardingQuestions.isProvidesStaffingServicesApplicable
+    providesStaffingService = industry.industryOnboardingQuestions
+      .isProvidesStaffingServicesApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
   }
 
   if (certifiedInteriorDesigner === undefined) {
-    certifiedInteriorDesigner = industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable
+    certifiedInteriorDesigner = industry.industryOnboardingQuestions
+      .isCertifiedInteriorDesignerApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
   }
@@ -93,6 +114,61 @@ export const completeNewBusinessOnboarding = ({
     interstateMoving = industry.industryOnboardingQuestions.isInterstateMovingApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
+  }
+
+  if (whatIsPropertyLeaseType === undefined) {
+    whatIsPropertyLeaseType = industry.industryOnboardingQuestions.whatIsPropertyLeaseType
+      ? randomElementFromArray([...propertyLeaseTypeOptions])
+      : undefined;
+  }
+
+  if (hasThreeOrMoreRentalUnits === undefined) {
+    hasThreeOrMoreRentalUnits = industry.industryOnboardingQuestions.canHaveThreeOrMoreRentalUnits
+      ? Boolean(randomInt() % 2)
+      : undefined;
+  }
+
+  if (cannabisLicenseType === undefined) {
+    cannabisLicenseType = industry.industryOnboardingQuestions.isCannabisLicenseTypeApplicable
+      ? randomElementFromArray([...cannabisLicenseOptions])
+      : undefined;
+  }
+
+  if (constructionType === undefined) {
+    constructionType = industry.industryOnboardingQuestions.isConstructionTypeApplicable
+      ? randomElementFromArray([...constructionOptions])
+      : undefined;
+  }
+
+  if (residentialConstructionType === undefined) {
+    residentialConstructionType =
+      industry.industryOnboardingQuestions.isConstructionTypeApplicable &&
+      (constructionType === "RESIDENTIAL" || constructionType === "BOTH")
+        ? randomElementFromArray([...residentialConstructionOptions])
+        : undefined;
+  }
+
+  if (publicWorksContractor === undefined) {
+    publicWorksContractor =
+      industry.industryOnboardingQuestions.isConstructionTypeApplicable &&
+      (constructionType === "COMMERCIAL_OR_INDUSTRIAL" || constructionType === "BOTH")
+        ? Boolean(randomInt() % 2)
+        : undefined;
+  }
+
+  if (employmentPersonnelServiceType === undefined) {
+    employmentPersonnelServiceType = industry.industryOnboardingQuestions
+      .isEmploymentAndPersonnelTypeApplicable
+      ? randomElementFromArray([...employmentPersonnelServiceOptions])
+      : undefined;
+  }
+
+  if (employmentPlacementType === undefined) {
+    employmentPlacementType =
+      industry.industryOnboardingQuestions.isEmploymentAndPersonnelTypeApplicable &&
+      employmentPersonnelServiceType === "EMPLOYERS"
+        ? randomElementFromArray([...employmentPlacementOptions])
+        : undefined;
   }
 
   if (!industry.industryOnboardingQuestions.isCpaRequiredApplicable && requiresCpa) {
@@ -151,7 +227,9 @@ export const completeNewBusinessOnboarding = ({
   } else {
     onOnboardingPage.selectRealEstateAppraisal(realEstateAppraisalManagement);
     onOnboardingPage.getRealEstateAppraisal(realEstateAppraisalManagement).should("be.checked");
-    onOnboardingPage.getRealEstateAppraisal(!realEstateAppraisalManagement).should("not.be.checked");
+    onOnboardingPage
+      .getRealEstateAppraisal(!realEstateAppraisalManagement)
+      .should("not.be.checked");
   }
 
   if (interstateLogistics === undefined) {
@@ -206,6 +284,63 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.getPetCareHousing(!petCareHousing).should("not.be.checked");
   }
 
+  if (cannabisLicenseType === undefined) {
+    onOnboardingPage.getCannabisLicenseType().should("not.exist");
+  } else {
+    onOnboardingPage.selectCannabisLicenseType(cannabisLicenseType);
+    onOnboardingPage.getCannabisLicenseType(cannabisLicenseType).should("be.checked");
+  }
+
+  if (constructionType === undefined) {
+    onOnboardingPage.getConstructionType().should("not.exist");
+  } else {
+    onOnboardingPage.selectConstructionType(constructionType);
+    onOnboardingPage.getConstructionType(constructionType).should("be.checked");
+    if (
+      residentialConstructionType !== undefined &&
+      (constructionType === "RESIDENTIAL" || constructionType === "BOTH")
+    ) {
+      onOnboardingPage.selectResidentialConstructionType(residentialConstructionType);
+      onOnboardingPage
+        .getResidentialConstructionType(residentialConstructionType)
+        .should("be.checked");
+    }
+    if (
+      publicWorksContractor !== undefined &&
+      (constructionType === "COMMERCIAL_OR_INDUSTRIAL" || constructionType === "BOTH")
+    ) {
+      onOnboardingPage.selectPublicWorksContractor(publicWorksContractor);
+      onOnboardingPage.getPublicWorksContractor(publicWorksContractor).should("be.checked");
+    }
+  }
+
+  if (employmentPersonnelServiceType === undefined) {
+    onOnboardingPage.getEmploymentPersonnelServiceType().should("not.exist");
+  } else {
+    onOnboardingPage.selectEmploymentPersonnelServiceType(employmentPersonnelServiceType);
+    onOnboardingPage
+      .getEmploymentPersonnelServiceType(employmentPersonnelServiceType)
+      .should("be.checked");
+    if (employmentPlacementType !== undefined && employmentPersonnelServiceType === "EMPLOYERS") {
+      onOnboardingPage.selectEmploymentPlacementType(employmentPlacementType);
+      onOnboardingPage.getEmploymentPlacementType(employmentPlacementType).should("be.checked");
+    }
+  }
+
+  if (whatIsPropertyLeaseType === undefined) {
+    onOnboardingPage.getPropertyLeaseType().should("not.exist");
+  } else {
+    onOnboardingPage.selectPropertyLeaseType(whatIsPropertyLeaseType);
+    onOnboardingPage.getPropertyLeaseType(whatIsPropertyLeaseType).should("be.checked");
+    if (
+      hasThreeOrMoreRentalUnits !== undefined &&
+      (whatIsPropertyLeaseType === "LONG_TERM_RENTAL" || whatIsPropertyLeaseType === "BOTH")
+    ) {
+      onOnboardingPage.selectHasThreeOrMoreRentalUnits(hasThreeOrMoreRentalUnits);
+      onOnboardingPage.getHasThreeOrMoreRentalUnits(hasThreeOrMoreRentalUnits).should("be.checked");
+    }
+  }
+
   onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
 };
@@ -257,7 +392,9 @@ export const completeForeignBusinessOnboarding = ({
 export const completeForeignNexusBusinessOnboarding = ({
   industry = undefined,
   locationInNewJersey = false,
-}: Partial<ForeignOnboardingData> & Partial<StartingOnboardingData> & Partial<Registration>): void => {
+}: Partial<ForeignOnboardingData> &
+  Partial<StartingOnboardingData> &
+  Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
