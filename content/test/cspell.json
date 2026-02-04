@@ -268,14 +268,7 @@
     "cemetary",
     "NJDLWD"
   ],
-  "ignorePaths": [
-    "node_modules/**",
-    "out/**",
-    "web/out/**",
-    "package.json",
-    "content/lib/industry.json",
-    "content/test/**"
-  ],
+  "ignorePaths": [],
   "overrides": [
     {
       "filename": "**/*.md",
