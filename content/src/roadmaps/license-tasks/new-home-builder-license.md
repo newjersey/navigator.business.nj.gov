@@ -1,6 +1,7 @@
 ---
 notesMd: "[Muni planning
-  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit)"
+  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECE\
+  USLahp8_yC4T4/edit)"
 licenseName: ""
 id: new-home-builder-license
 displayname: new-home-builder-license
@@ -15,7 +16,7 @@ summaryDescriptionMd: You must register as a new home builder with the State if
 industryId:
   - commercial-construction
 callToActionText: Register My Business as a New Home Builder
-callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_nhw/nhwprenew.pdf
+callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhp-home/
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Homeowner Protection
 divisionPhone: (609) 984-7905
