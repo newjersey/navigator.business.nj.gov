@@ -1,3 +1,16 @@
+# [2026.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.1.0...v2026.2.0) (2026-02-05)
+
+
+### Bug Fixes
+
+* [AB[#16139](https://github.com/newjersey/navigator.business.nj.gov/issues/16139)] Fix bug where trying to decrypt on first render when DOL EIN is not encrypted ([71e62d6](https://github.com/newjersey/navigator.business.nj.gov/commit/71e62d67cff3b4aa26c1efb840eae59ed026fb71))
+* [AB[#17235](https://github.com/newjersey/navigator.business.nj.gov/issues/17235)] preserve query params in onboarding routing ([19d0da6](https://github.com/newjersey/navigator.business.nj.gov/commit/19d0da63acdc7e45e21bca3ebd66d34f41fff595))
+
+
+### Features
+
+* [AB[#17102](https://github.com/newjersey/navigator.business.nj.gov/issues/17102)] allow some tasks to be synced with Webflow ([87698a2](https://github.com/newjersey/navigator.business.nj.gov/commit/87698a2d713f3b22f9d439b98a3cce68a67ff045))
+
 # [2026.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.0.1...v2026.1.0) (2026-01-27)
 
 
