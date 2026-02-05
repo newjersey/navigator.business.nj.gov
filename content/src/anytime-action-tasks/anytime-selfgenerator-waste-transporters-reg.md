@@ -11,9 +11,9 @@ industryIds:
   - interior-designer
 sectorIds:
   - construction
+moveToRecommendedForYouSection: true
 urlSlug: anytime-selfgenerator-waste-transporters-reg
 summaryDescriptionMd: >-
-
   :::infoAlert
    **Keep in mind:**
 
@@ -31,41 +31,40 @@ summaryDescriptionMd: >-
 callToActionText: Apply for My Self-Generator Transporters Registration
 callToActionLink: https://dep.nj.gov/wastedecals/self-generator-solid-waste-transporters/
 ---
-
 ## Application Requirements
 
-- Business name, address, and phone number
-- Contact name, address, email, and phone number
-- `Business structure|business-structure-contextual-link`
-- Incorporation date
-- Last four digits of your Social Security number
-- `Employer Identification Number (EIN)|ein`
-- `USDOT number|usdot-number` , if you transport waste across state lines
-- Lessor's USDOT number(s), if applicable
-- Division of Consumer Affairs Registration or License Number, if applicable
-- Previous New Jersey Department of Environmental Protection (NJDEP) waste transporter registration number, if applicable
-- Applicable fees paid, once the NJDEP sends an invoice
+* Business name, address, and phone number
+* Contact name, address, email, and phone number
+*  `Business structure|business-structure-contextual-link` 
+* Incorporation date
+* Last four digits of your Social Security number
+*  `Employer Identification Number (EIN)|ein` 
+*  `USDOT number|usdot-number` , if you transport waste across state lines
+* Lessor's USDOT number(s), if applicable
+* Division of Consumer Affairs Registration or License Number, if applicable
+* Previous New Jersey Department of Environmental Protection (NJDEP) waste transporter registration number, if applicable
+* Applicable fees paid, once the NJDEP sends an invoice
 
 ### Company Ownership Information
 
-- Name, EIN, and type of ownership for each owner
-- Each owner's share of the business (must total 100%)
+* Name, EIN, and type of ownership for each owner
+* Each owner's share of the business (must total 100%)
 
 ### Vehicle Information
 
-- Vehicle type (for example, vehicle, cab, trailer, or container)
-- Vehicle Identification Number (VIN)
-- License plate number and state
-- Address where you park the vehicle overnight
+* Vehicle type (for example, vehicle, cab, trailer, or container)
+* Vehicle Identification Number (VIN)
+* License plate number and state
+* Address where you park the vehicle overnight
 
 ### Required Documents
 
-- Completed and signed registration form
-- Notarized affidavit stating you only transport your waste that you generated (included in the application form)
-- Valid insurance information for all vehicles
-- Valid motor vehicle commercial registrations for all vehicles
-- A copy of your tax clearance certificate
-- A Copy of the [lease agreement and certification](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf) for any leased vehicles signed by lessor and lessee
+* Completed and signed registration form
+* Notarized affidavit stating you only transport your waste that you generated (included in the application form)
+* Valid insurance information for all vehicles
+* Valid motor vehicle commercial registrations for all vehicles
+* A copy of your tax clearance certificate
+* A Copy of the [lease agreement and certification](https://dep.nj.gov/wp-content/uploads/wastedecals/lease-agreement-certification.pdf) for any leased vehicles signed by lessor and lessee
 
 **Note:** Some industries may need to submit extra documents. You can check the specific requirements in the [application form](https://dep.nj.gov/wp-content/uploads/wastedecals/transporter-registration-initial-application-solid-medical-waste-self-generator-revised-6-24-2025.pdf).
 
@@ -90,17 +89,17 @@ Trenton, NJ 08625-0420
 :::infoAlert
 **After you apply:**
 
-- Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them
-- Application not approved or incomplete: NJDEP will email you with the next steps or missing information
+* Application approved: You will get a bill (pay online or by check). You will receive your decals in 2 weeks. Do not transport waste until you get them
+* Application not approved or incomplete: NJDEP will email you with the next steps or missing information
   :::
 
-:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="What if I don't complete this registration?" calloutType="warning" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 If you don’t register, you cannot legally transport waste, and you may be subject to significant fines.
 
 :::
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 A registration and decals for your waste transport vehicles.
 
