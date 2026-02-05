@@ -298,7 +298,7 @@ collections:
                 }
 
   - name: "tasks"
-    label: "Tasks - All (not mapped to Webflow/static site)"
+    label: "Tasks - All (option to map to Webflow/static site)"
     folder: "content/src/roadmaps/tasks"
     summary: "{{displayname}} - {{name}}"
     identifier_field: "{{id}}"
@@ -334,6 +334,7 @@ collections:
           widget: "boolean",
           required: false,
           default: false,
+          hint: "You must provide a 'Webflow Name' if this is selected",
         }
       - {
           label: "Webflow Name",
