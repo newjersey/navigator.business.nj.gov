@@ -7,6 +7,7 @@ industryIds:
   - remediation-waste
 sectorIds:
   - waste-management-and-Remediation
+moveToRecommendedForYouSection: true
 urlSlug: report-asbestos
 summaryDescriptionMd: >-
   If you are removing more than 3 square or linear feet of material that
