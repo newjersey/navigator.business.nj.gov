@@ -232,7 +232,7 @@
     "seedrandom": "^3.0.5",
     "semantic-release": "19.0.5",
     "storybook": "7.6.21",
-    "style-loader": "3.3.4",
+    "style-loader": "4.0.0",
     "supertest": "6.3.4",
     "ts-jest": "29.4.5",
     "ts-loader": "9.5.4",
