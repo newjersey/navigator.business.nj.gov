@@ -1,4 +1,4 @@
-import { filterByUndefinedDisposalDate } from "@client/dep/filterByUndefinedDisposalDate";
+import { filterByUndefinedDisposalDate } from "@client/dep/xray/filterByUndefinedDisposalDate";
 import { generateXrayRegistrationEntry } from "@test/factories";
 
 describe("filterByDisposalDate", () => {

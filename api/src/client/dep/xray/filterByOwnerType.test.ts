@@ -1,4 +1,4 @@
-import { filterByOwnerType } from "@client/dep/filterByOwnerType";
+import { filterByOwnerType } from "@client/dep/xray/filterByOwnerType";
 import { generateXrayRegistrationEntry } from "@test/factories";
 
 describe("filterByOwnerType", () => {

@@ -1,4 +1,4 @@
-import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
+import { XrayRegistrationSearchClient } from "@client/dep/xray/XrayRegistrationSearchClient";
 import type { XrayRegistrationSearch } from "@domain/types";
 import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
 

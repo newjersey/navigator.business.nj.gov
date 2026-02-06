@@ -1,7 +1,8 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
-  CRTKBusinessDetails,
+  CrtkBusinessDetails,
+  CrtkEmailMetadata,
   ElevatorSafetyRegistrationSummary,
   EmailMetaData,
   EmergencyTripPermitApplicationInfo,
@@ -81,14 +82,18 @@ export const checkXrayRegistrationStatus = (
   return post(`/xray-registration`, { facilityDetails });
 };
 
-export const searchBuisnessInCRTKDB = (
-  CRTKbusinessDetails: CRTKBusinessDetails,
+export const searchBuisnessInCrtkDB = (
+  crtkBusinessDetails: CrtkBusinessDetails,
 ): Promise<UserData> => {
-  return post(`/crtk-lookup`, { CRTKbusinessDetails });
+  return post(`/crtk-lookup`, { crtkBusinessDetails });
 };
 
 export const sendEnvironmentPermitEmail = (emailMetaData: EmailMetaData): Promise<string> => {
   return post(`/guest/environment-permit-email`, { emailMetaData }, false);
+};
+
+export const sendCrtkActivitiesEmail = (emailMetaData: CrtkEmailMetadata): Promise<string> => {
+  return post(`/crtk-email`, { emailMetaData });
 };
 
 export const postBusinessFormation = (

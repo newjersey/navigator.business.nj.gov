@@ -1,4 +1,4 @@
-import { consolidatedEntries } from "@client/dep/consolidatedEntries";
+import { consolidatedEntries } from "@client/dep/xray/consolidatedEntries";
 import { generateXrayRegistrationEntry } from "@test/factories";
 
 describe("consolidatedEntries", () => {
