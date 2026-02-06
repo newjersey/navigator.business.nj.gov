@@ -7,7 +7,7 @@ industryIds: []
 sectorIds:
   - construction
   - waste-management-and-Remediation
-nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
+moveToRecommendedForYouSection: true
 urlSlug: renew-waste-transporter-decals
 summaryDescriptionMd: You must renew your waste transporter vehicle and
   container decals every two years. This happens in odd-numbered years. You can
@@ -15,6 +15,7 @@ summaryDescriptionMd: You must renew your waste transporter vehicle and
 issuingAgency: Department of Environmental Protection (DEP)
 callToActionText: Renew My Waste Transporter Decals
 callToActionLink: https://dep.nj.gov/wastedecals/
+nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
 ---
 ## Application Requirements
 * NJDEP Transporter registration number
