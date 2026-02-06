@@ -8,7 +8,7 @@ industryIds: []
 sectorIds:
   - construction
   - waste-management-and-Remediation
-nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
+moveToRecommendedForYouSection: true
 urlSlug: add-update-waste-generator-decals
 summaryDescriptionMd: >-
   :::largeCallout{ showHeader="true" headerText="Keep in mind:"
@@ -42,6 +42,7 @@ summaryDescriptionMd: >-
 issuingAgency: Department of Environmental Protection (DEP)
 callToActionText: Get New or Updated Waste Transporter Decals
 callToActionLink: "https://dep.nj.gov/wastedecals/ "
+nonEssentialQuestionsMoveToRecommendedAnytimeActionIds: []
 ---
 ## Application Requirements
 
