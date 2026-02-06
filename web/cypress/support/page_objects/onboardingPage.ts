@@ -1,7 +1,13 @@
 import {
+  CannabisLicenseType,
   CarServiceType,
+  ConstructionType,
+  EmploymentAndPersonnelServicesType,
+  EmploymentPlacementType,
   LookupIndustryById,
   LookupSectorTypeById,
+  PropertyLeaseType,
+  ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared/";
 import { random } from "lodash";
 
@@ -79,6 +85,60 @@ export class OnboardingPage {
   getPetCareHousing(radio?: boolean) {
     return cy.get(
       `input[name="pet-care-housing"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
+  }
+
+  getCannabisLicenseType(value?: CannabisLicenseType) {
+    return cy.get(
+      `input[name="cannabis-license-type"]${value === undefined ? "" : `[value="${value}"]`}`,
+    );
+  }
+
+  getConstructionType(value?: ConstructionType) {
+    return cy.get(
+      `input[name="construction-type"]${value === undefined ? "" : `[value="${value}"]`}`,
+    );
+  }
+
+  getResidentialConstructionType(value?: ResidentialConstructionType) {
+    return cy.get(
+      `input[name="residential-construction-type"]${
+        value === undefined ? "" : `[value="${value}"]`
+      }`,
+    );
+  }
+
+  getPublicWorksContractor(radio?: boolean) {
+    return cy.get(
+      `input[name="public-works-contractor"]${radio === undefined ? "" : `[value="${radio}"]`}`,
+    );
+  }
+
+  getEmploymentPersonnelServiceType(value?: EmploymentAndPersonnelServicesType) {
+    return cy.get(
+      `input[name="employment-personnel-service-type"]${
+        value === undefined ? "" : `[value="${value}"]`
+      }`,
+    );
+  }
+
+  getEmploymentPlacementType(value?: EmploymentPlacementType) {
+    return cy.get(
+      `input[name="employment-placement-type"]${value === undefined ? "" : `[value="${value}"]`}`,
+    );
+  }
+
+  getPropertyLeaseType(value?: PropertyLeaseType) {
+    return cy.get(
+      `input[name="property-lease-type"]${value === undefined ? "" : `[value="${value}"]`}`,
+    );
+  }
+
+  getHasThreeOrMoreRentalUnits(radio?: boolean) {
+    return cy.get(
+      `input[name="has-three-or-more-rental-units"]${
+        radio === undefined ? "" : `[value="${radio}"]`
+      }`,
     );
   }
 
@@ -187,6 +247,38 @@ export class OnboardingPage {
 
   selectCarService(radio: CarServiceType) {
     this.getCarService(radio).check();
+  }
+
+  selectCannabisLicenseType(value: CannabisLicenseType) {
+    this.getCannabisLicenseType(value).check();
+  }
+
+  selectConstructionType(value: ConstructionType) {
+    this.getConstructionType(value).check();
+  }
+
+  selectResidentialConstructionType(value: ResidentialConstructionType) {
+    this.getResidentialConstructionType(value).check();
+  }
+
+  selectPublicWorksContractor(radio: boolean) {
+    this.getPublicWorksContractor(radio).check();
+  }
+
+  selectEmploymentPersonnelServiceType(value: EmploymentAndPersonnelServicesType) {
+    this.getEmploymentPersonnelServiceType(value).check();
+  }
+
+  selectEmploymentPlacementType(value: EmploymentPlacementType) {
+    this.getEmploymentPlacementType(value).check();
+  }
+
+  selectPropertyLeaseType(value: PropertyLeaseType) {
+    this.getPropertyLeaseType(value).check();
+  }
+
+  selectHasThreeOrMoreRentalUnits(radio: boolean) {
+    this.getHasThreeOrMoreRentalUnits(radio).check();
   }
 
   selectIndustry(industry: string) {

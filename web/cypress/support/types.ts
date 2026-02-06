@@ -1,6 +1,14 @@
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { CarServiceType } from "@businessnjgovnavigator/shared/profileData";
+import {
+  CannabisLicenseType,
+  CarServiceType,
+  ConstructionType,
+  EmploymentAndPersonnelServicesType,
+  EmploymentPlacementType,
+  PropertyLeaseType,
+  ResidentialConstructionType,
+} from "@businessnjgovnavigator/shared/profileData";
 
 export interface LighthouseThresholds {
   accessibility: number;
@@ -43,6 +51,14 @@ export interface StartingOnboardingData {
   isChildcareForSixOrMore: boolean | undefined;
   willSellPetCareItems: boolean | undefined;
   petCareHousing: boolean | undefined;
+  whatIsPropertyLeaseType: PropertyLeaseType | undefined;
+  hasThreeOrMoreRentalUnits: boolean | undefined;
+  cannabisLicenseType: CannabisLicenseType | undefined;
+  constructionType: ConstructionType | undefined;
+  residentialConstructionType: ResidentialConstructionType | undefined;
+  publicWorksContractor: boolean | undefined;
+  employmentPersonnelServiceType: EmploymentAndPersonnelServicesType | undefined;
+  employmentPlacementType: EmploymentPlacementType | undefined;
 }
 
 export interface ExistingOnboardingData {
