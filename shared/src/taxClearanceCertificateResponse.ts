@@ -1,4 +1,4 @@
-import { UserData } from "./userData";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 
 export type TaxClearanceCertificateResponseErrorType =
   | "INELIGIBLE_TAX_CLEARANCE_FORM"

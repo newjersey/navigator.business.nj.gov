@@ -1,4 +1,4 @@
-import FundingAgenciesJSON from "../../content/src/mappings/fundingAgency.json";
+import FundingAgenciesJSON from "@businessnjgovnavigator/content/mappings/fundingAgency.json";
 
 export interface FundingAgency {
   readonly id: string;

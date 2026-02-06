@@ -1,4 +1,4 @@
-import TaskAgenciesJSON from "../../content/src/mappings/taskAgency.json";
+import TaskAgenciesJSON from "@businessnjgovnavigator/content/mappings/taskAgency.json";
 
 export interface TaskAgency {
   readonly id: string;

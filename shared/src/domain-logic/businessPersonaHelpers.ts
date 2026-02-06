@@ -1,6 +1,6 @@
 import { intersection } from "lodash";
-import { ForeignBusinessTypeId, ProfileData } from "../profileData";
-import { Business } from "../userData";
+import { ForeignBusinessTypeId, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 
 export const isRemoteWorkerOrSellerBusiness = (business?: Business | undefined): boolean => {
   if (!business) return false;

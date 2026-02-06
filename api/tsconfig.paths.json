@@ -12,7 +12,9 @@
       "@test/*": ["test/*"],
       "@wiremock/*": ["wiremock/*"],
       "@businessnjgovnavigator/api/*": ["./*"],
-      "@businessnjgovnavigator/react-email": ["src/functions/messagingService/reactEmail"]
+      "@businessnjgovnavigator/react-email": ["src/functions/messagingService/reactEmail"],
+      "@businessnjgovnavigator/shared/*": ["../shared/src/*"],
+      "@businessnjgovnavigator/content/*": ["../content/src/*"]
     }
   }
 }

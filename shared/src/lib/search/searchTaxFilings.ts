@@ -1,6 +1,6 @@
-import { Filing } from "../../types";
-import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import { Filing } from "@businessnjgovnavigator/shared/types";
+import { convertFileDataToMatchList } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import { FileData, Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
   const filingData = getFilingData(filings);

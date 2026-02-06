@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { makeSnippet } from "./helpers";
-import { ConfigMatch, GroupedConfigMatch, MatchComparitor } from "./typesForSearch";
+import { makeSnippet } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import {
+  ConfigMatch,
+  GroupedConfigMatch,
+  MatchComparitor,
+} from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 const collectionInfo = new Map<string, string[]>();
 export const searchConfig = (

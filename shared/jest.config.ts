@@ -10,4 +10,8 @@ export default {
   ...sharedConfig,
   displayName: "shared",
   rootDir: "src",
+  moduleNameMapper: {
+    "^@businessnjgovnavigator/shared/(.*)$": "<rootDir>/$1",
+    "^@businessnjgovnavigator/content/(.*)$": "<rootDir>/../../content/src/$1",
+  },
 };

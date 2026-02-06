@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Municipality, MunicipalityDetail } from "../municipality";
+import { Municipality, MunicipalityDetail } from "@businessnjgovnavigator/shared/municipality";
 
 const recordsDirectory = path.join(process.cwd(), "../shared/src/static");
 

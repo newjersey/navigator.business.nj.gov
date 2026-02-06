@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { convertCertificationMd } from "../markdownReader";
-import { Certification } from "../types/types";
-import { getFileNameByUrlSlug } from "./helpers";
+import { convertCertificationMd } from "@businessnjgovnavigator/shared/markdownReader";
+import { Certification } from "@businessnjgovnavigator/shared/types/types";
+import { getFileNameByUrlSlug } from "@businessnjgovnavigator/shared/static/helpers";
 
 const certificationDirectory = path.join(process.cwd(), "..", "content", "src", "certifications");
 const archivedCertificationDirectory = path.join(

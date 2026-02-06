@@ -1,6 +1,6 @@
-import { AnytimeActionLicenseReinstatement } from "../../types";
-import { convertFileDataToMatchList } from "../search/helpers";
-import { FileData, Match } from "./typesForSearch";
+import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
+import { convertFileDataToMatchList } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import { FileData, Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 export const searchAnytimeActionLicenseReinstatements = (
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[],

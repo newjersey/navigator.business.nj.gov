@@ -1,15 +1,21 @@
-import { BusinessUser } from "./businessUser";
-import { CigaretteLicenseData } from "./cigaretteLicense";
-import { CRTKData } from "./crtk";
-import { createBusinessId } from "./domain-logic/createBusinessId";
-import { EnvironmentData } from "./environment";
-import { createEmptyFormationFormData, FormationData } from "./formationData";
-import { LicenseData } from "./license";
-import { createEmptyProfileData, ProfileData } from "./profileData";
-import { emptyRoadmapTaskData, RoadmapTaskData } from "./roadmapTaskData";
-import { TaxClearanceCertificateData } from "./taxClearanceCertificate";
-import { TaxFilingData } from "./taxFiling";
-import { XrayData } from "./xray";
+import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { CRTKData } from "@businessnjgovnavigator/shared/crtk";
+import { createBusinessId } from "@businessnjgovnavigator/shared/domain-logic/createBusinessId";
+import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
+import {
+  createEmptyFormationFormData,
+  FormationData,
+} from "@businessnjgovnavigator/shared/formationData";
+import { LicenseData } from "@businessnjgovnavigator/shared/license";
+import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  emptyRoadmapTaskData,
+  RoadmapTaskData,
+} from "@businessnjgovnavigator/shared/roadmapTaskData";
+import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import { TaxFilingData } from "@businessnjgovnavigator/shared/taxFiling";
+import { XrayData } from "@businessnjgovnavigator/shared/xray";
 
 export interface UserData {
   readonly user: BusinessUser;

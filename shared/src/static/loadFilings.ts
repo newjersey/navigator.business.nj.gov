@@ -1,8 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { convertFilingMd } from "../markdownReader";
-import { Filing } from "../types/types";
-import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
+import { convertFilingMd } from "@businessnjgovnavigator/shared/markdownReader";
+import { Filing } from "@businessnjgovnavigator/shared/types/types";
+import {
+  getFileNameByUrlSlug,
+  loadUrlSlugByFilename,
+} from "@businessnjgovnavigator/shared/static/helpers";
 
 type PathParameters<P> = { params: P; locale?: string };
 export type FilingUrlSlugParameter = {

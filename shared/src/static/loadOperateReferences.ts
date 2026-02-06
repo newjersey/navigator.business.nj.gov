@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { OperateReference } from "../types/types";
-import { loadCertificationByFileName } from "./loadCertifications";
-import { loadFilingByFileName } from "./loadFilings";
-import { loadFundingByFileName } from "./loadFundings";
+import { OperateReference } from "@businessnjgovnavigator/shared/types/types";
+import { loadCertificationByFileName } from "@businessnjgovnavigator/shared/static/loadCertifications";
+import { loadFilingByFileName } from "@businessnjgovnavigator/shared/static/loadFilings";
+import { loadFundingByFileName } from "@businessnjgovnavigator/shared/static/loadFundings";
 
 const filingsDirectory = path.join(process.cwd(), "..", "content", "src", "filings");
 const fundingsDirectory = path.join(process.cwd(), "..", "content", "src", "fundings");

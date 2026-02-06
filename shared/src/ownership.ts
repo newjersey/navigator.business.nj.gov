@@ -1,4 +1,4 @@
-import OwnershipTypeJSON from "../../content/src/mappings/ownershipTypes.json";
+import OwnershipTypeJSON from "@businessnjgovnavigator/content/mappings/ownershipTypes.json";
 export interface OwnershipType {
   id: string;
   name: string;

@@ -1,8 +1,8 @@
-import { NameAvailability } from "./businessNameSearch";
-import { CountriesShortCodes } from "./countries";
-import { Municipality } from "./municipality";
-import { BusinessPersona } from "./profileData";
-import { StateNames, StateObject } from "./states";
+import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
+import { CountriesShortCodes } from "@businessnjgovnavigator/shared/countries";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { StateNames, StateObject } from "@businessnjgovnavigator/shared/states";
 
 export const formationApiDateFormat = "MM/DD/YYYY";
 
