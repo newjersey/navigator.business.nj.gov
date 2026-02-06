@@ -10,7 +10,8 @@ import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
-import { ChangeEvent, ReactElement, useContext } from "react";
+import { ChangeEvent, ReactElement, useContext, useRef, useEffect } from "react";
+import { flushSync } from "react-dom";
 
 const allForeignBusinessTypeIdsOrdered = [
   "employeeOrContractorInNJ",
@@ -45,7 +46,17 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
 
   const isValid = (ids: string[]): boolean => ids.length > 0;
 
-  RegisterForOnSubmit(() => isValid(state.profileData.foreignBusinessTypeIds));
+  // React 19: Use ref to track latest value for validation
+  // This prevents stale closure issues when form validates before context updates
+  const foreignBusinessTypeIdsRef = useRef(state.profileData.foreignBusinessTypeIds);
+
+  useEffect(() => {
+    foreignBusinessTypeIdsRef.current = state.profileData.foreignBusinessTypeIds;
+  }, [state.profileData.foreignBusinessTypeIds]);
+
+  // React 19: The ref is only accessed when the validation callback runs (on submit), not during render
+  // eslint-disable-next-line react-hooks/refs
+  RegisterForOnSubmit(() => isValid(foreignBusinessTypeIdsRef.current));
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const value = event.target.value as ForeignBusinessTypeId;
@@ -62,14 +73,21 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
             return it !== value;
           });
     }
+
+    // React 19: Update ref immediately so validation always sees latest value
+    foreignBusinessTypeIdsRef.current = ids;
     isValid(ids) && setIsValid(true);
 
-    setProfileData({
-      ...state.profileData,
-      industryId:
-        determineForeignBusinessType(ids) === "NEXUS" ? state.profileData.industryId : undefined,
-      homeBasedBusiness: ids.includes("officeInNJ") ? false : state.profileData.homeBasedBusiness,
-      foreignBusinessTypeIds: ids,
+    // React 19: Use flushSync to ensure state update completes immediately
+    // This prevents race conditions where form submission happens before state is updated
+    flushSync(() => {
+      setProfileData({
+        ...state.profileData,
+        industryId:
+          determineForeignBusinessType(ids) === "NEXUS" ? state.profileData.industryId : undefined,
+        homeBasedBusiness: ids.includes("officeInNJ") ? false : state.profileData.homeBasedBusiness,
+        foreignBusinessTypeIds: ids,
+      });
     });
   };
 

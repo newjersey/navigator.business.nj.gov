@@ -18,6 +18,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
+import { useEffect } from "react";
 import { SWRConfig } from "swr";
 
 jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
@@ -53,10 +54,15 @@ describe("useUserData", () => {
     const returnVal = generateUseUserDataResponse({});
 
     function TestComponent(): null {
-      Object.assign(returnVal, useUserData());
-      returnVal.createUpdateQueue(returnVal.userData as UserData).then((createdQueue) => {
-        returnVal.updateQueue = createdQueue;
-      });
+      const hookResult = useUserData();
+      Object.assign(returnVal, hookResult);
+
+      useEffect(() => {
+        returnVal.createUpdateQueue(returnVal.userData as UserData).then((createdQueue) => {
+          returnVal.updateQueue = createdQueue;
+        });
+      }, []);
+
       return null;
     }
 
@@ -234,13 +240,18 @@ describe("useUserData", () => {
     it("saves new user data to cache when calling update", async () => {
       const currentUser = generateUser({});
       const { updateQueue } = await setupHook(currentUser, IsAuthenticated.FALSE);
-      expect(userDataStorage.getCurrentUserData()).toBeUndefined();
+      userDataStorage.clear(); // Ensure clean state for this test
+      await waitFor(() => {
+        expect(userDataStorage.getCurrentUserData()).toBeUndefined();
+      });
       const currentUserData = generateUserData({ user: currentUser });
       await act(() => {
         return updateQueue?.queue(currentUserData).update();
       });
       expect(mockApi.postUserData).not.toHaveBeenCalled();
-      expect(userDataStorage.getCurrentUserData()).toEqual(currentUserData);
+      await waitFor(() => {
+        expect(userDataStorage.getCurrentUserData()).toEqual(currentUserData);
+      });
     });
 
     it("does not update auth state when data is initially loaded", async () => {

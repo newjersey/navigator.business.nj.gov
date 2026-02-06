@@ -6,7 +6,7 @@ import {
   FormContextType,
   ReducedFieldStates,
 } from "@businessnjgovnavigator/shared/types";
-import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
+import { FormEvent, useCallback, useEffect, useReducer, useRef, useState } from "react";
 
 const debug = false;
 
@@ -37,6 +37,7 @@ export const useFormContextHelper = <
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [tab, setTab] = useState<Tab>(initTab ?? (0 as Tab));
   const [stagingTab, setStagingTab] = useState<Tab | undefined>(undefined);
+  const isSubmittingRef = useRef(false);
 
   const fieldStatesReducer: FormContextReducer<T> = (prevState, action) => {
     const { type, payload } = action;
@@ -90,10 +91,7 @@ export const useFormContextHelper = <
     }
   };
 
-  const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(
-    fieldStatesReducer,
-    initState,
-  );
+  const [fieldStates, fieldStateDispatch] = useReducer(fieldStatesReducer, initState);
   debug && console.log(fieldStates);
 
   const getErrors = (): FieldError[] =>
@@ -142,9 +140,24 @@ export const useFormContextHelper = <
 
       if (!stillNeedsUpdates) {
         if (valid) {
-          if (submitted) {
+          if (submitted && !isSubmittingRef.current) {
             debug && console.log("runs submit");
-            onSubmitFunc();
+            isSubmittingRef.current = true;
+
+            // Handle async submission
+            const runSubmit = async (): Promise<void> => {
+              try {
+                await onSubmitFunc();
+              } finally {
+                isSubmittingRef.current = false;
+                setSubmitted(false);
+              }
+            };
+
+            runSubmit().catch(() => {
+              // Errors are handled in onSubmitFunc
+            });
+            return;
           }
 
           if (stagingTab) {
@@ -152,8 +165,11 @@ export const useFormContextHelper = <
             setTab(stagingTab);
           }
         }
-        setSubmitted(false);
-        stagingTab && setStagingTab(undefined);
+
+        if (!isSubmittingRef.current) {
+          setSubmitted(false);
+          stagingTab && setStagingTab(undefined);
+        }
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps

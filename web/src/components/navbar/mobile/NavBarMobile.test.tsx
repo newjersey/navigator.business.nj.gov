@@ -1,6 +1,7 @@
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
+import userEvent from "@testing-library/user-event";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
@@ -13,7 +14,7 @@ import {
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { ReactNode } from "react";
 
 const Config = getMergedConfig();
@@ -81,7 +82,7 @@ describe("<NavBarMobile />", () => {
       expect(screen.getByTestId("nav-menu-mobile-quick-link-open")).toBeInTheDocument();
     });
 
-    it("renders getStarted and Login in account dropdown", () => {
+    it("renders getStarted and Login in account dropdown", async () => {
       render(
         <NavBarMobile
           variant={NavBarVariant.FULL_LANDING}
@@ -96,14 +97,14 @@ describe("<NavBarMobile />", () => {
       expect(screen.queryByText(Config.navigationDefaults.getStartedText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
+      await userEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
       expect(screen.getByText(Config.navigationDefaults.getStartedText)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
     });
   });
 
   describe("seo starter kit configuration", () => {
-    it("shows my account text and login button", () => {
+    it("shows my account text and login button", async () => {
       render(
         <NavBarMobile
           variant={NavBarVariant.MINIMAL_WITH_LOGIN}
@@ -137,7 +138,7 @@ describe("<NavBarMobile />", () => {
       expect(screen.queryByTestId("nav-menu-mobile-quick-link-open")).not.toBeInTheDocument();
     });
 
-    it("renders login in account dropdown", () => {
+    it("renders login in account dropdown", async () => {
       render(
         <NavBarMobile
           variant={NavBarVariant.MINIMAL_WITH_DISABLED_DROPDOWN}
@@ -151,13 +152,13 @@ describe("<NavBarMobile />", () => {
 
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
+      await userEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
     });
   });
 
   describe("authenticated configuration", () => {
-    it("shows quick link and account icons", () => {
+    it("shows quick link and account icons", async () => {
       render(
         <NavBarMobile
           variant={NavBarVariant.FULL_AUTHENTICATED}
@@ -173,7 +174,7 @@ describe("<NavBarMobile />", () => {
       expect(screen.getByTestId("nav-menu-mobile-quick-link-open")).toBeInTheDocument();
     });
 
-    it("renders profile, add business, myNj and logout in account menu", () => {
+    it("renders profile, add business, myNj and logout in account menu", async () => {
       const userData = generateUserData({});
       render(
         <NavBarMobile
@@ -195,7 +196,7 @@ describe("<NavBarMobile />", () => {
       expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
+      await userEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
       expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
@@ -221,7 +222,7 @@ describe("<NavBarMobile />", () => {
       expect(screen.getByTestId("nav-menu-mobile-quick-link-open")).toBeInTheDocument();
     });
 
-    it("renders profile, register and login in the account menu", () => {
+    it("renders profile, register and login in the account menu", async () => {
       const userData = generateUserData({});
       render(
         <NavBarMobile
@@ -242,7 +243,7 @@ describe("<NavBarMobile />", () => {
       ).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
+      await userEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
       expect(screen.getByText(Config.navigationDefaults.backToProfileLinkText)).toBeInTheDocument();
       expect(
@@ -315,7 +316,7 @@ describe("<NavBarMobile />", () => {
   });
 
   describe("side bar and mini-roadmap", () => {
-    it("does not display mini-roadmap when hideMiniRoadmap is true", () => {
+    it("does not display mini-roadmap when hideMiniRoadmap is true", async () => {
       useMockBusiness({});
       useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
       render(
@@ -329,11 +330,11 @@ describe("<NavBarMobile />", () => {
         />,
       );
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
-      fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
+      await userEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
     });
 
-    it("displays mini-roadmap with PLAN/START when hideMiniRoadmap does not exist", () => {
+    it("displays mini-roadmap with PLAN/START when hideMiniRoadmap does not exist", async () => {
       useMockBusiness({});
       useMockRoadmap(
         generateRoadmap({
@@ -357,7 +358,7 @@ describe("<NavBarMobile />", () => {
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
       expect(screen.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
+      await userEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
       expect(screen.getByText("step1")).toBeInTheDocument();
       expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
       expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
@@ -382,10 +383,10 @@ describe("<NavBarMobile />", () => {
         />,
       );
 
-      fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
+      await userEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
-      fireEvent.click(screen.getByText("step1"));
-      fireEvent.click(screen.getByText("task1"));
+      await userEvent.click(screen.getByText("step1"));
+      await userEvent.click(screen.getByText("task1"));
 
       await waitForElementToBeRemoved(() => {
         return screen.queryByTestId("nav-sidebar-menu");

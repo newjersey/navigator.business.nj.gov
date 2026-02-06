@@ -48,9 +48,12 @@ export const RemoveBusinessModal = (props: Props): ReactElement => {
     }
 
     if (showRemoveBusinessModal) {
-      setBusinessName(
-        getNavBarBusinessTitle(business, state.isAuthenticated === IsAuthenticated.TRUE),
-      );
+      const timeoutId = setTimeout(() => {
+        setBusinessName(
+          getNavBarBusinessTitle(business, state.isAuthenticated === IsAuthenticated.TRUE),
+        );
+      }, 0);
+      return (): void => clearTimeout(timeoutId);
     }
   }, [error, showRemoveBusinessModal, business, state.isAuthenticated]);
 

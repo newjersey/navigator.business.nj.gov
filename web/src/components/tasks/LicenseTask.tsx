@@ -23,7 +23,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { LicenseSearchError, TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
 
@@ -58,13 +58,18 @@ export const LicenseTask = (props: Props): ReactElement => {
       business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
 
     if (!licenseDetailsReceived && business.licenseData?.lastUpdatedISO) {
-      setError("NOT_FOUND");
-      return;
+      const timeoutId = setTimeout(() => {
+        setError("NOT_FOUND");
+      }, 0);
+      return (): void => clearTimeout(timeoutId);
     }
 
     if (licenseDetailsReceived) {
-      setTabIndex(STATUS_TAB_INDEX);
-      setLicenseDetails(business.licenseData?.licenses?.[licenseNameForTask]);
+      const timeoutId = setTimeout(() => {
+        setTabIndex(STATUS_TAB_INDEX);
+        setLicenseDetails(business.licenseData?.licenses?.[licenseNameForTask]);
+      }, 0);
+      return (): void => clearTimeout(timeoutId);
     }
   }, [licenseNameForTask, business]);
 

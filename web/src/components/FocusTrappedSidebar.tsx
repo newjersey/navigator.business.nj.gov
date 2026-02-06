@@ -22,7 +22,9 @@ export const FocusTrappedSidebar = ({
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
     if (isOpen && !showDiv) {
-      setShowDiv(true);
+      timeoutId = setTimeout(() => {
+        setShowDiv(true);
+      }, 0);
     } else if (!isOpen && showDiv) {
       timeoutId = setTimeout(() => {
         return setShowDiv(false);

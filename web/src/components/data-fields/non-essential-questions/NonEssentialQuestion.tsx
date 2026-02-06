@@ -16,7 +16,7 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
   const nonEssentialQuestionText = getNonEssentialQuestionText(props.essentialQuestionId);
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
-  const nonEssentialQuestion = useRef(null);
+  const nonEssentialQuestion = useRef<HTMLDivElement>(null);
   const [hasBeenSeen, setHasBeenSeen] = useState(false);
   const nonEssentialQuestionInViewPort = useIntersectionOnElement(nonEssentialQuestion, "-20px");
 
@@ -40,7 +40,10 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
         props.essentialQuestionId,
       );
     }
-    setHasBeenSeen(true);
+    const timeoutId = setTimeout(() => {
+      setHasBeenSeen(true);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [
     nonEssentialQuestionInViewPort,
     hasBeenSeen,

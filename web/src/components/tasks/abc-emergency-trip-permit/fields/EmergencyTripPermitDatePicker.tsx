@@ -14,7 +14,7 @@ import { TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, ReactNode } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;
@@ -32,6 +32,7 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
+        enableAccessibleFieldDOMStructure={false}
         minDate={getMinDate()}
         maxDate={getMinDate()?.add(4, "days")}
         value={
@@ -39,12 +40,13 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
             ? parseDateWithFormat(context.state.applicationInfo.permitDate, defaultDateFormat)
             : getMinDate()
         }
-        inputFormat={dateFormat}
-        onChange={(newValue: DateObject | null): void => {
-          if (newValue) {
+        format={dateFormat}
+        onChange={(newValue: unknown): void => {
+          const dateObj = newValue as DateObject | null;
+          if (dateObj) {
             const newApplicationInfo = {
               ...context.state.applicationInfo,
-              [props.fieldName]: newValue.format(defaultDateFormat),
+              [props.fieldName]: dateObj.format(defaultDateFormat),
             };
             context.setApplicationInfo(newApplicationInfo);
 
@@ -64,30 +66,33 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
               });
             }
           }
-          if (newValue === null) {
+          if (dateObj === null) {
             context.setApplicationInfo({
               ...context.state.applicationInfo,
               [props.fieldName]: "",
             });
           }
         }}
-        renderInput={(params): JSX.Element => {
-          return (
-            <div className="width-100">
-              <TextField
-                {...params}
-                variant="outlined"
-                error={false}
-                sx={{
-                  svg: { fill: "#4b7600" },
-                }}
-                inputProps={{
-                  ...params.inputProps,
-                  "aria-label": camelCaseToSentence(props.fieldName),
-                }}
-              />
-            </div>
-          );
+        slotProps={{
+          textField: {
+            variant: "outlined",
+            error: false,
+            sx: {
+              svg: { fill: "#4b7600" },
+            },
+            inputProps: {
+              "aria-label": camelCaseToSentence(props.fieldName),
+            },
+          },
+        }}
+        slots={{
+          textField: (params): ReactNode => {
+            return (
+              <div className="width-100">
+                <TextField {...params} />
+              </div>
+            );
+          },
         }}
       />
     </LocalizationProvider>

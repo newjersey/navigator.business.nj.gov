@@ -56,7 +56,7 @@ export const SingleTaxId = ({
           ),
         }}
         inputWidth={"reduced"}
-        numericProps={{ minLength: 12, maxLength: 12 }}
+        numericProps={{ minLength: 9, maxLength: 12 }}
         type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
         validationText={validationText}
         value={state.profileData[fieldName] as string | undefined}

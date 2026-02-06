@@ -15,7 +15,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -26,7 +26,12 @@ interface Props {
 export const FormationDateModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { business, updateQueue } = useUserData();
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+
+  // React 19: State initializes from business.profileData on mount
+  // Component remounts via key prop (managed by parent) when modal opens
+  const [profileData, setProfileData] = useState<ProfileData>(
+    business?.profileData ?? createEmptyProfileData(),
+  );
 
   const {
     FormFuncWrapper,
@@ -34,11 +39,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
     isValid,
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
-
-  useEffect(() => {
-    if (!business) return;
-    setProfileData(business.profileData);
-  }, [business]);
 
   const shouldShowMunicipalityQuestion = (): boolean => {
     if (!business) {

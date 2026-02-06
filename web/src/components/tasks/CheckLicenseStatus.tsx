@@ -34,14 +34,13 @@ interface Props {
   licenseTaskId: LicenseTaskId;
 }
 
-const Config = getMergedConfig();
-const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
-  NOT_FOUND: Config.licenseSearchTask.errorTextNotFound,
-  FIELDS_REQUIRED: Config.licenseSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
-};
-
 export const CheckLicenseStatus = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
+  const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
+    NOT_FOUND: Config.licenseSearchTask.errorTextNotFound,
+    FIELDS_REQUIRED: Config.licenseSearchTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
+  };
   const classes = useStyles();
   const [formValues, setFormValues] = useState<LicenseSearchNameAndAddress>(
     createEmptyLicenseSearchNameAndAddress(),

@@ -30,14 +30,20 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
     }
     if (router.query[config.queryKey] === "true") {
       if (config.delayInMilliseconds) {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
           return setAlertIsVisible(true);
         }, config.delayInMilliseconds);
+        redirect();
+        effectOccurred.current = true;
+        return (): void => clearTimeout(timeoutId);
       } else {
-        setAlertIsVisible(true);
+        const timeoutId = setTimeout(() => {
+          setAlertIsVisible(true);
+        }, 0);
+        redirect();
+        effectOccurred.current = true;
+        return (): void => clearTimeout(timeoutId);
       }
-      redirect();
-      effectOccurred.current = true;
     }
   }, [router, setAlertIsVisible, config.queryKey, config.delayInMilliseconds, redirect]);
 

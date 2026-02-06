@@ -15,6 +15,8 @@ type Props = {
 
 export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  // React 19: Counter to force FormationDateModal remount when opened
+  const [formationModalResetKey, setFormationModalResetKey] = useState(0);
   const router = useRouter();
   const { business, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
@@ -33,12 +35,15 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
       return;
     }
     setModalOpen(true);
+    // Increment reset key to force modal remount with fresh state
+    setFormationModalResetKey((prev) => prev + 1);
     analytics.event.formation_nudge_button.click.show_formation_date_modal();
   };
 
   return (
     <>
       <FormationDateModal
+        key={`${business?.id ?? "no-business"}-${formationModalResetKey}`}
         isOpen={modalOpen}
         close={(): void => setModalOpen(false)}
         onSave={updateFormationDateAndTaskProgress}

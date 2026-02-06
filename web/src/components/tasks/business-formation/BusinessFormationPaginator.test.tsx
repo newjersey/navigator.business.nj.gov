@@ -108,6 +108,17 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   getCompletedFiling: jest.fn(),
   searchBusinessName: jest.fn(),
 }));
+// React 19: Mock FormationDateModal to avoid async state update issues from setTimeout(0)
+jest.mock("@/components/FormationDateModal", () => ({
+  FormationDateModal: ({
+    isOpen,
+  }: {
+    isOpen: boolean;
+    close: () => void;
+    onSave: ({ redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
+  }): React.ReactElement | null =>
+    isOpen ? <div data-testid="formation-date-modal">Mocked Modal</div> : null,
+}));
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
@@ -160,15 +171,15 @@ describe("<BusinessFormationPaginator />", () => {
     it("shows the help button on every formation page", async () => {
       const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep();
-      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      expect(await screen.findByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
-      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      expect(await screen.findByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToReviewStep();
-      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      expect(await screen.findByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToBusinessNameStep();
-      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      expect(await screen.findByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToBillingStep();
-      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      expect(await screen.findByTestId("help-button")).toBeInTheDocument();
     });
   });
 
@@ -2078,7 +2089,7 @@ describe("<BusinessFormationPaginator />", () => {
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });
 
-          it.skip.each([
+          it.each([
             foreignUsMainAddressLine1,
             foreignUsMainAddressLine2,
             foreignUsMainAddressCity,

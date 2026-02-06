@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-wait-for-multiple-assertions */
 import { XrayStatus } from "@/components/xray/XrayStatus";
 import { generateEmptyFormationData } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
@@ -50,7 +51,7 @@ describe("<XrayStatus />", () => {
   const addressLine2 = "Apt 31";
   const addressZipCode = "12345";
 
-  it("pre populates fields from xray registration facility details if available", () => {
+  it("pre populates fields from xray registration facility details if available", async () => {
     renderComponent({
       xrayRegistrationData: {
         facilityDetails: {
@@ -61,14 +62,16 @@ describe("<XrayStatus />", () => {
         },
       },
     });
-    expect(getBusinessNameField().value).toBe("Brick and Mortar Store");
-    expect(getAddressLine1Field().value).toBe(addressLine1);
-    expect(getAddressLine2Field().value).toBe(addressLine2);
-    expect(getZipCodeField().value).toBe(addressZipCode);
+    await waitFor(() => {
+      expect(getBusinessNameField().value).toBe("Brick and Mortar Store");
+      expect(getAddressLine1Field().value).toBe(addressLine1);
+      expect(getAddressLine2Field().value).toBe(addressLine2);
+      expect(getZipCodeField().value).toBe(addressZipCode);
+    });
   });
 
   describe("xray registration facility details are undefined", () => {
-    it("pre populates the various fields from formationFormData when formation is succesful", () => {
+    it("pre populates the various fields from formationFormData when formation is succesful", async () => {
       renderComponent({
         xrayRegistrationData: {
           facilityDetails: undefined,
@@ -83,13 +86,15 @@ describe("<XrayStatus />", () => {
           }),
         }),
       });
-      expect(getBusinessNameField().value).toBe("Formed Business Name");
-      expect(getAddressLine1Field().value).toBe(addressLine1);
-      expect(getAddressLine2Field().value).toBe(addressLine2);
-      expect(getZipCodeField().value).toBe(addressZipCode);
+      await waitFor(() => {
+        expect(getBusinessNameField().value).toBe("Formed Business Name");
+        expect(getAddressLine1Field().value).toBe(addressLine1);
+        expect(getAddressLine2Field().value).toBe(addressLine2);
+        expect(getZipCodeField().value).toBe(addressZipCode);
+      });
     });
 
-    it("pre populates the businessName from profileData and addressData from formationFormData if formation isn't succesful", () => {
+    it("pre populates the businessName from profileData and addressData from formationFormData if formation isn't succesful", async () => {
       renderComponent({
         xrayRegistrationData: {
           facilityDetails: undefined,
@@ -107,10 +112,12 @@ describe("<XrayStatus />", () => {
           businessName: "Business Name in Profile",
         }),
       });
-      expect(getBusinessNameField().value).toBe("Business Name in Profile");
-      expect(getAddressLine1Field().value).toBe(addressLine1);
-      expect(getAddressLine2Field().value).toBe(addressLine2);
-      expect(getZipCodeField().value).toBe(addressZipCode);
+      await waitFor(() => {
+        expect(getBusinessNameField().value).toBe("Business Name in Profile");
+        expect(getAddressLine1Field().value).toBe(addressLine1);
+        expect(getAddressLine2Field().value).toBe(addressLine2);
+        expect(getZipCodeField().value).toBe(addressZipCode);
+      });
     });
   });
 

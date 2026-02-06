@@ -7,7 +7,7 @@ import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { configureAmplify, triggerSignOut } from "@/lib/auth/sessionHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   hasError?: boolean;
@@ -39,7 +39,7 @@ export const LoadingPageComponent = ({
     ),
   };
 
-  const renderErrorState = (): JSX.Element => {
+  const renderErrorState = (): ReactNode => {
     const titleMessage = isLinkingError
       ? Config.loginSupportPage.unlinkedAccount
       : Config.loginSupportPage.havingTrouble;

@@ -8,10 +8,10 @@ import { ReactElement, useState } from "react";
 const useStylesBootstrap = makeStyles((theme: Theme) => {
   return {
     arrow: {
-      color: theme.palette.common.black,
+      color: theme.palette?.common?.black ?? "#000",
     },
     tooltip: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: theme.palette?.common?.black ?? "#000",
       fontSize: "1em",
       padding: ".5em .75em",
     },
@@ -33,11 +33,13 @@ export const ArrowTooltip = (props: TooltipProps): ReactElement => {
             <Tooltip
               arrow
               enterTouchDelay={0}
+              enterDelay={process.env.NODE_ENV === "test" ? 0 : undefined}
               classes={classes}
               onOpen={analytics.event.tooltip.mouseover.view_tooltip}
               PopperProps={{
                 disablePortal: true,
               }}
+              TransitionProps={{ timeout: process.env.NODE_ENV === "test" ? 0 : undefined }}
               onClose={(): void => setOpen(false)}
               open={open}
               disableFocusListener
@@ -57,8 +59,10 @@ export const ArrowTooltip = (props: TooltipProps): ReactElement => {
         <Tooltip
           arrow
           enterTouchDelay={0}
+          enterDelay={process.env.NODE_ENV === "test" ? 0 : undefined}
           classes={classes}
           {...props}
+          TransitionProps={{ timeout: process.env.NODE_ENV === "test" ? 0 : undefined }}
           onOpen={analytics.event.tooltip.mouseover.view_tooltip}
         />
       )}

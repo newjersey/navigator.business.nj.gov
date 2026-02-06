@@ -1,7 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   disabled?: boolean;
@@ -17,11 +17,24 @@ interface Props {
 }
 
 export const NavBarDesktopDropDown = (props: Props): ReactElement => {
+  const {
+    disabled,
+    anchorRef,
+    open,
+    textColor,
+    menuButtonTitle,
+    dropDownTitle,
+    setOpen,
+    handleClose,
+    icon,
+    subMenuElement,
+  } = props;
+
   const toggleDropdown = (): void => {
-    if (!props.open) {
+    if (!open) {
       analytics.event.account_name.click.expand_account_menu();
     }
-    props.setOpen((prevOpen) => {
+    setOpen((prevOpen) => {
       return !prevOpen;
     });
   };
@@ -29,7 +42,7 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
   function handleListKeyDown(event: React.KeyboardEvent): void {
     if (event.key === "Tab") {
       event.preventDefault();
-      props.handleClose();
+      handleClose();
     }
   }
 
@@ -38,24 +51,24 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
       <button
         data-testid="nav-bar-desktop-dropdown-button"
         className="border-2px border-solid radius-pill border-base-lighter bg-white-transparent"
-        ref={props.anchorRef}
-        aria-controls={props.open ? "menu-list-grow" : undefined}
+        ref={anchorRef}
+        aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
         onClick={toggleDropdown}
-        disabled={props.disabled}
+        disabled={disabled}
       >
-        <div className={`text-bold text-${props.textColor} flex flex-align-center`}>
-          {props.icon}
+        <div className={`text-bold text-${textColor} flex flex-align-center`}>
+          {icon}
           <div className="text-base-darkest truncate-long-business-names_NavBarDesktop">
-            {props.menuButtonTitle}
+            {menuButtonTitle}
           </div>
-          {!props.disabled && <Icon className="usa-icon--size-3" iconName="arrow_drop_down" />}
+          {!disabled && <Icon className="usa-icon--size-3" iconName="arrow_drop_down" />}
         </div>
       </button>
 
       <Popper
-        open={props.open}
-        anchorEl={props.anchorRef.current}
+        open={open}
+        anchorEl={(): HTMLElement => anchorRef.current as HTMLElement}
         role={undefined}
         transition
         disablePortal={true}
@@ -71,7 +84,7 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
           },
         ]}
       >
-        {({ TransitionProps, placement }): JSX.Element => {
+        {({ TransitionProps, placement }): ReactNode => {
           return (
             <Grow
               {...TransitionProps}
@@ -80,10 +93,10 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={props.handleClose}>
+                <ClickAwayListener onClickAway={handleClose}>
                   <div>
                     <MenuList
-                      autoFocusItem={props.open}
+                      autoFocusItem={open}
                       variant={"selectedMenu"}
                       id="menu-list-grow"
                       onKeyDown={handleListKeyDown}
@@ -94,10 +107,10 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
                         className={"display-flex padding-y-1 menu-item-title"}
                         disabled={true}
                       >
-                        <div className="text-bold">{props.dropDownTitle}</div>
+                        <div className="text-bold">{dropDownTitle}</div>
                       </MenuItem>
                       <hr className="margin-0 hr-2px" key="name-break" />
-                      {props.subMenuElement}
+                      {subMenuElement}
                     </MenuList>
                   </div>
                 </ClickAwayListener>

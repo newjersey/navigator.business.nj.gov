@@ -18,13 +18,24 @@ describe("Tax Clearance [feature] [all] [group5]", () => {
 
   beforeEach(() => {
     cy.loginByCognitoApi();
+    // Generate a unique 12-digit Tax ID for each test run to avoid conflicts
+    // Format: 9 random digits + 3 random digits (standard NJ Tax ID format)
+    // Wiremock stub accepts any Tax ID matching pattern /^[0-9]{9,12}$/
+    const randomTaxId = Math.floor(Math.random() * 1000000000)
+      .toString()
+      .padStart(9, "0");
+    const randomLocation = Math.floor(Math.random() * 1000)
+      .toString()
+      .padStart(3, "0");
+    const uniqueTaxPayerId = randomTaxId + randomLocation;
+
     taxFormData = {
       businessName: "Tax Clearance Business",
       addressLine1: "123 Agent Main St.",
       addressState: "NJ",
       addressCity: "Teaneck",
       addressZipCode: "07666",
-      taxPayerId: "777777777771",
+      taxPayerId: uniqueTaxPayerId,
       taxPayerPin: "3889",
     };
   });
@@ -40,12 +51,26 @@ describe("Tax Clearance [feature] [all] [group5]", () => {
     cy.get('[data-testid="anytimeActionSearch"]').click();
     cy.get('[data-testid="option"]').contains("Get a Tax Clearance Certificate").click();
 
-    // Inside AA task
+    // Inside AA task - Requirements screen
     cy.get('[data-testid="cta-primary-1"]').click();
+
+    // Now on Check Eligibility screen
+    cy.contains("Check Eligibility").should("be.visible");
+
+    // Ensure no error is displayed initially
+    cy.get('[data-testid="tax-clearance-error-alert"]').should("not.exist");
+
+    // Fill out agency dropdown
     cy.get('[id="mui-component-select-tax-clearance-certificate-agency-dropdown"]').click();
     cy.get('[data-testid="newJerseyBoardOfPublicUtilities"]').click();
 
+    // Fill out the form
     fillOutTaxClearanceForm(taxFormData);
+
+    // Verify no error after filling form
+    cy.get('[data-testid="tax-clearance-error-alert"]').should("not.exist");
+
+    // Complete the flow
     completeTaxClearanceFlow();
   });
 });
