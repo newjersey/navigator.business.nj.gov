@@ -4658,7 +4658,7 @@ __metadata:
     rimraf: 6.1.2
     serverless-http: 3.2.0
     simple-oauth2: 5.1.0
-    supertest: 6.3.4
+    supertest: 7.2.2
     ts-jest: 29.4.5
     ts-loader: 9.5.4
     ts-node: 10.9.2
@@ -4895,7 +4895,7 @@ __metadata:
     slick-carousel: 1.8.1
     storybook: 7.6.21
     style-loader: 4.0.0
-    supertest: 6.3.4
+    supertest: 7.2.2
     swr: 1.3.0
     ts-jest: 29.4.5
     ts-loader: 9.5.4
@@ -17996,7 +17996,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"component-emitter@npm:^1.3.0":
+"component-emitter@npm:^1.3.1":
   version: 1.3.1
   resolution: "component-emitter@npm:1.3.1"
   checksum: 94550aa462c7bd5a61c1bc480e28554aa306066930152d1b1844a0dd3845d4e5db7e261ddec62ae184913b3e59b55a2ad84093b9d3596a8f17c341514d6c483d
@@ -18273,6 +18273,13 @@ __metadata:
   version: 1.0.6
   resolution: "cookie-signature@npm:1.0.6"
   checksum: f4e1b0a98a27a0e6e66fd7ea4e4e9d8e038f624058371bf4499cfcd8f3980be9a121486995202ba3fca74fbed93a407d6d54d43a43f96fd28d0bd7a06761591a
+  languageName: node
+  linkType: hard
+
+"cookie-signature@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "cookie-signature@npm:1.2.2"
+  checksum: 1ad4f9b3907c9f3673a0f0a07c0a23da7909ac6c9204c5d80a0ec102fe50ccc45f27fdf496361840d6c132c5bb0037122c0a381f856d070183d1ebe3e5e041ff
   languageName: node
   linkType: hard
 
@@ -22712,7 +22719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0, form-data@npm:^4.0.4, form-data@npm:~4.0.4":
+"form-data@npm:^4.0.0, form-data@npm:^4.0.4, form-data@npm:^4.0.5, form-data@npm:~4.0.4":
   version: 4.0.5
   resolution: "form-data@npm:4.0.5"
   dependencies:
@@ -22743,15 +22750,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"formidable@npm:^2.1.2":
-  version: 2.1.5
-  resolution: "formidable@npm:2.1.5"
+"formidable@npm:^3.5.4":
+  version: 3.5.4
+  resolution: "formidable@npm:3.5.4"
   dependencies:
     "@paralleldrive/cuid2": ^2.2.2
     dezalgo: ^1.0.4
     once: ^1.4.0
-    qs: ^6.11.0
-  checksum: b7a38dbf3f2d32858e9199f9e1597038d22854dc7f3120e30a05097fd538c3a5ebdfcb1b14ed3d68139f592176e64a3544aa14b5be624e26fe5b383a5c096a74
+  checksum: bdb8ecd8af16d40e7e4c06a9dbaf0394fe9cabb7a4cef6f68512ce6fe7933f5a9c588dfc5c1d92cbf83a9e4764f5216064d955669530d3d23ca816e93ea62989
   languageName: node
   linkType: hard
 
@@ -32216,7 +32222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.10.0, qs@npm:^6.11.0, qs@npm:^6.12.3, qs@npm:~6.14.1":
+"qs@npm:^6.10.0, qs@npm:^6.12.3, qs@npm:^6.14.1, qs@npm:~6.14.1":
   version: 6.14.1
   resolution: "qs@npm:6.14.1"
   dependencies:
@@ -34460,7 +34466,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.7.3, semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0, semver@npm:^7.7.1, semver@npm:^7.7.2, semver@npm:^7.7.3":
+"semver@npm:7.7.3, semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0, semver@npm:^7.7.1, semver@npm:^7.7.2, semver@npm:^7.7.3":
   version: 7.7.3
   resolution: "semver@npm:7.7.3"
   bin:
@@ -35937,31 +35943,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"superagent@npm:^8.1.2":
-  version: 8.1.2
-  resolution: "superagent@npm:8.1.2"
+"superagent@npm:^10.3.0":
+  version: 10.3.0
+  resolution: "superagent@npm:10.3.0"
   dependencies:
-    component-emitter: ^1.3.0
+    component-emitter: ^1.3.1
     cookiejar: ^2.1.4
-    debug: ^4.3.4
+    debug: ^4.3.7
     fast-safe-stringify: ^2.1.1
-    form-data: ^4.0.0
-    formidable: ^2.1.2
+    form-data: ^4.0.5
+    formidable: ^3.5.4
     methods: ^1.1.2
     mime: 2.6.0
-    qs: ^6.11.0
-    semver: ^7.3.8
-  checksum: f3601c5ccae34d5ba684a03703394b5d25931f4ae2e1e31a1de809f88a9400e997ece037f9accf148a21c408f950dc829db1e4e23576a7f9fe0efa79fd5c9d2f
+    qs: ^6.14.1
+  checksum: a29406b60522ab195cb7e743eec4eef8fc36ae5bdeeafa70328c41eb5f177cbdf31b43fcc415bfcc568547b74500f8847608e69b383ffb01421d9b018ec4b8dd
   languageName: node
   linkType: hard
 
-"supertest@npm:6.3.4":
-  version: 6.3.4
-  resolution: "supertest@npm:6.3.4"
+"supertest@npm:7.2.2":
+  version: 7.2.2
+  resolution: "supertest@npm:7.2.2"
   dependencies:
+    cookie-signature: ^1.2.2
     methods: ^1.1.2
-    superagent: ^8.1.2
-  checksum: 875c6fa7940f21e5be9bb646579cdb030d4057bf2da643e125e1f0480add1200395d2b17e10b8e54e1009efc63e047422501e9eb30e12828668498c0910f295f
+    superagent: ^10.3.0
+  checksum: daf7be09df5091a0f5aec5c52780aa64bc3d2cc0b5e14aee079dbe6c6e7a8896f630591a48fd714f247d3688eb7b3d8e16af5ed2093c78722296bb93df1ef565
   languageName: node
   linkType: hard
 
