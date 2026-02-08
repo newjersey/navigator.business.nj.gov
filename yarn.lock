@@ -4574,7 +4574,7 @@ __metadata:
   dependencies:
     "@jest/globals": ^30.1.2
     "@types/jest": 29.5.14
-    "@types/node": 20.19.17
+    "@types/node": 20.19.32
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
     aws-cdk: 2.1033.0
@@ -4623,7 +4623,7 @@ __metadata:
     "@types/jest": 29.5.14
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
-    "@types/node": 20.19.17
+    "@types/node": 20.19.32
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.3
     "@types/xml2js": 0.4.14
@@ -4679,7 +4679,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
     "@businessnjgovnavigator/shared": "*"
-    "@types/node": 20.19.17
+    "@types/node": 20.19.32
     "@vitest/coverage-v8": 2.1.8
     cross-env: 10.1.0
     cspell: 9.3.2
@@ -4786,7 +4786,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 20.19.17
+    "@types/node": 20.19.32
     "@types/react": 18.3.27
     "@types/react-dom": 18.3.7
     "@types/react-slick": 0.23.13
@@ -4925,7 +4925,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.14
-    "@types/node": 20.19.17
+    "@types/node": 20.19.32
     "@types/react": 18.3.27
     "@types/uuid": 10.0.0
     "@typescript-eslint/eslint-plugin": 7.18.0
@@ -5003,7 +5003,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 20.19.17
+    "@types/node": 20.19.32
     "@types/react": 18.3.27
     "@types/react-dom": 18.3.7
     "@types/react-slick": 0.23.13
@@ -13843,12 +13843,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.19.17":
-  version: 20.19.17
-  resolution: "@types/node@npm:20.19.17"
+"@types/node@npm:20.19.32":
+  version: 20.19.32
+  resolution: "@types/node@npm:20.19.32"
   dependencies:
     undici-types: ~6.21.0
-  checksum: facdb62f39dc01fda2822cda491bd6826dd10e5d9ab83d482e0b032a8fc28ad7e70345b20f6f0f284c9fdf8873d83c7be5ce55e19425cd973beb84f2f7fb0862
+  checksum: 9688296b86751eae3ec5aff5bcff5cbbbfc51280e1d391f762a01710073c4fa8910f15df08bc494921570508801701dde5d54df300383623ca12fc4a7d945506
   languageName: node
   linkType: hard
 
