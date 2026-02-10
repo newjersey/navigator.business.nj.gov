@@ -26,7 +26,7 @@ const generateSitemap = (): void => {
         <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
         <changefreq>${url.changefreq}</changefreq>
         <priority>${url.priority}</priority>
-      </url>`
+      </url>`,
       )
       .join("")}
   </urlset>`;

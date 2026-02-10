@@ -7,6 +7,16 @@ process.env.REDIRECT_URL = "http://www.example.com";
 
 global.scrollTo = jest.fn();
 global.gtag = jest.fn();
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({ items: [], pagination: { total: 0 } }),
+    headers: new Headers(),
+  }),
+);
+
+// Prevent process.exit from killing the test runner
+process.exit = jest.fn();
 
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;

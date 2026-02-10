@@ -1,13 +1,37 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const fundingDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/fundings`
-);
+const fundingDir = path.resolve(`${__dirname}/../../../content/src/fundings`);
 
-const convertFundingMd = (oppMdContents, filename) => {
+export interface Funding {
+  id: string;
+  name: string;
+  filename: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  fundingType: string;
+  programPurpose: string;
+  agency: string[];
+  agencyContact: string;
+  publishStageArchive: string;
+  openDate: string;
+  dueDate: string;
+  status: string;
+  programFrequency: string;
+  businessStage: string;
+  employeesRequired: string;
+  homeBased: string;
+  certifications?: string[];
+  preferenceForOpportunityZone: string;
+  county: string;
+  sector: string[];
+  contentMd: string;
+  [key: string]: unknown;
+}
+
+const convertFundingMd = (oppMdContents: string, filename: string): Funding => {
   const matterResult = matter(oppMdContents);
   const oppGrayMatter = matterResult.data;
 
@@ -15,17 +39,17 @@ const convertFundingMd = (oppMdContents, filename) => {
     contentMd: matterResult.content.replaceAll('"', '""'),
     filename,
     ...oppGrayMatter,
-  };
+  } as Funding;
 };
 
-export const loadAllFundings = () => {
+export const loadAllFundings = (): Funding[] => {
   const fileNames = fs.readdirSync(fundingDir);
   return fileNames.map((fileName) => {
     return loadFundingByFileName(fileName);
   });
 };
 
-const loadFundingByFileName = (fileName) => {
+const loadFundingByFileName = (fileName: string): Funding => {
   const fullPath = path.join(fundingDir, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -33,7 +57,7 @@ const loadFundingByFileName = (fileName) => {
   return convertFundingMd(fileContents, fileNameWithoutMd);
 };
 
-export const exportFundings = () => {
+export const exportFundings = (): void => {
   const fundings = loadAllFundings();
   let csvContent = `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,certifications,preferenceForOpportunityZone,county,sector,contentMd\n`;
 
@@ -53,13 +77,10 @@ export const exportFundings = () => {
   fs.writeFileSync("fundings.csv", csvContent);
 };
 
-// eslint-disable-next-line no-undef
 if (!process.argv.some((i) => i.includes("fundingExport")) || process.env.NODE_ENV === "test") {
-  // eslint-disable-next-line no-undef
+  // Skip execution
 } else if (process.argv.some((i) => i.includes("--export"))) {
   exportFundings();
-  // eslint-disable-next-line unicorn/no-process-exit, no-undef
-  process.exit(1);
 } else {
   console.log("Expected at least one argument! Use one of the following: ");
   console.log("--export = exports fundings as csv");
