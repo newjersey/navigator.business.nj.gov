@@ -9,6 +9,7 @@ export interface Industry {
   readonly canHavePermanentLocation: boolean;
   readonly additionalSearchTerms?: string;
   readonly defaultSectorId?: string;
+  readonly webflowId?: string;
   readonly roadmapSteps: AddOn[];
   readonly nonEssentialQuestionsIds: string[];
   readonly modifications?: TaskModification[];
@@ -62,6 +63,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       roadmapSteps: [],
       nonEssentialQuestionsIds: [],
       naicsCodes: "",
+      webflowId: "",
       isEnabled: false,
       industryOnboardingQuestions: {
         isProvidesStaffingServicesApplicable: undefined,

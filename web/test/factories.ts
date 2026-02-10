@@ -62,6 +62,8 @@ import {
   TaskWithoutLinks,
   XrayRenewalCalendarEventType,
 } from "@businessnjgovnavigator/shared/types";
+import { WebflowItem } from "../src/scripts/webflow/types";
+import type { Funding as FundingExport } from "../src/scripts/fundingExport";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -598,3 +600,301 @@ export const generateCrtkData = (overrides?: Partial<CrtkData>): CrtkData => ({
   crtkEntry: {},
   ...overrides,
 });
+
+export interface MockIndustry {
+  id: string;
+  name: string;
+  webflowId?: string;
+  additionalSearchTerms?: string;
+  description: string;
+  isEnabled: boolean;
+}
+
+export interface WebflowIndustryFieldData {
+  name: string;
+  slug: string;
+  additionalsearchterms?: string;
+  description: string;
+  industryquerystring: string;
+}
+
+export interface WebflowFundingFieldData {
+  "program-overview": string;
+  eligibility: string;
+  benefit: string;
+  "learn-more-url": string;
+  "certifications-2": string[];
+  agency: string;
+  "application-close-date": string | null;
+  "start-date": string | null;
+  name: string;
+  slug: string;
+  "last-updated": string;
+  "funding-status": string;
+  "funding-type": string;
+  "industry-reference": string[];
+}
+
+export interface WebflowSectorFieldData {
+  name: string;
+  slug: string;
+  rank?: number;
+}
+
+export interface WebflowLicenseFieldData {
+  name: string;
+  slug: string;
+  website: string;
+  "call-to-action-text": string;
+  "department-3": string;
+  division: string;
+  "department-phone-2": string;
+  "license-certification-classification": string;
+  "form-name": string;
+  "primary-industry": string;
+  content: string;
+  "last-updated": string;
+  "license-classification"?: string;
+  "summary-description": string;
+}
+
+export interface MockLicense {
+  id: string;
+  webflowId?: string;
+  urlSlug: string;
+  name: string;
+  displayname: string;
+  webflowName?: string;
+  filename: string;
+  callToActionLink?: string;
+  callToActionText?: string;
+  agencyId?: string;
+  agencyAdditionalContext?: string;
+  divisionPhone?: string;
+  industryId?: string;
+  webflowType?: string;
+  licenseCertificationClassification: string;
+  summaryDescriptionMd?: string;
+  contentMd: string;
+  syncToWebflow?: boolean | string;
+  formName?: string;
+  webflowIndustry?: string;
+  [key: string]: unknown;
+}
+
+export interface MockSector {
+  id: string;
+  name: string;
+}
+
+export const generateMockIndustry = (overrides?: Partial<MockIndustry>): MockIndustry => {
+  const id = randomInt();
+  const industryId = `industry-${id}`;
+  const webflowId = `webflow-${randomInt()}`;
+  return {
+    id: industryId,
+    name: `Industry ${randomInt()}`,
+    webflowId,
+    additionalSearchTerms: `term-${randomInt()}, term-${randomInt()}, term-${randomInt()}`,
+    description: `Industry description ${randomInt()}`,
+    isEnabled: true,
+    ...overrides,
+  };
+};
+
+export const generateWebflowIndustry = (
+  overrides?: Partial<Omit<WebflowItem<WebflowIndustryFieldData>, "fieldData">> & {
+    fieldData?: Partial<WebflowIndustryFieldData>;
+  },
+): WebflowItem<WebflowIndustryFieldData> => {
+  const webflowId = randomInt();
+  const industryNum = randomInt();
+  const name = `Industry ${industryNum}`;
+  const slug = `industry-${industryNum}`;
+  return {
+    id: overrides?.id ?? `webflow-${webflowId}`,
+    fieldData: {
+      name,
+      slug,
+      additionalsearchterms: `term-${randomInt()}, term-${randomInt()}, term-${randomInt()}`,
+      description: `Industry description ${randomInt()}`,
+      industryquerystring: slug,
+      ...overrides?.fieldData,
+    },
+  };
+};
+
+export const generateWebflowFunding = (
+  overrides?: Partial<Omit<WebflowItem<WebflowFundingFieldData>, "fieldData">> & {
+    fieldData?: Partial<WebflowFundingFieldData>;
+  },
+): WebflowItem<WebflowFundingFieldData> => {
+  const webflowId = randomInt();
+  const fundingNum = randomInt();
+  const name = `Funding ${fundingNum}`;
+  const slug = `funding-${fundingNum}`;
+  return {
+    id: overrides?.id ?? `webflow-${webflowId}`,
+    fieldData: {
+      "program-overview": `Program overview ${randomInt()}`,
+      eligibility: `Eligibility ${randomInt()}`,
+      benefit: `Benefits ${randomInt()}`,
+      "learn-more-url": `https://example-${randomInt()}.com`,
+      "certifications-2": [],
+      agency: `agency-${randomInt()}`,
+      "application-close-date": null,
+      "start-date": null,
+      name,
+      slug,
+      "last-updated": getCurrentDateISOString(),
+      "funding-status": `status-${randomInt()}`,
+      "funding-type": `type-${randomInt()}`,
+      "industry-reference": [],
+      ...overrides?.fieldData,
+    },
+  };
+};
+
+export const generateWebflowSector = (
+  overrides?: Partial<Omit<WebflowItem<WebflowSectorFieldData>, "fieldData">> & {
+    fieldData?: Partial<WebflowSectorFieldData>;
+  },
+): WebflowItem<WebflowSectorFieldData> => {
+  const sectorId = randomInt();
+  const sectorNum = randomInt();
+  const name = `Sector ${sectorNum}`;
+  const slug = `sector-${sectorNum}`;
+  return {
+    id: overrides?.id ?? `sector-${sectorId}`,
+    fieldData: {
+      name,
+      slug,
+      ...overrides?.fieldData,
+    },
+  };
+};
+
+export const generateMockFunding = (overrides?: Partial<FundingExport>): FundingExport => {
+  const fundingNum = randomInt();
+  const fundingId = `funding-${fundingNum}`;
+  const validAgencies = [
+    "njeda",
+    "njdol",
+    "njdep",
+    "njdot",
+    "nj-public-utilities",
+    "nj-treasury",
+    "nj-bac",
+    "invest-newark",
+  ];
+  const validSectors = [
+    "clean-energy",
+    "technology",
+    "life-sciences",
+    "advanced-manufacturing",
+    "retail",
+    "restaurant",
+    "home-contractor",
+    "cosmetology",
+    "e-commerce",
+  ];
+  return {
+    id: fundingId,
+    name: `Funding ${randomInt()}`,
+    filename: fundingId,
+    urlSlug: fundingId,
+    callToActionLink: `https://example-${randomInt()}.com`,
+    callToActionText: `Apply ${randomInt()}`,
+    fundingType: randomFundingType(),
+    programPurpose: `Purpose ${randomInt()}`,
+    agency: [validAgencies[randomInt() % validAgencies.length]],
+    agencyContact: `contact-${randomInt()}@example.com`,
+    publishStageArchive: "",
+    openDate: `2024-${(randomInt() % 12) + 1}-01`,
+    dueDate: `2099-${(randomInt() % 12) + 1}-31`,
+    status: randomFundingStatus(),
+    programFrequency: randomFundingProgramFrequency(),
+    businessStage: randomFundingBusinessStage(),
+    employeesRequired: `${randomInt() % 100}`,
+    homeBased: randomFundingHomeBased(),
+    certifications: [randomFundingCertification()],
+    preferenceForOpportunityZone: randomInt() % 2 ? "yes" : "no",
+    county: randomCounty(),
+    sector: [validSectors[randomInt() % validSectors.length]],
+    contentMd: `
+## Program Overview
+Program overview ${randomInt()}.
+
+>Eligibility</h3>
+Eligibility ${randomInt()}.
+
+"Benefits"
+Benefits ${randomInt()}.
+`,
+    ...overrides,
+  };
+};
+
+export const generateMockLicense = (overrides?: Partial<MockLicense>): MockLicense => {
+  const licenseNum = randomInt();
+  const licenseId = `license-${licenseNum}`;
+  return {
+    id: licenseId,
+    webflowId: `webflow-${randomInt()}`,
+    urlSlug: `license-slug-${randomInt()}`,
+    name: `License ${randomInt()}`,
+    displayname: `License Display ${randomInt()}`,
+    webflowName: `Webflow License ${randomInt()}`,
+    filename: `license-${randomInt()}`,
+    callToActionLink: `https://example-${randomInt()}.com/apply`,
+    callToActionText: `Apply ${randomInt()}`,
+    agencyId: `agency-${randomInt()}`,
+    agencyAdditionalContext: `Context ${randomInt()}`,
+    divisionPhone: `555-${randomInt(4)}`,
+    industryId: `industry-${randomInt()}`,
+    webflowType: `license-type-${randomInt()}`,
+    licenseCertificationClassification: randomElementFromArray(["license", "certification"]),
+    summaryDescriptionMd: `Summary ${randomInt()}`,
+    contentMd: `## License Content ${randomInt()}\n\nContent ${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateWebflowLicense = (
+  overrides?: Partial<Omit<WebflowItem<WebflowLicenseFieldData>, "fieldData">> & {
+    fieldData?: Partial<WebflowLicenseFieldData>;
+  },
+): WebflowItem<WebflowLicenseFieldData> => {
+  const webflowId = randomInt();
+  const licenseNum = randomInt();
+  const name = `License ${licenseNum}`;
+  const slug = `license-${licenseNum}`;
+  return {
+    id: overrides?.id ?? `webflow-${webflowId}`,
+    fieldData: {
+      name,
+      slug,
+      website: `https://example-${randomInt()}.com`,
+      "call-to-action-text": `Apply ${randomInt()}`,
+      "department-3": `Department ${randomInt()}`,
+      division: `Division ${randomInt()}`,
+      "department-phone-2": `555-${randomInt(4)}`,
+      "license-certification-classification": randomElementFromArray(["license", "certification"]),
+      "form-name": `form-${randomInt()}`,
+      "primary-industry": `Industry ${randomInt()}`,
+      content: `Content ${randomInt()}`,
+      "last-updated": getCurrentDateISOString(),
+      "summary-description": `Summary ${randomInt()}`,
+      ...overrides?.fieldData,
+    },
+  };
+};
+
+export const generateMockSector = (overrides?: Partial<MockSector>): MockSector => {
+  const sectorNum = randomInt();
+  return {
+    id: `sector-${sectorNum}`,
+    name: `Sector ${randomInt()}`,
+    ...overrides,
+  };
+};
