@@ -134,7 +134,7 @@ const airtableSelectAll = () => {
           } else {
             resolve(all);
           }
-        }
+        },
       );
   });
 };

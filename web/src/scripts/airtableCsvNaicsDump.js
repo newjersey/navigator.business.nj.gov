@@ -43,7 +43,11 @@ const sixDigitRenameCodes = [
   { name: "FourDigitDescription", fieldName: "4 digit description" },
   { name: "FourDigitCode", fieldName: "4 digit code (from 4 digit description)" },
   { name: "TwoDigitDescription", fieldName: "2 digit (from 4 digit description)" },
-  { name: "TwoDigitCode", fieldName: "2 digit code (from 4 digit description)", convert: DigitRangeToArray },
+  {
+    name: "TwoDigitCode",
+    fieldName: "2 digit code (from 4 digit description)",
+    convert: DigitRangeToArray,
+  },
   {
     name: "industryIds",
     fieldName: "BFS Industries",

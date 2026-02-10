@@ -52,17 +52,23 @@ const airtableToOpportunity = async (airtableOpp) => {
     fundingType: convertFundingType(airtableOpp["Filter: Funding Type"] ?? ""),
     benefits: airtableOpp["Benefits Summary (Public)"] ?? "",
     eligibility: airtableOpp["Eligibility- (Public)"] ?? "",
-    publishStageArchive: airtableOpp["Publish/Stage/Archive"] ? airtableOpp["Publish/Stage/Archive"][0] : "",
+    publishStageArchive: airtableOpp["Publish/Stage/Archive"]
+      ? airtableOpp["Publish/Stage/Archive"][0]
+      : "",
     industry: airtableOpp["Filter: Industry"]
       ? await Promise.all(airtableOpp["Filter: Industry"].map(getIndustryById))
       : [],
-    agency: airtableOpp["Agency"] ? await Promise.all(airtableOpp["Agency"].map(getAgencyById)) : [],
+    agency: airtableOpp["Agency"]
+      ? await Promise.all(airtableOpp["Agency"].map(getAgencyById))
+      : [],
     openDate: airtableOpp["Open Date"] ?? "",
     dueDate: airtableOpp["Due Date"] ?? "",
     status: convertStatus(airtableOpp["Filter: Status (open// closed// ...)"]),
     programFrequency: convertProgramFrequency(airtableOpp["Filter: Program Frequency"] ?? ""),
     businessStage: convertBusinessStage(airtableOpp["Filter: Business Stage"] ?? ""),
-    employeesRequired: convertemployeesRequired(airtableOpp["Filter: Business Size (Employees)"] ?? ""),
+    employeesRequired: convertemployeesRequired(
+      airtableOpp["Filter: Business Size (Employees)"] ?? "",
+    ),
     homeBased: convertHomeBasedValues(airtableOpp["Filter: Home Base Businesses"] ?? ""),
     mwvb: convertMWVB(airtableOpp["Filter: MWVB"] ?? ""),
     preferenceForOpportunityZone:
@@ -281,7 +287,7 @@ const airtableSelectAll = () => {
           } else {
             resolve(all);
           }
-        }
+        },
       );
   });
 };

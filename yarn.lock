@@ -5446,6 +5446,7 @@ __metadata:
     ts-jest: 29.4.5
     ts-loader: 9.5.4
     ts-node: 10.9.2
+    tsx: 4.21.0
     typescript: 5.9.3
     unified: 10.1.2
     unist-util-visit: 5.0.0
