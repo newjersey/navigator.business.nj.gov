@@ -52,6 +52,7 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
 - [Python 3.13](https://www.python.org/downloads/)
 - [yarn](https://yarnpkg.com/)
 - [wget](https://www.gnu.org/software/wget/)
+- [Java JDK](https://www.oracle.com/java/technologies/downloads/)
 
 **Windows (non-WSL) only**:
 
