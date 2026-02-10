@@ -9,7 +9,7 @@ sectorIds:
   - accommodation-and-food-services
   - digital-and-print-media
   - retail-trade-and-ecommerce
-moveToRecommendedForYouSection: true
+moveToRecommendedForYouSection: false
 urlSlug: resale-tax-certificate
 summaryDescriptionMd: >-
   If your business buys items for resale, you need to complete the Sales Tax

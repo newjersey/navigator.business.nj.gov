@@ -15,6 +15,7 @@ sectorIds:
   - professional-scientific-and-technical-services
   - life-sciences
   - educational-services
+moveToRecommendedForYouSection: true
 urlSlug: rmw-generator-registration-operating
 summaryDescriptionMd: >-
   If your business produces
