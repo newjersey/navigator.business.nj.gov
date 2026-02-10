@@ -1,3 +1,22 @@
+# [2026.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.2.0...v2026.3.0) (2026-02-10)
+
+
+### Bug Fixes
+
+* [AB[#17340](https://github.com/newjersey/navigator.business.nj.gov/issues/17340)] automatic biz name availability search should use formationFormData.businessName ([2916586](https://github.com/newjersey/navigator.business.nj.gov/commit/2916586836c5e1cc7c2abcfae6ecd6d02fe7f16b))
+* **deps:** update dependency @smithy/node-http-handler to v4 ([5bc43f9](https://github.com/newjersey/navigator.business.nj.gov/commit/5bc43f982a5fdf0050f7538d10b2a8fb1eb4c2c3))
+* **deps:** update dependency @smithy/node-http-handler to v4 ([7e16cfe](https://github.com/newjersey/navigator.business.nj.gov/commit/7e16cfe2f6e53f7fdf3602b2ce43f23bebcab79a))
+* **deps:** update dependency helmet to v8 ([a18b534](https://github.com/newjersey/navigator.business.nj.gov/commit/a18b534c8b6889f0967d2be170e0c9f328704a7f))
+* **deps:** update dependency next to v16.1.5 [security] ([1fdd85a](https://github.com/newjersey/navigator.business.nj.gov/commit/1fdd85a8369389d6ed0a2591d2edd45437851d59))
+
+
+### Features
+
+* [AB[#16536](https://github.com/newjersey/navigator.business.nj.gov/issues/16536)] Added CRTK to new industries ([#12455](https://github.com/newjersey/navigator.business.nj.gov/issues/12455)) ([4bf5706](https://github.com/newjersey/navigator.business.nj.gov/commit/4bf57069ffd9542eee7a5953dac60bed1e3eef93))
+* [AB[#16536](https://github.com/newjersey/navigator.business.nj.gov/issues/16536)] Removed CRTK and changed for General Guidance ([#12462](https://github.com/newjersey/navigator.business.nj.gov/issues/12462)) ([e691124](https://github.com/newjersey/navigator.business.nj.gov/commit/e691124a2856a68932c8cc30e12c7b5b059a6962))
+* [AB[#17224](https://github.com/newjersey/navigator.business.nj.gov/issues/17224)] Cypress test for Removing a Business ([e836731](https://github.com/newjersey/navigator.business.nj.gov/commit/e8367315b524241bbaa79c50410c5ee72a6a8125))
+* [AB[#17372](https://github.com/newjersey/navigator.business.nj.gov/issues/17372)] Cspell - do not flag wrapped URLs as misspellings ([cd5b8e5](https://github.com/newjersey/navigator.business.nj.gov/commit/cd5b8e5805e7d2c0d409c9d458d0ce259502c856))
+
 # [2026.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.1.0...v2026.2.0) (2026-02-05)
 
 
