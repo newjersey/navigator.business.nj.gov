@@ -32,6 +32,7 @@ import CigaretteLicenseConfirmationPreview from "@/lib/cms/previews/CigaretteLic
 import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
 import EmergencyTripPermitPreview from "@/lib/cms/previews/EmergencyTripPermitPreview";
+import EmployerRatesPreview from "@/lib/cms/previews/EmployerRatesPreview";
 import FormationDateDeletionModalPreview from "@/lib/cms/previews/FormationDateDeletionModalPreview";
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
@@ -63,7 +64,8 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
-import EmployerRatesPreview from "@/lib/cms/previews/EmployerRatesPreview";
+
+import jsYaml from "js-yaml";
 
 const CMS_CONFIG = {};
 const Loading = (): ReactElement => {
@@ -98,6 +100,15 @@ const CMS = dynamic(
       CMS.registerEditorComponent(MiniCallout);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(IconWidgetEditor);
+      // @ts-expect-error: No type definition available
+      // disables line wrapping in front-matter props
+      CMS.registerCustomFormat("yaml", "yml", {
+        fromFile: (text: string) => jsYaml.load(text),
+        toFile: (value: string) =>
+          jsYaml.dump(value, {
+            lineWidth: -1,
+          }),
+      });
 
       registerPreview(CMS, "tasks", TaskPreview);
       registerPreview(CMS, "license-tasks", TaskPreview);
