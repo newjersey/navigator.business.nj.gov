@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { convertTaskMd } from "../markdownReader";
+import { convertTaskMd } from "@businessnjgovnavigator/shared/markdownReader";
 
 export const loadUrlSlugByFilename = (fileName: string, filingsDirectory: string): string => {
   const fullPath = path.join(filingsDirectory, `${fileName}`);

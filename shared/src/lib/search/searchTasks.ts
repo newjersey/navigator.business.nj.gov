@@ -1,13 +1,13 @@
-import { Industry } from "../../industry";
+import { Industry } from "@businessnjgovnavigator/shared/industry";
 import {
   AddAddOnUsage,
   AddIndustryUsage,
   AddTaskDependencyUsage,
-} from "../../lib/search/usageHelpers";
-import { LookupTaskAgencyById } from "../../taskAgency";
-import { IndustryRoadmap, Task } from "../../types";
-import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+} from "@businessnjgovnavigator/shared/lib/search/usageHelpers";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
+import { IndustryRoadmap, Task } from "@businessnjgovnavigator/shared/types";
+import { convertFileDataToMatchList } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import { FileData, Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 export const searchTasks = (
   tasks: Task[],

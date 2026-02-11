@@ -1,6 +1,6 @@
-import { Step } from "../../types";
-import { findMatchInLabelledText } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import { Step } from "@businessnjgovnavigator/shared/types";
+import { findMatchInLabelledText } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import { FileData, Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 export const searchSteps = (
   steps: Step[],

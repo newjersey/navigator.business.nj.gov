@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { convertPageMetadataMd } from "../markdownReader";
-import { PageMetadata } from "../types/types";
+import { convertPageMetadataMd } from "@businessnjgovnavigator/shared/markdownReader";
+import { PageMetadata } from "@businessnjgovnavigator/shared/types/types";
 
 const pageMetadataLinksDirectory = path.join(
   process.cwd(),

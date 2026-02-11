@@ -1,5 +1,5 @@
-import { ProfileData } from "../profileData";
-import { determineForeignBusinessType } from "./businessPersonaHelpers";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { determineForeignBusinessType } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 
 export const nexusLocationInNewJersey = (profileData: ProfileData): boolean | undefined => {
   const isForeignBusiness = profileData.businessPersona === "FOREIGN";

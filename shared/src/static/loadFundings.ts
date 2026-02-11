@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { convertFundingMd } from "../markdownReader";
-import { Funding } from "../types/types";
-import { getFileNameByUrlSlug } from "./helpers";
+import { convertFundingMd } from "@businessnjgovnavigator/shared/markdownReader";
+import { Funding } from "@businessnjgovnavigator/shared/types/types";
+import { getFileNameByUrlSlug } from "@businessnjgovnavigator/shared/static/helpers";
 
 const fundingDirectory = path.join(process.cwd(), "..", "content", "src", "fundings");
 

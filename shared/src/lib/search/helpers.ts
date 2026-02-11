@@ -4,7 +4,7 @@ import {
   LabelledContentList,
   Match,
   MatchComparitor,
-} from "./typesForSearch";
+} from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 const removeMarkdownStyling = (markdownInput: string | undefined): string | undefined => {
   if (markdownInput === undefined) {

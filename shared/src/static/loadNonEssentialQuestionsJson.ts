@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { NonEssentialQuestion } from "../types";
+import { NonEssentialQuestion } from "@businessnjgovnavigator/shared/types";
 
 const NonEssentialQuestionsJsonPathTest = path.join(
   process.cwd(),

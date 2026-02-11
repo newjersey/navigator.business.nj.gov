@@ -1,5 +1,5 @@
 import matter from "gray-matter";
-import { LicenseName } from "./license";
+import { LicenseName } from "@businessnjgovnavigator/shared/license";
 import {
   Certification,
   ContextualInfo,
@@ -22,7 +22,7 @@ import {
   TaxFilingMethod,
   WebflowLicense,
   XrayRenewalCalendarEventType,
-} from "./types/types";
+} from "@businessnjgovnavigator/shared/types/types";
 
 export const convertContextualInfoMd = (contentMdContents: string): ContextualInfo => {
   const matterResult = matter(contentMdContents);

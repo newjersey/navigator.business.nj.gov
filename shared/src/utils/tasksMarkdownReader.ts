@@ -1,12 +1,12 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { LicenseName } from "../license";
+import { LicenseName } from "@businessnjgovnavigator/shared/license";
 import {
   AnytimeActionCategoryMapping,
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
-} from "../types/types";
+} from "@businessnjgovnavigator/shared/types/types";
 
 export const convertAnytimeActionTaskMd = (
   anytimeActionTaskMdContents: string,

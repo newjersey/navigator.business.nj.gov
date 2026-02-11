@@ -1,4 +1,4 @@
-import { TaxFilingCalendarEvent } from "./calendarEvent";
+import { TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared/calendarEvent";
 
 export type TaxFilingLookupState = "SUCCESS" | "FAILED" | "API_ERROR" | "PENDING" | "UNREGISTERED";
 export type TaxFilingOnboardingState = "SUCCESS" | "FAILED" | "API_ERROR";

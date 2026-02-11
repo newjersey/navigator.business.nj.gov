@@ -3,8 +3,8 @@ import {
   LicenseStatus,
   LicenseStatusItem,
   taskIdLicenseNameMapping,
-} from "../license";
-import { Business, TaskProgress } from "../userData";
+} from "@businessnjgovnavigator/shared/license";
+import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 
 export const getNonLicenseTasks = (business: Business): Record<string, TaskProgress> =>
   Object.fromEntries(

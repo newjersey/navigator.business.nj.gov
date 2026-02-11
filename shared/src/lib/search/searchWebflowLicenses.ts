@@ -1,7 +1,7 @@
-import { LookupTaskAgencyById } from "../../taskAgency";
-import { WebflowLicense } from "../../types";
-import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
+import { WebflowLicense } from "@businessnjgovnavigator/shared/types";
+import { convertFileDataToMatchList } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import { FileData, Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string): Match[] => {
   const licenseData = getWebflowLicenseData(licenses);

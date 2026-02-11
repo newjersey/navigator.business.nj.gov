@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Step } from "../types";
+import { Step } from "@businessnjgovnavigator/shared/types";
 
 const stepsJsonPathTest = path.join(
   process.cwd(),

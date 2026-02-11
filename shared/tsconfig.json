@@ -15,6 +15,7 @@
     "types": ["node", "jest"],
     "skipLibCheck": true,
     "paths": {
+      "@businessnjgovnavigator/shared/*": ["src/*"],
       "@businessnjgovnavigator/content/*": ["../content/src/*"]
     }
   },

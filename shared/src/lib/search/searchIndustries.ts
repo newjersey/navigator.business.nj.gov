@@ -1,6 +1,6 @@
-import { Industry } from "../../industry";
-import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import { Industry } from "@businessnjgovnavigator/shared/industry";
+import { convertFileDataToMatchList } from "@businessnjgovnavigator/shared/lib/search/helpers";
+import { FileData, Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
 
 export const searchIndustries = (industries: Industry[], term: string): Match[] => {
   const industryData = getIndustryData(industries);
