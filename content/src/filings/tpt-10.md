@@ -2,7 +2,11 @@
 urlSlug: tpt-10
 name: Tobacco/Nicotine Products Wholesale Sales and Use Tax
 extension: false
-treasuryLink: https://www.nj.gov/treasury/taxation/tobacco_over.shtml
+summaryDescriptionMd: "Updated dead link
+  https://www.nj.gov/treasury/taxation/tobacco_over.shtml to:
+  https://www.nj.gov/treasury/taxation/tobacco_over.shtml. Should've been
+  redirected."
+treasuryLink: https://www.nj.gov/treasury/taxation/tobacco.shtml
 taxRates: |
   
   - Tobacco Products wholesale price: 30%
