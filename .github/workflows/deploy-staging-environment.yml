@@ -3,6 +3,10 @@ name: Deploy Staging Environment
 on:
   workflow_call:
 
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest

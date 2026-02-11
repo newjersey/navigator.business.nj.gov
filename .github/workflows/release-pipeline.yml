@@ -6,6 +6,10 @@ on:
       - "release-*"
   workflow_dispatch:
 
+concurrency:
+  group: release-pipeline
+  cancel-in-progress: false
+
 jobs:
   deploy-staging:
     uses: ./.github/workflows/deploy-staging-environment.yml
@@ -20,7 +24,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    environment: prod
+    environment: prod-hold
     steps:
       - run: echo "Awaiting approval for production release."
 

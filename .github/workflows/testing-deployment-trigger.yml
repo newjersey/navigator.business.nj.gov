@@ -6,6 +6,10 @@ on:
       - testing-repo
   workflow_dispatch:
 
+concurrency:
+  group: deploy-testing
+  cancel-in-progress: true
+
 jobs:
   deploy-testing:
     runs-on: ubuntu-latest
