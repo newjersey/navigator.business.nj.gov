@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+concurrency:
+  group: merge-main-into-content-repo
+  cancel-in-progress: false
 
 jobs:
   merge-content:
