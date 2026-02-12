@@ -6,7 +6,8 @@ category:
   - offer-new-products-or-services
 industryIds:
   - commercial-construction
-sectorIds: []
+sectorIds:
+  - construction
 urlSlug: well-record
 summaryDescriptionMd: You must submit a well record within 90 days of completing
   the construction of a well.
