@@ -6,7 +6,8 @@ category:
   - offer-new-products-or-services
 industryIds:
   - commercial-construction
-sectorIds: []
+sectorIds:
+  - construction
 urlSlug: well-permit
 summaryDescriptionMd: >
   If you plan to install, repair, or modify a well in New Jersey, then you need
