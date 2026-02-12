@@ -5,6 +5,10 @@ on:
     - cron: "0 12 * * 6"
   workflow_dispatch:
 
+concurrency:
+  group: sync-testing-repo
+  cancel-in-progress: false
+
 jobs:
   sync-testing-repo-weekly-from-main:
     name: Sync testing-repo from main weekly

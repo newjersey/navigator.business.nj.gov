@@ -3,6 +3,10 @@ name: "Deploy Content Environment"
 on:
   workflow_call:
 
+concurrency:
+  group: deploy-content
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
