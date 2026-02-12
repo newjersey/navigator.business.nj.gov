@@ -5,6 +5,7 @@ import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoMessagesDataClient } from "@db/DynamoMessagesDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import {
+  EmailType,
   MessageData,
   type MessageChannel,
   type MessageTemplateId,
@@ -159,7 +160,7 @@ export const handler = async (
 const buildWelcomeEmail = (props: { toEmail: string }): SendEmailCommand => {
   return buildSesEmailCommand({
     toEmail: props.toEmail,
-    emailType: "welcome-email",
+    emailType: "welcome-email-b",
     subject: "Welcome to Business.NJ.gov",
     htmlBody: welcomeEmailShortVersionTemplate,
     fallbackText: welcomeEmailShortVersionPlaintext,
@@ -169,7 +170,7 @@ const buildWelcomeEmail = (props: { toEmail: string }): SendEmailCommand => {
 const buildReminderEmail = (props: { toEmail: string }): SendEmailCommand => {
   return buildSesEmailCommand({
     toEmail: props.toEmail,
-    emailType: "test-reminder-email",
+    emailType: "reminder-email",
     subject: "Incomplete Tasks Reminder - Business.NJ.gov",
     htmlBody: testReminderHtmlTemplate,
   });
@@ -199,7 +200,7 @@ const buildMessageRecord = (props: {
 
 const buildSesEmailCommand = (props: {
   toEmail: string;
-  emailType: string;
+  emailType: EmailType;
   subject: string;
   fallbackText?: string;
   htmlBody: string;
@@ -234,6 +235,7 @@ const buildSesEmailCommand = (props: {
         Value: props.emailType,
       },
     ],
+    ConfigurationSetName: props.emailType,
   };
   return new SendEmailCommand(input);
 };

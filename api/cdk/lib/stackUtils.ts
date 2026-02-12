@@ -12,6 +12,7 @@ import { Role } from "aws-cdk-lib/aws-iam";
 import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction, NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
 import * as logs from "aws-cdk-lib/aws-logs";
+import { ConfigurationSet } from "aws-cdk-lib/aws-ses";
 import { Construct, IConstruct } from "constructs";
 import path from "node:path";
 
@@ -163,3 +164,9 @@ export const exportLambdaArn = (
     exportName: `${id}LambdaArn-${stage}`,
   });
 };
+
+export function createSesConfigSet(scope: Construct, name: string) {
+  return new ConfigurationSet(scope, name, {
+    configurationSetName: name,
+  });
+}
