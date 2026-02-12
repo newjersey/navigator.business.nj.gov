@@ -6,7 +6,8 @@ category:
   - offer-new-products-or-services
 industryIds:
   - commercial-construction
-sectorIds: []
+sectorIds:
+  - construction
 urlSlug: well-decommissioning-report
 summaryDescriptionMd: >
   1. You need to examine the well on site to determine if you require approval
