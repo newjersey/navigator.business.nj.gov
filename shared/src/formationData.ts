@@ -132,7 +132,7 @@ export type HowToProceedOptions = "DIFFERENT_NAME" | "KEEP_NAME" | "CANCEL_NAME"
 export interface FormationFormData extends FormationAddress {
   readonly legalType: FormationLegalType;
   readonly businessName: string;
-  readonly businessNameConfirmation: boolean;
+  readonly businessNameConfirmation: boolean | undefined;
   readonly businessSuffix: BusinessSuffix | undefined;
   readonly businessTotalStock: string;
   readonly businessStartDate: string; // YYYY-MM-DD
@@ -183,7 +183,7 @@ export interface FormationFormData extends FormationAddress {
   readonly foreignDateOfFormation: string | undefined; // YYYY-MM-DD
   readonly willPracticeLaw: boolean | undefined;
   readonly isVeteranNonprofit: boolean | undefined;
-  readonly checkNameReservation: boolean;
+  readonly checkNameReservation: boolean | undefined;
   readonly howToProceed: HowToProceedOptions;
 }
 

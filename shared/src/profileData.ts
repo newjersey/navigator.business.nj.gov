@@ -23,7 +23,7 @@ export const propertyLeaseTypeOptions = ["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL"
 
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
-  readonly requiresCpa: boolean;
+  readonly requiresCpa: boolean | undefined;
   readonly homeBasedBusiness: boolean | undefined;
   readonly plannedRenovationQuestion: boolean | undefined;
   readonly providesStaffingService: boolean;
