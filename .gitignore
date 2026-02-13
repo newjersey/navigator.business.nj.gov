@@ -23,6 +23,7 @@ coverage/
 # next.js
 web/.next/
 web/out/
+next-env.d.ts
 
 # production
 web/build
@@ -100,9 +101,6 @@ web/fundings.csv
 # yaml file generated from yarn build
 web/public/mgmt/config.yml
 web/src/lib/cms/CollectionMap.json
-
-# sql
-sql/dol_employer_rates.sql
 
 # React Email generated templates
 api/src/functions/messagingService/email-templates/*.html
