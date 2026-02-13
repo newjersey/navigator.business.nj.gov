@@ -9,7 +9,7 @@ import {
   XrayRegistrationEntry,
   XrayRegistrationStatusResponse,
 } from "@businessnjgovnavigator/shared";
-import { REMINDER_EMAIL_CONFIG_SET_NAME, WELCOME_EMAIL_CONFIG_SET_NAME } from "@libs/constants";
+import { REMINDER_EMAIL_CONFIG_SET_BASE, WELCOME_EMAIL_CONFIG_SET_BASE } from "@libs/constants";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -48,12 +48,15 @@ import { AxiosResponse } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
+type Environment = "dev" | "content" | "testing" | "staging" | "prod";
+
 export type MessageChannel = "email" | "sms" | "tts" | "whatsapp";
 export type MessageTemplateId = "welcome_version-B" | "test-reminder-v1";
 export type MessageTopic = "welcome" | "reminder";
+
 export type EmailType =
-  | typeof WELCOME_EMAIL_CONFIG_SET_NAME
-  | typeof REMINDER_EMAIL_CONFIG_SET_NAME;
+  | `${typeof WELCOME_EMAIL_CONFIG_SET_BASE}-${Environment}`
+  | `${typeof REMINDER_EMAIL_CONFIG_SET_BASE}-${Environment}`;
 
 export interface MessageData {
   taskId: string;
