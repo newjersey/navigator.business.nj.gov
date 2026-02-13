@@ -2,8 +2,8 @@
  * Build Script for Navigator Content
  *
  * This script generates static JSON files from content sources (markdown, JSON) for use
- * in the business.nj.gov My Account application. It processes 8 content types:
- * industries, tasks, actions, certifications, filings, fundings, license events, and reinstatements.
+ * in the business.nj.gov My Account application. It processes 9 content types:
+ * industries, sectors, tasks, actions, certifications, filings, fundings, license events, and reinstatements.
  *
  * ## Architecture
  *
@@ -11,7 +11,7 @@
  *    - Abstracted behind FileSystemPort interface for dependency injection
  *    - Makes the code 100% testable without touching the real file system
  *
- * 2. **Domain Layer** - Pure business logic (parseIndustryFile, buildIndustries, etc.)
+ * 2. **Domain Layer** - Pure business logic (parseIndustryFile, buildIndustries, buildSectors, etc.)
  *    - No dependencies on file system or external libraries
  *    - Receives file system port as parameter for all I/O operations
  *
@@ -48,6 +48,8 @@ import { loadAllTasks } from "@businessnjgovnavigator/shared/static/loadTasks";
 export interface BuildResult {
   /** Number of industries built */
   industriesCount: number;
+  /** Number of sectors built */
+  sectorsCount: number;
   /** Number of tasks built */
   tasksCount: number;
   /** Number of anytime action tasks built */
@@ -208,6 +210,71 @@ export const buildIndustries = (fileSystem: FileSystemPort, sourceDir: string): 
 };
 
 // ============================================================================
+// DOMAIN LAYER - Sector Builder
+// ============================================================================
+
+/**
+ * Industry structure from industry JSON files.
+ */
+interface IndustryData {
+  readonly id: string;
+  readonly name: string;
+  readonly naicsCodes?: string;
+  readonly defaultSectorId?: string;
+}
+
+/**
+ * Sector structure from sectors.json.
+ */
+interface SectorData {
+  readonly id: string;
+  readonly name: string;
+  readonly nonEssentialQuestionsIds: string[];
+}
+
+/**
+ * Enriched sector with child industries.
+ */
+interface EnrichedSector extends SectorData {
+  readonly industries: Array<{
+    readonly id: string;
+    readonly name: string;
+    readonly naicsCodes?: string;
+  }>;
+}
+
+/**
+ * Builds enriched sectors by matching industries to their parent sectors.
+ * Each sector is enriched with its child industries (matched by defaultSectorId).
+ *
+ * @param sectors - Array of sectors from sectors.json
+ * @param industries - Array of industries from industry JSON files
+ * @returns Array of enriched sectors with industries
+ */
+export const buildSectors = (sectors: SectorData[], industries: unknown[]): EnrichedSector[] => {
+  return sectors.map((sector) => {
+    const matchingIndustries = (industries as IndustryData[])
+      .filter((industry) => industry.defaultSectorId === sector.id)
+      .map((industry) => {
+        // Only include naicsCodes if it exists (not undefined)
+        const result: { id: string; name: string; naicsCodes?: string } = {
+          id: industry.id,
+          name: industry.name,
+        };
+        if (industry.naicsCodes !== undefined) {
+          result.naicsCodes = industry.naicsCodes;
+        }
+        return result;
+      });
+
+    return {
+      ...sector,
+      industries: matchingIndustries,
+    };
+  });
+};
+
+// ============================================================================
 // APPLICATION LAYER - Build Operations
 // ============================================================================
 
@@ -276,6 +343,34 @@ export const buildAndWriteIndustries = (
     () => buildIndustries(fileSystem, sourceDir),
     "industry",
     "industries",
+  );
+};
+
+/**
+ * Builds and writes sector data enriched with child industries to file.
+ * Generates both minified and pretty-printed JSON outputs.
+ *
+ * @param fileSystem - File system operations
+ * @param config - Build configuration
+ * @param industries - Built industries from buildAndWriteIndustries
+ * @returns Built sectors for statistics
+ */
+export const buildAndWriteSectors = (
+  fileSystem: FileSystemPort,
+  config: BuildConfig,
+  industries: unknown[],
+): EnrichedSector[] => {
+  const sectorsPath = path.join(config.rootDir, "src/mappings/sectors.json");
+  const sectorsContent = fileSystem.readFile(sectorsPath);
+  const sectorsData = JSON.parse(sectorsContent) as { arrayOfSectors: SectorData[] };
+  const sectors = sectorsData.arrayOfSectors;
+
+  return buildAndWriteContent(
+    fileSystem,
+    config,
+    () => buildSectors(sectors, industries),
+    "sectors",
+    "sectors",
   );
 };
 
@@ -371,7 +466,7 @@ export const contentConfigs: ContentConfig[] = [
 ];
 
 /**
- * Executes the complete build process for all 8 content types.
+ * Executes the complete build process for all 9 content types.
  *
  * This function demonstrates the metaprogramming pattern:
  * - Instead of calling buildAndWriteTasks(), buildAndWriteActions(), etc.
@@ -380,22 +475,27 @@ export const contentConfigs: ContentConfig[] = [
  *
  * Build order:
  * 1. Industries (special case - reads from JSON files in src/roadmaps/industries/)
- * 2. All other content types (loop through contentConfigs array)
+ * 2. Sectors (special case - enriches sectors with child industries)
+ * 3. All other content types (loop through contentConfigs array)
  *    - Tasks, actions, certifications, filings, fundings, license events, reinstatements
  *    - Each uses a loader function from @businessnjgovnavigator/shared
  *    - Loaders handle markdown parsing with content-type-specific converters
  *
  * @param fileSystem - File system operations (injected for testability)
  * @param config - Build configuration with rootDir and outputDir
- * @returns Build statistics with counts for all 8 content types
+ * @returns Build statistics with counts for all 9 content types
  */
 export const executeBuild = (fileSystem: FileSystemPort, config: BuildConfig): BuildResult => {
   // Build industries first (special case with custom loader)
   const industries = buildAndWriteIndustries(fileSystem, config);
 
+  // Build sectors with enriched industry data (special case)
+  const sectors = buildAndWriteSectors(fileSystem, config, industries);
+
   // Build all other content types using configuration-driven approach
   const result: Partial<BuildResult> = {
     industriesCount: industries.length,
+    sectorsCount: sectors.length,
   };
 
   // Loop through each content type config and build it
@@ -432,12 +532,13 @@ export const createBuildConfig = (): BuildConfig => {
 
 /**
  * Logs build results to console.
- * Displays statistics for all 8 content types with checkmarks.
+ * Displays statistics for all 9 content types with checkmarks.
  *
  * @param result - Build statistics
  */
 export const logBuildResults = (result: BuildResult): void => {
   console.log(`✓ Built industry.json with ${result.industriesCount} industries`);
+  console.log(`✓ Built sectors.json with ${result.sectorsCount} sectors`);
   console.log(`✓ Built tasks.json with ${result.tasksCount} tasks`);
   console.log(`✓ Built actions.json with ${result.actionsCount} anytime actions`);
   console.log(`✓ Built certifications.json with ${result.certificationsCount} certifications`);
@@ -461,6 +562,7 @@ export const logBuildResults = (result: BuildResult): void => {
  *
  * This script generates static JSON files for all content types:
  * - Industries: Business industry configurations with roadmap settings
+ * - Sectors: Business sectors enriched with child industries and NAICS codes
  * - Tasks: All task types from multiple directories (tasks, license-tasks, etc.)
  * - Actions: Anytime Action tasks
  * - Certifications: Business certifications
