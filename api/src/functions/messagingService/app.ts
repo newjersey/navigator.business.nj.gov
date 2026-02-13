@@ -22,7 +22,7 @@ import {
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
-import { REMINDER_EMAIL_CONFIG_SET_NAME, WELCOME_EMAIL_CONFIG_SET_NAME } from "@libs/constants";
+import { REMINDER_EMAIL_CONFIG_SET_BASE, WELCOME_EMAIL_CONFIG_SET_BASE } from "@libs/constants";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { getConfigValue, USER_MESSAGING_CONFIG_VARS } from "@libs/ssmUtils";
 import { v4 as uuidv4 } from "uuid";
@@ -161,7 +161,7 @@ export const handler = async (
 const buildWelcomeEmail = (props: { toEmail: string }): SendEmailCommand => {
   return buildSesEmailCommand({
     toEmail: props.toEmail,
-    emailType: WELCOME_EMAIL_CONFIG_SET_NAME,
+    emailType: `${WELCOME_EMAIL_CONFIG_SET_BASE}-${STAGE}` as EmailType,
     subject: "Welcome to Business.NJ.gov",
     htmlBody: welcomeEmailShortVersionTemplate,
     fallbackText: welcomeEmailShortVersionPlaintext,
@@ -171,7 +171,7 @@ const buildWelcomeEmail = (props: { toEmail: string }): SendEmailCommand => {
 const buildReminderEmail = (props: { toEmail: string }): SendEmailCommand => {
   return buildSesEmailCommand({
     toEmail: props.toEmail,
-    emailType: REMINDER_EMAIL_CONFIG_SET_NAME,
+    emailType: `${REMINDER_EMAIL_CONFIG_SET_BASE}-${STAGE}` as EmailType,
     subject: "Incomplete Tasks Reminder - Business.NJ.gov",
     htmlBody: testReminderHtmlTemplate,
   });
