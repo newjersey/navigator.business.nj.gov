@@ -3,6 +3,10 @@ name: "Deploy Dev Environment"
 on:
   workflow_call:
 
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
