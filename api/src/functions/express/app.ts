@@ -16,7 +16,6 @@ import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertifica
 import { userRouterFactory } from "@api/userRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
-import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import { ApiEnvPermitEmailClient } from "@client/ApiEnvPermitEmailClient";
@@ -66,7 +65,6 @@ import { DynamoDataClient } from "@db/DynamoDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
-import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { updateCrtkStatusFactory } from "@domain/user/updateCrtkStatusFactory";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
@@ -290,15 +288,6 @@ const GOV_DELIVERY_API_KEY = process.env.GOV_DELIVERY_API_KEY || "testkey";
 const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "";
 const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID;
 
-const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "AIRTABLE_API_KEY";
-const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "TEST_BASE_ID";
-const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
-const AIRTABLE_BASE_URL =
-  process.env.AIRTABLE_BASE_URL ||
-  (STAGE === "local"
-    ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
-    : "https://api.airtable.com");
-
 const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
 const FORMATION_API_BASE_URL =
@@ -354,15 +343,6 @@ const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   urlQuestion: GOV_DELIVERY_URL_QUESTION_ID, // TODO: What is this? Currently undefined.
 });
 
-const airtableUserTestingClient = AirtableUserTestingClient(
-  {
-    apiKey: AIRTABLE_API_KEY,
-    baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
-    baseUrl: AIRTABLE_BASE_URL,
-    usersTableName: AIRTABLE_USERS_TABLE,
-  },
-  logger,
-);
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(
@@ -382,7 +362,6 @@ const dynamoDataClient = DynamoDataClient(
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
-const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
 
 const updateLicenseStatus = updateLicenseStatusFactory(
   webserviceLicenseStatusProcessorClient,
@@ -467,12 +446,7 @@ app.use(
 
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(
-    dynamoDataClient,
-    addGovDeliveryNewsletter,
-    addToAirtableUserTesting,
-    logger,
-  ),
+  externalEndpointRouterFactory(dynamoDataClient, addGovDeliveryNewsletter, logger),
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch, logger));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, dynamoDataClient, logger));

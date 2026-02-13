@@ -30,7 +30,6 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
   postGetAnnualFilings: jest.fn(),
 }));
 
