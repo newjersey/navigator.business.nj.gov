@@ -68,10 +68,6 @@ const AccountSetupPage = (): ReactElement => {
         userDataWithUser = await api.postNewsletter(userDataWithUser);
       }
 
-      if (user.userTesting) {
-        userDataWithUser = await api.postUserTesting(userDataWithUser);
-      }
-
       await updateQueue.queue(userDataWithUser).update();
       analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
       onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });

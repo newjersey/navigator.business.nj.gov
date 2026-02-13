@@ -160,10 +160,6 @@ export const postNewsletter = (userData: UserData): Promise<UserData> => {
   return post(`/external/newsletter`, userData, false);
 };
 
-export const postUserTesting = (userData: UserData): Promise<UserData> => {
-  return post(`/external/userTesting`, userData, false);
-};
-
 export const postGetAnnualFilings = (userData: UserData): Promise<UserData> => {
   return post(`/guest/annualFilings`, userData, false);
 };

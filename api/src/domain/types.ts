@@ -12,7 +12,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { REMINDER_EMAIL_CONFIG_SET_BASE, WELCOME_EMAIL_CONFIG_SET_BASE } from "@libs/constants";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
-import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
+import { BusinessUser, NewsletterResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import {
   EmailConfirmationResponse,
@@ -41,7 +41,6 @@ import {
   LicenseEntity,
   LicenseSearchNameAndAddress,
 } from "@shared/license";
-import { ProfileData } from "@shared/profileData";
 import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
 import { AxiosResponse } from "axios";
@@ -90,7 +89,6 @@ export interface UserDataClient {
   findByEmail: (email: string) => Promise<UserData | undefined>;
   put: (userData: UserData) => Promise<UserData>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;
-  getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
   getUsersWithOutdatedVersion: (
     latestVersion: number,
@@ -172,7 +170,6 @@ export interface TimeStampBusinessSearch {
 export type EncryptTaxId = (userData: UserData) => Promise<UserData>;
 
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;
-export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string) => Promise<LicenseEntity[]>;
@@ -181,10 +178,6 @@ export interface LicenseStatusClient {
 
 export interface EmployerRatesClient {
   getEmployerRates: (employerRatesRequest: EmployerRatesRequest) => Promise<EmployerRatesResponse>;
-}
-
-export interface UserTestingClient {
-  add: (user: BusinessUser, profileData: ProfileData) => Promise<UserTestingResponse>;
 }
 
 export interface SelfRegClient {

@@ -1,5 +1,5 @@
 import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
-import { AddNewsletter, AddToUserTesting, DatabaseClient } from "@domain/types";
+import { AddNewsletter, DatabaseClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
@@ -37,7 +37,6 @@ describe("externalEndpointRouter", () => {
   let app: Express;
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
-  let stubAddToUserTesting: jest.MockedFunction<AddToUserTesting>;
 
   beforeEach(async () => {
     stubDynamoDataClient = {
@@ -50,16 +49,8 @@ describe("externalEndpointRouter", () => {
       findBusinessesByHashedTaxId: jest.fn(),
     };
     stubAddNewsletter = jest.fn();
-    stubAddToUserTesting = jest.fn();
     app = setupExpress(false);
-    app.use(
-      externalEndpointRouterFactory(
-        stubDynamoDataClient,
-        stubAddNewsletter,
-        stubAddToUserTesting,
-        DummyLogWriter,
-      ),
-    );
+    app.use(externalEndpointRouterFactory(stubDynamoDataClient, stubAddNewsletter, DummyLogWriter));
     jest.spyOn(DummyLogWriter, "LogInfo").mockImplementation(() => {});
     jest.spyOn(DummyLogWriter, "LogError").mockImplementation(() => {});
   });
@@ -134,72 +125,6 @@ describe("externalEndpointRouter", () => {
         expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
           expect.stringContaining("no update to newsletter preferences needed for userId"),
         );
-      });
-    });
-
-    describe("userTesting", () => {
-      it("adds to userTesting if userTesting is set to true and externalStatus is empty", async () => {
-        const userData = generateUserData({
-          user: generateUser({
-            externalStatus: { newsletter: { status: "IN_PROGRESS" } },
-            userTesting: true,
-          }),
-        });
-        await request(app).post(`/userTesting`).send(userData);
-        expect(stubAddToUserTesting).toHaveBeenCalled();
-      });
-
-      it("does not add to userTesting if the request has been attempted", async () => {
-        const userData = generateUserData({
-          user: generateUser({
-            externalStatus: { userTesting: { status: "IN_PROGRESS" } },
-            userTesting: true,
-          }),
-        });
-        await request(app).post(`/userTesting`).send(userData);
-        expect(stubAddToUserTesting).not.toHaveBeenCalled();
-        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
-          expect.stringContaining("successfully updated user testing preferences for userId:"),
-        );
-      });
-
-      it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
-        const userData = generateUserData({
-          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
-        });
-        await request(app).post(`/userTesting`).send(userData);
-        expect(stubAddToUserTesting).toHaveBeenCalled();
-        expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
-      });
-
-      it("logs no update needed and does not call addToUserTesting when no update is needed", async () => {
-        const userData = generateUserData({
-          user: generateUser({
-            externalStatus: { userTesting: { status: "IN_PROGRESS" } },
-            userTesting: true,
-          }),
-        });
-
-        await request(app).post(`/userTesting`).send(userData);
-
-        expect(stubAddToUserTesting).not.toHaveBeenCalled();
-        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
-          expect.stringContaining("no update to user testing preferences needed for userId"),
-        );
-      });
-
-      it("adds to newsletter and updates the db if the user is authenticated", async () => {
-        const userData = generateUserData({
-          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
-        });
-        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        stubDynamoDataClient.put.mockResolvedValue(userData);
-        await request(app)
-          .post(`/userTesting`)
-          .send(userData)
-          .set("Authorization", "Bearer user-123-token");
-        expect(stubAddToUserTesting).toHaveBeenCalled();
-        expect(stubDynamoDataClient.put).toHaveBeenCalled();
       });
     });
   });

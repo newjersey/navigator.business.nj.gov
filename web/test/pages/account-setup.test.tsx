@@ -43,7 +43,6 @@ function setupMockAnalytics(): typeof analytics {
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
 }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
@@ -69,19 +68,6 @@ describe("Account Setup page", () => {
           externalStatus: {
             ...request.user.externalStatus,
             newsletter: { status: "SUCCESS", success: true },
-          },
-        },
-      });
-    });
-
-    mockApi.postUserTesting.mockImplementation((request) => {
-      return Promise.resolve({
-        ...request,
-        user: {
-          ...request.user,
-          externalStatus: {
-            ...request.user.externalStatus,
-            userTesting: { status: "SUCCESS", success: true },
           },
         },
       });
@@ -293,7 +279,7 @@ describe("Account Setup page", () => {
       name: "My Name",
       receiveNewsletter: false,
       userTesting: true,
-      externalStatus: { userTesting: { status: "SUCCESS", success: true } },
+      externalStatus: {},
     };
 
     await waitFor(() => {
@@ -349,7 +335,6 @@ describe("Account Setup page", () => {
       userTesting: true,
       externalStatus: {
         newsletter: { status: "SUCCESS", success: true },
-        userTesting: { status: "SUCCESS", success: true },
       },
     };
     await waitFor(() => {

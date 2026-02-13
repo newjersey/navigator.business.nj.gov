@@ -131,11 +131,6 @@ export const DynamoUserDataClient = (
     return search(statement);
   };
 
-  const getNeedToAddToUserTestingUsers = (): Promise<UserData[]> => {
-    const statement = `SELECT data FROM "${tableName}" WHERE data["user"].userTesting = true and (data["user"].externalStatus.userTesting is missing or data["user"].externalStatus.userTesting.success = false)`;
-    return search(statement);
-  };
-
   const getNeedTaxIdEncryptionUsers = (): Promise<UserData[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
     return search(statement);
@@ -181,7 +176,6 @@ export const DynamoUserDataClient = (
     put,
     findByEmail,
     getNeedNewsletterUsers,
-    getNeedToAddToUserTestingUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,
   };

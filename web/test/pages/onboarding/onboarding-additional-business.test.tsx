@@ -26,7 +26,6 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
   postGetAnnualFilings: jest.fn(),
 }));
 
@@ -126,7 +125,6 @@ describe("onboarding - additional business", () => {
     });
 
     expect(mockApi.postNewsletter).not.toHaveBeenCalled();
-    expect(mockApi.postUserTesting).not.toHaveBeenCalled();
 
     const expectedUserData: UserData = {
       ...initialData,

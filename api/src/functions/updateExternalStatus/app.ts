@@ -1,8 +1,5 @@
-import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
-import { addToUserTestingBatch } from "@domain/user-testing/addToUserTestingBatch";
-import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import {
   AWS_CRYPTO_CONTEXT_ORIGIN,
   AWS_CRYPTO_CONTEXT_STAGE,
@@ -48,13 +45,6 @@ export const handler = async (): Promise<void> => {
   const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "";
   const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID || "q_86783";
 
-  const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "";
-  const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
-  const AIRTABLE_BASE_URL =
-    process.env.AIRTABLE_BASE_URL ||
-    (isLocal ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
-  const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
-
   const newsletterGovDeliveryClient = GovDeliveryNewsletterClient({
     baseUrl: GOV_DELIVERY_BASE_URL,
     topic: GOV_DELIVERY_TOPIC,
@@ -65,19 +55,7 @@ export const handler = async (): Promise<void> => {
     urlQuestion: GOV_DELIVERY_URL_QUESTION_ID, // TODO: What is this? Currently undefined.
   });
 
-  const airtableUserTestingClient = AirtableUserTestingClient(
-    {
-      apiKey: AIRTABLE_API_KEY,
-      baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
-      baseUrl: AIRTABLE_BASE_URL,
-      usersTableName: AIRTABLE_USERS_TABLE,
-    },
-    logger,
-  );
-
   const addNewsletter = addNewsletterFactory(newsletterGovDeliveryClient);
-  const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
 
   await addNewsletterBatch(addNewsletter, dbClient);
-  await addToUserTestingBatch(addToAirtableUserTesting, dbClient);
 };
