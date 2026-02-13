@@ -1,4 +1,4 @@
-import { XrayRegistrationHealthCheckClient } from "@client/dep/healthcheck/XrayRegistrationHealthCheckClient";
+import { XrayRegistrationHealthCheckClient } from "@client/dep/xray/XrayRegistrationHealthCheckClient";
 import { HealthCheckMethod } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";

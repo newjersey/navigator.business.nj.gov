@@ -1,6 +1,6 @@
 import { BusinessUser } from "./businessUser";
 import { CigaretteLicenseData } from "./cigaretteLicense";
-import { CRTKData } from "./crtk";
+import { CrtkData } from "./crtk";
 import { createBusinessId } from "./domain-logic/createBusinessId";
 import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
@@ -42,10 +42,10 @@ export interface Business {
   readonly versionWhenCreated: number;
   readonly version: number;
   readonly userId: string;
-  readonly crtkData: CRTKData | undefined;
+  readonly crtkData: CrtkData | undefined;
 }
 
-export const CURRENT_VERSION = 186;
+export const CURRENT_VERSION = 187;
 
 export const createEmptyBusiness = ({
   userId,

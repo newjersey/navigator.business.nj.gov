@@ -9,7 +9,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
-import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getNaicsCode, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Business, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
@@ -52,11 +52,6 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       ? `Register & ${Config.determineNaicsCode.saveButtonText}`
       : Config.determineNaicsCode.saveButtonText;
 
-  const getCode = (code: string): NaicsCodeObject | undefined => {
-    return (NaicsCodes as NaicsCodeObject[]).find((element) => {
-      return element?.SixDigitCode?.toString() === code;
-    });
-  };
   const getDescriptions = (codes: string[]): NaicsCodeObject[] => {
     return (NaicsCodes as NaicsCodeObject[]).filter((element) => {
       return codes.includes(element?.SixDigitCode?.toString() ?? "");
@@ -79,7 +74,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     }
     setNaicsCode(value);
     if (value.length === REQUIRED_LENGTH) {
-      if (getCode(value)) {
+      if (getNaicsCode(value)) {
         setIsInvalid(undefined);
       } else {
         setIsInvalid("invalid");
@@ -103,7 +98,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       return;
     }
 
-    if (!getCode(naicsCode)) {
+    if (!getNaicsCode(naicsCode)) {
       setIsInvalid("invalid");
       return;
     }

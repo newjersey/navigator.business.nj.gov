@@ -187,6 +187,7 @@ import { migrate_v182_to_v183 } from "@db/migrations/v183_zod_changes";
 import { migrate_v183_to_v184 } from "@db/migrations/v184_change_addresscountry_interstatetransport";
 import { migrate_v184_to_v185 } from "@db/migrations/v185_zod_base64_encoding";
 import { migrate_v185_to_v186 } from "@db/migrations/v186_zod_base64_encoding";
+import { migrate_v186_to_v187 } from "@db/migrations/v187_add_crtk_data";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -378,6 +379,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v183_to_v184,
   migrate_v184_to_v185,
   migrate_v185_to_v186,
+  migrate_v186_to_v187,
 ];
 
-export { generatev186UserData as CURRENT_GENERATOR } from "@db/migrations/v186_zod_base64_encoding";
+export { generatev187UserData as CURRENT_GENERATOR } from "@db/migrations/v187_add_crtk_data";

@@ -1,4 +1,4 @@
-import { filterSquashByRegNumAndAddress } from "@client/dep/filterSquashByRegNumAndAddress";
+import { filterSquashByRegNumAndAddress } from "@client/dep/xray/filterSquashByRegNumAndAddress";
 import { generateXrayRegistrationEntry } from "@test/factories";
 
 describe("filterAndSquashByRegistrationNumber", () => {

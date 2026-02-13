@@ -1,25 +1,24 @@
+import { CrtkSearchResult } from "@/components/crtk/CrtkSearchResult";
+import { CrtkFacilityDetails, CrtkStatus } from "@/components/crtk/CrtkStatus";
 import { TaskHeader } from "@/components/TaskHeader";
-import { CRTKStatus } from "@/components/crtk/crtkForm";
-import { CRTKSearchResult } from "@/components/crtk/crtkSearchResult";
-import type { CRTKData } from "@/components/crtk/crtkTypes";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { Box } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
-import type { CRTKFacilityDetails } from "./crtkForm";
 
 interface Props {
   task: Task;
   CMS_ONLY_disable_overlay?: boolean;
 }
 
-export const CRTKPage = (props: Props): ReactElement => {
+export const CrtkPage = (props: Props): ReactElement => {
   const { business, refresh } = useUserData();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [crtkData, setCrtkData] = useState<CRTKData | undefined>(undefined);
+  const [crtkData, setCrtkData] = useState<CrtkData | undefined>(undefined);
   const [searchError, setSearchError] = useState<string | undefined>(undefined);
-  const [lastSearchParams, setLastSearchParams] = useState<CRTKFacilityDetails | undefined>(
+  const [lastSearchParams, setLastSearchParams] = useState<CrtkFacilityDetails | undefined>(
     undefined,
   );
 
@@ -27,18 +26,18 @@ export const CRTKPage = (props: Props): ReactElement => {
     if (!business) return;
     const existingCrtkData = business.crtkData;
 
-    if (existingCrtkData?.CRTKSearchResult) {
+    if (existingCrtkData?.crtkSearchResult) {
       setCrtkData(existingCrtkData);
     }
   }, [business]);
 
-  const handleSubmit = async (facilityDetails: CRTKFacilityDetails): Promise<void> => {
+  const handleSubmit = async (facilityDetails: CrtkFacilityDetails): Promise<void> => {
     setSearchError(undefined);
     setIsLoading(true);
     setLastSearchParams(facilityDetails);
 
     try {
-      const crtkSearchResponse = await api.searchBuisnessInCRTKDB({
+      const crtkSearchResponse = await api.searchBuisnessInCrtkDB({
         businessName: facilityDetails.businessName.trim().toUpperCase(),
         addressLine1: facilityDetails.businessStreetAddress.trim().toUpperCase(),
         city: facilityDetails.city.trim().toUpperCase(),
@@ -51,7 +50,7 @@ export const CRTKPage = (props: Props): ReactElement => {
         return;
       }
 
-      const updatedCrtkData: CRTKData | undefined =
+      const updatedCrtkData: CrtkData | undefined =
         crtkSearchResponse?.businesses[crtkSearchResponse.currentBusinessId].crtkData;
 
       if (!updatedCrtkData) {
@@ -80,14 +79,15 @@ export const CRTKPage = (props: Props): ReactElement => {
       <TaskHeader task={props.task} />
       <Box sx={{ width: "100%" }}>
         {crtkData ? (
-          <CRTKSearchResult
+          <CrtkSearchResult
             task={props.task}
             crtkData={crtkData}
             isLoading={isLoading}
             onSearchAgain={handleSearchAgain}
+            onResubmit={handleSubmit}
           />
         ) : (
-          <CRTKStatus
+          <CrtkStatus
             task={props.task}
             onSubmit={handleSubmit}
             isLoading={isLoading}
