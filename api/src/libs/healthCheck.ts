@@ -1,6 +1,5 @@
 import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
 import { LogWriterType } from "@libs/logWriter";
-import { getConfigValue } from "@libs/ssmUtils";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 type Status = "PASS" | "FAIL" | "ERROR";
@@ -19,20 +18,6 @@ const healthCheckEndPoints: Record<string, string> = {
   taxClearance: "tax-clearance",
   xrayRegistration: "xray-registration",
   taxFilingClient: "tax-filing-client",
-};
-
-const addFlaggedHealthChecks = (
-  endpoints: Record<string, string>,
-  flagValues: { cigarette: boolean },
-): Record<string, string> => {
-  if (flagValues.cigarette) {
-    return {
-      ...endpoints,
-      cigaretteEmailClient: "cigarette-email-client",
-      cigaretteLicense: "cigarette-license",
-    };
-  }
-  return endpoints;
 };
 
 const healthCheck = async (type: string, url: string, logger: LogWriterType): Promise<Status> => {
@@ -95,14 +80,7 @@ export const runHealthChecks = async (logger: LogWriterType): Promise<StatusResu
     throw new Error("API URL is undefined");
   }
 
-  const isCigaretteLicenseEnabled =
-    (await getConfigValue("FEATURE_CIGARETTE_LICENSE", logger)) === "true";
-
-  const endpoints = addFlaggedHealthChecks(healthCheckEndPoints, {
-    cigarette: isCigaretteLicenseEnabled,
-  });
-
-  const entries = Object.entries(endpoints).map(([type, endpoint]) =>
+  const entries = Object.entries(healthCheckEndPoints).map(([type, endpoint]) =>
     healthCheck(endpoint ?? "", url, logger).then((result) => [type, result] as const),
   );
 
