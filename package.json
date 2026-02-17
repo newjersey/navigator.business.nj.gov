@@ -64,7 +64,7 @@
     "@mui/material": "5.18.0",
     "@mui/styles": "5.18.0",
     "@mui/x-date-pickers": "5.0.20",
-    "@newjersey/njwds": "0.3.0",
+    "@newjersey/njwds": "2.9.1",
     "@react-email/components": "1.0.1",
     "@react-email/render": "2.0.0",
     "@smithy/node-http-handler": "4.4.8",

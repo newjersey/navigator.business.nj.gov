@@ -4745,7 +4745,7 @@ __metadata:
     "@mui/styles": 5.18.0
     "@mui/system": 5.18.0
     "@mui/x-date-pickers": 5.0.20
-    "@newjersey/njwds": 0.3.0
+    "@newjersey/njwds": 2.9.1
     "@next/bundle-analyzer": 16.1.1
     "@next/eslint-plugin-next": 15.5.6
     "@react-email/components": 1.0.1
@@ -4974,7 +4974,7 @@ __metadata:
     "@mui/styles": 5.18.0
     "@mui/system": 5.18.0
     "@mui/x-date-pickers": 5.0.20
-    "@newjersey/njwds": 0.3.0
+    "@newjersey/njwds": 2.9.1
     "@next/bundle-analyzer": 16.1.1
     "@next/eslint-plugin-next": 15.5.6
     "@storybook/addon-actions": 7.6.20
@@ -8081,12 +8081,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@newjersey/njwds@npm:0.3.0":
-  version: 0.3.0
-  resolution: "@newjersey/njwds@npm:0.3.0"
+"@newjersey/njwds@npm:2.9.1":
+  version: 2.9.1
+  resolution: "@newjersey/njwds@npm:2.9.1"
   dependencies:
-    "@uswds/uswds": 3.0.1
-  checksum: 027c573306109524ee71e9f99fad2f117be392da6fbdb5b4859c0e3a771e67d23e32c7cf9be8e41fd1b849b55150d9f193adc60d39da17953777dc5f01d1a11c
+    "@uswds/uswds": 3.10.0
+  checksum: 8c4656e46d315aafbb714771c63fb18f039a65435d15a3aa9d7ecca9f52a0c648c851e835af4ea9d4a84c1995e86a013a76a15dbf2679cf489fbbb0d428fad33
   languageName: node
   linkType: hard
 
@@ -14680,16 +14680,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@uswds/uswds@npm:3.0.1"
+"@uswds/uswds@npm:3.10.0":
+  version: 3.10.0
+  resolution: "@uswds/uswds@npm:3.10.0"
   dependencies:
-    classlist-polyfill: 1.0.3
-    domready: 1.0.8
-    object-assign: 4.1.1
     receptor: 1.0.0
     resolve-id-refs: 0.1.0
-  checksum: d13437cfd4af2ae9208dd88b3af969a52a46f5b9f23940b692759cbcf49a1f5c9e8fcaf55b5ebc008c8a0ee744313092aeab70e168771f921699575ec6d0f95a
+  checksum: e1a275a26c39c9d2b8ae38bf0ee8fff6dec4e0cf65292d9c4ec038cac12dc3745d5d7eb847907c5c6827b980bd1b6154fad8834bfcfba5b9dcf598a3ad354e90
   languageName: node
   linkType: hard
 
@@ -17453,13 +17450,6 @@ __metadata:
   version: 1.4.3
   resolution: "cjs-module-lexer@npm:1.4.3"
   checksum: 221a1661a9ff4944b472c85ac7cd5029b2f2dc7f6c5f4ecf887f261503611110b43a48acb6c07f8f04109c772d1637fdb20b31252bf27058f35aa97bf5ad8b12
-  languageName: node
-  linkType: hard
-
-"classlist-polyfill@npm:1.0.3":
-  version: 1.0.3
-  resolution: "classlist-polyfill@npm:1.0.3"
-  checksum: 287125901a08f3d2d0d397f38f7446f0804b1fb0eeabeea978e69268332e6f308da2fd15bfe073fb8d11e34f23d891e17298c52b348ade0308cf2a3eb118d394
   languageName: node
   linkType: hard
 
@@ -20327,13 +20317,6 @@ __metadata:
     "@types/trusted-types":
       optional: true
   checksum: 425c181ac531cb15f93be85dc6efb1eb535d7c53ad0752b305043fe43e76c5ef144c2aa3670da2a52bec253c0aa302c06545cd04012396dc81d52cf86529097b
-  languageName: node
-  linkType: hard
-
-"domready@npm:1.0.8":
-  version: 1.0.8
-  resolution: "domready@npm:1.0.8"
-  checksum: 5b0ee86650226e09f65c89b61d15fcfcda5925931dfffab5e9b82bf8ba96637286605fde1ac4addee19717bf7e486d4b49683e6f99038927560412113d96fde0
   languageName: node
   linkType: hard
 
@@ -30468,17 +30451,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-assign@npm:4.1.1, object-assign@npm:^4, object-assign@npm:^4.0.1, object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "object-assign@npm:4.1.1"
-  checksum: fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
-  languageName: node
-  linkType: hard
-
 "object-assign@npm:^2.0.0":
   version: 2.1.1
   resolution: "object-assign@npm:2.1.1"
   checksum: d37a7d7173408e07ee225116437592d92b584b2a5f38cafe608400b43efd9b78878dbd545b524aff5b4118d88e39466b9038b2d3de8885e212adad497d656c46
+  languageName: node
+  linkType: hard
+
+"object-assign@npm:^4, object-assign@npm:^4.0.1, object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "object-assign@npm:4.1.1"
+  checksum: fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
   languageName: node
   linkType: hard
 
