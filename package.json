@@ -157,7 +157,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/broken-link-checker": "0.7.3",
     "@types/cors": "2.8.19",
-    "@types/cypress-dotenv": "2.0.3",
+    "@types/cypress-dotenv": "3.0.0",
     "@types/dedent": "0.7.2",
     "@types/express": "5.0.0",
     "@types/jest": "29.5.14",
