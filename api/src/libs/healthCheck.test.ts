@@ -1,6 +1,5 @@
 import { runHealthChecks } from "@libs/healthCheck";
 import { DummyLogWriter } from "@libs/logWriter";
-import { CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
 import axios from "axios";
 
 jest.mock("axios");
@@ -10,17 +9,8 @@ jest.mock("@libs/ssmUtils", () => ({
   getConfigValue: jest.fn(),
 }));
 
-const mockGetConfigValue = getConfigValue as jest.MockedFunction<typeof getConfigValue>;
-
 describe("healthCheck", () => {
   const logger = DummyLogWriter;
-
-  beforeEach(() => {
-    mockGetConfigValue.mockImplementation(async (paramName: CONFIG_VARS) => {
-      if (paramName === "FEATURE_CIGARETTE_LICENSE") return "true";
-      return "false";
-    });
-  });
 
   it("returns an object with pass statuses if success is true", async () => {
     mockAxios.get.mockResolvedValue({ data: { success: true } });
@@ -34,8 +24,6 @@ describe("healthCheck", () => {
       webserviceFormation: "PASS",
       taxClearance: "PASS",
       xrayRegistration: "PASS",
-      cigaretteLicense: "PASS",
-      cigaretteEmailClient: "PASS",
       taxFilingClient: "PASS",
     });
   });
@@ -52,8 +40,6 @@ describe("healthCheck", () => {
       webserviceFormation: "FAIL",
       taxClearance: "FAIL",
       xrayRegistration: "FAIL",
-      cigaretteLicense: "FAIL",
-      cigaretteEmailClient: "FAIL",
       taxFilingClient: "FAIL",
     });
   });
@@ -70,27 +56,7 @@ describe("healthCheck", () => {
       webserviceFormation: "ERROR",
       taxClearance: "ERROR",
       xrayRegistration: "ERROR",
-      cigaretteLicense: "ERROR",
-      cigaretteEmailClient: "ERROR",
       taxFilingClient: "ERROR",
-    });
-  });
-
-  describe("flagged health checks", () => {
-    it("includes cigarette health checks when feature flag is on", async () => {
-      const result = await runHealthChecks(logger);
-      expect(Object.keys(result)).toContain("cigaretteLicense");
-      expect(Object.keys(result)).toContain("cigaretteEmailClient");
-    });
-
-    it("excludes cigarette health checks when feature flag is off", async () => {
-      mockGetConfigValue.mockImplementation(async () => {
-        return "false";
-      });
-
-      const result = await runHealthChecks(logger);
-      expect(Object.keys(result)).not.toContain("cigaretteLicense");
-      expect(Object.keys(result)).not.toContain("cigaretteEmailClient");
     });
   });
 });

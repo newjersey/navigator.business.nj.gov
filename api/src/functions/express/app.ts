@@ -536,9 +536,8 @@ app.use(
       ["webservice/formation", formationHealthCheckClient],
       ["tax-clearance", taxClearanceHealthCheckClient],
       ["xray-registration", xrayRegistrationHealthCheckClient],
-      // TODO: The following need CloudWatch metrics
-      ["cigarette-license", cigaretteLicenseHealthCheckClient],
-      ["cigarette-email-client", cigaretteLicenseEmailClient.health],
+      ["cigarette-license", cigaretteLicenseHealthCheckClient], // This endpoint is not being hit by the HealthCheck Lambda
+      ["cigarette-email-client", cigaretteLicenseEmailClient.health], // This endpoint is not being hit by the HealthCheck Lambda
       ["messaging-service", messagingServiceClient.health],
       ["tax-filing-client", taxFilingClient.health],
     ]),
