@@ -1,3 +1,18 @@
+# [2026.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.3.0...v2026.4.0) (2026-02-18)
+
+
+### Bug Fixes
+
+* [AB[#17076](https://github.com/newjersey/navigator.business.nj.gov/issues/17076)] add stage to config set names ([c6074f5](https://github.com/newjersey/navigator.business.nj.gov/commit/c6074f50805946bf67eaaae4c9600cab5a5031cd))
+
+
+### Features
+
+* [AB[#16129](https://github.com/newjersey/navigator.business.nj.gov/issues/16129)] crtk business activities email ([022b99b](https://github.com/newjersey/navigator.business.nj.gov/commit/022b99b4b633af64a609247cfca83c3bb92b4db2))
+* build and write sectors.json from content ([a3d1d3f](https://github.com/newjersey/navigator.business.nj.gov/commit/a3d1d3f84cc8620d1209c14cd2d125c68d5118ed))
+* make decap CMS source of truth for spellcheck, add slack alerts ([d544d3b](https://github.com/newjersey/navigator.business.nj.gov/commit/d544d3b30542887fe455150bfa7801ee92944a96))
+* show roadmaps where a task is used in the CMS task preview ([b13aa2c](https://github.com/newjersey/navigator.business.nj.gov/commit/b13aa2cdbd13aa6de26ef5d1f617c3112723d345))
+
 # [2026.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.2.0...v2026.3.0) (2026-02-10)
 
 
