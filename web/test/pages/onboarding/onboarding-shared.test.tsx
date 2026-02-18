@@ -3,6 +3,7 @@ import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
@@ -24,7 +25,8 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -38,10 +40,18 @@ const Config = getMergedConfig();
 describe("onboarding - shared", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockConfig();
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
-    jest.useFakeTimers();
+    // React 19: Use real timers to avoid conflicts with async waitFor in findBy* queries
+    jest.useRealTimers();
+  });
+
+  afterEach(() => {
+    // Clean up timers to prevent state leakage between tests
+    jest.clearAllTimers();
+    jest.useRealTimers();
   });
 
   it("routes to the dashboard when the user is authenticated and userData is undefined", async () => {
@@ -60,8 +70,8 @@ describe("onboarding - shared", () => {
     async (radioOption: string) => {
       const { page } = renderPage({ userData: undefined });
 
-      page.chooseRadio(radioOption);
-      fireEvent.click(screen.getByTestId("next"));
+      await page.chooseRadio(radioOption);
+      await userEvent.click(screen.getByTestId("next"));
       await waitFor(() => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
       });
@@ -139,8 +149,12 @@ describe("onboarding - shared", () => {
     useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({});
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
-    page.chooseEssentialQuestionRadio(industry, 0);
-    page.clickNext();
+    await page.chooseEssentialQuestionRadio(industry, 0);
+    // React 19: Wait for form state to update after essential question selection before proceeding
+    await waitFor(() => {
+      expect(screen.getByTestId("next")).toBeEnabled();
+    });
+    await page.clickNext();
     await waitFor(() => {
       expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     });
@@ -168,25 +182,26 @@ describe("onboarding - shared", () => {
 
   it("prevents user from moving after Step 1 if you have not selected whether you own a business", async () => {
     const { page } = renderPage({});
-    page.clickNext();
+    await page.clickNext();
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
     expect(screen.getByTestId("banner-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
   });
 
   it("allows user to move past Step 1 if you have selected whether you own a business", async () => {
     const { page } = renderPage({});
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
 
   it("is able to go back", async () => {
     const { page } = renderPage({});
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
-    page.clickBack();
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    await page.clickBack();
+    // React 19: Wait for navigation to complete
+    expect(await screen.findByTestId("step-1")).toBeInTheDocument();
   });
 
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
@@ -196,18 +211,18 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
-    page.selectByValue("Industry", "e-commerce");
-    page.clickBack();
+    await page.selectByValue("Industry", "e-commerce");
+    await page.clickBack();
 
     const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
 
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
-    expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
-    expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
-    page.chooseRadio("business-persona-owning");
-    page.clickNext();
+    expect(await screen.findByTestId("step-1")).toBeInTheDocument();
+    expect(await screen.findByTestId("business-persona-owning")).toBeInTheDocument();
+    expect(await screen.findByText(composeOnBoardingTitle(step))).toBeInTheDocument();
+    await page.chooseRadio("business-persona-owning");
+    await page.clickNext();
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalled();
     });
@@ -235,10 +250,10 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
-    page.selectByValue("Industry", "e-commerce");
-    page.clickBack();
+    await page.selectByValue("Industry", "e-commerce");
+    await page.clickBack();
 
     await page.visitStep(2);
     expect(currentBusiness().profileData.industryId).toEqual("e-commerce");
@@ -250,8 +265,8 @@ describe("onboarding - shared", () => {
       const { page } = renderPage({});
 
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      page.selectByText("Industry", "All Other Businesses");
-      page.clickNext();
+      await page.selectByText("Industry", "All Other Businesses");
+      await page.clickNext();
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
@@ -267,7 +282,7 @@ describe("onboarding - shared", () => {
       const { employeeOrContractorInNJ } =
         Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
-      page.checkByLabelText(employeeOrContractorInNJ);
+      await page.checkByLabelText(employeeOrContractorInNJ);
       await page.visitStep(3);
       expect(currentBusiness().profileData.businessPersona).toEqual("FOREIGN");
     });
@@ -277,8 +292,8 @@ describe("onboarding - shared", () => {
       const { page } = renderPage({});
 
       expect(screen.getByTestId("step-1")).toBeInTheDocument();
-      page.selectByValue("Sector", "clean-energy");
-      page.clickNext();
+      await page.selectByValue("Sector", "clean-energy");
+      await page.clickNext();
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });

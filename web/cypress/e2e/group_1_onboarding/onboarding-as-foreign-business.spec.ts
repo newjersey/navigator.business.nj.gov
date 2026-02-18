@@ -205,6 +205,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
       cy.url().should("include", "onboarding?page=2");
       onOnboardingPageNexusBusiness.selectEmployeeOrContractorInNJCheckBox();
       onOnboardingPageNexusBusiness.getEmployeeOrContractorInNJCheckbox().should("be.checked");
+      // React 19: Wait for state updates and validation to complete
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(150);
       onOnboardingPageNexusBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=3");
@@ -232,6 +235,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
         onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        // React 19: Wait for state updates and validation to complete
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(150);
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -255,6 +261,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
         onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        // React 19: Wait for state updates and validation to complete
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(150);
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -279,6 +288,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteSellerBusiness.selectRevenueInNJCheckBox();
         onOnboardingPageRemoteSellerBusiness.getRevenueInNJCheckbox().should("be.checked");
+        // React 19: Wait for state updates and validation to complete
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(150);
         onOnboardingPageRemoteSellerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -302,6 +314,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
         onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        // React 19: Wait for state updates and validation to complete
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(150);
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -324,6 +339,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageNoneOfTheAbove.selectNoneOfTheAbove();
         onOnboardingPageNoneOfTheAbove.getNoneOfTheAbove().should("be.checked");
+        // React 19: Wait for state updates and validation to complete
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(150);
         onOnboardingPageNoneOfTheAbove.clickShowMyGuide();
 
         cy.url().should("include", "unsupported");
@@ -345,6 +363,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageNoneOfTheAbove.selectNoneOfTheAbove();
         onOnboardingPageNoneOfTheAbove.getNoneOfTheAbove().should("be.checked");
+        // React 19: Wait for state updates and validation to complete
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(150);
         onOnboardingPageNoneOfTheAbove.clickShowMyGuide();
 
         cy.url().should("include", "unsupported");

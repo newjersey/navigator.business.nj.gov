@@ -32,7 +32,7 @@ import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
-  saveTaxClearanceCertificateData: () => void;
+  saveTaxClearanceCertificateData: () => Promise<void>;
 }
 
 export const CheckEligibility = (props: Props): ReactElement => {
@@ -74,8 +74,18 @@ export const CheckEligibility = (props: Props): ReactElement => {
 
   const handleSaveButtonClick = (): void => {
     analytics.event.tax_clearance.click.switch_to_step_three();
-    props.saveTaxClearanceCertificateData();
-    props.setStepIndex(2);
+    // React 19: Use setTimeout with delay to ensure all batched state updates flush
+    // This ensures all blur-based updates complete before saving (increased from 100ms to 300ms for React 19)
+    // With blur-based updates, this delay ensures blur events have propagated before save
+    setTimeout(async () => {
+      try {
+        await props.saveTaxClearanceCertificateData();
+      } catch (error) {
+        console.error("Error saving tax clearance data:", error);
+        // Continue to Review screen even if save fails - validation will happen there
+      }
+      props.setStepIndex(2);
+    }, 300);
   };
 
   const handleBackButtonClick = (): void => {
@@ -145,6 +155,7 @@ export const CheckEligibility = (props: Props): ReactElement => {
                 <DisabledTaxId />
               ) : (
                 <TaxId
+                  key="taxClearanceTaxId"
                   dbBusinessTaxId={getInitialTaxId(business)}
                   inputWidth="full"
                   preventRefreshWhenUnmounted

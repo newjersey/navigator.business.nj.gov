@@ -8,13 +8,13 @@ import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-select
 import { generateCigaretteLicenseData } from "@businessnjgovnavigator/shared";
 import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen } from "@testing-library/react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { CigaretteSignatures } from "./CigaretteSignatures";
 
 const Config = getMergedConfig();
 
 const renderComponent = (cigaretteLicenseData = generateCigaretteLicenseData({})): void => {
-  const TestComponent = (): JSX.Element => {
+  const TestComponent = (): ReactNode => {
     const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
     const [localCigaretteLicenseData, setLocalCigaretteLicenseData] =
       useState(cigaretteLicenseData);

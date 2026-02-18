@@ -18,7 +18,7 @@ import {
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 describe("<CigaretteLicenseReview />", () => {
   const mockSetStepIndex = jest.fn();
@@ -37,7 +37,7 @@ describe("<CigaretteLicenseReview />", () => {
     const testBusiness = business ?? generateBusiness({});
     const testUserData = userData ?? generateUserDataForBusiness(testBusiness);
 
-    const TestComponent = (): JSX.Element => {
+    const TestComponent = (): ReactNode => {
       const [cigaretteLicenseData, setCigaretteLicenseData] = useState(
         testBusiness.cigaretteLicenseData || emptyCigaretteLicenseData,
       );

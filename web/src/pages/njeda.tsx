@@ -38,9 +38,53 @@ interface Props {
   CMS_PREVIEW_ONLY_OPEN_MODAL?: number;
 }
 
-const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
+const FundingsHeader = (): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
+
+  return (
+    <div
+      className={
+        "bg-accent-cool-lightest padding-bottom-4 padding-top-3 border-bottom border-accent-cool-light"
+      }
+    >
+      <div className={"margin-left-3ch"}>
+        <div className="desktop:grid-col-6 display-block padding-bottom-3">
+          <UnStyledButton
+            dataTestid={"njeda-logo-button"}
+            isButtonALink={true}
+            ariaLabel={Config.fundingsOnboardingModal.pageHeader.logoAriaText}
+            onClick={() => {
+              router && router.push(Config.fundingsOnboardingModal.pageHeader.logoLink);
+            }}
+          >
+            <img src="/img/njeda-logo.webp" alt="" />
+          </UnStyledButton>
+        </div>
+        <Heading
+          level={1}
+          className="text-base-darkest margin-bottom-4 desktop:margin-bottom-3 text-accent-cool-darker"
+        >
+          {Config.fundingsOnboardingModal.pageHeader.headerText}
+        </Heading>
+        <div className={"text-lg-left text-accent-cool-dark-medium margin-bottom-1"}>
+          {Config.fundingsOnboardingModal.pageHeader.subHeaderText}
+        </div>
+        <PrimaryButton
+          isColor={"accent-cool-darker"}
+          onClick={() => {
+            router && router.push(ROUTES.dashboard);
+          }}
+        >
+          {Config.fundingsOnboardingModal.pageHeader.buttonText}
+        </PrimaryButton>
+      </div>
+    </div>
+  );
+};
+
+const NJEDAFundingsOnboardingPage = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const currentUserData = createEmptyUserData(createEmptyUser());
   const { business, updateQueue, createUpdateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(
@@ -52,14 +96,8 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     business?.profileData.existingEmployees ?? "",
   );
   const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(
-    props.CMS_PREVIEW_ONLY_OPEN_MODAL === undefined ? false : true,
+    props.CMS_PREVIEW_ONLY_OPEN_MODAL !== undefined && props.CMS_PREVIEW_ONLY_OPEN_MODAL <= 0,
   );
-
-  useEffect(() => {
-    if (props.CMS_PREVIEW_ONLY_OPEN_MODAL !== undefined && props.CMS_PREVIEW_ONLY_OPEN_MODAL > 0) {
-      setShouldCloseModal(false);
-    }
-  }, [props.CMS_PREVIEW_ONLY_OPEN_MODAL]);
 
   const [filteredFundings, setFilteredFundings] = useState<Funding[]>(props.fundings);
   const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState<boolean>(false);
@@ -144,48 +182,6 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
   };
 
   const { onSubmit, state: formContextState } = useFormContextHelper(createDataFormErrorMap());
-
-  const FundingsHeader = (): ReactElement => {
-    return (
-      <div
-        className={
-          "bg-accent-cool-lightest padding-bottom-4 padding-top-3 border-bottom border-accent-cool-light"
-        }
-      >
-        <div className={"margin-left-3ch"}>
-          <div className="desktop:grid-col-6 display-block padding-bottom-3">
-            <UnStyledButton
-              dataTestid={"njeda-logo-button"}
-              isButtonALink={true}
-              ariaLabel={Config.fundingsOnboardingModal.pageHeader.logoAriaText}
-              onClick={() => {
-                router && router.push(Config.fundingsOnboardingModal.pageHeader.logoLink);
-              }}
-            >
-              <img src="/img/njeda-logo.webp" alt="" />
-            </UnStyledButton>
-          </div>
-          <Heading
-            level={1}
-            className="text-base-darkest margin-bottom-4 desktop:margin-bottom-3 text-accent-cool-darker"
-          >
-            {Config.fundingsOnboardingModal.pageHeader.headerText}
-          </Heading>
-          <div className={"text-lg-left text-accent-cool-dark-medium margin-bottom-1"}>
-            {Config.fundingsOnboardingModal.pageHeader.subHeaderText}
-          </div>
-          <PrimaryButton
-            isColor={"accent-cool-darker"}
-            onClick={() => {
-              router && router.push(ROUTES.dashboard);
-            }}
-          >
-            {Config.fundingsOnboardingModal.pageHeader.buttonText}
-          </PrimaryButton>
-        </div>
-      </div>
-    );
-  };
 
   const fundingEntry = (funding: Funding, hideTopBorder: boolean): ReactElement => {
     return (
@@ -347,4 +343,4 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
   };
 };
 
-export default NJEDAFundingsOnboardingPaage;
+export default NJEDAFundingsOnboardingPage;

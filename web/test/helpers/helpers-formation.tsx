@@ -5,7 +5,8 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateTask, randomPublicFilingLegalType } from "@/test/factories";
-import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
+import { withConfig, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -72,6 +73,7 @@ export const useSetupInitialMocks = (): void => {
   useMockDocuments({});
   mockApiResponse();
   setDesktopScreen(true);
+  useMockConfig();
 };
 
 type PreparePageParams = {
@@ -136,23 +138,25 @@ export const preparePage = ({
   });
 
   render(
-    withNeedsAccountContext(
-      <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
-        <WithStatefulUserData initialUserData={userData}>
-          <ThemeProvider theme={createTheme()}>
-            <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
-          </ThemeProvider>
-        </WithStatefulUserData>
-      </MunicipalitiesContext.Provider>,
-      isAuthenticated ?? IsAuthenticated.TRUE,
-      {
-        showNeedsAccountModal: false,
-        setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
-        showContinueWithoutSaving: false,
-        setShowContinueWithoutSaving: setShowContinueWithoutSaving ?? jest.fn(),
-        userWantsToContinueWithoutSaving: false,
-        setUserWantsToContinueWithoutSaving: setUserWantsToContinueWithoutSaving ?? jest.fn(),
-      },
+    withConfig(
+      withNeedsAccountContext(
+        <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
+          <WithStatefulUserData initialUserData={userData}>
+            <ThemeProvider theme={createTheme()}>
+              <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
+            </ThemeProvider>
+          </WithStatefulUserData>
+        </MunicipalitiesContext.Provider>,
+        isAuthenticated ?? IsAuthenticated.TRUE,
+        {
+          showNeedsAccountModal: false,
+          setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
+          showContinueWithoutSaving: false,
+          setShowContinueWithoutSaving: setShowContinueWithoutSaving ?? jest.fn(),
+          userWantsToContinueWithoutSaving: false,
+          setUserWantsToContinueWithoutSaving: setUserWantsToContinueWithoutSaving ?? jest.fn(),
+        },
+      ),
     ),
   );
   return createFormationPageHelpers();

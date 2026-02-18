@@ -188,15 +188,13 @@ const OutlineBox = (props: any): ReactElement => {
 };
 
 const ListOrCheckbox = (props: any): ReactElement => {
-  if (
-    props.children &&
-    Array.isArray(props.children) &&
-    props.children.length > 0 &&
-    typeof props.children[0] === "string" &&
-    props.children[0].startsWith("[]")
-  ) {
-    const checklistItemId = props.children[0].slice("[]".length).split("{")[1].split("}")[0];
-    const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
+  // React 19 compatibility: normalize children to array
+  const childrenArray = Array.isArray(props.children) ? props.children : [props.children];
+  const firstChild = childrenArray[0];
+
+  if (firstChild && typeof firstChild === "string" && firstChild.startsWith("[]")) {
+    const checklistItemId = firstChild.slice("[]".length).split("{")[1].split("}")[0];
+    const checklistItemBody = [firstChild.split("}")[1], ...childrenArray.slice(1)];
 
     return (
       <div>

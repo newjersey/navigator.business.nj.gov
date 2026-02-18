@@ -321,10 +321,12 @@ describe("profile - shared", () => {
     const randomMunicipality = generateMunicipality({});
     renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
     await goToInfoTab();
-    selectByText("Location", randomMunicipality.displayName);
-    expect(screen.getByLabelText("Location")).toHaveValue(randomMunicipality.displayName);
+    await selectByText("Location", randomMunicipality.displayName);
+    await waitFor(() => {
+      expect(screen.getByLabelText("Location")).toHaveValue(randomMunicipality.displayName);
+    });
     fireEvent.blur(screen.getByLabelText("Location"));
-    clickSave();
+    await clickSave();
     await waitFor(() => {
       return expect(currentBusiness().profileData.municipality).toEqual(randomMunicipality);
     });
@@ -351,8 +353,8 @@ describe("profile - shared", () => {
 
     renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
     await goToInfoTab();
-    selectByText("Location", randomMunicipality.displayName);
-    clickSave();
+    await selectByText("Location", randomMunicipality.displayName);
+    await clickSave();
     await waitFor(() => {
       return expect(currentBusiness().profileData.municipality).toEqual(randomMunicipality);
     });
@@ -394,8 +396,8 @@ describe("profile - shared", () => {
 
       renderPage({ business });
 
-      selectByText("Industry", updatedIndustry.name);
-      clickSave();
+      await selectByText("Industry", updatedIndustry.name);
+      await clickSave();
 
       await waitFor(() => {
         expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true");
@@ -734,8 +736,8 @@ describe("profile - shared", () => {
         });
         renderPage({ business });
         await goToInfoTab();
-        selectByValue("Industry", "test-industry-with-no-non-essential-questions");
-        clickSave();
+        await selectByValue("Industry", "test-industry-with-no-non-essential-questions");
+        await clickSave();
         await waitFor(() => {
           expect(currentBusiness().profileData.nonEssentialRadioAnswers).toStrictEqual({});
         });
@@ -812,8 +814,8 @@ describe("profile - shared", () => {
         });
         renderPage({ business });
         await goToInfoTab();
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
+        await clickSave();
+        const profileAlert = await screen.findByTestId("profile-error-alert");
         await waitFor(() => {
           expect(profileAlert).toBeInTheDocument();
         });
@@ -957,7 +959,7 @@ describe("profile - shared", () => {
         }),
       );
 
-      clickSave();
+      await clickSave();
       await waitFor(() => {
         expect(currentBusiness().profileData.employerAccessRegistration).toEqual(true);
       });
@@ -983,7 +985,7 @@ describe("profile - shared", () => {
       const newEin = "1".repeat(DOL_EIN_CHARACTERS);
       await userEvent.type(textbox, newEin);
 
-      clickSave();
+      await clickSave();
       await waitFor(() => {
         expect(currentBusiness().profileData.deptOfLaborEin).toEqual(newEin);
       });

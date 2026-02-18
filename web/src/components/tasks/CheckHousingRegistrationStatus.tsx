@@ -24,21 +24,21 @@ interface Props {
   municipalities: HousingMunicipality[];
 }
 
-const Config = getMergedConfig();
-const HousingRegistrationSearchErrorLookup: Record<
-  HotelMotelRegistrationSearchError | MultipleDwellingSearchError,
-  string
-> = {
-  NO_PROPERTY_INTEREST_FOUND: Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_HOTEL_MOTEL_REGISTRATIONS_FOUND:
-    Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
-  FIELDS_REQUIRED: Config.housingRegistrationSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.housingRegistrationSearchTask.errorTextSearchFailed,
-  NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND:
-    Config.housingRegistrationSearchTask.errorTextNoMultipleDwellingRegistrations,
-};
-
 export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
+  const HousingRegistrationSearchErrorLookup: Record<
+    HotelMotelRegistrationSearchError | MultipleDwellingSearchError,
+    string
+  > = {
+    NO_PROPERTY_INTEREST_FOUND:
+      Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
+    NO_HOTEL_MOTEL_REGISTRATIONS_FOUND:
+      Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
+    FIELDS_REQUIRED: Config.housingRegistrationSearchTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.housingRegistrationSearchTask.errorTextSearchFailed,
+    NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND:
+      Config.housingRegistrationSearchTask.errorTextNoMultipleDwellingRegistrations,
+  };
   const [formValues, setFormValues] = useState<HousingAddress>({ address1: "" });
   const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(
     undefined,

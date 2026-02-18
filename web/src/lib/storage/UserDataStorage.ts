@@ -2,10 +2,13 @@ import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared/";
 
 interface UserDataStorage {
-  get: (key?: string) => UserData | undefined;
-  set: (key: string, value: UserData) => boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  get: (key?: string) => any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  set: (key: string, value: any) => any;
   delete: (key?: string) => void;
   clear: () => void;
+  keys: () => IterableIterator<string>;
   getCurrentUserData: () => UserData | undefined;
   deleteCurrentUser: () => void;
   getCurrentUserId: () => string | undefined;
@@ -17,11 +20,13 @@ export const userDataPrefix = "$swrUserData$";
 const registrationStatusKey = "selfRegStatus";
 export const swrPrefixToIgnore = "$swr$";
 
-export const UserDataStorageFactory = (): UserDataStorage => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+export const UserDataStorageFactory = (_cache?: any): UserDataStorage => {
   const buffer = new Map<string, UserData | undefined>();
   const browserStorage = BrowserStorageFactory("session");
 
-  const get = (key?: string): UserData | undefined => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const get = (key?: string): any => {
     if (!key) {
       return undefined;
     }
@@ -38,7 +43,8 @@ export const UserDataStorageFactory = (): UserDataStorage => {
     return undefined;
   };
 
-  const set = (key: string, value: UserData): boolean => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const set = (key: string, value: any): any => {
     if (!key) {
       return false;
     }
@@ -88,7 +94,12 @@ export const UserDataStorageFactory = (): UserDataStorage => {
 
   const getCurrentUserData = (): UserData | undefined => {
     const key = getCurrentUserId();
-    return key ? get(key) : undefined;
+    const storedData = key ? get(key) : undefined;
+    // Handle SWR cache structure which wraps data in { data, error, _c } format
+    if (storedData && typeof storedData === "object" && "data" in storedData) {
+      return storedData.data as UserData;
+    }
+    return storedData;
   };
 
   const getCurrentUsers = (): string[] => {
@@ -105,10 +116,15 @@ export const UserDataStorageFactory = (): UserDataStorage => {
         : userDataPrefix;
   };
 
+  const keys = (): IterableIterator<string> => {
+    return buffer.keys();
+  };
+
   return {
     get,
     set,
     clear,
+    keys,
     getCurrentUserId,
     getCurrentUserData,
     deleteCurrentUser,

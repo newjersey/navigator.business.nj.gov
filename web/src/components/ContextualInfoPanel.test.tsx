@@ -1,6 +1,7 @@
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
+import { flushPromises } from "@/test/helpers/helpers-formation";
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 
 describe("<ContextualInfoPanel />", () => {
   it("is closed when contextual info is empty", () => {
@@ -15,7 +16,7 @@ describe("<ContextualInfoPanel />", () => {
     expect(screen.queryByTestId("info-panel")).not.toBeInTheDocument();
   });
 
-  it("is open when the content is set", () => {
+  it("is open when the content is set", async () => {
     render(
       withContextualInfo(
         <ContextualInfoPanel />,
@@ -23,11 +24,16 @@ describe("<ContextualInfoPanel />", () => {
         jest.fn(),
       ),
     );
+    await act(async () => {
+      await flushPromises();
+    });
     expect(screen.getByTestId("overlay")).toHaveClass("is-visible");
-    expect(screen.getByTestId("info-panel")).toHaveClass("is-visible");
+    await waitFor(() => {
+      expect(screen.getByTestId("info-panel")).toHaveClass("is-visible");
+    });
   });
 
-  it("displays the content as markdown", () => {
+  it("displays the content as markdown", async () => {
     render(
       withContextualInfo(
         <ContextualInfoPanel />,
@@ -35,7 +41,12 @@ describe("<ContextualInfoPanel />", () => {
         jest.fn(),
       ),
     );
-    expect(screen.getByText("a header")).toBeInTheDocument();
+    await act(async () => {
+      await flushPromises();
+    });
+    await waitFor(() => {
+      expect(screen.getByText("a header")).toBeInTheDocument();
+    });
     expect(screen.getByText("a paragraph")).toBeInTheDocument();
   });
 });

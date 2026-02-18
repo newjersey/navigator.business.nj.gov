@@ -70,19 +70,21 @@ export const MyNjMenuItem = (props: { handleClose: () => void }): ReactElement =
   });
 };
 
-export const AddBusinessItem = (props: { handleClose: () => void }): ReactElement[] => {
-  const { Config } = useConfig();
-
-  const router = useRouter();
+// Pure function version that doesn't use hooks - safe for conditional calls
+export const createAddBusinessItems = (
+  handleClose: () => void,
+  Config: ReturnType<typeof useConfig>["Config"],
+  router: ReturnType<typeof useRouter>,
+): ReactElement[] => {
   return [
     NavMenuItem({
       onClick: (): void => {
         router &&
           routeWithQuery(router, {
             path: ROUTES.onboarding,
-            queries: { [QUERIES.additionalBusiness]: "true" },
+            queries: { [QUERIES.additionalBusiness]: "true", [QUERIES.page]: 1 },
           });
-        props.handleClose();
+        handleClose();
       },
       icon: <ButtonIcon svgFilename="add-business-plus" sizePx="25px" />,
       hoverIcon: <ButtonIcon svgFilename="add-business-plus-hover" sizePx="25px" />,
@@ -92,6 +94,14 @@ export const AddBusinessItem = (props: { handleClose: () => void }): ReactElemen
     }),
     <hr className="margin-0 hr-2px" key={"add-break-1"} />,
   ];
+};
+
+// Wrapper that calls hooks - must be used in component context
+export const AddBusinessItem = (props: { handleClose: () => void }): ReactElement[] => {
+  const { Config } = useConfig();
+  const router = useRouter();
+
+  return createAddBusinessItems(props.handleClose, Config, router);
 };
 
 export const RegisterMenuItem = (): ReactElement => {
@@ -125,20 +135,19 @@ export const GetStartedMenuItem = (): ReactElement => {
   });
 };
 
-export const ProfileMenuItem = (props: {
-  handleClose: () => void;
-  isAuthenticated: boolean;
-  userData?: UserData;
-}): ReactElement[] => {
-  const { Config } = useConfig();
-  const { setShowRemoveBusinessModal } = useContext(RemoveBusinessContext);
-
-  const { updateQueue } = useUserData();
-  const router = useRouter();
-  const isProfileSelected = router?.route === ROUTES.profile;
-
-  const userData = props.userData;
+// Pure function version that doesn't use hooks - safe for conditional calls
+export const createProfileMenuItems = (
+  userData: UserData | undefined,
+  handleClose: () => void,
+  isAuthenticated: boolean,
+  Config: ReturnType<typeof useConfig>["Config"],
+  setShowRemoveBusinessModal: (value: boolean) => void,
+  updateQueue: ReturnType<typeof useUserData>["updateQueue"],
+  router: ReturnType<typeof useRouter>,
+  isProfileSelected: boolean,
+): ReactElement[] => {
   if (!userData) return [];
+
   const hasMultipleBusinesses =
     Object.values(userData.businesses).filter(
       (b) => b.dateDeletedISO === undefined || b.dateDeletedISO === "",
@@ -159,12 +168,12 @@ export const ProfileMenuItem = (props: {
             if (Object.keys(userData.businesses).length > 1) {
               await updateQueue?.queue(switchCurrentBusiness(userData, businessId)).update();
             }
-            props.handleClose();
+            handleClose();
             router && (await router.push(ROUTES.dashboard));
           },
           selected: !isProfileSelected && isCurrent,
           icon: <ButtonIcon svgFilename={`business-${getBusinessIconColor(i)}`} sizePx="35px" />,
-          itemText: getNavBarBusinessTitle(userData.businesses[businessId], props.isAuthenticated),
+          itemText: getNavBarBusinessTitle(userData.businesses[businessId], isAuthenticated),
           dataTestid: `business-title-${i}`,
           key: `business-title-${businessId}`,
           className: `profile-menu-item ${isCurrent ? "current" : ""}`,
@@ -209,6 +218,30 @@ export const ProfileMenuItem = (props: {
 
       return businessMenuItems;
     });
+};
+
+// Wrapper that calls hooks - must be used in component context
+export const ProfileMenuItem = (props: {
+  handleClose: () => void;
+  isAuthenticated: boolean;
+  userData?: UserData;
+}): ReactElement[] => {
+  const { Config } = useConfig();
+  const { setShowRemoveBusinessModal } = useContext(RemoveBusinessContext);
+  const { updateQueue } = useUserData();
+  const router = useRouter();
+  const isProfileSelected = router?.route === ROUTES.profile;
+
+  return createProfileMenuItems(
+    props.userData,
+    props.handleClose,
+    props.isAuthenticated,
+    Config,
+    setShowRemoveBusinessModal,
+    updateQueue,
+    router,
+    isProfileSelected,
+  );
 };
 
 export const Search = (): ReactElement => {

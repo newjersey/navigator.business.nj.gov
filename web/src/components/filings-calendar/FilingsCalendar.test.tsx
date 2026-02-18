@@ -44,7 +44,8 @@ import {
 } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import dayjs, { Dayjs } from "dayjs";
 
 function mockMaterialUI(): typeof materialUi {
@@ -296,7 +297,7 @@ describe("<FilingsCalendar />", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("displays calendar content when there are filings in two years", () => {
+  it("displays calendar content when there are filings in two years", async () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: getAprilDateOfThisYear().add(2, "years").format(defaultDateFormat),
@@ -330,12 +331,19 @@ describe("<FilingsCalendar />", () => {
     expect(
       screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText)),
     ).not.toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
-    fireEvent.click(screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString()));
-    expect(screen.getByText(`Annual Report`)).toBeInTheDocument();
+
+    const yearDropdownButton = screen.getByTestId("primary-year-selector-dropdown-button");
+    await userEvent.click(yearDropdownButton);
+
+    const yearOption = screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString());
+    await userEvent.click(yearOption);
+
+    await waitFor(() => {
+      expect(screen.getByText(`Annual Report`)).toBeInTheDocument();
+    });
   });
 
-  it("displays empty calendar content when there are filings in two years", () => {
+  it("displays empty calendar content when there are filings in two years", async () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: getAprilDateOfThisYear().add(2, "years").format(defaultDateFormat),
@@ -365,23 +373,38 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByTestId("filings-calendar")).toHaveTextContent(
       markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown),
     );
-    fireEvent.click(
-      screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }),
-    );
+
+    const listViewButton = screen.getByText(Config.dashboardDefaults.calendarListViewButton, {
+      exact: false,
+    });
+    await userEvent.click(listViewButton);
+
     expect(screen.getByTestId("filings-calendar")).toHaveTextContent(
       markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown),
     );
-    fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
-    fireEvent.click(screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString()));
-    expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
-      markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown),
-    );
-    fireEvent.click(
-      screen.getByText(Config.dashboardDefaults.calendarGridViewButton, { exact: false }),
-    );
-    expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
-      markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown),
-    );
+
+    const yearDropdownButton = screen.getByTestId("primary-year-selector-dropdown-button");
+    await userEvent.click(yearDropdownButton);
+
+    const yearOption = screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString());
+    await userEvent.click(yearOption);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
+        markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown),
+      );
+    });
+
+    const gridViewButton = screen.getByText(Config.dashboardDefaults.calendarGridViewButton, {
+      exact: false,
+    });
+    await userEvent.click(gridViewButton);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
+        markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown),
+      );
+    });
   });
 
   it("hides year selector when there are no taxFilings", () => {
@@ -611,7 +634,7 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByText(xrayRenewalCalendarEvent.eventDisplayName)).toBeInTheDocument();
   });
 
-  it("sends analytics when feedback modal link is clicked", () => {
+  it("sends analytics when feedback modal link is clicked", async () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: getAprilDateOfThisYear().format(defaultDateFormat),
@@ -636,7 +659,10 @@ describe("<FilingsCalendar />", () => {
       },
     };
     renderFilingsCalendar(operateReferences, business);
-    fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarFeedbackButtonText));
+
+    const feedbackButton = screen.getByText(Config.dashboardDefaults.calendarFeedbackButtonText);
+    await userEvent.click(feedbackButton);
+
     expect(mockAnalytics.event.share_calendar_feedback.click.open_live_chat).toHaveBeenCalled();
   });
 
@@ -879,30 +905,44 @@ describe("<FilingsCalendar />", () => {
       };
     });
 
-    it("displays calendar list view when button is clicked", () => {
+    it("displays calendar list view when button is clicked", async () => {
       renderFilingsCalendar(operateReferences, business);
 
       expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
-      fireEvent.click(
-        screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }),
-      );
-      expect(currentBusiness().preferences.isCalendarFullView).toBeFalsy();
+
+      const listViewButton = screen.getByText(Config.dashboardDefaults.calendarListViewButton, {
+        exact: false,
+      });
+      await userEvent.click(listViewButton);
+
+      await waitFor(() => {
+        expect(currentBusiness().preferences.isCalendarFullView).toBeFalsy();
+      });
       expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
       expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     });
 
-    it("displays calendar grid view when button is clicked", () => {
+    it("displays calendar grid view when button is clicked", async () => {
       renderFilingsCalendar(operateReferences, business);
 
-      fireEvent.click(
-        screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }),
-      );
+      const listViewButton = screen.getByText(Config.dashboardDefaults.calendarListViewButton, {
+        exact: false,
+      });
+      await userEvent.click(listViewButton);
+
+      await waitFor(() => {
+        expect(currentBusiness().preferences.isCalendarFullView).toBeFalsy();
+      });
       expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
-      expect(currentBusiness().preferences.isCalendarFullView).toBeFalsy();
-      fireEvent.click(
-        screen.getByText(Config.dashboardDefaults.calendarGridViewButton, { exact: false }),
-      );
-      expect(currentBusiness().preferences.isCalendarFullView).toBeTruthy();
+
+      const gridViewButton = screen.getByText(Config.dashboardDefaults.calendarGridViewButton, {
+        exact: false,
+      });
+      await userEvent.click(gridViewButton);
+
+      await waitFor(() => {
+        expect(currentBusiness().preferences.isCalendarFullView).toBeTruthy();
+      });
       expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
       expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
     });
@@ -993,34 +1033,63 @@ describe("<FilingsCalendar />", () => {
       ).toBeInTheDocument();
     });
 
-    it("shows 5 more events when the view more button is clicked", () => {
+    it("shows 5 more events when the view more button is clicked", async () => {
       renderCalendarWithEntries(12);
       expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
-      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(10);
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
-      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(12);
+
+      const viewMoreButton1 = screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton);
+      await userEvent.click(viewMoreButton1);
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(10);
+      });
+
+      const viewMoreButton2 = screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton);
+      await userEvent.click(viewMoreButton2);
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(12);
+      });
     });
 
-    it("does not shows the view more button when we have no more entries to show", () => {
+    it("does not shows the view more button when we have no more entries to show", async () => {
       renderCalendarWithEntries(6);
       expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
-      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(6);
+
+      const viewMoreButton = screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton);
+      await userEvent.click(viewMoreButton);
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(6);
+      });
       expect(
         screen.queryByText(Config.dashboardDefaults.calendarListViewMoreButton),
       ).not.toBeInTheDocument();
     });
 
-    it("resets view more button when year is changed", () => {
+    it("resets view more button when year is changed", async () => {
       renderCalendarWithEntries(12);
 
       expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
-      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(10);
-      fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
-      fireEvent.click(screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString()));
-      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
+
+      const viewMoreButton = screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton);
+      await userEvent.click(viewMoreButton);
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(10);
+      });
+
+      const yearDropdownButton = screen.getByTestId("primary-year-selector-dropdown-button");
+      await userEvent.click(yearDropdownButton);
+
+      const futureYear = screen.getByText(
+        getAprilDateOfThisYear().add(2, "years").year().toString(),
+      );
+      await userEvent.click(futureYear);
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
+      });
     });
   });
 });

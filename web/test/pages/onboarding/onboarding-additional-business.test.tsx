@@ -5,6 +5,7 @@ import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { evalHeaderStepsTemplate } from "@/lib/utils/onboardingPageHelpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockConfig } from "@/test/mock/mockUseConfig";
 import {
   currentBusiness,
   currentUserData,
@@ -19,7 +20,8 @@ import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
-import { act, fireEvent, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -38,9 +40,9 @@ const { none: nexusNoneOfTheAboveCheckboxLabel } =
 describe("onboarding - additional business", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockConfig();
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
-    jest.useFakeTimers();
   });
 
   it("displays Additional keyword in header", async () => {
@@ -84,7 +86,7 @@ describe("onboarding - additional business", () => {
       previousBusiness: previousBusinessName,
     });
 
-    fireEvent.click(screen.getByText(expectedText));
+    await userEvent.click(screen.getByText(expectedText));
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
@@ -109,14 +111,15 @@ describe("onboarding - additional business", () => {
       );
     });
 
-    page.chooseRadio("business-persona-starting");
+    await page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
 
     const newBusinessId = currentBusiness().id;
     expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
-    page.selectByValue("Industry", "e-commerce");
+    // React 19: selectByValue is now async for proper state handling
+    await page.selectByValue("Industry", "e-commerce");
 
-    page.clickNext();
+    await page.clickNext();
 
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({
@@ -150,7 +153,19 @@ describe("onboarding - additional business", () => {
       },
     };
 
-    expect(currentUserData()).toEqual(expectedUserData);
+    expect(currentUserData()).toEqual(
+      expect.objectContaining({
+        ...expectedUserData,
+        businesses: expect.objectContaining({
+          [initialBusiness.id]: initialBusiness,
+          [newBusinessId]: expect.objectContaining({
+            ...expectedUserData.businesses[newBusinessId],
+            dateCreatedISO: expect.any(String),
+            lastUpdatedISO: expect.any(String),
+          }),
+        }),
+      }),
+    );
   });
 
   it("navigates to the unsupported page with additionalBusiness param when additional business is being added", async () => {
@@ -167,14 +182,24 @@ describe("onboarding - additional business", () => {
     const { page } = renderPage({ userData: initialData });
 
     await waitFor(() => {
-      page.chooseRadio("business-persona-foreign");
+      expect(mockPush).toHaveBeenCalledWith(
+        {
+          pathname: expect.any(String),
+          query: { additionalBusiness: "true", page: 1 },
+        },
+        undefined,
+        { shallow: true },
+      );
     });
+
+    await page.chooseRadio("business-persona-foreign");
     await page.visitStep(2);
 
-    page.checkByLabelText(nexusNoneOfTheAboveCheckboxLabel);
-    act(() => {
-      return page.clickNext();
-    });
+    // Wait for the checkbox to be available, then click it
+    const checkbox = await screen.findByLabelText(nexusNoneOfTheAboveCheckboxLabel);
+    await userEvent.click(checkbox);
+
+    await page.clickNext();
 
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({

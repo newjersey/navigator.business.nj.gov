@@ -22,17 +22,16 @@ interface Props {
   municipalities: HousingMunicipality[];
 }
 
-const Config = getMergedConfig();
-const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string> = {
-  NO_PROPERTY_INTEREST_FOUND:
-    Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_ELEVATOR_REGISTRATIONS_FOUND:
-    Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
-  FIELDS_REQUIRED: Config.elevatorRegistrationSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.elevatorRegistrationSearchTask.errorTextSearchFailed,
-};
-
 export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
+  const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string> = {
+    NO_PROPERTY_INTEREST_FOUND:
+      Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
+    NO_ELEVATOR_REGISTRATIONS_FOUND:
+      Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
+    FIELDS_REQUIRED: Config.elevatorRegistrationSearchTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.elevatorRegistrationSearchTask.errorTextSearchFailed,
+  };
   const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({ address1: "" });
   const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(
     undefined,

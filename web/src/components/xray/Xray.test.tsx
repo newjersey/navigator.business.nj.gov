@@ -348,26 +348,35 @@ describe("<Xray />", () => {
       });
     };
 
-    it("displays the summary if xray registration data is available", () => {
+    it("displays the summary if xray registration data is available", async () => {
       renderWithXrayData({});
-      expect(screen.getByTestId("xray-registration-summary")).toBeInTheDocument();
+      expect(await screen.findByTestId("xray-registration-summary")).toBeInTheDocument();
     });
 
-    it("takes the user back to the search page when the edit button is clicked on the summary page", () => {
+    it("takes the user back to the search page when the edit button is clicked on the summary page", async () => {
       renderWithXrayData({});
-      fireEvent.click(screen.getByText(Config.xrayRegistrationTask.editButtonText));
-      expect(screen.getByText(Config.xrayRegistrationTask.checkStatusText)).toBeInTheDocument();
+      const editButton = await screen.findByText(Config.xrayRegistrationTask.editButtonText);
+      fireEvent.click(editButton);
+      expect(
+        await screen.findByText(Config.xrayRegistrationTask.checkStatusText),
+      ).toBeInTheDocument();
     });
 
-    it("takes the user back to the registration tab when the `go to Start Registration Tab` is clicked on the summary page", () => {
+    it("takes the user back to the registration tab when the `go to Start Registration Tab` is clicked on the summary page", async () => {
       renderWithXrayData({ status: "INACTIVE" });
-      fireEvent.click(screen.getByText(Config.xrayRegistrationTask.editButtonText));
-      expect(screen.getByText(Config.xrayRegistrationTask.checkStatusText)).toBeInTheDocument();
+      const editButton = await screen.findByText(Config.xrayRegistrationTask.editButtonText);
+      fireEvent.click(editButton);
+      expect(
+        await screen.findByText(Config.xrayRegistrationTask.checkStatusText),
+      ).toBeInTheDocument();
     });
 
-    it("fires renewal analytics event when 'Renew your registration now' is clicked", () => {
+    it("fires renewal analytics event when 'Renew your registration now' is clicked", async () => {
       renderWithXrayData({ status: "EXPIRED" });
-      fireEvent.click(screen.getByText(Config.xrayRegistrationTask.expiredDescriptionCallToAction));
+      const callToActionButton = await screen.findByText(
+        Config.xrayRegistrationTask.expiredDescriptionCallToAction,
+      );
+      fireEvent.click(callToActionButton);
       expect(
         mockAnalytics.event.xray_registration_expired_status_card.click
           .xray_renewal_started_expired_card,

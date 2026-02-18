@@ -15,7 +15,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { UpdateQueue } from "@/lib/UpdateQueue";
-import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
+import { authReducer } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
@@ -23,13 +23,13 @@ import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
-import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   BusinessPersona,
   OperatingPhaseId,
   RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
@@ -50,7 +50,7 @@ ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
-  const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer, initialState);
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
   const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(
@@ -140,53 +140,77 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     setOnLoadDimensions(updateQueue!.current());
   }, updateQueue?.current);
 
-  useMountEffect(() => {
-    if (!pageProps.noAuth) {
-      getActiveUser()
-        .then((activeUser) => {
-          dispatch({
-            type: "LOGIN",
-            activeUser: activeUser,
-          });
-        })
-        .catch(() => {
-          router &&
-            onGuestSignIn({
-              push: router.push,
-              pathname: router.pathname,
-              asPath: router.asPath,
-              dispatch,
-            });
-        });
+  useEffect(() => {
+    // CRITICAL: Completely skip auth for /mgmt/* pages at every check
+    const isCurrentlyOnMgmtPage =
+      (typeof window !== "undefined" && window.location.pathname.startsWith("/mgmt/")) ||
+      router?.pathname?.startsWith("/mgmt/") ||
+      router?.asPath?.startsWith("/mgmt/");
+
+    if (isCurrentlyOnMgmtPage || pageProps.noAuth) {
+      return;
     }
-  });
+
+    // Wait for router to be ready before proceeding
+    if (!router || !router.isReady || !router.pathname) {
+      return;
+    }
+
+    getActiveUser()
+      .then((activeUser) => {
+        dispatch({
+          type: "LOGIN",
+          activeUser: activeUser,
+        });
+      })
+      .catch(() => {
+        // Double-check we're not on a mgmt page before redirecting
+        if (window.location.pathname.startsWith("/mgmt/") || router.pathname.startsWith("/mgmt/")) {
+          return;
+        }
+
+        onGuestSignIn({
+          push: router.push,
+          pathname: router.pathname,
+          asPath: router.asPath,
+          dispatch,
+        });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router?.isReady, router?.pathname, router?.asPath, pageProps.noAuth]);
 
   const isSeoPage = router && router.pathname.includes("/starter-kits");
 
-  const heroTitle = insertIndustryContent(
-    config.starterKits.hero.title,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const heroTitle = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.hero?.title ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const description = insertIndustryContent(
-    config.starterKits.seo.description,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const description = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.seo?.description ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const imageAlt = insertIndustryContent(
-    config.starterKits.seo.imageAltText,
-    pageProps.industry?.id,
-    pageProps.industry?.name,
-  );
+  const imageAlt = isSeoPage
+    ? insertIndustryContent(
+        config.starterKits?.seo?.imageAltText ?? "",
+        pageProps.industry?.id,
+        pageProps.industry?.name,
+      )
+    : "";
 
-  const DEFAULT_BASE_URL = "https://navigator.business.nj.gov/dashboard";
+  const DEFAULT_BASE_URL = "https://account.business.nj.gov/dashboard";
   const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL ?? DEFAULT_BASE_URL;
   const imageUrl = new URL("/img/team-success.jpg", baseUrl).href;
 
   return (
-    <>
+    <ConfigContext.Provider value={{ config, setOverrides: () => {} }}>
       <Head>
         <meta name="viewport" content="width=360, initial-scale=1" />
         {isSeoPage && (
@@ -289,7 +313,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           </ThemeProvider>
         </StyledEngineProvider>
       </IntercomContext.Provider>
-    </>
+    </ConfigContext.Provider>
   );
 };
 

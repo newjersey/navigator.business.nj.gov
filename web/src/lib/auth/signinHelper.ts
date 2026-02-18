@@ -96,6 +96,11 @@ export const onGuestSignIn = async ({
   dispatch: Dispatch<AuthAction>;
   encounteredMyNjLinkingError?: boolean | undefined;
 }): Promise<void> => {
+  // CRITICAL: Skip all guest signin logic for management pages - they handle their own auth
+  if (pathname && pathname.startsWith("/mgmt/")) {
+    return;
+  }
+
   const userDataStorage = UserDataStorageFactory();
   const abStorage = ABStorageFactory();
   const accountLinkingErrorStorage = AccountLinkingErrorStorageFactory();
@@ -144,6 +149,12 @@ export const onGuestSignIn = async ({
       setRegistrationDimension("Onboarded Guest");
     }
   } else {
+    // Don't redirect management pages (/mgmt/*) - they handle their own auth
+    if (pathname && pathname.startsWith("/mgmt/")) {
+      setRegistrationDimension("Not Started");
+      return;
+    }
+
     switch (pathname) {
       case ROUTES.welcome: {
         setRegistrationDimension("Not Started");

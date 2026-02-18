@@ -80,273 +80,254 @@ import * as UnsupportedNavigatorUserPage from "../../../content/src/fieldConfig/
 import * as XrayRegistration from "../../../content/src/fieldConfig/xray-registration.json";
 import * as XrayRenewal from "../../../content/src/fieldConfig/xray-renewal.json";
 import * as CalloutAlerts from "../../../content/src/mappings/callout-alerts.json";
+import * as FundingAgency from "../../../content/src/mappings/fundingAgency.json";
+import * as OwnershipTypes from "../../../content/src/mappings/ownershipTypes.json";
+import * as Sectors from "../../../content/src/mappings/sectors.json";
+import * as TaskAgency from "../../../content/src/mappings/taskAgency.json";
+import * as TaxClearanceCertificateIssuingAgencies from "../../../content/src/mappings/taxClearanceCertificateIssuingAgencies.json";
 import * as PageMetadata from "../../../content/src/page-metadata/page-metadata.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
+import { getDefaultConfig } from "./defaultConfig";
 
-const merged = JSON.parse(
-  JSON.stringify(
-    merge(
-      LegalMessageDefaults,
-      PassengerTransportCdl,
-      PassengerTransportCdl2,
-      SectionHeaders,
-      TaskProgressCard,
-      BetaBar,
-      SelfRegistration,
-      SkipToMainContent,
-      TaxCalendar,
-      OnboardingDefaults,
-      FormationDateModal,
-      FundingDefaults,
-      TaskProgress,
-      TaskDefaults,
-      SearchBusinessNameTask,
-      Footer,
-      RegisteredForTaxesModal,
-      UnsupportedNavigatorUserPage,
-      AutosaveDefaults,
-      HeaderDefaults,
-      Profile,
-      CannabisPriorityStatusTab1,
-      CannabisPriorityStatusTab2,
-      CannabisLicenseTab1,
-      CannabisLicenseAnnualTab2,
-      CannabisLicenseConditionalTab2,
-      CigaretteLicenseShared,
-      CigaretteLicenseStep1,
-      CigaretteLicenseStep2,
-      CigaretteLicenseStep3,
-      CigaretteLicenseStep4,
-      CigaretteLicenseConfirmation,
-      NexusNameSearch,
-      NexusDbaFormation,
-      NaicsCode,
-      Ein,
-      TaxId,
-      CannabisLicenseEligibilityModal,
-      FormationInterimSuccessPage,
-      FormationSuccessPage,
-      PageNotFoundError,
-      SiteWideErrorMessages,
-      DeferredLocation,
-      DashboardSnackbars,
-      DashboardCalendar,
-      DashboardTabs,
-      DashboardModals,
-      BusinessFormation,
-      TaxAccess,
-      BusinessStructureTask,
-      BusinessStructurePrompt,
-      AccountSetup,
-      NavigationDefaults,
-      PageMetadata,
-      GovernmentContracting,
-      NavigationDefaults,
-      DashboardDefaults,
-      PageMetadata,
-      CalloutDefaults,
-      ElevatorRegistration,
-      StarterKits,
-      HousingRegistrationSearchTask,
-      anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
-      CalloutAlerts,
-      EnvironmentQuestionnaire,
-      CheckAccountEmailPage,
-      LicenseSearchTask,
-      LandingPage,
-      FundingsOnboarding,
-      LandingPageExperienceB,
-      TaxClearanceCertificateStep1,
-      TaxClearanceCertificateStep2,
-      TaxClearanceCertificateStep3,
-      TaxClearanceCertificateShared,
-      TaxClearanceCertificateDownload,
-      FundingsOnboarding,
-      ManageBusinessVehicles,
-      XrayRegistration,
-      XrayRenewal,
-      AbcEmergencyTripPermit,
-      FilingDefaults,
-      FormationDataDeletionModal,
-      EmployerRates,
-      RemoveBusinessModal,
-      CrtkTask,
-      LoginSupportPage,
-    ),
-  ),
-);
+// Filter out undefined/null/empty imports at module load time to prevent them from overriding defaults
+const hasContent = (config: unknown): boolean => {
+  if (!config || typeof config !== "object") return false;
+  return Object.keys(config as Record<string, unknown>).length > 0;
+};
 
-export type ConfigType = typeof LegalMessageDefaults &
-  typeof SectionHeaders &
-  typeof PassengerTransportCdl &
-  typeof PassengerTransportCdl2 &
-  typeof TaskProgressCard &
-  typeof BetaBar &
-  typeof SelfRegistration &
-  typeof SkipToMainContent &
-  typeof TaxCalendar &
-  typeof OnboardingDefaults &
-  typeof FormationDateModal &
-  typeof FundingDefaults &
-  typeof TaskProgress &
-  typeof TaskDefaults &
-  typeof SearchBusinessNameTask &
-  typeof Footer &
-  typeof RegisteredForTaxesModal &
-  typeof UnsupportedNavigatorUserPage &
+// Helper to unwrap JSON imports - handles both direct imports and default-wrapped imports
+const unwrapConfig = (config: unknown): unknown => {
+  if (!config) return config;
+  // If the import has a 'default' property and only that property, unwrap it
+  const keys = Object.keys(config as Record<string, unknown>);
+  if (keys.length === 1 && keys[0] === "default") {
+    return (config as Record<string, unknown>).default;
+  }
+  return config;
+};
+
+export type ConfigType = typeof AbcEmergencyTripPermit &
+  typeof AccountSetup &
+  typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
   typeof AutosaveDefaults &
-  typeof HeaderDefaults &
-  typeof Profile &
-  typeof CannabisPriorityStatusTab1 &
-  typeof CannabisPriorityStatusTab2 &
-  typeof CannabisLicenseTab1 &
+  typeof BetaBar &
+  typeof BusinessFormation &
+  typeof BusinessStructurePrompt &
+  typeof BusinessStructureTask &
+  typeof CalloutAlerts &
+  typeof CalloutDefaults &
   typeof CannabisLicenseAnnualTab2 &
   typeof CannabisLicenseConditionalTab2 &
+  typeof CannabisLicenseEligibilityModal &
+  typeof CannabisLicenseTab1 &
+  typeof CannabisPriorityStatusTab1 &
+  typeof CannabisPriorityStatusTab2 &
+  typeof CheckAccountEmailPage &
+  typeof CigaretteLicenseConfirmation &
   typeof CigaretteLicenseShared &
   typeof CigaretteLicenseStep1 &
   typeof CigaretteLicenseStep2 &
   typeof CigaretteLicenseStep3 &
   typeof CigaretteLicenseStep4 &
-  typeof CigaretteLicenseConfirmation &
-  typeof NexusNameSearch &
-  typeof NexusDbaFormation &
-  typeof NaicsCode &
+  typeof CrtkTask &
+  typeof DashboardCalendar &
+  typeof DashboardDefaults &
+  typeof DashboardModals &
+  typeof DashboardSnackbars &
+  typeof DashboardTabs &
+  typeof DeferredLocation &
   typeof Ein &
-  typeof TaxId &
-  typeof CannabisLicenseEligibilityModal &
+  typeof ElevatorRegistration &
+  typeof EmployerRates &
+  typeof EnvironmentQuestionnaire &
+  typeof FilingDefaults &
+  typeof Footer &
+  typeof FormationDataDeletionModal &
+  typeof FormationDateModal &
   typeof FormationInterimSuccessPage &
   typeof FormationSuccessPage &
-  typeof PageNotFoundError &
-  typeof SiteWideErrorMessages &
-  typeof DeferredLocation &
-  typeof DashboardCalendar &
-  typeof DashboardModals &
-  typeof DashboardTabs &
-  typeof BusinessFormation &
-  typeof BusinessStructureTask &
-  typeof TaxAccess &
-  typeof DashboardSnackbars &
-  typeof BusinessStructurePrompt &
-  typeof AccountSetup &
-  typeof NavigationDefaults &
+  typeof FundingAgency &
+  typeof FundingDefaults &
+  typeof FundingsOnboarding &
   typeof GovernmentContracting &
-  typeof ElevatorRegistration &
-  typeof CalloutDefaults &
-  typeof DashboardDefaults &
-  typeof PageMetadata &
-  typeof StarterKits &
+  typeof HeaderDefaults &
   typeof HousingRegistrationSearchTask &
-  typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
-  typeof CalloutAlerts &
-  typeof CheckAccountEmailPage &
-  typeof EnvironmentQuestionnaire &
-  typeof LicenseSearchTask &
   typeof LandingPage &
   typeof LandingPageExperienceB &
+  typeof LegalMessageDefaults &
+  typeof LicenseSearchTask &
+  typeof LoginSupportPage &
   typeof ManageBusinessVehicles &
-  typeof FundingsOnboarding &
+  typeof NaicsCode &
+  typeof NavigationDefaults &
+  typeof NexusDbaFormation &
+  typeof NexusNameSearch &
+  typeof OnboardingDefaults &
+  typeof OwnershipTypes &
+  typeof PageMetadata &
+  typeof PageNotFoundError &
+  typeof PassengerTransportCdl &
+  typeof PassengerTransportCdl2 &
+  typeof Profile &
+  typeof RegisteredForTaxesModal &
+  typeof RemoveBusinessModal &
+  typeof SearchBusinessNameTask &
+  typeof Sectors &
+  typeof SectionHeaders &
+  typeof SelfRegistration &
+  typeof SiteWideErrorMessages &
+  typeof SkipToMainContent &
+  typeof StarterKits &
+  typeof TaskAgency &
+  typeof TaskDefaults &
+  typeof TaskProgress &
+  typeof TaskProgressCard &
+  typeof TaxAccess &
+  typeof TaxCalendar &
+  typeof TaxClearanceCertificateDownload &
+  typeof TaxClearanceCertificateIssuingAgencies &
+  typeof TaxClearanceCertificateShared &
   typeof TaxClearanceCertificateStep1 &
   typeof TaxClearanceCertificateStep2 &
   typeof TaxClearanceCertificateStep3 &
-  typeof TaxClearanceCertificateShared &
+  typeof TaxId &
+  typeof UnsupportedNavigatorUserPage &
   typeof XrayRegistration &
-  typeof XrayRenewal &
-  typeof TaxClearanceCertificateDownload &
-  typeof AbcEmergencyTripPermit &
-  typeof FilingDefaults &
-  typeof FormationDataDeletionModal &
-  typeof EmployerRates &
-  typeof RemoveBusinessModal &
-  typeof CrtkTask &
-  typeof LoginSupportPage;
+  typeof XrayRenewal;
 
 export const getMergedConfig = (): ConfigType => {
-  return merge(
-    LegalMessageDefaults,
-    PassengerTransportCdl,
-    PassengerTransportCdl2,
-    SectionHeaders,
-    TaskProgressCard,
-    BetaBar,
-    SelfRegistration,
-    SkipToMainContent,
-    TaxCalendar,
-    OnboardingDefaults,
-    FormationDateModal,
-    FundingDefaults,
-    TaskProgress,
-    TaskDefaults,
-    SearchBusinessNameTask,
-    Footer,
-    RegisteredForTaxesModal,
-    UnsupportedNavigatorUserPage,
+  // Filter out undefined/null/empty imports to prevent them from overriding defaults
+  const configs = [
+    AbcEmergencyTripPermit,
+    AccountSetup,
+    anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
     AutosaveDefaults,
-    HeaderDefaults,
-    Profile,
-    CannabisPriorityStatusTab1,
-    CannabisPriorityStatusTab2,
-    CannabisLicenseTab1,
+    BetaBar,
+    BusinessFormation,
+    BusinessStructurePrompt,
+    BusinessStructureTask,
+    CalloutAlerts,
+    CalloutDefaults,
     CannabisLicenseAnnualTab2,
     CannabisLicenseConditionalTab2,
+    CannabisLicenseEligibilityModal,
+    CannabisLicenseTab1,
+    CannabisPriorityStatusTab1,
+    CannabisPriorityStatusTab2,
+    CheckAccountEmailPage,
+    CigaretteLicenseConfirmation,
     CigaretteLicenseShared,
     CigaretteLicenseStep1,
     CigaretteLicenseStep2,
     CigaretteLicenseStep3,
     CigaretteLicenseStep4,
-    CigaretteLicenseConfirmation,
-    NexusNameSearch,
-    NexusDbaFormation,
-    NaicsCode,
+    CrtkTask,
+    DashboardCalendar,
+    DashboardDefaults,
+    DashboardModals,
+    DashboardSnackbars,
+    DashboardTabs,
+    DeferredLocation,
     Ein,
-    TaxId,
-    CannabisLicenseEligibilityModal,
+    ElevatorRegistration,
+    EmployerRates,
+    EnvironmentQuestionnaire,
+    FilingDefaults,
+    Footer,
+    FormationDataDeletionModal,
+    FormationDateModal,
     FormationInterimSuccessPage,
     FormationSuccessPage,
-    PageNotFoundError,
-    DeferredLocation,
-    DashboardSnackbars,
-    DashboardModals,
-    DashboardTabs,
-    DashboardCalendar,
-    BusinessFormation,
-    TaxAccess,
-    AccountSetup,
-    BusinessStructureTask,
-    NavigationDefaults,
-    PageMetadata,
-    DashboardDefaults,
-    PageMetadata,
+    FundingAgency,
+    FundingDefaults,
+    FundingsOnboarding,
     GovernmentContracting,
-    CalloutDefaults,
-    ElevatorRegistration,
-    StarterKits,
+    HeaderDefaults,
     HousingRegistrationSearchTask,
-    anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
-    CalloutAlerts,
-    EnvironmentQuestionnaire,
-    CheckAccountEmailPage,
-    LicenseSearchTask,
     LandingPage,
-    FundingsOnboarding,
     LandingPageExperienceB,
-    FundingsOnboarding,
+    LegalMessageDefaults,
+    LicenseSearchTask,
+    LoginSupportPage,
+    ManageBusinessVehicles,
+    NaicsCode,
+    NavigationDefaults,
+    NexusDbaFormation,
+    NexusNameSearch,
+    OnboardingDefaults,
+    OwnershipTypes,
+    PageMetadata,
+    PageNotFoundError,
+    PassengerTransportCdl,
+    PassengerTransportCdl2,
+    Profile,
+    RegisteredForTaxesModal,
+    RemoveBusinessModal,
+    SearchBusinessNameTask,
+    Sectors,
+    SectionHeaders,
+    SelfRegistration,
+    SiteWideErrorMessages,
+    SkipToMainContent,
+    StarterKits,
+    TaskAgency,
+    TaskDefaults,
+    TaskProgress,
+    TaskProgressCard,
+    TaxAccess,
+    TaxCalendar,
+    TaxClearanceCertificateDownload,
+    TaxClearanceCertificateIssuingAgencies,
+    TaxClearanceCertificateShared,
     TaxClearanceCertificateStep1,
     TaxClearanceCertificateStep2,
     TaxClearanceCertificateStep3,
-    ManageBusinessVehicles,
-    TaxClearanceCertificateShared,
-    TaxClearanceCertificateDownload,
+    TaxId,
+    UnsupportedNavigatorUserPage,
     XrayRegistration,
     XrayRenewal,
-    AbcEmergencyTripPermit,
-    FilingDefaults,
-    FormationDataDeletionModal,
-    RemoveBusinessModal,
-    LoginSupportPage,
-    CrtkTask,
-  );
+  ]
+    .map((config) => unwrapConfig(config))
+    .filter((config) => hasContent(config));
+
+  const defaultConfig = getDefaultConfig();
+
+  // If no valid configs to merge, just return defaults
+  if (configs.length === 0) {
+    return defaultConfig as unknown as ConfigType;
+  }
+
+  // Start with a fresh copy of defaults, then merge configs on top
+  const mergedConfig = merge({}, defaultConfig, ...configs);
+
+  // Ensure all critical top-level properties exist by falling back to defaults
+  // This handles cases where JSON imports fail during SSG
+  const criticalProperties = [
+    "profileDefaults",
+    "pagesMetadata",
+    "navigationDefaults",
+    "filingDefaults",
+    "taskDefaults",
+    "calloutDefaults",
+    "selfRegistration",
+    "accountSetup",
+    "siteWideErrorMessages",
+  ] as const;
+
+  for (const property of criticalProperties) {
+    if (!mergedConfig[property] || typeof mergedConfig[property] !== "object") {
+      mergedConfig[property] = defaultConfig[property];
+    }
+  }
+
+  // Final safety check - if still invalid, return defaults
+  if (!mergedConfig || !mergedConfig.pagesMetadata) {
+    return defaultConfig as unknown as ConfigType;
+  }
+
+  return mergedConfig;
 };
 
 export interface ConfigContextType {
@@ -355,6 +336,6 @@ export interface ConfigContextType {
 }
 
 export const ConfigContext = createContext<ConfigContextType>({
-  config: merged,
+  config: getDefaultConfig() as unknown as ConfigType,
   setOverrides: () => {},
 });

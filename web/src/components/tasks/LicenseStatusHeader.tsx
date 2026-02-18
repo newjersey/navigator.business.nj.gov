@@ -127,7 +127,10 @@ export const LicenseStatusHeader = (props: Props): ReactElement => {
       >
         {getPermitColorScheme().icon}
 
-        <p className="tablet:margin-left-1 tablet:padding-05 padding-left-1 line-height-sans-3">
+        <p
+          className="tablet:margin-left-1 tablet:padding-05 padding-left-1 line-height-sans-3"
+          data-testid="permit-status-value"
+        >
           {getText()}
         </p>
       </div>

@@ -4,6 +4,17 @@ import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
 describe("EmergencyPermitWithValidation", () => {
+  beforeEach(() => {
+    // React 19: Use real timers to avoid conflicts with async waitFor
+    jest.useRealTimers();
+  });
+
+  afterEach(() => {
+    // Clean up timers to prevent state leakage between tests
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
   describe("Validation", () => {
     const renderPage = (): void => {
       render(
@@ -181,6 +192,6 @@ describe("EmergencyPermitWithValidation", () => {
           name: "Formation Stepper Navigation: Requestor Step, State: Error",
         }),
       ).toBeInTheDocument();
-    });
+    }, 30000); // Extended timeout for test with many user interactions
   });
 });

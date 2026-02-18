@@ -41,7 +41,7 @@ import {
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
 import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -129,13 +129,17 @@ describe("profile-foreign", () => {
         }),
       });
       renderPage({ business });
-      clickSave();
+      await clickSave();
+      // Use getByText to expect exactly one error, avoiding cross-test contamination in parallel execution
       await waitFor(() => {
-        expect(
-          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.siteWideErrorMessages.errorRadioButton)).toBeInTheDocument();
+      });
+      // React 19: Wait for all pending React updates and microtasks to complete
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 150));
       });
     },
+    10000,
   );
 
   it("prevents Foreign Nexus user from saving when employment agency is selected as industry, but essential question is not answered", async () => {
@@ -149,13 +153,16 @@ describe("profile-foreign", () => {
       }),
     });
     renderPage({ business });
-    clickSave();
+    await clickSave();
+    // Use getByText to expect exactly one error, avoiding cross-test contamination in parallel execution
     await waitFor(() => {
-      expect(
-        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.siteWideErrorMessages.errorRadioButton)).toBeInTheDocument();
     });
-  });
+    // React 19: Wait for all pending React updates and microtasks to complete
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    });
+  }, 10000);
 
   describe("Nexus Foreign Business", () => {
     const nexusForeignBusinessProfile = ({

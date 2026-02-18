@@ -86,6 +86,8 @@ describe("<CrtkPage />", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
+    // React 19: Use real timers to avoid conflicts with async waitFor in findBy* queries
+    jest.useRealTimers();
   });
 
   describe("initial render", () => {
@@ -110,12 +112,12 @@ describe("<CrtkPage />", () => {
       expect(screen.getByTestId("crtk-submit")).toBeInTheDocument();
     });
 
-    it("displays the search results when CRTK data exists", () => {
+    it("displays the search results when CRTK data exists", async () => {
       renderWithBusinessData({
         crtkData: generateCrtkData(),
       });
-      // Should show business name and address
-      expect(screen.getByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
+      // React 19: Wait for async rendering to complete
+      expect(await screen.findByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
       expect(screen.getByText(/31 READINGTON RD/)).toBeInTheDocument();
     });
 
@@ -285,7 +287,8 @@ describe("<CrtkPage />", () => {
         }),
       });
 
-      expect(screen.getByTestId("crtk-not-found")).toBeInTheDocument();
+      // React 19: Wait for async rendering to complete before interacting
+      expect(await screen.findByTestId("crtk-not-found")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("crtk-search-again"));
 
@@ -337,19 +340,20 @@ describe("<CrtkPage />", () => {
   });
 
   describe("result display", () => {
-    it("displays FOUND status with facility details", () => {
+    it("displays FOUND status with facility details", async () => {
       renderWithBusinessData({
         crtkData: generateCrtkData(),
       });
 
-      expect(screen.getByText("Business Found")).toBeInTheDocument();
+      // React 19: Wait for async rendering to complete
+      expect(await screen.findByText("Business Found")).toBeInTheDocument();
       expect(screen.getByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
       expect(screen.getByText(/REGULATED/)).toBeInTheDocument();
       expect(screen.getByText(/ACTIVE/)).toBeInTheDocument();
       expect(screen.getByText(/CRTK\/RPPR/)).toBeInTheDocument();
     });
 
-    it("displays the not found flow when status is NOT_FOUND", () => {
+    it("displays NOT_FOUND status with appropriate message", async () => {
       renderWithBusinessData({
         crtkData: generateCrtkData({
           crtkSearchResult: "NOT_FOUND",
@@ -357,12 +361,14 @@ describe("<CrtkPage />", () => {
         }),
       });
 
-      expect(screen.getByTestId("crtk-not-found")).toBeInTheDocument();
+      // React 19: Wait for async rendering to complete
+      expect(await screen.findByTestId("crtk-not-found")).toBeInTheDocument();
+      expect(screen.getByText(/I have registered my business/)).toBeInTheDocument();
     });
   });
 
   describe("data persistence", () => {
-    it("displays existing CRTK data on component mount", () => {
+    it("displays existing CRTK data on component mount", async () => {
       const existingData = generateCrtkData({
         crtkBusinessDetails: {
           businessName: "Existing Business",
@@ -381,18 +387,22 @@ describe("<CrtkPage />", () => {
         crtkData: existingData,
       });
 
-      expect(screen.getByText("Existing Business")).toBeInTheDocument();
+      // React 19: Wait for async rendering to complete
+      expect(await screen.findByText("Existing Business")).toBeInTheDocument();
       expect(screen.getByText(/456 Existing St/)).toBeInTheDocument();
     });
 
-    it("does not display search form when CRTK data exists", () => {
+    it("does not display search form when CRTK data exists", async () => {
       renderWithBusinessData({
         crtkData: generateCrtkData(),
       });
 
-      expect(screen.queryByTestId("crtk-submit")).not.toBeInTheDocument();
+      // React 19: Wait for async rendering to complete before checking
+      await waitFor(() => {
+        expect(screen.queryByTestId("crtk-submit")).not.toBeInTheDocument();
+      });
 
-      expect(screen.getByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
+      expect(await screen.findByText("M&U INTERNATIONAL LLC")).toBeInTheDocument();
     });
   });
 });

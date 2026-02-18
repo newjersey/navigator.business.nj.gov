@@ -387,6 +387,9 @@ export const completeForeignBusinessOnboarding = ({
   }
 
   onOnboardingPage.clickNext();
+
+  // React 19: Foreign business flow now shows "Show My Guide" button before dashboard
+  cy.get('button').contains('Show My Guide').click({ force: true });
   cy.url().should("include", `dashboard`);
 };
 export const completeForeignNexusBusinessOnboarding = ({

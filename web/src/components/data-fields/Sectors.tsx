@@ -15,7 +15,7 @@ import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operati
 import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { Autocomplete, TextField } from "@mui/material";
 import { orderBy } from "lodash";
-import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
+import React, { ChangeEvent, ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   isSectorModal?: boolean;
@@ -87,7 +87,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
         getOptionLabel={(sector: SectorType): string => {
           return sector.name;
         }}
-        renderOption={(props, option, { selected }): JSX.Element => {
+        renderOption={(props, option, { selected }): ReactNode => {
           const { key, ...otherProps } = props;
           return (
             <li key={key} {...otherProps}>
@@ -108,7 +108,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
         }}
         value={state.profileData.sectorId ? LookupSectorTypeById(state.profileData.sectorId) : null}
         onChange={handleSectorSelect}
-        renderInput={(params): JSX.Element => {
+        renderInput={(params): ReactNode => {
           return (
             <TextField
               {...params}

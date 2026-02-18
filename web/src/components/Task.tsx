@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { getTaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -18,6 +18,7 @@ export const Task = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
+  const TaskProgressTagLookup = getTaskProgressTagLookup();
 
   const renderRequiredLabel = (): ReactNode => {
     if (!props.task.required) {

@@ -717,7 +717,7 @@ describe("<TaxAccessStepTwo />", () => {
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
     });
 
-    it("succeeds with 9-digit split-field tax id", async () => {
+    it("succeeds with 9-digit tax id", async () => {
       const nineDigitData = {
         ...userData,
         businesses: {
@@ -741,8 +741,7 @@ describe("<TaxAccessStepTwo />", () => {
         }),
       });
 
-      fireEvent.click(screen.getByLabelText("Tax id location"));
-      fireEvent.change(screen.getByLabelText("Tax id location"), { target: { value: "123" } });
+      // Tax ID is already valid at 9 digits, just save
       clickSave();
       await waitFor(() => {
         return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");

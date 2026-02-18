@@ -23,13 +23,14 @@ import {
   TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, useState } from "react";
+import { flushSync } from "react-dom";
 
 interface Props {
   setStepIndex: (step: number) => void;
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
   setResponseErrorType: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;
   isValid: () => boolean;
-  saveTaxClearanceCertificateData: () => void;
+  saveTaxClearanceCertificateData: () => Promise<void>;
 }
 export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -118,8 +119,10 @@ export const Review = (props: Props): ReactElement => {
 
       if (isAnyRequiredFieldEmpty(business.taxClearanceCertificateData) || !props.isValid()) return;
 
-      await api.postUserData(userData); // Need to assert that all businesses in a user's account have hashed data in DB
-      const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+      // React 19: postUserData returns updated userData with encrypted Tax ID/Pin fields
+      // CRITICAL: Must use the returned userData (with encrypted fields) for postTaxClearanceCertificate
+      const updatedUserData = await api.postUserData(userData);
+      const taxClearanceResponse = await api.postTaxClearanceCertificate(updatedUserData);
       if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
         analytics.event.api_submit.error(
@@ -147,9 +150,11 @@ export const Review = (props: Props): ReactElement => {
             type: "application/pdf",
           },
         );
-        props.setCertificatePdfBlob(blob);
-        props.setResponseErrorType(undefined);
-        updateQueue?.queue(taxClearanceResponse.userData).update();
+        flushSync(() => {
+          props.setCertificatePdfBlob(blob);
+          props.setResponseErrorType(undefined);
+        });
+        await updateQueue?.queue(taxClearanceResponse.userData).update();
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();
@@ -233,7 +238,7 @@ export const Review = (props: Props): ReactElement => {
             </div>
             <PrimaryButton
               isColor="primary"
-              onClick={() => !isLoading && handleSubmit()}
+              onClick={async () => !isLoading && (await handleSubmit())}
               isRightMarginRemoved={true}
               dataTestId="next-button"
               isLoading={isLoading}

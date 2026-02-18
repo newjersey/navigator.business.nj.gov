@@ -9,6 +9,14 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Create .env.production file
+      shell: bash
+      run: |
+        # Pipe all environment variables to .env.production
+        # Next.js will only bundle variables explicitly listed in next.config.ts
+        # This file stays in the builder stage and never reaches the final Docker image
+        env > web/.env.production
+        echo "Created web/.env.production with all environment variables"
     - name: Build Web Docker Image
       shell: bash
       run: |

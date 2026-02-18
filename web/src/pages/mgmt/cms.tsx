@@ -63,8 +63,7 @@ import XrayTaskPreview from "@/lib/cms/previews/XrayTaskPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
-import { ReactElement } from "react";
-
+import { ReactElement, ReactNode } from "react";
 import jsYaml from "js-yaml";
 
 const CMS_CONFIG = {};
@@ -249,27 +248,13 @@ const registerPreview = (
   CMS: typeof import("decap-cms-app"),
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  preview: (props: any) => JSX.Element,
+  preview: (props: any) => ReactNode,
 ): void => {
   // @ts-expect-error: No type definition available
   CMS.registerPreviewTemplate(name, applyTheme(preview));
 };
 
 const Admin = (): ReactElement => {
-  useMountEffect(() => {
-    setInterval(() => {
-      window.location.reload();
-    }, 3600000);
-
-    setInterval(() => {
-      printFieldWithErrorToConsole();
-    }, 1000 * 30);
-
-    setInterval(() => {
-      updateRequiredFieldErrorMessage();
-    }, 1000 * 2);
-  });
-
   const updateRequiredFieldErrorMessage = (): void => {
     const alertElement = document.querySelector(".css-83ylea-toast-danger-Toast");
     if (alertElement) {
@@ -308,6 +293,20 @@ const Admin = (): ReactElement => {
       }
     }
   };
+
+  useMountEffect(() => {
+    setInterval(() => {
+      window.location.reload();
+    }, 3600000);
+
+    setInterval(() => {
+      printFieldWithErrorToConsole();
+    }, 1000 * 30);
+
+    setInterval(() => {
+      updateRequiredFieldErrorMessage();
+    }, 1000 * 2);
+  });
 
   return (
     <>

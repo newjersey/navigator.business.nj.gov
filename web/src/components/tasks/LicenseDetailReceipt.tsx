@@ -20,9 +20,8 @@ interface Props {
   licenseTaskId: LicenseTaskId;
 }
 
-const Config = getMergedConfig();
-
 export const LicenseDetailReceipt = (props: Props): ReactElement => {
+  const Config = getMergedConfig();
   const { business } = useUserData();
 
   const getOneLineAddress = (): string => {

@@ -67,24 +67,37 @@ export const convertAnytimeActionCategoryMd = (
   };
 };
 
-const anytimeActionsCatgoriesDirectoryApp = path.join(
-  process.cwd(),
-  "..",
-  "content",
-  "src",
-  "anytime-action-categories",
-);
+// Helper to find content directory from different test contexts
+const findContentCategoriesDirectory = (): string => {
+  const possiblePaths = [
+    path.join(process.cwd(), "..", "content", "src", "anytime-action-categories"),
+    path.join(process.cwd(), "content", "src", "anytime-action-categories"),
+    path.join(process.cwd(), "..", "..", "content", "src", "anytime-action-categories"),
+  ];
 
-const anytimeActionsCatgoriesDirectoryTest = path.join(
-  process.cwd(),
-  "content",
-  "src",
-  "anytime-action-categories",
-);
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      return p;
+    }
+  }
+
+  throw new Error(
+    `Could not find content/src/anytime-action-categories directory. Tried: ${possiblePaths.join(", ")}`,
+  );
+};
+
+let anytimeActionsCatgoriesDirectoryApp: string | undefined;
+let anytimeActionsCatgoriesDirectoryTest: string | undefined;
 
 const getAnytimeActionsCatgoriesDirectory = (isTest: boolean): string => {
   if (isTest) {
+    if (!anytimeActionsCatgoriesDirectoryTest) {
+      anytimeActionsCatgoriesDirectoryTest = findContentCategoriesDirectory();
+    }
     return anytimeActionsCatgoriesDirectoryTest;
+  }
+  if (!anytimeActionsCatgoriesDirectoryApp) {
+    anytimeActionsCatgoriesDirectoryApp = findContentCategoriesDirectory();
   }
   return anytimeActionsCatgoriesDirectoryApp;
 };

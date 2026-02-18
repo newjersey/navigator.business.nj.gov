@@ -1,6 +1,6 @@
 import { Column, Link, Markdown, Row, Section } from "@react-email/components";
 
-export const Header = (props: { utmString?: string }): JSX.Element => {
+export const Header = (props: { utmString?: string }): ReactNode => {
   return (
     <Section style={{ fontSize: "12px" }}>
       <Row style={{ backgroundColor: "#1B1B1B", color: "#FFFFFF", padding: "12px 20px" }}>

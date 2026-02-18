@@ -10,7 +10,10 @@ import {
   kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
 import { ProfileData } from "@businessnjgovnavigator/shared/index";
-import { ProfileContentField, profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
+import {
+  ProfileContentField,
+  getProfileFieldsFromConfig,
+} from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -39,7 +42,7 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
   const contentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: fieldName as keyof typeof profileFieldsFromConfig,
+    fieldName: fieldName as keyof ReturnType<typeof getProfileFieldsFromConfig>,
   });
 
   props.required && RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);

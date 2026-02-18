@@ -1,12 +1,19 @@
 import dayjs from "dayjs";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { getEmployerAccessQuarterlyDropdownOptions } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 
-const Config = getMergedConfig();
-Config.employerRates.quarterOneLabel = "q1";
-Config.employerRates.quarterTwoLabel = "q2";
-Config.employerRates.quarterThreeLabel = "q3";
-Config.employerRates.quarterFourLabel = "q4";
+// Mock getMergedConfig to return Config with employerRates
+jest.mock("@businessnjgovnavigator/shared/contexts", () => ({
+  getMergedConfig: jest.fn(() => ({
+    ...jest.requireActual("@businessnjgovnavigator/shared/contexts").getMergedConfig(),
+    employerRates: {
+      quarterOneLabel: "q1",
+      quarterTwoLabel: "q2",
+      quarterThreeLabel: "q3",
+      quarterFourLabel: "q4",
+    },
+  })),
+}));
+
+import { getEmployerAccessQuarterlyDropdownOptions } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 
 describe("getEmployerAccessQuarterlyDropdownOptions", () => {
   it("returns correct quarters when current month is before October", () => {

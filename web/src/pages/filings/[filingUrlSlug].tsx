@@ -33,19 +33,18 @@ interface Props {
   filing: Filing;
 }
 
-const Config = getMergedConfig();
-export const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
-  online: Config.filingDefaults.onlineTaxFilingMethod,
-  "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
-  "online-required": Config.filingDefaults.onlineRequiredTaxFilingMethod,
-  "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod,
-};
-
 export const FilingElement = (props: {
   filing: Filing;
   dueDate: string;
   preview?: boolean;
 }): ReactElement => {
+  const Config = getMergedConfig();
+  const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
+    online: Config.filingDefaults.onlineTaxFilingMethod,
+    "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
+    "online-required": Config.filingDefaults.onlineRequiredTaxFilingMethod,
+    "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod,
+  };
   return (
     <>
       <div className="min-height-38rem">

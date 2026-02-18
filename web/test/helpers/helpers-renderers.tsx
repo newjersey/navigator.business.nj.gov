@@ -6,6 +6,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
@@ -121,5 +122,14 @@ export const withRoadmap = (params: {
     >
       {params.component}
     </RoadmapContext.Provider>
+  );
+};
+
+export const withConfig = (subject: ReactElement): ReactElement => {
+  const Config = getMergedConfig();
+  return (
+    <ConfigContext.Provider value={{ config: Config, setOverrides: jest.fn() }}>
+      {subject}
+    </ConfigContext.Provider>
   );
 };

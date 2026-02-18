@@ -75,7 +75,8 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
+import { flushSync } from "react-dom";
+import { CSSTransition } from "@/components/transitions/CssTransition";
 
 interface Props {
   municipalities: Municipality[];
@@ -166,6 +167,17 @@ const OnboardingPage = (props: Props): ReactElement => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
 
+  // React 19: Validate page.current against flow length after flow recomputation
+  // Redirects to last valid page if current page is out of range (e.g., Remote Seller/Worker on page 3)
+  useEffect(() => {
+    const maxPage = onboardingFlows[currentFlow].pages.length;
+    const currentPage = page.current;
+    if (currentPage > maxPage) {
+      setPage({ current: maxPage, previous: maxPage });
+      routeToPage(maxPage);
+    }
+  }, [page, onboardingFlows, currentFlow, routeToPage, setPage]);
+
   const protectUpdateQueueAgainstRaceCondition = (
     currentUserData: UserData | undefined,
   ): boolean => {
@@ -199,8 +211,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
 
       if (currentUserData) {
-        const queryAdditionalBusiness = router.query[QUERIES.additionalBusiness] as string;
-        if (queryAdditionalBusiness === "true") {
+        if (router.query[QUERIES.additionalBusiness] === "true") {
           setIsAdditionalBusiness(true);
           setPreviousBusiness(getCurrentBusiness(currentUserData));
           const userDataWithAdditionalBusiness = addAdditionalBusiness(currentUserData);
@@ -223,6 +234,8 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
+      const queryAdditionalBusiness = router.query[QUERIES.additionalBusiness] as string;
+
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
         await router.replace(ROUTES.dashboard);
         return;
@@ -288,7 +301,19 @@ const OnboardingPage = (props: Props): ReactElement => {
           await setBusinessPersonaAndRouteToPage(queryFlow, localUpdateQueue);
         } else {
           setPage({ current: 1, previous: 1 });
-          routeToPage(1);
+          // Preserve additionalBusiness query param when routing to page 1
+          if (queryAdditionalBusiness === "true") {
+            router?.push(
+              {
+                pathname: router.pathname,
+                query: { ...router.query, [QUERIES.additionalBusiness]: "true", [QUERIES.page]: 1 },
+              },
+              undefined,
+              { shallow: true },
+            );
+          } else {
+            routeToPage(1);
+          }
         }
       }
     })();
@@ -333,10 +358,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       onboardingFormProgress: "COMPLETED",
     });
 
-    if (
-      isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness()) &&
-      OperatingPhaseId.GUEST_MODE
-    ) {
+    if (isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness())) {
       updateQueue.queueProfileData({
         operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
       });
@@ -363,6 +385,8 @@ const OnboardingPage = (props: Props): ReactElement => {
     async (): Promise<void> => {
       scrollToTop();
       if (!updateQueue) return;
+      // React 19: Read from profileData state which may be stale in closure
+      // BUT will be updated by flushSync calls in child components
       let newProfileData = profileData;
 
       const hasBusinessPersonaChanged =
@@ -393,12 +417,10 @@ const OnboardingPage = (props: Props): ReactElement => {
         setCurrentFlow(getFlow(profileData));
       }
 
-      if (
-        newProfileData.businessPersona === "FOREIGN" &&
-        newProfileData.foreignBusinessTypeIds.length === 0 &&
-        page.current === 2
-      )
-        return;
+      // React 19: Removed early return check for empty foreignBusinessTypeIds
+      // The ForeignBusinessTypeField component already has proper form validation
+      // that prevents submission when no checkbox is selected.
+      // The early return was causing race conditions with stale closure data.
 
       const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
@@ -429,7 +451,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             headerRef.current?.focus();
           });
       } else {
-        completeOnboarding(newProfileData, updateQueue);
+        await completeOnboarding(newProfileData, updateQueue);
       }
     },
     (isValid, errors) => {
@@ -452,9 +474,13 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (page.current + 1 > 0) {
       setError(undefined);
       const previousPage = page.current - 1;
-      setPage({
-        current: previousPage,
-        previous: page.current,
+      // React 19: Use flushSync to ensure page navigation completes immediately
+      // This prevents concurrent rendering from batching/delaying the state update
+      flushSync(() => {
+        setPage({
+          current: previousPage,
+          previous: page.current,
+        });
       });
       routeToPage(previousPage);
       headerRef.current?.focus();
@@ -476,7 +502,14 @@ const OnboardingPage = (props: Props): ReactElement => {
         className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1"
         data-testid={`step-${page.current.toString()}`}
       >
-        <h1 ref={headerRef}>{`${[pageTitle, evalHeaderStepsTemplate(page)].join(" ")}`}</h1>
+        <h1
+          ref={headerRef}
+          data-testid={
+            isAdditionalBusiness ? "onboarding-additional-business-indicator" : undefined
+          }
+        >
+          {`${[pageTitle, evalHeaderStepsTemplate(page)].join(" ")}`}
+        </h1>
       </div>
     );
   };

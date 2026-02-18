@@ -16,7 +16,10 @@ export const MatchList = (props: Props): ReactElement => {
   const collapsedMatches = props.matches.slice(0, COLLAPSED_LEN);
   const cmsMap: CMSMap = cmsMapJson;
   useEffect(() => {
-    setExpandedMatches(false);
+    const timeoutId = setTimeout(() => {
+      setExpandedMatches(false);
+    }, 0);
+    return (): void => clearTimeout(timeoutId);
   }, [props.matches]);
 
   if (props.matches.length === 0) {

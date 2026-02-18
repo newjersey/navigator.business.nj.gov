@@ -188,10 +188,6 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "react-transition-group" },
-    },
-    {
-      from: {},
       to: { path: "rehype-react" },
     },
     {

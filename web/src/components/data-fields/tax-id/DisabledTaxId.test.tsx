@@ -5,7 +5,8 @@ import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -57,7 +58,8 @@ describe("<DisabledTaxId />", () => {
       taxId: "********9000",
       encryptedTaxId: "some-encrypted-value",
     });
-    fireEvent.click(screen.getByText(Config.taxId.showButtonText));
+    await userEvent.click(screen.getByText(Config.taxId.showButtonText));
+
     expect(mockApi.decryptValue).toHaveBeenCalledWith({ encryptedValue: "some-encrypted-value" });
     await waitFor(() => {
       expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("123-456-789/000");
@@ -73,7 +75,9 @@ describe("<DisabledTaxId />", () => {
     });
     expect(screen.queryByText(Config.taxId.hideButtonText)).not.toBeInTheDocument();
     expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
-    fireEvent.click(screen.getByText(Config.taxId.showButtonText));
+
+    await userEvent.click(screen.getByText(Config.taxId.showButtonText));
+
     await waitFor(() => {
       expect(screen.getByText(Config.taxId.hideButtonText)).toBeInTheDocument();
     });
@@ -89,7 +93,9 @@ describe("<DisabledTaxId />", () => {
       encryptedTaxId: "some-encrypted-value",
     });
     expect(screen.queryByText(Config.taxId.hideButtonTextMobile)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.taxId.showButtonTextMobile));
+
+    await userEvent.click(screen.getByText(Config.taxId.showButtonTextMobile));
+
     await waitFor(() => {
       expect(screen.getByText(Config.taxId.hideButtonTextMobile)).toBeInTheDocument();
     });

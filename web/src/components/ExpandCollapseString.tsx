@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import ClampLines from "react-clamp-lines";
 
 interface Props {
@@ -10,11 +10,13 @@ interface Props {
 }
 
 export const ExpandCollapseString = (props: Props): ReactElement => {
+  const [id] = useState(() => Math.random().toString().slice(2));
+
   return (
     <div {...(props.dataTestId ? { "data-testid": props.dataTestId } : {})}>
       <ClampLines
         text={props.text}
-        id={Math.random().toString().slice(2)}
+        id={id}
         lines={props.lines}
         ellipsis="..."
         moreText={props.viewMoreText}

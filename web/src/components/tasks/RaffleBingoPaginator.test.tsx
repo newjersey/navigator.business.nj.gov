@@ -9,7 +9,8 @@ import { convertTaskMd } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateUserData } from "@businessnjgovnavigator/shared/test";
 import { Task } from "@businessnjgovnavigator/shared/types";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -76,9 +77,8 @@ describe("<RaffleBingoPaginator />", () => {
   it("displays second step task content when on second step", async () => {
     renderPaginator(task);
 
-    await screen.findByTestId("stepper-1");
-
-    fireEvent.click(screen.getByTestId("stepper-1"));
+    const stepperButton = await screen.findByTestId("stepper-1");
+    await userEvent.click(stepperButton);
 
     expect(await screen.findByText("Application Requirements")).toBeInTheDocument();
 
@@ -97,17 +97,17 @@ describe("<RaffleBingoPaginator />", () => {
   it("marks task as complete when 'Mark As Complete' button is clicked", async () => {
     renderPaginator(task);
 
-    await screen.findByTestId("stepper-1");
-
-    fireEvent.click(screen.getByTestId("stepper-1"));
+    const stepperButton = await screen.findByTestId("stepper-1");
+    await userEvent.click(stepperButton);
 
     await waitFor(() => {
       expect(screen.queryByText(getTaskStatusUpdatedMessage("COMPLETED"))).not.toBeInTheDocument();
     });
 
-    fireEvent.click(
-      screen.getByRole("button", { name: Config.taskDefaults.markAsCompleteButtonText }),
-    );
+    const markCompleteButton = screen.getByRole("button", {
+      name: Config.taskDefaults.markAsCompleteButtonText,
+    });
+    await userEvent.click(markCompleteButton);
 
     await screen.findByText(getTaskStatusUpdatedMessage("COMPLETED"));
   });
@@ -117,7 +117,10 @@ describe("<RaffleBingoPaginator />", () => {
 
     expect(await screen.findByText("Eligibility Criteria")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: Config.taskDefaults.continueButtonText }));
+    const continueButton = screen.getByRole("button", {
+      name: Config.taskDefaults.continueButtonText,
+    });
+    await userEvent.click(continueButton);
 
     await screen.findByText("Application Requirements");
   });
@@ -127,11 +130,15 @@ describe("<RaffleBingoPaginator />", () => {
 
     expect(await screen.findByText("Eligibility Criteria")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: Config.taskDefaults.continueButtonText }));
+    const continueButton = screen.getByRole("button", {
+      name: Config.taskDefaults.continueButtonText,
+    });
+    await userEvent.click(continueButton);
 
     expect(await screen.findByText("Application Requirements")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: Config.taskDefaults.backButtonText }));
+    const backButton = screen.getByRole("button", { name: Config.taskDefaults.backButtonText });
+    await userEvent.click(backButton);
 
     await screen.findByText("Eligibility Criteria");
   });

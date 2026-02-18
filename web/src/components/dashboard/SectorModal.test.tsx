@@ -1,12 +1,15 @@
 import { SectorModal } from "@/components/dashboard/SectorModal";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
+import { findButton } from "@/test/helpers/accessible-queries";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-const submitSectorModal = (): void => {
-  fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
+const submitSectorModal = async (): Promise<void> => {
+  const button = await findButton(Config.dashboardDefaults.sectorModalSaveButton);
+  await userEvent.click(button);
 };
 
 const Config = getMergedConfig();
@@ -46,7 +49,7 @@ describe("<SectorModal />", () => {
     expect((screen.getByLabelText("Sector") as HTMLInputElement)?.value).toEqual("");
   });
 
-  it("fires validations when clicking submit", () => {
+  it("fires validations when clicking submit", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "STARTING",
@@ -62,10 +65,10 @@ describe("<SectorModal />", () => {
     useMockBusiness(business);
     const onContinue = jest.fn();
     renderSectorModal(onContinue);
-    submitSectorModal();
+    await submitSectorModal();
     expect(onContinue).not.toHaveBeenCalled();
     expect(
-      screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
+      await screen.findByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
     ).toBeInTheDocument();
   });
 
@@ -80,8 +83,8 @@ describe("<SectorModal />", () => {
     useMockBusiness(business);
     const onContinue = jest.fn();
     const { page } = renderSectorModal(onContinue);
-    page.selectByValue("Sector", "clean-energy");
-    submitSectorModal();
+    await page.selectByValue("Sector", "clean-energy");
+    await submitSectorModal();
     await waitFor(() => {
       expect(onContinue).toHaveBeenCalled();
     });

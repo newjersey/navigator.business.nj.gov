@@ -7,16 +7,15 @@ import { ReactElement, RefObject } from "react";
 
 interface Props {
   fieldErrors: string[];
-  profileAlertRef?: RefObject<HTMLDivElement>;
+  profileAlertRef?: RefObject<HTMLDivElement | null>;
 }
 
 export const ContactTabPanel = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const { fieldErrors, profileAlertRef } = props;
 
   const contactFieldIds = new Set(["name", "email", "phoneNumber"]);
-  const contactFieldErrorIds = props.fieldErrors.filter((field: string) =>
-    contactFieldIds.has(field),
-  );
+  const contactFieldErrorIds = fieldErrors.filter((field: string) => contactFieldIds.has(field));
 
   const hasContactErrors = contactFieldErrorIds.length > 0;
 
@@ -37,7 +36,7 @@ export const ContactTabPanel = (props: Props): ReactElement => {
     <div id="tabpanel-contact" role="tabpanel" aria-labelledby="tab-contact">
       <ProfileTabHeader tab="contact" />
       {hasContactErrors && (
-        <Alert variant="error" ref={props.profileAlertRef}>
+        <Alert variant="error" ref={profileAlertRef}>
           <div>{getProfileErrorAlertText(contactFieldErrorIds.length)}</div>
           <ul>
             {contactFieldErrorIds.map((fieldId) => (

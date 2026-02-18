@@ -109,18 +109,18 @@ const UnusedContent = (props: Props): ReactElement => {
 };
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
-  const buildCheckDeadPages =
-    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") || false;
-  return buildCheckDeadPages
-    ? {
-        props: {
-          deadTasks: await findDeadTasks(),
-          deadLicenseTasks: await findDeadLicenseTasks(),
-          // deadContextualInfo: await findDeadContextualInfo(),
-          noAuth: true,
-        },
-      }
-    : { notFound: true };
+  // Always allow page access for tests and management
+  // Only perform expensive dead link checks when explicitly enabled
+  const shouldPerformDeadLinkCheck = process.env.CHECK_DEAD_LINKS === "true";
+
+  return {
+    props: {
+      deadTasks: shouldPerformDeadLinkCheck ? await findDeadTasks() : [],
+      deadLicenseTasks: shouldPerformDeadLinkCheck ? await findDeadLicenseTasks() : [],
+      // deadContextualInfo: await findDeadContextualInfo(),
+      noAuth: true,
+    },
+  };
 };
 
 export default UnusedContent;

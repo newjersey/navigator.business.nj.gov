@@ -4,7 +4,7 @@ import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FocusEvent, ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   fieldName: string;
@@ -66,7 +66,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       disabled={props.disabled}
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
-      renderOption={(props, option, { selected }): JSX.Element => {
+      renderOption={(props, option, { selected }): ReactNode => {
         const { key, ...otherProps } = props;
         return (
           <li key={key} {...otherProps}>
@@ -80,7 +80,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
           </li>
         );
       }}
-      renderInput={(params): JSX.Element => {
+      renderInput={(params): ReactNode => {
         return (
           <div className="text-field-width-default">
             <TextField

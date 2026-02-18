@@ -13,7 +13,7 @@ import {
 } from "@react-email/components";
 import { Header } from "../components/Header";
 
-export const WelcomeEmailShortVersion = (): JSX.Element => {
+export const WelcomeEmailShortVersion = (): ReactNode => {
   return (
     <Html lang="en">
       <Head>

@@ -211,29 +211,27 @@ describe("Account Setup page", () => {
     act(() => {
       return clickSubmit();
     });
-    expect(
-      screen.getByText(Config.selfRegistration.errorTextFullNameSpecialCharacter),
-    ).toBeInTheDocument();
+    expect(screen.getAllByText(/full name may only contain letters/i)[0]).toBeInTheDocument();
   });
 
-  it("prevents user from registering if the name is greater than 50 characters", () => {
+  it("prevents user from registering if the name is greater than 50 characters", async () => {
     const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
     const name = Array(51).fill("a").join("");
-    page.fillText(Config.selfRegistration.nameFieldLabel, name);
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
+    await page.fillText(Config.selfRegistration.nameFieldLabel, name);
+    await page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    await page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    await act(async () => {
       return clickSubmit();
     });
     expect(screen.getByText(Config.selfRegistration.errorTextFullNameLength)).toBeInTheDocument();
   });
 
-  it("prevents user from registering if the name does not start with a letter", () => {
+  it("prevents user from registering if the name does not start with a letter", async () => {
     const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
-    page.fillText(Config.selfRegistration.nameFieldLabel, "12345");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
+    await page.fillText(Config.selfRegistration.nameFieldLabel, "12345");
+    await page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    await page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    await act(async () => {
       return clickSubmit();
     });
     expect(
@@ -280,11 +278,11 @@ describe("Account Setup page", () => {
 
   it("allows a user to uncheck to opt out of newsletter", async () => {
     const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    await page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    await page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    await page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     fireEvent.click(screen.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
-    act(() => {
+    await act(async () => {
       return clickSubmit();
     });
     const businessUser = {
@@ -312,11 +310,11 @@ describe("Account Setup page", () => {
 
   it("allows a user to uncheck to opt out of user testing", async () => {
     const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    await page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    await page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    await page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     fireEvent.click(screen.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
-    act(() => {
+    await act(async () => {
       return clickSubmit();
     });
     const businessUser = {
@@ -335,10 +333,10 @@ describe("Account Setup page", () => {
 
   it("posts to api self-reg after completion", async () => {
     const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
+    await page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    await page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    await page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    await act(async () => {
       return clickSubmit();
     });
     const businessUser = {

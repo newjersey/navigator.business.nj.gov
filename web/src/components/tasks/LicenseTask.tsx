@@ -23,9 +23,9 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { LicenseSearchError, TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useState } from "react";
 
 interface Props {
   task: TaskWithLicenseTaskId;
@@ -38,35 +38,45 @@ const STATUS_TAB_INDEX = 1;
 export const LicenseTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
-  const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [error, setError] = useState<LicenseSearchError | undefined>(undefined);
-  const [licenseDetails, setLicenseDetails] = useState<LicenseDetails | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { business, refresh } = useUserData();
   const { Config } = useConfig();
 
   const licenseNameForTask = taskIdLicenseNameMapping[props.task.id];
+
+  // Initialize states based on business data
+  const getInitialTabIndex = (): number => {
+    if (!business) return APPLICATION_TAB_INDEX;
+    const hasLicenseData = !!business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
+    return hasLicenseData ? STATUS_TAB_INDEX : APPLICATION_TAB_INDEX;
+  };
+
+  const getInitialError = (): LicenseSearchError | undefined => {
+    if (!business) return undefined;
+    const licenseDetailsReceived =
+      business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
+    if (!licenseDetailsReceived && business.licenseData?.lastUpdatedISO) {
+      return "NOT_FOUND";
+    }
+    return undefined;
+  };
+
+  const getInitialLicenseDetails = (): LicenseDetails | undefined => {
+    if (!business) return undefined;
+    return business.licenseData?.licenses?.[licenseNameForTask];
+  };
+
+  const [tabIndex, setTabIndex] = useState(getInitialTabIndex);
+  const [error, setError] = useState<LicenseSearchError | undefined>(getInitialError);
+  const [licenseDetails, setLicenseDetails] = useState<LicenseDetails | undefined>(
+    getInitialLicenseDetails,
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const hasCompletedSearch = !!licenseDetails?.lastUpdatedISO;
 
   const allFieldsHaveValues = (nameAndAddress: LicenseSearchNameAndAddress): boolean => {
     return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);
   };
-
-  useEffect(() => {
-    if (!business) return;
-    const licenseDetailsReceived =
-      business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
-
-    if (!licenseDetailsReceived && business.licenseData?.lastUpdatedISO) {
-      setError("NOT_FOUND");
-      return;
-    }
-
-    if (licenseDetailsReceived) {
-      setTabIndex(STATUS_TAB_INDEX);
-      setLicenseDetails(business.licenseData?.licenses?.[licenseNameForTask]);
-    }
-  }, [licenseNameForTask, business]);
 
   const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
     const index = Number.parseInt(newValue);
@@ -191,13 +201,15 @@ export const LicenseTask = (props: Props): ReactElement => {
                 </ActionBarLayout>
               </CtaContainer>
             </TabPanel>
-            <TabPanel value="1">
+            <TabPanel value="1" data-testid="license-status-tab-panel">
               {hasCompletedSearch && licenseDetails ? (
-                <LicenseDetailReceipt
-                  licenseTaskId={props.task.id}
-                  licenseDetails={licenseDetails}
-                  onEdit={onEdit}
-                />
+                <div data-testid="permit-status-screen">
+                  <LicenseDetailReceipt
+                    licenseTaskId={props.task.id}
+                    licenseDetails={licenseDetails}
+                    onEdit={onEdit}
+                  />
+                </div>
               ) : (
                 <CheckLicenseStatus
                   onSubmit={onSubmit}

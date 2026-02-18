@@ -1,5 +1,5 @@
 import { ROUTES } from "@/lib/domain-logic/routes";
-import NJEDAFundingsOnboardingPaage from "@/pages/njeda";
+import NJEDAFundingsOnboardingPage from "@/pages/njeda";
 import { generateFunding } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -34,7 +34,7 @@ const renderStatefulFundingsPageComponent = (business: Business, fundings: Fundi
       initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}
     >
       <ThemeProvider theme={createTheme()}>
-        <NJEDAFundingsOnboardingPaage fundings={fundings} noAuth={true} />
+        <NJEDAFundingsOnboardingPage fundings={fundings} noAuth={true} />
       </ThemeProvider>
     </WithStatefulUserData>,
   );

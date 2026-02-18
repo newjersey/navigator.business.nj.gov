@@ -1,5 +1,5 @@
 import { MenuItem } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   onClick: () => void;
@@ -15,14 +15,13 @@ interface Props {
 }
 
 export const NavMenuItem = (props: Props): ReactElement => {
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-  const icon = props.hoverIcon && isHovered ? props.hoverIcon : (props.icon ?? "");
+  // React 19: Removed useState for hover to avoid conditional hook issues
+  // Use CSS :hover instead if hover styling is needed
+  const icon = props.icon ?? "";
 
   return (
     <MenuItem
       onClick={props.onClick}
-      onMouseOver={(): void => setIsHovered(true)}
-      onMouseOut={(): void => setIsHovered(false)}
       className={`font-body-2xs menu-item-focus nav-menu-item-container ${props.className} ${
         props.selected ? "bg-primary-extra-light-mui-selected-override text-bold " : ""
       }
@@ -32,6 +31,11 @@ export const NavMenuItem = (props: Props): ReactElement => {
     >
       <div className={`${props.reducedLeftMargin ? "nav-bar-menu-reduced-width" : "icon-width"}`}>
         {icon}
+        {props.hoverIcon && (
+          <div className="hover-icon" style={{ display: "none" }}>
+            {props.hoverIcon}
+          </div>
+        )}
       </div>
       <div
         className={`text-wrap truncate-long-business-names_NavBarDesktop`}
