@@ -119,10 +119,6 @@ export class LambdaStack extends Stack {
     const useWireMockForGetTaxCalendarSearch =
       process.env.USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH || "";
 
-    const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
-    const airtableUserResearchBaseId = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
-    const airtableBaseUrl = process.env.AIRTABLE_BASE_URL || "";
-    const airtableUsersTable = process.env.AIRTABLE_USERS_TABLE || "";
     const usersTable = `${USERS_TABLE}-${props.stage}`;
     const messagesTable = `${MESSAGES_TABLE}-${props.stage}`;
     const documentS3Bucket = `nj-bfs-user-documents-${props.stage}`;
@@ -179,10 +175,6 @@ export class LambdaStack extends Stack {
         ADMIN_PASSWORD: adminPassword,
         AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
         AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT: awsCryptoTaxIdHashingSalt,
-        AIRTABLE_API_KEY: airtableApiKey,
-        AIRTABLE_BASE_URL: airtableBaseUrl,
-        AIRTABLE_USER_RESEARCH_BASE_ID: airtableUserResearchBaseId,
-        AIRTABLE_USERS_TABLE: airtableUsersTable,
         API_BASE_URL: apiBaseUrl,
         ABC_ETP_API_ACCOUNT: etpApiAccount,
         ABC_ETP_API_KEY: etpApiKey,
@@ -346,10 +338,6 @@ export class LambdaStack extends Stack {
         GOV_DELIVERY_BASE_URL: govDeliveryBaseUrl,
         GOV_DELIVERY_TOPIC: govDeliveryTopic,
         GOV_DELIVERY_URL_QUESTION_ID: govDeliveryQuestionId,
-        AIRTABLE_API_KEY: airtableApiKey,
-        AIRTABLE_BASE_URL: airtableBaseUrl,
-        AIRTABLE_USER_RESEARCH_BASE_ID: airtableUserResearchBaseId,
-        AIRTABLE_USERS_TABLE: airtableUsersTable,
       },
     });
 

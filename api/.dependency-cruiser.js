@@ -140,10 +140,6 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "airtable" },
-    },
-    {
-      from: {},
       to: { path: "axios" },
     },
     {
