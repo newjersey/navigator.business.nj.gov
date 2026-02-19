@@ -4629,7 +4629,6 @@ __metadata:
     "@types/xml2js": 0.4.14
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
-    airtable: 0.12.2
     axios: 1.13.5
     body-parser: 1.20.3
     concurrently: ^9.2.1
