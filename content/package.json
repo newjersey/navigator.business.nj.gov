@@ -11,6 +11,7 @@
     "test": "vitest run",
     "prettier": "prettier --write . --ignore-path=../.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=../.eslintignore",
+    "reports": "tsx -r tsconfig-paths/register ./scripts/generateRoadmapReports.ts",
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json --no-progress"
   },
   "dependencies": {
