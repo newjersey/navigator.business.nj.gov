@@ -5136,7 +5136,7 @@ __metadata:
     "@types/conventional-changelog-writer": 4.0.11
     "@types/conventional-commits-parser": 5.0.2
     "@types/cors": 2.8.19
-    "@types/cypress-dotenv": 2.0.3
+    "@types/cypress-dotenv": 3.0.0
     "@types/dedent": 0.7.2
     "@types/express": 5.0.0
     "@types/jest": 29.5.14
@@ -5356,7 +5356,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     "@types/broken-link-checker": 0.7.3
-    "@types/cypress-dotenv": 2.0.3
+    "@types/cypress-dotenv": 3.0.0
     "@types/jest": 29.5.14
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.20
@@ -14330,13 +14330,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cypress-dotenv@npm:2.0.3":
-  version: 2.0.3
-  resolution: "@types/cypress-dotenv@npm:2.0.3"
+"@types/cypress-dotenv@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@types/cypress-dotenv@npm:3.0.0"
   dependencies:
     "@types/node": "*"
-    dotenv: ^8.2.0
-  checksum: 2d49b6f769cc1b7a1d5738429fb6428d27d5347865bc580e3c66c5ce284c514316430b1e9da0e0c7764fddfcbe710c5680a99c1b780e5e7807f9cf46d7cae3a6
+  peerDependencies:
+    dotenv: ">=10.x"
+  checksum: f0ec179a03e0046f7c9c419e250c3a86d7f1c5f9118fc030a46ffbd692c0d6014d0bb99d853f17d9bae41094e8cfa9b87062be28698ac41371622668ce04ef8e
   languageName: node
   linkType: hard
 
@@ -21324,13 +21325,6 @@ __metadata:
   version: 16.6.1
   resolution: "dotenv@npm:16.6.1"
   checksum: e8bd63c9a37f57934f7938a9cf35de698097fadf980cb6edb61d33b3e424ceccfe4d10f37130b904a973b9038627c2646a3365a904b4406514ea94d7f1816b69
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^8.2.0":
-  version: 8.6.0
-  resolution: "dotenv@npm:8.6.0"
-  checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
   languageName: node
   linkType: hard
 
