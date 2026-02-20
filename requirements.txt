@@ -1,6 +1,6 @@
 asttokens==3.0.1
 beautifulsoup4==4.13.4
-black==25.11.0
+black==26.1.0
 cachetools==6.2.2
 certifi==2025.11.12
 cffi==2.0.0
