@@ -81,7 +81,7 @@
     "cypress-axe": "1.7.0",
     "dayjs": "1.11.19",
     "decap-cms-app": "3.0.12",
-    "dedent": "1.7.0",
+    "dedent": "1.7.1",
     "express": "4.21.2",
     "fast-deep-equal": "3.1.3",
     "focus-trap-react": "10.2.3",
