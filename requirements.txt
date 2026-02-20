@@ -14,7 +14,7 @@ executing==2.2.1
 fonttools==4.60.2
 idna==3.11
 ipdb==0.13.13
-ipython==9.7.0
+ipython==9.10.0
 ipython_pygments_lexers==1.1.1
 jedi==0.19.2
 kiwisolver==1.4.9
