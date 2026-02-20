@@ -44,7 +44,7 @@
     "airtable": "0.12.2",
     "axios": "1.13.5",
     "body-parser": "1.20.3",
-    "cors": "2.8.5",
+    "cors": "2.8.6",
     "dayjs": "1.11.19",
     "dedent": "1.7.0",
     "express": "4.21.2",
