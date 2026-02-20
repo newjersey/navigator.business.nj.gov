@@ -224,28 +224,28 @@ describe("buildUserRoadmap", () => {
         );
       });
 
-      it("does not add env-permitting add-on when industry is generic and if home-based business is true", async () => {
+      it("does not add env-requirements add-on when industry is generic and if home-based business is true", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: true }),
           {},
         );
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("env-permitting");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("env-requirements");
       });
 
-      it("adds env-permitting add-on when industry is generic and if home-based business is false", async () => {
+      it("adds env-requirements add-on when industry is generic and if home-based business is false", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: false }),
           {},
         );
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-requirements");
       });
 
-      it("adds env-permitting add-on when industry is generic and if home-based business is undefined", async () => {
+      it("adds env-requirements add-on when industry is generic and if home-based business is undefined", async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: "generic", homeBasedBusiness: undefined }),
           {},
         );
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-requirements");
       });
     });
 
@@ -882,9 +882,9 @@ describe("buildUserRoadmap", () => {
     });
 
     describe("all other industries", () => {
-      it("adds env permitting add on", () => {
+      it("adds env requirements add on", () => {
         buildUserRoadmap(generateStartingProfile({ industryId: "generic" }), {});
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-requirements");
       });
     });
   });

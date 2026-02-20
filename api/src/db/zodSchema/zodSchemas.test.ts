@@ -1,25 +1,25 @@
 import {
-  generatev188Business,
-  generatev188BusinessUser,
-  generatev188CigaretteLicenseData,
-  generatev188EnvironmentQuestionnaireData,
-  generatev188FormationMember,
-  generatev188LicenseDetails,
-  generatev188Municipality,
-  generatev188Preferences,
-  generatev188TaxClearanceCertificateData,
-  generatev188TaxFilingData,
-  generatev188UserData,
-} from "@db/migrations/v188_zod_cleanup_address_status_boolean";
+  generatev189Business,
+  generatev189BusinessUser,
+  generatev189CigaretteLicenseData,
+  generatev189EnvironmentQuestionnaireData,
+  generatev189FormationMember,
+  generatev189LicenseDetails,
+  generatev189Municipality,
+  generatev189Preferences,
+  generatev189TaxClearanceCertificateData,
+  generatev189TaxFilingData,
+  generatev189UserData,
+} from "@db/migrations/v189_update_env_task_id";
 import {
   parseUserData,
-  v188FormationMemberSchema,
-  v188MunicipalitySchema,
-  v188PreferencesSchema,
-  v188QuestionnaireDataSchema,
-  v188TaxClearanceCertificateDataSchema,
-  v188TaxFilingDataSchema,
-  v188UserDataSchema,
+  v189FormationMemberSchema,
+  v189MunicipalitySchema,
+  v189PreferencesSchema,
+  v189QuestionnaireDataSchema,
+  v189TaxClearanceCertificateDataSchema,
+  v189TaxFilingDataSchema,
+  v189UserDataSchema,
 } from "@db/zodSchema/zodSchemas";
 import { LogWriterType } from "@libs/logWriter";
 import {
@@ -89,7 +89,7 @@ describe("Zod Schema validation", () => {
   let safeParseSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    safeParseSpy = jest.spyOn(v188UserDataSchema, "safeParse");
+    safeParseSpy = jest.spyOn(v189UserDataSchema, "safeParse");
   });
 
   afterEach(() => {
@@ -111,7 +111,7 @@ describe("Zod Schema validation", () => {
     });
 
     it("logs success when parsing succeeds", () => {
-      const validUserData = generatev188UserData({});
+      const validUserData = generatev189UserData({});
 
       parseUserData(mockLogger, validUserData as unknown as UserData);
 
@@ -146,9 +146,9 @@ describe("Zod Schema validation", () => {
     });
 
     it("QuestionnaireDataSchema should pass for valid data", () => {
-      const validData = generatev188EnvironmentQuestionnaireData({});
+      const validData = generatev189EnvironmentQuestionnaireData({});
 
-      const result = v188QuestionnaireDataSchema.safeParse(validData);
+      const result = v189QuestionnaireDataSchema.safeParse(validData);
 
       expect(result.success).toBe(true);
     });
@@ -156,15 +156,15 @@ describe("Zod Schema validation", () => {
     it("QuestionnaireDataSchema should not pass for invalid data", () => {
       const invalidData = {};
 
-      const result = v188QuestionnaireDataSchema.safeParse(invalidData);
+      const result = v189QuestionnaireDataSchema.safeParse(invalidData);
 
       expect(result.success).toBe(false);
     });
 
     it("MuncipialitySchema should pass for valid data", () => {
-      const validData = generatev188Municipality({});
+      const validData = generatev189Municipality({});
 
-      const result = v188MunicipalitySchema.safeParse(validData);
+      const result = v189MunicipalitySchema.safeParse(validData);
 
       expect(result.success).toBe(true);
     });
@@ -172,15 +172,15 @@ describe("Zod Schema validation", () => {
     it("MuncipialitySchema should not pass for invalid data", () => {
       const invalidData = {};
 
-      const result = v188MunicipalitySchema.safeParse(invalidData);
+      const result = v189MunicipalitySchema.safeParse(invalidData);
 
       expect(result.success).toBe(false);
     });
 
     it("TaxFilingSchema should pass for valid data", () => {
-      const validData = generatev188TaxFilingData({});
+      const validData = generatev189TaxFilingData({});
 
-      const result = v188TaxFilingDataSchema.safeParse(validData);
+      const result = v189TaxFilingDataSchema.safeParse(validData);
 
       expect(result.success).toBe(true);
     });
@@ -188,23 +188,23 @@ describe("Zod Schema validation", () => {
     it("TaxFilingSchema should not pass for invalid data", () => {
       const invalidData = {};
 
-      const result = v188TaxFilingDataSchema.safeParse(invalidData);
+      const result = v189TaxFilingDataSchema.safeParse(invalidData);
 
       expect(result.success).toBe(false);
     });
 
     it("TaxClearanceSchema should pass for valid data", () => {
-      const validData = generatev188TaxClearanceCertificateData({});
+      const validData = generatev189TaxClearanceCertificateData({});
 
-      const result = v188TaxClearanceCertificateDataSchema.safeParse(validData);
+      const result = v189TaxClearanceCertificateDataSchema.safeParse(validData);
 
       expect(result.success).toBe(true);
     });
 
     it("PreferencesSchema should pass for valid data", () => {
-      const validData = generatev188Preferences({});
+      const validData = generatev189Preferences({});
 
-      const result = v188PreferencesSchema.safeParse(validData);
+      const result = v189PreferencesSchema.safeParse(validData);
 
       expect(result.success).toBe(true);
     });
@@ -212,15 +212,15 @@ describe("Zod Schema validation", () => {
     it("PreferencesSchema should not pass for invalid data", () => {
       const invalidData = {};
 
-      const result = v188PreferencesSchema.safeParse(invalidData);
+      const result = v189PreferencesSchema.safeParse(invalidData);
 
       expect(result.success).toBe(false);
     });
 
     it("FormationMemberSchema should pass for valid data", () => {
-      const validData = generatev188FormationMember({});
+      const validData = generatev189FormationMember({});
 
-      const result = v188FormationMemberSchema.safeParse(validData);
+      const result = v189FormationMemberSchema.safeParse(validData);
 
       expect(result.success).toBe(true);
     });
@@ -228,39 +228,39 @@ describe("Zod Schema validation", () => {
     it("FormationMemberSchema should not pass for invalid data", () => {
       const invalidData = {};
 
-      const result = v188FormationMemberSchema.safeParse(invalidData);
+      const result = v189FormationMemberSchema.safeParse(invalidData);
 
       expect(result.success).toBe(false);
     });
 
-    it("v188UserDataSchema should pass for valid data", () => {
+    it("v189UserDataSchema should pass for valid data", () => {
       safeParseSpy.mockRestore();
-      const validData = generatev188UserData({});
+      const validData = generatev189UserData({});
 
-      const result = v188UserDataSchema.safeParse(validData);
+      const result = v189UserDataSchema.safeParse(validData);
 
       expect(result.success).toBe(true);
     });
 
-    it("v188UserDataSchema should pass for  license valid data", () => {
+    it("v189UserDataSchema should pass for  license valid data", () => {
       safeParseSpy.mockRestore();
-      const validData = generatev188UserData({
+      const validData = generatev189UserData({
         businesses: {
-          "123": generatev188Business({
+          "123": generatev189Business({
             id: "123",
             licenseData: {
               lastUpdatedISO: "",
               licenses: {
-                ["Pharmacy-Pharmacy"]: generatev188LicenseDetails({}),
+                ["Pharmacy-Pharmacy"]: generatev189LicenseDetails({}),
               },
             },
           }),
         },
       });
       expect(() => {
-        v188UserDataSchema.parse(validData);
+        v189UserDataSchema.parse(validData);
       }).not.toThrow();
-      const result = v188UserDataSchema.safeParse(validData);
+      const result = v189UserDataSchema.safeParse(validData);
       expect(result.success).toBe(true);
     });
 
@@ -268,30 +268,30 @@ describe("Zod Schema validation", () => {
       safeParseSpy.mockRestore();
       const invalidData = {};
 
-      const result = v188UserDataSchema.safeParse(invalidData);
+      const result = v189UserDataSchema.safeParse(invalidData);
 
       expect(result.success).toBe(false);
     });
 
-    it("v188UserDataSchema should pass with all fields populated", () => {
+    it("v189UserDataSchema should pass with all fields populated", () => {
       safeParseSpy.mockRestore();
 
       const comprehensiveLicenseData = {
         lastUpdatedISO: "2024-01-01T00:00:00.000Z",
         licenses: {
-          "Pharmacy-Pharmacy": generatev188LicenseDetails({}),
-          "Accountancy-Firm Registration": generatev188LicenseDetails({
+          "Pharmacy-Pharmacy": generatev189LicenseDetails({}),
+          "Accountancy-Firm Registration": generatev189LicenseDetails({
             licenseStatus: "EXPIRED",
             expirationDateISO: "2023-12-31T00:00:00.000Z",
           }),
-          "Health Club Services": generatev188LicenseDetails({
+          "Health Club Services": generatev189LicenseDetails({
             licenseStatus: "PENDING",
           }),
         },
       };
 
       const comprehensiveEnvironmentData = {
-        questionnaireData: generatev188EnvironmentQuestionnaireData({
+        questionnaireData: generatev189EnvironmentQuestionnaireData({
           airOverrides: {
             emitPollutants: true,
             emitEmissions: true,
@@ -342,12 +342,12 @@ describe("Zod Schema validation", () => {
         lastUpdatedISO: "2024-01-01T00:00:00.000Z",
       };
 
-      const comprehensiveBusiness = generatev188Business({
+      const comprehensiveBusiness = generatev189Business({
         id: "business-123",
         licenseData: comprehensiveLicenseData,
         environmentData: comprehensiveEnvironmentData,
         xrayRegistrationData: comprehensiveXrayData,
-        taxClearanceCertificateData: generatev188TaxClearanceCertificateData({
+        taxClearanceCertificateData: generatev189TaxClearanceCertificateData({
           requestingAgencyId: "agency-001",
           businessName: "Comprehensive Test Business",
           addressLine1: "456 Business Ave",
@@ -363,7 +363,7 @@ describe("Zod Schema validation", () => {
           hasPreviouslyReceivedCertificate: true,
           lastUpdatedISO: "2024-01-01T00:00:00.000Z",
         }),
-        cigaretteLicenseData: generatev188CigaretteLicenseData({
+        cigaretteLicenseData: generatev189CigaretteLicenseData({
           businessName: "Tobacco Shop LLC",
           responsibleOwnerName: "John Doe",
           signature: true,
@@ -381,20 +381,20 @@ describe("Zod Schema validation", () => {
         },
       });
 
-      const secondBusiness = generatev188Business({
+      const secondBusiness = generatev189Business({
         id: "business-456",
         licenseData: {
           lastUpdatedISO: "2024-02-01T00:00:00.000Z",
           licenses: {
-            Telemarketers: generatev188LicenseDetails({
+            Telemarketers: generatev189LicenseDetails({
               licenseStatus: "ACTIVE",
             }),
           },
         },
       });
 
-      const comprehensiveUserData = generatev188UserData({
-        user: generatev188BusinessUser({
+      const comprehensiveUserData = generatev189UserData({
+        user: generatev189BusinessUser({
           name: "Jane Smith",
           email: "jane.smith@example.com",
           id: "user-789",
@@ -429,23 +429,23 @@ describe("Zod Schema validation", () => {
         dateCreatedISO: "2023-06-01T08:00:00.000Z",
       });
 
-      const result = v188UserDataSchema.safeParse(comprehensiveUserData);
+      const result = v189UserDataSchema.safeParse(comprehensiveUserData);
 
       expect(result.success).toBe(true);
     });
 
-    it("v188UserDataSchema should pass with only required fields (no optional data)", () => {
+    it("v189UserDataSchema should pass with only required fields (no optional data)", () => {
       safeParseSpy.mockRestore();
 
-      const minimalUserData = generatev188UserData({
-        user: generatev188BusinessUser({
+      const minimalUserData = generatev189UserData({
+        user: generatev189BusinessUser({
           name: undefined,
           myNJUserKey: undefined,
           intercomHash: undefined,
           phoneNumber: undefined,
         }),
         businesses: {
-          "business-minimal": generatev188Business({
+          "business-minimal": generatev189Business({
             id: "business-minimal",
             licenseData: undefined,
             environmentData: undefined,
@@ -459,23 +459,23 @@ describe("Zod Schema validation", () => {
         currentBusinessId: "business-minimal",
       });
 
-      const result = v188UserDataSchema.safeParse(minimalUserData);
+      const result = v189UserDataSchema.safeParse(minimalUserData);
 
       expect(result.success).toBe(true);
     });
 
-    it("v188UserDataSchema should pass when interstate transport is not in the object", () => {
+    it("v189UserDataSchema should pass when interstate transport is not in the object", () => {
       safeParseSpy.mockRestore();
 
-      const userDataWithoutInterstateTransport = generatev188UserData({
-        user: generatev188BusinessUser({
+      const userDataWithoutInterstateTransport = generatev189UserData({
+        user: generatev189BusinessUser({
           name: undefined,
           myNJUserKey: undefined,
           intercomHash: undefined,
           phoneNumber: undefined,
         }),
         businesses: {
-          "business-minimal": generatev188Business({
+          "business-minimal": generatev189Business({
             id: "business-minimal",
             licenseData: undefined,
             environmentData: undefined,
@@ -494,23 +494,23 @@ describe("Zod Schema validation", () => {
       expect(
         userDataWithoutInterstateTransport.businesses["business-minimal"].profileData,
       ).not.toHaveProperty("interstateTransport");
-      const result = v188UserDataSchema.safeParse(userDataWithoutInterstateTransport);
+      const result = v189UserDataSchema.safeParse(userDataWithoutInterstateTransport);
 
       expect(result.success).toBe(true);
     });
 
-    it("v188UserDataSchema should pass when address country is not in the object", () => {
+    it("v189UserDataSchema should pass when address country is not in the object", () => {
       safeParseSpy.mockRestore();
 
-      const minimalUserData = generatev188UserData({
-        user: generatev188BusinessUser({
+      const minimalUserData = generatev189UserData({
+        user: generatev189BusinessUser({
           name: undefined,
           myNJUserKey: undefined,
           intercomHash: undefined,
           phoneNumber: undefined,
         }),
         businesses: {
-          "business-minimal": generatev188Business({
+          "business-minimal": generatev189Business({
             id: "business-minimal",
             licenseData: undefined,
             environmentData: undefined,
@@ -545,22 +545,22 @@ describe("Zod Schema validation", () => {
         userDataWithoutAddressCountry.businesses["business-minimal"].formationData
           .formationFormData,
       ).not.toHaveProperty("addressCountry");
-      const result = v188UserDataSchema.safeParse(userDataWithoutAddressCountry);
+      const result = v189UserDataSchema.safeParse(userDataWithoutAddressCountry);
       expect(result.success).toBe(true);
     });
 
     it("max character tests", () => {
       safeParseSpy.mockRestore();
 
-      const userDataWithMaxOverLimits = generatev188UserData({
-        user: generatev188BusinessUser({
+      const userDataWithMaxOverLimits = generatev189UserData({
+        user: generatev189BusinessUser({
           name: undefined,
           myNJUserKey: undefined,
           intercomHash: undefined,
           phoneNumber: undefined,
         }),
         businesses: {
-          "business-minimal": generatev188Business({
+          "business-minimal": generatev189Business({
             id: "business-minimal",
             licenseData: undefined,
             environmentData: undefined,
@@ -613,7 +613,7 @@ describe("Zod Schema validation", () => {
         },
       };
 
-      const result = v188UserDataSchema.safeParse(userDataOverMaxLimits);
+      const result = v189UserDataSchema.safeParse(userDataOverMaxLimits);
 
       expect(result?.error?.issues).toEqual(
         expect.arrayContaining([
@@ -794,15 +794,15 @@ describe("Zod Schema validation", () => {
     it("base64 encoding tests", () => {
       safeParseSpy.mockRestore();
 
-      const userDataWithBase64Encoding = generatev188UserData({
-        user: generatev188BusinessUser({
+      const userDataWithBase64Encoding = generatev189UserData({
+        user: generatev189BusinessUser({
           name: generateLongBase64String(),
           myNJUserKey: undefined,
           intercomHash: undefined,
           phoneNumber: undefined,
         }),
         businesses: {
-          "business-minimal": generatev188Business({
+          "business-minimal": generatev189Business({
             id: "business-minimal",
             licenseData: undefined,
             environmentData: undefined,
@@ -817,7 +817,7 @@ describe("Zod Schema validation", () => {
       });
 
       const actual = jest.requireActual("@db/zodSchema/zodSchemas");
-      const schemaWithBase64Check = actual.withNoBase64Check(actual.v188UserDataSchema);
+      const schemaWithBase64Check = actual.withNoBase64Check(actual.v189UserDataSchema);
       const result = schemaWithBase64Check.safeParse(userDataWithBase64Encoding);
 
       expect(result.success).toBe(false);
@@ -826,34 +826,34 @@ describe("Zod Schema validation", () => {
 
   describe("withNoBase64Check tests", () => {
     let withNoBase64Check: <T>(schema: T) => T;
-    let actualv188UserDataSchema: typeof v188UserDataSchema;
+    let actualv189UserDataSchema: typeof v189UserDataSchema;
 
     beforeEach(() => {
       jest.restoreAllMocks();
       const actual = jest.requireActual("@db/zodSchema/zodSchemas");
       withNoBase64Check = actual.withNoBase64Check;
-      actualv188UserDataSchema = actual.v188UserDataSchema;
+      actualv189UserDataSchema = actual.v189UserDataSchema;
     });
 
     describe("valid data without base64 encoding", () => {
       it("should pass validation for normal user data", () => {
-        const validUserData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const validUserData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: "John Doe",
             email: "john@example.com",
             phoneNumber: "555-123-4567",
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(validUserData);
 
         expect(result.success).toBe(true);
       });
 
       it("should pass validation for user data with all optional fields populated", () => {
-        const validUserData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const validUserData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: "Jane Smith",
             email: "jane.smith@example.com",
             phoneNumber: "555-987-6543",
@@ -861,47 +861,47 @@ describe("Zod Schema validation", () => {
             intercomHash: "intercom-hash-abc",
           }),
           businesses: {
-            "business-123": generatev188Business({
+            "business-123": generatev189Business({
               id: "business-123",
               licenseData: {
                 lastUpdatedISO: "2024-01-01T00:00:00.000Z",
                 licenses: {
-                  "Pharmacy-Pharmacy": generatev188LicenseDetails({}),
+                  "Pharmacy-Pharmacy": generatev189LicenseDetails({}),
                 },
               },
             }),
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(validUserData);
 
         expect(result.success).toBe(true);
       });
 
       it("should pass validation for short strings", () => {
-        const validUserData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const validUserData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: "Bob",
             email: "b@x.com",
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(validUserData);
 
         expect(result.success).toBe(true);
       });
 
       it("should pass validation for strings with special characters", () => {
-        const validUserData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const validUserData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: "O'Brien-Smith Jr.",
             email: "obrien+test@example.com",
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(validUserData);
 
         expect(result.success).toBe(true);
@@ -911,13 +911,13 @@ describe("Zod Schema validation", () => {
     describe("base64 encoded data in various fields", () => {
       it("should fail validation for base64 in user name", () => {
         const base64Name = generateLongBase64String();
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: base64Name,
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -928,19 +928,19 @@ describe("Zod Schema validation", () => {
 
       it("should fail validation for base64 in business name", () => {
         const base64BusinessName = generateLongBase64String();
-        const userData = generatev188UserData({
+        const userData = generatev189UserData({
           businesses: {
-            "business-123": generatev188Business({
+            "business-123": generatev189Business({
               id: "business-123",
               profileData: {
-                ...generatev188Business({}).profileData,
+                ...generatev189Business({}).profileData,
                 businessName: base64BusinessName,
               },
             }),
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -958,11 +958,11 @@ describe("Zod Schema validation", () => {
 
       it("should fail validation for base64 in formation form data address", () => {
         const base64Address = generateLongBase64String();
-        const business = generatev188Business({
+        const business = generatev189Business({
           id: "business-123",
         });
 
-        const userData = generatev188UserData({
+        const userData = generatev189UserData({
           businesses: {
             "business-123": {
               ...business,
@@ -974,7 +974,7 @@ describe("Zod Schema validation", () => {
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -989,18 +989,18 @@ describe("Zod Schema validation", () => {
 
       it("should fail validation for base64 in nested cigarette license data", () => {
         const base64TradeName = generateLongBase64String();
-        const userData = generatev188UserData({
+        const userData = generatev189UserData({
           businesses: {
-            "business-123": generatev188Business({
+            "business-123": generatev189Business({
               id: "business-123",
-              cigaretteLicenseData: generatev188CigaretteLicenseData({
+              cigaretteLicenseData: generatev189CigaretteLicenseData({
                 tradeName: base64TradeName,
               }),
             }),
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1016,18 +1016,18 @@ describe("Zod Schema validation", () => {
 
       it("should fail validation for base64 in tax clearance certificate data", () => {
         const base64BusinessName = generateLongBase64String();
-        const userData = generatev188UserData({
+        const userData = generatev189UserData({
           businesses: {
-            "business-123": generatev188Business({
+            "business-123": generatev189Business({
               id: "business-123",
-              taxClearanceCertificateData: generatev188TaxClearanceCertificateData({
+              taxClearanceCertificateData: generatev189TaxClearanceCertificateData({
                 businessName: base64BusinessName,
               }),
             }),
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1046,13 +1046,13 @@ describe("Zod Schema validation", () => {
         const base64WithDoublePadding = generateLongBase64String("double");
         expect(base64WithDoublePadding).toMatch(/==$/); // Ends with ==
 
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: base64WithDoublePadding,
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1063,13 +1063,13 @@ describe("Zod Schema validation", () => {
         expect(base64WithSinglePadding).toMatch(/[^=]=$/); // Ends with single =
         expect(base64WithSinglePadding).not.toMatch(/==$/); // But not ==
 
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: base64WithSinglePadding,
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1078,19 +1078,19 @@ describe("Zod Schema validation", () => {
       it("should fail validation for long base64 encoded strings", () => {
         const base64LongString = generateLongBase64String();
 
-        const userData = generatev188UserData({
+        const userData = generatev189UserData({
           businesses: {
-            "business-123": generatev188Business({
+            "business-123": generatev189Business({
               id: "business-123",
               profileData: {
-                ...generatev188Business({}).profileData,
+                ...generatev189Business({}).profileData,
                 notes: base64LongString,
               },
             }),
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1100,22 +1100,22 @@ describe("Zod Schema validation", () => {
         const base64Name = generateLongBase64String();
         const base64BusinessName = generateLongBase64String();
 
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: base64Name,
           }),
           businesses: {
-            "business-123": generatev188Business({
+            "business-123": generatev189Business({
               id: "business-123",
               profileData: {
-                ...generatev188Business({}).profileData,
+                ...generatev189Business({}).profileData,
                 businessName: base64BusinessName,
               },
             }),
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1128,13 +1128,13 @@ describe("Zod Schema validation", () => {
 
     describe("edge cases and boundary conditions", () => {
       it("should handle strings that are exactly 20 characters and not base64", () => {
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: "Exactly 20 Chars!!",
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(true);
@@ -1144,13 +1144,13 @@ describe("Zod Schema validation", () => {
         const base64String = generateLongBase64String();
         const whitespaceWrapped = `  ${base64String}  `;
 
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: whitespaceWrapped,
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1159,21 +1159,21 @@ describe("Zod Schema validation", () => {
       it("should pass for strings that look like base64 but have wrong length", () => {
         const notBase64 = "abcdefghijklmnopqrstu";
 
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: notBase64,
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(true);
       });
 
       it("should handle undefined optional fields", () => {
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: undefined,
             myNJUserKey: undefined,
             intercomHash: undefined,
@@ -1181,26 +1181,26 @@ describe("Zod Schema validation", () => {
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(true);
       });
 
       it("should handle empty strings", () => {
-        const userData = generatev188UserData({
+        const userData = generatev189UserData({
           businesses: {
-            "business-123": generatev188Business({
+            "business-123": generatev189Business({
               id: "business-123",
               profileData: {
-                ...generatev188Business({}).profileData,
+                ...generatev189Business({}).profileData,
                 notes: "",
               },
             }),
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(true);
@@ -1214,7 +1214,7 @@ describe("Zod Schema validation", () => {
           },
         };
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(invalidUserData);
 
         expect(result.success).toBe(false);
@@ -1222,11 +1222,11 @@ describe("Zod Schema validation", () => {
 
       it("should fail for base64 in array of strings (formation additional provisions)", () => {
         const base64Provision = generateLongBase64String();
-        const business = generatev188Business({
+        const business = generatev189Business({
           id: "business-123",
         });
 
-        const userData = generatev188UserData({
+        const userData = generatev189UserData({
           businesses: {
             "business-123": {
               ...business,
@@ -1245,7 +1245,7 @@ describe("Zod Schema validation", () => {
           },
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);
@@ -1263,13 +1263,13 @@ describe("Zod Schema validation", () => {
       it("should pass for URL-safe base64 with dashes and underscores (not detected as base64)", () => {
         const base64UrlSafe = "aGVsbG8gd29ybGQgdGhpcyBpcyBhIHRlc3QgZm9yIGJhc2U2NA";
 
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: base64UrlSafe,
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(true);
@@ -1278,13 +1278,13 @@ describe("Zod Schema validation", () => {
       it("should handle base64 with various character combinations", () => {
         const base64WithSpecialChars = generateLongBase64String();
 
-        const userData = generatev188UserData({
-          user: generatev188BusinessUser({
+        const userData = generatev189UserData({
+          user: generatev189BusinessUser({
             name: base64WithSpecialChars,
           }),
         });
 
-        const schemaWithBase64Check = withNoBase64Check(actualv188UserDataSchema);
+        const schemaWithBase64Check = withNoBase64Check(actualv189UserDataSchema);
         const result = schemaWithBase64Check.safeParse(userData);
 
         expect(result.success).toBe(false);

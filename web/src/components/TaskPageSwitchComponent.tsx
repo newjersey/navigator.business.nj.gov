@@ -9,7 +9,7 @@ import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/Cannabis
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { EinTask } from "@/components/tasks/EinTask";
 import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
-import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
+import { EnvRequirements } from "@/components/tasks/environment-questionnaire/EnvRequirements";
 import { HotelMotelRegistrationTask } from "@/components/tasks/HotelMotelRegistrationTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
@@ -84,10 +84,7 @@ export const TaskPageSwitchComponent = ({
 
   return rswitch(task.id, {
     pwcr: <GovernmentContractingElement headerOverride={<TaskHeader task={task} />} />,
-    "env-permitting": <EnvPermit task={task} />,
-    "waste-permitting": <EnvPermit task={task} />,
-    "land-permitting": <EnvPermit task={task} />,
-    "air-permitting": <EnvPermit task={task} />,
+    "env-requirements": <EnvRequirements task={task} />,
     "passenger-transport-cdl": <PassengerTransportCdl task={task} />,
     "cigarette-license":
       isCigaretteLicenseEnabled && !CMS_ONLY_disable_default_functionality ? (

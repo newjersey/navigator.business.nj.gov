@@ -263,7 +263,7 @@ const getIndustryBasedAddOns = (
   }
 
   if (industryId === "generic" && profileData.homeBasedBusiness !== true) {
-    addOns.push("env-permitting");
+    addOns.push("env-requirements");
   }
 
   if (industry.nonEssentialQuestionsIds) {
