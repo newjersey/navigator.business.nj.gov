@@ -33,6 +33,8 @@ jobs:
           exclude_users: "NJ-Innovation-CI mjackson21"
           number_of_reviewers: 2
           token: ${{ steps.generate_token.outputs.token }}
+          github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
+          slack_token: ${{ secrets.SLACK_OAUTH_TOKEN }}
 
   post-slack-message:
     needs: assign-reviewers
