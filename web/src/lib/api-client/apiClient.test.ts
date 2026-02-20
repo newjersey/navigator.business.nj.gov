@@ -127,7 +127,7 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: "SUCCESS" });
     expect(await sendEnvironmentPermitEmail(emailMetaData)).toEqual("SUCCESS");
     expect(mockAxios.post).toHaveBeenCalledWith(
-      "/api/guest/environment-permit-email",
+      "/api/guest/environment-requirements-email",
       { emailMetaData },
       {},
     );

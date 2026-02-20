@@ -5,15 +5,15 @@ import {
 } from "@businessnjgovnavigator/shared/environment";
 import React, { createContext, FormEvent } from "react";
 
-interface EnvPermitState {
+interface EnvRequirementsState {
   questionnaireData: QuestionnaireData;
   stepIndex: number;
   submitted: boolean;
   sbapEmailSent: boolean;
 }
 
-interface EnvPermitContextType {
-  state: EnvPermitState;
+interface EnvRequirementsContextType {
+  state: EnvRequirementsState;
   setQuestionnaireData?: React.Dispatch<React.SetStateAction<QuestionnaireData>>;
   setStepIndex: React.Dispatch<React.SetStateAction<number>>;
   onSubmit?: (event?: FormEvent<HTMLFormElement>) => void;
@@ -24,7 +24,7 @@ interface EnvPermitContextType {
   mediaAreasWithErrors: () => MediaArea[];
 }
 
-export const EnvPermitContext = createContext<EnvPermitContextType>({
+export const EnvRequirementsContext = createContext<EnvRequirementsContextType>({
   state: {
     stepIndex: 0,
     questionnaireData: generateEmptyEnvironmentQuestionnaireData(),

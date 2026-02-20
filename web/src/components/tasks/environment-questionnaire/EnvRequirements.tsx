@@ -1,8 +1,9 @@
 import { TaskHeader } from "@/components/TaskHeader";
 import { EnvQuestionnaireStepper } from "@/components/tasks/environment-questionnaire/EnvQuestionnaireStepper";
+import { EnvRequirementsResults } from "@/components/tasks/environment-questionnaire/EnvRequirementsResults";
 import { mediaAreaToNotApplicableOption } from "@/components/tasks/environment-questionnaire/helpers";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
@@ -14,13 +15,12 @@ import {
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
-import { EnvPermitsResults } from "./EnvPermitsResults";
 
 interface Props {
   task: Task;
 }
 
-export const EnvPermit = (props: Props): ReactElement => {
+export const EnvRequirements = (props: Props): ReactElement => {
   useEffect(() => {
     analytics.event.gen_guidance_stepper_initiated.arrive.general_guidance_initiated();
   }, []);
@@ -54,7 +54,7 @@ export const EnvPermit = (props: Props): ReactElement => {
         submitted: stepIndex === 5 ? true : undefined,
       })
       .queueTaskProgress({
-        ["env-permitting"]: "COMPLETED",
+        ["env-requirements"]: "COMPLETED",
       })
       .update();
   };
@@ -67,7 +67,7 @@ export const EnvPermit = (props: Props): ReactElement => {
         submitted: false,
       })
       .queueTaskProgress({
-        ["env-permitting"]: "TO_DO",
+        ["env-requirements"]: "TO_DO",
       })
       .update();
   };
@@ -96,7 +96,7 @@ export const EnvPermit = (props: Props): ReactElement => {
     }) as MediaArea[];
 
   return (
-    <EnvPermitContext.Provider
+    <EnvRequirementsContext.Provider
       value={{
         state: {
           questionnaireData,
@@ -118,7 +118,7 @@ export const EnvPermit = (props: Props): ReactElement => {
         <TaskHeader task={props.task} />
         <UnlockedBy task={props.task} />
         {business?.environmentData?.submitted ? (
-          <EnvPermitsResults />
+          <EnvRequirementsResults />
         ) : (
           <>
             {isMobile && <div className="margin-bottom-105">{props.task.summaryDescriptionMd}</div>}
@@ -126,6 +126,6 @@ export const EnvPermit = (props: Props): ReactElement => {
           </>
         )}
       </div>
-    </EnvPermitContext.Provider>
+    </EnvRequirementsContext.Provider>
   );
 };
