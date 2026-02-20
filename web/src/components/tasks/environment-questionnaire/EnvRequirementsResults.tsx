@@ -5,13 +5,13 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ContactDep } from "@/components/tasks/environment-questionnaire/results/ContactDep";
 import { PersonalizedSupport } from "@/components/tasks/environment-questionnaire/results/PersonalizedSupport";
 import { SeeYourResponses } from "@/components/tasks/environment-questionnaire/results/SeeYourResponses";
-import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement, useContext } from "react";
 
-export const EnvPermitsResults = (): ReactElement => {
-  const envContext = useContext(EnvPermitContext);
+export const EnvRequirementsResults = (): ReactElement => {
+  const envContext = useContext(EnvRequirementsContext);
 
   const Config = getMergedConfig();
 

@@ -8,8 +8,8 @@ import {
   mediaAreaToStepNumber,
   stepNumberToMediaArea,
 } from "@/components/tasks/environment-questionnaire/helpers";
+import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 
-import { EnvPermitContext } from "@/contexts/EnvPermitContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -39,7 +39,7 @@ import { ChangeEvent, ReactElement, ReactNode, useContext } from "react";
 export const EnvQuestionnaireStepper = (): ReactElement => {
   const { Config } = useConfig();
   const isMobile = useMediaQuery(MediaQueries.isMobile);
-  const envContext = useContext(EnvPermitContext);
+  const envContext = useContext(EnvRequirementsContext);
   const { updateQueue } = useUserData();
 
   const {
@@ -49,7 +49,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     userWantsToContinueWithoutSaving,
   } = useContext(NeedsAccountContext);
 
-  type EnvPermitStepNames =
+  type EnvRequirementsStepNames =
     | "Instructions"
     | "Air"
     | "Land"
@@ -57,8 +57,8 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     | "Drinking Water"
     | "Wastewater";
 
-  const EnvPermitConfiguration: {
-    name: EnvPermitStepNames;
+  const EnvRequirementsConfiguration: {
+    name: EnvRequirementsStepNames;
     stepIndex: number;
   }[] = [
     { name: "Instructions", stepIndex: 0 },
@@ -69,7 +69,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
     { name: "Wastewater", stepIndex: 5 },
   ];
 
-  const steps = EnvPermitConfiguration.map((step) => {
+  const steps = EnvRequirementsConfiguration.map((step) => {
     return {
       name: step.name,
       hasError: envContext.state.submitted
@@ -145,7 +145,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
   };
 
   const handleOnStepClick = (newStep: number): void => {
-    const category = EnvPermitConfiguration.find((s) => newStep === s.stepIndex);
+    const category = EnvRequirementsConfiguration.find((s) => newStep === s.stepIndex);
 
     if (!category) return;
 
@@ -161,7 +161,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
       userWantsToContinueWithoutSaving === false;
 
     if (userNotAuthandDoesntWantToSave) {
-      updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.environmentRequirements }).update();
       setShowContinueWithoutSaving(true);
       setShowNeedsAccountModal(true);
     }
@@ -283,7 +283,9 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
               isAuthenticated === IsAuthenticated.FALSE &&
               userWantsToContinueWithoutSaving === false
             ) {
-              updateQueue?.queuePreferences({ returnToLink: ROUTES.envPermit }).update();
+              updateQueue
+                ?.queuePreferences({ returnToLink: ROUTES.environmentRequirements })
+                .update();
               setShowContinueWithoutSaving(true);
               analytics.event.gen_guidance_stepper_save_modal_displayed.appears.general_guidance_save_modal_displayed();
               setShowNeedsAccountModal(true);

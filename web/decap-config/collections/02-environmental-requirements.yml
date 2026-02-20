@@ -1,12 +1,12 @@
 collections:
-  - name: "environmental-compliance-label"
-    label: "🌲 ENVIRONMENTAL COMPLIANCE"
+  - name: "environmental-requirements-label"
+    label: "🌲 ENVIRONMENTAL REQUIREMENTS"
     folder: "content/src"
     fields:
       - { name: "" }
 
-  - name: "environmental-compliance-section"
-    label: "Env Comp - Config"
+  - name: "environmental-requirements-section"
+    label: "Environmental Requirements - Config"
     files:
       - label: "Environment Questionnaire Tasks"
         name: "env-questionnaire-task"

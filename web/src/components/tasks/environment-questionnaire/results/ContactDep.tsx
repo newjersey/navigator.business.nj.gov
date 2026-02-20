@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
@@ -10,7 +10,7 @@ import { ReactElement, useContext } from "react";
 
 export const ContactDep = (): ReactElement => {
   const Config = getMergedConfig();
-  const envContext = useContext(EnvPermitContext);
+  const envContext = useContext(EnvRequirementsContext);
 
   const contactCard = (mediaArea: MediaArea): ReactElement => {
     const contactConfig = Config.envResultsPage.contactDep[mediaArea];

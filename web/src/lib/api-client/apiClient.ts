@@ -4,11 +4,11 @@ import {
   CrtkBusinessDetails,
   CrtkEmailMetadata,
   ElevatorSafetyRegistrationSummary,
-  EmailMetaData,
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
   EmployerRatesRequest,
   EmployerRatesResponse,
+  EnvironmentRequirementsEmailMetaData,
   FacilityDetails,
   getCurrentBusiness,
   HousingRegistrationRequestLookupResponse,
@@ -88,8 +88,10 @@ export const searchBuisnessInCrtkDB = (
   return post(`/crtk-lookup`, { crtkBusinessDetails });
 };
 
-export const sendEnvironmentPermitEmail = (emailMetaData: EmailMetaData): Promise<string> => {
-  return post(`/guest/environment-permit-email`, { emailMetaData }, false);
+export const sendEnvironmentPermitEmail = (
+  emailMetaData: EnvironmentRequirementsEmailMetaData,
+): Promise<string> => {
+  return post(`/guest/environment-requirements-email`, { emailMetaData }, false);
 };
 
 export const sendCrtkActivitiesEmail = (emailMetaData: CrtkEmailMetadata): Promise<string> => {

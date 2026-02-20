@@ -1,11 +1,11 @@
 {
-  "id": "env-permitting",
-  "displayname": "env-permitting",
+  "id": "env-requirements",
+  "displayname": "env-requirements",
   "roadmapSteps": [
     {
       "step": 3,
       "weight": 20,
-      "task": "env-permitting",
+      "task": "env-requirements",
       "required": false
     }
   ]

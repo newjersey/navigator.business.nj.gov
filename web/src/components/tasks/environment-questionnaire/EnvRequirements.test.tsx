@@ -1,4 +1,4 @@
-import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
+import { EnvRequirements } from "@/components/tasks/environment-questionnaire/EnvRequirements";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -41,7 +41,7 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
-describe("<CheckEnvPermits />", () => {
+describe("<EnvRequirements />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
@@ -68,7 +68,7 @@ describe("<CheckEnvPermits />", () => {
 
     render(
       <WithStatefulUserData initialUserData={userDataWithEmail}>
-        <EnvPermit task={generateTask({})} />
+        <EnvRequirements task={generateTask({})} />
       </WithStatefulUserData>,
     );
   };
@@ -83,7 +83,7 @@ describe("<CheckEnvPermits />", () => {
     render(
       withNeedsAccountContext(
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
-          <EnvPermit task={generateTask({})} />
+          <EnvRequirements task={generateTask({})} />
         </WithStatefulUserData>,
         isAuthenticated ? IsAuthenticated.TRUE : IsAuthenticated.FALSE,
         {
@@ -121,7 +121,7 @@ describe("<CheckEnvPermits />", () => {
         await waitFor(() => {
           return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
         });
-        expect(currentBusiness().preferences.returnToLink).toEqual(ROUTES.envPermit);
+        expect(currentBusiness().preferences.returnToLink).toEqual(ROUTES.environmentRequirements);
       });
 
       it("sets showContinueWithoutSaving to true when on the first step, is not authenticated and user hasn't clicked continue without saving", async () => {
@@ -317,7 +317,7 @@ describe("<CheckEnvPermits />", () => {
           );
           render(
             <WithStatefulUserData initialUserData={userData}>
-              <EnvPermit task={generateTask({})} />
+              <EnvRequirements task={generateTask({})} />
             </WithStatefulUserData>,
           );
           fireEvent.click(screen.getByText(Config.envResultsPage.personalizedSupport.title));

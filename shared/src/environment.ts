@@ -114,11 +114,10 @@ export const generateEmptyEnvironmentQuestionnaireData = (): QuestionnaireData =
   };
 };
 
-export type EnvironmentPermitEmailClient = {
-  sendEmail: (emailMetaData: EmailMetaData) => Promise<string>;
+export type EnvironmentRequirementsEmailClient = {
+  sendEmail: (emailMetaData: EnvironmentRequirementsEmailMetaData) => Promise<string>;
 };
-
-export type EmailMetaData = {
+export type EnvironmentRequirementsEmailMetaData = {
   email: string;
   userName: string;
   businessName: string;

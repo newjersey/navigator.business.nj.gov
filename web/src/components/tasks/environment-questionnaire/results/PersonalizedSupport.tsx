@@ -4,7 +4,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { responsesToString } from "@/components/tasks/environment-questionnaire/results/helpers";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { EnvPermitContext } from "@/contexts/EnvPermitContext";
+import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
@@ -14,7 +14,7 @@ import { InputLabel } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 
 export const PersonalizedSupport = (): ReactElement => {
-  const envContext = useContext(EnvPermitContext);
+  const envContext = useContext(EnvRequirementsContext);
   const Config = getMergedConfig();
   const [error, setError] = useState<"EMAIL" | "GENERAL" | undefined>();
   const { userData, business, updateQueue } = useUserData();

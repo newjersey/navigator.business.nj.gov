@@ -64,7 +64,7 @@
     {
       "step": 4,
       "weight": 22,
-      "task": "env-permitting",
+      "task": "env-requirements",
       "required": false
     }
   ],

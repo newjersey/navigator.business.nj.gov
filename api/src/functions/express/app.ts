@@ -5,7 +5,7 @@ import { decryptionRouterFactory } from "@api/decryptionRouter";
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
 import { employerRatesRouterFactory } from "@api/employerRatesRouter";
-import { environmentPermitEmailRouter } from "@api/environmentPermitEmailRouter";
+import { environmentRequirementsEmailRouter } from "@api/environmentRequirementsEmailRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
 import { healthCheckRouterFactory } from "@api/healthCheckRouter";
@@ -18,7 +18,6 @@ import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
-import { ApiEnvPermitEmailClient } from "@client/ApiEnvPermitEmailClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
@@ -52,6 +51,8 @@ import { RegulatedBusinessDynamicsChecklistItemsClient } from "@client/dynamics/
 import { RegulatedBusinessDynamicsLicenseApplicationIdsClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseApplicationIdsClient";
 import { RegulatedBusinessDynamicsLicenseHealthCheckClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseHealthCheckClient";
 import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseStatusClient";
+import { EnvironmentRequirementsEmailClient } from "@client/EnvironmentRequirementsEmailClient";
+
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MockCryptoClient } from "@client/MockCryptoClient";
@@ -379,7 +380,7 @@ const xrayRegistrationSearch = XrayRegistrationSearchClient(
 
 const xrayRegistrationLookup = XrayRegistrationLookupClient(xrayRegistrationSearch, logger);
 
-const environmentPermitEmailClient = ApiEnvPermitEmailClient(logger);
+const environmentRequirementsEmailClient = EnvironmentRequirementsEmailClient(logger);
 
 const updateXrayStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookup);
 
@@ -526,7 +527,10 @@ app.use(
 app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient, logger));
 app.use("/api", crtkLookupRouterFactory(updateCrtkStatus, dynamoDataClient, logger));
 
-app.use("/api/guest", environmentPermitEmailRouter(environmentPermitEmailClient, logger));
+app.use(
+  "/api/guest",
+  environmentRequirementsEmailRouter(environmentRequirementsEmailClient, logger),
+);
 
 app.use("/api", crtkEmailRouter(crtkEmailClient, logger));
 
