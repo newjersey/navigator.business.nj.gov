@@ -24,7 +24,7 @@ matplotlib-inline==0.2.1
 mypy_extensions==1.1.0
 numpy==2.3.5
 packaging==25.0
-parso==0.8.5
+parso==0.8.6
 pathspec==0.12.1
 pexpect==4.9.0
 pillow==12.1.1
