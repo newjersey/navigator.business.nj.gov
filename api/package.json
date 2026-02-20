@@ -43,7 +43,7 @@
     "@smithy/node-http-handler": "4.4.8",
     "airtable": "0.12.2",
     "axios": "1.13.5",
-    "body-parser": "1.20.3",
+    "body-parser": "1.20.4",
     "cors": "2.8.5",
     "dayjs": "1.11.19",
     "dedent": "1.7.0",
