@@ -70,7 +70,7 @@
     "@types/jsonwebtoken": "9.0.10",
     "@types/lodash": "4.17.20",
     "@types/node": "24.1.0",
-    "@types/simple-oauth2": "5.0.7",
+    "@types/simple-oauth2": "5.0.8",
     "@types/supertest": "6.0.3",
     "@types/xml2js": "0.4.14",
     "@typescript-eslint/eslint-plugin": "7.18.0",
