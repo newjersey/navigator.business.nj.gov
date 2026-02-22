@@ -230,7 +230,7 @@
     "require-from-string": "2.0.2",
     "rimraf": "6.1.2",
     "sass": "1.94.2",
-    "sass-loader": "16.0.6",
+    "sass-loader": "16.0.7",
     "seedrandom": "3.0.5",
     "semantic-release": "19.0.5",
     "storybook": "7.6.21",
