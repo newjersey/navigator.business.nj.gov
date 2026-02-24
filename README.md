@@ -16,22 +16,22 @@ Everything is written in **TypeScript** and runs on **Node.js**.
 The frontend is **React** via **Next.js** and deployed in **Docker containers** on an **AWS Elastic
 Container Service** cluster.
 
-The backend is an **Express** app deployed as an **AWS Lambda** function using **AWS Cloud Development Kit**. It connects to an **AWS DynamoDB** instance that is also configured through
+The backend is an **Express** app deployed as an **AWS Lambda** function using **AWS Cloud
+Development Kit**. It connects to an **AWS DynamoDB** instance that is also configured through
 **Terraform**.
 
 The app uses **AWS Cognito** (through **AWS Amplify**) to handle authentication for registered
 users. Unregistered users are able to browse the site in guest mode without saving their data to the
 DynamoDB database.
 
-We deploy using
-**[GitHub Actions ](https://github.com/newjersey/navigator.business.nj.gov/actions)** for
-CI/CD.
+We deploy using **[GitHub Actions](https://github.com/newjersey/navigator.business.nj.gov/actions)**
+for CI/CD.
 
 ## Development
 
 You will need Node.js (with Yarn installed via `npm` or `corepack`) installed for primary
-development. Additionally, for running the server in local development mode, you will need
-Python (for the AWS CLI and some of our scripts) installed (details below).
+development. Additionally, for running the server in local development mode, you will need Python
+(for the AWS CLI and some of our scripts) installed (details below).
 
 We recommend using WSL2 if developing on Windows.
 
@@ -43,9 +43,11 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
   [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If installing via
   package manager, we suggest installing `corepack` if available separately.)
 - [Docker](https://www.docker.com/) — required for running containers locally
-  - **macOS:** We recommend using [Colima](https://github.com/abiosoft/colima) as your Docker runtime
+  - **macOS:** We recommend using [Colima](https://github.com/abiosoft/colima) as your Docker
+    runtime
     - **Recommended Colima Configuration:** aarch64, cpu: 8, memory: 16, disk: 256, runtime: docker
-    - You can manually configure Colima with `colima start --edit` or the script `install.sh` will configure automatically.
+    - You can manually configure Colima with `colima start --edit` or the script `install.sh` will
+      configure automatically.
   - **Windows (WSL2):** Use Docker Desktop with WSL2 integration enabled
   - **Linux:** Use the native Docker Engine installation
 - [AWS CLI](https://aws.amazon.com/cli/)
@@ -67,8 +69,8 @@ You will then setup your AWS credentials:
 aws configure
 ```
 
-Clone the code and navigate to the root of this repository. There is an installation script that will
-install all required development tools, yarn packages, and execute a yarn build.
+Clone the code and navigate to the root of this repository. There is an installation script that
+will install all required development tools, yarn packages, and execute a yarn build.
 
 ```shell
 ./scripts/install.sh
@@ -81,13 +83,17 @@ Before you can run locally, you will need to:
 - create a `./web/.env` that includes all the values laid out in the `./web/.env-template` file.
 - create a `./api/.env` that includes all the values laid out in the `./api/.env-template` file.
 - create a `.venv` virtual environment and install requirements if working on Python
-  - _Note: The application does not need a venv. This step is only required to run Python helper scripts._
+  - _Note: The application does not need a venv. This step is only required to run Python helper
+    scripts._
+
   ```shell
   python3 -m venv .venv
   source .venv/bin/activate
   pip install -r requirements.txt
   ```
+
 - do an initial build (skip if you ran `install.sh`)
+
   ```shell
   yarn build
   ```
@@ -142,33 +148,38 @@ yarn test:python
 
 ### Running locally
 
-Before starting the app, make sure your Docker environment is running. This is required for DynamoDB Local.
+Before starting the app, make sure your Docker environment is running. This is required for DynamoDB
+Local.
 
-_Note:_ If you ran the `install.sh` script, you should have Colima installed and running on your machine already. The script also sets Colima as a service for Homebrew to start on machine login.
+_Note:_ If you ran the `install.sh` script, you should have Colima installed and running on your
+machine already. The script also sets Colima as a service for Homebrew to start on machine login.
 
 #### First-Time Setup
 
-You will need to have all dependencies installed. If you haven't done so, you can install all required technologies by running `./scripts/install.sh` from the root directory.
+You will need to have all dependencies installed. If you haven't done so, you can install all
+required technologies by running `./scripts/install.sh` from the root directory.
 
 1. Build the application
 
-```shell
-yarn build # This happens in the install.sh script as well.
-```
+   ```shell
+   yarn build # This happens in the install.sh script as well.
+   ```
 
 2. Launch all the services
 
-```shell
-yarn start:dev
-```
+   ```shell
+   yarn start:dev
+   ```
 
-3. Open the application in your browser. The frontend is available at [localhost:3000](http://localhost:3000)
+3. Open the application in your browser. The frontend is available at
+   [localhost:3000](http://localhost:3000)
 
-4. Terminate the application with `Ctrl+C`. A cleanup script will tear down the Docker processes. If you need to stop the Docker containers manually, run:
+4. Terminate the application with `Ctrl+C`. A cleanup script will tear down the Docker processes. If
+   you need to stop the Docker containers manually, run:
 
-```shell
-yarn services:down
-```
+   ```shell
+   yarn services:down
+   ```
 
 ### Deploying
 
@@ -178,8 +189,8 @@ Use `ship-it` to run prettier, linting, and tests before pushing:
 ./scripts/ship-it.sh
 ```
 
-The GitHub CI/CD (which is configured in `.github/workflows`) will pick up the job and deploy
-to the development environment for commits to the main branch.
+The GitHub CI/CD (which is configured in `.github/workflows`) will pick up the job and deploy to the
+development environment for commits to the main branch.
 
 ## Frontend deep-dive
 
@@ -201,8 +212,8 @@ line in `_app.tsx`).
 For Next.js, environment variables are inserted at build time. In `./web/next.config.js`, the
 environment variables that the code will have access to are set up for the Next.js framework by
 pulling them in from the `.env` file. This works because the system that is building the Next.js
-code (via GitHub Actions workflow) has access to these variables via environment variables set during that
-build step.
+code (via GitHub Actions workflow) has access to these variables via environment variables set
+during that build step.
 
 **Important**: This means that any time you build the app, the system building it (your local
 terminal, for example) needs to have these environment variables set as well, or else they will not
@@ -253,14 +264,15 @@ make use of the `useUserData` wrapper around this hook.
 
 ## Backend deep-dive
 
-The backend code lives in `./api`. It uses [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html) for
-handling the integration with AWS Lambdas.
+The backend code lives in `./api`. It uses
+[AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html) for handling
+the integration with AWS Lambdas.
 
-We use CDK to deploy the backend app. The backend app itself is defined in `api/src/functions/express/app.ts` and is mostly a regular Express app,
-except it wraps its export in `serverless-http` to become a handler. Locally, the Express app runs normally.
-API gateway routing is configured using AWS CDK in the `api/cdk/lib/apiStack.ts` file, which
-defines the config structure that proxies all routes through to be handled by the Express routing
-system.
+We use CDK to deploy the backend app. The backend app itself is defined in
+`api/src/functions/express/app.ts` and is mostly a regular Express app, except it wraps its export
+in `serverless-http` to become a handler. Locally, the Express app runs normally. API gateway
+routing is configured using AWS CDK in the `api/cdk/lib/apiStack.ts` file, which defines the config
+structure that proxies all routes through to be handled by the Express routing system.
 
 The rest of the code is regular hexagonal Express structure. The `src/api` folder contains route
 definitions and depends on abstractions and types defined in `src/domain`. The `src/db` folder
@@ -354,10 +366,11 @@ Business.NJ.gov is an open source project that is meant to serve as a base for a
 to create an online resource for their own business community. You can find full license details at
 [Business.NJ.gov/license](https://business.nj.gov/license).
 
-### Launch a copy of the website
+#### Disclaimer
 
-We manage the website through Webflow. To launch your own copy of the site, visit the Webflow
-showcase and click "Open in Webflow": https://webflow.com/website/State-of-NJ-Business-One-Stop
+This project utilizes certain tools and technologies for development purposes. The inclusion of
+these tools does not imply endorsement or recommendation. Users are encouraged to evaluate the
+suitability of these tools for their own use.
 
 ### Repositories and code
 
