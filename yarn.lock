@@ -5022,6 +5022,7 @@ __metadata:
     tsx: 4.21.0
     typescript: 5.9.3
     uuid: 9.0.1
+    webpack: 5.104.1
     winston: 3.17.0
     winston-cloudwatch: 6.3.0
     wiremock: 3.13.2
@@ -5036,7 +5037,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/shared": "*"
     "@types/node": 24.1.0
-    "@vitest/coverage-v8": 2.1.8
+    "@vitest/coverage-v8": 2.1.9
     cross-env: 10.1.0
     cspell: 9.3.2
     gray-matter: 4.0.3
@@ -5057,6 +5058,7 @@ __metadata:
     "@react-email/preview-server": 5.0.6
     "@react-email/render": 2.0.0
     react: 18.3.1
+    react-dom: 18.3.1
     react-email: 5.0.6
     tsx: 4.21.0
   languageName: unknown
@@ -5159,11 +5161,12 @@ __metadata:
     "@types/xml2js": 0.4.14
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
-    "@vitest/coverage-v8": 2.1.8
+    "@vitest/coverage-v8": 2.1.9
     airtable: 0.12.2
     aws-amplify: 6.15.8
     aws-cdk: 2.1033.0
     aws-cdk-lib: 2.215.0
+    axe-core: 4.11.1
     axios: 1.13.5
     babel-jest: 29.7.0
     babel-loader: 10.0.0
@@ -5373,6 +5376,7 @@ __metadata:
     "@typescript-eslint/parser": 7.18.0
     airtable: 0.12.2
     aws-amplify: 6.15.8
+    axe-core: 4.11.1
     axios: 1.13.5
     babel-jest: 29.7.0
     babel-loader: 10.0.0
@@ -15609,9 +15613,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-v8@npm:2.1.8":
-  version: 2.1.8
-  resolution: "@vitest/coverage-v8@npm:2.1.8"
+"@vitest/coverage-v8@npm:2.1.9":
+  version: 2.1.9
+  resolution: "@vitest/coverage-v8@npm:2.1.9"
   dependencies:
     "@ampproject/remapping": ^2.3.0
     "@bcoe/v8-coverage": ^0.2.3
@@ -15626,12 +15630,12 @@ __metadata:
     test-exclude: ^7.0.1
     tinyrainbow: ^1.2.0
   peerDependencies:
-    "@vitest/browser": 2.1.8
-    vitest: 2.1.8
+    "@vitest/browser": 2.1.9
+    vitest: 2.1.9
   peerDependenciesMeta:
     "@vitest/browser":
       optional: true
-  checksum: 7453a33bddd051f70d9424e4b26db434ac792962af7a063952617ff8b0880733ccdc5afb7b8668c3af0b18edb1102725ebb4377d6d00bc6ac0202927e68166e3
+  checksum: ab86a73992df5ca964c4323222c709642607f929fda4e6017394ca304bb96a8ed2dde178cc9c3c6d885694956752eadabb390323614e906958fd3659fc42aa99
   languageName: node
   linkType: hard
 
@@ -16972,6 +16976,13 @@ __metadata:
   version: 1.13.2
   resolution: "aws4@npm:1.13.2"
   checksum: 9ac924e4a91c088b4928ea86b68d8c4558b0e6289ccabaae0e3e96a611bd75277c2eab6e3965821028768700516f612b929a5ce822f33a8771f74ba2a8cedb9c
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:4.11.1":
+  version: 4.11.1
+  resolution: "axe-core@npm:4.11.1"
+  checksum: 92b3c79af3695bcebac0e7f3f90f4bc11d2b39ccdc670937290e8dacbc943473713cc06b771dea0563c66d57d93d940ed89e082bfdecccf9dd70782d4bb243c0
   languageName: node
   linkType: hard
 

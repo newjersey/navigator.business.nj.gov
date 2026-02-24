@@ -73,7 +73,7 @@ Clone the code and navigate to the root of this repository. There is an installa
 will install all required development tools, yarn packages, and execute a yarn build.
 
 ```shell
-./scripts/install.sh
+source scripts/install.sh
 ```
 
 ### Local env
@@ -157,7 +157,7 @@ machine already. The script also sets Colima as a service for Homebrew to start 
 #### First-Time Setup
 
 You will need to have all dependencies installed. If you haven't done so, you can install all
-required technologies by running `./scripts/install.sh` from the root directory.
+required technologies by running `source scripts/install.sh` from the root directory.
 
 1. Build the application
 
