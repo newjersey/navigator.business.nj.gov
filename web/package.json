@@ -132,6 +132,7 @@
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "airtable": "0.12.2",
+    "axe-core": "4.11.1",
     "babel-jest": "29.7.0",
     "babel-loader": "10.0.0",
     "clean-webpack-plugin": "4.0.0",
@@ -174,9 +175,5 @@
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
     "webpack": "5.104.1"
-  },
-  "resolutions": {
-    "@types/react": "18.3.27",
-    "@types/react-dom": "18.3.7"
   }
 }
