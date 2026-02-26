@@ -51,7 +51,13 @@
       "step": 4,
       "licenseTask": "rmw-generator-registration",
       "required": true,
-      "weight": 1
+      "weight": 3
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "license-acupuncture",
+      "required": true
     }
   ],
   "name": "Acupuncture",
