@@ -7,7 +7,7 @@ import {
   RoadmapDisplayContent,
   SidebarCardContent,
   TaskWithoutLinks,
-} from "../types/types";
+} from "../types";
 
 const displayContentDirectory = path.join(process.cwd(), "..", "content", "src", "display-content");
 

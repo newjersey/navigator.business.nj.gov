@@ -12,16 +12,6 @@ import {
 } from "@businessnjgovnavigator/shared/types";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
-export const getHiddenCertifications = (
-  business: Business | undefined,
-  certifications: Certification[],
-): Certification[] => {
-  if (!business) return [];
-
-  return certifications.filter((it) => {
-    return business.preferences.hiddenCertificationIds.includes(it.id);
-  });
-};
 export const sortCertifications = (certifications: Certification[]): Certification[] => {
   return certifications.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -32,16 +22,6 @@ export const sortCertifications = (certifications: Certification[]): Certificati
       return 1;
     }
     return 0;
-  });
-};
-export const getVisibleCertifications = (
-  certifications: Certification[],
-  business: Business | undefined,
-): Certification[] => {
-  if (!business) return [];
-
-  return certifications.filter((it) => {
-    return !business?.preferences.hiddenCertificationIds.includes(it.id);
   });
 };
 export const sortFundingsForUser = (fundings: Funding[], userData?: UserData): Funding[] => {
@@ -125,15 +105,6 @@ export const getVisibleFundings = (
   if (!business) return [];
   return fundings.filter((it) => {
     return !business?.preferences.hiddenFundingIds.includes(it.id);
-  });
-};
-export const getHiddenFundings = (
-  business: Business | undefined,
-  fundings: Funding[],
-): Funding[] => {
-  if (!business) return [];
-  return fundings.filter((it: Funding) => {
-    return business.preferences.hiddenFundingIds.includes(it.id);
   });
 };
 export const filterFundings = ({
@@ -297,10 +268,7 @@ export const getForYouCardCount = (
   }
 
   if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications) {
-    count += getVisibleCertifications(
-      filterCertifications({ certifications, business }),
-      business,
-    ).length;
+    count += filterCertifications({ certifications, business }).length;
   }
 
   if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings) {
