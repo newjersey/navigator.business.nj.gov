@@ -10,6 +10,7 @@ industryId:
   - acupuncture
 callToActionText: Apply for My License
 callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
+webflowIndustry: ""
 licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Acupuncture
