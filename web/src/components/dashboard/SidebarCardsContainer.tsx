@@ -40,9 +40,7 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
     <SidebarCardsList
       sideBarCards={visibleSidebarCards}
       fundings={sortedFundings}
-      hiddenFundings={[]}
       certifications={sortedCertifications}
-      hiddenCertifications={[]}
       isRemoteSellerWorker={remoteSellerWorker}
       displayFundingCards={
         LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings
