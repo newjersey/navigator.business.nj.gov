@@ -10,7 +10,8 @@
     "emptyOpportunitiesRemoteSellerWorkerText": "We don't have any items for you.",
     "fundingTagText": "Funding",
     "certificationTagText": "Certification",
-    "learnMoreFundingOpportunitiesText": "Learn About Other Funding Opportunities",
+    "learnMoreFundingOpportunitiesText": "Access More Funding & Resources",
+    "fundingCertificationDueText": "Due",
     "learnMoreFundingOpportunitiesLink": "https://business.nj.gov/funding",
     "mobileFirstTabText": "Tasks",
     "mobileSecondTabText": "For You (${count})"

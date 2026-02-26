@@ -1,7 +1,5 @@
 import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
 import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
-import analytics from "@/lib/utils/analytics";
-import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
 import {
   generateCertification,
@@ -15,7 +13,7 @@ import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileDat
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -25,7 +23,6 @@ function mockMaterialUI(): typeof materialUi {
 }
 
 jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/utils/helpers", () => {
   return {
@@ -33,22 +30,6 @@ jest.mock("@/lib/utils/helpers", () => {
     scrollToTopOfElement: jest.fn(),
   };
 });
-const mockHelpers = helpers as jest.Mocked<typeof helpers>;
-
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
-function setupMockAnalytics(): typeof analytics {
-  return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
-    event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
-      for_you_card_unhide_button: {
-        click: {
-          unhide_cards: jest.fn(),
-        },
-      },
-    },
-  };
-}
 
 const Config = getMergedConfig();
 
@@ -123,39 +104,6 @@ describe("<SidebarCardsList />", () => {
 
     render(<SidebarCardsList {...sidebarCardsListProps} />);
   };
-
-  it("fires unhide_cards analytics when accordion is opened when displayFundings is true", () => {
-    useMockBusiness({
-      profileData: {
-        ...generateProfileData({
-          operatingPhase: getDisplayFundingOperatingPhase(),
-        }),
-      },
-    });
-
-    renderComponent({ displayFundingCards: true });
-    fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-    fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-    expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(
-      1,
-    );
-  });
-
-  it("fires unhide_cards analytics when accordion is opened when displayCertifications is true", () => {
-    useMockBusiness({
-      profileData: {
-        ...generateProfileData({
-          operatingPhase: getDisplayCertificationOperatingPhase(),
-        }),
-      },
-    });
-    renderComponent({ displayCertificationsCards: true });
-    fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-    fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-    expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(
-      1,
-    );
-  });
 
   describe("Empty State Messages", () => {
     describe("Remote Seller/Worker Message", () => {
@@ -391,37 +339,6 @@ describe("<SidebarCardsList />", () => {
     });
   });
 
-  describe("View Hidden Items Accordion", () => {
-    it("calls scrollToTopOfElement when the accordion opens", async () => {
-      useMockBusiness({
-        profileData: {
-          ...generateProfileData({
-            operatingPhase: getDisplayFundingOperatingPhase(),
-          }),
-        },
-      });
-
-      renderComponent({ displayCertificationsCards: true });
-      fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-      expect(mockHelpers.scrollToTopOfElement).toHaveBeenCalledTimes(1);
-    });
-
-    it("does not call scrollToTopOfElement when the accordion closes", async () => {
-      useMockBusiness({
-        profileData: {
-          ...generateProfileData({
-            operatingPhase: getDisplayCertificationOperatingPhase(),
-          }),
-        },
-      });
-
-      renderComponent({ displayCertificationsCards: true });
-      fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-      fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-      expect(mockHelpers.scrollToTopOfElement).toHaveBeenCalledTimes(1);
-    });
-  });
-
   describe("Funding and Certification Sorting", () => {
     it("displays certifications above fundings for most users", async () => {
       useMockUserData({
@@ -507,6 +424,50 @@ describe("<SidebarCardsList />", () => {
       expect(fundingElement.compareDocumentPosition(certificationElement)).toBe(
         Node.DOCUMENT_POSITION_FOLLOWING,
       );
+    });
+  });
+
+  describe("Due date", () => {
+    it("displays due dates only on fundings with them", async () => {
+      useMockUserData({
+        businesses: {
+          "biz-1": generateBusiness({
+            profileData: {
+              ...generateProfileData({
+                operatingPhase: getDisplayFundingOperatingPhase(),
+              }),
+            },
+          }),
+        },
+        user: generateUser({
+          accountCreationSource: "test-source",
+        }),
+      });
+
+      const fundingWithDueDate = generateFunding({
+        isNonprofitOnly: false,
+        county: [],
+        sector: [],
+        employeesRequired: undefined,
+        id: "funding-id",
+        dueDate: "01/01/2050",
+      });
+      const fundingWithNoDueDate = generateFunding({
+        isNonprofitOnly: false,
+        county: [],
+        sector: [],
+        employeesRequired: undefined,
+        id: "funding-id-2",
+      });
+      renderComponent({
+        fundings: [fundingWithDueDate, fundingWithNoDueDate],
+        certifications: [],
+        displayFundingCards: true,
+        displayCertificationsCards: true,
+      });
+
+      expect(screen.getByTestId("funding-id-dueDate-header")).toBeInTheDocument();
+      expect(screen.queryByTestId("funding-id-2-dueDate-header")).not.toBeInTheDocument();
     });
   });
 });
