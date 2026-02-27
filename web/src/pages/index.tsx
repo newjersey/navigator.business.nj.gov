@@ -10,11 +10,8 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
-import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
-import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
-import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { useMediaQuery } from "@mui/material";
 import { NextSeo } from "next-seo";
@@ -49,28 +46,7 @@ const Home = (): ReactElement => {
     setFireAnalyticsForSectionLookingForSupport(false);
   }
 
-  let landingPageConfig = Config.landingPage;
-  if (typeof window !== "undefined") {
-    const abStorage = ABStorageFactory();
-    let landingPageExperience: ABExperience;
-    const storedExperience = abStorage.getExperience();
-
-    if (storedExperience === undefined) {
-      const experience = decideABExperience();
-      abStorage.setExperience(experience);
-      landingPageExperience = experience;
-    } else {
-      landingPageExperience = storedExperience;
-    }
-
-    setABExperienceDimension(landingPageExperience);
-    if (landingPageExperience === "ExperienceB") {
-      landingPageConfig = {
-        ...landingPageConfig,
-        ...Config.landingPageExperienceB,
-      };
-    }
-  }
+  const landingPageConfig = Config.landingPage;
   useEffect(() => {
     if (state.isAuthenticated === IsAuthenticated.TRUE && router?.isReady) {
       if (business?.onboardingFormProgress === "COMPLETED") {
