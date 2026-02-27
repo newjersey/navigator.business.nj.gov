@@ -42,7 +42,6 @@ import * as SiteWideErrorMessages from "../../../content/src/fieldConfig/global-
 import * as GovernmentContracting from "../../../content/src/fieldConfig/government-contracting.json";
 import * as HeaderDefaults from "../../../content/src/fieldConfig/header-defaults.json";
 import * as HousingRegistrationSearchTask from "../../../content/src/fieldConfig/housing-registration.json";
-import * as LandingPageExperienceB from "../../../content/src/fieldConfig/landing-page-experience-b.json";
 import * as LandingPage from "../../../content/src/fieldConfig/landing-page.json";
 import * as LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
 import * as LicenseSearchTask from "../../../content/src/fieldConfig/license-search-task.json";
@@ -157,7 +156,6 @@ const merged = JSON.parse(
       LicenseSearchTask,
       LandingPage,
       FundingsOnboarding,
-      LandingPageExperienceB,
       TaxClearanceCertificateStep1,
       TaxClearanceCertificateStep2,
       TaxClearanceCertificateStep3,
@@ -244,7 +242,6 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof EnvironmentQuestionnaire &
   typeof LicenseSearchTask &
   typeof LandingPage &
-  typeof LandingPageExperienceB &
   typeof ManageBusinessVehicles &
   typeof FundingsOnboarding &
   typeof TaxClearanceCertificateStep1 &
@@ -330,7 +327,6 @@ export const getMergedConfig = (): ConfigType => {
     LicenseSearchTask,
     LandingPage,
     FundingsOnboarding,
-    LandingPageExperienceB,
     FundingsOnboarding,
     TaxClearanceCertificateStep1,
     TaxClearanceCertificateStep2,

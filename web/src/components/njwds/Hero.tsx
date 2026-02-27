@@ -4,7 +4,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
-import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/compat/router";
@@ -15,14 +14,6 @@ export const Hero = (): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const router = useRouter();
   const { Config } = useConfig();
-
-  let landingPageConfig = Config.landingPage;
-  if (ABStorageFactory().getExperience() === "ExperienceB") {
-    landingPageConfig = {
-      ...Config.landingPage,
-      ...Config.landingPageExperienceB,
-    };
-  }
 
   const routeToOnboarding = (): void => {
     router && router.push(ROUTES.onboarding);
@@ -52,11 +43,11 @@ export const Hero = (): ReactElement => {
               <h1
                 className={`text-primary-darker h1-styling-large desktop:margin-top-7 margin-bottom-3 desktop:margin-bottom-2`}
               >
-                {landingPageConfig.heroCallOutFirstLineText}
+                {Config.landingPage.heroCallOutFirstLineText}
                 <br />
               </h1>
               <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
-                {landingPageConfig.heroSupportingText}
+                {Config.landingPage.heroSupportingText}
               </div>
               <PrimaryButton
                 isColor={"accent-cool-darker"}
@@ -65,7 +56,7 @@ export const Hero = (): ReactElement => {
                 isLargeButton={true}
                 isUnBolded={true}
               >
-                {landingPageConfig.section2CallToActionText}
+                {Config.landingPage.section2CallToActionText}
               </PrimaryButton>
             </div>
 
@@ -78,7 +69,7 @@ export const Hero = (): ReactElement => {
 
         <div className={"margin-y-3 margin-x-2"}>
           <Heading level={2} className="text-align-center">
-            {landingPageConfig.tileTitleText}
+            {Config.landingPage.tileTitleText}
           </Heading>
         </div>
         <LandingPageTiles />
@@ -105,10 +96,10 @@ export const Hero = (): ReactElement => {
               >
                 <div className="border-top-1 border-primary" />
                 <Heading level={2} className="margin-y-4 desktop:margin-y-3">
-                  {landingPageConfig.section2HeaderText}
+                  {Config.landingPage.section2HeaderText}
                 </Heading>
                 <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
-                  {landingPageConfig.section2SupportingText}
+                  {Config.landingPage.section2SupportingText}
                 </div>
                 <PrimaryButton
                   isColor="primary"
@@ -116,7 +107,7 @@ export const Hero = (): ReactElement => {
                   isRightMarginRemoved={true}
                   isLargeButton={true}
                 >
-                  {landingPageConfig.section2CallToActionText}
+                  {Config.landingPage.section2CallToActionText}
                 </PrimaryButton>
               </div>
             </div>
@@ -140,10 +131,10 @@ export const Hero = (): ReactElement => {
             >
               <div className="border-top-1 border-accent-cool-darker"></div>
               <Heading level={2} className="margin-y-4 desktop:margin-y-3">
-                {landingPageConfig.section3HeaderText}
+                {Config.landingPage.section3HeaderText}
               </Heading>
               <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
-                {landingPageConfig.section3SupportingText}
+                {Config.landingPage.section3SupportingText}
               </div>
               <PrimaryButton
                 isColor="accent-cool-darker"
@@ -151,7 +142,7 @@ export const Hero = (): ReactElement => {
                 isRightMarginRemoved={true}
                 isLargeButton={true}
               >
-                {landingPageConfig.section3CallToActionText}
+                {Config.landingPage.section3CallToActionText}
               </PrimaryButton>
             </div>
           </div>
