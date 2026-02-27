@@ -4989,7 +4989,7 @@ __metadata:
     axios: 1.13.5
     body-parser: 1.20.3
     concurrently: 9.2.1
-    cors: 2.8.5
+    cors: 2.8.6
     cross-env: 10.1.0
     dayjs: 1.11.19
     dedent: 1.7.0
@@ -5178,7 +5178,7 @@ __metadata:
     concurrently: 9.2.1
     constructs: 10.0.0
     copy-webpack-plugin: 13.0.1
-    cors: 2.8.5
+    cors: 2.8.6
     cross-env: 10.1.0
     cspell: 9.3.2
     cypress: 15.9.0
@@ -18970,13 +18970,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cors@npm:2.8.5, cors@npm:~2.8.5":
-  version: 2.8.5
-  resolution: "cors@npm:2.8.5"
+"cors@npm:2.8.6, cors@npm:~2.8.5":
+  version: 2.8.6
+  resolution: "cors@npm:2.8.6"
   dependencies:
     object-assign: ^4
     vary: ^1
-  checksum: ced838404ccd184f61ab4fdc5847035b681c90db7ac17e428f3d81d69e2989d2b680cc254da0e2554f5ed4f8a341820a1ce3d1c16b499f6e2f47a1b9b07b5006
+  checksum: a967922b00fd17d836d21308c66ab9081d6c0f7dc019486ba1643a58281b12fc27d8c260471ddca72874b5bfe17a2d471ff8762d34f6009022ff749ec1136220
   languageName: node
   linkType: hard
 
