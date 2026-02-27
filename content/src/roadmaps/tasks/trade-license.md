@@ -9,6 +9,8 @@ callToActionLink: "https://newjersey.mylicense.com/verification/Search.aspx?faci
 callToActionText: "Verify My, My Employees’, or Subcontractors’ Trade Licenses"
 industryId: home-contractor
 agencyId: nj-consumer-affairs
+syncToWebflow: true
+webflowName: "Contractor: Ensure You, Your Employees, or Subcontractors are Licensed"
 ---
 
 ## License/Permit by Role

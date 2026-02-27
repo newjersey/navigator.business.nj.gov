@@ -9,6 +9,8 @@ id: trucking-usdot
 callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
 callToActionText: Register My Vehicle with USDoT
 agencyAdditionalContext: U.S. Department of Transportation
+syncToWebflow: true
+webflowName: Commercial Vehicle USDoT Registration
 ---
 
 :::infoAlert

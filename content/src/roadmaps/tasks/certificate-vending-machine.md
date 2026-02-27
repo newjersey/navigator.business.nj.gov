@@ -10,6 +10,8 @@ name: Obtain a Health Certificate, if Applicable
 id: certificate-vending-machine
 callToActionLink: https://www.nj.gov/health/lh/documents/LocalHealthDirectory.pdf
 callToActionText: Contact My Department of Health
+syncToWebflow: true
+webflowName: Vending Machine Health Certificate
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
