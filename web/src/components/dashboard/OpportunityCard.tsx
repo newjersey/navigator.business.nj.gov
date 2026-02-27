@@ -1,10 +1,6 @@
-import { OpportunityCardStatus } from "@/components/dashboard/OpportunityCardStatus";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { capitalizeEachWord } from "@/lib/utils/cases-helpers";
 import { Opportunity } from "@businessnjgovnavigator/shared/types";
@@ -24,7 +20,6 @@ interface Props {
 export const OPPORTUNITY_CARD_MAX_BODY_CHARS = 150;
 
 export const OpportunityCard = (props: Props): ReactElement => {
-  const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
   const router = useRouter();
 
@@ -39,44 +34,6 @@ export const OpportunityCard = (props: Props): ReactElement => {
         {capitalizeEachWord(Config.dashboardDefaults.certificationTagText)}
       </Tag>
     ),
-  };
-
-  const isHidden = (): boolean => {
-    if (!business) {
-      return false;
-    }
-    const property = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
-    return business.preferences[property].includes(props.opportunity.id);
-  };
-
-  const hideSelf = async (): Promise<void> => {
-    if (!business || !updateQueue) {
-      return;
-    }
-    const propertyToUpdate =
-      props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
-    analytics.event.for_you_card_hide_button.click.hide_card();
-    await updateQueue
-      .queuePreferences({
-        [propertyToUpdate]: [...business.preferences[propertyToUpdate], props.opportunity.id],
-      })
-      .update();
-  };
-
-  const unhideSelf = async (): Promise<void> => {
-    if (!business || !updateQueue) {
-      return;
-    }
-    const propertyToUpdate =
-      props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
-    analytics.event.for_you_card_unhide_button.click.unhide_card();
-    await updateQueue
-      .queuePreferences({
-        [propertyToUpdate]: business.preferences[propertyToUpdate].filter((it: string) => {
-          return it !== props.opportunity.id;
-        }),
-      })
-      .update();
   };
 
   const routeToPage = (): void => {
@@ -95,27 +52,6 @@ export const OpportunityCard = (props: Props): ReactElement => {
       >
         <div className="fdr margin-bottom-105">
           {!props.removeLabel && <div>{TYPE_TO_LABEL[props.urlPath]}</div>}
-
-          <div className="mla">
-            {!props.removeHideButton && (
-              <SecondaryButton
-                size={"small"}
-                isColor={"border-base-light"}
-                onClick={(): void => {
-                  isHidden() ? unhideSelf() : hideSelf();
-                }}
-              >
-                <div className="fdr fac">
-                  <Icon iconName={isHidden() ? "visibility" : "visibility_off"} />
-                  <span className="margin-left-05 line-height-sans-2">
-                    {isHidden()
-                      ? Config.dashboardDefaults.unHideOpportunityText
-                      : Config.dashboardDefaults.hideOpportunityText}
-                  </span>
-                </div>
-              </SecondaryButton>
-            )}
-          </div>
         </div>
         <div className="text-normal font-body-md margin-bottom-105">
           <UnStyledButton
@@ -126,10 +62,12 @@ export const OpportunityCard = (props: Props): ReactElement => {
             {props.opportunity.name}
           </UnStyledButton>
         </div>
-        <OpportunityCardStatus
-          dueDate={props.opportunity.dueDate}
-          status={props.opportunity.status}
-        />
+        {props.opportunity.dueDate && (
+          <div className="dashboard-opportunity-card-due-date">
+            <span className="dashboard-opportunity-card-due-date-header">Due: </span>
+            {props.opportunity.dueDate}{" "}
+          </div>
+        )}
         <div className="override-p-2xs text-base-dark">
           {truncate(props.opportunity.sidebarCardBodyText, {
             length: OPPORTUNITY_CARD_MAX_BODY_CHARS,

@@ -3,21 +3,16 @@ import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import analytics from "@/lib/utils/analytics";
-import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
+import { openInNewTab } from "@/lib/utils/helpers";
 import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement } from "react";
 
 export interface SidebarCardsListProps {
   sideBarCards: SidebarCardContent[];
   fundings: Funding[];
-  hiddenFundings: Funding[];
   certifications: Certification[];
-  hiddenCertifications: Certification[];
   isRemoteSellerWorker?: boolean;
   displayFundingCards?: boolean;
   displayCertificationsCards?: boolean;
@@ -25,27 +20,12 @@ export interface SidebarCardsListProps {
 }
 
 export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => {
-  const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
   const { userData } = useUserData();
-  const accordionRef = useRef(null);
 
   const shouldPrioritizeFundingsOverCertifications =
     userData?.user.accountCreationSource === "investNewark" ||
     userData?.user.accountCreationSource === "NJEDA";
-
-  const hiddenOpportunitiesCount = (): number => {
-    if (props.displayCertificationsCards && props.displayFundingCards) {
-      return props.hiddenCertifications.length + props.hiddenFundings.length;
-    } else if (props.displayCertificationsCards) {
-      return props.hiddenCertifications.length;
-    } else if (props.hiddenFundings) {
-      return props.hiddenFundings.length;
-    } else {
-      return 0;
-    }
-  };
-
   const showEmptyOpportunitiesMsg =
     props.displayCertificationsCards &&
     props.displayFundingCards &&
@@ -70,9 +50,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
     showEmptyOpportunitiesMsg || showCompleteRequiredTasksMsg || props.isRemoteSellerWorker;
   const renderFundingCards = props.displayFundingCards;
   const renderCertificationsCards = props.displayCertificationsCards;
-  const renderHiddenOpportunitiesAccordian =
-    props.displayCertificationsCards || props.displayFundingCards;
-  const renderFundingsInHiddenOpportunitiesAccordian = props.displayFundingCards;
   const renderLearnMoreFundingOpportunities = props.displayFundingCards;
 
   return (
@@ -150,66 +127,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
               {Config.dashboardDefaults.learnMoreFundingOpportunitiesText}
             </PrimaryButton>
           </div>
-        </>
-      )}
-      {renderHiddenOpportunitiesAccordian && (
-        <>
-          <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
-          <div className="desktop:margin-bottom-1">
-            <Accordion
-              ref={accordionRef}
-              expanded={hiddenAccordionIsOpen}
-              onChange={(): void => {
-                if (!hiddenAccordionIsOpen) {
-                  analytics.event.for_you_card_unhide_button.click.unhide_cards();
-                  const element = accordionRef.current as unknown as HTMLElement;
-                  if (element) {
-                    const timeForAccordionToOpen = 200;
-                    scrollToTopOfElement(element.parentElement as HTMLDivElement, {
-                      waitTime: timeForAccordionToOpen,
-                    });
-                  }
-                }
-                setHiddenAccordionIsOpen((prevAccordionStatus) => {
-                  return !prevAccordionStatus;
-                });
-              }}
-              sx={{
-                backgroundColor: `#F9FBFB`,
-              }}
-            >
-              <AccordionSummary
-                expandIcon={
-                  <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />
-                }
-                aria-controls="hidden-opportunity-content"
-                id="hidden-opportunity-header"
-                data-testid="hidden-opportunity-header"
-              >
-                <div className="flex flex-align-center margin-0-override text-normal">
-                  <div className="inline">
-                    {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
-                      count: String(hiddenOpportunitiesCount()),
-                    })}
-                  </div>
-                </div>
-              </AccordionSummary>
-              <AccordionDetails data-testid="hidden-opportunities">
-                {props.hiddenCertifications.map((cert) => {
-                  return (
-                    <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
-                  );
-                })}
-                {renderFundingsInHiddenOpportunitiesAccordian &&
-                  props.hiddenFundings.map((funding) => {
-                    return (
-                      <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
-                    );
-                  })}
-              </AccordionDetails>
-            </Accordion>
-          </div>
-          <hr className="margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
         </>
       )}
     </>

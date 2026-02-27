@@ -2,9 +2,6 @@ import {
   filterCertifications,
   filterFundings,
   getForYouCardCount,
-  getHiddenCertifications,
-  getHiddenFundings,
-  getVisibleCertifications,
   getVisibleFundings,
   getVisibleSideBarCards,
   sortCertifications,
@@ -28,22 +25,6 @@ import {
 import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 
 describe("sidebarCard Helpers", () => {
-  describe("getHiddenCertifications", () => {
-    it("returns an empty array when business is undefined", () => {
-      const certifications = [generateCertification({})];
-      expect(getHiddenCertifications(undefined, certifications).length).toEqual(0);
-    });
-
-    it("returns hidden certifications when there is a match", () => {
-      const business = generateBusiness({
-        preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
-      });
-      const certification = generateCertification({ id: "three" });
-      expect(getHiddenCertifications(business, [certification]).length).toEqual(1);
-      expect(getHiddenCertifications(business, [certification])).toEqual([certification]);
-    });
-  });
-
   describe("sortCertifications", () => {
     it("sorts certifications alphabetically case-insensitive", () => {
       const cert1 = generateCertification({ name: "bca" });
@@ -65,36 +46,6 @@ describe("sidebarCard Helpers", () => {
       const result = sortCertifications(certs);
       expect(result.length).toEqual(2);
       expect(result).toEqual([cert1, cert2]);
-    });
-  });
-
-  describe("getVisibleCertifications", () => {
-    it("returns an empty array when business is undefined", () => {
-      const certifications = [generateCertification({})];
-      expect(getVisibleCertifications(certifications, undefined).length).toEqual(0);
-    });
-
-    it("returns an array of all certifications when there is no matching id in hiddenCertificationIds", () => {
-      const business = generateBusiness({
-        preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
-      });
-      const certifications = [
-        generateCertification({ id: "one" }),
-        generateCertification({ id: "two" }),
-      ];
-
-      expect(getVisibleCertifications(certifications, business)).toEqual(certifications);
-    });
-
-    it("returns an array of filtered certifications when there is a matching id in hiddenCertificationIds", () => {
-      const business = generateBusiness({
-        preferences: generatePreferences({ hiddenCertificationIds: ["two"] }),
-      });
-
-      const cert1 = generateCertification({ id: "one" });
-      const cert2 = generateCertification({ id: "two" });
-
-      expect(getVisibleCertifications([cert1, cert2], business)).toEqual([cert1]);
     });
   });
 
@@ -348,22 +299,6 @@ describe("sidebarCard Helpers", () => {
       const funding2 = generateFunding({ id: "two" });
 
       expect(getVisibleFundings([funding1, funding2], business)).toEqual([funding1]);
-    });
-  });
-
-  describe("getHiddenFundings", () => {
-    it("returns an empty array when business is undefined", () => {
-      const fundings = [generateFunding({})];
-      expect(getHiddenFundings(undefined, fundings).length).toEqual(0);
-    });
-
-    it("returns hidden fundings when there is a match", () => {
-      const business = generateBusiness({
-        preferences: generatePreferences({ hiddenFundingIds: ["three"] }),
-      });
-      const funding = generateFunding({ id: "three" });
-      expect(getHiddenFundings(business, [funding]).length).toEqual(1);
-      expect(getHiddenFundings(business, [funding])).toEqual([funding]);
     });
   });
 
