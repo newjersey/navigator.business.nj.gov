@@ -1,3 +1,17 @@
+# [2026.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.4.0...v2026.5.0) (2026-02-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v1.13.5 [security] ([3e9bb4d](https://github.com/newjersey/navigator.business.nj.gov/commit/3e9bb4d8b3de9512b5acf3388e461ca204f4813b))
+* Update pickaroo to use organization slack mapping to not choose reviewers who are out of office ([ad43a48](https://github.com/newjersey/navigator.business.nj.gov/commit/ad43a4865967e2ca5ae2883495543bde9c50f64d))
+
+
+### Features
+
+* [AB#17452](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17452) add script to find and report duplicate industries based on task sets ([ed12eb6](https://github.com/newjersey/navigator.business.nj.gov/commit/ed12eb6810bba69eb1018f1ea3be832ee138de17))
+* fixes for conventional-commit to use ADO links ([6922b19](https://github.com/newjersey/navigator.business.nj.gov/commit/6922b1920040ec54ce040b9768451b1b07fb9d36))
+
 # [2026.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.3.0...v2026.4.0) (2026-02-18)
 
 ### Bug Fixes
