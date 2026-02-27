@@ -11,6 +11,8 @@ name: Pass Your Cosmetology Site Inspection
 id: board-inspection
 callToActionLink: ""
 callToActionText: ""
+syncToWebflow: true
+webflowName: Cosmetology Site Inspection
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }

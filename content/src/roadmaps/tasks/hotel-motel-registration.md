@@ -15,6 +15,8 @@ callToActionText: Register My Hotel, Motel, or Guesthouse
 industryId: lodging
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Housing Inspection
+syncToWebflow: true
+webflowName: Hotel, Motel, or Guesthouse Registration
 ---
 
 ## Application Requirements

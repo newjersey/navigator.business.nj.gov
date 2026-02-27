@@ -13,6 +13,8 @@ industryId: pharmacy
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Board of Pharmacy
 webflowType: individual-license
+syncToWebflow: true
+webflowName: "Pharmacy: Ensure Your Staff is Licensed"
 ---
 
 ## Licensing Requirements

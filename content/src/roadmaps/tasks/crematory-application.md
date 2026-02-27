@@ -9,10 +9,11 @@ name: Apply to Construct and Operate a Crematory
 id: crematory-application
 callToActionLink: "https://www.njconsumeraffairs.gov/cem/Applications/Application-and-Information-Sheet-for-Approval-to-Construct-and-Operate-a-Crematory.pdf"
 callToActionText: Apply to Construct and Operate a Crematory
-webflowName: "Funeral Services: Crematory Application"
 industryId: funeral
 agencyId: nj-consumer-affairs
 webflowType: business-license
+syncToWebflow: true
+webflowName: Crematory Construction and Operation
 ---
 
 ## Application Requirements
