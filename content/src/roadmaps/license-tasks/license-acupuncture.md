@@ -3,7 +3,7 @@ licenseName: ""
 id: license-acupuncture
 displayname: license-acupuncture
 urlSlug: acupuncture-license
-name: Apply for an Acupuncturist License, if Applicable
+name: Apply for an Acupuncturist License
 webflowName: Acupuncturist License
 summaryDescriptionMd: You need an acupuncturist license to offer services as an acupuncturist.
 industryId:
