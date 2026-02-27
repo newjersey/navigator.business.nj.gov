@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "stabilityDays": 3,
   "prConcurrentLimit": 15,
   "prCreation": "not-pending",
@@ -26,17 +26,15 @@
       "automerge": false
     },
     {
-      "matchPackagePrefixes": ["cypress"],
+      "matchPackageNames": ["cypress*"],
       "groupName": "cypress"
     },
     {
-      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest", "@jest/types"],
-      "matchPackagePrefixes": ["jest"],
+      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest", "@jest/types", "jest*"],
       "groupName": "jest"
     },
     {
-      "matchPackageNames": ["@types/eslint", "babel-eslint"],
-      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "matchPackageNames": ["@types/eslint", "babel-eslint", "@typescript-eslint/*", "eslint*"],
       "groupName": "linting"
     },
     {
@@ -48,32 +46,31 @@
       "enabled": false
     },
     {
-      "matchPackageNames": ["@types/react", "focus-trap-react", "@types/react-dom"],
-      "matchPackagePrefixes": ["react"],
+      "matchPackageNames": ["@types/react", "focus-trap-react", "@types/react-dom", "react*"],
       "groupName": "react"
     },
     {
-      "matchPackagePrefixes": ["@testing-library"],
+      "matchPackageNames": ["@testing-library/*"],
       "groupName": "testing-library"
     },
     {
-      "matchPackagePrefixes": ["@storybook"],
+      "matchPackageNames": ["@storybook/*"],
       "groupName": "storybook"
     },
     {
-      "matchPackagePrefixes": ["@aws-amplify"],
+      "matchPackageNames": ["@aws-amplify/*"],
       "groupName": "aws-amplify"
     },
     {
-      "matchPackagePrefixes": ["@swc"],
+      "matchPackageNames": ["@swc/*"],
       "groupName": "swc"
     },
     {
-      "matchPackagePrefixes": ["@mui"],
+      "matchPackageNames": ["@mui/*"],
       "groupName": "material-ui"
     },
     {
-      "matchPackagePrefixes": ["@aws-sdk"],
+      "matchPackageNames": ["@aws-sdk/*"],
       "groupName": "aws-sdk"
     },
     {
@@ -82,7 +79,8 @@
     },
     {
       "matchManagers": ["pip_requirements"],
-      "automerge": true
+      "automerge": true,
+      "ignoreTests": true
     }
   ]
 }
