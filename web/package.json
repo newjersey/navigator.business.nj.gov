@@ -30,11 +30,8 @@
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
-    "webflow:fundings-sync": "node ./src/scripts/webflow/fundingSync.mjs --sync",
-    "webflow:fundings-sync-full": "node ./src/scripts/webflow/fundingSync.mjs --full",
-    "webflow:fundings-ci-sync-full": "node ./src/scripts/webflow/fundingSync.mjs --ci-sync --full",
-    "webflow:industries-sync": "node ./src/scripts/webflow/industrySync.mjs --sync",
-    "webflow:industries-ci-sync": "node ./src/scripts/webflow/industrySync.mjs --ci-sync",
+    "webflow:fundings-sync": "tsx ./src/scripts/webflow/fundingSync.ts",
+    "webflow:industries-sync": "tsx ./src/scripts/webflow/industrySync.ts",
     "webflow:licenses-sync": "node ./src/scripts/webflow/licenseSync.mjs --sync",
     "webflow:licenses-ci-sync": "node ./src/scripts/webflow/licenseSync.mjs --ci-sync",
     "webflow:licenses-preview-sync": "node ./src/scripts/webflow/licenseSync.mjs --preview"
@@ -173,6 +170,7 @@
     "ts-jest": "29.4.5",
     "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
+    "tsx": "4.21.0",
     "typescript": "5.9.3",
     "webpack": "5.104.1"
   }

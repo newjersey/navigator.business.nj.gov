@@ -1,12 +1,12 @@
+import { SectorType } from "@businessnjgovnavigator/shared/sector";
 import fs from "fs";
 import { orderBy } from "lodash";
 import path from "path";
 import { fileURLToPath } from "url";
 import { wait } from "./helpers";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods";
-import {SectorsJson, WebflowItem, WebflowSector, WebflowSectorFieldData} from "./types";
+import { SectorsJson, WebflowItem, WebflowSector, WebflowSectorFieldData } from "./types";
 import { allIndustryId, sectorCollectionId } from "./webflowIds";
-import {SectorType} from "@businessnjgovnavigator/shared/sector";
 
 const sectorDir = path.resolve(
   `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`,

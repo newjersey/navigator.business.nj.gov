@@ -1,11 +1,11 @@
+import { Industry } from "@businessnjgovnavigator/shared/industry";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { argsInclude, catchRateLimitErrorAndRetry, resolveApiPromises } from "./helpers";
+import { catchRateLimitErrorAndRetry, resolveApiPromises } from "./helpers";
 import { createItem, getAllItems, modifyItem } from "./methods";
-import {WebflowIndustryName, WebflowItem} from "./types";
+import { WebflowIndustryName, WebflowItem } from "./types";
 import { industryNameCollectionId } from "./webflowIds";
-import {Industry} from "@businessnjgovnavigator/shared/industry";
 
 const navigatorIndustryDir = path.resolve(
   `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/roadmaps/industries`,
@@ -158,34 +158,23 @@ const createNewWebflowIndustryNames = async (): Promise<void> => {
   console.info(`Created a total of ${newIndustries.length} Webflow Industry Names`);
 };
 
-const syncIndustries = async (params: { create: boolean }): Promise<void> => {
+const syncIndustries = async (): Promise<void> => {
   console.log("updating industry names");
   const industriesAlreadyInWebflow = await getIndustryNamesAlreadyInWebflow();
 
   await updateWebflowIndustryNames(industriesAlreadyInWebflow);
   console.log("creating new industry names");
 
-  if (params.create) {
-    await createNewWebflowIndustryNames();
-    console.log("Complete industry sync!");
-  }
+  await createNewWebflowIndustryNames();
+  console.log("Complete industry sync!");
 };
 
 const main = async (): Promise<void> => {
-  if (process.env.NODE_ENV === "test") {
-    // intentionally empty
-  } else if (argsInclude("--sync")) {
-    await syncIndustries({ create: true });
-  } else {
-    console.log("Expected at least one argument! Use one of the following: ");
-    console.log("--sync =  Syncs industries");
-    console.log(
-      "--ci-sync =  Syncs existing industries; does not add new industries or modify codebase",
-    );
-    throw new Error("Invalid arguments");
-  }
+  await syncIndustries();
 };
 
-await main();
+(async () => {
+  await main();
+})();
 
 export {};

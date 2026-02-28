@@ -1,6 +1,10 @@
+import { SectorType } from "@businessnjgovnavigator/shared/sector";
+import fs from "fs";
+import { orderBy } from "lodash";
+import path from "path";
+import { fileURLToPath } from "url";
 import { Funding, loadAllFundings } from "../fundingExport";
 import {
-  argsInclude,
   catchRateLimitErrorAndRetry,
   contentToStrings,
   getHtml,
@@ -8,17 +12,28 @@ import {
   wait,
 } from "./helpers";
 import { createItem, deleteItem, getAllItems, getCollection, modifyItem } from "./methods";
-import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync";
 import {
   AgencyOption,
   FundingCertificationOption,
   FundingStatusOption,
   FundingTypeOption,
+  SectorsJson,
   WebflowCollectionFieldOption,
   WebflowFundingFieldData,
-  WebflowItem, WebflowSectorFieldData
+  WebflowItem,
+  WebflowSector,
+  WebflowSectorFieldData,
 } from "./types";
-import { certificationCollectionId, fundingCollectionId } from "./webflowIds";
+import {
+  allIndustryId,
+  certificationCollectionId,
+  fundingCollectionId,
+  sectorCollectionId,
+} from "./webflowIds";
+
+const sectorDir = path.resolve(
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`,
+);
 
 const getFundingTypeOptions = async (): Promise<WebflowCollectionFieldOption[]> => {
   const itemResponse = await getCollection(fundingCollectionId);
@@ -29,6 +44,7 @@ const getFundingTypeOptions = async (): Promise<WebflowCollectionFieldOption[]> 
   );
 };
 
+// TODO: Come back to this
 const fundingTypeMap: FundingTypeOption[] = [
   { name: "Grant", slug: "grant", id: "e84141a8393db92e7fbb14aad810be6d" },
   {
@@ -48,7 +64,11 @@ const fundingTypeMap: FundingTypeOption[] = [
 
 const getCertificationsOptions = async (): Promise<FundingCertificationOption[]> => {
   const itemResponse = await getAllItems<{ name: string; slug: string }>(certificationCollectionId);
-  return itemResponse.map(({ fieldData, id }) => ({ name: fieldData.name, slug: fieldData.slug, id }));
+  return itemResponse.map(({ fieldData, id }) => ({
+    name: fieldData.name,
+    slug: fieldData.slug,
+    id,
+  }));
 };
 
 const fundingCertificationsMap: FundingCertificationOption[] = [
@@ -82,6 +102,7 @@ const getAgencyOptions = async (): Promise<WebflowCollectionFieldOption[]> => {
   );
 };
 
+// TODO: Come back to this
 const agencyMap: Record<string, AgencyOption> = {
   njeda: { name: "NJEDA", slug: "NJEDA", id: "af647a925b907472a8ad9f5fe07ba6ed" },
   njdol: { name: "NJDOL", slug: "NJDOL", id: "868ea3a1400bc3ae3d48cdabc909727a" },
@@ -118,6 +139,7 @@ const getFundingOptions = async (): Promise<WebflowCollectionFieldOption[]> => {
   );
 };
 
+// TODO: Come back to this
 const fundingStatusMap: FundingStatusOption[] = [
   {
     name: "Rolling Application",
@@ -229,10 +251,11 @@ const getFundingFromMd = (
 
   const certifications =
     i.certifications
-      ?.map((cert) =>
-        fundingCertificationsMap.find((v) => {
-          return v.slug === cert;
-        })?.id,
+      ?.map(
+        (cert) =>
+          fundingCertificationsMap.find((v) => {
+            return v.slug === cert;
+          })?.id,
       )
       .filter((id): id is string => id !== undefined) ?? [];
 
@@ -365,6 +388,150 @@ const createNewFundings = async (): Promise<void> => {
   await resolveApiPromises(fundingPromises);
 };
 
+const getSectors = (): SectorType[] => {
+  return (JSON.parse(fs.readFileSync(path.join(sectorDir, "sectors.json"), "utf8")) as SectorsJson)
+    .arrayOfSectors;
+};
+
+const getCurrentSectors = async (): Promise<WebflowItem<WebflowSectorFieldData>[]> => {
+  return await getAllItems<WebflowSectorFieldData>(sectorCollectionId);
+};
+
+const getOverlappingSectorsFunc = (
+  currentSectors: WebflowItem<WebflowSectorFieldData>[],
+): WebflowItem<WebflowSectorFieldData>[] => {
+  return currentSectors.filter((item) => {
+    return new Set(
+      getSectors().map((item) => {
+        return item.id;
+      }),
+    ).has(item.fieldData.slug);
+  });
+};
+
+const getOverlappingSectors = async (): Promise<WebflowItem<WebflowSectorFieldData>[]> => {
+  return getOverlappingSectorsFunc(await getCurrentSectors());
+};
+
+const getUpdatedSectors = async (): Promise<WebflowItem<WebflowSectorFieldData>[]> => {
+  const sectorNames = new Set(
+    getSectors().map((item) => {
+      return item.name;
+    }),
+  );
+  const overlappingSectors = await getOverlappingSectors();
+
+  return overlappingSectors.filter((item) => {
+    return !sectorNames.has(item.fieldData.name);
+  });
+};
+
+const getNewSectors = async (): Promise<WebflowSector[]> => {
+  const current = await getCurrentSectors();
+  const currentIdArray = new Set(current.map((sec) => sec.fieldData.slug));
+  return getSectors()
+    .filter((i) => {
+      return !currentIdArray.has(i.id);
+    })
+    .map((i) => {
+      return { name: i.name, slug: i.id };
+    });
+};
+
+const getUnUsedSectors = async (): Promise<WebflowItem<WebflowSectorFieldData>[]> => {
+  const current = await getCurrentSectors();
+  const overLap = getOverlappingSectorsFunc(current);
+  return current.filter((item) => {
+    return !(overLap.includes(item) || item.id === allIndustryId);
+  });
+};
+
+const getUpdatedSectorNames = async (): Promise<WebflowItem<WebflowSectorFieldData>[]> => {
+  const sectors = getSectors();
+  const updatedSectors = await getUpdatedSectors();
+  return updatedSectors.map((item) => {
+    return {
+      ...item,
+      fieldData: {
+        ...item.fieldData,
+        name: sectors.find((sector) => sector.id === item.fieldData.slug)!.name,
+      },
+    };
+  });
+};
+
+const getSortedSectors = async (): Promise<
+  Array<WebflowItem<WebflowSectorFieldData> & { rank: number }>
+> => {
+  const current = await getCurrentSectors();
+  const allIndustryItem = current.find((item) => item.id === allIndustryId);
+  const overlappingSectorsOrdered = [
+    ...orderBy(getOverlappingSectorsFunc(current), ["fieldData.name"], "asc"),
+  ];
+
+  return [allIndustryItem!, ...overlappingSectorsOrdered].map((e, i) => {
+    return {
+      ...e,
+      rank: i + 1,
+    };
+  });
+};
+
+const deleteSectors = async (): Promise<void> => {
+  const unUsedSectors = await getUnUsedSectors();
+  await Promise.all(
+    unUsedSectors.map((item) => {
+      console.info(`Attempting to delete ${item.fieldData.name}`);
+      return deleteItem(item.id, sectorCollectionId);
+    }),
+  );
+};
+
+const updateSectorNames = async (): Promise<void> => {
+  const updatedSectorNames = await getUpdatedSectorNames();
+  await Promise.all(
+    updatedSectorNames.map((item) => {
+      console.info(`Attempting to modify ${item.fieldData.name}`);
+      return modifyItem(item.id, sectorCollectionId, { name: item.fieldData.name });
+    }),
+  );
+};
+
+const createNewSectors = async (): Promise<void> => {
+  const newSectors = await getNewSectors();
+  await Promise.all(
+    newSectors.map((item) => {
+      console.info(`Attempting to create ${item.name}`);
+      return createItem(item as unknown as Record<string, unknown>, sectorCollectionId, false);
+    }),
+  );
+};
+
+const reSortSectors = async (): Promise<void> => {
+  const sortedSectors = await getSortedSectors();
+  await Promise.all(
+    sortedSectors.map((item) => {
+      console.info(`Attempting to sort ${item.fieldData.name}`);
+      return modifyItem(item.id, sectorCollectionId, { rank: item.rank });
+    }),
+  );
+};
+
+const syncSectors = async (): Promise<void> => {
+  console.log("deleting unused sectors");
+  await deleteSectors();
+  console.log("updating renamed sectors");
+  await wait();
+  await updateSectorNames();
+  console.log("creating new sectors");
+  await wait();
+  await createNewSectors();
+  console.log("updating sectors order");
+  await wait();
+  await reSortSectors();
+  console.log("Complete Sectors Sync!");
+};
+
 const syncFundings = async (): Promise<void> => {
   console.log("deleting unused fundings");
   await deleteFundings();
@@ -377,39 +544,16 @@ const syncFundings = async (): Promise<void> => {
 
 /* eslint-disable unicorn/no-process-exit */
 // eslint-disable-next-line no-empty
-if (!argsInclude("fundingSync") || process.env.NODE_ENV === "test") {
-  // intentionally empty
-} else if (argsInclude("--sync")) {
-  await (async (): Promise<void> => {
-    await syncFundings();
-    process.exit(0);
-  })();
-} else if (argsInclude("--previewUnused")) {
-  await (async (): Promise<void> => {
-    console.info(await getUnUsedFundings());
-    process.exit(0);
-  })();
-} else if (argsInclude("--previewCreate")) {
-  await (async (): Promise<void> => {
-    console.info(await getNewFundings());
-    process.exit(0);
-  })();
-} else if (argsInclude("--full")) {
-  await (async (): Promise<void> => {
-    await syncSectors();
-    await wait(60000); // Wait 1 minute to avoid exceeding rate limit
-    await syncFundings();
-    await wait(60000); // Wait 1 minute to avoid exceeding rate limit
-    process.exit(0);
-  })();
-} else {
-  console.log("Expected at least one argument! Use one of the following: ");
-  console.log("--sync =  Syncs fundings");
-  console.log("--full = Syncs sectors and fundings");
-  console.log("--previewUnused = Preview Fundings to Delete");
-  console.log("--previewCreate = Preview Fundings to Create");
-  process.exit(1);
-}
+const main = async (): Promise<void> => {
+  await syncSectors();
+  await syncFundings();
+  process.exit(0);
+};
+
+(async () => {
+  await main();
+})();
+
 export {
   agencyMap,
   contentMdToObject,
