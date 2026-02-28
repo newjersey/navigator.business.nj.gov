@@ -379,6 +379,7 @@ module.exports = {
           "(^|/)tsconfig\\.json$", // TypeScript config
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$", // other configs
           "src/pages/healthz.tsx", // healthcheck page
+          "src/scripts/webflow/.*\\.ts$", // webflow scripts have both .mjs and .ts versions
         ],
       },
       to: {},
