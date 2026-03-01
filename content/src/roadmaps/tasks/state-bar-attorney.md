@@ -10,6 +10,8 @@ name: Apply for Admission to Your State Bar Association
 id: state-bar-attorney
 callToActionLink: https://www.njbarexams.org/information-and-applications
 callToActionText: Apply to Your State Bar Association
+syncToWebflow: true
+webflowName: State Bar Association Admission
 ---
 
 ## Eligibility Criteria

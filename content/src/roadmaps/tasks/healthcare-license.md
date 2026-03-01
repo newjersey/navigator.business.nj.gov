@@ -8,6 +8,8 @@ id: healthcare-license
 callToActionLink: https://newjersey.mylicense.com/verification/Search.aspx?facility=N
 callToActionText: Verify My Staff's Healthcare Licenses
 agencyId: nj-consumer-affairs
+syncToWebflow: true
+webflowName: "Healthcare: Ensure Your Staff is Licensed"
 ---
 
 ## Licensing Requirements By Role

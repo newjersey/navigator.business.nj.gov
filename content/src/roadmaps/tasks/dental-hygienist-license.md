@@ -11,6 +11,8 @@ callToActionText: Apply for My Dental Hygiene License
 industryId: healthcare
 agencyId: nj-consumer-affairs
 webflowType: individual-license
+syncToWebflow: true
+webflowName: Dental Hygienist License
 ---
 
 ## Application Requirements

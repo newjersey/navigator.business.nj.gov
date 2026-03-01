@@ -14,6 +14,8 @@ callToActionText: Apply for My Local Anesthesia Permit
 industryId: healthcare
 agencyId: nj-consumer-affairs
 webflowType: individual-license
+syncToWebflow: true
+webflowName: Local Anesthesia Permit
 ---
 
 ## Eligibility Criteria

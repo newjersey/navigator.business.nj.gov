@@ -8,6 +8,8 @@ id: trucking-vehicle-registration
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard/8
 callToActionText: Register My Truck
 agencyId: nj-motor-vehicle
+syncToWebflow: true
+webflowName: Commercial Vehicle Registration
 ---
 
 ## Application Requirements

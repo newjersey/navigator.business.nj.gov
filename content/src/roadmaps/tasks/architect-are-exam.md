@@ -10,6 +10,8 @@ callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 callToActionText: Apply for My ARE
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Architects
+syncToWebflow: true
+webflowName: Architect's Registration Exam
 ---
 
 ## Eligibility Criteria

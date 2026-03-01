@@ -16,6 +16,8 @@ industryId: independent-artist
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of State and Local Code Inspections
 webflowType: object-vehicle
+syncToWebflow: true
+webflowName: Carnival or Amusement Ride Individual Approval
 ---
 
 ---

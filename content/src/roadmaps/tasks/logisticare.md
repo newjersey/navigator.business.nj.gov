@@ -2,13 +2,15 @@
 summaryDescriptionMd: If you are considering billing Medicaid for your
   non-medical transportation services, you need to become a transportation
   provider with New Jersey’s non-medical transportation broker,
-  `Logisticare|logisticare` .
+  `Logisticare|logisticare`.
 urlSlug: logisticare-app
 displayname: logisticare-app
 name: Apply for Logisticare, if Applicable
 id: logisticare
 callToActionLink: https://www.logisticare.com/sfapplication
 callToActionText: Apply for Logisticare
+syncToWebflow: true
+webflowName: "Non-Medical Transportation Services: Logisticare"
 ---
 
 ## Application Requirements
