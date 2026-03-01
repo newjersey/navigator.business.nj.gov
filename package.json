@@ -181,7 +181,7 @@
     "@types/xml2js": "0.4.14",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
-    "@vitest/coverage-v8": "2.1.9",
+    "@vitest/coverage-v8": "4.0.18",
     "aws-cdk": "2.1033.0",
     "aws-cdk-lib": "2.215.0",
     "axe-core": "4.11.1",
@@ -244,7 +244,7 @@
     "tsconfig-paths": "4.2.0",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "vitest": "2.1.9",
+    "vitest": "4.0.18",
     "webpack": "5.104.1",
     "wiremock": "3.13.2",
     "yarn-workspace-sync-deps": "0.3.3"
