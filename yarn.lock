@@ -5105,7 +5105,7 @@ __metadata:
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
     "@next/bundle-analyzer": 16.1.1
-    "@next/eslint-plugin-next": 15.5.6
+    "@next/eslint-plugin-next": 16.1.6
     "@react-email/components": 1.0.1
     "@react-email/preview-server": 5.0.6
     "@react-email/render": 2.0.0
@@ -5337,7 +5337,7 @@ __metadata:
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
     "@next/bundle-analyzer": 16.1.1
-    "@next/eslint-plugin-next": 15.5.6
+    "@next/eslint-plugin-next": 16.1.6
     "@storybook/addon-actions": 7.6.23
     "@storybook/addon-designs": 7.0.9
     "@storybook/addon-docs": 7.6.23
@@ -8687,6 +8687,15 @@ __metadata:
   dependencies:
     fast-glob: 3.3.1
   checksum: e268e28ede79bf197bdd73990c861132aefb1fc80478f1fcce4f9af97461fd85ac6d4a6fd935fb032d3c7915a0366b146dea0f3c2c6cbc8062f231a05e57438d
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:16.1.6":
+  version: 16.1.6
+  resolution: "@next/eslint-plugin-next@npm:16.1.6"
+  dependencies:
+    fast-glob: 3.3.1
+  checksum: 8836d2ce448a9a84576114ba4b568cd81749d3b71bd8d7fe0dcc85d90857aa45b4d7f5503f411d503d0cdc82add8fa7caceb0d05db8ecd480619caf0c2b2e89c
   languageName: node
   linkType: hard
 

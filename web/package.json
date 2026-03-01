@@ -95,7 +95,7 @@
     "@jest/types": "29.6.3",
     "@mui/system": "5.18.0",
     "@next/bundle-analyzer": "16.1.1",
-    "@next/eslint-plugin-next": "15.5.6",
+    "@next/eslint-plugin-next": "16.1.6",
     "@storybook/addon-actions": "7.6.23",
     "@storybook/addon-designs": "7.0.9",
     "@storybook/addon-docs": "7.6.23",
