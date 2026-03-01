@@ -4934,7 +4934,7 @@ __metadata:
     "@types/node": 24.1.0
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
-    aws-cdk: 2.1033.0
+    aws-cdk: 2.1108.0
     aws-cdk-lib: 2.215.0
     constructs: 10.0.0
     esbuild: 0.27.0
@@ -5164,7 +5164,7 @@ __metadata:
     "@vitest/coverage-v8": 2.1.9
     airtable: 0.12.2
     aws-amplify: 6.15.8
-    aws-cdk: 2.1033.0
+    aws-cdk: 2.1108.0
     aws-cdk-lib: 2.215.0
     axe-core: 4.11.1
     axios: 1.13.5
@@ -16638,17 +16638,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk@npm:2.1033.0":
-  version: 2.1033.0
-  resolution: "aws-cdk@npm:2.1033.0"
-  dependencies:
-    fsevents: 2.3.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
+"aws-cdk@npm:2.1108.0":
+  version: 2.1108.0
+  resolution: "aws-cdk@npm:2.1108.0"
   bin:
     cdk: bin/cdk
-  checksum: 3f859f35ba1d20fb8091f8a763d641be3279818741769f16f72e2606f5756ce7f233836adc8ce93f3e3578b8892c3dcf841739ebd7dd552a12b2ae9a5bba9eeb
+  checksum: 497e4581fe7549a3e4c26fe06ab1924d9e47365ef6d12788f4eb79bfe6ed22f14c80a6cf23da8a39031eaa73a03f2946cbb63b571c3d8dcf93fe9f894013ebf9
   languageName: node
   linkType: hard
 
@@ -16666,7 +16661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.11.1":
+"axe-core@npm:4.11.1, axe-core@npm:^4.10.0, axe-core@npm:^4.2.0":
   version: 4.11.1
   resolution: "axe-core@npm:4.11.1"
   checksum: 92b3c79af3695bcebac0e7f3f90f4bc11d2b39ccdc670937290e8dacbc943473713cc06b771dea0563c66d57d93d940ed89e082bfdecccf9dd70782d4bb243c0
@@ -16677,13 +16672,6 @@ __metadata:
   version: 4.7.2
   resolution: "axe-core@npm:4.7.2"
   checksum: 5d86fa0f45213b0e54cbb5d713ce885c4a8fe3a72b92dd915a47aa396d6fd149c4a87fec53aa978511f6d941402256cfeb26f2db35129e370f25a453c688655a
-  languageName: node
-  linkType: hard
-
-"axe-core@npm:^4.10.0, axe-core@npm:^4.2.0":
-  version: 4.11.0
-  resolution: "axe-core@npm:4.11.0"
-  checksum: 57b0d7206d4dd63a1127b8ad6e173417857a3de43717cbb03561e75e2ff85765a228a7588fde4c828dbf179ef25f263ad98535656701e78def8f29a9524be866
   languageName: node
   linkType: hard
 
@@ -23603,31 +23591,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@npm:2.3.2":
-  version: 2.3.2
-  resolution: "fsevents@npm:2.3.2"
-  dependencies:
-    node-gyp: latest
-  checksum: 97ade64e75091afee5265e6956cb72ba34db7819b4c3e94c431d4be2b19b8bb7a2d4116da417950c3425f17c8fe693d25e20212cac583ac1521ad066b77ae31f
-  conditions: os=darwin
-  languageName: node
-  linkType: hard
-
 "fsevents@npm:^2.3.2, fsevents@npm:^2.3.3, fsevents@npm:~2.3.2, fsevents@npm:~2.3.3":
   version: 2.3.3
   resolution: "fsevents@npm:2.3.3"
   dependencies:
     node-gyp: latest
   checksum: 11e6ea6fea15e42461fc55b4b0e4a0a3c654faa567f1877dbd353f39156f69def97a69936d1746619d656c4b93de2238bf731f6085a03a50cabf287c9d024317
-  conditions: os=darwin
-  languageName: node
-  linkType: hard
-
-"fsevents@patch:fsevents@2.3.2#~builtin<compat/fsevents>":
-  version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
-  dependencies:
-    node-gyp: latest
   conditions: os=darwin
   languageName: node
   linkType: hard
