@@ -245,7 +245,7 @@
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vitest": "2.1.9",
-    "webpack": "5.104.1",
+    "webpack": "5.105.3",
     "wiremock": "3.13.2",
     "yarn-workspace-sync-deps": "0.3.3"
   },
