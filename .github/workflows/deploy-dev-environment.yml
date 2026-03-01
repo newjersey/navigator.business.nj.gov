@@ -116,7 +116,7 @@ jobs:
           node-version-file: .nvmrc
           cache: yarn
       - name: Download Build Workspace
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: workspace
           path: .
