@@ -182,7 +182,7 @@
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "@vitest/coverage-v8": "2.1.9",
-    "aws-cdk": "2.1033.0",
+    "aws-cdk": "2.1108.0",
     "aws-cdk-lib": "2.215.0",
     "axe-core": "4.11.1",
     "babel-loader": "10.0.0",
