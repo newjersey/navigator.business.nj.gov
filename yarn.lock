@@ -5238,7 +5238,7 @@ __metadata:
     rehype-format: 5.0.1
     rehype-raw: 7.0.0
     rehype-react: 7.2.0
-    rehype-rewrite: 4.0.3
+    rehype-rewrite: 4.0.4
     rehype-stringify: 9.0.4
     remark-directive: 2.0.1
     remark-gfm: 3.0.1
@@ -5428,7 +5428,7 @@ __metadata:
     rehype-format: 5.0.1
     rehype-raw: 7.0.0
     rehype-react: 7.2.0
-    rehype-rewrite: 4.0.3
+    rehype-rewrite: 4.0.4
     rehype-stringify: 9.0.4
     remark-directive: 2.0.1
     remark-gfm: 3.0.1
@@ -34230,14 +34230,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-rewrite@npm:4.0.3":
-  version: 4.0.3
-  resolution: "rehype-rewrite@npm:4.0.3"
+"rehype-rewrite@npm:4.0.4":
+  version: 4.0.4
+  resolution: "rehype-rewrite@npm:4.0.4"
   dependencies:
     hast-util-select: ^6.0.0
     unified: ^11.0.3
     unist-util-visit: ^5.0.0
-  checksum: 8e4f3ed3b2557f6a5e6b0862b38aeea7b3f4bef1d1c67d902e95032b752ee091a39709a35db1fde8e5153fb0dd69c52adc31e0c5976f74359226536e189f791c
+  checksum: 76fe082cd84b8bbf2d52aea054d1c883d8fb273cb2998166728a3317b19fe00831bc3098a995ce5449fe9239f96276fb498a305bd697cec16e47f327c876a8bd
   languageName: node
   linkType: hard
 
