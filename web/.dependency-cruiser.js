@@ -348,6 +348,16 @@ module.exports = {
       comment:
         "Allow content build script to import from shared (build script is standalone executable)",
     },
+    {
+      from: { path: "../content/scripts" },
+      to: { path: "../shared" },
+      comment: "Allow content report scripts to import from shared",
+    },
+    {
+      from: { path: "../content/scripts" },
+      to: { path: "src/lib/domain-logic" },
+      comment: "Allow content report scripts to import essential questions from web",
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */
