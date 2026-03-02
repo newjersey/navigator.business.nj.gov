@@ -109,6 +109,9 @@ jobs:
       BUSINESS_NAME_BASE_URL: ${{ vars.BUSINESS_NAME_BASE_URL_DEV }}
       INTERCOM_HASH_SECRET: ${{ secrets.INTERCOM_HASH_SECRET }}
 
+      INTERCOM_MACROS_BASE_URL: ${{ vars.INTERCOM_MACROS_BASE_URL }}
+      INTERCOM_TOKEN: ${{ secrets.INTERCOM_TOKEN }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
