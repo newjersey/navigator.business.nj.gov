@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/next-script-for-ga */
 // organize-imports-ignore
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { IntercomScript } from "@/components/IntercomScript";
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 
@@ -30,6 +31,7 @@ import {
   RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { Locale, LocaleContext } from "@businessnjgovnavigator/shared/contexts/localeContext";
 import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
@@ -50,6 +52,7 @@ ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
+  const [locale, setLocale] = useState<Locale>("en");
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
@@ -237,58 +240,63 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         title={config.pagesMetadata.titlePostfix}
         description={config.pagesMetadata.siteDescription}
       />
-      <IntercomContext.Provider
-        value={{ setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona }}
-      >
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={MuiTheme}>
-            {isSeoPage ? (
-              <Component {...pageProps} />
-            ) : (
-              <SWRConfig value={{ provider: UserDataStorageFactory }}>
-                <AuthContext.Provider value={{ state, dispatch }}>
-                  <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
-                    <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-                      <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                        <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-                          <NeedsAccountContext.Provider
-                            value={{
-                              isAuthenticated: state.isAuthenticated,
-                              showNeedsAccountSnackbar,
-                              showNeedsAccountModal,
-                              registrationStatus: registrationStatus,
-                              setRegistrationStatus: setRegistrationStatusInStateAndStorage,
-                              setShowNeedsAccountSnackbar,
-                              setShowNeedsAccountModal,
-                              showContinueWithoutSaving,
-                              setShowContinueWithoutSaving,
-                              userWantsToContinueWithoutSaving,
-                              setUserWantsToContinueWithoutSaving,
-                            }}
-                          >
-                            <RemoveBusinessContext.Provider
+      <LocaleContext.Provider value={{ locale, setLocale }}>
+        <IntercomContext.Provider
+          value={{ setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona }}
+        >
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={MuiTheme}>
+              {isSeoPage ? (
+                <Component {...pageProps} />
+              ) : (
+                <SWRConfig value={{ provider: UserDataStorageFactory }}>
+                  <AuthContext.Provider value={{ state, dispatch }}>
+                    <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
+                      <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
+                        <ContextualInfoContext.Provider
+                          value={{ contextualInfo, setContextualInfo }}
+                        >
+                          <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+                            <NeedsAccountContext.Provider
                               value={{
-                                showRemoveBusinessModal,
-                                setShowRemoveBusinessModal,
+                                isAuthenticated: state.isAuthenticated,
+                                showNeedsAccountSnackbar,
+                                showNeedsAccountModal,
+                                registrationStatus: registrationStatus,
+                                setRegistrationStatus: setRegistrationStatusInStateAndStorage,
+                                setShowNeedsAccountSnackbar,
+                                setShowNeedsAccountModal,
+                                showContinueWithoutSaving,
+                                setShowContinueWithoutSaving,
+                                userWantsToContinueWithoutSaving,
+                                setUserWantsToContinueWithoutSaving,
                               }}
                             >
-                              <ContextualInfoPanel />
-                              <Component {...pageProps} />
-                              <RemoveBusinessModal />
-                              <NeedsAccountModal />
-                              <RegistrationStatusSnackbar />
-                            </RemoveBusinessContext.Provider>
-                          </NeedsAccountContext.Provider>
-                        </RoadmapContext.Provider>
-                      </ContextualInfoContext.Provider>
-                    </UserDataErrorContext.Provider>
-                  </UpdateQueueContext.Provider>
-                </AuthContext.Provider>
-              </SWRConfig>
-            )}
-          </ThemeProvider>
-        </StyledEngineProvider>
-      </IntercomContext.Provider>
+                              <RemoveBusinessContext.Provider
+                                value={{
+                                  showRemoveBusinessModal,
+                                  setShowRemoveBusinessModal,
+                                }}
+                              >
+                                <ContextualInfoPanel />
+                                <Component {...pageProps} />
+                                <RemoveBusinessModal />
+                                <NeedsAccountModal />
+                                <RegistrationStatusSnackbar />
+                              </RemoveBusinessContext.Provider>
+                            </NeedsAccountContext.Provider>
+                          </RoadmapContext.Provider>
+                        </ContextualInfoContext.Provider>
+                      </UserDataErrorContext.Provider>
+                    </UpdateQueueContext.Provider>
+                  </AuthContext.Provider>
+                </SWRConfig>
+              )}
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </IntercomContext.Provider>
+        <LanguageSwitcher />
+      </LocaleContext.Provider>
     </>
   );
 };
