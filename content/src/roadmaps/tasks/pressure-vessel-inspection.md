@@ -23,6 +23,8 @@ industryId: generic
 agencyId: njdol
 agencyAdditionalContext: "Division of Public Safety and Occupational Safety and
   Health, Bureau of Boiler and Pressure Vessel Compliance "
+syncToWebflow: true
+webflowName: Pressure Vessel Registration and Inspection
 ---
 
 ## Pressure Vessels That Need Inspection

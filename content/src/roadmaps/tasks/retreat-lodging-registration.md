@@ -16,6 +16,8 @@ callToActionText: Register My Overnight Retreat or Conference Center
 industryId: ""
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Housing Inspection
+syncToWebflow: true
+webflowName: Nonprofit Overnight Retreat or Conference Center
 ---
 
 ## Application Requirements

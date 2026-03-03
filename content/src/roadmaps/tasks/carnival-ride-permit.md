@@ -14,6 +14,8 @@ industryId: independent-artist
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of State and Local Code Inspections
 webflowType: object-vehicle
+syncToWebflow: true
+webflowName: Carnival or Amusement Ride Permit
 ---
 
 Apply for a ride permit at least 30 days from your first day of operation. The permit application process includes a ride inspection.

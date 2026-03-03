@@ -26,6 +26,8 @@ callToActionText: Visit the Bureau’s Page for More Information
 agencyId: njdol
 agencyAdditionalContext: "Division of Public Safety and Occupational Safety and
   Health, Bureau of Boiler and Pressure Vessel Compliance "
+syncToWebflow: true
+webflowName: Boiler Registration and Inspection
 ---
 
 ## Boilers That Need Inspection

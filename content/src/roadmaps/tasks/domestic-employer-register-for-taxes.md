@@ -52,6 +52,8 @@ callToActionLink: https://www.njportal.com/DOR/BusinessRegistration/Home/FirstSt
 callToActionText: Register for State Taxes
 agencyId: nj-taxation
 formName: NJ-Reg
+syncToWebflow: true
+webflowName: Domestic Employer State Tax Registration
 ---
 
 ## Application Requirements

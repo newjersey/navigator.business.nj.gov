@@ -36,6 +36,8 @@ callToActionText: Register My Commercial Weighing and Measuring Device
 industryId: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Office of Weights and Measures
+syncToWebflow: true
+webflowName: Commercial Weighing or Measuring Device Registration
 ---
 
 ---

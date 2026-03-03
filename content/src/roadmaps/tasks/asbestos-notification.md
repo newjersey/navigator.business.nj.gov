@@ -38,56 +38,59 @@ industryId: remediation-waste
 agencyAdditionalContext: NJ Department of Labor and Workforce Development,
   Asbestos Control and Licensing Section and NJ Department of Health and Senior
   Services, Consumer and Environmental Health Services
+syncToWebflow: true
+webflowName: Asbestos Abatement Notification
 ---
+
 ## Asbestos Work That Does Not Require Notification
 
 You don’t need a Notification of Asbestos Abatement if **any** of the following are true:
 
-* The material contains 1% or less asbestos
-* You’re removing 3 feet or less of asbestos-containing material from pipes, or 3 square feet or less from ducts, boilers, tanks, or similar equipment (this may also apply to other areas like walls, ceilings, or floors, depending on the type of project)
-* The work is limited repair, such as sealing with duct tape, cement, or other materials
-* You’re working on roofing or exterior siding that contains asbestos, unless it’s for demolition
-* You’re only selling or storing asbestos, not disturbing it
-* Your company's building has asbestos, and you have trained employees who can remove it. These employees must follow safety rules set by the Occupational Safety and Health Administration (OSHA)
+- The material contains 1% or less asbestos
+- You’re removing 3 feet or less of asbestos-containing material from pipes, or 3 square feet or less from ducts, boilers, tanks, or similar equipment (this may also apply to other areas like walls, ceilings, or floors, depending on the type of project)
+- The work is limited repair, such as sealing with duct tape, cement, or other materials
+- You’re working on roofing or exterior siding that contains asbestos, unless it’s for demolition
+- You’re only selling or storing asbestos, not disturbing it
+- Your company's building has asbestos, and you have trained employees who can remove it. These employees must follow safety rules set by the Occupational Safety and Health Administration (OSHA)
 
 ## Application Requirements
 
 ### Notification
 
-* Name of building owner
-* Name and license number of abatement contractor
-* Name and address of monitoring firm hired by building owner
-* Project manager name and phone number
-* All agencies you are alerting asbestos removal to
-* Applicable fees paid
+- Name of building owner
+- Name and license number of abatement contractor
+- Name and address of monitoring firm hired by building owner
+- Project manager name and phone number
+- All agencies you are alerting asbestos removal to
+- Applicable fees paid
 
 ### Facility
 
-* Name and address of facility where you will remove asbestos
-* Type of facility (for example, school, commercial building, home)
-* Current use of facility (or prior use if it is being demolished)
-* Number of floors, square footage, and age of facility
+- Name and address of facility where you will remove asbestos
+- Type of facility (for example, school, commercial building, home)
+- Current use of facility (or prior use if it is being demolished)
+- Number of floors, square footage, and age of facility
 
 ### Project
 
-* Start and planned end date of asbestos work
-* Name and address of the OSHA monitor
-* Occupancy status of facility during asbestos removal
-* Scope of the work (renovation, mini-enclosure, etc.)
+- Start and planned end date of asbestos work
+- Name and address of the OSHA monitor
+- Occupancy status of facility during asbestos removal
+- Scope of the work (renovation, mini-enclosure, etc.)
 
 ### Asbestos-Containing Material
 
-* Location of asbestos in the building and if only maintenance staff use this area or not
-* Description of asbestos-containing material
-* Amount of material in square or linear feet
-* Type of work (removal, repair, encapsulation, or enclosure)
+- Location of asbestos in the building and if only maintenance staff use this area or not
+- Description of asbestos-containing material
+- Amount of material in square or linear feet
+- Type of work (removal, repair, encapsulation, or enclosure)
 
 ### Waste Disposal
 
-* Name, address, and ID number of waste hauler
-* Cubic yards of waste
-* Disposal date
-* Name and address of landfill
+- Name, address, and ID number of waste hauler
+- Cubic yards of waste
+- Disposal date
+- Name and address of landfill
 
 :::largeCallout{ showHeader="false" headerText="" calloutType="quickReference" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="(609) 633-2159" emailIconText="asbestos@dol.nj.gov" }
 
