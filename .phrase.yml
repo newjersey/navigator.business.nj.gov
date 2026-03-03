@@ -1,14 +1,14 @@
 phrase:
-  project_id: 105e0cce11ce06eafcf85dc6b657d6e7
+  project_id: b27f8d323a573d8f17d5a22861b77242
   push:
     sources:
       - file: ./content/src/fieldConfig/tax-clearance-certificate-step1.json
         params:
-          file_format: simple_json
-          locale_code: en
+          file_format: react_nested_json
+          locale_code: en-US
           autotranslate: false
   pull:
     targets:
       - file: ./content/src/fieldConfig/tax-clearance-certificate-step1.json
         params:
-          file_format: simple_json
+          file_format: react_nested_json
