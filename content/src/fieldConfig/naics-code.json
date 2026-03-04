@@ -11,6 +11,8 @@
     "ariaLabelText": "your NAICS code",
     "naicsDescriptionURL": "https://www.naics.com/naics-code-description/?v=2022&code=${code}",
     "saveButtonText": "Save NAICS Code",
-    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **This information is used for data and analysis purposes by State and Federal governments, and may have little effect on your business.**\n\nBegin by searching for a service or product you provide."
+    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **This information is used for data and analysis purposes by State and Federal governments, and may have little effect on your business.**\n\nBegin by searching for a service or product you provide.",
+    "industryUpdatedSnackbarHeading": "Your industry has been updated",
+    "industryUpdatedSnackbarBody": "Based on your NAICS code, your industry has been changed to ${industryName}. Your roadmap has been updated."
   }
 }
