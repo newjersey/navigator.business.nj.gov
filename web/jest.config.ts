@@ -7,6 +7,7 @@ process.env = Object.assign(process.env, {
   FEATURE_LOGIN_PAGE: "true",
   FEATURE_TAX_CLEARANCE_CERTIFICATE: "true",
   WEBFLOW_API_TOKEN: 12345678910,
+  FEATURE_NAICS_INDUSTRY_DETECTION: "true",
 });
 
 /** @type {import('jest').Config} */
