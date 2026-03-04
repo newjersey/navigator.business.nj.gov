@@ -2445,6 +2445,16 @@ collections:
                   widget: string,
                 }
               - { label: NAICS Description External URL, name: naicsDescriptionURL, widget: string }
+              - {
+                  label: Industry Updated Snackbar Heading,
+                  name: industryUpdatedSnackbarHeading,
+                  widget: string,
+                }
+              - {
+                  label: Industry Updated Snackbar Body,
+                  name: industryUpdatedSnackbarBody,
+                  widget: string,
+                }
       - label: "NAICS Code Input"
         name: "naics-code-input"
         file: "content/src/fieldConfig/profile.json"

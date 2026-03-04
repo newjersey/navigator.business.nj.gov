@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { TaskHeader } from "@/components/TaskHeader";
 import { NaicsCodeDisplay } from "@/components/tasks/NaicsCodeDisplay";
 import { NaicsCodeInput } from "@/components/tasks/NaicsCodeInput";
@@ -6,10 +7,13 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext, useState } from "react";
+
+const Config = getMergedConfig();
 
 interface Props {
   task: Task;
@@ -17,6 +21,8 @@ interface Props {
 
 export const NaicsCodeTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
+  const [showIndustryChangedAlert, setShowIndustryChangedAlert] = useState<boolean>(false);
+  const [updatedIndustryName, setUpdatedIndustryName] = useState<string>("");
   const { business, updateQueue } = useUserData();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
@@ -50,10 +56,14 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     return setBackToEditing({ remove: true });
   };
 
-  const onSave = (): void => {
+  const onSave = (changedIndustryName?: string): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setShowNeedsAccountModal(true);
       return;
+    }
+    if (changedIndustryName) {
+      setUpdatedIndustryName(changedIndustryName);
+      setShowIndustryChangedAlert(true);
     }
     setShowInput(false);
   };
@@ -79,6 +89,17 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
         )}
       </div>
       <Content>{postLookupContent}</Content>
+      <SnackbarAlert
+        variant="success"
+        isOpen={showIndustryChangedAlert}
+        close={(): void => setShowIndustryChangedAlert(false)}
+        heading={Config.determineNaicsCode.industryUpdatedSnackbarHeading}
+        dataTestid="industry-updated-snackbar"
+      >
+        {templateEval(Config.determineNaicsCode.industryUpdatedSnackbarBody, {
+          industryName: updatedIndustryName,
+        })}
+      </SnackbarAlert>
     </div>
   );
 };

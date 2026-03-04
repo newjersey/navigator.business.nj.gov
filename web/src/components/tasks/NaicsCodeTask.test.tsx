@@ -402,6 +402,93 @@ describe("<NaicsCodeTask />", () => {
     });
   });
 
+  describe("auto-detect industry from NAICS code", () => {
+    let initialBusiness: Business;
+
+    const renderPage = (): void => {
+      render(
+        withNeedsAccountContext(
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+            <NaicsCodeTask task={task} />
+          </WithStatefulUserData>,
+          IsAuthenticated.TRUE,
+        ),
+      );
+    };
+
+    beforeEach(() => {
+      initialBusiness = generateBusiness({
+        profileData: generateProfileData({ naicsCode: "", industryId: "generic" }),
+        taskProgress: { [taskId]: "TO_DO" },
+      });
+    });
+
+    it("updates industryId when NAICS code uniquely maps to a different industry", async () => {
+      renderPage();
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
+        target: { value: validNaicsCode },
+      });
+      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      await waitFor(() => {
+        expect(currentBusiness().profileData.industryId).toEqual(validIndustryId);
+      });
+    });
+
+    it("updates sectorId based on matched industry's defaultSectorId", async () => {
+      renderPage();
+      const expectedSectorId = LookupIndustryById(validIndustryId).defaultSectorId;
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
+        target: { value: validNaicsCode },
+      });
+      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      await waitFor(() => {
+        expect(currentBusiness().profileData.sectorId).toEqual(expectedSectorId);
+      });
+    });
+
+    it("does NOT change industryId when code matches the current industry", async () => {
+      initialBusiness = generateBusiness({
+        profileData: generateProfileData({ naicsCode: "", industryId: validIndustryId }),
+        taskProgress: { [taskId]: "TO_DO" },
+      });
+      renderPage();
+      fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
+      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      await waitFor(() => {
+        expect(currentBusiness().profileData.naicsCode).toEqual(validNaicsCode);
+      });
+      expect(currentBusiness().profileData.industryId).toEqual(validIndustryId);
+    });
+
+    it("shows industry updated snackbar when industry changes", async () => {
+      renderPage();
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
+        target: { value: validNaicsCode },
+      });
+      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      await waitFor(() => {
+        expect(screen.getByTestId("industry-updated-snackbar")).toBeInTheDocument();
+      });
+      expect(
+        screen.getByText(Config.determineNaicsCode.industryUpdatedSnackbarHeading),
+      ).toBeInTheDocument();
+    });
+
+    it("does NOT show industry updated snackbar when industry does not change", async () => {
+      initialBusiness = generateBusiness({
+        profileData: generateProfileData({ naicsCode: "", industryId: validIndustryId }),
+        taskProgress: { [taskId]: "TO_DO" },
+      });
+      renderPage();
+      fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
+      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      await waitFor(() => {
+        expect(currentBusiness().profileData.naicsCode).toEqual(validNaicsCode);
+      });
+      expect(screen.queryByTestId("industry-updated-snackbar")).not.toBeInTheDocument();
+    });
+  });
+
   describe("guest mode", () => {
     let initialBusiness: Business;
     let setShowNeedsAccountModal: jest.Mock;
