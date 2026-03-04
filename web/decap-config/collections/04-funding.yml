@@ -362,6 +362,7 @@ collections:
         widget: "select"
         options:
           ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+        i18n: true
       - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"
