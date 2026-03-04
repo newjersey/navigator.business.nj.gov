@@ -6,7 +6,7 @@ phrase:
         params:
           file_format: react_nested_json
           locale_id: en-US
-          autotranslate: false
+          autotranslate: true
   pull:
     targets:
       - file: ./content/src/fieldConfig/tax-clearance-certificate-step1<locale_code>.json
