@@ -18,7 +18,7 @@ callToActionLink: https://www.njeda.com/angeltaxcredit/
 callToActionText: Más información
 fundingType: tax credit
 programFrequency: reoccuring
-status: rolling application
+status: solicitud continua
 programPurpose: In State
 agency:
   - njeda
