@@ -18,6 +18,7 @@ export default {
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
   rootDir: "./",
   moduleDirectories: ["node_modules", "<rootDir>"],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "mjs", "json", "node"],
   moduleNameMapper: {
     "\\.(scss|sass|css)$": "identity-obj-proxy",
     "@/components/(.*)": "<rootDir>/src/components/$1",

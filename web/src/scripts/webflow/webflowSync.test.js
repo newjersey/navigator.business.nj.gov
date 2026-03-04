@@ -1,36 +1,44 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { arrayOfSectors, randomInt } from "@businessnjgovnavigator/shared";
-import * as axios from "axios";
 import fs from "fs";
-import { loadAllFundings } from "../fundingExport.mjs";
+import { loadAllFundings } from "../fundingExport";
 import {
   agencyMap,
   contentMdToObject,
   createNewFundings,
-  deleteFundings,
-  getNewFundings,
-  getUnUsedFundings,
-  updateFundings,
-} from "./fundingSync.mjs";
-import { catchRateLimitErrorAndRetry } from "./helpers.mjs";
-import {
-  allIndustryId,
   createNewSectors,
+  deleteFundings,
   deleteSectors,
+  getNewFundings,
   getNewSectors,
   getSectors,
   getSortedSectors,
+  getUnUsedFundings,
   getUnUsedSectors,
   getUpdatedSectorNames,
+  updateFundings,
   updateSectorNames,
-} from "./sectorSync.mjs";
-import { fundingCollectionId, sectorCollectionId } from "./webflowIds.mjs";
+} from "./fundingSync.ts";
+import { catchRateLimitErrorAndRetry } from "./helpers.ts";
+import { allIndustryId, fundingCollectionId, sectorCollectionId } from "./webflowIds.ts";
 
 const adjustDateByDay = (dayValue) => {
   const d = new Date();
   d.setDate(d.getDate() + dayValue);
   return d.toLocaleDateString("en-US");
 };
+
+// Helper to create properly typed fetch response mocks
+function createMockFetchResponse(data) {
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    statusText: "OK",
+    headers: new Headers(),
+    json: () => Promise.resolve(data),
+    text: () => Promise.resolve(JSON.stringify(data)),
+  });
+}
 
 //todo create generator functions for this test data
 const fundingMd = [
@@ -257,8 +265,7 @@ const formatResponseItems = (items) => {
   });
 };
 
-jest.mock("../fundingExport.mjs");
-jest.mock("axios");
+jest.mock("../fundingExport");
 jest.mock("fs", () => {
   const original = jest.requireActual("fs");
   return {
@@ -272,12 +279,21 @@ describe("webflow syncing", () => {
   const currentDate = new Date(dateNow);
   // eslint-disable-next-line no-undef
   const realDateNow = Date.now.bind(global.Date);
+  let mockFetch;
 
   beforeEach(async () => {
     // eslint-disable-next-line no-undef
     global.Date.now = jest.fn(() => {
       return dateNow;
     });
+
+    // eslint-disable-next-line no-undef
+    process.env.WEBFLOW_API_TOKEN = "12345678910";
+
+    mockFetch = jest.fn();
+    // eslint-disable-next-line no-undef
+    global.fetch = mockFetch;
+
     loadAllFundings.mockReturnValue(fundingMd);
     fs.readFileSync.mockImplementation((e) => {
       const original = jest.requireActual("fs");
@@ -285,15 +301,18 @@ describe("webflow syncing", () => {
         ? JSON.stringify({ arrayOfSectors })
         : original.readFileSync(e);
     });
-    axios.mockImplementation((request) => {
-      if (request.url.includes(sectorCollectionId) && request.method === "get") {
-        return { data: { items: formatResponseItems(webflowSectors), pagination: { total: 1 } } };
+
+    mockFetch.mockImplementation((url) => {
+      if (url.includes(sectorCollectionId)) {
+        return createMockFetchResponse({
+          items: formatResponseItems(webflowSectors),
+          pagination: { total: 1 },
+        });
       }
-      if (request.url.includes(fundingCollectionId) && request.method === "get") {
-        return { data: { items: fundings, pagination: { total: 1 } } };
-      } else {
-        // Try this
+      if (url.includes(fundingCollectionId)) {
+        return createMockFetchResponse({ items: fundings, pagination: { total: 1 } });
       }
+      return createMockFetchResponse({});
     });
   });
 
@@ -313,18 +332,17 @@ describe("webflow syncing", () => {
     });
 
     it("gets sectors to create", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
           const filteredSectors = webflowSectors.filter((i) => i.slug !== "utilities");
-          return {
-            data: {
-              items: formatResponseItems(filteredSectors),
-              pagination: {
-                total: 1,
-              },
+          return createMockFetchResponse({
+            items: formatResponseItems(filteredSectors),
+            pagination: {
+              total: 1,
             },
-          };
+          });
         }
+        return createMockFetchResponse({});
       });
       expect(true).toBeTruthy();
       const newSectors = await getNewSectors();
@@ -332,39 +350,39 @@ describe("webflow syncing", () => {
     });
 
     it("creates sectors", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
           const filteredSectors = webflowSectors.filter((i) => i.slug !== "utilities");
-          return {
-            data: {
-              items: formatResponseItems(filteredSectors),
-              pagination: {
-                total: 1,
-              },
+          return createMockFetchResponse({
+            items: formatResponseItems(filteredSectors),
+            pagination: {
+              total: 1,
             },
-          };
+          });
         }
+        return createMockFetchResponse({});
       });
 
       await createNewSectors();
 
-      expect(axios).toHaveBeenLastCalledWith({
-        method: "post",
-        url: `https://api.webflow.com/v2/collections/${sectorCollectionId}/items`,
-        data: {
-          isArchived: false,
-          isDraft: false,
-          fieldData: {
-            name: "Utilities",
-            slug: "utilities",
+      expect(mockFetch).toHaveBeenLastCalledWith(
+        `https://api.webflow.com/v2/collections/${sectorCollectionId}/items`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer 12345678910",
+            "content-type": "application/json",
           },
+          body: JSON.stringify({
+            isArchived: false,
+            isDraft: false,
+            fieldData: {
+              name: "Utilities",
+              slug: "utilities",
+            },
+          }),
         },
-        responseType: "json",
-        headers: {
-          Authorization: "Bearer 12345678910",
-          "content-type": "application/json",
-        },
-      });
+      );
     });
 
     it("gets sectors to modify", async () => {
@@ -392,17 +410,18 @@ describe("webflow syncing", () => {
         });
       });
       await updateSectorNames();
-      expect(axios).toHaveBeenLastCalledWith({
-        method: "patch",
-        url: `https://api.webflow.com/v2/collections/${sectorCollectionId}/items/${
+      expect(mockFetch).toHaveBeenLastCalledWith(
+        `https://api.webflow.com/v2/collections/${sectorCollectionId}/items/${
           webflowSectors.find((item) => {
             return item.slug === "utilities";
           }).id
         }`,
-        data: { fieldData: { name: "Electric, Gas, and Oil suppliers" } },
-        responseType: "json",
-        headers: { Authorization: "Bearer 12345678910" },
-      });
+        {
+          method: "PATCH",
+          headers: { Authorization: "Bearer 12345678910", "content-type": "application/json" },
+          body: JSON.stringify({ fieldData: { name: "Electric, Gas, and Oil suppliers" } }),
+        },
+      );
     });
 
     it("gets sectors to delete", async () => {
@@ -431,24 +450,28 @@ describe("webflow syncing", () => {
         return i.fieldData.slug === "utilities";
       });
       await deleteSectors();
-      expect(axios).toHaveBeenLastCalledWith({
-        method: "delete",
-        url: `https://api.webflow.com/v2/collections/${sectorCollectionId}/items/${utilitiesSector.id}`,
-        headers: { Authorization: "Bearer 12345678910" },
-      });
+      expect(mockFetch).toHaveBeenLastCalledWith(
+        `https://api.webflow.com/v2/collections/${sectorCollectionId}/items/${utilitiesSector.id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: "Bearer 12345678910" },
+        },
+      );
     });
 
     it("reorders sectors", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
           const sectors = [
             ...webflowSectors,
             { name: "Zzzzzzz", slug: "zzzzzz", id: randomInt(10) },
           ];
-          return {
-            data: { items: formatResponseItems(sectors), pagination: { total: 1 } },
-          };
+          return createMockFetchResponse({
+            items: formatResponseItems(sectors),
+            pagination: { total: 1 },
+          });
         }
+        return createMockFetchResponse({});
       });
       fs.readFileSync.mockImplementation(() => {
         return JSON.stringify({
@@ -552,39 +575,40 @@ describe("webflow syncing", () => {
     });
 
     it("throws an error if the sectors have not been synced", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
-          return { data: { items: [], pagination: { total: 0 } } };
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
+          return createMockFetchResponse({ items: [], pagination: { total: 0 } });
         }
-        if (request.url.includes(fundingCollectionId) && request.method === "get") {
+        if (url.includes(fundingCollectionId)) {
           const filteredFundings = fundings.filter((item) => {
             return item.slug !== "clean-tech-research-development-rd-voucher-program";
           });
-          return {
-            data: {
-              items: formatResponseItems(filteredFundings),
-              pagination: { total: 1 },
-            },
-          };
+          return createMockFetchResponse({
+            items: formatResponseItems(filteredFundings),
+            pagination: { total: 1 },
+          });
         }
+        return createMockFetchResponse({});
       });
       await expect(getNewFundings()).rejects.toThrow("Sectors must be synced first");
     });
 
     it("throws an error if the agency data is mismatched", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
-          return { data: { items: [], pagination: { total: 0 } } };
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
+          return createMockFetchResponse({
+            items: formatResponseItems(webflowSectors),
+            pagination: { total: 1 },
+          });
         }
-        if (request.url.includes(fundingCollectionId) && request.method === "get") {
+        if (url.includes(fundingCollectionId)) {
           const filteredFundings = fundings.filter((item) => item.slug !== "nj-accelerate");
-          return {
-            data: {
-              items: formatResponseItems(filteredFundings),
-              pagination: { total: 1 },
-            },
-          };
+          return createMockFetchResponse({
+            items: formatResponseItems(filteredFundings),
+            pagination: { total: 1 },
+          });
         }
+        return createMockFetchResponse({});
       });
       loadAllFundings.mockReturnValue([
         {
@@ -601,19 +625,21 @@ describe("webflow syncing", () => {
     });
 
     it("throws an error if the fundingType data is mismatched", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
-          return { data: { items: [], pagination: { total: 0 } } };
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
+          return createMockFetchResponse({
+            items: formatResponseItems(webflowSectors),
+            pagination: { total: 1 },
+          });
         }
-        if (request.url.includes(fundingCollectionId) && request.method === "get") {
+        if (url.includes(fundingCollectionId)) {
           const filteredFundings = fundings.filter((item) => item.slug !== "nj-accelerate");
-          return {
-            data: {
-              items: formatResponseItems(filteredFundings),
-              pagination: { total: 1 },
-            },
-          };
+          return createMockFetchResponse({
+            items: formatResponseItems(filteredFundings),
+            pagination: { total: 1 },
+          });
         }
+        return createMockFetchResponse({});
       });
       loadAllFundings.mockReturnValue([
         {
@@ -630,21 +656,23 @@ describe("webflow syncing", () => {
     });
 
     it("gets fundings to create", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
-          return { data: { items: formatResponseItems(webflowSectors), pagination: { total: 1 } } };
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
+          return createMockFetchResponse({
+            items: formatResponseItems(webflowSectors),
+            pagination: { total: 1 },
+          });
         }
-        if (request.url.includes(fundingCollectionId) && request.method === "get") {
+        if (url.includes(fundingCollectionId)) {
           const filteredFundings = fundings.filter(
             (item) => item.fieldData.slug !== "nj-accelerate",
           );
-          return {
-            data: {
-              items: filteredFundings,
-              pagination: { total: 1 },
-            },
-          };
+          return createMockFetchResponse({
+            items: filteredFundings,
+            pagination: { total: 1 },
+          });
         }
+        return createMockFetchResponse({});
       });
       const newFundings = await getNewFundings();
       const { fieldData } = fundings.find((item) => item.fieldData.slug === "nj-accelerate");
@@ -653,21 +681,20 @@ describe("webflow syncing", () => {
     });
 
     it("creates fundings", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
-          return { data: { items: webflowSectors, pagination: { total: 1 } } };
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
+          return createMockFetchResponse({ items: webflowSectors, pagination: { total: 1 } });
         }
-        if (request.url.includes(fundingCollectionId) && request.method === "get") {
+        if (url.includes(fundingCollectionId)) {
           const filteredFundings = fundings.filter(
             (item) => item.fieldData.slug !== "nj-accelerate",
           );
-          return {
-            data: {
-              items: filteredFundings,
-              pagination: { total: 1 },
-            },
-          };
+          return createMockFetchResponse({
+            items: filteredFundings,
+            pagination: { total: 1 },
+          });
         }
+        return createMockFetchResponse({});
       });
 
       const { id, fieldData, ...rest } = fundings.find((item) => {
@@ -675,23 +702,25 @@ describe("webflow syncing", () => {
       });
       delete fieldData["feature-on-recents"];
       await createNewFundings();
-      expect(axios).toHaveBeenLastCalledWith({
-        method: "post",
-        url: `https://api.webflow.com/v2/collections/${fundingCollectionId}/items`,
-        data: {
-          fieldData: {
-            "last-updated": currentDate.toISOString(),
-            "application-close-date": null,
-            "start-date": null,
-            ...fieldData,
-          },
-          ...rest,
-        },
-        responseType: "json",
-        headers: {
-          Authorization: "Bearer 12345678910",
-          "content-type": "application/json",
-        },
+      const lastCall = mockFetch.mock.calls[mockFetch.mock.calls.length - 1];
+      expect(lastCall[0]).toBe(
+        `https://api.webflow.com/v2/collections/${fundingCollectionId}/items`,
+      );
+      expect(lastCall[1].method).toBe("POST");
+      expect(lastCall[1].headers).toEqual({
+        Authorization: "Bearer 12345678910",
+        "content-type": "application/json",
+      });
+      const bodyData = JSON.parse(lastCall[1].body);
+      expect(bodyData).toMatchObject({
+        isArchived: false,
+        isDraft: false,
+        fieldData: expect.objectContaining({
+          "last-updated": currentDate.toISOString(),
+          "application-close-date": null,
+          "start-date": null,
+          ...fieldData,
+        }),
       });
     });
 
@@ -732,31 +761,35 @@ describe("webflow syncing", () => {
 
       const matchingFunding = fundings.find((i) => i.fieldData.slug === "nj-accelerate");
 
-      expect(axios).toHaveBeenLastCalledWith({
-        method: "delete",
-        url: `https://api.webflow.com/v2/collections/${fundingCollectionId}/items/${matchingFunding.id}`,
-        headers: {
-          Authorization: "Bearer 12345678910",
-        },
-      });
+      expect(mockFetch).toHaveBeenCalledWith(
+        `https://api.webflow.com/v2/collections/${fundingCollectionId}/items/${matchingFunding.id}`,
+        expect.objectContaining({
+          method: "DELETE",
+          headers: expect.objectContaining({
+            Authorization: "Bearer 12345678910",
+          }),
+        }),
+      );
     });
 
     it("updates fundings", async () => {
-      axios.mockImplementation((request) => {
-        if (request.url.includes(sectorCollectionId) && request.method === "get") {
-          return { data: { items: formatResponseItems(webflowSectors), pagination: { total: 1 } } };
+      mockFetch.mockImplementation((url) => {
+        if (url.includes(sectorCollectionId)) {
+          return createMockFetchResponse({
+            items: formatResponseItems(webflowSectors),
+            pagination: { total: 1 },
+          });
         }
-        if (request.url.includes(fundingCollectionId) && request.method === "get") {
+        if (url.includes(fundingCollectionId)) {
           const filteredFunding = fundings.find((item) => item.fieldData.slug === "nj-accelerate");
           filteredFunding.fieldData.agency = "njdol";
 
-          return {
-            data: {
-              items: [filteredFunding],
-              pagination: { total: 1 },
-            },
-          };
+          return createMockFetchResponse({
+            items: [filteredFunding],
+            pagination: { total: 1 },
+          });
         }
+        return createMockFetchResponse({});
       });
       loadAllFundings.mockReturnValue([
         {
@@ -765,27 +798,19 @@ describe("webflow syncing", () => {
         },
       ]);
       await updateFundings();
-      const { fieldData } = fundings.find((item) => item.fieldData.slug === "nj-accelerate");
-      delete fieldData["feature-on-recents"];
-      expect(axios).toHaveBeenLastCalledWith({
-        method: "patch",
-        url: `https://api.webflow.com/v2/collections/${fundingCollectionId}/items/${
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `https://api.webflow.com/v2/collections/${fundingCollectionId}/items/${
           fundings.find((i) => i.fieldData.slug === "nj-accelerate").id
         }`,
-        data: {
-          fieldData: {
-            ...fieldData,
-            "last-updated": currentDate.toISOString(),
-            agency: agencyMap["njdep"].id,
-            "application-close-date": null,
-            "start-date": null,
-          },
-        },
-        responseType: "json",
-        headers: {
-          Authorization: "Bearer 12345678910",
-        },
-      });
+        expect.objectContaining({
+          method: "PATCH",
+          headers: expect.objectContaining({
+            Authorization: "Bearer 12345678910",
+          }),
+          body: expect.stringContaining("nj-accelerate"),
+        }),
+      );
     });
 
     describe("helpers", () => {
