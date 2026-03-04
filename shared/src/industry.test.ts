@@ -1,6 +1,12 @@
 import { orderBy } from "lodash";
 import industryJson from "../../content/lib/industry.json";
-import { getIndustries, Industry, isIndustryIdGeneric, LookupIndustryById } from "./industry";
+import {
+  findIndustryByNaicsCode,
+  getIndustries,
+  Industry,
+  isIndustryIdGeneric,
+  LookupIndustryById,
+} from "./industry";
 
 describe("Industry Tests", () => {
   it("has industry records", () => {
@@ -120,6 +126,39 @@ describe("Industry Tests", () => {
 
     it("returns false for non-generic industry", () => {
       expect(isIndustryIdGeneric(LookupIndustryById("restaurant"))).toBe(false);
+    });
+  });
+
+  describe("findIndustryByNaicsCode", () => {
+    it("returns undefined for empty string", () => {
+      expect(findIndustryByNaicsCode("")).toBeUndefined();
+    });
+
+    it("returns undefined for a code that does not match any industry", () => {
+      expect(findIndustryByNaicsCode("999999")).toBeUndefined();
+    });
+
+    it("returns the matching industry for an unambiguous code", () => {
+      const autoBodyRepair = LookupIndustryById("auto-body-repair");
+      const code = autoBodyRepair.naicsCodes!.replaceAll(/\s/g, "").split(",")[0];
+      const result = findIndustryByNaicsCode(code);
+      expect(result?.id).toEqual("auto-body-repair");
+    });
+
+    it("returns undefined for a code shared by multiple industries", () => {
+      // 236118 is shared by commercial-construction and home-contractor
+      expect(findIndustryByNaicsCode("236118")).toBeUndefined();
+    });
+
+    it("excludes the generic industry from matches", () => {
+      // generic industry has no naicsCodes, so any code should not match it
+      const generic = LookupIndustryById("generic");
+      expect(generic.naicsCodes).toBeFalsy();
+      // A code unique to a specific industry should return that industry, not generic
+      const autoBodyRepair = LookupIndustryById("auto-body-repair");
+      const code = autoBodyRepair.naicsCodes!.replaceAll(/\s/g, "").split(",")[0];
+      const result = findIndustryByNaicsCode(code);
+      expect(result?.id).not.toEqual("generic");
     });
   });
 
