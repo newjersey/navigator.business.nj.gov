@@ -8,7 +8,8 @@
     "web/out/**",
     "package.json",
     "content/lib/industry.json",
-    "content/test/**"
+    "content/test/**",
+    "**/*.es-LA.md"
   ],
   "overrides": [
     {
