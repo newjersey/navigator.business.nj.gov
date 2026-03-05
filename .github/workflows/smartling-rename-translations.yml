@@ -27,7 +27,7 @@ jobs:
           for file in $(find content/src -name "*.en.es-LA.md"); do
             new_name="${file%.en.es-LA.md}.es-LA.md"
             echo "Renaming: $file -> $new_name"
-            git mv "$file" "$new_name"
+            git mv -f "$file" "$new_name"
             files_renamed=$((files_renamed + 1))
           done
           echo "files_renamed=$files_renamed" >> "$GITHUB_OUTPUT"
