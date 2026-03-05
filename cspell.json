@@ -1,6 +1,6 @@
 {
   "version": "0.2",
-  "language": "en",
+  "language": "en,es",
   "import": ["./content/src/spellcheck-exceptions.json"],
   "ignorePaths": [
     "node_modules/**",
@@ -8,7 +8,8 @@
     "web/out/**",
     "package.json",
     "content/lib/industry.json",
-    "content/test/**"
+    "content/test/**",
+    "**/*.es-LA.md"
   ],
   "overrides": [
     {
