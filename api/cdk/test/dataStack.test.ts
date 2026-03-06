@@ -107,7 +107,7 @@ describe("DataStack", () => {
     }).not.toThrow();
   });
 
-  test("validates that tables not created in Terraform are created in CDK", () => {
+  test("validates that DynamoDB tables are managed by CDK", () => {
     expect(() => {
       process.env.CI = "true";
       const stack = new DataStack(app, "TestDataStackDev", {
@@ -115,7 +115,34 @@ describe("DataStack", () => {
       });
       const template = Template.fromStack(stack);
 
-      template.resourceCountIs("AWS::DynamoDB::Table", 1);
+      template.resourceCountIs("AWS::DynamoDB::Table", 3);
+
+      template.hasResourceProperties("AWS::DynamoDB::Table", {
+        TableName: "users-table-dev",
+        BillingMode: "PAY_PER_REQUEST",
+        KeySchema: Match.arrayWith([{ AttributeName: "userId", KeyType: "HASH" }]),
+        AttributeDefinitions: Match.arrayWith([
+          { AttributeName: "userId", AttributeType: "S" },
+          { AttributeName: "email", AttributeType: "S" },
+        ]),
+        Tags: Match.arrayWith([{ Key: "STAGE", Value: "dev" }]),
+      });
+
+      template.hasResourceProperties("AWS::DynamoDB::Table", {
+        TableName: "businesses-table-dev",
+        BillingMode: "PAY_PER_REQUEST",
+        KeySchema: Match.arrayWith([{ AttributeName: "businessId", KeyType: "HASH" }]),
+        AttributeDefinitions: Match.arrayWith([
+          { AttributeName: "businessId", AttributeType: "S" },
+          { AttributeName: "businessName", AttributeType: "S" },
+          { AttributeName: "naicsCode", AttributeType: "S" },
+          { AttributeName: "industry", AttributeType: "S" },
+          { AttributeName: "hashedTaxId", AttributeType: "S" },
+          { AttributeName: "businessNamePartition", AttributeType: "S" },
+        ]),
+        Tags: Match.arrayWith([{ Key: "STAGE", Value: "dev" }]),
+      });
+
       template.hasResourceProperties("AWS::DynamoDB::Table", {
         TableName: "messages-table-dev",
         BillingMode: "PAY_PER_REQUEST",

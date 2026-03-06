@@ -1,6 +1,16 @@
 name: "Deploy Setup"
 description: "Runs configure-and-build, sets up Docker Buildx and triggers CDK deployment."
 
+inputs:
+  import_tables:
+    description: "Enable DynamoDB table ownership mode in CDK"
+    required: false
+    default: "false"
+  run_import_command:
+    description: "Run one-time cdk import for DynamoDB tables"
+    required: false
+    default: "false"
+
 runs:
   using: "composite"
   steps:
@@ -12,3 +22,6 @@ runs:
 
     - name: Deploy CDK
       uses: ./.github/actions/deploy-cdk
+      with:
+        import_tables: ${{ inputs.import_tables }}
+        run_import_command: ${{ inputs.run_import_command }}

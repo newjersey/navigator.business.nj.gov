@@ -13,7 +13,7 @@ function createUsersTable(
   stage: string,
   removalPolicy: RemovalPolicy,
 ) {
-  createDynamoDBTable(scope, {
+  return createDynamoDBTable(scope, {
     id: "UsersDynamoDBTable",
     tableName,
     stage,
@@ -39,7 +39,7 @@ function createBusinessesTable(
   stage: string,
   removalPolicy: RemovalPolicy,
 ) {
-  createDynamoDBTable(scope, {
+  return createDynamoDBTable(scope, {
     id: "BusinessesDynamoDBTable",
     tableName,
     stage,
@@ -89,7 +89,7 @@ function createMessagesTable(
   stage: string,
   removalPolicy: RemovalPolicy,
 ) {
-  createDynamoDBTable(scope, {
+  return createDynamoDBTable(scope, {
     stage,
     id: "MessagesDynamoDBTable",
     tableName,
@@ -112,6 +112,7 @@ function createMessagesTable(
 export class DataStack extends Stack {
   public readonly usersTable?: dynamodb.ITable;
   public readonly businessesTable?: dynamodb.ITable;
+  public readonly messagesTable?: dynamodb.ITable;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -121,19 +122,13 @@ export class DataStack extends Stack {
     const messagesTableName = `${MESSAGES_TABLE}-${props.stage}`;
 
     const removalPolicy = props.stage === "local" ? RemovalPolicy.DESTROY : RemovalPolicy.RETAIN;
-
-    if (process.env.CI !== "true" || props.stage === "local") {
-      createUsersTable(this, usersTableName, props.stage, removalPolicy);
-      createBusinessesTable(this, businessesTableName, props.stage, removalPolicy);
-      createMessagesTable(this, messagesTableName, props.stage, removalPolicy);
-    } else {
-      this.usersTable = dynamodb.Table.fromTableName(this, "ImportedUsersTable", usersTableName);
-      this.businessesTable = dynamodb.Table.fromTableName(
-        this,
-        "ImportedBusinessesTable",
-        businessesTableName,
-      );
-      createMessagesTable(this, messagesTableName, props.stage, removalPolicy);
-    }
+    this.usersTable = createUsersTable(this, usersTableName, props.stage, removalPolicy);
+    this.businessesTable = createBusinessesTable(
+      this,
+      businessesTableName,
+      props.stage,
+      removalPolicy,
+    );
+    this.messagesTable = createMessagesTable(this, messagesTableName, props.stage, removalPolicy);
   }
 }
