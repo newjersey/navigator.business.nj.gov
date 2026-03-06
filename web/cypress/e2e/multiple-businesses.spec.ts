@@ -2,7 +2,7 @@ import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/s
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 
-describe.skip("Multiple Businesses [feature] [all] [group2]", () => {
+describe("Multiple Businesses [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
@@ -16,7 +16,7 @@ describe.skip("Multiple Businesses [feature] [all] [group2]", () => {
     cy.get('[data-testid="business-title-1"]').should("not.exist");
     onDashboardPage.getAddBusinessButtonInDropdown().click();
 
-    cy.url().should("include", "onboarding?page=1");
+    cy.url().should("include", "additionalBusiness=true&page=1");
 
     onOnboardingPage.selectBusinessPersona("OWNING");
     onOnboardingPage.selectIndustrySector("construction");
@@ -44,7 +44,7 @@ describe.skip("Multiple Businesses [feature] [all] [group2]", () => {
 
     onDashboardPage.getDropdown().click();
     onDashboardPage.getAddBusinessButtonInDropdown().click();
-    cy.url().should("include", "onboarding?page=1");
+    cy.url().should("include", "additionalBusiness=true&page=1");
 
     onOnboardingPage.selectBusinessPersona("STARTING");
     onOnboardingPage.clickNext();
@@ -62,7 +62,7 @@ describe.skip("Multiple Businesses [feature] [all] [group2]", () => {
 
     onDashboardPage.getDropdown().click();
     onDashboardPage.getAddBusinessButtonInDropdown().click();
-    cy.url().should("include", "onboarding?page=1");
+    cy.url().should("include", "additionalBusiness=true&page=1");
 
     onOnboardingPage.selectBusinessPersona("FOREIGN");
     onOnboardingPage.clickNext();
