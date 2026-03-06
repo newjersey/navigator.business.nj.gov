@@ -176,7 +176,7 @@
     "@types/seedrandom": "3.0.8",
     "@types/simple-oauth2": "5.0.7",
     "@types/supertest": "6.0.3",
-    "@types/testing-library__jest-dom": "5.14.9",
+    "@types/testing-library__jest-dom": "6.0.0",
     "@types/uuid": "10.0.0",
     "@types/xml2js": "0.4.14",
     "@typescript-eslint/eslint-plugin": "7.18.0",
