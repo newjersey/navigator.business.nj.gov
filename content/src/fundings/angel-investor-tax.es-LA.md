@@ -14,37 +14,38 @@ fundingType: "tax credit"
 programFrequency: "reoccuring"
 status: "Aplicación continua"
 programPurpose: "In State"
-agency:
-  - "Njeda"
+agency: 
+    - "Njeda"
 agencyContact: ""
 businessStage: "early-stage"
 employeesRequired: yes
 homeBased: yes
-certifications:
-  - "propiedad de una mujer"
-  - "propiedad de minorías"
+certifications: 
+    - "propiedad de una mujer"
+    - "propiedad de minorías"
 preferenceForOpportunityZone: yes
-county:
-  - "Todos"
-sector:
-  - "Tecnología"
-  - "Ciencias de la vida"
-  - "Energía limpia"
-  - "Fabricación"
+county: 
+    - "Todos"
+sector: 
+    - "Tecnología"
+    - "Ciencias de la vida"
+    - "Energía limpia"
+    - "Fabricación"
 publishStageArchive: ""
 minEmployeesRequired: 1
 maxEmployeesRequired: 225
 ---
+Elegibilidad
+------------
 
-## Elegibilidad
-
-- Inversionista en compañías emergentes de tecnología o fondos de riesgo elegibles en Nueva Jersey
-- Tanto el inversionista como la compañía tecnológica deben completar la solicitud a más tardar 6 meses desde la fecha de inversión
-- Menos de 225 empleados a tiempo completo, de los cuales el 75% debe trabajar en Nueva Jersey
-- Comercializa una o más de las siguientes tecnologías elegibles en el Estado: Computación Avanzada, Materiales Avanzados, Biotecnología, Dispositivos Electrónicos, Tecnología de la Información, Ciencias de la Vida, Dispositivos Médicos, Comunicaciones Móviles, Tecnología de Energías Renovables y Tecnología de Reducción de Huella de Carbono
+* Inversionista en compañías emergentes de tecnología o fondos de riesgo elegibles en Nueva Jersey
+* Tanto el inversionista como la compañía tecnológica deben completar la solicitud a más tardar 6 meses desde la fecha de inversión
+* Menos de 225 empleados a tiempo completo, de los cuales el 75% debe trabajar en Nueva Jersey
+* Comercializa una o más de las siguientes tecnologías elegibles en el Estado: Computación Avanzada, Materiales Avanzados, Biotecnología, Dispositivos Electrónicos, Tecnología de la Información, Ciencias de la Vida, Dispositivos Médicos, Comunicaciones Móviles, Tecnología de Energías Renovables y Tecnología de Reducción de Huella de Carbono
 
 :::largeCallout\{ showHeader="true" headerText="Benefits" calloutType="conditional" \}
 
 Créditos fiscales que equivalen hasta al 20% de una inversión cualificada con un posible bono del 5%.
 
 :::
+
