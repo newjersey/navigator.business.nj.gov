@@ -16,21 +16,12 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
         <div className="h3-styling margin-y-2">
           ----- When Certs/Fundings Are Not Displayed -----
         </div>
-        <SidebarCardsList
-          sideBarCards={[]}
-          fundings={[]}
-          hiddenFundings={[]}
-          certifications={[]}
-          hiddenCertifications={[]}
-          cardCount={0}
-        />
+        <SidebarCardsList sideBarCards={[]} fundings={[]} certifications={[]} cardCount={0} />
         <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Displayed -----</div>
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[]}
-          hiddenFundings={[]}
           certifications={[]}
-          hiddenCertifications={[]}
           displayCertificationsCards
           displayFundingCards
           cardCount={0}
@@ -40,9 +31,7 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[]}
-          hiddenFundings={[]}
           certifications={[]}
-          hiddenCertifications={[]}
           isRemoteSellerWorker={true}
           cardCount={0}
         />
@@ -51,9 +40,7 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[generateFunding({})]}
-          hiddenFundings={[generateFunding({})]}
           certifications={[generateCertification({})]}
-          hiddenCertifications={[generateCertification({})]}
           displayCertificationsCards
           displayFundingCards
           cardCount={5}
