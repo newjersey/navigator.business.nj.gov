@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "esbuild": "esbuild",
     "build": "yarn verify:node && yarn decap:build-config && yarn cms:map && yarn workspaces foreach -ptvi run build",
     "build:clean": "yarn clean && yarn build",
     "clean": "yarn workspaces foreach -v run clean",
