@@ -25,6 +25,7 @@ export interface LambdaStackProps extends StackProps {
   stage: string;
   lambdaRole: iam.Role;
   messagesBucket: IBucket;
+  intercomMacrosBucket: IBucket;
 }
 
 export class LambdaStack extends Stack {
@@ -127,6 +128,9 @@ export class LambdaStack extends Stack {
 
     const skipSaveDocumentsToS3 = process.env.SKIP_SAVE_DOCUMENTS_TO_S3 || "";
     const useFakeSelfReg = process.env.USE_FAKE_SELF_REG || "";
+
+    const intercomMacrosUrl = process.env.INTERCOM_MACROS_URL || "";
+    const intercomToken = process.env.INTERCOM_TOKEN || "";
 
     /**
      * Environment Variables for Github Oauth2 lambda
@@ -384,8 +388,46 @@ export class LambdaStack extends Stack {
         MESSAGES_BUCKET: props.messagesBucket.bucketName,
       },
     });
-
     props.messagesBucket.grantWrite(this.lambdas.messagingService);
+
+    this.lambdas.updateKbWithIntercomMacros = createLambda(this, {
+      role: props.lambdaRole,
+      id: `${this.serviceName}-${props.stage}-updateKbWithIntercomMacros`,
+      stage: props.stage,
+      functionName: `${this.serviceName}-${props.stage}-updateKbWithIntercomMacros`,
+      entry: path.join(__dirname, "../../src/functions/updateKbWithIntercomMacros/app.ts"),
+      handler: "handler",
+      runtime: Runtime.NODEJS_22_X,
+      timeout: Duration.seconds(30),
+      memorySize: 1024,
+      ephemeralStorageSize: Size.mebibytes(512),
+      ...vpcProps,
+      environment: {
+        API_BASE_URL: apiBaseUrl,
+        INTERCOM_TOKEN: intercomToken,
+        INTERCOM_MACROS_URL: intercomMacrosUrl,
+        INTERCOM_MACROS_BUCKET: props.intercomMacrosBucket.bucketName,
+      },
+    });
+
+    const updateKbWithIntercomMacrosRule = new events.Rule(
+      this,
+      "UpdateKbWithIntercomMacrosSchedule",
+      {
+        schedule: events.Schedule.cron({
+          minute: "0",
+          hour: "13", // 1 PM UTC
+          weekDay: "FRI", // Friday
+        }),
+        description:
+          "Scheduled rule for updateKbWithIntercomMacros Lambda - runs weekly on Fridays at 1:00 PM UTC (8:00 AM EST/EDT)",
+      },
+    );
+    updateKbWithIntercomMacrosRule.addTarget(
+      new targets.LambdaFunction(this.lambdas.updateKbWithIntercomMacros),
+    );
+
+    props.intercomMacrosBucket.grantWrite(this.lambdas.updateKbWithIntercomMacros);
 
     const topic = sns.Topic.fromTopicArn(
       this,
