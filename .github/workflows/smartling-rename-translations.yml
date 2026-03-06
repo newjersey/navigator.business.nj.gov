@@ -40,7 +40,7 @@ jobs:
           git commit -m "chore: rename Smartling translation files (.en.es-LA.md -> .es-LA.md)"
           git push
 
-      - name: Enable auto-merge
-        run: gh pr merge ${{ github.event.pull_request.number }} --auto --squash
+      - name: Merge PR
+        run: gh pr merge ${{ github.event.pull_request.number }} --squash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
