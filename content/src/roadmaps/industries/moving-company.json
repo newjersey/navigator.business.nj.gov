@@ -1,6 +1,6 @@
 {
   "naicsCodes": "484210",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "transportation-and-warehousing",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
