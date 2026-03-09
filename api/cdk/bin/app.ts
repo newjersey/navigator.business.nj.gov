@@ -36,6 +36,7 @@ const lambdaStack = new LambdaStack(app, `LambdaStack-${stage}`, {
   stage: stage,
   lambdaRole: iamStack.role,
   messagesBucket: storageStack.messagesBucket,
+  intercomMacrosBucket: storageStack.intercomMacrosBucket,
   env,
 });
 

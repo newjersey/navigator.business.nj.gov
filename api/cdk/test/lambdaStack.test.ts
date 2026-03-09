@@ -20,6 +20,10 @@ describe("LambdaStack", () => {
         bucketName: "messages-bucket-local",
         grantWrite: () => {},
       } as unknown as IBucket,
+      intercomMacrosBucket: {
+        bucketName: "intercom-macros-bucket-local",
+        grantWrite: () => {},
+      } as unknown as IBucket,
     };
 
     stack = new LambdaStack(app, "TestLambdaStack", defaultProps);

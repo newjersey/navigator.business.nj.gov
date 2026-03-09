@@ -109,6 +109,9 @@ jobs:
       TAX_CLEARANCE_CERTIFICATE_USER_NAME: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
       TAX_CLEARANCE_CERTIFICATE_URL: ${{ vars.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
 
+      INTERCOM_MACROS_BASE_URL: ${{ vars.INTERCOM_MACROS_BASE_URL }}
+      INTERCOM_TOKEN: ${{ secrets.INTERCOM_TOKEN }}
+
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
