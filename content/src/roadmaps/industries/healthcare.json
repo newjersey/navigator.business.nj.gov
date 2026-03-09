@@ -1,6 +1,6 @@
 {
   "naicsCodes": "621330, 621112, 621420, 812990, 622210, 621111, 621112, 621330, 621391, 621310, 621210, 621399, 621320, 812199, 621330, 621111, 621112,  621340, 623110, 623312, 541940",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "health-care-and-social-assistance",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
