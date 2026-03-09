@@ -1,4 +1,8 @@
-import { LandingPageTiles } from "@/components/LandingPageTiles";
+import {
+  getStartingBusinessTileSet,
+  getExistingBusinessTileSet,
+  LandingPageTiles,
+} from "@/components/LandingPageTiles";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -14,6 +18,9 @@ export const Hero = (): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const router = useRouter();
   const { Config } = useConfig();
+
+  const startingBusinessTileSet = getStartingBusinessTileSet(Config.landingPage);
+  const secondTileSet = getExistingBusinessTileSet(Config.landingPage);
 
   const routeToOnboarding = (): void => {
     router && router.push(ROUTES.onboarding);
@@ -69,10 +76,16 @@ export const Hero = (): ReactElement => {
 
         <div className={"margin-y-3 margin-x-2"}>
           <Heading level={2} className="text-align-center">
-            {Config.landingPage.tileTitleText}
+            {Config.landingPage.startingBusinessTileTitleText}
           </Heading>
         </div>
-        <LandingPageTiles />
+        <LandingPageTiles tiles={startingBusinessTileSet} />
+        <div className={"margin-y-3 margin-x-2"}>
+          <Heading level={2} className="text-align-center">
+            {Config.landingPage.existingBusinessTileTitleText}
+          </Heading>
+        </div>
+        <LandingPageTiles tiles={secondTileSet} />
       </div>
       <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-primary-extra-light"}`}>
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
