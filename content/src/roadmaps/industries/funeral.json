@@ -1,6 +1,6 @@
 {
   "naicsCodes": "812210",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "health-care-and-social-assistance",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
