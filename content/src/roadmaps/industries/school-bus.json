@@ -1,6 +1,6 @@
 {
   "naicsCodes": "485999, 485210, 485310, 485320, 485410, 485510",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "transportation-and-warehousing",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -82,14 +82,18 @@
     }
   ],
   "name": "School Bus",
-  "nonEssentialQuestionsIds": ["weights-measures", "business-vehicle-irp", "vehicle-dealership-q"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-irp",
+    "vehicle-dealership-q"
+  ],
   "displayname": "school-bus",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isTransportation": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "bus, school bus, ",
+  "additionalSearchTerms": "bus, school bus",
   "id": "school-bus",
   "description": "Transports children to and from school, day camps, or other activities",
   "webflowId": "656a1362295cb540cf06fe19"
