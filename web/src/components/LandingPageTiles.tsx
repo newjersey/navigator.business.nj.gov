@@ -1,16 +1,72 @@
 import { LandingPageActionTile } from "@/components/LandingPageActionTile";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
-import analytics from "@/lib/utils/analytics";
 import { ActionTile } from "@businessnjgovnavigator/shared/types";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
-export const LandingPageTiles = (): ReactElement => {
-  const router = useRouter();
-  const { Config } = useConfig();
+export type TileConfig = Omit<ActionTile, "onClick"> & {
+  flow: "starting" | "out-of-state" | "up-and-running";
+  externalUrl?: string;
+};
 
-  const landingPageConfig = Config.landingPage;
+interface LandingPageTilesProps {
+  tiles: TileConfig[];
+}
+
+export const getStartingBusinessTileSet = (
+  landingPageConfig: ConfigType["landingPage"],
+): TileConfig[] => [
+  {
+    imgPath: "/img/startBusiness-icon.svg",
+    dataTestId: "start-biz-tile",
+    tileText: landingPageConfig.landingPageStartBizTile,
+    flow: "starting",
+  },
+  {
+    imgPath: "/img/eligibleFunding-icon.svg",
+    dataTestId: "eligible-funding-tile",
+    tileText: landingPageConfig.landingPageFundingTile,
+    flow: "starting",
+    externalUrl: landingPageConfig.landingPageFundingLink,
+  },
+  {
+    imgPath: "/img/gear-icon.svg",
+    dataTestId: "business-structure-tile",
+    tileText: landingPageConfig.landingPageBusinessStructureTile,
+    flow: "starting",
+    externalUrl: landingPageConfig.landingPageBusinessStructureLink,
+  },
+];
+
+export const getExistingBusinessTileSet = (
+  landingPageConfig: ConfigType["landingPage"],
+): TileConfig[] => [
+  {
+    imgPath: "/img/payTaxes-icon.svg",
+    tileText: landingPageConfig.landingPageAnnualReportTile,
+    dataTestId: "annual-report-tile",
+    flow: "up-and-running",
+    externalUrl: landingPageConfig.landingPageAnnualReportLink,
+  },
+  {
+    imgPath: "/img/rocket-ship-icon.svg",
+    dataTestId: "grow-funding-tile",
+    tileText: landingPageConfig.landingPageGrowFundingTile,
+    flow: "up-and-running",
+    externalUrl: landingPageConfig.landingPageGrowFundingLink,
+  },
+  {
+    imgPath: "/img/action-file-icon.svg",
+    tileText: landingPageConfig.landingPageSalesTaxTile,
+    dataTestId: "sales-tax-tile",
+    flow: "up-and-running",
+    externalUrl: landingPageConfig.landingPageSalesTaxLink,
+  },
+];
+
+export const LandingPageTiles = ({ tiles }: LandingPageTilesProps): ReactElement => {
+  const router = useRouter();
 
   const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
     router &&
@@ -20,65 +76,21 @@ export const LandingPageTiles = (): ReactElement => {
       });
   };
 
-  const actionTiles: ActionTile[] = [
-    {
-      imgPath: "/img/breif-case-icon.svg",
-      tileText: landingPageConfig.landingPageRegisterBizTile,
-      dataTestId: "register-biz-tile",
-      onClick: (): void => {
-        setFlowAndRouteUser("starting");
-        analytics.event.landing_page_get_my_registration_guide_tile.click.go_to_onboarding();
-      },
+  const actionTiles: ActionTile[] = tiles.map((tile) => ({
+    imgPath: tile.imgPath,
+    tileText: tile.tileText,
+    dataTestId: tile.dataTestId,
+    onClick: (): void => {
+      if (tile.externalUrl) {
+        window.location.href = tile.externalUrl;
+      } else {
+        setFlowAndRouteUser(tile.flow);
+      }
     },
-    {
-      imgPath: "/img/payTaxes-icon.svg",
-      tileText: landingPageConfig.landingPageTaxesTile,
-      dataTestId: "pay-taxes-tile",
-      onClick: (): void => {
-        setFlowAndRouteUser("up-and-running");
-        analytics.event.landing_page_file_and_pay_my_taxes_tile.click.go_to_onboarding();
-      },
-    },
-    {
-      imgPath: "/img/airplane-icon.svg",
-      dataTestId: "out-of-state-tile",
-      tileText: landingPageConfig.landingPageOutOfStateTile,
-      onClick: (): void => {
-        setFlowAndRouteUser("out-of-state");
-        analytics.event.landing_page_im_an_out_of_business_tile.click.go_to_onboarding();
-      },
-    },
-    {
-      imgPath: "/img/eligibleFunding-icon.svg",
-      dataTestId: "eligible-funding-tile",
-      tileText: landingPageConfig.landingPageFundingTile,
-      onClick: (): void => {
-        setFlowAndRouteUser("up-and-running");
-        analytics.event.landing_page_find_funding_for_my_business_tile.click.go_to_onboarding();
-      },
-    },
-    {
-      imgPath: "/img/startBusiness-icon.svg",
-      dataTestId: "start-biz-tile",
-      tileText: landingPageConfig.landingPageStartBizTile,
-      onClick: (): void => {
-        setFlowAndRouteUser("starting");
-        analytics.event.landing_page_im_starting_a_nj_business_tile.click.go_to_onboarding();
-      },
-    },
-    {
-      imgPath: "/img/gear-icon.svg",
-      dataTestId: "run-biz-tile",
-      tileText: landingPageConfig.landingPageRunBizTile,
-      onClick: (): void => {
-        setFlowAndRouteUser("up-and-running");
-        analytics.event.landing_page_im_running_a_nj_business_tile.click.go_to_onboarding();
-      },
-    },
-  ];
+  }));
 
   return (
-    <div className="display-flex fjc fac padding-top-2 dekstop:padding-bottom-4 padding-bottom-10">
+    <div className="display-flex fjc fac padding-top-2 dekstop:padding-bottom-2 padding-bottom-3">
       <div className={"landing-grid-container padding-x-6 desktop:grid-container-widescreen"}>
         {actionTiles.map((actionTile, index) => {
           const actionTileObj = {

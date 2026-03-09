@@ -1029,6 +1029,17 @@ collections:
               - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
               - { label: Landing Page - Funding Tile, name: landingPageFundingTile, widget: string }
+              - { label: Landing Page - Funding Link, name: landingPageFundingLink, widget: string }
+              - {
+                  label: Landing Page - Grow Business Funding Tile,
+                  name: landingPageGrowFundingTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Grow Business Funding Link,
+                  name: landingPageGrowFundingLink,
+                  widget: string,
+                }
               - {
                   label: Landing Page - Get Started Tile Line 1,
                   name: landingPageGetStartedTileLine1,
@@ -1055,7 +1066,41 @@ collections:
                   name: landingPageStartBizTile,
                   widget: string,
                 }
-              - { label: Landing Page - Taxes Tile, name: landingPageTaxesTile, widget: string }
+              - {
+                  label: Landing Page - Business Structure Tile,
+                  name: landingPageBusinessStructureTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Business Structure Link,
+                  name: landingPageBusinessStructureLink,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Start Biz Tile,
+                  name: landingPageStartBizTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Annual Report Tile,
+                  name: landingPageAnnualReportTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Annual Report Link,
+                  name: landingPageAnnualReportLink,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Sales Tax Tile,
+                  name: landingPageSalesTaxTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Sales Tax Link,
+                  name: landingPageSalesTaxLink,
+                  widget: string,
+                }
               - {
                   label: Section 2 - Call to Action,
                   name: section2CallToActionText,
@@ -1109,7 +1154,16 @@ collections:
                   widget: text,
                 }
               - { label: Section 6 - Header Text, name: section6Header, widget: string }
-              - { label: Tile Title Text, name: tileTitleText, widget: string }
+              - {
+                  label:Starting Business Tile Title Text,
+                  name: startingBusinessTileTitleText,
+                  widget: string,
+                }
+              - {
+                  label: Existing Business Tile Title Text,
+                  name: existingBusinessTileTitleText,
+                  widget: string,
+                }
 
   - name: "license-search-task"
     label: "License Search Task"
