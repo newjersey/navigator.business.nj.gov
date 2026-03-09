@@ -1,6 +1,6 @@
 {
   "naicsCodes": "493110, 493190, 493120, 493130",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "transportation-and-warehousing",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
