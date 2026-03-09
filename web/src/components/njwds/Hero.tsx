@@ -20,7 +20,7 @@ export const Hero = (): ReactElement => {
   const { Config } = useConfig();
 
   const startingBusinessTileSet = getStartingBusinessTileSet(Config.landingPage);
-  const secondTileSet = getExistingBusinessTileSet(Config.landingPage);
+  const existingBusinessTileSet = getExistingBusinessTileSet(Config.landingPage);
 
   const routeToOnboarding = (): void => {
     router && router.push(ROUTES.onboarding);
@@ -85,7 +85,7 @@ export const Hero = (): ReactElement => {
             {Config.landingPage.existingBusinessTileTitleText}
           </Heading>
         </div>
-        <LandingPageTiles tiles={secondTileSet} />
+        <LandingPageTiles tiles={existingBusinessTileSet} />
       </div>
       <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-primary-extra-light"}`}>
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
