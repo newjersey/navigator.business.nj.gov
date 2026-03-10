@@ -191,6 +191,7 @@ import { migrate_v186_to_v187 } from "@db/migrations/v187_add_crtk_data";
 import { migrate_v187_to_v188 } from "@db/migrations/v188_zod_cleanup_address_status_boolean";
 import { migrate_v188_to_v189 } from "@db/migrations/v189_update_env_task_id";
 import { migrate_v189_to_v190 } from "@db/migrations/v190_remove_hidden_fundings_and_certifications";
+import { migrate_v190_to_v191 } from "@db/migrations/v191_add_newsletter_email";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -386,6 +387,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v187_to_v188,
   migrate_v188_to_v189,
   migrate_v189_to_v190,
+  migrate_v190_to_v191,
 ];
 
-export { generatev190UserData as CURRENT_GENERATOR } from "@db/migrations/v190_remove_hidden_fundings_and_certifications";
+export { generatev191UserData as CURRENT_GENERATOR } from "@db/migrations/v191_add_newsletter_email";

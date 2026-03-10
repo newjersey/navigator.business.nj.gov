@@ -54,6 +54,7 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { EnvironmentRequirementsEmailClient } from "@client/EnvironmentRequirementsEmailClient";
 
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
+import { GovDeliveryCommCloudClient } from "@client/GovDeliveryCommCloudClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MockCryptoClient } from "@client/MockCryptoClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
@@ -334,6 +335,17 @@ const taxFilingClient = ApiTaxFilingClient(
   },
   logger,
 );
+const GOVDELIVERY_COMM_CLOUD_BASE_URL =
+  process.env.GOVDELIVERY_COMM_CLOUD_BASE_URL ||
+  `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+const govDeliveryCommCloudClient = GovDeliveryCommCloudClient({
+  baseUrl: GOVDELIVERY_COMM_CLOUD_BASE_URL,
+  accountCode: process.env.GOVDELIVERY_COMM_CLOUD_ACCOUNT_CODE || "",
+  username: process.env.GOVDELIVERY_COMM_CLOUD_USERNAME || "",
+  password: process.env.GOVDELIVERY_COMM_CLOUD_PASSWORD || "",
+  topicCode: process.env.GOVDELIVERY_COMM_CLOUD_TOPIC_CODE || "",
+});
+
 const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   baseUrl: GOV_DELIVERY_BASE_URL,
   topic: GOV_DELIVERY_TOPIC,
@@ -442,6 +454,7 @@ app.use(
     AWSTaxIDHashingClient,
     timeStampToBusinessSearch,
     logger,
+    govDeliveryCommCloudClient,
   ),
 );
 
