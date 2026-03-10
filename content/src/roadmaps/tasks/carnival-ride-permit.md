@@ -1,21 +1,24 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1yNGtzwQuNN0_mH5fguWruu_9BgJ5v25BegkQ\
-  Av4xC1g/edit)"
-summaryDescriptionMd: You must get a ride permit to own and/or operate a
-  `carnival or amusement ride|carnival-amusement-ride` in New Jersey.
-urlSlug: carnival-ride-permit
-displayname: carnival-ride-permit
-name: Obtain a Carnival or Amusement Ride Permit
 id: carnival-ride-permit
-callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_rides/permit_application.pdf
+webflowId: 69b02dd4522e3f9bd23e4826
+urlSlug: carnival-ride-permit
+name: Obtain a Carnival or Amusement Ride Permit
+displayname: carnival-ride-permit
+webflowName: Carnival or Amusement Ride Permit
+filename: carnival-ride-permit
+callToActionLink: "https://www.nj.gov/dca/divisions/codes/forms/pdf_rides/permit_application.pdf"
 callToActionText: Apply for My Ride Permit
-industryId: independent-artist
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of State and Local Code Inspections
+industryId: independent-artist
 webflowType: object-vehicle
+summaryDescriptionMd: >-
+  You must get a ride permit to own and/or operate a `carnival or amusement
+  ride|carnival-amusement-ride` in New Jersey.
+notesMd: >-
+  [Muni planning
+  doc](https://docs.google.com/document/d/1yNGtzwQuNN0_mH5fguWruu_9BgJ5v25BegkQAv4xC1g/edit)
 syncToWebflow: true
-webflowName: Carnival or Amusement Ride Permit
 ---
 
 Apply for a ride permit at least 30 days from your first day of operation. The permit application process includes a ride inspection.

@@ -1,18 +1,23 @@
 ---
-notesMd: "LLM-assisted (sort of -- heavy revisions made) Planning Doc: https://docs.google.com/document/d/1yoHDEM7vMXgHyWt9CmHKB6Uloz7lFQ_6B3h8jKfc4JU/edit"
-summaryDescriptionMd: You need a dental hygienist license to practice in New
-  Jersey, after completing your degree.
-urlSlug: dental-hygienist-license
-displayname: dental-hygienist-license
-name: Apply for Your Dental Hygienist License
 id: dental-hygienist-license
-callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
-callToActionText: Apply for My Dental Hygiene License
-industryId: healthcare
-agencyId: nj-consumer-affairs
-webflowType: individual-license
-syncToWebflow: true
+webflowId: 69b02dd9d7a0641e3aace68a
+urlSlug: dental-hygienist-license
+name: Apply for Your Dental Hygienist License
+displayname: dental-hygienist-license
 webflowName: Dental Hygienist License
+filename: dental-hygienist-license
+callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx"
+callToActionText: Apply for My Dental Hygiene License
+agencyId: nj-consumer-affairs
+industryId: healthcare
+webflowType: individual-license
+summaryDescriptionMd: >-
+  You need a dental hygienist license to practice in New Jersey, after
+  completing your degree.
+notesMd: >-
+  LLM-assisted (sort of -- heavy revisions made) Planning Doc:
+  https://docs.google.com/document/d/1yoHDEM7vMXgHyWt9CmHKB6Uloz7lFQ_6B3h8jKfc4JU/edit
+syncToWebflow: true
 ---
 
 ## Application Requirements

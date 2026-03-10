@@ -1,4 +1,48 @@
 ---
+id: domestic-employer-register-for-taxes
+webflowId: 69b02dda6b4992dc4d3e2186
+urlSlug: domestic-employer-tax-registration
+name: Register for State Taxes and Employer Purposes
+displayname: domestic-employer-tax-registration
+webflowName: Domestic Employer State Tax Registration
+filename: domestic-employer-register-for-taxes
+callToActionLink: "https://www.njportal.com/DOR/BusinessRegistration/Home/FirstStep"
+callToActionText: Register for State Taxes
+agencyId: nj-taxation
+summaryDescriptionMd: >-
+  It's time to register for State taxes. Doing so will tell the State more about
+  you as an employer of one or more `domestic workers|domestic-worker` and
+  determine the taxes and employer contributions you're responsible for. This
+  registration does not mean you are a registered as a business for tax purposes
+  in New Jersey: you will be registered as an employer of domestic workers.
+
+
+  &nbsp;
+
+
+  As an employer of domestic or household workers, you are required to report,
+  contribute to, and pay out, as applicable:
+
+
+  * Unemployment insurance
+
+  * Workforce and Temporary Disability insurance
+
+  * Family Leave insurance
+
+  * Gross Income Tax withholding
+
+
+  :::largeCallout{ showHeader="false" headerText=""  calloutType="informational"
+  }
+
+
+  For more information on your required responsibilities as an employer, visit
+  [Domestic Workers' Bill of Rights: What employers need to
+  know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml).
+
+
+  :::
 notesMd: >-
   Need to add link to Rights for Domestic Workers page when live
 
@@ -13,47 +57,11 @@ notesMd: >-
   \-or-
 
 
-  [Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) -- complete page 17 and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
-summaryDescriptionMd: >-
-  It's time to register for State taxes. Doing so will tell the State more about
-  you as an employer of one or more `domestic workers|domestic-worker` and
-  determine the taxes and employer contributions you're responsible for. This
-  registration does not mean you are a registered as a business for tax purposes
-  in New Jersey: you will be registered as an employer of domestic workers.
-
-
-  &nbsp;
-
-
-  As an employer of domestic or household workers, you are required to report, contribute to, and pay out, as applicable:
-
-
-  * Unemployment insurance
-
-  * Workforce and Temporary Disability insurance
-
-  * Family Leave insurance
-
-  * Gross Income Tax withholding
-
-
-  :::largeCallout{ showHeader="false" headerText=""  calloutType="informational" }
-
-
-  For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights: What employers need to know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml).
-
-
-  :::
-urlSlug: domestic-employer-tax-registration
-displayname: domestic-employer-tax-registration
-name: Register for State Taxes and Employer Purposes
-id: domestic-employer-register-for-taxes
-callToActionLink: https://www.njportal.com/DOR/BusinessRegistration/Home/FirstStep
-callToActionText: Register for State Taxes
-agencyId: nj-taxation
+  [Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf)
+  -- complete page 17 and choose "Employer of Domestic Household Employee(s)"
+  under step A and "Domestic (Household Employer)" under step H.
 formName: NJ-Reg
 syncToWebflow: true
-webflowName: Domestic Employer State Tax Registration
 ---
 
 ## Application Requirements

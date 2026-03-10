@@ -1,15 +1,18 @@
 ---
-summaryDescriptionMd: All healthcare providers in your medical facility need to
-  be licensed medical professionals.
-urlSlug: healthcare-license
-displayname: healthcare-license
-name: Ensure Your Staff is Licensed
 id: healthcare-license
-callToActionLink: https://newjersey.mylicense.com/verification/Search.aspx?facility=N
+webflowId: 69b02ddb529540084083d462
+urlSlug: healthcare-license
+name: Ensure Your Staff is Licensed
+displayname: healthcare-license
+webflowName: "Healthcare: Ensure Your Staff is Licensed"
+filename: healthcare-license
+callToActionLink: "https://newjersey.mylicense.com/verification/Search.aspx?facility=N"
 callToActionText: Verify My Staff's Healthcare Licenses
 agencyId: nj-consumer-affairs
+summaryDescriptionMd: >-
+  All healthcare providers in your medical facility need to be licensed medical
+  professionals.
 syncToWebflow: true
-webflowName: "Healthcare: Ensure Your Staff is Licensed"
 ---
 
 ## Licensing Requirements By Role

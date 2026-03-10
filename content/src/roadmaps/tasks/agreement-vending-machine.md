@@ -1,17 +1,20 @@
 ---
+id: agreement-vending-machine
+webflowId: 69b02dd16aa1f85c4d974976
+urlSlug: agreement-vending-machine
+name: Sign a Location Agreement
+displayname: agreement-vending-machine
+webflowName: Vending Machine Location Agreement
+filename: agreement-vending-machine
+industryId: vending-machine
 summaryDescriptionMd: >-
   Once you've identified a location for your vending machine, you need to draft
   and sign a location agreement with the site owner before installing your
   machine.
 
-  Signing your agreements under your registered business name may protect you from liabilities and associated costs.
-urlSlug: agreement-vending-machine
-displayname: agreement-vending-machine
-name: Sign a Location Agreement
-id: agreement-vending-machine
-industryId: vending-machine
+  Signing your agreements under your registered business name may protect you
+  from liabilities and associated costs.
 syncToWebflow: true
-webflowName: Vending Machine Location Agreement
 ---
 
 ## Agreement Considerations

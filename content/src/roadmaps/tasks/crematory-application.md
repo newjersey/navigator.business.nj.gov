@@ -1,19 +1,24 @@
 ---
-notesMd: "Planning doc:
-  https://docs.google.com/document/d/1l7IGO9m13_f2Mkn5OoVfyJD8eeFlidLqhCFQuRQoWMY/edit?tab=t.0#heading=h.gjdgxs"
-summaryDescriptionMd: You need prior approval from the New Jersey Cemetery Board
-  to construct and operate a crematory in New Jersey.
-urlSlug: crematory-application
-displayname: crematory-application
-name: Apply to Construct and Operate a Crematory
 id: crematory-application
-callToActionLink: "https://www.njconsumeraffairs.gov/cem/Applications/Application-and-Information-Sheet-for-Approval-to-Construct-and-Operate-a-Crematory.pdf"
-callToActionText: Apply to Construct and Operate a Crematory
-industryId: funeral
-agencyId: nj-consumer-affairs
-webflowType: business-license
-syncToWebflow: true
+webflowId: 69b02dd63bd86c98f4eb243e
+urlSlug: crematory-application
+name: Apply to Construct and Operate a Crematory
+displayname: crematory-application
 webflowName: Crematory Construction and Operation
+filename: crematory-application
+callToActionLink: >-
+  https://www.njconsumeraffairs.gov/cem/Applications/Application-and-Information-Sheet-for-Approval-to-Construct-and-Operate-a-Crematory.pdf
+callToActionText: Apply to Construct and Operate a Crematory
+agencyId: nj-consumer-affairs
+industryId: funeral
+webflowType: business-license
+summaryDescriptionMd: >-
+  You need prior approval from the New Jersey Cemetery Board to construct and
+  operate a crematory in New Jersey.
+notesMd: >-
+  Planning doc:
+  https://docs.google.com/document/d/1l7IGO9m13_f2Mkn5OoVfyJD8eeFlidLqhCFQuRQoWMY/edit?tab=t.0#heading=h.gjdgxs
+syncToWebflow: true
 ---
 
 ## Application Requirements

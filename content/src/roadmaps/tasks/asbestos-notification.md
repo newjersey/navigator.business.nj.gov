@@ -1,21 +1,19 @@
 ---
-notesMd: >-
-  8.8.25: Internal review complete, making edits and republishing 
-
-
-  6.25.25: Added exempted activities section, waiting for async SME review
-
-
-  6.13.25: WIP still. Edits made after crit but need to add exempted activities section. Note: address will go inside quick ref callout once available
-
-
-  6.10.25: Still a work in progress, making edits based on SME meeting
-
-
-  6.3.25: This is a work in progress; drafted here in the early stage to see how the callouts and overall layout appear
-
-
-  Draft Document: https://docs.google.com/document/d/16SDcwVjI4j_6HXntd3eatGnL3Hh8TjP2BTamIKMiBIs/edit?tab=t.0
+id: asbestos-notification
+webflowId: 69b02dd3d7a0641e3aace53d
+urlSlug: asbestos-notification
+name: Report Your Asbestos Work
+displayname: asbestos-notification
+webflowName: Asbestos Abatement Notification
+filename: asbestos-notification
+callToActionLink: >-
+  https://www.nj.gov/labor/safetyandhealth/programs-services/asbestos/index.shtml
+callToActionText: Submit My Notification of Asbestos Abatement
+agencyAdditionalContext: >-
+  NJ Department of Labor and Workforce Development, Asbestos Control and
+  Licensing Section and NJ Department of Health and Senior Services, Consumer
+  and Environmental Health Services
+industryId: remediation-waste
 summaryDescriptionMd: >-
   If you are removing more than 3 square or linear feet of material that
   contains more than 1% asbestos, you must submit a Notification of Asbestos
@@ -27,19 +25,30 @@ summaryDescriptionMd: >-
   &nbsp;
 
 
-  Send this form at least **10 days before the work begins**. If your plans or the scope changes, such as placing the project on hold or taking it off hold, you may have to submit an updated form or payment.
-urlSlug: asbestos-notification
-displayname: asbestos-notification
-name: Report Your Asbestos Work
-id: asbestos-notification
-callToActionLink: https://www.nj.gov/labor/safetyandhealth/programs-services/asbestos/index.shtml
-callToActionText: Submit My Notification of Asbestos Abatement
-industryId: remediation-waste
-agencyAdditionalContext: NJ Department of Labor and Workforce Development,
-  Asbestos Control and Licensing Section and NJ Department of Health and Senior
-  Services, Consumer and Environmental Health Services
+  Send this form at least **10 days before the work begins**. If your plans or
+  the scope changes, such as placing the project on hold or taking it off hold,
+  you may have to submit an updated form or payment.
+notesMd: >-
+  8.8.25: Internal review complete, making edits and republishing 
+
+
+  6.25.25: Added exempted activities section, waiting for async SME review
+
+
+  6.13.25: WIP still. Edits made after crit but need to add exempted activities
+  section. Note: address will go inside quick ref callout once available
+
+
+  6.10.25: Still a work in progress, making edits based on SME meeting
+
+
+  6.3.25: This is a work in progress; drafted here in the early stage to see how
+  the callouts and overall layout appear
+
+
+  Draft Document:
+  https://docs.google.com/document/d/16SDcwVjI4j_6HXntd3eatGnL3Hh8TjP2BTamIKMiBIs/edit?tab=t.0
 syncToWebflow: true
-webflowName: Asbestos Abatement Notification
 ---
 
 ## Asbestos Work That Does Not Require Notification

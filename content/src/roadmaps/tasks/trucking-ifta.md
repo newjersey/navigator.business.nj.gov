@@ -1,5 +1,14 @@
 ---
-notesMd: ""
+id: trucking-ifta
+webflowId: 69b02dea605f737873049e3c
+urlSlug: trucking-ifta
+name: Get Your International Fuel Tax Agreement (IFTA) License and Decals
+displayname: trucking-ifta
+webflowName: International Fuel Tax Agreement License
+filename: trucking-ifta
+callToActionLink: "https://www.nj.gov/mvc/pdf/commercial/IFTA_1.pdf"
+callToActionText: Apply for an IFTA Account
+agencyId: nj-motor-vehicle
 summaryDescriptionMd: >-
   If you plan to operate vehicles outside of a base NJ jurisdiction, you will
   need to license them under IFTA.
@@ -8,22 +17,19 @@ summaryDescriptionMd: >-
   &nbsp;
 
 
-  IFTA jurisdictions constitute the lower 48 U.S. states and the 10 Canadian provinces. Vehicles must display **1 or more of the following** to travel through IFTA member jurisdictions:
+  IFTA jurisdictions constitute the lower 48 U.S. states and the 10 Canadian
+  provinces. Vehicles must display **1 or more of the following** to travel
+  through IFTA member jurisdictions:
 
 
-  * A valid IFTA license and two IFTA decals issued by a the IFTA member jurisdiction in which they are based
+  * A valid IFTA license and two IFTA decals issued by a the IFTA member
+  jurisdiction in which they are based
 
-  * A valid IFTA trip permit issued by the IFTA member jurisdiction in which they are based
-urlSlug: trucking-ifta
-displayname: trucking-ifta
-name: Get Your International Fuel Tax Agreement (IFTA) License and Decals
-id: trucking-ifta
-callToActionLink: https://www.nj.gov/mvc/pdf/commercial/IFTA_1.pdf
-callToActionText: Apply for an IFTA Account
-agencyId: nj-motor-vehicle
+  * A valid IFTA trip permit issued by the IFTA member jurisdiction in which
+  they are based
+notesMd: ""
 formName: IFTA-1
 syncToWebflow: true
-webflowName: International Fuel Tax Agreement License
 ---
 
 &nbsp;

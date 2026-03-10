@@ -1,15 +1,18 @@
 ---
-summaryDescriptionMd: You need to get a commercial vehicle registration before
-  you can legally operate your business.
-urlSlug: trucking-vehicle-registration
-displayname: trucking-vehicle-registration
-name: Register Your Truck
 id: trucking-vehicle-registration
-callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard/8
+webflowId: 69b02dec2b431047e5291f74
+urlSlug: trucking-vehicle-registration
+name: Register Your Truck
+displayname: trucking-vehicle-registration
+webflowName: Commercial Vehicle Registration
+filename: trucking-vehicle-registration
+callToActionLink: "https://telegov.njportal.com/njmvc/AppointmentWizard/8"
 callToActionText: Register My Truck
 agencyId: nj-motor-vehicle
+summaryDescriptionMd: >-
+  You need to get a commercial vehicle registration before you can legally
+  operate your business.
 syncToWebflow: true
-webflowName: Commercial Vehicle Registration
 ---
 
 ## Application Requirements

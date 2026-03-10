@@ -1,9 +1,16 @@
 ---
-notesMd: >+
-  Planning doc:
-  https://docs.google.com/document/d/1pvZxUu7oNqGu61FQ_Z9CwYVIqBW26uTH2PfV7-Vqnj4/edit?tab=t.0#heading=h.5ku5mzqkm00c
-
-
+id: temp-help-dcp
+webflowId: 69b02de53bd86c98f4eb27f1
+urlSlug: temp-help-dcp
+name: >-
+  Apply for Your Certification to Make Designated Classification Placements for
+  Temporary Workers
+displayname: temp-help-dcp
+webflowName: Designated Classification Placements for Temporary Workers Certification
+filename: temp-help-dcp
+callToActionLink: "https://rgbportal.dca.njoag.gov/application-TWBRdcp/"
+callToActionText: Apply for My Certification to Make DCPs
+agencyId: njdol
 summaryDescriptionMd: >-
   You need a Temporary Worker Bill of Rights certification to make designated
   classification placements (DCPs) if you assign temporary workers in any of
@@ -27,17 +34,13 @@ summaryDescriptionMd: >-
   * 51-0000 Production Occupations
 
   * 53-0000 Transportation and Material Moving Occupation
-urlSlug: temp-help-dcp
-displayname: temp-help-dcp
-name: Apply for Your Certification to Make Designated Classification Placements
-  for Temporary Workers
-id: temp-help-dcp
-callToActionLink: https://rgbportal.dca.njoag.gov/application-TWBRdcp/
-callToActionText: Apply for My Certification to Make DCPs
+notesMd: >+
+  Planning doc:
+  https://docs.google.com/document/d/1pvZxUu7oNqGu61FQ_Z9CwYVIqBW26uTH2PfV7-Vqnj4/edit?tab=t.0#heading=h.5ku5mzqkm00c
+
+
 industryId: ""
-agencyId: njdol
 syncToWebflow: true
-webflowName: Designated Classification Placements for Temporary Workers Certification
 ---
 
 &nbsp;

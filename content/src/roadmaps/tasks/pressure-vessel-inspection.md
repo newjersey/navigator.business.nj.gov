@@ -1,4 +1,23 @@
 ---
+id: pressure-vessel-inspection
+webflowId: 69b02de1e64f6940d8cd6125
+urlSlug: pressure-vessel-inspection
+name: Get Your Pressure Vessel Registered and Inspected
+displayname: pressure-vessel-inspection
+webflowName: Pressure Vessel Registration and Inspection
+filename: pressure-vessel-inspection
+callToActionLink: >-
+  https://www.nj.gov/labor/safetyandhealth/programs-services/boiler-pressure-vessel-compliance/index.shtml
+callToActionText: Visit the Bureau’s Page for More Information
+agencyId: njdol
+agencyAdditionalContext: >-
+  Division of Public Safety and Occupational Safety and Health, Bureau of Boiler
+  and Pressure Vessel Compliance
+industryId: generic
+summaryDescriptionMd: >-
+  If your pressure vessel is newly installed or recently replaced, **it must be
+  registered and inspected within 30 days**. Your pressure vessel may also need
+  to be inspected regularly to ensure it is working safely.
 notesMd: >-
   Working doc:
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.bp49p3vkr1w0
@@ -8,23 +27,7 @@ notesMd: >-
 
 
   5.12.25: In SME review
-summaryDescriptionMd: If your pressure vessel is newly installed or recently
-  replaced, **it must be registered and inspected within 30 days**. Your
-  pressure vessel may also need to be inspected regularly to ensure it is
-  working safely.
-urlSlug: pressure-vessel-inspection
-displayname: pressure-vessel-inspection
-name: Get Your Pressure Vessel Registered and Inspected
-id: pressure-vessel-inspection
-callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
-  oiler-pressure-vessel-compliance/index.shtml "
-callToActionText: Visit the Bureau’s Page for More Information
-industryId: generic
-agencyId: njdol
-agencyAdditionalContext: "Division of Public Safety and Occupational Safety and
-  Health, Bureau of Boiler and Pressure Vessel Compliance "
 syncToWebflow: true
-webflowName: Pressure Vessel Registration and Inspection
 ---
 
 ## Pressure Vessels That Need Inspection
