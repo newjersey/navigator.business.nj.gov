@@ -207,7 +207,7 @@ export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> 
       return response.data;
     })
     .catch((error: AxiosError) => {
-      throw error.response?.status;
+      throw { status: error.response?.status, data: error.response?.data };
     });
 };
 

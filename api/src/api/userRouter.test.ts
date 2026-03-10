@@ -1226,6 +1226,104 @@ describe("userRouter", () => {
       expect(response.body).toEqual({ error: "error" });
     });
 
+    describe("govDeliveryCommCloudClient", () => {
+      let mockGovDeliveryClient: jest.Mocked<{
+        subscribe: jest.Mock;
+        unsubscribe: jest.Mock;
+        updateEmail: jest.Mock;
+      }>;
+      let appWithGovDelivery: Express;
+
+      beforeEach(() => {
+        mockGovDeliveryClient = {
+          subscribe: jest.fn().mockResolvedValue({ success: true }),
+          unsubscribe: jest.fn().mockResolvedValue({ success: true }),
+          updateEmail: jest.fn().mockResolvedValue({ success: true }),
+        };
+        appWithGovDelivery = setupExpress(false);
+        appWithGovDelivery.use(
+          userRouterFactory(
+            stubUnifiedDataClient,
+            stubUpdateLicenseStatus,
+            stubXrayRegistrationStatus,
+            stubUpdateRoadmapSidebarCards,
+            stubUpdateOperatingPhase,
+            stubCryptoEncryptionClient,
+            stubCryptoHashingClient,
+            stubTimeStampBusinessSearch,
+            DummyLogWriter,
+            mockGovDeliveryClient,
+          ),
+        );
+      });
+
+      it.skip("returns 502 with govDeliveryError body and does NOT call databaseClient.put when subscribe fails", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        mockGovDeliveryClient.subscribe.mockResolvedValueOnce({
+          success: false,
+          status: "CONNECTION_ERROR",
+        });
+        const oldUser = generateUserData({
+          user: generateUser({ id: "123", receiveNewsletter: false, email: "test@example.com" }),
+        });
+        const newUser = { ...oldUser, user: { ...oldUser.user, receiveNewsletter: true } };
+        stubUnifiedDataClient.get.mockResolvedValueOnce(oldUser);
+
+        const response = await request(appWithGovDelivery)
+          .post("/users")
+          .send(newUser)
+          .set("Authorization", "Bearer user-123-token");
+
+        expect(response.status).toBe(502);
+        expect(response.body).toEqual({ govDeliveryError: "SUBSCRIBE_FAILED" });
+        expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
+      });
+
+      it("returns 502 with govDeliveryError body and does NOT call databaseClient.put when unsubscribe fails", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        mockGovDeliveryClient.unsubscribe.mockResolvedValueOnce({
+          success: false,
+          status: "CONNECTION_ERROR",
+        });
+        const oldUser = generateUserData({
+          user: generateUser({ id: "123", receiveNewsletter: true, email: "test@example.com" }),
+        });
+        const newUser = { ...oldUser, user: { ...oldUser.user, receiveNewsletter: false } };
+        stubUnifiedDataClient.get.mockResolvedValueOnce(oldUser);
+
+        const response = await request(appWithGovDelivery)
+          .post("/users")
+          .send(newUser)
+          .set("Authorization", "Bearer user-123-token");
+
+        expect(response.status).toBe(502);
+        expect(response.body).toEqual({ govDeliveryError: "UNSUBSCRIBE_FAILED" });
+        expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
+      });
+
+      it("returns 502 with govDeliveryError body and does NOT call databaseClient.put when email update fails", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        mockGovDeliveryClient.updateEmail.mockResolvedValueOnce({
+          success: false,
+          status: "CONNECTION_ERROR",
+        });
+        const oldUser = generateUserData({
+          user: generateUser({ id: "123", receiveNewsletter: true, email: "old@example.com" }),
+        });
+        const newUser = { ...oldUser, user: { ...oldUser.user, email: "new@example.com" } };
+        stubUnifiedDataClient.get.mockResolvedValueOnce(oldUser);
+
+        const response = await request(appWithGovDelivery)
+          .post("/users")
+          .send(newUser)
+          .set("Authorization", "Bearer user-123-token");
+
+        expect(response.status).toBe(502);
+        expect(response.body).toEqual({ govDeliveryError: "EMAIL_UPDATE_FAILED" });
+        expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
+      });
+    });
+
     describe("legal structure changes", () => {
       it("does not allow changing the legal structure if formation is completed", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));

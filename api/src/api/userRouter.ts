@@ -1,5 +1,9 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import {
+  GovDeliveryCommCloudClientType,
+  syncNewsletterSubscription,
+} from "@domain/newsletter/syncNewsletterSubscription";
+import {
   CryptoClient,
   DatabaseClient,
   TimeStampBusinessSearch,
@@ -148,6 +152,7 @@ export const userRouterFactory = (
   hashingClient: CryptoClient,
   timeStampBusinessSearch: TimeStampBusinessSearch,
   logger: LogWriterType,
+  govDeliveryCommCloudClient?: GovDeliveryCommCloudClientType,
 ): Router => {
   const router = Router();
   const encryptFields = encryptFieldsFactory(encryptionDecryptionClient, hashingClient);
@@ -287,8 +292,30 @@ export const userRouterFactory = (
     const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
 
+    const existingUserData: UserData | undefined = (await databaseClient
+      .get(userData.user.id)
+      .catch(() => {})) as UserData | undefined;
+
+    let userDataForSave = userDataWithUpdatedISO;
+    if (govDeliveryCommCloudClient) {
+      const syncResult = await syncNewsletterSubscription(
+        existingUserData,
+        userDataWithUpdatedISO,
+        govDeliveryCommCloudClient,
+      );
+      if (!syncResult.ok) {
+        const status = StatusCodes.BAD_GATEWAY;
+        res.status(status).json({ govDeliveryError: syncResult.errorType });
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, govDeliveryError: ${syncResult.errorType}, userId: ${postedUserBodyId}, duration: ${Date.now() - requestStart}ms`,
+        );
+        return;
+      }
+      userDataForSave = syncResult.userData;
+    }
+
     databaseClient
-      .put(userDataWithUpdatedISO)
+      .put(userDataForSave)
       .then((result: UserData) => {
         const status = StatusCodes.OK;
         res.status(status).json(result);
