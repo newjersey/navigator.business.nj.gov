@@ -64,6 +64,11 @@ export interface NewsletterResponse {
   status: NewsletterStatus;
 }
 
+export type GovDeliveryErrorType =
+  | "SUBSCRIBE_FAILED"
+  | "UNSUBSCRIBE_FAILED"
+  | "EMAIL_UPDATE_FAILED";
+
 export interface UserTestingResponse {
   success?: boolean;
   status: UserTestingStatus;

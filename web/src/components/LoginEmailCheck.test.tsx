@@ -37,7 +37,7 @@ describe("<LoginEmailCheck />", () => {
 
   it("displays an error when a matching user is not found", async () => {
     const email = "test@example.com";
-    mockApi.postUserEmailCheck.mockReturnValue(Promise.reject(404));
+    mockApi.postUserEmailCheck.mockReturnValue(Promise.reject({ status: 404 }));
     render(<LoginEmailCheck />);
 
     const emailField = screen.getByLabelText("Email");
@@ -74,12 +74,32 @@ describe("<LoginEmailCheck />", () => {
     });
   });
 
+  it("displays an error when the service is unavailable", async () => {
+    const email = "test@example.com";
+    mockApi.postUserEmailCheck.mockReturnValue(Promise.reject({ status: 500 }));
+    render(<LoginEmailCheck />);
+
+    const emailField = screen.getByLabelText("Email");
+    fireEvent.change(emailField, { target: { value: email } });
+    const submitButton = screen.getByRole("button", {
+      name: Config.checkAccountEmailPage.inputButton,
+    });
+    fireEvent.click(submitButton);
+
+    expect(
+      await screen.findByText(Config.checkAccountEmailPage.serviceNotAvailableError),
+    ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(triggerSignIn).not.toHaveBeenCalled();
+    });
+  });
+
   it("displays a default error message if an unknown error occurs", async () => {
     render(<LoginEmailCheck />);
     const email = "test@example.com";
     // Doesn't matter what status code we use here, as long as it's not
     // one that we currently account for in our error handling.
-    mockApi.postUserEmailCheck.mockReturnValue(Promise.reject(418));
+    mockApi.postUserEmailCheck.mockReturnValue(Promise.reject({ status: 418 }));
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });

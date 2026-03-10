@@ -1,0 +1,14 @@
+{
+  "scenarioName": "GovDeliveryUnsubscribe",
+  "requiredScenarioState": "Failure",
+  "request": {
+    "method": "DELETE",
+    "urlPattern": "/api/account/.*/subscriptions.xml"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/xml"
+    }
+  }
+}
