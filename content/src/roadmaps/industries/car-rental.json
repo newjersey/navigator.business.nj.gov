@@ -1,6 +1,6 @@
 {
   "naicsCodes": "532111, 441110, 441120",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "transportation-and-warehousing",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -75,7 +75,10 @@
     }
   ],
   "name": "Car Rental and Dealerships ",
-  "nonEssentialQuestionsIds": ["weights-measures", "bus-initial-inspection"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "bus-initial-inspection"
+  ],
   "displayname": "car-rental ",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false

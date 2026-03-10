@@ -1,6 +1,6 @@
 {
   "naicsCodes": "238210",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {

@@ -1,6 +1,6 @@
 {
   "naicsCodes": "484110, 484121, 484122, 484220, 484230",
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "transportation-and-warehousing",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -98,7 +98,11 @@
     }
   ],
   "name": "Trucking",
-  "nonEssentialQuestionsIds": ["weights-measures", "vehicle-dealership-q", "flashing-light-permit"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "vehicle-dealership-q",
+    "flashing-light-permit"
+  ],
   "displayname": "trucking",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
