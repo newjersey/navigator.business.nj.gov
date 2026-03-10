@@ -1,16 +1,18 @@
 ---
-summaryDescriptionMd: Any commercial vehicle crossing state lines must register
-  with the U.S. Department of Transportation (USDoT) to obtain a registration
-  number.
-urlSlug: trucking-usdot
-displayname: trucking-usdot
-name: Register Your Vehicle with the U.S. Department of Transportation
 id: trucking-usdot
-callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
+webflowId: 69b02dec0fa503b0b245e5ac
+urlSlug: trucking-usdot
+name: Register Your Vehicle with the U.S. Department of Transportation
+displayname: trucking-usdot
+webflowName: Commercial Vehicle USDoT Registration
+filename: trucking-usdot
+callToActionLink: "https://portal.fmcsa.dot.gov/UrsRegistrationWizard/"
 callToActionText: Register My Vehicle with USDoT
 agencyAdditionalContext: U.S. Department of Transportation
+summaryDescriptionMd: >-
+  Any commercial vehicle crossing state lines must register with the U.S.
+  Department of Transportation (USDoT) to obtain a registration number.
 syncToWebflow: true
-webflowName: Commercial Vehicle USDoT Registration
 ---
 
 :::infoAlert

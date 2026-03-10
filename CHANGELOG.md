@@ -1,3 +1,17 @@
+# [2026.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.5.0...v2026.6.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency winston to v3.19.0 ([562be7d](https://github.com/newjersey/navigator.business.nj.gov/commit/562be7d0953936fd9c88522699576bc244cdab9f))
+* **deps:** update storybook to v7.6.23 ([c61b133](https://github.com/newjersey/navigator.business.nj.gov/commit/c61b1330463d40fe3011d3c98265dc7802961ff3))
+
+
+### Features
+
+* [AB#17326](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17326) update tasks in 'Tasks - All' for Webflow sync ([4eaa35c](https://github.com/newjersey/navigator.business.nj.gov/commit/4eaa35c707cb15f2bbf73643f8031de855395ab3))
+* [AB#17497](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17497) removes 'Experience B' on the landing page ([0b20424](https://github.com/newjersey/navigator.business.nj.gov/commit/0b204242edb6dc58a392f47d2feb545ca5a5b145))
+
 # [2026.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.4.0...v2026.5.0) (2026-02-25)
 
 

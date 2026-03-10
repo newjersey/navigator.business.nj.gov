@@ -1,21 +1,26 @@
 ---
-notesMd: ""
+id: daycare-site-requirements
+webflowId: 69b02dd8529540084083d38e
+urlSlug: daycare-site-requirements
+name: Prepare for State and Local Site Requirements
+displayname: daycare-site-requirements
+webflowName: Daycare Site Requirements
+filename: daycare-site-requirements
 summaryDescriptionMd: >-
   :::infoAlert
    These requirements are for a child care facility with 6 or more children. Go to [your profile ](https://dev.account.business.nj.gov/profile)to change this selection if necessary.
   :::
 
 
-  Before opening your daycare, New Jersey Department of Children and Families (DCF) and your local government require your building and property to be inspected.
+  Before opening your daycare, New Jersey Department of Children and Families
+  (DCF) and your local government require your building and property to be
+  inspected.
 
 
-  You can schedule a free preliminary inspection with DCF's Office of Licensing at (877) 667-9845.
-urlSlug: daycare-site-requirements
-displayname: daycare-site-requirements
-name: Prepare for State and Local Site Requirements
-id: daycare-site-requirements
+  You can schedule a free preliminary inspection with DCF's Office of Licensing
+  at (877) 667-9845.
+notesMd: ""
 syncToWebflow: true
-webflowName: Daycare Site Requirements
 ---
 
 ## DCF Requirements

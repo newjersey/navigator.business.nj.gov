@@ -1,4 +1,14 @@
 ---
+id: trucking-cdl
+webflowId: 69b02de90fa503b0b245e3a4
+urlSlug: trucking-cdl
+name: Make Sure You or Your Drivers Have a Commercial Driver's License (CDL)
+displayname: trucking-cdl
+webflowName: Commercial Driver's License
+filename: trucking-cdl
+callToActionLink: "https://www.nj.gov/mvc/pdf/license/BA-208C.pdf"
+callToActionText: Apply for My CDL
+agencyId: nj-motor-vehicle
 summaryDescriptionMd: >-
   A Commercial Driver License (CDL) is required to operate large, heavy, or
   specialized commercial vehicles. A business owner only needs a CDL if they
@@ -9,46 +19,56 @@ summaryDescriptionMd: >-
   &nbsp;
 
 
-  The type of CDL needed depends on vehicle type and endorsement, which are as follows:
+  The type of CDL needed depends on vehicle type and endorsement, which are as
+  follows:
 
 
-  * Class A, for vehicles weighing 26,001 or more and towing a vehicle over 10,000 lbs.
+  * Class A, for vehicles weighing 26,001 or more and towing a vehicle over
+  10,000 lbs.
 
-  * Class B, for vehicles weighing 26,001 or more lbs that aren’t towing a heavy trailer.
+  * Class B, for vehicles weighing 26,001 or more lbs that aren’t towing a heavy
+  trailer.
 
-  * Class B or C with “P” Endorsement, for vehicles designed to transport 16 or more passengers.
+  * Class B or C with “P” Endorsement, for vehicles designed to transport 16 or
+  more passengers.
 
-  * Class B or C with “S” Endorsement, for school buses used to transport students. **School buses require both an “S” and “P” CDL endorsement.**
+  * Class B or C with “S” Endorsement, for school buses used to transport
+  students. **School buses require both an “S” and “P” CDL endorsement.**
 
-  * Class A, B, or C  with “H” Endorsement, for vehicles transporting hazardous materials requiring placards
+  * Class A, B, or C  with “H” Endorsement, for vehicles transporting hazardous
+  materials requiring placards
 
-  * Class A or B with “N” Endorsement, for vehicles carrying liquid cargo in large tanks.
+  * Class A or B with “N” Endorsement, for vehicles carrying liquid cargo in
+  large tanks.
 
-  * Class A with “T” Endorsement, for combination vehicles with two or more trailers.
+  * Class A with “T” Endorsement, for combination vehicles with two or more
+  trailers.
 
-  * Class A or B with “X” Endorsement, for vehicles that require a combination of Hazmat (“H”) and Tanker (“N”) endorsements, such as fuel tankers and chemical transport trucks
-
-
-  :::largeCallout{ showHeader="true" headerText="Keep in mind:"  calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
-
-
-  * Endorsements (“P,” “S,” “H,” “T,” “X”)  are only added to a CDL upon request and require that applicants pass [additional knowledge and skills tests.](https://www.nj.gov/mvc/drivertopics/cdlendorsements.htm)
+  * Class A or B with “X” Endorsement, for vehicles that require a combination
+  of Hazmat (“H”) and Tanker (“N”) endorsements, such as fuel tankers and
+  chemical transport trucks
 
 
-  * You must apply for a CDL in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard) before showing up.
+  :::largeCallout{ showHeader="true" headerText="Keep in mind:" 
+  calloutType="informational" amountIconText="" filingTypeIconText=""
+  frequencyIconText="" phoneIconText="" emailIconText="" }
+
+
+  * Endorsements (“P,” “S,” “H,” “T,” “X”)  are only added to a CDL upon request
+  and require that applicants pass [additional knowledge and skills
+  tests.](https://www.nj.gov/mvc/drivertopics/cdlendorsements.htm)
+
+
+  * You must apply for a CDL in person. Complete the appropriate form(s) and
+  take them to any NJ MVC vehicle center (or complete the forms on site). Be
+  sure to [make an appointment
+  online](https://telegov.njportal.com/njmvc/AppointmentWizard) before showing
+  up.
 
 
   :::
-urlSlug: trucking-cdl
-displayname: trucking-cdl
-name: Make Sure You or Your Drivers Have a Commercial Driver's License (CDL)
-id: trucking-cdl
-callToActionLink: https://www.nj.gov/mvc/pdf/license/BA-208C.pdf
-callToActionText: Apply for My CDL
-agencyId: nj-motor-vehicle
 formName: BA-208C
 syncToWebflow: true
-webflowName: Commercial Driver's License
 ---
 
 &nbsp;

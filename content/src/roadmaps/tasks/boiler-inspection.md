@@ -1,4 +1,22 @@
 ---
+id: boiler-inspection
+webflowId: 69b02dd4e64f6940d8cd5bc0
+urlSlug: boiler-inspection
+name: Get Your Boiler Registered and Inspected
+displayname: boiler-inspection
+webflowName: Boiler Registration and Inspection
+filename: boiler-inspection
+callToActionLink: >-
+  https://www.nj.gov/labor/safetyandhealth/programs-services/boiler-pressure-vessel-compliance/index.shtml
+callToActionText: Visit the Bureau’s Page for More Information
+agencyId: njdol
+agencyAdditionalContext: >-
+  Division of Public Safety and Occupational Safety and Health, Bureau of Boiler
+  and Pressure Vessel Compliance
+summaryDescriptionMd: >-
+  If your boiler is newly installed or recently replaced, **it must be
+  registered and inspected within 30 days**. Your boiler may also need to be
+  inspected regularly to ensure it is working safely.
 notesMd: >-
   Working doc:
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.ndgv526k6eks
@@ -7,27 +25,14 @@ notesMd: >-
   5.13: Updated note callout to quick ref. Final publish for this task!
 
 
-  5.2: Updating callout to "note", or quick ref callout, but not republishing until that callout looks like it should (I know Faraz is working on this now!)
+  5.2: Updating callout to "note", or quick ref callout, but not republishing
+  until that callout looks like it should (I know Faraz is working on this now!)
 
 
   4.21: SME approved, publishing task
 
   4.18: Revisions made with guidance from Jess
-summaryDescriptionMd: If your boiler is newly installed or recently replaced,
-  **it must be registered and inspected within 30 days**. Your boiler may also
-  need to be inspected regularly to ensure it is working safely.
-urlSlug: boiler-inspection
-displayname: boiler-inspection
-name: Get Your Boiler Registered and Inspected
-id: boiler-inspection
-callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
-  oiler-pressure-vessel-compliance/index.shtml "
-callToActionText: Visit the Bureau’s Page for More Information
-agencyId: njdol
-agencyAdditionalContext: "Division of Public Safety and Occupational Safety and
-  Health, Bureau of Boiler and Pressure Vessel Compliance "
 syncToWebflow: true
-webflowName: Boiler Registration and Inspection
 ---
 
 ## Boilers That Need Inspection

@@ -1,23 +1,26 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1yNGtzwQuNN0_mH5fguWruu_9BgJ5v25BegkQ\
-  Av4xC1g/edit)"
-summaryDescriptionMd: You must apply for an `individual
-  approval|individual-approval` for your carnival or amusement ride if it
-  doesn't have a `type certification|type-certification`. You need an individual
-  approval for each ride before you can get a ride permit.
-urlSlug: individual-approval-permit
-displayname: individual-approval-permit
-name: Obtain a Carnival or Amusement Ride Individual Approval, if Applicable
 id: individual-approval-permit
-callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rides/IA_application.pdf
+webflowId: 69b02ddc8e9f2c5aa2a10294
+urlSlug: individual-approval-permit
+name: "Obtain a Carnival or Amusement Ride Individual Approval, if Applicable"
+displayname: individual-approval-permit
+webflowName: Carnival or Amusement Ride Individual Approval
+filename: individual-approval-permit
+callToActionLink: "https://www.nj.gov/dca/codes/forms/pdf_rides/IA_application.pdf"
 callToActionText: Apply for My Ride's Individual Approval
-industryId: independent-artist
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of State and Local Code Inspections
+industryId: independent-artist
 webflowType: object-vehicle
+summaryDescriptionMd: >-
+  You must apply for an `individual approval|individual-approval` for your
+  carnival or amusement ride if it doesn't have a `type
+  certification|type-certification`. You need an individual approval for each
+  ride before you can get a ride permit.
+notesMd: >-
+  [Muni planning
+  doc](https://docs.google.com/document/d/1yNGtzwQuNN0_mH5fguWruu_9BgJ5v25BegkQAv4xC1g/edit)
 syncToWebflow: true
-webflowName: Carnival or Amusement Ride Individual Approval
 ---
 
 ---

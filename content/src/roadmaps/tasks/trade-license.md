@@ -1,16 +1,19 @@
 ---
-summaryDescriptionMd: Ensure you, your employees, or subcontractors have any
-  required trade license(s).
-urlSlug: trade-license
-displayname: trade-license
-name: Ensure You, Your Employees, or Subcontractors are Licensed
 id: trade-license
+webflowId: 69b02de63c74176b38644aab
+urlSlug: trade-license
+name: "Ensure You, Your Employees, or Subcontractors are Licensed"
+displayname: trade-license
+webflowName: "Contractor: Ensure You, Your Employees, or Subcontractors are Licensed"
+filename: trade-license
 callToActionLink: "https://newjersey.mylicense.com/verification/Search.aspx?facility=N"
 callToActionText: "Verify My, My Employees’, or Subcontractors’ Trade Licenses"
-industryId: home-contractor
 agencyId: nj-consumer-affairs
+industryId: home-contractor
+summaryDescriptionMd: >-
+  Ensure you, your employees, or subcontractors have any required trade
+  license(s).
 syncToWebflow: true
-webflowName: "Contractor: Ensure You, Your Employees, or Subcontractors are Licensed"
 ---
 
 ## License/Permit by Role

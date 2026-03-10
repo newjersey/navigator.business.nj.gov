@@ -1,28 +1,35 @@
 ---
+id: trucking-irp
+webflowId: 69b02deb0fa503b0b245e524
+urlSlug: trucking-irp
+name: Register Your Vehicle(s) Under the International Registration Plan (IRP)
+displayname: trucking-irp
+webflowName: Vehicle International Registration Plan
+filename: trucking-irp
+callToActionLink: "https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf"
+callToActionText: Register With the IRP
+agencyId: nj-motor-vehicle
 summaryDescriptionMd: >
-  :::largeCallout{ showHeader="true" headerText=""
-  calloutType="informational" amountIconText="" filingTypeIconText=""
-  frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="" calloutType="informational"
+  amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText=""
+  emailIconText="" }
 
 
-  Recently purchased, qualifying vehicles cannot be registered with the NJ MVC until IRP-issued, appointed license plates and cab card are received by the owner.
+  Recently purchased, qualifying vehicles cannot be registered with the NJ MVC
+  until IRP-issued, appointed license plates and cab card are received by the
+  owner.
 
 
   :::
 
 
-  Before transporting passengers or hauling loads across state lines, your vehicles must be registered with the IRP in the state where you formed your business. The IRP is a reciprocity agreement between all states in the U.S. and Canada, and **allows legal operation between jurisdictions.**
-urlSlug: trucking-irp
-displayname: trucking-irp
-name: Register Your Vehicle(s) Under the International Registration Plan (IRP)
-id: trucking-irp
-callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
-callToActionText: Register With the IRP
-agencyId: nj-motor-vehicle
+  Before transporting passengers or hauling loads across state lines, your
+  vehicles must be registered with the IRP in the state where you formed your
+  business. The IRP is a reciprocity agreement between all states in the U.S.
+  and Canada, and **allows legal operation between jurisdictions.**
 agencyAdditionalContext: ""
 formName: IRP-7
 syncToWebflow: true
-webflowName: Vehicle International Registration Plan
 ---
 
 &nbsp;

@@ -1,22 +1,24 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQ\
-  oW2uKYE/edit?usp=sharing)"
+id: hotel-motel-registration
+webflowId: 69b02ddc0fa503b0b245db9a
+urlSlug: hotel-motel-registration
+name: "Register Your Hotel, Motel, or Guesthouse"
+displayname: hotel-motel-registration
+webflowName: "Hotel, Motel, or Guesthouse Registration"
+filename: hotel-motel-registration
+callToActionLink: "https://njdcaportal.dynamics365portals.us/ultra-bhi-home/"
+callToActionText: "Register My Hotel, Motel, or Guesthouse"
+agencyId: nj-community-affairs
+agencyAdditionalContext: Bureau of Housing Inspection
+industryId: lodging
 summaryDescriptionMd: >
   If you own a newly built hotel, motel, or guesthouse with ten rooms or more,
   you must register it with the State. If you are the new owner of an existing
   building, you must update the current registration.
-urlSlug: hotel-motel-registration
-displayname: hotel-motel-registration
-name: Register Your Hotel, Motel, or Guesthouse
-id: hotel-motel-registration
-callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
-callToActionText: Register My Hotel, Motel, or Guesthouse
-industryId: lodging
-agencyId: nj-community-affairs
-agencyAdditionalContext: Bureau of Housing Inspection
+notesMd: >-
+  [Muni planning
+  doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQoW2uKYE/edit?usp=sharing)
 syncToWebflow: true
-webflowName: Hotel, Motel, or Guesthouse Registration
 ---
 
 ## Application Requirements

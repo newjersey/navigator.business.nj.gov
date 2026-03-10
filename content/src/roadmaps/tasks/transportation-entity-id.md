@@ -1,4 +1,14 @@
 ---
+id: transportation-entity-id
+webflowId: 69b02de83bd86c98f4eb2866
+urlSlug: transportation-entity-id
+name: Get Your Motor Vehicle Commission EIN
+displayname: transportation-entity-id
+webflowName: Motor Vehicle Commission EIN
+filename: transportation-entity-id
+callToActionLink: "https://www.nj.gov/mvc/pdf/business/BA-8.pdf "
+callToActionText: Get My MVC EIN
+agencyId: nj-motor-vehicle
 summaryDescriptionMd: >-
   You need a  Motor Vehicle Commission `(MVC) Entity Identification Number
   (EIN)|mvc-entity-id` , once called the Corporation Code (Corpcode), to get:
@@ -9,16 +19,8 @@ summaryDescriptionMd: >-
   * Registration for personal or commercial vehicles under a business name
 
   * Licenses and permits related to operating a motor vehicle industry business
-urlSlug: transportation-entity-id
-displayname: transportation-entity-id
-name: Get Your Motor Vehicle Commission EIN
-id: transportation-entity-id
-callToActionLink: "https://www.nj.gov/mvc/pdf/business/BA-8.pdf "
-callToActionText: Get My MVC EIN
-agencyId: nj-motor-vehicle
 formName: BA-8
 syncToWebflow: true
-webflowName: Motor Vehicle Commission EIN
 ---
 
 ## Eligibility Criteria

@@ -1,4 +1,22 @@
 ---
+id: refrigeration-inspection
+webflowId: 69b02de16aa1f85c4d975ae0
+urlSlug: refrigeration-inspection
+name: Get Your Refrigeration System Registered and Inspected
+displayname: refrigeration-inspection
+webflowName: Refrigeration System Registration and Inspection
+filename: refrigeration-inspection
+callToActionLink: >-
+  https://www.nj.gov/labor/safetyandhealth/programs-services/boiler-pressure-vessel-compliance/index.shtml
+callToActionText: Visit the Bureau’s Page for More Information
+agencyAdditionalContext: >-
+  New Jersey Department of Labor and Workforce Development, Division of Public
+  Safety and Occupational Safety and Health, Bureau of Boiler and Pressure
+  Vessel Compliance
+summaryDescriptionMd: >-
+  If your refrigeration system is newly installed or recently replaced, **it
+  must be registered and inspected within 30 days**. Your refrigeration system
+  may also need to be inspected regularly to ensure it is working safely.
 notesMd: >-
   Working doc:
   https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.qv11ld6e66f\
@@ -11,23 +29,9 @@ notesMd: >-
   5.12.25: In SME review
 
 
-  Note: Drafting in the CMS prior to internal review in order to show the SME in a call on 5.8.25
-summaryDescriptionMd: If your refrigeration system is newly installed or
-  recently replaced, **it must be registered and inspected within 30 days**.
-  Your refrigeration system may also need to be inspected regularly to ensure it
-  is working safely.
-urlSlug: refrigeration-inspection
-displayname: refrigeration-inspection
-name: Get Your Refrigeration System Registered and Inspected
-id: refrigeration-inspection
-callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
-  oiler-pressure-vessel-compliance/index.shtml "
-callToActionText: Visit the Bureau’s Page for More Information
-agencyAdditionalContext: "New Jersey Department of Labor and Workforce
-  Development, Division of Public Safety and Occupational Safety and Health,
-  Bureau of Boiler and Pressure Vessel Compliance "
+  Note: Drafting in the CMS prior to internal review in order to show the SME in
+  a call on 5.8.25
 syncToWebflow: true
-webflowName: Refrigeration System Registration and Inspection
 ---
 
 ## Refrigeration Systems That Need Inspection

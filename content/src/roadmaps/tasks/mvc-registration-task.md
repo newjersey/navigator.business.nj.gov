@@ -1,5 +1,15 @@
 ---
-notesMd: ""
+id: mvc-registration-task
+webflowId: 69b02ddf529540084083d7b6
+urlSlug: mvc-register-task
+name: Register Your Business-Owned Vehicle(s) with the NJ MVC
+displayname: mvc-register-task
+webflowName: Business Vehicle Registration
+filename: mvc-registration-task
+callToActionLink: "https://www.nj.gov/mvc/vehicles/reginitial.htm?utm"
+callToActionText: Register My Business Vehicle(s)
+agencyId: nj-motor-vehicle
+industryId: car-rental
 summaryDescriptionMd: >-
   :::largeCallout{ showHeader="true" headerText="Keep in mind:"
   calloutType="informational" amountIconText="" filingTypeIconText=""
@@ -8,37 +18,39 @@ summaryDescriptionMd: >-
 
   * A Motor Vehicle Commission
 
-  (MVC) Entity Identification Number (EIN) is required before registering a vehicle
+  (MVC) Entity Identification Number (EIN) is required before registering a
+  vehicle
 
 
-  * You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
+  * You must apply for a title in person. Complete the appropriate form(s) and
+  take them to any NJ MVC vehicle center (or complete the forms on site). Be
+  sure to [make an appointment
+  online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing
+  up.
 
 
   :::
 
 
-  Your business vehicles must have a valid license plate and registration card to be legally driven on public roads. This includes:
+  Your business vehicles must have a valid license plate and registration card
+  to be legally driven on public roads. This includes:
 
 
-  * Trucks, vans, or other vehicles that exceed a certain weight limit (usually over 10,000 pounds)
+  * Trucks, vans, or other vehicles that exceed a certain weight limit (usually
+  over 10,000 pounds)
 
   * Vehicles used to carry freight
 
   * Vehicles used to carry passengers, such as taxis, limousines, and buses
 
 
-  Typically,  when you purchase a new vehicle from a New Jersey dealer, **they register it for you as part of the sales process.** If you opt out, or have a vehicle that was registered out of state, you, as the buyer, are responsible for registering it in NJ.
-urlSlug: mvc-register-task
-displayname: mvc-register-task
-name: Register Your Business-Owned Vehicle(s) with the NJ MVC
-id: mvc-registration-task
-callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
-callToActionText: Register My Business Vehicle(s)
-industryId: car-rental
-agencyId: nj-motor-vehicle
+  Typically,  when you purchase a new vehicle from a New Jersey dealer, **they
+  register it for you as part of the sales process.** If you opt out, or have a
+  vehicle that was registered out of state, you, as the buyer, are responsible
+  for registering it in NJ.
+notesMd: ""
 formName: BA-49
 syncToWebflow: true
-webflowName: Business Vehicle Registration
 ---
 
 ## Application Requirements

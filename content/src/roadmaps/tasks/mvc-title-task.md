@@ -1,5 +1,14 @@
 ---
-notesMd: ""
+id: mvc-title-task
+webflowId: 69b02ddfa6e4215fe9309a57
+urlSlug: mvc-title-task
+name: Get a Title for Your Business Vehicle(s)
+displayname: mvc-title-task
+webflowName: Business Vehicle Title
+filename: mvc-title-task
+callToActionLink: "https://www.nj.gov/mvc/vehicles/titlenew.htm"
+callToActionText: Get My Vehicle Title
+agencyId: nj-motor-vehicle
 summaryDescriptionMd: >-
   :::largeCallout{ showHeader="true" headerText="Keep in mind:"
   calloutType="informational" amountIconText="" filingTypeIconText=""
@@ -8,10 +17,15 @@ summaryDescriptionMd: >-
 
   * A Motor Vehicle Commission
 
-  (MVC) Entity Identification Number (EIN) is required before applying for or changing a vehicle title.
+  (MVC) Entity Identification Number (EIN) is required before applying for or
+  changing a vehicle title.
 
 
-  * You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
+  * You must apply for a title in person. Complete the appropriate form(s) and
+  take them to any NJ MVC vehicle center (or complete the forms on site). Be
+  sure to [make an appointment
+  online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing
+  up.
 
 
   :::
@@ -23,7 +37,10 @@ summaryDescriptionMd: >-
   &nbsp;
 
 
-  Typically, if you purchase a new vehicle from a New Jersey dealer, you will get a title as part of the sales process. If you opt out of this, you as the buyer are responsible for completing this process **within 10 days of the vehicle's purchase.**
+  Typically, if you purchase a new vehicle from a New Jersey dealer, you will
+  get a title as part of the sales process. If you opt out of this, you as the
+  buyer are responsible for completing this process **within 10 days of the
+  vehicle's purchase.**
 
 
   &nbsp;
@@ -36,21 +53,16 @@ summaryDescriptionMd: >-
 
   * Has a title owned by anyone other than the present business owner
 
-  * Has a title including a lien you want removed, or if you want to add a lien to the title
+  * Has a title including a lien you want removed, or if you want to add a lien
+  to the title
 
   * Does not have a title (this is rare)
 
-  * Is a boat or watercraft (vessel), longer than 12 feet, that is owned by someone other than the intended business owner
-urlSlug: mvc-title-task
-displayname: mvc-title-task
-name: Get a Title for Your Business Vehicle(s)
-id: mvc-title-task
-callToActionLink: https://www.nj.gov/mvc/vehicles/titlenew.htm
-callToActionText: Get My Vehicle Title
-agencyId: nj-motor-vehicle
+  * Is a boat or watercraft (vessel), longer than 12 feet, that is owned by
+  someone other than the intended business owner
+notesMd: ""
 formName: OS/SS-UTA
 syncToWebflow: true
-webflowName: Business Vehicle Title
 ---
 
 ## Application Requirements

@@ -1,21 +1,24 @@
 ---
-notesMd: "LLM assisted:
-  https://docs.google.com/document/d/1a4QD1VvRF-LmVgJiDZML05mkK-GfCBPpyap9Aw8SZ\
-  5I/edit?tab=t.0"
-summaryDescriptionMd: You need a local anesthesia permit to give local
-  anesthetic injections as a dental hygienist in New Jersey.
-urlSlug: local-anesthesia-permit
-displayname: local-anesthesia-permit
-name: Apply for Your Local Anesthesia Permit
 id: local-anesthesia-permit
-callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Applicati\
-  on-for-Local-Anesthesia-Permit-for-Dental-Hygienists.pdf "
-callToActionText: Apply for My Local Anesthesia Permit
-industryId: healthcare
-agencyId: nj-consumer-affairs
-webflowType: individual-license
-syncToWebflow: true
+webflowId: 69b02ddd8e9f2c5aa2a102d0
+urlSlug: local-anesthesia-permit
+name: Apply for Your Local Anesthesia Permit
+displayname: local-anesthesia-permit
 webflowName: Local Anesthesia Permit
+filename: local-anesthesia-permit
+callToActionLink: >-
+  https://www.njconsumeraffairs.gov/den/Applications/Application-for-Local-Anesthesia-Permit-for-Dental-Hygienists.pdf
+callToActionText: Apply for My Local Anesthesia Permit
+agencyId: nj-consumer-affairs
+industryId: healthcare
+webflowType: individual-license
+summaryDescriptionMd: >-
+  You need a local anesthesia permit to give local anesthetic injections as a
+  dental hygienist in New Jersey.
+notesMd: >-
+  LLM assisted:
+  https://docs.google.com/document/d/1a4QD1VvRF-LmVgJiDZML05mkK-GfCBPpyap9Aw8SZ5I/edit?tab=t.0
+syncToWebflow: true
 ---
 
 ## Eligibility Criteria

@@ -1,4 +1,14 @@
 ---
+id: transportation-assessment-usdot
+webflowId: 69b02de76aa1f85c4d975fdb
+urlSlug: transportation-assessment-usdot
+name: "Get Your USDoT Number, if Applicable"
+displayname: transportation-assessment-usdot
+webflowName: Commercial Vehicle USDoT Number
+filename: transportation-assessment-usdot
+callToActionLink: "https://portal.fmcsa.dot.gov/UrsRegistrationWizard/"
+callToActionText: Get My USDoT Number
+agencyAdditionalContext: Federal Motor Carrier Safety Administration
 summaryDescriptionMd: >-
 
 
@@ -7,16 +17,12 @@ summaryDescriptionMd: >-
   :::
 
 
-  You may be required to get a United States Department of Transportation (USDoT) number for your commercial vehicle if you are crossing state lines. Use the [self-assessment tool](https://www.fmcsa.dot.gov/registration/do-i-need-usdot-number) to determine if you must complete this task.
-urlSlug: transportation-assessment-usdot
-displayname: transportation-assessment-usdot
-name: Get Your USDoT Number, if Applicable
-id: transportation-assessment-usdot
-callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
-callToActionText: Get My USDoT Number
-agencyAdditionalContext: Federal Motor Carrier Safety Administration
+  You may be required to get a United States Department of Transportation
+  (USDoT) number for your commercial vehicle if you are crossing state lines.
+  Use the [self-assessment
+  tool](https://www.fmcsa.dot.gov/registration/do-i-need-usdot-number) to
+  determine if you must complete this task.
 syncToWebflow: true
-webflowName: Commercial Vehicle USDoT Number
 ---
 
 ## Application Requirements

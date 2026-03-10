@@ -1,46 +1,15 @@
 ---
-agencyId: nj-revenue-enterprise-services
+id: cigarette-license
+webflowId: 69b02dd56b4992dc4d3e1eb1
+urlSlug: cigarette-license
+name: Apply for Your Cigarette License
+displayname: cigarette-license
+webflowName: Cigarette License
 filename: cigarette-license
-notesMd: >-
-  https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/6751
-
-
-  Planning doc: https://docs.google.com/document/d/1MdJ66sV4W0PRiySHYoXzpE62F43H3YHvMK1wYczHW70/edit?tab=t.0
-
-
-  \---
-
-
-  SME feedback, **From:** Friedmann, Brian \[TREAS] [Brian.Friedmann@treas.nj.gov](mailto:Brian.Friedmann@treas.nj.gov)\
-
-  **Sent:** Tuesday, November 26, 2024 2:55 PM\
-
-  \
-
-  1.        ‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document.
-
-
-  This license is for rolled cigarettes only.  Other tobacco products do not require this license to be sold.
-
-
-  2.       The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed.
-
-
-  Both this and the supplier information are only needed if applicable to the license type selected at the top of the application.
-
-
-  3.       If needed there should be a bullet for vending machine license which states what information is needed.
-
-
-  4.       Under “once completed…”, it should be changed to say “A printed license will be sent directly to your business location.”
-
-
-
-
-  \===
-
-
-  Further feedback received by Jaime and Kellie on 10 Dec 2024 (see planning doc)
+callToActionLink: "https://www.njportal.com/DOR/CM100/Content/pdfs/cm100CigApp.pdf "
+callToActionText: Apply for My Cigarette License
+agencyId: nj-revenue-enterprise-services
+webflowType: business-license
 summaryDescriptionMd: >-
   You need a cigarette license to do either of the following in New Jersey:
 
@@ -52,23 +21,20 @@ summaryDescriptionMd: >-
   * Operate as a manufacturer sales representative
 
 
-  If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
+  If you sell container e-liquid and plan to have more than 50% of your retail
+  sales come from electronic smoking devices, related accessories, and/or liquid
+  nicotine, you must [apply for a Vapor Business License with the NJ Division of
+  Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
 
 
   &nbsp;
 
 
-  If you are a manufacturer (not a manufacturer representative), contact the Cigarette Tax Hotline at (609) 633-9000.
-urlSlug: cigarette-license
-displayname: cigarette-license
-name: Apply for Your Cigarette License
-id: cigarette-license
-callToActionLink: "https://www.njportal.com/DOR/CM100/Content/pdfs/cm100CigApp.pdf "
-callToActionText: Apply for My Cigarette License
-webflowName: Cigarette License
+  If you are a manufacturer (not a manufacturer representative), contact the
+  Cigarette Tax Hotline at (609) 633-9000.
+notesMd: "https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/6751\n\nPlanning doc: https://docs.google.com/document/d/1MdJ66sV4W0PRiySHYoXzpE62F43H3YHvMK1wYczHW70/edit?tab=t.0\n\n\\---\n\nSME feedback, **From:**\_Friedmann, Brian \\[TREAS] [Brian.Friedmann@treas.nj.gov](mailto:Brian.Friedmann@treas.nj.gov)\\\n**Sent:**\_Tuesday, November 26, 2024 2:55 PM\\\n\\\n1.\_\_\_\_\_\_\_\_‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document.\n\nThis license is for rolled cigarettes only.\_ Other tobacco products do not require this license to be sold.\n\n2.\_\_\_\_\_\_\_The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed.\n\nBoth this and the supplier information are only needed if applicable to the license type selected at the top of the application.\n\n3.\_\_\_\_\_\_\_If needed there should be a bullet for vending machine license which states what information is needed.\n\n4.\_\_\_\_\_\_\_Under “once completed…”, it should be changed to say “A printed license will be sent directly to your business location.”\n\n\n\n\\===\n\nFurther feedback received by Jaime and Kellie on 10 Dec 2024 (see planning doc)"
 industryId: ""
 formName: ""
-webflowType: business-license
 syncToWebflow: true
 ---
 

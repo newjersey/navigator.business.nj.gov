@@ -1,4 +1,14 @@
 ---
+id: resale-tax-certificate-operating
+webflowId: 69b02de22b431047e52917ba
+urlSlug: resale-tax-certificate-operating
+name: Get a Sales Tax Resale Certificate
+displayname: resale-tax-certificate-operating
+webflowName: Sales Tax Resale Certificate
+filename: resale-tax-certificate-operating
+callToActionLink: "https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3.pdf"
+callToActionText: Get My Sales Resale Certificate
+agencyId: nj-taxation
 summaryDescriptionMd: >-
   If your business buys items for resale, you need to complete the Sales Tax
   Resale Certificate. You also need to complete this certificate if you buy
@@ -8,30 +18,30 @@ summaryDescriptionMd: >-
 
    &nbsp;
 
-  You cannot use the Sales Tax Resale Certificate for items or equipment that you will not resell. For example, if you are an electronics retailer who buys computers to resell, you cannot use the resale certificate to buy a computer to use in your home or office.
+  You cannot use the Sales Tax Resale Certificate for items or equipment that
+  you will not resell. For example, if you are an electronics retailer who buys
+  computers to resell, you cannot use the resale certificate to buy a computer
+  to use in your home or office.
 
 
-  :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+  :::largeCallout{ showHeader="true" headerText="" calloutType="informational"
+  amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText=""
+  emailIconText="" }
 
 
-  * On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and the “seller” is the wholesaler
+  * On the Sales Tax Resale Certificate, the reseller is the “purchaser,” and
+  the “seller” is the wholesaler
 
-  * To use a Sales Tax Resale Certificate with a floor covering seller, you have to be a retail floor covering dealer
+  * To use a Sales Tax Resale Certificate with a floor covering seller, you have
+  to be a retail floor covering dealer
 
-  * A `home improvement contractor|home-contractors-activities` cannot use the Sales Tax Resale Certificate
+  * A `home improvement contractor|home-contractors-activities` cannot use the
+  Sales Tax Resale Certificate
 
 
   :::
-urlSlug: resale-tax-certificate-operating
-displayname: resale-tax-certificate-operating
-name: Get a Sales Tax Resale Certificate
-id: resale-tax-certificate-operating
-callToActionLink: https://www.nj.gov/treasury/taxation/pdf/other_forms/sales/st3.pdf
-callToActionText: Get My Sales Resale Certificate
 industryId: ""
-agencyId: nj-taxation
 syncToWebflow: true
-webflowName: Sales Tax Resale Certificate
 ---
 
 ## Requirements for Businesses in New Jersey
