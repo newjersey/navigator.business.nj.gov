@@ -3,15 +3,27 @@ import { ContactInformationTab } from "@/components/profile/ContactInformationTa
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, RefObject } from "react";
+import { scrollToTopOfElement } from "@/lib/utils/helpers";
+import { ReactElement, RefObject, useEffect, useRef } from "react";
+
+type GovDeliveryErrorType = "SUBSCRIBE_FAILED" | "UNSUBSCRIBE_FAILED" | "EMAIL_UPDATE_FAILED";
 
 interface Props {
   fieldErrors: string[];
   profileAlertRef?: RefObject<HTMLDivElement>;
+  govDeliveryError: GovDeliveryErrorType | null;
+  clearGovDeliveryError: () => void;
 }
 
 export const ContactTabPanel = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const govDeliveryAlertRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (props.govDeliveryError) {
+      scrollToTopOfElement(govDeliveryAlertRef.current, { focusElement: true });
+    }
+  }, [props.govDeliveryError]);
 
   const contactFieldIds = new Set(["name", "email", "phoneNumber"]);
   const contactFieldErrorIds = props.fieldErrors.filter((field: string) =>
@@ -46,7 +58,22 @@ export const ContactTabPanel = (props: Props): ReactElement => {
           </ul>
         </Alert>
       )}
-      <ContactInformationTab />
+      {props.govDeliveryError === "SUBSCRIBE_FAILED" && (
+        <Alert variant="error" ref={govDeliveryAlertRef}>
+          {Config.profileDefaults.default.newsletterSubscribeError}
+        </Alert>
+      )}
+      {props.govDeliveryError === "UNSUBSCRIBE_FAILED" && (
+        <Alert variant="error" ref={govDeliveryAlertRef}>
+          {Config.profileDefaults.default.newsletterUnsubscribeError}
+        </Alert>
+      )}
+      {props.govDeliveryError === "EMAIL_UPDATE_FAILED" && (
+        <Alert variant="error" ref={govDeliveryAlertRef}>
+          {Config.profileDefaults.default.newsletterEmailUpdateError}
+        </Alert>
+      )}
+      <ContactInformationTab clearGovDeliveryError={props.clearGovDeliveryError} />
     </div>
   );
 };

@@ -10,6 +10,7 @@
     "resolveJsonModule": true,
     "strict": true,
     "target": "ES2020",
+    "rootDir": "..",
     "outDir": "lib",
     "types": ["node", "jest"],
     "skipLibCheck": true
