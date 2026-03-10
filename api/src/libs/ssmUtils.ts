@@ -16,7 +16,8 @@ export type CONFIG_VARS =
   | "dep_base_url"
   | "zod_parsing_on"
   | "FEATURE_CIGARETTE_LICENSE"
-  | CRTK_EMAIL_CONFIG_VARS;
+  | CRTK_EMAIL_CONFIG_VARS
+  | GOV_DELIVERY_CONFIG_VARS;
 
 export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_base_url"
@@ -39,6 +40,13 @@ export type USER_MESSAGING_CONFIG_VARS =
   | "feature_reminder_emails_enabled";
 
 export type CRTK_EMAIL_CONFIG_VARS = "crtk_email_url" | "crtk_email_key";
+
+export type GOV_DELIVERY_CONFIG_VARS =
+  | "gov_delivery_base_url"
+  | "gov_delivery_topic"
+  | "gov_delivery_comm_cloud_account_code"
+  | "gov_delivery_comm_cloud_username"
+  | "gov_delivery_comm_cloud_password";
 
 let cache: {
   value?: boolean;

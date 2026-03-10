@@ -149,9 +149,9 @@ export const useUserData = (): UseUserDataResponse => {
           mutate(response, false);
           localUpdateQueue.queue(response);
         })
-        .catch(() => {
+        .catch((error) => {
           setUserDataError("UPDATE_FAILED");
-          throw undefined;
+          throw error;
         });
     }
   };
@@ -191,6 +191,7 @@ export const useUserData = (): UseUserDataResponse => {
     refresh: refresh,
     updateQueue: updateQueue,
     createUpdateQueue: createUpdateQueue,
+    clearUserDataError: () => setUserDataError(undefined),
   };
 };
 
@@ -203,4 +204,5 @@ export type UseUserDataResponse = {
   refresh: () => Promise<void>;
   updateQueue: UpdateQueue | undefined;
   createUpdateQueue: (userData: UserData) => Promise<UpdateQueue>;
+  clearUserDataError: () => void;
 };

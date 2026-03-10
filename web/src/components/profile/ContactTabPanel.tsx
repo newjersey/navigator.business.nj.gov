@@ -5,9 +5,13 @@ import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, RefObject } from "react";
 
+type GovDeliveryErrorType = "SUBSCRIBE_FAILED" | "UNSUBSCRIBE_FAILED" | "EMAIL_UPDATE_FAILED";
+
 interface Props {
   fieldErrors: string[];
   profileAlertRef?: RefObject<HTMLDivElement>;
+  govDeliveryError: GovDeliveryErrorType | null;
+  clearGovDeliveryError: () => void;
 }
 
 export const ContactTabPanel = (props: Props): ReactElement => {
@@ -46,7 +50,16 @@ export const ContactTabPanel = (props: Props): ReactElement => {
           </ul>
         </Alert>
       )}
-      <ContactInformationTab />
+      {props.govDeliveryError === "SUBSCRIBE_FAILED" && (
+        <Alert variant="error">{Config.profileDefaults.default.newsletterSubscribeError}</Alert>
+      )}
+      {props.govDeliveryError === "UNSUBSCRIBE_FAILED" && (
+        <Alert variant="error">{Config.profileDefaults.default.newsletterUnsubscribeError}</Alert>
+      )}
+      {props.govDeliveryError === "EMAIL_UPDATE_FAILED" && (
+        <Alert variant="error">{Config.profileDefaults.default.newsletterEmailUpdateError}</Alert>
+      )}
+      <ContactInformationTab clearGovDeliveryError={props.clearGovDeliveryError} />
     </div>
   );
 };
