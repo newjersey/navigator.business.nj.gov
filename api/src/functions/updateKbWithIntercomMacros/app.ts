@@ -127,7 +127,7 @@ const uploadToS3 = async (
     await client.send(
       new PutObjectCommand({
         Bucket: bucketName,
-        Key: "intercom-macros-json",
+        Key: "intercom-macros.json",
         Body: JSON.stringify(intercomMacros),
       }),
     );
