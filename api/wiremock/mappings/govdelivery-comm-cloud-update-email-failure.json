@@ -1,0 +1,14 @@
+{
+  "scenarioName": "GovDeliveryUpdateEmail",
+  "requiredScenarioState": "Failure",
+  "request": {
+    "method": "PUT",
+    "urlPattern": "/api/account/.*/subscribers/.*\\.xml"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/xml"
+    }
+  }
+}

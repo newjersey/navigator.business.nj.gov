@@ -21,7 +21,11 @@ import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useRef, useState } from "react";
 
-export const ContactInformationTab = (): ReactElement => {
+interface Props {
+  clearGovDeliveryError: () => void;
+}
+
+export const ContactInformationTab = ({ clearGovDeliveryError }: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, updateQueue, refresh } = useUserData();
   const [user, setUser] = useState<BusinessUser | undefined>(undefined);
@@ -84,6 +88,9 @@ export const ContactInformationTab = (): ReactElement => {
     value: BusinessUser[K],
   ): void => {
     if (!user) return;
+    if (field === "email" || field === "receiveNewsletter") {
+      clearGovDeliveryError();
+    }
     const updatedUser = { ...user, [field]: value };
     setUser(updatedUser);
     updateUserData(updatedUser);
