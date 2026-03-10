@@ -219,7 +219,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     sectorRequired: true,
-    displayGoToProfileNudge: true,
+    displayGoToProfileNudge: false,
     displayAnytimeActions: true,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: true,

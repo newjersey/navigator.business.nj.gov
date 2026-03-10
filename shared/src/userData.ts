@@ -45,7 +45,7 @@ export interface Business {
   readonly crtkData: CrtkData | undefined;
 }
 
-export const CURRENT_VERSION = 189;
+export const CURRENT_VERSION = 190;
 
 export const createEmptyBusiness = ({
   userId,
@@ -67,8 +67,6 @@ export const createEmptyBusiness = ({
     preferences: {
       roadmapOpenSections: ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"],
       roadmapOpenSteps: [],
-      hiddenCertificationIds: [],
-      hiddenFundingIds: [],
       visibleSidebarCards: [],
       returnToLink: "",
       isCalendarFullView: false,
@@ -126,8 +124,6 @@ export type TaskProgress = "TO_DO" | "COMPLETED";
 export interface Preferences {
   roadmapOpenSections: SectionType[];
   roadmapOpenSteps: number[];
-  hiddenFundingIds: string[];
-  hiddenCertificationIds: string[];
   visibleSidebarCards: string[];
   returnToLink: string;
   isCalendarFullView: boolean;

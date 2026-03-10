@@ -1,5 +1,4 @@
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
-import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
   generateFunding,
@@ -10,7 +9,6 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
-  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
@@ -314,121 +312,6 @@ describe("<SidebarCardsContainer />", () => {
       expect(
         screen.queryByText(Config.dashboardDefaults.learnMoreFundingOpportunitiesText),
       ).not.toBeInTheDocument();
-    });
-  });
-
-  describe("hiding opportunities", () => {
-    const certifications = [
-      generateCertification({ urlSlug: "cert1", name: "Cert 1", id: "cert1-id" }),
-    ];
-    const fundings = [generateFunding({ urlSlug: "fund1", name: "Fund 1", id: "fund1-id" })];
-
-    beforeEach(() => {
-      setupStatefulUserDataContext();
-    });
-
-    it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
-      renderWithBusiness(
-        generateBusiness({ profileData: getProfileDataForUnfilteredOpportunities() }),
-        {
-          certifications,
-          fundings,
-        },
-      );
-
-      let cert1 = within(screen.getByTestId("cert1-id"));
-      const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
-      const hiddenOpportunities = within(screen.getByTestId("hidden-opportunities"));
-
-      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
-      expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
-      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
-      expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
-
-      fireEvent.click(cert1.getByText(Config.dashboardDefaults.hideOpportunityText));
-      cert1 = within(screen.getByTestId("cert1-id"));
-
-      expect(visibleOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
-      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
-      expect(hiddenOpportunities.getByText("Cert 1")).toBeInTheDocument();
-      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
-
-      fireEvent.click(cert1.getByText(Config.dashboardDefaults.unHideOpportunityText));
-
-      expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
-      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
-      expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
-      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
-    });
-
-    it("saves hidden opportunities to user data", () => {
-      const business = generateBusiness({
-        profileData: getProfileDataForUnfilteredOpportunities(),
-        preferences: generatePreferences({
-          hiddenCertificationIds: [],
-          hiddenFundingIds: [],
-        }),
-      });
-
-      renderWithBusiness(business, { certifications, fundings });
-      const funding1 = within(screen.getByTestId("fund1-id"));
-
-      fireEvent.click(funding1.getByText(Config.dashboardDefaults.hideOpportunityText));
-      expect(currentBusiness().preferences.hiddenFundingIds).toEqual(["fund1-id"]);
-    });
-
-    it("hides opportunities from user data", () => {
-      const business = generateBusiness({
-        profileData: getProfileDataForUnfilteredOpportunities(),
-        preferences: generatePreferences({
-          hiddenCertificationIds: [],
-          hiddenFundingIds: ["fund1-id"],
-        }),
-      });
-
-      renderWithBusiness(business, { certifications, fundings });
-      const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
-
-      expect(visibleOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
-      expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
-    });
-
-    it("only counts hidden certifications before fundings are unlocked", () => {
-      const business = generateBusiness({
-        profileData: generateProfileData({
-          operatingPhase: OperatingPhaseId.FORMED,
-        }),
-        preferences: generatePreferences({
-          hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
-      });
-
-      renderWithBusiness(business, { certifications, fundings });
-      expect(
-        screen.getByText(
-          templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "1" }),
-        ),
-      ).toBeInTheDocument();
-    });
-
-    it("counts both hidden fundings and certifications after fundings are unlocked", () => {
-      const business = generateBusiness({
-        profileData: generateProfileData({
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-        }),
-        preferences: generatePreferences({
-          hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
-      });
-
-      renderWithBusiness(business, { certifications, fundings });
-      expect(
-        screen.getByText(
-          templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "2" }),
-        ),
-      ).toBeInTheDocument();
     });
   });
 });

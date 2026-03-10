@@ -113,8 +113,6 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
   return {
     roadmapOpenSections: ["PLAN", "START"],
     roadmapOpenSteps: [randomInt()],
-    hiddenFundingIds: [],
-    hiddenCertificationIds: [],
     visibleSidebarCards: [],
     returnToLink: "",
     isCalendarFullView: !(randomInt() % 2),
