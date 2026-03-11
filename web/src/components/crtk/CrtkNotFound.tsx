@@ -6,6 +6,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -54,7 +55,11 @@ export const CrtkNotFound = (props: Props): ReactElement => {
         primaryButtonText={Config?.crtkTask?.okButtonText}
         primaryButtonOnClick={() => setNotFoundModal(false)}
       >
-        <Content>{Config?.crtkTask?.businessNotFoundModalContent}</Content>
+        <Content>
+          {templateEval(Config?.crtkTask?.businessNotFoundModalContent, {
+            businessName: business?.crtkData?.crtkBusinessDetails?.businessName ?? "",
+          })}
+        </Content>
       </ModalOneButton>
       {crtkEmailSent ? (
         <div data-testid="crtk-email-sent-alert">
