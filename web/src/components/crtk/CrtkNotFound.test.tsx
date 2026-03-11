@@ -1,9 +1,11 @@
 import { CrtkNotFound } from "@/components/crtk/CrtkNotFound";
+import { templateEval } from "@/lib/utils/helpers";
 import { generateCrtkData } from "@/test/factories";
 import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
 import {
   generateBusiness,
@@ -20,6 +22,7 @@ const mockOnSearchAgain = jest.fn();
 const mockResubmit = jest.fn();
 
 describe("CrtkNotFound", () => {
+  const Config = getMergedConfig();
   const renderComponent = (overrides?: Partial<CrtkData>): void => {
     const userData = generateUserDataForBusiness(
       generateBusiness({
@@ -53,12 +56,30 @@ describe("CrtkNotFound", () => {
 
   it("displays the business not found modal when crtkSearchResult is NOT_FOUND", async () => {
     mockResubmit.mockResolvedValue({});
-    renderComponent({ crtkEmailSent: true, crtkSearchResult: "NOT_FOUND" });
+    const businsessName = "Test Business";
+    const businessNotFoundModalContent = templateEval(
+      Config?.crtkTask?.businessNotFoundModalContent,
+      {
+        businessName: businsessName,
+      },
+    );
+    renderComponent({
+      crtkEmailSent: true,
+      crtkSearchResult: "NOT_FOUND",
+      crtkBusinessDetails: {
+        businessName: businsessName,
+        addressLine1: "123 Main St",
+        city: "Anytown",
+        addressZipCode: "12345",
+      },
+    });
     expect(screen.getByTestId("crtk-email-sent-alert")).toBeInTheDocument();
-    expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText(businessNotFoundModalContent)).not.toBeInTheDocument();
+    });
     fireEvent.click(screen.getByText("check your status"));
     await waitFor(() => {
-      expect(screen.getByTestId("modal-content")).toBeInTheDocument();
+      expect(screen.getByText(businessNotFoundModalContent)).toBeInTheDocument();
     });
   });
 
