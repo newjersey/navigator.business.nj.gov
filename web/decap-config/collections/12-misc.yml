@@ -1452,6 +1452,11 @@ collections:
                               name: "searchAffirmation",
                               widget: "markdown",
                             }
+                          - {
+                              label: "Search Placeholder Text",
+                              name: "searchPlaceHolderText",
+                              widget: "string",
+                            }
                       - label: Onboarding Specific
                         name: "onboarding"
                         collapsed: false

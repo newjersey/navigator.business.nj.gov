@@ -21,13 +21,13 @@ import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
-
 interface Props {
   handleChange?: () => void;
   onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
   validationText?: string;
   validationLabel?: string;
+  showExperienceB?: boolean;
 }
 
 export const IndustryDropdown = (props: Props): ReactElement => {
@@ -104,11 +104,35 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       return [LookupIndustryById("generic")];
     }
 
+    let filteredList = industriesList;
     if (isForeignBusiness) {
-      return industriesList.filter((industry) => industry.id !== "domestic-employer");
+      filteredList = industriesList.filter((industry) => industry.id !== "domestic-employer");
     }
 
-    return industriesList;
+    const genericIndex = filteredList.findIndex((industry) => industry.id === "generic");
+
+    if (props.showExperienceB) {
+      if (genericIndex !== -1) {
+        const genericIndustry = filteredList[genericIndex];
+        filteredList = [
+          ...filteredList.slice(0, genericIndex),
+          ...filteredList.slice(genericIndex + 1),
+          genericIndustry,
+        ];
+      }
+    } else {
+      // For ExperienceA (default), move "All Other Businesses" (generic) to the beginning
+      if (genericIndex !== -1) {
+        const genericIndustry = filteredList[genericIndex];
+        filteredList = [
+          genericIndustry,
+          ...filteredList.slice(0, genericIndex),
+          ...filteredList.slice(genericIndex + 1),
+        ];
+      }
+    }
+
+    return filteredList;
   };
 
   return (
@@ -181,6 +205,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
               variant="outlined"
               error={props.error}
               helperText={props.error && props.validationText}
+              placeholder={props.showExperienceB ? contentFromConfig.searchPlaceHolderText : ""}
             />
           </div>
         );
