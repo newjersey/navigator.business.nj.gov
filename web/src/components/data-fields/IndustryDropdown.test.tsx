@@ -72,4 +72,41 @@ describe("Industry Dropdown", () => {
       expect(screen.getByTestId("domestic-employer")).toBeInTheDocument();
     });
   });
+
+  describe("experienceB", () => {
+    it("displays the Generic Industry as the last item in the dropdown list when showExperienceB is true", () => {
+      render(<IndustryDropdown showExperienceB={true} />);
+
+      fireEvent.mouseDown(screen.getByLabelText("Industry"));
+      const items = within(screen.getByRole("listbox")).getAllByRole("option");
+
+      expect(within(items[items.length - 1]).getByTestId("generic")).toBeInTheDocument();
+    });
+
+    it("displays the generic industry as the last option when there is no industry match and showExperienceB is true", async () => {
+      render(<IndustryDropdown showExperienceB={true} />);
+      const searchTerm = `some-industry-${randomInt()}`;
+
+      fireEvent.click(screen.getByLabelText("Industry"));
+      fireEvent.change(screen.getByLabelText("Industry"), {
+        target: { value: searchTerm },
+      });
+
+      fireEvent.click(screen.getByLabelText("Industry"));
+      expect(screen.getByTestId("generic")).toBeInTheDocument();
+      expect(screen.getAllByText(searchTerm).length).toEqual(1);
+      expect(screen.queryByTestId("certified-public-accountant")).not.toBeInTheDocument();
+    });
+
+    it("displays search affirmation when there is an input and showExperienceB is true", () => {
+      render(<IndustryDropdown showExperienceB={true} />);
+
+      const inputElement = screen.getByLabelText("Industry");
+      fireEvent.click(inputElement);
+      expect(screen.queryByTestId("search-affirmation")).not.toBeInTheDocument();
+
+      fireEvent.change(inputElement, { target: { value: "plan" } });
+      expect(screen.getByTestId("search-affirmation")).toBeInTheDocument();
+    });
+  });
 });

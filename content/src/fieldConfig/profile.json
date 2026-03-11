@@ -354,7 +354,8 @@
           "headerContextualInfo": "",
           "description": "",
           "errorTextRequired": "Select an industry.",
-          "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
+          "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_",
+          "searchPlaceHolderText": "Type your industry here"
         },
         "onboarding": {
           "default": {
