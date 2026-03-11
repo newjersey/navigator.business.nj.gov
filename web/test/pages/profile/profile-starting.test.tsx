@@ -813,7 +813,7 @@ describe("profile - starting business", () => {
       }),
     });
 
-    renderPage({ business });
+    renderPage({ business, abExperience: "ExperienceA" });
     expect(getBusinessNameValue()).toEqual("Applebees");
 
     expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
