@@ -1,0 +1,46 @@
+name: Process Smartling Translation Files
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches-ignore:
+      - "smartling-*"
+
+jobs:
+  rename-and-merge:
+    # Only run on PRs created by Smartling (branch name starts with "smartling-")
+    if: startsWith(github.head_ref, 'smartling-')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Rename .en.es-LA.md files to .es-LA.md
+        id: rename
+        run: |
+          files_renamed=0
+          for file in $(find content/src -name "*.en.es-LA.md"); do
+            new_name="${file%.en.es-LA.md}.es-LA.md"
+            echo "Renaming: $file -> $new_name"
+            git mv -f "$file" "$new_name"
+            files_renamed=$((files_renamed + 1))
+          done
+          echo "files_renamed=$files_renamed" >> "$GITHUB_OUTPUT"
+
+      - name: Commit renamed files
+        if: steps.rename.outputs.files_renamed != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: rename Smartling translation files (.en.es-LA.md -> .es-LA.md)"
+          git push
+
+      - name: Merge PR
+        run: gh pr merge ${{ github.event.pull_request.number }} --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -13,7 +13,7 @@ describe("funding page", () => {
       status: "deadline",
     });
 
-    render(<FundingPage funding={funding} />);
+    render(<FundingPage fundings={{ en: funding, "es-LA": funding }} />);
 
     expect(screen.getByText("Some Funding Name")).toBeInTheDocument();
     expect(screen.getByText("DUE: 07/01/2025")).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe("funding page", () => {
       agency: ["njeda"],
     });
 
-    render(<FundingPage funding={funding} />);
+    render(<FundingPage fundings={{ en: funding, "es-LA": funding }} />);
 
     expect(screen.getByTestId("funding-agency-header")).toBeInTheDocument();
     const expectedText = LookupFundingAgencyById("njeda").name;
@@ -38,7 +38,7 @@ describe("funding page", () => {
       agency: ["njeda", "njdol"],
     });
 
-    render(<FundingPage funding={funding} />);
+    render(<FundingPage fundings={{ en: funding, "es-LA": funding }} />);
 
     const edaText = LookupFundingAgencyById("njeda").name;
     const dolText = LookupFundingAgencyById("njdol").name;
@@ -55,7 +55,7 @@ describe("funding page", () => {
       agency: [],
     });
 
-    render(<FundingPage funding={funding} />);
+    render(<FundingPage fundings={{ en: funding, "es-LA": funding }} />);
 
     expect(screen.queryByTestId("funding-agency-header")).not.toBeInTheDocument();
   });
@@ -71,7 +71,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} />);
+      render(<FundingPage fundings={{ en: funding, "es-LA": funding }} />);
 
       expect(screen.getByText("FIRST COME, FIRST SERVE")).toBeInTheDocument();
     });
@@ -86,7 +86,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} />);
+      render(<FundingPage fundings={{ en: funding, "es-LA": funding }} />);
 
       expect(screen.getByText("DEADLINE")).toBeInTheDocument();
     });
@@ -101,7 +101,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} />);
+      render(<FundingPage fundings={{ en: funding, "es-LA": funding }} />);
 
       expect(screen.queryByText("DEADLINE")).not.toBeInTheDocument();
     });
