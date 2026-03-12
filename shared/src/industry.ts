@@ -88,6 +88,22 @@ export const isIndustryIdGeneric = (industry: Industry): boolean => {
   return industry.id === "generic";
 };
 
+export const findIndustryByNaicsCode = (naicsCode: string): Industry | undefined => {
+  if (!naicsCode) return undefined;
+
+  const matches = getIndustries().filter((industry) => {
+    if (isIndustryIdGeneric(industry)) return false;
+    const codes =
+      industry.naicsCodes
+        ?.replace(/\s/g, "")
+        .split(",")
+        .filter((code) => code.length > 0) ?? [];
+    return codes.includes(naicsCode);
+  });
+
+  return matches.length === 1 ? matches[0] : undefined;
+};
+
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export const getIndustries = (props?: { overrideShowDisabledIndustries?: boolean }): Industry[] =>
   orderBy(

@@ -10,14 +10,18 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { getNaicsCode, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Business, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  findIndustryByNaicsCode,
+  LookupIndustryById,
+} from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 interface Props {
-  onSave: () => void;
+  onSave: (changedIndustryName?: string) => void;
   task: Task;
   isAuthenticated: IsAuthenticated;
   CMS_ONLY_fakeBusiness?: Business;
@@ -106,13 +110,23 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     setIsInvalid(undefined);
     setIsLoading(true);
 
+    const matchedIndustry = findIndustryByNaicsCode(naicsCode);
+    const shouldChangeIndustry =
+      matchedIndustry && matchedIndustry.id !== business?.profileData.industryId;
+
+    const profileData: Record<string, string | undefined> = { naicsCode };
+    if (shouldChangeIndustry) {
+      profileData.industryId = matchedIndustry.id;
+      profileData.sectorId = matchedIndustry.defaultSectorId;
+    }
+
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
     updateQueue
-      .queueProfileData({ naicsCode })
+      .queueProfileData(profileData)
       .update()
       .then(async () => {
         setIsLoading(false);
-        props.onSave();
+        props.onSave(shouldChangeIndustry ? matchedIndustry.name : undefined);
       })
       .catch(() => {
         setIsLoading(false);
