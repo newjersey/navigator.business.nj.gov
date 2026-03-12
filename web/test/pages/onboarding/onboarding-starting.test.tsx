@@ -24,7 +24,11 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUser,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
@@ -230,16 +234,19 @@ describe("onboarding - starting a business", () => {
   });
 
   it("prefills form from existing user data", async () => {
+    const business = generateBusiness({
+      id: "12345",
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        businessName: "Applebees",
+        industryId: "cosmetology",
+      }),
+    });
     const userData = generateUserData({
+      user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
       currentBusinessId: "12345",
       businesses: {
-        "12345": generateBusiness({
-          profileData: generateProfileData({
-            businessPersona: "STARTING",
-            businessName: "Applebees",
-            industryId: "cosmetology",
-          }),
-        }),
+        "12345": business,
       },
     });
 

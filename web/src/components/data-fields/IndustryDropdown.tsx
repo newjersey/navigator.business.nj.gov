@@ -21,6 +21,7 @@ import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 
 interface Props {
   handleChange?: () => void;
@@ -34,6 +35,8 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+  const userDataFromHook = useUserData();
+  const abExperience = userDataFromHook.userData?.user.abExperience;
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["industryId"]["default"] =
     getProfileConfig({
@@ -104,11 +107,34 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       return [LookupIndustryById("generic")];
     }
 
+    let filteredList = industriesList;
     if (isForeignBusiness) {
-      return industriesList.filter((industry) => industry.id !== "domestic-employer");
+      filteredList = industriesList.filter((industry) => industry.id !== "domestic-employer");
     }
 
-    return industriesList;
+    const genericIndex = filteredList.findIndex((industry) => industry.id === "generic");
+
+    if (abExperience === "ExperienceB") {
+      // For ExperienceB, move "All Other Businesses" (generic) to the end
+      if (genericIndex !== -1) {
+        const genericIndustry = filteredList[genericIndex];
+        filteredList = [
+          ...filteredList.slice(0, genericIndex),
+          ...filteredList.slice(genericIndex + 1),
+          genericIndustry,
+        ];
+      }
+    } else if (abExperience === "ExperienceA" && genericIndex !== -1 && genericIndex !== 0) {
+      // For ExperienceA, move "All Other Businesses" (generic) to the beginning
+      const genericIndustry = filteredList[genericIndex];
+      filteredList = [
+        genericIndustry,
+        ...filteredList.slice(0, genericIndex),
+        ...filteredList.slice(genericIndex + 1),
+      ];
+    }
+
+    return filteredList;
   };
 
   return (
@@ -181,6 +207,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
               variant="outlined"
               error={props.error}
               helperText={props.error && props.validationText}
+              placeholder={abExperience === "ExperienceB" ? "Type your industry here" : ""}
             />
           </div>
         );
