@@ -1,3 +1,5 @@
+import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+
 class BusinessFormationPage {
   getAvailableBusinessNameAlert() {
     return cy.get('[data-testid="available-text"]');
@@ -16,6 +18,12 @@ class BusinessFormationPage {
   }
   getBusinessNameSearch() {
     return cy.get('[aria-label="Search business name"]');
+  }
+  getBusinessNameSearchConfirmation() {
+    return cy.get('[aria-label="Confirm business name"]');
+  }
+  getBusinessNameSearchConfirmationError() {
+    return cy.get('[aria-label="Confirm business name error"]');
   }
   getBusinessDesignator() {
     return cy.get('[data-testid="business-suffix"]');
@@ -95,6 +103,21 @@ class BusinessFormationPage {
   }
   getFormationSuccessPage() {
     return cy.get('[data-testid="formation-success-page"]');
+  }
+  getPermanentRecordCheckbox() {
+    return cy.get(
+      '[data-testid="permanent-record-checkbox-container"] > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input',
+    );
+  }
+  getNamesAddressDatesCheckbox() {
+    return cy.get(
+      '[data-testid="names-addresses-dates-checkbox-container"] > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input',
+    );
+  }
+  getCorrectionFeesCheckbox() {
+    return cy.get(
+      '[data-testid="correction-fees-checkbox-container"] > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input',
+    );
   }
 
   clickContinueToNextTab() {
@@ -183,6 +206,17 @@ class BusinessFormationPage {
 
   submitBusinessNameSearch() {
     cy.get('[data-testid="business-name-search-submit"]').click();
+  }
+  getRegisteredAgentTypeRadio(
+    agentType: FormationFormData["agentType"],
+  ): Cypress.Chainable<JQuery<HTMLElement>> {
+    const agent_type = {
+      PROFESSIONAL_SERVICE: "professional-service",
+      AUTHORIZED_REP: "authorized-rep",
+      MYSELF: "myself",
+    }[agentType];
+
+    return cy.get(`[data-testid="registered-agent-${agent_type}"]`);
   }
 }
 

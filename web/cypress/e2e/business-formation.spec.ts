@@ -7,7 +7,12 @@ import {
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { AdditionalFormation } from "@businessnjgovnavigator/cypress/support/types";
-import { FormationFormData, LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  FormationFormData,
+  LookupIndustryById,
+  randomElementFromArray,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 import { onAddressModal } from "cypress/support/page_objects/addressModal";
 import { onBusinessFormationPage } from "cypress/support/page_objects/businessFormationPage";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
@@ -20,7 +25,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     cy.loginByCognitoApi();
   });
 
-  it.skip("successfully forms an LLC business", () => {
+  it("successfully forms an LLC business", () => {
     const industry = LookupIndustryById("food-truck");
     const legalStructureId = "limited-liability-company";
     const businessNameSearch = "My Cool Business";
@@ -35,14 +40,22 @@ describe("Business Formation [feature] [all] [group2]", () => {
       "My Provision 1",
       "My Provision 2",
     ];
-    const agentType: FormationFormData["agentType"] = "AUTHORIZED_REP";
+
+    //const agentType: FormationFormData["agentType"] = "AUTHORIZED_REP";
+    const agentType = randomElementFromArray([
+      "PROFESSIONAL_SERVICE",
+      "AUTHORIZED_REP",
+      "MYSELF",
+    ] as FormationFormData["agentType"][]);
     const agentName = "John Doe";
+    const agentNumber = "1234567";
     const agentEmail = "John.Doe@gmail.com";
     const getRegisteredAgentSameAsBusinessAddressCheckbox = false;
     const agentOfficeAddressLine1 = "123 Agent Main St.";
     const agentOfficeAddressLine2 = "Apt Agent 321";
     const agentOfficeAddressCity = "agent-city-123";
     const agentOfficeAddressZipCode = "07666";
+
     const members: FormationFormData["members"] = [
       generateFormationMember({ addressZipCode: "07333" }),
       generateFormationMember({ addressZipCode: "07996" }),
@@ -83,6 +96,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     selectAndTypeRegisteredAgent({
       agentType,
       agentName,
+      agentNumber,
       agentEmail,
       getRegisteredAgentSameAsBusinessAddressCheckbox,
       agentOfficeAddressLine1,
@@ -102,6 +116,12 @@ describe("Business Formation [feature] [all] [group2]", () => {
     });
     selectServices({ certificateOfStanding, certifiedCopyOfFormationDocument, paymentType });
     onBusinessFormationPage.clickContinueToNextTab();
+    onBusinessFormationPage.getNamesAddressDatesCheckbox().check();
+    onBusinessFormationPage.getNamesAddressDatesCheckbox().should("be.checked");
+    onBusinessFormationPage.getPermanentRecordCheckbox().check();
+    onBusinessFormationPage.getPermanentRecordCheckbox().should("be.checked");
+    onBusinessFormationPage.getCorrectionFeesCheckbox().check();
+    onBusinessFormationPage.getCorrectionFeesCheckbox().should("be.checked");
     onBusinessFormationPage.clickContinueToNextTab();
     onBusinessFormationPage.getFormationSuccessPage().should("be.visible");
   });
@@ -111,6 +131,11 @@ const submitBusinessNameSearchAndContinue = (name: string): void => {
   cy.url().should("include", "form-business-entity");
   onBusinessFormationPage.typeBusinessNameSearch(name);
   onBusinessFormationPage.getBusinessNameSearch().invoke("prop", "value").should("contain", name);
+  onBusinessFormationPage.getBusinessNameSearchConfirmation().type(name);
+  onBusinessFormationPage
+    .getBusinessNameSearchConfirmation()
+    .invoke("prop", "value")
+    .should("contain", name);
   onBusinessFormationPage.submitBusinessNameSearch();
   onBusinessFormationPage.getAvailableBusinessNameAlert().should("be.visible");
   onBusinessFormationPage.clickContinueToNextTab();
@@ -213,22 +238,19 @@ const selectAndTypeRegisteredAgent = ({
   agentOfficeAddressCity,
   agentOfficeAddressZipCode,
 }: Partial<AdditionalFormation>): void => {
-  if (agentType === "AUTHORIZED_REP") {
-    onBusinessFormationPage.getRegisteredAgentNumberRadio().check();
-    onBusinessFormationPage.getRegisteredAgentNumberRadio().should("be.checked");
-
-    if (agentNumber) {
-      onBusinessFormationPage.typeRegisteredAgentIdNumber(agentNumber);
-      onBusinessFormationPage
-        .getRegisteredAgentIdNumber()
-        .invoke("prop", "value")
-        .should("contain", agentNumber);
-    }
+  if (agentType) {
+    onBusinessFormationPage.getRegisteredAgentTypeRadio(agentType).click();
   }
-  if (agentType === "AUTHORIZED_REP") {
-    onBusinessFormationPage.getRegisteredAgentManualRadio().check();
-    onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
 
+  if (agentType === "PROFESSIONAL_SERVICE") {
+    onBusinessFormationPage.typeRegisteredAgentIdNumber(agentNumber as string);
+    onBusinessFormationPage
+      .getRegisteredAgentIdNumber()
+      .invoke("prop", "value")
+      .should("contain", agentNumber);
+  }
+
+  if (agentType === "MYSELF" || agentType === "AUTHORIZED_REP") {
     if (agentName) {
       onBusinessFormationPage.typeRegisteredAgentName(agentName);
       onBusinessFormationPage
@@ -265,7 +287,6 @@ const selectAndTypeRegisteredAgent = ({
         .invoke("prop", "value")
         .should("contain", agentOfficeAddressLine2);
     }
-
     if (agentOfficeAddressCity) {
       onBusinessFormationPage.typeRegisteredAgentCity(agentOfficeAddressCity);
       onBusinessFormationPage
