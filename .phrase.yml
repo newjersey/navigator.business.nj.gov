@@ -5,16 +5,10 @@ phrase:
       - file: ./content/src/fieldConfig/tax-clearance-certificate-step1.json
         params:
           file_format: react_nested_json
-          locale_id: en-US
-          autotranslate: true
-      - file: ./content/src/fieldConfig/tax-clearance-certificate-step2.json
-        params:
-          file_format: react_nested_json
-          locale_id: en-US
-          autotranslate: true
+          locale_code: en
+          autotranslate: false
   pull:
     targets:
-      - file: ./content/src/fieldConfig/tax-clearance-certificate-step1<locale_code>.json
+      - file: ./content/src/fieldConfig/tax-clearance-certificate-step1.json
         params:
           file_format: react_nested_json
-          locale_id: en-US
