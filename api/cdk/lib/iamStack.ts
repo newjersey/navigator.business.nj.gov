@@ -19,6 +19,7 @@ export interface IamStackProps extends StackProps {
 export class IamStack extends Stack {
   readonly serviceName: string;
   public readonly role: iam.Role;
+  public readonly backupRole: iam.Role;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
@@ -126,6 +127,23 @@ export class IamStack extends Stack {
       resources: ["arn:aws:s3:::*/*"],
     });
 
+    const backupRole = new iam.Role(this, "backupRole", {
+      assumedBy: new iam.ServicePrincipal("backup.amazonaws.com"),
+      roleName: `Backups`,
+      description: `Role For Backup Service`,
+    });
+
+    backupRole.addManagedPolicy(
+      iam.ManagedPolicy.fromAwsManagedPolicyName(
+        "service-role/AWSBackupServiceRolePolicyForBackup",
+      ),
+    );
+    backupRole.addManagedPolicy(
+      iam.ManagedPolicy.fromAwsManagedPolicyName(
+        "service-role/AWSBackupServiceRolePolicyForRestores",
+      ),
+    );
+
     const lambdaRole = new iam.Role(this, "lambdaRole", {
       assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
       roleName: `${this.serviceName}-${props.stage}-lambdaRole`,
@@ -177,5 +195,6 @@ export class IamStack extends Stack {
     applyStandardTags(lambdaRole, props.stage);
 
     this.role = lambdaRole;
+    this.backupRole = backupRole;
   }
 }
