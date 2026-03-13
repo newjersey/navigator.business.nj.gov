@@ -5,7 +5,17 @@ import { DataStack } from "../lib/dataStack";
 import { IamStack } from "../lib/iamStack";
 import { LambdaStack } from "../lib/lambdaStack";
 import { StorageStack } from "../lib/storageStack";
-import { DEV_STAGE } from "../lib/constants";
+import {
+  BUSINESSES_TABLE,
+  CONTENT_STAGE,
+  DEV_STAGE,
+  PROD_STAGE,
+  STAGING_STAGE,
+  TESTING_STAGE,
+  USERS_TABLE,
+  MESSAGES_TABLE,
+} from "../lib/constants";
+import { BackupStack } from "../lib/backupStack";
 dotenv.config({ path: "../.env" });
 
 const app = new cdk.App();
@@ -33,6 +43,47 @@ const storageStack = new StorageStack(app, `StorageStack-${stage}`, {
   env,
 });
 
+if (stage === DEV_STAGE) {
+  new BackupStack(app, `BackupStack-${DEV_STAGE}-shared`, {
+    env,
+    backupRole: iamStack.backupRole!,
+    tableNames: [
+      `${BUSINESSES_TABLE}-${DEV_STAGE}`,
+      `${USERS_TABLE}-${DEV_STAGE}`,
+      `${MESSAGES_TABLE}-${DEV_STAGE}`,
+      `${BUSINESSES_TABLE}-${CONTENT_STAGE}`,
+      `${MESSAGES_TABLE}-${CONTENT_STAGE}`,
+      `${USERS_TABLE}-${CONTENT_STAGE}`,
+      `${BUSINESSES_TABLE}-${TESTING_STAGE}`,
+      `${MESSAGES_TABLE}-${TESTING_STAGE}`,
+      `${USERS_TABLE}-${TESTING_STAGE}`,
+    ],
+  });
+}
+
+if (stage === STAGING_STAGE) {
+  new BackupStack(app, `BackupStack-${STAGING_STAGE}`, {
+    env,
+    backupRole: iamStack.backupRole!,
+    tableNames: [
+      `${BUSINESSES_TABLE}-${STAGING_STAGE}`,
+      `${MESSAGES_TABLE}-${STAGING_STAGE}`,
+      `${USERS_TABLE}-${STAGING_STAGE}`,
+    ],
+  });
+}
+
+if (stage === PROD_STAGE) {
+  new BackupStack(app, `BackupStack-${PROD_STAGE}`, {
+    env,
+    backupRole: iamStack.backupRole!,
+    tableNames: [
+      `${BUSINESSES_TABLE}-${PROD_STAGE}`,
+      `${MESSAGES_TABLE}-${PROD_STAGE}`,
+      `${USERS_TABLE}-${PROD_STAGE}`,
+    ],
+  });
+}
 const lambdaStack = new LambdaStack(app, `LambdaStack-${stage}`, {
   stage: stage,
   lambdaRole: iamStack.role,
