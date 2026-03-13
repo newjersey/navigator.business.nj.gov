@@ -1,6 +1,7 @@
 // lib/constants.ts
 export const CONTENT_STAGE = "content";
 export const TESTING_STAGE = "testing";
+export const STAGING_STAGE = "staging";
 export const PROD_STAGE = "prod";
 export const DEV_STAGE = "dev";
 export const LOCAL_STAGE = "local";
