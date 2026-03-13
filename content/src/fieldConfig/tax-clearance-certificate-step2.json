@@ -1,7 +1,16 @@
 {
-  "taxClearanceCertificateStep2": {
-    "requestingAgencySectionHeader": "Reason for Certification",
-    "businessInformationSectionHeader": "Business Information",
-    "requestingAgencyLabel": "What agency is requesting the Tax Clearance Certificate?"
+  "en": {
+    "taxClearanceCertificateStep2": {
+      "requestingAgencySectionHeader": "Reason for Certification",
+      "businessInformationSectionHeader": "Business Information",
+      "requestingAgencyLabel": "What agency is requesting the Tax Clearance Certificate?"
+    }
+  },
+  "es": {
+    "taxClearanceCertificateStep2": {
+      "requestingAgencySectionHeader": "1Reason for Certification",
+      "businessInformationSectionHeader": "2Business Information",
+      "requestingAgencyLabel": "3What agency is requesting the Tax Clearance Certificate?"
+    }
   }
 }
