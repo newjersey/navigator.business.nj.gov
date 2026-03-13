@@ -43,6 +43,34 @@ runs:
           --region us-east-1 \
           --require-approval never
 
+    - name: Deploy IAM Stack (Temp Step)
+      shell: bash
+      run: |
+        echo "Running CDK for IamStack in stage: $STAGE"
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy IamStack-${{ env.STAGE }} \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
+    - name: Import Backup resources in CDK BackupStack
+      shell: bash
+      run: |
+        if [ "$STAGE" = "dev" ]; then
+          BACKUP_STACK="BackupStack-shared-lowerEnv"
+        elif [ "$STAGE" = "staging" ] || [ "$STAGE" = "prod" ]; then
+          BACKUP_STACK="BackupStack-$STAGE"
+        else
+          echo "No BackupStack import required for stage: $STAGE"
+          exit 0
+        fi
+        echo "Importing backup resources for stage: $STAGE"
+        yarn workspace @businessnjgovnavigator/api-cdk cdk import "$BACKUP_STACK" \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
     - name: Deploy CDK
       shell: bash
       run: |
