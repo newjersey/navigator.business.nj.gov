@@ -5268,7 +5268,7 @@ __metadata:
     tsx: 4.21.0
     typescript: 5.9.3
     unified: 10.1.2
-    unist-util-visit: 5.0.0
+    unist-util-visit: 5.1.0
     uuid: 9.0.1
     vitest: 2.1.9
     webpack: 5.105.4
@@ -5451,7 +5451,7 @@ __metadata:
     tsx: 4.21.0
     typescript: 5.9.3
     unified: 10.1.2
-    unist-util-visit: 5.0.0
+    unist-util-visit: 5.1.0
     webpack: 5.105.4
   languageName: unknown
   linkType: soft
@@ -38274,14 +38274,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-visit@npm:5.0.0, unist-util-visit@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "unist-util-visit@npm:5.0.0"
+"unist-util-visit@npm:5.1.0, unist-util-visit@npm:^5.0.0":
+  version: 5.1.0
+  resolution: "unist-util-visit@npm:5.1.0"
   dependencies:
     "@types/unist": ^3.0.0
     unist-util-is: ^6.0.0
     unist-util-visit-parents: ^6.0.0
-  checksum: 9ec42e618e7e5d0202f3c191cd30791b51641285732767ee2e6bcd035931032e3c1b29093f4d7fd0c79175bbc1f26f24f26ee49770d32be76f8730a652a857e6
+  checksum: c7b6cce10db3d912ca0d021f3fec1c7142878e0d3bf7df2b17c84ccb61b2b41342f8972874cb8fab50dc02121fc11858a857ccffa9c8305f0d957308c5b4e5fa
   languageName: node
   linkType: hard
 
