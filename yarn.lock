@@ -4973,7 +4973,7 @@ __metadata:
     "@aws-sdk/util-dynamodb": 3.896.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 29.6.3
-    "@smithy/node-http-handler": 4.4.14
+    "@smithy/node-http-handler": 4.4.16
     "@types/cors": 2.8.19
     "@types/dedent": 0.7.2
     "@types/express": 5.0.0
@@ -5111,7 +5111,7 @@ __metadata:
     "@react-email/render": 2.0.0
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
-    "@smithy/node-http-handler": 4.4.14
+    "@smithy/node-http-handler": 4.4.16
     "@storybook/addon-a11y": 7.6.23
     "@storybook/addon-actions": 7.6.23
     "@storybook/addon-designs": 7.0.9
@@ -10980,7 +10980,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/abort-controller@npm:^4.2.11, @smithy/abort-controller@npm:^4.2.5":
+"@smithy/abort-controller@npm:^4.2.12, @smithy/abort-controller@npm:^4.2.5":
   version: 4.2.12
   resolution: "@smithy/abort-controller@npm:4.2.12"
   dependencies:
@@ -11563,16 +11563,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/node-http-handler@npm:4.4.14, @smithy/node-http-handler@npm:^4.0.4, @smithy/node-http-handler@npm:^4.2.1, @smithy/node-http-handler@npm:^4.4.10, @smithy/node-http-handler@npm:^4.4.4, @smithy/node-http-handler@npm:^4.4.5":
-  version: 4.4.14
-  resolution: "@smithy/node-http-handler@npm:4.4.14"
+"@smithy/node-http-handler@npm:4.4.16, @smithy/node-http-handler@npm:^4.0.4, @smithy/node-http-handler@npm:^4.2.1, @smithy/node-http-handler@npm:^4.4.10, @smithy/node-http-handler@npm:^4.4.4, @smithy/node-http-handler@npm:^4.4.5":
+  version: 4.4.16
+  resolution: "@smithy/node-http-handler@npm:4.4.16"
   dependencies:
-    "@smithy/abort-controller": ^4.2.11
-    "@smithy/protocol-http": ^5.3.11
-    "@smithy/querystring-builder": ^4.2.11
-    "@smithy/types": ^4.13.0
+    "@smithy/abort-controller": ^4.2.12
+    "@smithy/protocol-http": ^5.3.12
+    "@smithy/querystring-builder": ^4.2.12
+    "@smithy/types": ^4.13.1
     tslib: ^2.6.2
-  checksum: 6a2c9b78118b79a4c7b3dda16192e30e5701e254b55c7381c402168c0df85ed884434247003b505216eb09feb201f2ec77e2bdaff5dea6706380c899ad9fea9a
+  checksum: 4e3180666a25826ce15022459661ee0718dac680d837ea1190172a3bb4692510683056580bdee82b6470e92653efdd00544b4222feedacef689bf45199773377
   languageName: node
   linkType: hard
 
@@ -11642,7 +11642,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/protocol-http@npm:^5.1.0, @smithy/protocol-http@npm:^5.2.1, @smithy/protocol-http@npm:^5.3.11, @smithy/protocol-http@npm:^5.3.4, @smithy/protocol-http@npm:^5.3.5, @smithy/protocol-http@npm:^5.3.8":
+"@smithy/protocol-http@npm:^5.1.0, @smithy/protocol-http@npm:^5.2.1, @smithy/protocol-http@npm:^5.3.12, @smithy/protocol-http@npm:^5.3.4, @smithy/protocol-http@npm:^5.3.5, @smithy/protocol-http@npm:^5.3.8":
   version: 5.3.12
   resolution: "@smithy/protocol-http@npm:5.3.12"
   dependencies:
@@ -11674,7 +11674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/querystring-builder@npm:^4.1.1, @smithy/querystring-builder@npm:^4.2.11, @smithy/querystring-builder@npm:^4.2.8":
+"@smithy/querystring-builder@npm:^4.1.1, @smithy/querystring-builder@npm:^4.2.12, @smithy/querystring-builder@npm:^4.2.8":
   version: 4.2.12
   resolution: "@smithy/querystring-builder@npm:4.2.12"
   dependencies:
@@ -11854,7 +11854,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/types@npm:^4.12.0, @smithy/types@npm:^4.13.0, @smithy/types@npm:^4.13.1, @smithy/types@npm:^4.2.0, @smithy/types@npm:^4.5.0, @smithy/types@npm:^4.8.1, @smithy/types@npm:^4.9.0":
+"@smithy/types@npm:^4.12.0, @smithy/types@npm:^4.13.1, @smithy/types@npm:^4.2.0, @smithy/types@npm:^4.5.0, @smithy/types@npm:^4.8.1, @smithy/types@npm:^4.9.0":
   version: 4.13.1
   resolution: "@smithy/types@npm:4.13.1"
   dependencies:
