@@ -22,7 +22,7 @@ Markdown==3.10.2
 matplotlib==3.10.8
 matplotlib-inline==0.2.1
 mypy_extensions==1.1.0
-numpy==2.4.2
+numpy==2.4.3
 packaging==26.0
 parso==0.8.6
 pathspec==1.0.4
