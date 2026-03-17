@@ -11,6 +11,7 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { templateEval } from "@/lib/utils/helpers";
 
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/";
+import { Locale, LocaleContext } from "@businessnjgovnavigator/shared/contexts/localeContext";
 import {
   FundingUrlSlugParameter,
   loadAllFundingUrlSlugs,
@@ -20,10 +21,10 @@ import { Funding } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
-  funding: Funding;
+  fundings: Record<Locale, Funding>;
 }
 
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
@@ -91,12 +92,15 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
 };
 
 const FundingPage = (props: Props): ReactElement => {
+  const { locale } = useContext(LocaleContext);
+  const funding = props.fundings[locale];
+
   return (
     <>
-      <NextSeo title={getNextSeoTitle(props.funding.name)} />
+      <NextSeo title={getNextSeoTitle(funding.name)} />
       <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
-          <FundingElement funding={props.funding} />
+          <FundingElement funding={funding} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
@@ -118,7 +122,10 @@ export const getStaticProps = ({
 }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      funding: loadFundingByUrlSlug(params.fundingUrlSlug),
+      fundings: {
+        en: loadFundingByUrlSlug(params.fundingUrlSlug, "en"),
+        "es-LA": loadFundingByUrlSlug(params.fundingUrlSlug, "es-LA"),
+      },
     },
   };
 };
