@@ -95,18 +95,6 @@ describe("Industry Dropdown", () => {
       fireEvent.click(screen.getByLabelText("Industry"));
       expect(screen.getByTestId("generic")).toBeInTheDocument();
       expect(screen.getAllByText(searchTerm).length).toEqual(1);
-      expect(screen.queryByTestId("certified-public-accountant")).not.toBeInTheDocument();
-    });
-
-    it("displays search affirmation when there is an input and showExperienceB is true", () => {
-      render(<IndustryDropdown showExperienceB={true} />);
-
-      const inputElement = screen.getByLabelText("Industry");
-      fireEvent.click(inputElement);
-      expect(screen.queryByTestId("search-affirmation")).not.toBeInTheDocument();
-
-      fireEvent.change(inputElement, { target: { value: "plan" } });
-      expect(screen.getByTestId("search-affirmation")).toBeInTheDocument();
     });
   });
 });

@@ -111,25 +111,13 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
     const genericIndex = filteredList.findIndex((industry) => industry.id === "generic");
 
-    if (props.showExperienceB) {
-      if (genericIndex !== -1) {
-        const genericIndustry = filteredList[genericIndex];
-        filteredList = [
-          ...filteredList.slice(0, genericIndex),
-          ...filteredList.slice(genericIndex + 1),
-          genericIndustry,
-        ];
-      }
-    } else {
-      // For ExperienceA (default), move "All Other Businesses" (generic) to the beginning
-      if (genericIndex !== -1) {
-        const genericIndustry = filteredList[genericIndex];
-        filteredList = [
-          genericIndustry,
-          ...filteredList.slice(0, genericIndex),
-          ...filteredList.slice(genericIndex + 1),
-        ];
-      }
+    if (props.showExperienceB && genericIndex !== -1) {
+      const genericIndustry = filteredList[genericIndex];
+      filteredList = [
+        ...filteredList.slice(0, genericIndex),
+        ...filteredList.slice(genericIndex + 1),
+        genericIndustry,
+      ];
     }
 
     return filteredList;

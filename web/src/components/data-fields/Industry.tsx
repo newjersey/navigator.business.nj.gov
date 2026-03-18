@@ -85,7 +85,6 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
   };
 
   const showExperienceB = userData?.user.abExperience === "ExperienceB";
-  //const showExperienceB = true;
 
   return (
     <>
