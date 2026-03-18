@@ -1077,11 +1077,6 @@ collections:
                   widget: string,
                 }
               - {
-                  label: Landing Page - Start Biz Tile,
-                  name: landingPageStartBizTile,
-                  widget: string,
-                }
-              - {
                   label: Landing Page - Annual Report Tile,
                   name: landingPageAnnualReportTile,
                   widget: string,
@@ -1155,7 +1150,7 @@ collections:
                 }
               - { label: Section 6 - Header Text, name: section6Header, widget: string }
               - {
-                  label:Starting Business Tile Title Text,
+                  label: Starting Business Tile Title Text,
                   name: startingBusinessTileTitleText,
                   widget: string,
                 }
