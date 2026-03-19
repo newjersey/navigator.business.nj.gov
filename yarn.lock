@@ -4931,7 +4931,7 @@ __metadata:
   dependencies:
     "@jest/globals": 30.1.2
     "@types/jest": 29.5.14
-    "@types/node": 24.1.0
+    "@types/node": 24.12.0
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
     aws-cdk: 2.1110.0
@@ -4980,7 +4980,7 @@ __metadata:
     "@types/jest": 29.5.14
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
-    "@types/node": 24.1.0
+    "@types/node": 24.12.0
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.3
     "@types/xml2js": 0.4.14
@@ -5036,7 +5036,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
     "@businessnjgovnavigator/shared": "*"
-    "@types/node": 24.1.0
+    "@types/node": 24.12.0
     "@vitest/coverage-v8": 2.1.9
     cross-env: 10.1.0
     cspell: 9.7.0
@@ -5146,7 +5146,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.10
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 24.1.0
+    "@types/node": 24.12.0
     "@types/react": 18.3.27
     "@types/react-dom": 18.3.7
     "@types/react-slick": 0.23.13
@@ -5286,7 +5286,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.14
-    "@types/node": 24.1.0
+    "@types/node": 24.12.0
     "@types/react": 18.3.27
     "@types/uuid": 10.0.0
     "@typescript-eslint/eslint-plugin": 7.18.0
@@ -5364,7 +5364,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.20
     "@types/mdast": 4.0.4
-    "@types/node": 24.1.0
+    "@types/node": 24.12.0
     "@types/react": 18.3.27
     "@types/react-dom": 18.3.7
     "@types/react-slick": 0.23.13
@@ -14338,21 +14338,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:>=6":
-  version: 24.10.1
-  resolution: "@types/node@npm:24.10.1"
+"@types/node@npm:*, @types/node@npm:24.12.0, @types/node@npm:>=10.0.0, @types/node@npm:>=6":
+  version: 24.12.0
+  resolution: "@types/node@npm:24.12.0"
   dependencies:
     undici-types: ~7.16.0
-  checksum: c2f370ae7a97c04991e0eee6b57e588a2abef0814a5f6e41fda5a9200cf02ae6654fad51c8372ee203ae4134bab80f5bf441c586f7f50e0fda3ba422f35eb3c0
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:24.1.0":
-  version: 24.1.0
-  resolution: "@types/node@npm:24.1.0"
-  dependencies:
-    undici-types: ~7.8.0
-  checksum: 01f9a97909eec619d937af3bc00ac49461e1846656b4d060f648145df06508eb6d77c200637a792481ee93a73976ced46cfbbdfe307e79be0f58ccdc415dfcd2
+  checksum: 1bad1c399515b316362b97c3a17845d960e4f6faba880d3268968bfee269669869a8939a999837e9d7c205aebc3788231f3c805293ce173da50e825922c27e7e
   languageName: node
   linkType: hard
 
@@ -38015,13 +38006,6 @@ __metadata:
   version: 7.16.0
   resolution: "undici-types@npm:7.16.0"
   checksum: 1ef68fc6c5bad200c8b6f17de8e5bc5cfdcadc164ba8d7208cd087cfa8583d922d8316a7fd76c9a658c22b4123d3ff847429185094484fbc65377d695c905857
-  languageName: node
-  linkType: hard
-
-"undici-types@npm:~7.8.0":
-  version: 7.8.0
-  resolution: "undici-types@npm:7.8.0"
-  checksum: 59521a5b9b50e72cb838a29466b3557b4eacbc191a83f4df5a2f7b156bc8263072b145dc4bb8ec41da7d56a7e9b178892458da02af769243d57f801a50ac5751
   languageName: node
   linkType: hard
 
