@@ -113,6 +113,8 @@ jobs:
       INTERCOM_MACROS_BASE_URL: ${{ vars.INTERCOM_MACROS_BASE_URL }}
       INTERCOM_TOKEN: ${{ secrets.INTERCOM_TOKEN }}
 
+      CMS_OAUTH_CLIENT_ID: ${{vars.CMS_OAUTH_CLIENT_ID}}
+      CMS_OAUTH_CLIENT_SECRET: ${{secrets.CMS_OAUTH_CLIENT_SECRET}}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6

@@ -177,6 +177,8 @@ export class ApiStack extends Stack {
     if (githubLambda) {
       const cms = api.addResource("cms");
       attachLambdaToResource(this, cms, githubLambda);
+      const cmsProxy = cms.addResource("{proxy+}");
+      attachLambdaToResource(this, cmsProxy, githubLambda);
     }
   }
 }
