@@ -2955,6 +2955,16 @@ collections:
                       widget: string,
                     }
                   - {
+                      label: Newsletter Subscribe Warning,
+                      name: newsletterSubscribeWarning,
+                      widget: string,
+                    }
+                  - {
+                      label: Newsletter Unsubscribe Warning,
+                      name: newsletterUnsubscribeWarning,
+                      widget: string,
+                    }
+                  - {
                       label: Notification Product News Label,
                       name: notificationProductNewsLabel,
                       widget: string,

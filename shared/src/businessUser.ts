@@ -24,6 +24,7 @@ export type BusinessUser = {
   readonly myNJUserKey?: string;
   readonly intercomHash?: string;
   readonly abExperience: ABExperience;
+  readonly newsletterEmail?: string;
 };
 
 export const decideABExperience = (): ABExperience => {
