@@ -110,6 +110,9 @@ jobs:
       BUSINESS_NAME_BASE_URL: ${{ vars.BUSINESS_NAME_BASE_URL_DEV }}
       INTERCOM_HASH_SECRET: ${{ secrets.INTERCOM_HASH_SECRET }}
 
+      CMS_OAUTH_CLIENT_ID: ${{vars.CMS_OAUTH_CLIENT_ID}}
+      CMS_OAUTH_CLIENT_SECRET: ${{secrets.CMS_OAUTH_CLIENT_SECRET}}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6

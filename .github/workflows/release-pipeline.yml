@@ -172,6 +172,9 @@ jobs:
           echo "GOV_DELIVERY_TOPIC=${{ vars.GOV_DELIVERY_TOPIC }}" >> $GITHUB_ENV
           echo "INTERCOM_HASH_SECRET=${{ secrets.INTERCOM_HASH_SECRET }}" >> $GITHUB_ENV
 
+          echo "CMS_OAUTH_CLIENT_ID=${{vars.CMS_OAUTH_CLIENT_ID}}" >> $GITHUB_ENV
+          echo "CMS_OAUTH_CLIENT_SECRET=${{secrets.CMS_OAUTH_CLIENT_SECRET}}" >> $GITHUB_ENV
+
       - name: Deploy to Production
         uses: ./.github/actions/deploy
         with:

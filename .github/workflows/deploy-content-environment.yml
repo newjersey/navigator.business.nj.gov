@@ -98,6 +98,9 @@ jobs:
       FEATURE_NAICS_INDUSTRY_DETECTION: ${{ vars.FEATURE_NAICS_INDUSTRY_DETECTION_CONTENT }}
       INTERCOM_HASH_SECRET: ${{ secrets.INTERCOM_HASH_SECRET }}
 
+      CMS_OAUTH_CLIENT_ID: ${{vars.CMS_OAUTH_CLIENT_ID}}
+      CMS_OAUTH_CLIENT_SECRET: ${{secrets.CMS_OAUTH_CLIENT_SECRET}}
+
     steps:
       - uses: actions/checkout@v6
 
