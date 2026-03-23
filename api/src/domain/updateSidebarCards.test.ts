@@ -1,7 +1,6 @@
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import {
   generateBusiness,
-  generateMunicipality,
   generatePreferences,
   generateProfileData,
   generateUserDataForBusiness,
@@ -10,10 +9,9 @@ import {
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
-import { OperatingPhaseId, OperatingPhases } from "@shared/index";
+import { OperatingPhaseId } from "@shared/index";
 
-const { formationNudge, fundingNudge, goToProfile, notRegistered, notRegisteredUpAndRunning } =
-  SIDEBAR_CARDS;
+const { formationNudge, fundingNudge, notRegistered, notRegisteredUpAndRunning } = SIDEBAR_CARDS;
 
 describe("updateRoadmapSidebarCards", () => {
   describe("not registered card", () => {
@@ -110,10 +108,9 @@ describe("updateRoadmapSidebarCards", () => {
 
   describe("formation nudge", () => {
     it("adds formation-nudge if operatingPhase is NEEDS_TO_FORM", () => {
-      const taskId = formationTaskId;
       const userData = generateUserDataForBusiness(
         generateBusiness({
-          taskProgress: { [taskId]: "TO_DO" },
+          taskProgress: { [formationTaskId]: "TO_DO" },
 
           profileData: generateProfileData({
             operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
@@ -192,75 +189,5 @@ describe("updateRoadmapSidebarCards", () => {
         fundingNudge,
       );
     });
-  });
-
-  describe("go-to-profile nudge", () => {
-    const phasesWhereGoToProfileNudgeTrue = OperatingPhases.filter(
-      (it) => it.displayGoToProfileNudge,
-    ).map((it) => it.id);
-    const phasesWhereGoToProfileNudgeFalse = OperatingPhases.filter(
-      (it) => !it.displayGoToProfileNudge,
-    ).map((it) => it.id);
-
-    it.each(phasesWhereGoToProfileNudgeFalse)(
-      "does not add go-to-profile nudge for %s",
-      (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase,
-              homeBasedBusiness: undefined,
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [] }),
-          }),
-        );
-        const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-          goToProfile,
-        );
-      },
-    );
-
-    it.each(phasesWhereGoToProfileNudgeTrue)(
-      "adds go-to-profile nudge for %s when at least one opportunity question unanswered",
-      (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase,
-              homeBasedBusiness: undefined,
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [] }),
-          }),
-        );
-        const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-          goToProfile,
-        );
-      },
-    );
-
-    it.each(phasesWhereGoToProfileNudgeTrue)(
-      "removes go-to-profile nudge for %s when all opportunity questions answered",
-      (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase,
-              homeBasedBusiness: true,
-              dateOfFormation: "2020-01-01",
-              municipality: generateMunicipality({}),
-              ownershipTypeIds: ["none"],
-              existingEmployees: "12",
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [] }),
-          }),
-        );
-        const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-          goToProfile,
-        );
-      },
-    );
   });
 });

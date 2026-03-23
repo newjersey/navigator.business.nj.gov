@@ -2544,20 +2544,6 @@ export default {
         },
       },
     },
-    go_to_profile_nudge: {
-      click: {
-        go_to_profile: () => {
-          eventRunner.track({
-            event: "graduation_phase_interactions",
-            legacy_event_action: "click",
-            legacy_event_category: "go_to_profile_nudge",
-            legacy_event_label: "go_to_profile",
-            action: "go_to_profile_screen",
-            item: "go_to_profile_nudge_button",
-          });
-        },
-      },
-    },
     finish_setup_on_myNewJersey_button: {
       submit: {
         go_to_myNJ_registration: () => {

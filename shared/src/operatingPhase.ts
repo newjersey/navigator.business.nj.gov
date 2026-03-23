@@ -15,7 +15,6 @@ export interface OperatingPhase {
   readonly sectorRequired: boolean;
   readonly displayBusinessStructurePrompt: boolean;
   readonly displayHomeBasedPrompt: boolean;
-  readonly displayGoToProfileNudge: boolean;
   readonly displayAnytimeActions: boolean;
   readonly displaySidebarCardNotRegistered: boolean;
   readonly displayEmployerRatesInProfile: boolean;
@@ -61,7 +60,6 @@ export const LookupOperatingPhaseById = (
       sectorRequired: false,
       displayBusinessStructurePrompt: false,
       displayHomeBasedPrompt: false,
-      displayGoToProfileNudge: false,
       displayAnytimeActions: false,
       displaySidebarCardNotRegistered: false,
       displayEmployerRatesInProfile: false,
@@ -87,7 +85,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: true,
     displayHomeBasedPrompt: false,
     sectorRequired: false,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: true,
     displayEmployerRatesInProfile: false,
@@ -109,7 +106,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
     sectorRequired: false,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: true,
     displayEmployerRatesInProfile: false,
@@ -131,7 +127,6 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: true,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
-    displayGoToProfileNudge: true,
     displayAnytimeActions: true,
     displaySidebarCardNotRegistered: true,
     displayEmployerRatesInProfile: false,
@@ -153,7 +148,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
     sectorRequired: false,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: false,
@@ -175,7 +169,6 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: false,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: false,
@@ -197,7 +190,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: true,
     displayHomeBasedPrompt: false,
     sectorRequired: false,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: false,
@@ -219,7 +211,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     sectorRequired: true,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: true,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: true,
@@ -241,7 +232,6 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: true,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
-    displayGoToProfileNudge: true,
     displayAnytimeActions: true,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: true,
@@ -263,7 +253,6 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: false,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: false,
@@ -285,7 +274,6 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: false,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
-    displayGoToProfileNudge: false,
     displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
     displayEmployerRatesInProfile: false,
