@@ -1,9 +1,8 @@
 import { UpdateSidebarCards } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { getFieldsForProfile, isFieldAnswered } from "@shared/domain-logic/opportunityFields";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
-import { LookupOperatingPhaseById, OperatingPhaseId } from "@shared/operatingPhase";
+import { OperatingPhaseId } from "@shared/operatingPhase";
 import { UserData } from "@shared/userData";
 
 export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): UserData => {
@@ -49,20 +48,6 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     showCard(SIDEBAR_CARDS.fundingNudge);
   } else {
     hideCard(SIDEBAR_CARDS.fundingNudge);
-  }
-
-  if (LookupOperatingPhaseById(operatingPhase).displayGoToProfileNudge) {
-    const isEveryOpportunityFieldAnswered = getFieldsForProfile(currentBusiness.profileData).every(
-      (field) => {
-        return isFieldAnswered(field, currentBusiness.profileData);
-      },
-    );
-
-    if (isEveryOpportunityFieldAnswered) {
-      hideCard(SIDEBAR_CARDS.goToProfile);
-    } else {
-      showCard(SIDEBAR_CARDS.goToProfile);
-    }
   }
 
   return modifyCurrentBusiness(userData, (business) => ({
