@@ -7,7 +7,7 @@ category:
 industryIds:
   - pest-control
 sectorIds: []
-moveToRecommendedForYouSection: true
+moveToRecommendedForYouSection: false
 urlSlug: commercial-pest-applicator-license-recert
 summaryDescriptionMd: You must recertify your commercial `pesticide|pesticide`
   applicator license every 5 years by October 31st.
