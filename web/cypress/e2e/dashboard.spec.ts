@@ -1,10 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable testing-library/await-async-utils */
 
-import {
-  clickDeferredSaveButton,
-  completeBusinessStructureTask,
-} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   completeExistingBusinessOnboarding,
   completeNewBusinessOnboarding,
@@ -41,7 +38,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
       });
     });
 
-    describe.skip("Starting a Business", () => {
+    describe("Starting a Business", () => {
       it("enters user info and shows the dashboard", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
@@ -76,8 +73,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.get('[data-step="3"]').should("exist");
       });
 
+      //choosing Cannabis for this test, to satisfy the town-mercantile-license option
       it("verifies the task screen and mini-roadmap displays", () => {
-        const industry = LookupIndustryById("e-commerce");
+        const industry = LookupIndustryById("cannabis");
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
@@ -85,22 +83,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
         });
 
         completeBusinessStructureTask({ legalStructureId });
-
-        // answer deferred question to get local-requirements task
-        onDashboardPage.getHomeBased(true).should("exist");
-        onDashboardPage.getHomeBased(false).should("exist");
-
-        onDashboardPage.selectHomeBased(false);
-        onDashboardPage.getHomeBased(false).should("be.checked");
-
-        clickDeferredSaveButton();
-        onDashboardPage.getHomeBased(true).should("not.exist");
-        onDashboardPage.getHomeBased(false).should("not.exist");
-
-        cy.wait(1000);
-
-        cy.get('[data-task="identify-potential-lease"]').should("exist");
-        cy.wait(1000);
 
         // tasks screen
         cy.get('[data-task="register-trade-name"]').first().click({ force: true });
