@@ -8,7 +8,8 @@
 .email-check-card {
   background-color: variables.$white;
   border: 1px solid variables.$base-lighter;
-  width: fit-content;
+  width: 100%;
+  max-width: 1200px;
   @include mixin.addDropShadow(variables.$drop-shadow-xs);
 
   .usa-button {
@@ -23,13 +24,68 @@
   p {
     color: variables.$base-dark;
   }
-  .need-help-text button {
-    margin-top: 0;
+
+  .help-text-container {
+    .usa-prose {
+      display: inline;
+    }
+
+    button {
+      display: inline;
+    }
+
+    .usa-button--unstyled,
+    button.usa-button--unstyled {
+      color: #38536f !important;
+
+      .dashed-underline,
+      .dashed-underline * {
+        color: #38536f !important;
+      }
+
+      * {
+        color: #38536f !important;
+      }
+    }
+  }
+
+  .need-help-text {
+    > div {
+      display: inline;
+    }
+
+    .usa-prose {
+      display: inline;
+    }
+
+    a,
+    button {
+      white-space: normal;
+      margin-top: 0;
+    }
+  }
+
+  .input-error-bar.error {
+    left: 0 !important;
+    width: 100% !important;
   }
 
   @media (max-width: variables.$sm) {
-    .help-text-container {
-      max-width: 16.25rem;
+    .or-divider {
+      display: none !important;
+    }
+
+    .mobile-border-top {
+      border-top: 1px solid variables.$base-lighter;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .need-help-text {
+      .intercom-chat-link {
+        white-space: normal !important;
+        display: inline !important;
+      }
     }
   }
 }
