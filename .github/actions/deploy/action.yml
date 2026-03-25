@@ -6,25 +6,11 @@ inputs:
     description: "Identifier used for both the image name and ECS service name."
     required: true
 
-  import_tables:
-    description: "Enable Dynamo Table ownership mode import (default: false)"
-    required: false
-    default: "false"
-
-  run_import_command:
-    description: "Run the CDK import for DynamoDB Tables"
-    required: false
-    default: "false"
-
 runs:
   using: "composite"
   steps:
     - name: Deploy Setup
       uses: ./.github/actions/deploy-setup
-      with:
-        import_tables: ${{ inputs.import_tables }}
-        run_import_command: ${{ inputs.run_import_command }}
-
     - name: Package WebApp Docker Image
       uses: ./.github/actions/package-webapp-docker
       with:

@@ -1,7 +1,7 @@
 import { RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
-import { LOWER_STAGES } from "./constants";
+import { DEV_STAGE, LOWER_STAGES } from "./constants";
 
 export interface StorageStackProps extends StackProps {
   stage: string;
@@ -9,7 +9,7 @@ export interface StorageStackProps extends StackProps {
 
 export class StorageStack extends Stack {
   public readonly messagesBucket: s3.Bucket;
-  public readonly intercomMacrosBucket: s3.Bucket;
+  public readonly intercomMacrosBucket?: s3.Bucket;
 
   constructor(scope: Construct, id: string, props: StorageStackProps) {
     super(scope, id, props);
@@ -25,14 +25,15 @@ export class StorageStack extends Stack {
       encryption: s3.BucketEncryption.S3_MANAGED,
       versioned: false,
     });
-
-    this.intercomMacrosBucket = new s3.Bucket(this, "IntercomMacrosBucket", {
-      bucketName: `nj-bfs-intercom-macros-${props.stage}`,
-      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-      removalPolicy: RemovalPolicy.RETAIN,
-      autoDeleteObjects: false,
-      encryption: s3.BucketEncryption.S3_MANAGED,
-      versioned: false,
-    });
+    if (props.stage === DEV_STAGE) {
+      this.intercomMacrosBucket = new s3.Bucket(this, "IntercomMacrosBucket", {
+        bucketName: `nj-bfs-intercom-macros-${props.stage}`,
+        blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+        removalPolicy: RemovalPolicy.RETAIN,
+        autoDeleteObjects: false,
+        encryption: s3.BucketEncryption.S3_MANAGED,
+        versioned: false,
+      });
+    }
   }
 }

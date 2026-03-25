@@ -25,7 +25,7 @@ export interface LambdaStackProps extends StackProps {
   stage: string;
   lambdaRole: iam.Role;
   messagesBucket: IBucket;
-  intercomMacrosBucket: IBucket;
+  intercomMacrosBucket?: IBucket;
 }
 
 export class LambdaStack extends Stack {
@@ -254,7 +254,9 @@ export class LambdaStack extends Stack {
           CMS_OAUTH_CLIENT_SECRET: cmsoAuthClientSecret,
         },
       });
+    }
 
+    if (props.stage === DEV_STAGE && props.intercomMacrosBucket) {
       this.lambdas.updateKbWithIntercomMacros = createLambda(this, {
         role: props.lambdaRole,
         id: `${this.serviceName}-${props.stage}-updateKbWithIntercomMacros`,

@@ -179,5 +179,3 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator
-          import_tables: "true"
-          run_import_command: "true"
