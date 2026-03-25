@@ -5,6 +5,7 @@ import { DataStack } from "../lib/dataStack";
 import { IamStack } from "../lib/iamStack";
 import { LambdaStack } from "../lib/lambdaStack";
 import { StorageStack } from "../lib/storageStack";
+import { DEV_STAGE } from "../lib/constants";
 dotenv.config({ path: "../.env" });
 
 const app = new cdk.App();
@@ -36,7 +37,7 @@ const lambdaStack = new LambdaStack(app, `LambdaStack-${stage}`, {
   stage: stage,
   lambdaRole: iamStack.role,
   messagesBucket: storageStack.messagesBucket,
-  intercomMacrosBucket: storageStack.intercomMacrosBucket,
+  intercomMacrosBucket: stage === DEV_STAGE ? storageStack.intercomMacrosBucket : undefined,
   env,
 });
 
