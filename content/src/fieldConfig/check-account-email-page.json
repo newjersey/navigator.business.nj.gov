@@ -2,14 +2,17 @@
   "checkAccountEmailPage": {
     "defaultErrorMessage": "An error has occurred. Please try again later.",
     "invalidEmailError": "Please enter a valid email address.",
-    "needHelpText": "Need help?",
+    "emailNotFoundAlertError": "Email not found.  You may need to [create a Business.NJ.gov account and link with myNewJersey](/onboarding?page=1)",
+    "needHelpText": "Need More Help?",
     "inputLabel": "Email",
-    "intercomChatText": "Chat with us",
-    "header": "Log in to Business.NJ.gov",
-    "noAccountText": "Don’t have an account?",
-    "linkAccountLinkText": "Sign up and link your myNewJersey account",
+    "assistanceText": "For more assistance, visit our [Login Issues Help page](/support/login) or",
+    "intercomChatText": "chat with a Business Expert",
+    "header": "Log In to Your Account",
+    "noAccountText": "Use your `myNewJersey|my-new-jersey` email to log in to your [Business.NJ.gov](/) account and save your progress.",
     "inputButton": "Next",
+    "createAccountButton": "Create a Business.NJ.gov Account",
+    "subButtonText": "Or, if you've never logged in to Business.NJ.gov",
     "serviceNotAvailableError": "Service unavailable. Please try again later.",
-    "emailNotFoundError": "No account found. Try a different email address."
+    "emailNotFoundError": "Enter an email linked to myNewJersey."
   }
 }
