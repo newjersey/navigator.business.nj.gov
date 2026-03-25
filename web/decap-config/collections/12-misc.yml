@@ -3251,6 +3251,11 @@ collections:
               - { label: "Input label", name: "inputLabel", widget: "string" }
               - { label: "Invalid Email text", name: "invalidEmailError", widget: "string" }
               - {
+                  label: "Invalid Email Alert error",
+                  name: "emailNotFoundAlertError",
+                  widget: "string",
+                }
+              - {
                   label: "Email Not Found Error Text",
                   name: "emailNotFoundError",
                   widget: "string",
@@ -3266,10 +3271,12 @@ collections:
                   widget: "string",
                 }
               - { label: "Input button", name: "inputButton", widget: "string" }
-              - { label: "No Account Text", name: "noAccountText", widget: "string" }
-              - { label: "Link Account Link Text", name: "linkAccountLinkText", widget: "string" }
+              - { label: "Sub button text", name: "subButtonText", widget: "string" }
+              - { label: "Create Account Button", name: "createAccountButton", widget: "string" }
+              - { label: "No Account Text", name: "noAccountText", widget: "markdown" }
               - { label: "Need help text", name: "needHelpText", widget: "string" }
-              - { label: "Intercom chat text", name: "intercomChatText", widget: "string" }
+              - { label: "Assistance Text", name: "assistanceText", widget: "markdown" }
+              - { label: "Intercom chat text", name: "intercomChatText", widget: "markdown" }
 
   - name: "component-accessibility"
     label: "Component Accessibility"
