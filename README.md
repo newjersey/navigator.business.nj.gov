@@ -1,13 +1,14 @@
 # navigator.business.nj.gov
 
 This is the development repository for the work-in-progress business navigator from the New Jersey
-Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site,
+Innovation Authority. For info on the existing [Business.NJ.gov](https://business.nj.gov) site,
 please see the
 [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov).
 
 [![GitHub Actions Build Status](https://github.com/newjersey/navigator.business.nj.gov/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/newjersey/navigator.business.nj.gov/actions/workflows/build-and-test.yml?query=branch%3Amain)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![semantic-release](https://img.shields.io/badge/semantic-release-e10079.svg?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/newjersey/navigator.business.nj.gov)
 
 ## Architecture
 
@@ -39,16 +40,17 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
 
 ### Software requirements
 
-- [Node.js 22 "Jod" LTS](https://nodejs.org/en/download/) (We recommend using
+- [Node.js 24 "Krypton" LTS](https://nodejs.org/en/download/) (We recommend using
   [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If installing via
   package manager, we suggest installing `corepack` if available separately.)
-- [Docker](https://www.docker.com/) — required for running containers locally
+- [Docker CLI](https://www.docker.com/) — required for running containers locally
   - **macOS:** We recommend using [Colima](https://github.com/abiosoft/colima) as your Docker
     runtime
     - **Recommended Colima Configuration:** aarch64, cpu: 8, memory: 16, disk: 256, runtime: docker
     - You can manually configure Colima with `colima start --edit` or the script `install.sh` will
       configure automatically.
-  - **Windows (WSL2):** Use Docker Desktop with WSL2 integration enabled
+  - **Windows (WSL2):** Use Docker Desktop with WSL2 integration enabled, or use native Docker CLI
+    installed in a Linux-based WSL2 environment
   - **Linux:** Use the native Docker Engine installation
 - [AWS CLI](https://aws.amazon.com/cli/)
 - [Python 3.13](https://www.python.org/downloads/)
@@ -347,7 +349,7 @@ following actions:
 ## Business.NJ.gov
 
 [Business.NJ.gov](https://business.nj.gov) is being developed by the
-[New Jersey State Office of Innovation](https://innovation.nj.gov),
+[New Jersey Innovation Authority](https://innovation.nj.gov),
 [New Jersey Department of State's Business Action Center](https://nj.gov/state/bac/), and the
 [New Jersey Economic Development Authority](https://www.njeda.gov) with support from departments and
 agencies across the State.
@@ -387,10 +389,10 @@ code base served as a foundation for the site.
 
 Please reach out or leave feedback for us at
 [Business.NJ.gov/feedback](https://business.nj.gov/feedback). You can also open a GitHub pull
-request or issue. If you want to get in touch with the Office of Innovation team, please email us at
-[team@innovation.nj.gov](mailto:team@innovation.nj.gov).
+request or issue. If you want to get in touch with the New Jersey Innovation Authority team, please
+email us at [team@innovation.nj.gov](mailto:team@innovation.nj.gov).
 
-### Join the Office of Innovation!
+### Join the New Jersey Innovation Authority
 
 If you are excited to design and deliver modern policies and services to improve the lives of all
 New Jerseyans, you should [join us](https://innovation.nj.gov/join)!
