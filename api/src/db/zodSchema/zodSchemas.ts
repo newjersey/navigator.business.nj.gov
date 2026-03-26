@@ -640,7 +640,7 @@ export const v190ForeignGoodStandingFileObjectSchema: z.ZodType<v190ForeignGoodS
   });
 
 export const v190NameAvailabilityResponseSchema = z.object({
-  status: v190NameAvailabilityStatusSchema,
+  status: z.union([v190NameAvailabilityStatusSchema, z.undefined()]),
   similarNames: z.array(z.string()),
   invalidWord: z.string().optional(),
 }) satisfies z.ZodType<v190NameAvailabilityResponse>;
@@ -677,10 +677,12 @@ export const v190LicenseSearchAddressSchema = z.object({
   zipCode: z.string(),
 }) satisfies z.ZodType<v190LicenseSearchAddress>;
 
-export const v190TaxFilingCalendarEventSchema = v190CalendarEventSchema.extend({
-  identifier: z.string(),
-  calendarEventType: z.literal("TAX-FILING"), // override enum to fixed value
-}) satisfies z.ZodType<v190TaxFilingCalendarEvent>;
+export const v190TaxFilingCalendarEventSchema = v190CalendarEventSchema
+  .extend({
+    identifier: z.string(),
+    calendarEventType: z.literal("TAX-FILING"), // override enum to fixed value
+  })
+  .readonly() satisfies z.ZodType<v190TaxFilingCalendarEvent>;
 
 export const v190LicenseSearchNameAndAddressSchema = v190LicenseSearchAddressSchema.extend({
   name: z.string(),
@@ -775,14 +777,18 @@ export const v190FormationAddressSchema = z.object({
   businessLocationType: z.union([v190FormationBusinessLocationTypeSchema, z.undefined()]),
 }) satisfies z.ZodType<v190FormationAddress>;
 
-export const v190FormationMemberSchema = v190FormationAddressSchema.extend({
-  name: z.string(),
-}) satisfies z.ZodType<v190FormationMember>;
+export const v190FormationMemberSchema = v190FormationAddressSchema
+  .extend({
+    name: z.string(),
+  })
+  .readonly() satisfies z.ZodType<v190FormationMember>;
 
-export const v190FormationIncorporatorSchema = z.object({
-  ...v190FormationSignerSchema.shape,
-  ...v190FormationAddressSchema.shape,
-});
+export const v190FormationIncorporatorSchema = z
+  .object({
+    ...v190FormationSignerSchema.shape,
+    ...v190FormationAddressSchema.shape,
+  })
+  .readonly();
 
 export const v190IndustrySpecificDataSchema = z.object({
   liquorLicense: z.boolean(),
@@ -794,7 +800,7 @@ export const v190IndustrySpecificDataSchema = z.object({
   cannabisLicenseType: v190CannabisLicenseTypeSchema,
   cannabisMicrobusiness: z.union([z.boolean(), z.undefined()]),
   constructionRenovationPlan: z.union([z.boolean(), z.undefined()]),
-  carService: z.union([v190CarServiceTypeSchema, z.undefined()]),
+  carService: v190CarServiceTypeSchema,
   interstateTransport: z.union([z.boolean(), z.undefined()]),
   interstateLogistics: z.union([z.boolean(), z.undefined()]),
   interstateMoving: z.union([z.boolean(), z.undefined()]),
@@ -845,77 +851,79 @@ export const v190ProfileDataSchema = v190IndustrySpecificDataSchema.extend({
   deptOfLaborEin: z.string(),
 }) satisfies z.ZodType<v190ProfileData>;
 
-export const v190FormationFormDataSchema = v190FormationAddressSchema.extend({
-  businessName: z.string(),
-  businessNameConfirmation: z.union([z.boolean(), z.undefined()]),
-  businessSuffix: z.union([v190BusinessSuffixSchema, z.undefined()]),
-  businessTotalStock: z.string(),
-  businessStartDate: z.string(), // YYYY-MM-DD
-  businessPurpose: z.string(),
-  withdrawals: z.string(),
-  combinedInvestment: z.string(),
-  dissolution: z.string(),
-  canCreateLimitedPartner: z.union([z.boolean(), z.undefined()]),
-  createLimitedPartnerTerms: z.string(),
-  canGetDistribution: z.union([z.boolean(), z.undefined()]),
-  getDistributionTerms: z.string(),
-  canMakeDistribution: z.union([z.boolean(), z.undefined()]),
-  makeDistributionTerms: z.string(),
-  hasNonprofitBoardMembers: z.union([z.boolean(), z.undefined()]),
-  nonprofitBoardMemberQualificationsSpecified: v190InFormInBylawsSchema,
-  nonprofitBoardMemberQualificationsTerms: z.string(),
-  nonprofitBoardMemberRightsSpecified: v190InFormInBylawsSchema,
-  nonprofitBoardMemberRightsTerms: z.string(),
-  nonprofitTrusteesMethodSpecified: v190InFormInBylawsSchema,
-  nonprofitTrusteesMethodTerms: z.string(),
-  nonprofitAssetDistributionSpecified: v190InFormInBylawsSchema,
-  nonprofitAssetDistributionTerms: z.string(),
-  additionalProvisions: z.union([z.array(z.string()), z.undefined()]),
-  agentType: z.enum(["MYSELF", "AUTHORIZED_REP", "PROFESSIONAL_SERVICE"]),
-  agentNumber: z.string(),
-  agentName: z.string().max(AGENT_NAME_MAX_CHAR, {
-    message: `agent name cannot exceed ${AGENT_NAME_MAX_CHAR} characters`,
-  }),
-  agentEmail: z.string().max(AGENT_EMAIL_MAX_CHAR, {
-    message: `agent email cannot exceed ${AGENT_EMAIL_MAX_CHAR} characters`,
-  }),
-  agentOfficeAddressLine1: z.string().max(AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR, {
-    message: `agent address line 1 cannot exceed ${AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR} characters`,
-  }),
-  agentOfficeAddressLine2: z.string().max(AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR, {
-    message: `agent address line 2 cannot exceed ${AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR} characters`,
-  }),
-  agentOfficeAddressCity: z.string().max(AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR, {
-    message: `agent address city cannot exceed ${AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR} characters`,
-  }),
-  agentOfficeAddressZipCode: z.string(),
-  agentUseAccountInfo: z.boolean(),
-  agentUseBusinessAddress: z.boolean(),
-  members: z.union([z.array(v190FormationMemberSchema), z.undefined()]),
-  incorporators: z.union([z.array(v190FormationIncorporatorSchema), z.undefined()]),
-  signers: z.union([z.array(v190FormationSignerSchema), z.undefined()]),
-  paymentType: v190PaymentTypeSchema,
-  annualReportNotification: z.boolean(),
-  corpWatchNotification: z.boolean(),
-  officialFormationDocument: z.boolean(),
-  certificateOfStanding: z.boolean(),
-  certifiedCopyOfFormationDocument: z.boolean(),
-  contactFirstName: z.string().max(CONTACT_FIRST_NAME_MAX_CHAR, {
-    message: `contact first name cannot exceed ${CONTACT_FIRST_NAME_MAX_CHAR} characters`,
-  }),
-  contactLastName: z.string().max(CONTACT_LAST_NAME_MAX_CHAR, {
-    message: `contact last name cannot exceed ${CONTACT_LAST_NAME_MAX_CHAR} characters`,
-  }),
-  contactPhoneNumber: z.string(),
-  foreignStateOfFormation: z.union([v190StateObjectSchema, z.undefined()]),
-  foreignDateOfFormation: z.union([z.string(), z.undefined()]), // YYYY-MM-DD
-  foreignGoodStandingFile: z.union([v190ForeignGoodStandingFileObjectSchema, z.undefined()]),
-  legalType: z.string(),
-  willPracticeLaw: z.union([z.boolean(), z.undefined()]),
-  isVeteranNonprofit: z.union([z.boolean(), z.undefined()]),
-  checkNameReservation: z.union([z.boolean(), z.undefined()]),
-  howToProceed: v190HowToProceedOptionsSchema,
-}) satisfies z.ZodType<v190FormationFormData>;
+export const v190FormationFormDataSchema = v190FormationAddressSchema
+  .extend({
+    businessName: z.string(),
+    businessNameConfirmation: z.union([z.boolean(), z.undefined()]),
+    businessSuffix: z.union([v190BusinessSuffixSchema, z.undefined()]),
+    businessTotalStock: z.string(),
+    businessStartDate: z.string(), // YYYY-MM-DD
+    businessPurpose: z.string(),
+    withdrawals: z.string(),
+    combinedInvestment: z.string(),
+    dissolution: z.string(),
+    canCreateLimitedPartner: z.union([z.boolean(), z.undefined()]),
+    createLimitedPartnerTerms: z.string(),
+    canGetDistribution: z.union([z.boolean(), z.undefined()]),
+    getDistributionTerms: z.string(),
+    canMakeDistribution: z.union([z.boolean(), z.undefined()]),
+    makeDistributionTerms: z.string(),
+    hasNonprofitBoardMembers: z.union([z.boolean(), z.undefined()]),
+    nonprofitBoardMemberQualificationsSpecified: v190InFormInBylawsSchema,
+    nonprofitBoardMemberQualificationsTerms: z.string(),
+    nonprofitBoardMemberRightsSpecified: v190InFormInBylawsSchema,
+    nonprofitBoardMemberRightsTerms: z.string(),
+    nonprofitTrusteesMethodSpecified: v190InFormInBylawsSchema,
+    nonprofitTrusteesMethodTerms: z.string(),
+    nonprofitAssetDistributionSpecified: v190InFormInBylawsSchema,
+    nonprofitAssetDistributionTerms: z.string(),
+    additionalProvisions: z.union([z.array(z.string()), z.undefined()]),
+    agentType: z.enum(["MYSELF", "AUTHORIZED_REP", "PROFESSIONAL_SERVICE"]),
+    agentNumber: z.string(),
+    agentName: z.string().max(AGENT_NAME_MAX_CHAR, {
+      message: `agent name cannot exceed ${AGENT_NAME_MAX_CHAR} characters`,
+    }),
+    agentEmail: z.string().max(AGENT_EMAIL_MAX_CHAR, {
+      message: `agent email cannot exceed ${AGENT_EMAIL_MAX_CHAR} characters`,
+    }),
+    agentOfficeAddressLine1: z.string().max(AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR, {
+      message: `agent address line 1 cannot exceed ${AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR} characters`,
+    }),
+    agentOfficeAddressLine2: z.string().max(AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR, {
+      message: `agent address line 2 cannot exceed ${AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR} characters`,
+    }),
+    agentOfficeAddressCity: z.string().max(AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR, {
+      message: `agent address city cannot exceed ${AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR} characters`,
+    }),
+    agentOfficeAddressZipCode: z.string(),
+    agentUseAccountInfo: z.boolean(),
+    agentUseBusinessAddress: z.boolean(),
+    members: z.union([z.array(v190FormationMemberSchema), z.undefined()]),
+    incorporators: z.union([z.array(v190FormationIncorporatorSchema), z.undefined()]),
+    signers: z.union([z.array(v190FormationSignerSchema.readonly()), z.undefined()]),
+    paymentType: v190PaymentTypeSchema,
+    annualReportNotification: z.boolean(),
+    corpWatchNotification: z.boolean(),
+    officialFormationDocument: z.boolean(),
+    certificateOfStanding: z.boolean(),
+    certifiedCopyOfFormationDocument: z.boolean(),
+    contactFirstName: z.string().max(CONTACT_FIRST_NAME_MAX_CHAR, {
+      message: `contact first name cannot exceed ${CONTACT_FIRST_NAME_MAX_CHAR} characters`,
+    }),
+    contactLastName: z.string().max(CONTACT_LAST_NAME_MAX_CHAR, {
+      message: `contact last name cannot exceed ${CONTACT_LAST_NAME_MAX_CHAR} characters`,
+    }),
+    contactPhoneNumber: z.string(),
+    foreignStateOfFormation: z.union([v190StateObjectSchema, z.undefined()]),
+    foreignDateOfFormation: z.union([z.string(), z.undefined()]), // YYYY-MM-DD
+    foreignGoodStandingFile: z.union([v190ForeignGoodStandingFileObjectSchema, z.undefined()]),
+    legalType: z.string(),
+    willPracticeLaw: z.union([z.boolean(), z.undefined()]),
+    isVeteranNonprofit: z.union([z.boolean(), z.undefined()]),
+    checkNameReservation: z.union([z.boolean(), z.undefined()]),
+    howToProceed: v190HowToProceedOptionsSchema,
+  })
+  .readonly() satisfies z.ZodType<v190FormationFormData>;
 
 export const v190FormationDataSchema: z.ZodType<v190FormationData> = z.object({
   formationFormData: v190FormationFormDataSchema,
@@ -927,7 +935,11 @@ export const v190FormationDataSchema: z.ZodType<v190FormationData> = z.object({
   lastVisitedPageIndex: z.number(),
 });
 
-export const v190LicensesSchema = z.record(z.string(), v190LicenseDetailsSchema);
+export const v190LicensesSchema = z.object(
+  Object.fromEntries(
+    v190LicenseNameSchema.options.map((name) => [name, v190LicenseDetailsSchema.optional()]),
+  ) as Record<string, z.ZodOptional<typeof v190LicenseDetailsSchema>>,
+);
 
 export const v190LicenseDataSchema: z.ZodType<v190LicenseData> = z.object({
   lastUpdatedISO: z.string(),
@@ -989,7 +1001,7 @@ export const v190CrtkEmailMetadataSchema: z.ZodType<v190CrtkEmailMetadata> = z.o
 
 export const v190CrtkDataSchema: z.ZodType<v190CrtkData> = z.object({
   lastUpdatedISO: z.string(),
-  crtkBusinessDetails: z.union([v190CrtkBusinessDetailsSchema, z.undefined()]),
+  crtkBusinessDetails: v190CrtkBusinessDetailsSchema.optional(),
   crtkSearchResult: z.union([v190CrtkSearchResultSchema]),
   crtkEntry: v190CrtkEntrySchema,
   crtkEmailSent: z.boolean().optional(),
