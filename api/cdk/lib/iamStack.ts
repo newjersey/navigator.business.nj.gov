@@ -8,6 +8,8 @@ import {
   DEV_STAGE,
   DOCUMENT_S3_BUCKET_NAME,
   MESSAGES_TABLE,
+  PROD_STAGE,
+  STAGING_STAGE,
   USERS_TABLE,
 } from "./constants";
 import { applyStandardTags } from "./stackUtils";
@@ -19,10 +21,36 @@ export interface IamStackProps extends StackProps {
 export class IamStack extends Stack {
   readonly serviceName: string;
   public readonly role: iam.Role;
+  public readonly backupRole?: iam.Role;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
     this.serviceName = API_SERVICE_NAME;
+
+    const shouldCreateBackupRole =
+      props.stage === DEV_STAGE || props.stage === STAGING_STAGE || props.stage === PROD_STAGE;
+
+    if (shouldCreateBackupRole) {
+      const backupRole = new iam.Role(this, "backupRole", {
+        assumedBy: new iam.ServicePrincipal("backup.amazonaws.com"),
+        roleName: `Backups`,
+        description: `Role For Backup Service`,
+      });
+
+      backupRole.addManagedPolicy(
+        iam.ManagedPolicy.fromAwsManagedPolicyName(
+          "service-role/AWSBackupServiceRolePolicyForBackup",
+        ),
+      );
+      backupRole.addManagedPolicy(
+        iam.ManagedPolicy.fromAwsManagedPolicyName(
+          "service-role/AWSBackupServiceRolePolicyForRestores",
+        ),
+      );
+
+      applyStandardTags(backupRole, props.stage);
+      this.backupRole = backupRole;
+    }
 
     const putMetricDataPolicyInCloudwatch = new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
