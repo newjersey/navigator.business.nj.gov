@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "PUT",
+    "urlPattern": "/api/account/.*/subscribers/.*.xml"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/xml"
+    }
+  }
+}

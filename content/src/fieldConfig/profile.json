@@ -492,6 +492,8 @@
       "notificationIncompleteTasksDescription": "Stay on track with helpful nudges when you leave something unfinished.",
       "errorTextBody": "Review your information in the ${fieldText} marked below.",
       "notificationNewsletterDescription": "Get updates on the latest State news that could impact your business.",
+      "newsletterSubscribeWarning": "Your newsletter preference was saved, but we couldn't apply it right now. It will be retried automatically.",
+      "newsletterUnsubscribeWarning": "Your preference to unsubscribe was saved, but we couldn't complete it right now. It will be retried automatically.",
       "yourProfileHelpsWithRecommendationsCallout": ":::miniCallout{ calloutType=\"informational\"  }\n**Your profile helps us make recommendations for your business.**\n:::",
       "annualReportDeadlineHeader": "Add Your Annual Report Deadline",
       "escapeModalHeader": "Save Changes",

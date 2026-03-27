@@ -1,3 +1,4 @@
+import { v191BusinessUser, v191UserData } from "@db/migrations/v191_add_newsletter_email";
 import {
   v190CigaretteLicenseData,
   v190CigaretteLicensePaymentInfo,
@@ -113,7 +114,7 @@ export const withNoBase64Check = <T extends ZodTypeAny>(schema: T): T => {
 };
 
 export const parseUserData = (logger: LogWriterType, userData: UserData): void => {
-  const schemaWithBase64Check = withNoBase64Check(v190UserDataSchema);
+  const schemaWithBase64Check = withNoBase64Check(v191UserDataSchema);
   const result = schemaWithBase64Check.safeParse(userData);
 
   if (result.success) {
@@ -1033,6 +1034,33 @@ export const v190BusinessSchema: z.ZodType<v190Business> = z.object({
 
 export const v190UserDataSchema: z.ZodType<v190UserData> = z.object({
   user: v190BusinessUserSchema,
+  version: z.number(),
+  lastUpdatedISO: z.string(),
+  dateCreatedISO: z.string(),
+  versionWhenCreated: z.number(),
+  businesses: z.record(z.string(), v190BusinessSchema),
+  currentBusinessId: z.string(),
+});
+
+export const v191BusinessUserSchema: z.ZodType<v191BusinessUser> = z.object({
+  name: z.string().optional(),
+  email: z.string(),
+  id: z.string(),
+  receiveNewsletter: z.boolean(),
+  userTesting: z.boolean(),
+  receiveUpdatesAndReminders: z.boolean(),
+  externalStatus: v190ExternalStatusSchema,
+  myNJUserKey: z.string().optional(),
+  intercomHash: z.string().optional(),
+  abExperience: v190ABExperienceSchema,
+  accountCreationSource: z.string(),
+  contactSharingWithAccountCreationPartner: z.boolean(),
+  phoneNumber: z.string().optional(),
+  newsletterEmail: z.string().optional(),
+});
+
+export const v191UserDataSchema: z.ZodType<v191UserData> = z.object({
+  user: v191BusinessUserSchema,
   version: z.number(),
   lastUpdatedISO: z.string(),
   dateCreatedISO: z.string(),

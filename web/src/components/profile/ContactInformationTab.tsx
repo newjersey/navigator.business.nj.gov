@@ -1,3 +1,4 @@
+import { Alert } from "@/components/njwds-extended/Alert";
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { HorizontalLine } from "@/components/HorizontalLine";
@@ -125,6 +126,13 @@ export const ContactInformationTab = (): ReactElement => {
     );
   };
 
+  const showNewsletterSubscribeWarning =
+    userData?.user.receiveNewsletter === true &&
+    userData?.user.externalStatus.newsletter?.success === false;
+
+  const showNewsletterUnsubscribeWarning =
+    userData?.user.receiveNewsletter === false && userData?.user.newsletterEmail !== undefined;
+
   if (!user) {
     return <></>;
   }
@@ -240,6 +248,16 @@ export const ContactInformationTab = (): ReactElement => {
               "notificationProductNewsDescription",
             )}
           </FormGroup>
+          {showNewsletterSubscribeWarning && (
+            <Alert variant="warning" dataTestid="newsletter-subscribe-warning">
+              {Config.profileDefaults.default.newsletterSubscribeWarning}
+            </Alert>
+          )}
+          {showNewsletterUnsubscribeWarning && (
+            <Alert variant="warning" dataTestid="newsletter-unsubscribe-warning">
+              {Config.profileDefaults.default.newsletterUnsubscribeWarning}
+            </Alert>
+          )}
         </div>
       </ProfileSubSection>
 
