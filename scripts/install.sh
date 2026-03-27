@@ -12,7 +12,7 @@ set -euo pipefail
 if [ "$(id -u)" -eq 0 ]; then
     SUDO=""
     SKIP_PRIVILEGED=false
-elif command -v sudo &> /dev/null; then
+elif sudo -n true 2>/dev/null; then
     SUDO="sudo"
     SKIP_PRIVILEGED=false
 else
