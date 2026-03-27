@@ -14,19 +14,19 @@ export class BackupStack extends Stack {
   constructor(scope: Construct, id: string, props: BackupStackProps) {
     super(scope, id, props);
 
-    const vault = new backup.BackupVault(this, "NavigatorBackupsVault", {
-      backupVaultName: "navigator-backups",
+    const vault = new backup.BackupVault(this, "BizX_dynamodb_BackupsVault", {
+      backupVaultName: "BizX_dynamodb_backups",
       removalPolicy: RemovalPolicy.RETAIN,
     });
 
-    const plan = new backup.BackupPlan(this, "NavigatorBackupPlan", {
-      backupPlanName: "dynamodb_backup_plan",
+    const plan = new backup.BackupPlan(this, "BizX_dynamodb_BackupPlan", {
+      backupPlanName: "BizX_dynamodb_backup_plan",
       backupVault: vault,
     });
 
     plan.addRule(
       new backup.BackupPlanRule({
-        ruleName: "dynamodb_backup_rule",
+        ruleName: "BizX_dynamodb_backup_rule",
         scheduleExpression: events.Schedule.cron({
           minute: "0",
           hour: "*/3",
@@ -40,7 +40,7 @@ export class BackupStack extends Stack {
       dynamodb.Table.fromTableName(this, `ImportedTable${index}`, tableName),
     );
 
-    plan.addSelection("DynamoDBBackupSelection", {
+    plan.addSelection("BizX_dynamodb_BackupSelection", {
       role: props.backupRole,
       resources: tables.map((table) => backup.BackupResource.fromDynamoDbTable(table)),
     });
