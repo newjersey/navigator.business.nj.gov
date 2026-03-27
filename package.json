@@ -68,7 +68,7 @@
     "@newjersey/njwds": "0.3.0",
     "@react-email/components": "1.0.10",
     "@react-email/render": "2.0.4",
-    "@smithy/node-http-handler": "4.4.14",
+    "@smithy/node-http-handler": "4.5.0",
     "@storybook/addon-outline": "7.6.23",
     "@types/mdast": "4.0.4",
     "airtable": "0.12.2",
