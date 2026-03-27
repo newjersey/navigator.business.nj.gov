@@ -24,7 +24,7 @@ runs:
       shell: bash
       run: |
         echo "Running CDK for IamStack in stage: $STAGE"
-        yarn workspace @businessnjgovnavigator/api-cdk cdk import IamStack-${{ env.STAGE }} \
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy IamStack-${{ env.STAGE }} \
           --qualifier biz-nj \
           --verbose \
           --region us-east-1 \
