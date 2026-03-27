@@ -3,6 +3,7 @@
 # When this script is sourced, set -euo pipefail would otherwise persist
 # into the caller's interactive shell session.
 _install_saved_opts=$(set +o 2>/dev/null)
+_install_saved_stty=$(stty -g 2>/dev/null) || _install_saved_stty=""
 set -euo pipefail
 
 # Setup script to setup machine for local development
@@ -286,6 +287,7 @@ echo "=== [7/7] Install dependencies and build ==="
 
 yarn install && yarn build && echo "Dependencies installed and project built." || { echo "Install or build failed."; exit 1; }
 
-# Restore the shell options that were active before this script ran.
+# Restore the shell options and terminal settings that were active before this script ran.
 eval "$_install_saved_opts"
-unset _install_saved_opts
+[[ -n "$_install_saved_stty" ]] && stty "$_install_saved_stty" 2>/dev/null || true
+unset _install_saved_opts _install_saved_stty
