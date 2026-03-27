@@ -53,7 +53,8 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
     installed in a Linux-based WSL2 environment
   - **Linux:** Use the native Docker Engine installation
 - [AWS CLI](https://aws.amazon.com/cli/)
-- [Python 3.10+](https://www.python.org/downloads/)
+- [Python 3.12+](https://www.python.org/downloads/) (managed automatically via
+  [uv](https://docs.astral.sh/uv/))
 - [yarn](https://yarnpkg.com/)
 - [wget](https://www.gnu.org/software/wget/)
 - [Java JDK](https://www.oracle.com/java/technologies/downloads/)
@@ -84,15 +85,45 @@ Before you can run locally, you will need to:
 
 - create a `./web/.env` that includes all the values laid out in the `./web/.env-template` file.
 - create a `./api/.env` that includes all the values laid out in the `./api/.env-template` file.
-- create a `.venv` virtual environment and install requirements if working on Python
+- install [uv](https://docs.astral.sh/uv/) and set up the Python environment if working on Python
+  helper scripts.
+  1. **Install uv** (if you haven't already):
+
+     ```shell
+     # macOS (Homebrew)
+     brew install uv
+
+     # Linux / WSL (curl)
+     curl -LsSf https://astral.sh/uv/install.sh | sh
+
+     # Linux / WSL (wget)
+     wget -qO- https://astral.sh/uv/install.sh | sh
+     ```
+
+  2. **(Optional) Enable shell completions for uv:**
+
+     ```shell
+     echo 'eval "$(uv generate-shell-completion zsh)"' >> ~/.zshrc
+     source ~/.zshrc
+     ```
+
+  3. **Create the virtual environment** (uses the Python version pinned in `.python-version`):
+
+     ```shell
+     uv venv --managed-python .venv
+     source .venv/bin/activate
+     ```
+
+  4. **Install dependencies:**
+
+     ```shell
+     uv sync
+     ```
   - _Note: The application does not need a venv. This step is only required to run Python helper
     scripts._
-
-  ```shell
-  python3 -m venv .venv
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  ```
+  - To **update uv** itself: `uv self update`
+  - To **upgrade all locked dependencies** to their latest compatible versions:
+    `uv lock --upgrade`
 
 - do an initial build (skip if you ran `install.sh`)
 
