@@ -53,7 +53,8 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
     installed in a Linux-based WSL2 environment
   - **Linux:** Use the native Docker Engine installation
 - [AWS CLI](https://aws.amazon.com/cli/)
-- [Python 3.10+](https://www.python.org/downloads/)
+- [Python 3.12+](https://www.python.org/downloads/) (managed automatically via
+  [uv](https://docs.astral.sh/uv/))
 - [yarn](https://yarnpkg.com/)
 - [wget](https://www.gnu.org/software/wget/)
 - [Java JDK](https://www.oracle.com/java/technologies/downloads/)
