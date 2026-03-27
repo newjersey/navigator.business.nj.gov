@@ -5106,7 +5106,7 @@ __metadata:
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
     "@next/bundle-analyzer": 16.1.6
-    "@next/eslint-plugin-next": 15.5.12
+    "@next/eslint-plugin-next": 16.2.1
     "@react-email/components": 1.0.10
     "@react-email/preview-server": 5.2.10
     "@react-email/render": 2.0.4
@@ -5339,7 +5339,7 @@ __metadata:
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
     "@next/bundle-analyzer": 16.1.6
-    "@next/eslint-plugin-next": 15.5.12
+    "@next/eslint-plugin-next": 16.2.1
     "@storybook/addon-actions": 7.6.23
     "@storybook/addon-designs": 7.0.9
     "@storybook/addon-docs": 7.6.23
@@ -8684,21 +8684,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:15.5.12":
-  version: 15.5.12
-  resolution: "@next/eslint-plugin-next@npm:15.5.12"
-  dependencies:
-    fast-glob: 3.3.1
-  checksum: e883a9e0e73b4610844846cb0fb99071c725a6adb59243cf46a048988ed3886979d0d582f272206c24cc42c67b3e03bb97ed9d4ce141febb30d00650cf3c1c03
-  languageName: node
-  linkType: hard
-
 "@next/eslint-plugin-next@npm:15.5.14":
   version: 15.5.14
   resolution: "@next/eslint-plugin-next@npm:15.5.14"
   dependencies:
     fast-glob: 3.3.1
   checksum: dc9e49a90e4229bf895991083a9a58a44363a06b4b24c707a89dfa16fd8687872de63cebc7a9b2f2f2e42770563ac75bf392ce06cf9924cd5b882248ccf971d3
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:16.2.1":
+  version: 16.2.1
+  resolution: "@next/eslint-plugin-next@npm:16.2.1"
+  dependencies:
+    fast-glob: 3.3.1
+  checksum: dc339fd63ae1c9dbcaf465115782c44187021acea77d8d575231efe46b0e0abcb5a05491512b3ab4277a0daf40fe48866cf48f8010815d77938f94c34235ae80
   languageName: node
   linkType: hard
 
