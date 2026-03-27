@@ -4,6 +4,9 @@ description: "Runs semantic-release and creates a pull request to main."
 runs:
   using: "composite"
   steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+
     - name: Generate Release Notes
       shell: bash
       env:

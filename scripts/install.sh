@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # Save current shell options so they can be restored at the end.
 # When this script is sourced, set -euo pipefail would otherwise persist
 # into the caller's interactive shell session.
@@ -190,54 +190,34 @@ esac
 
 # ============================================================
 echo ""
-echo "=== [3/7] Python environment ==="
+echo "=== [3/7] Python environment (uv) ==="
 # ============================================================
 
-# Detect python executable and verify minimum version
-if command -v python3 &> /dev/null; then
-    PYTHON="python3"
-elif command -v python &> /dev/null; then
-    PYTHON="python"
+if command -v uv &> /dev/null; then
+    echo "uv is installed."
+    uv --version
 else
-    echo "Error: No Python installation found. Please install Python 3.10 or later."
-    exit 1
+    echo "uv is not installed. Installing..."
+    # https://docs.astral.sh/uv/getting-started/installation/
+    fetch_url https://astral.sh/uv/install.sh | sh
+    # Add uv to PATH for the rest of this session
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
-PYTHON_VERSION=$("$PYTHON" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-PYTHON_MAJOR=$(echo "$PYTHON_VERSION" | cut -d. -f1)
-PYTHON_MINOR=$(echo "$PYTHON_VERSION" | cut -d. -f2)
-if [ "$PYTHON_MAJOR" -lt 3 ] || { [ "$PYTHON_MAJOR" -eq 3 ] && [ "$PYTHON_MINOR" -lt 10 ]; }; then
-    echo "Error: Python 3.10 or later is required (found $PYTHON_VERSION)."
-    exit 1
-fi
-echo "Python $PYTHON_VERSION found ($PYTHON)."
+# Install the Python version pinned in .python-version (like nvm reads .nvmrc)
+uv python install
+echo "Python $(uv run python --version 2>&1 | awk '{print $2}') installed."
 
 if [ -d ".venv" ]; then
     echo "Python virtual environment (.venv) already exists."
-    VENV_DIR=".venv"
-elif [ -d "venv" ]; then
-    echo "Python virtual environment (venv) already exists."
-    VENV_DIR="venv"
 else
     echo "Creating Python virtual environment..."
-    "$PYTHON" -m venv .venv
-    VENV_DIR=".venv"
+    uv venv --managed-python .venv
 fi
-source "$VENV_DIR/bin/activate"
+source .venv/bin/activate
 
-if command -v sha256sum &> /dev/null; then
-    REQUIREMENTS_HASH=$(sha256sum requirements.txt | awk '{print $1}')
-else
-    REQUIREMENTS_HASH=$(shasum -a 256 requirements.txt | awk '{print $1}')
-fi
-REQUIREMENTS_HASH_FILE="$VENV_DIR/.requirements_hash"
-if [ ! -f "$REQUIREMENTS_HASH_FILE" ] || [ "$(cat "$REQUIREMENTS_HASH_FILE")" != "$REQUIREMENTS_HASH" ]; then
-    echo "Installing Python dependencies..."
-    pip install -r requirements.txt
-    echo "$REQUIREMENTS_HASH" > "$REQUIREMENTS_HASH_FILE"
-else
-    echo "Python dependencies are up to date."
-fi
+echo "Installing Python dependencies..."
+uv sync
 
 # ============================================================
 echo ""
