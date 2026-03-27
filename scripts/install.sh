@@ -7,6 +7,19 @@ set -euo pipefail
 
 # Setup script to setup machine for local development
 
+# Detect privilege escalation method
+if [ "$(id -u)" -eq 0 ]; then
+    SUDO=""
+    SKIP_PRIVILEGED=false
+elif command -v sudo &> /dev/null; then
+    SUDO="sudo"
+    SKIP_PRIVILEGED=false
+else
+    SUDO=""
+    SKIP_PRIVILEGED=true
+    echo "Warning: Not running as root and sudo is not available. Steps requiring elevated permissions will be skipped."
+fi
+
 # Detect download tool (prefer curl, fall back to wget)
 if command -v curl &> /dev/null; then
     fetch_url() { curl -fsSL "$1"; }
@@ -53,12 +66,20 @@ case "$PLATFORM" in
         fi
         ;;
     debian)
-        echo "Updating apt package index..."
-        sudo apt-get update -y
+        if [ "$SKIP_PRIVILEGED" = false ]; then
+            echo "Updating apt package index..."
+            $SUDO apt-get update -y
+        else
+            echo "Skipping apt update (no sudo access)."
+        fi
         ;;
     alpine)
-        echo "Updating apk package index..."
-        sudo apk update
+        if [ "$SKIP_PRIVILEGED" = false ]; then
+            echo "Updating apk package index..."
+            $SUDO apk update
+        else
+            echo "Skipping apk update (no sudo access)."
+        fi
         ;;
     fedora)
         echo "Package manager: dnf."
@@ -121,32 +142,44 @@ case "$PLATFORM" in
         if command -v docker &> /dev/null; then
             echo "Docker is installed."
             docker --version
-        else
+        elif [ "$SKIP_PRIVILEGED" = false ]; then
             echo "Docker is not installed. Installing..."
             # https://get.docker.com handles apt, dnf, yum, etc.
-            fetch_url https://get.docker.com | sudo sh
+            fetch_url https://get.docker.com | $SUDO sh
+        else
+            echo "Docker is not installed. Skipping installation (requires elevated permissions)."
         fi
 
-        if sudo systemctl is-active --quiet docker; then
-            echo "Docker is already running."
+        if [ "$SKIP_PRIVILEGED" = false ]; then
+            if $SUDO systemctl is-active --quiet docker; then
+                echo "Docker is already running."
+            else
+                $SUDO systemctl enable --now docker
+            fi
         else
-            sudo systemctl enable --now docker
+            echo "Skipping Docker service management (requires elevated permissions)."
         fi
         ;;
     alpine)
         if command -v docker &> /dev/null; then
             echo "Docker is installed."
             docker --version
-        else
+        elif [ "$SKIP_PRIVILEGED" = false ]; then
             echo "Docker is not installed. Installing..."
-            sudo apk add docker
+            $SUDO apk add docker
+        else
+            echo "Docker is not installed. Skipping installation (requires elevated permissions)."
         fi
 
-        if sudo rc-service docker status &> /dev/null; then
-            echo "Docker is already running."
+        if [ "$SKIP_PRIVILEGED" = false ]; then
+            if $SUDO rc-service docker status &> /dev/null; then
+                echo "Docker is already running."
+            else
+                $SUDO rc-service docker start
+                $SUDO rc-update add docker boot
+            fi
         else
-            sudo rc-service docker start
-            sudo rc-update add docker boot
+            echo "Skipping Docker service management (requires elevated permissions)."
         fi
         ;;
     *)
