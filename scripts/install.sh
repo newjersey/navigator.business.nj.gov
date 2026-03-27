@@ -199,15 +199,15 @@ if command -v python3 &> /dev/null; then
 elif command -v python &> /dev/null; then
     PYTHON="python"
 else
-    echo "Error: No Python installation found. Please install Python 3.12 or later."
+    echo "Error: No Python installation found. Please install Python 3.10 or later."
     exit 1
 fi
 
 PYTHON_VERSION=$("$PYTHON" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
 PYTHON_MAJOR=$(echo "$PYTHON_VERSION" | cut -d. -f1)
 PYTHON_MINOR=$(echo "$PYTHON_VERSION" | cut -d. -f2)
-if [ "$PYTHON_MAJOR" -lt 3 ] || { [ "$PYTHON_MAJOR" -eq 3 ] && [ "$PYTHON_MINOR" -lt 12 ]; }; then
-    echo "Error: Python 3.12 or later is required (found $PYTHON_VERSION)."
+if [ "$PYTHON_MAJOR" -lt 3 ] || { [ "$PYTHON_MAJOR" -eq 3 ] && [ "$PYTHON_MINOR" -lt 10 ]; }; then
+    echo "Error: Python 3.10 or later is required (found $PYTHON_VERSION)."
     exit 1
 fi
 echo "Python $PYTHON_VERSION found ($PYTHON)."
