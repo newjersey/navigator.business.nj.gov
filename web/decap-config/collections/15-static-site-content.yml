@@ -1,0 +1,66 @@
+collections:
+  - name: "static-site-content"
+    label: "💻 Static Site Content"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "faqs"
+    label: "FAQs"
+    folder: "content/src/faqs"
+    summary: "{{name}}"
+    identifier_field: "{{slug}}"
+    slug: "{{slug}}"
+    delete: true
+    sortable_fields: ["name", "category", "sub-category"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "FAQ Title",
+          name: "name",
+          widget: "string",
+          hint: "The title/question for this FAQ (max 256 characters)",
+        }
+      - {
+          label: "Slug",
+          name: "slug",
+          widget: "no-space",
+          required: true,
+          hint: "URL-friendly identifier (alphanumeric, no spaces or special characters)",
+        }
+      - {
+          label: "FAQ Body",
+          name: "body",
+          widget: "markdown",
+          hint:
+            "IMPORTANT: Widgets used in the My Account app are not supported for static site content",
+        }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        required: false
+        options:
+          - { label: "Plan a Business", value: "plan-a-business" }
+          - { label: "Start a Business", value: "start-a-business" }
+          - { label: "Operate a Business", value: "operate-a-business" }
+          - { label: "Grow a Business", value: "grow-a-business" }
+          - { label: "Finance a Business", value: "finance-a-business" }
+          - { label: "Resources", value: "resources" }
+      - label: "Sub-Category"
+        name: "sub-category"
+        widget: "select"
+        required: false
+        options:
+          - { label: "Starting a Business", value: "starting-a-business" }
+          - { label: "Registering a Business", value: "registering-a-business" }
+          - { label: "Choosing a Business Type", value: "choosing-a-business-type" }
+          - { label: "Industry-Specific Guidance", value: "industry-specific-guidance" }
+          - { label: "Operate a Business", value: "operate-a-business" }
+          - { label: "Hiring Employees", value: "hiring-employees" }
+          - { label: "Exporting", value: "exporting" }
+          - { label: "Filings and Accounting", value: "filings-and-accounting" }
+          - { label: "Tax Information", value: "tax-information" }
+          - { label: "Grow a Business", value: "grow-a-business" }
+          - { label: "Contracting with the State", value: "contracting-with-the-state" }

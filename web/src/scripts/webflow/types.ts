@@ -163,3 +163,12 @@ export interface WebflowSector {
 export interface WebflowSectorFieldData extends WebflowSector {
   rank?: number;
 }
+
+export interface WebflowFaqFieldData {
+  name: string;
+  slug: string;
+  "support-post": string;
+  category?: string;
+  "sub-category"?: string;
+  author?: string;
+}
