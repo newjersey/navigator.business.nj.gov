@@ -4,6 +4,7 @@ import {
   WELCOME_EMAIL_CONFIG_SET_BASE,
 } from "@businessnjgovnavigator/api/src/libs/constants";
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
@@ -20,7 +21,7 @@ interface ApiStackProps extends StackProps {
 }
 
 export class ApiStack extends Stack {
-  public readonly restApi: apigateway.IRestApi;
+  public readonly restApi: apigateway.RestApi;
 
   constructor(scope: Construct, id: string, props: ApiStackProps) {
     super(scope, id, props);
@@ -91,6 +92,8 @@ export class ApiStack extends Stack {
     const authorizer = this.createCognitoAuthorizer(props.stage);
     this.setupRootRoutes(expressLambda!, authorizer);
     this.setupApiRoutes(expressLambda!, githubLambda);
+
+    this.configureCustomDomain(props.stage);
 
     new CfnOutput(this, "ApiGatewayId", {
       value: this.restApi.restApiId,
@@ -180,5 +183,68 @@ export class ApiStack extends Stack {
       const cmsProxy = cms.addResource("{proxy+}");
       attachLambdaToResource(this, cmsProxy, githubLambda);
     }
+  }
+
+  private getCustomDomainConfig(
+    stage: string,
+  ): { domainName: string; certificateArn: string } | undefined {
+    const configs: Record<string, { domainName: string; certificateArn?: string }> = {
+      dev: {
+        domainName: "dev.api.account.business.nj.gov",
+        certificateArn: process.env.API_GATEWAY_CERT_ARN_DEV_CONTENT_TESTING,
+      },
+      content: {
+        domainName: "content.api.account.business.nj.gov",
+        certificateArn: process.env.API_GATEWAY_CERT_ARN_DEV_CONTENT_TESTING,
+      },
+      testing: {
+        domainName: "testing.api.account.business.nj.gov",
+        certificateArn: process.env.API_GATEWAY_CERT_ARN_DEV_CONTENT_TESTING,
+      },
+      staging: {
+        domainName: "staging.api.account.business.nj.gov",
+        certificateArn: process.env.API_GATEWAY_CERT_ARN_STAGING,
+      },
+      prod: {
+        domainName: "api.account.business.nj.gov",
+        certificateArn: process.env.API_GATEWAY_CERT_ARN_PROD,
+      },
+    };
+
+    const config = configs[stage];
+    if (!config?.certificateArn) {
+      return undefined;
+    }
+
+    return {
+      domainName: config.domainName,
+      certificateArn: config.certificateArn,
+    };
+  }
+
+  private configureCustomDomain(stage: string) {
+    const config = this.getCustomDomainConfig(stage);
+
+    if (!config) {
+      return;
+    }
+
+    const certificate = acm.Certificate.fromCertificateArn(
+      this,
+      `ApiDomainCertificate-${stage}`,
+      config.certificateArn,
+    );
+
+    const domain = new apigateway.DomainName(this, `ApiCustomDomain-${stage}`, {
+      domainName: config.domainName,
+      certificate,
+      securityPolicy: apigateway.SecurityPolicy.TLS_1_2,
+    });
+
+    new apigateway.BasePathMapping(this, `ApiBasePathMapping-${stage}`, {
+      domainName: domain,
+      restApi: this.restApi,
+      stage: this.restApi.deploymentStage,
+    });
   }
 }
