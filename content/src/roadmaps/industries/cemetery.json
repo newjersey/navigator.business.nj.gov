@@ -45,18 +45,18 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "cemetery-certificate",
+      "task": "cemetery-certificate",
       "required": true
     },
     {
       "step": 3,
       "weight": 25,
-      "licenseTask": "cemetery-sales"
+      "task": "cemetery-sales"
     },
     {
       "weight": 32,
       "step": 3,
-      "licenseTask": "cemetery-branch"
+      "task": "cemetery-branch"
     },
     {
       "step": 4,

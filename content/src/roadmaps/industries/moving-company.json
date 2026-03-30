@@ -46,7 +46,7 @@
     {
       "step": 3,
       "weight": 12,
-      "licenseTask": "moving-company-license",
+      "task": "moving-company-license",
       "required": true
     },
     {

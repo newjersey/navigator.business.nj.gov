@@ -45,7 +45,7 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "home-baker-license",
+      "task": "home-baker-license",
       "required": true
     },
     {

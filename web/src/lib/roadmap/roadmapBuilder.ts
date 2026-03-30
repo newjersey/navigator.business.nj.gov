@@ -130,11 +130,10 @@ const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
 
 const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
   for (const addOn of addOns) {
-    const task = addOn.task || addOn.licenseTask;
-    if (!task) continue;
+    if (!addOn.task) continue;
     builder.tasks = [
       ...builder.tasks,
-      { filename: task, weight: addOn.weight, stepNumber: addOn.step, required: !!addOn.required },
+      { filename: addOn.task, weight: addOn.weight, stepNumber: addOn.step, required: !!addOn.required },
     ];
   }
 
@@ -262,7 +261,6 @@ export interface AddOn {
   step: number;
   weight: number;
   task?: string | undefined | null;
-  licenseTask?: string | undefined | null;
   required?: boolean;
 }
 

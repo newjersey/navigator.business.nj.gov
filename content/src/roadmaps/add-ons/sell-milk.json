@@ -7,7 +7,7 @@
       "weight": 30,
       "task": "",
       "required": true,
-      "licenseTask": "store-milk-license"
+      "task": "store-milk-license"
     }
   ]
 }

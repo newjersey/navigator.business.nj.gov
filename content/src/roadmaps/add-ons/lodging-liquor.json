@@ -5,7 +5,7 @@
     {
       "step": 1,
       "weight": 30,
-      "licenseTask": "",
+      "task": "",
       "task": "liquor-license-availability"
     }
   ],

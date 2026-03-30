@@ -5,7 +5,7 @@
     {
       "step": 3,
       "weight": 30,
-      "licenseTask": "special-dental-permit",
+      "task": "special-dental-permit",
       "required": true
     }
   ]

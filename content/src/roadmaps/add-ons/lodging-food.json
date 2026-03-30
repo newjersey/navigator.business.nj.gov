@@ -5,13 +5,13 @@
     {
       "step": 4,
       "weight": 20,
-      "licenseTask": "food-safety-course"
+      "task": "food-safety-course"
     },
     {
       "step": 4,
       "weight": 25,
       "task": "floor-plan-approval-doh",
-      "licenseTask": ""
+      "task": ""
     }
   ]
 }

@@ -82,7 +82,7 @@
       "weight": 18,
       "step": 4,
       "task": "passenger-transport-cdl",
-      "licenseTask": "",
+      "task": "",
       "required": false
     }
   ],

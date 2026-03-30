@@ -56,27 +56,10 @@ export const AddTaskDependencyUsage = (matches: Match[]): void => {
 
         addTaskDependency(matches[index], addedPhrase);
       }
-      if (match.filename === dependency.licenseTask) {
-        const addedPhrase = composeHasLicenseTaskDependenciesString();
-
-        addTaskDependency(matches[index], addedPhrase);
-      }
       if (dependency.taskDependencies) {
         for (const TaskDependnecy of dependency.taskDependencies) {
           if (match.filename === TaskDependnecy) {
-            const addedPhrase = composeIsTaskDependencyTaskString(
-              dependency.task ?? dependency.licenseTask ?? "",
-            );
-            addTaskDependency(matches[index], addedPhrase);
-          }
-        }
-      }
-      if (dependency.licenseTaskDependencies) {
-        for (const LicenseTaskDependnecy of dependency.licenseTaskDependencies) {
-          if (match.filename === LicenseTaskDependnecy) {
-            const addedPhrase = composeIsLicenseTaskDependencyString(
-              dependency.task ?? dependency.licenseTask ?? "",
-            );
+            const addedPhrase = composeIsTaskDependencyTaskString(dependency.task ?? "");
             addTaskDependency(matches[index], addedPhrase);
           }
         }
@@ -110,11 +93,6 @@ export const AddIndustryUsage = (matches: Match[], industries: Industry[]): void
 
           addIndustryDependency(matches[index], addedPhrase, industry.id);
         }
-        if (match.filename === roadMapStep.licenseTask) {
-          const addedPhrase = composeIndstryLicenseTaskString(industry.name);
-
-          addIndustryDependency(matches[index], addedPhrase, industry.id);
-        }
       }
     }
   }
@@ -134,11 +112,6 @@ export const AddAddOnUsage = (matches: Match[], addOns: IndustryRoadmap[]): void
       for (const roadMapStep of addOn.roadmapSteps) {
         if (match.filename === roadMapStep.task) {
           const addedPhrase = composeAddOnTaskString(addOn.id);
-          addAddOnDependency(matches[index], addedPhrase, addOn.id);
-        }
-        if (match.filename === roadMapStep.licenseTask) {
-          const addedPhrase = composeAddOnLicenseTaskString(addOn.id);
-
           addAddOnDependency(matches[index], addedPhrase, addOn.id);
         }
       }

@@ -51,12 +51,12 @@
       "step": 4,
       "weight": -1,
       "task": "",
-      "licenseTask": "pest-applicator-business-license",
+      "task": "pest-applicator-business-license",
       "required": true
     },
     {
       "step": 4,
-      "licenseTask": "commercial-pest-applicator-license",
+      "task": "commercial-pest-applicator-license",
       "required": true,
       "weight": -4
     },

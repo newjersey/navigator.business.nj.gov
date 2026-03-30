@@ -45,12 +45,12 @@
     {
       "step": 4,
       "weight": 8,
-      "licenseTask": "apply-for-shop-license",
+      "task": "apply-for-shop-license",
       "required": true
     },
     {
       "step": 4,
-      "licenseTask": "cosmetology-license",
+      "task": "cosmetology-license",
       "weight": 12,
       "required": true
     },

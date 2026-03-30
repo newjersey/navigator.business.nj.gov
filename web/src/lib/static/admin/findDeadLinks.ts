@@ -179,7 +179,7 @@ const isReferencedInARoadmap = async (
   for (const industry of contents.industries) {
     if (
       industry.roadmapSteps.some((it) => {
-        return it.task === filenameWithoutMd || it.licenseTask === filenameWithoutMd;
+        return it.task === filenameWithoutMd;
       })
     ) {
       containedInAnAddOn = true;
@@ -202,7 +202,7 @@ const isReferencedInARoadmap = async (
   for (const addOn of contents.addOns) {
     if (
       addOn.some((it) => {
-        return it.task === filenameWithoutMd || it.licenseTask === filenameWithoutMd;
+        return it.task === filenameWithoutMd;
       })
     ) {
       containedInAnAddOn = true;
@@ -233,19 +233,9 @@ const isReferencedInTaskDependencies = (filename: string): boolean => {
     if (dependency.task && dependency.task === filenameWithoutMd) {
       return true;
     }
-    if (dependency.licenseTask && dependency.licenseTask === filenameWithoutMd) {
-      return true;
-    }
     if (dependency.taskDependencies) {
       for (const taskDependency of dependency.taskDependencies) {
         if (taskDependency === filenameWithoutMd) {
-          return true;
-        }
-      }
-    }
-    if (dependency.licenseTaskDependencies) {
-      for (const licenseTaskDependency of dependency.licenseTaskDependencies) {
-        if (licenseTaskDependency === filenameWithoutMd) {
           return true;
         }
       }

@@ -5,7 +5,7 @@
     {
       "step": 3,
       "weight": 30,
-      "licenseTask": "family-daycare-register"
+      "task": "family-daycare-register"
     }
   ]
 }

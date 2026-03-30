@@ -40,18 +40,18 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "license-engineer"
+      "task": "license-engineer"
     },
     {
       "step": 3,
       "weight": 25,
-      "licenseTask": "firm-engineer",
+      "task": "firm-engineer",
       "required": true
     },
     {
       "weight": 23,
       "step": 3,
-      "licenseTask": "land-surveyor-license"
+      "task": "land-surveyor-license"
     },
     {
       "step": 4,

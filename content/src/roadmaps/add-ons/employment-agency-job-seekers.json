@@ -5,7 +5,7 @@
     {
       "step": 4,
       "weight": 1,
-      "licenseTask": "search-licenses-employment-agency",
+      "task": "search-licenses-employment-agency",
       "required": true
     }
   ]

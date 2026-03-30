@@ -4,7 +4,7 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "licenseTask": "xray-reg",
+      "task": "xray-reg",
       "weight": 1
     }
   ]

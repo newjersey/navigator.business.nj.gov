@@ -3,7 +3,7 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "dental-waste-exemption",
+      "task": "dental-waste-exemption",
       "required": true
     }
   ],

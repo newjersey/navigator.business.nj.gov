@@ -6,12 +6,12 @@
     {
       "step": 1,
       "weight": 1,
-      "licenseTask": "health-club-registration"
+      "task": "health-club-registration"
     },
     {
       "step": 1,
       "weight": 2,
-      "licenseTask": "home-health-aide-license"
+      "task": "home-health-aide-license"
     },
     {
       "step": 1,

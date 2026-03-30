@@ -5,13 +5,13 @@
     {
       "step": 4,
       "weight": 3,
-      "licenseTask": "electrologist-license",
+      "task": "electrologist-license",
       "required": true
     },
     {
       "step": 4,
       "weight": 4,
-      "licenseTask": "electrologist-office-license",
+      "task": "electrologist-office-license",
       "required": true
     }
   ]

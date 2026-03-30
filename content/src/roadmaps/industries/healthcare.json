@@ -50,7 +50,7 @@
     {
       "step": 3,
       "weight": 28,
-      "licenseTask": "cds-healthcare"
+      "task": "cds-healthcare"
     },
     {
       "step": 4,
@@ -67,7 +67,7 @@
     {
       "step": 4,
       "weight": 2,
-      "licenseTask": "rmw-generator-registration",
+      "task": "rmw-generator-registration",
       "required": true
     },
     {

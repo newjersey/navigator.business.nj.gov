@@ -43,13 +43,13 @@
     },
     {
       "step": 4,
-      "licenseTask": "appraiser-license",
+      "task": "appraiser-license",
       "weight": 200
     },
     {
       "step": 4,
       "weight": 210,
-      "licenseTask": "general-appraiser-certification"
+      "task": "general-appraiser-certification"
     },
     {
       "step": 4,

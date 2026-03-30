@@ -51,7 +51,7 @@
     {
       "step": 4,
       "weight": 100,
-      "licenseTask": "food-safety-course"
+      "task": "food-safety-course"
     },
     {
       "step": 4,

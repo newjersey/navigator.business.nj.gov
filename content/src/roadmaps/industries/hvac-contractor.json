@@ -46,7 +46,7 @@
     {
       "step": 3,
       "weight": 18,
-      "licenseTask": "hvac-license",
+      "task": "hvac-license",
       "required": true
     }
   ],

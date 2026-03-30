@@ -3,13 +3,13 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "dental-license",
+      "task": "dental-license",
       "required": true
     },
     {
       "step": 3,
       "weight": 25,
-      "licenseTask": "dental-branch"
+      "task": "dental-branch"
     }
   ],
   "id": "healthcare-dentist",

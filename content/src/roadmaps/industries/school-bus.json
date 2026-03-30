@@ -63,7 +63,7 @@
     {
       "step": 4,
       "weight": 15,
-      "licenseTask": "",
+      "task": "",
       "required": false,
       "task": "transportation-inspection"
     },
@@ -76,7 +76,7 @@
     {
       "weight": 17,
       "step": 4,
-      "licenseTask": "",
+      "task": "",
       "required": true,
       "task": "passenger-transport-cdl"
     }

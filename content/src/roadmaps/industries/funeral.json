@@ -45,13 +45,13 @@
     {
       "step": 4,
       "weight": 20,
-      "licenseTask": "funeral-registration",
+      "task": "funeral-registration",
       "required": true
     },
     {
       "step": 4,
       "weight": 25,
-      "licenseTask": "mortuary-practitioner",
+      "task": "mortuary-practitioner",
       "required": false
     },
     {
@@ -62,7 +62,7 @@
     },
     {
       "step": 4,
-      "licenseTask": "rmw-generator-registration",
+      "task": "rmw-generator-registration",
       "required": true,
       "weight": 100
     },

@@ -45,7 +45,7 @@
     {
       "step": 4,
       "weight": 15,
-      "licenseTask": "health-club-registration"
+      "task": "health-club-registration"
     },
     {
       "step": 4,

@@ -5,7 +5,7 @@
     {
       "step": 4,
       "weight": 8,
-      "licenseTask": "temp-help-consulting-firm-combined-reg",
+      "task": "temp-help-consulting-firm-combined-reg",
       "required": true
     }
   ]

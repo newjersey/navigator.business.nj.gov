@@ -25,14 +25,14 @@
       "weight": 30,
       "task": "register-for-ein",
       "required": false,
-      "licenseTask": ""
+      "task": ""
     },
     {
       "step": 2,
       "weight": 31,
       "task": "register-for-taxes",
       "required": false,
-      "licenseTask": ""
+      "task": ""
     },
     {
       "step": 3,
@@ -43,12 +43,12 @@
       "step": 3,
       "weight": 8,
       "task": "get-insurance",
-      "licenseTask": "",
+      "task": "",
       "required": true
     },
     {
       "step": 4,
-      "licenseTask": "register-accounting-firm",
+      "task": "register-accounting-firm",
       "required": false,
       "weight": 9
     },

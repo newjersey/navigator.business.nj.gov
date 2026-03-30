@@ -5,7 +5,7 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "animal-shelter-cds"
+      "task": "animal-shelter-cds"
     }
   ]
 }

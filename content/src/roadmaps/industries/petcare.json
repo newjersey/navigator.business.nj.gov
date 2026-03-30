@@ -45,7 +45,7 @@
     {
       "step": 4,
       "weight": 1,
-      "licenseTask": "rmw-generator-registration",
+      "task": "rmw-generator-registration",
       "required": true
     },
     {

@@ -5,7 +5,7 @@
     {
       "step": 4,
       "weight": 50,
-      "licenseTask": "public-accountant-license"
+      "task": "public-accountant-license"
     }
   ],
   "modifications": []

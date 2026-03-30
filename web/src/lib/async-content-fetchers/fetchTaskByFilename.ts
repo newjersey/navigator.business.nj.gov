@@ -7,12 +7,10 @@ export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
   const dependencies = await fetchDependenciesFile();
 
   const currentTaskDependencies = dependencies.find((dependency) => {
-    return dependency.task === filename || dependency.licenseTask === filename;
+    return dependency.task === filename;
   });
   const taskDependencies = currentTaskDependencies?.taskDependencies || [];
-  const licenseTaskDependencies = currentTaskDependencies?.licenseTaskDependencies || [];
-  const combinedDependencies = [...taskDependencies, ...licenseTaskDependencies];
-  const mappedDependencies = combinedDependencies.map(fetchTaskLinkByFilename);
+  const mappedDependencies = taskDependencies.map(fetchTaskLinkByFilename);
 
   const unlockedByTaskLinks = await Promise.all(mappedDependencies);
 

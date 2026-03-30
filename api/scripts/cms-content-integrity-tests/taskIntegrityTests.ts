@@ -30,13 +30,6 @@ const industriesTaskUsage = async (
         hasErrors = true;
         await publishSnsMessage(logMessage, topicArn);
       }
-      if (step.licenseTask && !allTasksFilenames.has(step.licenseTask)) {
-        const logMessage = `business-ux-content: The *"${industry.name}"* Industry has a roadmap license task that no longer exists (*"${step.licenseTask}"*). Please replace this with a new license task.`;
-
-        console.error(logMessage);
-        hasErrors = true;
-        await publishSnsMessage(logMessage, topicArn);
-      }
     }
     if (industry.modifications) {
       for (const modification of industry.modifications) {
@@ -71,13 +64,6 @@ const addOnTaskUsage = async (
       for (const roadmapStep of addOn.roadmapSteps) {
         if (roadmapStep.task && !allTasksFilenames.has(roadmapStep.task)) {
           const logMessage = `business-ux-content: The *"${addOn.id}"* Add On has a Roadmap Step with a Task that no longer exists (*"${roadmapStep.task}"*). Please replace this with a new task.`;
-
-          console.error(logMessage);
-          hasErrors = true;
-          await publishSnsMessage(logMessage, topicArn);
-        }
-        if (roadmapStep.licenseTask && !allTasksFilenames.has(roadmapStep.licenseTask)) {
-          const logMessage = `business-ux-content: The *"${addOn.id}"* Add On has a Roadmap Step with a License Task that no longer exists (*"${roadmapStep.licenseTask}"*). Please replace this with a new license task.`;
 
           console.error(logMessage);
           hasErrors = true;

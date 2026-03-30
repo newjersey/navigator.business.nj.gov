@@ -45,7 +45,7 @@
     {
       "step": 3,
       "weight": 2,
-      "licenseTask": "apply-for-food-truck-license",
+      "task": "apply-for-food-truck-license",
       "required": true
     },
     {
@@ -84,13 +84,13 @@
     {
       "step": 4,
       "weight": 4,
-      "licenseTask": "fire-permit-food-truck",
+      "task": "fire-permit-food-truck",
       "required": true
     },
     {
       "step": 4,
       "weight": 5,
-      "licenseTask": "town-mercantile-license"
+      "task": "town-mercantile-license"
     },
     {
       "step": 4,
@@ -100,7 +100,7 @@
     {
       "step": 4,
       "weight": 7,
-      "licenseTask": "food-safety-course"
+      "task": "food-safety-course"
     },
     {
       "weight": 8,

@@ -11,7 +11,7 @@
     {
       "step": 1,
       "weight": 6,
-      "licenseTask": "license-broker",
+      "task": "license-broker",
       "required": true
     },
     {

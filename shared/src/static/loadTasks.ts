@@ -139,12 +139,10 @@ export const loadTaskByFileName = (
   const fileNameWithoutMd = fileName.split(".md")[0];
 
   const currentTaskDependencies = dependencies.find((dependency) => {
-    return dependency.task === fileNameWithoutMd || dependency.licenseTask === fileNameWithoutMd;
+    return dependency.task === fileNameWithoutMd;
   });
   const taskDependencies = currentTaskDependencies?.taskDependencies || [];
-  const licenseTaskDependencies = currentTaskDependencies?.licenseTaskDependencies || [];
-  const combinedDependencies = [...taskDependencies, ...licenseTaskDependencies];
-  const unlockedByTaskLinks = combinedDependencies.map((dependencyFileName) => {
+  const unlockedByTaskLinks = taskDependencies.map((dependencyFileName) => {
     return loadTaskLinkByFilename(dependencyFileName, isTest);
   });
 

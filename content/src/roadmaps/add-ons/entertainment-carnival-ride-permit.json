@@ -7,7 +7,7 @@
       "weight": 80,
       "task": "carnival-ride-permit",
       "required": true,
-      "licenseTask": ""
+      "task": ""
     },
     {
       "step": 4,

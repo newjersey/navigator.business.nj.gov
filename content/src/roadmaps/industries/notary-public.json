@@ -40,7 +40,7 @@
     {
       "step": 3,
       "weight": 12,
-      "licenseTask": "notary-register",
+      "task": "notary-register",
       "required": true
     },
     {

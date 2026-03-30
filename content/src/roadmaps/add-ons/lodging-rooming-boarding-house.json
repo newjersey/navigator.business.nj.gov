@@ -6,7 +6,7 @@
       "step": 4,
       "weight": 200,
       "task": "",
-      "licenseTask": "rooming-boarding-house-license",
+      "task": "rooming-boarding-house-license",
       "required": true
     }
   ]

@@ -51,13 +51,13 @@
     {
       "step": 4,
       "weight": 40,
-      "licenseTask": "home-health-aide-license"
+      "task": "home-health-aide-license"
     },
     {
       "step": 4,
       "weight": 101,
       "required": true,
-      "licenseTask": "rmw-generator-registration"
+      "task": "rmw-generator-registration"
     }
   ],
   "name": "Home Health Aide Placement",

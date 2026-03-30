@@ -6,7 +6,7 @@
       "step": 4,
       "weight": 200,
       "task": "",
-      "licenseTask": "residential-health-care-facility-license",
+      "task": "residential-health-care-facility-license",
       "required": true
     }
   ]
