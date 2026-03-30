@@ -12,7 +12,6 @@ const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps")
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 const tasksDir = path.join(roadmapsDir, "tasks");
-const licenseTasksDir = path.join(roadmapsDir, "license-tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
 const contextualInfoDir = path.join(displayContentDir, "contextual-information");
@@ -46,14 +45,12 @@ type Filenames = {
   fundings: string[];
   certifications: string[];
   licenses: string[];
-  licenseTasks: string[];
   anytimeActionTasks: string[];
   anytimeActionLicenseReinstatements: string[];
 };
 
 type FileContents = {
   tasks: string[];
-  licenseTasks: string[];
   industries: Array<IndustryRoadmap>;
   addOns: Array<AddOn[]>;
   modifications: Array<TaskModification[]>;
@@ -91,7 +88,6 @@ const getFilenames = (): Filenames => {
     fundings: fs.readdirSync(fundingsDir),
     certifications: fs.readdirSync(certificationsDir),
     licenses: fs.readdirSync(licensesDir),
-    licenseTasks: fs.readdirSync(licenseTasksDir),
     anytimeActionTasks: fs.readdirSync(anytimeActionTasksDir),
     anytimeActionLicenseReinstatements: fs.readdirSync(anytimeActionLicenseReinstatementsDir),
   };
@@ -115,9 +111,6 @@ const getContents = (filenames: Filenames): FileContents => {
   return {
     tasks: filenames.tasks.map((it) => {
       return matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content;
-    }),
-    licenseTasks: filenames.licenseTasks.map((it) => {
-      return matter(fs.readFileSync(path.join(roadmapsDir, "license-tasks", it), "utf8")).content;
     }),
     industries,
     addOns: addOns.map((i) => {
@@ -277,22 +270,6 @@ export const findDeadTasks = async (): Promise<string[]> => {
   return deadTasks;
 };
 
-export const findDeadLicenseTasks = async (): Promise<string[]> => {
-  const deadTasks = [];
-  const filenames = getFilenames();
-  const contents = getContents(filenames);
-  for (const licenseTaskFilename of filenames.licenseTasks) {
-    if (!(await isReferencedInARoadmap(licenseTaskFilename, contents))) {
-      if (isReferencedInTaskDependencies(licenseTaskFilename)) {
-        deadTasks.push(`${licenseTaskFilename} (only used in task dependencies)`);
-      } else {
-        deadTasks.push(licenseTaskFilename);
-      }
-    }
-  }
-  return deadTasks;
-};
-
 export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
   const filenames = getFilenames();
   const pages = [
@@ -309,10 +286,6 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     }),
     "/welcome",
     "/unsupported",
-    ...filenames.licenseTasks.map((it) => {
-      return `/tasks/${it.split(".md")[0]}`;
-    }),
-
     ...filenames.licenses.map((it) => {
       return `/license-calendar-event/${it.split(".md")[0]}-renewal`;
     }),

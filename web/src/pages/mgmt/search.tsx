@@ -45,7 +45,6 @@ import {
   loadAllFilings,
   loadAllFundings,
   loadAllLicenseCalendarEvents,
-  loadAllLicenseTasks,
   loadAllMunicipalTasks,
   loadAllPageMetadata,
   loadAllRaffleBingoSteps,
@@ -85,7 +84,6 @@ interface Props {
   netlifyConfig: any;
   noAuth: boolean;
   tasks: Task[];
-  licenseTasks: Task[];
   municipalTasks: Task[];
   envTasks: Task[];
   raffleBingoSteps: Task[];
@@ -127,7 +125,6 @@ const SearchContentPage = (props: Props): ReactElement => {
   });
   const [businessFormationMatches, setBusinessFormationMatches] = useState<Match[]>([]);
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
-  const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
   const [raffleBingoStepMatches, setRaffleBingoStepMatches] = useState<Match[]>([]);
   const [envTaskMatches, setEnvTaskMatches] = useState<Match[]>([]);
@@ -185,15 +182,6 @@ const SearchContentPage = (props: Props): ReactElement => {
       console.error(error);
     }
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm, props.industries, props.addOns));
-    setLicenseTaskMatches(
-      searchTasks(
-        props.licenseTasks,
-        lowercaseTerm,
-
-        props.industries,
-        props.addOns,
-      ),
-    );
     setMunicipalTaskMatches(
       searchTasks(
         props.municipalTasks,
@@ -281,7 +269,6 @@ const SearchContentPage = (props: Props): ReactElement => {
       searchState.hasSearched &&
       [
         ...taskMatches,
-        ...licenseTaskMatches,
         ...municipalTaskMatches,
         ...raffleBingoStepMatches,
         ...envTaskMatches,
@@ -308,7 +295,6 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const taskCollection = {
     "Tasks - All": taskMatches,
-    "License Tasks (Navigator with Webflow mappings)": licenseTaskMatches,
     "Tasks - Municipal": municipalTaskMatches,
     "Webflow Licenses": webflowLicenseMatches,
   };
@@ -460,7 +446,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       netlifyConfig: getNetlifyConfig(),
       noAuth: true,
       tasks: loadAllTasksOnly(),
-      licenseTasks: loadAllLicenseTasks(),
       raffleBingoSteps: loadAllRaffleBingoSteps(),
       municipalTasks: loadAllMunicipalTasks(),
       envTasks: loadAllEnvironmentTasks(),

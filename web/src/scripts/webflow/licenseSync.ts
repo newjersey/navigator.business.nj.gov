@@ -72,7 +72,7 @@ const getAllLicenseDatasFromWebflow = async (): Promise<
   return await getAllItems<WebflowLicenseDataFieldData>(licenseCollectionId);
 };
 
-//  returns list of LicenseData MD loaded from navigator license-tasks folder
+//  returns list of LicenseData MD loaded from navigator tasks folder
 const getLicenseDatasAlreadyInWebflow = async (): Promise<LicenseData[]> => {
   const allLicenseDatas = await getAllLicenseDatasFromWebflow();
   const currentLicenseDatasInWebflowIds = new Set(allLicenseDatas.map((it) => it.id));
@@ -101,8 +101,6 @@ const getNewLicenseDatas = async (): Promise<LicenseData[]> => {
   const allLicenseDatas = await getAllLicenseDatasFromWebflow();
   const currentLicenseDatasInWebflowIds = new Set(allLicenseDatas.map((it) => it.id));
 
-  //CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
-  // right now only syncs license-tasks, not yet webflow-licenses also
   return currentLicenseDatasInNavigator.filter(
     (it) => it.webflowId === undefined || !currentLicenseDatasInWebflowIds.has(it.webflowId),
   );

@@ -563,7 +563,7 @@ export const logBuildResults = (result: BuildResult): void => {
  * This script generates static JSON files for all content types:
  * - Industries: Business industry configurations with roadmap settings
  * - Sectors: Business sectors enriched with child industries and NAICS codes
- * - Tasks: All task types from multiple directories (tasks, license-tasks, etc.)
+ * - Tasks: All task types from multiple directories (tasks, municipal-tasks, etc.)
  * - Actions: Anytime Action tasks
  * - Certifications: Business certifications
  * - Filings: Tax filings

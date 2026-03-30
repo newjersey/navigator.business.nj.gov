@@ -41,9 +41,8 @@ const composeErrorMessage = (
 };
 
 const EXPECTED_NUMBER_OF_TASK_RELATIONS = 8;
-const EXPECTED_NUMBER_OF_LICENSE_TASK_RELATIONS = 4;
 
-describe("Make sure we Have the expected number of Tasks tracked by our tests", () => {
+describe("Make sure we have the expected number of Tasks tracked by our tests", () => {
   const yamlContent = loadYamlFiles();
 
   it("Track number of Task collections", () => {
@@ -51,18 +50,6 @@ describe("Make sure we Have the expected number of Tasks tracked by our tests", 
     const taskRelations = countKeyValuePair(yamlContent, "collection", tasksCollection);
     expect(composeErrorMessage(taskRelations, tasksCollection)).toBe(
       composeErrorMessage(EXPECTED_NUMBER_OF_TASK_RELATIONS, tasksCollection),
-    );
-  });
-
-  it("Track Number of Task Collections", () => {
-    const licenseTaskCollection = "license-tasks";
-    const licenseTaskRelations = countKeyValuePair(
-      yamlContent,
-      "collection",
-      licenseTaskCollection,
-    );
-    expect(composeErrorMessage(licenseTaskRelations, licenseTaskCollection)).toBe(
-      composeErrorMessage(EXPECTED_NUMBER_OF_LICENSE_TASK_RELATIONS, licenseTaskCollection),
     );
   });
 });

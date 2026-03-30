@@ -111,7 +111,6 @@ const CMS = dynamic(
       });
 
       registerPreview(CMS, "tasks", TaskPreview);
-      registerPreview(CMS, "license-tasks", TaskPreview);
       registerPreview(CMS, "abc-emergency-trip-permit", EmergencyTripPermitPreview);
       registerPreview(CMS, "webflow-licenses", TaskPreview);
       registerPreview(CMS, "funding-opportunities", FundingsPreview);

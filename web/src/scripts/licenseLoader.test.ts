@@ -100,9 +100,6 @@ Test content`;
 
     it("filters tasks by syncToWebflow flag", () => {
       (mockFs.readdirSync as jest.Mock).mockImplementation((dir) => {
-        if (dir.toString().includes("license-tasks")) {
-          return [];
-        }
         if (dir.toString().includes("municipal-tasks")) {
           return [];
         }
@@ -138,9 +135,6 @@ Test content`;
 
     it("includes licenses with syncToWebflow as string 'true'", () => {
       (mockFs.readdirSync as jest.Mock).mockImplementation((dir) => {
-        if (dir.toString().includes("license-tasks")) {
-          return [];
-        }
         if (dir.toString().includes("municipal-tasks")) {
           return [];
         }
@@ -186,9 +180,9 @@ Test content`;
   });
 
   describe("loadNavigatorLicense", () => {
-    it("loads license from navigator directory when it exists", () => {
+    it("loads license from tasks directory when it exists", () => {
       mockFs.existsSync.mockImplementation((path) => {
-        return path.toString().includes("license-tasks");
+        return path.toString().includes("tasks");
       });
       mockFs.readFileSync.mockReturnValue("test content");
       mockMatter.mockReturnValue({
@@ -204,7 +198,7 @@ Test content`;
       const [license, filePath] = loadNavigatorLicense("test-license.md");
 
       expect(license.filename).toBe("test-license");
-      expect(filePath).toContain("license-tasks");
+      expect(filePath).toContain("tasks");
     });
 
     it("loads license from municipal directory when not in navigator", () => {

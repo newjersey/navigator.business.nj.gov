@@ -52,23 +52,17 @@ const fetchTaskFile = async (filename: string): Promise<string> => {
     } catch {
       try {
         file = await import(
-          `@businessnjgovnavigator/content/roadmaps/license-tasks/${filename}.md`
+          `@businessnjgovnavigator/content/roadmaps/municipal-tasks/${filename}.md`
         );
       } catch {
         try {
           file = await import(
-            `@businessnjgovnavigator/content/roadmaps/municipal-tasks/${filename}.md`
+            `@businessnjgovnavigator/content/roadmaps/raffle-bingo-steps/${filename}.md`
           );
         } catch {
-          try {
-            file = await import(
-              `@businessnjgovnavigator/content/roadmaps/raffle-bingo-steps/${filename}.md`
-            );
-          } catch {
-            file = await import(
-              `@businessnjgovnavigator/content/roadmaps/env-tasks/${filename}.md`
-            );
-          }
+          file = await import(
+            `@businessnjgovnavigator/content/roadmaps/env-tasks/${filename}.md`
+          );
         }
       }
     }

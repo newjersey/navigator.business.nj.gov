@@ -4,7 +4,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { findDeadLicenseTasks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import { findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -12,7 +12,6 @@ import { ReactElement, useState } from "react";
 
 interface Props {
   deadTasks: string[];
-  deadLicenseTasks: string[];
   noAuth: boolean;
 }
 
@@ -27,11 +26,6 @@ const UnusedContent = (props: Props): ReactElement => {
     unusedTasksOutput = `${unusedTasksOutput}\n\n Tasks:`;
     props.deadTasks.map((deadTasks) => {
       unusedTasksOutput = `${unusedTasksOutput}\n\n ${deadTasks}`;
-    });
-
-    unusedTasksOutput = `${unusedTasksOutput}\n\n License Tasks:`;
-    props.deadLicenseTasks.map((deadLicenseTask) => {
-      unusedTasksOutput = `${unusedTasksOutput}\n\n ${deadLicenseTask}`;
     });
 
     return unusedTasksOutput;
@@ -67,15 +61,6 @@ const UnusedContent = (props: Props): ReactElement => {
       <ul>
         {props.deadTasks.map((task, i) => {
           return <li key={i}>{task}</li>;
-        })}
-      </ul>
-
-      <Heading level={2} data-testid="dl-task-header">
-        License Tasks not referenced in any the application:
-      </Heading>
-      <ul>
-        {props.deadLicenseTasks.map((licenseTasks, i) => {
-          return <li key={i}>{licenseTasks}</li>;
         })}
       </ul>
 
@@ -115,7 +100,6 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
     ? {
         props: {
           deadTasks: await findDeadTasks(),
-          deadLicenseTasks: await findDeadLicenseTasks(),
           // deadContextualInfo: await findDeadContextualInfo(),
           noAuth: true,
         },

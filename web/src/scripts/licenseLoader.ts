@@ -4,10 +4,6 @@ import path from "path";
 
 const webflowLicenseDir = path.resolve(`${__dirname}/../../../content/src/webflow-licenses`);
 
-const navigatorLicenseDir = path.resolve(
-  `${__dirname}/../../../content/src/roadmaps/license-tasks`,
-);
-
 const municipalDir = path.resolve(`${__dirname}/../../../content/src/roadmaps/municipal-tasks`);
 
 const tasksAllDir = path.resolve(`${__dirname}/../../../content/src/roadmaps/tasks`);
@@ -64,13 +60,6 @@ export const loadAllNavigatorWebflowLicenses = (): LicenseData[] => {
 };
 
 export const loadAllNavigatorLicenses = (): LicenseData[] => {
-  const navigatorFileNames = fs.readdirSync(navigatorLicenseDir);
-
-  const navigatorLicenses = navigatorFileNames.map((fileName) => {
-    const fullPath = path.join(navigatorLicenseDir, `${fileName}`);
-    return loadLicenseByPath(fileName, fullPath);
-  });
-
   const municipalFileNames = fs.readdirSync(municipalDir);
   const municipalLicenses = municipalFileNames.map((fileName) => {
     const fullPath = path.join(municipalDir, `${fileName}`);
@@ -85,7 +74,7 @@ export const loadAllNavigatorLicenses = (): LicenseData[] => {
     })
     .filter((license) => license.syncToWebflow === true || license.syncToWebflow === "true");
 
-  return [...navigatorLicenses, ...municipalLicenses, ...tasksAllLicenses];
+  return [...municipalLicenses, ...tasksAllLicenses];
 };
 
 const loadLicenseByPath = (fileName: string, fullPath: string): LicenseData => {
@@ -102,14 +91,11 @@ const getMarkDownFromNavigatorDir = (fileName: string, filePath: string): [Licen
 };
 
 export const loadNavigatorLicense = (fileName: string): [LicenseData, string] => {
-  const navigatorLicenseFile = path.join(navigatorLicenseDir, `${fileName}`);
   const municipalLicenseFile = path.join(municipalDir, `${fileName}`);
   const tasksAllLicenseFile = path.join(tasksAllDir, `${fileName}`);
   const webflowLicenseFile = path.join(webflowLicenseDir, `${fileName}`);
 
-  if (fs.existsSync(navigatorLicenseFile)) {
-    return getMarkDownFromNavigatorDir(fileName, navigatorLicenseFile);
-  } else if (fs.existsSync(municipalLicenseFile)) {
+  if (fs.existsSync(municipalLicenseFile)) {
     return getMarkDownFromNavigatorDir(fileName, municipalLicenseFile);
   } else if (fs.existsSync(tasksAllLicenseFile)) {
     return getMarkDownFromNavigatorDir(fileName, tasksAllLicenseFile);

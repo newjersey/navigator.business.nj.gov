@@ -32,7 +32,6 @@ import {
   loadAllFilings,
   loadAllFundings,
   loadAllLicenseCalendarEvents,
-  loadAllLicenseTasks,
   loadAllMunicipalTasks,
   loadAllTasksOnly,
   loadAllWebflowLicenses,
@@ -179,7 +178,6 @@ export const checkContextualInfoLinksUsage = async (topicArn: string): Promise<b
     ...findMatchingContextualInfo(getCertificationData(loadAllCertifications()), "Certification"),
     ...findMatchingContextualInfo(getTaskData(loadAllEnvironmentTasks()), "Task"),
     ...findMatchingContextualInfo(getTaskData(loadAllMunicipalTasks()), "Task"),
-    ...findMatchingContextualInfo(getTaskData(loadAllLicenseTasks()), "Task"),
   ];
 
   if (matches.length > 0) {

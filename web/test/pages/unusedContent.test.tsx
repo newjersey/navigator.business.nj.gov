@@ -42,11 +42,8 @@ jest.mock("broken-link-checker", () => {
 
 describe("Deadlinks page", () => {
   it("displays content when password is successful", async () => {
-    render(
-      <UnusedContent deadTasks={["task1"]} deadLicenseTasks={["licenseTask1"]} noAuth={true} />,
-    );
+    render(<UnusedContent deadTasks={["task1"]} noAuth={true} />);
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
-    expect(screen.queryByText("licenseTask1")).not.toBeInTheDocument();
 
     mockApi.post.mockResolvedValue({});
 
@@ -54,16 +51,12 @@ describe("Deadlinks page", () => {
     fireEvent.click(screen.getByText("Submit"));
 
     await screen.findByText("task1");
-    expect(screen.getByText("licenseTask1")).toBeInTheDocument();
     expect(screen.queryByLabelText("Password")).not.toBeInTheDocument();
   });
 
   it("hides content when password is unsuccessful", async () => {
-    render(
-      <UnusedContent deadTasks={["task1"]} deadLicenseTasks={["licenseTask1"]} noAuth={true} />,
-    );
+    render(<UnusedContent deadTasks={["task1"]} noAuth={true} />);
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
-    expect(screen.queryByText("licenseTask1")).not.toBeInTheDocument();
 
     mockApi.post.mockRejectedValue({});
 
@@ -74,7 +67,6 @@ describe("Deadlinks page", () => {
       return expect(screen.getByText("Authentication failed")).toBeInTheDocument();
     });
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
-    expect(screen.queryByText("licenseTask1")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
 });

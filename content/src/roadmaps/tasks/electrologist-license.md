@@ -1,0 +1,50 @@
+---
+id: electrologist-license
+displayname: electrologist-license
+urlSlug: electrologist-license
+agencyId: nj-consumer-affairs
+divisionPhone: (973) 504-6377
+filename: electrologist-license
+name: Apply for Your Electrologist License
+webflowName: "Electrologist: Individual License"
+summaryDescriptionMd: You must have a license to work as an electrologist in New Jersey.
+industryId: healthcare
+callToActionText: Apply for My Electrologist License
+callToActionLink: https://www.njconsumeraffairs.gov/eac/Applications/Application-for-Licensure-as-an-Electrologist.pdf
+webflowId: 66e9d9648d1f1a667a8f04ab
+licenseCertificationClassification: undefined
+syncToWebflow: true
+---
+
+## Eligibility Criteria
+
+- Be at least 18 years old
+- High school diploma or its equivalent
+- Completion of an electrology education program approved by the Electrologists Advisory Committee (EAC) and taught by a licensed instructor in electrology
+- Passing score for the New Jersey Electrology Jurisprudence Examination
+- Passing score for the International Board of Electrologists Certification (IBEC) examination, administered by the American Electrology Association (AEA)
+
+## Application Requirements
+
+- Social Security number
+- Citizenship/immigration status
+- Child support information, if applicable
+- History of drug use, if applicable
+- List of all criminal offenses of which the applicant has been convicted, if applicable
+- History of disciplinary actions and suspended licenses, if applicable
+- List of all current licenses or certifications, if applicable
+- Copy of high school diploma or its equivalent
+- Criminal background check
+- Applicable fees paid
+
+:::largeCallout{ showHeader="true" headerText="What if I don't get this license?" calloutType="warning" }
+
+You can't work as an electrologist in New Jersey and may be subject to significant fines and legal penalties.
+
+:::
+
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+
+An electrologist license number.
+
+:::
