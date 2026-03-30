@@ -45,6 +45,7 @@ import {
   OperatingPhaseId,
   OperatingPhases,
   randomElementFromArray,
+  selectIndustryTaskId,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
@@ -77,11 +78,11 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import {
   BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -373,6 +374,7 @@ describe("profile - starting business", () => {
       taskProgress: {
         [einTaskId]: "COMPLETED",
         [naicsCodeTaskId]: "TO_DO",
+        [selectIndustryTaskId]: "COMPLETED",
       },
       taskItemChecklist: {},
     });

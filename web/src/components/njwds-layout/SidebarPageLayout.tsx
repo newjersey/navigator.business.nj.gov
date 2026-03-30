@@ -59,9 +59,7 @@ export const SidebarPageLayout = ({
               )}
               <div
                 className={
-                  outlineBox
-                    ? "border-1px border-base-light usa-prose min-height-40rem padding-4 radius-lg"
-                    : "min-height-40rem"
+                  outlineBox ? "border-1px border-base-light usa-prose padding-4 radius-lg" : ""
                 }
               >
                 {children}

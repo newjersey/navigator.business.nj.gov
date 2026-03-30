@@ -16,14 +16,18 @@ import {
   mockSuccessfulApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { arrayOfSectors as sectors } from "@businessnjgovnavigator/shared";
+import { arrayOfSectors as sectors, UserData } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
   generateProfileData,
   OperatingPhaseId,
 } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUser,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
@@ -34,6 +38,15 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const Config = getMergedConfig();
+
+const generateExperienceAUserData = (
+  businessOverrides?: Partial<ReturnType<typeof generateBusiness>>,
+): UserData => {
+  const business = generateBusiness(businessOverrides ?? {});
+  return generateUserDataForBusiness(business, {
+    user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+  });
+};
 
 describe("onboarding - shared", () => {
   beforeEach(() => {
@@ -58,7 +71,7 @@ describe("onboarding - shared", () => {
   it.each(["business-persona-starting", "business-persona-foreign"])(
     "allows %s to move past Step 1",
     async (radioOption: string) => {
-      const { page } = renderPage({ userData: undefined });
+      const { page } = renderPage({ userData: generateExperienceAUserData() });
 
       page.chooseRadio(radioOption);
       fireEvent.click(screen.getByTestId("next"));
@@ -78,7 +91,11 @@ describe("onboarding - shared", () => {
       onboardingFormProgress: "UNSTARTED",
     });
 
-    renderPage({ userData: generateUserDataForBusiness(business) });
+    renderPage({
+      userData: generateUserDataForBusiness(business, {
+        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+      }),
+    });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
 
@@ -137,7 +154,7 @@ describe("onboarding - shared", () => {
   it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {
     const industry = randomElementFromArray(industriesWithSingleEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
-    const { page } = renderPage({});
+    const { page } = renderPage({ userData: generateExperienceAUserData() });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
     page.chooseEssentialQuestionRadio(industry, 0);
     page.clickNext();
@@ -157,7 +174,11 @@ describe("onboarding - shared", () => {
     const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
-    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(business, {
+        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+      }),
+    });
     const numberOfPages = onboardingFlows.STARTING.pages.length;
 
     for (let pageNumber = 2; pageNumber < numberOfPages; pageNumber += 1) {
@@ -174,14 +195,14 @@ describe("onboarding - shared", () => {
   });
 
   it("allows user to move past Step 1 if you have selected whether you own a business", async () => {
-    const { page } = renderPage({});
+    const { page } = renderPage({ userData: generateExperienceAUserData() });
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
 
   it("is able to go back", async () => {
-    const { page } = renderPage({});
+    const { page } = renderPage({ userData: generateExperienceAUserData() });
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
@@ -194,7 +215,11 @@ describe("onboarding - shared", () => {
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(business, {
+        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+      }),
+    });
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
@@ -233,7 +258,11 @@ describe("onboarding - shared", () => {
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(business, {
+        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+      }),
+    });
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
@@ -247,7 +276,7 @@ describe("onboarding - shared", () => {
   describe("when query parameter sets onboarding flow", () => {
     it("routes user to step 2 when query parameter exists and value is starting", async () => {
       useMockRouter({ isReady: true, query: { flow: "starting" } });
-      const { page } = renderPage({});
+      const { page } = renderPage({ userData: generateExperienceAUserData() });
 
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
       page.selectByText("Industry", "All Other Businesses");
@@ -261,7 +290,7 @@ describe("onboarding - shared", () => {
 
     it("routes user to step 2 when query parameter exists and value is out-of-state", async () => {
       useMockRouter({ isReady: true, query: { flow: "out-of-state" } });
-      const { page } = renderPage({});
+      const { page } = renderPage({ userData: generateExperienceAUserData() });
 
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
       const { employeeOrContractorInNJ } =

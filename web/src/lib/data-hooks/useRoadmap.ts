@@ -20,7 +20,7 @@ export type UseRoadmapReturnValue = {
 
 export const useRoadmap = (): UseRoadmapReturnValue => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
-  const { business } = useUserData();
+  const { business, userData } = useUserData();
 
   const sectionNamesInRoadmap = useMemo(() => {
     if (!roadmap) {
@@ -42,7 +42,11 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
 
   const buildAndSetRoadmap = async (): Promise<void> => {
     if (business?.onboardingFormProgress === "COMPLETED") {
-      const roadmap = await buildUserRoadmap(business.profileData, business.roadmapTaskData);
+      const roadmap = await buildUserRoadmap(
+        business.profileData,
+        business.roadmapTaskData,
+        userData?.user.abExperience || "ExperienceA",
+      );
       setRoadmap(roadmap);
     }
   };
