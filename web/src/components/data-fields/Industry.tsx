@@ -6,7 +6,6 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { EssentialQuestion, EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 
@@ -20,7 +19,6 @@ interface Props<T> extends FormContextFieldProps<T> {
 }
 export const Industry = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
-  const { userData } = useUserData();
   const fieldName = "industryId";
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
@@ -84,8 +82,6 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
     ));
   };
 
-  const showExperienceB = userData?.user.abExperience === "ExperienceB";
-
   return (
     <>
       <IndustryDropdown
@@ -94,7 +90,6 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
         validationText={contentFromConfig.errorTextRequired}
         handleChange={(): void => setIsValid(true)}
         onValidation={(event): void => setIsValid(isValid(event.target.value))}
-        showExperienceB={showExperienceB}
       />
       {state.profileData.industryId === "home-contractor" && (
         <div
