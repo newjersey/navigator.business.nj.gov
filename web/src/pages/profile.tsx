@@ -88,6 +88,7 @@ import {
   Municipality,
   naicsCodeTaskId,
   ProfileData,
+  selectIndustryTaskId,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -360,6 +361,10 @@ const ProfilePage = (props: Props): ReactElement => {
       setIsLoading(true);
 
       sendOnSaveAnalytics(business.profileData, profileData);
+
+      if (!business.profileData.industryId && profileData.industryId) {
+        updateQueue.queueTaskProgress({ [selectIndustryTaskId]: "COMPLETED" });
+      }
 
       if (profileData.employerId && profileData.employerId.length > 0) {
         updateQueue.queueTaskProgress({ [einTaskId]: "COMPLETED" });

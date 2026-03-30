@@ -61,6 +61,7 @@ import * as RegisteredForTaxesModal from "../../../content/src/fieldConfig/regis
 import * as RemoveBusinessModal from "../../../content/src/fieldConfig/remove-business-modal.json";
 import * as SearchBusinessNameTask from "../../../content/src/fieldConfig/search-business-name-task.json";
 import * as SectionHeaders from "../../../content/src/fieldConfig/section-headers.json";
+import * as SelectIndustryTask from "../../../content/src/fieldConfig/select-industry-task.json";
 import * as SelfRegistration from "../../../content/src/fieldConfig/self-registration.json";
 import * as SkipToMainContent from "../../../content/src/fieldConfig/skip-to-main-content.json";
 import * as StarterKits from "../../../content/src/fieldConfig/starter-kits.json";
@@ -172,6 +173,7 @@ const merged = JSON.parse(
       RemoveBusinessModal,
       CrtkTask,
       LoginSupportPage,
+      SelectIndustryTask,
     ),
   ),
 );
@@ -257,7 +259,8 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof EmployerRates &
   typeof RemoveBusinessModal &
   typeof CrtkTask &
-  typeof LoginSupportPage;
+  typeof LoginSupportPage &
+  typeof SelectIndustryTask;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -342,6 +345,7 @@ export const getMergedConfig = (): ConfigType => {
     RemoveBusinessModal,
     LoginSupportPage,
     CrtkTask,
+    SelectIndustryTask,
   );
 };
 

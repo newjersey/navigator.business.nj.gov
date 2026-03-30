@@ -17,7 +17,11 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUser,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 
@@ -94,7 +98,9 @@ describe("onboarding - additional business", () => {
     const userId = "user-id";
     const emptyBusiness = createEmptyBusiness({ userId: userId });
     const initialBusiness = generateBusiness({ userId: userId });
-    const initialData = generateUserDataForBusiness(initialBusiness);
+    const initialData = generateUserDataForBusiness(initialBusiness, {
+      user: generateUser({ id: userId, abExperience: "ExperienceA" }),
+    });
     expect(Object.keys(initialData.businesses)).toHaveLength(1);
 
     useMockRouter({ isReady: true, query: { additionalBusiness: "true" } });

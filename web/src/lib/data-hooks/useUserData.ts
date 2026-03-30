@@ -113,7 +113,11 @@ export const useUserData = (): UseUserDataResponse => {
     const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
     const roadmapTaskData = newUserData.businesses[newUserData.currentBusinessId].roadmapTaskData;
     setAnalyticsDimensions(newProfileData);
-    const newRoadmap = await buildUserRoadmap(newProfileData, roadmapTaskData);
+    const newRoadmap = await buildUserRoadmap(
+      newProfileData,
+      roadmapTaskData,
+      newUserData.user.abExperience || "ExperienceA",
+    );
     setRoadmap(newRoadmap);
   };
 

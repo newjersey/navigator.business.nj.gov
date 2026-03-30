@@ -168,6 +168,7 @@ describe("useUserData", () => {
         return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(
           expectedProfileData,
           roadmapTask,
+          expect.stringMatching(/^Experience[AB]$/),
         );
       });
       expect(mockSetRoadmap).toHaveBeenCalledWith(returnedRoadmap);

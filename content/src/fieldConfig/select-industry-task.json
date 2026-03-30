@@ -1,0 +1,8 @@
+{
+  "selectIndustryTask": {
+    "successAlert": "You’ve successfully saved your industry. Once you select your business structure, you may see changes to your guide.",
+    "content": "**What industry do you work in?**\n\nThis helps us show you licenses and permits you may need.",
+    "infoCallout": "**To continue, click Save.**",
+    "save": "Save"
+  }
+}

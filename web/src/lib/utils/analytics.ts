@@ -3016,5 +3016,29 @@ export default {
         },
       },
     },
+    select_industry_task: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "select_industry_task",
+            legacy_event_label: "open_live_chat",
+            click_text: "open_live_chat",
+            clicked_to: "live_chat_widget",
+          });
+        },
+      },
+      submit: {
+        select_industry: () => {
+          eventRunner.track({
+            event: "form_submits",
+            legacy_event_category: "select_industry_task",
+            legacy_event_action: "submit",
+            legacy_event_label: "select_industry",
+          });
+        },
+      },
+    },
   },
 };

@@ -65,6 +65,7 @@ import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
 
+import SelectIndustryPreview from "@/lib/cms/previews/SelectIndustryPreview";
 import jsYaml from "js-yaml";
 
 const CMS_CONFIG = {};
@@ -148,6 +149,7 @@ const CMS = dynamic(
       registerPreview(CMS, "check-account-email-page", LoginEmailCheckPreview);
 
       registerPreview(CMS, "selfRegistration", SelfRegistrationPreview);
+      registerPreview(CMS, "select-industry-task", SelectIndustryPreview);
 
       registerPreview(CMS, "legalMessageDefaults", LegalMessagePreview);
 
