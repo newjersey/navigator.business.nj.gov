@@ -17,6 +17,7 @@ import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwe
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
+import { SelectIndustryTask } from "@/components/tasks/SelectIndustryTask";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { Xray } from "@/components/xray/Xray";
 import { rswitch } from "@/lib/utils/helpers";
@@ -133,6 +134,7 @@ export const TaskPageSwitchComponent = ({
     "community-right-to-know-survey": (
       <CrtkPage task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality} />
     ),
+    "select-industry": <SelectIndustryTask task={task} />,
     default: <TaskBody task={task} business={business} roadmap={roadmap} />,
   });
 };
