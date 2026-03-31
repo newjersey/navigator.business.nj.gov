@@ -4,6 +4,7 @@ import {
   WELCOME_EMAIL_CONFIG_SET_BASE,
 } from "@businessnjgovnavigator/api/src/libs/constants";
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
@@ -20,7 +21,7 @@ interface ApiStackProps extends StackProps {
 }
 
 export class ApiStack extends Stack {
-  public readonly restApi: apigateway.IRestApi;
+  public readonly restApi: apigateway.RestApi;
 
   constructor(scope: Construct, id: string, props: ApiStackProps) {
     super(scope, id, props);
@@ -91,6 +92,8 @@ export class ApiStack extends Stack {
     const authorizer = this.createCognitoAuthorizer(props.stage);
     this.setupRootRoutes(expressLambda!, authorizer);
     this.setupApiRoutes(expressLambda!, githubLambda);
+
+    this.configureCustomDomain(props.stage);
 
     new CfnOutput(this, "ApiGatewayId", {
       value: this.restApi.restApiId,
@@ -180,5 +183,53 @@ export class ApiStack extends Stack {
       const cmsProxy = cms.addResource("{proxy+}");
       attachLambdaToResource(this, cmsProxy, githubLambda);
     }
+  }
+
+  private getCustomDomainConfig(stage: string): { domainName: string; certificateArn: string } {
+    const certificateArn = process.env.API_GATEWAY_CERT_ARN;
+
+    if (!certificateArn) {
+      throw new Error("Missing required env var: API_GATEWAY_CERT_ARN");
+    }
+
+    const domainMap: Record<string, string> = {
+      dev: "dev.api.account.business.nj.gov",
+      content: "content.api.account.business.nj.gov",
+      testing: "testing.api.account.business.nj.gov",
+      staging: "staging.api.account.business.nj.gov",
+      prod: "api.account.business.nj.gov",
+    };
+
+    const domainName = domainMap[stage];
+    if (!domainName) {
+      throw new Error(`Invalid stage for custom domain: ${stage}`);
+    }
+    return {
+      domainName,
+      certificateArn,
+    };
+  }
+
+  private configureCustomDomain(stage: string) {
+    const { domainName, certificateArn } = this.getCustomDomainConfig(stage);
+
+    const certificate = acm.Certificate.fromCertificateArn(
+      this,
+      `ApiDomainCertificate-${stage}`,
+      certificateArn,
+    );
+
+    const domain = new apigateway.DomainName(this, `ApiCustomDomain-${stage}-v2`, {
+      domainName,
+      certificate,
+      endpointType: apigateway.EndpointType.EDGE,
+      securityPolicy: apigateway.SecurityPolicy.TLS_1_2,
+    });
+
+    new apigateway.BasePathMapping(this, `ApiBasePathMapping-${stage}-v2`, {
+      domainName: domain,
+      restApi: this.restApi,
+      stage: this.restApi.deploymentStage,
+    });
   }
 }
