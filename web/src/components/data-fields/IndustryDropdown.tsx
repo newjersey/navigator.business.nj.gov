@@ -27,7 +27,6 @@ interface Props {
   error?: boolean;
   validationText?: string;
   validationLabel?: string;
-  showExperienceB?: boolean;
 }
 
 export const IndustryDropdown = (props: Props): ReactElement => {
@@ -111,7 +110,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
     const genericIndex = filteredList.findIndex((industry) => industry.id === "generic");
 
-    if (props.showExperienceB && genericIndex !== -1) {
+    if (genericIndex !== -1) {
       const genericIndustry = filteredList[genericIndex];
       filteredList = [
         ...filteredList.slice(0, genericIndex),
@@ -193,7 +192,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
               variant="outlined"
               error={props.error}
               helperText={props.error && props.validationText}
-              placeholder={props.showExperienceB ? contentFromConfig.searchPlaceHolderText : ""}
+              placeholder={contentFromConfig.searchPlaceHolderText}
             />
           </div>
         );
