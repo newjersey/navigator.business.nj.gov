@@ -67,7 +67,7 @@ describe("<LoginEmailCheck />", () => {
     fireEvent.click(submitButton);
 
     expect(
-      await screen.findByText(Config.checkAccountEmailPage.invalidEmailError),
+      await screen.findByText(Config.checkAccountEmailPage.emailNotFoundError),
     ).toBeInTheDocument();
     await waitFor(() => {
       expect(triggerSignIn).not.toHaveBeenCalled();
