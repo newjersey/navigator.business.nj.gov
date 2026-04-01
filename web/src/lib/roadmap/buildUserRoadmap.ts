@@ -48,7 +48,7 @@ export const buildUserRoadmap = async (
     addOns = [];
   }
 
-  let roadmap = await buildRoadmap({ industryId: industryId, addOns });
+  let roadmap = await buildRoadmap({ industryId: industryId ?? "generic", addOns });
 
   roadmap = profileData.municipality
     ? await addMunicipalitySpecificData(roadmap, profileData.municipality.id)
