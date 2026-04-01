@@ -171,22 +171,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
 
-  useEffect(() => {
-    if (
-      profileData.businessPersona === "STARTING" &&
-      userData?.user.abExperience === "ExperienceB" &&
-      profileData.industryId !== "generic"
-    ) {
-      setProfileData((prev) => ({ ...prev, industryId: "generic" }));
-      updateQueue?.queueProfileData({ industryId: "generic" }).update({ local: true });
-    }
-  }, [
-    profileData.businessPersona,
-    profileData.industryId,
-    userData?.user.abExperience,
-    updateQueue,
-  ]);
-
   const protectUpdateQueueAgainstRaceCondition = (
     currentUserData: UserData | undefined,
   ): boolean => {

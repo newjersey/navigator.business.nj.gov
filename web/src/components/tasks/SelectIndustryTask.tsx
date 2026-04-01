@@ -17,6 +17,7 @@ import analytics from "@/lib/utils/analytics";
 import { getFlow } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Task } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 
 type Props = {
@@ -32,6 +33,7 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
 
+  const router = useRouter();
   useEffect(() => {
     if (!business) return;
     setProfileData(business.profileData);
@@ -45,6 +47,7 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
       return;
     }
     await updateQueue.queueProfileData(profileData).update();
+    router.push("/dashboard?success=true");
   });
 
   // Split content at first horizontal line break, to allow inserting the industry dropdown in between
