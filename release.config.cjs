@@ -147,6 +147,7 @@ module.exports = {
         writerOpts: { transform: adoTransform },
       },
     ],
+    "@open_resources/semantic-release-uv",
     "@semantic-release/npm",
     "@semantic-release/changelog",
     ["@semantic-release/github", { successComment: false }],
