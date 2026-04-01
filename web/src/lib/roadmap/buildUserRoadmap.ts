@@ -9,6 +9,7 @@ import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMov
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { templateEval } from "@/lib/utils/helpers";
 import {
+  ABExperience,
   determineForeignBusinessType,
   fetchMunicipalityById,
   LookupIndustryById,
@@ -22,6 +23,7 @@ import { Roadmap } from "@businessnjgovnavigator/shared/types";
 export const buildUserRoadmap = async (
   profileData: ProfileData,
   roadmapTaskData: RoadmapTaskData,
+  abExperience: ABExperience = "ExperienceA",
 ): Promise<Roadmap> => {
   let industryId = profileData.industryId;
   if (profileData.providesStaffingService) {
@@ -37,6 +39,7 @@ export const buildUserRoadmap = async (
     ...getIndustryBasedAddOns(profileData, industryId),
     ...getLegalStructureAddOns(profileData),
     ...getRoadmapTaskAddOns(roadmapTaskData),
+    ...getExperienceBAddOns(abExperience),
   ];
 
   const isDomesticEmployer =
@@ -339,6 +342,14 @@ const getRoadmapTaskAddOns = (roadmapTaskData: RoadmapTaskData): string[] => {
   const addOns = [];
   if (roadmapTaskData.manageBusinessVehicles) {
     addOns.push("business-vehicle");
+  }
+  return addOns;
+};
+
+const getExperienceBAddOns = (abExperience: ABExperience): string[] => {
+  const addOns = [];
+  if (abExperience === "ExperienceB") {
+    addOns.push("select-industry");
   }
   return addOns;
 };
