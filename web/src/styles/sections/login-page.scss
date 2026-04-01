@@ -50,18 +50,76 @@
   }
 
   .need-help-text {
-    > div {
-      display: inline;
+    > div,
+    > p {
+      display: inline !important;
+      line-height: 1.5;
+      word-spacing: normal;
+      orphans: 3;
+      widows: 3;
     }
 
     .usa-prose {
-      display: inline;
+      display: inline !important;
+
+      * {
+        display: inline !important;
+      }
     }
 
-    a,
+    span {
+      display: inline !important;
+    }
+
+    a {
+      display: inline !important;
+      white-space: normal !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+      word-break: normal !important;
+      vertical-align: baseline;
+      line-height: inherit;
+    }
+
     button {
-      white-space: normal;
-      margin-top: 0;
+      all: unset;
+      display: contents !important;
+      white-space: normal !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+      word-break: normal !important;
+      cursor: pointer;
+
+      > div {
+        all: unset;
+        display: inline !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        word-break: normal !important;
+        cursor: pointer;
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+
+    .intercom-button {
+      all: unset;
+      display: contents !important;
+      cursor: pointer;
+
+      > div {
+        all: unset;
+        display: inline !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        cursor: pointer;
+        color: inherit;
+        text-decoration: underline;
+      }
     }
   }
 
@@ -70,9 +128,36 @@
     width: 100% !important;
   }
 
+  .or-divider {
+    hr {
+      flex: 1;
+    }
+  }
+
+  @media (min-width: variables.$sm) {
+    .or-divider {
+      display: flex !important;
+      align-items: center;
+      text-align: center;
+
+      hr {
+        display: block !important;
+      }
+    }
+  }
+
   @media (max-width: variables.$sm) {
     .or-divider {
-      display: none !important;
+      display: block !important;
+      text-align: left;
+
+      span {
+        display: block !important;
+      }
+
+      hr {
+        display: none !important;
+      }
     }
 
     .mobile-border-top {
@@ -82,7 +167,8 @@
     }
 
     .need-help-text {
-      .intercom-chat-link {
+      .intercom-chat-link,
+      .intercom-button {
         white-space: normal !important;
         display: inline !important;
       }

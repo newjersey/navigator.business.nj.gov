@@ -25,13 +25,11 @@ export const LoginEmailCheck = (): ReactElement => {
   const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = (email: string): void => {
-    const isValidEmail = validateEmail(email);
-
-    if (isValidEmail) {
-      checkEmailExists(email);
-    } else {
-      setEmailError(Config.checkAccountEmailPage.invalidEmailError);
+    if (!email || email.trim() === "" || !validateEmail(email)) {
+      setEmailError(Config.checkAccountEmailPage.emailNotFoundError);
+      return;
     }
+    checkEmailExists(email);
   };
 
   const checkEmailExists = async (email: string): Promise<void> => {
@@ -70,8 +68,8 @@ export const LoginEmailCheck = (): ReactElement => {
     <div className="email-check-card padding-5 desktop:margin-x-2 radius-md">
       <Heading level={1}>{Config.checkAccountEmailPage.header}</Heading>
       <div className="grid-row grid-gap">
-        <div className="tablet:grid-col-6">
-          {emailError && emailError !== Config.checkAccountEmailPage.invalidEmailError && (
+        <div className="tablet:grid-col-6 tablet:padding-right-3">
+          {emailError && (
             <Alert variant="error">
               <Content>{Config.checkAccountEmailPage.emailNotFoundAlertError}</Content>
             </Alert>
@@ -103,14 +101,22 @@ export const LoginEmailCheck = (): ReactElement => {
               {Config.checkAccountEmailPage.inputButton}
             </PrimaryButton>
             <div
-              className="or-divider display-flex flex-align-center margin-y-3"
+              className="or-divider display-block margin-y-2 text-left tablet:display-flex tablet:flex-align-center tablet:text-center"
               style={{ width: "100%" }}
             >
-              <hr className="flex-fill margin-0" aria-hidden="true" style={{ minWidth: "20px" }} />
-              <span className="padding-x-2 text-base-dark text-center">
+              <hr
+                className="flex-fill margin-0 display-none tablet:display-block"
+                aria-hidden="true"
+                style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
+              />
+              <span className="display-block padding-y-1 text-base-dark tablet:flex-shrink-0 tablet:padding-x-2 tablet:padding-y-0">
                 {Config.checkAccountEmailPage.subButtonText}
               </span>
-              <hr className="flex-fill margin-0" aria-hidden="true" style={{ minWidth: "20px" }} />
+              <hr
+                className="flex-fill margin-0 display-none tablet:display-block"
+                aria-hidden="true"
+                style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
+              />
             </div>
             <SecondaryButton
               isFullWidthOnDesktop
@@ -124,14 +130,17 @@ export const LoginEmailCheck = (): ReactElement => {
             </SecondaryButton>
           </div>
         </div>
-        <div className="tablet:grid-col-6 tablet:border-left tablet:border-base-lighter tablet:padding-left-3 mobile-border-top">
+        <div className="tablet:grid-col-6 tablet:border-left tablet:border-base-lighter tablet:padding-left-2 tablet:padding-right-3 mobile-border-top">
           <div className="need-help-text">
-            <Heading level={2}>
-              <p>{Config.checkAccountEmailPage.needHelpText}</p>
+            <Heading level={2} className="text-base-darkest">
+              <p className="text-base-darkest">{Config.checkAccountEmailPage.needHelpText}</p>
             </Heading>
             <div style={{ display: "inline" }}>
-              <Content>{Config.checkAccountEmailPage.assistanceText}</Content>{" "}
+              <Content className="display-inline" style={{ display: "inline" }}>
+                {Config.checkAccountEmailPage.assistanceText}
+              </Content>{" "}
               <UnStyledButton
+                className="display-inline"
                 isUnderline
                 isIntercomEnabled
                 onClick={analytics.event.check_account_help_button.click.open_live_chat}
