@@ -5,6 +5,10 @@
   background-color: variables.$cool-extra-light;
 }
 
+.email-check-card-section {
+  padding-right: 40px;
+}
+
 .email-check-card {
   background-color: variables.$white;
   border: 1px solid variables.$base-lighter;
@@ -135,10 +139,19 @@
   }
 
   @media (min-width: variables.$sm) {
+    .need-help-text-section {
+      padding-left: 40px;
+    }
+
     .or-divider {
       display: flex !important;
       align-items: center;
       text-align: center;
+
+      span {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
 
       hr {
         display: block !important;

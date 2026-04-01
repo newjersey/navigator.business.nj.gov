@@ -69,69 +69,71 @@ export const LoginEmailCheck = (): ReactElement => {
       <Heading level={1}>{Config.checkAccountEmailPage.header}</Heading>
       <div className="grid-row grid-gap">
         <div className="tablet:grid-col-6 tablet:padding-right-3">
-          {emailError && (
-            <Alert variant="error">
-              <Content>{Config.checkAccountEmailPage.emailNotFoundAlertError}</Content>
-            </Alert>
-          )}
-          <div className="help-text-container margin-bottom-2">
+          <div className="email-check-card-section">
+            {emailError && (
+              <Alert variant="error">
+                <Content>{Config.checkAccountEmailPage.emailNotFoundAlertError}</Content>
+              </Alert>
+            )}
+            <div className="help-text-container margin-bottom-2">
+              <div>
+                <Content>{Config.checkAccountEmailPage.noAccountText}</Content>
+              </div>
+            </div>
+            <WithErrorBar hasError={Boolean(emailError)} type="ALWAYS">
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <GenericTextField
+                inputWidth="full"
+                fieldName="email"
+                value={email}
+                handleChange={handleTextInputChange}
+                error={Boolean(emailError)}
+                validationText={emailError}
+                onKeyDown={(e) => handleKeyDown(e)}
+              />
+            </WithErrorBar>
             <div>
-              <Content>{Config.checkAccountEmailPage.noAccountText}</Content>
+              <PrimaryButton
+                isFullWidthOnDesktop
+                isColor="primary"
+                isSubmitButton
+                onClick={() => handleSubmit(email)}
+              >
+                {Config.checkAccountEmailPage.inputButton}
+              </PrimaryButton>
+              <div
+                className="or-divider display-block margin-y-2 text-left tablet:display-flex tablet:flex-align-center tablet:text-center"
+                style={{ width: "100%" }}
+              >
+                <hr
+                  className="flex-fill margin-0 display-none tablet:display-block"
+                  aria-hidden="true"
+                  style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
+                />
+                <span className="display-block padding-y-1 text-base-dark tablet:flex-shrink-0 tablet:padding-y-0">
+                  {Config.checkAccountEmailPage.subButtonText}
+                </span>
+                <hr
+                  className="flex-fill margin-0 display-none tablet:display-block"
+                  aria-hidden="true"
+                  style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
+                />
+              </div>
+              <SecondaryButton
+                isFullWidthOnDesktop
+                isColor="primary"
+                onClick={() => {
+                  if (!router) return;
+                  onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+                }}
+              >
+                {Config.checkAccountEmailPage.createAccountButton}
+              </SecondaryButton>
             </div>
-          </div>
-          <WithErrorBar hasError={Boolean(emailError)} type="ALWAYS">
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <GenericTextField
-              inputWidth="full"
-              fieldName="email"
-              value={email}
-              handleChange={handleTextInputChange}
-              error={Boolean(emailError)}
-              validationText={emailError}
-              onKeyDown={(e) => handleKeyDown(e)}
-            />
-          </WithErrorBar>
-          <div>
-            <PrimaryButton
-              isFullWidthOnDesktop
-              isColor="primary"
-              isSubmitButton
-              onClick={() => handleSubmit(email)}
-            >
-              {Config.checkAccountEmailPage.inputButton}
-            </PrimaryButton>
-            <div
-              className="or-divider display-block margin-y-2 text-left tablet:display-flex tablet:flex-align-center tablet:text-center"
-              style={{ width: "100%" }}
-            >
-              <hr
-                className="flex-fill margin-0 display-none tablet:display-block"
-                aria-hidden="true"
-                style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
-              />
-              <span className="display-block padding-y-1 text-base-dark tablet:flex-shrink-0 tablet:padding-x-2 tablet:padding-y-0">
-                {Config.checkAccountEmailPage.subButtonText}
-              </span>
-              <hr
-                className="flex-fill margin-0 display-none tablet:display-block"
-                aria-hidden="true"
-                style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
-              />
-            </div>
-            <SecondaryButton
-              isFullWidthOnDesktop
-              isColor="primary"
-              onClick={() => {
-                if (!router) return;
-                onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
-              }}
-            >
-              {Config.checkAccountEmailPage.createAccountButton}
-            </SecondaryButton>
           </div>
         </div>
         <div className="tablet:grid-col-6 tablet:border-left tablet:border-base-lighter tablet:padding-left-2 tablet:padding-right-3 mobile-border-top">
-          <div className="need-help-text">
+          <div className="need-help-text need-help-text-section">
             <Heading level={2} className="text-base-darkest">
               <p className="text-base-darkest">{Config.checkAccountEmailPage.needHelpText}</p>
             </Heading>
