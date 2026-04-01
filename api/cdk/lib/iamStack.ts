@@ -22,6 +22,8 @@ export class IamStack extends Stack {
   readonly serviceName: string;
   public readonly role: iam.Role;
   public readonly backupRole?: iam.Role;
+  public readonly authRole?: iam.Role;
+  public readonly unauthRole?: iam.Role;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
@@ -50,6 +52,52 @@ export class IamStack extends Stack {
 
       applyStandardTags(backupRole, props.stage);
       this.backupRole = backupRole;
+    }
+
+    // Create Cognito Identity Pool roles if identity pool ID is provided
+    const identityPoolId = process.env.COGNITO_IDENTITY_POOL_ID;
+    if (identityPoolId) {
+      // Authenticated role for Cognito Identity Pool
+      const authRole = new iam.Role(this, "navigatorAuthRole", {
+        assumedBy: new iam.FederatedPrincipal(
+          "cognito-identity.amazonaws.com",
+          {
+            StringEquals: {
+              "cognito-identity.amazonaws.com:aud": identityPoolId,
+            },
+            "ForAnyValue:StringLike": {
+              "cognito-identity.amazonaws.com:amr": "authenticated",
+            },
+          },
+          "sts:AssumeRoleWithWebIdentity",
+        ),
+        roleName: "navigator_authRole",
+        description: "Role for authenticated users via Cognito Identity Pool",
+      });
+
+      applyStandardTags(authRole, props.stage);
+      this.authRole = authRole;
+
+      // Unauthenticated role for Cognito Identity Pool
+      const unauthRole = new iam.Role(this, "navigatorUnauthRole", {
+        assumedBy: new iam.FederatedPrincipal(
+          "cognito-identity.amazonaws.com",
+          {
+            StringEquals: {
+              "cognito-identity.amazonaws.com:aud": identityPoolId,
+            },
+            "ForAnyValue:StringLike": {
+              "cognito-identity.amazonaws.com:amr": "unauthenticated",
+            },
+          },
+          "sts:AssumeRoleWithWebIdentity",
+        ),
+        roleName: "navigator_unauthRole",
+        description: "Role for unauthenticated users via Cognito Identity Pool",
+      });
+
+      applyStandardTags(unauthRole, props.stage);
+      this.unauthRole = unauthRole;
     }
 
     const putMetricDataPolicyInCloudwatch = new iam.PolicyStatement({

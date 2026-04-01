@@ -3,6 +3,10 @@ import { App } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
 import { IamStack, IamStackProps } from "../lib/iamStack";
 
+// Store original value and set test identity pool ID at module level
+const originalIdentityPoolId = process.env.COGNITO_IDENTITY_POOL_ID;
+const TEST_IDENTITY_POOL_ID = "us-east-1:test-identity-pool-id";
+
 describe("IamStack", () => {
   let app: App;
   let stack: IamStack;
@@ -221,5 +225,104 @@ describe("IamStack", () => {
         },
       });
     }).not.toThrow();
+  });
+
+  describe("Cognito Identity Pool Roles", () => {
+    beforeAll(() => {
+      // Set environment variable for identity pool before all tests in this block
+      process.env.COGNITO_IDENTITY_POOL_ID = TEST_IDENTITY_POOL_ID;
+    });
+
+    afterAll(() => {
+      // Restore original value
+      if (originalIdentityPoolId) {
+        process.env.COGNITO_IDENTITY_POOL_ID = originalIdentityPoolId;
+      } else {
+        delete process.env.COGNITO_IDENTITY_POOL_ID;
+      }
+    });
+
+    let identityPoolApp: App;
+    let identityPoolStack: IamStack;
+    let identityPoolTemplate: Template;
+
+    beforeEach(() => {
+      identityPoolApp = new App();
+      const props: IamStackProps = { stage: "dev" };
+      identityPoolStack = new IamStack(identityPoolApp, "TestIamStackWithIdentityPool", props);
+      identityPoolTemplate = Template.fromStack(identityPoolStack);
+    });
+
+    test("creates authenticated role when identity pool ID is provided", () => {
+      expect(() => {
+        identityPoolTemplate.hasResourceProperties("AWS::IAM::Role", {
+          RoleName: "navigator_authRole",
+          AssumeRolePolicyDocument: {
+            Statement: Match.arrayWith([
+              Match.objectLike({
+                Action: "sts:AssumeRoleWithWebIdentity",
+                Effect: "Allow",
+                Principal: { Federated: "cognito-identity.amazonaws.com" },
+                Condition: {
+                  StringEquals: {
+                    "cognito-identity.amazonaws.com:aud": TEST_IDENTITY_POOL_ID,
+                  },
+                  "ForAnyValue:StringLike": {
+                    "cognito-identity.amazonaws.com:amr": "authenticated",
+                  },
+                },
+              }),
+            ]),
+          },
+        });
+      }).not.toThrow();
+    });
+
+    test("creates unauthenticated role when identity pool ID is provided", () => {
+      expect(() => {
+        identityPoolTemplate.hasResourceProperties("AWS::IAM::Role", {
+          RoleName: "navigator_unauthRole",
+          AssumeRolePolicyDocument: {
+            Statement: Match.arrayWith([
+              Match.objectLike({
+                Action: "sts:AssumeRoleWithWebIdentity",
+                Effect: "Allow",
+                Principal: { Federated: "cognito-identity.amazonaws.com" },
+                Condition: {
+                  StringEquals: {
+                    "cognito-identity.amazonaws.com:aud": TEST_IDENTITY_POOL_ID,
+                  },
+                  "ForAnyValue:StringLike": {
+                    "cognito-identity.amazonaws.com:amr": "unauthenticated",
+                  },
+                },
+              }),
+            ]),
+          },
+        });
+      }).not.toThrow();
+    });
+
+    test("exports authRole and unauthRole as public properties", () => {
+      expect(identityPoolStack.authRole).toBeDefined();
+      expect(identityPoolStack.unauthRole).toBeDefined();
+      // Role names and ARNs are CDK tokens at synth time, verified in other tests
+      expect(identityPoolStack.authRole?.roleArn).toBeDefined();
+      expect(identityPoolStack.unauthRole?.roleArn).toBeDefined();
+    });
+
+    test("does not create identity pool roles when COGNITO_IDENTITY_POOL_ID is not set", () => {
+      delete process.env.COGNITO_IDENTITY_POOL_ID;
+
+      const noIdentityPoolApp = new App();
+      const noIdentityPoolStack = new IamStack(
+        noIdentityPoolApp,
+        "TestIamStackNoIdentityPool",
+        { stage: "local" },
+      );
+
+      expect(noIdentityPoolStack.authRole).toBeUndefined();
+      expect(noIdentityPoolStack.unauthRole).toBeUndefined();
+    });
   });
 });
