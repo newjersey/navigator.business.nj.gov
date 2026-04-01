@@ -88,7 +88,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [page, setPage] = useState<Page>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [error, setError] = useState<ProfileError | undefined>(undefined);
-  const { updateQueue, createUpdateQueue, hasCompletedFetch } = useUserData();
+  const { updateQueue, createUpdateQueue, hasCompletedFetch, userData } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
@@ -149,11 +149,16 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     };
 
+    if (userData?.user.abExperience === "ExperienceB") {
+      removePageFromFlow("industry-page", "STARTING");
+      removePageFromFlow("industry-page-without-nonprofit", "STARTING");
+    }
+
     removeNexusSpecificPages();
     removeNonProfitForDomesticEmployer();
 
     return onboardingFlows;
-  }, [profileData]);
+  }, [profileData, userData]);
 
   const routeToPage = useCallback(
     (page: number) => {
@@ -165,6 +170,22 @@ const OnboardingPage = (props: Props): ReactElement => {
   useEffect(() => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
+
+  useEffect(() => {
+    if (
+      profileData.businessPersona === "STARTING" &&
+      userData?.user.abExperience === "ExperienceB" &&
+      profileData.industryId !== "generic"
+    ) {
+      setProfileData((prev) => ({ ...prev, industryId: "generic" }));
+      updateQueue?.queueProfileData({ industryId: "generic" }).update({ local: true });
+    }
+  }, [
+    profileData.businessPersona,
+    profileData.industryId,
+    userData?.user.abExperience,
+    updateQueue,
+  ]);
 
   const protectUpdateQueueAgainstRaceCondition = (
     currentUserData: UserData | undefined,

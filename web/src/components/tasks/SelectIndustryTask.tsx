@@ -4,24 +4,48 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { TaskHeader } from "@/components/TaskHeader";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
 } from "@/contexts/dataFormErrorMapContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
+import { getFlow } from "@/lib/utils/helpers";
+import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 type Props = {
   task: Task;
 };
 
 export const SelectIndustryTask = (props: Props): ReactElement => {
-  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const { business, updateQueue } = useUserData();
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    state: formContextState,
+  } = useFormContextHelper(createDataFormErrorMap());
+
+  useEffect(() => {
+    if (!business) return;
+    setProfileData(business.profileData);
+  }, [business]);
+
+  FormFuncWrapper(async () => {
+    if (!updateQueue || !business) return;
+    const profileDataHasNotChanged =
+      JSON.stringify(profileData) === JSON.stringify(business.profileData);
+    if (profileDataHasNotChanged) {
+      return;
+    }
+    await updateQueue.queueProfileData(profileData).update();
+  });
 
   // Split content at first horizontal line break, to allow inserting the industry dropdown in between
   const contentBeforeDropdown = props.task.contentMd.slice(
@@ -33,42 +57,42 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
   );
 
   return (
-    <>
-      <TaskHeader task={props.task} />
-      <DataFormErrorMapContext.Provider value={formContextState}>
-        <Content>{contentBeforeDropdown}</Content>
-        <Industry />
-        <HorizontalLine />
-        <Content>{contentAfterDropdown}</Content>
-        {/* TODO: why is there a gap between this container and the bottom? */}
-        <CtaContainer>
-          <ActionBarLayout>
-            <LiveChatHelpButton
-              analyticsEvent={analytics.event.cigarette_license_help_button.click.open_live_chat}
-            />
-            <SecondaryButton
-              isColor="primary"
-              onClick={() => {
-                analytics.event.cigarette_license.click.switch_to_step_one(); // TODO: update to correct analytics event
-              }}
-              dataTestId="back"
-            >
-              Back {/* TODO: move to cms config  */}
-            </SecondaryButton>
-            <PrimaryButton
-              isColor="primary"
-              onClick={() => {
-                analytics.event.cigarette_license.click.step_two_continue_button(); // TODO: update to correct analytics event
-                // TODO: save
-              }}
-              dataTestId="cta-primary-1"
-              isRightMarginRemoved={true}
-            >
-              Save {/* TODO: move to cms config  */}
-            </PrimaryButton>
-          </ActionBarLayout>
-        </CtaContainer>
-      </DataFormErrorMapContext.Provider>
-    </>
+    <DataFormErrorMapContext.Provider value={formContextState}>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: profileData,
+            flow: getFlow(profileData),
+          },
+          setProfileData,
+          onBack: (): void => {},
+        }}
+      >
+        <div className="flex flex-column space-between min-height-38rem">
+          <div>
+            <TaskHeader task={props.task} />
+            <Content>{contentBeforeDropdown}</Content>
+            <Industry />
+            <HorizontalLine />
+            <Content>{contentAfterDropdown}</Content>
+          </div>
+          <CtaContainer>
+            <ActionBarLayout>
+              <LiveChatHelpButton
+                analyticsEvent={analytics.event.cigarette_license_help_button.click.open_live_chat}
+              />
+              <PrimaryButton
+                isColor="primary"
+                onClick={onSubmit}
+                dataTestId="cta-primary-1"
+                isRightMarginRemoved={true}
+              >
+                Save {/* TODO: move to cms config  */}
+              </PrimaryButton>
+            </ActionBarLayout>
+          </CtaContainer>
+        </div>
+      </ProfileDataContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

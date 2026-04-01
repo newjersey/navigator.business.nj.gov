@@ -69,6 +69,33 @@ describe("onboarding - starting a business", () => {
   });
 
   describe("page 2", () => {
+    it("skips page 2 and continues immediately to the dashboard when userData.user.abExperience is set to ExperienceB", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: undefined,
+        }),
+        onboardingFormProgress: "UNSTARTED",
+      });
+      const userData = generateUserDataForBusiness(business, {
+        user: generateUser({ id: business.userId, abExperience: "ExperienceB" }),
+      });
+      useMockRouter({ isReady: true, query: { page: "1" } });
+      const { page } = renderPage({ userData });
+
+      expect(screen.getByTestId("step-1")).toBeInTheDocument();
+
+      page.chooseRadio("business-persona-starting");
+      page.clickNext();
+
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith({
+          pathname: ROUTES.dashboard,
+          query: { [QUERIES.fromOnboarding]: "true" },
+        });
+      });
+    });
+
     it("prevents user from moving after Step 2 if you have not selected an industry", async () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
