@@ -1,3 +1,5 @@
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import fs from "fs";
 import {
   LicenseData,
@@ -23,8 +25,6 @@ import {
   WebflowLicenseDataFieldData,
 } from "./types";
 import { licenseCollectionId } from "./webflowIds";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 
 const getLicenseDataFromMd = (licenseMd: LicenseData): [string | undefined, WebflowLicenseData] => {
   let name = licenseMd.name;
@@ -240,10 +240,9 @@ const syncLicenseDatas = async (params: { create: boolean }): Promise<void> => {
   }
 };
 
-/* eslint-disable unicorn/no-process-exit */
-// eslint-disable-next-line no-empty
 const main = async (): Promise<void> => {
   await syncLicenseDatas({ create: true });
+  /* eslint-disable-next-line unicorn/no-process-exit */
   process.exit(0);
 };
 
