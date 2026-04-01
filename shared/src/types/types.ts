@@ -539,6 +539,16 @@ export interface ContextualInfoFile extends ContextualInfo {
   filename: string;
 }
 
+export interface FaqItem {
+  name: string;
+  slug: string;
+  body: string;
+  category?: string;
+  "sub-category"?: string;
+  webflowId?: string;
+  author?: string;
+}
+
 export interface ActionTile {
   imgPath: string;
   tileText: string;

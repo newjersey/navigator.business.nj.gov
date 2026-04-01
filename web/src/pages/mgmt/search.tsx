@@ -13,7 +13,10 @@ import DomesticEmployerSteps from "@businessnjgovnavigator/content/roadmaps/step
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
-import { searchAnytimeActionLicenseReinstatements } from "@businessnjgovnavigator/shared/lib/search";
+import {
+  searchAnytimeActionLicenseReinstatements,
+  searchFaqs,
+} from "@businessnjgovnavigator/shared/lib/search";
 import { searchAnytimeActionTasks } from "@businessnjgovnavigator/shared/lib/search/searchAnytimeActionTasks";
 import { searchBusinessFormation } from "@businessnjgovnavigator/shared/lib/search/searchBusinessFormation";
 import { searchCertifications } from "@businessnjgovnavigator/shared/lib/search/searchCertifications";
@@ -42,6 +45,7 @@ import {
   loadAllCertifications,
   loadAllContextualInfo,
   loadAllEnvironmentTasks,
+  loadAllFaqs,
   loadAllFilings,
   loadAllFundings,
   loadAllLicenseCalendarEvents,
@@ -61,6 +65,7 @@ import {
   AnytimeActionTask,
   Certification,
   ContextualInfoFile,
+  FaqItem,
   Filing,
   FormationDbaDisplayContent,
   Funding,
@@ -106,6 +111,7 @@ interface Props {
   formationDbaContent: FormationDbaDisplayContent;
   addOns: IndustryRoadmap[];
   industries: Industry[];
+  faqs: FaqItem[];
 }
 
 interface SearchState {
@@ -150,6 +156,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     [],
   );
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
+  const [faqMatches, setFaqMatches] = useState<Match[]>([]);
 
   const { Config } = useConfig();
 
@@ -273,6 +280,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       props.formationDbaContent.formationDbaContent,
     );
     setBusinessFormationMatches(searchBusinessFormation(businessFormationInfo, lowercaseTerm));
+    setFaqMatches(searchFaqs(props.faqs, lowercaseTerm));
     updateSearchState({ hasSearched: true });
   };
 
@@ -302,6 +310,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...anytimeActionTaskMatches,
         ...anytimeActionLicenseReinstatementMatches,
         ...businessFormationMatches,
+        ...faqMatches,
       ].length === 0
     );
   };
@@ -353,6 +362,10 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const renewalCalendarCollection = {
     "Xray Renewal Calendar Event": xrayRenewalCalendarEventMatches,
+  };
+
+  const staticSiteContentCollection = {
+    FAQs: faqMatches,
   };
 
   const authedView = (
@@ -433,6 +446,10 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={{ "Login Support Page": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
+      <MatchCollection
+        matchedCollections={staticSiteContentCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
     </div>
   );
 
@@ -481,6 +498,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       formationDbaContent: loadFormationDbaContent(),
       addOns: loadAllAddOns(),
       industries: getIndustries(),
+      faqs: loadAllFaqs(),
     },
   };
 };

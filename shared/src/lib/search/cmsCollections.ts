@@ -113,4 +113,8 @@ export const cmsCollections = [
     label: "ℹ️ SUPPORT",
     children: ["Login Support Page"],
   },
+  {
+    label: "💻 STATIC SITE CONTENT",
+    children: ["FAQs"],
+  },
 ];

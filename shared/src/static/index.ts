@@ -7,6 +7,7 @@ export * from "./loadCmsConfig";
 export * from "./loadCommonBusinessTasks";
 export * from "./loadContextualInfo";
 export * from "./loadDisplayContent";
+export * from "./loadFaqs";
 export * from "./loadFilings";
 export * from "./loadFundings";
 export * from "./loadHousingMunicipalities";
