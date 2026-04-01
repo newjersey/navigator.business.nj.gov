@@ -269,7 +269,7 @@
     "url": "git+https://github.com/newjersey/navigator.business.nj.gov.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/newjersey/navigator.business.nj.gov/issues"
   },
