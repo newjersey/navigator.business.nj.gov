@@ -2,7 +2,7 @@
   "checkAccountEmailPage": {
     "defaultErrorMessage": "An error has occurred. Please try again later.",
     "invalidEmailError": "Please enter a valid email address.",
-    "emailNotFoundAlertError": "Email not found.  You may need to [create a Business.NJ.gov account and link with myNewJersey](/onboarding?page=1)",
+    "emailNotFoundAlertError": "Email not found.  You may need to [create a Business.NJ.gov account and link with myNewJersey](/onboarding?page=1).",
     "needHelpText": "Need More Help?",
     "inputLabel": "Email",
     "assistanceText": "For more assistance, visit our [Login Issues Help page](/support/login) or",
