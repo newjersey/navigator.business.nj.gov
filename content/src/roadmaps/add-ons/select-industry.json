@@ -1,0 +1,12 @@
+{
+  "id": "select-industry",
+  "displayname": "select-industry",
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 2,
+      "task": "select-industry",
+      "required": true
+    }
+  ]
+}
