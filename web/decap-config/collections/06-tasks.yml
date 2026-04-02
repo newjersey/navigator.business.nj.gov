@@ -2674,3 +2674,25 @@ collections:
           - { label: CRTK Info Shared Pt One, name: crtkInfoSharedPtOne, widget: string }
           - { label: CRTK Info Shared Pt Two, name: crtkInfoSharedPtTwo, widget: string }
           - { label: CRTK Info Shared Pt Three, name: crtkInfoSharedPtThree, widget: string }
+
+  - name: "select-your-industry-task"
+    label: "Select Your Industry"
+    delete: false
+    create: false
+    files:
+      - label: "Select Your Industry Task Component"
+        name: "select-your-industry-task-component"
+        file: content/src/fieldConfig/select-industry-task.json
+        editor:
+          preview: true
+        fields:
+          - label: Select Industry Task Config
+            name: selectIndustryTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label, name: successAlert, widget: text }
+              - { label, name: header, widget: text }
+              - { label, name: description, widget: text }
+              - { label, name: infoCallout, widget: markdown }
+              - { label, name: save, widget: string }

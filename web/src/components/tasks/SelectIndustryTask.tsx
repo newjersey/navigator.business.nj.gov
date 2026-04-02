@@ -21,6 +21,8 @@ import { Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 
+import { useConfig } from "@/lib/data-hooks/useConfig";
+
 type Props = {
   task: Task;
 };
@@ -33,6 +35,7 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     onSubmit,
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
+  const { Config } = useConfig();
 
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const router = useRouter();
@@ -53,15 +56,6 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     router.push("/dashboard?success=true");
   });
 
-  // Split content at first horizontal line break, to allow inserting the industry dropdown in between
-  const contentBeforeDropdown = props.task.contentMd.slice(
-    0,
-    Math.max(0, props.task.contentMd.indexOf("\n---\n")),
-  );
-  const contentAfterDropdown = props.task.contentMd.slice(
-    Math.max(0, props.task.contentMd.indexOf("\n---\n") + 5),
-  );
-
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
@@ -77,10 +71,11 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
         <div className="flex flex-column space-between min-height-38rem">
           <div>
             <TaskHeader task={props.task} />
-            <Content>{contentBeforeDropdown}</Content>
+            <Content>{Config.selectIndustryTask.header}</Content>
+            <Content>{Config.selectIndustryTask.description}</Content>
             <Industry />
             <HorizontalLine />
-            <Content>{contentAfterDropdown}</Content>
+            <Content>{Config.selectIndustryTask.infoCallout}</Content>
           </div>
           <CtaContainer>
             <ActionBarLayout>
@@ -93,7 +88,7 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
                 dataTestId="cta-primary-1"
                 isRightMarginRemoved={true}
               >
-                Save {/* TODO: move to cms config  */}
+                <Content>{Config.selectIndustryTask.save}</Content>
               </PrimaryButton>
             </ActionBarLayout>
           </CtaContainer>
