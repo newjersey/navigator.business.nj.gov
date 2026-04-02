@@ -12,6 +12,7 @@ import {
 } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getFlow } from "@/lib/utils/helpers";
@@ -33,6 +34,7 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
 
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const router = useRouter();
   useEffect(() => {
     if (!business) return;
@@ -46,6 +48,7 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     if (profileDataHasNotChanged) {
       return;
     }
+    queueUpdateTaskProgress(props.task.id, "COMPLETED");
     await updateQueue.queueProfileData(profileData).update();
     router.push("/dashboard?success=true");
   });
