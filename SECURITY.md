@@ -14,7 +14,7 @@ support only the latest versions from that page.
 ## Reporting a Vulnerability
 
 In order to communicate with us about your concern, please email us at
-[team@innovation.nj.gov](team@innovation.nj.gov) with a subject of "[security]
+[team@innovation.nj.gov](mailto:team@innovation.nj.gov) with a subject of "[security]
 newjersey/navigator.business.nj.gov". We value the input of all submitted reports and are committed
 to maintaining the highest level of security for our systems. If you choose to use this method, we
 will acknowledge receipt of your report within 48 hours and begin a response process. Please do not
