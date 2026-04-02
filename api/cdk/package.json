@@ -2,6 +2,7 @@
   "version": "0.1.0",
   "name": "@businessnjgovnavigator/api-cdk",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",

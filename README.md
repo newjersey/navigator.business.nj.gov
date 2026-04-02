@@ -122,8 +122,7 @@ Before you can run locally, you will need to:
   - _Note: The application does not need a venv. This step is only required to run Python helper
     scripts._
   - To **update uv** itself: `uv self update`
-  - To **upgrade all locked dependencies** to their latest compatible versions:
-    `uv lock --upgrade`
+  - To **upgrade all locked dependencies** to their latest compatible versions: `uv lock --upgrade`
 
 - do an initial build (skip if you ran `install.sh`)
 
@@ -396,7 +395,9 @@ communities throughout the state.
 ### Built as open source
 
 Business.NJ.gov is an open source project that is meant to serve as a base for anyone who is looking
-to create an online resource for their own business community. You can find full license details at
+to create an online resource for their own business community. The software code in this repository
+is licensed under the [MIT License](./LICENSE.md). Content (text, data, and other non-code assets)
+is separately licensed — you can find those details at
 [Business.NJ.gov/license](https://business.nj.gov/license).
 
 #### Disclaimer
