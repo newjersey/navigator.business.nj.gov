@@ -271,7 +271,10 @@ const OnboardingPage = (props: Props): ReactElement => {
           setProfileData(newProfileData);
           localUpdateQueue?.queueProfileData(newProfileData);
 
-          if (hasEssentialQuestion(queryIndustryId)) {
+          if (
+            hasEssentialQuestion(queryIndustryId) &&
+            userData?.user.abExperience !== "ExperienceB"
+          ) {
             setPage({ current: 2, previous: 1 });
           } else {
             completeOnboarding(newProfileData, localUpdateQueue);

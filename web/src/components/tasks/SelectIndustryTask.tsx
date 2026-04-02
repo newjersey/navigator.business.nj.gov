@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { Industry } from "@/components/data-fields/Industry";
-import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -18,17 +17,20 @@ import analytics from "@/lib/utils/analytics";
 import { getFlow } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Task } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 
+import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 
 type Props = {
   task: Task;
+  CMS_ONLY_showSuccessAlert?: boolean;
 };
 
 export const SelectIndustryTask = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
   const { business, updateQueue } = useUserData();
   const {
     FormFuncWrapper,
@@ -36,9 +38,8 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     state: formContextState,
   } = useFormContextHelper(createDataFormErrorMap());
   const { Config } = useConfig();
-
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
-  const router = useRouter();
+
   useEffect(() => {
     if (!business) return;
     setProfileData(business.profileData);
@@ -53,9 +54,11 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     }
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
     await updateQueue.queueProfileData(profileData).update();
-    router.push("/dashboard?success=true");
+    setShowSuccessAlert(true);
   });
 
+  const taskCompleted = business?.taskProgress["select-industry-task"] === "COMPLETED";
+  console.log("hi", taskCompleted);
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
@@ -69,13 +72,20 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
         }}
       >
         <div className="flex flex-column space-between min-height-38rem">
-          <div>
+          <div className="">
             <TaskHeader task={props.task} />
+            {(showSuccessAlert || props.CMS_ONLY_showSuccessAlert) && (
+              <Alert variant="success" className="margin-top-6">
+                <Content>{Config.selectIndustryTask.successAlert}</Content>
+              </Alert>
+            )}
+          </div>
+
+          <div>
             <Content>{Config.selectIndustryTask.header}</Content>
             <Content>{Config.selectIndustryTask.description}</Content>
             <Industry />
-            <HorizontalLine />
-            <Content>{Config.selectIndustryTask.infoCallout}</Content>
+            {!showSuccessAlert && <Content>{Config.selectIndustryTask.infoCallout}</Content>}
           </div>
           <CtaContainer>
             <ActionBarLayout>

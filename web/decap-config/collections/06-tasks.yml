@@ -2674,14 +2674,13 @@ collections:
           - { label: CRTK Info Shared Pt One, name: crtkInfoSharedPtOne, widget: string }
           - { label: CRTK Info Shared Pt Two, name: crtkInfoSharedPtTwo, widget: string }
           - { label: CRTK Info Shared Pt Three, name: crtkInfoSharedPtThree, widget: string }
-
-  - name: "select-your-industry-task"
-    label: "Select Your Industry"
+  - name: "select-industry-task"
+    label: "Tasks - Select Industry"
     delete: false
     create: false
     files:
-      - label: "Select Your Industry Task Component"
-        name: "select-your-industry-task-component"
+      - label: "Select Industry Task - Get Your Business Licenses and Permits"
+        name: "select-industry-task"
         file: content/src/fieldConfig/select-industry-task.json
         editor:
           preview: true
@@ -2691,8 +2690,8 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label, name: successAlert, widget: text }
-              - { label, name: header, widget: text }
-              - { label, name: description, widget: text }
-              - { label, name: infoCallout, widget: markdown }
-              - { label, name: save, widget: string }
+              - { label: Success Alert, name: successAlert, widget: markdown }
+              - { label: Header, name: header, widget: markdown }
+              - { label: Description, name: description, widget: markdown }
+              - { label: Info Callout, name: infoCallout, widget: markdown }
+              - { label: Save Button Text, name: save, widget: string }
