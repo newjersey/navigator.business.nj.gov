@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A shared library for the business.nj.gov navigator",
   "private": true,
+  "license": "MIT",
   "main": "lib/shared/src/index.js",
   "files": [
     "lib"

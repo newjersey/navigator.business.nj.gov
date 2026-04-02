@@ -2,6 +2,7 @@
   "name": "@businessnjgovnavigator/web",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "airtable:dump": "node src/scripts/airtableDump.js",
     "airtable:fetch-opps": "node src/scripts/airtableOpportunityDump.js",

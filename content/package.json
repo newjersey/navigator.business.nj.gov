@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A content library for the business.nj.gov navigator",
   "private": true,
+  "license": "MIT",
   "main": "src",
   "scripts": {
     "build": "tsx -r tsconfig-paths/register ./build.ts",
