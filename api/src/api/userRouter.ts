@@ -9,6 +9,10 @@ import {
   UpdateXrayRegistration,
 } from "@domain/types";
 import { encryptFieldsFactory } from "@domain/user/encryptFieldsFactory";
+import {
+  GovDeliveryCommCloudClientType,
+  syncNewsletterSubscription,
+} from "@domain/newsletter/syncNewsletterSubscription";
 import type { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
@@ -148,6 +152,7 @@ export const userRouterFactory = (
   hashingClient: CryptoClient,
   timeStampBusinessSearch: TimeStampBusinessSearch,
   logger: LogWriterType,
+  govDeliveryCommCloudClient?: GovDeliveryCommCloudClientType,
 ): Router => {
   const router = Router();
   const encryptFields = encryptFieldsFactory(encryptionDecryptionClient, hashingClient);
@@ -287,8 +292,33 @@ export const userRouterFactory = (
     const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
 
+    let existingUserData = userDataWithUpdatedISO;
+    try {
+      existingUserData = await databaseClient.get(userData.user.id);
+    } catch {
+      // user may not exist yet; syncNewsletterSubscription handles this gracefully
+    }
+
+    let userDataForSave = userDataWithUpdatedISO;
+    if (govDeliveryCommCloudClient) {
+      const syncResult = await syncNewsletterSubscription(
+        existingUserData,
+        userDataWithUpdatedISO,
+        govDeliveryCommCloudClient,
+      );
+      if (!syncResult.ok) {
+        const status = StatusCodes.BAD_GATEWAY;
+        res.status(status).json({ govDeliveryError: syncResult.errorType });
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, govDeliveryError: ${syncResult.errorType}, userId: ${postedUserBodyId}, duration: ${Date.now() - requestStart}ms`,
+        );
+        return;
+      }
+      userDataForSave = syncResult.userData;
+    }
+
     databaseClient
-      .put(userDataWithUpdatedISO)
+      .put(userDataForSave)
       .then((result: UserData) => {
         const status = StatusCodes.OK;
         res.status(status).json(result);
