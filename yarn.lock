@@ -4946,7 +4946,7 @@ __metadata:
     "@types/node": 24.1.0
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
-    aws-cdk: 2.1113.0
+    aws-cdk: 2.1114.1
     aws-cdk-lib: 2.244.0
     constructs: 10.0.0
     esbuild: 0.27.0
@@ -5177,7 +5177,7 @@ __metadata:
     "@vitest/coverage-v8": 2.1.9
     airtable: 0.12.2
     aws-amplify: 6.15.8
-    aws-cdk: 2.1113.0
+    aws-cdk: 2.1114.1
     aws-cdk-lib: 2.244.0
     axe-core: 4.11.1
     axios: 1.13.5
@@ -16391,12 +16391,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk@npm:2.1113.0":
-  version: 2.1113.0
-  resolution: "aws-cdk@npm:2.1113.0"
+"aws-cdk@npm:2.1114.1":
+  version: 2.1114.1
+  resolution: "aws-cdk@npm:2.1114.1"
   bin:
     cdk: bin/cdk
-  checksum: 66b473f3fb78eb6f5d93d7807f5cb06c2e886b28a57361c35249b200476551cc21e8958f821645cc0f725790e2438a226b8ebbd4b1fc325145ca458e414c4bc1
+  checksum: 6c91072890c5c00eeefcaa37fac92dcbabc2a2afae1beddb1bb2976641a5c62cdf17e42bea61661169b0ebec651bbccdec913b98c5e177cda324c98cac8493fc
   languageName: node
   linkType: hard
 
