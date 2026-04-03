@@ -182,3 +182,58 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator
+
+  sync-webflow:
+    needs: deploy-production
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    environment: prod
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - uses: actions/cache@v5
+        with:
+          path: .yarn/cache
+          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-cache-
+
+      - name: Install Dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      - name: Build
+        shell: bash
+        run: yarn build
+
+      - name: Sync Webflow Content
+        working-directory: web
+        shell: bash
+        env:
+          WEBFLOW_API_TOKEN: ${{ secrets.WEBFLOW_API_TOKEN }}
+        run: yarn workspace @businessnjgovnavigator/web webflow:run-sync
+
+      - name: Commit and Push Changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n $(git status --porcelain) ]]; then
+            git add .
+            git commit -m "chore: sync Webflow content and store webflowIds [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi

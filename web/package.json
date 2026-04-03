@@ -31,10 +31,11 @@
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
+    "webflow:run-sync": "yarn webflow:fundings-sync && yarn webflow:industries-sync && yarn webflow:licenses-sync",
+    "webflow:faq-sync": "tsx ./src/scripts/webflow/faqSync.ts",
     "webflow:fundings-sync": "tsx ./src/scripts/webflow/fundingSync.ts",
     "webflow:industries-sync": "tsx ./src/scripts/webflow/industrySync.ts",
-    "webflow:licenses-sync": "tsx ./src/scripts/webflow/licenseSync.ts",
-    "webflow:faq-sync": "tsx ./src/scripts/webflow/faqSync.ts"
+    "webflow:licenses-sync": "tsx ./src/scripts/webflow/licenseSync.ts"
   },
   "dependencies": {
     "@aws-crypto/sha256-browser": "5.2.0",
