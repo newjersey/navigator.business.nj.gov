@@ -6,6 +6,7 @@ export * from "./searchBusinessFormation";
 export * from "./searchCertifications";
 export * from "./searchConfig";
 export * from "./searchContextualInfo";
+export * from "./searchFaqs";
 export * from "./searchFundings";
 export * from "./searchIndustries";
 export * from "./searchLicenseEvents";

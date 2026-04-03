@@ -1,0 +1,19 @@
+---
+name: "What resources are available to help my manufacturing company?"
+slug: "what-resources-are-available-to-help-my-manufacturing-company"
+webflowId: "5e31b06cb76b834ebf358ed1"
+category: "resources"
+author: "5e31b06cb76b836564358e8f"
+---
+
+Several state agencies and industry organizations offer many different types of resources that could be beneficial to New Jersey manufacturers. Much of the following information is catalogued in the [Manufacturing Resource Guide](https://www.njmep.org/educational-resource-directory/), a comprehensive guide developed by the [New Jersey Manufacturing Extension Program (NJMEP) ](https://www.njmep.org/)and updated on a recurring basis with the assistance of the [New Jersey Economic Development Authority (NJEDA)](https://njeda.com/advanced-manufacturing/).
+
+**New Jersey Manufacturing Extension Program (NJMEP) **is an organization dedicated to improving the competitiveness of New Jersey manufacturers by providing a full suite of services in areas such as workforce development, innovation and growth, and operational excellence. They offer educational training workshops, industry certification and apprenticeship programs, consulting services, and much more. Consult the [Manufacturing Resource Guide](https://www.njmep.org/educational-resource-directory/) or visit their [website](https://www.njmep.org/) for more information on specific services. &nbsp;
+
+**New Jersey Economic Development Authority (NJEDA) **is the State’s principal agency for economic growth. The NJEDA drives inclusive and sustainable economic development by helping to build strong and dynamic communities, creating good jobs for New Jersey residents, providing pathways to a stronger and fairer economy, and implementing initiatives to strengthen New Jersey’s long-term economic competitiveness. Advanced Manufacturing has been identified as a key economic sector for New Jersey, as such, the NJEDA offers a number [of programs and initiatives](<https://spruceblob01.blob.core.windows.net/stwpnjeda/getattachment/OET/Advanced-Manufacturing-(1)/AdvancedManufacturing_onePager_ProdVersion.pdf.aspx>)
+
+**New Jersey Business Action Center (NJBAC) **is a state agency that acts as a point of contact to help New Jersey businesses interact with state government. [NJBAC](https://nj.gov/state/bac/bac.shtml) provides businesses with assistance with getting answers from government agencies, directing them to the appropriate state government official, helping them interact with necessary regulatory agencies, etc. They also provide several grant programs for [export promotion](https://nj.gov/state/bac/bac-export-assistance.shtml) and small business [participation](https://nj.gov/state/bac/bac-njstep.shtml) in international trade shows or missions.NJBAC also provides consulting services to help New Jersey businesses access workforce training grants and other state resources. They can be reached by phone through their business helpline (1-800-Jersey-7).
+
+**New Jersey Division of Labor and Workforce Development (NJLWD) **is a state agency dedicated to developing a skilled and productive New Jersey workforce. LWD offers many services relevant to manufacturers, including supporting [apprenticeships,](https://www.nj.gov/labor/career-services/apprenticeship/index.shtml) extensive [training and education](https://careerconnections.nj.gov/careerconnections/prepare/skills/training/training_and_education_opportunities.shtml) opportunities for workers, and [grant programs](https://www.nj.gov/labor/programs/grants/ngo_index.html) (e.g., for apprenticeships, incumbent worker training, etc.). NJLWD also provides detailed research and information, including [labor market data on New Jersey’s advanced manufacturing cluster](https://nj.gov/labor/lpa/pub/empecon/advmfg.pdf). &nbsp;
+
+‍
