@@ -1,3 +1,26 @@
+# [2026.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.7.0...v2026.8.0) (2026-04-06)
+
+
+### Bug Fixes
+
+* [AB#17519](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17519) remove separate deploy steps ([b37e83f](https://github.com/newjersey/navigator.business.nj.gov/commit/b37e83f060784546da9ab59ddbfa9ff2626ded02))
+* [AB#17519](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17519) update iam cdk step ([b097d01](https://github.com/newjersey/navigator.business.nj.gov/commit/b097d01826e4cf2c3de9ca5c314b7e36c9bc74b0))
+* **deps:** update dependency body-parser to v1.20.4 ([bc1a74a](https://github.com/newjersey/navigator.business.nj.gov/commit/bc1a74a9356fc85f7c5b61f6210da9e628e86d86))
+* **deps:** update dependency cors to v2.8.6 ([95fe9be](https://github.com/newjersey/navigator.business.nj.gov/commit/95fe9be3b6b96cc39e7bd66f61232cd4d5eec044))
+* **deps:** update dependency express to v4.22.1 ([0034974](https://github.com/newjersey/navigator.business.nj.gov/commit/0034974ddc2aecc6f96978a6cfaa6c97b2d29cc8))
+* **deps:** update dependency next to v16.1.7 [security] ([60dabd7](https://github.com/newjersey/navigator.business.nj.gov/commit/60dabd787629c0f1e07e5fa96afe26f9eb140357))
+* **deps:** update dependency unist-util-visit to v5.1.0 ([27cdc16](https://github.com/newjersey/navigator.business.nj.gov/commit/27cdc16dc58578984c6475903bf6fb28e6e1fa8e))
+* **deps:** update react-email monorepo ([f55b1c8](https://github.com/newjersey/navigator.business.nj.gov/commit/f55b1c8cbbb9f1c951807d236ee0661cfec2b7e5))
+* **deps:** update storybook to v7.6.24 ([13f5959](https://github.com/newjersey/navigator.business.nj.gov/commit/13f595910e67ab567d389874385b21ec1a6af934))
+
+
+### Features
+
+* [AB#16853](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/16853) Remove go to profile nudge for all users ([a0f68d7](https://github.com/newjersey/navigator.business.nj.gov/commit/a0f68d780b74e426ae0f9d8c0a9b4e7bcfa19d83))
+* [AB#17598](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17598) remove pilot status from 'all other businesses' dropdown change ([abb099b](https://github.com/newjersey/navigator.business.nj.gov/commit/abb099b6ee44a677c7ad2c006f1a821e518f6e6c))
+* add /create-pr-navigator command ([64a4e20](https://github.com/newjersey/navigator.business.nj.gov/commit/64a4e20ec2206aa0d2fcaba036e366793a092a92))
+* script to print combined user data schemas ([05ecd75](https://github.com/newjersey/navigator.business.nj.gov/commit/05ecd7574fd862f757f7c55f42b33eb9125556ad))
+
 # [2026.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.6.0...v2026.7.0) (2026-03-24)
 
 
