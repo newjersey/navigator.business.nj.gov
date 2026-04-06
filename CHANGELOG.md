@@ -1,51 +1,66 @@
-# [2026.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.6.0...v2026.7.0) (2026-03-24)
-
+# [2026.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.7.0...v2026.8.0) (2026-04-06)
 
 ### Bug Fixes
 
-* [AB#17402](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17402) update object name ([2db0f07](https://github.com/newjersey/navigator.business.nj.gov/commit/2db0f07f45460113785ff139e15aa5e8ca8220d4))
-* **deps:** update dependency @smithy/node-http-handler to v4.4.14 ([2b6b1f3](https://github.com/newjersey/navigator.business.nj.gov/commit/2b6b1f32d4bf3f68ea701c1453e2252ed1da1fb0))
-* **deps:** update dependency dedent to v1.7.2 ([037d78e](https://github.com/newjersey/navigator.business.nj.gov/commit/037d78e598cc59ca41e8009c1421bfba8e3d9285))
-* **deps:** update nextjs monorepo ([14644eb](https://github.com/newjersey/navigator.business.nj.gov/commit/14644eb9989dbe11819da07b0ca4fecf4cc26752))
-
+- [AB#17519](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17519) remove separate deploy steps ([b37e83f](https://github.com/newjersey/navigator.business.nj.gov/commit/b37e83f060784546da9ab59ddbfa9ff2626ded02))
+- [AB#17519](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17519) update iam cdk step ([b097d01](https://github.com/newjersey/navigator.business.nj.gov/commit/b097d01826e4cf2c3de9ca5c314b7e36c9bc74b0))
+- **deps:** update dependency body-parser to v1.20.4 ([bc1a74a](https://github.com/newjersey/navigator.business.nj.gov/commit/bc1a74a9356fc85f7c5b61f6210da9e628e86d86))
+- **deps:** update dependency cors to v2.8.6 ([95fe9be](https://github.com/newjersey/navigator.business.nj.gov/commit/95fe9be3b6b96cc39e7bd66f61232cd4d5eec044))
+- **deps:** update dependency express to v4.22.1 ([0034974](https://github.com/newjersey/navigator.business.nj.gov/commit/0034974ddc2aecc6f96978a6cfaa6c97b2d29cc8))
+- **deps:** update dependency next to v16.1.7 [security] ([60dabd7](https://github.com/newjersey/navigator.business.nj.gov/commit/60dabd787629c0f1e07e5fa96afe26f9eb140357))
+- **deps:** update dependency unist-util-visit to v5.1.0 ([27cdc16](https://github.com/newjersey/navigator.business.nj.gov/commit/27cdc16dc58578984c6475903bf6fb28e6e1fa8e))
+- **deps:** update react-email monorepo ([f55b1c8](https://github.com/newjersey/navigator.business.nj.gov/commit/f55b1c8cbbb9f1c951807d236ee0661cfec2b7e5))
+- **deps:** update storybook to v7.6.24 ([13f5959](https://github.com/newjersey/navigator.business.nj.gov/commit/13f595910e67ab567d389874385b21ec1a6af934))
 
 ### Features
 
-* [AB#16853](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/16853) For You column updates - removing status, remove hide feature for certs and fundings, remove customize nudge for graduated users ([f7c0fac](https://github.com/newjersey/navigator.business.nj.gov/commit/f7c0fac84534335d2cd1e6e04aed2775346a07ea))
-* [AB#17402](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17402) upload intercom macros to s3 ([88f7f77](https://github.com/newjersey/navigator.business.nj.gov/commit/88f7f778c79e59c1a3f837b20e2f1f9f42e34b35))
-* [AB#17417](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17417) Pilot [#3](https://github.com/newjersey/navigator.business.nj.gov/issues/3): Changing the placement of all other business ([49b6ead](https://github.com/newjersey/navigator.business.nj.gov/commit/49b6ead1ebfc3f37e3be6268afa05937b9fa917d))
-* [AB#17417](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17417) Pilot [#3](https://github.com/newjersey/navigator.business.nj.gov/issues/3): Changing the placement of all other businesses ([fcd9d2f](https://github.com/newjersey/navigator.business.nj.gov/commit/fcd9d2fdcb6d50e53eb762612715f407bff974fc))
-* [AB#17466](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17466) Deployment of Pilot [#1](https://github.com/newjersey/navigator.business.nj.gov/issues/1): Differentiated User Swimlanes ([b723c8e](https://github.com/newjersey/navigator.business.nj.gov/commit/b723c8e9e7d9deef2689a67dece999584b12b422))
-* [AB#17466](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17466) Deployment of Pilot [#1](https://github.com/newjersey/navigator.business.nj.gov/issues/1): Differentiated User Swimlanes ([6ec24a6](https://github.com/newjersey/navigator.business.nj.gov/commit/6ec24a6648fa6b3469f7d54defc43219d00525b0))
-* [AB#17570](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17570) implement industry detection and snackbar notification for NAICS code updates ([631df49](https://github.com/newjersey/navigator.business.nj.gov/commit/631df4960e231f467f3807ea284c93d7587ed91d))
+- [AB#16853](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/16853) Remove go to profile nudge for all users ([a0f68d7](https://github.com/newjersey/navigator.business.nj.gov/commit/a0f68d780b74e426ae0f9d8c0a9b4e7bcfa19d83))
+- [AB#17598](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17598) remove pilot status from 'all other businesses' dropdown change ([abb099b](https://github.com/newjersey/navigator.business.nj.gov/commit/abb099b6ee44a677c7ad2c006f1a821e518f6e6c))
+- add /create-pr-navigator command ([64a4e20](https://github.com/newjersey/navigator.business.nj.gov/commit/64a4e20ec2206aa0d2fcaba036e366793a092a92))
+- script to print combined user data schemas ([05ecd75](https://github.com/newjersey/navigator.business.nj.gov/commit/05ecd7574fd862f757f7c55f42b33eb9125556ad))
+
+# [2026.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.6.0...v2026.7.0) (2026-03-24)
+
+### Bug Fixes
+
+- [AB#17402](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17402) update object name ([2db0f07](https://github.com/newjersey/navigator.business.nj.gov/commit/2db0f07f45460113785ff139e15aa5e8ca8220d4))
+- **deps:** update dependency @smithy/node-http-handler to v4.4.14 ([2b6b1f3](https://github.com/newjersey/navigator.business.nj.gov/commit/2b6b1f32d4bf3f68ea701c1453e2252ed1da1fb0))
+- **deps:** update dependency dedent to v1.7.2 ([037d78e](https://github.com/newjersey/navigator.business.nj.gov/commit/037d78e598cc59ca41e8009c1421bfba8e3d9285))
+- **deps:** update nextjs monorepo ([14644eb](https://github.com/newjersey/navigator.business.nj.gov/commit/14644eb9989dbe11819da07b0ca4fecf4cc26752))
+
+### Features
+
+- [AB#16853](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/16853) For You column updates - removing status, remove hide feature for certs and fundings, remove customize nudge for graduated users ([f7c0fac](https://github.com/newjersey/navigator.business.nj.gov/commit/f7c0fac84534335d2cd1e6e04aed2775346a07ea))
+- [AB#17402](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17402) upload intercom macros to s3 ([88f7f77](https://github.com/newjersey/navigator.business.nj.gov/commit/88f7f778c79e59c1a3f837b20e2f1f9f42e34b35))
+- [AB#17417](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17417) Pilot [#3](https://github.com/newjersey/navigator.business.nj.gov/issues/3): Changing the placement of all other business ([49b6ead](https://github.com/newjersey/navigator.business.nj.gov/commit/49b6ead1ebfc3f37e3be6268afa05937b9fa917d))
+- [AB#17417](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17417) Pilot [#3](https://github.com/newjersey/navigator.business.nj.gov/issues/3): Changing the placement of all other businesses ([fcd9d2f](https://github.com/newjersey/navigator.business.nj.gov/commit/fcd9d2fdcb6d50e53eb762612715f407bff974fc))
+- [AB#17466](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17466) Deployment of Pilot [#1](https://github.com/newjersey/navigator.business.nj.gov/issues/1): Differentiated User Swimlanes ([b723c8e](https://github.com/newjersey/navigator.business.nj.gov/commit/b723c8e9e7d9deef2689a67dece999584b12b422))
+- [AB#17466](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17466) Deployment of Pilot [#1](https://github.com/newjersey/navigator.business.nj.gov/issues/1): Differentiated User Swimlanes ([6ec24a6](https://github.com/newjersey/navigator.business.nj.gov/commit/6ec24a6648fa6b3469f7d54defc43219d00525b0))
+- [AB#17570](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17570) implement industry detection and snackbar notification for NAICS code updates ([631df49](https://github.com/newjersey/navigator.business.nj.gov/commit/631df4960e231f467f3807ea284c93d7587ed91d))
 
 # [2026.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.5.0...v2026.6.0) (2026-03-10)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency winston to v3.19.0 ([562be7d](https://github.com/newjersey/navigator.business.nj.gov/commit/562be7d0953936fd9c88522699576bc244cdab9f))
-* **deps:** update storybook to v7.6.23 ([c61b133](https://github.com/newjersey/navigator.business.nj.gov/commit/c61b1330463d40fe3011d3c98265dc7802961ff3))
-
+- **deps:** update dependency winston to v3.19.0 ([562be7d](https://github.com/newjersey/navigator.business.nj.gov/commit/562be7d0953936fd9c88522699576bc244cdab9f))
+- **deps:** update storybook to v7.6.23 ([c61b133](https://github.com/newjersey/navigator.business.nj.gov/commit/c61b1330463d40fe3011d3c98265dc7802961ff3))
 
 ### Features
 
-* [AB#17326](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17326) update tasks in 'Tasks - All' for Webflow sync ([4eaa35c](https://github.com/newjersey/navigator.business.nj.gov/commit/4eaa35c707cb15f2bbf73643f8031de855395ab3))
-* [AB#17497](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17497) removes 'Experience B' on the landing page ([0b20424](https://github.com/newjersey/navigator.business.nj.gov/commit/0b204242edb6dc58a392f47d2feb545ca5a5b145))
+- [AB#17326](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17326) update tasks in 'Tasks - All' for Webflow sync ([4eaa35c](https://github.com/newjersey/navigator.business.nj.gov/commit/4eaa35c707cb15f2bbf73643f8031de855395ab3))
+- [AB#17497](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17497) removes 'Experience B' on the landing page ([0b20424](https://github.com/newjersey/navigator.business.nj.gov/commit/0b204242edb6dc58a392f47d2feb545ca5a5b145))
 
 # [2026.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.4.0...v2026.5.0) (2026-02-25)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency axios to v1.13.5 [security] ([3e9bb4d](https://github.com/newjersey/navigator.business.nj.gov/commit/3e9bb4d8b3de9512b5acf3388e461ca204f4813b))
-* Update pickaroo to use organization slack mapping to not choose reviewers who are out of office ([ad43a48](https://github.com/newjersey/navigator.business.nj.gov/commit/ad43a4865967e2ca5ae2883495543bde9c50f64d))
-
+- **deps:** update dependency axios to v1.13.5 [security] ([3e9bb4d](https://github.com/newjersey/navigator.business.nj.gov/commit/3e9bb4d8b3de9512b5acf3388e461ca204f4813b))
+- Update pickaroo to use organization slack mapping to not choose reviewers who are out of office ([ad43a48](https://github.com/newjersey/navigator.business.nj.gov/commit/ad43a4865967e2ca5ae2883495543bde9c50f64d))
 
 ### Features
 
-* [AB#17452](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17452) add script to find and report duplicate industries based on task sets ([ed12eb6](https://github.com/newjersey/navigator.business.nj.gov/commit/ed12eb6810bba69eb1018f1ea3be832ee138de17))
-* fixes for conventional-commit to use ADO links ([6922b19](https://github.com/newjersey/navigator.business.nj.gov/commit/6922b1920040ec54ce040b9768451b1b07fb9d36))
+- [AB#17452](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17452) add script to find and report duplicate industries based on task sets ([ed12eb6](https://github.com/newjersey/navigator.business.nj.gov/commit/ed12eb6810bba69eb1018f1ea3be832ee138de17))
+- fixes for conventional-commit to use ADO links ([6922b19](https://github.com/newjersey/navigator.business.nj.gov/commit/6922b1920040ec54ce040b9768451b1b07fb9d36))
 
 # [2026.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.3.0...v2026.4.0) (2026-02-18)
 
