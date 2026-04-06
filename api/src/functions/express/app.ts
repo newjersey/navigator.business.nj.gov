@@ -14,6 +14,7 @@ import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
 import { userRouterFactory } from "@api/userRouter";
+import { userSchemaRouterFactory } from "@api/userSchemaRouter";
 import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
@@ -533,6 +534,9 @@ app.use(
 );
 
 app.use("/api", crtkEmailRouter(crtkEmailClient, logger));
+if ((process.env.FEATURE_USERDATA_ENDPOINT ?? "false") === "true") {
+  app.use("/api", userSchemaRouterFactory(logger));
+}
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

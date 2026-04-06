@@ -71,7 +71,13 @@
       }
     },
     {
-      "files": ["cdk/bin/**/*", "cdk/lib/**/*", "cdk/test/**/*", "api/lib/api/scripts/**/*"],
+      "files": [
+        "cdk/bin/**/*",
+        "cdk/lib/**/*",
+        "cdk/test/**/*",
+        "api/lib/api/scripts/**/*",
+        "scripts/**/*"
+      ],
       "rules": {
         "no-restricted-imports": "off",
         "@typescript-eslint/no-var-requires": "off",
