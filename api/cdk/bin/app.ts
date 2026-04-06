@@ -16,6 +16,7 @@ import {
   MESSAGES_TABLE,
 } from "../lib/constants";
 import { BackupStack } from "../lib/backupStack";
+import { LoggingStack } from "../lib/loggingStack";
 dotenv.config({ path: "../.env" });
 
 const app = new cdk.App();
@@ -33,7 +34,7 @@ new DataStack(app, `DataStack-${stage}`, {
   env,
 });
 
-const iamStack = new IamStack(app, `IamStack-${stage}`, {
+new IamStack(app, `IamStack-${stage}`, {
   stage,
   env,
 });
@@ -43,10 +44,19 @@ const storageStack = new StorageStack(app, `StorageStack-${stage}`, {
   env,
 });
 
+new LoggingStack(app, `LoggingStack-${stage}`, {
+  stage,
+  env,
+});
+
 if (stage === DEV_STAGE) {
   new BackupStack(app, `BackupStack-${DEV_STAGE}-shared`, {
     env,
-    backupRole: iamStack.backupRole!,
+    backupRole: cdk.aws_iam.Role.fromRoleName(
+      app,
+      "ImportedBackupRole",
+      "Backups",
+    ),
     tableNames: [
       `${BUSINESSES_TABLE}-${DEV_STAGE}`,
       `${USERS_TABLE}-${DEV_STAGE}`,
@@ -64,7 +74,11 @@ if (stage === DEV_STAGE) {
 if (stage === STAGING_STAGE) {
   new BackupStack(app, `BackupStack-${STAGING_STAGE}`, {
     env,
-    backupRole: iamStack.backupRole!,
+    backupRole: cdk.aws_iam.Role.fromRoleName(
+      app,
+      "ImportedBackupRoleStaging",
+      "Backups",
+    ),
     tableNames: [
       `${BUSINESSES_TABLE}-${STAGING_STAGE}`,
       `${MESSAGES_TABLE}-${STAGING_STAGE}`,
@@ -76,7 +90,11 @@ if (stage === STAGING_STAGE) {
 if (stage === PROD_STAGE) {
   new BackupStack(app, `BackupStack-${PROD_STAGE}`, {
     env,
-    backupRole: iamStack.backupRole!,
+    backupRole: cdk.aws_iam.Role.fromRoleName(
+      app,
+      "ImportedBackupRoleProd",
+      "Backups",
+    ),
     tableNames: [
       `${BUSINESSES_TABLE}-${PROD_STAGE}`,
       `${MESSAGES_TABLE}-${PROD_STAGE}`,
@@ -84,9 +102,9 @@ if (stage === PROD_STAGE) {
     ],
   });
 }
+
 const lambdaStack = new LambdaStack(app, `LambdaStack-${stage}`, {
   stage: stage,
-  lambdaRole: iamStack.role,
   messagesBucket: storageStack.messagesBucket,
   intercomMacrosBucket: stage === DEV_STAGE ? storageStack.intercomMacrosBucket : undefined,
   env,

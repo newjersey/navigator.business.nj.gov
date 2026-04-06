@@ -23,7 +23,7 @@ import { createLambda, exportLambdaArn } from "./stackUtils";
 
 export interface LambdaStackProps extends StackProps {
   stage: string;
-  lambdaRole: iam.Role;
+  lambdaRole?: iam.Role;
   messagesBucket: IBucket;
   intercomMacrosBucket?: IBucket;
 }
@@ -46,6 +46,13 @@ export class LambdaStack extends Stack {
   constructor(scope: Construct, id: string, props: LambdaStackProps) {
     super(scope, id, props);
     this.serviceName = API_SERVICE_NAME;
+
+    // Look up the lambda role from Terraform-managed resources
+    const lambdaRole = iam.Role.fromRoleName(
+      this,
+      "ImportedLambdaRole",
+      `${this.serviceName}-${props.stage}-lambdaRole`,
+    );
 
     /**
      * Environment Variables for Express lambda
@@ -163,7 +170,7 @@ export class LambdaStack extends Stack {
           };
 
     this.lambdas.express = createLambda(this, {
-      role: props.lambdaRole,
+      role: lambdaRole,
       id: `${this.serviceName}-${props.stage}-express`,
       stage: props.stage,
       functionName: `${this.serviceName}-${props.stage}-express`,
@@ -238,7 +245,7 @@ export class LambdaStack extends Stack {
 
     if (props.stage === DEV_STAGE) {
       this.lambdas.githubOauth2 = createLambda(this, {
-        role: props.lambdaRole,
+        role: lambdaRole,
         id: `${this.serviceName}-${props.stage}-githubOauth2`,
         stage: props.stage,
         functionName: `${this.serviceName}-${props.stage}-githubOauth2`,
@@ -258,7 +265,7 @@ export class LambdaStack extends Stack {
 
     if (props.stage === DEV_STAGE && props.intercomMacrosBucket) {
       this.lambdas.updateKbWithIntercomMacros = createLambda(this, {
-        role: props.lambdaRole,
+        role: lambdaRole,
         id: `${this.serviceName}-${props.stage}-updateKbWithIntercomMacros`,
         stage: props.stage,
         functionName: `${this.serviceName}-${props.stage}-updateKbWithIntercomMacros`,
@@ -299,7 +306,7 @@ export class LambdaStack extends Stack {
 
     if (props.stage !== CONTENT_STAGE && props.stage !== TESTING_STAGE) {
       this.lambdas.healthCheck = createLambda(this, {
-        role: props.lambdaRole,
+        role: lambdaRole,
         id: `${this.serviceName}-${props.stage}-healthCheck`,
         stage: props.stage,
         functionName: `${this.serviceName}-${props.stage}-healthCheck`,
@@ -327,7 +334,7 @@ export class LambdaStack extends Stack {
     }
 
     this.lambdas.migrateUsersVersion = createLambda(this, {
-      role: props.lambdaRole,
+      role: lambdaRole,
       id: `${this.serviceName}-${props.stage}-migrateUsersVersion`,
       stage: props.stage,
       functionName: `${this.serviceName}-${props.stage}-migrateUsersVersion`,
@@ -360,7 +367,7 @@ export class LambdaStack extends Stack {
     scheduleRule.addTarget(new targets.LambdaFunction(this.lambdas.migrateUsersVersion));
 
     this.lambdas.updateExternalStatus = createLambda(this, {
-      role: props.lambdaRole,
+      role: lambdaRole,
       id: `${this.serviceName}-${props.stage}-updateExternalStatus`,
       stage: props.stage,
       functionName: `${this.serviceName}-${props.stage}-updateExternalStatus`,
@@ -387,7 +394,7 @@ export class LambdaStack extends Stack {
     });
 
     this.lambdas.updateKillSwitchParameter = createLambda(this, {
-      role: props.lambdaRole,
+      role: lambdaRole,
       id: `${this.serviceName}-${props.stage}-updateKillSwitchParameter`,
       stage: props.stage,
       functionName: `${this.serviceName}-${props.stage}-updateKillSwitchParameter`,
@@ -404,7 +411,7 @@ export class LambdaStack extends Stack {
     });
 
     this.lambdas.messagingService = createLambda(this, {
-      role: props.lambdaRole,
+      role: lambdaRole,
       id: `${this.serviceName}-${props.stage}-messagingService`,
       stage: props.stage,
       functionName: `${this.serviceName}-${props.stage}-messagingService`,
