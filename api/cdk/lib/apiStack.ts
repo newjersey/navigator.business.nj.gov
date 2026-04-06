@@ -171,6 +171,11 @@ export class ApiStack extends Stack {
       }
     }
 
+    if (process.env.FEATURE_USERDATA_ENDPOINT === "true") {
+      const userSchema = api.addResource("user-schema");
+      attachLambdaToResource(this, userSchema, expressLambda);
+    }
+
     const users = api.addResource("users");
     attachLambdaToResource(this, users, expressLambda);
 

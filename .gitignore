@@ -105,3 +105,6 @@ web/src/lib/cms/CollectionMap.json
 # React Email generated templates
 api/src/functions/messagingService/email-templates/*.html
 api/src/functions/messagingService/email-templates/*.txt
+
+# Generated user schema (produced by generate:user-schema, prebuild, prestart)
+api/src/domain/userSchema.generated.ts

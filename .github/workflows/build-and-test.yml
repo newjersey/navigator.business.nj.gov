@@ -41,6 +41,7 @@ env: &integration-env
   FEATURE_BUSINESS_FLP: "false"
   FEATURE_CIGARETTE_LICENSE: "true"
   FEATURE_LOGIN_PAGE: "true"
+  FEATURE_USERDATA_ENDPOINT: "true"
   SKIP_SAVE_DOCUMENTS_TO_S3: "true"
 
   # Cognito

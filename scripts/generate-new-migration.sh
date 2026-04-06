@@ -67,21 +67,30 @@ import { migrate_v${MOST_RECENT_VERSION_NUMBER}_to_v${NEW_VERSION_NUMBER} } from
 # Update CURRENT_GENERATOR export in migrations.ts
 sedi "s|v${MOST_RECENT_VERSION_NUMBER}UserData as CURRENT_GENERATOR } from \"@db/migrations/${MOST_RECENT_FILENAME_NO_EXT}\"|v${NEW_VERSION_NUMBER}UserData as CURRENT_GENERATOR } from \"@db/migrations/v${NEW_VERSION_NUMBER}_${NEW_FILENAME}\"|g" migrations.ts
 
-# Update Zod schema files and the print-schema script
+# Update Zod schema files and the schema generator script
 ZOD_SCHEMA_FILE="$PROJECT_ROOT/api/src/db/zodSchema/zodSchemas.ts"
 ZOD_SCHEMA_TEST_FILE="$PROJECT_ROOT/api/src/db/zodSchema/zodSchemas.test.ts"
 PRINT_USER_SCHEMA_FILE="$PROJECT_ROOT/api/scripts/printUserZodSchema.ts"
+GENERATE_USER_SCHEMA_FILE="$PROJECT_ROOT/api/scripts/generateUserSchemaFile.ts"
+USER_SCHEMA_GENERATOR_FILE="$PROJECT_ROOT/api/src/domain/userSchemaGenerator.ts"
 
 echo "Updating Zod schema imports and schema version numbers"
 sedi "s/${MOST_RECENT_FILENAME_NO_EXT}/v${NEW_VERSION_NUMBER}_${NEW_FILENAME}/g" \
   "$ZOD_SCHEMA_FILE" \
   "$ZOD_SCHEMA_TEST_FILE" \
-  "$PRINT_USER_SCHEMA_FILE"
+  "$PRINT_USER_SCHEMA_FILE" \
+  "$GENERATE_USER_SCHEMA_FILE" \
+  "$USER_SCHEMA_GENERATOR_FILE"
 
 sedi "s/${MOST_RECENT_VERSION_NUMBER}/${NEW_VERSION_NUMBER}/g" \
   "$ZOD_SCHEMA_FILE" \
   "$ZOD_SCHEMA_TEST_FILE" \
-  "$PRINT_USER_SCHEMA_FILE"
+  "$PRINT_USER_SCHEMA_FILE" \
+  "$GENERATE_USER_SCHEMA_FILE" \
+  "$USER_SCHEMA_GENERATOR_FILE"
+
+echo "Regenerating cached user schema..."
+yarn workspace @businessnjgovnavigator/api generate:user-schema
 
 echo ""
 echo "------------------------------------"

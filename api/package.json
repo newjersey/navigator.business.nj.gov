@@ -4,7 +4,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "yarn generate:user-schema && tsc --project tsconfig.json",
+    "prestart": "yarn generate:user-schema",
+    "generate:user-schema": "tsx scripts/generateUserSchemaFile.ts",
     "clean": "rimraf cdk/cdk.out",
     "dev": "concurrently \"yarn start:wiremock\" \"yarn start:hotReload\"",
     "dependency-check": "yarn depcruise --config .dependency-cruiser.js src",
