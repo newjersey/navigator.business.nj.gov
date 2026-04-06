@@ -64,6 +64,8 @@ export interface BuildResult {
   licenseCalendarEventsCount: number;
   /** Number of license reinstatements built */
   licenseReinstatementsCount: number;
+  /** Number of checklist item keys mapped to tasks */
+  checklistItemTasksCount: number;
 }
 
 /**
@@ -272,6 +274,154 @@ export const buildSectors = (sectors: SectorData[], industries: unknown[]): Enri
       industries: matchingIndustries,
     };
   });
+};
+
+// ============================================================================
+// DOMAIN LAYER - Checklist Item Task Map Builder
+// ============================================================================
+
+/**
+ * Regex pattern matching checklist item syntax embedded in markdown: []{item-key}
+ * Captures the key in group 1 and the remaining text on the line in group 2.
+ */
+const CHECKLIST_ITEM_PATTERN = /\[\]\{([^}]+)\}([^\n]*)/g;
+
+/**
+ * Maps fieldConfig JSON filenames (without extension) to the task ID they belong to.
+ *
+ * FieldConfig files define tabbed form content within tasks but are not referenced
+ * directly in task markdown. This mapping is stable; it reflects the relationship
+ * between form tab configurations and the task they appear in.
+ */
+export const FIELDCONFIG_TASK_MAP: Readonly<Record<string, string>> = {
+  "cannabis-license-annual-tab2": "annual-license-cannabis",
+  "cannabis-license-conditional-tab2": "conditional-permit-cannabis",
+  "cannabis-priority-status-tab1": "priority-status-cannabis",
+  "cannabis-priority-status-tab2": "priority-status-cannabis",
+};
+
+/**
+ * Represents a checklist item extracted from task or anytime action content.
+ */
+export interface ChecklistItemEntry {
+  taskId: string;
+  name: string;
+  type: "task" | "anytime-action";
+}
+
+export type ChecklistItemTaskMap = Record<string, ChecklistItemEntry>;
+
+/**
+ * Extracts all []{key} checklist items from a markdown string, including the name
+ * text that follows each key on the same line.
+ *
+ * @param content - Markdown string to search
+ * @returns Array of extracted items with key and name (may be empty)
+ */
+export const extractChecklistItems = (content: string): Array<{ key: string; name: string }> => {
+  const items: Array<{ key: string; name: string }> = [];
+  let match: RegExpExecArray | null;
+  const pattern = new RegExp(CHECKLIST_ITEM_PATTERN.source, "g");
+  while ((match = pattern.exec(content)) !== null) {
+    if (match[1]) items.push({ key: match[1], name: match[2].trim() });
+  }
+  return items;
+};
+
+/**
+ * Recursively searches all string values in a JSON object for checklist items.
+ *
+ * @param obj - Parsed JSON value to search
+ * @returns Array of extracted items with key and name
+ */
+export const extractItemsFromObject = (obj: unknown): Array<{ key: string; name: string }> => {
+  if (typeof obj === "string") return extractChecklistItems(obj);
+  if (Array.isArray(obj)) return obj.flatMap(extractItemsFromObject);
+  if (typeof obj === "object" && obj !== null) {
+    return Object.values(obj).flatMap(extractItemsFromObject);
+  }
+  return [];
+};
+
+/**
+ * Builds the checklist item key → entry map from task contentMd, anytime action
+ * contentMd, and fieldConfig files.
+ *
+ * Scans each task's and anytime action task's contentMd for []{key} patterns, then
+ * overlays fieldConfig files for keys embedded in tabbed form configurations.
+ * FieldConfig entries take precedence when a key appears in both (they provide a
+ * more specific task context).
+ *
+ * @param tasks - Loaded roadmap task objects with id and contentMd fields
+ * @param anytimeActionTasks - Loaded anytime action task objects with id and contentMd fields
+ * @param fieldConfigDir - Directory containing fieldConfig JSON files
+ * @param fileSystem - File system port for reading fieldConfig files
+ * @returns Record mapping each item key to its entry (taskId, name, type)
+ */
+export const buildChecklistItemTaskMap = (
+  tasks: Array<{ readonly id: string; readonly contentMd?: string }>,
+  anytimeActionTasks: Array<{ readonly id: string; readonly contentMd?: string }>,
+  fieldConfigDir: string,
+  fileSystem: FileSystemPort,
+): ChecklistItemTaskMap => {
+  const result: ChecklistItemTaskMap = {};
+
+  for (const task of tasks) {
+    if (!task.contentMd) continue;
+    for (const { key, name } of extractChecklistItems(task.contentMd)) {
+      result[key] = { taskId: task.id, name, type: "task" };
+    }
+  }
+
+  for (const task of anytimeActionTasks) {
+    if (!task.contentMd) continue;
+    for (const { key, name } of extractChecklistItems(task.contentMd)) {
+      result[key] = { taskId: task.id, name, type: "anytime-action" };
+    }
+  }
+
+  for (const [configName, taskId] of Object.entries(FIELDCONFIG_TASK_MAP)) {
+    const filePath = path.join(fieldConfigDir, `${configName}.json`);
+    const parsed = JSON.parse(fileSystem.readFile(filePath)) as unknown;
+    for (const { key, name } of extractItemsFromObject(parsed)) {
+      result[key] = { taskId, name, type: "task" };
+    }
+  }
+
+  return result;
+};
+
+/**
+ * Builds and writes the checklist item key → entry map to file.
+ *
+ * Must be called after tasks are built since it calls loadAllTasks and
+ * loadAllAnytimeActionTasks to access contentMd. Generates both minified and
+ * pretty-printed JSON outputs.
+ *
+ * @param fileSystem - File system operations
+ * @param config - Build configuration
+ * @returns Number of unique checklist item keys mapped
+ */
+export const buildAndWriteChecklistItemTasks = (
+  fileSystem: FileSystemPort,
+  config: BuildConfig,
+): number => {
+  const tasks = loadAllTasks(false) as Array<{ readonly id: string; readonly contentMd?: string }>;
+  const anytimeActionTasks = loadAllAnytimeActionTasks(false);
+  const fieldConfigDir = path.join(config.rootDir, "src/fieldConfig");
+  const checklistItemTasks = buildChecklistItemTaskMap(
+    tasks,
+    anytimeActionTasks,
+    fieldConfigDir,
+    fileSystem,
+  );
+  const outputPath = path.join(config.outputDir, "checklist-item-tasks.json");
+  const prettyOutputPath = path.join(config.outputDir, "checklist-item-tasks.pretty.json");
+
+  fileSystem.writeJsonFile(outputPath, { checklistItemTasks });
+  fileSystem.writePrettyJsonFile(prettyOutputPath, { checklistItemTasks });
+
+  return Object.keys(checklistItemTasks).length;
 };
 
 // ============================================================================
@@ -510,6 +660,9 @@ export const executeBuild = (fileSystem: FileSystemPort, config: BuildConfig): B
     result[contentConfig.resultKey] = content.length;
   }
 
+  // Build checklist item task map after tasks are loaded (depends on task contentMd)
+  result.checklistItemTasksCount = buildAndWriteChecklistItemTasks(fileSystem, config);
+
   return result as BuildResult;
 };
 
@@ -549,6 +702,9 @@ export const logBuildResults = (result: BuildResult): void => {
   );
   console.log(
     `✓ Built license-reinstatements.json with ${result.licenseReinstatementsCount} license reinstatements`,
+  );
+  console.log(
+    `✓ Built checklist-item-tasks.json with ${result.checklistItemTasksCount} checklist item keys`,
   );
 };
 

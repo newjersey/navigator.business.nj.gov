@@ -159,6 +159,7 @@ interface AnytimeAction {
 }
 
 export interface AnytimeActionTask extends AnytimeAction {
+  id: string;
   category: AnytimeActionCategory[];
   urlSlug: string;
   callToActionLink?: string;
