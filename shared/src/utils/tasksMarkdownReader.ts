@@ -124,6 +124,7 @@ const loadIndividualAnytimeActionCatgory = (
 };
 
 type AnytimeActionTaskGrayMatter = {
+  id: string;
   name: string;
   category: string[];
   urlSlug: string;

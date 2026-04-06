@@ -18,6 +18,12 @@ import {
   createBuildConfig,
   logBuildResults,
   main,
+  type ChecklistItemEntry,
+  FIELDCONFIG_TASK_MAP,
+  extractChecklistItems,
+  extractItemsFromObject,
+  buildChecklistItemTaskMap,
+  buildAndWriteChecklistItemTasks,
 } from "./build";
 
 // ============================================================================
@@ -35,11 +41,7 @@ interface MockFileSystem extends FileSystemPort {
 }
 
 const createMockFileSystem = (config: MockFileSystemConfig = {}): MockFileSystem => {
-  const {
-    directories = {},
-    files = {},
-    existingDirs = new Set<string>(),
-  } = config;
+  const { directories = {}, files = {}, existingDirs = new Set<string>() } = config;
 
   return {
     readDirectory: (dirPath: string) => directories[dirPath] || [],
@@ -50,7 +52,8 @@ const createMockFileSystem = (config: MockFileSystemConfig = {}): MockFileSystem
     writePrettyJsonFile: (filePath: string, data: unknown) => {
       files[filePath] = JSON.stringify(data, null, 2);
     },
-    directoryExists: (dirPath: string) => existingDirs.has(dirPath) || directories[dirPath] !== undefined,
+    directoryExists: (dirPath: string) =>
+      existingDirs.has(dirPath) || directories[dirPath] !== undefined,
   };
 };
 
@@ -112,7 +115,10 @@ describe("Infrastructure Layer", () => {
       const files: Record<string, string> = {};
       const mockFs = createMockFileSystem({ files });
 
-      mockFs.writePrettyJsonFile("/output/data.pretty.json", { test: "data", nested: { value: 123 } });
+      mockFs.writePrettyJsonFile("/output/data.pretty.json", {
+        test: "data",
+        nested: { value: 123 },
+      });
 
       const expected = JSON.stringify({ test: "data", nested: { value: 123 } }, null, 2);
       expect(files["/output/data.pretty.json"]).toBe(expected);
@@ -165,7 +171,10 @@ describe("Domain Layer", () => {
         },
       });
 
-      const industry = parseIndustryFile(mockFs, "/industries", "test.json") as Record<string, unknown>;
+      const industry = parseIndustryFile(mockFs, "/industries", "test.json") as Record<
+        string,
+        unknown
+      >;
 
       expect(industry.id).toBe("test-industry");
       expect(industry.name).toBe("Test Industry");
@@ -208,9 +217,24 @@ describe("Domain Layer", () => {
       ];
 
       const industries = [
-        { id: "commercial-construction", name: "Construction", naicsCodes: "236220, 238160", defaultSectorId: "construction" },
-        { id: "home-contractor", name: "Home Improvement Contractor", naicsCodes: "236118", defaultSectorId: "construction" },
-        { id: "cannabis", name: "Cannabis", naicsCodes: "111419, 111998, 424590, 459991", defaultSectorId: "cannabis" },
+        {
+          id: "commercial-construction",
+          name: "Construction",
+          naicsCodes: "236220, 238160",
+          defaultSectorId: "construction",
+        },
+        {
+          id: "home-contractor",
+          name: "Home Improvement Contractor",
+          naicsCodes: "236118",
+          defaultSectorId: "construction",
+        },
+        {
+          id: "cannabis",
+          name: "Cannabis",
+          naicsCodes: "111419, 111998, 424590, 459991",
+          defaultSectorId: "cannabis",
+        },
       ];
 
       const enrichedSectors = buildSectors(sectors, industries);
@@ -229,9 +253,7 @@ describe("Domain Layer", () => {
     });
 
     it("should return empty industries array for sectors with no matches", () => {
-      const sectors = [
-        { id: "technology", name: "Technology", nonEssentialQuestionsIds: [] },
-      ];
+      const sectors = [{ id: "technology", name: "Technology", nonEssentialQuestionsIds: [] }];
 
       const industries = [
         { id: "cannabis", name: "Cannabis", naicsCodes: "111419", defaultSectorId: "cannabis" },
@@ -244,9 +266,7 @@ describe("Domain Layer", () => {
     });
 
     it("should handle industries without naicsCodes", () => {
-      const sectors = [
-        { id: "generic", name: "Generic", nonEssentialQuestionsIds: [] },
-      ];
+      const sectors = [{ id: "generic", name: "Generic", nonEssentialQuestionsIds: [] }];
 
       const industries = [
         { id: "generic-industry", name: "Generic Industry", defaultSectorId: "generic" },
@@ -326,7 +346,10 @@ describe("Application Layer", () => {
         outputDir: "/root/lib",
       };
 
-      const mockData = [{ id: "1", name: "Item 1" }, { id: "2", name: "Item 2" }];
+      const mockData = [
+        { id: "1", name: "Item 1" },
+        { id: "2", name: "Item 2" },
+      ];
       const loader = () => mockData;
 
       const result = buildAndWriteContent(mockFs, config, loader, "test-content", "items");
@@ -362,8 +385,18 @@ describe("Application Layer", () => {
       };
 
       const industries = [
-        { id: "commercial-construction", name: "Construction", naicsCodes: "236220", defaultSectorId: "construction" },
-        { id: "cannabis", name: "Cannabis", naicsCodes: "111419, 111998, 424590, 459991", defaultSectorId: "cannabis" },
+        {
+          id: "commercial-construction",
+          name: "Construction",
+          naicsCodes: "236220",
+          defaultSectorId: "construction",
+        },
+        {
+          id: "cannabis",
+          name: "Cannabis",
+          naicsCodes: "111419, 111998, 424590, 459991",
+          defaultSectorId: "cannabis",
+        },
       ];
 
       const sectors = buildAndWriteSectors(mockFs, config, industries);
@@ -400,8 +433,18 @@ describe("Application Layer", () => {
       };
 
       const industries = [
-        { id: "commercial-construction", name: "Construction", naicsCodes: "236220", defaultSectorId: "construction" },
-        { id: "home-contractor", name: "Home Improvement Contractor", naicsCodes: "236118", defaultSectorId: "construction" },
+        {
+          id: "commercial-construction",
+          name: "Construction",
+          naicsCodes: "236220",
+          defaultSectorId: "construction",
+        },
+        {
+          id: "home-contractor",
+          name: "Home Improvement Contractor",
+          naicsCodes: "236118",
+          defaultSectorId: "construction",
+        },
         { id: "cannabis", name: "Cannabis", naicsCodes: "111419", defaultSectorId: "cannabis" },
       ];
 
@@ -414,22 +457,32 @@ describe("Application Layer", () => {
     });
 
     it("should execute full build and return statistics", () => {
-      const files: Record<string, string> = {
-        "/root/src/mappings/sectors.json": JSON.stringify({
-          arrayOfSectors: [
-            { id: "construction", name: "Construction", nonEssentialQuestionsIds: [] },
-            { id: "cannabis", name: "Cannabis", nonEssentialQuestionsIds: [] },
-          ],
-        }),
-      };
+      const fieldConfigFiles = Object.fromEntries(
+        Object.keys(FIELDCONFIG_TASK_MAP).map((name) => [
+          `/root/src/fieldConfig/${name}.json`,
+          JSON.stringify({}),
+        ]),
+      );
       const mockFs = createMockFileSystem({
         directories: {
           "/root/src/roadmaps/industries": ["ind1.json", "ind2.json"],
         },
         files: {
-          "/root/src/roadmaps/industries/ind1.json": JSON.stringify({ id: "ind1", defaultSectorId: "construction" }),
-          "/root/src/roadmaps/industries/ind2.json": JSON.stringify({ id: "ind2", defaultSectorId: "cannabis" }),
-          ...files,
+          "/root/src/roadmaps/industries/ind1.json": JSON.stringify({
+            id: "ind1",
+            defaultSectorId: "construction",
+          }),
+          "/root/src/roadmaps/industries/ind2.json": JSON.stringify({
+            id: "ind2",
+            defaultSectorId: "cannabis",
+          }),
+          "/root/src/mappings/sectors.json": JSON.stringify({
+            arrayOfSectors: [
+              { id: "construction", name: "Construction", nonEssentialQuestionsIds: [] },
+              { id: "cannabis", name: "Cannabis", nonEssentialQuestionsIds: [] },
+            ],
+          }),
+          ...fieldConfigFiles,
         },
       });
 
@@ -449,6 +502,7 @@ describe("Application Layer", () => {
       expect(result.fundingsCount).toBeGreaterThan(0);
       expect(result.licenseCalendarEventsCount).toBeGreaterThan(0);
       expect(result.licenseReinstatementsCount).toBeGreaterThan(0);
+      expect(result.checklistItemTasksCount).toBeGreaterThanOrEqual(0);
     });
   });
 
@@ -474,6 +528,7 @@ describe("Application Layer", () => {
         fundingsCount: 25,
         licenseCalendarEventsCount: 8,
         licenseReinstatementsCount: 12,
+        checklistItemTasksCount: 77,
       };
 
       logBuildResults(result);
@@ -490,6 +545,9 @@ describe("Application Layer", () => {
       );
       expect(consoleSpy).toHaveBeenCalledWith(
         "✓ Built license-reinstatements.json with 12 license reinstatements",
+      );
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "✓ Built checklist-item-tasks.json with 77 checklist item keys",
       );
 
       consoleSpy.mockRestore();
@@ -565,7 +623,9 @@ describe("Integration Tests", () => {
     expect(industries).toHaveLength(2);
 
     // Verify JSON file was written correctly
-    const industryOutput = JSON.parse(mockFs.readFile("/root/lib/industry.json")) as { industries: unknown[] };
+    const industryOutput = JSON.parse(mockFs.readFile("/root/lib/industry.json")) as {
+      industries: unknown[];
+    };
     expect(industryOutput.industries).toHaveLength(2);
   });
 
