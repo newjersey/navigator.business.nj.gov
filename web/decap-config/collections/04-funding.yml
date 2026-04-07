@@ -6,6 +6,7 @@ collections:
       - { name: "" }
 
   - name: "funding-opportunities"
+    i18n: true
     label: "Fund Opps - Content"
     folder: "content/src/fundings"
     summary: "[{{agency[0]}}] - {{displayName}}"
@@ -23,15 +24,23 @@ collections:
           name: "name",
           widget: "string",
           hint: "This appears to the user in both My Account and on the static site funding page",
+          i18n: true,
         }
       - {
           label: "Display Name",
           name: "displayName",
           widget: "string",
           hint: "This is the name displayed internally in CMS list",
+          i18n: true,
         }
-      - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true, i18n: duplicate }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          required: true,
+          i18n: duplicate,
+        }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -39,6 +48,7 @@ collections:
           hint:
             "This appears only in My Account, in the For You column, max char is 150 including
             spaces, plain text only",
+          i18n: true,
         }
       - {
           label: "Open Date",
@@ -47,6 +57,7 @@ collections:
           required: false,
           default: "",
           format: "MM/DD/yyyy",
+          i18n: duplicate,
         }
       - {
           label: "Due Date",
@@ -55,24 +66,28 @@ collections:
           required: false,
           default: "",
           format: "MM/DD/yyyy",
+          i18n: duplicate,
         }
       - {
           label: "Summary Description",
           name: "summaryDescriptionMd",
           widget: "markdown",
           hint: "Summarize the Program Description in 2-4 sentences",
+          i18n: true,
         }
       - {
           label: "Content",
           name: "body",
           widget: "markdown",
           hint: "Eligibility Requirements for Business, Benefit to Participating Businesses",
+          i18n: true,
         }
       - {
           label: "Call To Action Link",
           name: "callToActionLink",
           widget: "string",
           required: false,
+          i18n: duplicate,
         }
       - {
           label: "Call To Action Text",
@@ -81,6 +96,7 @@ collections:
           required: false,
           hint:
             "If there is a link in the 'Call To Action Link' field above, this field is required",
+          i18n: true,
         }
       - label: "Funding Type"
         name: "fundingType"
@@ -96,6 +112,7 @@ collections:
             "investment",
           ]
         hint: "Incentive Type"
+        # is this user facing text? or is it an id to control something on the front end
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
@@ -127,6 +144,7 @@ collections:
           widget: "string",
           required: false,
           hint: "Point of Contact Email",
+          i18n: duplicate,
         }
       - label: "Business Stage"
         name: "businessStage"
@@ -344,6 +362,7 @@ collections:
         widget: "select"
         options:
           ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+        i18n: true
       - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"

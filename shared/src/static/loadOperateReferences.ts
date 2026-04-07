@@ -1,33 +1,24 @@
-import fs from "fs";
-import path from "path";
 import { OperateReference } from "../types/types";
-import { loadCertificationByFileName } from "./loadCertifications";
-import { loadFilingByFileName } from "./loadFilings";
-import { loadFundingByFileName } from "./loadFundings";
-
-const filingsDirectory = path.join(process.cwd(), "..", "content", "src", "filings");
-const fundingsDirectory = path.join(process.cwd(), "..", "content", "src", "fundings");
-const certificationsDirectory = path.join(process.cwd(), "..", "content", "src", "certifications");
+import { loadAllCertifications } from "./loadCertifications";
+import { loadAllFilings } from "./loadFilings";
+import { loadAllFundings } from "./loadFundings";
 
 export const loadOperateReferences = (): Record<string, OperateReference> => {
-  const filingFilenames = fs.readdirSync(filingsDirectory);
-  const fundingFilenames = fs.readdirSync(fundingsDirectory);
-  const certFilenames = fs.readdirSync(certificationsDirectory);
-  const filingFileContents = filingFilenames.map((fileName) => {
+  const filingFileContents = loadAllFilings().map((filing) => {
     return {
-      ...loadFilingByFileName(fileName),
+      ...filing,
       origin: "filings" as Origin,
     };
   });
-  const fundingFileContents = fundingFilenames.map((fileName) => {
+  const fundingFileContents = loadAllFundings().map((funding) => {
     return {
-      ...loadFundingByFileName(fileName),
+      ...funding,
       origin: "funding" as Origin,
     };
   });
-  const certificationFileContents = certFilenames.map((fileName) => {
+  const certificationFileContents = loadAllCertifications().map((cert) => {
     return {
-      ...loadCertificationByFileName(fileName),
+      ...cert,
       origin: "certification" as Origin,
     };
   });
