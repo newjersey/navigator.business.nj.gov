@@ -131,6 +131,7 @@ export class LambdaStack extends Stack {
 
     const intercomMacrosUrl = process.env.INTERCOM_MACROS_BASE_URL || "";
     const intercomToken = process.env.INTERCOM_TOKEN || "";
+    const featureUserdataEndpoint = process.env.FEATURE_USERDATA_ENDPOINT || "";
 
     /**
      * Environment Variables for Github Oauth2 lambda
@@ -233,6 +234,7 @@ export class LambdaStack extends Stack {
         SKIP_SAVE_DOCUMENTS_TO_S3: skipSaveDocumentsToS3,
         USE_FAKE_SELF_REG: useFakeSelfReg,
         DYNAMO_PORT: dynamoOfflinePort,
+        FEATURE_USERDATA_ENDPOINT: featureUserdataEndpoint,
       },
     });
 
