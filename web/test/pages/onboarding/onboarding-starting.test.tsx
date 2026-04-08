@@ -41,31 +41,25 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
-  return generateUserDataForBusiness(
-    generateBusiness({
-      profileData: generateProfileData({
-        businessPersona: "STARTING",
-        ...overrides,
-      }),
-      onboardingFormProgress: "UNSTARTED",
+  const business = generateBusiness({
+    profileData: generateProfileData({
+      businessPersona: "STARTING",
+      ...overrides,
     }),
-  );
+    onboardingFormProgress: "UNSTARTED",
+  });
+  return generateUserDataForBusiness(business, {
+    user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+  });
 };
-
-const initialABTestingExperienceBPercentage = process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE;
 
 describe("onboarding - starting a business", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE = "0";
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
     jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE = initialABTestingExperienceBPercentage;
   });
 
   describe("page 2", () => {
@@ -94,6 +88,25 @@ describe("onboarding - starting a business", () => {
           query: { [QUERIES.fromOnboarding]: "true" },
         });
       });
+    });
+
+    it("shows 'Show My Guide' button on Step 1 instead of 'Next' for ExperienceB", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: undefined,
+        }),
+        onboardingFormProgress: "UNSTARTED",
+      });
+      const userData = generateUserDataForBusiness(business, {
+        user: generateUser({ id: business.userId, abExperience: "ExperienceB" }),
+      });
+      useMockRouter({ isReady: true, query: { page: "1" } });
+      renderPage({ userData });
+
+      const page1 = within(screen.getByTestId("page-1-form"));
+      expect(page1.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+      expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
     });
 
     it("prevents user from moving after Step 2 if you have not selected an industry", async () => {
@@ -238,7 +251,8 @@ describe("onboarding - starting a business", () => {
   });
 
   it("changes url pathname every time a user goes to a different page", async () => {
-    const { page } = renderPage({});
+    const userData = generateTestUserData({});
+    const { page } = renderPage({ userData });
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
     page.chooseRadio("business-persona-starting");
 
@@ -253,7 +267,8 @@ describe("onboarding - starting a business", () => {
 
   it("shows correct next-button text on each page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const { page } = renderPage({ municipalities: [newark] });
+    const userData = generateTestUserData({});
+    const { page } = renderPage({ municipalities: [newark], userData });
     page.chooseRadio("business-persona-starting");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
@@ -277,7 +292,7 @@ describe("onboarding - starting a business", () => {
       }),
     });
     const userData = generateUserData({
-      user: generateUser({ id: business.userId }),
+      user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
       currentBusinessId: "12345",
       businesses: {
         "12345": business,
@@ -296,7 +311,7 @@ describe("onboarding - starting a business", () => {
   });
 
   it("updates the user data after each form page", async () => {
-    const initialUserData = createEmptyUserData(createEmptyUser());
+    const initialUserData = createEmptyUserData(createEmptyUser({ abExperience: "ExperienceA" }));
     const businessId = initialUserData.currentBusinessId;
     const { page } = renderPage({ userData: initialUserData });
 

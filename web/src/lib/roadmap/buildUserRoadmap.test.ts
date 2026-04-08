@@ -889,6 +889,23 @@ describe("buildUserRoadmap", () => {
     });
   });
 
+  describe("ExperienceB addons", () => {
+    it("adds select-industry addon when abExperience is ExperienceB", () => {
+      buildUserRoadmap(generateStartingProfile({}), {}, "ExperienceB");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("select-industry");
+    });
+
+    it("does not add select-industry addon when abExperience is ExperienceA", () => {
+      buildUserRoadmap(generateStartingProfile({}), {}, "ExperienceA");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("select-industry");
+    });
+
+    it("does not add select-industry addon when abExperience is not provided", () => {
+      buildUserRoadmap(generateStartingProfile({}), {});
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("select-industry");
+    });
+  });
+
   describe("municipality", () => {
     it("replaces placeholders with info from the user municipality", async () => {
       mockFetchMunicipality.mockResolvedValue(
