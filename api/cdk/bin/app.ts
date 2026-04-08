@@ -23,6 +23,13 @@ const region = "us-east-1";
 const stage = process.env.STAGE || "local";
 const account_id = process.env.AWS_ACCOUNT_ID;
 
+// Parse identity pool IDs from comma-separated environment variable
+const identityPoolIds = process.env.SHARED_IDENTITY_POOL_IDS?.split(",") ?? [];
+
+if (identityPoolIds.length === 0) {
+  throw new Error("SHARED_IDENTITY_POOL_IDS must be set");
+}
+
 const env = {
   account: account_id,
   region: region,
@@ -36,6 +43,7 @@ new DataStack(app, `DataStack-${stage}`, {
 const iamStack = new IamStack(app, `IamStack-${stage}`, {
   stage,
   env,
+  identityPoolIds,
 });
 
 const storageStack = new StorageStack(app, `StorageStack-${stage}`, {

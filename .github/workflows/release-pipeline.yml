@@ -179,6 +179,8 @@ jobs:
           echo "CMS_OAUTH_CLIENT_ID=${{vars.CMS_OAUTH_CLIENT_ID}}" >> $GITHUB_ENV
           echo "CMS_OAUTH_CLIENT_SECRET=${{secrets.CMS_OAUTH_CLIENT_SECRET}}" >> $GITHUB_ENV
 
+          echo "SHARED_IDENTITY_POOL_IDS=${{ secrets.COGNITO_IDENTITY_POOL_ID_PROD }}" >> $GITHUB_ENV
+
       - name: Deploy to Production
         uses: ./.github/actions/deploy
         with:
