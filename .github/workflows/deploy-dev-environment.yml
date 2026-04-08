@@ -117,6 +117,10 @@ jobs:
 
       CMS_OAUTH_CLIENT_ID: ${{vars.CMS_OAUTH_CLIENT_ID}}
       CMS_OAUTH_CLIENT_SECRET: ${{secrets.CMS_OAUTH_CLIENT_SECRET}}
+
+      SHARED_IDENTITY_POOL_IDS:
+        "${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }},${{ secrets.COGNITO_IDENTITY_POOL_ID_TESTING
+        }},${{ secrets.COGNITO_IDENTITY_POOL_ID_CONTENT }}"
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6

@@ -22,15 +22,17 @@ export class IamStack extends Stack {
   readonly serviceName: string;
   public readonly role: iam.Role;
   public readonly backupRole?: iam.Role;
+  public readonly authRole?: iam.Role;
+  public readonly unauthRole?: iam.Role;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
     this.serviceName = API_SERVICE_NAME;
 
-    const shouldCreateBackupRole =
+    const isIamCreatedForDevStagingProdOnly =
       props.stage === DEV_STAGE || props.stage === STAGING_STAGE || props.stage === PROD_STAGE;
 
-    if (shouldCreateBackupRole) {
+    if (isIamCreatedForDevStagingProdOnly) {
       const backupRole = new iam.Role(this, "backupRole", {
         assumedBy: new iam.ServicePrincipal("backup.amazonaws.com"),
         roleName: `Backups`,
@@ -50,6 +52,59 @@ export class IamStack extends Stack {
 
       applyStandardTags(backupRole, props.stage);
       this.backupRole = backupRole;
+
+      const identityPoolIds: string[] =
+        props.stage === DEV_STAGE
+          ? (process.env.SHARED_IDENTITY_POOL_IDS?.split(",").map((id) => id.trim()) ?? [])
+          : process.env.COGNITO_IDENTITY_POOL_ID
+            ? [process.env.COGNITO_IDENTITY_POOL_ID]
+            : [];
+
+      if (props.stage === DEV_STAGE && identityPoolIds.length === 0) {
+        throw new Error("SHARED_IDENTITY_POOL_IDS must be set for dev");
+      }
+
+      if (props.stage !== DEV_STAGE && identityPoolIds.length === 0) {
+        throw new Error("COGNITO_IDENTITY_POOL_ID must be set for this stage");
+      }
+
+      const authRole = new iam.Role(this, "navigatorAuthRole", {
+        roleName: "navigator_authRole",
+        assumedBy: new iam.FederatedPrincipal(
+          "cognito-identity.amazonaws.com",
+          {
+            StringEquals: {
+              "cognito-identity.amazonaws.com:aud": identityPoolIds,
+            },
+            "ForAnyValue:StringLike": {
+              "cognito-identity.amazonaws.com:amr": "authenticated",
+            },
+          },
+          "sts:AssumeRoleWithWebIdentity",
+        ),
+      });
+
+      applyStandardTags(authRole, props.stage);
+      this.authRole = authRole;
+
+      const unauthRole = new iam.Role(this, "navigatorUnauthRole", {
+        roleName: "navigator_unauthRole",
+        assumedBy: new iam.FederatedPrincipal(
+          "cognito-identity.amazonaws.com",
+          {
+            StringEquals: {
+              "cognito-identity.amazonaws.com:aud": identityPoolIds,
+            },
+            "ForAnyValue:StringLike": {
+              "cognito-identity.amazonaws.com:amr": "unauthenticated",
+            },
+          },
+          "sts:AssumeRoleWithWebIdentity",
+        ),
+      });
+
+      applyStandardTags(unauthRole, props.stage);
+      this.unauthRole = unauthRole;
     }
 
     const putMetricDataPolicyInCloudwatch = new iam.PolicyStatement({
