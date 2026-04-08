@@ -52,13 +52,12 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
     if (profileDataHasNotChanged) {
       return;
     }
+    analytics.event.select_industry_task.submit.select_industry();
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
     await updateQueue.queueProfileData(profileData).update();
     setShowSuccessAlert(true);
   });
 
-  const taskCompleted = business?.taskProgress["select-industry-task"] === "COMPLETED";
-  console.log("hi", taskCompleted);
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
@@ -82,15 +81,14 @@ export const SelectIndustryTask = (props: Props): ReactElement => {
           </div>
 
           <div>
-            <Content>{Config.selectIndustryTask.header}</Content>
-            <Content>{Config.selectIndustryTask.description}</Content>
+            <Content>{Config.selectIndustryTask.content}</Content>
             <Industry />
             {!showSuccessAlert && <Content>{Config.selectIndustryTask.infoCallout}</Content>}
           </div>
           <CtaContainer>
             <ActionBarLayout>
               <LiveChatHelpButton
-                analyticsEvent={analytics.event.cigarette_license_help_button.click.open_live_chat}
+                analyticsEvent={analytics.event.select_industry_task.click.open_live_chat}
               />
               <PrimaryButton
                 isColor="primary"

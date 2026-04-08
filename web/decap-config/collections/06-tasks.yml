@@ -2691,7 +2691,6 @@ collections:
             widget: object
             fields:
               - { label: Success Alert, name: successAlert, widget: markdown }
-              - { label: Header, name: header, widget: markdown }
-              - { label: Description, name: description, widget: markdown }
+              - { label: Content, name: content, widget: markdown }
               - { label: Info Callout, name: infoCallout, widget: markdown }
               - { label: Save Button Text, name: save, widget: string }
