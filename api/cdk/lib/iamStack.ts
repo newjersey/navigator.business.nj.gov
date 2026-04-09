@@ -5,11 +5,13 @@ import { Construct } from "constructs";
 import {
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   BUSINESSES_TABLE,
+  CONTENT_STAGE,
   DEV_STAGE,
   DOCUMENT_S3_BUCKET_NAME,
   MESSAGES_TABLE,
   PROD_STAGE,
   STAGING_STAGE,
+  TESTING_STAGE,
   USERS_TABLE,
 } from "./constants";
 import { applyStandardTags } from "./stackUtils";
@@ -22,6 +24,8 @@ export class IamStack extends Stack {
   readonly serviceName: string;
   public readonly role: iam.Role;
   public readonly backupRole?: iam.Role;
+  public readonly developerGroup?: iam.Group;
+  public readonly bfsUsersGroup?: iam.Group;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
@@ -205,5 +209,27 @@ export class IamStack extends Stack {
     applyStandardTags(lambdaRole, props.stage);
 
     this.role = lambdaRole;
+
+    // Create IAM groups conditionally based on stage
+    const shouldCreateGroups =
+      props.stage !== CONTENT_STAGE && props.stage !== TESTING_STAGE;
+
+    if (shouldCreateGroups) {
+      const developerGroup = new iam.Group(this, "bfsNavigatorDevelopers", {
+        groupName: "bfs-navigator-developers",
+        path: "/users/",
+      });
+
+      applyStandardTags(developerGroup, props.stage);
+      this.developerGroup = developerGroup;
+
+      const bfsUsersGroup = new iam.Group(this, "awsBfsUsers", {
+        groupName: "aws-bfs-users",
+        path: "/system/",
+      });
+
+      applyStandardTags(bfsUsersGroup, props.stage);
+      this.bfsUsersGroup = bfsUsersGroup;
+    }
   }
 }
