@@ -222,4 +222,161 @@ describe("IamStack", () => {
       });
     }).not.toThrow();
   });
+
+  describe("Cognito Identity Pool roles", () => {
+    test("does NOT create auth/unauth roles when identityPoolIds not provided", () => {
+      const localApp = new App();
+      const localProps: IamStackProps = { stage: "local" };
+      const localStack = new IamStack(localApp, "TestIamStackLocal", localProps);
+      const localTemplate = Template.fromStack(localStack);
+
+      const roles = localTemplate.findResources("AWS::IAM::Role");
+      const roleNames = Object.values(roles).map((role) => role.Properties?.RoleName as string);
+
+      expect(roleNames).not.toContain("navigator_authRole");
+      expect(roleNames).not.toContain("navigator_unauthRole");
+    });
+
+    test("creates auth role with correct configuration when identityPoolIds provided", () => {
+      const testApp = new App();
+      const testProps: IamStackProps = {
+        stage: "dev",
+        identityPoolIds: ["us-east-1:test-pool-id-1", "us-east-1:test-pool-id-2"],
+      };
+      const testStack = new IamStack(testApp, "TestIamStackWithPools", testProps);
+      const testTemplate = Template.fromStack(testStack);
+
+      expect(() => {
+        testTemplate.hasResourceProperties("AWS::IAM::Role", {
+          RoleName: "navigator_authRole",
+          AssumeRolePolicyDocument: {
+            Statement: [
+              {
+                Action: "sts:AssumeRoleWithWebIdentity",
+                Condition: {
+                  StringEquals: {
+                    "cognito-identity.amazonaws.com:aud": [
+                      "us-east-1:test-pool-id-1",
+                      "us-east-1:test-pool-id-2",
+                    ],
+                  },
+                  "ForAnyValue:StringLike": {
+                    "cognito-identity.amazonaws.com:amr": "authenticated",
+                  },
+                },
+                Effect: "Allow",
+                Principal: {
+                  Federated: "cognito-identity.amazonaws.com",
+                },
+              },
+            ],
+            Version: "2012-10-17",
+          },
+        });
+      }).not.toThrow();
+    });
+
+    test("creates unauth role with correct configuration when identityPoolIds provided", () => {
+      const testApp = new App();
+      const testProps: IamStackProps = {
+        stage: "dev",
+        identityPoolIds: ["us-east-1:test-pool-id-1", "us-east-1:test-pool-id-2"],
+      };
+      const testStack = new IamStack(testApp, "TestIamStackWithPools", testProps);
+      const testTemplate = Template.fromStack(testStack);
+
+      expect(() => {
+        testTemplate.hasResourceProperties("AWS::IAM::Role", {
+          RoleName: "navigator_unauthRole",
+          AssumeRolePolicyDocument: {
+            Statement: [
+              {
+                Action: "sts:AssumeRoleWithWebIdentity",
+                Condition: {
+                  StringEquals: {
+                    "cognito-identity.amazonaws.com:aud": [
+                      "us-east-1:test-pool-id-1",
+                      "us-east-1:test-pool-id-2",
+                    ],
+                  },
+                  "ForAnyValue:StringLike": {
+                    "cognito-identity.amazonaws.com:amr": "unauthenticated",
+                  },
+                },
+                Effect: "Allow",
+                Principal: {
+                  Federated: "cognito-identity.amazonaws.com",
+                },
+              },
+            ],
+            Version: "2012-10-17",
+          },
+        });
+      }).not.toThrow();
+    });
+
+    test("creates both auth and unauth roles when identityPoolIds provided", () => {
+      const testApp = new App();
+      const testProps: IamStackProps = {
+        stage: "dev",
+        identityPoolIds: ["us-east-1:test-pool-id"],
+      };
+      const testStack = new IamStack(testApp, "TestIamStackWithPool", testProps);
+      const testTemplate = Template.fromStack(testStack);
+
+      const roles = testTemplate.findResources("AWS::IAM::Role");
+      const roleNames = Object.values(roles).map((role) => role.Properties?.RoleName as string);
+
+      expect(roleNames).toContain("navigator_authRole");
+      expect(roleNames).toContain("navigator_unauthRole");
+    });
+
+    test("supports single identity pool ID", () => {
+      const testApp = new App();
+      const testProps: IamStackProps = {
+        stage: "prod",
+        identityPoolIds: ["us-east-1:single-pool-id"],
+      };
+      const testStack = new IamStack(testApp, "TestIamStackSinglePool", testProps);
+      const testTemplate = Template.fromStack(testStack);
+
+      expect(() => {
+        testTemplate.hasResourceProperties("AWS::IAM::Role", {
+          RoleName: "navigator_authRole",
+          AssumeRolePolicyDocument: {
+            Statement: [
+              {
+                Condition: {
+                  StringEquals: {
+                    "cognito-identity.amazonaws.com:aud": ["us-east-1:single-pool-id"],
+                  },
+                  "ForAnyValue:StringLike": Match.anyValue(),
+                },
+                Effect: "Allow",
+                Principal: {
+                  Federated: "cognito-identity.amazonaws.com",
+                },
+              },
+            ],
+          },
+        });
+      }).not.toThrow();
+    });
+
+    test("does NOT create roles when identityPoolIds is empty array", () => {
+      const testApp = new App();
+      const testProps: IamStackProps = {
+        stage: "local",
+        identityPoolIds: [],
+      };
+      const testStack = new IamStack(testApp, "TestIamStackEmptyPools", testProps);
+      const testTemplate = Template.fromStack(testStack);
+
+      const roles = testTemplate.findResources("AWS::IAM::Role");
+      const roleNames = Object.values(roles).map((role) => role.Properties?.RoleName as string);
+
+      expect(roleNames).not.toContain("navigator_authRole");
+      expect(roleNames).not.toContain("navigator_unauthRole");
+    });
+  });
 });

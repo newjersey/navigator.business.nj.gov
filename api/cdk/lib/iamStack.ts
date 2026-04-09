@@ -16,12 +16,15 @@ import { applyStandardTags } from "./stackUtils";
 
 export interface IamStackProps extends StackProps {
   stage: string;
+  identityPoolIds?: string[];
 }
 
 export class IamStack extends Stack {
   readonly serviceName: string;
   public readonly role: iam.Role;
   public readonly backupRole?: iam.Role;
+  public readonly authRole?: iam.Role;
+  public readonly unauthRole?: iam.Role;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
@@ -205,5 +208,48 @@ export class IamStack extends Stack {
     applyStandardTags(lambdaRole, props.stage);
 
     this.role = lambdaRole;
+
+    // Create Cognito Identity Pool roles if identity pool IDs are provided
+    if (props.identityPoolIds && props.identityPoolIds.length > 0) {
+      // Authenticated role
+      const authRole = new iam.Role(this, "navigatorAuthRole", {
+        roleName: "navigator_authRole",
+        assumedBy: new iam.FederatedPrincipal(
+          "cognito-identity.amazonaws.com",
+          {
+            StringEquals: {
+              "cognito-identity.amazonaws.com:aud": props.identityPoolIds,
+            },
+            "ForAnyValue:StringLike": {
+              "cognito-identity.amazonaws.com:amr": "authenticated",
+            },
+          },
+          "sts:AssumeRoleWithWebIdentity",
+        ),
+      });
+
+      applyStandardTags(authRole, props.stage);
+      this.authRole = authRole;
+
+      // Unauthenticated role
+      const unauthRole = new iam.Role(this, "navigatorUnauthRole", {
+        roleName: "navigator_unauthRole",
+        assumedBy: new iam.FederatedPrincipal(
+          "cognito-identity.amazonaws.com",
+          {
+            StringEquals: {
+              "cognito-identity.amazonaws.com:aud": props.identityPoolIds,
+            },
+            "ForAnyValue:StringLike": {
+              "cognito-identity.amazonaws.com:amr": "unauthenticated",
+            },
+          },
+          "sts:AssumeRoleWithWebIdentity",
+        ),
+      });
+
+      applyStandardTags(unauthRole, props.stage);
+      this.unauthRole = unauthRole;
+    }
   }
 }
