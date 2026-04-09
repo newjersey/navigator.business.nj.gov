@@ -105,11 +105,64 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Check for Webflow Content Changes
+        id: check-changes
+        shell: bash
+        run: |
+          # Check if any files in the Webflow-synced directories have changed
+          if git diff --name-only origin/main HEAD | grep -qE '^content/src/(roadmaps/industries|licenses|fundings)/'; then
+            echo "webflow_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in Webflow-synced content directories"
+          else
+            echo "webflow_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes in Webflow-synced content directories"
+          fi
 
       - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
           cache: yarn
+
+      - uses: actions/cache@v5
+        with:
+          path: .yarn/cache
+          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-cache-
+
+      - name: Install Dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      - name: Build
+        shell: bash
+        run: yarn build
+
+      - name: Sync Webflow Content
+        if: steps.check-changes.outputs.webflow_changes == 'true'
+        working-directory: web
+        shell: bash
+        env:
+          WEBFLOW_API_TOKEN: ${{ secrets.WEBFLOW_API_TOKEN }}
+        run: yarn workspace @businessnjgovnavigator/web webflow:run-sync
+
+      - name: Commit and Push Changes
+        if: steps.check-changes.outputs.webflow_changes == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n $(git status --porcelain) ]]; then
+            git add .
+            git commit -m "chore: sync Webflow content and store webflowIds [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi
 
       - uses: ./.github/actions/deploy
         with:
