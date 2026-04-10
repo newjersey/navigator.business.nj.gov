@@ -115,6 +115,6 @@ export const cmsCollections = [
   },
   {
     label: "💻 STATIC SITE CONTENT",
-    children: ["FAQs"],
+    children: ["Categories", "FAQs"],
   },
 ];

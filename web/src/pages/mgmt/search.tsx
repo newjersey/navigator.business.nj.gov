@@ -15,6 +15,7 @@ import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
 import {
   searchAnytimeActionLicenseReinstatements,
+  searchCategories,
   searchFaqs,
 } from "@businessnjgovnavigator/shared/lib/search";
 import { searchAnytimeActionTasks } from "@businessnjgovnavigator/shared/lib/search/searchAnytimeActionTasks";
@@ -42,6 +43,7 @@ import {
   loadAllAnytimeActionTasks,
   loadAllArchivedCertifications,
   loadAllArchivedContextualInfo,
+  loadAllCategories,
   loadAllCertifications,
   loadAllContextualInfo,
   loadAllEnvironmentTasks,
@@ -63,6 +65,7 @@ import {
 import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
+  CategoryItem,
   Certification,
   ContextualInfoFile,
   FaqItem,
@@ -111,6 +114,7 @@ interface Props {
   formationDbaContent: FormationDbaDisplayContent;
   addOns: IndustryRoadmap[];
   industries: Industry[];
+  categories: CategoryItem[];
   faqs: FaqItem[];
 }
 
@@ -156,6 +160,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     [],
   );
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
+  const [categoryMatches, setCategoryMatches] = useState<Match[]>([]);
   const [faqMatches, setFaqMatches] = useState<Match[]>([]);
 
   const { Config } = useConfig();
@@ -280,6 +285,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       props.formationDbaContent.formationDbaContent,
     );
     setBusinessFormationMatches(searchBusinessFormation(businessFormationInfo, lowercaseTerm));
+    setCategoryMatches(searchCategories(props.categories, lowercaseTerm));
     setFaqMatches(searchFaqs(props.faqs, lowercaseTerm));
     updateSearchState({ hasSearched: true });
   };
@@ -310,6 +316,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...anytimeActionTaskMatches,
         ...anytimeActionLicenseReinstatementMatches,
         ...businessFormationMatches,
+        ...categoryMatches,
         ...faqMatches,
       ].length === 0
     );
@@ -365,6 +372,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   };
 
   const staticSiteContentCollection = {
+    Categories: categoryMatches,
     FAQs: faqMatches,
   };
 
@@ -498,6 +506,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       formationDbaContent: loadFormationDbaContent(),
       addOns: loadAllAddOns(),
       industries: getIndustries(),
+      categories: loadAllCategories(),
       faqs: loadAllFaqs(),
     },
   };

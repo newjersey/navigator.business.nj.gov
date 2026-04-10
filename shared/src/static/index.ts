@@ -2,6 +2,7 @@ export * from "./helpers";
 export * from "./loadAllAddOns";
 export * from "./loadAnytimeActionLicenseReinstatements";
 export * from "./loadAnytimeActionTasks";
+export * from "./loadCategories";
 export * from "./loadCertifications";
 export * from "./loadCmsConfig";
 export * from "./loadCommonBusinessTasks";
