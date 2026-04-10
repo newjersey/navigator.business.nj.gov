@@ -16,6 +16,7 @@ import {
   MESSAGES_TABLE,
 } from "../lib/constants";
 import { BackupStack } from "../lib/backupStack";
+import { MonitoringStack } from "../lib/monitoringStack";
 dotenv.config({ path: "../.env" });
 
 const app = new cdk.App();
@@ -39,6 +40,11 @@ const iamStack = new IamStack(app, `IamStack-${stage}`, {
 });
 
 const storageStack = new StorageStack(app, `StorageStack-${stage}`, {
+  stage,
+  env,
+});
+
+new MonitoringStack(app, `MonitoringStack-${stage}`, {
   stage,
   env,
 });

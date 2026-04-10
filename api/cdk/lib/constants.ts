@@ -11,3 +11,18 @@ export const BUSINESSES_TABLE = "businesses-table";
 export const USERS_TABLE = "users-table";
 export const MESSAGES_TABLE = "messages-table";
 export const AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY = process.env.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
+export const NAVIGATOR_WEBSERVICE = "NavigatorWebService";
+export const NAVIGATOR_DB_CLIENT = "NavigatorDBClient";
+export const HEALTH_CHECK_SERVICE = "HealthCheckService";
+export const HEALTH_CHECK_ENDPOINTS: Record<string, string> = {
+  self: "self",
+  elevator: "dynamics/elevator",
+  fireSafety: "dynamics/fire-safety",
+  housing: "dynamics/housing",
+  rgbDynamicsLicenseStatus: "rgbDynamics/license-status",
+  webserviceLicenseStatus: "webservice/license-status",
+  webserviceFormation: "webservice/formation",
+  taxClearance: "tax-clearance",
+  xrayRegistration: "xray-registration",
+  taxFilingClient: "tax-filing-client",
+};
