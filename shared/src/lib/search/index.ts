@@ -3,6 +3,7 @@ export * from "./helpers";
 export * from "./searchAnytimeActionLicenseReinstatement";
 export * from "./searchAnytimeActionTasks";
 export * from "./searchBusinessFormation";
+export * from "./searchCategories";
 export * from "./searchCertifications";
 export * from "./searchConfig";
 export * from "./searchContextualInfo";
