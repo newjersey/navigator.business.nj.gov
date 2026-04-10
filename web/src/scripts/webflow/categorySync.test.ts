@@ -11,11 +11,7 @@ import { WebflowCategoryFieldData, WebflowItem } from "./types";
 
 const {
   categoryToWebflowFormat,
-  createNewCategories,
-  deleteCategories,
   getCurrentWebflowCategories,
-  getNewCategories,
-  getUnusedCategories,
   loadAllCategoriesFromNavigator,
   updateCategories,
 } = categorySync;
@@ -196,81 +192,7 @@ describe("categorySync", () => {
 
       loadAllCategoriesFromNavigator();
 
-      expect(mockedMatter).toHaveBeenCalledTimes(2); // Only .md files
-    });
-  });
-
-  describe("getNewCategories", () => {
-    it("should return categories without webflowId", async () => {
-      const categoryWithId = generateNavigatorCategory({ webflowId: "existing-id" });
-      const categoryWithoutId = generateNavigatorCategory({ webflowId: undefined });
-
-      const result = await getNewCategories([categoryWithId, categoryWithoutId]);
-
-      expect(result).toHaveLength(1);
-      expect(result[0]).toEqual(categoryWithoutId);
-    });
-
-    it("should return empty array if all categories have webflowId", async () => {
-      const categories = [
-        generateNavigatorCategory({ webflowId: "id-1" }),
-        generateNavigatorCategory({ webflowId: "id-2" }),
-      ];
-
-      const result = await getNewCategories(categories);
-
-      expect(result).toEqual([]);
-    });
-
-    it("should return all categories if none have webflowId", async () => {
-      const categories = [
-        generateNavigatorCategory({ webflowId: undefined }),
-        generateNavigatorCategory({ webflowId: undefined }),
-      ];
-
-      const result = await getNewCategories(categories);
-
-      expect(result).toHaveLength(2);
-    });
-  });
-
-  describe("getUnusedCategories", () => {
-    it("should return Webflow categories not in Navigator", async () => {
-      const webflowCategory1 = generateWebflowCategory({ id: "webflow-1" });
-      const webflowCategory2 = generateWebflowCategory({ id: "webflow-2" });
-      const webflowCategory3 = generateWebflowCategory({ id: "webflow-3" });
-
-      mockedMethods.getAllItems.mockResolvedValue([
-        webflowCategory1,
-        webflowCategory2,
-        webflowCategory3,
-      ]);
-
-      const navigatorCategories = [
-        generateNavigatorCategory({ webflowId: "webflow-1" }),
-        generateNavigatorCategory({ webflowId: "webflow-2" }),
-      ];
-
-      const result = await getUnusedCategories(navigatorCategories);
-
-      expect(result).toHaveLength(1);
-      expect(result[0].id).toBe("webflow-3");
-    });
-
-    it("should return empty array if all Webflow categories are in Navigator", async () => {
-      const webflowCategory1 = generateWebflowCategory({ id: "webflow-1" });
-      const webflowCategory2 = generateWebflowCategory({ id: "webflow-2" });
-
-      mockedMethods.getAllItems.mockResolvedValue([webflowCategory1, webflowCategory2]);
-
-      const navigatorCategories = [
-        generateNavigatorCategory({ webflowId: "webflow-1" }),
-        generateNavigatorCategory({ webflowId: "webflow-2" }),
-      ];
-
-      const result = await getUnusedCategories(navigatorCategories);
-
-      expect(result).toEqual([]);
+      expect(mockedMatter).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -288,28 +210,6 @@ describe("categorySync", () => {
       const result = await getCurrentWebflowCategories();
 
       expect(result).toEqual(mockCategories);
-    });
-  });
-
-  describe("deleteCategories", () => {
-    it("should delete unused categories from Webflow", async () => {
-      const unusedCategory = generateWebflowCategory({ id: "unused-id" });
-      mockedMethods.getAllItems.mockResolvedValue([unusedCategory]);
-
-      const navigatorCategories = [generateNavigatorCategory({ webflowId: "different-id" })];
-
-      await deleteCategories(navigatorCategories);
-
-      expect(mockedHelpers.resolveApiPromises).toHaveBeenCalled();
-    });
-
-    it("should not attempt to delete if no unused categories", async () => {
-      mockedMethods.getAllItems.mockResolvedValue([]);
-
-      await deleteCategories([generateNavigatorCategory()]);
-
-      const calls = mockedHelpers.resolveApiPromises.mock.calls;
-      expect(calls[0][0]).toHaveLength(0); // No delete operations queued
     });
   });
 
@@ -336,55 +236,7 @@ describe("categorySync", () => {
       await updateCategories([navigatorCategory]);
 
       const calls = mockedHelpers.resolveApiPromises.mock.calls;
-      expect(calls[0][0]).toHaveLength(0); // No update operations queued
-    });
-  });
-
-  describe("createNewCategories", () => {
-    it("should create categories without webflowId", async () => {
-      const newCategory = generateNavigatorCategory({ webflowId: undefined });
-
-      await createNewCategories([newCategory]);
-
-      expect(mockedHelpers.resolveApiPromises).toHaveBeenCalled();
-    });
-
-    it("should not create categories that already have webflowId", async () => {
-      const existingCategory = generateNavigatorCategory({ webflowId: "existing-id" });
-
-      await createNewCategories([existingCategory]);
-
-      const calls = mockedHelpers.resolveApiPromises.mock.calls;
-      expect(calls[0][0]).toHaveLength(0); // No create operations queued
-    });
-
-    it("should update markdown file with webflowId after creation", async () => {
-      const newCategory = generateNavigatorCategory({
-        webflowId: undefined,
-        slug: "new-category",
-      });
-
-      const createdId = "newly-created-id";
-      mockedMethods.createItem.mockResolvedValue({
-        data: { id: createdId },
-        headers: new Headers(),
-      } as any);
-
-      mockedFs.existsSync.mockReturnValue(true);
-      mockedFs.readFileSync.mockReturnValue("---\nname: Test\nslug: new-category\n---");
-      mockedMatter.mockReturnValue({
-        data: { name: "Test", slug: "new-category" },
-        content: "",
-      } as any);
-
-      await createNewCategories([newCategory]);
-
-      // Verify resolveApiPromises was called and execute the create function
-      expect(mockedHelpers.resolveApiPromises).toHaveBeenCalled();
-      const createFunctions = mockedHelpers.resolveApiPromises.mock.calls[0][0];
-      await createFunctions[0](); // Execute the create function
-
-      expect(mockedFs.writeFileSync).toHaveBeenCalled();
+      expect(calls[0][0]).toHaveLength(0);
     });
   });
 });

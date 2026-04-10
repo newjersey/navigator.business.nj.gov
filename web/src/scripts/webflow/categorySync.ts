@@ -4,8 +4,8 @@ import matter from "gray-matter";
 import path from "path";
 import { fileURLToPath } from "url";
 import { catchRateLimitErrorAndRetry, resolveApiPromises } from "./helpers";
-import { createItem, deleteItem, getAllItems, modifyItem } from "./methods";
-import { WebflowCategoryFieldData, WebflowCreateItemResponse, WebflowItem } from "./types";
+import { getAllItems, modifyItem } from "./methods";
+import { WebflowCategoryFieldData, WebflowItem } from "./types";
 import { categoriesCollectionId } from "./webflowIds";
 
 const categoriesDir = path.resolve(
@@ -47,41 +47,6 @@ const getOverlappingCategories = (
   return currentCategories.filter((item) => categoryWebflowIds.has(item.id));
 };
 
-const getNewCategories = async (navigatorCategories: CategoryItem[]): Promise<CategoryItem[]> => {
-  return navigatorCategories.filter((category) => !category.webflowId);
-};
-
-const getUnusedCategories = async (
-  navigatorCategories: CategoryItem[],
-): Promise<WebflowItem<WebflowCategoryFieldData>[]> => {
-  const current = await getCurrentWebflowCategories();
-  const categoryWebflowIds = new Set(
-    navigatorCategories
-      .filter((category) => category.webflowId !== undefined)
-      .map((category) => category.webflowId as string),
-  );
-  return current.filter((item) => !categoryWebflowIds.has(item.id));
-};
-
-const deleteCategories = async (navigatorCategories: CategoryItem[]): Promise<void> => {
-  const categories = await getUnusedCategories(navigatorCategories);
-
-  const deleteCategory = async (category: WebflowItem<WebflowCategoryFieldData>): Promise<void> => {
-    console.info(`Attempting to delete ${category.fieldData.slug}`);
-    try {
-      await deleteItem(category.id, categoriesCollectionId);
-    } catch (error) {
-      await catchRateLimitErrorAndRetry(error, deleteItem, category.id, categoriesCollectionId);
-    }
-  };
-
-  const categoryPromises = categories.map((item): (() => Promise<void>) => {
-    return (): Promise<void> => deleteCategory(item);
-  });
-
-  await resolveApiPromises(categoryPromises);
-};
-
 const updateCategories = async (navigatorCategories: CategoryItem[]): Promise<void> => {
   const currentCategories = await getCurrentWebflowCategories();
   const overlappingCategories = getOverlappingCategories(currentCategories, navigatorCategories);
@@ -110,38 +75,6 @@ const updateCategories = async (navigatorCategories: CategoryItem[]): Promise<vo
 
   const categoryPromises = overlappingCategories.map((item): (() => Promise<void>) => {
     return (): Promise<void> => modify(item);
-  });
-
-  await resolveApiPromises(categoryPromises);
-};
-
-const createNewCategories = async (navigatorCategories: CategoryItem[]): Promise<void> => {
-  const newCategories = await getNewCategories(navigatorCategories);
-
-  const create = async (category: CategoryItem): Promise<void> => {
-    console.info(`Attempting to create ${category.slug}`);
-    const webflowCategory = categoryToWebflowFormat(category);
-
-    let result;
-    try {
-      result = await createItem(webflowCategory, categoriesCollectionId, false);
-    } catch (error) {
-      result = await catchRateLimitErrorAndRetry(
-        error,
-        createItem,
-        webflowCategory,
-        categoriesCollectionId,
-        false,
-      );
-    }
-
-    if (result && (result.data as WebflowCreateItemResponse).id && !category.webflowId) {
-      updateCategoryFileWithWebflowId(category.slug, (result.data as WebflowCreateItemResponse).id);
-    }
-  };
-
-  const categoryPromises = newCategories.map((item): (() => Promise<void>) => {
-    return (): Promise<void> => create(item);
   });
 
   await resolveApiPromises(categoryPromises);
@@ -180,14 +113,8 @@ const syncCategories = async (): Promise<void> => {
 
   console.log(`Found ${navigatorCategories.length} Categories in Navigator`);
 
-  console.log("Deleting unused Categories from Webflow");
-  await deleteCategories(navigatorCategories);
-
   console.log("Updating existing Categories in Webflow");
   await updateCategories(navigatorCategories);
-
-  console.log("Creating new Categories in Webflow");
-  await createNewCategories(navigatorCategories);
 
   console.log("Complete Category Sync!");
 };
@@ -205,11 +132,7 @@ const main = async (): Promise<void> => {
 
 export {
   categoryToWebflowFormat,
-  createNewCategories,
-  deleteCategories,
   getCurrentWebflowCategories,
-  getNewCategories,
-  getUnusedCategories,
   loadAllCategoriesFromNavigator,
   syncCategories,
   updateCategories,
