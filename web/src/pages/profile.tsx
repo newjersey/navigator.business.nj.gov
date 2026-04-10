@@ -55,7 +55,7 @@ import {
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
+import { type ApiError, postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -83,6 +83,7 @@ import {
   ForeignBusinessType,
   FormationAddress,
   formationTaskId,
+  GovDeliveryErrorType,
   hasCompletedFormation,
   LookupLegalStructureById,
   Municipality,
@@ -128,9 +129,11 @@ const ProfilePage = (props: Props): ReactElement => {
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] =
     useState<boolean>(false);
+  const [govDeliveryError, setGovDeliveryError] = useState<GovDeliveryErrorType | null>(null);
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
+  const clearUserDataError = userDataFromHook.clearUserDataError;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
@@ -358,6 +361,7 @@ const ProfilePage = (props: Props): ReactElement => {
       analytics.event.profile_save.click.save_profile_changes();
 
       setIsLoading(true);
+      setGovDeliveryError(null);
 
       sendOnSaveAnalytics(business.profileData, profileData);
 
@@ -385,6 +389,7 @@ const ProfilePage = (props: Props): ReactElement => {
             setIsLoading(false);
             setIsSavingFromModal(false);
             setAlert("SUCCESS");
+            setGovDeliveryError(null);
             if (postSaveRedirectUrl) {
               allowNavigation();
               await router?.push(postSaveRedirectUrl);
@@ -394,9 +399,14 @@ const ProfilePage = (props: Props): ReactElement => {
               await redirect({ success: true });
             }
           })
-          .catch(() => {
+          .catch((error) => {
             setIsLoading(false);
             setIsSavingFromModal(false);
+            const { data } = error as ApiError;
+            if (data?.govDeliveryError) {
+              setGovDeliveryError(data.govDeliveryError as GovDeliveryErrorType);
+              clearUserDataError();
+            }
           });
       })();
     },
@@ -519,7 +529,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -620,7 +635,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: <></>,
     numbers: (
@@ -745,7 +765,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -900,7 +925,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -1000,7 +1030,12 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">

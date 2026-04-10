@@ -23,6 +23,7 @@ import {
   postUserData,
   postUserEmailCheck,
   sendEnvironmentPermitEmail,
+  type ApiError,
 } from "./apiClient";
 
 jest.mock("axios");
@@ -157,6 +158,15 @@ describe("apiClient", () => {
     expect(mockAxios.post).toHaveBeenCalledWith("/api/postTaxClearanceCertificate", userData, {
       headers: { Authorization: "Bearer some-token" },
     });
+  });
+
+  it("throws an ApiError with status and data when a post request fails", async () => {
+    mockAxios.post.mockRejectedValue({
+      response: { status: 422, data: { message: "Unprocessable" } },
+    });
+    const error = await postUserEmailCheck("someone@example.com").catch((error_) => error_);
+    expect((error as ApiError).status).toBe(422);
+    expect((error as ApiError).data).toEqual({ message: "Unprocessable" });
   });
 
   it("gets employer rates request", async () => {
