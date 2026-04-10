@@ -304,7 +304,7 @@ jobs:
     uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@main
     secrets: inherit
     permissions:
-      contents: read
+      contents: write
       id-token: write
     needs:
       - build
