@@ -2,6 +2,7 @@
 const AWSCrypto = require("@aws-crypto/client-node");
 import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
 import { CryptoClient } from "@domain/types";
+import { NonSharedBuffer } from "node:buffer";
 import * as crypto from "node:crypto";
 import { TextDecoder } from "node:util";
 
@@ -18,7 +19,7 @@ export const cryptoUtils: { pbkdf2: typeof crypto.pbkdf2 } = {
     iterations: number,
     keylen: number,
     digest: string,
-    callback: (err: Error | null, derivedKey: Buffer) => void,
+    callback: (err: Error | null, derivedKey: NonSharedBuffer) => void,
   ) => {
     return crypto.pbkdf2(password, salt, iterations, keylen, digest, callback);
   },
