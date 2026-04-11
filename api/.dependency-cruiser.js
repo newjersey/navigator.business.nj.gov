@@ -132,6 +132,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "buffer" },
+    },
+    {
+      from: {},
       to: { path: "crypto" },
     },
     {
