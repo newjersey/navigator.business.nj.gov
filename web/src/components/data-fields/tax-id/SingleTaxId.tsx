@@ -10,11 +10,10 @@ import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { InputAdornment, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-interface Props
-  extends Omit<
-    ProfileDataFieldProps,
-    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
-  > {
+interface Props extends Omit<
+  ProfileDataFieldProps,
+  "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+> {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: () => ReactElement;
   taxIdDisplayStatus: ShowHideStatus;
