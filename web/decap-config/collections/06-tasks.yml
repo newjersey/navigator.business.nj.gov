@@ -2674,3 +2674,23 @@ collections:
           - { label: CRTK Info Shared Pt One, name: crtkInfoSharedPtOne, widget: string }
           - { label: CRTK Info Shared Pt Two, name: crtkInfoSharedPtTwo, widget: string }
           - { label: CRTK Info Shared Pt Three, name: crtkInfoSharedPtThree, widget: string }
+  - name: "select-industry-task"
+    label: "Tasks - Select Industry"
+    delete: false
+    create: false
+    files:
+      - label: "Select Industry Task - Get Your Business Licenses and Permits"
+        name: "select-industry-task"
+        file: content/src/fieldConfig/select-industry-task.json
+        editor:
+          preview: true
+        fields:
+          - label: Select Industry Task Config
+            name: selectIndustryTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Success Alert, name: successAlert, widget: markdown }
+              - { label: Content, name: content, widget: markdown }
+              - { label: Info Callout, name: infoCallout, widget: markdown }
+              - { label: Save Button Text, name: save, widget: string }
