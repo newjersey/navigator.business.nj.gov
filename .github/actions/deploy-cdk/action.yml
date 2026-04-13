@@ -20,6 +20,17 @@ runs:
           --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess || \
           echo "Bootstrap already completed or not required."
 
+    - name: Import Monitoring resources in CDK MonitoringStack
+      shell: bash
+      run: |
+        echo "Importing monitoring resources for stage: $STAGE"
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy MonitoringStack-${{ env.STAGE }} \
+          --import-existing-resources \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
     - name: Deploy CDK
       shell: bash
       run: |
