@@ -102,6 +102,7 @@ export class MonitoringStack extends Stack {
         statistic: "Sum",
         period: Duration.seconds(120),
       });
+      dataMigrationTopic.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       const dataMigrationAlarm = new cloudwatch.Alarm(this, "DataMigrationErrorAlarm", {
         alarmName: `${props.stage}-bfs-navigator-data-migration-errors`,
@@ -114,6 +115,7 @@ export class MonitoringStack extends Stack {
       });
 
       dataMigrationAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(dataMigrationTopic));
+      dataMigrationAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       const navigatorApiErrorTopic = new sns.Topic(this, "NavigatorApiErrorTopic", {
         topicName: `bfs-navigator-errors-${props.stage}`,
@@ -129,6 +131,7 @@ export class MonitoringStack extends Stack {
         statistic: "Sum",
         period: Duration.seconds(60),
       });
+      navigatorApiErrorTopic.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       const myAccountNicUsaErrorAlarm = new cloudwatch.Alarm(this, "MyAccountNicUsaErrorAlarm", {
         alarmName: `${props.stage}-bfs-navigator-nicusa-errors`,
@@ -143,6 +146,7 @@ export class MonitoringStack extends Stack {
       myAccountNicUsaErrorAlarm.addAlarmAction(
         new cloudwatch_actions.SnsAction(navigatorApiErrorTopic),
       );
+      myAccountNicUsaErrorAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       const apiErrorMetric = apiErrorMetricFilter.metric({
         statistic: "Sum",
@@ -160,10 +164,12 @@ export class MonitoringStack extends Stack {
       });
 
       apiErrorAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      apiErrorAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       const healthCheckErrorTopic = new sns.Topic(this, "HealthCheckErrorTopic", {
         topicName: `bfs-navigator-${props.stage}-health-check-errors`,
       });
+      healthCheckErrorTopic.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       new sns.Subscription(this, "healthCheckErrorTopicSubscription", {
         topic: healthCheckErrorTopic,
@@ -183,7 +189,7 @@ export class MonitoringStack extends Stack {
           },
         });
 
-        const alarm = new cloudwatch.Alarm(this, `HealthCheckAlarm-${key}`, {
+        const healthCheckalarm = new cloudwatch.Alarm(this, `HealthCheckAlarm-${key}`, {
           alarmName: `${props.stage}-bfs-navigator-healthcheck-${key}-alarm`,
           metric,
           threshold: 1,
@@ -193,9 +199,9 @@ export class MonitoringStack extends Stack {
           treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
         });
 
-        alarm.addAlarmAction(new cloudwatch_actions.SnsAction(healthCheckErrorTopic));
-
-        alarm.addOkAction(new cloudwatch_actions.SnsAction(healthCheckErrorTopic));
+        healthCheckalarm.addAlarmAction(new cloudwatch_actions.SnsAction(healthCheckErrorTopic));
+        healthCheckalarm.addOkAction(new cloudwatch_actions.SnsAction(healthCheckErrorTopic));
+        healthCheckalarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
       }
     }
   }
