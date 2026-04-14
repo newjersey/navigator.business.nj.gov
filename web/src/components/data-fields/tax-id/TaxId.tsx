@@ -10,11 +10,10 @@ import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 
-export interface Props
-  extends Omit<
-    ProfileDataFieldProps,
-    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
-  > {
+export interface Props extends Omit<
+  ProfileDataFieldProps,
+  "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+> {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
   dbBusinessTaxId: string | undefined;
