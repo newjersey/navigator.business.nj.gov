@@ -43,9 +43,9 @@ export const Review = (props: Props): ReactElement => {
 
   const isAddressComplete = Boolean(
     business?.taxClearanceCertificateData?.addressLine1 &&
-    business?.taxClearanceCertificateData?.addressCity &&
-    business?.taxClearanceCertificateData?.addressState &&
-    business?.taxClearanceCertificateData?.addressZipCode,
+      business?.taxClearanceCertificateData?.addressCity &&
+      business?.taxClearanceCertificateData?.addressState &&
+      business?.taxClearanceCertificateData?.addressZipCode,
   );
 
   let addressValue = "";

@@ -19,10 +19,11 @@ import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 
-interface Props extends Omit<
-  ProfileDataFieldProps,
-  "fieldName" | "handleChange" | "onValidation" | "inputWidth"
-> {
+interface Props
+  extends Omit<
+    ProfileDataFieldProps,
+    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+  > {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
   taxIdDisplayStatus: ShowHideStatus;
