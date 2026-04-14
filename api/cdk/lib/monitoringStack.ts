@@ -353,14 +353,18 @@ export class MonitoringStack extends Stack {
         },
       });
 
-      const dynamoDbBusinessesLatencyAlarm = new cloudwatch.Alarm(this, "DynamoDbLatencyAlarm", {
-        alarmName: `${props.stage}-dynamodb-businesses-latency`,
-        metric: dynamoDbBusinessesLatencyMetric,
-        threshold: 30,
-        evaluationPeriods: 2,
-        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
-      });
+      const dynamoDbBusinessesLatencyAlarm = new cloudwatch.Alarm(
+        this,
+        "DynamoDbBusinessesLatencyAlarm",
+        {
+          alarmName: `${props.stage}-dynamodb-businesses-latency`,
+          metric: dynamoDbBusinessesLatencyMetric,
+          threshold: 30,
+          evaluationPeriods: 2,
+          comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+          treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+        },
+      );
 
       dynamoDbBusinessesLatencyAlarm.addAlarmAction(
         new cloudwatch_actions.SnsAction(navigatorApiErrorTopic),
