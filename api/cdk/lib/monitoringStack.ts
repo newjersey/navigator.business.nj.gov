@@ -11,6 +11,8 @@ import {
   HEALTH_CHECK_ENDPOINTS,
   USERS_TABLE,
   BUSINESSES_TABLE,
+  ECS_SERVICE_NAME,
+  ECS_CLUSTER_NAME,
 } from "./constants";
 
 export interface MonitoringStackProps extends StackProps {
@@ -374,13 +376,155 @@ export class MonitoringStack extends Stack {
       );
       dynamoDbBusinessesLatencyAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
+      const ecsTaskCountMetric = new cloudwatch.Metric({
+        namespace: "ECS/ContainerInsights",
+        metricName: "DesiredTaskCount",
+        statistic: "Average",
+        period: Duration.seconds(300),
+        dimensionsMap: {
+          ServiceName: ECS_SERVICE_NAME,
+          ClusterName: ECS_CLUSTER_NAME,
+        },
+      });
+
+      const ecsTaskCountAlarm = new cloudwatch.Alarm(this, "EcsTaskCountAlarm", {
+        alarmName: `${props.stage}-ecs-bfs-navigator-task-count`,
+        metric: ecsTaskCountMetric,
+        threshold: 2,
+        evaluationPeriods: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+      });
+
+      ecsTaskCountAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      ecsTaskCountAlarm.addOkAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      ecsTaskCountAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+      const ecsCpuMetric = new cloudwatch.Metric({
+        namespace: "AWS/ECS",
+        metricName: "CPUUtilization",
+        statistic: "Average",
+        period: Duration.seconds(300),
+        dimensionsMap: {
+          ServiceName: ECS_SERVICE_NAME,
+          ClusterName: ECS_CLUSTER_NAME,
+        },
+      });
+
+      const ecsCpuAlarm = new cloudwatch.Alarm(this, "EcsCpuAlarm", {
+        alarmName: `${props.stage}-ecs-bfs-navigator-cpu`,
+        metric: ecsCpuMetric,
+        threshold: 80,
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+      });
+
+      ecsCpuAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      ecsCpuAlarm.addOkAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      ecsCpuAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+      const ecsMemoryMetric = new cloudwatch.Metric({
+        namespace: "AWS/ECS",
+        metricName: "MemoryUtilization",
+        statistic: "Average",
+        period: Duration.seconds(300),
+        dimensionsMap: {
+          ServiceName: ECS_SERVICE_NAME,
+          ClusterName: ECS_CLUSTER_NAME,
+        },
+      });
+
+      const ecsMemoryAlarm = new cloudwatch.Alarm(this, "EcsMemoryAlarm", {
+        alarmName: `${props.stage}-ecs-bfs-navigator-memory`,
+        metric: ecsMemoryMetric,
+        threshold: 80,
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+      });
+
+      ecsMemoryAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      ecsMemoryAlarm.addOkAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      ecsMemoryAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+      const backupMetric = new cloudwatch.Metric({
+        namespace: "AWS/Backup",
+        metricName: "NumberOfBackupJobsCompleted",
+        statistic: "Sum",
+        period: Duration.hours(7),
+        dimensionsMap: {
+          BackupVaultName: "BizX_dynamodb_backups",
+        },
+      });
+
+      const backupAlarm = new cloudwatch.Alarm(this, "BackupJobAlarm", {
+        alarmName: `${props.stage}-backup-job-error`,
+        metric: backupMetric,
+        threshold: 2,
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+      });
+
+      backupAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      backupAlarm.addOkAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      backupAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+      const lambdaAnomalyAlarm = new cloudwatch.CfnAlarm(this, "LambdaAnomalyAlarm", {
+        alarmName: `${props.stage}-bfs-navigator-lambda-excessive-executions`,
+        comparisonOperator: "GreaterThanUpperThreshold",
+        evaluationPeriods: 1,
+        thresholdMetricId: "ad1",
+        treatMissingData: "notBreaching",
+
+        metrics: [
+          {
+            id: "m1",
+            metricStat: {
+              metric: {
+                namespace: "AWS/Lambda",
+                metricName: "Invocations",
+                dimensions: [
+                  {
+                    name: "FunctionName",
+                    value: `businessnjgov-api-v2-${props.stage}-express`,
+                  },
+                  {
+                    name: "Resource",
+                    value: `businessnjgov-api-v2-${props.stage}-express`,
+                  },
+                ],
+              },
+              period: 300,
+              stat: "Average",
+            },
+            returnData: false,
+          },
+          {
+            id: "ad1",
+            expression: "ANOMALY_DETECTION_BAND(m1, 2)",
+            label: "Expected Invocations",
+            returnData: true,
+          },
+        ],
+
+        alarmActions: [navigatorApiErrorTopic.topicArn],
+        okActions: [navigatorApiErrorTopic.topicArn],
+      });
+
+      lambdaAnomalyAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
       const lambdaErrorMetricFilter = new logs.MetricFilter(this, "LambdaErrorMetricFilter", {
         logGroup: expressLogGroup,
         filterName: `LambdaErrorCount-${props.stage}`,
         metricNamespace: "BFS/Navigator/Lambda",
         metricName: "LambdaErrorCount",
         filterPattern: logs.FilterPattern.literal("error"),
-        metricValue: "2",
+        metricValue: "1",
         defaultValue: 0,
       });
 
@@ -402,6 +546,30 @@ export class MonitoringStack extends Stack {
       lambdaErrorAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
       lambdaErrorAlarm.addOkAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
       lambdaErrorAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+      const lambdaDurationMetric = new cloudwatch.Metric({
+        namespace: "AWS/Lambda",
+        metricName: "Duration",
+        statistic: "Average",
+        period: Duration.seconds(180),
+        dimensionsMap: {
+          FunctionName: `businessnjgov-api-v2-${props.stage}-express`,
+        },
+      });
+
+      const lambdaDurationAlarm = new cloudwatch.Alarm(this, "LambdaDurationAlarm", {
+        alarmName: `${props.stage}-bfs-navigator-lambda-long-requests`,
+        metric: lambdaDurationMetric,
+        threshold: 2000,
+        evaluationPeriods: 2,
+        datapointsToAlarm: 2,
+        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+      });
+
+      lambdaDurationAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      lambdaDurationAlarm.addOkAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
+      lambdaDurationAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       const healthCheckErrorTopic = new sns.Topic(this, "HealthCheckErrorTopic", {
         topicName: `bfs-navigator-${props.stage}-health-check-errors`,
