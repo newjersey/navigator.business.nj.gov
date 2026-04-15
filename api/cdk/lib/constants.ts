@@ -14,6 +14,8 @@ export const AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY = process.env.AWS_CRYPTO_TAX_ID_EN
 export const NAVIGATOR_WEBSERVICE = "NavigatorWebService";
 export const NAVIGATOR_DB_CLIENT = "NavigatorDBClient";
 export const HEALTH_CHECK_SERVICE = "HealthCheckService";
+export const ECS_SERVICE_NAME = "bfs-navigator";
+export const ECS_CLUSTER_NAME = "bfs_container_cluster";
 export const HEALTH_CHECK_ENDPOINTS: Record<string, string> = {
   self: "self",
   elevator: "dynamics/elevator",
