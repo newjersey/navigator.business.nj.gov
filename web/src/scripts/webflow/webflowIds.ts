@@ -1,6 +1,7 @@
 export const siteId = "5e31b06cb76b830809358a75";
 
 export const allIndustryId = "61c48e1b3257cc374781ee12";
+export const categoriesCollectionId = "5e31b06cb76b8347b8358ae7";
 export const certificationCollectionId = "63efba2368f2ae1b10abe579";
 export const faqCollectionId = "5e31b06cb76b83a29d358b62";
 export const fundingCollectionId = "6112e6b88aa567fdbc725ffc";
