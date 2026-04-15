@@ -498,7 +498,7 @@ export class MonitoringStack extends Stack {
               period: 300,
               stat: "Sum",
             },
-            returnData: false,
+            returnData: true,
           },
           {
             id: "ad1",
@@ -507,7 +507,6 @@ export class MonitoringStack extends Stack {
             returnData: true,
           },
         ],
-
         alarmActions: [navigatorApiErrorTopic.topicArn],
         okActions: [navigatorApiErrorTopic.topicArn],
       });
