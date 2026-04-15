@@ -9,8 +9,12 @@ describe("LambdaStack", () => {
   let stack: LambdaStack;
   let template: Template;
   let iamStack: IamStack;
+  let originalCognitoIdentityPoolId: string | undefined;
 
   beforeEach(() => {
+    originalCognitoIdentityPoolId = process.env.COGNITO_IDENTITY_POOL_ID;
+    process.env.COGNITO_IDENTITY_POOL_ID = "us-east-1:single-pool-id";
+
     app = new App();
     iamStack = new IamStack(app, "TestIamStack", { stage: "local" } as IamStackProps);
     const defaultProps: LambdaStackProps = {
@@ -28,6 +32,14 @@ describe("LambdaStack", () => {
 
     stack = new LambdaStack(app, "TestLambdaStack", defaultProps);
     template = Template.fromStack(stack);
+  });
+
+  afterEach(() => {
+    if (originalCognitoIdentityPoolId === undefined) {
+      delete process.env.COGNITO_IDENTITY_POOL_ID;
+    } else {
+      process.env.COGNITO_IDENTITY_POOL_ID = originalCognitoIdentityPoolId;
+    }
   });
 
   test("creates the express Lambda with correct environment variables", () => {

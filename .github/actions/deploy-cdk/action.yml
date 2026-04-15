@@ -31,6 +31,17 @@ runs:
           --region us-east-1 \
           --require-approval never
 
+    - name: Import IAM resources in CDK IamStack
+      shell: bash
+      run: |
+        echo "Importing IAM resources for stage: $STAGE"
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy IamStack-${{ env.STAGE }} \
+          --import-existing-resources \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
     - name: Deploy CDK
       shell: bash
       run: |
