@@ -5195,7 +5195,7 @@ __metadata:
     cors: 2.8.6
     cross-env: 10.1.0
     cspell: 9.7.0
-    cypress: 15.13.0
+    cypress: 15.13.1
     cypress-axe: 1.7.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -5402,7 +5402,7 @@ __metadata:
     copy-webpack-plugin: 13.0.1
     cross-env: 10.1.0
     cspell: 9.7.0
-    cypress: 15.13.0
+    cypress: 15.13.1
     cypress-axe: 1.7.0
     cypress-dotenv: 3.0.1
     cypress-wait-until: 3.0.2
@@ -19208,9 +19208,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:15.13.0":
-  version: 15.13.0
-  resolution: "cypress@npm:15.13.0"
+"cypress@npm:15.13.1":
+  version: 15.13.1
+  resolution: "cypress@npm:15.13.1"
   dependencies:
     "@cypress/request": ^3.0.10
     "@cypress/xvfb": ^1.2.4
@@ -19257,7 +19257,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 60425bdcd85373874c725da392dc4beded48043298b2b22bda055fc616ace8803f2386ef282372d0fb2639ee639e1a09ca7c1e9b1e50555fc1fc6dc5308ef28c
+  checksum: 4d925fbc00eff44dc0abef14c4cc9febe0341e77042b14b5265ada1af50cf68d1dd7ea4913ef80c8dc612b57d5d39e0dc4aa65d2ef9664854ad220f05f170608
   languageName: node
   linkType: hard
 
