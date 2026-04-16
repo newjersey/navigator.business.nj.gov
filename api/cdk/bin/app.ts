@@ -44,7 +44,7 @@ const storageStack = new StorageStack(app, `StorageStack-${stage}`, {
   env,
 });
 
-new MonitoringStack(app, `MonitoringStack-${stage}`, {
+const monitoringStack = new MonitoringStack(app, `MonitoringStack-${stage}`, {
   stage,
   env,
 });
@@ -95,6 +95,7 @@ const lambdaStack = new LambdaStack(app, `LambdaStack-${stage}`, {
   lambdaRole: iamStack.role,
   messagesBucket: storageStack.messagesBucket,
   intercomMacrosBucket: stage === DEV_STAGE ? storageStack.intercomMacrosBucket : undefined,
+  migrationLambdaTopic: monitoringStack.migrationLambdaTopic,
   env,
 });
 
