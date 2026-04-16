@@ -5067,9 +5067,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/react-email@workspace:api/src/functions/messagingService/reactEmail"
   dependencies:
-    "@react-email/components": 1.0.10
+    "@react-email/components": 1.0.12
     "@react-email/preview-server": 5.2.10
-    "@react-email/render": 2.0.4
+    "@react-email/render": 2.0.6
     react: 18.3.1
     react-dom: 18.3.1
     react-email: 5.0.6
@@ -5119,9 +5119,9 @@ __metadata:
     "@newjersey/njwds": 0.3.0
     "@next/bundle-analyzer": 16.1.6
     "@next/eslint-plugin-next": 15.5.12
-    "@react-email/components": 1.0.10
+    "@react-email/components": 1.0.12
     "@react-email/preview-server": 5.2.10
-    "@react-email/render": 2.0.4
+    "@react-email/render": 2.0.6
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@smithy/node-http-handler": 4.4.14
@@ -10254,9 +10254,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/components@npm:1.0.10":
-  version: 1.0.10
-  resolution: "@react-email/components@npm:1.0.10"
+"@react-email/components@npm:1.0.12":
+  version: 1.0.12
+  resolution: "@react-email/components@npm:1.0.12"
   dependencies:
     "@react-email/body": 0.3.0
     "@react-email/button": 0.2.1
@@ -10273,14 +10273,14 @@ __metadata:
     "@react-email/link": 0.0.13
     "@react-email/markdown": 0.0.18
     "@react-email/preview": 0.0.14
-    "@react-email/render": 2.0.4
+    "@react-email/render": 2.0.6
     "@react-email/row": 0.0.13
     "@react-email/section": 0.0.17
-    "@react-email/tailwind": 2.0.6
+    "@react-email/tailwind": 2.0.7
     "@react-email/text": 0.1.6
   peerDependencies:
     react: ^18.0 || ^19.0 || ^19.0.0-rc
-  checksum: 669cbcd3c3b2762e650b56b3fbbcf622b2b8873a926458fe0a86c77a9774ef26cfa415917a803c71ae02200cee6efddf6ec499765ddc81c0ffbc77cf8ea68b5e
+  checksum: 9e4eae7034e147a6515d1016bccd529e39c1c880c63d920375fffb9ca2045ea8e6df86b13146078a3b3d78554f369acb06f505c4b7acfe29c314c8c6bdc56f69
   languageName: node
   linkType: hard
 
@@ -10386,16 +10386,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/render@npm:2.0.4":
-  version: 2.0.4
-  resolution: "@react-email/render@npm:2.0.4"
+"@react-email/render@npm:2.0.6":
+  version: 2.0.6
+  resolution: "@react-email/render@npm:2.0.6"
   dependencies:
     html-to-text: ^9.0.5
     prettier: ^3.5.3
   peerDependencies:
     react: ^18.0 || ^19.0 || ^19.0.0-rc
     react-dom: ^18.0 || ^19.0 || ^19.0.0-rc
-  checksum: 8c4f8dcd821cb0a24fa7feb95c1bde3efde54b65e74a61887905b8218c35e27df938344e9c0073e35119c4606f88ac3ed5b870e27fe22162fd585cc9ae2bbf18
+  checksum: af1172406243a6b3a5bcaa9e1220bb480b0c4d2fc48ca10f31da2dcecca75c14c04ae79af312974748d5d2a9a61bfbe4dffafa04825d72e37661db5138ea0129
   languageName: node
   linkType: hard
 
@@ -10417,11 +10417,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/tailwind@npm:2.0.6":
-  version: 2.0.6
-  resolution: "@react-email/tailwind@npm:2.0.6"
+"@react-email/tailwind@npm:2.0.7":
+  version: 2.0.7
+  resolution: "@react-email/tailwind@npm:2.0.7"
   dependencies:
-    tailwindcss: 4.1.18
+    tailwindcss: ^4.1.18
   peerDependencies:
     "@react-email/body": ">=0"
     "@react-email/button": ">=0"
@@ -10456,7 +10456,7 @@ __metadata:
       optional: true
     "@react-email/preview":
       optional: true
-  checksum: 094d9a8c121b78ca0f21bfa72936a8afd4fc0e8e13d9c90f96ecb94d60333938647b5c60158e927ad9610aded75e9aefe52921ffb111843c8997f18b9057320b
+  checksum: 6973bcb85ef3f3fcf7b6a983176670da6d41c72662383bf7dd02c06c5dd483a33c72838c9b8e5dd1f867e289145105bc8adf37650f1f0e7bf0dbb54b5bfc57d9
   languageName: node
   linkType: hard
 
@@ -36806,10 +36806,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:4.1.18":
-  version: 4.1.18
-  resolution: "tailwindcss@npm:4.1.18"
-  checksum: 6e1ccc22d444177773f28080fd6f9430f39be31a93708c6d698859431a677eb5c1a7993996a03d8fcbc4c68b7c3fcbf724e02be108a63b92cadd731ef27daf6f
+"tailwindcss@npm:^4.1.18":
+  version: 4.2.2
+  resolution: "tailwindcss@npm:4.2.2"
+  checksum: 708b4f878b95f3bf44955bd1bcb047f7288775aeac90ac71898d89aeada351848d3efbb66c5eeb479c825bec03665a655f2cd1255c79622eba1f2925047971da
   languageName: node
   linkType: hard
 
