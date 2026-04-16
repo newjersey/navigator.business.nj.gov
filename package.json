@@ -110,7 +110,7 @@
     "remark-parse": "10.0.2",
     "remark-rehype": "10.1.0",
     "remark-stringify": "^11.0.0",
-    "remove-markdown": "0.6.2",
+    "remove-markdown": "0.6.3",
     "serverless-http": "3.2.0",
     "simple-oauth2": "5.1.0",
     "slick-carousel": "1.8.1",
