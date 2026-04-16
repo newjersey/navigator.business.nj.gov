@@ -20,6 +20,8 @@ export interface MonitoringStackProps extends StackProps {
 }
 
 export class MonitoringStack extends Stack {
+  public readonly migrationLambdaTopic: sns.Topic;
+
   constructor(scope: Construct, id: string, props: MonitoringStackProps) {
     super(scope, id, props);
 
@@ -132,10 +134,10 @@ export class MonitoringStack extends Stack {
       period: Duration.seconds(300),
     });
 
-    const migrationLambdaTopic = new sns.Topic(this, "migrationLambdaTopic", {
+    this.migrationLambdaTopic = new sns.Topic(this, "migrationLambdaTopic", {
       topicName: `bfs-navigator-${props.stage}-migrationLambda-Topic`,
     });
-    migrationLambdaTopic.applyRemovalPolicy(RemovalPolicy.RETAIN);
+    this.migrationLambdaTopic.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
     const killSwitchAlertsTopic = new sns.Topic(this, "KillSwitchAlertsTopic", {
       topicName: `bfs-navigator-${props.stage}-kill-switch-alerts`,
@@ -182,7 +184,7 @@ export class MonitoringStack extends Stack {
         statistic: "Sum",
         period: Duration.seconds(60),
         dimensionsMap: {
-          TopicName: migrationLambdaTopic.topicName,
+          TopicName: this.migrationLambdaTopic.topicName,
         },
       }),
       threshold: 1,

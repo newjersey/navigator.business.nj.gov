@@ -3,12 +3,14 @@ import { Match, Template } from "aws-cdk-lib/assertions";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { IamStack, IamStackProps } from "../lib/iamStack";
 import { LambdaStack, LambdaStackProps } from "../lib/lambdaStack";
+import { MonitoringStack } from "../lib/monitoringStack";
 
 describe("LambdaStack", () => {
   let app: App;
   let stack: LambdaStack;
   let template: Template;
   let iamStack: IamStack;
+  let monitoringStack: MonitoringStack;
   let originalCognitoIdentityPoolId: string | undefined;
 
   beforeEach(() => {
@@ -17,6 +19,7 @@ describe("LambdaStack", () => {
 
     app = new App();
     iamStack = new IamStack(app, "TestIamStack", { stage: "local" } as IamStackProps);
+    monitoringStack = new MonitoringStack(app, "TestMonitoringStack", { stage: "local" });
     const defaultProps: LambdaStackProps = {
       stage: "local",
       lambdaRole: iamStack.role,
@@ -28,6 +31,7 @@ describe("LambdaStack", () => {
         bucketName: "intercom-macros-bucket-local",
         grantWrite: () => {},
       } as unknown as IBucket,
+      migrationLambdaTopic: monitoringStack.migrationLambdaTopic,
     };
 
     stack = new LambdaStack(app, "TestLambdaStack", defaultProps);

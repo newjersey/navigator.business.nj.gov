@@ -26,6 +26,7 @@ export interface LambdaStackProps extends StackProps {
   lambdaRole: iam.Role;
   messagesBucket: IBucket;
   intercomMacrosBucket?: IBucket;
+  migrationLambdaTopic: sns.ITopic;
 }
 
 export class LambdaStack extends Stack {
@@ -52,7 +53,6 @@ export class LambdaStack extends Stack {
      */
 
     const adminPassword = process.env.ADMIN_PASSWORD ?? "";
-    const account_id = process.env.AWS_ACCOUNT_ID;
     const awsCryptoTaxIdEncryptionKey = process.env.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
     const awsCryptoContextStage = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
     const awsCryptoContextTaxIdEncryptionPurpose =
@@ -433,13 +433,9 @@ export class LambdaStack extends Stack {
     });
     props.messagesBucket.grantWrite(this.lambdas.messagingService);
 
-    const topic = sns.Topic.fromTopicArn(
-      this,
-      `${this.serviceName}-${props.stage}-migrationLambda-Topic`,
-      `arn:aws:sns:us-east-1:${account_id}:bfs-navigator-${props.stage}-migrationLambda-Topic`,
+    props.migrationLambdaTopic.addSubscription(
+      new subs.LambdaSubscription(this.lambdas.updateKillSwitchParameter),
     );
-
-    topic.addSubscription(new subs.LambdaSubscription(this.lambdas.updateKillSwitchParameter));
 
     exportLambdaArn(this, this.lambdas.express, "Express", props.stage);
     exportLambdaArn(this, this.lambdas.migrateUsersVersion, "MigrateUsersVersion", props.stage);
