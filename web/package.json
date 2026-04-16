@@ -173,7 +173,7 @@
     "sass-loader": "16.0.7",
     "storybook": "7.6.24",
     "style-loader": "4.0.0",
-    "ts-jest": "29.4.6",
+    "ts-jest": "29.4.9",
     "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
     "tsx": "4.21.0",
