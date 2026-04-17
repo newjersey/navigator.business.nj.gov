@@ -1,5 +1,9 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import {
+  GovDeliveryCommCloudClientType,
+  syncNewsletterSubscription,
+} from "@domain/newsletter/syncNewsletterSubscription";
+import {
   CryptoClient,
   DatabaseClient,
   TimeStampBusinessSearch,
@@ -138,6 +142,63 @@ const businessHasFormed = (userData: UserData): boolean => {
   return getCurrentBusiness(userData).formationData.getFilingResponse?.success ?? false;
 };
 
+const industryHasChanged = (userData: UserData, oldUserData: UserData): boolean => {
+  const oldBusinessData = getCurrentBusiness(oldUserData);
+  const currentBusinessData = getCurrentBusiness(userData);
+
+  return oldBusinessData.profileData.industryId !== currentBusinessData.profileData.industryId;
+};
+
+const updateLegalStructureIfNeeded = (userData: UserData, oldUserData: UserData): UserData => {
+  if (legalStructureHasChanged(oldUserData, userData)) {
+    // prevent legal structure from changing if business has been formed
+    if (businessHasFormed(oldUserData)) {
+      const oldBusiness = getCurrentBusiness(oldUserData);
+
+      return modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        profileData: {
+          ...business.profileData,
+          legalStructureId: oldBusiness.profileData.legalStructureId,
+        },
+      }));
+    }
+
+    const formationFormData =
+      userData.businesses[userData.currentBusinessId].formationData.formationFormData;
+
+    const address: FormationAddress = {
+      addressLine1: formationFormData.addressLine1,
+      addressLine2: formationFormData.addressLine2,
+      addressCity: formationFormData.addressCity,
+      addressMunicipality: formationFormData.addressMunicipality,
+      addressState: formationFormData.addressState,
+      addressCountry: formationFormData.addressCountry,
+      addressZipCode: formationFormData.addressZipCode,
+      addressProvince: formationFormData.addressProvince,
+      businessLocationType: formationFormData.businessLocationType,
+    };
+
+    return modifyCurrentBusiness(userData, (business) => ({
+      ...business,
+      formationData: {
+        formationResponse: undefined,
+        getFilingResponse: undefined,
+        completedFilingPayment: false,
+        formationFormData: {
+          ...createEmptyFormationFormData(),
+          ...address,
+        },
+        businessNameAvailability: undefined,
+        dbaBusinessNameAvailability: undefined,
+        lastVisitedPageIndex: 0,
+      },
+    }));
+  }
+
+  return userData;
+};
+
 export const userRouterFactory = (
   databaseClient: DatabaseClient,
   updateLicenseStatus: UpdateLicenseStatus,
@@ -148,6 +209,7 @@ export const userRouterFactory = (
   hashingClient: CryptoClient,
   timeStampBusinessSearch: TimeStampBusinessSearch,
   logger: LogWriterType,
+  govDeliveryCommCloudClient?: GovDeliveryCommCloudClientType,
 ): Router => {
   const router = Router();
   const encryptFields = encryptFieldsFactory(encryptionDecryptionClient, hashingClient);
@@ -274,11 +336,20 @@ export const userRouterFactory = (
       return;
     }
 
-    if (await industryHasChanged(userData)) {
+    let existingUserData: UserData | undefined;
+    try {
+      existingUserData = await databaseClient.get(userData.user.id);
+    } catch {
+      // user does not exist yet
+    }
+
+    if (existingUserData && industryHasChanged(userData, existingUserData)) {
       userData = clearTaskItemChecklists(userData);
     }
 
-    const userDataWithUpdatedLegalStructure = await updateLegalStructureIfNeeded(userData);
+    const userDataWithUpdatedLegalStructure = existingUserData
+      ? updateLegalStructureIfNeeded(userData, existingUserData)
+      : userData;
     const userDataWithAnnualFilings = getAnnualFilings(userDataWithUpdatedLegalStructure);
     const userDataWithUpdatedOperatingPhase = updateOperatingPhase(userDataWithAnnualFilings);
     const userDataWithUpdatedSidebarCards = updateRoadmapSidebarCards(
@@ -286,6 +357,22 @@ export const userRouterFactory = (
     );
     const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
+
+    if (govDeliveryCommCloudClient && existingUserData) {
+      const syncResult = await syncNewsletterSubscription(
+        existingUserData,
+        userDataWithUpdatedISO,
+        govDeliveryCommCloudClient,
+      );
+      if (!syncResult.ok) {
+        const status = StatusCodes.BAD_GATEWAY;
+        res.status(status).json({ govDeliveryError: syncResult.errorType });
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, govDeliveryError: ${syncResult.errorType}, userId: ${postedUserBodyId}, duration: ${Date.now() - requestStart}ms`,
+        );
+        return;
+      }
+    }
 
     databaseClient
       .put(userDataWithUpdatedISO)
@@ -311,75 +398,6 @@ export const userRouterFactory = (
         res.status(status).json({ error: error.message });
       });
   });
-
-  const industryHasChanged = async (userData: UserData): Promise<boolean> => {
-    try {
-      const oldUserData = await databaseClient.get(userData.user.id);
-      const oldBusinessData = getCurrentBusiness(oldUserData);
-      const currentBusinessData = getCurrentBusiness(userData);
-
-      return oldBusinessData.profileData.industryId !== currentBusinessData.profileData.industryId;
-    } catch {
-      return false;
-    }
-  };
-
-  const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
-    let oldUserData;
-    try {
-      oldUserData = await databaseClient.get(userData.user.id);
-    } catch {
-      return userData;
-    }
-
-    if (legalStructureHasChanged(oldUserData, userData)) {
-      // prevent legal structure from changing if business has been formed
-      if (businessHasFormed(oldUserData)) {
-        const oldBusiness = getCurrentBusiness(oldUserData);
-
-        return modifyCurrentBusiness(userData, (business) => ({
-          ...business,
-          profileData: {
-            ...business.profileData,
-            legalStructureId: oldBusiness.profileData.legalStructureId,
-          },
-        }));
-      }
-
-      const formationFormData =
-        userData.businesses[userData.currentBusinessId].formationData.formationFormData;
-
-      const address: FormationAddress = {
-        addressLine1: formationFormData.addressLine1,
-        addressLine2: formationFormData.addressLine2,
-        addressCity: formationFormData.addressCity,
-        addressMunicipality: formationFormData.addressMunicipality,
-        addressState: formationFormData.addressState,
-        addressCountry: formationFormData.addressCountry,
-        addressZipCode: formationFormData.addressZipCode,
-        addressProvince: formationFormData.addressProvince,
-        businessLocationType: formationFormData.businessLocationType,
-      };
-
-      return modifyCurrentBusiness(userData, (business) => ({
-        ...business,
-        formationData: {
-          formationResponse: undefined,
-          getFilingResponse: undefined,
-          completedFilingPayment: false,
-          formationFormData: {
-            ...createEmptyFormationFormData(),
-            ...address,
-          },
-          businessNameAvailability: undefined,
-          dbaBusinessNameAvailability: undefined,
-          lastVisitedPageIndex: 0,
-        },
-      }));
-    }
-
-    return userData;
-  };
 
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
     const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;

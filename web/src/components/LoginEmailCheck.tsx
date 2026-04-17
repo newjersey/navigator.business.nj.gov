@@ -4,7 +4,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { AuthContext } from "@/contexts/authContext";
-import { postUserEmailCheck } from "@/lib/api-client/apiClient";
+import { type ApiError, postUserEmailCheck } from "@/lib/api-client/apiClient";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -41,9 +41,10 @@ export const LoginEmailCheck = (): ReactElement => {
         analytics.event.check_account_next_button.submit.go_to_myNJ_login();
       }
     } catch (error) {
-      if (error === 404) {
+      const { status } = error as ApiError;
+      if (status === 404) {
         setEmailError(Config.checkAccountEmailPage.emailNotFoundError);
-      } else if (error === 500) {
+      } else if (status === 500) {
         setEmailError(Config.checkAccountEmailPage.serviceNotAvailableError);
       } else {
         setEmailError(Config.checkAccountEmailPage.defaultErrorMessage);

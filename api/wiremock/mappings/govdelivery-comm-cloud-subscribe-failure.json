@@ -1,0 +1,14 @@
+{
+  "scenarioName": "GovDeliverySubscribe",
+  "requiredScenarioState": "Failure",
+  "request": {
+    "method": "POST",
+    "urlPattern": "/api/account/.*/subscriptions.xml"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/xml"
+    }
+  }
+}

@@ -3,11 +3,14 @@ import { ContactInformationTab } from "@/components/profile/ContactInformationTa
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { GovDeliveryErrorType } from "@businessnjgovnavigator/shared";
 import { ReactElement, RefObject } from "react";
 
 interface Props {
   fieldErrors: string[];
   profileAlertRef?: RefObject<HTMLDivElement>;
+  govDeliveryError: GovDeliveryErrorType | null;
+  clearGovDeliveryError: () => void;
 }
 
 export const ContactTabPanel = (props: Props): ReactElement => {
@@ -46,7 +49,16 @@ export const ContactTabPanel = (props: Props): ReactElement => {
           </ul>
         </Alert>
       )}
-      <ContactInformationTab />
+      {props.govDeliveryError === "SUBSCRIBE_FAILED" && (
+        <Alert variant="error">{Config.profileDefaults.default.newsletterSubscribeError}</Alert>
+      )}
+      {props.govDeliveryError === "UNSUBSCRIBE_FAILED" && (
+        <Alert variant="error">{Config.profileDefaults.default.newsletterUnsubscribeError}</Alert>
+      )}
+      {props.govDeliveryError === "EMAIL_UPDATE_FAILED" && (
+        <Alert variant="error">{Config.profileDefaults.default.newsletterEmailUpdateError}</Alert>
+      )}
+      <ContactInformationTab clearGovDeliveryError={props.clearGovDeliveryError} />
     </div>
   );
 };

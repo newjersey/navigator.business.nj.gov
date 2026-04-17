@@ -26,6 +26,8 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 
+export type ApiError = { status: number | undefined; data: Record<string, unknown> | undefined };
+
 export const getUserData = async (id: string): Promise<UserData> => {
   return get<UserData>(`/users/${id}`).then((userData) => {
     setPhaseDimension(getCurrentBusiness(userData).profileData.operatingPhase);
@@ -207,7 +209,7 @@ export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> 
       return response.data;
     })
     .catch((error: AxiosError) => {
-      throw error.response?.status;
+      throw { status: error.response?.status, data: error.response?.data };
     });
 };
 
