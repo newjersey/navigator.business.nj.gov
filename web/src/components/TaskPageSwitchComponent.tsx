@@ -17,12 +17,16 @@ import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwe
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
+import { SearchBusinessNameTask } from "@/components/tasks/search-business-name/SearchBusinessNameTask";
 import { SelectIndustryTask } from "@/components/tasks/SelectIndustryTask";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { Xray } from "@/components/xray/Xray";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+import {
+  formationTaskId,
+  searchBusinessNameTaskId,
+} from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import {
   FormationDbaDisplayContent,
   Roadmap,
@@ -125,6 +129,7 @@ export const TaskPageSwitchComponent = ({
     "business-structure": (
       <BusinessStructureTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />
     ),
+    [searchBusinessNameTaskId]: <SearchBusinessNameTask task={task} />,
     [formationTaskId]: (
       <BusinessFormation
         task={getTaskFromRoadmap(roadmap, task.id)}
