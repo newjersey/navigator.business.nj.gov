@@ -63,8 +63,7 @@ export const SearchBusinessNameTask = ({ task }: Props): ReactElement => {
   const handleSetBusinessNameAvailability = (
     availability: SetStateAction<NameAvailability | undefined>,
   ): void => {
-    const resolved =
-      typeof availability === "function" ? availability(nameAvailability) : availability;
+    const resolved = availability as NameAvailability | undefined;
     setNameAvailability(resolved);
     if (resolved?.status === "AVAILABLE" && updateQueue) {
       queueUpdateTaskProgress(task.id, "COMPLETED");
