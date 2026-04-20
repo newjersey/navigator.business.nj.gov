@@ -7,6 +7,7 @@ import {
   WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
+  userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
 import {
@@ -15,7 +16,7 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -49,9 +50,19 @@ describe("<SearchBusinessNameTask />", () => {
     );
   };
 
+  const fillBothFields = (name: string): void => {
+    fillText(name);
+    fireEvent.change(screen.getByLabelText("Confirm business name"), { target: { value: name } });
+  };
+
   it("renders the search button", () => {
     renderPage();
     expect(screen.getByText(Config.searchBusinessNameTask.searchButtonText)).toBeInTheDocument();
+  });
+
+  it("renders the confirm business name input", () => {
+    renderPage();
+    expect(screen.getByLabelText("Confirm business name")).toBeInTheDocument();
   });
 
   it("pre-fills the input with profileData.businessName", () => {
@@ -62,29 +73,74 @@ describe("<SearchBusinessNameTask />", () => {
 
   it("shows the available alert after a successful search", async () => {
     renderPage();
-    fillText("Best Pizza");
+    fillBothFields("Best Pizza");
     await searchAndGetValue({ status: "AVAILABLE" });
     expect(screen.getByTestId("available-text")).toBeInTheDocument();
   });
 
   it("shows the unavailable alert when name is taken", async () => {
     renderPage();
-    fillText("Taken Name");
+    fillBothFields("Taken Name");
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
   });
 
-  it("marks task as COMPLETED when name is available", async () => {
+  it("save button is disabled initially", () => {
     renderPage();
-    fillText("Best Pizza");
+    expect(screen.getByTestId("save-business-name")).toBeDisabled();
+  });
+
+  it("save button is disabled when name is unavailable", async () => {
+    renderPage();
+    fillBothFields("Taken Name");
+    await searchAndGetValue({ status: "UNAVAILABLE" });
+    expect(screen.getByTestId("save-business-name")).toBeDisabled();
+  });
+
+  it("save button is enabled when name is available", async () => {
+    renderPage();
+    fillBothFields("Best Pizza");
     await searchAndGetValue({ status: "AVAILABLE" });
+    expect(screen.getByTestId("save-business-name")).toBeEnabled();
+  });
+
+  it("does not mark task as COMPLETED when name is available but save has not been clicked", async () => {
+    renderPage();
+    fillBothFields("Best Pizza");
+    await searchAndGetValue({ status: "AVAILABLE" });
+    expect(userDataWasNotUpdated()).toBe(true);
+  });
+
+  it("marks task as COMPLETED when save is clicked after finding an available name", async () => {
+    renderPage();
+    fillBothFields("Best Pizza");
+    await searchAndGetValue({ status: "AVAILABLE" });
+    fireEvent.click(screen.getByTestId("save-business-name"));
     expect(currentBusiness().taskProgress["search-business-name"]).toBe("COMPLETED");
+  });
+
+  it("saves the business name to profile when save is clicked", async () => {
+    renderPage();
+    fillBothFields("Best Pizza LLC");
+    await searchAndGetValue({ status: "AVAILABLE" });
+    fireEvent.click(screen.getByTestId("save-business-name"));
+    expect(currentBusiness().profileData.businessName).toBe("Best Pizza LLC");
   });
 
   it("does not mark task as COMPLETED when name is unavailable", async () => {
     renderPage();
-    fillText("Taken Name");
+    fillBothFields("Taken Name");
     await searchAndGetValue({ status: "UNAVAILABLE" });
-    expect(currentBusiness().taskProgress["search-business-name"]).not.toBe("COMPLETED");
+    expect(userDataWasNotUpdated()).toBe(true);
+  });
+
+  it("save button becomes disabled when user types a new name after finding an available one", async () => {
+    renderPage();
+    fillBothFields("Best Pizza");
+    await searchAndGetValue({ status: "AVAILABLE" });
+    expect(screen.getByTestId("save-business-name")).toBeEnabled();
+
+    fillText("New Name");
+    expect(screen.getByTestId("save-business-name")).toBeDisabled();
   });
 });
