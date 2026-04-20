@@ -110,12 +110,20 @@ const importForeignSteps = async (): Promise<GenericStep[]> => {
 
 const importAddOn = async (relativePath: string): Promise<IndustryRoadmap> => {
   if (process.env.NODE_ENV === "test") {
-    return (await import(`@/lib/roadmap/fixtures/add-ons/${relativePath}.json`)) as IndustryRoadmap;
+    let file = await import(`@/lib/roadmap/fixtures/add-ons/${relativePath}.json`);
+    if (!file) {
+      file = await import(`@/lib/roadmap/fixtures/foreign-add-ons/${relativePath}.json`);
+    }
+    return file as IndustryRoadmap;
   }
 
-  return (await import(
-    `@businessnjgovnavigator/content/roadmaps/add-ons/${relativePath}.json`
-  )) as IndustryRoadmap;
+  let file = await import(`@businessnjgovnavigator/content/roadmaps/add-ons/${relativePath}.json`);
+  if (!file) {
+    file = await import(
+      `@businessnjgovnavigator/content/roadmaps/foreign-add-ons/${relativePath}.json`
+    );
+  }
+  return file as IndustryRoadmap;
 };
 
 const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
