@@ -135,6 +135,7 @@
     "@mui/system": "5.18.0",
     "@next/bundle-analyzer": "16.1.6",
     "@next/eslint-plugin-next": "15.5.12",
+    "@open_resources/semantic-release-uv": "1.5.1",
     "@react-email/preview-server": "5.2.10",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
