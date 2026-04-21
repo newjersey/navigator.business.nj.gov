@@ -17,6 +17,7 @@ import {
   searchAnytimeActionLicenseReinstatements,
   searchCategories,
   searchFaqs,
+  searchPages,
 } from "@businessnjgovnavigator/shared/lib/search";
 import { searchAnytimeActionTasks } from "@businessnjgovnavigator/shared/lib/search/searchAnytimeActionTasks";
 import { searchBusinessFormation } from "@businessnjgovnavigator/shared/lib/search/searchBusinessFormation";
@@ -48,6 +49,7 @@ import {
   loadAllContextualInfo,
   loadAllEnvironmentTasks,
   loadAllFaqs,
+  loadAllPages,
   loadAllFilings,
   loadAllFundings,
   loadAllLicenseCalendarEvents,
@@ -70,6 +72,7 @@ import {
   ContextualInfoFile,
   FaqItem,
   Filing,
+  PageItem,
   FormationDbaDisplayContent,
   Funding,
   IndustryRoadmap,
@@ -116,6 +119,7 @@ interface Props {
   industries: Industry[];
   categories: CategoryItem[];
   faqs: FaqItem[];
+  pages: PageItem[];
 }
 
 interface SearchState {
@@ -162,6 +166,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
   const [categoryMatches, setCategoryMatches] = useState<Match[]>([]);
   const [faqMatches, setFaqMatches] = useState<Match[]>([]);
+  const [pageMatches, setPageMatches] = useState<Match[]>([]);
 
   const { Config } = useConfig();
 
@@ -287,6 +292,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setBusinessFormationMatches(searchBusinessFormation(businessFormationInfo, lowercaseTerm));
     setCategoryMatches(searchCategories(props.categories, lowercaseTerm));
     setFaqMatches(searchFaqs(props.faqs, lowercaseTerm));
+    setPageMatches(searchPages(props.pages, lowercaseTerm));
     updateSearchState({ hasSearched: true });
   };
 
@@ -318,6 +324,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...businessFormationMatches,
         ...categoryMatches,
         ...faqMatches,
+        ...pageMatches,
       ].length === 0
     );
   };
@@ -374,6 +381,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const staticSiteContentCollection = {
     Categories: categoryMatches,
     FAQs: faqMatches,
+    Pages: pageMatches,
   };
 
   const authedView = (
@@ -508,6 +516,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       industries: getIndustries(),
       categories: loadAllCategories(),
       faqs: loadAllFaqs(),
+      pages: loadAllPages(),
     },
   };
 };

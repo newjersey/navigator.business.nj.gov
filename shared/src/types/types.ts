@@ -583,6 +583,76 @@ export interface CategoryItem {
   "side-nav-active-color"?: string;
 }
 
+export interface PageItem {
+  name: string;
+  slug: string;
+  webflowId?: string;
+  category: string;
+  rank?: number;
+  "sub-heading-text"?: string;
+  "teaser-text"?: string;
+  "include-in-home-slider"?: boolean;
+  "homepage-slider-order"?: number;
+  "is-sub-page"?: boolean;
+  "primary-page"?: string;
+  "main-link-text"?: string;
+  "non-collection-link"?: string;
+  "coming-soon"?: boolean;
+  "heading-1"?: string;
+  "main-text-1"?: string;
+  "tip-1"?: string;
+  "link-text-1"?: string;
+  "link-1"?: string;
+  "heading-2"?: string;
+  "main-text-2"?: string;
+  "tip-2"?: string;
+  "link-text-2"?: string;
+  "link-2"?: string;
+  "heading-3"?: string;
+  "main-text-3"?: string;
+  "tip-3"?: string;
+  "link-text-3"?: string;
+  "link-3"?: string;
+  "heading-4"?: string;
+  "main-text-4"?: string;
+  "tip-4"?: string;
+  "link-text-4"?: string;
+  "link-4"?: string;
+  "heading-5"?: string;
+  "main-text-5"?: string;
+  "link-text-5"?: string;
+  "link-5"?: string;
+  "heading-6"?: string;
+  "main-text-6"?: string;
+  "link-text-6"?: string;
+  "link-6"?: string;
+  "heading-7"?: string;
+  "main-text-7"?: string;
+  "link-text-7"?: string;
+  "link-7"?: string;
+  "heading-8"?: string;
+  "main-text-8"?: string;
+  "link-text-8"?: string;
+  "link-8"?: string;
+  "heading-9"?: string;
+  "main-text-9"?: string;
+  "link-text-9"?: string;
+  "link-9"?: string;
+  "heading-10"?: string;
+  "main-text-10"?: string;
+  "link-text-10"?: string;
+  "link-10"?: string;
+  "heading-11"?: string;
+  "main-text-11"?: string;
+  "link-text-11"?: string;
+  "link-11"?: string;
+  "meta-data"?: string;
+  "relative-link"?: string;
+  "is-unique-page"?: boolean;
+  "navigator-button"?: boolean;
+  "open-graph"?: string;
+}
+
 export interface ActionTile {
   imgPath: string;
   tileText: string;

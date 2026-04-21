@@ -210,3 +210,76 @@ export interface WebflowCategoryFieldData {
   "side-nav-background-color"?: string;
   "side-nav-active-color"?: string;
 }
+
+export interface WebflowLinkField {
+  url: string;
+}
+
+export interface WebflowPageFieldData {
+  name: string;
+  slug: string;
+  category: string;
+  rank?: number;
+  "sub-heading-text"?: string;
+  "teaser-text"?: string;
+  "include-in-home-slider"?: boolean;
+  "homepage-slider-order"?: number;
+  "is-sub-page"?: boolean;
+  "primary-page"?: string;
+  "main-link-text"?: string;
+  "non-collection-link"?: WebflowLinkField | null;
+  "coming-soon"?: boolean;
+  "heading-1"?: string;
+  "main-text-1"?: string;
+  "tip-1"?: string;
+  "link-text-1"?: string;
+  "link-1"?: WebflowLinkField | null;
+  "heading-2"?: string;
+  "main-text-2"?: string;
+  "tip-2"?: string;
+  "link-text-2"?: string;
+  "link-2"?: WebflowLinkField | null;
+  "heading-3"?: string;
+  "main-text-3"?: string;
+  "tip-3"?: string;
+  "link-text-3"?: string;
+  "link-3"?: WebflowLinkField | null;
+  "heading-4"?: string;
+  "main-text-4"?: string;
+  "tip-4"?: string;
+  "link-text-4"?: string;
+  "link-4"?: WebflowLinkField | null;
+  "heading-5"?: string;
+  "main-text-5"?: string;
+  "link-text-5"?: string;
+  "link-5"?: WebflowLinkField | null;
+  "heading-6"?: string;
+  "main-text-6"?: string;
+  "link-text-6"?: string;
+  "link-6"?: WebflowLinkField | null;
+  "heading-7"?: string;
+  "main-text-7"?: string;
+  "link-text-7"?: string;
+  "link-7"?: WebflowLinkField | null;
+  "heading-8"?: string;
+  "main-text-8"?: string;
+  "link-text-8"?: string;
+  "link-8"?: WebflowLinkField | null;
+  "heading-9"?: string;
+  "main-text-9"?: string;
+  "link-text-9"?: string;
+  "link-9"?: WebflowLinkField | null;
+  "heading-10"?: string;
+  "main-text-10"?: string;
+  "link-text-10"?: string;
+  "link-10"?: WebflowLinkField | null;
+  "heading-11"?: string;
+  "main-text-11"?: string;
+  "link-text-11"?: string;
+  "link-11"?: WebflowLinkField | null;
+  "meta-data"?: string;
+  "relative-link"?: WebflowLinkField | null;
+  "is-unique-page"?: boolean;
+  "navigator-button"?: boolean;
+  "open-graph"?: WebflowImageField | null;
+}

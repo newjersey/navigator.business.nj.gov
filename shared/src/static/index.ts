@@ -18,6 +18,7 @@ export * from "./loadMunicipalities";
 export * from "./loadNonEssentialQuestionsJson";
 export * from "./loadOperateReferences";
 export * from "./loadPageMetadata";
+export * from "./loadPages";
 export * from "./loadStepsJson";
 export * from "./loadTaskDependencies";
 export * from "./loadTasks";
