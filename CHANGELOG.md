@@ -1,3 +1,33 @@
+# [2026.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.8.0...v2026.9.0) (2026-04-21)
+
+
+### Bug Fixes
+
+* [AB#17520](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17520) add retain policy to monitoring resources ([9a24877](https://github.com/newjersey/navigator.business.nj.gov/commit/9a24877894b49238301ad47d1c8e554609b9ffdd))
+* [AB#17520](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17520) adjusted construct name ([720a5cc](https://github.com/newjersey/navigator.business.nj.gov/commit/720a5ccbfc047d5c58e650941af560e513c117db))
+* [AB#17520](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17520) change returnData to true for anomalyAlarm ([83e6640](https://github.com/newjersey/navigator.business.nj.gov/commit/83e6640c9ba86d61da54fe8dd378b2071ea52e2c))
+* [AB#17520](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17520) Changed statistic from Average to Sum for Invocations metric ([bc5049e](https://github.com/newjersey/navigator.business.nj.gov/commit/bc5049ea2a063892bedba4751841e28684951d30))
+* add lambda feature flag for userdata endpoint ([3a7b1ac](https://github.com/newjersey/navigator.business.nj.gov/commit/3a7b1ac21d226882267342e27820e031dc851654))
+* add uv based dependencies to package.json ([b7a3c93](https://github.com/newjersey/navigator.business.nj.gov/commit/b7a3c93d14c82a52842bfb93b57cfa1a3485e413))
+* **deps:** update dependency zod to v4.3.6 ([58a297f](https://github.com/newjersey/navigator.business.nj.gov/commit/58a297f27e354ab6375c60d0effdee90fdb9ff62))
+* types mismatch ([0d61c81](https://github.com/newjersey/navigator.business.nj.gov/commit/0d61c8104fd3b622f6fd9157a50af7d6ec63d84d))
+
+
+### Features
+
+* [AB#17111](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17111) Enhanced login page ([c134989](https://github.com/newjersey/navigator.business.nj.gov/commit/c13498929d7cc3672fef08ac5ed571d177fcf7ce))
+* [AB#17111](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17111) pr review comments ([d53b5c6](https://github.com/newjersey/navigator.business.nj.gov/commit/d53b5c66a9a00ebb6e22b778f2723550fdad77a9))
+* [AB#17111](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17111) pr review comments ([449617f](https://github.com/newjersey/navigator.business.nj.gov/commit/449617ff1237268490166d92229fc5d1ce0f12a3))
+* [AB#17253](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17253) create FAQs collection, population script, and Webflow sync script ([8df525e](https://github.com/newjersey/navigator.business.nj.gov/commit/8df525e9b22cef6ca7c44a192969187210ff0529))
+* [AB#17253](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17253) populate the Decap FAQs collection with Webflow content ([e676075](https://github.com/newjersey/navigator.business.nj.gov/commit/e676075192522f2c3a49d641761fbebc673c15bf))
+* [AB#17584](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17584) AB test move industry selection from onboarding to task ([fdc11ca](https://github.com/newjersey/navigator.business.nj.gov/commit/fdc11cab5f646ef4ad1d7e0ee7d224b424023f1c))
+* [AB#17640](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17640) adopt MIT license ([#12679](https://github.com/newjersey/navigator.business.nj.gov/issues/12679)) ([83618ca](https://github.com/newjersey/navigator.business.nj.gov/commit/83618ca13863cfd3db948bb06204b1f1aafaf7e2))
+* [AB#17641](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17641) migrate Categories collection Webflow -> Decap ([a47f74f](https://github.com/newjersey/navigator.business.nj.gov/commit/a47f74fd8d3af7ec090a4c52b0c6a84b9c78b89a))
+* always print most recent migration structure ([d99343b](https://github.com/newjersey/navigator.business.nj.gov/commit/d99343bbe8512a0fd39440df16876c4d881d4758))
+* export checklist items ([80a33a3](https://github.com/newjersey/navigator.business.nj.gov/commit/80a33a35865190ed699ddce013e5448e877959ce))
+* improve migration generator to keep sample user data up to date ([0fde016](https://github.com/newjersey/navigator.business.nj.gov/commit/0fde01663d7cc6d528cc8fc0d8df8d61815bb1ee))
+* pr show feature for Slack ([bc2b46b](https://github.com/newjersey/navigator.business.nj.gov/commit/bc2b46bcf08f21c44b157447e3525509c76f2a4d))
+
 # [2026.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.7.0...v2026.8.0) (2026-04-06)
 
 ### Bug Fixes
