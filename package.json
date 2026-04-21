@@ -1,6 +1,6 @@
 {
   "name": "@businessnjgovnavigator/root",
-  "version": "2026.8.0",
+  "version": "2026.9.0",
   "description": "This is the development repository for the work-in-progress business navigator from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
@@ -135,6 +135,7 @@
     "@mui/system": "5.18.0",
     "@next/bundle-analyzer": "16.1.6",
     "@next/eslint-plugin-next": "15.5.12",
+    "@open_resources/semantic-release-uv": "1.5.1",
     "@react-email/preview-server": "5.2.10",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
