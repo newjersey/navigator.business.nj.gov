@@ -31,7 +31,7 @@
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
-    "webflow:run-sync": "yarn webflow:fundings-sync && yarn webflow:industries-sync && yarn webflow:licenses-sync && yarn webflow:faq-sync && yarn webflow:categories-sync && yarn webflow:pages-sync",
+    "webflow:run-sync": "yarn webflow:fundings-sync && yarn webflow:industries-sync && yarn webflow:licenses-sync",
     "webflow:categories-sync": "tsx ./src/scripts/webflow/categorySync.ts",
     "webflow:faq-sync": "tsx ./src/scripts/webflow/faqSync.ts",
     "webflow:fundings-sync": "tsx ./src/scripts/webflow/fundingSync.ts",
