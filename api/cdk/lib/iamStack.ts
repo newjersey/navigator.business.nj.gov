@@ -22,6 +22,7 @@ export class IamStack extends Stack {
   readonly serviceName: string;
   public readonly role: iam.Role;
   public readonly backupRole?: iam.Role;
+  public readonly taxKMSRole?: iam.Role;
   public readonly authRole?: iam.Role;
   public readonly unauthRole?: iam.Role;
 
@@ -52,6 +53,15 @@ export class IamStack extends Stack {
 
       applyStandardTags(backupRole, props.stage);
       this.backupRole = backupRole;
+
+      const taxKMSRole = new iam.Role(this, "taxKMSRole", {
+        assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
+        roleName: "iamRoleForTaxIdEncryptionAndHashing",
+        description: `Role For Lambda Functions To Access KMS Key For Encrypting, Hashing Tax Ids`,
+      });
+
+      applyStandardTags(taxKMSRole, props.stage);
+      this.taxKMSRole = taxKMSRole;
 
       const identityPoolIds: string[] =
         props.stage === DEV_STAGE
