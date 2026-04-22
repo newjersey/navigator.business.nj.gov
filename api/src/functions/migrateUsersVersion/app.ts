@@ -7,10 +7,14 @@ import {
   AWS_CRYPTO_CONTEXT_ORIGIN,
   AWS_CRYPTO_CONTEXT_STAGE,
   AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+  AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+  AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  AWS_CRYPTO_TAX_ID_HASHING_KEY,
   BUSINESSES_TABLE,
   DYNAMO_OFFLINE_PORT,
   IS_DOCKER,
+  LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
@@ -35,12 +39,34 @@ export const handler = async (): Promise<void> => {
     purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
     origin: AWS_CRYPTO_CONTEXT_ORIGIN,
   });
+
+  const LegacyAWSTaxIDEncryptionClient = AWSCryptoFactory(LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
+    stage: AWS_CRYPTO_CONTEXT_STAGE,
+    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  });
+
+  const AWSTaxIDHashingClient = AWSCryptoFactory(
+    AWS_CRYPTO_TAX_ID_HASHING_KEY,
+    {
+      stage: AWS_CRYPTO_CONTEXT_STAGE,
+      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+    },
+    AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+  );
+
   const userDataClient = DynamoUserDataClient(
     dynamoDb,
     AWSTaxIDEncryptionClient,
     USERS_TABLE,
     logger,
+    {
+      legacyTaxIdCryptoClient: LegacyAWSTaxIDEncryptionClient,
+      newHashingClient: AWSTaxIDHashingClient,
+    },
   );
+
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
   const dynamoDataClient = DynamoDataClient(
     userDataClient,
