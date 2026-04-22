@@ -7,6 +7,7 @@ import { Migrations } from "@db/migrations/migrations";
 import { type CryptoClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { MigrationClients } from "@db/migrations/types";
 
 const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -28,6 +29,7 @@ export const DynamoUserDataClient = (
   cryptoClient: CryptoClient,
   tableName: string,
   logger: LogWriterType,
+  migrationClients?: Omit<MigrationClients, "cryptoClient">,
 ): UserDataClient => {
   const migrateData = async (data: UserData, logger: LogWriterType): Promise<any> => {
     const logId = logger.GetId();
@@ -41,7 +43,7 @@ export const DynamoUserDataClient = (
             migratedData.version
           } to ${Number(migratedData.version) + 1}`,
         );
-        migratedData = await Promise.resolve(migration(migratedData, { cryptoClient }));
+        migratedData = await Promise.resolve(migration(migratedData, { cryptoClient, ...migrationClients }));
       } catch (error) {
         logger.LogError(
           `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(

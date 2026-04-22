@@ -1,6 +1,6 @@
 /**
  * TypeScript Compiler API utilities for generating a `UserData` interface
- * by fully expanding the `v190UserData` type from the migration source.
+ * by fully expanding the `v191UserData` type from the migration source.
  *
  * This lives in `scripts/` (not `src/domain/`) because it depends on
  * `typescript` (a dev dependency) and `path`, neither of which are
@@ -110,7 +110,7 @@ export const serializeType = (checker: ts.TypeChecker, type: ts.Type, depth: num
 };
 
 /**
- * Uses the TypeScript Compiler API to resolve the `v190UserData` interface and
+ * Uses the TypeScript Compiler API to resolve the `v191UserData` interface and
  * recursively inline all referenced types into a single `interface UserData { ... }`.
  * @param migrationFilePath - Absolute path to the migration `.ts` file containing the type.
  * @param tsconfigPath - Absolute path to the `tsconfig.json` to use for compilation.
@@ -139,14 +139,14 @@ export const generateTsSourceFromCompiler = (
   ts.forEachChild(sourceFile, (node) => {
     if (
       (ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node)) &&
-      node.name.text === "v190UserData"
+      node.name.text === "v191UserData"
     ) {
       userDataType = checker.getTypeAtLocation(node.name);
     }
   });
 
   if (!userDataType) {
-    throw new Error("Could not find v190UserData type");
+    throw new Error("Could not find v191UserData type");
   }
 
   const body = serializeType(checker, userDataType, 0);
