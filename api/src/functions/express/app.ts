@@ -79,6 +79,7 @@ import {
   AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
   AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   AWS_CRYPTO_TAX_ID_HASHING_KEY,
   BUSINESSES_TABLE,
   DYNAMO_OFFLINE_PORT,
@@ -308,6 +309,14 @@ const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
+const LegacyAWSTaxIDEncryptionClient = isLocal
+  ? new MockCryptoClient()
+  : AWSCryptoFactory(LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
+      stage: AWS_CRYPTO_CONTEXT_STAGE,
+      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+    });
+
 const AWSTaxIDEncryptionClient = isLocal
   ? new MockCryptoClient()
   : AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
@@ -352,6 +361,10 @@ const userDataClient = DynamoUserDataClient(
   AWSTaxIDEncryptionClient,
   USERS_TABLE,
   dataLogger,
+  {
+    legacyTaxIdCryptoClient: LegacyAWSTaxIDEncryptionClient,
+    newHashingClient: AWSTaxIDHashingClient,
+  },
 );
 const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, dataLogger);
 const dynamoDataClient = DynamoDataClient(

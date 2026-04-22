@@ -15,7 +15,7 @@ import path from "node:path";
 
 const migrationFilePath = path.resolve(
   __dirname,
-  "../src/db/migrations/v190_remove_hidden_fundings_and_certifications.ts",
+  "../src/db/migrations/v191_rotate_new_kms_keys.ts",
 );
 
 const tsconfigPath = path.resolve(__dirname, "../tsconfig.json");
