@@ -1,0 +1,84 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!**/.yarn/*",
+      "!package-lock.json",
+      "!pnpm-lock.yaml",
+      "!yarn.lock",
+      "!bun.lockb",
+      "!.claude"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "lineWidth": 100,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "warn",
+        "noExcessiveLinesPerFunction": {
+          "level": "warn",
+          "options": { "maxLines": 80 }
+        },
+        "noForEach": "warn",
+        "useArrowFunction": "error",
+        "useMaxParams": {
+          "level": "error",
+          "options": { "max": 2 }
+        }
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "style": {
+        "noCommonJs": "error",
+        "noParameterAssign": "error",
+        "noProcessEnv": "error",
+        "useConst": "error",
+        "useExportType": "error",
+        "useImportType": "error",
+        "useNodejsImportProtocol": "error",
+        "useTemplate": "warn",
+        "useThrowOnlyError": "error"
+      },
+      "suspicious": {
+        "noConsole": "warn",
+        "noExplicitAny": "error",
+        "noImportCycles": "error",
+        "noVar": "error"
+      },
+      "nursery": {
+        "noFloatingPromises": "warn",
+        "noNestedPromises": "warn",
+        "useErrorCause": "warn"
+      }
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "bracketSpacing": true,
+      "jsxQuoteStyle": "double",
+      "quoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "all"
+    }
+  }
+}

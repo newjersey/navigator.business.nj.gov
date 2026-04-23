@@ -1,0 +1,43 @@
+{
+  "name": "@businessnjgovnavigator/static-site",
+  "version": "0.0.1",
+  "description": "Business.NJ.Gov is your first stop to plan, start, operate, and grow a business in the Garden State",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newjersey/navigator.business.nj.gov.git",
+    "directory": "packages/static-site"
+  },
+  "homepage": "https://next.business.nj.gov",
+  "bugs": {
+    "url": "https://github.com/newjersey/navigator.business.nj.gov/issues"
+  },
+  "scripts": {
+    "build": "node -e \"console.log('static-site build is not implemented yet')\"",
+    "clean": "node -e \"console.log('static-site clean is not implemented yet')\"",
+    "dependency-check": "node -e \"console.log('static-site dependency-check is not implemented yet')\"",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "spellcheck": "node -e \"console.log('static-site spellcheck is not implemented yet')\"",
+    "typecheck": "node -e \"console.log('static-site typecheck is not implemented yet')\"",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "keywords": [],
+  "author": {
+    "name": "New Jersey Innovation Authority",
+    "url": "https://github.com/newjersey"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "2.4.12",
+    "husky": "9.1.7",
+    "lint-staged": "16.2.7"
+  },
+  "lint-staged": {
+    "*": "biome check --write --no-errors-on-unmatched"
+  }
+}

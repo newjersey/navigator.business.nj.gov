@@ -129,6 +129,7 @@
     "@aws-sdk/client-cognito-identity-provider": "3.777.0",
     "@aws-sdk/types": "3.893.0",
     "@babel/core": "7.29.0",
+    "@biomejs/biome": "2.4.12",
     "@businessnjgovnavigator/shared": "*",
     "@cypress-audit/lighthouse": "1.4.2",
     "@cypress-audit/pa11y": "1.4.2",
@@ -264,6 +265,7 @@
       "content",
       "shared",
       "web",
+      "packages/static-site",
       "api/cdk",
       "api/src/functions/messagingService/reactEmail"
     ]
