@@ -164,7 +164,7 @@
     "jest-environment-jsdom": "29.7.0",
     "jest-junit": "16.0.0",
     "next-router-mock": "0.9.13",
-    "prettier": "3.8.1",
+    "prettier": "3.8.3",
     "prettier-plugin-organize-imports": "4.3.0",
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
