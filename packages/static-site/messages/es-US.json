@@ -1,0 +1,348 @@
+{
+  "metadata": {
+    "title": "Business.NJ.gov | Planifique, Comience y Haga Crecer",
+    "description": "Prototipo de página principal para una experiencia de orientación empresarial impulsada por Next.js y NJWDS."
+  },
+  "landing": {
+    "skipNavigationLabel": "Saltar al contenido principal",
+    "mainContentId": "main-content",
+    "banner": {
+      "sectionAriaLabel": "Sitio web oficial del gobierno",
+      "stateSealAlt": "Sello del estado de New Jersey",
+      "stateSiteLink": {
+        "label": "Sitio oficial del estado de New Jersey",
+        "href": "https://nj.gov",
+        "isInternal": false,
+        "opensInNewTab": true
+      },
+      "governorIdentityLink": {
+        "label": "Gobernadora Mikie Sherrill • Vicegobernador Dr. Dale G. Caldwell",
+        "href": "https://nj.gov/governor/",
+        "isInternal": false,
+        "opensInNewTab": true
+      },
+      "updatesLink": {
+        "label": "Recibir actualizaciones",
+        "href": "https://nj.gov/subscribe/",
+        "isInternal": false,
+        "opensInNewTab": true
+      }
+    },
+    "header": {
+      "primaryNavigationAriaLabel": "Navegación principal",
+      "homeLink": {
+        "label": "Business.NJ.gov",
+        "href": "/",
+        "isInternal": true,
+        "opensInNewTab": false
+      },
+      "homeLinkTitle": "Inicio",
+      "homeLinkAriaLabel": "Inicio de Business.NJ.gov",
+      "siteTitle": "Business.NJ.gov",
+      "menuButtonLabel": "Menú",
+      "closeButtonAlt": "Cerrar menú",
+      "primaryItems": [
+        {
+          "kind": "link",
+          "link": {
+            "label": "Planificar",
+            "href": "/plan",
+            "isInternal": true,
+            "opensInNewTab": false
+          },
+          "isCurrent": false
+        },
+        {
+          "kind": "link",
+          "link": {
+            "label": "Comenzar",
+            "href": "/start",
+            "isInternal": true,
+            "opensInNewTab": false
+          },
+          "isCurrent": false
+        },
+        {
+          "kind": "link",
+          "link": {
+            "label": "Operar",
+            "href": "/operate",
+            "isInternal": true,
+            "opensInNewTab": false
+          },
+          "isCurrent": false
+        },
+        {
+          "kind": "link",
+          "link": {
+            "label": "Crecer",
+            "href": "/grow",
+            "isInternal": true,
+            "opensInNewTab": false
+          },
+          "isCurrent": false
+        }
+      ],
+      "secondaryLinks": [],
+      "searchAction": "/search",
+      "searchInputLabel": "Buscar en el sitio",
+      "searchSubmitIconAlt": "Buscar"
+    },
+    "hero": {
+      "sectionAriaLabel": "Introducción",
+      "callout": "Las necesidades de su negocio en New Jersey.",
+      "title": "Todo en un solo lugar.",
+      "paragraph": "Obtenga su guía personalizada para comenzar su negocio, encuentre oportunidades de financiamiento y descubra sus obligaciones fiscales.",
+      "callToActionLink": {
+        "label": "Obtenga su guía personalizada",
+        "href": "https://account.business.nj.gov/",
+        "isInternal": false,
+        "opensInNewTab": true
+      }
+    },
+    "tagline": {
+      "title": "Planifique, opere y crezca con confianza",
+      "paragraphs": [
+        "Business.NJ.gov es el recurso empresarial del estado para ayudarle a planificar, comenzar, operar y hacer crecer su negocio.",
+        "Use su cuenta para crear una hoja de ruta personalizada, seguir solicitudes y conectarse con un asesor empresarial de New Jersey sin costo."
+      ]
+    },
+    "graphicList": {
+      "items": [
+        {
+          "title": "Registro empresarial",
+          "paragraph": "Inicie su LLC, corporación o sociedad con orientación estatal paso a paso.",
+          "imageAlt": "Texto alternativo"
+        },
+        {
+          "title": "Licencias y permisos",
+          "paragraph": "Encuentre los requisitos de licencias y permisos según su industria y ubicación.",
+          "imageAlt": "Texto alternativo"
+        },
+        {
+          "title": "Nombres comerciales",
+          "paragraph": "Revise disponibilidad y reglas de nombres para su negocio en New Jersey.",
+          "imageAlt": "Texto alternativo"
+        },
+        {
+          "title": "Obligaciones del empleador",
+          "paragraph": "Conozca requisitos laborales, de nómina y de registro antes de contratar.",
+          "imageAlt": "Texto alternativo"
+        }
+      ]
+    },
+    "callToAction": {
+      "sectionId": "test-section-id",
+      "title": "Más apoyo para su negocio",
+      "intro": "¿Busca asesoría más especializada? Explore guías personalizadas gratuitas, conéctese con un asesor empresarial y reciba actualizaciones sobre programas y regulaciones relevantes para su negocio.",
+      "callToActionLink": {
+        "label": "Explorar Business.NJ.gov",
+        "href": "https://business.nj.gov/",
+        "isInternal": false,
+        "opensInNewTab": true
+      }
+    },
+    "footer": {
+      "returnToTopLabel": "Volver arriba",
+      "navigationAriaLabel": "Navegación del pie de página",
+      "primaryLinks": [
+        {
+          "link": {
+            "label": "Planificar",
+            "href": "/plan",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Comenzar",
+            "href": "/start",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Operar",
+            "href": "/operate",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Crecer",
+            "href": "/grow",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Soporte",
+            "href": "/support",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        }
+      ],
+      "agencyLogoAlt": "Logotipo de Business.NJ.gov",
+      "agencyName": "Business.NJ.gov",
+      "socialLinks": [
+        {
+          "modifier": "github",
+          "link": {
+            "label": "GitHub",
+            "href": "https://github.com/newjersey/",
+            "isInternal": false,
+            "opensInNewTab": true
+          },
+          "iconAlt": "GitHub",
+          "iconPath": "/vendor/img/usa-icons/github.svg"
+        },
+        {
+          "modifier": "facebook",
+          "link": {
+            "label": "Facebook",
+            "href": "https://www.facebook.com/BusinessNJgov",
+            "isInternal": false,
+            "opensInNewTab": true
+          },
+          "iconAlt": "Facebook",
+          "iconPath": "/vendor/img/usa-icons/facebook.svg"
+        },
+        {
+          "modifier": "youtube",
+          "link": {
+            "label": "YouTube",
+            "href": "https://www.youtube.com/@BusinessExperience-NJOOI",
+            "isInternal": false,
+            "opensInNewTab": true
+          },
+          "iconAlt": "YouTube",
+          "iconPath": "/vendor/img/usa-icons/youtube.svg"
+        }
+      ],
+      "contactHeading": "Centro de contacto de Business.NJ.gov",
+      "phoneLink": {
+        "label": "(800) CALL-GOVT",
+        "href": "tel:1-800-555-5555",
+        "isInternal": false,
+        "opensInNewTab": false
+      },
+      "emailLink": {
+        "label": "info@business.nj.gov",
+        "href": "mailto:info@business.nj.gov",
+        "isInternal": false,
+        "opensInNewTab": false
+      }
+    },
+    "identifier": {
+      "agencySectionAriaLabel": "Identificador de la agencia",
+      "stateLogoAlt": "Logotipo del estado de New Jersey",
+      "agencyLogoAlt": "Logotipo de Business.NJ.gov",
+      "domain": "business.nj.gov",
+      "disclaimerPrefix": "Un sitio web oficial del",
+      "disclaimerLink": {
+        "label": "Estado de New Jersey",
+        "href": "https://nj.gov",
+        "isInternal": false,
+        "opensInNewTab": false
+      },
+      "importantLinksAriaLabel": "Enlaces importantes",
+      "requiredLinks": [
+        {
+          "link": {
+            "label": "Gobernadora Mikie Sherrill",
+            "href": "https://nj.gov/governor/admin/about/",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Vicegobernador Dr. Dale G. Caldwell",
+            "href": "https://nj.gov/governor/admin/lt/",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Inicio de NJ",
+            "href": "https://nj.gov/",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Servicios de la A a la Z",
+            "href": "https://nj.gov/nj/gov/njgov/alphaserv.html",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Departamentos/Agencias",
+            "href": "https://nj.gov/nj/gov/deptserv/",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Preguntas frecuentes",
+            "href": "https://nj.gov/faqs/",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Contáctenos",
+            "href": "https://nj.gov/nj/feedback.html",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Aviso de privacidad",
+            "href": "https://nj.gov/nj/privacy.html",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Declaración legal y exenciones",
+            "href": "https://nj.gov/nj/legal.html",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Accesibilidad",
+            "href": "https://nj.gov/nj/accessibility.html",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Ley de Registros Públicos Abiertos (OPRA)",
+            "href": "https://nj.gov/opra/",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        }
+      ],
+      "usGovernmentSectionAriaLabel": "Información y servicios del gobierno de EE. UU.",
+      "usGovernmentDescription": "Copyright © 2026 Estado de New Jersey"
+    }
+  }
+}

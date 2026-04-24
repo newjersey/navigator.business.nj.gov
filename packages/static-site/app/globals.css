@@ -1,0 +1,30 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.nj-banner__inner ul {
+  margin: 0;
+}
+
+.usa-identifier {
+  margin-top: 0;
+}
+
+.usa-header--extended .usa-nav__secondary-links a,
+.usa-header--extended .usa-nav__secondary-links a:visited {
+  color: #dfe1e2;
+}
+
+.usa-header--extended .usa-nav__secondary-links a:hover,
+.usa-header--extended .usa-nav__secondary-links a:active {
+  color: #ffffff;
+}

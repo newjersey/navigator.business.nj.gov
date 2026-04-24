@@ -13,18 +13,22 @@
     "url": "https://github.com/newjersey/navigator.business.nj.gov/issues"
   },
   "scripts": {
-    "build": "node -e \"console.log('static-site build is not implemented yet')\"",
-    "clean": "node -e \"console.log('static-site clean is not implemented yet')\"",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "clean": "rimraf .next coverage",
     "dependency-check": "node -e \"console.log('static-site dependency-check is not implemented yet')\"",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "lint": "biome lint .",
-    "lint:fix": "biome lint --write .",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
     "check": "biome check .",
     "check:fix": "biome check --write .",
     "spellcheck": "node -e \"console.log('static-site spellcheck is not implemented yet')\"",
-    "typecheck": "node -e \"console.log('static-site typecheck is not implemented yet')\"",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "typecheck": "tsc --noemit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:accessibility": "playwright test --config=playwright.a11y.config.ts"
   },
   "keywords": [],
   "author": {
@@ -33,11 +37,35 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@axe-core/playwright": "4.11.2",
     "@biomejs/biome": "2.4.12",
+    "@playwright/test": "1.59.1",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/react": "16.3.2",
+    "@types/node": "25.6.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
+    "axe-core": "4.11.3",
+    "babel-plugin-react-compiler": "1.0.0",
     "husky": "9.1.7",
-    "lint-staged": "16.2.7"
+    "jsdom": "29.0.2",
+    "lint-staged": "16.2.7",
+    "playwright": "1.59.1",
+    "playwright-core": "1.59.1",
+    "rimraf": "6.1.3",
+    "typescript": "6.0.3",
+    "vite": "8.0.10",
+    "vitest": "4.1.5"
   },
   "lint-staged": {
     "*": "biome check --write --no-errors-on-unmatched"
+  },
+  "dependencies": {
+    "@newjersey/njwds": "2.9.1",
+    "next": "16.2.4",
+    "next-intl": "4.9.1",
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
   }
 }

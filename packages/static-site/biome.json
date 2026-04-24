@@ -4,6 +4,11 @@
     "includes": [
       "**",
       "!**/.yarn/*",
+      "!.next",
+      "!public/vendor",
+      "!coverage",
+      "!test-results",
+      "!playwright-report",
       "!package-lock.json",
       "!pnpm-lock.yaml",
       "!yarn.lock",
@@ -43,6 +48,17 @@
         "noCommonJs": "error",
         "noParameterAssign": "error",
         "noProcessEnv": "error",
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "patterns": [
+              {
+                "group": ["../**"],
+                "message": "Use @/ absolute imports instead of parent-relative imports."
+              }
+            ]
+          }
+        },
         "useConst": "error",
         "useExportType": "error",
         "useImportType": "error",
