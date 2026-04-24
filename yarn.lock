@@ -5117,8 +5117,8 @@ __metadata:
     "@mui/system": 5.18.0
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
-    "@next/bundle-analyzer": 16.1.6
-    "@next/eslint-plugin-next": 15.5.12
+    "@next/bundle-analyzer": 16.2.4
+    "@next/eslint-plugin-next": 15.5.15
     "@open_resources/semantic-release-uv": 1.5.1
     "@react-email/components": 1.0.10
     "@react-email/preview-server": 5.2.10
@@ -5354,8 +5354,8 @@ __metadata:
     "@mui/system": 5.18.0
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
-    "@next/bundle-analyzer": 16.1.6
-    "@next/eslint-plugin-next": 15.5.12
+    "@next/bundle-analyzer": 16.2.4
+    "@next/eslint-plugin-next": 15.5.15
     "@storybook/addon-actions": 7.6.24
     "@storybook/addon-designs": 7.0.9
     "@storybook/addon-docs": 7.6.24
@@ -8694,12 +8694,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:16.1.6":
-  version: 16.1.6
-  resolution: "@next/bundle-analyzer@npm:16.1.6"
+"@next/bundle-analyzer@npm:16.2.4":
+  version: 16.2.4
+  resolution: "@next/bundle-analyzer@npm:16.2.4"
   dependencies:
     webpack-bundle-analyzer: 4.10.1
-  checksum: 595b9534775fb78497494fa4c42d1156e482596dfd9fa4f040bdbf738c8f1db368749a307cfb0687275caad3c5d3d923d20abbede728c60863551b4b66842a7c
+  checksum: f76361d7be4b6a2a52d36c2c2bb2cb09a9c1ebebdc46ac3ae3dcafc0fefecd6d3126907993bdc6595a437ccc24fed7011c444a3a7d4102f4e80424bd34cba867
   languageName: node
   linkType: hard
 
@@ -8707,15 +8707,6 @@ __metadata:
   version: 16.1.7
   resolution: "@next/env@npm:16.1.7"
   checksum: 5de148c378d76f4da98d91ed5084e2bdadd9761f179dcb8b150022a0560f644cd405c5d81b88e62e6e6ef63750b4de270f171f20f2a98691674dfa761037e8f4
-  languageName: node
-  linkType: hard
-
-"@next/eslint-plugin-next@npm:15.5.12":
-  version: 15.5.12
-  resolution: "@next/eslint-plugin-next@npm:15.5.12"
-  dependencies:
-    fast-glob: 3.3.1
-  checksum: e883a9e0e73b4610844846cb0fb99071c725a6adb59243cf46a048988ed3886979d0d582f272206c24cc42c67b3e03bb97ed9d4ce141febb30d00650cf3c1c03
   languageName: node
   linkType: hard
 
