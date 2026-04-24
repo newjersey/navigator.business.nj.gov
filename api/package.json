@@ -50,7 +50,7 @@
     "@businessnjgovnavigator/shared": "*",
     "@smithy/node-http-handler": "4.4.14",
     "axios": "1.15.0",
-    "body-parser": "1.20.4",
+    "body-parser": "2.2.2",
     "cors": "2.8.6",
     "dayjs": "1.11.19",
     "dedent": "1.7.2",
