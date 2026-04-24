@@ -4,7 +4,6 @@ import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { ReviewNotEntered } from "@/components/tasks/review-screen-components/ReviewNotEntered";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -26,7 +25,7 @@ interface Props {
 export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): ReactElement => {
   const { Config } = useConfig();
   const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
-  const { state, setStepIndex } = useContext(BusinessFormationContext);
+  const { state } = useContext(BusinessFormationContext);
   const { business } = useUserData();
   const router = useRouter();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -110,7 +109,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
             </div>
             {!isReviewStep && (
               <UnStyledButton
-                onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
+                onClick={(): void => {
+                  router && router.push("/tasks/search-business-name");
+                }}
                 isUnderline
                 dataTestid="edit-business-name"
                 ariaLabel={`${Config.formation.general.editButtonText} ${Config.formation.fields.businessName.label}`}

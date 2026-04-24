@@ -35,7 +35,15 @@ import { FormationStepNames, StepperStep } from "@businessnjgovnavigator/shared/
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
-export const BusinessFormationPaginator = (): ReactElement => {
+type BusinessFormationPaginatorProps = {
+  nexusStepOffset?: number;
+  skipInitialStepSetting?: boolean;
+};
+
+export const BusinessFormationPaginator = ({
+  nexusStepOffset = 0,
+  skipInitialStepSetting = false,
+}: BusinessFormationPaginatorProps = {}): ReactElement => {
   const { updateQueue, business } = useUserData();
   const {
     state,
@@ -49,7 +57,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const { Config } = useConfig();
   const { doesStepHaveError, isStepCompleted, allCurrentErrorsForStep, getApiErrorMessage } =
     useFormationErrors();
-  const currentStepName = LookupNameByStepIndex(state.stepIndex);
+  const currentStepName = LookupNameByStepIndex(state.stepIndex - nexusStepOffset);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const stepperRef = useRef<HTMLDivElement>(null);
@@ -84,7 +92,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const { stepsWithErrors, stepStates } = determineStepsStates();
 
   const selectedStepHasErrors =
-    (state.hasBeenSubmitted && stepStates[state.stepIndex].hasError) ?? false;
+    (state.hasBeenSubmitted && stepStates[state.stepIndex - nexusStepOffset].hasError) ?? false;
 
   useEffect(() => {
     if (isMounted.current && selectedStepHasErrors) {
@@ -93,6 +101,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   }, [state.stepIndex, selectedStepHasErrors]);
 
   useMountEffect(() => {
+    if (skipInitialStepSetting) return;
     if (!business) return;
     if (
       business.formationData.lastVisitedPageIndex >
@@ -131,7 +140,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       return;
     }
 
-    const isSubmittingFromFinalStep = stepIndex >= BusinessFormationStepsConfiguration.length;
+    const isSubmittingFromFinalStep = stepIndex >= BusinessFormationStepsConfiguration.length + nexusStepOffset;
 
     if (isSubmittingFromFinalStep) {
       setHasBeenSubmitted(true);
@@ -193,14 +202,6 @@ export const BusinessFormationPaginator = (): ReactElement => {
       });
     }
 
-    if (
-      isStep("Name") &&
-      updateQueue.currentBusiness().formationData.businessNameAvailability?.status === "AVAILABLE"
-    ) {
-      updateQueue.queueProfileData({
-        businessName: updateQueue.currentBusiness().formationData.formationFormData.businessName,
-      });
-    }
   };
 
   const filterEmptyFormData = (formationFormData: FormationFormData): FormationFormData => {
@@ -240,27 +241,21 @@ export const BusinessFormationPaginator = (): ReactElement => {
     moveType: "PREVIOUS_BUTTON" | "NEXT_BUTTON" | "STEPPER",
   ): void => {
     if (moveType === "STEPPER") {
-      if (LookupNameByStepIndex(nextStepIndex) === "Name") {
-        analytics.event.business_formation_name_tab.click.arrive_on_business_formation_name_step();
-      }
-      if (LookupNameByStepIndex(nextStepIndex) === "Business") {
+      if (LookupNameByStepIndex(nextStepIndex - nexusStepOffset) === "Business") {
         analytics.event.business_formation_business_tab.click.arrive_on_business_formation_business_step();
       }
-      if (LookupNameByStepIndex(nextStepIndex) === "Contacts") {
+      if (LookupNameByStepIndex(nextStepIndex - nexusStepOffset) === "Contacts") {
         analytics.event.business_formation_contacts_tab.click.arrive_on_business_formation_contacts_step();
       }
-      if (LookupNameByStepIndex(nextStepIndex) === "Billing") {
+      if (LookupNameByStepIndex(nextStepIndex - nexusStepOffset) === "Billing") {
         analytics.event.business_formation_billing_tab.click.arrive_on_business_formation_billing_step();
       }
-      if (LookupNameByStepIndex(nextStepIndex) === "Review") {
+      if (LookupNameByStepIndex(nextStepIndex - nexusStepOffset) === "Review") {
         analytics.event.business_formation_review_tab.click.arrive_on_business_formation_review_step();
       }
     }
 
     if (moveType === "NEXT_BUTTON") {
-      if (isStep("Name")) {
-        analytics.event.business_formation_name_step_continue_button.click.arrive_on_business_formation_business_step();
-      }
       if (isStep("Business")) {
         analytics.event.business_formation_business_step_continue_button.click.arrive_on_business_formation_contacts_step();
       }
@@ -362,9 +357,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const getNextButtonText = (): string => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return `Register & ${Config.formation.general.initialNextButtonText}`;
-    } else if (state.stepIndex === 0) {
-      return Config.formation.general.initialNextButtonText;
-    } else if (state.stepIndex === BusinessFormationStepsConfiguration.length - 1) {
+    } else if (state.stepIndex === BusinessFormationStepsConfiguration.length - 1 + nexusStepOffset) {
       return Config.formation.general.submitButtonText;
     } else {
       return Config.formation.general.nextButtonText;
@@ -549,15 +542,15 @@ export const BusinessFormationPaginator = (): ReactElement => {
       <div className="margin-top-3" ref={stepperRef}>
         <HorizontalStepper
           steps={stepStates}
-          currentStep={state.stepIndex}
+          currentStep={state.stepIndex - nexusStepOffset}
           onStepClicked={(step: number): void => {
-            onMoveToStep(step, { moveType: "STEPPER" });
+            onMoveToStep(step + nexusStepOffset, { moveType: "STEPPER" });
           }}
           suppressRefocusBehavior={selectedStepHasErrors || currentStepName === "Review"}
         />
       </div>
       <div className="fg1 flex flex-column space-between" role={"tabpanel"}>
-        {BusinessFormationSteps[state.stepIndex].component}
+        {BusinessFormationSteps[state.stepIndex - nexusStepOffset].component}
         {displayButtons()}
       </div>
     </>

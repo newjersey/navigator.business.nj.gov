@@ -51,8 +51,6 @@ export const getPageHelper = async (
 
   if (isForeign) {
     await page.fillAndSubmitNexusBusinessNameStep();
-  } else {
-    await page.fillAndSubmitBusinessNameStep();
   }
   await page.submitBusinessStep();
   return page;

@@ -225,9 +225,10 @@ describe("<BusinessFormation />", () => {
     beforeEach(() => {
       useMockRouter({ isReady: true, query: { completeFiling: "true" } });
       task = generateTask({ urlSlug: "some-formation-url" });
-      formationData = generateFormationData({
+      formationData = {
+        ...generateEmptyFormationData(),
         formationResponse: generateFormationSubmitResponse({ success: true }),
-      });
+      };
     });
 
     describe("on API getFiling success", () => {
@@ -323,14 +324,21 @@ describe("<BusinessFormation />", () => {
     const profileData = generateFormationProfileData({
       legalStructureId,
     });
-    const formationData = generateEmptyFormationData();
+    const emptyFormation = generateEmptyFormationData();
+    const formationData = {
+      ...emptyFormation,
+      formationFormData: { ...emptyFormation.formationFormData, businessName: "Pizza Joint" },
+      businessNameAvailability: {
+        status: "AVAILABLE" as const,
+        similarNames: [],
+        lastUpdatedTimeStamp: "",
+      },
+    };
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
       municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
-
-    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
     const listbox = within(screen.getByRole("listbox"));
@@ -555,14 +563,21 @@ describe("<BusinessFormation />", () => {
   it("fills multi-step form, submits, and updates userData when LLP", async () => {
     const legalStructureId = "limited-liability-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = generateEmptyFormationData();
+    const emptyFormation = generateEmptyFormationData();
+    const formationData = {
+      ...emptyFormation,
+      formationFormData: { ...emptyFormation.formationFormData, businessName: "Pizza Joint" },
+      businessNameAvailability: {
+        status: "AVAILABLE" as const,
+        similarNames: [],
+        lastUpdatedTimeStamp: "",
+      },
+    };
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
       municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
-
-    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
     const listbox = within(screen.getByRole("listbox"));
@@ -780,14 +795,21 @@ describe("<BusinessFormation />", () => {
   it("fills multi-step form, submits, and updates userData when LP", async () => {
     const legalStructureId = "limited-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = generateEmptyFormationData();
+    const emptyFormation = generateEmptyFormationData();
+    const formationData = {
+      ...emptyFormation,
+      formationFormData: { ...emptyFormation.formationFormData, businessName: "Pizza Joint" },
+      businessNameAvailability: {
+        status: "AVAILABLE" as const,
+        similarNames: [],
+        lastUpdatedTimeStamp: "",
+      },
+    };
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
       municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
-
-    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
     const listbox = within(screen.getByRole("listbox"));
@@ -910,7 +932,16 @@ describe("<BusinessFormation />", () => {
   it("fills multi-step form, submits, and updates userData when corp", async () => {
     const legalStructureId = "c-corporation";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = generateEmptyFormationData();
+    const emptyFormation = generateEmptyFormationData();
+    const formationData = {
+      ...emptyFormation,
+      formationFormData: { ...emptyFormation.formationFormData, businessName: "Pizza Joint" },
+      businessNameAvailability: {
+        status: "AVAILABLE" as const,
+        similarNames: [],
+        lastUpdatedTimeStamp: "",
+      },
+    };
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
@@ -927,8 +958,6 @@ describe("<BusinessFormation />", () => {
       addressCountry: "US",
       businessLocationType: "US",
     };
-
-    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
     const listbox = within(screen.getByRole("listbox"));
@@ -1026,7 +1055,16 @@ describe("<BusinessFormation />", () => {
   it("fills multi-step form, submits, and updates userData when nonprofit", async () => {
     const legalStructureId = "nonprofit";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = generateEmptyFormationData();
+    const emptyFormation = generateEmptyFormationData();
+    const formationData = {
+      ...emptyFormation,
+      formationFormData: { ...emptyFormation.formationFormData, businessName: "Pizza Joint" },
+      businessNameAvailability: {
+        status: "AVAILABLE" as const,
+        similarNames: [],
+        lastUpdatedTimeStamp: "",
+      },
+    };
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
@@ -1043,8 +1081,6 @@ describe("<BusinessFormation />", () => {
       addressCountry: "US",
       businessLocationType: "US",
     };
-
-    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     fireEvent.mouseDown(screen.getByTestId("business-suffix-main"));
     const listbox = within(screen.getByRole("listbox"));
@@ -1278,7 +1314,7 @@ describe("<BusinessFormation />", () => {
       const dateFormat = "MM/DD/YYYY";
       const expectedDateString = getCurrentDateInNewJerseyFormatted(dateFormat);
 
-      const page = preparePage({
+      preparePage({
         business: {
           profileData: generateStartingProfileData({
             legalStructureId: "limited-liability-company",
@@ -1287,7 +1323,6 @@ describe("<BusinessFormation />", () => {
         },
         displayContent,
       });
-      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
       expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
     });
 
@@ -1298,7 +1333,7 @@ describe("<BusinessFormation />", () => {
       jest.useFakeTimers();
       jest.setSystemTime(mockDate);
 
-      const page = preparePage({
+      preparePage({
         business: {
           profileData: generateStartingProfileData({
             legalStructureId: "limited-liability-company",
@@ -1307,7 +1342,6 @@ describe("<BusinessFormation />", () => {
         },
         displayContent,
       });
-      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
       expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
     });
 
@@ -1318,7 +1352,7 @@ describe("<BusinessFormation />", () => {
       jest.useFakeTimers();
       jest.setSystemTime(mockDate);
 
-      const page = preparePage({
+      preparePage({
         business: {
           profileData: generateProfileData({
             legalStructureId: "limited-liability-company",
@@ -1328,7 +1362,6 @@ describe("<BusinessFormation />", () => {
         },
         displayContent,
       });
-      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
       expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
     });
   });

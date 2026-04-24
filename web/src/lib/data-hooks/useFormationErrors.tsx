@@ -133,7 +133,9 @@ export const useFormationErrors = (): FormationErrorsResponse => {
   };
 
   const getFieldErrorLabel = (field: FormationFields): string => {
-    return overrideErrorStateForApiErrors(errorStates[field]).label;
+    const fieldErrorState = errorStates[field as FieldsForErrorHandling];
+    if (!fieldErrorState) return "";
+    return overrideErrorStateForApiErrors(fieldErrorState)?.label ?? "";
   };
 
   const doSomeFieldsHaveError = (fields: FormationFields[]): boolean => {
@@ -174,9 +176,6 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     step: FormationStepNames,
     overrides?: { hasSubmitted: boolean },
   ): boolean => {
-    if (step === "Name") {
-      return allCurrentErrorsForStep(step, overrides).length > 0;
-    }
     if (overrides?.hasSubmitted ?? state.hasBeenSubmitted) {
       return allCurrentErrorsForStep(step, overrides).length > 0;
     } else {

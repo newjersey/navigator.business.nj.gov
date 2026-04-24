@@ -27,7 +27,7 @@ export const NexusFormationFlow = (): ReactElement => {
   useMountEffect(() => {
     if (!business) return;
     const { lastVisitedPageIndex } = business.formationData;
-    const largestValidPageIndex = BusinessFormationStepsConfiguration.length - 1;
+    const largestValidPageIndex = BusinessFormationStepsConfiguration.length;
     if (lastVisitedPageIndex > largestValidPageIndex || lastVisitedPageIndex < 0) {
       setStepIndex(0);
     } else {
@@ -77,7 +77,7 @@ export const NexusFormationFlow = (): ReactElement => {
     if (
       allowFormation(business.profileData.legalStructureId, business.profileData.businessPersona)
     ) {
-      return <BusinessFormationPaginator />;
+      return <BusinessFormationPaginator nexusStepOffset={1} skipInitialStepSetting={true} />;
     } else {
       return (
         <>

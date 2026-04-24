@@ -4,12 +4,6 @@
   "roadmapSteps": [
     {
       "step": 2,
-      "weight": 18,
-      "task": "search-business-name",
-      "required": true
-    },
-    {
-      "step": 2,
       "weight": 19,
       "task": "form-business-entity-llc",
       "required": true

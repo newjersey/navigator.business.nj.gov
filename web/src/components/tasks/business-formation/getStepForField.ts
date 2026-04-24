@@ -5,7 +5,6 @@ export const getStepForField = (field: FieldsForErrorHandling): FormationStepNam
   switch (field) {
     case "businessName":
       return "Name";
-
     case "businessSuffix":
     case "businessStartDate":
     case "foreignDateOfFormation":

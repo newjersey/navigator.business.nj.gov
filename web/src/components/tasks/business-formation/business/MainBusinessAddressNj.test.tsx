@@ -121,7 +121,7 @@ describe("<MainBusinessAddressNj />", () => {
   it("should NOT require Address fields for state business for API submission", async () => {
     const page = await getPageHelper(emptyAddress);
     await attemptApiSubmission(page);
-    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
   });
 
   describe("requires complete address", () => {

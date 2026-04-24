@@ -4,11 +4,10 @@ export const BusinessFormationStepsConfiguration: {
   name: FormationStepNames;
   stepIndex: number;
 }[] = [
-  { name: "Name", stepIndex: 0 },
-  { name: "Business", stepIndex: 1 },
-  { name: "Contacts", stepIndex: 2 },
-  { name: "Billing", stepIndex: 3 },
-  { name: "Review", stepIndex: 4 },
+  { name: "Business", stepIndex: 0 },
+  { name: "Contacts", stepIndex: 1 },
+  { name: "Billing", stepIndex: 2 },
+  { name: "Review", stepIndex: 3 },
 ];
 
 export const LookupStepIndexByName = (name: FormationStepNames): number => {

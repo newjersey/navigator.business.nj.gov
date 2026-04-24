@@ -239,15 +239,15 @@ describe("Formation - BusinessStep", () => {
     expect(page.getInputElementByLabel("Business purpose").value).toBe("some cool purpose");
   });
 
-  it("does not display dependency alert", async () => {
+  it("displays dependency alert on business step", async () => {
     await getPageHelper({}, {});
-    expect(screen.queryByTestId("dependency-alert")).not.toBeInTheDocument();
+    expect(screen.getByTestId("dependency-alert")).toBeInTheDocument();
   });
 
-  it("goes back to name step when edit business name button is clicked", async () => {
+  it("navigates to search-business-name task when edit business name button is clicked", async () => {
     await getPageHelper({}, {});
     fireEvent.click(screen.getByTestId("edit-business-name"));
-    expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+    expect(mockPush).toHaveBeenCalledWith("/tasks/search-business-name");
   });
 
   describe("Business purpose", () => {
@@ -1093,18 +1093,6 @@ describe("Formation - BusinessStep", () => {
       },
     );
 
-    it("displays business name from name check step and overrides profile", async () => {
-      const page = await getPageHelper({ businessName: "some cool name" }, {});
-
-      fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
-      await page.fillAndSubmitBusinessNameStep("another cool name");
-
-      expect(screen.getByText("another cool name", { exact: false })).toBeInTheDocument();
-      expect(screen.queryByText("some cool name", { exact: false })).not.toBeInTheDocument();
-
-      expect(screen.queryByText(Config.formation.general.notEntered)).not.toBeInTheDocument();
-    });
-
     it("displays City (Main Address) from profile data", async () => {
       await getPageHelper(
         {
@@ -1215,7 +1203,7 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
-      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.canCreateLimitedPartner.label,
       );
     });
@@ -1238,7 +1226,7 @@ describe("Formation - BusinessStep", () => {
         { canMakeDistribution: undefined },
       );
       await attemptApiSubmission(page);
-      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.canMakeDistribution.label,
       );
     });
@@ -1261,7 +1249,7 @@ describe("Formation - BusinessStep", () => {
         { canGetDistribution: undefined },
       );
       await attemptApiSubmission(page);
-      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.canGetDistribution.label,
       );
     });

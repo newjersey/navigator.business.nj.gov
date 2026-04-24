@@ -129,16 +129,12 @@ describe("<BusinessFormationPaginator />", () => {
   });
 
   describe("button text", () => {
-    it("shows unique text on button on first step", () => {
+    it("shows Save & Continue on first step", () => {
       preparePage({ business, displayContent });
-      expect(screen.getByText(Config.formation.general.initialNextButtonText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
-
-      fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
+      expect(screen.getByText(Config.formation.general.nextButtonText)).toBeInTheDocument();
       expect(
         screen.queryByText(Config.formation.general.initialNextButtonText),
       ).not.toBeInTheDocument();
-      expect(screen.getByText(Config.formation.general.nextButtonText)).toBeInTheDocument();
     });
 
     it("does not show previous button on first step", () => {
@@ -146,7 +142,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(
         screen.queryByText(Config.formation.general.previousButtonText),
       ).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
+      fireEvent.click(screen.getByText(Config.formation.general.nextButtonText));
       expect(screen.getByText(Config.formation.general.previousButtonText)).toBeInTheDocument();
     });
 
@@ -164,8 +160,6 @@ describe("<BusinessFormationPaginator />", () => {
       await page.stepperClickToBusinessStep();
       expect(screen.getByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToReviewStep();
-      expect(screen.getByTestId("help-button")).toBeInTheDocument();
-      await page.stepperClickToBusinessNameStep();
       expect(screen.getByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToBillingStep();
       expect(screen.getByTestId("help-button")).toBeInTheDocument();
@@ -203,44 +197,40 @@ describe("<BusinessFormationPaginator />", () => {
       renderAsGuest();
       fireEvent.click(screen.getByText(guestModeNextButtonText));
       expect(setShowNeedsAccountModal).toHaveBeenCalled();
-      expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("contacts-step")).not.toBeInTheDocument();
     });
 
     it("shows Needs Account modal when clicking a step in the stepper", () => {
       renderAsGuest();
       fireEvent.click(screen.getByTestId(`stepper-1`));
       expect(setShowNeedsAccountModal).toHaveBeenCalled();
-      expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("contacts-step")).not.toBeInTheDocument();
     });
   });
 
   describe("when switching steps and user has not yet submitted", () => {
-    it("displays dependency alert on first step only", async () => {
+    it("displays dependency alert on business step only", async () => {
       const page = preparePage({ business, displayContent });
       expect(screen.getByTestId("dependency-alert")).toBeInTheDocument();
-      await page.stepperClickToBusinessStep();
+      await page.stepperClickToContactsStep();
       expect(screen.queryByTestId("dependency-alert")).not.toBeInTheDocument();
     });
 
     it("switches steps when clicking the stepper", async () => {
       const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep({ useUserEvent: true });
-      expect(screen.getByTestId("stepper-2")).toHaveFocus();
-      await page.stepperClickToBusinessStep({ useUserEvent: true });
       expect(screen.getByTestId("stepper-1")).toHaveFocus();
-      await page.stepperClickToReviewStep({ useUserEvent: true });
-
-      expect(screen.getByTestId("stepper-4")).toHaveFocus();
-      await page.stepperClickToBusinessNameStep({ useUserEvent: true });
+      await page.stepperClickToBusinessStep({ useUserEvent: true });
       expect(screen.getByTestId("stepper-0")).toHaveFocus();
-      await page.stepperClickToBillingStep({ useUserEvent: true });
+      await page.stepperClickToReviewStep({ useUserEvent: true });
       expect(screen.getByTestId("stepper-3")).toHaveFocus();
+      await page.stepperClickToBillingStep({ useUserEvent: true });
+      expect(screen.getByTestId("stepper-2")).toHaveFocus();
       expect(screen.getByTestId("billing-step")).toBeInTheDocument();
     });
 
     it("switches steps when clicking the next and previous buttons", async () => {
       const page = preparePage({ business, displayContent });
-      await page.submitBusinessNameStep();
       await page.submitBusinessStep();
       await page.submitContactsStep();
       await page.submitBillingStep();
@@ -248,43 +238,6 @@ describe("<BusinessFormationPaginator />", () => {
       await waitFor(() => {
         expect(screen.getByTestId("billing-step")).toBeInTheDocument();
       });
-    });
-
-    it("switches from error-active to error, persisting the error state on step one even after switching steps", async () => {
-      const page = preparePage({ business, displayContent });
-      page.fillAndBlurBusinessName("Test Name");
-      page.fillAndBlurBusinessNameConfirmation("Test Name");
-      await page.searchBusinessName({ status: "UNAVAILABLE" });
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
-      await page.stepperClickToBusinessStep();
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
-    });
-
-    it("maintains the unavailable business name search error, even after switching steps and returning", async () => {
-      const page = preparePage({ business, displayContent });
-      page.fillAndBlurBusinessName("Test Name");
-      page.fillAndBlurBusinessNameConfirmation("Test Name");
-      await page.searchBusinessName({ status: "UNAVAILABLE" });
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
-      expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
-      await page.stepperClickToBusinessStep();
-      await page.stepperClickToBusinessNameStep();
-      expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
-    });
-
-    it("maintains the confirm business name error, even after switching steps and returning", async () => {
-      const page = preparePage({ business, displayContent });
-      page.fillAndBlurBusinessName("Test Name");
-      page.fillAndBlurBusinessNameConfirmation("Test Name");
-      expect(
-        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
-      ).toBeInTheDocument();
-      await page.stepperClickToBusinessStep();
-      await page.stepperClickToBusinessNameStep();
-      expect(
-        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch),
-      ).toBeInTheDocument();
     });
 
     const switchingStepTests = (switchStepFunction: () => void): void => {
@@ -308,70 +261,6 @@ describe("<BusinessFormationPaginator />", () => {
         ]);
         await page.stepperClickToBusinessStep();
         expect(screen.getByText(Config.formation.general.removeSectionText)).toBeInTheDocument();
-      });
-
-      describe("business name step", () => {
-        it("saves name to formation data", async () => {
-          const page = preparePage({ business, displayContent });
-          await page.stepperClickToBusinessNameStep();
-          page.fillText("Search business name", "Pizza Joint");
-          switchStepFunction();
-          expect(currentBusiness().formationData.formationFormData.businessName).toEqual(
-            "Pizza Joint",
-          );
-
-          await page.stepperClickToBusinessNameStep();
-          expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-            "Pizza Joint",
-          );
-        });
-
-        it("saves availability state when switching back to step", async () => {
-          const page = preparePage({ business, displayContent });
-          await page.stepperClickToBusinessNameStep();
-          page.fillAndBlurBusinessName("Test Name");
-          page.fillAndBlurBusinessNameConfirmation("Test Name");
-          await page.searchBusinessName({ status: "AVAILABLE" });
-          expect(screen.getByTestId("available-text")).toBeInTheDocument();
-
-          switchStepFunction();
-          await page.stepperClickToBusinessNameStep();
-          expect(screen.getByTestId("available-text")).toBeInTheDocument();
-        });
-
-        it("saves name to profile when available", async () => {
-          const page = preparePage({ business, displayContent });
-          await page.stepperClickToBusinessNameStep();
-          page.fillAndBlurBusinessName("Test Name");
-          page.fillAndBlurBusinessNameConfirmation("Test Name");
-          await page.searchBusinessName({ status: "AVAILABLE" });
-          switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual("Test Name");
-        });
-
-        it("does not save name to profile when unavailable", async () => {
-          const page = preparePage({ business, displayContent });
-          await page.stepperClickToBusinessNameStep();
-          page.fillAndBlurBusinessName("Test Name");
-          page.fillAndBlurBusinessNameConfirmation("Test Name");
-          await page.searchBusinessName({ status: "UNAVAILABLE" });
-          switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(
-            business.profileData.businessName,
-          );
-        });
-
-        it("does not save name to profile when error", async () => {
-          const page = preparePage({ business, displayContent });
-          await page.stepperClickToBusinessNameStep();
-          page.fillAndBlurBusinessName("Test Name");
-          page.fillAndBlurBusinessNameConfirmation("Test Name");
-          await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
-          switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(
-            business.profileData.businessName,
-          );
-        });
       });
 
       describe("business step", () => {
@@ -490,33 +379,6 @@ describe("<BusinessFormationPaginator />", () => {
         });
       });
 
-      it("marks step one as complete if business name is available", async () => {
-        const page = preparePage({ business, displayContent });
-        page.fillAndBlurBusinessName("Test Name");
-        page.fillAndBlurBusinessNameConfirmation("Test Name");
-        await page.searchBusinessName({ status: "AVAILABLE" });
-        switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
-      });
-
-      it("marks step one as error if business name is unavailable", async () => {
-        const page = preparePage({ business, displayContent });
-        page.fillAndBlurBusinessName("Test Name");
-        page.fillAndBlurBusinessNameConfirmation("Test Name");
-        await page.searchBusinessName({ status: "UNAVAILABLE" });
-        switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
-      });
-
-      it("marks step one as error if business name search is error", async () => {
-        const page = preparePage({ business, displayContent });
-        page.fillAndBlurBusinessName("Test Name");
-        page.fillAndBlurBusinessNameConfirmation("Test Name");
-        await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
-        switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
-      });
-
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {
         const businessWithMunicipality = {
           ...business,
@@ -571,7 +433,6 @@ describe("<BusinessFormationPaginator />", () => {
         await page.checkAllReviewCheckboxes();
         await page.clickSubmit();
 
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
         expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("ERROR");
         expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("ERROR");
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
@@ -719,7 +580,6 @@ describe("<BusinessFormationPaginator />", () => {
         );
 
         const page = preparePage({ business: filledInBusiness, displayContent });
-        await page.fillAndSubmitBusinessNameStep();
         await page.stepperClickToReviewStep();
         await page.checkAllReviewCheckboxes();
         await page.clickSubmit();
@@ -746,13 +606,13 @@ describe("<BusinessFormationPaginator />", () => {
               ],
             }),
             fieldName: "businessName",
-            formationStepName: "Name",
+            formationStepName: "Business",
             fieldLabel: "Search business name",
             newTextInput: "1234567",
           };
 
-          it("shows error alert and error state on step associated with businessName API error", async () => {
-            const { formationFormData, formationResponse, formationStepName } = businessName;
+          it("businessName API error does not block submission or show formation step error", async () => {
+            const { formationFormData, formationResponse } = businessName;
 
             filledInBusiness = {
               ...business,
@@ -771,20 +631,17 @@ describe("<BusinessFormationPaginator />", () => {
             };
 
             const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitBusinessNameStep();
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-              "COMPLETE",
-            );
-
             await page.stepperClickToReviewStep();
             await page.checkAllReviewCheckboxes();
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-              "ERROR",
-            );
+            // businessName is now managed outside the formation flow (SearchBusinessNameTask),
+            // so businessName API errors do not mark any formation step as ERROR
+            BusinessFormationStepsConfiguration.forEach(({ stepIndex }) => {
+              expect(page.getStepStateInStepper(stepIndex)).not.toEqual("ERROR");
+            });
             expect(
-              screen.getByText(Config.formation.errorBanner.incompleteStepsError),
-            ).toBeInTheDocument();
+              screen.queryByText(Config.formation.errorBanner.incompleteStepsError),
+            ).not.toBeInTheDocument();
           });
         });
 
@@ -1399,7 +1256,6 @@ describe("<BusinessFormationPaginator />", () => {
                 },
               };
               const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.checkAllReviewCheckboxes();
               await page.clickSubmit();
@@ -1454,7 +1310,6 @@ describe("<BusinessFormationPaginator />", () => {
               },
             };
             const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
             if (formationStepName === "Business") await page.stepperClickToBusinessStep();
@@ -1510,7 +1365,6 @@ describe("<BusinessFormationPaginator />", () => {
                 },
               };
               const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
@@ -1550,7 +1404,6 @@ describe("<BusinessFormationPaginator />", () => {
                 },
               };
               const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
@@ -1582,7 +1435,6 @@ describe("<BusinessFormationPaginator />", () => {
                 },
               };
               const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
@@ -1625,7 +1477,6 @@ describe("<BusinessFormationPaginator />", () => {
                 },
               };
               const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
@@ -2182,10 +2033,8 @@ describe("<BusinessFormationPaginator />", () => {
 
         it("still shows all steps as complete", async () => {
           const page = preparePage({ business: filledInBusiness, displayContent });
-          await page.fillAndSubmitBusinessNameStep();
           await page.stepperClickToReviewStep();
 
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
           expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("COMPLETE");
           expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("COMPLETE");
           expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
@@ -2246,38 +2095,11 @@ describe("<BusinessFormationPaginator />", () => {
       act(() => {
         jest.advanceTimersByTime(1000);
       });
-      page.fillText("Search business name", "Pizza Joint");
+      await page.stepperClickToBillingStep();
+      page.fillText("Contact first name", "John");
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.businessName).toEqual(
-          "Pizza Joint",
-        ),
+        expect(currentBusiness().formationData.formationFormData.contactFirstName).toEqual("John"),
       );
-    });
-
-    it("autosaves every second if business name availability has changed", async () => {
-      const businessWithName = {
-        ...business,
-        profileData: { ...business.profileData, businessName: "old-name" },
-        formationData: {
-          ...business.formationData,
-          businessNameAvailability: undefined,
-          dbaBusinessNameAvailability: undefined,
-        },
-      };
-      const page = preparePage({ business: businessWithName, displayContent });
-      act(() => {
-        jest.advanceTimersByTime(1000);
-      });
-      page.fillAndBlurBusinessName("Pizza Joint");
-      page.fillAndBlurBusinessNameConfirmation("Pizza Joint");
-      act(() => {
-        jest.advanceTimersByTime(1000);
-      });
-      await page.searchBusinessName({ status: "UNAVAILABLE" });
-      expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
-      await waitFor(() => {
-        expect(currentBusiness().formationData.businessNameAvailability).not.toBeUndefined();
-      });
     });
 
     it("does not autosave if fields have not changed", () => {
@@ -2329,8 +2151,8 @@ describe("<BusinessFormationPaginator />", () => {
       });
       makeChangeToForm(page);
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.businessName).toEqual(
-          "Pizza Joint",
+        expect(currentBusiness().formationData.formationFormData.businessPurpose).toEqual(
+          "some purpose",
         ),
       );
 
@@ -2379,14 +2201,15 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     const makeChangeToForm = (page: FormationPageHelpers): void => {
-      page.fillText("Search business name", "Pizza Joint");
+      fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
+      page.fillText("Business purpose", "some purpose");
     };
   });
 
   describe("remembers formation step", () => {
     it("shows the Business Step with an initial user when lastVisitedPage has index 0 which is by default", async () => {
       preparePage({ business, displayContent });
-      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
       });
@@ -2395,7 +2218,7 @@ describe("<BusinessFormationPaginator />", () => {
     it("shows the last formation step when lastVisitedPage has step index 4", () => {
       const legalStructureId = "limited-liability-company";
       const profileData = generateFormationProfileData({ legalStructureId });
-      const formationData = generateFormationData({ lastVisitedPageIndex: 4 });
+      const formationData = generateFormationData({ lastVisitedPageIndex: 3 });
 
       business = generateBusiness({ profileData, formationData });
       preparePage({ business, displayContent });
@@ -2404,16 +2227,16 @@ describe("<BusinessFormationPaginator />", () => {
 
     it("lastVistedPage updates on step change via stepper", async () => {
       const page = preparePage({ business, displayContent });
-      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
 
       await page.stepperClickToBillingStep();
       await waitFor(() => {
-        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(3);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(2);
       });
 
       await page.stepperClickToBusinessStep();
       await waitFor(() => {
-        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(1);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
       });
     });
 
@@ -2423,31 +2246,31 @@ describe("<BusinessFormationPaginator />", () => {
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
       });
-      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("next-button"));
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(1);
       });
-      expect(screen.getByTestId("business-step")).toBeInTheDocument();
+      expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("next-button"));
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(2);
       });
-      expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
+      expect(screen.getByTestId("billing-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("previous-button"));
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(1);
       });
-      expect(screen.getByTestId("business-step")).toBeInTheDocument();
+      expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("previous-button"));
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
       });
-      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
     });
 
     it("defaults to first formation step when we go above 4 for page index", () => {
@@ -2458,7 +2281,7 @@ describe("<BusinessFormationPaginator />", () => {
 
       business = generateBusiness({ profileData, formationData });
       preparePage({ business, displayContent });
-      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
     });
 
     it("defaults to first formation step when we go below 0 for page index", () => {
@@ -2467,7 +2290,7 @@ describe("<BusinessFormationPaginator />", () => {
 
       business = generateBusiness({ profileData, formationData });
       preparePage({ business, displayContent });
-      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
     });
   });
 
@@ -2475,31 +2298,23 @@ describe("<BusinessFormationPaginator />", () => {
     it("Moves focus when using arrow keys in Stepper", async () => {
       const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep({ useUserEvent: true });
-      expect(screen.getByTestId("stepper-2")).toHaveFocus();
+      expect(screen.getByTestId("stepper-1")).toHaveFocus();
       await userEvent.keyboard("{ArrowRight}");
-      expect(screen.getByTestId("stepper-3")).toHaveFocus();
+      expect(screen.getByTestId("stepper-2")).toHaveFocus();
     });
 
     it("Selects a step on keyboard enter press", async () => {
       const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep({ useUserEvent: true });
-      expect(screen.getByTestId("stepper-2")).toHaveFocus();
+      expect(screen.getByTestId("stepper-1")).toHaveFocus();
       await userEvent.keyboard("{ArrowRight}");
-      expect(screen.getByTestId("stepper-3")).toHaveFocus();
+      expect(screen.getByTestId("stepper-2")).toHaveFocus();
       await userEvent.keyboard("{Enter}");
       expect(screen.getByTestId("billing-step")).toBeInTheDocument();
     });
 
     it("has correctly composed aria labels", () => {
       preparePage({ business, displayContent });
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("Name"),
-      );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete),
-      );
       expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)).toHaveAttribute(
         "aria-label",
         expect.stringContaining("Business"),

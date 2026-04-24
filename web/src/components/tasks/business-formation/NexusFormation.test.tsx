@@ -1,6 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-non-null-assertion */
 
-import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
 import * as api from "@/lib/api-client/apiClient";
@@ -447,7 +446,10 @@ describe("<NexusFormationFlow />", () => {
           expect(currentBusiness().formationData.formationFormData.businessName).toEqual(
             "Pizza Joint",
           );
-          await page.stepperClickToNexusBusinessNameStep();
+          clickBack();
+          await waitFor(() => {
+            expect(screen.queryByTestId("nexus-name-step")).toBeInTheDocument();
+          });
           expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
             "Pizza Joint",
           );
@@ -461,7 +463,10 @@ describe("<NexusFormationFlow />", () => {
             screen.getByTestId("available-text").innerHTML.includes("Pizza Joint"),
           ).toBeTruthy();
           clickNext();
-          await page.stepperClickToNexusBusinessNameStep();
+          clickBack();
+          await waitFor(() => {
+            expect(screen.queryByTestId("nexus-name-step")).toBeInTheDocument();
+          });
           expect(screen.getByTestId("available-text")).toBeInTheDocument();
           expect(
             screen.getByTestId("available-text").innerHTML.includes("Pizza Joint"),
@@ -484,11 +489,12 @@ describe("<NexusFormationFlow />", () => {
           expect(currentBusiness().profileData.businessName).toEqual("Pizza Joint");
         });
 
-        it("marks step one as complete if business name is available", async () => {
+        it("navigates to the business formation step if business name is available", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           clickNext();
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
+          await screen.findByTestId("business-step");
+          expect(screen.getByTestId("business-step")).toBeInTheDocument();
         });
       });
 

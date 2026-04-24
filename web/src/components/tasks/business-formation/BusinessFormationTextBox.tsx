@@ -7,7 +7,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
   maxChars: number;
@@ -29,6 +29,12 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
     props.required || !!state.formationFormData[props.fieldName],
   );
   const { doesFieldHaveError } = useFormationErrors();
+
+  useEffect(() => {
+    if (state.formationFormData[props.fieldName]) {
+      setIsExpanded(true);
+    }
+  }, [state.formationFormData[props.fieldName]]);
 
   const handleAddButtonClick = (): void => {
     setIsExpanded(true);

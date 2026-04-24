@@ -134,6 +134,11 @@ describe("<SearchBusinessNameTask />", () => {
     expect(userDataWasNotUpdated()).toBe(true);
   });
 
+  it("renders the name reservation section from the formation name step", () => {
+    renderPage();
+    expect(screen.getByText(Config.formation.checkNameReservation.header)).toBeInTheDocument();
+  });
+
   it("save button becomes disabled when user types a new name after finding an available one", async () => {
     renderPage();
     fillBothFields("Best Pizza");
