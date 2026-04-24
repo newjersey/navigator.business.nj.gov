@@ -1,0 +1,27 @@
+{
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "always",
+    "source.organizeImports.biome": "always",
+    "source.fixAll.eslint": "never"
+  },
+  "eslint.enable": false,
+  "eslint.validate": [],
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "minimal",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifierEnding": "minimal"
+}
