@@ -134,7 +134,7 @@
     "@jest/types": "29.6.3",
     "@mui/system": "5.18.0",
     "@next/bundle-analyzer": "16.1.6",
-    "@next/eslint-plugin-next": "15.5.12",
+    "@next/eslint-plugin-next": "16.2.4",
     "@open_resources/semantic-release-uv": "1.5.1",
     "@react-email/preview-server": "5.2.10",
     "@semantic-release/changelog": "6.0.3",
