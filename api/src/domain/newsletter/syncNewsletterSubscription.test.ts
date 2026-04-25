@@ -57,6 +57,29 @@ describe("syncNewsletterSubscription", () => {
     });
   });
 
+  describe("new user (null oldUserData) with receiveNewsletter=true", () => {
+    it("calls subscribe and returns ok:true on success", async () => {
+      mockClient.subscribe.mockResolvedValueOnce(SUCCESS_RESPONSE);
+      const newUserData = buildUserData({ receiveNewsletter: true, email: "user@example.com" });
+
+      const result = await syncNewsletterSubscription(undefined, newUserData, mockClient);
+
+      expect(mockClient.subscribe).toHaveBeenCalledWith("user@example.com");
+      expect(result).toEqual({ ok: true, userData: newUserData });
+    });
+
+    it("returns ok:true without any client call when receiveNewsletter=false", async () => {
+      const newUserData = buildUserData({ receiveNewsletter: false });
+
+      const result = await syncNewsletterSubscription(undefined, newUserData, mockClient);
+
+      expect(mockClient.subscribe).not.toHaveBeenCalled();
+      expect(mockClient.unsubscribe).not.toHaveBeenCalled();
+      expect(mockClient.updateEmail).not.toHaveBeenCalled();
+      expect(result).toEqual({ ok: true, userData: newUserData });
+    });
+  });
+
   describe("receiveNewsletter=true and the user email is unchanged (i.e., already subscribed —> no-op)", () => {
     it("returns ok:true without calling any client method", async () => {
       const userData = buildUserData({ receiveNewsletter: true, email: "user@example.com" });

@@ -12,13 +12,13 @@ export type SyncResult =
   | { ok: false; errorType: "SUBSCRIBE_FAILED" | "UNSUBSCRIBE_FAILED" | "EMAIL_UPDATE_FAILED" };
 
 export const syncNewsletterSubscription = async (
-  oldUserData: UserData,
+  oldUserData: UserData | undefined,
   newUserData: UserData,
   client: GovDeliveryCommCloudClientType,
 ): Promise<SyncResult> => {
-  const oldReceiveNewsletter = oldUserData.user.receiveNewsletter;
+  const oldReceiveNewsletter = oldUserData?.user.receiveNewsletter ?? false;
   const newReceiveNewsletter = newUserData.user.receiveNewsletter;
-  const oldEmail = oldUserData.user.email;
+  const oldEmail = oldUserData?.user.email ?? "";
   const newEmail = newUserData.user.email;
 
   const isSubscribing = newReceiveNewsletter && !oldReceiveNewsletter;
