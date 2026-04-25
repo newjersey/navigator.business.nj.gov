@@ -292,9 +292,9 @@ export const userRouterFactory = (
     const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
 
-    const existingUserData: UserData | undefined = await databaseClient
+    const existingUserData: UserData | undefined = (await databaseClient
       .get(userData.user.id)
-      .catch(() => {});
+      .catch(() => {})) as UserData | undefined;
 
     let userDataForSave = userDataWithUpdatedISO;
     if (govDeliveryCommCloudClient) {
