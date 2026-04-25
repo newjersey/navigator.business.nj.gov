@@ -2955,6 +2955,21 @@ collections:
                       widget: string,
                     }
                   - {
+                      label: Newsletter Subscribe Error,
+                      name: newsletterSubscribeError,
+                      widget: string,
+                    }
+                  - {
+                      label: Newsletter Unsubscribe Error,
+                      name: newsletterUnsubscribeError,
+                      widget: string,
+                    }
+                  - {
+                      label: Newsletter Email Update Error,
+                      name: newsletterEmailUpdateError,
+                      widget: string,
+                    }
+                  - {
                       label: Notification Product News Label,
                       name: notificationProductNewsLabel,
                       widget: string,

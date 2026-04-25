@@ -217,6 +217,28 @@ describe("useUserData", () => {
       });
       expect(mockSetError).toHaveBeenCalledWith("UPDATE_FAILED");
     });
+
+    it("rethrows the error from postUserData so callers receive it", async () => {
+      const currentUser = generateUser({});
+      mockApi.getUserData.mockResolvedValue(generateUserData({}));
+      const mockError = { status: 502, data: { govDeliveryError: "SUBSCRIBE_FAILED" } };
+      mockApi.postUserData.mockRejectedValue(mockError);
+
+      const { updateQueue } = await setupHook(currentUser);
+      const newUserData = generateUserData({});
+
+      let caughtError;
+      await act(async () => {
+        try {
+          await updateQueue?.queue(newUserData).update();
+        } catch (error) {
+          caughtError = error;
+        }
+      });
+
+      expect(caughtError).toEqual(mockError);
+      expect(mockSetError).toHaveBeenCalledWith("UPDATE_FAILED");
+    });
   });
 
   describe("when there is a guest current user", () => {

@@ -129,9 +129,13 @@ const ProfilePage = (props: Props): ReactElement => {
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] =
     useState<boolean>(false);
+  const [govDeliveryError, setGovDeliveryError] = useState<
+    "SUBSCRIBE_FAILED" | "UNSUBSCRIBE_FAILED" | "EMAIL_UPDATE_FAILED" | null
+  >(null);
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
+  const clearUserDataError = userDataFromHook.clearUserDataError;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
@@ -359,6 +363,7 @@ const ProfilePage = (props: Props): ReactElement => {
       analytics.event.profile_save.click.save_profile_changes();
 
       setIsLoading(true);
+      setGovDeliveryError(null);
 
       sendOnSaveAnalytics(business.profileData, profileData);
 
@@ -390,6 +395,7 @@ const ProfilePage = (props: Props): ReactElement => {
             setIsLoading(false);
             setIsSavingFromModal(false);
             setAlert("SUCCESS");
+            setGovDeliveryError(null);
             if (postSaveRedirectUrl) {
               allowNavigation();
               await router?.push(postSaveRedirectUrl);
@@ -399,9 +405,13 @@ const ProfilePage = (props: Props): ReactElement => {
               await redirect({ success: true });
             }
           })
-          .catch(() => {
+          .catch((error) => {
             setIsLoading(false);
             setIsSavingFromModal(false);
+            if (error?.data?.govDeliveryError) {
+              setGovDeliveryError(error.data.govDeliveryError);
+              clearUserDataError();
+            }
           });
       })();
     },
@@ -524,7 +534,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -625,7 +640,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: <></>,
     numbers: (
@@ -750,7 +770,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -905,7 +930,12 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
@@ -1005,7 +1035,12 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
     contact: (
-      <ContactTabPanel fieldErrors={getInvalidFieldIds()} profileAlertRef={profileAlertRef} />
+      <ContactTabPanel
+        fieldErrors={getInvalidFieldIds()}
+        profileAlertRef={profileAlertRef}
+        govDeliveryError={govDeliveryError}
+        clearGovDeliveryError={(): void => setGovDeliveryError(null)}
+      />
     ),
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">

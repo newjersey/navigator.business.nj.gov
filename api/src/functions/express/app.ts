@@ -55,6 +55,7 @@ import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/l
 import { EnvironmentRequirementsEmailClient } from "@client/EnvironmentRequirementsEmailClient";
 
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
+import { GovDeliveryCommCloudClient } from "@client/GovDeliveryCommCloudClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MockCryptoClient } from "@client/MockCryptoClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
@@ -335,6 +336,8 @@ const taxFilingClient = ApiTaxFilingClient(
   },
   logger,
 );
+const govDeliveryCommCloudClient = GovDeliveryCommCloudClient();
+
 const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   baseUrl: GOV_DELIVERY_BASE_URL,
   topic: GOV_DELIVERY_TOPIC,
@@ -443,6 +446,7 @@ app.use(
     AWSTaxIDHashingClient,
     timeStampToBusinessSearch,
     logger,
+    govDeliveryCommCloudClient,
   ),
 );
 
