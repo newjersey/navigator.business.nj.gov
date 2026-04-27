@@ -63,11 +63,13 @@ collections:
   - name: "categories"
     label: "Categories"
     folder: "content/src/categories"
+    format: "json"
+    extension: "json"
     summary: "{{name}}"
     identifier_field: "{{slug}}"
     slug: "{{slug}}"
     delete: false
-    sortable_fields: ["name", "navbar-order"]
+    sortable_fields: ["name"]
     create: false
     editor:
       preview: false
@@ -88,76 +90,11 @@ collections:
           hint: "Name displayed in navigation",
         }
       - {
-          label: "Description Text",
+          label: "Description",
           name: "description-text",
           widget: "text",
           required: false,
           hint: "Description of the topic that appears in each section",
-        }
-      - {
-          label: "Navbar Order",
-          name: "navbar-order",
-          widget: "number",
-          required: false,
-          value_type: "int",
-          min: 1,
-          max: 10,
-          hint: "Order in navigation bar (1-10)",
-        }
-      - {
-          label: "Customized Drop Down Link Filter",
-          name: "customized-drop-down-link-filter",
-          widget: "string",
-          required: false,
-          hint: "Filter for drop down links on specific category pages",
-        }
-      - {
-          label: "Background Image",
-          name: "bg-image",
-          widget: "image",
-          required: false,
-          hint: "Background image for the left column",
-        }
-      - {
-          label: "Topic Icon (Transparent BG)",
-          name: "topic-icon",
-          widget: "image",
-          required: false,
-          hint: "Icon for desktop version",
-        }
-      - {
-          label: "Mobile Icon",
-          name: "mobile-icon",
-          widget: "image",
-          required: false,
-          hint: "Icon for mobile version",
-        }
-      - {
-          label: "Topic Icon (White BG)",
-          name: "topic-icon-white-bg",
-          widget: "image",
-          required: false,
-        }
-      - {
-          label: "Topic Icon (Category Page)",
-          name: "topic-icon-cat-page",
-          widget: "image",
-          required: false,
-        }
-      - { label: "Arrow", name: "arrow", widget: "image", required: false }
-      - {
-          label: "Icon Accessibility Alt Description",
-          name: "icon-accessibility-alt-description",
-          widget: "string",
-          required: false,
-          hint: "Alt text for accessibility",
-        }
-      - {
-          label: "Topic Color",
-          name: "topic-color",
-          widget: "color",
-          required: false,
-          hint: "Main theme color for this category",
         }
       - {
           label: "Topic Description",
@@ -172,88 +109,6 @@ collections:
           widget: "text",
           required: false,
           hint: "Appears on homepage tiles",
-        }
-      - {
-          label: "Nav Promo Hero Button Text",
-          name: "nav-promo-hero-button-text",
-          widget: "string",
-          required: false,
-          hint: "Button text for nav promo under page summary",
-        }
-      - {
-          label: "Navigator Promotion Image",
-          name: "navigator-promotion-image",
-          widget: "image",
-          required: false,
-          hint: "Image for side nav bar promotion box",
-        }
-      - { label: "Nav Promo Heading", name: "nav-promo-heading", widget: "string", required: false }
-      - {
-          label: "Nav Promo Description",
-          name: "nav-promo-description",
-          widget: "text",
-          required: false,
-        }
-      - {
-          label: "Nav Promo Button Text",
-          name: "nav-promo-button-text",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Navigation Promotion Color",
-          name: "navigation-promotion-color",
-          widget: "color",
-          required: false,
-          hint: "Color of navigator sidebar promotion tile overlay",
-        }
-      - {
-          label: "Navigation Tile Border Color",
-          name: "navigation-tile-border-color",
-          widget: "color",
-          required: false,
-        }
-      - {
-          label: "Nav Promo Text Color",
-          name: "nav-promo-text-color-2",
-          widget: "color",
-          required: false,
-        }
-      - {
-          label: "Category Page Tile Background",
-          name: "category-page-tile-background",
-          widget: "color",
-          required: false,
-        }
-      - {
-          label: "Category Page Header",
-          name: "category-page-header",
-          widget: "color",
-          required: false,
-        }
-      - {
-          label: "Category Page Promo Text",
-          name: "category-page-promo-text",
-          widget: "color",
-          required: false,
-        }
-      - {
-          label: "Side Nav Hover Color",
-          name: "side-nav-hover-color",
-          widget: "color",
-          required: false,
-        }
-      - {
-          label: "Side Nav Background Color",
-          name: "side-nav-background-color",
-          widget: "color",
-          required: false,
-        }
-      - {
-          label: "Side Nav Active Color",
-          name: "side-nav-active-color",
-          widget: "color",
-          required: false,
         }
 
   - name: "pages"

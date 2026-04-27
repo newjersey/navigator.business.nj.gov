@@ -183,32 +183,8 @@ export interface WebflowCategoryFieldData {
   slug: string;
   "nav-name"?: string;
   "description-text"?: string;
-  "navbar-order"?: number;
-  "customized-drop-down-link-filter"?: string;
-  "bg-image"?: WebflowImageField;
-  "topic-icon"?: WebflowImageField;
-  "mobile-icon"?: WebflowImageField;
-  "topic-icon-white-bg"?: WebflowImageField;
-  "topic-icon-cat-page"?: WebflowImageField;
-  arrow?: WebflowImageField;
-  "icon-accessibility-alt-description"?: string;
-  "topic-color"?: string;
   "topic-description"?: string;
   "homepage-description"?: string;
-  "nav-promo-hero-button-text"?: string;
-  "navigator-promotion-image"?: WebflowImageField;
-  "nav-promo-heading"?: string;
-  "nav-promo-description"?: string;
-  "nav-promo-button-text"?: string;
-  "navigation-promotion-color"?: string;
-  "navigation-tile-border-color"?: string;
-  "nav-promo-text-color-2"?: string;
-  "category-page-tile-background"?: string;
-  "category-page-header"?: string;
-  "category-page-promo-text"?: string;
-  "side-nav-hover-color"?: string;
-  "side-nav-background-color"?: string;
-  "side-nav-active-color"?: string;
 }
 
 export interface WebflowLinkField {

@@ -170,4 +170,16 @@ const deleteItem = async (itemId: string, collectionId: string): Promise<FetchRe
   };
 };
 
-export { createItem, deleteItem, getAllCollections, getAllItems, getCollection, modifyItem };
+const normalizeQuotes = (text: string): string => {
+  return text.replaceAll(/[\u2018\u2019]/g, "'").replaceAll(/[\u201C\u201D]/g, '"');
+};
+
+export {
+  createItem,
+  deleteItem,
+  getAllCollections,
+  getAllItems,
+  getCollection,
+  modifyItem,
+  normalizeQuotes,
+};

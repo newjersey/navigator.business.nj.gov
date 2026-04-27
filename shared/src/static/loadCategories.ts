@@ -1,5 +1,4 @@
 import fs from "fs";
-import matter from "gray-matter";
 import path from "path";
 import { CategoryItem } from "../types/types";
 
@@ -10,13 +9,10 @@ export const loadAllCategories = (): CategoryItem[] => {
     return [];
   }
 
-  const fileNames = fs.readdirSync(categoriesDirectory).filter((file) => file.endsWith(".md"));
+  const fileNames = fs.readdirSync(categoriesDirectory).filter((file) => file.endsWith(".json"));
 
   return fileNames.map((fileName) => {
     const fullPath = path.join(categoriesDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data } = matter(fileContents);
-
-    return data as CategoryItem;
+    return JSON.parse(fs.readFileSync(fullPath, "utf8")) as CategoryItem;
   });
 };

@@ -5,6 +5,7 @@ import {
   getAllItems,
   getCollection,
   modifyItem,
+  normalizeQuotes,
 } from "./methods";
 
 // Helper to create properly typed fetch response mocks
@@ -208,6 +209,21 @@ describe("methods", () => {
           method: "DELETE",
         }),
       );
+    });
+  });
+
+  describe("normalizeQuotes", () => {
+    it("should replace curly single quotes with straight apostrophes", () => {
+      expect(normalizeQuotes("you\u2018ve decided")).toBe("you've decided");
+      expect(normalizeQuotes("it\u2019s time")).toBe("it's time");
+    });
+
+    it("should replace curly double quotes with straight double quotes", () => {
+      expect(normalizeQuotes("\u201Chello\u201D")).toBe('"hello"');
+    });
+
+    it("should leave text without smart quotes unchanged", () => {
+      expect(normalizeQuotes("plain text")).toBe("plain text");
     });
   });
 });
