@@ -3,7 +3,6 @@ name: "What financing and incentive programs are available to large businesses i
 slug: "what-financing-and-incentive-programs-are-available-to-large-businesses-in-new-jersey"
 webflowId: "5e31b06cb76b8350c0358ef7"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### 1. Grow New Jersey Assistance Program
@@ -35,15 +34,15 @@ In order to qualify for consideration for Grow NJ, a company must:
 • Garden State Create Zone – at or within a three-mile radius of the outermost boundary of the campus (or satellite campus) of a New Jersey doctoral university (Montclair State University, New Jersey Institute of Technology, Princeton University, Rowan University, Rutgers-New Brunswick, Rutgers-Newark, Seton Hall University and Stevens Institute of Technology.) Please see mapping tool or campus maps at the bottom of the page to determine if your project location is eligible, and please see list of contacts at the various doctoral universities to contact for more information on pursuing collaborative research opportunities with a particular school.
 \*\*\*To be considered a Garden State Create Zone, in addition to being located in proximity to a NJ doctoral university, the business must be in a targeted industry and the facility used by the business to conduct a collaborative research relationship with that NJ doctoral university. A collaborative research agreement between a Grow NJ applicant and the University will be reviewed for program compliance based on Collaborative Research Agreement Qualification Worksheet. Any terms beyond those outlined on the worksheet are ultimately up to the discretion of the University and corporate partner. The collaboration agreement should be entered into subsequent to EDA’s award approval, but prior to any certification of funds being award.
 • Projects in a priority area (see Program Rules below for more information)
-• Other eligible areas not located within a distressed municipality or priority area, including an Aviation District; Planning Areas 1, 2 or 3 pursuant to State Planning Act; certain portions of Meadowlands, Pinelands and Highlands; certain portions of Planning Areas 4A, 4B &amp; 5; and the “sports complex” under the jurisdiction of the New Jersey Sports and Exposition Authority.
+• Other eligible areas not located within a distressed municipality or priority area, including an Aviation District; Planning Areas 1, 2 or 3 pursuant to State Planning Act; certain portions of Meadowlands, Pinelands and Highlands; certain portions of Planning Areas 4A, 4B & 5; and the “sports complex” under the jurisdiction of the New Jersey Sports and Exposition Authority.
 
 2. Meet or exceed the minimum employment and capital investment requirements, as outlined below:
 
 _Minimum Full-Time Employment Requirements_
 
-<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1508px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1508px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b8389c4358d45_image.png"></div></figure>*Minimum Capital Investment Requirements*
+_Minimum Capital Investment Requirements_
 
-<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1558px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1558px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b8341e2358cdf_image.png"></div></figure>3. Demonstrate that the award of the tax credit is a “material factor” in the company’s decision to create or retain at least the minimum number of full-time jobs unless the project is located in a GSGZ that qualifies under the Municipal Rehabilitation and Economic Recovery Act (MRERA) (Camden), or which contains a Tourism District established by section 5 of P.L.2011, c.18 (C.5:12-219) and regulated by the Casino Reinvestment Development Authority (Atlantic City), in which case, demonstrate that the award of tax credits is a material factor in the business decision to make a capital investment and locate at least the minimum number of full-time jobs in such GSGZ.
+3. Demonstrate that the award of the tax credit is a “material factor” in the company’s decision to create or retain at least the minimum number of full-time jobs unless the project is located in a GSGZ that qualifies under the Municipal Rehabilitation and Economic Recovery Act (MRERA) (Camden), or which contains a Tourism District established by section 5 of P.L.2011, c.18 (C.5:12-219) and regulated by the Casino Reinvestment Development Authority (Atlantic City), in which case, demonstrate that the award of tax credits is a material factor in the business decision to make a capital investment and locate at least the minimum number of full-time jobs in such GSGZ.
 
 4. Demonstrate that the capital investment and the resultant creation of eligible positions will yield a net positive benefit of at least 110 percent of the requested tax credit amount, or, for a project in a GSGZ that qualifies under the MRERA (Camden), 100 percent of the requested tax credit prior to factoring in the tax credit.
 
@@ -67,17 +66,17 @@ In addition, for each application for tax credits in excess of $4 million annual
 
 _Base Calculation of Tax Credits_
 
-<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1520px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1520px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b832569358d89_image.png"></div></figure>Generally applicable bonuses are listed below:
+Generally applicable bonuses are listed below:
 
 _Bonus Criteria_
 
-<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1450px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1450px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b83cc43358d34_image.png"></div></figure><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1278px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1278px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b8341c5358d12_image.png"></div></figure><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1282px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1282px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b830fbf358d01_image.png"></div></figure>A different tax credit award determination may apply if the project is located in a GSGZ that qualifies under the MRERA (currently Camden) and will create 35 or more jobs new to Camden and make a capital investment of at least $5 million. If so, please contact your EDA Business Development Officer.
+A different tax credit award determination may apply if the project is located in a GSGZ that qualifies under the MRERA (currently Camden) and will create 35 or more jobs new to Camden and make a capital investment of at least $5 million. If so, please contact your EDA Business Development Officer.
 
 Fees apply and all fees are non-refundable except for the approval fee due prior to approval, which shall be refunded if the Authority does not approve the tax credit.
 
 Division of Taxation Tax Clearance Certificate required. Certificates must be requested through the State of New Jersey’s [Premier Business Services (PBS) portal](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the Business Incentive Tax Clearance can be printed directly through PBS.
 
 Please note: It is the applicant/client’s responsibility to maintain a current and clear tax clearance certificate. If a current and clear certificate is not evidenced to EDA at time of closing, EDA will not proceed with closing.
@@ -101,7 +100,7 @@ Additional terms and conditions pursuant to P.L. 2013, c. 161, as amended, and i
 
 [Courtesy Copy of Grow New Jersey Assistance Act, N.J.S.A. 34:1B-242 et seq.](https://www.njeda.com/financing_incentives/programs/grow_nj)
 
-[Grow NJ Policies &amp; Procedures Webinar Presentation - 8/15/2017](https://www.njeda.com/pdfs/GrowNJWebinar_08152017.aspx)
+[Grow NJ Policies & Procedures Webinar Presentation - 8/15/2017](https://www.njeda.com/pdfs/GrowNJWebinar_08152017.aspx)
 
 [Campus Map – Montclair State University](https://www.njeda.com/pdfs/Montclair-State.aspx)
 
@@ -115,13 +114,13 @@ Additional terms and conditions pursuant to P.L. 2013, c. 161, as amended, and i
 
 [Campus Map – Rutgers University – Newark](https://www.njeda.com/pdfs/Rutgers-Newark.aspx)
 
-[Campus Map – Seton Hall University](<https://www.njeda.com/pdfs/Seton-Hall-Univ-(1).aspx>)
+[Campus Map – Seton Hall University]()
 
 [Campus Map - Stevens Institute of Technology](https://www.njeda.com/pdfs/Stevens-Inst.aspx)
 
 [Collaborative Research Agreement Qualification Worksheet](https://www.njeda.com/pdfs/Collaborative-Research-Agreement-Qualification-Wor.aspx)
 
-[Garden State Create Zone - NJ Doctoral University Contact List](<https://www.njeda.com/pdfs/Collaborative-Research-Contacts-(1).aspx>)
+[Garden State Create Zone - NJ Doctoral University Contact List]()
 
 - Any proposed amendments to the program rules can be found on the [Proposed New Rules/Amendments page](https://www.njeda.com/public_information/rules_regulations/proposed).
 
@@ -132,8 +131,11 @@ A number of statutory tests must be met in addition to basic eligibility and cou
 - Net Benefit: The project must provide a “net benefit” to the State, net of incentives, over a 20-year period, requiring an “economic impact” analysis.
 - Award Limit: 90 percent of state income tax withholding for new and retained jobs in Priority Areas and Other Eligible Areas.
 - Material Factor: A company’s CEO must certify that the incentives are a material factor in the company’s decision to locate in NJ, and whether existing jobs are in fact “at risk” of leaving NJ.
-<li>Gap test for large awards: On awards in excess of $4 million/year, NJEDA is required to perform a detailed “gap analysis” to establish the minimum amount of tax credit needed to win the project. This will require a comparative cost analysis of competing out-of-state
-location options.</li>- Job Maintenance and Determining Employment Threshold: Companies are required to maintain 80 percent of project and statewide employment for 1.5x the term of the tax credit. A company’s Employment Threshold (statewide employment count) is determined at the end of the last tax period prior to credit approval.
+
+* Gap test for large awards: On awards in excess of $4 million/year, NJEDA is required to perform a detailed “gap analysis” to establish the minimum amount of tax credit needed to win the project. This will require a comparative cost analysis of competing out-of-state
+  location options.
+
+- Job Maintenance and Determining Employment Threshold: Companies are required to maintain 80 percent of project and statewide employment for 1.5x the term of the tax credit. A company’s Employment Threshold (statewide employment count) is determined at the end of the last tax period prior to credit approval.
 - Eligible position or “full-time job” means a full-time position in a business in this State that the business has filled with a full-time employee. To be eligible, the employee must have his or her primary office at the qualified business facility and must spend at least 80 percent of his or her time at the qualified business facility. (Contractors, temporary, and 1099 tax filers are not eligible.)
 - Prevailing Wage: All construction associated with the job creation or retention project must be done at prevailing wage labor rates.
 - Green Building Requirements: Projects must meet Green Building Requirements. Go to [http://www.njeda.com/pdfs/GreenBuildingGuidance.aspx](http://www.njeda.com/pdfs/GreenBuildingGuidance.aspx) for further details.
@@ -199,7 +201,7 @@ _Commercial Projects_
 _Residential Projects_
 
 • If receiving tax credits, the term of each approved state redevelopment incentive grant agreement will be up to 10 years
-• If receiving tax credits, &nbsp;the Minimum Total Project Cost of at least:
+• If receiving tax credits,  the Minimum Total Project Cost of at least:
 
 o $17,500,000, if the project is located in a municipality with a population greater than 200,000 according to the latest federal decennial census (Two cities qualify under the
 latest federal decennial census data, from 2010 – Newark and Jersey City.)
@@ -262,7 +264,7 @@ Fees apply and are non-refundable unless otherwise noted.
 
 Division of Taxation Tax Clearance Certificate required. Certificates must be requested through the State of New Jersey’s Premier Business Services (PBS) portal online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the
 Business Incentive Tax Clearance can be printed directly through PBS.
 
@@ -315,7 +317,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s [Premier Business Services (PBS) portal](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the Business Incentive Tax Clearance can be printed directly through PBS.
 
 **Please note: **It is the applicant/client’s responsibility to maintain a current and clear tax clearance certificate. If a current and clear certificate is not evidenced to EDA at time of closing, EDA will not proceed with closing.
@@ -334,8 +336,8 @@ This program makes capital available to financial intermediary organizations who
 
 The Loan to Lenders Program is partially funded by the State Small Business Credit Initiative (SSBCI).
 
-<strong>Interest Rate and Terms:
-</strong>
+**Interest Rate and Terms:
+**
 • 2% fixed interest rate
 • Up to 15 year term with principal moratorium for up to 5 years, then principal and interest to full amortize the loan for the remaining 10 years
 • Quarterly loan repayments
@@ -349,7 +351,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s [Premier Business Services (PBS) portal](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the
 Business Incentive Tax Clearance can be printed directly through PBS.
 
@@ -371,7 +373,7 @@ The Municipal Landfill Closure and Remediation Reimbursement Program was develop
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s [Premier Business Services (PBS) portal](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the
 Business Incentive Tax Clearance can be printed directly through PBS.
@@ -448,17 +450,17 @@ _Private Component:_
 • General construction and/or rehabilitation; and
 • Associated soft development expenses
 
-<em>Public Component:
-</em>
-• Title
-• Survey
-• Environmental investigation and remediation;
-• Pre-development costs;
-• On-site infrastructure;
-• General construction and/or rehabilitation; and
-• Marketing the site for sale
+\*Public Component:
 
-**Financing Instruments:**
+- • Title
+  • Survey
+  • Environmental investigation and remediation;
+  • Pre-development costs;
+  • On-site infrastructure;
+  • General construction and/or rehabilitation; and
+  • Marketing the site for sale
+
+  **Financing Instruments:**
 
 _Private Component:_
 
@@ -469,8 +471,8 @@ _Public Component:_
 
 • EDA financing must be in first mortgage lien position, including any federal, county, and municipal liens (i.e., a property will not be eligible if there is any outstanding governmental lien)
 
-<strong>Loan Term:
-</strong>
+**Loan Term:
+**
 • Term: Maximum 10 years
 
 _Private Component:_
@@ -487,22 +489,22 @@ _Private Component:_
 
 • Applicant must provide Owner Equity equal to a minimum of 10% of total project costs and must match Impact Fund investment 1:1; Owner Equity shall not include grants or developer fee.
 
-**Rates, Repayment &amp; Participating Mortgage Loan Structure:**
+**Rates, Repayment & Participating Mortgage Loan Structure:**
 
-<em>Private Component:
-</em>
-• Interest rate: 3%
-• Payment on accrued interest shall be made from the project’s net cash flow, after payment of all project debt, based on loan percentage in relation to the percentage of total equity contributed by the applicant at the time of project completion, issuance of a permanent certificate of occupancy and submission of the final project. However, in no event shall the actual total equity contributed by the applicant to the project be less than what was presented at the time of approval of the loan.
-• If net cash flow is insufficient to pay interest only, then any unpaid interest shall accrue and be added to the outstanding principal balance.
-• If the percentage of net cash flow is in excess of the current interest, then the payment shall first be applied to accrued interest, if any, and then to reduce outstanding principal.
-• At approval, the Board shall determine the Effective Rate of the loan, which shall range between 3 – 10%, determined by the economic feasibility and the need of the loan for the project.
-• All unpaid or deferred interest payments and principal plus amount equal to Effective Rate shall be due in full at end of the loan term or at a Liquidity Event.
+\*Private Component:
 
-<em>Public Component:
-</em>
-• Interest rate: 3%
-• During the term of the loan, interest shall accrue and be added to principal annually at the stated interest rate until the earlier of the Liquidity Event or the end of the term.
-• All unpaid or deferred interest payments and principal shall be due in full at the end of the loan term, or at a Liquidity Event.
+- • Interest rate: 3%
+  • Payment on accrued interest shall be made from the project’s net cash flow, after payment of all project debt, based on loan percentage in relation to the percentage of total equity contributed by the applicant at the time of project completion, issuance of a permanent certificate of occupancy and submission of the final project. However, in no event shall the actual total equity contributed by the applicant to the project be less than what was presented at the time of approval of the loan.
+  • If net cash flow is insufficient to pay interest only, then any unpaid interest shall accrue and be added to the outstanding principal balance.
+  • If the percentage of net cash flow is in excess of the current interest, then the payment shall first be applied to accrued interest, if any, and then to reduce outstanding principal.
+  • At approval, the Board shall determine the Effective Rate of the loan, which shall range between 3 – 10%, determined by the economic feasibility and the need of the loan for the project.
+  • All unpaid or deferred interest payments and principal plus amount equal to Effective Rate shall be due in full at end of the loan term or at a Liquidity Event.
+
+  \*Public Component:
+
+- • Interest rate: 3%
+  • During the term of the loan, interest shall accrue and be added to principal annually at the stated interest rate until the earlier of the Liquidity Event or the end of the term.
+  • All unpaid or deferred interest payments and principal shall be due in full at the end of the loan term, or at a Liquidity Event.
 
 Fees apply and are non-refundable.
 
@@ -526,8 +528,8 @@ Ability to purchase machinery, equipment, furniture, fixtures, and building mate
 
 Machinery, equipment, furniture and furnishings, fixtures and building materials other than tools and supplies for placement at the project location until the new facility is functional.
 
-<strong>Benefits:
-</strong>
+**Benefits:
+**
 Encourages economic development and preserves jobs that currently exist in the State of New Jersey.
 
 **Eligibility Details:**
@@ -548,7 +550,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s [Premier Business Services (PBS) portal](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the
 Business Incentive Tax Clearance can be printed directly through PBS.
 

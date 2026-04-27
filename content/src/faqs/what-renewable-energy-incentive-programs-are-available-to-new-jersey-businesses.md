@@ -3,7 +3,6 @@ name: "What renewable energy incentive programs are available to New Jersey busi
 slug: "what-renewable-energy-incentive-programs-are-available-to-new-jersey-businesses"
 webflowId: "5e31b06cb76b8358ad358eed"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### 1. Federal Energy Investment Tax Credit

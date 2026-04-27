@@ -17,7 +17,6 @@ export const getFaqData = (faqs: FaqItem[]): FileData[] => {
     const body = faq.body.toLowerCase();
     const category = faq.category?.toLowerCase();
     const subCategory = faq["sub-category"]?.toLowerCase();
-    const webflowId = faq.webflowId?.toLowerCase();
 
     const blockTexts = [body];
 
@@ -26,7 +25,6 @@ export const getFaqData = (faqs: FaqItem[]): FileData[] => {
       { content: slug, label: "Slug" },
       { content: category, label: "Category" },
       { content: subCategory, label: "Sub-Category" },
-      { content: webflowId, label: "Webflow ID" },
     ];
 
     faqData.push({

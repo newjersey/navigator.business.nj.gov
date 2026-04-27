@@ -3,7 +3,6 @@ name: "Do I need a trademark, copyright, or patent?"
 slug: "do-i-need-a-trademark-copyright-or-patent"
 webflowId: "5e31b06cb76b83c85d358e90"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 See below for definitions and more information:

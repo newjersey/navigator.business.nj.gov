@@ -3,7 +3,6 @@ name: "How do I deal with the risks associated with starting a business?"
 slug: "how-do"
 webflowId: "5e31b06cb76b83d128358b10"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Starting and operating a business involved many risks, but also many rewards. Follow these tips to reduce the risks and ensure your business is on sound footing.

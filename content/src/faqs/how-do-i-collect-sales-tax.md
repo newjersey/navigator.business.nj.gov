@@ -4,7 +4,6 @@ slug: "how-do-i-collect-sales-tax"
 webflowId: "5e31b06cb76b830cf6358ec0"
 category: "operate-a-business"
 sub-category: "tax-information"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 A registered business that will be collecting sales tax, remitting use tax, or exemption certificates, will receive a Certificate of Authority for Sales Tax by mail. The Certificate permits a business to collect sales tax and to use exemption certificates. It must be displayed prominently at the place of business.

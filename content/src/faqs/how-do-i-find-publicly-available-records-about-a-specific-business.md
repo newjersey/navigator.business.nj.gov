@@ -3,7 +3,6 @@ name: "How do I find publicly available records about a specific business?"
 slug: "how-do-i-find-publicly-available-records-about-a-specific-business"
 webflowId: "5e31b06cb76b83379c358ecf"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 See the below links for more information:

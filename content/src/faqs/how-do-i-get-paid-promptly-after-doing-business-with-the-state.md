@@ -4,7 +4,6 @@ slug: "how-do-i-get-paid-promptly-after-doing-business-with-the-state"
 webflowId: "5e31b06cb76b83bcfc358ecb"
 category: "grow-a-business"
 sub-category: "contracting-with-the-state"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### How to Be Paid Promptly by the State of New Jersey
@@ -35,27 +34,27 @@ _State of New Jersey PAYMENT VOUCHER (PBPV1-r3/93)_
 
 Keep a record of the payment voucher. Address changes should be made in writing to:
 
-&nbsp; &nbsp; &nbsp;Department of the Treasury
+     Department of the Treasury
 
-&nbsp; &nbsp; &nbsp;Office of Management and Budget — Vendor Control
+     Office of Management and Budget — Vendor Control
 
-&nbsp; &nbsp; &nbsp;PO Box 221
+     PO Box 221
 
-&nbsp; &nbsp; &nbsp;Trenton, NJ 08625-0221
+     Trenton, NJ 08625-0221
 
-&nbsp; &nbsp; &nbsp;609-292-6746
+     609-292-6746
 
 All other changes (business address, phone number, identification number, etc.) should be made in writing to:
 
-&nbsp; &nbsp; &nbsp;Department of the Treasury
+     Department of the Treasury
 
-&nbsp; &nbsp; &nbsp;Purchase Bureau — Vendor Change
+     Purchase Bureau — Vendor Change
 
-&nbsp; &nbsp; &nbsp;PO Box 230
+     PO Box 230
 
-&nbsp; &nbsp; &nbsp;Trenton, NJ 08625-0230
+     Trenton, NJ 08625-0230
 
-&nbsp; &nbsp; &nbsp;609-292-4700
+     609-292-4700
 
 **Subcontractors**
 

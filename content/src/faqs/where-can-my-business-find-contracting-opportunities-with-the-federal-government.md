@@ -4,7 +4,6 @@ slug: "where-can-my-business-find-contracting-opportunities-with-the-federal-gov
 webflowId: "5e31b06cb76b83efd5358ec9"
 category: "grow-a-business"
 sub-category: "contracting-with-the-state"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### Historically Underutilized Business (HUB) Zones
@@ -19,7 +18,7 @@ The U.S. SBA provides guidance to companies seeking to do business with the fede
 
 Small Business Administration
 Two Gateway Center, Suite 1501
-Newark, NJ &nbsp;07102
+Newark, NJ  07102
 
 **Contact for program and service information:**
 

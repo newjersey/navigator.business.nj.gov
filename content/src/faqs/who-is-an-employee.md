@@ -4,7 +4,6 @@ slug: "who-is-an-employee"
 webflowId: "5e31b06cb76b837937358eb4"
 category: "operate-a-business"
 sub-category: "hiring-employees"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **Who is an Employee?**

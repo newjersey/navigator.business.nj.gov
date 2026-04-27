@@ -4,16 +4,15 @@ slug: "how-do-i-export-goods-and-services-out-of-new-jersey"
 webflowId: "5e31b06cb76b8325ce358eb9"
 category: "operate-a-business"
 sub-category: "exporting"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 The Office of Export Promotion works with New Jersey’s small and mid-sized companies interested in expanding their products and services through export. Companies interested in global business activity can tap into a number of resources available through NJBAC’s Export Promotion unit.
 
 Most recently, the Office of Export Promotion received the President’s E Star Award for Export Service during an award ceremony at the U.S. Department of Commerce headquarters in Washington, D.C. The E and E Star Awards are the Nation’s highest honor for export excellence. Created in 1961 through an Executive through an Executive Order by President John F. Kennedy, the awards afford suitable recognition to persons, firms, or organizations that contribute significantly in the effort to increase U.S. exports.
-<strong>‍
-Global Business Advocacy</strong>
+**‍
+Global Business Advocacy**
 
-Research shows that businesses who export their goods and services have significantly greater growth potential. &nbsp;Entering into the Global Marketplace is easier than you think and our Global Business Advocates will be your guide to help navigate your way to international success and:
+Research shows that businesses who export their goods and services have significantly greater growth potential.  Entering into the Global Marketplace is easier than you think and our Global Business Advocates will be your guide to help navigate your way to international success and:
 
 - Provide free consulting services
 - Offer educational opportunities and acquaint you with resources to learn more about exporting basics, regulatory compliance, customs procedures, reporting and other topics.
@@ -93,7 +92,7 @@ Further information can be obtained by contacting the New Jersey Business Action
 
 U.S. Department of Commerce
 
-4th Street &amp; Constitution Avenue, NW, Rm. 384-A
+4th Street & Constitution Avenue, NW, Rm. 384-A
 
 Washington, DC 20230
 
@@ -138,7 +137,7 @@ For more information, go to:
 **Additional Sources of Import Assistance**
 
 - _Foreign Embassies and Consulates in the United States _– Promotion of their country’s goods and services: [https://www.embassy.org/embassies/index.html](https://intercom.help/nj-business/en/articles/3206923-how-do-i-export-goods-and-services-out-of-new-jersey)
-- _Customs Importation Guidelines for Commercial Importers_ – Importing into the United States: [https://www.usitc.gov/](https://www.usitc.gov/) &nbsp;
+- _Customs Importation Guidelines for Commercial Importers_ – Importing into the United States: [https://www.usitc.gov/](https://www.usitc.gov/)  
 - *Freight Forwarders: *Local business telephone listings often feature a freight forwarder or transportation heading. The National Customs Brokers and Forwarders Association of America provides exporters with information on their members. [http://www.ncbfaa.org/](http://www.ncbfaa.org/)
 
 ‍

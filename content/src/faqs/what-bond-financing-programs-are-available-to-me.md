@@ -3,7 +3,6 @@ name: "What bond financing programs are available to me?"
 slug: "what-bond-financing-programs-are-available-to-me"
 webflowId: "5e31b06cb76b832e1a358f02"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 The following programs offer bond financing:

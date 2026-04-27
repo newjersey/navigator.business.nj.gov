@@ -1,3 +1,5 @@
+import type { Element, Node, Root, Text } from "hast";
+import { fromHtml } from "hast-util-from-html";
 import { checkRateLimitAndWait } from "./helpers";
 import {
   FetchResponse,
@@ -174,12 +176,68 @@ const normalizeQuotes = (text: string): string => {
   return text.replaceAll(/[\u2018\u2019]/g, "'").replaceAll(/[\u201C\u201D]/g, '"');
 };
 
+// Used to get more consistent output to match what we expect from Decap
+const processHastNode = (node: Node): string => {
+  if (node.type === "text") return (node as Text).value;
+
+  if (node.type === "root") return (node as Root).children.map(processHastNode).join("");
+
+  if (node.type === "element") {
+    const el = node as Element;
+    const tag = el.tagName.toLowerCase();
+    const children = el.children.map(processHastNode).join("");
+
+    switch (tag) {
+      case "p":
+        return `${children}\n\n`;
+      case "br":
+        return "\n";
+      case "strong":
+      case "b":
+        return `**${children}**`;
+      case "em":
+      case "i":
+        return `*${children}*`;
+      case "a":
+        return `[${children}](${(el.properties?.href as string) ?? ""})`;
+      case "ul":
+      case "ol":
+        return `${children}\n`;
+      case "li":
+        return `* ${children.trim()}\n`;
+      case "h1":
+        return `# ${children}\n\n`;
+      case "h2":
+        return `## ${children}\n\n`;
+      case "h3":
+        return `### ${children}\n\n`;
+      case "h4":
+        return `#### ${children}\n\n`;
+      case "h5":
+        return `##### ${children}\n\n`;
+      case "h6":
+        return `###### ${children}\n\n`;
+      default:
+        return children;
+    }
+  }
+
+  return "";
+};
+
+const htmlToMarkdown = (html: string): string =>
+  processHastNode(fromHtml(html, { fragment: true }))
+    .replaceAll(/\n{3,}/g, "\n\n")
+    .trim();
+
 export {
   createItem,
   deleteItem,
   getAllCollections,
   getAllItems,
   getCollection,
+  htmlToMarkdown,
   modifyItem,
   normalizeQuotes,
+  processHastNode,
 };

@@ -3,7 +3,6 @@ name: "Financing and incentive programs for small/mid-sized businesses"
 slug: "financing-and-incentive-programs-for-small-mid-sized-businesses"
 webflowId: "5e31b06cb76b83c6e2358f05"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 [**Access: **](https://njeda.com/access)Access is a pilot lending program that provides financing to small businesses in New Jersey - either in the form of direct loans through EDA, or through loan participations/guarantees in partnership with an EDA Premier Lenders.

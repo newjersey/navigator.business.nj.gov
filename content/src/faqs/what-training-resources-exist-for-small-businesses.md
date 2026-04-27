@@ -3,7 +3,6 @@ name: "What training resources exist for small businesses?"
 slug: "what-training-resources-exist-for-small-businesses"
 webflowId: "5e31b06cb76b8323fc358eda"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 See the below links for resources available to small businesses:

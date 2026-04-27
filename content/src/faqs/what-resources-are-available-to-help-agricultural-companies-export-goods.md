@@ -3,7 +3,6 @@ name: "What resources are available to help agricultural companies export goods?
 slug: "what-resources-are-available-to-help-agricultural-companies-export-goods"
 webflowId: "5e31b06cb76b8388ce358efa"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### State of New Jersey Department of Agriculture Export Development

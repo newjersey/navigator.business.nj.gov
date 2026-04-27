@@ -4,7 +4,6 @@ slug: "how-do-i-get-a-certificate-of-free-sale"
 webflowId: "5e31b06cb76b83c1a1358ea2"
 category: "start-a-business"
 sub-category: "registering-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Certificates of Free Sale assist those who sell domestically produced food, drug, cosmetic, and medical device products internationally.

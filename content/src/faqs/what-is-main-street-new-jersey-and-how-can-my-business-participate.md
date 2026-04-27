@@ -3,7 +3,6 @@ name: "What is Main Street New Jersey, and how can my business participate?"
 slug: "what-is-main-street-new-jersey-and-how-can-my-business-participate"
 webflowId: "5e31b06cb76b832847358ef0"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Main Street New Jersey is a comprehensive revitalization program that promotes the historic and economic redevelopment of traditional business districts in New Jersey. The Program was established to encourage and support the revitalization of downtowns throughout the state.

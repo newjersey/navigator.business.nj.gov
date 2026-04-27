@@ -4,7 +4,6 @@ slug: "what-certifications-do-i-need-to-contract-with-state-departments-as-a-spe
 webflowId: "5e31b06cb76b835a00358ecd"
 category: "grow-a-business"
 sub-category: "contracting-with-the-state"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 In addition to State Certification, there are a number of State Departments that also require various types of Certification. These include the Department of Transportation, the Department of Environmental Protection, New Jersey Transit and the Port Authority of New York and New Jersey. Details on these Certification programs are outlined below.
@@ -47,7 +46,7 @@ A Disadvantaged Business Enterprise (DBE) Certification is needed to be eligible
 
 The Port Authority of NY/NJ
 
-Office of Business &amp; Job Opportunity
+Office of Business & Job Opportunity
 
 Newark Legal Center
 

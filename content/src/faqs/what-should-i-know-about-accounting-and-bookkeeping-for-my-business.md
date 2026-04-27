@@ -4,7 +4,6 @@ slug: "what-should-i-know-about-accounting-and-bookkeeping-for-my-business"
 webflowId: "5e31b06cb76b83e758358ebe"
 category: "operate-a-business"
 sub-category: "filings-and-accounting"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **What Should I Know About Accounting and Bookkeeping?**

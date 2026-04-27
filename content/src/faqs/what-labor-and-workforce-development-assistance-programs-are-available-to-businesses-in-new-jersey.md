@@ -3,12 +3,11 @@ name: "What labor and workforce development assistance programs are available to
 slug: "what-labor-and-workforce-development-assistance-programs-are-available-to-businesses-in-new-jersey"
 webflowId: "5e31b06cb76b833a6b358eef"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### 1. Workforce Training Grant (Skills Partnership)
 
-Administered by the New Jersey Department of Labor &amp; Workforce Development (LWD), training grant funds are available to New Jersey employers to upgrade the occupational, literacy and safety skills of their current employees and/or train new employees. The training can consist of on-the-job and/or classroom training. Training can be provided by the employer or by a training provider selected by the employer. The training grant funds provide New Jersey employers with up to 50 percent cost reimbursement assistance to train new or existing employees. Awards are capped at $100,000 for individual businesses and can range up to $1,500 per employee.
+Administered by the New Jersey Department of Labor & Workforce Development (LWD), training grant funds are available to New Jersey employers to upgrade the occupational, literacy and safety skills of their current employees and/or train new employees. The training can consist of on-the-job and/or classroom training. Training can be provided by the employer or by a training provider selected by the employer. The training grant funds provide New Jersey employers with up to 50 percent cost reimbursement assistance to train new or existing employees. Awards are capped at $100,000 for individual businesses and can range up to $1,500 per employee.
 
 [Career Connections Training Programs](http://careerconnections.nj.gov/careerconnections/hire/training/training_index.shtml)
 
@@ -42,7 +41,7 @@ Offered through LWD, state representatives at regional Business Resource Centers
 
 ### 6. Skills4Jersey
 
-Administered by the New Jersey Department of Labor &amp; Workforce Development (DOL), these competitive grants are available to upgrade the skills of workers to ensure that New Jersey employers are more competitive in the global economy. Grant allocations may be applied to the direct cost of training (training vendor fees, training supplies, etc.) as well as the partial reimbursement of wages of workers participating in the training. Awards are capped at $50,000 for companies with 250 employees or fewer and $75,000 for companies with 250 employees or more and can range up to $1,000 per employee trained depending on the complexity and term of the training.
+Administered by the New Jersey Department of Labor & Workforce Development (DOL), these competitive grants are available to upgrade the skills of workers to ensure that New Jersey employers are more competitive in the global economy. Grant allocations may be applied to the direct cost of training (training vendor fees, training supplies, etc.) as well as the partial reimbursement of wages of workers participating in the training. Awards are capped at $50,000 for companies with 250 employees or fewer and $75,000 for companies with 250 employees or more and can range up to $1,000 per employee trained depending on the complexity and term of the training.
 
 [Skills Partnership Program](https://careerconnections.nj.gov/careerconnections/hire/training/skills/skills_partnership_program.shtml)
 
@@ -58,7 +57,7 @@ Offered through the LWD, state representatives at regional Business Resource Cen
 
 ### 9. WorkFirst New Jersey
 
-Administered by the NJ Dept. of Labor and Workforce Development (NJDOLWD), employers can receive up to half of the new employees’ gross wages for up to 26 weeks to help defray the costs of their training. Employment specialists at local One-Stop Career Centers pre-screen job applicants from the WorkFirst New Jersey Food Stamp Employment &amp; Training Programs. A WorkFirst New Jersey participant is someone who is receiving public assistance such as Temporary Assistance for Needy Families (TANF), General Assistance, or non-public assistance Supplemental Nutrition Assistance Program. The most qualified applicants are referred to employers, who interview candidates and make the final hiring decision. Before employers hire a WorkFirst participant, they meet with an OJT specialist from the NJDOLWD to draw up a contract. The contract will outline the OJT training requirements for each position, and specify the level of reimbursement.
+Administered by the NJ Dept. of Labor and Workforce Development (NJDOLWD), employers can receive up to half of the new employees’ gross wages for up to 26 weeks to help defray the costs of their training. Employment specialists at local One-Stop Career Centers pre-screen job applicants from the WorkFirst New Jersey Food Stamp Employment & Training Programs. A WorkFirst New Jersey participant is someone who is receiving public assistance such as Temporary Assistance for Needy Families (TANF), General Assistance, or non-public assistance Supplemental Nutrition Assistance Program. The most qualified applicants are referred to employers, who interview candidates and make the final hiring decision. Before employers hire a WorkFirst participant, they meet with an OJT specialist from the NJDOLWD to draw up a contract. The contract will outline the OJT training requirements for each position, and specify the level of reimbursement.
 
 **Key program features:**
 
@@ -87,7 +86,7 @@ The NJ Division of Vocational Rehabilitation Services (DVRS) assists businesses 
 
 [www.careerconnections.nj.gov](http://www.careerconnections.nj.gov/)
 
-The New Jersey Department of Labor and Workforce Development (DOL&amp;WD) launched the New Jersey Career Connections website to link New Jersey job-seekers and employers. The website helps connect the businesses that are creating these jobs to the New Jerseyans who want them.
+The New Jersey Department of Labor and Workforce Development (DOL&WD) launched the New Jersey Career Connections website to link New Jersey job-seekers and employers. The website helps connect the businesses that are creating these jobs to the New Jerseyans who want them.
 
 **Features for Job-Seekers include:**
 
@@ -119,13 +118,13 @@ The Work Opportunity Tax Credit (WOTC) is a federal credit available to private-
 
 In New Jersey, applications that were submitted in accordance with the IRS Transitional Relief period that ended August 31, 2016 may not be processed until all other applications submitted timely have been processed.
 
-[Work Opportunity Tax Credit](https://careerconnections.nj.gov/careerconnections/hire/hiring/wotc/work_opportunity_tax_credit.shtml) &nbsp;
+[Work Opportunity Tax Credit](https://careerconnections.nj.gov/careerconnections/hire/hiring/wotc/work_opportunity_tax_credit.shtml)  
 
 ### 13. Labor Market Information/County Information
 
-The NJ Department of Labor (DOL) maintains a vast array of information important to employers and job seekers. Information categories include: Demographics; Current Employment Statistics; Unemployment Rates &amp; Labor Force Estimates; Industry and Economic Information. This information can be accessed on the DOL’s website.
+The NJ Department of Labor (DOL) maintains a vast array of information important to employers and job seekers. Information categories include: Demographics; Current Employment Statistics; Unemployment Rates & Labor Force Estimates; Industry and Economic Information. This information can be accessed on the DOL’s website.
 
-[DOL&nbsp;Labor Market Information](http://www.nj.gov/labor/lpa/LMI_index.html)
+[DOL Labor Market Information](http://www.nj.gov/labor/lpa/LMI_index.html)
 
 ### 14. Prevailing Wage Rates
 
@@ -139,7 +138,7 @@ The DOL’s Division of Labor Market and Demographic Research has also developed
 
 [Regional Community Fact Books](http://www.nj.gov/labor/lpa/pub/factbook/factbook_index.html)
 
-### 16. Occupational Safety &amp; Health On-Site Consultation Program
+### 16. Occupational Safety & Health On-Site Consultation Program
 
 Available through the NJ Department of Labor and Workforce Development (LWD), employers can find out about potential hazards at their worksites, improve their occupational safety and health management systems, and qualify for a one-year exemption. The service is delivered by the LWD using trained safety and health professionals. Consultations take place on-site, though limited services away from the worksite are available. Primarily targeted for businesses with fewer than 250 employees, this safety and health consultation program is completely separate from the OSHA inspection effort. No citations are issued or penalties proposed.
 

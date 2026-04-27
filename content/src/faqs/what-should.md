@@ -3,7 +3,6 @@ name: "What should I consider before buying land for my business?"
 slug: "what-should"
 webflowId: "5e31b06cb76b8319dd358b3b"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### Industrial Site Recovery Act (ISRA)

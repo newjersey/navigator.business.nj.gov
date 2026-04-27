@@ -3,7 +3,6 @@ name: "What is the Brownfields Redevelopment Task Force?"
 slug: "what-is-the-brownfields-redevelopment-task-force"
 webflowId: "5e31b06cb76b836c3c358ece"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Any former or current commercial or industrial site, currently vacant or underutilized and on which there has been, or there is suspected to have been, a discharge of a contaminant. (Source: Brownfield and Contaminated Site Remediation Act, N.J.S.A. 58:10B-1 et seq.)
@@ -24,6 +23,6 @@ For names and contact information of Task Force and BRIT members, please visit:
 
 [https://www.state.nj.us/state/planning/spc-redevelopment-brownfields-task-force.html](https://www.state.nj.us/state/planning/spc-redevelopment-brownfields-task-force.html)
 
-[https://nj.gov/state/planning/assets/docs/redevelopment/brit-2015-0326.pdf](https://nj.gov/state/planning/assets/docs/redevelopment/brit-2015-0326.pdf) &nbsp;
+[https://nj.gov/state/planning/assets/docs/redevelopment/brit-2015-0326.pdf](https://nj.gov/state/planning/assets/docs/redevelopment/brit-2015-0326.pdf)  
 
 ‍

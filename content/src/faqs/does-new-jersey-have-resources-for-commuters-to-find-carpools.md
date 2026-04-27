@@ -3,7 +3,6 @@ name: "Does New Jersey have resources for commuters to find carpools?"
 slug: "does-new-jersey-have-resources-for-commuters-to-find-carpools"
 webflowId: "5e31b06cb76b83e9c2358edb"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Available through the NJ Department of Transportation (DOT) rideshare matching assistance allows commuters to find carpool and vanpool partners with compatible schedules.

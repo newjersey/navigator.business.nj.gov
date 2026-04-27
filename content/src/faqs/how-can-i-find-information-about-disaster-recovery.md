@@ -3,7 +3,6 @@ name: "How can I find information about disaster recovery?"
 slug: "how-can-i-find-information-about-disaster-recovery"
 webflowId: "5e31b06cb76b83226b358eb2"
 category: "operate-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### Business Recovery Checklist
@@ -71,8 +70,8 @@ New York, NY 10278
 
 For information on emergency planning and technical assistance, contact the Business Action Center at 1-866-534-7789. Call-Center representatives are available Monday through Friday, 8:00 a.m. through 5:00 p.m.
 
-<strong>Disaster Recovery &amp; Preparedness Checklist
-</strong>To help small businesses be prepared for an emergency, the State has condensed pages of resource materials and information into a simple, easy-to-follow document that contains key information, resources and reminders regarding NJ disaster preparedness, disaster recovery and business continuity planning.
+**Disaster Recovery & Preparedness Checklist
+**To help small businesses be prepared for an emergency, the State has condensed pages of resource materials and information into a simple, easy-to-follow document that contains key information, resources and reminders regarding NJ disaster preparedness, disaster recovery and business continuity planning.
 
 - [Plan and Prepare ](http://business.nj.gov/category/plan)
 

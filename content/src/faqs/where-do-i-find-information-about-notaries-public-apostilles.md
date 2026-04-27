@@ -3,7 +3,6 @@ name: "Where do I find information about Notaries Public & Apostilles?"
 slug: "where-do-i-find-information-about-notaries-public-apostilles"
 webflowId: "5e31b06cb76b8325ac358ed3"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 See the below links for relevant information:

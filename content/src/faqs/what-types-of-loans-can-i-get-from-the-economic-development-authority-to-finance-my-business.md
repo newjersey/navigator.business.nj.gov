@@ -3,7 +3,6 @@ name: "What types of loans can I get from the Economic Development Authority to 
 slug: "what-types-of-loans-can-i-get-from-the-economic-development-authority-to-finance-my-business"
 webflowId: "5e31b06cb76b83254f358f03"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 [Premier Lender:](https://njeda.com/premierlender/) TheEconomic Development Authority partners with lenders to provide financing for New Jersey businesses. The NJEDA supports these partner financial organizations with loan participations or guarantees, which can make financing more affordable for businesses.

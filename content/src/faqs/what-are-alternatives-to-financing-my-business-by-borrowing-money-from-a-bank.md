@@ -3,7 +3,6 @@ name: "What are alternatives to financing my business by borrowing money from a 
 slug: "what-are-alternatives-to-financing-my-business-by-borrowing-money-from-a-bank"
 webflowId: "5e31b06cb76b838e2b358f00"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Committing personal funds is often the first financing step. It is certainly the best indicator of the owner’s seriousness about the business. Risking personal money gives confidence to others investing in the business.

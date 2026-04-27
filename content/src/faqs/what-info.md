@@ -3,7 +3,6 @@ name: "What information do I need when selecting a site for my business?"
 slug: "what-info"
 webflowId: "5e31b06cb76b833e2e358b63"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 For a quick view of some of the most important information when selecting a site, use the New Jersey Site Evaluator Tool:

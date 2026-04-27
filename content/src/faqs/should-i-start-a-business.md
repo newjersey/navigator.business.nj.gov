@@ -3,7 +3,6 @@ name: "Should I start a business?"
 slug: "should-i-start-a-business"
 webflowId: "5e31b06cb76b833420358e93"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### **Reasons to Start a Business**
