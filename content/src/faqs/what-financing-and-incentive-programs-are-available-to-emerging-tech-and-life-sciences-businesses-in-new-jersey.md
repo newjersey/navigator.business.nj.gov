@@ -3,7 +3,6 @@ name: "What financing and incentive programs are available to emerging tech and 
 slug: "what-financing-and-incentive-programs-are-available-to-emerging-tech-and-life-sciences-businesses-in-new-jersey"
 webflowId: "5e31b06cb76b830983358ef5"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Funded by internal resources (currently at $2 million), these programs offer growth capital to be leveraged with angel investments and venture capital investments. Funding under these programs can be used for key hires, product iteration/rollout, product enhancement or marketing/sales.
@@ -16,8 +15,8 @@ All investors that invest in a qualifying NJ emerging technology business may be
 
 10% of the qualified investment made in a NJ emerging technology business, up to a maximum allowed credit of $500,000 for each qualified investment
 
-<strong>Uses:
-</strong>
+**Uses:
+**
 Qualified investment in a NJ emerging technology business
 
 **Benefits:**
@@ -120,14 +119,14 @@ Fees apply and are non-refundable.
 
 Please email your questions and contact information to [NOL@NJEDA.COM](mailto:NOL@NJEDA.COM). All emailed questions and their responses are considered public knowledge. The questions and responses are reviewed by the deputy attorney general's office and posted in the program's “frequently asked questions” (link above).
 
-[https://www.njeda.com/technology_lifesciences/Technology-Business-Tax-Certificate-Transfer-(NOL)](<https://www.njeda.com/technology_lifesciences/Technology-Business-Tax-Certificate-Transfer-(NOL)>)
+[https://www.njeda.com/technology_lifesciences/Technology-Business-Tax-Certificate-Transfer-(NOL)]()
 
 ### 3. NJ Founders and Funders
 
-NJ Founders &amp; Funders is organized by the NJEDA Technology &amp; Life Sciences (TLS) team to facilitate warm introductions between emerging New Jersey TLS companies and sophisticated angel &amp; institutional investors. Our mission is to help grow the TLS ecosystem to support innovative NJ companies. Hosted twice per year, venture capital investors are invited to meet with a select group of companies for 10-minute, one-on-one sessions to discuss strategy, business models and funding opportunities.
+NJ Founders & Funders is organized by the NJEDA Technology & Life Sciences (TLS) team to facilitate warm introductions between emerging New Jersey TLS companies and sophisticated angel & institutional investors. Our mission is to help grow the TLS ecosystem to support innovative NJ companies. Hosted twice per year, venture capital investors are invited to meet with a select group of companies for 10-minute, one-on-one sessions to discuss strategy, business models and funding opportunities.
 
-• Warm Intros to Angels &amp; VCs &nbsp;- Connected based on company profile and investment thesis
-• 1:1 Q&amp;A Sessions - Smart, honest feedback on your business model, strategy and technology
+• Warm Intros to Angels & VCs  - Connected based on company profile and investment thesis
+• 1:1 Q&A Sessions - Smart, honest feedback on your business model, strategy and technology
 • Meet the Tech Ecosystem - Meet fellow entrepreneurs and key stakeholders
 
 [https://application.njeda.com/tls/](https://application.njeda.com/tls/)
@@ -162,8 +161,8 @@ The NJ CoVest Fund provides seed funding to New Jersey technology and life scien
 
 • The Note will require a negative pledge on the company’s technology/intellectual property and a lien will spring on this technology/intellectual property in the event of default.
 
-<strong>Eligibility Guidelines:
-</strong>
+**Eligibility Guidelines:
+**
 _Company:_
 • Early Stage in technology or life sciences industries.
 • Structured as a C-Corporation or a LLC with Unit Structure.
@@ -193,7 +192,7 @@ Fees apply.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s [Premier Business Services (PBS) portal](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the Business Incentive Tax Clearance can be printed directly through PBS.
 
 [www.njeda.com/njcovest](http://www.njeda.com/njcovest)
@@ -206,15 +205,15 @@ Financing under the following programs is subject to available funding:
 
 **• **[**Edison Innovation Angel Growth Fund:**](https://www.njeda.com/financing_incentives/technology_lifesciences/edison_innovation_fund/Edison-Innovation-Angel-Growth-Fund)\*\* \*\*Angel supported technology companies with minimum trailing 12 month commercial revenues of $250,000 may be eligible for up to $250,000 in subordinated convertible debt financing. Growth capital through the Edison Innovation Angel Growth Fund can be used for key hires, product rollout, product enhancement, and marketing/sales. There is a 2:1 angel match funding requirement that must be received within 90 days prior to application.
 
-**• **[**Edison Innovation VC Growth Fund:**](<https://www.njeda.com/financing_incentives/technology_lifesciences/edison_innovation_fund/Edison-Innovation-VC-Growth-Fund-(1)>) Venture capital (VC) supported technology companies with minimum trailing 12 month commercial revenues of $500,000 may be eligible for up to $1 million in subordinated convertible debt financing. Growth capital through the Edison Innovation VC Growth Fund can be used for key hires, product rollout, product enhancement, and marketing/sales. There is a 1:1 VC match funding requirement that must be received within 90 days prior to application.
+**• **[**Edison Innovation VC Growth Fund:**]() Venture capital (VC) supported technology companies with minimum trailing 12 month commercial revenues of $500,000 may be eligible for up to $1 million in subordinated convertible debt financing. Growth capital through the Edison Innovation VC Growth Fund can be used for key hires, product rollout, product enhancement, and marketing/sales. There is a 1:1 VC match funding requirement that must be received within 90 days prior to application.
 
-**• **[**Edison Innovation Growth Stars Fund:**](<https://www.njeda.com/financing_incentives/technology_lifesciences/edison_innovation_fund/Edison-Innovation-Growth-Stars-Fund-(1)>)\*\* \*\*Angel and/or VC supported technology companies with minimum trailing 12 month commercial revenues of $2,000,000 may be eligible for up to $500,000 in subordinated convertible debt financing. Growth capital through the
+**• **[**Edison Innovation Growth Stars Fund:**]()\*\* \*\*Angel and/or VC supported technology companies with minimum trailing 12 month commercial revenues of $2,000,000 may be eligible for up to $500,000 in subordinated convertible debt financing. Growth capital through the
 
 Edison Innovation Growth Stars Fund can be used for key hires, product rollout, product enhancement, and marketing/sales. There is a 1:1 match funding requirement that must be received within 90 days prior to application.
 
 ### 6. Venture Fund Investments
 
-EDA forms collaborative partnerships with venture capital fund managers active in New Jersey’s Technology and life science community. Our venture partners leverage EDA investment to increase funds available for emerging technology &amp; life sciences companies to grow and create jobs in the State.
+EDA forms collaborative partnerships with venture capital fund managers active in New Jersey’s Technology and life science community. Our venture partners leverage EDA investment to increase funds available for emerging technology & life sciences companies to grow and create jobs in the State.
 
 **Dollar Amount:**
 
@@ -224,14 +223,14 @@ EDA’s average historical commitment is $2.6 million since program inception. Q
 
 Investment in early-stage technology and life science companies with revenues, generally, less than $3 million
 
-<strong>Benefits:
-</strong>
+**Benefits:
+**
 • Investment capital for approved partners
 • Build strategic relationships in the technology and life sciences community
 • Support growth and job creation for NJ companies
 
-<strong>Eligibility:
-</strong>
+**Eligibility:
+**
 • See venture fund policy and investment guidelines below
 • Application submission required for consideration
 
@@ -263,7 +262,7 @@ Venture fund managers seeking EDA investment will apply through the online appli
 
 2. Depth of Resource: Consideration is given to the size and experience of additional team, as well as, the current staffing processes used in order to effectuate the strategy. Succession / continuity planning is considered.
 
-3. NJEDA Partnering: The prospective manager is assessed on its ability and willingness to serve as a strategic partner to EDA, support the Technology &amp; Life Sciences ecosystem in New Jersey and locate in the State.
+3. NJEDA Partnering: The prospective manager is assessed on its ability and willingness to serve as a strategic partner to EDA, support the Technology & Life Sciences ecosystem in New Jersey and locate in the State.
 
 4. Sourcing: The prospective manager is assessed on its ability to source and track relevant and non-traditional deal flow to maintain an advantage in effectuating the stated strategy, with particular emphasis on New Jersey.
 
@@ -319,8 +318,8 @@ What is the Incubator and Collaborative Workspace Initiative?
 
 • EDA will provide an additional month of support if the workspace is located in an Opportunity Zone, affiliated with a hospital system or New Jersey university, or is recently established. These months can be added together for a total of three additional months. These months do not count toward the workspace match requirement or the tenant commitment requirement.
 
-<strong>What is required of the workspace?
-</strong>
+**What is required of the workspace?
+**
 
 _Step 1: Become an Approved Site_
 

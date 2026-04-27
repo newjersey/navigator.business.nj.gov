@@ -3,7 +3,6 @@ name: "How do I participate in NJ STEP (New Jersey State Trade Expansion Program
 slug: "how-do-i-participate-in-nj-step-new-jersey-state-trade-expansion-program"
 webflowId: "5e31b06cb76b830c54358ee6"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Welcome to the 2018-2020 New Jersey State Trade Expansion Program (NJ STEP). The Program is funded in part through a grant with the U.S. Small Business Administration (SBA).
@@ -62,7 +61,7 @@ For the purposes of the STEP program, Small Business Communities are defined by 
 - 13 C.F.R 124. 104 - [Who Is Economically Disadvantaged?](https://www.gpo.gov/fdsys/granule/CFR-2012-title13-vol1/CFR-2012-title13-vol1-sec124-104)
 - 13 CFR 103 - [Standards For Conducting Business With SBA](https://www.gpo.gov/fdsys/granule/CFR-2011-title13-vol1/CFR-2011-title13-vol1-part103)
 - 13 C.F.R. part 121 - [Small Business Size Regulations](https://www.ecfr.gov/cgi-bin/text-idx?SID=50ff66d5d1cc9357d5f4ce114fcc5c79&mc=true&node=pt13.1.121&rgn=div5)
-- 26 USC 1393(2), [Rural area](<http://uscode.house.gov/view.xhtml?req=(title:26%20section:1393%20edition:prelim)>)
+- 26 USC 1393(2), [Rural area]()
 - OMB Bulletin No. 15-01 - [Metropolitan and Micropolitan areas](https://www.census.gov/programs-surveys/metro-micro/about/omb-bulletins.html)
 - 38 CFR 3.1(d) - [Title 38: Pensions, Bonuses, and Veterans' Relief](https://www.ecfr.gov/cgi-bin/text-idx?SID=c2a864a94d2fa2e8385288b107dd7623&node=se38.1.3_11&rgn=div8)
 - 13 CFR 125.8(g) Title 13 - Part 125 - [Government Contracting Programs](https://www.ecfr.gov/cgi-bin/text-idx?SID=50ff66d5d1cc9357d5f4ce114fcc5c79&mc=true&node=pt13.1.125&rgn=div5)

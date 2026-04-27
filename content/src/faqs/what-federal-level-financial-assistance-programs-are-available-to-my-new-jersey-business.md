@@ -3,7 +3,6 @@ name: "What federal-level financial assistance programs are available to my New 
 slug: "what-federal-level-financial-assistance-programs-are-available-to-my-new-jersey-business"
 webflowId: "5e31b06cb76b830abe358ee2"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### U.S. Small Business Administration Programs
@@ -12,7 +11,9 @@ The U.S. Small Business Administration (SBA) is the largest source of long-term 
 
 In order to determine whether you qualify, or if an SBA business loan best suits your financing needs, please read the following carefully. For more details on the SBA and its programs, visit its Web site at [www.sba.gov/nj.](http://www.sba.gov/nj)
 
-<h5>**The 7(a) Loan Guaranty Program**</h5>**‍**The 7(a) Loan Guaranty Program is the SBA’s primary loan program. The SBA reduces risk to lenders by guaranteeing major portions of loans made to small businesses. This enables the lenders to provide financing to small businesses when funding is otherwise unavailable on equity favorable terms.
+##### **The 7(a) Loan Guaranty Program**
+
+**‍**The 7(a) Loan Guaranty Program is the SBA’s primary loan program. The SBA reduces risk to lenders by guaranteeing major portions of loans made to small businesses. This enables the lenders to provide financing to small businesses when funding is otherwise unavailable on equity favorable terms.
 
 The eligibility requirements and credit criteria of the program are very broad in order to accommodate a wide range of financing needs. When a small business applies to a lending institution for a loan, the lender reviews the application and decides if it merits a loan on its own or if it requires additional support in the form of an SBA guaranty.
 The lender may then request an SBA guaranty. In guaranteeing the loan, the SBA assures the lender that, in the event the borrower does not repay the loan, the government will reimburse the lending institution for a substantial portion of its loss.
@@ -26,17 +27,17 @@ The maximum amount of an SBA guaranty is $1.5 million. Borrowers seeking funding
 
 **_How it Works_**
 
-**_‍_**A borrower submits a loan application to a lender for initial review. If the lender approves the loan subject to an SBA guaranty, a copy of the application and a credit analysis are forwarded by the lender to the nearest SBA office.
-SBA’s review and approval process is streamlined for the Certified &amp; Preferred Lenders program and the SBA Express lenders. After SBA approval, the lending institution closes the loan and disburses the funds.
+***‍***A borrower submits a loan application to a lender for initial review. If the lender approves the loan subject to an SBA guaranty, a copy of the application and a credit analysis are forwarded by the lender to the nearest SBA office.
+SBA’s review and approval process is streamlined for the Certified & Preferred Lenders program and the SBA Express lenders. After SBA approval, the lending institution closes the loan and disburses the funds.
 Monthly loan payments are made directly to the lender. As with any loan, the borrower is responsible for repaying the full amount due.
 
 **_Use of Proceeds_**
 
-**_‍_**A borrower can use a 7(a) loan to: expand or renovate facilities; purchase machinery, equipment, fixtures and leasehold improvements; finance receivables and augment working capital; refinance existing debt if certain conditions are met; finance seasonal lines of credit; construct commercial buildings; and/or purchase land or buildings.
+***‍***A borrower can use a 7(a) loan to: expand or renovate facilities; purchase machinery, equipment, fixtures and leasehold improvements; finance receivables and augment working capital; refinance existing debt if certain conditions are met; finance seasonal lines of credit; construct commercial buildings; and/or purchase land or buildings.
 
 **_Terms, Interest Rates and Fees_**
 
-**_‍_**The length of time for repayment depends on the use of the proceeds and the ability of your business to repay: usually five to seven years for working capital and up to 25 years for fixed assets such as the purchase or major renovation of real estate or purchase of equipment.
+***‍***The length of time for repayment depends on the use of the proceeds and the ability of your business to repay: usually five to seven years for working capital and up to 25 years for fixed assets such as the purchase or major renovation of real estate or purchase of equipment.
 
 Both fixed and variable interest rates are available. Rates are pegged at no more than 2.25 percent over the lowest prime rate (as published in the Wall Street Journal) for loans with maturities of less than seven years and up to 2.75 percent above prime for maturities of seven years or longer.
 
@@ -48,12 +49,12 @@ On loans with maturities of more than one year, the guaranty fee is 2 percent on
 
 **_Collateral_**
 
-**_‍_**Borrowers must pledge sufficient assets, to the extent that they are reasonably available, to adequately secure the loan. Personal guaranties are required from all the principal owners of the business.
+***‍***Borrowers must pledge sufficient assets, to the extent that they are reasonably available, to adequately secure the loan. Personal guaranties are required from all the principal owners of the business.
 Liens on personal assets of the principals may be required. However, in most cases a loan will not be declined where insufficient collateral is the only unfavorable factor.
 
 **_Eligibility_**
 
-**_‍_**Businesses generally must be operated for profit and fall within the size standards set by the SBA. The SBA determines if the business qualifies as a small business based on the average number of employees during the preceding 12 months or on sales averaged over the previous three years. Loans cannot be made to businesses engaged in speculation or investment.
+***‍***Businesses generally must be operated for profit and fall within the size standards set by the SBA. The SBA determines if the business qualifies as a small business based on the average number of employees during the preceding 12 months or on sales averaged over the previous three years. Loans cannot be made to businesses engaged in speculation or investment.
 
 **_Small Business Size Standards_**
 
@@ -63,7 +64,7 @@ Liens on personal assets of the principals may be required. However, in most cas
 - Retailing – most common standard is average annual receipts not to exceed $6.5 million; several retail businesses at $19.9 million to $25 million in sales‍
 - General construction - average annual receipts not to exceed $31 million‍
 - Special trade construction - average annual receipts not to exceed $13 million‍
-- Agriculture – most &nbsp;common standard is average &nbsp;annual &nbsp;receipts &nbsp;not &nbsp;to &nbsp;exceed $750,000; some groups at $1.5 million at $11.5 million in sales
+- Agriculture – most  common standard is average  annual  receipts  not  to  exceed $750,000; some groups at $1.5 million at $11.5 million in sales
 
 **_Applying for a loan_**
 When applying for a loan, you must prepare a written loan proposal. Make your best presentation in the initial loan proposal and application; you may not get a second opportunity.
@@ -90,35 +91,38 @@ _Common requirements include the following:_
 In addition to documentation needed, the SBA needs to know more about you and your plan to be sure that planning and thorough forethought has been given to your enterprise. The SBA looks for the following elements to aid them in their risk assessment:
 
 - Good character‍
-- Management &nbsp;expertise &nbsp;and &nbsp;commitment necessary for success‍
+- Management  expertise  and  commitment necessary for success‍
 - Sufficient funds, including the SBA guaranteed loan, to operate the business on a sound financial basis (for new businesses, this includes the resources to meet start-up expenses and the initial operating phase)‍
 - Feasible business plan‍
-- Adequate &nbsp;equity &nbsp;or &nbsp;investment &nbsp;in &nbsp;the business‍
+- Adequate  equity  or  investment  in  the business‍
 - Sufficient collateral‍
-<li>Ability to repay the loan on time from the projected operating cash flow
-</li>
-<h5>**Specialized Programs Under 7(A)**</h5>**‍**There are a number of special loan guaranty programs under the 7(a) program that address specific needs of start-up or established businesses.
+
+* Ability to repay the loan on time from the projected operating cash flow
+
+##### **Specialized Programs Under 7(A)**
+
+**‍**There are a number of special loan guaranty programs under the 7(a) program that address specific needs of start-up or established businesses.
 They are governed, for the most part, by the same rules, regulations, fees, interest rates, etc., as the regular 7(a) loan guaranty. Your lender can advise you of any variations.
 
 **_SBAExpress_**
 
-**_‍_**SBAExpress provides additional incentives to lenders to make small business loans. Participating banks use their own documentation and procedures to approve and service loans of up to $350,000. In return, the SBA guarantees up to 50 percent of each loan and provides expedited processing, often approving applications within 36 hours. &nbsp;SBAExpress also provides revolving lines of credit of up to $350,000 for terms of up to seven years.
+***‍***SBAExpress provides additional incentives to lenders to make small business loans. Participating banks use their own documentation and procedures to approve and service loans of up to $350,000. In return, the SBA guarantees up to 50 percent of each loan and provides expedited processing, often approving applications within 36 hours.  SBAExpress also provides revolving lines of credit of up to $350,000 for terms of up to seven years.
 
 **_Low Documentation Loan (LowDoc)_**
 
-**_‍_**For small business loans of $150,000 or less, LowDoc features a one-page SBA application, cutting the paperwork burden for both small businesses and lending institutions.
+***‍***For small business loans of $150,000 or less, LowDoc features a one-page SBA application, cutting the paperwork burden for both small businesses and lending institutions.
 
 Once the applicant has satisfied the lender’s requirements, the lender and applicant together complete the SBA’s one-page guaranty application. If approved, the SBA guarantees up to 85 percent of the loan, with a quick turnaround to the lender.
 
 **_CAPLines_**
 
-**_‍_**There are five Short Term Loans and Revolving Lines of Credit programs under CAPLines, which provide financing for the short-term, cyclical working capital needs of small businesses.
+***‍***There are five Short Term Loans and Revolving Lines of Credit programs under CAPLines, which provide financing for the short-term, cyclical working capital needs of small businesses.
 
 CAPLines may be used to: finance seasonal working capital needs; finance direct costs needed to perform construction, service and supply contracts; finance direct costs associated with commercial and residential construction without a firm commitment for purchase; finance operating capital by obtaining advances against existing inventory and accounts receivable; or consolidate short-term debt.
 
 **_Patriot Express Pilot Loan Initiative_**
 
-**_‍_**The U.S. Small Business Administration has announced the SBA’s Patriot Express Pilot Loan Initiative for veterans and members of the military community wanting to establish or expand small businesses.
+***‍***The U.S. Small Business Administration has announced the SBA’s Patriot Express Pilot Loan Initiative for veterans and members of the military community wanting to establish or expand small businesses.
 
 The U.S. Small Business Administration (SBA) Patriot Express Loan program offers veterans and members of the military community both term loans and lines of credit to help fulfill a variety of financing needs—inventory, equipment, and real estate purchases, starting a new business, or refinancing existing debt
 
@@ -146,13 +150,13 @@ Loans may be made under the 7(a) and/or 504 programs. The maximum loan amount fo
 
 **_The Certified and Preferred Lenders Program_**
 
-**_‍_**The most active and expert lenders qualify for the SBA’s Certified and Preferred Lenders Program. Participants are delegated partial or full authority to approve loans, which results in faster service. Certified (CLP) lenders are those that have been heavily involved in regular SBA loan-guaranty processing and have met certain other criteria.
+***‍***The most active and expert lenders qualify for the SBA’s Certified and Preferred Lenders Program. Participants are delegated partial or full authority to approve loans, which results in faster service. Certified (CLP) lenders are those that have been heavily involved in regular SBA loan-guaranty processing and have met certain other criteria.
 
 They receive a partial delegation of authority and are given a three-day turnaround on their applications. Preferred (PLP) lenders are chosen from among the SBA’s best lenders and enjoy full delegation of lending authority. This authority must be renewed at least every two years and the lender’s portfolio is subject to performance benchmarks and is examined periodically by the SBA.
 
 **_The 504 Loan Program_**
 
-**_‍_**The SBA’s 504 Loan Program provides long- term, fixed asset financing through certified development companies (CDC’s).
+***‍***The SBA’s 504 Loan Program provides long- term, fixed asset financing through certified development companies (CDC’s).
 
 These nonprofit organizations are sponsored by private interests or by state and local governments. The SBA can guarantee debentures covering as much as 40 percent of a 504 project, up to $1.5 million for meeting job creation criteria or a community development goal.
 
@@ -160,42 +164,42 @@ Generally, a business must create or retain one job for every $50,000 provided b
 Generally, a manufacturer must create or retain one job for every $100,000 provided by the SBA. Programs from the 504 loans must be used for fixed asset projects such as purchasing land and improvements, including existing buildings, grading, street improvements, utilities, parking lots and landscaping; construction of new facilities, or modernization or converting existing facilities; or purchasing long-term machinery and equipment.
 
 The 504 Loan program cannot be used for working capital or inventory, consolidating or repaying debt, or refinancing.
-<em>
-</em>**_The 7(M) MicroLoan Program_**
 
-**_‍_**The MicroLoan Program makes smaller amounts of capital (up to $35,000) available through SBA intermediaries.
-Although a borrower must prove credit worthiness and the viability of the business idea, collateral and other stringent requirements will be eased.
-The private non-profit intermediaries receive loans from SBA to establish a local revolving loan fund and they re-lend the money to local entrepreneurs within their designated areas.
-Management and technical assistance is also available after loan closings to assist the borrower in the successful execution of the business plan.
-For information, contact the intermediary lender in your area.
+- **\*_The 7(M) MicroLoan Program_**
 
-**Regional Business Assistance Corporation**
-247 East Front Street
-Trenton, NJ 08611
-609-587-1133
-Service area: Bergen, Burlington, Hunterdon, Mercer, Middlesex, Monmouth, Morris, Somerset, Sussex and Warren Counties
+  ***‍***The MicroLoan Program makes smaller amounts of capital (up to $35,000) available through SBA intermediaries.
+  Although a borrower must prove credit worthiness and the viability of the business idea, collateral and other stringent requirements will be eased.
+  The private non-profit intermediaries receive loans from SBA to establish a local revolving loan fund and they re-lend the money to local entrepreneurs within their designated areas.
+  Management and technical assistance is also available after loan closings to assist the borrower in the successful execution of the business plan.
+  For information, contact the intermediary lender in your area.
 
-**Greater Newark Business Development Consortium**
-744 Broad Street, 26th floor
-Newark, NJ 07102
-973-242-4134
-Service area: Statewide
+  **Regional Business Assistance Corporation**
+  247 East Front Street
+  Trenton, NJ 08611
+  609-587-1133
+  Service area: Bergen, Burlington, Hunterdon, Mercer, Middlesex, Monmouth, Morris, Somerset, Sussex and Warren Counties
 
-**UCEDC**
-Liberty Hall Corporate Center 1085 Morris Avenue, Suite 531
-Union, NJ 07083
-908-527-1166
-Service area: &nbsp;Statewide
+  **Greater Newark Business Development Consortium**
+  744 Broad Street, 26th floor
+  Newark, NJ 07102
+  973-242-4134
+  Service area: Statewide
 
-**Cooperative Business Assistance Corporation**
-328 Market Street
-Camden, NJ 08102
-856-966-8181
-Service Areas: Atlantic, Camden, Cape May, Cumberland, Gloucester and Salem Counties
+  **UCEDC**
+  Liberty Hall Corporate Center 1085 Morris Avenue, Suite 531
+  Union, NJ 07083
+  908-527-1166
+  Service area:  Statewide
 
-**_The Small Business Investment Company (SBIC) Program_**
+  **Cooperative Business Assistance Corporation**
+  328 Market Street
+  Camden, NJ 08102
+  856-966-8181
+  Service Areas: Atlantic, Camden, Cape May, Cumberland, Gloucester and Salem Counties
 
-**_‍_**There are a variety of alternatives to bank financing for small businesses, especially business start-ups. The Small Business Investment Company (SBIC) fills the gap between the availability of venture capital and the needs of small businesses that are either starting or growing.
+  **_The Small Business Investment Company (SBIC) Program_**
+
+  ***‍***There are a variety of alternatives to bank financing for small businesses, especially business start-ups. The Small Business Investment Company (SBIC) fills the gap between the availability of venture capital and the needs of small businesses that are either starting or growing.
 
 Licensed and regulated by the SBA, SBICs are privately owned and managed investment firms that make capital available to small businesses through investments or loans.
 
@@ -207,7 +211,7 @@ The SBIC Program provides funding to all types of manufacturing and service indu
 
 **_The Surety Bond Program_**
 
-**_‍_**The Surety Bond Guarantee (SBG) Program was developed to provide small and minority contractors with opportunities for which they would not otherwise bid.
+***‍***The Surety Bond Guarantee (SBG) Program was developed to provide small and minority contractors with opportunities for which they would not otherwise bid.
 
 The Office of Surety Guarantees administers the SBG Program through a private-public partnership between the federal government and the surety industry. SBA guarantees bid, performance, payment and ancillary bonds issued by surety companies for construction, service and supply contracts, and reimburses the sureties a percentage of the losses sustained if the contractor defaults.
 
@@ -221,6 +225,6 @@ Each of these programs targets a different segment of the contracting community 
 
 The surety bond guarantee programs are a major factor in the surety reinsurance and contracting industries and are recognized as a primary stabilizing influence by those industries.
 
-<strong>For more information on the SBA, contact:
+**For more information on the SBA, contact:
 973-645-2434
-</strong>[**www.sba.gov/nj**](http://www.sba.gov/nj)
+**[**www.sba.gov/nj**](http://www.sba.gov/nj)

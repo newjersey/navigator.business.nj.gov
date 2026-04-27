@@ -4,7 +4,6 @@ slug: "change-my-business-address-or-amend-my-charter-documents"
 webflowId: "5e31b06cb76b839110358e9f"
 category: "start-a-business"
 sub-category: "registering-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Depending on how your business is organized, forms can be used to amend your charter documents.

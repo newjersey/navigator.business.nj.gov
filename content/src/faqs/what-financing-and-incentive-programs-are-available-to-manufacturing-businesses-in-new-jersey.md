@@ -3,14 +3,13 @@ name: "What financing and incentive programs are available to manufacturing busi
 slug: "what-financing-and-incentive-programs-are-available-to-manufacturing-businesses-in-new-jersey"
 webflowId: "5e31b06cb76b831a9a358ef6"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ‍
 
-<a href="https://www.njeda.com/financing_incentives/programs/Premier-Lender-Program" target="_blank">1. Premier Lender Program
-</a><a href="https://www.njeda.com/financing_incentives/programs/direct_loans" target="_blank">2. Direct Loans
-</a>[3. Bond Financing](https://www.njeda.com/financing_incentives/programs/Premier-Lender-Program)
+[1. Premier Lender Program
+](https://www.njeda.com/financing_incentives/programs/Premier-Lender-Program)[2. Direct Loans
+](https://www.njeda.com/financing_incentives/programs/direct_loans)[3. Bond Financing](https://www.njeda.com/financing_incentives/programs/Premier-Lender-Program)
 
 (See [article](https://intercom.help/nj-business/en/articles/3232432-what-financing-and-incentive-programs-are-available-to-small-and-midsize-businesses): "What financing and incentive programs are available to small and midsize businesses?")
 
@@ -22,7 +21,7 @@ author: "5e31b06cb76b836564358e8f"
 
 **7. Sales Tax Exemption on Manufacturing Equipment**: New Jersey offers a full 6.625% sales tax exemption on the purchase of eligible manufacturing equipment. The exemption is good for machinery and equipment used directly and primarily in the production of tangible personal property by manufacturing, processing, assembling, or refining.
 
-[https://www.njeda.com/financing_incentives/Programs/Salem-County-Energy-Sales-Tax-Exemption-(1)](<https://www.njeda.com/financing_incentives/Programs/Salem-County-Energy-Sales-Tax-Exemption-(1)>)
+[https://www.njeda.com/financing_incentives/Programs/Salem-County-Energy-Sales-Tax-Exemption-(1)]()
 
 Companies interested in receiving the exemption can use the Division of Taxation’s ST-4.
 

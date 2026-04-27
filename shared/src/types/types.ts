@@ -546,7 +546,12 @@ export interface FaqItem {
   category?: string;
   "sub-category"?: string;
   webflowId?: string;
-  author?: string;
+}
+
+export interface SubCategoryItem {
+  name: string;
+  slug: string;
+  webflowId?: string;
 }
 
 export interface CategoryItem {

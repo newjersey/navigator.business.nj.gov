@@ -3,7 +3,6 @@ name: "Can my business get a property tax abatement?"
 slug: "can-my-business-get-a-property-tax-abatement"
 webflowId: "5e31b06cb76b835c21358eea"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **Payment In Lieu of Taxes/Long Term Property Tax Abatement**

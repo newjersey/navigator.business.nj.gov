@@ -10,7 +10,7 @@ webflowId: "60f1b677fadff341bfc4c85a"
 
 If your organization is selected to host a pop-up site, you will be matched to an existing vaccine provider in your vicinity.
 
-&nbsp;**Will my company have to pay for the vaccine or the pop-up?**
+ **Will my company have to pay for the vaccine or the pop-up?**
 
 No, there is no cost to the company for scheduling a pop-up through this process, or for providing the COVID-19 vaccine to individuals. Based on the CDC COVID-19 Vaccination Program Provider Agreement, all providers must vaccinate individuals regardless of whether they have health insurance coverage or what type of coverage they have, and are prohibited from balance billing or otherwise charging vaccine recipients themselves. The New Jersey Department of Health website has more information.
 
@@ -60,7 +60,7 @@ While you should promote the vaccine with your employees, it is recommended that
 
 Yes, partnerships are encouraged.
 
-&nbsp;**Are there any state-sponsored incentives which we could use to promote the event? **
+ **Are there any state-sponsored incentives which we could use to promote the event? **
 
 Yes. The State of NJ has launched several initiatives for vaccinated individuals, including the “Vax and Visit” and “Operation Jersey Summer” campaigns. More information can be found here.
 
@@ -90,14 +90,13 @@ This will be determined in conjunction with your provider partner. If a very lar
 
 The EEOC issued guidance on these topics in May 2021, which can be found on their website. Relevant parts of that guidance include:
 
-- Federal EEO laws do not prevent an employer from requiring all employees physically entering the workplace to be vaccinated for COVID-19, so long as employers comply with the reasonable accommodation provisions of the ADA and Title VII of the Civil Rights Act of 1964 and other EEO considerations.&nbsp;Other laws, not in EEOC’s jurisdiction, may place additional restrictions on employers. From an EEO perspective, employers should keep in mind that because some individuals or demographic groups may face greater barriers to receiving a COVID-19 vaccination than others, some employees may be more likely to be negatively impacted by a vaccination requirement.
+- Federal EEO laws do not prevent an employer from requiring all employees physically entering the workplace to be vaccinated for COVID-19, so long as employers comply with the reasonable accommodation provisions of the ADA and Title VII of the Civil Rights Act of 1964 and other EEO considerations. Other laws, not in EEOC’s jurisdiction, may place additional restrictions on employers. From an EEO perspective, employers should keep in mind that because some individuals or demographic groups may face greater barriers to receiving a COVID-19 vaccination than others, some employees may be more likely to be negatively impacted by a vaccination requirement.
 - Federal EEO laws do not prevent or limit employers from offering incentives to employees to voluntarily provide documentation or other confirmation of vaccination obtained from a third party (not the employer) in the community, such as a pharmacy, personal health care provider, or public clinic. If employers choose to obtain vaccination information from their employees, employers must keep vaccination information confidential pursuant to the ADA.
 - Employers that are administering vaccines to their employees may offer incentives for employees to be vaccinated, as long as the incentives are not coercive. Because vaccinations require employees to answer pre-vaccination disability-related screening questions, a very large incentive could make employees feel pressured to disclose protected medical information.
 
-&nbsp;
-&nbsp;
+ 
 
-&nbsp; &nbsp; &nbsp;
+ 
+
+     
 **‍**
-
-&nbsp;&nbsp;

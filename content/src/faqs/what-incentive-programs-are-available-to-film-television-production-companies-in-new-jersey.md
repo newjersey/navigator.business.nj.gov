@@ -3,7 +3,6 @@ name: "What incentive programs are available to film/television production compa
 slug: "what-incentive-programs-are-available-to-film-television-production-companies-in-new-jersey"
 webflowId: "5e31b06cb76b83513b358ee9"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### New Jersey Motion Picture and Television Commission

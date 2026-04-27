@@ -4,7 +4,6 @@ slug: "what-types-forms-of-businesses-are-there"
 webflowId: "5e31b06cb76b83c944358ea3"
 category: "start-a-business"
 sub-category: "choosing-a-business-type"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Your first step to doing business in New Jersey is deciding which form of business organization you wish to operate under. There are several options, each with their own advantages and disadvantages. Learn more about the different available business structures in [Choose a Business Structure](/pages/choose-a-business-structure).

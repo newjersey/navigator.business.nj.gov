@@ -3,7 +3,6 @@ name: "What is the Office of Planning Advocacy, and what decisions does it make 
 slug: "what-is-the-office-of-planning-advocacy-and-what-decisions-does-it-make-that-are-relevant-to-new-jersey-businesses"
 webflowId: "5e31b06cb76b83b20d358ec4"
 category: "grow-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **Planning in New Jersey**

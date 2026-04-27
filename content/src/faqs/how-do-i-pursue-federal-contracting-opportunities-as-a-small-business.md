@@ -4,7 +4,6 @@ slug: "how-do-i-pursue-federal-contracting-opportunities-as-a-small-business"
 webflowId: "5e31b06cb76b8335f5358eca"
 category: "grow-a-business"
 sub-category: "contracting-with-the-state"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### U.S. Small Business Administration’s (SBA) Government Contracting Program
@@ -13,7 +12,7 @@ The Government Contracting Program of SBA ensures that small businesses receive 
 
 **The Government Contracting Program of SBA works to make sure small businesses get at least 23 percent of all federal contracting dollars.**
 
-Additionally, the government tries to award a certain percentage of all federal prime contracting dollars to small businesses each year called Set-asides, that meet certain socio-economic conditions.They include &nbsp; Minority-owned, Women-owned, Service-disabled veteran-owned and HUBZone-certified small businesses.
+Additionally, the government tries to award a certain percentage of all federal prime contracting dollars to small businesses each year called Set-asides, that meet certain socio-economic conditions.They include   Minority-owned, Women-owned, Service-disabled veteran-owned and HUBZone-certified small businesses.
 
 SBA also provides information and assistance to firms who are interested in obtaining federal contracts. SBA staff can be contacted for additional information at the following locations:
 
@@ -25,7 +24,7 @@ SBA also provides information and assistance to firms who are interested in obta
 
 [www.sba.gov](http://www.sba.gov/)
 
-**Minority Small Business &amp; Capital Ownership Development (MSB/COD) 8(a) Program**
+**Minority Small Business & Capital Ownership Development (MSB/COD) 8(a) Program**
 
 The 8(a) Program is SBA’s effort to promote equal access for socially and economically disadvantaged individuals to participate in the business sector of the nation’s economy.
 

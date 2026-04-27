@@ -4,7 +4,6 @@ slug: "how-do-i-withhold-income-tax-from-my-employees"
 webflowId: "5e31b06cb76b83e4be358eb5"
 category: "operate-a-business"
 sub-category: "hiring-employees"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Employers are required to withhold New Jersey State income tax from the wages of your employees (except Pennsylvania residents). New Jersey gross income tax withheld from employees' wages must be remitted electronically to the State on a weekly, monthly/quarterly, or annual basis. Withholding rates range from 1.5 percent to 7.0 percent.
@@ -45,7 +44,7 @@ For forms or information, call New Jersey’s Taxation’s Automated Tax Informa
 
 New Jersey Division of Taxation Technical Services
 
-PO Box 281 CSB/I&amp;P
+PO Box 281 CSB/I&P
 
 Trenton, NJ 08695-0281
 

@@ -4,7 +4,6 @@ slug: "what-is-franchising"
 webflowId: "5e31b06cb76b83ed08358ea5"
 category: "start-a-business"
 sub-category: "choosing-a-business-type"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Franchising is a form of licensing by which the owner (the franchiser) of a product, service or method obtains distribution through affiliated dealers (the franchisees). The holder of the right is often given exclusive access to a defined geographical area.

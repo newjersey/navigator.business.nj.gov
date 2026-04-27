@@ -3,7 +3,6 @@ name: "What State-level financial assistance programs are available to my busine
 slug: "what-state-level-financial-assistance-programs-are-available-to-my-business"
 webflowId: "5e31b06cb76b83cf4d358ef3"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### New Jersey Economic Development Authority Overview
@@ -34,8 +33,11 @@ If a party meets these criteria, they would be eligible for 50 percent of the to
 • Duly incorporated volunteer fire, ambulance, first aid emergency or rescue companies
 • Independent colleges and universities of New Jersey
 
-<h3>
-Assistance for New Jersey Technology Companies</h3>**New Jersey Commission on Science, Innovation and Technology**
+###
+
+Assistance for New Jersey Technology Companies
+
+**New Jersey Commission on Science, Innovation and Technology**
 
 The New Jersey Commission on Science, Innovation andTechnology (CSIT) is responsible for strengthening the innovation economy within the state, encouraging collaboration and connectivity between industry and academia and the translation of innovations into successful high growth businesses
 

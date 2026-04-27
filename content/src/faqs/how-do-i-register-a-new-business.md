@@ -4,10 +4,9 @@ slug: "how-do-i-register-a-new-business"
 webflowId: "5e31b06cb76b83ee93358ea0"
 category: "start-a-business"
 sub-category: "registering-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
-If your company is a limited liability corporation or a corporation, you must file formation or authorization documents for the public record with the New Jersey Division of Revenue &amp; Enterprise Services (DORES). Partnerships and sole proprietorships are not subject to this step.
+If your company is a limited liability corporation or a corporation, you must file formation or authorization documents for the public record with the New Jersey Division of Revenue & Enterprise Services (DORES). Partnerships and sole proprietorships are not subject to this step.
 
 If your company is a sole proprietorship or a general partnership, you must register in each of the County Clerk's offices in counties where you will conduct business.
 

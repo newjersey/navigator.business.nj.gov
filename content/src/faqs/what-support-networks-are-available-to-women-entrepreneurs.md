@@ -3,7 +3,6 @@ name: "What support networks are available to women entrepreneurs?"
 slug: "what-support-networks-are-available-to-women-entrepreneurs"
 webflowId: "5e31b06cb76b835e21358ede"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### The Women’s Business Center

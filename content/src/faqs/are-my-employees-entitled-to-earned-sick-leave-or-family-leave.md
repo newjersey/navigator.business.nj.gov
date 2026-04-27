@@ -4,7 +4,6 @@ slug: "are-my-employees-entitled-to-earned-sick-leave-or-family-leave"
 webflowId: "5e31b06cb76b834894358eb7"
 category: "operate-a-business"
 sub-category: "hiring-employees"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### Earned Sick Leave Act

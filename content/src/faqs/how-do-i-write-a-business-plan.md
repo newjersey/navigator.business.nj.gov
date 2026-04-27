@@ -3,7 +3,6 @@ name: "How do I write a business plan?"
 slug: "how-do-i-write-a-business-plan"
 webflowId: "5e31b06cb76b8333d4358e91"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **Construction of a Business Plan**

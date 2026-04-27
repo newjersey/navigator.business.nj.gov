@@ -4,7 +4,6 @@ slug: "how-can-i-add-a-business-to-my-premier-business-services-pbs-account"
 webflowId: "5e31b06cb76b830870358ebd"
 category: "operate-a-business"
 sub-category: "filings-and-accounting"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 To add a business to your Premier Business Services (PBS) account, login to the [MyNewJersey Portal](https://my.state.nj.us/openam/UI/Login) and follow the steps below.

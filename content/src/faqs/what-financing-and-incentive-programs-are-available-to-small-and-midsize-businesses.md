@@ -3,7 +3,6 @@ name: "What financing and incentive programs are available to small and midsize 
 slug: "what-financing-and-incentive-programs-are-available-to-small-and-midsize-businesses"
 webflowId: "5e31b06cb76b8320a6358ef8"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### 1. Premier Lender Program
@@ -38,7 +37,7 @@ All fees are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s Premier Business Services (PBS) portal online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the
 Business Incentive Tax Clearance can be printed directly through PBS.
 
@@ -53,7 +52,7 @@ The EDA is pleased to offer this listing of participating financial institutions
 - Atlantic Stewardship Bank
 - Lakeland Bank
 - Sturdy Savings Bank
-- BB&amp;T M&amp;T Bank
+- BB&T M&T Bank
 - TD Bank
 - Bank of America
 - Newfield National Bank
@@ -74,8 +73,9 @@ The EDA is pleased to offer this listing of participating financial institutions
 - Santander Bank
 - Wells Fargo
 - JPMorgan Chase
-<li>Sterling National Bank
-(as of 2/14/2018)</li>
+
+* Sterling National Bank
+  (as of 2/14/2018)
 
 ### 2. Direct Loans
 
@@ -108,7 +108,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s Premier Business Services (PBS) portal online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the Business Incentive Tax Clearance can be printed directly through PBS.
 
@@ -162,7 +162,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s Premier Business Services (PBS) portal online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the Business Incentive Tax Clearance can be printed directly through PBS.
 
 Please note: It is the applicant/client’s responsibility to maintain a current and clear tax clearance certificate. If a current and clear certificate is not evidenced to EDA at time of closing, EDA will not proceed with closing.
@@ -206,7 +206,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates must be requested through the State of New Jersey’s Premier Business Services (PBS) portal online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the
 Business Incentive Tax Clearance can be printed directly through PBS.
 
@@ -244,7 +244,7 @@ The GSGZ BLI Program is a performance-based incentive program. This means that n
 • Certification that the BLI, when combined with other governmental grants, does not exceed 80% of annual lease payment.
 
 **Eligible Areas:**
-EDA has worked with the five GSGZ cities to determine areas within the city that are eligible for the incentive. These areas are consistent with existing redevelopment plans and/or zoning ordinances. &nbsp;Below are maps for your reference. &nbsp;Please contact the GSGZ Program Representative if you are unsure of your location's eligibility.
+EDA has worked with the five GSGZ cities to determine areas within the city that are eligible for the incentive. These areas are consistent with existing redevelopment plans and/or zoning ordinances.  Below are maps for your reference.  Please contact the GSGZ Program Representative if you are unsure of your location's eligibility.
 
 Atlantic City - [Click here for more information](https://www.njeda.com/pdfs/GSGZ_atlanticcity_Map.aspx)
 
@@ -260,7 +260,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s Premier Business Services (PBS) portal online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the
 Business Incentive Tax Clearance can be printed directly through PBS.
@@ -296,7 +296,7 @@ The GSGZ BII Program is a performance-based incentive program. This means that n
 • Documentation reflecting prevailing wage compliance.
 
 **Eligible Areas:**
-EDA has worked with the five GSGZ cities to determine areas within the city that are eligible for the incentive. These areas are consistent with existing redevelopment plans and/or zoning ordinances. &nbsp;Below are maps for your reference. &nbsp;Please contact the GSGZ Program Representative if you are unsure of your location's eligibility.
+EDA has worked with the five GSGZ cities to determine areas within the city that are eligible for the incentive. These areas are consistent with existing redevelopment plans and/or zoning ordinances.  Below are maps for your reference.  Please contact the GSGZ Program Representative if you are unsure of your location's eligibility.
 
 Atlantic City - [Click here for more information](https://www.njeda.com/pdfs/GSGZ_atlanticcity_Map.aspx)
 
@@ -312,7 +312,7 @@ Fees apply and are non-refundable.
 
 Division of Taxation Tax Clearance Certificate required. Certificates may be requested through the State of New Jersey’s Premier Business Services (PBS) portal online.
 
-• Under the Tax &amp; Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
+• Under the Tax & Revenue Center, select Tax Services, then select Business Incentive Tax Clearance.
 • If the applicant’s account is in compliance with its tax obligations and no liabilities exist, the Business Incentive Tax Clearance can be printed directly through PBS.
 
 Please note: It is the applicant/client’s responsibility to maintain a current and clear tax clearance certificate. If a current and clear certificate is not evidenced to EDA at time of application, EDA will not proceed with approval.
@@ -345,7 +345,7 @@ Passaic, NJ 07055
 
 Paterson: Penni Forestieri - UEZ Director
 125 Ellison Street, 4th Floor
-Paterson, NJ &nbsp;07505
+Paterson, NJ  07505
 973-321-1220 Office
 [pforestieri@patersonnj.gov](mailto:pforestieri@patersonnj.gov)
 
@@ -391,7 +391,7 @@ We encourage you to explore how your business can benefit from these services. C
 
 ### 10. Small Business Bonding Readiness Assistance Program
 
-New Jersey Economic Development Authority (NJEDA) has partnered with The African American Chamber of Commerce of New Jersey (AACCNJ) and Minority Business Development Institute (MBDI) for the Small Business Bonding Readiness Assistance Program. MBDI, the program administrator, specializes in Capacity Building Solutions for Small, Minority, Woman, and Veteran-Owned Construction Firms in the areas of Bonding &amp; Insurance, Community Outreach, Capital Management, Compliance &amp; Monitoring, Capacity Building Programs, Back Office Services and Construction Management. The program is designed to help construction business needs, providing comprehensive technical assistance, supportive services and access to capital. The goal is to have more qualified small firms bidding and working on public work and state contracts.
+New Jersey Economic Development Authority (NJEDA) has partnered with The African American Chamber of Commerce of New Jersey (AACCNJ) and Minority Business Development Institute (MBDI) for the Small Business Bonding Readiness Assistance Program. MBDI, the program administrator, specializes in Capacity Building Solutions for Small, Minority, Woman, and Veteran-Owned Construction Firms in the areas of Bonding & Insurance, Community Outreach, Capital Management, Compliance & Monitoring, Capacity Building Programs, Back Office Services and Construction Management. The program is designed to help construction business needs, providing comprehensive technical assistance, supportive services and access to capital. The goal is to have more qualified small firms bidding and working on public work and state contracts.
 
 MBDI has mentored 288 firms in capacity building programs, 181 Financial Education Classes. We have streamed 42 Quickbooks webinars and conducted 1,450 hours of personalized One-on-One assessments and helped firms to qualify for almost $187 million in surety credit, writing bonds as small as $50,000 and as large as $20 million with the world’s largest A+ rated sureties.
 
@@ -548,9 +548,9 @@ The Women’s Business Center (WBC) Program is a network of approximately 110 co
 **Women’s Center for Entrepreneurship Corp. Latin American Economic Development Association**
 Peapack-Gladstone Bank 433 Market Street, Suite 1
 311 Main Street, 2nd floor Camden, NJ 08102-1572
-Chatham, NJ &nbsp;07928 (856) 338-1177
+Chatham, NJ  07928 (856) 338-1177
 Phone: 973-507-9700 Website: [http://www.laeda.com/](http://www.laeda.com/)
-Website: &nbsp;[www.wcecnj.org](http://www.wcecnj.org/)
+Website:  [www.wcecnj.org](http://www.wcecnj.org/)
 
 ### 17. Business Action Center (BAC)
 
@@ -572,7 +572,7 @@ There are a variety of alternatives to bank financing for small businesses. The 
 
 ### 21. Small Business Innovation Research (SBIR) Program
 
-The SBIR program encourages small businesses to advance their technical potential from funds committed by federal agencies with large extramural research and development budgets. The SBIR program serves to fund the critical startup and development stages for a technology and encourages commercialization of the technology. Each year, 11 federal departments and agencies are required to reserve 3.2% of their extramural R&amp;D funds for awards through the SBIR program: Agriculture; Commerce; Defense; Education; Energy; Health and Human Services Homeland Security; Transportation; Environmental Protection Agency; National Aeronautics and Space Administration; and National Science Foundation.
+The SBIR program encourages small businesses to advance their technical potential from funds committed by federal agencies with large extramural research and development budgets. The SBIR program serves to fund the critical startup and development stages for a technology and encourages commercialization of the technology. Each year, 11 federal departments and agencies are required to reserve 3.2% of their extramural R&D funds for awards through the SBIR program: Agriculture; Commerce; Defense; Education; Energy; Health and Human Services Homeland Security; Transportation; Environmental Protection Agency; National Aeronautics and Space Administration; and National Science Foundation.
 
 Participating agencies publish one or more SBIR solicitations per year. The solicitation is a list of topics and areas where they are interested in sponsoring research. Some agencies such as the Departments of Defense and Homeland Security the topics are very specific. These agencies have some very real, specific and immediate problems that they need help in solving. At the other end of the specificity spectrum, the National Institutes of Health (NIH) and Department of Agriculture publish broader categories of interest and leave it to the applicant small business to specify the topic. Beyond those categories, NIH will entertain any proposal related to improving the nation’s health and is the only SBIR agency to consider unsolicited proposals. Companies that think they have a technology that will address an agency’s problem or interests can develop and submit a Phase I proposal. Proposals are evaluated competitively and awards are made based upon relative merit. Emphasis is placed on technologies that both address the sponsoring agency’s interest and also have commercial application.
 
@@ -580,7 +580,7 @@ Participating agencies publish one or more SBIR solicitations per year. The soli
 
 **• Phase I **- purpose is to demonstrate the technical, scientific and increasingly commercial merit and feasibility of the proposed technology. Phase I grant awards vary in size by agency. They are typically up to $100,000, but sometimes more. Upon successful completion of Phase I, companies can apply for Phase II.
 
-**• Phase II **- supports the main R&amp;D effort and may include the development of a prototype. &nbsp;Phase
+**• Phase II **- supports the main R&D effort and may include the development of a prototype.  Phase
 II awards also vary by agency. They are typically up to $750,000, but sometimes more.
 
 **• Phase III **- commercialization. Companies that successfully complete Phases I and II are expected to commercialize their technology. No additional cash awards are available for Phase III. Companies are generally expected by that point to be able to raise the funding they need privately or through a government customer.

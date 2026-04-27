@@ -3,7 +3,6 @@ name: "What are New Jersey's principal industries?"
 slug: "what-are-new-jerseys-principal-industries"
 webflowId: "5e31b06cb76b83b0e1358e95"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 New Jersey's diverse economy includes major pharmaceuticals, life sciences, financial services, advanced manufacturing, information technology, and transportation and logistic sectors. Our Business Advocates have a deep understanding of your industry and all that New Jersey can bring to your business plan. Take a look at our key industry sectors to learn more about New Jersey's advantages. When you grow or relocate in New Jersey, you'll find yourself in good company.

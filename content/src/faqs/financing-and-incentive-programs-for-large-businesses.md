@@ -3,7 +3,6 @@ name: "Financing and incentive programs for large businesses"
 slug: "financing-and-incentive-programs-for-large-businesses"
 webflowId: "5e31b06cb76b8345d2358f08"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Grow NJ is a tax credit for businesses looking to come to the state or at risk of leaving state. Grow NJ is a powerful job creation and retention incentive program that strengthens New Jersey's competitive edge against tax incentive programs in surrounding states. Businesses that are creating or retaining jobs in New Jersey may be eligible for up to tax credits ranging from $500 to $5,000 per job, per year; with bonus credits ranging from $250 to $3,000 per job, per year.
