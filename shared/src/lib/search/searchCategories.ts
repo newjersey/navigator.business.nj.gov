@@ -16,28 +16,17 @@ export const getCategoryData = (categories: CategoryItem[]): FileData[] => {
     const slug = category.slug.toLowerCase();
     const navName = category["nav-name"]?.toLowerCase();
     const descriptionText = category["description-text"]?.toLowerCase();
-    const customizedDropDownLinkFilter =
-      category["customized-drop-down-link-filter"]?.toLowerCase();
     const topicDescription = category["topic-description"]?.toLowerCase();
     const homepageDescription = category["homepage-description"]?.toLowerCase();
-    const navPromoHeading = category["nav-promo-heading"]?.toLowerCase();
-    const navPromoDescription = category["nav-promo-description"]?.toLowerCase();
-    const webflowId = category.webflowId?.toLowerCase();
 
-    const blockTexts = [
-      descriptionText,
-      topicDescription,
-      homepageDescription,
-      navPromoDescription,
-    ].filter((text): text is string => text !== undefined);
+    const blockTexts = [descriptionText, topicDescription, homepageDescription].filter(
+      (text): text is string => text !== undefined,
+    );
 
     const labelledTexts = [
       { content: name, label: "Name" },
       { content: slug, label: "Slug" },
       { content: navName, label: "Nav Name" },
-      { content: customizedDropDownLinkFilter, label: "Link Filter" },
-      { content: navPromoHeading, label: "Promo Heading" },
-      { content: webflowId, label: "Webflow ID" },
     ];
 
     categoryData.push({

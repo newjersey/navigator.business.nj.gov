@@ -32,7 +32,7 @@
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
     "webflow:run-sync": "yarn webflow:fundings-sync && yarn webflow:industries-sync && yarn webflow:licenses-sync",
-    "webflow:categories-sync": "tsx ./src/scripts/webflow/categorySync.ts",
+    "webflow:categories-pull": "tsx ./src/scripts/webflow/categoryPull.ts",
     "webflow:faq-sync": "tsx ./src/scripts/webflow/faqSync.ts",
     "webflow:fundings-sync": "tsx ./src/scripts/webflow/fundingSync.ts",
     "webflow:industries-sync": "tsx ./src/scripts/webflow/industrySync.ts",
