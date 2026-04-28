@@ -13,8 +13,11 @@
     "url": "https://github.com/newjersey/navigator.business.nj.gov/issues"
   },
   "scripts": {
+    "predev": "pnpm sync:njwds-assets",
     "dev": "next dev",
+    "prebuild": "pnpm sync:njwds-assets",
     "build": "next build",
+    "prestart": "pnpm sync:njwds-assets",
     "start": "next start",
     "clean": "rimraf .next coverage",
     "dependency-check": "node -e \"console.log('static-site dependency-check is not implemented yet')\"",
@@ -28,6 +31,8 @@
     "typecheck": "tsc --noemit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "pretest:accessibility": "pnpm sync:njwds-assets",
+    "sync:njwds-assets": "tsx scripts/syncNjwdsAssets.ts",
     "test:accessibility": "playwright test --config=playwright.a11y.config.ts"
   },
   "keywords": [],
@@ -36,6 +41,7 @@
     "url": "https://github.com/newjersey"
   },
   "license": "MIT",
+  "packageManager": "pnpm@10.19.0",
   "devDependencies": {
     "@axe-core/playwright": "4.11.2",
     "@biomejs/biome": "2.4.12",
@@ -54,6 +60,7 @@
     "playwright": "1.59.1",
     "playwright-core": "1.59.1",
     "rimraf": "6.1.3",
+    "tsx": "4.21.0",
     "typescript": "6.0.3",
     "vite": "8.0.10",
     "vitest": "4.1.5"

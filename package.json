@@ -274,7 +274,6 @@
       "content",
       "shared",
       "web",
-      "packages/static-site",
       "api/cdk",
       "api/src/functions/messagingService/reactEmail"
     ]
@@ -293,6 +292,7 @@
   },
   "homepage": "https://github.com/newjersey/navigator.business.nj.gov#readme",
   "lint-staged": {
+    "packages/static-site/**/*.{css,js,json,md,ts,tsx,yaml,yml}": "bash -c 'cd packages/static-site && pnpm lint:fix' --",
     "*.{js,ts,tsx}": [
       "eslint --fix",
       "prettier --write"

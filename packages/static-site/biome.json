@@ -6,6 +6,7 @@
       "!**/.yarn/*",
       "!.next",
       "!public/vendor",
+      "!public/assets",
       "!coverage",
       "!test-results",
       "!playwright-report",

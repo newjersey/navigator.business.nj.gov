@@ -252,7 +252,7 @@ nvm install
 
 # ============================================================
 echo ""
-echo "=== [5/7] Package manager (Yarn) ==="
+echo "=== [5/7] Package managers (Yarn + pnpm) ==="
 # ============================================================
 
 corepack enable && echo "Corepack enabled." || { echo "Failed to enable corepack."; exit 1; }
@@ -271,4 +271,13 @@ echo ""
 echo "=== [7/7] Install dependencies and build ==="
 # ============================================================
 
-yarn install && yarn build && echo "Dependencies installed and project built." || { echo "Install or build failed."; exit 1; }
+yarn install && yarn build || { echo "Root install or build failed."; exit 1; }
+(
+    cd packages/static-site
+    pnpm install
+    pnpm build
+) || {
+    echo "Static-site install or build failed."
+    exit 1
+}
+echo "Dependencies installed and projects built."
