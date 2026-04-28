@@ -4,7 +4,6 @@ slug: "what-should-i-do-if-my-employee-tests-positive-for-covid-19"
 webflowId: "6273fd7511ea8d5fac100bfc"
 category: "operate-a-business"
 sub-category: "operate-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 New Jersey does not have any COVID-19-specific policies regarding sick leave or job security for private employers. Businesses must abide by existing sick leave and job protection laws.

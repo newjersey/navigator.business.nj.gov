@@ -3,14 +3,13 @@ name: "What are available financing and incentive programs for tech and life sci
 slug: "what-are-available-financing-and-incentive-programs-for-tech-and-life-sciences-companies"
 webflowId: "5e31b06cb76b8374b7358efb"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Visit the New Jersey Economic Development Authority website to learn more about the below financing options for tech and life sciences companies:
 
 **Angel Investor Tax Credit Program:** Investors can receive a 20 percent tax credit for an eligible investment into a qualifying New Jersey company through the state’s Angel Investor Tax Credit Program. The program also offers an additional five-percent bonus for investments made into women- or minority-owned companies.
 
-**Technology Business Tax Certificate Transfer (NOL) Program: **Better known as the Net Operating Loss program, the Technology Business Tax Certificate Transfer Program enables emerging technology and life sciences companies that have not yet reached profitability to sell their net operating losses and unused research and development (R&amp;D) tax credits to unrelated profitable corporations for non-dilutive capital.
+**Technology Business Tax Certificate Transfer (NOL) Program: **Better known as the Net Operating Loss program, the Technology Business Tax Certificate Transfer Program enables emerging technology and life sciences companies that have not yet reached profitability to sell their net operating losses and unused research and development (R&D) tax credits to unrelated profitable corporations for non-dilutive capital.
 
 **Golden Seeds: **First Lady Tammy Murphy and the NJEDA have partnered to create a New Jersey chapter of Golden Seeds, a national investor network focused on supporting women-led businesses to increase available capital for women-led businesses and provide mentorship opportunities for women entrepreneurs.
 
@@ -24,4 +23,4 @@ Visit the New Jersey Economic Development Authority website to learn more about 
 
 **NJ Ignite: **NJ Ignite supports entrepreneurs seeking to operate in collaborative work spaces, while providing work spaces with a competitive advantage and greater value proposition to offer prospective tenants. The goal of NJ Ignite is to drive both greater supply of and demand for incubators, accelerators, and co-working spaces within New Jersey.
 
-**Research with New Jersey:**[\*\* \*\*](http://researchwithnj.com/)ResearchwithNJ.com is an online gateway that lets New Jersey’s entrepreneurs and commercial enterprises identify experts, facilities, publications, intellectual property, news, and events in some of New Jersey’s world-class universities. &nbsp;Research with NJ is designed to help forge collaborative partnerships between academia and the private sector.
+**Research with New Jersey:**[\*\* \*\*](http://researchwithnj.com/)ResearchwithNJ.com is an online gateway that lets New Jersey’s entrepreneurs and commercial enterprises identify experts, facilities, publications, intellectual property, news, and events in some of New Jersey’s world-class universities.  Research with NJ is designed to help forge collaborative partnerships between academia and the private sector.

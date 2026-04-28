@@ -3,7 +3,6 @@ name: "What resources are available for businesses seeking to find locations in 
 slug: "what-resources-are-available-for-businesses-seeking-to-find-locations-in-new-jersey"
 webflowId: "5e31b06cb76b83f5ac358edc"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### 1. Site Selection

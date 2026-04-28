@@ -3,7 +3,6 @@ name: "Can I get a grant through the Economic Development Authority?"
 slug: "can-i-get-a-grant-through-the-economic-development-authority"
 webflowId: "5e31b06cb76b837ec4358f07"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 [**Small Business Lease Assistance Program**](https://njeda.com/leaseassistance/)**:** Reimbursement of a percentage of annual lease payments to for profit businesses and non-profit organizations in eligible areas that plan to lease between 500 and 5,000 square feet of new or additional market-rate, first-floor office, industrial or retail space for a minimum 5-year term.

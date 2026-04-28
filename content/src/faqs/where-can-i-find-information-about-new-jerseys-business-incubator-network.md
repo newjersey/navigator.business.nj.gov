@@ -1,9 +1,8 @@
 ---
-name: "Where can I find information about New Jersey’s Business Incubator network?"
+name: "Where can I find information about New Jersey's Business Incubator network?"
 slug: "where-can-i-find-information-about-new-jerseys-business-incubator-network"
 webflowId: "5e31b06cb76b837db2358ed0"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 For more information about New Jersey’s Business Incubator network visit: [http://www.njbin.org/.](http://www.njbin.org/)
@@ -17,7 +16,7 @@ Barbara Witkowski, MPA
 Mt Laurel, NJ 08054
 609-894-9311 Ext. 2804
 
-**Business Development &nbsp;Incubator at NJ City University**
+**Business Development  Incubator at NJ City University**
 Joseph Tetteh
 Director
 285 West Side Avenue
@@ -29,9 +28,9 @@ Jersey City, NJ 07305
 Lenzi Harcum
 Program Manager
 675US Highway One
-N. &nbsp;Brunswick, NJ 08902
-732-839-1881 &nbsp;
-[lharcum@njeda.com](mailto:lharcum@njeda.com) &nbsp;
+N.  Brunswick, NJ 08902
+732-839-1881  
+[lharcum@njeda.com](mailto:lharcum@njeda.com)  
 
 **Enterprise Development Center NJIT**
 Jerry Creighton, Sr.
@@ -103,8 +102,8 @@ Director
 Asbury Park, NJ 07712
 732-455-0519
 
-**JuiceTank Innovation Lab &amp; Incubator-Accelerator**
-Mukesh M. Patel, Founder &amp; CEO
+**JuiceTank Innovation Lab & Incubator-Accelerator**
+Mukesh M. Patel, Founder & CEO
 220 Davidson Avenue
 Somerset, NJ 08873
 (P) 908-505-5735

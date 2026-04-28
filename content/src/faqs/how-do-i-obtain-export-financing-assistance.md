@@ -3,7 +3,6 @@ name: "How do I obtain export financing assistance?"
 slug: "how-do-i-obtain-export-financing-assistance"
 webflowId: "5e31b06cb76b835a6a358ef9"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Numerous export-financing sources are available. Business seeking financing assistance should first check with local or regional banks. In many cases these banks have international financing services.
@@ -78,6 +77,6 @@ New Jersey’s District Export Council is an affiliate of the U.S. Department of
 
 973-645-4682
 
-[https://www.njdec.org/](https://www.njdec.org/) &nbsp;
+[https://www.njdec.org/](https://www.njdec.org/)  
 
 ‍

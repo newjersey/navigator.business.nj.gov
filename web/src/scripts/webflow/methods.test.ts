@@ -1,14 +1,24 @@
+import type { Element, Root, Text } from "hast";
 import {
   createItem,
   deleteItem,
   getAllCollections,
   getAllItems,
   getCollection,
+  htmlToMarkdown,
   modifyItem,
   normalizeQuotes,
+  processHastNode,
 } from "./methods";
 
-// Helper to create properly typed fetch response mocks
+jest.mock("hast-util-from-html", () => ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  fromHtml: (_html: string, _opts: unknown): Root => ({
+    type: "root",
+    children: [{ type: "text", value: "parsed" }],
+  }),
+}));
+
 function createMockFetchResponse<T>(data: T): Promise<Response> {
   return Promise.resolve({
     ok: true,
@@ -209,6 +219,61 @@ describe("methods", () => {
           method: "DELETE",
         }),
       );
+    });
+  });
+
+  describe("processHastNode", () => {
+    const t = (value: string): Text => ({ type: "text", value });
+    const el = (
+      tagName: string,
+      children: Element["children"],
+      properties: Element["properties"] = {},
+    ): Element => ({ type: "element", tagName, properties, children });
+
+    it("should return text node values as-is without escaping", () => {
+      expect(processHastNode(t("**bold**"))).toBe("**bold**");
+    });
+
+    it("should wrap strong in **", () => {
+      expect(processHastNode(el("strong", [t("bold")]))).toBe("**bold**");
+    });
+
+    it("should wrap em in *", () => {
+      expect(processHastNode(el("em", [t("italic")]))).toBe("*italic*");
+    });
+
+    it("should convert <a> to markdown link", () => {
+      expect(processHastNode(el("a", [t("click here")], { href: "https://example.com" }))).toBe(
+        "[click here](https://example.com)",
+      );
+    });
+
+    it("should convert <br> to newline", () => {
+      expect(processHastNode(el("br", []))).toBe("\n");
+    });
+
+    it("should add double newlines after <p>", () => {
+      expect(processHastNode(el("p", [t("text")]))).toBe("text\n\n");
+    });
+
+    it("should convert <ul>/<li> to markdown list", () => {
+      expect(processHastNode(el("ul", [el("li", [t("item")])]))).toBe("* item\n\n");
+    });
+
+    it("should convert heading tags to markdown headings", () => {
+      expect(processHastNode(el("h2", [t("Title")]))).toBe("## Title\n\n");
+    });
+
+    it("should join root children", () => {
+      const root: Root = { type: "root", children: [t("a"), t("b")] };
+      expect(processHastNode(root)).toBe("ab");
+    });
+  });
+
+  describe("htmlToMarkdown", () => {
+    it("should call fromHtml and process the result", () => {
+      const result = htmlToMarkdown("<p>hello</p>");
+      expect(result).toBe("parsed");
     });
   });
 

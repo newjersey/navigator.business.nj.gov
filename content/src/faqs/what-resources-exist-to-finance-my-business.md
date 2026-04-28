@@ -3,7 +3,6 @@ name: "What resources exist to finance my business?"
 slug: "what-resources-exist-to-finance-my-business"
 webflowId: "5e31b06cb76b83749e358f06"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 There are various resources available through programs and lenders to raise startup capital or obtain a loan.

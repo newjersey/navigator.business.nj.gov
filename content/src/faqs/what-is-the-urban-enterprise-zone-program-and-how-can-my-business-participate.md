@@ -3,7 +3,6 @@ name: "What is the Urban Enterprise Zone Program and how can my business partici
 slug: "what-is-the-urban-enterprise-zone-program-and-how-can-my-business-participate"
 webflowId: "5e31b06cb76b83906c358ef1"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **Urban Enterprise Zone Program**

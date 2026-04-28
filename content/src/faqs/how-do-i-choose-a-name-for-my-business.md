@@ -4,7 +4,6 @@ slug: "how-do-i-choose-a-name-for-my-business"
 webflowId: "5e31b06cb76b835053358e97"
 category: "start-a-business"
 sub-category: "starting-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Before you register your business, you should make sure your intended business’ name is not currently in use elsewhere in New Jersey. You can search which business names are already in use in the state at through [New Jersey Treasury's name availability tool](https://www.njportal.com/DOR/BusinessNameSearch/).

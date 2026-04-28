@@ -3,7 +3,6 @@ name: "What community planning grants are available to New Jersey businesses?"
 slug: "what-community-planning-grants-are-available-to-new-jersey-businesses"
 webflowId: "5e31b06cb76b83c566358eeb"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### 1. The 21st Century Redevelopment Program

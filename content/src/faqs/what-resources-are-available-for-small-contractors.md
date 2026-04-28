@@ -3,7 +3,6 @@ name: "What resources are available for small contractors?"
 slug: "what-resources-are-available-for-small-contractors"
 webflowId: "5e31b06cb76b837ba5358ee0"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 #### Regional Alliance for Small Contractors, Inc. - An Innovative Industry Partnership

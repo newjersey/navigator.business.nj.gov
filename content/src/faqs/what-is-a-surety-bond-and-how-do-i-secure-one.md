@@ -3,7 +3,6 @@ name: "What is a surety bond, and how do I secure one?"
 slug: "what-is-a-surety-bond-and-how-do-i-secure-one"
 webflowId: "5e31b06cb76b837460358f01"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 A surety bond is an instrument under which one party guarantees to another that a third party will perform a contract.
@@ -97,7 +96,7 @@ Vineland, NJ 08360
 
 _G.R. Murray Insurance_
 
-Division of O'Gorman &amp; Young, Inc.
+Division of O'Gorman & Young, Inc.
 
 707 State Road
 
@@ -109,7 +108,7 @@ Princeton, NJ 08542
 
 609-924-5000
 
-[https://www.ajg.com/us/](https://www.ajg.com/us/) &nbsp;
+[https://www.ajg.com/us/](https://www.ajg.com/us/)  
 
 _Global Indemnity Insurance Agency, Inc._
 
@@ -119,7 +118,7 @@ Metuchen, NJ 08840
 
 732-632-2790
 
-[https://www.globalindemnityinsurance.com/](https://www.globalindemnityinsurance.com/) &nbsp;
+[https://www.globalindemnityinsurance.com/](https://www.globalindemnityinsurance.com/)  
 
 _International Fidelity Insurance Co_
 

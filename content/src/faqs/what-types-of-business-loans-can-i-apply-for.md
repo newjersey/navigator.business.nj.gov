@@ -3,7 +3,6 @@ name: "What types of business loans can I apply for?"
 slug: "what-types-of-business-loans-can-i-apply-for"
 webflowId: "5e31b06cb76b8378ea358efc"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### Types of Business Loans

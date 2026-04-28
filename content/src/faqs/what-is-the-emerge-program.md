@@ -5,7 +5,7 @@ webflowId: "60f70c850ecb651b254dc940"
 category: "finance-a-business"
 ---
 
-<a>**Emerge**</a>
+[**Emerge**]()
 
 The Emerge Program provides per-job tax credits to projects that invest private capital into the state and create new good-paying jobs (or retain a large number of good-paying jobs) in Governor Murphy’s priority sectors and in targeted communities across the New Jersey.
 

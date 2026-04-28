@@ -128,6 +128,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "hast-util-from-html" },
+    },
+    {
+      from: {},
       to: { path: "lodash" },
     },
     {
@@ -498,7 +502,7 @@ module.exports = {
       },
       to: {
         dependencyTypes: ["npm-dev"],
-        pathNot: ["airtable"],
+        pathNot: ["airtable", "@types"],
       },
     },
     {

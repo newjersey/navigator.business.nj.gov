@@ -3,7 +3,6 @@ name: "What tax credit programs are available to New Jersey businesses?"
 slug: "what-tax-credit-programs-are-available-to-new-jersey-businesses"
 webflowId: "5e31b06cb76b839385358ef2"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **Division of Taxation’s Corporation Business Tax Credits and Incentives **[https://www.state.nj.us/treasury/taxation/cbt-creditlist.shtml](https://www.state.nj.us/treasury/taxation/cbt-creditlist.shtml)
@@ -13,9 +12,9 @@ author: "5e31b06cb76b836564358e8f"
 Available from the NJ Division of Taxation, the Manufacturing Equipment and Employment Investment Tax Credit provides a credit against corporation business tax liability for investments in certain manufacturing equipment and for certain increased employment. The manufacturing equipment portion of the credit is limited to 2 percent (4 percent for companies with 50 employees or less) of the net cost of qualified equipment up to a maximum allowed credit of $1 million. The employment investment portion of the credit is computed for each of the two succeeding years following the year a credit is allowed for the equipment investment. The tax credit in these years is limited to 3 percent of the net cost of qualified equipment, not to exceed $1,000 per job created directly related to the equipment.
 
 **Research and Development Tax Credit**
-[https://www.state.nj.us/treasury/taxation/pdf/current/cbt/306.pdf](https://www.state.nj.us/treasury/taxation/pdf/current/cbt/306.pdf) &nbsp;
+[https://www.state.nj.us/treasury/taxation/pdf/current/cbt/306.pdf](https://www.state.nj.us/treasury/taxation/pdf/current/cbt/306.pdf)  
 
-Available from the NJ Division of Taxation, the R&amp;D Tax Credit provides a credit for increased research activities based on qualified expenditures. This credit is calculated in the same manner as the federal tax credit for increasing research activities. It provides a credit of 10 percent of excess qualified research expenditures over a base amount, plus 10 percent of basic research payments. For periods beginning on or after January 1, 2012, the amount of the credits applied cannot reduce the tax liability to an amount less than the statutory minimum tax.
+Available from the NJ Division of Taxation, the R&D Tax Credit provides a credit for increased research activities based on qualified expenditures. This credit is calculated in the same manner as the federal tax credit for increasing research activities. It provides a credit of 10 percent of excess qualified research expenditures over a base amount, plus 10 percent of basic research payments. For periods beginning on or after January 1, 2012, the amount of the credits applied cannot reduce the tax liability to an amount less than the statutory minimum tax.
 
 **Urban Enterprise Zone Tax Credit **[https://www.state.nj.us/treasury/taxation/pdf/cbt/2008/300.pdf](https://www.state.nj.us/treasury/taxation/pdf/cbt/2008/300.pdf)
 
@@ -27,7 +26,7 @@ Available through the NJ Division of Taxation, there is an alternate method by w
 
 **Purchasing Tax Credits**
 
-The Technology Business Tax Certificate Transfer Program enables qualified, unprofitable NJ-based technology or biotechnology companies with fewer than 225 US employees (including parent company and all subsidiaries)to sell a percentage of net operating losses (NOL) and research and development (R&amp;D) tax credits to unrelated profitable corporations. Learn more about the program at [https://www.njeda.com/activeprograms](https://www.njeda.com/activeprograms).
+The Technology Business Tax Certificate Transfer Program enables qualified, unprofitable NJ-based technology or biotechnology companies with fewer than 225 US employees (including parent company and all subsidiaries)to sell a percentage of net operating losses (NOL) and research and development (R&D) tax credits to unrelated profitable corporations. Learn more about the program at [https://www.njeda.com/activeprograms](https://www.njeda.com/activeprograms).
 
 ‍
 

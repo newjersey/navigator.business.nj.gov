@@ -4,7 +4,6 @@ slug: "what-business-taxes-apply-to-new-jersey-corporations"
 webflowId: "5e31b06cb76b836dad358ebf"
 category: "operate-a-business"
 sub-category: "tax-information"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 ### Corporate Taxes

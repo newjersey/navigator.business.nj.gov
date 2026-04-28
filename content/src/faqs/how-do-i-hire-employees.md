@@ -4,7 +4,6 @@ slug: "how-do-i-hire-employees"
 webflowId: "5e31b06cb76b8372ac358e99"
 category: "start-a-business"
 sub-category: "starting-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 Whether you are a small employer or a large corporation in New Jersey, hiring and retaining the right people is crucial to the success of your business. The New Jersey Department of Labor and Workforce Development offers training grants and resources to help you recruit the ideal staff and train new and current employees.

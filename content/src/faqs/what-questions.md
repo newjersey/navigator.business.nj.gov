@@ -3,7 +3,6 @@ name: "What questions should I ask when deciding where to locate my business?"
 slug: "what-questions"
 webflowId: "5e31b06cb76b834e2e358b22"
 category: "plan-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **General questions to ask:**

@@ -4,7 +4,6 @@ slug: "what-types-of-insurance-am-i-required-to-provide-for-my-employees"
 webflowId: "5e31b06cb76b83b2ed358eb6"
 category: "operate-a-business"
 sub-category: "hiring-employees"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 There are certain types of insurance that all small businesses should have, such as fire, general liability, automobile liability, automobile physical damage and automobile collision.

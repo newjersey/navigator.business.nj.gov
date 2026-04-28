@@ -1,10 +1,8 @@
 ---
-name: What energy efficiency incentive programs are available to New Jersey
-  businesses?
-slug: what-energy-efficiency-incentive-programs-are-available-to-new-jersey-businesses
-webflowId: 5e31b06cb76b833a3b358eee
-category: finance-a-business
-author: 5e31b06cb76b836564358e8f
+name: "What energy efficiency incentive programs are available to New Jersey businesses?"
+slug: "what-energy-efficiency-incentive-programs-are-available-to-new-jersey-businesses"
+webflowId: "5e31b06cb76b833a3b358eee"
+category: "finance-a-business"
 ---
 
 ### 1. New Jersey Board of Public Utilities (BPU)
@@ -107,8 +105,6 @@ New Jersey's Clean Energy Program is a statewide program that offers financial i
 • Rebate Quicklinks
 • Solar Renewable Energy Certificate (SREC) Program
 
-<http://www.njcleanenergy.com/>
-
 ### 8. Local Government Energy Audit
 
 The Local Government Energy Audit is available to qualifying local governmental and non-profit entities, as well as state colleges and universities. NJCEP provides 100% reimbursement for investment grade energy audits by a prequalified network of energy auditing firms. It allows them to examine their facilities and see how they can improve their energy use.
@@ -118,10 +114,6 @@ The program can help you identify cost-justified energy-efficiency measures, as 
 The LGEA Application Workbook walks applicants through the application requirements. If you have additional questions, please contact us at 866-NJSMART (657-6278) or by email at [LGEA@NJCleanEnergy.com](mailto:LGEA@NJCleanEnergy.com).
 
 Note: If you have submitted a question or application to this email address and have not received a response within five business days, please contact our office at (732) 855-0033 extension 0.
-
-<http://www.njcleanenergy.com/commercial-industrial/programs/local-government-energy-audit/local-government-energy-audit>
-
-<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1404px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1404px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b83052c358c9b_image.png"></div></figure><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1396px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1396px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b83249d358c24_image.png"></div></figure><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1386px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1386px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b8386bd358c68_image.png"></div></figure><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1340px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1340px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b8371dd358c79_image.png"></div></figure><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1342px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1342px"><div><img src="https://uploads-ssl.webflow.com/5e31b06cb76b831258358aa7/5e31b06cb76b8385a6358c02_image.png"></div></figure>
 
 **Rockland Electric**
 

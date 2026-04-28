@@ -3,10 +3,9 @@ name: "How do I participate in the Small Business Set-Aside Program?"
 slug: "how-do-i-participate-in-the-small-business-set-aside-program"
 webflowId: "5e31b06cb76b833df5358f04"
 category: "finance-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
-The State of New Jersey Small Business Set-Aside Program was established with the goal of awarding 25 percent of state contracting and purchase order dollars to small businesses. By registering your small business with the New Jersey Small Business Set-Aside Program, through the Division of Revenue &amp; Enterprise Services, your company becomes a member of a limited group of vendors eligible to participate in these selected contract offerings.
+The State of New Jersey Small Business Set-Aside Program was established with the goal of awarding 25 percent of state contracting and purchase order dollars to small businesses. By registering your small business with the New Jersey Small Business Set-Aside Program, through the Division of Revenue & Enterprise Services, your company becomes a member of a limited group of vendors eligible to participate in these selected contract offerings.
 
 **Standards of Eligibility for Small Business**
 
@@ -26,7 +25,7 @@ For **state construction contracts**, small businesses with no more than 100 ful
 
 The business must be independently owned and operated, with management being responsible for both its daily and long-term operation, as well as owning at least 51 percent interest in the business.
 
-Businesses must be incorporated or registered with the Division of Revenue &amp; Enterprise Services to do business in the State and have its principal place of business in New Jersey, defined when:
+Businesses must be incorporated or registered with the Division of Revenue & Enterprise Services to do business in the State and have its principal place of business in New Jersey, defined when:
 
 - 51 percent or more of its employees work in New Jersey supported by paid New Jersey unemployment taxes or;
 - 51 percent or more of its business operations/activities occur in New Jersey supported by income and/or business tax returns.
@@ -36,6 +35,6 @@ Businesses must be incorporated or registered with the Division of Revenue &amp;
 
 To apply for small business registration and participation in the New Jersey Small Business Set-Aside Program, you may submit the [New SBE Online Registry Service Application](https://www.njportal.com/DOR/SBERegistry/).
 
-**For additional information on these programs or services, call the Division of Revenue &amp; Enterprise Services, Small Business Registration and M/WBE Certification Services Unit at 609.292.2146.**
+**For additional information on these programs or services, call the Division of Revenue & Enterprise Services, Small Business Registration and M/WBE Certification Services Unit at 609.292.2146.**
 
 ‍

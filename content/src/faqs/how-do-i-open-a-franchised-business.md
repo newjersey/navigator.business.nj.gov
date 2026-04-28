@@ -4,7 +4,6 @@ slug: "how-do-i-open-a-franchised-business"
 webflowId: "5e31b06cb76b837020358ea6"
 category: "start-a-business"
 sub-category: "choosing-a-business-type"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **Investigate the Franchise**

@@ -4,7 +4,6 @@ slug: "how-do-i-get-a-certificate-of-formation"
 webflowId: "5e31b06cb76b836e3e358e9e"
 category: "start-a-business"
 sub-category: "registering-a-business"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 You can file a certificate of formation with the New Jersey [Division of Revenue](https://www.njportal.com/DOR/BusinessFormation/Home/Welcome). Learn more about the filing process [here](https://www.state.nj.us/treasury/revenue/filecerts.shtml).

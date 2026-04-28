@@ -3,7 +3,6 @@ name: "Where can I find a list of statewide business organizations in New Jersey
 slug: "where-can-i-find-a-list-of-statewide-business-organizations-in-new-jersey"
 webflowId: "5e31b06cb76b8356c8358ed6"
 category: "resources"
-author: "5e31b06cb76b836564358e8f"
 ---
 
 **NJ Business and Industry Association **– [http://www.njbia.org/](http://www.njbia.org/)

@@ -24,7 +24,6 @@ export const loadAllFaqs = (): FaqItem[] => {
       category: data.category ?? "",
       "sub-category": data["sub-category"] ?? "",
       webflowId: data.webflowId ?? "",
-      author: data.author ?? "",
     };
   });
 };
