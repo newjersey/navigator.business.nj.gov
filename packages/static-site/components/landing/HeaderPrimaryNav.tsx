@@ -16,6 +16,11 @@ import type {
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
+ * Public path for the synced NJWDS close icon.
+ */
+const NJWDS_CLOSE_ICON_PATH = "/assets/njwds/dist/img/usa-icons/close.svg";
+
+/**
  * Describes props used by the primary header navigation component.
  *
  * This type defines a stable shape for related data.
@@ -179,7 +184,13 @@ export const HeaderPrimaryNav = ({ header }: HeaderPrimaryNavProps) => {
   return (
     <>
       <button className="usa-nav__close" type="button">
-        <Image alt={header.closeButtonAlt} height={20} src="/vendor/img/close.svg" width={20} />
+        <Image
+          alt={header.closeButtonAlt}
+          height={20}
+          src={NJWDS_CLOSE_ICON_PATH}
+          style={{ height: "auto" }}
+          width={20}
+        />
       </button>
       <ul className="usa-nav__primary usa-accordion">
         {header.primaryItems.map((primaryItem) => {

@@ -13,7 +13,7 @@ const playwrightAccessibilityConfig = defineConfig({
     headless: true,
   },
   webServer: {
-    command: "yarn dev --port 3000",
+    command: "pnpm dev --port 3000",
     reuseExistingServer: true,
     timeout: 120_000,
     url: SERVER_URL,

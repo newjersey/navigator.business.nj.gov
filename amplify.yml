@@ -1,0 +1,21 @@
+version: 1
+applications:
+  - appRoot: packages/static-site
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - corepack enable
+            - corepack prepare pnpm@10.19.0 --activate
+            - pnpm install --frozen-lockfile
+        build:
+          commands:
+            - pnpm build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+          - .next/cache/**/*

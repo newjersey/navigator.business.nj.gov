@@ -5,7 +5,6 @@
  * injects NJWDS assets, and builds localized metadata.
  */
 
-import "@newjersey/njwds/dist/css/styles.css";
 import "@/app/globals.css";
 
 import type { Metadata } from "next";
@@ -26,6 +25,16 @@ const NJ_LOGO_IMAGE_PATH = "/vendor/img/nj-logo-gray-20.png";
  * Stores the canonical production URL for metadata URL resolution.
  */
 const METADATA_BASE_URL = "https://next.business.nj.gov";
+
+/**
+ * Public path for the synced NJWDS stylesheet.
+ */
+const NJWDS_STYLESHEET_PATH = "/assets/njwds/dist/css/styles.css";
+
+/**
+ * Public path for the synced NJWDS runtime script.
+ */
+const NJWDS_SCRIPT_PATH = "/assets/njwds/dist/js/uswds.min.js";
 
 /**
  * Describes route params for locale-scoped pages.
@@ -155,11 +164,14 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
 
   return (
     <html lang={locale}>
+      <head>
+        <link href={NJWDS_STYLESHEET_PATH} rel="stylesheet" />
+      </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={applicationMessages}>
           {children}
         </NextIntlClientProvider>
-        <Script src="/vendor/js/uswds.min.js" strategy="afterInteractive" />
+        <Script src={NJWDS_SCRIPT_PATH} strategy="afterInteractive" />
       </body>
     </html>
   );

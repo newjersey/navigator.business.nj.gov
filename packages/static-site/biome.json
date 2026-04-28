@@ -1,11 +1,12 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
   "files": {
     "includes": [
       "**",
       "!**/.yarn/*",
       "!.next",
       "!public/vendor",
+      "!public/assets",
       "!coverage",
       "!test-results",
       "!playwright-report",
