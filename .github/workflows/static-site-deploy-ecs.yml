@@ -1,0 +1,88 @@
+name: Deploy Static Site to ECS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/static-site/**"
+      - ".github/workflows/static-site-deploy-ecs.yml"
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  deploy:
+    if: vars.STATIC_SITE_ECS_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      ECR_REPOSITORY: ${{ vars.STATIC_SITE_ECR_REPOSITORY }}
+      ECS_CLUSTER: ${{ vars.STATIC_SITE_ECS_CLUSTER }}
+      ECS_SERVICE: ${{ vars.STATIC_SITE_ECS_SERVICE }}
+      ECS_CONTAINER_NAME: ${{ vars.STATIC_SITE_CONTAINER_NAME || 'static-site' }}
+      ECS_TASK_DEFINITION_PATH:
+        ${{ vars.STATIC_SITE_TASK_DEFINITION_PATH ||
+        'packages/static-site/deploy/ecs-task-definition.json' }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Validate workflow configuration
+        shell: bash
+        run: |
+          required_vars=(ECR_REPOSITORY ECS_CLUSTER ECS_SERVICE ECS_TASK_DEFINITION_PATH ECS_CONTAINER_NAME)
+          for variable_name in "${required_vars[@]}"; do
+            if [ -z "${!variable_name}" ]; then
+              echo "Missing required configuration: ${variable_name}"
+              exit 1
+            fi
+          done
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push Docker image
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        shell: bash
+        run: |
+          image_uri="${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
+          latest_uri="${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
+
+          docker build -f packages/static-site/Dockerfile -t "${image_uri}" -t "${latest_uri}" packages/static-site
+
+          docker push "${image_uri}"
+          docker push "${latest_uri}"
+
+          echo "image=${image_uri}" >> "$GITHUB_OUTPUT"
+
+      - name: Render Amazon ECS task definition
+        id: task-definition
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION_PATH }}
+          container-name: ${{ env.ECS_CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-definition.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
