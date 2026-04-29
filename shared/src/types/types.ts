@@ -539,6 +539,22 @@ export interface ContextualInfoFile extends ContextualInfo {
   filename: string;
 }
 
+export interface RecentItem {
+  name: string;
+  slug: string;
+  webflowId?: string;
+  date?: string;
+  topics?: string;
+  source?: string;
+  "heading-1"?: string;
+  summary?: string;
+  "homepage-announcement-text-2"?: string;
+  "cta-text"?: string;
+  "cta-link"?: string;
+  agency?: string;
+  body: string;
+}
+
 export interface FaqItem {
   name: string;
   slug: string;

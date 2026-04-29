@@ -5,6 +5,77 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "recents"
+    label: "Recents"
+    folder: "content/src/recents"
+    summary: "{{name}}"
+    identifier_field: "{{slug}}"
+    slug: "{{slug}}"
+    delete: false
+    sortable_fields: ["name", "date", "topics"]
+    create: false
+    editor:
+      preview: false
+    fields:
+      - { label: "Name", name: "name", widget: "string", required: true }
+      - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - {
+          label: "Date Posted",
+          name: "date",
+          widget: "datetime",
+          default: "",
+          date_format: "YYYY-MM-DD",
+          time_format: "",
+          required: false,
+          hint: "YYYY-MM-DD",
+        }
+      - label: "Topics"
+        name: "topics"
+        widget: "select"
+        required: false
+        options:
+          - { label: "Grants and Resources", value: "Grants and Resources" }
+          - { label: "Rules and Regulations", value: "Rules and Regulations" }
+      - {
+          label: "Source",
+          name: "source",
+          widget: "markdown",
+          required: false,
+          hint: "Link to the source article",
+        }
+      - { label: "Section Heading", name: "heading-1", widget: "string", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Article Content", name: "body", widget: "markdown", required: false }
+      - {
+          label: "Homepage Announcement Text",
+          name: "homepage-announcement-text-2",
+          widget: "string",
+          required: false,
+        }
+      - { label: "CTA Text", name: "cta-text", widget: "string", required: false }
+      - { label: "CTA Link", name: "cta-link", widget: "string", required: false }
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        required: false
+        options:
+          - { label: "NJ Business Action Center", value: "NJ Business Action Center" }
+          - {
+              label: "NJ Department of Environmental Protection",
+              value: "NJ Department of Environmental Protection",
+            }
+          - { label: "NJ Department of Labor", value: "NJ Department of Labor" }
+          - {
+              label: "NJ Department of Public Utilities",
+              value: "NJ Department of Public Utilities",
+            }
+          - { label: "NJ Department of Transportation", value: "NJ Department of Transportation" }
+          - { label: "NJ Department of Treasury", value: "NJ Department of Treasury" }
+          - {
+              label: "NJ Economic Development Authority",
+              value: "NJ Economic Development Authority",
+            }
+
   - name: "faqs"
     label: "FAQs"
     folder: "content/src/faqs"

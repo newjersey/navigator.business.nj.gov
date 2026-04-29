@@ -248,3 +248,17 @@ export interface WebflowPageFieldData {
   "link-text-11"?: string;
   "link-11"?: WebflowLinkField | null;
 }
+
+export interface WebflowRecentFieldData {
+  name: string;
+  slug: string;
+  "updated-on-date"?: string;
+  topics?: string;
+  source?: string;
+  "heading-1"?: string;
+  "section-1"?: string;
+  "homepage-announcement-text-2"?: string;
+  "cta-text"?: string;
+  "cta-link"?: string;
+  agency?: string;
+}

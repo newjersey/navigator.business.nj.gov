@@ -13,6 +13,7 @@ export * from "./searchIndustries";
 export * from "./searchLicenseEvents";
 export * from "./searchNonEssentialQuestions";
 export * from "./searchPages";
+export * from "./searchRecents";
 export * from "./searchRenewalCalendarEvents";
 export * from "./searchSidebarCards";
 export * from "./searchSteps";

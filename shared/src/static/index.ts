@@ -10,6 +10,7 @@ export * from "./loadCommonBusinessTasks";
 export * from "./loadContextualInfo";
 export * from "./loadDisplayContent";
 export * from "./loadFaqs";
+export * from "./loadRecents";
 export * from "./loadFilings";
 export * from "./loadFundings";
 export * from "./loadHousingMunicipalities";
