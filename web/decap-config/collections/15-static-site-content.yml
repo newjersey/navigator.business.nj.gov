@@ -133,7 +133,7 @@ collections:
     identifier_field: "{{slug}}"
     slug: "{{slug}}"
     delete: false
-    sortable_fields: ["name", "category", "rank"]
+    sortable_fields: ["name", "category"]
     create: false
     editor:
       preview: false
@@ -142,75 +142,13 @@ collections:
       - { label: "Slug", name: "slug", widget: "no-space", required: true }
       - label: "Category"
         name: "category"
-        widget: "select"
-        required: true
-        options:
-          - { label: "Plan a Business", value: "5e31b06cb76b837e68358b82" }
-          - { label: "Start a Business", value: "5e31b06cb76b83de0d358b83" }
-          - { label: "Operate a Business", value: "5e31b06cb76b833562358b84" }
-          - { label: "Grow a Business", value: "5e31b06cb76b839f99358b85" }
-          - { label: "Updates", value: "6183da96541d5d5e1ee9275d" }
-      - {
-          label: "Rank",
-          name: "rank",
-          widget: "number",
-          value_type: "int",
-          hint: "For sub-pages enter 0",
-          required: false,
-        }
+        widget: "relation"
+        collection: "categories"
+        search_fields: ["name"]
+        value_field: "slug"
+        display_fields: ["name"]
+        required: false
       - { label: "Sub-Heading Text", name: "sub-heading-text", widget: "text", required: false }
-      - { label: "Teaser Text", name: "teaser-text", widget: "text", required: false }
-      - {
-          label: "Include in Home Slider",
-          name: "include-in-home-slider",
-          widget: "boolean",
-          required: false,
-          default: false,
-        }
-      - {
-          label: "Homepage Slider Order",
-          name: "homepage-slider-order",
-          widget: "number",
-          required: false,
-          value_type: "int",
-        }
-      - {
-          label: "Is Sub Page",
-          name: "is-sub-page",
-          widget: "boolean",
-          required: false,
-          default: false,
-          hint: "Will prevent the page from being displayed in the navbar and side nav.",
-        }
-      - {
-          label: "Subpage of...",
-          name: "primary-page",
-          widget: "relation",
-          collection: "pages",
-          search_fields: ["name"],
-          value_field: "webflowId",
-          display_fields: ["name"],
-          required: false,
-          hint:
-            "Required if 'IS SUB PAGE' -- Select the page for which this is a subpage - This field
-            is used to create the breadcrumb (home>topic>page>sub-page)",
-        }
-      - { label: "Main Link Text", name: "main-link-text", widget: "string", required: false }
-      - {
-          label: "Non-Collection Link",
-          name: "non-collection-link",
-          widget: "string",
-          required: false,
-          hint: "Used to link an item to a unique page that is not part of the pages CMS.",
-        }
-      - {
-          label: "Navigator Redirect",
-          name: "coming-soon",
-          widget: "boolean",
-          required: false,
-          default: false,
-          hint: "Select to add the Navigator promotional section at the top of the page.",
-        }
       - {
           label: "Meta Data",
           name: "meta-data",
@@ -218,29 +156,17 @@ collections:
           hint: "Tags to help improve site search",
           required: false,
         }
-      - { label: "Relative Link", name: "relative-link", widget: "string", required: false }
+      - { label: "Main Link Text", name: "main-link-text", widget: "string", required: false }
       - {
-          label: "Is Unique Page",
-          name: "is-unique-page",
-          widget: "boolean",
+          label: "Subpage of...",
+          name: "primary-page",
+          widget: "relation",
+          collection: "pages",
+          search_fields: ["name"],
+          value_field: "slug",
+          display_fields: ["name"],
           required: false,
-          default: false,
-        }
-      - {
-          label: "Navigator Button",
-          name: "navigator-button",
-          widget: "boolean",
-          required: false,
-          default: false,
-        }
-      - {
-          label: "Open Graph Image",
-          name: "open-graph",
-          widget: "no-space",
-          hint:
-            "URL for an asset located in the Webflow CMS. Ask an engineer for help if you need to
-            change this.",
-          required: false,
+          hint: "Select the page for which this is a subpage - used for breadcrumb navigation",
         }
       - { label: "Heading 1", name: "heading-1", widget: "string", required: false }
       - { label: "Main Text 1", name: "main-text-1", widget: "markdown", required: false }

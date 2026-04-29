@@ -568,17 +568,11 @@ export interface PageItem {
   name: string;
   slug: string;
   webflowId?: string;
-  category: string;
-  rank?: number;
+  category?: string;
   "sub-heading-text"?: string;
-  "teaser-text"?: string;
-  "include-in-home-slider"?: boolean;
-  "homepage-slider-order"?: number;
-  "is-sub-page"?: boolean;
-  "primary-page"?: string;
+  "meta-data"?: string;
   "main-link-text"?: string;
-  "non-collection-link"?: string;
-  "coming-soon"?: boolean;
+  "primary-page"?: string;
   "heading-1"?: string;
   "main-text-1"?: string;
   "tip-1"?: string;
@@ -627,11 +621,6 @@ export interface PageItem {
   "main-text-11"?: string;
   "link-text-11"?: string;
   "link-11"?: string;
-  "meta-data"?: string;
-  "relative-link"?: string;
-  "is-unique-page"?: boolean;
-  "navigator-button"?: boolean;
-  "open-graph"?: string;
 }
 
 export interface ActionTile {
