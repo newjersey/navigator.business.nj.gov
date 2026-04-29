@@ -8,4 +8,5 @@ export const fundingCollectionId = "6112e6b88aa567fdbc725ffc";
 export const industryNameCollectionId = "651dcfeab277fedcdc98d25a";
 export const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
 export const pagesCollectionId = "5e31b06cb76b839599358b4e";
+export const recentsCollectionId = "604103fab1c0e7fa9759c5fc";
 export const sectorCollectionId = "61c21253f7640b5f5ce829a4";
