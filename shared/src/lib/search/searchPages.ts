@@ -15,10 +15,8 @@ export const getPageData = (pages: PageItem[]): FileData[] => {
     const name = page.name.toLowerCase();
     const slug = page.slug.toLowerCase();
     const subHeadingText = page["sub-heading-text"]?.toLowerCase();
-    const teaserText = page["teaser-text"]?.toLowerCase();
     const mainLinkText = page["main-link-text"]?.toLowerCase();
     const metaData = page["meta-data"]?.toLowerCase();
-    const webflowId = page.webflowId?.toLowerCase();
 
     // Collect all headings and main text
     const blockTexts: string[] = [];
@@ -27,12 +25,7 @@ export const getPageData = (pages: PageItem[]): FileData[] => {
       { content: slug, label: "Slug" },
       { content: subHeadingText, label: "Sub-Heading" },
       { content: mainLinkText, label: "Main Link Text" },
-      { content: webflowId, label: "Webflow ID" },
     ];
-
-    if (teaserText) {
-      blockTexts.push(teaserText);
-    }
 
     if (metaData) {
       blockTexts.push(metaData);

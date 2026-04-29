@@ -1,12 +1,10 @@
 ---
-name: "ADA Compliance"
-slug: "ada-compliance"
-webflowId: "5e31b06cb76b838d32358bbe"
-category: "5e31b06cb76b837e68358b82"
-sub-heading-text: "Making your business accessible to the disabled not only helps your customers, it’s federal and state law. The Federal Americans with Disabilities Act (ADA) paired with the State's building codes ensure equal access to those with disabilities or impairments."
-is-sub-page: true
-navigator-button: false
-main-text-1: |
+name: ADA Compliance
+slug: ada-compliance
+webflowId: 5e31b06cb76b838d32358bbe
+category: plan
+sub-heading-text: Making your business accessible to the disabled not only helps your customers, it's federal and state law. The Federal Americans with Disabilities Act (ADA) paired with the State's building codes ensure equal access to those with disabilities or impairments.
+main-text-1: |-
   ## The Americans with Disabilities Act
 
   Federal law prohibits discrimination against people with disabilities. The Americans with Disabilities Act (ADA) is a Federal civil rights law designed to ensure equal access, full inclusion and participation for people with disabilities or impairments. Under the law, people with disabilities are entitled to full and equal access to places of public accommodation, transportation carriers, lodging places, recreation and amusement facilities, and other business establishments where the general public is invited.

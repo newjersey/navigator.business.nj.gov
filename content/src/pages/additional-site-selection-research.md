@@ -1,12 +1,10 @@
 ---
-name: "Additional Site Selection Research"
-slug: "additional-site-selection-research"
-webflowId: "5e31b06cb76b833f3f358bbc"
-category: "5e31b06cb76b837e68358b82"
-sub-heading-text: "Finding a great location for your business is a critical step to set your business up for success. Do your research on the area and think about the needs of your customers and employees. You can also save time and money down the line by learning about zoning and building permits in addition to getting smart about how to negotiate a commercial lease."
-is-sub-page: true
-navigator-button: false
-main-text-1: |
+name: Additional Site Selection Research
+slug: additional-site-selection-research
+webflowId: 5e31b06cb76b833f3f358bbc
+category: plan
+sub-heading-text: Finding a great location for your business is a critical step to set your business up for success. Do your research on the area and think about the needs of your customers and employees. You can also save time and money down the line by learning about zoning and building permits in addition to getting smart about how to negotiate a commercial lease.
+main-text-1: |-
   ## Demographics
 
   If you've developed your business plan you should have a good sense of who your target customers are, who is the most likely to purchase your products or services, and who you want to market to. Use this information to your advantage and consider how you can locate your business to most effectively serve your target customer base.

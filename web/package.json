@@ -32,12 +32,12 @@
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
     "webflow:run-sync": "yarn webflow:fundings-sync && yarn webflow:industries-sync && yarn webflow:licenses-sync",
-    "webflow:categories-pull": "tsx ./src/scripts/webflow/categoryPull.ts",
-    "webflow:faq-pull": "tsx ./src/scripts/webflow/faqPull.ts",
     "webflow:fundings-sync": "tsx ./src/scripts/webflow/fundingSync.ts",
     "webflow:industries-sync": "tsx ./src/scripts/webflow/industrySync.ts",
     "webflow:licenses-sync": "tsx ./src/scripts/webflow/licenseSync.ts",
-    "webflow:pages-sync": "tsx ./src/scripts/webflow/pageSync.ts"
+    "webflow:categories-pull": "tsx ./src/scripts/webflow/categoryPull.ts",
+    "webflow:faq-pull": "tsx ./src/scripts/webflow/faqPull.ts",
+    "webflow:pages-pull": "tsx ./src/scripts/webflow/pagePull.ts"
   },
   "dependencies": {
     "@aws-crypto/sha256-browser": "5.2.0",
