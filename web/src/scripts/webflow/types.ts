@@ -194,17 +194,11 @@ export interface WebflowLinkField {
 export interface WebflowPageFieldData {
   name: string;
   slug: string;
-  category: string;
-  rank?: number;
+  category?: string;
   "sub-heading-text"?: string;
-  "teaser-text"?: string;
-  "include-in-home-slider"?: boolean;
-  "homepage-slider-order"?: number;
-  "is-sub-page"?: boolean;
-  "primary-page"?: string;
+  "meta-data"?: string;
   "main-link-text"?: string;
-  "non-collection-link"?: WebflowLinkField | null;
-  "coming-soon"?: boolean;
+  "primary-page"?: string;
   "heading-1"?: string;
   "main-text-1"?: string;
   "tip-1"?: string;
@@ -253,9 +247,4 @@ export interface WebflowPageFieldData {
   "main-text-11"?: string;
   "link-text-11"?: string;
   "link-11"?: WebflowLinkField | null;
-  "meta-data"?: string;
-  "relative-link"?: WebflowLinkField | null;
-  "is-unique-page"?: boolean;
-  "navigator-button"?: boolean;
-  "open-graph"?: WebflowImageField | null;
 }
