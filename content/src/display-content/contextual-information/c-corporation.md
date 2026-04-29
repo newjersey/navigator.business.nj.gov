@@ -1,9 +1,9 @@
 ---
-header: C-Corporation (C-Corp)
+header: C Corporation (C corp)
 id: c-corporation
 displayname: c-corporation
 ---
-A C-Corp is more complex than other business structures and is suggested for larger companies with many employees. It is a separate entity from those who own it, meaning it can be taxed (or sued) independently from its owners, known as shareholders. They elect a board of directors to oversee major policies and decisions and appoint officers who carry out the daily operations of the business.
+A C corp is more complex than other business structures and is suggested for larger companies with many employees. It is a separate entity from those who own it, meaning it can be taxed (or sued) independently from its owners, known as shareholders. They elect a board of directors to oversee major policies and decisions and appoint officers who carry out the daily operations of the business.
 
 **Advantages**
 
