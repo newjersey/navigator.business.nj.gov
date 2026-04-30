@@ -262,3 +262,40 @@ export interface WebflowRecentFieldData {
   "cta-link"?: string;
   agency?: string;
 }
+
+export interface WebflowCovidFieldData {
+  name: string;
+  slug: string;
+  section?: string; // maps to topic in CovidItem
+  source?: string;
+  "s1-headline"?: string;
+  "section-1"?: string;
+  "s2-headline"?: string;
+  "section-2"?: string;
+  "s3-headline"?: string;
+  "section-3"?: string;
+  "s4-headline"?: string;
+  "section-4"?: string;
+  "s5-headline"?: string;
+  "section-5"?: string;
+  "s6-headline"?: string;
+  "section-6"?: string;
+  "s7-headline"?: string;
+  "section-7"?: string;
+  "s8-headline"?: string;
+  "section-8"?: string;
+  "s9-headline"?: string;
+  "section-9"?: string;
+  "s10-headline"?: string;
+  "section-10"?: string;
+  "s11-headline"?: string;
+  "section-11"?: string;
+  "s12-headline"?: string;
+  "section-12"?: string;
+  "s13-headline"?: string;
+  "section-13"?: string;
+  "s14-headline"?: string;
+  "section-14"?: string;
+  "s15-headline"?: string;
+  "section-15"?: string;
+}

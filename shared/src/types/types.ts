@@ -539,6 +539,16 @@ export interface ContextualInfoFile extends ContextualInfo {
   filename: string;
 }
 
+export interface CovidItem {
+  name: string;
+  slug: string;
+  webflowId?: string;
+  topic?: string;
+  source?: string;
+  [key: `s${number}-headline`]: string | undefined;
+  [key: `section-${number}`]: string | undefined;
+}
+
 export interface RecentItem {
   name: string;
   slug: string;

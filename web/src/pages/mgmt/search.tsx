@@ -16,6 +16,7 @@ import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry
 import {
   searchAnytimeActionLicenseReinstatements,
   searchCategories,
+  searchCovids,
   searchFaqs,
   searchPages,
   searchRecents,
@@ -46,6 +47,7 @@ import {
   loadAllArchivedCertifications,
   loadAllArchivedContextualInfo,
   loadAllCategories,
+  loadAllCovids,
   loadAllCertifications,
   loadAllContextualInfo,
   loadAllEnvironmentTasks,
@@ -70,6 +72,7 @@ import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
   CategoryItem,
+  CovidItem,
   Certification,
   ContextualInfoFile,
   FaqItem,
@@ -121,6 +124,7 @@ interface Props {
   addOns: IndustryRoadmap[];
   industries: Industry[];
   categories: CategoryItem[];
+  covids: CovidItem[];
   faqs: FaqItem[];
   pages: PageItem[];
   recents: RecentItem[];
@@ -169,6 +173,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   );
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
   const [categoryMatches, setCategoryMatches] = useState<Match[]>([]);
+  const [covidMatches, setCovidMatches] = useState<Match[]>([]);
   const [faqMatches, setFaqMatches] = useState<Match[]>([]);
   const [pageMatches, setPageMatches] = useState<Match[]>([]);
   const [recentMatches, setRecentMatches] = useState<Match[]>([]);
@@ -296,6 +301,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     );
     setBusinessFormationMatches(searchBusinessFormation(businessFormationInfo, lowercaseTerm));
     setCategoryMatches(searchCategories(props.categories, lowercaseTerm));
+    setCovidMatches(searchCovids(props.covids, lowercaseTerm));
     setFaqMatches(searchFaqs(props.faqs, lowercaseTerm));
     setPageMatches(searchPages(props.pages, lowercaseTerm));
     setRecentMatches(searchRecents(props.recents, lowercaseTerm));
@@ -329,6 +335,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...anytimeActionLicenseReinstatementMatches,
         ...businessFormationMatches,
         ...categoryMatches,
+        ...covidMatches,
         ...faqMatches,
         ...pageMatches,
         ...recentMatches,
@@ -387,6 +394,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const staticSiteContentCollection = {
     Categories: categoryMatches,
+    COVIDs: covidMatches,
     FAQs: faqMatches,
     Pages: pageMatches,
     Recents: recentMatches,
@@ -523,6 +531,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       addOns: loadAllAddOns(),
       industries: getIndustries(),
       categories: loadAllCategories(),
+      covids: loadAllCovids(),
       faqs: loadAllFaqs(),
       pages: loadAllPages(),
       recents: loadAllRecents(),
