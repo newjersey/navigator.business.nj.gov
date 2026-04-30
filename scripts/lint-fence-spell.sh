@@ -13,5 +13,13 @@ yarn prettier
 yarn spellcheck
 yarn dependency-check
 
+(
+    cd packages/static-site
+    pnpm lint
+    pnpm typecheck
+    pnpm test
+    pnpm build
+)
+
 # run linting and fix any fixable errors
 yarn lint:fix

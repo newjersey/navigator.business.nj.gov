@@ -62,3 +62,11 @@ web/amplify-build-config.json
 web/amplify-gradle-config.json
 web/amplifytools.xcconfig
 web/next-env.d.ts
+
+# static-site
+packages/static-site
+packages/static-site/.next
+packages/static-site/coverage
+packages/static-site/playwright-report
+packages/static-site/public/assets
+packages/static-site/test-results

@@ -1,5 +1,5 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -23,6 +23,12 @@
   ],
   "editor.formatOnSave": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.workingDirectories": [
+    { "directory": "./api", "changeProcessCWD": true },
+    { "directory": "./api/cdk", "changeProcessCWD": true },
+    { "directory": "./web", "changeProcessCWD": true },
+    { "directory": "./shared", "changeProcessCWD": true }
+  ],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.py": "test_$(capture).py",
@@ -42,7 +48,7 @@
   "terminal.integrated.scrollback": 10000,
   "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist", "**/.next", "**/compiled"],
   "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]", "TODO-APP"],
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
   "typescript.surveys.enabled": false,
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"

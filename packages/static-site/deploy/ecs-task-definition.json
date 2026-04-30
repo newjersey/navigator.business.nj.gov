@@ -1,0 +1,37 @@
+{
+  "family": "static-site",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "REPLACE_WITH_ECS_EXECUTION_ROLE_ARN",
+  "taskRoleArn": "REPLACE_WITH_ECS_TASK_ROLE_ARN",
+  "containerDefinitions": [
+    {
+      "name": "static-site",
+      "image": "public.ecr.aws/docker/library/node:24-alpine",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "HOSTNAME",
+          "value": "0.0.0.0"
+        },
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "PORT",
+          "value": "3000"
+        }
+      ]
+    }
+  ]
+}
