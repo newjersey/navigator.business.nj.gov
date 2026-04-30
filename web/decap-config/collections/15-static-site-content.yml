@@ -5,6 +5,63 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "covids"
+    label: "COVIDs"
+    folder: "content/src/covids"
+    summary: "{{name}}"
+    identifier_field: "{{slug}}"
+    slug: "{{slug}}"
+    delete: false
+    sortable_fields: ["name", "section", "date"]
+    create: false
+    editor:
+      preview: false
+    fields:
+      - { label: "Name", name: "name", widget: "string", required: true }
+      - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - label: "Topic"
+        name: "section"
+        widget: "select"
+        required: false
+        options:
+          - "Business Operation Restrictions"
+          - "Economic Assistance for Businesses"
+          - "Business Resources and Finances"
+          - "Benefits for Impacted Individuals"
+          - "General Information about COVID-19"
+          - "Most Recent Guidance"
+      - { label: "Source", name: "source", widget: "markdown", required: false }
+      - { label: "Headline 1", name: "s1-headline", widget: "string", required: false }
+      - { label: "Section 1", name: "section-1", widget: "markdown", required: false }
+      - { label: "Headline 2", name: "s2-headline", widget: "string", required: false }
+      - { label: "Section 2", name: "section-2", widget: "markdown", required: false }
+      - { label: "Headline 3", name: "s3-headline", widget: "string", required: false }
+      - { label: "Section 3", name: "section-3", widget: "markdown", required: false }
+      - { label: "Headline 4", name: "s4-headline", widget: "string", required: false }
+      - { label: "Section 4", name: "section-4", widget: "markdown", required: false }
+      - { label: "Headline 5", name: "s5-headline", widget: "string", required: false }
+      - { label: "Section 5", name: "section-5", widget: "markdown", required: false }
+      - { label: "Headline 6", name: "s6-headline", widget: "string", required: false }
+      - { label: "Section 6", name: "section-6", widget: "markdown", required: false }
+      - { label: "Headline 7", name: "s7-headline", widget: "string", required: false }
+      - { label: "Section 7", name: "section-7", widget: "markdown", required: false }
+      - { label: "Headline 8", name: "s8-headline", widget: "string", required: false }
+      - { label: "Section 8", name: "section-8", widget: "markdown", required: false }
+      - { label: "Headline 9", name: "s9-headline", widget: "string", required: false }
+      - { label: "Section 9", name: "section-9", widget: "markdown", required: false }
+      - { label: "Headline 10", name: "s10-headline", widget: "string", required: false }
+      - { label: "Section 10", name: "section-10", widget: "markdown", required: false }
+      - { label: "Headline 11", name: "s11-headline", widget: "string", required: false }
+      - { label: "Section 11", name: "section-11", widget: "markdown", required: false }
+      - { label: "Headline 12", name: "s12-headline", widget: "string", required: false }
+      - { label: "Section 12", name: "section-12", widget: "markdown", required: false }
+      - { label: "Headline 13", name: "s13-headline", widget: "string", required: false }
+      - { label: "Section 13", name: "section-13", widget: "markdown", required: false }
+      - { label: "Headline 14", name: "s14-headline", widget: "string", required: false }
+      - { label: "Section 14", name: "section-14", widget: "markdown", required: false }
+      - { label: "Headline 15", name: "s15-headline", widget: "string", required: false }
+      - { label: "Section 15", name: "section-15", widget: "markdown", required: false }
+
   - name: "recents"
     label: "Recents"
     folder: "content/src/recents"

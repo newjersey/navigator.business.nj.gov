@@ -8,7 +8,8 @@
     "web/out/**",
     "package.json",
     "content/lib/industry.json",
-    "content/test/**"
+    "content/test/**",
+    "content/src/covids/language-assistance-for-completing-the-emergency-grant-application.md"
   ],
   "overrides": [
     {

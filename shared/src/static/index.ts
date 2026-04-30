@@ -3,6 +3,7 @@ export * from "./loadAllAddOns";
 export * from "./loadAnytimeActionLicenseReinstatements";
 export * from "./loadAnytimeActionTasks";
 export * from "./loadCategories";
+export * from "./loadCovids";
 export * from "./loadSubCategories";
 export * from "./loadCertifications";
 export * from "./loadCmsConfig";

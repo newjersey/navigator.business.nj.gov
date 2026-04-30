@@ -36,9 +36,11 @@
     "webflow:industries-sync": "tsx ./src/scripts/webflow/industrySync.ts",
     "webflow:licenses-sync": "tsx ./src/scripts/webflow/licenseSync.ts",
     "webflow:categories-pull": "tsx ./src/scripts/webflow/categoryPull.ts",
+    "webflow:covids-pull": "tsx ./src/scripts/webflow/covidPull.ts",
     "webflow:faq-pull": "tsx ./src/scripts/webflow/faqPull.ts",
     "webflow:pages-pull": "tsx ./src/scripts/webflow/pagePull.ts",
-    "webflow:recents-pull": "tsx ./src/scripts/webflow/recentPull.ts"
+    "webflow:recents-pull": "tsx ./src/scripts/webflow/recentPull.ts",
+    "webflow:tropical-storm-ida-pull": "tsx ./src/scripts/webflow/tropicalStormIdaPull.ts"
   },
   "dependencies": {
     "@aws-crypto/sha256-browser": "5.2.0",
