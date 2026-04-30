@@ -5,6 +5,39 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "tropical-storm-ida"
+    label: "Tropical Storm Ida"
+    folder: "content/src/tropical-storm-ida"
+    summary: "{{name}}"
+    identifier_field: "{{slug}}"
+    slug: "{{slug}}"
+    delete: false
+    create: false
+    editor:
+      preview: false
+    fields:
+      - { label: "Name", name: "name", widget: "string", required: true }
+      - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - { label: "Date", name: "date", widget: "string", required: false, hint: "YYYY-MM-DD" }
+      - label: "Topics"
+        name: "topics"
+        widget: "select"
+        required: false
+        options:
+          - "General Information"
+          - "Financial Assistance"
+      - { label: "Source", name: "source", widget: "markdown", required: false }
+      - { label: "Heading 1", name: "s1-heading", widget: "string", required: false }
+      - { label: "Section 1", name: "section-1", widget: "markdown", required: false }
+      - { label: "Heading 2", name: "s2-heading", widget: "string", required: false }
+      - { label: "Section 2", name: "section-2", widget: "markdown", required: false }
+      - {
+          label: "Homepage Announcement Text",
+          name: "homepage-announcement-text",
+          widget: "string",
+          required: false,
+        }
+
   - name: "covids"
     label: "COVIDs"
     folder: "content/src/covids"

@@ -20,6 +20,7 @@ import {
   searchFaqs,
   searchPages,
   searchRecents,
+  searchTropicalStormIda,
 } from "@businessnjgovnavigator/shared/lib/search";
 import { searchAnytimeActionTasks } from "@businessnjgovnavigator/shared/lib/search/searchAnytimeActionTasks";
 import { searchBusinessFormation } from "@businessnjgovnavigator/shared/lib/search/searchBusinessFormation";
@@ -54,6 +55,7 @@ import {
   loadAllFaqs,
   loadAllPages,
   loadAllRecents,
+  loadAllTropicalStormIda,
   loadAllFilings,
   loadAllFundings,
   loadAllLicenseCalendarEvents,
@@ -79,6 +81,7 @@ import {
   Filing,
   PageItem,
   RecentItem,
+  TropicalStormIdaItem,
   FormationDbaDisplayContent,
   Funding,
   IndustryRoadmap,
@@ -128,6 +131,7 @@ interface Props {
   faqs: FaqItem[];
   pages: PageItem[];
   recents: RecentItem[];
+  tropicalStormIda: TropicalStormIdaItem[];
 }
 
 interface SearchState {
@@ -177,6 +181,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [faqMatches, setFaqMatches] = useState<Match[]>([]);
   const [pageMatches, setPageMatches] = useState<Match[]>([]);
   const [recentMatches, setRecentMatches] = useState<Match[]>([]);
+  const [tropicalStormIdaMatches, setTropicalStormIdaMatches] = useState<Match[]>([]);
 
   const { Config } = useConfig();
 
@@ -305,6 +310,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setFaqMatches(searchFaqs(props.faqs, lowercaseTerm));
     setPageMatches(searchPages(props.pages, lowercaseTerm));
     setRecentMatches(searchRecents(props.recents, lowercaseTerm));
+    setTropicalStormIdaMatches(searchTropicalStormIda(props.tropicalStormIda, lowercaseTerm));
     updateSearchState({ hasSearched: true });
   };
 
@@ -339,6 +345,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...faqMatches,
         ...pageMatches,
         ...recentMatches,
+        ...tropicalStormIdaMatches,
       ].length === 0
     );
   };
@@ -398,6 +405,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     FAQs: faqMatches,
     Pages: pageMatches,
     Recents: recentMatches,
+    "Tropical Storm Ida": tropicalStormIdaMatches,
   };
 
   const authedView = (
@@ -535,6 +543,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       faqs: loadAllFaqs(),
       pages: loadAllPages(),
       recents: loadAllRecents(),
+      tropicalStormIda: loadAllTropicalStormIda(),
     },
   };
 };

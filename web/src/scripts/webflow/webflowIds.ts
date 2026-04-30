@@ -10,4 +10,5 @@ export const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
 export const pagesCollectionId = "5e31b06cb76b839599358b4e";
 export const covidsCollectionId = "5f918cdf816c9b63baf61896";
 export const recentsCollectionId = "604103fab1c0e7fa9759c5fc";
+export const tropicalStormIdasCollectionId = "613902082b1290ea6b1412db";
 export const sectorCollectionId = "61c21253f7640b5f5ce829a4";

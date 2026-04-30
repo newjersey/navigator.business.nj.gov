@@ -539,6 +539,20 @@ export interface ContextualInfoFile extends ContextualInfo {
   filename: string;
 }
 
+export interface TropicalStormIdaItem {
+  name: string;
+  slug: string;
+  webflowId?: string;
+  date?: string;
+  topics?: string;
+  source?: string;
+  "s1-heading"?: string;
+  "section-1"?: string;
+  "s2-heading"?: string;
+  "section-2"?: string;
+  "homepage-announcement-text"?: string;
+}
+
 export interface CovidItem {
   name: string;
   slug: string;
