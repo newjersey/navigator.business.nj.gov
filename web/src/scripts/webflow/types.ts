@@ -299,3 +299,16 @@ export interface WebflowCovidFieldData {
   "s15-headline"?: string;
   "section-15"?: string;
 }
+
+export interface WebflowTropicalStormIdaFieldData {
+  name: string;
+  slug: string;
+  "updated-on-date"?: string;
+  topics?: string;
+  source?: string;
+  "s1-heading"?: string;
+  section1?: string;
+  "s2-heading"?: string;
+  "section-2"?: string;
+  "homepage-announcement-text"?: string;
+}

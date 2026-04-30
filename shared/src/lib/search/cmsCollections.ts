@@ -116,6 +116,6 @@ export const cmsCollections = [
   },
   {
     label: "💻 STATIC SITE CONTENT",
-    children: ["Categories", "COVIDs", "FAQs", "Pages", "Recents"],
+    children: ["Categories", "COVIDs", "FAQs", "Pages", "Recents", "Tropical Storm Ida"],
   },
 ];
