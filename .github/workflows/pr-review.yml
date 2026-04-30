@@ -1,0 +1,137 @@
+name: Pickaroo Reviewers
+
+on:
+  pull_request:
+    types: ["labeled"]
+
+jobs:
+  pickaroo:
+    if: >-
+      github.event.label.name == 'pr-review' || github.event.label.name == 'pr-show'
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Generate GitHub App Token
+        id: generate-token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        with:
+          app-id: "2454947"
+          private-key: ${{ secrets.OOI_PULL_REQUEST_APP }}
+
+      - uses: actions/checkout@v6
+        with:
+          repository: newjersey/innovation-shared-actions
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      - uses: actions/checkout@v6
+        with:
+          path: self
+
+      - name: Format PR title with ADO links
+        id: format-title
+        shell: bash
+        run: python3 self/scripts/generate_ado_link.py "${{ github.event.pull_request.title }}"
+
+      - name: Find existing pickaroo comment
+        id: find-comment
+        run: python3 .github/scripts/pickaroo.py find-comment
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+
+      - name: Select reviewers
+        if: github.event.label.name == 'pr-review'
+        id: select-reviewers
+        run: python3 .github/scripts/pickaroo.py select-reviewers
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          INCLUDE_TEAMS: "business-dev"
+          EXCLUDE_USERS:
+            "NJ-Innovation-CI mjackson21 ${{ steps.find-comment.outputs.previously-picked }}"
+          NUMBER_OF_REVIEWERS: 2
+          GH_PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          GH_SLACK_USER_MAP: ${{ vars.GH_SLACK_USER_MAP }}
+          SLACK_TOKEN: ${{ secrets.SLACK_OAUTH_TOKEN }}
+
+      - name: Look up new reviewers in Slack
+        if: github.event.label.name == 'pr-review'
+        id: lookup-new-reviewers
+        uses: ./.github/actions/lookup-slack-users
+        with:
+          github_usernames: ${{ steps.select-reviewers.outputs.picked_reviewers }}
+          github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
+
+      - name: Look up all reviewers in Slack
+        if: github.event.label.name == 'pr-review'
+        id: lookup-all-reviewers
+        uses: ./.github/actions/lookup-slack-users
+        with:
+          github_usernames: ${{ steps.select-reviewers.outputs.all_reviewers }}
+          github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
+
+      - name: Look up PR author in Slack
+        id: lookup-pr-author
+        uses: ./.github/actions/lookup-slack-users
+        with:
+          github_usernames: ${{ github.event.pull_request.user.login }}
+          github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
+
+      - name: Build Slack messages
+        run: python .github/scripts/pickaroo.py build-messages
+        env:
+          NUMBER_OF_REVIEWERS: 2
+          EXTRAS: true
+          PICKED_REVIEWERS: ${{ steps.select-reviewers.outputs.picked_reviewers }}
+          PICKED_REVIEWER_MENTIONS: ${{ steps.lookup-new-reviewers.outputs.formatted_string }}
+          ALL_REVIEWER_MENTIONS: ${{ steps.lookup-all-reviewers.outputs.formatted_string }}
+          AUTHOR_MENTION: ${{ steps.lookup-pr-author.outputs.formatted_string }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ steps.format-title.outputs.pr_title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          SHOW: ${{ github.event.label.name == 'pr-show' }}
+
+      - name: Send Slack message
+        id: send-slack-message
+        uses: ./.github/actions/slack-message
+        env:
+          CHANNEL_ID: ${{ secrets.SLACK_BIZX_ENG_CHANNEL_ID }}
+          MESSAGE_TS: ${{ steps.find-comment.outputs.message-ts }}
+          TOKEN: ${{ secrets.SLACK_OAUTH_TOKEN }}
+
+      - name: Post PR comment
+        run: python .github/scripts/pickaroo.py post-comment
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PICKED_REVIEWERS: ${{ steps.select-reviewers.outputs.picked_reviewers }}
+          PREVIOUSLY_PICKED: ${{ steps.find-comment.outputs.previously-picked }}
+          MESSAGE_TS: ${{ steps.send-slack-message.outputs.message_ts }}
+          COMMENT_ID: ${{ steps.find-comment.outputs.comment-id }}
+
+  remove-label:
+    if: always()
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Generate GitHub App Token
+        id: generate-token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        with:
+          app-id: "2454947"
+          private-key: ${{ secrets.OOI_PULL_REQUEST_APP }}
+
+      - name: Remove triggering label
+        run: |
+          set -euo pipefail
+
+          echo "Removing label '${{ github.event.label.name }}' from PR #${{ github.event.pull_request.number }}"
+          if ! gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/${{ github.event.label.name }} \
+            -X DELETE 2>&1; then
+            echo "WARNING: Failed to remove label '${{ github.event.label.name }}'"
+          else
+            echo "Successfully removed label"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
