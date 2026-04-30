@@ -18,6 +18,7 @@ import {
   searchCategories,
   searchFaqs,
   searchPages,
+  searchRecents,
 } from "@businessnjgovnavigator/shared/lib/search";
 import { searchAnytimeActionTasks } from "@businessnjgovnavigator/shared/lib/search/searchAnytimeActionTasks";
 import { searchBusinessFormation } from "@businessnjgovnavigator/shared/lib/search/searchBusinessFormation";
@@ -50,6 +51,7 @@ import {
   loadAllEnvironmentTasks,
   loadAllFaqs,
   loadAllPages,
+  loadAllRecents,
   loadAllFilings,
   loadAllFundings,
   loadAllLicenseCalendarEvents,
@@ -73,6 +75,7 @@ import {
   FaqItem,
   Filing,
   PageItem,
+  RecentItem,
   FormationDbaDisplayContent,
   Funding,
   IndustryRoadmap,
@@ -120,6 +123,7 @@ interface Props {
   categories: CategoryItem[];
   faqs: FaqItem[];
   pages: PageItem[];
+  recents: RecentItem[];
 }
 
 interface SearchState {
@@ -167,6 +171,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [categoryMatches, setCategoryMatches] = useState<Match[]>([]);
   const [faqMatches, setFaqMatches] = useState<Match[]>([]);
   const [pageMatches, setPageMatches] = useState<Match[]>([]);
+  const [recentMatches, setRecentMatches] = useState<Match[]>([]);
 
   const { Config } = useConfig();
 
@@ -293,6 +298,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCategoryMatches(searchCategories(props.categories, lowercaseTerm));
     setFaqMatches(searchFaqs(props.faqs, lowercaseTerm));
     setPageMatches(searchPages(props.pages, lowercaseTerm));
+    setRecentMatches(searchRecents(props.recents, lowercaseTerm));
     updateSearchState({ hasSearched: true });
   };
 
@@ -325,6 +331,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...categoryMatches,
         ...faqMatches,
         ...pageMatches,
+        ...recentMatches,
       ].length === 0
     );
   };
@@ -382,6 +389,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     Categories: categoryMatches,
     FAQs: faqMatches,
     Pages: pageMatches,
+    Recents: recentMatches,
   };
 
   const authedView = (
@@ -517,6 +525,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       categories: loadAllCategories(),
       faqs: loadAllFaqs(),
       pages: loadAllPages(),
+      recents: loadAllRecents(),
     },
   };
 };
