@@ -76,10 +76,6 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@storybook/react" },
-    },
-    {
-      from: {},
       to: { path: "@testing-library/jest-dom/extend-expect" },
     },
     {
@@ -245,10 +241,6 @@ module.exports = {
     {
       from: {},
       to: { path: "unified" },
-    },
-    {
-      from: {},
-      to: { path: "storybook-addon-designs" },
     },
     {
       from: {},

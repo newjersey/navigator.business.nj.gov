@@ -23,7 +23,6 @@ import { ReactElement, ReactNode, useContext, useEffect, useState } from "react"
 interface Props {
   taskId: string;
   disabledTooltipText: string | undefined;
-  STORYBOOK_ONLY_currentTaskProgress?: TaskProgress;
 }
 
 type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes-unset";
@@ -53,8 +52,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     }
   }, [business, updateQueue, updateTaskProgressDueToWiremockFormationCompletion]);
 
-  const currentTaskProgress: TaskProgress =
-    props.STORYBOOK_ONLY_currentTaskProgress ?? business?.taskProgress[props.taskId] ?? "TO_DO";
+  const currentTaskProgress: TaskProgress = business?.taskProgress[props.taskId] ?? "TO_DO";
   const isDisabled = !!props.disabledTooltipText;
 
   const getNextStatus = (): TaskProgress => {

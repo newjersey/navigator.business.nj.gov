@@ -52,7 +52,6 @@ api/.env
 web/cypress/videos
 web/cypress/results
 web/cypress/screenshots/
-web/.storybook/build
 web/public/vendor
 
 # sitemap

@@ -54,10 +54,6 @@
       "groupName": "testing-library"
     },
     {
-      "matchPackageNames": ["@storybook/*"],
-      "groupName": "storybook"
-    },
-    {
       "matchPackageNames": ["@aws-amplify/*"],
       "groupName": "aws-amplify"
     },
