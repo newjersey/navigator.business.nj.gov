@@ -1,5 +1,5 @@
 name: "Deploy Storybook"
-description: "Clears the Storybook S3 bucket and deploys the Storybook site."
+description: "Builds Storybook, uploads it to S3, and configures the S3 website."
 
 inputs:
   storybook_s3_bucket:
@@ -9,13 +9,19 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Clear Storybook S3 Bucket
+    - name: Build Storybook
       shell: bash
       run: |
-        aws s3 rm s3://${{ inputs.storybook_s3_bucket }} --recursive
+        yarn workspace @businessnjgovnavigator/web build-storybook -o .storybook/build
 
-    - name: Deploy Storybook
+    - name: Upload Storybook to S3
       shell: bash
       run: |
-        yarn workspace @businessnjgovnavigator/web deploy:storybook \
-          --bucket-path ${{ inputs.storybook_s3_bucket }} --aws-profile=NONE
+        aws s3 sync web/.storybook/build s3://${{ inputs.storybook_s3_bucket }} --delete
+
+    - name: Configure Storybook S3 Website
+      shell: bash
+      run: |
+        aws s3 website s3://${{ inputs.storybook_s3_bucket }} \
+          --index-document index.html \
+          --error-document index.html

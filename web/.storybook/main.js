@@ -23,16 +23,7 @@ export default {
     name: getAbsolutePath("@storybook/nextjs-vite"),
     options: {},
   },
-  core: {
-    builder: {
-      name: getAbsolutePath("@storybook/builder-webpack5"),
-      options: {
-        fsCache: true,
-        lazyCompilation: true,
-      },
-    },
-  },
-  webpackFinal: async (config) => {
+  viteFinal: async (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       "/img": resolve(__dirname, "../public/img"),
@@ -47,6 +38,20 @@ export default {
       "@businessnjgovnavigator/shared": resolve(__dirname, "../../shared/lib/shared/src"),
       "@/test": resolve(__dirname, "../test"),
     };
+    config.plugins = [
+      ...(config.plugins ?? []),
+      {
+        name: "raw-markdown-loader",
+        transform(code, id) {
+          if (id.endsWith(".md")) {
+            return {
+              code: `export default ${JSON.stringify(code)};`,
+              map: null,
+            };
+          }
+        },
+      },
+    ];
     return config;
   },
   features: {
