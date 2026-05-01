@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (

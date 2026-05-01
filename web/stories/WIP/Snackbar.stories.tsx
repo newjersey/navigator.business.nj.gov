@@ -1,5 +1,5 @@
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof SnackbarAlert> = {
   title: "WIP/Alerts/Snackbars",

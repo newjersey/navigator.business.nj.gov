@@ -9,7 +9,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { ConfigContext, ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import { useState } from "react";
 
 const Template = () => {

@@ -1,5 +1,5 @@
 import { ChecklistTag } from "@/components/ChecklistTag";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof ChecklistTag> = {
   title: "Atoms/Tag/ChecklistTag",

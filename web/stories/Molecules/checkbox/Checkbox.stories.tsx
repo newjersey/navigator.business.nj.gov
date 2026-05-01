@@ -1,16 +1,22 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (
     <FormGroup>
       <FormControlLabel control={<Checkbox onChange={() => {}} />} label={"Unselected"} />
-      <FormControlLabel control={<Checkbox checked={true} onChange={() => {}} />} label={"Selected"} />
+      <FormControlLabel
+        control={<Checkbox checked={true} onChange={() => {}} />}
+        label={"Selected"}
+      />
       <FormControlLabel
         control={<Checkbox checked={false} color={"error"} onChange={() => {}} />}
         label={"Error"}
       />
-      <FormControlLabel control={<Checkbox disabled onChange={() => {}} />} label={"Unselected Disabled"} />
+      <FormControlLabel
+        control={<Checkbox disabled onChange={() => {}} />}
+        label={"Unselected Disabled"}
+      />
       <FormControlLabel
         control={<Checkbox checked={true} disabled onChange={() => {}} />}
         label={"Selected Disabled"}

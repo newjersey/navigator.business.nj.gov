@@ -1,6 +1,6 @@
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { generateSidebarCardContent } from "@/test/factories";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof SidebarCardGeneric> = {
   title: "Molecules/Cards/SideBarCards",

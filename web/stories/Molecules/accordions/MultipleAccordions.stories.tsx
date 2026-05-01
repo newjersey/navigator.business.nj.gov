@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (
@@ -9,7 +9,9 @@ const Template = () => {
       <Accordion onChange={() => {}} square={false} className="">
         <AccordionSummary
           aria-controls=""
-          expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"} iconName="expand_more" />}
+          expandIcon={
+            <Icon className={"usa-icon--size-3 text-base-darkest"} iconName="expand_more" />
+          }
         >
           <div>Accordion Summary Text</div>
         </AccordionSummary>
@@ -25,7 +27,9 @@ const Template = () => {
       <Accordion onChange={() => {}} square={false} className="">
         <AccordionSummary
           aria-controls=""
-          expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"} iconName="expand_more" />}
+          expandIcon={
+            <Icon className={"usa-icon--size-3 text-base-darkest"} iconName="expand_more" />
+          }
         >
           <div>Accordion Summary Text</div>
         </AccordionSummary>
@@ -41,7 +45,9 @@ const Template = () => {
       <Accordion onChange={() => {}} square={false} className="">
         <AccordionSummary
           aria-controls=""
-          expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"} iconName="expand_more" />}
+          expandIcon={
+            <Icon className={"usa-icon--size-3 text-base-darkest"} iconName="expand_more" />
+          }
         >
           <div>Accordion Summary Text</div>
         </AccordionSummary>
