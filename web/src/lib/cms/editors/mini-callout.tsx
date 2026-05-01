@@ -10,6 +10,12 @@ export default {
       options: ["conditional", "informational", "warning", "quickReference"],
     },
     {
+      name: "hideIcon",
+      label: "Hide Icon",
+      widget: "boolean",
+      default: false,
+    },
+    {
       name: "body",
       label: "Body Text",
       default: "",
@@ -27,6 +33,7 @@ export default {
   ): {
     body: string;
     calloutType: string;
+    hideIcon: string | boolean;
   } => {
     // We can safely assume there will be a single match; else we wouldn't be inside this function.
     const [calloutBlock] = match;
@@ -37,7 +44,7 @@ export default {
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
 
     // If we just have :::miniCallout {}\n:::, then we need to return some default values instead.
-    const defaultCalloutContents = 'calloutType="conditional"';
+    const defaultCalloutContents = 'calloutType="conditional" hideIcon="false"';
 
     const calloutParameters = calloutMatch?.groups?.parameters ?? defaultCalloutContents;
 
@@ -46,15 +53,19 @@ export default {
     const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
     const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
 
+    const hideIconMatch = calloutParameters.match(/hideIcon="(?<hideIcon>[^"]+)"/);
+    const hideIconValue = hideIconMatch?.groups?.hideIcon.trim() === "true";
+
     return {
       calloutType: calloutTypeValue,
       body: calloutBody,
+      hideIcon: hideIconValue,
     };
   },
-  toBlock: (obj: { calloutType: string; body: string }): string => {
-    return `:::miniCallout{ calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
+  toBlock: (obj: { calloutType: string; hideIcon: string | boolean; body: string }): string => {
+    return `:::miniCallout{ calloutType="${obj.calloutType}" hideIcon="${obj.hideIcon}"}\n${obj.body}\n:::`;
   },
-  toPreview: (obj: { calloutType: string; body: string }): string => {
-    return `:::miniCallout{ calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
+  toPreview: (obj: { calloutType: string; hideIcon: string | boolean; body: string }): string => {
+    return `:::miniCallout{ calloutType="${obj.calloutType}" hideIcon="${obj.hideIcon}"}\n${obj.body}\n:::`;
   },
 };

@@ -135,7 +135,7 @@ describe("<BusinessStructureTask />", () => {
     renderTask(business);
     fireEvent.click(screen.getByText(Config.taskDefaults.editText));
     expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
-    expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
+    expect(screen.getByLabelText("Common business structures")).toBeInTheDocument();
   });
 
   it("does not allow editing when formation is completed", () => {
@@ -153,8 +153,9 @@ describe("<BusinessStructureTask />", () => {
       profileData: generateProfileData({ legalStructureId: undefined }),
     });
     renderTask(business);
-    expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
-    expect(screen.getByText(Config.businessStructureTask.radioQuestionHeader)).toBeInTheDocument();
+    expect(screen.getByLabelText("Common business structures")).toBeInTheDocument();
+    expect(screen.getByLabelText("Other business structures")).toBeInTheDocument();
+
     expect(
       screen.queryByText(Config.businessStructureTask.completedHeader),
     ).not.toBeInTheDocument();
@@ -167,11 +168,10 @@ describe("<BusinessStructureTask />", () => {
     await waitFor(() => {
       expect(screen.getByTestId("success-alert")).toHaveTextContent(name);
     });
-    expect(screen.queryByLabelText("Business structure")).not.toBeInTheDocument();
+
+    expect(screen.queryByLabelText("Common business structures")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Other business structures")).not.toBeInTheDocument();
     expect(screen.getByText(Config.businessStructureTask.completedHeader)).toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.businessStructureTask.radioQuestionHeader),
-    ).not.toBeInTheDocument();
 
     expect(currentBusiness().profileData.legalStructureId).toEqual("limited-liability-company");
   });
@@ -312,7 +312,8 @@ describe("<BusinessStructureTask />", () => {
     await waitFor(() => {
       expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
     });
-    expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
+    expect(screen.getByLabelText("Common business structures")).toBeInTheDocument();
+    expect(screen.getByLabelText("Other business structures")).toBeInTheDocument();
     expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     expect(currentBusiness().profileData.legalStructureId).toEqual(undefined);
   });
@@ -334,7 +335,8 @@ describe("<BusinessStructureTask />", () => {
     await waitFor(() => {
       expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
     });
-    expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
+    expect(screen.getByLabelText("Common business structures")).toBeInTheDocument();
+    expect(screen.getByLabelText("Other business structures")).toBeInTheDocument();
     expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     expect(currentBusiness().profileData.legalStructureId).toEqual(undefined);
     expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE");

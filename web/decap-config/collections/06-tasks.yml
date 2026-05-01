@@ -2508,12 +2508,34 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Tooltip - Not Complete, name: uncompletedTooltip, widget: text }
-              - { label: Header - Not Complete, name: radioQuestionHeader, widget: string }
-              - { label: Tooltip - Completed, name: completedTooltip, widget: text }
+              - {
+                  label: Tooltip - Not Complete,
+                  name: uncompletedTooltip,
+                  widget: text,
+                  hint:
+                    The checkbox in the upper left is disabled for this task. This tooltip shows if
+                    the user hovers over the checkbox and explains what to do in order to complete
+                    the task.,
+                }
+              - {
+                  label: Tooltip - Completed,
+                  name: completedTooltip,
+                  widget: text,
+                  hint: This tooltip shows if the user hovers over a completed checkbox.,
+                }
+              - {
+                  label: Info Callout,
+                  name: infoCallout,
+                  widget: markdown,
+                  hint:
+                    This text appears above the radio selection and explains why the user has to
+                    select their business structure.,
+                }
+
               - { label: Header - Complete, name: completedHeader, widget: string }
               - { label: Save Button, name: saveButton, widget: string }
-              - { label: SuccessMessage, name: successMessage, widget: string }
+              - { label: Success Message, name: successMessage, widget: string }
+              - { label: Success Message Next Step, name: successMessageNextStep, widget: string }
               - {
                   label: Aria Label Text,
                   name: ariaLabelText,

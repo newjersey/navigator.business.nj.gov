@@ -3016,6 +3016,20 @@ export default {
         },
       },
     },
+    select_business_structure_task: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "select_business_structure_task",
+            legacy_event_label: "open_live_chat",
+            click_text: "open_live_chat",
+            clicked_to: "live_chat_widget",
+          });
+        },
+      },
+    },
     select_industry_task: {
       click: {
         open_live_chat: () => {
