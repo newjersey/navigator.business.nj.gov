@@ -1,9 +1,12 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
@@ -19,6 +22,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 import {
   getFlow,
   scrollToTopOfElement,
@@ -147,37 +151,30 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="min-height-38rem" data-testid={"business-structure-task"}>
+    <div data-testid={"business-structure-task"}>
       <TaskHeader task={props.task} tooltipText={getTaskProgressTooltip()} />
       <UnlockedBy task={props.task} />
-      <Content>{preLookupContent}</Content>
+      <Content className="margin-bottom-3">{preLookupContent}</Content>
       {showRadioQuestion && (
-        <DataFormErrorMapContext.Provider value={formContextState}>
-          <ProfileDataContext.Provider
-            value={{
-              state: {
-                profileData: profileData,
-                flow: getFlow(profileData),
-              },
-              setProfileData,
-              onBack: (): void => {},
-            }}
-          >
-            <LegalStructureRadio taskId={props.task.id} ref={whenErrorScrollToRef} />
-            <div className="margin-top-4">
-              <SecondaryButton
-                isColor="primary"
-                onClick={onSubmit}
-                dataTestId={"save-business-structure"}
-              >
-                {Config.businessStructureTask.saveButton}
-              </SecondaryButton>
-            </div>
-          </ProfileDataContext.Provider>
-        </DataFormErrorMapContext.Provider>
+        <div className="margin-bottom-6">
+          <DataFormErrorMapContext.Provider value={formContextState}>
+            <ProfileDataContext.Provider
+              value={{
+                state: {
+                  profileData: profileData,
+                  flow: getFlow(profileData),
+                },
+                setProfileData,
+                onBack: (): void => {},
+              }}
+            >
+              <LegalStructureRadio taskId={props.task.id} ref={whenErrorScrollToRef} />
+            </ProfileDataContext.Provider>
+          </DataFormErrorMapContext.Provider>
+        </div>
       )}
       {business && !showRadioQuestion && (
-        <>
+        <div className="margin-bottom-3">
           <Heading level={2}>{Config.businessStructureTask.completedHeader}</Heading>
           <Alert variant="success">
             <div
@@ -222,7 +219,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               )}
             </div>
           </Alert>
-        </>
+        </div>
       )}
       <Content>{postLookupContent}</Content>
       <TaskStatusChangeSnackbar
@@ -230,6 +227,22 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
         close={(): void => setSuccessSnackbarIsOpen(false)}
         status={"COMPLETED"}
       />
+
+      <CtaContainer>
+        <ActionBarLayout>
+          <LiveChatHelpButton
+            analyticsEvent={analytics.event.select_industry_task.click.open_live_chat}
+          />
+          <PrimaryButton
+            isColor="primary"
+            onClick={onSubmit}
+            dataTestId="save-business-structure"
+            isRightMarginRemoved={true}
+          >
+            <Content>{Config.businessStructureTask.saveButton}</Content>
+          </PrimaryButton>
+        </ActionBarLayout>
+      </CtaContainer>
     </div>
   );
 };
