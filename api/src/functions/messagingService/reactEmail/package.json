@@ -1,7 +1,7 @@
 {
   "name": "@businessnjgovnavigator/react-email",
   "type": "module",
-  "packageManager": "yarn@3.8.7",
+  "packageManager": "yarn@4.14.1",
   "devDependencies": {
     "@react-email/preview-server": "5.2.10",
     "react-email": "5.0.6"
