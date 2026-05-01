@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { Icon } from "@/components/njwds/Icon";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -15,7 +16,15 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { orderBy } from "lodash";
 import React, { ForwardedRef, forwardRef, ReactElement, useContext } from "react";
 
@@ -44,8 +53,23 @@ const LegalStructureRadio = forwardRef(
 
     RegisterForOnSubmit(() => state.profileData.legalStructureId !== undefined);
 
-    const LegalStructuresOrdered: LegalStructure[] = orderBy(
-      LegalStructures,
+    const commonLegalStructures: LegalStructure[] = LegalStructures.filter((ls) => {
+      return ls.isCommon;
+    });
+
+    const otherLegalStructures: LegalStructure[] = LegalStructures.filter((ls) => {
+      return !ls.isCommon;
+    });
+
+    const commonLegalStructuresOrdered: LegalStructure[] = orderBy(
+      commonLegalStructures,
+      (legalStructure: LegalStructure) => {
+        return legalStructure.onboardingOrder;
+      },
+    );
+
+    const otherLegalStructuresOrdered: LegalStructure[] = orderBy(
+      otherLegalStructures,
       (legalStructure: LegalStructure) => {
         return legalStructure.onboardingOrder;
       },
@@ -83,54 +107,126 @@ const LegalStructureRadio = forwardRef(
             </Alert>
           </div>
         )}
-        <Heading level={2}>{Config.businessStructureTask.radioQuestionHeader}</Heading>
         <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS">
-          <div className="margin-top-3">
-            <FormControl variant="outlined" fullWidth>
-              <RadioGroup
-                aria-label="Business structure"
-                name="legal-structure"
-                value={state.profileData.legalStructureId || ""}
-                onChange={handleLegalStructure}
-              >
-                {LegalStructuresOrdered.map((legalStructure) => {
-                  return (
-                    <div key={legalStructure.id}>
-                      <FormControlLabel
-                        aria-label={legalStructure.id}
-                        style={{ alignItems: "center" }}
-                        labelPlacement="end"
-                        key={legalStructure.id}
-                        data-testid={legalStructure.id}
-                        value={legalStructure.id}
-                        control={<Radio color={isFormFieldInvalid ? "error" : "primary"} />}
-                        label={makeLabel(legalStructure.id)}
-                      />
+          <Accordion defaultExpanded={true}>
+            <AccordionSummary
+              expandIcon={
+                <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />
+              }
+              aria-controls={`common-business-structures-content`}
+              id={`common-business-structures-header`}
+              data-testid={`common-business-structures-header`}
+            >
+              <Heading level={3} className={`flex flex-align-center margin-0-override`}>
+                <div className="inline">Common Business Structures</div>
+              </Heading>
+            </AccordionSummary>
+            <AccordionDetails>
+              <FormControl variant="outlined" fullWidth>
+                <RadioGroup
+                  aria-label="Common business structures"
+                  name="common-legal-structures"
+                  value={state.profileData.legalStructureId || ""}
+                  onChange={handleLegalStructure}
+                >
+                  {commonLegalStructuresOrdered.map((legalStructure) => {
+                    return (
+                      <div className="margin-bottom-2" key={legalStructure.id}>
+                        <FormControlLabel
+                          aria-label={legalStructure.id}
+                          style={{ alignItems: "center" }}
+                          labelPlacement="end"
+                          key={legalStructure.id}
+                          data-testid={legalStructure.id}
+                          value={legalStructure.id}
+                          control={<Radio color={isFormFieldInvalid ? "error" : "primary"} />}
+                          label={makeLabel(legalStructure.id)}
+                        />
 
-                      {(contentFromConfig.optionContent as Record<string, string>)[
-                        legalStructure.id
-                      ] && (
-                        <div className="margin-left-4 padding-left-05">
-                          <Content>
-                            {
-                              (contentFromConfig.optionContent as Record<string, string>)[
-                                legalStructure.id
-                              ]
-                            }
-                          </Content>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </RadioGroup>
-            </FormControl>
-            {isFormFieldInvalid && (
-              <div className="text-error-dark text-bold" data-testid="business-structure-error">
-                {contentFromConfig.errorTextRequired}
-              </div>
-            )}
+                        {(contentFromConfig.optionContent as Record<string, string>)[
+                          legalStructure.id
+                        ] && (
+                          <div className="margin-left-4 padding-left-05">
+                            <Content>
+                              {
+                                (contentFromConfig.optionContent as Record<string, string>)[
+                                  legalStructure.id
+                                ]
+                              }
+                            </Content>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </RadioGroup>
+              </FormControl>
+            </AccordionDetails>
+          </Accordion>
+          <div className="margin-top-3 margin-bottom-1">
+            <Accordion>
+              <AccordionSummary
+                expandIcon={
+                  <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />
+                }
+                aria-controls={`other-business-structures-content`}
+                id={`other-business-structures-header`}
+                data-testid={`other-business-structures-header`}
+              >
+                <Heading level={3} className={`flex flex-align-center margin-0-override`}>
+                  <div className="inline">Other Business Structures</div>
+                </Heading>
+              </AccordionSummary>
+              <AccordionDetails>
+                <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS">
+                  <FormControl variant="outlined" fullWidth>
+                    <RadioGroup
+                      aria-label="Other business structures"
+                      name="other-legal-structures"
+                      value={state.profileData.legalStructureId || ""}
+                      onChange={handleLegalStructure}
+                    >
+                      {otherLegalStructuresOrdered.map((legalStructure) => {
+                        return (
+                          <div className="margin-bottom-2" key={legalStructure.id}>
+                            <FormControlLabel
+                              aria-label={legalStructure.id}
+                              style={{ alignItems: "center" }}
+                              labelPlacement="end"
+                              key={legalStructure.id}
+                              data-testid={legalStructure.id}
+                              value={legalStructure.id}
+                              control={<Radio color={isFormFieldInvalid ? "error" : "primary"} />}
+                              label={makeLabel(legalStructure.id)}
+                            />
+
+                            {(contentFromConfig.optionContent as Record<string, string>)[
+                              legalStructure.id
+                            ] && (
+                              <div className="margin-left-4 padding-left-05">
+                                <Content>
+                                  {
+                                    (contentFromConfig.optionContent as Record<string, string>)[
+                                      legalStructure.id
+                                    ]
+                                  }
+                                </Content>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </RadioGroup>
+                  </FormControl>
+                </WithErrorBar>
+              </AccordionDetails>
+            </Accordion>
           </div>
+          {isFormFieldInvalid && (
+            <div className="text-error-dark text-bold" data-testid="business-structure-error">
+              {contentFromConfig.errorTextRequired}
+            </div>
+          )}
         </WithErrorBar>
       </>
     );

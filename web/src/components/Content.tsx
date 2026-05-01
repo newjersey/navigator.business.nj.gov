@@ -76,7 +76,11 @@ export const Content = (props: ContentProps): ReactNode => {
       );
     },
     miniCallout: (props: any): ReactElement => {
-      return <MiniCallout calloutType={props.calloutType}>{props.children}</MiniCallout>;
+      return (
+        <MiniCallout calloutType={props.calloutType} hideIcon={props.hideIcon}>
+          {props.children}
+        </MiniCallout>
+      );
     },
     infoAlert: (props: any): ReactElement => {
       return <Alert variant="info">{props.children}</Alert>;

@@ -14,4 +14,14 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
+:::miniCallout{ calloutType="informational" hideIcon="true" }
+
+**You need to pick a business structure before forming your business.**
+
+Business structure impacts who is responsible for debts and what rules you must follow.
+
+You can change your business structure up until the “Register Your Business” step.
+
+:::
+
 ${businessStructureSelectionComponent}

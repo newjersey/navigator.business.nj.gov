@@ -12,7 +12,9 @@ export const MiniCallout = (props: PropsWithChildren<MiniCalloutProps>): ReactEl
       className={`padding-205 radius-md margin-y-2 ${styling.backgroundColor} ${styling.textColor}`}
     >
       <div className="flex">
-        <div className={styling.headerIcon} aria-hidden="true" data-testid="callout-icon" />
+        {!props.hideIcon && (
+          <div className={styling.headerIcon} aria-hidden="true" data-testid="callout-icon" />
+        )}
         <div>{props.children}</div>
       </div>
     </div>

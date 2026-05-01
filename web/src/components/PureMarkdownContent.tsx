@@ -72,6 +72,7 @@ const customRemarkPlugin: Plugin = () => {
             data.hProperties = {
               headerText: node.attributes.headerText,
               calloutType: node.attributes.calloutType,
+              hideIcon: node.attributes.hideIcon === "true",
             };
             break;
           case "icon":

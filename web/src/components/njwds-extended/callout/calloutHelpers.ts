@@ -14,6 +14,7 @@ export interface LargeCalloutProps extends IconProps {
 
 export interface MiniCalloutProps {
   calloutType: CalloutTypes;
+  hideIcon?: string | boolean;
 }
 
 export const CALLOUT_STYLES: Record<CalloutTypes, CalloutStyling> = {
