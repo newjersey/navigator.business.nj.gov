@@ -1,6 +1,46 @@
 import sharedConfig from "../jest.shared";
 
-const esModules = ["rehype-react", "remark-gfm", "remark-parse", "remark-rehype", "unified"];
+const esmModulePattern = [
+  "@ungap/structured-clone",
+  "bail",
+  "bcp-47-match",
+  "ccount",
+  "character-entities[^/]*",
+  "character-reference-invalid",
+  "comma-separated-tokens",
+  "decode-named-character-reference",
+  "devlop",
+  "direction",
+  "entities",
+  "escape-string-regexp",
+  "hast-[^/]*",
+  "hastscript",
+  "html-void-elements",
+  "html-whitespace-sensitive-tag-names",
+  "is-alphabetical",
+  "is-alphanumerical",
+  "is-decimal",
+  "is-hexadecimal",
+  "is-plain-obj",
+  "longest-streak",
+  "markdown-table",
+  "mdast-util-[^/]*",
+  "micromark[^/]*",
+  "parse-entities",
+  "parse5",
+  "property-information",
+  "rehype-[^/]*",
+  "remark-[^/]*",
+  "space-separated-tokens",
+  "stringify-entities",
+  "trim-lines",
+  "trough",
+  "unified",
+  "unist-util-[^/]*",
+  "vfile[^/]*",
+  "web-namespaces",
+  "zwitch",
+].join("|");
 
 process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_FLP: "true",
@@ -33,7 +73,7 @@ export default {
     "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
   },
   resolver: `${__dirname}/test/resolver.js`,
-  transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules.join("|")}))`],
+  transformIgnorePatterns: [`/node_modules/(?!(${esmModulePattern}))`],
   transform: {
     "\\.md$": "<rootDir>/test/jest-raw-loader.js",
     "\\.m?[jt]sx?$": [
