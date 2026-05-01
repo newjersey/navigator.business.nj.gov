@@ -25,7 +25,7 @@
  * ```
  */
 
-import { v190UserDataSchema, withNoBase64Check } from "@db/zodSchema/zodSchemas";
+import { v191UserDataSchema, withNoBase64Check } from "@db/zodSchema/zodSchemas";
 import { generateTsSourceFromCompiler } from "./userSchemaCompiler";
 import { generateTsSourceFromZod, generateZodSource } from "./userSchemaGenerator";
 import { highlight } from "cli-highlight";
@@ -34,12 +34,12 @@ import { z } from "zod";
 
 const migrationFilePath = path.resolve(
   __dirname,
-  "../src/db/migrations/v190_remove_hidden_fundings_and_certifications.ts",
+  "../src/db/migrations/v191_rotate_new_kms_keys.ts",
 );
 
 const tsconfigPath = path.resolve(__dirname, "../tsconfig.json");
 
-const finalZodSchema = withNoBase64Check(v190UserDataSchema);
+const finalZodSchema = withNoBase64Check(v191UserDataSchema);
 const shouldPrintZod = process.argv.includes("--zod");
 const shouldPrintJson = process.argv.includes("--json");
 const shouldPrintTsZod = process.argv.includes("--ts-zod");
@@ -53,10 +53,10 @@ if (modeCount !== 1) {
 }
 
 if (shouldPrintZod) {
-  const source = generateZodSource(v190UserDataSchema);
+  const source = generateZodSource(v191UserDataSchema);
   console.log(highlight(source, { language: "typescript" }));
 } else if (shouldPrintTsZod) {
-  const source = generateTsSourceFromZod(v190UserDataSchema);
+  const source = generateTsSourceFromZod(v191UserDataSchema);
   console.log(highlight(source, { language: "typescript" }));
 } else if (shouldPrintTs) {
   const source = generateTsSourceFromCompiler(migrationFilePath, tsconfigPath);

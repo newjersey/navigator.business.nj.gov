@@ -54,6 +54,8 @@ export class LambdaStack extends Stack {
 
     const adminPassword = process.env.ADMIN_PASSWORD ?? "";
     const awsCryptoTaxIdEncryptionKey = process.env.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
+    const legacyAwsCryptoTaxIdEncryptionKey =
+      process.env.LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
     const awsCryptoContextStage = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
     const awsCryptoContextTaxIdEncryptionPurpose =
       process.env.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE || "";
@@ -185,6 +187,7 @@ export class LambdaStack extends Stack {
         ABC_ETP_API_KEY: etpApiKey,
         ABC_ETP_API_BASE_URL: etpApiBaseUrl,
         AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
+        LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: legacyAwsCryptoTaxIdEncryptionKey,
         AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE: awsCryptoContextTaxIdEncryptionPurpose,
         AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
         AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
@@ -347,6 +350,7 @@ export class LambdaStack extends Stack {
         USERS_TABLE: usersTable,
         BUSINESSES_TABLE: businessesTable,
         AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
+        LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: legacyAwsCryptoTaxIdEncryptionKey,
         AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE: awsCryptoContextTaxIdEncryptionPurpose,
       },
     });
@@ -380,6 +384,7 @@ export class LambdaStack extends Stack {
         USERS_TABLE: usersTable,
         BUSINESSES_TABLE: businessesTable,
         AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
+        LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: legacyAwsCryptoTaxIdEncryptionKey,
         AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE: awsCryptoContextTaxIdEncryptionPurpose,
         GOV_DELIVERY_API_KEY: govDeliveryApiKey,
         GOV_DELIVERY_BASE_URL: govDeliveryBaseUrl,
@@ -423,6 +428,7 @@ export class LambdaStack extends Stack {
       environment: {
         API_BASE_URL: apiBaseUrl,
         AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
+        LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: legacyAwsCryptoTaxIdEncryptionKey,
         AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
         AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE: awsCryptoContextTaxIdEncryptionPurpose,
         AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
