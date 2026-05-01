@@ -16,7 +16,7 @@ import {
   getMergedConfig,
 } from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import { useState } from "react";
 const Template = () => {
   const taxId = "2";

@@ -1,5 +1,5 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof SecondaryButton> = {
   title: "Molecules/Button/Secondary",

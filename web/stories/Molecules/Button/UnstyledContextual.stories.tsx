@@ -1,5 +1,5 @@
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => <ContextualInfoButton text="Contextual Link" id="id" />;
 

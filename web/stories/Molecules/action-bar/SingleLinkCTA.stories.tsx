@@ -1,5 +1,5 @@
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (

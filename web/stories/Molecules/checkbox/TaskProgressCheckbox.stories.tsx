@@ -1,5 +1,5 @@
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (
