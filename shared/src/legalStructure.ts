@@ -4,6 +4,7 @@ export interface LegalStructure {
   readonly abbreviation: string;
   readonly requiresPublicFiling: boolean;
   readonly hasTradeName: boolean;
+  readonly isCommon: boolean;
   readonly onboardingOrder: number;
   readonly elementsToDisplay: Set<ElementsToDisplay>;
 }
@@ -29,6 +30,7 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
       hasTradeName: false,
       onboardingOrder: 0,
       elementsToDisplay: new Set<ElementsToDisplay>(["entityId", "formationDate"]),
+      isCommon: false,
     }
   );
 };
@@ -42,6 +44,7 @@ export const LegalStructures: LegalStructure[] = [
     onboardingOrder: 30,
     hasTradeName: true,
     elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
+    isCommon: true,
   },
   {
     id: "general-partnership",
@@ -51,6 +54,7 @@ export const LegalStructures: LegalStructure[] = [
     hasTradeName: true,
     onboardingOrder: 20,
     elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
+    isCommon: false,
   },
   {
     id: "limited-partnership",
@@ -67,6 +71,7 @@ export const LegalStructures: LegalStructure[] = [
       "entityId",
       "dbaName",
     ]),
+    isCommon: false,
   },
   {
     id: "limited-liability-partnership",
@@ -83,6 +88,7 @@ export const LegalStructures: LegalStructure[] = [
       "entityId",
       "dbaName",
     ]),
+    isCommon: false,
   },
   {
     id: "limited-liability-company",
@@ -99,10 +105,11 @@ export const LegalStructures: LegalStructure[] = [
       "entityId",
       "dbaName",
     ]),
+    isCommon: true,
   },
   {
     id: "c-corporation",
-    name: "Corporation",
+    name: "Corporation (C designation)",
     abbreviation: "C Corp",
     requiresPublicFiling: true,
     hasTradeName: false,
@@ -115,6 +122,7 @@ export const LegalStructures: LegalStructure[] = [
       "entityId",
       "dbaName",
     ]),
+    isCommon: true,
   },
   {
     id: "nonprofit",
@@ -131,6 +139,7 @@ export const LegalStructures: LegalStructure[] = [
       "entityId",
       "dbaName",
     ]),
+    isCommon: false,
   },
   {
     id: "s-corporation",
@@ -147,5 +156,6 @@ export const LegalStructures: LegalStructure[] = [
       "entityId",
       "dbaName",
     ]),
+    isCommon: true,
   },
 ];

@@ -1,4 +1,5 @@
 ---
+notesMd: Please visit the [Tasks - Business Structure collection](https://dev.account.business.nj.gov/mgmt/cms#/collections/business-structure-section/entries/business-structure-selection) to modify the content of this task.
 summaryDescriptionMd: >-
   :::infoAlert
    You can change your intended business structure anytime before you [form your business](https://navigator.business.nj.gov/tasks/form-business-entity) with the NJ Department of Treasury.
@@ -13,5 +14,3 @@ id: business-structure
 callToActionLink: ""
 callToActionText: ""
 ---
-
-${businessStructureSelectionComponent}
