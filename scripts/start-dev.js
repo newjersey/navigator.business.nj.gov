@@ -25,7 +25,7 @@ async function main() {
   });
 
   up.on("close", () => {
-    const dev = run("yarn workspaces foreach -ptvi run dev");
+    const dev = run("yarn workspaces foreach --all -ptvi run dev");
 
     // On Ctrl+C or process termination
     process.on("SIGINT", cleanup);
