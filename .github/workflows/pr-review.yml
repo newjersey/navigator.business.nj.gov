@@ -63,12 +63,26 @@ jobs:
           github_usernames: ${{ steps.select-reviewers.outputs.picked_reviewers }}
           github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
 
+      - name: Gather reviewers for Slack message
+        id: reviewers-for-slack
+        shell: bash
+        env:
+          IS_SHOW: ${{ github.event.label.name == 'pr-show' }}
+          SELECTED_REVIEWERS: ${{ steps.select-reviewers.outputs.all_reviewers }}
+        run: |
+          if [ "$IS_SHOW" = "true" ]; then
+            reviewers="$(jq -r '[.pull_request.requested_reviewers[]?.login] | join(" ")' "$GITHUB_EVENT_PATH")"
+          else
+            reviewers="$SELECTED_REVIEWERS"
+          fi
+
+          echo "github-usernames=$reviewers" >> "$GITHUB_OUTPUT"
+
       - name: Look up all reviewers in Slack
-        if: github.event.label.name == 'pr-review'
         id: lookup-all-reviewers
         uses: ./.github/actions/lookup-slack-users
         with:
-          github_usernames: ${{ steps.select-reviewers.outputs.all_reviewers }}
+          github_usernames: ${{ steps.reviewers-for-slack.outputs.github-usernames }}
           github_slack_mapping: ${{ vars.GH_SLACK_USER_MAP }}
 
       - name: Look up PR author in Slack
