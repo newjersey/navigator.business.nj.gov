@@ -71,7 +71,7 @@
     "@smithy/node-http-handler": "4.4.14",
     "@types/mdast": "4.0.4",
     "airtable": "0.12.2",
-    "aws-amplify": "6.15.8",
+    "aws-amplify": "6.16.4",
     "axios": "1.15.0",
     "babel-jest": "29.7.0",
     "body-parser": "1.20.4",
