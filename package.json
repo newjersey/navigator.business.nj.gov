@@ -255,7 +255,7 @@
     "typescript": "5.9.3",
     "vite": "^7.0.0",
     "vitest": "2.1.9",
-    "webpack": "5.105.4",
+    "webpack": "5.106.2",
     "wiremock": "3.13.2",
     "yarn-workspace-sync-deps": "0.3.3"
   },
