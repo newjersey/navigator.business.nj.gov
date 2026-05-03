@@ -68,7 +68,7 @@
     "@newjersey/njwds": "0.3.0",
     "@react-email/components": "1.0.10",
     "@react-email/render": "2.0.4",
-    "@smithy/node-http-handler": "4.4.14",
+    "@smithy/node-http-handler": "4.6.1",
     "@types/mdast": "4.0.4",
     "airtable": "0.12.2",
     "aws-amplify": "6.15.8",
