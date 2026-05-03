@@ -48,7 +48,7 @@
     "@aws-sdk/util-base64-node": "3.209.0",
     "@aws-sdk/util-dynamodb": "3.896.0",
     "@businessnjgovnavigator/shared": "*",
-    "@smithy/node-http-handler": "4.4.14",
+    "@smithy/node-http-handler": "4.6.1",
     "axios": "1.15.0",
     "body-parser": "1.20.4",
     "cors": "2.8.6",
