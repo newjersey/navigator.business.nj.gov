@@ -6,6 +6,7 @@ import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkip
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
+import { CssTransition } from "@/components/transitions/CssTransition";
 import { AuthContext } from "@/contexts/authContext";
 import {
   createDataFormErrorMap,
@@ -75,7 +76,6 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
 
 interface Props {
   municipalities: Municipality[];
@@ -277,7 +277,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           ) {
             setPage({ current: 2, previous: 1 });
           } else {
-            completeOnboarding(newProfileData, localUpdateQueue);
+            await completeOnboarding(newProfileData, localUpdateQueue);
           }
         } else if (querySectorId && sectorQueryParamIsValid(querySectorId)) {
           const newProfileData: ProfileData = {
@@ -289,7 +289,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
           setProfileData(newProfileData);
           localUpdateQueue?.queueProfileData(newProfileData);
-          completeOnboarding(newProfileData, localUpdateQueue);
+          await completeOnboarding(newProfileData, localUpdateQueue);
         } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
           setPage({ current: queryPage, previous: queryPage - 1 });
         } else if (flowQueryParamIsValid(queryFlow)) {
@@ -424,20 +424,16 @@ const OnboardingPage = (props: Props): ReactElement => {
               : {},
           }));
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
-        updateQueue
-          .queueProfileData(newProfileData)
-          .update({ local: true })
-          .then(() => {
-            const nextCurrentPage = page.current + 1;
-            setPage({
-              current: nextCurrentPage,
-              previous: page.current,
-            });
-            routeToPage(nextCurrentPage);
-            headerRef.current?.focus();
-          });
+        await updateQueue.queueProfileData(newProfileData).update({ local: true });
+        const nextPage = page.current + 1;
+        setPage({
+          current: nextPage,
+          previous: page.current,
+        });
+        routeToPage(nextPage);
+        headerRef.current?.focus();
       } else {
-        completeOnboarding(newProfileData, updateQueue);
+        await completeOnboarding(newProfileData, updateQueue);
       }
     },
     (isValid, errors) => {
@@ -523,12 +519,13 @@ const OnboardingPage = (props: Props): ReactElement => {
               <div className="slide-container">
                 {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
                   return (
-                    <CSSTransition
+                    <CssTransition
                       key={index}
-                      in={page.current === index + 1}
+                      isVisible={page.current === index + 1}
                       unmountOnExit
                       timeout={getTimeout(page, index + 1)}
-                      classNames={`width-100 ${getAnimation(page)}`}
+                      className="width-100"
+                      transitionClassName={getAnimation(page)}
                     >
                       <SingleColumnContainer isSmallerWidth>
                         <form
@@ -548,7 +545,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                           />
                         </form>
                       </SingleColumnContainer>
-                    </CSSTransition>
+                    </CssTransition>
                   );
                 })}
               </div>
