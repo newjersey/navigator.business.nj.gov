@@ -1,8 +1,7 @@
 import "@newjersey/njwds/dist/css/styles.css";
+import { ThemeProvider } from "@mui/material";
 import muiTheme from "../src/lib/muiTheme.ts";
 import "../src/styles/main.scss";
-
-const { ThemeProvider } = require("@mui/material");
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
