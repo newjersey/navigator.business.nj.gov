@@ -1,49 +1,45 @@
-// We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
-import { Options } from "broken-link-checker";
+import { findDeadContentLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 import fs from "fs";
 
 jest.mock("fs");
 jest.mock("process", () => ({ cwd: (): string => "/test" }));
+jest.mock(
+  "@/lib/cms/CollectionMap.json",
+  () => ({
+    "test-task": { Tasks: "tasks" },
+    task1: { Tasks: "tasks" },
+    task2: { Tasks: "tasks" },
+    "dead-task": { Tasks: "tasks" },
+    filing1: { Filings: "filings" },
+    fundings: { Fundings: "funding-opportunities" },
+    certifications: { Certifications: "certification-opportunities" },
+    "test-mapping": { Mappings: "mappings" },
+  }),
+  { virtual: true },
+);
 
-describe("findDeadLinks", () => {
-  let mockedFs: jest.Mocked<typeof fs>;
+const mockReaddirSync = fs.readdirSync as jest.Mock;
+const mockReadFileSync = fs.readFileSync as jest.Mock;
+const mockExistsSync = fs.existsSync as jest.Mock;
 
+describe("findDeadTasks", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    mockedFs = fs as jest.Mocked<typeof fs>;
 
-    mockedFs.readdirSync
-      // @ts-ignore
+    mockReaddirSync
       .mockReturnValueOnce(["task1.md", "task2.md", "dead-task.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["industry1.json"])
-      // @ts-ignore
       .mockReturnValueOnce(["filing1.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["addon1.json", "addon2.json"])
-      // @ts-ignore
       .mockReturnValueOnce(["info1.md", "info2.md", "info3", "info4", "dead-info.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["display-subfolder", "display1.md", "display2.ts"])
-      // @ts-ignore
       .mockReturnValueOnce(["display-subfolder-item1.md", "display-subfolder-item2.ts"])
-      // @ts-ignore
       .mockReturnValueOnce(["config.json"])
-      // @ts-ignore
       .mockReturnValueOnce(["fundings.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["certifications.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["licenses.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["licenseTasks.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["anytimeActionTasks.md"])
-      // @ts-ignore
       .mockReturnValueOnce(["anytimeActionLicenseReinstatements.md"]);
 
     const task1 = "Task 1 contents";
@@ -71,7 +67,7 @@ describe("findDeadLinks", () => {
     const anytimeActionTasks = "AnytimeActionTask Content";
     const anytimeActionLicenseReinstatements = "AnytimeActionLicenseReinstatement Content";
 
-    mockedFs.readFileSync
+    mockReadFileSync
       .mockReturnValueOnce(industry1)
       .mockReturnValueOnce(addOn1)
       .mockReturnValueOnce(addOn2)
@@ -95,65 +91,225 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(anytimeActionLicenseReinstatements);
   });
 
-  describe("findDeadTasks", () => {
-    it("finds tasks that are not referenced in any add-ons or modifications", async () => {
-      expect(await findDeadTasks()).toEqual(["dead-task.md"]);
-    });
-  });
-
-  describe("findDeadLinks", () => {
-    it("finds dead links on every page", async () => {
-      expect(await findDeadLinks()).toEqual({
-        "/tasks/task1": ["http://www.example.com"],
-        "/tasks/task2": [],
-        "/tasks/dead-task": [],
-        "/filings/filing1": [],
-        "/onboarding?page=1": [],
-        "/onboarding?page=2": [],
-        "/onboarding?page=3": [],
-        "/profile": [],
-        "/dashboard": [],
-        "/welcome": [],
-        "/unsupported": [],
-        "/tasks/licenseTasks": [],
-        "/license-calendar-event/licenses-renewal": [],
-        "/license-calendar-event/licenses-expiration": [],
-        "/funding/fundings": [],
-        "/certification/certifications": [],
-        "/anytime-action-tasks/anytimeActionTasks": [],
-        "/anytime-action-license-reinstatements/anytimeActionLicenseReinstatements": [],
-      });
-    });
+  it("finds tasks that are not referenced in any add-ons or modifications", async () => {
+    expect(await findDeadTasks()).toEqual(["dead-task.md"]);
   });
 });
 
-jest.mock("broken-link-checker", () => {
-  return {
-    HtmlUrlChecker: function SpyHtmlUrlChecker(
-      options: Options,
-      handlers: {
-        link?: ((result: any) => void) | undefined;
-        end?: (() => void) | undefined;
+const setupContentScanMocks = (files: { name: string; content: string }[]): void => {
+  mockExistsSync.mockImplementation((dirPath: unknown) => {
+    return String(dirPath).includes("roadmaps/tasks");
+  });
+  mockReaddirSync.mockReturnValue(files.map((f) => f.name));
+  mockReadFileSync.mockImplementation((filePath: unknown) => {
+    const name = String(filePath).split("/").pop() || "";
+    const file = files.find((f) => f.name === name);
+    return file?.content || "";
+  });
+};
+
+describe("findDeadContentLinks", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it("extracts URLs from markdown files and reports dead ones", async () => {
+    const mdContent = `---
+name: Test Task
+callToActionLink: https://dead-link.example.com/page
+---
+
+Visit [Example](https://alive-link.example.com) for more info.
+Also check https://another-dead.example.com/resource for details.
+`;
+
+    setupContentScanMocks([{ name: "test-task.md", content: mdContent }]);
+
+    (global.fetch as jest.Mock).mockImplementation((url: string) => {
+      if (url === "https://alive-link.example.com") {
+        return Promise.resolve({ ok: true, status: 200 });
+      }
+      return Promise.resolve({ ok: false, status: 404 });
+    });
+
+    const results = await findDeadContentLinks();
+
+    expect(results.length).toBe(1);
+    const result = results[0];
+    expect(result.slug).toBe("test-task");
+    expect(result.collection).toBe("Tasks");
+    expect(result.cmsEditUrl).toBe("/mgmt/cms#/collections/tasks/entries/test-task");
+    expect(result.deadUrls).toHaveLength(2);
+    expect(result.deadUrls.map((u) => u.url)).toEqual(
+      expect.arrayContaining([
+        "https://dead-link.example.com/page",
+        "https://another-dead.example.com/resource",
+      ]),
+    );
+    expect(result.deadUrls.find((u) => u.url === "https://dead-link.example.com/page")?.field).toBe(
+      "callToActionLink",
+    );
+    expect(
+      result.deadUrls.find((u) => u.url === "https://another-dead.example.com/resource")?.field,
+    ).toBe("body");
+  });
+
+  it("skips template URLs and known false positives", async () => {
+    const mdContent = `---
+name: Test
+---
+
+Visit $municipalityWebsite for local info.
+Also https://www.facebook.com/BusinessNJgov is fine.
+But https://real-dead.example.com is broken.
+`;
+
+    setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
+
+    (global.fetch as jest.Mock).mockImplementation(() => {
+      return Promise.resolve({ ok: false, status: 404 });
+    });
+
+    const results = await findDeadContentLinks();
+
+    expect(results.length).toBe(1);
+    expect(results[0].deadUrls).toHaveLength(1);
+    expect(results[0].deadUrls[0].url).toBe("https://real-dead.example.com");
+  });
+
+  it("retries with GET when HEAD returns 403 or 405", async () => {
+    const mdContent = `---
+name: Test
+callToActionLink: https://head-blocked.example.com
+---
+`;
+
+    setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
+
+    let callCount = 0;
+    (global.fetch as jest.Mock).mockImplementation(() => {
+      callCount++;
+      if (callCount === 1) {
+        return Promise.resolve({ ok: false, status: 403 });
+      }
+      return Promise.resolve({ ok: true, status: 200 });
+    });
+
+    const results = await findDeadContentLinks();
+    expect(results).toHaveLength(0);
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it("calls onProgress callback during URL checking", async () => {
+    const mdContent = `---
+name: Test
+callToActionLink: https://example.com/1
+---
+
+Also https://example.com/2 here.
+`;
+
+    setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
+
+    (global.fetch as jest.Mock).mockResolvedValue({ ok: true, status: 200 });
+
+    const progressCalls: [number, number][] = [];
+    await findDeadContentLinks((checked, total) => {
+      progressCalls.push([checked, total]);
+    });
+
+    expect(progressCalls.length).toBeGreaterThan(0);
+    const lastCall = progressCalls[progressCalls.length - 1];
+    expect(lastCall[0]).toBe(lastCall[1]);
+  });
+
+  it("extracts URLs from JSON files", async () => {
+    const jsonContent = JSON.stringify({
+      name: "Test Mapping",
+      link: "https://dead-json-link.example.com",
+      nested: {
+        url: "Check https://alive-json.example.com for info",
       },
-    ): any {
-      const enqueue = (pageUrl: any): any => {
-        if (!handlers.link || !handlers.end) {
-          return;
-        }
-        if (pageUrl.includes("task1")) {
-          handlers.link({
-            url: { original: "http://www.example.com" },
-            broken: true,
-          });
-        } else {
-          handlers.link({
-            url: { original: "" },
-            broken: false,
-          });
-        }
-        handlers.end();
-      };
-      return { enqueue };
-    },
-  };
+    });
+
+    setupContentScanMocks([{ name: "test-mapping.json", content: jsonContent }]);
+
+    (global.fetch as jest.Mock).mockImplementation((url: string) => {
+      if (url === "https://alive-json.example.com") {
+        return Promise.resolve({ ok: true, status: 200 });
+      }
+      return Promise.resolve({ ok: false, status: 404 });
+    });
+
+    const results = await findDeadContentLinks();
+
+    expect(results.length).toBe(1);
+    expect(results[0].deadUrls).toHaveLength(1);
+    expect(results[0].deadUrls[0].url).toBe("https://dead-json-link.example.com");
+    expect(results[0].deadUrls[0].field).toBe("link");
+  });
+
+  it("handles parentheses inside markdown link URLs", async () => {
+    const mdContent = `---
+name: Parens Test
+---
+
+Download the [MW-562 form](https://www.nj.gov/labor/wageandhour/assets/PDFs/MW-562%20(6-23).pdf) here.
+`;
+
+    setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
+
+    (global.fetch as jest.Mock).mockResolvedValue({ ok: false, status: 404 });
+
+    const results = await findDeadContentLinks();
+
+    expect(results.length).toBe(1);
+    expect(results[0].deadUrls[0].url).toBe(
+      "https://www.nj.gov/labor/wageandhour/assets/PDFs/MW-562%20(6-23).pdf",
+    );
+  });
+
+  it("handles markdown links where link text is a URL", async () => {
+    const mdContent = `---
+name: URL as link text
+---
+
+An eligibility map can be found here:
+[https://eligibility.example.com/welcome](https://eligibility.example.com/welcome)
+`;
+
+    setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
+
+    (global.fetch as jest.Mock).mockResolvedValue({ ok: false, status: 404 });
+
+    const results = await findDeadContentLinks();
+
+    expect(results.length).toBe(1);
+    expect(results[0].deadUrls).toHaveLength(1);
+    expect(results[0].deadUrls[0].url).toBe("https://eligibility.example.com/welcome");
+  });
+
+  it("includes context snippets around dead URLs", async () => {
+    const mdContent = `---
+name: Context Test
+---
+
+For more information, visit [the resource page](https://dead-context.example.com/info) to learn more about this topic.
+`;
+
+    setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
+
+    (global.fetch as jest.Mock).mockResolvedValue({ ok: false, status: 404 });
+
+    const results = await findDeadContentLinks();
+
+    expect(results.length).toBe(1);
+    expect(results[0].deadUrls[0].context).toContain("the resource page");
+    expect(results[0].deadUrls[0].context).toContain("dead-context.example.com");
+  });
 });

@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import cmsMapJson from "@/lib/cms/CollectionMap.json";
 import { AddOn, TaskModification } from "@/lib/roadmap/roadmapBuilder";
 import { loadTaskDependenciesFile } from "@businessnjgovnavigator/shared/static";
-import { IndustryRoadmap, TaskDependencies } from "@businessnjgovnavigator/shared/types";
-import { HtmlUrlChecker } from "broken-link-checker";
+import { CMSMap, IndustryRoadmap, TaskDependencies } from "@businessnjgovnavigator/shared/types";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
+import remarkParse from "remark-parse";
+import { unified } from "unified";
+import { visit } from "unist-util-visit";
 
 const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
@@ -293,110 +294,424 @@ export const findDeadLicenseTasks = async (): Promise<string[]> => {
   return deadTasks;
 };
 
-export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
-  const filenames = getFilenames();
-  const pages = [
-    "/onboarding?page=1",
-    "/onboarding?page=2",
-    "/onboarding?page=3",
-    "/profile",
-    "/dashboard",
-    ...filenames.tasks.map((it) => {
-      return `/tasks/${it.split(".md")[0]}`;
-    }),
-    ...filenames.filings.map((it) => {
-      return `/filings/${it.split(".md")[0]}`;
-    }),
-    "/welcome",
-    "/unsupported",
-    ...filenames.licenseTasks.map((it) => {
-      return `/tasks/${it.split(".md")[0]}`;
-    }),
+export type FoundUrl = {
+  url: string;
+  field: string;
+  context: string;
+  statusCode?: number | null;
+  statusText?: string;
+};
 
-    ...filenames.licenses.map((it) => {
-      return `/license-calendar-event/${it.split(".md")[0]}-renewal`;
-    }),
-    ...filenames.licenses.map((it) => {
-      return `/license-calendar-event/${it.split(".md")[0]}-expiration`;
-    }),
-    ...filenames.fundings.map((it) => {
-      return `/funding/${it.split(".md")[0]}`;
-    }),
-    ...filenames.certifications.map((it) => {
-      return `/certification/${it.split(".md")[0]}`;
-    }),
-    ...filenames.anytimeActionTasks.map((it) => {
-      return `/anytime-action-tasks/${it.split(".md")[0]}`;
-    }),
-    ...filenames.anytimeActionLicenseReinstatements.map((it) => {
-      return `/anytime-action-license-reinstatements/${it.split(".md")[0]}`;
-    }),
-  ];
+export type ContentDeadLink = {
+  file: string;
+  slug: string;
+  displayName: string;
+  collection: string;
+  cmsEditUrl: string;
+  pageUrl: string;
+  deadUrls: FoundUrl[];
+};
 
-  const deadLinks = pages.reduce(
-    (acc, cur) => {
-      acc[cur] = [];
-      return acc;
-    },
-    {} as Record<string, string[]>,
-  );
+const CONTENT_DIRS_TO_SCAN = [
+  "anytime-action-categories",
+  "anytime-action-license-reinstatements",
+  "anytime-action-tasks",
+  "certifications",
+  "categories",
+  "covids",
+  "display-content",
+  "faqs",
+  "fieldConfig",
+  "filings",
+  "fundings",
+  "license-calendar-events",
+  "mappings",
+  "page-metadata",
+  "pages",
+  "recents",
+  "renewal-calendar-events",
+  "roadmaps/tasks",
+  "roadmaps/license-tasks",
+  "roadmaps/municipal-tasks",
+  "roadmaps/raffle-bingo-steps",
+  "sub-categories",
+  "tropical-storm-ida",
+  "webflow-licenses",
+];
 
-  const templateEvals = [
-    "municipalityWebsite",
-    "municipality",
-    "county",
-    "countyClerkPhone",
-    "countyClerkWebsite",
-  ];
+const TEMPLATE_VARS = [
+  "municipalityWebsite",
+  "municipality",
+  "county",
+  "countyClerkPhone",
+  "countyClerkWebsite",
+];
 
-  const isTemplateLink = (url: string): boolean => {
-    return (
-      url.startsWith("$") &&
-      templateEvals.some((it) => {
-        return url.includes(it);
-      })
-    );
-  };
+const KNOWN_FALSE_POSITIVES = new Set(["https://www.facebook.com/BusinessNJgov"]);
 
-  const numberOfBatches = Math.ceil(pages.length / 5);
+const URL_REGEX = /https?:\/\/[^\s"')<>[\]]+/g;
 
-  for (let j = 0; j < numberOfBatches; j++) {
-    const pagePromises = [];
-    const startIndex = j * 5;
-    const batch = pages.slice(startIndex, startIndex + 5);
+const getContextSnippet = (text: string, url: string): string => {
+  const index = text.indexOf(url);
+  if (index === -1) return url;
+  const snippetRadius = 40;
+  const start = Math.max(0, index - snippetRadius);
+  const end = Math.min(text.length, index + url.length + snippetRadius);
+  let snippet = text.slice(start, end).replaceAll("\n", " ");
+  if (start > 0) snippet = `...${snippet}`;
+  if (end < text.length) snippet = `${snippet}...`;
+  return snippet;
+};
 
-    console.debug("batch:", batch);
+const markdownParser = unified().use(remarkParse);
 
-    for (const page of batch) {
-      const promise = new Promise((resolve) => {
-        const htmlUrlChecker = new HtmlUrlChecker(
-          {},
-          {
-            link: (result: any): void => {
-              if (
-                result.broken &&
-                !isTemplateLink(result.url.original) &&
-                result.url.original !== "https://www.facebook.com/BusinessNJgov"
-              ) {
-                deadLinks[page].push(result.url.original);
-              }
-            },
-            end: (): void => {
-              resolve({});
-            },
-          },
-        );
-        const url = new URL(process.env.REDIRECT_URL || "");
-        htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
-      });
+const extractUrlsFromText = (text: string, fieldName: string): FoundUrl[] => {
+  const tree = markdownParser.parse(text);
+  const seen = new Set<string>();
+  const results: FoundUrl[] = [];
 
-      pagePromises.push(promise);
+  visit(tree, "link", (node: { url: string }) => {
+    const url = node.url;
+    if (/^https?:\/\//.test(url) && !seen.has(url)) {
+      seen.add(url);
+      results.push({ url, field: fieldName, context: getContextSnippet(text, url) });
     }
+  });
 
-    await Promise.all(pagePromises);
+  const rawRegex = new RegExp(URL_REGEX.source, "g");
+  let match;
+  while ((match = rawRegex.exec(text)) !== null) {
+    const url = match[0].replace(/[!),.:;?]+$/, "");
+    if (seen.has(url)) continue;
+    let isSubstringOfKnown = false;
+    for (const seenUrl of seen) {
+      if (seenUrl.includes(url)) {
+        isSubstringOfKnown = true;
+        break;
+      }
+    }
+    if (isSubstringOfKnown) continue;
+    seen.add(url);
+    results.push({ url, field: fieldName, context: getContextSnippet(text, url) });
   }
 
-  return deadLinks;
+  return results;
+};
+
+const extractUrlsFromJsonValue = (obj: unknown, fieldName: string): FoundUrl[] => {
+  const results: FoundUrl[] = [];
+  if (typeof obj === "string") {
+    results.push(...extractUrlsFromText(obj, fieldName));
+  } else if (Array.isArray(obj)) {
+    for (const [i, element] of obj.entries()) {
+      results.push(...extractUrlsFromJsonValue(element, `${fieldName}[${i}]`));
+    }
+  } else if (obj !== null && typeof obj === "object") {
+    for (const [key, value] of Object.entries(obj)) {
+      results.push(...extractUrlsFromJsonValue(value, key));
+    }
+  }
+  return results;
+};
+
+const extractUrlsFromFile = (filePath: string): FoundUrl[] => {
+  const content = fs.readFileSync(filePath, "utf8");
+  const ext = path.extname(filePath).toLowerCase();
+
+  if (ext === ".json") {
+    try {
+      return extractUrlsFromJsonValue(JSON.parse(content), "root");
+    } catch {
+      return [];
+    }
+  }
+
+  if (ext === ".md") {
+    const { data: frontmatter, content: body } = matter(content);
+    const results: FoundUrl[] = [];
+    for (const [key, value] of Object.entries(frontmatter)) {
+      results.push(...extractUrlsFromJsonValue(value, key));
+    }
+    results.push(...extractUrlsFromText(body, "body"));
+    const seen = new Set<string>();
+    return results.filter((r) => {
+      if (seen.has(r.url)) return false;
+      seen.add(r.url);
+      return true;
+    });
+  }
+
+  return [];
+};
+
+const isTemplateUrl = (url: string): boolean => {
+  return url.startsWith("$") && TEMPLATE_VARS.some((v) => url.includes(v));
+};
+
+const getCmsEditUrl = (slug: string): string => {
+  const cmsMap: CMSMap = cmsMapJson;
+  const entry = cmsMap[slug];
+  if (!entry) return "";
+  const collectionName = Object.values(entry)[0];
+  return `/mgmt/cms#/collections/${collectionName}/entries/${slug}`;
+};
+
+const getCmsCollectionLabel = (slug: string): string => {
+  const cmsMap: CMSMap = cmsMapJson;
+  const entry = cmsMap[slug];
+  if (!entry) return "Unknown";
+  return Object.keys(entry)[0];
+};
+
+const COLLECTION_ROUTE_MAP: Record<string, string> = {
+  "Tasks - ABC": "/tasks",
+  "Tasks - All (option to map to Webflow/static site)": "/tasks",
+  "Tasks - Business Structure": "/tasks",
+  "Tasks - Cannabis License": "/tasks",
+  "Tasks - Cannabis Priority Status": "/tasks",
+  "Tasks - Cigarette License": "/tasks",
+  "Tasks - EIN": "/tasks",
+  "Tasks - Manage Business Vehicles": "/tasks",
+  "Tasks - Municipal": "/tasks",
+  "Tasks - NAICS Code": "/tasks",
+  "Tasks - Passenger Transport CDL": "/tasks",
+  "Tasks - Select Industry": "/tasks",
+  "Tasks - Tax ID": "/tasks",
+  "License Tasks (Navigator with Webflow mappings)": "/tasks",
+  "Raffle Bingo Steps": "/tasks",
+  "Fund Opps - Content": "/funding",
+  "Cert Opps - Content": "/certification",
+  "Taxes Filings - All": "/filings",
+  "Anytime Actions Tasks": "/actions",
+  "Consumer Affairs License Expiration / Renewal Events": "/license-calendar-event",
+  "Anytime Action With Consumer Affairs License Integrations (Reinstatements)":
+    "/license-reinstatement",
+};
+
+const getPageUrl = (slug: string, collection: string, filePath: string): string => {
+  const routeBase = COLLECTION_ROUTE_MAP[collection];
+  if (!routeBase) return "";
+  try {
+    const content = fs.readFileSync(filePath, "utf8");
+    const { data } = matter(content);
+    const urlSlug = data.urlSlug || slug;
+    return `${routeBase}/${urlSlug}`;
+  } catch {
+    return `${routeBase}/${slug}`;
+  }
+};
+
+const getDisplayName = (slug: string, filePath: string): string => {
+  try {
+    const content = fs.readFileSync(filePath, "utf8");
+    const ext = path.extname(filePath).toLowerCase();
+    if (ext === ".md") {
+      const { data } = matter(content);
+      return data.name || data.displayname || data["category-name"] || slug;
+    }
+    if (ext === ".json") {
+      const parsed = JSON.parse(content);
+      return parsed.name || parsed.displayname || slug;
+    }
+  } catch {
+    // fall through
+  }
+  return slug;
+};
+
+const collectContentFiles = (): { filePath: string; slug: string }[] => {
+  const contentBase = path.join(process.cwd(), "..", "content", "src");
+  const files: { filePath: string; slug: string }[] = [];
+
+  for (const dir of CONTENT_DIRS_TO_SCAN) {
+    const dirPath = path.join(contentBase, dir);
+    if (!fs.existsSync(dirPath)) continue;
+    const allFiles = getFlattenedFilenames(dirPath);
+    for (const filePath of allFiles) {
+      const ext = path.extname(filePath).toLowerCase();
+      if (ext !== ".md" && ext !== ".json") continue;
+      const slug = path.basename(filePath, ext);
+      files.push({ filePath, slug });
+    }
+  }
+
+  return files;
+};
+
+const BROWSER_UA =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+
+const fetchWithTimeout = async (
+  url: string,
+  method: string,
+  followRedirects = true,
+): Promise<{ ok: boolean; status: number; headers: { get(name: string): string | null } }> => {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000);
+  try {
+    return await fetch(url, {
+      method,
+      redirect: followRedirects ? "follow" : "manual",
+      signal: controller.signal,
+      headers: { "User-Agent": BROWSER_UA },
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
+type UrlCheckResult = {
+  alive: boolean;
+  statusCode: number | null;
+  statusText: string;
+};
+
+const STATUS_TEXT: Record<number, string> = {
+  301: "Moved Permanently",
+  302: "Found",
+  308: "Permanent Redirect",
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  405: "Method Not Allowed",
+  410: "Gone",
+  429: "Too Many Requests",
+  500: "Internal Server Error",
+  502: "Bad Gateway",
+  503: "Service Unavailable",
+  521: "Web Server Is Down",
+  522: "Connection Timed Out",
+  523: "Origin Is Unreachable",
+};
+
+const getStatusText = (code: number): string => STATUS_TEXT[code] || `HTTP ${code}`;
+
+const checkUrl = async (url: string): Promise<UrlCheckResult> => {
+  try {
+    const noRedirectResponse = await fetchWithTimeout(url, "HEAD", false);
+    const isRedirect = noRedirectResponse.status >= 300 && noRedirectResponse.status < 400;
+    const redirectLocation = isRedirect ? noRedirectResponse.headers.get("location") || "" : "";
+
+    const headResponse = await fetchWithTimeout(url, "HEAD");
+    if (headResponse.ok) return { alive: true, statusCode: headResponse.status, statusText: "OK" };
+    const getResponse = await fetchWithTimeout(url, "GET");
+    if (getResponse.ok) return { alive: true, statusCode: getResponse.status, statusText: "OK" };
+
+    const finalStatus = getResponse.status;
+    const statusText = isRedirect
+      ? `${getStatusText(noRedirectResponse.status)} → ${finalStatus} ${getStatusText(finalStatus)}${redirectLocation ? ` (${redirectLocation})` : ""}`
+      : getStatusText(finalStatus);
+
+    return {
+      alive: false,
+      statusCode: isRedirect ? noRedirectResponse.status : finalStatus,
+      statusText,
+    };
+  } catch {
+    return { alive: false, statusCode: null, statusText: "Connection Failed" };
+  }
+};
+
+const checkUrlBatch = async (urls: string[]): Promise<Map<string, UrlCheckResult>> => {
+  const results = new Map<string, UrlCheckResult>();
+  const promises = urls.map(async (url) => {
+    const result = await checkUrl(url);
+    results.set(url, result);
+  });
+  await Promise.all(promises);
+  return results;
+};
+
+export const findDeadContentLinks = async (
+  onProgress?: (checkedUrls: number, totalUrls: number) => void,
+): Promise<ContentDeadLink[]> => {
+  const files = collectContentFiles();
+  console.log(`[deadlinks] Found ${files.length} content files to scan`);
+
+  const fileData: { filePath: string; slug: string; foundUrls: FoundUrl[] }[] = [];
+  let totalRawUrls = 0;
+  let skippedTemplate = 0;
+  let skippedFalsePositive = 0;
+
+  for (const { filePath, slug } of files) {
+    const rawUrls = extractUrlsFromFile(filePath);
+    totalRawUrls += rawUrls.length;
+    const filtered = rawUrls.filter((u) => {
+      if (isTemplateUrl(u.url)) {
+        skippedTemplate++;
+        return false;
+      }
+      if (KNOWN_FALSE_POSITIVES.has(u.url)) {
+        skippedFalsePositive++;
+        return false;
+      }
+      return true;
+    });
+    if (filtered.length > 0) {
+      fileData.push({ filePath, slug, foundUrls: filtered });
+    }
+  }
+
+  const allUniqueUrls = [...new Set(fileData.flatMap((f) => f.foundUrls.map((u) => u.url)))];
+  console.log(
+    `[deadlinks] Extracted ${totalRawUrls} URLs total, ${allUniqueUrls.length} unique to check ` +
+      `(skipped ${skippedTemplate} template, ${skippedFalsePositive} false positive)`,
+  );
+
+  const urlStatus = new Map<string, UrlCheckResult>();
+  let checked = 0;
+  const batchSize = 15;
+
+  for (let i = 0; i < allUniqueUrls.length; i += batchSize) {
+    const batch = allUniqueUrls.slice(i, i + batchSize);
+    const batchResults = await checkUrlBatch(batch);
+    const batchDead: string[] = [];
+    for (const [url, result] of batchResults) {
+      urlStatus.set(url, result);
+      if (!result.alive) batchDead.push(url);
+    }
+    checked += batch.length;
+    console.log(
+      `[deadlinks] Checked ${checked}/${allUniqueUrls.length} URLs${
+        batchDead.length > 0 ? ` — dead in batch: ${batchDead.join(", ")}` : ""
+      }`,
+    );
+    onProgress?.(checked, allUniqueUrls.length);
+  }
+
+  const results: ContentDeadLink[] = [];
+  for (const { filePath, slug, foundUrls } of fileData) {
+    const deadUrls = foundUrls
+      .filter((u) => urlStatus.get(u.url)?.alive === false)
+      .map((u) => {
+        const status = urlStatus.get(u.url);
+        return {
+          ...u,
+          statusCode: status?.statusCode ?? null,
+          statusText: status?.statusText ?? "Unknown",
+        };
+      });
+    if (deadUrls.length > 0) {
+      const collection = getCmsCollectionLabel(slug);
+      results.push({
+        file: filePath,
+        slug,
+        displayName: getDisplayName(slug, filePath),
+        collection,
+        cmsEditUrl: getCmsEditUrl(slug),
+        pageUrl: getPageUrl(slug, collection, filePath),
+        deadUrls,
+      });
+    }
+  }
+
+  const totalDead = results.reduce((sum, r) => sum + r.deadUrls.length, 0);
+  console.log(
+    `[deadlinks] Complete: ${totalDead} dead URLs across ${results.length} content items`,
+  );
+
+  return results;
 };
 
 export const findDeadContextualInfo = async (): Promise<string[]> => {
