@@ -394,7 +394,7 @@ describe("profile - shared", () => {
 
       renderPage({ business });
 
-      selectByText("Industry", updatedIndustry.name);
+      selectByValue("Industry", updatedIndustry.id);
       clickSave();
 
       await waitFor(() => {

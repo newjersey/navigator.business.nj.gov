@@ -205,7 +205,9 @@ describe("<TaxAccess />", () => {
         expect(currentBusiness().profileData.legalStructureId).toBe("c-corporation");
       });
 
-      fireEvent.click(screen.getByText(Config.taxAccess.stepTwoBackButton));
+      fireEvent.click(
+        await screen.findByRole("button", { name: Config.taxAccess.stepTwoBackButton }),
+      );
       await waitFor(() => {
         expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
       });

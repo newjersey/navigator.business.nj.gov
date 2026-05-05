@@ -109,12 +109,16 @@ const setupContentScanMocks = (files: { name: string; content: string }[]): void
 };
 
 describe("findDeadContentLinks", () => {
+  let consoleLogSpy: jest.SpyInstance<void, Parameters<typeof console.log>>;
+
   beforeEach(() => {
     jest.resetAllMocks();
     global.fetch = jest.fn();
+    consoleLogSpy = jest.spyOn(console, "log").mockImplementation(() => {});
   });
 
   afterEach(() => {
+    consoleLogSpy.mockRestore();
     jest.restoreAllMocks();
   });
 

@@ -173,9 +173,11 @@ const main = async (): Promise<void> => {
   await syncIndustries();
 };
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
-(async (): Promise<void> => {
-  await main();
-})();
+if (process.env.NODE_ENV !== "test") {
+  // eslint-disable-next-line unicorn/prefer-top-level-await
+  (async (): Promise<void> => {
+    await main();
+  })();
+}
 
 export {};

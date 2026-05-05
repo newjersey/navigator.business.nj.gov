@@ -10,7 +10,7 @@ import {
 import { ISecurityGroup, ISubnet, IVpc } from "aws-cdk-lib/aws-ec2";
 import { Role } from "aws-cdk-lib/aws-iam";
 import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
-import { NodejsFunction, NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
+import { LogLevel, NodejsFunction, NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
 import * as logs from "aws-cdk-lib/aws-logs";
 import { ConfigurationSet } from "aws-cdk-lib/aws-ses";
 import { Construct, IConstruct } from "constructs";
@@ -67,6 +67,7 @@ export function createLambda(stack: Stack, props: LambdaFunctionProps): NodejsFu
     },
     bundling: {
       externalModules: [],
+      logLevel: LogLevel.ERROR,
       minify: true,
       sourceMap: true,
       ...props.bundling,

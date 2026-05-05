@@ -48,6 +48,8 @@ const mockedHelpers = helpers as jest.Mocked<typeof helpers>;
 const mockedMethods = methods as jest.Mocked<typeof methods>;
 
 describe("fundingSync", () => {
+  let consoleLogSpy: jest.SpyInstance<void, Parameters<typeof console.log>>;
+
   const mockFundings: Funding[] = [
     generateMockFunding({
       sector: ["clean-energy"], // Must use sectors from mockSectors
@@ -98,6 +100,7 @@ describe("fundingSync", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    consoleLogSpy = jest.spyOn(console, "log").mockImplementation(() => {});
     Object.defineProperty(process.env, "NODE_ENV", { value: "test", writable: true });
 
     mockedFundingExport.loadAllFundings.mockReturnValue(mockFundings);
@@ -145,6 +148,10 @@ describe("fundingSync", () => {
       const slice = stop === -1 ? lines.slice(start) : lines.slice(start, stop);
       return slice.join(" ");
     });
+  });
+
+  afterEach(() => {
+    consoleLogSpy.mockRestore();
   });
 
   describe("contentMdToObject", () => {
@@ -537,16 +544,12 @@ Eligibility here.
 
   describe("syncFundings", () => {
     it("runs full sync process in correct order", async () => {
-      const consoleLogSpy = jest.spyOn(console, "log").mockImplementation();
-
       await syncFundings();
 
       expect(consoleLogSpy).toHaveBeenCalledWith("deleting unused fundings");
       expect(consoleLogSpy).toHaveBeenCalledWith("updating fundings");
       expect(consoleLogSpy).toHaveBeenCalledWith("creating new fundings");
       expect(consoleLogSpy).toHaveBeenCalledWith("Complete Funding Sync!");
-
-      consoleLogSpy.mockRestore();
     });
 
     it("calls all sync operations", async () => {
