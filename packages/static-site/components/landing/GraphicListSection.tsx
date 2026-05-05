@@ -20,6 +20,11 @@ import type {
 const GRAPHIC_LIST_ROW_SIZE = 2;
 
 /**
+ * Public path for the synced NJWDS graphic-list image.
+ */
+const GRAPHIC_LIST_IMAGE_PATH = "/assets/njwds/dist/img/circle-124.png";
+
+/**
  * Describes props used by the graphic-list section component.
  *
  * This type defines a stable shape for related data.
@@ -105,7 +110,7 @@ const renderGraphicListItem = ({ item, itemIndex }: RenderGraphicListItemParams)
         alt={item.imageAlt}
         className="usa-media-block__img"
         height={124}
-        src="/vendor/img/circle-124.png"
+        src={GRAPHIC_LIST_IMAGE_PATH}
         width={124}
       />
       <div className="usa-media-block__body">

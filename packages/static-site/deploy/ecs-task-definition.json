@@ -30,6 +30,10 @@
         {
           "name": "PORT",
           "value": "3000"
+        },
+        {
+          "name": "USE_BASIC_AUTH",
+          "value": "false"
         }
       ]
     }
