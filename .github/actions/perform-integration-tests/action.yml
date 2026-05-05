@@ -42,3 +42,19 @@ runs:
           --browser=${{ inputs.browser }} \
           --record=${{ inputs.enable-dashboard }} \
           --env SUITE=${{ inputs.suite }}
+
+    - name: Upload Cypress Screenshots
+      if: failure()
+      uses: actions/upload-artifact@v7
+      with:
+        name: cypress-screenshots-${{ inputs.suite }}
+        path: web/cypress/screenshots/
+        retention-days: 7
+
+    - name: Upload Cypress Test Results
+      if: always()
+      uses: actions/upload-artifact@v7
+      with:
+        name: cypress-results-${{ inputs.suite }}
+        path: web/cypress/results/
+        retention-days: 7
