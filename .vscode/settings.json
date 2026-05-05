@@ -42,7 +42,7 @@
   "terminal.integrated.scrollback": 10000,
   "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist", "**/.next", "**/compiled"],
   "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]", "TODO-APP"],
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
   "typescript.surveys.enabled": false,
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
