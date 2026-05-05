@@ -3,8 +3,6 @@
     "avraammavridis.vsc-react-documentation",
     "bierner.github-markdown-preview",
     "cardinal90.multi-cursor-case-preserve",
-    "chakrounanas.turbo-console-log",
-    "circleci.circleci",
     "dbaeumer.vscode-eslint",
     "donjayamanne.python-extension-pack",
     "donjayamanne.python-environment-manager",
@@ -34,5 +32,9 @@
     "unifiedjs.vscode-mdx",
     "usernamehw.errorlens",
     "vivaxy.vscode-conventional-commits"
+  ],
+  "unwantedRecommendations": [
+    "chakrounanas.turbo-console-log",
+    "circleci.circleci"
   ]
 }
