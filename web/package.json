@@ -103,7 +103,7 @@
     "@mui/system": "5.18.0",
     "@next/bundle-analyzer": "16.2.4",
     "@next/eslint-plugin-next": "15.5.15",
-    "@storybook/addon-designs": "11.1.3",
+    "@storybook/addon-designs": "^11.1.3",
     "@storybook/addon-docs": "10.3.6",
     "@storybook/addon-links": "10.3.6",
     "@storybook/addons": "7.6.17",
