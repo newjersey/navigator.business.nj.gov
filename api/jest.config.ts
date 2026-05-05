@@ -10,6 +10,11 @@ export default {
   ...sharedConfig,
   ...require("jest-dynalite/jest-preset"),
   ...require("ts-jest/jest-preset"),
+  transformIgnorePatterns: ["/node_modules/(?!(uuid))"],
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.m?jsx?$": "@swc/jest",
+  },
   displayName: "api",
   testEnvironment: "<rootDir>/test/customNodeEnvironment.ts",
   setupFiles: ["<rootDir>/test/setupFile.ts"],

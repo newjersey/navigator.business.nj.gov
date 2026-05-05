@@ -39,6 +39,7 @@ const esmModulePattern = [
   "unist-util-[^/]*",
   "vfile[^/]*",
   "web-namespaces",
+  "uuid",
   "zwitch",
 ].join("|");
 
@@ -72,7 +73,6 @@ export default {
     "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
     "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
   },
-  resolver: `${__dirname}/test/resolver.js`,
   transformIgnorePatterns: [`/node_modules/(?!(${esmModulePattern}))`],
   transform: {
     "\\.md$": "<rootDir>/test/jest-raw-loader.js",
