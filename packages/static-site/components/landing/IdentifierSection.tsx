@@ -14,6 +14,11 @@ import type {
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
+ * Public path for the synced NJWDS New Jersey logo image.
+ */
+const NJ_LOGO_IMAGE_PATH = "/assets/njwds/dist/img/nj-logo-gray-20.png";
+
+/**
  * Describes props used by the identifier section component.
  *
  * The content payload includes all labels, links, and alt text needed by the
@@ -81,7 +86,7 @@ export const IdentifierSection = ({ content }: IdentifierSectionProps) => {
                 alt={content.stateLogoAlt}
                 className="usa-identifier__logo-img"
                 height={20}
-                src="/vendor/img/nj-logo-gray-20.png"
+                src={NJ_LOGO_IMAGE_PATH}
                 unoptimized
                 width={20}
               />

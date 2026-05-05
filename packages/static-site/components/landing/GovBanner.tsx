@@ -11,6 +11,11 @@ import type { LandingBannerContent } from "@/domain/landing/types";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
+ * Public path for the synced NJWDS SVG sprite.
+ */
+const NJWDS_SPRITE_PATH = "/assets/njwds/dist/img/sprite.svg";
+
+/**
  * Describes the props used to render the government banner.
  *
  * Keep banner content typed so all required links and labels are present
@@ -64,7 +69,7 @@ export const GovBanner = ({ content }: GovBannerProps) => {
                     className="usa-icon usa-icon--size-3 nj-banner__mail-icon margin-right-05"
                     focusable="false"
                   >
-                    <use xlinkHref="/vendor/img/sprite.svg#mail" />
+                    <use xlinkHref={`${NJWDS_SPRITE_PATH}#mail`} />
                   </svg>
                   {content.updatesLink.label}
                 </LocalizedLink>

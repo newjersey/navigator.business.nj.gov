@@ -183,6 +183,34 @@ const REQUIRED_NJWDS_ASSETS: readonly RequiredNjwdsAsset[] = [
     relativePath: "js/uswds.min.js",
     description: "NJWDS runtime script",
   },
+  {
+    relativePath: "img/circle-124.png",
+    description: "NJWDS graphic-list image",
+  },
+  {
+    relativePath: "img/logo-img.png",
+    description: "NJWDS footer logo image",
+  },
+  {
+    relativePath: "img/nj-logo-gray-20.png",
+    description: "NJWDS New Jersey logo image",
+  },
+  {
+    relativePath: "img/sprite.svg",
+    description: "NJWDS icon sprite",
+  },
+  {
+    relativePath: "img/usa-icons/facebook.svg",
+    description: "NJWDS Facebook icon",
+  },
+  {
+    relativePath: "img/usa-icons/github.svg",
+    description: "NJWDS GitHub icon",
+  },
+  {
+    relativePath: "img/usa-icons/youtube.svg",
+    description: "NJWDS YouTube icon",
+  },
 ];
 
 /**

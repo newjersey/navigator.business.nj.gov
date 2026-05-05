@@ -18,9 +18,52 @@ import type {
   Task,
 } from "./types";
 
-const CONTENT_LIB_DIR = path.resolve(process.cwd(), "../../content/lib");
+/**
+ * Possible content roots for package scripts and the Next standalone server.
+ */
+const CONTENT_ROOT_DIRECTORY_CANDIDATES = [
+  path.resolve(process.cwd(), "../../content"),
+  path.resolve(process.cwd(), "../../../../content"),
+] as const;
 
-const CONTENT_SRC_DIR = path.resolve(process.cwd(), "../../content/src");
+/**
+ * Checks whether a resolved content directory is present on disk.
+ */
+const isExistingDirectory = (directoryPath: string): boolean => {
+  return fs.existsSync(directoryPath);
+};
+
+/**
+ * Resolves the repository content package root for the current runtime layout.
+ */
+const resolveContentRootDirectory = (): string => {
+  const contentRootDirectory = CONTENT_ROOT_DIRECTORY_CANDIDATES.find(isExistingDirectory);
+
+  if (!contentRootDirectory) {
+    throw new Error(
+      `Unable to locate the content package. Checked: ${CONTENT_ROOT_DIRECTORY_CANDIDATES.join(
+        ", ",
+      )}.`,
+    );
+  }
+
+  return contentRootDirectory;
+};
+
+/**
+ * Root directory of the repository content package.
+ */
+const CONTENT_ROOT_DIR = resolveContentRootDirectory();
+
+/**
+ * Built content JSON emitted by the repository content package.
+ */
+const CONTENT_LIB_DIR = path.join(CONTENT_ROOT_DIR, "lib");
+
+/**
+ * Source content managed by the repository content package.
+ */
+const CONTENT_SRC_DIR = path.join(CONTENT_ROOT_DIR, "src");
 
 const readContentJson = (filename: string): unknown => {
   const filePath = path.join(CONTENT_LIB_DIR, filename);

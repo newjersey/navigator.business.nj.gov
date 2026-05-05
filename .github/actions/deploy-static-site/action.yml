@@ -1,0 +1,69 @@
+name: "Deploy Static Site"
+description: "Builds the static-site image, pushes it to ECR, and deploys the ECS Fargate service."
+
+inputs:
+  image_tag:
+    description: "Immutable image tag to deploy. Defaults to the current Git SHA."
+    required: false
+    default: ""
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Static Site CDK Mode
+      shell: bash
+      run: echo "STATIC_SITE_ONLY_DEPLOY=true" >> "$GITHUB_ENV"
+
+    - name: Resolve Static Site Image Tag
+      id: image-tag
+      shell: bash
+      run: |
+        image_tag="${{ inputs.image_tag }}"
+        if [ -z "$image_tag" ]; then
+          image_tag="$GITHUB_SHA"
+        fi
+
+        echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
+
+    - name: Deploy Static Site ECR Repository
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteRepositoryStack-${STAGE}" \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
+    - name: Login to Amazon ECR
+      shell: bash
+      run: |
+        aws ecr get-login-password --region "$AWS_REGION" \
+          | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+
+    - name: Build Static Site Docker Image
+      shell: bash
+      env:
+        IMAGE_TAG: ${{ steps.image-tag.outputs.image_tag }}
+      run: |
+        image_repo="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs-static-site-${STAGE}"
+        image_uri="${image_repo}:${IMAGE_TAG}"
+
+        docker build -f packages/static-site/Dockerfile . \
+          --build-arg NEXT_PUBLIC_WEB_BASE_URL="${NEXT_PUBLIC_WEB_BASE_URL:-}" \
+          -t "$image_uri"
+
+        echo "STATIC_SITE_IMAGE_URI=$image_uri" >> "$GITHUB_ENV"
+        echo "STATIC_SITE_IMAGE_TAG=$IMAGE_TAG" >> "$GITHUB_ENV"
+
+    - name: Push Static Site Docker Image
+      shell: bash
+      run: docker push "$STATIC_SITE_IMAGE_URI"
+
+    - name: Deploy Static Site ECS Service
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteServiceStack-${STAGE}" \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never

@@ -209,7 +209,7 @@
             "opensInNewTab": true
           },
           "iconAlt": "GitHub",
-          "iconPath": "/vendor/img/usa-icons/github.svg"
+          "iconPath": "/assets/njwds/dist/img/usa-icons/github.svg"
         },
         {
           "modifier": "facebook",
@@ -220,7 +220,7 @@
             "opensInNewTab": true
           },
           "iconAlt": "Facebook",
-          "iconPath": "/vendor/img/usa-icons/facebook.svg"
+          "iconPath": "/assets/njwds/dist/img/usa-icons/facebook.svg"
         },
         {
           "modifier": "youtube",
@@ -231,7 +231,7 @@
             "opensInNewTab": true
           },
           "iconAlt": "YouTube",
-          "iconPath": "/vendor/img/usa-icons/youtube.svg"
+          "iconPath": "/assets/njwds/dist/img/usa-icons/youtube.svg"
         }
       ],
       "contactHeading": "Business.NJ.gov Contact Center",

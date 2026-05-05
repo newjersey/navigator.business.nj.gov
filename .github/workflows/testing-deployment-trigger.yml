@@ -130,3 +130,5 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator-testing
+      - name: Deploy Static Site
+        uses: ./.github/actions/deploy-static-site
