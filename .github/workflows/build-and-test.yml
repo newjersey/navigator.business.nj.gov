@@ -177,7 +177,7 @@ jobs:
         with:
           name: jest-test-results-${{ matrix.shard }}
           path: coverage/test_results
-          retention-days: 3
+          retention-days: 7
 
       - name: Upload Jest Coverage
         if: always()
@@ -185,7 +185,7 @@ jobs:
         with:
           name: jest-coverage-${{ matrix.shard }}
           path: coverage
-          retention-days: 3
+          retention-days: 7
 
   integration-group-1:
     name: Integration Tests - Group 1
