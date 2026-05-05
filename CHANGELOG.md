@@ -1,3 +1,31 @@
+# [2026.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.9.0...v2026.10.0) (2026-05-05)
+
+
+### Bug Fixes
+
+* CJS syntax in Storybook should be ESM ([981b8ea](https://github.com/newjersey/navigator.business.nj.gov/commit/981b8ea34df0a6314bc69e42855c7a280294f343))
+* **deps:** update dependency axios to v1.15.0 [security] ([970fa23](https://github.com/newjersey/navigator.business.nj.gov/commit/970fa23b600834b92edbcff4372a56c6ee34c335))
+* **deps:** update dependency jsonwebtoken to v9.0.3 ([d2231ec](https://github.com/newjersey/navigator.business.nj.gov/commit/d2231ec6f5f9da431610628ac99954a95f52c254))
+* **deps:** update dependency lodash to v4.18.1 [security] ([56e98c0](https://github.com/newjersey/navigator.business.nj.gov/commit/56e98c09895b29c5c7c8d06234d1498e5dd0f845))
+* **deps:** update dependency next to v16.2.3 [security] ([dbf4b45](https://github.com/newjersey/navigator.business.nj.gov/commit/dbf4b45e958e77e3eca189b35d883de69d3de049))
+* **deps:** update dependency rehype-rewrite to v4.0.4 ([310a8b3](https://github.com/newjersey/navigator.business.nj.gov/commit/310a8b38f3067d7f399af892fb262de656c25cf3))
+* **deps:** update dependency remove-markdown to v0.6.3 ([d3214ea](https://github.com/newjersey/navigator.business.nj.gov/commit/d3214ea6bbdfebc490400b1f776790e86ff3871a))
+* **deps:** update dependency uuid to v14 [security] ([9ba4666](https://github.com/newjersey/navigator.business.nj.gov/commit/9ba4666c08181d6060a744bd00a0359c6b1c417d))
+* ESM/CJS issues ([841469a](https://github.com/newjersey/navigator.business.nj.gov/commit/841469a58cd804a63a1f6bf2f17286133f436564))
+* let unit tests run again ([da5b4e9](https://github.com/newjersey/navigator.business.nj.gov/commit/da5b4e92c8957c2bf0c0fc16ecb5b78dddbcda67))
+* make uuid v14 work with our setup ([95df1a2](https://github.com/newjersey/navigator.business.nj.gov/commit/95df1a2de1b7f9d3e1b3163eb2efc2ccee14296e))
+* reduce errors/warnings when AWS_PROFILE is set and static IAM credentials are set ([1f10593](https://github.com/newjersey/navigator.business.nj.gov/commit/1f105939b60d323dbb786f77f6b7b41925b53276))
+
+
+### Features
+
+* [AB#17642](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17642) migrate Pages collection Webflow -> Decap ([4889409](https://github.com/newjersey/navigator.business.nj.gov/commit/488940957e7b74875da7f5a9633cf413d17563e1))
+* feature flag scripts ([04abeff](https://github.com/newjersey/navigator.business.nj.gov/commit/04abeff474f53da9100bbca92daafdb531e847c9))
+* improve link status checker tool ([ad898f2](https://github.com/newjersey/navigator.business.nj.gov/commit/ad898f2b6ca7a89a8d666610a63f5ef95cf267f2))
+* pickaroo should report out picked people even in PR show ([9a3ce8d](https://github.com/newjersey/navigator.business.nj.gov/commit/9a3ce8dc15d2cce2a1d5d442dffc3a54dc0f5e4c))
+* pickaroo updates and consolidation ([40b70ec](https://github.com/newjersey/navigator.business.nj.gov/commit/40b70ec02e7ee23ba1b84572d343e7cfd8f7099d))
+* re-enable storybook deploy ([e2ede7a](https://github.com/newjersey/navigator.business.nj.gov/commit/e2ede7a91fa9a2773f043ef2e67350bf8df8606c))
+
 # [2026.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.8.0...v2026.9.0) (2026-04-21)
 
 
