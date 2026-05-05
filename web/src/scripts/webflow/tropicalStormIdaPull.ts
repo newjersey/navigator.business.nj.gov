@@ -120,10 +120,12 @@ const main = async (): Promise<void> => {
   process.exit(0);
 };
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
-(async (): Promise<void> => {
-  await main();
-})();
+if (process.env.NODE_ENV !== "test") {
+  // eslint-disable-next-line unicorn/prefer-top-level-await
+  (async (): Promise<void> => {
+    await main();
+  })();
+}
 
 export {
   getCurrentWebflowIdas,

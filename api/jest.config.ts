@@ -36,7 +36,7 @@ export default {
     "@scripts/(.*)": "<rootDir>/../scripts/$1",
     "\\.(html|txt)$": "<rootDir>/test/jestRawLoader.js",
   },
-  testPathIgnorePatterns: ["<rootDir>/lib/", "<rootDir>/node_modules/"],
+  testPathIgnorePatterns: ["<rootDir>/cdk/", "<rootDir>/lib/", "<rootDir>/node_modules/"],
   globalSetup: "<rootDir>/test/globalSetup.ts",
   globalTeardown: "<rootDir>/test/teardownTests.ts",
 };

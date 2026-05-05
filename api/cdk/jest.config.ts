@@ -5,8 +5,9 @@ import sharedConfig from "../../jest.shared";
 export default {
   ...sharedConfig,
   displayName: "api-cdk",
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "mjs", "json", "node"],
   testMatch: ["**/cdk/test/**/*.test.ts"],
   setupFiles: [],
-  setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ["<rootDir>/test/setupSilentBundlingOutput.ts"],
   testEnvironment: "node",
 };

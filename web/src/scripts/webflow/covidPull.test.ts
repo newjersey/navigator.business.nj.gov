@@ -55,8 +55,15 @@ const generateWebflowCovid = (
 });
 
 describe("covidPull", () => {
+  let consoleLogSpy: jest.SpyInstance<void, Parameters<typeof console.log>>;
+
   beforeEach(() => {
     jest.clearAllMocks();
+    consoleLogSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleLogSpy.mockRestore();
   });
 
   describe("topicOptionMap", () => {
