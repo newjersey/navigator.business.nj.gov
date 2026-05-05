@@ -138,6 +138,8 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator
+      - name: Deploy Static Site
+        uses: ./.github/actions/deploy-static-site
       - name: Deploy Storybook
         uses: ./.github/actions/deploy-storybook
         with:

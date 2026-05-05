@@ -15,6 +15,11 @@ import type {
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
+ * Public path for the synced NJWDS footer logo image.
+ */
+const FOOTER_LOGO_IMAGE_PATH = "/assets/njwds/dist/img/logo-img.png";
+
+/**
  * Describes props used by the site footer component.
  *
  * This type defines a stable shape for related data.
@@ -139,7 +144,7 @@ export const SiteFooter = ({ content, mainContentId }: SiteFooterProps) => {
                   alt={content.agencyLogoAlt}
                   className="usa-footer__logo-img"
                   height={80}
-                  src="/vendor/img/logo-img.png"
+                  src={FOOTER_LOGO_IMAGE_PATH}
                   unoptimized
                   width={80}
                 />

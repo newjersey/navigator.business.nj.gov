@@ -87,13 +87,18 @@ pnpm test:accessibility
 
 ## Docker
 
-Run from `packages/static-site`.
+Build the production image from the repository root so Docker can include the
+static-site package, generated content, and content type package.
 
 ```bash
 # Production image (Next.js standalone output)
-docker build -f Dockerfile -t static-site:prod .
+docker build -f packages/static-site/Dockerfile -t static-site:prod .
 docker run --rm -p 3000:3000 static-site:prod
+```
 
+Run local development containers from `packages/static-site`.
+
+```bash
 # Local dev with hot reload
 docker compose up --build
 ```
@@ -104,15 +109,17 @@ This package includes two deployment targets.
 
 - ECS/Fargate via ECR + GitHub Actions:
   - CI workflow: `.github/workflows/static-site-ci.yml`
-  - Deploy workflow: `.github/workflows/static-site-deploy-ecs.yml`
-  - Task definition template: `packages/static-site/deploy/ecs-task-definition.json`
+  - Deploy action: `.github/actions/deploy-static-site/action.yml`
+  - Infrastructure: `api/cdk/lib/staticSiteRepositoryStack.ts` and
+    `api/cdk/lib/staticSiteServiceStack.ts`
 - AWS Amplify:
   - Build config: `amplify.yml` at repository root
 
-ECS deploy workflow uses the existing AWS credential secret pattern and static-site-specific
-resource variables (`STATIC_SITE_*`). Set `STATIC_SITE_ECS_ENABLED=true` in repository variables to
-enable automatic deploys on `main`. Replace the placeholder role ARNs in
-`packages/static-site/deploy/ecs-task-definition.json` before first deployment.
+Static-site ECS deploys run from the existing environment deployment workflows. Non-production
+images are tagged with the Git SHA. Production images are tagged with the root `package.json`
+version. Pre-launch ECS deployments enable HTTP Basic Auth from the repository-level
+`BASIC_AUTH_USERNAME` variable and `BASIC_AUTH_PASSWORD` secret. Local runs leave Basic Auth
+disabled by default.
 
 ## Contributing
 

@@ -23,7 +23,7 @@ import { getApplicationMessages } from "@/domain/i18n/messages";
 /**
  * Stores the logo path used in metadata icons and social previews.
  */
-const NJ_LOGO_IMAGE_PATH = "/vendor/img/nj-logo-gray-20.png";
+const NJ_LOGO_IMAGE_PATH = "/assets/njwds/dist/img/nj-logo-gray-20.png";
 
 /**
  * Stores the canonical production URL for metadata URL resolution.

@@ -1,4 +1,10 @@
-FROM node:24-alpine
+FROM node:26-alpine
+
+LABEL org.opencontainers.image.title="Business.NJ.gov static site development"
+LABEL org.opencontainers.image.description="Development container for the Business.NJ.gov Next.js static site"
+LABEL org.opencontainers.image.source="https://github.com/newjersey/navigator.business.nj.gov"
+LABEL org.opencontainers.image.vendor="New Jersey Innovation Authority"
+LABEL org.opencontainers.image.licenses="MIT"
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -7,9 +13,15 @@ RUN corepack enable
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY packages/content-types /content-types
+COPY packages/static-site/package.json packages/static-site/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
+RUN pnpm exec tsc --build /content-types/tsconfig.json
 
-EXPOSE 3000
+COPY packages/static-site .
+COPY content/lib /content/lib
+COPY content/src /content/src
 
-CMD ["pnpm", "dev", "--hostname", "0.0.0.0", "--port", "3000"]
+EXPOSE 4000
+
+CMD ["pnpm", "dev", "--hostname", "0.0.0.0", "--port", "4000"]

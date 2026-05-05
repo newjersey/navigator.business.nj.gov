@@ -171,3 +171,5 @@ jobs:
       - uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator-content
+      - name: Deploy Static Site
+        uses: ./.github/actions/deploy-static-site
