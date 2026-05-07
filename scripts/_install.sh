@@ -261,14 +261,7 @@ corepack prepare pnpm@latest --activate && echo "pnpm activated." || { echo "Fai
 
 # ============================================================
 echo ""
-echo "=== [6/7] Git hooks (Husky) ==="
-# ============================================================
-
-yarn run prepare && echo "Git hooks installed." || { echo "Failed to install git hooks."; exit 1; }
-
-# ============================================================
-echo ""
-echo "=== [7/7] Install dependencies and build ==="
+echo "=== [6/7] Install dependencies and build ==="
 # ============================================================
 
 yarn install && yarn build || { echo "Root install or build failed."; exit 1; }
@@ -281,3 +274,10 @@ yarn install && yarn build || { echo "Root install or build failed."; exit 1; }
     exit 1
 }
 echo "Dependencies installed and projects built."
+
+# ============================================================
+echo ""
+echo "=== [7/7] Git hooks (Husky) ==="
+# ============================================================
+
+yarn run prepare && echo "Git hooks installed." || { echo "Failed to install git hooks."; exit 1; }
