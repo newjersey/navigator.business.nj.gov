@@ -108,3 +108,5 @@ api/src/functions/messagingService/email-templates/*.txt
 
 # Generated user schema (produced by generate:user-schema, prebuild, prestart)
 api/src/domain/userSchema.generated.ts
+
+.claude/settings.json
