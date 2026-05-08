@@ -34,6 +34,12 @@ jobs:
           cache: pnpm
           cache-dependency-path: packages/static-site/pnpm-lock.yaml
 
+      - name: Build content-types
+        working-directory: packages/content-types
+        run: |
+          pnpm install
+          pnpm build
+
       - name: Install dependencies
         working-directory: packages/static-site
         run: pnpm install --frozen-lockfile

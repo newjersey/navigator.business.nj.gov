@@ -1,0 +1,21 @@
+{
+  "name": "@businessnjgovnavigator/content-types",
+  "version": "1.0.0",
+  "description": "Content type definitions for business.nj.gov navigator",
+  "private": true,
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "rimraf lib",
+    "typecheck": "tsc --noemit"
+  },
+  "devDependencies": {
+    "rimraf": "6.1.3",
+    "typescript": "5.9.3"
+  }
+}

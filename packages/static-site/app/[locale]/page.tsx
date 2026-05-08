@@ -8,6 +8,7 @@
 import { notFound } from "next/navigation";
 
 import { LandingPage } from "@/components/landing/LandingPage";
+import { loadFundings } from "@/domain/content/loadContent";
 import { hasAppLocale } from "@/domain/i18n/locales";
 import { loadLandingContentFromMessages } from "@/domain/landing/loadLandingContent";
 
@@ -51,8 +52,9 @@ const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
   }
 
   const loadedLandingContent = await loadLandingContentFromMessages({ locale });
+  const fundings = loadFundings();
 
-  return <LandingPage content={loadedLandingContent.landing} />;
+  return <LandingPage content={loadedLandingContent.landing} fundings={fundings} />;
 };
 
 /**

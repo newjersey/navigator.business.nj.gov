@@ -10,6 +10,7 @@
 !.yarn/releases
 !.yarn/versions
 public/vendor
+public/assets/njwds
 
 # testing
 /coverage

@@ -5141,6 +5141,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@businessnjgovnavigator/content-types@npm:*, @businessnjgovnavigator/content-types@workspace:packages/content-types":
+  version: 0.0.0-use.local
+  resolution: "@businessnjgovnavigator/content-types@workspace:packages/content-types"
+  dependencies:
+    rimraf: "npm:6.1.3"
+    typescript: "npm:5.9.3"
+  languageName: unknown
+  linkType: soft
+
 "@businessnjgovnavigator/content@npm:*, @businessnjgovnavigator/content@workspace:content":
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
@@ -5202,6 +5211,7 @@ __metadata:
     "@babel/core": "npm:7.29.0"
     "@biomejs/biome": "npm:2.4.12"
     "@businessnjgovnavigator/content": "npm:*"
+    "@businessnjgovnavigator/content-types": "npm:*"
     "@businessnjgovnavigator/shared": "npm:*"
     "@cypress-audit/lighthouse": "npm:1.4.2"
     "@cypress-audit/pa11y": "npm:1.4.2"
@@ -5408,6 +5418,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/shared@workspace:shared"
   dependencies:
     "@businessnjgovnavigator/content": "npm:*"
+    "@businessnjgovnavigator/content-types": "npm:*"
     "@jest/types": "npm:29.6.3"
     "@types/jest": "npm:29.5.14"
     "@types/node": "npm:24.12.2"
