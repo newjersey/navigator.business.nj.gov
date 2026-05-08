@@ -9,7 +9,7 @@ import {
   FundingBusinessStage,
   FundingCertifications,
   FundingHomeBased,
-  FundingpreferenceForOpportunityZone,
+  FundingPreferenceForOpportunityZone,
   FundingProgramFrequency,
   FundingPublishStatus,
   FundingStatus,
@@ -225,7 +225,7 @@ type FundingGrayMatter = {
   employeesRequired: string;
   homeBased: FundingHomeBased;
   certifications: FundingCertifications[] | null;
-  preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
+  preferenceForOpportunityZone: FundingPreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
   programPurpose: string;

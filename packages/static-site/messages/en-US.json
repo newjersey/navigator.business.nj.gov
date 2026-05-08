@@ -81,6 +81,16 @@
             "opensInNewTab": false
           },
           "isCurrent": false
+        },
+        {
+          "kind": "link",
+          "link": {
+            "label": "Business Names",
+            "href": "/business-names",
+            "isInternal": true,
+            "opensInNewTab": false
+          },
+          "isCurrent": false
         }
       ],
       "secondaryLinks": [],

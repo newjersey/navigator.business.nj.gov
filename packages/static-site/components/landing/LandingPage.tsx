@@ -5,6 +5,7 @@
  * page structure simple and leaves content decisions to typed props.
  */
 
+import type { Funding } from "@/domain/content/types";
 import type { LandingPageContent } from "@/domain/landing/types";
 import { CtaSection } from "./CtaSection";
 import { GovBanner } from "./GovBanner";
@@ -16,15 +17,11 @@ import { SiteHeader } from "./SiteHeader";
 import { SkipNav } from "./SkipNav";
 import { TaglineSection } from "./TaglineSection";
 
-/**
- * Describes the props used to render the full landing page.
- *
- * The `content` object includes every section payload required by child
- * components.
- */
 export interface LandingPageProps {
   /** Localized content for all landing sections. */
   readonly content: LandingPageContent;
+  /** Featured fundings loaded from CMS content. */
+  readonly fundings?: Funding[];
 }
 
 /**
@@ -38,7 +35,7 @@ export interface LandingPageProps {
  * <LandingPage content={loadedContent.landing} />
  * ```
  */
-export const LandingPage = ({ content }: LandingPageProps) => {
+export const LandingPage = ({ content, fundings }: LandingPageProps) => {
   return (
     <div>
       <SkipNav label={content.skipNavigationLabel} mainContentId={content.mainContentId} />
@@ -48,6 +45,32 @@ export const LandingPage = ({ content }: LandingPageProps) => {
         <HeroSection content={content.hero} />
         <TaglineSection content={content.tagline} />
         <GraphicListSection content={content.graphicList} />
+        {fundings && fundings.length > 0 && (
+          <section className="usa-section">
+            <div className="grid-container">
+              <h2 className="font-heading-xl margin-y-0">Featured Funding Opportunities</h2>
+              <ul className="usa-card-group">
+                {fundings.map((funding) => (
+                  <li key={funding.name} className="usa-card tablet:grid-col-4">
+                    <div className="usa-card__container">
+                      <div className="usa-card__header">
+                        <h3 className="usa-card__heading">{funding.name}</h3>
+                      </div>
+                      <div className="usa-card__body">
+                        <p>{funding.summaryDescriptionMd}</p>
+                      </div>
+                      <div className="usa-card__footer">
+                        <a href={funding.callToActionLink} className="usa-button">
+                          {funding.callToActionText}
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
         <CtaSection content={content.callToAction} />
       </main>
       <SiteFooter content={content.footer} mainContentId={content.mainContentId} />

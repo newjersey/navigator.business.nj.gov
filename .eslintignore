@@ -65,6 +65,9 @@ web/amplify-gradle-config.json
 web/amplifytools.xcconfig
 web/next-env.d.ts
 
+# content-types
+packages/content-types
+
 # static-site
 packages/static-site
 packages/static-site/.next

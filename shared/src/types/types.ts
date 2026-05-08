@@ -15,7 +15,9 @@ import { SectionType, UserData } from "../userData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
-export type KeysOfType<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
+export type KeysOfType<T, V> = {
+  [K in keyof T]-?: T[K] extends V ? K : never;
+}[keyof T];
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
@@ -115,7 +117,7 @@ export type Funding = {
   employeesRequired: string;
   homeBased: FundingHomeBased;
   certifications: FundingCertifications[] | null;
-  preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
+  preferenceForOpportunityZone: FundingPreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
   programPurpose: string | null | undefined;
@@ -227,7 +229,7 @@ export type FundingProgramFrequency =
   | "other";
 export type FundingBusinessStage = "early-stage" | "operating" | "both";
 export type FundingHomeBased = "yes" | "no" | "unknown";
-export type FundingpreferenceForOpportunityZone = "yes" | "no";
+export type FundingPreferenceForOpportunityZone = "yes" | "no";
 
 export const AllCounties = [
   "All",
@@ -533,7 +535,11 @@ export type TaskWithoutLinks = {
 };
 export type Page = { current: number; previous: number };
 
-export type StepperStep = { name: string; hasError?: boolean; isComplete?: boolean };
+export type StepperStep = {
+  name: string;
+  hasError?: boolean;
+  isComplete?: boolean;
+};
 
 export interface ContextualInfoFile extends ContextualInfo {
   filename: string;
@@ -725,7 +731,11 @@ export enum FieldStateActionKind {
 
 interface ValidationAction<T, FieldError = FieldErrorType> {
   type: FieldStateActionKind.VALIDATION;
-  payload: { field: keyof T | (keyof T)[]; invalid: boolean; errorTypes?: FieldError[] };
+  payload: {
+    field: keyof T | (keyof T)[];
+    invalid: boolean;
+    errorTypes?: FieldError[];
+  };
 }
 
 interface RegisterAction<T> {
