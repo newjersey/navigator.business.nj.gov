@@ -273,7 +273,8 @@ describe("onboarding - shared", () => {
     expect(currentBusiness().profileData.industryId).toEqual("e-commerce");
   });
 
-  describe("when query parameter sets onboarding flow", () => {
+  // This suite is skipped because routing between steps has been disabled for the duration of the AB test
+  describe.skip("when query parameter sets onboarding flow", () => {
     it("routes user to step 2 when query parameter exists and value is starting", async () => {
       useMockRouter({ isReady: true, query: { flow: "starting" } });
       const { page } = renderPage({ userData: generateExperienceAUserData() });
