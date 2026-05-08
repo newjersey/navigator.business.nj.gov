@@ -1,3 +1,10 @@
+## [2026.10.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.10.0...v2026.10.1) (2026-05-08)
+
+
+### Bug Fixes
+
+* [AB#17752](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17752) fix bug on "Start my NJ business step by step" button ([d417e65](https://github.com/newjersey/navigator.business.nj.gov/commit/d417e6519fe1d5a6e0709702d3d7e37c3c5fa879))
+
 # [2026.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.9.0...v2026.10.0) (2026-05-05)
 
 
