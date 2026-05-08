@@ -315,11 +315,18 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     setProfileData(newProfileData);
     setCurrentFlow(flowType);
+
+    /* The logic below used to skip the first step of onboarding for STARTING businesses,
+    it has been temporarily commented out because it is incompatible with our current AB
+    test to skip the second onboarding step.
+
     if (flowType === "OWNING") {
       setPage({ current: 1, previous: 1 });
     } else {
       setPage({ current: 2, previous: 1 });
     }
+    */
+
     updateQueue?.queueProfileData(newProfileData);
   };
 
