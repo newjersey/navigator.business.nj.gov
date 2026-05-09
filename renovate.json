@@ -1,6 +1,6 @@
 {
   "extends": ["config:recommended"],
-  "stabilityDays": 3,
+  "minimumReleaseAge": "3 days",
   "prConcurrentLimit": 15,
   "prCreation": "not-pending",
   "labels": ["renovate"],
