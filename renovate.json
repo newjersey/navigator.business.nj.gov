@@ -1,6 +1,6 @@
 {
   "extends": ["config:recommended"],
-  "stabilityDays": 3,
+  "minimumReleaseAge": "3 days",
   "prConcurrentLimit": 15,
   "prCreation": "not-pending",
   "labels": ["renovate"],
@@ -22,7 +22,11 @@
       "automergeStrategy": "rebase"
     },
     {
-      "matchPackageNames": ["@aws-amplify/core", "@aws-amplify/auth", "decap-cms-app"],
+      "matchPackageNames": [
+        "@aws-amplify/core",
+        "@aws-amplify/auth",
+        "decap-cms-app"
+      ],
       "automerge": false
     },
     {
@@ -30,11 +34,22 @@
       "groupName": "cypress"
     },
     {
-      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest", "@jest/types", "jest*"],
+      "matchPackageNames": [
+        "@types/jest",
+        "ts-jest",
+        "babel-jest",
+        "@jest/types",
+        "jest*"
+      ],
       "groupName": "jest"
     },
     {
-      "matchPackageNames": ["@types/eslint", "babel-eslint", "@typescript-eslint/*", "eslint*"],
+      "matchPackageNames": [
+        "@types/eslint",
+        "babel-eslint",
+        "@typescript-eslint/*",
+        "eslint*"
+      ],
       "groupName": "linting"
     },
     {
@@ -46,7 +61,12 @@
       "enabled": false
     },
     {
-      "matchPackageNames": ["@types/react", "focus-trap-react", "@types/react-dom", "react*"],
+      "matchPackageNames": [
+        "@types/react",
+        "focus-trap-react",
+        "@types/react-dom",
+        "react*"
+      ],
       "groupName": "react"
     },
     {
@@ -74,7 +94,13 @@
       "groupName": "aws-sdk"
     },
     {
-      "matchPackageNames": ["unified", "remark", "remark-*", "rehype", "rehype-*"],
+      "matchPackageNames": [
+        "unified",
+        "remark",
+        "remark-*",
+        "rehype",
+        "rehype-*"
+      ],
       "groupName": "unified"
     },
     {
