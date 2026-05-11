@@ -79,4 +79,36 @@ describe("<SectionAccordion />", () => {
       expect.arrayContaining(["PLAN", "START"]),
     );
   });
+
+  it("renders a progress bar when progressPercentage is provided", () => {
+    render(
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(
+          generateBusiness({
+            preferences: generatePreferences({ roadmapOpenSections: [] }),
+          }),
+        )}
+      >
+        <SectionAccordion sectionType="PLAN" progressPercentage={60}>
+          BODY CONTENT
+        </SectionAccordion>
+      </WithStatefulUserData>,
+    );
+    expect(screen.getByTestId("section-progress-bar")).toBeInTheDocument();
+  });
+
+  it("does not render a progress bar when progressPercentage is not provided", () => {
+    render(
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(
+          generateBusiness({
+            preferences: generatePreferences({ roadmapOpenSections: [] }),
+          }),
+        )}
+      >
+        <SectionAccordion sectionType="PLAN">BODY CONTENT</SectionAccordion>
+      </WithStatefulUserData>,
+    );
+    expect(screen.queryByTestId("section-progress-bar")).not.toBeInTheDocument();
+  });
 });
