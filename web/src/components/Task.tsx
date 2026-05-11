@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -11,6 +12,7 @@ import { ReactElement, ReactNode } from "react";
 
 interface Props {
   task: types.Task;
+  showCheckbox?: boolean;
 }
 
 export const Task = (props: Props): ReactElement => {
@@ -33,6 +35,20 @@ export const Task = (props: Props): ReactElement => {
     );
   };
 
+  const getDisabledTooltipText = (taskId: string, taskProgress: string): string => {
+    // Block users from checking off the business structure task without completing it
+    // since the formation task changes depending on business structure
+    if (taskId === "business-structure") {
+      if (taskProgress === "COMPLETED") {
+        return Config.businessStructureTask.completedRoadmapTooltip;
+      } else {
+        return Config.businessStructureTask.uncompletedRoadmapTooltip;
+      }
+    }
+
+    return "";
+  };
+
   return (
     <li className="margin-0">
       <div
@@ -42,7 +58,14 @@ export const Task = (props: Props): ReactElement => {
       >
         {isTabletAndUp && (
           <span className="margin-right-205 margin-top-05 padding-top-2px">
-            {TaskProgressTagLookup[taskProgress]}
+            {props.showCheckbox ? (
+              <TaskProgressCheckbox
+                taskId={props.task.id}
+                disabledTooltipText={getDisabledTooltipText(props.task.id, taskProgress)}
+              />
+            ) : (
+              TaskProgressTagLookup[taskProgress]
+            )}
           </span>
         )}
         <div>

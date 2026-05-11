@@ -1,5 +1,5 @@
 import { BusinessStructurePrompt } from "@/components/dashboard/BusinessStructurePrompt";
-import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
+import { SectionAccordionCard } from "@/components/dashboard/SectionAccordionCard";
 import { Step } from "@/components/Step";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -37,18 +37,29 @@ export const Roadmap = (): ReactElement => {
         const percentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
         return (
-          <SectionAccordion key={section} sectionType={section} progressPercentage={percentage}>
+          <SectionAccordionCard key={section} sectionType={section} progressPercentage={percentage}>
             {section === "START" &&
             !completedBusinessStructure &&
             displayBusinessStructurePrompt ? (
               <BusinessStructurePrompt />
             ) : (
-              roadmap &&
-              roadmap.steps.filter(isInSection).map((step, index, array) => {
-                return <Step key={step.stepNumber} step={step} last={index === array.length - 1} />;
+              roadmap?.steps.filter(isInSection).map((step, index, array) => {
+                return (
+                  <div key={step.stepNumber}>
+                    <Step
+                      step={step}
+                      last={index === array.length - 1}
+                      hideVerticalLine
+                      showCheckboxes
+                    />
+                    {index !== array.length - 1 && (
+                      <div className="margin-bottom-3 border-1px border-cool-lighter" />
+                    )}
+                  </div>
+                );
               })
             )}
-          </SectionAccordion>
+          </SectionAccordionCard>
         );
       })}
     </>

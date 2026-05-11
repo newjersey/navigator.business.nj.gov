@@ -11,6 +11,7 @@ interface Props {
   completed?: boolean;
   miniRoadmap?: boolean;
   miniRoadmapSubtaskisOpen?: boolean;
+  hideVerticalLine?: boolean;
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {
@@ -21,8 +22,9 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
     `vertical-content-${props.stepNumber}`,
   )?.offsetHeight;
   const renderVerticalBar =
-    (isTabletAndUp && sectionIsOpen && !props.miniRoadmap) ||
-    (props.miniRoadmap && sectionIsOpen && (!props.last || props.miniRoadmapSubtaskisOpen));
+    !props.hideVerticalLine &&
+    ((isTabletAndUp && sectionIsOpen && !props.miniRoadmap) ||
+      (props.miniRoadmap && sectionIsOpen && (!props.last || props.miniRoadmapSubtaskisOpen)));
 
   const resizeVerticalBarToContent = (): void => {
     const content = document.getElementById(`vertical-content-${props.stepNumber}`);
