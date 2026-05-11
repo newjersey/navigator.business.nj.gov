@@ -45,8 +45,8 @@
         {
           "kind": "link",
           "link": {
-            "label": "Plan",
-            "href": "/plan",
+            "label": "Learn",
+            "href": "/learn",
             "isInternal": true,
             "opensInNewTab": false
           },
@@ -55,8 +55,8 @@
         {
           "kind": "link",
           "link": {
-            "label": "Start",
-            "href": "/start",
+            "label": "Updates",
+            "href": "/updates",
             "isInternal": true,
             "opensInNewTab": false
           },
@@ -65,27 +65,7 @@
         {
           "kind": "link",
           "link": {
-            "label": "Operate",
-            "href": "/operate",
-            "isInternal": true,
-            "opensInNewTab": false
-          },
-          "isCurrent": false
-        },
-        {
-          "kind": "link",
-          "link": {
-            "label": "Grow",
-            "href": "/grow",
-            "isInternal": true,
-            "opensInNewTab": false
-          },
-          "isCurrent": false
-        },
-        {
-          "kind": "link",
-          "link": {
-            "label": "Business Names",
+            "label": "Business Names (temp)",
             "href": "/business-names",
             "isInternal": true,
             "opensInNewTab": false
@@ -354,5 +334,52 @@
       "usGovernmentSectionAriaLabel": "U.S. government information and services",
       "usGovernmentDescription": "Copyright © 2026 State of New Jersey"
     }
+  },
+  "learn": {
+    "name": "Learn",
+    "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
+    "heading2": "Where are you in your business journey?",
+    "categories": [
+      {
+        "title": "Planning",
+        "description": "You have a great idea and want to turn it into a successful business.",
+        "link": {
+          "label": "Learn More",
+          "href": "/learn/plan",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
+      },
+      {
+        "title": "Starting",
+        "description": "You’ve decided to start a business, and now it's time to legally register it.",
+        "link": {
+          "label": "Learn More",
+          "href": "/learn/start",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
+      },
+      {
+        "title": "Operating",
+        "description": "Your doors are open and you want to stay in compliance with the State.",
+        "link": {
+          "label": "Learn More",
+          "href": "/learn/operate",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
+      },
+      {
+        "title": "Growing",
+        "description": "You are looking to expand your business, find funding, export your goods, or contract with the State.",
+        "link": {
+          "label": "Learn More",
+          "href": "/learn/grow",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
+      }
+    ]
   }
 }
