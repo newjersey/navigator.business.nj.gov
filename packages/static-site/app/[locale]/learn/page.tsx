@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { hasAppLocale } from "@/domain/i18n/locales";
-import { loadLearnContentFromMessages } from "@/domain/learn/loadLearnContent";
+import { getApplicationMessages } from "@/domain/i18n/messages";
 
 interface PageParams {
   readonly locale: string;
@@ -18,7 +18,7 @@ const LearnPage = async ({ params }: Props) => {
     notFound();
   }
 
-  const { learn } = await loadLearnContentFromMessages({ locale });
+  const { learn } = await getApplicationMessages({ locale });
 
   return (
     <main className="grid-container usa-section">

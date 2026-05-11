@@ -7,7 +7,10 @@
 
 import Image from "next/image";
 
-import type { LandingGraphicListContent, LandingGraphicListItem } from "@/domain/landing/types";
+import type {
+  LandingGraphicListContent,
+  LandingGraphicListItem,
+} from "@/domain/content/messageTypes";
 
 /**
  * Sets how many graphic-list cards are shown per row.

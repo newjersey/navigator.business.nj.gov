@@ -5,7 +5,7 @@
  * dedicated navigation subcomponents.
  */
 
-import type { LandingHeaderContent } from "@/domain/landing/types";
+import type { LandingHeaderContent } from "@/domain/content/messageTypes";
 import { HeaderPrimaryNav } from "./HeaderPrimaryNav";
 import { HeaderSecondaryNav } from "./HeaderSecondaryNav";
 import { LocalizedLink } from "./LocalizedLink";

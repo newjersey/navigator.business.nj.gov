@@ -11,7 +11,7 @@ import type {
   LandingFooterContent,
   LandingFooterPrimaryLink,
   LandingSocialLink,
-} from "@/domain/landing/types";
+} from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**

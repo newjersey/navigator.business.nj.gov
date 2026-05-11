@@ -5,7 +5,7 @@
  * hero markup.
  */
 
-import type { LandingHeroContent } from "@/domain/landing/types";
+import type { LandingHeroContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**

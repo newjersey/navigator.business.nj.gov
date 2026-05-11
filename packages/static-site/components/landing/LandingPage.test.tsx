@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import axe from "axe-core";
 import { describe, expect, it } from "vitest";
 import type { AppLocale } from "@/domain/i18n/locales";
-import { loadLandingContentFromMessages } from "@/domain/landing/loadLandingContent";
+import { getApplicationMessages } from "@/domain/i18n/messages";
 import { LandingPage } from "./LandingPage";
 
 /**
@@ -41,11 +41,11 @@ const escapeRegularExpressionValue = (value: string): string => {
  * Renders the landing page for a specific locale.
  */
 const renderLandingPageForLocale = async ({ locale }: RenderLandingPageForLocaleParams) => {
-  const loadedLandingContent = await loadLandingContentFromMessages({ locale });
+  const messages = await getApplicationMessages({ locale });
 
   return {
-    ...render(<LandingPage content={loadedLandingContent.landing} />),
-    content: loadedLandingContent.landing,
+    ...render(<LandingPage content={messages.landing} />),
+    content: messages.landing,
   };
 };
 

@@ -5,7 +5,7 @@
  * localized landing content.
  */
 
-import type { LandingTaglineContent } from "@/domain/landing/types";
+import type { LandingTaglineContent } from "@/domain/content/messageTypes";
 
 /**
  * Describes props used by the tagline section component.

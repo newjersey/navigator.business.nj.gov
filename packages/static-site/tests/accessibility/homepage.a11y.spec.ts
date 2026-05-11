@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import type { Page } from "playwright";
 import type { AppLocale } from "@/domain/i18n/locales";
 import { APP_LOCALES } from "@/domain/i18n/locales";
-import { loadLandingContentFromMessages } from "@/domain/landing/loadLandingContent";
+import { getApplicationMessages } from "@/domain/i18n/messages";
 
 /**
  * Defines the test context provided by Playwright.
@@ -26,12 +26,10 @@ interface CreateLocaleAccessibilityTestParams {
  */
 const createLocaleAccessibilityTest = ({ locale }: CreateLocaleAccessibilityTestParams) => {
   return async ({ page }: AccessibilityTestContext) => {
-    const loadedLandingContent = await loadLandingContentFromMessages({ locale });
+    const messages = await getApplicationMessages({ locale });
 
     await page.goto(`/${locale}`);
-    await page
-      .getByRole("heading", { level: 1, name: loadedLandingContent.landing.hero.title })
-      .waitFor();
+    await page.getByRole("heading", { level: 1, name: messages.landing.hero.title }).waitFor();
 
     const results = await new AxeBuilder({ page }).analyze();
 

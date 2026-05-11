@@ -5,8 +5,8 @@
  * page structure simple and leaves content decisions to typed props.
  */
 
+import type { LandingPageContent } from "@/domain/content/messageTypes";
 import type { Funding } from "@/domain/content/types";
-import type { LandingPageContent } from "@/domain/landing/types";
 import { CtaSection } from "./CtaSection";
 import { GovBanner } from "./GovBanner";
 import { GraphicListSection } from "./GraphicListSection";
