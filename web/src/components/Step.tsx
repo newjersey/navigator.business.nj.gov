@@ -10,6 +10,8 @@ import { ModifiedContent } from "./ModifiedContent";
 interface Props {
   step: types.Step;
   last: boolean;
+  hideVerticalLine?: boolean;
+  showCheckboxes?: boolean;
 }
 
 export const Step = (props: Props): ReactElement => {
@@ -17,7 +19,7 @@ export const Step = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   return (
     <div
-      className={`margin-top-3 ${props.last ? "margin-bottom-1" : "padding-bottom-105"}`}
+      className={`margin-top-4  ${!props.last && "margin-bottom-4"}`}
       id={`vertical-content-${props.step.stepNumber}`}
     >
       <div className="tablet:margin-right-4 minh-4">
@@ -26,6 +28,7 @@ export const Step = (props: Props): ReactElement => {
             stepNumber={props.step.stepNumber}
             last={props.last}
             completed={isStepCompleted(roadmap, props.step, business)}
+            hideVerticalLine={props.hideVerticalLine}
           />
 
           <div className="margin-left-6 margin-top-neg-2px tablet:margin-left-205 font-body-md margin-bottom-105">
@@ -45,7 +48,9 @@ export const Step = (props: Props): ReactElement => {
           </div>
         </div>
 
-        <div className="tablet:margin-left-6 padding-left-05">
+        <div
+          className={`${props.hideVerticalLine ? "padding-left-05" : "tablet:margin-left-6 padding-left-05"} `}
+        >
           <p className="margin-bottom-205">{props.step.description}</p>
           <ul className="usa-list usa-list--unstyled">
             {roadmap?.tasks
@@ -53,7 +58,7 @@ export const Step = (props: Props): ReactElement => {
                 return task.stepNumber === props.step.stepNumber;
               })
               .map((task) => {
-                return <Task key={task.id} task={task} />;
+                return <Task key={task.id} task={task} showCheckbox={props.showCheckboxes} />;
               })}
           </ul>
         </div>
