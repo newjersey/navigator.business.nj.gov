@@ -11,7 +11,7 @@ import { ReactElement } from "react";
 
 export const Roadmap = (): ReactElement => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
-  const { updateQueue } = useUserData();
+  const { updateQueue, business } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
     updateQueue?.currentBusiness().profileData.operatingPhase,
@@ -22,8 +22,25 @@ export const Roadmap = (): ReactElement => {
   return (
     <>
       {sectionNamesInRoadmap.map((section) => {
+        const stepNumbersInSection = roadmap
+          ? roadmap.steps.filter((step) => step.section === section).map((step) => step.stepNumber)
+          : [];
+        const tasksInSection = roadmap
+          ? roadmap.tasks.filter(
+              (task) =>
+                task.stepNumber !== undefined && stepNumbersInSection.includes(task.stepNumber),
+            )
+          : [];
+        const completedCount = tasksInSection.filter(
+          (task) => business?.taskProgress[task.id] === "COMPLETED",
+        ).length;
+        const percentage =
+          tasksInSection.length > 0
+            ? Math.round((completedCount / tasksInSection.length) * 100)
+            : 0;
+
         return (
-          <SectionAccordion key={section} sectionType={section}>
+          <SectionAccordion key={section} sectionType={section} progressPercentage={percentage}>
             {section === "START" &&
             !completedBusinessStructure &&
             displayBusinessStructurePrompt ? (
