@@ -12,6 +12,11 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
+import { GovBanner } from "@/components/landing/GovBanner";
+import { IdentifierSection } from "@/components/landing/IdentifierSection";
+import { SiteFooter } from "@/components/landing/SiteFooter";
+import { SiteHeader } from "@/components/landing/SiteHeader";
+import { SkipNav } from "@/components/landing/SkipNav";
 import { APP_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
@@ -159,7 +164,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
     notFound();
   }
 
-  const applicationMessages = getApplicationMessages({ locale });
+  const messages = getApplicationMessages({ locale });
 
   return (
     <html lang={locale}>
@@ -167,8 +172,19 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
         <link href={NJWDS_STYLESHEET_PATH} rel="stylesheet" />
       </head>
       <body>
-        <NextIntlClientProvider locale={locale} messages={applicationMessages}>
-          {children}
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <SkipNav
+            label={messages.layout.skipNavigationLabel}
+            mainContentId={messages.layout.mainContentId}
+          />
+          <GovBanner content={messages.layout.banner} />
+          <SiteHeader content={messages.layout.header} />
+          <main id={messages.layout.mainContentId}>{children}</main>
+          <SiteFooter
+            content={messages.layout.footer}
+            mainContentId={messages.layout.mainContentId}
+          />
+          <IdentifierSection content={messages.layout.identifier} />
         </NextIntlClientProvider>
         <Script src={NJWDS_SCRIPT_PATH} strategy="afterInteractive" />
       </body>

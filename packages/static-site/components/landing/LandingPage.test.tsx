@@ -14,23 +14,6 @@ interface RenderLandingPageForLocaleParams {
 }
 
 /**
- * Parameters required to count secondary navigation items.
- */
-interface CountSecondaryNavigationItemsParams {
-  /** Rendered page container queried for navigation items. */
-  readonly container: HTMLElement;
-}
-
-/**
- * Counts rendered secondary navigation list items.
- */
-const countSecondaryNavigationItems = ({
-  container,
-}: CountSecondaryNavigationItemsParams): number => {
-  return container.querySelectorAll(".usa-nav__secondary-item").length;
-};
-
-/**
  * Escapes a string value for safe regular-expression usage.
  */
 const escapeRegularExpressionValue = (value: string): string => {
@@ -45,51 +28,8 @@ const renderLandingPageForLocale = async ({ locale }: RenderLandingPageForLocale
 
   return {
     ...render(<LandingPage content={messages.landing} />),
-    content: messages.landing,
+    content: messages,
   };
-};
-
-/**
- * Verifies banner government identity appears and placeholder header links are absent.
- */
-const shouldRenderGovernmentIdentityDetails = async () => {
-  const englishPage = await renderLandingPageForLocale({ locale: "en-US" });
-  const englishGovernorName = englishPage.content.banner.governorIdentityLink.label;
-  const englishGovernorLink = screen.getByRole("link", { name: englishGovernorName });
-  const englishSecondaryNavigationItemCount = countSecondaryNavigationItems({
-    container: englishPage.container,
-  });
-
-  expect(englishGovernorLink).toBeTruthy();
-  expect(englishSecondaryNavigationItemCount).toBe(
-    englishPage.content.header.secondaryLinks.length,
-  );
-  expect(screen.queryByRole("searchbox")).toBeNull();
-  expect(screen.queryByText("Secondary link")).toBeNull();
-  expect(screen.queryByText("Another secondary link")).toBeNull();
-  expect(
-    screen.getByRole("link", { name: englishPage.content.banner.updatesLink.label }),
-  ).toBeTruthy();
-
-  englishPage.unmount();
-
-  const spanishPage = await renderLandingPageForLocale({ locale: "es-US" });
-  const spanishGovernorName = spanishPage.content.banner.governorIdentityLink.label;
-  const spanishGovernorLink = screen.getByRole("link", { name: spanishGovernorName });
-  const spanishSecondaryNavigationItemCount = countSecondaryNavigationItems({
-    container: spanishPage.container,
-  });
-
-  expect(spanishGovernorLink).toBeTruthy();
-  expect(spanishSecondaryNavigationItemCount).toBe(
-    spanishPage.content.header.secondaryLinks.length,
-  );
-  expect(screen.queryByRole("searchbox")).toBeNull();
-  expect(screen.queryByText("Enlace secundario")).toBeNull();
-  expect(screen.queryByText("Otro enlace secundario")).toBeNull();
-  expect(
-    screen.getByRole("link", { name: spanishPage.content.banner.updatesLink.label }),
-  ).toBeTruthy();
 };
 
 /**
@@ -98,7 +38,7 @@ const shouldRenderGovernmentIdentityDetails = async () => {
 const shouldRenderKeyLandingSections = async () => {
   const englishPage = await renderLandingPageForLocale({ locale: "en-US" });
   const englishHeroTitlePattern = new RegExp(
-    escapeRegularExpressionValue(englishPage.content.hero.title),
+    escapeRegularExpressionValue(englishPage.content.landing.hero.title),
     "i",
   );
 
@@ -107,7 +47,7 @@ const shouldRenderKeyLandingSections = async () => {
     level: 1,
   });
   const englishTaglineHeading = screen.getByRole("heading", {
-    name: englishPage.content.tagline.title,
+    name: englishPage.content.landing.tagline.title,
     level: 2,
   });
 
@@ -118,7 +58,7 @@ const shouldRenderKeyLandingSections = async () => {
 
   const spanishPage = await renderLandingPageForLocale({ locale: "es-US" });
   const spanishHeroTitlePattern = new RegExp(
-    escapeRegularExpressionValue(spanishPage.content.hero.title),
+    escapeRegularExpressionValue(spanishPage.content.landing.hero.title),
     "i",
   );
 
@@ -127,7 +67,7 @@ const shouldRenderKeyLandingSections = async () => {
     level: 1,
   });
   const spanishTaglineHeading = screen.getByRole("heading", {
-    name: spanishPage.content.tagline.title,
+    name: spanishPage.content.landing.tagline.title,
     level: 2,
   });
 
@@ -170,7 +110,6 @@ const shouldPassAxeAudit = async () => {
  * Defines the landing-page component test suite.
  */
 const runLandingPageSuite = () => {
-  it("renders required government identity content", shouldRenderGovernmentIdentityDetails);
   it("renders key landing sections", shouldRenderKeyLandingSections);
   it("passes automated accessibility checks", shouldPassAxeAudit);
 };
