@@ -5164,9 +5164,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/react-email@workspace:api/src/functions/messagingService/reactEmail"
   dependencies:
-    "@react-email/components": "npm:1.0.10"
+    "@react-email/components": "npm:1.0.12"
     "@react-email/preview-server": "npm:5.2.10"
-    "@react-email/render": "npm:2.0.4"
+    "@react-email/render": "npm:2.0.8"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     react-email: "npm:5.0.6"
@@ -5220,9 +5220,9 @@ __metadata:
     "@next/eslint-plugin-next": "npm:15.5.15"
     "@open_resources/semantic-release-uv": "npm:1.5.1"
     "@playwright/test": "npm:1.59.1"
-    "@react-email/components": "npm:1.0.10"
+    "@react-email/components": "npm:1.0.12"
     "@react-email/preview-server": "npm:5.2.10"
-    "@react-email/render": "npm:2.0.4"
+    "@react-email/render": "npm:2.0.8"
     "@semantic-release/changelog": "npm:6.0.3"
     "@semantic-release/git": "npm:10.0.1"
     "@smithy/node-http-handler": "npm:4.4.14"
@@ -9839,9 +9839,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/components@npm:1.0.10":
-  version: 1.0.10
-  resolution: "@react-email/components@npm:1.0.10"
+"@react-email/components@npm:1.0.12":
+  version: 1.0.12
+  resolution: "@react-email/components@npm:1.0.12"
   dependencies:
     "@react-email/body": "npm:0.3.0"
     "@react-email/button": "npm:0.2.1"
@@ -9858,14 +9858,14 @@ __metadata:
     "@react-email/link": "npm:0.0.13"
     "@react-email/markdown": "npm:0.0.18"
     "@react-email/preview": "npm:0.0.14"
-    "@react-email/render": "npm:2.0.4"
+    "@react-email/render": "npm:2.0.6"
     "@react-email/row": "npm:0.0.13"
     "@react-email/section": "npm:0.0.17"
-    "@react-email/tailwind": "npm:2.0.6"
+    "@react-email/tailwind": "npm:2.0.7"
     "@react-email/text": "npm:0.1.6"
   peerDependencies:
     react: ^18.0 || ^19.0 || ^19.0.0-rc
-  checksum: 10/8b81b972b0b0a370bae596202218eef8118bca21c9b66e113ffc1f036eb168717fd65939e8f9217edf8e5a9f05cb884c734a86e23e6dc35eae49ce33d7a1002d
+  checksum: 10/55944c7adb91e8878e7f95d886e7711077442f37df06ef5d707131b3046b492148a12cdb300d9c50fcdcaea23faa5c978fde1f88500754326a779798e797e43d
   languageName: node
   linkType: hard
 
@@ -9971,16 +9971,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/render@npm:2.0.4":
-  version: 2.0.4
-  resolution: "@react-email/render@npm:2.0.4"
+"@react-email/render@npm:2.0.6":
+  version: 2.0.6
+  resolution: "@react-email/render@npm:2.0.6"
   dependencies:
     html-to-text: "npm:^9.0.5"
     prettier: "npm:^3.5.3"
   peerDependencies:
     react: ^18.0 || ^19.0 || ^19.0.0-rc
     react-dom: ^18.0 || ^19.0 || ^19.0.0-rc
-  checksum: 10/a1f0c0f99aa678f273ca0497cc9997241815af90ef6550f1a504b3f1b69ae1938b7165d4be037a817e882cee0930ae0f503f804f0637495deba568eba36337d3
+  checksum: 10/4e0451af267b5b60bd7ab71529707454eaf38705b80cb887006cbc7449f9edd5718a48b240de07337562a54e5e8ca6577ae34f390495a48e642dc62fc19ddf97
+  languageName: node
+  linkType: hard
+
+"@react-email/render@npm:2.0.8":
+  version: 2.0.8
+  resolution: "@react-email/render@npm:2.0.8"
+  dependencies:
+    html-to-text: "npm:^9.0.5"
+    prettier: "npm:^3.5.3"
+  peerDependencies:
+    react: ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^18.0 || ^19.0 || ^19.0.0-rc
+  checksum: 10/975173f4c4ed90ba151e7cf3e5d5b93e57f8224954573be3c78059d3c3df4a53faa19188681a675430c8837c9334f0c518e403ad8ab0b051330b6db90b9b8bb6
   languageName: node
   linkType: hard
 
@@ -10002,11 +10015,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/tailwind@npm:2.0.6":
-  version: 2.0.6
-  resolution: "@react-email/tailwind@npm:2.0.6"
+"@react-email/tailwind@npm:2.0.7":
+  version: 2.0.7
+  resolution: "@react-email/tailwind@npm:2.0.7"
   dependencies:
-    tailwindcss: "npm:4.1.18"
+    tailwindcss: "npm:^4.1.18"
   peerDependencies:
     "@react-email/body": ">=0"
     "@react-email/button": ">=0"
@@ -10041,7 +10054,7 @@ __metadata:
       optional: true
     "@react-email/preview":
       optional: true
-  checksum: 10/4524c0f06cdcfbabcbdc36b57b85ac2bc8ae6502747000ac7912c50c44c61e1db65fbf5e7c6b0ccd4937724c478ede2876fa6205de3cb49ab1b4f6bd81f9bdf3
+  checksum: 10/ba46a2322ff59c5251a8146364f30fd544f2b272d2962057a780a9139fecc530973b41882932a1f404be1c4d6a68499cc9f691685ca6054d8e62b10ca4e4f3c4
   languageName: node
   linkType: hard
 
@@ -35525,10 +35538,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:4.1.18":
-  version: 4.1.18
-  resolution: "tailwindcss@npm:4.1.18"
-  checksum: 10/16a51bf972dce3871fec66aba7bffa02cd6fccc5a330180be3dcf297e48aae2d64d965df48fda851f65924ef61d7d2c6c8e6d7a05a09f454244475b7dab93464
+"tailwindcss@npm:^4.1.18":
+  version: 4.3.0
+  resolution: "tailwindcss@npm:4.3.0"
+  checksum: 10/3a7dde8a0ccd31ef02e6b45a1257e0040fd8372584a94e930445400f4e5c50a101022f99951cf5c0a12b3936e23489d9c55d342e7d597a806c7a0f139ba8c0dd
   languageName: node
   linkType: hard
 
