@@ -14,7 +14,6 @@ import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
 import { APP_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
-import { loadLandingContentFromMessages } from "@/domain/landing/loadLandingContent";
 
 /**
  * Stores the logo path used in metadata icons and social previews.
@@ -104,11 +103,11 @@ export const generateMetadata = async ({ params }: GenerateMetadataProps): Promi
     notFound();
   }
 
-  const loadedLandingContent = await loadLandingContentFromMessages({ locale });
+  const messages = await getApplicationMessages({ locale });
 
   return {
-    title: loadedLandingContent.metadata.title,
-    description: loadedLandingContent.metadata.description,
+    title: messages.metadata.title,
+    description: messages.metadata.description,
     metadataBase: new URL(METADATA_BASE_URL),
     icons: {
       icon: NJ_LOGO_IMAGE_PATH,
@@ -116,8 +115,8 @@ export const generateMetadata = async ({ params }: GenerateMetadataProps): Promi
       apple: NJ_LOGO_IMAGE_PATH,
     },
     openGraph: {
-      title: loadedLandingContent.metadata.title,
-      description: loadedLandingContent.metadata.description,
+      title: messages.metadata.title,
+      description: messages.metadata.description,
       images: [
         {
           url: NJ_LOGO_IMAGE_PATH,
@@ -129,8 +128,8 @@ export const generateMetadata = async ({ params }: GenerateMetadataProps): Promi
     },
     twitter: {
       card: "summary",
-      title: loadedLandingContent.metadata.title,
-      description: loadedLandingContent.metadata.description,
+      title: messages.metadata.title,
+      description: messages.metadata.description,
       images: [NJ_LOGO_IMAGE_PATH],
     },
   };

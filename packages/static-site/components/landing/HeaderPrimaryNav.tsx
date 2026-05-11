@@ -12,7 +12,7 @@ import type {
   HeaderPrimaryLinkItem,
   HeaderPrimarySubmenuItem,
   LandingHeaderContent,
-} from "@/domain/landing/types";
+} from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**

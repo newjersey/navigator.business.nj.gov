@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import { LandingPage } from "@/components/landing/LandingPage";
 import { loadFundings } from "@/domain/content/loadContent";
 import { hasAppLocale } from "@/domain/i18n/locales";
-import { loadLandingContentFromMessages } from "@/domain/landing/loadLandingContent";
+import { getApplicationMessages } from "@/domain/i18n/messages";
 
 /**
  * Describes route params for locale page rendering.
@@ -51,10 +51,10 @@ const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
     notFound();
   }
 
-  const loadedLandingContent = await loadLandingContentFromMessages({ locale });
+  const messages = await getApplicationMessages({ locale });
   const fundings = loadFundings();
 
-  return <LandingPage content={loadedLandingContent.landing} fundings={fundings} />;
+  return <LandingPage content={messages.landing} fundings={fundings} />;
 };
 
 /**

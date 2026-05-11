@@ -6,8 +6,8 @@
  */
 
 import type { ReactNode } from "react";
+import type { LandingLink } from "@/domain/content/messageTypes";
 import { Link } from "@/domain/i18n/navigation";
-import type { LandingLink } from "@/domain/landing/types";
 
 /**
  * Describes props accepted by the localized link component.

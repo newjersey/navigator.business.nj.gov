@@ -7,7 +7,7 @@
 
 import Image from "next/image";
 
-import type { LandingBannerContent } from "@/domain/landing/types";
+import type { LandingBannerContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**

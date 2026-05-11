@@ -5,7 +5,7 @@
  * markup and skips render when no links exist.
  */
 
-import type { LandingHeaderContent } from "@/domain/landing/types";
+import type { LandingHeaderContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**

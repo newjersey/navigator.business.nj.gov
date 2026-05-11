@@ -10,7 +10,7 @@ import Image from "next/image";
 import type {
   LandingIdentifierContent,
   LandingIdentifierRequiredLink,
-} from "@/domain/landing/types";
+} from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**

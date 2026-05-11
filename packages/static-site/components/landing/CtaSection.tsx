@@ -4,7 +4,7 @@
  * This module shows the CTA heading, intro text, and action button link.
  */
 
-import type { LandingCallToActionContent } from "@/domain/landing/types";
+import type { LandingCallToActionContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
