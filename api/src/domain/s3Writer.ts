@@ -67,7 +67,12 @@ export const saveFileFromUrl = async function (
   return new Promise((resolve, reject) => {
     getFileFromURL(URI)
       .then((object) => {
-        uploadFile(fullName, object.data, object.headers["content-type"], bucket)
+        uploadFile(
+          fullName,
+          object.data,
+          String(object.headers["content-type"] ?? "application/octet-stream"),
+          bucket,
+        )
           .then((s3response) => {
             if (s3response.$metadata.httpStatusCode === StatusCodes.OK) {
               resolve(escapeColons(`https://${bucket}.s3.us-east-1.amazonaws.com/${fullName}`));
