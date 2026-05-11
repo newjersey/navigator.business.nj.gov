@@ -8,7 +8,7 @@
 import { getRequestConfig } from "next-intl/server";
 
 import { resolveAppLocale } from "./locales";
-import { getApplicationMessagesForUnknownLocale } from "./messages";
+import { getApplicationMessages } from "./messages";
 
 /**
  * Configures locale and messages for each incoming `next-intl` request.
@@ -22,7 +22,7 @@ const requestConfig = getRequestConfig(async ({ locale, requestLocale }) => {
 
   return {
     locale: resolvedLocale,
-    messages: getApplicationMessagesForUnknownLocale({ locale: resolvedLocale }),
+    messages: getApplicationMessages({ locale: resolvedLocale }),
   };
 });
 

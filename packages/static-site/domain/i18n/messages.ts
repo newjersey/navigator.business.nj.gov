@@ -9,7 +9,6 @@ import type { ApplicationMessages } from "@/domain/landing/types";
 import enUsMessagesData from "@/messages/en-US.json";
 import esUsMessagesData from "@/messages/es-US.json";
 import type { AppLocale } from "./locales";
-import { resolveAppLocale } from "./locales";
 
 /**
  * Describes input used to fetch messages for a known valid locale.
@@ -19,17 +18,6 @@ import { resolveAppLocale } from "./locales";
 export interface GetApplicationMessagesParams {
   /** Locale code for selecting localized message content. */
   readonly locale: AppLocale;
-}
-
-/**
- * Describes input used to fetch messages from an untrusted locale value.
- *
- * This shape is used at route and request boundaries where locale data might
- * be missing or malformed.
- */
-export interface GetApplicationMessagesForUnknownLocaleParams {
-  /** Locale candidate from routing or request data. */
-  readonly locale: string | undefined;
 }
 
 /**
@@ -608,25 +596,4 @@ export const getApplicationMessages = ({
   locale,
 }: GetApplicationMessagesParams): ApplicationMessages => {
   return APPLICATION_MESSAGES_BY_LOCALE[locale];
-};
-
-/**
- * Returns application messages for raw locale input.
- *
- * The locale is resolved through fallback rules before message lookup.
- *
- * @param params Message lookup input.
- * @param params.locale Raw locale value from routing or request state.
- * @returns Localized application messages for the resolved locale.
- * @example
- * ```ts
- * const messages = getApplicationMessagesForUnknownLocale({ locale: "fr-FR" });
- * ```
- */
-export const getApplicationMessagesForUnknownLocale = ({
-  locale,
-}: GetApplicationMessagesForUnknownLocaleParams): ApplicationMessages => {
-  const resolvedLocale = resolveAppLocale({ locale });
-
-  return getApplicationMessages({ locale: resolvedLocale });
 };
