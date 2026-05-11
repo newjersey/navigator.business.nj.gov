@@ -5,6 +5,8 @@
  * and rendered UI sections.
  */
 
+import type { LearnPageContent } from "@/domain/learn/types";
+
 /**
  * A localized link used by landing-page components.
  *
@@ -330,4 +332,6 @@ export interface ApplicationMessages {
   readonly metadata: LandingMetadataContent;
   /** Landing-page content strings and links. */
   readonly landing: LandingPageContent;
+  /** Learn page content strings and links. */
+  readonly learn: LearnPageContent;
 }
