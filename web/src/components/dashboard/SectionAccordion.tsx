@@ -1,5 +1,6 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
+import { ProgressBar } from "@/components/ProgressBar";
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -13,7 +14,20 @@ interface Props {
   children: ReactNode;
   mini?: boolean;
   isDividerDisabled?: boolean;
+  progressPercentage?: number;
 }
+
+type ProgressLabelStage = "zero" | "low" | "mid" | "high";
+
+const PROGRESS_STAGE_LOW_THRESHOLD = 50;
+const PROGRESS_STAGE_MID_THRESHOLD = 90;
+
+const progressLabelStage = (percentage: number): ProgressLabelStage => {
+  if (percentage === 0) return "zero";
+  if (percentage < PROGRESS_STAGE_LOW_THRESHOLD) return "low";
+  if (percentage < PROGRESS_STAGE_MID_THRESHOLD) return "mid";
+  return "high";
+};
 
 export const SectionAccordion = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
@@ -58,13 +72,32 @@ export const SectionAccordion = (props: Props): ReactElement => {
             aria-controls={`${sectionName}-content`}
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
+            sx={{ position: "relative" }}
           >
-            <Heading
-              level={3}
-              className={`flex flex-align-center margin-0-override ${headerClasses}`}
-            >
-              <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
-            </Heading>
+            <div className="flex flex-column width-full">
+              <Heading
+                level={3}
+                className={`flex flex-align-center margin-0-override ${headerClasses}`}
+              >
+                <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
+              </Heading>
+              {props.progressPercentage !== undefined && (
+                <div className="section-progress-bar-row">
+                  <ProgressBar
+                    label={`${Config.sectionHeaders[props.sectionType]} section task progress`}
+                    percentage={props.progressPercentage}
+                    data-testid="section-progress-bar"
+                  />
+                </div>
+              )}
+            </div>
+            {props.progressPercentage !== undefined && (
+              <span
+                className={`section-progress-bar-label section-progress-bar-label--${progressLabelStage(props.progressPercentage)}`}
+              >
+                {props.progressPercentage}%
+              </span>
+            )}
           </AccordionSummary>
           <AccordionDetails>{props.children}</AccordionDetails>
         </Accordion>

@@ -1,0 +1,48 @@
+@use "../sass-files/variables";
+
+$progress-bar-label-offset: 16px;
+
+.section-progress-bar-row {
+  margin-top: 1.5rem;
+}
+
+.section-progress-bar-label {
+  font-size: 0.9rem;
+  position: absolute;
+  bottom: 0;
+  right: $progress-bar-label-offset;
+  font-weight: bold;
+
+  &--zero {
+    color: variables.$base;
+  }
+  &--low {
+    color: variables.$secondary;
+  }
+  &--mid {
+    color: variables.$accent-semi-cool;
+  }
+  &--high {
+    color: variables.$success;
+  }
+}
+
+.progress-bar {
+  flex: 1;
+  border-radius: 6px;
+  width: calc(100% - #{$progress-bar-label-offset});
+  background-image:
+    linear-gradient(variables.$base-lighter, variables.$base-lighter),
+    linear-gradient(
+      90deg,
+      variables.$secondary-light 0%,
+      variables.$accent-semi-cool-400 50%,
+      variables.$success-light 94%
+    );
+  background-size:
+    calc(100% - var(--progress, 0%)) 100%,
+    100% 100%;
+  background-position: right, left;
+  background-repeat: no-repeat;
+  height: 10px;
+}
