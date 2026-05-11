@@ -24,7 +24,9 @@ export const generateMunicipality = (overrides: Partial<Municipality>): Municipa
     ...overrides,
   };
 };
-export const generateFormationUSAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+export const generateFormationUSAddress = (
+  overrides: Partial<FormationAddress>,
+): FormationAddress => {
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
@@ -35,9 +37,10 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
           state.shortCode !== "NJ" &&
           state.shortCode !== "AS" &&
           state.shortCode !== "VI" &&
+          state.shortCode !== "Outside of the USA" &&
           state.shortCode !== "GU"
         );
-      })
+      }),
     ),
     addressCountry: "US",
     addressZipCode: randomInt(5).toString(),
@@ -47,7 +50,9 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
     ...overrides,
   };
 };
-export const generateFormationForeignAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+export const generateFormationForeignAddress = (
+  overrides: Partial<FormationAddress>,
+): FormationAddress => {
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
@@ -58,14 +63,16 @@ export const generateFormationForeignAddress = (overrides: Partial<FormationAddr
     addressCountry: randomElementFromArray(
       countries.filter((item) => {
         return item.shortCode !== "US";
-      })
+      }),
     ).shortCode,
     addressProvince: `some-address-province-${randomInt()}`,
     addressZipCode: randomInt(11).toString(),
     ...overrides,
   };
 };
-export const generateFormationNJAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+export const generateFormationNJAddress = (
+  overrides: Partial<FormationAddress>,
+): FormationAddress => {
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
@@ -88,7 +95,7 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
 };
 export const generateFormationSigner = (
   overrides: Partial<FormationSigner>,
-  legalStructureId?: FormationLegalType
+  legalStructureId?: FormationLegalType,
 ): FormationSigner => {
   return {
     name: `some-signer-name-${randomInt()}`,
@@ -101,6 +108,6 @@ const getSignerType = (legalStructureId?: FormationLegalType) => {
   return randomElementFromArray(
     legalStructureId
       ? BusinessSignerTypeMap[legalStructureId]
-      : BusinessSignerTypeMap[randomFormationLegalType()]
+      : BusinessSignerTypeMap[randomFormationLegalType()],
   );
 };
