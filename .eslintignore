@@ -1,4 +1,6 @@
 node_modules
+.venv
+venv
 
 # root
 aws_config_file_path.json
