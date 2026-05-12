@@ -54,7 +54,7 @@ const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
   const loadedLandingContent = await loadLandingContentFromMessages({ locale });
   const fundings = loadFundings();
 
-  return <LandingPage content={loadedLandingContent.landing} fundings={fundings} />;
+  return <LandingPage content={loadedLandingContent.landing} locale={locale} fundings={fundings} />;
 };
 
 /**

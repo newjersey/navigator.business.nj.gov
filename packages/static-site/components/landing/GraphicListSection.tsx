@@ -6,7 +6,7 @@
  */
 
 import Image from "next/image";
-
+import { buildLandingGraphicListHeadingId } from "@/domain/landing/headingIds";
 import type { LandingGraphicListContent, LandingGraphicListItem } from "@/domain/landing/types";
 
 /**
@@ -111,7 +111,12 @@ const renderGraphicListItem = ({ item, itemIndex }: RenderGraphicListItemParams)
         width={124}
       />
       <div className="usa-media-block__body">
-        <h2 className="usa-graphic-list__heading">{item.title}</h2>
+        <h2
+          className="usa-graphic-list__heading"
+          id={buildLandingGraphicListHeadingId({ index: itemIndex })}
+        >
+          {item.title}
+        </h2>
         <p>{item.paragraph}</p>
       </div>
     </div>

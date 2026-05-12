@@ -5,6 +5,7 @@
  * dedicated navigation subcomponents.
  */
 
+import type { AppLocale } from "@/domain/i18n/locales";
 import type { LandingHeaderContent } from "@/domain/landing/types";
 import { HeaderPrimaryNav } from "./HeaderPrimaryNav";
 import { HeaderSecondaryNav } from "./HeaderSecondaryNav";
@@ -18,6 +19,8 @@ import { LocalizedLink } from "./LocalizedLink";
 export interface SiteHeaderProps {
   /** Localized content used by header subcomponents. */
   readonly content: LandingHeaderContent;
+  /** Active locale used by locale-scoped header controls. */
+  readonly locale: AppLocale;
 }
 
 /**
@@ -28,10 +31,10 @@ export interface SiteHeaderProps {
  * @returns The full extended header markup.
  * @example
  * ```tsx
- * <SiteHeader content={landing.header} />
+ * <SiteHeader content={landing.header} locale="en-US" />
  * ```
  */
-export const SiteHeader = ({ content }: SiteHeaderProps) => {
+export const SiteHeader = ({ content, locale }: SiteHeaderProps) => {
   return (
     <>
       <div className="usa-overlay" />
@@ -55,7 +58,7 @@ export const SiteHeader = ({ content }: SiteHeaderProps) => {
         <nav aria-label={content.primaryNavigationAriaLabel} className="usa-nav">
           <div className="usa-nav__inner">
             <HeaderPrimaryNav header={content} />
-            <HeaderSecondaryNav header={content} />
+            <HeaderSecondaryNav header={content} locale={locale} />
           </div>
         </nav>
       </header>

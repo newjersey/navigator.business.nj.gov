@@ -5,7 +5,9 @@
  * markup and skips render when no links exist.
  */
 
+import type { AppLocale } from "@/domain/i18n/locales";
 import type { LandingHeaderContent } from "@/domain/landing/types";
+import { HeaderSearchForm } from "./HeaderSearchForm";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
@@ -16,6 +18,8 @@ import { LocalizedLink } from "./LocalizedLink";
 export interface HeaderSecondaryNavProps {
   /** Header content containing secondary links and search labels. */
   readonly header: LandingHeaderContent;
+  /** Active locale used to scope the search form action. */
+  readonly locale: AppLocale;
 }
 
 /**
@@ -58,21 +62,20 @@ const renderSecondaryLink = ({ link, index }: RenderSecondaryLinkParams) => {
  * @returns The secondary navigation block, or `null` when no links exist.
  * @example
  * ```tsx
- * <HeaderSecondaryNav header={landing.header} />
+ * <HeaderSecondaryNav header={landing.header} locale="en-US" />
  * ```
  */
-export const HeaderSecondaryNav = ({ header }: HeaderSecondaryNavProps) => {
-  if (header.secondaryLinks.length === 0) {
-    return null;
-  }
-
+export const HeaderSecondaryNav = ({ header, locale }: HeaderSecondaryNavProps) => {
   return (
     <div className="usa-nav__secondary">
-      <ul className="usa-nav__secondary-links">
-        {header.secondaryLinks.map((secondaryLink, index) => {
-          return renderSecondaryLink({ link: secondaryLink, index });
-        })}
-      </ul>
+      {header.secondaryLinks.length > 0 && (
+        <ul className="usa-nav__secondary-links">
+          {header.secondaryLinks.map((secondaryLink, index) => {
+            return renderSecondaryLink({ link: secondaryLink, index });
+          })}
+        </ul>
+      )}
+      <HeaderSearchForm header={header} locale={locale} />
     </div>
   );
 };

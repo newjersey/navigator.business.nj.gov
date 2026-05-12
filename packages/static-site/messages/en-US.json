@@ -3,6 +3,22 @@
     "title": "Business.NJ.gov | Plan, Start, and Grow",
     "description": "Landing page prototype for a Next.js and NJWDS-powered business guidance experience."
   },
+  "search": {
+    "pageTitle": "Search",
+    "pageDescription": "Search Business.NJ.gov pages and resources.",
+    "inputLabel": "Search Business.NJ.gov",
+    "submitLabel": "Search",
+    "emptyStateTitle": "Search Business.NJ.gov",
+    "emptyStateDescription": "Enter a term to find pages and resources.",
+    "loadingLabel": "Searching",
+    "noResultsTitle": "No results found",
+    "noResultsDescription": "Try different terms or check spelling.",
+    "errorTitle": "Search is unavailable",
+    "errorDescription": "Refresh the page or try again later.",
+    "resultSingularLabel": "result",
+    "resultPluralLabel": "results",
+    "resultQueryConnector": "for"
+  },
   "landing": {
     "skipNavigationLabel": "Skip to main content",
     "mainContentId": "main-content",

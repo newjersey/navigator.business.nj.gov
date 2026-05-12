@@ -28,3 +28,16 @@ body {
 .usa-header--extended .usa-nav__secondary-links a:active {
   color: #ffffff;
 }
+
+.search-results-list {
+  padding-left: 1.5rem;
+}
+
+.search-result {
+  margin-top: 2rem;
+}
+
+.search-result mark {
+  background-color: #face00;
+  padding: 0 0.125rem;
+}

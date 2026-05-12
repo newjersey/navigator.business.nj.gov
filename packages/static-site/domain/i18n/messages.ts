@@ -537,6 +537,39 @@ const isLandingMetadataContent = (value: unknown): boolean => {
 };
 
 /**
+ * Checks if a value matches search page content.
+ *
+ * @param value Unknown value to validate.
+ * @returns `true` when all search labels and state text are valid strings.
+ * @example
+ * ```ts
+ * const isSearch = isSearchPageContent(candidate);
+ * ```
+ */
+const isSearchPageContent = (value: unknown): boolean => {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    isString(value.pageTitle) &&
+    isString(value.pageDescription) &&
+    isString(value.inputLabel) &&
+    isString(value.submitLabel) &&
+    isString(value.emptyStateTitle) &&
+    isString(value.emptyStateDescription) &&
+    isString(value.loadingLabel) &&
+    isString(value.noResultsTitle) &&
+    isString(value.noResultsDescription) &&
+    isString(value.errorTitle) &&
+    isString(value.errorDescription) &&
+    isString(value.resultSingularLabel) &&
+    isString(value.resultPluralLabel) &&
+    isString(value.resultQueryConnector)
+  );
+};
+
+/**
  * Checks if a value matches the complete application message schema.
  *
  * @param value Unknown value to validate.
@@ -551,7 +584,11 @@ const isApplicationMessages = (value: unknown): value is ApplicationMessages => 
     return false;
   }
 
-  return isLandingMetadataContent(value.metadata) && isLandingPageContent(value.landing);
+  return (
+    isLandingMetadataContent(value.metadata) &&
+    isSearchPageContent(value.search) &&
+    isLandingPageContent(value.landing)
+  );
 };
 
 /**

@@ -44,7 +44,7 @@ const renderLandingPageForLocale = async ({ locale }: RenderLandingPageForLocale
   const loadedLandingContent = await loadLandingContentFromMessages({ locale });
 
   return {
-    ...render(<LandingPage content={loadedLandingContent.landing} />),
+    ...render(<LandingPage content={loadedLandingContent.landing} locale={locale} />),
     content: loadedLandingContent.landing,
   };
 };
@@ -64,7 +64,9 @@ const shouldRenderGovernmentIdentityDetails = async () => {
   expect(englishSecondaryNavigationItemCount).toBe(
     englishPage.content.header.secondaryLinks.length,
   );
-  expect(screen.queryByRole("searchbox")).toBeNull();
+  expect(
+    screen.getByRole("searchbox", { name: englishPage.content.header.searchInputLabel }),
+  ).toBeTruthy();
   expect(screen.queryByText("Secondary link")).toBeNull();
   expect(screen.queryByText("Another secondary link")).toBeNull();
   expect(
@@ -84,7 +86,9 @@ const shouldRenderGovernmentIdentityDetails = async () => {
   expect(spanishSecondaryNavigationItemCount).toBe(
     spanishPage.content.header.secondaryLinks.length,
   );
-  expect(screen.queryByRole("searchbox")).toBeNull();
+  expect(
+    screen.getByRole("searchbox", { name: spanishPage.content.header.searchInputLabel }),
+  ).toBeTruthy();
   expect(screen.queryByText("Enlace secundario")).toBeNull();
   expect(screen.queryByText("Otro enlace secundario")).toBeNull();
   expect(

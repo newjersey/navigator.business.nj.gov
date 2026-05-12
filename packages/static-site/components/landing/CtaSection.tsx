@@ -4,6 +4,7 @@
  * This module shows the CTA heading, intro text, and action button link.
  */
 
+import { HOME_CTA_HEADING_ID } from "@/domain/landing/headingIds";
 import type { LandingCallToActionContent } from "@/domain/landing/types";
 import { LocalizedLink } from "./LocalizedLink";
 
@@ -32,7 +33,9 @@ export const CtaSection = ({ content }: CtaSectionProps) => {
   return (
     <section className="usa-section" id={content.sectionId}>
       <div className="grid-container">
-        <h2 className="font-heading-xl margin-y-0">{content.title}</h2>
+        <h2 className="font-heading-xl margin-y-0" id={HOME_CTA_HEADING_ID}>
+          {content.title}
+        </h2>
         <p className="usa-intro">{content.intro}</p>
         <LocalizedLink className="usa-button usa-button--big" link={content.callToActionLink} />
       </div>

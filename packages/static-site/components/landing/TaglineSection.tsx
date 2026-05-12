@@ -5,6 +5,7 @@
  * localized landing content.
  */
 
+import { HOME_TAGLINE_HEADING_ID } from "@/domain/landing/headingIds";
 import type { LandingTaglineContent } from "@/domain/landing/types";
 
 /**
@@ -61,7 +62,12 @@ export const TaglineSection = ({ content }: TaglineSectionProps) => {
     <section className="grid-container usa-section">
       <div className="grid-row grid-gap">
         <div className="tablet:grid-col-4">
-          <h2 className="font-heading-xl margin-top-0 tablet:margin-bottom-0">{content.title}</h2>
+          <h2
+            className="font-heading-xl margin-top-0 tablet:margin-bottom-0"
+            id={HOME_TAGLINE_HEADING_ID}
+          >
+            {content.title}
+          </h2>
         </div>
         <div className="tablet:grid-col-8 usa-prose">
           {content.paragraphs.map((paragraph, index) => {

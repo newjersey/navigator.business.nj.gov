@@ -5,6 +5,7 @@
  * hero markup.
  */
 
+import { HOME_HERO_HEADING_ID } from "@/domain/landing/headingIds";
 import type { LandingHeroContent } from "@/domain/landing/types";
 import { LocalizedLink } from "./LocalizedLink";
 
@@ -34,7 +35,7 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
     <section aria-label={content.sectionAriaLabel} className="usa-hero">
       <div className="grid-container">
         <div className="usa-hero__callout">
-          <h1 className="usa-hero__heading">
+          <h1 className="usa-hero__heading" id={HOME_HERO_HEADING_ID}>
             <span className="usa-hero__heading--alt">{content.callout}</span>
             {content.title}
           </h1>

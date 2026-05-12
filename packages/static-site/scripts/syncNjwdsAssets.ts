@@ -211,6 +211,10 @@ const REQUIRED_NJWDS_ASSETS: readonly RequiredNjwdsAsset[] = [
     relativePath: "img/usa-icons/youtube.svg",
     description: "NJWDS YouTube icon",
   },
+  {
+    relativePath: "img/usa-icons-bg/search--white.svg",
+    description: "NJWDS search submit icon",
+  },
 ];
 
 /**

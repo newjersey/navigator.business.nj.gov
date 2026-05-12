@@ -321,6 +321,42 @@ export interface LandingMetadataContent {
 }
 
 /**
+ * Localized content for the search results page.
+ *
+ * This type defines a stable shape for related data.
+ */
+export interface SearchPageContent {
+  /** Heading text rendered at the top of the search page. */
+  readonly pageTitle: string;
+  /** Introductory text shown below the search page heading. */
+  readonly pageDescription: string;
+  /** Accessible label for the search page input. */
+  readonly inputLabel: string;
+  /** Visible submit button label for the search page form. */
+  readonly submitLabel: string;
+  /** Heading text shown before a query has been submitted. */
+  readonly emptyStateTitle: string;
+  /** Help text shown before a query has been submitted. */
+  readonly emptyStateDescription: string;
+  /** Status text announced while search results load. */
+  readonly loadingLabel: string;
+  /** Heading text shown when a submitted query has no results. */
+  readonly noResultsTitle: string;
+  /** Help text shown when a submitted query has no results. */
+  readonly noResultsDescription: string;
+  /** Heading text shown when the generated search bundle cannot load. */
+  readonly errorTitle: string;
+  /** Help text shown when search fails. */
+  readonly errorDescription: string;
+  /** Singular noun used in the result count summary. */
+  readonly resultSingularLabel: string;
+  /** Plural noun used in the result count summary. */
+  readonly resultPluralLabel: string;
+  /** Connector word placed between result count and submitted query. */
+  readonly resultQueryConnector: string;
+}
+
+/**
  * Complete localized message payload for one locale.
  *
  * This type defines a stable shape for related data.
@@ -328,6 +364,8 @@ export interface LandingMetadataContent {
 export interface ApplicationMessages {
   /** Metadata strings for the localized route. */
   readonly metadata: LandingMetadataContent;
+  /** Search page labels and state text. */
+  readonly search: SearchPageContent;
   /** Landing-page content strings and links. */
   readonly landing: LandingPageContent;
 }

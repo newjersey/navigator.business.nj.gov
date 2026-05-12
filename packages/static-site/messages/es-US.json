@@ -3,6 +3,22 @@
     "title": "Business.NJ.gov | Planifique, Comience y Haga Crecer",
     "description": "Prototipo de página principal para una experiencia de orientación empresarial impulsada por Next.js y NJWDS."
   },
+  "search": {
+    "pageTitle": "Buscar",
+    "pageDescription": "Busca páginas y recursos de Business.NJ.gov.",
+    "inputLabel": "Buscar en Business.NJ.gov",
+    "submitLabel": "Buscar",
+    "emptyStateTitle": "Busca en Business.NJ.gov",
+    "emptyStateDescription": "Ingresa un término para encontrar páginas y recursos.",
+    "loadingLabel": "Buscando",
+    "noResultsTitle": "No se encontraron resultados",
+    "noResultsDescription": "Prueba otros términos o revisa la ortografía.",
+    "errorTitle": "La búsqueda no está disponible",
+    "errorDescription": "Actualiza la página o intenta de nuevo más tarde.",
+    "resultSingularLabel": "resultado",
+    "resultPluralLabel": "resultados",
+    "resultQueryConnector": "para"
+  },
   "landing": {
     "skipNavigationLabel": "Saltar al contenido principal",
     "mainContentId": "main-content",
