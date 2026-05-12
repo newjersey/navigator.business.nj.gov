@@ -15,6 +15,8 @@ const vitestConfig = defineConfig({
       "app/**/*.test.tsx",
       "components/**/*.test.ts",
       "components/**/*.test.tsx",
+      "domain/**/*.test.ts",
+      "domain/**/*.test.tsx",
     ],
     exclude: ["node_modules/**", "tests/accessibility/**"],
     environment: "jsdom",
