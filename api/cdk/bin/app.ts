@@ -1,5 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import * as dotenv from "dotenv";
+import * as iam from "aws-cdk-lib/aws-iam";
 import { ApiStack } from "../lib/apiStack";
 import { DataStack } from "../lib/dataStack";
 import { IamStack } from "../lib/iamStack";
@@ -45,7 +46,11 @@ const storageStack = new StorageStack(app, `StorageStack-${stage}`, {
   env,
 });
 
-const taxKMSRole = iamStack.taxKMSRole!;
+const taxKMSRole = iam.Role.fromRoleName(
+  iamStack,
+  "TaxKMSRole",
+  "iamRoleForTaxIdEncryptionAndHashing",
+);
 
 new EncryptionStack(app, `EncryptionStack-${stage}`, {
   stage,
