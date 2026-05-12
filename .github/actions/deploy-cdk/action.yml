@@ -20,6 +20,17 @@ runs:
           --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess || \
           echo "Bootstrap already completed or not required."
 
+    - name: Import StorageStack resources in CDK
+      shell: bash
+      run: |
+        echo "Importing StorageStack resources for stage: $STAGE"
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy StorageStack-${{ env.STAGE }} \
+          --import-existing-resources \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
     - name: Import IAM resources in CDK IamStack
       shell: bash
       run: |
