@@ -7,7 +7,7 @@
 
 import Image from "next/image";
 
-import type { LandingBannerContent } from "@/domain/content/messageTypes";
+import type { LayoutBannerContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
@@ -18,7 +18,7 @@ import { LocalizedLink } from "./LocalizedLink";
  */
 export interface GovBannerProps {
   /** Localized banner content. */
-  readonly content: LandingBannerContent;
+  readonly content: LayoutBannerContent;
 }
 
 /**

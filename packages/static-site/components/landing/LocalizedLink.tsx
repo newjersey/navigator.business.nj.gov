@@ -6,7 +6,7 @@
  */
 
 import type { ReactNode } from "react";
-import type { LandingLink } from "@/domain/content/messageTypes";
+import type { ContentLink } from "@/domain/content/messageTypes";
 import { Link } from "@/domain/i18n/navigation";
 
 /**
@@ -16,7 +16,7 @@ import { Link } from "@/domain/i18n/navigation";
  */
 export interface LocalizedLinkProps {
   /** Link content metadata to render. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
   /** Optional CSS class list applied to the anchor element. */
   readonly className?: string;
   /** Optional aria-label override for the anchor element. */

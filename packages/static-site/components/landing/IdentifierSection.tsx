@@ -8,8 +8,8 @@
 import Image from "next/image";
 
 import type {
-  LandingIdentifierContent,
   LandingIdentifierRequiredLink,
+  LayoutIdentifierContent,
 } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
@@ -21,7 +21,7 @@ import { LocalizedLink } from "./LocalizedLink";
  */
 export interface IdentifierSectionProps {
   /** Localized identifier content. */
-  readonly content: LandingIdentifierContent;
+  readonly content: LayoutIdentifierContent;
 }
 
 /**

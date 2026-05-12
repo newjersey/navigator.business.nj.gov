@@ -11,7 +11,7 @@ import type {
   HeaderPrimaryItem,
   HeaderPrimaryLinkItem,
   HeaderPrimarySubmenuItem,
-  LandingHeaderContent,
+  LayoutHeaderContent,
 } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
@@ -27,7 +27,7 @@ const NJWDS_CLOSE_ICON_PATH = "/assets/njwds/dist/img/usa-icons/close.svg";
  */
 export interface HeaderPrimaryNavProps {
   /** Header content containing close icon text and primary nav items. */
-  readonly header: LandingHeaderContent;
+  readonly header: LayoutHeaderContent;
 }
 
 /**
