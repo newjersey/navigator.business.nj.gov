@@ -20,20 +20,24 @@ import type { AppLocale } from "./locales";
  * @param other Candidate value from another locale payload.
  * @returns `true` when `other` structurally matches `base`.
  */
-const hasSameStructure = (base: unknown, other: unknown): boolean => {
+export const hasSameStructure = (base: unknown, other: unknown): boolean => {
   if (Array.isArray(base)) {
     if (!Array.isArray(other)) return false;
-    if (base.length === 0) return true;
-    return other.length > 0 && hasSameStructure(base[0], other[0]);
+    if (base.length !== other.length) return false;
+    return base.every((item, index) => hasSameStructure(item, other[index]));
   }
 
   if (typeof base === "object" && base !== null) {
     if (typeof other !== "object" || other === null || Array.isArray(other)) return false;
     const baseRecord = base as Record<string, unknown>;
     const otherRecord = other as Record<string, unknown>;
-    return Object.keys(baseRecord).every(
+    const allKeysInBasePresentInOther = Object.keys(baseRecord).every(
       (key) => key in otherRecord && hasSameStructure(baseRecord[key], otherRecord[key]),
     );
+    const allKeysInOtherPresentInBase = Object.keys(otherRecord).every(
+      (key) => key in baseRecord && hasSameStructure(baseRecord[key], otherRecord[key]),
+    );
+    return allKeysInBasePresentInOther && allKeysInOtherPresentInBase;
   }
 
   return typeof base === typeof other;
