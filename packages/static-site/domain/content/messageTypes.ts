@@ -8,7 +8,7 @@
 /**
  * A localized link used by landing-page components.
  */
-export interface LandingLink {
+export interface ContentLink {
   /** Human-readable link label rendered in UI. */
   readonly label: string;
   /** URL or path destination for the link. */
@@ -17,6 +17,8 @@ export interface LandingLink {
   readonly isInternal: boolean;
   /** Indicates the link should open in a new browser tab. */
   readonly opensInNewTab: boolean;
+  /** Some links need a string key identifier to help us construct link categories */
+  readonly key?: string;
 }
 
 /**
@@ -24,7 +26,7 @@ export interface LandingLink {
  */
 export interface HeaderPrimarySubmenuLink {
   /** Link metadata rendered in the submenu. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
@@ -34,7 +36,7 @@ export interface HeaderPrimaryLinkItem {
   /** Discriminator for a simple link item. */
   readonly kind: "link";
   /** Link metadata rendered in the primary navigation. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
   /** Indicates the link points to the current section/page. */
   readonly isCurrent: boolean;
 }
@@ -63,27 +65,27 @@ export type HeaderPrimaryItem = HeaderPrimaryLinkItem | HeaderPrimarySubmenuItem
 /**
  * Localized content for the government identity banner.
  */
-export interface LandingBannerContent {
+export interface LayoutBannerContent {
   /** Accessible label for the banner section landmark. */
   readonly sectionAriaLabel: string;
   /** Alt text for the New Jersey state seal image. */
   readonly stateSealAlt: string;
   /** Link to the official New Jersey state site. */
-  readonly stateSiteLink: LandingLink;
+  readonly stateSiteLink: ContentLink;
   /** Link displaying the governor and lieutenant governor names. */
-  readonly governorIdentityLink: LandingLink;
+  readonly governorIdentityLink: ContentLink;
   /** Link to the state updates subscription destination. */
-  readonly updatesLink: LandingLink;
+  readonly updatesLink: ContentLink;
 }
 
 /**
  * Localized content for the NJWDS extended header.
  */
-export interface LandingHeaderContent {
+export interface LayoutHeaderContent {
   /** Accessible label for the primary navigation region. */
   readonly primaryNavigationAriaLabel: string;
   /** Home link metadata rendered in the logo area. */
-  readonly homeLink: LandingLink;
+  readonly homeLink: ContentLink;
   /** Title attribute for the home link. */
   readonly homeLinkTitle: string;
   /** Aria label for the home link. */
@@ -97,7 +99,7 @@ export interface LandingHeaderContent {
   /** Collection of primary navigation items. */
   readonly primaryItems: readonly HeaderPrimaryItem[];
   /** Collection of secondary navigation links. */
-  readonly secondaryLinks: readonly LandingLink[];
+  readonly secondaryLinks: readonly ContentLink[];
   /** Form action destination for the header search form. */
   readonly searchAction: string;
   /** Accessible label for the search input. */
@@ -119,7 +121,7 @@ export interface LandingHeroContent {
   /** Hero supporting paragraph text. */
   readonly paragraph: string;
   /** Primary hero call-to-action link. */
-  readonly callToActionLink: LandingLink;
+  readonly callToActionLink: ContentLink;
 }
 
 /**
@@ -163,7 +165,7 @@ export interface LandingCallToActionContent {
   /** Introductory paragraph rendered for the CTA section. */
   readonly intro: string;
   /** CTA button link metadata. */
-  readonly callToActionLink: LandingLink;
+  readonly callToActionLink: ContentLink;
 }
 
 /**
@@ -173,7 +175,7 @@ export interface LandingSocialLink {
   /** Class name modifier suffix for NJWDS social icon styling. */
   readonly modifier: string;
   /** Link metadata for the social destination. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
   /** Alt text for the social icon image. */
   readonly iconAlt: string;
   /** Path to the social icon asset. */
@@ -185,13 +187,13 @@ export interface LandingSocialLink {
  */
 export interface LandingFooterPrimaryLink {
   /** Link metadata rendered in the footer primary nav list. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
  * Localized content for the footer section.
  */
-export interface LandingFooterContent {
+export interface LayoutFooterContent {
   /** Label for the return-to-top link. */
   readonly returnToTopLabel: string;
   /** Accessible label for footer navigation. */
@@ -207,9 +209,9 @@ export interface LandingFooterContent {
   /** Contact heading rendered above phone/email links. */
   readonly contactHeading: string;
   /** Contact center phone link metadata. */
-  readonly phoneLink: LandingLink;
+  readonly phoneLink: ContentLink;
   /** Contact center email link metadata. */
-  readonly emailLink: LandingLink;
+  readonly emailLink: ContentLink;
 }
 
 /**
@@ -217,13 +219,13 @@ export interface LandingFooterContent {
  */
 export interface LandingIdentifierRequiredLink {
   /** Link metadata rendered in the required-links list. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
  * Localized content for the identifier section.
  */
-export interface LandingIdentifierContent {
+export interface LayoutIdentifierContent {
   /** Accessible label for the agency identifier section. */
   readonly agencySectionAriaLabel: string;
   /** Alt text for the state logo image. */
@@ -235,7 +237,7 @@ export interface LandingIdentifierContent {
   /** Prefix text rendered before the state link in disclaimer copy. */
   readonly disclaimerPrefix: string;
   /** Link metadata rendered in disclaimer copy. */
-  readonly disclaimerLink: LandingLink;
+  readonly disclaimerLink: ContentLink;
   /** Accessible label for the required links navigation. */
   readonly importantLinksAriaLabel: string;
   /** Required links rendered in identifier navigation. */
@@ -255,13 +257,13 @@ export interface LayoutContent {
   /** Element ID used for main-content anchor navigation. */
   readonly mainContentId: string;
   /** Banner section content. */
-  readonly banner: LandingBannerContent;
+  readonly banner: LayoutBannerContent;
   /** Header section content. */
-  readonly header: LandingHeaderContent;
+  readonly header: LayoutHeaderContent;
   /** Footer section content. */
-  readonly footer: LandingFooterContent;
+  readonly footer: LayoutFooterContent;
   /** Identifier section content. */
-  readonly identifier: LandingIdentifierContent;
+  readonly identifier: LayoutIdentifierContent;
 }
 
 /**
@@ -289,6 +291,16 @@ export interface LandingMetadataContent {
 }
 
 /**
+ * Localized content for the learn section side navigation.
+ */
+export interface LearnSideNavContent {
+  /** Accessible name for the section. */
+  readonly ariaLabel: string;
+  /** Ordered list of pages rendered in the side navigation. */
+  readonly pages: readonly ContentLink[];
+}
+
+/**
  * One category card rendered in the learn page grid.
  */
 export interface LearnCategory {
@@ -297,7 +309,7 @@ export interface LearnCategory {
   /** Supporting text rendered in the category card. */
   readonly description: string;
   /** Link metadata for the category card CTA. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
@@ -310,6 +322,8 @@ export interface LearnPageContent {
   readonly subHeadingText: string;
   /** Secondary heading text rendered above the categories grid. */
   readonly heading2: string;
+  /** Side navigation content for the learn section. */
+  readonly sideNav: LearnSideNavContent;
   /** Category cards rendered in the learn grid. */
   readonly categories: readonly LearnCategory[];
 }

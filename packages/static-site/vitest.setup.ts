@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { createElement } from "react";

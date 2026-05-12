@@ -8,9 +8,9 @@
 import Image from "next/image";
 
 import type {
-  LandingFooterContent,
   LandingFooterPrimaryLink,
   LandingSocialLink,
+  LayoutFooterContent,
 } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
@@ -21,7 +21,7 @@ import { LocalizedLink } from "./LocalizedLink";
  */
 export interface SiteFooterProps {
   /** Localized footer content. */
-  readonly content: LandingFooterContent;
+  readonly content: LayoutFooterContent;
   /** Main-content ID used by the return-to-top anchor. */
   readonly mainContentId: string;
 }

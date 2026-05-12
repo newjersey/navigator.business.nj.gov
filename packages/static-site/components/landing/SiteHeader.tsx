@@ -5,7 +5,7 @@
  * dedicated navigation subcomponents.
  */
 
-import type { LandingHeaderContent } from "@/domain/content/messageTypes";
+import type { LayoutHeaderContent } from "@/domain/content/messageTypes";
 import { HeaderPrimaryNav } from "./HeaderPrimaryNav";
 import { HeaderSecondaryNav } from "./HeaderSecondaryNav";
 import { LocalizedLink } from "./LocalizedLink";
@@ -17,7 +17,7 @@ import { LocalizedLink } from "./LocalizedLink";
  */
 export interface SiteHeaderProps {
   /** Localized content used by header subcomponents. */
-  readonly content: LandingHeaderContent;
+  readonly content: LayoutHeaderContent;
 }
 
 /**

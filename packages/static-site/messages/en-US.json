@@ -338,6 +338,46 @@
     }
   },
   "learn": {
+    "sideNav": {
+      "ariaLabel": "Side navigation",
+      "pages": [
+        {
+          "key": "learn",
+          "label": "Introduction",
+          "href": "/learn",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "plan",
+          "label": "Plan",
+          "href": "/learn/plan",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "start",
+          "label": "Start",
+          "href": "/learn/start",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "operate",
+          "label": "Operate",
+          "href": "/learn/operate",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "grow",
+          "label": "Grow",
+          "href": "/learn/grow",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
+      ]
+    },
     "name": "Learn",
     "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
     "heading2": "Where are you in your business journey?",
