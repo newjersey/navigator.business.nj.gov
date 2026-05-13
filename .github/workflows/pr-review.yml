@@ -48,7 +48,8 @@ jobs:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
           INCLUDE_TEAMS: "business-dev"
           EXCLUDE_USERS:
-            "NJ-Innovation-CI mjackson21 ${{ steps.find-comment.outputs.previously-picked }}"
+            "NJ-Innovation-CI cleong14 FearHar jtabron1 mjackson21 ${{
+            steps.find-comment.outputs.previously-picked }}"
           NUMBER_OF_REVIEWERS: 2
           GH_PR_NUMBER: ${{ github.event.pull_request.number }}
           GH_PR_AUTHOR: ${{ github.event.pull_request.user.login }}
