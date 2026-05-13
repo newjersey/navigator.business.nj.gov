@@ -10,6 +10,7 @@ COPY ./content/package.json ./content/package.json
 COPY ./content/src ./content/src
 COPY ./shared/package.json ./shared/package.json
 COPY ./api/package.json ./api/package.json
+COPY ./packages/content-types/package.json ./packages/content-types/package.json
 COPY ./web/package.json ./web/package.json
 COPY ./package.json ./package.json
 
