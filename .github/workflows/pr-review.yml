@@ -125,7 +125,12 @@ jobs:
           COMMENT_ID: ${{ steps.find-comment.outputs.comment-id }}
 
   remove-label:
-    if: always()
+    needs: pickaroo
+    if: >-
+      always() && (
+        github.event.label.name == 'pr-review' ||
+        github.event.label.name == 'pr-show'
+      )
     runs-on: ubuntu-latest
     permissions: {}
     steps:
