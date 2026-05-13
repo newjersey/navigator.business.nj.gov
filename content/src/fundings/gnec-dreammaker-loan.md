@@ -39,16 +39,13 @@ publishStageArchive: ""
 municipality: Newark
 priority: true
 ---
-
 ## Eligibility
 
-- Have good credit history with a history of on-time payments
-- Have at least a 650 credit score
-- Pass a capacity test to show you can manage the loan payments
-- Submit a $100 application fee
-- Final approval is contingent on the credit committee
+* Have good credit history with a history of on-time payments
+* Preferably at least 650 credit score
+* Pass a capacity test to show you can manage the loan payments
 
-:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 - Up to $30,000 in funding
 - No pre-payment penalties for this loan
