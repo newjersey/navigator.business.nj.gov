@@ -1,11 +1,31 @@
 import { App, Stack } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
 import * as ecr from "aws-cdk-lib/aws-ecr";
+import { STATIC_SITE_CERTIFICATE_ID } from "../lib/constants";
 import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
+
+const TEST_AWS_ACCOUNT_ID = "123456789012";
+const TEST_AWS_REGION = "us-east-1";
+const STATIC_SITE_TEST_ENVIRONMENT = {
+  account: TEST_AWS_ACCOUNT_ID,
+  region: TEST_AWS_REGION,
+};
+const STATIC_SITE_CERTIFICATE_ARN = {
+  "Fn::Join": [
+    "",
+    [
+      "arn:",
+      { Ref: "AWS::Partition" },
+      `:acm:${TEST_AWS_REGION}:${TEST_AWS_ACCOUNT_ID}:certificate/${STATIC_SITE_CERTIFICATE_ID}`,
+    ],
+  ],
+};
 
 const createStaticSiteTemplate = (stage: string): Template => {
   const app = new App();
-  const repositoryStack = new Stack(app, `${stage}RepositoryStack`);
+  const repositoryStack = new Stack(app, `${stage}RepositoryStack`, {
+    env: STATIC_SITE_TEST_ENVIRONMENT,
+  });
   const repository = new ecr.Repository(repositoryStack, "StaticSiteRepository", {
     repositoryName: `bfs-static-site-${stage}`,
   });
@@ -13,6 +33,7 @@ const createStaticSiteTemplate = (stage: string): Template => {
     stage,
     repository,
     imageTag: "abc123",
+    env: STATIC_SITE_TEST_ENVIRONMENT,
   });
 
   return Template.fromStack(stack);
@@ -34,7 +55,7 @@ describe("StaticSiteServiceStack", () => {
     process.env = { ...originalEnvironment };
   });
 
-  test("creates an internal ALB-backed Fargate service for the static site", () => {
+  test("creates an internal HTTPS ALB-backed Fargate service for the static site", () => {
     const template = createStaticSiteTemplate("dev");
 
     expect(template.toJSON()).toBeDefined();
@@ -45,6 +66,28 @@ describe("StaticSiteServiceStack", () => {
       LoadBalancerAttributes: Match.arrayWith([
         { Key: "deletion_protection.enabled", Value: "true" },
       ]),
+    });
+    template.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", {
+      Port: 443,
+      Protocol: "HTTPS",
+      Certificates: [{ CertificateArn: STATIC_SITE_CERTIFICATE_ARN }],
+      SslPolicy: "ELBSecurityPolicy-TLS13-1-2-2021-06",
+    });
+    template.hasResourceProperties("AWS::EC2::SecurityGroupIngress", {
+      GroupId: "sg-1234567890abcdef0",
+      IpProtocol: "tcp",
+      FromPort: 80,
+      ToPort: 80,
+      CidrIp: "0.0.0.0/0",
+      Description: "Allow HTTP traffic to the static-site load balancer.",
+    });
+    template.hasResourceProperties("AWS::EC2::SecurityGroupIngress", {
+      GroupId: "sg-1234567890abcdef0",
+      IpProtocol: "tcp",
+      FromPort: 443,
+      ToPort: 443,
+      CidrIp: "0.0.0.0/0",
+      Description: "Allow HTTPS traffic to the static-site load balancer.",
     });
     template.hasResourceProperties("AWS::ElasticLoadBalancingV2::TargetGroup", {
       Name: "bfs-static-site-dev-tg",

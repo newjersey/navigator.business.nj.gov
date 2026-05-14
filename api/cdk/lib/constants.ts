@@ -31,6 +31,8 @@ export const STATIC_SITE_HOSTNAMES: Record<string, string> = {
   [STAGING_STAGE]: "staging.next.business.nj.gov",
   [PROD_STAGE]: "next.business.nj.gov",
 };
+/** Shared ACM certificate ID covering every static-site hostname. */
+export const STATIC_SITE_CERTIFICATE_ID = "97592b7b-b08f-41f0-9667-68a0e8927687";
 export const HEALTH_CHECK_ENDPOINTS: Record<string, string> = {
   self: "self",
   elevator: "dynamics/elevator",

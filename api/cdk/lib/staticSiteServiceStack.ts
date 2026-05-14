@@ -1,4 +1,5 @@
-import { Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import { ArnFormat, Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 import * as ecs from "aws-cdk-lib/aws-ecs";
@@ -6,7 +7,11 @@ import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import * as logs from "aws-cdk-lib/aws-logs";
 import * as sns from "aws-cdk-lib/aws-sns";
 import { Construct } from "constructs";
-import { STATIC_SITE_HEALTH_CHECK_PATH, STATIC_SITE_SERVICE_BASE_NAME } from "./constants";
+import {
+  STATIC_SITE_CERTIFICATE_ID,
+  STATIC_SITE_HEALTH_CHECK_PATH,
+  STATIC_SITE_SERVICE_BASE_NAME,
+} from "./constants";
 import {
   createStaticSiteAlarms,
   createStaticSiteDeploymentFailureRule,
@@ -87,6 +92,12 @@ const STATIC_SITE_DEPLOYMENT_MAX_PERCENT = 200;
  */
 const STATIC_SITE_DEPLOYMENT_MIN_HEALTHY_PERCENT = 0;
 
+/** HTTP ingress port retained for existing upstream origin routing to the static-site ALB. */
+const STATIC_SITE_HTTP_INGRESS_PORT = 80;
+
+/** HTTPS ingress port used by the static-site ALB listener. */
+const STATIC_SITE_HTTPS_INGRESS_PORT = 443;
+
 const requireEnvironmentValue = (props: RequiredEnvironmentValue): string => {
   if (props.value === undefined || props.value.trim().length === 0) {
     throw new Error(`${props.name} must be set to deploy the static site service`);
@@ -113,6 +124,7 @@ export class StaticSiteServiceStack extends Stack {
     super(scope, id, props);
 
     const network = this.createNetwork();
+    this.configureLoadBalancerIngress(network);
     const alarmTopic = this.createAlarmTopic(props.stage);
     const cluster = this.createCluster(props.stage, network);
     const logGroup = this.createLogGroup(props.stage);
@@ -125,9 +137,13 @@ export class StaticSiteServiceStack extends Stack {
     });
     const loadBalancer = this.createLoadBalancer(props.stage, network);
     const targetGroup = this.createTargetGroup(props.stage, network);
+    const certificate = this.createCertificate();
     const listener = loadBalancer.addListener("StaticSiteListener", {
-      port: 80,
-      protocol: elbv2.ApplicationProtocol.HTTP,
+      port: STATIC_SITE_HTTPS_INGRESS_PORT,
+      protocol: elbv2.ApplicationProtocol.HTTPS,
+      certificates: [elbv2.ListenerCertificate.fromCertificateManager(certificate)],
+      sslPolicy: elbv2.SslPolicy.RECOMMENDED_TLS,
+      open: false,
       defaultTargetGroups: [targetGroup],
     });
     const service = this.createService({
@@ -190,9 +206,22 @@ export class StaticSiteServiceStack extends Stack {
         this,
         "StaticSiteSecurityGroup",
         requireEnvironmentValue({ name: "SG_ID", value: process.env.SG_ID }),
-        { mutable: false },
+        { mutable: true },
       ),
     };
+  }
+
+  private configureLoadBalancerIngress(network: StaticSiteNetwork): void {
+    network.securityGroup.addIngressRule(
+      ec2.Peer.anyIpv4(),
+      ec2.Port.tcp(STATIC_SITE_HTTP_INGRESS_PORT),
+      "Allow HTTP traffic to the static-site load balancer.",
+    );
+    network.securityGroup.addIngressRule(
+      ec2.Peer.anyIpv4(),
+      ec2.Port.tcp(STATIC_SITE_HTTPS_INGRESS_PORT),
+      "Allow HTTPS traffic to the static-site load balancer.",
+    );
   }
 
   private createCluster(stage: string, network: StaticSiteNetwork): ecs.Cluster {
@@ -220,6 +249,19 @@ export class StaticSiteServiceStack extends Stack {
     alarmTopic.applyRemovalPolicy(RemovalPolicy.RETAIN);
     applyStandardTags(alarmTopic, stage);
     return alarmTopic;
+  }
+
+  private createCertificate(): acm.ICertificate {
+    return acm.Certificate.fromCertificateArn(
+      this,
+      "StaticSiteCertificate",
+      this.formatArn({
+        service: "acm",
+        resource: "certificate",
+        resourceName: STATIC_SITE_CERTIFICATE_ID,
+        arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
+      }),
+    );
   }
 
   private createLogGroup(stage: string): logs.LogGroup {
