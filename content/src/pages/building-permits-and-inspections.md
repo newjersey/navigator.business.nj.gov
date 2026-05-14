@@ -26,6 +26,7 @@ main-text-2: |-
 
   Contact the [Business Action Center](https://www.nj.gov/state/bac/bac.shtml) for further assistance.
 link-text-2: Uniform Construction Code Forms
+link-url-2: https://www.nj.gov/dca/codes/resources/constructionpermitforms.shtml
 heading-3: Sign Up for an Inspection
 main-text-3: Once your building permit has been approved, you can begin your work. However, don't forget the critical step of scheduling the required inspections. Inspections are required before you cover or conceal any work that's been completed to ensure that the work you've done meets the permit requirements. Depending on your project type and size, you may need to schedule a few inspections – you can check with the local Building/Construction Department for a list of required inspections and at what stage in the project they must be performed.
 tip-3: Occasionally, the municipality may submit all or a portion of the construction project to the State Department of Community Affairs (or to a nearby municipality) for review and inspection. This is typically done because the municipality does not have Sub-Code or inspection staff holding the appropriate license for the type of construction proposed, or because the staff member has a conflict of interest and must recuse themselves from the project.

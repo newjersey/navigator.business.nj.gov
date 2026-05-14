@@ -15,9 +15,11 @@ main-text-1: |-
 heading-2: Running a Business with Operations in New Jersey
 main-text-2: "The State calls out-of-state businesses with operations in New Jersey foreign businesses or Nexus businesses (because they have a nexus in New Jersey).\n\n**Note:** These steps apply to corporations; if your business is not a corporation, see “[Running a Business that Only Sells Goods and Services in New Jersey](https://business.nj.gov/pages/out-of-state-business-registration#:~:text=Register%20for%20Taxes-,Running%20a%20Business%20that%20Only%20Sells%20Goods%20and%20Services%20in%20New%20Jersey).\"\n\nIf any of the following applies to your business, you have business operations in New Jersey:\n\n* An office in New Jersey\n* Employees or independent contractors provide services to clients in New Jersey\n* Ownership of property in New Jersey, including inventory housed in a 3rd party warehouse in New Jersey\n* Company-operated vehicles making business-related stops (deliveries or pickups) in New Jersey\n* Some licensing agreements with an entity operating in New Jersey\n\nAlso, a business has a nexus when it meets any financial conditions in the[ bright-line economic nexus standard](https://www.nj.gov/treasury/taxation/pdf/pubs/tb/tb108.pdf). This means it must pay taxes under the Corporation Business Tax Act.\n\nThe NJ Division of Taxation’s [Nexus Unit - Office Audit Branch](https://www.state.nj.us/treasury/taxation/organization/audit-taxtype-nexus.shtml) can help you determine if you have a nexus business.\n\n**To register as a Nexus Business:**\n\n* Corporations must obtain a Certificate of Good Standing with their state of origin\n* All businesses must check to see if the EXACT name they used to register in their place of origin is available in New Jersey AND THEN form their business. *NOTE: If your ****business name is available****, you can submit your authorization documents online. If your ****business name is not available**** in New Jersey, you need to find an available name, this is known as your Doing Business As (DBA)\_ name. You can find an available DBA name using the same name search tool. Once you have found an available name you would like to use, you must submit a paper authorization application. *Search [available business names](https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName).\n* After you form your business, you need to [register for State taxes](https://www.njportal.com/DOR/BusinessRegistration/)."
 link-text-2: Authorize Your Business
+link-url-2: https://www.njportal.com/DOR/BusinessFormation/Home/Welcome
 heading-3: Running a Business with Employees in New Jersey
 main-text-3: If you have employees in New Jersey and have no other business activity in the State, you need to register for State taxes.
 link-text-3: Register for Taxes
+link-url-3: https://www.njportal.com/DOR/BusinessRegistration/
 heading-4: Running a Business that Only Sells Goods and Services in New Jersey
 main-text-4: |-
   **Note:** These steps apply to businesses that are not corporations. If your business is a corporation, see “[Running a Business with Operations in New Jersey](https://business.nj.gov/pages/out-of-state-business-registration#:~:text=and%20guidance%20here.-,Running%20a%20Business%20with%20Operations%20in%20New%20Jersey)."
@@ -31,6 +33,7 @@ main-text-4: |-
 
   If neither of the above applies to your business, you do NOT need to register for State taxes.
 link-text-4: Register for Taxes
+link-url-4: https://www.njportal.com/DOR/BusinessRegistration/
 heading-5: Running a Business Seeking to Contract with New Jersey Government
 main-text-5: |-
   If you are looking to contract with the New Jersey government you will have business operations in New Jersey. Follow the steps identified under "Your Business has Operations in New Jersey" above to properly register your business.
@@ -47,4 +50,5 @@ main-text-6: |-
   * If you wish to convert your business structure **and** become a New Jersey Business, please use for [CD-100](https://www.nj.gov/treasury/revenue/pdf/CD100.pdf).
   * If you wish to convert your business structure only, please use form [CD-101](https://www.nj.gov/treasury/revenue/pdf/CD101.pdf).
 link-text-6: Domestication Legislation
+link-url-6: https://pub.njleg.state.nj.us/Bills/2022/AL23/38_.PDF
 ---
