@@ -5,7 +5,7 @@
  * markup and skips render when no links exist.
  */
 
-import type { LandingHeaderContent } from "@/domain/content/messageTypes";
+import type { LayoutHeaderContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
@@ -15,7 +15,7 @@ import { LocalizedLink } from "./LocalizedLink";
  */
 export interface HeaderSecondaryNavProps {
   /** Header content containing secondary links and search labels. */
-  readonly header: LandingHeaderContent;
+  readonly header: LayoutHeaderContent;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface HeaderSecondaryNavProps {
  */
 interface RenderSecondaryLinkParams {
   /** Secondary link content and index metadata. */
-  readonly link: LandingHeaderContent["secondaryLinks"][number];
+  readonly link: LayoutHeaderContent["secondaryLinks"][number];
   /** Positional index for React key generation fallback. */
   readonly index: number;
 }

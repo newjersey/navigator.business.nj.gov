@@ -1,5 +1,5 @@
 /**
- * Declares typed landing-page content models used across the static site.
+ * Declares typed content models used across the static site.
  *
  * These interfaces define the contract between localized messages, loaders,
  * and rendered UI sections.
@@ -7,10 +7,8 @@
 
 /**
  * A localized link used by landing-page components.
- *
- * This type defines a stable shape for related data.
  */
-export interface LandingLink {
+export interface ContentLink {
   /** Human-readable link label rendered in UI. */
   readonly label: string;
   /** URL or path destination for the link. */
@@ -19,36 +17,32 @@ export interface LandingLink {
   readonly isInternal: boolean;
   /** Indicates the link should open in a new browser tab. */
   readonly opensInNewTab: boolean;
+  /** Some links need a string key identifier to help us construct link categories */
+  readonly key?: string;
 }
 
 /**
  * One item in the header primary submenu.
- *
- * This type defines a stable shape for related data.
  */
 export interface HeaderPrimarySubmenuLink {
   /** Link metadata rendered in the submenu. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
  * A primary navigation item that renders as a simple link.
- *
- * This type defines a stable shape for related data.
  */
 export interface HeaderPrimaryLinkItem {
   /** Discriminator for a simple link item. */
   readonly kind: "link";
   /** Link metadata rendered in the primary navigation. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
   /** Indicates the link points to the current section/page. */
   readonly isCurrent: boolean;
 }
 
 /**
  * A primary navigation item that renders a submenu accordion trigger.
- *
- * This type defines a stable shape for related data.
  */
 export interface HeaderPrimarySubmenuItem {
   /** Discriminator for a submenu item. */
@@ -65,39 +59,33 @@ export interface HeaderPrimarySubmenuItem {
 
 /**
  * A primary navigation item rendered in the NJWDS header.
- *
- * This type defines a stable shape for related data.
  */
 export type HeaderPrimaryItem = HeaderPrimaryLinkItem | HeaderPrimarySubmenuItem;
 
 /**
  * Localized content for the government identity banner.
- *
- * This type defines a stable shape for related data.
  */
-export interface LandingBannerContent {
+export interface LayoutBannerContent {
   /** Accessible label for the banner section landmark. */
   readonly sectionAriaLabel: string;
   /** Alt text for the New Jersey state seal image. */
   readonly stateSealAlt: string;
   /** Link to the official New Jersey state site. */
-  readonly stateSiteLink: LandingLink;
+  readonly stateSiteLink: ContentLink;
   /** Link displaying the governor and lieutenant governor names. */
-  readonly governorIdentityLink: LandingLink;
+  readonly governorIdentityLink: ContentLink;
   /** Link to the state updates subscription destination. */
-  readonly updatesLink: LandingLink;
+  readonly updatesLink: ContentLink;
 }
 
 /**
  * Localized content for the NJWDS extended header.
- *
- * This type defines a stable shape for related data.
  */
-export interface LandingHeaderContent {
+export interface LayoutHeaderContent {
   /** Accessible label for the primary navigation region. */
   readonly primaryNavigationAriaLabel: string;
   /** Home link metadata rendered in the logo area. */
-  readonly homeLink: LandingLink;
+  readonly homeLink: ContentLink;
   /** Title attribute for the home link. */
   readonly homeLinkTitle: string;
   /** Aria label for the home link. */
@@ -111,7 +99,7 @@ export interface LandingHeaderContent {
   /** Collection of primary navigation items. */
   readonly primaryItems: readonly HeaderPrimaryItem[];
   /** Collection of secondary navigation links. */
-  readonly secondaryLinks: readonly LandingLink[];
+  readonly secondaryLinks: readonly ContentLink[];
   /** Form action destination for the header search form. */
   readonly searchAction: string;
   /** Accessible label for the search input. */
@@ -122,8 +110,6 @@ export interface LandingHeaderContent {
 
 /**
  * Localized content for the hero section.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingHeroContent {
   /** Accessible label for the hero section landmark. */
@@ -135,13 +121,11 @@ export interface LandingHeroContent {
   /** Hero supporting paragraph text. */
   readonly paragraph: string;
   /** Primary hero call-to-action link. */
-  readonly callToActionLink: LandingLink;
+  readonly callToActionLink: ContentLink;
 }
 
 /**
  * Localized content for the tagline section.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingTaglineContent {
   /** Heading text for the tagline section. */
@@ -152,8 +136,6 @@ export interface LandingTaglineContent {
 
 /**
  * Localized content for one graphic-list card.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingGraphicListItem {
   /** Heading text for the graphic-list item. */
@@ -166,8 +148,6 @@ export interface LandingGraphicListItem {
 
 /**
  * Localized content for the dark graphic-list section.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingGraphicListContent {
   /** Items rendered in the graphic-list layout. */
@@ -176,8 +156,6 @@ export interface LandingGraphicListContent {
 
 /**
  * Localized content for the section call-to-action block.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingCallToActionContent {
   /** Element ID used as the CTA section anchor target. */
@@ -187,19 +165,17 @@ export interface LandingCallToActionContent {
   /** Introductory paragraph rendered for the CTA section. */
   readonly intro: string;
   /** CTA button link metadata. */
-  readonly callToActionLink: LandingLink;
+  readonly callToActionLink: ContentLink;
 }
 
 /**
  * Localized content for one footer social link.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingSocialLink {
   /** Class name modifier suffix for NJWDS social icon styling. */
   readonly modifier: string;
   /** Link metadata for the social destination. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
   /** Alt text for the social icon image. */
   readonly iconAlt: string;
   /** Path to the social icon asset. */
@@ -208,20 +184,16 @@ export interface LandingSocialLink {
 
 /**
  * Localized content for one footer primary link.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingFooterPrimaryLink {
   /** Link metadata rendered in the footer primary nav list. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
  * Localized content for the footer section.
- *
- * This type defines a stable shape for related data.
  */
-export interface LandingFooterContent {
+export interface LayoutFooterContent {
   /** Label for the return-to-top link. */
   readonly returnToTopLabel: string;
   /** Accessible label for footer navigation. */
@@ -237,27 +209,23 @@ export interface LandingFooterContent {
   /** Contact heading rendered above phone/email links. */
   readonly contactHeading: string;
   /** Contact center phone link metadata. */
-  readonly phoneLink: LandingLink;
+  readonly phoneLink: ContentLink;
   /** Contact center email link metadata. */
-  readonly emailLink: LandingLink;
+  readonly emailLink: ContentLink;
 }
 
 /**
  * Localized content for one required identifier link.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingIdentifierRequiredLink {
   /** Link metadata rendered in the required-links list. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
  * Localized content for the identifier section.
- *
- * This type defines a stable shape for related data.
  */
-export interface LandingIdentifierContent {
+export interface LayoutIdentifierContent {
   /** Accessible label for the agency identifier section. */
   readonly agencySectionAriaLabel: string;
   /** Alt text for the state logo image. */
@@ -269,7 +237,7 @@ export interface LandingIdentifierContent {
   /** Prefix text rendered before the state link in disclaimer copy. */
   readonly disclaimerPrefix: string;
   /** Link metadata rendered in disclaimer copy. */
-  readonly disclaimerLink: LandingLink;
+  readonly disclaimerLink: ContentLink;
   /** Accessible label for the required links navigation. */
   readonly importantLinksAriaLabel: string;
   /** Required links rendered in identifier navigation. */
@@ -281,19 +249,27 @@ export interface LandingIdentifierContent {
 }
 
 /**
- * All localized content needed to render the landing page.
- *
- * This type defines a stable shape for related data.
+ * Shared localized content rendered on every page of the site.
  */
-export interface LandingPageContent {
+export interface LayoutContent {
   /** Label text rendered by the skip navigation link. */
   readonly skipNavigationLabel: string;
   /** Element ID used for main-content anchor navigation. */
   readonly mainContentId: string;
   /** Banner section content. */
-  readonly banner: LandingBannerContent;
+  readonly banner: LayoutBannerContent;
   /** Header section content. */
-  readonly header: LandingHeaderContent;
+  readonly header: LayoutHeaderContent;
+  /** Footer section content. */
+  readonly footer: LayoutFooterContent;
+  /** Identifier section content. */
+  readonly identifier: LayoutIdentifierContent;
+}
+
+/**
+ * All localized content needed to render the landing page.
+ */
+export interface LandingPageContent {
   /** Hero section content. */
   readonly hero: LandingHeroContent;
   /** Tagline section content. */
@@ -302,16 +278,10 @@ export interface LandingPageContent {
   readonly graphicList: LandingGraphicListContent;
   /** CTA section content. */
   readonly callToAction: LandingCallToActionContent;
-  /** Footer section content. */
-  readonly footer: LandingFooterContent;
-  /** Identifier section content. */
-  readonly identifier: LandingIdentifierContent;
 }
 
 /**
  * Localized metadata content for the root document.
- *
- * This type defines a stable shape for related data.
  */
 export interface LandingMetadataContent {
   /** Document title used in metadata. */
@@ -321,9 +291,17 @@ export interface LandingMetadataContent {
 }
 
 /**
+ * Localized content for the learn section side navigation.
+ */
+export interface LearnSideNavContent {
+  /** Accessible name for the section. */
+  readonly ariaLabel: string;
+  /** Ordered list of pages rendered in the side navigation. */
+  readonly pages: readonly ContentLink[];
+}
+
+/**
  * One category card rendered in the learn page grid.
- *
- * This type defines a stable shape for related data.
  */
 export interface LearnCategory {
   /** Heading text for the category card. */
@@ -331,13 +309,11 @@ export interface LearnCategory {
   /** Supporting text rendered in the category card. */
   readonly description: string;
   /** Link metadata for the category card CTA. */
-  readonly link: LandingLink;
+  readonly link: ContentLink;
 }
 
 /**
  * All localized content needed to render the learn page.
- *
- * This type defines a stable shape for related data.
  */
 export interface LearnPageContent {
   /** Navigation name for the learn section. */
@@ -346,18 +322,20 @@ export interface LearnPageContent {
   readonly subHeadingText: string;
   /** Secondary heading text rendered above the categories grid. */
   readonly heading2: string;
+  /** Side navigation content for the learn section. */
+  readonly sideNav: LearnSideNavContent;
   /** Category cards rendered in the learn grid. */
   readonly categories: readonly LearnCategory[];
 }
 
 /**
  * Complete localized message payload for one locale.
- *
- * This type defines a stable shape for related data.
  */
 export interface ApplicationMessages {
   /** Metadata strings for the localized route. */
   readonly metadata: LandingMetadataContent;
+  /** Shared layout content for banner, header, footer, and identifier on all pages. */
+  readonly layout: LayoutContent;
   /** Landing-page content strings and links. */
   readonly landing: LandingPageContent;
   /** Learn page content strings and links. */

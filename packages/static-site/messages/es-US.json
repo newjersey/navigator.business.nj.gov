@@ -3,7 +3,7 @@
     "title": "Business.NJ.gov | Planifique, Comience y Haga Crecer",
     "description": "Prototipo de página principal para una experiencia de orientación empresarial impulsada por Next.js y NJWDS."
   },
-  "landing": {
+  "layout": {
     "skipNavigationLabel": "Saltar al contenido principal",
     "mainContentId": "main-content",
     "banner": {
@@ -77,60 +77,6 @@
       "searchAction": "/search",
       "searchInputLabel": "Buscar en el sitio",
       "searchSubmitIconAlt": "Buscar"
-    },
-    "hero": {
-      "sectionAriaLabel": "Introducción",
-      "callout": "Las necesidades de su negocio en New Jersey.",
-      "title": "Todo en un solo lugar.",
-      "paragraph": "Obtenga su guía personalizada para comenzar su negocio, encuentre oportunidades de financiamiento y descubra sus obligaciones fiscales.",
-      "callToActionLink": {
-        "label": "Obtenga su guía personalizada",
-        "href": "https://account.business.nj.gov/",
-        "isInternal": false,
-        "opensInNewTab": true
-      }
-    },
-    "tagline": {
-      "title": "Planifique, opere y crezca con confianza",
-      "paragraphs": [
-        "Business.NJ.gov es el recurso empresarial del estado para ayudarle a planificar, comenzar, operar y hacer crecer su negocio.",
-        "Use su cuenta para crear una hoja de ruta personalizada, seguir solicitudes y conectarse con un asesor empresarial de New Jersey sin costo."
-      ]
-    },
-    "graphicList": {
-      "items": [
-        {
-          "title": "Registro empresarial",
-          "paragraph": "Inicie su LLC, corporación o sociedad con orientación estatal paso a paso.",
-          "imageAlt": "Texto alternativo"
-        },
-        {
-          "title": "Licencias y permisos",
-          "paragraph": "Encuentre los requisitos de licencias y permisos según su industria y ubicación.",
-          "imageAlt": "Texto alternativo"
-        },
-        {
-          "title": "Nombres comerciales",
-          "paragraph": "Revise disponibilidad y reglas de nombres para su negocio en New Jersey.",
-          "imageAlt": "Texto alternativo"
-        },
-        {
-          "title": "Obligaciones del empleador",
-          "paragraph": "Conozca requisitos laborales, de nómina y de registro antes de contratar.",
-          "imageAlt": "Texto alternativo"
-        }
-      ]
-    },
-    "callToAction": {
-      "sectionId": "test-section-id",
-      "title": "Más apoyo para su negocio",
-      "intro": "¿Busca asesoría más especializada? Explore guías personalizadas gratuitas, conéctese con un asesor empresarial y reciba actualizaciones sobre programas y regulaciones relevantes para su negocio.",
-      "callToActionLink": {
-        "label": "Explorar Business.NJ.gov",
-        "href": "https://business.nj.gov/",
-        "isInternal": false,
-        "opensInNewTab": true
-      }
     },
     "footer": {
       "returnToTopLabel": "Volver arriba",
@@ -335,10 +281,106 @@
       "usGovernmentDescription": "Copyright © 2026 Estado de New Jersey"
     }
   },
+  "landing": {
+    "hero": {
+      "sectionAriaLabel": "Introducción",
+      "callout": "Las necesidades de su negocio en New Jersey.",
+      "title": "Todo en un solo lugar.",
+      "paragraph": "Obtenga su guía personalizada para comenzar su negocio, encuentre oportunidades de financiamiento y descubra sus obligaciones fiscales.",
+      "callToActionLink": {
+        "label": "Obtenga su guía personalizada",
+        "href": "https://account.business.nj.gov/",
+        "isInternal": false,
+        "opensInNewTab": true
+      }
+    },
+    "tagline": {
+      "title": "Planifique, opere y crezca con confianza",
+      "paragraphs": [
+        "Business.NJ.gov es el recurso empresarial del estado para ayudarle a planificar, comenzar, operar y hacer crecer su negocio.",
+        "Use su cuenta para crear una hoja de ruta personalizada, seguir solicitudes y conectarse con un asesor empresarial de New Jersey sin costo."
+      ]
+    },
+    "graphicList": {
+      "items": [
+        {
+          "title": "Registro empresarial",
+          "paragraph": "Inicie su LLC, corporación o sociedad con orientación estatal paso a paso.",
+          "imageAlt": "Texto alternativo"
+        },
+        {
+          "title": "Licencias y permisos",
+          "paragraph": "Encuentre los requisitos de licencias y permisos según su industria y ubicación.",
+          "imageAlt": "Texto alternativo"
+        },
+        {
+          "title": "Nombres comerciales",
+          "paragraph": "Revise disponibilidad y reglas de nombres para su negocio en New Jersey.",
+          "imageAlt": "Texto alternativo"
+        },
+        {
+          "title": "Obligaciones del empleador",
+          "paragraph": "Conozca requisitos laborales, de nómina y de registro antes de contratar.",
+          "imageAlt": "Texto alternativo"
+        }
+      ]
+    },
+    "callToAction": {
+      "sectionId": "test-section-id",
+      "title": "Más apoyo para su negocio",
+      "intro": "¿Busca asesoría más especializada? Explore guías personalizadas gratuitas, conéctese con un asesor empresarial y reciba actualizaciones sobre programas y regulaciones relevantes para su negocio.",
+      "callToActionLink": {
+        "label": "Explorar Business.NJ.gov",
+        "href": "https://business.nj.gov/",
+        "isInternal": false,
+        "opensInNewTab": true
+      }
+    }
+  },
   "learn": {
     "name": "Learn",
     "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
     "heading2": "Where are you in your business journey?",
+    "sideNav": {
+      "ariaLabel": "Side navigation",
+      "pages": [
+        {
+          "key": "learn",
+          "label": "Introducción",
+          "href": "/learn",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "plan",
+          "label": "Planificar",
+          "href": "/learn/plan",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "start",
+          "label": "Comenzar",
+          "href": "/learn/start",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "operate",
+          "label": "Operar",
+          "href": "/learn/operate",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "grow",
+          "label": "Crecer",
+          "href": "/learn/grow",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
+      ]
+    },
     "categories": [
       {
         "title": "Planning",

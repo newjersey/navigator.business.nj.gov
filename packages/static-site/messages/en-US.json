@@ -3,7 +3,7 @@
     "title": "Business.NJ.gov | Plan, Start, and Grow",
     "description": "Landing page prototype for a Next.js and NJWDS-powered business guidance experience."
   },
-  "landing": {
+  "layout": {
     "skipNavigationLabel": "Skip to main content",
     "mainContentId": "main-content",
     "banner": {
@@ -77,60 +77,6 @@
       "searchAction": "/search",
       "searchInputLabel": "Search site",
       "searchSubmitIconAlt": "Search"
-    },
-    "hero": {
-      "sectionAriaLabel": "Introduction",
-      "callout": "Your New Jersey business needs.",
-      "title": "All in one place.",
-      "paragraph": "Get your personalized business starter kit, find funding opportunities, discover your tax obligations, and more.",
-      "callToActionLink": {
-        "label": "Get Your Personalized Guide",
-        "href": "https://account.business.nj.gov/",
-        "isInternal": false,
-        "opensInNewTab": true
-      }
-    },
-    "tagline": {
-      "title": "Start, operate, and grow with confidence",
-      "paragraphs": [
-        "Business.NJ.gov is New Jersey's business-friendly resource, providing you with the information you need to plan, start, operate, and grow your business.",
-        "Use your account to build a personalized roadmap, track applications, and connect with a New Jersey business advocate for no-cost support."
-      ]
-    },
-    "graphicList": {
-      "items": [
-        {
-          "title": "Business Registration",
-          "paragraph": "Start your LLC, corporation, or partnership with clear, step-by-step state guidance.",
-          "imageAlt": "Alt text"
-        },
-        {
-          "title": "Licenses & Permits",
-          "paragraph": "Find required licenses and permits by business type, industry, and location.",
-          "imageAlt": "Alt text"
-        },
-        {
-          "title": "Business Names",
-          "paragraph": "Choose an available name and understand naming rules for your New Jersey business.",
-          "imageAlt": "Alt text"
-        },
-        {
-          "title": "Employer Obligations",
-          "paragraph": "Learn labor, payroll, and registration requirements before hiring employees.",
-          "imageAlt": "Alt text"
-        }
-      ]
-    },
-    "callToAction": {
-      "sectionId": "test-section-id",
-      "title": "For More Support",
-      "intro": "Looking for more expert advice? Explore free personalized guides, connect with a business advocate, and sign up for updates about grants, programs, and regulations likely to affect your business.",
-      "callToActionLink": {
-        "label": "Explore Business.NJ.gov",
-        "href": "https://business.nj.gov/",
-        "isInternal": false,
-        "opensInNewTab": true
-      }
     },
     "footer": {
       "returnToTopLabel": "Return to top",
@@ -335,7 +281,103 @@
       "usGovernmentDescription": "Copyright © 2026 State of New Jersey"
     }
   },
+  "landing": {
+    "hero": {
+      "sectionAriaLabel": "Introduction",
+      "callout": "Your New Jersey business needs.",
+      "title": "All in one place.",
+      "paragraph": "Get your personalized business starter kit, find funding opportunities, discover your tax obligations, and more.",
+      "callToActionLink": {
+        "label": "Get Your Personalized Guide",
+        "href": "https://account.business.nj.gov/",
+        "isInternal": false,
+        "opensInNewTab": true
+      }
+    },
+    "tagline": {
+      "title": "Start, operate, and grow with confidence",
+      "paragraphs": [
+        "Business.NJ.gov is New Jersey's business-friendly resource, providing you with the information you need to plan, start, operate, and grow your business.",
+        "Use your account to build a personalized roadmap, track applications, and connect with a New Jersey business advocate for no-cost support."
+      ]
+    },
+    "graphicList": {
+      "items": [
+        {
+          "title": "Business Registration",
+          "paragraph": "Start your LLC, corporation, or partnership with clear, step-by-step state guidance.",
+          "imageAlt": "Alt text"
+        },
+        {
+          "title": "Licenses & Permits",
+          "paragraph": "Find required licenses and permits by business type, industry, and location.",
+          "imageAlt": "Alt text"
+        },
+        {
+          "title": "Business Names",
+          "paragraph": "Choose an available name and understand naming rules for your New Jersey business.",
+          "imageAlt": "Alt text"
+        },
+        {
+          "title": "Employer Obligations",
+          "paragraph": "Learn labor, payroll, and registration requirements before hiring employees.",
+          "imageAlt": "Alt text"
+        }
+      ]
+    },
+    "callToAction": {
+      "sectionId": "test-section-id",
+      "title": "For More Support",
+      "intro": "Looking for more expert advice? Explore free personalized guides, connect with a business advocate, and sign up for updates about grants, programs, and regulations likely to affect your business.",
+      "callToActionLink": {
+        "label": "Explore Business.NJ.gov",
+        "href": "https://business.nj.gov/",
+        "isInternal": false,
+        "opensInNewTab": true
+      }
+    }
+  },
   "learn": {
+    "sideNav": {
+      "ariaLabel": "Side navigation",
+      "pages": [
+        {
+          "key": "learn",
+          "label": "Introduction",
+          "href": "/learn",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "plan",
+          "label": "Plan",
+          "href": "/learn/plan",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "start",
+          "label": "Start",
+          "href": "/learn/start",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "operate",
+          "label": "Operate",
+          "href": "/learn/operate",
+          "isInternal": true,
+          "opensInNewTab": false
+        },
+        {
+          "key": "grow",
+          "label": "Grow",
+          "href": "/learn/grow",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
+      ]
+    },
     "name": "Learn",
     "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
     "heading2": "Where are you in your business journey?",
