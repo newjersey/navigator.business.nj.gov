@@ -24,7 +24,7 @@ status: rolling application
 programPurpose: In State
 agency:
   - invest-newark
-agencyContact: ovillares@gnec.com
+agencyContact: ovillares@gnec.org
 businessStage: early-stage
 employeesRequired: yes
 homeBased: no
