@@ -1,5 +1,16 @@
 .yarn
 !.yarn/releases
 !.yarn/plugins
+.git
+.next
+**/.next
+coverage
+**/coverage
+test-results
+**/test-results
+playwright-report
+**/playwright-report
 node_modules
 **/node_modules
+.DS_Store
+**/.DS_Store

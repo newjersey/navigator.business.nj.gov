@@ -184,3 +184,13 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator
+
+      - name: Read Release Version
+        id: release-version
+        shell: bash
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy Static Site to Production
+        uses: ./.github/actions/deploy-static-site
+        with:
+          image_tag: ${{ steps.release-version.outputs.version }}

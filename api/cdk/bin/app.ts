@@ -7,6 +7,8 @@ import { IamStack } from "../lib/iamStack";
 import { LambdaStack } from "../lib/lambdaStack";
 import { StorageStack } from "../lib/storageStack";
 import { EncryptionStack } from "../lib/encryptionStack";
+import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
+import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
 import {
   BUSINESSES_TABLE,
   CONTENT_STAGE,
@@ -25,98 +27,122 @@ const app = new cdk.App();
 const region = "us-east-1";
 const stage = process.env.STAGE || "local";
 const account_id = process.env.AWS_ACCOUNT_ID;
+const staticSiteImageTag = process.env.STATIC_SITE_IMAGE_TAG;
+const isStaticSiteDeploy = staticSiteImageTag !== undefined && staticSiteImageTag.trim().length > 0;
+const isMyAccountDeploy = !isStaticSiteDeploy;
 
 const env = {
   account: account_id,
   region: region,
 };
 
-new DataStack(app, `DataStack-${stage}`, {
-  stage: stage,
-  env,
-});
-
-const iamStack = new IamStack(app, `IamStack-${stage}`, {
-  stage,
-  env,
-});
-
-const storageStack = new StorageStack(app, `StorageStack-${stage}`, {
-  stage,
-  env,
-});
-
-const taxKMSRole = iam.Role.fromRoleName(
-  iamStack,
-  "TaxKMSRole",
-  "iamRoleForTaxIdEncryptionAndHashing",
+const staticSiteRepositoryStack = new StaticSiteRepositoryStack(
+  app,
+  `StaticSiteRepositoryStack-${stage}`,
+  {
+    stage,
+    env,
+  },
 );
 
-new EncryptionStack(app, `EncryptionStack-${stage}`, {
-  stage,
-  env,
-  taxKMSRole,
-});
-
-const monitoringStack = new MonitoringStack(app, `MonitoringStack-${stage}`, {
-  stage,
-  env,
-});
-
-if (stage === DEV_STAGE) {
-  new BackupStack(app, `BackupStack-${DEV_STAGE}-shared`, {
+if (isStaticSiteDeploy) {
+  new StaticSiteServiceStack(app, `StaticSiteServiceStack-${stage}`, {
+    stage,
     env,
-    backupRole: iamStack.backupRole!,
-    tableNames: [
-      `${BUSINESSES_TABLE}-${DEV_STAGE}`,
-      `${USERS_TABLE}-${DEV_STAGE}`,
-      `${MESSAGES_TABLE}-${DEV_STAGE}`,
-      `${BUSINESSES_TABLE}-${CONTENT_STAGE}`,
-      `${MESSAGES_TABLE}-${CONTENT_STAGE}`,
-      `${USERS_TABLE}-${CONTENT_STAGE}`,
-      `${BUSINESSES_TABLE}-${TESTING_STAGE}`,
-      `${MESSAGES_TABLE}-${TESTING_STAGE}`,
-      `${USERS_TABLE}-${TESTING_STAGE}`,
-    ],
+    repository: staticSiteRepositoryStack.repository,
+    imageTag: staticSiteImageTag,
   });
 }
 
-if (stage === STAGING_STAGE) {
-  new BackupStack(app, `BackupStack-${STAGING_STAGE}`, {
+if (isMyAccountDeploy) {
+  new DataStack(app, `DataStack-${stage}`, {
+    stage: stage,
     env,
-    backupRole: iamStack.backupRole!,
-    tableNames: [
-      `${BUSINESSES_TABLE}-${STAGING_STAGE}`,
-      `${MESSAGES_TABLE}-${STAGING_STAGE}`,
-      `${USERS_TABLE}-${STAGING_STAGE}`,
-    ],
+  });
+
+  const iamStack = new IamStack(app, `IamStack-${stage}`, {
+    stage,
+    env,
+  });
+
+  const storageStack = new StorageStack(app, `StorageStack-${stage}`, {
+    stage,
+    env,
+  });
+
+  const taxKMSRole = iam.Role.fromRoleName(
+    iamStack,
+    "TaxKMSRole",
+    "iamRoleForTaxIdEncryptionAndHashing",
+  );
+
+  new EncryptionStack(app, `EncryptionStack-${stage}`, {
+    stage,
+    env,
+    taxKMSRole,
+  });
+
+  const monitoringStack = new MonitoringStack(app, `MonitoringStack-${stage}`, {
+    stage,
+    env,
+  });
+
+  if (stage === DEV_STAGE) {
+    new BackupStack(app, `BackupStack-${DEV_STAGE}-shared`, {
+      env,
+      backupRole: iamStack.backupRole!,
+      tableNames: [
+        `${BUSINESSES_TABLE}-${DEV_STAGE}`,
+        `${USERS_TABLE}-${DEV_STAGE}`,
+        `${MESSAGES_TABLE}-${DEV_STAGE}`,
+        `${BUSINESSES_TABLE}-${CONTENT_STAGE}`,
+        `${MESSAGES_TABLE}-${CONTENT_STAGE}`,
+        `${USERS_TABLE}-${CONTENT_STAGE}`,
+        `${BUSINESSES_TABLE}-${TESTING_STAGE}`,
+        `${MESSAGES_TABLE}-${TESTING_STAGE}`,
+        `${USERS_TABLE}-${TESTING_STAGE}`,
+      ],
+    });
+  }
+
+  if (stage === STAGING_STAGE) {
+    new BackupStack(app, `BackupStack-${STAGING_STAGE}`, {
+      env,
+      backupRole: iamStack.backupRole!,
+      tableNames: [
+        `${BUSINESSES_TABLE}-${STAGING_STAGE}`,
+        `${MESSAGES_TABLE}-${STAGING_STAGE}`,
+        `${USERS_TABLE}-${STAGING_STAGE}`,
+      ],
+    });
+  }
+
+  if (stage === PROD_STAGE) {
+    new BackupStack(app, `BackupStack-${PROD_STAGE}`, {
+      env,
+      backupRole: iamStack.backupRole!,
+      tableNames: [
+        `${BUSINESSES_TABLE}-${PROD_STAGE}`,
+        `${MESSAGES_TABLE}-${PROD_STAGE}`,
+        `${USERS_TABLE}-${PROD_STAGE}`,
+      ],
+    });
+  }
+
+  const lambdaStack = new LambdaStack(app, `LambdaStack-${stage}`, {
+    stage: stage,
+    lambdaRole: iamStack.role,
+    messagesBucket: storageStack.messagesBucket,
+    intercomMacrosBucket: stage === DEV_STAGE ? storageStack.intercomMacrosBucket : undefined,
+    migrationLambdaTopic: monitoringStack.migrationLambdaTopic,
+    env,
+  });
+
+  new ApiStack(app, `ApiStack-${stage}`, {
+    stage,
+    lambdas: {
+      express: { lambda: lambdaStack.expressLambda },
+      githubOauth2: { lambda: lambdaStack.githubOauth2Lambda },
+    },
   });
 }
-
-if (stage === PROD_STAGE) {
-  new BackupStack(app, `BackupStack-${PROD_STAGE}`, {
-    env,
-    backupRole: iamStack.backupRole!,
-    tableNames: [
-      `${BUSINESSES_TABLE}-${PROD_STAGE}`,
-      `${MESSAGES_TABLE}-${PROD_STAGE}`,
-      `${USERS_TABLE}-${PROD_STAGE}`,
-    ],
-  });
-}
-const lambdaStack = new LambdaStack(app, `LambdaStack-${stage}`, {
-  stage: stage,
-  lambdaRole: iamStack.role,
-  messagesBucket: storageStack.messagesBucket,
-  intercomMacrosBucket: stage === DEV_STAGE ? storageStack.intercomMacrosBucket : undefined,
-  migrationLambdaTopic: monitoringStack.migrationLambdaTopic,
-  env,
-});
-
-new ApiStack(app, `ApiStack-${stage}`, {
-  stage,
-  lambdas: {
-    express: { lambda: lambdaStack.expressLambda },
-    githubOauth2: { lambda: lambdaStack.githubOauth2Lambda },
-  },
-});
