@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import PageContent from "@/components/learn/PageContent";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { loadPageBySlug } from "@/domain/content/loadContent";
 import { hasAppLocale } from "@/domain/i18n/locales";
@@ -39,7 +40,7 @@ const ContentPage = async ({ params }: Props) => {
 
   return (
     <>
-      <h1>{page.name}</h1>
+      <PageContent page={page} />
     </>
   );
 };
