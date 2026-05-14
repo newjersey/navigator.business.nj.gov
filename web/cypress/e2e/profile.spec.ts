@@ -16,11 +16,12 @@ import {
   homeBasedIndustries,
   liquorLicenseIndustries,
   randomHomeBasedIndustry,
-  randomNonHomeBasedIndustry,
+  randomNonHomeBasedNonDomesticEmployerIndustry,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import {
   Industry,
   arrayOfSectors,
+  employmentPersonnelServiceOptions,
   randomElementFromArray,
   randomInt,
 } from "@businessnjgovnavigator/shared/";
@@ -30,11 +31,10 @@ describe("Profile [feature] [all] [group4]", () => {
     cy.loginByCognitoApi();
   });
 
-  // Todo: fix and remove skip https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/13889
-  describe.skip("navigates to profile page and updates all fields", () => {
+  describe("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
-      const industry = randomNonHomeBasedIndustry();
-      const homeBasedQuestion = industry.industryOnboardingQuestions.canBeHomeBased
+      const industry = randomNonHomeBasedNonDomesticEmployerIndustry();
+      const doesHomeBasedQuestionExist = industry.industryOnboardingQuestions.canBeHomeBased
         ? Boolean(randomInt() % 2)
         : undefined;
       const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
@@ -43,12 +43,17 @@ describe("Profile [feature] [all] [group4]", () => {
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
+      const employmentPersonnelServiceType = industry.industryOnboardingQuestions
+        .isEmploymentAndPersonnelTypeApplicable
+        ? randomElementFromArray([...employmentPersonnelServiceOptions])
+        : undefined;
       const townDisplayName = "Barnegat";
 
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
         requiresCpa,
+        employmentPersonnelServiceType,
       });
       updateNewBusinessProfilePage({
         townDisplayName,
@@ -56,7 +61,7 @@ describe("Profile [feature] [all] [group4]", () => {
 
       checkNewBusinessProfilePage({
         industry,
-        homeBasedQuestion,
+        doesHomeBasedQuestionExist,
         liquorLicenseQuestion,
         townDisplayName,
       });
