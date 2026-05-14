@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -11,6 +12,7 @@ import { ReactElement, ReactNode } from "react";
 
 interface Props {
   task: types.Task;
+  showCheckbox?: boolean;
 }
 
 export const Task = (props: Props): ReactElement => {
@@ -42,7 +44,11 @@ export const Task = (props: Props): ReactElement => {
       >
         {isTabletAndUp && (
           <span className="margin-right-205 margin-top-05 padding-top-2px">
-            {TaskProgressTagLookup[taskProgress]}
+            {props.showCheckbox ? (
+              <TaskProgressCheckbox taskId={props.task.id} disabledTooltipText="" />
+            ) : (
+              TaskProgressTagLookup[taskProgress]
+            )}
           </span>
         )}
         <div>
