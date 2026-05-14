@@ -4,6 +4,9 @@
 .git
 .next
 **/.next
+# WebApp.Dockerfile packages the Next.js build generated before docker build.
+!web/.next
+!web/.next/**
 coverage
 **/coverage
 test-results
