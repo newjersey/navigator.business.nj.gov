@@ -5,21 +5,27 @@
  */
 
 import { loadPages } from "@/domain/content/loadContent";
+import type { PageItem } from "@/domain/content/types";
 
 export interface CategoryHierarchy {
-  /** Ordered page slugs belonging to this category. */
-  readonly children: string[];
+  /** page slugs belonging to this category. */
+  readonly children: PageItem[];
 }
 
 /** the expected category strings are plan/start/operate/grow but this is generic to avoid hardcoding that */
-export const CATEGORY_HIERARCHY: Readonly<Record<string, CategoryHierarchy>> = (() => {
+export const buildCategoryHierarchy = (
+  pages: PageItem[],
+): Readonly<Record<string, CategoryHierarchy>> => {
   const result: Record<string, CategoryHierarchy> = {};
 
-  for (const page of loadPages()) {
-    if (!page.category || !page.slug) continue;
+  for (const page of pages) {
+    if (!page.slug) throw new Error(`Page "${page.name}" is missing a slug`);
+    if (!page.category) continue;
     result[page.category] ??= { children: [] };
-    result[page.category].children.push(page.slug);
+    result[page.category].children.push(page);
   }
 
   return result;
-})();
+};
+
+export const CATEGORY_HIERARCHY = buildCategoryHierarchy(loadPages());
