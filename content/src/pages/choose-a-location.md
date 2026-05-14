@@ -11,6 +11,7 @@ main-text-2: |-
 
   Finding a great location for your business is a critical step to set your business up for success. Do your research on the area, and think about the needs of your customers and employees. You can also save time and money down the line by learning about zoning and building permits, and getting smart about how to negotiate a commercial lease.
 link-text-2: Additional Site Selection Research
+link-url-2:
 main-text-3: |-
   ## Home-Based Businesses
 

@@ -16,6 +16,7 @@ main-text-2: "The plan should be clear about\_what you intend to sell, offer a c
 heading-3: "Obtain a Certificate of Free Sale\_"
 main-text-3: Certificates of Free Sale are required by many countries and/or individual buyers that may import your goods. A Certificate of Free Sale certifies that a company is in substantial compliance with the state and federal standards and is equivalent to products marketed domestically in the United States.
 link-text-3: Obtain a Certificate of Free Sale
+link-url-3: https://www.state.nj.us/health/ceohs/phfpp/export/
 heading-4: Learn About Industry Specific Exporting Requirements
 main-text-4: |-
   ### **Industry: Food, Drug, Medical Devices, and Hygiene**‍

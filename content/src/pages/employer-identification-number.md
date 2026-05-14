@@ -17,9 +17,11 @@ main-text-1: |-
 
   If you have a fax number, write it in bold on the top of your application. The IRS will be able to fax your EIN back to typically within 4 days. Applying for your EIN by mail may take 2 to 4 weeks.
 link-text-1: IRS Website - EIN Information and Application
+link-url-1: https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers
 main-text-2: |-
   ## Individual Taxpayer Identification Number
 
   If you are not a resident of the US and do not have, or are not eligible for, a Social Security Number, you may need an Individual Taxpayer Identification Number (ITIN). While having an ITIN is not required to apply for an Employer Identification Number, it will enable you to apply for an EIN online and may be necessary for the purposes of paying taxes and other business transactions. Review the IRS website to learn more about how to apply for an ITIN.
 link-text-2: IRS Website - ITIN Information
+link-url-2: https://www.irs.gov/individuals/individual-taxpayer-identification-number
 ---

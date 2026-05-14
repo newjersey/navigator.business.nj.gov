@@ -26,4 +26,5 @@ main-text-1: |-
   * ‍**Industrial Homework: **The New Jersey Industrial Homework Law and Regulations require the issuing of licenses, permits and certificates for employers and home-based businesses involved in the manufacturing, altering, finishing and distribution of certain articles, materials and goods. The manufacturing of apparel in the home by a home worker performing work for an apparel manufacturer or contractor is prohibited.
   * ‍**Sheltered Workshop: **The New Jersey State Wage and Hour Law authorizes the employment of individuals with disabilities by charitable organizations or institutions at a rate less than the minimum wage, and requires the issuing of special permits.
 link-text-1: Business Registration Certificate
+link-url-1: https://www.nj.gov/treasury/revenue/busregcert.shtml
 ---
