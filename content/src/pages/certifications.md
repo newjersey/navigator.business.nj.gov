@@ -24,6 +24,7 @@ main-text-2: |-
 
   [Learn more about M/WBE.](/pages/mwbe)
 link-text-2: Apply for M/WBE Certification
+link-url-2: https://www.njportal.com/DOR/SBERegistry/
 heading-3: Veteran-Owned Business (VOB) and Disabled Veteran-Owned Business (DVOB)
 main-text-3: |-
   VOB or veteran-owned business is a business that has its principal place of business in the State, is independently owned and operated, and at least 51% of the business is owned and controlled by persons who are veterans. DVOB is a disabled veteran-owned business. These certifications require different applications and offer different opportunities.
@@ -32,6 +33,7 @@ main-text-3: |-
 
   ‍
 link-text-3: Apply for Certification
+link-url-3: https://business.nj.gov/pages/vob-dvob
 heading-4: Small Business Enterprise (SBE)
 main-text-4: |-
   Businesses can become an SBE or Small Business Enterprise through New Jersey's Set-Aside Program. Registered businesses become members of a limited group of vendors eligible to participate in selected contract offerings. The State aims to award 25% of its contracts and purchase order dollars to organizations registered as small businesses.
@@ -40,28 +42,33 @@ main-text-4: |-
 
   ‍
 link-text-4: Apply for SBE Certification
+link-url-4: https://www.njportal.com/DOR/SBERegistry/
 heading-5: Emerging Small Business Enterprise (ESBE) and Disadvantaged Business Enterprise (DBE) Certifications
 main-text-5: |-
   The ESBE program is a race- and gender-neutral program designed to provide select contracting opportunities to small, economically disadvantaged businesses. The program runs concurrently with the Disadvantaged Business Enterprise (DBE) program on federally funded projects.
 
   [Learn more about ESB and DBE.](/pages/esbe-and-dbe-programs)
 link-text-5: Apply for ESBE or DBE Certifications
+link-url-5: https://www.nj.gov/transportation/business/civilrights/faq.shtm#criteria
 heading-6: Lesbian, Gay Bisexual, Transgender, Queer, Questioning (LGBTQ+) Certification
 main-text-6: |-
   A lesbian, gay, bisexual, transgender, queer, questioning business (LGBTQ+) is a business that is at least 51% owned, operated, and controlled by persons who identify as LGBTQ+. Once a business has obtained certification, its contact information will be posted to a public database called [Selective Assistance Vendor Information (SAVI)](https://www20.state.nj.us/TYTR_SAVI/vendorSearch.jsp), allowing state agencies or prime contractors to the state to identify all certificate-holding businesses.
 
   [Learn more about LGBTQ+ certification.](http://business.nj.gov/pages/lgbtq)
 link-text-6: Apply for LGBTQ+ Certification
+link-url-6: https://www.njportal.com/DOR/SBERegistry
 heading-7: Urban Enterprise Zone (UEZ) Certification
 main-text-7: |-
   Qualified businesses in certain urban areas can apply to be an Urban Enterprise Zone (UEZ) business. A UEZ business may be eligible for benefits such as a reduced sales tax rate and tax-free purchases.
 
   Check if your business is in one of the[ urban areas eligible for the UEZ program](https://njdca.maps.arcgis.com/apps/InformationLookup/index.html?appid=0db472ac220a419d938e9060574d2f21). If your business is eligible, you can apply to be a UEZ business.
 link-text-7: Apply for UEZ Certification
+link-url-7: https://www.njportal.com/DOR/SBERegistry
 heading-8: Socially and Economically Disadvantaged Business (SEBD) Certification
 main-text-8: |-
   The Socially and Economically Disadvantaged Business Enterprise (SEDB) certification shows that is at least 51% owned, operated, and controlled by persons who have faced social or financial challenges. Once a business has obtained certification, its contact information will be posted to a public database called [Selective Assistance Vendor Information (SAVI)](https://www20.state.nj.us/TYTR_SAVI/vendorSearch.jsp), allowing state agencies or prime contractors to the state to identify all certificate-holding businesses.
 
   [Learn more about SEBD.](https://business.nj.gov/pages/socially-and-economically-disadvantaged-business-sebd)
 link-text-8: Apply for SEBD Certification
+link-url-8: https://business.nj.gov/pages/socially-and-economically-disadvantaged-business-sebd
 ---

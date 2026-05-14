@@ -9,6 +9,7 @@ main-text-1: Navigating the government permitting process can be challenging eve
 heading-2: Understand Building Permits and Inspections
 main-text-2: You've found a space zoned for your business, but before you start renovating to make it your own find out if you need a building permit. Building permits are required for building, structural, electrical, HVAC, and plumbing projects. They help ensure your space is safe for your team and your customers.
 link-text-2: Building Permits and Inspections
+link-url-2: /pages/building-permits-and-inspections
 heading-3: Make Your Site ADA Compliant
 main-text-3: |-
   Making your business accessible not only helps your customers, but it’s also federal and state law. The Americans with Disabilities Act (ADA) and New Jersey state requirements are in place to ensure people with disabilities or other impairments have equal access to businesses and other public facilities. 
@@ -21,6 +22,7 @@ main-text-3: |-
 heading-4: Meet State Requirements for Air Pollution When Doing Construction
 main-text-4: The Department of Environmental Protection’s Bureau of Stationary Sources is responsible for permitting stationary sources of air pollution, such as factories, power plants, etc.—both old sources (those already constructed) and newer facilities—to ensure they do not adversely affect air quality in your neighborhood or anywhere in the state. Some businesses will require air permits for their business operations.
 link-text-4: Determine If Your Business Requires Air Permits
+link-url-4: https://www.state.nj.us/dep/aqpp/
 heading-5: Meet State Requirements for Land Use and Water Protection
 main-text-5: |-
   The Department of Environmental Protection's strategy is to manage New Jersey's land. This allows the department to protect the quality of our drinking water, other waterways, and wildlife. There are a variety of regulations that could apply to your project, including the Freshwater Wetlands Protection Act, Flood Hazard Area Control Act, Wetlands Act of 1970, Coastal Area Facility Review Act, Waterfront Development Law, Tidelands Act, NJ Water Pollution Control Act, and the Highlands Water Protection and Planning Act.
@@ -39,10 +41,13 @@ main-text-7: |-
 
   ‍
 link-text-7: Additional Information and Application Forms
+link-url-7:
 heading-8: Obtain a Certificate of Need Program for Facilities that Meet Community Needs
 main-text-8: A Certificate of Need is a regulatory process governing the construction, relocation, or renovation of certain healthcare facilities. The Certificate of Need program helps ensure new facilities, or the expansion of existing facilities, meet the needs of the community. This helps to avoid investment in duplicate facilities.
 link-text-8: Certificate of Need Forms and Applications
+link-url-8:
 heading-9: Ensure Your Site Meets Fire Safety Requirements
 main-text-9: "Once you've completed site construction or renovation and passed all building inspections, register your business with the state Division of Fire Safety or your Local Enforcing Agency (LEA) to operate. LEAs, such as a fire prevention bureau, fire department, or fire district, enforce state and local fire safety regulations in their town.\_\n\nFind your town’s LEA and contact them to determine if you need to register with the State or LEA and how to register. Don’t forget to ask your LEA how often your business needs to be inspected after opening so you can stay compliant with regulations."
 link-text-9: Find Your Local Enforcing Agency
+link-url-9: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county_summary/fire_code_enforcement_director.pdf
 ---

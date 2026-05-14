@@ -15,6 +15,7 @@ main-text-1: |-
 
   For more information on alternative lenders, call us at [1-800-Jersey-7.](tel:1-800-Jersey-7)
 link-text-1: Chat with us!
+link-url-1:
 heading-2: Finance with a Bank Loan
 main-text-2: |-
   Bank loans are one of the most traditional ways to finance a business. Unfortunately, they’re also some of the hardest loans to get approved for due to their stricter requirements such as having an alternate source of income, stellar credit, or being able to provide significant collateral. Have a great business plan to support your case, be persistent, shop around for the lowest interest rate, and keep in mind that you can also try other avenues, such as CDFIs.
@@ -23,6 +24,7 @@ main-text-2: |-
 heading-3: Use Lending Organizations
 main-text-3: Lending organizations, such as the Economic Development Authority (EDA) or the [U.S. Small Business Administration Lending Partners](https://www.sba.gov/partners/lenders/microloan-program/list-lenders), may be helpful for those businesses that do not qualify for more traditional (bank) lending.
 link-text-3: Browse EDA Financing Programs
+link-url-3:
 heading-4: Finance with Investors
 main-text-4: |-
   Your investors might be people you know, such as friends, relatives, and colleagues. Otherwise, an investment in your business could take the form of venture capital, which comes from individuals (often called angel investors) or venture capital firms who invest in businesses that they think are promising. Angel investors will often provide capital and mentoring in exchange for equity in the business, and may require certain conditions such as influencing how to run the company.
