@@ -31,6 +31,7 @@ const CategoryPage = async ({ params }: Props) => {
 
   const messages = getApplicationMessages({ locale });
   const currentPage = messages.learn.sideNav.pages.find((page) => page.key === category);
+  const subpages = CATEGORY_HIERARCHY[category].children;
 
   if (!currentPage) {
     notFound();
@@ -39,6 +40,13 @@ const CategoryPage = async ({ params }: Props) => {
   return (
     <>
       <h1>{currentPage.label}</h1>
+      <ul>
+        {subpages.map((subpage) => (
+          <li key={subpage.slug}>
+            <a href={`/learn/${category}/${subpage.slug}`}>{subpage.name}</a>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
