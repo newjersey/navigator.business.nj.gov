@@ -25,6 +25,7 @@ export class IamStack extends Stack {
   public readonly taxKMSRole?: iam.Role;
   public readonly authRole?: iam.Role;
   public readonly unauthRole?: iam.Role;
+  public readonly githubOidcRole?: iam.Role;
 
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
@@ -33,7 +34,51 @@ export class IamStack extends Stack {
     const isIamCreatedForDevStagingProdOnly =
       props.stage === DEV_STAGE || props.stage === STAGING_STAGE || props.stage === PROD_STAGE;
 
+    const deployRoleAllowlist: Record<string, string[]> = {
+      dev: ["dev", "testing", "content"],
+      staging: ["staging"],
+      prod: ["prod"],
+    };
+
+    const allowedStages = deployRoleAllowlist[props.stage] ?? [];
+
     if (isIamCreatedForDevStagingProdOnly) {
+      const githubOidcProvider = iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+        this,
+        "GitHubOIDC",
+        `arn:aws:iam::${this.account}:oidc-provider/token.actions.githubusercontent.com`,
+      );
+
+      this.githubOidcRole = new iam.Role(this, "GitHubOidcRole", {
+        roleName: "bfs_github_actions_oidc_role",
+        assumedBy: new iam.FederatedPrincipal(
+          githubOidcProvider.openIdConnectProviderArn,
+          {
+            StringEquals: {
+              "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+            },
+            StringLike: {
+              "token.actions.githubusercontent.com:sub": [
+                "repo:newjersey/business-data-warehouse-cdk:ref:refs/heads/main",
+              ],
+            },
+          },
+          "sts:AssumeRoleWithWebIdentity",
+        ),
+      });
+
+      this.githubOidcRole.addToPolicy(
+        new iam.PolicyStatement({
+          actions: ["sts:AssumeRole"],
+          resources: allowedStages.map(
+            (stage) =>
+              `arn:aws:iam::${this.account}:role/njbfs-business-data-warehouse-deploy-${stage}`,
+          ),
+        }),
+      );
+
+      applyStandardTags(this.githubOidcRole, props.stage);
+
       const backupRole = new iam.Role(this, "backupRole", {
         assumedBy: new iam.ServicePrincipal("backup.amazonaws.com"),
         roleName: `Backups`,
@@ -272,5 +317,50 @@ export class IamStack extends Stack {
     applyStandardTags(lambdaRole, props.stage);
 
     this.role = lambdaRole;
+
+    const warehouseDeployRole = new iam.Role(this, "WarehouseDeployRole", {
+      roleName: `njbfs-business-data-warehouse-deploy-${props.stage}`,
+      assumedBy: new iam.ArnPrincipal(this.githubOidcRole!.roleArn),
+      description: `Deploy role for Business Data Warehouse`,
+    });
+
+    // Permissions are intentionally broad to allow for bootstrap for data warehouse project.
+    warehouseDeployRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: [
+          "s3:*",
+          "dynamodb:*",
+          "glue:*",
+          "athena:*",
+          "sns:*",
+          "events:*",
+          "cloudwatch:*",
+          "logs:*",
+          "kms:*",
+          "lambda:*",
+          "cloudformation:*",
+          "states:*",
+          "iam:CreateRole",
+          "iam:DeleteRole",
+          "iam:UpdateRole",
+          "iam:UpdateAssumeRolePolicy",
+          "iam:PutRolePolicy",
+          "iam:DeleteRolePolicy",
+          "iam:AttachRolePolicy",
+          "iam:DetachRolePolicy",
+          "iam:TagRole",
+          "iam:UntagRole",
+          "iam:GetRole",
+          "iam:GetRolePolicy",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies",
+          "iam:PassRole",
+          "iam:CreateServiceLinkedRole",
+        ],
+        resources: ["*"],
+      }),
+    );
+
+    applyStandardTags(warehouseDeployRole, props.stage);
   }
 }
