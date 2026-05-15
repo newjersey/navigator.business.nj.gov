@@ -35,20 +35,15 @@ const env = {
   region: region,
 };
 
-const staticSiteRepositoryStack = new StaticSiteRepositoryStack(
-  app,
-  `StaticSiteRepositoryStack-${stage}`,
-  {
-    stage,
-    env,
-  },
-);
+new StaticSiteRepositoryStack(app, `StaticSiteRepositoryStack-${stage}`, {
+  stage,
+  env,
+});
 
 if (isStaticSiteDeploy) {
   new StaticSiteServiceStack(app, `StaticSiteServiceStack-${stage}`, {
     stage,
     env,
-    repository: staticSiteRepositoryStack.repository,
     imageTag: staticSiteImageTag,
   });
 }
