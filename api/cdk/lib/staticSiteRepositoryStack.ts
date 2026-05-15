@@ -1,4 +1,4 @@
-import { CfnOutput, Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import { Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 import { Construct } from "constructs";
 import { PROD_STAGE, STATIC_SITE_SERVICE_BASE_NAME } from "./constants";
@@ -39,11 +39,6 @@ export class StaticSiteRepositoryStack extends Stack {
     });
 
     applyStandardTags(repository, props.stage);
-
-    new CfnOutput(this, "StaticSiteRepositoryUri", {
-      value: repository.repositoryUri,
-      exportName: `${STATIC_SITE_SERVICE_BASE_NAME}-${props.stage}-repository-uri`,
-    });
 
     this.repository = repository;
   }
