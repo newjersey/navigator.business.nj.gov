@@ -49,7 +49,7 @@ priority: true
 
 * Up to $30,000 in funding
 * No pre-payment penalties for this loan
-* Loan terms are typically amortized over four years
+* Loan terms are typically amortized over 4 years
 * Fixed interest rate of 5.99% applies for businesses that qualify as minority and/or woman-owned (M/WBE), LGBTQ+-owned, located in a designated Opportunity Zone or operating in a designated trade (electricians, plumbers, carpenters, welders, brick masons, HVAC technicians, diesel mechanics, and elevator specialists)
 * Interest rate starts at 7.99% but reduces by 1% each year (if payments are made on time). Followed by 6.99%, 5.99%, and 0% (ZERO) interest on final year
 
