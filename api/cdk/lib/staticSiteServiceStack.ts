@@ -28,9 +28,6 @@ export interface StaticSiteServiceStackProps extends StackProps {
   /** Deployment stage that owns this ECS service, such as dev, testing, content, staging, or prod. */
   readonly stage: string;
 
-  /** ECR repository that contains the static-site image for this stage. */
-  readonly repository: ecr.IRepository;
-
   /** Immutable image tag that ECS should deploy for this service revision. */
   readonly imageTag: string;
 }
@@ -128,10 +125,15 @@ export class StaticSiteServiceStack extends Stack {
     const alarmTopic = this.createAlarmTopic(props.stage);
     const cluster = this.createCluster(props.stage, network);
     const logGroup = this.createLogGroup(props.stage);
+    const repository = ecr.Repository.fromRepositoryName(
+      this,
+      "StaticSiteRepository",
+      `${STATIC_SITE_SERVICE_BASE_NAME}-${props.stage}`,
+    );
     const taskDefinition = createStaticSiteTaskDefinition({
       scope: this,
       stage: props.stage,
-      repository: props.repository,
+      repository,
       imageTag: props.imageTag,
       logGroup,
     });

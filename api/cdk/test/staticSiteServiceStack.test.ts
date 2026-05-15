@@ -1,7 +1,7 @@
-import { App, Stack } from "aws-cdk-lib";
+import { App } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
-import * as ecr from "aws-cdk-lib/aws-ecr";
 import { STATIC_SITE_CERTIFICATE_ID } from "../lib/constants";
+import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
 import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
 
 const TEST_AWS_ACCOUNT_ID = "123456789012";
@@ -21,22 +21,26 @@ const STATIC_SITE_CERTIFICATE_ARN = {
   ],
 };
 
-const createStaticSiteTemplate = (stage: string): Template => {
+const createStaticSiteTemplates = (stage: string) => {
   const app = new App();
-  const repositoryStack = new Stack(app, `${stage}RepositoryStack`, {
+  const repositoryStack = new StaticSiteRepositoryStack(app, `${stage}StaticSiteRepositoryStack`, {
+    stage,
     env: STATIC_SITE_TEST_ENVIRONMENT,
   });
-  const repository = new ecr.Repository(repositoryStack, "StaticSiteRepository", {
-    repositoryName: `bfs-static-site-${stage}`,
-  });
-  const stack = new StaticSiteServiceStack(app, `${stage}StaticSiteServiceStack`, {
+  const serviceStack = new StaticSiteServiceStack(app, `${stage}StaticSiteServiceStack`, {
     stage,
-    repository,
     imageTag: "abc123",
     env: STATIC_SITE_TEST_ENVIRONMENT,
   });
 
-  return Template.fromStack(stack);
+  return {
+    repositoryTemplate: Template.fromStack(repositoryStack),
+    serviceTemplate: Template.fromStack(serviceStack),
+  };
+};
+
+const createStaticSiteTemplate = (stage: string): Template => {
+  return createStaticSiteTemplates(stage).serviceTemplate;
 };
 
 describe("StaticSiteServiceStack", () => {
@@ -242,5 +246,34 @@ describe("StaticSiteServiceStack", () => {
       Endpoint: "https://global.sns-api.chatbot.amazonaws.com",
       Protocol: "https",
     });
+  });
+
+  test("references the ECR repository by name without a cross-stack Fn::ImportValue", () => {
+    const template = createStaticSiteTemplate("dev");
+    const templateJson = JSON.stringify(template.toJSON());
+
+    expect(templateJson).not.toContain("Fn::ImportValue");
+    template.hasResourceProperties("AWS::ECS::TaskDefinition", {
+      ContainerDefinitions: Match.arrayWith([
+        Match.objectLike({
+          Image: {
+            "Fn::Join": [
+              "",
+              [
+                "123456789012.dkr.ecr.us-east-1.",
+                { Ref: "AWS::URLSuffix" },
+                "/bfs-static-site-dev:abc123",
+              ],
+            ],
+          },
+        }),
+      ]),
+    });
+  });
+
+  test("does not add repository exports when the repository and service stacks are synthesized together", () => {
+    const templates = createStaticSiteTemplates("dev");
+
+    expect(templates.repositoryTemplate.toJSON().Outputs).toBeUndefined();
   });
 });

@@ -3,6 +3,16 @@ import { Match, Template } from "aws-cdk-lib/assertions";
 import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
 
 describe("StaticSiteRepositoryStack", () => {
+  test("has no CloudFormation Outputs to prevent cross-stack export dependencies", () => {
+    const app = new App();
+    const stack = new StaticSiteRepositoryStack(app, "TestStaticSiteRepositoryStack", {
+      stage: "dev",
+    });
+    const template = Template.fromStack(stack);
+
+    expect(template.toJSON().Outputs).toBeUndefined();
+  });
+
   test("creates a private dev ECR repository that keeps the latest 50 tagged images", () => {
     const app = new App();
     const stack = new StaticSiteRepositoryStack(app, "TestStaticSiteRepositoryStack", {
