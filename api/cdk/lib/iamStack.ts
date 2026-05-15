@@ -41,6 +41,7 @@ export class IamStack extends Stack {
     };
 
     const allowedStages = deployRoleAllowlist[props.stage] ?? [];
+    const shouldCreateWarehouseDeployRole = props.stage !== "local";
 
     if (isIamCreatedForDevStagingProdOnly) {
       const githubOidcProvider = iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(
@@ -318,49 +319,54 @@ export class IamStack extends Stack {
 
     this.role = lambdaRole;
 
-    const warehouseDeployRole = new iam.Role(this, "WarehouseDeployRole", {
-      roleName: `njbfs-business-data-warehouse-deploy-${props.stage}`,
-      assumedBy: new iam.ArnPrincipal(this.githubOidcRole!.roleArn),
-      description: `Deploy role for Business Data Warehouse`,
-    });
+    const githubRoleArn = this.githubOidcRole
+      ? this.githubOidcRole.roleArn
+      : `arn:aws:iam::${this.account}:role/bfs_github_actions_oidc_role`;
+    if (shouldCreateWarehouseDeployRole) {
+      const warehouseDeployRole = new iam.Role(this, "WarehouseDeployRole", {
+        roleName: `njbfs-business-data-warehouse-deploy-${props.stage}`,
+        assumedBy: new iam.ArnPrincipal(githubRoleArn),
+        description: `Deploy role for Business Data Warehouse`,
+      });
 
-    // Permissions are intentionally broad to allow for bootstrap for data warehouse project.
-    warehouseDeployRole.addToPolicy(
-      new iam.PolicyStatement({
-        actions: [
-          "s3:*",
-          "dynamodb:*",
-          "glue:*",
-          "athena:*",
-          "sns:*",
-          "events:*",
-          "cloudwatch:*",
-          "logs:*",
-          "kms:*",
-          "lambda:*",
-          "cloudformation:*",
-          "states:*",
-          "iam:CreateRole",
-          "iam:DeleteRole",
-          "iam:UpdateRole",
-          "iam:UpdateAssumeRolePolicy",
-          "iam:PutRolePolicy",
-          "iam:DeleteRolePolicy",
-          "iam:AttachRolePolicy",
-          "iam:DetachRolePolicy",
-          "iam:TagRole",
-          "iam:UntagRole",
-          "iam:GetRole",
-          "iam:GetRolePolicy",
-          "iam:ListRolePolicies",
-          "iam:ListAttachedRolePolicies",
-          "iam:PassRole",
-          "iam:CreateServiceLinkedRole",
-        ],
-        resources: ["*"],
-      }),
-    );
+      // Permissions are intentionally broad to allow for bootstrap for data warehouse project.
+      warehouseDeployRole.addToPolicy(
+        new iam.PolicyStatement({
+          actions: [
+            "s3:*",
+            "dynamodb:*",
+            "glue:*",
+            "athena:*",
+            "sns:*",
+            "events:*",
+            "cloudwatch:*",
+            "logs:*",
+            "kms:*",
+            "lambda:*",
+            "cloudformation:*",
+            "states:*",
+            "iam:CreateRole",
+            "iam:DeleteRole",
+            "iam:UpdateRole",
+            "iam:UpdateAssumeRolePolicy",
+            "iam:PutRolePolicy",
+            "iam:DeleteRolePolicy",
+            "iam:AttachRolePolicy",
+            "iam:DetachRolePolicy",
+            "iam:TagRole",
+            "iam:UntagRole",
+            "iam:GetRole",
+            "iam:GetRolePolicy",
+            "iam:ListRolePolicies",
+            "iam:ListAttachedRolePolicies",
+            "iam:PassRole",
+            "iam:CreateServiceLinkedRole",
+          ],
+          resources: ["*"],
+        }),
+      );
 
-    applyStandardTags(warehouseDeployRole, props.stage);
+      applyStandardTags(warehouseDeployRole, props.stage);
+    }
   }
 }
