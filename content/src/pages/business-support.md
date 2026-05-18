@@ -8,9 +8,11 @@ main-link-text: View Resources
 heading-1: Business Action Center
 main-text-1: The New Jersey Business Action Center (NJBAC) is a business-first resource that can help you get answers from government agencies, direct you to appropriate officials or contacts, facilitate meetings and follow-ups with regulatory agencies and so much more, all at no cost and strictly confidential.
 link-text-1: Visit the Business Action Center Homepage
+link-url-1: https://nj.gov/state/bac/
 heading-2: Small Business Development Centers
 main-text-2: There is no substitute for expert advice. Visit a New Jersey Small Business Development Center near you for help with growing your business. Receive free, hands-on guidance on business planning, taxes, marketing, and much more.
 link-text-2: View Development Center Resources
+link-url-2: https://njsbdc.com/
 heading-3: SCORE (Volunteer Based Organization)
 main-text-3: |-
   SCORE is a national non-profit organization dedicated to helping existing small businesses maximize their potential for success. They provide free, confidential, and professional business counseling to aspiring entrepreneurs who are launching their companies, and to small business owners or individuals planning on going into business.
@@ -60,9 +62,11 @@ main-text-4: |-
 heading-5: DEP Small Business Assistance Program
 main-text-5: "The Small Business Assistance Program (SBAP) helps New Jersey’s small businesses understand the complex world of environmental regulation.\_ The services that we provide include the following:\n\n* Consultations:\_The SBAP provides consultations on the phone, by e-mail, or on-site, where we discuss how State and Federal environmental rules and permits may apply to your particular situation\n* Referrals:\_ The SBAP has access to engineers, scientists, and environmental specialists who can help you with your environmental questions or concerns\n* Guidance Documents:\_The SBAP develops and distributes guidance documents to help small businesses comply with environmental regulations and permits\n* Education & Outreach:\_The SBAP provides seminars, workshops, and on-site training, on a range of regulatory topics that help small businesses stay in and go beyond compliance\n* Fostering Innovation:\_The SBAP supports innovative ideas which help small businesses improve energy efficiency, resource conservation, pollution prevention, and sustainability**\n**"
 link-text-5: DEP Small Business Support
+link-url-5: https://www.state.nj.us/dep/aqes/sbap/
 heading-6: NJ Research Asset Database
 main-text-6: "ResearchwithNJ.com is a free database for businesses and entrepreneurs to search for experts in science, technology, engineering, and mathematics (STEM) and learn about their professional backgrounds, publications, and achievements. It also contains information about research departments and specializations of six participating New Jersey universities: New Jersey Institute of Technology, Princeton University, Rutgers University, Rowan University, Stevens Institute of Technology, and Montclair State University."
 link-text-6: Search the Database
+link-url-6: https://www.researchwithnj.com/
 heading-7: New Jersey Libraries
 main-text-7: |-
   New Jersey libraries provide a wealth of information to help businesses grow and succeed, whether in the beginning stages of writing a business plan, conducting market research, or exploring financing options.
@@ -80,6 +84,7 @@ main-text-7: |-
 
   For more information, visit your local public library,[ JerseyClicks.org](http://www.njstatelib.org/services_for_libraries/statewide_services/jerseyclicks/), or the[ New Jersey State Library](https://www.njstatelib.org/).
 link-text-7: Browse NJ State Library Resources
+link-url-7: https://libguides.njstatelib.org/nonprofits/home
 heading-8: Chambers of Commerce (Member Supported Organization)
 main-text-8: |-
   A Chamber of Commerce is a business network that connects its members with ideas, resources, and each other. Chambers of Commerce also frequently lobby on behalf of businesses for laws and policies that are favorable to its members. A Chamber can be organized around a specific region, such as businesses located in Morris County, around a specific type of business, or around another affinity such as an ethnic group. Find a Chamber that suits you and your business.
@@ -95,10 +100,12 @@ main-text-8: |-
 heading-9: Main Street New Jersey
 main-text-9: Main Street New Jersey is a comprehensive revitalization program that promotes the historic and economic redevelopment of traditional business districts in New Jersey. Every two years, select communities join the program and receive valuable technical support and training to assist in restoring their Main Streets. These communities demonstrate commitment to a volunteer board of directors, procurement of long-term funding, development of private-public partnerships, the hiring of an executive director, and other criteria. Exploring this program is a good idea if you are a business owner interested in whether your downtown is a part of Main Street New Jersey or interested in starting the process.
 link-text-9: Visit Main Street New Jersey
+link-url-9: https://nj.gov/dca/divisions/lps/msnj.html
 heading-10: "U.S. Small Business Administration\_"
 main-text-10: |-
   [(SBA) Learning Platform – ](https://www.sba.gov/sba-learning-platform)Includes courses ranging from launch to management to market. It also includes a free online learning center for women – Ascent – and development programs for transitioning service members and their spouses.
 
   ‍
 link-text-10: New Jersey SBA District Office
+link-url-10: https://www.sba.gov/offices/district/nj/newark
 ---

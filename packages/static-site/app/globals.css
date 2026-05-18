@@ -28,3 +28,13 @@ body {
 .usa-header--extended .usa-nav__secondary-links a:active {
   color: #ffffff;
 }
+
+li {
+  line-height: 1.6rem;
+}
+
+ul.unstyled-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
