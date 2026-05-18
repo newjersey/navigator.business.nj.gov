@@ -367,6 +367,7 @@ export class IamStack extends Stack {
             "ssm:GetParameters",
             "ssm:PutParameter",
             "ssm:DeleteParameter",
+            "ecr:*"
           ],
           resources: ["*"],
         }),
