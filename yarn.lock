@@ -5318,7 +5318,7 @@ __metadata:
     dynamodb-admin: "npm:5.1.3"
     esbuild: "npm:0.27.0"
     eslint: "npm:8.57.1"
-    eslint-config-next: "npm:15.5.15"
+    eslint-config-next: "npm:15.5.18"
     eslint-config-prettier: "npm:9.1.2"
     eslint-plugin-cypress: "npm:2.15.2"
     eslint-plugin-jest: "npm:27.9.0"
@@ -5327,7 +5327,7 @@ __metadata:
     eslint-plugin-jsx-a11y: "npm:6.10.2"
     eslint-plugin-react: "npm:7.37.5"
     eslint-plugin-react-hooks: "npm:4.6.2"
-    eslint-plugin-storybook: "npm:10.3.6"
+    eslint-plugin-storybook: "npm:10.4.0"
     eslint-plugin-testing-library: "npm:6.5.0"
     eslint-plugin-unicorn: "npm:51.0.1"
     express: "npm:4.22.1"
@@ -5524,7 +5524,7 @@ __metadata:
     dependency-cruiser: "npm:17.3.10"
     dotenv: "npm:17.4.2"
     eslint: "npm:8.57.1"
-    eslint-config-next: "npm:15.5.15"
+    eslint-config-next: "npm:15.5.18"
     eslint-config-prettier: "npm:9.1.2"
     eslint-plugin-cypress: "npm:2.15.2"
     eslint-plugin-jest: "npm:27.9.0"
@@ -5532,7 +5532,7 @@ __metadata:
     eslint-plugin-jsx-a11y: "npm:6.10.2"
     eslint-plugin-react: "npm:7.37.5"
     eslint-plugin-react-hooks: "npm:4.6.2"
-    eslint-plugin-storybook: "npm:10.3.6"
+    eslint-plugin-storybook: "npm:10.4.0"
     eslint-plugin-testing-library: "npm:6.5.0"
     eslint-plugin-unicorn: "npm:51.0.1"
     fast-deep-equal: "npm:3.1.3"
@@ -8964,6 +8964,15 @@ __metadata:
   dependencies:
     fast-glob: "npm:3.3.1"
   checksum: 10/35ac4a63f7591c968ac3668a592a17055cb3e7352de08bba637a18e5f0a4d2fb319facfda16945c3ee629b2280cbb7708b36c6cdfda96149aea3b1524910f9cf
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:15.5.18":
+  version: 15.5.18
+  resolution: "@next/eslint-plugin-next@npm:15.5.18"
+  dependencies:
+    fast-glob: "npm:3.3.1"
+  checksum: 10/73f7c24b943d5bd01759d0c40aeafbf2d954ff45b983eb6624da01c6c6113313c55ca4789ca8ce6390bdc12f29d9908a1ce21094f789d9a2e58e9d6e897cf33c
   languageName: node
   linkType: hard
 
@@ -21295,11 +21304,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:15.5.15":
-  version: 15.5.15
-  resolution: "eslint-config-next@npm:15.5.15"
+"eslint-config-next@npm:15.5.18":
+  version: 15.5.18
+  resolution: "eslint-config-next@npm:15.5.18"
   dependencies:
-    "@next/eslint-plugin-next": "npm:15.5.15"
+    "@next/eslint-plugin-next": "npm:15.5.18"
     "@rushstack/eslint-patch": "npm:^1.10.3"
     "@typescript-eslint/eslint-plugin": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
     "@typescript-eslint/parser": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
@@ -21315,7 +21324,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/ecda327455fea1c0a5e546d358a95c01698c688179a139d70c38b81e352cc85a70719f241d02369d3ac9526d3cb4b92c358308298b2524d63f1f1a93e8ce8530
+  checksum: 10/eec8dddb2ecc944f8eeab2aa807df02a43318425d5bde66e636097df197de85752bec9618702ca66c7b493753551d27968ca82bb19bdeffb0b6b8f21347543b2
   languageName: node
   linkType: hard
 
@@ -21531,15 +21540,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-storybook@npm:10.3.6":
-  version: 10.3.6
-  resolution: "eslint-plugin-storybook@npm:10.3.6"
+"eslint-plugin-storybook@npm:10.4.0":
+  version: 10.4.0
+  resolution: "eslint-plugin-storybook@npm:10.4.0"
   dependencies:
     "@typescript-eslint/utils": "npm:^8.48.0"
   peerDependencies:
     eslint: ">=8"
-    storybook: ^10.3.6
-  checksum: 10/073002cdc611da06f6055cd8fd6b3eba73e94fb7a735aa0323a11c00b8c19d3c4e1644c494691aafdc8b77be619167b5dca528967e1e45d0c2ff4809a8959173
+    storybook: ^10.4.0
+  checksum: 10/9b4aa328ab57a927d5b58fc866ec142d941befd3411a18bd2c3f827c09bedfd302e1a5d6429a636ccfc6a6037897f82cc5edc3e4afaf68ddde3068a7eb9ac9c2
   languageName: node
   linkType: hard
 
