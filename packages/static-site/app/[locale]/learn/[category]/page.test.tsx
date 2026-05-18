@@ -6,7 +6,11 @@ vi.mock("@/domain/categories", () => ({
   CATEGORY_HIERARCHY: {
     plan: {
       children: [
-        { slug: "create-a-business-plan", name: "Create a Business Plan" },
+        {
+          slug: "create-a-business-plan",
+          name: "Create a Business Plan",
+          "sub-heading-text": "Business Plan Subheader",
+        },
         { slug: "choose-a-business-structure", name: "Choose a Business Structure" },
       ],
     },
@@ -38,5 +42,15 @@ describe("CategoryPage", () => {
       "href",
       "/learn/plan/choose-a-business-structure",
     );
+  });
+
+  it("renders the sub-heading-text when it exists", async () => {
+    render(
+      await CategoryPage({
+        params: Promise.resolve({ locale: "en-US", category: "plan" }),
+      }),
+    );
+
+    expect(screen.getByText("Business Plan Subheader")).toBeInTheDocument();
   });
 });

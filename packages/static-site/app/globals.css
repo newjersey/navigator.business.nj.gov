@@ -28,3 +28,7 @@ body {
 .usa-header--extended .usa-nav__secondary-links a:active {
   color: #ffffff;
 }
+
+li {
+  line-height: 1.6rem;
+}
