@@ -69,6 +69,7 @@ export const setupStatefulUserDataContext = (): void => {
       updateQueue: updateQueue,
       createUpdateQueue,
       refresh: jest.fn(),
+      clearUserDataError: jest.fn(),
     };
   });
 };
