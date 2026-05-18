@@ -18,12 +18,15 @@ export const checkNewBusinessProfilePage = ({
   legalStructureId,
   townDisplayName,
   homeBasedQuestion,
+  doesHomeBasedQuestionExist,
   liquorLicenseQuestion,
   employerId = "",
   taxId = "",
   notes = "",
   entityId = "",
-}: Partial<StartingProfileData & { businessName: string }>): void => {
+}: Partial<
+  StartingProfileData & { businessName: string; doesHomeBasedQuestionExist: boolean | undefined }
+>): void => {
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");
@@ -49,8 +52,12 @@ export const checkNewBusinessProfilePage = ({
     onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
   }
 
-  if (homeBasedQuestion !== undefined) {
-    onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
+  if (doesHomeBasedQuestionExist !== undefined) {
+    if (homeBasedQuestion !== undefined) {
+      onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
+    } else {
+      onProfilePage.getHomeBased(homeBasedQuestion).should("not.be.checked");
+    }
     onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
 
