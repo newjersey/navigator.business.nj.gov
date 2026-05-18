@@ -13,6 +13,7 @@ export class StorageStack extends Stack {
   public readonly intercomMacrosBucket?: s3.Bucket;
   public readonly userDocumentsBucket: s3.Bucket;
   public readonly userDocumentsLocalBucket?: s3.Bucket;
+  public readonly usersTableBackup: s3.Bucket;
 
   constructor(scope: Construct, id: string, props: StorageStackProps) {
     super(scope, id, props);
@@ -27,11 +28,26 @@ export class StorageStack extends Stack {
       `arn:aws:iam::${this.account}:role/navigator_authRole`,
     );
 
+    const developersGroup = iam.Group.fromGroupName(
+      this,
+      "DevelopersGroup",
+      "bfs-navigator-developers",
+    );
+
     const unauthRole = iam.Role.fromRoleArn(
       this,
       "CognitoUnauthRole",
       `arn:aws:iam::${this.account}:role/navigator_unauthRole`,
     );
+
+    this.usersTableBackup = new s3.Bucket(this, "UsersTableBackupBuckets", {
+      bucketName: `nj-bfs-user-table--${props.stage}-backup`,
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      removalPolicy: RemovalPolicy.RETAIN,
+      autoDeleteObjects: false,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      versioned: false,
+    });
 
     this.userDocumentsBucket = new s3.Bucket(this, "UserDocumentsBucket", {
       bucketName: `nj-bfs-user-documents-${props.stage}`,
@@ -92,6 +108,22 @@ export class StorageStack extends Stack {
         removalPolicy: RemovalPolicy.RETAIN,
         encryption: s3.BucketEncryption.S3_MANAGED,
       });
+
+      const localBucketPolicy = new iam.ManagedPolicy(this, "LocalBucketPolicy", {
+        managedPolicyName: "bfs-navigator-local-policy",
+        statements: [
+          new iam.PolicyStatement({
+            effect: iam.Effect.ALLOW,
+            actions: ["s3:GetObject", "s3:PutObject", "s3:DeleteObject", "s3:ListBucket"],
+            resources: [
+              this.userDocumentsLocalBucket.bucketArn,
+              `${this.userDocumentsLocalBucket.bucketArn}/*`,
+            ],
+          }),
+        ],
+      });
+
+      developersGroup.addManagedPolicy(localBucketPolicy);
     }
   }
 }
