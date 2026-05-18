@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
-import { hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
 interface PageParams {
-  readonly locale: string;
+  readonly locale: AppLocale;
   readonly category: string;
 }
 
@@ -26,24 +26,32 @@ const CategoryPage = async ({ params }: Props) => {
   const { locale, category } = await params;
 
   if (!hasAppLocale(locale)) {
-    notFound();
+    return notFound();
   }
 
   const messages = getApplicationMessages({ locale });
-  const currentPage = messages.learn.sideNav.pages.find((page) => page.key === category);
+  const currentCategoryContent = messages.learn.categories.find(
+    (content) => content.key === category,
+  );
   const subpages = CATEGORY_HIERARCHY[category].children;
 
-  if (!currentPage) {
-    notFound();
+  if (!currentCategoryContent) {
+    return notFound();
   }
 
   return (
     <>
-      <h1>{currentPage.label}</h1>
-      <ul>
+      <h1>{currentCategoryContent.title}</h1>
+      <p className="usa-intro">{currentCategoryContent.subtitle}</p>
+      <h2 className="margin-top-6">{messages.learn.categoryPages.allTopics}</h2>
+      <ul className="unstyled-list">
         {subpages.map((subpage) => (
           <li key={subpage.slug}>
-            <a href={`/learn/${category}/${subpage.slug}`}>{subpage.name}</a>
+            <strong>
+              <a href={`/learn/${category}/${subpage.slug}`}>{subpage.name}</a>
+            </strong>
+            <p>{subpage["sub-heading-text"]}</p>
+            <hr className="margin-y-2" />
           </li>
         ))}
       </ul>

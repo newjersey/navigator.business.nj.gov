@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Markdown from "react-markdown";
 import type { PageItem } from "@/domain/content/types";
 
@@ -11,6 +12,7 @@ interface Section {
   linkText?: string;
   linkUrl?: string;
   tip?: string;
+  index: number;
 }
 
 const PageContent = ({ page }: Props) => {
@@ -29,6 +31,7 @@ const PageContent = ({ page }: Props) => {
       linkText: page[`link-text-${n}`],
       linkUrl: page[`link-url-${n}`],
       tip: page[`tip-${n}`],
+      index: n,
     });
     n++;
   }
@@ -38,7 +41,7 @@ const PageContent = ({ page }: Props) => {
       <h1>{page.name}</h1>
       {page["sub-heading-text"] && <p className="usa-intro">{page["sub-heading-text"]}</p>}
       {sections.map((section) => (
-        <>
+        <Fragment key={section.index}>
           <hr className="margin-y-4" />
           <section>
             {section.heading && <h2>{section.heading}</h2>}
@@ -61,7 +64,7 @@ const PageContent = ({ page }: Props) => {
               </a>
             )}
           </section>
-        </>
+        </Fragment>
       ))}
     </article>
   );

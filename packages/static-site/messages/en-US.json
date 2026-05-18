@@ -381,7 +381,32 @@
     "name": "Learn",
     "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
     "heading2": "Where are you in your business journey?",
+    "categoryPages": {
+      "allTopics": "All Topics"
+    },
     "categories": [
+      {
+        "key": "plan",
+        "title": "Plan",
+        "subtitle": "Placeholder text"
+      },
+      {
+        "key": "start",
+        "title": "Start",
+        "subtitle": "Registering a business, EINs, taxes, licenses, and employer requirements"
+      },
+      {
+        "key": "operate",
+        "title": "Operate",
+        "subtitle": "Placeholder text"
+      },
+      {
+        "key": "grow",
+        "title": "Grow",
+        "subtitle": "Placeholder text"
+      }
+    ],
+    "cards": [
       {
         "title": "Planning",
         "description": "You have a great idea and want to turn it into a successful business.",

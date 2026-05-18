@@ -2,10 +2,10 @@ import { notFound } from "next/navigation";
 import PageContent from "@/components/learn/PageContent";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { loadPageBySlug } from "@/domain/content/loadContent";
-import { hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
 
 interface PageParams {
-  readonly locale: string;
+  readonly locale: AppLocale;
   readonly category: string;
   readonly slug: string;
 }
@@ -38,11 +38,7 @@ const ContentPage = async ({ params }: Props) => {
 
   const page = loadPageBySlug(slug);
 
-  return (
-    <>
-      <PageContent page={page} />
-    </>
-  );
+  return <PageContent page={page} />;
 };
 
 export default ContentPage;

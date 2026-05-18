@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 
-import { hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
 interface PageParams {
-  readonly locale: string;
+  readonly locale: AppLocale;
 }
 
 interface Props {
@@ -26,18 +26,18 @@ const LearnPage = async ({ params }: Props) => {
       <p className="usa-intro">{learn.subHeadingText}</p>
       <h2>{learn.heading2}</h2>
       <ul className="usa-card-group">
-        {learn.categories.map((category) => (
-          <li key={category.title} className="usa-card tablet:grid-col-6">
+        {learn.cards.map((card) => (
+          <li key={card.title} className="usa-card tablet:grid-col-6">
             <div className="usa-card__container">
               <div className="usa-card__header">
-                <h3 className="usa-card__heading">{category.title}</h3>
+                <h3 className="usa-card__heading">{card.title}</h3>
               </div>
               <div className="usa-card__body">
-                <p>{category.description}</p>
+                <p>{card.description}</p>
               </div>
               <div className="usa-card__footer">
-                <a href={category.link.href} className="usa-button">
-                  {category.link.label}
+                <a href={card.link.href} className="usa-button">
+                  {card.link.label}
                 </a>
               </div>
             </div>
