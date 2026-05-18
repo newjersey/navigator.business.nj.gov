@@ -301,15 +301,35 @@ export interface LearnSideNavContent {
 }
 
 /**
- * One category card rendered in the learn page grid.
+ * One category entry in the learn section, keyed to a route segment.
  */
 export interface LearnCategory {
-  /** Heading text for the category card. */
+  /** Route key matching the [category] segment (e.g. "plan", "start"). */
+  readonly key: string;
+  /** Heading title for the category page. */
   readonly title: string;
-  /** Supporting text rendered in the category card. */
+  /** Subtitle text rendered below the category page title. */
+  readonly subtitle: string;
+}
+
+/**
+ * One card rendered in the learn page grid.
+ */
+export interface LearnCard {
+  /** Heading text for the card. */
+  readonly title: string;
+  /** Supporting text rendered in the card. */
   readonly description: string;
-  /** Link metadata for the category card CTA. */
+  /** Link metadata for the card CTA. */
   readonly link: ContentLink;
+}
+
+/**
+ * Localized strings shared across all category pages.
+ */
+export interface LearnCategoryPagesContent {
+  /** Label for the "all topics" navigation link. */
+  readonly allTopics: string;
 }
 
 /**
@@ -320,12 +340,16 @@ export interface LearnPageContent {
   readonly name: string;
   /** Subheading text rendered below the page title. */
   readonly subHeadingText: string;
-  /** Secondary heading text rendered above the categories grid. */
+  /** Secondary heading text rendered above the cards grid. */
   readonly heading2: string;
   /** Side navigation content for the learn section. */
   readonly sideNav: LearnSideNavContent;
-  /** Category cards rendered in the learn grid. */
+  /** Category metadata keyed to route segments. */
   readonly categories: readonly LearnCategory[];
+  /** Cards rendered in the learn grid. */
+  readonly cards: readonly LearnCard[];
+  /** Shared strings used across category pages. */
+  readonly categoryPages: LearnCategoryPagesContent;
 }
 
 /**
