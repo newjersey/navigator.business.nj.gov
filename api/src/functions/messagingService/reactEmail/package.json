@@ -4,13 +4,13 @@
   "packageManager": "yarn@4.14.1",
   "devDependencies": {
     "@react-email/preview-server": "5.2.10",
-    "react-email": "5.0.6"
+    "react-email": "6.1.4"
   },
   "dependencies": {
     "@react-email/components": "1.0.12",
     "@react-email/render": "2.0.8",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "tsx": "4.21.0"
   },
   "scripts": {
