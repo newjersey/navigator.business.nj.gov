@@ -138,6 +138,7 @@ if (isMyAccountDeploy) {
 
   new ApiStack(app, `ApiStack-${stage}`, {
     stage,
+    lambdaRole: iamStack.role,
     lambdas: {
       express: { lambda: lambdaStack.expressLambda },
       githubOauth2: { lambda: lambdaStack.githubOauth2Lambda },
