@@ -50,7 +50,10 @@ export const NeedsAccountModal = (): ReactElement => {
     <>
       <ModalZeroButton
         isOpen={showNeedsAccountModal}
-        close={(): void => setShowNeedsAccountModal(false)}
+        close={(): void => {
+          analytics.event.guest_modal.click.close_NeedsAccountModal();
+          setShowNeedsAccountModal(false);
+        }}
         title={Config.selfRegistration.needsAccountModalTitle}
       >
         <div data-testid="self-reg-modal">

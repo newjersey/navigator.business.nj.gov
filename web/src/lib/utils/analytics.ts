@@ -165,7 +165,8 @@ type Clicked =
   | "log_out"
   | "unlinked_myNJ_account"
   | "get_unlinked_myNJ_account_modal"
-  | "link_your_myNJ_account";
+  | "link_your_myNJ_account"
+  | "close_NeedsAccountModal";
 
 type OnSiteSection =
   | "landing_page"
@@ -743,6 +744,27 @@ export default {
             legacy_event_category: "guest_modal",
             legacy_event_label: "go_to_myNJ_login",
             clicked: "go_to_myNJ_login",
+            item: "guest_modal",
+          });
+        },
+        close_NeedsAccountModal: () => {
+          eventRunner.track({
+            event: "account_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "guest_modal",
+            legacy_event_label: "close_NeedsAccountModal",
+            clicked: "close_NeedsAccountModal",
+            item: "guest_modal",
+          });
+        },
+      },
+      appears: {
+        open_NeedsAccountModal: () => {
+          eventRunner.track({
+            event: "account_clicks",
+            legacy_event_action: "appears",
+            legacy_event_category: "guest_modal",
+            legacy_event_label: "open_NeedsAccountModal",
             item: "guest_modal",
           });
         },
