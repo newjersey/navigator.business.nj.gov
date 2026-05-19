@@ -84,6 +84,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const config = getMergedConfig();
   const showGtm = !(process.env.DISABLE_GTM === "true");
 
+  const setShowNeedsAccountModalAndSendAnalytics = (isOpening: boolean): void => {
+    if (isOpening) {
+      analytics.event.guest_modal.appears.open_NeedsAccountModal();
+    }
+    setShowNeedsAccountModal(isOpening);
+  };
+
   useEffect(() => {
     if (router?.isReady) {
       router.events.on("routeChangeComplete", analytics.pageview);
@@ -259,7 +266,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                               registrationStatus: registrationStatus,
                               setRegistrationStatus: setRegistrationStatusInStateAndStorage,
                               setShowNeedsAccountSnackbar,
-                              setShowNeedsAccountModal,
+                              setShowNeedsAccountModal: setShowNeedsAccountModalAndSendAnalytics,
                               showContinueWithoutSaving,
                               setShowContinueWithoutSaving,
                               userWantsToContinueWithoutSaving,
