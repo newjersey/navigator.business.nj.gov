@@ -17,8 +17,8 @@ runs:
           --bootstrap-bucket-name cdk-biz-nj-assets-$AWS_ACCOUNT_ID-us-east-1 \
           --qualifier biz-nj \
           --trust arn:aws:iam::$AWS_ACCOUNT_ID:user/system/bfs-navigator \
-          --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess || \
-          echo "Bootstrap already completed or not required."
+          --trust arn:aws:iam::$AWS_ACCOUNT_ID:role/bfs_github_actions_oidc_role \
+          --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess
 
     - name: Import StorageStack resources in CDK
       shell: bash
