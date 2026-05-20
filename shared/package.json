@@ -5,9 +5,7 @@
   "private": true,
   "license": "MIT",
   "main": "lib/shared/src/index.js",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "typings": "./lib/shared/src/index.d.ts",
   "scripts": {
     "build": "tsc --build",

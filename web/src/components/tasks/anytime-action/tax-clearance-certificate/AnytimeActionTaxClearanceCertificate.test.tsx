@@ -316,18 +316,19 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
-    it.each(["Address zip code", "Tax id", "Tax pin"])(
-      "renders tab two as error when all fields are non empty but the %s field does not have enough digits",
-      async (incompleteField) => {
-        renderComponent({});
-        const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
-        expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
-        fireEvent.click(secondTab);
+    it.each([
+      "Address zip code",
+      "Tax id",
+      "Tax pin",
+    ])("renders tab two as error when all fields are non empty but the %s field does not have enough digits", async (incompleteField) => {
+      renderComponent({});
+      const secondTab = screen.getByRole("tab", { name: /Check Eligibility Step/ });
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
+      fireEvent.click(secondTab);
 
-        fillText(incompleteField, "123");
-        expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
-      },
-    );
+      fillText(incompleteField, "123");
+      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Error"));
+    });
   });
 
   describe("renders data from userData", () => {
@@ -1629,28 +1630,25 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       type: "TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE" as const,
       message: "TaxpayerId  is required.",
     },
-  ] as const)(
-    "shows a generic error message when the API post request returns an error type $type",
-    async (arg) => {
-      const response: TaxClearanceCertificateResponse = {
-        error: {
-          type: arg.type as TaxClearanceCertificateResponseErrorType,
-          message: arg.message,
-        },
-      };
-      mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
-      renderComponent({});
-      const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
-      fireEvent.click(thirdTab);
-      fireEvent.click(
-        screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
-      );
+  ] as const)("shows a generic error message when the API post request returns an error type $type", async (arg) => {
+    const response: TaxClearanceCertificateResponse = {
+      error: {
+        type: arg.type as TaxClearanceCertificateResponseErrorType,
+        message: arg.message,
+      },
+    };
+    mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
+    renderComponent({});
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+    fireEvent.click(
+      screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+    );
 
-      await waitFor(() => {
-        expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
-      });
-    },
-  );
+    await waitFor(() => {
+      expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
+    });
+  });
 
   it.each([
     "Business name",

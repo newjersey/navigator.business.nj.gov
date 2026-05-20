@@ -79,15 +79,10 @@ function findLatestLTS(releases: NodeRelease[]): NodeRelease {
  * @throws {Error} If no matching version is found
  * @returns {NodeRelease} Latest release for the specified major version
  */
-function findLatestInMajorVersion(
-  releases: NodeRelease[],
-  major: number
-): NodeRelease {
+function findLatestInMajorVersion(releases: NodeRelease[], major: number): NodeRelease {
   const majorVersions = releases
     .filter((r) => r.version.replace(/^v/, "").startsWith(`${major}.`))
-    .sort((a, b) =>
-      b.version.localeCompare(a.version, undefined, { numeric: true })
-    );
+    .sort((a, b) => b.version.localeCompare(a.version, undefined, { numeric: true }));
 
   if (majorVersions.length === 0) {
     throw new Error(`No versions found for Node.js ${major}.x`);
@@ -104,10 +99,7 @@ function findLatestInMajorVersion(
  * @throws {Error} If version is not found
  * @returns {NodeRelease} Matching release
  */
-function findExactVersion(
-  releases: NodeRelease[],
-  version: string
-): NodeRelease {
+function findExactVersion(releases: NodeRelease[], version: string): NodeRelease {
   const exactMatch = releases.find((r) => r.version === `v${version}`);
   if (!exactMatch) {
     throw new Error(`Version ${version} not found in Node.js releases`);
@@ -199,11 +191,7 @@ function getCurrentBranchName(): string {
  * @param {string} newVersion - New Node.js version
  * @throws {Error} If file update fails
  */
-async function updateFile(
-  filePath: string,
-  oldVersion: string,
-  newVersion: string
-): Promise<void> {
+async function updateFile(filePath: string, oldVersion: string, newVersion: string): Promise<void> {
   try {
     const absolutePath = path.resolve(filePath);
     let content = await fs.readFile(absolutePath, "utf8");
@@ -222,22 +210,14 @@ async function updateFile(
  * @param {string} newNPMVersion - New NPM version
  * @throws {Error} If update fails
  */
-async function updateVerifyNodeScript(
-  filePath: string,
-  newNPMVersion: string
-): Promise<void> {
+async function updateVerifyNodeScript(filePath: string, newNPMVersion: string): Promise<void> {
   try {
     const absolutePath = path.resolve(filePath);
     const content = await fs.readFile(absolutePath, "utf8");
     const jsonContent = JSON.parse(content);
-    jsonContent.scripts[
-      "verify:node"
-    ] = `check-node-version --node $(cat .nvmrc) --npm ${newNPMVersion}`;
-    await fs.writeFile(
-      absolutePath,
-      JSON.stringify(jsonContent, null, 2) + "\n",
-      "utf8"
-    );
+    jsonContent.scripts["verify:node"] =
+      `check-node-version --node $(cat .nvmrc) --npm ${newNPMVersion}`;
+    await fs.writeFile(absolutePath, JSON.stringify(jsonContent, null, 2) + "\n", "utf8");
     console.info(`✓ Updated verify:node script in ${filePath}`);
   } catch (error) {
     throw new Error(`Failed to update verify:node script: ${error.message}`);
@@ -253,9 +233,7 @@ async function main() {
 
     const currentBranch = getCurrentBranchName();
     if (currentBranch !== "new-docker-image") {
-      throw new Error(
-        'You must be on the "new-docker-image" branch to run this script.'
-      );
+      throw new Error('You must be on the "new-docker-image" branch to run this script.');
     }
 
     const { nodeVersion, npmVersion } = await resolveVersions(args);
@@ -276,16 +254,10 @@ async function main() {
   } catch (error) {
     console.error("\n❌ Error:", error.message);
     console.error("\nUsage:");
-    console.error(
-      "  ./scripts/update-node.ts                  # Latest LTS version"
-    );
-    console.error(
-      "  ./scripts/update-node.ts 18              # Latest in 18.x line"
-    );
+    console.error("  ./scripts/update-node.ts                  # Latest LTS version");
+    console.error("  ./scripts/update-node.ts 18              # Latest in 18.x line");
     console.error("  ./scripts/update-node.ts 18.18.2         # Exact version");
-    console.error(
-      "  ./scripts/update-node.ts 18.18.2 9.8.1   # Exact versions"
-    );
+    console.error("  ./scripts/update-node.ts 18.18.2 9.8.1   # Exact versions");
     process.exit(1);
   }
 }

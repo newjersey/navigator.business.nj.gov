@@ -663,35 +663,34 @@ describe("<BusinessFormationPaginator />", () => {
         );
       });
 
-      it.each(corpLegalStructures)(
-        "shows Board of Directors label when members' field has an error and legalType is %s",
-        async (corpLegalStructure) => {
-          const corporation = generateBusiness({
-            formationData: generateFormationData({
-              formationFormData: generateFormationFormData({ members: undefined }),
-            }),
-            profileData: generateStartingProfileData({
-              legalStructureId: corpLegalStructure,
-            }),
-          });
-          const page = preparePage({ business: corporation, displayContent });
+      it.each(
+        corpLegalStructures,
+      )("shows Board of Directors label when members' field has an error and legalType is %s", async (corpLegalStructure) => {
+        const corporation = generateBusiness({
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({ members: undefined }),
+          }),
+          profileData: generateStartingProfileData({
+            legalStructureId: corpLegalStructure,
+          }),
+        });
+        const page = preparePage({ business: corporation, displayContent });
 
-          await page.stepperClickToReviewStep();
-          await page.submitReviewStep();
+        await page.stepperClickToReviewStep();
+        await page.submitReviewStep();
 
-          await page.stepperClickToContactsStep();
+        await page.stepperClickToContactsStep();
 
-          expect(screen.getByTestId("alert-error")).toHaveTextContent(
-            Config.formation.errorBanner.errorOnStep,
-          );
-          expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
-            Config.formation.fields.members.label,
-          );
-          expect(screen.getByTestId("alert-error")).toHaveTextContent(
-            Config.formation.fields.directors.label,
-          );
-        },
-      );
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(
+          Config.formation.errorBanner.errorOnStep,
+        );
+        expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
+          Config.formation.fields.members.label,
+        );
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(
+          Config.formation.fields.directors.label,
+        );
+      });
     });
 
     describe("no validation errors", () => {
@@ -1384,33 +1383,30 @@ describe("<BusinessFormationPaginator />", () => {
             contactLastName,
             contactPhoneNumber,
             paymentType,
-          ])(
-            "shows error alert and error state on step associated with %o API error",
-            async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName, profileData } = data;
+          ])("shows error alert and error state on step associated with %o API error", async (testTitle, data) => {
+            const { formationFormData, formationResponse, formationStepName, profileData } = data;
 
-              filledInBusiness = {
-                ...business,
-                profileData: profileData ? { ...profileData } : { ...business.profileData },
-                formationData: {
-                  ...business.formationData,
-                  formationFormData: formationFormData,
-                  formationResponse: formationResponse,
-                },
-              };
-              const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
-              await page.stepperClickToReviewStep();
-              await page.checkAllReviewCheckboxes();
-              await page.clickSubmit();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "ERROR",
-              );
-              expect(
-                screen.getByText(Config.formation.errorBanner.incompleteStepsError),
-              ).toBeInTheDocument();
-            },
-          );
+            filledInBusiness = {
+              ...business,
+              profileData: profileData ? { ...profileData } : { ...business.profileData },
+              formationData: {
+                ...business.formationData,
+                formationFormData: formationFormData,
+                formationResponse: formationResponse,
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.checkAllReviewCheckboxes();
+            await page.clickSubmit();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "ERROR",
+            );
+            expect(
+              screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+            ).toBeInTheDocument();
+          });
 
           it.each([
             businessSuffix,
@@ -1489,162 +1485,158 @@ describe("<BusinessFormationPaginator />", () => {
             contactFirstName,
             contactLastName,
             contactPhoneNumber,
-          ])(
-            "removes %o API error on blur when user changes text field",
-            async (testTitle, data) => {
-              const {
+          ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
+            const {
+              formationFormData,
+              formationResponse,
+              formationStepName,
+              fieldLabel,
+              newTextInput,
+              profileData,
+            } = data;
+            filledInBusiness = {
+              ...business,
+              profileData: profileData ? { ...profileData } : { ...business.profileData },
+              formationData: {
+                ...business.formationData,
                 formationFormData,
                 formationResponse,
-                formationStepName,
-                fieldLabel,
-                newTextInput,
-                profileData,
-              } = data;
-              filledInBusiness = {
-                ...business,
-                profileData: profileData ? { ...profileData } : { ...business.profileData },
-                formationData: {
-                  ...business.formationData,
-                  formationFormData,
-                  formationResponse,
-                },
-              };
-              const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
-              await page.stepperClickToReviewStep();
-              await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-              if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
-              page.fillText(fieldLabel as string as string, newTextInput as string);
-              await waitFor(() => {
-                expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              });
-              expect(
-                screen.queryByText(Config.formation.errorBanner.errorOnStep),
-              ).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE",
-              );
-            },
-          );
-
-          it.each([paymentType, canCreateLimitedPartner, canGetDistribution, canMakeDistribution])(
-            "removes %o API error when user selects radio button",
-            async (testTitle, data) => {
-              const {
-                formationFormData,
-                formationResponse,
-                formationStepName,
-                radioBtnTestId,
-                profileData,
-              } = data;
-              filledInBusiness = {
-                ...business,
-                profileData: profileData ? { ...profileData } : { ...business.profileData },
-                formationData: {
-                  ...business.formationData,
-                  formationFormData,
-                  formationResponse,
-                },
-              };
-              const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
-              await page.stepperClickToReviewStep();
-              await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-              if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
-              fireEvent.click(screen.getByTestId(radioBtnTestId as string));
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
+            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+            page.fillText(fieldLabel as string as string, newTextInput as string);
+            await waitFor(() => {
               expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(
-                screen.queryByText(Config.formation.errorBanner.errorOnStep),
-              ).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE",
-              );
-            },
-          );
+            });
+            expect(
+              screen.queryByText(Config.formation.errorBanner.errorOnStep),
+            ).not.toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE-ACTIVE",
+            );
+          });
 
-          it.each([businessSuffix])(
-            "removes %o API error when user selects from dropdown and then blur",
-            async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName, dropDownValue } =
-                data;
-              filledInBusiness = {
-                ...business,
-                formationData: {
-                  ...business.formationData,
-                  formationFormData,
-                  formationResponse,
-                },
-              };
-              const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
-              await page.stepperClickToReviewStep();
-              await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
-
-              const selectButton = screen.getByTestId("business-suffix-main");
-              fireEvent.mouseDown(selectButton);
-              const listbox = within(screen.getByRole("listbox"));
-              fireEvent.click(listbox.getByText(dropDownValue as string));
-              fireEvent.blur(selectButton);
-
-              await waitFor(() => {
-                expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              });
-              expect(
-                screen.queryByText(Config.formation.errorBanner.errorOnStep),
-              ).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE",
-              );
-            },
-          );
-
-          it.each([businessStartDate])(
-            "removes %o API error when user selects from date picker",
-            async (testTitle, data) => {
-              const {
+          it.each([
+            paymentType,
+            canCreateLimitedPartner,
+            canGetDistribution,
+            canMakeDistribution,
+          ])("removes %o API error when user selects radio button", async (testTitle, data) => {
+            const {
+              formationFormData,
+              formationResponse,
+              formationStepName,
+              radioBtnTestId,
+              profileData,
+            } = data;
+            filledInBusiness = {
+              ...business,
+              profileData: profileData ? { ...profileData } : { ...business.profileData },
+              formationData: {
+                ...business.formationData,
                 formationFormData,
                 formationResponse,
-                formationStepName,
-                newDate,
-                datePickerFieldType,
-              } = data as MockApiErrorTestData;
-              filledInBusiness = {
-                ...business,
-                formationData: {
-                  ...business.formationData,
-                  formationFormData,
-                  formationResponse,
-                },
-              };
-              const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitBusinessNameStep();
-              await page.stepperClickToReviewStep();
-              await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
+            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+            fireEvent.click(screen.getByTestId(radioBtnTestId as string));
+            expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+            expect(
+              screen.queryByText(Config.formation.errorBanner.errorOnStep),
+            ).not.toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE-ACTIVE",
+            );
+          });
 
-              page.selectDate(
-                newDate as DateObject,
-                datePickerFieldType as "Business start date" | "Foreign date of formation",
-              );
+          it.each([
+            businessSuffix,
+          ])("removes %o API error when user selects from dropdown and then blur", async (testTitle, data) => {
+            const { formationFormData, formationResponse, formationStepName, dropDownValue } = data;
+            filledInBusiness = {
+              ...business,
+              formationData: {
+                ...business.formationData,
+                formationFormData,
+                formationResponse,
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
+            const selectButton = screen.getByTestId("business-suffix-main");
+            fireEvent.mouseDown(selectButton);
+            const listbox = within(screen.getByRole("listbox"));
+            fireEvent.click(listbox.getByText(dropDownValue as string));
+            fireEvent.blur(selectButton);
+
+            await waitFor(() => {
               expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(
-                screen.queryByText(Config.formation.errorBanner.errorOnStep),
-              ).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE",
-              );
-            },
-          );
+            });
+            expect(
+              screen.queryByText(Config.formation.errorBanner.errorOnStep),
+            ).not.toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE-ACTIVE",
+            );
+          });
+
+          it.each([
+            businessStartDate,
+          ])("removes %o API error when user selects from date picker", async (testTitle, data) => {
+            const {
+              formationFormData,
+              formationResponse,
+              formationStepName,
+              newDate,
+              datePickerFieldType,
+            } = data as MockApiErrorTestData;
+            filledInBusiness = {
+              ...business,
+              formationData: {
+                ...business.formationData,
+                formationFormData,
+                formationResponse,
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+
+            page.selectDate(
+              newDate as DateObject,
+              datePickerFieldType as "Business start date" | "Foreign date of formation",
+            );
+
+            expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+            expect(
+              screen.queryByText(Config.formation.errorBanner.errorOnStep),
+            ).not.toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE-ACTIVE",
+            );
+          });
         });
 
         describe("foreign business persona", () => {
@@ -2009,32 +2001,29 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressCountry,
             foreignStateOfFormation,
             foreignDateOfFormation,
-          ])(
-            "shows error alert and error state on step associated with %o API error",
-            async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName } = data;
+          ])("shows error alert and error state on step associated with %o API error", async (testTitle, data) => {
+            const { formationFormData, formationResponse, formationStepName } = data;
 
-              filledInBusiness = {
-                ...business,
-                profileData: { ...business.profileData, businessPersona: "FOREIGN" },
-                formationData: {
-                  ...business.formationData,
-                  formationFormData: formationFormData,
-                  formationResponse: formationResponse,
-                },
-              };
-              const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitNexusBusinessNameStep();
-              await page.stepperClickToReviewStep();
-              await page.clickSubmit();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "ERROR",
-              );
-              expect(
-                screen.getByText(Config.formation.errorBanner.incompleteStepsError),
-              ).toBeInTheDocument();
-            },
-          );
+            filledInBusiness = {
+              ...business,
+              profileData: { ...business.profileData, businessPersona: "FOREIGN" },
+              formationData: {
+                ...business.formationData,
+                formationFormData: formationFormData,
+                formationResponse: formationResponse,
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitNexusBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "ERROR",
+            );
+            expect(
+              screen.getByText(Config.formation.errorBanner.incompleteStepsError),
+            ).toBeInTheDocument();
+          });
 
           it.each([
             foreignUsMainAddressLine1,
@@ -2092,46 +2081,43 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressCountry,
             foreignStateOfFormation,
             foreignDateOfFormation,
-          ])(
-            "removes %o API error on blur when user changes text field",
-            async (testTitle, data) => {
-              const {
+          ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
+            const {
+              formationFormData,
+              formationResponse,
+              formationStepName,
+              fieldLabel,
+              newTextInput,
+            } = data;
+            filledInBusiness = {
+              ...filledInBusiness,
+              profileData: { ...filledInBusiness.profileData, businessPersona: "FOREIGN" },
+              formationData: {
+                ...filledInBusiness.formationData,
                 formationFormData,
                 formationResponse,
-                formationStepName,
-                fieldLabel,
-                newTextInput,
-              } = data;
-              filledInBusiness = {
-                ...filledInBusiness,
-                profileData: { ...filledInBusiness.profileData, businessPersona: "FOREIGN" },
-                formationData: {
-                  ...filledInBusiness.formationData,
-                  formationFormData,
-                  formationResponse,
-                },
-              };
-              const page = preparePage({ business: filledInBusiness, displayContent });
-              await page.fillAndSubmitNexusBusinessNameStep();
-              await page.stepperClickToReviewStep();
-              await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-              if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitNexusBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
+            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
-              page.fillText(fieldLabel as string as string, newTextInput as string);
-              await waitFor(() => {
-                expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              });
-              expect(
-                screen.queryByText(Config.formation.errorBanner.errorOnStep),
-              ).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE",
-              );
-            },
-          );
+            page.fillText(fieldLabel as string as string, newTextInput as string);
+            await waitFor(() => {
+              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+            });
+            expect(
+              screen.queryByText(Config.formation.errorBanner.errorOnStep),
+            ).not.toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE-ACTIVE",
+            );
+          });
         });
       });
 

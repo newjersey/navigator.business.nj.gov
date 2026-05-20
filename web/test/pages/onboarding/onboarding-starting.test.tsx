@@ -132,67 +132,64 @@ describe("onboarding - starting a business", () => {
       });
     });
 
-    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-      "prevents user from moving to Step 3 when %s is selected as industry, but essential question is not answered",
-      async (industryId) => {
-        const userData = generateTestUserData({
-          industryId: industryId,
-          ...emptyIndustrySpecificData,
+    it.each(
+      industryIdsWithSingleRequiredEssentialQuestion,
+    )("prevents user from moving to Step 3 when %s is selected as industry, but essential question is not answered", async (industryId) => {
+      const userData = generateTestUserData({
+        industryId: industryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+
+      page.clickNext();
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+      ).toBeInTheDocument();
+    });
+
+    it.each(
+      industryIdsWithSingleRequiredEssentialQuestion,
+    )("allows user to move past Step 2 when you have selected an industry %s and answered the essential question", async (industryId) => {
+      const userData = generateTestUserData({
+        industryId: industryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+
+      page.chooseEssentialQuestionRadio(industryId, 0);
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith({
+          pathname: ROUTES.dashboard,
+          query: { [QUERIES.fromOnboarding]: "true" },
         });
-        useMockRouter({ isReady: true, query: { page: "2" } });
-        const { page } = renderPage({ userData });
+      });
+    });
 
-        page.clickNext();
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
-        expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
-        expect(
-          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
-        ).toBeInTheDocument();
-      },
-    );
+    it.each(
+      industryIdsWithSingleRequiredEssentialQuestion,
+    )("removes essential question inline error when essential question radio is selected for %s industry", async (industryId) => {
+      const userData = generateTestUserData({
+        industryId: industryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
 
-    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-      "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
-      async (industryId) => {
-        const userData = generateTestUserData({
-          industryId: industryId,
-          ...emptyIndustrySpecificData,
-        });
-        useMockRouter({ isReady: true, query: { page: "2" } });
-        const { page } = renderPage({ userData });
-
-        page.chooseEssentialQuestionRadio(industryId, 0);
-        page.clickNext();
-        await waitFor(() => {
-          expect(mockPush).toHaveBeenCalledWith({
-            pathname: ROUTES.dashboard,
-            query: { [QUERIES.fromOnboarding]: "true" },
-          });
-        });
-      },
-    );
-
-    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-      "removes essential question inline error when essential question radio is selected for %s industry",
-      async (industryId) => {
-        const userData = generateTestUserData({
-          industryId: industryId,
-          ...emptyIndustrySpecificData,
-        });
-        useMockRouter({ isReady: true, query: { page: "2" } });
-        const { page } = renderPage({ userData });
-
-        page.clickNext();
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
-        expect(
-          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
-        ).toBeInTheDocument();
-        page.chooseEssentialQuestionRadio(industryId, 0);
-        expect(
-          screen.queryByText(Config.siteWideErrorMessages.errorRadioButton),
-        ).not.toBeInTheDocument();
-      },
-    );
+      page.clickNext();
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+      ).toBeInTheDocument();
+      page.chooseEssentialQuestionRadio(industryId, 0);
+      expect(
+        screen.queryByText(Config.siteWideErrorMessages.errorRadioButton),
+      ).not.toBeInTheDocument();
+    });
 
     const employmentAgencyIndustryId = "employment-agency";
 

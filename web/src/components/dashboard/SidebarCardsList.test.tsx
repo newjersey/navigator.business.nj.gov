@@ -113,47 +113,41 @@ describe("<SidebarCardsList />", () => {
         "transactionsInNJ",
       ];
 
-      it.each(foreignBusinessTypeIds)(
-        "displays when the business %s is a Remote Seller/Worker",
-        (foreignBusinessTypeId) => {
-          const mockBusiness = generateBusiness({
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              operatingPhase: OperatingPhaseId.REMOTE_SELLER_WORKER,
-              foreignBusinessTypeIds: [foreignBusinessTypeId],
-            }),
-          });
-          useMockBusiness(mockBusiness);
+      it.each(
+        foreignBusinessTypeIds,
+      )("displays when the business %s is a Remote Seller/Worker", (foreignBusinessTypeId) => {
+        const mockBusiness = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            operatingPhase: OperatingPhaseId.REMOTE_SELLER_WORKER,
+            foreignBusinessTypeIds: [foreignBusinessTypeId],
+          }),
+        });
+        useMockBusiness(mockBusiness);
 
-          renderComponent({ isRemoteSellerWorker: true });
-          expect(
-            screen.getAllByText(
-              Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText,
-            )[0],
-          ).toBeInTheDocument();
-        },
-      );
+        renderComponent({ isRemoteSellerWorker: true });
+        expect(
+          screen.getAllByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)[0],
+        ).toBeInTheDocument();
+      });
 
-      it.each(foreignBusinessTypeIds)(
-        "displays when the business %s is a Remote Seller/Worker and operating phase is GUEST_MODE",
-        (foreignBusinessTypeId) => {
-          const mockBusiness = generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase: OperatingPhaseId.GUEST_MODE,
-              businessPersona: "FOREIGN",
-              foreignBusinessTypeIds: [foreignBusinessTypeId],
-            }),
-          });
-          useMockBusiness(mockBusiness);
+      it.each(
+        foreignBusinessTypeIds,
+      )("displays when the business %s is a Remote Seller/Worker and operating phase is GUEST_MODE", (foreignBusinessTypeId) => {
+        const mockBusiness = generateBusiness({
+          profileData: generateProfileData({
+            operatingPhase: OperatingPhaseId.GUEST_MODE,
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: [foreignBusinessTypeId],
+          }),
+        });
+        useMockBusiness(mockBusiness);
 
-          renderComponent({ isRemoteSellerWorker: true });
-          expect(
-            screen.getAllByText(
-              Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText,
-            )[0],
-          ).toBeInTheDocument();
-        },
-      );
+        renderComponent({ isRemoteSellerWorker: true });
+        expect(
+          screen.getAllByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)[0],
+        ).toBeInTheDocument();
+      });
     });
 
     describe("Empty Opportunities Message", () => {

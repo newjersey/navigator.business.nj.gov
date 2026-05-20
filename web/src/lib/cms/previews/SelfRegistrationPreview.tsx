@@ -37,8 +37,9 @@ const SelfRegistrationPreview = (props: PreviewProps): ReactElement => {
 
   const currentRegistrationStatus = registrationStatusList[changeRegistrationStatus];
 
-  const { FormFuncWrapper, state: formContextState } =
-    useFormContextHelper(createDataFormErrorMap<OnboardingErrors>());
+  const { FormFuncWrapper, state: formContextState } = useFormContextHelper(
+    createDataFormErrorMap<OnboardingErrors>(),
+  );
 
   FormFuncWrapper(
     async (): Promise<void> => {},

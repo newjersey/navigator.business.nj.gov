@@ -410,36 +410,34 @@ describe("Formation - ReviewStep", () => {
       return false;
     };
 
-    it.each(legalStructureIds)(
-      "conditionally renders the members section when there are NO members and the legalStructure is %s",
-      async (legalStructure) => {
-        await renderStep({ legalStructureId: legalStructure }, { members: [] });
-        if (shouldShowMembersSectionNoMembers(legalStructure)) {
-          /* eslint-disable-next-line jest/no-conditional-expect */
-          expect(screen.getByTestId("review-members")).toBeInTheDocument();
-        } else {
-          /* eslint-disable-next-line jest/no-conditional-expect */
-          expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
-        }
-      },
-    );
+    it.each(
+      legalStructureIds,
+    )("conditionally renders the members section when there are NO members and the legalStructure is %s", async (legalStructure) => {
+      await renderStep({ legalStructureId: legalStructure }, { members: [] });
+      if (shouldShowMembersSectionNoMembers(legalStructure)) {
+        /* eslint-disable-next-line jest/no-conditional-expect */
+        expect(screen.getByTestId("review-members")).toBeInTheDocument();
+      } else {
+        /* eslint-disable-next-line jest/no-conditional-expect */
+        expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
+      }
+    });
 
-    it.each(legalStructureIds)(
-      "conditionally renders the members section when there are members and the legalStructure is %s",
-      async (legalStructure) => {
-        await renderStep(
-          { legalStructureId: legalStructure },
-          { members: [generateFormationMember({})] },
-        );
-        if (legalStructure === "limited-partnership") {
-          /* eslint-disable-next-line jest/no-conditional-expect */
-          expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
-        } else {
-          /* eslint-disable-next-line jest/no-conditional-expect */
-          expect(screen.getByTestId("review-members")).toBeInTheDocument();
-        }
-      },
-    );
+    it.each(
+      legalStructureIds,
+    )("conditionally renders the members section when there are members and the legalStructure is %s", async (legalStructure) => {
+      await renderStep(
+        { legalStructureId: legalStructure },
+        { members: [generateFormationMember({})] },
+      );
+      if (legalStructure === "limited-partnership") {
+        /* eslint-disable-next-line jest/no-conditional-expect */
+        expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
+      } else {
+        /* eslint-disable-next-line jest/no-conditional-expect */
+        expect(screen.getByTestId("review-members")).toBeInTheDocument();
+      }
+    });
   });
 
   describe("address", () => {

@@ -231,78 +231,73 @@ describe("profile - shared", () => {
     ).not.toBeInTheDocument();
   });
 
-  it.each(nonOwningPersonas)(
-    "should show planned renovation question when home base question is no for %s",
-    async (businessPersona) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          industryId: randomHomeBasedIndustry(),
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-          businessPersona: businessPersona,
-          homeBasedBusiness: false,
-          foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
-        }),
-      });
+  it.each(
+    nonOwningPersonas,
+  )("should show planned renovation question when home base question is no for %s", async (businessPersona) => {
+    const business = generateBusinessForProfile({
+      profileData: generateProfileData({
+        industryId: randomHomeBasedIndustry(),
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+        businessPersona: businessPersona,
+        homeBasedBusiness: false,
+        foreignBusinessTypeIds:
+          businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+      }),
+    });
 
-      renderPage({ business });
-      chooseTab("permits");
+    renderPage({ business });
+    chooseTab("permits");
 
-      expect(
-        screen.getByText(
-          Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
-        ),
-      ).toBeInTheDocument();
-    },
-  );
+    expect(
+      screen.getByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description),
+    ).toBeInTheDocument();
+  });
 
-  it.each(nonOwningPersonas)(
-    "should NOT show planned renovation question when home based question is yes for %s",
-    async (businessPersona) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          industryId: randomHomeBasedIndustry(),
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-          businessPersona: businessPersona,
-          homeBasedBusiness: true,
-          foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
-        }),
-      });
+  it.each(
+    nonOwningPersonas,
+  )("should NOT show planned renovation question when home based question is yes for %s", async (businessPersona) => {
+    const business = generateBusinessForProfile({
+      profileData: generateProfileData({
+        industryId: randomHomeBasedIndustry(),
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+        businessPersona: businessPersona,
+        homeBasedBusiness: true,
+        foreignBusinessTypeIds:
+          businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+      }),
+    });
 
-      renderPage({ business });
+    renderPage({ business });
 
-      expect(
-        screen.queryByText(
-          Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
-        ),
-      ).not.toBeInTheDocument();
-    },
-  );
+    expect(
+      screen.queryByText(
+        Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
+      ),
+    ).not.toBeInTheDocument();
+  });
 
-  it.each(nonOwningPersonas)(
-    "should NOT show planned renovation question when home based question is undefined for %s",
-    async (businessPersona) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          industryId: randomHomeBasedIndustry(),
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-          businessPersona: businessPersona,
-          homeBasedBusiness: undefined,
-          foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
-        }),
-      });
+  it.each(
+    nonOwningPersonas,
+  )("should NOT show planned renovation question when home based question is undefined for %s", async (businessPersona) => {
+    const business = generateBusinessForProfile({
+      profileData: generateProfileData({
+        industryId: randomHomeBasedIndustry(),
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+        businessPersona: businessPersona,
+        homeBasedBusiness: undefined,
+        foreignBusinessTypeIds:
+          businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+      }),
+    });
 
-      renderPage({ business });
+    renderPage({ business });
 
-      expect(
-        screen.queryByText(
-          Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
-        ),
-      ).not.toBeInTheDocument();
-    },
-  );
+    expect(
+      screen.queryByText(
+        Config.profileDefaults.fields.plannedRenovationQuestion.default.description,
+      ),
+    ).not.toBeInTheDocument();
+  });
 
   it("sends analytics when municipality entered for first time", async () => {
     const persona: Partial<ProfileData> = randomElementFromArray([
@@ -571,49 +566,48 @@ describe("profile - shared", () => {
     });
 
     describe("tax pin", () => {
-      it.each(["STARTING", "OWNING"])(
-        "displays the tax pin field for %s businessPersona",
-        (businessPersona) => {
-          renderPage({
-            business: generateBusinessForProfile({
-              profileData: generateProfileData({
-                businessPersona: businessPersona as BusinessPersona,
-              }),
+      it.each([
+        "STARTING",
+        "OWNING",
+      ])("displays the tax pin field for %s businessPersona", (businessPersona) => {
+        renderPage({
+          business: generateBusinessForProfile({
+            profileData: generateProfileData({
+              businessPersona: businessPersona as BusinessPersona,
             }),
-          });
-          chooseTab("numbers");
-          expect(
-            screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
-          ).toBeInTheDocument();
-        },
-      );
+          }),
+        });
+        chooseTab("numbers");
+        expect(
+          screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
+        ).toBeInTheDocument();
+      });
     });
   });
 
   describe("Callout that the profile helps with recommendations", () => {
-    it.each(businessPersonas)(
-      "shows the callout for all personas when unauthenticated for %s",
-      (persona) => {
-        const business = generateBusinessForProfile({
-          formationData: generateFormationData({
-            completedFilingPayment: false,
-          }),
-          profileData: generateProfileData({
-            dateOfFormation: undefined,
-            businessPersona: persona,
-          }),
-        });
-        renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
+    it.each(
+      businessPersonas,
+    )("shows the callout for all personas when unauthenticated for %s", (persona) => {
+      const business = generateBusinessForProfile({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: undefined,
+          businessPersona: persona,
+        }),
+      });
+      renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
 
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
-          )?.[1];
+      const calloutText =
+        Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+          /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+        )?.[1];
 
-        expect(calloutText).toBeDefined();
-        expect(screen.getByText(calloutText!)).toBeInTheDocument();
-      },
-    );
+      expect(calloutText).toBeDefined();
+      expect(screen.getByText(calloutText!)).toBeInTheDocument();
+    });
 
     it("shows the callout for OWNING businesses and authenticated", () => {
       const business = generateBusinessForProfile({
@@ -635,77 +629,74 @@ describe("profile - shared", () => {
       expect(screen.getByText(calloutText!)).toBeInTheDocument();
     });
 
-    it.each(nonOwningPersonas)(
-      "shows the callout for %s business that paid via the Navigator and are authenticated",
-      (persona) => {
-        const business = generateBusinessForProfile({
-          formationData: generateFormationData({
-            completedFilingPayment: true,
-          }),
-          profileData: generateProfileData({
-            dateOfFormation: "2020-8-8",
-            businessPersona: persona as BusinessPersona,
-          }),
-        });
-        renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
+    it.each(
+      nonOwningPersonas,
+    )("shows the callout for %s business that paid via the Navigator and are authenticated", (persona) => {
+      const business = generateBusinessForProfile({
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: "2020-8-8",
+          businessPersona: persona as BusinessPersona,
+        }),
+      });
+      renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
 
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
-          )?.[1];
+      const calloutText =
+        Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+          /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+        )?.[1];
 
-        expect(calloutText).toBeDefined();
-        expect(screen.getByText(calloutText!)).toBeInTheDocument();
-      },
-    );
+      expect(calloutText).toBeDefined();
+      expect(screen.getByText(calloutText!)).toBeInTheDocument();
+    });
 
-    it.each(nonOwningPersonas)(
-      "shows the callout for %s business that have not paid and not formed and are authenticated",
-      (persona) => {
-        const business = generateBusinessForProfile({
-          formationData: generateFormationData({
-            completedFilingPayment: false,
-          }),
-          profileData: generateProfileData({
-            dateOfFormation: undefined,
-            businessPersona: persona as BusinessPersona,
-          }),
-        });
-        renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
+    it.each(
+      nonOwningPersonas,
+    )("shows the callout for %s business that have not paid and not formed and are authenticated", (persona) => {
+      const business = generateBusinessForProfile({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: undefined,
+          businessPersona: persona as BusinessPersona,
+        }),
+      });
+      renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
 
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
-          )?.[1];
+      const calloutText =
+        Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+          /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+        )?.[1];
 
-        expect(calloutText).toBeDefined();
-        expect(screen.getByText(calloutText!)).toBeInTheDocument();
-      },
-    );
+      expect(calloutText).toBeDefined();
+      expect(screen.getByText(calloutText!)).toBeInTheDocument();
+    });
 
-    it.each(businessPersonas)(
-      "shows the callout for %s business that set DateOfFormation but did NOT pay",
-      (persona) => {
-        const business = generateBusinessForProfile({
-          formationData: generateFormationData({
-            completedFilingPayment: false,
-          }),
-          profileData: generateProfileData({
-            dateOfFormation: "2020-8-8",
-            businessPersona: persona as BusinessPersona,
-          }),
-        });
-        renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
+    it.each(
+      businessPersonas,
+    )("shows the callout for %s business that set DateOfFormation but did NOT pay", (persona) => {
+      const business = generateBusinessForProfile({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: "2020-8-8",
+          businessPersona: persona as BusinessPersona,
+        }),
+      });
+      renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
 
-        const calloutText =
-          Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
-            /}\s*\*{2}([^*]+)\*{2}\s*:::/,
-          )?.[1];
+      const calloutText =
+        Config.profileDefaults.default.yourProfileHelpsWithRecommendationsCallout.match(
+          /}\s*\*{2}([^*]+)\*{2}\s*:::/,
+        )?.[1];
 
-        expect(calloutText).toBeDefined();
-        expect(screen.getByText(calloutText!)).toBeInTheDocument();
-      },
-    );
+      expect(calloutText).toBeDefined();
+      expect(screen.getByText(calloutText!)).toBeInTheDocument();
+    });
   });
 
   describe("non essential questions", () => {
@@ -721,70 +712,67 @@ describe("profile - shared", () => {
       });
     };
 
-    it.each(nonOwningPersonas)(
-      "resets non essential questions if industry is changed when %s",
-      async (businessPersona: BusinessPersona) => {
-        const business = generateBusinessForNonEssentialQuestionTest({
-          industryId: "test-industry-with-non-essential-questions",
-          businessPersona: businessPersona,
-          nonEssentialRadioAnswers: {
-            "test-question-1": true,
-            "test-question-2": true,
-          },
-        });
-        renderPage({ business });
-        await goToInfoTab();
-        selectByValue("Industry", "test-industry-with-no-non-essential-questions");
-        clickSave();
-        await waitFor(() => {
-          expect(currentBusiness().profileData.nonEssentialRadioAnswers).toStrictEqual({});
-        });
-      },
-    );
+    it.each(
+      nonOwningPersonas,
+    )("resets non essential questions if industry is changed when %s", async (businessPersona: BusinessPersona) => {
+      const business = generateBusinessForNonEssentialQuestionTest({
+        industryId: "test-industry-with-non-essential-questions",
+        businessPersona: businessPersona,
+        nonEssentialRadioAnswers: {
+          "test-question-1": true,
+          "test-question-2": true,
+        },
+      });
+      renderPage({ business });
+      await goToInfoTab();
+      selectByValue("Industry", "test-industry-with-no-non-essential-questions");
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.nonEssentialRadioAnswers).toStrictEqual({});
+      });
+    });
   });
 
   describe("location", () => {
-    it.each(nonOwningPersonas)(
-      "displays a warning alert for cannabis businesses when %s",
-      async (businessPersona: BusinessPersona) => {
-        renderPage({
-          business: generateBusinessForProfile({
-            profileData: generateProfileData({
-              businessPersona: businessPersona,
-              municipality: generateMunicipality({ displayName: "Trenton" }),
-              industryId: "cannabis",
-              ...getForeignNexusProfileFields(businessPersona),
-            }),
+    it.each(
+      nonOwningPersonas,
+    )("displays a warning alert for cannabis businesses when %s", async (businessPersona: BusinessPersona) => {
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: businessPersona,
+            municipality: generateMunicipality({ displayName: "Trenton" }),
+            industryId: "cannabis",
+            ...getForeignNexusProfileFields(businessPersona),
           }),
-        });
-        await goToInfoTab();
-        expect(
-          screen.getByText(Config.profileDefaults.default.cannabisLocationAlert),
-        ).toBeInTheDocument();
-      },
-    );
+        }),
+      });
+      await goToInfoTab();
+      expect(
+        screen.getByText(Config.profileDefaults.default.cannabisLocationAlert),
+      ).toBeInTheDocument();
+    });
 
-    it.each(nonOwningPersonas)(
-      "should NOT display a warning alert for non-cannabis businesses when %s",
-      async (businessPersona: BusinessPersona) => {
-        const filter = (industry: Industry): boolean => industry.id !== "cannabis";
-        const industry = filterRandomIndustry(filter);
+    it.each(
+      nonOwningPersonas,
+    )("should NOT display a warning alert for non-cannabis businesses when %s", async (businessPersona: BusinessPersona) => {
+      const filter = (industry: Industry): boolean => industry.id !== "cannabis";
+      const industry = filterRandomIndustry(filter);
 
-        renderPage({
-          business: generateBusinessForProfile({
-            profileData: generateProfileData({
-              businessPersona: businessPersona,
-              industryId: industry.id,
-              ...getForeignNexusProfileFields(businessPersona),
-            }),
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: businessPersona,
+            industryId: industry.id,
+            ...getForeignNexusProfileFields(businessPersona),
           }),
-        });
-        await goToInfoTab();
-        expect(
-          screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert),
-        ).not.toBeInTheDocument();
-      },
-    );
+        }),
+      });
+      await goToInfoTab();
+      expect(
+        screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert),
+      ).not.toBeInTheDocument();
+    });
 
     it("should NOT display a cannabis specific warning alert when OWNING", () => {
       renderPage({
@@ -799,29 +787,28 @@ describe("profile - shared", () => {
   });
 
   describe("profile error alert", () => {
-    it.each(nonOwningPersonas)(
-      "displays alert with the header if industry field has an error when %s",
-      async (businessPersona) => {
-        const business = generateBusinessForProfile({
-          profileData: generateProfileData({
-            businessPersona: businessPersona as BusinessPersona,
-            industryId: undefined,
-            foreignBusinessTypeIds:
-              businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
-          }),
-        });
-        renderPage({ business });
-        await goToInfoTab();
-        clickSave();
-        const profileAlert = screen.getByTestId("profile-error-alert");
-        await waitFor(() => {
-          expect(profileAlert).toBeInTheDocument();
-        });
-        expect(
-          within(profileAlert).getByText(Config.profileDefaults.fields.industryId.default.header),
-        ).toBeInTheDocument();
-      },
-    );
+    it.each(
+      nonOwningPersonas,
+    )("displays alert with the header if industry field has an error when %s", async (businessPersona) => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: businessPersona as BusinessPersona,
+          industryId: undefined,
+          foreignBusinessTypeIds:
+            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+        }),
+      });
+      renderPage({ business });
+      await goToInfoTab();
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+      expect(
+        within(profileAlert).getByText(Config.profileDefaults.fields.industryId.default.header),
+      ).toBeInTheDocument();
+    });
   });
 
   describe("sets init profile tab", () => {

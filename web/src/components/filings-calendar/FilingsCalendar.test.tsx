@@ -434,59 +434,55 @@ describe("<FilingsCalendar />", () => {
   });
 
   describe("formation date prompt", () => {
-    it.each(publicFilingLegalStructures)(
-      "shows formation date prompt if %s and not yet entered Formation Date",
-      (legalStructureId) => {
-        const business = generateBusiness({
-          profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
-          taxFilingData: generateTaxFilingData({ filings: [] }),
-        });
-        renderFilingsCalendar({}, business);
-        expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
-      },
-    );
+    it.each(
+      publicFilingLegalStructures,
+    )("shows formation date prompt if %s and not yet entered Formation Date", (legalStructureId) => {
+      const business = generateBusiness({
+        profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
+        taxFilingData: generateTaxFilingData({ filings: [] }),
+      });
+      renderFilingsCalendar({}, business);
+      expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
+    });
 
-    it.each(publicFilingLegalStructures)(
-      "shows formation date prompt if %s and not yet entered Formation Date even if other filings exist",
-      (legalStructureId) => {
-        const business = generateBusiness({
-          profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
-          taxFilingData: generateTaxFilingData({
-            filings: [generateTaxFilingCalendarEvent({ identifier: "filing1" })],
-          }),
-        });
-        const operateReferences: Record<string, OperateReference> = {
-          filing1: generateOperateReference({}),
-        };
-        useMockProfileData({ dateOfFormation: undefined, legalStructureId });
-        renderFilingsCalendar(operateReferences, business);
-        expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
-      },
-    );
+    it.each(
+      publicFilingLegalStructures,
+    )("shows formation date prompt if %s and not yet entered Formation Date even if other filings exist", (legalStructureId) => {
+      const business = generateBusiness({
+        profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
+        taxFilingData: generateTaxFilingData({
+          filings: [generateTaxFilingCalendarEvent({ identifier: "filing1" })],
+        }),
+      });
+      const operateReferences: Record<string, OperateReference> = {
+        filing1: generateOperateReference({}),
+      };
+      useMockProfileData({ dateOfFormation: undefined, legalStructureId });
+      renderFilingsCalendar(operateReferences, business);
+      expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
+    });
 
-    it.each(publicFilingLegalStructures)(
-      "does not show formation date prompt if %s and has entered Formation Date",
-      (legalStructureId) => {
-        const business = generateBusiness({
-          profileData: generateProfileData({ dateOfFormation: "2023-01-01", legalStructureId }),
-          taxFilingData: generateTaxFilingData({ filings: [] }),
-        });
-        renderFilingsCalendar({}, business);
-        expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
-      },
-    );
+    it.each(
+      publicFilingLegalStructures,
+    )("does not show formation date prompt if %s and has entered Formation Date", (legalStructureId) => {
+      const business = generateBusiness({
+        profileData: generateProfileData({ dateOfFormation: "2023-01-01", legalStructureId }),
+        taxFilingData: generateTaxFilingData({ filings: [] }),
+      });
+      renderFilingsCalendar({}, business);
+      expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
+    });
 
-    it.each(tradeNameLegalStructures)(
-      "does not show formation date prompt if %s",
-      (legalStructureId) => {
-        const business = generateBusiness({
-          profileData: generateProfileData({ legalStructureId }),
-          taxFilingData: generateTaxFilingData({ filings: [] }),
-        });
-        renderFilingsCalendar({}, business);
-        expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
-      },
-    );
+    it.each(
+      tradeNameLegalStructures,
+    )("does not show formation date prompt if %s", (legalStructureId) => {
+      const business = generateBusiness({
+        profileData: generateProfileData({ legalStructureId }),
+        taxFilingData: generateTaxFilingData({ filings: [] }),
+      });
+      renderFilingsCalendar({}, business);
+      expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
+    });
   });
 
   it("displays filings calendar as list with annual report", () => {

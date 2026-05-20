@@ -129,21 +129,18 @@ describe("<MainBusinessAddressNj />", () => {
       ["addressLine1", ""],
       ["addressMunicipality", undefined],
       ["addressZipCode", ""],
-    ])(
-      "shows an error on submission when missing address field for %s",
-      async (field, initialValue) => {
-        const page = await getPageHelper({
-          [field]: initialValue,
-          legalType: "limited-liability-company",
-        });
-        await attemptApiSubmission(page);
+    ])("shows an error on submission when missing address field for %s", async (field, initialValue) => {
+      const page = await getPageHelper({
+        [field]: initialValue,
+        legalType: "limited-liability-company",
+      });
+      await attemptApiSubmission(page);
 
-        expect(screen.getByTestId("alert-error")).toHaveTextContent(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (Config.formation.fields as any)[field].label,
-        );
-      },
-    );
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (Config.formation.fields as any)[field].label,
+      );
+    });
   });
 
   describe("NJ zipCode validation", () => {

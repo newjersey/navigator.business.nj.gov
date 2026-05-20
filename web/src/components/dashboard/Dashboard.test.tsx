@@ -331,15 +331,14 @@ describe("<DashboardOnDesktop />", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  it.each(operatingPhasesThatDontDisplayHideableRoadmapTasks)(
-    "does not render HideableTasks for %s that don't display HideableRoadmapTasks",
-    (OperatingPhase) => {
-      useMockBusiness({ profileData: generateProfileData({ operatingPhase: OperatingPhase }) });
-      renderDashboardComponent({});
+  it.each(
+    operatingPhasesThatDontDisplayHideableRoadmapTasks,
+  )("does not render HideableTasks for %s that don't display HideableRoadmapTasks", (OperatingPhase) => {
+    useMockBusiness({ profileData: generateProfileData({ operatingPhase: OperatingPhase }) });
+    renderDashboardComponent({});
 
-      expect(screen.queryByTestId("hideableTasks")).not.toBeInTheDocument();
-    },
-  );
+    expect(screen.queryByTestId("hideableTasks")).not.toBeInTheDocument();
+  });
 
   describe("anytime actions", () => {
     const operatingPhasesWithAnytimeActions = OperatingPhases.filter((phase: OperatingPhase) => {
@@ -350,33 +349,31 @@ describe("<DashboardOnDesktop />", () => {
       return !phase.displayAnytimeActions;
     }).map((phase) => phase.id);
 
-    it.each(operatingPhasesWithoutAnytimeActions)(
-      "does not display anytime action section for %s",
-      (phase) => {
-        useMockBusiness(
-          generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }),
-        );
-        renderDashboardComponent({
-          anytimeActionTasks: [generateAnytimeActionTask({})],
-        });
+    it.each(
+      operatingPhasesWithoutAnytimeActions,
+    )("does not display anytime action section for %s", (phase) => {
+      useMockBusiness(
+        generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }),
+      );
+      renderDashboardComponent({
+        anytimeActionTasks: [generateAnytimeActionTask({})],
+      });
 
-        expect(screen.queryByTestId("anytimeActionSearch")).not.toBeInTheDocument();
-      },
-    );
+      expect(screen.queryByTestId("anytimeActionSearch")).not.toBeInTheDocument();
+    });
 
-    it.each(operatingPhasesWithAnytimeActions)(
-      "displays anytime action section for %s",
-      (phase) => {
-        useMockBusiness(
-          generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }),
-        );
-        renderDashboardComponent({
-          anytimeActionTasks: [generateAnytimeActionTask({})],
-        });
+    it.each(
+      operatingPhasesWithAnytimeActions,
+    )("displays anytime action section for %s", (phase) => {
+      useMockBusiness(
+        generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }),
+      );
+      renderDashboardComponent({
+        anytimeActionTasks: [generateAnytimeActionTask({})],
+      });
 
-        expect(screen.getByTestId("anytimeActionSearch")).toBeInTheDocument();
-      },
-    );
+      expect(screen.getByTestId("anytimeActionSearch")).toBeInTheDocument();
+    });
   });
 
   it("displays step2 for guest mode user when business structure task is completed", () => {
@@ -427,32 +424,31 @@ describe("<DashboardOnDesktop />", () => {
     expect(screen.getByText("Annual Report")).toBeInTheDocument();
   });
 
-  it.each(operatingPhasesThatDisplayHideableRoadmapTasks)(
-    "renders HideableTasks for %s that display HideableRoadmapTasks",
-    (OperatingPhase) => {
-      const filteredIndustries = getIndustries().filter(
-        (industry) => industry.id !== "domestic-employer",
-      );
-      useMockBusiness({
-        profileData: generateProfileData({
-          operatingPhase: OperatingPhase,
-          industryId: randomElementFromArray(filteredIndustries).id,
-        }),
-        onboardingFormProgress: "COMPLETED",
-      });
-      renderDashboardComponent({});
+  it.each(
+    operatingPhasesThatDisplayHideableRoadmapTasks,
+  )("renders HideableTasks for %s that display HideableRoadmapTasks", (OperatingPhase) => {
+    const filteredIndustries = getIndustries().filter(
+      (industry) => industry.id !== "domestic-employer",
+    );
+    useMockBusiness({
+      profileData: generateProfileData({
+        operatingPhase: OperatingPhase,
+        industryId: randomElementFromArray(filteredIndustries).id,
+      }),
+      onboardingFormProgress: "COMPLETED",
+    });
+    renderDashboardComponent({});
 
-      expect(
-        screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
-      ).toBeInTheDocument();
-      expect(
-        screen.queryAllByRole("heading", {
-          level: 2,
-          name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
-        }).length,
-      ).toEqual(0);
-    },
-  );
+    expect(
+      screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryAllByRole("heading", {
+        level: 2,
+        name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+      }).length,
+    ).toEqual(0);
+  });
 
   it("renders HideableTasks for domestic-employer industry with alternate heading", () => {
     useMockBusiness({

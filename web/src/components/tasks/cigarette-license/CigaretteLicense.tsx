@@ -63,8 +63,9 @@ export const CigaretteLicense = (props: Props): ReactElement => {
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const router = useRouter();
   const [submissionError, setSubmissionError] = useState<SubmissionError>(undefined);
-  const { getInvalidFieldIds, state: formContextState } =
-    useFormContextHelper(createDataFormErrorMap());
+  const { getInvalidFieldIds, state: formContextState } = useFormContextHelper(
+    createDataFormErrorMap(),
+  );
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);

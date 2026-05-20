@@ -98,11 +98,7 @@
     }
   ],
   "name": "Trucking",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "vehicle-dealership-q",
-    "flashing-light-permit"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "vehicle-dealership-q", "flashing-light-permit"],
   "displayname": "trucking",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

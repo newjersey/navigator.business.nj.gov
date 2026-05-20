@@ -84,29 +84,24 @@ describe("businessPersonaHelpers", () => {
   });
 
   describe("isNexusBusiness", () => {
-    it.each(NexusBusinessTypeIds)(
-      `returns true when %s`,
-      (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
-        expect(
-          isNexusBusiness(
-            generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds]),
-          ),
-        ).toBe(true);
-      },
-    );
+    it.each(
+      NexusBusinessTypeIds,
+    )(`returns true when %s`, (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
+      expect(
+        isNexusBusiness(generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds])),
+      ).toBe(true);
+    });
 
-    it.each([...RemoteSellerBusinessTypeIds, ...RemoteWorkerBusinessTypeIds])(
-      `returns false when %s`,
-      (RemoteSellerOrWorkerBusinessTypeIds: ForeignBusinessTypeId) => {
-        expect(
-          isNexusBusiness(
-            generateForeignBusinessWithForeignBusinessTypeIds([
-              RemoteSellerOrWorkerBusinessTypeIds,
-            ]),
-          ),
-        ).toBe(false);
-      },
-    );
+    it.each([
+      ...RemoteSellerBusinessTypeIds,
+      ...RemoteWorkerBusinessTypeIds,
+    ])(`returns false when %s`, (RemoteSellerOrWorkerBusinessTypeIds: ForeignBusinessTypeId) => {
+      expect(
+        isNexusBusiness(
+          generateForeignBusinessWithForeignBusinessTypeIds([RemoteSellerOrWorkerBusinessTypeIds]),
+        ),
+      ).toBe(false);
+    });
 
     it("returns false when empty", () => {
       expect(isNexusBusiness(generateForeignBusinessWithForeignBusinessTypeIds([]))).toBe(false);
@@ -131,27 +126,26 @@ describe("businessPersonaHelpers", () => {
   });
 
   describe("isRemoteWorkerOrSellerBusiness", () => {
-    it.each([...RemoteSellerBusinessTypeIds, ...RemoteWorkerBusinessTypeIds])(
-      `returns true when %s`,
-      (RemoteWorkerOrSellerBusinessTypeId: ForeignBusinessTypeId) => {
-        expect(
-          isRemoteWorkerOrSellerBusiness(
-            generateForeignBusinessWithForeignBusinessTypeIds([RemoteWorkerOrSellerBusinessTypeId]),
-          ),
-        ).toBe(true);
-      },
-    );
+    it.each([
+      ...RemoteSellerBusinessTypeIds,
+      ...RemoteWorkerBusinessTypeIds,
+    ])(`returns true when %s`, (RemoteWorkerOrSellerBusinessTypeId: ForeignBusinessTypeId) => {
+      expect(
+        isRemoteWorkerOrSellerBusiness(
+          generateForeignBusinessWithForeignBusinessTypeIds([RemoteWorkerOrSellerBusinessTypeId]),
+        ),
+      ).toBe(true);
+    });
 
-    it.each(NexusBusinessTypeIds)(
-      `returns false when %s`,
-      (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
-        expect(
-          isRemoteWorkerOrSellerBusiness(
-            generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds]),
-          ),
-        ).toBe(false);
-      },
-    );
+    it.each(
+      NexusBusinessTypeIds,
+    )(`returns false when %s`, (NexusBusinessTypeIds: ForeignBusinessTypeId) => {
+      expect(
+        isRemoteWorkerOrSellerBusiness(
+          generateForeignBusinessWithForeignBusinessTypeIds([NexusBusinessTypeIds]),
+        ),
+      ).toBe(false);
+    });
 
     it("returns false when empty", () => {
       expect(

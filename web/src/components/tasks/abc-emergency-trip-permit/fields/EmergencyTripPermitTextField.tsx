@@ -13,10 +13,8 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-export interface Props extends Omit<
-  GenericTextFieldProps,
-  "value" | "fieldName" | "error" | "inputWidth"
-> {
+export interface Props
+  extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;
   secondaryLabel?: string;
   readOnly?: boolean;

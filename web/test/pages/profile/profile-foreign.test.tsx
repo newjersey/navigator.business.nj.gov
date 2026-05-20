@@ -116,27 +116,26 @@ describe("profile-foreign", () => {
     expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
   });
 
-  it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-    "prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered",
-    async (industryId) => {
-      const business = generateBusinessForProfile({
-        onboardingFormProgress: "UNSTARTED",
-        profileData: generateProfileData({
-          businessPersona: "FOREIGN",
-          industryId: industryId,
-          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-          ...emptyIndustrySpecificData,
-        }),
-      });
-      renderPage({ business });
-      clickSave();
-      await waitFor(() => {
-        expect(
-          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
-        ).toBeInTheDocument();
-      });
-    },
-  );
+  it.each(
+    industryIdsWithSingleRequiredEssentialQuestion,
+  )("prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered", async (industryId) => {
+    const business = generateBusinessForProfile({
+      onboardingFormProgress: "UNSTARTED",
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        industryId: industryId,
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+        ...emptyIndustrySpecificData,
+      }),
+    });
+    renderPage({ business });
+    clickSave();
+    await waitFor(() => {
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+      ).toBeInTheDocument();
+    });
+  });
 
   it("prevents Foreign Nexus user from saving when employment agency is selected as industry, but essential question is not answered", async () => {
     const business = generateBusinessForProfile({
@@ -606,38 +605,40 @@ describe("profile-foreign", () => {
   });
 
   describe("Remote Worker and Seller", () => {
-    it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
-      "renders the business name field for %s",
-      (foreignBusinessTypeId) => {
-        renderPage({
-          business: generateBusinessForProfile({
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
-            }),
+    it.each([
+      "employeesInNJ",
+      "revenueInNJ",
+      "transactionsInNJ",
+    ])("renders the business name field for %s", (foreignBusinessTypeId) => {
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
           }),
-        });
-        expect(screen.getByTestId("businessName")).toBeInTheDocument();
-      },
-    );
+        }),
+      });
+      expect(screen.getByTestId("businessName")).toBeInTheDocument();
+    });
 
-    it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
-      "renders the tax pin field for %s",
-      (foreignBusinessTypeId) => {
-        renderPage({
-          business: generateBusinessForProfile({
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
-            }),
+    it.each([
+      "employeesInNJ",
+      "revenueInNJ",
+      "transactionsInNJ",
+    ])("renders the tax pin field for %s", (foreignBusinessTypeId) => {
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
           }),
-        });
-        chooseTab("numbers");
-        expect(
-          screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
-        ).toBeInTheDocument();
-      },
-    );
+        }),
+      });
+      chooseTab("numbers");
+      expect(
+        screen.getByText(Config.profileDefaults.fields.taxPin.default.header),
+      ).toBeInTheDocument();
+    });
 
     it("shows the employer rates section if the business has remoteWorker foreignBusinessId", () => {
       process.env.FEATURE_EMPLOYER_RATES = "true";

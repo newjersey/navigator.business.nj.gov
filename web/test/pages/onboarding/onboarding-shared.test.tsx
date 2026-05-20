@@ -68,18 +68,18 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
   });
 
-  it.each(["business-persona-starting", "business-persona-foreign"])(
-    "allows %s to move past Step 1",
-    async (radioOption: string) => {
-      const { page } = renderPage({ userData: generateExperienceAUserData() });
+  it.each([
+    "business-persona-starting",
+    "business-persona-foreign",
+  ])("allows %s to move past Step 1", async (radioOption: string) => {
+    const { page } = renderPage({ userData: generateExperienceAUserData() });
 
-      page.chooseRadio(radioOption);
-      fireEvent.click(screen.getByTestId("next"));
-      await waitFor(() => {
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      });
-    },
-  );
+    page.chooseRadio(radioOption);
+    fireEvent.click(screen.getByTestId("next"));
+    await waitFor(() => {
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    });
+  });
 
   it("routes to the second onboarding page when they have answered the first question and we route them to page 2", async () => {
     useMockRouter({ isReady: true, query: { page: "2" } });

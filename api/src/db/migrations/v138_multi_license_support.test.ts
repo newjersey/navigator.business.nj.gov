@@ -152,25 +152,22 @@ describe("v138_multi_license_support", () => {
       industryId: "landscape-architecture",
       taskId: "landscape-architect-license",
     },
-  ])(
-    "correctly updates the license data for $industryId by removing license detail for tasks where license search is removed",
-    (args) => {
-      const initialBusiness = generatev137Business({
-        taskProgress: initialTaskProgress,
-        licenseData: initialLicenseData,
-        profileData: generatev137ProfileData({ industryId: args.industryId }),
-      });
+  ])("correctly updates the license data for $industryId by removing license detail for tasks where license search is removed", (args) => {
+    const initialBusiness = generatev137Business({
+      taskProgress: initialTaskProgress,
+      licenseData: initialLicenseData,
+      profileData: generatev137ProfileData({ industryId: args.industryId }),
+    });
 
-      const updatedBusiness = migrate_v137Business_to_v138Business(initialBusiness);
+    const updatedBusiness = migrate_v137Business_to_v138Business(initialBusiness);
 
-      expect(updatedBusiness.taskProgress).toEqual({
-        "non-license-task-progress": "COMPLETED",
-        [args.taskId]: "NOT_STARTED",
-      });
+    expect(updatedBusiness.taskProgress).toEqual({
+      "non-license-task-progress": "COMPLETED",
+      [args.taskId]: "NOT_STARTED",
+    });
 
-      expect(updatedBusiness.licenseData).toBeUndefined();
-    },
-  );
+    expect(updatedBusiness.licenseData).toBeUndefined();
+  });
 
   it("correctly updates the license data and changes register-consumer-affairs taskprogress key to register-home-contractor", () => {
     const industryId = "home-contractor";

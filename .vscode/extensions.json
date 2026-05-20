@@ -35,8 +35,5 @@
     "usernamehw.errorlens",
     "vivaxy.vscode-conventional-commits"
   ],
-  "unwantedRecommendations": [
-    "chakrounanas.turbo-console-log",
-    "circleci.circleci"
-  ]
+  "unwantedRecommendations": ["chakrounanas.turbo-console-log", "circleci.circleci"]
 }

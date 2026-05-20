@@ -46,7 +46,7 @@ Amplify.configure(
       },
     },
   },
-  { ssr: true }
+  { ssr: true },
 );
 
 Cypress.Commands.add("loginByCognitoApi", () => {

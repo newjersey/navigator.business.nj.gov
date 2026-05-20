@@ -129,37 +129,10 @@ describe("<MiniRoadmap />", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  describe.each(operatingPhasesDisplayingBusinessStructurePrompt)(
-    "BusinessStructurePrompt",
-    (operatingPhase) => {
-      beforeEach(() => {
-        useMockRoadmap({
-          steps: [
-            generateStep({ name: "step1", section: "PLAN" }),
-            generateStep({ name: "step2", section: "START" }),
-          ],
-        });
-
-        useMockBusiness({
-          preferences: generatePreferences({
-            roadmapOpenSections: ["PLAN", "START"],
-          }),
-          profileData: generateProfileData({ operatingPhase: operatingPhase }),
-        });
-      });
-
-      describe(`${operatingPhase}`, () => {
-        it("renders the roadmap with the business structure prompt", () => {
-          renderMiniRoadMap("task3");
-          expect(screen.getByTestId("business-structure-prompt")).toBeInTheDocument();
-        });
-      });
-    },
-  );
-
-  test.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
-    "does not render the roadmap with the business structure prompt for %p",
-    (operatingPhase) => {
+  describe.each(
+    operatingPhasesDisplayingBusinessStructurePrompt,
+  )("BusinessStructurePrompt", (operatingPhase) => {
+    beforeEach(() => {
       useMockRoadmap({
         steps: [
           generateStep({ name: "step1", section: "PLAN" }),
@@ -173,11 +146,36 @@ describe("<MiniRoadmap />", () => {
         }),
         profileData: generateProfileData({ operatingPhase: operatingPhase }),
       });
+    });
 
-      renderMiniRoadMap("task3");
-      expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();
-    },
-  );
+    describe(`${operatingPhase}`, () => {
+      it("renders the roadmap with the business structure prompt", () => {
+        renderMiniRoadMap("task3");
+        expect(screen.getByTestId("business-structure-prompt")).toBeInTheDocument();
+      });
+    });
+  });
+
+  test.each(
+    operatingPhasesNotDisplayingBusinessStructurePrompt,
+  )("does not render the roadmap with the business structure prompt for %p", (operatingPhase) => {
+    useMockRoadmap({
+      steps: [
+        generateStep({ name: "step1", section: "PLAN" }),
+        generateStep({ name: "step2", section: "START" }),
+      ],
+    });
+
+    useMockBusiness({
+      preferences: generatePreferences({
+        roadmapOpenSections: ["PLAN", "START"],
+      }),
+      profileData: generateProfileData({ operatingPhase: operatingPhase }),
+    });
+
+    renderMiniRoadMap("task3");
+    expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();
+  });
 
   const renderStatefulMiniRoadMap = (taskId: string, business: Business): void => {
     render(
