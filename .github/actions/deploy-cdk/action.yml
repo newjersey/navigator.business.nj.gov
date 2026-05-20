@@ -1,5 +1,5 @@
 name: "Deploy CDK"
-description: "Clears CDK context, runs CDK bootstrap, and deploys all stacks."
+description: "Clears CDK context, runs CDK bootstrap, and deploys the account application stacks."
 
 runs:
   using: "composite"
@@ -56,8 +56,24 @@ runs:
     - name: Deploy CDK
       shell: bash
       run: |
+        stacks=(
+          "DataStack-${STAGE}"
+          "IamStack-${STAGE}"
+          "StorageStack-${STAGE}"
+          "EncryptionStack-${STAGE}"
+          "MonitoringStack-${STAGE}"
+          "LambdaStack-${STAGE}"
+          "ApiStack-${STAGE}"
+        )
+
+        if [ "$STAGE" = "dev" ]; then
+          stacks+=("BackupStack-dev-shared")
+        elif [ "$STAGE" = "staging" ] || [ "$STAGE" = "prod" ]; then
+          stacks+=("BackupStack-${STAGE}")
+        fi
+
         yarn workspace @businessnjgovnavigator/api-cdk cdk deploy \
-          --all \
+          "${stacks[@]}" \
           --qualifier biz-nj \
           --verbose \
           --region us-east-1 \
