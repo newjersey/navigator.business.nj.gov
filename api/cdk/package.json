@@ -10,8 +10,8 @@
     "cdk": "cdk",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "prettier": "biome format --write .",
-    "prettier:check": "biome format ."
+    "format": "biome format --write .",
+    "format:check": "biome format ."
   },
   "devDependencies": {
     "@jest/globals": "30.1.2",

@@ -9,7 +9,7 @@ yarn typecheck
 yarn workspace @businessnjgovnavigator/web typecheck:cypress
 
 # format files
-yarn prettier
+yarn format
 yarn spellcheck
 yarn dependency-check
 

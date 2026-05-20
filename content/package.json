@@ -10,8 +10,8 @@
     "clean": "rimraf lib",
     "dev": "yarn build",
     "test": "vitest run",
-    "prettier": "biome format --write .",
-    "prettier:check": "biome format .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json --no-progress"
   },
   "dependencies": {

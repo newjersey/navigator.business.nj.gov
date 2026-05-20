@@ -16,8 +16,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "snapshot:update": "jest --updateSnapshot",
-    "prettier": "biome format --write .",
-    "prettier:check": "biome format .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "test": "jest",
     "typecheck": "tsc --noemit"
   },
