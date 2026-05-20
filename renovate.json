@@ -34,6 +34,10 @@
       "groupName": "jest"
     },
     {
+      "matchPackageNames": ["@biomejs/biome"],
+      "groupName": "biome"
+    },
+    {
       "matchPackageNames": ["@types/eslint", "babel-eslint", "@typescript-eslint/*", "eslint*"],
       "groupName": "linting"
     },
