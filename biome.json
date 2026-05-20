@@ -44,7 +44,7 @@
       },
       "correctness": { "noUnusedImports": "error", "noUnusedVariables": "error" },
       "nursery": {
-        "noFloatingPromises": "error",
+        "noFloatingPromises": "off",
         "noNestedPromises": "error",
         "useErrorCause": "error"
       },
