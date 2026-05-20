@@ -5,24 +5,20 @@ import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
 describe("StaticSiteRepositoryStack", () => {
   test("has no CloudFormation Outputs to prevent cross-stack export dependencies", () => {
     const app = new App();
-    const stack = new StaticSiteRepositoryStack(app, "TestStaticSiteRepositoryStack", {
-      stage: "dev",
-    });
+    const stack = new StaticSiteRepositoryStack(app, "TestStaticSiteRepositoryStack", {});
     const template = Template.fromStack(stack);
 
     expect(template.toJSON().Outputs).toBeUndefined();
   });
 
-  test("creates a private dev ECR repository that keeps the latest 50 tagged images", () => {
+  test("creates a private shared ECR repository that keeps recent tagged images", () => {
     const app = new App();
-    const stack = new StaticSiteRepositoryStack(app, "TestStaticSiteRepositoryStack", {
-      stage: "dev",
-    });
+    const stack = new StaticSiteRepositoryStack(app, "TestStaticSiteRepositoryStack", {});
     const template = Template.fromStack(stack);
 
     expect(template.toJSON()).toBeDefined();
     template.hasResourceProperties("AWS::ECR::Repository", {
-      RepositoryName: "bfs-static-site-dev",
+      RepositoryName: "bfs-static-site",
       ImageScanningConfiguration: {
         ScanOnPush: true,
       },
@@ -43,44 +39,14 @@ describe("StaticSiteRepositoryStack", () => {
                   tagStatus: "tagged",
                   tagPatternList: ["*"],
                   countType: "imageCountMoreThan",
-                  countNumber: 50,
+                  countNumber: 100,
                 }),
               }),
             ]),
           }),
         ),
       },
-      Tags: Match.arrayWith([{ Key: "STAGE", Value: "dev" }]),
-    });
-  });
-
-  test("creates a private prod ECR repository that keeps the latest 20 tagged images", () => {
-    const app = new App();
-    const stack = new StaticSiteRepositoryStack(app, "TestStaticSiteRepositoryStackProd", {
-      stage: "prod",
-    });
-    const template = Template.fromStack(stack);
-
-    expect(template.toJSON()).toBeDefined();
-    template.hasResourceProperties("AWS::ECR::Repository", {
-      RepositoryName: "bfs-static-site-prod",
-      LifecyclePolicy: {
-        LifecyclePolicyText: Match.serializedJson(
-          Match.objectLike({
-            rules: Match.arrayWith([
-              Match.objectLike({
-                selection: Match.objectLike({
-                  tagStatus: "tagged",
-                  tagPatternList: ["*"],
-                  countType: "imageCountMoreThan",
-                  countNumber: 20,
-                }),
-              }),
-            ]),
-          }),
-        ),
-      },
-      Tags: Match.arrayWith([{ Key: "STAGE", Value: "prod" }]),
+      Tags: Match.arrayWith([{ Key: "STAGE", Value: "shared" }]),
     });
   });
 });

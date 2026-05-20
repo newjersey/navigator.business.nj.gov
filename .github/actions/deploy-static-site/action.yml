@@ -1,5 +1,6 @@
 name: "Deploy Static Site"
-description: "Builds the static-site image, pushes it to ECR, and deploys the ECS Fargate service."
+description:
+  "Builds the static-site image, pushes it to ECR, and refreshes the ECS Fargate service."
 
 inputs:
   image_tag:
@@ -21,73 +22,40 @@ runs:
 
         echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
 
-    - name: Check Static Site ECR Repository
-      id: repository
-      shell: bash
-      run: |
-        repository_name="bfs-static-site-${STAGE}"
-
-        if repository_output=$(aws ecr describe-repositories \
-          --repository-names "$repository_name" \
-          --region "$AWS_REGION" 2>&1); then
-          echo "exists=true" >> "$GITHUB_OUTPUT"
-        elif echo "$repository_output" | grep -q "RepositoryNotFoundException"; then
-          echo "exists=false" >> "$GITHUB_OUTPUT"
-        else
-          echo "$repository_output"
-          exit 1
-        fi
-
-    - name: Deploy Static Site ECR Repository
-      if: steps.repository.outputs.exists == 'false'
-      shell: bash
-      run: |
-        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteRepositoryStack-${STAGE}" \
-          --qualifier biz-nj \
-          --verbose \
-          --region us-east-1 \
-          --require-approval never
-
     - name: Login to Amazon ECR
       shell: bash
       run: |
         aws ecr get-login-password --region "$AWS_REGION" \
           | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
 
-    - name: Build Static Site Docker Image
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v4
+
+    - name: Build and Push Static Site Docker Image
       shell: bash
       env:
-        IMAGE_TAG: ${{ steps.image-tag.outputs.image_tag }}
+        IMAGE_VERSION: ${{ steps.image-tag.outputs.image_tag }}
       run: |
-        image_repo="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs-static-site-${STAGE}"
-        image_uri="${image_repo}:${IMAGE_TAG}"
+        image_repo="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs-static-site"
+        image_name="bfs-static-site-${STAGE}"
 
-        docker build -f packages/static-site/Dockerfile . \
+        docker buildx build --platform linux/amd64 \
+          -f packages/static-site/Dockerfile . \
           --build-arg NEXT_PUBLIC_WEB_BASE_URL="${NEXT_PUBLIC_WEB_BASE_URL:-}" \
-          -t "$image_uri"
+          -t "$image_repo:$image_name-$IMAGE_VERSION" \
+          -t "$image_repo:$image_name" \
+          -t "$image_repo:$image_name-latest" \
+          --push
 
-        echo "STATIC_SITE_IMAGE_URI=$image_uri" >> "$GITHUB_ENV"
-        echo "STATIC_SITE_IMAGE_TAG=$IMAGE_TAG" >> "$GITHUB_ENV"
+        echo "STATIC_SITE_IMAGE_REPO=$image_repo" >> "$GITHUB_ENV"
+        echo "STATIC_SITE_IMAGE_NAME=$image_name" >> "$GITHUB_ENV"
+        echo "STATIC_SITE_IMAGE_VERSION=$IMAGE_VERSION" >> "$GITHUB_ENV"
 
-    - name: Push Static Site Docker Image
-      shell: bash
-      run: docker push "$STATIC_SITE_IMAGE_URI"
-
-    - name: Deploy Static Site ECS Service
-      shell: bash
-      run: |
-        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteServiceStack-${STAGE}" \
-          --qualifier biz-nj \
-          --verbose \
-          --region us-east-1 \
-          --require-approval never
-
-    - name: Update Static Site ECR Repository Stack
-      if: steps.repository.outputs.exists == 'true'
+    - name: Deploy Static Site to ECS
       shell: bash
       run: |
-        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteRepositoryStack-${STAGE}" \
-          --qualifier biz-nj \
-          --verbose \
-          --region us-east-1 \
-          --require-approval never
+        aws ecs update-service \
+          --cluster bfs-static-site \
+          --service "$STATIC_SITE_IMAGE_NAME" \
+          --region "$AWS_REGION" \
+          --force-new-deployment
