@@ -4,6 +4,7 @@
     "includes": [
       "**",
       "!**/.yarn/*",
+      "!web/.next/*",
       "!package-lock.json",
       "!pnpm-lock.yaml",
       "!yarn.lock",
