@@ -57,6 +57,9 @@ runs:
       shell: bash
       run: |
         stacks=(
+          "StaticSiteClusterStack"
+          "StaticSiteRepositoryStack"
+          "StaticSiteServiceStack-${STAGE}"
           "DataStack-${STAGE}"
           "IamStack-${STAGE}"
           "StorageStack-${STAGE}"

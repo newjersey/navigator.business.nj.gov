@@ -8,6 +8,7 @@ import * as logs from "aws-cdk-lib/aws-logs";
 import * as sns from "aws-cdk-lib/aws-sns";
 import { Construct } from "constructs";
 import {
+  STATIC_SITE_CLUSTER_NAME,
   STATIC_SITE_CERTIFICATE_ID,
   STATIC_SITE_HEALTH_CHECK_PATH,
   STATIC_SITE_SERVICE_BASE_NAME,
@@ -27,9 +28,6 @@ import { applyStandardTags } from "./stackUtils";
 export interface StaticSiteServiceStackProps extends StackProps {
   /** Deployment stage that owns this ECS service, such as dev, testing, content, staging, or prod. */
   readonly stage: string;
-
-  /** Immutable image tag that ECS should deploy for this service revision. */
-  readonly imageTag: string;
 }
 
 interface RequiredEnvironmentValue {
@@ -103,10 +101,6 @@ const requireEnvironmentValue = (props: RequiredEnvironmentValue): string => {
   return props.value;
 };
 
-const createStaticSiteClusterName = (stage: string): string => {
-  return `${STATIC_SITE_SERVICE_BASE_NAME}-${stage}-cluster`;
-};
-
 const createStaticSiteAlbName = (stage: string): string => {
   return `${STATIC_SITE_SERVICE_BASE_NAME}-${stage}-alb`;
 };
@@ -123,18 +117,17 @@ export class StaticSiteServiceStack extends Stack {
     const network = this.createNetwork();
     this.configureLoadBalancerIngress(network);
     const alarmTopic = this.createAlarmTopic(props.stage);
-    const cluster = this.createCluster(props.stage, network);
+    const cluster = this.createCluster(network);
     const logGroup = this.createLogGroup(props.stage);
     const repository = ecr.Repository.fromRepositoryName(
       this,
       "StaticSiteRepository",
-      `${STATIC_SITE_SERVICE_BASE_NAME}-${props.stage}`,
+      STATIC_SITE_SERVICE_BASE_NAME,
     );
     const taskDefinition = createStaticSiteTaskDefinition({
       scope: this,
       stage: props.stage,
       repository,
-      imageTag: props.imageTag,
       logGroup,
     });
     const loadBalancer = this.createLoadBalancer(props.stage, network);
@@ -226,15 +219,17 @@ export class StaticSiteServiceStack extends Stack {
     );
   }
 
-  private createCluster(stage: string, network: StaticSiteNetwork): ecs.Cluster {
-    const cluster = new ecs.Cluster(this, "StaticSiteCluster", {
-      clusterName: createStaticSiteClusterName(stage),
+  private createCluster(network: StaticSiteNetwork): ecs.ICluster {
+    return ecs.Cluster.fromClusterAttributes(this, "StaticSiteCluster", {
+      clusterArn: this.formatArn({
+        service: "ecs",
+        resource: "cluster",
+        resourceName: STATIC_SITE_CLUSTER_NAME,
+        arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
+      }),
+      clusterName: STATIC_SITE_CLUSTER_NAME,
       vpc: network.vpc,
-      containerInsightsV2: ecs.ContainerInsights.ENABLED,
     });
-
-    applyStandardTags(cluster, stage);
-    return cluster;
   }
 
   private createAlarmTopic(stage: string): sns.Topic {

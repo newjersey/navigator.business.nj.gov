@@ -27,9 +27,6 @@ export interface CreateStaticSiteTaskDefinitionProps {
   /** ECR repository that contains the static-site image. */
   readonly repository: ecr.IRepository;
 
-  /** Immutable ECR image tag that this task definition revision should run. */
-  readonly imageTag: string;
-
   /** CloudWatch log group that receives container logs. */
   readonly logGroup: logs.ILogGroup;
 }
@@ -90,6 +87,11 @@ interface StaticSiteBasicAuthEnvironment {
 /** Create the consistent per-stage ECS service and task-definition family name. */
 export const createStaticSiteServiceName = (stage: string): string => {
   return `${STATIC_SITE_SERVICE_BASE_NAME}-${stage}`;
+};
+
+/** Create the mutable ECR image tag refreshed by static-site ECS deployments. */
+export const createStaticSiteImageTag = (stage: string): string => {
+  return createStaticSiteServiceName(stage);
 };
 
 const isStaticSiteBasicAuthStage = (stage: string): boolean => {
@@ -177,11 +179,18 @@ export const createStaticSiteTaskDefinition = (
     memoryLimitMiB: STATIC_SITE_MEMORY_MIB,
     executionRole: taskExecutionRole,
     taskRole,
+    runtimePlatform: {
+      cpuArchitecture: ecs.CpuArchitecture.X86_64,
+      operatingSystemFamily: ecs.OperatingSystemFamily.LINUX,
+    },
   });
 
   taskDefinition.addContainer("StaticSiteContainer", {
     containerName: STATIC_SITE_CONTAINER_NAME,
-    image: ecs.ContainerImage.fromEcrRepository(props.repository, props.imageTag),
+    image: ecs.ContainerImage.fromEcrRepository(
+      props.repository,
+      createStaticSiteImageTag(props.stage),
+    ),
     essential: true,
     environment: createStaticSiteContainerEnvironment({ stage: props.stage }),
     healthCheck: {
