@@ -15,6 +15,10 @@ export const NAVIGATOR_DB_CLIENT = "NavigatorDBClient";
 export const HEALTH_CHECK_SERVICE = "HealthCheckService";
 export const ECS_SERVICE_NAME = "bfs-navigator";
 export const ECS_CLUSTER_NAME = "bfs_container_cluster";
+/** Shared ECS cluster name for every static-site service in an AWS account. */
+export const STATIC_SITE_CLUSTER_NAME = "bfs-static-site";
+/** STAGE tag value for static-site resources shared by every stage in an AWS account. */
+export const STATIC_SITE_SHARED_RESOURCE_TAG = "shared";
 /** Base name used for static-site AWS resources that are duplicated per stage. */
 export const STATIC_SITE_SERVICE_BASE_NAME = "bfs-static-site";
 /** ECS container name used in the static-site task definition and ALB target mapping. */

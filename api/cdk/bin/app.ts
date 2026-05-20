@@ -6,12 +6,14 @@ import { IamStack } from "../lib/iamStack";
 import { LambdaStack } from "../lib/lambdaStack";
 import { StorageStack } from "../lib/storageStack";
 import { EncryptionStack } from "../lib/encryptionStack";
+import { StaticSiteClusterStack } from "../lib/staticSiteClusterStack";
 import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
 import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
 import {
   BUSINESSES_TABLE,
   CONTENT_STAGE,
   DEV_STAGE,
+  LOCAL_STAGE,
   PROD_STAGE,
   STAGING_STAGE,
   TESTING_STAGE,
@@ -26,8 +28,8 @@ const app = new cdk.App();
 const region = "us-east-1";
 const stage = process.env.STAGE || "local";
 const account_id = process.env.AWS_ACCOUNT_ID;
-const staticSiteImageTag = process.env.STATIC_SITE_IMAGE_TAG;
-const isStaticSiteDeploy = staticSiteImageTag !== undefined && staticSiteImageTag.trim().length > 0;
+const shouldCreateStaticSiteServiceStack = stage !== LOCAL_STAGE;
+const isStaticSiteDeploy = process.env.STATIC_SITE_INFRA_ONLY === "true";
 const isMyAccountDeploy = !isStaticSiteDeploy;
 
 const env = {
@@ -35,17 +37,26 @@ const env = {
   region: region,
 };
 
-new StaticSiteRepositoryStack(app, `StaticSiteRepositoryStack-${stage}`, {
-  stage,
+const staticSiteClusterStack = new StaticSiteClusterStack(app, "StaticSiteClusterStack", {
   env,
 });
 
-if (isStaticSiteDeploy) {
-  new StaticSiteServiceStack(app, `StaticSiteServiceStack-${stage}`, {
-    stage,
-    env,
-    imageTag: staticSiteImageTag,
-  });
+const staticSiteRepositoryStack = new StaticSiteRepositoryStack(app, "StaticSiteRepositoryStack", {
+  env,
+});
+
+if (shouldCreateStaticSiteServiceStack) {
+  const staticSiteServiceStack = new StaticSiteServiceStack(
+    app,
+    `StaticSiteServiceStack-${stage}`,
+    {
+      stage,
+      env,
+    },
+  );
+
+  staticSiteServiceStack.addDependency(staticSiteClusterStack);
+  staticSiteServiceStack.addDependency(staticSiteRepositoryStack);
 }
 
 if (isMyAccountDeploy) {

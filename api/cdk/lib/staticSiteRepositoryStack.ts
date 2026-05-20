@@ -1,25 +1,27 @@
 import { Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 import { Construct } from "constructs";
-import { PROD_STAGE, STATIC_SITE_SERVICE_BASE_NAME } from "./constants";
+import { STATIC_SITE_SERVICE_BASE_NAME, STATIC_SITE_SHARED_RESOURCE_TAG } from "./constants";
 import { applyStandardTags } from "./stackUtils";
 
-/** Properties for creating the per-stage static-site ECR repository stack. */
-export interface StaticSiteRepositoryStackProps extends StackProps {
-  /** Deployment stage that owns this repository, such as dev, testing, content, staging, or prod. */
-  readonly stage: string;
-}
+/**
+ * Number of tagged static-site images retained in the shared ECR repository.
+ *
+ * The shared repository carries dev, content, testing, staging, and production tags, so the policy
+ * keeps enough history for lower-environment SHA tags and production point-release tags.
+ */
+const STATIC_SITE_TAGGED_IMAGE_RETENTION_COUNT = 100;
 
 /** CDK stack that owns the static-site ECR repository and image lifecycle policy. */
 export class StaticSiteRepositoryStack extends Stack {
-  /** Private ECR repository that stores static-site images for this stage. */
+  /** Private ECR repository that stores static-site images for every stage in this AWS account. */
   public readonly repository: ecr.Repository;
 
-  constructor(scope: Construct, id: string, props: StaticSiteRepositoryStackProps) {
+  constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
 
     const repository = new ecr.Repository(this, "StaticSiteRepository", {
-      repositoryName: `${STATIC_SITE_SERVICE_BASE_NAME}-${props.stage}`,
+      repositoryName: STATIC_SITE_SERVICE_BASE_NAME,
       imageScanOnPush: true,
       removalPolicy: RemovalPolicy.RETAIN,
       emptyOnDelete: false,
@@ -35,10 +37,10 @@ export class StaticSiteRepositoryStack extends Stack {
       description: "Keep the latest tagged static-site images.",
       tagStatus: ecr.TagStatus.TAGGED,
       tagPatternList: ["*"],
-      maxImageCount: props.stage === PROD_STAGE ? 20 : 50,
+      maxImageCount: STATIC_SITE_TAGGED_IMAGE_RETENTION_COUNT,
     });
 
-    applyStandardTags(repository, props.stage);
+    applyStandardTags(repository, STATIC_SITE_SHARED_RESOURCE_TAG);
 
     this.repository = repository;
   }

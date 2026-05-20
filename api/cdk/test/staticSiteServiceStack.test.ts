@@ -1,7 +1,6 @@
 import { App } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
 import { STATIC_SITE_CERTIFICATE_ID } from "../lib/constants";
-import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
 import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
 
 const TEST_AWS_ACCOUNT_ID = "123456789012";
@@ -23,18 +22,12 @@ const STATIC_SITE_CERTIFICATE_ARN = {
 
 const createStaticSiteTemplates = (stage: string) => {
   const app = new App();
-  const repositoryStack = new StaticSiteRepositoryStack(app, `${stage}StaticSiteRepositoryStack`, {
-    stage,
-    env: STATIC_SITE_TEST_ENVIRONMENT,
-  });
   const serviceStack = new StaticSiteServiceStack(app, `${stage}StaticSiteServiceStack`, {
     stage,
-    imageTag: "abc123",
     env: STATIC_SITE_TEST_ENVIRONMENT,
   });
 
   return {
-    repositoryTemplate: Template.fromStack(repositoryStack),
     serviceTemplate: Template.fromStack(serviceStack),
   };
 };
@@ -105,6 +98,10 @@ describe("StaticSiteServiceStack", () => {
       Family: "bfs-static-site-dev",
       Cpu: "512",
       Memory: "1024",
+      RuntimePlatform: {
+        CpuArchitecture: "X86_64",
+        OperatingSystemFamily: "LINUX",
+      },
       ContainerDefinitions: Match.arrayWith([
         Match.objectLike({
           Name: "static-site",
@@ -124,6 +121,7 @@ describe("StaticSiteServiceStack", () => {
     });
     template.hasResourceProperties("AWS::ECS::Service", {
       ServiceName: "bfs-static-site-dev",
+      Cluster: "bfs-static-site",
       DesiredCount: 1,
       LaunchType: "FARGATE",
       DeploymentConfiguration: Match.objectLike({
@@ -248,7 +246,17 @@ describe("StaticSiteServiceStack", () => {
     });
   });
 
-  test("references the ECR repository by name without a cross-stack Fn::ImportValue", () => {
+  test("does not create per-stage ECS clusters", () => {
+    const template = createStaticSiteTemplate("dev");
+
+    expect(template.toJSON()).toBeDefined();
+    template.resourceCountIs("AWS::ECS::Cluster", 0);
+    template.hasResourceProperties("AWS::ECS::Service", {
+      Cluster: "bfs-static-site",
+    });
+  });
+
+  test("references the shared ECR repository by name without a cross-stack Fn::ImportValue", () => {
     const template = createStaticSiteTemplate("dev");
     const templateJson = JSON.stringify(template.toJSON());
 
@@ -262,18 +270,12 @@ describe("StaticSiteServiceStack", () => {
               [
                 "123456789012.dkr.ecr.us-east-1.",
                 { Ref: "AWS::URLSuffix" },
-                "/bfs-static-site-dev:abc123",
+                "/bfs-static-site:bfs-static-site-dev",
               ],
             ],
           },
         }),
       ]),
     });
-  });
-
-  test("does not add repository exports when the repository and service stacks are synthesized together", () => {
-    const templates = createStaticSiteTemplates("dev");
-
-    expect(templates.repositoryTemplate.toJSON().Outputs).toBeUndefined();
   });
 });
