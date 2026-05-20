@@ -13,7 +13,6 @@ export class StorageStack extends Stack {
   public readonly intercomMacrosBucket?: s3.Bucket;
   public readonly userDocumentsBucket: s3.Bucket;
   public readonly userDocumentsLocalBucket?: s3.Bucket;
-  public readonly usersTableBackup: s3.Bucket;
 
   constructor(scope: Construct, id: string, props: StorageStackProps) {
     super(scope, id, props);
@@ -39,15 +38,6 @@ export class StorageStack extends Stack {
       "CognitoUnauthRole",
       `arn:aws:iam::${this.account}:role/navigator_unauthRole`,
     );
-
-    this.usersTableBackup = new s3.Bucket(this, "UsersTableBackupBuckets", {
-      bucketName: `nj-bfs-user-table--${props.stage}-backup`,
-      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-      removalPolicy: RemovalPolicy.RETAIN,
-      autoDeleteObjects: false,
-      encryption: s3.BucketEncryption.S3_MANAGED,
-      versioned: false,
-    });
 
     this.userDocumentsBucket = new s3.Bucket(this, "UserDocumentsBucket", {
       bucketName: `nj-bfs-user-documents-${props.stage}`,
