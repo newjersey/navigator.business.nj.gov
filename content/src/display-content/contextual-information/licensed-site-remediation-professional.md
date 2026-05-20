@@ -7,4 +7,4 @@ A Licensed Site Remediation Professional (LSRP) is an expert who is trained to m
 
 A [list of LSRPs](https://njems.nj.gov/DataMiner/Search/SearchByCategory?isExternal=y&getCategory=y&catName=Site+Remediation) is available at the New Jersey Department of Environmental Protection's DataMiner website. Scroll to “Licensed Site Remediation Professional List.”  
 
-**Note:** the DEP cannot recommend an LSRP. sdfdfgdfg 
+**Note:** the DEP cannot recommend an LSRP. 
