@@ -21,7 +21,25 @@ runs:
 
         echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
 
+    - name: Check Static Site ECR Repository
+      id: repository
+      shell: bash
+      run: |
+        repository_name="bfs-static-site-${STAGE}"
+
+        if repository_output=$(aws ecr describe-repositories \
+          --repository-names "$repository_name" \
+          --region "$AWS_REGION" 2>&1); then
+          echo "exists=true" >> "$GITHUB_OUTPUT"
+        elif echo "$repository_output" | grep -q "RepositoryNotFoundException"; then
+          echo "exists=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "$repository_output"
+          exit 1
+        fi
+
     - name: Deploy Static Site ECR Repository
+      if: steps.repository.outputs.exists == 'false'
       shell: bash
       run: |
         yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteRepositoryStack-${STAGE}" \
@@ -59,6 +77,16 @@ runs:
       shell: bash
       run: |
         yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteServiceStack-${STAGE}" \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
+    - name: Update Static Site ECR Repository Stack
+      if: steps.repository.outputs.exists == 'true'
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteRepositoryStack-${STAGE}" \
           --qualifier biz-nj \
           --verbose \
           --region us-east-1 \
