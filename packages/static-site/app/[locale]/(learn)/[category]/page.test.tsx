@@ -36,12 +36,12 @@ describe("CategoryPage", () => {
 
     expect(screen.getByRole("link", { name: "Create a Business Plan" })).toHaveAttribute(
       "href",
-      "/learn/plan/create-a-business-plan",
+      "/pages/create-a-business-plan",
     );
 
     expect(screen.getByRole("link", { name: "Choose a Business Structure" })).toHaveAttribute(
       "href",
-      "/learn/plan/choose-a-business-structure",
+      "/pages/choose-a-business-structure",
     );
   });
 

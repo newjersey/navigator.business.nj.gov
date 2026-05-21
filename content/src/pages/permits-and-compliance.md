@@ -9,7 +9,7 @@ main-text-1: Navigating the government permitting process can be challenging eve
 heading-2: Understand Building Permits and Inspections
 main-text-2: You've found a space zoned for your business, but before you start renovating to make it your own find out if you need a building permit. Building permits are required for building, structural, electrical, HVAC, and plumbing projects. They help ensure your space is safe for your team and your customers.
 link-text-2: Building Permits and Inspections
-link-url-2: /learn/plan/building-permits-and-inspections
+link-url-2: /pages/building-permits-and-inspections
 heading-3: Make Your Site ADA Compliant
 main-text-3: |-
   Making your business accessible not only helps your customers, but it’s also federal and state law. The Americans with Disabilities Act (ADA) and New Jersey state requirements are in place to ensure people with disabilities or other impairments have equal access to businesses and other public facilities.

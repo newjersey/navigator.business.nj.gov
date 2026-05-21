@@ -25,28 +25,28 @@ describe("LearnSideNav", () => {
       expect(link?.getAttribute("href")).toBe("/learn");
     });
 
-    it("second item is Plan linking to /learn/plan", () => {
+    it("second item is Plan linking to /plan", () => {
       const link = navItems[1].querySelector("a");
       expect(link?.textContent).toBe("Plan");
-      expect(link?.getAttribute("href")).toBe("/learn/plan");
+      expect(link?.getAttribute("href")).toBe("/plan");
     });
 
-    it("third item is Start linking to /learn/start", () => {
+    it("third item is Start linking to /start", () => {
       const link = navItems[2].querySelector("a");
       expect(link?.textContent).toBe("Start");
-      expect(link?.getAttribute("href")).toBe("/learn/start");
+      expect(link?.getAttribute("href")).toBe("/start");
     });
 
-    it("fourth item is Operate linking to /learn/operate", () => {
+    it("fourth item is Operate linking to /operate", () => {
       const link = navItems[3].querySelector("a");
       expect(link?.textContent).toBe("Operate");
-      expect(link?.getAttribute("href")).toBe("/learn/operate");
+      expect(link?.getAttribute("href")).toBe("/operate");
     });
 
-    it("fifth item is Grow linking to /learn/grow", () => {
+    it("fifth item is Grow linking to /grow", () => {
       const link = navItems[4].querySelector("a");
       expect(link?.textContent).toBe("Grow");
-      expect(link?.getAttribute("href")).toBe("/learn/grow");
+      expect(link?.getAttribute("href")).toBe("/grow");
     });
   });
 
