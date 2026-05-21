@@ -23,7 +23,7 @@ heading-3: Show Pay, Benefits, and Other Compensation in Job Postings and Promot
 main-text-3: |-
   In New Jersey, most employers must list pay, benefits, and other compensation in all job postings. This includes job postings online, in print, on social media, and more. This rule applies to new jobs and transfers.
 
-  Most employers must also make reasonable efforts to notify employees in the affected departments when a promotion is available. Learn more about New Jersey[ Pay and Benefits Transparency Requirements](https://business.nj.gov/pages/hiring-employees).
+  Most employers must also make reasonable efforts to notify employees in the affected departments when a promotion is available. Learn more about New Jersey[ Pay and Benefits Transparency Requirements](/learn/start/hiring-employees).
 heading-4: Health and Safety Requirements
 main-text-4: New Jersey businesses are required to obtain the appropriate safety licenses in certain industries. The New Jersey Department of Labor and Workforce Development Division for Public Safety and Occupational Safety and Health issues licenses and permits and also offers free and confidential workplace health and safety consultations or training to help employers stay in compliance with the law.
 link-text-4: Health and Safety Licensing
@@ -32,7 +32,7 @@ heading-5: Understand Withholding Taxes and Insurance Requirements for Employees
 main-text-5: |-
   ### Temporary Disability and Family Leave Insurance
 
-  The Temporary Disability Benefits Law protects against wage loss suffered because of the inability to perform regular job duties due to illness or injury. You, the employer, are required to pay disability insurance taxes and to give the [Division of Temporary Disability Insurance](https://www.myleavebenefits.nj.gov/labor/myleavebenefits/worker/tdi/index.shtml#PrivatePlan) certain information about your employees when they file claims for disability benefits. Employers may select coverage under the state plan or a private plan. 
+  The Temporary Disability Benefits Law protects against wage loss suffered because of the inability to perform regular job duties due to illness or injury. You, the employer, are required to pay disability insurance taxes and to give the [Division of Temporary Disability Insurance](https://www.myleavebenefits.nj.gov/labor/myleavebenefits/worker/tdi/index.shtml#PrivatePlan) certain information about your employees when they file claims for disability benefits. Employers may select coverage under the state plan or a private plan.
 
   ### Unemployment Insurance
 

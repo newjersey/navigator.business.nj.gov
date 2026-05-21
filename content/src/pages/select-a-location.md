@@ -33,10 +33,10 @@ main-text-6: |-
   * **Rent and other costs:** Understand the rent amount, payment schedule, and any other costs or fees associated with the lease. Other costs could include maintenance, utilities, or property taxes. Be aware of any rent increases and how the landlord determines them.**‍**
   * **Security deposit: **Know the amount of the security deposit required and the conditions under which it can be withheld by the landlord. Understand the process for returning the deposit at the end of the lease term.**‍**
   * **Tenant improvements:** Know who handles repairs and maintenance and how to submit requests. Find out if you can make alterations or improvements to your space. Clarify any restrictions, approval processes, and cost coverage.**‍**
-  * **Subleasing and assignment: **Check whether assigning the lease to another party is permitted. Understand the landlord's requirements and approval process.**‍**
+  * **Subleasing and assignment:** Check whether assigning the lease to another party is permitted. Understand the landlord's requirements and approval process.**‍**
   * **Termination and default:** Understand lease termination conditions and consequences for defaulting on terms. Pay attention to any required notice periods for termination or renewal.**‍**
   * **Insurance requirements:** Determine the insurance coverage required by the landlord. You may need general liability insurance or property insurance to follow their requirements.**‍**
-  * **Dispute resolution: **Understand the dispute resolution process outlined in the lease agreement. It may include mediation, arbitration, or litigation. Understanding the procedure beforehand can help you navigate potential conflicts.**‍**
+  * **Dispute resolution:** Understand the dispute resolution process outlined in the lease agreement. It may include mediation, arbitration, or litigation. Understanding the procedure beforehand can help you navigate potential conflicts.**‍**
   * **Legal compliance:** Make sure your lease agreement follows federal, state, and local laws and regulations. This can include zoning requirements, accessibility standards, or building codes.
 
   Understand common terms that may appear in your lease:
@@ -51,19 +51,19 @@ main-text-7: |-
   Acquiring commercial real estate in New Jersey involves a series of steps that require careful planning, research, and professional assistance. Here's a general guide to help you through the process:
 
   * **Define Your Objectives:** Determine your investment goals and the type of commercial property you want to acquire, such as office space, retail, industrial, etc. Clarifying your objectives will help you focus your search and decision-making.
-  * **Set a Budget: **Establish a budget for your commercial property purchase. Consider not just the purchase price but also additional costs like closing expenses, due diligence, and potential renovations.
-  * **Obtain Financing: **Secure financing for your purchase. This may involve approaching banks, commercial lenders, or private investors to get pre-approved for a loan or establish your funding capacity.
-  * **Assemble a Team of Professionals: **Engage key professionals to guide you through the acquisition process, including a commercial real estate broker, a real estate attorney, and potentially a property inspector and appraiser.
-  * **Search for Properties: **Work closely with your commercial real estate broker to identify properties that meet your criteria. Your broker will provide you with property listings, arrange property tours, and help you assess their potential.
-  * **Conduct Due Diligence: **Once you've identified a potential property, perform thorough due diligence. This involves inspecting the property, reviewing financial documents, checking zoning and permits, and verifying the property's legal status.
+  * **Set a Budget:** Establish a budget for your commercial property purchase. Consider not just the purchase price but also additional costs like closing expenses, due diligence, and potential renovations.
+  * **Obtain Financing:** Secure financing for your purchase. This may involve approaching banks, commercial lenders, or private investors to get pre-approved for a loan or establish your funding capacity.
+  * **Assemble a Team of Professionals:** Engage key professionals to guide you through the acquisition process, including a commercial real estate broker, a real estate attorney, and potentially a property inspector and appraiser.
+  * **Search for Properties:** Work closely with your commercial real estate broker to identify properties that meet your criteria. Your broker will provide you with property listings, arrange property tours, and help you assess their potential.
+  * **Conduct Due Diligence:** Once you've identified a potential property, perform thorough due diligence. This involves inspecting the property, reviewing financial documents, checking zoning and permits, and verifying the property's legal status.
   * **Negotiate the Purchase:** Negotiate the terms of the purchase with the seller, including the price, closing date, contingencies, and any other relevant terms. Your real estate attorney can assist with contract negotiations.
-  * **Sign a Purchase Agreement: **Once both parties agree on the terms, sign a formal Purchase Agreement or Sales Contract. This legally binds both parties to the agreed-upon terms and sets the stage for the closing.
-  * **Complete Financing and Contingencies: **Finalize your financing arrangements and work through any contingencies outlined in the purchase agreement, such as obtaining necessary permits or approvals.
-  * **Conduct Title Search and Obtain Title Insurance: **A title search is conducted to ensure there are no outstanding liens or ownership issues with the property. Title insurance is typically obtained to protect against any unforeseen title problems.
-  * **Closing: **At the closing, all necessary documents are signed, and the funds are transferred. The property ownership officially changes hands, and you become the new owner.
-  * **Post-Closing: **After the closing, you'll need to handle tasks such as transferring utilities, updating leases if applicable, and managing the property or finding tenants if it's an income-generating property.
+  * **Sign a Purchase Agreement:** Once both parties agree on the terms, sign a formal Purchase Agreement or Sales Contract. This legally binds both parties to the agreed-upon terms and sets the stage for the closing.
+  * **Complete Financing and Contingencies:** Finalize your financing arrangements and work through any contingencies outlined in the purchase agreement, such as obtaining necessary permits or approvals.
+  * **Conduct Title Search and Obtain Title Insurance:** A title search is conducted to ensure there are no outstanding liens or ownership issues with the property. Title insurance is typically obtained to protect against any unforeseen title problems.
+  * **Closing:** At the closing, all necessary documents are signed, and the funds are transferred. The property ownership officially changes hands, and you become the new owner.
+  * **Post-Closing:** After the closing, you'll need to handle tasks such as transferring utilities, updating leases if applicable, and managing the property or finding tenants if it's an income-generating property.
 
-  **Additional considerations: **Acquiring commercial real estate can be complex, and regulations may vary depending on the location and property type. It's important to seek guidance from experienced professionals throughout the process to ensure a successful acquisition.
+  **Additional considerations:** Acquiring commercial real estate can be complex, and regulations may vary depending on the location and property type. It's important to seek guidance from experienced professionals throughout the process to ensure a successful acquisition.
 
   If you sell real estate with a value of more than $1 million, you are responsible for an additional fee at closing. You can find more details about the fee on the [Realty Transfer Fee page](https://www.nj.gov/treasury/taxation/realty.shtml) on the Division of Taxation website.
 

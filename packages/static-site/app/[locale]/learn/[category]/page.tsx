@@ -33,7 +33,9 @@ const CategoryPage = async ({ params }: Props) => {
   const currentCategoryContent = messages.learn.categories.find(
     (content) => content.key === category,
   );
-  const subpages = CATEGORY_HIERARCHY[category].children;
+  const subpages = CATEGORY_HIERARCHY[category].children.filter(
+    (subpage) => subpage.hideFromCategoryPage !== true,
+  );
 
   if (!currentCategoryContent) {
     return notFound();

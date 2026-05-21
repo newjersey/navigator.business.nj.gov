@@ -31,7 +31,7 @@ main-text-5: |-
   * Anticipated first payroll withholding date for employees (if applicable)
   * Mailing address and business location(s)
 
-  After completing your registration you will receive an NJ Tax ID and a Certificate of Authorization to Collect Sales Tax. The NJ Tax ID is often the same as your EIN with 3 additional numbers added, this 12-digit number is your identifier when you pay state taxes. 
+  After completing your registration you will receive an NJ Tax ID and a Certificate of Authorization to Collect Sales Tax. The NJ Tax ID is often the same as your EIN with 3 additional numbers added, this 12-digit number is your identifier when you pay state taxes.
 
   The Certificate of Authorization to Collect Sale Tax is only given to you if you are collecting sales tax and needs to be displayed in your place of business. Learn more about what you need to [register for taxes](https://business.nj.gov/pages/register-for-taxes).
 
