@@ -293,11 +293,11 @@ export interface LandingMetadataContent {
 /**
  * Localized content for the learn section side navigation.
  */
-export interface LearnSideNavContent {
+export interface LearnSideNav {
   /** Accessible name for the section. */
   readonly ariaLabel: string;
-  /** Ordered list of pages rendered in the side navigation. */
-  readonly pages: readonly ContentLink[];
+  /** The top-level "Introduction" entry linking to /learn. */
+  readonly learnCategory: LearnCategory;
 }
 
 /**
@@ -310,17 +310,7 @@ export interface LearnCategory {
   readonly title: string;
   /** Subtitle text rendered below the category page title. */
   readonly subtitle: string;
-}
-
-/**
- * One card rendered in the learn page grid.
- */
-export interface LearnCard {
-  /** Heading text for the card. */
-  readonly title: string;
-  /** Supporting text rendered in the card. */
-  readonly description: string;
-  /** Link metadata for the card CTA. */
+  /** Link metadata for the category. */
   readonly link: ContentLink;
 }
 
@@ -340,14 +330,14 @@ export interface LearnPageContent {
   readonly name: string;
   /** Subheading text rendered below the page title. */
   readonly subHeadingText: string;
-  /** Secondary heading text rendered above the cards grid. */
+  /** Second heading on the page */
   readonly heading2: string;
+  /** Link text for each card */
+  readonly cardLinkText: string;
   /** Side navigation content for the learn section. */
-  readonly sideNav: LearnSideNavContent;
+  readonly sideNav: LearnSideNav;
   /** Category metadata keyed to route segments. */
   readonly categories: readonly LearnCategory[];
-  /** Cards rendered in the learn grid. */
-  readonly cards: readonly LearnCard[];
   /** Shared strings used across category pages. */
   readonly categoryPages: LearnCategoryPagesContent;
 }

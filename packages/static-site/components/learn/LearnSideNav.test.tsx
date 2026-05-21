@@ -15,7 +15,7 @@ describe("LearnSideNav", () => {
     let navItems: HTMLElement[];
 
     beforeEach(async () => {
-      render(<LearnSideNav content={messages.learn.sideNav} />);
+      render(<LearnSideNav content={messages.learn} />);
       navItems = screen.getAllByRole("listitem");
     });
 
@@ -55,7 +55,7 @@ describe("LearnSideNav", () => {
       const { useSelectedLayoutSegment } = vi.mocked(await import("next/navigation"));
       useSelectedLayoutSegment.mockReturnValue(null);
 
-      render(<LearnSideNav content={messages.learn.sideNav} />);
+      render(<LearnSideNav content={messages.learn} />);
 
       expect(screen.getByRole("link", { name: "Introduction" })).toHaveClass("usa-current");
     });
@@ -64,7 +64,7 @@ describe("LearnSideNav", () => {
       const { useSelectedLayoutSegment } = vi.mocked(await import("next/navigation"));
       useSelectedLayoutSegment.mockReturnValue("plan");
 
-      render(<LearnSideNav content={messages.learn.sideNav} />);
+      render(<LearnSideNav content={messages.learn} />);
 
       expect(screen.getByRole("link", { name: "Plan" })).toHaveClass("usa-current");
     });
@@ -73,7 +73,7 @@ describe("LearnSideNav", () => {
       const { useSelectedLayoutSegment } = vi.mocked(await import("next/navigation"));
       useSelectedLayoutSegment.mockReturnValue("plan");
 
-      render(<LearnSideNav content={messages.learn.sideNav} />);
+      render(<LearnSideNav content={messages.learn} />);
 
       expect(screen.getByRole("link", { name: "Introduction" })).not.toHaveClass("usa-current");
     });
