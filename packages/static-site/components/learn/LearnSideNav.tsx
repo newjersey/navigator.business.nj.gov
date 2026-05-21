@@ -7,14 +7,14 @@
 
 import { useSelectedLayoutSegment } from "next/navigation";
 import { SideNav } from "@/components/SideNav";
-import type { LearnSideNavContent } from "@/domain/content/messageTypes";
+import type { LearnPageContent } from "@/domain/content/messageTypes";
 
 /**
  * Describes props accepted by the LearnSideNav component.
  */
 export interface LearnSideNavProps {
   /** Ordered list of pages to render in the side navigation. */
-  readonly content: LearnSideNavContent;
+  readonly content: LearnPageContent;
 }
 
 /**
@@ -29,11 +29,13 @@ export const LearnSideNav = ({ content }: LearnSideNavProps) => {
   const pathSegment = useSelectedLayoutSegment();
   const activeKey = pathSegment ?? "learn";
 
-  const items = content.pages.map((page) => ({
-    link: page,
-    isCurrent: page.key === activeKey,
+  const sideNavCategories = [content.sideNav.learnCategory, ...content.categories];
+
+  const items = sideNavCategories.map((category) => ({
+    link: { ...category.link, label: category.title },
+    isCurrent: category.key === activeKey,
     children: [],
   }));
 
-  return <SideNav ariaLabel={content.ariaLabel} items={items} />;
+  return <SideNav ariaLabel={content.sideNav.ariaLabel} items={items} />;
 };
