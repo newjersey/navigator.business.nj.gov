@@ -23,7 +23,7 @@ heading-3: Show Pay, Benefits, and Other Compensation in Job Postings and Promot
 main-text-3: |-
   In New Jersey, most employers must list pay, benefits, and other compensation in all job postings. This includes job postings online, in print, on social media, and more. This rule applies to new jobs and transfers.
 
-  Most employers must also make reasonable efforts to notify employees in the affected departments when a promotion is available. Learn more about New Jersey[ Pay and Benefits Transparency Requirements](/learn/start/hiring-employees).
+  Most employers must also make reasonable efforts to notify employees in the affected departments when a promotion is available. Learn more about New Jersey[ Pay and Benefits Transparency Requirements](/pages/hiring-employees).
 heading-4: Health and Safety Requirements
 main-text-4: New Jersey businesses are required to obtain the appropriate safety licenses in certain industries. The New Jersey Department of Labor and Workforce Development Division for Public Safety and Occupational Safety and Health issues licenses and permits and also offers free and confidential workplace health and safety consultations or training to help employers stay in compliance with the law.
 link-text-4: Health and Safety Licensing

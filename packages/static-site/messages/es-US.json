@@ -61,16 +61,6 @@
             "opensInNewTab": false
           },
           "isCurrent": false
-        },
-        {
-          "kind": "link",
-          "link": {
-            "label": "Business Names (temp)",
-            "href": "/business-names",
-            "isInternal": true,
-            "opensInNewTab": false
-          },
-          "isCurrent": false
         }
       ],
       "secondaryLinks": [],
@@ -363,7 +353,7 @@
         "title": "Plan",
         "subtitle": "Expand on your great idea to lay the foundation for a successful business.",
         "link": {
-          "href": "/learn/plan",
+          "href": "/plan",
           "isInternal": true,
           "opensInNewTab": false
         }
@@ -373,7 +363,7 @@
         "title": "Start",
         "subtitle": "Learn what it means to be an employer in New Jersey and register your new business.",
         "link": {
-          "href": "/learn/start",
+          "href": "/start",
           "isInternal": true,
           "opensInNewTab": false
         }
@@ -383,7 +373,7 @@
         "title": "Operate",
         "subtitle": "Understand the requirements of keeping your business running smoothly.",
         "link": {
-          "href": "/learn/operate",
+          "href": "/operate",
           "isInternal": true,
           "opensInNewTab": false
         }
@@ -393,7 +383,7 @@
         "title": "Grow",
         "subtitle": "Expand your business and see it flourish with financing and new opportunities.",
         "link": {
-          "href": "/learn/grow",
+          "href": "/grow",
           "isInternal": true,
           "opensInNewTab": false
         }

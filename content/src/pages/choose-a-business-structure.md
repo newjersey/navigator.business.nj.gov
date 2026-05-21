@@ -165,7 +165,7 @@ main-text-3: |-
   Filing forms are available for this process:
 
   * If you are a New Jersey business wishing to convert your business structure, please file using form [CD-100](https://www.nj.gov/treasury/revenue/pdf/CD100.pdf).
-  * If you are an out-of-state business wishing to convert your business structure **and** [become a New Jersey Business](/learn/start/out-of-state-business-registration#section-6), please use CD-100.
+  * If you are an out-of-state business wishing to convert your business structure **and** [become a New Jersey Business](/pages/out-of-state-business-registration#section-6), please use CD-100.
   * If you are an out-of-state business wishing to convert your business structure only, please use form [CD-101](https://www.nj.gov/treasury/revenue/pdf/CD101.pdf).
 link-text-3: Business Conversion Legislation
 link-url-3: https://pub.njleg.state.nj.us/Bills/2022/AL23/38_.PDF

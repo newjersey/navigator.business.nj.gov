@@ -25,18 +25,14 @@ vi.mock("@/domain/content/loadContent", () => ({
 }));
 
 describe("generateStaticParams", () => {
-  it("returns one entry per slug in the category", () => {
-    const result = generateStaticParams({ params: { category: "plan" } });
-    expect(result).toHaveLength(2);
+  it("returns one entry per slug in CATEGORY_HIERARCHY", () => {
+    const result = generateStaticParams();
+    expect(result).toHaveLength(3);
     expect(result).toEqual([
       { slug: "create-a-business-plan" },
       { slug: "choose-a-business-structure" },
+      { slug: "something-else" },
     ]);
-  });
-
-  it("returns empty array for unknown category", () => {
-    const result = generateStaticParams({ params: { category: "unknown" } });
-    expect(result).toEqual([]);
   });
 });
 

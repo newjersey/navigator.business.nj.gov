@@ -6,7 +6,7 @@ category: grow
 sub-heading-text: Whatever your situation, there are a few things to keep in mind when thinking about additional financing. Learn more about applying for business loans.
 main-link-text: Learn About Business Loans
 main-text-1: |-
-  Your business has been up and running for a year or 2, and you have a list of places where you would like to make capital investments. Or you are a long-time business owner deciding to expand into different markets –you’re even thinking about [exports](/learn/grow/exporting). Or you are a brand new business owner, just getting started.
+  Your business has been up and running for a year or 2, and you have a list of places where you would like to make capital investments. Or you are a long-time business owner deciding to expand into different markets –you’re even thinking about [exports](/pages/exporting). Or you are a brand new business owner, just getting started.
 
   Whatever your situation, you are probably thinking about how to best finance your business beyond committing personal funds. (It is good to keep in mind that using personal funds is considered a key indicator of your seriousness about the business. Risking personal money gives confidence to others investing in the business.)
 heading-2: Understand Your Financing Options
@@ -17,8 +17,8 @@ main-text-2: |-
   * **Investors**: Your investors may be people you know, such as friends, relatives, or colleagues. Investment can also come from venture capital—angel investors or venture capital firms that want to invest in your business. Examples include commercial finance companies and venture capital funds.
   * **Community Development Financial Institutions / Micro Lenders:** This is a good option if you are unable to get a traditional loan. This could be a good first step to building credit and getting a bigger loan down the line.
   * **Life insurance companies: **We strongly encourage working with an attorney on this approach due to tax implications.
-  * **Crowdfunding:** Also known as peer-to-peer lending or investing, is an alternative funding model often via internet platforms. Crowdfunding can also raise awareness of your company or brand.[‍](/learn/grow/funding)
-  * **Government funding: **Funding programs with different government agencies are another way to fund some business ventures. These programs can provide a variety of capital or offer tax breaks for your business. [View open government funding opportunities](/learn/grow/funding).
+  * **Crowdfunding:** Also known as peer-to-peer lending or investing, is an alternative funding model often via internet platforms. Crowdfunding can also raise awareness of your company or brand.[‍](/pages/funding)
+  * **Government funding: **Funding programs with different government agencies are another way to fund some business ventures. These programs can provide a variety of capital or offer tax breaks for your business. [View open government funding opportunities](/pages/funding).
 heading-3: Estimate How Much Money To Borrow
 main-text-3: Once the building and equipment needs have been met, the business owner(s) must have enough money on hand to cover operating expenses for at least a year. These expenses include salaries and money to repay the loan. Work closely with your accountant to estimate cash flow needs.
 heading-4: Understand the Different Types of Business Loans‍
@@ -82,7 +82,7 @@ main-text-7: |-
   * Has the principal(s) prepared a loan proposal and business plan that demonstrates an understanding of the business and commitment to the success of the business?
   * Does the business have sufficient “cash flow” to make the monthly payments on the loan request?
 heading-8: Find Loan Resources
-main-text-8: "These organizations have workshops, people who can answer questions, mentoring programs, and more. Whether you’re refining a business plan, thinking through potential expansion, or need some questions clarified, these entities will have information and support.\_\n\n* [**New Jersey Business Action Center**](https://nj.gov/state/bac/)**\_**\n* [**Small Business Development Centers**](https://njsbdc.com/)\n* [**SCORE**](https://www.score.org/)\n\nFor more, visit the business.nj.gov [business support page](/learn/plan/business-support)."
+main-text-8: "These organizations have workshops, people who can answer questions, mentoring programs, and more. Whether you’re refining a business plan, thinking through potential expansion, or need some questions clarified, these entities will have information and support.\_\n\n* [**New Jersey Business Action Center**](https://nj.gov/state/bac/)**\_**\n* [**Small Business Development Centers**](https://njsbdc.com/)\n* [**SCORE**](https://www.score.org/)\n\nFor more, visit the business.nj.gov [business support page](/pages/business-support)."
 heading-9: A Note of Caution
 main-text-9: |-
   Be aware of advertisements or programs from so-called experts that offer “insider information” on financing a business with claims the state government or other public organizations have funds in the form of grants or extremely low-rate loans are available to the following groups:
@@ -95,5 +95,5 @@ main-text-9: |-
 
   Once a person begins calling these numbers to request money they quickly find out that the programs often have been misrepresented. Make sure you understand the terms, conditions, and obligations of the loan to avoid predatory lenders.
 
-  If you’re interested in information on financing a business through government funds, you can[ check out our verified, government-created database.](/learn/grow/funding)
+  If you’re interested in information on financing a business through government funds, you can[ check out our verified, government-created database.](/pages/funding)
 ---

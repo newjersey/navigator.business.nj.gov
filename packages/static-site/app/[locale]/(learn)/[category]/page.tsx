@@ -50,7 +50,7 @@ const CategoryPage = async ({ params }: Props) => {
         {subpages.map((subpage) => (
           <li key={subpage.slug}>
             <strong>
-              <a href={`/learn/${category}/${subpage.slug}`}>{subpage.name}</a>
+              <a href={`/pages/${subpage.slug}`}>{subpage.name}</a>
             </strong>
             <p>{subpage["sub-heading-text"]}</p>
             <hr className="margin-y-2" />
