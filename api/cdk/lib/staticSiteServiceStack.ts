@@ -19,6 +19,7 @@ import {
 } from "./staticSiteMonitoring";
 import { createStaticSiteOutputs } from "./staticSiteOutputs";
 import {
+  createStaticSiteImageTag,
   createStaticSiteServiceName,
   createStaticSiteTaskDefinition,
 } from "./staticSiteTaskDefinition";
@@ -129,6 +130,10 @@ export class StaticSiteServiceStack extends Stack {
       stage: props.stage,
       repository,
       logGroup,
+      imageTag: createStaticSiteImageTag({
+        stage: props.stage,
+        imageVersion: process.env.STATIC_SITE_IMAGE_VERSION,
+      }),
     });
     const loadBalancer = this.createLoadBalancer(props.stage, network);
     const targetGroup = this.createTargetGroup(props.stage, network);
