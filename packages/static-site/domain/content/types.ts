@@ -35,7 +35,7 @@ export interface PageItem {
   /** If "true", make a page for this but do not create a link to it from the "Plan"/"Start" etc main page */
   /** Assumes false if undefined */
   /** Needs to be a string due to the "[key: string]: string | undefined" index type */
-  hideFromCategoryPage?: string | undefined;
+  hideFromCategoryPage?: "true" | "false" | undefined;
   /** Category this page belongs to (e.g., "plan", "start", "operate"). */
   category?: string;
   /** Introductory text displayed below the page title. */
