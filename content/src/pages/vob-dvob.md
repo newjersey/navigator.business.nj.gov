@@ -2,7 +2,7 @@
 name: Veteran and Disabled Veteran-Owned Business
 slug: vob-dvob
 webflowId: 609a9cb0a58db6755f9ef877
-hideFromCategoryPage: true
+hideFromCategoryPage: "true"
 category: operate
 sub-heading-text: The state of New Jersey offers certifications for Veteran Owned Businesses (VOB) and Disabled Veteran Owned Businesses (DVOB).
 meta-data: How do I get certified as a Veteran-Owned Business (VOB) or Disabled Veteran Owned Business (DVOB)?
