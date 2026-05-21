@@ -13,11 +13,25 @@ runs:
       shell: bash
       run: |
         echo "Running CDK bootstrap for stage: $STAGE ..."
+        github_actions_oidc_role_arn="arn:aws:iam::$AWS_ACCOUNT_ID:role/bfs_github_actions_oidc_role"
+        github_actions_oidc_role_lookup=""
+        trust_args=(
+          --trust "arn:aws:iam::$AWS_ACCOUNT_ID:user/system/bfs-navigator"
+        )
+
+        if github_actions_oidc_role_lookup="$(aws iam get-role --role-name bfs_github_actions_oidc_role --query 'Role.Arn' --output text 2>&1)"; then
+          trust_args+=(--trust "$github_actions_oidc_role_arn")
+        elif [[ "$github_actions_oidc_role_lookup" == *"NoSuchEntity"* ]]; then
+          echo "Skipping CDK bootstrap trust for missing GitHub Actions OIDC role"
+        else
+          echo "Could not check for GitHub Actions OIDC role: $github_actions_oidc_role_lookup" >&2
+          exit 1
+        fi
+
         yarn workspace @businessnjgovnavigator/api-cdk cdk bootstrap aws://$AWS_ACCOUNT_ID/us-east-1 \
           --bootstrap-bucket-name cdk-biz-nj-assets-$AWS_ACCOUNT_ID-us-east-1 \
           --qualifier biz-nj \
-          --trust arn:aws:iam::$AWS_ACCOUNT_ID:user/system/bfs-navigator \
-          --trust arn:aws:iam::$AWS_ACCOUNT_ID:role/bfs_github_actions_oidc_role \
+          "${trust_args[@]}" \
           --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess
 
     - name: Import StorageStack resources in CDK

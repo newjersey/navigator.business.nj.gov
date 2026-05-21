@@ -35,8 +35,14 @@ export const STATIC_SITE_HOSTNAMES: Record<string, string> = {
   [STAGING_STAGE]: "staging.next.business.nj.gov",
   [PROD_STAGE]: "next.business.nj.gov",
 };
-/** Shared ACM certificate ID covering every static-site hostname. */
-export const STATIC_SITE_CERTIFICATE_ID = "97592b7b-b08f-41f0-9667-68a0e8927687";
+/** ACM certificate IDs covering the static-site hostnames in each AWS account. */
+export const STATIC_SITE_CERTIFICATE_IDS_BY_STAGE: Record<string, string> = {
+  [DEV_STAGE]: "97592b7b-b08f-41f0-9667-68a0e8927687",
+  [TESTING_STAGE]: "97592b7b-b08f-41f0-9667-68a0e8927687",
+  [CONTENT_STAGE]: "97592b7b-b08f-41f0-9667-68a0e8927687",
+  [STAGING_STAGE]: "57500157-27c7-41ac-bc54-aea63ee25ee8",
+  [PROD_STAGE]: "0c1c87db-0f58-4a71-b850-608c1268a69c",
+};
 export const HEALTH_CHECK_ENDPOINTS: Record<string, string> = {
   self: "self",
   elevator: "dynamics/elevator",

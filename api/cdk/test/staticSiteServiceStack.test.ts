@@ -1,6 +1,6 @@
 import { App } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
-import { STATIC_SITE_CERTIFICATE_ID } from "../lib/constants";
+import { STATIC_SITE_CERTIFICATE_IDS_BY_STAGE } from "../lib/constants";
 import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
 
 const TEST_AWS_ACCOUNT_ID = "123456789012";
@@ -9,15 +9,17 @@ const STATIC_SITE_TEST_ENVIRONMENT = {
   account: TEST_AWS_ACCOUNT_ID,
   region: TEST_AWS_REGION,
 };
-const STATIC_SITE_CERTIFICATE_ARN = {
-  "Fn::Join": [
-    "",
-    [
-      "arn:",
-      { Ref: "AWS::Partition" },
-      `:acm:${TEST_AWS_REGION}:${TEST_AWS_ACCOUNT_ID}:certificate/${STATIC_SITE_CERTIFICATE_ID}`,
+const createStaticSiteCertificateArn = (stage: string) => {
+  return {
+    "Fn::Join": [
+      "",
+      [
+        "arn:",
+        { Ref: "AWS::Partition" },
+        `:acm:${TEST_AWS_REGION}:${TEST_AWS_ACCOUNT_ID}:certificate/${STATIC_SITE_CERTIFICATE_IDS_BY_STAGE[stage]}`,
+      ],
     ],
-  ],
+  };
 };
 
 const createStaticSiteTemplates = (stage: string) => {
@@ -67,7 +69,7 @@ describe("StaticSiteServiceStack", () => {
     template.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", {
       Port: 443,
       Protocol: "HTTPS",
-      Certificates: [{ CertificateArn: STATIC_SITE_CERTIFICATE_ARN }],
+      Certificates: [{ CertificateArn: createStaticSiteCertificateArn("dev") }],
       SslPolicy: "ELBSecurityPolicy-TLS13-1-2-2021-06",
     });
     template.hasResourceProperties("AWS::EC2::SecurityGroupIngress", {
@@ -145,6 +147,24 @@ describe("StaticSiteServiceStack", () => {
           ]),
         }),
       ]),
+    });
+  });
+
+  test("uses the staging account static-site certificate for staging", () => {
+    const template = createStaticSiteTemplate("staging");
+
+    expect(template.toJSON()).toBeDefined();
+    template.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", {
+      Certificates: [{ CertificateArn: createStaticSiteCertificateArn("staging") }],
+    });
+  });
+
+  test("uses the production account static-site certificate for production", () => {
+    const template = createStaticSiteTemplate("prod");
+
+    expect(template.toJSON()).toBeDefined();
+    template.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", {
+      Certificates: [{ CertificateArn: createStaticSiteCertificateArn("prod") }],
     });
   });
 
