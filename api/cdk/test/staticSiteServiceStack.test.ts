@@ -278,4 +278,27 @@ describe("StaticSiteServiceStack", () => {
       ]),
     });
   });
+
+  test("uses the immutable image tag pushed by the static-site deploy workflow", () => {
+    process.env.STATIC_SITE_IMAGE_VERSION = "test-image-version";
+    const template = createStaticSiteTemplate("dev");
+
+    expect(template.toJSON()).toBeDefined();
+    template.hasResourceProperties("AWS::ECS::TaskDefinition", {
+      ContainerDefinitions: Match.arrayWith([
+        Match.objectLike({
+          Image: {
+            "Fn::Join": [
+              "",
+              [
+                "123456789012.dkr.ecr.us-east-1.",
+                { Ref: "AWS::URLSuffix" },
+                "/bfs-static-site:bfs-static-site-dev-test-image-version",
+              ],
+            ],
+          },
+        }),
+      ]),
+    });
+  });
 });

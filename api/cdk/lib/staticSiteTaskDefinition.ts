@@ -29,6 +29,9 @@ export interface CreateStaticSiteTaskDefinitionProps {
 
   /** CloudWatch log group that receives container logs. */
   readonly logGroup: logs.ILogGroup;
+
+  /** ECR image tag that the task definition should run. */
+  readonly imageTag: string;
 }
 
 /**
@@ -75,6 +78,15 @@ export interface StaticSiteContainerEnvironmentProps {
   readonly stage: string;
 }
 
+/** Inputs for resolving the static-site ECR image tag. */
+export interface CreateStaticSiteImageTagProps {
+  /** Deployment stage used in the default mutable image tag. */
+  readonly stage: string;
+
+  /** Optional immutable image version pushed by the static-site deploy workflow. */
+  readonly imageVersion?: string;
+}
+
 /** Basic Auth credential variables supplied by GitHub Actions during CDK deployment. */
 interface StaticSiteBasicAuthEnvironment {
   /** Username injected into the ECS task for protected-stage Basic Auth. */
@@ -89,9 +101,16 @@ export const createStaticSiteServiceName = (stage: string): string => {
   return `${STATIC_SITE_SERVICE_BASE_NAME}-${stage}`;
 };
 
-/** Create the mutable ECR image tag refreshed by static-site ECS deployments. */
-export const createStaticSiteImageTag = (stage: string): string => {
-  return createStaticSiteServiceName(stage);
+/** Create the ECR image tag used by static-site ECS deployments. */
+export const createStaticSiteImageTag = (props: CreateStaticSiteImageTagProps): string => {
+  const serviceName = createStaticSiteServiceName(props.stage);
+  const imageVersion = props.imageVersion?.trim();
+
+  if (!imageVersion) {
+    return serviceName;
+  }
+
+  return `${serviceName}-${imageVersion}`;
 };
 
 const isStaticSiteBasicAuthStage = (stage: string): boolean => {
@@ -187,10 +206,7 @@ export const createStaticSiteTaskDefinition = (
 
   taskDefinition.addContainer("StaticSiteContainer", {
     containerName: STATIC_SITE_CONTAINER_NAME,
-    image: ecs.ContainerImage.fromEcrRepository(
-      props.repository,
-      createStaticSiteImageTag(props.stage),
-    ),
+    image: ecs.ContainerImage.fromEcrRepository(props.repository, props.imageTag),
     essential: true,
     environment: createStaticSiteContainerEnvironment({ stage: props.stage }),
     healthCheck: {
