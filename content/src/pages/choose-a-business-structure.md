@@ -10,6 +10,7 @@ main-text-1: |-
 
   Depending on their needs, many business owners also consult with an attorney. Some business structures are easier to set up than others. For instance, forming a sole proprietorship does not require you to file any formation documents (although tax registration is still required), while for entities such as corporations and Limited Liability Companies, you will need to formally incorporate your company with the State. You may find more information at the [US Small Business Administration website](https://www.sba.gov/business-guide/launch-your-business/choose-business-structure) or the[ IRS website](https://www.irs.gov/businesses/small-businesses-self-employed/business-structures).
 link-text-1: View SBA Business Structure Guide
+link-url-1: https://www.sba.gov/business-guide/launch-your-business/choose-business-structure
 heading-2: Determine the Right Business Structures for Your Business
 main-text-2: |-
   Explore each business structure for more information about the advantages and drawbacks of each business structure (also referred to as legal structures).
@@ -167,4 +168,5 @@ main-text-3: |-
   * If you are an out-of-state business wishing to convert your business structure **and** [become a New Jersey Business](https://business.nj.gov/pages/out-of-state-business-registration#section-6), please use CD-100.
   * If you are an out-of-state business wishing to convert your business structure only, please use form [CD-101](https://www.nj.gov/treasury/revenue/pdf/CD101.pdf).
 link-text-3: Business Conversion Legislation
+link-url-3: https://pub.njleg.state.nj.us/Bills/2022/AL23/38_.PDF
 ---

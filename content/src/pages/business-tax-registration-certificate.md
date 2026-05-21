@@ -11,15 +11,15 @@ main-text-1: |-
 
   Before registering with the State, make sure you address the following items:
 
-  * **Partnerships, LLC's, and Corporations** 
+  * **Partnerships, LLC's, and Corporations**
   If you plan to start a general or limited partnership, LLC, or corporation, you will need to incorporate your business with the State before completing this step.**‍**
-  * **Location & Zoning** 
+  * **Location & Zoning**
   Check zoning and decide on a location for your business before registering. If you register your business before choosing a final location, you will have to update your registration with the new address. This can cost money and time.** **
-  * **Business Name** 
+  * **Business Name**
   Make sure the business name you want hasn't already been taken by someone else conducting business in the State.**‍**
-  * **Employer Identification Number (EIN)** 
+  * **Employer Identification Number (EIN)**
   You'll need to have your EIN from the US Internal Revenue Service (IRS) before you can register your business with the State. It's free and simple to do online. If you are planning to be a sole proprietor and will not hire any employees, you may also use your Social Security Number, although it's recommended to obtain an EIN to avoid identity theft.** **
-  * **Sales Tax Number 
+  * **Sales Tax Number
   ‍**If you're planning to sell goods or products that are taxable, you'll need a resale certificate from the New Jersey Division of Revenue and Enterprise Services.
 
   ## Step 1: Register Your Business
@@ -43,4 +43,5 @@ main-text-1: |-
 
   Once you've completed your application, you will be able to obtain your Business Registration Certificate (BRC). If you completed your application online, you will be issued a BRC immediately with a paper form being mailed to you in a few weeks. You will need to use your BRC number to pay your business taxes.
 link-text-1: Register
+link-url-1:
 ---

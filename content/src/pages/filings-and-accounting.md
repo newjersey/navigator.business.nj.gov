@@ -8,6 +8,7 @@ main-link-text: View Key Information
 heading-1: File Your Annual Report
 main-text-1: "Every business in NJ must file an annual report. This includes simply ensuring that your registered agent and address are up to date, and submitting a $75 filing fee.\n\nThe report is due every year on the last day of the month, in the month in which you completed your business formation (LLC, Corporation, etc). The responsibility to file falls on the business, even if you fail to receive any notification from the State. Failure to file can result in the revocation of your business.\n\n### Need more help?\n\n[Watch a video that explains how to file your annual report and make amendments to your business information, including your business name or address](https://www.youtube.com/watch?v=-qeM3J-Prls). They break down key definitions you need to understand for the process and any documentation required before you get started.\_\n\n**Important Timestamps:**\n\n* 1:30 Online business amendments vs employer account registration change service\n* 2:18 Learn about annual reports\n* 3:01 How to file an annual report\n* 8:13 Reinstate your business after being revoked\n* 9:58 File online business amendments\n* 15:32 Learn how to amend change your tax/employer records or amend your original Business Registration Certificate"
 link-text-1: File Your Annual Report with the Div. of Revenue
+link-url-1: https://www.njportal.com/dor/annualreports
 heading-2: File for State of New Jersey Taxes
 main-text-2: |-
   Your New Jersey deadlines will depend on your business structure, if you collect sales tax, or if you have employees. There are 3 main types of taxes your business may need to file:
@@ -38,15 +39,18 @@ main-text-2: |-
 
   [File C-Corp taxes with the New Jersey Division of Taxation](https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=20)
 link-text-2: View the State's Tax Calendar
+link-url-2: https://www.state.nj.us/treasury/taxation/njtaxcal.shtml
 heading-3: Understand Sales Tax
 main-text-3: "If selling taxable items or services in New Jersey, businesses are required to collect and remit, or pay, a sales tax to the State. The sales tax rate is 6.625%. Reduced taxes (50% of the regular rate) may apply to transactions taking place within an Urban Enterprise Zone (UEZ) and involving a certified UEZ Business. Learn more about the [New Jersey Sales and Use Tax and find the current rates](https://www.nj.gov/treasury/taxation/businesses/salestax/index.shtml).\n\n**Filings**\n\nYou must file a New Jersey Sales and Use Tax Quarterly Return with [Form ST-50](https://www.nj.gov/treasury/taxation/pdf/other_forms/st-50-en17.pdf) every 3 months even if no tax was collected during that particular quarter (note: If you had no sales during the quarter, simply file the return with all zeros).\_\_\n\n[Some businesses](https://nj.gov/treasury/taxation/su_12.shtml) will be required to make monthly payments for the first 2 months of the quarter. This applies to you if your business:\_\n\n* Collected more than $30,000 in Sales and Use Tax in New Jersey during the prior calendar year; and\n* Collected more than $500 in the first and/or second month of the current calendar quarter\n\nYou can [file the quarterly return and make payments online](https://taxportal.nj.gov/). Failure to file the return and pay the tax by the due date (on or before the 20th day of the month after the end of the filing period) may result in the assessment of interest and/or penalty. \_\n\n**Exemptions**\n\nCertain production machinery and most packaging supplies are exempt from sales tax because of their intended use. You may use an Exempt Use Certificate (Form ST-4) when purchasing these items and pay no sales tax. Other common uses of the Exempt Use Certificate are listed on the back of the certificate.\n\nNOTE: There are special exemption certificates for use by registered exempt organizations (FORM ST-5) and contractors doing work for exempt organizations (Form ST-13)."
 link-text-3: File for Sales and Use Tax
+link-url-3: https://taxportal.nj.gov/
 heading-4: Withhold Wage and Payroll Taxes
 main-text-4: |-
   If you have an employee that is a resident subject to New Jersey taxes, you need to pay payroll and wage withholding taxes. This is true even if your business is out of state. [Read more about withholding taxes](https://www.state.nj.us/treasury/taxation/njit31.shtml).
 
   If you are unsure about the status of your employee and whether you need to complete payroll taxes, please refer to the circumstances listed under the [ABC test](https://www.nj.gov/labor/ea/audit/independent-contractor-vs-employees/).
 link-text-4: File Payroll Taxes and Wage Withholding
+link-url-4: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=45
 heading-5: File Specialty Taxes
 main-text-5: |-
   There are other unique taxes you may qualify for; you should have identified these when you registered for State taxes. Examples include:
@@ -58,9 +62,11 @@ main-text-5: |-
   * Occupancy tax for hotels and motels[**‍**]()**‍**[**
   **]()
 link-text-5: File for Other Taxes
+link-url-5: https://www.state.nj.us/treasury/taxation/payments-notices.shtml
 heading-6: Using Premier Business Services for Tax Services
 main-text-6: "[Premier Business Services](https://www-njlib.nj.gov/NJ_PREMIER_EBIZ/jsp/home.jsp) (PBS) provides access to your tax records, and lets you make tax payments, request tax clearance certificates, and register as an Urban Enterprise Zone business. You can also give employees, payroll companies, or tax professionals limited access to PBS on your behalf.\n\nTo access PBS you must:\n\n* Setup a [myNewJersey](https://my.state.nj.us/openam/UI/Login) account (myNewJersey is the State's secure login platform)\n* Add a PBS account to your MyNewJersey account\n* Add your business to your PBS account\n\nTo add a business to your PBS account, you must have registered for State taxes. You will need your:\n\n* NJ\_Tax ID\_# (which is the same as your EIN\_and 3-digit location code)\n* Business Name\n* [A PIN #](https://www.state.nj.us/treasury/assets/contact/taxation/contact-pin.shtml) (this was provided when you registered for State taxes)\n\nOR\n\n* Chosen business structure\n* Year your business operations started in New Jersey\n* Zip code (where you receive tax notices and forms)\n\n### Need more help?\n\nPremier Business Services (PBS) is the State’s electronic tax filing and payment platform, and shows your tax filing/payment history.[ This video provides information on what you need to get started and how to navigate the tool](https://www.youtube.com/watch?v=Zb5Z3VKRtPw).\n\n* **Important Timestamps:**\n* 1:22 What do I need to set up a PBS account\n* 2:29 Learn how to set up a PBS account\n* 6:55 Access your PBS account once it's set up\n* 7:30 Change the primary representative of your PBS account"
 link-text-6: "File Your Taxes on Premier Business Services "
+link-url-6: https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp
 heading-7: New Jersey State Audits, Disagreements About Determinations or Bills
 main-text-7: |-
   [The New Jersey Taxpayers' Bill of Rights](https://www.state.nj.us/treasury/taxation/pdf/pubs/sales/anj1.pdf) ensures you have the right to access information about your taxes, including details about your tax situation, how your liability is determined, any notices from the Division of Taxation, and your rights and responsibilities as a taxpayer. Here are the key points simplified:
@@ -95,6 +101,7 @@ main-text-8: |-
   * [Business Registration Certificate](https://www.nj.gov/treasury/revenue/busregcert.shtml) (useful if you are looking into public contracting)[‍](https://www.nj.gov/treasury/revenue/standcert.shtml)
   * [Standing Certificates](https://www.nj.gov/treasury/revenue/standcert.shtml) (may be helpful to confirm corporate status)
 link-text-8: View the Federal Tax Calendar at the IRS
+link-url-8: https://www.irs.gov/businesses/small-businesses-self-employed/business-taxes
 heading-9: File ‍City, Town, and County Taxes
 main-text-9: |-
   Typically, cities or towns do not charge business taxes directly. Revenues for the city or town come from property taxes, which a business owner may be responsible for paying based on the property you own or lease within the municipality.
@@ -109,4 +116,5 @@ main-text-9: |-
 heading-10: Filing Beneficial Owner Information Report
 main-text-10: "If you are a “reporting company” under the law, you must file a Beneficial Ownership Information Report (BOIR). Reporting companies usually include corporations, LLCs, and similar businesses registered in the U.S. or foreign businesses operating in the U.S., unless they qualify for an exemption. [The Financial Crimes Enforcement Network (FinCEN) provides a chart to see if your business is a reporting company or qualifies for one of the 23 exemption types](https://www.fincen.gov/sites/default/files/shared/BOI_Small_Compliance_Guide.v1.1-FINAL.pdf).\_\n\nFiling Beneficial Ownership Information (BOI) with the federal government helps prevent financial crimes like money laundering, fraud, and tax evasion.If your company must report, you must share information about your beneficial owners—people who own at least 25% or have significant control. To stay compliant, file accurate information with FinCEN on time, update it when needed, and follow the rules to avoid penalties.\n\n**Know when to file:\_**\n\n* If your company was created or registered before January 1, 2024, you have until January 1, 2025, to file your first BOIR\n* If your company was created or registered in 2024, you must file within 90 days of receiving notice that your registration is complete\n* Starting January 1, 2025, new companies will have 30 days to file after receiving notice that their registration is complete\n\nUp-to-date information about filing your BOIR with FinCEN can be found at [https://www.fincen.gov/boi](https://www.fincen.gov/boi)."
 link-text-10: File Your BOIR with FinCEN
+link-url-10: https://boiefiling.fincen.gov/
 ---

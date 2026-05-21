@@ -16,6 +16,7 @@ main-text-3: |-
 
   When you close or sell your business, you will still need to file an annual return for the year. If you have employees, you will also file final employment tax returns and make federal tax deposits. Additional returns may need to be filed to report capital gains/losses, disposing of business property, or other items depending on the nature of your business. The IRS Closing a Business checklist provides more information and the necessary forms.
 link-text-3: IRS Closing a Business Checklist
+link-url-3: https://www.irs.gov/businesses/small-businesses-self-employed/closing-a-business
 heading-4: Understand Obligations Under the Worker Adjustment and Retraining Notification (WARN) Act
 main-text-4: |-
   ### Overview
@@ -44,4 +45,5 @@ main-text-4: |-
 
   [Learn how to file a WARN notice](https://www.nj.gov/labor/employer-services/warn/index.shtml).
 link-text-4: WARN Fact Sheet
+link-url-4: https://www.doleta.gov/programs/factsht/WARN_Fact_Sheet_updated_03.06.2019.pdf
 ---

@@ -18,4 +18,5 @@ main-text-5: "Federal agencies must publicly list their contract opportunities, 
 heading-6: "Contracting Assistance and Support "
 main-text-6: "### New-Jersey Based Resources and Support\n\nThe New Jersey Institute of Technology (NJIT) APEX Accelerators provides free counseling, training, and technical resources to New Jersey-based businesses, including those looking to work on government contracts.\_\n\n### Federal Contracting Resources and Support\n\nThe [Small Business Administration (SBA) offers counseling, training, and resources](https://www.sba.gov/federal-contracting/counseling-help) to help small businesses succeed in government contracting. You can also [contact your SBA District Office](https://www.sba.gov/about-sba/sba-locations/sba-district-offices) for help planning, starting, or growing your small business."
 link-text-6: Get Support on Your Government Contract
+link-url-6: http://www.njit.edu/ptac
 ---
