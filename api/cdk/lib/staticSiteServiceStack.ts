@@ -9,7 +9,7 @@ import * as sns from "aws-cdk-lib/aws-sns";
 import { Construct } from "constructs";
 import {
   STATIC_SITE_CLUSTER_NAME,
-  STATIC_SITE_CERTIFICATE_ID,
+  STATIC_SITE_CERTIFICATE_IDS_BY_STAGE,
   STATIC_SITE_HEALTH_CHECK_PATH,
   STATIC_SITE_SERVICE_BASE_NAME,
 } from "./constants";
@@ -110,6 +110,17 @@ const createStaticSiteTargetGroupName = (stage: string): string => {
   return `${STATIC_SITE_SERVICE_BASE_NAME}-${stage}-tg`;
 };
 
+/** Resolve the ACM certificate ID for the static-site stage being deployed. */
+const requireStaticSiteCertificateId = (stage: string): string => {
+  const certificateId = STATIC_SITE_CERTIFICATE_IDS_BY_STAGE[stage];
+
+  if (!certificateId) {
+    throw new Error(`No static-site ACM certificate ID configured for stage '${stage}'.`);
+  }
+
+  return certificateId;
+};
+
 /** CDK stack that runs the static site in ECS Fargate behind an internal ALB. */
 export class StaticSiteServiceStack extends Stack {
   constructor(scope: Construct, id: string, props: StaticSiteServiceStackProps) {
@@ -137,7 +148,7 @@ export class StaticSiteServiceStack extends Stack {
     });
     const loadBalancer = this.createLoadBalancer(props.stage, network);
     const targetGroup = this.createTargetGroup(props.stage, network);
-    const certificate = this.createCertificate();
+    const certificate = this.createCertificate(props.stage);
     const listener = loadBalancer.addListener("StaticSiteListener", {
       port: STATIC_SITE_HTTPS_INGRESS_PORT,
       protocol: elbv2.ApplicationProtocol.HTTPS,
@@ -253,14 +264,14 @@ export class StaticSiteServiceStack extends Stack {
     return alarmTopic;
   }
 
-  private createCertificate(): acm.ICertificate {
+  private createCertificate(stage: string): acm.ICertificate {
     return acm.Certificate.fromCertificateArn(
       this,
       "StaticSiteCertificate",
       this.formatArn({
         service: "acm",
         resource: "certificate",
-        resourceName: STATIC_SITE_CERTIFICATE_ID,
+        resourceName: requireStaticSiteCertificateId(stage),
         arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
       }),
     );
