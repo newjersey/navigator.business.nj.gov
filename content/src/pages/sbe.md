@@ -3,7 +3,7 @@ name: Small Business Enterprise (SBE)
 slug: sbe
 webflowId: 609aab19e6dd41f8845c6f1f
 category: operate
-hideFromCategoryPage: true
+hideFromCategoryPage: "true"
 sub-heading-text: Small Business Enterprise (SBE) can register through the State of New Jersey Small Business Set-Aside Program.
 meta-data: How do I participate in the Small Business Set-Aside Program? SBE
 primary-page: certifications

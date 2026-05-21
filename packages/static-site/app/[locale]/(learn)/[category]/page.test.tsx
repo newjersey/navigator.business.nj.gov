@@ -12,7 +12,7 @@ vi.mock("@/domain/categories", () => ({
           "sub-heading-text": "Business Plan Subheader",
         },
         { slug: "choose-a-business-structure", name: "Choose a Business Structure" },
-        { slug: "hidden-content", name: "Don't display me", hideFromCategoryPage: true },
+        { slug: "hidden-content", name: "Don't display me", hideFromCategoryPage: "true" },
       ],
     },
     start: { children: [] },

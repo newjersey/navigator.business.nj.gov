@@ -32,9 +32,10 @@ export interface PageItem {
   slug: string;
   /** Legacy Webflow CMS identifier. */
   webflowId?: string;
-  /** If true, make a page for this but do not create a link to it from the "Plan"/"Start" etc main page */
+  /** If "true", make a page for this but do not create a link to it from the "Plan"/"Start" etc main page */
   /** Assumes false if undefined */
-  hideFromCategoryPage?: boolean | undefined;
+  /** Needs to be a string due to the "[key: string]: string | undefined" index type */
+  hideFromCategoryPage?: string | undefined;
   /** Category this page belongs to (e.g., "plan", "start", "operate"). */
   category?: string;
   /** Introductory text displayed below the page title. */

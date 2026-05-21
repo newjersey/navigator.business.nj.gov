@@ -3,7 +3,7 @@ name: Minority and/or Women Business Enterprise (M/WBE)
 slug: mwbe
 webflowId: 6050a39961294e752a308718
 category: operate
-hideFromCategoryPage: true
+hideFromCategoryPage: "true"
 sub-heading-text: M/WBE is a certificate issued by the state to identify minority and/or women owned business or enterprises. This certification may help when obtaining contracts with government entities or as subcontractors to a larger government contract.
 meta-data: How do I contract with the State as a small business, minority- or women-owned business?
 main-link-text: About M/WBE
