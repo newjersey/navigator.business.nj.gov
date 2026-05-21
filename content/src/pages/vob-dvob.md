@@ -2,6 +2,7 @@
 name: Veteran and Disabled Veteran-Owned Business
 slug: vob-dvob
 webflowId: 609a9cb0a58db6755f9ef877
+hideFromCategoryPage: true
 category: operate
 sub-heading-text: The state of New Jersey offers certifications for Veteran Owned Businesses (VOB) and Disabled Veteran Owned Businesses (DVOB).
 meta-data: How do I get certified as a Veteran-Owned Business (VOB) or Disabled Veteran Owned Business (DVOB)?
@@ -24,11 +25,11 @@ main-text-2: |-
 
   **Application Requirements**
 
-  In all cases, provide a copy of your proof of business registration with the State of New Jersey. 
+  In all cases, provide a copy of your proof of business registration with the State of New Jersey.
 
   If you wish to be registered under definition **one** above, include with your application a Service Connected Award Letter, or comparable communication, from the federal Department of Veterans Affairs for each owner that is a disabled veteran.
 
-  If you wish to be registered under definition **two** above, include with your application the firm's Federal Service Disabled Veteran Owned Business Determination Letter. 
+  If you wish to be registered under definition **two** above, include with your application the firm's Federal Service Disabled Veteran Owned Business Determination Letter.
 
   You can obtain the business registration certificate online [here](https://www1.state.nj.us/TYTR_BRC/jsp/BRCLoginJsp.jsp).
 
