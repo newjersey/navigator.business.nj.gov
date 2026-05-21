@@ -51,6 +51,16 @@ runs:
         echo "STATIC_SITE_IMAGE_NAME=$image_name" >> "$GITHUB_ENV"
         echo "STATIC_SITE_IMAGE_VERSION=$IMAGE_VERSION" >> "$GITHUB_ENV"
 
+    - name: Deploy Static Site ECS Service Stack
+      shell: bash
+      run: |
+        echo "Deploying static site ECS service stack: StaticSiteServiceStack-${STAGE}"
+        STATIC_SITE_INFRA_ONLY=true yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteServiceStack-${STAGE}" \
+          --qualifier biz-nj \
+          --verbose \
+          --region us-east-1 \
+          --require-approval never
+
     - name: Deploy Static Site to ECS
       shell: bash
       run: |
