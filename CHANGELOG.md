@@ -1,3 +1,10 @@
+## [2026.11.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.11.0...v2026.11.1) (2026-05-21)
+
+
+### Bug Fixes
+
+* properly read release version from package.json ([e475e92](https://github.com/newjersey/navigator.business.nj.gov/commit/e475e92e3365f158e7dd830fae41be61dae3f919))
+
 # [2026.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.10.1...v2026.11.0) (2026-05-21)
 
 
