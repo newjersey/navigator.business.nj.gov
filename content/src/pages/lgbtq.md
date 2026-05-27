@@ -3,6 +3,7 @@ name: Lesbian, Gay, Bisexual, Transgender, Queer, Questioning (LGBTQ+) Certifica
 slug: lgbtq
 webflowId: 647f193e37f4a647514ab738
 category: operate
+hideFromCategoryPage: "true"
 sub-heading-text: The state of New Jersey offers certifications for Lesbian, Gay, Bisexual, Transgender, Queer, Questioning (LGBTQ+) Businesses.
 primary-page: certifications
 heading-1: Qualifying Businesses and Enterprises

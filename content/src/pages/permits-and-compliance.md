@@ -12,7 +12,7 @@ link-text-2: Building Permits and Inspections
 link-url-2: /pages/building-permits-and-inspections
 heading-3: Make Your Site ADA Compliant
 main-text-3: |-
-  Making your business accessible not only helps your customers, but it’s also federal and state law. The Americans with Disabilities Act (ADA) and New Jersey state requirements are in place to ensure people with disabilities or other impairments have equal access to businesses and other public facilities. 
+  Making your business accessible not only helps your customers, but it’s also federal and state law. The Americans with Disabilities Act (ADA) and New Jersey state requirements are in place to ensure people with disabilities or other impairments have equal access to businesses and other public facilities.
 
   The Americans with Disabilities Act (ADA) is a Federal civil rights law designed to ensure equal access, full inclusion, and participation for people with disabilities or impairments. Under the law, people with disabilities are entitled to full and equal access to places of public accommodation, transportation carriers, lodging places, recreation, amusement facilities, and other business establishments where the general public is invited.
 

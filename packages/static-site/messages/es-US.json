@@ -61,16 +61,6 @@
             "opensInNewTab": false
           },
           "isCurrent": false
-        },
-        {
-          "kind": "link",
-          "link": {
-            "label": "Business Names (temp)",
-            "href": "/business-names",
-            "isInternal": true,
-            "opensInNewTab": false
-          },
-          "isCurrent": false
         }
       ],
       "secondaryLinks": [],
@@ -341,108 +331,59 @@
     "name": "Learn",
     "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
     "heading2": "Where are you in your business journey?",
+    "cardLinkText": "Learn more",
     "categoryPages": {
       "allTopics": "All Topics"
     },
     "sideNav": {
       "ariaLabel": "Side navigation",
-      "pages": [
-        {
-          "key": "learn",
-          "label": "Introducción",
+      "learnCategory": {
+        "key": "learn",
+        "title": "Introduction",
+        "link": {
           "href": "/learn",
           "isInternal": true,
           "opensInNewTab": false
-        },
-        {
-          "key": "plan",
-          "label": "Planificar",
-          "href": "/learn/plan",
-          "isInternal": true,
-          "opensInNewTab": false
-        },
-        {
-          "key": "start",
-          "label": "Comenzar",
-          "href": "/learn/start",
-          "isInternal": true,
-          "opensInNewTab": false
-        },
-        {
-          "key": "operate",
-          "label": "Operar",
-          "href": "/learn/operate",
-          "isInternal": true,
-          "opensInNewTab": false
-        },
-        {
-          "key": "grow",
-          "label": "Crecer",
-          "href": "/learn/grow",
-          "isInternal": true,
-          "opensInNewTab": false
         }
-      ]
+      }
     },
     "categories": [
       {
         "key": "plan",
         "title": "Plan",
-        "subtitle": "Placeholder text"
+        "subtitle": "Expand on your great idea to lay the foundation for a successful business.",
+        "link": {
+          "href": "/plan",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
       },
       {
         "key": "start",
         "title": "Start",
-        "subtitle": "Registering a business, EINs, taxes, licenses, and employer requirements"
+        "subtitle": "Learn what it means to be an employer in New Jersey and register your new business.",
+        "link": {
+          "href": "/start",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
       },
       {
         "key": "operate",
         "title": "Operate",
-        "subtitle": "Placeholder text"
+        "subtitle": "Understand the requirements of keeping your business running smoothly.",
+        "link": {
+          "href": "/operate",
+          "isInternal": true,
+          "opensInNewTab": false
+        }
       },
       {
         "key": "grow",
         "title": "Grow",
-        "subtitle": "Placeholder text"
-      }
-    ],
-    "cards": [
-      {
-        "title": "Planning",
-        "description": "You have a great idea and want to turn it into a successful business.",
+        "subtitle": "Expand your business and see it flourish with financing and new opportunities.",
         "link": {
-          "label": "Learn More",
-          "href": "/learn/plan",
-          "isInternal": true,
-          "opensInNewTab": false
-        }
-      },
-      {
-        "title": "Starting",
-        "description": "You’ve decided to start a business, and now it's time to legally register it.",
-        "link": {
-          "label": "Learn More",
-          "href": "/learn/start",
-          "isInternal": true,
-          "opensInNewTab": false
-        }
-      },
-      {
-        "title": "Operating",
-        "description": "Your doors are open and you want to stay in compliance with the State.",
-        "link": {
-          "label": "Learn More",
-          "href": "/learn/operate",
-          "isInternal": true,
-          "opensInNewTab": false
-        }
-      },
-      {
-        "title": "Growing",
-        "description": "You are looking to expand your business, find funding, export your goods, or contract with the State.",
-        "link": {
-          "label": "Learn More",
-          "href": "/learn/grow",
+          "href": "/grow",
           "isInternal": true,
           "opensInNewTab": false
         }

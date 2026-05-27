@@ -12,6 +12,7 @@ vi.mock("@/domain/categories", () => ({
           "sub-heading-text": "Business Plan Subheader",
         },
         { slug: "choose-a-business-structure", name: "Choose a Business Structure" },
+        { slug: "hidden-content", name: "Don't display me", hideFromCategoryPage: "true" },
       ],
     },
     start: { children: [] },
@@ -35,12 +36,12 @@ describe("CategoryPage", () => {
 
     expect(screen.getByRole("link", { name: "Create a Business Plan" })).toHaveAttribute(
       "href",
-      "/learn/plan/create-a-business-plan",
+      "/pages/create-a-business-plan",
     );
 
     expect(screen.getByRole("link", { name: "Choose a Business Structure" })).toHaveAttribute(
       "href",
-      "/learn/plan/choose-a-business-structure",
+      "/pages/choose-a-business-structure",
     );
   });
 
@@ -52,5 +53,15 @@ describe("CategoryPage", () => {
     );
 
     expect(screen.getByText("Business Plan Subheader")).toBeInTheDocument();
+  });
+
+  it("does not render a link when a page has hideFromCategoryPage=true", async () => {
+    render(
+      await CategoryPage({
+        params: Promise.resolve({ locale: "en-US", category: "plan" }),
+      }),
+    );
+
+    expect(screen.queryByText("Don't display me")).not.toBeInTheDocument();
   });
 });

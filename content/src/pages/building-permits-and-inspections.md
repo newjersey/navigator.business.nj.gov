@@ -3,6 +3,7 @@ name: Building Permits and Inspections
 slug: building-permits-and-inspections
 webflowId: 5e31b06cb76b83846d358bbd
 category: plan
+hideFromCategoryPage: "true"
 sub-heading-text: If you're planning on making any changes or renovations to your space, you'll probably need to get a building permit. Building permits are required for building, structural, electrical, HVAC, and plumbing projects, and help to ensure that your space is safe for your team and your customers. Learn more about each step, from application to review to inspection.
 main-link-text: Compliance Information
 heading-1: Determine if You Need a Building Permit

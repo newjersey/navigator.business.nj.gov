@@ -3,6 +3,7 @@ name: Socially and Economically Disadvantaged Business (SEBD)
 slug: socially-and-economically-disadvantaged-business-sebd
 webflowId: 680137cc1447523031c64e01
 category: operate
+hideFromCategoryPage: "true"
 sub-heading-text: A Socially and Economically Disadvantaged Business (SEBD) certification can help grow your business and give you an advantage with government contracts.
 primary-page: certifications
 heading-1: Eligibility Criteria
