@@ -1,6 +1,5 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
-import { ProgressBar } from "@/components/ProgressBar";
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -9,33 +8,16 @@ import { SectionType } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 
-interface Props {
+interface MiniSectionAccordionProps {
   sectionType: SectionType;
   children: ReactNode;
-  mini?: boolean;
   isDividerDisabled?: boolean;
-  progressPercentage?: number;
 }
 
-type ProgressLabelStage = "zero" | "low" | "mid" | "high";
-
-const PROGRESS_STAGE_LOW_THRESHOLD = 50;
-const PROGRESS_STAGE_MID_THRESHOLD = 90;
-
-const progressLabelStage = (percentage: number): ProgressLabelStage => {
-  if (percentage === 0) return "zero";
-  if (percentage < PROGRESS_STAGE_LOW_THRESHOLD) return "low";
-  if (percentage < PROGRESS_STAGE_MID_THRESHOLD) return "mid";
-  return "high";
-};
-
-export const SectionAccordion = (props: Props): ReactElement => {
+export const MiniSectionAccordion = (props: MiniSectionAccordionProps): ReactElement => {
   const { updateQueue, business } = useUserData();
-  const dropdownIconClasses = props.mini
-    ? "usa-icon--size-5 text-base-light"
-    : "usa-icon--size-5 margin-left-1";
-  const headerClasses = props.mini ? "" : "margin-top-3 tablet:margin-left-3";
-  const dividerClasses = props.mini ? "margin-y-2" : "margin-y-3";
+  const dropdownIconClasses = "usa-icon--size-5 text-base-light";
+  const dividerClasses = "margin-y-2";
   const sectionName = props.sectionType.toLowerCase();
   const isOpen = business?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
   const { Config } = useConfig();
@@ -72,32 +54,10 @@ export const SectionAccordion = (props: Props): ReactElement => {
             aria-controls={`${sectionName}-content`}
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
-            sx={{ position: "relative" }}
           >
-            <div className="flex flex-column width-full">
-              <Heading
-                level={3}
-                className={`flex flex-align-center margin-0-override ${headerClasses}`}
-              >
-                <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
-              </Heading>
-              {props.progressPercentage !== undefined && (
-                <div className="section-progress-bar-row">
-                  <ProgressBar
-                    label={`${Config.sectionHeaders[props.sectionType]} section task progress`}
-                    percentage={props.progressPercentage}
-                    data-testid="section-progress-bar"
-                  />
-                </div>
-              )}
-            </div>
-            {props.progressPercentage !== undefined && (
-              <span
-                className={`section-progress-bar-label section-progress-bar-label--${progressLabelStage(props.progressPercentage)}`}
-              >
-                {props.progressPercentage}%
-              </span>
-            )}
+            <Heading level={3} className="flex flex-align-center margin-0-override">
+              <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
+            </Heading>
           </AccordionSummary>
           <AccordionDetails>{props.children}</AccordionDetails>
         </Accordion>

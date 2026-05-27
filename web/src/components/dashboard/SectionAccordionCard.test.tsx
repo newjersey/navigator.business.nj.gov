@@ -1,4 +1,4 @@
-import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
+import { SectionAccordionCard } from "@/components/dashboard/SectionAccordionCard";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
@@ -17,7 +17,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-describe("<SectionAccordion />", () => {
+describe("<SectionAccordionCard />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     setupStatefulUserDataContext();
@@ -27,7 +27,7 @@ describe("<SectionAccordion />", () => {
   const statefulRender = (type: SectionType, business: Business): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
-        <SectionAccordion sectionType={type}>BODY CONTENT</SectionAccordion>
+        <SectionAccordionCard sectionType={type}>BODY CONTENT</SectionAccordionCard>
       </WithStatefulUserData>,
     );
   };
@@ -89,9 +89,9 @@ describe("<SectionAccordion />", () => {
           }),
         )}
       >
-        <SectionAccordion sectionType="PLAN" progressPercentage={60}>
+        <SectionAccordionCard sectionType="PLAN" progressPercentage={60}>
           BODY CONTENT
-        </SectionAccordion>
+        </SectionAccordionCard>
       </WithStatefulUserData>,
     );
     expect(screen.getByTestId("section-progress-bar")).toBeInTheDocument();
@@ -106,7 +106,7 @@ describe("<SectionAccordion />", () => {
           }),
         )}
       >
-        <SectionAccordion sectionType="PLAN">BODY CONTENT</SectionAccordion>
+        <SectionAccordionCard sectionType="PLAN">BODY CONTENT</SectionAccordionCard>
       </WithStatefulUserData>,
     );
     expect(screen.queryByTestId("section-progress-bar")).not.toBeInTheDocument();

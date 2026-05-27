@@ -1,5 +1,5 @@
 import { BusinessStructurePrompt } from "@/components/dashboard/BusinessStructurePrompt";
-import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
+import { MiniSectionAccordion } from "@/components/dashboard/MiniSectionAccordion";
 import { MiniRoadmapStep } from "@/components/roadmap/MiniRoadmapStep";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -56,7 +56,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     <>
       {sectionNamesInRoadmap.map((section) => {
         return (
-          <SectionAccordion key={section} sectionType={section} mini={true}>
+          <MiniSectionAccordion key={section} sectionType={section}>
             {section === "START" &&
             !completedBusinessStructure &&
             displayBusinessStructurePrompt ? (
@@ -81,7 +81,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                   );
                 })
             )}
-          </SectionAccordion>
+          </MiniSectionAccordion>
         );
       })}
     </>

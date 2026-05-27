@@ -219,7 +219,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   };
 
   return (
-    <div className={"flex flex-align-center"}>
+    <div className={"flex flex-align-start"}>
       <>{congratulatoryModal}</>
 
       <div className="margin-right-2">
@@ -234,7 +234,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         )}
       </div>
 
-      <span className="flex flex-align-center">{TaskProgressTagLookup[currentTaskProgress]}</span>
+      <span className="flex flex-align-start">{TaskProgressTagLookup[currentTaskProgress]}</span>
 
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}

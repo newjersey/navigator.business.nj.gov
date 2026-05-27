@@ -2509,7 +2509,7 @@ collections:
             widget: object
             fields:
               - {
-                  label: Tooltip - Not Complete,
+                  label: Task Page Tooltip - Not Complete,
                   name: uncompletedTooltip,
                   widget: text,
                   hint:
@@ -2518,11 +2518,28 @@ collections:
                     the task.,
                 }
               - {
-                  label: Tooltip - Completed,
+                  label: Task Page Tooltip - Completed,
                   name: completedTooltip,
                   widget: text,
                   hint: This tooltip shows if the user hovers over a completed checkbox.,
                 }
+              - {
+                  label: Roadmap Page Tooltip - Not Complete,
+                  name: uncompletedRoadmapTooltip,
+                  widget: text,
+                  hint:
+                    This tooltip shows if the user hovers over the checkbox on the dashboard page
+                    showing the roadmap.,
+                }
+              - {
+                  label: Roadmap Page Tooltip - Completed,
+                  name: completedRoadmapTooltip,
+                  widget: text,
+                  hint:
+                    This tooltip shows if the user hovers over a completed checkbox on the dashboard
+                    page showing the roadmap.,
+                }
+
               - {
                   label: Info Callout,
                   name: infoCallout,
