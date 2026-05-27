@@ -43,6 +43,58 @@ export const hasSameStructure = (base: unknown, other: unknown): boolean => {
   return typeof base === typeof other;
 };
 
+interface DiffParams {
+  base: unknown;
+  other: unknown;
+  path?: string;
+}
+
+const collectArrayDiffs = ({ base, other, path = "" }: DiffParams): string[] => {
+  const baseArr = base as unknown[];
+  if (!Array.isArray(other)) {
+    return [`${path}: expected array, got ${typeof other}`];
+  }
+  if (baseArr.length !== other.length) {
+    return [`${path}: array length mismatch (base: ${baseArr.length}, other: ${other.length})`];
+  }
+  return baseArr.flatMap((item, index) =>
+    collectStructureDiffs({ base: item, other: other[index], path: `${path}[${index}]` }),
+  );
+};
+
+const collectObjectDiffs = ({ base, other, path = "" }: DiffParams): string[] => {
+  if (typeof other !== "object" || other === null || Array.isArray(other)) {
+    return [`${path}: expected object, got ${Array.isArray(other) ? "array" : typeof other}`];
+  }
+  const baseRecord = base as Record<string, unknown>;
+  const otherRecord = other as Record<string, unknown>;
+  const missingOrChanged = Object.keys(baseRecord).flatMap((key) => {
+    const childPath = path ? `${path}.${key}` : key;
+    if (!(key in otherRecord)) return [`${childPath}: missing in other locale`];
+    return collectStructureDiffs({
+      base: baseRecord[key],
+      other: otherRecord[key],
+      path: childPath,
+    });
+  });
+  const extra = Object.keys(otherRecord)
+    .filter((key) => !(key in baseRecord))
+    .map((key) => `${path ? `${path}.${key}` : key}: extra key not in base locale`);
+  return [...missingOrChanged, ...extra];
+};
+
+/**
+ * Collects paths where `other` diverges structurally from `base`.
+ */
+export const collectStructureDiffs = ({ base, other, path = "" }: DiffParams): string[] => {
+  if (Array.isArray(base)) return collectArrayDiffs({ base, other, path });
+  if (typeof base === "object" && base !== null) return collectObjectDiffs({ base, other, path });
+  if (typeof base !== typeof other) {
+    return [`${path}: type mismatch (base: ${typeof base}, other: ${typeof other})`];
+  }
+  return [];
+};
+
 /**
  * Asserts that a locale payload has the same structure as en-US.
  *
@@ -51,8 +103,11 @@ export const hasSameStructure = (base: unknown, other: unknown): boolean => {
  * @throws {Error} Thrown when the payload structure diverges from en-US.
  */
 const ensureMatchingStructure = (locale: AppLocale, payload: unknown): void => {
-  if (!hasSameStructure(enUsMessagesData, payload)) {
-    throw new Error(`Message payload for locale "${locale}" does not match en-US structure`);
+  const diffs = collectStructureDiffs({ base: enUsMessagesData, other: payload });
+  if (diffs.length > 0) {
+    throw new Error(
+      `Message payload for locale "${locale}" does not match en-US structure:\n${diffs.join("\n")}`,
+    );
   }
 };
 

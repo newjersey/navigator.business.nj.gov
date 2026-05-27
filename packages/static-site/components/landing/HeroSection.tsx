@@ -1,9 +1,8 @@
 /**
  * Renders the hero section for the landing page.
- *
- * This module maps hero labels and CTA data from localized content into NJWDS
- * hero markup.
  */
+
+import Image from "next/image";
 
 import type { LandingHeroContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
@@ -19,7 +18,7 @@ export interface HeroSectionProps {
 }
 
 /**
- * Maps hero content into NJWDS hero markup.
+ * Maps hero content into hero markup.
  *
  * @param props Component props.
  * @param props.content Localized labels, text, and CTA link for the hero.
@@ -31,15 +30,29 @@ export interface HeroSectionProps {
  */
 export const HeroSection = ({ content }: HeroSectionProps) => {
   return (
-    <section aria-label={content.sectionAriaLabel} className="usa-hero">
+    <section aria-label={content.sectionAriaLabel} className="usa-hero hero-gradient">
       <div className="grid-container">
-        <div className="usa-hero__callout">
-          <h1 className="usa-hero__heading">
-            <span className="usa-hero__heading--alt">{content.callout}</span>
-            {content.title}
-          </h1>
-          <p>{content.paragraph}</p>
-          <LocalizedLink className="usa-button" link={content.callToActionLink} />
+        <div className="grid-row grid-gap flex-align-center">
+          <div className="tablet:grid-col-6">
+            <h1 className="usa-hero__heading dark-blue">{content.title}</h1>
+            <p className="usa-hero__text">{content.paragraph}</p>
+            <LocalizedLink className="usa-button" link={content.callToActionLink} />
+          </div>
+          <div className="tablet:grid-col-6">
+            <section className="hero-carousel" aria-label="carousel">
+              {content.carouselImages.map((image, index) => (
+                <Image
+                  key={[image.src, index].join()}
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="480"
+                  className={`hero-carousel__image hero-carousel__image--${index + 1}`}
+                  priority={index === 0}
+                />
+              ))}
+            </section>
+          </div>
         </div>
       </div>
     </section>

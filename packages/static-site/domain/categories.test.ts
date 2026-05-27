@@ -16,12 +16,12 @@ describe("buildCategoryHierarchy", () => {
 
     const result = buildCategoryHierarchy([page1, page2, page3]);
 
-    expect(result["plan"].children).toHaveLength(2);
-    expect(result["plan"].children[0]).toEqual(page1);
-    expect(result["plan"].children[1]).toEqual(page2);
+    expect(result.plan.children).toHaveLength(2);
+    expect(result.plan.children[0]).toEqual(page1);
+    expect(result.plan.children[1]).toEqual(page2);
 
-    expect(result["start"].children).toHaveLength(1);
-    expect(result["start"].children[0]).toEqual(page3);
+    expect(result.start.children).toHaveLength(1);
+    expect(result.start.children[0]).toEqual(page3);
   });
 
   it("skips pages with no category", () => {
@@ -30,7 +30,7 @@ describe("buildCategoryHierarchy", () => {
       page("no-category-page", undefined),
     ]);
 
-    expect(result["plan"].children).toHaveLength(1);
+    expect(result.plan.children).toHaveLength(1);
     expect(Object.keys(result)).toEqual(["plan"]);
   });
 

@@ -109,63 +109,29 @@ export interface LayoutHeaderContent {
 }
 
 /**
+ * One image in the hero carousel.
+ */
+export interface HeroCarouselImage {
+  /** Public path to the carousel image. */
+  readonly src: string;
+  /** Alt text for the carousel image. */
+  readonly alt: string;
+}
+
+/**
  * Localized content for the hero section.
  */
 export interface LandingHeroContent {
   /** Accessible label for the hero section landmark. */
   readonly sectionAriaLabel: string;
-  /** Introductory callout text rendered above the hero title. */
-  readonly callout: string;
   /** Hero heading text. */
   readonly title: string;
   /** Hero supporting paragraph text. */
   readonly paragraph: string;
   /** Primary hero call-to-action link. */
   readonly callToActionLink: ContentLink;
-}
-
-/**
- * Localized content for the tagline section.
- */
-export interface LandingTaglineContent {
-  /** Heading text for the tagline section. */
-  readonly title: string;
-  /** Paragraphs rendered in the tagline body column. */
-  readonly paragraphs: readonly string[];
-}
-
-/**
- * Localized content for one graphic-list card.
- */
-export interface LandingGraphicListItem {
-  /** Heading text for the graphic-list item. */
-  readonly title: string;
-  /** Supporting paragraph text for the graphic-list item. */
-  readonly paragraph: string;
-  /** Alt text for the decorative image. */
-  readonly imageAlt: string;
-}
-
-/**
- * Localized content for the dark graphic-list section.
- */
-export interface LandingGraphicListContent {
-  /** Items rendered in the graphic-list layout. */
-  readonly items: readonly LandingGraphicListItem[];
-}
-
-/**
- * Localized content for the section call-to-action block.
- */
-export interface LandingCallToActionContent {
-  /** Element ID used as the CTA section anchor target. */
-  readonly sectionId: string;
-  /** Heading text rendered for the CTA section. */
-  readonly title: string;
-  /** Introductory paragraph rendered for the CTA section. */
-  readonly intro: string;
-  /** CTA button link metadata. */
-  readonly callToActionLink: ContentLink;
+  /** Images displayed in the hero carousel. */
+  readonly carouselImages: readonly HeroCarouselImage[];
 }
 
 /**
@@ -267,17 +233,137 @@ export interface LayoutContent {
 }
 
 /**
+ * One item in the Quick Services grid.
+ */
+export interface QuickServicesItem {
+  /** Card heading text. */
+  readonly title: string;
+  /** Card supporting description text. */
+  readonly description: string;
+  /** Path to the card icon image. */
+  readonly iconPath: string;
+  /** Alt text for the card icon. */
+  readonly iconAlt: string;
+  /** Link destination for the card. */
+  readonly link: ContentLink;
+}
+
+/**
+ * Localized content for the Quick Services section.
+ */
+export interface QuickServicesContent {
+  /** Section heading text. */
+  readonly title: string;
+  /** Section subtitle text. */
+  readonly subtitle: string;
+  /** Cards rendered in the quick services grid. */
+  readonly items: readonly QuickServicesItem[];
+}
+
+/**
+ * Localized content for the CTA banner section.
+ */
+export interface CtaBannerContent {
+  /** Banner heading text. */
+  readonly title: string;
+  /** Banner subtitle text. */
+  readonly subtitle: string;
+  /** CTA button link metadata. */
+  readonly callToActionLink: ContentLink;
+}
+
+/**
+ * Localized content for the What's New section.
+ */
+export interface WhatsNewContent {
+  /** Section heading text. */
+  readonly title: string;
+  /** Link to view all updates. */
+  readonly viewAllLink: ContentLink;
+}
+
+/**
+ * One card in the For More Support section.
+ */
+export interface SupportCard {
+  /** Card heading text. */
+  readonly title: string;
+  /** Card description text. */
+  readonly description: string;
+  /** Path to the card icon image. */
+  readonly iconPath: string;
+  /** Alt text for the card icon. */
+  readonly iconAlt: string;
+  /** CTA link for the card. */
+  readonly link: ContentLink;
+}
+
+/**
+ * Localized content for the For More Support section.
+ */
+export interface SupportSectionContent {
+  /** Section heading text. */
+  readonly title: string;
+  /** Section description paragraph. */
+  readonly description: string;
+  /** Support cards rendered in the section. */
+  readonly cards: readonly SupportCard[];
+}
+
+/**
+ * One agency in the Brought to You By section.
+ */
+export interface BroughtToYouByAgency {
+  /** Agency display name. */
+  readonly name: string;
+  /** Path to the agency logo image. */
+  readonly logo: string;
+  /** Alt text for the agency logo. */
+  readonly logoAlt: string;
+  /** Link to the agency website. */
+  readonly link: ContentLink;
+}
+
+/**
+ * Localized content for the Brought to You By section.
+ */
+export interface BroughtToYouByContent {
+  /** Section heading text. */
+  readonly title: string;
+  /** Agencies displayed in the section. */
+  readonly agencies: readonly BroughtToYouByAgency[];
+}
+
+/**
+ * Localized content for the feedback bar.
+ */
+export interface FeedbackBarContent {
+  /** Question text displayed to the user. */
+  readonly question: string;
+  /** Label for the affirmative button. */
+  readonly yesLabel: string;
+  /** Label for the negative button. */
+  readonly noLabel: string;
+}
+
+/**
  * All localized content needed to render the landing page.
  */
 export interface LandingPageContent {
   /** Hero section content. */
   readonly hero: LandingHeroContent;
-  /** Tagline section content. */
-  readonly tagline: LandingTaglineContent;
-  /** Graphic-list section content. */
-  readonly graphicList: LandingGraphicListContent;
-  /** CTA section content. */
-  readonly callToAction: LandingCallToActionContent;
+  /** Quick Services section content. */
+  readonly quickServices: QuickServicesContent;
+  /** CTA banner section content. */
+  readonly ctaBanner: CtaBannerContent;
+  /** What's New section content. */
+  readonly whatsNew: WhatsNewContent;
+  /** For More Support section content. */
+  readonly support: SupportSectionContent;
+  /** Brought to You By section content. */
+  readonly broughtToYouBy: BroughtToYouByContent;
+  /** Feedback bar content. */
+  readonly feedbackBar: FeedbackBarContent;
 }
 
 /**

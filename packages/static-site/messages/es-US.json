@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Business.NJ.gov | Planifique, Comience y Haga Crecer",
-    "description": "Prototipo de página principal para una experiencia de orientación empresarial impulsada por Next.js y NJWDS."
+    "description": "Prototipo de p\u00e1gina principal para una experiencia de orientaci\u00f3n empresarial impulsada por Next.js y NJWDS."
   },
   "layout": {
     "skipNavigationLabel": "Saltar al contenido principal",
@@ -29,7 +29,7 @@
       }
     },
     "header": {
-      "primaryNavigationAriaLabel": "Navegación principal",
+      "primaryNavigationAriaLabel": "Navegaci\u00f3n principal",
       "homeLink": {
         "label": "Business.NJ.gov",
         "href": "/",
@@ -39,8 +39,8 @@
       "homeLinkTitle": "Inicio",
       "homeLinkAriaLabel": "Inicio de Business.NJ.gov",
       "siteTitle": "Business.NJ.gov",
-      "menuButtonLabel": "Menú",
-      "closeButtonAlt": "Cerrar menú",
+      "menuButtonLabel": "Men\u00fa",
+      "closeButtonAlt": "Cerrar men\u00fa",
       "primaryItems": [
         {
           "kind": "link",
@@ -70,7 +70,7 @@
     },
     "footer": {
       "returnToTopLabel": "Volver arriba",
-      "navigationAriaLabel": "Navegación del pie de página",
+      "navigationAriaLabel": "Navegaci\u00f3n del pie de p\u00e1gina",
       "primaryLinks": [
         {
           "link": {
@@ -228,7 +228,7 @@
         },
         {
           "link": {
-            "label": "Contáctenos",
+            "label": "Cont\u00e1ctenos",
             "href": "https://nj.gov/nj/feedback.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -244,7 +244,7 @@
         },
         {
           "link": {
-            "label": "Declaración legal y exenciones",
+            "label": "Declaraci\u00f3n legal y exenciones",
             "href": "https://nj.gov/nj/legal.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -260,71 +260,250 @@
         },
         {
           "link": {
-            "label": "Ley de Registros Públicos Abiertos (OPRA)",
+            "label": "Ley de Registros P\u00fablicos Abiertos (OPRA)",
             "href": "https://nj.gov/opra/",
             "isInternal": false,
             "opensInNewTab": false
           }
         }
       ],
-      "usGovernmentSectionAriaLabel": "Información y servicios del gobierno de EE. UU.",
-      "usGovernmentDescription": "Copyright © 2026 Estado de New Jersey"
+      "usGovernmentSectionAriaLabel": "Informaci\u00f3n y servicios del gobierno de EE. UU.",
+      "usGovernmentDescription": "Copyright \u00a9 2026 Estado de New Jersey"
     }
   },
   "landing": {
     "hero": {
-      "sectionAriaLabel": "Introducción",
-      "callout": "Las necesidades de su negocio en New Jersey.",
-      "title": "Todo en un solo lugar.",
-      "paragraph": "Obtenga su guía personalizada para comenzar su negocio, encuentre oportunidades de financiamiento y descubra sus obligaciones fiscales.",
+      "sectionAriaLabel": "Introducci\u00f3n",
+      "title": "Las necesidades de su negocio en New Jersey. Todo en un solo lugar.",
+      "paragraph": "Obtenga su gu\u00eda personalizada para comenzar su negocio, encuentre oportunidades de financiamiento y descubra sus obligaciones fiscales.",
       "callToActionLink": {
-        "label": "Obtenga su guía personalizada",
-        "href": "https://account.business.nj.gov/",
+        "label": "Obtenga su gu\u00eda personalizada",
+        "href": "https://account.business.nj.gov/onboarding",
         "isInternal": false,
         "opensInNewTab": true
-      }
-    },
-    "tagline": {
-      "title": "Planifique, opere y crezca con confianza",
-      "paragraphs": [
-        "Business.NJ.gov es el recurso empresarial del estado para ayudarle a planificar, comenzar, operar y hacer crecer su negocio.",
-        "Use su cuenta para crear una hoja de ruta personalizada, seguir solicitudes y conectarse con un asesor empresarial de New Jersey sin costo."
-      ]
-    },
-    "graphicList": {
-      "items": [
+      },
+      "carouselImages": [
         {
-          "title": "Registro empresarial",
-          "paragraph": "Inicie su LLC, corporación o sociedad con orientación estatal paso a paso.",
-          "imageAlt": "Texto alternativo"
+          "src": "/img/hero/image_1.png",
+          "alt": "Una mujer sonriendo mientras trabaja en su computadora port\u00e1til en casa."
         },
         {
-          "title": "Licencias y permisos",
-          "paragraph": "Encuentre los requisitos de licencias y permisos según su industria y ubicación.",
-          "imageAlt": "Texto alternativo"
+          "src": "/img/hero/image_2.png",
+          "alt": "Un tatuador trabajando en su tienda de New Jersey."
         },
         {
-          "title": "Nombres comerciales",
-          "paragraph": "Revise disponibilidad y reglas de nombres para su negocio en New Jersey.",
-          "imageAlt": "Texto alternativo"
+          "src": "/img/hero/image_3.png",
+          "alt": "Una empresaria revisando documentos en su negocio."
         },
         {
-          "title": "Obligaciones del empleador",
-          "paragraph": "Conozca requisitos laborales, de nómina y de registro antes de contratar.",
-          "imageAlt": "Texto alternativo"
+          "src": "/img/hero/image_4.png",
+          "alt": "El due\u00f1o de un restaurante de New Jersey preparando comida."
         }
       ]
     },
-    "callToAction": {
-      "sectionId": "test-section-id",
-      "title": "Más apoyo para su negocio",
-      "intro": "¿Busca asesoría más especializada? Explore guías personalizadas gratuitas, conéctese con un asesor empresarial y reciba actualizaciones sobre programas y regulaciones relevantes para su negocio.",
+    "quickServices": {
+      "title": "Servicios r\u00e1pidos",
+      "subtitle": "Acceda a servicios empresariales populares",
+      "items": [
+        {
+          "title": "Registro empresarial",
+          "description": "Inicie su LLC, corporaci\u00f3n o sociedad",
+          "iconPath": "/img/checklist.svg",
+          "iconAlt": "Icono de lista de verificaci\u00f3n",
+          "link": {
+            "label": "Registro empresarial",
+            "href": "/pages/register-your-business",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Licencias y permisos",
+          "description": "Solicite las licencias comerciales requeridas",
+          "iconPath": "/img/planning.svg",
+          "iconAlt": "Icono de planificaci\u00f3n",
+          "link": {
+            "label": "Licencias y permisos",
+            "href": "/pages/licensing-and-certification-guide",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Nombres comerciales",
+          "description": "Elija nombres disponibles para representar su negocio",
+          "iconPath": "/img/paper.svg",
+          "iconAlt": "Icono de documentos",
+          "link": {
+            "label": "Nombres comerciales",
+            "href": "/pages/business-names",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Presente su informe anual",
+          "description": "Nunca pierda una fecha l\u00edmite",
+          "iconPath": "/img/arrow.svg",
+          "iconAlt": "Icono de flecha",
+          "link": {
+            "label": "Presente su informe anual",
+            "href": "/pages/filings-and-accounting",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Obligaciones del empleador",
+          "description": "Registro y recursos para empleadores",
+          "iconPath": "/img/shaking_hands.svg",
+          "iconAlt": "Icono de apret\u00f3n de manos",
+          "link": {
+            "label": "Obligaciones del empleador",
+            "href": "/pages/employer-requirements",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Apoyo empresarial",
+          "description": "Acceda a subvenciones y programas de asistencia",
+          "iconPath": "/img/finance.svg",
+          "iconAlt": "Icono de finanzas",
+          "link": {
+            "label": "Apoyo empresarial",
+            "href": "/pages/business-support",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        }
+      ]
+    },
+    "ctaBanner": {
+      "title": "Acceda a su informaci\u00f3n empresarial personalizada",
+      "subtitle": "\u00a1Comience y haga crecer su negocio en New Jersey o fuera del estado con su cuenta de Business.NJ.gov hoy!",
       "callToActionLink": {
-        "label": "Explorar Business.NJ.gov",
-        "href": "https://business.nj.gov/",
+        "label": "Crear cuenta",
+        "href": "https://account.business.nj.gov/onboarding",
         "isInternal": false,
         "opensInNewTab": true
       }
+    },
+    "whatsNew": {
+      "title": "Novedades",
+      "viewAllLink": {
+        "label": "Ver todas las actualizaciones",
+        "href": "/updates",
+        "isInternal": true,
+        "opensInNewTab": false
+      }
+    },
+    "support": {
+      "title": "M\u00e1s apoyo",
+      "description": "\u00bfBusca asesor\u00eda m\u00e1s especializada? Pruebe nuestras gu\u00edas gratuitas y personalizadas de registro empresarial en l\u00ednea, hable con un representante en nuestro chat o reg\u00edstrese para recibir actualizaciones empresariales directamente en su correo electr\u00f3nico. Tambi\u00e9n est\u00e1 disponible una versi\u00f3n impresa y digital de nuestro [Manual para peque\u00f1as empresas](https://cdn.prod.website-files.com/5e31b06cb76b830809358a75/662a750614519d466e63f6c7_NJ_Small_Business_Manual_for_download.pdf).",
+      "cards": [
+        {
+          "title": "Su cuenta de Business.NJ.gov",
+          "description": "Obtenga una gu\u00eda gratuita y personalizada paso a paso para iniciar su negocio en New Jersey.",
+          "iconPath": "/img/navigation.svg",
+          "iconAlt": "Icono de navegaci\u00f3n",
+          "link": {
+            "label": "Su cuenta de Business.NJ.gov",
+            "href": "https://account.business.nj.gov/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "title": "Apoyo individual",
+          "description": "Converse con un asesor empresarial con d\u00e9cadas de experiencia, de 9a.m. a 5p.m. de lunes a viernes.",
+          "iconPath": "/img/hands.svg",
+          "iconAlt": "Icono de manos",
+          "link": {
+            "label": "Apoyo individual",
+            "href": "/support",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Bolet\u00edn empresarial",
+          "description": "Mant\u00e9ngase al d\u00eda sobre programas o regulaciones anunciados recientemente que puedan afectar su negocio.",
+          "iconPath": "/img/piechart.svg",
+          "iconAlt": "Icono de gr\u00e1fico",
+          "link": {
+            "label": "Bolet\u00edn empresarial",
+            "href": "https://business.nj.gov/newsletter",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        }
+      ]
+    },
+    "broughtToYouBy": {
+      "title": "Presentado por",
+      "agencies": [
+        {
+          "name": "Oficina del Gobernador",
+          "logo": "/img/New_Jersey_state_seal.png",
+          "logoAlt": "Sello del Estado de New Jersey",
+          "link": {
+            "label": "Oficina del Gobernador",
+            "href": "https://nj.gov/governor/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "Centro de Acci\u00f3n Empresarial de New Jersey",
+          "logo": "/img/njbac_logo.png",
+          "logoAlt": "Logotipo del Centro de Acci\u00f3n Empresarial de New Jersey",
+          "link": {
+            "label": "Centro de Acci\u00f3n Empresarial de New Jersey",
+            "href": "https://www.nj.gov/state/bac/bac.shtml",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "Autoridad de Desarrollo Econ\u00f3mico de New Jersey",
+          "logo": "/img/njeda_logo.png",
+          "logoAlt": "Logotipo de la Autoridad de Desarrollo Econ\u00f3mico de New Jersey",
+          "link": {
+            "label": "Autoridad de Desarrollo Econ\u00f3mico de New Jersey",
+            "href": "https://www.njeda.com/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "Departamento del Tesoro",
+          "logo": "/img/treasuryseal.webp",
+          "logoAlt": "Sello del Departamento del Tesoro de New Jersey",
+          "link": {
+            "label": "Departamento del Tesoro",
+            "href": "https://www.state.nj.us/treasury/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "Oficina de Innovaci\u00f3n",
+          "logo": "/img/nj_logo.svg",
+          "logoAlt": "Logotipo de la Oficina de Innovaci\u00f3n de New Jersey",
+          "link": {
+            "label": "Oficina de Innovaci\u00f3n",
+            "href": "https://innovation.nj.gov/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        }
+      ]
+    },
+    "feedbackBar": {
+      "question": "\u00bfEncontr\u00f3 lo que buscaba en esta p\u00e1gina?",
+      "yesLabel": "S\u00ed",
+      "noLabel": "No"
     }
   },
   "learn": {
@@ -361,7 +540,7 @@
       {
         "key": "start",
         "title": "Start",
-        "subtitle": "Learn what it means to be an employer in New Jersey and register your new business.",
+        "subtitle": "Learn what it means to be an employer in New Jersey and register your new business.",
         "link": {
           "href": "/start",
           "isInternal": true,

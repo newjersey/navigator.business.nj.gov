@@ -2,13 +2,19 @@
  * Implements the locale-scoped landing page route.
  *
  * This route validates the locale segment, loads localized landing content,
- * and renders the composed landing page component.
+ * and renders the landing page component.
  */
 
 import { notFound } from "next/navigation";
-
-import { LandingPage } from "@/components/landing/LandingPage";
-import { loadFundings } from "@/domain/content/loadContent";
+import Script from "next/script";
+import { BroughtToYouBySection } from "@/components/landing/BroughtToYouBySection";
+import { CtaBannerSection } from "@/components/landing/CtaBannerSection";
+import { FeedbackBar } from "@/components/landing/FeedbackBar";
+import { HeroSection } from "@/components/landing/HeroSection";
+import { QuickServicesSection } from "@/components/landing/QuickServicesSection";
+import { SupportSection } from "@/components/landing/SupportSection";
+import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
+import { loadRecents } from "@/domain/content/loadContent";
 import { hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
@@ -52,9 +58,29 @@ const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
   }
 
   const messages = await getApplicationMessages({ locale });
-  const fundings = loadFundings();
+  const allRecents = loadRecents();
 
-  return <LandingPage content={messages.landing} fundings={fundings} />;
+  const recents = allRecents
+    .filter((r) => r.date)
+    .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""))
+    .slice(0, 3);
+
+  return (
+    <>
+      <HeroSection content={messages.landing.hero} />
+      <QuickServicesSection content={messages.landing.quickServices} />
+      <CtaBannerSection content={messages.landing.ctaBanner} />
+      <WhatsNewSection content={messages.landing.whatsNew} recents={recents} />
+      <SupportSection content={messages.landing.support} />
+      <BroughtToYouBySection content={messages.landing.broughtToYouBy} />
+      <FeedbackBar content={messages.landing.feedbackBar} />
+      <Script
+        id="smcx-sdk"
+        src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd_2Fl0hAvWCD8cNdKnWc8kt0IafoTskhMiZ5h9m_2FJavuow.js"
+        strategy="afterInteractive"
+      />
+    </>
+  );
 };
 
 /**

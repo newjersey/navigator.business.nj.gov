@@ -268,68 +268,247 @@
         }
       ],
       "usGovernmentSectionAriaLabel": "U.S. government information and services",
-      "usGovernmentDescription": "Copyright © 2026 State of New Jersey"
+      "usGovernmentDescription": "Copyright \u00a9 2026 State of New Jersey"
     }
   },
   "landing": {
     "hero": {
       "sectionAriaLabel": "Introduction",
-      "callout": "Your New Jersey business needs.",
-      "title": "All in one place.",
+      "title": "Your New Jersey business needs. All in one place.",
       "paragraph": "Get your personalized business starter kit, find funding opportunities, discover your tax obligations, and more.",
       "callToActionLink": {
         "label": "Get Your Personalized Guide",
-        "href": "https://account.business.nj.gov/",
+        "href": "https://account.business.nj.gov/onboarding",
         "isInternal": false,
         "opensInNewTab": true
-      }
-    },
-    "tagline": {
-      "title": "Start, operate, and grow with confidence",
-      "paragraphs": [
-        "Business.NJ.gov is New Jersey's business-friendly resource, providing you with the information you need to plan, start, operate, and grow your business.",
-        "Use your account to build a personalized roadmap, track applications, and connect with a New Jersey business advocate for no-cost support."
-      ]
-    },
-    "graphicList": {
-      "items": [
+      },
+      "carouselImages": [
         {
-          "title": "Business Registration",
-          "paragraph": "Start your LLC, corporation, or partnership with clear, step-by-step state guidance.",
-          "imageAlt": "Alt text"
+          "src": "/img/hero/image_1.png",
+          "alt": "A woman smiling while working on her laptop at home."
         },
         {
-          "title": "Licenses & Permits",
-          "paragraph": "Find required licenses and permits by business type, industry, and location.",
-          "imageAlt": "Alt text"
+          "src": "/img/hero/image_2.png",
+          "alt": "A tattoo artist working in his New Jersey shop."
         },
         {
-          "title": "Business Names",
-          "paragraph": "Choose an available name and understand naming rules for your New Jersey business.",
-          "imageAlt": "Alt text"
+          "src": "/img/hero/image_3.png",
+          "alt": "A female entrepreneur reviewing documents in her business."
         },
         {
-          "title": "Employer Obligations",
-          "paragraph": "Learn labor, payroll, and registration requirements before hiring employees.",
-          "imageAlt": "Alt text"
+          "src": "/img/hero/image_4.png",
+          "alt": "The owner of a New Jersey restaurant preparing food."
         }
       ]
     },
-    "callToAction": {
-      "sectionId": "test-section-id",
-      "title": "For More Support",
-      "intro": "Looking for more expert advice? Explore free personalized guides, connect with a business advocate, and sign up for updates about grants, programs, and regulations likely to affect your business.",
+    "quickServices": {
+      "title": "Quick Services",
+      "subtitle": "Access popular business services",
+      "items": [
+        {
+          "title": "Business Registration",
+          "description": "Start your LLC, corporation, or partnership",
+          "iconPath": "/img/checklist.svg",
+          "iconAlt": "Checklist icon",
+          "link": {
+            "label": "Business Registration",
+            "href": "/pages/register-your-business",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Licenses & Permits",
+          "description": "Apply for required business licenses",
+          "iconPath": "/img/planning.svg",
+          "iconAlt": "Planning icon",
+          "link": {
+            "label": "Licenses & Permits",
+            "href": "/pages/licensing-and-certification-guide",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Business Names",
+          "description": "Choose available names to represent your business",
+          "iconPath": "/img/paper.svg",
+          "iconAlt": "Stack of paper icon",
+          "link": {
+            "label": "Business Names",
+            "href": "/pages/business-names",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "File Your Annual Report",
+          "description": "Never miss a deadline",
+          "iconPath": "/img/arrow.svg",
+          "iconAlt": "Up arrow icon",
+          "link": {
+            "label": "File Your Annual Report",
+            "href": "/pages/filings-and-accounting",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Employer Obligations",
+          "description": "Employer registration and resources",
+          "iconPath": "/img/shaking_hands.svg",
+          "iconAlt": "Shaking hands icon",
+          "link": {
+            "label": "Employer Obligations",
+            "href": "/pages/employer-requirements",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Business Support",
+          "description": "Access grants and assistance programs",
+          "iconPath": "/img/finance.svg",
+          "iconAlt": "Finance icon",
+          "link": {
+            "label": "Business Support",
+            "href": "/pages/business-support",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        }
+      ]
+    },
+    "ctaBanner": {
+      "title": "Access Your Personalized Business Information",
+      "subtitle": "Start and grow your New Jersey or out-of-state business with your Business.NJ.gov account today!",
       "callToActionLink": {
-        "label": "Explore Business.NJ.gov",
-        "href": "https://business.nj.gov/",
+        "label": "Create Account",
+        "href": "https://account.business.nj.gov/onboarding",
         "isInternal": false,
         "opensInNewTab": true
       }
+    },
+    "whatsNew": {
+      "title": "What\u2019s New",
+      "viewAllLink": {
+        "label": "View All Updates",
+        "href": "/updates",
+        "isInternal": true,
+        "opensInNewTab": false
+      }
+    },
+    "support": {
+      "title": "For More Support",
+      "description": "Looking for more expert advice? Try our free, personalized online business registration guides, speak to a representative on our chat, or sign up for business updates straight to your email. A print version and digital file of our [Small Business Manual](https://cdn.prod.website-files.com/5e31b06cb76b830809358a75/662a750614519d466e63f6c7_NJ_Small_Business_Manual_for_download.pdf) is also available.",
+      "cards": [
+        {
+          "title": "Your Business.NJ.gov Account",
+          "description": "Get a free, personalized step-by-step guide for starting your business in New Jersey.",
+          "iconPath": "/img/navigation.svg",
+          "iconAlt": "Navigation icon",
+          "link": {
+            "label": "Your Business.NJ.gov Account",
+            "href": "https://account.business.nj.gov/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "title": "One-on-One Support",
+          "description": "Chat with a business advocate with decades of experience, anytime from 9a.m. - 5p.m. Monday - Friday.",
+          "iconPath": "/img/hands.svg",
+          "iconAlt": "Helping hands icon",
+          "link": {
+            "label": "One-on-One Support",
+            "href": "/support",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "title": "Business Newsletter",
+          "description": "Stay up to date on recently announced programs or regulations likely to affect your business.",
+          "iconPath": "/img/piechart.svg",
+          "iconAlt": "Business chart icon",
+          "link": {
+            "label": "Business Newsletter",
+            "href": "https://business.nj.gov/newsletter",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        }
+      ]
+    },
+    "broughtToYouBy": {
+      "title": "Brought to you by",
+      "agencies": [
+        {
+          "name": "Office of the Governor",
+          "logo": "/img/New_Jersey_state_seal.png",
+          "logoAlt": "State of New Jersey Seal",
+          "link": {
+            "label": "Office of the Governor",
+            "href": "https://nj.gov/governor/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "New Jersey Business Action Center",
+          "logo": "/img/njbac_logo.png",
+          "logoAlt": "New Jersey Business Action Center Logo",
+          "link": {
+            "label": "New Jersey Business Action Center",
+            "href": "https://www.nj.gov/state/bac/bac.shtml",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "New Jersey Economic Development Authority",
+          "logo": "/img/njeda_logo.png",
+          "logoAlt": "New Jersey Economic Development Authority Logo",
+          "link": {
+            "label": "New Jersey Economic Development Authority",
+            "href": "https://www.njeda.com/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "Department of the Treasury",
+          "logo": "/img/treasuryseal.webp",
+          "logoAlt": "New Jersey Department of Treasury Seal",
+          "link": {
+            "label": "Department of the Treasury",
+            "href": "https://www.state.nj.us/treasury/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        },
+        {
+          "name": "New Jersey Innovation Authority",
+          "logo": "/img/nj_logo.svg",
+          "logoAlt": "New Jersey Innovation Authority Logo",
+          "link": {
+            "label": "New Jersey Innovation Authority",
+            "href": "https://innovation.nj.gov/",
+            "isInternal": false,
+            "opensInNewTab": true
+          }
+        }
+      ]
+    },
+    "feedbackBar": {
+      "question": "Did you find what you were looking for on this page?",
+      "yesLabel": "Yes",
+      "noLabel": "No"
     }
   },
   "learn": {
     "name": "Learn",
-    "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
+    "subHeadingText": "Find guides and resources for every stage \u2014 from your first idea to long-term growth.",
     "heading2": "Where are you in your business journey?",
     "cardLinkText": "Learn more",
     "categoryPages": {
@@ -361,7 +540,7 @@
       {
         "key": "start",
         "title": "Start",
-        "subtitle": "Learn what it means to be an employer in New Jersey and register your new business.",
+        "subtitle": "Learn what it means to be an employer in New Jersey and register your new business.",
         "link": {
           "href": "/start",
           "isInternal": true,
