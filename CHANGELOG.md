@@ -1,3 +1,16 @@
+# [2026.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.11.1...v2026.12.0) (2026-05-28)
+
+
+### Features
+
+* [[#17755](https://github.com/newjersey/navigator.business.nj.gov/issues/17755)] Add PageContent to display each slug and its markdown content ([47fd996](https://github.com/newjersey/navigator.business.nj.gov/commit/47fd996b6737d086556af07c58ffd3e39d89f489))
+* [[#17755](https://github.com/newjersey/navigator.business.nj.gov/issues/17755)] add subpage routes under each category ([5e4f566](https://github.com/newjersey/navigator.business.nj.gov/commit/5e4f56650d6b6e1fdba85d365051edf47dd1d012))
+* [[#17755](https://github.com/newjersey/navigator.business.nj.gov/issues/17755)] build category pages with subtitles and styled links to content subpages ([ba11672](https://github.com/newjersey/navigator.business.nj.gov/commit/ba11672ebdbb5b0088b8683bc610b4a434d3a6d1))
+* [[#17755](https://github.com/newjersey/navigator.business.nj.gov/issues/17755)] replace hardcoded Plan subpath with generic route page ([9821743](https://github.com/newjersey/navigator.business.nj.gov/commit/9821743cae204fe26668eb52bc8831735660cdaa))
+* [AB#17705](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17705) add checkboxes to roadmap ([4bae50c](https://github.com/newjersey/navigator.business.nj.gov/commit/4bae50cebb2ab5590e3dec5e4400456e0b658c78))
+* [AB#17713](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17713) add `ProgressBar` component for roadmap steps ([2c01eb6](https://github.com/newjersey/navigator.business.nj.gov/commit/2c01eb6d343c12d3458b1d9337c6df4bd0168138))
+* [AB#17759](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17759) add analytics events for opening and closinng login modal ([d298c33](https://github.com/newjersey/navigator.business.nj.gov/commit/d298c33084175fb645cbc02dff724f42cb7810ec))
+
 ## [2026.11.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.11.0...v2026.11.1) (2026-05-21)
 
 
