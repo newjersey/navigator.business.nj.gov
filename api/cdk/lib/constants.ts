@@ -57,3 +57,7 @@ export const HEALTH_CHECK_ENDPOINTS: Record<string, string> = {
   xrayRegistration: "xray-registration",
   taxFilingClient: "tax-filing-client",
 };
+export const COGNITO_USERPOOL_NAME = "businessnjgov-navigator-userpool";
+export const COGNITO_DOMAIN_NAME = "businessnjgov-navigator";
+export const COGNITO_USERPOOL_CLIENT_NAME = "businessnjgov-navigator_app_client";
+export const COGNITO_USERPOOL_WEBCLIENT_NAME = "businessnjgov-navigator-clientWeb";

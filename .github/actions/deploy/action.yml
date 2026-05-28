@@ -6,11 +6,17 @@ inputs:
     description: "Identifier used for both the image name and ECS service name."
     required: true
 
+  stage:
+    description: "Stage to deploy to"
+    required: true
+
 runs:
   using: "composite"
   steps:
     - name: Deploy Setup
       uses: ./.github/actions/deploy-setup
+      with:
+        stage: ${{ env.STAGE }}
     - name: Package WebApp Docker Image
       uses: ./.github/actions/package-webapp-docker
       with:

@@ -56,6 +56,13 @@ runs:
           --region us-east-1 \
           --require-approval never
 
+    - name: Import CDK CognitoStack
+      shell: bash
+      run: |
+        echo "Importing Cognito resources for stage: $STAGE"
+        yarn workspace @businessnjgovnavigator/api-cdk cdk import CognitoStack-${{ env.STAGE }} \
+        --resource-mapping imports/cognito-import-${{ env.STAGE }}.json
+
     - name: Import resources in CDK EncryptionStack
       shell: bash
       run: |
