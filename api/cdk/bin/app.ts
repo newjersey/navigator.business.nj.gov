@@ -5,6 +5,7 @@ import { DataStack } from "../lib/dataStack";
 import { IamStack } from "../lib/iamStack";
 import { LambdaStack } from "../lib/lambdaStack";
 import { StorageStack } from "../lib/storageStack";
+import { CognitoStack } from "../lib/cognitoStack";
 import { EncryptionStack } from "../lib/encryptionStack";
 import { StaticSiteClusterStack } from "../lib/staticSiteClusterStack";
 import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
@@ -143,5 +144,12 @@ if (isMyAccountDeploy) {
       express: { lambda: lambdaStack.expressLambda },
       githubOauth2: { lambda: lambdaStack.githubOauth2Lambda },
     },
+  });
+
+  new CognitoStack(app, `CognitoStack-${stage}`, {
+    stage,
+    env,
+    authRoleArn: iamStack.authRole?.roleArn ?? process.env.COGNITO_AUTH_ROLE_ARN!,
+    unAuthRoleArn: iamStack.unauthRole?.roleArn ?? process.env.COGNITO_UNAUTH_ROLE_ARN!,
   });
 }
