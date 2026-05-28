@@ -31,6 +31,8 @@ jobs:
       COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_STAGING }}
       COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_STAGING }}
       COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_STAGING }}
+      COGNITO_UNAUTH_ROLE_ARN: ${{ vars.COGNITO_UNAUTH_ROLE_ARN }}
+      COGNITO_AUTH_ROLE_ARN: ${{ vars.COGNITO_AUTH_ROLE_ARN }}
       API_GATEWAY_CERT_ARN: ${{ vars.API_GATEWAY_CERT_ARN_STAGING }}
       BUSINESS_NAME_BASE_URL: ${{ vars.BUSINESS_NAME_BASE_URL_STAGING }}
       MYNJ_ROLE_NAME: ${{ vars.MYNJ_ROLE_NAME_PROD_STAGING }}
@@ -121,5 +123,6 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator
+          stage: staging
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site

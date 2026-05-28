@@ -1,0 +1,27 @@
+{
+  "UserPool": {
+    "UserPoolId": "us-east-1_7aavRHd9s"
+  },
+  "UserPoolDomain": {
+    "UserPoolId": "us-east-1_7aavRHd9s",
+    "Domain": "businessnjgov-navigator-staging"
+  },
+  "UserPoolClient": {
+    "UserPoolId": "us-east-1_7aavRHd9s",
+    "ClientId": "1rcnlt9hmjmplvpcrrfjvmhc12"
+  },
+  "CognitoIdentityProvider": {
+    "UserPoolId": "us-east-1_7aavRHd9s",
+    "ProviderName": "myNJ"
+  },
+  "UserPoolWebClient": {
+    "UserPoolId": "us-east-1_7aavRHd9s",
+    "ClientId": "16puvumr0agiqad2p44t8fh96l"
+  },
+  "IdentityPool": {
+    "Id": "us-east-1:c5fcb02d-6540-485b-ac71-db8087bf4b00"
+  },
+  "IdentityPoolRoleAttachment": {
+    "Id": "us-east-1:c5fcb02d-6540-485b-ac71-db8087bf4b00"
+  }
+}
