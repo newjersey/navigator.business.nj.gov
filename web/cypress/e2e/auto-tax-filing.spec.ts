@@ -12,7 +12,7 @@ import { randomNonHomeBasedNonDomesticEmployerIndustry } from "@businessnjgovnav
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
 
-describe.skip(
+describe(
   "auto tax filing [feature] [all] [group4]",
   { retries: 1 }, // Retry due to a race condition
   () => {
@@ -22,8 +22,7 @@ describe.skip(
       businessName = "Cool Business Name";
     });
 
-    // TODO: There is an issue in Cypress where the value of the taxId is being entered incorrectly by the automation. Need to investigate further. Temporarily skipping this test to avoid false failures.
-    it.skip("automatically registers for Gov2Go and retrieves tax events if business name and tax id are provided", () => {
+    it("automatically registers for Gov2Go and retrieves tax events if business name and tax id are provided", () => {
       completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
       completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
@@ -62,7 +61,7 @@ describe.skip(
       cy.get("button").contains("Save").click();
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
       cy.get('[data-testid="cta-funding-nudge"]').first().click();
-      cy.get('[data-testid="get-tax-access"]').should("exist");
+      cy.get('[data-testid="tax-calendar-access-submit-button"]').should("exist");
       cy.get('[data-testid="alert-content-container"]').should("not.exist");
     });
 
@@ -79,7 +78,7 @@ describe.skip(
       selectLocation("Allendale");
       clickModalSaveButton();
       cy.get('[data-testid="cta-funding-nudge"]').first().click();
-      cy.get('[data-testid="get-tax-access"]').should("exist");
+      cy.get('[data-testid="tax-calendar-access-submit-button"]').should("exist");
       cy.get('[data-testid="alert-content-container"]').should("not.exist");
     });
   },
