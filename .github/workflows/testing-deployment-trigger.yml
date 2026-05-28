@@ -103,6 +103,8 @@ jobs:
       COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_TESTING }}
       COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_TESTING }}
       COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_TESTING }}
+      COGNITO_UNAUTH_ROLE_ARN: ${{ vars.COGNITO_UNAUTH_ROLE_ARN }}
+      COGNITO_AUTH_ROLE_ARN: ${{ vars.COGNITO_AUTH_ROLE_ARN }}
 
       MYNJ_ROLE_NAME: ${{ vars.MYNJ_ROLE_NAME_TESTING }}
       MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_TESTING }}
@@ -130,5 +132,6 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator-testing
+          stage: testing
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site

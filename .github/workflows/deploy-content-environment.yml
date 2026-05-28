@@ -43,6 +43,8 @@ jobs:
       COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_CONTENT }}
       COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_CONTENT }}
       COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_CONTENT }}
+      COGNITO_UNAUTH_ROLE_ARN: ${{ vars.COGNITO_UNAUTH_ROLE_ARN }}
+      COGNITO_AUTH_ROLE_ARN: ${{ vars.COGNITO_AUTH_ROLE_ARN }}
 
       CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
       DEV_ONLY_UNLINK_TAX_ID: ${{ vars.DEV_ONLY_UNLINK_TAX_ID_DEV }}
@@ -171,5 +173,6 @@ jobs:
       - uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator-content
+          stage: content
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site
