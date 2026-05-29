@@ -10,6 +10,8 @@ export const BUSINESSES_TABLE = "businesses-table";
 export const USERS_TABLE = "users-table";
 export const MESSAGES_TABLE = "messages-table";
 export const AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY = process.env.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
+export const LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY =
+  process.env.LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
 export const NAVIGATOR_WEBSERVICE = "NavigatorWebService";
 export const NAVIGATOR_DB_CLIENT = "NavigatorDBClient";
 export const HEALTH_CHECK_SERVICE = "HealthCheckService";
