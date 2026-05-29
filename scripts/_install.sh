@@ -3,6 +3,9 @@ set -euo pipefail
 
 # Setup script to setup machine for local development
 
+# Always run from the repo root so that .nvmrc, .venv, yarn.lock, etc. resolve correctly
+cd "${0:a:h:h}"
+
 # Detect privilege escalation method
 if [ "$(id -u)" -eq 0 ]; then
     SUDO=""
@@ -99,8 +102,6 @@ case "$PLATFORM" in
             colima --version
         else
             echo "Colima is not installed. Installing..."
-            # https://formulae.brew.sh/formula/colima#default
-            # https://github.com/abiosoft/colima
             brew install colima
         fi
 
@@ -109,28 +110,141 @@ case "$PLATFORM" in
             docker --version
         else
             echo "Docker CLI is not installed. Installing..."
-            # https://formulae.brew.sh/formula/docker
             brew install docker
         fi
 
-        # On first install, colima start creates ~/.colima/default/colima.yaml
-        # with the resource settings. We then stop it so brew services can own
-        # the lifecycle (auto-start on boot, restart on crash).
-        if [ ! -f "$HOME/.colima/default/colima.yaml" ]; then
-            echo "Initializing Colima VM with recommended resources..."
-            colima start --cpu 8 --memory 16 --disk 256
+        for _pkg in docker-compose docker-buildx; do
+            if brew list "$_pkg" &> /dev/null; then
+                echo "$_pkg is installed."
+            else
+                echo "$_pkg is not installed. Installing..."
+                brew install "$_pkg"
+            fi
+        done
+
+        # Wire Docker CLI to Homebrew's plugin directory so `docker compose` and
+        # `docker buildx` work without manual symlinks.
+        BREW_PREFIX="$(brew --prefix)"
+        _DOCKER_CONFIG="$HOME/.docker/config.json"
+        _plugin_dir="${BREW_PREFIX}/lib/docker/cli-plugins"
+        mkdir -p "$HOME/.docker"
+
+        if [ ! -f "$_DOCKER_CONFIG" ]; then
+            printf '{\n  "cliPluginsExtraDirs": ["%s"]\n}\n' "$_plugin_dir" > "$_DOCKER_CONFIG"
+            echo "Created ~/.docker/config.json with cliPluginsExtraDirs."
+        elif grep -qF "$_plugin_dir" "$_DOCKER_CONFIG" 2> /dev/null; then
+            echo "~/.docker/config.json already has cliPluginsExtraDirs."
+        else
+            echo "Adding cliPluginsExtraDirs to existing ~/.docker/config.json..."
+            BREW_PREFIX="$BREW_PREFIX" python3 - <<'PYEOF'
+import json, os
+path = os.path.expanduser("~/.docker/config.json")
+with open(path) as f:
+    cfg = json.load(f)
+d = f"{os.environ['BREW_PREFIX']}/lib/docker/cli-plugins"
+dirs = cfg.setdefault("cliPluginsExtraDirs", [])
+if d not in dirs:
+    dirs.append(d)
+with open(path, "w") as f:
+    json.dump(cfg, f, indent=2)
+PYEOF
+        fi
+
+        # Fallback: add user-level buildx symlink if the plugin is still unreachable.
+        if ! docker buildx version &> /dev/null; then
+            echo "Adding docker-buildx user-level symlink..."
+            mkdir -p "$HOME/.docker/cli-plugins"
+            ln -sfn "${BREW_PREFIX}/opt/docker-buildx/bin/docker-buildx" \
+                "$HOME/.docker/cli-plugins/docker-buildx"
+        fi
+
+        # Rosetta is required for linux/amd64 containers on Apple Silicon.
+        if pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto &> /dev/null; then
+            echo "Rosetta is installed."
+        else
+            echo "Installing Rosetta..."
+            /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+        fi
+
+        # Detect whether the existing Colima VM uses the required settings.
+        # vmType, arch, and mountType are fixed at VM creation time and cannot
+        # be changed in-place — the VM must be deleted and recreated.
+        _COLIMA_YAML="$HOME/.colima/default/colima.yaml"
+        _needs_migration=false
+
+        if [ -f "$_COLIMA_YAML" ]; then
+            if ! grep -q "vmType: vz" "$_COLIMA_YAML" || \
+               ! grep -q "rosetta: true" "$_COLIMA_YAML" || \
+               ! grep -q "mountType: virtiofs" "$_COLIMA_YAML"; then
+                _needs_migration=true
+            fi
+        fi
+
+        if [ "$_needs_migration" = true ]; then
+            echo ""
+            echo "WARNING: Existing Colima VM does not use the required VZ/Rosetta/virtiofs"
+            echo "         settings. This will DELETE all containers, images, volumes, and the"
+            echo "         current VM. Back up any important data now. Press Ctrl-C to abort."
+            echo ""
+            for _i in $(seq 10 -1 1); do
+                printf "\r  Migrating in %2d seconds..." "$_i"
+                sleep 1
+            done
+            echo ""
+
+            brew services stop colima || true
+            # Start manually so Docker can remove objects before the VM is deleted.
+            if ! colima status &> /dev/null; then
+                colima start || true
+            fi
+            docker ps -aq | while read -r _cid; do docker rm -f "$_cid"; done
+            docker system prune -a --volumes -f || true
+            docker volume prune -a -f || true
+            docker builder prune -a -f || true
+            colima stop || true
+            colima delete --force || true
+        fi
+
+        # Initialize the VM on first install or immediately after migration.
+        if [ ! -f "$_COLIMA_YAML" ]; then
+            echo "Initializing Colima VM (VZ + Rosetta + virtiofs)..."
+            brew services stop colima || true
+            colima start \
+                --vm-type vz \
+                --vz-rosetta \
+                --mount-type virtiofs \
+                --arch aarch64 \
+                --cpu 8 \
+                --memory 16 \
+                --disk 256 \
+                --runtime docker
             colima stop
         fi
 
-        # Let brew services manage colima (runs `colima start -f`, reads config from colima.yaml)
-        if brew services list | grep -q "^colima.*started"; then
+        # Ensure brew services owns the Colima lifecycle. If Colima is running
+        # outside brew services (e.g. the developer ran `colima start` manually),
+        # stop it so launchd can take over cleanly.
+        _colima_running=false
+        _brew_managing=false
+        colima status &> /dev/null && _colima_running=true || true
+        brew services list | grep -q "^colima.*started" && _brew_managing=true || true
+
+        if [ "$_colima_running" = true ] && [ "$_brew_managing" = false ]; then
+            echo "Colima is running outside brew services. Stopping manual instance..."
+            brew services stop colima || true
+            colima stop
+        fi
+
+        if [ "$_needs_migration" = true ]; then
+            brew services restart colima
+        elif [ "$_brew_managing" = true ]; then
             echo "Colima brew service is already started."
         else
             echo "Starting Colima brew service..."
             brew services start colima
         fi
 
-        # Wait for Colima VM to be ready (brew services returns before the VM is booted)
+        # Wait for the VM to be ready (brew services returns before the VM has booted).
         echo "Waiting for Colima to be ready..."
         for i in $(seq 1 30); do
             if colima status &> /dev/null; then
@@ -139,7 +253,7 @@ case "$PLATFORM" in
             fi
             if [ "$i" -eq 30 ]; then
                 echo "Error: Colima failed to start within 60 seconds."
-                echo "Debug: brew services list; tail /opt/homebrew/var/log/colima.log"
+                echo "Debug: brew services list; tail $(brew --prefix)/var/log/colima.log"
                 exit 1
             fi
             sleep 2
@@ -247,7 +361,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Install and use correct version of Node
+if ! command -v nvm &> /dev/null; then
+    echo "Error: nvm failed to load. Try opening a new terminal and re-running the script."
+    exit 1
+fi
+
+# Install and use the Node version pinned in .nvmrc
 nvm install
 
 # ============================================================
