@@ -41,7 +41,7 @@ export class IamStack extends Stack {
     };
 
     const allowedStages = deployRoleAllowlist[props.stage] ?? [];
-    const shouldCreateWarehouseDeployRole = props.stage !== "local";
+    const shouldCreateDeployRoles = props.stage !== "local";
 
     if (isIamCreatedForDevStagingProdOnly) {
       const githubOidcProvider = iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(
@@ -60,6 +60,7 @@ export class IamStack extends Stack {
             },
             StringLike: {
               "token.actions.githubusercontent.com:sub": [
+                "repo:newjersey/permits.nj.gov:ref:refs/heads/main",
                 "repo:newjersey/business-data-warehouse-cdk:ref:refs/heads/main",
                 "repo:newjersey/business-data-warehouse-cdk:environment:dev",
                 "repo:newjersey/business-data-warehouse-cdk:environment:production",
@@ -73,10 +74,15 @@ export class IamStack extends Stack {
       this.githubOidcRole.addToPolicy(
         new iam.PolicyStatement({
           actions: ["sts:AssumeRole"],
-          resources: allowedStages.map(
-            (stage) =>
-              `arn:aws:iam::${this.account}:role/njbfs-business-data-warehouse-deploy-${stage}`,
-          ),
+          resources: [
+            ...allowedStages.map(
+              (stage) =>
+                `arn:aws:iam::${this.account}:role/njbfs-business-data-warehouse-deploy-${stage}`,
+            ),
+            ...allowedStages.map(
+              (stage) => `arn:aws:iam::${this.account}:role/njbfs-permits-deploy-${stage}`,
+            ),
+          ],
         }),
       );
 
@@ -324,7 +330,13 @@ export class IamStack extends Stack {
     const githubRoleArn = this.githubOidcRole
       ? this.githubOidcRole.roleArn
       : `arn:aws:iam::${this.account}:role/bfs_github_actions_oidc_role`;
-    if (shouldCreateWarehouseDeployRole) {
+    if (shouldCreateDeployRoles) {
+      const permitsDeployRole = new iam.Role(this, "PermitsDeployRole", {
+        roleName: `njbfs-permits-deploy-${props.stage}`,
+        assumedBy: new iam.ArnPrincipal(githubRoleArn),
+        description: `Deploy role for Permits.nj.gov repo`,
+      });
+
       const warehouseDeployRole = new iam.Role(this, "WarehouseDeployRole", {
         roleName: `njbfs-business-data-warehouse-deploy-${props.stage}`,
         assumedBy: new iam.ArnPrincipal(githubRoleArn),
@@ -374,6 +386,46 @@ export class IamStack extends Stack {
       );
 
       applyStandardTags(warehouseDeployRole, props.stage);
+
+      permitsDeployRole.addToPolicy(
+        new iam.PolicyStatement({
+          actions: [
+            "cloudformation:*",
+            "ec2:Describe*",
+            "ec2:CreateVpc",
+            "ec2:DeleteVpc",
+            "ec2:CreateSubnet",
+            "ec2:DeleteSubnet",
+            "ec2:CreateRouteTable",
+            "ec2:DeleteRouteTable",
+            "ec2:AssociateRouteTable",
+            "ec2:DisassociateRouteTable",
+            "ec2:CreateInternetGateway",
+            "ec2:AttachInternetGateway",
+            "ec2:DetachInternetGateway",
+            "ec2:DeleteInternetGateway",
+            "ec2:CreateNatGateway",
+            "ec2:DeleteNatGateway",
+            "ec2:AllocateAddress",
+            "ec2:ReleaseAddress",
+            "ec2:CreateSecurityGroup",
+            "ec2:DeleteSecurityGroup",
+            "ec2:AuthorizeSecurityGroupIngress",
+            "ec2:AuthorizeSecurityGroupEgress",
+            "ec2:RevokeSecurityGroupIngress",
+            "ec2:RevokeSecurityGroupEgress",
+            "ec2:CreateTags",
+            "ec2:DeleteTags",
+            "rds:*",
+            "secretsmanager:*",
+            "iam:PassRole",
+            "logs:*",
+            "kms:*",
+          ],
+          resources: ["*"],
+        }),
+      );
+      applyStandardTags(permitsDeployRole, props.stage);
     }
   }
 }
