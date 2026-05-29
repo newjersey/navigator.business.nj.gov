@@ -67,6 +67,7 @@ export class IamStack extends Stack {
                 "repo:newjersey/permits.nj.gov:environment:prod",
                 "repo:newjersey/business-data-warehouse-cdk:ref:refs/heads/main",
                 "repo:newjersey/business-data-warehouse-cdk:environment:dev",
+                "repo:newjersey/business-data-warehouse-cdk:environment:staging",
                 "repo:newjersey/business-data-warehouse-cdk:environment:production",
               ],
             },
