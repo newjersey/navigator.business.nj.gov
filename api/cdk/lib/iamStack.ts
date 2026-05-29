@@ -61,6 +61,10 @@ export class IamStack extends Stack {
             StringLike: {
               "token.actions.githubusercontent.com:sub": [
                 "repo:newjersey/permits.nj.gov:ref:refs/heads/main",
+                "repo:newjersey/permits.nj.gov:environment:testing",
+                "repo:newjersey/permits.nj.gov:environment:dev",
+                "repo:newjersey/permits.nj.gov:environment:staging",
+                "repo:newjersey/permits.nj.gov:environment:prod",
                 "repo:newjersey/business-data-warehouse-cdk:ref:refs/heads/main",
                 "repo:newjersey/business-data-warehouse-cdk:environment:dev",
                 "repo:newjersey/business-data-warehouse-cdk:environment:production",
