@@ -4,6 +4,7 @@ import * as iam from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 import {
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   BUSINESSES_TABLE,
   DEV_STAGE,
   DOCUMENT_S3_BUCKET_NAME,
@@ -256,7 +257,7 @@ export class IamStack extends Stack {
     const kmsEncryptPolicy = new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
       actions: ["kms:Encrypt", "kms:Decrypt", "kms:GenerateDataKey"],
-      resources: [AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY],
+      resources: [AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY],
     });
 
     const loggingPolicy = new iam.PolicyStatement({
