@@ -1,3 +1,10 @@
+## [2026.12.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.12.0...v2026.12.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* [AB#17815](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17815) stop sending stale AB experience value to analytics ([ae11acd](https://github.com/newjersey/navigator.business.nj.gov/commit/ae11acd49f40628690b4b7ffdff40c00b919871b))
+
 # [2026.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.11.1...v2026.12.0) (2026-05-28)
 
 
