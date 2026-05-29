@@ -2,7 +2,6 @@ import { NeedsAccountContextType } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ActiveUser, AuthAction } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { UpdateQueue } from "@/lib/UpdateQueue";
@@ -97,7 +96,6 @@ export const onGuestSignIn = async ({
   encounteredMyNjLinkingError?: boolean | undefined;
 }): Promise<void> => {
   const userDataStorage = UserDataStorageFactory();
-  const abStorage = ABStorageFactory();
   const accountLinkingErrorStorage = AccountLinkingErrorStorageFactory();
   let userData = userDataStorage.getCurrentUserData();
   if (userData?.user.myNJUserKey) {
@@ -125,7 +123,7 @@ export const onGuestSignIn = async ({
     type: "LOGIN_GUEST",
     activeUser: activeUser,
   });
-  setABExperienceDimension(abStorage.getExperience() || emptyUser.abExperience, true);
+  setABExperienceDimension(emptyUser.abExperience, true);
   if (encounteredMyNjLinkingError) {
     accountLinkingErrorStorage.setEncounteredMyNjLinkingError(encounteredMyNjLinkingError);
   }
