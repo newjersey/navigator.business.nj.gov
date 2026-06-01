@@ -294,11 +294,7 @@ jobs:
       contents: read
       id-token: write
     needs:
-      - integration-group-1
-      - integration-group-2
-      - integration-group-3
-      - integration-group-4
-      - integration-group-5
+      - unit-tests
     if: github.ref_name == 'main'
 
   deploy-content:
