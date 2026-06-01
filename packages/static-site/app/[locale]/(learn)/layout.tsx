@@ -33,10 +33,10 @@ const PageLayout = async ({ children, params }: PageLayoutProps) => {
   return (
     <main className="grid-container usa-section">
       <div className="grid-row grid-gap">
-        <div className="tablet:grid-col-3">
+        <div className="tablet:grid-col-4 learn-side-nav">
           <LearnSideNav content={messages.learn} />
         </div>
-        <div className="tablet:grid-col-9">{children}</div>
+        <div className="tablet:grid-col-8">{children}</div>
       </div>
     </main>
   );
