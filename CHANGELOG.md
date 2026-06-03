@@ -1,3 +1,18 @@
+# [2026.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.12.1...v2026.13.0) (2026-06-03)
+
+
+### Bug Fixes
+
+* [AB#17815](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17815) stop sending stale AB experience value to analytics ([b692966](https://github.com/newjersey/navigator.business.nj.gov/commit/b69296696810d5b40dcac049c6c8227dee18c7d9))
+* **deps:** update dependency axios to v1.16.0 [security] ([2b4685d](https://github.com/newjersey/navigator.business.nj.gov/commit/2b4685ddad36445e1bcd0e3e6ff27bc2b4d0a55f))
+* resolve KMS Issue ([f90cf12](https://github.com/newjersey/navigator.business.nj.gov/commit/f90cf128c883d1249a3170241f8a358b0079e1a2))
+
+
+### Features
+
+* [AB#16890](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/16890) integrate w/ GovDelivery API for newsletter updates ([42066f5](https://github.com/newjersey/navigator.business.nj.gov/commit/42066f54fc3f083555150e763ad8e6b60215911b))
+* [AB#17754](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17754) add home page ([99ddff2](https://github.com/newjersey/navigator.business.nj.gov/commit/99ddff21635f4138c8093b71dc59093279559cea))
+
 ## [2026.12.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.12.0...v2026.12.1) (2026-05-29)
 
 
