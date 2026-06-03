@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/noExcessiveLinesPerFunction: <explanation> */
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { PageItem } from "@/domain/content/types";
@@ -78,5 +79,42 @@ describe("PageContent", () => {
     );
     expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(3);
     expect(document.querySelectorAll("hr")).toHaveLength(3);
+  });
+
+  it("renders multiple sections if page content does not follow standard numeric ordering", () => {
+    render(
+      <PageContent
+        page={page({
+          "heading-2": "Section One",
+          "heading-4": "Section Two",
+          "heading-7": "Section Three",
+        })}
+      />,
+    );
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(3);
+    expect(document.querySelectorAll("hr")).toHaveLength(3);
+  });
+
+  it("renders up to 11 page sections", () => {
+    render(
+      <PageContent
+        page={page({
+          "heading-1": "Section One",
+          "heading-2": "Section Two",
+          "heading-3": "Section Three",
+          "heading-4": "Section Four",
+          "heading-5": "Section Five",
+          "heading-6": "Section Six",
+          "heading-7": "Section Seven",
+          "heading-8": "Section Eight",
+          "heading-9": "Section Nine",
+          "heading-10": "Section Ten",
+          "heading-11": "Section Eleven",
+          "heading-12": "Section Twelve",
+        })}
+      />,
+    );
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(11);
+    expect(document.querySelectorAll("hr")).toHaveLength(11);
   });
 });

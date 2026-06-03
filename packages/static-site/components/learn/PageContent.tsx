@@ -19,20 +19,22 @@ const PageContent = ({ page }: Props) => {
   const sections: Section[] = [];
 
   let n = 1;
-  while (
-    page[`heading-${n}`] ||
-    page[`main-text-${n}`] ||
-    page[`link-text-${n}`] ||
-    page[`tip-${n}`]
-  ) {
-    sections.push({
-      heading: page[`heading-${n}`],
-      body: page[`main-text-${n}`],
-      linkText: page[`link-text-${n}`],
-      linkUrl: page[`link-url-${n}`],
-      tip: page[`tip-${n}`],
-      index: n,
-    });
+  while (n <= 11) {
+    const heading = page[`heading-${n}`];
+    const body = page[`main-text-${n}`];
+    const linkText = page[`link-text-${n}`];
+    const linkUrl = page[`link-url-${n}`];
+    const tip = page[`tip-${n}`];
+
+    if (heading || body || (linkText && linkUrl) || tip)
+      sections.push({
+        heading: page[`heading-${n}`],
+        body: page[`main-text-${n}`],
+        linkText: page[`link-text-${n}`],
+        linkUrl: page[`link-url-${n}`],
+        tip: page[`tip-${n}`],
+        index: n,
+      });
     n++;
   }
 
