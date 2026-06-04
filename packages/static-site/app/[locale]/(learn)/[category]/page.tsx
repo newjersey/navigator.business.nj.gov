@@ -45,21 +45,21 @@ const CategoryPage = async ({ params }: Props) => {
   }
 
   const messages = getApplicationMessages({ locale });
-  const currentCategoryContent = messages.learn.categories.find(
-    (content) => content.key === category,
-  );
-  const subpages = CATEGORY_HIERARCHY[category].children.filter(
-    (subpage) => subpage.hideFromCategoryPage !== "true",
-  );
+  const categoryMessages = messages.learn.categories.find((content) => content.key === category);
+  const categoryHierarchy = CATEGORY_HIERARCHY[category];
 
-  if (!currentCategoryContent) {
+  if (!categoryMessages || !categoryHierarchy) {
     return notFound();
   }
 
+  const subpages = categoryHierarchy.children.filter(
+    (subpage) => subpage.hideFromCategoryPage !== "true",
+  );
+
   return (
     <>
-      <h1>{currentCategoryContent.title}</h1>
-      <p className="usa-intro">{currentCategoryContent.subtitle}</p>
+      <h1>{categoryMessages.title}</h1>
+      <p className="usa-intro">{categoryMessages.subtitle}</p>
       <h2 className="margin-top-6">{messages.learn.categoryPages.allTopics}</h2>
       <ul className="usa-list--unstyled">
         {subpages.map((subpage) => (

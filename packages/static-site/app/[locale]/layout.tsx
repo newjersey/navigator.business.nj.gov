@@ -6,6 +6,7 @@
  */
 
 import "@/app/globals.css";
+import "@/app/header.css";
 import "@/app/landing.css";
 
 import type { Metadata } from "next";

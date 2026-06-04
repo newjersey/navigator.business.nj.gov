@@ -39,7 +39,7 @@
       "homeLinkTitle": "Home",
       "homeLinkAriaLabel": "Business.NJ.gov home",
       "siteTitle": "Business.NJ.Gov",
-      "menuButtonLabel": "Menu",
+      "logoAlt": "Business.NJ.gov",
       "closeButtonAlt": "Close menu",
       "primaryItems": [
         {
@@ -66,7 +66,16 @@
       "secondaryLinks": [],
       "searchAction": "/search",
       "searchInputLabel": "Search site",
-      "searchSubmitIconAlt": "Search"
+      "searchSubmitIconAlt": "Search",
+      "logInLabel": "Log In",
+      "myAccountLabel": "My Account",
+      "getStartedLabel": "Get Started",
+      "accountIconAlt": "Account icon",
+      "dropdownArrowAlt": "Open My Account menu",
+      "hamburgerButtonAriaLabel": "Open navigation menu",
+      "mobileAccountButtonAriaLabel": "Open account menu",
+      "navDrawerTitle": "Business.NJ.gov",
+      "closeDrawerAriaLabel": "Close menu"
     },
     "languageSwitcher": {
       "navigationAriaLabel": "Language",
