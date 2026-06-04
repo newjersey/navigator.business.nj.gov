@@ -13,6 +13,10 @@ body {
   min-height: 100vh;
 }
 
+.grid-container p {
+  max-width: unset;
+}
+
 .nj-banner__inner ul {
   margin: 0;
 }

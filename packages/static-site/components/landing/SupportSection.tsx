@@ -9,7 +9,7 @@ export interface SupportSectionProps {
 
 export const SupportSection = ({ content }: SupportSectionProps) => {
   return (
-    <section className="usa-section">
+    <section className="usa-section padding-y-0">
       <div className="grid-container">
         <h2 className="font-heading-xl">{content.title}</h2>
         <Markdown>{content.description}</Markdown>
