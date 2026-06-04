@@ -92,8 +92,8 @@ export interface LayoutHeaderContent {
   readonly homeLinkAriaLabel: string;
   /** Site title text rendered in the logo area. */
   readonly siteTitle: string;
-  /** Label rendered on the responsive menu button. */
-  readonly menuButtonLabel: string;
+  /** Alt text for the site logo image. */
+  readonly logoAlt: string;
   /** Alt text for the close icon in primary navigation. */
   readonly closeButtonAlt: string;
   /** Collection of primary navigation items. */
@@ -106,6 +106,24 @@ export interface LayoutHeaderContent {
   readonly searchInputLabel: string;
   /** Alt text for the search submit icon. */
   readonly searchSubmitIconAlt: string;
+  /** Label for the Log In link. */
+  readonly logInLabel: string;
+  /** Label for the My Account button. */
+  readonly myAccountLabel: string;
+  /** Label for the Get Started dropdown item. */
+  readonly getStartedLabel: string;
+  /** Alt text for the account avatar icon. */
+  readonly accountIconAlt: string;
+  /** Alt text for the dropdown arrow icon. */
+  readonly dropdownArrowAlt: string;
+  /** Accessible label for the mobile hamburger menu button. */
+  readonly hamburgerButtonAriaLabel: string;
+  /** Accessible label for the mobile account icon button. */
+  readonly mobileAccountButtonAriaLabel: string;
+  /** Title shown in the mobile nav drawer header. */
+  readonly navDrawerTitle: string;
+  /** Accessible label for the close button inside a mobile drawer. */
+  readonly closeDrawerAriaLabel: string;
 }
 
 /**

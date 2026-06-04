@@ -64,4 +64,10 @@ describe("CategoryPage", () => {
 
     expect(screen.queryByText("Don't display me")).not.toBeInTheDocument();
   });
+
+  it("returns notFound for an unknown category", async () => {
+    await expect(
+      CategoryPage({ params: Promise.resolve({ locale: "en-US", category: "updates" }) }),
+    ).rejects.toMatchObject({ digest: "NEXT_HTTP_ERROR_FALLBACK;404" });
+  });
 });

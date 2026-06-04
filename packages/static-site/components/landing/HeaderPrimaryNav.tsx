@@ -13,12 +13,15 @@ import type {
   HeaderPrimarySubmenuItem,
   LayoutHeaderContent,
 } from "@/domain/content/messageTypes";
+import { ACCOUNT_APP_URL } from "@/domain/env";
+import { HeaderAuthButtons } from "./HeaderAuthButtons";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
  * Public path for the synced NJWDS close icon.
  */
 const NJWDS_CLOSE_ICON_PATH = "/assets/njwds/dist/img/usa-icons/close.svg";
+const SITE_LOGO_PATH = "/img/business.NJ.gov-logo.svg";
 
 /**
  * Describes props used by the primary header navigation component.
@@ -104,7 +107,7 @@ const renderHeaderSubmenuLink = ({ item, index }: RenderHeaderSubmenuLinkParams)
  * ```
  */
 const renderHeaderPrimaryLinkItem = ({ item }: RenderHeaderPrimaryLinkItemParams) => {
-  const linkClassName = item.isCurrent ? "usa-nav__link usa-current" : "usa-nav__link";
+  const linkClassName = item.isCurrent ? "usa-nav__link usa-current" : "usa-nav__link nj-nav__link";
 
   return (
     <li className="usa-nav__primary-item" key={item.link.href}>
@@ -129,7 +132,7 @@ const renderHeaderPrimaryLinkItem = ({ item }: RenderHeaderPrimaryLinkItemParams
 const renderHeaderPrimarySubmenuItem = ({ item }: RenderHeaderPrimarySubmenuItemParams) => {
   const buttonClassName = item.isCurrent
     ? "usa-accordion__button usa-nav__link usa-current"
-    : "usa-accordion__button usa-nav__link";
+    : "usa-accordion__button usa-nav__link nj-nav__link";
 
   return (
     <li className="usa-nav__primary-item" key={item.submenuId}>
@@ -192,11 +195,28 @@ export const HeaderPrimaryNav = ({ header }: HeaderPrimaryNavProps) => {
           width={20}
         />
       </button>
-      <ul className="usa-nav__primary usa-accordion">
-        {header.primaryItems.map((primaryItem) => {
-          return renderHeaderPrimaryItem({ item: primaryItem });
-        })}
-      </ul>
+      <div className="usa-nav__primary-row">
+        <LocalizedLink
+          ariaLabel={header.homeLinkAriaLabel}
+          link={header.homeLink}
+          title={header.homeLinkTitle}
+        >
+          <Image alt={header.logoAlt} height={33} src={SITE_LOGO_PATH} unoptimized width={132} />
+        </LocalizedLink>
+        <ul className="usa-nav__primary usa-accordion">
+          {header.primaryItems.map((primaryItem) => {
+            return renderHeaderPrimaryItem({ item: primaryItem });
+          })}
+        </ul>
+        <HeaderAuthButtons
+          accountAppUrl={ACCOUNT_APP_URL}
+          accountIconAlt={header.accountIconAlt}
+          dropdownArrowAlt={header.dropdownArrowAlt}
+          getStartedLabel={header.getStartedLabel}
+          logInLabel={header.logInLabel}
+          myAccountLabel={header.myAccountLabel}
+        />
+      </div>
     </>
   );
 };

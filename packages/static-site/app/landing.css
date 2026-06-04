@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   padding: 1.25rem;
-  border: 1px solid var(--light-grey);
+  border: 1px solid var(--color-base-lighter);
   border-radius: 0.5rem;
   text-decoration: none;
   color: inherit;
@@ -22,13 +22,14 @@ a.card:hover {
 .card__title {
   font-size: 1.06rem;
   font-weight: 700;
-  color: var(--dark-blue);
+  color: var(--color-primary-dark);
   margin: 0 0 0.25rem;
 }
 
 .card__description {
+  font-size: 0.93rem;
   text-align: center;
-  color: #565c65;
+  color: var(--color-base-dark);
   margin: 0;
 }
 
@@ -51,7 +52,7 @@ a.card:hover {
   justify-content: center;
   width: 100px;
   height: 100px;
-  border: 3px solid var(--dark-blue);
+  border: 3px solid var(--color-primary-dark);
   border-radius: 50%;
   margin-bottom: 1.5rem;
 }
@@ -76,13 +77,15 @@ a.card:hover {
   align-items: start;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 40em) {
+  /* 640px for a 16px font-size default */
   .brought-to-you-by__logos {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64em) {
+  /* 1024px for a 16px font-size default */
   .brought-to-you-by__logos {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -93,11 +96,11 @@ a.card:hover {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: var(--dark-blue);
+  color: var(--color-primary-dark);
 }
 
 .brought-to-you-by__agency:visited {
-  color: var(--dark-blue);
+  color: var(--color-primary-dark);
 }
 
 .brought-to-you-by__name {
@@ -108,12 +111,8 @@ a.card:hover {
 }
 
 section.usa-hero.hero-gradient {
-  background: linear-gradient(
-    180deg,
-    #e8f5e9 0%,
-    #ffffff 100%
-  ); /* override NJWDS default hero.jpg */
-  color: #1b1b1b;
+  background: linear-gradient(180deg, #e8f5e9 0%, white 100%); /* override NJWDS default hero.jpg */
+  color: var(--color-ink);
 }
 
 .hero-carousel {
