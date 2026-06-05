@@ -429,6 +429,7 @@ const eventRunner = new GTMTracker();
 
 interface GTMUserData {
   user_id?: string;
+  current_business_id?: string;
   industry_name?: string;
   municipality_name?: string;
   legal_structure?: string;
@@ -460,6 +461,10 @@ export class DimensionQueueFactory {
 
   userId(user_id?: string) {
     return this.queue({ user_id });
+  }
+
+  currentBusinessId(current_business_id?: string) {
+    return this.queue({ current_business_id });
   }
 
   industry(industry_name?: string) {

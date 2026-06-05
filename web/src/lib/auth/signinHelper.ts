@@ -133,7 +133,7 @@ export const onGuestSignIn = async ({
   const onboardingRoute =
     asPath && asPath.startsWith(ROUTES.onboarding) ? asPath : ROUTES.onboarding;
   if (userData) {
-    setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
+    setAnalyticsDimensions(userData, true);
     if (getCurrentBusiness(userData).onboardingFormProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
       push(onboardingRoute);

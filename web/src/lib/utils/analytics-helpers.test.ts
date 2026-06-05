@@ -1,7 +1,11 @@
 import analytics from "@/lib/utils/analytics";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { generateProfileData, getIndustries } from "@businessnjgovnavigator/shared/";
-import { sendOnboardingOnSubmitEvents } from "./analytics-helpers";
+import {
+  generateProfileData,
+  generateUserData,
+  getIndustries,
+} from "@businessnjgovnavigator/shared/";
+import { sendOnboardingOnSubmitEvents, setOnLoadDimensions } from "./analytics-helpers";
 
 jest.mock("@/lib/utils/analytics");
 
@@ -14,6 +18,55 @@ const liquorLicenseApplicableIndustries = getIndustries().filter((industry) => {
 describe("analytics-helpers", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+  });
+
+  describe("setOnLoadDimensions", () => {
+    it("sets all analytics dimensions on load", () => {
+      const mockUpdate = jest.fn();
+      const mockDimensionQueue = {
+        update: mockUpdate,
+      };
+
+      mockAnalytic.dimensions.currentBusinessId = jest.fn();
+      mockAnalytic.dimensions.industry = jest.fn();
+      mockAnalytic.dimensions.municipality = jest.fn();
+      mockAnalytic.dimensions.legalStructure = jest.fn();
+      mockAnalytic.dimensions.homeBasedBusiness = jest.fn();
+      mockAnalytic.dimensions.persona = jest.fn();
+      mockAnalytic.dimensions.naicsCode = jest.fn();
+      mockAnalytic.dimensions.subPersona = jest.fn();
+      mockAnalytic.dimensions.phase = jest.fn().mockReturnValue(mockDimensionQueue);
+      mockAnalytic.dimensions.userId = jest.fn().mockReturnValue(mockDimensionQueue);
+      mockAnalytic.dimensions.abExperience = jest.fn().mockReturnValue(mockDimensionQueue);
+      mockAnalytic.dimensions.update = jest.fn();
+
+      const userData = generateUserData({});
+      const currentBusiness = userData.businesses[userData.currentBusinessId];
+
+      setOnLoadDimensions(userData);
+
+      expect(mockAnalytic.dimensions.currentBusinessId).toHaveBeenCalledWith(
+        userData.currentBusinessId,
+      );
+      expect(mockAnalytic.dimensions.industry).toHaveBeenCalledWith(
+        currentBusiness.profileData.industryId,
+      );
+      expect(mockAnalytic.dimensions.municipality).toHaveBeenCalledWith(
+        currentBusiness.profileData.municipality?.displayName,
+      );
+      expect(mockAnalytic.dimensions.legalStructure).toHaveBeenCalledWith(
+        currentBusiness.profileData.legalStructureId,
+      );
+      expect(mockAnalytic.dimensions.homeBasedBusiness).toHaveBeenCalledWith(
+        currentBusiness.profileData.homeBasedBusiness,
+      );
+      expect(mockAnalytic.dimensions.naicsCode).toHaveBeenCalledWith(
+        currentBusiness.profileData.naicsCode,
+      );
+      expect(mockAnalytic.dimensions.userId).toHaveBeenCalledWith(userData.user.id);
+      expect(mockAnalytic.dimensions.abExperience).toHaveBeenCalledWith(userData.user.abExperience);
+      expect(mockUpdate).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe("sendOnboardingOnSubmitEvents", () => {
